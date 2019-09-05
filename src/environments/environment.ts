@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  URL_PORTAL: ''
+  URL_PORTAL: 'https://webclickamdev.blob.core.windows.net/'
 };
 
 /*
