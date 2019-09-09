@@ -7,7 +7,7 @@
     "build": "ng build",
     "build-qa": "ng build --configuration=qa",
     "build-pr": "ng build --configuration=prod",
-    "test": "ng test --codeCoverage --karma-config=./karma.conf.js",
+    "test": "ng test --code-coverage --karma-config=./karma.conf.js",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
