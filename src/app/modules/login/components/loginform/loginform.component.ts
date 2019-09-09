@@ -25,14 +25,14 @@ export class LoginformComponent implements OnInit {
     });
   }
 
-  // login(){
-  //   console.log(this.loginForm.value);
-  //   this.isSubmitted = true;
-  //   if(this.loginForm.invalid){
-  //     return;
-  //   }
-  //   this.authService.login(this.loginForm.value);
-  //   this.router.navigateByUrl('/admin');
-  // }
+  login(){
+    console.log(this.loginForm.value);
+    this.isSubmitted = true;
+    if(this.loginForm.invalid){
+      return;
+    }
+    this.authService.login(this.loginForm.value);
+    // this.router.navigateByUrl('/admin');
+  }
 
 }

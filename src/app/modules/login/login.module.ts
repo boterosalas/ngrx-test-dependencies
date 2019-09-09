@@ -4,6 +4,7 @@ import { LoginComponent } from './pages/login.component';
 import { LoginformComponent } from './components/loginform/loginform.component';
 import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     AppMaterialModule,
+    TranslateModule,
     RouterModule.forChild([
       {
         path: '',

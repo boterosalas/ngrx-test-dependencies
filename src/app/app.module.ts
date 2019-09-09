@@ -13,6 +13,8 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { LoginModule } from './modules/login/login.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './modules/shared/app-material/app-material.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -34,7 +36,8 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]

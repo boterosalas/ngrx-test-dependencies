@@ -1,3 +1,14 @@
 {
     
+    "GENERIC": {
+        "EMAIL": "Correo",
+        "PASSWORD": "Contraseña",
+        "NAME": "Nombre",
+        "LASTNAME": "Apellidos"
+    },
+    "LOGIN": {
+        "LOGIN": "Iniciar sesión",
+        "INVALID_EMAIL": "Email invalido",
+        "INVALID_PASSWORD": "Contraseña invalida"
+    }
 }
