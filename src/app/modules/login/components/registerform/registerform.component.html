@@ -1,0 +1,137 @@
+<div
+  class="register-container"
+  [formGroup]="registerForm"
+  *ngIf="showRegisterForm"
+>
+  <mat-form-field>
+    <input
+      matInput
+      id="name"
+      type="text"
+      placeholder="{{ 'GENERIC.NAME' | translate }}"
+      formControlName="name"
+      required
+    />
+    <mat-error *ngIf="registerForm.controls.name.invalid  && registerForm.controls.name.errors.required">{{
+      "GENERIC.REQUIRED" | translate: {formValue: 'Nombre'}
+    }}</mat-error>
+
+    <mat-error *ngIf="registerForm.controls.name.invalid && registerForm.controls.name.errors.maxlength">{{
+      "GENERIC.MAX_CHARACTERS" | translate: {maxchar:registerForm.controls.name.errors.maxlength.requiredLength}
+    }}</mat-error>
+
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      id="lastname"
+      type="text"
+      placeholder="{{ 'GENERIC.LASTNAME' | translate }}"
+      formControlName="lastName"
+      required
+    />
+    <mat-error *ngIf="registerForm.controls.lastName.invalid  && registerForm.controls.lastName.errors.required">{{
+      "GENERIC.REQUIRED" | translate: {formValue: 'Apellidos'}
+    }}</mat-error>
+
+    <mat-error *ngIf="registerForm.controls.lastName.invalid && registerForm.controls.lastName.errors.maxlength">{{
+      "GENERIC.MAX_CHARACTERS" | translate: {maxchar:registerForm.controls.name.errors.maxlength.requiredLength}
+    }}</mat-error>
+
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="C.C" id="idtype" formControlName="idType">
+      <mat-option value="option">C.C</mat-option>
+    </mat-select>
+    <mat-error *ngIf="registerForm.controls.idType.invalid">{{
+      "GENERIC.REQUIRED" | translate
+    }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      id="id"
+      type="text"
+      placeholder="{{ 'GENERIC.DOCUMENT_NUMBER' | translate }}"
+      formControlName="id"
+      required
+    />
+    <mat-error *ngIf="registerForm.controls.id.invalid">{{
+      "GENERIC.REQUIRED" | translate
+    }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      id="phone"
+      type="text"
+      placeholder="{{ 'GENERIC.CELLPHONE' | translate }}"
+      formControlName="phone"
+      required
+    />
+    <mat-error *ngIf="registerForm.controls.phone.invalid">{{
+      "GENERIC.REQUIRED" | translate
+    }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      id="email"
+      type="email"
+      placeholder="{{ 'GENERIC.EMAIL' | translate }}"
+      formControlName="email"
+      required
+    />
+    <mat-error *ngIf="registerForm.controls.email.invalid">{{
+      "LOGIN.INVALID_EMAIL" | translate
+    }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      id="password"
+      type="password"
+      placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
+      formControlName="password"
+      required
+    />
+    <mat-error *ngIf="registerForm.controls.password.invalid">{{
+      "LOGIN.INVALID_PASSWORD" | translate
+    }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      id="confirmPassword"
+      type="password"
+      placeholder="{{ 'GENERIC.CONFIRM_PASSWORD' | translate }}"
+      formControlName="confirmPassword"
+      required
+    />
+    <mat-error *ngIf="registerForm.get('confirmPassword').errors && 
+    registerForm.get('confirmPassword').errors.ConfirmPassword">{{
+      "REGISTER.PASSWORD_NOT_MATCH" | translate
+    }}</mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button id="next" color="primary" (click)="nextStep()" [disabled]="!registerForm.valid">
+    {{ "GENERIC.NEXT" | translate }}
+  </button>
+</div>
+
+<div *ngIf="showTerms">
+  <h4>{{ "REGISTER.TITLE_SECTION" | translate }}</h4>
+  <h3>{{ "REGISTER.TITLE_TERMS_AND_CONDITIONS" | translate }}</h3>
+  <p>{{ "REGISTER.TERMS_AND_CONDITIONS" | translate }}</p>
+  <mat-checkbox (change)="acceptTermsCheck($event)">{{ "REGISTER.ACCEPT" | translate }}</mat-checkbox>
+  <button mat-raised-button id="register" color="primary" (click)="register()" [disabled]="!acceptTerms">
+    {{ "GENERIC.REGISTER" | translate }}
+  </button>
+</div>

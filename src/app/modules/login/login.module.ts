@@ -5,10 +5,11 @@ import { LoginformComponent } from './components/loginform/loginform.component';
 import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { RegisterformComponent } from './components/registerform/registerform.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, LoginformComponent],
+  declarations: [LoginComponent, LoginformComponent, RegisterformComponent],
   imports: [
     FormsModule,
     ReactiveFormsModule,

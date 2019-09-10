@@ -3,12 +3,27 @@
     "GENERIC": {
         "EMAIL": "Correo",
         "PASSWORD": "Contraseña",
+        "CONFIRM_PASSWORD": "Confirmar Contraseña",
         "NAME": "Nombre",
-        "LASTNAME": "Apellidos"
+        "LASTNAME": "Apellidos",
+        "CELLPHONE": "Celular",
+        "DOCUMENT_NUMBER": "Número de documento",
+        "REQUIRED": "El campo {{formValue}} es requerido",
+        "NEXT": "Siguiente",
+        "REGISTER": "Regístrate",
+        "MAX_CHARACTERS": "El número máximo de caracteres es {{maxchar}}"
     },
     "LOGIN": {
         "LOGIN": "Iniciar sesión",
         "INVALID_EMAIL": "Email invalido",
-        "INVALID_PASSWORD": "Contraseña invalida"
+        "INVALID_PASSWORD": "Contraseña invalida",
+        "FORGOT_PASSWORD": "Olvidé mi contraseña"
+    },
+    "REGISTER": {
+        "ACCEPT":"¿Acepta los términos y condiciones y políticas de privacidad de Clickam?",
+        "TERMS_AND_CONDITIONS": "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "TITLE_SECTION": "Regístrate, recomienda y gana",
+        "TITLE_TERMS_AND_CONDITIONS": "TÉRMINOS Y CONDICIONES DE  LA LEY HABEAS DATA",
+        "PASSWORD_NOT_MATCH":"Las contraseñas no son iguales"
     }
 }
