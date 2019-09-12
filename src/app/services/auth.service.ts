@@ -22,7 +22,7 @@ export class AuthService {
 
   public login(userInfo: User){
 
-    return this.http.post((`${this.url + this.api}`), userInfo, this.httpOptions);
+    return this.http.post((`${this.url + this.api}`), {Body:userInfo});
 
   }
 
