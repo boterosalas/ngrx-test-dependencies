@@ -17,21 +17,26 @@ export class LoginformComponent implements OnInit {
 
   loginForm: FormGroup;
   isSubmitted  =  false;
+  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      email: ["", Validators.required],
-      password: ["", Validators.required]
+      Username: ["",[ Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
+      Password: ["", [Validators.required, Validators.minLength(6)]]
     });
-  }
+  };
 
-  login(){
+  public login(){
     this.isSubmitted = true;
     if(this.loginForm.invalid){
       return;
     }
-    this.authService.login(this.loginForm.value);
-    // this.router.navigateByUrl('/admin');
+    this.authService.login(this.loginForm.value).subscribe(resp=> {
+      console.log(resp);
+      //localStorage.setItem('ACCESS_TOKEN', "access_token");
+      // this.router.navigateByUrl('/admin');
+    });
   }
+
 
 }
