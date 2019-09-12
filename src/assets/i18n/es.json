@@ -11,7 +11,8 @@
         "REQUIRED": "El campo {{formValue}} es requerido",
         "NEXT": "Siguiente",
         "REGISTER": "Regístrate",
-        "MAX_CHARACTERS": "El número máximo de caracteres es {{maxchar}}"
+        "MAX_CHARACTERS": "El número máximo de caracteres es {{maxchar}}",
+        "MIN_CHARACTERS": "El número mínimo de caracteres es {{minchar}}"
     },
     "LOGIN": {
         "LOGIN": "Iniciar sesión",

@@ -1,5 +1,5 @@
 export const environment = {
     production: false,
-    URL_PORTAL: ''
+    URL_PORTAL: ' https://clickamapisecurity.azurewebsites.net/api/'
   };
   

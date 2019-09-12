@@ -5,10 +5,10 @@
       id="email"
       type="email"
       placeholder="{{ 'GENERIC.EMAIL' | translate }}"
-      formControlName="email"
+      formControlName="Username"
       required
     />
-    <mat-error *ngIf="loginForm.controls.email.invalid">{{
+    <mat-error *ngIf="loginForm.controls.Username.invalid">{{
       "LOGIN.INVALID_EMAIL" | translate
     }}</mat-error>
   </mat-form-field>
@@ -19,10 +19,10 @@
       id="password"
       type="password"
       placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
-      formControlName="password"
+      formControlName="Password"
       required
     />
-    <mat-error *ngIf="loginForm.controls.password.invalid">{{
+    <mat-error *ngIf="loginForm.controls.Password.invalid">{{
       "LOGIN.INVALID_PASSWORD" | translate
     }}</mat-error>
   </mat-form-field>

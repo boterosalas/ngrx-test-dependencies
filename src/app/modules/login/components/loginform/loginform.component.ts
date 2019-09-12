@@ -21,8 +21,8 @@ export class LoginformComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      email: ["",[ Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
-      password: ["", [Validators.required, Validators.minLength(8)]]
+      Username: ["",[ Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
+      Password: ["", [Validators.required, Validators.minLength(6)]]
     });
   };
 
@@ -31,8 +31,11 @@ export class LoginformComponent implements OnInit {
     if(this.loginForm.invalid){
       return;
     }
-    this.authService.login(this.loginForm.value);
-    // this.router.navigateByUrl('/admin');
+    this.authService.login(this.loginForm.value).subscribe(resp=> {
+      console.log(resp);
+      //localStorage.setItem('ACCESS_TOKEN', "access_token");
+      // this.router.navigateByUrl('/admin');
+    });
   }
 
 

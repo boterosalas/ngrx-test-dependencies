@@ -47,16 +47,16 @@ describe("LoginformComponent", () => {
 
   it('login valid', () => {
     component.isSubmitted = true;
-    component.loginForm.controls.email.setValue('test@test.com');
-    component.loginForm.controls.password.setValue('123456789');
+    component.loginForm.controls.Username.setValue('test@test.com');
+    component.loginForm.controls.Password.setValue('123456789');
     component.login();
     expect(component.loginForm.invalid).toBeFalsy();
   });
 
   it('Login invalid', () => {
     component.isSubmitted = false;
-    component.loginForm.controls.email.setValue('');
-    component.loginForm.controls.password.setValue('');
+    component.loginForm.controls.Username.setValue('');
+    component.loginForm.controls.Password.setValue('');
     component.login();
     expect(component.loginForm.invalid).toBeTruthy();
   });
