@@ -151,7 +151,7 @@
   <h4>{{ "REGISTER.TITLE_SECTION" | translate }}</h4>
   <h3>{{ "REGISTER.TITLE_TERMS_AND_CONDITIONS" | translate }}</h3>
   <p>{{ "REGISTER.TERMS_AND_CONDITIONS" | translate }}</p>
-  <mat-checkbox id="chkaccept" (change)="acceptTermsCheck($event)">{{ "REGISTER.ACCEPT" | translate }}</mat-checkbox>
+  <mat-checkbox id="chkaccept" (change)="acceptTermsCheck()">{{ "REGISTER.ACCEPT" | translate }}</mat-checkbox>
   <button mat-raised-button id="register" color="primary" (click)="register()" [disabled]="!acceptTerms">
     {{ "GENERIC.REGISTER" | translate }}
   </button>
