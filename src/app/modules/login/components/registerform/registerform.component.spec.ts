@@ -96,4 +96,11 @@ describe("RegisterformComponent", () => {
     component.removewhiteSpace();
     expect(component.registerForm.controls.password.value).toBe("12345678");
   });
+
+  it("remove white space Confirm password", () => {
+    component.registerForm.controls.confirmPassword.setValue("1234 5678");
+    component.removewhiteSpaceConfirm();
+    expect(component.registerForm.controls.confirmPassword.value).toBe("12345678");
+  });
+
 });
