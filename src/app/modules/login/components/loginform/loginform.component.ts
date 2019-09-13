@@ -22,7 +22,7 @@ export class LoginformComponent implements OnInit {
   ngOnInit() {
     this.loginForm = this.fb.group({
       Username: ["",[ Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
-      Password: ["", [Validators.required, Validators.minLength(6)]]
+      Password: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(20)]]
     });
   };
 
@@ -32,8 +32,8 @@ export class LoginformComponent implements OnInit {
       return;
     }
     this.authService.login(this.loginForm.value).subscribe(resp=> {
-      console.log(resp);
-      //localStorage.setItem('ACCESS_TOKEN', "access_token");
+      const token = JSON.stringify(resp);
+      localStorage.setItem('ACCESS_TOKEN', token);
       // this.router.navigateByUrl('/admin');
     });
   }
