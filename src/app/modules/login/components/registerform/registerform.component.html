@@ -156,11 +156,25 @@
       placeholder="{{ 'GENERIC.CONFIRM_PASSWORD' | translate }}"
       formControlName="confirmPassword"
       required
+      (input)="removewhiteSpaceConfirm()"
     />
     <mat-error id="notmatchPassword" *ngIf="registerForm.get('confirmPassword').errors && 
     registerForm.get('confirmPassword').errors.ConfirmPassword">{{
       "REGISTER.PASSWORD_NOT_MATCH" | translate
     }}</mat-error>
+
+    <mat-error id="requiredConfirmPassword" *ngIf="registerForm.controls.confirmPassword.invalid  && registerForm.controls.confirmPassword.errors.required">{{
+      "GENERIC.REQUIRED" | translate: {formValue: 'Contraseña'}
+    }}</mat-error>
+
+    <mat-error id="minConfirmPassword" *ngIf="registerForm.controls.confirmPassword.invalid && registerForm.controls.confirmPassword.errors.minlength">{{
+      "GENERIC.MIN_CHARACTERS" | translate: {minchar:registerForm.controls.confirmPassword.errors.minlength.requiredLength}
+    }}</mat-error>
+
+    <mat-error id="maxConfirmPassword" *ngIf="registerForm.controls.confirmPassword.invalid && registerForm.controls.confirmPassword.errors.maxlength">{{
+      "GENERIC.MAX_CHARACTERS" | translate: {maxchar:registerForm.controls.confirmPassword.errors.maxlength.requiredLength}
+    }}</mat-error>
+
   </mat-form-field>
 
   <button mat-raised-button id="next" color="primary" (click)="nextStep()" [disabled]="!registerForm.valid">
