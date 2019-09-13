@@ -10,7 +10,7 @@
         "DOCUMENT_NUMBER": "Número de documento",
         "REQUIRED": "El campo {{formValue}} es requerido",
         "NEXT": "Siguiente",
-        "REGISTER": "Regístrate",
+        "REGISTER": "Regístro",
         "INVALID_FORMAT": "El campo {{val}} no puede contener números y espacios en blanco al inicio",
         "MAX_CHARACTERS": "El número máximo de caracteres es {{maxchar}}",
         "MIN_CHARACTERS": "El número mínimo de caracteres es {{minchar}}",
@@ -30,6 +30,6 @@
         "TITLE_SECTION": "Regístrate, recomienda y gana",
         "TITLE_TERMS_AND_CONDITIONS": "TÉRMINOS Y CONDICIONES DE  LA LEY HABEAS DATA",
         "PASSWORD_NOT_MATCH":"Las contraseñas no son iguales",
-        "ID_TYPE":"Tipo de identificación"
+        "ID_TYPE":"Seleccionar documento"
     }
 }

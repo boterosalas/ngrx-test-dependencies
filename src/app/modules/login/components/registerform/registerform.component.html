@@ -12,15 +12,15 @@
       formControlName="name"
       required
     />
-    <mat-error *ngIf="registerForm.controls.name.invalid  && registerForm.controls.name.errors.required">{{
+    <mat-error id="requiredName" *ngIf="registerForm.controls.name.invalid  && registerForm.controls.name.errors.required">{{
       "GENERIC.REQUIRED" | translate: {formValue: 'Nombre'}
     }}</mat-error>
 
-    <mat-error *ngIf="registerForm.controls.name.invalid && registerForm.controls.name.errors.maxlength">{{
+    <mat-error id="maxName" *ngIf="registerForm.controls.name.invalid && registerForm.controls.name.errors.maxlength">{{
       "GENERIC.MAX_CHARACTERS" | translate: {maxchar:registerForm.controls.name.errors.maxlength.requiredLength}
     }}</mat-error>
 
-    <mat-error *ngIf="registerForm.controls.name.invalid && registerForm.controls.name.errors.pattern">{{
+    <mat-error id="invalidName" *ngIf="registerForm.controls.name.invalid && registerForm.controls.name.errors.pattern">{{
       "GENERIC.INVALID_FORMAT" | translate: {val: 'Nombre'}
     }}</mat-error>
 
@@ -35,15 +35,15 @@
       formControlName="lastName"
       required
     />
-    <mat-error *ngIf="registerForm.controls.lastName.invalid  && registerForm.controls.lastName.errors.required">{{
+    <mat-error id="requiredLastName" *ngIf="registerForm.controls.lastName.invalid  && registerForm.controls.lastName.errors.required">{{
       "GENERIC.REQUIRED" | translate: {formValue: 'Apellidos'}
     }}</mat-error>
 
-    <mat-error *ngIf="registerForm.controls.lastName.invalid && registerForm.controls.lastName.errors.maxlength">{{
+    <mat-error id="maxLastName" *ngIf="registerForm.controls.lastName.invalid && registerForm.controls.lastName.errors.maxlength">{{
       "GENERIC.MAX_CHARACTERS" | translate: {maxchar:registerForm.controls.lastName.errors.maxlength.requiredLength}
     }}</mat-error>
 
-    <mat-error *ngIf="registerForm.controls.lastName.invalid && registerForm.controls.lastName.errors.pattern">{{
+    <mat-error id="invalidLastName" *ngIf="registerForm.controls.lastName.invalid && registerForm.controls.lastName.errors.pattern">{{
       "GENERIC.INVALID_FORMAT" | translate: {val: 'Apellidos'}
     }}</mat-error>
 
@@ -53,7 +53,7 @@
     <mat-select placeholder="{{'REGISTER.ID_TYPE' | translate}}" id="idtype" formControlName="idType">
       <mat-option *ngFor="let typeId of idUserType" value="{{typeId.id}}">{{typeId.value}}</mat-option>
     </mat-select>
-    <mat-error *ngIf="registerForm.controls.idType.invalid">{{
+    <mat-error id="requiredTypeId" *ngIf="registerForm.controls.idType.invalid">{{
       "GENERIC.REQUIRED" | translate: {formValue: ''}
     }}</mat-error>
   </mat-form-field>
@@ -68,12 +68,16 @@
       required
     />
 
-    <mat-error *ngIf="registerForm.controls.id.invalid  && registerForm.controls.id.errors.required">{{
+    <mat-error id="reuiredId" *ngIf="registerForm.controls.id.invalid  && registerForm.controls.id.errors.required">{{
       "GENERIC.REQUIRED" | translate: {formValue: 'Número de documento'}
     }}</mat-error>
 
-    <mat-error *ngIf="registerForm.controls.id.invalid && registerForm.controls.id.errors.maxlength">{{
+    <mat-error id="maxId" *ngIf="registerForm.controls.id.invalid && registerForm.controls.id.errors.maxlength">{{
       "GENERIC.MAX_CHARACTERS" | translate: {maxchar:registerForm.controls.id.errors.maxlength.requiredLength}
+    }}</mat-error>
+
+    <mat-error id="numberId" *ngIf="registerForm.controls.id.invalid && registerForm.controls.id.errors.pattern">{{
+      "GENERIC.ONLY_NUMBERS" | translate
     }}</mat-error>
 
   </mat-form-field>
@@ -87,19 +91,19 @@
       formControlName="phone"
       required
     />
-    <mat-error *ngIf="registerForm.controls.phone.invalid  && registerForm.controls.phone.errors.required">{{
+    <mat-error id="requiredPhone" *ngIf="registerForm.controls.phone.invalid  && registerForm.controls.phone.errors.required">{{
       "GENERIC.REQUIRED" | translate: {formValue: 'Celular'}
     }}</mat-error>
 
-    <mat-error *ngIf="registerForm.controls.phone.invalid && registerForm.controls.phone.errors.minlength">{{
+    <mat-error id="minPhone" *ngIf="registerForm.controls.phone.invalid && registerForm.controls.phone.errors.minlength">{{
       "GENERIC.MIN_CHARACTERS" | translate: {minchar:registerForm.controls.phone.errors.minlength.requiredLength}
     }}</mat-error>
 
-    <mat-error *ngIf="registerForm.controls.phone.invalid && registerForm.controls.phone.errors.maxlength">{{
+    <mat-error id="maxPhone" *ngIf="registerForm.controls.phone.invalid && registerForm.controls.phone.errors.maxlength">{{
       "GENERIC.MAX_CHARACTERS" | translate: {maxchar:registerForm.controls.phone.errors.maxlength.requiredLength}
     }}</mat-error>
 
-    <mat-error *ngIf="registerForm.controls.phone.invalid && registerForm.controls.phone.errors.pattern">{{
+    <mat-error id="numberPhone" *ngIf="registerForm.controls.phone.invalid && registerForm.controls.phone.errors.pattern">{{
       "GENERIC.ONLY_NUMBERS" | translate
     }}</mat-error>
 
@@ -114,7 +118,7 @@
       formControlName="email"
       required
     />
-    <mat-error *ngIf="registerForm.controls.email.invalid">{{
+    <mat-error id="invalidEmail" *ngIf="registerForm.controls.email.invalid">{{
       "LOGIN.INVALID_EMAIL" | translate: {formValue: 'Email'}
     }}</mat-error>
 
@@ -128,16 +132,17 @@
       placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
       formControlName="password"
       required
+      (input)="removewhiteSpace()"
     />
-    <mat-error *ngIf="registerForm.controls.password.invalid  && registerForm.controls.password.errors.required">{{
+    <mat-error id="requiredPassword" *ngIf="registerForm.controls.password.invalid  && registerForm.controls.password.errors.required">{{
       "GENERIC.REQUIRED" | translate: {formValue: 'Contraseña'}
     }}</mat-error>
 
-    <mat-error *ngIf="registerForm.controls.password.invalid && registerForm.controls.password.errors.minlength">{{
+    <mat-error id="minPassword" *ngIf="registerForm.controls.password.invalid && registerForm.controls.password.errors.minlength">{{
       "GENERIC.MIN_CHARACTERS" | translate: {minchar:registerForm.controls.password.errors.minlength.requiredLength}
     }}</mat-error>
 
-    <mat-error *ngIf="registerForm.controls.password.invalid && registerForm.controls.password.errors.minlength">{{
+    <mat-error id="maxPassword" *ngIf="registerForm.controls.password.invalid && registerForm.controls.password.errors.maxlength">{{
       "GENERIC.MAX_CHARACTERS" | translate: {maxchar:registerForm.controls.password.errors.maxlength.requiredLength}
     }}</mat-error>
 
@@ -152,7 +157,7 @@
       formControlName="confirmPassword"
       required
     />
-    <mat-error *ngIf="registerForm.get('confirmPassword').errors && 
+    <mat-error id="notmatchPassword" *ngIf="registerForm.get('confirmPassword').errors && 
     registerForm.get('confirmPassword').errors.ConfirmPassword">{{
       "REGISTER.PASSWORD_NOT_MATCH" | translate
     }}</mat-error>

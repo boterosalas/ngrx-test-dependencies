@@ -17,7 +17,7 @@ export class LoginformComponent implements OnInit {
 
   loginForm: FormGroup;
   isSubmitted  =  false;
-  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
+  emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
 
   ngOnInit() {
     this.loginForm = this.fb.group({

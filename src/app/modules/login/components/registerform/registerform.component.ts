@@ -20,16 +20,16 @@ export class RegisterformComponent implements OnInit {
   showRegisterForm: boolean;
   acceptTerms: boolean;
   idUserType = [];
-  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
+  emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
   namePattern = "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
-  numberPattern = "^(0|[1-9][0-9]*)$";
+  numberPattern = "^(0|[0-9][0-9]*)$";
 
   ngOnInit() {
     this.registerForm = this.fb.group({
       name: ["", [Validators.required, Validators.maxLength(50), Validators.pattern(this.namePattern)]],
       lastName: ["", [Validators.required, Validators.maxLength(50), Validators.pattern(this.namePattern)]],
       idType: ["", Validators.required],
-      id: ["", [Validators.required, Validators.maxLength(11)]],
+      id: ["", [Validators.required, Validators.maxLength(11), Validators.pattern(this.numberPattern)]],
       phone: ["", [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern(this.numberPattern)]],
       email: ["",[ Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
       password: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
@@ -59,7 +59,6 @@ export class RegisterformComponent implements OnInit {
     }
     
     this.registerUser.registerUser(registerForm).subscribe(resp=> {
-      console.log(resp);
     });
   }
 
@@ -70,8 +69,13 @@ export class RegisterformComponent implements OnInit {
   public getidType() {
     this.registerUser.idType().subscribe(res=> {
       this.idUserType = res;
-      console.log(this.idUserType);
     })
+  }
+
+  public removewhiteSpace() {
+    const inputValue = this.registerForm.controls.password.value;
+    let noSpace =  inputValue.replace(/ /g, '');
+    this.registerForm.controls.password.setValue(noSpace);
   }
 
 }
