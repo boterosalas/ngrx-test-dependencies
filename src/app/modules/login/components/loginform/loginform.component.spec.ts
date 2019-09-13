@@ -6,10 +6,19 @@ import { AppMaterialModule } from "src/app/modules/shared/app-material/app-mater
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, RouterOutlet, Router } from "@angular/router";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { AuthService } from 'src/app/services/auth.service';
+import { of } from 'rxjs';
 
 describe("LoginformComponent", () => {
   let component: LoginformComponent;
   let fixture: ComponentFixture<LoginformComponent>;
+
+  const mockAuthService = jasmine.createSpyObj('AuthService', ['login']);
+
+  const dataUser = {
+    Username: 'david.betancur@pragma.com.co',
+    Password: '123456789'
+  }
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -31,8 +40,10 @@ describe("LoginformComponent", () => {
           }
         },
         TranslateService,
+        {provide: AuthService, useValue: mockAuthService}
       ]
     }).compileComponents();
+    mockAuthService.login.and.returnValue(of(dataUser));
   }));
 
   beforeEach(() => {
@@ -51,6 +62,7 @@ describe("LoginformComponent", () => {
     component.loginForm.controls.Password.setValue('123456789');
     component.login();
     expect(component.loginForm.invalid).toBeFalsy();
+    expect(mockAuthService.login).toHaveBeenCalled();
   });
 
   it('Login invalid', () => {
