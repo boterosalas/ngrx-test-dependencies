@@ -25,7 +25,7 @@
       formControlName="Password"
       required
     />
-    <mat-error *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Username.errors.required">{{
+    <mat-error *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Password.errors.required">{{
       "LOGIN.INTRODUCE_PASSWORD" | translate
     }}</mat-error>
   </mat-form-field>
