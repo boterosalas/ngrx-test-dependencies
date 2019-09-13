@@ -20,7 +20,7 @@ export class RegisterformComponent implements OnInit {
   showRegisterForm: boolean;
   acceptTerms: boolean;
   idUserType = [];
-  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
+  emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
   namePattern = "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
   numberPattern = "^(0|[0-9][0-9]*)$";
 
