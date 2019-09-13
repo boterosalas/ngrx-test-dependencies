@@ -137,6 +137,10 @@
       "GENERIC.MIN_CHARACTERS" | translate: {minchar:registerForm.controls.password.errors.minlength.requiredLength}
     }}</mat-error>
 
+    <mat-error *ngIf="registerForm.controls.password.invalid && registerForm.controls.password.errors.minlength">{{
+      "GENERIC.MAX_CHARACTERS" | translate: {maxchar:registerForm.controls.password.errors.maxlength.requiredLength}
+    }}</mat-error>
+
   </mat-form-field>
 
   <mat-form-field>
