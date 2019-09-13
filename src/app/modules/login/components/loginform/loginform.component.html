@@ -8,7 +8,10 @@
       formControlName="Username"
       required
     />
-    <mat-error *ngIf="loginForm.controls.Username.invalid">{{
+    <mat-error *ngIf="loginForm.controls.Username.invalid && loginForm.controls.Username.errors.required">{{
+      "LOGIN.INTRODUCE_EMAIL" | translate
+    }}</mat-error>
+    <mat-error *ngIf="loginForm.controls.Username.invalid && loginForm.controls.Username.errors.pattern">{{
       "LOGIN.INVALID_EMAIL" | translate
     }}</mat-error>
   </mat-form-field>
@@ -22,8 +25,8 @@
       formControlName="Password"
       required
     />
-    <mat-error *ngIf="loginForm.controls.Password.invalid">{{
-      "LOGIN.INVALID_PASSWORD" | translate
+    <mat-error *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Username.errors.required">{{
+      "LOGIN.INTRODUCE_PASSWORD" | translate
     }}</mat-error>
   </mat-form-field>
 

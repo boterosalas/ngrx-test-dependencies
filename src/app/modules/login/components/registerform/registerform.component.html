@@ -20,6 +20,10 @@
       "GENERIC.MAX_CHARACTERS" | translate: {maxchar:registerForm.controls.name.errors.maxlength.requiredLength}
     }}</mat-error>
 
+    <mat-error *ngIf="registerForm.controls.name.invalid && registerForm.controls.name.errors.pattern">{{
+      "GENERIC.INVALID_FORMAT" | translate: {val: 'Nombre'}
+    }}</mat-error>
+
   </mat-form-field>
 
   <mat-form-field>
@@ -39,11 +43,15 @@
       "GENERIC.MAX_CHARACTERS" | translate: {maxchar:registerForm.controls.lastName.errors.maxlength.requiredLength}
     }}</mat-error>
 
+    <mat-error *ngIf="registerForm.controls.lastName.invalid && registerForm.controls.lastName.errors.pattern">{{
+      "GENERIC.INVALID_FORMAT" | translate: {val: 'Apellidos'}
+    }}</mat-error>
+
   </mat-form-field>
 
   <mat-form-field>
-    <mat-select placeholder="C.C" id="idtype" formControlName="idType">
-      <mat-option value="option">C.C</mat-option>
+    <mat-select placeholder="{{'REGISTER.ID_TYPE' | translate}}" id="idtype" formControlName="idType">
+      <mat-option *ngFor="let typeId of idUserType" value="{{typeId.id}}">{{typeId.value}}</mat-option>
     </mat-select>
     <mat-error *ngIf="registerForm.controls.idType.invalid">{{
       "GENERIC.REQUIRED" | translate: {formValue: ''}
@@ -89,6 +97,10 @@
 
     <mat-error *ngIf="registerForm.controls.phone.invalid && registerForm.controls.phone.errors.maxlength">{{
       "GENERIC.MAX_CHARACTERS" | translate: {maxchar:registerForm.controls.phone.errors.maxlength.requiredLength}
+    }}</mat-error>
+
+    <mat-error *ngIf="registerForm.controls.phone.invalid && registerForm.controls.phone.errors.pattern">{{
+      "GENERIC.ONLY_NUMBERS" | translate
     }}</mat-error>
 
   </mat-form-field>
