@@ -1,24 +1,38 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { LoginformComponent } from "./loginform.component";
-import { TranslateModule, TranslateService, TranslateStore, TranslateLoader, TranslateCompiler, TranslateParser, MissingTranslationHandler, USE_DEFAULT_LANG } from "@ngx-translate/core";
+import {
+  TranslateModule,
+  TranslateService,
+} from "@ngx-translate/core";
 import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, RouterOutlet, Router } from "@angular/router";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { AuthService } from 'src/app/services/auth.service';
-import { of } from 'rxjs';
+import { AuthService } from "src/app/services/auth.service";
+import { of } from "rxjs";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { RouterTestingModule } from "@angular/router/testing";
 
 describe("LoginformComponent", () => {
   let component: LoginformComponent;
   let fixture: ComponentFixture<LoginformComponent>;
 
-  const mockAuthService = jasmine.createSpyObj('AuthService', ['login']);
+  const mockAuthService = jasmine.createSpyObj("AuthService", ["login"]);
 
   const dataUser = {
-    Username: 'david.betancur@pragma.com.co',
-    Password: '123456789'
-  }
+    state: "Success",
+    userMessage: null,
+    objectResponse:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc…VzIn0.Bcsm-qVHHtRcLlQae_5tVwGpgbPQJkCEQ97ZbwRxz_4"
+  };
+
+  const dataUserInvalid = {
+    state: "Error",
+    userMessage: null,
+    objectResponse:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc…VzIn0.Bcsm-qVHHtRcLlQae_5tVwGpgbPQJkCEQ97ZbwRxz_4"
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -29,7 +43,8 @@ describe("LoginformComponent", () => {
         FormsModule,
         ReactiveFormsModule,
         HttpClientTestingModule,
-        RouterModule,
+        RouterTestingModule.withRoutes([]),
+        BrowserAnimationsModule,
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -40,7 +55,7 @@ describe("LoginformComponent", () => {
           }
         },
         TranslateService,
-        {provide: AuthService, useValue: mockAuthService}
+        { provide: AuthService, useValue: mockAuthService }
       ]
     }).compileComponents();
     mockAuthService.login.and.returnValue(of(dataUser));
@@ -56,23 +71,40 @@ describe("LoginformComponent", () => {
     expect(component).toBeTruthy();
   });
 
-  it('login valid', () => {
+  it("login valid", () => {
     component.isSubmitted = true;
-    component.loginForm.controls.Username.setValue('test@test.com');
-    component.loginForm.controls.Password.setValue('123456789');
+    component.loginForm.controls.Username.setValue("test@test.com");
+    component.loginForm.controls.Password.setValue("123456789");
     component.login();
     expect(component.loginForm.invalid).toBeFalsy();
     expect(mockAuthService.login).toHaveBeenCalled();
   });
 
-  it('Login invalid', () => {
+  it("Login invalid", () => {
     component.isSubmitted = false;
-    component.loginForm.controls.Username.setValue('');
-    component.loginForm.controls.Password.setValue('');
+    component.loginForm.controls.Username.setValue("");
+    component.loginForm.controls.Password.setValue("");
     component.login();
     expect(component.loginForm.invalid).toBeTruthy();
   });
-  
+
+
+  describe('Login invalid', () => {
+
+    beforeEach(function() {
+      mockAuthService.login.and.returnValue(of(dataUserInvalid));
+    });
+    
+
+    it("Login invalid", () => {
+      component.isSubmitted = true;
+      component.loginForm.controls.Username.setValue("david.betancur@pragma.com.co");
+      component.loginForm.controls.Password.setValue("123456");
+      component.login();
+      expect(mockAuthService.login).toHaveBeenCalled();
+    });
+
+  });
   
 
 });

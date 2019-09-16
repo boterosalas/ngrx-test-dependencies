@@ -12,9 +12,11 @@ import {
 } from "@ngx-translate/core";
 import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { RouterModule, RouterOutlet, Router } from "@angular/router";
+import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { Router } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe("LoginComponent", () => {
   let component: LoginComponent;
@@ -29,10 +31,13 @@ describe("LoginComponent", () => {
         FormsModule,
         ReactiveFormsModule,
         HttpClientTestingModule,
-        RouterModule,
+        RouterTestingModule.withRoutes([]),
+        BrowserAnimationsModule,
         TranslateModule.forRoot({})
       ],
-      providers: [],
+      providers: [
+        // Router
+      ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
@@ -49,14 +54,6 @@ describe("LoginComponent", () => {
 
   it("show register", () => {
     component.showRegister();
-    expect(component.showRegisterForm).toBeTruthy();
-    expect(component.showLoginForm).toBeFalsy();
-  });
-
-  it("show login", () => {
-    component.showLogin();
-    expect(component.showRegisterForm).toBeFalsy();
-    expect(component.showLoginForm).toBeTruthy();
   });
   
 });
