@@ -1,0 +1,54 @@
+<div class="login-container" [formGroup]="loginForm">
+  <mat-form-field>
+    <input
+      matInput
+      id="email"
+      type="email"
+      placeholder="{{ 'GENERIC.EMAIL' | translate }}"
+      formControlName="Username"
+      required
+    />
+    <mat-error id="introduceEmail" *ngIf="loginForm.controls.Username.invalid && loginForm.controls.Username.errors.required">{{
+      "LOGIN.INTRODUCE_EMAIL" | translate
+    }}</mat-error>
+    <mat-error id="invalidEmail" *ngIf="loginForm.controls.Username.invalid && loginForm.controls.Username.errors.pattern">{{
+      "LOGIN.INVALID_EMAIL" | translate
+    }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      id="password"
+      type="password"
+      placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
+      formControlName="Password"
+      required
+    />
+    <mat-error id="introducePassword" *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Password.errors.required">{{
+      "LOGIN.INTRODUCE_PASSWORD" | translate
+    }}</mat-error>
+
+    <mat-error id="minPassword" *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Password.errors.minlength">{{
+      "GENERIC.MIN_CHARACTERS" | translate: {minchar:loginForm.controls.Password.errors.minlength.requiredLength}
+    }}</mat-error>
+
+    <mat-error id="maxPassword" *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Password.errors.maxlength">{{
+      "GENERIC.MAX_CHARACTERS" | translate: {maxchar:loginForm.controls.Password.errors.maxlength.requiredLength}
+    }}</mat-error>
+
+  </mat-form-field>
+
+  <p>{{ "LOGIN.FORGOT_PASSWORD" | translate}}</p>
+
+  <button
+  mat-raised-button
+  id="login"
+  color="primary"
+  (click)="login()"
+  [disabled]="!loginForm.valid"
+>
+  {{ "LOGIN.LOGIN" | translate }}
+</button>
+
+</div>
