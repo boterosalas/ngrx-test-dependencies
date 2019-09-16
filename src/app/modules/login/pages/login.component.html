@@ -5,13 +5,12 @@
         <mat-card-header class="justify-content-center text-center">
           <mat-card-title>LOGO</mat-card-title>
           <mat-card-subtitle>
-                <button mat-button  (click)="showLogin()">{{ "LOGIN.LOGIN" | translate }}</button>
-                <button mat-button (click)="showRegister()">{{ "GENERIC.REGISTER" | translate }}</button>
+                <button mat-button id="login">{{ "LOGIN.LOGIN" | translate }}</button>
+                <button mat-button id="register" (click)="showRegister()">{{ "GENERIC.REGISTER" | translate }}</button>
             </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-          <app-loginform *ngIf="showLoginForm"></app-loginform>
-          <app-registerform *ngIf="showRegisterForm"></app-registerform>
+          <app-loginform></app-loginform>
         </mat-card-content>
       </mat-card>
     </div>

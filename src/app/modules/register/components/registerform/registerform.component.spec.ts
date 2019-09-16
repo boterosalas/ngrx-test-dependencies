@@ -5,9 +5,10 @@ import { TranslateModule } from "@ngx-translate/core";
 import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { RouterModule } from "@angular/router";
 import { RegisterUserService } from "src/app/services/register-user.service";
 import { of } from "rxjs";
+import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe("RegisterformComponent", () => {
   let component: RegisterformComponent;
@@ -33,13 +34,13 @@ describe("RegisterformComponent", () => {
   ];
 
   const register = {
-    Email: 'david@test.com',
-    FirstNames: 'David',
-    LastNames: 'Betancur Jaramillo',
-    Identification: '1039741122',
-    Cellphone: '3015496320',
-    Password: '123456789',
-    IdType: '1',
+    state: "Success",
+    userMessage: null
+  }
+
+  const registerInvalid = {
+    state: "Error",
+    userMessage: null
   }
 
   beforeEach(async(() => {
@@ -51,7 +52,8 @@ describe("RegisterformComponent", () => {
         FormsModule,
         ReactiveFormsModule,
         HttpClientTestingModule,
-        RouterModule,
+        BrowserAnimationsModule,
+        RouterTestingModule.withRoutes([]),
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -86,9 +88,22 @@ describe("RegisterformComponent", () => {
     expect(component.acceptTerms).toBeTruthy();
   });
 
+  it("back step", () => {
+    component.backStep();
+    component.showTerms = false;
+    component.showRegisterForm = true;
+    expect(component.showTerms).toBeFalsy();
+    expect(component.showRegisterForm).toBeTruthy();
+  });
+
+  it('go to login', () => {
+    component.showLogin();
+  });
+  
+
   it("register form", () => {
     component.register();
-    expect( mockRegisterService.registerUser).toHaveBeenCalled();
+    expect(mockRegisterService.registerUser).toHaveBeenCalled();
   });
 
   it("remove white space password", () => {
@@ -101,6 +116,19 @@ describe("RegisterformComponent", () => {
     component.registerForm.controls.confirmPassword.setValue("1234 5678");
     component.removewhiteSpaceConfirm();
     expect(component.registerForm.controls.confirmPassword.value).toBe("12345678");
+  });
+
+  describe('register invalid', () => {
+
+    beforeEach(function() {
+      mockRegisterService.registerUser.and.returnValue(of(registerInvalid));
+    });
+    
+    it("register invalid", () => {
+      component.register();
+      expect(mockRegisterService.registerUser).toHaveBeenCalled();
+    });
+
   });
 
 });
