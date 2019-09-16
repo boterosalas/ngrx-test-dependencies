@@ -4,6 +4,7 @@ import { ConfirmPasswordValidator } from "src/app/validators/confirm-password.va
 import { RegisterUserService } from "src/app/services/register-user.service";
 import Swal from "sweetalert2";
 import { ResponseService } from 'src/app/interfaces/response';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-registerform",
@@ -13,17 +14,21 @@ import { ResponseService } from 'src/app/interfaces/response';
 export class RegisterformComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
-    private registerUser: RegisterUserService
+    private registerUser: RegisterUserService,
+    private router: Router
   ) {}
 
   registerForm: FormGroup;
   showTerms: boolean;
   showRegisterForm: boolean;
+  showLoginForm: boolean;
   acceptTerms: boolean;
   idUserType = [];
   emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
   namePattern = "[a-zA-Z0-9 ]+";
   numberPattern = "^(0|[0-9][0-9]*)$";
+
+  
 
   ngOnInit() {
     this.registerForm = this.fb.group(
@@ -98,6 +103,16 @@ export class RegisterformComponent implements OnInit {
   public nextStep() {
     this.showTerms = true;
     this.showRegisterForm = false;
+    this.acceptTerms = false;
+  }
+
+  public backStep() {
+    this.showTerms = false;
+    this.showRegisterForm = true;
+  }
+
+  public showLogin() {
+    this.router.navigate(['/']);
   }
 
   public register() {
@@ -119,6 +134,8 @@ export class RegisterformComponent implements OnInit {
             text: "Te Has registrado correctamente",
             type: "success",
             confirmButtonText: "Aceptar"
+          }).then(()=> {
+            this.showLogin();
           });
         } else {
           Swal.fire({
@@ -126,15 +143,19 @@ export class RegisterformComponent implements OnInit {
             text: resp.userMessage,
             type: "error",
             confirmButtonText: "Aceptar"
+          }).then(()=>{
+            this.backStep();
           });
         }
       },
       error => {
         Swal.fire({
           title: "Registro invalido",
-          text: error.error,
+          text: 'No hay conexión',
           type: "error",
           confirmButtonText: "Aceptar"
+        }).then(()=>{
+          this.backStep();
         });
       }
     );

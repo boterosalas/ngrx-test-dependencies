@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './modules/shared/app-material/app-material.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { RegisterModule } from './modules/register/register.module';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -28,6 +29,7 @@ export function createTranslateLoader(http: HttpClient) {
     AppRoutingModule,
     HttpClientModule,
     LoginModule,
+    RegisterModule,
     AppMaterialModule,
     TranslateModule.forRoot({
       loader: {
