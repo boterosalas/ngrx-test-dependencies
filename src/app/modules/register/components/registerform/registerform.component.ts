@@ -167,7 +167,7 @@ export class RegisterformComponent implements OnInit {
 
   public getidType() {
     this.registerUser.idType().subscribe(res => {
-      this.idUserType = res.objectResponse;
+      this.idUserType = res;
     });
   }
 
