@@ -128,6 +128,7 @@ export class RegisterformComponent implements OnInit {
 
     this.registerUser.registerUser(registerForm).subscribe(
       (resp: ResponseService) => {
+        console.log(resp);
         if (resp.state === "Success") {
           Swal.fire({
             title: "Registro valido",
@@ -167,7 +168,7 @@ export class RegisterformComponent implements OnInit {
 
   public getidType() {
     this.registerUser.idType().subscribe(res => {
-      this.idUserType = res;
+      this.idUserType = res.objectResponse;
     });
   }
 
