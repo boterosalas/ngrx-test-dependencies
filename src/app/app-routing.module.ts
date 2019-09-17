@@ -4,10 +4,16 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'login',  loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule)
+    path: '',  loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule)
   },
   {
     path: 'registro',  loadChildren: () => import('./modules/register/register.module').then(m => m.RegisterModule)
+  },
+  {
+    path: 'olvido-contrasena',  loadChildren: () => import('./modules/forgotpassword/forgotpassword.module').then(m => m.ForgotpasswordModule)
+  },
+  {
+    path: 'recuperar-contrasena/:id',  loadChildren: () => import('./modules/recoverpassword/recoverpassword.module').then(m => m.RecoverpasswordModule)
   }
 ];
 

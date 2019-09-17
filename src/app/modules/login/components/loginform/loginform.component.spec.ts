@@ -1,16 +1,13 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { LoginformComponent } from "./loginform.component";
-import {
-  TranslateModule,
-  TranslateService,
-} from "@ngx-translate/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, RouterOutlet, Router } from "@angular/router";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { AuthService } from "src/app/services/auth.service";
-import { of } from "rxjs";
+import { of, Observable, throwError } from "rxjs";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterTestingModule } from "@angular/router/testing";
 
@@ -88,23 +85,33 @@ describe("LoginformComponent", () => {
     expect(component.loginForm.invalid).toBeTruthy();
   });
 
-
-  describe('Login invalid', () => {
-
+  describe("Login invalid", () => {
     beforeEach(function() {
       mockAuthService.login.and.returnValue(of(dataUserInvalid));
     });
-    
 
     it("Login invalid", () => {
       component.isSubmitted = true;
-      component.loginForm.controls.Username.setValue("david.betancur@pragma.com.co");
+      component.loginForm.controls.Username.setValue(
+        "david.betancur@pragma.com.co"
+      );
       component.loginForm.controls.Password.setValue("123456");
       component.login();
       expect(mockAuthService.login).toHaveBeenCalled();
     });
-
   });
-  
 
+  describe("invalid request", () => {
+    beforeEach(function() {
+      mockAuthService.login.and.returnValue(throwError({status: 500}));
+    });
+
+    it("invalid request", () => {
+      component.isSubmitted = true;
+      component.loginForm.controls.Username.setValue("t@gmail.com");
+      component.loginForm.controls.Password.setValue("123123");
+      component.login();
+      expect(mockAuthService.login).toHaveBeenCalled();
+    });
+  });
 });
