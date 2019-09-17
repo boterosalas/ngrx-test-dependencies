@@ -16,6 +16,8 @@ import { AppMaterialModule } from './modules/shared/app-material/app-material.mo
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { RegisterModule } from './modules/register/register.module';
+import { RecoverpasswordModule } from './modules/recoverpassword/recoverpassword.module';
+import { ForgotpasswordModule } from './modules/forgotpassword/forgotpassword.module';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -30,6 +32,8 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     LoginModule,
     RegisterModule,
+    RecoverpasswordModule,
+    ForgotpasswordModule,
     AppMaterialModule,
     TranslateModule.forRoot({
       loader: {
