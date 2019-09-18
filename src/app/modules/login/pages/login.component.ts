@@ -25,4 +25,8 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/registro']);
   }
 
+  searchProduct(term:string){
+    console.log(term);
+  }
+
 }
