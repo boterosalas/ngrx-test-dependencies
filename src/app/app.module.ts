@@ -19,7 +19,6 @@ import { RegisterModule } from './modules/register/register.module';
 import { RecoverpasswordModule } from './modules/recoverpassword/recoverpassword.module';
 import { ForgotpasswordModule } from './modules/forgotpassword/forgotpassword.module';
 
-
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }

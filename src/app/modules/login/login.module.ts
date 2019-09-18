@@ -6,6 +6,7 @@ import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     AppMaterialModule,
     TranslateModule,
+    SharedModule,
     CommonModule,
     RouterModule.forChild(routes)
   ],

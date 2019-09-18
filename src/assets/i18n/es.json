@@ -17,7 +17,8 @@
         "ONLY_NUMBERS": "Solo se aceptan números",
         "SEND": "Enviar",
         "SAVE": "Guardar",
-        "CANCEL": " Cancelar"
+        "CANCEL": "Cancelar",
+        "SEARCH": "Buscar"
     },
     "LOGIN": {
         "LOGIN": "Iniciar sesión",
