@@ -4,11 +4,13 @@ import { SearchComponent } from './components/search/search.component';
 import { AppMaterialModule } from './app-material/app-material.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 @NgModule({
   declarations: [
-    SearchComponent
+    SearchComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
@@ -17,6 +19,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     ReactiveFormsModule,
     FormsModule
   ],
-  exports: [SearchComponent]
+  exports: [SearchComponent, NotFoundComponent]
 })
 export class SharedModule { }

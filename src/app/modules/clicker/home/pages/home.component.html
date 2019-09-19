@@ -1,0 +1,15 @@
+<div class="container">
+    <app-search (search)="searchProduct($event)"></app-search>
+    
+    <div *ngIf="showResults">   
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let product of productsList">
+                <app-product [productName]="product.productName" [price]="product.items[0].sellers[0].commertialOffer.PriceWithoutDiscount" description="lorem ipssum" [image]="product.items[0].images[0].imageUrl" [alt]="product.productName" textbutton="{{'PRODUCTS.GET_LINK' | translate}}" (infoProduct)="dataProduct(product)"></app-product>
+            </div> 
+        </div>    
+    </div>
+    
+    <div class="not-found" *ngIf="showNotFound">
+        <app-not-found></app-not-found>
+    </div>
+</div>
