@@ -31,6 +31,10 @@ describe("LoginformComponent", () => {
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc…VzIn0.Bcsm-qVHHtRcLlQae_5tVwGpgbPQJkCEQ97ZbwRxz_4"
   };
 
+  let mockRouter = {
+    navigate: jasmine.createSpy('navigate')
+  }
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [LoginformComponent],
@@ -45,12 +49,7 @@ describe("LoginformComponent", () => {
         TranslateModule.forRoot({})
       ],
       providers: [
-        {
-          provide: Router,
-          useClass: class {
-            navigate = jasmine.createSpy("navigate");
-          }
-        },
+        { provide: Router, useValue: mockRouter},
         TranslateService,
         { provide: AuthService, useValue: mockAuthService }
       ]
@@ -67,6 +66,12 @@ describe("LoginformComponent", () => {
   it("should create", () => {
     expect(component).toBeTruthy();
   });
+
+  it('go to forgot password', () => {
+    component.forgotpass();
+    expect(mockRouter.navigate).toHaveBeenCalledWith(['/olvido-contrasena']);
+  });
+  
 
   it("login valid", () => {
     component.isSubmitted = true;
