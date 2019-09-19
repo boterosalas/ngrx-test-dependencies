@@ -24,12 +24,17 @@ export class HomeComponent implements OnInit {
     this.sp.getProducts(term).subscribe((resp: SearchProduct) => {
       if(resp.length > 0 ) {
         this.showResults = true;
+        this.showNotFound = false;
         this.productsList = resp;
       } else {
         this.showNotFound = true;
         this.showResults = false;
       }
     })
+  }
+
+  dataProduct(product) {
+    console.log(product);
   }
 
 }

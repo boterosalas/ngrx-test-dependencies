@@ -43,5 +43,8 @@
     "RECOVERPASSWORD":{
         "RECOVER_PASSWORD": "Recuperar contraseña",
         "ENTER_PASSWORD": "Por favor, introduzca su nueva contraseña"
+    },
+    "PRODUCTS": {
+        "GET_LINK": "Obtener link"
     }
 }

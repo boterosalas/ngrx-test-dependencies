@@ -6,6 +6,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ProductSearchService } from 'src/app/services/product-search.service';
 import { of } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -42,7 +43,8 @@ describe('HomeComponent', () => {
        ],
        imports:[
          AppMaterialModule,
-         HttpClientTestingModule
+         HttpClientTestingModule,
+         TranslateModule.forRoot({})
        ],
        providers:[
          {provide: ProductSearchService, useValue: mockProductSearchService}
