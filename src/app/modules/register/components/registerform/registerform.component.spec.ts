@@ -6,7 +6,7 @@ import { AppMaterialModule } from "src/app/modules/shared/app-material/app-mater
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { RegisterUserService } from "src/app/services/register-user.service";
-import { of } from "rxjs";
+import { of, throwError } from "rxjs";
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -83,7 +83,7 @@ describe("RegisterformComponent", () => {
     expect(component.showRegisterForm).toBeFalsy();
   });
 
-  it("next step", () => {
+  it("accept terms", () => {
     component.acceptTermsCheck();
     expect(component.acceptTerms).toBeTruthy();
   });
@@ -125,6 +125,19 @@ describe("RegisterformComponent", () => {
     });
     
     it("register invalid", () => {
+      component.register();
+      expect(mockRegisterService.registerUser).toHaveBeenCalled();
+    });
+
+  });
+
+  describe('invalid request', () => {
+
+    beforeEach(function() {
+      mockRegisterService.registerUser.and.returnValue(throwError({status: 500}));
+    });
+    
+    it("invalid request", () => {
       component.register();
       expect(mockRegisterService.registerUser).toHaveBeenCalled();
     });

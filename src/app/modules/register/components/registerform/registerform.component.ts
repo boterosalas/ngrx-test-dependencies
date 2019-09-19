@@ -128,7 +128,6 @@ export class RegisterformComponent implements OnInit {
 
     this.registerUser.registerUser(registerForm).subscribe(
       (resp: ResponseService) => {
-        console.log(resp);
         if (resp.state === "Success") {
           Swal.fire({
             title: "Registro valido",
@@ -151,8 +150,8 @@ export class RegisterformComponent implements OnInit {
       },
       error => {
         Swal.fire({
-          title: "Registro invalido",
-          text: 'No hay conexión',
+          title: error.statusText,
+          text: error.error.userMessage,
           type: "error",
           confirmButtonText: "Aceptar"
         }).then(()=>{

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProductSearchService } from 'src/app/services/product-search.service';
+import { SearchProduct } from 'src/app/interfaces/search-product';
 
 @Component({
   selector: 'app-login',
