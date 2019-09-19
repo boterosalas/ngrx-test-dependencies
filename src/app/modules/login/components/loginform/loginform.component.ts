@@ -62,12 +62,7 @@ export class LoginformComponent implements OnInit {
         if (resp.state === "Success") {
           const token = JSON.stringify(resp);
           localStorage.setItem("ACCESS_TOKEN", token);
-          Swal.fire({
-            title: "Login valido",
-            text: "Has ingresado correctamente",
-            type: "success",
-            confirmButtonText: "Aceptar"
-          });
+          this.router.navigate(['/inicio']);
         } else {
           Swal.fire({
             title: "Login invalido",
@@ -76,7 +71,6 @@ export class LoginformComponent implements OnInit {
             confirmButtonText: "Aceptar"
           });
         }
-        // this.router.navigateByUrl('/admin');
       },
       error => {
         Swal.fire({

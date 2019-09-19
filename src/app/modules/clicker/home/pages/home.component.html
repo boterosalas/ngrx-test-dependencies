@@ -1,0 +1,8 @@
+<app-search (search)="searchProduct($event)"></app-search>
+
+<div class="results" *ngIf="showResults">
+    <app-product *ngFor="let product of productsList" [productName]="product.productName" [price]="product.items[0].sellers[0].commertialOffer.PriceWithoutDiscount" description="lorem ipssum" [image]="product.items[0].images[0].imageUrl" [alt]="product.productName"></app-product>
+</div> 
+<div class="not-found" *ngIf="showNotFound">
+    <app-not-found></app-not-found>
+</div>

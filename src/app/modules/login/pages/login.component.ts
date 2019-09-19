@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProductSearchService } from 'src/app/services/product-search.service';
+import { SearchProduct } from 'src/app/interfaces/search-product';
 
 @Component({
   selector: 'app-login',
@@ -23,10 +25,6 @@ export class LoginComponent implements OnInit {
   
   public showRegister() {
     this.router.navigate(['/registro']);
-  }
-
-  searchProduct(term:string){
-    console.log(term);
   }
 
 }
