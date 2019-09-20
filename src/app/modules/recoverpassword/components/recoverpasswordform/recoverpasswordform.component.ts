@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RecoverpasswordService } from 'src/app/services/recoverpassword.service';
 import Swal from "sweetalert2";
 import { ResponseService } from 'src/app/interfaces/response';
+import { Subscription } from 'rxjs';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-recoverpasswordform',
@@ -17,9 +19,11 @@ export class RecoverpasswordformComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private recover: RecoverpasswordService
+    private recover: RecoverpasswordService,
+    private loading: LoaderService
   ) { }
 
+  private subscription: Subscription = new Subscription();
   recoverPasswordForm: FormGroup;
   id: string;
 
@@ -50,13 +54,15 @@ export class RecoverpasswordformComponent implements OnInit {
   }
 
   public recoverPassword() {
+    this.loading.show();
     let dataUser = {
       password: btoa(this.recoverPasswordForm.controls.password.value),
       id: this.id
     }
 
-    this.recover.recoverPassword(dataUser).subscribe(
+    this.subscription = this.recover.recoverPassword(dataUser).subscribe(
       (resp: ResponseService) => {
+        this.loading.hide();
         if (resp.state === "Success") {
           Swal.fire({
             title: "Recuperación de contraseña",
@@ -76,6 +82,7 @@ export class RecoverpasswordformComponent implements OnInit {
         }
       },
       error => {
+        this.loading.hide();
         Swal.fire({
           title: error.statusText,
           // text: error.error.userMessage,
@@ -96,6 +103,10 @@ export class RecoverpasswordformComponent implements OnInit {
     const inputValue = this.recoverPasswordForm.controls.confirmPassword.value;
     let noSpace = inputValue.replace(/ /g, "");
     this.recoverPasswordForm.controls.confirmPassword.setValue(noSpace);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();  
   }
 
 }
