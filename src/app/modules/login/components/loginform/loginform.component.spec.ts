@@ -52,7 +52,7 @@ describe("LoginformComponent", () => {
         { provide: Router, useValue: mockRouter},
         TranslateService,
         { provide: AuthService, useValue: mockAuthService }
-      ]
+      ],
     }).compileComponents();
     mockAuthService.login.and.returnValue(of(dataUser));
   }));

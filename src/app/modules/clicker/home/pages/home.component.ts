@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductSearchService } from 'src/app/services/product-search.service';
 import { SearchProduct } from 'src/app/interfaces/search-product';
+import { Subscription } from 'rxjs';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-home',
@@ -9,8 +11,9 @@ import { SearchProduct } from 'src/app/interfaces/search-product';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private sp: ProductSearchService) { }
+  constructor(private sp: ProductSearchService, private loading: LoaderService) { }
 
+  private subscription: Subscription = new Subscription();
   productsList:SearchProduct;
   showResults: boolean;
   showNotFound: boolean;
@@ -21,7 +24,9 @@ export class HomeComponent implements OnInit {
   }
 
   public searchProduct(term:string){
-    this.sp.getProducts(term).subscribe((resp: SearchProduct) => {
+    this.loading.show();
+    this.subscription = this.sp.getProducts(term).subscribe((resp: SearchProduct) => {
+      this.loading.hide();
       if(resp.length > 0 ) {
         this.showResults = true;
         this.showNotFound = false;
@@ -31,6 +36,11 @@ export class HomeComponent implements OnInit {
         this.showResults = false;
       }
     })
+  }
+
+  ngOnDestroy(): void {
+   this.subscription.unsubscribe();
+    
   }
 
   dataProduct(product) {

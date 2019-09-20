@@ -8,6 +8,8 @@ import { Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
 import Swal from "sweetalert2";
 import { ResponseService } from "src/app/interfaces/response";
+import { Subscription } from 'rxjs';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: "app-loginform",
@@ -18,8 +20,11 @@ export class LoginformComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private loading: LoaderService
   ) {}
+
+  private subscription: Subscription = new Subscription();
 
   loginForm: FormGroup;
   isSubmitted = false;
@@ -40,6 +45,11 @@ export class LoginformComponent implements OnInit {
         [Validators.required, Validators.minLength(6), Validators.maxLength(20)]
       ]
     });
+
+    if(this.authService.isLoggedIn){
+      this.router.navigate(['/inicio']);
+    }
+
   }
 
   public forgotpass(){
@@ -57,8 +67,11 @@ export class LoginformComponent implements OnInit {
       Username: this.loginForm.value.Username
     };
 
-    this.authService.login(loginData).subscribe(
+  this.loading.show();
+
+   this.subscription = this.authService.login(loginData).subscribe(
       (resp: ResponseService) => {
+        this.loading.hide();
         if (resp.state === "Success") {
           const token = JSON.stringify(resp);
           localStorage.setItem("ACCESS_TOKEN", token);
@@ -73,6 +86,7 @@ export class LoginformComponent implements OnInit {
         }
       },
       error => {
+        this.loading.hide();
         Swal.fire({
           title: error.statusText,
           text: error.error.userMessage,
@@ -82,4 +96,9 @@ export class LoginformComponent implements OnInit {
       }
     );
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }
