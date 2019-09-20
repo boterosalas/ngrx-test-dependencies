@@ -13,6 +13,7 @@ export class ProductComponent implements OnInit {
   @Input() productDescription: string;
   @Input() price: string;
   @Input() image: string;
+  @Input() plu: string;
   @Input() alt: string;
   @Input() textbutton: string;
 
