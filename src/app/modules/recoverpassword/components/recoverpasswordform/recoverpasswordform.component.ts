@@ -25,7 +25,8 @@ export class RecoverpasswordformComponent implements OnInit {
 
   private subscription: Subscription = new Subscription();
   recoverPasswordForm: FormGroup;
-  id: string;
+  code: string;
+  email: string;
 
   ngOnInit() {
     this.recoverPasswordForm = this.fb.group({
@@ -47,8 +48,9 @@ export class RecoverpasswordformComponent implements OnInit {
       ]
     },{ validator: ConfirmPasswordValidator.MatchPassword });
 
-    this.route.params.subscribe(params => {
-      this.id = params.id;
+    this.route.queryParams.subscribe(params => {
+      this.code = params.code;
+      this.email = params.email;
     });
 
   }
@@ -56,8 +58,9 @@ export class RecoverpasswordformComponent implements OnInit {
   public recoverPassword() {
     this.loading.show();
     let dataUser = {
-      password: btoa(this.recoverPasswordForm.controls.password.value),
-      id: this.id
+      code: this.code,
+      email: this.email,
+      newPassword: btoa(this.recoverPasswordForm.controls.password.value)
     }
 
     this.subscription = this.recover.recoverPassword(dataUser).subscribe(

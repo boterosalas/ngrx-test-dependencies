@@ -11,10 +11,13 @@ export class ProductSearchService {
 
   url = environment.URL_VETEX;
   
-  public getProducts(params: {term: string, from:string, to:string}){
-    params.from = params && params.from ? params.from : '1';
-    params.to = params && params.to ? params.to : '50';
+  public getProductsPagination(params: {term: string, from:string, to:string}){
     const apiSearchVetex = `api/catalog_system/pub/products/search?ft=${params.term}&_from=${params.from}&_to=${params.to}`
+    return this.http.get((`${this.url + apiSearchVetex}`));
+  }
+
+  public getTotalItems(params: {term: string}){
+    const apiSearchVetex = `api/catalog_system/pub/products/search?ft=${params.term}`
     return this.http.get((`${this.url + apiSearchVetex}`));
   }
 

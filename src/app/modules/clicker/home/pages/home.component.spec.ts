@@ -12,7 +12,7 @@ describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
-  const mockProductSearchService = jasmine.createSpyObj("ProductSearchService", ["getProducts"]);
+  const mockProductSearchService = jasmine.createSpyObj("ProductSearchService", ["getProductsPagination", "getTotalItems"]);
 
   let data = [{
     productName: 'olla',
@@ -54,7 +54,8 @@ describe('HomeComponent', () => {
        ]
     })
     .compileComponents();
-    mockProductSearchService.getProducts.and.returnValue(of(data));
+    mockProductSearchService.getProductsPagination.and.returnValue(of(data));
+    mockProductSearchService.getTotalItems.and.returnValue(of(data));
   }));
 
   beforeEach(() => {
@@ -68,20 +69,27 @@ describe('HomeComponent', () => {
   });
 
   it('search products', () => {
-    component.searchProduct('cocina');
-    expect(mockProductSearchService.getProducts).toHaveBeenCalled();
+    component.searchProductPaginate('cocina');
+    expect(mockProductSearchService.getProductsPagination).toHaveBeenCalled();
   });
+
+  it('paginate', () => {
+    const dataPaginate = {previousPageIndex: 0, pageIndex: 1, pageSize: 5, length: 10}
+    component.pagination(dataPaginate);
+    expect(mockProductSearchService.getProductsPagination).toHaveBeenCalled();
+  });
+  
 
   describe('No results on search', () => {
 
     beforeEach(function() {
-      mockProductSearchService.getProducts.and.returnValue(of(dataEmpty));
+      mockProductSearchService.getProductsPagination.and.returnValue(of(dataEmpty));
     });
     
 
     it('search products not found', () => {
-      component.searchProduct('playstation');
-      expect(mockProductSearchService.getProducts).toHaveBeenCalled();
+      component.searchProductPaginate('playstation');
+      expect(mockProductSearchService.getProductsPagination).toHaveBeenCalled();
     });
 
   });

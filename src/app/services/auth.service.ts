@@ -11,7 +11,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  url = environment.URL_PORTAL;
+  url = environment.URL_SECURITY;
   apiLogin = 'api/Authentication/login';
 
   public login(userInfo: User){

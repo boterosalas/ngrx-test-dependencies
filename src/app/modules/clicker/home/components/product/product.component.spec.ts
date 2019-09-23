@@ -31,4 +31,10 @@ describe('ProductComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('emit info product', () => {
+    component.product();
+  });
+  
+
 });
