@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, Input, TemplateRef } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { Component, OnInit, Output, EventEmitter, Input, TemplateRef, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-dialog',
@@ -8,18 +8,7 @@ import { MatDialogRef } from '@angular/material';
 })
 export class DialogComponent implements OnInit {
 
-  // @Output() infoProduct = new EventEmitter();
-
-  @Input() id: string;
-  @Input() title: string;
-  @Input() template: TemplateRef<any>;
-  @Input() showClose: boolean;
-  @Input() showOk: boolean;
-  @Input() buttonClose: string;
-  @Input() buttonOk: string;
-  
-
-  constructor( public dialogRef: MatDialogRef<any>) { }
+  constructor( public dialogRef: MatDialogRef<any>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
     this.dialogRef.close();
