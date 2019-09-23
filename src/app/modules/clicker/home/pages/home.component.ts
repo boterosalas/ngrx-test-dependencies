@@ -56,7 +56,6 @@ export class HomeComponent implements OnInit {
   }
 
   public pagination(paginate: any) {
-    console.log(paginate);
     paginate.length = this.totalItems;
     const from = ((paginate.pageSize * paginate.pageIndex) + 1).toString();
     const to = (paginate.pageSize * (paginate.pageIndex + 1 )).toString();
