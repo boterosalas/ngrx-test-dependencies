@@ -1,9 +1,15 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
+import {
+  FormGroup,
+  Validators,
+  FormBuilder
+} from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
-import Swal from 'sweetalert2'
-import { ResponseService } from 'src/app/interfaces/response';
+import Swal from "sweetalert2";
+import { ResponseService } from "src/app/interfaces/response";
+import { Subscription } from 'rxjs';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: "app-loginform",
@@ -14,60 +20,85 @@ export class LoginformComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private loading: LoaderService
   ) {}
 
+  private subscription: Subscription = new Subscription();
+
   loginForm: FormGroup;
-  isSubmitted  =  false;
+  isSubmitted = false;
   emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      Username: ["",[ Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
-      Password: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(20)]]
+      Username: [
+        "",
+        [
+          Validators.required,
+          Validators.pattern(this.emailPattern),
+          Validators.maxLength(64)
+        ]
+      ],
+      Password: [
+        "",
+        [Validators.required, Validators.minLength(6), Validators.maxLength(20)]
+      ]
     });
 
-  };
+    if(this.authService.isLoggedIn){
+      this.router.navigate(['/inicio']);
+    }
 
-  public login(){
+  }
+
+  public forgotpass(){
+    this.router.navigate(['/olvido-contrasena']);
+  }
+
+  public login() {
     this.isSubmitted = true;
-    if(this.loginForm.invalid){
+    if (this.loginForm.invalid) {
       return;
     }
 
     let loginData = {
-      Password :  btoa(this.loginForm.value.Password),
-      Username : this.loginForm.value.Username
-    }
+      Password: btoa(this.loginForm.value.Password),
+      Username: this.loginForm.value.Username
+    };
 
-    this.authService.login(loginData).subscribe( (resp: ResponseService) => {
-      if(resp.state === "Success") {
-        const token = JSON.stringify(resp);
-        localStorage.setItem('ACCESS_TOKEN', token);
+  this.loading.show();
+
+   this.subscription = this.authService.login(loginData).subscribe(
+      (resp: ResponseService) => {
+        this.loading.hide();
+        if (resp.state === "Success") {
+          const token = JSON.stringify(resp);
+          localStorage.setItem("ACCESS_TOKEN", token);
+          this.router.navigate(['/inicio']);
+        } else {
+          Swal.fire({
+            title: "Login invalido",
+            text: resp.userMessage,
+            type: "error",
+            confirmButtonText: "Aceptar"
+          });
+        }
+      },
+      error => {
+        this.loading.hide();
         Swal.fire({
-          title: 'Login valido',
-          text: 'Has ingresado correctamente',
-          type: 'success',
-          confirmButtonText: 'Aceptar'
-        })
-      } else {
-        Swal.fire({
-          title: 'Login invalido',
-          text: resp.userMessage ,
-          type: 'error',
-          confirmButtonText: 'Aceptar'
-        })
+          title: error.statusText,
+          text: error.error.userMessage,
+          type: "error",
+          confirmButtonText: "Aceptar"
+        });
       }
-      // this.router.navigateByUrl('/admin');
-    }, error => {
-      Swal.fire({
-        title: 'Login invalido',
-        text: 'No hay conexion' ,
-        type: 'error',
-        confirmButtonText: 'Aceptar'
-      })
-    });
+    );
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
 }

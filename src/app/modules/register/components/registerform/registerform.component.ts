@@ -5,6 +5,8 @@ import { RegisterUserService } from "src/app/services/register-user.service";
 import Swal from "sweetalert2";
 import { ResponseService } from 'src/app/interfaces/response';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: "app-registerform",
@@ -15,9 +17,11 @@ export class RegisterformComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private registerUser: RegisterUserService,
-    private router: Router
+    private router: Router,
+    private loading: LoaderService
   ) {}
 
+  private subscription: Subscription = new Subscription();
   registerForm: FormGroup;
   showTerms: boolean;
   showRegisterForm: boolean;
@@ -116,6 +120,9 @@ export class RegisterformComponent implements OnInit {
   }
 
   public register() {
+
+    this.loading.show();
+
     let registerForm = {
       Email: this.registerForm.controls.email.value,
       FirstNames: this.registerForm.controls.name.value,
@@ -126,9 +133,9 @@ export class RegisterformComponent implements OnInit {
       IdType: this.registerForm.controls.idType.value
     };
 
-    this.registerUser.registerUser(registerForm).subscribe(
+    this.subscription = this.registerUser.registerUser(registerForm).subscribe(
       (resp: ResponseService) => {
-        console.log(resp);
+        this.loading.hide();
         if (resp.state === "Success") {
           Swal.fire({
             title: "Registro valido",
@@ -150,9 +157,10 @@ export class RegisterformComponent implements OnInit {
         }
       },
       error => {
+        this.loading.hide();
         Swal.fire({
-          title: "Registro invalido",
-          text: 'No hay conexión',
+          title: error.statusText,
+          text: error.error.userMessage,
           type: "error",
           confirmButtonText: "Aceptar"
         }).then(()=>{
@@ -183,4 +191,9 @@ export class RegisterformComponent implements OnInit {
     let noSpace = inputValue.replace(/ /g, "");
     this.registerForm.controls.confirmPassword.setValue(noSpace);
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }

@@ -16,6 +16,13 @@ import { AppMaterialModule } from './modules/shared/app-material/app-material.mo
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { RegisterModule } from './modules/register/register.module';
+import { RecoverpasswordModule } from './modules/recoverpassword/recoverpassword.module';
+import { ForgotpasswordModule } from './modules/forgotpassword/forgotpassword.module';
+
+// interceptors
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoaderInterceptorService } from './interceptors/loader-interceptor.service';
+import { SharedModule } from './modules/shared/shared.module';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -30,6 +37,9 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     LoginModule,
     RegisterModule,
+    SharedModule,
+    RecoverpasswordModule,
+    ForgotpasswordModule,
     AppMaterialModule,
     TranslateModule.forRoot({
       loader: {
@@ -41,7 +51,13 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

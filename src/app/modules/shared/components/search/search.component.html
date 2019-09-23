@@ -1,0 +1,16 @@
+<form [formGroup]="searchForm">
+    <mat-form-field>
+        <input matInput type="text" placeholder="{{ 'GENERIC.SEARCH' | translate }}" formControlName="search">
+        <mat-icon matPrefix class="mr-1">search</mat-icon>
+        <mat-error id="searchErrorMin"
+            *ngIf="searchForm.controls.search.invalid && searchForm.controls.search.errors.minlength">{{
+        "GENERIC.MIN_CHARACTERS" | translate: {minchar:searchForm.controls.search.errors.minlength.requiredLength}
+      }}</mat-error>
+        <mat-error id="searchErrorMax"
+            *ngIf="searchForm.controls.search.invalid && searchForm.controls.search.errors.maxlength">{{
+        "GENERIC.MAX_CHARACTERS" | translate: {maxchar:searchForm.controls.search.errors.maxlength.requiredLength}
+      }}</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="ml-3"
+        [disabled]="!searchForm.valid || searchForm.value.search===''" (click)="searchProduct()">{{ "GENERIC.SEARCH" | translate }}</button>
+</form>

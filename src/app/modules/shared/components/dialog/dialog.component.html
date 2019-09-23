@@ -1,0 +1,10 @@
+<div id="modal-{{id}}">
+    <h1 mat-dialog-title>{{title}}</h1>
+    <div mat-dialog-content>
+        {{template}}
+    </div>
+    <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()" *ngIf="showClose">{{buttonClose}}</button>
+    <button mat-button *ngIf="showOk">{{buttonOk}}</button>
+    </div>
+</div>

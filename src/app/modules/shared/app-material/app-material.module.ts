@@ -1,6 +1,6 @@
 
 import { NgModule } from '@angular/core';
-import { MatInputModule, MatButtonModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatCardModule, MatCheckboxModule } from '@angular/material';
+import { MatInputModule, MatButtonModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatCardModule, MatCheckboxModule, MatIconModule, MatPaginatorModule, MatDialogModule } from '@angular/material';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -13,7 +13,10 @@ import { CommonModule } from '@angular/common';
     MatOptionModule,
     MatSelectModule,
     MatCardModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatIconModule,
+    MatPaginatorModule,
+    MatDialogModule
   ],
   exports: [
     MatFormFieldModule,
@@ -22,7 +25,10 @@ import { CommonModule } from '@angular/common';
     MatOptionModule,
     MatSelectModule,
     MatCardModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatIconModule,
+    MatPaginatorModule,
+    MatDialogModule
   ]
 })
 export class AppMaterialModule { }

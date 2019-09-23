@@ -14,7 +14,11 @@
         "INVALID_FORMAT": "El campo {{val}} no puede contener caracteres especiales",
         "MAX_CHARACTERS": "El número máximo de caracteres es {{maxchar}}",
         "MIN_CHARACTERS": "El número mínimo de caracteres es {{minchar}}",
-        "ONLY_NUMBERS": "Solo se aceptan números"
+        "ONLY_NUMBERS": "Solo se aceptan números",
+        "SEND": "Enviar",
+        "SAVE": "Guardar",
+        "CANCEL": "Cancelar",
+        "SEARCH": "Buscar"
     },
     "LOGIN": {
         "LOGIN": "Iniciar sesión",
@@ -31,5 +35,16 @@
         "TITLE_TERMS_AND_CONDITIONS": "TÉRMINOS Y CONDICIONES DE  LA LEY HABEAS DATA",
         "PASSWORD_NOT_MATCH":"Las contraseñas no son iguales",
         "ID_TYPE":"Seleccionar documento"
+    },
+    "FORGOTPASSWORD":{
+        "FORGOT_PASSWORD": "Se te olvidó tu contraseña",
+        "ENTER_EMAIL": "Por favor, introduzca su dirección de correo electrónico"
+    },
+    "RECOVERPASSWORD":{
+        "RECOVER_PASSWORD": "Recuperar contraseña",
+        "ENTER_PASSWORD": "Por favor, introduzca su nueva contraseña"
+    },
+    "PRODUCTS": {
+        "GET_LINK": "Obtener link"
     }
 }
