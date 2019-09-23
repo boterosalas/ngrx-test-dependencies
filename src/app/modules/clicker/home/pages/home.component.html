@@ -1,5 +1,5 @@
 <div class="container">
-    <app-search (search)="searchProduct($event)"></app-search>
+    <app-search (search)="searchProductPaginate($event)"></app-search>
     
     <div *ngIf="showResults">   
         <div class="row">
@@ -8,7 +8,7 @@
             </div> 
         </div>    
         <mat-paginator 
-            [length]="50"
+            [length]="totalItems"
             [pageSize]="pageSize"
             [pageSizeOptions]="pageSizeOptions"
             (page)="pagination($event)"
@@ -19,4 +19,7 @@
     <div class="not-found" *ngIf="showNotFound">
         <app-not-found></app-not-found>
     </div>
+
+    <!-- <app-dialog title="prueba" template='<div><h1>prueba</h1></div>' showClose="true" showOk="false" buttonClose="Cerrar" buttonOk="Aceptar" ></app-dialog> -->
+
 </div>

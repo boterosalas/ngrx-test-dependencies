@@ -10,11 +10,11 @@ export class ForgotpasswordService {
 
   constructor(private http: HttpClient) { }
 
-  url = environment.URL_PORTAL;
-  apiForgotPassword = '';
+  url = environment.URL_SECURITY;
+  apiForgotPassword = 'api/Authentication/recoveryPassword';
 
   public forgotPassword(username: Forgotpassword) {
-    return this.http.post((`${this.url + this.apiForgotPassword}`), username);
+    return this.http.post((`${this.url + this.apiForgotPassword}`),{ email:username});
   }
 
 }

@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   productsList:SearchProduct;
   showResults: boolean;
   showNotFound: boolean;
-  term: string;
+  paginate: string;
   totalItems: number;
   pageSize: number = 5;
   pageTo:number = 5;
@@ -30,13 +30,20 @@ export class HomeComponent implements OnInit {
     this.showResults = false;
   }
 
-  public searchProduct(term: string, from = '1', to = this.pageTo.toString()){
-    this.loading.show();
-    this.term = term;
-    const params = {term, from , to};
-    this.subscription = this.sp.getProducts(params).subscribe((resp: SearchProduct) => {
-      this.loading.hide();
+  private totalItemsSearch(term: string){
+    const params = {term};
+    this.subscription = this.sp.getTotalItems(params).subscribe((resp: SearchProduct) => {
       this.totalItems = resp.length;
+    })
+  }
+  
+  public searchProductPaginate(term: string, from = '1', to = this.pageTo.toString()){
+    this.loading.show();
+    this.paginate = term;
+    const params = {term, from , to};
+    this.totalItemsSearch(term);
+    this.subscription = this.sp.getProductsPagination(params).subscribe((resp: SearchProduct) => {
+      this.loading.hide();
       if(resp.length > 0 ) {
         this.showResults = true;
         this.showNotFound = false;
@@ -48,11 +55,12 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  public pagination(term: any) {
-    const from = ((term.pageSize * term.pageIndex) + 1).toString();
-    const to = (term.pageSize * (term.pageIndex + 1 )).toString();
-    this.searchProduct(this.term, from, to);
-
+  public pagination(paginate: any) {
+    console.log(paginate);
+    paginate.length = this.totalItems;
+    const from = ((paginate.pageSize * paginate.pageIndex) + 1).toString();
+    const to = (paginate.pageSize * (paginate.pageIndex + 1 )).toString();
+    this.searchProductPaginate(this.paginate, from, to);
   }
 
   ngOnDestroy(): void {

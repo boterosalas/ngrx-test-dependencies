@@ -10,8 +10,8 @@ export class RecoverpasswordService {
 
   constructor(private http: HttpClient) { }
 
-  url = environment.URL_PORTAL;
-  apiRecoverPassword = '';
+  url = environment.URL_SECURITY;
+  apiRecoverPassword = 'api/Authentication/resetpassword';
 
   public recoverPassword(password: Recoverpassword) {
     return this.http.post((`${this.url + this.apiRecoverPassword}`), password);

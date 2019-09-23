@@ -1,4 +1,5 @@
 export interface Recoverpassword {
-    id: string,
-    password: string
+    code: string,
+    email: string,
+    newPassword: string
 }
