@@ -72,7 +72,7 @@ describe('RecoverpasswordformComponent', () => {
   });
 
   it('recover password', () => {
-    component.id= "123456";
+    component.code= "123456";
     component.recoverPasswordForm.controls.password.setValue('123456');
     component.recoverPasswordForm.controls.confirmPassword.setValue('123456');
     component.recoverPassword();
@@ -88,7 +88,7 @@ describe('RecoverpasswordformComponent', () => {
     });
 
     it('recover password', () => {
-      component.id= "123456";
+      component.code= "123456";
       component.recoverPasswordForm.controls.password.setValue('1234567');
       component.recoverPasswordForm.controls.confirmPassword.setValue('123456');
       component.recoverPassword();
@@ -104,7 +104,7 @@ describe('RecoverpasswordformComponent', () => {
     });
 
     it('recover password invalid request', () => {
-      component.id= "123456";
+      component.code= "123456";
       component.recoverPasswordForm.controls.password.setValue('1234567');
       component.recoverPasswordForm.controls.confirmPassword.setValue('123456');
       component.recoverPassword();

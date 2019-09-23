@@ -46,9 +46,11 @@ export class ForgotpasswordformComponent implements OnInit {
         if (resp.state === "Success") {
           Swal.fire({
             title: "Se ha enviado un email",
-            text: "Revisa tu bandeja de entrada en tú correo",
+            text: resp.userMessage,
             type: "success",
             confirmButtonText: "Aceptar"
+          }).then(()=> {
+            this.router.navigate(['/']);
           });
         } else {
           Swal.fire({
