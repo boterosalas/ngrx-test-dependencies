@@ -73,7 +73,8 @@ export class LoginformComponent implements OnInit {
       (resp: ResponseService) => {
         this.loading.hide();
         if (resp.state === "Success") {
-          const token = JSON.stringify(resp);
+          const responseToken = resp.objectResponse;
+          const token = JSON.stringify(responseToken);
           localStorage.setItem("ACCESS_TOKEN", token);
           this.router.navigate(['/inicio']);
         } else {
