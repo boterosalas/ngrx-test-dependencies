@@ -43,6 +43,11 @@ describe("RegisterformComponent", () => {
     userMessage: null
   }
 
+  const InvalidRquest = {
+    state: "Error",
+    userMessage: 'Internal server error'
+  }
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [RegisterformComponent],
@@ -140,7 +145,7 @@ describe("RegisterformComponent", () => {
   describe('invalid request', () => {
 
     beforeEach(function() {
-      mockRegisterService.registerUser.and.returnValue(throwError({status: 500}));
+      mockRegisterService.registerUser.and.returnValue(throwError(InvalidRquest));
     });
     
     it("invalid request", () => {
