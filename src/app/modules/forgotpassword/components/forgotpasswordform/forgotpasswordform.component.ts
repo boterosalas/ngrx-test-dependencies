@@ -48,7 +48,8 @@ export class ForgotpasswordformComponent implements OnInit {
             title: "Se ha enviado un email",
             text: resp.userMessage,
             type: "success",
-            confirmButtonText: "Aceptar"
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: 'accept-forgot-alert-success'
           }).then(()=> {
             this.router.navigate(['/']);
           });
@@ -57,7 +58,8 @@ export class ForgotpasswordformComponent implements OnInit {
             title: "Ups algo salió mal",
             text: resp.userMessage,
             type: "error",
-            confirmButtonText: "Aceptar"
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: 'accept-forgot-alert-error'
           });
         }
       },
@@ -67,7 +69,8 @@ export class ForgotpasswordformComponent implements OnInit {
           title: error.statusText,
           // text: error.error.userMessage,
           type: "error",
-          confirmButtonText: "Aceptar"
+          confirmButtonText: "Aceptar",
+          confirmButtonClass: 'accept-forgot-alert-invalid'
         });
       }
     );
@@ -75,6 +78,12 @@ export class ForgotpasswordformComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  public removewhiteSpaceEmail() {
+    const inputValue = this.forgotPaswordForm.controls.Username.value;
+    let noSpace = inputValue.replace(/ /g, "");
+    this.forgotPaswordForm.controls.Username.setValue(noSpace);
   }
 
 }

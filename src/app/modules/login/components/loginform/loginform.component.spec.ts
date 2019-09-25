@@ -71,6 +71,18 @@ describe("LoginformComponent", () => {
     component.forgotpass();
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/olvido-contrasena']);
   });
+
+  it("remove white space password", () => {
+    component.loginForm.controls.Password.setValue("12 3456789");
+    component.removewhiteSpace();
+    expect(component.loginForm.controls.Password.value).toBe("123456789");
+  });
+
+  it("remove white space email", () => {
+    component.loginForm.controls.Username.setValue("dav id.betancur@pragma.com.co");
+    component.removewhiteSpaceEmail();
+    expect(component.loginForm.controls.Username.value).toBe("david.betancur@pragma.com.co");
+  });
   
 
   it("login valid", () => {

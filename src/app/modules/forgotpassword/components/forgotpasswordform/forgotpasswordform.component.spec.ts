@@ -71,6 +71,12 @@ describe('ForgotpasswordformComponent', () => {
     component.forgotPaswordForm.controls.Username.setValue('david.betancur@pragma.com.co');
     expect(mockForgotpasswordService.forgotPassword).toHaveBeenCalled();
   });
+
+  it("remove white space email", () => {
+    component.forgotPaswordForm.controls.Username.setValue("dav id.betancur@pragma.com.co");
+    component.removewhiteSpaceEmail();
+    expect(component.forgotPaswordForm.controls.Username.value).toBe("david.betancur@pragma.com.co");
+  });
   
   describe('invalid password', () => {
 
