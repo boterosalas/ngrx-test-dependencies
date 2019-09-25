@@ -31,6 +31,12 @@ describe("LoginformComponent", () => {
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc…VzIn0.Bcsm-qVHHtRcLlQae_5tVwGpgbPQJkCEQ97ZbwRxz_4"
   };
 
+  const InvalidRquest = {
+    state: "Error",
+    userMessage: 'Internal server error'
+  }
+
+
   let mockRouter = {
     navigate: jasmine.createSpy('navigate')
   }
@@ -120,7 +126,7 @@ describe("LoginformComponent", () => {
 
   describe("invalid request", () => {
     beforeEach(function() {
-      mockAuthService.login.and.returnValue(throwError({status: 500}));
+      mockAuthService.login.and.returnValue(throwError(InvalidRquest));
     });
 
     it("invalid request", () => {
