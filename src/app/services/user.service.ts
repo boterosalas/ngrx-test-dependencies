@@ -1,33 +1,32 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { environment } from "src/environments/environment";
+import { map } from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class UserService {
-
   constructor(private http: HttpClient) {}
 
-  authorization = localStorage.getItem("ACCESS_TOKEN");
-  parsed = JSON.parse(this.authorization);
-  token = this.parsed.objectResponse;
+  token = localStorage.getItem("ACCESS_TOKEN");
+  authorization = JSON.parse(this.token);
+
   httpOptions = {
     headers: new HttpHeaders({
-      'Authorization': "Bearer "+this.token
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + this.authorization
     })
   };
 
-  
-  
-
   url = environment.URL_PROFILE;
-  apiProfile = 'api/userprofile/getuserprofile';
+  apiProfile = "api/userprofile/getuserprofile";
 
   public getProfile() {
-    console.log(this.token);
-    return this.http.get(this.url + this.apiProfile, this.httpOptions);
+    return this.http.get(this.url + this.apiProfile, this.httpOptions).pipe(
+      map((user: any) => {
+        return user.objectResponse;
+      })
+    );
   }
-
-
 }

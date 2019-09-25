@@ -7,8 +7,10 @@ import { PageEvent } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material";
 import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog.component";
 import { FormBuilder, FormGroup } from '@angular/forms';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar} from '@angular/material/snack-bar';
 import { UserService } from 'src/app/services/user.service';
+import { ShortenerService } from 'src/app/services/shortener.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: "app-home",
@@ -22,7 +24,9 @@ export class HomeComponent implements OnInit {
     private dialog: MatDialog,
     private fb: FormBuilder,
     private _snackBar: MatSnackBar,
-    private user: UserService
+    private user: UserService,
+    private shortUrl: ShortenerService,
+    private auth: AuthService
   ) {}
 
   @ViewChild("templateDialog", { static: false }) template: TemplateRef<any>;
@@ -36,29 +40,32 @@ export class HomeComponent implements OnInit {
   pageSize: number = 5;
   pageTo: number = 5;
   pageSizeOptions: number[] = [5, 10, 25, 50];
-  url =
-    "https://www.exito.com/?utm_source=clickam&utm_medium=referral&utm_campaign=productosexito&utm_content=1017200776";
+  url: string;
+  urlshorten: string;
   formLink: FormGroup;
+  identification: string;
 
   ngOnInit() {
     this.showNotFound = false;
     this.showResults = false;
 
+    this.user.getProfile().subscribe((user: any)=> {
+      this.identification = user.identification;
+    });
+
+  }
+
+  private formShareLink() {
     this.formLink = this.fb.group(
       {
         link: [this.url]
       }
     )
-
-    this.user.getProfile().subscribe(user=> {
-      console.log(user);
-    })
-
   }
 
   private totalItemsSearch(term: string) {
     const params = { term };
-    this.subscription = this.sp
+    this.sp
       .getTotalItems(params)
       .subscribe((resp: SearchProduct) => {
         this.totalItems = resp.length;
@@ -108,7 +115,14 @@ export class HomeComponent implements OnInit {
   }
 
   dataProduct(product) {
-    console.log(product);
+    const productUrl = product.linkText;
+    this.url = `https://www.exito.com/${productUrl}/p?utm_source=clickam&utm_medium=referral&utm_campaign=productosexito&utm_content=${this.identification}`;
+    this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
+      if(resp) {
+        this.urlshorten = resp.toString();
+      }
+    })
+    this.formShareLink();
     const title = product.productName;
     const id = product.productId;
     const template = this.template;
@@ -125,12 +139,24 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  public shareFacebook() {
+    window.open(`https://www.facebook.com/share.php?u=${this.url}`, "_blank", "width=550,height=490");
+  }
+
+  public shareTwitter() {
+    window.open(`https://twitter.com/intent/tweet?status=${this.urlshorten}`, "_blank", "width=550,height=490");
+  }
+
   /* To copy Text from Textbox */
   copyInputMessage(inputElement){
     inputElement.select();
     document.execCommand('copy');
     inputElement.setSelectionRange(0, 0);
     this.openSnackBar('Se ha copiado el link al portapapeles', 'Cerrar')
+  }
+
+  public logout() {
+    this.auth.logout();
   }
 
 }

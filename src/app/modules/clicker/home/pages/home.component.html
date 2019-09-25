@@ -1,6 +1,8 @@
+<div class="row justify-content-end">
+    <button mat-button (click)="logout()"><mat-icon>exit_to_app</mat-icon></button>
+</div>
 <div class="container">
     <app-search (search)="searchProductPaginate($event)"></app-search>
-    
     <div *ngIf="showResults">   
         <div class="row">
             <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let product of productsList">
@@ -29,6 +31,18 @@
                 <mat-icon matSuffix>file_copy</mat-icon>
             </button>
         </form>
+
+        <div id="share">
+                <!-- facebook -->
+                <button mat-mini-fab color="primary" class="facebook mr-2" (click)="shareFacebook()"> <i class="fa fa-2x fa-facebook"></i></button>
+                <!-- twitter -->
+                <button mat-mini-fab color="primary" class="twitter mr-2" (click)="shareTwitter()"> <i class="fa fa-2x fa-twitter"></i></button>
+                <!-- instagram -->
+                <button mat-mini-fab color="primary" class="instagram mr-2"> <i class="fa fa-2x fa-instagram"></i></button>
+                <!-- whatsapp -->
+                <button mat-mini-fab color="primary" class="whatsapp"> <i class="fa fa-2x fa-whatsapp"></i></button>
+        </div>
+
     </ng-template>
 
 </div>
