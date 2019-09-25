@@ -79,7 +79,7 @@ describe('ForgotpasswordformComponent', () => {
 
   it("remove white space email", () => {
     component.forgotPaswordForm.controls.Username.setValue("dav id.betancur@pragma.com.co");
-    component.removewhiteSpaceEmail();
+    component.removewhiteSpaceEmailForgot();
     expect(component.forgotPaswordForm.controls.Username.value).toBe("david.betancur@pragma.com.co");
   });
   

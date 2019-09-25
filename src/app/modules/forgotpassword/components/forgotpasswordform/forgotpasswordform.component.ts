@@ -80,7 +80,7 @@ export class ForgotpasswordformComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
-  public removewhiteSpaceEmail() {
+  public removewhiteSpaceEmailForgot() {
     const inputValue = this.forgotPaswordForm.controls.Username.value;
     let noSpace = inputValue.replace(/ /g, "");
     this.forgotPaswordForm.controls.Username.setValue(noSpace);

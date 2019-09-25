@@ -99,13 +99,13 @@ export class RecoverpasswordformComponent implements OnInit {
     );
   }
 
-  public removewhiteSpace() {
+  public removewhiteSpaceRecover() {
     const inputValue = this.recoverPasswordForm.controls.password.value;
     let noSpace = inputValue.replace(/ /g, "");
     this.recoverPasswordForm.controls.password.setValue(noSpace);
   }
 
-  public removewhiteSpaceConfirm() {
+  public removewhiteSpaceConfirmRecover() {
     const inputValue = this.recoverPasswordForm.controls.confirmPassword.value;
     let noSpace = inputValue.replace(/ /g, "");
     this.recoverPasswordForm.controls.confirmPassword.setValue(noSpace);
