@@ -71,7 +71,8 @@ export class RecoverpasswordformComponent implements OnInit {
             title: "Recuperación de contraseña",
             text: "Tu contraseña ha sido reestablecida exitosamente",
             type: "success",
-            confirmButtonText: "Aceptar"
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: 'accept-recover-alert-success'
           }).then(()=>{
             this.router.navigate(['/']);
           });
@@ -80,7 +81,8 @@ export class RecoverpasswordformComponent implements OnInit {
             title: "Ups algo salió mal",
             text: resp.userMessage,
             type: "error",
-            confirmButtonText: "Aceptar"
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: 'accept-recover-alert-error'
           });
         }
       },
@@ -90,7 +92,8 @@ export class RecoverpasswordformComponent implements OnInit {
           title: error.statusText,
           // text: error.error.userMessage,
           type: "error",
-          confirmButtonText: "Aceptar"
+          confirmButtonText: "Aceptar",
+          confirmButtonClass: 'accept-recover-alert-invalid'
         });
       }
     );

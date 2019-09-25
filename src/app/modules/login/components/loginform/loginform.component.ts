@@ -82,7 +82,8 @@ export class LoginformComponent implements OnInit {
             title: "Login invalido",
             text: resp.userMessage,
             type: "error",
-            confirmButtonText: "Aceptar"
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: 'accept-login-alert-error'
           });
         }
       },
@@ -92,7 +93,8 @@ export class LoginformComponent implements OnInit {
           title: error.statusText,
           text: error.error.userMessage,
           type: "error",
-          confirmButtonText: "Aceptar"
+          confirmButtonText: "Aceptar",
+          confirmButtonClass: 'accept-forgot-alert-invalid'
         });
       }
     );
@@ -101,5 +103,18 @@ export class LoginformComponent implements OnInit {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
+  public removewhiteSpace() {
+    const inputValue = this.loginForm.controls.Password.value;
+    let noSpace = inputValue.replace(/ /g, "");
+    this.loginForm.controls.Password.setValue(noSpace);
+  }
+
+  public removewhiteSpaceEmail() {
+    const inputValue = this.loginForm.controls.Username.value;
+    let noSpace = inputValue.replace(/ /g, "");
+    this.loginForm.controls.Username.setValue(noSpace);
+  }
+
 
 }
