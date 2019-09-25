@@ -37,9 +37,10 @@ export class HomeComponent implements OnInit {
   showNotFound: boolean;
   paginate: string;
   totalItems: number;
-  pageSize: number = 5;
-  pageTo: number = 5;
-  pageSizeOptions: number[] = [5, 10, 25, 50];
+  pageSize: number = 30;
+  pageTo: number = 30;
+  // pageSizeOptions: number[] = [5, 10, 25, 50];
+  pageSizeOptions: number[] = [30];
   url: string;
   urlshorten: string;
   formLink: FormGroup;
@@ -63,43 +64,41 @@ export class HomeComponent implements OnInit {
     )
   }
 
-  private totalItemsSearch(term: string) {
-    const params = { term };
-    this.sp
-      .getTotalItems(params)
-      .subscribe((resp: SearchProduct) => {
-        this.totalItems = resp.length;
-      });
-  }
 
   public searchProductPaginate(
     term: string,
-    from = "1",
-    to = this.pageTo.toString()
+    from = 1,
+    to = this.pageTo
   ) {
     this.loading.show();
     this.paginate = term;
     const params = { term, from, to };
-    this.totalItemsSearch(term);
     this.subscription = this.sp
       .getProductsPagination(params)
-      .subscribe((resp: SearchProduct) => {
+      .subscribe((resp: any) => {
+        this.totalItems = resp.total;
         this.loading.hide();
-        if (resp.length > 0) {
+        if (this.totalItems > 0) {
           this.showResults = true;
           this.showNotFound = false;
-          this.productsList = resp;
+          this.productsList = JSON.parse(resp.json);
         } else {
           this.showNotFound = true;
           this.showResults = false;
         }
-      });
+      },
+      error => {
+        this.loading.hide();
+        this.showNotFound = true;
+        this.showResults = false;
+      }
+      );
   }
 
   public pagination(paginate: any) {
     paginate.length = this.totalItems;
-    const from = (paginate.pageSize * paginate.pageIndex + 1).toString();
-    const to = (paginate.pageSize * (paginate.pageIndex + 1)).toString();
+    const from = (paginate.pageSize * paginate.pageIndex + 1);
+    const to = (paginate.pageSize * (paginate.pageIndex + 1));
     this.searchProductPaginate(this.paginate, from, to);
   }
 
