@@ -7,6 +7,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ProductComponent } from './components/product/product.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { DialogComponent } from '../../shared/components/dialog/dialog.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
     TranslateModule,
     FormsModule,
     RouterModule.forChild(routes)
-  ]
+  ],
+  entryComponents: [DialogComponent]
 })
 export class HomeModule { }

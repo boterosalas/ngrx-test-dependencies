@@ -18,7 +18,8 @@
         "SEND": "Enviar",
         "SAVE": "Guardar",
         "CANCEL": "Cancelar",
-        "SEARCH": "Buscar"
+        "SEARCH": "Buscar",
+        "WHITE_SPACES": "No se permite más de un espacio en blanco"
     },
     "LOGIN": {
         "LOGIN": "Iniciar sesión",
@@ -37,8 +38,8 @@
         "ID_TYPE":"Seleccionar documento"
     },
     "FORGOTPASSWORD":{
-        "FORGOT_PASSWORD": "Se te olvidó tu contraseña",
-        "ENTER_EMAIL": "Por favor, introduzca su dirección de correo electrónico"
+        "FORGOT_PASSWORD": "Recuperación de contraseña",
+        "ENTER_EMAIL": "Por favor, introduzca su correo electrónico"
     },
     "RECOVERPASSWORD":{
         "RECOVER_PASSWORD": "Recuperar contraseña",

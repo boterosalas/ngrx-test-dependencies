@@ -13,10 +13,11 @@ export class SearchComponent implements OnInit {
   ) { }
   @Output() search = new EventEmitter();
   searchForm: FormGroup;
+  searchPattern = '^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$';
 
   ngOnInit() {
     this.searchForm = this.fb.group({
-      search: ['', [Validators.minLength(3), Validators.maxLength(20)]]
+      search: ['', [Validators.minLength(2), Validators.maxLength(20), Validators.pattern(this.searchPattern)]]
     })
   }
 

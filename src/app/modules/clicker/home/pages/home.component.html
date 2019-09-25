@@ -1,6 +1,8 @@
+<div class="row justify-content-end">
+    <button mat-button (click)="logout()"><mat-icon>exit_to_app</mat-icon></button>
+</div>
 <div class="container">
     <app-search (search)="searchProductPaginate($event)"></app-search>
-    
     <div *ngIf="showResults">   
         <div class="row">
             <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let product of productsList">
@@ -20,6 +22,27 @@
         <app-not-found></app-not-found>
     </div>
 
-    <!-- <app-dialog title="prueba" template='<div><h1>prueba</h1></div>' showClose="true" showOk="false" buttonClose="Cerrar" buttonOk="Aceptar" ></app-dialog> -->
+    <ng-template #templateDialog>
+        <form [formGroup]="formLink">
+            <mat-form-field>
+                <input id="url" matInput placeholder="url" formcontrolName="link" value={{formLink.controls.link.value}} #linkInput readonly>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="copyInputMessage(linkInput)">
+                <mat-icon matSuffix>file_copy</mat-icon>
+            </button>
+        </form>
+
+        <div id="share">
+                <!-- facebook -->
+                <button mat-mini-fab color="primary" class="facebook mr-2" (click)="shareFacebook()"> <i class="fa fa-2x fa-facebook"></i></button>
+                <!-- twitter -->
+                <button mat-mini-fab color="primary" class="twitter mr-2" (click)="shareTwitter()"> <i class="fa fa-2x fa-twitter"></i></button>
+                <!-- instagram -->
+                <button mat-mini-fab color="primary" class="instagram mr-2" (click)="shareInstagram()"> <i class="fa fa-2x fa-instagram"></i></button>
+                <!-- whatsapp -->
+                <button mat-mini-fab color="primary" class="whatsapp" (click)="shareWhatsapp()"> <i class="fa fa-2x fa-whatsapp"></i></button>
+        </div>
+
+    </ng-template>
 
 </div>
