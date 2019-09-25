@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { ResponseService } from 'src/app/interfaces/response';
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
+import { RemoveSpaceService } from 'src/app/services/remove-space.service';
 
 @Component({
   selector: 'app-recoverpasswordform',
@@ -20,7 +21,8 @@ export class RecoverpasswordformComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private recover: RecoverpasswordService,
-    private loading: LoaderService
+    private loading: LoaderService,
+    private removeSpace: RemoveSpaceService
   ) { }
 
   private subscription: Subscription = new Subscription();
@@ -101,14 +103,14 @@ export class RecoverpasswordformComponent implements OnInit {
 
   public removewhiteSpaceRecover() {
     const inputValue = this.recoverPasswordForm.controls.password.value;
-    let noSpace = inputValue.replace(/ /g, "");
-    this.recoverPasswordForm.controls.password.setValue(noSpace);
+    const recoverControl = this.recoverPasswordForm.controls.password;
+    this.removeSpace.removeSpace(inputValue, recoverControl);
   }
 
   public removewhiteSpaceConfirmRecover() {
     const inputValue = this.recoverPasswordForm.controls.confirmPassword.value;
-    let noSpace = inputValue.replace(/ /g, "");
-    this.recoverPasswordForm.controls.confirmPassword.setValue(noSpace);
+    const recoerConfirmControl = this.recoverPasswordForm.controls.confirmPassword
+    this.removeSpace.removeSpace(inputValue, recoerConfirmControl);
   }
 
   ngOnDestroy(): void {

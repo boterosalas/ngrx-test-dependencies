@@ -6,6 +6,7 @@ import { ResponseService } from "src/app/interfaces/response";
 import Swal from "sweetalert2";
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
+import { RemoveSpaceService } from 'src/app/services/remove-space.service';
 
 @Component({
   selector: "app-forgotpasswordform",
@@ -17,7 +18,8 @@ export class ForgotpasswordformComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private forgot: ForgotpasswordService,
-    private loading: LoaderService
+    private loading: LoaderService,
+    private removeSpace: RemoveSpaceService
   ) {}
   
   private subscription: Subscription = new Subscription();
@@ -82,8 +84,8 @@ export class ForgotpasswordformComponent implements OnInit {
 
   public removewhiteSpaceEmailForgot() {
     const inputValue = this.forgotPaswordForm.controls.Username.value;
-    let noSpace = inputValue.replace(/ /g, "");
-    this.forgotPaswordForm.controls.Username.setValue(noSpace);
+    const forgotControl = this.forgotPaswordForm.controls.Username;
+    this.removeSpace.removeSpace(inputValue, forgotControl);
   }
 
 }
