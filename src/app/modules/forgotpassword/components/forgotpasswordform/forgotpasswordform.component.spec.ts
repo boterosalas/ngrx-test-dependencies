@@ -28,6 +28,11 @@ describe('ForgotpasswordformComponent', () => {
       state: "Error",
       userMessage: null
     }
+
+    const InvalidRquest = {
+      state: "Error",
+      userMessage: 'Internal server error'
+    }
   
 
   beforeEach(async(() => {
@@ -95,7 +100,7 @@ describe('ForgotpasswordformComponent', () => {
   describe('invalid request password', () => {
 
     beforeEach(function() {
-      mockForgotpasswordService.forgotPassword.and.returnValue(throwError({status: 500}));
+      mockForgotpasswordService.forgotPassword.and.returnValue(throwError(InvalidRquest));
     });
     
     it('forgot password invalid request', () => {

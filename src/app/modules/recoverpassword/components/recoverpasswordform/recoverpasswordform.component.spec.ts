@@ -27,6 +27,12 @@ describe('RecoverpasswordformComponent', () => {
     userMessage: null
   }
 
+  const InvalidRquest = {
+    state: "Error",
+    userMessage: 'Internal server error'
+  }
+
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ 
@@ -100,7 +106,7 @@ describe('RecoverpasswordformComponent', () => {
   describe('Inavlid request', () => {
 
     beforeEach(function() {
-      mockRecoverpasswordService.recoverPassword.and.returnValue(throwError({status: 500}));
+      mockRecoverpasswordService.recoverPassword.and.returnValue(throwError(InvalidRquest));
     });
 
     it('recover password invalid request', () => {
