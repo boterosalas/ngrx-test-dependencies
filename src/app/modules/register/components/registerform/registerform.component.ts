@@ -141,7 +141,8 @@ export class RegisterformComponent implements OnInit {
             title: "Registro valido",
             text: "Te Has registrado correctamente",
             type: "success",
-            confirmButtonText: "Aceptar"
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: 'accept-register-alert-success'
           }).then(()=> {
             this.showLogin();
           });
@@ -150,7 +151,8 @@ export class RegisterformComponent implements OnInit {
             title: "Registro invalido",
             text: resp.userMessage,
             type: "error",
-            confirmButtonText: "Aceptar"
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: 'accept-register-alert-error'
           }).then(()=>{
             this.backStep();
           });
@@ -162,7 +164,8 @@ export class RegisterformComponent implements OnInit {
           title: error.statusText,
           text: error.error.userMessage,
           type: "error",
-          confirmButtonText: "Aceptar"
+          confirmButtonText: "Aceptar",
+          confirmButtonClass: 'accept-register-alert-invalid'
         }).then(()=>{
           this.backStep();
         });
@@ -190,6 +193,12 @@ export class RegisterformComponent implements OnInit {
     const inputValue = this.registerForm.controls.confirmPassword.value;
     let noSpace = inputValue.replace(/ /g, "");
     this.registerForm.controls.confirmPassword.setValue(noSpace);
+  }
+
+  public removewhiteSpaceEmail() {
+    const inputValue = this.registerForm.controls.email.value;
+    let noSpace = inputValue.replace(/ /g, "");
+    this.registerForm.controls.email.setValue(noSpace);
   }
 
   ngOnDestroy(): void {

@@ -114,10 +114,12 @@ describe('HomeComponent', () => {
     expect(mockProductUserService.getProfile).toHaveBeenCalled();
   });
 
-  it('share facebook', () => {
+  it('share social links', () => {
     spyOn(window, 'open').and.callThrough();
     component.shareFacebook();
     component.shareTwitter();
+    component.shareInstagram();
+    component.shareWhatsapp();
     expect(window.open).toBeTruthy();
   });
   

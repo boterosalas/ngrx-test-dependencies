@@ -118,6 +118,12 @@ describe("RegisterformComponent", () => {
     expect(component.registerForm.controls.confirmPassword.value).toBe("12345678");
   });
 
+  it("remove white space email", () => {
+    component.registerForm.controls.email.setValue("da vid.betancur@pragma.com.co");
+    component.removewhiteSpaceEmail();
+    expect(component.registerForm.controls.email.value).toBe("david.betancur@pragma.com.co");
+  });
+
   describe('register invalid', () => {
 
     beforeEach(function() {
