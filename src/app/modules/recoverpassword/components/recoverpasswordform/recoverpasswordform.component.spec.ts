@@ -67,13 +67,13 @@ describe('RecoverpasswordformComponent', () => {
 
   it("remove white space password", () => {
     component.recoverPasswordForm.controls.password.setValue("1234 5678");
-    component.removewhiteSpace();
+    component.removewhiteSpaceRecover();
     expect(component.recoverPasswordForm.controls.password.value).toBe("12345678");
   });
 
   it("remove white space Confirm password", () => {
     component.recoverPasswordForm.controls.confirmPassword.setValue("1234 5678");
-    component.removewhiteSpaceConfirm();
+    component.removewhiteSpaceConfirmRecover();
     expect(component.recoverPasswordForm.controls.confirmPassword.value).toBe("12345678");
   });
 
