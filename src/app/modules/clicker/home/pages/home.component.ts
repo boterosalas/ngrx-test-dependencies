@@ -118,9 +118,7 @@ export class HomeComponent implements OnInit {
     const productUrl = product.linkText;
     this.url = `https://www.exito.com/${productUrl}/p?utm_source=clickam&utm_medium=referral&utm_campaign=productosexito&utm_content=${this.identification}`;
     this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
-      if(resp) {
         this.urlshorten = resp.toString();
-      }
     })
     this.formShareLink();
     const title = product.productName;
@@ -133,18 +131,26 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  openSnackBar(message: string, action: string) {
+  private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 2000,
     });
   }
 
   public shareFacebook() {
-    window.open(`https://www.facebook.com/share.php?u=${this.url}`, "_blank", "width=550,height=490");
+    window.open(`https://www.facebook.com/share.php?u=${this.urlshorten}`, "_blank", "width=550,height=490");
   }
 
   public shareTwitter() {
     window.open(`https://twitter.com/intent/tweet?status=${this.urlshorten}`, "_blank", "width=550,height=490");
+  }
+
+  public shareInstagram() {
+    window.open(`https://www.instagram.com/?url=${this.urlshorten}`);
+  }
+
+  public shareWhatsapp() {
+    window.open(`https://wa.me/?text=${this.urlshorten}`);
   }
 
   /* To copy Text from Textbox */

@@ -41,4 +41,9 @@ describe('ForgotpasswordComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('go to login', () => {
+    component.backLogin();
+  });
+  
 });

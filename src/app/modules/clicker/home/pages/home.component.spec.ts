@@ -10,6 +10,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { UserService } from 'src/app/services/user.service';
+import { ShortenerService } from 'src/app/services/shortener.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { By } from '@angular/platform-browser';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -17,6 +24,9 @@ describe('HomeComponent', () => {
 
   const mockProductSearchService = jasmine.createSpyObj("ProductSearchService", ["getProductsPagination", "getTotalItems"]);
   const mockProductUserService = jasmine.createSpyObj("UserService", ["getProfile"]);
+  const mockShortenerService = jasmine.createSpyObj("ShortenerService", ["getShortUrl"]);
+  const mockDialog = jasmine.createSpyObj('MatDialog', ['open']); 
+	const mockDialogRef = jasmine.createSpyObj('MatDialogRef', ['close', 'afterClosed', 'componentInstance']);
 
   let data = [{
     productName: 'olla',
@@ -39,10 +49,21 @@ describe('HomeComponent', () => {
   }]
 
   let user = {
-    identification: '123456789'
+    identification: '123456789',
   }
 
   let dataEmpty = [];
+
+  let dataProduct = {
+    linkText: 'estufa-322',
+    productName: 'estufa322',
+    productId: '12345687',
+    template: null,
+    showClose: true,
+    buttonClose: 'Cerrar'
+  }
+
+  const shortUrl = 'http://tynyurl.com/xixiaa'
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -56,19 +77,30 @@ describe('HomeComponent', () => {
          FormsModule,
          ReactiveFormsModule,
          RouterTestingModule.withRoutes([]),
+         BrowserAnimationsModule,
+         SharedModule
        ],
        providers:[
          {provide: ProductSearchService, useValue: mockProductSearchService},
          {provide: UserService, useValue: mockProductUserService},
+         {provide: ShortenerService, useValue: mockShortenerService},
+         { provide: MatDialogRef, useValue: mockDialogRef}, 
+         { provide: MAT_DIALOG_DATA, useValue: mockDialog }
        ],
        schemas:[
          NO_ERRORS_SCHEMA
        ]
+    }).overrideModule(BrowserDynamicTestingModule, {
+      set: {
+        entryComponents: [DialogComponent]
+      }
     })
     .compileComponents();
+
     mockProductSearchService.getProductsPagination.and.returnValue(of(data));
     mockProductSearchService.getTotalItems.and.returnValue(of(data));
     mockProductUserService.getProfile.and.returnValue(of(user));
+    mockShortenerService.getShortUrl.and.returnValue(of(shortUrl));
   }));
 
   beforeEach(() => {
@@ -116,6 +148,15 @@ describe('HomeComponent', () => {
 
   });
   
-  
+  it('product data', () => {
+    component.dataProduct(dataProduct);
+    expect(mockShortenerService.getShortUrl).toHaveBeenCalled();
+  });
 
+  // it('copy input', () => {
+  //   const input = `<input _ngcontent-gfe-c2="" class="mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored" formcontrolname="link" id="url" matinput="" placeholder="url" readonly="true" ng-reflect-id="url" ng-reflect-placeholder="url" ng-reflect-value="https://www.exito.com/estufa-s" ng-reflect-readonly="" aria-invalid="false" aria-required="false">`;
+  //   component.copyInputMessage(input);
+  // });
+  
+    
 });
