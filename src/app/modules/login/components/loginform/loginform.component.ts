@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 import { ResponseService } from "src/app/interfaces/response";
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
+import { RemoveSpaceService } from 'src/app/services/remove-space.service';
 
 @Component({
   selector: "app-loginform",
@@ -21,7 +22,8 @@ export class LoginformComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
-    private loading: LoaderService
+    private loading: LoaderService,
+    private removeSpace: RemoveSpaceService
   ) {}
 
   private subscription: Subscription = new Subscription();
@@ -106,14 +108,14 @@ export class LoginformComponent implements OnInit {
 
   public removewhiteSpace() {
     const inputValue = this.loginForm.controls.Password.value;
-    let noSpace = inputValue.replace(/ /g, "");
-    this.loginForm.controls.Password.setValue(noSpace);
+    const passwordControl = this.loginForm.controls.Password;
+    this.removeSpace.removeSpace(inputValue, passwordControl)
   }
 
   public removewhiteSpaceEmail() {
     const inputValue = this.loginForm.controls.Username.value;
-    let noSpace = inputValue.replace(/ /g, "");
-    this.loginForm.controls.Username.setValue(noSpace);
+    const confirmPasswordControl = this.loginForm.controls.Username;
+    this.removeSpace.removeSpace(inputValue, confirmPasswordControl);
   }
 
 
