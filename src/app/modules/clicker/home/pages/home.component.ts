@@ -29,7 +29,10 @@ export class HomeComponent implements OnInit {
     private auth: AuthService
   ) {}
 
+  term: string;
+
   @ViewChild("templateDialog", { static: false }) template: TemplateRef<any>;
+  @ViewChild("paginator", { static: false }) paginator: any;
 
   private subscription: Subscription = new Subscription();
   productsList: SearchProduct;
@@ -44,6 +47,7 @@ export class HomeComponent implements OnInit {
   urlshorten: string;
   formLink: FormGroup;
   identification: string;
+  pageIndex: number = 0;
 
   ngOnInit() {
     this.showNotFound = false;
@@ -70,14 +74,18 @@ export class HomeComponent implements OnInit {
     to = this.pageTo
   ) {
     this.loading.show();
-    this.paginate = term;
+    if(term !== this.paginate){
+      this.paginate = term;
+      this.pageIndex = 0;
+    }
     const params = { term, from, to };
     this.subscription = this.sp
       .getProductsPagination(params)
       .subscribe((resp: any) => {
+        const parsed =  JSON.parse(resp.json);
         this.totalItems = resp.total;
         this.loading.hide();
-        if (this.totalItems > 0) {
+        if (parsed.length > 0) {
           this.showResults = true;
           this.showNotFound = false;
           this.productsList = JSON.parse(resp.json);
@@ -95,6 +103,7 @@ export class HomeComponent implements OnInit {
   }
 
   public pagination(paginate: any) {
+    this.pageIndex = paginate.pageIndex;
     paginate.length = this.totalItems;
     const from = (paginate.pageSize * paginate.pageIndex + 1);
     const to = (paginate.pageSize * (paginate.pageIndex + 1));

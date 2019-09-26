@@ -4,6 +4,9 @@
   </button>
 </div>
 <div class="container">
+    <div id="Inicio">
+        <h1>Inicio</h1>
+      </div>
   <app-search (search)="searchProductPaginate($event)"></app-search>
   <div *ngIf="showResults">
     <div class="row">
@@ -24,9 +27,11 @@
       </div>
     </div>
     <mat-paginator
+      id="paginator"
       [length]="totalItems"
       [pageSize]="pageSize"
       [pageSizeOptions]="pageSizeOptions"
+      [pageIndex]="pageIndex"
       (page)="pagination($event)"
     >
     </mat-paginator>
