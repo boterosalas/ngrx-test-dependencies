@@ -125,15 +125,7 @@ describe("HomeComponent", () => {
     expect(mockProductUserService.getProfile).toHaveBeenCalled();
   });
 
-  it("share social links", () => {
-    spyOn(window, "open").and.callThrough();
-    component.shareFacebook();
-    component.shareTwitter();
-    component.shareInstagram();
-    component.shareWhatsapp();
-    expect(window.open).toBeTruthy();
-  });
-
+  
   it("search products", () => {
     component.searchProductPaginate("cocina");
     expect(mockProductSearchService.getProductsPagination).toHaveBeenCalled();

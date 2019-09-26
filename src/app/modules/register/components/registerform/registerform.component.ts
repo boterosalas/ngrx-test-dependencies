@@ -31,6 +31,7 @@ export class RegisterformComponent implements OnInit {
   emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
   namePattern = "[a-zA-Z0-9 ]+";
   numberPattern = "^(0|[0-9][0-9]*)$";
+  passwordPattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[!#/_@#$%^&+-.*)(´}{><:;¡!})])";
 
   
 
@@ -84,7 +85,8 @@ export class RegisterformComponent implements OnInit {
           [
             Validators.required,
             Validators.minLength(6),
-            Validators.maxLength(20)
+            Validators.maxLength(20),
+            Validators.pattern(new RegExp(this.passwordPattern))
           ]
         ],
         confirmPassword: [
