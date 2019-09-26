@@ -82,10 +82,10 @@ export class ForgotpasswordformComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
-  // public removewhiteSpaceEmailForgot() {
-  //   const inputValue = this.forgotPaswordForm.controls.Username.value;
-  //   const forgotControl = this.forgotPaswordForm.controls.Username;
-  //   this.removeSpace.removeSpace(inputValue, forgotControl);
-  // }
+  public removewhiteSpaceEmailForgot() {
+    const inputValue = this.forgotPaswordForm.controls.Username.value;
+    const forgotControl = this.forgotPaswordForm.controls.Username;
+    this.removeSpace.removeSpace(inputValue, forgotControl);
+  }
 
 }
