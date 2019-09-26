@@ -37,10 +37,9 @@ export class HomeComponent implements OnInit {
   showNotFound: boolean;
   paginate: string;
   totalItems: number;
-  pageSize: number = 30;
-  pageTo: number = 30;
-  // pageSizeOptions: number[] = [5, 10, 25, 50];
-  pageSizeOptions: number[] = [30];
+  pageSize: number = 5;
+  pageTo: number = 5;
+  pageSizeOptions: number[] = [5, 10, 25, 50];
   url: string;
   urlshorten: string;
   formLink: FormGroup;
