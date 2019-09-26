@@ -116,7 +116,7 @@ export class HomeComponent implements OnInit {
     const productUrl = product.linkText;
     this.url = `https://www.exito.com/${productUrl}/p?utm_source=clickam&utm_medium=referral&utm_campaign=productosexito&utm_content=${this.identification}`;
     this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
-        this.urlshorten = resp.toString();
+        this.urlshorten = resp;
     })
     this.formShareLink();
     const title = product.productName;
@@ -124,7 +124,7 @@ export class HomeComponent implements OnInit {
     const template = this.template;
     const showClose = true;
     const buttonClose = "Cerrar";
-    const dialogRef = this.dialog.open(DialogComponent, {
+    this.dialog.open(DialogComponent, {
       data: { title, template, showClose, buttonClose, id }
     });
   }
