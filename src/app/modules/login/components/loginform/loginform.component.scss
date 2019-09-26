@@ -12,3 +12,9 @@
     cursor: pointer;
   }
 }
+
+.text-decoration{
+  &:hover{
+    text-decoration: underline;
+  }
+}
