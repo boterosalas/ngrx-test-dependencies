@@ -19,7 +19,8 @@
         "SAVE": "Guardar",
         "CANCEL": "Cancelar",
         "SEARCH": "Buscar",
-        "WHITE_SPACES": "No se permite más de un espacio en blanco"
+        "WHITE_SPACES": "No se permite más de un espacio en blanco",
+        "PASSWORD_PATTERN": "la contraseña debe contener al menos una letra minúscula, una letra mayúscula un número y un carácter especial"
     },
     "LOGIN": {
         "LOGIN": "Iniciar sesión",

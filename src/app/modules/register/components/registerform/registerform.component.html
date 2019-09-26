@@ -148,6 +148,10 @@
       "GENERIC.MAX_CHARACTERS" | translate: {maxchar:registerForm.controls.password.errors.maxlength.requiredLength}
     }}</mat-error>
 
+    <mat-error id="patternPassword" *ngIf="registerForm.controls.password.invalid && registerForm.controls.password.errors.pattern">{{
+      "GENERIC.PASSWORD_PATTERN" | translate
+    }}</mat-error>
+
   </mat-form-field>
 
   <mat-form-field>
