@@ -29,6 +29,7 @@ export class RecoverpasswordformComponent implements OnInit {
   recoverPasswordForm: FormGroup;
   code: string;
   email: string;
+  passwordPattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[!#/_@#$%^&+-.*)(´}{><:;¡!})])";
 
   ngOnInit() {
     this.recoverPasswordForm = this.fb.group({
@@ -37,7 +38,8 @@ export class RecoverpasswordformComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(6),
-          Validators.maxLength(20)
+          Validators.maxLength(20),
+          Validators.pattern(new RegExp(this.passwordPattern))
         ]
       ],
       confirmPassword: [
