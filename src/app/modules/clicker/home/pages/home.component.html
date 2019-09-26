@@ -6,7 +6,7 @@
     <div *ngIf="showResults">   
         <div class="row">
             <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let product of productsList">
-                <app-product [productName]="product.productName" [price]="product.items[0].sellers[0].commertialOffer.PriceWithoutDiscount" productDescription="lorem ipssum" [image]="product.items[0].images[0].imageUrl" [alt]="product.productName" textbutton="{{'PRODUCTS.GET_LINK' | translate}}" [plu]="product.items[0].itemId" (infoProduct)="dataProduct(product)"></app-product>
+                <app-product [productName]="product.productName" [price]="product.items[0].sellers[0].commertialOffer.Price" productDescription="lorem ipssum" [image]="product.items[0].images[0].imageUrl" [alt]="product.productName" textbutton="{{'PRODUCTS.GET_LINK' | translate}}" [plu]="product.items[0].itemId" (infoProduct)="dataProduct(product)"></app-product>
             </div> 
         </div>
         <mat-paginator 

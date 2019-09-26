@@ -25,7 +25,7 @@ export class ProductSearchService {
       map((user: any) => {
         return user.objectResponse;
       })
-    );;
+    );
   }
 
   // public getTotalItems(params: {term: string}){
