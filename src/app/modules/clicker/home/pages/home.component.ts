@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
     this.showResults = false;
 
     setTimeout(() => {
-      this.user.getProfile().subscribe((user: any)=> {
+      this.subscription = this.user.getProfile().subscribe((user: any)=> {
         this.identification = user.identification;
       });
     }, 2000);
