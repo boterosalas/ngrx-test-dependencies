@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
     private user: UserService
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params.code && params.email) {
+      if (params.email) {
         this.email = params.email;
         this.activateUser();
       } else {
@@ -80,4 +80,9 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
 }
