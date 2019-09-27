@@ -29,7 +29,9 @@ describe('RecoverpasswordformComponent', () => {
 
   const InvalidRquest = {
     state: "Error",
-    userMessage: 'Internal server error'
+    error:{
+      userMessage: 'Internal server error'
+    }
   }
 
 
