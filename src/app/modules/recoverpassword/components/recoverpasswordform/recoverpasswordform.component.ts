@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { ResponseService } from 'src/app/interfaces/response';
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
+import { RemoveSpaceService } from 'src/app/services/remove-space.service';
 
 @Component({
   selector: 'app-recoverpasswordform',
@@ -20,13 +21,15 @@ export class RecoverpasswordformComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private recover: RecoverpasswordService,
-    private loading: LoaderService
+    private loading: LoaderService,
+    private removeSpace: RemoveSpaceService
   ) { }
 
   private subscription: Subscription = new Subscription();
   recoverPasswordForm: FormGroup;
   code: string;
   email: string;
+  passwordPattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[!#/_@#$%^&+-.*)(´}{><:;¡!})])";
 
   ngOnInit() {
     this.recoverPasswordForm = this.fb.group({
@@ -35,7 +38,8 @@ export class RecoverpasswordformComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(6),
-          Validators.maxLength(20)
+          Validators.maxLength(20),
+          Validators.pattern(new RegExp(this.passwordPattern))
         ]
       ],
       confirmPassword: [
@@ -49,8 +53,12 @@ export class RecoverpasswordformComponent implements OnInit {
     },{ validator: ConfirmPasswordValidator.MatchPassword });
 
     this.route.queryParams.subscribe(params => {
-      this.code = params.code;
-      this.email = params.email;
+      if(params.code && params.email) {
+        this.code = params.code;
+        this.email = params.email;
+      } else {
+        this.router.navigate(['/']);
+      }
     });
 
   }
@@ -71,7 +79,8 @@ export class RecoverpasswordformComponent implements OnInit {
             title: "Recuperación de contraseña",
             text: "Tu contraseña ha sido reestablecida exitosamente",
             type: "success",
-            confirmButtonText: "Aceptar"
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: 'accept-recover-alert-success'
           }).then(()=>{
             this.router.navigate(['/']);
           });
@@ -80,7 +89,8 @@ export class RecoverpasswordformComponent implements OnInit {
             title: "Ups algo salió mal",
             text: resp.userMessage,
             type: "error",
-            confirmButtonText: "Aceptar"
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: 'accept-recover-alert-error'
           });
         }
       },
@@ -90,22 +100,23 @@ export class RecoverpasswordformComponent implements OnInit {
           title: error.statusText,
           // text: error.error.userMessage,
           type: "error",
-          confirmButtonText: "Aceptar"
+          confirmButtonText: "Aceptar",
+          confirmButtonClass: 'accept-recover-alert-invalid'
         });
       }
     );
   }
 
-  public removewhiteSpace() {
+  public removewhiteSpaceRecover() {
     const inputValue = this.recoverPasswordForm.controls.password.value;
-    let noSpace = inputValue.replace(/ /g, "");
-    this.recoverPasswordForm.controls.password.setValue(noSpace);
+    const recoverControl = this.recoverPasswordForm.controls.password;
+    this.removeSpace.removeSpace(inputValue, recoverControl);
   }
 
-  public removewhiteSpaceConfirm() {
+  public removewhiteSpaceConfirmRecover() {
     const inputValue = this.recoverPasswordForm.controls.confirmPassword.value;
-    let noSpace = inputValue.replace(/ /g, "");
-    this.recoverPasswordForm.controls.confirmPassword.setValue(noSpace);
+    const recoerConfirmControl = this.recoverPasswordForm.controls.confirmPassword
+    this.removeSpace.removeSpace(inputValue, recoerConfirmControl);
   }
 
   ngOnDestroy(): void {

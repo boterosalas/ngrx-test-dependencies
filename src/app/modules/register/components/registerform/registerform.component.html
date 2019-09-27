@@ -117,6 +117,7 @@
       type="email"
       placeholder="{{ 'GENERIC.EMAIL' | translate }}"
       formControlName="email"
+      (input)="removewhiteSpaceEmail()"
       required
     />
     <mat-error id="invalidEmail" *ngIf="registerForm.controls.email.invalid">{{
@@ -145,6 +146,10 @@
 
     <mat-error id="maxPassword" *ngIf="registerForm.controls.password.invalid && registerForm.controls.password.errors.maxlength">{{
       "GENERIC.MAX_CHARACTERS" | translate: {maxchar:registerForm.controls.password.errors.maxlength.requiredLength}
+    }}</mat-error>
+
+    <mat-error id="patternPassword" *ngIf="registerForm.controls.password.invalid && registerForm.controls.password.errors.pattern">{{
+      "GENERIC.PASSWORD_PATTERN" | translate
     }}</mat-error>
 
   </mat-form-field>

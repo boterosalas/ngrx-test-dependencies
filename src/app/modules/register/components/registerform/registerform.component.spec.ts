@@ -43,6 +43,13 @@ describe("RegisterformComponent", () => {
     userMessage: null
   }
 
+  const InvalidRquest = {
+    state: "Error",
+    error:{
+      userMessage: 'Internal server error'
+    }
+  }
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [RegisterformComponent],
@@ -118,6 +125,12 @@ describe("RegisterformComponent", () => {
     expect(component.registerForm.controls.confirmPassword.value).toBe("12345678");
   });
 
+  it("remove white space email", () => {
+    component.registerForm.controls.email.setValue("da vid.betancur@pragma.com.co");
+    component.removewhiteSpaceEmail();
+    expect(component.registerForm.controls.email.value).toBe("david.betancur@pragma.com.co");
+  });
+
   describe('register invalid', () => {
 
     beforeEach(function() {
@@ -134,7 +147,7 @@ describe("RegisterformComponent", () => {
   describe('invalid request', () => {
 
     beforeEach(function() {
-      mockRegisterService.registerUser.and.returnValue(throwError({status: 500}));
+      mockRegisterService.registerUser.and.returnValue(throwError(InvalidRquest));
     });
     
     it("invalid request", () => {

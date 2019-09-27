@@ -31,6 +31,7 @@ export class RegisterformComponent implements OnInit {
   emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
   namePattern = "[a-zA-Z0-9 ]+";
   numberPattern = "^(0|[0-9][0-9]*)$";
+  passwordPattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[!#/_@#$%^&+-.*)(´}{><:;¡!})])";
 
   
 
@@ -84,7 +85,8 @@ export class RegisterformComponent implements OnInit {
           [
             Validators.required,
             Validators.minLength(6),
-            Validators.maxLength(20)
+            Validators.maxLength(20),
+            Validators.pattern(new RegExp(this.passwordPattern))
           ]
         ],
         confirmPassword: [
@@ -141,7 +143,8 @@ export class RegisterformComponent implements OnInit {
             title: "Registro valido",
             text: "Te Has registrado correctamente",
             type: "success",
-            confirmButtonText: "Aceptar"
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: 'accept-register-alert-success'
           }).then(()=> {
             this.showLogin();
           });
@@ -150,7 +153,8 @@ export class RegisterformComponent implements OnInit {
             title: "Registro invalido",
             text: resp.userMessage,
             type: "error",
-            confirmButtonText: "Aceptar"
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: 'accept-register-alert-error'
           }).then(()=>{
             this.backStep();
           });
@@ -162,7 +166,8 @@ export class RegisterformComponent implements OnInit {
           title: error.statusText,
           text: error.error.userMessage,
           type: "error",
-          confirmButtonText: "Aceptar"
+          confirmButtonText: "Aceptar",
+          confirmButtonClass: 'accept-register-alert-invalid'
         }).then(()=>{
           this.backStep();
         });
@@ -190,6 +195,12 @@ export class RegisterformComponent implements OnInit {
     const inputValue = this.registerForm.controls.confirmPassword.value;
     let noSpace = inputValue.replace(/ /g, "");
     this.registerForm.controls.confirmPassword.setValue(noSpace);
+  }
+
+  public removewhiteSpaceEmail() {
+    const inputValue = this.registerForm.controls.email.value;
+    let noSpace = inputValue.replace(/ /g, "");
+    this.registerForm.controls.email.setValue(noSpace);
   }
 
   ngOnDestroy(): void {

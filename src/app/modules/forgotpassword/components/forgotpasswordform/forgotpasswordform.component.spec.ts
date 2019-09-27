@@ -28,6 +28,13 @@ describe('ForgotpasswordformComponent', () => {
       state: "Error",
       userMessage: null
     }
+
+    const InvalidRquest = {
+      state: "Error",
+      error:{
+        userMessage: 'Internal server error'
+      }
+    }
   
 
   beforeEach(async(() => {
@@ -71,6 +78,12 @@ describe('ForgotpasswordformComponent', () => {
     component.forgotPaswordForm.controls.Username.setValue('david.betancur@pragma.com.co');
     expect(mockForgotpasswordService.forgotPassword).toHaveBeenCalled();
   });
+
+  it("remove white space email", () => {
+    component.forgotPaswordForm.controls.Username.setValue("dav id.betancur@pragma.com.co");
+    component.removewhiteSpaceEmailForgot();
+    expect(component.forgotPaswordForm.controls.Username.value).toBe("david.betancur@pragma.com.co");
+  });
   
   describe('invalid password', () => {
 
@@ -89,7 +102,7 @@ describe('ForgotpasswordformComponent', () => {
   describe('invalid request password', () => {
 
     beforeEach(function() {
-      mockForgotpasswordService.forgotPassword.and.returnValue(throwError({status: 500}));
+      mockForgotpasswordService.forgotPassword.and.returnValue(throwError(InvalidRquest));
     });
     
     it('forgot password invalid request', () => {

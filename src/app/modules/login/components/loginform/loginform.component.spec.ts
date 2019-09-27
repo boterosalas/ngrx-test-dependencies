@@ -10,6 +10,7 @@ import { AuthService } from "src/app/services/auth.service";
 import { of, Observable, throwError } from "rxjs";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterTestingModule } from "@angular/router/testing";
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("LoginformComponent", () => {
   let component: LoginformComponent;
@@ -30,6 +31,14 @@ describe("LoginformComponent", () => {
     objectResponse:
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc…VzIn0.Bcsm-qVHHtRcLlQae_5tVwGpgbPQJkCEQ97ZbwRxz_4"
   };
+
+  const InvalidRquest = {
+    state: "Error",
+    error:{
+      userMessage: 'Internal server error'
+    }
+  }
+
 
   let mockRouter = {
     navigate: jasmine.createSpy('navigate')
@@ -53,6 +62,9 @@ describe("LoginformComponent", () => {
         TranslateService,
         { provide: AuthService, useValue: mockAuthService }
       ],
+      schemas: [
+        NO_ERRORS_SCHEMA
+      ]
     }).compileComponents();
     mockAuthService.login.and.returnValue(of(dataUser));
   }));
@@ -70,6 +82,18 @@ describe("LoginformComponent", () => {
   it('go to forgot password', () => {
     component.forgotpass();
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/olvido-contrasena']);
+  });
+
+  it("remove white space password", () => {
+    component.loginForm.controls.Password.setValue("12 3456789");
+    component.removewhiteSpace();
+    expect(component.loginForm.controls.Password.value).toBe("123456789");
+  });
+
+  it("remove white space email", () => {
+    component.loginForm.controls.Username.setValue("dav id.betancur@pragma.com.co");
+    component.removewhiteSpaceEmail();
+    expect(component.loginForm.controls.Username.value).toBe("david.betancur@pragma.com.co");
   });
   
 
@@ -108,7 +132,7 @@ describe("LoginformComponent", () => {
 
   describe("invalid request", () => {
     beforeEach(function() {
-      mockAuthService.login.and.returnValue(throwError({status: 500}));
+      mockAuthService.login.and.returnValue(throwError(InvalidRquest));
     });
 
     it("invalid request", () => {

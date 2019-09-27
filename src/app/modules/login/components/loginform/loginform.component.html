@@ -6,6 +6,7 @@
       type="email"
       placeholder="{{ 'GENERIC.EMAIL' | translate }}"
       formControlName="Username"
+      (input)="removewhiteSpaceEmail()"
       required
     />
     <mat-error id="introduceEmail" *ngIf="loginForm.controls.Username.invalid && loginForm.controls.Username.errors.required">{{
@@ -23,6 +24,7 @@
       type="password"
       placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
       formControlName="Password"
+      (input)="removewhiteSpace()"
       required
     />
     <mat-error id="introducePassword" *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Password.errors.required">{{
@@ -39,7 +41,7 @@
 
   </mat-form-field>
 
-  <p class="cursor-pointer" (click)="forgotpass()">{{ "LOGIN.FORGOT_PASSWORD" | translate}}</p>
+  <p  id="forgotPass" class="cursor-pointer text-decoration" (click)="forgotpass()">{{ "LOGIN.FORGOT_PASSWORD" | translate}}</p>
 
   <button
   mat-raised-button

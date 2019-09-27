@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogComponent } from './dialog.component';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AppMaterialModule } from '../../app-material/app-material.module';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('DialogComponent', () => {
   let component: DialogComponent;
@@ -21,7 +22,11 @@ describe('DialogComponent', () => {
         AppMaterialModule
        ],
        providers: [
+        { provide: MAT_DIALOG_DATA, useValue: {} },
         {provide: MatDialogRef, useValue: dialogMock},
+       ],
+       schemas: [
+         NO_ERRORS_SCHEMA
        ]
     })
     .compileComponents();

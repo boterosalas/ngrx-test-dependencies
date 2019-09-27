@@ -1,6 +1,6 @@
 <form [formGroup]="searchForm">
     <mat-form-field>
-        <input matInput type="text" placeholder="{{ 'GENERIC.SEARCH' | translate }}" formControlName="search">
+        <input matInput type="text" id="BarSearch" placeholder="{{ 'GENERIC.SEARCH' | translate }}" formControlName="search">
         <mat-icon matPrefix class="mr-1">search</mat-icon>
         <mat-error id="searchErrorMin"
             *ngIf="searchForm.controls.search.invalid && searchForm.controls.search.errors.minlength">{{
@@ -10,7 +10,11 @@
             *ngIf="searchForm.controls.search.invalid && searchForm.controls.search.errors.maxlength">{{
         "GENERIC.MAX_CHARACTERS" | translate: {maxchar:searchForm.controls.search.errors.maxlength.requiredLength}
       }}</mat-error>
+        <mat-error id="searchErrorPattern"
+            *ngIf="searchForm.controls.search.invalid && searchForm.controls.search.errors.pattern">{{
+        "GENERIC.WHITE_SPACES" | translate
+      }}</mat-error>
     </mat-form-field>
-    <button mat-raised-button color="primary" class="ml-3"
+    <button mat-raised-button color="primary" class="ml-3" id="BtnSearch"
         [disabled]="!searchForm.valid || searchForm.value.search===''" (click)="searchProduct()">{{ "GENERIC.SEARCH" | translate }}</button>
 </form>
