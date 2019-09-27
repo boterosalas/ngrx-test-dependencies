@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
     this.subscription = this.user
     .activateProfile(this.email)
     .subscribe((user: any) => {
-      console.log(user);
       if (user.state === "Success") {
         Swal.fire({
           title: "Activación exitosa",

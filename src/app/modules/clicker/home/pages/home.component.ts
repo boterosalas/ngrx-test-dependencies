@@ -53,9 +53,12 @@ export class HomeComponent implements OnInit {
     this.showNotFound = false;
     this.showResults = false;
 
-    this.user.getProfile().subscribe((user: any)=> {
-      this.identification = user.identification;
-    });
+    setTimeout(() => {
+      this.user.getProfile().subscribe((user: any)=> {
+        this.identification = user.identification;
+      });
+    }, 2000);
+
 
   }
 
@@ -83,7 +86,6 @@ export class HomeComponent implements OnInit {
       .getProductsPagination(params)
       .subscribe((resp: any) => {
         const parsed =  JSON.parse(resp.json);
-        console.log(resp);
         this.totalItems = resp.total;
         this.loading.hide();
         if (parsed.length > 0) {
