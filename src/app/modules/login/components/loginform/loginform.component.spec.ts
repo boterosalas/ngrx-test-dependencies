@@ -10,6 +10,7 @@ import { AuthService } from "src/app/services/auth.service";
 import { of, Observable, throwError } from "rxjs";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterTestingModule } from "@angular/router/testing";
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("LoginformComponent", () => {
   let component: LoginformComponent;
@@ -61,6 +62,9 @@ describe("LoginformComponent", () => {
         TranslateService,
         { provide: AuthService, useValue: mockAuthService }
       ],
+      schemas: [
+        NO_ERRORS_SCHEMA
+      ]
     }).compileComponents();
     mockAuthService.login.and.returnValue(of(dataUser));
   }));

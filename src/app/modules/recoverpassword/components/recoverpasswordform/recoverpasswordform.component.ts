@@ -53,8 +53,12 @@ export class RecoverpasswordformComponent implements OnInit {
     },{ validator: ConfirmPasswordValidator.MatchPassword });
 
     this.route.queryParams.subscribe(params => {
-      this.code = params.code;
-      this.email = params.email;
+      if(params.code && params.email) {
+        this.code = params.code;
+        this.email = params.email;
+      } else {
+        this.router.navigate(['/']);
+      }
     });
 
   }
