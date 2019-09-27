@@ -123,7 +123,7 @@ export class HomeComponent implements OnInit {
 
   dataProduct(product) {
     const productUrl = product.linkText;
-    this.url = `https://www.exito.com/${productUrl}/p?utm_source=clickam&utm_medium=referral&utm_campaign=productosexito&utm_content=${this.identification}`;
+    this.url = `https://www.exito.com/${productUrl}/p?utm_source=clickam&utm_medium=referral&utm_campaign=${this.identification}`;
     this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
         this.urlshorten = resp;
     })
