@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params.code && params.email) {
         this.email = params.email;
+        this.activateUser();
       } else {
         router.navigate(["/"]);
       }
@@ -32,7 +33,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.showLoginForm = true;
     this.showRegisterForm = false;
-    this.activateUser();
   }
 
   public showRegister() {
