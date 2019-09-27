@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { async, ComponentFixture, TestBed, tick } from "@angular/core/testing";
 
 import { HomeComponent } from "./home.component";
 import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
@@ -1668,7 +1668,10 @@ describe("HomeComponent", () => {
 
   it("should create", () => {
     expect(component).toBeTruthy();
-    expect(mockProductUserService.getProfile).toHaveBeenCalled();
+    fixture.whenStable().then(()=>{
+      tick();
+      expect(mockProductUserService.getProfile).toHaveBeenCalled();
+    })
   });
 
   it("search products", () => {
