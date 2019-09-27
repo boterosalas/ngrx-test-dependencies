@@ -47,11 +47,6 @@ export class LoginformComponent implements OnInit {
         [Validators.required, Validators.minLength(6), Validators.maxLength(20)]
       ]
     });
-
-    if(this.authService.isLoggedIn){
-      this.router.navigate(['/inicio']);
-    }
-
   }
 
   public forgotpass(){

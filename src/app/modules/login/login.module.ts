@@ -11,7 +11,11 @@ import { SharedModule } from '../shared/shared.module';
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent
+    component: LoginComponent,
+  },
+  {
+    path: '?',
+    component: LoginComponent,
   }
 ];
 

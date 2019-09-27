@@ -83,6 +83,7 @@ export class HomeComponent implements OnInit {
       .getProductsPagination(params)
       .subscribe((resp: any) => {
         const parsed =  JSON.parse(resp.json);
+        console.log(resp);
         this.totalItems = resp.total;
         this.loading.hide();
         if (parsed.length > 0) {
