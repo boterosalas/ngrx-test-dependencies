@@ -16,6 +16,9 @@ export class ProductComponent implements OnInit {
   @Input() plu: string;
   @Input() alt: string;
   @Input() textbutton: string;
+  @Input() id: string;
+  @Input() btnid: string;
+
 
 
   constructor() { }

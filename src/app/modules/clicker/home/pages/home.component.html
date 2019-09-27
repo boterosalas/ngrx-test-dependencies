@@ -12,12 +12,14 @@
     <div class="row">
       <div
         class="col-sm-12 col-md-6 col-lg-4"
-        *ngFor="let product of productsList"
+        *ngFor="let product of productsList; let i= index"
       >
         <app-product
+          id="productTitle{{i}}"
+          btnid="btnLink{{i}}"
           [productName]="product.productName"
           [price]="product.items[0].sellers[0].commertialOffer.Price"
-          productDescription="lorem ipssum"
+          productDescription=""
           [image]="product.items[0].images[0].imageUrl"
           [alt]="product.productName"
           textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
@@ -56,6 +58,7 @@
       </mat-form-field>
       <button
         mat-raised-button
+        id="btnCopy"
         color="primary"
         (click)="copyInputMessage(linkInput)"
       >
