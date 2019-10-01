@@ -1,0 +1,70 @@
+@import "variables.scss";
+
+footer {
+    background: $footer-bg;
+    color: $white;
+    a{
+        cursor: pointer;
+        color: $white;
+    }
+
+    .social-links{
+        i{
+            font-size: 1.1rem;
+            color: $footer-social-links;
+            padding: 0 1.3rem;
+        }
+        
+    .orange{
+        color: $primary-color;
+        font-size: 1.5rem;
+      }
+    }
+
+    .footer-links{
+        .border-bottom-orange{
+            &::after{
+                margin-top: 0.2rem ;
+            }
+        }
+        .section{
+            font-family: $font-galano-bold;
+            padding: 0.8rem 0;
+        }
+        a{
+            color: $white;
+        }
+    }
+
+    .clickacedemy{
+        a{
+            font-size: $font-size-sm;
+            padding: .5rem 0;
+        }
+    }
+
+    .terms{
+        margin-top: 3rem;
+        a{
+            text-decoration: underline;
+            font-size: $font-size-sm - .1rem;
+            color: #B5B8BC;
+        }
+    }
+
+    .border-footer{
+        height: 2px;
+        background:#86888A;
+        width: 100%;
+    }
+
+    .copy{
+        font-size: $font-size-sm - .1rem;
+        color:#86888A;
+    }
+
+    .rotate{
+        transform: rotate(180deg);
+    }
+
+}

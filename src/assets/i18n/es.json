@@ -11,6 +11,7 @@
         "REQUIRED": "El campo {{formValue}} es requerido",
         "NEXT": "Siguiente",
         "REGISTER": "Regístro",
+        "REGISTER2": "Registrarse",
         "INVALID_FORMAT": "El campo {{val}} no puede contener caracteres especiales",
         "MAX_CHARACTERS": "El número máximo de caracteres es {{maxchar}}",
         "MIN_CHARACTERS": "El número mínimo de caracteres es {{minchar}}",
@@ -48,5 +49,15 @@
     },
     "PRODUCTS": {
         "GET_LINK": "Obtener link"
+    },
+    "HOME": {
+        "TITLE_SPEND": "¿Cuánto gano?",
+        "DESPCRIPTION_SPEND": "Revisa los valores que puedes ganar por vender productos del grupo éxito",
+        "TEXT_BUTTON_COMISIONS": "Ver comisiones",
+        "TITLE_SELL": "¿Qué vendo?",
+        "DESPCRIPTION_SELL": "Ten en cuenta las mejores ofertas para vender más",
+        "TEXT_BUTTON_OFFERS": "Ver Ofertas",
+        "HOW_WORKS": "¿Cómo funciona?",
+        "HOW_WORKS_DESCRIPTION": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula"
     }
 }

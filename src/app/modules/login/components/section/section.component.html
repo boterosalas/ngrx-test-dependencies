@@ -1,0 +1,26 @@
+<section *ngIf="sectionLeft">
+    <div class="home-section" fxLayout="row" fxLayoutAlign="center center">
+        <div fxLayout="column" fxLayoutAlign="start">
+            <img class="img-left" [src]="img" alt={{alt}}>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="end" class={{textDirection}}>
+            <h2>{{title}}</h2>
+            <p>{{description}}</p>
+            <button mat-raised-button class="orange-border" color="primary">{{textbutton}}</button>
+        </div>
+    </div>
+</section>
+
+<section *ngIf="sectionRight">
+    <div class="home-section" fxLayout="row" fxLayoutAlign="center center">
+        <div fxLayout="column" fxLayoutAlign="end" class={{textDirection}}>
+            <h2>{{title}}</h2>
+            <p>{{description}}</p>
+            <button mat-raised-button class="orange-border" color="primary">{{textbutton}}</button>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="start">
+            <img class="img-right" src={{img}} alt={{alt}}>
+        </div>
+    </div>
+</section>
+
