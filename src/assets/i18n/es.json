@@ -58,6 +58,9 @@
         "DESPCRIPTION_SELL": "Ten en cuenta las mejores ofertas para vender más",
         "TEXT_BUTTON_OFFERS": "Ver Ofertas",
         "HOW_WORKS": "¿Cómo funciona?",
-        "HOW_WORKS_DESCRIPTION": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula"
+        "HOW_WORKS_DESCRIPTION": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula",
+        "TITLE_RAISE":"Aumenta tus ingresos en tus espacios habituales",
+        "DESCRIPTION_RAISE": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum."
+
     }
 }
