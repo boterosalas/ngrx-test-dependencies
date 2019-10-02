@@ -1,3 +1,5 @@
+@import 'variables';
+
 .login-container {
   display: flex;
   flex-direction: column;
@@ -17,4 +19,9 @@
   &:hover{
     text-decoration: underline;
   }
+}
+
+.mat-orange{
+  background: $primary-color;
+  color: $white;
 }

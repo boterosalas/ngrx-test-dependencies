@@ -1,0 +1,13 @@
+@import 'animations';
+
+.login{
+    box-shadow: none !important;
+  }
+
+  .fullheight{
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    background: #fff;
+    height: 100%;
+  }
