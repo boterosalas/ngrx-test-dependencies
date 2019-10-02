@@ -29,7 +29,9 @@
         "INVALID_PASSWORD": "Contraseña invalida",
         "FORGOT_PASSWORD": "Olvidó su contraseña?",
         "INTRODUCE_EMAIL": "Ingrese un correo",
-        "INTRODUCE_PASSWORD": "Ingrese una contraseña"
+        "INTRODUCE_PASSWORD": "Ingrese una contraseña",
+        "DESCRIPTION": "Si todavía no tienes una cuenta puedes",
+        "REGISTER": "registrarte aquí"
     },
     "REGISTER": {
         "ACCEPT":"¿Acepta los términos y condiciones y políticas de privacidad de Clickam?",

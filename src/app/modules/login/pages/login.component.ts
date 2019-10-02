@@ -1,19 +1,43 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, HostBinding } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import Swal from "sweetalert2";
 import { Subscription } from "rxjs";
 import { UserService } from "src/app/services/user.service";
+import { UtilsService } from 'src/app/services/utils.service';
+import { trigger, state, style, transition, animate, group } from '@angular/animations';
+
 
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"]
+  styleUrls: ["./login.component.scss"],
+  animations: [
+    trigger('openClose', [
+        state('in', style({height: '*', opacity: 0})),
+        transition(':leave', [
+            style({height: '*', opacity: 1}),
+
+            group([
+                animate(300, style({height: 0})),
+                animate('600ms ease-in-out', style({'transform': 'translateY(-1000px)'}))
+            ])
+
+        ])
+    ])
+]
 })
+
+
 export class LoginComponent implements OnInit {
+
+  // @HostBinding('class.slide-in-top')
+  isOpen = false;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private user: UserService
+    private user: UserService,
+    private utils: UtilsService
   ) {
     this.route.queryParams.subscribe(params => {
       if (params.email) {
@@ -29,14 +53,24 @@ export class LoginComponent implements OnInit {
   showLoginForm: boolean;
   showRegisterForm: boolean;
   email: string;
+  
 
   ngOnInit() {
     this.showLoginForm = true;
     this.showRegisterForm = false;
+
+    this.utils.change.subscribe(isOpen => {
+      this.isOpen = isOpen;
+    });
+
   }
 
   public showRegister() {
     this.router.navigate(["/registro"]);
+  }
+
+  public hideLogin() {
+    this.isOpen = !this.isOpen;
   }
 
   public activateUser() {
@@ -83,5 +117,6 @@ export class LoginComponent implements OnInit {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
+
 
 }

@@ -63,6 +63,25 @@ body {
   .orange {
     color: $primary-color;
   }
+
+  .mat-orange{
+    background: $primary-color;
+    color: $white;
+  }
+
+  &-init {
+    &::after {
+      content: "";
+      background: $primary-color;
+      height: 4px;
+      width: 25px;
+      position: relative;
+      border-radius: 3px;
+      display: flex;
+      margin-top: 0px;
+    }
+  }
+
 }
 
 h1,
@@ -105,4 +124,8 @@ button{
 
 .slick-dots li.slick-active button:before {
   color: $primary-color !important;
+}
+
+.cursor-pointer{
+  cursor: pointer;
 }

@@ -40,17 +40,19 @@
     }}</mat-error>
 
   </mat-form-field>
-
-  <p  id="forgotPass" class="cursor-pointer text-decoration" (click)="forgotpass()">{{ "LOGIN.FORGOT_PASSWORD" | translate}}</p>
-
-  <button
-  mat-raised-button
-  id="login"
-  color="primary"
-  (click)="login()"
-  [disabled]="!loginForm.valid"
->
-  {{ "LOGIN.LOGIN" | translate }}
-</button>
-
+<div class="text-center">
+    <button
+    mat-raised-button
+    id="login"
+    color="orange"
+    (click)="login()"
+    [disabled]="!loginForm.valid"
+  >
+    {{ "LOGIN.LOGIN" | translate }}
+  </button>
+  
+    <p  id="forgotPass" class="cursor-pointer text-decoration" (click)="forgotpass()">{{ "LOGIN.FORGOT_PASSWORD" | translate}}</p>
+  
+</div>
+ 
 </div>
