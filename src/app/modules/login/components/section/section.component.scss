@@ -1,0 +1,21 @@
+section{
+    margin-bottom: 3rem;
+
+    h2{
+        color: #2B2A27;
+        font-size: 2rem;
+    }
+
+}
+
+.img{
+    &-left{
+        position: relative;
+        margin-left: -40px;
+        margin-right: 10px;
+    }
+    &-right{
+        margin-right: -60px;
+        margin-left: 10px;
+    }
+}

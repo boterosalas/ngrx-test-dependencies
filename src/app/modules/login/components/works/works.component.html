@@ -1,0 +1,20 @@
+<section class="howworks text-center mb-5">
+    <h2>{{ 'HOME.HOW_WORKS' | translate }}</h2>
+    
+    <p>{{ 'HOME.HOW_WORKS_DESCRIPTION' | translate }}</p>
+
+    <ngx-slick-carousel class="carousel" 
+                        #slickModal="slick-carousel" 
+                        [config]="slideConfig" 
+                      >
+        <div ngxSlickItem *ngFor="let slide of slides" class="slide text-center">
+              <h3>{{slide.textTop}}</h3>
+              <img src="{{ slide.img }}" alt="">
+              <p class="p-3 text-slide">{{slide.textBottom}}</p>
+        </div>
+    </ngx-slick-carousel>
+    
+    <div class="mt-5">
+        <button mat-raised-button color="primary" class="orange">{{ 'GENERIC.REGISTER2' | translate }}</button>
+    </div>
+</section>

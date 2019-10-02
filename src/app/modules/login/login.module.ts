@@ -7,6 +7,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
+import { SectionComponent } from './components/section/section.component';
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { WorksComponent } from './components/works/works.component';
+import { SectionbgComponent } from './components/sectionbg/sectionbg.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 const routes: Routes = [
   {
@@ -20,7 +25,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [LoginComponent, LoginformComponent],
+  declarations: [LoginComponent, LoginformComponent, SectionComponent, WorksComponent, SectionbgComponent],
   imports: [
     FormsModule,
     ReactiveFormsModule,
@@ -28,6 +33,8 @@ const routes: Routes = [
     TranslateModule,
     SharedModule,
     CommonModule,
+    FlexLayoutModule,
+    SlickCarouselModule,
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule]

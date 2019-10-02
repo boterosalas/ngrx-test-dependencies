@@ -71,8 +71,9 @@ export class LoginformComponent implements OnInit {
         this.loading.hide();
         if (resp.state === "Success") {
           const responseToken = resp.objectResponse;
-          const token = JSON.stringify(responseToken);
+          const token = responseToken.toString();
           localStorage.setItem("ACCESS_TOKEN", token);
+          console.log(localStorage);
           this.router.navigate(['/inicio']);
         } else {
           Swal.fire({
