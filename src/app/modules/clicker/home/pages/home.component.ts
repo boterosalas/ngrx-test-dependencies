@@ -6,11 +6,11 @@ import { LoaderService } from "src/app/services/loader.service";
 import { PageEvent } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material";
 import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog.component";
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatSnackBar} from '@angular/material/snack-bar';
-import { UserService } from 'src/app/services/user.service';
-import { ShortenerService } from 'src/app/services/shortener.service';
-import { AuthService } from 'src/app/services/auth.service';
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { UserService } from "src/app/services/user.service";
+import { ShortenerService } from "src/app/services/shortener.service";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-home",
@@ -52,40 +52,27 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.showNotFound = false;
     this.showResults = false;
-
-    setTimeout(() => {
-      this.subscription = this.user.getProfile().subscribe((user: any)=> {
-        this.identification = user.identification;
-      });
-    }, 2000);
-
-
+    this.subscription = this.user.getProfile().subscribe((user: any) => {
+      this.identification = user.identification;
+    });
   }
 
   private formShareLink() {
-    this.formLink = this.fb.group(
-      {
-        link: [this.url]
-      }
-    )
+    this.formLink = this.fb.group({
+      link: [this.url]
+    });
   }
 
-
-  public searchProductPaginate(
-    term: string,
-    from = 1,
-    to = this.pageTo
-  ) {
+  public searchProductPaginate(term: string, from = 1, to = this.pageTo) {
     this.loading.show();
-    if(term !== this.paginate){
+    if (term !== this.paginate) {
       this.paginate = term;
       this.pageIndex = 0;
     }
     const params = { term, from, to };
-    this.subscription = this.sp
-      .getProductsPagination(params)
-      .subscribe((resp: any) => {
-        const parsed =  JSON.parse(resp.json);
+    this.subscription = this.sp.getProductsPagination(params).subscribe(
+      (resp: any) => {
+        const parsed = JSON.parse(resp.json);
         this.totalItems = resp.total;
         this.loading.hide();
         if (parsed.length > 0) {
@@ -102,14 +89,14 @@ export class HomeComponent implements OnInit {
         this.showNotFound = true;
         this.showResults = false;
       }
-      );
+    );
   }
 
   public pagination(paginate: any) {
     this.pageIndex = paginate.pageIndex;
     paginate.length = this.totalItems;
-    const from = (paginate.pageSize * paginate.pageIndex + 1);
-    const to = (paginate.pageSize * (paginate.pageIndex + 1));
+    const from = paginate.pageSize * paginate.pageIndex + 1;
+    const to = paginate.pageSize * (paginate.pageIndex + 1);
     this.searchProductPaginate(this.paginate, from, to);
   }
 
@@ -128,8 +115,8 @@ export class HomeComponent implements OnInit {
     const productUrl = product.linkText;
     this.url = `https://www.exito.com/${productUrl}/p?utm_source=clickam&utm_medium=referral&utm_campaign=${this.identification}`;
     this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
-        this.urlshorten = resp;
-    })
+      this.urlshorten = resp;
+    });
     this.formShareLink();
     const title = product.productName;
     const id = product.productId;
@@ -143,20 +130,19 @@ export class HomeComponent implements OnInit {
 
   private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      duration: 2000,
+      duration: 2000
     });
   }
 
   /* To copy Text from Textbox */
-  copyInputMessage(inputElement){
+  copyInputMessage(inputElement) {
     inputElement.select();
-    document.execCommand('copy');
+    document.execCommand("copy");
     inputElement.setSelectionRange(0, 0);
-    this.openSnackBar('Se ha copiado el link al portapapeles', 'Cerrar')
+    this.openSnackBar("Se ha copiado el link al portapapeles", "Cerrar");
   }
 
   public logout() {
     this.auth.logout();
   }
-
 }

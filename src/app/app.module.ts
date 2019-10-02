@@ -18,6 +18,7 @@ import { environment } from '../environments/environment';
 import { RegisterModule } from './modules/register/register.module';
 import { RecoverpasswordModule } from './modules/recoverpassword/recoverpassword.module';
 import { ForgotpasswordModule } from './modules/forgotpassword/forgotpassword.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 // interceptors
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -41,6 +42,7 @@ export function createTranslateLoader(http: HttpClient) {
     RecoverpasswordModule,
     ForgotpasswordModule,
     AppMaterialModule,
+    FlexLayoutModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
