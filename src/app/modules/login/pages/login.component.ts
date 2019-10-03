@@ -78,6 +78,8 @@ export class LoginComponent implements OnInit {
 
     this.utils.change.subscribe(isOpen => {
       this.isOpen = isOpen;
+      this.showRegisterForm = false;
+      this.showLoginForm = true;
     });
 
   }

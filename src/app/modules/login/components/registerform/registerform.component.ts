@@ -7,6 +7,7 @@ import { ResponseService } from 'src/app/interfaces/response';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: "app-registerform",
@@ -18,7 +19,8 @@ export class RegisterformComponent implements OnInit {
     private fb: FormBuilder,
     private registerUser: RegisterUserService,
     private router: Router,
-    private loading: LoaderService
+    private loading: LoaderService,
+    private utils: UtilsService
   ) {}
 
   private subscription: Subscription = new Subscription();
@@ -146,7 +148,7 @@ export class RegisterformComponent implements OnInit {
             confirmButtonText: "Aceptar",
             confirmButtonClass: 'accept-register-alert-success'
           }).then(()=> {
-            this.showLogin();
+            this.utils.hideloginForm();
           });
         } else {
           Swal.fire({
