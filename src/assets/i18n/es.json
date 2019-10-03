@@ -4,7 +4,7 @@
         "EMAIL": "Correo",
         "PASSWORD": "Contraseña",
         "CONFIRM_PASSWORD": "Confirmar Contraseña",
-        "NAME": "Nombre",
+        "NAME": "Nombres",
         "LASTNAME": "Apellidos",
         "CELLPHONE": "Celular",
         "DOCUMENT_NUMBER": "Número de documento",
@@ -39,11 +39,12 @@
         "TITLE_SECTION": "Regístrate, recomienda y gana",
         "TITLE_TERMS_AND_CONDITIONS": "TÉRMINOS Y CONDICIONES DE  LA LEY HABEAS DATA",
         "PASSWORD_NOT_MATCH":"Las contraseñas no son iguales",
-        "ID_TYPE":"Seleccionar documento"
+        "ID_TYPE":"Seleccionar documento",
+        "HAVE_ACCOUNT": "Si ya tienes una cuenta puedes"
     },
     "FORGOTPASSWORD":{
-        "FORGOT_PASSWORD": "Recuperación de contraseña",
-        "ENTER_EMAIL": "Por favor, introduzca su correo electrónico"
+        "FORGOT_PASSWORD": "Recuperar contraseña",
+        "ENTER_EMAIL": "Ingresa tu correo electrónico registrado para recuperar tu contraseña"
     },
     "RECOVERPASSWORD":{
         "RECOVER_PASSWORD": "Recuperar contraseña",

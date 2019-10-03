@@ -23,6 +23,21 @@ import { trigger, state, style, transition, animate, group } from '@angular/anim
             ])
 
         ])
+    ]),
+    trigger('simpleFadeAnimation', [
+
+      // the "in" style determines the "resting" state of the element when it is visible.
+      state('in', style({opacity: 1})),
+
+      // fade in when created. this could also be written as transition('void => *')
+      transition(':enter', [
+        style({opacity: 0}),
+        animate(600 )
+      ]),
+
+      // fade out when destroyed. this could also be written as transition('void => *')
+      transition(':leave',
+        animate(600, style({opacity: 0})))
     ])
 ]
 })
@@ -52,12 +67,14 @@ export class LoginComponent implements OnInit {
   private subscription: Subscription = new Subscription();
   showLoginForm: boolean;
   showRegisterForm: boolean;
+  showForgotForm: boolean;
   email: string;
   
 
   ngOnInit() {
     this.showLoginForm = true;
     this.showRegisterForm = false;
+    this.showForgotForm = false;
 
     this.utils.change.subscribe(isOpen => {
       this.isOpen = isOpen;
@@ -67,6 +84,9 @@ export class LoginComponent implements OnInit {
 
   public hideLogin() {
     this.isOpen = !this.isOpen;
+    this.showLoginForm = true;
+    this.showRegisterForm = false;
+    this.showForgotForm = false;
   }
 
   public activateUser() {
@@ -108,6 +128,24 @@ export class LoginComponent implements OnInit {
         });
       }
     );
+  }
+
+  public showRegister() {
+    this.showRegisterForm = true;
+    this.showLoginForm = false;
+    this.showForgotForm = false;
+  }
+
+  public showLogin() {
+    this.showRegisterForm = false;
+    this.showForgotForm = false;
+    this.showLoginForm = true;
+  }
+
+  public showForgot() {
+    this.showForgotForm = true;
+    this.showRegisterForm = false;
+    this.showLoginForm = false;
   }
 
   ngOnDestroy() {

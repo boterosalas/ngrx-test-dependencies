@@ -9,6 +9,7 @@
       (input)="removewhiteSpaceEmail()"
       required
     />
+    <span matPrefix><mat-icon color="gray">person</mat-icon></span>
     <mat-error id="introduceEmail" *ngIf="loginForm.controls.Username.invalid && loginForm.controls.Username.errors.required">{{
       "LOGIN.INTRODUCE_EMAIL" | translate
     }}</mat-error>
@@ -27,6 +28,7 @@
       (input)="removewhiteSpace()"
       required
     />
+    <span matPrefix><mat-icon color="gray">lock</mat-icon></span>
     <mat-error id="introducePassword" *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Password.errors.required">{{
       "LOGIN.INTRODUCE_PASSWORD" | translate
     }}</mat-error>
@@ -50,8 +52,6 @@
   >
     {{ "LOGIN.LOGIN" | translate }}
   </button>
-  
-    <p  id="forgotPass" class="cursor-pointer text-decoration" (click)="forgotpass()">{{ "LOGIN.FORGOT_PASSWORD" | translate}}</p>
   
 </div>
  

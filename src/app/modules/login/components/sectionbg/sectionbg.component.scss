@@ -4,7 +4,7 @@
     background-image: url('/assets/img/bg-home-banner@2x.png');
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    min-height: 81vh;
     p,h2{
         color: $white;
     }
