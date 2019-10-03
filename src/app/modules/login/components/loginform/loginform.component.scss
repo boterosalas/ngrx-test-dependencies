@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'general';
 
 .login-container {
   display: flex;
@@ -16,12 +17,14 @@
 }
 
 .text-decoration{
-  &:hover{
     text-decoration: underline;
-  }
 }
 
 .mat-orange{
   background: $primary-color;
   color: $white;
+}
+
+.mat-gray{
+  color: #86888a;
 }

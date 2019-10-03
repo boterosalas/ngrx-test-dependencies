@@ -15,9 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './modules/shared/app-material/app-material.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { RegisterModule } from './modules/register/register.module';
 import { RecoverpasswordModule } from './modules/recoverpassword/recoverpassword.module';
-import { ForgotpasswordModule } from './modules/forgotpassword/forgotpassword.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 // interceptors
@@ -37,10 +35,8 @@ export function createTranslateLoader(http: HttpClient) {
     AppRoutingModule,
     HttpClientModule,
     LoginModule,
-    RegisterModule,
     SharedModule,
     RecoverpasswordModule,
-    ForgotpasswordModule,
     AppMaterialModule,
     FlexLayoutModule,
     TranslateModule.forRoot({

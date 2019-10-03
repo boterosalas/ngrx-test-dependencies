@@ -1,5 +1,5 @@
 export interface ResponseService {
-    objectResponse: Object,
+    objectResponse: any,
     state: string,
     userMessage: string
 }

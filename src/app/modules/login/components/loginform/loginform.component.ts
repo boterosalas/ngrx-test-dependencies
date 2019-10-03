@@ -68,11 +68,10 @@ export class LoginformComponent implements OnInit {
 
    this.subscription = this.authService.login(loginData).subscribe(
       (resp: ResponseService) => {
+        console.log(resp);
         this.loading.hide();
         if (resp.state === "Success") {
-          const responseToken = resp.objectResponse;
-          const token = responseToken.toString();
-          localStorage.setItem("ACCESS_TOKEN", token);
+          localStorage.setItem("ACCESS_TOKEN", resp.objectResponse.token);
           this.router.navigate(['/inicio']);
         } else {
           Swal.fire({
