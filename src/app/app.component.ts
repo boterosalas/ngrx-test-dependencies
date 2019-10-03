@@ -22,6 +22,7 @@ export class AppComponent {
         this.internal = false
       } else {
         this.isHome = false;
+        this.internal = true;
       }
     });
   }
