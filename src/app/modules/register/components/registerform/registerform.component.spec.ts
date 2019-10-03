@@ -9,6 +9,7 @@ import { RegisterUserService } from "src/app/services/register-user.service";
 import { of, throwError } from "rxjs";
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Router } from '@angular/router';
 
 describe("RegisterformComponent", () => {
   let component: RegisterformComponent;
@@ -50,6 +51,10 @@ describe("RegisterformComponent", () => {
     }
   }
 
+  let mockRouter = {
+    navigate: jasmine.createSpy('navigate')
+  }
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [RegisterformComponent],
@@ -64,7 +69,8 @@ describe("RegisterformComponent", () => {
         TranslateModule.forRoot({})
       ],
       providers: [
-        { provide: RegisterUserService, useValue: mockRegisterService }
+        { provide: RegisterUserService, useValue: mockRegisterService },
+        { provide: Router, useValue: mockRouter},
       ]
     }).compileComponents();
 
@@ -105,6 +111,7 @@ describe("RegisterformComponent", () => {
 
   it('go to login', () => {
     component.showLogin();
+    expect(mockRouter.navigate).toHaveBeenCalledWith(['/']);
   });
   
 

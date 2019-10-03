@@ -69,10 +69,6 @@ describe("LoginComponent", () => {
     expect(component).toBeTruthy();
   });
 
-  it("show register", () => {
-    component.showRegister();
-  });
-
   describe('Error activation', () => {
 
     beforeEach(() => {
