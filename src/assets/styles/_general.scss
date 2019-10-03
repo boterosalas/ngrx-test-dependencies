@@ -1,4 +1,4 @@
-@import 'buttons';
+@import "buttons";
 
 html,
 body {
@@ -11,9 +11,7 @@ body {
   font-size: 0.9rem;
 }
 
-
-
-.maincontent{
+.maincontent {
   overflow-x: hidden;
 }
 
@@ -64,7 +62,7 @@ body {
     color: $primary-color;
   }
 
-  .mat-orange{
+  .mat-orange {
     background: $primary-color;
     color: $white;
   }
@@ -81,7 +79,6 @@ body {
       margin-top: 0px;
     }
   }
-
 }
 
 h1,
@@ -98,24 +95,24 @@ h6 {
   text-align: right;
 }
 
-p{
+p {
   color: $color-p;
 }
 
-.text{
-  &-left{
+.text {
+  &-left {
     text-align: left;
   }
-  &-right{
+  &-right {
     text-align: right;
   }
 }
 
-h2{
+h2 {
   font-size: $h2-font-size;
 }
 
-button{
+button {
   border-radius: 10px !important;
   max-width: 162px;
   width: 155px;
@@ -126,20 +123,25 @@ button{
   color: $primary-color !important;
 }
 
-.cursor-pointer{
+.cursor-pointer {
   cursor: pointer;
 }
 
 ::ng-deep .mat-focused .mat-form-field-label {
   /*change color of label*/
-  color:$primary-color !important;
- }
-
-::ng-deep.mat-form-field-ripple {
- /*change color of underline when focused*/
- background-color:$primary-color !important;;
+  color: $primary-color !important;
 }
 
-::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate, .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate {
-  background-color: $primary-color !important;    
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: $primary-color !important;
+}
+
+.mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+.mat-accent .mat-pseudo-checkbox-checked,
+.mat-accent .mat-pseudo-checkbox-indeterminate,
+.mat-pseudo-checkbox-checked,
+.mat-pseudo-checkbox-indeterminate {
+  background-color: $primary-color !important;
 }
