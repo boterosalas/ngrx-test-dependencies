@@ -5,8 +5,7 @@
 export const environment = {
   production: false,
   URL_SECURITY: 'https://clickamapisecurity.azurewebsites.net/',
-  URL_PROFILE: 'https://clickamprofile.azurewebsites.net/',
-  URL_VETEX: 'https://clickamprofile.azurewebsites.net/api/userprofile/'
+  URL_PROFILE: 'http://clickamapiprofile.azurewebsites.net/',
 };
 
 /*

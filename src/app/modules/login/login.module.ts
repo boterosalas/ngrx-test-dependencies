@@ -12,6 +12,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { WorksComponent } from './components/works/works.component';
 import { SectionbgComponent } from './components/sectionbg/sectionbg.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { RegisterformComponent } from './components/registerform/registerform.component';
+import { ForgotpasswordformComponent } from './components/forgotpasswordform/forgotpasswordform.component';
 
 const routes: Routes = [
   {
@@ -25,7 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [LoginComponent, LoginformComponent, SectionComponent, WorksComponent, SectionbgComponent],
+  declarations: [LoginComponent, LoginformComponent, SectionComponent, WorksComponent, SectionbgComponent, RegisterformComponent, ForgotpasswordformComponent],
   imports: [
     FormsModule,
     ReactiveFormsModule,
