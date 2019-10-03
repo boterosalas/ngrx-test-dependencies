@@ -33,7 +33,13 @@ describe('ProductComponent', () => {
   });
 
   it('emit info product', () => {
-    component.product();
+    spyOn(component.infoProduct, 'emit');
+    const nativeElement = fixture.nativeElement;
+    const button = nativeElement.querySelector('button');
+    button.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+    component.product();    
+    expect(component.infoProduct.emit).toHaveBeenCalled();
   });
   
 

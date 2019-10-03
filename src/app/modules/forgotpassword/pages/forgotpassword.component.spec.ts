@@ -7,10 +7,15 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Router } from '@angular/router';
 
 describe('ForgotpasswordComponent', () => {
   let component: ForgotpasswordComponent;
   let fixture: ComponentFixture<ForgotpasswordComponent>;
+
+  let mockRouter = {
+    navigate: jasmine.createSpy('navigate')
+  }
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -24,6 +29,9 @@ describe('ForgotpasswordComponent', () => {
         RouterTestingModule.withRoutes([]),
         BrowserAnimationsModule,
         TranslateModule.forRoot({})
+       ],
+       providers: [ 
+        { provide: Router, useValue: mockRouter},
        ],
        schemas: [
          NO_ERRORS_SCHEMA
@@ -44,6 +52,7 @@ describe('ForgotpasswordComponent', () => {
 
   it('go to login', () => {
     component.backLogin();
+    expect(mockRouter.navigate).toHaveBeenCalledWith(['']);
   });
   
 });
