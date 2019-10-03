@@ -73,7 +73,6 @@ export class LoginformComponent implements OnInit {
           const responseToken = resp.objectResponse;
           const token = responseToken.toString();
           localStorage.setItem("ACCESS_TOKEN", token);
-          console.log(localStorage);
           this.router.navigate(['/inicio']);
         } else {
           Swal.fire({

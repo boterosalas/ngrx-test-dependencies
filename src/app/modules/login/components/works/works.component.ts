@@ -10,7 +10,7 @@ export class WorksComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.slides);
+    
   }
 
   slides = [

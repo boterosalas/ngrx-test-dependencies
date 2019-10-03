@@ -10,6 +10,7 @@ import { DialogComponent } from "./components/dialog/dialog.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { WhatsappComponent } from "./components/whatsapp/whatsapp.component";
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { WhatsappComponent } from "./components/whatsapp/whatsapp.component";
     LoaderComponent,
     DialogComponent,
     FooterComponent,
-    WhatsappComponent
+    WhatsappComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,8 @@ import { WhatsappComponent } from "./components/whatsapp/whatsapp.component";
     NotFoundComponent,
     LoaderComponent,
     FooterComponent,
-    WhatsappComponent
+    WhatsappComponent,
+    HeaderComponent
   ]
 })
 export class SharedModule {}
