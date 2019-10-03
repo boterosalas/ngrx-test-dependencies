@@ -1,7 +1,19 @@
-<header>
+<header *ngIf="isHome">
     <div fxLayout="row" fxLayoutAlign="space-between center" class="position-absolute">
         <div class="logo pl-4" id="logo-header">
             <img src="assets/img/logo-header.svg" alt="clickam">
+        </div>
+        <div class="menu pr-4" fxLayout="row" fxLayoutAlign="space-around center">
+            <span class="pr-2 cursor-pointer" (click)="showLoginForm()" id="header-login">Iniciar sesión</span>
+            <mat-icon>menu</mat-icon>
+        </div>
+    </div>
+</header>
+
+<header *ngIf="internal">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="nav">
+        <div class="logo pl-4" id="logo-header">
+            <img src="assets/img/logo-header-2.svg" alt="clickam">
         </div>
         <div class="menu pr-4" fxLayout="row" fxLayoutAlign="space-around center">
             <span class="pr-2 cursor-pointer" (click)="showLoginForm()" id="header-login">Iniciar sesión</span>
