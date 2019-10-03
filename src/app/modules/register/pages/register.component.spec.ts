@@ -5,10 +5,15 @@ import { AppMaterialModule } from '../../shared/app-material/app-material.module
 import { TranslateModule } from '@ngx-translate/core';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
+
+  let mockRouter = {
+    navigate: jasmine.createSpy('navigate')
+  }
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -19,6 +24,9 @@ describe('RegisterComponent', () => {
          AppMaterialModule,
          RouterTestingModule.withRoutes([]),
          TranslateModule.forRoot({})
+       ],
+       providers: [
+        { provide: Router, useValue: mockRouter}
        ],
        schemas:[
          NO_ERRORS_SCHEMA
@@ -39,6 +47,7 @@ describe('RegisterComponent', () => {
 
   it('go to login', () => {
     component.showLogin();
+    expect(mockRouter.navigate).toHaveBeenCalledWith(['/']);
   });
   
 

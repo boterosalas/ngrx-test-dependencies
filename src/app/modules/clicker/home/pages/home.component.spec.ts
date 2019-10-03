@@ -179,14 +179,15 @@ describe("HomeComponent", () => {
 
   it("should create", () => {
     expect(component).toBeTruthy();
-    fixture.whenStable().then(()=>{
+    fixture.whenStable().then(() => {
       tick();
       expect(mockProductUserService.getProfile).toHaveBeenCalled();
-    })
+    });
   });
 
   it("search products", () => {
     component.searchProductPaginate("cocina");
+    fixture.detectChanges();
     expect(mockProductSearchService.getProductsPagination).toHaveBeenCalled();
   });
 
@@ -202,25 +203,24 @@ describe("HomeComponent", () => {
   });
 
   describe("No results on search", () => {
-    beforeEach(function() {
-      mockProductSearchService.getProductsPagination.and.returnValue(
-        of(dataEmpty)
-      );
+    
+    beforeEach(() => {
+
+      fixture = TestBed.createComponent(HomeComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+      mockProductSearchService.getProductsPagination.and.returnValue(of(dataEmpty));
+
     });
 
     it("search products not found", () => {
       component.searchProductPaginate("playstation");
       expect(mockProductSearchService.getProductsPagination).toHaveBeenCalled();
     });
-  });
 
-  it("product data", () => {
-    component.dataProduct(dataProduct);
-    expect(mockShortenerService.getShortUrl).toHaveBeenCalled();
+    it("product data", () => {
+      component.dataProduct(dataProduct);
+      expect(mockShortenerService.getShortUrl).toHaveBeenCalled();
+    });
   });
-
-  // it('copy input', () => {
-  //   const input = `<input _ngcontent-gfe-c2="" class="mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored" formcontrolname="link" id="url" matinput="" placeholder="url" readonly="true" ng-reflect-id="url" ng-reflect-placeholder="url" ng-reflect-value="https://www.exito.com/estufa-s" ng-reflect-readonly="" aria-invalid="false" aria-required="false">`;
-  //   component.copyInputMessage(input);
-  // });
 });

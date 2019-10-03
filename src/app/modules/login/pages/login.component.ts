@@ -65,10 +65,6 @@ export class LoginComponent implements OnInit {
 
   }
 
-  public showRegister() {
-    this.router.navigate(["/registro"]);
-  }
-
   public hideLogin() {
     this.isOpen = !this.isOpen;
   }
