@@ -9,8 +9,8 @@ import { trigger, state, style, transition, animate, group } from '@angular/anim
 
 @Component({
   selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"],
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.scss"],
   animations: [
     trigger('openClose', [
         state('in', style({height: '*', opacity: 0})),
@@ -43,7 +43,7 @@ import { trigger, state, style, transition, animate, group } from '@angular/anim
 })
 
 
-export class LoginComponent implements OnInit {
+export class HomeComponent implements OnInit {
 
   // @HostBinding('class.slide-in-top')
   isOpen = false;
