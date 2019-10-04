@@ -52,8 +52,8 @@ export class AppComponent implements OnInit {
   showLoginForm: boolean;
   showRegisterForm: boolean;
   showForgotForm: boolean;
-  // @HostBinding('class.slide-in-top')
   isOpen = false;
+  isOpenMenu = false;
   private subscription: Subscription = new Subscription();
 
   constructor(
@@ -87,6 +87,11 @@ export class AppComponent implements OnInit {
       this.showRegisterForm = false;
       this.showLoginForm = true;
     });
+
+    this.utils.changeMenu.subscribe(isOpenMenu => {
+      this.isOpenMenu = isOpenMenu;
+    });
+
   }
 
   public hideLogin() {

@@ -1,15 +1,10 @@
+<div class="fullheight slide-in-top" *ngIf="isOpenMenu" @openClose>
+    <app-menu (close)="hideMenu()" ></app-menu>
+</div>
+
 <div class="fullheight slide-in-top" *ngIf="isOpen" @openClose>
   
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="pt-3">
-    <div class="logo pl-4">
-      <img src="assets/img/logo-header-2.svg" alt="" />
-    </div>
-    <div class="menu pr-4">
-      <mat-icon class="cursor-pointer" (click)="hideLogin()" id="headerClose"
-        >close</mat-icon
-      >
-    </div>
-  </div>
+  <app-top (close)="hideLogin()"></app-top>
 
   <div
     class="row align-content-center justify-content-center"

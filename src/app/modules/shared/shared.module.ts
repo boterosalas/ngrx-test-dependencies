@@ -13,6 +13,7 @@ import { WhatsappComponent } from "./components/whatsapp/whatsapp.component";
 import { HeaderComponent } from './components/header/header.component';
 import { MatListModule, MatRippleModule } from '@angular/material';
 import { SociallinksComponent } from './components/sociallinks/sociallinks.component';
+import { TopComponent } from './components/top/top.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SociallinksComponent } from './components/sociallinks/sociallinks.compo
     FooterComponent,
     WhatsappComponent,
     HeaderComponent,
-    SociallinksComponent
+    SociallinksComponent,
+    TopComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +46,8 @@ import { SociallinksComponent } from './components/sociallinks/sociallinks.compo
     HeaderComponent,
     MatListModule,
     MatRippleModule,
-    SociallinksComponent
+    SociallinksComponent,
+    TopComponent
   ]
 })
 export class SharedModule {}

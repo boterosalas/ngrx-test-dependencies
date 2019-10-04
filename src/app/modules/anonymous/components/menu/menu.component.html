@@ -1,10 +1,20 @@
-<div class="position-relative pb-3">
+<app-top (close)="hideMenu()"></app-top>
+<div fxLayout="column" fxLayoutAlign="flex-end" class="menu">
+  <div class="position-relative pb-3">
     <mat-list>
-      <mat-list-item *ngFor="let item of options"  routerLink="{{item.route}}" class="item" routerLinkActive="active" matRipple> <span> {{item.name}} </span>
-    </mat-list-item>
+      <mat-list-item
+        *ngFor="let item of options"
+        routerLink="{{ item.route }}"
+        class="item"
+        routerLinkActive="active"
+        matRipple
+      >
+        <span> {{ item.name }} </span>
+      </mat-list-item>
     </mat-list>
-</div>
+  </div>
 
-<div class="social-links-menu border-top pt-3">
+  <div class="social-links-menu border-top pt-3">
     <app-sociallinks></app-sociallinks>
+  </div>
 </div>
