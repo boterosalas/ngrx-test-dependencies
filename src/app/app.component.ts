@@ -1,6 +1,12 @@
 import { Component } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
-import { Router, ActivatedRoute } from "@angular/router";
+import {
+  Router,
+  ActivatedRoute,
+  NavigationStart,
+  NavigationEnd,
+  NavigationError
+} from "@angular/router";
 
 @Component({
   selector: "app-root",
@@ -17,13 +23,34 @@ export class AppComponent {
     const path = window.location.pathname;
 
     router.events.subscribe((url: any) => {
-      if (path === "/") {
-        this.isHome = true;
-        this.internal = false
-      } else {
-        this.isHome = false;
-        this.internal = true;
+      if (url instanceof NavigationStart) {
+        if (url.url === "/") {
+          this.isHome = true;
+          this.internal = false;
+        } else {
+          this.isHome = false;
+          this.internal = true;
+        }
       }
+      // if (url instanceof NavigationEnd) {
+      //   if (path === "/") {
+      //     this.isHome = true;
+      //     this.internal = false;
+      //   } else {
+      //     this.isHome = false;
+      //     this.internal = true;
+      //   }
+      // }
     });
+
+    // this.router.events.subscribe((url: any) => {
+    //   if (path === "/") {
+    //     this.isHome = true;
+    //     this.internal = false
+    //   } else {
+    //     this.isHome = false;
+    //     this.internal = true;
+    //   }
+    // });
   }
 }
