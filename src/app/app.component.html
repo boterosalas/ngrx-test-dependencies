@@ -1,7 +1,110 @@
-<app-header [isHome]='isHome'></app-header>
-<app-header [internal]='internal'></app-header>
+<div class="fullheight slide-in-top" *ngIf="isOpen" @openClose>
+  
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="pt-3">
+    <div class="logo pl-4">
+      <img src="assets/img/logo-header-2.svg" alt="" />
+    </div>
+    <div class="menu pr-4">
+      <mat-icon class="cursor-pointer" (click)="hideLogin()" id="headerClose"
+        >close</mat-icon
+      >
+    </div>
+  </div>
+
+  <div
+    class="row align-content-center justify-content-center"
+    *ngIf="showLoginForm"
+    @simpleFadeAnimation
+  >
+    <div class="col-sm-12">
+      <mat-card color="transparent" class="login">
+        <mat-card-header class="justify-content-center">
+          <mat-card-title id="titleLogin"
+            ><h2 class="border-bottom-orange-init">
+              {{ "LOGIN.LOGIN" | translate }}
+            </h2></mat-card-title
+          >
+          <mat-card-subtitle>
+            <p class="text-left">
+              {{ "LOGIN.DESCRIPTION" | translate }}
+              <span class="link" (click)="showRegister()" id="registerHere"
+                >{{ "LOGIN.REGISTER" | translate }}
+              </span>
+            </p>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <app-loginform></app-loginform>
+          <p
+            id="forgotPass"
+            class="cursor-pointer text-decoration text-center"
+            (click)="showForgot()"
+          >
+            {{ "LOGIN.FORGOT_PASSWORD" | translate }}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div
+    class="row align-content-center justify-content-center"
+    *ngIf="showRegisterForm"
+  >
+    <div class="col-sm-12">
+      <mat-card color="transparent" class="login">
+        <mat-card-header class="justify-content-center">
+          <mat-card-title id="titleRegister"
+            ><h2 class="border-bottom-orange-init">
+              {{ "GENERIC.REGISTER" | translate }}
+            </h2></mat-card-title
+          >
+          <mat-card-subtitle>
+            <p class="text-left">
+              {{ "REGISTER.HAVE_ACCOUNT" | translate }}
+              <span class="link" (click)="showLogin()" id="registerForm"
+                >{{ "LOGIN.LOGIN" | translate }}
+              </span>
+            </p>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <app-registerform></app-registerform>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div
+    class="row align-content-center justify-content-center"
+    *ngIf="showForgotForm"
+  >
+    <div class="col-sm-12">
+      <mat-card color="transparent" class="login">
+        <mat-card-header class="justify-content-center">
+          <mat-card-title id="titleForgot"
+            ><h2 class="border-bottom-orange-init">
+              {{ "FORGOTPASSWORD.FORGOT_PASSWORD" | translate }}
+            </h2></mat-card-title
+          >
+          <mat-card-subtitle>
+            <p class="text-left">
+              {{ "FORGOTPASSWORD.ENTER_EMAIL" | translate }}
+            </p>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <app-forgotpasswordform></app-forgotpasswordform>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<app-header [isHome]="isHome"></app-header>
+<app-header [internal]="internal"></app-header>
 <div class="maincontent">
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>
 
 <app-footer></app-footer>

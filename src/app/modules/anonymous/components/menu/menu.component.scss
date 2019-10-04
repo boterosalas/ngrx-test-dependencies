@@ -1,0 +1,31 @@
+@import "variables";
+@import 'general';
+
+.item {
+  font-family: $font-galano-bold;
+  font-size: 2rem;
+  cursor: pointer;
+  &.active {
+      margin-left: 10px;
+    &::before {
+      background: url("/assets/img/arrow-footer.svg") no-repeat;
+      content: "";
+      display: block;
+      width: 25px;
+      height: 25px;
+      position: absolute;
+      top: 12px;
+    }
+    span{
+        margin-left: 0.5rem;
+    }
+  }
+}
+
+.mat-list-item-content{
+    padding: 0 25px !important;
+}
+
+.position-relative{
+    position: relative;
+}

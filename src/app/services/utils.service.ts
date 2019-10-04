@@ -8,8 +8,6 @@ export class UtilsService {
   constructor() { }
 
   isOpen = false;
-  showLogin = true;
-  hideRegister = false;
 
   @Output() change: EventEmitter<boolean> = new EventEmitter();
 

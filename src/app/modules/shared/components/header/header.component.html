@@ -3,9 +3,9 @@
         <div class="logo pl-4" id="logo-header">
             <img src="assets/img/logo-header.svg" alt="clickam">
         </div>
-        <div class="menu pr-4" fxLayout="row" fxLayoutAlign="space-around center">
-            <span class="pr-2 cursor-pointer" (click)="showLoginForm()" id="header-login">Iniciar sesión</span>
-            <mat-icon>menu</mat-icon>
+        <div class="menu" fxLayout="row" fxLayoutAlign="space-around center">
+            <a mat-button (click)="showLogin()" id="header-login">Iniciar sesión</a>
+            <a mat-button><mat-icon>menu</mat-icon></a>
         </div>
     </div>
 </header>
@@ -15,9 +15,9 @@
         <div class="logo pl-4" id="logo-header">
             <img src="assets/img/logo-header-2.svg" alt="clickam">
         </div>
-        <div class="menu pr-4" fxLayout="row" fxLayoutAlign="space-around center">
-            <span class="pr-2 cursor-pointer" (click)="showLoginForm()" id="header-login">Iniciar sesión</span>
-            <mat-icon>menu</mat-icon>
+        <div class="menu" fxLayout="row" fxLayoutAlign="space-around center">
+                <a mat-button (click)="showLogin()" id="header-login">Iniciar sesión</a>
+                <a mat-button><mat-icon>menu</mat-icon></a>
         </div>
     </div>
 </header>

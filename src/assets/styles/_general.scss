@@ -150,3 +150,30 @@ button {
   background: $primary-color;
   color: $white;
 }
+
+.social-links{
+  i{
+      font-size: 1.1rem;
+      color: $footer-social-links;
+      padding: 0 1.3rem;
+  }
+  
+.orange{
+  color: $primary-color;
+  font-size: 1.5rem;
+}
+}
+
+
+.social-links-menu{
+  i{
+      font-size: 1.1rem;
+      color: $color-p;
+      padding: 0 1.3rem;
+  }
+
+}
+
+.border-top{
+  border-top: 1px solid $color-p;
+}
