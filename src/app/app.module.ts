@@ -10,12 +10,11 @@ import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
 // modules
-import { LoginModule } from './modules/login/login.module';
+import { AnonymousModule } from './modules/anonymous/anonymous.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './modules/shared/app-material/app-material.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { RecoverpasswordModule } from './modules/recoverpassword/recoverpassword.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 // interceptors
@@ -34,9 +33,8 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    LoginModule,
+    AnonymousModule,
     SharedModule,
-    RecoverpasswordModule,
     AppMaterialModule,
     FlexLayoutModule,
     TranslateModule.forRoot({

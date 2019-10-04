@@ -5,6 +5,8 @@ import {TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate
 import {AppComponent} from './app.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 
 // const TRANSLATIONS_ES = require('../assets/i18n/es.json');
@@ -21,7 +23,8 @@ describe('AppComponent', () => {
       ],
       imports: [
         HttpClientTestingModule,
-        TranslateModule.forRoot({})
+        TranslateModule.forRoot({}),
+        RouterTestingModule.withRoutes([])
       ],
       providers: [
         TranslateService

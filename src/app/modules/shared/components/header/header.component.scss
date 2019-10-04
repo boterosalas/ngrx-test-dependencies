@@ -1,3 +1,5 @@
+@import 'variables';
+
 .position-absolute{
     position: absolute;
     width: 100%;
@@ -6,4 +8,11 @@
 
 header{
     color: #ffffff;
+
+    .nav{
+        color:$color-p !important;
+        border-bottom: 1px solid $primary-color;
+        min-height: 50px;
+    }
+
 }
