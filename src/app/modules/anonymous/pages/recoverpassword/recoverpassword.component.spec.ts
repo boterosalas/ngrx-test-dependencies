@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RecoverpasswordComponent } from './recoverpassword.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { AppMaterialModule } from '../../shared/app-material/app-material.module';
+import { AppMaterialModule } from '../../../shared/app-material/app-material.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

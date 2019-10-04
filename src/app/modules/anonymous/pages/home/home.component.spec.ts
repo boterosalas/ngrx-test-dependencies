@@ -1,4 +1,4 @@
-import { LoginComponent } from "./login.component";
+import { HomeComponent } from "./home.component";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import {
   TranslateModule
@@ -13,9 +13,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from 'src/app/services/user.service';
 import { of, throwError } from 'rxjs';
 
-describe("LoginComponent", () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+describe("HomeComponent", () => {
+  let component: HomeComponent;
+  let fixture: ComponentFixture<HomeComponent>;
 
   const mockUserService= jasmine.createSpyObj("UserService", ["activateProfile"]);
 
@@ -40,7 +40,7 @@ describe("LoginComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [LoginComponent],
+      declarations: [HomeComponent],
       imports: [
         TranslateModule,
         AppMaterialModule,
@@ -62,7 +62,7 @@ describe("LoginComponent", () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
+    fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -118,7 +118,7 @@ describe("LoginComponent", () => {
   describe('Error activation', () => {
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(LoginComponent);
+      fixture = TestBed.createComponent(HomeComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
       mockUserService.activateProfile.and.returnValue(of(dataError));
@@ -133,7 +133,7 @@ describe("LoginComponent", () => {
   describe('invalid request', () => {
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(LoginComponent);
+      fixture = TestBed.createComponent(HomeComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
       mockUserService.activateProfile.and.returnValue(throwError(invalidRequest));

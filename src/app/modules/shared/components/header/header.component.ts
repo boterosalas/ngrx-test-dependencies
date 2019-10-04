@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, HostListener, Input } from '@angular/core';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -7,6 +7,9 @@ import { UtilsService } from 'src/app/services/utils.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
+  @Input() isHome: boolean;
+  @Input() internal: boolean;
 
   constructor(
     private utils: UtilsService
