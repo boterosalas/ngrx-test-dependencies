@@ -8,14 +8,21 @@ export class UtilsService {
   constructor() { }
 
   isOpen = false;
-  isOpenMenu= false;
+  isOpenMenu=  false;
+  isRegisterOpen = false;
 
   @Output() change: EventEmitter<boolean> = new EventEmitter();
   @Output() changeMenu: EventEmitter<boolean> = new EventEmitter();
+  @Output() changeRegister: EventEmitter<boolean> = new EventEmitter();
 
   showloginForm() {
     this.isOpen = true;
     this.change.emit(this.isOpen);
+  }
+
+  showRegisterForm() {
+    this.isOpen = true;
+    this.changeRegister.emit(this.isOpen);
   }
 
   hideloginForm() {

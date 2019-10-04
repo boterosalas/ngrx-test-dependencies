@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
 import { RemoveSpaceService } from 'src/app/services/remove-space.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: "app-forgotpasswordform",
@@ -19,7 +20,8 @@ export class ForgotpasswordformComponent implements OnInit {
     private fb: FormBuilder,
     private forgot: ForgotpasswordService,
     private loading: LoaderService,
-    private removeSpace: RemoveSpaceService
+    private removeSpace: RemoveSpaceService,
+    private utils: UtilsService
   ) {}
   
   private subscription: Subscription = new Subscription();
@@ -72,7 +74,7 @@ export class ForgotpasswordformComponent implements OnInit {
         if (resp.state === "Success") {
           this.swalOptSuccess = {...this.swalOptSuccess, text: resp.userMessage};
           Swal.fire(this.swalOptSuccess).then(()=> {
-            this.router.navigate(['/']);
+            this.utils.hideloginForm();
           });
         } else {
           Swal.fire(

@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding } from "@angular/core";
+import { Component, OnInit, HostBinding, HostListener } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import Swal from "sweetalert2";
 import { Subscription } from "rxjs";
@@ -45,12 +45,16 @@ import { trigger, state, style, transition, animate, group } from '@angular/anim
 
 export class HomeComponent implements OnInit {
 
- 
+  showLoginForm: boolean;
+  showRegisterForm: boolean;
+  showForgotForm: boolean;
+  isOpen = false;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private user: UserService,
+    private utils: UtilsService
   ) {
     this.route.queryParams.subscribe(params => {
       if (params.email) {
@@ -67,7 +71,12 @@ export class HomeComponent implements OnInit {
   
 
   ngOnInit() {
-
+    // this.utils.change.subscribe(isOpen => {
+    //   this.isOpen = isOpen;
+    //   this.showRegisterForm = false;
+    //   this.showLoginForm = true;
+    //   this.showForgotForm = false;
+    // });
   }
 
 
@@ -115,6 +124,10 @@ export class HomeComponent implements OnInit {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
+  
+  @HostListener('over')
+  openRegister() {
+    this.utils.showRegisterForm();
+  }
 
 }
