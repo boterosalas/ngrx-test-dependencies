@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MenuComponent } from './menu.component';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('MenuComponent', () => {
   let component: MenuComponent;
@@ -8,7 +12,17 @@ describe('MenuComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MenuComponent ]
+      declarations: [ 
+        MenuComponent
+       ],
+       imports: [
+         AppMaterialModule,
+         HttpClientTestingModule,
+         RouterTestingModule.withRoutes([])
+       ],
+       schemas: [
+         NO_ERRORS_SCHEMA
+       ]
     })
     .compileComponents();
   }));
