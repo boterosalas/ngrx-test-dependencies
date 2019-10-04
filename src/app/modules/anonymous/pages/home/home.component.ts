@@ -45,14 +45,12 @@ import { trigger, state, style, transition, animate, group } from '@angular/anim
 
 export class HomeComponent implements OnInit {
 
-  // @HostBinding('class.slide-in-top')
-  isOpen = false;
+ 
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private user: UserService,
-    private utils: UtilsService
   ) {
     this.route.queryParams.subscribe(params => {
       if (params.email) {
@@ -65,31 +63,13 @@ export class HomeComponent implements OnInit {
   }
 
   private subscription: Subscription = new Subscription();
-  showLoginForm: boolean;
-  showRegisterForm: boolean;
-  showForgotForm: boolean;
   email: string;
   
 
   ngOnInit() {
-    this.showLoginForm = true;
-    this.showRegisterForm = false;
-    this.showForgotForm = false;
-
-    this.utils.change.subscribe(isOpen => {
-      this.isOpen = isOpen;
-      this.showRegisterForm = false;
-      this.showLoginForm = true;
-    });
 
   }
 
-  public hideLogin() {
-    this.isOpen = !this.isOpen;
-    this.showLoginForm = true;
-    this.showRegisterForm = false;
-    this.showForgotForm = false;
-  }
 
   public activateUser() {
 
@@ -130,24 +110,6 @@ export class HomeComponent implements OnInit {
         });
       }
     );
-  }
-
-  public showRegister() {
-    this.showRegisterForm = true;
-    this.showLoginForm = false;
-    this.showForgotForm = false;
-  }
-
-  public showLogin() {
-    this.showRegisterForm = false;
-    this.showForgotForm = false;
-    this.showLoginForm = true;
-  }
-
-  public showForgot() {
-    this.showForgotForm = true;
-    this.showRegisterForm = false;
-    this.showLoginForm = false;
   }
 
   ngOnDestroy() {

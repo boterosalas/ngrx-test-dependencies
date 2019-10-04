@@ -18,9 +18,19 @@ export class HeaderComponent implements OnInit {
   ngOnInit() { 
   }
 
-  @HostListener('click')
-  showLoginForm() {
+  @HostListener('over')
+  showLogin() {
     this.utils.showloginForm();
   }
+
+  @HostListener('over')
+  showMenu() {
+    this.utils.showMenu();
+  }
+
+  // @HostListener('over')
+  // hideMenu() {
+  //   this.utils.hideMenu();
+  // }
 
 }

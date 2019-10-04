@@ -11,6 +11,9 @@ import { FooterComponent } from "./components/footer/footer.component";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { WhatsappComponent } from "./components/whatsapp/whatsapp.component";
 import { HeaderComponent } from './components/header/header.component';
+import { MatListModule, MatRippleModule } from '@angular/material';
+import { SociallinksComponent } from './components/sociallinks/sociallinks.component';
+import { TopComponent } from './components/top/top.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,9 @@ import { HeaderComponent } from './components/header/header.component';
     DialogComponent,
     FooterComponent,
     WhatsappComponent,
-    HeaderComponent
+    HeaderComponent,
+    SociallinksComponent,
+    TopComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +33,9 @@ import { HeaderComponent } from './components/header/header.component';
     TranslateModule,
     ReactiveFormsModule,
     FormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatListModule,
+    MatRippleModule
   ],
   exports: [
     SearchComponent,
@@ -36,7 +43,11 @@ import { HeaderComponent } from './components/header/header.component';
     LoaderComponent,
     FooterComponent,
     WhatsappComponent,
-    HeaderComponent
+    HeaderComponent,
+    MatListModule,
+    MatRippleModule,
+    SociallinksComponent,
+    TopComponent
   ]
 })
 export class SharedModule {}

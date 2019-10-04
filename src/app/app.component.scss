@@ -1,3 +1,36 @@
-.test{
-    color: red;
-}
+@import 'animations';
+@import 'variables';
+
+.login{
+    box-shadow: none !important;
+  }
+
+  .fullheight{
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    background: #fff;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+  }
+
+  .mat-transparent{
+    background: transparent;
+  }
+
+  .link{
+    color: $primary-color;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .cursor{
+    &-pointer{
+      cursor: pointer;
+    }
+  }
+  
+  .text-decoration{
+      text-decoration: underline;
+  }
