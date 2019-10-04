@@ -86,10 +86,18 @@ export class AppComponent implements OnInit {
       this.isOpen = isOpen;
       this.showRegisterForm = false;
       this.showLoginForm = true;
+      this.showForgotForm = false;
     });
 
     this.utils.changeMenu.subscribe(isOpenMenu => {
       this.isOpenMenu = isOpenMenu;
+    });
+
+    this.utils.changeRegister.subscribe(isOpenRegister => {
+      this.isOpen= isOpenRegister;
+      this.showRegisterForm = true;
+      this.showLoginForm = false;
+      this.showForgotForm = false;
     });
 
   }
