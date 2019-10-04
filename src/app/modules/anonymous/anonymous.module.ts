@@ -14,8 +14,9 @@ import { SectionbgComponent } from "./components/sectionbg/sectionbg.component";
 import { SlickCarouselModule } from "ngx-slick-carousel";
 import { RegisterformComponent } from "./components/registerform/registerform.component";
 import { ForgotpasswordformComponent } from "./components/forgotpasswordform/forgotpasswordform.component";
-import { RecoverpasswordformComponent } from './components/recoverpasswordform/recoverpasswordform.component';
-import { RecoverpasswordComponent } from './pages/recoverpassword/recoverpassword.component';
+import { RecoverpasswordformComponent } from "./components/recoverpasswordform/recoverpasswordform.component";
+import { RecoverpasswordComponent } from "./pages/recoverpassword/recoverpassword.component";
+import { MenuComponent } from "./components/menu/menu.component";
 
 const routes: Routes = [
   {
@@ -42,7 +43,8 @@ const routes: Routes = [
     RegisterformComponent,
     ForgotpasswordformComponent,
     RecoverpasswordComponent,
-    RecoverpasswordformComponent
+    RecoverpasswordformComponent,
+    MenuComponent
   ],
   imports: [
     FormsModule,
@@ -55,6 +57,13 @@ const routes: Routes = [
     SlickCarouselModule,
     RouterModule.forChild(routes)
   ],
-  exports: [RouterModule]
+  exports: [
+    RouterModule,
+    LoginformComponent,
+    RegisterformComponent,
+    RecoverpasswordformComponent,
+    ForgotpasswordformComponent,
+    MenuComponent
+  ]
 })
 export class AnonymousModule {}
