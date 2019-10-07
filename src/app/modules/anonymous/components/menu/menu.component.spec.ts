@@ -5,6 +5,7 @@ import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-mater
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('MenuComponent', () => {
   let component: MenuComponent;
@@ -18,6 +19,7 @@ describe('MenuComponent', () => {
        imports: [
          AppMaterialModule,
          HttpClientTestingModule,
+         TranslateModule.forRoot({}),
          RouterTestingModule.withRoutes([])
        ],
        schemas: [
