@@ -1,0 +1,89 @@
+<div class="tabs mb-3">
+  <h2 class="border-bottom-orange-init">Busca y crea un link</h2>
+  <p>Elige la tienda y busca el producto que quieres compartir</p>
+
+  <mat-tab-group>
+    <mat-tab label="exito.com">
+      <app-search (search)="searchProductPaginate($event)"></app-search>
+      <div *ngIf="showResults">
+        <div class="row m-0">
+          <mat-paginator
+            id="paginator"
+            [length]="totalItems"
+            [pageSize]="pageSize"
+            [pageIndex]="pageIndex"
+            (page)="pagination($event)"
+          >
+          </mat-paginator>
+          <div
+            fxLayout="column"
+            fxFlex="50"
+            *ngFor="let product of productsList; let i = index"
+          >
+            <app-product
+              id="productTitle{{ i }}"
+              btnid="btnLink{{ i }}"
+              [productName]="product.productName"
+              [price]="product.items[0].sellers[0].commertialOffer.Price"
+              productDescription=""
+              [image]="product.items[0].images[0].imageUrl"
+              [alt]="product.productName"
+              textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+              [plu]="product.items[0].itemId"
+              (infoProduct)="dataProduct(product)"
+              class="mb-3"
+            ></app-product>
+          </div>
+          <mat-paginator
+            id="paginator"
+            [length]="totalItems"
+            [pageSize]="pageSize"
+            [pageIndex]="pageIndex"
+            (page)="pagination($event)"
+          >
+          </mat-paginator>
+        </div>
+      </div>
+
+      <div class="not-found" *ngIf="showNotFound">
+        <app-not-found></app-not-found>
+      </div>
+
+      <ng-template #templateDialog>
+        <form [formGroup]="formLink">
+          <mat-form-field>
+            <input
+              id="url"
+              matInput
+              placeholder="url"
+              formcontrolName="link"
+              [value]="urlshorten"
+              #linkInput
+              readonly
+            />
+          </mat-form-field>
+          <button
+            mat-raised-button
+            id="btnCopy"
+            color="primary"
+            (click)="copyInputMessage(linkInput)"
+          >
+            <mat-icon matSuffix>file_copy</mat-icon>
+          </button>
+        </form>
+
+        <div id="share">
+          <share-buttons
+            [theme]="'circles-dark'"
+            [include]="['facebook', 'twitter', 'whatsapp']"
+            [show]="3"
+            [url]="urlshorten"
+            [autoSetMeta]="false"
+          ></share-buttons>
+        </div>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Seguros"> Content 2 </mat-tab>
+    <mat-tab label="Viajes"> Content 3 </mat-tab>
+  </mat-tab-group>
+</div>

@@ -64,6 +64,9 @@
         "HOW_WORKS_DESCRIPTION": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula",
         "TITLE_RAISE":"Aumenta tus ingresos en tus espacios habituales",
         "DESCRIPTION_RAISE": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum."
-
+    },
+    "HEADER": {
+        "PROFILE": "Mi perfil",
+        "LOGOUT": "Cerrar sesión"
     }
 }

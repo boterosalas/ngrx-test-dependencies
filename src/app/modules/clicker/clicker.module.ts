@@ -9,6 +9,10 @@ import { ProductComponent } from './components/product/product.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { DialogComponent } from '../shared/components/dialog/dialog.component';
 import { ShareButtonsModule } from '@ngx-share/buttons';
+import { SliderComponent } from './components/slider/slider.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { TabsComponent } from './components/tabs/tabs.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const routes: Routes = [
   {
@@ -18,13 +22,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [HomeComponent, ProductComponent],
+  declarations: [HomeComponent, ProductComponent, SliderComponent, TabsComponent],
   imports: [
     CommonModule,
     AppMaterialModule,
     SharedModule,
+    SlickCarouselModule,
     ReactiveFormsModule,
     TranslateModule,
+    FlexLayoutModule,
     FormsModule,
     ShareButtonsModule,
     RouterModule.forChild(routes)
