@@ -194,3 +194,27 @@ button {
     box-shadow: none !important;
   }
 }
+
+.mat-ink-bar{
+  background-color: #00A9B3 !important;
+  height: 3px !important;
+  border-top-right-radius: 7px;
+  border-top-left-radius: 7px;
+}
+
+.mat-tab-label-active {
+  font-family: $font-galano-bold;
+  color: #000000 !important;
+  opacity: 1 !important;
+}
+
+.mat-paginator-page-size{
+  display: none !important;
+}
+
+.mat-paginator {
+  border-top: 1px solid $color-p;
+  width: 100%;
+  border-bottom: 1px solid $color-p;
+  justify-content: flex-end;
+}

@@ -13,16 +13,26 @@ export class MenuComponent implements OnInit {
 
   constructor(private auth:AuthService,   private utils: UtilsService) { }
 
-  options:[] = [];
+  options = [];
   isOpenMenu: boolean;
   isLoggedIn: any;
 
   ngOnInit() {
-    this.auth.getMenu().subscribe((resp:any) => {
-      this.options = resp;
-    });
-
     this.isLoggedIn = this.auth.isLoggedIn;
+
+    if(!this.isLoggedIn) {
+      this.auth.getMenu().subscribe((resp:any) => {
+        this.options = resp;
+      });
+    } 
+    
+    if(this.isLoggedIn) {
+      this.auth.getMenuClicker().subscribe((resp:any) => {
+        // this.options = [...resp , {name: 'Reportes', route: 'reportes'}];
+        this.options = resp;
+      });
+    }
+
     
   }
 
