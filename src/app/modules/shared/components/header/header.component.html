@@ -16,7 +16,7 @@
             <img src="assets/img/logo-header-2.svg" alt="clickam">
         </div>
         <div class="menu" fxLayout="row" fxLayoutAlign="space-around center">
-                <a mat-button (click)="showLogin()" id="header-login">Iniciar sesión</a>
+                <a *ngIf="!isLoggedIn" mat-button (click)="showLogin()" id="header-login">Iniciar sesión</a>
                 <a mat-button (click)="showMenu()"><mat-icon>menu</mat-icon></a>
         </div>
     </div>
