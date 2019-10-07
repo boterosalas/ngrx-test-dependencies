@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '',  loadChildren: () => import('./modules/anonymous/anonymous.module').then(m => m.AnonymousModule),
   },
   {
-    path: 'inicio',  loadChildren: () => import('./modules/clicker/home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard]
+    path: 'inicio',  loadChildren: () => import('./modules/clicker/clicker.module').then(m => m.ClickerModule), canActivate: [AuthGuard]
   }
 ];
 

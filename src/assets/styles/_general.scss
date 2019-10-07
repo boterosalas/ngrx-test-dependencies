@@ -41,8 +41,8 @@ body {
   white-space: normal !important;
 }
 
-.mat-card {
-  font-family: $font-family-base;
+.mat-card, .mat-input-element, .mat-form-field-label {
+  font-family: $font-family-base !important;
 }
 
 .border-bottom-orange {
@@ -176,4 +176,21 @@ button {
 
 .border-top{
   border-top: 1px solid $color-p;
+}
+
+.button{
+  padding: 2px;
+  &-100{
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.swal2-styled.swal2-confirm {
+  background-color: transparent !important;
+  color:$primary-color !important;
+  background: none !important;
+  &:focus{
+    box-shadow: none !important;
+  }
 }

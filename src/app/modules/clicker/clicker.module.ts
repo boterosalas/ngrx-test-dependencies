@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './pages/home.component';
+import { HomeComponent } from './pages/home/home.component';
 import { Routes, RouterModule } from '@angular/router';
-import { AppMaterialModule } from '../../shared/app-material/app-material.module';
-import { SharedModule } from '../../shared/shared.module';
+import { AppMaterialModule } from '../shared/app-material/app-material.module';
+import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ProductComponent } from './components/product/product.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { DialogComponent } from '../../shared/components/dialog/dialog.component';
+import { DialogComponent } from '../shared/components/dialog/dialog.component';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 
 const routes: Routes = [
@@ -31,4 +31,4 @@ const routes: Routes = [
   ],
   entryComponents: [DialogComponent]
 })
-export class HomeModule { }
+export class ClickerModule { }

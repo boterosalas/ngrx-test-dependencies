@@ -366,12 +366,14 @@
   <button
     mat-raised-button
     id="next"
-    class="center"
+    class="center button button-100"
     color="orange"
     (click)="nextStep()"
     [disabled]="!registerForm.valid"
-  >
-    {{ "GENERIC.NEXT" | translate }}
+  > 
+  <span fxLayoutAlign="space-around center">
+    {{ "GENERIC.NEXT" | translate }} <mat-icon>arrow_forward</mat-icon>
+  </span>
   </button>
 </div>
 
@@ -740,7 +742,7 @@
   <button
     mat-raised-button
     id="register"
-    class="mt-2 center"
+    class="mt-2 center button button-100"
     color="orange"
     (click)="register()"
     [disabled]="!acceptTerms"
