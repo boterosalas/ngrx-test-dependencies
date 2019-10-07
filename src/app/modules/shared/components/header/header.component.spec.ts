@@ -4,6 +4,9 @@ import { HeaderComponent } from './header.component';
 import { AppMaterialModule } from '../../app-material/app-material.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateModule } from '@ngx-translate/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { MatMenuModule } from '@angular/material';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -17,7 +20,12 @@ describe('HeaderComponent', () => {
        imports: [
          AppMaterialModule,
          HttpClientTestingModule,
-         RouterTestingModule.withRoutes([])
+         RouterTestingModule.withRoutes([]),
+         TranslateModule.forRoot({}),
+         MatMenuModule
+       ],
+       schemas: [
+         NO_ERRORS_SCHEMA
        ]
     })
     .compileComponents();

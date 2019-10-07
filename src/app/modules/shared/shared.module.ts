@@ -11,7 +11,7 @@ import { FooterComponent } from "./components/footer/footer.component";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { WhatsappComponent } from "./components/whatsapp/whatsapp.component";
 import { HeaderComponent } from './components/header/header.component';
-import { MatListModule, MatRippleModule } from '@angular/material';
+import { MatListModule, MatRippleModule, MatMenuModule } from '@angular/material';
 import { SociallinksComponent } from './components/sociallinks/sociallinks.component';
 import { TopComponent } from './components/top/top.component';
 
@@ -35,7 +35,8 @@ import { TopComponent } from './components/top/top.component';
     FormsModule,
     FlexLayoutModule,
     MatListModule,
-    MatRippleModule
+    MatRippleModule,
+    MatMenuModule
   ],
   exports: [
     SearchComponent,
@@ -47,6 +48,7 @@ import { TopComponent } from './components/top/top.component';
     MatListModule,
     MatRippleModule,
     SociallinksComponent,
+    MatMenuModule,
     TopComponent
   ]
 })

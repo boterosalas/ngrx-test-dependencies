@@ -39,4 +39,12 @@ export class AuthService {
     );
   }
 
+  public getMenuClicker(){
+    return this.http.get(`${this.url + this.apiGetmenus}`).pipe(
+      map((resp: any) => {
+        return resp.objectResponse;
+      })
+    );
+  }
+
 }

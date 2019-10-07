@@ -1,0 +1,27 @@
+@import 'variables';
+@import 'general';
+
+.title{
+    font-family: $font-galano;
+    font-weight: normal;
+    color: #707070;
+    max-height: 38px;
+    min-height: 38px;
+}
+
+.small {
+    font-size: .8rem;
+}
+
+.text-line{
+    text-decoration: line-through;
+}
+
+.discount{
+    color: $primary-color;
+    font-size: 1rem;
+}
+
+.img-responsive{
+    max-width: 100%;
+}
