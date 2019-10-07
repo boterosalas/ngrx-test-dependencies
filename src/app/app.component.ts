@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, TemplateRef } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import {
   Router,
@@ -47,6 +47,9 @@ import { Subscription } from "rxjs";
   ]
 })
 export class AppComponent implements OnInit {
+
+  @ViewChild("templateCardLogin, TemplateCardRegister, TemplateCardForgot", { static: false }) template: TemplateRef<any>;
+
   isHome: boolean;
   internal: boolean;
   showLoginForm: boolean;
