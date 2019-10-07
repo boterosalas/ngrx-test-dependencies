@@ -6,94 +6,31 @@
   
   <app-top (close)="hideLogin()"></app-top>
 
-  <div
-    class="row align-content-center justify-content-center"
-    *ngIf="showLoginForm"
-    @simpleFadeAnimation
-  >
-    <div class="col-sm-12">
-      <mat-card color="transparent" class="login">
-        <mat-card-header class="justify-content-center">
-          <mat-card-title id="titleLogin"
-            ><h2 class="border-bottom-orange-init">
-              {{ "LOGIN.LOGIN" | translate }}
-            </h2></mat-card-title
-          >
-          <mat-card-subtitle>
-            <p class="text-left">
-              {{ "LOGIN.DESCRIPTION" | translate }}
-              <span class="link" (click)="showRegister()" id="registerHere"
-                >{{ "LOGIN.REGISTER" | translate }}
-              </span>
-            </p>
-          </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <app-loginform></app-loginform>
-          <p
-            id="forgotPass"
-            class="cursor-pointer text-decoration text-center"
-            (click)="showForgot()"
-          >
-            {{ "LOGIN.FORGOT_PASSWORD" | translate }}
-          </p>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
+  <app-card *ngIf="showLoginForm" idTitle="titleLogin" title="{{ 'LOGIN.LOGIN' | translate }}" description="{{ 'LOGIN.DESCRIPTION' | translate }}" idAction="registerHere" action="{{ 'LOGIN.REGISTER' | translate }}" (actionButton)="showRegister()" [template]="templateCardLogin"></app-card>
 
-  <div
-    class="row align-content-center justify-content-center"
-    *ngIf="showRegisterForm"
-  >
-    <div class="col-sm-12">
-      <mat-card color="transparent" class="login">
-        <mat-card-header class="justify-content-center">
-          <mat-card-title id="titleRegister"
-            ><h2 class="border-bottom-orange-init">
-              {{ "GENERIC.REGISTER" | translate }}
-            </h2></mat-card-title
-          >
-          <mat-card-subtitle>
-            <p class="text-left">
-              {{ "REGISTER.HAVE_ACCOUNT" | translate }}
-              <span class="link" (click)="showLogin()" id="registerForm"
-                >{{ "LOGIN.LOGIN" | translate }}
-              </span>
-            </p>
-          </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <app-registerform></app-registerform>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
+  <ng-template #templateCardLogin>
+    <app-loginform></app-loginform>
+    <p
+      id="forgotPass"
+      class="cursor-pointer text-decoration text-center"
+      (click)="showForgot()"
+    >
+      {{ "LOGIN.FORGOT_PASSWORD" | translate }}
+    </p>
+  </ng-template>
 
-  <div
-    class="row align-content-center justify-content-center"
-    *ngIf="showForgotForm"
-  >
-    <div class="col-sm-12">
-      <mat-card color="transparent" class="login">
-        <mat-card-header class="justify-content-center">
-          <mat-card-title id="titleForgot"
-            ><h2 class="border-bottom-orange-init">
-              {{ "FORGOTPASSWORD.FORGOT_PASSWORD" | translate }}
-            </h2></mat-card-title
-          >
-          <mat-card-subtitle>
-            <p class="text-left">
-              {{ "FORGOTPASSWORD.ENTER_EMAIL" | translate }}
-            </p>
-          </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <app-forgotpasswordform></app-forgotpasswordform>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
+  <app-card *ngIf="showRegisterForm" idTitle="titleRegister" title="{{ 'GENERIC.REGISTER' | translate }}" description="{{ 'REGISTER.HAVE_ACCOUNT' | translate }}" idAction="registerForm" action="{{ 'LOGIN.LOGIN' | translate }}" (actionButton)="showLogin()" [template]="templateCardRegister"></app-card>
+
+  <ng-template #templateCardRegister>
+    <app-registerform></app-registerform>
+  </ng-template>
+
+  <app-card *ngIf="showForgotForm" idTitle="titleForgot" title="{{ 'FORGOTPASSWORD.FORGOT_PASSWORD' | translate }}" description="{{ 'FORGOTPASSWORD.ENTER_EMAIL' | translate }}" [template]="templateCardForgot"></app-card>
+
+  <ng-template #templateCardForgot>
+    <app-forgotpasswordform></app-forgotpasswordform>
+  </ng-template>
+  
 </div>
 
 <app-header [isHome]="isHome"></app-header>

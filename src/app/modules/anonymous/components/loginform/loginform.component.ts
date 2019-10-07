@@ -11,6 +11,7 @@ import { ResponseService } from "src/app/interfaces/response";
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
 import { RemoveSpaceService } from 'src/app/services/remove-space.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: "app-loginform",
@@ -23,7 +24,8 @@ export class LoginformComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private loading: LoaderService,
-    private removeSpace: RemoveSpaceService
+    private removeSpace: RemoveSpaceService,
+    private utils: UtilsService
   ) {}
 
   private subscription: Subscription = new Subscription();
@@ -68,10 +70,10 @@ export class LoginformComponent implements OnInit {
 
    this.subscription = this.authService.login(loginData).subscribe(
       (resp: ResponseService) => {
-        console.log(resp);
         this.loading.hide();
         if (resp.state === "Success") {
           localStorage.setItem("ACCESS_TOKEN", resp.objectResponse.token);
+          this.utils.hideloginForm();
           this.router.navigate(['/inicio']);
         } else {
           Swal.fire({

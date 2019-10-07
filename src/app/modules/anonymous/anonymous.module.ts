@@ -17,6 +17,7 @@ import { ForgotpasswordformComponent } from "./components/forgotpasswordform/for
 import { RecoverpasswordformComponent } from "./components/recoverpasswordform/recoverpasswordform.component";
 import { RecoverpasswordComponent } from "./pages/recoverpassword/recoverpassword.component";
 import { MenuComponent } from "./components/menu/menu.component";
+import { CardComponent } from './components/card/card.component';
 
 const routes: Routes = [
   {
@@ -44,7 +45,8 @@ const routes: Routes = [
     ForgotpasswordformComponent,
     RecoverpasswordComponent,
     RecoverpasswordformComponent,
-    MenuComponent
+    MenuComponent,
+    CardComponent
   ],
   imports: [
     FormsModule,
@@ -63,7 +65,8 @@ const routes: Routes = [
     RegisterformComponent,
     RecoverpasswordformComponent,
     ForgotpasswordformComponent,
-    MenuComponent
+    MenuComponent,
+    CardComponent
   ]
 })
 export class AnonymousModule {}
