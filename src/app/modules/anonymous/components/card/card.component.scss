@@ -1,0 +1,25 @@
+@import 'variables';
+
+.login{
+    box-shadow: none !important;
+  }
+
+  .mat-transparent{
+    background: transparent;
+  }
+
+  .link{
+    color: $primary-color;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .cursor{
+    &-pointer{
+      cursor: pointer;
+    }
+  }
+  
+  .text-decoration{
+      text-decoration: underline;
+  }
