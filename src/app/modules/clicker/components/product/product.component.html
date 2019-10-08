@@ -1,4 +1,4 @@
-<mat-card class="mt-5 mat-elevation-z0">
+<mat-card class="mat-elevation-z0 card-product puff-in-center">
     <mat-card-content>
       <img class="img-responsive" mat-card-image src="{{image}}" alt="{{alt}}">
       <h3 class="title" id="{{id}}">{{productName}}</h3>
@@ -17,6 +17,6 @@
       </p>
     </mat-card-content>
     <mat-card-actions>
-        <button id={{btnid}} mat-raised-button color="orange" (click)="product()">{{textbutton}}</button>
+        <button id={{btnid}}  mat-raised-button color="orange" class="mb-1 button-100" (click)="product()">{{textbutton}}</button>
       </mat-card-actions>
   </mat-card>

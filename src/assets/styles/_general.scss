@@ -114,9 +114,13 @@ h2 {
 
 button {
   border-radius: 10px !important;
-  max-width: 162px;
-  width: 155px;
+  // max-width: 162px;
+  // width: 155px;
   font-family: $font-family-base !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-infix{
+  padding: 0 !important;
 }
 
 .slick-dots li.slick-active button:before {
@@ -213,8 +217,52 @@ button {
 }
 
 .mat-paginator {
-  border-top: 1px solid $color-p;
+  border-top: 1px solid $color-border;
   width: 100%;
-  border-bottom: 1px solid $color-p;
+  border-bottom: 1px solid $color-border;
   justify-content: flex-end;
+}
+
+.card-product {
+  border: 1px solid $color-border;
+  border-radius: 0px !important;
+  .mat-card-image{
+    margin: 0 auto !important;
+  }
+}
+
+.mat-bottom-sheet-container {
+  border-top-right-radius: 10%;
+  border-top-left-radius: 10%;
+}
+
+.responsive-img{
+  max-width: 100%;
+}
+
+.title{
+  font-family: $font-galano;
+  font-weight: normal;
+  color:$gray;
+  min-height: 58px;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: rgb(255, 111, 17) !important;
+}
+
+.dashed .mat-form-field-infix {
+  border: 1px dashed #86888A;
+  padding: 12px;
+  border-radius: 5px;
+  background: #f5f5f5;
+}
+
+#share button {
+  width: auto;
+}
+
+.sb-circles-dark .sb-wrapper.sb-facebook .sb-icon, .sb-circles-dark .sb-wrapper.sb-twitter .sb-icon, .sb-circles-dark .sb-wrapper.sb-whatsapp .sb-icon{
+  background: $social-share !important;
+  box-shadow: none;
 }

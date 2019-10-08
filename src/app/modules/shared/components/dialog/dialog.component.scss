@@ -1,0 +1,21 @@
+@import 'variables';
+@import 'general';
+
+.close {
+  margin: 12px 10px;
+  background:$gray2;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 16px;
+  text-align: center;
+  line-height: 24px;
+}
+
+.discount{
+  color: $primary-color;
+  font-size: 1rem;
+}
+
+.plu{
+  color: $gray2;
+}
