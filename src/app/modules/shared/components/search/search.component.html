@@ -1,7 +1,11 @@
 <form [formGroup]="searchForm" fxLayoutAlign="start" class="pt-2">
     <mat-form-field appearance="outline" class="w-100">
-        <input matInput type="text" id="BarSearch" placeholder="{{ 'GENERIC.SEARCH' | translate }}" formControlName="search" (keydown.enter)="searchProduct()">
-        <mat-icon matSuffix class="mr-1 blue">search</mat-icon>
+      <span fxLayoutAlign="center space-between">
+      <input matInput type="text" id="BarSearch" placeholder="{{ 'GENERIC.SEARCH' | translate }}" formControlName="search">
+        <button mat-button [disabled]="!searchForm.valid || searchForm.value.search===''" (click)="searchProduct()" id="BtnSearch" class="lupa" >
+          <mat-icon matSuffix class="mr-1 blue cursor-pointer">search</mat-icon>
+        </button>
+      </span>  
         <mat-error id="searchErrorMin"
             *ngIf="searchForm.controls.search.invalid && searchForm.controls.search.errors.minlength">{{
         "GENERIC.MIN_CHARACTERS" | translate: {minchar:searchForm.controls.search.errors.minlength.requiredLength}

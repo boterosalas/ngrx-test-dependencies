@@ -28,9 +28,4 @@ export class ProductSearchService {
     );
   }
 
-  // public getTotalItems(params: {term: string}){
-  //   const apiSearchVetex = `getProducts?ft=${params.term}`
-  //   return this.http.get(`${this.url + apiSearchVetex}`);
-  // }
-
 }

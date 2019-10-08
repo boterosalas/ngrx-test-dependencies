@@ -11,14 +11,10 @@
 
     <div class="footer-links pt-4" fxLayout="column" fxLayoutAlign="center center">
         <a id="home-footer" class="border-bottom-orange section" routerLink="['']">Inicio</a>
+        <a *ngIf="auth.isLoggedIn()" id="offers-footer" class="border-bottom-orange section" routerLink="['']">Reportes</a>
         <a id="offers-footer" class="border-bottom-orange section" routerLink="['']">Ofertas</a>
         <a id="academy-footer" class="border-bottom-orange section" routerLink="['']">Click Academy</a>
-        <div class="clickacedemy"  fxLayout="column" fxLayoutAlign="center center">
-            <a  id="tools-footer" routerLink="['']">Herramientas</a>
-            <a  id="comisions-footer" routerLink="['']">Comisiones</a>
-            <a  id="exclude-footer" routerLink="['']">Productos excluidos</a>
-            <a  id="question-footer" routerLink="['']">Preguntas Frecuentes</a>
-        </div>
+        <a id="question-footer" class="border-bottom-orange section" routerLink="['']">Preguntas Frecuentes</a>
     </div>
     
     <div class="terms" id="terms-footer" fxLayout="column" fxLayoutAlign="center center">

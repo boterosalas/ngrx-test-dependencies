@@ -16,8 +16,8 @@
             <img src="assets/img/logo-header-2.svg" alt="clickam">
         </div>
         <div class="menu" fxLayout="row" fxLayoutAlign="space-around center">
-                <a *ngIf="!isLoggedIn" mat-button (click)="showLogin()" id="header-login">{{ 'LOGIN.LOGIN' | translate }}</a>
-                <span *ngIf="isLoggedIn">
+                <a *ngIf="!auth.isLoggedIn" mat-button (click)="showLogin()" id="header-login">{{ 'LOGIN.LOGIN' | translate }}</a>
+                <span *ngIf="auth.isLoggedIn()">
                     <button mat-button [matMenuTriggerFor]="menu" class="initials">{{initials}}</button>
                     <mat-menu #menu="matMenu">
                         <button mat-menu-item>{{ 'HEADER.PROFILE' | translate }}</button>

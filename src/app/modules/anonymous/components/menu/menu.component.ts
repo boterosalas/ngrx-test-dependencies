@@ -1,8 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { ResponseService } from 'src/app/interfaces/response';
 import { UtilsService } from 'src/app/services/utils.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -15,20 +14,20 @@ export class MenuComponent implements OnInit {
 
   options = [];
   isOpenMenu: boolean;
-  isLoggedIn: any;
-
+  private subscription: Subscription = new Subscription();
+  
   ngOnInit() {
-    this.isLoggedIn = this.auth.isLoggedIn;
 
-    if(!this.isLoggedIn) {
-      this.auth.getMenu().subscribe((resp:any) => {
+
+    if(!this.auth.isLoggedIn()) {
+      this.subscription = this.auth.getMenu().subscribe((resp:any) => {
         this.options = resp;
       });
     } 
     
-    if(this.isLoggedIn) {
-      this.auth.getMenuClicker().subscribe((resp:any) => {
-        // this.options = [...resp , {name: 'Reportes', route: 'reportes'}];
+    if(this.auth.isLoggedIn()) {
+      this.subscription =  this.auth.getMenuClicker().subscribe((resp:any) => {
+        console.log(resp);
         this.options = resp;
       });
     }
@@ -45,6 +44,10 @@ export class MenuComponent implements OnInit {
   @HostListener('over')
   hideMenu() {
     this.utils.hideMenu();
+  }
+
+  ngOnDestroy(): void {
+   this.subscription.unsubscribe();
   }
 
 }

@@ -56,7 +56,29 @@ describe('TabsComponent', () => {
     productId: "12345687",
     template: null,
     showClose: true,
-    buttonClose: "Cerrar"
+    buttonClose: "Cerrar",
+    title : "estufa-322",
+    id : "123456789",
+    img : 'prueba',
+    price :'$1.000.000',
+    showCloseIcon : true,
+    showProduct: true,
+    showshowTitle : false,
+    items: [
+      {
+        images: [
+          {imageUrl: 'pruebas'}
+        ],
+        sellers: [
+          {
+            commertialOffer: {
+              price: '$1.000.000'
+            }
+          }
+        ],
+        itemId: '12345489'
+      }
+    ]
   };
 
   const shortUrl = "http://tynyurl.com/xixiaa";
@@ -121,6 +143,11 @@ describe('TabsComponent', () => {
     expect(mockProductSearchService.getProductsPagination).toHaveBeenCalled();
   });
 
+  it("product data", () => {
+    component.dataProduct(dataProduct);
+    expect(mockShortenerService.getShortUrl).toHaveBeenCalled();
+  });
+
   describe("No results on search", () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(TabsComponent);
@@ -136,10 +163,6 @@ describe('TabsComponent', () => {
       expect(mockProductSearchService.getProductsPagination).toHaveBeenCalled();
     });
 
-    it("product data", () => {
-      component.dataProduct(dataProduct);
-      expect(mockShortenerService.getShortUrl).toHaveBeenCalled();
-    });
   });
 
 });

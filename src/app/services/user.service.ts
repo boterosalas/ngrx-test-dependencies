@@ -1,16 +1,22 @@
 import { Injectable, OnInit } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "src/environments/environment";
-import { map, tap } from "rxjs/operators";
+import { map, tap, distinctUntilChanged } from "rxjs/operators";
 import { ResponseService } from "../interfaces/response";
 import { BehaviorSubject } from "rxjs";
+import { AuthService } from "./auth.service";
+import { setTimeout } from 'timers';
 
 @Injectable({
   providedIn: "root"
 })
 export class UserService {
-  constructor(private http: HttpClient) {
-    this.getProfile();
+  constructor(private http: HttpClient, private auth: AuthService) {
+    this.auth.isLogged$.pipe(distinctUntilChanged()).subscribe(val => {
+      if(!!val) {
+        this.getProfile();
+      }
+    })
   }
 
   url = environment.URL_PROFILE;

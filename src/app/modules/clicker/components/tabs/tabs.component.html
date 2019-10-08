@@ -1,6 +1,6 @@
-<div class="tabs mb-3">
-  <h2 class="border-bottom-orange-init">Busca y crea un link</h2>
-  <p>Elige la tienda y busca el producto que quieres compartir</p>
+<div class="tabs">
+  <h2 class="border-bottom-orange-init">{{'HOME.TITLE_SEARCH' | translate}} </h2>
+  <p>{{'HOME.DESCRIPTION_SEARCH' | translate}}</p>
 
   <mat-tab-group>
     <mat-tab label="exito.com">
@@ -8,6 +8,7 @@
       <div *ngIf="showResults">
         <div class="row m-0">
           <mat-paginator
+            class="mb-3"
             id="paginator"
             [length]="totalItems"
             [pageSize]="pageSize"
@@ -31,10 +32,10 @@
               textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
               [plu]="product.items[0].itemId"
               (infoProduct)="dataProduct(product)"
-              class="mb-3"
             ></app-product>
           </div>
           <mat-paginator
+            class="mt-3 mb-3"
             id="paginator"
             [length]="totalItems"
             [pageSize]="pageSize"
@@ -51,35 +52,39 @@
 
       <ng-template #templateDialog>
         <form [formGroup]="formLink">
-          <mat-form-field>
-            <input
-              id="url"
-              matInput
-              placeholder="url"
-              formcontrolName="link"
-              [value]="urlshorten"
-              #linkInput
-              readonly
-            />
-          </mat-form-field>
-          <button
-            mat-raised-button
-            id="btnCopy"
-            color="primary"
-            (click)="copyInputMessage(linkInput)"
-          >
-            <mat-icon matSuffix>file_copy</mat-icon>
-          </button>
+          <div fxLayout="column">
+            <mat-form-field appearance="dashed" class="dashed mt-2">
+              <input
+                id="url"
+                matInput
+                formcontrolName="link"
+                [value]="urlshorten"
+                #linkInput
+                readonly
+              />
+            </mat-form-field>
+          </div>
+          <div fxLayout="column">
+              <button
+              mat-raised-button
+              id="btnCopy"
+              color="orange"
+              class="button button-100 p-1"
+              (click)="copyInputMessage(linkInput)"
+            >
+            <span fxLayoutAlign="space-between center">
+            <span class="pl-3">{{'GENERIC.COPY_LINK' | translate}}</span>
+              <mat-icon matSuffix class="mr-3">link</mat-icon>
+            </span>
+            </button>
+          </div>
         </form>
 
         <div id="share">
-          <share-buttons
-            [theme]="'circles-dark'"
-            [include]="['facebook', 'twitter', 'whatsapp']"
-            [show]="3"
-            [url]="urlshorten"
-            [autoSetMeta]="false"
-          ></share-buttons>
+          <h3 class="border-bottom-orange-init">{{'GENERIC.SHARE' | translate}}</h3>
+          <share-button id="facebook" [url]="urlshorten" button="facebook" theme="circles-dark" ></share-button>
+          <share-button id="twitter" [url]="urlshorten" button="twitter" theme="circles-dark" ></share-button>
+          <share-button id="whatsapp" [url]="urlshorten" button="whatsapp" theme="circles-dark" ></share-button>
         </div>
       </ng-template>
     </mat-tab>
