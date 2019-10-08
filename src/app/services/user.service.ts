@@ -5,7 +5,6 @@ import { map, tap, distinctUntilChanged } from "rxjs/operators";
 import { ResponseService } from "../interfaces/response";
 import { BehaviorSubject } from "rxjs";
 import { AuthService } from "./auth.service";
-import { setTimeout } from 'timers';
 
 @Injectable({
   providedIn: "root"
