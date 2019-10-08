@@ -1,27 +1,31 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { ProductSearchService } from 'src/app/services/product-search.service';
-import { LoaderService } from 'src/app/services/loader.service';
-import { MatDialog, MatSnackBar, PageEvent } from '@angular/material';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { UserService } from 'src/app/services/user.service';
-import { ShortenerService } from 'src/app/services/shortener.service';
-import { AuthService } from 'src/app/services/auth.service';
-import { Subscription } from 'rxjs';
-import { SearchProduct } from 'src/app/interfaces/search-product';
-import { distinctUntilChanged } from 'rxjs/operators';
-import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
+import { Component, OnInit, ViewChild, TemplateRef } from "@angular/core";
+import { ProductSearchService } from "src/app/services/product-search.service";
+import { LoaderService } from "src/app/services/loader.service";
+import {
+  MatDialog,
+  MatSnackBar,
+  PageEvent,
+  MatBottomSheet
+} from "@angular/material";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { UserService } from "src/app/services/user.service";
+import { ShortenerService } from "src/app/services/shortener.service";
+import { AuthService } from "src/app/services/auth.service";
+import { Subscription } from "rxjs";
+import { SearchProduct } from "src/app/interfaces/search-product";
+import { distinctUntilChanged } from "rxjs/operators";
+import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog.component";
 
 @Component({
-  selector: 'app-tabs',
-  templateUrl: './tabs.component.html',
-  styleUrls: ['./tabs.component.scss']
+  selector: "app-tabs",
+  templateUrl: "./tabs.component.html",
+  styleUrls: ["./tabs.component.scss"]
 })
-export class TabsComponent implements OnInit  {
-
+export class TabsComponent implements OnInit {
   constructor(
     private sp: ProductSearchService,
     private loading: LoaderService,
-    private dialog: MatDialog,
+    private dialog: MatBottomSheet,
     private fb: FormBuilder,
     private _snackBar: MatSnackBar,
     private user: UserService,
@@ -40,23 +44,28 @@ export class TabsComponent implements OnInit  {
   showNotFound: boolean;
   paginate: string;
   totalItems: number;
-  pageSize: number = 5;
-  pageTo: number = 5;
+  pageSize: number = 6;
+  pageTo: number = 6;
   pageSizeOptions: number[] = [5, 10, 25, 50];
   url: string;
   urlshorten: string;
   formLink: FormGroup;
   identification: string;
   pageIndex: number = 0;
+  isLoggedIn: any;
 
   ngOnInit() {
     this.showNotFound = false;
     this.showResults = false;
-    this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
-      if(!!val) {
-        this.identification = val.identification;
-      }
-    })
+
+    this.isLoggedIn = this.auth.isLoggedIn();
+    if (this.isLoggedIn) {
+      this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
+        if (!!val) {
+          this.identification = val.identification;
+        }
+      });
+    }
   }
 
   private formShareLink() {
@@ -122,11 +131,29 @@ export class TabsComponent implements OnInit  {
     this.formShareLink();
     const title = product.productName;
     const id = product.productId;
+    const img = product.items[0].images[0].imageUrl;
+    const price = product.items[0].sellers[0].commertialOffer.Price;
     const template = this.template;
-    const showClose = true;
+    const showClose = false;
+    const showCloseIcon = true;
+    const showProduct = true;
+    const showshowTitle = false;
     const buttonClose = "Cerrar";
+    const plu = product.items[0].itemId;
     this.dialog.open(DialogComponent, {
-      data: { title, template, showClose, buttonClose, id }
+      data: {
+        title,
+        template,
+        showClose,
+        showCloseIcon,
+        img,
+        plu,
+        price,
+        showProduct,
+        showshowTitle,
+        buttonClose,
+        id
+      }
     });
   }
 

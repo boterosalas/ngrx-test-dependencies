@@ -38,8 +38,8 @@ describe('SearchComponent', () => {
   it('search product', () => {
     spyOn(component.search, 'emit');
     const nativeElement = fixture.nativeElement;
-    const button = nativeElement.querySelector('input');
-    button.dispatchEvent(new Event('enter'));
+    const button = nativeElement.querySelector('button');
+    button.dispatchEvent(new Event('click'));
     fixture.detectChanges();
     component.searchProduct();    
     expect(component.search.emit).toHaveBeenCalled();

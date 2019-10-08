@@ -71,12 +71,6 @@ export class HomeComponent implements OnInit {
   
 
   ngOnInit() {
-    // this.utils.change.subscribe(isOpen => {
-    //   this.isOpen = isOpen;
-    //   this.showRegisterForm = false;
-    //   this.showLoginForm = true;
-    //   this.showForgotForm = false;
-    // });
   }
 
 

@@ -21,7 +21,9 @@
         "CANCEL": "Cancelar",
         "SEARCH": "Buscar",
         "WHITE_SPACES": "No se permite más de un espacio en blanco",
-        "PASSWORD_PATTERN": "la contraseña debe contener al menos una letra minúscula, una letra mayúscula un número y un carácter especial"
+        "PASSWORD_PATTERN": "la contraseña debe contener al menos una letra minúscula, una letra mayúscula un número y un carácter especial",
+        "SHARE": "Compartir directamente en:",
+        "COPY_LINK": "Copiar link"
     },
     "LOGIN": {
         "LOGIN": "Iniciar sesión",
@@ -63,7 +65,9 @@
         "HOW_WORKS": "¿Cómo funciona?",
         "HOW_WORKS_DESCRIPTION": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula",
         "TITLE_RAISE":"Aumenta tus ingresos en tus espacios habituales",
-        "DESCRIPTION_RAISE": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum."
+        "DESCRIPTION_RAISE": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum.",
+        "TITLE_SEARCH": "Busca y crea un link",
+        "DESCRIPTION_SEARCH": "Elige la tienda y busca el producto que quieres compartir"
     },
     "HEADER": {
         "PROFILE": "Mi perfil",
