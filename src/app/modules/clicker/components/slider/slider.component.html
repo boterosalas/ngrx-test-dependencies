@@ -4,8 +4,9 @@
   [config]="slideConfig"
 >
   <div ngxSlickItem *ngFor="let slide of slides" class="slide text-center">
-    <h3>{{ slide.textTop }}</h3>
-    <img src="{{ slide.img }}" alt="" />
-    <p class="p-3 text-slide">{{ slide.textBottom }}</p>
+    <h3>{{ slide.description }}</h3>
+    <a href="{{ slide.link }}" target="_blank">
+      <img class="responsive-img" src="{{ slide.imageurl }}" alt="{{ slide.description }}" />
+    </a>
   </div>
 </ngx-slick-carousel>

@@ -1,22 +1,70 @@
-<mat-card class="mat-elevation-z0 card-product puff-in-center">
-    <mat-card-content>
-      <img class="img-responsive" mat-card-image src="{{image}}" alt="{{alt}}">
-      <h3 class="title" id="{{id}}">{{productName}}</h3>
-      <p>
-       <span class="d-block discount">
-         {{price | currency}}
-       </span>
-       <span class="d-block discount">
-         {{discount | currency}}
-       </span>
-      </p>
-      <p>
-        <span class="plu">
-        PLU:{{plu}}
+<mat-card class="mat-elevation-z0 card-product puff-in-center" *ngIf="exito">
+  <mat-card-content>
+    <img
+      class="img-responsive"
+      mat-card-image
+      src="{{ image }}"
+      alt="{{ alt }}"
+    />
+    <h3 class="title" id="{{ id }}">{{ productName }}</h3>
+    <p>
+      <span class="d-block discount">
+        {{ price | currency }}
       </span>
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-        <button id={{btnid}}  mat-raised-button color="orange" class="mb-1 button-100" (click)="product()">{{textbutton}}</button>
-      </mat-card-actions>
-  </mat-card>
+      <span class="d-block discount">
+        {{ discount | currency }}
+      </span>
+    </p>
+    <p>
+      <span class="plu"> PLU:{{ plu }} </span>
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      id="{{ btnid }}"
+      mat-raised-button
+      color="orange"
+      class="mb-1 button-100"
+      (click)="product()"
+    >
+      {{ textbutton }}
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card class="mat-elevation-z0 card-product puff-in-center p-1" *ngIf="other">
+  <mat-card-content fxLayout="row" fxLayoutGap="10px">
+    <span fxLayout="column" fxFlex="30" fxLayoutAlign="center">
+      <img
+        class="img-responsive"
+        mat-card-image
+        src="{{ image }}"
+        alt="{{ alt }}"
+      />
+    </span>
+    <span fxLayout="column" fxFlex="70" fxLayoutAlign="center center">
+      <span fxLayout="row" fxLayoutGap="5px">
+        <span fxLayout="column"  fxLayoutAlign="start start">
+          <h3 class="m-0 gray" id="{{ id }}">{{ productName }}</h3>
+          <p>
+            <span>Comisión:</span>
+            <span class="d-block discount">
+              {{ price | currency }}
+            </span>
+          </p>
+        </span>
+        <span fxLayout="column"  fxLayoutAlign="center">
+          <button
+            id="{{ btnid }}"
+            mat-raised-button
+            color="orange"
+            class="mb-1"
+            (click)="product()"
+          >
+            {{ textbutton }}
+          </button>
+        </span>
+      </span>
+    </span>
+  </mat-card-content>
+</mat-card>

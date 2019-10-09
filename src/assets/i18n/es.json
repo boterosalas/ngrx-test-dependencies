@@ -72,5 +72,18 @@
     "HEADER": {
         "PROFILE": "Mi perfil",
         "LOGOUT": "Cerrar sesión"
+    },
+    "MONTH_RESUME": {
+        "TITLE": "Resumen mes",
+        "COMISSIONS": "Comisiones",
+        "LINKS_CREATED": "Links creados"
+    },
+    "GENERAL_RESUME": {
+        "TITLE": "Resumen general",
+        "COMISSIONS": "Total comisiones",
+        "LINKS_CREATED": "Links creados",
+        "PRODUCTS_SELLER": "Productos vendidos",
+        "CONVERSION": "Tasa de conversión"
     }
+
 }

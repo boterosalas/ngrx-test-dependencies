@@ -11,7 +11,7 @@ export class ForgotpasswordService {
   constructor(private http: HttpClient) { }
 
   url = environment.URL_SECURITY;
-  apiForgotPassword = 'api/Authentication/recoveryPassword';
+  apiForgotPassword = 'Authentication/recoveryPassword';
 
   public forgotPassword(username: Forgotpassword) {
     return this.http.post((`${this.url + this.apiForgotPassword}`),{ email:username});

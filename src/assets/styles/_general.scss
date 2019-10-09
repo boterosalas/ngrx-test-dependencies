@@ -58,15 +58,6 @@ body {
     margin-top: 10px;
   }
 
-  .orange {
-    color: $primary-color;
-  }
-
-  .mat-orange {
-    background: $primary-color;
-    color: $white;
-  }
-
   &-init {
     &::after {
       content: "";
@@ -79,6 +70,46 @@ body {
       margin-top: 0px;
     }
   }
+}
+
+.border-bottom-blue {
+  &::after {
+    content: "";
+    background: $primary-color;
+    height: 4px;
+    width: 25px;
+    position: relative;
+    margin: 0 auto;
+    border-radius: 3px;
+    display: flex;
+    margin-top: 10px;
+  }
+
+  &-init {
+    &::after {
+      content: "";
+      background: $blue;
+      height: 4px;
+      width: 25px;
+      position: relative;
+      border-radius: 3px;
+      display: flex;
+      margin-top: 0px;
+    }
+  }
+}
+
+.orange {
+  color: $primary-color;
+}
+
+.mat-orange {
+  background: $primary-color;
+  color: $white;
+}
+
+.gray {
+  color: $color-p;
 }
 
 h1,
