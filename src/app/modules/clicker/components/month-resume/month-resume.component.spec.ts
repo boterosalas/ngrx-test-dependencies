@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MonthResumeComponent } from './month-resume.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 describe('MonthResumeComponent', () => {
   let component: MonthResumeComponent;
@@ -8,7 +10,11 @@ describe('MonthResumeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MonthResumeComponent ]
+      declarations: [ MonthResumeComponent ],
+      imports: [
+        TranslateModule.forRoot({}),
+        GoogleChartsModule
+      ]
     })
     .compileComponents();
   }));

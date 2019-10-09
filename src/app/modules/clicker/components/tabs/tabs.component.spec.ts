@@ -11,11 +11,12 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { ProductSearchService } from 'src/app/services/product-search.service';
 import { UserService } from 'src/app/services/user.service';
 import { ShortenerService } from 'src/app/services/shortener.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
 import { of } from 'rxjs';
+import { ContentService } from 'src/app/services/content.service';
 
 describe('TabsComponent', () => {
   let component: TabsComponent;
@@ -25,12 +26,21 @@ describe('TabsComponent', () => {
     "ProductSearchService",
     ["getProductsPagination"]
   );
+
   const mockProductUserService = jasmine.createSpyObj("UserService", [
     "getProfile"
   ]);
+
   const mockShortenerService = jasmine.createSpyObj("ShortenerService", [
     "getShortUrl"
   ]);
+
+  const mockContentService= jasmine.createSpyObj("ContentService", [
+    "getAssured",
+    "getTrips"
+  ]);
+
+
   const mockDialog = jasmine.createSpyObj("MatDialog", ["open"]);
   const mockDialogRef = jasmine.createSpyObj("MatDialogRef", [
     "close",
@@ -81,6 +91,57 @@ describe('TabsComponent', () => {
     ]
   };
 
+  let  dataAssured = {
+    linkText: "estufa-322",
+    productName: "estufa322",
+    productId: "12345687",
+    template: null,
+    showClose: true,
+    buttonClose: "Cerrar",
+    title : "mascota",
+    id : "123456789",
+    img : 'prueba',
+    price :'$200000',
+    showCloseIcon : true,
+    showProduct: true,
+    showshowTitle : false,
+    objectResponse: [
+      {
+        "imageurl": "https://cdn.shopify.com/s/files/1/0025/0986/5071/products/Seguro_mascotas_1024x1024.jpg?v=1548429524",
+        "description": "Seguro mascota",
+        "link": "https://www.wesura.com/seguro-mascotas?utm_source=pling&utm_medium=app&utm_campaign=wesuraconpling",
+        "commission": 0
+      }
+    ]
+  }
+
+  let segurosSuccess = {
+  "state": "Success",
+  "userMessage": null,
+  "objectResponse": [
+    {
+      "imageurl": "https://cdn.shopify.com/s/files/1/0025/0986/5071/products/Seguro_mascotas_1024x1024.jpg?v=1548429524",
+      "description": "Seguro mascota",
+      "link": "https://www.wesura.com/seguro-mascotas?utm_source=pling&utm_medium=app&utm_campaign=wesuraconpling",
+      "commission": 0
+    }
+  ]
+}
+
+  let ViajeSuccess = {
+  "state": "Success",
+  "userMessage": null,
+  "objectResponse": [
+    {
+      "imageurl": "https://cdn.shopify.com/s/files/1/0025/0986/5071/products/Seguro_mascotas_1024x1024.jpg?v=1548429524",
+      "description": "Seguro mascota",
+      "link": "https://www.wesura.com/seguro-mascotas?utm_source=pling&utm_medium=app&utm_campaign=wesuraconpling",
+      "commission": 0
+    }
+  ]
+}
+
+
   const shortUrl = "http://tynyurl.com/xixiaa";
 
 
@@ -102,7 +163,8 @@ describe('TabsComponent', () => {
         // { provide: UserService, useValue: mockProductUserService },
         { provide: ShortenerService, useValue: mockShortenerService },
         { provide: MatDialogRef, useValue: mockDialogRef },
-        { provide: MAT_DIALOG_DATA, useValue: mockDialog }
+        // { provide: ContentService, useValue: mockContentService },
+        { provide: MAT_BOTTOM_SHEET_DATA, useValue: mockDialog }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
@@ -115,6 +177,8 @@ describe('TabsComponent', () => {
     // mockProductUserService.getProfile.and.returnValue(of(user));
     mockShortenerService.getShortUrl.and.returnValue(of(shortUrl));
     mockProductSearchService.getProductsPagination.and.returnValue(of(data));
+    // mockContentService.getAssured.and.returnValue(of(segurosSuccess));
+    // mockContentService.getTrips.and.returnValue(of(ViajeSuccess));
   }));
   beforeEach(() => {
     fixture = TestBed.createComponent(TabsComponent);
@@ -145,6 +209,16 @@ describe('TabsComponent', () => {
 
   it("product data", () => {
     component.dataProduct(dataProduct);
+    expect(mockShortenerService.getShortUrl).toHaveBeenCalled();
+  });
+
+  it("Assured data", () => {
+    component.dataAssured(dataAssured);
+    expect(mockShortenerService.getShortUrl).toHaveBeenCalled();
+  });
+
+  it("Trip data", () => {
+    component.dataTrip(dataAssured);
     expect(mockShortenerService.getShortUrl).toHaveBeenCalled();
   });
 

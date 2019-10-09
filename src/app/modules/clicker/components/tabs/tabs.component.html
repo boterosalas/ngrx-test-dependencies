@@ -4,7 +4,7 @@
 
   <mat-tab-group>
     <!-- exito -->
-    <mat-tab label="exito.com">
+    <mat-tab label="exito.com" id="exitoTab">
       <app-search (search)="searchProductPaginate($event)"></app-search>
       <div *ngIf="showResults">
         <div class="row m-0">
