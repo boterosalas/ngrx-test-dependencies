@@ -15,6 +15,7 @@ import { Subscription } from "rxjs";
 import { SearchProduct } from "src/app/interfaces/search-product";
 import { distinctUntilChanged } from "rxjs/operators";
 import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog.component";
+import { ContentService } from 'src/app/services/content.service';
 
 @Component({
   selector: "app-tabs",
@@ -30,7 +31,8 @@ export class TabsComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private user: UserService,
     private shortUrl: ShortenerService,
-    private auth: AuthService
+    private auth: AuthService,
+    private content: ContentService
   ) {}
 
   term: string;
@@ -53,6 +55,8 @@ export class TabsComponent implements OnInit {
   identification: string;
   pageIndex: number = 0;
   isLoggedIn: any;
+  assureds = [];
+  trips = [];
 
   ngOnInit() {
     this.showNotFound = false;
@@ -66,6 +70,10 @@ export class TabsComponent implements OnInit {
         }
       });
     }
+
+    this.Assured();
+    this.Trip();
+
   }
 
   private formShareLink() {
@@ -104,6 +112,7 @@ export class TabsComponent implements OnInit {
   }
 
   public pagination(paginate: any) {
+    this.loading.show();
     this.pageIndex = paginate.pageIndex;
     paginate.length = this.totalItems;
     const from = paginate.pageSize * paginate.pageIndex + 1;
@@ -122,7 +131,7 @@ export class TabsComponent implements OnInit {
     this.pageSizeOptions = setPageSizeOptionsInput.split(",").map(str => +str);
   }
 
-  dataProduct(product) {
+  public dataProduct(product) {
     const productUrl = product.linkText;
     this.url = `https://www.exito.com/${productUrl}/p?utm_source=clickam&utm_medium=referral&utm_campaign=${this.identification}`;
     this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
@@ -139,6 +148,7 @@ export class TabsComponent implements OnInit {
     const showProduct = true;
     const showshowTitle = false;
     const buttonClose = "Cerrar";
+    const showPlu = true;
     const plu = product.items[0].itemId;
     this.dialog.open(DialogComponent, {
       data: {
@@ -150,11 +160,84 @@ export class TabsComponent implements OnInit {
         plu,
         price,
         showProduct,
+        showPlu,
         showshowTitle,
         buttonClose,
         id
       }
     });
+  }
+
+  public dataAssured(assured) {
+    const dataAssuredUrl = assured.link;
+    this.url = dataAssuredUrl;
+    this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
+      this.urlshorten = resp;
+    });
+    this.formShareLink();
+    const title = assured.description;
+    const id = assured.productId;
+    const img = assured.imageurl;
+    const price = assured.commission;
+    const template = this.template;
+    const showClose = false;
+    const showCloseIcon = true;
+    const showProduct = true;
+    const showComission = true;
+    const showshowTitle = false;
+    const buttonClose = "Cerrar";
+    this.dialog.open(DialogComponent, {
+      data: {
+        title,
+        template,
+        showClose,
+        showCloseIcon,
+        img,
+        price,
+        showProduct,
+        showshowTitle,
+        showComission,
+        buttonClose,
+        id
+      }
+    });
+
+  }
+
+  public dataTrip(trip) {
+    const datatripUrl = trip.link;
+    this.url = datatripUrl;
+    this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
+      this.urlshorten = resp;
+    });
+    this.formShareLink();
+    const title = trip.description;
+    const id = trip.productId;
+    const img = trip.imageurl;
+    const price = trip.commission;
+    const template = this.template;
+    const showClose = false;
+    const showCloseIcon = true;
+    const showProduct = true;
+    const showComission = true;
+    const showshowTitle = false;
+    const buttonClose = "Cerrar";
+    this.dialog.open(DialogComponent, {
+      data: {
+        title,
+        template,
+        showClose,
+        showCloseIcon,
+        img,
+        price,
+        showProduct,
+        showshowTitle,
+        showComission,
+        buttonClose,
+        id
+      }
+    });
+
   }
 
   private openSnackBar(message: string, action: string) {
@@ -164,10 +247,24 @@ export class TabsComponent implements OnInit {
   }
 
   /* To copy Text from Textbox */
-  copyInputMessage(inputElement) {
+  public copyInputMessage(inputElement: any) {
     inputElement.select();
     document.execCommand("copy");
     inputElement.setSelectionRange(0, 0);
     this.openSnackBar("Se ha copiado el link al portapapeles", "Cerrar");
   }
+
+  public Assured() {
+    this.content.getAssured().subscribe(assured => {
+      this.assureds = assured;
+    });
+  }
+
+  public Trip() {
+    this.content.getTrips().subscribe(trip => {
+      this.trips = trip;
+    });
+  }
+
+
 }

@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SliderComponent } from './slider.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('SliderComponent', () => {
   let component: SliderComponent;
@@ -11,7 +12,8 @@ describe('SliderComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ SliderComponent ],
       imports: [
-        SlickCarouselModule
+        SlickCarouselModule,
+        HttpClientTestingModule
       ]
     })
     .compileComponents();

@@ -3,13 +3,13 @@
   <div class="position-relative pb-3">
     <mat-list>
       <mat-list-item
-        *ngFor="let item of options"
+        *ngFor="let item of options; let i =index"
         routerLink="{{ item.route }}"
         class="item"
         routerLinkActive="active"
         matRipple
       >
-        <span> {{ item.name }} </span>
+        <span id="menuTop{{i}}"> {{ item.name }} </span>
       </mat-list-item>
     </mat-list>
   </div>

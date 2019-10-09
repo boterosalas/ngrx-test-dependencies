@@ -1,0 +1,17 @@
+@import 'variables';
+@import 'general';
+
+.number {
+    font-size: 1.5rem;
+    color: black;
+    padding-bottom: 5px;
+}
+
+.subtitle{
+    text-transform: uppercase;
+    color: $color-p;
+}
+
+.icon-resume{
+    width: 30px;
+}

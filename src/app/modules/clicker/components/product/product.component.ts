@@ -19,6 +19,8 @@ export class ProductComponent implements OnInit {
   @Input() textbutton: string;
   @Input() id: string;
   @Input() btnid: string;
+  @Input() exito: boolean;
+  @Input() other: boolean;
 
 
 

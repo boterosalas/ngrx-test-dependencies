@@ -1,0 +1,14 @@
+<h2 class="border-bottom-orange-init">{{ 'MONTH_RESUME.TITLE' | translate }}</h2>
+
+<div class="stadistic" fxLayout="row" fxLayoutGap="100px"fxLayoutAlign="start center">
+    <div fxLayout="column" fxFLex="50">
+        <span class="number">$ 189.215</span>
+        <span class="gray border-bottom-blue-init">{{ 'MONTH_RESUME.COMISSIONS' | translate }}</span>
+    </div>
+    <div fxLayout="column" fxFLex="50">
+            <span class="number">32</span>
+            <span class="gray border-bottom-blue-init">{{ 'MONTH_RESUME.LINKS_CREATED' | translate }}</span>
+    </div>
+</div>
+
+<google-chart type="ComboChart" [data]="myData" [options]="myOptions"></google-chart>
