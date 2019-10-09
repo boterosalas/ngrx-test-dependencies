@@ -13,6 +13,8 @@ import { SliderComponent } from './components/slider/slider.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MonthResumeComponent } from './components/month-resume/month-resume.component';
+import { GeneralResumeComponent } from './components/general-resume/general-resume.component';
 
 const routes: Routes = [
   {
@@ -22,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [HomeComponent, ProductComponent, SliderComponent, TabsComponent],
+  declarations: [HomeComponent, ProductComponent, SliderComponent, TabsComponent, MonthResumeComponent, GeneralResumeComponent],
   imports: [
     CommonModule,
     AppMaterialModule,

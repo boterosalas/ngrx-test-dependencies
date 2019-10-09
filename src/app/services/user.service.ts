@@ -12,15 +12,15 @@ import { AuthService } from "./auth.service";
 export class UserService {
   constructor(private http: HttpClient, private auth: AuthService) {
     this.auth.isLogged$.pipe(distinctUntilChanged()).subscribe(val => {
-      if(!!val) {
+      if(!!val || this.auth.isLoggedIn()) {
         this.getProfile();
       }
     })
   }
 
   url = environment.URL_PROFILE;
-  apiProfile = "api/userprofile/getuserprofile";
-  apiActivateProfile = "api/userprofile/activateUser";
+  apiProfile = "userprofile/getuserprofile";
+  apiActivateProfile = "userprofile/activateUser";
 
   userInfo$ = new BehaviorSubject<any>(null);
 

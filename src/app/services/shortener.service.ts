@@ -10,7 +10,7 @@ export class ShortenerService {
 
   constructor(private http: HttpClient) { }
   url = environment.URL_PROFILE;
-  apiShorUrl= 'api/userprofile/getShortURL';
+  apiShorUrl= 'userprofile/getShortURL';
   
   getShortUrl(url: string)  {
     const apiShort= `${this.url}${this.apiShorUrl}?=${encodeURIComponent(url)}`

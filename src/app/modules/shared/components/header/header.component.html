@@ -18,14 +18,14 @@
         <div class="menu" fxLayout="row" fxLayoutAlign="space-around center">
                 <a *ngIf="!auth.isLoggedIn" mat-button (click)="showLogin()" id="header-login">{{ 'LOGIN.LOGIN' | translate }}</a>
                 <span *ngIf="auth.isLoggedIn()">
-                    <button mat-button [matMenuTriggerFor]="menu" class="initials">{{initials}}</button>
+                    <button mat-button [matMenuTriggerFor]="menu" class="initials" id="btnUser">{{initials}}</button>
                     <mat-menu #menu="matMenu">
                         <button mat-menu-item>{{ 'HEADER.PROFILE' | translate }}</button>
                         <button mat-menu-item (click)="logout()">{{ 'HEADER.LOGOUT' | translate }} </button>
                     </mat-menu>
                 </span>
                 <span class="border-right"></span>
-                <a mat-button (click)="showMenu()"><mat-icon>menu</mat-icon></a>
+                <a id="hamburguer" mat-button (click)="showMenu()"><mat-icon>menu</mat-icon></a>
         </div>
     </div>
 </header>

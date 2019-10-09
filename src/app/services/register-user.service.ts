@@ -11,8 +11,8 @@ export class RegisterUserService {
   constructor(private http: HttpClient) { }
 
   url = environment.URL_PROFILE;
-  apiCreateUser = 'api/UserProfile/create';
-  apiIdType = 'api/UserProfile/getIdTypes';
+  apiCreateUser = 'UserProfile/create';
+  apiIdType = 'UserProfile/getIdTypes';
 
 
   public registerUser(userInfo: any){

@@ -14,9 +14,9 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   url = environment.URL_SECURITY;
-  apiLogin = 'api/Authentication/login';
-  apiGetmenus= 'api/Authentication/getMenus';
-  apiGetmenusClicker= 'api/Authentication/getMenusByRol';
+  apiLogin = 'Authentication/login';
+  apiGetmenus= 'Authentication/getMenus';
+  apiGetmenusClicker= 'Authentication/getMenusByRol';
 
   menuInfo$ = new BehaviorSubject<any>(null);
 
