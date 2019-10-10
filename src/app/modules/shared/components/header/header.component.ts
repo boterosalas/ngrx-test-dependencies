@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private utils: UtilsService,
-    private auth: AuthService,
+    public auth: AuthService,
     private user: UserService
   ) {}
 

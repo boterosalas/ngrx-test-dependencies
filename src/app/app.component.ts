@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, TemplateRef } from "@angular/core";
+import { Component, OnInit, ViewChild, TemplateRef, HostListener } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import {
   Router,
@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
   private subscription: Subscription = new Subscription();
 
   constructor(
-    translate: TranslateService,
+    private translate: TranslateService,
     private router: Router,
     private utils: UtilsService,
   ) {
@@ -132,6 +132,11 @@ export class AppComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe(); 
+  }
+
+  @HostListener('over')
+  hideMenu() {
+    this.utils.hideMenu();
   }
 
 }
