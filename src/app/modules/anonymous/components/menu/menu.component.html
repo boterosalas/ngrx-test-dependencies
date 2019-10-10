@@ -5,8 +5,10 @@
       <mat-list-item
         *ngFor="let item of options; let i =index"
         routerLink="{{ item.route }}"
+        (click)="hideMenu()"
         class="item"
         routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
         matRipple
       >
         <span id="menuTop{{i}}"> {{ item.name }} </span>

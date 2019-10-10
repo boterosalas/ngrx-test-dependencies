@@ -18,10 +18,19 @@ import { RecoverpasswordformComponent } from "./components/recoverpasswordform/r
 import { RecoverpasswordComponent } from "./pages/recoverpassword/recoverpassword.component";
 import { MenuComponent } from "./components/menu/menu.component";
 import { CardComponent } from './components/card/card.component';
+import { ClickAcademyComponent } from './pages/click-academy/click-academy.component';
+import { OffersComponent } from './pages/offers/offers.component';
+import { FrequentQuestionsComponent } from './pages/frequent-questions/frequent-questions.component';
+import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
 
 const routes: Routes = [
   {
     path: "",
+    redirectTo: 'inicio',
+    pathMatch: 'full'
+  },
+  {
+    path: "inicio",
     component: HomeComponent
   },
   {
@@ -31,6 +40,22 @@ const routes: Routes = [
   {
     path: "recuperar-contrasena/:id",
     component: RecoverpasswordComponent
+  },
+  {
+    path: "click-academy",
+    component: ClickAcademyComponent
+  },
+  {
+    path: "ofertas",
+    component: OffersComponent
+  },
+  {
+    path: "preguntas-frecuentes",
+    component: FrequentQuestionsComponent
+  },
+  {
+    path: "terminos-y-condiciones",
+    component: TermsAndConditionsComponent
   }
 ];
 
@@ -46,7 +71,11 @@ const routes: Routes = [
     RecoverpasswordComponent,
     RecoverpasswordformComponent,
     MenuComponent,
-    CardComponent
+    CardComponent,
+    ClickAcademyComponent,
+    OffersComponent,
+    FrequentQuestionsComponent,
+    TermsAndConditionsComponent
   ],
   imports: [
     FormsModule,

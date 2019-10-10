@@ -74,7 +74,7 @@ export class LoginformComponent implements OnInit {
         if (resp.state === "Success") {
           localStorage.setItem("ACCESS_TOKEN", resp.objectResponse.token);
           this.utils.hideloginForm();
-          this.router.navigate(['/inicio']);
+          this.router.navigate(['/clicker']);
           this.authService.isLogged$.next(true);
         } else {
           Swal.fire({
