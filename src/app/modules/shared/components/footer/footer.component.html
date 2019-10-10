@@ -10,15 +10,15 @@
     </div>
 
     <div class="footer-links pt-4" fxLayout="column" fxLayoutAlign="center center">
-        <a id="home-footer" class="border-bottom-orange section" routerLink="['']">Inicio</a>
-        <a *ngIf="auth.isLoggedIn()" id="offers-footer" class="border-bottom-orange section" routerLink="['']">Reportes</a>
-        <a id="offers-footer" class="border-bottom-orange section" routerLink="['']">Ofertas</a>
-        <a id="academy-footer" class="border-bottom-orange section" routerLink="['']">Click Academy</a>
-        <a id="question-footer" class="border-bottom-orange section" routerLink="['']">Preguntas Frecuentes</a>
+        <a matRipple id="home-footer" class="border-bottom-orange section" [routerLink]="['inicio']">Inicio</a>
+        <a matRipple *ngIf="auth.isLoggedIn()" id="offers-footer" class="border-bottom-orange section" [routerLink]="['']">Reportes</a>
+        <a matRipple id="offers-footer" class="border-bottom-orange section" [routerLink]="['ofertas']" >Ofertas</a>
+        <a matRipple id="academy-footer" class="border-bottom-orange section" [routerLink]="['click-academy']">Click Academy</a>
+        <a matRipple id="question-footer" class="border-bottom-orange section" [routerLink]="['preguntas-frecuentes']">Preguntas Frecuentes</a>
     </div>
     
     <div class="terms" id="terms-footer" fxLayout="column" fxLayoutAlign="center center">
-        <a routerLink="['']">Términos y condiciones</a>
+        <a [routerLink]="['terminos-y-condiciones']">Términos y condiciones</a>
     </div>
 
     <div class="border-footer mt-3"></div>

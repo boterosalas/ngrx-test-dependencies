@@ -84,6 +84,31 @@
         "LINKS_CREATED": "Links creados",
         "PRODUCTS_SELLER": "Productos vendidos",
         "CONVERSION": "Tasa de conversión"
+    },
+    "CLICKACADEMY": {
+        "TOOLS": "Herramientas",
+        "TOOLS_DESCRIPTION": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem",
+        "TOOLS_TEXT1": "Entendiendo la plataforma nueva",
+        "TOOLS_TEXT2": "¿Cómo vendo producto de exito.com?",
+        "TOOLS_TEXT3": "¿Cómo vendo un seguro?",
+        "COMISSIONS": "Comisiones",
+        "COMISSIONS_TEXT": "Conoce nuestras comisiones",
+        "CATEGORY": "Categoría de producto",
+        "COMISSION": "Comisión",
+        "MARKETPLACE": "*Marketplace está excluido y ninguno de sus productos generan comisión."
+    },
+    "FREQUENT": {
+        "FREQUENT_QUESTIONS": "Preguntas Frecuentes",
+        "FREQUENT_QUESTIONS_DESCRIPTION": "Bienvenido a la comunidad de ayuda de Clickam."
+    },
+    "OFFERS": {
+        "OFFERS_TITLE": "Descubre las ofertas",
+        "TENDENT": "Tendencias",
+        "BEST_BUY": "Más vendidos",
+        "BEST_COMISSION": "Mejores comisiones"
+    },
+    "TERMS": {
+        "TITLE": "Emprendedor empleado Almacenes Éxito"
     }
 
 }

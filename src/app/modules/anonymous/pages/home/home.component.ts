@@ -5,6 +5,7 @@ import { Subscription } from "rxjs";
 import { UserService } from "src/app/services/user.service";
 import { UtilsService } from 'src/app/services/utils.service';
 import { trigger, state, style, transition, animate, group } from '@angular/animations';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -54,7 +55,8 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private user: UserService,
-    private utils: UtilsService
+    private utils: UtilsService,
+    private auth: AuthService
   ) {
     this.route.queryParams.subscribe(params => {
       if (params.email) {
@@ -71,6 +73,9 @@ export class HomeComponent implements OnInit {
   
 
   ngOnInit() {
+    if(this.auth.isLoggedIn()) {
+      this.router.navigate(['clicker']);
+    }
   }
 
 
