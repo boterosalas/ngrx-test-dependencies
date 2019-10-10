@@ -15,6 +15,7 @@ import { MatListModule, MatRippleModule, MatMenuModule } from '@angular/material
 import { SociallinksComponent } from './components/sociallinks/sociallinks.component';
 import { TopComponent } from './components/top/top.component';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { GoogleChartsModule } from 'angular-google-charts';
     MatListModule,
     MatRippleModule,
     MatMenuModule,
-    GoogleChartsModule
+    GoogleChartsModule,
+    RouterModule
   ],
   exports: [
     SearchComponent,
@@ -52,7 +54,8 @@ import { GoogleChartsModule } from 'angular-google-charts';
     SociallinksComponent,
     MatMenuModule,
     TopComponent,
-    GoogleChartsModule
+    GoogleChartsModule,
+    RouterModule
   ]
 })
 export class SharedModule {}

@@ -1,7 +1,9 @@
 <header *ngIf="isHome">
     <div fxLayout="row" fxLayoutAlign="space-between center" class="position-absolute">
         <div class="logo pl-4" id="logo-header">
+        <a matRipple  [routerLink]="['inicio']">
             <img src="assets/img/logo-header.svg" alt="clickam">
+        </a>
         </div>
         <div class="menu" fxLayout="row" fxLayoutAlign="space-around center">
             <a mat-button (click)="showLogin()" id="header-login">{{ 'LOGIN.LOGIN' | translate }}</a>
@@ -10,10 +12,12 @@
     </div>
 </header>
 
-<header *ngIf="internal">
-    <div fxLayout="row" fxLayoutAlign="space-between center" class="nav">
-        <div class="logo pl-4" id="logo-header">
-            <img src="assets/img/logo-header-2.svg" alt="clickam">
+<header *ngIf="internal" class="border-orange">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="container nav">
+        <div class="logo" id="logo-header">
+            <a matRipple  [routerLink]="['inicio']">
+                <img src="assets/img/logo-header-2.svg" alt="clickam">
+            </a>
         </div>
         <div class="menu" fxLayout="row" fxLayoutAlign="space-around center">
                 <a *ngIf="!auth.isLoggedIn" mat-button (click)="showLogin()" id="header-login">{{ 'LOGIN.LOGIN' | translate }}</a>
@@ -24,6 +28,7 @@
                         <button mat-menu-item (click)="logout()">{{ 'HEADER.LOGOUT' | translate }} </button>
                     </mat-menu>
                 </span>
+                <a mat-button *ngIf="!auth.isLoggedIn()" (click)="showLogin()" id="header-login">{{ 'LOGIN.LOGIN' | translate }}</a>
                 <span class="border-right"></span>
                 <a id="hamburguer" mat-button (click)="showMenu()"><mat-icon>menu</mat-icon></a>
         </div>

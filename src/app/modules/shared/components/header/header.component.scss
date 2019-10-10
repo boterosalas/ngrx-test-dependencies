@@ -8,12 +8,14 @@
 
 header {
   color: #ffffff;
-
   .nav {
     color: $color-p !important;
-    border-bottom: 1px solid $primary-color;
     min-height: 50px;
   }
+}
+
+.border-orange{
+  border-bottom: 1px solid $primary-color;
 }
 
 .border-right{

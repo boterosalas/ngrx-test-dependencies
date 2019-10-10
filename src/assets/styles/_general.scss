@@ -41,7 +41,7 @@ body {
   white-space: normal !important;
 }
 
-.mat-card, .mat-input-element, .mat-form-field-label {
+.mat-card, .mat-input-element, .mat-form-field-label, .mat-expansion-panel-header,.mat-expansion-panel-content {
   font-family: $font-family-base !important;
 }
 
@@ -297,4 +297,29 @@ button {
   background: $social-share !important;
   color: $color-p !important;
   box-shadow: none;
+}
+
+table{
+  color: $color-p;
+  thead {
+    background: #ECECEC;
+    color: #707070;
+  }
+  th{
+    padding: 5px 10px;
+  }
+  td{
+    padding: 20px 10px;
+  }
+}
+
+.mat-expansion-indicator::after, .mat-expansion-panel-header-description {
+  color:$blue !important;
+}
+.mat-content{
+  font-size: 1rem;
+}
+.mat-expansion-panel-content {
+  background: #F0F0F0;
+  color: #86888A;
 }
