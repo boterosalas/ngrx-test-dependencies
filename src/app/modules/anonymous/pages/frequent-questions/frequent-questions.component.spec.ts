@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FrequentQuestionsComponent } from './frequent-questions.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('FrequentQuestionsComponent', () => {
   let component: FrequentQuestionsComponent;
@@ -8,7 +11,12 @@ describe('FrequentQuestionsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FrequentQuestionsComponent ]
+      declarations: [ FrequentQuestionsComponent ],
+      imports: [
+        TranslateModule.forRoot({}),
+        AppMaterialModule,
+        BrowserAnimationsModule
+      ]
     })
     .compileComponents();
   }));
