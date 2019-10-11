@@ -72,8 +72,14 @@ header {
 }
 
 .border-right-white{
-  border-right: 2px solid $color-p;
+  border-right: 1px solid $color-p;
   z-index: 1;
   position: relative;
   height: 25px;
+}
+
+@media screen and (min-width: 600px) {
+  .initials{
+    margin-left: 10px;
+  }
 }

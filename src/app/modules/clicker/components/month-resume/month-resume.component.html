@@ -1,14 +1,13 @@
 <h2 class="border-bottom-orange-init">{{ 'MONTH_RESUME.TITLE' | translate }}</h2>
 
-<div class="stadistic" fxLayout="row" fxLayoutGap="100px"fxLayoutAlign="start center">
-    <div fxLayout="column" fxFLex="50">
+<div class="stadistic" fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutGap.xs="100px" fxLayoutGap.gt-xs="20px" fxLayoutAlign.xs="start center"  fxLayoutAlign.gt-xs="flex-start flex-start">
+    <div fxLayout="column" fxFLex="50" class="card">
         <span class="number">$ 189.215</span>
         <span class="gray border-bottom-blue-init">{{ 'MONTH_RESUME.COMISSIONS' | translate }}</span>
     </div>
-    <div fxLayout="column" fxFLex="50">
+    <div fxLayout="column" fxFLex="50"  class="card">
             <span class="number">32</span>
             <span class="gray border-bottom-blue-init">{{ 'MONTH_RESUME.LINKS_CREATED' | translate }}</span>
     </div>
+    <google-chart type="ComboChart" [data]="myData" [options]="myoptions"></google-chart>
 </div>
-
-<google-chart type="ComboChart" [data]="myData" [options]="myoptions"></google-chart>

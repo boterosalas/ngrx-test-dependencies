@@ -3,32 +3,33 @@
 </h2>
 
 <div
-  class="sell pb-4"
+  class="sell card mb-2"
   fxLayout="row"
-  fxLayoutGap="20px"
+  fxLayoutGap="10px"
   fxLayoutAlign="start center"
+  
 >
   <div fxLayout="column">
     <img src="assets/img/money-bag.svg" alt="comisiones" />
   </div>
-  <div fxLayout="column">
+  <div fxLayout="column" >
     <span class="number">$ 1'245.078</span>
     <span class="subtitle">{{ "GENERAL_RESUME.COMISSIONS" | translate }}</span>
   </div>
 </div>
 
-<div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center" class="mb-3">
-  <div fxLayout="column" fxLayoutAlign="start">
+<div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" class="mb-3">
+  <div fxLayout="column" fxFlex="33" fxLayoutAlign="start" class="card">
     <img class="pb-4 icon-resume" src="assets/img/link.svg" alt="link" />
     <span class="number">45</span>
     <span class="subtitle">{{ "GENERAL_RESUME.LINKS_CREATED" | translate }}</span>
   </div>
-  <div fxLayout="column">
+  <div fxLayout="column" fxFlex="33" class="card">
     <img class="pb-4 icon-resume" src="assets/img/HomePage.svg" alt="page" />
     <span class="number">32</span>
     <span class="subtitle">{{ "GENERAL_RESUME.PRODUCTS_SELLER" | translate }}</span>
   </div>
-  <div fxLayout="column">
+  <div fxLayout="column" fxFlex="33" class="card">
     <img class="pb-4 icon-resume" src="assets/img/conversion.svg" alt="conversion" />
     <span class="number">63,4</span>
     <span class="subtitle">{{ "GENERAL_RESUME.CONVERSION" | translate }}</span>

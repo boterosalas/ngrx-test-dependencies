@@ -34,6 +34,20 @@ import { Subscription } from "rxjs";
         ])
       ])
     ]),
+    trigger('slideInOut', [
+      state("in", style({ height: "*", opacity: 1 })),
+      transition(":leave", [
+        style({ height: "*", opacity: 1 }),
+
+        group([
+          animate(300),
+          animate(
+            "600ms ease-in-out",
+            style({ transform: "translateX(1000px)" })
+          )
+        ])
+      ])
+    ]),
     trigger("simpleFadeAnimation", [
       // the "in" style determines the "resting" state of the element when it is visible.
       state("in", style({ opacity: 1 })),
@@ -58,6 +72,9 @@ export class AppComponent implements OnInit {
   isOpen = false;
   isOpenMenu = false;
   private subscription: Subscription = new Subscription();
+  innerWidth: number;
+  showAnimation1:boolean;
+  showAnimation2:boolean;
 
   constructor(
     private translate: TranslateService,
@@ -81,6 +98,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.showAnimation1 = true;
+    this.innerWidth = window.innerWidth;
     this.showLoginForm = true;
     this.showRegisterForm = false;
     this.showForgotForm = false;
@@ -137,6 +156,19 @@ export class AppComponent implements OnInit {
   @HostListener('over')
   hideMenu() {
     this.utils.hideMenu();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+    if(this.innerWidth > 600) {
+      this.showAnimation1 = true;
+      this.showAnimation2 = false;
+    } 
+    if(this.innerWidth < 600) {
+      this.showAnimation1 = false;
+      this.showAnimation2 = true;
+    }
   }
 
 }
