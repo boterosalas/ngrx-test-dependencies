@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(private auth:AuthService,   private utils: UtilsService) { }
+  constructor(public auth:AuthService,   private utils: UtilsService) { }
 
   options = [
     {name: 'Incio', route:'inicio'},

@@ -4,6 +4,8 @@
   position: absolute;
   width: 100%;
   padding: 10px 0;
+  left: 0;
+  right: 0;
 }
 
 header {
@@ -23,7 +25,6 @@ header {
     padding: 0 10px;
     z-index: 1;
     position: relative;
-    height: 25px;
 }
 
 .initials {
@@ -50,5 +51,35 @@ header {
     left: -3px;
     right: 0px;
     bottom: 0;
+  }
+}
+
+.menu-desktop{
+  a{
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px 10px;
+  }
+
+  &-internal{
+    a{
+      color: $color-p;
+      text-decoration: none;
+      padding: 5px 10px;
+    }
+  }
+
+}
+
+.border-right-white{
+  border-right: 1px solid $color-p;
+  z-index: 1;
+  position: relative;
+  height: 25px;
+}
+
+@media screen and (min-width: 600px) {
+  .initials{
+    margin-left: 10px;
   }
 }

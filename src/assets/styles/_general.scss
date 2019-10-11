@@ -41,7 +41,7 @@ body {
   white-space: normal !important;
 }
 
-.mat-card, .mat-input-element, .mat-form-field-label, .mat-expansion-panel-header,.mat-expansion-panel-content {
+.mat-card, .mat-input-element, .mat-form-field-label, .mat-expansion-panel-header,.mat-expansion-panel-content, .mat-button, .mat-fab, .mat-flat-button, .mat-icon-button, .mat-mini-fab, .mat-raised-button, .mat-stroked-button {
   font-family: $font-family-base !important;
 }
 
@@ -322,4 +322,28 @@ table{
 .mat-expansion-panel-content {
   background: #F0F0F0;
   color: #86888A;
+}
+
+.mat-raised-button.mat-primary{
+  padding: 0 30px;
+}
+
+.fullheight{
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  background: #fff;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+
+@media screen and (min-width: 600px) {
+  .fullheight{
+    width: 30%;
+    right: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 }
