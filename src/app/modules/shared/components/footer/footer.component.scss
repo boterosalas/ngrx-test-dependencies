@@ -30,7 +30,7 @@ footer {
         }
         .section{
             font-family: $font-galano-bold;
-            padding: 0.8rem 0;
+            padding: 0.8rem;
         }
         a{
             color: $white;
@@ -69,4 +69,14 @@ footer {
         transform: rotate(180deg);
     }
 
+}
+
+@media screen and (min-width: 600px) {
+    .terms{
+        margin-top: 2rem !important;
+    }
+
+    .width-border{
+        width: 40%;
+    }
 }

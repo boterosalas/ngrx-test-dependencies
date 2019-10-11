@@ -1,11 +1,15 @@
 <section class="bg-home pl-3 pr-3 mb-5 pt-4">
-    <div class="home-section-top" fxLayout="column" fxLayoutAlign="start start">
-        <div fxLayout="column" fxLayoutAlign="start" class={{textDirection}}>
-            <h2 id="titleSectionbg">{{title}}</h2>
-            <p>{{description}}</p>
+    <div class="home-section-top container" fxLayout="column" fxLayoutAlign="center start">
+
+        <div class="text-action">
+            <div fxLayout="column" fxLayoutAlign="start" class={{textDirection}}>
+                <h2 id="titleSectionbg">{{title}}</h2>
+                <p class="desc">{{description}}</p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start"  class="mt-4">
+                    <button mat-raised-button class="orange" color="primary" id="register-bg" (click)="openRegister()">{{textbutton}}</button>
+            </div>
         </div>
-        <div fxLayout="row" fxLayoutAlign="start"  class="mt-4">
-                <button mat-raised-button class="orange" color="primary" id="register-bg" (click)="openRegister()">{{textbutton}}</button>
-        </div>
+
     </div>
 </section>

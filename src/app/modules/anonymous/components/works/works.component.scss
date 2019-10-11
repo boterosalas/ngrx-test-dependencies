@@ -8,3 +8,12 @@
     max-width: 230px;
     margin: 0 auto;
   }
+
+  @media screen and (min-width: 600px) {
+      .text-desc{
+          p{
+              width: 30%;
+              margin:0 auto ;
+          }
+      }
+  }

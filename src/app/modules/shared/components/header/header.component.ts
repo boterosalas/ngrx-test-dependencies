@@ -51,4 +51,10 @@ export class HeaderComponent implements OnInit {
   showMenu() {
     this.utils.showMenu();
   }
+
+  @HostListener('over')
+  openRegister() {
+    this.utils.showRegisterForm();
+  }
+  
 }
