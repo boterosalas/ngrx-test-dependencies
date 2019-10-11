@@ -1,19 +1,11 @@
 @import 'animations';
 @import 'variables';
+@import 'general';
 
 .login{
     box-shadow: none !important;
   }
 
-  .fullheight{
-    position: fixed;
-    z-index: 10;
-    top: 0;
-    background: #fff;
-    height: 100%;
-    width: 100%;
-    overflow: auto;
-  }
 
   .mat-transparent{
     background: transparent;

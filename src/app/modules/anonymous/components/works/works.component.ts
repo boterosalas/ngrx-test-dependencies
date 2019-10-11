@@ -21,6 +21,7 @@ export class WorksComponent implements OnInit {
   ];
 
   slideConfig = {"slidesToShow": 1, "slidesToScroll": 1, "dots": true,  dotClass: 'slick-dots orange', autoplay: true}
+  slideConfigMobile = {"slidesToShow": 3, "slidesToScroll": 1, "dots": false,  dotClass: 'slick-dots orange', autoplay: true}
 
   @HostListener('over')
   openRegister() {
