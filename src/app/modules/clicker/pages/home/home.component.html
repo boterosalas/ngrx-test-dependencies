@@ -3,7 +3,8 @@
   <app-tabs></app-tabs>
 
   <div class="ofertas pb-2">
-    <img class="responsive-img mat-elevation-z3 w-100" src="assets/img/ver-ofertas.png" alt="ofertas">
+    <img [fxShow.gt-xs]="false"  class="responsive-img mat-elevation-z3 w-100" src="assets/img/ver-ofertas.png" alt="ofertas">
+    <img  [fxShow.xs]="false" class="responsive-img mat-elevation-z3 w-100" src="assets/img/banner desk-1.png" alt="ofertas">
   </div>
   <div fxLayout.gt-xs="row" fxLayout.xs="column">
     <app-month-resume></app-month-resume>
