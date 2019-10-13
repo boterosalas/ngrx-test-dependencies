@@ -19,3 +19,9 @@
 .plu{
   color: $gray2;
 }
+
+@media screen and (min-width: 600px) {
+  .img-desk{
+      width: 200px;
+  }
+}
