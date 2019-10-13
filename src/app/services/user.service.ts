@@ -1,39 +1,48 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnInit } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "src/environments/environment";
-import { map } from "rxjs/operators";
-import { Observable } from 'rxjs';
+import { map, tap, distinctUntilChanged } from "rxjs/operators";
+import { ResponseService } from "../interfaces/response";
+import { BehaviorSubject } from "rxjs";
+import { AuthService } from "./auth.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class UserService {
-  constructor(private http: HttpClient) {}
-
-  token = localStorage.getItem("ACCESS_TOKEN");
-  authorization = JSON.parse(this.token);
-
-  httpOptions = {
-    headers: new HttpHeaders({
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + this.authorization
+  constructor(private http: HttpClient, private auth: AuthService) {
+    this.auth.isLogged$.pipe(distinctUntilChanged()).subscribe(val => {
+      if(!!val || this.auth.isLoggedIn()) {
+        this.getProfile();
+      }
     })
-  };
+  }
 
   url = environment.URL_PROFILE;
-  apiProfile = "api/userprofile/getuserprofile";
-  apiActivateProfile = "api/userprofile/activateUser";
+  apiProfile = "userprofile/getuserprofile";
+  apiActivateProfile = "userprofile/activateUser";
+
+  userInfo$ = new BehaviorSubject<any>(null);
 
   public getProfile() {
-    return this.http.get(this.url + this.apiProfile, this.httpOptions).pipe(
-      map((user: any) => {
-        return user.objectResponse;
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization
       })
-    );
+    };
+    return this.http
+      .get(this.url + this.apiProfile, httpOptions)
+      .pipe(map((res: ResponseService) => res.objectResponse))
+      .subscribe((resp: ResponseService) => {
+        this.userInfo$.next(resp);
+      });
   }
 
-  public activateProfile(email: string){
-    return this.http.post(`${this.url + this.apiActivateProfile}`, {email});
+  public activateProfile(email: string) {
+    return this.http.post(`${this.url + this.apiActivateProfile}`, { email });
   }
-
 }

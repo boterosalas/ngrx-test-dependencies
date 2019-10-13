@@ -17,20 +17,15 @@ export class ProductSearchService {
     })
   };
 
-  url = environment.URL_VETEX;
+  url = environment.URL_PROFILE;
   
   public getProductsPagination(params: {term: string, from:number, to:number}){
-    const apiSearchVetex = `getProducts?ft=${params.term}&_from=${params.from}&_to=${params.to}`
+    const apiSearchVetex = `userprofile/getProducts?ft=${params.term}&_from=${params.from}&_to=${params.to}`
     return this.http.get(`${this.url + apiSearchVetex}`).pipe(
       map((user: any) => {
         return user.objectResponse;
       })
     );
   }
-
-  // public getTotalItems(params: {term: string}){
-  //   const apiSearchVetex = `getProducts?ft=${params.term}`
-  //   return this.http.get(`${this.url + apiSearchVetex}`);
-  // }
 
 }

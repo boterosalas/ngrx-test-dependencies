@@ -4,13 +4,14 @@
         "EMAIL": "Correo",
         "PASSWORD": "Contraseña",
         "CONFIRM_PASSWORD": "Confirmar Contraseña",
-        "NAME": "Nombre",
+        "NAME": "Nombres",
         "LASTNAME": "Apellidos",
         "CELLPHONE": "Celular",
         "DOCUMENT_NUMBER": "Número de documento",
         "REQUIRED": "El campo {{formValue}} es requerido",
         "NEXT": "Siguiente",
         "REGISTER": "Regístro",
+        "REGISTER2": "Registrarse",
         "INVALID_FORMAT": "El campo {{val}} no puede contener caracteres especiales",
         "MAX_CHARACTERS": "El número máximo de caracteres es {{maxchar}}",
         "MIN_CHARACTERS": "El número mínimo de caracteres es {{minchar}}",
@@ -20,7 +21,9 @@
         "CANCEL": "Cancelar",
         "SEARCH": "Buscar",
         "WHITE_SPACES": "No se permite más de un espacio en blanco",
-        "PASSWORD_PATTERN": "la contraseña debe contener al menos una letra minúscula, una letra mayúscula un número y un carácter especial"
+        "PASSWORD_PATTERN": "la contraseña debe contener al menos una letra minúscula, una letra mayúscula un número y un carácter especial",
+        "SHARE": "Compartir directamente en:",
+        "COPY_LINK": "Copiar link"
     },
     "LOGIN": {
         "LOGIN": "Iniciar sesión",
@@ -28,7 +31,9 @@
         "INVALID_PASSWORD": "Contraseña invalida",
         "FORGOT_PASSWORD": "Olvidó su contraseña?",
         "INTRODUCE_EMAIL": "Ingrese un correo",
-        "INTRODUCE_PASSWORD": "Ingrese una contraseña"
+        "INTRODUCE_PASSWORD": "Ingrese una contraseña",
+        "DESCRIPTION": "Si todavía no tienes una cuenta puedes",
+        "REGISTER": "registrarte aquí"
     },
     "REGISTER": {
         "ACCEPT":"¿Acepta los términos y condiciones y políticas de privacidad de Clickam?",
@@ -36,17 +41,74 @@
         "TITLE_SECTION": "Regístrate, recomienda y gana",
         "TITLE_TERMS_AND_CONDITIONS": "TÉRMINOS Y CONDICIONES DE  LA LEY HABEAS DATA",
         "PASSWORD_NOT_MATCH":"Las contraseñas no son iguales",
-        "ID_TYPE":"Seleccionar documento"
+        "ID_TYPE":"Seleccionar documento",
+        "HAVE_ACCOUNT": "Si ya tienes una cuenta puedes"
     },
     "FORGOTPASSWORD":{
-        "FORGOT_PASSWORD": "Recuperación de contraseña",
-        "ENTER_EMAIL": "Por favor, introduzca su correo electrónico"
+        "FORGOT_PASSWORD": "Recuperar contraseña",
+        "ENTER_EMAIL": "Ingresa tu correo electrónico registrado para recuperar tu contraseña"
     },
     "RECOVERPASSWORD":{
         "RECOVER_PASSWORD": "Recuperar contraseña",
         "ENTER_PASSWORD": "Por favor, introduzca su nueva contraseña"
     },
     "PRODUCTS": {
-        "GET_LINK": "Obtener link"
+        "GET_LINK": "Crear link"
+    },
+    "HOME": {
+        "TITLE_SPEND": "¿Cuánto gano?",
+        "DESPCRIPTION_SPEND": "Revisa los valores que puedes ganar por vender productos del grupo éxito",
+        "TEXT_BUTTON_COMISIONS": "Ver comisiones",
+        "TITLE_SELL": "¿Qué vendo?",
+        "DESPCRIPTION_SELL": "Ten en cuenta las mejores ofertas para vender más",
+        "TEXT_BUTTON_OFFERS": "Ver Ofertas",
+        "HOW_WORKS": "¿Cómo funciona?",
+        "HOW_WORKS_DESCRIPTION": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula",
+        "TITLE_RAISE":"Aumenta tus ingresos en tus espacios habituales",
+        "DESCRIPTION_RAISE": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum.",
+        "TITLE_SEARCH": "Busca y crea un link",
+        "DESCRIPTION_SEARCH": "Elige la tienda y busca el producto que quieres compartir"
+    },
+    "HEADER": {
+        "PROFILE": "Mi perfil",
+        "LOGOUT": "Cerrar sesión"
+    },
+    "MONTH_RESUME": {
+        "TITLE": "Resumen mes",
+        "COMISSIONS": "Comisiones",
+        "LINKS_CREATED": "Links creados"
+    },
+    "GENERAL_RESUME": {
+        "TITLE": "Resumen general",
+        "COMISSIONS": "Total comisiones",
+        "LINKS_CREATED": "Links creados",
+        "PRODUCTS_SELLER": "Productos vendidos",
+        "CONVERSION": "Tasa de conversión"
+    },
+    "CLICKACADEMY": {
+        "TOOLS": "Herramientas",
+        "TOOLS_DESCRIPTION": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem",
+        "TOOLS_TEXT1": "Entendiendo la plataforma nueva",
+        "TOOLS_TEXT2": "¿Cómo vendo producto de exito.com?",
+        "TOOLS_TEXT3": "¿Cómo vendo un seguro?",
+        "COMISSIONS": "Comisiones",
+        "COMISSIONS_TEXT": "Conoce nuestras comisiones",
+        "CATEGORY": "Categoría de producto",
+        "COMISSION": "Comisión",
+        "MARKETPLACE": "*Marketplace está excluido y ninguno de sus productos generan comisión."
+    },
+    "FREQUENT": {
+        "FREQUENT_QUESTIONS": "Preguntas Frecuentes",
+        "FREQUENT_QUESTIONS_DESCRIPTION": "Bienvenido a la comunidad de ayuda de Clickam."
+    },
+    "OFFERS": {
+        "OFFERS_TITLE": "Descubre las ofertas",
+        "TENDENT": "Tendencias",
+        "BEST_BUY": "Más vendidos",
+        "BEST_COMISSION": "Mejores comisiones"
+    },
+    "TERMS": {
+        "TITLE": "Emprendedor empleado Almacenes Éxito"
     }
+
 }

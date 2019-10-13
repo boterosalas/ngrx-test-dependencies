@@ -1,0 +1,56 @@
+<header *ngIf="isHome">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="position-absolute container">
+        <div class="logo pl-4" id="logo-header">
+        <a matRipple  [routerLink]="['inicio']">
+            <img src="assets/img/logo-header.svg" alt="clickam">
+        </a>
+        </div>
+        <div class="menu" fxLayout="row" fxLayoutAlign="space-around center" [fxShow.gt-xs]="false">
+            <a mat-button (click)="showLogin()" id="header-login">{{ 'LOGIN.LOGIN' | translate }}</a>
+            <a mat-button (click)="showMenu()"><mat-icon>menu</mat-icon></a>
+        </div>
+        <div class="menu-desktop" fxLayout="row" fxLayoutAlign="space-around center" [fxShow.xs]="false">
+            <a matRipple id="home-header" [routerLink]="['inicio']" routerLinkActive="active">Inicio</a>
+            <a matRipple *ngIf="auth.isLoggedIn()" id="offers-header" [routerLink]="['reportes']" routerLinkActive="active">Reportes</a>
+            <a matRipple id="offers-header" [routerLink]="['ofertas']" >Ofertas</a>
+            <a matRipple id="academy-header" [routerLink]="['click-academy']">Click Academy</a>
+            <a matRipple id="question-header" [routerLink]="['preguntas-frecuentes']">Preguntas Frecuentes</a>
+            <span class="border-right-white"></span>
+            <a mat-button (click)="openRegister()" id="header-register">{{ 'GENERIC.REGISTER2' | translate }}</a>
+            <a mat-button (click)="showLogin()" id="header-login">{{ 'LOGIN.LOGIN' | translate }}</a>
+        </div>
+    </div>
+</header>
+
+<header *ngIf="internal" class="border-orange">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="container nav">
+        <div class="logo" id="logo-header">
+            <a matRipple  [routerLink]="['inicio']">
+                <img src="assets/img/logo-header-2.svg" alt="clickam">
+            </a>
+        </div>
+        <div class="menu" fxLayout="row" fxLayoutAlign="space-around center">
+                <div class="menu-desktop-internal" fxLayout="row" fxLayoutAlign="space-around center" [fxShow.xs]="false">
+                        <a matRipple id="home-header" [routerLink]="['inicio']">Inicio</a>
+                        <a matRipple *ngIf="auth.isLoggedIn()" id="offers-header" [routerLink]="['reportes']" routerLinkActive="active">Reportes</a>
+                        <a matRipple id="offers-header" [routerLink]="['ofertas']" routerLinkActive="active">Ofertas</a>
+                        <a matRipple id="academy-header" [routerLink]="['click-academy']" routerLinkActive="active">Click Academy</a>
+                        <a matRipple id="question-header" [routerLink]="['preguntas-frecuentes']" routerLinkActive="active">Preguntas Frecuentes</a>
+                        <span class="border-right-white"></span>
+                        <a *ngIf="!auth.isLoggedIn()" mat-button (click)="openRegister()" id="header-register">{{ 'GENERIC.REGISTER2' | translate }}</a>
+                    </div>
+                    <a *ngIf="!auth.isLoggedIn()" mat-button (click)="showLogin()" id="header-login">{{ 'LOGIN.LOGIN' | translate }}</a>
+                <span *ngIf="auth.isLoggedIn()">
+                    <button mat-button [matMenuTriggerFor]="menu" class="initials" id="btnUser">{{initials}}</button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>{{ 'HEADER.PROFILE' | translate }}</button>
+                        <button mat-menu-item (click)="logout()">{{ 'HEADER.LOGOUT' | translate }} </button>
+                    </mat-menu>
+                </span>
+                <div fxLayout="row" [fxShow.gt-xs]="false">
+                    <span class="border-right"></span>
+                    <a id="hamburguer" mat-button (click)="showMenu()"><mat-icon>menu</mat-icon></a>
+                </div>
+        </div>
+    </div>
+</header>

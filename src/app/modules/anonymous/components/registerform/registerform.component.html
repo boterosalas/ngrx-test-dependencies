@@ -1,0 +1,752 @@
+<div
+  class="register-container"
+  [formGroup]="registerForm"
+  *ngIf="showRegisterForm"
+>
+  <mat-form-field>
+    <input
+      matInput
+      id="name"
+      type="text"
+      placeholder="{{ 'GENERIC.NAME' | translate }}"
+      formControlName="name"
+      required
+    />
+    <mat-error
+      id="requiredName"
+      *ngIf="
+        registerForm.controls.name.invalid &&
+        registerForm.controls.name.errors.required
+      "
+      >{{ "GENERIC.REQUIRED" | translate: { formValue: "Nombre" } }}</mat-error
+    >
+
+    <mat-error
+      id="maxName"
+      *ngIf="
+        registerForm.controls.name.invalid &&
+        registerForm.controls.name.errors.maxlength
+      "
+      >{{
+        "GENERIC.MAX_CHARACTERS"
+          | translate
+            : {
+                maxchar:
+                  registerForm.controls.name.errors.maxlength.requiredLength
+              }
+      }}</mat-error
+    >
+
+    <mat-error
+      id="invalidName"
+      *ngIf="
+        registerForm.controls.name.invalid &&
+        registerForm.controls.name.errors.pattern
+      "
+      >{{ "GENERIC.INVALID_FORMAT" | translate: { val: "Nombre" } }}</mat-error
+    >
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      id="lastname"
+      type="text"
+      placeholder="{{ 'GENERIC.LASTNAME' | translate }}"
+      formControlName="lastName"
+      required
+    />
+    <mat-error
+      id="requiredLastName"
+      *ngIf="
+        registerForm.controls.lastName.invalid &&
+        registerForm.controls.lastName.errors.required
+      "
+      >{{
+        "GENERIC.REQUIRED" | translate: { formValue: "Apellidos" }
+      }}</mat-error
+    >
+
+    <mat-error
+      id="maxLastName"
+      *ngIf="
+        registerForm.controls.lastName.invalid &&
+        registerForm.controls.lastName.errors.maxlength
+      "
+      >{{
+        "GENERIC.MAX_CHARACTERS"
+          | translate
+            : {
+                maxchar:
+                  registerForm.controls.lastName.errors.maxlength.requiredLength
+              }
+      }}</mat-error
+    >
+
+    <mat-error
+      id="invalidLastName"
+      *ngIf="
+        registerForm.controls.lastName.invalid &&
+        registerForm.controls.lastName.errors.pattern
+      "
+      >{{
+        "GENERIC.INVALID_FORMAT" | translate: { val: "Apellidos" }
+      }}</mat-error
+    >
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select
+      placeholder="{{ 'REGISTER.ID_TYPE' | translate }}"
+      id="idtype"
+      formControlName="idType"
+    >
+      <mat-option>{{ "REGISTER.ID_TYPE" | translate }}</mat-option>
+      <mat-option *ngFor="let typeId of idUserType" value="{{ typeId.id }}">{{
+        typeId.value
+      }}</mat-option>
+    </mat-select>
+    <mat-error
+      id="requiredTypeId"
+      *ngIf="registerForm.controls.idType.invalid"
+      >{{ "GENERIC.REQUIRED" | translate: { formValue: "" } }}</mat-error
+    >
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      id="id"
+      type="text"
+      placeholder="{{ 'GENERIC.DOCUMENT_NUMBER' | translate }}"
+      formControlName="id"
+      required
+    />
+
+    <mat-error
+      id="reuiredId"
+      *ngIf="
+        registerForm.controls.id.invalid &&
+        registerForm.controls.id.errors.required
+      "
+      >{{
+        "GENERIC.REQUIRED" | translate: { formValue: "Número de documento" }
+      }}</mat-error
+    >
+
+    <mat-error
+      id="maxId"
+      *ngIf="
+        registerForm.controls.id.invalid &&
+        registerForm.controls.id.errors.maxlength
+      "
+      >{{
+        "GENERIC.MAX_CHARACTERS"
+          | translate
+            : {
+                maxchar:
+                  registerForm.controls.id.errors.maxlength.requiredLength
+              }
+      }}</mat-error
+    >
+
+    <mat-error
+      id="numberId"
+      *ngIf="
+        registerForm.controls.id.invalid &&
+        registerForm.controls.id.errors.pattern
+      "
+      >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+    >
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      id="phone"
+      type="text"
+      placeholder="{{ 'GENERIC.CELLPHONE' | translate }}"
+      formControlName="phone"
+      required
+    />
+    <mat-error
+      id="requiredPhone"
+      *ngIf="
+        registerForm.controls.phone.invalid &&
+        registerForm.controls.phone.errors.required
+      "
+      >{{ "GENERIC.REQUIRED" | translate: { formValue: "Celular" } }}</mat-error
+    >
+
+    <mat-error
+      id="minPhone"
+      *ngIf="
+        registerForm.controls.phone.invalid &&
+        registerForm.controls.phone.errors.minlength
+      "
+      >{{
+        "GENERIC.MIN_CHARACTERS"
+          | translate
+            : {
+                minchar:
+                  registerForm.controls.phone.errors.minlength.requiredLength
+              }
+      }}</mat-error
+    >
+
+    <mat-error
+      id="maxPhone"
+      *ngIf="
+        registerForm.controls.phone.invalid &&
+        registerForm.controls.phone.errors.maxlength
+      "
+      >{{
+        "GENERIC.MAX_CHARACTERS"
+          | translate
+            : {
+                maxchar:
+                  registerForm.controls.phone.errors.maxlength.requiredLength
+              }
+      }}</mat-error
+    >
+
+    <mat-error
+      id="numberPhone"
+      *ngIf="
+        registerForm.controls.phone.invalid &&
+        registerForm.controls.phone.errors.pattern
+      "
+      >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+    >
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      id="email"
+      type="email"
+      placeholder="{{ 'GENERIC.EMAIL' | translate }}"
+      formControlName="email"
+      (input)="removewhiteSpaceEmail()"
+      required
+    />
+    <mat-error id="invalidEmail" *ngIf="registerForm.controls.email.invalid">{{
+      "LOGIN.INVALID_EMAIL" | translate: { formValue: "Email" }
+    }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      id="password"
+      type="password"
+      placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
+      formControlName="password"
+      required
+      (input)="removewhiteSpace()"
+    />
+    <mat-error
+      id="requiredPassword"
+      *ngIf="
+        registerForm.controls.password.invalid &&
+        registerForm.controls.password.errors.required
+      "
+      >{{
+        "GENERIC.REQUIRED" | translate: { formValue: "Contraseña" }
+      }}</mat-error
+    >
+
+    <mat-error
+      id="minPassword"
+      *ngIf="
+        registerForm.controls.password.invalid &&
+        registerForm.controls.password.errors.minlength
+      "
+      >{{
+        "GENERIC.MIN_CHARACTERS"
+          | translate
+            : {
+                minchar:
+                  registerForm.controls.password.errors.minlength.requiredLength
+              }
+      }}</mat-error
+    >
+
+    <mat-error
+      id="maxPassword"
+      *ngIf="
+        registerForm.controls.password.invalid &&
+        registerForm.controls.password.errors.maxlength
+      "
+      >{{
+        "GENERIC.MAX_CHARACTERS"
+          | translate
+            : {
+                maxchar:
+                  registerForm.controls.password.errors.maxlength.requiredLength
+              }
+      }}</mat-error
+    >
+
+    <mat-error
+      id="patternPassword"
+      *ngIf="
+        registerForm.controls.password.invalid &&
+        registerForm.controls.password.errors.pattern
+      "
+      >{{ "GENERIC.PASSWORD_PATTERN" | translate }}</mat-error
+    >
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      id="confirmPassword"
+      type="password"
+      placeholder="{{ 'GENERIC.CONFIRM_PASSWORD' | translate }}"
+      formControlName="confirmPassword"
+      required
+      (input)="removewhiteSpaceConfirm()"
+    />
+    <mat-error
+      id="notmatchPassword"
+      *ngIf="
+        registerForm.get('confirmPassword').errors &&
+        registerForm.get('confirmPassword').errors.ConfirmPassword
+      "
+      >{{ "REGISTER.PASSWORD_NOT_MATCH" | translate }}</mat-error
+    >
+
+    <mat-error
+      id="requiredConfirmPassword"
+      *ngIf="
+        registerForm.controls.confirmPassword.invalid &&
+        registerForm.controls.confirmPassword.errors.required
+      "
+      >{{
+        "GENERIC.REQUIRED" | translate: { formValue: "Contraseña" }
+      }}</mat-error
+    >
+
+    <mat-error
+      id="minConfirmPassword"
+      *ngIf="
+        registerForm.controls.confirmPassword.invalid &&
+        registerForm.controls.confirmPassword.errors.minlength
+      "
+      >{{
+        "GENERIC.MIN_CHARACTERS"
+          | translate
+            : {
+                minchar:
+                  registerForm.controls.confirmPassword.errors.minlength
+                    .requiredLength
+              }
+      }}</mat-error
+    >
+
+    <mat-error
+      id="maxConfirmPassword"
+      *ngIf="
+        registerForm.controls.confirmPassword.invalid &&
+        registerForm.controls.confirmPassword.errors.maxlength
+      "
+      >{{
+        "GENERIC.MAX_CHARACTERS"
+          | translate
+            : {
+                maxchar:
+                  registerForm.controls.confirmPassword.errors.maxlength
+                    .requiredLength
+              }
+      }}</mat-error
+    >
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    id="next"
+    class="center button button-100"
+    color="orange"
+    (click)="nextStep()"
+    [disabled]="!registerForm.valid"
+  > 
+  <span fxLayoutAlign="space-around center">
+    {{ "GENERIC.NEXT" | translate }} <mat-icon>arrow_forward</mat-icon>
+  </span>
+  </button>
+</div>
+
+<div *ngIf="showTerms">
+  <h4>{{ "REGISTER.TITLE_SECTION" | translate }}</h4>
+  <h3>{{ "REGISTER.TITLE_TERMS_AND_CONDITIONS" | translate }}</h3>
+  <div class="terms">
+  <p>
+    GEMEX O &amp; W S.A.S. ( “Gemex”) es una sociedad comercial domiciliada en
+    la República de Colombia que pone a disposición en su aplicativo web
+    www.pling.com.co ( “La Plataforma” o “pling.com.co”) una plataforma que
+    permite la exhibición y comercialización de bienes y/o servicios (“los
+    Productos”) por parte de vendedores nacionales o internacionales que actúan
+    a título personal y que por tanto son independientes a Gemex (“los
+    Vendedores”), para la adquisición en línea de los mismos por parte de los
+    consumidores (“Clientes” o “Usuarios”), y gracias a la intermediación de los
+    emprendedores inscritos en el programa PLING (“el Programa”).
+  </p>
+  <p>
+    Gemex por tanto, no es distribuidor de los Productos ofrecidos por los
+    Vendedores, no tiene ninguna posición contractual dentro de la transacción
+    efectuada entre Clientes y Vendedores, y tampoco podrá ser calificado como
+    revendedor de los productos ofrecidos por los Vendedores en pling.com.co
+  </p>
+  <p>
+    Los presentes Términos y Condiciones están sujetos a cambios sin previo
+    aviso, en cualquier momento, y a partir de la fecha de modificación de estos
+    Términos y Condiciones, todas las operaciones que se celebren entre
+    pling.com.co y el Usuario se regirán por el documento modificado.
+  </p>
+  <p>
+    <strong>
+      Ámbito de aplicación de las Condiciones de Uso
+    </strong>
+  </p>
+  <p>
+    Las presentes condiciones generales de uso de la plataforma www.pling.com.co
+    (“Condiciones de Uso”) se aplican a todos los pedidos de Productos
+    realizados por los Usuarios a los Vendedores o Lineas de Negocio vinculadas
+    al Programa. Las Condiciones de Uso aplicables son las que se encuentren
+    vigentes en el momento de realizar el pedido por parte del Usuario. De igual
+    manera, el Vendedor por el sólo hecho de exhibir los Productos en la
+    plataforma confirma el entendimiento y acepta incondicionalmente la
+    aplicación de los mismos.
+  </p>
+  <p>
+    <strong>
+      Capacidad para el uso de la plataforma
+    </strong>
+  </p>
+  <p>
+    Los bienes y servicios ofrecidos en la Plataforma únicamente podrán ser
+    utilizados por personas que tengan capacidad legal para contratar de
+    conformidad con lo dispuesto por la legislación colombiana vigente.
+  </p>
+  <p><strong>Emprendedor Pliner / Cliente</strong></p>
+  <p>
+    No existirá ningún tipo de relación contractual o responsabilidad legal
+    entre el emprendedor y el cliente, ya que la venta final será dada entre
+    determina línea de negocio y el cliente final.
+  </p>
+  <p><strong>Proceso de venta</strong></p>
+  <p>
+    Los clientes pueden ordenar los Productos o Servicios ofrecidos en la
+    Plataforma, por intermedio de los Emprendedores. La descripción de los
+    Productos es suministrada por los Emprendedores y complementada por la
+    información dispuesta en la Plataforma y la que llegare a informar cada uno
+    de los Vendedores o líneas de negocio vinculadas, siendo por tanto éstos los
+    responsables de la integridad de la descripción facilitada y la conformidad
+    de los Productos con dicha descripción.
+  </p>
+  <p>
+    Al hacer clic en el icono Acepto Términos y Condiciones al ingresar por
+    primer vez a la plataforma, el Emprendedor y los Clientes contactados
+    declaran aceptar plenamente y sin reserva alguna la totalidad de las
+    Condiciones de Uso de la Plataforma y el marco regulatorio del mismo.
+  </p>
+  <p>
+    Una vez confirmado el contenido de la orden, aceptadas los Términos y
+    Condiciones de la Plataforma y de cada una de las líneas de negocio
+    ofrecidas, el Referido validará definitivamente su orden por el pago
+    efectivo en cada una de las plataformas de los negocios. El pedido será
+    válido únicamente a partir del pago total del precio del Producto.
+  </p>
+  <p>
+    La venta efectuada por parte del Vendedor está sujeta a la condición
+    resolutoria de que el producto esté disponible.
+  </p>
+  <p>
+    Gemex no recoge ni recibe en ningún momento los fondos de los pedidos
+    realizados a través de la Plataforma y por intermedio de los Emprendedores.
+    Todo pedido que no haya sido pagado en su totalidad será denegado.
+  </p>
+  <p>
+    Cada uno de los vendedores o líneas de negocio vinculadas confirmarán
+    sistemáticamente la orden de compra por correo electrónico a cada Usuario o
+    cliente (siempre y cuando esta sea aceptada por el banco o el medio de pago
+    escogido). Tras la aceptación del pedido, la información de éste permanecerá
+    accesible en el Sitio en “estado de pedidos”.
+  </p>
+  <p>
+    Gemex y/o la plataforma notificará al Vendedor si uno o más de los Productos
+    tienen una orden de compra de un Cliente. El Vendedor tiene veinticuatro
+    (24) horas hábiles para confirmar o negar la el estado de compra. Una vez
+    verificado lo anterior, Gemex comunicará al emprendedor el estado de su
+    venta, cabe anotar que el emprendedor contara con 8 días para gestionar la
+    finalización de la venta, de lo contrario y si esta se da posterior a estos
+    8 días, no podrá acceder a la comisión por la misma.
+  </p>
+  <p>
+    Si el Vendedor confirma la disponibilidad de los Productos o servicios, el
+    contrato de venta se concluye definitivamente entre el Vendedor y el
+    Cliente.
+  </p>
+  <p>
+    El Vendedor o Línea de Negocio es el único responsable en caso de no
+    disponibilidad del Producto ya que este punto solo lo controla el mismo.
+  </p>
+  <p><strong>Envío y entrega</strong></p>
+  <p>
+    Todas las condiciones y tiempos de entrega en productos y servicios serán
+    responsabilidad de cada una de las líneas de negocios, de acuerdo a sus
+    políticas y términos y condiciones.
+  </p>
+  <p><strong>Precios</strong></p>
+  <p>
+    Los precios de los Productos son determinados libremente por los Vendedores
+    o Lineas de Negocio y se indican excluyendo el precio de su envío en la
+    ficha de los Productos, en la línea correspondiente al Vendedor o Producto
+    seleccionado. Si es necesario, se añaden los gastos de envío al precio de
+    los Productos antes de la validación final por el Cliente.
+  </p>
+  <p>
+    Todos los Productos ofrecidos por los eEmprendedores y relacionados en la
+    Plataforma incluyen en el precio todos los impuestos legalmente aplicables
+    en Colombia.
+  </p>
+  <p>
+    Algunos de los Productos ofrecidos por los Emprendedores y relacionados en
+    la plataforma pueden sufrir algunos cambios en el precio durante el día por
+    causas ajenas a la voluntad de los Vendedores, por ejemplo aquellas
+    derivadas de la fluctuación de divisas.
+  </p>
+  <p><strong>Responsabilidad</strong></p>
+  <p>
+    Los Productos ofrecidos por los Emprendedores y a través de la Plataforma
+    están sujetos a disponibilidad y se ofrecen de forma limitada hasta agotar
+    las existencias informadas por los Vendedores o Lineas de Negocio.
+    Eventualmente podría suceder que un mismo producto sea adquirido por varios
+    Usuarios al mismo tiempo, y que al final del proceso de venta resulte que el
+    Producto ya no se encuentre disponible debido al agotamiento de todas las
+    unidades disponibles, aun cuando tu como emprendedor lo hayas ofrecido y se
+    relacionará como Producto disponible en la Plataforma. En este caso se
+    procederá a informar al Cliente la situación, se le notificara la
+    imposibilidad de procesar su orden de compra.
+  </p>
+  <p>
+    Los Vendedores o Lineas de Negocio no podrán ser declarados responsables o
+    que incumplen las presentes Condiciones de Uso por cualquier retraso o
+    incumplimiento derivado de la entrega de los Productos, siempre que dicha
+    eventualidad tenga como causa un evento de fuerza mayor o caso fortuito de
+    conformidad con las Leyes colombianas.
+  </p>
+  <p>
+    Los Productos ofrecidos por los Referidores y a través de la Plataforma son
+    de absoluta responsabilidad de los Vendedores o líneas de negocio, así como
+    también el uso de las marcas que los identifican. De manera que los
+    Vendedores serán los únicos responsables en el evento en que terceros
+    consideren que sus derechos de propiedad intelectual han sido infringidos
+    por la venta de los mismos y, por tanto, cualquier reclamación por este
+    concepto deberá ser remitida directamente a los Vendedores.
+  </p>
+  <p><strong>Reclamaciones y Garantías</strong></p>
+  <p>
+    Gemex opera como un simple facilitador de la Plataforma para la ejecución
+    del Programa, con el fin de que los Vendedores y las distintas líneas de
+    ofrezcan su portafolio. Gemex en todo caso no es un revendedor de los
+    Productos ofrecidos. Por tanto, cualquier reclamación sobre la no
+    conformidad o calidad de los Productos deberá ser realizada directamente por
+    el Usuario al Proveedor a través de pling@grupo-exito.com
+  </p>
+  <p>
+    El Vendedor es el único responsable de los Productos ofrecidos por los
+    Emprendedores y a través de la Plataforma, Gemex sin embargo, se reserva el
+    derecho de intervenir en los procesos de reclamación y/o garantías, si el
+    Vendedor no proporciona ninguna respuesta a una solicitud del Usuario en
+    relación a dichos conceptos dentro de los 5 días hábiles.
+  </p>
+  <p>
+    Gemex no asume responsabilidad alguna y bajo ninguna circunstancia de las
+    garantías otorgadas por los Vendedores de los Productos, por tanto el
+    Usuario Referido deberá contactar directamente al Vendedor para hacer
+    efectiva la garantía.
+  </p>
+  <p><strong>Protección de datos personales</strong></p>
+  <p><strong>Modificación de las Condiciones de Uso</strong></p>
+  <p>
+    Éxito se reserva el derecho de realizar modificaciones, adiciones o
+    inserciones a las presentes Condiciones de Uso en cualquier momento. Por
+    tanto, los Usuarios quedarán sujetos a las condiciones vigentes a la fecha
+    en que realice una orden de compra.
+  </p>
+  <p><strong>Ley y jurisdicción aplicable.</strong></p>
+  <p>
+    Los presentes Términos y Condiciones se rigen e interpretan de conformidad
+    con las leyes de la República de Colombia. Cualquier controversia relativa a
+    la misma estará sujeta a los tribunales de la República de Colombia.
+  </p>
+  <p><strong>Invalidez</strong></p>
+  <p>
+    En el evento en que cualquier disposición de los presentes Términos y
+    Condiciones se considere nula, ineficaz, o inválida, en forma parcial o
+    total por un tribunal o cualquier autoridad competente, dicha declaratoria
+    no afectará la validez de las demás disposiciones, las cuales continuarán
+    vigentes.
+  </p>
+  <p><strong>Términos y condiciones Viajes Éxito</strong></p>
+  <p>
+    Este reglamento delimita y aclara las condiciones bajo las cuales se regirá
+    la participación de Viajes Éxito como aliado comercial en el proyecto PLING.
+    Lo aquí dispuesto será de acatamiento obligatorio para las dos partes
+    implicadas.
+  </p>
+  <p>
+    La comisión sólo será válida si el cliente es cliente nuevo de Viajes Éxito,
+    es decir, si no ha comprado nunca antes en Viajes Éxito y su primera compra
+    la realiza como cliente de la App. Se pagará una comisión de $50.000cop al
+    emprendedor cada vez que su cliente realice una compra de paquete y/o de
+    $20.000cop por cada compra de hotel, vuelo nacional, vuelo internacional,
+    actividad o circuito realizado a través de cualquiera de nuestros canales.
+  </p>
+  <p>La comisión se pagará por pasajero/cliente y no por transacción.</p>
+  <p>
+    La comisión sólo se pagará si el cliente es quien compra y paga el servicio.
+  </p>
+  <p>La comisión se paga si se cumplen los siguientes requisitos:</p>
+
+  <ol>
+    <li>Que se inscriba</li>
+    <li>Que se haga el pedido a través de cualquiera de los tres canales.</li>
+    <li>Que se pague el pedido</li>
+  </ol>
+
+  <p>
+    El cliente tendrá un plazo de 8 días para realizar la compra, para que sea
+    efectivo y se pague la comisión.
+  </p>
+  <p>
+    Los asesores de puntos de venta contratados actualmente por Viajes Éxito y
+    los asesores del contact center contratados por One Link no podrán ser
+    emprendedores del negocio viajes éxito.
+  </p>
+  <p>La comisión no aplica para cruceros, ni Asist card.</p>
+  <p>
+    <strong
+      >Términos y condiciones Éxito.com, Bronzini.com y Arkitect.com</strong
+    >
+  </p>
+  <p>
+    No se pagarán comisiones sobre pedidos que hayan sido devueltos ejerciendo
+    el derecho de retracto.
+  </p>
+  <p>
+    Los términos y condiciones, las políticas de datos personales y las
+    políticas de privacidad que aplican a los clientes y usuarios serán los
+    establecidos en los legales de cada sitio web. Los cuales podrán cambiar sin
+    previo aviso.
+  </p>
+  <p>
+    Las compras se deben realizar a nombre del cliente identificado con su
+    número de cédula a través de las páginas web de Arkitec, Bronzini y
+    éxito.com.
+  </p>
+  <p>
+    El emprendedor podrá ganar comisiones por todos los pedidos que hagan sus
+    clientes si cumplen con la condición de no haber realizado compras en los
+    últimos 3 meses para alimentos o en los últimos 12 meses para categorías de
+    no alimentos.
+  </p>
+  <p><strong>Términos y condiciones Todohogar</strong></p>
+  <p>
+    Si el emprendedor es empresario y se inscribe por la plataforma, y entrega
+    un cliente por ésta para ser empresario; sólo se le paga la comisión, no el
+    regalo por cliente como en el modelo tradicional de Todohogar.
+  </p>
+  <p>La comisión se paga si se cumple:</p>
+  <ol>
+    <li>Que se inscriba</li>
+    <li>Que se haga el primer pedido</li>
+    <li>Que se pague el primer pedido</li>
+  </ol>
+  <p>La comisión será de $18.000</p>
+  <p>
+    Cuando se inscriba en la plataforma como cliente, tiene 40 días para
+    inscribirse como empresario de Todohogar, realizar el primer pedido y
+    pagarlo.
+  </p>
+  <p>
+    A partir de que el cliente monte el primer pedido y lo pague, pasarán 23
+    días y se hará efectiva la comisión.
+  </p>
+  <p>
+    Si faltan menos de una semana de la campaña operativa (la que está
+    facturando), se le dará la opción al cliente de empezar a contar desde la
+    campaña siguiente.
+  </p>
+  <p>
+    Se contactará al cliente el mismo día de su captura, si entra antes del
+    medio día será contactado en la tarde del mismo día, si es capturado en la
+    tarde al día siguiente será contactado en la mañana.
+  </p>
+  <p>
+    Si al tercer intento no es factible contactar al cliente, se considerará un
+    cliente no efectivo y se eliminará de la base de datos.
+  </p>
+  <p>La asignación del cupo será otorgado según las políticas de Todo Hogar.</p>
+  <p>
+    Si la asignación de cupo de un cliente no es efectiva, se tiene la
+    posibilidad de montar su pedido en la modalidad de pago anticipado y el
+    cliente es capturado como efectivo.
+  </p>
+  <p>El pedido debe ser montado según el monto mínimo de la campaña.</p>
+  <p><strong>Términos y condiciones Seguros Éxito</strong></p>
+  <p>
+    SEGUROS GENERALES SURAMERICANA S.A. y SEGUROS DE VIDA SURAMERICANA S.A., en
+    adelante SURA, se permite informar los términos y condiciones que regirán la
+    relación con la aplicación Pling:
+  </p>
+  <p>
+    SURA se encargará de analizar la viabilidad de vincular o no a un cliente a
+    la póliza solicitada, de conformidad con los lineamientos y procedimientos
+    establecidos internamente. En caso de que el cliente referenciado sea
+    rechazado en el proceso de compra, no se generará ninguna comisión.
+  </p>
+  <p>
+    El cliente dispondrá 8 días calendario para finalizar el proceso de compra
+    después de haber sido referido y de haber recibido la URL para realizar el
+    pago. Si después de 8 días calendario el cliente no ha realizado la compra,
+    se eliminará de la lista de clientes interesados, por lo que en el eventual
+    caso de que el cliente realice la compra después de este término, no se
+    generará ningún pago del servicio a favor del emprendedor.
+  </p>
+  <p>
+    La comisión se pagará al emprendedor por cada uno de los seguros que sean
+    efectivamente expedidos y recaudados por la Compañía.
+  </p>
+  <p>
+    No se generará pago de comisión por aquellas pólizas que hayan sido
+    compradas por el cliente de manera previa a la referenciación en cualquiera
+    de los canales de SURA.
+  </p>
+  <p>
+    El pago de la comisión corresponde al valor absoluto definido en las
+    características de cada producto y no dependerá del valor de la prima de la
+    póliza adquirida por el cliente.
+  </p>
+  <p>
+    Sólo se pagará la comisión al emprendedor por el producto para el cual el
+    cliente fue referido. En caso de que el cliente esté interesado en adquirir
+    varios productos, éste debe ser referido para cada uno de ellos.
+  </p>
+</div>
+  <mat-checkbox id="chkaccept" (change)="acceptTermsCheck()">{{
+    "REGISTER.ACCEPT" | translate
+  }}</mat-checkbox>
+  <button
+    mat-raised-button
+    id="register"
+    class="mt-2 center button button-100"
+    color="orange"
+    (click)="register()"
+    [disabled]="!acceptTerms"
+  >
+    {{ "GENERIC.REGISTER" | translate }}
+  </button>
+</div>

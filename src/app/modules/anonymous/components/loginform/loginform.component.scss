@@ -1,0 +1,30 @@
+@import 'variables';
+@import 'general';
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container > * {
+  width: 100%;
+}
+
+.cursor{
+  &-pointer{
+    cursor: pointer;
+  }
+}
+
+.text-decoration{
+    text-decoration: underline;
+}
+
+.mat-orange{
+  background: $primary-color;
+  color: $white;
+}
+
+.mat-gray{
+  color: #86888a;
+}

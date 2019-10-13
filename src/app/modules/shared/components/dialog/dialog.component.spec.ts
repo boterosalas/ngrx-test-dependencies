@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogComponent } from './dialog.component';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
 import { AppMaterialModule } from '../../app-material/app-material.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
@@ -10,7 +10,7 @@ describe('DialogComponent', () => {
   let fixture: ComponentFixture<DialogComponent>;
 
   const dialogMock = {
-    close: () => { }
+    dismiss: () => { }
    };
 
   beforeEach(async(() => {
@@ -22,8 +22,8 @@ describe('DialogComponent', () => {
         AppMaterialModule
        ],
        providers: [
-        { provide: MAT_DIALOG_DATA, useValue: {} },
-        {provide: MatDialogRef, useValue: dialogMock},
+        { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} },
+        {provide: MatBottomSheetRef, useValue: dialogMock},
        ],
        schemas: [
          NO_ERRORS_SCHEMA
@@ -43,7 +43,7 @@ describe('DialogComponent', () => {
   });
 
   it('close dialog', () => {
-    let spy = spyOn(component.dialogRef, 'close').and.callThrough();
+    let spy = spyOn(component.dialogRef, 'dismiss').and.callThrough();
     component.onNoClick();
     expect(spy).toHaveBeenCalled();    
   });

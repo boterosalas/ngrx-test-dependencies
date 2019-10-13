@@ -1,0 +1,43 @@
+@import "variables";
+
+.bg-home {
+  background-image: url("/assets/img/bg-home-banner@2x.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 81vh;
+  p,
+  h2 {
+    color: $white;
+  }
+}
+
+.home-section-top {
+  min-height: 300px;
+}
+
+@media screen and (min-width: 600px) {
+  .bg-home {
+    background-image: url("/assets/img/bg-home-desktop.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 110vh;
+  }
+
+  .home-section-top {
+    min-height: 500px;
+  }
+
+  #titleSectionbg {
+    font-size: 2.2rem;
+  }
+
+  .desc {
+    font-size: 1.1rem;
+    font-family: $font-galano;
+  }
+
+  .text-action {
+    width: 40%;
+  }
+
+}
