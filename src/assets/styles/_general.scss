@@ -3,6 +3,7 @@
 html,
 body {
   height: 100%;
+  color: $color-p;
 }
 
 body {
@@ -52,7 +53,8 @@ body {
 .mat-icon-button,
 .mat-mini-fab,
 .mat-raised-button,
-.mat-stroked-button {
+.mat-stroked-button,
+.mat-tab-group {
   font-family: $font-family-base !important;
 }
 
