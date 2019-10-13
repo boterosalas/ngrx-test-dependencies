@@ -26,6 +26,7 @@ export class TabsComponent implements OnInit {
   constructor(
     private sp: ProductSearchService,
     private loading: LoaderService,
+    // private dialog: MatDialog,
     private dialog: MatBottomSheet,
     private fb: FormBuilder,
     private _snackBar: MatSnackBar,
@@ -48,7 +49,7 @@ export class TabsComponent implements OnInit {
   totalItems: number;
   pageSize: number = 6;
   pageTo: number = 6;
-  pageSizeOptions: number[] = [5, 10, 25, 50];
+  pageSizeOptions: number[] = [6, 12, 24, 50];
   url: string;
   urlshorten: string;
   formLink: FormGroup;

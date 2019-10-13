@@ -59,6 +59,9 @@ header {
     color: #ffffff;
     text-decoration: none;
     padding: 5px 10px;
+    &.active{
+      color: $primary-color;
+    }
   }
 
   &-internal{
@@ -66,6 +69,9 @@ header {
       color: $color-p;
       text-decoration: none;
       padding: 5px 10px;
+      &.active{
+        color: $primary-color;
+      }
     }
   }
 
@@ -83,3 +89,4 @@ header {
     margin-left: 10px;
   }
 }
+
