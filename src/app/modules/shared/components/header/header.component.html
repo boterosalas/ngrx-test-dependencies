@@ -11,7 +11,7 @@
         </div>
         <div class="menu-desktop" fxLayout="row" fxLayoutAlign="space-around center" [fxShow.xs]="false">
             <a matRipple id="home-header" [routerLink]="['inicio']" routerLinkActive="active">Inicio</a>
-            <a matRipple *ngIf="auth.isLoggedIn()" id="offers-header" [routerLink]="['']">Reportes</a>
+            <a matRipple *ngIf="auth.isLoggedIn()" id="offers-header" [routerLink]="['reportes']" routerLinkActive="active">Reportes</a>
             <a matRipple id="offers-header" [routerLink]="['ofertas']" >Ofertas</a>
             <a matRipple id="academy-header" [routerLink]="['click-academy']">Click Academy</a>
             <a matRipple id="question-header" [routerLink]="['preguntas-frecuentes']">Preguntas Frecuentes</a>
@@ -32,7 +32,7 @@
         <div class="menu" fxLayout="row" fxLayoutAlign="space-around center">
                 <div class="menu-desktop-internal" fxLayout="row" fxLayoutAlign="space-around center" [fxShow.xs]="false">
                         <a matRipple id="home-header" [routerLink]="['inicio']">Inicio</a>
-                        <a matRipple *ngIf="auth.isLoggedIn()" id="offers-header" [routerLink]="['']" routerLinkActive="active">Reportes</a>
+                        <a matRipple *ngIf="auth.isLoggedIn()" id="offers-header" [routerLink]="['reportes']" routerLinkActive="active">Reportes</a>
                         <a matRipple id="offers-header" [routerLink]="['ofertas']" routerLinkActive="active">Ofertas</a>
                         <a matRipple id="academy-header" [routerLink]="['click-academy']" routerLinkActive="active">Click Academy</a>
                         <a matRipple id="question-header" [routerLink]="['preguntas-frecuentes']" routerLinkActive="active">Preguntas Frecuentes</a>
