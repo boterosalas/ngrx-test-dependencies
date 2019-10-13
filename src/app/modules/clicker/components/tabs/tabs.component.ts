@@ -16,6 +16,7 @@ import { SearchProduct } from "src/app/interfaces/search-product";
 import { distinctUntilChanged } from "rxjs/operators";
 import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog.component";
 import { ContentService } from 'src/app/services/content.service';
+import { LinksService } from 'src/app/services/links.service';
 
 @Component({
   selector: "app-tabs",
@@ -26,13 +27,15 @@ export class TabsComponent implements OnInit {
   constructor(
     private sp: ProductSearchService,
     private loading: LoaderService,
+    // private dialog: MatDialog,
     private dialog: MatBottomSheet,
     private fb: FormBuilder,
     private _snackBar: MatSnackBar,
     private user: UserService,
     private shortUrl: ShortenerService,
     private auth: AuthService,
-    private content: ContentService
+    private content: ContentService,
+    private links: LinksService
   ) {}
 
   term: string;
@@ -48,7 +51,7 @@ export class TabsComponent implements OnInit {
   totalItems: number;
   pageSize: number = 6;
   pageTo: number = 6;
-  pageSizeOptions: number[] = [5, 10, 25, 50];
+  pageSizeOptions: number[] = [6, 12, 24, 50];
   url: string;
   urlshorten: string;
   formLink: FormGroup;
@@ -57,6 +60,8 @@ export class TabsComponent implements OnInit {
   isLoggedIn: any;
   assureds = [];
   trips = [];
+  date: any;
+  plu: string;
 
   ngOnInit() {
     this.showNotFound = false;
@@ -71,9 +76,9 @@ export class TabsComponent implements OnInit {
       });
     }
 
+    this.getDate();
     this.Assured();
     this.Trip();
-
   }
 
   private formShareLink() {
@@ -150,6 +155,7 @@ export class TabsComponent implements OnInit {
     const buttonClose = "Cerrar";
     const showPlu = true;
     const plu = product.items[0].itemId;
+    this.plu = product.items[0].itemId;
     this.dialog.open(DialogComponent, {
       data: {
         title,
@@ -186,6 +192,7 @@ export class TabsComponent implements OnInit {
     const showComission = true;
     const showshowTitle = false;
     const buttonClose = "Cerrar";
+    this.plu = '';
     this.dialog.open(DialogComponent, {
       data: {
         title,
@@ -222,6 +229,7 @@ export class TabsComponent implements OnInit {
     const showComission = true;
     const showshowTitle = false;
     const buttonClose = "Cerrar";
+    this.plu = '';
     this.dialog.open(DialogComponent, {
       data: {
         title,
@@ -266,5 +274,21 @@ export class TabsComponent implements OnInit {
     });
   }
 
+  public saveLink(){
+    let data = {
+      link: this.urlshorten,
+      identification: this.identification,
+      plu: this.plu,
+      creationDate: this.date
+    }
+    this.links.saveLink(data).subscribe();
+  }
+
+  public getDate(){
+    let today = new Date();
+    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    this.date = date+' '+time;
+  }
 
 }

@@ -14,8 +14,8 @@ export class HeaderComponent implements OnInit {
   @Input() internal: boolean;
   isLoggedIn: any;
 
-  firstNames: string = "David";
-  lastNames: string = "Betancur";
+  firstNames: string;
+  lastNames: string;
   initials: string;
 
   constructor(
