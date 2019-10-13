@@ -102,7 +102,7 @@ export class HomeComponent implements OnInit {
           confirmButtonText: "Aceptar",
           confirmButtonClass: "accept-activation-alert-error"
         }).then(() => {
-          this.router.navigate(["/"]);
+          this.router.navigate(["/inicio"]);
         });
       }
     },
