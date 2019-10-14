@@ -1,19 +1,19 @@
 <footer class="p-4">
-  <div fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutAlign.gt-xs="flex-start flex-start" fxLayoutAlign.xs="center center" class="mt-2">
+  <div fxLayout.gt-xs="row" fxLayout.lt-md="column" fxLayoutAlign.gt-xs="flex-start flex-start" fxLayoutAlign.lt-md="center center" class="mt-2">
       
     <span fxLayout.gt-xs="column" fxFlex.gt-xs="25" class="pt-1 border-bottom-orange">
           <img src="assets/img/logo-footer.svg" alt="Clickam" />
       </span>
 
-    <div fxLayoutAlign="center center" fxFlex.gt-xs="25" ngClass.xs="social-links pt-4" ngClass.gt-xs="pt-3 social-links"  fxFlexOrder.gt-xs="4">
+    <div fxLayoutAlign="center center" fxFlex.gt-xs="25" ngClass.xs="social-links pt-4" ngClass.gt-xs="pt-3 social-links"  fxFlexOrder.gt-md="4" fxFlexOrder.md="4">
       <img [fxShow.gt-xs]="false" src="assets/img/arrow-footer.svg" alt="Clickam" />
       <app-sociallinks></app-sociallinks>
       <img [fxShow.gt-xs]="false" class="rotate" src="assets/img/arrow-footer.svg" alt="Clickam" />
     </div>
 
-    <div fxLayout.gt-xs="column" fxLayout.xs="column" fxLayoutAlign="center center" fxFlex.gt-xs="50">
+    <div fxLayout.gt-xs="column" fxLayout.lt-md="column" fxLayoutAlign="center center" fxFlex.gt-xs="50">
 
-    <div ngClass.xs="footer-links pt-4" ngClass.gt-xs="footer-links" fxLayout.xs="column" fxLayout.gt-xs="row"  fxFlex.gt-xs="33" fxLayoutAlign="center center">
+    <div ngClass.lt-md="footer-links pt-4" ngClass.gt-xs="footer-links" fxLayout.lt-md="column" fxLayout.gt-xs="row"  fxFlex.gt-xs="33" fxLayoutAlign="center center">
         <a matRipple id="home-footer" class="border-bottom-orange section" [routerLink]="['inicio']">Inicio</a>
         <a matRipple *ngIf="auth.isLoggedIn()" id="offers-footer" class="border-bottom-orange section" [routerLink]="['']">Reportes</a>
         <a matRipple id="offers-footer" class="border-bottom-orange section" [routerLink]="['ofertas']" >Ofertas</a>
@@ -26,7 +26,7 @@
     <div class="terms" id="terms-footer" fxLayout="row"  fxFlex.gt-xs="100" fxLayoutAlign="center center">
         <a [routerLink]="['terminos-y-condiciones']">Términos y condiciones</a>
     </div>
-  <div fxLayout.xs="column" fxLayout.gt-xs="column" fxLayoutAlign="center center" class="width-border">
+  <div fxLayout.lt-md="column" fxLayout.gt-xs="column" fxLayoutAlign="center center" class="width-border">
     <div  class="border-footer mt-3"></div>
     <span class="copy pt-3">Copyright 2019 &copy;</span>
   </div>
