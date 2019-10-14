@@ -6,10 +6,6 @@
             <img *ngIf="internal" src="assets/img/logo-header-2.svg" alt="clickam">
         </a>
         </div>
-        <!-- <div class="menu" fxLayout="row" fxLayoutAlign="space-around center" [fxShow.gt-xs]="false">
-            <a mat-button *ngIf="!auth.isLoggedIn()" (click)="showLogin()" id="header-login">{{ 'LOGIN.LOGIN' | translate }}</a>
-            <a mat-button (click)="showMenu()"><mat-icon>menu</mat-icon></a>
-        </div> -->
         <div fxLayout="row" fxLayoutAlign="center center">
         <div [ngClass]="isHome ? 'menu-desktop' : 'menu-desktop colorlinks'" fxLayout="row" fxLayoutAlign="space-around center" [fxShow.xs]="false">
                 <app-menu-options></app-menu-options>

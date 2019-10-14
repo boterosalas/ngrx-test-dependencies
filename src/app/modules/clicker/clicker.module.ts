@@ -15,16 +15,23 @@ import { TabsComponent } from './components/tabs/tabs.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MonthResumeComponent } from './components/month-resume/month-resume.component';
 import { GeneralResumeComponent } from './components/general-resume/general-resume.component';
+import { ReportComponent } from './components/report/report.component';
+import { AuthGuard } from 'src/app/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: "reportes",
+    component: ReportComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
 @NgModule({
-  declarations: [HomeComponent, ProductComponent, SliderComponent, TabsComponent, MonthResumeComponent, GeneralResumeComponent],
+  declarations: [HomeComponent, ProductComponent, SliderComponent, TabsComponent, MonthResumeComponent, GeneralResumeComponent, ReportComponent],
   imports: [
     CommonModule,
     AppMaterialModule,
