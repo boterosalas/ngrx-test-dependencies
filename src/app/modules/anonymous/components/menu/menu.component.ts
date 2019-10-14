@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -11,32 +11,13 @@ import { Subscription } from 'rxjs';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(public auth:AuthService,   private utils: UtilsService) { }
+  constructor(private utils: UtilsService, private auth: AuthService) { }
 
-  options = [
-    {name: 'Incio', route:'inicio'},
-    {name: 'Click Academy', route:'click-academy'},
-    {name: 'Ofertas', route:'ofertas'},
-    {name: 'Preguntas Frecuentes', route:'preguntas-frecuentes'},
-  ];
+ 
   isOpenMenu: boolean;
   private subscription: Subscription = new Subscription();
   
   ngOnInit() {
-
-    // if(!this.auth.isLoggedIn()) {
-    //   this.subscription = this.auth.getMenu().subscribe((resp:any) => {
-    //     this.options = resp;
-    //   });
-    // } 
-    
-    if(this.auth.isLoggedIn()) {
-      this.subscription =  this.auth.getMenuClicker().subscribe((resp:any) => {
-        this.options = resp;
-      });
-    }
-
-    
   }
 
   @HostListener('over')

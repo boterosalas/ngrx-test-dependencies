@@ -3,6 +3,8 @@ import { UtilsService } from "src/app/services/utils.service";
 import { AuthService } from "src/app/services/auth.service";
 import { UserService } from "src/app/services/user.service";
 import { distinctUntilChanged } from "rxjs/operators";
+import { Subscription } from 'rxjs';
+import { NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: "app-header",
@@ -17,15 +19,30 @@ export class HeaderComponent implements OnInit {
   firstNames: string;
   lastNames: string;
   initials: string;
-
+  private subscription: Subscription = new Subscription();
+  
   constructor(
     private utils: UtilsService,
     public auth: AuthService,
-    private user: UserService
+    private user: UserService,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.initialNameLastName();
+
+    this.subscription = this.router.events.subscribe((url: any) => {
+      if (url instanceof NavigationStart) {
+        if (url.url === "/") {
+          this.isHome = true;
+          this.internal = false;
+        } else {
+          this.isHome = false;
+          this.internal = true;
+        }
+      }
+    });
+
   }
 
   public logout() {
