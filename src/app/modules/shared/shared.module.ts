@@ -16,6 +16,7 @@ import { SociallinksComponent } from './components/sociallinks/sociallinks.compo
 import { TopComponent } from './components/top/top.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { RouterModule } from '@angular/router';
+import { MenuOptionsComponent } from './components/menu-options/menu-options.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { RouterModule } from '@angular/router';
     WhatsappComponent,
     HeaderComponent,
     SociallinksComponent,
-    TopComponent
+    TopComponent,
+    MenuOptionsComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +57,8 @@ import { RouterModule } from '@angular/router';
     MatMenuModule,
     TopComponent,
     GoogleChartsModule,
-    RouterModule
+    RouterModule,
+    MenuOptionsComponent
   ]
 })
 export class SharedModule {}

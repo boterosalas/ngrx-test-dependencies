@@ -16,6 +16,7 @@ import { AppMaterialModule } from './modules/shared/app-material/app-material.mo
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ClickerModule } from './modules/clicker/clicker.module';
 
 // interceptors
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -34,6 +35,7 @@ export function createTranslateLoader(http: HttpClient) {
     AppRoutingModule,
     HttpClientModule,
     AnonymousModule,
+    ClickerModule,
     SharedModule,
     AppMaterialModule,
     FlexLayoutModule,

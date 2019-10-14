@@ -22,7 +22,7 @@ import { ClickAcademyComponent } from './pages/click-academy/click-academy.compo
 import { OffersComponent } from './pages/offers/offers.component';
 import { FrequentQuestionsComponent } from './pages/frequent-questions/frequent-questions.component';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
-import { ReportComponent } from '../clicker/components/report/report.component';
+// import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
   {
@@ -51,10 +51,6 @@ const routes: Routes = [
     component: OffersComponent
   },
   {
-    path: "reportes",
-    component: ReportComponent
-  },
-  {
     path: "preguntas-frecuentes",
     component: FrequentQuestionsComponent
   },
@@ -81,7 +77,7 @@ const routes: Routes = [
     OffersComponent,
     FrequentQuestionsComponent,
     TermsAndConditionsComponent,
-    ReportComponent
+    // ReportComponent
   ],
   imports: [
     FormsModule,
