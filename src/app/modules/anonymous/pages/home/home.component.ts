@@ -73,9 +73,11 @@ export class HomeComponent implements OnInit {
   
 
   ngOnInit() {
+
     if(this.auth.isLoggedIn()) {
       this.router.navigate(['clicker']);
     }
+    
   }
 
 

@@ -37,11 +37,11 @@
 </div>
 
 <div *ngIf="showAnimation1">
-<div ngClass.xs="fullheight slide-in-right" ngClass.gt-xs="fullheight slide-in-right p-5" *ngIf="isOpenMenu" @slideInOut>
+<div ngClass.lt-md="fullheight slide-in-right" ngClass.gt-md="fullheight slide-in-right p-5" *ngIf="isOpenMenu" @slideInOut>
     <app-menu (close)="hideMenu()" ></app-menu>
 </div>
 
-<div ngClass.xs="fullheight slide-in-right" ngClass.xs="fullheight slide-in-right" ngClass.gt-xs="fullheight slide-in-right p-5" *ngIf="isOpen"  @slideInOut>
+<div ngClass.lt-md="fullheight slide-in-right" ngClass.gt-md="fullheight slide-in-right p-5" *ngIf="isOpen"  @slideInOut>
   
   <app-top (close)="hideLogin()"></app-top>
 
