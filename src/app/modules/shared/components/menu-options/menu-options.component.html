@@ -1,0 +1,12 @@
+<div>
+    <span
+      *ngFor="let item of options; let i =index"
+      routerLink="{{ item.route }}"
+      (click)="hideMenu()"
+      class="item"
+      routerLinkActive="active"
+      matRipple
+    >
+      <a matRipple class="cursor-pointer" id="menuTop{{i}}"> {{ item.name }} </a>
+</span>
+  </div>

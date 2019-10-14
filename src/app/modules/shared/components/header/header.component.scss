@@ -1,15 +1,19 @@
 @import "variables";
+@import "general";
 
 .position-absolute {
   position: absolute;
   width: 100%;
-  padding: 10px 0;
+  padding: 10px 15px;
   left: 0;
   right: 0;
 }
 
-header {
+.headercolor{
   color: #ffffff;
+}
+
+header {
   .nav {
     color: $color-p !important;
     min-height: 50px;
@@ -54,29 +58,6 @@ header {
   }
 }
 
-.menu-desktop{
-  a{
-    color: #ffffff;
-    text-decoration: none;
-    padding: 5px 10px;
-    &.active{
-      color: $primary-color;
-    }
-  }
-
-  &-internal{
-    a{
-      color: $color-p;
-      text-decoration: none;
-      padding: 5px 10px;
-      &.active{
-        color: $primary-color;
-      }
-    }
-  }
-
-}
-
 .border-right-white{
   border-right: 1px solid $color-p;
   z-index: 1;
@@ -88,5 +69,11 @@ header {
   .initials{
     margin-left: 10px;
   }
+}
+
+@media screen and (max-width: 600px) {
+  // #logo-header{
+  //   padding-left: 30px;
+  // }
 }
 
