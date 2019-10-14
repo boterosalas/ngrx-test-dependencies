@@ -1,7 +1,11 @@
 <header [ngClass]="isHome ? 'headercolor' : 'border-orange'" >
     <div fxLayout="row" fxLayoutAlign="space-between center" [ngClass]="isHome ? 'position-absolute container' : 'pt-2 pb-2 container'">
         <div class="logo" id="logo-header">
-        <a matRipple  [routerLink]="['inicio']">
+        <a matRipple *ngIf="!auth.isLoggedIn()"  [routerLink]="['inicio']">
+            <img *ngIf="isHome" src="assets/img/logo-header.svg" alt="clickam">
+            <img *ngIf="internal" src="assets/img/logo-header-2.svg" alt="clickam">
+        </a>
+        <a matRipple *ngIf="auth.isLoggedIn()"  [routerLink]="['clicker']">
             <img *ngIf="isHome" src="assets/img/logo-header.svg" alt="clickam">
             <img *ngIf="internal" src="assets/img/logo-header-2.svg" alt="clickam">
         </a>

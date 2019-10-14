@@ -12,31 +12,43 @@ import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from 'src/app/services/user.service';
 import { of, throwError } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 describe("HomeComponent", () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
   const mockUserService= jasmine.createSpyObj("UserService", ["activateProfile"]);
+  const mockAuthService = jasmine.createSpyObj("AuthService", ["login", "isLoggedIn"]);
+  const mockUtilsService = jasmine.createSpyObj("UtilsService", ["showRegisterForm"]);
+
+  const dataUser = {
+    state: "Success",
+    userMessage: null,
+    objectResponse:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc…VzIn0.Bcsm-qVHHtRcLlQae_5tVwGpgbPQJkCEQ97ZbwRxz_4"
+  };
 
   let data = {
-    state: 'Success',
-    email: 'david.betancur@pragma.com.co'
-  }
+    "state": "Success",
+    "userMessage": "El usuario ha sido activado satisfactoriamente",
+    "objectResponse": true
+}
 
   let dataError = {
-    state: 'Error',
-    email: 'david.betancur@pragma.com.co',
-    userMessage: 'Activación erronea'
-  }
+    "state": "Error",
+    "userMessage": "El usuario ya esta activado",
+    "objectResponse": true
+}
 
-  let invalidRequest = {
-    state: {
-      error: 'Error'
-    },
-    error: 'Peticion invalida',
-    email: 'david.betancur@pragma.com.co'
+let invalidRquest = {
+  state: "Error",
+  error:{
+    userMessage: 'Internal server error'
   }
+}
+
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -52,13 +64,18 @@ describe("HomeComponent", () => {
         TranslateModule.forRoot({})
       ],
       providers: [
-        { provide: UserService, useValue: mockUserService }
+        { provide: UserService, useValue: mockUserService },
+        { provide: AuthService, useValue: mockAuthService },
+        { provide: UtilsService, useValue: mockUtilsService }
+        // AuthService
       ],
       schemas: [
         NO_ERRORS_SCHEMA
       ]
     }).compileComponents();
+    mockAuthService.isLoggedIn.and.returnValue(false);
     mockUserService.activateProfile.and.returnValue(of(data));
+    mockUtilsService.showRegisterForm.and.returnValue({});
   }));
 
   beforeEach(() => {
@@ -69,6 +86,12 @@ describe("HomeComponent", () => {
 
   it("should create", () => {
     expect(component).toBeTruthy();
+    expect(mockAuthService.isLoggedIn).toHaveBeenCalled();
+  });
+
+  it('open register', () => {
+    component.openRegister();
+    expect(mockUtilsService.showRegisterForm).toHaveBeenCalled();
   });
 
   describe('Error activation', () => {
@@ -78,10 +101,13 @@ describe("HomeComponent", () => {
       component = fixture.componentInstance;
       fixture.detectChanges();
       mockUserService.activateProfile.and.returnValue(of(dataError));
+      mockAuthService.isLoggedIn.and.returnValue(false);
     });
 
     it('error activation', () => {
+      component.ngOnInit();
       component.activateUser();
+      expect(mockAuthService.isLoggedIn).toHaveBeenCalled();
       expect(mockUserService.activateProfile).toHaveBeenCalled();
     });
   });
@@ -92,14 +118,32 @@ describe("HomeComponent", () => {
       fixture = TestBed.createComponent(HomeComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
-      mockUserService.activateProfile.and.returnValue(throwError(invalidRequest));
+      mockUserService.activateProfile.and.returnValue(throwError(invalidRquest));
+      mockAuthService.isLoggedIn.and.returnValue(false);
     });
 
     it('invalid request', () => {
+      component.ngOnInit();
       component.activateUser();
+      expect(mockAuthService.isLoggedIn).toHaveBeenCalled();
       expect(mockUserService.activateProfile).toHaveBeenCalled();
     });
   });
-  
+
+  describe('is loged', () => {
+
+    beforeEach(() => {
+      fixture = TestBed.createComponent(HomeComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+      mockAuthService.login.and.returnValue(of(dataUser));
+      mockAuthService.isLoggedIn.and.returnValue(true);
+    });
+
+    it('is loged', () => {
+      component.ngOnInit();
+      expect(mockAuthService.isLoggedIn).toHaveBeenCalled();
+    });
+  });
   
 });
