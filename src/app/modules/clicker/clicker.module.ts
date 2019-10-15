@@ -17,6 +17,7 @@ import { MonthResumeComponent } from './components/month-resume/month-resume.com
 import { GeneralResumeComponent } from './components/general-resume/general-resume.component';
 import { ReportComponent } from './components/report/report.component';
 import { AuthGuard } from 'src/app/auth.guard';
+import { MatPaginatorIntl } from '@angular/material';
 
 const routes: Routes = [
   {
@@ -43,6 +44,9 @@ const routes: Routes = [
     FormsModule,
     ShareButtonsModule,
     RouterModule.forChild(routes)
+  ],
+  providers: [
+    { provide: MatPaginatorIntl, useClass: TabsComponent },
   ],
   entryComponents: [DialogComponent]
 })
