@@ -39,7 +39,6 @@ export class MonthResumeComponent implements OnInit {
       this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
         if (!!val) {
           this.identification = val.identification;
-          console.log(this.identification);
         }
       });
     }

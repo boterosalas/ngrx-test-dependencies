@@ -122,6 +122,7 @@ export class AppComponent implements OnInit {
       this.showForgotForm = false;
     });
 
+    this.windowWidth();
   }
 
   public hideLogin() {
@@ -160,7 +161,11 @@ export class AppComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    this.innerWidth = window.innerWidth;
+    this.innerWidth = event.target.innerWidth;
+    this.windowWidth();
+  }
+
+  public windowWidth() {
     if(this.innerWidth > 600) {
       this.showAnimation1 = true;
       this.showAnimation2 = false;

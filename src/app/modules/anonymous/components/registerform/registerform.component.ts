@@ -120,7 +120,7 @@ export class RegisterformComponent implements OnInit {
   }
 
   public showLogin() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/inicio']);
   }
 
   public register() {

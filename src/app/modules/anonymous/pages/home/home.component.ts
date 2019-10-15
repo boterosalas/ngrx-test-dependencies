@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
   isOpen = false;
 
   constructor(
-    private router: Router,
+    public router: Router,
     private route: ActivatedRoute,
     private user: UserService,
     private utils: UtilsService,
@@ -73,9 +73,11 @@ export class HomeComponent implements OnInit {
   
 
   ngOnInit() {
+
     if(this.auth.isLoggedIn()) {
       this.router.navigate(['clicker']);
     }
+    
   }
 
 
@@ -92,7 +94,7 @@ export class HomeComponent implements OnInit {
           confirmButtonText: "Aceptar",
           confirmButtonClass: "accept-activation-alert-success"
         }).then(() => {
-          this.router.navigate(["/"]);
+          this.router.navigate(["/inicio"]);
         });
       } else {
         Swal.fire({
@@ -114,7 +116,7 @@ export class HomeComponent implements OnInit {
           confirmButtonText: "Aceptar",
           confirmButtonClass: "accept-activation-alert-invalid"
         }).then(() => {
-          this.router.navigate(["/"]);
+          this.router.navigate(["/inicio"]);
         });
       }
     );
