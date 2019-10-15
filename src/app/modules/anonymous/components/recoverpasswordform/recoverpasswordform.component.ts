@@ -57,7 +57,7 @@ export class RecoverpasswordformComponent implements OnInit {
         this.code = params.code;
         this.email = params.email;
       } else {
-        this.router.navigate(['/']);
+        this.router.navigate(['/inicio']);
       }
     });
 
@@ -82,7 +82,7 @@ export class RecoverpasswordformComponent implements OnInit {
             confirmButtonText: "Aceptar",
             confirmButtonClass: 'accept-recover-alert-success'
           }).then(()=>{
-            this.router.navigate(['/']);
+            this.router.navigate(['/inicio']);
           });
         } else {
           Swal.fire({

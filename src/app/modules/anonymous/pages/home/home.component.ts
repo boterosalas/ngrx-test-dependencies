@@ -94,7 +94,7 @@ export class HomeComponent implements OnInit {
           confirmButtonText: "Aceptar",
           confirmButtonClass: "accept-activation-alert-success"
         }).then(() => {
-          this.router.navigate(["/"]);
+          this.router.navigate(["/inicio"]);
         });
       } else {
         Swal.fire({
@@ -116,7 +116,7 @@ export class HomeComponent implements OnInit {
           confirmButtonText: "Aceptar",
           confirmButtonClass: "accept-activation-alert-invalid"
         }).then(() => {
-          this.router.navigate(["/"]);
+          this.router.navigate(["/inicio"]);
         });
       }
     );

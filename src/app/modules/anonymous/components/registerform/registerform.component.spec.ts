@@ -111,7 +111,7 @@ describe("RegisterformComponent", () => {
 
   it('go to login', () => {
     component.showLogin();
-    expect(mockRouter.navigate).toHaveBeenCalledWith(['/']);
+    expect(mockRouter.navigate).toHaveBeenCalledWith(['/inicio']);
   });
   
 

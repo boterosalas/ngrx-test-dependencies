@@ -20,10 +20,11 @@
           </mat-paginator>
           <div fxLayout="row wrap">
           <div
-            fxLayout="column wrap"
-            fxFlex="20"
+            fxLayout="column"
+            fxFlex="25"
             fxFlex.xs="50"
-            fxFLex.gt-xs="20"
+            fxFLex.sm="30"
+            fxFLex.gt-md="20"
             *ngFor="let product of productsList; let i = index"
           >
             <app-product
