@@ -360,11 +360,6 @@ table {
     display: none !important;
   }
 
-  .img-container {
-    max-height: 225px;
-    min-height: 225px;
-  }
-
   .tmin {
     min-height: 40px;
   }
@@ -385,6 +380,12 @@ table {
   .mat-paginator-page-size {
     display: none !important;
   }
+
+  .img-container {
+    max-height: 225px;
+    min-height: 225px;
+  }
+
 }
 
 .mobile-menu {

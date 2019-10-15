@@ -5,7 +5,8 @@ import {
   MatDialog,
   MatSnackBar,
   PageEvent,
-  MatBottomSheet
+  MatBottomSheet,
+  MatPaginatorIntl
 } from "@angular/material";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { UserService } from "src/app/services/user.service";
@@ -23,7 +24,7 @@ import { LinksService } from 'src/app/services/links.service';
   templateUrl: "./tabs.component.html",
   styleUrls: ["./tabs.component.scss"]
 })
-export class TabsComponent implements OnInit {
+export class TabsComponent extends MatPaginatorIntl  implements OnInit {
   constructor(
     private sp: ProductSearchService,
     private loading: LoaderService,
@@ -36,7 +37,29 @@ export class TabsComponent implements OnInit {
     private auth: AuthService,
     private content: ContentService,
     private links: LinksService
-  ) {}
+  ) {
+    super();
+    this.itemsPerPageLabel = 'Productos por página';
+    this.nextPageLabel = 'Página siguiente';
+    this.previousPageLabel = 'Página anterior';
+    this.lastPageLabel = 'Última página';
+    this.firstPageLabel = 'Primera página';
+
+    this.getRangeLabel = function (page, pageSize, length) {
+      if (length === 0 || pageSize === 0) {
+        return '0 de ' + length;
+      }
+      length = Math.max(length, 0);
+      const startIndex = page * pageSize;
+      // If the start index exceeds the list length, do not try and fix the end index to the end.
+      const endIndex =
+        startIndex < length
+          ? Math.min(startIndex + pageSize, length)
+          : startIndex + pageSize;
+      return startIndex + 1 + ' de ' + endIndex + ' productos de ' + length;
+    };
+
+  }
 
   term: string;
 
