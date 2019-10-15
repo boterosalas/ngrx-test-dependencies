@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
   isOpen = false;
 
   constructor(
-    private router: Router,
+    public router: Router,
     private route: ActivatedRoute,
     private user: UserService,
     private utils: UtilsService,
