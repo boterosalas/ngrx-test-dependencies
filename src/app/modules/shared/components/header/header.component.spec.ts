@@ -10,6 +10,7 @@ import { MatMenuModule } from '@angular/material';
 import { UtilsService } from 'src/app/services/utils.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { of } from 'rxjs';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -31,12 +32,15 @@ describe('HeaderComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ 
-        HeaderComponent
+        HeaderComponent,
+        HomeComponent
        ],
        imports: [
          AppMaterialModule,
          HttpClientTestingModule,
-         RouterTestingModule.withRoutes([]),
+          RouterTestingModule.withRoutes([
+            { path: 'inicio', component: HomeComponent},
+         ]),
          TranslateModule.forRoot({}),
          MatMenuModule
        ],
