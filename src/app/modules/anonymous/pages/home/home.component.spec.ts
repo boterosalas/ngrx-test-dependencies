@@ -59,7 +59,10 @@ let invalidRquest = {
         FormsModule,
         ReactiveFormsModule,
         HttpClientTestingModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'clicker', component: HomeComponent},
+          { path: 'inicio', component: HomeComponent},
+        ]),
         BrowserAnimationsModule,
         TranslateModule.forRoot({})
       ],
