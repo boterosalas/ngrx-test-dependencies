@@ -17,7 +17,13 @@ export class MenuOptionsComponent implements OnInit {
     private loader: LoaderService
   ) {}
 
-  options = [];
+  options = [
+    { name: "Inicio", route: "/inicio" },
+    { name: "Click Academy", route: "/click-academy" },
+    // { name: "Ofertas", route: "/ofertas" },
+    { name: "Preguntas Frecuentes", route: "/preguntas-frecuentes" }
+  ];
+
   isOpenMenu: boolean;
   private subscription: Subscription = new Subscription();
 
@@ -27,6 +33,11 @@ export class MenuOptionsComponent implements OnInit {
     this.showMobileMenu();
     this.showClickerMobile();
   }
+
+  
+  /**
+   * metodos para mostrar los menus en escritorio
+   */
 
   public showAnonymousMenu() {
     this.subscription = this.auth.menuInfo$
@@ -43,6 +54,10 @@ export class MenuOptionsComponent implements OnInit {
         this.options = val;
       });
   }
+
+  /**
+   * metodos para mostrar los menus en mobile
+   */
 
   public showMobileMenu() {
     if (!this.auth.isLoggedIn()) {

@@ -31,6 +31,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.initialNameLastName();
 
+    /**
+     * metodo para verificar la url si es home para aplicar estilos en la cabezera
+     */
+
     this.subscription = this.router.events.subscribe((url: any) => {
       if (url instanceof NavigationStart) {
         if (url.url === "/") {
@@ -45,9 +49,17 @@ export class HeaderComponent implements OnInit {
 
   }
 
+  /**
+   * metodo para cerrar sesion
+   */
+
   public logout() {
     this.auth.logout();
   }
+
+  /**
+   * Meotodo para formar las inciales del nombre y el apellido
+   */
 
   initialNameLastName() {
     this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {

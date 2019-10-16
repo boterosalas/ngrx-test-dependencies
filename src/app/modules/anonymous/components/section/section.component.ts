@@ -20,6 +20,8 @@ export class SectionComponent implements OnInit {
   @Input() alt: string;
   @Input() textDirection: string;
   
+  /**emite una accion que es abrir el formulario de registro */
+  
   public openRegister() {
     this.open.emit();
   }

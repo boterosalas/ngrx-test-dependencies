@@ -65,6 +65,11 @@ export class ForgotpasswordformComponent implements OnInit {
     });
   }
 
+  /**
+   * Metodo para enviar correo cuando se olvido la contreña
+   * @param userName  recibe el nombre del usuario que es el correo.
+   */
+
   public forgotPassword() {
     this.loading.show();
     let userName = this.forgotPaswordForm.controls.Username.value;
@@ -94,6 +99,10 @@ export class ForgotpasswordformComponent implements OnInit {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
+  /**
+   * Remueve los espacios en blanco de la contraseña
+   */
 
   public removewhiteSpaceEmailForgot() {
     const inputValue = this.forgotPaswordForm.controls.Username.value;

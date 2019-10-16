@@ -17,11 +17,14 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ClickerModule } from './modules/clicker/clicker.module';
+import { AdminModule } from './modules/admin/admin.module';
 
 // interceptors
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoaderInterceptorService } from './interceptors/loader-interceptor.service';
 import { SharedModule } from './modules/shared/shared.module';
+import { JwtModule } from '@auth0/angular-jwt';
+
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -36,15 +39,25 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     AnonymousModule,
     ClickerModule,
+    AdminModule,
     SharedModule,
     AppMaterialModule,
     FlexLayoutModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('ACCESS_TOKEN');
+        },
+        whitelistedDomains: [],
+        blacklistedRoutes: []
+      }
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: createTranslateLoader,
         deps: [HttpClient]
-      }
+      },
     }),
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })

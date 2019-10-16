@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, TemplateRef } from "@angular/core";
 import { ProductSearchService } from "src/app/services/product-search.service";
 import { LoaderService } from "src/app/services/loader.service";
 import {
-  MatDialog,
   MatSnackBar,
   PageEvent,
   MatBottomSheet,
@@ -28,7 +27,6 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
   constructor(
     private sp: ProductSearchService,
     private loading: LoaderService,
-    // private dialog: MatDialog,
     private dialog: MatBottomSheet,
     private fb: FormBuilder,
     private _snackBar: MatSnackBar,
@@ -39,6 +37,11 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
     private links: LinksService
   ) {
     super();
+
+    /**
+     * Traduccion del paginador
+     */
+
     this.itemsPerPageLabel = 'Productos por página';
     this.nextPageLabel = 'Página siguiente';
     this.previousPageLabel = 'Página anterior';
@@ -85,10 +88,16 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
   trips = [];
   date: any;
   plu: string;
+  business: string;
 
   ngOnInit() {
     this.showNotFound = false;
     this.showResults = false;
+
+    
+    /**
+     * verifica si el usuario esta logueado y se obtiene la identificacion
+     */
 
     this.isLoggedIn = this.auth.isLoggedIn();
     if (this.isLoggedIn) {
@@ -109,6 +118,14 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
       link: [this.url]
     });
   }
+
+  /**
+   * Metodo para buscar los productos paginados
+   * @param term 
+   * @param from 
+   * @param to 
+   * 
+   */
 
   public searchProductPaginate(term: string, from = 1, to = this.pageTo) {
     this.loading.show();
@@ -139,6 +156,11 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
     );
   }
 
+  /**
+   * Paginacion
+   * @param paginate 
+   */
+
   public pagination(paginate: any) {
     this.loading.show();
     this.pageIndex = paginate.pageIndex;
@@ -158,6 +180,11 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
   setPageSizeOptions(setPageSizeOptionsInput: string) {
     this.pageSizeOptions = setPageSizeOptionsInput.split(",").map(str => +str);
   }
+
+  /**
+   * Metodo para abrir la modal con el producto seleccionado del exito
+   * @param product 
+   */
 
   public dataProduct(product) {
     const productUrl = product.linkText;
@@ -179,6 +206,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
     const showPlu = true;
     const plu = product.items[0].itemId;
     this.plu = product.items[0].itemId;
+    this.business = 'exito';
     this.dialog.open(DialogComponent, {
       data: {
         title,
@@ -197,8 +225,13 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
     });
   }
 
+  /**
+   * Metodo para abrir la modal con el producto seleccionado del seguros
+   * @param assured 
+   */
+
   public dataAssured(assured) {
-    const dataAssuredUrl = assured.link;
+    const dataAssuredUrl = `${assured.link}${this.identification}`;
     this.url = dataAssuredUrl;
     this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
       this.urlshorten = resp;
@@ -216,6 +249,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
     const showshowTitle = false;
     const buttonClose = "Cerrar";
     this.plu = '';
+    this.business = 'seguros'
     this.dialog.open(DialogComponent, {
       data: {
         title,
@@ -234,9 +268,14 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
 
   }
 
+  /**
+   * Metodo para abrir la modal con el producto seleccionado del viajes
+   * @param trip 
+   */
+
   public dataTrip(trip) {
     const datatripUrl = trip.link;
-    this.url = datatripUrl;
+    this.url = `${datatripUrl.link}${this.identification}`;
     this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
       this.urlshorten = resp;
     });
@@ -253,6 +292,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
     const showshowTitle = false;
     const buttonClose = "Cerrar";
     this.plu = '';
+    this.business = 'viajes'
     this.dialog.open(DialogComponent, {
       data: {
         title,
@@ -271,6 +311,12 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
 
   }
 
+  /**
+   * Abre el mensaje de confirmacion de copiado del link
+   * @param message 
+   * @param action 
+   */
+
   private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 2000
@@ -285,11 +331,19 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
     this.openSnackBar("Se ha copiado el link al portapapeles", "Cerrar");
   }
 
+  /**
+   * Metodo para listar los seguros
+   */
+
   public Assured() {
     this.content.getAssured().subscribe(assured => {
       this.assureds = assured;
     });
   }
+
+   /**
+   * Metodo para listar los viajes
+   */
 
   public Trip() {
     this.content.getTrips().subscribe(trip => {
@@ -297,15 +351,24 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
     });
   }
 
+   /**
+   * Metodo para dalvar los links generados
+   */
+
   public saveLink(){
     let data = {
       link: this.urlshorten,
       identification: this.identification,
       plu: this.plu,
+      business: this.business,
       creationDate: this.date
     }
     this.links.saveLink(data).subscribe();
   }
+
+  /**
+   * Obtiene la fecha actual
+   */
 
   public getDate(){
     let today = new Date();

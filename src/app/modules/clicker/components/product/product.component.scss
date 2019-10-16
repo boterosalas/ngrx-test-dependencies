@@ -29,3 +29,17 @@
 .gray {
     color: $gray;
 }
+
+.img-container {
+    margin: 10px auto;
+    min-height: 40px;
+}
+
+@media screen and (min-width: 600px) {
+
+    .img-container-2{
+        max-width: 50%;
+        margin: 0px auto;
+        height: 20vh;
+    }
+}

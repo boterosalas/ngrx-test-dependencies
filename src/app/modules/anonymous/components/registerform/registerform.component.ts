@@ -108,20 +108,29 @@ export class RegisterformComponent implements OnInit {
     this.getidType();
   }
 
+  /**
+   * Muestra los terminos y condiciones al dar clic en el boton siguiente del registro
+   */
+
   public nextStep() {
     this.showTerms = true;
     this.showRegisterForm = false;
     this.acceptTerms = false;
   }
 
+  /**
+   * Oculta los terminos y condiciones y muestra el registro
+   */
+
   public backStep() {
     this.showTerms = false;
     this.showRegisterForm = true;
   }
 
-  public showLogin() {
-    this.router.navigate(['/inicio']);
-  }
+  /**
+   * Metodo para registrar un usuario
+   * @params Email, FirstNames, LastNames, Identification, Cellphone. Password, IdType
+   */
 
   public register() {
 
@@ -177,15 +186,27 @@ export class RegisterformComponent implements OnInit {
     );
   }
 
+  /**
+   * check para aceptar terminos y condiciones
+   */
+
   public acceptTermsCheck() {
     this.acceptTerms = !this.acceptTerms;
   }
+
+  /**
+   * Metodo para listar el tipo de identificacion del usuario
+   */
 
   public getidType() {
     this.registerUser.idType().subscribe(res => {
       this.idUserType = res.objectResponse;
     });
   }
+
+  /**
+   * Remueve los espacios en blanco
+   */
 
   public removewhiteSpace() {
     const inputValue = this.registerForm.controls.password.value;

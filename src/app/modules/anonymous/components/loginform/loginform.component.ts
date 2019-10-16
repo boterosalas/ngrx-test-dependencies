@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
 import { RemoveSpaceService } from 'src/app/services/remove-space.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import decode from 'jwt-decode';
 
 @Component({
   selector: "app-loginform",
@@ -51,9 +52,10 @@ export class LoginformComponent implements OnInit {
     });
   }
 
-  public forgotpass(){
-    this.router.navigate(['/olvido-contrasena']);
-  }
+  /**
+   * Metodo para loguearse
+   * @params recibe Password y Username
+   */
 
   public login() {
     this.isSubmitted = true;
@@ -74,8 +76,7 @@ export class LoginformComponent implements OnInit {
         if (resp.state === "Success") {
           localStorage.setItem("ACCESS_TOKEN", resp.objectResponse.token);
           this.utils.hideloginForm();
-          this.router.navigate(['/clicker']);
-          this.authService.isLogged$.next(true);
+          this.routeBased();
         } else {
           Swal.fire({
             title: "Login invalido",
@@ -103,6 +104,8 @@ export class LoginformComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
+  /** remueve los espacion en blanco */
+
   public removewhiteSpace() {
     const inputValue = this.loginForm.controls.Password.value;
     const passwordControl = this.loginForm.controls.Password;
@@ -113,6 +116,20 @@ export class LoginformComponent implements OnInit {
     const inputValue = this.loginForm.controls.Username.value;
     const confirmPasswordControl = this.loginForm.controls.Username;
     this.removeSpace.removeSpace(inputValue, confirmPasswordControl);
+  }
+
+  /** Al momento de hacer login determina la ruta por el perfil de usuario */
+
+  private routeBased() {
+    let token = localStorage.getItem("ACCESS_TOKEN");
+    let tokenDecode = decode(token);
+    if(tokenDecode.IdRol === "CLICKER") {
+      this.router.navigate(['/clicker']);
+      this.authService.isLogged$.next(true);
+    } else {
+      this.router.navigate(['/dashboard']);
+      this.authService.isLogged$.next(true);
+    }
   }
 
 

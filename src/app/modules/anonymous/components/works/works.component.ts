@@ -14,6 +14,10 @@ export class WorksComponent implements OnInit {
     
   }
 
+  /**
+   * configuracion del slider, para mas info ir a https://kenwheeler.github.io/slick/, https://www.npmjs.com/package/ngx-slick-carousel
+   */
+
   slides = [
     {img: "assets/img/slide-home/registro.svg",  textTop: 'Regístrate', textBottom: 'Completa el formulario para registrarte'},
     {img: "assets/img/slide-home/crea.svg",  textTop: 'Crea un link', textBottom: 'Busca un producto o promoción y crea un link'},
