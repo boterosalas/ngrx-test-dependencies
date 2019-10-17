@@ -62,8 +62,12 @@ export class AuthService implements OnDestroy {
 
   public getRole() {
       const token = localStorage.getItem("ACCESS_TOKEN");
-      const tokenPayload = decode(token);
-      this.role = tokenPayload.role;
+      if(token !== null) {
+        const tokenPayload = decode(token);
+        this.role = tokenPayload.role;
+      } else {
+        return false;
+      }
   }
 
   public getMenu() {

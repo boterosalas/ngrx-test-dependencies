@@ -9,7 +9,7 @@ const routes: Routes = [
     path: '',  loadChildren: () => import('./modules/anonymous/anonymous.module').then(m => m.AnonymousModule),
   },
   {
-    path: 'clicker',  loadChildren: () => import('./modules/clicker/clicker.module').then(m => m.ClickerModule), canActivate: [RoleGuard] ,
+    path: 'clicker',  loadChildren: () => import('./modules/clicker/clicker.module').then(m => m.ClickerModule), canActivate: [AuthGuard, RoleGuard],
     data: {
       role: "CLICKER"
     }
