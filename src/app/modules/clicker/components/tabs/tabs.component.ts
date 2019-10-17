@@ -128,17 +128,17 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
    */
 
   public searchProductPaginate(term: string, from = 1, to = this.pageTo) {
-    this.loading.show();
     if (term !== this.paginate) {
       this.paginate = term;
       this.pageIndex = 0;
     }
     const params = { term, from, to };
+    this.loading.show();
     this.subscription = this.sp.getProductsPagination(params).subscribe(
       (resp: any) => {
+        this.loading.hide();
         const parsed = JSON.parse(resp.json);
         this.totalItems = resp.total;
-        this.loading.hide();
         if (parsed.length > 0) {
           this.showResults = true;
           this.showNotFound = false;
@@ -162,7 +162,6 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
    */
 
   public pagination(paginate: any) {
-    this.loading.show();
     this.pageIndex = paginate.pageIndex;
     paginate.length = this.totalItems;
     const from = paginate.pageSize * paginate.pageIndex + 1;

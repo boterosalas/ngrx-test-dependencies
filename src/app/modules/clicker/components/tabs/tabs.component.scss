@@ -11,3 +11,11 @@
     flex-direction: row;
     margin: 0 0 0 auto;
 }
+
+@media screen and (min-width: 600px) {
+
+    .contain-products {
+        max-height: 355px;
+    }
+
+}
