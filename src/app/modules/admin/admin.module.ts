@@ -11,7 +11,7 @@ const routes: Routes = [
     component: DashboardComponent,
     canActivate: [RoleGuard, AuthGuard],
     data: {
-      IdRol: "3"
+      role: "ADMIN"
     }
   }
 ];

@@ -5,7 +5,11 @@
             <img *ngIf="isHome" src="assets/img/logo-header.svg" alt="clickam">
             <img *ngIf="internal" src="assets/img/logo-header-2.svg" alt="clickam">
         </a>
-        <a matRipple *ngIf="auth.isLoggedIn()"  [routerLink]="['clicker']">
+        <a matRipple *ngIf="auth.isLoggedIn() && auth.role === 'CLICKER'"  [routerLink]="['clicker']">
+            <img *ngIf="isHome" src="assets/img/logo-header.svg" alt="clickam">
+            <img *ngIf="internal" src="assets/img/logo-header-2.svg" alt="clickam">
+        </a>
+        <a matRipple *ngIf="auth.isLoggedIn() && auth.role === 'ADMIN'"  [routerLink]="['dashboard']">
             <img *ngIf="isHome" src="assets/img/logo-header.svg" alt="clickam">
             <img *ngIf="internal" src="assets/img/logo-header-2.svg" alt="clickam">
         </a>

@@ -21,6 +21,7 @@ export class ProductComponent implements OnInit {
   @Input() btnid: string;
   @Input() exito: boolean;
   @Input() other: boolean;
+  @Input() container: boolean;
 
 
 
