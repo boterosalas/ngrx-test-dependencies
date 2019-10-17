@@ -58,6 +58,12 @@ export class HomeComponent implements OnInit {
     private utils: UtilsService,
     private auth: AuthService
   ) {
+
+    /**
+     *  Verifica que en la ruta de inicio exista el parametro de email y activa el usuario
+     * @param email 
+     */
+
     this.route.queryParams.subscribe(params => {
       if (params.email) {
         this.email = params.email;
@@ -74,12 +80,20 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
+    /**
+     * verifica si el usuario esta logueado y lo envia a la pagina de clicker, para no mostrar la pagina inicial anonima
+     */
+
     if(this.auth.isLoggedIn()) {
       this.router.navigate(['clicker']);
     }
     
   }
 
+  /**
+   * Metodo para activar el usuario
+   * @param email
+   */
 
   public activateUser() {
 

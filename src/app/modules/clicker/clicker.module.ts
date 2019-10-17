@@ -24,11 +24,11 @@ const routes: Routes = [
     path: '',
     component: HomeComponent
   },
-  {
-    path: "reportes",
-    component: ReportComponent,
-    canActivate: [AuthGuard]
-  }
+  // {
+  //   path: "reportes",
+  //   component: ReportComponent,
+  //   canActivate: [AuthGuard]
+  // }
 ];
 
 @NgModule({

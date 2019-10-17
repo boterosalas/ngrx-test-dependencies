@@ -79,11 +79,6 @@ describe("LoginformComponent", () => {
     expect(component).toBeTruthy();
   });
 
-  it('go to forgot password', () => {
-    component.forgotpass();
-    expect(mockRouter.navigate).toHaveBeenCalledWith(['/olvido-contrasena']);
-  });
-
   it("remove white space password", () => {
     component.loginForm.controls.Password.setValue("12 3456789");
     component.removewhiteSpace();
