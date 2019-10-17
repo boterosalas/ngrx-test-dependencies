@@ -123,7 +123,7 @@ export class LoginformComponent implements OnInit {
   private routeBased() {
     let token = localStorage.getItem("ACCESS_TOKEN");
     let tokenDecode = decode(token);
-    if(tokenDecode.IdRol === "CLICKER") {
+    if(tokenDecode.role === "CLICKER") {
       this.router.navigate(['/clicker']);
       this.authService.isLogged$.next(true);
     } else {
