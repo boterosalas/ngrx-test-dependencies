@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from "@angular/core";
+import { Component, OnInit, HostListener, OnChanges, DoCheck } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
 import { Subscription } from "rxjs";
 import { UtilsService } from "src/app/services/utils.service";
@@ -17,62 +17,23 @@ export class MenuOptionsComponent implements OnInit {
     private loader: LoaderService
   ) {}
 
-  options = [
-    { name: "Inicio", route: "/inicio" },
-    { name: "Click Academy", route: "/click-academy" },
-    // { name: "Ofertas", route: "/ofertas" },
-    { name: "Preguntas Frecuentes", route: "/preguntas-frecuentes" }
-  ];
+  options = [];
 
   isOpenMenu: boolean;
   private subscription: Subscription = new Subscription();
 
   ngOnInit() {
-    this.showAnonymousMenu();
-    this.showClickerMenu();
-    this.showMobileMenu();
-    this.showClickerMobile();
+    this.getMenu()
   }
 
+  /**
+   * Metodo para obtener los menus
+   */
   
-  /**
-   * metodos para mostrar los menus en escritorio
-   */
-
-  public showAnonymousMenu() {
-    this.subscription = this.auth.menuInfo$
-      .pipe(distinctUntilChanged())
-      .subscribe((val) => {
-        this.options = val;
-      });
-  }
-
-  public showClickerMenu() {
-    this.subscription = this.auth.menuInfoClicker$
-      .pipe(distinctUntilChanged())
-      .subscribe((val) => {
-        this.options = [val];
-      });
-  }
-
-  /**
-   * metodos para mostrar los menus en mobile
-   */
-
-  public showMobileMenu() {
-    if (!this.auth.isLoggedIn()) {
-      this.subscription = this.auth.getMenuMobile().subscribe(opt => {
-        this.options = opt;
-      });
-    }
-  }
-
-  public showClickerMobile() {
-    if (this.auth.isLoggedIn()) {
-      this.subscription = this.auth.getMenuClickerMobile().subscribe(opt => {
-        this.options = opt;
-      });
-    }
+  public getMenu () {
+    this.auth.getMenu$.subscribe(val => {
+      this.options = val;
+    })
   }
 
   ngOnDestroy(): void {
