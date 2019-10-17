@@ -488,7 +488,9 @@ footer {
     a {
       color: $white;
       text-decoration: none;
-      padding: 0px 10px;
+    }
+    .item{
+      padding: 10px 10px;
     }
   }
 
@@ -544,4 +546,16 @@ footer {
 ::-webkit-scrollbar-thumb {
   background:#B5B8BC;
   border-radius: 5px;
+}
+
+.footer-links a::after {
+  content: "";
+  background:$primary-color;
+  height: 4px;
+  width: 25px;
+  position: relative;
+  border-radius: 3px;
+  display: flex;
+  margin-top: 0px;
+  margin: 0 auto;
 }

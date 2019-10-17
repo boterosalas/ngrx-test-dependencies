@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, OnChanges, DoCheck } from "@angular/core";
+import { Component, OnInit, HostListener, OnChanges, DoCheck, Input } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
 import { Subscription } from "rxjs";
 import { UtilsService } from "src/app/services/utils.service";
@@ -18,6 +18,8 @@ export class MenuOptionsComponent implements OnInit {
   ) {}
 
   options = [];
+
+  @Input() colfooter;
 
   isOpenMenu: boolean;
   private subscription: Subscription = new Subscription();
