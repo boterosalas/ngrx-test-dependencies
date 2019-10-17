@@ -1,24 +1,29 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { TabsComponent } from './tabs.component';
-import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { TranslateModule } from '@ngx-translate/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SharedModule } from 'src/app/modules/shared/shared.module';
-import { ProductSearchService } from 'src/app/services/product-search.service';
-import { UserService } from 'src/app/services/user.service';
-import { ShortenerService } from 'src/app/services/shortener.service';
-import { MatDialogRef, MAT_DIALOG_DATA, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
-import { of } from 'rxjs';
-import { ContentService } from 'src/app/services/content.service';
+import { TabsComponent } from "./tabs.component";
+import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { TranslateModule } from "@ngx-translate/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { RouterTestingModule } from "@angular/router/testing";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { SharedModule } from "src/app/modules/shared/shared.module";
+import { ProductSearchService } from "src/app/services/product-search.service";
+import { UserService } from "src/app/services/user.service";
+import { ShortenerService } from "src/app/services/shortener.service";
+import {
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MAT_BOTTOM_SHEET_DATA
+} from "@angular/material";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
+import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog.component";
+import { of } from "rxjs";
+import { ContentService } from "src/app/services/content.service";
+import { JwtHelperService, JWT_OPTIONS, JwtModule } from "@auth0/angular-jwt";
 
-describe('TabsComponent', () => {
+describe("TabsComponent", () => {
   let component: TabsComponent;
   let fixture: ComponentFixture<TabsComponent>;
 
@@ -35,11 +40,10 @@ describe('TabsComponent', () => {
     "getShortUrl"
   ]);
 
-  const mockContentService= jasmine.createSpyObj("ContentService", [
+  const mockContentService = jasmine.createSpyObj("ContentService", [
     "getAssured",
     "getTrips"
   ]);
-
 
   const mockDialog = jasmine.createSpyObj("MatDialog", ["open"]);
   const mockDialogRef = jasmine.createSpyObj("MatDialogRef", [
@@ -58,7 +62,11 @@ describe('TabsComponent', () => {
     identification: "123456789"
   };
 
-  let dataEmpty = {"state":"Success","userMessage":null,"objectResponse":{"total":0,"json":"[]"}};
+  let dataEmpty = {
+    state: "Success",
+    userMessage: null,
+    objectResponse: { total: 0, json: "[]" }
+  };
 
   let dataProduct = {
     linkText: "estufa-322",
@@ -67,87 +75,96 @@ describe('TabsComponent', () => {
     template: null,
     showClose: true,
     buttonClose: "Cerrar",
-    title : "estufa-322",
-    id : "123456789",
-    img : 'prueba',
-    price :'$1.000.000',
-    showCloseIcon : true,
+    title: "estufa-322",
+    id: "123456789",
+    img: "prueba",
+    price: "$1.000.000",
+    showCloseIcon: true,
     showProduct: true,
-    showshowTitle : false,
+    showshowTitle: false,
     items: [
       {
-        images: [
-          {imageUrl: 'pruebas'}
-        ],
+        images: [{ imageUrl: "pruebas" }],
         sellers: [
           {
             commertialOffer: {
-              price: '$1.000.000'
+              price: "$1.000.000"
             }
           }
         ],
-        itemId: '12345489'
+        itemId: "12345489"
       }
     ]
   };
 
-  let  dataAssured = {
+  let dataAssured = {
+    link: "www.exito.com",
     linkText: "estufa-322",
     productName: "estufa322",
     productId: "12345687",
     template: null,
     showClose: true,
     buttonClose: "Cerrar",
-    title : "mascota",
-    id : "123456789",
-    img : 'prueba',
-    price :'$200000',
-    showCloseIcon : true,
+    title: "mascota",
+    id: "123456789",
+    img: "prueba",
+    price: "$200000",
+    showCloseIcon: true,
     showProduct: true,
-    showshowTitle : false,
+    showshowTitle: false,
+    business: "viajes",
     objectResponse: [
       {
-        "imageurl": "https://cdn.shopify.com/s/files/1/0025/0986/5071/products/Seguro_mascotas_1024x1024.jpg?v=1548429524",
-        "description": "Seguro mascota",
-        "link": "https://www.wesura.com/seguro-mascotas?utm_source=pling&utm_medium=app&utm_campaign=wesuraconpling",
-        "commission": 0
+        imageurl:
+          "https://cdn.shopify.com/s/files/1/0025/0986/5071/products/Seguro_mascotas_1024x1024.jpg?v=1548429524",
+        description: "Seguro mascota",
+        link:
+          "https://www.wesura.com/seguro-mascotas?utm_source=pling&utm_medium=app&utm_campaign=wesuraconpling",
+        commission: 0
       }
     ]
-  }
+  };
 
   let segurosSuccess = {
-  "state": "Success",
-  "userMessage": null,
-  "objectResponse": [
-    {
-      "imageurl": "https://cdn.shopify.com/s/files/1/0025/0986/5071/products/Seguro_mascotas_1024x1024.jpg?v=1548429524",
-      "description": "Seguro mascota",
-      "link": "https://www.wesura.com/seguro-mascotas?utm_source=pling&utm_medium=app&utm_campaign=wesuraconpling",
-      "commission": 0
-    }
-  ]
-}
+    state: "Success",
+    userMessage: null,
+    objectResponse: [
+      {
+        imageurl:
+          "https://cdn.shopify.com/s/files/1/0025/0986/5071/products/Seguro_mascotas_1024x1024.jpg?v=1548429524",
+        description: "Seguro mascota",
+        link:
+          "https://www.wesura.com/seguro-mascotas?utm_source=pling&utm_medium=app&utm_campaign=wesuraconpling",
+        commission: 0
+      }
+    ]
+  };
 
   let ViajeSuccess = {
-  "state": "Success",
-  "userMessage": null,
-  "objectResponse": [
-    {
-      "imageurl": "https://cdn.shopify.com/s/files/1/0025/0986/5071/products/Seguro_mascotas_1024x1024.jpg?v=1548429524",
-      "description": "Seguro mascota",
-      "link": "https://www.wesura.com/seguro-mascotas?utm_source=pling&utm_medium=app&utm_campaign=wesuraconpling",
-      "commission": 0
-    }
-  ]
-}
-
+    state: "Success",
+    userMessage: null,
+    objectResponse: [
+      {
+        imageurl:
+          "https://cdn.shopify.com/s/files/1/0025/0986/5071/products/Seguro_mascotas_1024x1024.jpg?v=1548429524",
+        description: "Seguro mascota",
+        link:
+          "https://www.wesura.com/seguro-mascotas?utm_source=pling&utm_medium=app&utm_campaign=wesuraconpling",
+        commission: 0
+      }
+    ]
+  };
 
   const shortUrl = "http://tynyurl.com/xixiaa";
 
+  localStorage.setItem(
+    "ACCESS_TOKEN",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU"
+  );
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations:[TabsComponent],
+      declarations: [TabsComponent],
       imports: [
         AppMaterialModule,
         HttpClientTestingModule,
@@ -156,7 +173,17 @@ describe('TabsComponent', () => {
         ReactiveFormsModule,
         RouterTestingModule.withRoutes([]),
         BrowserAnimationsModule,
-        SharedModule
+        SharedModule,
+        JwtModule.forRoot({
+          config: {
+            tokenGetter: () => {
+              return localStorage.getItem("ACCESS_TOKEN");
+            },
+            throwNoTokenError: true,
+            whitelistedDomains: [],
+            blacklistedRoutes: []
+          }
+        })
       ],
       providers: [
         { provide: ProductSearchService, useValue: mockProductSearchService },
@@ -164,7 +191,8 @@ describe('TabsComponent', () => {
         { provide: ShortenerService, useValue: mockShortenerService },
         { provide: MatDialogRef, useValue: mockDialogRef },
         // { provide: ContentService, useValue: mockContentService },
-        { provide: MAT_BOTTOM_SHEET_DATA, useValue: mockDialog }
+        { provide: MAT_BOTTOM_SHEET_DATA, useValue: mockDialog },
+        JwtHelperService
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
@@ -186,7 +214,7 @@ describe('TabsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
     // expect(mockProductUserService.getProfile).toHaveBeenCalled();
   });
@@ -236,8 +264,5 @@ describe('TabsComponent', () => {
       component.searchProductPaginate("playstation");
       expect(mockProductSearchService.getProductsPagination).toHaveBeenCalled();
     });
-
   });
-
 });
-

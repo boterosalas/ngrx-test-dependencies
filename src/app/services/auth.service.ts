@@ -40,13 +40,12 @@ export class AuthService {
   }
 
   public isLoggedIn() {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-
-    if (token == null) {
-      return false;
-    } else {
-      return !this.jwtHelper.isTokenExpired(token);
-    }
+   return localStorage.getItem("ACCESS_TOKEN") !== null;
+    // if (token == null) {
+    //   return false;
+    // } else {
+    //   return !this.jwtHelper.isTokenExpired(token);
+    // }
   }
 
   public logout() {
