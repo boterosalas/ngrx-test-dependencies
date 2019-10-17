@@ -6,19 +6,24 @@ import { Router } from "@angular/router";
 import { map, distinctUntilChanged } from "rxjs/operators";
 import { BehaviorSubject } from "rxjs";
 import { ResponseService } from "../interfaces/response";
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    public jwtHelper: JwtHelperService
+  ) {
     this.isLogged$.pipe(distinctUntilChanged()).subscribe(val => {
-      if(!!val || this.isLoggedIn()) {
+      if (!!val || this.isLoggedIn()) {
         this.getMenuClicker();
       } else {
         this.getMenu();
       }
-    })
+    });
   }
 
   url = environment.URL_SECURITY;
@@ -35,7 +40,12 @@ export class AuthService {
   }
 
   public isLoggedIn() {
-    return localStorage.getItem("ACCESS_TOKEN") !== null;
+   return localStorage.getItem("ACCESS_TOKEN") !== null;
+    // if (token == null) {
+    //   return false;
+    // } else {
+    //   return !this.jwtHelper.isTokenExpired(token);
+    // }
   }
 
   public logout() {
@@ -48,8 +58,8 @@ export class AuthService {
     return this.http
       .get(`${this.url + this.apiGetmenus}`)
       .pipe(map((res: ResponseService) => res))
-      .subscribe((resp:any) => {
-         this.menuInfo$.next(resp.objectResponse);
+      .subscribe((resp: any) => {
+        this.menuInfo$.next(resp.objectResponse);
       });
   }
 
@@ -63,7 +73,7 @@ export class AuthService {
         Authorization: "Bearer " + authorization
       })
     };
-    if(this.isLoggedIn()) {
+    if (this.isLoggedIn()) {
       return this.http
         .get(`${this.url + this.apiGetmenusClicker}`, httpOptions)
         .pipe(map((res: ResponseService) => res))
@@ -73,15 +83,15 @@ export class AuthService {
     }
   }
 
-  public getMenuMobile(){
+  public getMenuMobile() {
     return this.http.get(`${this.url + this.apiGetmenus}`).pipe(
       map((resp: any) => {
         return resp.objectResponse;
-      }
-    ));
+      })
+    );
   }
 
-  public getMenuClickerMobile(){
+  public getMenuClickerMobile() {
     const token = localStorage.getItem("ACCESS_TOKEN");
     const authorization = token;
 
@@ -91,12 +101,13 @@ export class AuthService {
         Authorization: "Bearer " + authorization
       })
     };
-    
-    return this.http.get(`${this.url + this.apiGetmenusClicker}`, httpOptions).pipe(
-      map((resp: any) => {
-        return resp.objectResponse;
-      })
-    );
-  }
 
+    return this.http
+      .get(`${this.url + this.apiGetmenusClicker}`, httpOptions)
+      .pipe(
+        map((resp: any) => {
+          return resp.objectResponse;
+        })
+      );
+  }
 }

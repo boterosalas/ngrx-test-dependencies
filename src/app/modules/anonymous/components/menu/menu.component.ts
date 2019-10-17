@@ -1,6 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { UtilsService } from 'src/app/services/utils.service';
-import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
 
@@ -12,13 +11,14 @@ import { AuthService } from 'src/app/services/auth.service';
 export class MenuComponent implements OnInit {
 
   constructor(private utils: UtilsService, private auth: AuthService) { }
-
- 
-  isOpenMenu: boolean;
-  private subscription: Subscription = new Subscription();
   
   ngOnInit() {
   }
+
+  /**
+   * Los host listener se encargan de mostrar los formularios de iniciar sesion, registro, menu
+   * Tambien se encargan de ocultarlos
+   */
 
   @HostListener('over')
   openRegister() {
@@ -29,10 +29,6 @@ export class MenuComponent implements OnInit {
   @HostListener('over')
   hideMenu() {
     this.utils.hideMenu();
-  }
-
-  ngOnDestroy(): void {
-   this.subscription.unsubscribe();
   }
 
 }

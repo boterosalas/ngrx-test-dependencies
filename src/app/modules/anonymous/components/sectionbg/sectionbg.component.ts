@@ -23,6 +23,8 @@ export class SectionbgComponent implements OnInit {
   ngOnInit() {
   }
 
+   /**emite una accion que es abrir el formulario de registro */
+
   public openRegister() {
     this.open.emit();
   }

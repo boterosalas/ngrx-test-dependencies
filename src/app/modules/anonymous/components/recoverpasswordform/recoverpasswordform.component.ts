@@ -52,6 +52,8 @@ export class RecoverpasswordformComponent implements OnInit {
       ]
     },{ validator: ConfirmPasswordValidator.MatchPassword });
 
+    /** verifica que los parametros en la ruta existan si no hace un redirect hacia el inicio */
+
     this.route.queryParams.subscribe(params => {
       if(params.code && params.email) {
         this.code = params.code;
@@ -62,6 +64,11 @@ export class RecoverpasswordformComponent implements OnInit {
     });
 
   }
+
+  /**
+   * Metodo encargado de reestablecer la contraseña
+   * @params code, email, newpassword
+   */
 
   public recoverPassword() {
     this.loading.show();
@@ -106,6 +113,10 @@ export class RecoverpasswordformComponent implements OnInit {
       }
     );
   }
+
+  /**
+   * Remueve los espacios en blanco
+   */
 
   public removewhiteSpaceRecover() {
     const inputValue = this.recoverPasswordForm.controls.password.value;

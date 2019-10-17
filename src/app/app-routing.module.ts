@@ -9,6 +9,9 @@ const routes: Routes = [
   },
   {
     path: 'clicker',  loadChildren: () => import('./modules/clicker/clicker.module').then(m => m.ClickerModule), canActivate: [AuthGuard]
+  },
+  {
+    path: 'dashboard',  loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule)
   }
 ];
 

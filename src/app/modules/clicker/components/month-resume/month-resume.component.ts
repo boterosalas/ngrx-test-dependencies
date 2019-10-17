@@ -35,6 +35,11 @@ export class MonthResumeComponent implements OnInit {
   ngOnInit() {
 
     this.isLoggedIn = this.auth.isLoggedIn();
+
+    /**
+     * verifica si el usuario esta logueado y se obtiene la identificacion
+     */
+
     if (this.isLoggedIn) {
       this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
         if (!!val) {
@@ -44,10 +49,14 @@ export class MonthResumeComponent implements OnInit {
     }
     setTimeout(() => {
       this.getLinksGenerated();
-    }, 1000);
+    }, 3000);
   }
 
-  public getLinksGenerated() {
+  /**
+   * Metodo para obtener los links generados
+   */
+
+  private getLinksGenerated() {
     this.link.getLink(this.identification).subscribe((link: any) => {
       this.linksGenerated = link.totalLinks;
     });
