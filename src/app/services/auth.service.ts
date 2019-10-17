@@ -16,15 +16,7 @@ export class AuthService {
     private http: HttpClient,
     private router: Router,
     public jwtHelper: JwtHelperService
-  ) {
-    this.isLogged$.pipe(distinctUntilChanged()).subscribe(val => {
-      if (!!val || this.isLoggedIn()) {
-        this.getMenuClicker();
-      } else {
-        this.getMenu();
-      }
-    });
-  }
+  ) {}
 
   url = environment.URL_SECURITY;
   apiLogin = "Authentication/login";
@@ -40,7 +32,7 @@ export class AuthService {
   }
 
   public isLoggedIn() {
-   return localStorage.getItem("ACCESS_TOKEN") !== null;
+    return localStorage.getItem("ACCESS_TOKEN") !== null;
     // if (token == null) {
     //   return false;
     // } else {
@@ -55,12 +47,14 @@ export class AuthService {
   }
 
   public getMenu() {
-    return this.http
-      .get(`${this.url + this.apiGetmenus}`)
-      .pipe(map((res: ResponseService) => res))
-      .subscribe((resp: any) => {
-        this.menuInfo$.next(resp.objectResponse);
-      });
+    if (!this.isLoggedIn()) {
+      return this.http
+        .get(`${this.url + this.apiGetmenus}`)
+        .pipe(map((res: ResponseService) => res))
+        .subscribe((resp: any) => {
+          this.menuInfo$.next(resp.objectResponse);
+        });
+    }
   }
 
   public getMenuClicker() {
@@ -84,11 +78,13 @@ export class AuthService {
   }
 
   public getMenuMobile() {
-    return this.http.get(`${this.url + this.apiGetmenus}`).pipe(
-      map((resp: any) => {
-        return resp.objectResponse;
-      })
-    );
+    if (!this.isLoggedIn()) {
+      return this.http.get(`${this.url + this.apiGetmenus}`).pipe(
+        map((resp: any) => {
+          return resp.objectResponse;
+        })
+      );
+    }
   }
 
   public getMenuClickerMobile() {
@@ -101,13 +97,14 @@ export class AuthService {
         Authorization: "Bearer " + authorization
       })
     };
-
-    return this.http
-      .get(`${this.url + this.apiGetmenusClicker}`, httpOptions)
-      .pipe(
-        map((resp: any) => {
-          return resp.objectResponse;
-        })
-      );
+    if (this.isLoggedIn()) {
+      return this.http
+        .get(`${this.url + this.apiGetmenusClicker}`, httpOptions)
+        .pipe(
+          map((resp: any) => {
+            return resp.objectResponse;
+          })
+        );
+    }
   }
 }

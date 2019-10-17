@@ -42,7 +42,7 @@ export class MenuOptionsComponent implements OnInit {
   public showAnonymousMenu() {
     this.subscription = this.auth.menuInfo$
       .pipe(distinctUntilChanged())
-      .subscribe(val => {
+      .subscribe((val) => {
         this.options = val;
       });
   }
@@ -50,8 +50,8 @@ export class MenuOptionsComponent implements OnInit {
   public showClickerMenu() {
     this.subscription = this.auth.menuInfoClicker$
       .pipe(distinctUntilChanged())
-      .subscribe(val => {
-        this.options = val;
+      .subscribe((val) => {
+        this.options = [val];
       });
   }
 
