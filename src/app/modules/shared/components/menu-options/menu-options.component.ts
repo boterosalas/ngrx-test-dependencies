@@ -20,6 +20,7 @@ export class MenuOptionsComponent implements OnInit {
   options = [];
 
   @Input() colfooter;
+  @Input() aligment;
 
   isOpenMenu: boolean;
   private subscription: Subscription = new Subscription();
