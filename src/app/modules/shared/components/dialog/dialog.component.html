@@ -11,7 +11,7 @@
             <div fxLayout="column" fxFlex="50">
                 <h3 class="title m-0">{{data.title}}</h3>
                 <span *ngIf="data.showComission">Comisión:</span>
-                <span class="discount">{{data.price | currency}}</span>
+                <span class="discount">{{data.price | currency : '' : 'symbol' : '1.0-0'}}</span>
                 <span class="plu" *ngIf="data.showPlu">PLU:{{data.plu}} </span>
             </div>
         </div>

@@ -1,7 +1,5 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { GoogleChartComponent } from "angular-google-charts";
+import { Component, OnInit } from "@angular/core";
 import { LinksService } from "src/app/services/links.service";
-import { ResponseService } from "src/app/interfaces/response";
 import { UserService } from "src/app/services/user.service";
 import { AuthService } from "src/app/services/auth.service";
 import { distinctUntilChanged } from "rxjs/operators";
@@ -18,22 +16,42 @@ export class MonthResumeComponent implements OnInit {
     private auth: AuthService
   ) {}
 
-  linksGenerated: string;
+  linksCreated: string;
   identification: string;
+  totalComissions: string;
   isLoggedIn: any;
 
-  myoptions = {
-    title: "Performance del clicker",
-    // vAxis: { title: "Comision" },
-    hAxis: { title: "Mes" },
-    seriesType: "bars",
-    series: { 5: { type: "BarChart" } }
-  };
+  title = 'Performance del Clicker';
+   type = 'ComboChart';
+   data = [];
+   columnNames = ['Mes', 'Links Creados', 'Comisión'];
 
-  myData = [["clicks", 136, 6], ["Comisiones", 20000, 500]];
+   options = {   
+    colors: ['#FF6F11', '#B5B8BC'],
+      hAxis: {
+         title: 'Últimos 30 días'
+      },
+      vAxes:{
+         0: {title: 'Links Creados'},
+         1: {title: 'Comisión'}
+      },
+      seriesType: 'bars',
+      series: {
+        0: {type: 'line', targetAxisIndex: 0},
+        1: {type:'bar', targetAxisIndex: 1}
+      },
+      is3D: true,
+      legend: { position: 'top', alignment: 'center' }
+   };
+
+   
+   width = 550;
+   height = 400;
+
+  
+
 
   ngOnInit() {
-
     this.isLoggedIn = this.auth.isLoggedIn();
 
     /**
@@ -44,21 +62,23 @@ export class MonthResumeComponent implements OnInit {
       this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
         if (!!val) {
           this.identification = val.identification;
+          this.getInfomonth();
         }
       });
     }
-    setTimeout(() => {
-      this.getLinksGenerated();
-    }, 3000);
+    
+    
   }
 
   /**
-   * Metodo para obtener los links generados
+   * Metodo para obtener el resumen del mes generados
    */
 
-  private getLinksGenerated() {
-    this.link.getLink(this.identification).subscribe((link: any) => {
-      this.linksGenerated = link.totalLinks;
+  private getInfomonth() {
+    this.link.getReports(this.identification).subscribe((resume: any) => {
+      this.linksCreated = resume.MonthResume.TotalLink;
+      this.totalComissions = resume.MonthResume.TotalCommissions;
+      this.data = resume.MonthResume.DaysResume;
     });
   }
 }
