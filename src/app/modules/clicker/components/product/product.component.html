@@ -11,10 +11,10 @@
     <h3 class="title" id="{{ id }}">{{ productName }}</h3>
     <p>
       <span class="d-block discount">
-        {{ price | currency }}
+        {{ price | currency : '' : 'symbol' : '1.0-0' }}
       </span>
       <span class="d-block discount">
-        {{ discount | currency }}
+        {{ discount | currency : '' : 'symbol' : '1.0-0' }}
       </span>
     </p>
     <p>
@@ -53,7 +53,7 @@
           <p>
             <span>Comisión:</span>
             <span class="d-block discount">
-              {{ price | currency }}
+              {{ price | currency : '' : 'symbol' : '1.0-0' }}
             </span>
           </p>
         </span>
