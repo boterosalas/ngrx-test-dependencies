@@ -37,7 +37,6 @@
     },
     "REGISTER": {
         "ACCEPT":"¿Acepta los términos y condiciones y políticas de privacidad de Clickam?",
-        "TERMS_AND_CONDITIONS": "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
         "TITLE_SECTION": "Regístrate, recomienda y gana",
         "TITLE_TERMS_AND_CONDITIONS": "TÉRMINOS Y CONDICIONES DE  LA LEY HABEAS DATA",
         "PASSWORD_NOT_MATCH":"Las contraseñas no son iguales",
@@ -57,17 +56,17 @@
     },
     "HOME": {
         "TITLE_SPEND": "¿Cuánto gano?",
-        "DESPCRIPTION_SPEND": "Revisa los valores que puedes ganar por vender productos del grupo éxito",
+        "DESPCRIPTION_SPEND": "Consulta aquí los valores de las comisiones que puedes ganar por crear link y generar ventas a través de estos.",
         "TEXT_BUTTON_COMISIONS": "Ver comisiones",
-        "TITLE_SELL": "¿Qué vendo?",
-        "DESPCRIPTION_SELL": "Ten en cuenta las mejores ofertas para vender más",
+        "TITLE_SELL": "¿Ofertas para ganar comisiones rápido?",
+        "DESPCRIPTION_SELL": "Conoce las mejores ofertas de los negocios asociados que le puedes ofrecer a tus clientes.",
         "TEXT_BUTTON_OFFERS": "Ver Ofertas",
         "HOW_WORKS": "¿Cómo funciona?",
-        "HOW_WORKS_DESCRIPTION": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula",
-        "TITLE_RAISE":"Aumenta tus ingresos en tus espacios habituales",
-        "DESCRIPTION_RAISE": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum.",
+        "HOW_WORKS_DESCRIPTION": "Busca un producto o servicio de los comercios asociados, crea un link, compártelo en redes sociales y empieza a ganar comisiones.",
+        "TITLE_RAISE":"Ingresos adicionales a solo un click",
+        "DESCRIPTION_RAISE": "¡Nunca fue tan fácil tener ingresos adicionales! Refiere y vende productos de los negocios asociados y obtén las mejores comisiones.",
         "TITLE_SEARCH": "Busca y crea un link",
-        "DESCRIPTION_SEARCH": "Elige la tienda y busca el producto que quieres compartir"
+        "DESCRIPTION_SEARCH": "Elige el negocio asociado, selecciona un producto o servicio y compártelo para ganar ingresos adicionales."
     },
     "HEADER": {
         "PROFILE": "Mi perfil",
@@ -87,7 +86,7 @@
     },
     "CLICKACADEMY": {
         "TOOLS": "Herramientas",
-        "TOOLS_DESCRIPTION": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem",
+        "TOOLS_DESCRIPTION": "Guías rápidas para que ganes tus primeras comisiones, aprendas los trucos de los mejores clickers y le saques el mayor provecho a la plataforma.",
         "TOOLS_TEXT1": "Entendiendo la plataforma nueva",
         "TOOLS_TEXT2": "¿Cómo vendo producto de exito.com?",
         "TOOLS_TEXT3": "¿Cómo vendo un seguro?",
@@ -99,7 +98,25 @@
     },
     "FREQUENT": {
         "FREQUENT_QUESTIONS": "Preguntas Frecuentes",
-        "FREQUENT_QUESTIONS_DESCRIPTION": "Bienvenido a la comunidad de ayuda de Clickam."
+        "FREQUENT_QUESTIONS_DESCRIPTION": "Bienvenido a la comunidad de ayuda de Clickam, acá podrás encontrar respuesta a las preguntas más frecuentes.",
+        "HOW_WORKS_TITLE": "¿Cómo funciona?",
+        "HOW_WORKS_DESCRIPTION": "En Clickam ganas comisiones por referir y compartir link de productos y servicios en tus redes sociales, una vez las personas compren a través de estos, te ganaras una comisión según el producto o servicio vendido.",
+        "SALES_TITLE":"¿Cómo cruzan la venta?",
+        "SALES_DESCRIPTION":"Cuando crees un link y las personas compren a través de este, nuestro sistema rastreara de manera precisa el link desde donde se generará la compra, si es a través de uno de los link que tú como clicker creaste y compartiste, te ganaras la comisión correspondiente al producto o servicio.",
+        "WON_COMISSION_TITLE": "¿Cómo veo las comisiones que gané?",
+        "WON_COMISSION_DESCRIPTION": "Cuando inicies sesión podrás encontrar una tabla con los link creados y las comisiones ganadas los últimos 30 días, un gráfico con el desempeño de tu perfil, métricas del año en curso de tus comisiones ganadas, los link creados, el número de productos vendidos y la tasa de conversión (La tasa de conversión es la división entre el número de productos vendidos y los link generados).",
+        "BEST_OFFER_TITLE": "¿Dónde puedo encontrar las mejores ofertas?",
+        "BEST_OFFER_DESCRIPTION": "Al final de la aplicación encontraras un “mapa del sitio”, y un botón que dice Ofertas, este te enviara a una página con las ofertas mas ganadoras del día, para que tú puedas generar comisiones de manera rápida y efectiva. También las podrás encontrar cuando inicies sesión en la sección de Ver Ofertas.",
+        "ASSOCIATED_TITLE": "¿Cuáles son los negocios asociados?",
+        "ASSOCIATED_DESCRIPTION": "A la fecha contamos con <a href='https://www.exito.com' target='_blank'> www.exito.com </a>, <a href='https://www.segurosexito.com' target='_blank'> www.segurosexito.com </a>  y <a href='https://www.viajesexito.com' target='_blank'> www.viajesexito.com </a> , muy pronto tendremos otros negocios para que ganes más.",
+        "PAYDAYS_TITLE":"¿Cuáles son las fechas de pago?",
+        "PAYDAYS_DESCRIPTION":"<p>Las comisiones tienen 2 fechas de corte: </p> <ul><li> Del 1° al 15 de cada mes, las ventas que generen tus link dentro de este periodo se pagarán los 20 de cada mes ó el dia hábil siguiente.</li> <li>Del 16 al 30 o 31 de cada mes y las ventas generadas en este periodo se pagan el 5 del mes ó el siguiente dia hábil.</li></ul> <p>*Tener en cuenta que las ventas por <a href='https://www.exito.com' target='_blank'> www.exito.com </a> se hacen efectivas 7 días después de la compra debido a la legislación de Ley de Retracto, donde el comprador tiene 7 días para retractarse de su compra.</p>",
+        "WHERE_PAY_TITLE": "¿Dónde me pagan?",
+        "WHERE_PAY_DESCRIPTION": "Tus comisiones se pagarán en la cuenta de nómina que tengas registrada dentro del Grupo Exito o la cuenta que hayas registrado.",
+        "PAYMET_METHODS_TITLE": "¿Medios de pago?",
+        "PAYMET_METHODS_DESCRIPTION": "Cada negocio asociado cuenta con diferentes medios de pago que puedes utilizar a la hora de pagar tu producto o servicio, podrás encontrar desde pagos con tarjeta débito y crédito, hasta pagos contra entrega. Valida siempre las formas de pago de cada negocio para dar claridad a tus referidos.",
+        "SHIPMENT_TITLE": "¿Envíos?",
+        "SHIPMENT_DESC" : "Los envíos aplican para <a href='https://www.exito.com' target='_blank'> www.exito.com </a>, este negocio asociado hace envíos a todo el País, los periodos de entrega son entre 2 y 10 días hábiles según la ubicación geográfica."
     },
     "OFFERS": {
         "OFFERS_TITLE": "Descubre las ofertas",

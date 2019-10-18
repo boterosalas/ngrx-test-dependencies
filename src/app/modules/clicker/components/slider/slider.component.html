@@ -3,8 +3,7 @@
   #slickModal="slick-carousel"
   [config]="slideConfig"
 >
-  <div ngxSlickItem *ngFor="let slide of slides; let i=index" class="slide text-center">
-    <h3>{{ slide.description }}</h3>
+  <div ngxSlickItem *ngFor="let slide of slides; let i=index" class="slide text-center mt-4">
     <a href="{{ slide.link }}" target="_blank" id="banner{{i}}">
       <img class="responsive-img" src="{{ slide.imageurl }}" alt="{{ slide.description }}" />
     </a>
