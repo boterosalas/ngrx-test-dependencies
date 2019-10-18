@@ -23,9 +23,9 @@ export class MonthResumeComponent implements OnInit {
   isLoggedIn: any;
 
   myoptions = {
-    title: "Monthly Coffee Production by Country",
-    vAxis: { title: "Cups" },
-    hAxis: { title: "Month" },
+    title: "Performance del clicker",
+    // vAxis: { title: "Comision" },
+    hAxis: { title: "Mes" },
     seriesType: "bars",
     series: { 5: { type: "BarChart" } }
   };
