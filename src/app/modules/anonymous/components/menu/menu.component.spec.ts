@@ -7,10 +7,13 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { JwtModule } from '@auth0/angular-jwt';
+import { UtilsService } from 'src/app/services/utils.service';
 
 describe('MenuComponent', () => {
   let component: MenuComponent;
   let fixture: ComponentFixture<MenuComponent>;
+
+  const mockUtilsService = jasmine.createSpyObj("UtilsService", ["showRegisterForm", "hideMenu"]);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -33,11 +36,16 @@ describe('MenuComponent', () => {
           }
         })
        ],
+       providers: [
+        { provide: UtilsService, useValue: mockUtilsService }
+       ],
        schemas: [
          NO_ERRORS_SCHEMA
        ]
     })
     .compileComponents();
+    mockUtilsService.showRegisterForm.and.returnValue(true);
+    mockUtilsService.hideMenu.and.returnValue(true);
   }));
 
   beforeEach(() => {
@@ -50,4 +58,15 @@ describe('MenuComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('open register', () => {
+    component.openRegister();
+    expect(mockUtilsService.showRegisterForm).toHaveBeenCalled();
+  });
+
+  it('hide menu', () => {
+    component.hideMenu();
+    expect(mockUtilsService.hideMenu).toHaveBeenCalled();
+  });
+
 });

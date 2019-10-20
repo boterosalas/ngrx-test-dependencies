@@ -41,6 +41,17 @@ export class AuthService implements OnDestroy {
   getMenu$ = new BehaviorSubject<any>(null);
   subs = [];
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Ocp-Apim-Subscription-Key': `${environment.SUBSCRIPTION}`
+    })
+  }
+
+
+
   public login(userInfo: User) {
     return this.http.post(`${this.url + this.apiLogin}`, userInfo);
   }
@@ -71,7 +82,7 @@ export class AuthService implements OnDestroy {
   }
 
   public getMenu() {
-      return this.http.get(`${this.url + this.apiGetmenus}`).pipe(
+      return this.http.get(`${this.url + this.apiGetmenus}`, this.httpOptions).pipe(
         map((resp: any) => {
            return resp.objectResponse;
         })
@@ -84,7 +95,8 @@ export class AuthService implements OnDestroy {
     let httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
       })
     };
       return this.http
