@@ -37,23 +37,18 @@ export class AuthService implements OnDestroy {
   apiGetmenusClicker = "Authentication/getMenusByRol";
   role = "";
 
+   httpOptions = {
+    headers: new HttpHeaders({
+      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+    })
+  };
+
   isLogged$ = new BehaviorSubject<boolean>(false);
   getMenu$ = new BehaviorSubject<any>(null);
   subs = [];
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Access-Control-Allow-Headers': 'Content-Type',
-      'Ocp-Apim-Subscription-Key': `${environment.SUBSCRIPTION}`
-    })
-  }
-
-
-
-  public login(userInfo: User) {
-    return this.http.post(`${this.url + this.apiLogin}`, userInfo);
+  public login(userInfo: any) {
+    return this.http.post(`${this.url + this.apiLogin}`, userInfo, this.httpOptions);
   }
 
   public isLoggedIn() {
