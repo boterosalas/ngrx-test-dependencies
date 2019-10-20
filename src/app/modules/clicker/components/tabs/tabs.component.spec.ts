@@ -23,7 +23,7 @@ import { of } from "rxjs";
 import { ContentService } from "src/app/services/content.service";
 import { JwtHelperService, JWT_OPTIONS, JwtModule } from "@auth0/angular-jwt";
 
-fdescribe("TabsComponent", () => {
+describe("TabsComponent", () => {
   let component: TabsComponent;
   let fixture: ComponentFixture<TabsComponent>;
 
