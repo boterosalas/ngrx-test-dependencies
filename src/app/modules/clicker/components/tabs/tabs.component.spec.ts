@@ -266,5 +266,16 @@ describe("TabsComponent", () => {
       component.searchProductPaginate("playstation");
       expect(mockProductSearchService.getProductsPagination).toHaveBeenCalled();
     });
+
+    it('save link', () => {
+      component.urlshorten = "https://tyny.url/xaxa";
+      component.identification = "123456789";
+      component.plu = '123456';
+      component.business = 'exito';
+      component.date = "2019/09/09"
+      component.saveLink();
+      
+    });
+
   });
 });
