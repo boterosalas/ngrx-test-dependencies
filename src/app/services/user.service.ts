@@ -22,6 +22,12 @@ export class UserService {
   apiProfile = "userprofile/getuserprofile";
   apiActivateProfile = "userprofile/activateUser";
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+    })
+  };
+
   userInfo$ = new BehaviorSubject<any>(null);
 
   public getProfile() {
@@ -31,7 +37,8 @@ export class UserService {
     let httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
       })
     };
     return this.http
@@ -43,6 +50,6 @@ export class UserService {
   }
 
   public activateProfile(email: string) {
-    return this.http.post(`${this.url + this.apiActivateProfile}`, { email });
+    return this.http.post(`${this.url + this.apiActivateProfile}`, {email:email}, this.httpOptions);
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Forgotpassword } from '../interfaces/forgotpassword';
 
@@ -13,8 +13,14 @@ export class ForgotpasswordService {
   url = environment.URL_SECURITY;
   apiForgotPassword = 'Authentication/recoveryPassword';
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+    })
+  };
+
   public forgotPassword(username: Forgotpassword) {
-    return this.http.post((`${this.url + this.apiForgotPassword}`),{ email:username});
+    return this.http.post((`${this.url + this.apiForgotPassword}`),{email:username}, this.httpOptions);
   }
 
 }

@@ -4,10 +4,12 @@
 
 export const environment = {
   production: false,
-  URL_SECURITY: 'https://clickamapisecurity.azurewebsites.net/api/',
-  URL_PROFILE: 'https://clickamapiprofile.azurewebsites.net/api/',
-  URL_CONTENT: 'https://clickamapicontent.azurewebsites.net/api/product/',
-  URL_REFERAL: 'https://clickamapireferral.azurewebsites.net/api/Link/'
+  URL_SECURITY: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apisecurity/api/',
+  URL_PROFILE: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apiprofile/api/',
+  URL_CONTENT: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apicontent/api/product/',
+  URL_REFERAL: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apireferral/api/Link/',
+  URL_REPORT: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apicommission/api/Reports/',
+  SUBSCRIPTION: 'f5edbcd2315e479aad33d80c58052fcc'
 };
 
 /*

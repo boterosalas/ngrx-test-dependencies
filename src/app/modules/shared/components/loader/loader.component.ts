@@ -13,6 +13,11 @@ export class LoaderComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   constructor(private loaderService: LoaderService) { }
   ngOnInit() {
+
+    /**
+     * metodo para mostrar el loader del sitio
+     */
+
     this.subscription = this.loaderService.loaderState
     .subscribe((state: LoaderState) => {
       this.show = state.show;

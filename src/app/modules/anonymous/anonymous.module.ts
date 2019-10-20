@@ -46,10 +46,10 @@ const routes: Routes = [
     path: "click-academy",
     component: ClickAcademyComponent
   },
-  {
-    path: "ofertas",
-    component: OffersComponent
-  },
+  // {
+  //   path: "ofertas",
+  //   component: OffersComponent
+  // },
   {
     path: "preguntas-frecuentes",
     component: FrequentQuestionsComponent

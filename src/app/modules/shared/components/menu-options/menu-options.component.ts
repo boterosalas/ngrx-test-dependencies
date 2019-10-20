@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from "@angular/core";
+import { Component, OnInit, HostListener, OnChanges, DoCheck, Input } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
 import { Subscription } from "rxjs";
 import { UtilsService } from "src/app/services/utils.service";
@@ -18,46 +18,25 @@ export class MenuOptionsComponent implements OnInit {
   ) {}
 
   options = [];
+
+  @Input() colfooter;
+  @Input() aligment;
+
   isOpenMenu: boolean;
   private subscription: Subscription = new Subscription();
 
   ngOnInit() {
-    this.showAnonymousMenu();
-    this.showClickerMenu();
-    this.showMobileMenu();
-    this.showClickerMobile();
+    this.getMenu()
   }
 
-  public showAnonymousMenu() {
-    this.subscription = this.auth.menuInfo$
-      .pipe(distinctUntilChanged())
-      .subscribe(val => {
-        this.options = val;
-      });
-  }
-
-  public showClickerMenu() {
-    this.subscription = this.auth.menuInfoClicker$
-      .pipe(distinctUntilChanged())
-      .subscribe(val => {
-        this.options = val;
-      });
-  }
-
-  public showMobileMenu() {
-    if (!this.auth.isLoggedIn()) {
-      this.subscription = this.auth.getMenuMobile().subscribe(opt => {
-        this.options = opt;
-      });
-    }
-  }
-
-  public showClickerMobile() {
-    if (this.auth.isLoggedIn()) {
-      this.subscription = this.auth.getMenuClickerMobile().subscribe(opt => {
-        this.options = opt;
-      });
-    }
+  /**
+   * Metodo para obtener los menus
+   */
+  
+  public getMenu () {
+    this.auth.getMenu$.subscribe(val => {
+      this.options = val;
+    })
   }
 
   ngOnDestroy(): void {

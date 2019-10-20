@@ -12,6 +12,10 @@ export class RecoverpasswordComponent implements OnInit {
   constructor(private auth: AuthService,   private router: Router) { }
 
   ngOnInit() {
+    /**
+     * verifica si el usuario esta logueado y lo envia a la pagina de clicker, para no mostrar recuperar contraseña
+     */
+
     if(this.auth.isLoggedIn()) {
       this.router.navigate(['clicker']);
     }

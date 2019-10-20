@@ -29,3 +29,26 @@
 .gray {
     color: $gray;
 }
+
+.img-container-seguros {
+    width: 100%;
+    display: flex;
+    max-height: 40px;
+    margin-top: 15px;
+}
+
+.img-container-viajes {
+    width: 100%;
+    display: flex;
+    margin-top: 15px;
+}
+
+
+@media screen and (min-width: 600px) {
+
+    .img-container-2{
+        max-width: 50%;
+        margin: 0px auto;
+        height: 20vh;
+    }
+}

@@ -107,13 +107,7 @@ describe("RegisterformComponent", () => {
     component.showRegisterForm = true;
     expect(component.showTerms).toBeFalsy();
     expect(component.showRegisterForm).toBeTruthy();
-  });
-
-  it('go to login', () => {
-    component.showLogin();
-    expect(mockRouter.navigate).toHaveBeenCalledWith(['/inicio']);
-  });
-  
+  });  
 
   it("register form", () => {
     component.register();

@@ -81,6 +81,7 @@
           [alt]="asurred.description"
           other="true"
           textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+          container="img-container-seguros"
           (infoProduct)="dataAssured(asurred)"
         ></app-product>
       </div>
@@ -106,6 +107,7 @@
           [image]="trip.imageurl"
           [alt]="trip.description"
           other="true"
+          container="img-container-viajes"
           textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
           (infoProduct)="dataTrip(trip)"
         ></app-product>

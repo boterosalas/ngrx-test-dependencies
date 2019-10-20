@@ -12,16 +12,15 @@ export class ProductSearchService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      "Content-Type": "application/json",
-      "Accept": "application/json"
+      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
     })
   };
 
-  url = environment.URL_PROFILE;
+  url = environment.URL_CONTENT;
   
   public getProductsPagination(params: {term: string, from:number, to:number}){
-    const apiSearchVetex = `userprofile/getProducts?ft=${params.term}&_from=${params.from}&_to=${params.to}`
-    return this.http.get(`${this.url + apiSearchVetex}`).pipe(
+    const apiSearchVetex = `getProducts?ft=${params.term}&_from=${params.from}&_to=${params.to}&fq=1`
+    return this.http.get(`${this.url + apiSearchVetex}`, this.httpOptions).pipe(
       map((user: any) => {
         return user.objectResponse;
       })
