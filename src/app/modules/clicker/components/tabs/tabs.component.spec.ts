@@ -23,7 +23,7 @@ import { of } from "rxjs";
 import { ContentService } from "src/app/services/content.service";
 import { JwtHelperService, JWT_OPTIONS, JwtModule } from "@auth0/angular-jwt";
 
-describe("TabsComponent", () => {
+fdescribe("TabsComponent", () => {
   let component: TabsComponent;
   let fixture: ComponentFixture<TabsComponent>;
 
@@ -266,5 +266,16 @@ describe("TabsComponent", () => {
       component.searchProductPaginate("playstation");
       expect(mockProductSearchService.getProductsPagination).toHaveBeenCalled();
     });
+
+    it('save link', () => {
+      component.urlshorten = "https://tyny.url/xaxa";
+      component.identification = "123456789";
+      component.plu = '123456';
+      component.business = 'exito';
+      component.date = "2019/09/09"
+      component.saveLink();
+      
+    });
+
   });
 });

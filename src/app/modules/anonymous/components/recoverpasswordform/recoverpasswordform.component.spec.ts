@@ -8,6 +8,9 @@ import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-mater
 import { RouterTestingModule } from '@angular/router/testing';
 import { RecoverpasswordService } from 'src/app/services/recoverpassword.service';
 import { of, throwError } from 'rxjs';
+import { HomeComponent } from 'src/app/modules/clicker/pages/home/home.component';
+import { AnonymousModule } from '../../anonymous.module';
+import { ClickerModule } from 'src/app/modules/clicker/clicker.module';
 
 describe('RecoverpasswordformComponent', () => {
   let component: RecoverpasswordformComponent;
@@ -38,7 +41,7 @@ describe('RecoverpasswordformComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ 
-        RecoverpasswordformComponent
+        RecoverpasswordformComponent,
        ],
        imports: [
         ReactiveFormsModule,
@@ -47,7 +50,11 @@ describe('RecoverpasswordformComponent', () => {
         HttpClientTestingModule,
         BrowserAnimationsModule,
         AppMaterialModule,
-        RouterTestingModule.withRoutes([]),
+        ClickerModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent},
+          { path: 'clicker', component: HomeComponent},
+        ]),
        ],
        providers: [
          {provide: RecoverpasswordService, useValue: mockRecoverpasswordService}
