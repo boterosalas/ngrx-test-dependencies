@@ -44,12 +44,8 @@ export class MonthResumeComponent implements OnInit {
       legend: { position: 'top', alignment: 'center' }
    };
 
-   
    width = 550;
    height = 400;
-
-  
-
 
   ngOnInit() {
     this.isLoggedIn = this.auth.isLoggedIn();
