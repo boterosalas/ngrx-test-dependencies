@@ -68,7 +68,7 @@ describe("TabsComponent", () => {
   let dataEmpty = {
     state: "Success",
     userMessage: null,
-    objectResponse: { total: 0, json: "[]" }
+    objectResponse: { total: 0, json: "[{}]" }
   };
 
   let dataProduct = {
