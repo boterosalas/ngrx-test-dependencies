@@ -4,6 +4,7 @@ import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 import { Routes, RouterModule } from "@angular/router";
 import { RoleGuard } from "src/app/role.guard";
 import { AuthGuard } from 'src/app/auth.guard';
+import { SideMenuComponent } from './components/side-menu/side-menu.component';
 
 const routes: Routes = [
   {
@@ -17,10 +18,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, SideMenuComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes)
+  ],
+  exports:[
+    SideMenuComponent
   ]
 })
 export class AdminModule {}

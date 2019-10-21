@@ -18,12 +18,19 @@ import { GeneralResumeComponent } from './components/general-resume/general-resu
 import { ReportComponent } from './components/report/report.component';
 import { AuthGuard } from 'src/app/auth.guard';
 import { MatPaginatorIntl } from '@angular/material';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { ProfileFormComponent } from './components/profile-form/profile-form.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent
   },
+  {
+    path: 'mi-perfil',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
+  }
   // {
   //   path: "reportes",
   //   component: ReportComponent,
@@ -32,7 +39,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [HomeComponent, ProductComponent, SliderComponent, TabsComponent, MonthResumeComponent, GeneralResumeComponent, ReportComponent],
+  declarations: [HomeComponent, ProductComponent, SliderComponent, TabsComponent, MonthResumeComponent, GeneralResumeComponent, ReportComponent, ProfileComponent, ProfileFormComponent],
   imports: [
     CommonModule,
     AppMaterialModule,
