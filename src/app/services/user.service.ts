@@ -19,8 +19,8 @@ export class UserService {
   }
 
   url = environment.URL_PROFILE;
-  apiProfile = "userprofile/getuserprofile";
-  apiActivateProfile = "userprofile/activateUser";
+  apiProfile = "getuserprofile";
+  apiActivateProfile = "activateUser";
 
   httpOptions = {
     headers: new HttpHeaders({
