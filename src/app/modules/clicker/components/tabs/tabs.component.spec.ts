@@ -258,7 +258,7 @@ describe("TabsComponent", () => {
       component = fixture.componentInstance;
       fixture.detectChanges();
       mockProductSearchService.getProductsPagination.and.returnValue(
-        of(dataEmpty)
+        of(data)
       );
     });
 
