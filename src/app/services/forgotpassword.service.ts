@@ -11,7 +11,7 @@ export class ForgotpasswordService {
   constructor(private http: HttpClient) { }
 
   url = environment.URL_SECURITY;
-  apiForgotPassword = 'Authentication/recoveryPassword';
+  apiForgotPassword = 'recoveryPassword';
 
   httpOptions = {
     headers: new HttpHeaders({

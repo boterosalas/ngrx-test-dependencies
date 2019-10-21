@@ -10,7 +10,7 @@ export class ShortenerService {
 
   constructor(private http: HttpClient) { }
   url = environment.URL_PROFILE;
-  apiShorUrl= 'userprofile/getShortURL';
+  apiShorUrl= 'getShortURL';
 
   httpOptions = {
     headers: new HttpHeaders({
