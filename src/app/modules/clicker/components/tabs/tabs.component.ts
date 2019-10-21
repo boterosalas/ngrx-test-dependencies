@@ -196,6 +196,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
     const id = product.productId;
     const img = product.items[0].images[0].imageUrl;
     const price = product.items[0].sellers[0].commertialOffer.Price;
+    const discount = product.items[0].sellers[0].commertialOffer.ListPrice;
     const template = this.template;
     const showClose = false;
     const showCloseIcon = true;
@@ -219,7 +220,8 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
         showPlu,
         showshowTitle,
         buttonClose,
-        id
+        id,
+        discount
       }
     });
   }
@@ -274,7 +276,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
 
   public dataTrip(trip) {
     const datatripUrl = trip.link;
-    this.url = `${datatripUrl.link}${this.identification}`;
+    this.url = `${datatripUrl}${this.identification}`;
     this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
       this.urlshorten = resp;
     });

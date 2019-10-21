@@ -25,7 +25,7 @@
             <span *ngIf="auth.isLoggedIn()">
                     <button mat-button [matMenuTriggerFor]="menu" class="initials" id="btnUser">{{initials}}</button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item>{{ 'HEADER.PROFILE' | translate }}</button>
+                        <button mat-menu-item routerLink="mi-perfil">{{ 'HEADER.PROFILE' | translate }}</button>
                         <button mat-menu-item (click)="logout()">{{ 'HEADER.LOGOUT' | translate }} </button>
                     </mat-menu>
             </span>
