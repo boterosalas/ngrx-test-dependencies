@@ -43,7 +43,15 @@ export function createTranslateLoader(http: HttpClient) {
     SharedModule,
     AppMaterialModule,
     FlexLayoutModule,
-    JwtModule.forRoot({}),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('ACCESS_TOKEN');
+        },
+        whitelistedDomains: [],
+        blacklistedRoutes: []
+      }
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
