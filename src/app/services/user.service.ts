@@ -52,4 +52,5 @@ export class UserService {
   public activateProfile(email: string) {
     return this.http.post(`${this.url + this.apiActivateProfile}`, {email:email}, this.httpOptions);
   }
+  
 }

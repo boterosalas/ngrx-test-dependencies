@@ -77,6 +77,8 @@
 <app-header></app-header>
 
 <div class="maincontent">
+  <!-- <app-side-menu *ngIf="auth.isLoggedIn() && auth.role === 'ADMIN'"></app-side-menu> -->
+
   <router-outlet (activate)="onActivate($event)"></router-outlet>
 </div>
 

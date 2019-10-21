@@ -274,7 +274,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
 
   public dataTrip(trip) {
     const datatripUrl = trip.link;
-    this.url = `${datatripUrl.link}${this.identification}`;
+    this.url = `${datatripUrl}${this.identification}`;
     this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
       this.urlshorten = resp;
     });
