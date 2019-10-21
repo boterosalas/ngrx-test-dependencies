@@ -10,21 +10,20 @@ export class ShortenerService {
 
   constructor(private http: HttpClient) { }
   url = environment.URL_PROFILE;
-  apiShorUrl= 'userprofile/getShortURL';
+  apiShorUrl= 'getShortURL';
 
   httpOptions = {
     headers: new HttpHeaders({
       'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
-      responseType: 'text'
+       responseType: 'text'
     })
   };
   
   getShortUrl(url: string)  {
-    const apiShort= `${this.url}${this.apiShorUrl}?=${encodeURIComponent(url)}`
+    const apiShort= `${this.url}${this.apiShorUrl}?url=${encodeURIComponent(url)}`
     return this.http.get(apiShort, this.httpOptions).pipe(
       map((url: any) => {
-        const parseUrl =  JSON.parse(url);
-        return parseUrl.objectResponse;
+        return url.objectResponse;
       })
     );
   }

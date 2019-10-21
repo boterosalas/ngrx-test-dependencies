@@ -31,6 +31,10 @@ export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
 
+export function jwtTokenGetter() {
+  return localStorage.getItem('ACCESS_TOKEN');
+}
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -45,9 +49,7 @@ export function createTranslateLoader(http: HttpClient) {
     FlexLayoutModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => {
-          return localStorage.getItem('ACCESS_TOKEN');
-        },
+        tokenGetter: jwtTokenGetter,
         whitelistedDomains: [],
         blacklistedRoutes: []
       }
