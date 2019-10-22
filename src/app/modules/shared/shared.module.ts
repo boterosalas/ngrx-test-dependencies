@@ -17,6 +17,7 @@ import { TopComponent } from './components/top/top.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { RouterModule } from '@angular/router';
 import { MenuOptionsComponent } from './components/menu-options/menu-options.component';
+import { UnderConstructionComponent } from './components/under-construction/under-construction.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { MenuOptionsComponent } from './components/menu-options/menu-options.com
     HeaderComponent,
     SociallinksComponent,
     TopComponent,
-    MenuOptionsComponent
+    MenuOptionsComponent,
+    UnderConstructionComponent
   ],
   imports: [
     CommonModule,
@@ -58,7 +60,8 @@ import { MenuOptionsComponent } from './components/menu-options/menu-options.com
     TopComponent,
     GoogleChartsModule,
     RouterModule,
-    MenuOptionsComponent
+    MenuOptionsComponent,
+    UnderConstructionComponent
   ]
 })
 export class SharedModule {}
