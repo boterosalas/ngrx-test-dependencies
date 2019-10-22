@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'app-reports',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reports.component.scss']
 })
 export class ReportsComponent implements OnInit {
+
+  @ViewChild("templateCardReport, templateCardCross", { static: false }) template: TemplateRef<any>;
 
   constructor() { }
 

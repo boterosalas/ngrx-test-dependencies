@@ -144,5 +144,15 @@
   },
   "UNDER_CONSTRUCTION": {
     "SORRY": "Discúlpanos, está página esta en construcción"
+  },
+  "REPORTS": {
+    "REPORTS": "Reportes",
+    "SELL_REPORTS": "Reporte de ventas",
+    "DOWNLOAD_REPORT": "Descarga el reporte de ventas",
+    "DOWNLOAD": "Descargar",
+    "CROSS": "Cruzar ventas",
+    "UPLOAD": "Sube los archivos de cada negocio por separado.",
+    "TRIPS": "VENTAS VIAJES",
+    "ASSURED": "VENTAS SEGUROS"
   }
 }

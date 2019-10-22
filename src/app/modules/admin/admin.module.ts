@@ -7,6 +7,10 @@ import { AuthGuard } from 'src/app/auth.guard';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { SharedModule } from '../shared/shared.module';
 import { ReportsComponent } from './pages/reports/reports.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { CardComponent } from './components/card/card.component';
+import { AppMaterialModule } from '../shared/app-material/app-material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const routes: Routes = [
   {
@@ -28,11 +32,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [DashboardComponent, SideMenuComponent, ReportsComponent],
+  declarations: [DashboardComponent, SideMenuComponent, ReportsComponent, CardComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharedModule
+    SharedModule,
+    TranslateModule,
+    AppMaterialModule,
+    FlexLayoutModule
   ],
   exports:[
     SideMenuComponent

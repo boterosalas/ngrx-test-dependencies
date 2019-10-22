@@ -31,7 +31,7 @@
   </div>
   <div fxLayout="column" fxFlex="33" class="card">
     <img class="pb-4 icon-resume" src="assets/img/conversion.svg" alt="conversion" />
-    <span class="number">{{conversionRate}}</span>
+    <span class="number">{{conversionRate | percent:'1.2'}}</span>
     <span class="subtitle">{{ "GENERAL_RESUME.CONVERSION" | translate }}</span>
   </div>
 </div>
