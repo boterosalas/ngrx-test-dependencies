@@ -22,10 +22,12 @@ export class AuthService implements OnDestroy {
       if(!!val || this.isLoggedIn()) {
         this.getMenuClicker().subscribe(res => {
           this.getMenu$.next(res);
+          this.getRole();
         });
       } else {
         this.getMenu().subscribe(res => {
           this.getMenu$.next(res);
+          this.getRole();
         });
       }
     });

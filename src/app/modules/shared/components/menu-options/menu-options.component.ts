@@ -20,7 +20,12 @@ export class MenuOptionsComponent implements OnInit {
   options = [];
 
   @Input() colfooter;
+  @Input() aligmentdesktop = 'center center';
   @Input() aligment;
+  @Input() layoutxs = "row";
+  @Input() layoutmd = "column";
+  @Input() showIcon = false;
+  @Input() icon:string
 
   isOpenMenu: boolean;
   private subscription: Subscription = new Subscription();

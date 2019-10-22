@@ -1,4 +1,5 @@
-<div fxLayout.lt-md="column" fxLayout.gt-xs="row" fxLayoutAlign="center center" fxLayoutAlign.xs="{{aligment}}">
+<div fxLayout.lt-md="{{layoutmd}}" fxLayout.gt-xs="{{layoutxs}}" fxLayoutAlign="{{aligmentdesktop}}" fxLayoutAlign.xs="{{aligment}}">
+  
     <span
       *ngFor="let item of options; let i =index"
       routerLink="{{ item.route }}"
@@ -7,6 +8,9 @@
       routerLinkActive="active"
       matRipple
     >
+    <span *ngIf="showIcon">
+        <img src="assets/img/dashboard/icon-{{i}}.svg" alt="icon">
+        </span>
       <a matRipple class="cursor-pointer" id="menuTop{{i}}"> {{ item.name }} </a>
 </span>
   </div>
