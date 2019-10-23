@@ -1,5 +1,5 @@
-<div class="container m-t4">
-  <h1 class="border-bottom-orange-init">{{ "REPORTS.REPORTS" | translate }}</h1>
+<div class="container m-t4 fade-in">
+  <h1 class="border-bottom-orange-init" id="reportsTitle">{{ "REPORTS.REPORTS" | translate }}</h1>
   <div fxLayout="row" fxLayoutGap="20px">
     <app-card
       fxLayout="column"
@@ -19,17 +19,36 @@
 </div>
 
 <ng-template #templateCardReport>
-  <p>{{ 'REPORTS.DOWNLOAD_REPORT' | translate }}</p>
-  <button mat-raised-button color="orange">{{ 'REPORTS.DOWNLOAD' | translate }} <mat-icon>keyboard_arrow_down</mat-icon></button>
+  <p id="reportSell">{{ 'REPORTS.DOWNLOAD_REPORT' | translate }}</p>
+    <a href="{{fileUrl}}"> 
+      <button id="downloadReport" mat-raised-button color="orange"> {{ 'REPORTS.DOWNLOAD' | translate }} <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
+    </a> 
 </ng-template>
 
 <ng-template #templateCardCross>
-    <p>{{ 'REPORTS.UPLOAD' | translate }}</p>
+    <p id="cross">{{ 'REPORTS.UPLOAD' | translate }}</p>
     <br>
-    <h4 class="title-upload">{{ 'REPORTS.TRIPS' | translate }}</h4>
-    <input type="file" name="trips" id="trips">
+    <h4  id="trips" class="title-upload">{{ 'REPORTS.TRIPS' | translate }}</h4>
+    
+    <div [formGroup]="fileForm" fxLayout="row" fxLayoutAlign="space-between center">
+            <span *ngIf="nameFileTrip === ''">No hay archivo seleccionado</span> 
+            <span class="file-input" *ngIf="nameFileTrip !== ''">{{nameFileTrip}}</span>
+        <label for="file-upload" class="custom-file-upload mat-elevation-z1">
+                Explorar
+            </label>
+            <input id="file-upload"  type="file" (input)="onFileChange($event)"/>
+    </div>
+
     <br>
-    <br>
-    <h4 class="title-upload">{{ 'REPORTS.ASSURED' | translate }}</h4>
-    <input type="file" name="asurred" id="asurred">
+    <h4 id="assured" class="title-upload">{{ 'REPORTS.ASSURED' | translate }}</h4>
+    
+    <div [formGroup]="fileForm2" fxLayout="row" fxLayoutAlign="space-between center">
+            <span *ngIf="nameFileAsured === ''">No hay archivo seleccionado</span> 
+            <span class="file-input" *ngIf="nameFileAsured !== ''">{{nameFileAsured}}</span> 
+            <label for="file-upload-2" class="custom-file-upload mat-elevation-z1">
+                    Explorar
+                </label>
+                <input id="file-upload-2" type="file" (input)="onFileChange2($event)"/>
+        </div>
+        
 </ng-template>

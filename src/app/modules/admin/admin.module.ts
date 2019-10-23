@@ -11,6 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CardComponent } from './components/card/card.component';
 import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -22,9 +23,9 @@ const routes: Routes = [
     }
   },
   {
-    path: "reportes",
+    path: "reportes-admin",
     component: ReportsComponent,
-    canActivate: [RoleGuard, AuthGuard],
+    canActivate: [RoleGuard],
     data: {
       role: "ADMIN"
     }
@@ -39,7 +40,9 @@ const routes: Routes = [
     SharedModule,
     TranslateModule,
     AppMaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports:[
     SideMenuComponent

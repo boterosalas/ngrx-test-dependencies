@@ -39,7 +39,7 @@
               textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
               [plu]="product.items[0].itemId"
               exito="true"
-              (infoProduct)="dataProduct(product)"
+              (infoProduct)="dataProduct(product);  saveLink()"
             ></app-product>
           </div>
         </div>
@@ -83,7 +83,7 @@
           other="true"
           textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
           container="img-container-seguros"
-          (infoProduct)="dataAssured(asurred)"
+          (infoProduct)="dataAssured(asurred); saveLink()"
         ></app-product>
       </div>
       </div>
@@ -110,7 +110,7 @@
           other="true"
           container="img-container-viajes"
           textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
-          (infoProduct)="dataTrip(trip)"
+          (infoProduct)="dataTrip(trip);"
         ></app-product>
       </div> 
       </div>
@@ -141,7 +141,7 @@
           id="btnCopy"
           color="orange"
           class="button button-100 p-1"
-          (click)="copyInputMessage(linkInput); saveLink()"
+          (click)="copyInputMessage(linkInput);"
         >
         <span fxLayoutAlign="space-between center">
         <span class="pl-3">{{'GENERIC.COPY_LINK' | translate}}</span>
@@ -153,8 +153,8 @@
 
     <div id="share">
       <h3 class="border-bottom-orange-init">{{'GENERIC.SHARE' | translate}}</h3>
-      <share-button (click)="saveLink()" id="facebook" [url]="urlshorten" button="facebook" theme="circles-dark" ></share-button>
-      <share-button (click)="saveLink()" id="twitter" [url]="urlshorten" button="twitter" theme="circles-dark" ></share-button>
-      <share-button (click)="saveLink()" id="whatsapp" [url]="urlshorten" button="whatsapp" theme="circles-dark" ></share-button>
+      <share-button id="facebook" [url]="urlshorten" button="facebook" theme="circles-dark" ></share-button>
+      <share-button id="twitter" [url]="urlshorten" button="twitter" theme="circles-dark" ></share-button>
+      <share-button id="whatsapp" [url]="urlshorten" button="whatsapp" theme="circles-dark" ></share-button>
     </div>
   </ng-template>

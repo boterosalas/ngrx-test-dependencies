@@ -17,17 +17,18 @@ export class AuthService implements OnDestroy {
     private router: Router,
     public jwtHelper: JwtHelperService
   ) {
-    this.getRole();
     this.isLogged$.subscribe(val => {
       if(!!val || this.isLoggedIn()) {
+        this.role = this.getRole$.value;
+        this.getRole();
+        console.log(this.role);
         this.getMenuClicker().subscribe(res => {
           this.getMenu$.next(res);
-          this.getRole();
         });
       } else {
+        this.role = this.getRole$.value;
         this.getMenu().subscribe(res => {
           this.getMenu$.next(res);
-          this.getRole();
         });
       }
     });
@@ -47,6 +48,7 @@ export class AuthService implements OnDestroy {
 
   isLogged$ = new BehaviorSubject<boolean>(false);
   getMenu$ = new BehaviorSubject<any>(null);
+  getRole$ = new BehaviorSubject<any>(null);
   subs = [];
 
   public login(userInfo: any) {
@@ -65,6 +67,7 @@ export class AuthService implements OnDestroy {
   public logout() {
     localStorage.removeItem("ACCESS_TOKEN");
     this.router.navigate(["/inicio"]);
+    this.getRole$.next(null);
     this.isLogged$.next(false);
   }
 
@@ -73,8 +76,9 @@ export class AuthService implements OnDestroy {
       if(token !== null) {
         const tokenPayload = decode(token);
         this.role = tokenPayload.role;
+        return this.getRole$.next(this.role);
       } else {
-        return false;
+        return this.getRole$.next(null);
       }
   }
 

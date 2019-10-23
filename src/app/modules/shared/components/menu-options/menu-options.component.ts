@@ -25,7 +25,8 @@ export class MenuOptionsComponent implements OnInit {
   @Input() layoutxs = "row";
   @Input() layoutmd = "column";
   @Input() showIcon = false;
-  @Input() icon:string
+  @Input() icon:string;
+  @Input() section:string="menuTop";
 
   isOpenMenu: boolean;
   private subscription: Subscription = new Subscription();
@@ -41,6 +42,7 @@ export class MenuOptionsComponent implements OnInit {
   public getMenu () {
     this.auth.getMenu$.subscribe(val => {
       this.options = val;
+      console.log(this.section,  this.options);
     })
   }
 

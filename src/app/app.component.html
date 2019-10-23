@@ -76,8 +76,8 @@
 
 <app-header></app-header>
 
-<div class="maincontent">
-  <div [fxLayout]="auth.isLoggedIn() && auth.role === 'ADMIN' ? row : column" [ngClass]="{'container': auth.isLoggedIn() && auth.role === 'ADMIN'}">
+<div class="maincontent" *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'ADMIN'">
+  <div fxLayout="row" class="container">
     <div fxLayout="column" fxFlex="20" class="mt-4" *ngIf="auth.isLoggedIn() && auth.role === 'ADMIN'">
       <app-side-menu class="sideMenu"></app-side-menu>
     </div>
@@ -87,10 +87,9 @@
   </div>
 </div>
 
-  <!-- <div [ngClass]="{'container': auth.isLoggedIn() && auth.role === 'ADMIN'}" class="maincontent">
-        <app-side-menu *ngIf="auth.isLoggedIn() && auth.role === 'ADMIN'" class="sideMenu mt-4"></app-side-menu>
+  <div class="maincontent" *ngIf="!(auth.isLoggedIn() && (auth.getRole$  | async) === 'ADMIN')">
         <router-outlet (activate)="onActivate($event)"></router-outlet>
-  </div> -->
+  </div>
 
 <app-footer></app-footer>
 

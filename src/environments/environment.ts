@@ -9,6 +9,7 @@ export const environment = {
   URL_CONTENT: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apicontent/api/product/',
   URL_REFERAL: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apireferral/api/Link/',
   URL_REPORT: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apicommission/api/Reports/',
+  URL_COMISSION: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apicommission/api/commissions/',
   SUBSCRIPTION: 'f5edbcd2315e479aad33d80c58052fcc'
 };
 
