@@ -207,6 +207,9 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
     const plu = product.items[0].itemId;
     this.plu = product.items[0].itemId;
     this.business = 'exito';
+    setTimeout(() => {
+      this.saveLink();
+    }, 1500);
     this.dialog.open(DialogComponent, {
       data: {
         title,
@@ -237,6 +240,9 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
     this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
       this.urlshorten = resp;
     });
+    setTimeout(() => {
+      this.saveLink();
+    }, 1500);
     this.formShareLink();
     const title = assured.description;
     const id = assured.productId;
@@ -280,6 +286,9 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
     this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
       this.urlshorten = resp;
     });
+    setTimeout(() => {
+      this.saveLink();
+    }, 1500);
     this.formShareLink();
     const title = trip.description;
     const id = trip.productId;

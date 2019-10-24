@@ -22,7 +22,8 @@
     "WHITE_SPACES": "No se permite más de un espacio en blanco",
     "PASSWORD_PATTERN": "la contraseña debe contener al menos una letra minúscula, una letra mayúscula un número y un carácter especial",
     "SHARE": "Compartir directamente en:",
-    "COPY_LINK": "Copiar link"
+    "COPY_LINK": "Copiar link",
+    "INVALID_FORMAT_FILE": "Formato inválido solo se pueden subir archivos con la extensión xlsx, xls"
   },
   "LOGIN": {
     "LOGIN": "Iniciar sesión",
@@ -108,11 +109,11 @@
     "HOW_WORKS_TITLE": "¿Cómo funciona?",
     "HOW_WORKS_DESCRIPTION": "En Clickam ganas comisiones por referir y compartir link de productos y servicios en tus redes sociales, una vez las personas compren a través de estos, te ganaras una comisión según el producto o servicio vendido.",
     "SALES_TITLE": "¿Cómo cruzan la venta?",
-    "SALES_DESCRIPTION": "Cuando crees un link y las personas compren a través de este, nuestro sistema rastreara de manera precisa el link desde donde se generará la compra, si es a través de uno de los link que tú como clicker creaste y compartiste, te ganaras la comisión correspondiente al producto o servicio.",
+    "SALES_DESCRIPTION": "Cuando crees un link y las personas compren a través de este, nuestro sistema rastreará de manera precisa el link desde donde se generará la compra, si es a través de uno de los link que tú como clicker creaste y compartiste, te ganarás la comisión correspondiente al producto o servicio.",
     "WON_COMISSION_TITLE": "¿Cómo veo las comisiones que gané?",
     "WON_COMISSION_DESCRIPTION": "Cuando inicies sesión podrás encontrar una tabla con los link creados y las comisiones ganadas los últimos 30 días, un gráfico con el desempeño de tu perfil, métricas del año en curso de tus comisiones ganadas, los link creados, el número de productos vendidos y la tasa de conversión (La tasa de conversión es la división entre el número de productos vendidos y los link generados).",
     "BEST_OFFER_TITLE": "¿Dónde puedo encontrar las mejores ofertas?",
-    "BEST_OFFER_DESCRIPTION": "Al final de la aplicación encontrarás un “mapa del sitio”, y un botón que dice Ofertas, este te enviara a una página con las ofertas más ganadoras del día, para que tú puedas generar comisiones de manera rápida y efectiva. También las podrás encontrar cuando inicies sesión en la sección de Ver Ofertas.",
+    "BEST_OFFER_DESCRIPTION": "Al final de la aplicación encontrarás un “mapa del sitio”, y un botón que dice Ofertas, este te enviará a una página con las ofertas más ganadoras del día, para que tú puedas generar comisiones de manera rápida y efectiva. También las podrás encontrar cuando inicies sesión en la sección de Ver Ofertas.",
     "ASSOCIATED_TITLE": "¿Cuáles son los negocios asociados?",
     "ASSOCIATED_DESCRIPTION": "A la fecha contamos con <a href='https://www.exito.com' target='_blank'> www.exito.com </a>, <a href='https://www.segurosexito.com' target='_blank'> www.segurosexito.com </a>  y <a href='https://www.viajesexito.com' target='_blank'> www.viajesexito.com </a> , muy pronto tendremos otros negocios para que ganes más.",
     "PAYDAYS_TITLE": "¿Cuáles son las fechas de pago?",
@@ -141,5 +142,18 @@
   },
   "PROFILE": {
     "PROFILE": "Perfil"
+  },
+  "UNDER_CONSTRUCTION": {
+    "SORRY": "Discúlpanos, está página esta en construcción"
+  },
+  "REPORTS": {
+    "REPORTS": "Reportes",
+    "SELL_REPORTS": "Reporte de ventas",
+    "DOWNLOAD_REPORT": "Descarga el reporte de ventas",
+    "DOWNLOAD": "Descargar",
+    "CROSS": "Cruzar ventas",
+    "UPLOAD": "Sube los archivos de cada negocio por separado.",
+    "TRIPS": "VENTAS VIAJES",
+    "ASSURED": "VENTAS SEGUROS"
   }
 }
