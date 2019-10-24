@@ -13,7 +13,9 @@ export class LinksService {
 
   url = environment.URL_REFERAL;
   urlReport = environment.URL_REPORT;
+  urlComission = environment.URL_COMISSION;
   apiSaveLink = 'SaveLink';
+  apiFile = 'getUrlFileCommissions';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -38,6 +40,27 @@ export class LinksService {
   public getReports(identification: string) {
     let apiReport = `ClickerPerformanceReport?identification=${identification}`;
     return this.http.get((`${this.urlReport + apiReport}`), this.httpOptions).pipe(
+      map((resp: ResponseService) => {
+        return resp.objectResponse;
+      })
+    );
+  }
+
+  public getFileReport() {
+    return this.http.get((`${this.urlComission + this.apiFile}`), this.httpOptions).pipe(
+      map((resp: ResponseService) => {
+        return resp.objectResponse;
+      })
+    );
+  }
+
+  public sendfile(formdata) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.post((`${environment.URL_INSURANCE}`), {Body: {formdata}}, httpOptions ).pipe(
       map((resp: ResponseService) => {
         return resp.objectResponse;
       })

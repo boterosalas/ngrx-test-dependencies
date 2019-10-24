@@ -1,0 +1,42 @@
+<div class="container m-t4 fade-in">
+  <h1 class="border-bottom-orange-init" id="reportsTitle">{{ "REPORTS.REPORTS" | translate }}</h1>
+  <div fxLayout="row" fxLayoutGap="20px">
+    <app-card
+      fxLayout="column"
+      fxFlex="50"
+      title="{{ 'REPORTS.SELL_REPORTS' | translate }}"
+      img="/assets/img/dashboard/icono-reporte-ventas.svg"
+      [template]="templateCardReport"
+    ></app-card>
+    <app-card
+      fxLayout="column"
+      fxFlex="50"
+      title="{{ 'REPORTS.CROSS' | translate }}"
+      img="/assets/img/dashboard/Icono-cruzar-ventas.svg"
+      [template]="templateCardCross"
+    ></app-card>
+  </div>
+</div>
+
+<ng-template #templateCardReport>
+  <p id="reportSell">{{ 'REPORTS.DOWNLOAD_REPORT' | translate }}</p>
+    <a href="{{fileUrl}}"> 
+      <button id="downloadReport" mat-raised-button color="orange"> {{ 'REPORTS.DOWNLOAD' | translate }} <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
+    </a> 
+</ng-template>
+
+<ng-template #templateCardCross>
+    <p id="cross">{{ 'REPORTS.UPLOAD' | translate }}</p>
+    <br>
+    <h4  id="trips" class="title-upload">{{ 'REPORTS.TRIPS' | translate }}</h4>
+      <app-load-form-file [fileForm]="fileForm" [nameFile]="nameFile" label="trip" (uploadFile)="onFileChangeTrip($event)"></app-load-form-file>
+      <mat-error *ngIf="showErrorExt" class="small">
+        {{ "GENERIC.INVALID_FORMAT_FILE" | translate }}
+      </mat-error>
+    <br>
+    <h4 id="assured" class="title-upload">{{ 'REPORTS.ASSURED' | translate }}</h4>
+    <app-load-form-file [fileForm]="fileFormAssured"  [nameFile]="nameFileAssured" label="assured" (uploadFile)="onFileChangeAssured($event)"></app-load-form-file>  
+    <mat-error *ngIf="showErrorExtAssured" class="small">
+      {{ "GENERIC.INVALID_FORMAT_FILE" | translate }}
+    </mat-error>
+</ng-template>
