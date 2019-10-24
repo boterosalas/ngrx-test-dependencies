@@ -33,11 +33,15 @@
     <div [formGroup]="fileForm" fxLayout="row" fxLayoutAlign="space-between center">
             <span *ngIf="nameFileTrip === ''">No hay archivo seleccionado</span> 
             <span class="file-input" *ngIf="nameFileTrip !== ''">{{nameFileTrip}}</span>
+            
         <label for="file-upload" class="custom-file-upload mat-elevation-z1">
                 Explorar
             </label>
             <input id="file-upload"  type="file" (input)="onFileChange($event)"/>
-    </div>
+          </div>
+              <mat-error *ngIf="showErrorExt"  class="small">
+                  {{ 'GENERIC.INVALID_FORMAT_FILE' | translate }}
+              </mat-error>
 
     <br>
     <h4 id="assured" class="title-upload">{{ 'REPORTS.ASSURED' | translate }}</h4>
@@ -50,5 +54,8 @@
                 </label>
                 <input id="file-upload-2" type="file" (input)="onFileChange2($event)"/>
         </div>
+        <mat-error *ngIf="showErrorExt2" class="small">
+            {{ 'GENERIC.INVALID_FORMAT_FILE' | translate }}
+        </mat-error>
         
 </ng-template>

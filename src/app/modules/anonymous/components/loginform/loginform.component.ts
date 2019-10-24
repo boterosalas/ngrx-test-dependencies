@@ -129,6 +129,7 @@ export class LoginformComponent implements OnInit {
     } else {
       this.router.navigate(['/dashboard']);
       this.authService.isLogged$.next(true);
+      this.authService.getRole$.next("ADMIN")
     }
   }
 

@@ -18,11 +18,10 @@ export class AuthService implements OnDestroy {
     public jwtHelper: JwtHelperService
   ) {
     this.isLogged$.subscribe(val => {
+      this.getRole();
       if(!!val || this.isLoggedIn()) {
-        this.role = this.getRole$.value;
-        this.getRole();
-        console.log(this.role);
         this.getMenuClicker().subscribe(res => {
+          this.role = this.getRole$.value;
           this.getMenu$.next(res);
         });
       } else {

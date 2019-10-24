@@ -53,5 +53,18 @@ export class LinksService {
       })
     );
   }
+
+  public sendfile(formdata) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.post((`${environment.URL_INSURANCE}`), {Body: {formdata}}, httpOptions ).pipe(
+      map((resp: ResponseService) => {
+        return resp.objectResponse;
+      })
+    );
+  }
   
 }
