@@ -13,28 +13,29 @@ export class ReportsComponent implements OnInit {
 
   fileUrl: string;
   fileForm: FormGroup;
-  fileForm2: FormGroup;
-  nameFileTrip: string;
-  nameFileAsured: string;
-  formData = new FormData();
+  fileFormAssured: FormGroup;
+  nameFile: string;
+  nameFileAssured: string;
   showErrorExt: boolean;
-  showErrorExt2: boolean;
+  showErrorExtAssured: boolean;
+  validFormat: boolean;
 
   constructor(private file: LinksService, private fb: FormBuilder) {}
 
   ngOnInit() {
-    this.nameFileTrip = "";
-    this.nameFileAsured = "";
-
     this.getFileReport();
+    
+    this.nameFile = "";
+    this.nameFileAssured = "";
+
     this.fileForm = this.fb.group({
-      file: [null],
-      business: 'Viajes'
+      file: [null]
+    });
+    
+    this.fileFormAssured = this.fb.group({
+      file: [null]
     });
 
-    this.fileForm2 = this.fb.group({
-      file2: [null]
-    });
   }
 
   public getFileReport() {
@@ -43,8 +44,8 @@ export class ReportsComponent implements OnInit {
     });
   }
 
-  public onFileChange(event) {
-    this.nameFileTrip = event.target.files[0].name;
+  public onFileChangeTrip(event) {
+    this.nameFile = event.target.files[0].name
     let reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
@@ -54,58 +55,69 @@ export class ReportsComponent implements OnInit {
         this.fileForm.controls.file.patchValue({
           file: reader.result
         });
-        this.getExtension(this.nameFileTrip);
+        this.getExtension(this.nameFile);
+        if(this.validFormat === true) {
+          this.showErrorExt = false;
+          this.sendFileTrip();
+        } else {
+          this.showErrorExt = true;
+        }
       };
     }
-
-
   }
 
-  public onFileChange2(event) {
-    this.nameFileAsured = event.target.files[0].name;
+  public onFileChangeAssured(event) {
+    this.nameFileAssured = event.target.files[0].name;
     let reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       reader.readAsDataURL(file);
 
       reader.onload = () => {
-        this.fileForm2.controls.file2.patchValue({
-          file2: reader.result
+        this.fileFormAssured.controls.file.patchValue({
+          file: reader.result
         });
+        this.getExtension(this.nameFileAssured);
+        if(this.validFormat === true) {
+          this.showErrorExtAssured = false;
+          this.sendFileAssured();
+        } else {
+          this.showErrorExtAssured = true;
+        }
       };
     }
-
-    this.getExtension2(this.nameFileAsured);
-
   }
 
-  public getExtension(nameFile: string) {
+  private getExtension(nameFile: string) {
     let splitExt = nameFile.split(".");
     let getExt = splitExt[1];
+    this.validFormat = false;
     if (getExt === "xlsx" || getExt === "xls") {
-      this.showErrorExt = false;
-      let file = this.fileForm.controls.file.value.file;
-      let data = {
-        file,
-        business: 'Viajes'
-      }
-      this.file.sendfile(data).subscribe(val => {
-        console.log(val);
-      })
-    } else {
-      this.showErrorExt = true;
+      this.validFormat = true;
     }
   }
 
-  public getExtension2(nameFile: string) {
-    let splitExt = nameFile.split(".");
-    let getExt = splitExt[1];
-
-    if (getExt === "xlsx" || getExt === "xls") {
-      this.showErrorExt2 = false;
-    } else {
-      this.showErrorExt2 = true;
+  private sendFileTrip() {
+    let file = this.fileForm.controls.file.value.file;
+    let data = {
+      file,
+      business: 'Viajes'
     }
+    this.file.sendfile(data).subscribe(val => {
+      this.nameFile= "No hay archivo seleccionado"
+    })
   }
+
+  private sendFileAssured() {
+    let file = this.fileFormAssured.controls.file.value.file;
+    let data = {
+      file,
+      business: 'Seguros'
+    }
+    this.file.sendfile(data).subscribe(val => {
+      this.nameFileAssured= "No hay archivo seleccionado"
+    })
+  }
+  
 
 }

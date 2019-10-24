@@ -42,7 +42,6 @@ export class MenuOptionsComponent implements OnInit {
   public getMenu () {
     this.auth.getMenu$.subscribe(val => {
       this.options = val;
-      console.log(this.section,  this.options);
     })
   }
 
