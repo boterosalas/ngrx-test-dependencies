@@ -7,7 +7,7 @@ import {
   MatBottomSheet,
   MatPaginatorIntl
 } from "@angular/material";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 import { UserService } from "src/app/services/user.service";
 import { ShortenerService } from "src/app/services/shortener.service";
 import { AuthService } from "src/app/services/auth.service";
@@ -67,6 +67,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
   term: string;
 
   @ViewChild("templateDialog", { static: false }) template: TemplateRef<any>;
+  @ViewChild("templateDialogAssured", { static: false }) templateAssured: TemplateRef<any>;
   @ViewChild("paginator", { static: false }) paginator: any;
 
   private subscription: Subscription = new Subscription();
@@ -89,11 +90,28 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
   date: any;
   plu: string;
   business: string;
+  showForm = false;
+  showFormCustomer = true;
+
+  idCustomer: string = '';
+  buttonDisabled: boolean = true;
+  numberPattern = "^(0|[0-9][0-9]*)$";
+  idCustomerForm: FormGroup;
 
   ngOnInit() {
     this.showNotFound = false;
     this.showResults = false;
 
+    this.idCustomerForm = this.fb.group({
+      identification: [
+        "",
+        [
+          Validators.required,
+          Validators.pattern(this.numberPattern),
+          Validators.maxLength(10)
+        ]
+      ]
+    });
     
     /**
      * verifica si el usuario esta logueado y se obtiene la identificacion
@@ -207,9 +225,6 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
     const plu = product.items[0].itemId;
     this.plu = product.items[0].itemId;
     this.business = 'exito';
-    setTimeout(() => {
-      this.saveLink();
-    }, 1500);
     this.dialog.open(DialogComponent, {
       data: {
         title,
@@ -240,15 +255,12 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
     this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
       this.urlshorten = resp;
     });
-    setTimeout(() => {
-      this.saveLink();
-    }, 1500);
     this.formShareLink();
     const title = assured.description;
     const id = assured.productId;
     const img = assured.imageurl;
     const price = assured.commission;
-    const template = this.template;
+    const template = this.templateAssured;
     const showClose = false;
     const showCloseIcon = true;
     const showProduct = true;
@@ -256,7 +268,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
     const showshowTitle = false;
     const buttonClose = "Cerrar";
     this.plu = '';
-    this.business = 'seguros'
+    this.business = 'seguros';
     this.dialog.open(DialogComponent, {
       data: {
         title,
@@ -371,7 +383,8 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
       identification: this.identification,
       plu: this.plu,
       business: this.business,
-      creationDate: this.date
+      creationDate: this.date,
+      identificationcustomer: this.idCustomerForm.controls.identification.value
     }
     this.links.saveLink(data).subscribe();
   }
@@ -385,6 +398,23 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
     let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     this.date = date+' '+time;
+  }
+
+  public nextStep() {
+    this.showForm = !this.showForm;
+    this.showFormCustomer = !this.showFormCustomer;
+    setTimeout(() => {
+      this.saveLink();
+    }, 1500);
+  }
+
+  public getInfo(event) {
+    this.idCustomer = event.target.value
+    if( event.target.value !== this.numberPattern && event.target.value === '') {
+      this.buttonDisabled = true;
+    } else {
+      this.buttonDisabled = false;
+    }
   }
 
 }
