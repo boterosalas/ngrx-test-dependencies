@@ -82,7 +82,7 @@
       <app-side-menu class="sideMenu"></app-side-menu>
     </div>
     <div fxLayout="column" fxFlex>
-      <router-outlet (activate)="onActivate($event)"></router-outlet>
+      <router-outlet *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'ADMIN'" (activate)="onActivate($event)"></router-outlet>
     </div>
   </div>
 </div>
