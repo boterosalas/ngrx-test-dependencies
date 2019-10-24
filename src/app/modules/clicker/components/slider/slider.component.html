@@ -1,11 +1,30 @@
+
+<div fxShow.xs="false">
 <ngx-slick-carousel
   class="carousel"
   #slickModal="slick-carousel"
   [config]="slideConfig"
 >
-  <div ngxSlickItem *ngFor="let slide of slides; let i=index" class="slide text-center mt-4">
+  <div ngxSlickItem *ngFor="let slide of slides.web; let i=index" class="slide text-center mt-4">
     <a href="{{ slide.link }}" target="_blank" id="banner{{i}}">
       <img class="responsive-img" src="{{ slide.imageurl }}" alt="{{ slide.description }}" />
     </a>
   </div>
 </ngx-slick-carousel>
+</div>
+
+<div fxShow.gt-xs="false">
+    <ngx-slick-carousel
+      class="carousel"
+      #slickModal="slick-carousel"
+      [config]="slideConfig"
+    >
+      <div ngxSlickItem *ngFor="let slide of slides.mobile; let i=index" class="slide text-center mt-4">
+        <a href="{{ slide.link }}" target="_blank" id="banner{{i}}">
+          <img class="responsive-img" src="{{ slide.imageurl }}" alt="{{ slide.description }}" />
+        </a>
+      </div>
+    </ngx-slick-carousel>
+    </div>
+    
+
