@@ -10,11 +10,12 @@
 }
 
 .small {
-    font-size: .8rem;
+    font-size: .8rem !important;
 }
 
 .text-line{
     text-decoration: line-through;
+    color: $color-p !important;
 }
 
 .discount{

@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CardComponent } from './card.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('CardComponent', () => {
   let component: CardComponent;
@@ -15,7 +16,10 @@ describe('CardComponent', () => {
        ],
        imports: [
          AppMaterialModule,
-         BrowserAnimationsModule
+         BrowserAnimationsModule,
+       ],
+       schemas: [
+         NO_ERRORS_SCHEMA
        ]
     })
     .compileComponents();

@@ -23,8 +23,6 @@ export class ProductComponent implements OnInit {
   @Input() other: boolean;
   @Input() container: boolean;
 
-
-
   constructor() { }
 
 

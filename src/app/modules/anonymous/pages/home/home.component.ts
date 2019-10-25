@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params.email) {
         this.email = params.email;
-        console.log(params.email);
+  
         this.activateUser();
       } else {
         router.navigate(["/"]);

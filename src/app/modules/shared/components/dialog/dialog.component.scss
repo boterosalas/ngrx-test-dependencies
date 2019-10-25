@@ -21,6 +21,17 @@
   color: $gray2;
 }
 
+
+.small {
+  font-size: .8rem !important;
+}
+
+.text-line{
+  text-decoration: line-through;
+  color: $color-p !important;
+}
+
+
 @media screen and (min-width: 600px) {
   .img-desk{
       width: 200px;

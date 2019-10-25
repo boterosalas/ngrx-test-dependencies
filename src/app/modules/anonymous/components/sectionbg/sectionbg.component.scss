@@ -1,7 +1,7 @@
 @import "variables";
 
 .bg-home {
-  background-image: url("/assets/img/bg-home-banner@2x.png");
+  background-image: url("/assets/img/bg-home-mobile-banner.png");
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 81vh;
@@ -17,10 +17,10 @@
 
 @media screen and (min-width: 600px) {
   .bg-home {
-    background-image: url("/assets/img/bg-home-desktop.jpg");
+    background-image: url("/assets/img/bg-home-desk-banner.png");
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 110vh;
+    min-height: 115vh;
   }
 
   .home-section-top {

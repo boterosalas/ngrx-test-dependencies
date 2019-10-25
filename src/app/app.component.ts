@@ -14,6 +14,7 @@ import {
 } from "@angular/animations";
 import { UtilsService } from "./services/utils.service";
 import { Subscription } from "rxjs";
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: "app-root",
@@ -80,6 +81,7 @@ export class AppComponent implements OnInit {
     private translate: TranslateService,
     private router: Router,
     private utils: UtilsService,
+    public auth: AuthService
   ) {
     translate.setDefaultLang("es");
     translate.use("es");
