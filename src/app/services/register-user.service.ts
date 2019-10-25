@@ -22,11 +22,11 @@ export class RegisterUserService {
 
 
   public registerUser(userInfo: any){
-    return this.http.post((`${this.url + this.apiCreateUser}`), userInfo, this.httpOptions);
+    return this.http.post((`${this.url}${this.apiCreateUser}`), userInfo, this.httpOptions);
   }
 
   public idType(): Observable<any>{
-    return this.http.get((`${this.url + this.apiIdType}`), this.httpOptions);
+    return this.http.get((`${this.url}${this.apiIdType}`), this.httpOptions);
   }
 
 
