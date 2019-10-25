@@ -128,7 +128,7 @@ export class ReportsComponent implements OnInit {
     let file = this.fileForm.controls.file.value.file;
     let data = {
       File: file,
-      Business: "Viajes",
+      Business: "viajes",
       Email: this.userName
     };
     this.loading.show();
@@ -160,7 +160,7 @@ export class ReportsComponent implements OnInit {
     let file = this.fileFormAssured.controls.file.value.file;
     let data = {
       File: file,
-      Business: "Seguros",
+      Business: "seguros",
       Email: this.userName
     };
     this.file.sendfile(data).subscribe(
