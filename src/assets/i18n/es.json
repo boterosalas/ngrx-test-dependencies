@@ -23,7 +23,8 @@
     "PASSWORD_PATTERN": "la contraseña debe contener al menos una letra minúscula, una letra mayúscula un número y un carácter especial",
     "SHARE": "Compartir directamente en:",
     "COPY_LINK": "Copiar link",
-    "INVALID_FORMAT_FILE": "Formato inválido solo se pueden subir archivos con la extensión xlsx, xls"
+    "INVALID_FORMAT_FILE": "Formato inválido solo se pueden subir archivos con la extensión xlsx, xls",
+    "CUSTOMER_ID": "Ingrese la cédula del tomador del seguro"
   },
   "LOGIN": {
     "LOGIN": "Iniciar sesión",
