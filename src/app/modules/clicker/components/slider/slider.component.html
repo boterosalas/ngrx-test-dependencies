@@ -6,7 +6,7 @@
   [config]="slideConfig"
 >
   <div ngxSlickItem *ngFor="let slide of slides.web; let i=index" class="slide text-center mt-4">
-    <a href="{{ slide.link }}" target="_blank" id="banner{{i}}">
+    <a href="{{ slide.link }}" id="banner{{i}}">
       <img class="responsive-img" src="{{ slide.imageurl }}" alt="{{ slide.description }}" />
     </a>
   </div>

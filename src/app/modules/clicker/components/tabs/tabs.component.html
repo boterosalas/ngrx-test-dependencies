@@ -181,10 +181,12 @@
 <ng-template #templateDialogAssured>
   <div id="share">
     <div *ngIf="showFormCustomer">
+      <p class="text-id">{{"GENERIC.CUSTOMER_ID" | translate}}</p>
         <form class="forgotpassword-container" [formGroup]="idCustomerForm" fxLayout="column">
             <mat-form-field appearance="outline" class="mt-2">
               <input
                 matInput
+                class="p-2"
                 id="idcustomer"
                 type="text"
                 placeholder="N° de Documento"
@@ -237,7 +239,7 @@
               (click)="nextStep()"
               [disabled]="!idCustomerForm.valid"
             >
-              <span fxLayout="row" fxLayoutAlign="space-around center">
+              <span fxLayout="row" fxLayoutAlign="space-between center" class="pl-3 pr-3">
                   {{ "GENERIC.NEXT" | translate }}
                   <mat-icon>arrow_forward</mat-icon>
                 </span>

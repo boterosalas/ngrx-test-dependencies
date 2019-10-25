@@ -256,6 +256,9 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
       this.urlshorten = resp;
     });
     this.formShareLink();
+    this.showForm = false;
+    this.idCustomerForm.controls.identification.setValue('');
+    this.showFormCustomer = true;
     const title = assured.description;
     const id = assured.productId;
     const img = assured.imageurl;
