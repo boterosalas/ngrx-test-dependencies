@@ -60,11 +60,7 @@ export class LinksService {
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
       })
     };
-    return this.http.post((`${environment.URL_INSURANCE}`), {Body: {formdata}}, httpOptions ).pipe(
-      map((resp: ResponseService) => {
-        return resp.objectResponse;
-      })
-    );
+    return this.http.post((`${environment.URL_INSURANCE}`), {Body: {formdata}}, httpOptions );
   }
   
 }
