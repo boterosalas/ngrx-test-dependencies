@@ -152,7 +152,7 @@ export class RegisterformComponent implements OnInit {
         if (resp.state === "Success") {
           Swal.fire({
             title: "Registro valido",
-            text: "Te Has registrado correctamente",
+            text: "Se ha registrado satisfactoriamente. Por favor, revise su correo para activar su cuenta.",
             type: "success",
             confirmButtonText: "Aceptar",
             confirmButtonClass: 'accept-register-alert-success'
