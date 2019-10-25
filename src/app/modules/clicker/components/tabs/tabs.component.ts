@@ -204,8 +204,8 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
    */
 
   public dataProduct(product) {
-    const productUrl = product.linkText;
-    this.url = `https://www.exito.com/${productUrl}/p?utm_source=clickam&utm_medium=referral&utm_campaign=${this.identification}`;
+    const productUrl = product.link;
+    this.url = `${productUrl}utm_source=clickam&utm_medium=referral&utm_campaign=${this.identification}`;
     this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
       this.urlshorten = resp;
     });
