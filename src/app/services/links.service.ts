@@ -12,8 +12,11 @@ export class LinksService {
   constructor(private http: HttpClient) { }
 
   url = environment.URL_REFERAL;
-  urlReport = environment.URL_REPORT;
   urlComission = environment.URL_COMISSION;
+  comission = 'commissions';
+  reports = 'Reports';
+  insurance = 'Insurance/ProcessFiles'
+
   apiSaveLink = 'SaveLink';
   apiFile = 'getUrlFileCommissions';
 
@@ -39,7 +42,7 @@ export class LinksService {
 
   public getReports(identification: string) {
     let apiReport = `ClickerPerformanceReport?identification=${identification}`;
-    return this.http.get((`${this.urlReport + apiReport}`), this.httpOptions).pipe(
+    return this.http.get((`${this.urlComission}/${this.reports}/${apiReport}`), this.httpOptions).pipe(
       map((resp: ResponseService) => {
         return resp.objectResponse;
       })
@@ -47,7 +50,7 @@ export class LinksService {
   }
 
   public getFileReport() {
-    return this.http.get((`${this.urlComission + this.apiFile}`), this.httpOptions).pipe(
+    return this.http.get((`${this.urlComission}/${this.comission}/${this.apiFile}`), this.httpOptions).pipe(
       map((resp: ResponseService) => {
         return resp.objectResponse;
       })
@@ -60,7 +63,7 @@ export class LinksService {
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
       })
     };
-    return this.http.post((`${environment.URL_INSURANCE}`), {Body: {formdata}}, httpOptions );
+    return this.http.post((`${environment.URL_COMISSION}/${this.insurance}`), {Body: {formdata}}, httpOptions );
   }
   
 }
