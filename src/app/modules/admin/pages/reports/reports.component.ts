@@ -71,6 +71,7 @@ export class ReportsComponent implements OnInit {
   }
 
   public onFileChangeTrip(event) {
+    console.log(event);
     this.nameFile = event.target.files[0].name;
     let reader = new FileReader();
     if (event.target.files && event.target.files.length) {

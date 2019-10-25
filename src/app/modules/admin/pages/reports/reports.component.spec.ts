@@ -8,10 +8,13 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
+import { LinksService } from 'src/app/services/links.service';
 
 describe('ReportsComponent', () => {
   let component: ReportsComponent;
   let fixture: ComponentFixture<ReportsComponent>;
+
+  // let mockLinksService = jasmine.createSpyObj('LinksService', ['getFileReport']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -34,6 +37,9 @@ describe('ReportsComponent', () => {
         }),
         FormsModule
       ],
+      providers: [
+        // {provide: LinksService, }
+      ],
       schemas: [
         NO_ERRORS_SCHEMA
       ]
@@ -54,4 +60,10 @@ describe('ReportsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('File reader trip', () => {
+    
+  });
+  
+
 });
