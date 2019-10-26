@@ -14,6 +14,7 @@ export class LoadFormFileComponent implements OnInit {
   // @Input() nameFileAssured: string;
   @Input() label: string;  
   @Output() uploadFile = new EventEmitter;
+  
 
   constructor() {}
   
