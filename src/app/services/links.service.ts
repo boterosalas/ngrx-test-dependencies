@@ -60,10 +60,11 @@ export class LinksService {
   public sendfile(formdata) {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        'Content-Type':'multipart/form-data',
       })
     };
-    return this.http.post((`${environment.URL_COMISSION}/${this.insurance}`), {Body: {formdata}}, httpOptions );
+    return this.http.post((`${environment.URL_COMISSION}${this.insurance}`), {Body: formdata }, httpOptions );
   }
   
 }
