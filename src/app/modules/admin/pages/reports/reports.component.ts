@@ -7,6 +7,7 @@ import { UserService } from "src/app/services/user.service";
 import Swal from "sweetalert2";
 import { ResponseService } from "src/app/interfaces/response";
 import { LoaderService } from 'src/app/services/loader.service';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: "app-reports",
@@ -27,6 +28,8 @@ export class ReportsComponent implements OnInit {
   validFormat: boolean;
   isLoggedIn: any;
   userName: string;
+  fileAssured: any;
+  EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 
   constructor(
     private file: LinksService,
@@ -71,12 +74,11 @@ export class ReportsComponent implements OnInit {
   }
 
   public onFileChangeTrip(event) {
-    console.log(event);
     this.nameFile = event.target.files[0].name;
     let reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      reader.readAsDataURL(file);
+      reader.readAsBinaryString(file);
 
       reader.onload = () => {
         this.fileForm.controls.file.patchValue({
@@ -95,11 +97,11 @@ export class ReportsComponent implements OnInit {
 
   public onFileChangeAssured(event) {
     this.nameFileAssured = event.target.files[0].name;
+    this.fileAssured = event.target.files;
     let reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       reader.readAsDataURL(file);
-
       reader.onload = () => {
         this.fileFormAssured.controls.file.patchValue({
           file: reader.result
@@ -125,7 +127,7 @@ export class ReportsComponent implements OnInit {
   }
 
   private sendFileTrip() {
-    let file = this.fileForm.controls.file.value.file;
+    let file = this.fileFormAssured.controls.file;
     let data = {
       File: file,
       Business: "viajes",
@@ -155,14 +157,15 @@ export class ReportsComponent implements OnInit {
       }
     );
   }
-
+ 
   private sendFileAssured() {
     let file = this.fileFormAssured.controls.file.value.file;
     let data = {
-      File: file,
+      File:  file,
       Business: "seguros",
       Email: this.userName
     };
+
     this.file.sendfile(data).subscribe(
       (resp: ResponseService) => {
         this.loading.hide();
@@ -186,4 +189,5 @@ export class ReportsComponent implements OnInit {
       }
     );
   }
+
 }
