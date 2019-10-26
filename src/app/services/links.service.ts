@@ -61,7 +61,8 @@ export class LinksService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
-        'Content-Type':'multipart/form-data',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': '*/*'
       })
     };
     return this.http.post((`${environment.URL_COMISSION}${this.insurance}`), {Body: formdata }, httpOptions );
