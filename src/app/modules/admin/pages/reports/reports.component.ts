@@ -78,9 +78,12 @@ export class ReportsComponent implements OnInit {
   public onFileChangeTrip(event) {
     this.nameFile = event.target.files[0].name;
     let reader = new FileReader();
+    
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      reader.readAsDataURL(file);
+      let fileBlob = new Blob([file], {type: 'text/plain'} )
+      let file2 = new File(([fileBlob]), this.nameFile, { type: this.EXCEL_TYPE });
+      reader.readAsDataURL(file2);
 
       reader.onload = () => {
         this.fileForm.controls.file.patchValue({
@@ -102,7 +105,9 @@ export class ReportsComponent implements OnInit {
     let reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      reader.readAsDataURL(file);
+      let fileBlob = new Blob([file], {type: 'text/plain'} )
+      let file2 = new File(([fileBlob]), this.nameFile, { type: this.EXCEL_TYPE });
+      reader.readAsDataURL(file2);
       reader.onload = () => {
         this.fileFormAssured.controls.file.patchValue({
           file: reader.result
@@ -129,24 +134,33 @@ export class ReportsComponent implements OnInit {
   }
 
   private sendFileTrip() {
-    let file = this.nameFile;
-    // this.saveAsExcel(file);
+    let file = this.fileForm.controls.file.value.file;
     let data = {
       File: file,
       Business: "viajes",
-      Email: 'eisner.puerta@pragma.com.co'
+      Email: this.userName
     };
     this.loading.show();
     this.file.sendfile(data).subscribe(
       (res: ResponseService) => {
         this.loading.hide();
-        Swal.fire({
-          title: "Carga exitosa",
-          text: res.userMessage,
-          type: "success",
-          confirmButtonText: "Aceptar",
-          confirmButtonClass: "upload-success"
-        });
+        if(res.state !== 'Error') {
+          Swal.fire({
+            title: "Carga exitosa",
+            text: res.userMessage,
+            type: "success",
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: "upload-success"
+          });
+        } else {
+          Swal.fire({
+            title: 'Error en la Carga',
+            text: res.userMessage,
+            type: "error",
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: "upload-error"
+          });
+        }
       },
       error => {
         this.loading.hide();
@@ -163,23 +177,31 @@ export class ReportsComponent implements OnInit {
  
   private sendFileAssured() {
     let file =  this.fileFormAssured.controls.file.value.file;
-    this.saveAsExcel(file);
     let data = {
       File:  file,
       Business: "seguros",
-      Email: 'eisner.puerta@pragma.com.co'
+      Email: this.userName
     };
 
     this.file.sendfile(data).subscribe(
-      (resp: ResponseService) => {
-        this.loading.hide();
-        Swal.fire({
-          title: "Carga exitosa",
-          text: resp.userMessage,
-          type: "success",
-          confirmButtonText: "Aceptar",
-          confirmButtonClass: "upload-success"
-        });
+      (res: ResponseService) => {
+        if(res.state !== 'Error') {
+          Swal.fire({
+            title: "Carga exitosa",
+            text: res.userMessage,
+            type: "success",
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: "upload-success"
+          });
+        } else {
+          Swal.fire({
+            title: 'Error en la Carga',
+            text: res.userMessage,
+            type: "error",
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: "upload-error"
+          });
+        }
       },
       error => {
         this.loading.hide();
@@ -193,12 +215,5 @@ export class ReportsComponent implements OnInit {
       }
     );
   }
-
-  saveAsExcel(buffer: any) {
-    const data: Blob = new Blob([buffer], {
-      type: this.EXCEL_TYPE
-    });
-  }
-
 
 }
