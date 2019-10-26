@@ -7,7 +7,6 @@ import { UserService } from "src/app/services/user.service";
 import Swal from "sweetalert2";
 import { ResponseService } from "src/app/interfaces/response";
 import { LoaderService } from 'src/app/services/loader.service';
-import * as FileSaver from 'file-saver';
 
 @Component({
   selector: "app-reports",
@@ -28,9 +27,7 @@ export class ReportsComponent implements OnInit {
   validFormat: boolean;
   isLoggedIn: any;
   userName: string;
-  fileAssured: any;
-  EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-
+  
   constructor(
     private file: LinksService,
     private fb: FormBuilder,
@@ -78,7 +75,7 @@ export class ReportsComponent implements OnInit {
     let reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      reader.readAsBinaryString(file);
+      reader.readAsDataURL(file);
 
       reader.onload = () => {
         this.fileForm.controls.file.patchValue({
@@ -97,7 +94,6 @@ export class ReportsComponent implements OnInit {
 
   public onFileChangeAssured(event) {
     this.nameFileAssured = event.target.files[0].name;
-    this.fileAssured = event.target.files;
     let reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
@@ -127,7 +123,7 @@ export class ReportsComponent implements OnInit {
   }
 
   private sendFileTrip() {
-    let file = this.fileFormAssured.controls.file;
+    let file = this.fileForm.controls.file.value.file;
     let data = {
       File: file,
       Business: "viajes",
