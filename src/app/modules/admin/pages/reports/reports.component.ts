@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, TemplateRef } from "@angular/core";
+import { Component, OnInit, ViewChild, TemplateRef, ElementRef, ChangeDetectorRef } from "@angular/core";
 import { LinksService } from "src/app/services/links.service";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { AuthService } from "src/app/services/auth.service";
@@ -15,6 +15,8 @@ import { LoaderService } from 'src/app/services/loader.service';
 })
 export class ReportsComponent implements OnInit {
   @ViewChild("templateCardReport, templateCardCross", { static: false })
+  // @ViewChild('input',{ static: false }) input: ElementRef;
+
   template: TemplateRef<any>;
 
   fileUrl: string;
@@ -27,13 +29,16 @@ export class ReportsComponent implements OnInit {
   validFormat: boolean;
   isLoggedIn: any;
   userName: string;
+  tmpPath: string;
+  EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
   
   constructor(
     private file: LinksService,
     private fb: FormBuilder,
     private auth: AuthService,
     private user: UserService,
-    private loading: LoaderService
+    private loading: LoaderService,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -110,6 +115,7 @@ export class ReportsComponent implements OnInit {
           this.showErrorExtAssured = true;
         }
       };
+      this.cd.markForCheck();
     }
   }
 
@@ -123,11 +129,12 @@ export class ReportsComponent implements OnInit {
   }
 
   private sendFileTrip() {
-    let file = this.fileForm.controls.file.value.file;
+    let file = this.nameFile;
+    // this.saveAsExcel(file);
     let data = {
       File: file,
       Business: "viajes",
-      Email: this.userName
+      Email: 'eisner.puerta@pragma.com.co'
     };
     this.loading.show();
     this.file.sendfile(data).subscribe(
@@ -155,11 +162,12 @@ export class ReportsComponent implements OnInit {
   }
  
   private sendFileAssured() {
-    let file = this.fileFormAssured.controls.file.value.file;
+    let file =  this.fileFormAssured.controls.file.value.file;
+    this.saveAsExcel(file);
     let data = {
       File:  file,
       Business: "seguros",
-      Email: this.userName
+      Email: 'eisner.puerta@pragma.com.co'
     };
 
     this.file.sendfile(data).subscribe(
@@ -185,5 +193,12 @@ export class ReportsComponent implements OnInit {
       }
     );
   }
+
+  saveAsExcel(buffer: any) {
+    const data: Blob = new Blob([buffer], {
+      type: this.EXCEL_TYPE
+    });
+  }
+
 
 }

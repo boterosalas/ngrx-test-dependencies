@@ -34,7 +34,7 @@
         {{ "GENERIC.INVALID_FORMAT_FILE" | translate }}
       </mat-error>
     <br>
-    <h4 id="assured" class="title-upload">{{ 'REPORTS.ASSURED' | translate }}</h4>
+    <h4 id="assured" ref="#inputAssured" class="title-upload">{{ 'REPORTS.ASSURED' | translate }}</h4>
     <app-load-form-file [fileForm]="fileFormAssured"  [nameFile]="nameFileAssured" label="assured" (uploadFile)="onFileChangeAssured($event)"></app-load-form-file>  
     <mat-error *ngIf="showErrorExtAssured" class="small">
       {{ "GENERIC.INVALID_FORMAT_FILE" | translate }}
