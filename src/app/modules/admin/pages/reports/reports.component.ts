@@ -27,7 +27,7 @@ export class ReportsComponent implements OnInit {
   validFormat: boolean;
   isLoggedIn: any;
   userName: string;
-
+  
   constructor(
     private file: LinksService,
     private fb: FormBuilder,
@@ -71,7 +71,6 @@ export class ReportsComponent implements OnInit {
   }
 
   public onFileChangeTrip(event) {
-    console.log(event);
     this.nameFile = event.target.files[0].name;
     let reader = new FileReader();
     if (event.target.files && event.target.files.length) {
@@ -99,7 +98,6 @@ export class ReportsComponent implements OnInit {
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       reader.readAsDataURL(file);
-
       reader.onload = () => {
         this.fileFormAssured.controls.file.patchValue({
           file: reader.result
@@ -155,14 +153,15 @@ export class ReportsComponent implements OnInit {
       }
     );
   }
-
+ 
   private sendFileAssured() {
     let file = this.fileFormAssured.controls.file.value.file;
     let data = {
-      File: file,
+      File:  file,
       Business: "seguros",
       Email: this.userName
     };
+
     this.file.sendfile(data).subscribe(
       (resp: ResponseService) => {
         this.loading.hide();
@@ -186,4 +185,5 @@ export class ReportsComponent implements OnInit {
       }
     );
   }
+
 }
