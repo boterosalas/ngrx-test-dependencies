@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -14,18 +14,19 @@ export class LoadFormFileComponent implements OnInit {
   // @Input() nameFileAssured: string;
   @Input() label: string;  
   @Output() uploadFile = new EventEmitter;
-  
+  @ViewChild('form', {static: false}) form;
 
   constructor() {}
   
   ngOnInit() {
   }
 
+  reset() {
+    this.form.nativeElement.reset()
+  }
+
   public onFileChange(event) {
     this.uploadFile.emit(event);
   }
-
-
-
 
 }
