@@ -58,14 +58,17 @@ export class LinksService {
   }
 
   public sendfile(formdata) {
+      let data = new FormData();
+      data.append("FileBase64", formdata.fileBase64);
+      data.append("Business", formdata.business);
+      data.append("email", formdata.email);
     const httpOptions = {
       headers: new HttpHeaders({
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': '*/*'
+        "Content-Type": "application/json"
       })
     };
-    return this.http.post((`${environment.URL_COMISSION}${this.insurance}`), {Body: formdata }, httpOptions );
+    return this.http.post((`${environment.URL_COMISSION}${this.insurance}`), formdata , httpOptions );
   }
   
 }
