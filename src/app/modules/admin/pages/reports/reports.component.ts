@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, TemplateRef } from "@angular/core";
+import { Component, OnInit, ViewChild, TemplateRef, ElementRef, ChangeDetectorRef } from "@angular/core";
 import { LinksService } from "src/app/services/links.service";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { AuthService } from "src/app/services/auth.service";
@@ -15,6 +15,8 @@ import { LoaderService } from 'src/app/services/loader.service';
 })
 export class ReportsComponent implements OnInit {
   @ViewChild("templateCardReport, templateCardCross", { static: false })
+  // @ViewChild('input',{ static: false }) input: ElementRef;
+
   template: TemplateRef<any>;
 
   fileUrl: string;
@@ -27,13 +29,16 @@ export class ReportsComponent implements OnInit {
   validFormat: boolean;
   isLoggedIn: any;
   userName: string;
-
+  tmpPath: string;
+  EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+  
   constructor(
     private file: LinksService,
     private fb: FormBuilder,
     private auth: AuthService,
     private user: UserService,
-    private loading: LoaderService
+    private loading: LoaderService,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -71,12 +76,14 @@ export class ReportsComponent implements OnInit {
   }
 
   public onFileChangeTrip(event) {
-    console.log(event);
     this.nameFile = event.target.files[0].name;
     let reader = new FileReader();
+    
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      reader.readAsDataURL(file);
+      let fileBlob = new Blob([file], {type: this.EXCEL_TYPE} )
+      let file2 = new File(([fileBlob]), this.nameFile, { type: this.EXCEL_TYPE });
+      reader.readAsDataURL(file2);
 
       reader.onload = () => {
         this.fileForm.controls.file.patchValue({
@@ -98,8 +105,9 @@ export class ReportsComponent implements OnInit {
     let reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      reader.readAsDataURL(file);
-
+      let fileBlob = new Blob([file], {type: this.EXCEL_TYPE} )
+      let file2 = new File(([fileBlob]), this.nameFileAssured, { type: this.EXCEL_TYPE });
+      reader.readAsDataURL(file2);
       reader.onload = () => {
         this.fileFormAssured.controls.file.patchValue({
           file: reader.result
@@ -125,23 +133,38 @@ export class ReportsComponent implements OnInit {
   }
 
   private sendFileTrip() {
-    let file = this.fileForm.controls.file.value.file;
+    let fileSplit = this.fileForm.controls.file.value.file.split(',');
+    let file =  fileSplit[1];
     let data = {
-      File: file,
-      Business: "viajes",
-      Email: this.userName
+      fileBase64:file,
+      business: "viajes",
+      email: this.userName
     };
     this.loading.show();
     this.file.sendfile(data).subscribe(
       (res: ResponseService) => {
         this.loading.hide();
-        Swal.fire({
-          title: "Carga exitosa",
-          text: res.userMessage,
-          type: "success",
-          confirmButtonText: "Aceptar",
-          confirmButtonClass: "upload-success"
-        });
+        if(res.state !== 'Error') {
+          Swal.fire({
+            title: "Carga exitosa",
+            text: res.userMessage,
+            type: "success",
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: "upload-success"
+          }).then(()=> {
+            this.nameFile ="";
+          });
+        } else {
+          Swal.fire({
+            title: 'Error en la Carga',
+            text: res.userMessage,
+            type: "error",
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: "upload-error"
+          }).then(()=> {
+            this.nameFile ="";
+          });
+        }
       },
       error => {
         this.loading.hide();
@@ -151,39 +174,59 @@ export class ReportsComponent implements OnInit {
           type: "error",
           confirmButtonText: "Aceptar",
           confirmButtonClass: "upload-invalid"
+        }).then(()=> {
+          this.nameFile ="";
+        });
+      }
+    );
+  }
+ 
+  private sendFileAssured() {
+    let fileSplit = this.fileFormAssured.controls.file.value.file.split(',');
+    let file =  fileSplit[1];
+    let data = {
+      fileBase64:file,
+      business: "seguros",
+      email: this.userName
+    };
+
+    this.file.sendfile(data).subscribe(
+      (res: ResponseService) => {
+        if(res.state !== 'Error') {
+          Swal.fire({
+            title: "Carga exitosa",
+            text: res.userMessage,
+            type: "success",
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: "upload-success"
+          }).then(()=> {
+            this.nameFileAssured ="";
+          });
+        } else {
+          Swal.fire({
+            title: 'Error en la Carga',
+            text: res.userMessage,
+            type: "error",
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: "upload-error"
+          }).then(()=> {
+            this.nameFileAssured ="";
+          });
+        }
+      },
+      error => {
+        this.loading.hide();
+        Swal.fire({
+          title: error.statusText,
+          text: error.error.userMessage,
+          type: "error",
+          confirmButtonText: "Aceptar",
+          confirmButtonClass: "upload-invalid"
+        }).then(()=> {
+          this.nameFileAssured ="";
         });
       }
     );
   }
 
-  private sendFileAssured() {
-    let file = this.fileFormAssured.controls.file.value.file;
-    let data = {
-      File: file,
-      Business: "seguros",
-      Email: this.userName
-    };
-    this.file.sendfile(data).subscribe(
-      (resp: ResponseService) => {
-        this.loading.hide();
-        Swal.fire({
-          title: "Carga exitosa",
-          text: resp.userMessage,
-          type: "success",
-          confirmButtonText: "Aceptar",
-          confirmButtonClass: "upload-success"
-        });
-      },
-      error => {
-        this.loading.hide();
-        Swal.fire({
-          title: error.statusText,
-          text: error.error.userMessage,
-          type: "error",
-          confirmButtonText: "Aceptar",
-          confirmButtonClass: "upload-invalid"
-        });
-      }
-    );
-  }
 }
