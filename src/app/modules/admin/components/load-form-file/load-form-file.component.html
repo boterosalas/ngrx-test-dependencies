@@ -1,4 +1,4 @@
-<form [formGroup]="fileForm" fxLayout="row" fxLayoutAlign="space-between center">
+<form [formGroup]="fileForm" fxLayout="row" fxLayoutAlign="space-between center" #form>
   <span *ngIf="nameFile === ''">No hay archivo seleccionado</span>
   <span class="file-input" *ngIf="nameFile !== ''">{{ nameFile }}</span>
 
@@ -9,7 +9,7 @@
     Explorar
   </label>
 
-  <input id="file-upload{{label}}" type="file" (change)="onFileChange($event)" />
+  <input id="file-upload{{label}}" type="file" (click)="reset()" (change)="onFileChange($event)" />
   
 </form>
 
