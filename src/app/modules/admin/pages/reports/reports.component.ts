@@ -30,7 +30,7 @@ export class ReportsComponent implements OnInit {
   isLoggedIn: any;
   userName: string;
   tmpPath: string;
-  EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+  EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
   
   constructor(
     private file: LinksService,
@@ -81,7 +81,7 @@ export class ReportsComponent implements OnInit {
     
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      let fileBlob = new Blob([file], {type: 'text/plain'} )
+      let fileBlob = new Blob([file], {type: this.EXCEL_TYPE} )
       let file2 = new File(([fileBlob]), this.nameFile, { type: this.EXCEL_TYPE });
       reader.readAsDataURL(file2);
 
@@ -105,8 +105,8 @@ export class ReportsComponent implements OnInit {
     let reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      let fileBlob = new Blob([file], {type: 'text/plain'} )
-      let file2 = new File(([fileBlob]), this.nameFile, { type: this.EXCEL_TYPE });
+      let fileBlob = new Blob([file], {type: this.EXCEL_TYPE} )
+      let file2 = new File(([fileBlob]), this.nameFileAssured, { type: this.EXCEL_TYPE });
       reader.readAsDataURL(file2);
       reader.onload = () => {
         this.fileFormAssured.controls.file.patchValue({
@@ -120,7 +120,6 @@ export class ReportsComponent implements OnInit {
           this.showErrorExtAssured = true;
         }
       };
-      this.cd.markForCheck();
     }
   }
 
@@ -134,11 +133,12 @@ export class ReportsComponent implements OnInit {
   }
 
   private sendFileTrip() {
-    let file = this.fileForm.controls.file.value.file;
+    let fileSplit = this.fileForm.controls.file.value.file.split(',');
+    let file =  fileSplit[1];
     let data = {
-      File: file,
-      Business: "viajes",
-      Email: this.userName
+      fileBase64:file,
+      business: "viajes",
+      email: this.userName
     };
     this.loading.show();
     this.file.sendfile(data).subscribe(
@@ -151,6 +151,8 @@ export class ReportsComponent implements OnInit {
             type: "success",
             confirmButtonText: "Aceptar",
             confirmButtonClass: "upload-success"
+          }).then(()=> {
+            this.nameFile ="";
           });
         } else {
           Swal.fire({
@@ -159,6 +161,8 @@ export class ReportsComponent implements OnInit {
             type: "error",
             confirmButtonText: "Aceptar",
             confirmButtonClass: "upload-error"
+          }).then(()=> {
+            this.nameFile ="";
           });
         }
       },
@@ -170,17 +174,20 @@ export class ReportsComponent implements OnInit {
           type: "error",
           confirmButtonText: "Aceptar",
           confirmButtonClass: "upload-invalid"
+        }).then(()=> {
+          this.nameFile ="";
         });
       }
     );
   }
  
   private sendFileAssured() {
-    let file =  this.fileFormAssured.controls.file.value.file;
+    let fileSplit = this.fileFormAssured.controls.file.value.file.split(',');
+    let file =  fileSplit[1];
     let data = {
-      File:  file,
-      Business: "seguros",
-      Email: this.userName
+      fileBase64:file,
+      business: "seguros",
+      email: this.userName
     };
 
     this.file.sendfile(data).subscribe(
@@ -192,6 +199,8 @@ export class ReportsComponent implements OnInit {
             type: "success",
             confirmButtonText: "Aceptar",
             confirmButtonClass: "upload-success"
+          }).then(()=> {
+            this.nameFileAssured ="";
           });
         } else {
           Swal.fire({
@@ -200,6 +209,8 @@ export class ReportsComponent implements OnInit {
             type: "error",
             confirmButtonText: "Aceptar",
             confirmButtonClass: "upload-error"
+          }).then(()=> {
+            this.nameFileAssured ="";
           });
         }
       },
@@ -211,6 +222,8 @@ export class ReportsComponent implements OnInit {
           type: "error",
           confirmButtonText: "Aceptar",
           confirmButtonClass: "upload-invalid"
+        }).then(()=> {
+          this.nameFileAssured ="";
         });
       }
     );
