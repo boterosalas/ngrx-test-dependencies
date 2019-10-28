@@ -6,6 +6,7 @@ import { UserService } from "src/app/services/user.service";
 import { UtilsService } from 'src/app/services/utils.service';
 import { trigger, state, style, transition, animate, group } from '@angular/animations';
 import { AuthService } from 'src/app/services/auth.service';
+import decode from 'jwt-decode';
 
 
 @Component({
@@ -86,9 +87,8 @@ export class HomeComponent implements OnInit, OnDestroy {
      * verifica si el usuario esta logueado y lo envia a la pagina de clicker, para no mostrar la pagina inicial anonima
      */
 
-    if(this.auth.isLoggedIn()) {
-      this.router.navigate(['clicker']);
-    }
+     this.routeBased();
+
     
   }
 
@@ -145,6 +145,19 @@ export class HomeComponent implements OnInit, OnDestroy {
   @HostListener('over')
   openRegister() {
     this.utils.showRegisterForm();
+  }
+
+  private routeBased() {
+    let token = localStorage.getItem("ACCESS_TOKEN");
+    if (token !== null) {
+      let tokenDecode = decode(token);
+      if(tokenDecode.role === "CLICKER") {
+        this.router.navigate(['/clicker']);
+      } else {
+        this.router.navigate(['/dashboard']);
+        this.auth.getRole$.next("ADMIN")
+      }
+    }
   }
 
 }
