@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ConfirmPasswordValidator } from 'src/app/validators/confirm-password.validator';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,7 +14,7 @@ import { RemoveSpaceService } from 'src/app/services/remove-space.service';
   templateUrl: './recoverpasswordform.component.html',
   styleUrls: ['./recoverpasswordform.component.scss']
 })
-export class RecoverpasswordformComponent implements OnInit {
+export class RecoverpasswordformComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
@@ -54,7 +54,7 @@ export class RecoverpasswordformComponent implements OnInit {
 
     /** verifica que los parametros en la ruta existan si no hace un redirect hacia el inicio */
 
-    this.route.queryParams.subscribe(params => {
+    this.subscription = this.route.queryParams.subscribe(params => {
       if(params.code && params.email) {
         this.code = params.code;
         this.email = params.email;

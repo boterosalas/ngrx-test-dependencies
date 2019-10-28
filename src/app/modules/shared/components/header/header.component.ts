@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Input } from "@angular/core";
+import { Component, OnInit, HostListener, Input, OnDestroy } from "@angular/core";
 import { UtilsService } from "src/app/services/utils.service";
 import { AuthService } from "src/app/services/auth.service";
 import { UserService } from "src/app/services/user.service";
@@ -11,7 +11,7 @@ import { NavigationStart, Router } from '@angular/router';
   templateUrl: "./header.component.html",
   styleUrls: ["./header.component.scss"]
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   @Input() isHome: boolean;
   @Input() internal: boolean;
   isLoggedIn: any;
@@ -62,7 +62,7 @@ export class HeaderComponent implements OnInit {
    */
 
   initialNameLastName() {
-    this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
+   this.subscription = this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
       if (!!val) {
         const initialName = val.firstNames.charAt(0);
         const initialLastName = val.lastNames.charAt(0);
@@ -84,6 +84,10 @@ export class HeaderComponent implements OnInit {
   @HostListener('over')
   openRegister() {
     this.utils.showRegisterForm();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
   
 }

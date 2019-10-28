@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ConfirmPasswordValidator } from "src/app/validators/confirm-password.validator";
 import { RegisterUserService } from "src/app/services/register-user.service";
@@ -14,7 +14,7 @@ import { UtilsService } from 'src/app/services/utils.service';
   templateUrl: "./registerform.component.html",
   styleUrls: ["./registerform.component.scss"]
 })
-export class RegisterformComponent implements OnInit {
+export class RegisterformComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private registerUser: RegisterUserService,
@@ -199,7 +199,7 @@ export class RegisterformComponent implements OnInit {
    */
 
   public getidType() {
-    this.registerUser.idType().subscribe(res => {
+   this.subscription = this.registerUser.idType().subscribe(res => {
       this.idUserType = res.objectResponse;
     });
   }

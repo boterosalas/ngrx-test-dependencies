@@ -1,15 +1,16 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { LinksService } from "src/app/services/links.service";
 import { UserService } from "src/app/services/user.service";
 import { AuthService } from "src/app/services/auth.service";
 import { distinctUntilChanged } from "rxjs/operators";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: "app-month-resume",
   templateUrl: "./month-resume.component.html",
   styleUrls: ["./month-resume.component.scss"]
 })
-export class MonthResumeComponent implements OnInit {
+export class MonthResumeComponent implements OnInit, OnDestroy {
   constructor(
     private link: LinksService,
     private user: UserService,
@@ -20,6 +21,7 @@ export class MonthResumeComponent implements OnInit {
   identification: string;
   totalComissions: string;
   isLoggedIn: any;
+  private subscription: Subscription = new Subscription();
 
   title = 'Performance del Clicker';
    type = 'ComboChart';
@@ -55,7 +57,7 @@ export class MonthResumeComponent implements OnInit {
      */
 
     if (this.isLoggedIn) {
-      this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
+      this.subscription = this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
         if (!!val) {
           this.identification = val.identification;
           this.getInfomonth();
@@ -77,4 +79,9 @@ export class MonthResumeComponent implements OnInit {
       this.data = resume.MonthResume.DaysResume;
     });
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }
