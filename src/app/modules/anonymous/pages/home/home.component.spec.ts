@@ -97,7 +97,10 @@ let invalidRquest = {
 
   it('open register', () => {
     component.openRegister();
-    expect(mockUtilsService.showRegisterForm).toHaveBeenCalled();
+    fixture.whenStable().then(() =>{
+      tick();
+      expect(mockUtilsService.showRegisterForm).toHaveBeenCalled();
+    });
   });
 
   describe('Error activation', () => {
