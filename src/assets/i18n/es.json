@@ -1,6 +1,8 @@
 {
   "GENERIC": {
     "EMAIL": "Correo",
+    "CONFIRM_EMAIL": "Confirmar Correo",
+    "CONFIRM_EMAIL_PATTERN": "Los correos no son iguales",
     "PASSWORD": "Contraseña",
     "CONFIRM_PASSWORD": "Confirmar Contraseña",
     "NAME": "Nombres",

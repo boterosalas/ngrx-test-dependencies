@@ -1,4 +1,4 @@
-<div
+<form
   class="register-container"
   [formGroup]="registerForm"
   *ngIf="showRegisterForm"
@@ -238,6 +238,28 @@
   <mat-form-field>
     <input
       matInput
+      appBlockCopyPaste
+      id="confirmEmail"
+      type="email"
+      placeholder="{{ 'GENERIC.CONFIRM_EMAIL' | translate }}"
+      formControlName="confirmEmail"
+      (input)="removewhiteSpaceEmail()"
+      required
+    />
+
+    <mat-error
+    id="patternEmail"
+    *ngIf="
+      registerForm.controls.confirmEmail.invalid
+    "
+    >{{ "GENERIC.CONFIRM_EMAIL_PATTERN" | translate }}</mat-error
+  >
+
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
       id="password"
       type="password"
       placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
@@ -375,7 +397,7 @@
     {{ "GENERIC.NEXT" | translate }} <mat-icon>arrow_forward</mat-icon>
   </span>
   </button>
-</div>
+</form>
 
 <div *ngIf="showTerms">
   <h4>{{ "REGISTER.TITLE_SECTION" | translate }}</h4>

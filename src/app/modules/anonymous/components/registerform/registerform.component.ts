@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { ConfirmEmailValidator } from 'src/app/validators/confirm-email.validator';
+
 
 @Component({
   selector: "app-registerform",
@@ -82,6 +84,11 @@ export class RegisterformComponent implements OnInit, OnDestroy {
             Validators.maxLength(64)
           ]
         ],
+        confirmEmail: [
+          "",
+          [
+          ]
+        ],
         password: [
           "",
           [
@@ -100,7 +107,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
           ]
         ]
       },
-      { validator: ConfirmPasswordValidator.MatchPassword }
+      { validator: [ConfirmPasswordValidator.MatchPassword,  ConfirmEmailValidator.MatchEmail] }
     );
     this.showTerms = false;
     this.showRegisterForm = true;
