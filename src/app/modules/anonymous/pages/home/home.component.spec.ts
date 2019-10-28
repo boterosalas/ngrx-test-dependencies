@@ -1,5 +1,5 @@
 import { HomeComponent } from "./home.component";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { async, ComponentFixture, TestBed, tick } from "@angular/core/testing";
 import {
   TranslateModule
 } from "@ngx-translate/core";
@@ -89,7 +89,10 @@ let invalidRquest = {
 
   it("should create", () => {
     expect(component).toBeTruthy();
-    expect(mockAuthService.isLoggedIn).toHaveBeenCalled();
+    fixture.whenStable().then(() =>{
+      tick();
+      expect(mockAuthService.isLoggedIn).toHaveBeenCalled();
+    });
   });
 
   it('open register', () => {
@@ -103,15 +106,21 @@ let invalidRquest = {
       fixture = TestBed.createComponent(HomeComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
-      mockUserService.activateProfile.and.returnValue(of(dataError));
-      mockAuthService.isLoggedIn.and.returnValue(false);
+      fixture.whenStable().then(() =>{
+        tick();
+        mockUserService.activateProfile.and.returnValue(of(dataError));
+        mockAuthService.isLoggedIn.and.returnValue(false);
+      });
     });
 
     it('error activation', () => {
       component.ngOnInit();
       component.activateUser();
-      expect(mockAuthService.isLoggedIn).toHaveBeenCalled();
-      expect(mockUserService.activateProfile).toHaveBeenCalled();
+      fixture.whenStable().then(() =>{
+        tick();
+        expect(mockAuthService.isLoggedIn).toHaveBeenCalled();
+        expect(mockUserService.activateProfile).toHaveBeenCalled();
+      });
     });
   });
 
@@ -128,8 +137,11 @@ let invalidRquest = {
     it('invalid request', () => {
       component.ngOnInit();
       component.activateUser();
-      expect(mockAuthService.isLoggedIn).toHaveBeenCalled();
-      expect(mockUserService.activateProfile).toHaveBeenCalled();
+      fixture.whenStable().then(() =>{
+        tick();
+        expect(mockAuthService.isLoggedIn).toHaveBeenCalled();
+        expect(mockUserService.activateProfile).toHaveBeenCalled();
+      });
     });
   });
 
@@ -139,13 +151,19 @@ let invalidRquest = {
       fixture = TestBed.createComponent(HomeComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
-      mockAuthService.login.and.returnValue(of(dataUser));
-      mockAuthService.isLoggedIn.and.returnValue(true);
+      fixture.whenStable().then(() =>{
+        tick();
+        mockAuthService.login.and.returnValue(of(dataUser));
+        mockAuthService.isLoggedIn.and.returnValue(true);
+      });
     });
 
     it('is loged', () => {
       component.ngOnInit();
-      expect(mockAuthService.isLoggedIn).toHaveBeenCalled();
+      fixture.whenStable().then(() =>{
+        tick();
+        expect(mockAuthService.isLoggedIn).toHaveBeenCalled();
+      });
     });
   });
   
