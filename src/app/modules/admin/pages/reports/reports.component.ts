@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, TemplateRef, ElementRef, ChangeDetectorRef } from "@angular/core";
+import { Component, OnInit, ViewChild, TemplateRef, ElementRef, ChangeDetectorRef, OnDestroy } from "@angular/core";
 import { LinksService } from "src/app/services/links.service";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { AuthService } from "src/app/services/auth.service";
@@ -7,13 +7,14 @@ import { UserService } from "src/app/services/user.service";
 import Swal from "sweetalert2";
 import { ResponseService } from "src/app/interfaces/response";
 import { LoaderService } from 'src/app/services/loader.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: "app-reports",
   templateUrl: "./reports.component.html",
   styleUrls: ["./reports.component.scss"]
 })
-export class ReportsComponent implements OnInit {
+export class ReportsComponent implements OnInit, OnDestroy {
   @ViewChild("templateCardReport, templateCardCross", { static: false })
   // @ViewChild('input',{ static: false }) input: ElementRef;
 
@@ -31,6 +32,7 @@ export class ReportsComponent implements OnInit {
   userName: string;
   tmpPath: string;
   EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+  private subscription: Subscription = new Subscription();
   
   constructor(
     private file: LinksService,
@@ -61,7 +63,7 @@ export class ReportsComponent implements OnInit {
 
     this.isLoggedIn = this.auth.isLoggedIn();
     if (this.isLoggedIn) {
-      this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
+     this.subscription = this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
         if (!!val) {
           this.userName = val.email;
         }
@@ -141,7 +143,7 @@ export class ReportsComponent implements OnInit {
       email: this.userName
     };
     this.loading.show();
-    this.file.sendfile(data).subscribe(
+    this.subscription = this.file.sendfile(data).subscribe(
       (res: ResponseService) => {
         this.loading.hide();
         if(res.state !== 'Error') {
@@ -190,7 +192,7 @@ export class ReportsComponent implements OnInit {
       email: this.userName
     };
 
-    this.file.sendfile(data).subscribe(
+    this.subscription = this.file.sendfile(data).subscribe(
       (res: ResponseService) => {
         if(res.state !== 'Error') {
           Swal.fire({
@@ -227,6 +229,10 @@ export class ReportsComponent implements OnInit {
         });
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();  
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, TemplateRef, HostListener } from "@angular/core";
+import { Component, OnInit, ViewChild, TemplateRef, HostListener, OnDestroy } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import {
   Router,
@@ -61,7 +61,7 @@ import { AuthService } from './services/auth.service';
     ])
   ]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
   @ViewChild("templateCardLogin, TemplateCardRegister, TemplateCardForgot", { static: false }) template: TemplateRef<any>;
 
@@ -106,18 +106,18 @@ export class AppComponent implements OnInit {
     this.showRegisterForm = false;
     this.showForgotForm = false;
 
-    this.utils.change.subscribe(isOpen => {
+    this.subscription = this.utils.change.subscribe(isOpen => {
       this.isOpen = isOpen;
       this.showRegisterForm = false;
       this.showLoginForm = true;
       this.showForgotForm = false;
     });
 
-    this.utils.changeMenu.subscribe(isOpenMenu => {
+    this.subscription = this.utils.changeMenu.subscribe(isOpenMenu => {
       this.isOpenMenu = isOpenMenu;
     });
 
-    this.utils.changeRegister.subscribe(isOpenRegister => {
+    this.subscription = this.utils.changeRegister.subscribe(isOpenRegister => {
       this.isOpen= isOpenRegister;
       this.showRegisterForm = true;
       this.showLoginForm = false;

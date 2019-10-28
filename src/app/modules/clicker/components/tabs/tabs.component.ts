@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, TemplateRef } from "@angular/core";
+import { Component, OnInit, ViewChild, TemplateRef, OnDestroy } from "@angular/core";
 import { ProductSearchService } from "src/app/services/product-search.service";
 import { LoaderService } from "src/app/services/loader.service";
 import {
@@ -23,7 +23,7 @@ import { LinksService } from 'src/app/services/links.service';
   templateUrl: "./tabs.component.html",
   styleUrls: ["./tabs.component.scss"]
 })
-export class TabsComponent extends MatPaginatorIntl  implements OnInit {
+export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestroy {
   constructor(
     private sp: ProductSearchService,
     private loading: LoaderService,
@@ -97,6 +97,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
   buttonDisabled: boolean = true;
   numberPattern = "^(0|[0-9][0-9]*)$";
   idCustomerForm: FormGroup;
+  
 
   ngOnInit() {
     this.showNotFound = false;
@@ -119,7 +120,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
 
     this.isLoggedIn = this.auth.isLoggedIn();
     if (this.isLoggedIn) {
-      this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
+     this.subscription = this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
         if (!!val) {
           this.identification = val.identification;
         }
@@ -206,7 +207,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
   public dataProduct(product) {
     const productUrl = product.link;
     this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=${this.identification}`;
-    this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
+    this.subscription = this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
       this.urlshorten = resp;
     });
     this.formShareLink();
@@ -252,7 +253,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
   public dataAssured(assured) {
     const dataAssuredUrl = `${assured.link}${this.identification}`;
     this.url = dataAssuredUrl;
-    this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
+    this.subscription = this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
       this.urlshorten = resp;
     });
     this.formShareLink();
@@ -298,7 +299,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
   public dataTrip(trip) {
     const datatripUrl = trip.link;
     this.url = `${datatripUrl}${this.identification}`;
-    this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
+    this.subscription = this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
       this.urlshorten = resp;
     });
     setTimeout(() => {
@@ -361,7 +362,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
    */
 
   public Assured() {
-    this.content.getAssured().subscribe(assured => {
+    this.subscription = this.content.getAssured().subscribe(assured => {
       this.assureds = assured;
     });
   }
@@ -371,7 +372,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
    */
 
   public Trip() {
-    this.content.getTrips().subscribe(trip => {
+   this.subscription = this.content.getTrips().subscribe(trip => {
       this.trips = trip;
     });
   }
@@ -389,7 +390,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit {
       creationDate: this.date,
       identificationcustomer: this.idCustomerForm.controls.identification.value
     }
-    this.links.saveLink(data).subscribe();
+   this.subscription = this.links.saveLink(data).subscribe();
   }
 
   /**
