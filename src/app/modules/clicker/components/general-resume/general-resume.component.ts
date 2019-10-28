@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LinksService } from 'src/app/services/links.service';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { distinctUntilChanged } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-general-resume',
   templateUrl: './general-resume.component.html',
   styleUrls: ['./general-resume.component.scss']
 })
-export class GeneralResumeComponent implements OnInit {
+export class GeneralResumeComponent implements OnInit, OnDestroy {
 
   constructor(
     private link: LinksService,
@@ -23,6 +24,7 @@ export class GeneralResumeComponent implements OnInit {
   totalProducts: string;
   conversionRate: string;
   isLoggedIn: any;
+  private subscription: Subscription = new Subscription();
 
   ngOnInit() {
 
@@ -33,7 +35,7 @@ export class GeneralResumeComponent implements OnInit {
      */
 
     if (this.isLoggedIn) {
-      this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
+     this.subscription = this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
         if (!!val) {
           this.identification = val.identification;
           this.getInfomonth();
@@ -49,11 +51,16 @@ export class GeneralResumeComponent implements OnInit {
    */
 
   private getInfomonth() {
-    this.link.getReports(this.identification).subscribe((resume: any) => {
+   this.subscription = this.link.getReports(this.identification).subscribe((resume: any) => {
       this.linksGenerated = resume.GeneralResume.TotalLinks;
       this.totalComissions = resume.GeneralResume.TotalCommissions;
       this.totalProducts = resume.GeneralResume.TotalProducts;
       this.conversionRate = resume.GeneralResume.ConversionRate;
     });
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import {
   FormGroup,
   Validators,
@@ -19,7 +19,7 @@ import decode from 'jwt-decode';
   templateUrl: "./loginform.component.html",
   styleUrls: ["./loginform.component.scss"]
 })
-export class LoginformComponent implements OnInit {
+export class LoginformComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private router: Router,

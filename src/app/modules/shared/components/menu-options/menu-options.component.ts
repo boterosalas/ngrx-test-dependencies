@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, OnChanges, DoCheck, Input } from "@angular/core";
+import { Component, OnInit, HostListener, OnChanges, DoCheck, Input, OnDestroy } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
 import { Subscription } from "rxjs";
 import { UtilsService } from "src/app/services/utils.service";
@@ -10,7 +10,7 @@ import { distinctUntilChanged } from "rxjs/operators";
   templateUrl: "./menu-options.component.html",
   styleUrls: ["./menu-options.component.scss"]
 })
-export class MenuOptionsComponent implements OnInit {
+export class MenuOptionsComponent implements OnInit, OnDestroy {
   constructor(
     public auth: AuthService,
     private utils: UtilsService,
@@ -40,7 +40,7 @@ export class MenuOptionsComponent implements OnInit {
    */
   
   public getMenu () {
-    this.auth.getMenu$.subscribe(val => {
+   this.subscription = this.auth.getMenu$.subscribe(val => {
       this.options = val;
     })
   }
