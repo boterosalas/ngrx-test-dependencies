@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ForgotpasswordService } from "src/app/services/forgotpassword.service";
@@ -14,7 +14,7 @@ import { UtilsService } from 'src/app/services/utils.service';
   templateUrl: "./forgotpasswordform.component.html",
   styleUrls: ["./forgotpasswordform.component.scss"]
 })
-export class ForgotpasswordformComponent implements OnInit {
+export class ForgotpasswordformComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private fb: FormBuilder,

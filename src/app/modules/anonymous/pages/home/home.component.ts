@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding, HostListener } from "@angular/core";
+import { Component, OnInit, HostBinding, HostListener, OnDestroy } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import Swal from "sweetalert2";
 import { Subscription } from "rxjs";
@@ -44,12 +44,14 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 
 
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   showLoginForm: boolean;
   showRegisterForm: boolean;
   showForgotForm: boolean;
   isOpen = false;
+  private subscription: Subscription = new Subscription();
+  email: string;
 
   constructor(
     public router: Router,
@@ -64,7 +66,7 @@ export class HomeComponent implements OnInit {
      * @param email 
      */
 
-    this.route.queryParams.subscribe(params => {
+    this.subscription = this.route.queryParams.subscribe(params => {
       if (params.email) {
         this.email = params.email;
   
@@ -75,8 +77,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  private subscription: Subscription = new Subscription();
-  email: string;
+ 
   
 
   ngOnInit() {
