@@ -227,7 +227,7 @@
       type="email"
       placeholder="{{ 'GENERIC.EMAIL' | translate }}"
       formControlName="email"
-      (input)="removewhiteSpaceEmail()"
+      spacebar
       required
     />
     <mat-error id="invalidEmail" *ngIf="registerForm.controls.email.invalid">{{
@@ -243,7 +243,7 @@
       type="email"
       placeholder="{{ 'GENERIC.CONFIRM_EMAIL' | translate }}"
       formControlName="confirmEmail"
-      (input)="removewhiteSpaceEmail()"
+      spacebar
       required
     />
 
@@ -265,7 +265,7 @@
       placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
       formControlName="password"
       required
-      (input)="removewhiteSpace()"
+      spacebar
     />
     <mat-error
       id="requiredPassword"
@@ -328,7 +328,7 @@
       placeholder="{{ 'GENERIC.CONFIRM_PASSWORD' | translate }}"
       formControlName="confirmPassword"
       required
-      (input)="removewhiteSpaceConfirm()"
+      spacebar
     />
     <mat-error
       id="notmatchPassword"

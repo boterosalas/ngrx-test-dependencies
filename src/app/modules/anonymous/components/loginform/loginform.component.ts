@@ -10,7 +10,6 @@ import Swal from "sweetalert2";
 import { ResponseService } from "src/app/interfaces/response";
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
-import { RemoveSpaceService } from 'src/app/services/remove-space.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import decode from 'jwt-decode';
 
@@ -25,7 +24,6 @@ export class LoginformComponent implements OnInit, OnDestroy {
     private router: Router,
     private fb: FormBuilder,
     private loading: LoaderService,
-    private removeSpace: RemoveSpaceService,
     private utils: UtilsService
   ) {}
 
@@ -102,20 +100,6 @@ export class LoginformComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
-  }
-
-  /** remueve los espacion en blanco */
-
-  public removewhiteSpace() {
-    const inputValue = this.loginForm.controls.Password.value;
-    const passwordControl = this.loginForm.controls.Password;
-    this.removeSpace.removeSpace(inputValue, passwordControl)
-  }
-
-  public removewhiteSpaceEmail() {
-    const inputValue = this.loginForm.controls.Username.value;
-    const confirmPasswordControl = this.loginForm.controls.Username;
-    this.removeSpace.removeSpace(inputValue, confirmPasswordControl);
   }
 
   /** Al momento de hacer login determina la ruta por el perfil de usuario */

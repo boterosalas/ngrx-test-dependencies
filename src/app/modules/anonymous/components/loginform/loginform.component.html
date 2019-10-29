@@ -6,7 +6,7 @@
       type="email"
       placeholder="{{ 'GENERIC.EMAIL' | translate }}"
       formControlName="Username"
-      (input)="removewhiteSpaceEmail()"
+      spacebar
       required
     />
     <span matPrefix><mat-icon color="gray">person</mat-icon></span>
@@ -25,7 +25,7 @@
       type="password"
       placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
       formControlName="Password"
-      (input)="removewhiteSpace()"
+      spacebar
       required
     />
     <span matPrefix><mat-icon color="gray">lock</mat-icon></span>

@@ -6,7 +6,6 @@ import { ResponseService } from "src/app/interfaces/response";
 import Swal from "sweetalert2";
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
-import { RemoveSpaceService } from 'src/app/services/remove-space.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -20,7 +19,6 @@ export class ForgotpasswordformComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private forgot: ForgotpasswordService,
     private loading: LoaderService,
-    private removeSpace: RemoveSpaceService,
     private utils: UtilsService
   ) {}
   
@@ -98,16 +96,6 @@ export class ForgotpasswordformComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
-  }
-
-  /**
-   * Remueve los espacios en blanco de la contraseña
-   */
-
-  public removewhiteSpaceEmailForgot() {
-    const inputValue = this.forgotPaswordForm.controls.Username.value;
-    const forgotControl = this.forgotPaswordForm.controls.Username;
-    this.removeSpace.removeSpace(inputValue, forgotControl);
   }
 
 }

@@ -211,28 +211,6 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     });
   }
 
-  /**
-   * Remueve los espacios en blanco
-   */
-
-  public removewhiteSpace() {
-    const inputValue = this.registerForm.controls.password.value;
-    let noSpace = inputValue.replace(/ /g, "");
-    this.registerForm.controls.password.setValue(noSpace);
-  }
-
-  public removewhiteSpaceConfirm() {
-    const inputValue = this.registerForm.controls.confirmPassword.value;
-    let noSpace = inputValue.replace(/ /g, "");
-    this.registerForm.controls.confirmPassword.setValue(noSpace);
-  }
-
-  public removewhiteSpaceEmail() {
-    const inputValue = this.registerForm.controls.email.value;
-    let noSpace = inputValue.replace(/ /g, "");
-    this.registerForm.controls.email.setValue(noSpace);
-  }
-
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
