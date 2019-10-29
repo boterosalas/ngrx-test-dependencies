@@ -9,12 +9,15 @@
     />
   </div>
     <h3 class="title" id="{{ id }}">{{ productName }}</h3>
-    <p>
-      <span class="d-block discount text-line small">
+    <p class="discount-height">
+      <span class="d-block discount text-line small" *ngIf="discount !== price">
         {{ discount | currency : '' : 'symbol' : '1.0-0' }}
       </span>
         <span class="d-block discount">
           {{ price | currency : '' : 'symbol' : '1.0-0' }}
+        </span>
+        <span class="d-block discount font">
+          {{aliance * price  | currency : '' : 'symbol' : '1.0-0'}}
         </span>
     </p>
     <p>

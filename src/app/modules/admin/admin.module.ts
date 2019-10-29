@@ -13,6 +13,9 @@ import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadFormFileComponent } from './components/load-form-file/load-form-file.component';
+import { UsersComponent } from './pages/users/users.component';
+import { TableUsersComponent } from './components/table-users/table-users.component';
+import { SearchUsersComponent } from './components/search-users/search-users.component';
 
 const routes: Routes = [
   {
@@ -30,11 +33,19 @@ const routes: Routes = [
     data: {
       role: "ADMIN"
     }
+  },
+  {
+    path: "usuarios",
+    component: UsersComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN"
+    }
   }
 ];
 
 @NgModule({
-  declarations: [DashboardComponent, SideMenuComponent, ReportsComponent, CardComponent, LoadFormFileComponent],
+  declarations: [DashboardComponent, SideMenuComponent, ReportsComponent, CardComponent, LoadFormFileComponent, UsersComponent, TableUsersComponent, SearchUsersComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

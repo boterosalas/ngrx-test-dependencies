@@ -291,6 +291,10 @@ button {
   justify-content: flex-end;
 }
 
+.border-bottom-gray{
+  border-bottom: 1px solid $color-border;
+}
+
 .card-product {
   border: 1px solid $color-border;
   border-radius: 0px !important;

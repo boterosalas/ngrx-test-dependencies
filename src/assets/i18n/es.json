@@ -158,5 +158,9 @@
     "UPLOAD": "Sube los archivos de cada negocio por separado.",
     "TRIPS": "VENTAS VIAJES",
     "ASSURED": "VENTAS SEGUROS"
+  },
+  "USERS": {
+    "USERS": "Usuarios"
   }
+
 }
