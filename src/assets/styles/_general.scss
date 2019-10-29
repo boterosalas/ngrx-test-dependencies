@@ -56,7 +56,8 @@ body {
 .mat-mini-fab,
 .mat-raised-button,
 .mat-stroked-button,
-.mat-tab-group {
+.mat-tab-group,
+.mat-table {
   font-family: $font-family-base !important;
 }
 
@@ -621,4 +622,12 @@ footer {
       }
     }
   }
+}
+
+.mat-cell, .mat-footer-cell{
+  color: $gray !important;
+}
+
+th.mat-header-cell {
+  color: $th;
 }

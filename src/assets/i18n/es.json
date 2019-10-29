@@ -160,7 +160,14 @@
     "ASSURED": "VENTAS SEGUROS"
   },
   "USERS": {
-    "USERS": "Usuarios"
+    "USERS": "Usuarios",
+    "IDENTIFICATION": "CÉDULA",
+    "NAME": "NOMBRE",
+    "CELLPHONE": "CELULAR",
+    "EMAIL": "CORREO",
+    "ORIGIN": "ORIGEN",
+    "VERIFIED": "VERIFICADO",
+    "STATUS":"ESTADO"
   }
 
 }
