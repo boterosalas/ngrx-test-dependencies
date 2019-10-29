@@ -1,0 +1,97 @@
+<div *ngIf="showAnimation2">
+
+<div  class="fullheight slide-in-top" *ngIf="isOpenMenu" @openClose>
+    <app-menu (close)="hideMenu()" ></app-menu>
+</div>
+
+<div class="fullheight slide-in-top" *ngIf="isOpen"  @openClose>
+  
+  <app-top (close)="hideLogin()"></app-top>
+
+  <app-card *ngIf="showLoginForm" idTitle="titleLogin" title="{{ 'LOGIN.LOGIN' | translate }}" description="{{ 'LOGIN.DESCRIPTION' | translate }}" idAction="registerHere" action="{{ 'LOGIN.REGISTER' | translate }}" (actionButton)="showRegister()" [template]="templateCardLogin"></app-card>
+
+  <ng-template #templateCardLogin>
+    <app-loginform></app-loginform>
+    <p
+      id="forgotPass"
+      class="cursor-pointer text-decoration text-center"
+      (click)="showForgot()"
+    >
+      {{ "LOGIN.FORGOT_PASSWORD" | translate }}
+    </p>
+  </ng-template>
+
+  <app-card *ngIf="showRegisterForm" idTitle="titleRegister" title="{{ 'GENERIC.REGISTER' | translate }}" description="{{ 'REGISTER.HAVE_ACCOUNT' | translate }}" idAction="registerForm" action="{{ 'LOGIN.LOGIN' | translate }}" (actionButton)="showLogin()" [template]="templateCardRegister"></app-card>
+
+  <ng-template #templateCardRegister>
+    <app-registerform></app-registerform>
+  </ng-template>
+
+  <app-card *ngIf="showForgotForm" idTitle="titleForgot" title="{{ 'FORGOTPASSWORD.FORGOT_PASSWORD' | translate }}" description="{{ 'FORGOTPASSWORD.ENTER_EMAIL' | translate }}" [template]="templateCardForgot"></app-card>
+
+  <ng-template #templateCardForgot>
+    <app-forgotpasswordform></app-forgotpasswordform>
+  </ng-template>
+  
+</div>
+</div>
+
+<div *ngIf="showAnimation1">
+<div ngClass.lt-md="fullheight slide-in-right" ngClass.gt-md="fullheight slide-in-right p-5" *ngIf="isOpenMenu" @slideInOut>
+    <app-menu (close)="hideMenu()" ></app-menu>
+</div>
+
+<div ngClass.lt-md="fullheight slide-in-right" ngClass.gt-md="fullheight slide-in-right p-5" *ngIf="isOpen"  @slideInOut>
+  
+  <app-top (close)="hideLogin()"></app-top>
+
+  <app-card *ngIf="showLoginForm" idTitle="titleLogin" title="{{ 'LOGIN.LOGIN' | translate }}" description="{{ 'LOGIN.DESCRIPTION' | translate }}" idAction="registerHere" action="{{ 'LOGIN.REGISTER' | translate }}" (actionButton)="showRegister()" [template]="templateCardLogin"></app-card>
+
+  <ng-template #templateCardLogin>
+    <app-loginform></app-loginform>
+    <p
+      id="forgotPass"
+      class="cursor-pointer text-decoration text-center"
+      (click)="showForgot()"
+    >
+      {{ "LOGIN.FORGOT_PASSWORD" | translate }}
+    </p>
+  </ng-template>
+
+  <app-card *ngIf="showRegisterForm" idTitle="titleRegister" title="{{ 'GENERIC.REGISTER' | translate }}" description="{{ 'REGISTER.HAVE_ACCOUNT' | translate }}" idAction="registerForm" action="{{ 'LOGIN.LOGIN' | translate }}" (actionButton)="showLogin()" [template]="templateCardRegister"></app-card>
+
+  <ng-template #templateCardRegister>
+    <app-registerform></app-registerform>
+  </ng-template>
+
+  <app-card *ngIf="showForgotForm" idTitle="titleForgot" title="{{ 'FORGOTPASSWORD.FORGOT_PASSWORD' | translate }}" description="{{ 'FORGOTPASSWORD.ENTER_EMAIL' | translate }}" [template]="templateCardForgot"></app-card>
+
+  <ng-template #templateCardForgot>
+    <app-forgotpasswordform></app-forgotpasswordform>
+  </ng-template>
+  
+</div>
+</div>
+
+
+<app-header></app-header>
+
+<div class="maincontent" *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'ADMIN'">
+  <div fxLayout="row" class="container">
+    <div fxLayout="column" fxFlex="20" class="mt-4" *ngIf="auth.isLoggedIn() && auth.role === 'ADMIN'">
+      <app-side-menu class="sideMenu"></app-side-menu>
+    </div>
+    <div fxLayout="column" fxFlex>
+      <router-outlet *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'ADMIN'" (activate)="onActivate($event)"></router-outlet>
+    </div>
+  </div>
+</div>
+
+  <div class="maincontent" *ngIf="!(auth.isLoggedIn() && (auth.getRole$  | async) === 'ADMIN')">
+        <router-outlet (activate)="onActivate($event)"></router-outlet>
+  </div>
+
+<app-footer></app-footer>
+
+<app-whatsapp></app-whatsapp>
+<app-loader></app-loader>

@@ -1,0 +1,39 @@
+<header [ngClass]="isHome ? 'headercolor' : 'border-orange'" >
+    <div fxLayout="row" fxLayoutAlign="space-between center" [ngClass]="isHome ? 'position-absolute container' : 'pt-2 pb-2 container'">
+        <div class="logo" id="logo-header">
+        <a matRipple *ngIf="!auth.isLoggedIn()"  [routerLink]="['inicio']">
+            <img *ngIf="isHome" src="assets/img/logo-header.svg" alt="clickam">
+            <img *ngIf="internal" src="assets/img/logo-header-2.svg" alt="clickam">
+        </a>
+        <a matRipple *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'CLICKER'"  [routerLink]="['clicker']">
+            <img *ngIf="isHome" src="assets/img/logo-header.svg" alt="clickam">
+            <img *ngIf="internal" src="assets/img/logo-header-2.svg" alt="clickam">
+        </a>
+        <a matRipple *ngIf="auth.isLoggedIn() && (auth.getRole$ | async )  === 'ADMIN'"  [routerLink]="['dashboard']">
+            <img *ngIf="isHome" src="assets/img/logo-header.svg" alt="clickam">
+            <img *ngIf="internal" src="assets/img/logo-header-2.svg" alt="clickam">
+        </a>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center">
+        <div [ngClass]="isHome ? 'menu-desktop' : 'menu-desktop colorlinks'" fxLayout="row" fxLayoutAlign="space-around center" [fxShow.lt-md]="false">
+                <app-menu-options aligment="start start" *ngIf="(auth.getRole$ | async) !== 'ADMIN'"></app-menu-options>
+                <span class="border-right-white"></span>
+                <a *ngIf="!auth.isLoggedIn()" mat-button (click)="openRegister()" id="header-register">{{ 'GENERIC.REGISTER2' | translate }}</a>
+                <a *ngIf="!auth.isLoggedIn()" mat-button (click)="showLogin()" id="header-login">{{ 'LOGIN.LOGIN' | translate }}</a>
+            </div>
+            
+            <span *ngIf="auth.isLoggedIn()">
+                    <button mat-button [matMenuTriggerFor]="menu" class="initials" id="btnUser">{{initials}}</button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item routerLink="mi-perfil">{{ 'HEADER.PROFILE' | translate }}</button>
+                        <button mat-menu-item (click)="logout()">{{ 'HEADER.LOGOUT' | translate }} </button>
+                    </mat-menu>
+            </span>
+            <div fxLayout="row" [fxShow.gt-md]="false" [fxShow.md]="false">
+                    <a *ngIf="!auth.isLoggedIn()" mat-button (click)="showLogin()" id="header-login">{{ 'LOGIN.LOGIN' | translate }}</a>
+                <span class="border-right"></span>
+                <a id="hamburguer" mat-button (click)="showMenu()"><mat-icon>menu</mat-icon></a>
+            </div>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,160 @@
+{
+  "GENERIC": {
+    "EMAIL": "Correo",
+    "PASSWORD": "Contraseña",
+    "CONFIRM_PASSWORD": "Confirmar Contraseña",
+    "NAME": "Nombres",
+    "LASTNAME": "Apellidos",
+    "CELLPHONE": "Celular",
+    "DOCUMENT_NUMBER": "Número de documento",
+    "REQUIRED": "El campo {{formValue}} es requerido",
+    "NEXT": "Siguiente",
+    "REGISTER": "Regístro",
+    "REGISTER2": "Registrarse",
+    "INVALID_FORMAT": "El campo {{val}} no puede contener caracteres especiales",
+    "MAX_CHARACTERS": "El número máximo de caracteres es {{maxchar}}",
+    "MIN_CHARACTERS": "El número mínimo de caracteres es {{minchar}}",
+    "ONLY_NUMBERS": "Solo se aceptan números",
+    "SEND": "Enviar",
+    "SAVE": "Guardar",
+    "CANCEL": "Cancelar",
+    "SEARCH": "Buscar",
+    "WHITE_SPACES": "No se permite más de un espacio en blanco",
+    "PASSWORD_PATTERN": "la contraseña debe contener al menos una letra minúscula, una letra mayúscula un número y un carácter especial",
+    "SHARE": "Compartir directamente en:",
+    "COPY_LINK": "Copiar link",
+    "INVALID_FORMAT_FILE": "Formato inválido solo se pueden subir archivos con la extensión xlsx, xls",
+    "CUSTOMER_ID": "Ingrese la cédula del tomador del seguro"
+  },
+  "LOGIN": {
+    "LOGIN": "Iniciar sesión",
+    "INVALID_EMAIL": "Email inválido",
+    "INVALID_PASSWORD": "Contraseña invalida",
+    "FORGOT_PASSWORD": "Olvidó su contraseña?",
+    "INTRODUCE_EMAIL": "Ingrese un correo",
+    "INTRODUCE_PASSWORD": "Ingrese una contraseña",
+    "DESCRIPTION": "Si todavía no tienes una cuenta puedes",
+    "REGISTER": "registrarte aquí"
+  },
+  "REGISTER": {
+    "ACCEPT": "¿Acepta los términos y condiciones y políticas de privacidad de Clickam?",
+    "TITLE_SECTION": "Regístrate, recomienda y gana",
+    "TITLE_TERMS_AND_CONDITIONS": "TÉRMINOS Y CONDICIONES DE  LA LEY HABEAS DATA",
+    "PASSWORD_NOT_MATCH": "Las contraseñas no son iguales",
+    "ID_TYPE": "Seleccionar documento",
+    "HAVE_ACCOUNT": "Si ya tienes una cuenta puedes"
+  },
+  "FORGOTPASSWORD": {
+    "FORGOT_PASSWORD": "Recuperar contraseña",
+    "ENTER_EMAIL": "Ingresa tu correo electrónico registrado para recuperar tu contraseña"
+  },
+  "RECOVERPASSWORD": {
+    "RECOVER_PASSWORD": "Recuperar contraseña",
+    "ENTER_PASSWORD": "Por favor, introduzca su nueva contraseña"
+  },
+  "PRODUCTS": {
+    "GET_LINK": "Crear link"
+  },
+  "HOME": {
+    "TITLE_SPEND": "¿Cuánto ganó?",
+    "DESPCRIPTION_SPEND": "Consulta aquí los valores de las comisiones que puedes ganar por crear link y generar ventas a través de estos.",
+    "TEXT_BUTTON_COMISIONS": "Ver comisiones",
+    "TITLE_SELL": "¿Ofertas para ganar comisiones rápido?",
+    "DESPCRIPTION_SELL": "Conoce las mejores ofertas de los negocios asociados que le puedes ofrecer a tus clientes.",
+    "TEXT_BUTTON_OFFERS": "Ver Ofertas",
+    "HOW_WORKS": "¿Cómo funciona?",
+    "HOW_WORKS_DESCRIPTION": "Busca un producto o servicio de los comercios asociados, crea un link, compártelo en redes sociales y empieza a ganar comisiones.",
+    "TITLE_RAISE": "Ingresos adicionales a solo un click",
+    "DESCRIPTION_RAISE": "¡Nunca fue tan fácil tener ingresos adicionales! Refiere y vende productos de los negocios asociados y obtén las mejores comisiones.",
+    "TITLE_SEARCH": "Busca y crea un link",
+    "DESCRIPTION_SEARCH": "Elige el negocio asociado, selecciona un producto o servicio y compártelo para ganar ingresos adicionales."
+  },
+  "HEADER": {
+    "PROFILE": "Mi perfil",
+    "LOGOUT": "Cerrar sesión"
+  },
+  "MONTH_RESUME": {
+    "TITLE": "Resumen mes",
+    "COMISSIONS": "Comisiones",
+    "LINKS_CREATED": "Links creados"
+  },
+  "GENERAL_RESUME": {
+    "TITLE": "Resumen general",
+    "COMISSIONS": "Total comisiones",
+    "LINKS_CREATED": "Links creados",
+    "PRODUCTS_SELLER": "Productos vendidos",
+    "CONVERSION": "Tasa de conversión"
+  },
+  "CLICKACADEMY": {
+    "CLICKACADEMY": "Click Academy",
+    "CLICKACADEMY_TAB_EXITO": "exito.com",
+    "CLICKACADEMY_TAB_EXITO_TABLE": "<table class='w-100 text-left mt-3'><thead><th>Categoría de producto</th><th>Comisiones</th></thead><tbody><tr><td>Textiles</td><td>9.60%</td></tr><tr><td>Ropa hogar y otros</td><td>6.40%</td></tr><tr><td>Ropa hogar y otros</td><td>4.00%</td></tr><tr><td>Accesorios de telefonía, Categoría genérica, Punto liquidación, Garantías extendidas, Ventilación, Calefacción, Combos sublínea 51, Cuidado pisos, Cuidado ropa, Cuidado personal, Aires acondicionados, Accesorios preparación alimentos, Bebidas, Cocción eléctrica, Preparación Alimentos</td><td>2.40%</td></tr><tr><td>DVD, Accesorios pata TV, Teatro en casa, Equipos de sonido, Portables de audio, Accesorios audio, Networking, Teléfonos, Accesorios TV-Audio y teatro en casa, Periféricos, Accesorios para PC.</td><td>1.60%</td></tr><tr><td>Televisores, Celulares gama alta</td><td>0.96%</td></tr><tr><td>Calefacción, Cocción, Refrigeración, Máquinas de coser, Lavadoras, Secadoras, Video juegos</td><td>0.80%</td></tr><tr><td>Celulares gama media, Celulares gama baja</td><td>0.64%</td></tr><tr><td>Informática, Impresión, Cámaras fotográficas y filmadoras.</td><td>0.48%</td></tr></tbody></table>",
+    "CLICKACADEMY_TAB_SEGUROS": "Seguros",
+    "CLICKACADEMY_TAB_SEGUROS_TABLE": "<table class='w-100 text-left mt-3'><thead><th>Categoría de producto</th><th>Comisiones</th></thead><tbody><tr><td>SOAT Auto</td><td>$32.000</td></tr><tr><td>SOAT Moto</td><td>$8.000</td></tr><tr><td>Seguro viaje internacional</td><td>$16.000</td></tr><tr><td>Seguro Celular</td><td>$12.000</td></tr><tr><td>Seguro Smartwatch</td><td>$12.000</td></tr><tr><td>Seguro Tablet</td><td>$12.000</td></tr><tr><td>Seguro Portátil</td><td>$12.000</td></tr><tr><td>Seguro consola de videojuego</td><td>$12.000</td></tr><tr><td>Seguro mascotas</td><td>$12.000</td></tr><tr><td>Seguro motos</td><td>$12.000</td></tr><tr><td>Seguro bicicletas</td><td>$12.000</td></tr><tr><td>Seguro de viaje nacional</td><td>$4.800</td></tr></tbody></table>",
+    "CLICKACADEMY_TAB_VIAJES": "Viajes",
+    "CLICKACADEMY_TAB_VIAJES_TABLE": "<table class='w-100 text-left mt-3'><thead><th>Categoría de producto</th><th>Comisiones</th></thead><tbody><tr><td>Paquetes de viaje</td><td>$40.000</td></tr><tr><td>Vuelos, actividades, autos, circuitos, hoteles</td><td>$16.000</td></tr></tbody></table>",
+    "TOOLS": "Herramientas",
+    "TOOLS_DESCRIPTION": "Guías rápidas para que ganes tus primeras comisiones, aprendas los trucos de los mejores clickers y le saques el mayor provecho a la plataforma.",
+    "TOOLS_TEXT1": "Entendiendo la plataforma nueva",
+    "TOOLS_TEXT2": "¿Cómo vendo producto de exito.com?",
+    "TOOLS_TEXT3": "¿Cómo vendo un seguro?",
+    "COMISSIONS": "Comisiones",
+    "COMISSIONS_TEXT": "Conoce nuestras comisiones",
+    "CATEGORY": "Categoría de producto",
+    "COMISSION": "Comisión",
+    "MARKETPLACE": "*Marketplace está excluido y ninguno de sus productos generan comisión."
+  },
+  "FREQUENT": {
+    "FREQUENT_QUESTIONS": "Preguntas Frecuentes",
+    "FREQUENT_QUESTIONS_DESCRIPTION": "Bienvenido a la comunidad de ayuda de Clickam, acá podrás encontrar respuesta a las preguntas más frecuentes.",
+    "HOW_WORKS_TITLE": "¿Cómo funciona?",
+    "HOW_WORKS_DESCRIPTION": "En Clickam ganas comisiones por referir y compartir link de productos y servicios en tus redes sociales, una vez las personas compren a través de estos, te ganaras una comisión según el producto o servicio vendido.",
+    "SALES_TITLE": "¿Cómo cruzan la venta?",
+    "SALES_DESCRIPTION": "Cuando crees un link y las personas compren a través de este, nuestro sistema rastreará de manera precisa el link desde donde se generará la compra, si es a través de uno de los link que tú como clicker creaste y compartiste, te ganarás la comisión correspondiente al producto o servicio.",
+    "WON_COMISSION_TITLE": "¿Cómo veo las comisiones que gané?",
+    "WON_COMISSION_DESCRIPTION": "Cuando inicies sesión podrás encontrar una tabla con los link creados y las comisiones ganadas los últimos 30 días, un gráfico con el desempeño de tu perfil, métricas del año en curso de tus comisiones ganadas, los link creados, el número de productos vendidos y la tasa de conversión (La tasa de conversión es la división entre el número de productos vendidos y los link generados).",
+    "BEST_OFFER_TITLE": "¿Dónde puedo encontrar las mejores ofertas?",
+    "BEST_OFFER_DESCRIPTION": "Al final de la aplicación encontrarás un “mapa del sitio”, y un botón que dice Ofertas, este te enviará a una página con las ofertas más ganadoras del día, para que tú puedas generar comisiones de manera rápida y efectiva. También las podrás encontrar cuando inicies sesión en la sección de Ver Ofertas.",
+    "ASSOCIATED_TITLE": "¿Cuáles son los negocios asociados?",
+    "ASSOCIATED_DESCRIPTION": "A la fecha contamos con <a href='https://www.exito.com' target='_blank'> www.exito.com </a>, <a href='https://www.segurosexito.com' target='_blank'> www.segurosexito.com </a>  y <a href='https://www.viajesexito.com' target='_blank'> www.viajesexito.com </a> , muy pronto tendremos otros negocios para que ganes más.",
+    "PAYDAYS_TITLE": "¿Cuáles son las fechas de pago?",
+    "PAYDAYS_DESCRIPTION": "<p>Las comisiones tienen 2 fechas de corte: </p> <ul><li> Del 1° al 15 de cada mes, las ventas que generen tus link dentro de este periodo se pagarán los 20 de cada mes ó el día hábil siguiente.</li> <li>Del 16 al 30 o 31 de cada mes y las ventas generadas en este periodo se pagan el 5 del mes ó el siguiente día hábil.</li></ul> <p>*Tener en cuenta que las ventas por <a href='https://www.exito.com' target='_blank'> www.exito.com </a> se hacen efectivas 7 días después de la compra debido a la legislación de Ley de Retracto, donde el comprador tiene 7 días para retractarse de su compra.</p>",
+    "WHERE_PAY_TITLE": "¿Dónde me pagan?",
+    "WHERE_PAY_DESCRIPTION": "Tus comisiones se pagarán en la cuenta de nómina que tengas registrada dentro del Grupo Exito o la cuenta que hayas registrado.",
+    "PAYMET_METHODS_TITLE": "¿Medios de pago?",
+    "PAYMET_METHODS_DESCRIPTION": "Cada negocio asociado cuenta con diferentes medios de pago que puedes utilizar a la hora de pagar tu producto o servicio, podrás encontrar desde pagos con tarjeta débito y crédito, hasta pagos contra entrega. Válida siempre las formas de pago de cada negocio para dar claridad a tus referidos.",
+    "SHIPMENT_TITLE": "¿Envíos?",
+    "SHIPMENT_DESC": "Los envíos aplican para <a href='https://www.exito.com' target='_blank'> www.exito.com </a>, este negocio asociado hace envíos a todo el País, los periodos de entrega son entre 2 y 10 días hábiles según la ubicación geográfica."
+  },
+  "OFFERS": {
+    "OFFERS_TITLE": "Descubre las ofertas",
+    "TENDENT": "Tendencias",
+    "BEST_BUY": "Más vendidos",
+    "BEST_COMISSION": "Mejores comisiones"
+  },
+  "TERMS": {
+    "TITLE": "Emprendedor empleado Almacenes Éxito",
+    "CONDITION_TAB": "Términos y condiciones",
+    "CONDITION": "<p><strong>DECLARACIÓN [Nombre] [Apellido], Cédula de ciudadanía [Numero de CC del usuario] ANEXA AL CONTRATO DE TRABAJO CON [Sociedad en la que labora el empleado]</strong> En mi condición de empleado de Almacenes Éxito S.A, declaro expresamente que: <p><strong>PRIMERO:</strong> Por mi propia voluntad manifiesto mi interés en participar del programa “CLICKAM”, como un acto de comercio independiente y ajeno a mi relación laboral y del cual conozco y acepto sus términos y condiciones.</p> <p><strong>SEGUNDO: </strong>Que en mi contrato de trabajo se encuentra pactada cláusula de exclusividad por lo que solicité a mi empresa empleadora, la autorización para participar del programa CLICKAM y me fue concedida dicha autorización, sin que ello implique eliminación de la cláusula de exclusividad la que continúa vigente frente a otros programas, proyectos o terceros.</p><p><strong>TERCERO: </strong>La actividad que sobre referidos realice en el programa CLICKAM, no hace parte de la relación laboral actualmente vigente ni se constituye en otra relación de trabajo, ni mi empleador me remunera por ello, la ejecuto por mi propia cuenta y riesgo, en mi tiempo no laboral y me comprometo a no hacer uso de las herramientas de trabajo y medios tecnológicos o de información de mi empresa empleadora, así como reitero mi compromiso de cumplir cabalmente todas y cada una de las obligaciones contenidas en el contrato de trabajo y demás reglamentos existentes.</p><p><strong>CUARTO: </strong>La retribución, beneficios o prerrogativas que a mi favor puedan derivarse por las actividades del programa CLICKAM, no son constitutivos de salario para ningún efecto y declaro expresamente que las cargas impositivas por tributos y/o impuestos que puedan derivarse por hacer parte del programa CLICKAM o recibir sus beneficios, serán de mi exclusiva cuenta y riesgo.</p>",
+    "LEGAL_TAB": "Términos legales de usuario",
+    "LEGAL": "<h2 class='border-bottom-orange-init'>TERMINOS Y CONDICIONES GENERALES</h2><p>MARKETPLACE INTERNACIONAL EXITO Y SERVICIOS S.A.S. ( “MPI”) es una sociedad comercial domiciliada en la República de Colombia que pone a disposición en su aplicativo web www.clickam.com.co ( “La Plataforma” o “clickam.com.co”) una plataforma que permite la exhibición y comercialización de bienes y/o servicios (“los Productos”) por parte de vendedores nacionales o internacionales que actúan a título personal y que por tanto son independientes a MPI (“los Vendedores”), para la adquisición en línea de los mismos por parte de los consumidores (“Clientes” o “Usuarios”), y gracias a la intermediación de los emprendedores inscritos en el programa CLICKAM &#40;&quot;el Programa&quot;&#41;.</p><p>MPI por tanto, no es distribuidor de los Productos ofrecidos por los Vendedores, no tiene ninguna posición contractual dentro de la transacción efectuada entre Clientes y Vendedores, y tampoco podrá ser calificado como revendedor de los productos ofrecidos por los Vendedores en clickam.com.co</p><p>Los presentes Términos y Condiciones están sujetos a cambios sin previo aviso, en cualquier momento, y a partir de la fecha de modificación de estos Términos y Condiciones, todas las operaciones que se celebren entre pling.com.co y el Usuario se regirán por el documento modificado.</p><h3>Ámbito de aplicación de las Condiciones de Uso</h3><p>Las presentes condiciones generales de uso de la plataforma www.clickam.com.co (“Condiciones de Uso”) se aplican a todos los pedidos de Productos realizados por los Usuarios a los Vendedores o Líneas de Negocio vinculadas al Programa. Las Condiciones de Uso aplicables son las que se encuentren vigentes en el momento de realizar el pedido por parte del Usuario. De igual manera, el Vendedor por el sólo hecho de exhibir los Productos en la plataforma confirma el entendimiento y acepta incondicionalmente la aplicación de los mismos.</p><h3>Capacidad para el uso de la plataforma</h3><p>Los bienes y servicios ofrecidos en la Plataforma únicamente podrán ser utilizados por personas que tengan capacidad legal para contratar de conformidad con lo dispuesto por la legislación colombiana vigente.</p><h3>Emprendedor Clicker / Cliente</h3><p>No existirá ningún tipo de relación contractual o responsabilidad legal entre el emprendedor y el cliente, ya que la venta final será dada entre determina línea de negocio y el cliente final.</p><h3>Proceso de venta</h3><p>Los clientes pueden ordenar los Productos o Servicios ofrecidos en la Plataforma, por intermedio de los Emprendedores. La descripción de los Productos es suministrada por los Emprendedores y complementada por la información dispuesta en la Plataforma y la que llegare a informar cada uno de los Vendedores o líneas de negocio vinculadas, siendo por tanto éstos los responsables de la integridad de la descripción facilitada y la conformidad de los Productos con dicha descripción.</p><p>Al hacer clic en el icono Acepto Términos y Condiciones al ingresar por primer vez a la plataforma, el Emprendedor y los Clientes contactados declaran aceptar plenamente y sin reserva alguna la totalidad de las Condiciones de Uso de la Plataforma y el marco regulatorio del mismo.</p><p>Una vez confirmado el contenido de la orden, aceptadas los Términos y Condiciones de la Plataforma y de cada una de las líneas de negocio ofrecidas, el Referido validará definitivamente su orden por el pago efectivo en cada una de las plataformas de los negocios. El pedido será válido únicamente a partir del pago total del precio del Producto.</p><p>La venta efectuada por parte del Vendedor está sujeta a la condición resolutoria de que el producto esté disponible.</p><p>MPI no recoge ni recibe en ningún momento los fondos de los pedidos realizados a través de la Plataforma y por intermedio de los Emprendedores. Todo pedido que no haya sido pagado en su totalidad será denegado.</p><p>Cada uno de los vendedores o líneas de negocio vinculadas confirmarán sistemáticamente la orden de compra por correo electrónico a cada Usuario o cliente (siempre y cuando esta sea aceptada por el banco o el medio de pago escogido). Tras la aceptación del pedido, la información de éste permanecerá accesible en el Sitio en “estado de pedidos”.</p><p>MPI y/o la plataforma notificará al Vendedor si uno o más de los Productos tienen una orden de compra de un Cliente. El Vendedor tiene veinticuatro (24) horas hábiles para confirmar o negar  el estado de compra. Una vez verificado lo anterior, MPI comunicará al emprendedor el estado de su venta, cabe anotar que el emprendedor contara con 8 días para gestionar la finalización de la venta, de lo contrario y si esta se da posterior a estos 8 días, no podrá acceder a la comisión por la misma.</p><p>Si el Vendedor confirma la disponibilidad de los Productos o servicios, el contrato de venta se concluye definitivamente entre el Vendedor y el Cliente.</p><p>El Vendedor o Línea de Negocio es el único responsable en caso de no disponibilidad del Producto ya que este punto solo lo controla el mismo.</p><h3>Envío y entrega</h3>  <p>Todas las condiciones y tiempos de entrega en productos y servicios serán responsabilidad de cada una de las líneas de negocios, de acuerdo a sus políticas y términos y condiciones.</p><h3>Precios</h3><p>Los precios de los Productos son determinados libremente por los Vendedores o Líneas de Negocio y se indican excluyendo el precio de su envío en la ficha de los Productos, en la línea correspondiente al Vendedor o Producto seleccionado. Si es necesario, se añaden los gastos de envío al precio de los Productos antes de la validación final por el Cliente.</p><p>Todos los Productos ofrecidos por los Emprendedores y relacionados en la Plataforma incluyen en el precio todos los impuestos legalmente aplicables en Colombia.</p><p>Algunos de los Productos ofrecidos por los Emprendedores y relacionados en la plataforma pueden sufrir algunos cambios en el precio durante el día por causas ajenas a la voluntad de los Vendedores, por ejemplo aquellas derivadas de la fluctuación de divisas.</p><h3>Responsabilidad</h3><p>Los Productos ofrecidos por los Emprendedores y a través de la Plataforma están sujetos a disponibilidad y se ofrecen de forma limitada hasta agotar las existencias informadas por los Vendedores o Líneas de Negocio. Eventualmente podría suceder que un mismo producto sea adquirido por varios Usuarios al mismo tiempo, y que al final del proceso de venta resulte que el Producto ya no se encuentre disponible debido al agotamiento de todas las unidades disponibles, aun cuando tu como emprendedor lo hayas ofrecido y se relacionará como Producto disponible en la Plataforma. En este caso se procederá a informar al Cliente la situación, se le notificara la imposibilidad de procesar su orden de compra.</p><p>Los Vendedores o Líneas de Negocio no podrán ser declarados responsables o que incumplen las presentes Condiciones de Uso por cualquier retraso o incumplimiento derivado de la entrega de los Productos, siempre que dicha eventualidad tenga como causa un evento de fuerza mayor o caso fortuito de conformidad con las Leyes colombianas.</p><p>Los Productos ofrecidos por los Referidores y a través de la Plataforma son de absoluta responsabilidad de los Vendedores o líneas de negocio, así como también el uso de las marcas que los identifican. De manera que los Vendedores serán los únicos responsables en el evento en que terceros consideren que sus derechos de propiedad intelectual han sido infringidos por la venta de los mismos y, por tanto, cualquier reclamación por este concepto deberá ser remitida directamente a los Vendedores.</p><h3>Reclamaciones y Garantías</h3><p>MPI opera como un simple facilitador de la Plataforma para la ejecución del Programa, con el fin de que los Vendedores y las distintas líneas de ofrezcan su portafolio. MPI en todo caso no es un revendedor de los Productos ofrecidos. Por tanto, cualquier reclamación sobre la no conformidad o calidad de los Productos deberá ser realizada directamente por el Usuario al Proveedor a través de clickam@grupo-exito.com</p><p>El Vendedor es el único responsable de los Productos ofrecidos por los Emprendedores y a través de la Plataforma, MPI sin embargo, se reserva el derecho de intervenir en los procesos de reclamación y/o garantías, si el Vendedor no proporciona ninguna respuesta a una solicitud del Usuario en relación a dichos conceptos dentro de los 5 días hábiles.</p><p>MPI no asume responsabilidad alguna y bajo ninguna circunstancia de las garantías otorgadas por los Vendedores de los Productos, por tanto el Usuario Referido deberá contactar directamente al Vendedor para hacer efectiva la garantía.</p><h3>Protección de datos personales</h3><h3>Modificación de las Condiciones de Uso</h3><p>Éxito se reserva el derecho de realizar modificaciones, adiciones o inserciones a las presentes Condiciones de Uso en cualquier momento. Por tanto, los Usuarios quedarán sujetos a las condiciones vigentes a la fecha en que realice una orden de compra.</p><h3>Ley y jurisdicción aplicable.</h3><p>Los presentes Términos y Condiciones se rigen e interpretan de conformidad con las leyes de la República de Colombia. Cualquier controversia relativa a la misma estará sujeta a los tribunales de la República de Colombia.</p><h3>Invalidez</h3><p>En el evento en que cualquier disposición de los presentes Términos y Condiciones se considere nula, ineficaz, o inválida, en forma parcial o total por un tribunal o cualquier autoridad competente, dicha declaratoria no afectará la validez de las demás disposiciones, las cuales continuarán vigentes.</p><h3>Términos y condiciones Viajes Éxito</h3><p>Este reglamento delimita y aclara las condiciones bajo las cuales se regirá la participación de Viajes Éxito como aliado comercial en el proyecto CLICKAM. Lo aquí dispuesto será de acatamiento obligatorio para las dos partes implicadas.</p><p>La comisión sólo será válida si el cliente es cliente nuevo de Viajes Éxito, es decir, si no ha comprado nunca antes en Viajes Éxito y su primera compra la realiza como cliente de la App. Se pagará una comisión de $50.000cop al emprendedor cada vez que su cliente realice una compra de paquete y/o de $20.000cop por cada compra de hotel, vuelo nacional, vuelo internacional, actividad o circuito realizado a través de cualquiera de nuestros canales.</p><p>La comisión se pagará por pasajero/cliente y no por transacción.</p><p>La comisión sólo se pagará si el cliente es quien compra y paga el servicio.</p><p>La comisión se paga si se cumplen los siguientes requisitos:</p><ul>  <li>Que se inscriba</li>  <li>Que se haga el pedido a través de cualquiera de los tres canales.</li>  <li>Que se pague el pedido</li></ul><p>El cliente tendrá un plazo de 8 días para realizar la compra, para que sea efectivo y se pague la comisión.</p><p>Los asesores de puntos de venta contratados actualmente por Viajes Éxito y los asesores del contact center contratados por One Link no podrán ser emprendedores del negocio viajes éxito.</p><p>La comisión no aplica para cruceros, ni Asist card.</p><h3>Términos y condiciones Éxito.com, Bronzini.com y Arkitect.com</h3><p>No se pagarán comisiones sobre pedidos que hayan sido devueltos ejerciendo el derecho de retracto.</p><p>Los términos y condiciones, las políticas de datos personales y las políticas de privacidad que aplican a los clientes y usuarios serán los establecidos en los legales de cada sitio web. Los cuales podrán cambiar sin previo aviso.</p><p>Las compras se deben realizar a nombre del cliente identificado con su número de cédula a través de las páginas web de Arkitec, Bronzini y éxito.com.</p><p>El emprendedor podrá ganar comisiones por todos los pedidos que hagan sus clientes si cumplen con la condición de no haber realizado compras en los últimos 3 meses para alimentos o en los últimos 12 meses para categorías de no alimentos.</p><h3>Términos y condiciones Seguros Éxito</h3><p>SEGUROS GENERALES SURAMERICANA S.A. y SEGUROS DE VIDA SURAMERICANA S.A., en adelante SURA, se permite informar los términos y condiciones que regirán la relación con la aplicación CLICKAM:</p><p>SURA se encargará de analizar la viabilidad de vincular o no a un cliente a la póliza solicitada, de conformidad con los lineamientos y procedimientos establecidos internamente. En caso de que el cliente referenciado sea rechazado en el proceso de compra, no se generará ninguna comisión.</p><p>El cliente dispondrá 8 días calendario para finalizar el proceso de compra después de haber sido referido y de haber recibido la URL para realizar el pago. Si después de 8 días calendario el cliente no ha realizado la compra, se eliminará de la lista de clientes interesados, por lo que en el eventual caso de que el cliente realice la compra después de este término, no se generará ningún pago del servicio a favor del emprendedor.</p><p>La comisión se pagará al emprendedor por cada uno de los seguros que sean efectivamente expedidos y recaudados por la Compañía.</p><p>No se generará pago de comisión por aquellas pólizas que hayan sido compradas por el cliente de manera previa a la referenciación en cualquiera de los canales de SURA.</p><p>El pago de la comisión corresponde al valor absoluto definido en las características de cada producto y no dependerá del valor de la prima de la póliza adquirida por el cliente.</p><p>Sólo se pagará la comisión al emprendedor por el producto para el cual el cliente fue referido. En caso de que el cliente esté interesado en adquirir varios productos, éste debe ser referido para cada uno de ellos.</p>",
+    "PROTECTION_TAB": "Protección de datos",
+    "PROTECTION": "<h2 class='border-bottom-orange-init'>Autorización para el tratamiento de datos personales de referidos</h2><p>Autorizo a MARKETPLACE INTERNACIONAL ÉXITO Y SERVICIOS S.A.S y a ALMACENES ÉXITO S.A. para que traten mis datos personales suministrados en la presente plataforma virtual con los siguientes fines:</p><ol><li>Cumplir las obligaciones derivadas de las relaciones contractuales que llegare a establecer conmigo; otorgarme garantía sobre productos adquiridos cuando ello proceda; e informarme sobre condiciones comerciales y servicios postventa, entre otras acciones derivadas del negocio que celebremos.</li><li>Realizar trazabilidad de las acciones asociadas a su participación en esta aplicación, generando reporte y estadísticas sobre la misma.</li><li>Realizar acciones de inteligencia de negocios, creación de ofertas a la medida, investigación y tendencias de mercado; identificar trazabilidad y patrones de consumo con fines estadísticos; entendimiento de perfiles, rutas de navegación, seguimiento de marcas y demás comportamientos en redes sociales.</li><li>Contactarme a través de diversos canales físicos y electrónicos, como pueden ser volantes, contacto telefónico, mensajes de texto, correo electrónico, o cualquier otro por mi autorizado, para invitarme a participar del programa de lealtad; comunicarme promociones y publicidad sobre productos, bienes y servicios, así como enviarme obsequios por campañas publicitarias, e invitaciones a eventos de interés relacionados.</li><li>Entregarlos a sus empresas filiales, subsidiarias, sociedades en las cuales tenga directa o indirectamente participación accionaria, a sus aliados estratégicos y socios de negocio, así como al Grupo Casino, para las finalidades aquí mencionadas, en relación con su vínculo comercial con ALMACENES ÉXITO S.A. y MARKETPLACE INTERNACIONAL ÉXITO Y SERVICIOS S.A.S.</li><li>Entregarlos a terceros encargados de alguno de los tratamientos aquí mencionados, en Colombia o en el exterior.</li><li>Entregarlos a la compañía administradora de su programa de lealtad, PUNTOS COLOMBIA S.A.S., para que además esta me invite a participar en la totalidad de beneficios que ofrecerá su ecosistema de puntos y aliados. Consultarlos en bases de datos con vocación pública para la gestión de riesgos.</li><li>En relación con los datos biométricos que MARKETPLACE INTERNACIONAL ÉXITO Y SERVICIOS S.A.S y ALMACENES ÉXITO S.A. te llegare a solicitar, tales como la huella dactilar, fotografías, entre otros, te recordamos el carácter facultativo de la respuesta a las solicitudes que te hagamos en relación con tales datos.</li></ol><p>Consulta nuestra política de protección de datos personales en <a href='www.grupoexito.com.co' target='_blank'>www.grupoexito.com.co</a> y ten presente que entre los canales para el ejercicio de tus derechos de habeas data a consultar, actualizar, corregir, rectificar, suprimir tus datos o revocar tu autorización, tenemos a tu disposición el correo electrónico proteccion.datos@grupo-exito.com</p>"
+  },
+  "PROFILE": {
+    "PROFILE": "Perfil"
+  },
+  "UNDER_CONSTRUCTION": {
+    "SORRY": "Discúlpanos, está página esta en construcción"
+  },
+  "REPORTS": {
+    "REPORTS": "Reportes",
+    "SELL_REPORTS": "Reporte de ventas",
+    "DOWNLOAD_REPORT": "Descarga el reporte de ventas",
+    "DOWNLOAD": "Descargar",
+    "CROSS": "Cruzar ventas",
+    "UPLOAD": "Sube los archivos de cada negocio por separado.",
+    "TRIPS": "VENTAS VIAJES",
+    "ASSURED": "VENTAS SEGUROS"
+  }
+}

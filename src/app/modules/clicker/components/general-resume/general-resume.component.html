@@ -1,0 +1,37 @@
+<h2 class="border-bottom-orange-init">
+  {{ "GENERAL_RESUME.TITLE" | translate }}
+</h2>
+
+<div
+  class="sell card mb-2"
+  fxLayout="row"
+  fxLayoutGap="10px"
+  fxLayoutAlign="start center"
+  
+>
+  <div fxLayout="column">
+    <img src="assets/img/money-bag.svg" alt="comisiones" />
+  </div>
+  <div fxLayout="column" >
+    <span class="number">{{totalComissions | currency : '' : 'symbol' : '1.0-0'}}</span>
+    <span class="subtitle">{{ "GENERAL_RESUME.COMISSIONS" | translate }}</span>
+  </div>
+</div>
+
+<div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start start" class="mb-3">
+  <div fxLayout="column" fxFlex="33" class="card card-height">
+    <img class="pb-4 icon-resume" src="assets/img/link.svg" alt="link" />
+    <span class="number">{{linksGenerated}}</span>
+    <span class="subtitle">{{ "GENERAL_RESUME.LINKS_CREATED" | translate }}</span>
+  </div>
+  <div fxLayout="column" fxFlex="33" class="card card-height">
+    <img class="pb-3 icon-resume" src="assets/img/HomePage.svg" alt="page" />
+    <span class="number">{{totalProducts}}</span>
+    <span class="subtitle">{{ "GENERAL_RESUME.PRODUCTS_SELLER" | translate }}</span>
+  </div>
+  <div fxLayout="column" fxFlex="33" class="card card-height">
+    <img class="pb-4 icon-resume" src="assets/img/conversion.svg" alt="conversion" />
+    <span class="number">{{conversionRate | percent:'1.2'}}</span>
+    <span class="subtitle">{{ "GENERAL_RESUME.CONVERSION" | translate }}</span>
+  </div>
+</div>

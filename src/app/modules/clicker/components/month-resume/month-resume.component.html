@@ -1,0 +1,29 @@
+<h2 class="border-bottom-orange-init">{{ 'MONTH_RESUME.TITLE' | translate }}</h2>
+
+<div class="stadistic" fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutGap.xs="30px" fxLayoutGap.gt-xs="20px" fxLayoutAlign.xs="start center"  fxLayoutAlign.gt-xs="flex-start flex-start">
+    <div fxLayout="row" fxLayoutGap.xs="20px" fxLayoutAlign="space-around">
+    <div fxLayout="column" fxFLex="50" class="card">
+        <span class="number">{{totalComissions | currency : '' : 'symbol' : '1.0-0'}}</span>
+        <span class="gray border-bottom-blue-init">{{ 'MONTH_RESUME.COMISSIONS' | translate }}</span>
+    </div>
+
+    <div fxLayout="column" fxFLex="50"  class="card">
+            <span class="number">{{linksCreated}}</span>
+            <span class="gray border-bottom-blue-init">{{ 'MONTH_RESUME.LINKS_CREATED' | translate }}</span>
+    </div>
+    </div>
+    <div *ngIf="data.length > 0">
+        <google-chart
+        [title]="title"
+        [type]="type"
+        [data]="data"
+        [columnNames]="columnNames"
+        [options]="options"
+        ></google-chart>
+    </div>
+    <div *ngIf="data.length === 0" class="pr-5 mr-2">
+        <img src="assets/img/no-ventas.svg" alt="">
+        <h3 class="gray border-bottom-blue-init">Aún no has hecho ventas</h3>
+    </div>
+
+</div>

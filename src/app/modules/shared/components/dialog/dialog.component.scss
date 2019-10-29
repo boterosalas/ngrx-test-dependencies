@@ -1,0 +1,39 @@
+@import 'variables';
+@import 'general';
+
+.close {
+  margin: 12px 10px;
+  background:$gray2;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 16px;
+  text-align: center;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.discount{
+  color: $primary-color;
+  font-size: 1rem;
+}
+
+.plu{
+  color: $gray2;
+}
+
+
+.small {
+  font-size: .8rem !important;
+}
+
+.text-line{
+  text-decoration: line-through;
+  color: $color-p !important;
+}
+
+
+@media screen and (min-width: 600px) {
+  .img-desk{
+      width: 200px;
+  }
+}

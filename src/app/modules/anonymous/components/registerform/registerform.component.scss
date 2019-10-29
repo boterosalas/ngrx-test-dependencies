@@ -1,0 +1,31 @@
+@import 'variables';
+@import 'general';
+
+.register-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .register-container > * {
+    width: 100%;
+  }
+  
+  .mat-orange{
+    background: $primary-color;
+    color: $white;
+  }
+
+  .terms{
+    max-height: 172px;
+    overflow: auto;
+    margin-bottom: 18px;
+    border: 2px solid #b0b0b0;
+    padding: 0 10px;
+    border-radius: 5px;
+  }
+
+  .center{
+    margin: 0 auto;
+    display: block;
+    width: 100%;
+  }

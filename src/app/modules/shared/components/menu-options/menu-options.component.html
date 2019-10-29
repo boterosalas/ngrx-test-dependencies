@@ -1,0 +1,16 @@
+<div fxLayout.lt-md="{{layoutmd}}" fxLayout.gt-xs="{{layoutxs}}" fxLayoutAlign="{{aligmentdesktop}}" fxLayoutAlign.xs="{{aligment}}">
+  
+    <span
+      *ngFor="let item of options; let i =index"
+      routerLink="{{ item.route }}"
+      (click)="hideMenu()"
+      class="item"
+      routerLinkActive="active"
+      matRipple
+    >
+    <span *ngIf="showIcon">
+        <img src="assets/img/dashboard/icon-{{i}}.svg" alt="icon">
+        </span>
+      <a matRipple class="cursor-pointer" id="{{section}}{{i}}"> {{ item.name }} </a>
+</span>
+  </div>

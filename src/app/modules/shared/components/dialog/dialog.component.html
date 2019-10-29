@@ -1,0 +1,26 @@
+<div id={{data.id}}>
+    <div fxLayoutAlign="end">
+        <a id="closeDialog" matRipple (click)="onNoClick()" *ngIf="data.showCloseIcon"><mat-icon class="close">close</mat-icon></a>
+    </div>
+    <h1 mat-dialog-title *ngIf="data.showTitle">{{data.title}}</h1>
+    <div mat-dialog-content>
+        <div fxLayout="row" *ngIf="data.showProduct" fxLayoutGap="15px" class="mb-2">
+            <div fxLayout="column" fxFlex="50">
+                <img class="responsive-img img-desk" src="{{data.img}}" alt="{{data.title}}">
+            </div>
+            <div fxLayout="column" fxFlex="50">
+                <h3 class="title m-0">{{data.title}}</h3>
+                <span *ngIf="data.showComission">Comisión:</span>
+                <span class="discount small text-line">{{data.discount | currency : '' : 'symbol' : '1.0-0'}}</span>
+                <span class="discount">{{data.price | currency : '' : 'symbol' : '1.0-0'}}</span>
+                <span class="plu" *ngIf="data.showPlu">PLU:{{data.plu}} </span>
+            </div>
+        </div>
+        <ng-container *ngTemplateOutlet="data.template">
+        </ng-container>
+    </div>
+    <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()" *ngIf="data.showClose">{{data.buttonClose}}</button>
+    <button mat-button *ngIf="data.showOk">{{data.buttonOk}}</button>
+    </div>
+</div>

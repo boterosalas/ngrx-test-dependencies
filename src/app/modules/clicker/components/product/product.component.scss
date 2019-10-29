@@ -1,0 +1,55 @@
+@import 'variables';
+@import 'general';
+@import 'animations';
+
+.title{
+    font-family: $font-galano;
+    font-weight: normal;
+    color:$gray;
+    min-height: 58px;
+}
+
+.small {
+    font-size: .8rem !important;
+}
+
+.text-line{
+    text-decoration: line-through;
+    color: $color-p !important;
+}
+
+.discount{
+    color: $primary-color;
+    font-size: 1rem;
+}
+
+.img-responsive{
+    max-width: 100%;
+}
+
+.gray {
+    color: $gray;
+}
+
+.img-container-seguros {
+    width: 100%;
+    display: flex;
+    max-height: 40px;
+    margin-top: 15px;
+}
+
+.img-container-viajes {
+    width: 100%;
+    display: flex;
+    margin-top: 15px;
+}
+
+
+@media screen and (min-width: 600px) {
+
+    .img-container-2{
+        max-width: 50%;
+        margin: 0px auto;
+        height: 20vh;
+    }
+}
