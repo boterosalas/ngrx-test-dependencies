@@ -11,7 +11,7 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { LinksService } from "src/app/services/links.service";
 import { of } from "rxjs/internal/observable/of";
 
-fdescribe("ReportsComponent", () => {
+describe("ReportsComponent", () => {
   let component: ReportsComponent;
   let fixture: ComponentFixture<ReportsComponent>;
 
@@ -81,10 +81,10 @@ fdescribe("ReportsComponent", () => {
     const mockFile = new File([""], "name.xlsx", { type: "text/html" });
     const mockEvt = { target: { files: [mockFile] } };
     component.onFileChangeTrip(mockEvt);
-    // fixture.whenStable().then(() => {
-    //   tick();
-    //   expect(mockLinksService.sendfile).toHaveBeenCalled();
-    // })
+    fixture.whenStable().then(() => {
+      tick();
+      expect(mockLinksService.sendfile).toHaveBeenCalled();
+    })
   });
 
   it("on file change trip invalid", () => {
@@ -111,10 +111,10 @@ fdescribe("ReportsComponent", () => {
       const mockFile = new File([""], "name.xlsx", { type: "text/html" });
       const mockEvt = { target: { files: [mockFile] } };
       component.onFileChangeAssured(mockEvt);
-      // fixture.whenStable().then(() => {
-      //   tick();
-      //   expect(mockLinksService.sendfile).toHaveBeenCalled();
-      // })
+      fixture.whenStable().then(() => {
+        tick();
+        expect(mockLinksService.sendfile).toHaveBeenCalled();
+      })
     });
 
     it("on file change trip invalid", () => {
