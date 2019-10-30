@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
+import { Component, OnInit, Input } from '@angular/core'
 
 @Component({
   selector: 'app-table-users',
@@ -14,10 +13,7 @@ export class TableUsersComponent implements OnInit {
 
   displayedColumns: string[] = ['identification', 'name', 'cellphone', 'email', 'origin', 'verified', 'status'];
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
   }
 
 }

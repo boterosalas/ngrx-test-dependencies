@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchUsersComponent } from './search-users.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('SearchUsersComponent', () => {
   let component: SearchUsersComponent;
@@ -8,7 +13,17 @@ describe('SearchUsersComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchUsersComponent ]
+      declarations: [ SearchUsersComponent ],
+      imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        AppMaterialModule,
+        TranslateModule.forRoot({}),
+        BrowserAnimationsModule
+      ],
+      schemas: [
+        NO_ERRORS_SCHEMA
+      ]
     })
     .compileComponents();
   }));
