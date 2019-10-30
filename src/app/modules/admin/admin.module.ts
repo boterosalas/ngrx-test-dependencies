@@ -59,6 +59,9 @@ const routes: Routes = [
   ],
   exports:[
     SideMenuComponent
+  ],
+  entryComponents: [
+    DialogUserComponent
   ]
 })
 export class AdminModule {}

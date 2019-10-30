@@ -1,1 +1,84 @@
-<p>dialog-user works!</p>
+<div id="{{ data.id }}">
+  <div fxLayout="column" fxLayoutAlign="center" class="border-bottom-gray">
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+          <h3 class="mb-3">{{ data.name }} {{data.lastNames}}</h3>
+        <a id="closeDialog" matRipple (click)="onNoClick()"
+          ><mat-icon class="close">close</mat-icon></a
+          >
+      </div>
+  </div>
+  <div mat-dialog-content>  
+      <div fxLayout="row">
+          <div fxLayout="column" fxFlex="70">
+              <div class="personal-information">
+                  <h3>Información personal</h3>
+                  <p><span>DOCUMENTO</span> {{data.identification}}</p>
+                  <p><span>CORREO ELECTRÓNICO </span>{{data.email}}</p>
+                  <p><span>CELULAR</span> {{data.cellphone}}</p>
+                  <p><span>DIRECCIÓN</span> {{data.address}}</p>
+              </div>
+              <div class="bank-information">
+                  <h3>Información Bancaria</h3>
+                  <p><span>BANCO</span> {{data.bank}}</p>
+                  <p><span>CUENTA</span> {{data.account}}</p>
+              </div>
+
+          </div>
+          <div fxLayout="column" fxFlex="30" fxLayoutAlign="start start">
+              <div class="user-status">
+                  <h3>Usuario</h3>
+                  
+                  <p>ESTADO</p>
+
+                  <mat-slide-toggle [(ngModel)]="data.status">
+                        <span *ngIf="data.status === true">
+                            Activo
+                        </span>
+                        <span *ngIf="data.status === false">
+                            Inactivo
+                        </span>
+                    </mat-slide-toggle>
+
+                  <p>RECIBE COMUNICACIONES</p>
+                  <mat-slide-toggle [(ngModel)]="data.comunications">
+                      <span *ngIf="data.comunications === true">
+                          Si
+                      </span>
+                      <span *ngIf="data.comunications === false">
+                          No
+                      </span>
+                  </mat-slide-toggle>
+
+                  <p>ORIGEN</p>
+                  <span>{{data.origin}}</span>
+
+                  <p>VERIFICACIÓN</p>
+                    <mat-slide-toggle [(ngModel)]="data.verified">
+                        <span *ngIf="data.verified === true">
+                            Aprobado
+                        </span>
+                        <span *ngIf="data.verified === false">
+                             Pendiente
+                        </span>
+                    </mat-slide-toggle>
+              </div>
+
+              <div class="files" fxLayout="column" *ngIf="data.origin === false">
+                  <h3>Archivos adjuntos</h3>
+
+                    <a [href]="data.imgid1" target="_blank">Cédula 1</a>
+                    <a href={{data.imgid2}} target="_blank">Cédula 2</a>
+                    <a href={{data.certification}} target="_blank">Cert.bancaria</a>
+
+              </div>
+
+          </div>
+      </div>
+  </div>
+  <!-- <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()" *ngIf="data.showClose">
+      {{ data.buttonClose }}
+    </button>
+    <button mat-button *ngIf="data.showOk">{{ data.buttonOk }}</button>
+  </div> -->
+</div>
