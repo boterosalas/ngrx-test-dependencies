@@ -84,7 +84,7 @@ export class RecoverpasswordformComponent implements OnInit, OnDestroy {
         if (resp.state === "Success") {
           Swal.fire({
             title: "Recuperación de contraseña",
-            text: "Tu contraseña ha sido reestablecida exitosamente",
+            text: "Tu contraseña ha sido restablecida exitosamente",
             type: "success",
             confirmButtonText: "Aceptar",
             confirmButtonClass: 'accept-recover-alert-success'

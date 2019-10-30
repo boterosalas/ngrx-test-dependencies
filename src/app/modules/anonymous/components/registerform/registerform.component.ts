@@ -151,7 +151,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
         this.loading.hide();
         if (resp.state === "Success") {
           Swal.fire({
-            title: "Registro valido",
+            title: "Registro válido",
             text: "Se ha registrado satisfactoriamente. Por favor, revise su correo para activar su cuenta.",
             type: "success",
             confirmButtonText: "Aceptar",
@@ -161,7 +161,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
           });
         } else {
           Swal.fire({
-            title: "Registro invalido",
+            title: "Registro inválido",
             text: resp.userMessage,
             type: "error",
             confirmButtonText: "Aceptar",

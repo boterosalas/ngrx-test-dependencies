@@ -44,6 +44,18 @@
     margin-top: 15px;
 }
 
+.container-info{
+    max-width: 20vh;
+    min-width: 20vh;
+}
+
+@media screen and (max-width: 350px) {
+    .container-info{
+        max-width: 15vh;
+        min-width: 15vh;
+    }
+}
+
 
 @media screen and (min-width: 600px) {
 
