@@ -17,6 +17,8 @@ import { distinctUntilChanged } from "rxjs/operators";
 import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog.component";
 import { ContentService } from 'src/app/services/content.service';
 import { LinksService } from 'src/app/services/links.service';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: "app-tabs",
@@ -205,8 +207,13 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
    */
 
   public dataProduct(product) {
-    const productUrl = product.link;
-    this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=${this.identification}`;
+    if(environment.production === false) {
+      const productUrl = product.link;
+      this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=${this.identification}`;
+    } else {
+      const productUrl = product.linkText;
+      this.url = `https://www.exito.com/${productUrl}/p?utm_source=clickam&utm_medium=referral&utm_campaign=${this.identification}`;
+    }
     this.subscription = this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
       this.urlshorten = resp;
     });
