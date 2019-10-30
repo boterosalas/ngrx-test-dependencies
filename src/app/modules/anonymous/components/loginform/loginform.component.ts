@@ -79,7 +79,7 @@ export class LoginformComponent implements OnInit, OnDestroy {
           this.routeBased();
         } else {
           Swal.fire({
-            title: "Login invalido",
+            title: "Login inválido",
             text: resp.userMessage,
             type: "error",
             confirmButtonText: "Aceptar",
