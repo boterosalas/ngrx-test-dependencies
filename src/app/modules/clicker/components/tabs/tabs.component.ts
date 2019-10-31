@@ -217,6 +217,9 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
     this.subscription = this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
       this.urlshorten = resp;
     });
+    setTimeout(() => {
+      this.saveLink();
+    }, 1500);
     this.formShareLink();
     const title = product.productName;
     const id = product.productId;
