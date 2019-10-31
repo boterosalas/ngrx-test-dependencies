@@ -20,6 +20,7 @@ import { AuthGuard } from 'src/app/auth.guard';
 import { MatPaginatorIntl } from '@angular/material';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ProfileFormComponent } from './components/profile-form/profile-form.component';
+import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 
 const routes: Routes = [
   {
@@ -39,7 +40,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [HomeComponent, ProductComponent, SliderComponent, TabsComponent, MonthResumeComponent, GeneralResumeComponent, ReportComponent, ProfileComponent, ProfileFormComponent],
+  declarations: [HomeComponent, ProductComponent, SliderComponent, TabsComponent, MonthResumeComponent, GeneralResumeComponent, ReportComponent, ProfileComponent, ProfileFormComponent, TruncatePipe],
   imports: [
     CommonModule,
     AppMaterialModule,
