@@ -4,6 +4,8 @@ import { ProductComponent } from './product.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ProductComponent', () => {
   let component: ProductComponent;
@@ -11,13 +13,16 @@ describe('ProductComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductComponent ],
+      declarations: [ ProductComponent, TruncatePipe ],
       imports: [
         AppMaterialModule,
         FormsModule,
         ReactiveFormsModule
       ],
-      providers: []
+      providers: [],
+      schemas: [
+        NO_ERRORS_SCHEMA
+      ]
     })
     .compileComponents();
   }));
