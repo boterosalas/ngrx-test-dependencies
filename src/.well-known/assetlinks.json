@@ -1,12 +1,25 @@
-[
-  {
-    "relation": ["delegate_permission/common.handle_all_urls"],
-    "target": {
-      "namespace": "android_app",
-      "package_name": "com.companyname.Clickam",
-      "sha256_cert_fingerprints": [
-        "FF:00:E9:62:63:C0:CA:22:26:1B:17:40:44:64:B6:0D:4D:C8:A9:27:12:AF:F9:02:36:60:2A:1C:61:38:9A:28"
-      ]
-    }
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.clickam.appcompania",
+    "sha256_cert_fingerprints":
+    ["10:03:EB:02:BA:E5:F5:6B:24:E7:D0:5B:3F:B1:ED:1A:94:BA:B2:9C:77:76:47:A4:3A:91:E7:44:D5:51:32:63"]
   }
-]
+},
+{
+  "relation": ["delegate_permission/common.get_login_creds"],
+  "target": {
+    "namespace": "web",
+    "site": "https://www.clickam.co"
+  }
+},
+{
+  "relation": ["delegate_permission/common.get_login_creds"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.clickam.appcompania",
+    "sha256_cert_fingerprints":
+    ["10:03:EB:02:BA:E5:F5:6B:24:E7:D0:5B:3F:B1:ED:1A:94:BA:B2:9C:77:76:47:A4:3A:91:E7:44:D5:51:32:63"]
+  }
+}]
