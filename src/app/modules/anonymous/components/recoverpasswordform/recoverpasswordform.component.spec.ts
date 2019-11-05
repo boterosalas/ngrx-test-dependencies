@@ -74,18 +74,6 @@ describe('RecoverpasswordformComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it("remove white space password", () => {
-    component.recoverPasswordForm.controls.password.setValue("1234 5678");
-    component.removewhiteSpaceRecover();
-    expect(component.recoverPasswordForm.controls.password.value).toBe("12345678");
-  });
-
-  it("remove white space Confirm password", () => {
-    component.recoverPasswordForm.controls.confirmPassword.setValue("1234 5678");
-    component.removewhiteSpaceConfirmRecover();
-    expect(component.recoverPasswordForm.controls.confirmPassword.value).toBe("12345678");
-  });
-
   it('recover password', () => {
     component.code= "123456";
     component.recoverPasswordForm.controls.password.setValue('123456');

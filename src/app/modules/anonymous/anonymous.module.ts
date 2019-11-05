@@ -22,6 +22,8 @@ import { ClickAcademyComponent } from './pages/click-academy/click-academy.compo
 import { OffersComponent } from './pages/offers/offers.component';
 import { FrequentQuestionsComponent } from './pages/frequent-questions/frequent-questions.component';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
+import { BlockCopyPasteDirective } from 'src/directives/copy.directive';
+import { KeySpaceDirective } from 'src/directives/space.directive';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -77,6 +79,8 @@ const routes: Routes = [
     OffersComponent,
     FrequentQuestionsComponent,
     TermsAndConditionsComponent,
+    BlockCopyPasteDirective,
+    KeySpaceDirective
     // ReportComponent
   ],
   imports: [
