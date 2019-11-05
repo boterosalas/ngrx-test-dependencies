@@ -1,36 +1,36 @@
 <div id="{{ data.id }}">
   <div fxLayout="column" fxLayoutAlign="center" class="border-bottom-gray">
       <div fxLayout="row" fxLayoutAlign="space-between center">
-          <h3 class="mb-3">{{ data.name }} {{data.lastNames}}</h3>
+          <h3 class="mb-3 gray-title">{{ data.name }} {{data.lastNames}}</h3>
         <a id="closeDialog" matRipple (click)="onNoClick()"
           ><mat-icon class="close">close</mat-icon></a
           >
       </div>
   </div>
   <div mat-dialog-content>  
-      <div fxLayout="row">
-          <div fxLayout="column" fxFlex="70">
+      <div fxLayout="row" fxLayoutGap="50px">
+          <div fxLayout="column" fxFlex="75">
               <div class="personal-information">
-                  <h3>Información personal</h3>
-                  <p><span>DOCUMENTO</span> {{data.identification}}</p>
-                  <p><span>CORREO ELECTRÓNICO </span>{{data.email}}</p>
-                  <p><span>CELULAR</span> {{data.cellphone}}</p>
-                  <p><span>DIRECCIÓN</span> {{data.address}}</p>
+                  <h3 class="gray-title">Información personal</h3>
+                  <p><span class="galano-bold gray">DOCUMENTO</span> {{data.identification}}</p>
+                  <p><span class="galano-bold gray">CORREO ELECTRÓNICO </span>{{data.email}}</p>
+                  <p><span class="galano-bold gray">CELULAR</span> {{data.cellphone}}</p>
+                  <p><span class="galano-bold gray">DIRECCIÓN</span> {{data.address}}</p>
               </div>
               <div class="bank-information">
-                  <h3>Información Bancaria</h3>
-                  <p><span>BANCO</span> {{data.bank}}</p>
-                  <p><span>CUENTA</span> {{data.account}}</p>
+                  <h3 class="gray-title">Información Bancaria</h3>
+                  <p><span class="galano-bold gray">BANCO</span> {{data.bank}}</p>
+                  <p><span class="galano-bold gray">CUENTA</span> {{data.typeBankAccount}} - {{data.bankAccountNumber}}</p>
               </div>
 
           </div>
-          <div fxLayout="column" fxFlex="30" fxLayoutAlign="start start">
+          <div fxLayout="column" fxFlex="25" fxLayoutAlign="start start">
               <div class="user-status">
-                  <h3>Usuario</h3>
+                  <h3 class="gray-title">Usuario</h3>
                   
-                  <p>ESTADO</p>
+                  <p class="galano-bold gray">ESTADO</p>
 
-                  <mat-slide-toggle [(ngModel)]="data.status">
+                  <mat-slide-toggle [(ngModel)]="data.status" color="orange-toggle">
                         <span *ngIf="data.status === true">
                             Activo
                         </span>
@@ -39,8 +39,8 @@
                         </span>
                     </mat-slide-toggle>
 
-                  <p>RECIBE COMUNICACIONES</p>
-                  <mat-slide-toggle [(ngModel)]="data.comunications">
+                  <p class="galano-bold gray">RECIBE COMUNICACIONES</p>
+                  <mat-slide-toggle [(ngModel)]="data.comunications" color="orange-toggle">
                       <span *ngIf="data.comunications === true">
                           Si
                       </span>
@@ -49,11 +49,15 @@
                       </span>
                   </mat-slide-toggle>
 
-                  <p>ORIGEN</p>
-                  <span>{{data.origin}}</span>
-
-                  <p>VERIFICACIÓN</p>
-                    <mat-slide-toggle [(ngModel)]="data.verified">
+                  <p class="galano-bold gray">ORIGEN</p>
+                     <span *ngIf="data.origin === true">
+                        Interno
+                    </span>
+                    <span *ngIf="data.origin === false">
+                        Externo
+                    </span>
+                  <p class="galano-bold gray">VERIFICACIÓN</p>
+                    <mat-slide-toggle [(ngModel)]="data.verified" color="orange-toggle">
                         <span *ngIf="data.verified === true">
                             Aprobado
                         </span>
@@ -64,11 +68,11 @@
               </div>
 
               <div class="files" fxLayout="column" *ngIf="data.origin === false">
-                  <h3>Archivos adjuntos</h3>
+                  <h3 class="gray-title">Archivos adjuntos</h3>
 
-                    <a [href]="data.imgid1" target="_blank">Cédula 1</a>
-                    <a href={{data.imgid2}} target="_blank">Cédula 2</a>
-                    <a href={{data.certification}} target="_blank">Cert.bancaria</a>
+                    <a [href]="data.fileIdentificationCard1" target="_blank"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cédula 1</a>
+                    <a [href]="data.fileIdentificationCard2" target="_blank"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cédula 2</a>
+                    <a [href]="data.fileBankCertificate" target="_blank"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cert.bancaria</a>
 
               </div>
 
