@@ -30,34 +30,34 @@
                   
                   <p class="galano-bold gray">ESTADO</p>
 
-                  <mat-slide-toggle [(ngModel)]="data.status" color="orange-toggle">
-                        <span *ngIf="data.status === true">
+                  <mat-slide-toggle  [(ngModel)]="data.state" (change)="changeStatus()" color="orange-toggle" labelPosition="before">
+                        <span *ngIf="data.state === true">
                             Activo
                         </span>
-                        <span *ngIf="data.status === false">
+                        <span *ngIf="data.state === false">
                             Inactivo
                         </span>
                     </mat-slide-toggle>
 
                   <p class="galano-bold gray">RECIBE COMUNICACIONES</p>
-                  <mat-slide-toggle [(ngModel)]="data.comunications" color="orange-toggle">
-                      <span *ngIf="data.comunications === true">
+                  <mat-slide-toggle [(ngModel)]="data.receiveCommunications" (change)="changeComunications()" color="orange-toggle" labelPosition="before">
+                      <span *ngIf="data.receiveCommunications === true">
                           Si
                       </span>
-                      <span *ngIf="data.comunications === false">
+                      <span *ngIf="data.receiveCommunications === false">
                           No
                       </span>
                   </mat-slide-toggle>
 
                   <p class="galano-bold gray">ORIGEN</p>
-                     <span *ngIf="data.origin === true">
+                     <span *ngIf="data.isEmployeeGrupoExito === true">
                         Interno
                     </span>
-                    <span *ngIf="data.origin === false">
+                    <span *ngIf="data.isEmployeeGrupoExito === false">
                         Externo
                     </span>
                   <p class="galano-bold gray">VERIFICACIÓN</p>
-                    <mat-slide-toggle [(ngModel)]="data.verified" color="orange-toggle">
+                    <mat-slide-toggle [(ngModel)]="data.verified" (change)="changeVerified()" color="orange-toggle" labelPosition="before">
                         <span *ngIf="data.verified === true">
                             Aprobado
                         </span>
@@ -67,7 +67,7 @@
                     </mat-slide-toggle>
               </div>
 
-              <div class="files" fxLayout="column" *ngIf="data.origin === false">
+              <div class="files" fxLayout="column" *ngIf="data.isEmployeeGrupoExito === false">
                   <h3 class="gray-title">Archivos adjuntos</h3>
 
                     <a [href]="data.fileIdentificationCard1" target="_blank"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cédula 1</a>
@@ -79,10 +79,4 @@
           </div>
       </div>
   </div>
-  <!-- <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()" *ngIf="data.showClose">
-      {{ data.buttonClose }}
-    </button>
-    <button mat-button *ngIf="data.showOk">{{ data.buttonOk }}</button>
-  </div> -->
 </div>
