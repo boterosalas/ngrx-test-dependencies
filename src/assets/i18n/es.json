@@ -1,6 +1,8 @@
 {
   "GENERIC": {
     "EMAIL": "Correo",
+    "CONFIRM_EMAIL": "Confirmar Correo",
+    "CONFIRM_EMAIL_PATTERN": "Los correos no son iguales",
     "PASSWORD": "Contraseña",
     "CONFIRM_PASSWORD": "Confirmar Contraseña",
     "NAME": "Nombres",
@@ -156,5 +158,16 @@
     "UPLOAD": "Sube los archivos de cada negocio por separado.",
     "TRIPS": "VENTAS VIAJES",
     "ASSURED": "VENTAS SEGUROS"
+  },
+  "USERS": {
+    "USERS": "Usuarios",
+    "IDENTIFICATION": "CÉDULA",
+    "NAME": "NOMBRE",
+    "CELLPHONE": "CELULAR",
+    "EMAIL": "CORREO",
+    "ORIGIN": "ORIGEN",
+    "VERIFIED": "VERIFICADO",
+    "STATUS":"ESTADO"
   }
+
 }

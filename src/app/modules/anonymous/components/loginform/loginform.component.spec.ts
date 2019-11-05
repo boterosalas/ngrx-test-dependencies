@@ -67,6 +67,10 @@ describe("LoginformComponent", () => {
       ]
     }).compileComponents();
     mockAuthService.login.and.returnValue(of(dataUser));
+    localStorage.setItem(
+      "ACCESS_TOKEN",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU"
+    );
   }));
 
   beforeEach(() => {    
@@ -82,19 +86,6 @@ describe("LoginformComponent", () => {
   it("should create", () => {
     expect(component).toBeTruthy();
   });
-
-  it("remove white space password", () => {
-    component.loginForm.controls.Password.setValue("12 3456789");
-    component.removewhiteSpace();
-    expect(component.loginForm.controls.Password.value).toBe("123456789");
-  });
-
-  it("remove white space email", () => {
-    component.loginForm.controls.Username.setValue("dav id.betancur@pragma.com.co");
-    component.removewhiteSpaceEmail();
-    expect(component.loginForm.controls.Username.value).toBe("david.betancur@pragma.com.co");
-  });
-  
 
   it("login valid", () => {
     component.isSubmitted = true;
@@ -114,11 +105,11 @@ describe("LoginformComponent", () => {
   });
 
   describe("Login invalid", () => {
-    localStorage.setItem(
-      "ACCESS_TOKEN",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU"
-    );
     beforeEach(function() {
+      localStorage.setItem(
+        "ACCESS_TOKEN",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU"
+      );
       mockAuthService.login.and.returnValue(of(dataUserInvalid));
     });
 
@@ -135,6 +126,10 @@ describe("LoginformComponent", () => {
 
   describe("invalid request", () => {
     beforeEach(function() {
+      localStorage.setItem(
+        "ACCESS_TOKEN",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU"
+      );
       mockAuthService.login.and.returnValue(throwError(InvalidRquest));
     });
 

@@ -114,23 +114,6 @@ describe("RegisterformComponent", () => {
     expect(mockRegisterService.registerUser).toHaveBeenCalled();
   });
 
-  it("remove white space password", () => {
-    component.registerForm.controls.password.setValue("1234 5678");
-    component.removewhiteSpace();
-    expect(component.registerForm.controls.password.value).toBe("12345678");
-  });
-
-  it("remove white space Confirm password", () => {
-    component.registerForm.controls.confirmPassword.setValue("1234 5678");
-    component.removewhiteSpaceConfirm();
-    expect(component.registerForm.controls.confirmPassword.value).toBe("12345678");
-  });
-
-  it("remove white space email", () => {
-    component.registerForm.controls.email.setValue("da vid.betancur@pragma.com.co");
-    component.removewhiteSpaceEmail();
-    expect(component.registerForm.controls.email.value).toBe("david.betancur@pragma.com.co");
-  });
 
   describe('register invalid', () => {
 
