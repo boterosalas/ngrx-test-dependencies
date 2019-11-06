@@ -28,16 +28,18 @@
               <div class="user-status">
                   <h3 class="gray-title">Usuario</h3>
                   
-                  <p class="galano-bold gray">ESTADO</p>
-
-                  <mat-slide-toggle  [(ngModel)]="data.state" (change)="changeStatus()" color="orange-toggle" labelPosition="before">
-                        <span *ngIf="data.state === true">
-                            Activo
-                        </span>
-                        <span *ngIf="data.state === false">
-                            Inactivo
-                        </span>
-                    </mat-slide-toggle>
+                  <div *ngIf="data.userId !== idAdmin">
+                      <p class="galano-bold gray">ESTADO</p>
+    
+                      <mat-slide-toggle  [(ngModel)]="data.state" (change)="changeStatus()" color="orange-toggle" labelPosition="before">
+                            <span *ngIf="data.state === true">
+                                Activo
+                            </span>
+                            <span *ngIf="data.state === false">
+                                Inactivo
+                            </span>
+                        </mat-slide-toggle>
+                  </div>
 
                   <p class="galano-bold gray">RECIBE COMUNICACIONES</p>
                   <mat-slide-toggle [(ngModel)]="data.receiveCommunications" (change)="changeComunications()" color="orange-toggle" labelPosition="before">
@@ -56,6 +58,7 @@
                     <span *ngIf="data.isEmployeeGrupoExito === false">
                         Externo
                     </span>
+                    <div *ngIf="data.isEmployeeGrupoExito === false">
                   <p class="galano-bold gray">VERIFICACIÓN</p>
                     <mat-slide-toggle [(ngModel)]="data.verified" (change)="changeVerified()" color="orange-toggle" labelPosition="before">
                         <span *ngIf="data.verified === true">
@@ -65,6 +68,7 @@
                              Pendiente
                         </span>
                     </mat-slide-toggle>
+                </div>
               </div>
 
               <div class="files" fxLayout="column" *ngIf="data.isEmployeeGrupoExito === false">

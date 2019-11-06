@@ -3,8 +3,10 @@ import {
   MatTableDataSource,
   MatPaginator,
   MatDialog,
-  MatSnackBar
+  MatSnackBar,
+  MatPaginatorIntl
 } from "@angular/material";
+import { MatSort, Sort } from "@angular/material/sort";
 import { DialogUserComponent } from "../../components/dialog-user/dialog-user.component";
 import { RegisterUserService } from "src/app/services/register-user.service";
 
@@ -13,35 +15,65 @@ import { RegisterUserService } from "src/app/services/register-user.service";
   templateUrl: "./users.component.html",
   styleUrls: ["./users.component.scss"]
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent extends MatPaginatorIntl implements OnInit {
   users: Array<any>;
-
   dataSource: any;
+  pageIndex: number = 0;
+  pageSize: number;
+  pageTo: number = 50;
+  totalItems: number;
+  paginate: string;
 
   constructor(
     private dialog: MatDialog,
     private usersService: RegisterUserService,
     private _snackBar: MatSnackBar
-  ) {}
+  ) {
+    super();
+
+    /**
+     * Traduccion del paginador
+     */
+
+    this.itemsPerPageLabel = "Usuarios por página";
+    this.nextPageLabel = "Página siguiente";
+    this.previousPageLabel = "Página anterior";
+    this.lastPageLabel = "Última página";
+    this.firstPageLabel = "Primera página";
+
+    this.getRangeLabel = function(page, pageSize, length) {
+      if (length === 0 || pageSize === 0) {
+        return "0 de " + length;
+      }
+      length = Math.max(length, 0);
+      const startIndex = page * pageSize;
+      // If the start index exceeds the list length, do not try and fix the end index to the end.
+      const endIndex =
+        startIndex < length
+          ? Math.min(startIndex + pageSize, length)
+          : startIndex + pageSize;
+      return startIndex + 1 + " de " + endIndex + " Usuarios de " + length;
+    };
+  }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit() {
-    this.usersInfo();
-    setTimeout(() => {
+    this.searchUser('');
+  }
+
+  public searchUser(term, from = 1, to = this.pageTo) {
+    if (term !== this.paginate) {
+      this.paginate = term;
+      this.pageIndex = 0;
+    }
+    const params = { term, from, to };
+    this.usersService.searchUsers(params).subscribe((user:any) => {
+      this.users = user.users;
+      this.totalItems = user.total;
       this.dataSource = new MatTableDataSource<any>(this.users);
-      this.dataSource.paginator = this.paginator;
-    }, 1000);
-  }
-
-  public usersInfo() {
-    this.usersService.getUsers().subscribe(user => {
-      this.users = user;
+      // this.dataSource.paginator = this.paginator;
     });
-  }
-
-  public searchUser(user) {
-    console.log(user);
   }
 
   public userData(user) {
@@ -106,35 +138,48 @@ export class UsersComponent implements OnInit {
       }
     });
 
-    const userComunications = dialogRef.componentInstance.comunications.subscribe(event => {
-      if (event.target.checked === false) {
-        this.changeComunications(userId, event.target.checked);
-      } else {
-        if (event.target.checked === true) {
+    const userComunications = dialogRef.componentInstance.comunications.subscribe(
+      event => {
+        if (event.target.checked === false) {
           this.changeComunications(userId, event.target.checked);
+        } else {
+          if (event.target.checked === true) {
+            this.changeComunications(userId, event.target.checked);
+          }
         }
       }
-    });
+    );
 
-    const userVerified= dialogRef.componentInstance.verified.subscribe(event => {
-      if (event.target.checked === false) {
-        this.changeVerified(userId, event.target.checked);
-      } else {
-        if (event.target.checked === true) {
+    const userVerified = dialogRef.componentInstance.verified.subscribe(
+      event => {
+        if (event.target.checked === false) {
           this.changeVerified(userId, event.target.checked);
+        } else {
+          if (event.target.checked === true) {
+            this.changeVerified(userId, event.target.checked);
+          }
         }
       }
-    });
+    );
 
+    dialogRef.beforeClosed().subscribe(() => {
+      this.searchUser(this.paginate);
+    })
 
   }
 
   private changeComunications(userId, value) {
     this.usersService.comunitcations(userId, value).subscribe(state => {
       if (value === true) {
-        this.openSnackBar("Se ha guardado el usuario para que reciba comunicaciones", "Cerrar");
+        this.openSnackBar(
+          "Se ha guardado el usuario para que reciba comunicaciones",
+          "Cerrar"
+        );
       } else {
-        this.openSnackBar("Se ha guardado el usuario para que no reciba comunicaciones", "Cerrar");
+        this.openSnackBar(
+          "Se ha guardado el usuario para que no reciba comunicaciones",
+          "Cerrar"
+        );
       }
     });
   }
@@ -154,7 +199,10 @@ export class UsersComponent implements OnInit {
       if (value === true) {
         this.openSnackBar("Se ha verificado el usuario", "Cerrar");
       } else {
-        this.openSnackBar("Se ha cambiado el usuario a no verificado", "Cerrar");
+        this.openSnackBar(
+          "Se ha cambiado el usuario a no verificado",
+          "Cerrar"
+        );
       }
     });
   }
@@ -169,5 +217,13 @@ export class UsersComponent implements OnInit {
     this._snackBar.open(message, action, {
       duration: 2000
     });
+  }
+
+  public pagination(paginate: any) {
+    this.pageIndex = paginate.pageIndex;
+    paginate.length = this.totalItems;
+    const from = paginate.pageSize * paginate.pageIndex + 1;
+    const to = paginate.pageSize * (paginate.pageIndex + 1);
+    this.searchUser(this.paginate, from, to);
   }
 }

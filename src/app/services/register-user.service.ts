@@ -47,12 +47,13 @@ export class RegisterUserService {
     return this.http.get((`${this.url}${this.apiIdType}`), this.httpOptions);
   }
 
-  public getUsers() {
-    return this.http.get((`${this.url}${this.apiUsers}`), this.httpOptionsToken).pipe(
+
+  public searchUsers(term?: any) {
+    return this.http.get((`${this.url}${this.apiUsers}?searchText=${term.term}&from=${term.from}&to=${term.to}`), this.httpOptionsToken).pipe(
       map((user: any) => {
         return user.objectResponse;
       })
-    );;
+    );
   }
 
   public statusUser(id: any, value: boolean) {

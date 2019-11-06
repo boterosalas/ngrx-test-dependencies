@@ -4,7 +4,11 @@
     <div id="users-table">
         <app-table-users (dataUser)="userData($event)" [dataSource]="dataSource"></app-table-users>
         <mat-paginator
-        [pageSizeOptions]="[50]"
+        [length]="totalItems"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[50]"
+            [pageIndex]="pageIndex"
+            (page)="pagination($event)"
        ></mat-paginator>
     </div>
 </div>

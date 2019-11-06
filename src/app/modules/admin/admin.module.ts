@@ -17,6 +17,7 @@ import { UsersComponent } from './pages/users/users.component';
 import { TableUsersComponent } from './components/table-users/table-users.component';
 import { SearchUsersComponent } from './components/search-users/search-users.component';
 import { DialogUserComponent } from './components/dialog-user/dialog-user.component';
+import { MatPaginatorIntl } from '@angular/material';
 
 const routes: Routes = [
   {
@@ -62,6 +63,9 @@ const routes: Routes = [
   ],
   entryComponents: [
     DialogUserComponent
-  ]
+  ],
+  providers: [
+    { provide: MatPaginatorIntl, useClass: UsersComponent },
+  ],
 })
 export class AdminModule {}

@@ -5,8 +5,7 @@
 export const environment = {
   production: false,
   URL_SECURITY: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apisecurity/api/Authentication/',
-  URL_PROFILE: 'http://10.125.65.230/profile/api/userprofile/',
-  // URL_PROFILE: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apiprofile/api/userprofile/',
+  URL_PROFILE: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apiprofile/api/userprofile/',
   URL_CONTENT: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apicontent/api/product/',
   URL_REFERAL: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apireferral/api/Link/',
   URL_COMISSION: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apicommission/api/',

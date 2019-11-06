@@ -4,6 +4,7 @@ import { DialogComponent } from './dialog.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
 import { AppMaterialModule } from '../../app-material/app-material.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('DialogComponent', () => {
   let component: DialogComponent;
