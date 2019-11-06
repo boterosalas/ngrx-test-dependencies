@@ -1,45 +1,83 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { MatTableDataSource, MatPaginator, MatDialog } from "@angular/material";
+import {
+  MatTableDataSource,
+  MatPaginator,
+  MatDialog,
+  MatSnackBar,
+  MatPaginatorIntl
+} from "@angular/material";
+import { MatSort, Sort } from "@angular/material/sort";
 import { DialogUserComponent } from "../../components/dialog-user/dialog-user.component";
+import { RegisterUserService } from "src/app/services/register-user.service";
 
 @Component({
   selector: "app-users",
   templateUrl: "./users.component.html",
   styleUrls: ["./users.component.scss"]
 })
-export class UsersComponent implements OnInit {
-  users = [
-    {
-      identification: "123456789",
-      firstNames: "David",
-      lastNames: "Betancur Jaramillo",
-      cellphone: "123456789",
-      email: "david.betancur@pragma.com.co",
-      address: 'cll falsa 123 # 12sur - 21 Medellín, Antioquía',
-      bank: 'Bancolombia',
-      typeBankAccount: 'Ahorros',
-      bankAccountNumber:'5894523687',
-      status: true,
-      comunications: false,
-      origin: false,
-      verified: true,
-      fileIdentificationCard1: 'https://wsr.registraduria.gov.co/IMG/jpg/cedula_frontal.jpg',
-      fileIdentificationCard2: 'https://wsr.registraduria.gov.co/IMG/jpg/cedula_frontal.jpg',
-      fileBankCertificate: 'https://assets.website-files.com/5c4ba48132b5c62df3e9c1b4/5d291b7b96131e248826184c_Bancolombia%20-%20Certificado%20Retenci%C3%B3n%20en%20la%20fuente-01.jpg'
-    }
-  ];
+export class UsersComponent extends MatPaginatorIntl implements OnInit {
+  users: Array<any>;
+  dataSource: any;
+  pageIndex: number = 0;
+  pageSize: number;
+  pageTo: number = 50;
+  totalItems: number;
+  paginate: string;
 
-  dataSource = new MatTableDataSource<any>(this.users);
+  constructor(
+    private dialog: MatDialog,
+    private usersService: RegisterUserService,
+    private _snackBar: MatSnackBar
+  ) {
+    super();
 
-  constructor(private dialog: MatDialog) {}
+    /**
+     * Traduccion del paginador
+     */
+
+    this.itemsPerPageLabel = "Usuarios por página";
+    this.nextPageLabel = "Página siguiente";
+    this.previousPageLabel = "Página anterior";
+    this.lastPageLabel = "Última página";
+    this.firstPageLabel = "Primera página";
+
+    this.getRangeLabel = function(page, pageSize, length) {
+      if (length === 0 || pageSize === 0) {
+        return "0 de " + length;
+      }
+      length = Math.max(length, 0);
+      const startIndex = page * pageSize;
+      // If the start index exceeds the list length, do not try and fix the end index to the end.
+      const endIndex =
+        startIndex < length
+          ? Math.min(startIndex + pageSize, length)
+          : startIndex + pageSize;
+      return startIndex + 1 + " de " + endIndex + " Usuarios de " + length;
+    };
+  }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
+    this.searchUser('');
+  }
+
+  public searchUser(term, from = 1, to = this.pageTo) {
+    if (term !== this.paginate) {
+      this.paginate = term;
+      this.pageIndex = 0;
+    }
+    const params = { term, from, to };
+    this.usersService.searchUsers(params).subscribe((user:any) => {
+      this.users = user.users;
+      this.totalItems = user.total;
+      this.dataSource = new MatTableDataSource<any>(this.users);
+      // this.dataSource.paginator = this.paginator;
+    });
   }
 
   public userData(user) {
+    const userId = user.userId;
     const identification = user.identification;
     const name = user.firstNames;
     const lastNames = user.lastNames;
@@ -50,15 +88,26 @@ export class UsersComponent implements OnInit {
     const typeBankAccount = user.typeBankAccount;
     const account = user.account;
     const bankAccountNumber = user.bankAccountNumber;
-    const status = user.status;
-    const comunications = user.comunications;
-    const origin = user.origin;
+    let state = user.state;
+    const receiveCommunications = user.receiveCommunications;
+    const isEmployeeGrupoExito = user.isEmployeeGrupoExito;
     const verified = user.verified;
     const fileIdentificationCard1 = user.fileIdentificationCard1;
     const fileIdentificationCard2 = user.fileIdentificationCard2;
     const fileBankCertificate = user.fileBankCertificate;
-    this.dialog.open(DialogUserComponent, {
+
+    if (state === "Inactivo") {
+      state = false;
+    } else {
+      if (state === "Activo" || state === "Registrado" || state === "Migrado") {
+        state = true;
+      }
+    }
+
+    const dialogRef = this.dialog.open(DialogUserComponent, {
+      width: "649px",
       data: {
+        userId,
         identification,
         name,
         lastNames,
@@ -69,14 +118,112 @@ export class UsersComponent implements OnInit {
         typeBankAccount,
         bankAccountNumber,
         account,
-        status,
-        comunications,
-        origin,
+        state,
+        receiveCommunications,
+        isEmployeeGrupoExito,
         verified,
         fileIdentificationCard1,
         fileIdentificationCard2,
         fileBankCertificate
       }
     });
+
+    const userStatus = dialogRef.componentInstance.state.subscribe(event => {
+      if (event.target.checked === false) {
+        this.changeStateUser(userId, event.target.checked);
+      } else {
+        if (event.target.checked === true) {
+          this.changeStateUser(userId, event.target.checked);
+        }
+      }
+    });
+
+    const userComunications = dialogRef.componentInstance.comunications.subscribe(
+      event => {
+        if (event.target.checked === false) {
+          this.changeComunications(userId, event.target.checked);
+        } else {
+          if (event.target.checked === true) {
+            this.changeComunications(userId, event.target.checked);
+          }
+        }
+      }
+    );
+
+    const userVerified = dialogRef.componentInstance.verified.subscribe(
+      event => {
+        if (event.target.checked === false) {
+          this.changeVerified(userId, event.target.checked);
+        } else {
+          if (event.target.checked === true) {
+            this.changeVerified(userId, event.target.checked);
+          }
+        }
+      }
+    );
+
+    dialogRef.beforeClosed().subscribe(() => {
+      this.searchUser(this.paginate);
+    })
+
+  }
+
+  private changeComunications(userId, value) {
+    this.usersService.comunitcations(userId, value).subscribe(state => {
+      if (value === true) {
+        this.openSnackBar(
+          "Se ha guardado el usuario para que reciba comunicaciones",
+          "Cerrar"
+        );
+      } else {
+        this.openSnackBar(
+          "Se ha guardado el usuario para que no reciba comunicaciones",
+          "Cerrar"
+        );
+      }
+    });
+  }
+
+  private changeStateUser(userId, value) {
+    this.usersService.statusUser(userId, value).subscribe(state => {
+      if (value === true) {
+        this.openSnackBar("El usuario ha sido activado", "Cerrar");
+      } else {
+        this.openSnackBar("El usuario ha sido inactivado", "Cerrar");
+      }
+    });
+  }
+
+  private changeVerified(userId, value) {
+    this.usersService.verifiedUser(userId, value).subscribe(state => {
+      if (value === true) {
+        this.openSnackBar("Se ha verificado el usuario", "Cerrar");
+      } else {
+        this.openSnackBar(
+          "Se ha cambiado el usuario a no verificado",
+          "Cerrar"
+        );
+      }
+    });
+  }
+
+  /**
+   * Abre el mensaje de confirmacion de copiado del link
+   * @param message
+   * @param action
+   */
+
+  private openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000
+    });
+  }
+
+  public pagination(paginate: any) {
+    this.pageIndex = paginate.pageIndex;
+    paginate.length = this.totalItems;
+    const from = paginate.pageSize * paginate.pageIndex + 1;
+    const to = paginate.pageSize * (paginate.pageIndex + 1);
+    this.searchUser(this.paginate, from, to);
   }
 }
