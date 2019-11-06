@@ -1,10 +1,14 @@
 <div class="container m-t4 fade-in">
     <h1 class="border-bottom-orange-init">{{ 'USERS.USERS' | translate}}</h1>
-    <app-search-users></app-search-users>
+    <app-search-users (search)="searchUser($event)"></app-search-users>
     <div id="users-table">
         <app-table-users (dataUser)="userData($event)" [dataSource]="dataSource"></app-table-users>
         <mat-paginator
-        [pageSizeOptions]="[50]"
+        [length]="totalItems"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[50]"
+            [pageIndex]="pageIndex"
+            (page)="pagination($event)"
        ></mat-paginator>
     </div>
 </div>

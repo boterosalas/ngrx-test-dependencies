@@ -11,6 +11,8 @@ export class TableUsersComponent implements OnInit {
   
   @Input()dataSource;
   @Output() dataUser = new EventEmitter;
+  @Output() sortDataUser = new EventEmitter;
+  
 
   displayedColumns: string[] = ['identification', 'name', 'cellphone', 'email', 'origin', 'verified', 'status'];
 
@@ -19,6 +21,10 @@ export class TableUsersComponent implements OnInit {
 
   userInfo(dataSource){
     this.dataUser.emit(dataSource);
+  }
+
+  sortData(event) {
+    this.sortDataUser.emit(event);
   }
 
 }
