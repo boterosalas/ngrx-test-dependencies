@@ -1,3 +1,119 @@
 <div class="offers container">
-        <h1>{{ "OFFERS.OFFERS_TITLE" | translate }}</h1>
+  <h1>{{ "OFFERS.OFFERS_TITLE" | translate }}</h1>
+
+  <h3 class="gray border-left-orange mt-5">
+    {{ "OFFERS.TENDENT" | translate }}
+  </h3>
+  <div fxLayout="row" fxLayoutGap="20px">
+    <app-card-offer
+      fxLayout="column"
+      fxFlex="20"
+      classButton="mb-1  button-100"
+      *ngFor="let mostprominent of mostprominent; let i = index"
+      id="productTitle{{ i }}"
+      btnid="mostprominent{{ i }}"
+      [productName]="mostprominent.title"
+      [price]="mostprominent.price"
+      productDescription=""
+      [image]="mostprominent.imageurl"
+      [alt]="mostprominent.productName"
+      textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+      (infoProduct)="dataProduct(mostprominent)"
+    ></app-card-offer>
+  </div>
+
+  <h3 class="gray border-left-orange mt-5">
+    {{ "OFFERS.BEST_BUY" | translate }}
+  </h3>
+  <div fxLayout="row" fxLayoutGap="20px">
+    <app-card-offer
+      fxLayout="column"
+      fxFlex="20"
+      classButton="mb-1  button-100 orange-border"
+      *ngFor="let mostsold of mostsold; let i = index"
+      id="productTitle{{ i }}"
+      btnid="mostsold{{ i }}"
+      [productName]="mostsold.title"
+      [price]="mostsold.price"
+      productDescription=""
+      [image]="mostsold.imageurl"
+      [alt]="mostsold.productName"
+      textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+      (infoProduct)="dataProduct(mostsold)"
+    ></app-card-offer>
+  </div>
+
+  <h3 class="gray border-left-orange mt-5">
+    {{ "OFFERS.BEST_COMISSION" | translate }}
+  </h3>
+  <div fxLayout="row" fxLayoutGap="20px">
+    <app-card-offer
+      fxLayout="column"
+      fxFlex="20"
+      classButton="mb-1 button-100"
+      *ngFor="let highercommission of highercommission; let i = index"
+      id="productTitle{{ i }}"
+      btnid="highercommission{{ i }}"
+      [productName]="highercommission.title"
+      [price]="highercommission.price"
+      productDescription=""
+      [image]="highercommission.imageurl"
+      [alt]="highercommission.productName"
+      textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+      (infoProduct)="dataProduct(highercommission)"
+    ></app-card-offer>
+  </div>
 </div>
+
+<ng-template #templateDialog>
+  <form [formGroup]="formLink">
+    <div fxLayout="column">
+      <mat-form-field appearance="dashed" class="dashed mt-2">
+        <input
+          id="url"
+          matInput
+          formcontrolName="link"
+          [value]="urlshorten"
+          #linkInput
+          readonly
+        />
+      </mat-form-field>
+    </div>
+    <div fxLayout="column">
+      <button
+        mat-raised-button
+        id="btnCopy"
+        color="orange"
+        class="button button-100 p-1"
+        (click)="copyInputMessage(linkInput)"
+      >
+        <span fxLayoutAlign="space-between center">
+          <span class="pl-3">{{ "GENERIC.COPY_LINK" | translate }}</span>
+          <mat-icon matSuffix class="mr-3">link</mat-icon>
+        </span>
+      </button>
+    </div>
+  </form>
+
+  <div id="share">
+    <h3 class="border-bottom-orange-init">{{ "GENERIC.SHARE" | translate }}</h3>
+    <share-button
+      id="facebook"
+      [url]="urlshorten"
+      button="facebook"
+      theme="circles-dark"
+    ></share-button>
+    <share-button
+      id="twitter"
+      [url]="urlshorten"
+      button="twitter"
+      theme="circles-dark"
+    ></share-button>
+    <share-button
+      id="whatsapp"
+      [url]="urlshorten"
+      button="whatsapp"
+      theme="circles-dark"
+    ></share-button>
+  </div>
+</ng-template>

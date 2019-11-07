@@ -1,0 +1,38 @@
+<div
+  fxLayout="row"
+  fxLayoutAlign="start start"
+  @simpleFadeAnimation
+>
+  <mat-card class="puff-in-center p-3" fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
+    <mat-card-content class="w-100">
+      
+        <div class="img-container-2">
+          <img
+            class="img-responsive mt-3"
+            mat-card-image
+            src="{{ image }}"
+            alt="{{ alt }}"
+          />
+        </div>
+      
+
+      <h3 class="m-0 gray regular" id="{{ id }}">{{ productName }}</h3>
+      <p>
+        <span>Comisión:</span>
+        <span class="discount">
+          {{ price | currency: "":"symbol":"1.0-0" }}
+        </span>
+      </p>
+
+      <button *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'CLICKER'"
+        id="{{ btnid }}"
+        mat-raised-button
+        color="orange"
+        ngClass="{{classButton}}"
+        (click)="product()"
+      >
+        {{ textbutton }}
+      </button>
+    </mat-card-content>
+  </mat-card>
+</div>

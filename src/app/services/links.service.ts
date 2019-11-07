@@ -42,7 +42,7 @@ export class LinksService {
 
   public getReports(identification: string) {
     let apiReport = `ClickerPerformanceReport?identification=${identification}`;
-    return this.http.get((`${this.urlComission}/${this.reports}/${apiReport}`), this.httpOptions).pipe(
+    return this.http.get((`${this.urlComission}${this.reports}/${apiReport}`), this.httpOptions).pipe(
       map((resp: ResponseService) => {
         return resp.objectResponse;
       })
@@ -50,7 +50,7 @@ export class LinksService {
   }
 
   public getFileReport() {
-    return this.http.get((`${this.urlComission}/${this.comission}/${this.apiFile}`), this.httpOptions).pipe(
+    return this.http.get((`${this.urlComission}${this.comission}/${this.apiFile}`), this.httpOptions).pipe(
       map((resp: ResponseService) => {
         return resp.objectResponse;
       })

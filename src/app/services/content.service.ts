@@ -18,9 +18,10 @@ export class ContentService {
   };
 
   url = environment.URL_CONTENT;
-  apiNews = 'getNews';
-  apiAssured= 'getProductsSegurosExito';
-  apiTrips= 'getProductsViajesExito';
+  apiNews = 'product/getNews';
+  apiAssured= 'product/getProductsSegurosExito';
+  apiTrips= 'product/getProductsViajesExito';
+  apiOffers= 'offer/getOffers';
 
   public getNews() {
     return this.http.get(`${this.url + this.apiNews}`, this.httpOptions).pipe(
@@ -40,6 +41,14 @@ export class ContentService {
 
   public getTrips() {
     return this.http.get(`${this.url + this.apiTrips}`, this.httpOptions).pipe(
+      map((user: ResponseService) => {
+        return user.objectResponse;
+      })
+    );
+  }
+
+  public getOffers() {
+    return this.http.get(`${this.url + this.apiOffers}`, this.httpOptions).pipe(
       map((user: ResponseService) => {
         return user.objectResponse;
       })
