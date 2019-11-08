@@ -1,3 +1,150 @@
 <div class="offers container">
-        <h1>{{ "OFFERS.OFFERS_TITLE" | translate }}</h1>
+  <h1>{{ "OFFERS.OFFERS_TITLE" | translate }}</h1>
+  <div class="arrows" fxLayout="row" fxLayoutAlign="space-between"  class="mt-5">
+  <h3 class="gray border-left-orange">
+    {{ "OFFERS.TENDENT" | translate }}
+  </h3>
+  <span fxLayout="row" fxLayoutAlign="end">
+    <button mat-button class="p-1" (click)="prev()"><mat-icon>keyboard_arrow_left</mat-icon></button>
+      <button mat-button class="p-1" (click)="next()"><mat-icon>keyboard_arrow_right</mat-icon></button>
+    </span>
+  </div>
+  <ngx-slick-carousel class="carousel" 
+                        #slickModal="slick-carousel" 
+                        [config]="slideConfig" 
+                      >
+        <div ngxSlickItem *ngFor="let mostprominent of mostprominent; let i = index" class="slide">
+                <app-card-offer
+                  ngxSlickItem
+                  fxLayout="column"
+                  classButton="mb-1 button-100"
+                  [(business)]="mostprominent.business"
+                  offers="true"
+                  id="productTitle{{ i }}"
+                  btnid="mostprominent{{ i }}"
+                  [productName]="mostprominent.title"
+                  [image]="mostprominent.imageurl"
+                  [alt]="mostprominent.productName"
+                  textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+                  (infoProduct)="dataProduct(mostprominent)"
+                ></app-card-offer>
+              
+        </div>
+    </ngx-slick-carousel>
+
+ 
+    <div class="arrows" fxLayout="row" fxLayoutAlign="space-between"  class="mt-5">
+        <h3 class="gray border-left-orange">
+            {{ "OFFERS.BEST_BUY" | translate }}
+        </h3>
+        <span fxLayout="row" fxLayoutAlign="end">
+          <button mat-button class="p-1" (click)="prev2()"><mat-icon>keyboard_arrow_left</mat-icon></button>
+            <button mat-button class="p-1" (click)="next2()"><mat-icon>keyboard_arrow_right</mat-icon></button>
+          </span>
+        </div>
+
+  <ngx-slick-carousel class="carousel" 
+                        #slickModal2="slick-carousel" 
+                        [config]="slideConfig" 
+                      >
+  <div ngxSlickItem *ngFor="let mostsold of mostsold; let i = index" class="slide">
+    <app-card-offer
+      fxLayout="column"
+      classButton="mb-1  button-100 orange-border"
+      [(business)]="mostsold.business"
+      offers="true"
+      id="productTitle{{ i }}"
+      btnid="mostsold{{ i }}"
+      [productName]="mostsold.title"
+      [image]="mostsold.imageurl"
+      [alt]="mostsold.productName"
+      textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+      (infoProduct)="dataProduct(mostsold)"
+    ></app-card-offer>
+  </div>
+  </ngx-slick-carousel>
+
+  <div class="arrows" fxLayout="row" fxLayoutAlign="space-between"  class="mt-5">
+      <h3 class="gray border-left-orange">
+          {{ "OFFERS.BEST_COMISSION" | translate }}
+      </h3>
+      <span fxLayout="row" fxLayoutAlign="end">
+        <button mat-button class="p-1" (click)="prev3()"><mat-icon>keyboard_arrow_left</mat-icon></button>
+          <button mat-button class="p-1" (click)="next3()"><mat-icon>keyboard_arrow_right</mat-icon></button>
+        </span>
+      </div>
+
+  <ngx-slick-carousel class="carousel" 
+  #slickModal3="slick-carousel" 
+  [config]="slideConfig" 
+>
+<div ngxSlickItem *ngFor="let highercommission of highercommission; let i = index" class="slide">
+    <app-card-offer
+      fxLayout="column"
+      classButton="mb-1 button-100"
+      [(business)]="highercommission.business"
+      offers="true"
+      id="productTitle{{ i }}"
+      btnid="highercommission{{ i }}"
+      [productName]="highercommission.title"
+      [image]="highercommission.imageurl"
+      [alt]="highercommission.productName"
+      textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+      (infoProduct)="dataProduct(highercommission)"
+    ></app-card-offer>
+  </div>
+</ngx-slick-carousel>
 </div>
+
+<ng-template #templateDialog>
+  <form [formGroup]="formLink">
+    <div fxLayout="column">
+      <mat-form-field appearance="dashed" class="dashed mt-2">
+        <input
+          id="url"
+          matInput
+          formcontrolName="link"
+          [value]="urlshorten"
+          #linkInput
+          readonly
+        />
+      </mat-form-field>
+    </div>
+    <div fxLayout="column">
+      <button
+        mat-raised-button
+        id="btnCopy"
+        color="orange"
+        class="button button-100 p-1"
+        (click)="copyInputMessage(linkInput)"
+      >
+        <span fxLayoutAlign="space-between center">
+          <span class="pl-3">{{ "GENERIC.COPY_LINK" | translate }}</span>
+          <mat-icon matSuffix class="mr-3">link</mat-icon>
+        </span>
+      </button>
+    </div>
+  </form>
+
+  <div id="share">
+    <h3 class="border-bottom-orange-init">{{ "GENERIC.SHARE" | translate }}</h3>
+    <share-button
+      id="facebook"
+      [url]="urlshorten"
+      button="facebook"
+      theme="circles-dark"
+    ></share-button>
+    <share-button
+      id="twitter"
+      [url]="urlshorten"
+      button="twitter"
+      theme="circles-dark"
+    ></share-button>
+    <share-button
+      id="whatsapp"
+      [url]="urlshorten"
+      button="whatsapp"
+      theme="circles-dark"
+    ></share-button>
+  </div>
+</ng-template>

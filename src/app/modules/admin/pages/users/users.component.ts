@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, OnDestroy } from "@angular/core";
 import {
   MatTableDataSource,
   MatPaginator,
@@ -6,16 +6,16 @@ import {
   MatSnackBar,
   MatPaginatorIntl
 } from "@angular/material";
-import { MatSort, Sort } from "@angular/material/sort";
 import { DialogUserComponent } from "../../components/dialog-user/dialog-user.component";
 import { RegisterUserService } from "src/app/services/register-user.service";
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
   selector: "app-users",
   templateUrl: "./users.component.html",
   styleUrls: ["./users.component.scss"]
 })
-export class UsersComponent extends MatPaginatorIntl implements OnInit {
+export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestroy {
   users: Array<any>;
   dataSource: any;
   pageIndex: number = 0;
@@ -23,6 +23,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit {
   pageTo: number = 50;
   totalItems: number;
   paginate: string;
+  private subscription: Subscription = new Subscription();
 
   constructor(
     private dialog: MatDialog,
@@ -35,7 +36,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit {
      * Traduccion del paginador
      */
 
-    this.itemsPerPageLabel = "Usuarios por página";
+    this.itemsPerPageLabel = "Items por página";
     this.nextPageLabel = "Página siguiente";
     this.previousPageLabel = "Página anterior";
     this.lastPageLabel = "Última página";
@@ -52,7 +53,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit {
         startIndex < length
           ? Math.min(startIndex + pageSize, length)
           : startIndex + pageSize;
-      return startIndex + 1 + " de " + endIndex + " Usuarios de " + length;
+      return startIndex + 1 + " de " + endIndex + " items de " + length;
     };
   }
 
@@ -68,11 +69,10 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit {
       this.pageIndex = 0;
     }
     const params = { term, from, to };
-    this.usersService.searchUsers(params).subscribe((user:any) => {
+    this.subscription = this.usersService.searchUsers(params).subscribe((user:any) => {
       this.users = user.users;
       this.totalItems = user.total;
       this.dataSource = new MatTableDataSource<any>(this.users);
-      // this.dataSource.paginator = this.paginator;
     });
   }
 
@@ -128,7 +128,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit {
       }
     });
 
-    const userStatus = dialogRef.componentInstance.state.subscribe(event => {
+    this.subscription = dialogRef.componentInstance.state.subscribe(event => {
       if (event.target.checked === false) {
         this.changeStateUser(userId, event.target.checked);
       } else {
@@ -138,7 +138,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit {
       }
     });
 
-    const userComunications = dialogRef.componentInstance.comunications.subscribe(
+    this.subscription = dialogRef.componentInstance.comunications.subscribe(
       event => {
         if (event.target.checked === false) {
           this.changeComunications(userId, event.target.checked);
@@ -150,7 +150,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit {
       }
     );
 
-    const userVerified = dialogRef.componentInstance.verified.subscribe(
+    this.subscription = dialogRef.componentInstance.verified.subscribe(
       event => {
         if (event.target.checked === false) {
           this.changeVerified(userId, event.target.checked);
@@ -162,14 +162,14 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit {
       }
     );
 
-    dialogRef.beforeClosed().subscribe(() => {
+    this.subscription =  dialogRef.beforeClosed().subscribe(() => {
       this.searchUser(this.paginate);
     })
 
   }
 
   private changeComunications(userId, value) {
-    this.usersService.comunitcations(userId, value).subscribe(state => {
+    this.usersService.comunitcations(userId, value).subscribe(()=> {
       if (value === true) {
         this.openSnackBar(
           "Se ha guardado el usuario para que reciba comunicaciones",
@@ -185,7 +185,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit {
   }
 
   private changeStateUser(userId, value) {
-    this.usersService.statusUser(userId, value).subscribe(state => {
+    this.usersService.statusUser(userId, value).subscribe(()=> {
       if (value === true) {
         this.openSnackBar("El usuario ha sido activado", "Cerrar");
       } else {
@@ -195,7 +195,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit {
   }
 
   private changeVerified(userId, value) {
-    this.usersService.verifiedUser(userId, value).subscribe(state => {
+    this.usersService.verifiedUser(userId, value).subscribe(()=> {
       if (value === true) {
         this.openSnackBar("Se ha verificado el usuario", "Cerrar");
       } else {
@@ -226,4 +226,9 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit {
     const to = paginate.pageSize * (paginate.pageIndex + 1);
     this.searchUser(this.paginate, from, to);
   }
+
+  ngOnDestroy(): void {
+   this.subscription.unsubscribe();
+  }
+
 }

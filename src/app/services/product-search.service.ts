@@ -17,9 +17,10 @@ export class ProductSearchService {
   };
 
   url = environment.URL_CONTENT;
+  apiProducts = 'product';
   
   public getProductsPagination(params: {term: string, from:number, to:number}){
-    const apiSearchVetex = `getProducts?ft=${params.term}&_from=${params.from}&_to=${params.to}&fq=1`
+    const apiSearchVetex = `${this.apiProducts}/getProducts?ft=${params.term}&_from=${params.from}&_to=${params.to}&fq=1`
     return this.http.get(`${this.url + apiSearchVetex}`, this.httpOptions).pipe(
       map((user: any) => {
         return user.objectResponse;
