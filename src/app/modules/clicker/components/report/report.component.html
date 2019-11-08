@@ -1,0 +1,13 @@
+<div class="container m-t4 fade-in">
+  <h1 id="reportsTitle">{{ "REPORTS.REPORTS" | translate }}</h1>
+
+  <app-table-historial [dataSource]="dataSource"></app-table-historial>
+  <mat-paginator
+  [length]="totalItems"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[20]"
+  [pageIndex]="pageIndex"
+  (page)="pagination($event)"
+ ></mat-paginator>
+
+</div>

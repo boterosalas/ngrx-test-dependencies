@@ -1,6 +1,8 @@
 {
   "GENERIC": {
     "EMAIL": "Correo",
+    "CONFIRM_EMAIL": "Confirmar Correo",
+    "CONFIRM_EMAIL_PATTERN": "Los correos no son iguales",
     "PASSWORD": "Contraseña",
     "CONFIRM_PASSWORD": "Confirmar Contraseña",
     "NAME": "Nombres",
@@ -128,7 +130,7 @@
   },
   "OFFERS": {
     "OFFERS_TITLE": "Descubre las ofertas",
-    "TENDENT": "Tendencias",
+    "TENDENT": "Destacados",
     "BEST_BUY": "Más vendidos",
     "BEST_COMISSION": "Mejores comisiones"
   },
@@ -155,6 +157,21 @@
     "CROSS": "Cruzar ventas",
     "UPLOAD": "Sube los archivos de cada negocio por separado.",
     "TRIPS": "VENTAS VIAJES",
-    "ASSURED": "VENTAS SEGUROS"
+    "ASSURED": "VENTAS SEGUROS",
+    "HISTORICAL": "Historial pagos",
+    "DATE": "FECHA",
+    "AMOUNT": "MONTO",
+    "BANK": "BANCO DONDE SE PAGÓ"
+  },
+  "USERS": {
+    "USERS": "Usuarios",
+    "IDENTIFICATION": "CÉDULA",
+    "NAME": "NOMBRE",
+    "CELLPHONE": "CELULAR",
+    "EMAIL": "CORREO",
+    "ORIGIN": "ORIGEN",
+    "VERIFIED": "VERIFICADO",
+    "STATUS":"ESTADO"
   }
+
 }

@@ -22,6 +22,10 @@ import { ClickAcademyComponent } from './pages/click-academy/click-academy.compo
 import { OffersComponent } from './pages/offers/offers.component';
 import { FrequentQuestionsComponent } from './pages/frequent-questions/frequent-questions.component';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
+import { BlockCopyPasteDirective } from 'src/directives/copy.directive';
+import { KeySpaceDirective } from 'src/directives/space.directive';
+import { CardOfferComponent } from './components/card-offer/card-offer.component';
+import { ShareButtonsModule } from '@ngx-share/buttons';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -46,10 +50,10 @@ const routes: Routes = [
     path: "click-academy",
     component: ClickAcademyComponent
   },
-  // {
-  //   path: "ofertas",
-  //   component: OffersComponent
-  // },
+  {
+    path: "ofertas",
+    component: OffersComponent
+  },
   {
     path: "preguntas-frecuentes",
     component: FrequentQuestionsComponent
@@ -77,6 +81,9 @@ const routes: Routes = [
     OffersComponent,
     FrequentQuestionsComponent,
     TermsAndConditionsComponent,
+    BlockCopyPasteDirective,
+    KeySpaceDirective,
+    CardOfferComponent,
     // ReportComponent
   ],
   imports: [
@@ -88,6 +95,7 @@ const routes: Routes = [
     CommonModule,
     FlexLayoutModule,
     SlickCarouselModule,
+    ShareButtonsModule,
     RouterModule.forChild(routes)
   ],
   exports: [

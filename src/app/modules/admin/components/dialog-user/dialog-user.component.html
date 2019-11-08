@@ -1,0 +1,86 @@
+<div id="{{ data.id }}">
+  <div fxLayout="column" fxLayoutAlign="center" class="border-bottom-gray">
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+          <h3 class="mb-3 gray-title">{{ data.name }} {{data.lastNames}}</h3>
+        <a id="closeDialog" matRipple (click)="onNoClick()"
+          ><mat-icon class="close">close</mat-icon></a
+          >
+      </div>
+  </div>
+  <div mat-dialog-content>  
+      <div fxLayout="row" fxLayoutGap="50px">
+          <div fxLayout="column" fxFlex="75">
+              <div class="personal-information">
+                  <h3 class="gray-title">Información personal</h3>
+                  <p><span class="galano-bold gray">DOCUMENTO</span> {{data.identification}}</p>
+                  <p><span class="galano-bold gray">CORREO ELECTRÓNICO </span>{{data.email}}</p>
+                  <p><span class="galano-bold gray">CELULAR</span> {{data.cellphone}}</p>
+                  <p><span class="galano-bold gray">DIRECCIÓN</span> {{data.address}}</p>
+              </div>
+              <div class="bank-information">
+                  <h3 class="gray-title">Información Bancaria</h3>
+                  <p><span class="galano-bold gray">BANCO</span> {{data.bank}}</p>
+                  <p><span class="galano-bold gray">CUENTA</span> {{data.typeBankAccount}} - {{data.bankAccountNumber}}</p>
+              </div>
+
+          </div>
+          <div fxLayout="column" fxFlex="25" fxLayoutAlign="start start">
+              <div class="user-status">
+                  <h3 class="gray-title">Usuario</h3>
+                  
+                  <div *ngIf="data.userId !== idAdmin">
+                      <p class="galano-bold gray">ESTADO</p>
+    
+                      <mat-slide-toggle  [(ngModel)]="data.state" (change)="changeStatus()" color="orange-toggle" labelPosition="before" id="state-toggle">
+                            <span *ngIf="data.state === true">
+                                Activo
+                            </span>
+                            <span *ngIf="data.state === false">
+                                Inactivo
+                            </span>
+                        </mat-slide-toggle>
+                  </div>
+
+                  <p class="galano-bold gray">RECIBE COMUNICACIONES</p>
+                  <mat-slide-toggle [(ngModel)]="data.receiveCommunications" (change)="changeComunications()" color="orange-toggle" labelPosition="before" id="comunications-toggle">
+                      <span *ngIf="data.receiveCommunications === true">
+                          Si
+                      </span>
+                      <span *ngIf="data.receiveCommunications === false">
+                          No
+                      </span>
+                  </mat-slide-toggle>
+
+                  <p class="galano-bold gray">ORIGEN</p>
+                     <span *ngIf="data.isEmployeeGrupoExito === true">
+                        Interno
+                    </span>
+                    <span *ngIf="data.isEmployeeGrupoExito === false">
+                        Externo
+                    </span>
+                    <div *ngIf="data.isEmployeeGrupoExito === false">
+                  <p class="galano-bold gray">VERIFICACIÓN</p>
+                    <mat-slide-toggle [(ngModel)]="data.verified" (change)="changeVerified()" color="orange-toggle" labelPosition="before" id="verified-toggle">
+                        <span *ngIf="data.verified === true">
+                            Aprobado
+                        </span>
+                        <span *ngIf="data.verified === false">
+                             Pendiente
+                        </span>
+                    </mat-slide-toggle>
+                </div>
+              </div>
+
+              <div class="files" fxLayout="column" *ngIf="data.isEmployeeGrupoExito === false">
+                  <h3 class="gray-title">Archivos adjuntos</h3>
+
+                    <a [href]="data.fileIdentificationCard1" target="_blank" id="ced1"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cédula 1</a>
+                    <a [href]="data.fileIdentificationCard2" target="_blank" id="ced2"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cédula 2</a>
+                    <a [href]="data.fileBankCertificate" target="_blank" id="certbank"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cert.bancaria</a>
+
+              </div>
+
+          </div>
+      </div>
+  </div>
+</div>
