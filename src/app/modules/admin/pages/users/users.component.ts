@@ -36,7 +36,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
      * Traduccion del paginador
      */
 
-    this.itemsPerPageLabel = "Usuarios por página";
+    this.itemsPerPageLabel = "Items por página";
     this.nextPageLabel = "Página siguiente";
     this.previousPageLabel = "Página anterior";
     this.lastPageLabel = "Última página";
@@ -53,7 +53,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
         startIndex < length
           ? Math.min(startIndex + pageSize, length)
           : startIndex + pageSize;
-      return startIndex + 1 + " de " + endIndex + " Usuarios de " + length;
+      return startIndex + 1 + " de " + endIndex + " items de " + length;
     };
   }
 

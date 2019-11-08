@@ -151,6 +151,7 @@ export class OffersComponent implements OnInit {
     const showComission = true;
     const showshowTitle = false;
     const buttonClose = "Cerrar";
+    const offers = true;
     this.plu = "";
     this.business = offer.business;
     this.dialog.open(DialogComponent, {
@@ -165,7 +166,8 @@ export class OffersComponent implements OnInit {
         showshowTitle,
         showComission,
         buttonClose,
-        id
+        id,
+        offers
       }
     });
   }

@@ -20,9 +20,14 @@ export class LinksService {
   apiSaveLink = 'SaveLink';
   apiFile = 'getUrlFileCommissions';
 
+  token = localStorage.getItem("ACCESS_TOKEN");
+  authorization = this.token;
+
+
   httpOptions = {
     headers: new HttpHeaders({
-      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+      Authorization: "Bearer " + this.authorization,
     })
   };
   
@@ -43,6 +48,15 @@ export class LinksService {
   public getReports(identification: string) {
     let apiReport = `ClickerPerformanceReport?identification=${identification}`;
     return this.http.get((`${this.urlComission}${this.reports}/${apiReport}`), this.httpOptions).pipe(
+      map((resp: ResponseService) => {
+        return resp.objectResponse;
+      })
+    );
+  }
+
+  public getPayment(params) {
+    let apiPayment = `getPaymentHistoryClicker`;
+    return this.http.get((`${this.urlComission}${this.comission}/${apiPayment}?from=${params.from}&to=${params.to}`), this.httpOptions).pipe(
       map((resp: ResponseService) => {
         return resp.objectResponse;
       })

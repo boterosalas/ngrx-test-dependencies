@@ -157,7 +157,11 @@
     "CROSS": "Cruzar ventas",
     "UPLOAD": "Sube los archivos de cada negocio por separado.",
     "TRIPS": "VENTAS VIAJES",
-    "ASSURED": "VENTAS SEGUROS"
+    "ASSURED": "VENTAS SEGUROS",
+    "HISTORICAL": "Historial pagos",
+    "DATE": "FECHA",
+    "AMOUNT": "MONTO",
+    "BANK": "BANCO DONDE SE PAGÓ"
   },
   "USERS": {
     "USERS": "Usuarios",

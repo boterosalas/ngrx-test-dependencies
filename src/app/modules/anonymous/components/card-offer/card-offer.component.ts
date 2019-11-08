@@ -40,6 +40,7 @@ export class CardOfferComponent implements OnInit {
   @Input() container: boolean;
   @Input() classButton: string;
   @Input() business: string;
+  @Input() offers: string;
 
   
 
