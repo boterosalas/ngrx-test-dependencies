@@ -20,7 +20,7 @@ import { AuthGuard } from 'src/app/auth.guard';
 import { MatPaginatorIntl } from '@angular/material';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ProfileFormComponent } from './components/profile-form/profile-form.component';
-import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
+import { TableHistorialComponent } from './components/table-historial/table-historial.component';
 
 const routes: Routes = [
   {
@@ -31,16 +31,16 @@ const routes: Routes = [
     path: 'mi-perfil',
     component: ProfileComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: "reportes",
+    component: ReportComponent,
+    canActivate: [AuthGuard]
   }
-  // {
-  //   path: "reportes",
-  //   component: ReportComponent,
-  //   canActivate: [AuthGuard]
-  // }
 ];
 
 @NgModule({
-  declarations: [HomeComponent, ProductComponent, SliderComponent, TabsComponent, MonthResumeComponent, GeneralResumeComponent, ReportComponent, ProfileComponent, ProfileFormComponent, TruncatePipe],
+  declarations: [HomeComponent, ProductComponent, SliderComponent, TabsComponent, MonthResumeComponent, GeneralResumeComponent, ReportComponent, ProfileComponent, ProfileFormComponent, TableHistorialComponent],
   imports: [
     CommonModule,
     AppMaterialModule,

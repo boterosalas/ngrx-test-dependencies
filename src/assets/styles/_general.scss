@@ -300,6 +300,13 @@ button {
   border-bottom: 1px solid $color-border;
 }
 
+.border-left-orange::before {
+  content: "";
+  border-left: 3px solid $primary-color;
+  border-radius: 4px;
+  margin-right: 15px;
+}
+
 .card-product {
   border: 1px solid $color-border;
   border-radius: 0px !important;
@@ -652,4 +659,10 @@ th.mat-header-cell {
 }
 .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
   background-color: rgba($primary-color, 0.54) !important;
+}
+
+
+.slick-track {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }

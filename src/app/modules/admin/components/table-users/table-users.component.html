@@ -27,7 +27,7 @@
 
           <!-- Origin Column -->
           <ng-container matColumnDef="origin">
-            <th mat-header-cell *matHeaderCellDef> {{ 'USERS.ORIGIN' | translate }} </th>
+            <th mat-header-cell *matHeaderCellDef class="pr-3"> {{ 'USERS.ORIGIN' | translate }} </th>
             <td mat-cell *matCellDef="let element"> 
                 <span *ngIf="element.isEmployeeGrupoExito === true">
                     Interno
@@ -40,8 +40,8 @@
 
           <!-- Verified Column -->
           <ng-container matColumnDef="verified">
-            <th mat-header-cell *matHeaderCellDef> {{ 'USERS.VERIFIED' | translate }} </th>
-            <td mat-cell *matCellDef="let element"> 
+            <th mat-header-cell *matHeaderCellDef class="text-center pr-2"> {{ 'USERS.VERIFIED' | translate }} </th>
+            <td mat-cell *matCellDef="let element" class="text-center"> 
                 <span *ngIf="element.verified === true">
                    Si
                 </span>
@@ -53,8 +53,8 @@
 
           <!-- Status Column -->
           <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef> {{ 'USERS.STATUS' | translate }} </th>
-            <td mat-cell *matCellDef="let element"> 
+            <th mat-header-cell *matHeaderCellDef class="text-center"> {{ 'USERS.STATUS' | translate }} </th>
+            <td mat-cell *matCellDef="let element" class="text-center"> 
                 <span *ngIf="element.state !== 'Inactivo'">
                     <img src="/assets/img/dashboard/checked-ok.svg" alt="">
                 </span>
@@ -66,6 +66,6 @@
           </ng-container>
       
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;let i= index;" (click)="userInfo((dataSource.data)[i])"></tr>
+          <tr class="cursor-pointer" id="user-{{i}}" mat-row *matRowDef="let row; columns: displayedColumns;let i= index;" (click)="userInfo((dataSource.data)[i])"></tr>
         </table>
       </div>

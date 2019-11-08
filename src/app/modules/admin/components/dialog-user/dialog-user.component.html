@@ -31,7 +31,7 @@
                   <div *ngIf="data.userId !== idAdmin">
                       <p class="galano-bold gray">ESTADO</p>
     
-                      <mat-slide-toggle  [(ngModel)]="data.state" (change)="changeStatus()" color="orange-toggle" labelPosition="before">
+                      <mat-slide-toggle  [(ngModel)]="data.state" (change)="changeStatus()" color="orange-toggle" labelPosition="before" id="state-toggle">
                             <span *ngIf="data.state === true">
                                 Activo
                             </span>
@@ -42,7 +42,7 @@
                   </div>
 
                   <p class="galano-bold gray">RECIBE COMUNICACIONES</p>
-                  <mat-slide-toggle [(ngModel)]="data.receiveCommunications" (change)="changeComunications()" color="orange-toggle" labelPosition="before">
+                  <mat-slide-toggle [(ngModel)]="data.receiveCommunications" (change)="changeComunications()" color="orange-toggle" labelPosition="before" id="comunications-toggle">
                       <span *ngIf="data.receiveCommunications === true">
                           Si
                       </span>
@@ -60,7 +60,7 @@
                     </span>
                     <div *ngIf="data.isEmployeeGrupoExito === false">
                   <p class="galano-bold gray">VERIFICACIÓN</p>
-                    <mat-slide-toggle [(ngModel)]="data.verified" (change)="changeVerified()" color="orange-toggle" labelPosition="before">
+                    <mat-slide-toggle [(ngModel)]="data.verified" (change)="changeVerified()" color="orange-toggle" labelPosition="before" id="verified-toggle">
                         <span *ngIf="data.verified === true">
                             Aprobado
                         </span>
@@ -74,9 +74,9 @@
               <div class="files" fxLayout="column" *ngIf="data.isEmployeeGrupoExito === false">
                   <h3 class="gray-title">Archivos adjuntos</h3>
 
-                    <a [href]="data.fileIdentificationCard1" target="_blank"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cédula 1</a>
-                    <a [href]="data.fileIdentificationCard2" target="_blank"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cédula 2</a>
-                    <a [href]="data.fileBankCertificate" target="_blank"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cert.bancaria</a>
+                    <a [href]="data.fileIdentificationCard1" target="_blank" id="ced1"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cédula 1</a>
+                    <a [href]="data.fileIdentificationCard2" target="_blank" id="ced2"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cédula 2</a>
+                    <a [href]="data.fileBankCertificate" target="_blank" id="certbank"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cert.bancaria</a>
 
               </div>
 

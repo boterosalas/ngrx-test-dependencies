@@ -236,6 +236,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
     const plu = product.items[0].itemId;
     this.plu = product.items[0].itemId;
     this.business = 'exito';
+    const home = true;
     this.dialog.open(DialogComponent, {
       data: {
         title,
@@ -250,7 +251,8 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
         showshowTitle,
         buttonClose,
         id,
-        discount
+        discount,
+        home
       }
     });
   }
@@ -283,6 +285,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
     const buttonClose = "Cerrar";
     this.plu = '';
     this.business = 'seguros';
+    const home = true;
     this.dialog.open(DialogComponent, {
       data: {
         title,
@@ -295,7 +298,8 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
         showshowTitle,
         showComission,
         buttonClose,
-        id
+        id,
+        home
       }
     });
 
@@ -329,6 +333,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
     const buttonClose = "Cerrar";
     this.plu = '';
     this.business = 'viajes'
+    const home = true;
     this.dialog.open(DialogComponent, {
       data: {
         title,
@@ -341,7 +346,8 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
         showshowTitle,
         showComission,
         buttonClose,
-        id
+        id,
+        home
       }
     });
 
