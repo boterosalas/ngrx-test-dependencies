@@ -18,6 +18,7 @@ import { GoogleChartsModule } from 'angular-google-charts';
 import { RouterModule } from '@angular/router';
 import { MenuOptionsComponent } from './components/menu-options/menu-options.component';
 import { UnderConstructionComponent } from './components/under-construction/under-construction.component';
+import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { UnderConstructionComponent } from './components/under-construction/unde
     SociallinksComponent,
     TopComponent,
     MenuOptionsComponent,
-    UnderConstructionComponent
+    UnderConstructionComponent,
+    TruncatePipe
   ],
   imports: [
     CommonModule,
@@ -61,7 +63,8 @@ import { UnderConstructionComponent } from './components/under-construction/unde
     GoogleChartsModule,
     RouterModule,
     MenuOptionsComponent,
-    UnderConstructionComponent
+    UnderConstructionComponent,
+    TruncatePipe
   ]
 })
 export class SharedModule {}

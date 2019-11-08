@@ -1,40 +1,64 @@
 <div class="offers container">
   <h1>{{ "OFFERS.OFFERS_TITLE" | translate }}</h1>
-
-  <h3 class="gray border-left-orange mt-5">
+  <div class="arrows" fxLayout="row" fxLayoutAlign="space-between"  class="mt-5">
+  <h3 class="gray border-left-orange">
     {{ "OFFERS.TENDENT" | translate }}
   </h3>
-  <div fxLayout="row" fxLayoutGap="20px">
-    <app-card-offer
-      fxLayout="column"
-      fxFlex="20"
-      classButton="mb-1  button-100"
-      *ngFor="let mostprominent of mostprominent; let i = index"
-      id="productTitle{{ i }}"
-      btnid="mostprominent{{ i }}"
-      [productName]="mostprominent.title"
-      [price]="mostprominent.price"
-      productDescription=""
-      [image]="mostprominent.imageurl"
-      [alt]="mostprominent.productName"
-      textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
-      (infoProduct)="dataProduct(mostprominent)"
-    ></app-card-offer>
+  <span fxLayout="row" fxLayoutAlign="end">
+    <button mat-button class="p-1" (click)="prev()"><mat-icon>keyboard_arrow_left</mat-icon></button>
+      <button mat-button class="p-1" (click)="next()"><mat-icon>keyboard_arrow_right</mat-icon></button>
+    </span>
   </div>
+  <ngx-slick-carousel class="carousel" 
+                        #slickModal="slick-carousel" 
+                        [config]="slideConfig" 
+                      >
+        <div ngxSlickItem *ngFor="let mostprominent of mostprominent; let i = index" class="slide">
+                <app-card-offer
+                  ngxSlickItem
+                  fxLayout="column"
+                  classButton="mb-1 button-100"
+                  [(business)]="mostprominent.business"
+                  id="productTitle{{ i }}"
+                  btnid="mostprominent{{ i }}"
+                  [productName]="mostprominent.title"
+                  [price]="mostprominent.price"
+                  [plu]="mostprominent.plu"
+                  productDescription=""
+                  [image]="mostprominent.imageurl"
+                  [alt]="mostprominent.productName"
+                  textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+                  (infoProduct)="dataProduct(mostprominent)"
+                ></app-card-offer>
+              
+        </div>
+    </ngx-slick-carousel>
 
-  <h3 class="gray border-left-orange mt-5">
-    {{ "OFFERS.BEST_BUY" | translate }}
-  </h3>
-  <div fxLayout="row" fxLayoutGap="20px">
+ 
+    <div class="arrows" fxLayout="row" fxLayoutAlign="space-between"  class="mt-5">
+        <h3 class="gray border-left-orange">
+            {{ "OFFERS.BEST_BUY" | translate }}
+        </h3>
+        <span fxLayout="row" fxLayoutAlign="end">
+          <button mat-button class="p-1" (click)="prev2()"><mat-icon>keyboard_arrow_left</mat-icon></button>
+            <button mat-button class="p-1" (click)="next2()"><mat-icon>keyboard_arrow_right</mat-icon></button>
+          </span>
+        </div>
+
+  <ngx-slick-carousel class="carousel" 
+                        #slickModal2="slick-carousel" 
+                        [config]="slideConfig" 
+                      >
+  <div ngxSlickItem *ngFor="let mostsold of mostsold; let i = index" class="slide">
     <app-card-offer
       fxLayout="column"
-      fxFlex="20"
       classButton="mb-1  button-100 orange-border"
-      *ngFor="let mostsold of mostsold; let i = index"
+      [(business)]="mostsold.business"
       id="productTitle{{ i }}"
       btnid="mostsold{{ i }}"
       [productName]="mostsold.title"
       [price]="mostsold.price"
+      [plu]="mostsold.plu"
       productDescription=""
       [image]="mostsold.imageurl"
       [alt]="mostsold.productName"
@@ -42,20 +66,32 @@
       (infoProduct)="dataProduct(mostsold)"
     ></app-card-offer>
   </div>
+  </ngx-slick-carousel>
 
-  <h3 class="gray border-left-orange mt-5">
-    {{ "OFFERS.BEST_COMISSION" | translate }}
-  </h3>
-  <div fxLayout="row" fxLayoutGap="20px">
+  <div class="arrows" fxLayout="row" fxLayoutAlign="space-between"  class="mt-5">
+      <h3 class="gray border-left-orange">
+          {{ "OFFERS.BEST_COMISSION" | translate }}
+      </h3>
+      <span fxLayout="row" fxLayoutAlign="end">
+        <button mat-button class="p-1" (click)="prev3()"><mat-icon>keyboard_arrow_left</mat-icon></button>
+          <button mat-button class="p-1" (click)="next3()"><mat-icon>keyboard_arrow_right</mat-icon></button>
+        </span>
+      </div>
+
+  <ngx-slick-carousel class="carousel" 
+  #slickModal3="slick-carousel" 
+  [config]="slideConfig" 
+>
+<div ngxSlickItem *ngFor="let highercommission of highercommission; let i = index" class="slide">
     <app-card-offer
       fxLayout="column"
-      fxFlex="20"
       classButton="mb-1 button-100"
-      *ngFor="let highercommission of highercommission; let i = index"
+      [(business)]="highercommission.business"
       id="productTitle{{ i }}"
       btnid="highercommission{{ i }}"
       [productName]="highercommission.title"
       [price]="highercommission.price"
+      [plu]="highercommission.plu"
       productDescription=""
       [image]="highercommission.imageurl"
       [alt]="highercommission.productName"
@@ -63,6 +99,7 @@
       (infoProduct)="dataProduct(highercommission)"
     ></app-card-offer>
   </div>
+</ngx-slick-carousel>
 </div>
 
 <ng-template #templateDialog>

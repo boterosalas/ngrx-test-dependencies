@@ -22,6 +22,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class CardOfferComponent implements OnInit {
 
   @Output() infoProduct = new EventEmitter();
+  @Output() showExito = new EventEmitter();
 
   @Input() productName: string;
   @Input() productDescription: string;
@@ -38,6 +39,9 @@ export class CardOfferComponent implements OnInit {
   @Input() other: boolean;
   @Input() container: boolean;
   @Input() classButton: string;
+  @Input() business: string;
+
+  
 
   constructor( public auth: AuthService) { }
 

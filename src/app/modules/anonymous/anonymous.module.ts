@@ -83,7 +83,7 @@ const routes: Routes = [
     TermsAndConditionsComponent,
     BlockCopyPasteDirective,
     KeySpaceDirective,
-    CardOfferComponent
+    CardOfferComponent,
     // ReportComponent
   ],
   imports: [

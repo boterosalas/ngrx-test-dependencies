@@ -1,23 +1,23 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
-import { Subscription } from 'rxjs';
-import { MatSnackBar, MatBottomSheet } from '@angular/material';
-import { UserService } from 'src/app/services/user.service';
-import { ShortenerService } from 'src/app/services/shortener.service';
-import { AuthService } from 'src/app/services/auth.service';
-import { ContentService } from 'src/app/services/content.service';
-import { LinksService } from 'src/app/services/links.service';
-import { distinctUntilChanged } from 'rxjs/operators';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Component, OnInit, ViewChild, TemplateRef } from "@angular/core";
+import { environment } from "src/environments/environment";
+import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog.component";
+import { Subscription } from "rxjs";
+import { MatSnackBar, MatBottomSheet } from "@angular/material";
+import { UserService } from "src/app/services/user.service";
+import { ShortenerService } from "src/app/services/shortener.service";
+import { AuthService } from "src/app/services/auth.service";
+import { ContentService } from "src/app/services/content.service";
+import { LinksService } from "src/app/services/links.service";
+import { distinctUntilChanged } from "rxjs/operators";
+import { FormGroup, FormBuilder } from "@angular/forms";
+import { SlickCarouselComponent } from 'ngx-slick-carousel';
 
 @Component({
-  selector: 'app-offers',
-  templateUrl: './offers.component.html',
-  styleUrls: ['./offers.component.scss']
+  selector: "app-offers",
+  templateUrl: "./offers.component.html",
+  styleUrls: ["./offers.component.scss"]
 })
 export class OffersComponent implements OnInit {
-
   @ViewChild("templateDialog", { static: false }) template: TemplateRef<any>;
 
   date: any;
@@ -42,37 +42,100 @@ export class OffersComponent implements OnInit {
     private dialog: MatBottomSheet,
     private fb: FormBuilder,
     private content: ContentService
-  ) { }
+  ) {}
 
   ngOnInit() {
-     /**
+    /**
      * verifica si el usuario esta logueado y se obtiene la identificacion
      */
 
     this.isLoggedIn = this.auth.isLoggedIn();
     if (this.isLoggedIn) {
-     this.subscription = this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
-        if (!!val) {
-          this.identification = val.identification;
-        }
-      });
+      this.subscription = this.user.userInfo$
+        .pipe(distinctUntilChanged())
+        .subscribe(val => {
+          if (!!val) {
+            this.identification = val.identification;
+          }
+        });
     }
 
     this.getOffers();
-
   }
 
-    /**
+  @ViewChild('slickModal', {static: true}) slickModal: SlickCarouselComponent;
+  @ViewChild('slickModal2', {static: true}) slickModal2: SlickCarouselComponent;
+  @ViewChild('slickModal3', {static: true}) slickModal3: SlickCarouselComponent;
+
+  slideConfig = {
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    infinite: true,
+    dots: false,
+    dotClass: "slick-dots orange",
+    autoplay: false,
+    arrows: true,
+    centerPadding:'10px',
+    // the magic
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          infinite: false
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          dots: false
+        }
+      },
+      {
+        breakpoint: 300,
+        settings: "unslick" // destroys slick
+      }
+    ]
+  };
+
+  next() {
+    this.slickModal.slickNext();
+  }
+  
+  prev() {
+    this.slickModal.slickPrev();
+  }
+
+  next2() {
+    this.slickModal2.slickNext();
+  }
+  
+  prev2() {
+    this.slickModal2.slickPrev();
+  }
+
+  next3() {
+    this.slickModal3.slickNext();
+  }
+  
+  prev3() {
+    this.slickModal3.slickPrev();
+  }
+
+  /**
    * Metodo para abrir la modal con el producto seleccionado del exito
-   * @param product 
+   * @param product
    */
 
   public dataProduct(offer) {
     const dataurl = offer.link;
     this.url = `${dataurl}${this.identification}`;
-    this.subscription = this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
-      this.urlshorten = resp;
-    });
+    this.subscription = this.shortUrl
+      .getShortUrl(this.url)
+      .subscribe((resp: any) => {
+        this.urlshorten = resp;
+      });
     setTimeout(() => {
       this.saveLink();
     }, 1500);
@@ -88,7 +151,7 @@ export class OffersComponent implements OnInit {
     const showComission = true;
     const showshowTitle = false;
     const buttonClose = "Cerrar";
-    this.plu = '';
+    this.plu = "";
     this.business = offer.business;
     this.dialog.open(DialogComponent, {
       data: {
@@ -107,25 +170,25 @@ export class OffersComponent implements OnInit {
     });
   }
 
-    /**
+  /**
    * Metodo para dalvar los links generados
    */
 
-  public saveLink(){
+  public saveLink() {
     let data = {
       identification: this.identification,
       link: this.urlshorten,
       plu: this.plu,
       business: this.business,
       creationDate: this.date
-    }
-   this.subscription = this.links.saveLink(data).subscribe();
+    };
+    this.subscription = this.links.saveLink(data).subscribe();
   }
 
   /**
    * Abre el mensaje de confirmacion de copiado del link
-   * @param message 
-   * @param action 
+   * @param message
+   * @param action
    */
 
   private openSnackBar(message: string, action: string) {
@@ -154,11 +217,9 @@ export class OffersComponent implements OnInit {
 
   public getOffers() {
     this.subscription = this.content.getOffers().subscribe(offer => {
-       this.mostprominent = offer.mostprominent;
-       this.highercommission = offer.highercommission;
-       this.mostsold = offer.mostsold;
-     });
-   }
-
-
+      this.mostprominent = offer.mostprominent;
+      this.highercommission = offer.highercommission;
+      this.mostsold = offer.mostsold;
+    });
+  }
 }

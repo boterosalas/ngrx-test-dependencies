@@ -23,7 +23,8 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, {
       enableTracing: false, // <-- debugging purposes only
-      preloadingStrategy: PreloadAllModules
+      preloadingStrategy: PreloadAllModules,
+      useHash: true
     })
   ],
   exports: [RouterModule]
