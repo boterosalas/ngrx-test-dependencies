@@ -6,33 +6,18 @@
   <mat-card  fxLayout="column" fxFlex="100" class="mt-2 mb-2" fxLayoutAlign="center center">
     <mat-card-content class="w-100">
       
-        <div class="img-container-2">
+        <div>
           <img
-            class="img-responsive mt-3"
             mat-card-image
+            class="radius"
             src="{{ image }}"
             alt="{{ alt }}"
           />
         </div>
       
 
-      <h3 class="m-0 gray regular" id="{{ id }}" matTooltip={{productName}}>{{ productName | truncate: '10' }}</h3>
-      <div *ngIf="business === 'viajes'">
-      <p class="min-comi">
-        <span>Comisión:</span>
-        <span class="discount">
-          {{ price | currency: "":"symbol":"1.0-0" }}
-        </span>
-      </p>
-    </div>
-      <div *ngIf="business === 'exito'">
-      <p>
-        <span class="discount d-block">
-          {{ price | currency: "":"symbol":"1.0-0" }}
-        </span>
-        <span class="plu"> PLU:{{ plu }} </span>
-      </p>
-    </div>
+      <h3 class="gray regular truncate" id="{{ id }}" matTooltip={{productName}}>{{ productName }}</h3>
+    
       <button *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'CLICKER'"
         id="{{ btnid }}"
         mat-raised-button

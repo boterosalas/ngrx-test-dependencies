@@ -25,3 +25,17 @@ h3{
 .min-comi{
     min-height: 36px;
 }
+
+.radius {
+    border-top-right-radius: 5px !important;
+    border-top-left-radius: 5px !important;
+}
+
+
+.truncate{
+    width: 100px;
+    overflow: hidden;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

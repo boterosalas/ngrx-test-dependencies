@@ -20,7 +20,6 @@ import { AuthGuard } from 'src/app/auth.guard';
 import { MatPaginatorIntl } from '@angular/material';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ProfileFormComponent } from './components/profile-form/profile-form.component';
-import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 import { TableHistorialComponent } from './components/table-historial/table-historial.component';
 
 const routes: Routes = [

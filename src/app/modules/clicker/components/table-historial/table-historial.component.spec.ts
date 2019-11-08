@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TableHistorialComponent } from './table-historial.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 
 describe('TableHistorialComponent', () => {
   let component: TableHistorialComponent;
@@ -8,7 +10,11 @@ describe('TableHistorialComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TableHistorialComponent ]
+      declarations: [ TableHistorialComponent ],
+      imports: [
+        TranslateModule.forRoot({}),
+        AppMaterialModule
+      ]
     })
     .compileComponents();
   }));

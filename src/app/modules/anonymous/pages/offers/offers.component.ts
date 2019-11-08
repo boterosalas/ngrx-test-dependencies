@@ -70,7 +70,7 @@ export class OffersComponent implements OnInit {
   slideConfig = {
     slidesToShow: 6,
     slidesToScroll: 1,
-    infinite: true,
+    infinite: false,
     dots: false,
     dotClass: "slick-dots orange",
     autoplay: false,

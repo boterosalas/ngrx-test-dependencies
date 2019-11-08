@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { async, ComponentFixture, TestBed, tick } from "@angular/core/testing";
 
 import { OffersComponent } from "./offers.component";
 import { TranslateModule } from "@ngx-translate/core";
@@ -16,6 +16,7 @@ import { ContentService } from "src/app/services/content.service";
 import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
 import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog.component";
 import { ShareButtonsModule } from '@ngx-share/buttons';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 describe("OffersComponent", () => {
   let component: OffersComponent;
@@ -165,6 +166,7 @@ describe("OffersComponent", () => {
         FormsModule,
         BrowserAnimationsModule,
         ShareButtonsModule,
+        SlickCarouselModule,
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
@@ -206,12 +208,18 @@ describe("OffersComponent", () => {
 
   it("should create", () => {
     expect(component).toBeTruthy();
-    expect(mockContentService.getOffers).toHaveBeenCalled();
+    fixture.whenStable().then(()=> {
+      tick();
+      expect(mockContentService.getOffers).toHaveBeenCalled();
+    })
   });
 
   it("data product", () => {
     component.dataProduct(mostprominent);
-    expect(mockShortenerService.getShortUrl).toHaveBeenCalled();
+    fixture.whenStable().then(()=> {
+      tick();
+      expect(mockShortenerService.getShortUrl).toHaveBeenCalled();
+    })
   });
 
   
@@ -222,7 +230,6 @@ describe("OffersComponent", () => {
     component.business = 'exito';
     component.date = "2019/09/09"
     component.saveLink();
-    
-  });
+  });  
 
 });

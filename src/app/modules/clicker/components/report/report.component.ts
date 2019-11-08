@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { MatPaginator, MatPaginatorIntl, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { LinksService } from 'src/app/services/links.service';
-import { TokenDataService } from 'src/app/services/token-data.service';
 
 @Component({
   selector: 'app-report',

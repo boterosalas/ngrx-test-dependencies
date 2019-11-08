@@ -2,11 +2,12 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CardOfferComponent } from './card-offer.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
-import { AnonymousModule } from '../../anonymous.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 
 describe('CardOfferComponent', () => {
   let component: CardOfferComponent;
@@ -14,9 +15,10 @@ describe('CardOfferComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [],
+      declarations: [CardOfferComponent, TruncatePipe],
       imports:[
-        AnonymousModule,
+        // AnonymousModule,
+        // ClickerModule,
         AppMaterialModule,
         HttpClientTestingModule,
         RouterTestingModule.withRoutes([]),
@@ -31,6 +33,9 @@ describe('CardOfferComponent', () => {
             blacklistedRoutes: []
           }
         }),
+      ],
+      schemas: [
+        NO_ERRORS_SCHEMA
       ]
     })
     .compileComponents();
@@ -44,6 +49,6 @@ describe('CardOfferComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+      expect(component).toBeTruthy();
   });
 });
