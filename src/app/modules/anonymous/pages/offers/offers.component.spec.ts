@@ -9,20 +9,21 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { JwtModule } from "@auth0/angular-jwt";
 import { RouterTestingModule } from "@angular/router/testing";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { ShortenerService } from "src/app/services/shortener.service";
 import { MatDialogRef, MAT_BOTTOM_SHEET_DATA } from "@angular/material";
 import { of } from "rxjs/internal/observable/of";
 import { ContentService } from "src/app/services/content.service";
 import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
 import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog.component";
-import { ShareButtonsModule } from '@ngx-share/buttons';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { ShareButtonsModule } from "@ngx-share/buttons";
+import { SlickCarouselModule } from "ngx-slick-carousel";
+import { UserService } from "src/app/services/user.service";
+import { AuthService } from "src/app/services/auth.service";
 
 describe("OffersComponent", () => {
   let component: OffersComponent;
   let fixture: ComponentFixture<OffersComponent>;
 
-  const mockShortenerService = jasmine.createSpyObj("ShortenerService", [
+  const mockUserService = jasmine.createSpyObj("UserService", [
     "getShortUrl"
   ]);
 
@@ -31,6 +32,8 @@ describe("OffersComponent", () => {
   ]);
 
   const mockDialog = jasmine.createSpyObj("MatDialog", ["open"]);
+
+  const mockAuthService = jasmine.createSpyObj("AuthService", ["isLoggedIn"]);
 
   const mockDialogRef = jasmine.createSpyObj("MatDialogRef", [
     "close",
@@ -135,24 +138,45 @@ describe("OffersComponent", () => {
     }
   };
 
-  let mostprominent = 
-    {
-      id: 1,
-      title: "Seguro mascota",
-      description: "Detalle Seguro mascota",
-      link: null,
-      imageurl:
-        "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-seguros/ico-mascota.svg",
-      oncreatedate: "2019-11-05T00:00:00",
-      price: 10000.0,
-      orderoffer: 1,
-      mostprominent: true,
-      highercommission: false,
-      mostsold: false
-    }
-  
+  let mostprominent = {
+    id: 1,
+    title: "Seguro mascota",
+    description: "Detalle Seguro mascota",
+    link: null,
+    imageurl:
+      "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-seguros/ico-mascota.svg",
+    oncreatedate: "2019-11-05T00:00:00",
+    price: 10000.0,
+    orderoffer: 1,
+    mostprominent: true,
+    highercommission: false,
+    mostsold: false
+  };
 
   const shortUrl = "http://tynyurl.com/xixiaa";
+
+  let userInfo = {
+    address: "",
+    bank: "Cuenta de nómina",
+    bankAccountNumber: "",
+    cellphone: "3008526341",
+    email: "david.betancur@pragma.com.co",
+    fileBankCertificate: "",
+    fileIdentificationCard1: "",
+    fileIdentificationCard2: "",
+    firstNames: "Daniel",
+    idType: 1,
+    identification: "14725836",
+    isEmployeeGrupoExito: true,
+    lastNames: "Salamanca",
+    password: null,
+    receiveCommunications: false,
+    state: "Activo",
+    stateId: 5,
+    typeBankAccount: "",
+    userId: 9,
+    verified: true
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -179,7 +203,8 @@ describe("OffersComponent", () => {
         })
       ],
       providers: [
-        { provide: ShortenerService, useValue: mockShortenerService },
+        { provide: UserService, useValue: mockUserService },
+        { provide: AuthService, useValue: mockAuthService },
         { provide: ContentService, useValue: mockContentService },
         { provide: MatDialogRef, useValue: mockDialogRef },
         { provide: MAT_BOTTOM_SHEET_DATA, useValue: mockDialog }
@@ -192,8 +217,9 @@ describe("OffersComponent", () => {
         }
       })
       .compileComponents();
-    mockShortenerService.getShortUrl.and.returnValue(of(shortUrl));
+    mockUserService.getShortUrl.and.returnValue(of(shortUrl));
     mockContentService.getOffers.and.returnValue(of(data));
+    mockAuthService.isLoggedIn.and.returnValue(true);
   }));
 
   beforeEach(() => {
@@ -208,28 +234,26 @@ describe("OffersComponent", () => {
 
   it("should create", () => {
     expect(component).toBeTruthy();
-    fixture.whenStable().then(()=> {
+    fixture.whenStable().then(() => {
       tick();
       expect(mockContentService.getOffers).toHaveBeenCalled();
-    })
+    });
   });
 
   it("data product", () => {
     component.dataProduct(mostprominent);
-    fixture.whenStable().then(()=> {
+    fixture.whenStable().then(() => {
       tick();
-      expect(mockShortenerService.getShortUrl).toHaveBeenCalled();
-    })
+      expect(mockUserService.getShortUrl).toHaveBeenCalled();
+    });
   });
 
-  
-  it('save link', () => {
+  it("save link", () => {
     component.urlshorten = "https://tyny.url/xaxa";
     component.identification = "123456789";
-    component.plu = '123456';
-    component.business = 'exito';
-    component.date = "2019/09/09"
+    component.plu = "123456";
+    component.business = "exito";
+    component.date = "2019/09/09";
     component.saveLink();
-  });  
-
+  });
 });

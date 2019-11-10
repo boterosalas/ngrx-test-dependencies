@@ -13,16 +13,17 @@ export class LinksService {
 
   url = environment.URL_REFERAL;
   urlComission = environment.URL_COMISSION;
-  comission = 'commissions';
-  reports = 'Reports';
+  
+  // comission = 'commissions';
+  reports = 'Reports/ClickerPerformanceReport';
   insurance = 'Insurance/ProcessFiles'
-
-  apiSaveLink = 'SaveLink';
-  apiFile = 'getUrlFileCommissions';
+  apiSaveLink = 'Link/SaveLink';
+  apiGetTotalLinks = 'Link/GetTotalLinksGenerated';
+  apiFile = 'commissions/getUrlFileCommissions';
+  apiHistory = 'commissions/getPaymentHistoryClicker';
 
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
-
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -37,7 +38,7 @@ export class LinksService {
   }
 
   public getLink(identification: string) {
-    let apiGetLink = `GetTotalLinksGenerated?identification=${identification}`;
+    let apiGetLink = `${this.apiGetTotalLinks}=${identification}`;
     return this.http.get((`${this.url + apiGetLink}`), this.httpOptions).pipe(
       map((resp: ResponseService) => {
         return resp.objectResponse;
@@ -46,8 +47,8 @@ export class LinksService {
   }
 
   public getReports(identification: string) {
-    let apiReport = `ClickerPerformanceReport?identification=${identification}`;
-    return this.http.get((`${this.urlComission}${this.reports}/${apiReport}`), this.httpOptions).pipe(
+    let apiReport = `${this.reports}?identification=${identification}`;
+    return this.http.get((`${this.urlComission}/${apiReport}`), this.httpOptions).pipe(
       map((resp: ResponseService) => {
         return resp.objectResponse;
       })
@@ -55,8 +56,18 @@ export class LinksService {
   }
 
   public getPayment(params) {
-    let apiPayment = `getPaymentHistoryClicker`;
-    return this.http.get((`${this.urlComission}${this.comission}/${apiPayment}?from=${params.from}&to=${params.to}`), this.httpOptions).pipe(
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+
+    return this.http.get((`${this.urlComission}${this.apiHistory}?from=${params.from}&to=${params.to}`), httpOptions).pipe(
       map((resp: ResponseService) => {
         return resp.objectResponse;
       })
@@ -64,7 +75,7 @@ export class LinksService {
   }
 
   public getFileReport() {
-    return this.http.get((`${this.urlComission}${this.comission}/${this.apiFile}`), this.httpOptions).pipe(
+    return this.http.get((`${this.urlComission}/${this.apiFile}`), this.httpOptions).pipe(
       map((resp: ResponseService) => {
         return resp.objectResponse;
       })

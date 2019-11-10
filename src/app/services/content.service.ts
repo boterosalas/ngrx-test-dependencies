@@ -22,6 +22,7 @@ export class ContentService {
   apiAssured= 'product/getProductsSegurosExito';
   apiTrips= 'product/getProductsViajesExito';
   apiOffers= 'offer/getOffers';
+  apiProducts = 'product';
 
   public getNews() {
     return this.http.get(`${this.url + this.apiNews}`, this.httpOptions).pipe(
@@ -50,6 +51,15 @@ export class ContentService {
   public getOffers() {
     return this.http.get(`${this.url + this.apiOffers}`, this.httpOptions).pipe(
       map((user: ResponseService) => {
+        return user.objectResponse;
+      })
+    );
+  }
+
+  public getProductsPagination(params: {term: string, from:number, to:number}){
+    const apiSearchVetex = `${this.apiProducts}/getProducts?ft=${params.term}&_from=${params.from}&_to=${params.to}&fq=1`
+    return this.http.get(`${this.url + apiSearchVetex}`, this.httpOptions).pipe(
+      map((user: any) => {
         return user.objectResponse;
       })
     );

@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-general-resume',
@@ -15,7 +16,8 @@ export class GeneralResumeComponent implements OnInit, OnDestroy {
   constructor(
     private link: LinksService,
     private user: UserService,
-    private auth: AuthService
+    private auth: AuthService,
+    private token: TokenService
   ) { }
 
   linksGenerated: string;
@@ -35,12 +37,8 @@ export class GeneralResumeComponent implements OnInit, OnDestroy {
      */
 
     if (this.isLoggedIn) {
-     this.subscription = this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
-        if (!!val) {
-          this.identification = val.identification;
-          this.getInfomonth();
-        }
-      });
+        this.identification = this.token.userInfo().identification;
+        this.getInfomonth();
     }
     
     
