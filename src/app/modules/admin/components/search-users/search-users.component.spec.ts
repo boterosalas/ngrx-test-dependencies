@@ -37,4 +37,20 @@ describe('SearchUsersComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('search product', () => {
+    
+    
+    spyOn(component.search, 'emit');
+    component.searchForm.controls.search.setValue('hello');
+    // trigger the click
+    const nativeElement = fixture.nativeElement;
+    const button = nativeElement.querySelector('button');
+    button.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+ 
+    expect(component.search.emit).toHaveBeenCalledWith('hello');
+  });
+  
+
 });

@@ -56,7 +56,18 @@ export class LinksService {
   }
 
   public getPayment(params) {
-    return this.http.get((`${this.urlComission}${this.apiHistory}?from=${params.from}&to=${params.to}`), this.httpOptions).pipe(
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+
+    return this.http.get((`${this.urlComission}${this.apiHistory}?from=${params.from}&to=${params.to}`), httpOptions).pipe(
       map((resp: ResponseService) => {
         return resp.objectResponse;
       })

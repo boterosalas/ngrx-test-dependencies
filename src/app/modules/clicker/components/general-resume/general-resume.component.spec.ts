@@ -1,18 +1,44 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { GeneralResumeComponent } from './general-resume.component';
-import { TranslateModule } from '@ngx-translate/core';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { JwtModule } from '@auth0/angular-jwt';
+import { GeneralResumeComponent } from "./general-resume.component";
+import { TranslateModule } from "@ngx-translate/core";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { RouterTestingModule } from "@angular/router/testing";
+import { JwtModule } from "@auth0/angular-jwt";
+import { LinksService } from "src/app/services/links.service";
+import { of } from 'rxjs/internal/observable/of';
 
-describe('GeneralResumeComponent', () => {
+describe("GeneralResumeComponent", () => {
   let component: GeneralResumeComponent;
   let fixture: ComponentFixture<GeneralResumeComponent>;
 
+  let mockLinksService = jasmine.createSpyObj("LinksService", ["getReports"]);
+
+  let resume = {
+    MonthResume: {
+      TotalCommissions: 14806530,
+      TotalLink: 189,
+      DaysResume: [
+        ["10/12/2019", 0, 490320],
+        ["10/23/2019", 13, 12265210],
+        ["10/25/2019", 11, 1299000],
+        ["10/28/2019", 26, 288000],
+        ["10/29/2019", 1, 176000],
+        ["10/30/2019", 3, 240000],
+        ["11/06/2019", 0, 48000]
+      ]
+    },
+    GeneralResume: {
+      TotalCommissions: 14806530,
+      TotalLinks: 197,
+      TotalProducts: 56,
+      ConversionRate: 0.09137055837563451
+    }
+  };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GeneralResumeComponent ],
+      declarations: [GeneralResumeComponent],
       imports: [
         TranslateModule.forRoot({}),
         RouterTestingModule.withRoutes([]),
@@ -27,9 +53,10 @@ describe('GeneralResumeComponent', () => {
             blacklistedRoutes: []
           }
         })
-      ]
-    })
-    .compileComponents();
+      ],
+      providers: [{ provide: LinksService, useValue: mockLinksService }]
+    }).compileComponents();
+    mockLinksService.getReports.and.returnValue(of(resume));
   }));
 
   beforeEach(() => {
@@ -42,7 +69,8 @@ describe('GeneralResumeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
+
 });

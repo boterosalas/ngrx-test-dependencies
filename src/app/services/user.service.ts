@@ -35,12 +35,6 @@ export class UserService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
-    })
-  };
-
-  httpOptionsToken = {
-    headers: new HttpHeaders({
       "Content-Type": "application/json",
       Authorization: "Bearer " + this.authorization,
       'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
@@ -60,6 +54,7 @@ export class UserService {
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
       })
     };
+
     return this.http
       .get(this.url + this.apiProfile, httpOptions)
       .pipe(map((res: ResponseService) => res.objectResponse))
@@ -91,7 +86,17 @@ export class UserService {
 
 
   public searchUsers(term?: any) {
-    return this.http.get((`${this.url}${this.apiUsers}?searchText=${term.term}&from=${term.from}&to=${term.to}`), this.httpOptionsToken).pipe(
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.get((`${this.url}${this.apiUsers}?searchText=${term.term}&from=${term.from}&to=${term.to}`), httpOptions).pipe(
       map((user: any) => {
         return user.objectResponse;
       })
@@ -99,15 +104,45 @@ export class UserService {
   }
 
   public statusUser(id: any, value: boolean) {
-    return this.http.post((`${this.url}${this.apiDisableUser}`),{userid:id, value}, this.httpOptionsToken);
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.post((`${this.url}${this.apiDisableUser}`),{userid:id, value}, httpOptions);
   }
 
   public comunitcations(id: any, value: boolean) {
-    return this.http.post((`${this.url}${this.apiComunications}`),{userid:id, value}, this.httpOptionsToken);
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.post((`${this.url}${this.apiComunications}`),{userid:id, value}, httpOptions);
   }
 
   public verifiedUser(id: any, value: boolean) {
-    return this.http.post((`${this.url}${this.apiVerified}`),{userid:id, value}, this.httpOptionsToken);
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.post((`${this.url}${this.apiVerified}`),{userid:id, value}, httpOptions);
   }
 
   
