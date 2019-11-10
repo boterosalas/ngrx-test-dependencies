@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ForgotpasswordService } from "src/app/services/forgotpassword.service";
 import { ResponseService } from "src/app/interfaces/response";
 import Swal from "sweetalert2";
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: "app-forgotpasswordform",
@@ -17,7 +17,7 @@ export class ForgotpasswordformComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private forgot: ForgotpasswordService,
+    private forgot: AuthService,
     private loading: LoaderService,
     private utils: UtilsService
   ) {}

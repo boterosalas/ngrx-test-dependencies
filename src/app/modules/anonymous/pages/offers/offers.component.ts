@@ -4,13 +4,13 @@ import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog
 import { Subscription } from "rxjs";
 import { MatSnackBar, MatBottomSheet } from "@angular/material";
 import { UserService } from "src/app/services/user.service";
-import { ShortenerService } from "src/app/services/shortener.service";
 import { AuthService } from "src/app/services/auth.service";
 import { ContentService } from "src/app/services/content.service";
 import { LinksService } from "src/app/services/links.service";
 import { distinctUntilChanged } from "rxjs/operators";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: "app-offers",
@@ -36,31 +36,17 @@ export class OffersComponent implements OnInit {
   constructor(
     private _snackBar: MatSnackBar,
     private user: UserService,
-    private shortUrl: ShortenerService,
     private auth: AuthService,
     private links: LinksService,
     private dialog: MatBottomSheet,
     private fb: FormBuilder,
-    private content: ContentService
+    private content: ContentService,
+    private token: TokenService
   ) {}
 
   ngOnInit() {
-    /**
-     * verifica si el usuario esta logueado y se obtiene la identificacion
-     */
-
-    this.isLoggedIn = this.auth.isLoggedIn();
-    if (this.isLoggedIn) {
-      this.subscription = this.user.userInfo$
-        .pipe(distinctUntilChanged())
-        .subscribe(val => {
-          if (!!val) {
-            this.identification = val.identification;
-          }
-        });
-    }
-
     this.getOffers();
+    this.identification = this.token.userInfo().identification;
   }
 
   @ViewChild('slickModal', {static: true}) slickModal: SlickCarouselComponent;
@@ -131,7 +117,7 @@ export class OffersComponent implements OnInit {
   public dataProduct(offer) {
     const dataurl = offer.link;
     this.url = `${dataurl}${this.identification}`;
-    this.subscription = this.shortUrl
+    this.subscription = this.user
       .getShortUrl(this.url)
       .subscribe((resp: any) => {
         this.urlshorten = resp;

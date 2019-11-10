@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ConfirmPasswordValidator } from "src/app/validators/confirm-password.validator";
-import { RegisterUserService } from "src/app/services/register-user.service";
 import Swal from "sweetalert2";
 import { ResponseService } from 'src/app/interfaces/response';
 import { Router } from '@angular/router';
@@ -9,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { ConfirmEmailValidator } from 'src/app/validators/confirm-email.validator';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -19,7 +19,7 @@ import { ConfirmEmailValidator } from 'src/app/validators/confirm-email.validato
 export class RegisterformComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
-    private registerUser: RegisterUserService,
+    private registerUser: UserService,
     private router: Router,
     private loading: LoaderService,
     private utils: UtilsService

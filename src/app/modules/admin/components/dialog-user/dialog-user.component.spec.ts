@@ -55,4 +55,17 @@ describe('DialogUserComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('change status', () => {
+    spyOn(component.state, 'emit');
+    // trigger the click
+    const nativeElement = fixture.nativeElement;
+    const toggle = nativeElement.querySelector('input');
+    toggle.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+ 
+    expect(component.state.emit).toHaveBeenCalledTimes(0);
+  });
+  
+
 });

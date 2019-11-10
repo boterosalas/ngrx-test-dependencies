@@ -6,17 +6,16 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { RouterTestingModule } from '@angular/router/testing';
-import { RecoverpasswordService } from 'src/app/services/recoverpassword.service';
 import { of, throwError } from 'rxjs';
 import { HomeComponent } from 'src/app/modules/clicker/pages/home/home.component';
-import { AnonymousModule } from '../../anonymous.module';
 import { ClickerModule } from 'src/app/modules/clicker/clicker.module';
+import { AuthService } from 'src/app/services/auth.service';
 
 describe('RecoverpasswordformComponent', () => {
   let component: RecoverpasswordformComponent;
   let fixture: ComponentFixture<RecoverpasswordformComponent>;
 
-  const mockRecoverpasswordService= jasmine.createSpyObj("RecoverpasswordService", [
+  const mockAuthService= jasmine.createSpyObj("AuthService", [
   "recoverPassword"
   ]);
 
@@ -57,11 +56,11 @@ describe('RecoverpasswordformComponent', () => {
         ]),
        ],
        providers: [
-         {provide: RecoverpasswordService, useValue: mockRecoverpasswordService}
+         {provide: AuthService, useValue: mockAuthService}
        ]
     })
     .compileComponents();
-    mockRecoverpasswordService.recoverPassword.and.returnValue(of(Success));
+    mockAuthService.recoverPassword.and.returnValue(of(Success));
   }));
 
   beforeEach(() => {
@@ -79,7 +78,7 @@ describe('RecoverpasswordformComponent', () => {
     component.recoverPasswordForm.controls.password.setValue('123456');
     component.recoverPasswordForm.controls.confirmPassword.setValue('123456');
     component.recoverPassword();
-    expect(mockRecoverpasswordService.recoverPassword).toHaveBeenCalled();
+    expect(mockAuthService.recoverPassword).toHaveBeenCalled();
   });
 
 
@@ -87,7 +86,7 @@ describe('RecoverpasswordformComponent', () => {
 
 
     beforeEach(function() {
-      mockRecoverpasswordService.recoverPassword.and.returnValue(of(ErrorService));
+      mockAuthService.recoverPassword.and.returnValue(of(ErrorService));
     });
 
     it('recover password', () => {
@@ -95,7 +94,7 @@ describe('RecoverpasswordformComponent', () => {
       component.recoverPasswordForm.controls.password.setValue('1234567');
       component.recoverPasswordForm.controls.confirmPassword.setValue('123456');
       component.recoverPassword();
-      expect(mockRecoverpasswordService.recoverPassword).toHaveBeenCalled();
+      expect(mockAuthService.recoverPassword).toHaveBeenCalled();
     });
 
   });
@@ -103,7 +102,7 @@ describe('RecoverpasswordformComponent', () => {
   describe('Inavlid request', () => {
 
     beforeEach(function() {
-      mockRecoverpasswordService.recoverPassword.and.returnValue(throwError(InvalidRquest));
+      mockAuthService.recoverPassword.and.returnValue(throwError(InvalidRquest));
     });
 
     it('recover password invalid request', () => {
@@ -111,7 +110,7 @@ describe('RecoverpasswordformComponent', () => {
       component.recoverPasswordForm.controls.password.setValue('1234567');
       component.recoverPasswordForm.controls.confirmPassword.setValue('123456');
       component.recoverPassword();
-      expect(mockRecoverpasswordService.recoverPassword).toHaveBeenCalled();
+      expect(mockAuthService.recoverPassword).toHaveBeenCalled();
     });
 
   });
