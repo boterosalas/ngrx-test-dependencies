@@ -2,11 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ConfirmPasswordValidator } from 'src/app/validators/confirm-password.validator';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RecoverpasswordService } from 'src/app/services/recoverpassword.service';
 import Swal from "sweetalert2";
 import { ResponseService } from 'src/app/interfaces/response';
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-recoverpasswordform',
@@ -19,7 +19,7 @@ export class RecoverpasswordformComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private recover: RecoverpasswordService,
+    private recover: AuthService,
     private loading: LoaderService,
   ) { }
 
