@@ -1,5 +1,4 @@
 import { Injectable, OnDestroy } from "@angular/core";
-import { User } from "../interfaces/user";
 import { environment } from "src/environments/environment";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
@@ -7,6 +6,8 @@ import { map } from "rxjs/operators";
 import { BehaviorSubject, Subscription } from "rxjs";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import decode from "jwt-decode";
+import { Forgotpassword } from '../interfaces/forgotpassword';
+import { Recoverpassword } from '../interfaces/recoverpassword';
 
 @Injectable({
   providedIn: "root"
@@ -34,9 +35,12 @@ export class AuthService implements OnDestroy {
   }
 
   url = environment.URL_SECURITY;
-  apiLogin = "login";
-  apiGetmenus = "getMenus";
-  apiGetmenusClicker = "getMenusByRol";
+  apiLogin = "Authentication/login";
+  apiGetmenus = "Authentication/getMenus";
+  apiGetmenusClicker = "Authentication/getMenusByRol";
+  apiForgotPassword = 'Authentication/recoveryPassword';
+  apiRecoverPassword = 'Authentication/resetpassword';
+
   role = "";
 
    httpOptions = {
@@ -106,6 +110,14 @@ export class AuthService implements OnDestroy {
             return resp.objectResponse;
           })
         );
+  }
+
+  public forgotPassword(username: Forgotpassword) {
+    return this.http.post((`${this.url + this.apiForgotPassword}`),{email:username}, this.httpOptions);
+  }
+
+  public recoverPassword(password: Recoverpassword) {
+    return this.http.post((`${this.url + this.apiRecoverPassword}`), password, this.httpOptions);
   }
 
   ngOnDestroy(): void {

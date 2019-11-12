@@ -6,21 +6,22 @@ import { TranslateModule } from "@ngx-translate/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { RegisterUserService } from "src/app/services/register-user.service";
 import { of } from "rxjs/internal/observable/of";
 import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
 import { DialogUserComponent } from "../../components/dialog-user/dialog-user.component";
 import { AdminModule } from '../../admin.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
+import { UserService } from 'src/app/services/user.service';
 
 describe("UsersComponent", () => {
   let component: UsersComponent;
   let fixture: ComponentFixture<UsersComponent>;
 
-  const mockRegisterUserService = jasmine.createSpyObj("RegisterUserService", [
+  const mockUserService = jasmine.createSpyObj("UserService", [
     "searchUsers"
   ]);
+
   const mockDialog = jasmine.createSpyObj("MatDialog", ["open"]);
   const mockDialogRef = jasmine.createSpyObj("MatDialogRef", [
     "close",
@@ -105,7 +106,7 @@ describe("UsersComponent", () => {
         AdminModule
       ],
       providers: [
-        { provide: RegisterUserService, useValue: mockRegisterUserService }
+        { provide: UserService, useValue: mockUserService }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
@@ -119,7 +120,7 @@ describe("UsersComponent", () => {
 
   beforeEach(() => {
     localStorage.setItem('ACCESS_TOKEN', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU');
-    mockRegisterUserService.searchUsers.and.returnValue(of(dataUser));
+    mockUserService.searchUsers.and.returnValue(of(dataUser));
     fixture = TestBed.createComponent(UsersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -132,7 +133,7 @@ describe("UsersComponent", () => {
 
   it("search user", () => {
     component.searchUser("david");
-    expect(mockRegisterUserService.searchUsers).toHaveBeenCalled();
+    expect(mockUserService.searchUsers).toHaveBeenCalled();
   });
 
   it("modal data", () => {

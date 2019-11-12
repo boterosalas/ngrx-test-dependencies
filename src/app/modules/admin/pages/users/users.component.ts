@@ -7,8 +7,8 @@ import {
   MatPaginatorIntl
 } from "@angular/material";
 import { DialogUserComponent } from "../../components/dialog-user/dialog-user.component";
-import { RegisterUserService } from "src/app/services/register-user.service";
 import { Subscription } from 'rxjs/internal/Subscription';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: "app-users",
@@ -27,7 +27,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
 
   constructor(
     private dialog: MatDialog,
-    private usersService: RegisterUserService,
+    private usersService: UserService,
     private _snackBar: MatSnackBar
   ) {
     super();
@@ -169,7 +169,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
   }
 
   private changeComunications(userId, value) {
-    this.usersService.comunitcations(userId, value).subscribe(()=> {
+    this.usersService.comunitcations(userId, value).subscribe((user:any)=> {
       if (value === true) {
         this.openSnackBar(
           "Se ha guardado el usuario para que reciba comunicaciones",
