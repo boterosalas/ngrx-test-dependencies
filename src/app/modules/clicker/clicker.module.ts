@@ -32,11 +32,11 @@ const routes: Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuard]
   },
-  {
-    path: "reportes",
-    component: ReportComponent,
-    canActivate: [AuthGuard]
-  }
+  // {
+  //   path: "reportes",
+  //   component: ReportComponent,
+  //   canActivate: [AuthGuard]
+  // }
 ];
 
 @NgModule({
