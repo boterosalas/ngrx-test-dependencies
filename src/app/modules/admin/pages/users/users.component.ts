@@ -169,7 +169,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
   }
 
   private changeComunications(userId, value) {
-    this.usersService.comunitcations(userId, value).subscribe(()=> {
+    this.usersService.comunitcations(userId, value).subscribe((user:any)=> {
       if (value === true) {
         this.openSnackBar(
           "Se ha guardado el usuario para que reciba comunicaciones",
