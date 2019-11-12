@@ -54,7 +54,7 @@ export class OffersComponent implements OnInit {
   @ViewChild('slickModal3', {static: true}) slickModal3: SlickCarouselComponent;
 
   slideConfig = {
-    slidesToShow: 6,
+    slidesToShow: 5,
     slidesToScroll: 1,
     infinite: false,
     dots: false,
