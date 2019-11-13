@@ -420,3 +420,129 @@
     {{ "GENERIC.REGISTER" | translate }}
   </button>
 </div>
+
+<form
+  autocomplete="nope"
+  class="register-container"
+  [formGroup]="externalForm"
+  *ngIf="showRegisterFormExternal"
+>
+
+<p class="additional-info">{{ "REGISTER.INFO_HOME" | translate }}</p>
+
+  <mat-form-field>
+    <input matInput placeholder="{{ 'REGISTER.DEPARTMENT' | translate }}" [matAutocomplete]="auto" formControlName="department" autocomplete="nope">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayDepartment">
+      <mat-option (onSelectionChange)="selectDepartment(department)" *ngFor="let department of filteredDepartments | async; let i= index" [value]="department">
+        <span>{{ department.description }}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field>
+
+      <input matInput id="city"  placeholder="{{ 'REGISTER.CITY' | translate }}" [matAutocomplete]="city" formControlName="city" autocomplete="nope">
+      <mat-autocomplete #city="matAutocomplete">
+        <mat-option (onSelectionChange)="selectCity(city)" *ngFor="let city of filteredCities | async" value="{{ city.description }}">
+            <span>{{city.description}}</span>
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field> 
+
+    <mat-form-field>
+        <input
+          matInput
+          id="address"
+          type="text"
+          placeholder="{{ 'REGISTER.ADDRESS' | translate }}"
+          formControlName="address"
+          autocomplete="nope"
+        />
+    </mat-form-field>
+
+    <p class="additional-info">{{ "REGISTER.ACOUNT_INFO" | translate }}</p>
+
+    <mat-form-field>
+        <mat-select
+          placeholder="{{ 'REGISTER.BANK' | translate }}"
+          id="bank"
+          formControlName="bank"
+        >
+          <!-- <mat-option>{{ "REGISTER.BANK" | translate }}</mat-option> -->
+          <mat-option *ngFor="let bank of banks" value="{{ bank.description }}"> <span>{{
+            bank.description
+          }}</span></mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+    <mat-form-field>
+        <mat-select
+          placeholder="{{ 'REGISTER.TYPE_ACCOUNT' | translate }}"
+          id="typeAccount"
+          formControlName="typeAccount"
+        >
+        <mat-option *ngFor="let account of typeAccount" value="{{ account.id }}"><span>{{
+            account.description
+          }}</span></mat-option>
+         
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+          <input
+            matInput
+            id="numberAccount"
+            type="text"
+            placeholder="{{ 'REGISTER.NUMBER_ACCOUNT' | translate }}"
+            formControlName="numberAccount"
+          />
+       </mat-form-field>
+
+       <p class="additional-info">{{ "REGISTER.ADITIONAL_FILE" | translate }}</p>
+
+       <p>{{ "REGISTER.INFO_ADDITIONAL" | translate }}</p>
+       <p class="black"><strong>{{ "REGISTER.INFO_ADDITIONAL_2" | translate }}</strong></p>
+      
+          <input
+          (change)="onFileChange($event, 'ced1')"
+            id="ced1"
+            type="file"
+            formControlName="ced1"
+          />
+          <mat-error *ngIf="showErrorCed1" class="small">
+              {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
+            </mat-error>
+
+          <input
+          (change)="onFileChange($event, 'ced2')"
+            id="ced2"
+            type="file"
+            formControlName="ced2"
+          />
+          <mat-error *ngIf="showErrorCed2" class="small">
+              {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
+            </mat-error>
+
+          <input
+          (change)="onFileChange($event, 'cert')"
+            id="cert"
+            type="file"
+            formControlName="cert"
+          />
+          <mat-error *ngIf="showErrorCert" class="small">
+              {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
+            </mat-error>
+
+            <button
+            mat-raised-button
+            id="nextClicker"
+            class="center button button-100"
+            color="orange"
+            (click)="nextStepExternalClicker()"
+          > 
+          <span fxLayoutAlign="space-around center">
+            {{ "GENERIC.NEXT" | translate }} <mat-icon>arrow_forward</mat-icon>
+          </span>
+          </button>
+
+</form>
