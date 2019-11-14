@@ -11,6 +11,7 @@ import { ConfirmEmailValidator } from "src/app/validators/confirm-email.validato
 import { UserService } from "src/app/services/user.service";
 import { startWith } from "rxjs/internal/operators/startWith";
 import { map } from "rxjs/internal/operators/map";
+import { MasterDataService } from 'src/app/services/master-data.service';
 
 @Component({
   selector: "app-registerform",
@@ -23,7 +24,8 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     private registerUser: UserService,
     private router: Router,
     private loading: LoaderService,
-    private utils: UtilsService
+    private utils: UtilsService,
+    private personalInfo: MasterDataService
   ) {}
 
   private subscription: Subscription = new Subscription();
@@ -35,7 +37,9 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   showLoginForm: boolean;
   acceptTerms: boolean;
   validFormat: boolean;
-  nameFile: string;
+  nameFileCed1: string;
+  nameFileCed2: string;
+  nameFileCert: string;
   showErrorCed1: boolean;
   showErrorCed2: boolean;
   showErrorCert: boolean;
@@ -139,6 +143,9 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     this.acceptTerms = false;
     this.disabledCity = true;
     this.getidType();
+    this.nameFileCed1 = '';
+    this.nameFileCed2 = '';
+    this.nameFileCert = '';
   }
 
   public displayDepartment(departments?: any): string | undefined {
@@ -222,12 +229,12 @@ export class RegisterformComponent implements OnInit, OnDestroy {
 
   public externalClickerForm() {
     this.externalForm = this.fb.group({
-      department: [""],
-      city: [{ value: "", disabled: this.disabledCity }],
-      address: [""],
-      bank: [""],
-      typeAccount: [""],
-      numberAccount: [""],
+      department: ["", Validators.required],
+      city: [{ value: "", disabled: this.disabledCity }, Validators.required],
+      address: ["", Validators.required],
+      bank: ["", Validators.required],
+      typeAccount: ["", Validators.required],
+      numberAccount: ["", [Validators.required, Validators.pattern(this.numberPattern), Validators.minLength(5), Validators.maxLength(10)]],
       ced1: [null],
       ced2: [null],
       cert: [null],
@@ -244,26 +251,29 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   }
 
   public onFileChange(event, param: string) {
-    this.nameFile = event.target.files[0].name;
+    let nameFile = event.target.files[0].name;
     let reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       let fileBlob = new Blob([file])
-      let file2 = new File(([fileBlob]), this.nameFile);
+      let file2 = new File(([fileBlob]), nameFile);
       reader.readAsDataURL(file2);
       reader.onload = () => {
-        this.getExtension(this.nameFile);
+        this.getExtension(nameFile);
         if (this.validFormat === true) {
           if(param === 'ced1') {
             this.fileIdentificationCard1 = reader.result;
+            this.nameFileCed1 = nameFile;
             this.showErrorCed1 = false;
           } else {
             if(param === 'ced2') {
               this.fileIdentificationCard2 = reader.result;
+              this.nameFileCed2 = nameFile;
               this.showErrorCed2 = false;
             }
             else {
               this.fileBankCertificate = reader.result;
+              this.nameFileCert = nameFile;
               this.showErrorCert = false;
             }
           }
@@ -407,7 +417,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
    */
 
   public getDepartments() {
-    this.subscription = this.registerUser
+    this.subscription = this.personalInfo
       .getDepartments()
       .subscribe((res: ResponseService) => {
         this.departments = res.objectResponse;
@@ -419,7 +429,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
    */
 
   public getBanks() {
-    this.subscription = this.registerUser
+    this.subscription = this.personalInfo
       .getBanks()
       .subscribe((res: ResponseService) => {
         this.banks = res.objectResponse;
