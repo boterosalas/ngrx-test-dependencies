@@ -3,7 +3,8 @@ import { LinksService } from "src/app/services/links.service";
 import { UserService } from "src/app/services/user.service";
 import { AuthService } from "src/app/services/auth.service";
 import { distinctUntilChanged } from "rxjs/operators";
-import { Subscription } from 'rxjs';
+import { Subscription } from "rxjs";
+import { TokenService } from "src/app/services/token.service";
 
 @Component({
   selector: "app-month-resume",
@@ -14,7 +15,8 @@ export class MonthResumeComponent implements OnInit, OnDestroy {
   constructor(
     private link: LinksService,
     private user: UserService,
-    private auth: AuthService
+    private auth: AuthService,
+    private token: TokenService
   ) {}
 
   linksCreated: string;
@@ -23,31 +25,31 @@ export class MonthResumeComponent implements OnInit, OnDestroy {
   isLoggedIn: any;
   private subscription: Subscription = new Subscription();
 
-  title = 'Performance del Clicker';
-   type = 'ComboChart';
-   data = [];
-   columnNames = ['Mes', 'Links Creados', 'Comisión'];
+  title = "Performance del Clicker";
+  type = "ComboChart";
+  data = [];
+  columnNames = ["Mes", "Links Creados", "Comisión"];
 
-   options = {   
-    colors: ['#FF6F11', '#B5B8BC'],
-      hAxis: {
-         title: 'Últimos 30 días'
-      },
-      vAxes:{
-         0: {title: 'Links Creados'},
-         1: {title: 'Comisión'}
-      },
-      seriesType: 'bars',
-      series: {
-        0: {type: 'line', targetAxisIndex: 0},
-        1: {type:'bar', targetAxisIndex: 1}
-      },
-      is3D: true,
-      legend: { position: 'top', alignment: 'center' }
-   };
+  options = {
+    colors: ["#FF6F11", "#B5B8BC"],
+    hAxis: {
+      title: "Últimos 30 días"
+    },
+    vAxes: {
+      0: { title: "Links Creados" },
+      1: { title: "Comisión" }
+    },
+    seriesType: "bars",
+    series: {
+      0: { type: "line", targetAxisIndex: 0 },
+      1: { type: "bar", targetAxisIndex: 1 }
+    },
+    is3D: true,
+    legend: { position: "top", alignment: "center" }
+  };
 
-   width = 550;
-   height = 400;
+  width = 550;
+  height = 400;
 
   ngOnInit() {
     this.isLoggedIn = this.auth.isLoggedIn();
@@ -57,15 +59,9 @@ export class MonthResumeComponent implements OnInit, OnDestroy {
      */
 
     if (this.isLoggedIn) {
-      this.subscription = this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
-        if (!!val) {
-          this.identification = val.identification;
-          this.getInfomonth();
-        }
-      });
+      this.identification = this.token.userInfo().identification;
+      this.getInfomonth();
     }
-    
-    
   }
 
   /**
@@ -83,5 +79,4 @@ export class MonthResumeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
 }

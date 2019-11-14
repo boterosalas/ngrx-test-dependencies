@@ -1,0 +1,41 @@
+@import 'variables';
+
+.img-container-2 {
+    width: 100px;
+    display: flex;
+    margin: 0 auto;
+    height: 100px;
+    img{
+        max-width: 100%;
+    }
+}
+
+h3{
+  font-family: $font-galano;
+}
+
+.discount{
+    color: $primary-color;
+    font-size: 1rem;
+    &-height{
+        min-height: 34px;
+    }
+}
+
+.min-comi{
+    min-height: 36px;
+}
+
+.radius {
+    border-top-right-radius: 5px !important;
+    border-top-left-radius: 5px !important;
+}
+
+
+.truncate{
+    width: 100px;
+    overflow: hidden;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

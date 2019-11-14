@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, TemplateRef, OnDestroy } from "@angular/core";
-import { ProductSearchService } from "src/app/services/product-search.service";
 import { LoaderService } from "src/app/services/loader.service";
 import {
   MatSnackBar,
@@ -9,7 +8,6 @@ import {
 } from "@angular/material";
 import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 import { UserService } from "src/app/services/user.service";
-import { ShortenerService } from "src/app/services/shortener.service";
 import { AuthService } from "src/app/services/auth.service";
 import { Subscription } from "rxjs";
 import { SearchProduct } from "src/app/interfaces/search-product";
@@ -18,6 +16,7 @@ import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog
 import { ContentService } from 'src/app/services/content.service';
 import { LinksService } from 'src/app/services/links.service';
 import { environment } from 'src/environments/environment';
+import { TokenService } from 'src/app/services/token.service';
 
 
 @Component({
@@ -27,16 +26,16 @@ import { environment } from 'src/environments/environment';
 })
 export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestroy {
   constructor(
-    private sp: ProductSearchService,
+    private sp: ContentService,
     private loading: LoaderService,
     private dialog: MatBottomSheet,
     private fb: FormBuilder,
     private _snackBar: MatSnackBar,
     private user: UserService,
-    private shortUrl: ShortenerService,
     private auth: AuthService,
     private content: ContentService,
-    private links: LinksService
+    private links: LinksService,
+    private token: TokenService
   ) {
     super();
 
@@ -121,13 +120,15 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
      */
 
     this.isLoggedIn = this.auth.isLoggedIn();
-    if (this.isLoggedIn) {
-     this.subscription = this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
-        if (!!val) {
-          this.identification = val.identification;
-        }
-      });
-    }
+    this.identification = this.token.userInfo().identification;
+
+    // if (this.isLoggedIn) {
+    //  this.subscription = this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
+    //     if (!!val) {
+    //       this.identification = val.identification;
+    //     }
+    //   });
+    // }
 
     this.getDate();
     this.Assured();
@@ -214,7 +215,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
       const productUrl = product.linkText;
       this.url = `https://www.exito.com/${productUrl}/p?utm_source=clickam&utm_medium=referral&utm_campaign=${this.identification}`;
     }
-    this.subscription = this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
+    this.subscription = this.user.getShortUrl(this.url).subscribe((resp: any) => {
       this.urlshorten = resp;
     });
     setTimeout(() => {
@@ -236,6 +237,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
     const plu = product.items[0].itemId;
     this.plu = product.items[0].itemId;
     this.business = 'exito';
+    const home = true;
     this.dialog.open(DialogComponent, {
       data: {
         title,
@@ -250,7 +252,8 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
         showshowTitle,
         buttonClose,
         id,
-        discount
+        discount,
+        home
       }
     });
   }
@@ -263,7 +266,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
   public dataAssured(assured) {
     const dataAssuredUrl = `${assured.link}${this.identification}`;
     this.url = dataAssuredUrl;
-    this.subscription = this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
+    this.subscription = this.user.getShortUrl(this.url).subscribe((resp: any) => {
       this.urlshorten = resp;
     });
     this.formShareLink();
@@ -283,6 +286,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
     const buttonClose = "Cerrar";
     this.plu = '';
     this.business = 'seguros';
+    const home = true;
     this.dialog.open(DialogComponent, {
       data: {
         title,
@@ -295,7 +299,8 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
         showshowTitle,
         showComission,
         buttonClose,
-        id
+        id,
+        home
       }
     });
 
@@ -309,7 +314,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
   public dataTrip(trip) {
     const datatripUrl = trip.link;
     this.url = `${datatripUrl}${this.identification}`;
-    this.subscription = this.shortUrl.getShortUrl(this.url).subscribe((resp: any) => {
+    this.subscription = this.user.getShortUrl(this.url).subscribe((resp: any) => {
       this.urlshorten = resp;
     });
     setTimeout(() => {
@@ -329,6 +334,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
     const buttonClose = "Cerrar";
     this.plu = '';
     this.business = 'viajes'
+    const home = true;
     this.dialog.open(DialogComponent, {
       data: {
         title,
@@ -341,7 +347,8 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
         showshowTitle,
         showComission,
         buttonClose,
-        id
+        id,
+        home
       }
     });
 

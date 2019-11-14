@@ -1,13 +1,15 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ConfirmPasswordValidator } from "src/app/validators/confirm-password.validator";
-import { RegisterUserService } from "src/app/services/register-user.service";
 import Swal from "sweetalert2";
 import { ResponseService } from 'src/app/interfaces/response';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { ConfirmEmailValidator } from 'src/app/validators/confirm-email.validator';
+import { UserService } from 'src/app/services/user.service';
+
 
 @Component({
   selector: "app-registerform",
@@ -17,7 +19,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class RegisterformComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
-    private registerUser: RegisterUserService,
+    private registerUser: UserService,
     private router: Router,
     private loading: LoaderService,
     private utils: UtilsService
@@ -82,6 +84,11 @@ export class RegisterformComponent implements OnInit, OnDestroy {
             Validators.maxLength(64)
           ]
         ],
+        confirmEmail: [
+          "",
+          [
+          ]
+        ],
         password: [
           "",
           [
@@ -100,7 +107,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
           ]
         ]
       },
-      { validator: ConfirmPasswordValidator.MatchPassword }
+      { validator: [ConfirmPasswordValidator.MatchPassword,  ConfirmEmailValidator.MatchEmail] }
     );
     this.showTerms = false;
     this.showRegisterForm = true;
@@ -202,28 +209,6 @@ export class RegisterformComponent implements OnInit, OnDestroy {
    this.subscription = this.registerUser.idType().subscribe(res => {
       this.idUserType = res.objectResponse;
     });
-  }
-
-  /**
-   * Remueve los espacios en blanco
-   */
-
-  public removewhiteSpace() {
-    const inputValue = this.registerForm.controls.password.value;
-    let noSpace = inputValue.replace(/ /g, "");
-    this.registerForm.controls.password.setValue(noSpace);
-  }
-
-  public removewhiteSpaceConfirm() {
-    const inputValue = this.registerForm.controls.confirmPassword.value;
-    let noSpace = inputValue.replace(/ /g, "");
-    this.registerForm.controls.confirmPassword.setValue(noSpace);
-  }
-
-  public removewhiteSpaceEmail() {
-    const inputValue = this.registerForm.controls.email.value;
-    let noSpace = inputValue.replace(/ /g, "");
-    this.registerForm.controls.email.setValue(noSpace);
   }
 
   ngOnDestroy(): void {

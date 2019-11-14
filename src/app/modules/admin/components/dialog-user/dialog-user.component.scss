@@ -1,0 +1,35 @@
+@import 'variables';
+@import 'general';
+
+.close {
+    background:$gray2;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    line-height: 24px;
+    cursor: pointer;
+  }
+
+  .gray{
+    color:$gray2;
+  }
+
+  .gray-title{
+    color:$gray;
+    font-size: 14px;
+  }
+
+  p{
+    color: #231F20;
+    font-size: 14px;
+  }
+
+  .galano-bold{
+    font-size: 11px;
+  }
+
+  a{
+    color: #00A9B3;
+    line-height: 20px;
+  }

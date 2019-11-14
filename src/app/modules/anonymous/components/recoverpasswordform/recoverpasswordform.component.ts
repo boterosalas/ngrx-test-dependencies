@@ -2,12 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ConfirmPasswordValidator } from 'src/app/validators/confirm-password.validator';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RecoverpasswordService } from 'src/app/services/recoverpassword.service';
 import Swal from "sweetalert2";
 import { ResponseService } from 'src/app/interfaces/response';
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
-import { RemoveSpaceService } from 'src/app/services/remove-space.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-recoverpasswordform',
@@ -20,9 +19,8 @@ export class RecoverpasswordformComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private recover: RecoverpasswordService,
+    private recover: AuthService,
     private loading: LoaderService,
-    private removeSpace: RemoveSpaceService
   ) { }
 
   private subscription: Subscription = new Subscription();
@@ -112,22 +110,6 @@ export class RecoverpasswordformComponent implements OnInit, OnDestroy {
         });
       }
     );
-  }
-
-  /**
-   * Remueve los espacios en blanco
-   */
-
-  public removewhiteSpaceRecover() {
-    const inputValue = this.recoverPasswordForm.controls.password.value;
-    const recoverControl = this.recoverPasswordForm.controls.password;
-    this.removeSpace.removeSpace(inputValue, recoverControl);
-  }
-
-  public removewhiteSpaceConfirmRecover() {
-    const inputValue = this.recoverPasswordForm.controls.confirmPassword.value;
-    const recoerConfirmControl = this.recoverPasswordForm.controls.confirmPassword
-    this.removeSpace.removeSpace(inputValue, recoerConfirmControl);
   }
 
   ngOnDestroy(): void {

@@ -7,15 +7,15 @@ import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-mater
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ForgotpasswordService } from 'src/app/services/forgotpassword.service';
 import { of, throwError } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 describe('ForgotpasswordformComponent', () => {
   let component: ForgotpasswordformComponent;
   let fixture: ComponentFixture<ForgotpasswordformComponent>;
 
-  const mockForgotpasswordService= jasmine.createSpyObj("ForgotpasswordService", [
+  const mockAuthService= jasmine.createSpyObj("AuthService", [
     "forgotPassword"
     ]);
 
@@ -52,14 +52,14 @@ describe('ForgotpasswordformComponent', () => {
          RouterTestingModule.withRoutes([]),
        ],
        providers: [
-         {provide: ForgotpasswordService, useValue: mockForgotpasswordService}
+         {provide: AuthService, useValue: mockAuthService}
        ],
        schemas: [
          NO_ERRORS_SCHEMA
        ]
     })
     .compileComponents();
-    mockForgotpasswordService.forgotPassword.and.returnValue(of(Success));
+    mockAuthService.forgotPassword.and.returnValue(of(Success));
   }));
 
   beforeEach(() => {
@@ -76,25 +76,19 @@ describe('ForgotpasswordformComponent', () => {
   it('forgot password', () => {
     component.forgotPassword();
     component.forgotPaswordForm.controls.Username.setValue('david.betancur@pragma.com.co');
-    expect(mockForgotpasswordService.forgotPassword).toHaveBeenCalled();
-  });
-
-  it("remove white space email", () => {
-    component.forgotPaswordForm.controls.Username.setValue("dav id.betancur@pragma.com.co");
-    component.removewhiteSpaceEmailForgot();
-    expect(component.forgotPaswordForm.controls.Username.value).toBe("david.betancur@pragma.com.co");
+    expect(mockAuthService.forgotPassword).toHaveBeenCalled();
   });
   
   describe('invalid password', () => {
 
     beforeEach(function() {
-      mockForgotpasswordService.forgotPassword.and.returnValue(of(ErrorService));
+      mockAuthService.forgotPassword.and.returnValue(of(ErrorService));
     });
     
 
     it('forgot password invalid', () => {
       component.forgotPassword();
-      expect(mockForgotpasswordService.forgotPassword).toHaveBeenCalled();
+      expect(mockAuthService.forgotPassword).toHaveBeenCalled();
     });
 
   });
@@ -102,13 +96,13 @@ describe('ForgotpasswordformComponent', () => {
   describe('invalid request password', () => {
 
     beforeEach(function() {
-      mockForgotpasswordService.forgotPassword.and.returnValue(throwError(InvalidRquest));
+      mockAuthService.forgotPassword.and.returnValue(throwError(InvalidRquest));
     });
     
     it('forgot password invalid request', () => {
       component.forgotPassword();
       component.forgotPaswordForm.controls.Username.setValue('1');
-      expect(mockForgotpasswordService.forgotPassword).toHaveBeenCalled();
+      expect(mockAuthService.forgotPassword).toHaveBeenCalled();
     });
 
   });

@@ -5,17 +5,17 @@ import { TranslateModule } from "@ngx-translate/core";
 import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { RegisterUserService } from "src/app/services/register-user.service";
 import { of, throwError } from "rxjs";
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 describe("RegisterformComponent", () => {
   let component: RegisterformComponent;
   let fixture: ComponentFixture<RegisterformComponent>;
 
-  const mockRegisterService = jasmine.createSpyObj("RegisterUserService", [
+  const mockUserService = jasmine.createSpyObj("UserService", [
     "idType", "registerUser"
   ]);
 
@@ -69,13 +69,13 @@ describe("RegisterformComponent", () => {
         TranslateModule.forRoot({})
       ],
       providers: [
-        { provide: RegisterUserService, useValue: mockRegisterService },
+        { provide: UserService, useValue: mockUserService },
         { provide: Router, useValue: mockRouter},
       ]
     }).compileComponents();
 
-    mockRegisterService.idType.and.returnValue(of(idType));
-    mockRegisterService.registerUser.and.returnValue(of(register));
+    mockUserService.idType.and.returnValue(of(idType));
+    mockUserService.registerUser.and.returnValue(of(register));
 
   }));
 
@@ -87,7 +87,7 @@ describe("RegisterformComponent", () => {
 
   it("should create", () => {
     expect(component).toBeTruthy();
-    expect(mockRegisterService.idType).toHaveBeenCalled();
+    expect(mockUserService.idType).toHaveBeenCalled();
   });
 
   it("next step", () => {
@@ -111,36 +111,19 @@ describe("RegisterformComponent", () => {
 
   it("register form", () => {
     component.register();
-    expect(mockRegisterService.registerUser).toHaveBeenCalled();
+    expect(mockUserService.registerUser).toHaveBeenCalled();
   });
 
-  it("remove white space password", () => {
-    component.registerForm.controls.password.setValue("1234 5678");
-    component.removewhiteSpace();
-    expect(component.registerForm.controls.password.value).toBe("12345678");
-  });
-
-  it("remove white space Confirm password", () => {
-    component.registerForm.controls.confirmPassword.setValue("1234 5678");
-    component.removewhiteSpaceConfirm();
-    expect(component.registerForm.controls.confirmPassword.value).toBe("12345678");
-  });
-
-  it("remove white space email", () => {
-    component.registerForm.controls.email.setValue("da vid.betancur@pragma.com.co");
-    component.removewhiteSpaceEmail();
-    expect(component.registerForm.controls.email.value).toBe("david.betancur@pragma.com.co");
-  });
 
   describe('register invalid', () => {
 
     beforeEach(function() {
-      mockRegisterService.registerUser.and.returnValue(of(registerInvalid));
+      mockUserService.registerUser.and.returnValue(of(registerInvalid));
     });
     
     it("register invalid", () => {
       component.register();
-      expect(mockRegisterService.registerUser).toHaveBeenCalled();
+      expect(mockUserService.registerUser).toHaveBeenCalled();
     });
 
   });
@@ -148,12 +131,12 @@ describe("RegisterformComponent", () => {
   describe('invalid request', () => {
 
     beforeEach(function() {
-      mockRegisterService.registerUser.and.returnValue(throwError(InvalidRquest));
+      mockUserService.registerUser.and.returnValue(throwError(InvalidRquest));
     });
     
     it("invalid request", () => {
       component.register();
-      expect(mockRegisterService.registerUser).toHaveBeenCalled();
+      expect(mockUserService.registerUser).toHaveBeenCalled();
     });
 
   });
