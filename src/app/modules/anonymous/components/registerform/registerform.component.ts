@@ -180,7 +180,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   private _filterCities(value: string) {
     const filterValue = value.toLowerCase();
     return this.cities.filter(
-      city => city.description.toLowerCase().indexOf(filterValue) === 0
+      (city: any) => city.description.toLowerCase().indexOf(filterValue) === 0
     );
   }
 
@@ -227,7 +227,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       });
   }
 
-  public externalClickerForm() {
+  private externalClickerForm() {
     this.externalForm = this.fb.group({
       department: ["", Validators.required],
       city: [{ value: "", disabled: this.disabledCity }, Validators.required],
