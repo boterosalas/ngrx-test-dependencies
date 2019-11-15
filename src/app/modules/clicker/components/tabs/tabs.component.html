@@ -32,9 +32,8 @@
                 id="productTitle{{ i }}"
                 btnid="btnLink{{ i }}"
                 [productName]="product.productName"
-                [discount]="
-                  product.items[0].sellers[0].commertialOffer.ListPrice
-                "
+                [discount]="product.items[0].sellers[0].commertialOffer.ListPrice"
+                [aliance]="product.items[0].sellers[0].commertialOffer.Teasers"
                 [price]="product.items[0].sellers[0].commertialOffer.Price"
                 productDescription=""
                 [image]="product.items[0].images[0].imageUrl"

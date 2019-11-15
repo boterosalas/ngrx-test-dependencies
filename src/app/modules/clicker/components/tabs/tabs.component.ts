@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, TemplateRef, OnDestroy } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  TemplateRef,
+  OnDestroy
+} from "@angular/core";
 import { LoaderService } from "src/app/services/loader.service";
 import {
   MatSnackBar,
@@ -6,25 +12,30 @@ import {
   MatBottomSheet,
   MatPaginatorIntl
 } from "@angular/material";
-import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl
+} from "@angular/forms";
 import { UserService } from "src/app/services/user.service";
 import { AuthService } from "src/app/services/auth.service";
 import { Subscription } from "rxjs";
 import { SearchProduct } from "src/app/interfaces/search-product";
 import { distinctUntilChanged } from "rxjs/operators";
 import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog.component";
-import { ContentService } from 'src/app/services/content.service';
-import { LinksService } from 'src/app/services/links.service';
-import { environment } from 'src/environments/environment';
-import { TokenService } from 'src/app/services/token.service';
-
+import { ContentService } from "src/app/services/content.service";
+import { LinksService } from "src/app/services/links.service";
+import { environment } from "src/environments/environment";
+import { TokenService } from "src/app/services/token.service";
 
 @Component({
   selector: "app-tabs",
   templateUrl: "./tabs.component.html",
   styleUrls: ["./tabs.component.scss"]
 })
-export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestroy {
+export class TabsComponent extends MatPaginatorIntl
+  implements OnInit, OnDestroy {
   constructor(
     private sp: ContentService,
     private loading: LoaderService,
@@ -43,15 +54,15 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
      * Traduccion del paginador
      */
 
-    this.itemsPerPageLabel = 'Productos por página';
-    this.nextPageLabel = 'Página siguiente';
-    this.previousPageLabel = 'Página anterior';
-    this.lastPageLabel = 'Última página';
-    this.firstPageLabel = 'Primera página';
+    this.itemsPerPageLabel = "Productos por página";
+    this.nextPageLabel = "Página siguiente";
+    this.previousPageLabel = "Página anterior";
+    this.lastPageLabel = "Última página";
+    this.firstPageLabel = "Primera página";
 
-    this.getRangeLabel = function (page, pageSize, length) {
+    this.getRangeLabel = function(page, pageSize, length) {
       if (length === 0 || pageSize === 0) {
-        return '0 de ' + length;
+        return "0 de " + length;
       }
       length = Math.max(length, 0);
       const startIndex = page * pageSize;
@@ -60,15 +71,15 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
         startIndex < length
           ? Math.min(startIndex + pageSize, length)
           : startIndex + pageSize;
-      return startIndex + 1 + ' de ' + endIndex + ' productos de ' + length;
+      return startIndex + 1 + " de " + endIndex + " productos de " + length;
     };
-
   }
 
   term: string;
 
   @ViewChild("templateDialog", { static: false }) template: TemplateRef<any>;
-  @ViewChild("templateDialogAssured", { static: false }) templateAssured: TemplateRef<any>;
+  @ViewChild("templateDialogAssured", { static: false })
+  templateAssured: TemplateRef<any>;
   @ViewChild("paginator", { static: false }) paginator: any;
 
   private subscription: Subscription = new Subscription();
@@ -93,12 +104,14 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
   business: string;
   showForm = false;
   showFormCustomer = true;
-
-  idCustomer: string = '';
+  percent: number;
+  percents = [];
+  images = [];
+  imgLogo:string;
+  idCustomer: string = "";
   buttonDisabled: boolean = true;
   numberPattern = "^(0|[0-9][0-9]*)$";
   idCustomerForm: FormGroup;
-  
 
   ngOnInit() {
     this.showNotFound = false;
@@ -114,7 +127,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
         ]
       ]
     });
-    
+
     /**
      * verifica si el usuario esta logueado y se obtiene la identificacion
      */
@@ -143,10 +156,10 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
 
   /**
    * Metodo para buscar los productos paginados
-   * @param term 
-   * @param from 
-   * @param to 
-   * 
+   * @param term
+   * @param from
+   * @param to
+   *
    */
 
   public searchProductPaginate(term: string, from = 1, to = this.pageTo) {
@@ -180,7 +193,7 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
 
   /**
    * Paginacion
-   * @param paginate 
+   * @param paginate
    */
 
   public pagination(paginate: any) {
@@ -204,20 +217,22 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
 
   /**
    * Metodo para abrir la modal con el producto seleccionado del exito
-   * @param product 
+   * @param product
    */
 
   public dataProduct(product) {
-    if(environment.production === false) {
+    if (environment.production === false) {
       const productUrl = product.link;
       this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=${this.identification}`;
     } else {
       const productUrl = product.linkText;
       this.url = `https://www.exito.com/${productUrl}/p?utm_source=clickam&utm_medium=referral&utm_campaign=${this.identification}`;
     }
-    this.subscription = this.user.getShortUrl(this.url).subscribe((resp: any) => {
-      this.urlshorten = resp;
-    });
+    this.subscription = this.user
+      .getShortUrl(this.url)
+      .subscribe((resp: any) => {
+        this.urlshorten = resp;
+      });
     setTimeout(() => {
       this.saveLink();
     }, 1500);
@@ -236,8 +251,34 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
     const showPlu = true;
     const plu = product.items[0].itemId;
     this.plu = product.items[0].itemId;
-    this.business = 'exito';
+    this.business = "exito";
     const home = true;
+    const percent = product.items[0].sellers[0].commertialOffer.Teasers;
+    percent.map(element => {
+      let allPercent = [
+        element["<Effects>k__BackingField"]["<Parameters>k__BackingField"][0][
+          "<Value>k__BackingField"
+        ]
+      ];
+      let nameAliance = element["<Name>k__BackingField"];
+      let splitName = nameAliance.split('_');
+      let alianceText = splitName[0];
+      this.images.push(alianceText)
+      this.percents.push(allPercent);
+    });
+
+    let arr = this.percents;
+    let max = arr.reduce((a,b) => {
+      return Math.max(a, b);
+    },[""])
+
+    this.getImages(this.images[0]);
+    const imgLogo = this.imgLogo;
+
+    console.log(this.imgLogo);
+
+    const aliance = max;
+
     this.dialog.open(DialogComponent, {
       data: {
         title,
@@ -253,25 +294,102 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
         buttonClose,
         id,
         discount,
-        home
+        home,
+        aliance,
+        imgLogo
       }
     });
   }
 
+
+  private getImages(text: string) {
+    
+    switch (text) {
+      case 'exito1':
+        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-tuya-3dwydtsjyhmy22j.png"
+        break;
+      case 'exito2':
+        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-tuya-3oc0pwkjyhmzi29.png"
+        break;
+      case 'colpatria1':
+        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-colpatria-3oc0pwkjyhniolc.png"
+        break;
+      case 'bogota1':
+        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-bogota-3dwydtsjyhnn0v1.png"
+        break;
+      case 'colpatriascotiabank1':
+        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-scotiaBankColpatria-3dwydtsjyhnlx0r.png"
+        break;
+      case 'colpatria2':
+        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-colpatria-3oc0pwkjyhnjjjd.png"
+        break;
+      case 'colpatriascotiabank2':
+        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-scotiaBankColpatria-3dwydtsjyhnmd9o.png"
+        break;
+      case 'scotiabank1':
+        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-scotiaBankColpatria-3oc0pwkjyhnl32l.png"
+        break;
+      case 'visa':
+        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-visa-3oc0pwkjyhnqkbs.png"
+        break;
+      case 'aval':
+        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-aval-3dwydtsjyhnpl3m.png"
+        break;
+      case 'occidente1':
+        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-occidente-3oc0pwkjyhnomk3.png"
+        break;
+      case 'bogota2':
+        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-bogota-3dwydtsjyhnnqgr.png"
+        break;
+      case 'mastercard':
+        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-mastercard-3oc0pwkjyhnsecq.png"
+        break;
+      case 'davivienda1':
+        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-davivienda-3dwydtsjyhnt6eo.png"
+        break;
+      case 'davivienda3':
+        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-davivienda-3oc0pwkjyhnuoxx.png"
+        break;
+      case 'coomeva1':
+        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-coomeva-3oc0pwkjyhnvboq.png"
+        break;
+      case 'codensa1':
+        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-codensa-3dwydtsjyhn0fzz.png"
+        break;
+      case 'bancolombia2':
+        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-bancolombia-3dwydtsjyhn3xpy.png"
+        break;
+      case 'bancolombia1':
+        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-bancolombia-3dwydtsjyhn1lhq.png"
+        break;
+      case 'popular1':
+        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-banco-popular-7lvp9sk0gu7rqx.png"
+        break;
+      case 'itau1':
+        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-itau-7lvp9sk0gu986p.png"
+        break;
+      default:
+        this.imgLogo = ""
+        break;
+    }
+  }
+
   /**
    * Metodo para abrir la modal con el producto seleccionado del seguros
-   * @param assured 
+   * @param assured
    */
 
   public dataAssured(assured) {
     const dataAssuredUrl = `${assured.link}${this.identification}`;
     this.url = dataAssuredUrl;
-    this.subscription = this.user.getShortUrl(this.url).subscribe((resp: any) => {
-      this.urlshorten = resp;
-    });
+    this.subscription = this.user
+      .getShortUrl(this.url)
+      .subscribe((resp: any) => {
+        this.urlshorten = resp;
+      });
     this.formShareLink();
     this.showForm = false;
-    this.idCustomerForm.controls.identification.setValue('');
+    this.idCustomerForm.controls.identification.setValue("");
     this.showFormCustomer = true;
     const title = assured.description;
     const id = assured.productId;
@@ -284,8 +402,8 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
     const showComission = true;
     const showshowTitle = false;
     const buttonClose = "Cerrar";
-    this.plu = '';
-    this.business = 'seguros';
+    this.plu = "";
+    this.business = "seguros";
     const home = true;
     this.dialog.open(DialogComponent, {
       data: {
@@ -303,20 +421,21 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
         home
       }
     });
-
   }
 
   /**
    * Metodo para abrir la modal con el producto seleccionado del viajes
-   * @param trip 
+   * @param trip
    */
 
   public dataTrip(trip) {
     const datatripUrl = trip.link;
     this.url = `${datatripUrl}${this.identification}`;
-    this.subscription = this.user.getShortUrl(this.url).subscribe((resp: any) => {
-      this.urlshorten = resp;
-    });
+    this.subscription = this.user
+      .getShortUrl(this.url)
+      .subscribe((resp: any) => {
+        this.urlshorten = resp;
+      });
     setTimeout(() => {
       this.saveLink();
     }, 1500);
@@ -332,8 +451,8 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
     const showComission = true;
     const showshowTitle = false;
     const buttonClose = "Cerrar";
-    this.plu = '';
-    this.business = 'viajes'
+    this.plu = "";
+    this.business = "viajes";
     const home = true;
     this.dialog.open(DialogComponent, {
       data: {
@@ -351,13 +470,12 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
         home
       }
     });
-
   }
 
   /**
    * Abre el mensaje de confirmacion de copiado del link
-   * @param message 
-   * @param action 
+   * @param message
+   * @param action
    */
 
   private openSnackBar(message: string, action: string) {
@@ -384,21 +502,21 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
     });
   }
 
-   /**
+  /**
    * Metodo para listar los viajes
    */
 
   public Trip() {
-   this.subscription = this.content.getTrips().subscribe(trip => {
+    this.subscription = this.content.getTrips().subscribe(trip => {
       this.trips = trip;
     });
   }
 
-   /**
+  /**
    * Metodo para dalvar los links generados
    */
 
-  public saveLink(){
+  public saveLink() {
     let data = {
       link: this.urlshorten,
       identification: this.identification,
@@ -406,19 +524,25 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
       business: this.business,
       creationDate: this.date,
       identificationcustomer: this.idCustomerForm.controls.identification.value
-    }
-   this.subscription = this.links.saveLink(data).subscribe();
+    };
+    this.subscription = this.links.saveLink(data).subscribe();
   }
 
   /**
    * Obtiene la fecha actual
    */
 
-  public getDate(){
+  public getDate() {
     let today = new Date();
-    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    this.date = date+' '+time;
+    let date =
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getDate();
+    let time =
+      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    this.date = date + " " + time;
   }
 
   public nextStep() {
@@ -430,12 +554,14 @@ export class TabsComponent extends MatPaginatorIntl  implements OnInit, OnDestro
   }
 
   public getInfo(event) {
-    this.idCustomer = event.target.value
-    if( event.target.value !== this.numberPattern && event.target.value === '') {
+    this.idCustomer = event.target.value;
+    if (
+      event.target.value !== this.numberPattern &&
+      event.target.value === ""
+    ) {
       this.buttonDisabled = true;
     } else {
       this.buttonDisabled = false;
     }
   }
-
 }
