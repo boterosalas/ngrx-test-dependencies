@@ -7,13 +7,13 @@ export const environment = {
   URL_SECURITY: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apisecurity/api/',
   URL_PROFILE: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apiprofile/api/',
   URL_VALIDATE_EMPLOYEE: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apiprofile/',
-  URL_CONTENT: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apicontent/api/',
-  // URL_CONTENT: 'https://apimexito.azure-api.net/PD-clickam-md-apicontent/api/',
+  // URL_CONTENT: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apicontent/api/',
+  URL_CONTENT: 'https://apimexito.azure-api.net/PD-clickam-md-apicontent/api/',
   URL_REFERAL: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apireferral/api/',
   URL_COMISSION: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apicommission/api/',
   URL_MASTER: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apimasterdata/api/',
-  SUBSCRIPTION: 'f5edbcd2315e479aad33d80c58052fcc'
-  // SUBSCRIPTION: 'e2d3328d254d4e52a11495b223f56e86'
+  // SUBSCRIPTION: 'f5edbcd2315e479aad33d80c58052fcc'
+  SUBSCRIPTION: 'e2d3328d254d4e52a11495b223f56e86'
 };
 
 /*

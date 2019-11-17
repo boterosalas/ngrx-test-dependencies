@@ -75,13 +75,12 @@ export class TabsComponent extends MatPaginatorIntl
     };
   }
 
-  term: string;
-
   @ViewChild("templateDialog", { static: false }) template: TemplateRef<any>;
   @ViewChild("templateDialogAssured", { static: false })
   templateAssured: TemplateRef<any>;
   @ViewChild("paginator", { static: false }) paginator: any;
 
+  term: string;
   private subscription: Subscription = new Subscription();
   productsList: SearchProduct;
   showResults: boolean;
@@ -106,12 +105,19 @@ export class TabsComponent extends MatPaginatorIntl
   showFormCustomer = true;
   percent: number;
   percents = [];
+  percentsSearch = [];
+  percentsSearch2 = [];
   images = [];
-  imgLogo:string;
+  imgLogo: string;
   idCustomer: string = "";
   buttonDisabled: boolean = true;
   numberPattern = "^(0|[0-9][0-9]*)$";
   idCustomerForm: FormGroup;
+  priceAliance: any;
+  listPriceAliance: any;
+  totalPriceAliance: any;
+  totalPriceArrays = [];
+  totalArraysDesc:any;
 
   ngOnInit() {
     this.showNotFound = false;
@@ -178,6 +184,7 @@ export class TabsComponent extends MatPaginatorIntl
           this.showResults = true;
           this.showNotFound = false;
           this.productsList = JSON.parse(resp.json);
+          this.aliance([this.productsList]);
         } else {
           this.showNotFound = true;
           this.showResults = false;
@@ -189,6 +196,74 @@ export class TabsComponent extends MatPaginatorIntl
         this.showResults = false;
       }
     );
+  }
+
+  private aliance(arr: any) {
+    arr.map(element => {
+      for (const key in element) {
+        let teasers = element[key].items[0].sellers[0].commertialOffer.Teasers;
+        this.priceAliance =
+          element[key].items[0].sellers[0].commertialOffer.Price;
+        this.listPriceAliance =
+          element[key].items[0].sellers[0].commertialOffer.ListPrice;
+        if (teasers.length === 0) {
+          teasers = [
+            {
+              "<Name>k__BackingField": "",
+              "<Conditions>k__BackingField": {
+                "<MinimumQuantity>k__BackingField": 0,
+                "<Parameters>k__BackingField": [
+                  {
+                    "<Name>k__BackingField": "",
+                    "<Value>k__BackingField": ""
+                  }
+                ]
+              },
+              "<Effects>k__BackingField": {
+                "<Parameters>k__BackingField": [
+                  {
+                    "<Name>k__BackingField": "PercentualDiscount",
+                    "<Value>k__BackingField": "0"
+                  }
+                ]
+              }
+            }
+          ];
+        }
+
+        if(teasers.length > 1) {
+          teasers.map(element => {
+            let allPercent = 
+              element["<Effects>k__BackingField"][
+                "<Parameters>k__BackingField"
+              ][0]["<Value>k__BackingField"]            
+              this.percentsSearch.push(allPercent); 
+          });
+          let max = this.percentsSearch.reduce(
+              (a, b) => {
+                return Math.max(a, b);
+              },
+              [""]
+            );
+            this.percentsSearch = [max];
+            // console.log(this.percentsSearch);
+        } else {
+          if(teasers.length <= 1) {   
+            teasers.map(element => {
+              let allPercent = 
+                element["<Effects>k__BackingField"][
+                  "<Parameters>k__BackingField"
+                ][0]["<Value>k__BackingField"]
+              ;
+              this.percentsSearch2.push(allPercent);
+            });
+          }
+        }
+        // console.log(this.percentsSearch);
+      }
+      // this.totalArraysDesc =[...this.percentsSearch, ...this.percentsSearch2];
+      // console.log(this.totalArraysDesc);
+    });
   }
 
   /**
@@ -261,16 +336,19 @@ export class TabsComponent extends MatPaginatorIntl
         ]
       ];
       let nameAliance = element["<Name>k__BackingField"];
-      let splitName = nameAliance.split('_');
+      let splitName = nameAliance.split("_");
       let alianceText = splitName[0];
-      this.images.push(alianceText)
+      this.images.push(alianceText);
       this.percents.push(allPercent);
     });
 
     let arr = this.percents;
-    let max = arr.reduce((a,b) => {
-      return Math.max(a, b);
-    },[""])
+    let max = arr.reduce(
+      (a, b) => {
+        return Math.max(a, b);
+      },
+      [""]
+    );
 
     this.getImages(this.images[0]);
     const imgLogo = this.imgLogo;
@@ -301,75 +379,94 @@ export class TabsComponent extends MatPaginatorIntl
     });
   }
 
-
   private getImages(text: string) {
-    
     switch (text) {
-      case 'exito1':
-        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-tuya-3dwydtsjyhmy22j.png"
+      case "exito1":
+        this.imgLogo =
+          "https://d3ez54m90carx6.cloudfront.net/logo-bank-tuya-3dwydtsjyhmy22j.png";
         break;
-      case 'exito2':
-        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-tuya-3oc0pwkjyhmzi29.png"
+      case "exito2":
+        this.imgLogo =
+          "https://d3ez54m90carx6.cloudfront.net/logo-bank-tuya-3oc0pwkjyhmzi29.png";
         break;
-      case 'colpatria1':
-        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-colpatria-3oc0pwkjyhniolc.png"
+      case "colpatria1":
+        this.imgLogo =
+          "https://d3ez54m90carx6.cloudfront.net/logo-bank-colpatria-3oc0pwkjyhniolc.png";
         break;
-      case 'bogota1':
-        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-bogota-3dwydtsjyhnn0v1.png"
+      case "bogota1":
+        this.imgLogo =
+          "https://d3ez54m90carx6.cloudfront.net/logo-bank-bogota-3dwydtsjyhnn0v1.png";
         break;
-      case 'colpatriascotiabank1':
-        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-scotiaBankColpatria-3dwydtsjyhnlx0r.png"
+      case "colpatriascotiabank1":
+        this.imgLogo =
+          "https://d3ez54m90carx6.cloudfront.net/logo-bank-scotiaBankColpatria-3dwydtsjyhnlx0r.png";
         break;
-      case 'colpatria2':
-        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-colpatria-3oc0pwkjyhnjjjd.png"
+      case "colpatria2":
+        this.imgLogo =
+          "https://d3ez54m90carx6.cloudfront.net/logo-bank-colpatria-3oc0pwkjyhnjjjd.png";
         break;
-      case 'colpatriascotiabank2':
-        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-scotiaBankColpatria-3dwydtsjyhnmd9o.png"
+      case "colpatriascotiabank2":
+        this.imgLogo =
+          "https://d3ez54m90carx6.cloudfront.net/logo-bank-scotiaBankColpatria-3dwydtsjyhnmd9o.png";
         break;
-      case 'scotiabank1':
-        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-scotiaBankColpatria-3oc0pwkjyhnl32l.png"
+      case "scotiabank1":
+        this.imgLogo =
+          "https://d3ez54m90carx6.cloudfront.net/logo-bank-scotiaBankColpatria-3oc0pwkjyhnl32l.png";
         break;
-      case 'visa':
-        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-visa-3oc0pwkjyhnqkbs.png"
+      case "visa":
+        this.imgLogo =
+          "https://d3ez54m90carx6.cloudfront.net/logo-bank-visa-3oc0pwkjyhnqkbs.png";
         break;
-      case 'aval':
-        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-aval-3dwydtsjyhnpl3m.png"
+      case "aval":
+        this.imgLogo =
+          "https://d3ez54m90carx6.cloudfront.net/logo-bank-aval-3dwydtsjyhnpl3m.png";
         break;
-      case 'occidente1':
-        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-occidente-3oc0pwkjyhnomk3.png"
+      case "occidente1":
+        this.imgLogo =
+          "https://d3ez54m90carx6.cloudfront.net/logo-bank-occidente-3oc0pwkjyhnomk3.png";
         break;
-      case 'bogota2':
-        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-bogota-3dwydtsjyhnnqgr.png"
+      case "bogota2":
+        this.imgLogo =
+          "https://d3ez54m90carx6.cloudfront.net/logo-bank-bogota-3dwydtsjyhnnqgr.png";
         break;
-      case 'mastercard':
-        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-mastercard-3oc0pwkjyhnsecq.png"
+      case "mastercard":
+        this.imgLogo =
+          "https://d3ez54m90carx6.cloudfront.net/logo-bank-mastercard-3oc0pwkjyhnsecq.png";
         break;
-      case 'davivienda1':
-        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-davivienda-3dwydtsjyhnt6eo.png"
+      case "davivienda1":
+        this.imgLogo =
+          "https://d3ez54m90carx6.cloudfront.net/logo-bank-davivienda-3dwydtsjyhnt6eo.png";
         break;
-      case 'davivienda3':
-        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-davivienda-3oc0pwkjyhnuoxx.png"
+      case "davivienda3":
+        this.imgLogo =
+          "https://d3ez54m90carx6.cloudfront.net/logo-bank-davivienda-3oc0pwkjyhnuoxx.png";
         break;
-      case 'coomeva1':
-        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-coomeva-3oc0pwkjyhnvboq.png"
+      case "coomeva1":
+        this.imgLogo =
+          "https://d3ez54m90carx6.cloudfront.net/logo-bank-coomeva-3oc0pwkjyhnvboq.png";
         break;
-      case 'codensa1':
-        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-codensa-3dwydtsjyhn0fzz.png"
+      case "codensa1":
+        this.imgLogo =
+          "https://d3ez54m90carx6.cloudfront.net/logo-bank-codensa-3dwydtsjyhn0fzz.png";
         break;
-      case 'bancolombia2':
-        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-bancolombia-3dwydtsjyhn3xpy.png"
+      case "bancolombia2":
+        this.imgLogo =
+          "https://d3ez54m90carx6.cloudfront.net/logo-bank-bancolombia-3dwydtsjyhn3xpy.png";
         break;
-      case 'bancolombia1':
-        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-bancolombia-3dwydtsjyhn1lhq.png"
+      case "bancolombia1":
+        this.imgLogo =
+          "https://d3ez54m90carx6.cloudfront.net/logo-bank-bancolombia-3dwydtsjyhn1lhq.png";
         break;
-      case 'popular1':
-        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-banco-popular-7lvp9sk0gu7rqx.png"
+      case "popular1":
+        this.imgLogo =
+          "https://d3ez54m90carx6.cloudfront.net/logo-bank-banco-popular-7lvp9sk0gu7rqx.png";
         break;
-      case 'itau1':
-        this.imgLogo = "https://d3ez54m90carx6.cloudfront.net/logo-bank-itau-7lvp9sk0gu986p.png"
+      case "itau1":
+        this.imgLogo =
+          "https://d3ez54m90carx6.cloudfront.net/logo-bank-itau-7lvp9sk0gu986p.png";
         break;
       default:
-        this.imgLogo = ""
+        this.imgLogo = "";
         break;
     }
   }

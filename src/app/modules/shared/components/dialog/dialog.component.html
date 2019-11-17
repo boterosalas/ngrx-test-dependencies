@@ -11,10 +11,12 @@
             <div fxLayout="column" fxFlex="50" *ngIf="data.home">
                 <h3 class="title m-0">{{data.title}}</h3>
                 <span *ngIf="data.showComission">Comisión:</span>
-                <span class="discount small text-line">{{data.discount | currency : '' : 'symbol' : '1.0-0'}}</span>
+                <span class="discount small text-line" *ngIf="data.discount !== data.price">{{data.discount | currency : '' : 'symbol' : '1.0-0'}}</span>
                 <span class="discount">{{data.price | currency : '' : 'symbol' : '1.0-0'}}</span>
-                <img class="aliance-img" src="{{data.imgLogo}}" alt="logo">
-                <span class="discount">{{  (data.discount - (data.discount * (data.aliance/100))) | currency : '' : 'symbol' : '1.0-0'}}</span>
+                <div *ngIf="data.aliance > 0" fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start center">
+                    <span class="discount" fxLayout="column">{{  (data.discount - (data.discount * (data.aliance/100))) | currency : '' : 'symbol' : '1.0-0'}}</span>
+                    <span fxLayout="column"><img class="aliance-img" src="{{data.imgLogo}}" alt="logo"></span>
+                </div>
                 <span class="plu" *ngIf="data.showPlu">PLU:{{data.plu}} </span>
             </div>
             <div fxLayout="column" fxFlex="50" *ngIf="data.offers">

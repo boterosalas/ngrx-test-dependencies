@@ -26,14 +26,14 @@
               fxFlex.xs="50"
               fxFlex.sm="33"
               fxFlex.gt-sm="25"
-              *ngFor="let product of productsList; let i = index"
+              *ngFor="let product of productsList;let i = index;"
             >
               <app-product
                 id="productTitle{{ i }}"
                 btnid="btnLink{{ i }}"
                 [productName]="product.productName"
                 [discount]="product.items[0].sellers[0].commertialOffer.ListPrice"
-                [aliance]="product.items[0].sellers[0].commertialOffer.Teasers"
+                [aliance]="totalPriceArrays[i]"
                 [price]="product.items[0].sellers[0].commertialOffer.Price"
                 productDescription=""
                 [image]="product.items[0].images[0].imageUrl"

@@ -12,21 +12,23 @@
     <h3 [fxShow.xs]="false" class="title" id="{{ id }}"  matTooltip={{productName}}>{{ productName | truncate: '50' }}</h3>
     <p>
       <span *ngIf="price !== 0">
-        <span class="d-block discount text-line small">
+        <span *ngIf="discount !== price" class="d-block discount text-line small">
           {{ discount | currency : '' : 'symbol' : '1.0-0' }}
         </span>
           <span class="d-block discount">
             {{ price | currency : '' : 'symbol' : '1.0-0' }}
           </span>
+
+          <span class="d-block discount" *ngIf="aliance !== '0'">
+            {{ aliance | currency : '' : 'symbol' : '1.0-0' }}
+          </span>
+
       </span>
       <span *ngIf="price === 0">
         <span class="badge-product">
           Producto no disponible
         </span>
         <span class="min-18">
-        </span>
-        <span class="d-block discount font">
-          {{aliance}}
         </span>
       </span>
     </p>
