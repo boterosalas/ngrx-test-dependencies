@@ -19,8 +19,9 @@
             {{ price | currency : '' : 'symbol' : '1.0-0' }}
           </span>
 
-          <span class="d-block discount" *ngIf="aliance !== '0'">
+          <span class="d-block discount" *ngIf="aliance !== 0">
             {{ aliance | currency : '' : 'symbol' : '1.0-0' }}
+            <img *ngIf="imgLogo !== undefined" [src]="imgLogo" alt="logo">
           </span>
 
       </span>

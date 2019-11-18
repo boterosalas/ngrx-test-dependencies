@@ -106,9 +106,8 @@ export class TabsComponent extends MatPaginatorIntl
   percent: number;
   percents = [];
   percentsSearch = [];
-  percentsSearch2 = [];
   images = [];
-  imgLogo: string;
+  imgLogo: any;
   idCustomer: string = "";
   buttonDisabled: boolean = true;
   numberPattern = "^(0|[0-9][0-9]*)$";
@@ -199,70 +198,27 @@ export class TabsComponent extends MatPaginatorIntl
   }
 
   private aliance(arr: any) {
-    arr.map(element => {
+    this.percentsSearch = [];
+    arr.map((element, i) => {
       for (const key in element) {
         let teasers = element[key].items[0].sellers[0].commertialOffer.Teasers;
-        this.priceAliance =
-          element[key].items[0].sellers[0].commertialOffer.Price;
-        this.listPriceAliance =
-          element[key].items[0].sellers[0].commertialOffer.ListPrice;
-        if (teasers.length === 0) {
-          teasers = [
-            {
-              "<Name>k__BackingField": "",
-              "<Conditions>k__BackingField": {
-                "<MinimumQuantity>k__BackingField": 0,
-                "<Parameters>k__BackingField": [
-                  {
-                    "<Name>k__BackingField": "",
-                    "<Value>k__BackingField": ""
-                  }
-                ]
-              },
-              "<Effects>k__BackingField": {
-                "<Parameters>k__BackingField": [
-                  {
-                    "<Name>k__BackingField": "PercentualDiscount",
-                    "<Value>k__BackingField": "0"
-                  }
-                ]
-              }
-            }
-          ];
-        }
+        this.priceAliance = element[key].items[0].sellers[0].commertialOffer.Price;
+        this.listPriceAliance = element[key].items[0].sellers[0].commertialOffer.ListPrice;
 
-        if(teasers.length > 1) {
           teasers.map(element => {
-            let allPercent = 
-              element["<Effects>k__BackingField"][
-                "<Parameters>k__BackingField"
-              ][0]["<Value>k__BackingField"]            
-              this.percentsSearch.push(allPercent); 
+            let name = element["<Name>k__BackingField"];
+            let split = name.split("_");
+            let logo = split[0];
+            let percent = split[1];
+            this.percentsSearch.push(percent);
+            this.images.push(logo);
           });
-          let max = this.percentsSearch.reduce(
-              (a, b) => {
-                return Math.max(a, b);
-              },
-              [""]
-            );
-            this.percentsSearch = [max];
-            // console.log(this.percentsSearch);
-        } else {
-          if(teasers.length <= 1) {   
-            teasers.map(element => {
-              let allPercent = 
-                element["<Effects>k__BackingField"][
-                  "<Parameters>k__BackingField"
-                ][0]["<Value>k__BackingField"]
-              ;
-              this.percentsSearch2.push(allPercent);
-            });
-          }
+          // this.getImages(this.images[key]);
+          // console.log(this.images[key]);
+          // this.totalPriceAliance = (this.listPriceAliance - (this.listPriceAliance * (this.percentsSearch[key]/100)));
+          // this.totalPriceArrays.push(this.totalPriceAliance);
         }
-        // console.log(this.percentsSearch);
-      }
-      // this.totalArraysDesc =[...this.percentsSearch, ...this.percentsSearch2];
-      // console.log(this.totalArraysDesc);
+        
     });
   }
 
@@ -352,8 +308,6 @@ export class TabsComponent extends MatPaginatorIntl
 
     this.getImages(this.images[0]);
     const imgLogo = this.imgLogo;
-
-    console.log(this.imgLogo);
 
     const aliance = max;
 
