@@ -269,7 +269,6 @@ export class TabsComponent extends MatPaginatorIntl
    */
 
   public dataProduct(product) {
-    console.log(product);
     if (environment.production === false) {
       const productUrl = product.link;
       this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=${this.identification}`;
