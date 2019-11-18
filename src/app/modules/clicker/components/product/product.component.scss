@@ -25,6 +25,9 @@
     &-height{
         min-height: 34px;
     }
+    &-aliance {
+        color: red;
+    }
 }
 
 .font{
@@ -69,6 +72,15 @@
     vertical-align: baseline;
     border-radius: .25em;
     background: red;
+}
+
+.prices {
+    max-height: 63px;
+    min-height: 63px;
+}
+
+.logo-aliance{
+    width: 25px;
 }
 
 @media screen and (max-width: 350px) {

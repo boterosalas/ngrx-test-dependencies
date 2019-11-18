@@ -108,6 +108,7 @@ export class TabsComponent extends MatPaginatorIntl
   percentsSearch = [];
   images = [];
   imgLogo: any;
+  imgLogoAliance = [];
   idCustomer: string = "";
   buttonDisabled: boolean = true;
   numberPattern = "^(0|[0-9][0-9]*)$";
@@ -116,7 +117,7 @@ export class TabsComponent extends MatPaginatorIntl
   listPriceAliance: any;
   totalPriceAliance: any;
   totalPriceArrays = [];
-  totalArraysDesc:any;
+  totalArraysDesc: any;
 
   ngOnInit() {
     this.showNotFound = false;
@@ -199,26 +200,42 @@ export class TabsComponent extends MatPaginatorIntl
 
   private aliance(arr: any) {
     this.percentsSearch = [];
-    arr.map((element, i) => {
+    this.totalPriceArrays = [];
+    this.imgLogoAliance = [];
+    this.images = [];
+    this.totalPriceAliance = "";
+    arr.map((element) => {
       for (const key in element) {
         let teasers = element[key].items[0].sellers[0].commertialOffer.Teasers;
-        this.priceAliance = element[key].items[0].sellers[0].commertialOffer.Price;
-        this.listPriceAliance = element[key].items[0].sellers[0].commertialOffer.ListPrice;
+        this.priceAliance =
+          element[key].items[0].sellers[0].commertialOffer.Price;
+        this.listPriceAliance =
+          element[key].items[0].sellers[0].commertialOffer.ListPrice;
 
-          teasers.map(element => {
-            let name = element["<Name>k__BackingField"];
-            let split = name.split("_");
-            let logo = split[0];
-            let percent = split[1];
-            this.percentsSearch.push(percent);
-            this.images.push(logo);
-          });
-          // this.getImages(this.images[key]);
-          // console.log(this.images[key]);
-          // this.totalPriceAliance = (this.listPriceAliance - (this.listPriceAliance * (this.percentsSearch[key]/100)));
-          // this.totalPriceArrays.push(this.totalPriceAliance);
+        if (teasers.length === 0) {
+          teasers = [
+            {
+              "<Name>k__BackingField": "default_0"
+            }
+          ];
         }
-        
+
+        let name = teasers[0]["<Name>k__BackingField"];
+        let split = name.split("_");
+        let logo = split[0];
+        let percent = split[1];
+        this.percentsSearch.push(percent);
+        this.images.push(logo);
+
+        this.getImages(this.images[key]);
+
+        this.imgLogoAliance.push(this.imgLogo);
+
+        this.totalPriceAliance =
+          this.listPriceAliance -
+          this.listPriceAliance * (this.percentsSearch[key] / 100);
+        this.totalPriceArrays.push(this.totalPriceAliance);
+      }
     });
   }
 
@@ -252,6 +269,7 @@ export class TabsComponent extends MatPaginatorIntl
    */
 
   public dataProduct(product) {
+    console.log(product);
     if (environment.production === false) {
       const productUrl = product.link;
       this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=${this.identification}`;
@@ -284,32 +302,23 @@ export class TabsComponent extends MatPaginatorIntl
     this.plu = product.items[0].itemId;
     this.business = "exito";
     const home = true;
-    const percent = product.items[0].sellers[0].commertialOffer.Teasers;
-    percent.map(element => {
-      let allPercent = [
-        element["<Effects>k__BackingField"]["<Parameters>k__BackingField"][0][
-          "<Value>k__BackingField"
-        ]
+    let teasers = product.items[0].sellers[0].commertialOffer.Teasers;
+    
+    if(teasers.length === 0) {
+      teasers = [
+        {
+          "<Name>k__BackingField": "default_0"
+        }
       ];
-      let nameAliance = element["<Name>k__BackingField"];
-      let splitName = nameAliance.split("_");
-      let alianceText = splitName[0];
-      this.images.push(alianceText);
-      this.percents.push(allPercent);
-    });
+    }
 
-    let arr = this.percents;
-    let max = arr.reduce(
-      (a, b) => {
-        return Math.max(a, b);
-      },
-      [""]
-    );
-
-    this.getImages(this.images[0]);
+    let name = teasers[0]["<Name>k__BackingField"];
+    let split = name.split("_");
+    let logo = split[0];
+    let aliance = split[1];
+    
+    this.getImages(logo);
     const imgLogo = this.imgLogo;
-
-    const aliance = max;
 
     this.dialog.open(DialogComponent, {
       data: {
@@ -328,7 +337,7 @@ export class TabsComponent extends MatPaginatorIntl
         discount,
         home,
         aliance,
-        imgLogo
+        imgLogo,
       }
     });
   }
