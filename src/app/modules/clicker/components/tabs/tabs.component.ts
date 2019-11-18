@@ -98,6 +98,7 @@ export class TabsComponent extends MatPaginatorIntl
   isLoggedIn: any;
   assureds = [];
   trips = [];
+  categories = [];
   date: any;
   plu: string;
   business: string;
@@ -118,6 +119,38 @@ export class TabsComponent extends MatPaginatorIntl
   totalPriceAliance: any;
   totalPriceArrays = [];
   totalArraysDesc: any;
+
+  slideConfig = {
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    infinite: false,
+    dots: false,
+    dotClass: "slick-dots orange",
+    autoplay: false,
+    arrows: true,
+    centerPadding:'10px',
+    // the magic
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          infinite: false
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          dots: false
+        }
+      },
+      {
+        breakpoint: 300,
+        settings: "unslick" // destroys slick
+      }
+    ]
+  };
 
   ngOnInit() {
     this.showNotFound = false;
@@ -151,6 +184,7 @@ export class TabsComponent extends MatPaginatorIntl
 
     this.getDate();
     this.Assured();
+    this.getCategories();
     this.Trip();
   }
 
@@ -302,6 +336,7 @@ export class TabsComponent extends MatPaginatorIntl
     this.business = "exito";
     const home = true;
     let teasers = product.items[0].sellers[0].commertialOffer.Teasers;
+    const exito = true;
     
     if(teasers.length === 0) {
       teasers = [
@@ -337,6 +372,7 @@ export class TabsComponent extends MatPaginatorIntl
         home,
         aliance,
         imgLogo,
+        exito
       }
     });
   }
@@ -532,6 +568,51 @@ export class TabsComponent extends MatPaginatorIntl
   }
 
   /**
+   * Metodo para abrir la modal con el producto seleccionado del viajes
+   * @param trip
+   */
+
+  public dataCategory(category) {
+    const dataCategoryUrl = category.link;
+    this.url = `${dataCategoryUrl}${this.identification}`;
+    this.subscription = this.user
+      .getShortUrl(this.url)
+      .subscribe((resp: any) => {
+        this.urlshorten = resp;
+      });
+    setTimeout(() => {
+      this.saveLink();
+    }, 1500);
+    this.formShareLink();
+    const title = category.description;
+    const id = category.productId;
+    const img = category.imageurl;
+    const template = this.template;
+    const showClose = false;
+    const showCloseIcon = true;
+    const showProduct = true;
+    const showshowTitle = false;
+    const buttonClose = "Cerrar";
+    this.plu = "";
+    this.business = "exito";
+    const home = true;
+    this.dialog.open(DialogComponent, {
+      data: {
+        title,
+        template,
+        showClose,
+        showCloseIcon,
+        img,
+        showProduct,
+        showshowTitle,
+        buttonClose,
+        id,
+        home
+      }
+    });
+  }
+
+  /**
    * Abre el mensaje de confirmacion de copiado del link
    * @param message
    * @param action
@@ -568,6 +649,16 @@ export class TabsComponent extends MatPaginatorIntl
   public Trip() {
     this.subscription = this.content.getTrips().subscribe(trip => {
       this.trips = trip;
+    });
+  }
+
+  /**
+   * Metodo para listar las categorias
+   */
+
+  public getCategories() {
+    this.subscription = this.content.getCategory().subscribe(category => {
+      this.categories = category;
     });
   }
 

@@ -83,6 +83,10 @@
     width: 25px;
 }
 
+.border-rad{
+    border-radius:10px ;
+}
+
 @media screen and (max-width: 350px) {
     .container-info{
         max-width: 15vh;
@@ -98,4 +102,19 @@
         margin: 0px auto;
         height: 20vh;
     }
+}
+
+.category {
+    // height: 110px;
+    // width: 200px;
+    // background-size: cover !important;
+    cursor: pointer;
+}
+
+.white{
+    color: #fff;
+}
+
+.absolute{
+    position: absolute;
 }

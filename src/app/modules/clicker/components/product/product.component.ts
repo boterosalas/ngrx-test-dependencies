@@ -10,6 +10,7 @@ export class ProductComponent implements OnInit {
   @Output() infoProduct = new EventEmitter();
 
   @Input() productName: string;
+  @Input() categoryName: string;
   @Input() productDescription: string;
   @Input() price: number;
   @Input() discount: string;
@@ -23,7 +24,9 @@ export class ProductComponent implements OnInit {
   @Input() btnid: string;
   @Input() exito: boolean;
   @Input() other: boolean;
+  @Input() category: boolean;
   @Input() container: boolean;
+  @Input() photo: string;
 
   constructor() { }
 

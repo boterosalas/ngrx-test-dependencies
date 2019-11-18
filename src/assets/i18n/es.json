@@ -27,7 +27,8 @@
     "COPY_LINK": "Copiar link",
     "INVALID_FORMAT_FILE": "Formato inválido solo se pueden subir archivos con la extensión xlsx, xls",
     "INVALID_FORMAT_FILE_REGISTER": "Formato inválido solo se pueden subir archivos con la extensión JPG, PDF",
-    "CUSTOMER_ID": "Ingrese la cédula del tomador del seguro"
+    "CUSTOMER_ID": "Ingrese la cédula del tomador del seguro",
+    "CATEGORIES": "Categorías"
   },
   "LOGIN": {
     "LOGIN": "Iniciar sesión",

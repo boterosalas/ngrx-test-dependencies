@@ -121,6 +121,25 @@
   </mat-tab-group>
 </div>
 
+<!-- categorias -->
+<h3>{{ 'GENERIC.CATEGORIES' | translate }}</h3>
+<ngx-slick-carousel class="carousel" 
+                        #slickModal="slick-carousel" 
+                        [config]="slideConfig" 
+                      >
+<div ngxSlickItem  *ngFor="let category of categories; let i = index" class="slide">
+<div fxLayout="row wrap">
+      <app-product
+        id="category{{i}}"
+        [categoryName]="category.description"
+        [photo]="category.imageurl"
+        category="true"
+        home
+        (infoProduct)="dataCategory(category)"
+      ></app-product>
+    </div>
+  </div>
+</ngx-slick-carousel>
 <!-- template bottomsheet -->
 
 <ng-template #templateDialog>

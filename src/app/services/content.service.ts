@@ -48,6 +48,14 @@ export class ContentService {
     );
   }
 
+  public getCategory() {
+    return this.http.get(`${this.url + this.apiTrips}`, this.httpOptions).pipe(
+      map((user: ResponseService) => {
+        return user.objectResponse;
+      })
+    );
+  }
+
   public getOffers() {
     return this.http.get(`${this.url + this.apiOffers}`, this.httpOptions).pipe(
       map((user: ResponseService) => {
