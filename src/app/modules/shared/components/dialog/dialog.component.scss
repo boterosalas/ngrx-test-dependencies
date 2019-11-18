@@ -15,6 +15,9 @@
 .discount{
   color: $primary-color;
   font-size: 1rem;
+  &-aliance{
+    color: red;
+  }
 }
 
 .plu{
@@ -29,6 +32,9 @@
 .text-line{
   text-decoration: line-through;
   color: $color-p !important;
+}
+.aliance-img{
+  width: 30px;
 }
 
 

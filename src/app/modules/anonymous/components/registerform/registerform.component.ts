@@ -2,14 +2,16 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ConfirmPasswordValidator } from "src/app/validators/confirm-password.validator";
 import Swal from "sweetalert2";
-import { ResponseService } from 'src/app/interfaces/response';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { LoaderService } from 'src/app/services/loader.service';
-import { UtilsService } from 'src/app/services/utils.service';
-import { ConfirmEmailValidator } from 'src/app/validators/confirm-email.validator';
-import { UserService } from 'src/app/services/user.service';
-
+import { ResponseService } from "src/app/interfaces/response";
+import { Router } from "@angular/router";
+import { Subscription, Observable } from "rxjs";
+import { LoaderService } from "src/app/services/loader.service";
+import { UtilsService } from "src/app/services/utils.service";
+import { ConfirmEmailValidator } from "src/app/validators/confirm-email.validator";
+import { UserService } from "src/app/services/user.service";
+import { startWith } from "rxjs/internal/operators/startWith";
+import { map } from "rxjs/internal/operators/map";
+import { MasterDataService } from 'src/app/services/master-data.service';
 
 @Component({
   selector: "app-registerform",
@@ -22,22 +24,48 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     private registerUser: UserService,
     private router: Router,
     private loading: LoaderService,
-    private utils: UtilsService
+    private utils: UtilsService,
+    private personalInfo: MasterDataService
   ) {}
 
   private subscription: Subscription = new Subscription();
   registerForm: FormGroup;
+  externalForm: FormGroup;
   showTerms: boolean;
   showRegisterForm: boolean;
+  showRegisterFormExternal: boolean;
   showLoginForm: boolean;
   acceptTerms: boolean;
+  validFormat: boolean;
+  nameFileCed1: string;
+  nameFileCed2: string;
+  nameFileCert: string;
+  showErrorCed1: boolean;
+  showErrorCed2: boolean;
+  showErrorCert: boolean;
+  fileIdentificationCard1: any;
+  fileIdentificationCard2: any;
+  fileBankCertificate: any;
+  EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
   idUserType = [];
+  departments = [];
+  banks = [];
+  typeAccount = [
+    {id: 1, description: 'Ahorros'},
+    {id: 2, description: 'Corriente'},
+  ]
+
+  cities: [];
   emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
   namePattern = "[a-zA-Z0-9 ]+";
   numberPattern = "^(0|[0-9][0-9]*)$";
-  passwordPattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[!#/_@#$%^&+-.*)(´}{><:;¡!})])";
-
-  
+  passwordPattern =
+    "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[!#/_@#$%^&+-.*)(´}{><:;¡!})])";
+  filteredDepartments: Observable<any>;
+  filteredCities: Observable<any>;
+  disabledCity: boolean;
+  departmentCode: string;
+  cityCode: string;
 
   ngOnInit() {
     this.registerForm = this.fb.group(
@@ -84,11 +112,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
             Validators.maxLength(64)
           ]
         ],
-        confirmEmail: [
-          "",
-          [
-          ]
-        ],
+        confirmEmail: ["", []],
         password: [
           "",
           [
@@ -107,12 +131,64 @@ export class RegisterformComponent implements OnInit, OnDestroy {
           ]
         ]
       },
-      { validator: [ConfirmPasswordValidator.MatchPassword,  ConfirmEmailValidator.MatchEmail] }
+      {
+        validator: [
+          ConfirmPasswordValidator.MatchPassword,
+          ConfirmEmailValidator.MatchEmail
+        ]
+      }
     );
     this.showTerms = false;
     this.showRegisterForm = true;
     this.acceptTerms = false;
+    this.disabledCity = true;
     this.getidType();
+    this.nameFileCed1 = '';
+    this.nameFileCed2 = '';
+    this.nameFileCert = '';
+  }
+
+  public displayDepartment(departments?: any): string | undefined {
+    return departments ? departments.description : undefined;
+  }
+
+
+  public filter() {
+    this.filteredDepartments = this.externalForm.controls.department.valueChanges
+    .pipe(
+      map(department => typeof department === 'string' ? department : department.description),
+      map(department => department ? this._filterDepartments(department) : this.departments.slice())
+    );
+  }
+
+  public filterCities() {
+    this.filteredCities = this.externalForm.controls.city.valueChanges.pipe(
+      startWith(""),
+      map(city => (city ? this._filterCities(city) : this.cities.slice()))
+    );
+  }
+
+  private _filterDepartments(value: any) {
+    
+    const filterValue = value.toLowerCase();
+    return this.departments.filter(
+      department =>
+        department.description.toLowerCase().indexOf(filterValue) === 0
+    );
+  }
+
+  private _filterCities(value: string) {
+    const filterValue = value.toLowerCase();
+    return this.cities.filter(
+      (city: any) => city.description.toLowerCase().indexOf(filterValue) === 0
+    );
+  }
+
+
+  nextStepExternalClicker() {
+    this.showTerms = true;
+    this.showRegisterFormExternal = false;
+    this.acceptTerms = false;
   }
 
   /**
@@ -120,9 +196,102 @@ export class RegisterformComponent implements OnInit, OnDestroy {
    */
 
   public nextStep() {
-    this.showTerms = true;
-    this.showRegisterForm = false;
-    this.acceptTerms = false;
+    let idEmployee = this.registerForm.controls.id.value;
+    let idTypeEmployee = this.registerForm.controls.idType.value;
+
+    if (idTypeEmployee === "1") {
+      idTypeEmployee = "CC";
+    } else {
+      if (idTypeEmployee === "2") {
+        idTypeEmployee = "CE";
+      } else {
+        idTypeEmployee = "NIT";
+      }
+    }
+
+    this.registerUser
+      .validateEmployee(idEmployee, idTypeEmployee)
+      .subscribe((employee: ResponseService) => {
+        if (employee.objectResponse === true) {
+          this.showTerms = true;
+          this.showRegisterForm = false;
+          this.acceptTerms = false;
+        } else {
+          this.showRegisterForm = false;
+          this.showRegisterFormExternal = true;
+          this.getDepartments();
+          this.getBanks();
+          this.externalClickerForm();
+          this.filter();
+        }
+      });
+  }
+
+  private externalClickerForm() {
+    this.externalForm = this.fb.group({
+      department: ["", Validators.required],
+      city: [{ value: "", disabled: this.disabledCity }, Validators.required],
+      address: ["", Validators.required],
+      bank: ["", Validators.required],
+      typeAccount: ["", Validators.required],
+      numberAccount: ["", [Validators.required, Validators.pattern(this.numberPattern), Validators.minLength(5), Validators.maxLength(10)]],
+      ced1: [null],
+      ced2: [null],
+      cert: [null],
+    });
+  }
+
+  private getExtension(nameFile: string) {
+    let splitExt = nameFile.split(".");
+    let getExt = splitExt[1];
+    this.validFormat = false;
+    if (getExt === "jpg" || getExt === "pdf") {
+      this.validFormat = true;
+    }
+  }
+
+  public onFileChange(event, param: string) {
+    let nameFile = event.target.files[0].name;
+    let reader = new FileReader();
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      let fileBlob = new Blob([file])
+      let file2 = new File(([fileBlob]), nameFile);
+      reader.readAsDataURL(file2);
+      reader.onload = () => {
+        this.getExtension(nameFile);
+        if (this.validFormat === true) {
+          if(param === 'ced1') {
+            this.fileIdentificationCard1 = reader.result;
+            this.nameFileCed1 = nameFile;
+            this.showErrorCed1 = false;
+          } else {
+            if(param === 'ced2') {
+              this.fileIdentificationCard2 = reader.result;
+              this.nameFileCed2 = nameFile;
+              this.showErrorCed2 = false;
+            }
+            else {
+              this.fileBankCertificate = reader.result;
+              this.nameFileCert = nameFile;
+              this.showErrorCert = false;
+            }
+          }
+          
+        } else {
+          if(param === 'ced1') {
+              this.showErrorCed1 = true;
+          } else {
+            if(param === 'ced2') {
+              this.showErrorCed2 = true;
+            }
+            else {
+              this.showErrorCert = true;
+            }
+          }
+        }
+      };
+    }
   }
 
   /**
@@ -140,7 +309,6 @@ export class RegisterformComponent implements OnInit, OnDestroy {
    */
 
   public register() {
-
     this.loading.show();
 
     let registerForm = {
@@ -150,7 +318,16 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       Identification: this.registerForm.controls.id.value,
       Cellphone: this.registerForm.controls.phone.value,
       Password: btoa(this.registerForm.controls.password.value),
-      IdType: this.registerForm.controls.idType.value
+      IdType: this.registerForm.controls.idType.value,
+      department: this.departmentCode,
+      municipality: this.cityCode,
+      bank: this.externalForm.controls.bank.value,
+      fileIdentificationCard1: this.fileIdentificationCard1,
+      fileIdentificationCard2: this.fileIdentificationCard2,
+      fileBankCertificate: this.fileBankCertificate,
+      bankAccountNumber: this.externalForm.controls.numberAccount.value,
+      typeBankAccount: this.externalForm.controls.typeAccount.value,
+      address: this.externalForm.controls.address.value
     };
 
     this.subscription = this.registerUser.registerUser(registerForm).subscribe(
@@ -159,11 +336,12 @@ export class RegisterformComponent implements OnInit, OnDestroy {
         if (resp.state === "Success") {
           Swal.fire({
             title: "Registro válido",
-            text: "Se ha registrado satisfactoriamente. Por favor, revise su correo para activar su cuenta.",
+            text:
+              "Se ha registrado satisfactoriamente. Por favor, revise su correo para activar su cuenta.",
             type: "success",
             confirmButtonText: "Aceptar",
-            confirmButtonClass: 'accept-register-alert-success'
-          }).then(()=> {
+            confirmButtonClass: "accept-register-alert-success"
+          }).then(() => {
             this.utils.hideloginForm();
           });
         } else {
@@ -172,8 +350,8 @@ export class RegisterformComponent implements OnInit, OnDestroy {
             text: resp.userMessage,
             type: "error",
             confirmButtonText: "Aceptar",
-            confirmButtonClass: 'accept-register-alert-error'
-          }).then(()=>{
+            confirmButtonClass: "accept-register-alert-error"
+          }).then(() => {
             this.backStep();
           });
         }
@@ -185,8 +363,8 @@ export class RegisterformComponent implements OnInit, OnDestroy {
           text: error.error.userMessage,
           type: "error",
           confirmButtonText: "Aceptar",
-          confirmButtonClass: 'accept-register-alert-invalid'
-        }).then(()=>{
+          confirmButtonClass: "accept-register-alert-invalid"
+        }).then(() => {
           this.backStep();
         });
       }
@@ -206,13 +384,59 @@ export class RegisterformComponent implements OnInit, OnDestroy {
    */
 
   public getidType() {
-   this.subscription = this.registerUser.idType().subscribe(res => {
-      this.idUserType = res.objectResponse;
-    });
+    this.subscription = this.registerUser
+      .idType()
+      .subscribe((res: ResponseService) => {
+        this.idUserType = res.objectResponse;
+      });
+  }
+
+  selectDepartment(department) {
+    this.departmentCode = department.code;
+    this.cities = department.municipalities;
+    this.externalForm.controls.city.setValue('');
+    this.filterCities();
+    let valueDepartment = this.externalForm.controls.department.valueChanges;
+
+    valueDepartment.subscribe((resp) => {
+      if (resp !== '') {
+        this.externalForm.controls.city.enable();
+      } else {
+        this.externalForm.controls.city.disable();
+        this.externalForm.controls.city.setValue('');
+      }
+    })
+  }
+
+  selectCity(city) {
+    this.cityCode = city.code;
+  }
+
+  /**
+   * Metodo para listar los departamentos
+   */
+
+  public getDepartments() {
+    this.subscription = this.personalInfo
+      .getDepartments()
+      .subscribe((res: ResponseService) => {
+        this.departments = res.objectResponse;
+      });
+  }
+
+  /**
+   * Metodo para listar los bancos
+   */
+
+  public getBanks() {
+    this.subscription = this.personalInfo
+      .getBanks()
+      .subscribe((res: ResponseService) => {
+        this.banks = res.objectResponse;
+      });
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
 }

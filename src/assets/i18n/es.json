@@ -26,6 +26,7 @@
     "SHARE": "Compartir directamente en:",
     "COPY_LINK": "Copiar link",
     "INVALID_FORMAT_FILE": "Formato inválido solo se pueden subir archivos con la extensión xlsx, xls",
+    "INVALID_FORMAT_FILE_REGISTER": "Formato inválido solo se pueden subir archivos con la extensión JPG, PDF",
     "CUSTOMER_ID": "Ingrese la cédula del tomador del seguro"
   },
   "LOGIN": {
@@ -44,7 +45,22 @@
     "TITLE_TERMS_AND_CONDITIONS": "TÉRMINOS Y CONDICIONES DE  LA LEY HABEAS DATA",
     "PASSWORD_NOT_MATCH": "Las contraseñas no son iguales",
     "ID_TYPE": "Seleccionar documento",
-    "HAVE_ACCOUNT": "Si ya tienes una cuenta puedes"
+    "HAVE_ACCOUNT": "Si ya tienes una cuenta puedes",
+    "INFO_HOME": "Información domiciliaria",
+    "DEPARTMENT": "Departamento",
+    "CITY": "Ciudad",
+    "ADDRESS": "Dirección",
+    "ACOUNT_INFO": "Información bancaria",
+    "BANK": "Banco",
+    "TYPE_ACCOUNT": "Tipo de cuenta",
+    "NUMBER_ACCOUNT": "Número de cuenta",
+    "ADITIONAL_FILE": "Archivos adicionales",
+    "INFO_ADDITIONAL": "Los siguientes documentos son necesarios para poder verificar tu cuenta y que empieces a recibir tus comisiones.",
+    "INFO_ADDITIONAL_2": " Puedes adjuntarlos ahora o más adelante desde tu página de perfil.",
+    "CED1": "Cédula pag 1",
+    "CED2": "Cédula pag 2",
+    "ACCOUNT_CERT": "Certificación bancaria",
+    "NO_FILE": "Ningún archivo seleccionado"
   },
   "FORGOTPASSWORD": {
     "FORGOT_PASSWORD": "Recuperar contraseña",

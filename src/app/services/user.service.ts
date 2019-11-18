@@ -19,6 +19,7 @@ export class UserService {
   }
 
   url = environment.URL_PROFILE;
+  urlEmployee = environment.URL_VALIDATE_EMPLOYEE;
   apiProfile = "userprofile/GetUserProfile";
   apiActivateProfile = "userprofile/activateUser";
   apiShorUrl= 'userprofile/getShortURL';
@@ -28,6 +29,9 @@ export class UserService {
   apiUsers = 'userprofile/getUsers';
   apiComunications = 'userprofile/setReceiveCommunications';
   apiVerified = 'userprofile/verifyUser';
+  apiDepartment = 'userprofile/getDeparments';
+  apiBanks = 'userprofile/getBanks';
+
 
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
@@ -80,8 +84,20 @@ export class UserService {
     return this.http.post((`${this.url}${this.apiCreateUser}`), userInfo, this.httpOptions);
   }
 
-  public idType(): Observable<any>{
+  public idType(){
     return this.http.get((`${this.url}${this.apiIdType}`), this.httpOptions);
+  }
+
+  public getDepartments(){
+    return this.http.get((`${this.url}${this.apiDepartment}`), this.httpOptions);
+  }
+
+  public getBanks(){
+    return this.http.get((`${this.url}${this.apiBanks}`), this.httpOptions);
+  }
+
+  public validateEmployee(id: string, document: string){
+    return this.http.get((`${this.urlEmployee}/validateEmployee?id=${id}&documentType=${document}`), this.httpOptions);
   }
 
 

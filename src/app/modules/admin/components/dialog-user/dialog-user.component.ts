@@ -1,9 +1,16 @@
-import { Component, OnInit, Inject, Output, EventEmitter, OnDestroy } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Inject,
+  Output,
+  EventEmitter,
+  OnDestroy
+} from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
-import { Subscription } from 'rxjs';
-import { distinctUntilChanged } from 'rxjs/operators';
-import { UserService } from 'src/app/services/user.service';
-import { AuthService } from 'src/app/services/auth.service';
+import { Subscription } from "rxjs";
+import { distinctUntilChanged } from "rxjs/operators";
+import { UserService } from "src/app/services/user.service";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-dialog-user",
@@ -11,13 +18,13 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ["./dialog-user.component.scss"]
 })
 export class DialogUserComponent implements OnInit, OnDestroy {
-
   constructor(
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private user: UserService,
     private auth: AuthService
-  ) {}
+  ) {
+  }
 
   @Output() state = new EventEmitter();
   @Output() comunications = new EventEmitter();
@@ -50,16 +57,17 @@ export class DialogUserComponent implements OnInit, OnDestroy {
      */
 
     if (this.isLoggedIn) {
-      this.subscription = this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
-        if (!!val) {
-          this.idAdmin = val.userId;
-        }
-      });
+      this.subscription = this.user.userInfo$
+        .pipe(distinctUntilChanged())
+        .subscribe(val => {
+          if (!!val) {
+            this.idAdmin = val.userId;
+          }
+        });
     }
   }
 
   ngOnDestroy(): void {
-   this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
-
 }
