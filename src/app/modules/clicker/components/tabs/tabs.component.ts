@@ -119,6 +119,10 @@ export class TabsComponent extends MatPaginatorIntl
   totalPriceAliance: any;
   totalPriceArrays = [];
   totalArraysDesc: any;
+  alianceSplit:string;
+  alianceSplit2:string;
+  nameAliance: any;
+  percentModal: any;
 
   slideConfig = {
     slidesToShow: 5,
@@ -254,15 +258,35 @@ export class TabsComponent extends MatPaginatorIntl
           ];
         }
 
-        let name = teasers[0]["<Name>k__BackingField"];
-        let split = name.split("_");
-        let logo = split[0];
-        let percent = split[1];
-        this.percentsSearch.push(percent);
-        this.images.push(logo);
+        if(teasers.length === 1) {
+          let name = teasers[0]["<Name>k__BackingField"];
+          let split = name.split("_");
+          let logo = split[0];
+          let percent = split[1];
+          this.percentsSearch.push(percent);
+          this.images.push(logo);
+        } else {
+          if(teasers.length === 2) {
+            let name = teasers[0]["<Name>k__BackingField"];
+            let name2 = teasers[1]["<Name>k__BackingField"];
+            let split = name.split("_");
+            let split2 = name2.split("_");
+            let logo = split[0];
+            let logo2 = split2[0];
+            let percent = split[1];
+            let percent2 = split2[1];
+            if(percent > percent2) {
+              this.percentsSearch.push(percent);  
+              this.images.push(logo);
+            } else {
+              this.percentsSearch.push(percent2);
+              this.images.push(logo2);
+            }
+          }
+        }
+
 
         this.getImages(this.images[key]);
-
         this.imgLogoAliance.push(this.imgLogo);
 
         this.totalPriceAliance =
@@ -346,13 +370,35 @@ export class TabsComponent extends MatPaginatorIntl
       ];
     }
 
-    let name = teasers[0]["<Name>k__BackingField"];
-    let split = name.split("_");
-    let logo = split[0];
-    let aliance = split[1];
-    
-    this.getImages(logo);
+    if(teasers.length === 1) {
+      let name = teasers[0]["<Name>k__BackingField"];
+      let split = name.split("_");
+      let logo = split[0];
+      this.alianceSplit = split[1];
+      this.percentModal = this.alianceSplit;
+      this.getImages(logo);
+    } else {
+      if(teasers.length === 2) {
+        let name = teasers[0]["<Name>k__BackingField"];
+        let name2 = teasers[1]["<Name>k__BackingField"];
+        let split = name.split("_");
+        let split2 = name2.split("_");
+        let logo = split[0];
+        let logo2 = split2[0];
+        this.alianceSplit = split[1];
+        this.alianceSplit2 = split2[1];
+        if(this.alianceSplit > this.alianceSplit2) {
+          this.percentModal = this.alianceSplit;
+          this.getImages(logo);
+        } else {
+          this.percentModal = this.alianceSplit2;
+          this.getImages(logo2);
+        }
+      }
+    }
+
     const imgLogo = this.imgLogo;
+    const aliance = this.percentModal;
 
     this.dialog.open(DialogComponent, {
       data: {

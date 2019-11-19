@@ -16,6 +16,7 @@ import { of } from "rxjs";
 import { JwtHelperService, JwtModule } from "@auth0/angular-jwt";
 import { ContentService } from "src/app/services/content.service";
 import { UserService } from "src/app/services/user.service";
+import { SlickCarouselModule } from "ngx-slick-carousel";
 
 describe("TabsComponent", () => {
   let component: TabsComponent;
@@ -24,7 +25,8 @@ describe("TabsComponent", () => {
   const mockContentService = jasmine.createSpyObj("ContentService", [
     "getProductsPagination",
     "getAssured",
-    "getTrips"
+    "getTrips",
+    "getCategory"
   ]);
 
   const mockUserService = jasmine.createSpyObj("UserService", ["getShortUrl"]);
@@ -185,6 +187,1105 @@ describe("TabsComponent", () => {
     ]
   };
 
+  let dataProduct2 = {
+    linkText: "estufa-322",
+    productName: "estufa322",
+    productId: "12345687",
+    template: null,
+    showClose: true,
+    buttonClose: "Cerrar",
+    title: "estufa-322",
+    id: "123456789",
+    img: "prueba",
+    price: "$1.000.000",
+    showCloseIcon: true,
+    showProduct: true,
+    showshowTitle: false,
+    items: [
+      {
+        images: [{ imageUrl: "pruebas" }],
+        sellers: [
+          {
+            commertialOffer: {
+              price: "$1.000.000",
+              Teasers: [
+                {
+                  "<Name>k__BackingField": "coomeva1_49.96_aliado_oct29",
+                  "<Conditions>k__BackingField": {
+                    "<MinimumQuantity>k__BackingField": 0,
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "RestrictionsBins",
+                        "<Value>k__BackingField": "526808"
+                      }
+                    ]
+                  },
+
+                  "<Effects>k__BackingField": {
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "PercentualDiscount",
+                        "<Value>k__BackingField": "49.96"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "<Name>k__BackingField": "exito1_60_aliado_oct29",
+                  "<Conditions>k__BackingField": {
+                    "<MinimumQuantity>k__BackingField": 0,
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "RestrictionsBins",
+                        "<Value>k__BackingField": "526808"
+                      }
+                    ]
+                  },
+
+                  "<Effects>k__BackingField": {
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "PercentualDiscount",
+                        "<Value>k__BackingField": "60"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        itemId: "12345489"
+      }
+    ]
+  };
+
+  let teaserExito2 = {
+    linkText: "estufa-322",
+    productName: "estufa322",
+    productId: "12345687",
+    template: null,
+    showClose: true,
+    buttonClose: "Cerrar",
+    title: "estufa-322",
+    id: "123456789",
+    img: "prueba",
+    price: "$1.000.000",
+    showCloseIcon: true,
+    showProduct: true,
+    showshowTitle: false,
+    items: [
+      {
+        images: [{ imageUrl: "pruebas" }],
+        sellers: [
+          {
+            commertialOffer: {
+              price: "$1.000.000",
+              Teasers: [
+                {
+                  "<Name>k__BackingField": "coomeva1_49.96_aliado_oct29",
+                  "<Conditions>k__BackingField": {
+                    "<MinimumQuantity>k__BackingField": 0,
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "RestrictionsBins",
+                        "<Value>k__BackingField": "526808"
+                      }
+                    ]
+                  },
+
+                  "<Effects>k__BackingField": {
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "PercentualDiscount",
+                        "<Value>k__BackingField": "49.96"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "<Name>k__BackingField": "exito2_60_aliado_oct29",
+                  "<Conditions>k__BackingField": {
+                    "<MinimumQuantity>k__BackingField": 0,
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "RestrictionsBins",
+                        "<Value>k__BackingField": "526808"
+                      }
+                    ]
+                  },
+
+                  "<Effects>k__BackingField": {
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "PercentualDiscount",
+                        "<Value>k__BackingField": "60"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        itemId: "12345489"
+      }
+    ]
+  };
+
+  let teaserColpatria1 = {
+    linkText: "estufa-322",
+    productName: "estufa322",
+    productId: "12345687",
+    template: null,
+    showClose: true,
+    buttonClose: "Cerrar",
+    title: "estufa-322",
+    id: "123456789",
+    img: "prueba",
+    price: "$1.000.000",
+    showCloseIcon: true,
+    showProduct: true,
+    showshowTitle: false,
+    items: [
+      {
+        images: [{ imageUrl: "pruebas" }],
+        sellers: [
+          {
+            commertialOffer: {
+              price: "$1.000.000",
+              Teasers: [
+                {
+                  "<Name>k__BackingField": "colpatria1_60_aliado_oct29",
+                  "<Conditions>k__BackingField": {
+                    "<MinimumQuantity>k__BackingField": 0,
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "RestrictionsBins",
+                        "<Value>k__BackingField": "526808"
+                      }
+                    ]
+                  },
+
+                  "<Effects>k__BackingField": {
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "PercentualDiscount",
+                        "<Value>k__BackingField": "49.96"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        itemId: "12345489"
+      }
+    ]
+  };
+
+  let teaserBogota1 = {
+    linkText: "estufa-322",
+    productName: "estufa322",
+    productId: "12345687",
+    template: null,
+    showClose: true,
+    buttonClose: "Cerrar",
+    title: "estufa-322",
+    id: "123456789",
+    img: "prueba",
+    price: "$1.000.000",
+    showCloseIcon: true,
+    showProduct: true,
+    showshowTitle: false,
+    items: [
+      {
+        images: [{ imageUrl: "pruebas" }],
+        sellers: [
+          {
+            commertialOffer: {
+              price: "$1.000.000",
+              Teasers: [
+                {
+                  "<Name>k__BackingField": "bogota1_49.96_aliado_oct29",
+                  "<Conditions>k__BackingField": {
+                    "<MinimumQuantity>k__BackingField": 0,
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "RestrictionsBins",
+                        "<Value>k__BackingField": "526808"
+                      }
+                    ]
+                  },
+
+                  "<Effects>k__BackingField": {
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "PercentualDiscount",
+                        "<Value>k__BackingField": "49.96"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        itemId: "12345489"
+      }
+    ]
+  };
+
+  let teaserColpatriascotiabank1= {
+    linkText: "estufa-322",
+    productName: "estufa322",
+    productId: "12345687",
+    template: null,
+    showClose: true,
+    buttonClose: "Cerrar",
+    title: "estufa-322",
+    id: "123456789",
+    img: "prueba",
+    price: "$1.000.000",
+    showCloseIcon: true,
+    showProduct: true,
+    showshowTitle: false,
+    items: [
+      {
+        images: [{ imageUrl: "pruebas" }],
+        sellers: [
+          {
+            commertialOffer: {
+              price: "$1.000.000",
+              Teasers: [
+                {
+                  "<Name>k__BackingField": "colpatriascotiabank1_49.96_aliado_oct29",
+                  "<Conditions>k__BackingField": {
+                    "<MinimumQuantity>k__BackingField": 0,
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "RestrictionsBins",
+                        "<Value>k__BackingField": "526808"
+                      }
+                    ]
+                  },
+
+                  "<Effects>k__BackingField": {
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "PercentualDiscount",
+                        "<Value>k__BackingField": "49.96"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        itemId: "12345489"
+      }
+    ]
+  };
+
+  let teaserColpatria2= {
+    linkText: "estufa-322",
+    productName: "estufa322",
+    productId: "12345687",
+    template: null,
+    showClose: true,
+    buttonClose: "Cerrar",
+    title: "estufa-322",
+    id: "123456789",
+    img: "prueba",
+    price: "$1.000.000",
+    showCloseIcon: true,
+    showProduct: true,
+    showshowTitle: false,
+    items: [
+      {
+        images: [{ imageUrl: "pruebas" }],
+        sellers: [
+          {
+            commertialOffer: {
+              price: "$1.000.000",
+              Teasers: [
+                {
+                  "<Name>k__BackingField": "colpatria2_49.96_aliado_oct29",
+                  "<Conditions>k__BackingField": {
+                    "<MinimumQuantity>k__BackingField": 0,
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "RestrictionsBins",
+                        "<Value>k__BackingField": "526808"
+                      }
+                    ]
+                  },
+
+                  "<Effects>k__BackingField": {
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "PercentualDiscount",
+                        "<Value>k__BackingField": "49.96"
+                      }
+                    ]
+                  }
+                },
+                
+              ]
+            }
+          }
+        ],
+        itemId: "12345489"
+      }
+    ]
+  };
+
+  let teaserColpatriascotiabank2= {
+    linkText: "estufa-322",
+    productName: "estufa322",
+    productId: "12345687",
+    template: null,
+    showClose: true,
+    buttonClose: "Cerrar",
+    title: "estufa-322",
+    id: "123456789",
+    img: "prueba",
+    price: "$1.000.000",
+    showCloseIcon: true,
+    showProduct: true,
+    showshowTitle: false,
+    items: [
+      {
+        images: [{ imageUrl: "pruebas" }],
+        sellers: [
+          {
+            commertialOffer: {
+              price: "$1.000.000",
+              Teasers: [
+                {
+                  "<Name>k__BackingField": "colpatriascotiabank2_49.96_aliado_oct29",
+                  "<Conditions>k__BackingField": {
+                    "<MinimumQuantity>k__BackingField": 0,
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "RestrictionsBins",
+                        "<Value>k__BackingField": "526808"
+                      }
+                    ]
+                  },
+
+                  "<Effects>k__BackingField": {
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "PercentualDiscount",
+                        "<Value>k__BackingField": "49.96"
+                      }
+                    ]
+                  }
+                },
+                
+              ]
+            }
+          }
+        ],
+        itemId: "12345489"
+      }
+    ]
+  };
+
+  let teaserscotiabank1= {
+    linkText: "estufa-322",
+    productName: "estufa322",
+    productId: "12345687",
+    template: null,
+    showClose: true,
+    buttonClose: "Cerrar",
+    title: "estufa-322",
+    id: "123456789",
+    img: "prueba",
+    price: "$1.000.000",
+    showCloseIcon: true,
+    showProduct: true,
+    showshowTitle: false,
+    items: [
+      {
+        images: [{ imageUrl: "pruebas" }],
+        sellers: [
+          {
+            commertialOffer: {
+              price: "$1.000.000",
+              Teasers: [
+                {
+                  "<Name>k__BackingField": "scotiabank1_49.96_aliado_oct29",
+                  "<Conditions>k__BackingField": {
+                    "<MinimumQuantity>k__BackingField": 0,
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "RestrictionsBins",
+                        "<Value>k__BackingField": "526808"
+                      }
+                    ]
+                  },
+
+                  "<Effects>k__BackingField": {
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "PercentualDiscount",
+                        "<Value>k__BackingField": "49.96"
+                      }
+                    ]
+                  }
+                },
+                
+              ]
+            }
+          }
+        ],
+        itemId: "12345489"
+      }
+    ]
+  };
+
+  let teasersVisa= {
+    linkText: "estufa-322",
+    productName: "estufa322",
+    productId: "12345687",
+    template: null,
+    showClose: true,
+    buttonClose: "Cerrar",
+    title: "estufa-322",
+    id: "123456789",
+    img: "prueba",
+    price: "$1.000.000",
+    showCloseIcon: true,
+    showProduct: true,
+    showshowTitle: false,
+    items: [
+      {
+        images: [{ imageUrl: "pruebas" }],
+        sellers: [
+          {
+            commertialOffer: {
+              price: "$1.000.000",
+              Teasers: [
+                {
+                  "<Name>k__BackingField": "visa_49.96_aliado_oct29",
+                  "<Conditions>k__BackingField": {
+                    "<MinimumQuantity>k__BackingField": 0,
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "RestrictionsBins",
+                        "<Value>k__BackingField": "526808"
+                      }
+                    ]
+                  },
+
+                  "<Effects>k__BackingField": {
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "PercentualDiscount",
+                        "<Value>k__BackingField": "49.96"
+                      }
+                    ]
+                  }
+                },
+                
+              ]
+            }
+          }
+        ],
+        itemId: "12345489"
+      }
+    ]
+  };
+
+  let teasersAval = {
+    linkText: "estufa-322",
+    productName: "estufa322",
+    productId: "12345687",
+    template: null,
+    showClose: true,
+    buttonClose: "Cerrar",
+    title: "estufa-322",
+    id: "123456789",
+    img: "prueba",
+    price: "$1.000.000",
+    showCloseIcon: true,
+    showProduct: true,
+    showshowTitle: false,
+    items: [
+      {
+        images: [{ imageUrl: "pruebas" }],
+        sellers: [
+          {
+            commertialOffer: {
+              price: "$1.000.000",
+              Teasers: [
+                {
+                  "<Name>k__BackingField": "aval_49.96_aliado_oct29",
+                  "<Conditions>k__BackingField": {
+                    "<MinimumQuantity>k__BackingField": 0,
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "RestrictionsBins",
+                        "<Value>k__BackingField": "526808"
+                      }
+                    ]
+                  },
+
+                  "<Effects>k__BackingField": {
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "PercentualDiscount",
+                        "<Value>k__BackingField": "49.96"
+                      }
+                    ]
+                  }
+                },
+                
+              ]
+            }
+          }
+        ],
+        itemId: "12345489"
+      }
+    ]
+  };
+
+  let teaserOccidente1 = {
+    linkText: "estufa-322",
+    productName: "estufa322",
+    productId: "12345687",
+    template: null,
+    showClose: true,
+    buttonClose: "Cerrar",
+    title: "estufa-322",
+    id: "123456789",
+    img: "prueba",
+    price: "$1.000.000",
+    showCloseIcon: true,
+    showProduct: true,
+    showshowTitle: false,
+    items: [
+      {
+        images: [{ imageUrl: "pruebas" }],
+        sellers: [
+          {
+            commertialOffer: {
+              price: "$1.000.000",
+              Teasers: [
+                {
+                  "<Name>k__BackingField": "occidente1_49.96_aliado_oct29",
+                  "<Conditions>k__BackingField": {
+                    "<MinimumQuantity>k__BackingField": 0,
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "RestrictionsBins",
+                        "<Value>k__BackingField": "526808"
+                      }
+                    ]
+                  },
+
+                  "<Effects>k__BackingField": {
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "PercentualDiscount",
+                        "<Value>k__BackingField": "49.96"
+                      }
+                    ]
+                  }
+                },
+                
+              ]
+            }
+          }
+        ],
+        itemId: "12345489"
+      }
+    ]
+  };
+
+  let teaserBogota2 = {
+    linkText: "estufa-322",
+    productName: "estufa322",
+    productId: "12345687",
+    template: null,
+    showClose: true,
+    buttonClose: "Cerrar",
+    title: "estufa-322",
+    id: "123456789",
+    img: "prueba",
+    price: "$1.000.000",
+    showCloseIcon: true,
+    showProduct: true,
+    showshowTitle: false,
+    items: [
+      {
+        images: [{ imageUrl: "pruebas" }],
+        sellers: [
+          {
+            commertialOffer: {
+              price: "$1.000.000",
+              Teasers: [
+                {
+                  "<Name>k__BackingField": "bogota2_49.96_aliado_oct29",
+                  "<Conditions>k__BackingField": {
+                    "<MinimumQuantity>k__BackingField": 0,
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "RestrictionsBins",
+                        "<Value>k__BackingField": "526808"
+                      }
+                    ]
+                  },
+
+                  "<Effects>k__BackingField": {
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "PercentualDiscount",
+                        "<Value>k__BackingField": "49.96"
+                      }
+                    ]
+                  }
+                },
+                
+              ]
+            }
+          }
+        ],
+        itemId: "12345489"
+      }
+    ]
+  };
+
+  let teaserMastercard = {
+    linkText: "estufa-322",
+    productName: "estufa322",
+    productId: "12345687",
+    template: null,
+    showClose: true,
+    buttonClose: "Cerrar",
+    title: "estufa-322",
+    id: "123456789",
+    img: "prueba",
+    price: "$1.000.000",
+    showCloseIcon: true,
+    showProduct: true,
+    showshowTitle: false,
+    items: [
+      {
+        images: [{ imageUrl: "pruebas" }],
+        sellers: [
+          {
+            commertialOffer: {
+              price: "$1.000.000",
+              Teasers: [
+                {
+                  "<Name>k__BackingField": "mastercard_49.96_aliado_oct29",
+                  "<Conditions>k__BackingField": {
+                    "<MinimumQuantity>k__BackingField": 0,
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "RestrictionsBins",
+                        "<Value>k__BackingField": "526808"
+                      }
+                    ]
+                  },
+
+                  "<Effects>k__BackingField": {
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "PercentualDiscount",
+                        "<Value>k__BackingField": "49.96"
+                      }
+                    ]
+                  }
+                },
+                
+              ]
+            }
+          }
+        ],
+        itemId: "12345489"
+      }
+    ]
+  };
+  
+
+  let teaserDavivienda1 = {
+    linkText: "estufa-322",
+    productName: "estufa322",
+    productId: "12345687",
+    template: null,
+    showClose: true,
+    buttonClose: "Cerrar",
+    title: "estufa-322",
+    id: "123456789",
+    img: "prueba",
+    price: "$1.000.000",
+    showCloseIcon: true,
+    showProduct: true,
+    showshowTitle: false,
+    items: [
+      {
+        images: [{ imageUrl: "pruebas" }],
+        sellers: [
+          {
+            commertialOffer: {
+              price: "$1.000.000",
+              Teasers: [
+                {
+                  "<Name>k__BackingField": "davivienda1_49.96_aliado_oct29",
+                  "<Conditions>k__BackingField": {
+                    "<MinimumQuantity>k__BackingField": 0,
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "RestrictionsBins",
+                        "<Value>k__BackingField": "526808"
+                      }
+                    ]
+                  },
+
+                  "<Effects>k__BackingField": {
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "PercentualDiscount",
+                        "<Value>k__BackingField": "49.96"
+                      }
+                    ]
+                  }
+                },
+                
+              ]
+            }
+          }
+        ],
+        itemId: "12345489"
+      }
+    ]
+  };
+  
+  let teaserDavivienda3= {
+    linkText: "estufa-322",
+    productName: "estufa322",
+    productId: "12345687",
+    template: null,
+    showClose: true,
+    buttonClose: "Cerrar",
+    title: "estufa-322",
+    id: "123456789",
+    img: "prueba",
+    price: "$1.000.000",
+    showCloseIcon: true,
+    showProduct: true,
+    showshowTitle: false,
+    items: [
+      {
+        images: [{ imageUrl: "pruebas" }],
+        sellers: [
+          {
+            commertialOffer: {
+              price: "$1.000.000",
+              Teasers: [
+                {
+                  "<Name>k__BackingField": "davivienda3_49.96_aliado_oct29",
+                  "<Conditions>k__BackingField": {
+                    "<MinimumQuantity>k__BackingField": 0,
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "RestrictionsBins",
+                        "<Value>k__BackingField": "526808"
+                      }
+                    ]
+                  },
+
+                  "<Effects>k__BackingField": {
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "PercentualDiscount",
+                        "<Value>k__BackingField": "49.96"
+                      }
+                    ]
+                  }
+                },
+                
+              ]
+            }
+          }
+        ],
+        itemId: "12345489"
+      }
+    ]
+  };
+
+  let teaserCodensa1= {
+    linkText: "estufa-322",
+    productName: "estufa322",
+    productId: "12345687",
+    template: null,
+    showClose: true,
+    buttonClose: "Cerrar",
+    title: "estufa-322",
+    id: "123456789",
+    img: "prueba",
+    price: "$1.000.000",
+    showCloseIcon: true,
+    showProduct: true,
+    showshowTitle: false,
+    items: [
+      {
+        images: [{ imageUrl: "pruebas" }],
+        sellers: [
+          {
+            commertialOffer: {
+              price: "$1.000.000",
+              Teasers: [
+                {
+                  "<Name>k__BackingField": "codensa1_49.96_aliado_oct29",
+                  "<Conditions>k__BackingField": {
+                    "<MinimumQuantity>k__BackingField": 0,
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "RestrictionsBins",
+                        "<Value>k__BackingField": "526808"
+                      }
+                    ]
+                  },
+
+                  "<Effects>k__BackingField": {
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "PercentualDiscount",
+                        "<Value>k__BackingField": "49.96"
+                      }
+                    ]
+                  }
+                },
+                
+              ]
+            }
+          }
+        ],
+        itemId: "12345489"
+      }
+    ]
+  };
+  
+  let teaserBancolombia2= {
+    linkText: "estufa-322",
+    productName: "estufa322",
+    productId: "12345687",
+    template: null,
+    showClose: true,
+    buttonClose: "Cerrar",
+    title: "estufa-322",
+    id: "123456789",
+    img: "prueba",
+    price: "$1.000.000",
+    showCloseIcon: true,
+    showProduct: true,
+    showshowTitle: false,
+    items: [
+      {
+        images: [{ imageUrl: "pruebas" }],
+        sellers: [
+          {
+            commertialOffer: {
+              price: "$1.000.000",
+              Teasers: [
+                {
+                  "<Name>k__BackingField": "bancolombia2_49.96_aliado_oct29",
+                  "<Conditions>k__BackingField": {
+                    "<MinimumQuantity>k__BackingField": 0,
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "RestrictionsBins",
+                        "<Value>k__BackingField": "526808"
+                      }
+                    ]
+                  },
+
+                  "<Effects>k__BackingField": {
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "PercentualDiscount",
+                        "<Value>k__BackingField": "49.96"
+                      }
+                    ]
+                  }
+                },
+                
+              ]
+            }
+          }
+        ],
+        itemId: "12345489"
+      }
+    ]
+  };
+  
+  let teaserBancolombia1= {
+    linkText: "estufa-322",
+    productName: "estufa322",
+    productId: "12345687",
+    template: null,
+    showClose: true,
+    buttonClose: "Cerrar",
+    title: "estufa-322",
+    id: "123456789",
+    img: "prueba",
+    price: "$1.000.000",
+    showCloseIcon: true,
+    showProduct: true,
+    showshowTitle: false,
+    items: [
+      {
+        images: [{ imageUrl: "pruebas" }],
+        sellers: [
+          {
+            commertialOffer: {
+              price: "$1.000.000",
+              Teasers: [
+                {
+                  "<Name>k__BackingField": "bancolombia1_49.96_aliado_oct29",
+                  "<Conditions>k__BackingField": {
+                    "<MinimumQuantity>k__BackingField": 0,
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "RestrictionsBins",
+                        "<Value>k__BackingField": "526808"
+                      }
+                    ]
+                  },
+
+                  "<Effects>k__BackingField": {
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "PercentualDiscount",
+                        "<Value>k__BackingField": "49.96"
+                      }
+                    ]
+                  }
+                },
+                
+              ]
+            }
+          }
+        ],
+        itemId: "12345489"
+      }
+    ]
+  };
+  
+  let teaserItau1 = {
+    linkText: "estufa-322",
+    productName: "estufa322",
+    productId: "12345687",
+    template: null,
+    showClose: true,
+    buttonClose: "Cerrar",
+    title: "estufa-322",
+    id: "123456789",
+    img: "prueba",
+    price: "$1.000.000",
+    showCloseIcon: true,
+    showProduct: true,
+    showshowTitle: false,
+    items: [
+      {
+        images: [{ imageUrl: "pruebas" }],
+        sellers: [
+          {
+            commertialOffer: {
+              price: "$1.000.000",
+              Teasers: [
+                {
+                  "<Name>k__BackingField": "itau1_49.96_aliado_oct29",
+                  "<Conditions>k__BackingField": {
+                    "<MinimumQuantity>k__BackingField": 0,
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "RestrictionsBins",
+                        "<Value>k__BackingField": "526808"
+                      }
+                    ]
+                  },
+
+                  "<Effects>k__BackingField": {
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "PercentualDiscount",
+                        "<Value>k__BackingField": "49.96"
+                      }
+                    ]
+                  }
+                },
+                
+              ]
+            }
+          }
+        ],
+        itemId: "12345489"
+      }
+    ]
+  };
+  
+  let teaserPopular1= {
+    linkText: "estufa-322",
+    productName: "estufa322",
+    productId: "12345687",
+    template: null,
+    showClose: true,
+    buttonClose: "Cerrar",
+    title: "estufa-322",
+    id: "123456789",
+    img: "prueba",
+    price: "$1.000.000",
+    showCloseIcon: true,
+    showProduct: true,
+    showshowTitle: false,
+    items: [
+      {
+        images: [{ imageUrl: "pruebas" }],
+        sellers: [
+          {
+            commertialOffer: {
+              price: "$1.000.000",
+              Teasers: [
+                {
+                  "<Name>k__BackingField": "popular1_49.96_aliado_oct29",
+                  "<Conditions>k__BackingField": {
+                    "<MinimumQuantity>k__BackingField": 0,
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "RestrictionsBins",
+                        "<Value>k__BackingField": "526808"
+                      }
+                    ]
+                  },
+
+                  "<Effects>k__BackingField": {
+                    "<Parameters>k__BackingField": [
+                      {
+                        "<Name>k__BackingField": "PercentualDiscount",
+                        "<Value>k__BackingField": "49.96"
+                      }
+                    ]
+                  }
+                },
+                
+              ]
+            }
+          }
+        ],
+        itemId: "12345489"
+      }
+    ]
+  };
+
+
   let dataAssured = {
     link: "www.exito.com",
     linkText: "estufa-322",
@@ -213,6 +1314,18 @@ describe("TabsComponent", () => {
     ]
   };
 
+  let category = [{
+    id: 1,
+    ordercategory: 1,
+    link:
+      "https://www.exito.com/home-mercado?utm_source=clickam&utm_medium=referral&utm_campaign=hoteles&utm_term=",
+    imageurl:
+      "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-categories/Categoria_mercado.jpg",
+    description: "Mercado",
+    oncreatedate: "2019-11-18T00:00:00",
+    title: "Mercado"
+  }];
+
   const shortUrl = "http://tynyurl.com/xixiaa";
 
   beforeEach(async(() => {
@@ -227,6 +1340,7 @@ describe("TabsComponent", () => {
         RouterTestingModule.withRoutes([]),
         BrowserAnimationsModule,
         SharedModule,
+        SlickCarouselModule,
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
@@ -257,6 +1371,7 @@ describe("TabsComponent", () => {
     mockContentService.getProductsPagination.and.returnValue(of(data));
     mockContentService.getAssured.and.returnValue(of(dataok));
     mockContentService.getTrips.and.returnValue(of(dataok));
+    mockContentService.getCategory.and.returnValue(of(category));
   }));
   beforeEach(() => {
     localStorage.setItem(
@@ -289,8 +1404,108 @@ describe("TabsComponent", () => {
     expect(mockContentService.getProductsPagination).toHaveBeenCalled();
   });
 
-  it("product data", () => {
+  it("product data coomeva", () => {
     component.dataProduct(dataProduct);
+    expect(mockUserService.getShortUrl).toHaveBeenCalled();
+  });
+
+  it("product data exito", () => {
+    component.dataProduct(dataProduct2);
+    expect(mockUserService.getShortUrl).toHaveBeenCalled();
+  });
+
+  it("product data colpatria 1", () => {
+    component.dataProduct(teaserColpatria1);
+    expect(mockUserService.getShortUrl).toHaveBeenCalled();
+  });
+
+  it("product data exito 2", () => {
+    component.dataProduct(teaserExito2);
+    expect(mockUserService.getShortUrl).toHaveBeenCalled();
+  });
+
+  it("product data bogota 1", () => {
+    component.dataProduct(teaserBogota1);
+    expect(mockUserService.getShortUrl).toHaveBeenCalled();
+  });
+
+  it("product data colpatriascotiabank1", () => {
+    component.dataProduct(teaserColpatriascotiabank1);
+    expect(mockUserService.getShortUrl).toHaveBeenCalled();
+  });
+
+  it("product data colpatria 2", () => {
+    component.dataProduct(teaserColpatria2);
+    expect(mockUserService.getShortUrl).toHaveBeenCalled();
+  });
+
+  it("product data colpatriascotiabank2", () => {
+    component.dataProduct(teaserColpatriascotiabank2);
+    expect(mockUserService.getShortUrl).toHaveBeenCalled();
+  });
+
+  it("product data scotiabank1", () => {
+    component.dataProduct(teaserscotiabank1);
+    expect(mockUserService.getShortUrl).toHaveBeenCalled();
+  });
+
+  it("product data popular1", () => {
+    component.dataProduct(teaserPopular1);
+    expect(mockUserService.getShortUrl).toHaveBeenCalled();
+  });
+
+  it("product data aval", () => {
+    component.dataProduct(teasersAval);
+    expect(mockUserService.getShortUrl).toHaveBeenCalled();
+  });
+
+  it("product data occidente1", () => {
+    component.dataProduct(teaserOccidente1);
+    expect(mockUserService.getShortUrl).toHaveBeenCalled();
+  });
+
+  it("product data bogota2", () => {
+    component.dataProduct(teaserBogota2);
+    expect(mockUserService.getShortUrl).toHaveBeenCalled();
+  });
+
+  it("product data visa", () => {
+    component.dataProduct(teasersVisa);
+    expect(mockUserService.getShortUrl).toHaveBeenCalled();
+  });
+
+  it("product data davivienda1", () => {
+    component.dataProduct(teaserDavivienda1);
+    expect(mockUserService.getShortUrl).toHaveBeenCalled();
+  });
+
+  it("product data davivienda3", () => {
+    component.dataProduct(teaserDavivienda3);
+    expect(mockUserService.getShortUrl).toHaveBeenCalled();
+  });
+
+  it("product data bancolombia2", () => {
+    component.dataProduct(teaserBancolombia2);
+    expect(mockUserService.getShortUrl).toHaveBeenCalled();
+  });
+
+  it("product data bancolombia1", () => {
+    component.dataProduct(teaserBancolombia1);
+    expect(mockUserService.getShortUrl).toHaveBeenCalled();
+  });
+
+  it("product data codensa1", () => {
+    component.dataProduct(teaserCodensa1);
+    expect(mockUserService.getShortUrl).toHaveBeenCalled();
+  });
+
+  it("product data mastercard", () => {
+    component.dataProduct(teaserMastercard);
+    expect(mockUserService.getShortUrl).toHaveBeenCalled();
+  });
+
+  it("product data itau1", () => {
+    component.dataProduct(teaserItau1);
     expect(mockUserService.getShortUrl).toHaveBeenCalled();
   });
 
