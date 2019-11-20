@@ -25,6 +25,10 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   email:string;
   phone: string;
   id: string;
+  address: string;
+  bank: string;
+  bankAccountNumber: string;
+  typeBankAccount: string;
 
   ngOnInit() {
     this.isLoggedIn = this.auth.isLoggedIn();
@@ -36,6 +40,10 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
           this.email = val.email;
           this.phone = val.cellphone;
           this.id = val.identification;
+          this.address = val.address;
+          this.bank = val.bank;
+          this.bankAccountNumber = val.bankAccountNumber;
+          this.typeBankAccount = val.typeBankAccount;
         }
         this.formProfile();
       });
