@@ -1,120 +1,131 @@
-@import 'variables';
-@import 'general';
-@import 'animations';
+@import "variables";
+@import "general";
+@import "animations";
 
-.title{
-    font-family: $font-galano;
-    font-weight: normal;
-    color:$gray;
-    min-height: 58px;
+.title {
+  font-family: $font-galano;
+  font-weight: normal;
+  color: $gray;
+  min-height: 58px;
 }
 
 .small {
-    font-size: .8rem !important;
+  font-size: 0.8rem !important;
 }
 
-.text-line{
-    text-decoration: line-through;
-    color: $color-p !important;
+.text-line {
+  text-decoration: line-through;
+  color: $color-p !important;
 }
 
-
-.discount{
-    color: $primary-color;
-    font-size: 1rem;
-    &-height{
-        min-height: 34px;
-    }
-    &-aliance {
-        color: red;
-    }
+.discount {
+  color: $primary-color;
+  font-size: 1rem;
+  &-height {
+    min-height: 34px;
+  }
+  &-aliance {
+    color: red;
+  }
 }
 
-.font{
-    font-size: 50px;
+.font {
+  font-size: 50px;
 }
 
-.img-responsive{
-    max-width: 100%;
+.img-responsive {
+  max-width: 100%;
 }
 
 .gray {
-    color: $gray;
+  color: $gray;
 }
 
 .img-container-seguros {
-    width: 100%;
-    display: flex;
-    max-height: 40px;
-    margin-top: 15px;
+  width: 100%;
+  display: flex;
+  max-height: 40px;
+  margin-top: 15px;
 }
 
 .img-container-viajes {
-    width: 100%;
-    display: flex;
-    margin-top: 15px;
+  width: 100%;
+  display: flex;
+  margin-top: 15px;
 }
 
-.container-info{
-    max-width: 20vh;
-    min-width: 20vh;
+.container-info {
+  max-width: 20vh;
+  min-width: 20vh;
 }
 
-.badge-product{
-    display: inline;
-    padding: .2em .6em .3em;
-    font-size: 75%;
-    font-weight: 700;
-    line-height: 1;
-    color: #fff;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: .25em;
-    background: red;
+.badge-product {
+  display: inline;
+  padding: 0.2em 0.6em 0.3em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25em;
+  background: red;
 }
 
 .prices {
-    max-height: 63px;
-    min-height: 63px;
+  max-height: 63px;
+  min-height: 63px;
 }
 
-.logo-aliance{
-    width: 25px;
+.logo-aliance {
+  width: 25px;
 }
 
-.border-rad{
-    border-radius:10px ;
+.border-rad {
+  border-radius: 10px;
 }
 
 @media screen and (max-width: 350px) {
-    .container-info{
-        max-width: 15vh;
-        min-width: 15vh;
-    }
+  .container-info {
+    max-width: 15vh;
+    min-width: 15vh;
+  }
 }
 
-
 @media screen and (min-width: 600px) {
+  .img-container-2 {
+    max-width: 50%;
+    margin: 0px auto;
+    height: 20vh;
+  }
+}
 
-    .img-container-2{
-        max-width: 50%;
-        margin: 0px auto;
-        height: 20vh;
-    }
+@media screen and (min-width: 1024px) {
+  .size {
+    font-size: 16px;
+    width: auto;
+  }
 }
 
 .category {
-    // height: 110px;
-    // width: 200px;
-    // background-size: cover !important;
-    cursor: pointer;
+  // height: 110px;
+  // width: 200px;
+  // background-size: cover !important;
+  cursor: pointer;
 }
 
-.white{
-    color: #fff;
+.white {
+  color: #fff;
 }
 
-.absolute{
-    position: absolute;
+.absolute {
+  position: absolute;
+}
+@media screen and (max-width: 1023px) {
+  .size {
+    font-size: 12px;
+    width: 120px;
+    text-align: center;
+  }
 }
