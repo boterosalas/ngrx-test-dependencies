@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -21,7 +21,8 @@ export class AditionalFilesComponent implements OnInit {
   fileIdentificationCard1: any;
   fileIdentificationCard2: any;
   fileBankCertificate: any;
-
+  @Output() uploadFile = new EventEmitter;
+  
   ngOnInit() {
    
     this.formFiles();
@@ -89,6 +90,10 @@ export class AditionalFilesComponent implements OnInit {
     if (getExt === "jpg" || getExt === "pdf") {
       this.validFormat = true;
     }
+  }
+
+  public sendInfo() {
+    this.uploadFile.emit(this.externalForm);
   }
 
 }

@@ -470,7 +470,7 @@
       <mat-option
         (onSelectionChange)="selectCity(city)"
         *ngFor="let city of filteredCities | async"
-        value="{{ city.description }}"
+        [(value)]="city.description"
       >
         <span>{{ city.description }}</span>
       </mat-option>

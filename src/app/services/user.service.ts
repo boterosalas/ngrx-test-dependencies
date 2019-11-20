@@ -31,6 +31,7 @@ export class UserService {
   apiVerified = 'userprofile/verifyUser';
   apiDepartment = 'userprofile/getDeparments';
   apiBanks = 'userprofile/getBanks';
+  apiUploadFiles = 'userprofile/upload';
 
 
   token = localStorage.getItem("ACCESS_TOKEN");
@@ -82,6 +83,10 @@ export class UserService {
 
   public registerUser(userInfo: any){
     return this.http.post((`${this.url}${this.apiCreateUser}`), userInfo, this.httpOptions);
+  }
+
+  public uploadFiles(params: any){
+    return this.http.post((`${this.url}${this.apiUploadFiles}`), params, this.httpOptions);
   }
 
   public idType(){

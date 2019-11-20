@@ -11,5 +11,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
   }
+  
+  public sendFiles(files) {
+    console.log(files);
+  }
 
 }

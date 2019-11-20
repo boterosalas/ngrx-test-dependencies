@@ -325,7 +325,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       fileIdentificationCard1: this.fileIdentificationCard1,
       fileIdentificationCard2: this.fileIdentificationCard2,
       fileBankCertificate: this.fileBankCertificate,
-      bankAccountNumber: this.externalForm.controls.numberAccount.value,
+      bankAccountNumber: btoa(this.externalForm.controls.numberAccount.value),
       typeBankAccount: this.externalForm.controls.typeAccount.value,
       address: this.externalForm.controls.address.value
     };
@@ -395,11 +395,12 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     this.departmentCode = department.code;
     this.cities = department.municipalities;
     this.externalForm.controls.city.setValue('');
-    this.filterCities();
     let valueDepartment = this.externalForm.controls.department.valueChanges;
+    this.filterCities();
 
     valueDepartment.subscribe((resp) => {
       if (resp !== '') {
+        this.getDepartments();
         this.externalForm.controls.city.enable();
       } else {
         this.externalForm.controls.city.disable();
