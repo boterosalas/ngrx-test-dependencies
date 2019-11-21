@@ -543,7 +543,7 @@ export class TabsComponent extends MatPaginatorIntl
     const showComission = true;
     const showshowTitle = false;
     const buttonClose = "Cerrar";
-    this.plu = "";
+    this.plu = assured.description;
     this.business = "seguros";
     const home = true;
     this.dialog.open(DialogComponent, {
@@ -592,7 +592,7 @@ export class TabsComponent extends MatPaginatorIntl
     const showComission = true;
     const showshowTitle = false;
     const buttonClose = "Cerrar";
-    this.plu = "";
+    this.plu = trip.description;
     this.business = "viajes";
     const home = true;
     this.dialog.open(DialogComponent, {
@@ -639,7 +639,7 @@ export class TabsComponent extends MatPaginatorIntl
     const showProduct = true;
     const showshowTitle = false;
     const buttonClose = "Cerrar";
-    this.plu = "";
+    this.plu = category.description;
     this.business = "exito";
     const home = true;
     this.dialog.open(DialogComponent, {
