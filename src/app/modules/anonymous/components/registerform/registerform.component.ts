@@ -243,9 +243,9 @@ export class RegisterformComponent implements OnInit, OnDestroy {
 
   private getExtension(nameFile: string) {
     let splitExt = nameFile.split(".");
-    let getExt = splitExt[1];
+    let getExt = splitExt[1].toLocaleLowerCase();
     this.validFormat = false;
-    if (getExt === "jpg" || getExt === "pdf") {
+    if (getExt === "jpg" ||  getExt === "jpeg" ||  getExt === "pdf") {
       this.validFormat = true;
     }
   }
@@ -281,12 +281,15 @@ export class RegisterformComponent implements OnInit, OnDestroy {
         } else {
           if(param === 'ced1') {
               this.showErrorCed1 = true;
+              this.nameFileCed1 = nameFile;
           } else {
             if(param === 'ced2') {
               this.showErrorCed2 = true;
+              this.nameFileCed2 = nameFile;
             }
             else {
               this.showErrorCert = true;
+              this.nameFileCert = nameFile;
             }
           }
         }
@@ -325,7 +328,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       fileIdentificationCard1: this.fileIdentificationCard1,
       fileIdentificationCard2: this.fileIdentificationCard2,
       fileBankCertificate: this.fileBankCertificate,
-      bankAccountNumber: this.externalForm.controls.numberAccount.value,
+      bankAccountNumber: btoa(this.externalForm.controls.numberAccount.value),
       typeBankAccount: this.externalForm.controls.typeAccount.value,
       address: this.externalForm.controls.address.value
     };
@@ -395,11 +398,12 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     this.departmentCode = department.code;
     this.cities = department.municipalities;
     this.externalForm.controls.city.setValue('');
-    this.filterCities();
     let valueDepartment = this.externalForm.controls.department.valueChanges;
+    this.filterCities();
 
     valueDepartment.subscribe((resp) => {
       if (resp !== '') {
+        this.getDepartments();
         this.externalForm.controls.city.enable();
       } else {
         this.externalForm.controls.city.disable();

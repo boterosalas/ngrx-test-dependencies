@@ -21,6 +21,7 @@ import { MatPaginatorIntl } from '@angular/material';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ProfileFormComponent } from './components/profile-form/profile-form.component';
 import { TableHistorialComponent } from './components/table-historial/table-historial.component';
+import { AditionalFilesComponent } from './components/aditional-files/aditional-files.component';
 
 const routes: Routes = [
   {
@@ -40,7 +41,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [HomeComponent, ProductComponent, SliderComponent, TabsComponent, MonthResumeComponent, GeneralResumeComponent, ReportComponent, ProfileComponent, ProfileFormComponent, TableHistorialComponent],
+  declarations: [HomeComponent, ProductComponent, SliderComponent, TabsComponent, MonthResumeComponent, GeneralResumeComponent, ReportComponent, ProfileComponent, ProfileFormComponent, TableHistorialComponent, AditionalFilesComponent],
   imports: [
     CommonModule,
     AppMaterialModule,

@@ -29,6 +29,9 @@ export class DialogUserComponent implements OnInit, OnDestroy {
   @Output() state = new EventEmitter();
   @Output() comunications = new EventEmitter();
   @Output() verified = new EventEmitter();
+  @Output() IdentificationCard1 = new EventEmitter();
+  @Output() IdentificationCard2 = new EventEmitter();
+  @Output() bankCertificate = new EventEmitter();
   isLoggedIn: any;
   private subscription: Subscription = new Subscription();
   idAdmin: string;
@@ -43,6 +46,18 @@ export class DialogUserComponent implements OnInit, OnDestroy {
 
   changeVerified() {
     this.verified.emit(event);
+  }
+
+  IdentificationCard1Download() {
+    this.IdentificationCard1.emit(event);
+  }
+
+  IdentificationCard2Download() {
+    this.IdentificationCard2.emit(event);
+  }
+
+  bankCardDownload() {
+    this.bankCertificate.emit(event);
   }
 
   onNoClick(): void {

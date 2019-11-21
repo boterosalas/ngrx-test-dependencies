@@ -7,15 +7,17 @@ import {
   MatPaginatorIntl
 } from "@angular/material";
 import { DialogUserComponent } from "../../components/dialog-user/dialog-user.component";
-import { Subscription } from 'rxjs/internal/Subscription';
-import { UserService } from 'src/app/services/user.service';
+import { Subscription } from "rxjs/internal/Subscription";
+import { UserService } from "src/app/services/user.service";
+import { ResponseService } from "src/app/interfaces/response";
 
 @Component({
   selector: "app-users",
   templateUrl: "./users.component.html",
   styleUrls: ["./users.component.scss"]
 })
-export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestroy {
+export class UsersComponent extends MatPaginatorIntl
+  implements OnInit, OnDestroy {
   users: Array<any>;
   dataSource: any;
   pageIndex: number = 0;
@@ -24,6 +26,8 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
   totalItems: number;
   paginate: string;
   private subscription: Subscription = new Subscription();
+  ext: string;
+  contentType: string;
 
   constructor(
     private dialog: MatDialog,
@@ -60,7 +64,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit() {
-    this.searchUser('');
+    this.searchUser("");
   }
 
   public searchUser(term, from = 1, to = this.pageTo) {
@@ -69,11 +73,13 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
       this.pageIndex = 0;
     }
     const params = { term, from, to };
-    this.subscription = this.usersService.searchUsers(params).subscribe((user:any) => {
-      this.users = user.users;
-      this.totalItems = user.total;
-      this.dataSource = new MatTableDataSource<any>(this.users);
-    });
+    this.subscription = this.usersService
+      .searchUsers(params)
+      .subscribe((user: any) => {
+        this.users = user.users;
+        this.totalItems = user.total;
+        this.dataSource = new MatTableDataSource<any>(this.users);
+      });
   }
 
   public userData(user) {
@@ -162,14 +168,43 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
       }
     );
 
-    this.subscription =  dialogRef.beforeClosed().subscribe(() => {
-      this.searchUser(this.paginate);
-    })
+    this.subscription = dialogRef.componentInstance.IdentificationCard1.subscribe(
+      () => {
+        this.usersService
+          .downloadFile(identification, "IdentificationCard1")
+          .subscribe((resp: ResponseService) => {
+            this.download(resp);
+          });
+      }
+    );
 
+    this.subscription = dialogRef.componentInstance.IdentificationCard2.subscribe(
+      () => {
+        this.usersService
+          .downloadFile(identification, "IdentificationCard2")
+          .subscribe((resp: ResponseService) => {
+            this.download(resp);
+          });
+      }
+    );
+
+    this.subscription = dialogRef.componentInstance.bankCertificate.subscribe(
+      () => {
+        this.usersService
+          .downloadFile(identification, "BankCertificate")
+          .subscribe((resp: ResponseService) => {
+            this.download(resp);
+          });
+      }
+    );
+
+    this.subscription = dialogRef.beforeClosed().subscribe(() => {
+      this.searchUser(this.paginate);
+    });
   }
 
   private changeComunications(userId, value) {
-    this.usersService.comunitcations(userId, value).subscribe((user:any)=> {
+    this.usersService.comunitcations(userId, value).subscribe((user: any) => {
       if (value === true) {
         this.openSnackBar(
           "Se ha guardado el usuario para que reciba comunicaciones",
@@ -184,8 +219,30 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
     });
   }
 
+  private download(fileDownload) {
+    let base64 = fileDownload.objectResponse;
+    let splitbase64 = base64.split(",");
+    let file = splitbase64[1];
+
+    if (file.includes("/9j/")) {
+      this.ext = ".jpg";
+      this.contentType = "image/jpeg";
+    } else {
+      this.ext = ".pdf";
+      this.contentType = "application/pdf";
+    }
+
+    const linkSource = `data:${this.contentType};base64,${file}`;
+    const downloadLink = document.createElement("a");
+    const fileName = `archivo${this.ext}`;
+
+    downloadLink.href = linkSource;
+    downloadLink.download = fileName;
+    downloadLink.click();
+  }
+
   private changeStateUser(userId, value) {
-    this.usersService.statusUser(userId, value).subscribe(()=> {
+    this.usersService.statusUser(userId, value).subscribe(() => {
       if (value === true) {
         this.openSnackBar("El usuario ha sido activado", "Cerrar");
       } else {
@@ -195,7 +252,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
   }
 
   private changeVerified(userId, value) {
-    this.usersService.verifiedUser(userId, value).subscribe(()=> {
+    this.usersService.verifiedUser(userId, value).subscribe(() => {
       if (value === true) {
         this.openSnackBar("Se ha verificado el usuario", "Cerrar");
       } else {
@@ -228,7 +285,6 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
   }
 
   ngOnDestroy(): void {
-   this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
-
 }
