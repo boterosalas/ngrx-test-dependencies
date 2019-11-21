@@ -11,6 +11,7 @@ import { Subscription } from "rxjs";
 import { distinctUntilChanged } from "rxjs/operators";
 import { UserService } from "src/app/services/user.service";
 import { AuthService } from "src/app/services/auth.service";
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: "app-profile-form",
@@ -21,7 +22,8 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private user: UserService,
-    private auth: AuthService
+    private auth: AuthService,
+    private loader: LoaderService
   ) {}
 
   private subscription: Subscription = new Subscription();
@@ -40,10 +42,8 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   isEmployee:boolean;
 
   ngOnInit() {
-    this.isLoggedIn = this.auth.isLoggedIn();
-    if (this.isLoggedIn) {
+    
       this.subscription = this.user.userInfo$
-        .pipe(distinctUntilChanged())
         .subscribe(val => {
           if (!!val) {
             this.name = val.firstNames;
@@ -59,7 +59,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
             this.isEmployee = val.isEmployeeGrupoExito;
           }
         });
-    }
+    
   }
 
   // public formProfile() {

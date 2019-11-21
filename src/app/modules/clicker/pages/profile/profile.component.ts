@@ -32,18 +32,36 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-   
+   this.user.userInfo$.subscribe((val)=> {
+     if(!!val) {
+       this.userId = val.userId;
+       this.id = val.identification;
+     }
+   })
   }
   
   public sendFiles(files) {
+
+    let file1 = files.fileIdentificationCard1;
+    let file1Split = file1.split('data:application/octet-stream;base64,');
+    let file1bs64 = file1Split[1];
+    let file2 = files.fileIdentificationCard2;
+    let file2Split = file2.split('data:application/octet-stream;base64,');
+    let file2bs64 = file2Split[1];
+    let file3 = files.fileBankCertificate;
+    let file3Split = file3.split('data:application/octet-stream;base64,');
+    let file3bs64 = file3Split[1];
+
     let sendvalues = {
       userid: this.userId,
       value: true,
       identification: this.id,
-      identificationCard1: files.fileIdentificationCard1,
-      identificationCard2: files.fileIdentificationCard2,
-      bankCertificate: files.fileBankCertificate,
+      identificationCard1: file1bs64,
+      identificationCard2: file2bs64,
+      bankCertificate: file3bs64
     }
+
+    
 
     this.user.uploadFiles(sendvalues).subscribe((res:ResponseService) => {
       if(res.state !== 'Error') {

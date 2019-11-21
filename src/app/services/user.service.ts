@@ -32,6 +32,7 @@ export class UserService {
   apiDepartment = 'userprofile/getDeparments';
   apiBanks = 'userprofile/getBanks';
   apiUploadFiles = 'userprofile/upload';
+  apiDownloadFile = 'userprofile/download';
 
 
   token = localStorage.getItem("ACCESS_TOKEN");
@@ -86,11 +87,32 @@ export class UserService {
   }
 
   public uploadFiles(params: any){
-    return this.http.post((`${this.url}${this.apiUploadFiles}`), params, this.httpOptions);
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + this.authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.post((`${this.url}${this.apiUploadFiles}`), params, httpOptions);
   }
 
   public idType(){
     return this.http.get((`${this.url}${this.apiIdType}`), this.httpOptions);
+  }
+
+  public downloadFile(identification: string, typeDocument: string){
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "APPLICATION/octet-stream",
+        Authorization: "Bearer " + this.authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        responseType : 'blob',
+        Accept : 'application/pdf',
+        observe : 'response'
+      })
+    };
+    return this.http.get((`${this.url}${this.apiDownloadFile}?identification=${identification}&typeDocument=${typeDocument}`), this.httpOptions);
   }
 
   public getDepartments(){
