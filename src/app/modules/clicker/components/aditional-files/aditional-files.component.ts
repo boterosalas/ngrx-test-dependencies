@@ -12,28 +12,28 @@ export class AditionalFilesComponent implements OnInit {
   constructor(private fb: FormBuilder,  private user: UserService,) { }
 
   externalForm: FormGroup;
-  validFormat: boolean;
-  nameFileCed1: string;
-  nameFileCed2: string;
-  nameFileCert: string;
-  showErrorCed1: boolean;
-  showErrorCed2: boolean;
-  showErrorCert: boolean;
-  fileIdentificationCard1: any;
-  fileIdentificationCard2: any;
-  fileBankCertificate: any;
-  isEmployee:boolean;
+  files = {
+    validFormat: true,
+    nameFileCed1: '',
+    nameFileCed2: '',
+    nameFileCert: '',
+    showErrorCed1: false,
+    showErrorCed2: false,
+    showErrorCert: false,
+    fileIdentificationCard1: null,
+    fileIdentificationCard2: null,
+    fileBankCertificate: null,
+    isEmployee:false,
+  }
   @Output() uploadFile = new EventEmitter;
   
   ngOnInit() {
     this.formFiles();
-    this.nameFileCed1 = '';
-    this.nameFileCed2 = '';
-    this.nameFileCert = '';
+    
     this.user.userInfo$
         .subscribe(val => {
           if (!!val) {
-            this.isEmployee = val.isEmployeeGrupoExito;
+            this.files.isEmployee = val.isEmployeeGrupoExito;
           }
         });
   }
@@ -46,46 +46,46 @@ export class AditionalFilesComponent implements OnInit {
     });
   }
 
-  public onFileChange(event, param: string) {
-    let nameFile = event.target.files[0].name;
+  public onFileChangeFiles(event, param: string) {
     let reader = new FileReader();
+    let name = event.target.files[0].name;
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       let fileBlob = new Blob([file])
-      let file2 = new File(([fileBlob]), nameFile);
+      let file2 = new File(([fileBlob]), name);
       reader.readAsDataURL(file2);
       reader.onload = () => {
-        this.getExtension(nameFile);
-        if (this.validFormat === true) {
-          if(param === 'ced1') {
-            this.fileIdentificationCard1 = reader.result;
-            this.nameFileCed1 = nameFile;
-            this.showErrorCed1 = false;
+        this.getExtension(name);
+        if (this.files.validFormat === true) {
+          if(param === 'cedula1') {
+            this.files.fileIdentificationCard1 = reader.result;
+            this.files.nameFileCed1 = name;
+            this.files.showErrorCed1 = false;
           } else {
-            if(param === 'ced2') {
-              this.fileIdentificationCard2 = reader.result;
-              this.nameFileCed2 = nameFile;
-              this.showErrorCed2 = false;
+            if(param === 'cedula2') {
+              this.files.fileIdentificationCard2 = reader.result;
+              this.files.nameFileCed2 = name;
+              this.files.showErrorCed2 = false;
             }
             else {
-              this.fileBankCertificate = reader.result;
-              this.nameFileCert = nameFile;
-              this.showErrorCert = false;
+              this.files.fileBankCertificate = reader.result;
+              this.files.nameFileCert = name;
+              this.files.showErrorCert = false;
             }
           }
           
         } else {
-          if(param === 'ced1') {
-              this.showErrorCed1 = true;
-              this.nameFileCed1 = nameFile;
+          if(param === 'cedula1') {
+            this.files.showErrorCed1 = true;
+            this.files.nameFileCed1 = name;
           } else {
-            if(param === 'ced2') {
-              this.showErrorCed2 = true;
-              this.nameFileCed2 = nameFile;
+            if(param === 'cedula2') {
+              this.files.showErrorCed2 = true;
+              this.files.nameFileCed2 = name;
             }
             else {
-              this.showErrorCert = true;
-              this.nameFileCert = nameFile;
+              this.files.showErrorCert = true;
+              this.files.nameFileCert = name;
             }
           }
         }
@@ -93,17 +93,17 @@ export class AditionalFilesComponent implements OnInit {
     }
   }
 
-  private getExtension(nameFile: string) {
-    let splitExt = nameFile.split(".");
-    let getExt = splitExt[1];
-    this.validFormat = false;
-    if (getExt === "jpg" || getExt === "pdf") {
-      this.validFormat = true;
+  private getExtension(name: string) {
+    let splitExt = name.split(".");
+    let getExt = splitExt[1].toLocaleLowerCase();
+    this.files.validFormat = false;
+    if (getExt === "jpg" || getExt === "pdf" || getExt === "jpeg") {
+      this.files.validFormat = true;
     }
   }
 
   public sendInfo() {
-    this.uploadFile.emit({fileIdentificationCard1: this.fileIdentificationCard1, fileIdentificationCard2: this.fileIdentificationCard2, fileBankCertificate: this.fileBankCertificate  });
+    this.uploadFile.emit({fileIdentificationCard1: this.files.fileIdentificationCard1, fileIdentificationCard2: this.files.fileIdentificationCard2, fileBankCertificate: this.files.fileBankCertificate  });
   }
 
 }

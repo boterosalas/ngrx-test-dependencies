@@ -243,9 +243,9 @@ export class RegisterformComponent implements OnInit, OnDestroy {
 
   private getExtension(nameFile: string) {
     let splitExt = nameFile.split(".");
-    let getExt = splitExt[1];
+    let getExt = splitExt[1].toLocaleLowerCase();
     this.validFormat = false;
-    if (getExt === "jpg" || getExt === "pdf") {
+    if (getExt === "jpg" ||  getExt === "jpeg" ||  getExt === "pdf") {
       this.validFormat = true;
     }
   }
@@ -314,16 +314,6 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   public register() {
     this.loading.show();
 
-    let file1 = this.fileIdentificationCard1;
-    let file1Split = file1.split('data:application/octet-stream;base64,');
-    let file1bs64 = file1Split[1];
-    let file2 = this.fileIdentificationCard2;
-    let file2Split = file2.split('data:application/octet-stream;base64,');
-    let file2bs64 = file2Split[1];
-    let file3 = this.fileBankCertificate;
-    let file3Split = file3.split('data:application/octet-stream;base64,');
-    let file3bs64 = file3Split[1];
-
     let registerForm = {
       Email: this.registerForm.controls.email.value,
       FirstNames: this.registerForm.controls.name.value,
@@ -335,9 +325,9 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       department: this.departmentCode,
       municipality: this.cityCode,
       bank: this.externalForm.controls.bank.value,
-      fileIdentificationCard1: file1bs64,
-      fileIdentificationCard2: file2bs64,
-      fileBankCertificate: file3bs64,
+      fileIdentificationCard1: this.fileIdentificationCard1,
+      fileIdentificationCard2: this.fileIdentificationCard2,
+      fileBankCertificate: this.fileBankCertificate,
       bankAccountNumber: btoa(this.externalForm.controls.numberAccount.value),
       typeBankAccount: this.externalForm.controls.typeAccount.value,
       address: this.externalForm.controls.address.value
