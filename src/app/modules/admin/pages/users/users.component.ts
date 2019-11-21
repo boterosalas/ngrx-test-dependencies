@@ -162,6 +162,23 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
       }
     );
 
+    this.subscription = dialogRef.componentInstance.IdentificationCard1.subscribe(() => {
+        this.usersService.downloadFile(identification, 'IdentificationCard1').subscribe( resp => {
+          console.log(resp, 'ok');
+        })
+      }
+    );
+
+    this.subscription = dialogRef.componentInstance.IdentificationCard2.subscribe(() => {
+        this.usersService.downloadFile(identification, 'IdentificationCard2').subscribe();
+      }
+    );
+
+    this.subscription = dialogRef.componentInstance.bankCertificate.subscribe(() => {
+        this.usersService.downloadFile(identification, 'BankCertificate').subscribe();
+      }
+    );
+
     this.subscription =  dialogRef.beforeClosed().subscribe(() => {
       this.searchUser(this.paginate);
     })
