@@ -1,4 +1,4 @@
-<div *ngIf="isEmployee === false">
+<div *ngIf="files.isEmployee === false">
 <h3 class="gray border-left-orange pt-3">{{ "REGISTER.ADITIONAL_FILE" | translate }}</h3>
   <p class="black">
     <strong>{{ "REGISTER.INFO_ADDITIONAL_3" | translate }}</strong>
@@ -13,22 +13,22 @@
   <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px">
     <div fxLayout="column" fxLayoutAlign="center" class="space">
       <strong class="gray">{{ "REGISTER.CED1" | translate }}</strong>
-      <span *ngIf="nameFileCed1 === ''">No hay archivo seleccionado</span>
-      <span class="file-input" *ngIf="nameFileCed1 !== ''">{{
-        nameFileCed1 | truncate: 20
+      <span *ngIf="files.nameFileCed1 === ''">No hay archivo seleccionado</span>
+      <span class="file-input" *ngIf="files.nameFileCed1 !== ''">{{
+        files.nameFileCed1 | truncate: 20
       }}</span>
     </div>
     <div fxLayout="column" fxLayoutAlign="center" fxLayoutAlign.xs="flex-end flex-end"  class="space">
       <label for="ced1" id="upload" class="cursor-pointer">
         <img
           class="mt-1"
-          *ngIf="nameFileCed1 === ''"
+          *ngIf="files.nameFileCed1 === ''"
           src="/assets/img/image-file-upload.svg"
           alt="upload"
         />
         <img
           class="mt-1"
-          *ngIf="nameFileCed1 !== ''"
+          *ngIf="files.nameFileCed1 !== ''"
           src="/assets/img/image-file-upload-ok.svg"
           alt="upload"
         />
@@ -36,14 +36,14 @@
     </div>
   </div>
   
-  <mat-error *ngIf="showErrorCed1" class="small pb-2">
+  <mat-error *ngIf="files.showErrorCed1" class="small pb-2">
       {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
   </mat-error>
 
   <br>
 
   <input
-    (change)="onFileChange($event, 'ced1')"
+    (change)="onFileChangeFiles($event, 'cedula1')"
     id="ced1"
     type="file"
     formControlName="ced1"
@@ -52,36 +52,36 @@
   <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px">
     <div fxLayout="column" fxLayoutAlign="center" class="space">
       <strong class="gray">{{ "REGISTER.CED2" | translate }}</strong>
-      <span *ngIf="nameFileCed2 === ''">No hay archivo seleccionado</span>
-      <span class="file-input" *ngIf="nameFileCed2 !== ''">{{
-        nameFileCed2 | truncate: 20
+      <span *ngIf="files.nameFileCed2 === ''">No hay archivo seleccionado</span>
+      <span class="file-input" *ngIf="files.nameFileCed2 !== ''">{{
+        files.nameFileCed2 | truncate: 20
       }}</span>
     </div>
     <div fxLayout="column" fxLayoutAlign="center" fxLayoutAlign.xs="flex-end flex-end" class="space">
       <label for="ced2" id="upload" class="cursor-pointer">
         <img
           class="mt-1"
-          *ngIf="nameFileCed2 === ''"
+          *ngIf="files.nameFileCed2 === ''"
           src="/assets/img/image-file-upload.svg"
           alt="upload"
         />
         <img
           class="mt-1"
-          *ngIf="nameFileCed2 !== ''"
+          *ngIf="files.nameFileCed2 !== ''"
           src="/assets/img/image-file-upload-ok.svg"
           alt="upload"
         />
       </label>
     </div>
   </div>
-  <mat-error *ngIf="showErrorCed2" class="small pb-2">
+  <mat-error *ngIf="files.showErrorCed2" class="small pb-2">
       {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
   </mat-error>
 
   <br>
 
   <input
-    (change)="onFileChange($event, 'ced2')"
+    (change)="onFileChangeFiles($event, 'cedula2')"
     id="ced2"
     type="file"
     formControlName="ced2"
@@ -89,34 +89,34 @@
   <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" class="pb-3">
     <div fxLayout="column" fxLayoutAlign="center" class="space">
       <strong class="gray">{{ "REGISTER.ACCOUNT_CERT" | translate }}</strong>
-      <span *ngIf="nameFileCert === ''">No hay archivo seleccionado</span>
-      <span class="file-input" *ngIf="nameFileCert !== ''">{{
-        nameFileCert | truncate: 20
+      <span *ngIf="files.nameFileCert === ''">No hay archivo seleccionado</span>
+      <span class="file-input" *ngIf="files.nameFileCert !== ''">{{
+        files.nameFileCert | truncate: 20
       }}</span>
     </div>
     <div fxLayout="column" fxLayoutAlign="center" fxLayoutAlign.xs="flex-end flex-end" class="space">
       <label for="cert" id="upload" class="cursor-pointer">
         <img
           class="mt-1"
-          *ngIf="nameFileCert === ''"
+          *ngIf="files.nameFileCert === ''"
           src="/assets/img/image-file-upload.svg"
           alt="upload"
         />
         <img
           class="mt-1"
-          *ngIf="nameFileCert !== ''"
+          *ngIf="files.nameFileCert !== ''"
           src="/assets/img/image-file-upload-ok.svg"
           alt="upload"
         />
       </label>
     </div>
   </div>
-  <mat-error *ngIf="showErrorCert" class="small pb-2">
+  <mat-error *ngIf="files.showErrorCert" class="small pb-2">
       {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
   </mat-error>
 
   <input
-    (change)="onFileChange($event, 'cert')"
+    (change)="onFileChangeFiles($event, 'certificado')"
     id="cert"
     type="file"
     formControlName="cert"
@@ -128,7 +128,7 @@
     class="button bw"
     color="orange"
     (click)="sendInfo()"
-    [disabled]="(showErrorCed1 || showErrorCed2 || showErrorCert) || (nameFileCed1 === '' && nameFileCed2 === '' && nameFileCert === '')"
+    [disabled]="(files.showErrorCed1 || files.showErrorCed2 || files.showErrorCert) || (files.nameFileCed1 === '' && files.nameFileCed2 === '' && files.nameFileCert === '')"
   >
   {{ "GENERIC.SEND" | translate }}
   </button>

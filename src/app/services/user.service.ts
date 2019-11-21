@@ -32,7 +32,7 @@ export class UserService {
   apiDepartment = 'userprofile/getDeparments';
   apiBanks = 'userprofile/getBanks';
   apiUploadFiles = 'userprofile/upload';
-  apiDownloadFile = 'userprofile/download';
+  apiDownloadFile = 'userprofile/downloadBase64';
 
 
   token = localStorage.getItem("ACCESS_TOKEN");
