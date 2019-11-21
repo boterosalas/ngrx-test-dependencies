@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-aditional-files',
@@ -8,7 +9,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 })
 export class AditionalFilesComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,  private user: UserService,) { }
 
   externalForm: FormGroup;
   validFormat: boolean;
@@ -21,21 +22,27 @@ export class AditionalFilesComponent implements OnInit {
   fileIdentificationCard1: any;
   fileIdentificationCard2: any;
   fileBankCertificate: any;
+  isEmployee:boolean;
   @Output() uploadFile = new EventEmitter;
   
   ngOnInit() {
-   
     this.formFiles();
     this.nameFileCed1 = '';
     this.nameFileCed2 = '';
     this.nameFileCert = '';
+    this.user.userInfo$
+        .subscribe(val => {
+          if (!!val) {
+            this.isEmployee = val.isEmployeeGrupoExito;
+          }
+        });
   }
 
   public formFiles() {
     this.externalForm = this.fb.group({
-      ced1: [null, Validators.required],
-      ced2: [null, Validators.required],
-      cert: [null, Validators.required],
+      ced1: [null],
+      ced2: [null],
+      cert: [null],
     });
   }
 
@@ -70,12 +77,15 @@ export class AditionalFilesComponent implements OnInit {
         } else {
           if(param === 'ced1') {
               this.showErrorCed1 = true;
+              this.nameFileCed1 = nameFile;
           } else {
             if(param === 'ced2') {
               this.showErrorCed2 = true;
+              this.nameFileCed2 = nameFile;
             }
             else {
               this.showErrorCert = true;
+              this.nameFileCert = nameFile;
             }
           }
         }
@@ -93,7 +103,7 @@ export class AditionalFilesComponent implements OnInit {
   }
 
   public sendInfo() {
-    this.uploadFile.emit(this.externalForm);
+    this.uploadFile.emit({fileIdentificationCard1: this.fileIdentificationCard1, fileIdentificationCard2: this.fileIdentificationCard2, fileBankCertificate: this.fileBankCertificate  });
   }
 
 }

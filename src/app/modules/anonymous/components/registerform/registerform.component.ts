@@ -281,12 +281,15 @@ export class RegisterformComponent implements OnInit, OnDestroy {
         } else {
           if(param === 'ced1') {
               this.showErrorCed1 = true;
+              this.nameFileCed1 = nameFile;
           } else {
             if(param === 'ced2') {
               this.showErrorCed2 = true;
+              this.nameFileCed2 = nameFile;
             }
             else {
               this.showErrorCert = true;
+              this.nameFileCert = nameFile;
             }
           }
         }
