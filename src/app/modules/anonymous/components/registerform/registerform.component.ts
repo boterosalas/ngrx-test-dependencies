@@ -281,12 +281,15 @@ export class RegisterformComponent implements OnInit, OnDestroy {
         } else {
           if(param === 'ced1') {
               this.showErrorCed1 = true;
+              this.nameFileCed1 = nameFile;
           } else {
             if(param === 'ced2') {
               this.showErrorCed2 = true;
+              this.nameFileCed2 = nameFile;
             }
             else {
               this.showErrorCert = true;
+              this.nameFileCert = nameFile;
             }
           }
         }
@@ -311,6 +314,16 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   public register() {
     this.loading.show();
 
+    let file1 = this.fileIdentificationCard1;
+    let file1Split = file1.split('data:application/octet-stream;base64,');
+    let file1bs64 = file1Split[1];
+    let file2 = this.fileIdentificationCard2;
+    let file2Split = file2.split('data:application/octet-stream;base64,');
+    let file2bs64 = file2Split[1];
+    let file3 = this.fileBankCertificate;
+    let file3Split = file3.split('data:application/octet-stream;base64,');
+    let file3bs64 = file3Split[1];
+
     let registerForm = {
       Email: this.registerForm.controls.email.value,
       FirstNames: this.registerForm.controls.name.value,
@@ -322,10 +335,10 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       department: this.departmentCode,
       municipality: this.cityCode,
       bank: this.externalForm.controls.bank.value,
-      fileIdentificationCard1: this.fileIdentificationCard1,
-      fileIdentificationCard2: this.fileIdentificationCard2,
-      fileBankCertificate: this.fileBankCertificate,
-      bankAccountNumber: this.externalForm.controls.numberAccount.value,
+      fileIdentificationCard1: file1bs64,
+      fileIdentificationCard2: file2bs64,
+      fileBankCertificate: file3bs64,
+      bankAccountNumber: btoa(this.externalForm.controls.numberAccount.value),
       typeBankAccount: this.externalForm.controls.typeAccount.value,
       address: this.externalForm.controls.address.value
     };
@@ -395,11 +408,12 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     this.departmentCode = department.code;
     this.cities = department.municipalities;
     this.externalForm.controls.city.setValue('');
-    this.filterCities();
     let valueDepartment = this.externalForm.controls.department.valueChanges;
+    this.filterCities();
 
     valueDepartment.subscribe((resp) => {
       if (resp !== '') {
+        this.getDepartments();
         this.externalForm.controls.city.enable();
       } else {
         this.externalForm.controls.city.disable();

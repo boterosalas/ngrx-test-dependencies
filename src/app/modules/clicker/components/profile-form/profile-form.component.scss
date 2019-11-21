@@ -1,1 +1,39 @@
 @import 'variables';
+@import 'animations';
+
+.border-rad{
+    border-radius: 10px;
+}
+
+label {
+    width: 80px;
+    color:$gray2;
+    text-transform: uppercase;
+    font-family: $font-galano-bold;
+}
+
+.info{
+    color: #2B2A27;
+    font-family: $font-galano;
+    font-size: 16px;
+}
+
+.item{
+    line-height: 3;
+    border-bottom: 1px solid #ECECEC;
+    padding-left: 2rem;
+    &:last-child{
+        border-bottom: none;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .truncate{
+      width: 100px;
+      overflow: hidden;
+      display: block !important;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+  

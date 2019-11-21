@@ -8,10 +8,25 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateModule } from '@ngx-translate/core';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserService } from 'src/app/services/user.service';
+import { of } from 'rxjs/internal/observable/of';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
   let fixture: ComponentFixture<ProfileComponent>;
+
+  const mockUserService = jasmine.createSpyObj("UserService", [
+    "uploadFiles",
+  ]);
+
+  let sendvalues = {
+    userid: '260',
+    value: true,
+    identification: '123456789',
+    identificationCard1: '84994889',
+    identificationCard2: '84994889',
+    bankCertificate: '84994889'
+  }
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -33,6 +48,9 @@ describe('ProfileComponent', () => {
           }
         })
       ],
+      providers: [
+        // { provide: UserService, useValue: mockUserService },
+      ],
       schemas: [
         NO_ERRORS_SCHEMA
       ]
@@ -45,9 +63,17 @@ describe('ProfileComponent', () => {
     fixture = TestBed.createComponent(ProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    mockUserService.uploadFiles.and.returnValue(of(sendvalues));
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('send Files', () => {
+    component.userId = '260';
+    component.id = '131516'
+    component.sendFiles({fileIdentificationCard1: 'data:application/octet-stream;base64, 84dq8d9qdqd', fileIdentificationCard2: 'data:application/octet-stream;base64, dqdqdqsqsq', fileBankCertificate: 'data:application/octet-stream;base64, ddp0d9aida0d'  });
+  });
+
 });

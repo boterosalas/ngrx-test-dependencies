@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
 import { UserService } from "src/app/services/user.service";
 import { JwtModule } from "@auth0/angular-jwt";
 import { MasterDataService } from "src/app/services/master-data.service";
-import { By } from '@angular/platform-browser';
+import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 
 describe("RegisterformComponent", () => {
   let component: RegisterformComponent;
@@ -188,7 +188,7 @@ describe("RegisterformComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [RegisterformComponent],
+      declarations: [RegisterformComponent, TruncatePipe],
       imports: [
         TranslateModule,
         AppMaterialModule,

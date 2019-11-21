@@ -98,6 +98,7 @@ export class TabsComponent extends MatPaginatorIntl
   isLoggedIn: any;
   assureds = [];
   trips = [];
+  categories = [];
   date: any;
   plu: string;
   business: string;
@@ -118,6 +119,42 @@ export class TabsComponent extends MatPaginatorIntl
   totalPriceAliance: any;
   totalPriceArrays = [];
   totalArraysDesc: any;
+  alianceSplit:string;
+  alianceSplit2:string;
+  nameAliance: any;
+  percentModal: any;
+
+  slideConfig = {
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    infinite: false,
+    dots: false,
+    dotClass: "slick-dots orange",
+    autoplay: false,
+    arrows: true,
+    centerPadding:'10px',
+    // the magic
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          infinite: false
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          dots: false
+        }
+      },
+      {
+        breakpoint: 300,
+        settings: "unslick" // destroys slick
+      }
+    ]
+  };
 
   ngOnInit() {
     this.showNotFound = false;
@@ -151,6 +188,7 @@ export class TabsComponent extends MatPaginatorIntl
 
     this.getDate();
     this.Assured();
+    this.getCategories();
     this.Trip();
   }
 
@@ -220,15 +258,35 @@ export class TabsComponent extends MatPaginatorIntl
           ];
         }
 
-        let name = teasers[0]["<Name>k__BackingField"];
-        let split = name.split("_");
-        let logo = split[0];
-        let percent = split[1];
-        this.percentsSearch.push(percent);
-        this.images.push(logo);
+        if(teasers.length === 1) {
+          let name = teasers[0]["<Name>k__BackingField"];
+          let split = name.split("_");
+          let logo = split[0];
+          let percent = split[1];
+          this.percentsSearch.push(percent);
+          this.images.push(logo);
+        } else {
+          if(teasers.length === 2) {
+            let name = teasers[0]["<Name>k__BackingField"];
+            let name2 = teasers[1]["<Name>k__BackingField"];
+            let split = name.split("_");
+            let split2 = name2.split("_");
+            let logo = split[0];
+            let logo2 = split2[0];
+            let percent = split[1];
+            let percent2 = split2[1];
+            if(percent > percent2) {
+              this.percentsSearch.push(percent);  
+              this.images.push(logo);
+            } else {
+              this.percentsSearch.push(percent2);
+              this.images.push(logo2);
+            }
+          }
+        }
+
 
         this.getImages(this.images[key]);
-
         this.imgLogoAliance.push(this.imgLogo);
 
         this.totalPriceAliance =
@@ -302,6 +360,7 @@ export class TabsComponent extends MatPaginatorIntl
     this.business = "exito";
     const home = true;
     let teasers = product.items[0].sellers[0].commertialOffer.Teasers;
+    const exito = true;
     
     if(teasers.length === 0) {
       teasers = [
@@ -311,13 +370,35 @@ export class TabsComponent extends MatPaginatorIntl
       ];
     }
 
-    let name = teasers[0]["<Name>k__BackingField"];
-    let split = name.split("_");
-    let logo = split[0];
-    let aliance = split[1];
-    
-    this.getImages(logo);
+    if(teasers.length === 1) {
+      let name = teasers[0]["<Name>k__BackingField"];
+      let split = name.split("_");
+      let logo = split[0];
+      this.alianceSplit = split[1];
+      this.percentModal = this.alianceSplit;
+      this.getImages(logo);
+    } else {
+      if(teasers.length === 2) {
+        let name = teasers[0]["<Name>k__BackingField"];
+        let name2 = teasers[1]["<Name>k__BackingField"];
+        let split = name.split("_");
+        let split2 = name2.split("_");
+        let logo = split[0];
+        let logo2 = split2[0];
+        this.alianceSplit = split[1];
+        this.alianceSplit2 = split2[1];
+        if(this.alianceSplit > this.alianceSplit2) {
+          this.percentModal = this.alianceSplit;
+          this.getImages(logo);
+        } else {
+          this.percentModal = this.alianceSplit2;
+          this.getImages(logo2);
+        }
+      }
+    }
+
     const imgLogo = this.imgLogo;
+    const aliance = this.percentModal;
 
     this.dialog.open(DialogComponent, {
       data: {
@@ -337,6 +418,7 @@ export class TabsComponent extends MatPaginatorIntl
         home,
         aliance,
         imgLogo,
+        exito
       }
     });
   }
@@ -532,6 +614,51 @@ export class TabsComponent extends MatPaginatorIntl
   }
 
   /**
+   * Metodo para abrir la modal con el producto seleccionado del viajes
+   * @param trip
+   */
+
+  public dataCategory(category) {
+    const dataCategoryUrl = category.link;
+    this.url = `${dataCategoryUrl}${this.identification}`;
+    this.subscription = this.user
+      .getShortUrl(this.url)
+      .subscribe((resp: any) => {
+        this.urlshorten = resp;
+      });
+    setTimeout(() => {
+      this.saveLink();
+    }, 1500);
+    this.formShareLink();
+    const title = category.description;
+    const id = category.productId;
+    const img = category.imageurl;
+    const template = this.template;
+    const showClose = false;
+    const showCloseIcon = true;
+    const showProduct = true;
+    const showshowTitle = false;
+    const buttonClose = "Cerrar";
+    this.plu = "";
+    this.business = "exito";
+    const home = true;
+    this.dialog.open(DialogComponent, {
+      data: {
+        title,
+        template,
+        showClose,
+        showCloseIcon,
+        img,
+        showProduct,
+        showshowTitle,
+        buttonClose,
+        id,
+        home
+      }
+    });
+  }
+
+  /**
    * Abre el mensaje de confirmacion de copiado del link
    * @param message
    * @param action
@@ -568,6 +695,16 @@ export class TabsComponent extends MatPaginatorIntl
   public Trip() {
     this.subscription = this.content.getTrips().subscribe(trip => {
       this.trips = trip;
+    });
+  }
+
+  /**
+   * Metodo para listar las categorias
+   */
+
+  public getCategories() {
+    this.subscription = this.content.getCategory().subscribe(category => {
+      this.categories = category;
     });
   }
 
