@@ -9,6 +9,7 @@ import {
 import { DialogUserComponent } from "../../components/dialog-user/dialog-user.component";
 import { Subscription } from 'rxjs/internal/Subscription';
 import { UserService } from 'src/app/services/user.service';
+import { ResponseService } from 'src/app/interfaces/response';
 
 @Component({
   selector: "app-users",
@@ -24,6 +25,8 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
   totalItems: number;
   paginate: string;
   private subscription: Subscription = new Subscription();
+  ext: string;
+  contentType: string;
 
   constructor(
     private dialog: MatDialog,
@@ -163,19 +166,80 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
     );
 
     this.subscription = dialogRef.componentInstance.IdentificationCard1.subscribe(() => {
-        this.usersService.downloadFile(identification, 'IdentificationCard1').subscribe( resp => {
-          console.log(resp, 'ok');
+        this.usersService.downloadFile(identification, 'IdentificationCard1').subscribe( (resp: ResponseService) => {
+          
+          
+          let base64 = resp.objectResponse;
+          let splitbase64 = base64.split(',');
+          let file = splitbase64[1];
+
+          if(file.includes('/9j/')) {
+            this.ext = '.jpg';
+            this.contentType = "image/jpeg"
+          } else {
+            this.ext = '.pdf';
+            this.contentType = "application/pdf"
+          }
+
+          const linkSource = `data:${this.contentType};base64,${file}`;
+          const downloadLink = document.createElement("a");
+          const fileName = `Cedula1${this.ext}`;
+
+          downloadLink.href = linkSource;
+          downloadLink.download = fileName;
+          downloadLink.click();
+         
         })
       }
     );
 
     this.subscription = dialogRef.componentInstance.IdentificationCard2.subscribe(() => {
-        this.usersService.downloadFile(identification, 'IdentificationCard2').subscribe();
+        this.usersService.downloadFile(identification, 'IdentificationCard2').subscribe((resp: ResponseService) => {
+          let base64 = resp.objectResponse;
+          let splitbase64 = base64.split(',');
+          let file = splitbase64[1];
+
+          if(file.includes('/9j/')) {
+            this.ext = '.jpg';
+            this.contentType = "image/jpeg"
+          } else {
+            this.ext = '.pdf';
+            this.contentType = "application/pdf"
+          }
+
+          const linkSource = `data:${this.contentType};base64,${file}`;
+          const downloadLink = document.createElement("a");
+          const fileName = `Cedula2${this.ext}`;
+
+          downloadLink.href = linkSource;
+          downloadLink.download = fileName;
+          downloadLink.click();
+        });
       }
     );
 
     this.subscription = dialogRef.componentInstance.bankCertificate.subscribe(() => {
-        this.usersService.downloadFile(identification, 'BankCertificate').subscribe();
+        this.usersService.downloadFile(identification, 'BankCertificate').subscribe((resp: ResponseService)=> {
+          let base64 = resp.objectResponse;
+          let splitbase64 = base64.split(',');
+          let file = splitbase64[1];
+
+          if(file.includes('/9j/')) {
+            this.ext = '.jpg';
+            this.contentType = "image/jpeg"
+          } else {
+            this.ext = '.pdf';
+            this.contentType = "application/pdf"
+          }
+
+          const linkSource = `data:${this.contentType};base64,${file}`;
+          const downloadLink = document.createElement("a");
+          const fileName = `Certificado${this.ext}`;
+
+          downloadLink.href = linkSource;
+          downloadLink.download = fileName;
+          downloadLink.click();
+        });
       }
     );
 
