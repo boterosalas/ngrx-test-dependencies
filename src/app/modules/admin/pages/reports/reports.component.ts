@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, TemplateRef, ElementRef, ChangeDetectorRef, OnDestroy } from "@angular/core";
 import { LinksService } from "src/app/services/links.service";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "src/app/services/auth.service";
 import { distinctUntilChanged } from "rxjs/operators";
 import { UserService } from "src/app/services/user.service";
@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { ResponseService } from "src/app/interfaces/response";
 import { LoaderService } from 'src/app/services/loader.service';
 import { Subscription } from 'rxjs';
+import { ValidateDate } from 'src/app/validators/validate-date.validators';
 
 @Component({
   selector: "app-reports",
@@ -25,6 +26,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
   fileFormAssured: FormGroup;
   nameFile: string;
   nameFileAssured: string;
+  dateForm: FormGroup;
   showErrorExt: boolean;
   showErrorExtAssured: boolean;
   validFormat: boolean;
@@ -33,6 +35,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
   tmpPath: string;
   EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
   private subscription: Subscription = new Subscription();
+  maxDate = new Date();
   
   constructor(
     private file: LinksService,
@@ -56,6 +59,17 @@ export class ReportsComponent implements OnInit, OnDestroy {
     this.fileFormAssured = this.fb.group({
       file: [null]
     });
+
+    this.dateForm = this.fb.group({
+      dateStart: ['', Validators.required],
+      dateEnd: ['', Validators.required],
+    },
+    {
+      validator: [
+       ValidateDate.CompareDates
+      ]
+    }
+    )
 
     /**
      * verifica si el usuario esta logueado y se obtiene la identificacion
@@ -102,28 +116,28 @@ export class ReportsComponent implements OnInit, OnDestroy {
     }
   }
 
-  public onFileChangeAssured(event) {
-    this.nameFileAssured = event.target.files[0].name;
-    let reader = new FileReader();
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      let fileBlob = new Blob([file], {type: this.EXCEL_TYPE} )
-      let file2 = new File(([fileBlob]), this.nameFileAssured, { type: this.EXCEL_TYPE });
-      reader.readAsDataURL(file2);
-      reader.onload = () => {
-        this.fileFormAssured.controls.file.patchValue({
-          file: reader.result
-        });
-        this.getExtension(this.nameFileAssured);
-        if (this.validFormat === true) {
-          this.showErrorExtAssured = false;
-          this.sendFileAssured();
-        } else {
-          this.showErrorExtAssured = true;
-        }
-      };
-    }
-  }
+  // public onFileChangeAssured(event) {
+  //   this.nameFileAssured = event.target.files[0].name;
+  //   let reader = new FileReader();
+  //   if (event.target.files && event.target.files.length) {
+  //     const [file] = event.target.files;
+  //     let fileBlob = new Blob([file], {type: this.EXCEL_TYPE} )
+  //     let file2 = new File(([fileBlob]), this.nameFileAssured, { type: this.EXCEL_TYPE });
+  //     reader.readAsDataURL(file2);
+  //     reader.onload = () => {
+  //       this.fileFormAssured.controls.file.patchValue({
+  //         file: reader.result
+  //       });
+  //       this.getExtension(this.nameFileAssured);
+  //       if (this.validFormat === true) {
+  //         this.showErrorExtAssured = false;
+  //         this.sendFileAssured();
+  //       } else {
+  //         this.showErrorExtAssured = true;
+  //       }
+  //     };
+  //   }
+  // }
 
   private getExtension(nameFile: string) {
     let splitExt = nameFile.split(".");
@@ -139,7 +153,6 @@ export class ReportsComponent implements OnInit, OnDestroy {
     let file =  fileSplit[1];
     let data = {
       fileBase64:file,
-      business: "viajes",
       email: this.userName
     };
     this.loading.show();
@@ -183,52 +196,71 @@ export class ReportsComponent implements OnInit, OnDestroy {
     );
   }
  
-  private sendFileAssured() {
-    let fileSplit = this.fileFormAssured.controls.file.value.file.split(',');
-    let file =  fileSplit[1];
-    let data = {
-      fileBase64:file,
-      business: "seguros",
-      email: this.userName
-    };
+  // private sendFileAssured() {
+  //   let fileSplit = this.fileFormAssured.controls.file.value.file.split(',');
+  //   let file =  fileSplit[1];
+  //   let data = {
+  //     fileBase64:file,
+  //     business: "seguros",
+  //     email: this.userName
+  //   };
 
-    this.subscription = this.file.sendfile(data).subscribe(
-      (res: ResponseService) => {
-        if(res.state !== 'Error') {
-          Swal.fire({
-            title: "Carga exitosa",
-            text: res.userMessage,
-            type: "success",
-            confirmButtonText: "Aceptar",
-            confirmButtonClass: "upload-success"
-          }).then(()=> {
-            this.nameFileAssured ="";
-          });
-        } else {
-          Swal.fire({
-            title: 'Error en la Carga',
-            text: res.userMessage,
-            type: "error",
-            confirmButtonText: "Aceptar",
-            confirmButtonClass: "upload-error"
-          }).then(()=> {
-            this.nameFileAssured ="";
-          });
-        }
-      },
-      error => {
-        this.loading.hide();
-        Swal.fire({
-          title: error.statusText,
-          text: error.error.userMessage,
-          type: "error",
-          confirmButtonText: "Aceptar",
-          confirmButtonClass: "upload-invalid"
-        }).then(()=> {
-          this.nameFileAssured ="";
-        });
-      }
-    );
+  //   this.subscription = this.file.sendfile(data).subscribe(
+  //     (res: ResponseService) => {
+  //       if(res.state !== 'Error') {
+  //         Swal.fire({
+  //           title: "Carga exitosa",
+  //           text: res.userMessage,
+  //           type: "success",
+  //           confirmButtonText: "Aceptar",
+  //           confirmButtonClass: "upload-success"
+  //         }).then(()=> {
+  //           this.nameFileAssured ="";
+  //         });
+  //       } else {
+  //         Swal.fire({
+  //           title: 'Error en la Carga',
+  //           text: res.userMessage,
+  //           type: "error",
+  //           confirmButtonText: "Aceptar",
+  //           confirmButtonClass: "upload-error"
+  //         }).then(()=> {
+  //           this.nameFileAssured ="";
+  //         });
+  //       }
+  //     },
+  //     error => {
+  //       this.loading.hide();
+  //       Swal.fire({
+  //         title: error.statusText,
+  //         text: error.error.userMessage,
+  //         type: "error",
+  //         confirmButtonText: "Aceptar",
+  //         confirmButtonClass: "upload-invalid"
+  //       }).then(()=> {
+  //         this.nameFileAssured ="";
+  //       });
+  //     }
+  //   );
+  // }
+
+  public downloadReferal() {
+    let dates = {
+      dateStart: this.dateForm.controls.dateStart.value,
+      dateEnd: this.dateForm.controls.dateEnd.value
+    }
+   this.file.downloadReferrals(dates).subscribe( (resp:ResponseService) => {
+      let file = resp.objectResponse;
+      let contentType = 'application/vnd.ms-excel'
+      const linkSource = `data:${contentType};base64,${file}`;
+      const downloadLink = document.createElement("a");
+      const fileName = `reporte.xlsx`;
+  
+      downloadLink.href = linkSource;
+      downloadLink.download = fileName;
+      downloadLink.click();
+    
+   });
   }
 
   ngOnDestroy(): void {

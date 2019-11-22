@@ -667,3 +667,11 @@ th.mat-header-cell {
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
+
+.mat-calendar-table-header{
+  background: none;
+}
+
+.mat-calendar-body-selected {
+  background-color:$primary-color !important;
+}
