@@ -126,9 +126,9 @@ export class TabsComponent extends MatPaginatorIntl
 
   slideConfig = {
     slidesToShow: 5,
-    slidesToScroll: 1,
+    slidesToScroll: 5,
     infinite: true,
-    dots: false,
+    dots: true,
     dotClass: "slick-dots orange",
     autoplay: false,
     autoplaySpeed: 5000,
@@ -140,14 +140,16 @@ export class TabsComponent extends MatPaginatorIntl
         breakpoint: 1024,
         settings: {
           slidesToShow: 4,
-          infinite: false
+          infinite: false,
+          slidesToScroll: 4,
         }
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 2,
-          dots: false
+          dots: false,
+          slidesToScroll: 5,
         }
       },
       {

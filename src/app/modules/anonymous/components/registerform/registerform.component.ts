@@ -66,6 +66,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   disabledCity: boolean;
   departmentCode: string;
   cityCode: string;
+  cityValue: string;
 
   ngOnInit() {
     this.registerForm = this.fb.group(
@@ -230,11 +231,11 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   private externalClickerForm() {
     this.externalForm = this.fb.group({
       department: ["", Validators.required],
-      city: [{ value: "", disabled: this.disabledCity }, Validators.required],
+      city: ["", Validators.required],
       address: ["", Validators.required],
       bank: ["", Validators.required],
       typeAccount: ["", Validators.required],
-      numberAccount: ["", [Validators.required, Validators.pattern(this.numberPattern), Validators.minLength(5), Validators.maxLength(10)]],
+      numberAccount: ["", [Validators.required, Validators.pattern(this.numberPattern), Validators.minLength(5), Validators.maxLength(20)]],
       ced1: [null],
       ced2: [null],
       cert: [null],
@@ -356,6 +357,13 @@ export class RegisterformComponent implements OnInit, OnDestroy {
             confirmButtonClass: "accept-register-alert-error"
           }).then(() => {
             this.backStep();
+            this.nameFileCed1 ="";
+            this.nameFileCed2 ="";
+            this.nameFileCert ="";
+            this.externalForm.reset();
+            this.showErrorCed1 = false;
+            this.showErrorCed2 = false;
+            this.showErrorCert = false;
           });
         }
       },
@@ -394,7 +402,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       });
   }
 
-  selectDepartment(department) {
+  public selectDepartment(department) {
     this.departmentCode = department.code;
     this.cities = department.municipalities;
     this.externalForm.controls.city.setValue('');
@@ -404,30 +412,28 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     valueDepartment.subscribe((resp) => {
       if (resp !== '') {
         this.getDepartments();
-        this.externalForm.controls.city.enable();
+        // this.externalForm.controls.city.enable();
       } else {
-        this.externalForm.controls.city.disable();
+        // this.externalForm.controls.city.disable();
         this.externalForm.controls.city.setValue('');
       }
     })
   }
 
-  checkDepartment() {
-    if (this.externalForm.controls.department.value.code !== this.departmentCode) {
-      this.externalForm.controls.department.setValue('');
-      this.departmentCode = '';
-      this.externalForm.controls.city.setValue('');
+  public checkDepartment() {
+    if ((this.externalForm.controls.department.value.code !== this.departmentCode) || (this.externalForm.controls.department.value.code === undefined || this.departmentCode === undefined )) {
+      this.externalForm.controls.department.setErrors({'incorrect': true});
     }
   }
 
-  selectCity(city) {
+  public selectCity(city) {
     this.cityCode = city.code;
+    this.cityValue = city.description;
   }
 
-  checkCity(city) {
-    console.log(city.code, this.cityCode);
-    if (city.code !== this.cityCode) {
-      this.externalForm.controls.city.setValue('');
+  public checkCity() {
+    if (this.externalForm.controls.city.value !== this.cityValue) {
+      this.externalForm.controls.city.setErrors({'incorrectCity': true});
     }
   }
 
