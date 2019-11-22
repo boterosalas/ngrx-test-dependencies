@@ -40,6 +40,13 @@
 
 @media screen and (min-width: 600px) {
   .img-desk{
-      width: 200px;
+    width: 100px;
+    border-radius: 10px;
   }
+}
+
+.title {
+  font-family: $font-galano-bold;
+  color: #707070;
+  min-height: 32px;
 }

@@ -192,7 +192,7 @@ h2 {
 }
 
 button {
-  border-radius: 10px !important;
+  border-radius: 10px;
   // max-width: 162px;
   // width: 155px;
   font-family: $font-family-base !important;
@@ -325,6 +325,15 @@ button {
   max-width: 100%;
 }
 
+img{
+  border-radius: 10px;
+}
+
+.mat-card-image:first-child{
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;;
+}
+
 .title {
   font-family: $font-galano;
   font-weight: normal;
@@ -344,7 +353,11 @@ button {
 }
 
 #share button {
-  width: auto;
+  // width: auto;
+}
+
+.mat-mini-fab{
+  border-radius: 50% !important;
 }
 
 .sb-circles-dark .sb-wrapper.sb-facebook .sb-icon,
