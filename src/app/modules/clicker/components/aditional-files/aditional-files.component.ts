@@ -26,6 +26,7 @@ export class AditionalFilesComponent implements OnInit {
     isEmployee:false,
   }
   @Output() uploadFile = new EventEmitter;
+  @Output() resetFormEmit = new EventEmitter;
   
   ngOnInit() {
     this.formFiles();
@@ -103,7 +104,25 @@ export class AditionalFilesComponent implements OnInit {
   }
 
   public sendInfo() {
-    this.uploadFile.emit({fileIdentificationCard1: this.files.fileIdentificationCard1, fileIdentificationCard2: this.files.fileIdentificationCard2, fileBankCertificate: this.files.fileBankCertificate  });
+    this.uploadFile.emit(this.files);
+  }
+
+  public resetForm() {
+    this.resetFormEmit.emit(
+      this.files = {
+        validFormat: true,
+        nameFileCed1: '',
+        nameFileCed2: '',
+        nameFileCert: '',
+        showErrorCed1: false,
+        showErrorCed2: false,
+        showErrorCert: false,
+        fileIdentificationCard1: null,
+        fileIdentificationCard2: null,
+        fileBankCertificate: null,
+        isEmployee:false,
+      }
+      );
   }
 
 }

@@ -87,10 +87,13 @@ export class UserService {
   }
 
   public uploadFiles(params: any){
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
     let httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
-        Authorization: "Bearer " + this.authorization,
+        Authorization: "Bearer " + authorization,
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
       })
     };
