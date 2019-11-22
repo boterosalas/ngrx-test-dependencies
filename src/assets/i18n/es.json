@@ -23,6 +23,7 @@
     "SAVE": "Guardar",
     "CANCEL": "Cancelar",
     "SEARCH": "Buscar",
+    "ACCEPT": "Aceptar",
     "WHITE_SPACES": "No se permite más de un espacio en blanco",
     "PASSWORD_PATTERN": "la contraseña debe contener al menos una letra minúscula, una letra mayúscula un número y un carácter especial",
     "SHARE": "Compartir directamente en:",
@@ -30,7 +31,10 @@
     "INVALID_FORMAT_FILE": "Formato inválido solo se pueden subir archivos con la extensión xlsx, xls",
     "INVALID_FORMAT_FILE_REGISTER": "Formato inválido solo se pueden subir archivos con la extensión JPG, PDF",
     "CUSTOMER_ID": "Ingrese la cédula del tomador del seguro",
-    "CATEGORIES": "Categorías"
+    "CATEGORIES": "Categorías",
+    "REFERENCE_TEXT": "O puedes referenciar a un cliente con su número de cédula",
+    "REFERENCE": "Referenciar",
+    "REFERENCE_IDENTIFICATION": "Ingresa la cédula del cliente a referir"
   },
   "LOGIN": {
     "LOGIN": "Iniciar sesión",
@@ -182,8 +186,10 @@
     "DOWNLOAD_REPORT": "Descarga el reporte de ventas",
     "DOWNLOAD": "Descargar",
     "CROSS": "Cruzar ventas",
+    "DATE_ERROR": "La fecha final no puede ser menor a la fecha inicial",
     "UPLOAD": "Sube los archivos de cada negocio por separado.",
     "TRIPS": "VENTAS VIAJES",
+    "SELLS": "VENTAS",
     "ASSURED": "VENTAS SEGUROS",
     "HISTORICAL": "Historial pagos",
     "DATE": "FECHA",

@@ -17,7 +17,8 @@ describe("ReportsComponent", () => {
 
   let mockLinksService = jasmine.createSpyObj("LinksService", [
     "getFileReport",
-    "sendfile"
+    "sendfile",
+    "downloadReferrals"
   ]);
 
   const fileReport = {
@@ -66,6 +67,7 @@ describe("ReportsComponent", () => {
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU"
     );
     mockLinksService.getFileReport.and.returnValue(of(fileReport));
+    mockLinksService.downloadReferrals.and.returnValue(of(fileReport));
     mockLinksService.sendfile.and.returnValue(of(data));
     fixture = TestBed.createComponent(ReportsComponent);
     component = fixture.componentInstance;
@@ -95,34 +97,11 @@ describe("ReportsComponent", () => {
     expect(component.showErrorExt).toBeTruthy();
   });
 
-  describe("send assured", () => {
-    beforeEach(() => {
-      localStorage.setItem(
-        "ACCESS_TOKEN",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU"
-      );
-      mockLinksService.sendfile.and.returnValue(of(data));
-      fixture = TestBed.createComponent(ReportsComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    });
-
-    it("on file change assured valid", () => {
-      const mockFile = new File([""], "name.xlsx", { type: "text/html" });
-      const mockEvt = { target: { files: [mockFile] } };
-      component.onFileChangeAssured(mockEvt);
-      fixture.whenStable().then(() => {
-        tick();
-        expect(mockLinksService.sendfile).toHaveBeenCalled();
-      })
-    });
-
-    it("on file change trip invalid", () => {
-      const mockFile = new File([""], "name.txt", { type: "text/html" });
-      const mockEvt = { target: { files: [mockFile] } };
-      component.onFileChangeAssured(mockEvt);
-      component.showErrorExtAssured = true;
-      expect(component.showErrorExtAssured).toBeTruthy();
-    });
+  it("download referal", () => {
+    component.dateForm.controls.dateStart.setValue('2019-11-10');
+    component.dateForm.controls.dateEnd.setValue('2019-11-10');
+    component.downloadReferal();
+    expect(mockLinksService.downloadReferrals).toHaveBeenCalled();
   });
+
 });
