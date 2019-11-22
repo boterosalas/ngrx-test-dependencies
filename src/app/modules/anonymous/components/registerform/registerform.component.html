@@ -434,6 +434,7 @@
       [matAutocomplete]="auto"
       formControlName="department"
       autocomplete="nope"
+      (blur)="checkDepartment()"
     />
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayDepartment">
       <mat-option
@@ -471,6 +472,7 @@
         (onSelectionChange)="selectCity(city)"
         *ngFor="let city of filteredCities | async"
         [(value)]="city.description"
+        (blur)="checkCity(city)"
       >
         <span>{{ city.description }}</span>
       </mat-option>

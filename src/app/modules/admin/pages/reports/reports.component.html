@@ -26,6 +26,24 @@
 </ng-template>
 
 <ng-template #templateCardCross>
+  <!-- <br>
+  <div fxLayout="row">
+    <mat-form-field class="pr-2">
+        <input matInput [matDatepicker]="picker" placeholder="Fecha inicial">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+    <mat-form-field>
+        <input matInput [matDatepicker]="picker2" placeholder="Fecha final">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+    </div>
+  <br>
+    <a href="{{fileUrl}}"> 
+        <button id="downloadReport" mat-raised-button color="orange"> {{ 'REPORTS.DOWNLOAD' | translate }} <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
+      </a>  -->
     <p id="cross">{{ 'REPORTS.UPLOAD' | translate }}</p>
     <br>
     <h4  id="trips" class="title-upload">{{ 'REPORTS.TRIPS' | translate }}</h4>

@@ -412,8 +412,23 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     })
   }
 
+  checkDepartment() {
+    if (this.externalForm.controls.department.value.code !== this.departmentCode) {
+      this.externalForm.controls.department.setValue('');
+      this.departmentCode = '';
+      this.externalForm.controls.city.setValue('');
+    }
+  }
+
   selectCity(city) {
     this.cityCode = city.code;
+  }
+
+  checkCity(city) {
+    console.log(city.code, this.cityCode);
+    if (city.code !== this.cityCode) {
+      this.externalForm.controls.city.setValue('');
+    }
   }
 
   /**

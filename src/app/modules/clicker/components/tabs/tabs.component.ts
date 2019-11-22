@@ -127,10 +127,11 @@ export class TabsComponent extends MatPaginatorIntl
   slideConfig = {
     slidesToShow: 5,
     slidesToScroll: 1,
-    infinite: false,
+    infinite: true,
     dots: false,
     dotClass: "slick-dots orange",
     autoplay: false,
+    autoplaySpeed: 5000,
     arrows: true,
     centerPadding:'10px',
     // the magic
