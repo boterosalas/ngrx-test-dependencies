@@ -26,35 +26,51 @@
 </ng-template>
 
 <ng-template #templateCardCross>
-  <!-- <br>
+  <br>
+  <form
+  [formGroup]="dateForm"
+>
   <div fxLayout="row">
     <mat-form-field class="pr-2">
-        <input matInput [matDatepicker]="picker" placeholder="Fecha inicial">
+        <input matInput [matDatepicker]="picker" placeholder="Fecha inicial" formControlName="dateStart" readonly>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
     <mat-form-field>
-        <input matInput [matDatepicker]="picker2" placeholder="Fecha final">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <input matInput [max]="maxDate" [matDatepicker]="picker2" placeholder="Fecha final" formControlName="dateEnd" readonly>
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
       </mat-form-field>
     </div>
+
+    <mat-error
+    class="small"
+    id="invalidDate"
+    *ngIf="
+    dateForm.get('dateEnd').errors &&
+    dateForm.get('dateEnd').errors.dateEnd
+    "
+    >{{ "REPORTS.DATE_ERROR" | translate }}</mat-error
+  >
+
   <br>
-    <a href="{{fileUrl}}"> 
-        <button id="downloadReport" mat-raised-button color="orange"> {{ 'REPORTS.DOWNLOAD' | translate }} <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
-      </a>  -->
+     <button (click)="downloadReferal()" id="downloadReport" mat-raised-button color="orange" [disabled]="!dateForm.valid"> {{ 'REPORTS.DOWNLOAD' | translate }} <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
+  </form>
+
     <p id="cross">{{ 'REPORTS.UPLOAD' | translate }}</p>
     <br>
-    <h4  id="trips" class="title-upload">{{ 'REPORTS.TRIPS' | translate }}</h4>
+    <h4  id="trips" class="title-upload m-0">{{ 'REPORTS.SELLS' | translate }}</h4>
       <app-load-form-file [fileForm]="fileForm" [nameFile]="nameFile" label="trip" (uploadFile)="onFileChangeTrip($event)"></app-load-form-file>
       <mat-error *ngIf="showErrorExt" class="small">
         {{ "GENERIC.INVALID_FORMAT_FILE" | translate }}
       </mat-error>
     <br>
-    <h4 id="assured" ref="#inputAssured" class="title-upload">{{ 'REPORTS.ASSURED' | translate }}</h4>
+
+    <!-- <h4 id="assured" ref="#inputAssured" class="title-upload">{{ 'REPORTS.ASSURED' | translate }}</h4>
     <app-load-form-file [fileForm]="fileFormAssured"  [nameFile]="nameFileAssured" label="assured" (uploadFile)="onFileChangeAssured($event)"></app-load-form-file>  
     <mat-error *ngIf="showErrorExtAssured" class="small">
       {{ "GENERIC.INVALID_FORMAT_FILE" | translate }}
-    </mat-error>
+    </mat-error> -->
+
 </ng-template>

@@ -97,34 +97,34 @@
 </div>
 
 <ng-template #templateDialog>
-  <form [formGroup]="formLink">
-    <div fxLayout="column">
-      <mat-form-field appearance="dashed" class="dashed mt-2">
-        <input
-          id="url"
-          matInput
-          formcontrolName="link"
-          [value]="urlshorten"
-          #linkInput
-          readonly
-        />
-      </mat-form-field>
-    </div>
-    <div fxLayout="column">
-      <button
-        mat-raised-button
-        id="btnCopy"
-        color="orange"
-        class="button button-100 p-1"
-        (click)="copyInputMessage(linkInput)"
-      >
-        <span fxLayoutAlign="space-between center">
-          <span class="pl-3">{{ "GENERIC.COPY_LINK" | translate }}</span>
-          <mat-icon matSuffix class="mr-3">link</mat-icon>
-        </span>
-      </button>
-    </div>
-  </form>
+    <form [formGroup]="formLink">
+        <div fxLayout="row" fxLayoutGap="20px"> 
+        <div fxLayout="column" fxFlex="90">
+          <mat-form-field appearance="dashed" class="dashed mt-2">
+            <input
+              id="url"
+              matInput
+              formcontrolName="link"
+              [value]="urlshorten"
+              #linkInput
+              readonly
+            />
+          </mat-form-field>
+        </div>
+        <div fxLayout="column" fxFlex="10" class="mt-2">
+          <button
+            mat-mini-fab
+            id="btnCopy"
+            color="orange"
+            (click)="copyInputMessage(linkInput)"
+          >
+            <span fxLayoutAlign="space-between center">
+              <mat-icon matSuffix>link</mat-icon>
+            </span>
+          </button>
+        </div>
+      </div>
+      </form>
 
   <div id="share">
     <h3 class="border-bottom-orange-init">{{ "GENERIC.SHARE" | translate }}</h3>
