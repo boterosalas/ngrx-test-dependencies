@@ -39,6 +39,12 @@ export class ProfileComponent implements OnInit {
      }
    })
   }
+
+ public reset(file) {
+    file.nameFileCed1 = "";
+    file.nameFileCed2= "";
+    file.nameFileCert = "";
+  }
   
   public sendFiles(files) {
 
@@ -61,6 +67,8 @@ export class ProfileComponent implements OnInit {
           type: "success",
           confirmButtonText: "Aceptar",
           confirmButtonClass: "upload-success"
+        }).then(() => {
+          this.reset(files);
         })
       } else {
         Swal.fire({

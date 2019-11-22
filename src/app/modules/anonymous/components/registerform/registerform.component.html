@@ -434,6 +434,7 @@
       [matAutocomplete]="auto"
       formControlName="department"
       autocomplete="nope"
+      (blur)="checkDepartment()"
     />
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayDepartment">
       <mat-option
@@ -455,6 +456,16 @@
         "GENERIC.REQUIRED" | translate: { formValue: "Departamento" }
       }}</mat-error
     >
+    <mat-error
+      id="selectDepartementError"
+      *ngIf="
+        externalForm.controls.department.invalid &&
+        externalForm.controls.department.errors.incorrect
+      "
+      >{{
+        "REGISTER.ERROR_DEPARTMENT" | translate
+      }}</mat-error
+    >
   </mat-form-field>
 
   <mat-form-field>
@@ -465,6 +476,7 @@
       [matAutocomplete]="city"
       formControlName="city"
       autocomplete="nope"
+      (blur)="checkCity()"
     />
     <mat-autocomplete #city="matAutocomplete">
       <mat-option
@@ -477,6 +489,16 @@
     </mat-autocomplete>
 
     <mat-error
+      id="selectCityError"
+      *ngIf="
+        externalForm.controls.city.invalid &&
+        externalForm.controls.city.errors.incorrectCity
+      "
+      >{{
+        "REGISTER.ERROR_CITY" | translate
+      }}</mat-error>
+
+    <mat-error
       id="requiredCity"
       *ngIf="
         externalForm.controls.city.invalid &&
@@ -484,6 +506,8 @@
       "
       >{{ "GENERIC.REQUIRED" | translate: { formValue: "Ciudad" } }}</mat-error
     >
+
+    
   </mat-form-field>
 
   <mat-form-field>
@@ -632,6 +656,7 @@
     </div>
     <div fxLayout="column" fxLayoutAlign="center">
       <label for="ced1" id="upload" class="cursor-pointer">
+        <span *ngIf="!showErrorCed1">
         <img
           class="mt-1"
           *ngIf="nameFileCed1 === ''"
@@ -643,7 +668,15 @@
           *ngIf="nameFileCed1 !== ''"
           src="/assets/img/image-file-upload-ok.svg"
           alt="upload"
-        />
+        />  
+      </span>
+
+      <img
+      class="mt-1 w-icon"
+      *ngIf="showErrorCed1"
+      src="/assets/img/icono-error-carga.svg"
+      alt="upload"
+    />
       </label>
     </div>
   </div>
@@ -669,6 +702,7 @@
     </div>
     <div fxLayout="column" fxLayoutAlign="center">
       <label for="ced2" id="upload" class="cursor-pointer">
+        <span  *ngIf="!showErrorCed2">
         <img
           class="mt-1"
           *ngIf="nameFileCed2 === ''"
@@ -681,6 +715,13 @@
           src="/assets/img/image-file-upload-ok.svg"
           alt="upload"
         />
+      </span>
+        <img
+        class="mt-1 w-icon"
+        *ngIf="showErrorCed2"
+        src="/assets/img/icono-error-carga.svg"
+        alt="upload"
+      />
       </label>
     </div>
   </div>
@@ -705,6 +746,7 @@
     </div>
     <div fxLayout="column" fxLayoutAlign="center">
       <label for="cert" id="upload" class="cursor-pointer">
+        <span *ngIf="!showErrorCert">
         <img
           class="mt-1"
           *ngIf="nameFileCert === ''"
@@ -717,6 +759,13 @@
           src="/assets/img/image-file-upload-ok.svg"
           alt="upload"
         />
+      </span>
+        <img
+        class="mt-1 w-icon"
+        *ngIf="showErrorCert"
+        src="/assets/img/icono-error-carga.svg"
+        alt="upload"
+      />
       </label>
     </div>
   </div>
