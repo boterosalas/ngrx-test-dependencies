@@ -752,7 +752,7 @@ export class TabsComponent extends MatPaginatorIntl
         this.openSnackBar(resp.userMessage, 'cerrar')
       } else {
         this.openSnackBar(resp.userMessage, 'cerrar')
-        this.idCustomerForm.controls.identificacion.setValue('');
+        // this.idCustomerForm.controls.identificacion.setValue('');
         this.dialog.dismiss();
       }
     });
@@ -797,7 +797,7 @@ export class TabsComponent extends MatPaginatorIntl
 
   public showReference() {
     this.reference = !this.reference;
-    this.idCustomerForm.controls.identificacion.setValue('');
+    this.idCustomerForm.controls.identification.setValue('');
   }
 
 }
