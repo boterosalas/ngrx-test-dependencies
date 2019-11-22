@@ -65,7 +65,9 @@
     "CED1": "Cédula pag 1",
     "CED2": "Cédula pag 2",
     "ACCOUNT_CERT": "Certificación bancaria",
-    "NO_FILE": "Ningún archivo seleccionado"
+    "NO_FILE": "Ningún archivo seleccionado",
+    "ERROR_DEPARTMENT": "Selecciona un departamento",
+    "ERROR_CITY": "Selecciona una ciudad"
   },
   "FORGOTPASSWORD": {
     "FORGOT_PASSWORD": "Recuperar contraseña",
