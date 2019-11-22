@@ -28,6 +28,8 @@ import { ContentService } from "src/app/services/content.service";
 import { LinksService } from "src/app/services/links.service";
 import { environment } from "src/environments/environment";
 import { TokenService } from "src/app/services/token.service";
+import { ResponseService } from 'src/app/interfaces/response';
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-tabs",
@@ -123,6 +125,7 @@ export class TabsComponent extends MatPaginatorIntl
   alianceSplit2:string;
   nameAliance: any;
   percentModal: any;
+  reference: boolean;
 
   slideConfig = {
     slidesToShow: 5,
@@ -193,6 +196,7 @@ export class TabsComponent extends MatPaginatorIntl
     this.Assured();
     this.getCategories();
     this.Trip();
+    this.reference = false;
   }
 
   private formShareLink() {
@@ -330,6 +334,7 @@ export class TabsComponent extends MatPaginatorIntl
    */
 
   public dataProduct(product) {
+    this.reference = false;
     if (environment.production === false) {
       const productUrl = product.link;
       this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=${this.identification}`;
@@ -573,6 +578,7 @@ export class TabsComponent extends MatPaginatorIntl
    */
 
   public dataTrip(trip) {
+    this.reference = false;
     const datatripUrl = trip.link;
     this.url = `${datatripUrl}${this.identification}`;
     this.subscription = this.user
@@ -659,6 +665,7 @@ export class TabsComponent extends MatPaginatorIntl
         home
       }
     });
+    
   }
 
   /**
@@ -669,7 +676,7 @@ export class TabsComponent extends MatPaginatorIntl
 
   private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      duration: 2000
+      duration: 5000
     });
   }
 
@@ -728,6 +735,30 @@ export class TabsComponent extends MatPaginatorIntl
   }
 
   /**
+   * Metodo para dalvar los links reference
+   */
+
+  public saveLinkReference() {
+    let data = {
+      link: this.urlshorten,
+      identification: this.identification,
+      plu: this.plu,
+      business: this.business,
+      creationDate: this.date,
+      identificationcustomer: this.idCustomerForm.controls.identification.value
+    };
+    this.subscription = this.links.saveLink(data).subscribe((resp: ResponseService) => {
+      if(resp.state === 'Error') {
+        this.openSnackBar(resp.userMessage, 'cerrar')
+      } else {
+        this.openSnackBar(resp.userMessage, 'cerrar')
+        this.idCustomerForm.controls.identificacion.setValue('');
+        this.dialog.dismiss();
+      }
+    });
+  }
+
+  /**
    * Obtiene la fecha actual
    */
 
@@ -763,4 +794,10 @@ export class TabsComponent extends MatPaginatorIntl
       this.buttonDisabled = false;
     }
   }
+
+  public showReference() {
+    this.reference = !this.reference;
+    this.idCustomerForm.controls.identificacion.setValue('');
+  }
+
 }

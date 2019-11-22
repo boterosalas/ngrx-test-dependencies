@@ -18,8 +18,10 @@ export class LinksService {
   reports = 'Reports/ClickerPerformanceReport';
   insurance = 'Insurance/ProcessFiles'
   apiSaveLink = 'Link/SaveLink';
+  apiPostReferrrals = 'Link/downloadReferrals';
   apiGetTotalLinks = 'Link/GetTotalLinksGenerated';
   apiFile = 'commissions/getUrlFileCommissions';
+  apigenerateCommissions = 'commissions/generateCommissionsFile';
   apiHistory = 'commissions/getPaymentHistoryClicker';
 
   token = localStorage.getItem("ACCESS_TOKEN");
@@ -35,6 +37,11 @@ export class LinksService {
 
   public saveLink(SaveLink: any) {
     return this.http.post((`${this.url + this.apiSaveLink}`), SaveLink, this.httpOptions);
+  }
+
+  public downloadReferrals(dates: any) {
+    console.log(dates);
+    return this.http.post((`${this.url + this.apiPostReferrrals}`), dates, this.httpOptions);
   }
 
   public getLink(identification: string) {
@@ -72,17 +79,20 @@ export class LinksService {
   }
 
   public sendfile(formdata) {
+      let token = localStorage.getItem("ACCESS_TOKEN");
+      let authorization = token;
       let data = new FormData();
       data.append("FileBase64", formdata.fileBase64);
-      data.append("Business", formdata.business);
+      // data.append("Business", formdata.business);
       data.append("email", formdata.email);
     const httpOptions = {
       headers: new HttpHeaders({
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
       })
     };
-    return this.http.post((`${environment.URL_COMISSION}${this.insurance}`), formdata , httpOptions );
+    return this.http.post((`${environment.URL_COMISSION}${this.apigenerateCommissions}`), formdata , httpOptions );
   }
   
 }
