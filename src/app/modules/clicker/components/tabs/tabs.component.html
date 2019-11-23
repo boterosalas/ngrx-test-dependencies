@@ -140,6 +140,7 @@
     </div>
   </div>
 </ngx-slick-carousel>
+
 <!-- template bottomsheet -->
 
 <ng-template #templateDialog>
@@ -261,6 +262,63 @@
      </div>
     </form>
 
+</ng-template>
+
+<!-- template categories -->
+
+<ng-template #templateCategories>
+  <div *ngIf="!reference">
+  <form [formGroup]="formLink">
+    <div fxLayout="row" fxLayoutGap="20px"> 
+    <div fxLayout="column" fxFlex="90">
+      <mat-form-field appearance="dashed" class="dashed mt-2">
+        <input
+          id="url"
+          matInput
+          formcontrolName="link"
+          [value]="urlshorten"
+          #linkInput
+          readonly
+        />
+      </mat-form-field>
+    </div>
+    <div fxLayout="column" fxFlex="10" class="mt-2">
+      <button
+        mat-mini-fab
+        id="btnCopy"
+        color="orange"
+        (click)="copyInputMessage(linkInput)"
+      >
+        <span fxLayoutAlign="space-between center">
+          <mat-icon matSuffix>link</mat-icon>
+        </span>
+      </button>
+    </div>
+  </div>
+  </form>
+
+  <div id="share">
+    <h3 class="border-bottom-orange-init">{{ "GENERIC.SHARE" | translate }}</h3>
+    <share-button
+      id="facebook"
+      [url]="urlshorten"
+      button="facebook"
+      theme="circles-dark"
+    ></share-button>
+    <share-button
+      id="twitter"
+      [url]="urlshorten"
+      button="twitter"
+      theme="circles-dark"
+    ></share-button>
+    <share-button
+      id="whatsapp"
+      [url]="urlshorten"
+      button="whatsapp"
+      theme="circles-dark"
+    ></share-button>
+  </div>
+</div>
 </ng-template>
 
 <!-- template bottomsheet -->

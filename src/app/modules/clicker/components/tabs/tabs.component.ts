@@ -78,8 +78,8 @@ export class TabsComponent extends MatPaginatorIntl
   }
 
   @ViewChild("templateDialog", { static: false }) template: TemplateRef<any>;
-  @ViewChild("templateDialogAssured", { static: false })
-  templateAssured: TemplateRef<any>;
+  @ViewChild("templateDialogAssured", { static: false }) templateAssured: TemplateRef<any>;
+  @ViewChild("templateCategories", { static: false }) templateCategories: TemplateRef<any>;
   @ViewChild("paginator", { static: false }) paginator: any;
 
   term: string;
@@ -642,7 +642,7 @@ export class TabsComponent extends MatPaginatorIntl
     const title = category.description;
     const id = category.productId;
     const img = category.imageurl;
-    const template = this.template;
+    const template = this.templateCategories;
     const showClose = false;
     const showCloseIcon = true;
     const showProduct = true;
@@ -797,7 +797,8 @@ export class TabsComponent extends MatPaginatorIntl
 
   public showReference() {
     this.reference = !this.reference;
-    this.idCustomerForm.controls.identification.setValue('');
+    // this.idCustomerForm.controls.identification.setValue('');
+    this.idCustomerForm.reset();
   }
 
 }
