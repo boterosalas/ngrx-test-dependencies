@@ -259,7 +259,9 @@ export class ReportsComponent implements OnInit, OnDestroy {
       downloadLink.href = linkSource;
       downloadLink.download = fileName;
       downloadLink.click();
-    
+      this.dateForm.reset();
+      this.dateForm.controls.dateStart.setErrors(null);
+      this.dateForm.controls.dateEnd.setErrors(null);
    });
   }
 
