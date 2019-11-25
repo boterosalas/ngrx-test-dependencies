@@ -795,9 +795,7 @@ export class TabsComponent extends MatPaginatorIntl
   public nextStep() {
     this.showForm = !this.showForm;
     this.showFormCustomer = !this.showFormCustomer;
-    setTimeout(() => {
-      this.saveLink("assured");
-    }, 1500);
+    this.saveLink("assured");
   }
 
   public getInfo(event) {
