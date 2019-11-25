@@ -15,7 +15,7 @@
       <strong class="gray">{{ "REGISTER.CED1" | translate }}</strong>
       <span *ngIf="files.nameFileCed1 === ''">No hay archivo seleccionado</span>
       <span class="file-input" *ngIf="files.nameFileCed1 !== ''">{{
-        files.nameFileCed1 | truncate: 20
+        files.nameFileCed1 | truncate: '20'
       }}</span>
     </div>
     <div fxLayout="column" fxLayoutAlign="center" fxLayoutAlign.xs="flex-end flex-end"  class="space">
@@ -62,7 +62,7 @@
       <strong class="gray">{{ "REGISTER.CED2" | translate }}</strong>
       <span *ngIf="files.nameFileCed2 === ''">No hay archivo seleccionado</span>
       <span class="file-input" *ngIf="files.nameFileCed2 !== ''">{{
-        files.nameFileCed2 | truncate: 20
+        files.nameFileCed2 | truncate: '20'
       }}</span>
     </div>
     <div fxLayout="column" fxLayoutAlign="center" fxLayoutAlign.xs="flex-end flex-end" class="space">
@@ -107,7 +107,7 @@
       <strong class="gray">{{ "REGISTER.ACCOUNT_CERT" | translate }}</strong>
       <span *ngIf="files.nameFileCert === ''">No hay archivo seleccionado</span>
       <span class="file-input" *ngIf="files.nameFileCert !== ''">{{
-        files.nameFileCert | truncate: 20
+        files.nameFileCert | truncate: '20'
       }}</span>
     </div>
     <div fxLayout="column" fxLayoutAlign="center" fxLayoutAlign.xs="flex-end flex-end" class="space">
