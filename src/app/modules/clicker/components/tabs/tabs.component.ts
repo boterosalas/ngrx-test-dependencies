@@ -28,7 +28,7 @@ import { ContentService } from "src/app/services/content.service";
 import { LinksService } from "src/app/services/links.service";
 import { environment } from "src/environments/environment";
 import { TokenService } from "src/app/services/token.service";
-import { ResponseService } from 'src/app/interfaces/response';
+import { ResponseService } from "src/app/interfaces/response";
 import Swal from "sweetalert2";
 
 @Component({
@@ -78,8 +78,10 @@ export class TabsComponent extends MatPaginatorIntl
   }
 
   @ViewChild("templateDialog", { static: false }) template: TemplateRef<any>;
-  @ViewChild("templateDialogAssured", { static: false }) templateAssured: TemplateRef<any>;
-  @ViewChild("templateCategories", { static: false }) templateCategories: TemplateRef<any>;
+  @ViewChild("templateDialogAssured", { static: false })
+  templateAssured: TemplateRef<any>;
+  @ViewChild("templateCategories", { static: false })
+  templateCategories: TemplateRef<any>;
   @ViewChild("paginator", { static: false }) paginator: any;
 
   term: string;
@@ -121,8 +123,8 @@ export class TabsComponent extends MatPaginatorIntl
   totalPriceAliance: any;
   totalPriceArrays = [];
   totalArraysDesc: any;
-  alianceSplit:string;
-  alianceSplit2:string;
+  alianceSplit: string;
+  alianceSplit2: string;
   nameAliance: any;
   percentModal: any;
   reference: boolean;
@@ -136,7 +138,7 @@ export class TabsComponent extends MatPaginatorIntl
     autoplay: false,
     autoplaySpeed: 5000,
     arrows: true,
-    centerPadding:'10px',
+    centerPadding: "10px",
     // the magic
     responsive: [
       {
@@ -144,7 +146,7 @@ export class TabsComponent extends MatPaginatorIntl
         settings: {
           slidesToShow: 4,
           infinite: false,
-          slidesToScroll: 4,
+          slidesToScroll: 4
         }
       },
       {
@@ -152,7 +154,7 @@ export class TabsComponent extends MatPaginatorIntl
         settings: {
           slidesToShow: 2,
           dots: false,
-          slidesToScroll: 5,
+          slidesToScroll: 5
         }
       },
       {
@@ -249,7 +251,7 @@ export class TabsComponent extends MatPaginatorIntl
     this.imgLogoAliance = [];
     this.images = [];
     this.totalPriceAliance = "";
-    arr.map((element) => {
+    arr.map(element => {
       for (const key in element) {
         let teasers = element[key].items[0].sellers[0].commertialOffer.Teasers;
         this.priceAliance =
@@ -265,7 +267,7 @@ export class TabsComponent extends MatPaginatorIntl
           ];
         }
 
-        if(teasers.length === 1) {
+        if (teasers.length === 1) {
           let name = teasers[0]["<Name>k__BackingField"];
           let split = name.split("_");
           let logo = split[0];
@@ -273,7 +275,7 @@ export class TabsComponent extends MatPaginatorIntl
           this.percentsSearch.push(percent);
           this.images.push(logo);
         } else {
-          if(teasers.length === 2) {
+          if (teasers.length === 2) {
             let name = teasers[0]["<Name>k__BackingField"];
             let name2 = teasers[1]["<Name>k__BackingField"];
             let split = name.split("_");
@@ -282,8 +284,8 @@ export class TabsComponent extends MatPaginatorIntl
             let logo2 = split2[0];
             let percent = split[1];
             let percent2 = split2[1];
-            if(percent > percent2) {
-              this.percentsSearch.push(percent);  
+            if (percent > percent2) {
+              this.percentsSearch.push(percent);
               this.images.push(logo);
             } else {
               this.percentsSearch.push(percent2);
@@ -291,7 +293,6 @@ export class TabsComponent extends MatPaginatorIntl
             }
           }
         }
-
 
         this.getImages(this.images[key]);
         this.imgLogoAliance.push(this.imgLogo);
@@ -347,6 +348,8 @@ export class TabsComponent extends MatPaginatorIntl
       .subscribe((resp: any) => {
         this.urlshorten = resp;
       });
+    this.idCustomerForm.controls.identification.setValue("");
+    this.idCustomerForm.reset();
     setTimeout(() => {
       this.saveLink();
     }, 1500);
@@ -369,8 +372,8 @@ export class TabsComponent extends MatPaginatorIntl
     const home = true;
     let teasers = product.items[0].sellers[0].commertialOffer.Teasers;
     const exito = true;
-    
-    if(teasers.length === 0) {
+
+    if (teasers.length === 0) {
       teasers = [
         {
           "<Name>k__BackingField": "default_0"
@@ -378,7 +381,7 @@ export class TabsComponent extends MatPaginatorIntl
       ];
     }
 
-    if(teasers.length === 1) {
+    if (teasers.length === 1) {
       let name = teasers[0]["<Name>k__BackingField"];
       let split = name.split("_");
       let logo = split[0];
@@ -386,7 +389,7 @@ export class TabsComponent extends MatPaginatorIntl
       this.percentModal = this.alianceSplit;
       this.getImages(logo);
     } else {
-      if(teasers.length === 2) {
+      if (teasers.length === 2) {
         let name = teasers[0]["<Name>k__BackingField"];
         let name2 = teasers[1]["<Name>k__BackingField"];
         let split = name.split("_");
@@ -395,7 +398,7 @@ export class TabsComponent extends MatPaginatorIntl
         let logo2 = split2[0];
         this.alianceSplit = split[1];
         this.alianceSplit2 = split2[1];
-        if(this.alianceSplit > this.alianceSplit2) {
+        if (this.alianceSplit > this.alianceSplit2) {
           this.percentModal = this.alianceSplit;
           this.getImages(logo);
         } else {
@@ -539,6 +542,7 @@ export class TabsComponent extends MatPaginatorIntl
     this.formShareLink();
     this.showForm = false;
     this.idCustomerForm.controls.identification.setValue("");
+    this.idCustomerForm.reset();
     this.showFormCustomer = true;
     const title = assured.description;
     const id = assured.productId;
@@ -586,6 +590,8 @@ export class TabsComponent extends MatPaginatorIntl
       .subscribe((resp: any) => {
         this.urlshorten = resp;
       });
+    this.idCustomerForm.controls.identification.setValue("");
+    this.idCustomerForm.reset();
     setTimeout(() => {
       this.saveLink();
     }, 1500);
@@ -665,7 +671,6 @@ export class TabsComponent extends MatPaginatorIntl
         home
       }
     });
-    
   }
 
   /**
@@ -722,7 +727,7 @@ export class TabsComponent extends MatPaginatorIntl
    * Metodo para dalvar los links generados
    */
 
-  public saveLink() {
+  public saveLink(param?: string) {
     let data = {
       link: this.urlshorten,
       identification: this.identification,
@@ -731,7 +736,17 @@ export class TabsComponent extends MatPaginatorIntl
       creationDate: this.date,
       identificationcustomer: this.idCustomerForm.controls.identification.value
     };
-    this.subscription = this.links.saveLink(data).subscribe();
+    this.subscription = this.links
+      .saveLink(data)
+      .subscribe((resp: ResponseService) => {
+        if (param === "assured") {
+          if (resp.state === "Error") {
+            this.openSnackBar(resp.userMessage, "cerrar");
+            this.showForm = false;
+            this.showFormCustomer = true;
+          }
+        }
+      });
   }
 
   /**
@@ -747,15 +762,17 @@ export class TabsComponent extends MatPaginatorIntl
       creationDate: this.date,
       identificationcustomer: this.idCustomerForm.controls.identification.value
     };
-    this.subscription = this.links.saveLink(data).subscribe((resp: ResponseService) => {
-      if(resp.state === 'Error') {
-        this.openSnackBar(resp.userMessage, 'cerrar')
-      } else {
-        this.openSnackBar(resp.userMessage, 'cerrar')
-        // this.idCustomerForm.controls.identificacion.setValue('');
-        this.dialog.dismiss();
-      }
-    });
+    this.subscription = this.links
+      .saveLink(data)
+      .subscribe((resp: ResponseService) => {
+        if (resp.state === "Error") {
+          this.openSnackBar(resp.userMessage, "cerrar");
+        } else {
+          this.openSnackBar(resp.userMessage, "cerrar");
+          // this.idCustomerForm.controls.identificacion.setValue('');
+          this.dialog.dismiss();
+        }
+      });
   }
 
   /**
@@ -779,7 +796,7 @@ export class TabsComponent extends MatPaginatorIntl
     this.showForm = !this.showForm;
     this.showFormCustomer = !this.showFormCustomer;
     setTimeout(() => {
-      this.saveLink();
+      this.saveLink("assured");
     }, 1500);
   }
 
@@ -800,5 +817,4 @@ export class TabsComponent extends MatPaginatorIntl
     // this.idCustomerForm.controls.identification.setValue('');
     this.idCustomerForm.reset();
   }
-
 }

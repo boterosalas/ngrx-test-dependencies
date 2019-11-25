@@ -33,7 +33,7 @@
   <div fxLayout="row">
     <mat-form-field class="pr-2">
         <input matInput [matDatepicker]="picker" [max]="maxDate"  placeholder="Fecha inicial" formControlName="dateStart" readonly>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker-toggle matSuffix [for]="picker" id="dateStart"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-error
         class="small"
@@ -49,8 +49,8 @@
 
 
     <mat-form-field>
-        <input matInput [max]="maxDate" [matDatepicker]="picker2" placeholder="Fecha final" formControlName="dateEnd" readonly>
-        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <input matInput [max]="maxDate" [min]="dateForm.controls.dateStart.value" [matDatepicker]="picker2" placeholder="Fecha final" formControlName="dateEnd" readonly>
+        <mat-datepicker-toggle matSuffix id="dateEnd" [for]="picker2" [disabled]="dateForm.controls.dateStart.value === ''"></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
         <mat-error
         class="small"
@@ -76,7 +76,7 @@
 
     
   <br>
-     <button (click)="downloadReferal()" id="downloadReport" mat-raised-button color="orange" [disabled]="!dateForm.valid"> {{ 'REPORTS.DOWNLOAD' | translate }} <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
+     <button (click)="downloadReferal()" id="downloadReportSell" mat-raised-button color="orange" [disabled]="!dateForm.valid"> {{ 'REPORTS.DOWNLOAD' | translate }} <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
   </form>
 
     <p id="cross">{{ 'REPORTS.UPLOAD' | translate }}</p>
