@@ -25,6 +25,7 @@ export class ProfileComponent implements OnInit {
   bank: string;
   bankAccountNumber: string;
   typeBankAccount: string;
+  verified: boolean;
 
   constructor(
     private user: UserService,
@@ -36,6 +37,7 @@ export class ProfileComponent implements OnInit {
      if(!!val) {
        this.userId = val.userId;
        this.id = val.identification;
+       this.verified = val.verified;
      }
    })
   }
