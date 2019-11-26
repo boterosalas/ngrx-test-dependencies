@@ -1,9 +1,16 @@
-import { Component, OnInit, Inject, Output, EventEmitter, OnDestroy } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Inject,
+  Output,
+  EventEmitter,
+  OnDestroy
+} from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
-import { Subscription } from 'rxjs';
-import { distinctUntilChanged } from 'rxjs/operators';
-import { UserService } from 'src/app/services/user.service';
-import { AuthService } from 'src/app/services/auth.service';
+import { Subscription } from "rxjs";
+import { distinctUntilChanged } from "rxjs/operators";
+import { UserService } from "src/app/services/user.service";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-dialog-user",
@@ -11,17 +18,20 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ["./dialog-user.component.scss"]
 })
 export class DialogUserComponent implements OnInit, OnDestroy {
-
   constructor(
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private user: UserService,
     private auth: AuthService
-  ) {}
+  ) {
+  }
 
   @Output() state = new EventEmitter();
   @Output() comunications = new EventEmitter();
   @Output() verified = new EventEmitter();
+  @Output() IdentificationCard1 = new EventEmitter();
+  @Output() IdentificationCard2 = new EventEmitter();
+  @Output() bankCertificate = new EventEmitter();
   isLoggedIn: any;
   private subscription: Subscription = new Subscription();
   idAdmin: string;
@@ -38,6 +48,18 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     this.verified.emit(event);
   }
 
+  IdentificationCard1Download() {
+    this.IdentificationCard1.emit(event);
+  }
+
+  IdentificationCard2Download() {
+    this.IdentificationCard2.emit(event);
+  }
+
+  bankCardDownload() {
+    this.bankCertificate.emit(event);
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -50,16 +72,17 @@ export class DialogUserComponent implements OnInit, OnDestroy {
      */
 
     if (this.isLoggedIn) {
-      this.subscription = this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
-        if (!!val) {
-          this.idAdmin = val.userId;
-        }
-      });
+      this.subscription = this.user.userInfo$
+        .pipe(distinctUntilChanged())
+        .subscribe(val => {
+          if (!!val) {
+            this.idAdmin = val.userId;
+          }
+        });
     }
   }
 
   ngOnDestroy(): void {
-   this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
-
 }

@@ -138,7 +138,7 @@ export class OffersComponent implements OnInit {
     const showshowTitle = false;
     const buttonClose = "Cerrar";
     const offers = true;
-    this.plu = "";
+    this.plu = offer.title;
     this.business = offer.business;
     this.dialog.open(DialogComponent, {
       data: {

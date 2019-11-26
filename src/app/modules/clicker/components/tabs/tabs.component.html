@@ -26,15 +26,15 @@
               fxFlex.xs="50"
               fxFlex.sm="33"
               fxFlex.gt-sm="25"
-              *ngFor="let product of productsList; let i = index"
+              *ngFor="let product of productsList;let i = index;"
             >
               <app-product
                 id="productTitle{{ i }}"
                 btnid="btnLink{{ i }}"
                 [productName]="product.productName"
-                [discount]="
-                  product.items[0].sellers[0].commertialOffer.ListPrice
-                "
+                [discount]="product.items[0].sellers[0].commertialOffer.ListPrice"
+                [aliance]="totalPriceArrays[i]"
+                [logo]="imgLogoAliance[i]"
                 [price]="product.items[0].sellers[0].commertialOffer.Price"
                 productDescription=""
                 [image]="product.items[0].images[0].imageUrl"
@@ -121,11 +121,33 @@
   </mat-tab-group>
 </div>
 
+<!-- categorias -->
+<h3>{{ 'GENERIC.CATEGORIES' | translate }}</h3>
+<ngx-slick-carousel class="carousel" 
+                        #slickModal="slick-carousel" 
+                        [config]="slideConfig" 
+                      >
+<div ngxSlickItem  *ngFor="let category of categories; let i = index" class="slide">
+<div fxLayout="row wrap">
+      <app-product
+        id="category{{i}}"
+        [categoryName]="category.description"
+        [photo]="category.imageurl"
+        category="true"
+        home
+        (infoProduct)="dataCategory(category)"
+      ></app-product>
+    </div>
+  </div>
+</ngx-slick-carousel>
+
 <!-- template bottomsheet -->
 
 <ng-template #templateDialog>
+  <div *ngIf="!reference">
   <form [formGroup]="formLink">
-    <div fxLayout="column">
+    <div fxLayout="row" fxLayoutGap="20px"> 
+    <div fxLayout="column" fxFlex="90">
       <mat-form-field appearance="dashed" class="dashed mt-2">
         <input
           id="url"
@@ -137,20 +159,19 @@
         />
       </mat-form-field>
     </div>
-    <div fxLayout="column">
+    <div fxLayout="column" fxFlex="10" class="mt-2">
       <button
-        mat-raised-button
+        mat-mini-fab
         id="btnCopy"
         color="orange"
-        class="button button-100 p-1"
         (click)="copyInputMessage(linkInput)"
       >
         <span fxLayoutAlign="space-between center">
-          <span class="pl-3">{{ "GENERIC.COPY_LINK" | translate }}</span>
-          <mat-icon matSuffix class="mr-3">link</mat-icon>
+          <mat-icon matSuffix>link</mat-icon>
         </span>
       </button>
     </div>
+  </div>
   </form>
 
   <div id="share">
@@ -174,6 +195,130 @@
       theme="circles-dark"
     ></share-button>
   </div>
+  <p>{{'GENERIC.REFERENCE_TEXT' | translate}}</p>
+  <button mat-raised-button class="orange-border mb-2" color="primary" id="reference" (click)="showReference()">{{'GENERIC.REFERENCE' | translate}}</button>
+</div>
+  <br>
+  <form class="forgotpassword-container" [formGroup]="idCustomerForm" fxLayout="column" *ngIf="reference">
+      <p>{{'GENERIC.REFERENCE_IDENTIFICATION' | translate}}</p>
+      <mat-form-field appearance="outline" class="mt-2">
+        <input
+          matInput
+          class="p-2"
+          id="idcustomer"
+          type="text"
+          placeholder="N° de Documento"
+          formControlName="identification"
+          required
+        />
+        <mat-error
+        id="reuiredId"
+        *ngIf="
+          idCustomerForm.controls.identification.invalid &&
+          idCustomerForm.controls.identification.errors.required
+        "
+        >{{
+          "GENERIC.REQUIRED" | translate: { formValue: "Número de documento" }
+        }}</mat-error
+      >
+    
+      <mat-error
+        id="maxId"
+        *ngIf="
+          idCustomerForm.controls.identification.invalid &&
+          idCustomerForm.controls.identification.errors.maxlength
+        "
+        >{{
+          "GENERIC.MAX_CHARACTERS"
+            | translate
+              : {
+                  maxchar:
+                    idCustomerForm.controls.identification.errors.maxlength.requiredLength
+                }
+        }}</mat-error
+      >
+    
+      <mat-error
+        id="numberId"
+        *ngIf="
+          idCustomerForm.controls.identification.invalid &&
+          idCustomerForm.controls.identification.errors.pattern
+        "
+        >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+      >
+      </mat-form-field>
+    
+      <div fxLayout="column">
+      <button
+        mat-raised-button
+        class="button button-100 p-1"
+        id="recoverPassword"
+        color="orange"
+        (click)="saveLinkReference()"
+        [disabled]="!idCustomerForm.valid"
+      >
+       {{ "GENERIC.ACCEPT" | translate }}
+      </button>
+     </div>
+    </form>
+
+</ng-template>
+
+<!-- template categories -->
+
+<ng-template #templateCategories>
+  <div *ngIf="!reference">
+  <form [formGroup]="formLink">
+    <div fxLayout="row" fxLayoutGap="20px"> 
+    <div fxLayout="column" fxFlex="90">
+      <mat-form-field appearance="dashed" class="dashed mt-2">
+        <input
+          id="url"
+          matInput
+          formcontrolName="link"
+          [value]="urlshorten"
+          #linkInput
+          readonly
+        />
+      </mat-form-field>
+    </div>
+    <div fxLayout="column" fxFlex="10" class="mt-2">
+      <button
+        mat-mini-fab
+        id="btnCopy"
+        color="orange"
+        (click)="copyInputMessage(linkInput)"
+      >
+        <span fxLayoutAlign="space-between center">
+          <mat-icon matSuffix>link</mat-icon>
+        </span>
+      </button>
+    </div>
+  </div>
+  </form>
+
+  <div id="share">
+    <h3 class="border-bottom-orange-init">{{ "GENERIC.SHARE" | translate }}</h3>
+    <share-button
+      id="facebook"
+      [url]="urlshorten"
+      button="facebook"
+      theme="circles-dark"
+    ></share-button>
+    <share-button
+      id="twitter"
+      [url]="urlshorten"
+      button="twitter"
+      theme="circles-dark"
+    ></share-button>
+    <share-button
+      id="whatsapp"
+      [url]="urlshorten"
+      button="whatsapp"
+      theme="circles-dark"
+    ></share-button>
+  </div>
+</div>
 </ng-template>
 
 <!-- template bottomsheet -->
@@ -251,34 +396,34 @@
     
     <div *ngIf="showForm">
       <form [formGroup]="formLink">
-        <div fxLayout="column">
-          <mat-form-field appearance="dashed" class="dashed mt-2">
-            <input
-              id="url"
-              matInput
-              formcontrolName="link"
-              [value]="urlshorten"
-              #linkInput
-              readonly
-            />
-          </mat-form-field>
+          <div fxLayout="row" fxLayoutGap="20px"> 
+          <div fxLayout="column" fxFlex="90">
+            <mat-form-field appearance="dashed" class="dashed mt-2">
+              <input
+                id="url"
+                matInput
+                formcontrolName="link"
+                [value]="urlshorten"
+                #linkInput
+                readonly
+              />
+            </mat-form-field>
+          </div>
+          <div fxLayout="column" fxFlex="10" class="mt-2">
+            <button
+              mat-mini-fab
+              id="btnCopy"
+              color="orange"
+              (click)="copyInputMessage(linkInput)"
+            >
+              <span fxLayoutAlign="space-between center">
+                <mat-icon matSuffix>link</mat-icon>
+              </span>
+            </button>
+          </div>
         </div>
-      </form>
+        </form>
 
-      <div fxLayout="column">
-        <button
-          mat-raised-button
-          id="btnCopy"
-          color="orange"
-          class="button button-100 p-1"
-          (click)="copyInputMessage(linkInput)"
-        >
-          <span fxLayoutAlign="space-between center">
-            <span class="pl-3">{{ "GENERIC.COPY_LINK" | translate }}</span>
-            <mat-icon matSuffix class="mr-3">link</mat-icon>
-          </span>
-        </button>
-      </div>
       <h3 class="border-bottom-orange-init">
         {{ "GENERIC.SHARE" | translate }}
       </h3>

@@ -1,8 +1,51 @@
-<div fxLayout="row" >
-    <h2 class="border-bottom-orange-init">{{ "PROFILE.PROFILE" | translate }}</h2>
+<div>
+
+<h3 class="gray border-left-orange">{{ "PROFILE.PERSONAL_INFO" | translate }}</h3>
+
+<mat-card class="p-0">
+  <span fxLayout="row"  fxLayout.xs="column" fxLayoutGap="80px" fxLayoutGap.xs="0px" class="item">
+    <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{ 'GENERIC.NAME' | translate }}</label>
+    <span class="info" fxLayout="column" fxLayout.xs="row" fxFLex="70" fxFLex.xs="0">{{name}}</span>
+  </span>
+  <span fxLayout="row"  fxLayout.xs="column" fxLayoutGap="80px" fxLayoutGap.xs="0px" class="item">
+    <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{ 'GENERIC.LASTNAME' | translate }}</label>
+    <span class="info" fxLayout="column" fxLayout.xs="row" fxFLex="70" fxFLex.xs="0">{{lastName}}</span>
+  </span>
+  <span fxLayout="row"  fxLayout.xs="column" fxLayoutGap="80px" fxLayoutGap.xs="0px" class="item">
+    <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{ 'GENERIC.EMAIL' | translate }}</label>
+    <span class="info" fxLayout="column" fxLayout.xs="row" fxFLex="70" fxFLex.xs="0">{{email}}</span>
+  </span>
+  <span fxLayout="row"  fxLayout.xs="column" fxLayoutGap="80px" fxLayoutGap.xs="0px" class="item" *ngIf="address !== ''">
+    <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{ 'GENERIC.ADDRESS' | translate }}</label>
+    <span class="info" fxLayout="column" fxLayout.xs="row" fxFLex="70" fxFLex.xs="0">{{address}}</span>
+  </span>
+  <span fxLayout="row"  fxLayout.xs="column" fxLayoutGap="80px" fxLayoutGap.xs="0px" class="item">
+    <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{ 'GENERIC.CELLPHONE' | translate }}</label>
+    <span class="info" fxLayout="column" fxLayout.xs="row" fxFLex="70" fxFLex.xs="0">{{phone}}</span>
+  </span>
+  <span fxLayout="row"  fxLayout.xs="column" fxLayoutGap="80px" fxLayoutGap.xs="0px" class="item">
+    <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{ 'GENERIC.DOCUMENT'  | translate }}</label>
+    <span class="info" fxLayout="column" fxLayout.xs="row" fxFLex="70" fxFLex.xs="0">{{id}}</span>
+  </span>
+</mat-card>
+
+<div *ngIf="isEmployee === false">
+  <h3 class="gray border-left-orange pt-3">{{ "PROFILE.ACOUNT_INFO" | translate }}</h3>
+
+  <mat-card class="p-0 mb-3">
+    <span fxLayout="row"  fxLayout.xs="column" fxLayoutGap="80px" fxLayoutGap.xs="0px" class="item">
+      <label fxLayout="column" fxFLex="50">{{ 'REGISTER.BANK' | translate }}</label>
+      <span class="info" fxLayout="column" fxLayout.xs="row" fxFLex="70" fxFLex.xs="0">{{bank}}</span>
+    </span>
+    <span fxLayout="row"  fxLayout.xs="column" fxLayoutGap="80px" fxLayoutGap.xs="0px" class="item">
+      <label>{{ 'REGISTER.ACCOUNT' | translate }}</label>
+      <div class="info"> <span *ngIf="typeBankAccount === '1'"> Ahorros </span> <span *ngIf="typeBankAccount === '2'"> Corriente </span>  - {{bankAccountNumber}}</div>
+    </span>
+  </mat-card>
 </div>
-<div fxLayout="row" >
-<form [formGroup]="profileForm" fxLayout="column" fxFlex="50" >
+</div>
+<!-- <div fxLayout="row" class="border-rad">
+<form [formGroup]="profileForm" fxLayout="column" fxFlex="100" class="mat-elevation-z1">
   <mat-form-field>
     <input
       matInput
@@ -54,4 +97,4 @@
     />
   </mat-form-field>
 </form>
-</div>
+</div> -->

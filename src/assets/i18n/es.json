@@ -8,7 +8,9 @@
     "NAME": "Nombres",
     "LASTNAME": "Apellidos",
     "CELLPHONE": "Celular",
+    "ADDRESS": "Dirección",
     "DOCUMENT_NUMBER": "Número de documento",
+    "DOCUMENT": "Documento",
     "REQUIRED": "El campo {{formValue}} es requerido",
     "NEXT": "Siguiente",
     "REGISTER": "Regístro",
@@ -21,12 +23,18 @@
     "SAVE": "Guardar",
     "CANCEL": "Cancelar",
     "SEARCH": "Buscar",
+    "ACCEPT": "Aceptar",
     "WHITE_SPACES": "No se permite más de un espacio en blanco",
     "PASSWORD_PATTERN": "la contraseña debe contener al menos una letra minúscula, una letra mayúscula un número y un carácter especial",
     "SHARE": "Compartir directamente en:",
     "COPY_LINK": "Copiar link",
     "INVALID_FORMAT_FILE": "Formato inválido solo se pueden subir archivos con la extensión xlsx, xls",
-    "CUSTOMER_ID": "Ingrese la cédula del tomador del seguro"
+    "INVALID_FORMAT_FILE_REGISTER": "Formato inválido solo se pueden subir archivos con la extensión JPG, PDF",
+    "CUSTOMER_ID": "Ingrese la cédula del tomador del seguro",
+    "CATEGORIES": "Categorías",
+    "REFERENCE_TEXT": "O puedes referenciar a un cliente con su número de cédula",
+    "REFERENCE": "Referenciar",
+    "REFERENCE_IDENTIFICATION": "Ingresa la cédula del cliente a referir"
   },
   "LOGIN": {
     "LOGIN": "Iniciar sesión",
@@ -44,7 +52,26 @@
     "TITLE_TERMS_AND_CONDITIONS": "TÉRMINOS Y CONDICIONES DE  LA LEY HABEAS DATA",
     "PASSWORD_NOT_MATCH": "Las contraseñas no son iguales",
     "ID_TYPE": "Seleccionar documento",
-    "HAVE_ACCOUNT": "Si ya tienes una cuenta puedes"
+    "HAVE_ACCOUNT": "Si ya tienes una cuenta puedes",
+    "INFO_HOME": "Información domiciliaria",
+    "DEPARTMENT": "Departamento",
+    "CITY": "Ciudad",
+    "ADDRESS": "Dirección",
+    "ACOUNT_INFO": "Información bancaria",
+    "BANK": "Banco",
+    "TYPE_ACCOUNT": "Tipo de cuenta",
+    "NUMBER_ACCOUNT": "Número de cuenta",
+    "ACCOUNT": "Cuenta",
+    "ADITIONAL_FILE": "Archivos adicionales",
+    "INFO_ADDITIONAL": "Los siguientes documentos son necesarios para poder verificar tu cuenta y que empieces a recibir tus comisiones.",
+    "INFO_ADDITIONAL_2": " Puedes adjuntarlos ahora o más adelante desde tu página de perfil.",
+    "INFO_ADDITIONAL_3": "Adjunta los siguientes documentos para poder verificar tu cuenta y que empieces a recibir tus comisiones.",
+    "CED1": "Cédula pag 1",
+    "CED2": "Cédula pag 2",
+    "ACCOUNT_CERT": "Certificación bancaria",
+    "NO_FILE": "Ningún archivo seleccionado",
+    "ERROR_DEPARTMENT": "Selecciona un departamento",
+    "ERROR_CITY": "Selecciona una ciudad"
   },
   "FORGOTPASSWORD": {
     "FORGOT_PASSWORD": "Recuperar contraseña",
@@ -144,7 +171,11 @@
     "PROTECTION": "<h2 class='border-bottom-orange-init'>Autorización para el tratamiento de datos personales de referidos</h2><p>Autorizo a MARKETPLACE INTERNACIONAL ÉXITO Y SERVICIOS S.A.S y a ALMACENES ÉXITO S.A. para que traten mis datos personales suministrados en la presente plataforma virtual con los siguientes fines:</p><ol><li>Cumplir las obligaciones derivadas de las relaciones contractuales que llegare a establecer conmigo; otorgarme garantía sobre productos adquiridos cuando ello proceda; e informarme sobre condiciones comerciales y servicios postventa, entre otras acciones derivadas del negocio que celebremos.</li><li>Realizar trazabilidad de las acciones asociadas a su participación en esta aplicación, generando reporte y estadísticas sobre la misma.</li><li>Realizar acciones de inteligencia de negocios, creación de ofertas a la medida, investigación y tendencias de mercado; identificar trazabilidad y patrones de consumo con fines estadísticos; entendimiento de perfiles, rutas de navegación, seguimiento de marcas y demás comportamientos en redes sociales.</li><li>Contactarme a través de diversos canales físicos y electrónicos, como pueden ser volantes, contacto telefónico, mensajes de texto, correo electrónico, o cualquier otro por mi autorizado, para invitarme a participar del programa de lealtad; comunicarme promociones y publicidad sobre productos, bienes y servicios, así como enviarme obsequios por campañas publicitarias, e invitaciones a eventos de interés relacionados.</li><li>Entregarlos a sus empresas filiales, subsidiarias, sociedades en las cuales tenga directa o indirectamente participación accionaria, a sus aliados estratégicos y socios de negocio, así como al Grupo Casino, para las finalidades aquí mencionadas, en relación con su vínculo comercial con ALMACENES ÉXITO S.A. y MARKETPLACE INTERNACIONAL ÉXITO Y SERVICIOS S.A.S.</li><li>Entregarlos a terceros encargados de alguno de los tratamientos aquí mencionados, en Colombia o en el exterior.</li><li>Entregarlos a la compañía administradora de su programa de lealtad, PUNTOS COLOMBIA S.A.S., para que además esta me invite a participar en la totalidad de beneficios que ofrecerá su ecosistema de puntos y aliados. Consultarlos en bases de datos con vocación pública para la gestión de riesgos.</li><li>En relación con los datos biométricos que MARKETPLACE INTERNACIONAL ÉXITO Y SERVICIOS S.A.S y ALMACENES ÉXITO S.A. te llegare a solicitar, tales como la huella dactilar, fotografías, entre otros, te recordamos el carácter facultativo de la respuesta a las solicitudes que te hagamos en relación con tales datos.</li></ol><p>Consulta nuestra política de protección de datos personales en <a href='www.grupoexito.com.co' target='_blank'>www.grupoexito.com.co</a> y ten presente que entre los canales para el ejercicio de tus derechos de habeas data a consultar, actualizar, corregir, rectificar, suprimir tus datos o revocar tu autorización, tenemos a tu disposición el correo electrónico proteccion.datos@grupo-exito.com</p>"
   },
   "PROFILE": {
-    "PROFILE": "Perfil"
+    "PROFILE": "Perfil",
+    "PERSONAL_INFO": "Información personal",
+    "ACOUNT_INFO": "Información bancaria",
+    "ADITIONAL_FILE": "Archivos adicionales",
+    "INFO_ADDITIONAL": "Los siguientes documentos son necesarios para poder verificar tu cuenta y que empieces a recibir tus comisiones."
   },
   "UNDER_CONSTRUCTION": {
     "SORRY": "Discúlpanos, está página esta en construcción"
@@ -155,8 +186,10 @@
     "DOWNLOAD_REPORT": "Descarga el reporte de ventas",
     "DOWNLOAD": "Descargar",
     "CROSS": "Cruzar ventas",
+    "DATE_ERROR": "La fecha final no puede ser menor a la fecha inicial",
     "UPLOAD": "Sube los archivos de cada negocio por separado.",
     "TRIPS": "VENTAS VIAJES",
+    "SELLS": "VENTAS",
     "ASSURED": "VENTAS SEGUROS",
     "HISTORICAL": "Historial pagos",
     "DATE": "FECHA",

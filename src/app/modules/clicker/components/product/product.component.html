@@ -10,14 +10,22 @@
   </div>
     <h3 [fxShow.gt-xs]="false" class="title" id="{{ id }}"  matTooltip={{productName}}>{{ productName | truncate: '20' }}</h3>
     <h3 [fxShow.xs]="false" class="title" id="{{ id }}"  matTooltip={{productName}}>{{ productName | truncate: '50' }}</h3>
-    <p>
+    <p class="prices">
       <span *ngIf="price !== 0">
-        <span class="d-block discount text-line small">
+        <span *ngIf="discount !== price" class="d-block discount text-line small">
           {{ discount | currency : '' : 'symbol' : '1.0-0' }}
         </span>
+        
+        <!-- <span class="d-block discount discount-aliance" *ngIf="aliance !== discount">
+          {{ aliance | currency : '' : 'symbol' : '1.0-0' }}
+          <img *ngIf="logo !== ''" class="logo-aliance" [src]="logo" alt="logo">
+        </span> -->
+
           <span class="d-block discount">
             {{ price | currency : '' : 'symbol' : '1.0-0' }}
           </span>
+
+
       </span>
       <span *ngIf="price === 0">
         <span class="badge-product">
@@ -25,9 +33,6 @@
         </span>
         <span class="min-18">
         </span>
-        <!-- <span class="d-block discount font">
-          {{aliance * price  | currency : '' : 'symbol' : '1.0-0'}}
-        </span> -->
       </span>
     </p>
     <p>
@@ -86,3 +91,13 @@
     </span>
   </mat-card-content>
 </mat-card>
+
+<mat-card class="mat-elevation-z0 border-rad puff-in-center p-0 pr-3" *ngIf="category">
+    <mat-card-content fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap="10px" fxLayoutAlign.xs="center center" class="category border-rad">
+      <span class="border-rad" fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
+        <img [src]="photo" class="img-responsive border-rad">
+            <h3 (click)="product()" class="m-0 white absolute size" id="{{ id }}">{{ categoryName }}</h3>
+      </span>
+    </mat-card-content>
+  </mat-card>
+

@@ -192,7 +192,7 @@ h2 {
 }
 
 button {
-  border-radius: 10px !important;
+  border-radius: 10px;
   // max-width: 162px;
   // width: 155px;
   font-family: $font-family-base !important;
@@ -312,6 +312,7 @@ button {
   border-radius: 0px !important;
   .mat-card-image {
     margin: 0 auto !important;
+    height: 100%;
   }
 }
 
@@ -322,6 +323,15 @@ button {
 
 .responsive-img {
   max-width: 100%;
+}
+
+img{
+  border-radius: 10px;
+}
+
+.mat-card-image:first-child{
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;;
 }
 
 .title {
@@ -343,7 +353,11 @@ button {
 }
 
 #share button {
-  width: auto;
+  // width: auto;
+}
+
+.mat-mini-fab{
+  border-radius: 50% !important;
 }
 
 .sb-circles-dark .sb-wrapper.sb-facebook .sb-icon,
@@ -665,4 +679,12 @@ th.mat-header-cell {
 .slick-track {
   margin-left: 0 !important;
   margin-right: 0 !important;
+}
+
+.mat-calendar-table-header{
+  background: none;
+}
+
+.mat-calendar-body-selected {
+  background-color:$primary-color !important;
 }
