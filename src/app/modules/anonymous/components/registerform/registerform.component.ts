@@ -244,7 +244,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
 
   private getExtension(nameFile: string) {
     let splitExt = nameFile.split(".");
-    let getExt = splitExt[1].toLocaleLowerCase();
+    let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
     this.validFormat = false;
     if (getExt === "jpg" ||  getExt === "jpeg" ||  getExt === "pdf") {
       this.validFormat = true;
@@ -339,10 +339,10 @@ export class RegisterformComponent implements OnInit, OnDestroy {
         this.loading.hide();
         if (resp.state === "Success") {
           Swal.fire({
-            title: "Registro válido",
-            text:
-              "Se ha registrado satisfactoriamente. Por favor, revise su correo para activar su cuenta.",
-            type: "success",
+          
+              html: `
+              Por favor, <b>revisa tu correo</b> para activar tu cuenta.
+              `,
             confirmButtonText: "Aceptar",
             confirmButtonClass: "accept-register-alert-success"
           }).then(() => {

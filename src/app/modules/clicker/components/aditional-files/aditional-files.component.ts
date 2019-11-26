@@ -96,7 +96,7 @@ export class AditionalFilesComponent implements OnInit {
 
   private getExtension(name: string) {
     let splitExt = name.split(".");
-    let getExt = splitExt[1].toLocaleLowerCase();
+    let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
     this.files.validFormat = false;
     if (getExt === "jpg" || getExt === "pdf" || getExt === "jpeg") {
       this.files.validFormat = true;
