@@ -1,4 +1,4 @@
-<mat-card class="mat-elevation-z0 card-product puff-in-center" *ngIf="exito">
+<mat-card class="mat-elevation-z0 card-product puff-in-center" *ngIf="exito && price !== 0">
   <mat-card-content>
   <div class="img-container-2">
     <img
@@ -11,29 +11,28 @@
     <h3 [fxShow.gt-xs]="false" class="title" id="{{ id }}"  matTooltip={{productName}}>{{ productName | truncate: '20' }}</h3>
     <h3 [fxShow.xs]="false" class="title" id="{{ id }}"  matTooltip={{productName}}>{{ productName | truncate: '50' }}</h3>
     <p class="prices">
-      <span *ngIf="price !== 0">
+      <span>
         <span *ngIf="discount !== price" class="d-block discount text-line small">
           {{ discount | currency : '' : 'symbol' : '1.0-0' }}
         </span>
         
-        <!-- <span class="d-block discount discount-aliance" *ngIf="aliance !== discount">
+        <span class="d-block discount discount-aliance" *ngIf="aliance !== discount">
           {{ aliance | currency : '' : 'symbol' : '1.0-0' }}
           <img *ngIf="logo !== ''" class="logo-aliance" [src]="logo" alt="logo">
-        </span> -->
+        </span>
 
           <span class="d-block discount">
             {{ price | currency : '' : 'symbol' : '1.0-0' }}
           </span>
-
-
       </span>
-      <span *ngIf="price === 0">
+
+      <!-- <span *ngIf="price === 0">
         <span class="badge-product">
           Producto no disponible
         </span>
         <span class="min-18">
         </span>
-      </span>
+      </span> -->
     </p>
     <p>
       <span class="plu"> PLU:{{ plu }} </span>

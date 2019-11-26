@@ -91,9 +91,9 @@ export class TabsComponent extends MatPaginatorIntl
   showNotFound: boolean;
   paginate: string;
   totalItems: number;
-  pageSize: number = 6;
-  pageTo: number = 6;
-  pageSizeOptions: number[] = [6, 12, 24, 50];
+  pageSize: number = 50;
+  pageTo: number = 50;
+  pageSizeOptions: number[] = [50];
   url: string;
   urlshorten: string;
   formLink: FormGroup;
@@ -215,11 +215,14 @@ export class TabsComponent extends MatPaginatorIntl
    *
    */
 
-  public searchProductPaginate(term: string, from = 1, to = this.pageTo) {
+  public searchProductPaginate(term: any, from = 1, to = this.pageTo) {
     if (term !== this.paginate) {
       this.paginate = term;
       this.pageIndex = 0;
     }
+
+    console.log(isNaN(term));
+
     const params = { term, from, to };
     this.loading.show();
     this.subscription = this.sp.getProductsPagination(params).subscribe(
