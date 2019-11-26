@@ -1,5 +1,5 @@
 <div class="container">
     <h2 class="border-bottom-orange-init">{{ "PROFILE.PROFILE" | translate }}</h2>
     <app-profile-form></app-profile-form>
-    <app-aditional-files (uploadFile)="sendFiles($event)" (resetForm)="reset($event)"></app-aditional-files>
+    <app-aditional-files *ngIf="verified === false" (uploadFile)="sendFiles($event)" (resetForm)="reset($event)"></app-aditional-files>
 </div>

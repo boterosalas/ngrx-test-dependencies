@@ -339,11 +339,11 @@ export class RegisterformComponent implements OnInit, OnDestroy {
         this.loading.hide();
         if (resp.state === "Success") {
           Swal.fire({
-          
+              title:'Revisa tu correo',
               html: `
-              Por favor, <b>revisa tu correo</b> para activar tu cuenta.
+              Activa tu cuenta siguiendo el enlace </br> que enviamos a tu correo.
               `,
-            confirmButtonText: "Aceptar",
+            confirmButtonText: "Volver al inicio",
             confirmButtonClass: "accept-register-alert-success"
           }).then(() => {
             this.utils.hideloginForm();
