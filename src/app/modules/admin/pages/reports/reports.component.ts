@@ -1,4 +1,12 @@
-import { Component, OnInit, ViewChild, TemplateRef, ElementRef, ChangeDetectorRef, OnDestroy } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  TemplateRef,
+  ElementRef,
+  ChangeDetectorRef,
+  OnDestroy
+} from "@angular/core";
 import { LinksService } from "src/app/services/links.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "src/app/services/auth.service";
@@ -6,9 +14,9 @@ import { distinctUntilChanged } from "rxjs/operators";
 import { UserService } from "src/app/services/user.service";
 import Swal from "sweetalert2";
 import { ResponseService } from "src/app/interfaces/response";
-import { LoaderService } from 'src/app/services/loader.service';
-import { Subscription } from 'rxjs';
-import { ValidateDate } from 'src/app/validators/validate-date.validators';
+import { LoaderService } from "src/app/services/loader.service";
+import { Subscription } from "rxjs";
+import { ValidateDate } from "src/app/validators/validate-date.validators";
 
 @Component({
   selector: "app-reports",
@@ -18,7 +26,6 @@ import { ValidateDate } from 'src/app/validators/validate-date.validators';
 export class ReportsComponent implements OnInit, OnDestroy {
   @ViewChild("templateCardReport, templateCardCross", { static: false })
   // @ViewChild('input',{ static: false }) input: ElementRef;
-
   template: TemplateRef<any>;
 
   fileUrl: string;
@@ -33,10 +40,11 @@ export class ReportsComponent implements OnInit, OnDestroy {
   isLoggedIn: any;
   userName: string;
   tmpPath: string;
-  EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+  EXCEL_TYPE =
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
   private subscription: Subscription = new Subscription();
   maxDate = new Date();
-  
+
   constructor(
     private file: LinksService,
     private fb: FormBuilder,
@@ -60,16 +68,15 @@ export class ReportsComponent implements OnInit, OnDestroy {
       file: [null]
     });
 
-    this.dateForm = this.fb.group({
-      dateStart: ['', Validators.required],
-      dateEnd: ['', Validators.required],
-    },
-    {
-      validator: [
-       ValidateDate.CompareDates
-      ]
-    }
-    )
+    this.dateForm = this.fb.group(
+      {
+        dateStart: ["", Validators.required],
+        dateEnd: ["", Validators.required]
+      },
+      {
+        validator: [ValidateDate.CompareDates]
+      }
+    );
 
     /**
      * verifica si el usuario esta logueado y se obtiene la identificacion
@@ -77,11 +84,13 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
     this.isLoggedIn = this.auth.isLoggedIn();
     if (this.isLoggedIn) {
-     this.subscription = this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
-        if (!!val) {
-          this.userName = val.email;
-        }
-      });
+      this.subscription = this.user.userInfo$
+        .pipe(distinctUntilChanged())
+        .subscribe(val => {
+          if (!!val) {
+            this.userName = val.email;
+          }
+        });
     }
   }
 
@@ -94,11 +103,13 @@ export class ReportsComponent implements OnInit, OnDestroy {
   public onFileChangeTrip(event) {
     this.nameFile = event.target.files[0].name;
     let reader = new FileReader();
-    
+
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      let fileBlob = new Blob([file], {type: this.EXCEL_TYPE} )
-      let file2 = new File(([fileBlob]), this.nameFile, { type: this.EXCEL_TYPE });
+      let fileBlob = new Blob([file], { type: this.EXCEL_TYPE });
+      let file2 = new File([fileBlob], this.nameFile, {
+        type: this.EXCEL_TYPE
+      });
       reader.readAsDataURL(file2);
 
       reader.onload = () => {
@@ -149,35 +160,35 @@ export class ReportsComponent implements OnInit, OnDestroy {
   }
 
   private sendFileTrip() {
-    let fileSplit = this.fileForm.controls.file.value.file.split(',');
-    let file =  fileSplit[1];
+    let fileSplit = this.fileForm.controls.file.value.file.split(",");
+    let file = fileSplit[1];
     let data = {
-      fileBase64:file,
+      fileBase64: file,
       email: this.userName
     };
     this.loading.show();
     this.subscription = this.file.sendfile(data).subscribe(
       (res: ResponseService) => {
         this.loading.hide();
-        if(res.state !== 'Error') {
+        if (res.state !== "Error") {
           Swal.fire({
             title: "Carga exitosa",
             text: res.userMessage,
             type: "success",
             confirmButtonText: "Aceptar",
             confirmButtonClass: "upload-success"
-          }).then(()=> {
-            this.nameFile ="";
+          }).then(() => {
+            this.nameFile = "";
           });
         } else {
           Swal.fire({
-            title: 'Error en la Carga',
+            title: "Error en la Carga",
             text: res.userMessage,
             type: "error",
             confirmButtonText: "Aceptar",
             confirmButtonClass: "upload-error"
-          }).then(()=> {
-            this.nameFile ="";
+          }).then(() => {
+            this.nameFile = "";
           });
         }
       },
@@ -189,13 +200,13 @@ export class ReportsComponent implements OnInit, OnDestroy {
           type: "error",
           confirmButtonText: "Aceptar",
           confirmButtonClass: "upload-invalid"
-        }).then(()=> {
-          this.nameFile ="";
+        }).then(() => {
+          this.nameFile = "";
         });
       }
     );
   }
- 
+
   // private sendFileAssured() {
   //   let fileSplit = this.fileFormAssured.controls.file.value.file.split(',');
   //   let file =  fileSplit[1];
@@ -248,25 +259,28 @@ export class ReportsComponent implements OnInit, OnDestroy {
     let dates = {
       dateStart: this.dateForm.controls.dateStart.value,
       dateEnd: this.dateForm.controls.dateEnd.value
-    }
-   this.file.downloadReferrals(dates).subscribe( (resp:ResponseService) => {
+    };
+    this.file.downloadReferrals(dates).subscribe((resp: ResponseService) => {
       let file = resp.objectResponse;
-      let contentType = 'application/vnd.ms-excel'
+      let contentType = "application/vnd.ms-excel";
       const linkSource = `data:${contentType};base64,${file}`;
       const downloadLink = document.createElement("a");
       const fileName = `reporte.xlsx`;
-  
+
       downloadLink.href = linkSource;
       downloadLink.download = fileName;
       downloadLink.click();
       this.dateForm.reset();
-      this.dateForm.controls.dateStart.setErrors(null);
-      this.dateForm.controls.dateEnd.setErrors(null);
-   });
+      this.dateForm.controls.dateStart.setValue("");
+      this.dateForm.controls.dateEnd.setValue("");
+      setTimeout(() => {
+        this.dateForm.controls.dateEnd.setErrors(null);
+        this.dateForm.controls.dateStart.setErrors(null);
+      });
+    });
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();  
+    this.subscription.unsubscribe();
   }
-
 }
