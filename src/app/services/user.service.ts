@@ -127,7 +127,7 @@ export class UserService {
   }
 
   public validateEmployee(id: string, document: string){
-    return this.http.get((`${this.urlEmployee}/validateEmployee?id=${id}&documentType=${document}`), this.httpOptions);
+    return this.http.get((`${this.urlEmployee}validateEmployee?id=${id}&documentType=${document}`), this.httpOptions);
   }
 
 
