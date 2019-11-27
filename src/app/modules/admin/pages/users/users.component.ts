@@ -224,7 +224,7 @@ export class UsersComponent extends MatPaginatorIntl
     let splitbase64 = base64.split(",");
     let file = splitbase64[1];
 
-    if (file.includes("/9j/")) {
+    if (file.startsWith('/9j/')) {
       this.ext = ".jpg";
       this.contentType = "image/jpeg";
     } else {

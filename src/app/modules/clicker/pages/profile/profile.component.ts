@@ -44,8 +44,11 @@ export class ProfileComponent implements OnInit {
 
  public reset(file) {
     file.nameFileCed1 = "";
-    file.nameFileCed2= "";
+    file.fileIdentificationCard1 = null;
+    file.nameFileCed2 = "";
+    file.fileIdentificationCard2 = null;
     file.nameFileCert = "";
+    file.fileBankCertificate = null;
   }
   
   public sendFiles(files) {
@@ -70,7 +73,7 @@ export class ProfileComponent implements OnInit {
           confirmButtonText: "Aceptar",
           confirmButtonClass: "upload-success"
         }).then(() => {
-          this.reset(files);
+           this.reset(files);
         })
       } else {
         Swal.fire({
