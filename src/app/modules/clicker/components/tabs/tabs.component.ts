@@ -97,6 +97,7 @@ export class TabsComponent extends MatPaginatorIntl
   url: string;
   urlshorten: string;
   formLink: FormGroup;
+  orderForm: FormGroup;
   identification: string;
   pageIndex: number = 0;
   isLoggedIn: any;
@@ -128,6 +129,7 @@ export class TabsComponent extends MatPaginatorIntl
   nameAliance: any;
   percentModal: any;
   reference: boolean;
+  orderOptions: any;
 
   slideConfig = {
     slidesToShow: 5,
@@ -179,6 +181,16 @@ export class TabsComponent extends MatPaginatorIntl
       ]
     });
 
+    this.orderForm = this.fb.group({
+        order: [{value: 'OrderByPriceDESC', description: 'Menor precio primero'}]
+    });
+
+    this.orderOptions = [
+      {description: 'Menor precio primero', value: 'OrderByPriceDESC'},
+      {description: 'Mayor precio primero', value: 'OrderByPriceASC'}
+    ]
+  
+
     /**
      * verifica si el usuario esta logueado y se obtiene la identificacion
      */
@@ -207,6 +219,10 @@ export class TabsComponent extends MatPaginatorIntl
     });
   }
 
+  public orderValue(val) {
+    console.log(val);
+  }
+
   /**
    * Metodo para buscar los productos paginados
    * @param term
@@ -220,8 +236,6 @@ export class TabsComponent extends MatPaginatorIntl
       this.paginate = term;
       this.pageIndex = 0;
     }
-
-    console.log(isNaN(term));
 
     const params = { term, from, to };
     this.loading.show();

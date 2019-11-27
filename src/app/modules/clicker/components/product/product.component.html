@@ -1,4 +1,4 @@
-<mat-card class="mat-elevation-z0 card-product puff-in-center" *ngIf="exito && price !== 0">
+<mat-card class="mat-elevation-z0 card-product puff-in-center" *ngIf="exito">
   <mat-card-content>
   <div class="img-container-2">
     <img
@@ -10,7 +10,7 @@
   </div>
     <h3 [fxShow.gt-xs]="false" class="title" id="{{ id }}"  matTooltip={{productName}}>{{ productName | truncate: '20' }}</h3>
     <h3 [fxShow.xs]="false" class="title" id="{{ id }}"  matTooltip={{productName}}>{{ productName | truncate: '50' }}</h3>
-    <p class="prices">
+    <p class="prices" *ngIf="price !== 0">
       <span>
         <span *ngIf="discount !== price" class="d-block discount text-line small">
           {{ discount | currency : '' : 'symbol' : '1.0-0' }}
@@ -26,13 +26,13 @@
           </span>
       </span>
 
-      <!-- <span *ngIf="price === 0">
+      <span *ngIf="price === 0">
         <span class="badge-product">
           Producto no disponible
         </span>
         <span class="min-18">
         </span>
-      </span> -->
+      </span>
     </p>
     <p>
       <span class="plu"> PLU:{{ plu }} </span>
