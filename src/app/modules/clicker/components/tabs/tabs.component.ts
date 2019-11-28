@@ -91,12 +91,13 @@ export class TabsComponent extends MatPaginatorIntl
   showNotFound: boolean;
   paginate: string;
   totalItems: number;
-  pageSize: number = 6;
-  pageTo: number = 6;
-  pageSizeOptions: number[] = [6, 12, 24, 50];
+  pageSize: number = 50;
+  pageTo: number = 50;
+  pageSizeOptions: number[] = [50];
   url: string;
   urlshorten: string;
   formLink: FormGroup;
+  orderForm: FormGroup;
   identification: string;
   pageIndex: number = 0;
   isLoggedIn: any;
@@ -128,6 +129,8 @@ export class TabsComponent extends MatPaginatorIntl
   nameAliance: any;
   percentModal: any;
   reference: boolean;
+  orderOptions: any;
+  orderValue:string;
 
   slideConfig = {
     slidesToShow: 5,
@@ -179,6 +182,16 @@ export class TabsComponent extends MatPaginatorIntl
       ]
     });
 
+    this.orderForm = this.fb.group({
+        order: ['']
+    });
+
+    this.orderOptions = [
+      {value: 'OrderByPriceDESC', description: 'Menor precio primero'},
+      {value: 'OrderByPriceASC', description: 'Mayor precio primero'}
+    ]
+  
+
     /**
      * verifica si el usuario esta logueado y se obtiene la identificacion
      */
@@ -207,6 +220,12 @@ export class TabsComponent extends MatPaginatorIntl
     });
   }
 
+  // order() {
+  //   this.orderForm.controls.order.valueChanges.subscribe((resp) => {
+  //     this.orderValue = resp;
+  //   })
+  // }
+
   /**
    * Metodo para buscar los productos paginados
    * @param term
@@ -215,12 +234,13 @@ export class TabsComponent extends MatPaginatorIntl
    *
    */
 
-  public searchProductPaginate(term: string, from = 1, to = this.pageTo) {
+public searchProductPaginate(term: any, from = 1, to = this.pageTo, order:string ='') {
     if (term !== this.paginate) {
       this.paginate = term;
       this.pageIndex = 0;
     }
-    const params = { term, from, to };
+
+    const params = { term, from, to, order };
     this.loading.show();
     this.subscription = this.sp.getProductsPagination(params).subscribe(
       (resp: any) => {

@@ -24,6 +24,7 @@ export class ContentService {
   apiOffers= 'offer/getOffers';
   apiCategories= 'offer/getCategories';
   apiProducts = 'product';
+  sendSearch = {};
 
   public getNews() {
     return this.http.get(`${this.url + this.apiNews}`, this.httpOptions).pipe(
@@ -65,9 +66,23 @@ export class ContentService {
     );
   }
 
-  public getProductsPagination(params: {term: string, from:number, to:number}){
-    const apiSearchVetex = `${this.apiProducts}/getProducts?ft=${params.term}&_from=${params.from}&_to=${params.to}&fq=1`
-    return this.http.get(`${this.url + apiSearchVetex}`, this.httpOptions).pipe(
+  // public getProductsPagination(params: {term: string, from:number, to:number}){
+  //   const apiSearchVetex = `${this.apiProducts}/getProducts?ft=${params.term}&_from=${params.from}&_to=${params.to}&fq=1`
+  //   return this.http.get(`${this.url + apiSearchVetex}`, this.httpOptions).pipe(
+  //     map((user: any) => {
+  //       return user.objectResponse;
+  //     })
+  //   );
+  // }
+
+  public getProductsPagination(params: {term: any, from:number, to:number, order: string}){
+    if(isNaN(params.term) === true) {
+      this.sendSearch = {parameters: `?ft=${params.term}&_from=${params.from}&_to=${params.to}&fq=sellerIds:1&O=${params.order}`};
+    } else {
+      this.sendSearch = {parameters: `?ft=${params.term}&fq=sellerIds:1`};
+    }
+    const apiSearchVetex = `${this.apiProducts}/getProducts`
+    return this.http.post(`${this.url + apiSearchVetex}`, this.sendSearch, this.httpOptions).pipe(
       map((user: any) => {
         return user.objectResponse;
       })

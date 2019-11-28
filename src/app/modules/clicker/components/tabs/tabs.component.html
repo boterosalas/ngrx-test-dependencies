@@ -8,6 +8,19 @@
     <!-- exito -->
     <mat-tab label="exito.com" id="exitoTab">
       <app-search (search)="searchProductPaginate($event)"></app-search>
+      <!-- <div class="order border-bottom-gray" fxLayout="row" fxLayoutAlign="flex-end center" *ngIf="showResults">
+        <form [formGroup]="orderForm">
+        <label class="mr-4">Ordenar por: </label>
+        <mat-form-field>
+          <mat-select formControlName="order">
+              <mat-option *ngFor="let option of orderOptions" value="{{option.value}}" (onSelectionChange)="searchProductPaginate()">
+                  <span>{{option.description}}</span></mat-option
+                >
+          </mat-select>
+        </mat-form-field>     
+
+      </form>
+      </div> -->
       <div *ngIf="showResults">
         <div class="row m-0">
           <mat-paginator
