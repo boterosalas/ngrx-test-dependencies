@@ -154,7 +154,7 @@ export class TabsComponent extends MatPaginatorIntl
         settings: {
           slidesToShow: 2,
           dots: false,
-          slidesToScroll: 5
+          slidesToScroll: 1
         }
       },
       {
