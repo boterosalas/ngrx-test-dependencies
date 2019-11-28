@@ -97,7 +97,6 @@ export class TabsComponent extends MatPaginatorIntl
   url: string;
   urlshorten: string;
   formLink: FormGroup;
-  orderForm: FormGroup;
   identification: string;
   pageIndex: number = 0;
   isLoggedIn: any;
@@ -131,8 +130,6 @@ export class TabsComponent extends MatPaginatorIntl
   reference: boolean;
   orderOptions: any;
   orderValue:string;
-  selected = 'Mayor precio primero';
-
   slideConfig = {
     slidesToShow: 5,
     slidesToScroll: 5,
@@ -183,13 +180,12 @@ export class TabsComponent extends MatPaginatorIntl
       ]
     });
 
-    this.orderForm = this.fb.group({
-        order: ['']
-    });
-
     this.orderOptions = [
+      {value: 'OrderByTopSaleDESC', description: 'Más Vendidos'},
+      {value: 'OrderByReleaseDateDESC', description: 'Más recientes'},
       {value: 'OrderByPriceDESC', description: 'Mayor precio primero'},
-      {value: 'OrderByPriceASC', description: 'Menor precio primero'}
+      {value: 'OrderByNameASC', description: 'Productos de la A-Z'},
+      {value: 'OrderByNameDESC', description: 'Productos de la Z-A'},
     ]
   
 
@@ -221,11 +217,9 @@ export class TabsComponent extends MatPaginatorIntl
     });
   }
 
-  order() {
-    this.orderForm.controls.order.valueChanges.subscribe((resp) => {
-      this.orderValue = resp;
-      this.searchProductPaginate(this.paginate, resp, 1 , this.pageTo)
-    })
+  order(option) {
+    this.searchProductPaginate(this.paginate, option, 1 , this.pageTo);
+    this.orderValue = option;
   }
 
   /**
@@ -236,7 +230,7 @@ export class TabsComponent extends MatPaginatorIntl
    *
    */
 
-public searchProductPaginate(term: any, order:string ='OrderByPriceDESC', from = 1, to = this.pageTo) {
+public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pageTo) {
     if (term !== this.paginate) {
       this.paginate = term;
       this.pageIndex = 0;

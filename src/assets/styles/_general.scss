@@ -695,3 +695,18 @@ th.mat-header-cell {
 .mat-calendar-body-selected {
   background-color:$primary-color !important;
 }
+
+.mat-select-value, .mat-form-field-appearance-legacy .mat-form-field-underline {
+  color: $color-p !important;
+  font-family: $font-galano !important;
+}
+
+.mat-select-arrow{
+  border: none !important;
+  background: url("/assets/img/arrow-down.svg") no-repeat;
+  width: 20px !important;
+  height: 20px !important;
+  background-size: 25px;
+  position: relative;
+  bottom: 4px;
+}
