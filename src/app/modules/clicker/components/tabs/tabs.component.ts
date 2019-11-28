@@ -130,6 +130,7 @@ export class TabsComponent extends MatPaginatorIntl
   percentModal: any;
   reference: boolean;
   orderOptions: any;
+  orderValue:string;
 
   slideConfig = {
     slidesToShow: 5,
@@ -182,12 +183,12 @@ export class TabsComponent extends MatPaginatorIntl
     });
 
     this.orderForm = this.fb.group({
-        order: [{value: 'OrderByPriceDESC', description: 'Menor precio primero'}]
+        order: ['']
     });
 
     this.orderOptions = [
-      {description: 'Menor precio primero', value: 'OrderByPriceDESC'},
-      {description: 'Mayor precio primero', value: 'OrderByPriceASC'}
+      {value: 'OrderByPriceDESC', description: 'Menor precio primero'},
+      {value: 'OrderByPriceASC', description: 'Mayor precio primero'}
     ]
   
 
@@ -219,9 +220,11 @@ export class TabsComponent extends MatPaginatorIntl
     });
   }
 
-  public orderValue(val) {
-    console.log(val);
-  }
+  // order() {
+  //   this.orderForm.controls.order.valueChanges.subscribe((resp) => {
+  //     this.orderValue = resp;
+  //   })
+  // }
 
   /**
    * Metodo para buscar los productos paginados
@@ -231,13 +234,13 @@ export class TabsComponent extends MatPaginatorIntl
    *
    */
 
-  public searchProductPaginate(term: any, from = 1, to = this.pageTo) {
+public searchProductPaginate(term: any, from = 1, to = this.pageTo, order:string ='') {
     if (term !== this.paginate) {
       this.paginate = term;
       this.pageIndex = 0;
     }
 
-    const params = { term, from, to };
+    const params = { term, from, to, order };
     this.loading.show();
     this.subscription = this.sp.getProductsPagination(params).subscribe(
       (resp: any) => {

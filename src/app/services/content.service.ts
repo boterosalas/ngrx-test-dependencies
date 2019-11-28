@@ -75,9 +75,9 @@ export class ContentService {
   //   );
   // }
 
-  public getProductsPagination(params: {term: any, from:number, to:number}){
+  public getProductsPagination(params: {term: any, from:number, to:number, order: string}){
     if(isNaN(params.term) === true) {
-      this.sendSearch = {parameters: `?ft=${params.term}&_from=${params.from}&_to=${params.to}&fq=sellerIds:1`};
+      this.sendSearch = {parameters: `?ft=${params.term}&_from=${params.from}&_to=${params.to}&fq=sellerIds:1&O=${params.order}`};
     } else {
       this.sendSearch = {parameters: `?ft=${params.term}&fq=sellerIds:1`};
     }
