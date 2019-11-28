@@ -69,6 +69,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   cityValue: string;
 
   ngOnInit() {
+
     this.registerForm = this.fb.group(
       {
         name: [
@@ -147,6 +148,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     this.nameFileCed1 = '';
     this.nameFileCed2 = '';
     this.nameFileCert = '';
+    this.externalClickerForm();
   }
 
   public displayDepartment(departments?: any): string | undefined {
@@ -230,12 +232,12 @@ export class RegisterformComponent implements OnInit, OnDestroy {
 
   private externalClickerForm() {
     this.externalForm = this.fb.group({
-      department: ["", Validators.required],
-      city: ["", Validators.required],
-      address: ["", Validators.required],
-      bank: ["", Validators.required],
-      typeAccount: ["", Validators.required],
-      numberAccount: ["", [Validators.required, Validators.pattern(this.numberPattern), Validators.minLength(5), Validators.maxLength(20)]],
+      department: [null, Validators.required],
+      city: [null, Validators.required],
+      address: [null, Validators.required],
+      bank: [null, Validators.required],
+      typeAccount: [null, Validators.required],
+      numberAccount: [null, [Validators.required, Validators.pattern(this.numberPattern), Validators.minLength(5), Validators.maxLength(20)]],
       ced1: [null],
       ced2: [null],
       cert: [null],
