@@ -436,6 +436,10 @@ table {
   }
 }
 
+.search .mat-form-field-wrapper{
+  padding: 0 !important;
+}
+
 @media screen and (max-width: 600px) {
   .mat-paginator-page-size {
     display: none !important;
