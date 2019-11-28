@@ -97,7 +97,6 @@ export class TabsComponent extends MatPaginatorIntl
   url: string;
   urlshorten: string;
   formLink: FormGroup;
-  orderForm: FormGroup;
   identification: string;
   pageIndex: number = 0;
   isLoggedIn: any;
@@ -131,7 +130,6 @@ export class TabsComponent extends MatPaginatorIntl
   reference: boolean;
   orderOptions: any;
   orderValue:string;
-
   slideConfig = {
     slidesToShow: 5,
     slidesToScroll: 5,
@@ -182,13 +180,12 @@ export class TabsComponent extends MatPaginatorIntl
       ]
     });
 
-    this.orderForm = this.fb.group({
-        order: ['']
-    });
-
     this.orderOptions = [
-      {value: 'OrderByPriceDESC', description: 'Menor precio primero'},
-      {value: 'OrderByPriceASC', description: 'Mayor precio primero'}
+      {value: 'OrderByTopSaleDESC', description: 'Más Vendidos'},
+      {value: 'OrderByReleaseDateDESC', description: 'Más recientes'},
+      {value: 'OrderByPriceDESC', description: 'Mayor precio primero'},
+      {value: 'OrderByNameASC', description: 'Productos de la A-Z'},
+      {value: 'OrderByNameDESC', description: 'Productos de la Z-A'},
     ]
   
 
@@ -220,11 +217,10 @@ export class TabsComponent extends MatPaginatorIntl
     });
   }
 
-  // order() {
-  //   this.orderForm.controls.order.valueChanges.subscribe((resp) => {
-  //     this.orderValue = resp;
-  //   })
-  // }
+  order(option) {
+    this.searchProductPaginate(this.paginate, option, 1 , this.pageTo);
+    this.orderValue = option;
+  }
 
   /**
    * Metodo para buscar los productos paginados
@@ -234,13 +230,13 @@ export class TabsComponent extends MatPaginatorIntl
    *
    */
 
-public searchProductPaginate(term: any, from = 1, to = this.pageTo, order:string ='') {
+public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pageTo) {
     if (term !== this.paginate) {
       this.paginate = term;
       this.pageIndex = 0;
     }
-
-    const params = { term, from, to, order };
+    
+    const params = { term, order, from, to };
     this.loading.show();
     this.subscription = this.sp.getProductsPagination(params).subscribe(
       (resp: any) => {
@@ -335,7 +331,7 @@ public searchProductPaginate(term: any, from = 1, to = this.pageTo, order:string
     paginate.length = this.totalItems;
     const from = paginate.pageSize * paginate.pageIndex + 1;
     const to = paginate.pageSize * (paginate.pageIndex + 1);
-    this.searchProductPaginate(this.paginate, from, to);
+    this.searchProductPaginate(this.paginate, this.orderValue, from, to);
   }
 
   ngOnDestroy(): void {
