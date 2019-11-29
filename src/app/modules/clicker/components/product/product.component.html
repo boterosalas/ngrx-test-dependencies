@@ -43,7 +43,7 @@
       id="{{ btnid }}"
       mat-raised-button
       color="orange"
-      class="mb-1 button-100"
+      class="mb-1 button-100 gtmInicioClicFiltroExitocomCrearLink"
       (click)="product()"
       [disabled]="price === 0"
     >
@@ -80,7 +80,7 @@
             id="{{ btnid }}"
             mat-raised-button
             color="orange"
-            class="mb-1  button-100"
+            [(ngClass)]="Class"
             (click)="product()"
           >
             {{ textbutton }}

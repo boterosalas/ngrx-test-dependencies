@@ -13,6 +13,10 @@ import { LoaderService } from 'src/app/services/loader.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import decode from 'jwt-decode';
 
+declare global {
+  interface Window { dataLayer: any[]; }
+}
+
 @Component({
   selector: "app-loginform",
   templateUrl: "./loginform.component.html",
@@ -32,6 +36,7 @@ export class LoginformComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
   isSubmitted = false;
   emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
+  dataLayer:any;
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -72,6 +77,14 @@ export class LoginformComponent implements OnInit, OnDestroy {
       (resp: ResponseService) => {
         this.loading.hide();
         if (resp.state === "Success") {
+          
+          window.dataLayer.push({
+            event: 'pushEventGA',
+            categoria: 'IniciarSesión',
+            accion: 'ClicLateral',
+            etiqueta: 'IniciarSesionExitoso'
+          });
+
           localStorage.setItem("ACCESS_TOKEN", resp.objectResponse.token);
           this.utils.hideloginForm();
           this.routeBased();

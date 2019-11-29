@@ -10,11 +10,11 @@ export class TokenService {
   }
 
   user: any;
-  token = localStorage.getItem("ACCESS_TOKEN");
-
+  
   public userInfo() {
-    if (this.token !== null) {
-      this.user = decode(this.token);
+    let token = localStorage.getItem("ACCESS_TOKEN");
+    if (token !== null) {
+      this.user = decode(token);
       return this.user;
      }
   }

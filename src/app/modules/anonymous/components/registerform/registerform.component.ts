@@ -13,6 +13,10 @@ import { startWith } from "rxjs/internal/operators/startWith";
 import { map } from "rxjs/internal/operators/map";
 import { MasterDataService } from 'src/app/services/master-data.service';
 
+declare global {
+  interface Window { dataLayer: any[]; }
+}
+
 @Component({
   selector: "app-registerform",
   templateUrl: "./registerform.component.html",
@@ -46,6 +50,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   fileIdentificationCard1: any;
   fileIdentificationCard2: any;
   fileBankCertificate: any;
+  dataLayer: any;
   EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
   idUserType = [];
   departments = [];
@@ -340,13 +345,21 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       (resp: ResponseService) => {
         this.loading.hide();
         if (resp.state === "Success") {
+          
+          window.dataLayer.push({
+            event: 'pushEventGA',
+            categoria: 'Registro',
+            accion: 'ClicLateralRegistro',
+            etiqueta: 'RegistroExitoso'
+          });
+
           Swal.fire({
               title:'Revisa tu correo',
               html: `
               Activa tu cuenta siguiendo el enlace </br> que enviamos a tu correo.
               `,
             confirmButtonText: "Volver al inicio",
-            confirmButtonClass: "accept-register-alert-success"
+            confirmButtonClass: "accept-register-alert-success gtmRegistroClicModalValidacion"
           }).then(() => {
             this.utils.hideloginForm();
           });
