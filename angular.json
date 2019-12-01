@@ -40,6 +40,7 @@
               "./node_modules/bootstrap/scss/bootstrap-grid.scss",
               "node_modules/slick-carousel/slick/slick.scss",
               "node_modules/slick-carousel/slick/slick-theme.scss",
+              "node_modules/smart-app-banner/dist/smart-app-banner.css",
               "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/assets/styles/styles.scss"
             ],
@@ -136,6 +137,7 @@
               "./node_modules/bootstrap/scss/bootstrap-grid.scss",
               "node_modules/slick-carousel/slick/slick.scss",
               "node_modules/slick-carousel/slick/slick-theme.scss",
+              "node_modules/smart-app-banner/dist/smart-app-banner.css",
               "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/assets/styles/styles.scss"
             ],

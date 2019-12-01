@@ -710,3 +710,42 @@ th.mat-header-cell {
   position: relative;
   bottom: 4px;
 }
+
+.smartbanner-android .smartbanner-close {
+  border: 0;
+  width: 17px;
+  height: 17px;
+  line-height: 17px;
+  margin-right: 7px;
+  color: #fff;
+  background: none;
+  text-shadow: none;
+  box-shadow: none;
+}
+
+.smartbanner-android{
+  background: $primary-color;
+  box-shadow: none;
+}
+
+.smartbanner-android .smartbanner-info{
+  text-shadow: none;
+  color: #fff;
+}
+
+.smartbanner-android .smartbanner-button-text {
+  text-align: center;
+  display: block;
+  padding: 0 10px;
+  text-transform: none;
+  text-shadow: none;
+  box-shadow: 0 0 0 0px #333, 0 0 0 0px #dddcdc;
+  background: #fff;
+  border: none;
+  border-radius: 5px;
+  color: $primary-color;
+}
+
+.smartbanner-android .smartbanner-button{
+  box-shadow: 0 0 0 0px #333, 0 0 0 0px #dddcdc;
+}
