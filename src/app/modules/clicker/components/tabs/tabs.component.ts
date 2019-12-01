@@ -31,10 +31,6 @@ import { TokenService } from "src/app/services/token.service";
 import { ResponseService } from "src/app/interfaces/response";
 import Swal from "sweetalert2";
 
-declare global {
-  interface Window { dataLayer: any[]; }
-}
-
 @Component({
   selector: "app-tabs",
   templateUrl: "./tabs.component.html",
@@ -129,7 +125,7 @@ export class TabsComponent extends MatPaginatorIntl
   totalArraysDesc: any;
   alianceSplit: string;
   alianceSplit2: string;
-  dataLayer:any;
+  dataLayer=[];
   nameAliance: any;
   percentModal: any;
   reference: boolean;
@@ -246,7 +242,7 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     this.subscription = this.sp.getProductsPagination(params).subscribe(
       (resp: any) => {
         
-        window.dataLayer.push({
+        this.dataLayer.push({
           event: 'pushEventGA',
           categoria: 'Inicio',
           accion: 'ClicFiltroExitocom',

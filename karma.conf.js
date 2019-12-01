@@ -28,10 +28,10 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    // browsers: ['Chrome'],
-    // singleRun: false,
-    browsers: ['ChromeHeadless'],
-    singleRun: true,
+    browsers: ['Chrome'],
+    singleRun: false,
+    // browsers: ['ChromeHeadless'],
+    // singleRun: true,
     restartOnFileChange: true
   });
 };
