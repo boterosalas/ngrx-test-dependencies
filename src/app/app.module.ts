@@ -24,9 +24,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoaderInterceptorService } from './interceptors/loader-interceptor.service';
 import { SharedModule } from './modules/shared/shared.module';
 import { JwtModule } from '@auth0/angular-jwt';
-import { KeySpaceDirective } from 'src/directives/space.directive';
 
-
+// sesion timeout
+import { BnNgIdleService } from 'bn-ng-idle';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -70,7 +70,8 @@ export function jwtTokenGetter() {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptorService,
       multi: true
-    }
+    },
+    BnNgIdleService
   ],
   bootstrap: [AppComponent]
 })
