@@ -29,7 +29,9 @@ export class CardComponent implements OnInit {
   @Input() description: string;
   @Input() idAction: string;
   @Input() action: string;
+  @Input() Class: string;
   @Input() template: TemplateRef<any>;
+  
 
   ngOnInit() {
   }

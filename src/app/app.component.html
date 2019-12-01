@@ -14,20 +14,20 @@
     <app-loginform></app-loginform>
     <p
       id="forgotPass"
-      class="cursor-pointer text-decoration text-center"
+      class="cursor-pointer text-decoration text-center gtmIniciarSesiónClicLtrlOlvidoClave"
       (click)="showForgot()"
     >
       {{ "LOGIN.FORGOT_PASSWORD" | translate }}
     </p>
   </ng-template>
 
-  <app-card *ngIf="showRegisterForm" idTitle="titleRegister" title="{{ 'GENERIC.REGISTER' | translate }}" description="{{ 'REGISTER.HAVE_ACCOUNT' | translate }}" idAction="registerForm" action="{{ 'LOGIN.LOGIN' | translate }}" (actionButton)="showLogin()" [template]="templateCardRegister"></app-card>
+  <app-card *ngIf="showRegisterForm" Class="gtmRegistroClicLatrlIniciarSesion" idTitle="titleRegister" title="{{ 'GENERIC.REGISTER' | translate }}" description="{{ 'REGISTER.HAVE_ACCOUNT' | translate }}" idAction="registerForm" action="{{ 'LOGIN.LOGIN' | translate }}" (actionButton)="showLogin()" [template]="templateCardRegister"></app-card>
 
   <ng-template #templateCardRegister>
     <app-registerform></app-registerform>
   </ng-template>
 
-  <app-card *ngIf="showForgotForm" idTitle="titleForgot" title="{{ 'FORGOTPASSWORD.FORGOT_PASSWORD' | translate }}" description="{{ 'FORGOTPASSWORD.ENTER_EMAIL' | translate }}" [template]="templateCardForgot"></app-card>
+  <app-card *ngIf="showForgotForm" Class="gtmIniciarSesiónClicLtrlOlvidoClave" idTitle="titleForgot" title="{{ 'FORGOTPASSWORD.FORGOT_PASSWORD' | translate }}" description="{{ 'FORGOTPASSWORD.ENTER_EMAIL' | translate }}" [template]="templateCardForgot"></app-card>
 
   <ng-template #templateCardForgot>
     <app-forgotpasswordform></app-forgotpasswordform>
@@ -45,20 +45,20 @@
   
   <app-top (close)="hideLogin()"></app-top>
 
-  <app-card *ngIf="showLoginForm" idTitle="titleLogin" title="{{ 'LOGIN.LOGIN' | translate }}" description="{{ 'LOGIN.DESCRIPTION' | translate }}" idAction="registerHere" action="{{ 'LOGIN.REGISTER' | translate }}" (actionButton)="showRegister()" [template]="templateCardLogin"></app-card>
+  <app-card Class="gtmIniciarSesiónClicLtrlRegistrarte" *ngIf="showLoginForm" idTitle="titleLogin" title="{{ 'LOGIN.LOGIN' | translate }}" description="{{ 'LOGIN.DESCRIPTION' | translate }}" idAction="registerHere" action="{{ 'LOGIN.REGISTER' | translate }}" (actionButton)="showRegister()" [template]="templateCardLogin"></app-card>
 
   <ng-template #templateCardLogin>
     <app-loginform></app-loginform>
     <p
       id="forgotPass"
-      class="cursor-pointer text-decoration text-center"
+      class="cursor-pointer text-decoration text-center gtmIniciarSesiónClicLtrlOlvidoClave"
       (click)="showForgot()"
     >
       {{ "LOGIN.FORGOT_PASSWORD" | translate }}
     </p>
   </ng-template>
 
-  <app-card *ngIf="showRegisterForm" idTitle="titleRegister" title="{{ 'GENERIC.REGISTER' | translate }}" description="{{ 'REGISTER.HAVE_ACCOUNT' | translate }}" idAction="registerForm" action="{{ 'LOGIN.LOGIN' | translate }}" (actionButton)="showLogin()" [template]="templateCardRegister"></app-card>
+  <app-card Class="gtmRegistroClicLatrlIniciarSesion" *ngIf="showRegisterForm" idTitle="titleRegister" title="{{ 'GENERIC.REGISTER' | translate }}" description="{{ 'REGISTER.HAVE_ACCOUNT' | translate }}" idAction="registerForm" action="{{ 'LOGIN.LOGIN' | translate }}" (actionButton)="showLogin()" [template]="templateCardRegister"></app-card>
 
   <ng-template #templateCardRegister>
     <app-registerform></app-registerform>

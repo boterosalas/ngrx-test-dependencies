@@ -139,4 +139,10 @@ describe("UsersComponent", () => {
   it("modal data", () => {
     component.userData(dataUsers);
   });
+
+  it('pagination', () => {
+    component.pagination({previousPageIndex: 1, pageIndex: 0, pageSize: 20, length: 5});
+    expect(mockUserService.searchUsers).toHaveBeenCalled();
+  });
+
 });
