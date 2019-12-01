@@ -125,6 +125,7 @@ export class TabsComponent extends MatPaginatorIntl
   totalArraysDesc: any;
   alianceSplit: string;
   alianceSplit2: string;
+  dataLayer=[];
   nameAliance: any;
   percentModal: any;
   reference: boolean;
@@ -240,6 +241,14 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     this.loading.show();
     this.subscription = this.sp.getProductsPagination(params).subscribe(
       (resp: any) => {
+        
+        this.dataLayer.push({
+          event: 'pushEventGA',
+          categoria: 'Inicio',
+          accion: 'ClicFiltroExitocom',
+          etiqueta: term
+        });
+
         this.loading.hide();
         const parsed = JSON.parse(resp.json);
         this.totalItems = resp.total;

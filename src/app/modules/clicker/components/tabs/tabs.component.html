@@ -6,7 +6,11 @@
 
   <mat-tab-group>
     <!-- exito -->
-    <mat-tab label="exito.com" id="exitoTab">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <span class="gtmInicioClicFiltroExitocom">exito.com</span>
+       </ng-template>
+
       <app-search (search)="searchProductPaginate($event)"></app-search>
       <div class="order border-bottom-gray" fxLayout="row" fxLayoutAlign="flex-end center" *ngIf="showResults">
         
@@ -77,7 +81,10 @@
     </mat-tab>
 
     <!-- seguros -->
-    <mat-tab label="Seguros">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <span class="gtmInicioClicFiltroSeguro">Seguros</span>
+       </ng-template>
       <div fxLayout="row wrap">
         <div
           fxLayout="column"
@@ -95,6 +102,7 @@
             [image]="asurred.imageurl"
             [alt]="asurred.description"
             other="true"
+            Class="mb-1 button-100 gtmInicioClicLinkSeg{{i}}"
             textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
             container="img-container-seguros"
             (infoProduct)="dataAssured(asurred)"
@@ -104,7 +112,10 @@
     </mat-tab>
 
     <!-- viajes -->
-    <mat-tab label="Viajes">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <span class="gtmInicioClicFiltroViajes">Viajes</span>
+       </ng-template>
       <div fxLayout="row wrap">
         <div
           fxLayout="column"
@@ -122,6 +133,7 @@
             [image]="trip.imageurl"
             [alt]="trip.description"
             other="true"
+            Class="mb-1 button-100 gtmInicioClicLinkViaj{{i}}"
             container="img-container-viajes"
             textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
             home
@@ -176,6 +188,7 @@
         mat-mini-fab
         id="btnCopy"
         color="orange"
+        class="gtmInicioClicFiltroExitocomCopiarLink"
         (click)="copyInputMessage(linkInput)"
       >
         <span fxLayoutAlign="space-between center">
@@ -193,18 +206,21 @@
       [url]="urlshorten"
       button="facebook"
       theme="circles-dark"
+      class="gtmInicioClicFiltroExitocomFacebook"
     ></share-button>
     <share-button
       id="twitter"
       [url]="urlshorten"
       button="twitter"
       theme="circles-dark"
+      class="gtmInicioClicFiltroExitocomTwitter"
     ></share-button>
     <share-button
       id="whatsapp"
       [url]="urlshorten"
       button="whatsapp"
       theme="circles-dark"
+      class="gtmInicioClicFiltroExitocomWhatsapp"
     ></share-button>
   </div>
   <p>{{'GENERIC.REFERENCE_TEXT' | translate}}</p>

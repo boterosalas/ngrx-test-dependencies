@@ -27,6 +27,7 @@ export class ProductComponent implements OnInit {
   @Input() category: boolean;
   @Input() container: boolean;
   @Input() photo: string;
+  @Input() Class: string;
 
   constructor() { }
 
