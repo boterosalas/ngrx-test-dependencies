@@ -1,9 +1,13 @@
-import { Component, OnInit, ViewChild, TemplateRef, HostListener, OnDestroy } from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
 import {
-  Router,
-  NavigationStart
-} from "@angular/router";
+  Component,
+  OnInit,
+  ViewChild,
+  TemplateRef,
+  HostListener,
+  OnDestroy
+} from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
+import { Router, NavigationStart } from "@angular/router";
 import {
   trigger,
   state,
@@ -14,8 +18,10 @@ import {
 } from "@angular/animations";
 import { UtilsService } from "./services/utils.service";
 import { Subscription } from "rxjs";
-import { AuthService } from './services/auth.service';
+import { AuthService } from "./services/auth.service";
 import * as SmartBanner from "../../node_modules/smart-app-banner/dist/smart-app-banner.js";
+import { BnNgIdleService } from "bn-ng-idle";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-root",
@@ -36,7 +42,7 @@ import * as SmartBanner from "../../node_modules/smart-app-banner/dist/smart-app
         ])
       ])
     ]),
-    trigger('slideInOut', [
+    trigger("slideInOut", [
       state("in", style({ height: "*", opacity: 1 })),
       transition(":leave", [
         style({ height: "*", opacity: 1 }),
@@ -63,8 +69,10 @@ import * as SmartBanner from "../../node_modules/smart-app-banner/dist/smart-app
   ]
 })
 export class AppComponent implements OnInit, OnDestroy {
-
-  @ViewChild("templateCardLogin, TemplateCardRegister, TemplateCardForgot", { static: false }) template: TemplateRef<any>;
+  @ViewChild("templateCardLogin, TemplateCardRegister, TemplateCardForgot", {
+    static: false
+  })
+  template: TemplateRef<any>;
   SmartBanner: any;
   isHome: boolean;
   internal: boolean;
@@ -75,14 +83,16 @@ export class AppComponent implements OnInit, OnDestroy {
   isOpenMenu = false;
   private subscription: Subscription = new Subscription();
   innerWidth: number;
-  showAnimation1:boolean;
-  showAnimation2:boolean;
+  showAnimation1: boolean;
+  showAnimation2: boolean;
+  isLoggedIn: any;
 
   constructor(
     private translate: TranslateService,
     private router: Router,
     private utils: UtilsService,
-    public auth: AuthService
+    public auth: AuthService,
+    private bnIdle: BnNgIdleService
   ) {
     translate.setDefaultLang("es");
     translate.use("es");
@@ -102,19 +112,38 @@ export class AppComponent implements OnInit, OnDestroy {
     new SmartBanner({
       daysHidden: 5, // days to hide banner after close button is clicked (defaults to 15)
       daysReminder: 20, // days to hide banner after "VIEW" button is clicked (defaults to 90)
-      appStoreLanguage: 'es', // language code for the App Store (defaults to user's browser language)
+      appStoreLanguage: "es", // language code for the App Store (defaults to user's browser language)
       title: "Clickam",
-      author: '',
+      author: "",
       button: "Descargar",
       price: {
-        android: 'Descarga la app ',
+        android: "Descarga la app "
       },
       store: {
-          android: `</br> gratis en la Play Store`
-      },
+        android: `</br> gratis en la Play Store`
+      }
       // force: 'android' // Uncomment for platform emulation
-  });
+    });
 
+    this.isLoggedIn = this.auth.isLoggedIn();
+
+    if (this.isLoggedIn) {
+      this.bnIdle.startWatching(3600).subscribe(res => {
+        if (res) {
+          Swal.fire({
+            title: "Ha expirado tu sesión",
+            text: 'Por favor vuelve a iniciar sesión',
+            type: "info",
+            confirmButtonText: "Volver al inicio",
+            confirmButtonClass: "init-sesssion"
+          }).then(() => {
+            this.auth.logout();
+          })
+        }
+      });
+    }
+
+    
   }
 
   ngOnInit() {
@@ -136,7 +165,7 @@ export class AppComponent implements OnInit, OnDestroy {
     });
 
     this.subscription = this.utils.changeRegister.subscribe(isOpenRegister => {
-      this.isOpen= isOpenRegister;
+      this.isOpen = isOpenRegister;
       this.showRegisterForm = true;
       this.showLoginForm = false;
       this.showForgotForm = false;
@@ -172,39 +201,38 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onActivate(event) {
     let scrollToTop = window.setInterval(() => {
-        let pos = window.pageYOffset;
-        if (pos > 0) {
-            window.scrollTo(0, pos - 20); // how far to scroll on each step
-        } else {
-            window.clearInterval(scrollToTop);
-        }
+      let pos = window.pageYOffset;
+      if (pos > 0) {
+        window.scrollTo(0, pos - 20); // how far to scroll on each step
+      } else {
+        window.clearInterval(scrollToTop);
+      }
     }, 1);
-}
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe(); 
   }
 
-  @HostListener('over')
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  @HostListener("over")
   hideMenu() {
     this.utils.hideMenu();
   }
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener("window:resize", ["$event"])
   onResize(event) {
     this.innerWidth = event.target.innerWidth;
     this.windowWidth();
   }
 
   public windowWidth() {
-    if(this.innerWidth > 600) {
+    if (this.innerWidth > 600) {
       this.showAnimation1 = true;
       this.showAnimation2 = false;
-    } 
-    if(this.innerWidth < 600) {
+    }
+    if (this.innerWidth < 600) {
       this.showAnimation1 = false;
       this.showAnimation2 = true;
     }
   }
-
 }
