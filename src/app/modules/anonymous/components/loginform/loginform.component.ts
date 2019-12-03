@@ -74,6 +74,10 @@ export class LoginformComponent implements OnInit, OnDestroy {
         this.loading.hide();
         if (resp.state === "Success") {
           
+          localStorage.setItem("ACCESS_TOKEN", resp.objectResponse.token);
+          this.utils.hideloginForm();
+          this.routeBased();
+          
           dataLayer.push({
             event: 'pushEventGA',
             categoria: 'IniciarSesión',
@@ -81,9 +85,6 @@ export class LoginformComponent implements OnInit, OnDestroy {
             etiqueta: 'IniciarSesionExitoso'
           });
 
-          localStorage.setItem("ACCESS_TOKEN", resp.objectResponse.token);
-          this.utils.hideloginForm();
-          this.routeBased();
         } else {
           Swal.fire({
             title: "Login inválido",
