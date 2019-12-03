@@ -249,14 +249,6 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     this.loading.show();
     this.subscription = this.sp.getProductsPagination(params).subscribe(
       (resp: any) => {
-        
-        dataLayer.push({
-          event: 'pushEventGA',
-          categoria: 'Inicio',
-          accion: 'ClicFiltroExitocom',
-          etiqueta: term
-        });
-
         this.loading.hide();
         const parsed = JSON.parse(resp.json);
         this.totalItems = resp.total;
@@ -269,6 +261,12 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
           this.showNotFound = true;
           this.showResults = false;
         }
+        dataLayer.push({
+          event: 'pushEventGA',
+          categoria: 'Inicio',
+          accion: 'ClicFiltroExitocom',
+          etiqueta: term
+        });
       },
       error => {
         this.loading.hide();
