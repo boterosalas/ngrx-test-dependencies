@@ -12,6 +12,7 @@ import { UserService } from "src/app/services/user.service";
 import { startWith } from "rxjs/internal/operators/startWith";
 import { map } from "rxjs/internal/operators/map";
 import { MasterDataService } from 'src/app/services/master-data.service';
+declare var dataLayer: any
 
 @Component({
   selector: "app-registerform",
@@ -46,7 +47,6 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   fileIdentificationCard1: any;
   fileIdentificationCard2: any;
   fileBankCertificate: any;
-  dataLayer=[];
   EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
   idUserType = [];
   departments = [];
@@ -341,14 +341,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       (resp: ResponseService) => {
         this.loading.hide();
         if (resp.state === "Success") {
-          
-          this.dataLayer.push({
-            event: 'pushEventGA',
-            categoria: 'Registro',
-            accion: 'ClicLateralRegistro',
-            etiqueta: 'RegistroExitoso'
-          });
-
+        
           Swal.fire({
               title:'Revisa tu correo',
               html: `
@@ -359,6 +352,14 @@ export class RegisterformComponent implements OnInit, OnDestroy {
           }).then(() => {
             this.utils.hideloginForm();
           });
+
+          dataLayer.push({
+            event: 'pushEventGA',
+            categoria: 'Registro',
+            accion: 'ClicLateralRegistro',
+            etiqueta: 'RegistroExitoso'
+          });
+
         } else {
           Swal.fire({
             title: "Registro inválido",

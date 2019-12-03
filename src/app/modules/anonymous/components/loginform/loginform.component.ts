@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import decode from 'jwt-decode';
+declare var dataLayer: any
 
 @Component({
   selector: "app-loginform",
@@ -32,7 +33,6 @@ export class LoginformComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
   isSubmitted = false;
   emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
-  dataLayer=[];
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -74,16 +74,17 @@ export class LoginformComponent implements OnInit, OnDestroy {
         this.loading.hide();
         if (resp.state === "Success") {
           
-          this.dataLayer.push({
+          localStorage.setItem("ACCESS_TOKEN", resp.objectResponse.token);
+          this.utils.hideloginForm();
+          this.routeBased();
+          
+          dataLayer.push({
             event: 'pushEventGA',
             categoria: 'IniciarSesión',
             accion: 'ClicLateral',
             etiqueta: 'IniciarSesionExitoso'
           });
 
-          localStorage.setItem("ACCESS_TOKEN", resp.objectResponse.token);
-          this.utils.hideloginForm();
-          this.routeBased();
         } else {
           Swal.fire({
             title: "Login inválido",

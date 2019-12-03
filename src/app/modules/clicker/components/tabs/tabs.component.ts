@@ -30,6 +30,7 @@ import { environment } from "src/environments/environment";
 import { TokenService } from "src/app/services/token.service";
 import { ResponseService } from "src/app/interfaces/response";
 import Swal from "sweetalert2";
+declare var dataLayer: any
 
 @Component({
   selector: "app-tabs",
@@ -125,7 +126,6 @@ export class TabsComponent extends MatPaginatorIntl
   totalArraysDesc: any;
   alianceSplit: string;
   alianceSplit2: string;
-  dataLayer=[];
   nameAliance: any;
   percentModal: any;
   reference: boolean;
@@ -167,6 +167,13 @@ export class TabsComponent extends MatPaginatorIntl
   };
 
   ngOnInit() {
+
+    setTimeout(() => {
+      document.querySelector('#mat-tab-label-0-0').classList.add("gtmInicioClicFiltroExitocom");
+      document.querySelector('#mat-tab-label-0-1').classList.add("gtmInicioClicFiltroSeguro");
+      document.querySelector('#mat-tab-label-0-2').classList.add("gtmInicioClicFiltroViajes");
+    }, 1000);
+
     this.showNotFound = false;
     this.showResults = false;
 
@@ -210,6 +217,7 @@ export class TabsComponent extends MatPaginatorIntl
     this.getCategories();
     this.Trip();
     this.reference = false;
+    
   }
 
   private formShareLink() {
@@ -241,14 +249,6 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     this.loading.show();
     this.subscription = this.sp.getProductsPagination(params).subscribe(
       (resp: any) => {
-        
-        this.dataLayer.push({
-          event: 'pushEventGA',
-          categoria: 'Inicio',
-          accion: 'ClicFiltroExitocom',
-          etiqueta: term
-        });
-
         this.loading.hide();
         const parsed = JSON.parse(resp.json);
         this.totalItems = resp.total;
@@ -261,6 +261,12 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
           this.showNotFound = true;
           this.showResults = false;
         }
+        dataLayer.push({
+          event: 'pushEventGA',
+          categoria: 'Inicio',
+          accion: 'ClicFiltroExitocom',
+          etiqueta: term
+        });
       },
       error => {
         this.loading.hide();

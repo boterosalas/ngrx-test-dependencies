@@ -16,7 +16,7 @@
         <div fxLayout="column" fxFlex.gt-xs="24" fxLayoutAlign="flex-start flex-start"  class={{textDirection}}>
             <h2>{{title}}</h2>
             <p>{{description}}</p>
-            <button mat-raised-button class="orange-border gtmHomeClicInfVerOfertas" color="primary"  id="offers-button" [routerLink]="['/ofertas']">{{textbutton}}</button>
+            <button mat-raised-button class="orange-border gtmHomeClicInfVerOfertas" color="primary"  id="offers-button" [routerLink]="['/ofertas']"><span class="gtmHomeClicInfVerOfertas">{{textbutton}}</span> </button>
         </div>
         <div fxLayout="column" fxLayoutAlign="start">
             <img class="img-right" src={{img}} alt={{alt}}>

@@ -18,7 +18,7 @@
         <div [ngClass]="isHome ? 'menu-desktop' : 'menu-desktop colorlinks'" fxLayout="row" fxLayoutAlign="space-around center" [fxShow.lt-md]="false">
                 <app-menu-options aligment="start start" *ngIf="(auth.getRole$ | async) !== 'ADMIN'"></app-menu-options>
                 <span class="border-right-white"></span>
-                <a *ngIf="!auth.isLoggedIn()" class="gtmHomeClicSupRegistrarse" mat-button (click)="openRegister()" id="header-register">{{ 'GENERIC.REGISTER2' | translate }}</a>
+                <a *ngIf="!auth.isLoggedIn()" class="gtmHomeClicSupRegistrarse" mat-button (click)="openRegister()" id="header-register"><span class="gtmHomeClicSupRegistrarse" >{{ 'GENERIC.REGISTER2' | translate }}</span></a>
                 <a *ngIf="!auth.isLoggedIn()" class="gtmHomeClicSupIniciarSesion" mat-button (click)="showLogin()" id="header-login">{{ 'LOGIN.LOGIN' | translate }}</a>
             </div>
             
