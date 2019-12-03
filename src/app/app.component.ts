@@ -129,7 +129,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
    this.subscription = this.auth.isLogged$.subscribe((val) => {
       if(!!val) {
-        this.subscription = this.bnIdle.startWatching(60).subscribe(res => {
+        this.subscription = this.bnIdle.startWatching(3600).subscribe(res => {
           if (res) {
             localStorage.removeItem("ACCESS_TOKEN");
             this.auth.getRole$.next(null);

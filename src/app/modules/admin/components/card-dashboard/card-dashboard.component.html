@@ -1,0 +1,33 @@
+
+<h3>{{title}}</h3>
+
+<mat-card class="card">
+    <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <span fxLayout="column">
+                    <circle-progress
+                    percent="{{circle}}"
+                  ></circle-progress>
+            </span>
+            <span fxLayout="column">
+                <img src="/assets/img/icono-descarga.svg" alt="user">
+                <p>{{ 'DASHBOARD.TOTAL_USERS' | translate }}</p>
+                <span> 6204</span>
+                <img src="/assets/img/icono-descarga.svg" alt="user">
+                <p>{{ 'DASHBOARD.TOTAL_ACTIVE' | translate }}</p>
+                <span>3102</span>
+            </span>
+        </div>
+    </mat-card-content>  
+</mat-card>
+
+  <!-- <mat-card class="card">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="border-bottom">
+    
+    </div>
+  
+    <mat-card-content>
+
+    </mat-card-content>
+    
+  </mat-card> -->
