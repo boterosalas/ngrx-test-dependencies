@@ -1,33 +1,18 @@
-
-<h3>{{title}}</h3>
-
 <mat-card class="card">
     <mat-card-content>
         <div fxLayout="row" fxLayoutAlign="space-between center">
-            <span fxLayout="column">
+            <span fxLayout="column" fxFlex="45">
                     <circle-progress
                     percent="{{circle}}"
                   ></circle-progress>
             </span>
-            <span fxLayout="column">
-                <img src="/assets/img/icono-descarga.svg" alt="user">
-                <p>{{ 'DASHBOARD.TOTAL_USERS' | translate }}</p>
-                <span> 6204</span>
-                <img src="/assets/img/icono-descarga.svg" alt="user">
-                <p>{{ 'DASHBOARD.TOTAL_ACTIVE' | translate }}</p>
-                <span>3102</span>
+            <span fxLayout="column" fxLayoutAlign="flex-end flex-end" fxFlex="55">
+                <img class="icon-dashboard" src="/assets/img/dashboard/icono-usuarios1.svg" alt="user">
+                <p class="mb-0 font-12">{{ 'DASHBOARD.TOTAL_USERS' | translate }}</p>
+                <span class="number"> {{cifer}}</span>
+                <p class="mb-0 mt-2 font-12">{{ 'DASHBOARD.TOTAL_ACTIVE' | translate }}</p>
+                <span class="number">{{cifer2}}</span>
             </span>
         </div>
     </mat-card-content>  
 </mat-card>
-
-  <!-- <mat-card class="card">
-    <div fxLayout="row" fxLayoutAlign="space-between center" class="border-bottom">
-    
-    </div>
-  
-    <mat-card-content>
-
-    </mat-card-content>
-    
-  </mat-card> -->
