@@ -23,6 +23,7 @@ import { CardDashboardComponent } from "./components/card-dashboard/card-dashboa
 
 // Import ng-circle-progress
 import { NgCircleProgressModule } from "ng-circle-progress";
+import { CardDashboardInfoComponent } from './components/card-dashboard-info/card-dashboard-info.component';
 
 const routes: Routes = [
   {
@@ -63,7 +64,8 @@ const routes: Routes = [
     SearchUsersComponent,
     DialogUserComponent,
     KeySpaceDirectiveAdmin,
-    CardDashboardComponent
+    CardDashboardComponent,
+    CardDashboardInfoComponent
   ],
   imports: [
     CommonModule,
@@ -98,7 +100,8 @@ const routes: Routes = [
       showUnits: true,
       showBackground: false,
       clockwise: false,
-      startFromZero: false
+      startFromZero: false,
+      responsive: true
     })
   ],
   exports: [SideMenuComponent],

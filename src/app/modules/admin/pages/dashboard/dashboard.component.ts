@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LinksService } from 'src/app/services/links.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,49 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private kpi: LinksService) { }
+
+  totalUsers: string;
+  totalActiveUsers: string;
+  totalMonthRegisterUsers:string;
+  todayRegisterUsers:string;
+  totalMonthRegisterActive:string;
+  todayActiveUsers:string;
+  salesMonth: string;
+  salesMonthYesterday: string;
+  salesMonthTotalYesterday: string;
+  commissionMonth: string;
+  commissionMonthYesterday: string;
+  commissionMonthTotalYesterday: string;
+  linksMonth: string;
+  linksMonthYesterday: string;
+  linksMonthTotalYesterday: string;
+  percent: any;
+  links = true;
 
   ngOnInit() {
+    this.getKPI();
+  }
+
+  public getKPI(){
+    this.kpi.getKPI().subscribe(resp=> {
+      this.totalUsers = resp.historicalUsersQuantity;
+      this.totalActiveUsers = resp.historicalActiveUsersQuantity;
+      this.totalMonthRegisterUsers = resp.monthUsersQuantity;
+      this.todayRegisterUsers = resp.todayUsersQuantity;
+      this.totalMonthRegisterActive = resp.historicalActiveUsersQuantity;
+      this.todayActiveUsers = resp.yesterdayActiveUsersQuantity;
+      this.salesMonth = resp.monthSales;
+      this.salesMonthTotalYesterday = resp.yesterdaySales;
+      this.salesMonthTotalYesterday = resp.historicalSales;
+      this.commissionMonth = resp.monthCommissionValue;
+      this.commissionMonthYesterday = resp.yesterdayCommissionValue;
+      this.commissionMonthTotalYesterday = resp.historicalCommissionValue;
+      this.linksMonth = resp.monthGeneratedLinks;
+      this.linksMonthYesterday = resp.todayGeneratedLinks;
+      this.linksMonthTotalYesterday = resp.historicalGeneratedLinks;
+      this.percent = (resp.historicalActiveUsersQuantity /resp.historicalUsersQuantity) * 100;
+    })
   }
 
 }

@@ -212,12 +212,14 @@
     "TOTAL_ACTIVE": "TOTAL ACTIVOS",
     "TOTAL_MONTH": "REGISTRADOS (MES)",
     "YESTERDAY": "AYER",
+    "YESTERDAY2": "Ayer",
+    "TODAY": "HOY",
     "ACTIVE_MONTH": "ACTIVOS (MES)",
     "MONTH": "MES",
     "SELLS": "VENTAS",
     "COMMISSIONS": "COMISIONES",
     "LINKS_GENERATED": "LINKS GENERADOS",
-    "TOTAL": "TOTAL"
+    "TOTAL": "Total"
   }
 
 }
