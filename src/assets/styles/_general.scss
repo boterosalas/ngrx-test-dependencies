@@ -329,10 +329,6 @@ button {
   max-width: 100%;
 }
 
-img{
-  // border-radius: 10px;
-}
-
 .mat-card-image:first-child{
   border-top-left-radius: 10px !important;
   border-top-right-radius: 10px !important;;
@@ -356,9 +352,7 @@ img{
   background: #f5f5f5;
 }
 
-#share button {
-  // width: auto;
-}
+
 
 .mat-mini-fab{
   border-radius: 50% !important;
@@ -603,9 +597,6 @@ footer {
     margin-top: 2rem !important;
   }
 
-  // .width-border{
-  //     width: 40%;
-  // }
 }
 
 ::-webkit-scrollbar {

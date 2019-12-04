@@ -78,7 +78,7 @@
 
 <div class="maincontent" *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'ADMIN'">
   <div fxLayout="row" class="container">
-    <div fxLayout="column" fxFlex="20" class="mt-4" *ngIf="auth.isLoggedIn() && auth.role === 'ADMIN'">
+    <div fxLayout="column" fxFlex="20" [fxHide.xs]="true" class="mt-4" *ngIf="auth.isLoggedIn() && auth.role === 'ADMIN'">
       <app-side-menu class="sideMenu"></app-side-menu>
     </div>
     <div fxLayout="column" fxFlex>
@@ -93,5 +93,5 @@
 
 <app-footer></app-footer>
 
-<app-whatsapp></app-whatsapp>
+<app-whatsapp *ngIf="((auth.getRole$  | async) !== 'ADMIN')"></app-whatsapp>
 <app-loader></app-loader>

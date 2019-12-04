@@ -1,14 +1,14 @@
 <div class="container mt-4">
   <h3 class="gray">{{ "DASHBOARD.USERS" | translate }}</h3>
-  <div fxLayout="row" fxLayoutAlign="flex-start flex-start" fxLayoutGap="20px">
-    <div fxLayout="column" fxFlex="33">
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign.xs="space-between" fxLayoutAlign.sm="space-between"  fxLayoutAlign="flex-start flex-start" fxLayoutGap="20px">
+    <div fxLayout="column" fxFlex="33" fxFlex.xs="100" fxFlex.sm="100">
       <app-card-dashboard
         [circle]="percent"
         [cifer]="totalUsers"
         [cifer2]="totalActiveUsers"
       ></app-card-dashboard>
     </div>
-    <div fxLayout="column" fxFlex="33">
+    <div fxLayout="column" fxFlex="33" fxFlex.xs="100" fxFlex.sm="100">
       <app-card-dashboard-info
         icon="/assets/img/dashboard/icono-usuarriosregistrados.svg"
         iconClass="icon-dashboard"
@@ -21,7 +21,7 @@
         [cifer3]="todayRegisterUsers"
       ></app-card-dashboard-info>
     </div>
-    <div fxLayout="column" fxFlex="33">
+    <div fxLayout="column" fxFlex="33" fxFlex.xs="100" fxFlex.sm="100">
       <app-card-dashboard-info
         icon="/assets/img/dashboard/icono-usuarios-activos.svg"
         iconClass="icon-dashboard"
@@ -35,8 +35,8 @@
     </div>
   </div>
 
-  <div fxLayout="row" fxLayoutAlign="flex-start flex-start" fxLayoutGap="20px" class="mb-4">
-    <div fxLayout="column" fxFlex="28">
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign.xs="space-between" fxLayoutAlign.sm="space-between" fxLayoutAlign="flex-start flex-start" fxLayoutGap="20px" class="mb-4">
+    <div fxLayout="column" fxFlex="28" fxFlex.xs="100" fxFlex.sm="100">
       <app-card-dashboard-info
         icon="/assets/img/dashboard/Icono-ventas.svg"
         iconClass="icon-dashboard-bottom"
@@ -50,7 +50,7 @@
         [cifer5]="salesMonthTotalYesterday"
       ></app-card-dashboard-info>
     </div>
-    <div fxLayout="column" fxFlex="28">
+    <div fxLayout="column" fxFlex="28" fxFlex.xs="100" fxFlex.sm="100">
       <app-card-dashboard-info
         icon="/assets/img/dashboard/Icono-comisiones.svg"
         iconClass="icon-dashboard-bottom"
@@ -64,7 +64,7 @@
         [cifer5]="commissionMonthTotalYesterday"
       ></app-card-dashboard-info>
     </div>
-    <div fxLayout="column" fxFlex="28">
+    <div fxLayout="column" fxFlex="28" fxFlex.xs="100" fxFlex.sm="100">
       <app-card-dashboard-info
         icon="/assets/img/dashboard/Icono-links-generados.svg"
         iconClass="icon-dashboard-bottom"
