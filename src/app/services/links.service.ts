@@ -16,6 +16,7 @@ export class LinksService {
   
   // comission = 'commissions';
   reports = 'Reports/ClickerPerformanceReport';
+  apiKPI = 'Reports/getKPI';
   insurance = 'Insurance/ProcessFiles'
   apiSaveLink = 'Link/SaveLink';
   apiPostReferrrals = 'Link/downloadReferrals';
@@ -56,6 +57,14 @@ export class LinksService {
   public getReports(identification: string) {
     let apiReport = `${this.reports}?identification=${identification}`;
     return this.http.get((`${this.urlComission}/${apiReport}`), this.httpOptions).pipe(
+      map((resp: ResponseService) => {
+        return resp.objectResponse;
+      })
+    );
+  }
+
+  public getKPI() {
+    return this.http.get((`${this.urlComission}/${this.apiKPI}`), this.httpOptions).pipe(
       map((resp: ResponseService) => {
         return resp.objectResponse;
       })

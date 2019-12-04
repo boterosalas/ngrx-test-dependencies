@@ -1,0 +1,46 @@
+<h3 class="gray">{{ title }}</h3>
+
+<mat-card class="card">
+  <mat-card-content>
+    <div fxLayout="row">
+      <span fxLayout="column" fxFlex="100" fxLayoutAlign="{{aligment}}">
+        <img class="{{iconClass}}" src="{{ icon }}" alt="user" />
+        <p  class="number mb-1">{{ dataNumber}}</p>
+        <p  class="number mb-1" *ngIf="dataNumberBottom !== '' && links === false">{{ dataNumberBottom | currency : '' : 'symbol' : '1.0-0'}}</p>
+        <p  class="number mb-1" *ngIf="links === true"> {{ dataNumberBottom}}</p>
+        <span>{{textBottomCard}}</span>
+      </span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between space-around"  class="border-bottom-gray pb-2">
+      <span class="cifer"></span>
+      <span> {{ textData }} </span>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between space-between"
+      class="pt-2"
+    >
+      <span class="cifer"></span>
+      <span> {{ textData2 }} <span class="number2">{{cifer3}} </span></span>
+    </div>
+    
+    <div *ngIf ="cifer4 !== undefined"
+    fxLayout="row"
+    fxLayoutAlign="space-between space-between"
+    class="pt-2"
+  >
+    <span class="number2">{{ textData4 }} </span>
+    <span *ngIf="links === false"> {{cifer4 | currency : '' : 'symbol' : '1.0-0'}} </span>
+    <span *ngIf="links === true"> {{cifer4}} </span>
+  </div>
+    <div *ngIf ="cifer5 !== undefined"
+    fxLayout="row"
+    fxLayoutAlign="space-between space-between"
+    class="pt-2"
+  >
+    <span class="number2">{{ textData5 }} </span>
+    <span class="total" *ngIf="links === false"> {{cifer5 | currency : '' : 'symbol' : '1.0-0'}} </span>
+    <span class="total" *ngIf="links === true"> {{cifer5}} </span>
+  </div>
+  </mat-card-content>
+</mat-card>

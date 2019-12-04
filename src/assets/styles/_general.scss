@@ -300,6 +300,10 @@ button {
   border-bottom: 1px solid $color-border;
 }
 
+.mat-card{
+  color: inherit;
+}
+
 .border-left-orange::before {
   content: "";
   border-left: 3px solid $primary-color;
@@ -326,7 +330,7 @@ button {
 }
 
 img{
-  border-radius: 10px;
+  // border-radius: 10px;
 }
 
 .mat-card-image:first-child{
@@ -748,4 +752,14 @@ th.mat-header-cell {
 
 .smartbanner-android .smartbanner-button{
   box-shadow: 0 0 0 0px #333, 0 0 0 0px #dddcdc;
+}
+
+.icon-dashboard{
+  width: 30px;
+  height: 20px;
+}
+
+.icon-dashboard-bottom {
+  width: 30px;
+  height: 40px;
 }
