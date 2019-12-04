@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CardDashboardInfoComponent } from './card-dashboard-info.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('CardDashboardInfoComponent', () => {
   let component: CardDashboardInfoComponent;
@@ -8,7 +11,12 @@ describe('CardDashboardInfoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CardDashboardInfoComponent ]
+      declarations: [ CardDashboardInfoComponent ],
+      imports: [
+        TranslateModule.forRoot(),
+        AppMaterialModule,
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));
