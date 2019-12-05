@@ -10,11 +10,9 @@ import { DialogUserComponent } from "../../components/dialog-user/dialog-user.co
 import { Subscription } from "rxjs/internal/Subscription";
 import { UserService } from "src/app/services/user.service";
 import { ResponseService } from "src/app/interfaces/response";
-import { Moment } from 'moment';
 import { LinksService } from 'src/app/services/links.service';
 import * as moment from 'moment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ValidateDate } from 'src/app/validators/validate-date.validators';
 moment.locale('es');
 
 @Component({
@@ -35,16 +33,16 @@ export class UsersComponent extends MatPaginatorIntl
   private subscription: Subscription = new Subscription();
   ext: string;
   contentType: string;
-  // selected: {startDate: Moment, endDate: Moment};
   email: string;
   maxDate = moment(new Date());
   orderOrigin: string;
   orderBy:string;
   from: any;
   to: any;
+  dateParams: any;
+  disButon: boolean;
 
   locale = {
-    format: moment().format('MM/DD/YYYY'),
     locale: 'es',
     direction: 'ltr', // could be rtl
     weekLabel: 'W',
@@ -106,7 +104,7 @@ export class UsersComponent extends MatPaginatorIntl
 
         this.dateForm = this.fb.group(
           {
-            dateRange: ["", Validators.required]
+            dateRange: [null, Validators.required]
           }
         );
 
@@ -330,17 +328,25 @@ export class UsersComponent extends MatPaginatorIntl
   }
 
   public getUserExcel() {
-    let params = {
+    this.dateParams = {
       email: this.email,
       start: this.dateForm.controls.dateRange.value.startDate.format(),
       end: this.dateForm.controls.dateRange.value.endDate.format()
     }
     
-    this.file.getUsersExcel(params).subscribe((resp: ResponseService) => {
+    this.file.getUsersExcel(this.dateParams).subscribe((resp: ResponseService) => {
       if(resp.state === 'Success') {
-        this.openSnackBar(resp.userMessage + ' a ' + this.email, 'Cerrar')
+        this.openSnackBar(resp.userMessage + ' a ' + this.email, 'Cerrar');
+        this.dateForm.reset();
+        if (this.dateForm.controls.dateRange.value.startDate === null) {
+          this.disButon = true;
+        }
       }
     });
+  }
+
+  change() {
+    this.disButon = false;
   }
 
   sort(event) {

@@ -8,8 +8,8 @@
         class="downloadUsers"
         >
             <mat-icon class="icon-date" matPrefix>date_range</mat-icon>
-            <input formControlName="dateRange" [locale]="locale" placeholder="Seleccione fechas" type="text" [maxDate]="maxDate"  ngxDaterangepickerMd class="form-control border-input mat-elevation-z1 p-2 border-radius"/>
-            <button mat-raised-button color="orange" (click)="getUserExcel()" id="download-users" class="ml-2" [disabled]="!dateForm.valid">Descargar <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
+            <input (change)="change()" formControlName="dateRange" [locale]="locale" placeholder="Seleccione fechas" type="text" [maxDate]="maxDate"  ngxDaterangepickerMd class="form-control border-input mat-elevation-z1 p-2 border-radius"/>
+            <button mat-raised-button color="orange" (click)="getUserExcel()" id="download-users" class="ml-2" [disabled]="!dateForm.valid || disButon">Descargar <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
     </form>
 
     <app-search-users (search)="searchUser($event)"></app-search-users>
