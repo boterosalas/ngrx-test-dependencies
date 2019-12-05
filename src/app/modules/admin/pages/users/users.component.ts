@@ -38,6 +38,10 @@ export class UsersComponent extends MatPaginatorIntl
   // selected: {startDate: Moment, endDate: Moment};
   email: string;
   maxDate = moment(new Date());
+  orderOrigin: string;
+  orderBy:string;
+  from: any;
+  to: any;
 
   locale = {
     format: moment().format('MM/DD/YYYY'),
@@ -108,13 +112,13 @@ export class UsersComponent extends MatPaginatorIntl
 
   }
 
-  public searchUser(term, from = 1, to = this.pageTo) {
+  public searchUser(term, from = 1, to = this.pageTo, orderOrigin = '' ,orderBy = '') {
     if (term !== this.paginate) {
       this.paginate = term;
       this.pageIndex = 0;
     }
-    const params = { term, from, to };
-    this.subscription = this.usersService
+    const params = { term, from, to, orderOrigin, orderBy };
+    this.subscription = this.file
       .searchUsers(params)
       .subscribe((user: any) => {
         this.users = user.users;
@@ -320,9 +324,9 @@ export class UsersComponent extends MatPaginatorIntl
   public pagination(paginate: any) {
     this.pageIndex = paginate.pageIndex;
     paginate.length = this.totalItems;
-    const from = paginate.pageSize * paginate.pageIndex + 1;
-    const to = paginate.pageSize * (paginate.pageIndex + 1);
-    this.searchUser(this.paginate, from, to);
+    this.from = paginate.pageSize * paginate.pageIndex + 1;
+    this.to = paginate.pageSize * (paginate.pageIndex + 1);
+    this.searchUser(this.paginate, this.from, this.to);
   }
 
   public getUserExcel() {
@@ -337,6 +341,15 @@ export class UsersComponent extends MatPaginatorIntl
         this.openSnackBar(resp.userMessage + ' a ' + this.email, 'Cerrar')
       }
     });
+  }
+
+  sort(event) {
+    let name = event.active.toUpperCase();
+    let direction = event.direction.toUpperCase();
+    if( direction === '') {
+      name = ''
+    }
+    this.searchUser(this.paginate, this.from, this.to, name, direction);
   }
 
   ngOnDestroy(): void {

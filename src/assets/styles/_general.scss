@@ -626,11 +626,12 @@ footer {
 .sideMenu {
   .item {
     padding: 5px 5px 5px 15px;
-    width: 100%;
+    width: 85%;
     border-radius: 5px;
     font-size: 14px;
     display: flex;
     align-items: center;
+    margin: auto;
     a {
       margin-left: 5px;
     }
@@ -638,6 +639,7 @@ footer {
       // margin-left: 10px;
       color: $primary-color;
       background: #ff6f111a;
+      font-family: $font-galano-bold;
       &::before {
         content: "";
         width: 3px;
@@ -761,4 +763,15 @@ th.mat-header-cell {
 
 .md-drppicker .btn{
   color: #fff !important;
+}
+
+.users-table {
+  td.mat-cell, td.mat-footer-cell, th.mat-header-cell{
+    padding: 0 5px;
+  }
+}
+
+.mat-sort-header-container:not(.mat-sort-header-sorted) .mat-sort-header-arrow {
+  opacity: 0.54 !important;
+  transform: translateY(0px) !important;
 }

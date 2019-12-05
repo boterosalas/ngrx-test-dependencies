@@ -5,6 +5,7 @@
     
     <form
         [formGroup]="dateForm"
+        class="downloadUsers"
         >
             <mat-icon class="icon-date" matPrefix>date_range</mat-icon>
             <input formControlName="dateRange" [locale]="locale" placeholder="Seleccione fechas" type="text" [maxDate]="maxDate"  ngxDaterangepickerMd class="form-control border-input mat-elevation-z1 p-2 border-radius"/>
@@ -13,7 +14,7 @@
 
     <app-search-users (search)="searchUser($event)"></app-search-users>
     <div id="users-table">
-        <app-table-users (dataUser)="userData($event)" [dataSource]="dataSource"></app-table-users>
+        <app-table-users (dataUser)="userData($event)" [dataSource]="dataSource" (sortDataUser)="sort($event)"></app-table-users>
         <mat-paginator
         [length]="totalItems"
             [pageSize]="pageSize"
