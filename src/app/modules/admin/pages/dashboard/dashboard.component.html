@@ -26,7 +26,7 @@
         icon="/assets/img/dashboard/icono-usuarios-activos.svg"
         iconClass="icon-dashboard"
         title=""
-        [dataNumber]="totalMonthRegisterActive"
+        [dataNumber]="monthActiveUsersQuantity"
         textData="{{ 'DASHBOARD.ACTIVE_MONTH' | translate }}"
         textData2="{{ 'DASHBOARD.YESTERDAY' | translate }}"
         aligment="flex-end flex-end"
@@ -45,7 +45,7 @@
         textBottomCard ="{{ 'DASHBOARD.MONTH' | translate }}"
         aligment="center center"
         textData4 = "{{ 'DASHBOARD.YESTERDAY2' | translate }}"
-        [cifer4]="salesMonthTotalYesterday"
+        [cifer4]="salesMonthYesterday"
         textData5 = "{{ 'DASHBOARD.TOTAL' | translate }}"
         [cifer5]="salesMonthTotalYesterday"
       ></app-card-dashboard-info>
