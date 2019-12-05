@@ -52,11 +52,39 @@
   width: 100%;
   display: flex;
   margin-top: 15px;
+  img {
+    border-radius: 10px !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  
+  .card-other{
+    padding: 0 !important;
+    border-radius: 10px !important;
+  }
+
+  .img-container-viajes {
+    .card-product {
+      padding: 0 !important;
+      border-radius: 10px !important;
+    }
+    width: 100%;
+    display: flex;
+    margin-top: 0;
+    img {
+      border-top-right-radius: 0px !important;
+      border-bottom-right-radius: 0px !important;
+      border-bottom-left-radius: 10px !important;
+    }
+  }
 }
 
 .container-info {
   max-width: 20vh;
   min-width: 20vh;
+  position: relative;
+  top: 7px;
 }
 
 .badge-product {
@@ -110,7 +138,7 @@
   }
 }
 
-h3{
+h3 {
   cursor: pointer;
 }
 
