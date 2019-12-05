@@ -661,6 +661,7 @@ footer {
 
 th.mat-header-cell {
   color: $th;
+  border-bottom-color: #3B3B3B;
 }
 
 .min-18 {
@@ -767,7 +768,11 @@ th.mat-header-cell {
 
 .users-table {
   td.mat-cell, td.mat-footer-cell, th.mat-header-cell{
-    padding: 0 5px;
+    padding: 10px 5px;
+  }
+  color: #707070;
+  p{
+    color: #707070;
   }
 }
 
