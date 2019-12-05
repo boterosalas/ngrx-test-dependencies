@@ -754,3 +754,11 @@ th.mat-header-cell {
   width: 30px;
   height: 40px;
 }
+
+.md-drppicker td.active, .md-drppicker td.active:hover, .md-drppicker .btn{
+  background-color: $primary-color !important;
+}
+
+.md-drppicker .btn{
+  color: #fff !important;
+}

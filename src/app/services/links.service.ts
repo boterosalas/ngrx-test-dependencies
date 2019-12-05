@@ -17,6 +17,7 @@ export class LinksService {
   // comission = 'commissions';
   reports = 'Reports/ClickerPerformanceReport';
   apiKPI = 'Reports/getKPI';
+  apiUsersExcel= 'Reports/getUsersExcel'
   insurance = 'Insurance/ProcessFiles'
   apiSaveLink = 'Link/SaveLink';
   apiPostReferrrals = 'Link/downloadReferrals';
@@ -85,6 +86,10 @@ export class LinksService {
         return resp.objectResponse;
       })
     );
+  }
+
+  public getUsersExcel(params: any) {
+    return this.http.get((`${this.urlComission}${this.apiUsersExcel}?email=${params.email}&start=${params.start}&end=${params.end}`), this.httpOptions);
   }
 
   public sendfile(formdata) {
