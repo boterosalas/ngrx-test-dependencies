@@ -20,10 +20,14 @@ import { DialogUserComponent } from "./components/dialog-user/dialog-user.compon
 import { MatPaginatorIntl } from "@angular/material";
 import { KeySpaceDirectiveAdmin } from "src/directives/space.admin.directive";
 import { CardDashboardComponent } from "./components/card-dashboard/card-dashboard.component";
+import { CardDashboardInfoComponent } from './components/card-dashboard-info/card-dashboard-info.component';
 
 // Import ng-circle-progress
 import { NgCircleProgressModule } from "ng-circle-progress";
-import { CardDashboardInfoComponent } from './components/card-dashboard-info/card-dashboard-info.component';
+
+// date range
+
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 const routes: Routes = [
   {
@@ -76,6 +80,7 @@ const routes: Routes = [
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxDaterangepickerMd.forRoot(),
     NgCircleProgressModule.forRoot({
       // set defaults here
       radius: 60,

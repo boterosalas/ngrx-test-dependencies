@@ -22,6 +22,7 @@ import { AuthService } from "./services/auth.service";
 import * as SmartBanner from "../../node_modules/smart-app-banner/dist/smart-app-banner.js";
 import { BnNgIdleService } from "bn-ng-idle";
 import Swal from "sweetalert2";
+declare var dataLayer: any
 
 @Component({
   selector: "app-root",
@@ -106,7 +107,13 @@ export class AppComponent implements OnInit, OnDestroy {
           this.isHome = false;
           this.internal = true;
         }
+        dataLayer.push({
+        event: 'pageview',
+        virtualPageURL: url.url
+      })
+
       }
+
     });
 
     new SmartBanner({
@@ -153,6 +160,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
     this.showAnimation1 = true;
     this.innerWidth = window.innerWidth;
     this.showLoginForm = true;

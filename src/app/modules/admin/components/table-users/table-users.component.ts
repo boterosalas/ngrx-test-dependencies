@@ -14,7 +14,7 @@ export class TableUsersComponent implements OnInit {
   @Output() sortDataUser = new EventEmitter;
   
 
-  displayedColumns: string[] = ['identification', 'name', 'cellphone', 'email', 'origin', 'verified', 'status'];
+  displayedColumns: string[] = ['identification', 'cellphone', 'email', 'subscription', 'firstsale' ,'origin', 'comunication', 'verified', 'status'];
 
   ngOnInit() {
   }
