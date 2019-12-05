@@ -198,13 +198,17 @@
   },
   "USERS": {
     "USERS": "Usuarios",
+    "USER": "USUARIO",
+    "SUBSCRIPTION": "INSCRITO",
+    "FIRST_SALE": "P.VENTA  ",
     "IDENTIFICATION": "CÉDULA",
     "NAME": "NOMBRE",
     "CELLPHONE": "CELULAR",
     "EMAIL": "CORREO",
     "ORIGIN": "ORIGEN",
     "VERIFIED": "VERIFICADO",
-    "STATUS":"ESTADO"
+    "STATUS":"ESTADO",
+    "COMUNICATION": "COMUNICADO"
   },
   "DASHBOARD": {
     "USERS": "USUARIOS",

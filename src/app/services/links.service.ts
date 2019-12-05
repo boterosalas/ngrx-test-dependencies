@@ -17,6 +17,8 @@ export class LinksService {
   // comission = 'commissions';
   reports = 'Reports/ClickerPerformanceReport';
   apiKPI = 'Reports/getKPI';
+  apiUsersExcel= 'Reports/getUsersExcel'
+  apiUsers= 'Reports/getUsers'
   insurance = 'Insurance/ProcessFiles'
   apiSaveLink = 'Link/SaveLink';
   apiPostReferrrals = 'Link/downloadReferrals';
@@ -87,6 +89,10 @@ export class LinksService {
     );
   }
 
+  public getUsersExcel(params: any) {
+    return this.http.get((`${this.urlComission}${this.apiUsersExcel}?email=${params.email}&start=${params.start}&end=${params.end}`), this.httpOptions);
+  }
+
   public sendfile(formdata) {
       let token = localStorage.getItem("ACCESS_TOKEN");
       let authorization = token;
@@ -102,6 +108,24 @@ export class LinksService {
       })
     };
     return this.http.post((`${environment.URL_COMISSION}${this.apigenerateCommissions}`), formdata , httpOptions );
+  }
+
+  public searchUsers(term?: any) {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.get((`${this.urlComission}${this.apiUsers}?searchText=${term.term}&from=${term.from}&to=${term.to}&orderBy=${term.orderOrigin}&ordination=${term.orderBy}`), httpOptions).pipe(
+      map((user: any) => {
+        return user.objectResponse;
+      })
+    );
   }
   
 }
