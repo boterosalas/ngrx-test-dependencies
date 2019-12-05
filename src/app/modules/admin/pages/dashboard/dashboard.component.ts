@@ -28,6 +28,8 @@ export class DashboardComponent implements OnInit {
   percent: any;
   links = true;
 
+  monthActiveUsersQuantity:string;
+
   ngOnInit() {
     this.getKPI();
   }
@@ -41,7 +43,7 @@ export class DashboardComponent implements OnInit {
       this.totalMonthRegisterActive = resp.historicalActiveUsersQuantity;
       this.todayActiveUsers = resp.yesterdayActiveUsersQuantity;
       this.salesMonth = resp.monthSales;
-      this.salesMonthTotalYesterday = resp.yesterdaySales;
+      this.salesMonthYesterday = resp.yesterdaySales;
       this.salesMonthTotalYesterday = resp.historicalSales;
       this.commissionMonth = resp.monthCommissionValue;
       this.commissionMonthYesterday = resp.yesterdayCommissionValue;
@@ -50,6 +52,7 @@ export class DashboardComponent implements OnInit {
       this.linksMonthYesterday = resp.todayGeneratedLinks;
       this.linksMonthTotalYesterday = resp.historicalGeneratedLinks;
       this.percent = (resp.historicalActiveUsersQuantity /resp.historicalUsersQuantity) * 100;
+      this.monthActiveUsersQuantity = resp.monthActiveUsersQuantity;
     })
   }
 
