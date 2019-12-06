@@ -2,7 +2,7 @@
     <div fxLayout="row" fxLayoutAlign="space-between center" [ngClass]="isHome ? 'position-absolute container' : 'pt-2 pb-2 container' && auth.isLoggedIn() && (auth.getRole$ | async )  === 'ADMIN' ? 'container-fluid pt-3 pb-3 ' : 'container pt-2 pb-2 ' ">
         <div class="logo gtmHomeClicLatrlLogoClickam" id="logo-header">
         <a matRipple *ngIf="!auth.isLoggedIn()"  [routerLink]="['inicio']">
-            <img class="gtmHomeClicLatrlLogoClickam" *ngIf="isHome gtmHomeClicLatrlLogoClickam" src="assets/img/logo-header.svg" alt="clickam">
+            <img class="gtmHomeClicLatrlLogoClickam" *ngIf="isHome gtmHomeClicLatrlLogoClickam" src="assets/img/logo-header-2.svg" alt="clickam">
             <img class="gtmHomeClicLatrlLogoClickam" *ngIf="internal" src="assets/img/logo-header-2.svg" alt="clickam">
         </a>
         <a matRipple *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'CLICKER'"  [routerLink]="['clicker']">

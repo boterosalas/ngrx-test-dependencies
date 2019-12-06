@@ -1,25 +1,49 @@
 section{
-    margin-bottom: 3rem;
+    // margin-bottom: 3rem;
 
     h2{
         color: #2B2A27;
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 
 }
 
-.img{
-    &-left{
-        position: relative;
-        margin-left: -40px;
-        margin-right: 10px;
-    }
-    &-right{
-        margin-right: -60px;
-        margin-left: 10px;
-    }
+img{
+    max-width: 100%;
 }
 
 .lineheight {
     line-height: 1.4;
 }
+
+.fr{
+    float: right;
+}
+
+@media screen and (min-width: 600px) {
+    .width-desc{
+        width: 295px;
+        font-size: 15px;
+    }
+    
+    .width-desc2{
+        width: 325px;
+        font-size: 15px;
+        margin-bottom: 34px;
+
+    }
+
+    .img{
+        &-left{
+            top: 16px;
+            position: relative;
+        }
+        &-right{
+            top: 7px;
+            position: relative;
+        }
+        max-width: 100%;
+    }
+
+}
+
