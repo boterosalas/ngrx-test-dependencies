@@ -169,9 +169,9 @@ export class TabsComponent extends MatPaginatorIntl
   ngOnInit() {
 
     setTimeout(() => {
-      document.querySelector('#mat-tab-label-0-0').classList.add("gtmInicioClicFiltroExitocom");
-      document.querySelector('#mat-tab-label-0-1').classList.add("gtmInicioClicFiltroSeguro");
-      document.querySelector('#mat-tab-label-0-2').classList.add("gtmInicioClicFiltroViajes");
+      document.querySelector('.mat-tab-label[aria-posinset="1"]').classList.add("gtmInicioClicFiltroExitocom");
+      document.querySelector('.mat-tab-label[aria-posinset="2"]').classList.add("gtmInicioClicFiltroSeguro");
+      document.querySelector('.mat-tab-label[aria-posinset="3"]').classList.add("gtmInicioClicFiltroViajes");
     }, 1000);
 
     this.showNotFound = false;
