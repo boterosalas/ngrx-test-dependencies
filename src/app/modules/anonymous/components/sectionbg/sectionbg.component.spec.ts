@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SectionbgComponent } from './sectionbg.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('SectionbgComponent', () => {
   let component: SectionbgComponent;
@@ -8,7 +9,10 @@ describe('SectionbgComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SectionbgComponent ]
+      declarations: [ SectionbgComponent ],
+      imports: [
+        TranslateModule.forRoot()
+      ]
     })
     .compileComponents();
   }));
