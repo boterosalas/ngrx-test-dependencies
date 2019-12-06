@@ -5,20 +5,20 @@
 }
 
 .text-slide{
-    max-width: 230px;
+    max-width: 270px;
     margin: 0 auto;
     line-height: 1.4;
   }
 
   .text-desc{
-      font-size: 16px;
+      font-size: 15px;
       line-height: 1.4;
   }
 
   @media screen and (min-width: 600px) {
       .text-desc{
           p{
-              width: 30%;
+              width: 520px;
               margin:0 auto ;
           }
       }

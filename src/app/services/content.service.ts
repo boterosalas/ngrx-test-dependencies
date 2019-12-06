@@ -33,7 +33,17 @@ export class ContentService {
   sendSearch = {};
 
   public getNews() {
-    return this.http.get(`${this.url + this.apiNews}`, this.httpOptions).pipe(
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.get(`${this.url + this.apiNews}`, httpOptions).pipe(
       map((user: ResponseService) => {
         return user.objectResponse;
       })
@@ -41,7 +51,17 @@ export class ContentService {
   }
 
   public getAssured() {
-    return this.http.get(`${this.url + this.apiAssured}`, this.httpOptions).pipe(
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.get(`${this.url + this.apiAssured}`, httpOptions).pipe(
       map((user: ResponseService) => {
         return user.objectResponse;
       })
@@ -49,7 +69,17 @@ export class ContentService {
   }
 
   public getTrips() {
-    return this.http.get(`${this.url + this.apiTrips}`, this.httpOptions).pipe(
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.get(`${this.url + this.apiTrips}`, httpOptions).pipe(
       map((user: ResponseService) => {
         return user.objectResponse;
       })
@@ -57,7 +87,17 @@ export class ContentService {
   }
 
   public getCategory() {
-    return this.http.get(`${this.url + this.apiCategories}`, this.httpOptions).pipe(
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.get(`${this.url + this.apiCategories}`, httpOptions).pipe(
       map((user: ResponseService) => {
         return user.objectResponse;
       })
@@ -65,7 +105,17 @@ export class ContentService {
   }
 
   public getOffers() {
-    return this.http.get(`${this.url + this.apiOffers}`, this.httpOptions).pipe(
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.get(`${this.url + this.apiOffers}`, httpOptions).pipe(
       map((user: ResponseService) => {
         return user.objectResponse;
       })
@@ -82,6 +132,16 @@ export class ContentService {
   // }
 
   public getProductsPagination(params: {term: any, from:number, to:number, order: string}){
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
     if(isNaN(params.term) === true) {
       if(params.order !== '') {
         this.sendSearch = {parameters: `?ft=${params.term}&_from=${params.from}&_to=${params.to}&fq=sellerIds:1&O=${params.order}`};
@@ -92,7 +152,7 @@ export class ContentService {
       this.sendSearch = {parameters: `?ft=${params.term}&fq=sellerIds:1`};
     }
     const apiSearchVetex = `${this.apiProducts}/getProducts`
-    return this.http.post(`${this.url + apiSearchVetex}`, this.sendSearch, this.httpOptions).pipe(
+    return this.http.post(`${this.url + apiSearchVetex}`, this.sendSearch, httpOptions).pipe(
       map((user: any) => {
         return user.objectResponse;
       })

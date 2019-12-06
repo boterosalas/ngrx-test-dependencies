@@ -30,7 +30,7 @@ import { environment } from "src/environments/environment";
 import { TokenService } from "src/app/services/token.service";
 import { ResponseService } from "src/app/interfaces/response";
 import Swal from "sweetalert2";
-declare var dataLayer: any
+declare var dataLayer: any;
 
 @Component({
   selector: "app-tabs",
