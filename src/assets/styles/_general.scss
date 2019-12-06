@@ -494,6 +494,12 @@ table {
   position: relative;
 }
 
+@media screen and (min-width: 960px) and (max-width: 991px) {
+  .menu-desktop {
+    width: 660px;
+  }
+}
+
 .menu-desktop {
   &.colorlinks {
     a {
@@ -793,7 +799,7 @@ th.mat-header-cell {
 }
 
 .mat-raised-button{
-  border-radius: 8px;
+  border-radius: 10px !important;
 }
 
 .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
