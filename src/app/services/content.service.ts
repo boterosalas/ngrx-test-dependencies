@@ -11,8 +11,14 @@ export class ContentService {
 
   constructor(private http: HttpClient) { }
 
+  token = localStorage.getItem("ACCESS_TOKEN");
+  authorization = this.token;
+
+
   httpOptions = {
     headers: new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + this.authorization,
       'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
     })
   };

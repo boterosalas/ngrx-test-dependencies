@@ -7,6 +7,12 @@
 .text-slide{
     max-width: 230px;
     margin: 0 auto;
+    line-height: 1.4;
+  }
+
+  .text-desc{
+      font-size: 16px;
+      line-height: 1.4;
   }
 
   @media screen and (min-width: 600px) {

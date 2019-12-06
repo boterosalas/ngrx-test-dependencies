@@ -43,7 +43,6 @@ export class LinksService {
   }
 
   public downloadReferrals(dates: any) {
-    console.log(dates);
     return this.http.post((`${this.url + this.apiPostReferrrals}`), dates, this.httpOptions);
   }
 
