@@ -67,7 +67,7 @@
     <span fxLayout="column" fxFlex="100"  fxFlex.xs="70" fxFLex.gt-xs="100" fxLayoutAlign="center center" fxLayoutAlign.gt-xs="inherit inherit">
       <span fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap="5px">
         <span fxLayout="column"  ngClass.xs="container-info"  fxLayoutAlign="start start">
-          <h3 class="m-0 gray tmin" id="{{ id }}">{{ productName }}</h3>
+          <h3 class="m-0 gray tmin" id="{{ id }}" matTooltip={{productName}}>{{ productName | truncate: '20' }}</h3>
           <p>
             <span>Comisión:</span>
             <span class="d-block discount">

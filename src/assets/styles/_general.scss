@@ -57,7 +57,9 @@ body {
 .mat-raised-button,
 .mat-stroked-button,
 .mat-tab-group,
-.mat-table {
+.mat-table,
+.mat-bottom-sheet-container
+ {
   font-family: $font-family-base !important;
 }
 
@@ -312,8 +314,13 @@ button {
 }
 
 .card-product {
-  border: 1px solid $color-border;
-  border-radius: 0px !important;
+  // border: 1px solid $color-border;
+  // border-radius: 0px !important;
+  box-shadow: 0px 1px 3px #00000029;
+  white-space: normal;
+  border-radius: 5px;
+  min-width: 160px;
+  width: 100%;
   .mat-card-image {
     margin: 0 auto !important;
     height: auto;
@@ -411,7 +418,7 @@ table {
 
 @media screen and (min-width: 600px) {
   .fullheight {
-    width: 30%;
+    width: 28%;
     right: 0;
     overflow-x: hidden;
     overflow-y: auto;
@@ -432,13 +439,22 @@ table {
   .mat-bottom-sheet-container-large,
   .mat-bottom-sheet-container-medium,
   .mat-bottom-sheet-container-xlarge {
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
   }
+}
+
+.mat-bottom-sheet-container-large, .mat-bottom-sheet-container-medium, .mat-bottom-sheet-container-xlarge {
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
 }
 
 .search .mat-form-field-wrapper{
   padding: 0 !important;
+}
+
+.mat-bottom-sheet-container-large {
+  min-width: 430px !important;
 }
 
 @media screen and (max-width: 600px) {
@@ -446,6 +462,10 @@ table {
     display: none !important;
     .ch-100 {
       height: 100% !important;
+    }
+
+    .drag-scroll-wrapper.drag-scroll-container .drag-scroll-content {
+      flex-direction: column !important;
     }
   }
 
@@ -455,6 +475,14 @@ table {
     height: 90px;
   }
 }
+
+@media (max-width: 600px) {
+  .drag-scroll-content {
+    flex-direction: column !important;
+  }
+}
+
+
 
 .mobile-menu {
   .item {
@@ -492,6 +520,13 @@ table {
 
 .position-relative {
   position: relative;
+}
+
+@media screen and (min-width: 320px) and (max-width: 375px) {
+  .card-product {
+    min-width: auto;
+  }
+  
 }
 
 @media screen and (min-width: 960px) and (max-width: 991px) {
@@ -611,6 +646,7 @@ footer {
 
 ::-webkit-scrollbar {
   width: 7px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
   background: #ececec;
@@ -792,6 +828,8 @@ th.mat-header-cell {
 
 .mat-raised-button[disabled]:not([class*=mat-elevation-z]) {
   box-shadow: 0 0 0 0 rgba(0,0,0,.2), 0 0 0 0 rgba(0,0,0,.14), 0 0 0 0 rgba(0,0,0,.12) !important;
+  color: #fff;
+  background: #B5B8BC;
 }
 
 .slick-dots li button:before{
@@ -808,6 +846,14 @@ th.mat-header-cell {
 
 .mat-expansion-panel-body {
   padding: 14px 24px 16px !important;
+}
+
+.drag-scroll-wrapper.drag-scroll-container {
+  height: 100% !important;
+}
+
+[container="img-container-viajes"] mat-card {
+  padding: 0 !important;
 }
 
 // .mat-sort-header-container:not(.mat-sort-header-sorted) .mat-sort-header-arrow {

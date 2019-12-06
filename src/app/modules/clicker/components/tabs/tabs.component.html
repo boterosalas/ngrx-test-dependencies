@@ -36,12 +36,13 @@
             (page)="pagination($event)"
           >
           </mat-paginator>
-          <div fxLayout="row wrap">
+          <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="5px">
             <div
               fxLayout="column"
-              fxFlex.xs="50"
-              fxFlex.sm="33"
-              fxFlex.gt-sm="25"
+              fxFlex.xs="43"
+              fxFlex.sm="30"
+              fxFlex.gt-sm="15"
+              class="mt-3 mb-3 ml-2"
               *ngFor="let product of productsList;let i = index;"
             >
               <app-product
@@ -85,13 +86,14 @@
         <ng-template mat-tab-label>
             <span class="gtmInicioClicFiltroSeguro">Seguros</span>
        </ng-template>
-      <div fxLayout="row wrap">
+      <div fxLayout="row wrap" fxLayout.xs="column">
+        <drag-scroll scrollbar-hidden="true" drag-scroll-y-disabled="true">
         <div
           fxLayout="column"
           fxFlex.xs="100"
           fxFlex.sm="33"
-          fxFlex.gt-sm="20"
-          class="mt-3 mb-3"
+          fxFlex.gt-sm="15"
+          class="mt-3 mb-3 mr-3 ml-2"
           *ngFor="let asurred of assureds; let i = index"
         >
           <app-product
@@ -108,6 +110,7 @@
             (infoProduct)="dataAssured(asurred)"
           ></app-product>
         </div>
+        </drag-scroll>
       </div>
     </mat-tab>
 
@@ -116,12 +119,12 @@
         <ng-template mat-tab-label>
             <span class="gtmInicioClicFiltroViajes">Viajes</span>
        </ng-template>
-      <div fxLayout="row wrap">
+      <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="0px">
         <div
           fxLayout="column"
           fxFlex.xs="100"
-          fxFlex.sm="33"
-          fxFlex.gt-sm="20"
+          fxFlex.sm="30"
+          fxFlex.gt-sm="18"
           class="mt-3 mb-3"
           *ngFor="let trip of trips; let i = index"
         >
