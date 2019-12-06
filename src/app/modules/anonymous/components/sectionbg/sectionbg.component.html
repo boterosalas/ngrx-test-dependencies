@@ -4,7 +4,7 @@
         <div class="text-action">
             <div fxLayout="column" fxLayoutAlign="start" class={{textDirection}} ngClass.xs="mt-4">
                 <h2 id="titleSectionbg">{{title}}</h2>
-                <p class="desc">{{description}}</p>
+                <p class="desc"> <span class="galano-bold">{{ 'HOME.DESCRIPTION_RAISE' | translate }}</span> {{ 'HOME.DESCRIPTION_RAISE2' | translate }}</p>
             </div>
             <div fxLayout="row" fxLayoutAlign="start"  class="mt-4">
                     <button mat-raised-button class="orange gtmHomeClicLatrlRgtr" color="primary" id="register-bg" (click)="openRegister()">{{textbutton}}</button>
