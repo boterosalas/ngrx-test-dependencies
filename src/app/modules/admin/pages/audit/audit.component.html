@@ -1,0 +1,11 @@
+<h1 class="border-bottom-orange-init">{{ 'AUDIT.AUDIT' | translate}}</h1>
+<p>Elige un rango de fechas para exportar la audioria</p>
+
+<form
+    [formGroup]="dateForm"
+    class="downloadUsers"
+    >
+        <mat-icon class="icon-date" matPrefix>date_range</mat-icon>
+        <input (change)="change()" formControlName="dateRange" [locale]="locale" placeholder="Seleccione fechas" type="text" [maxDate]="maxDate"  ngxDaterangepickerMd class="form-control border-input mat-elevation-z1 p-2 border-radius"/>
+        <button mat-raised-button color="orange" (click)="exportAudit()" id="download-users" class="ml-2" [disabled]="!dateForm.valid || disButon">Exportar <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
+</form>

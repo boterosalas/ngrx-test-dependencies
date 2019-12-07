@@ -12,6 +12,7 @@
        </ng-template>
 
       <app-search (search)="searchProductPaginate($event)"></app-search>
+      
       <div class="order border-bottom-gray" fxLayout="row" fxLayoutAlign="flex-end center" *ngIf="showResults">
         
         <label class="mr-4">Ordenar por: </label>
@@ -24,28 +25,26 @@
         </mat-form-field>
       
       </div>
+
       <div *ngIf="showResults">
-        <div class="row m-0">
-          <mat-paginator
-            class="mb-3"
-            id="paginator"
-            [length]="totalItems"
-            [pageSize]="pageSize"
-            [pageSizeOptions]="pageSizeOptions"
-            [pageIndex]="pageIndex"
-            (page)="pagination($event)"
-          >
-          </mat-paginator>
-          <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="5px">
-            <div
-              fxLayout="column"
-              fxFlex.xs="43"
-              fxFlex.sm="30"
-              fxFlex.gt-sm="15"
-              class="mt-3 mb-3 ml-2"
-              *ngFor="let product of productsList;let i = index;"
-            >
+        <mat-paginator
+          class="mb-3"
+          id="paginator"
+          [length]="totalItems"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="pageSizeOptions"
+          [pageIndex]="pageIndex"
+          (page)="pagination($event)"
+        >
+        </mat-paginator>
+          <div fxLayout="row wrap"  fxLayoutGap="2%">
               <app-product
+                *ngFor="let product of productsList;let i = index;"
+                class="product-exito"
+                fxLayout="column"
+                fxFlex="18"
+                fxFlex.xs="48"
+                fxFlex.sm="30"
                 id="productTitle{{ i }}"
                 btnid="btnLink{{ i }}"
                 [productName]="product.productName"
@@ -62,7 +61,7 @@
                 (infoProduct)="dataProduct(product);"
               ></app-product>
             </div>
-          </div>
+
           <mat-paginator
             class="mb-3 hide-pag"
             id="paginator"
@@ -73,7 +72,7 @@
             (page)="pagination($event)"
           >
           </mat-paginator>
-        </div>
+        
       </div>
 
       <div class="not-found" *ngIf="showNotFound">
