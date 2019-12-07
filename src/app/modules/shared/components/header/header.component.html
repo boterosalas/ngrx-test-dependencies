@@ -20,14 +20,14 @@
                 <app-menu-options aligment="start start" *ngIf="(auth.getRole$ | async) !== 'ADMIN'"></app-menu-options>
                 <span class="border-right-white"></span>
                 <a *ngIf="!auth.isLoggedIn()" class="gtmHomeClicSupRegistrarse" mat-button (click)="openRegister()" id="header-register"><span class="gtmHomeClicSupRegistrarse" >{{ 'GENERIC.REGISTER2' | translate }}</span></a>
-                <a *ngIf="!auth.isLoggedIn()" class="gtmHomeClicSupIniciarSesion" mat-button (click)="showLogin()" id="header-login">{{ 'LOGIN.LOGIN' | translate }}</a>
+                <a *ngIf="!auth.isLoggedIn()" class="gtmHomeClicSupIniciarSesion" mat-button (click)="showLogin()" id="header-login"> <span class="gtmHomeClicSupIniciarSesion" >{{ 'LOGIN.LOGIN' | translate }}</span> </a>
             </div>
             
             <span *ngIf="auth.isLoggedIn()">
                     <button mat-button [matMenuTriggerFor]="menu" class="initials gtmHomeClicSupPerfil" id="btnUser">{{initials}}</button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item class="gtmHomeClicSupMiPerfil" routerLink="mi-perfil">{{ 'HEADER.PROFILE' | translate }}</button>
-                        <button mat-menu-item class="gtmHomeClicSupCerrarSesionPerfil" (click)="logout()">{{ 'HEADER.LOGOUT' | translate }} </button>
+                        <button mat-menu-item class="gtmHomeClicSupMiPerfil" routerLink="mi-perfil"><span class="gtmHomeClicSupMiPerfil">{{ 'HEADER.PROFILE' | translate }}</span> </button>
+                        <button mat-menu-item class="gtmHomeClicSupCerrarSesionPerfil" (click)="logout()"><span class="gtmHomeClicSupCerrarSesionPerfil">{{ 'HEADER.LOGOUT' | translate }}</span>  </button>
                     </mat-menu>
             </span>
             <div fxLayout="row" [fxShow.gt-md]="false" [fxShow.md]="false">
