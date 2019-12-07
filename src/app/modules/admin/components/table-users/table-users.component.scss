@@ -14,3 +14,7 @@ table {
   .gray-light{
     color: #969696;
   }
+
+  td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type{
+    padding-left: 0 !important;
+  }
