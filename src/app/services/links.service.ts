@@ -56,8 +56,18 @@ export class LinksService {
   }
 
   public getReports(identification: string) {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
     let apiReport = `${this.reports}?identification=${identification}`;
-    return this.http.get((`${this.urlComission}/${apiReport}`), this.httpOptions).pipe(
+    return this.http.get((`${this.urlComission}/${apiReport}`), httpOptions).pipe(
       map((resp: ResponseService) => {
         return resp.objectResponse;
       })
@@ -65,7 +75,17 @@ export class LinksService {
   }
 
   public getKPI() {
-    return this.http.get((`${this.urlComission}/${this.apiKPI}`), this.httpOptions).pipe(
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.get((`${this.urlComission}/${this.apiKPI}`), httpOptions).pipe(
       map((resp: ResponseService) => {
         return resp.objectResponse;
       })

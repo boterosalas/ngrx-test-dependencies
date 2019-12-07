@@ -46,7 +46,9 @@ export class OffersComponent implements OnInit {
 
   ngOnInit() {
     this.getOffers();
-    this.identification = this.token.userInfo().identification;
+    if(localStorage.getItem("ACCESS_TOKEN") !== null ) {
+      this.identification = this.token.userInfo().identification;
+    }
   }
 
   @ViewChild('slickModal', {static: true}) slickModal: SlickCarouselComponent;

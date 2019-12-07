@@ -2,7 +2,8 @@
     <div fxLayout="row" fxLayoutAlign="space-between center" [ngClass]="isHome ? 'position-absolute container' : 'pt-2 pb-2 container' && auth.isLoggedIn() && (auth.getRole$ | async )  === 'ADMIN' ? 'container-fluid pt-3 pb-3 ' : 'container pt-2 pb-2 ' ">
         <div class="logo gtmHomeClicLatrlLogoClickam" id="logo-header">
         <a matRipple *ngIf="!auth.isLoggedIn()"  [routerLink]="['inicio']">
-            <img class="gtmHomeClicLatrlLogoClickam" *ngIf="isHome gtmHomeClicLatrlLogoClickam" src="assets/img/logo-header.svg" alt="clickam">
+            <img fxShow.gt-xs="true" fxShow.xs="false" class="gtmHomeClicLatrlLogoClickam" *ngIf="isHome gtmHomeClicLatrlLogoClickam" src="assets/img/logo-header-2.svg" alt="clickam">
+            <img fxShow.gt-xs="false"  fxShow.xs="true" class="gtmHomeClicLatrlLogoClickam" *ngIf="isHome gtmHomeClicLatrlLogoClickam" src="assets/img/logo-header.svg" alt="clickam">
             <img class="gtmHomeClicLatrlLogoClickam" *ngIf="internal" src="assets/img/logo-header-2.svg" alt="clickam">
         </a>
         <a matRipple *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'CLICKER'"  [routerLink]="['clicker']">
@@ -19,14 +20,14 @@
                 <app-menu-options aligment="start start" *ngIf="(auth.getRole$ | async) !== 'ADMIN'"></app-menu-options>
                 <span class="border-right-white"></span>
                 <a *ngIf="!auth.isLoggedIn()" class="gtmHomeClicSupRegistrarse" mat-button (click)="openRegister()" id="header-register"><span class="gtmHomeClicSupRegistrarse" >{{ 'GENERIC.REGISTER2' | translate }}</span></a>
-                <a *ngIf="!auth.isLoggedIn()" class="gtmHomeClicSupIniciarSesion" mat-button (click)="showLogin()" id="header-login">{{ 'LOGIN.LOGIN' | translate }}</a>
+                <a *ngIf="!auth.isLoggedIn()" class="gtmHomeClicSupIniciarSesion" mat-button (click)="showLogin()" id="header-login"> <span class="gtmHomeClicSupIniciarSesion" >{{ 'LOGIN.LOGIN' | translate }}</span> </a>
             </div>
             
             <span *ngIf="auth.isLoggedIn()">
                     <button mat-button [matMenuTriggerFor]="menu" class="initials gtmHomeClicSupPerfil" id="btnUser">{{initials}}</button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item class="gtmHomeClicSupMiPerfil" routerLink="mi-perfil">{{ 'HEADER.PROFILE' | translate }}</button>
-                        <button mat-menu-item class="gtmHomeClicSupCerrarSesionPerfil" (click)="logout()">{{ 'HEADER.LOGOUT' | translate }} </button>
+                        <button mat-menu-item class="gtmHomeClicSupMiPerfil" routerLink="mi-perfil"><span class="gtmHomeClicSupMiPerfil">{{ 'HEADER.PROFILE' | translate }}</span> </button>
+                        <button mat-menu-item class="gtmHomeClicSupCerrarSesionPerfil" (click)="logout()"><span class="gtmHomeClicSupCerrarSesionPerfil">{{ 'HEADER.LOGOUT' | translate }}</span>  </button>
                     </mat-menu>
             </span>
             <div fxLayout="row" [fxShow.gt-md]="false" [fxShow.md]="false">

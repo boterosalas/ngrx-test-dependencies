@@ -30,7 +30,7 @@ import { environment } from "src/environments/environment";
 import { TokenService } from "src/app/services/token.service";
 import { ResponseService } from "src/app/interfaces/response";
 import Swal from "sweetalert2";
-declare var dataLayer: any
+declare var dataLayer: any;
 
 @Component({
   selector: "app-tabs",
@@ -383,6 +383,9 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     this.idCustomerForm.reset();
     setTimeout(() => {
       this.saveLink();
+      document.querySelector('#facebook').classList.add("gtmInicioClicFiltroExitocomFacebook");
+      document.querySelector('#twitter').classList.add("gtmInicioClicFiltroExitocomTwitter");
+      document.querySelector('#whatsapp').classList.add("gtmInicioClicFiltroExitocomWhatsapp");
     }, 1500);
     this.formShareLink();
     const title = product.productName;
