@@ -22,6 +22,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { ProfileFormComponent } from './components/profile-form/profile-form.component';
 import { TableHistorialComponent } from './components/table-historial/table-historial.component';
 import { AditionalFilesComponent } from './components/aditional-files/aditional-files.component';
+import { DragScrollModule } from 'ngx-drag-scroll';
 
 const routes: Routes = [
   {
@@ -52,6 +53,7 @@ const routes: Routes = [
     FlexLayoutModule,
     FormsModule,
     ShareButtonsModule,
+    DragScrollModule,
     RouterModule.forChild(routes)
   ],
   providers: [
