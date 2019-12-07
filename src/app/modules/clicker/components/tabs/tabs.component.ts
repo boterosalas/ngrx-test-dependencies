@@ -30,7 +30,7 @@ import { environment } from "src/environments/environment";
 import { TokenService } from "src/app/services/token.service";
 import { ResponseService } from "src/app/interfaces/response";
 import Swal from "sweetalert2";
-declare var dataLayer: any;
+declare var dataLayer: any
 
 @Component({
   selector: "app-tabs",
@@ -261,12 +261,12 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
           this.showNotFound = true;
           this.showResults = false;
         }
-        dataLayer.push({
-          event: 'pushEventGA',
-          categoria: 'Inicio',
-          accion: 'ClicFiltroExitocom',
-          etiqueta: term
-        });
+        // dataLayer.push({
+        //   event: 'pushEventGA',
+        //   categoria: 'Inicio',
+        //   accion: 'ClicFiltroExitocom',
+        //   etiqueta: term
+        // });
       },
       error => {
         this.loading.hide();
@@ -383,9 +383,33 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     this.idCustomerForm.reset();
     setTimeout(() => {
       this.saveLink();
-      document.querySelector('#facebook').classList.add("gtmInicioClicFiltroExitocomFacebook");
-      document.querySelector('#twitter').classList.add("gtmInicioClicFiltroExitocomTwitter");
-      document.querySelector('#whatsapp').classList.add("gtmInicioClicFiltroExitocomWhatsapp");
+      // if(document.querySelector('#facebook')) {
+
+      //   document.querySelector('#facebook').classList.add("gtmInicioClicFiltroExitocomFacebook");
+      //   document.querySelector('#facebook button').classList.add("gtmInicioClicFiltroExitocomFacebook");
+      //   document.querySelector('#facebook svg').classList.add("gtmInicioClicFiltroExitocomFacebook");
+      //   document.querySelectorAll('#facebook div').forEach(item => {
+      //     item.classList.add("gtmInicioClicFiltroExitocomFacebook");
+      //   });
+      //   document.querySelector('#facebook fa-icon').classList.add("gtmInicioClicFiltroExitocomFacebook");
+
+      //   document.querySelector('#twitter').classList.add("gtmInicioClicFiltroExitocomTwitter");
+      //   document.querySelector('#twitter button').classList.add("gtmInicioClicFiltroExitocomTwitter");
+      //   document.querySelector('#twitter svg').classList.add("gtmInicioClicFiltroExitocomTwitter");
+      //   document.querySelectorAll('#twitter div').forEach(item => {
+      //     item.classList.add("gtmInicioClicFiltroExitocomTwitter");
+      //   });
+      //   document.querySelector('#twitter fa-icon').classList.add("gtmInicioClicFiltroExitocomTwitter");
+
+      //   document.querySelector('#whatsapp').classList.add("gtmInicioClicFiltroExitocomWhatsapp");
+      //   document.querySelector('#whatsapp button').classList.add("gtmInicioClicFiltroExitocomWhatsapp");
+      //   document.querySelector('#whatsapp svg').classList.add("gtmInicioClicFiltroExitocomWhatsapp");
+      //   document.querySelectorAll('#whatsapp div').forEach(item => {
+      //     item.classList.add("gtmInicioClicFiltroExitocomWhatsapp");
+      //   });
+      //   document.querySelector('#whatsapp fa-icon').classList.add("gtmInicioClicFiltroExitocomWhatsapp");
+
+      // }
     }, 1500);
     this.formShareLink();
     const title = product.productName;
