@@ -383,6 +383,9 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     this.idCustomerForm.reset();
     setTimeout(() => {
       this.saveLink();
+      document.querySelector('#facebook').classList.add("gtmInicioClicFiltroExitocomFacebook");
+      document.querySelector('#twitter').classList.add("gtmInicioClicFiltroExitocomTwitter");
+      document.querySelector('#whatsapp').classList.add("gtmInicioClicFiltroExitocomWhatsapp");
     }, 1500);
     this.formShareLink();
     const title = product.productName;

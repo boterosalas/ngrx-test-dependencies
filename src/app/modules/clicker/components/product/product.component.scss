@@ -51,7 +51,7 @@
 .img-container-viajes {
   width: 100%;
   display: flex;
-  margin-top: 15px;
+  margin-top: 0;
   img {
     border-radius: 10px !important;
   }
@@ -81,8 +81,8 @@
 }
 
 .container-info {
-  max-width: 20vh;
-  min-width: 20vh;
+  max-width: 14vh;
+  min-width: 14vh;
   position: relative;
   top: 7px;
 }
@@ -125,9 +125,9 @@
 
 @media screen and (min-width: 600px) {
   .img-container-2 {
-    max-width: 50%;
+    max-width: 100%;
     margin: 0px auto;
-    height: 20vh;
+    height: 25vh;
   }
 }
 
@@ -138,7 +138,7 @@
   }
 }
 
-h3 {
+h3.size {
   cursor: pointer;
 }
 
