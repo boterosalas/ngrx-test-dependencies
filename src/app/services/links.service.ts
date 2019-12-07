@@ -18,6 +18,7 @@ export class LinksService {
   reports = 'Reports/ClickerPerformanceReport';
   apiKPI = 'Reports/getKPI';
   apiUsersExcel= 'Reports/getUsersExcel'
+  apiAuditExcel= 'Reports/getAudit'
   apiUsers= 'Reports/getUsers'
   insurance = 'Insurance/ProcessFiles'
   apiSaveLink = 'Link/SaveLink';
@@ -159,6 +160,20 @@ export class LinksService {
       })
     };
     return this.http.get((`${this.urlComission}${this.apiUsersExcel}?email=${params.email}&start=${params.start}&end=${params.end}`), httpOptions);
+  }
+
+  public getAudit(params: any) {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.get((`${this.urlComission}${this.apiAuditExcel}?email=${params.email}&start=${params.start}&end=${params.end}`), httpOptions);
   }
 
   public sendfile(formdata) {
