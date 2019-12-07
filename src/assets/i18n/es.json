@@ -211,6 +211,9 @@
     "STATUS":"ESTADO",
     "COMUNICATION": "COMUNICADO"
   },
+  "AUDIT": {
+    "AUDIT": "Auditoria"
+  },
   "DASHBOARD": {
     "USERS": "USUARIOS",
     "TOTAL_USERS": "TOTAL USUARIOS",

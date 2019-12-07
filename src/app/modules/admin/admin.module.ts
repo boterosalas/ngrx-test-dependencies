@@ -28,6 +28,7 @@ import { NgCircleProgressModule } from "ng-circle-progress";
 // date range
 
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { AuditComponent } from './pages/audit/audit.component';
 
 const routes: Routes = [
   {
@@ -53,6 +54,14 @@ const routes: Routes = [
     data: {
       role: "ADMIN"
     }
+  },
+  {
+    path: "auditoria",
+    component: AuditComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN"
+    }
   }
 ];
 
@@ -69,7 +78,8 @@ const routes: Routes = [
     DialogUserComponent,
     KeySpaceDirectiveAdmin,
     CardDashboardComponent,
-    CardDashboardInfoComponent
+    CardDashboardInfoComponent,
+    AuditComponent
   ],
   imports: [
     CommonModule,

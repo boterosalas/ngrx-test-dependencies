@@ -285,7 +285,7 @@ export class UsersComponent extends MatPaginatorIntl
   }
 
   private changeStateUser(userId, value) {
-    this.usersService.statusUser(userId, value).subscribe(() => {
+    this.subscription = this.usersService.statusUser(userId, value).subscribe(() => {
       if (value === true) {
         this.openSnackBar("El usuario ha sido activado", "Cerrar");
       } else {
@@ -295,7 +295,7 @@ export class UsersComponent extends MatPaginatorIntl
   }
 
   private changeVerified(userId, value) {
-    this.usersService.verifiedUser(userId, value).subscribe(() => {
+    this.subscription = this.usersService.verifiedUser(userId, value).subscribe(() => {
       if (value === true) {
         this.openSnackBar("Se ha verificado el usuario", "Cerrar");
       } else {
@@ -334,7 +334,7 @@ export class UsersComponent extends MatPaginatorIntl
       end: this.dateForm.controls.dateRange.value.endDate.format()
     }
     
-    this.file.getUsersExcel(this.dateParams).subscribe((resp: ResponseService) => {
+    this.subscription = this.file.getUsersExcel(this.dateParams).subscribe((resp: ResponseService) => {
       if(resp.state === 'Success') {
         this.openSnackBar(resp.userMessage + ' a ' + this.email, 'Cerrar');
         this.dateForm.reset();
