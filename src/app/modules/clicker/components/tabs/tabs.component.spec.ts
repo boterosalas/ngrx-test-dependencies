@@ -17,6 +17,7 @@ import { JwtHelperService, JwtModule } from "@auth0/angular-jwt";
 import { ContentService } from "src/app/services/content.service";
 import { UserService } from "src/app/services/user.service";
 import { SlickCarouselModule } from "ngx-slick-carousel";
+import { ShareButtonsModule } from '@ngx-share/buttons';
 
 describe("TabsComponent", () => {
   let component: TabsComponent;
@@ -1340,6 +1341,9 @@ describe("TabsComponent", () => {
         RouterTestingModule.withRoutes([]),
         BrowserAnimationsModule,
         SharedModule,
+        ShareButtonsModule.withConfig({
+          include: ['facebook', 'twitter', 'whatsapp'],
+        }),
         SlickCarouselModule,
         JwtModule.forRoot({
           config: {
@@ -1373,6 +1377,7 @@ describe("TabsComponent", () => {
     mockContentService.getTrips.and.returnValue(of(dataok));
     mockContentService.getCategory.and.returnValue(of(category));
   }));
+
   beforeEach(() => {
     localStorage.setItem(
       "ACCESS_TOKEN",

@@ -341,6 +341,13 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       (resp: ResponseService) => {
         this.loading.hide();
         if (resp.state === "Success") {
+
+          dataLayer.push({
+            event: 'pushEventGA',
+            categoria: 'Registro',
+            accion: 'ClicLateralRegistro',
+            etiqueta: 'RegistroExitoso'
+          });
         
           Swal.fire({
               title:'Revisa tu correo',
@@ -351,13 +358,6 @@ export class RegisterformComponent implements OnInit, OnDestroy {
             confirmButtonClass: "accept-register-alert-success gtmRegistroClicModalValidacion"
           }).then(() => {
             this.utils.hideloginForm();
-          });
-
-          dataLayer.push({
-            event: 'pushEventGA',
-            categoria: 'Registro',
-            accion: 'ClicLateralRegistro',
-            etiqueta: 'RegistroExitoso'
           });
 
         } else {
