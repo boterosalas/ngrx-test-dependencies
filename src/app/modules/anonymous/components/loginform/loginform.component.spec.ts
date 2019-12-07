@@ -110,9 +110,7 @@ describe("LoginformComponent", () => {
   });
 
   describe("Login invalid", () => {
-    afterAll(()=>{
 
-    });
     beforeEach(() => {
       mockAuthService.login.and.returnValue(of(dataUserInvalid));
     });
