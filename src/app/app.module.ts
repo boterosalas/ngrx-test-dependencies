@@ -24,6 +24,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoaderInterceptorService } from './interceptors/loader-interceptor.service';
 import { SharedModule } from './modules/shared/shared.module';
 import { JwtModule } from '@auth0/angular-jwt';
+import { AuthInterceptor } from './interceptors/auth-interceptor.service';
 
 // sesion timeout
 import { BnNgIdleService } from 'bn-ng-idle';
@@ -69,6 +70,11 @@ export function jwtTokenGetter() {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
       multi: true
     },
     BnNgIdleService
