@@ -334,7 +334,9 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       fileBankCertificate: this.fileBankCertificate,
       bankAccountNumber: btoa(this.externalForm.controls.numberAccount.value),
       typeBankAccount: this.externalForm.controls.typeAccount.value,
-      address: this.externalForm.controls.address.value
+      address: this.externalForm.controls.address.value,
+      acceptHabeasData: true,
+      acceptTerms: true
     };
 
     this.subscription = this.registerUser.registerUser(registerForm).subscribe(

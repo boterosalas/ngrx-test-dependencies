@@ -63,8 +63,8 @@ export class AuditComponent implements OnInit, OnDestroy {
   public exportAudit() {
     this.dateParams = {
       email: this.email,
-      start: this.dateForm.controls.dateRange.value.startDate,
-      end: this.dateForm.controls.dateRange.value.endDate
+      start: this.dateForm.controls.dateRange.value.startDate.format(),
+      end: this.dateForm.controls.dateRange.value.endDate.format()
     }
     
    this.subscription = this.file.getAudit(this.dateParams).subscribe((resp: ResponseService) => {
