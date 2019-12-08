@@ -70,7 +70,18 @@ export class UserService {
   }
 
   public activateProfile(email: string) {
-    return this.http.post(`${this.url + this.apiActivateProfile}`, {email:email}, this.httpOptions);
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+
+    return this.http.post(`${this.url + this.apiActivateProfile}`, {email:email}, httpOptions);
   }
 
   getShortUrl(url: string)  {
@@ -125,7 +136,7 @@ export class UserService {
         observe : 'response'
       })
     };
-    return this.http.get((`${this.url}${this.apiDownloadFile}?identification=${identification}&typeDocument=${typeDocument}`), this.httpOptions);
+    return this.http.get((`${this.url}${this.apiDownloadFile}?identification=${identification}&typeDocument=${typeDocument}`), httpOptions);
   }
 
   public getDepartments(){
