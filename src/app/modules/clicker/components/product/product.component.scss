@@ -185,5 +185,14 @@ h3.size {
 }
 
 .titles{
-  min-height: 125px;
+  min-height: 100px;
+}
+
+@media screen and (min-width: 767px) and (max-width:1024px) {
+  .card-exito{
+    h3{
+      font-size: 15px;
+    }
+  }
+
 }
