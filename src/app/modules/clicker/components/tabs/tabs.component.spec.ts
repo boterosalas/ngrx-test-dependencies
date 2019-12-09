@@ -1385,6 +1385,7 @@ describe("TabsComponent", () => {
     );
     fixture = TestBed.createComponent(TabsComponent);
     component = fixture.componentInstance;
+    window['dataLayer'] = [];
     fixture.detectChanges();
   });
 
@@ -1392,6 +1393,7 @@ describe("TabsComponent", () => {
     expect(component).toBeTruthy();
     // expect(mockProductUserService.getProfile).toHaveBeenCalled();
   });
+  
   it("search products", () => {
     component.searchProductPaginate("cocina");
     fixture.detectChanges();
@@ -1544,6 +1546,7 @@ describe("TabsComponent", () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(TabsComponent);
       component = fixture.componentInstance;
+      window['dataLayer'] = [];
       fixture.detectChanges();
       mockContentService.getProductsPagination.and.returnValue(of(data));
     });
