@@ -875,7 +875,14 @@ span.orange-border {
   border: none !important;
 }
 
-// .mat-sort-header-container:not(.mat-sort-header-sorted) .mat-sort-header-arrow {
-//   opacity: 0.54 !important;
-//   transform: translateY(0px) !important;
-// }
+.register-container input, .register-container .mat-select-value, .register-container .mat-form-field-appearance-legacy .mat-form-field-underline {
+  color: #000 !important;
+}
+
+.over-x{
+  overflow-x: hidden;
+  .slick-dots{
+    position: relative !important;
+    bottom: 0 !important;
+  }
+}
