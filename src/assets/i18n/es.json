@@ -33,6 +33,7 @@
     "CUSTOMER_ID": "Ingrese la cédula del tomador del seguro",
     "CATEGORIES": "Categorías",
     "REFERENCE_TEXT": "O puedes referenciar a un cliente con su número de cédula",
+    "TRIPS_MSJ": "(refiere con cédula, si y solo si, tú serás quien pague en Viajes Éxito)",
     "REFERENCE": "Referenciar",
     "REFERENCE_IDENTIFICATION": "Ingresa la cédula del cliente a referir"
   },
