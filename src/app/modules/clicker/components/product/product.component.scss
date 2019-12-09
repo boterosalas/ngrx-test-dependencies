@@ -108,6 +108,12 @@
   // min-height: 35px;
 }
 
+.imageContainer {
+  img{
+    max-width: 100%;
+  }
+}
+
 .logo-aliance {
   width: 25px;
 }
@@ -157,10 +163,11 @@ h3.size {
   }
 }
 
-// .card-exito{
-//   flex-basis: 20%;
-//   max-width: 20%;
-// }
+.card-exito{
+  h3{
+    min-height: 38px;
+  }
+}
 
 .exito-product{
   position: relative;
@@ -175,4 +182,17 @@ h3.size {
   max-height: 17.56rem;
   display: block;
   position: relative;
+}
+
+.titles{
+  min-height: 100px;
+}
+
+@media screen and (min-width: 767px) and (max-width:1024px) {
+  .card-exito{
+    h3{
+      font-size: 15px;
+    }
+  }
+
 }
