@@ -2,7 +2,7 @@
   <mat-card-content>
     
   <div class="exito-product">
-    <div class="imageContainer">
+    <div class="imageContainer" fxLayout="column" fxLayoutAlign="start start">
       <img
         class="img-exito"
         mat-card-image
@@ -12,10 +12,10 @@
     </div>
   </div>
 
-  <div>
-    <h3 class="mt-0" [fxShow.gt-xs]="false"  id="{{ id }}"  matTooltip={{productName}}>{{ productName | truncate: '20' }}</h3>
-    <h3 class="mt-0" [fxShow.xs]="false"  id="{{ id }}"  matTooltip={{productName}}>{{ productName | truncate: '50' }}</h3>
-  </div>
+  <div fxLayout="column" fxLayoutAlign="start start" class="titles">
+    <h3 class="mt-0" [fxShow.gt-xs]="false"  id="{{ id }}"  matTooltip={{productName}}>{{ productName | truncate: '15' }}</h3>
+    <h3 class="mt-0" [fxShow.xs]="false"  id="{{ id }}"  matTooltip={{productName}}>{{ productName | truncate: '22' }}</h3>
+  
   <div *ngIf="price !== 0">
     <div>
      
@@ -23,18 +23,18 @@
           {{ discount | currency : '' : 'symbol' : '1.0-0' }}
         </span>
       </div>
-      <div>
+      <!-- <div>
         <span class="d-block discount discount-aliance" *ngIf="aliance !== discount">
           {{ aliance | currency : '' : 'symbol' : '1.0-0' }}
           <img *ngIf="logo !== ''" class="logo-aliance" [src]="logo" alt="logo">
         </span>
-      </div>
+      </div> -->
       <div>
           <span class="d-block discount">
             {{ price | currency : '' : 'symbol' : '1.0-0' }}
           </span>
       </div>
-
+    </div>
       <span *ngIf="price === 0">
         <span class="badge-product">
           Producto no disponible
