@@ -13,6 +13,7 @@ import { UserService } from "src/app/services/user.service";
 import { JwtModule } from "@auth0/angular-jwt";
 import { MasterDataService } from "src/app/services/master-data.service";
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 
 describe("RegisterformComponent", () => {
   let component: RegisterformComponent;
@@ -196,6 +197,7 @@ describe("RegisterformComponent", () => {
         ReactiveFormsModule,
         HttpClientTestingModule,
         BrowserAnimationsModule,
+        MatPasswordStrengthModule,
         RouterTestingModule.withRoutes([]),
         TranslateModule.forRoot({}),
         JwtModule.forRoot({
