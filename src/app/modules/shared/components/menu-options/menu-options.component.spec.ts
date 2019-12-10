@@ -7,12 +7,15 @@ import { AuthService } from 'src/app/services/auth.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { UtilsService } from 'src/app/services/utils.service';
+import { JwtModule } from '@auth0/angular-jwt';
 
-xdescribe('MenuOptionsComponent', () => {
+describe('MenuOptionsComponent', () => {
   let component: MenuOptionsComponent;
   let fixture: ComponentFixture<MenuOptionsComponent>;
 
-  const mockAuthService = jasmine.createSpyObj("AuthService", ["isLoggedIn"]);
+  // const mockAuthService = jasmine.createSpyObj("AuthService", ["getMenu$"]);
+  const mockUtilsService = jasmine.createSpyObj("UtilsService", ["showRegisterForm", "hideMenu"]);
 
   let menuAnymous = {
     "state": "Success",
@@ -38,17 +41,28 @@ xdescribe('MenuOptionsComponent', () => {
       declarations: [ MenuOptionsComponent ],
       imports: [
         RouterTestingModule.withRoutes([]),
+        JwtModule.forRoot({
+          config: {
+            tokenGetter: () => {
+              return localStorage.getItem("ACCESS_TOKEN");
+            },
+            throwNoTokenError: true,
+            whitelistedDomains: [],
+            blacklistedRoutes: []
+          }
+        }),
         HttpClientTestingModule
       ],
       providers: [
-        { provide: AuthService, useValue: mockAuthService }
+        // { provide: AuthService, useValue: mockAuthService },
+        { provide: UtilsService, useValue: mockUtilsService }
       ],
       schemas: [
         NO_ERRORS_SCHEMA
       ]
     })
     .compileComponents();
-    // mockAuthService.menuInfo$.pipe().and.returnValue(of(menuAnymous));
+    // mockAuthService.getMenu$.and.returnValue(of(true));
   }));
 
   beforeEach(() => {
@@ -60,4 +74,11 @@ xdescribe('MenuOptionsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('hide menu', () => {
+    component.hideMenu();
+    expect(mockUtilsService.hideMenu).toHaveBeenCalled();
+  });
+
+
 });

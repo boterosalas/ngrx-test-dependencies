@@ -230,6 +230,7 @@ describe("RegisterformComponent", () => {
     mockUserService.validateEmployee.and.returnValue(
       of(validateEmployeeSuccess)
     );
+    window['dataLayer'] = [];
     fixture.detectChanges();
   });
 
@@ -399,7 +400,8 @@ describe("RegisterformComponent", () => {
   });
 
   describe("register invalid", () => {
-    beforeEach(function() {
+    beforeEach(() => {
+      window['dataLayer'] = [];
       mockUserService.registerUser.and.returnValue(of(registerInvalid));
     });
 

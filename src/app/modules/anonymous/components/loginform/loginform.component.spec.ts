@@ -12,11 +12,6 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterTestingModule } from "@angular/router/testing";
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-localStorage.setItem(
-      "ACCESS_TOKEN",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU"
-    );
-
 describe("LoginformComponent", () => {
   let component: LoginformComponent;
   let fixture: ComponentFixture<LoginformComponent>;
@@ -112,14 +107,17 @@ describe("LoginformComponent", () => {
   describe("Login invalid", () => {
 
     beforeEach(() => {
-      mockAuthService.login.and.returnValue(of(dataUserInvalid));
-    });
-
-    it("Login invalid", () => {
       localStorage.setItem(
         "ACCESS_TOKEN",
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU"
       );
+      fixture = TestBed.createComponent(LoginformComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+      mockAuthService.login.and.returnValue(of(dataUserInvalid));
+    });
+
+    it("Login invalid", () => {
       component.isSubmitted = true;
       component.loginForm.controls.Username.setValue(
         "david.betancur@pragma.com.co"

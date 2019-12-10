@@ -33,4 +33,13 @@ describe('TableUsersComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('user info', () => {
+    component.userInfo([]);
+  });
+
+  it('sort data', () => {
+    component.sortData([]);
+  });
+
 });

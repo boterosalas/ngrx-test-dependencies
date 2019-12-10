@@ -51,4 +51,14 @@ describe('CardOfferComponent', () => {
   it('should create', () => {
       expect(component).toBeTruthy();
   });
+
+  it('product change', () => {
+    spyOn(component.infoProduct, 'emit');
+    const nativeElement = fixture.nativeElement;
+    const button = nativeElement.querySelector('button');
+    button.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+    expect(component.infoProduct.emit).toHaveBeenCalled();
+  });
+
 });
