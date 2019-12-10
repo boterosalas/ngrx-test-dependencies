@@ -26,6 +26,7 @@ import { BlockCopyPasteDirective } from 'src/directives/copy.directive';
 import { KeySpaceDirective } from 'src/directives/space.directive';
 import { CardOfferComponent } from './components/card-offer/card-offer.component';
 import { ShareButtonsModule } from '@ngx-share/buttons';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -96,7 +97,8 @@ const routes: Routes = [
     FlexLayoutModule,
     SlickCarouselModule,
     ShareButtonsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MatPasswordStrengthModule
   ],
   exports: [
     RouterModule,
