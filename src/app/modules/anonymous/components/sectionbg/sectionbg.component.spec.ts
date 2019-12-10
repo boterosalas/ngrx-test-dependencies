@@ -26,4 +26,9 @@ describe('SectionbgComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('open register', () => {
+    component.openRegister();
+  });
+
 });
