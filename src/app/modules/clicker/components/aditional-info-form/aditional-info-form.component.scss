@@ -4,7 +4,7 @@
 .item{
     line-height: 3;
     border-bottom: 1px solid #ECECEC;
-    padding: 12px 25px;
+    padding: 0 25px;
     &:last-child{
         border-bottom: none;
     }
@@ -16,4 +16,8 @@ label {
     text-transform: uppercase;
     font-family: $font-galano-bold;
     line-height: 1.5;
+}
+
+.w-85{
+    width: 85%;
 }

@@ -8,15 +8,162 @@
           <h3 class="gray m-0">{{ "ADDITIONAL.PERSONAL" | translate }}</h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
+      <form [formGroup]="personalForm" fxLayout="column" fxFlex="100">
+        <span
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutGap="80px"
+          fxLayoutGap.xs="0px"
+          class="item"
+          fxLayoutAlign="start center"
+        >
+          <label
+            fxLayout="column"
+            fxFLex="50"
+            fxFLex.xs="0"
+            fxLayout.xs="row"
+            >{{ "ADDITIONAL.BIRTHDATE" | translate }}</label
+          >
+          <span
+            class="info"
+            fxLayout="column"
+            fxLayout.xs="row"
+            fxFLex="70"
+            fxFLex.xs="0"
+          >
+            <mat-form-field class="example-full-width">
+              <input matInput [matDatepicker]="picker" readonly />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker touchUi #picker></mat-datepicker>
+            </mat-form-field>
+          </span>
+        </span>
+
+        <span
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutGap="80px"
+          fxLayoutGap.xs="0px"
+          class="item"
+          fxLayoutAlign="start center"
+        >
+          <label
+            fxLayout="column"
+            fxFLex="50"
+            fxFLex.xs="0"
+            fxLayout.xs="row"
+            >{{ "ADDITIONAL.CIVIL_STATE" | translate }}</label
+          >
+          <span
+            class="info"
+            fxLayout="column"
+            fxLayout.xs="row"
+            fxFLex="70"
+            fxFLex.xs="0"
+          >
+            <mat-form-field>
+              <mat-label>Select an option</mat-label>
+              <mat-select [(value)]="selected">
+                <mat-option>None</mat-option>
+                <mat-option value="option1">Option 1</mat-option>
+                <mat-option value="option2">Option 2</mat-option>
+                <mat-option value="option3">Option 3</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </span>
+        </span>
+
+        <span
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutGap="80px"
+          fxLayoutGap.xs="0px"
+          class="item"
+          fxLayoutAlign="start center"
+        >
+          <label
+            fxLayout="column"
+            fxFLex="50"
+            fxFLex.xs="0"
+            fxLayout.xs="row"
+            >{{ "ADDITIONAL.GENDER" | translate }}</label
+          >
+          <span
+            class="info"
+            fxLayout="column"
+            fxLayout.xs="row"
+            fxFLex="70"
+            fxFLex.xs="0"
+          >
+          <mat-form-field>
+              <mat-label>Select an option</mat-label>
+              <mat-select [(value)]="selected">
+                <mat-option>None</mat-option>
+                <mat-option value="option1">Option 1</mat-option>
+                <mat-option value="option2">Option 2</mat-option>
+                <mat-option value="option3">Option 3</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </span>
+        </span>
+
+        <span
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutGap="80px"
+          fxLayoutGap.xs="0px"
+          class="item"
+          fxLayoutAlign="start center"
+        >
+          <label
+            fxLayout="column"
+            fxFLex="50"
+            fxFLex.xs="0"
+            fxLayout.xs="row"
+            >{{ "ADDITIONAL.EDUCATION_LEVEL" | translate }}</label
+          >
+          <span
+            class="info"
+            fxLayout="column"
+            fxLayout.xs="row"
+            fxFLex="70"
+            fxFLex.xs="0"
+          >
+          <mat-form-field>
+              <mat-label>Select an option</mat-label>
+              <mat-select [(value)]="selected">
+                <mat-option>None</mat-option>
+                <mat-option value="option1">Option 1</mat-option>
+                <mat-option value="option2">Option 2</mat-option>
+                <mat-option value="option3">Option 3</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </span>
+        </span>
+      </form>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-accordion class="ml-2 mr-2 additional-info">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3 class="gray m-0">{{ "ADDITIONAL.PROFESIONAL" | translate }}</h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
       <span
         fxLayout="row"
         fxLayout.xs="column"
         fxLayoutGap="80px"
         fxLayoutGap.xs="0px"
         class="item"
+        fxLayoutAlign="start center"
       >
         <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
-          "ADDITIONAL.BIRTHDATE" | translate
+          "ADDITIONAL.ACTIVITY" | translate
         }}</label>
         <span
           class="info"
@@ -24,7 +171,17 @@
           fxLayout.xs="row"
           fxFLex="70"
           fxFLex.xs="0"
-        ></span>
+        >
+        <mat-form-field>
+            <mat-label>Select an option</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option>None</mat-option>
+              <mat-option value="option1">Option 1</mat-option>
+              <mat-option value="option2">Option 2</mat-option>
+              <mat-option value="option3">Option 3</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </span>
       </span>
 
       <span
@@ -33,9 +190,10 @@
         fxLayoutGap="80px"
         fxLayoutGap.xs="0px"
         class="item"
+        fxLayoutAlign="start center"
       >
         <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
-          "ADDITIONAL.CIVIL_STATE" | translate
+          "ADDITIONAL.INCOME_FIXED" | translate
         }}</label>
         <span
           class="info"
@@ -43,7 +201,18 @@
           fxLayout.xs="row"
           fxFLex="70"
           fxFLex.xs="0"
-        ></span>
+        >
+        <mat-form-field>
+            <input
+              matInput
+              id="name"
+              type="text"
+              placeholder="{{ 'GENERIC.NAME' | translate }}"
+              formControlName="name"
+              required
+            />
+        </mat-form-field>
+      </span>
       </span>
 
       <span
@@ -52,9 +221,10 @@
         fxLayoutGap="80px"
         fxLayoutGap.xs="0px"
         class="item"
+        fxLayoutAlign="start center"
       >
         <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
-          "ADDITIONAL.GENDER" | translate
+          "ADDITIONAL.OTHER_INCOME" | translate
         }}</label>
         <span
           class="info"
@@ -62,217 +232,204 @@
           fxLayout.xs="row"
           fxFLex="70"
           fxFLex.xs="0"
-        ></span>
+        >
+        <mat-form-field>
+            <input
+              matInput
+              id="name"
+              type="text"
+              placeholder="{{ 'GENERIC.NAME' | translate }}"
+              formControlName="name"
+              required
+            />
+        </mat-form-field>
       </span>
-
-      <span
-        fxLayout="row"
-        fxLayout.xs="column"
-        fxLayoutGap="80px"
-        fxLayoutGap.xs="0px"
-        class="item"
-      >
-        <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
-          "ADDITIONAL.EDUCATION_LEVEL" | translate
-        }}</label>
-        <span
-          class="info"
-          fxLayout="column"
-          fxLayout.xs="row"
-          fxFLex="70"
-          fxFLex.xs="0"
-        ></span>
       </span>
     </mat-expansion-panel>
   </mat-accordion>
 
   <mat-accordion class="ml-2 mr-2 additional-info">
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <h3 class="gray m-0">{{ "ADDITIONAL.PROFESIONAL" | translate }}</h3>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <span
-            fxLayout="row"
-            fxLayout.xs="column"
-            fxLayoutGap="80px"
-            fxLayoutGap.xs="0px"
-            class="item"
-          >
-            <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
-              "ADDITIONAL.ACTIVITY" | translate
-            }}</label>
-            <span
-              class="info"
-              fxLayout="column"
-              fxLayout.xs="row"
-              fxFLex="70"
-              fxFLex.xs="0"
-            ></span>
-          </span>
-    
-          <span
-            fxLayout="row"
-            fxLayout.xs="column"
-            fxLayoutGap="80px"
-            fxLayoutGap.xs="0px"
-            class="item"
-          >
-            <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
-              "ADDITIONAL.INCOME_FIXED" | translate
-            }}</label>
-            <span
-              class="info"
-              fxLayout="column"
-              fxLayout.xs="row"
-              fxFLex="70"
-              fxFLex.xs="0"
-            ></span>
-          </span>
-    
-          <span
-            fxLayout="row"
-            fxLayout.xs="column"
-            fxLayoutGap="80px"
-            fxLayoutGap.xs="0px"
-            class="item"
-          >
-            <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
-              "ADDITIONAL.OTHER_INCOME" | translate
-            }}</label>
-            <span
-              class="info"
-              fxLayout="column"
-              fxLayout.xs="row"
-              fxFLex="70"
-              fxFLex.xs="0"
-            ></span>
-          </span>
-        </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3 class="gray m-0">{{ "ADDITIONAL.PLACE" | translate }}</h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <span
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutGap="105px"
+      fxLayoutGap.xs="0px"
+      class="item"
+      fxLayoutAlign="start center"
+    >
+      <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+        "ADDITIONAL.ADDRESS" | translate
+      }}</label>
+      <span fxLayout="row" fxLayoutAlign="space-between center " class="w-85">
+      <span
+        class="info"
+        fxLayout="column"
+        fxLayout.xs="row"
+        fxFLex="70"
+        fxFLex.xs="0"
+        >*******</span
+      >
+      <a mat-raised-button class="no-shadow" (click)="changePassword(userInfo)"
+      ><img src="/assets/img/icono-editar.svg" alt="editar"
+    /></a>
+    </span>
+    </span>
+
+      <span
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="80px"
+        fxLayoutGap.xs="0px"
+        class="item"
+        fxLayoutAlign="start center"
+      >
+        <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+          "ADDITIONAL.STRATUM" | translate
+        }}</label>
+        <span
+          class="info"
+          fxLayout="column"
+          fxLayout.xs="row"
+          fxFLex="70"
+          fxFLex.xs="0"
+        >
+        <mat-form-field>
+            <mat-label>Select an option</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option>None</mat-option>
+              <mat-option value="option1">Option 1</mat-option>
+              <mat-option value="option2">Option 2</mat-option>
+              <mat-option value="option3">Option 3</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </span>
+      </span>
+
+      <span
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="80px"
+        fxLayoutGap.xs="0px"
+        class="item"
+        fxLayoutAlign="start center"
+      >
+        <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+          "ADDITIONAL.TYPE_PLACE" | translate
+        }}</label>
+        <span
+          class="info"
+          fxLayout="column"
+          fxLayout.xs="row"
+          fxFLex="70"
+          fxFLex.xs="0"
+        >
+        <mat-form-field>
+            <mat-label>Select an option</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option>None</mat-option>
+              <mat-option value="option1">Option 1</mat-option>
+              <mat-option value="option2">Option 2</mat-option>
+              <mat-option value="option3">Option 3</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </span>
+      </span>
+
+      <span
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="80px"
+        fxLayoutGap.xs="0px"
+        class="item"
+        fxLayoutAlign="start center"
+      >
+        <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+          "ADDITIONAL.LIVING_PEOPLE" | translate
+        }}</label>
+        <span
+          class="info"
+          fxLayout="column"
+          fxLayout.xs="row"
+          fxFLex="70"
+          fxFLex.xs="0"
+        >
+        <mat-form-field>
+            <mat-label>Select an option</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option>None</mat-option>
+              <mat-option value="option1">Option 1</mat-option>
+              <mat-option value="option2">Option 2</mat-option>
+              <mat-option value="option3">Option 3</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </span>
+      </span>
+      <span
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="80px"
+        fxLayoutGap.xs="0px"
+        class="item"
+        fxLayoutAlign="start center"
+      >
+        <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+          "ADDITIONAL.CARGO_PERSONS" | translate
+        }}</label>
+        <span
+          class="info"
+          fxLayout="column"
+          fxLayout.xs="row"
+          fxFLex="70"
+          fxFLex.xs="0"
+        >
+        <mat-form-field>
+            <mat-label>Select an option</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option>None</mat-option>
+              <mat-option value="option1">Option 1</mat-option>
+              <mat-option value="option2">Option 2</mat-option>
+              <mat-option value="option3">Option 3</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </span>
+      </span>
+
+      <span
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="80px"
+        fxLayoutGap.xs="0px"
+        class="item"
+        fxLayoutAlign="start center"
+      >
+        <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+          "ADDITIONAL.MOVILITY" | translate
+        }}</label>
+        <span
+          class="info"
+          fxLayout="column"
+          fxLayout.xs="row"
+          fxFLex="70"
+          fxFLex.xs="0"
+        >
+        <mat-form-field>
+            <mat-label>Select an option</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option>None</mat-option>
+              <mat-option value="option1">Option 1</mat-option>
+              <mat-option value="option2">Option 2</mat-option>
+              <mat-option value="option3">Option 3</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </span>
+      </span>
+    </mat-expansion-panel>
   </mat-accordion>
-
-  <mat-accordion class="ml-2 mr-2 additional-info">
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <h3 class="gray m-0">{{ "ADDITIONAL.PLACE" | translate }}</h3>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <span
-            fxLayout="row"
-            fxLayout.xs="column"
-            fxLayoutGap="80px"
-            fxLayoutGap.xs="0px"
-            class="item"
-          >
-            <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
-              "ADDITIONAL.ADDRESS" | translate
-            }}</label>
-            <span
-              class="info"
-              fxLayout="column"
-              fxLayout.xs="row"
-              fxFLex="70"
-              fxFLex.xs="0"
-            ></span>
-          </span>
-    
-          <span
-            fxLayout="row"
-            fxLayout.xs="column"
-            fxLayoutGap="80px"
-            fxLayoutGap.xs="0px"
-            class="item"
-          >
-            <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
-              "ADDITIONAL.STRATUM" | translate
-            }}</label>
-            <span
-              class="info"
-              fxLayout="column"
-              fxLayout.xs="row"
-              fxFLex="70"
-              fxFLex.xs="0"
-            ></span>
-          </span>
-    
-          <span
-            fxLayout="row"
-            fxLayout.xs="column"
-            fxLayoutGap="80px"
-            fxLayoutGap.xs="0px"
-            class="item"
-          >
-            <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
-              "ADDITIONAL.TYPE_PLACE" | translate
-            }}</label>
-            <span
-              class="info"
-              fxLayout="column"
-              fxLayout.xs="row"
-              fxFLex="70"
-              fxFLex.xs="0"
-            ></span>
-          </span>
-    
-          <span
-            fxLayout="row"
-            fxLayout.xs="column"
-            fxLayoutGap="80px"
-            fxLayoutGap.xs="0px"
-            class="item"
-          >
-            <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
-              "ADDITIONAL.LIVING_PEOPLE" | translate
-            }}</label>
-            <span
-              class="info"
-              fxLayout="column"
-              fxLayout.xs="row"
-              fxFLex="70"
-              fxFLex.xs="0"
-            ></span>
-          </span>
-          <span
-            fxLayout="row"
-            fxLayout.xs="column"
-            fxLayoutGap="80px"
-            fxLayoutGap.xs="0px"
-            class="item"
-          >
-            <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
-              "ADDITIONAL.CARGO_PERSONS" | translate
-            }}</label>
-            <span
-              class="info"
-              fxLayout="column"
-              fxLayout.xs="row"
-              fxFLex="70"
-              fxFLex.xs="0"
-            ></span>
-          </span>
-          
-          <span
-            fxLayout="row"
-            fxLayout.xs="column"
-            fxLayoutGap="80px"
-            fxLayoutGap.xs="0px"
-            class="item"
-          >
-            <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
-              "ADDITIONAL.MOVILITY" | translate
-            }}</label>
-            <span
-              class="info"
-              fxLayout="column"
-              fxLayout.xs="row"
-              fxFLex="70"
-              fxFLex.xs="0"
-            ></span>
-          </span>
-
-        </mat-expansion-panel>
-      </mat-accordion>
-
 </div>
