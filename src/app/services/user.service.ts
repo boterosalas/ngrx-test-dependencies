@@ -26,6 +26,7 @@ export class UserService {
   apiCreateUser = 'userprofile/create';
   apiIdType = 'userprofile/getIdTypes';
   apiDisableUser = 'userprofile/disableUser';
+  apiUpdateUser = 'userprofile/updateUser';
   apiUsers = 'userprofile/getUsers';
   apiComunications = 'userprofile/setReceiveCommunications';
   apiVerified = 'userprofile/verifyUser';
@@ -182,6 +183,20 @@ export class UserService {
       })
     };
     return this.http.post((`${this.url}${this.apiDisableUser}`),{userid:id, value}, httpOptions);
+  }
+
+  public updateUser(id: any, data:any) {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.post((`${this.url}${this.apiUpdateUser}`),data, httpOptions);
   }
 
   public comunitcations(id: any, value: boolean) {

@@ -27,6 +27,10 @@ label {
     }
 }
 
+.w-85{
+    width: 85%;
+}
+
 @media screen and (max-width: 450px) {
     .truncate{
       width: 100px;
@@ -35,5 +39,10 @@ label {
       white-space: nowrap;
       text-overflow: ellipsis;
     }
+
+    .info{
+        font-size: 14px;
+    }
+
   }
   

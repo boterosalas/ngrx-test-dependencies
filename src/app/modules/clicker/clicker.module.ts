@@ -23,6 +23,9 @@ import { ProfileFormComponent } from './components/profile-form/profile-form.com
 import { TableHistorialComponent } from './components/table-historial/table-historial.component';
 import { AditionalFilesComponent } from './components/aditional-files/aditional-files.component';
 import { DragScrollModule } from 'ngx-drag-scroll';
+import { AditionalInfoFormComponent } from './components/aditional-info-form/aditional-info-form.component';
+import { DialogEditComponent } from './components/dialog-edit/dialog-edit.component';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 
 const routes: Routes = [
   {
@@ -42,7 +45,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [HomeComponent, ProductComponent, SliderComponent, TabsComponent, MonthResumeComponent, GeneralResumeComponent, ReportComponent, ProfileComponent, ProfileFormComponent, TableHistorialComponent, AditionalFilesComponent],
+  declarations: [HomeComponent, ProductComponent, SliderComponent, TabsComponent, MonthResumeComponent, GeneralResumeComponent, ReportComponent, ProfileComponent, ProfileFormComponent, TableHistorialComponent, AditionalFilesComponent, AditionalInfoFormComponent, DialogEditComponent],
   imports: [
     CommonModule,
     AppMaterialModule,
@@ -54,11 +57,12 @@ const routes: Routes = [
     FormsModule,
     ShareButtonsModule,
     DragScrollModule,
+    MatPasswordStrengthModule,
     RouterModule.forChild(routes)
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: TabsComponent },
   ],
-  entryComponents: [DialogComponent]
+  entryComponents: [DialogComponent, DialogEditComponent]
 })
 export class ClickerModule { }

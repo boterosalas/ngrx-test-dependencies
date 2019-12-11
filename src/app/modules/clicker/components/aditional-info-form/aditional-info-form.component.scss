@@ -1,0 +1,19 @@
+@import 'variables';
+@import 'animations';
+
+.item{
+    line-height: 3;
+    border-bottom: 1px solid #ECECEC;
+    padding: 12px 25px;
+    &:last-child{
+        border-bottom: none;
+    }
+}
+
+label {
+    width: 190px;
+    color:$gray2;
+    text-transform: uppercase;
+    font-family: $font-galano-bold;
+    line-height: 1.5;
+}

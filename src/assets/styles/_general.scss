@@ -913,3 +913,42 @@ span.orange-border {
     background-color: $primary-color;
   }
 }
+
+.no-shadow{
+  box-shadow: none !important;
+}
+
+.weak{
+  color:#f44336;
+  font-size: 11px;
+}
+
+.normal{
+  color:$primary-color;
+  font-size: 11px;
+}
+
+.acceptable{
+  color:#6BC541;
+  font-size: 11px;
+}
+
+.additional-info {
+  .mat-expansion-panel{
+    margin: 0 5px;
+  }
+
+  .mat-expansion-panel-content{
+    background: #fff;
+  }
+
+  .mat-expansion-panel-body {
+    padding: 0 !important;
+  }
+
+  .mat-expansion-panel-header:not([aria-disabled=true]) {
+    border-bottom: 1px solid #ECECEC;
+}
+
+}
+
