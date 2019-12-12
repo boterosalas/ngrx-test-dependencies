@@ -31,6 +31,12 @@ label {
     width: 85%;
 }
 
+
+.lineh{
+    line-height: 2;
+    padding: 10px 0px;
+}
+
 @media screen and (max-width: 450px) {
     .truncate{
       width: 100px;
@@ -46,3 +52,6 @@ label {
 
   }
   
+  .passText{
+      width: 213px;
+  }

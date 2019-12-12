@@ -179,7 +179,9 @@
     "PERSONAL_INFO": "Cuenta",
     "ACOUNT_INFO": "Información bancaria",
     "ADITIONAL_FILE": "Archivos adicionales",
-    "INFO_ADDITIONAL": "Los siguientes documentos son necesarios para poder verificar tu cuenta y que empieces a recibir tus comisiones."
+    "INFO_ADDITIONAL": "Los siguientes documentos son necesarios para poder verificar tu cuenta y que empieces a recibir tus comisiones.",
+    "TEXT_PASS": "Ingresa tu contraseña para poder realizar estos cambios",
+    "ACCOUNT_INFO": "Actualiza tu información bancaria para tenerla en cuenta en tu próximo pago"
   },
   "ADDITIONAL": {
     "PERSONAL": "Personal",
@@ -197,7 +199,8 @@
     "TYPE_PLACE": "TIPO DE VIVIENDA",
     "LIVING_PEOPLE": "PERSONAS CON LAS QUE VIVES",
     "CARGO_PERSONS": "PERSONAS A CARGO",
-    "MOVILITY": "PRINCIPAL MEDIO DE TRANSPORTE"
+    "MOVILITY": "PRINCIPAL MEDIO DE TRANSPORTE",
+    "ADD_VALUE": "Ingresa un valor"
   },
   "UNDER_CONSTRUCTION": {
     "SORRY": "Discúlpanos, está página esta en construcción"

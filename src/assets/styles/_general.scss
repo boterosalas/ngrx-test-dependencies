@@ -951,4 +951,11 @@ span.orange-border {
 }
 
 }
+@media screen and (max-width: 600px) {
+  .info-basic{
+    span.info,.mat-form-field{
+      width: 100% !important;
+    }
+  }
+}
 

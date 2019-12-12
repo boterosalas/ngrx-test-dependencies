@@ -17,6 +17,8 @@ import { LoaderService } from "src/app/services/loader.service";
 import { MatDialogRef, MatDialog, MatSnackBar } from "@angular/material";
 import { DialogEditComponent } from "../dialog-edit/dialog-edit.component";
 import { ConfirmPasswordValidator } from "src/app/validators/confirm-password.validator";
+import { MasterDataService } from 'src/app/services/master-data.service';
+import { ResponseService } from 'src/app/interfaces/response';
 
 @Component({
   selector: "app-profile-form",
@@ -30,17 +32,21 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     private auth: AuthService,
     private loader: LoaderService,
     private dialog: MatDialog,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private personalInfo: MasterDataService
   ) {}
 
   @ViewChild("templateDialog", { static: false }) template: TemplateRef<any>;
   @ViewChild("templateDialogCell", { static: false }) templateCell: TemplateRef<any>;
   @ViewChild("templateDialogPass", { static: false }) templatePass: TemplateRef<any>;
+  @ViewChild("templateDialogAccount", { static: false}) templateAccount: TemplateRef<any>;
 
   private subscription: Subscription = new Subscription();
   profileForm: FormGroup;
   profileFormCell: FormGroup;
   profileFormPass: FormGroup;
+  accountForm: FormGroup;
+  loginForm: FormGroup;
   isLoggedIn: any;
   name: string;
   lastName: string;
@@ -59,6 +65,14 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   passwordPattern = "(?=.*[a-zA-Z])(?=.*[0-9])";
   msg:string;
   classMsg: string;
+  banks = [];
+  typeAccount = [
+    {id: 1, description: 'Ahorros'},
+    {id: 2, description: 'Corriente'},
+  ]
+
+  showBankInfoUser: boolean;
+  showPassword: boolean = true;
 
   ngOnInit() {
     this.subscription = this.user.userInfo$.subscribe(val => {
@@ -79,7 +93,10 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       this.formProfile();
       this.formProfileCell();
       this.formProfilePass();
+      this.formAccount();
     });
+    this.accountBankForm();
+    this.getBanks();
   }
 
   public formProfile() {
@@ -113,6 +130,23 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
           Validators.minLength(10),
           Validators.pattern(this.numberPattern)
         ]
+      ]
+    });
+  }
+
+  public formAccount() {
+    this.accountForm = this.fb.group({
+      bank: [this.bank , Validators.required],
+      typeAccount: [this.typeBankAccount, Validators.required],
+      numberAccount: ['' , [Validators.required, Validators.pattern(this.numberPattern), Validators.minLength(5), Validators.maxLength(20)]],
+    });
+  }
+
+  public accountBankForm() {
+    this.loginForm = this.fb.group({
+      Password: [
+        "",
+        [Validators.required, Validators.minLength(6), Validators.maxLength(20)]
       ]
     });
   }
@@ -154,6 +188,23 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     const title = "Editar Nombres y apellidos";
     const id = "names";
     const template = this.template;
+
+    this.dialog.open(DialogEditComponent, {
+      data: {
+        title,
+        template,
+        id
+      }
+    });
+  }
+
+  public editAccount() {
+    this.showBankInfoUser = false;
+    this.showPassword = true;
+    this.loginForm.reset();
+    const title = "";
+    const id = "account";
+    const template = this.templateAccount;
 
     this.dialog.open(DialogEditComponent, {
       data: {
@@ -212,6 +263,30 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       );
   }
 
+  updateAccount() {
+
+    let data = {
+      bank: this.accountForm.controls.bank.value,
+      typebankaccount: this.accountForm.controls.typeAccount.value,
+      bankaccountnumber: btoa(this.accountForm.controls.numberAccount.value)
+    }
+
+    this.subscription = this.user
+    .changeBankInformation(this.userId, data)
+    .subscribe(
+      (resp: any) => {
+        if (resp.state === "Success") {
+          this.dialog.closeAll();
+          this.user.getProfile();
+          this.openSnackBar(resp.userMessage, "Cerrar");
+        }
+      },
+      err => {
+        this.openSnackBar(err.userMessage, "Cerrar");
+      }
+    );
+  }
+
   private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 3000
@@ -223,7 +298,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       password: btoa(this.profileFormPass.controls.actualPassword.value),
       newPassword:btoa(this.profileFormPass.controls.password.value)
     }
-    this.auth.changePassword(this.userId, data).subscribe(
+    this.subscription = this.auth.changePassword(this.userId, data).subscribe(
       (resp: any) => {
         if (resp.state === "Success") {
           this.dialog.closeAll();
@@ -236,6 +311,33 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
         this.openSnackBar(err.userMessage, "Cerrar");
       }
     );
+  }
+
+  public showAccount() {
+    this.user.getBankAccountNumber(btoa(this.loginForm.controls.Password.value)).subscribe((resp:ResponseService) => {
+      if (resp.state === "Success") {
+      this.accountForm.controls.numberAccount.setValue(resp.objectResponse);
+      this.showBankInfoUser = true;
+      this.showPassword = false;
+      } else {
+        this.openSnackBar(resp.userMessage, "Cerrar");
+      }
+    },
+    err => {
+      this.openSnackBar(err.userMessage, "Cerrar");
+    })
+  }
+
+  /**
+   * Metodo para listar los bancos
+   */
+
+  public getBanks() {
+    this.subscription = this.personalInfo
+      .getBanks()
+      .subscribe((res: ResponseService) => {
+        this.banks = res.objectResponse;
+      });
   }
 
 
