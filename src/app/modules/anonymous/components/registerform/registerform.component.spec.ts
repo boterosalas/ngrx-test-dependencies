@@ -399,16 +399,28 @@ describe("RegisterformComponent", () => {
     expect(mockUserService.registerUser).toHaveBeenCalled();
   });
 
+  it('checkDepartment', () => {
+    component.externalForm.controls.department.setValue({code:'05'});
+    component.checkDepartment();
+    expect(component.externalForm.controls.department.hasError).toBeTruthy();
+  });
+
+  it('checkCity', () => {
+    component.checkCity();
+    expect(component.externalForm.controls.city.hasError).toBeTruthy();
+  });
+  
+
   describe("register invalid", () => {
     beforeEach(() => {
       window['dataLayer'] = [];
       mockUserService.registerUser.and.returnValue(of(registerInvalid));
     });
 
-    // it("register invalid", () => {
-    //   component.register();
-    //   expect(mockUserService.registerUser).toHaveBeenCalled();
-    // });
+    it("register invalid", () => {
+      component.register();
+      expect(mockUserService.registerUser).toHaveBeenCalled();
+    });
   });
 
   describe("invalid request", () => {
@@ -416,9 +428,9 @@ describe("RegisterformComponent", () => {
       mockUserService.registerUser.and.returnValue(throwError(InvalidRquest));
     });
 
-    // it("invalid request", () => {
-    //   component.register();
-    //   expect(mockUserService.registerUser).toHaveBeenCalled();
-    // });
+    it("invalid request", () => {
+      component.register();
+      expect(mockUserService.registerUser).toHaveBeenCalled();
+    });
   });
 });

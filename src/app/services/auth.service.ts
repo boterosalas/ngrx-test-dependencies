@@ -40,6 +40,7 @@ export class AuthService implements OnDestroy {
   apiGetmenusClicker = "Authentication/getMenusByRol";
   apiForgotPassword = 'Authentication/recoveryPassword';
   apiRecoverPassword = 'Authentication/resetpassword';
+  apiChangePassword = 'Authentication/changePassword';
 
   role = "";
 
@@ -110,6 +111,20 @@ export class AuthService implements OnDestroy {
             return resp.objectResponse;
           })
         );
+  }
+
+  public changePassword(id: any, data:any) {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.post((`${this.url}${this.apiChangePassword}`),data, httpOptions);
   }
 
   public forgotPassword(username: Forgotpassword) {
