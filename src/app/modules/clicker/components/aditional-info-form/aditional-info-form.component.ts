@@ -46,7 +46,7 @@ export class AditionalInfoFormComponent implements OnInit {
     {id: 1, description: 1},
     {id: 2, description: 2},
     {id: 3, description: 3},
-    {id: 4, description: 4}
+    {id: 4, description: '4+'}
   ]
 
   dependant = [
@@ -54,7 +54,7 @@ export class AditionalInfoFormComponent implements OnInit {
     {id: 1, description: 1},
     {id: 2, description: 2},
     {id: 3, description: 3},
-    {id: 4, description: 4}
+    {id: 4, description: '4+'}
   ]
 
   userId: string;
@@ -78,6 +78,7 @@ export class AditionalInfoFormComponent implements OnInit {
   filteredCities: Observable<any>;
   disabledCity: boolean;
   departmentCode: string;
+  departmentDecription: string;
   cityCode: string;
   cityValue: string;
   departments = [];
@@ -110,6 +111,7 @@ export class AditionalInfoFormComponent implements OnInit {
         this.addressInfo = val.address;
         this.departmentInfo = val.departmentName;
         this.municipalityInfo = val.municipalityName;
+        this.departmentDecription = val.departmentName;
         this.receiveCommunications = val.receiveCommunications;
      };
      this.getBasicData();
@@ -134,7 +136,7 @@ export class AditionalInfoFormComponent implements OnInit {
     this.profesionalForm = this.fb.group({
       occupation: [this.occupationOb['id'], Validators.required],
       fixedIncome: [this.fixedIncomeOb['id'], Validators.required],
-      OtherIncome: [this.otherIncomeInfo, Validators.pattern(this.numberPattern)],
+      OtherIncome: [this.otherIncomeInfo, [Validators.maxLength(8), Validators.pattern(this.numberPattern)]],
     })
   }
 
@@ -201,6 +203,7 @@ export class AditionalInfoFormComponent implements OnInit {
 
 
   public selectDepartment(department) {
+    this.departmentDecription = department.description;
     this.departmentCode = department.code;
     this.cities = department.municipalities;
     this.livingForm.controls.city.setValue('');
@@ -216,11 +219,11 @@ export class AditionalInfoFormComponent implements OnInit {
     })
   }
 
-  // public checkDepartment() {
-  //   if ((this.livingForm.controls.department.value.code !== this.departmentCode) || (this.livingForm.controls.department.value.code === undefined || this.departmentCode === undefined )) {
-  //     this.livingForm.controls.department.setErrors({'incorrect': true});
-  //   }
-  // }
+  public checkDepartment() {
+    if ((this.livingForm.controls.department.value !== this.departmentDecription) || (this.livingForm.controls.department.value === undefined )) {
+      this.livingForm.controls.department.setErrors({'incorrect': true});
+    }
+  }
 
   public selectCity(city) {
     this.cityCode = city.code;
