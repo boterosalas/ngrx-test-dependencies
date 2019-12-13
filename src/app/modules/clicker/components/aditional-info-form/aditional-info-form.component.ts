@@ -85,6 +85,7 @@ export class AditionalInfoFormComponent implements OnInit {
   cities: [];
   numberPattern = "^(0|[0-9][0-9]*)$";
   maxDate = new Date();
+  receiveCommunications: boolean;
 
   private subscription: Subscription = new Subscription();
 
@@ -109,6 +110,7 @@ export class AditionalInfoFormComponent implements OnInit {
         this.addressInfo = val.address;
         this.departmentInfo = val.departmentName;
         this.municipalityInfo = val.municipalityName;
+        this.receiveCommunications = val.receiveCommunications;
      };
      this.getBasicData();
      this.personalFormInfo();
@@ -243,6 +245,15 @@ export class AditionalInfoFormComponent implements OnInit {
       });
   }
 
+  changeComunications(comunication) {
+    if (comunication.checked === false) {
+      this.receiveCommunications = false;
+    }
+    if (comunication.checked === true) {
+      this.receiveCommunications = true;
+    }
+  }
+
 
   editInfo() {
     this.userInfo.birthDate = this.personalForm.controls.birthDate.value;
@@ -260,6 +271,7 @@ export class AditionalInfoFormComponent implements OnInit {
     this.userInfo.mobility = this.livingForm.controls.mobility.value;
     this.userInfo.department =  this.departmentCode;
     this.userInfo.municipality =  this.cityCode;
+    this.userInfo.receiveCommunications = this.receiveCommunications;
 
     this.subscription = this.user
       .updateUser(this.userId, this.userInfo)
@@ -267,7 +279,7 @@ export class AditionalInfoFormComponent implements OnInit {
         (resp: any) => {
           if (resp.state === "Success") {
             this.openSnackBar(resp.userMessage, "Cerrar");
-            this.user.getProfile();
+            // this.user.getProfile();
           }
         },
         err => {
