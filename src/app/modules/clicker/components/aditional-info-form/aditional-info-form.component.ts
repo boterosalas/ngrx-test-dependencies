@@ -83,6 +83,8 @@ export class AditionalInfoFormComponent implements OnInit {
   departments = [];
   banks = [];
   cities: [];
+  numberPattern = "^(0|[0-9][0-9]*)$";
+  maxDate = new Date();
 
   private subscription: Subscription = new Subscription();
 
@@ -130,7 +132,7 @@ export class AditionalInfoFormComponent implements OnInit {
     this.profesionalForm = this.fb.group({
       occupation: [this.occupationOb['id'], Validators.required],
       fixedIncome: [this.fixedIncomeOb['id'], Validators.required],
-      OtherIncome: [this.otherIncomeInfo],
+      OtherIncome: [this.otherIncomeInfo, Validators.pattern(this.numberPattern)],
     })
   }
 
