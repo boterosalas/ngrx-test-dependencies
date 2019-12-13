@@ -299,6 +299,21 @@
                 "
                 >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
               >
+              <mat-error
+              id="maxIncome"
+              *ngIf="
+                profesionalForm.controls.OtherIncome.invalid &&
+                profesionalForm.controls.OtherIncome.errors.maxlength
+              "
+              >{{
+                "GENERIC.MAX_CHARACTERS"
+                  | translate
+                    : {
+                        maxchar:
+                          profesionalForm.controls.OtherIncome.errors.maxlength.requiredLength
+                      }
+              }}</mat-error
+            >
             </mat-form-field>
           </span>
         </span>
@@ -396,6 +411,7 @@
                 [matAutocomplete]="auto"
                 formControlName="department"
                 autocomplete="nope"
+                (blur)="checkDepartment()"
               />
               <mat-autocomplete #auto="matAutocomplete">
                 <mat-option
