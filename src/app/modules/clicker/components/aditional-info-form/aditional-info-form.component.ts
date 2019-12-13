@@ -279,7 +279,7 @@ export class AditionalInfoFormComponent implements OnInit {
         (resp: any) => {
           if (resp.state === "Success") {
             this.openSnackBar(resp.userMessage, "Cerrar");
-            this.user.getProfile();
+            // this.user.getProfile();
           }
         },
         err => {

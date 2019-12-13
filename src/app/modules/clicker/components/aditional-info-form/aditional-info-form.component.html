@@ -698,7 +698,7 @@
           fxFLex="70"
           fxFLex.xs="0"
         >
-        <mat-slide-toggle color="orange-toggle" (change)="changeComunications($event)" labelPosition="before" id="comunications-toggle">
+        <mat-slide-toggle color="orange-toggle" [checked]="receiveCommunications" (change)="changeComunications($event)" labelPosition="before" id="comunications-toggle">
             <span *ngIf="receiveCommunications === true">
                 Si
             </span>
