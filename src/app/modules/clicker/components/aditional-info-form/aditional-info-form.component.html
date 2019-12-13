@@ -1,0 +1,598 @@
+<div class="info-basic">
+  <p>{{ "PROFILE.BASIC" | translate }}</p>
+
+  <mat-accordion class="ml-2 mr-2 additional-info">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3 class="gray m-0">{{ "ADDITIONAL.PERSONAL" | translate }}</h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <form [formGroup]="personalForm" fxLayout="column" fxFlex="100">
+        <span
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutGap="80px"
+          fxLayoutGap.xs="0px"
+          class="item"
+          fxLayoutAlign="start center"
+          fxLayoutAlign.xs="start start"
+        >
+          <label
+            fxLayout="column"
+            fxFLex="50"
+            fxFLex.xs="0"
+            fxLayout.xs="row"
+            >{{ "ADDITIONAL.BIRTHDATE" | translate }}</label
+          >
+          <span
+            class="info"
+            ngClass.xs="w-100" 
+            fxLayout="column"
+            fxLayout.xs="row"
+            fxFLex="70"
+            fxFLex.xs="0"
+          >
+            <mat-form-field class="example-full-width">
+              <input matInput [matDatepicker]="picker" formControlName="birthDate" readonly />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker touchUi #picker></mat-datepicker>
+            </mat-form-field>
+          </span>
+        </span>
+
+        <span
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutGap="80px"
+          fxLayoutGap.xs="0px"
+          class="item"
+          fxLayoutAlign="start center"
+          fxLayoutAlign.xs="start start"
+        >
+          <label
+            fxLayout="column"
+            fxFLex="50"
+            fxFLex.xs="0"
+            fxLayout.xs="row"
+            >{{ "ADDITIONAL.CIVIL_STATE" | translate }}</label
+          >
+          <span
+            class="info"
+            ngClass.xs="w-100" 
+            fxLayout="column"
+            fxLayout.xs="row"
+            fxFLex="70"
+            fxFLex.xs="0"
+          >
+            <mat-form-field>
+              <mat-label>Selecciona tu estado civil</mat-label>
+              <mat-select  formControlName="maritalStatus" [(value)]="maritalStatusOb.id">
+                <mat-option *ngFor="let item of maritalStatus" [value]="item.id"> <span>{{item.description}}</span></mat-option>
+              </mat-select>
+            </mat-form-field>
+          </span>
+
+        </span>
+
+        <span
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutGap="80px"
+          fxLayoutGap.xs="0px"
+          class="item"
+          fxLayoutAlign="start center"
+          fxLayoutAlign.xs="start start"
+        >
+          <label
+            fxLayout="column"
+            fxFLex="50"
+            fxFLex.xs="0"
+            fxLayout.xs="row"
+            >{{ "ADDITIONAL.GENDER" | translate }}</label
+          >
+          <span
+            class="info"
+            ngClass.xs="w-100" 
+            fxLayout="column"
+            fxLayout.xs="row"
+            fxFLex="70"
+            fxFLex.xs="0"
+          >
+         <mat-form-field>
+              <mat-label>Selecciona tu género</mat-label>
+              <mat-select  formControlName="gender">
+                <mat-option *ngFor="let item of gender" [value]="item.id"> <span>{{item.description}}</span></mat-option>
+              </mat-select>
+            </mat-form-field>
+        </span>
+        </span>
+
+        <span
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutGap="80px"
+          fxLayoutGap.xs="0px"
+          class="item"
+          fxLayoutAlign="start center"
+          fxLayoutAlign.xs="start start"
+        >
+          <label
+            fxLayout="column"
+            fxFLex="50"
+            fxFLex.xs="0"
+            fxLayout.xs="row"
+            >{{ "ADDITIONAL.EDUCATION_LEVEL" | translate }}</label
+          >
+          <span
+            class="info"
+            ngClass.xs="w-100" 
+            fxLayout="column"
+            fxLayout.xs="row"
+            fxFLex="70"
+            fxFLex.xs="0"
+          >
+          <mat-form-field ngClass.xs="w-100" >
+              <mat-label>Elige tu nivel de educación</mat-label>
+              <mat-select  formControlName="educationLevel">
+                <mat-option *ngFor="let item of educationLevel" [value]="item.id"> <span>{{item.description}}</span></mat-option>
+              </mat-select>
+          </mat-form-field>
+        </span>
+        </span>
+        <div fxLayout="row" fxLayoutAlign="end end">
+          <span fxLayout="column" fxFlex="15" fxFlex.xs="150px" class="m-3">
+            <button
+              mat-raised-button
+              id="editPersonal"
+              class="center button button-100"
+              color="orange"
+              (click)="editInfo()"
+              [disabled]="!personalForm.valid"
+            > {{ 'GENERIC.SAVE' | translate }} 
+          </button>
+          </span>
+      </div>
+      </form>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-accordion class="ml-2 mr-2 additional-info">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3 class="gray m-0">{{ "ADDITIONAL.PROFESIONAL" | translate }}</h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <form [formGroup]="profesionalForm" fxLayout="column" fxFlex="100">
+      <span
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="80px"
+        fxLayoutGap.xs="0px"
+        class="item"
+        fxLayoutAlign="start center"
+        fxLayoutAlign.xs="start start"
+      >
+        <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+          "ADDITIONAL.ACTIVITY" | translate
+        }}</label>
+        <span
+          class="info"
+          ngClass.xs="w-100" 
+          fxLayout="column"
+          fxLayout.xs="row"
+          fxFLex="70"
+          fxFLex.xs="0"
+        >
+        <mat-form-field>
+            <mat-label>Añadir actividad laborar</mat-label>
+            <mat-select formControlName="occupation">
+              <mat-option *ngFor="let item of occupation" [value]="item.id"> <span>{{item.description}}</span></mat-option>
+            </mat-select>
+        </mat-form-field>
+      </span>
+      </span>
+
+      <span
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="80px"
+        fxLayoutGap.xs="0px"
+        class="item"
+        fxLayoutAlign="start center"
+        fxLayoutAlign.xs="start start"
+      >
+        <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+          "ADDITIONAL.INCOME_FIXED" | translate
+        }}</label>
+        <span
+          class="info"
+          ngClass.xs="w-100" 
+          fxLayout="column"
+          fxLayout.xs="row"
+          fxFLex="70"
+          fxFLex.xs="0"
+        >
+        <mat-form-field>
+            <mat-label>Selecciona un valor</mat-label>
+            <mat-select formControlName="fixedIncome">
+              <mat-option *ngFor="let item of fixedIncome" [value]="item.id"> <span>{{item.description}}</span></mat-option>
+            </mat-select>
+          </mat-form-field>
+      </span>
+      </span>
+
+      <span
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="80px"
+        fxLayoutGap.xs="0px"
+        class="item"
+        fxLayoutAlign="start center"
+        fxLayoutAlign.xs="start start"
+      >
+        <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+          "ADDITIONAL.OTHER_INCOME" | translate
+        }}</label>
+        <span
+          class="info"
+          ngClass.xs="w-100" 
+          fxLayout="column"
+          fxLayout.xs="row"
+          fxFLex="70"
+          fxFLex.xs="0"
+        >
+        <mat-form-field>
+            <input
+              matInput
+              id="OtherIncome"
+              type="text"
+              formControlName="OtherIncome"
+              placeholder="{{ 'ADDITIONAL.ADD_VALUE' | translate }}"
+            />
+        </mat-form-field>
+      </span>
+      </span>
+      <div fxLayout="row" fxLayoutAlign="end end">
+          <span fxLayout="column" fxFlex="15" fxFlex.xs="150px" class="m-3">
+            <button
+              mat-raised-button
+              id="editPersonal"
+              class="center button button-100"
+              color="orange"
+              (click)="editInfo()"
+              [disabled]="!profesionalForm.valid"
+            > {{ 'GENERIC.SAVE' | translate }} 
+          </button>
+          </span>
+      </div>
+    </form>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-accordion class="ml-2 mr-2 additional-info">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3 class="gray m-0">{{ "ADDITIONAL.PLACE" | translate }}</h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <form [formGroup]="livingForm" fxLayout="column" fxFlex="100">
+          <span
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutGap="80px"
+          fxLayoutGap.xs="0px"
+          class="item"
+          fxLayoutAlign="start center"
+          fxLayoutAlign.xs="start start"
+        >
+          <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+            "GENERIC.ADDRESS" | translate
+          }}</label>
+          <span
+            class="info"
+            ngClass.xs="w-100" 
+            fxLayout="column"
+            fxLayout.xs="row"
+            fxFLex="70"
+            fxFLex.xs="0"
+          >
+          <mat-form-field>
+              <input
+                matInput
+                id="address"
+                type="text"
+                formControlName="address"
+                placeholder="{{ 'GENERIC.ADDRESS' | translate }}"
+              />
+          </mat-form-field>
+        </span>
+        </span>
+
+        <span
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="80px"
+        fxLayoutGap.xs="0px"
+        class="item"
+        fxLayoutAlign="start center"
+        fxLayoutAlign.xs="start start"
+      >
+        <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+           'REGISTER.DEPARTMENT' | translate 
+        }}</label>
+        <span
+          class="info"
+          ngClass.xs="w-100" 
+          fxLayout="column"
+          fxLayout.xs="row"
+          fxFLex="70"
+          fxFLex.xs="0"
+        >
+        <mat-form-field>
+            <input
+              matInput
+              id="departmentCode"
+              placeholder="{{ 'REGISTER.DEPARTMENT' | translate }}"
+              [matAutocomplete]="auto"
+              formControlName="department"
+              autocomplete="nope"
+            />
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option
+                (onSelectionChange)="selectDepartment(department)"
+                *ngFor="let department of filteredDepartments | async; let i = index"
+                [value]="department.description"
+              >
+                <span>{{ department.description }}</span>
+              </mat-option>
+            </mat-autocomplete>
+        
+            <mat-error
+              id="requiredDepartment"
+              *ngIf="
+                livingForm.controls.department.invalid &&
+                livingForm.controls.department.errors.required
+              "
+              >{{
+                "GENERIC.REQUIRED" | translate: { formValue: "Departamento" }
+              }}</mat-error
+            >
+            <mat-error
+              id="selectDepartementError"
+              *ngIf="
+                livingForm.controls.department.invalid &&
+                livingForm.controls.department.errors.incorrect
+              "
+              >{{ "REGISTER.ERROR_DEPARTMENT" | translate }}</mat-error
+            >
+          </mat-form-field>
+      </span>
+      </span>
+
+      <span
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutGap="80px"
+      fxLayoutGap.xs="0px"
+      class="item"
+      fxLayoutAlign="start center"
+      fxLayoutAlign.xs="start start"
+    >
+      <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+          'REGISTER.CITY' | translate
+      }}</label>
+      <span
+        class="info"
+        ngClass.xs="w-100" 
+        fxLayout="column"
+        fxLayout.xs="row"
+        fxFLex="70"
+        fxFLex.xs="0"
+      >
+      <mat-form-field>
+          <input
+            matInput
+            id="city"
+            placeholder="{{ 'REGISTER.CITY' | translate }}"
+            [matAutocomplete]="city"
+            formControlName="city"
+            autocomplete="nope"
+            (blur)="checkCity()"
+          />
+          <mat-autocomplete #city="matAutocomplete">
+            <mat-option
+              (onSelectionChange)="selectCity(city)"
+              *ngFor="let city of filteredCities | async"
+              [(value)]="city.description"
+            >
+              <span>{{ city.description }}</span>
+            </mat-option>
+          </mat-autocomplete>
+      
+          <mat-error
+            id="selectCityError"
+            *ngIf="
+              livingForm.controls.city.invalid &&
+              livingForm.controls.city.errors.incorrectCity
+            "
+            >{{ "REGISTER.ERROR_CITY" | translate }}</mat-error
+          >
+      
+          <mat-error
+            id="requiredCity"
+            *ngIf="
+              livingForm.controls.city.invalid &&
+              livingForm.controls.city.errors.required
+            "
+            >{{ "GENERIC.REQUIRED" | translate: { formValue: "Ciudad" } }}</mat-error
+          >
+        </mat-form-field>
+    </span>
+    </span>
+      
+      <span
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="80px"
+        fxLayoutGap.xs="0px"
+        class="item"
+        fxLayoutAlign="start center"
+        fxLayoutAlign.xs="start start"
+      >
+        <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+          "ADDITIONAL.STRATUM" | translate
+        }}</label>
+        <span
+          class="info"
+          ngClass.xs="w-100" 
+          fxLayout="column"
+          fxLayout.xs="row"
+          fxFLex="70"
+          fxFLex.xs="0"
+        >
+        <mat-form-field>
+            <mat-label>Seleccionar</mat-label>
+            <mat-select formControlName="stratum">
+              <mat-option *ngFor="let item of stratum" [value]="item.id"> <span>{{item.description}}</span></mat-option>
+            </mat-select>
+        </mat-form-field>
+      </span>
+      </span>
+
+      <span
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="80px"
+        fxLayoutGap.xs="0px"
+        class="item"
+        fxLayoutAlign="start center"
+        fxLayoutAlign.xs="start start"
+      >
+        <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+          "ADDITIONAL.TYPE_PLACE" | translate
+        }}</label>
+        <span
+          class="info"
+          ngClass.xs="w-100" 
+          fxLayout="column"
+          fxLayout.xs="row"
+          fxFLex="70"
+          fxFLex.xs="0"
+        >
+        <mat-form-field>
+            <mat-label>Seleccionar</mat-label>
+            <mat-select formControlName="typeHousing">
+              <mat-option *ngFor="let item of typeHousing" [value]="item.id"> <span>{{item.description}}</span></mat-option>
+            </mat-select>
+        </mat-form-field>
+      </span>
+      </span>
+
+      <span
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="80px"
+        fxLayoutGap.xs="0px"
+        class="item"
+        fxLayoutAlign="start center"
+        fxLayoutAlign.xs="start start"
+      >
+        <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+          "ADDITIONAL.LIVING_PEOPLE" | translate
+        }}</label>
+        <span
+          class="info"
+          ngClass.xs="w-100" 
+          fxLayout="column"
+          fxLayout.xs="row"
+          fxFLex="70"
+          fxFLex.xs="0"
+        >
+        <mat-form-field>
+            <mat-label>Seleccionar</mat-label>
+            <mat-select formControlName="numberPeopleLive">
+              <mat-option *ngFor="let item of people" [value]="item.id"> <span>{{item.description}}</span></mat-option>
+            </mat-select>
+        </mat-form-field>
+      </span>
+      </span>
+      <span
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="80px"
+        fxLayoutGap.xs="0px"
+        class="item"
+        fxLayoutAlign="start center"
+        fxLayoutAlign.xs="start start"
+      >
+        <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+          "ADDITIONAL.CARGO_PERSONS" | translate
+        }}</label>
+        <span
+          class="info"
+          ngClass.xs="w-100" 
+          fxLayout="column"
+          fxLayout.xs="row"
+          fxFLex="70"
+          fxFLex.xs="0"
+        >
+        <mat-form-field>
+            <mat-label>Seleccionar</mat-label>
+            <mat-select formControlName="dependant">
+              <mat-option *ngFor="let item of dependant" [value]="item.id"> <span>{{item.description}}</span></mat-option>
+            </mat-select>
+        </mat-form-field>
+      </span>
+      </span>
+
+      <span
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="80px"
+        fxLayoutGap.xs="0px"
+        class="item"
+        fxLayoutAlign="start center"
+        fxLayoutAlign.xs="start start"
+      >
+        <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+          "ADDITIONAL.MOVILITY" | translate
+        }}</label>
+        <span
+          class="info"
+          ngClass.xs="w-100" 
+          fxLayout="column"
+          fxLayout.xs="row"
+          fxFLex="70"
+          fxFLex.xs="0"
+        >
+        <mat-form-field>
+            <mat-label>Seleccionar</mat-label>
+            <mat-select formControlName="mobility">
+              <mat-option *ngFor="let item of mobility" [value]="item.id"> <span>{{item.description}}</span></mat-option>
+            </mat-select>
+        </mat-form-field>
+      </span>
+      </span>
+      <div fxLayout="row" fxLayoutAlign="end end">
+          <span fxLayout="column" fxFlex="15" fxFlex.xs="150px" class="m-3">
+            <button
+              mat-raised-button
+              id="editPersonal"
+              class="center button button-100"
+              color="orange"
+              (click)="editInfo()"
+              [disabled]="!livingForm.valid"
+            > {{ 'GENERIC.SAVE' | translate }} 
+          </button>
+          </span>
+      </div>
+      </form>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

@@ -9,14 +9,20 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { JwtModule } from '@auth0/angular-jwt';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
+import { DialogEditComponent } from '../dialog-edit/dialog-edit.component';
+import { MatDialogRef } from '@angular/material';
 
 describe('ProfileFormComponent', () => {
   let component: ProfileFormComponent;
   let fixture: ComponentFixture<ProfileFormComponent>;
 
+  const mockDialog = jasmine.createSpyObj("MatDialog", ["open"]);
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileFormComponent ],
+      declarations: [ ProfileFormComponent, DialogEditComponent ],
       imports: [
         TranslateModule.forRoot({}),
         ReactiveFormsModule,
@@ -36,9 +42,16 @@ describe('ProfileFormComponent', () => {
           }
         })
       ],
+      providers: [
+        { provide: MatDialogRef, useValue: mockDialog },
+      ],
       schemas: [
         NO_ERRORS_SCHEMA
-      ]
+      ],
+    }).overrideModule(BrowserDynamicTestingModule, {
+      set: {
+        entryComponents: [DialogEditComponent]
+      }
     })
     .compileComponents();
   }));
@@ -53,4 +66,33 @@ describe('ProfileFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('editName', () => {
+    component.editName();
+    expect(mockDialog.open).toBeTruthy();
+  });
+
+  it('editAccount', () => {
+    component.editAccount();
+    expect(mockDialog.open).toBeTruthy();
+  });
+
+  it('editCell', () => {
+    component.editCell();
+    expect(mockDialog.open).toBeTruthy();
+  });
+
+  it('changePassword', () => {
+    component.changePassword();
+    expect(mockDialog.open).toBeTruthy();
+  });
+
+  // it('editUser', () => {
+  //   component.userId = '123445';
+  //   component.profileForm.controls.name.setValue('test');
+  //   component.profileForm.controls.lastName.setValue('test');
+  //   component.profileFormCell.controls.phone.setValue('123456789');
+  //   component.editUser();
+  // });
+
 });
