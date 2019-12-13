@@ -672,6 +672,44 @@
             </mat-form-field>
           </span>
         </span>
+
+        <span
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="80px"
+        fxLayoutGap.xs="0px"
+        class="item"
+        fxLayoutAlign="start center"
+        fxLayoutAlign.xs="start start"
+      >
+        <label
+          fxLayout="column"
+          fxFLex="50"
+          fxFLex.xs="0"
+          fxLayout.xs="row"
+          class="pb-1 pt-1"
+          >{{ "ADDITIONAL.COMUNICATIONS" | translate }}</label
+        >
+        <span
+          class="info"
+          ngClass.xs="w-100"
+          fxLayout="column"
+          fxLayout.xs="row"
+          fxFLex="70"
+          fxFLex.xs="0"
+        >
+        <mat-slide-toggle color="orange-toggle" (change)="changeComunications($event)" labelPosition="before" id="comunications-toggle">
+            <span *ngIf="receiveCommunications === true">
+                Si
+            </span>
+            <span *ngIf="receiveCommunications === false">
+                No
+            </span>
+        </mat-slide-toggle>
+
+        </span>
+      </span>
+
         <div fxLayout="row" fxLayoutAlign="end end">
           <span fxLayout="column" fxFlex="15" fxFlex.xs="150px" class="m-3">
             <button
