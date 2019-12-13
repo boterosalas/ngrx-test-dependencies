@@ -58,7 +58,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
 
   cities: [];
   emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
-  namePattern = "[a-zA-Z0-9 ]+";
+  namePattern = "[a-zA-Z0-9 àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]+";
   numberPattern = "^(0|[0-9][0-9]*)$";
   // passwordPattern =
   //   "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[!#/_@#$%^&+-.*)(´}{><:;¡!})])";

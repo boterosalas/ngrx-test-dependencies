@@ -60,8 +60,9 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   userId: string;
   isEmployee: boolean;
   userInfo: any;
+
   numberPattern = "^(0|[0-9][0-9]*)$";
-  namePattern = "[a-zA-Z0-9 ]+";
+  namePattern = "[a-zA-Z0-9 àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]+";
   passwordPattern = "(?=.*[a-zA-Z])(?=.*[0-9])";
   msg:string;
   classMsg: string;
@@ -305,6 +306,8 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
           this.dialog.closeAll();
           this.user.getProfile();
           this.profileFormPass.reset();
+          this.openSnackBar(resp.userMessage, "Cerrar");
+        } else {
           this.openSnackBar(resp.userMessage, "Cerrar");
         }
       },
