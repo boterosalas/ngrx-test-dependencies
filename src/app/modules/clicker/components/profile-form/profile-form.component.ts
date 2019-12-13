@@ -230,6 +230,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   }
 
   public changePassword() {
+    this.profileFormPass.reset();
     const title = "Cambiar contraseña";
     const id = "password";
     const template = this.templatePass;
