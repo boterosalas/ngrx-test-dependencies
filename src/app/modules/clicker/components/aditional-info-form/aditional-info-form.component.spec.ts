@@ -114,70 +114,7 @@ describe("AditionalInfoFormComponent", () => {
     ]
   };
 
-  let dataDepartments = {
-    state: "Success",
-    userMessage: "",
-    objectResponse: [
-      {
-        Id: 1,
-        code: "01",
-        description: "Bolivar",
-        municipalities: [
-          {
-            Id: 1,
-            code: "01",
-            description: "Turbaco",
-            idDeparment: 1
-          },
-          {
-            Id: 2,
-            code: "02",
-            description: "Cartagena",
-            idDeparment: 1
-          }
-        ]
-      },
-      {
-        Id: 2,
-        code: "02",
-        description: "Antioquia",
-        municipalities: [
-          {
-            Id: 3,
-            code: "03",
-            description: "Medellín",
-            idDeparment: 2
-          },
-          {
-            Id: 4,
-            code: "04",
-            description: "Bello",
-            idDeparment: 2
-          }
-        ]
-      }
-    ]
-  };
-
-  let department = {
-    Id: 1,
-    code: "01",
-    description: "Bolivar",
-    municipalities: [
-      {
-        Id: 1,
-        code: "01",
-        description: "Turbaco",
-        idDeparment: 1
-      },
-      {
-        Id: 2,
-        code: "02",
-        description: "Cartagena",
-        idDeparment: 1
-      }
-    ]
-  };
+ 
 
   let dataUser = {
     userId: 5277,
@@ -249,8 +186,7 @@ describe("AditionalInfoFormComponent", () => {
     mockUserService.userInfo.and.returnValue(true);
     mockUserService.getBasicData.and.returnValue(of(basicData));
     mockUserService.updateUser.and.returnValue(of(dataUser));
-    mockMasterDataService.getBanks.and.returnValue(of(dataBanks)),
-    mockMasterDataService.getDepartments.and.returnValue(of(dataDepartments));
+    mockMasterDataService.getBanks.and.returnValue(of(dataBanks));
   }));
 
   beforeEach(() => {
@@ -261,21 +197,6 @@ describe("AditionalInfoFormComponent", () => {
 
   it("should create", () => {
     expect(component).toBeTruthy();
-  });
-
-  it("select city", () => {
-    component.cityCode = "01";
-    component.selectCity("Medellín");
-  });
-
-  it("select selectDepartment", () => {
-    let fb = new FormBuilder();
-    component.livingForm = fb.group({
-      department: ["Antioquia"],
-      city: ["Medellin"],
-      address: [""]
-    });
-    component.selectDepartment(department);
   });
   
 });
