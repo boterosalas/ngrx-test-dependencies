@@ -124,4 +124,11 @@ describe("ReportsComponent", () => {
     expect(mockLinksService.downloadReferrals).toHaveBeenCalled();
   });
 
+  it('change button', () => {
+    component.disButon = false;
+    component.change();
+    expect(component.disButon).toBeFalsy();
+  });
+  
+
 });
