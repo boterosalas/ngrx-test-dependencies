@@ -51,12 +51,40 @@
 .img-container-viajes {
   width: 100%;
   display: flex;
-  margin-top: 15px;
+  margin-top: 0;
+  img {
+    border-radius: 10px !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  
+  .card-other{
+    padding: 0 !important;
+    border-radius: 10px !important;
+  }
+
+  .img-container-viajes {
+    .card-product {
+      padding: 0 !important;
+      border-radius: 10px !important;
+    }
+    width: 100%;
+    display: flex;
+    margin-top: 0;
+    img {
+      border-top-right-radius: 0px !important;
+      border-bottom-right-radius: 0px !important;
+      border-bottom-left-radius: 10px !important;
+    }
+  }
 }
 
 .container-info {
-  max-width: 20vh;
-  min-width: 20vh;
+  max-width: 14vh;
+  min-width: 14vh;
+  position: relative;
+  top: 7px;
 }
 
 .badge-product {
@@ -74,10 +102,16 @@
 }
 
 .prices {
-  // max-height: 63px;
-  // min-height: 63px;
-  max-height: 35px;
-  min-height: 35px;
+  max-height: 63px;
+  min-height: 63px;
+  // max-height: 35px;
+  // min-height: 35px;
+}
+
+.imageContainer {
+  img{
+    max-width: 100%;
+  }
 }
 
 .logo-aliance {
@@ -97,9 +131,9 @@
 
 @media screen and (min-width: 600px) {
   .img-container-2 {
-    max-width: 50%;
+    max-width: 100%;
     margin: 0px auto;
-    height: 20vh;
+    height: 25vh;
   }
 }
 
@@ -110,7 +144,7 @@
   }
 }
 
-h3{
+h3.size {
   cursor: pointer;
 }
 
@@ -127,4 +161,38 @@ h3{
     width: 120px;
     text-align: center;
   }
+}
+
+.card-exito{
+  h3{
+    min-height: 38px;
+  }
+}
+
+.exito-product{
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.imageContainer{
+  width: 100%;
+}
+
+.img-exito{
+  max-height: 17.56rem;
+  display: block;
+  position: relative;
+}
+
+.titles{
+  min-height: 100px;
+}
+
+@media screen and (min-width: 767px) and (max-width:1024px) {
+  .card-exito{
+    h3{
+      font-size: 15px;
+    }
+  }
+
 }

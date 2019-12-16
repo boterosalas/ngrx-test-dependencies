@@ -3,22 +3,26 @@
         <div fxLayout="column" fxLayoutAlign="start">
             <img class="img-left" [src]="img" alt={{alt}}>
         </div>
-        <div fxLayout="column" fxFlex.gt-xs="30" fxLayoutAlign="flex-end flex-end" class={{textDirection}}>
-            <h2>{{title}}</h2>
-            <p class="text-right">{{description}}</p>
-            <button mat-raised-button class="orange-border" color="primary" id="comision-button" [routerLink]="['/click-academy']">{{textbutton}}</button>
+        <div fxLayout="column" fxFlex.gt-xs="100" fxLayoutAlign="flex-end flex-end" class={{textDirection}}>
+            <div  class="width-desc">
+                <h2 class="text-right">{{title}}</h2>
+                <p class="text-right lineheight">{{description}}</p>
+                <button mat-raised-button class="orange-border gtmHomeClicInfVerComisiones fr" color="primary" id="comision-button" [routerLink]="['/click-academy']"> <span class="gtmHomeClicInfVerComisiones">{{textbutton}}</span> </button>
+            </div>
         </div>
     </div>
 </section>
 
 <section *ngIf="sectionRight">
     <div class="home-section" fxLayout="row" fxLayoutAlign="center center">
-        <div fxLayout="column" fxFlex.gt-xs="24" fxLayoutAlign="flex-start flex-start"  class={{textDirection}}>
-            <h2>{{title}}</h2>
-            <p>{{description}}</p>
-            <button mat-raised-button class="orange-border" color="primary"  id="offers-button" [routerLink]="['/ofertas']">{{textbutton}}</button>
+        <div fxLayout="column" fxFlex.gt-xs="100" fxLayoutAlign="flex-start flex-start"  class={{textDirection}}>
+            <div  class="width-desc2">
+                <h2>{{title}}</h2>
+                <p class="lineheight">{{description}}</p>
+                <button mat-raised-button class="orange-border gtmHomeClicInfVerOfertas" color="primary"  id="offers-button" [routerLink]="['/ofertas']"><span class="gtmHomeClicInfVerOfertas">{{textbutton}}</span> </button>
+            </div>
         </div>
-        <div fxLayout="column" fxLayoutAlign="start">
+        <div fxLayout="column" fxLayoutAlign="end">
             <img class="img-right" src={{img}} alt={{alt}}>
         </div>
     </div>

@@ -1,33 +1,45 @@
 <div class="mat-elevation-z0 mt-4 mb-4">
-        <table mat-table [dataSource]="dataSource">
+        <table mat-table [dataSource]="dataSource" class="users-table" matSort (matSortChange)="sortData($event)" >
       
           <!-- Identificaton Column -->
           <ng-container matColumnDef="identification">
-            <th mat-header-cell *matHeaderCellDef> {{ 'USERS.IDENTIFICATION' | translate }} </th>
-            <td mat-cell *matCellDef="let element"> {{element.identification}} </td>
-          </ng-container>
-      
-          <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> {{ 'USERS.NAME' | translate }} </th>
-            <td mat-cell *matCellDef="let element"> {{element.firstNames}} {{element.lastNames}} </td>
+            <th mat-header-cell *matHeaderCellDef style="width: 30%;"> {{ 'USERS.USER' | translate }} </th>
+            <td mat-cell *matCellDef="let element"> 
+            <p class="m-0 galano-bold">{{element.firstNames}} {{element.lastNames}}</p>
+            <p class="m-0 gray-light">C.C {{element.identification}}</p>
+            </td>
           </ng-container>
       
           <!-- CellPhone Column -->
           <ng-container matColumnDef="cellphone">
-            <th mat-header-cell *matHeaderCellDef> {{ 'USERS.CELLPHONE' | translate }}</th>
+            <th mat-header-cell *matHeaderCellDef style="width: 15%;"> {{ 'USERS.CELLPHONE' | translate }}</th>
             <td mat-cell *matCellDef="let element"> {{element.cellphone}} </td>
           </ng-container>
       
           <!-- Email Column -->
           <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef> {{ 'USERS.EMAIL' | translate }} </th>
+            <th mat-header-cell *matHeaderCellDef style="width: 15%;"> {{ 'USERS.EMAIL' | translate }} </th>
             <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+          </ng-container>
+
+          <!-- Subscription Column -->
+          <ng-container matColumnDef="subscription">
+            <th mat-header-cell *matHeaderCellDef style="width: 10%;" mat-sort-header="dateregister"> {{ 'USERS.SUBSCRIPTION' | translate }} </th>
+            <td mat-cell *matCellDef="let element"> {{element.createdondate | date: 'yyyy-MM-dd'}}</td>
+          </ng-container>
+
+          <!-- first sale Column -->
+          <ng-container matColumnDef="firstsale">
+            <th mat-header-cell *matHeaderCellDef class="text-center" style="width: 50%;"> {{ 'USERS.FIRST_SALE' | translate }} </th>
+            <td mat-cell *matCellDef="let element" class="text-center"> 
+              <span *ngIf="element.firstsale !== '0001-01-01T00:00:00'">{{element.firstsale | date: 'yyyy-MM-dd'}}</span>
+              <span *ngIf="element.firstsale === '0001-01-01T00:00:00'"><mat-icon class="red">close</mat-icon></span>
+            </td>
           </ng-container>
 
           <!-- Origin Column -->
           <ng-container matColumnDef="origin">
-            <th mat-header-cell *matHeaderCellDef class="pr-3"> {{ 'USERS.ORIGIN' | translate }} </th>
+            <th mat-header-cell *matHeaderCellDef style="width: 10%;" mat-sort-header="origin"> {{ 'USERS.ORIGIN' | translate }} </th>
             <td mat-cell *matCellDef="let element"> 
                 <span *ngIf="element.isEmployeeGrupoExito === true">
                     Interno
@@ -39,8 +51,21 @@
           </ng-container>
 
           <!-- Verified Column -->
+          <ng-container matColumnDef="comunication">
+              <th mat-header-cell *matHeaderCellDef class="text-center" style="width: 10%;"> {{ 'USERS.COMUNICATION' | translate }} </th>
+              <td mat-cell *matCellDef="let element" class="text-center"> 
+                  <span *ngIf="element.receiveCommunications === true">
+                     Si
+                  </span>
+                  <span *ngIf="element.receiveCommunications === false">
+                      No
+                  </span>
+              </td>
+            </ng-container>
+
+          <!-- Verified Column -->
           <ng-container matColumnDef="verified">
-            <th mat-header-cell *matHeaderCellDef class="text-center pr-2"> {{ 'USERS.VERIFIED' | translate }} </th>
+            <th mat-header-cell *matHeaderCellDef class="text-center" style="width: 10%;"  mat-sort-header="verified"> {{ 'USERS.VERIFIED' | translate }} </th>
             <td mat-cell *matCellDef="let element" class="text-center"> 
                 <span *ngIf="element.verified === true">
                    Si
@@ -53,13 +78,13 @@
 
           <!-- Status Column -->
           <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef class="text-center"> {{ 'USERS.STATUS' | translate }} </th>
+            <th mat-header-cell *matHeaderCellDef class="text-center" style="width: 10%;" mat-sort-header="status"> {{ 'USERS.STATUS' | translate }} </th>
             <td mat-cell *matCellDef="let element" class="text-center"> 
                 <span *ngIf="element.state !== 'Inactivo'">
-                    <img src="/assets/img/dashboard/checked-ok.svg" alt="">
+                    <img src="/assets/img/dashboard/checked-ok.svg" alt="ok">
                 </span>
                 <span *ngIf="element.state === 'Inactivo'">
-                    <img src="/assets/img/dashboard/checked-pend.svg" alt="">
+                    <img src="/assets/img/dashboard/checked-pend.svg" alt="pendind">
                 </span>
                
             </td>

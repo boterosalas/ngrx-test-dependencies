@@ -17,7 +17,7 @@
                 <app-card-offer
                   ngxSlickItem
                   fxLayout="column"
-                  classButton="mb-1 button-100"
+                  classButton="mb-1 button-100 gtmOfertasClicLinkBannerDest{{i}}"
                   [(business)]="mostprominent.business"
                   offers="true"
                   id="productTitle{{ i }}"
@@ -50,7 +50,7 @@
   <div ngxSlickItem *ngFor="let mostsold of mostsold; let i = index" class="slide">
     <app-card-offer
       fxLayout="column"
-      classButton="mb-1  button-100 orange-border"
+      classButton="mb-1  button-100 orange-border gtmOfertasClicLinkBannerVend{{i}}"
       [(business)]="mostsold.business"
       offers="true"
       id="productTitle{{ i }}"
@@ -81,7 +81,7 @@
 <div ngxSlickItem *ngFor="let highercommission of highercommission; let i = index" class="slide">
     <app-card-offer
       fxLayout="column"
-      classButton="mb-1 button-100"
+      classButton="mb-1 button-100 gtmOfertasClicLinkBannerComis{{i}}"
       [(business)]="highercommission.business"
       offers="true"
       id="productTitle{{ i }}"
@@ -115,11 +115,12 @@
           <button
             mat-mini-fab
             id="btnCopy"
+            class="gtmOfertasClicLinkCopiarLink"
             color="orange"
             (click)="copyInputMessage(linkInput)"
           >
-            <span fxLayoutAlign="space-between center">
-              <mat-icon matSuffix>link</mat-icon>
+            <span fxLayoutAlign="space-between center" class="gtmOfertasClicLinkCopiarLink">
+              <mat-icon matSuffix class="gtmOfertasClicLinkCopiarLink">link</mat-icon>
             </span>
           </button>
         </div>

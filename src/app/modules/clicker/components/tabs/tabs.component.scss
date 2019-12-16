@@ -1,30 +1,38 @@
-.mat-ink-bar{
-    background-color: red !important;
+.mat-ink-bar {
+  background-color: red !important;
 }
 
-.mat-paginator-page-size{
-    display: none;
+.mat-paginator-page-size {
+  display: none;
 }
 
 .mat-paginator {
-    display: flex;
-    flex-direction: row;
-    margin: 0 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  margin: 0 0 0 auto;
 }
 
-.text-id{
-    font-size: 1rem;
-    margin-bottom: 0;
+.text-id {
+  font-size: 1rem;
+  margin-bottom: 0;
 }
 
-.w-150{
-    width: 150px;
+.w-150 {
+  width: 150px;
 }
 
 @media screen and (min-width: 600px) {
+  .contain-products {
+    max-height: 355px;
+  }
+}
 
-    .contain-products {
-        max-height: 355px;
-    }
-
+.order {
+    .mat-form-field-underline{
+    display: none !important;
+  }
+  .mat-select {
+    top: 6px;
+    position: relative;
+  }
 }

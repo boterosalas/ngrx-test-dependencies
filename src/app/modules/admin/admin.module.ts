@@ -18,7 +18,17 @@ import { TableUsersComponent } from "./components/table-users/table-users.compon
 import { SearchUsersComponent } from "./components/search-users/search-users.component";
 import { DialogUserComponent } from "./components/dialog-user/dialog-user.component";
 import { MatPaginatorIntl } from "@angular/material";
-import { KeySpaceDirectiveAdmin } from 'src/directives/space.admin.directive';
+import { KeySpaceDirectiveAdmin } from "src/directives/space.admin.directive";
+import { CardDashboardComponent } from "./components/card-dashboard/card-dashboard.component";
+import { CardDashboardInfoComponent } from './components/card-dashboard-info/card-dashboard-info.component';
+
+// Import ng-circle-progress
+import { NgCircleProgressModule } from "ng-circle-progress";
+
+// date range
+
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { AuditComponent } from './pages/audit/audit.component';
 
 const routes: Routes = [
   {
@@ -44,6 +54,14 @@ const routes: Routes = [
     data: {
       role: "ADMIN"
     }
+  },
+  {
+    path: "auditoria",
+    component: AuditComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN"
+    }
   }
 ];
 
@@ -58,7 +76,10 @@ const routes: Routes = [
     TableUsersComponent,
     SearchUsersComponent,
     DialogUserComponent,
-    KeySpaceDirectiveAdmin
+    KeySpaceDirectiveAdmin,
+    CardDashboardComponent,
+    CardDashboardInfoComponent,
+    AuditComponent
   ],
   imports: [
     CommonModule,
@@ -68,7 +89,35 @@ const routes: Routes = [
     AppMaterialModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxDaterangepickerMd.forRoot(),
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      radius: 60,
+      space: -10,
+      unitsFontSize: "14",
+      unitsFontWeight: "500",
+      outerStrokeGradient: true,
+      outerStrokeWidth: 10,
+      outerStrokeColor: "#ff6f11",
+      outerStrokeGradientStopColor: "#ff6f11",
+      innerStrokeColor: "#e7e8ea",
+      innerStrokeWidth: 10,
+      titleFontWeight: "500",
+      titleColor: "#86888a",
+      unitsColor: "#86888a",
+      subtitleFontSize: "16",
+      subtitleFontWeight: "700",
+      animateTitle: false,
+      animationDuration: 1000,
+      showTitle: true,
+      showSubtitle: false,
+      showUnits: true,
+      showBackground: false,
+      clockwise: false,
+      startFromZero: false,
+      responsive: true
+    })
   ],
   exports: [SideMenuComponent],
   entryComponents: [DialogUserComponent],

@@ -8,9 +8,11 @@ export const environment = {
   URL_PROFILE: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apiprofile/api/',
   URL_VALIDATE_EMPLOYEE: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apiprofile/',
   URL_CONTENT: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apicontent/api/',
+  // URL_CONTENT: '  http://10.125.65.230/content/api/',
   // URL_CONTENT: 'https://apimexito.azure-api.net/PD-clickam-md-apicontent/api/',
   URL_REFERAL: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apireferral/api/',
   URL_COMISSION: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apicommission/api/',
+  // URL_COMISSION: ' http://10.125.65.230/commission/api/',
   URL_MASTER: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apimasterdata/api/',
   SUBSCRIPTION: 'f5edbcd2315e479aad33d80c58052fcc'
   // SUBSCRIPTION: 'e2d3328d254d4e52a11495b223f56e86'

@@ -76,4 +76,10 @@ describe('ProfileComponent', () => {
     component.sendFiles({fileIdentificationCard1: 'data:application/octet-stream;base64, 84dq8d9qdqd', fileIdentificationCard2: 'data:application/octet-stream;base64, dqdqdqsqsq', fileBankCertificate: 'data:application/octet-stream;base64, ddp0d9aida0d'  });
   });
 
+  it('reset files', () => {
+    component.reset({});
+    let file = '';
+    expect(file).toBe('');
+  });
+
 });

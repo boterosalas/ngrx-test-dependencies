@@ -12,6 +12,7 @@ import { UserService } from "src/app/services/user.service";
 import { startWith } from "rxjs/internal/operators/startWith";
 import { map } from "rxjs/internal/operators/map";
 import { MasterDataService } from 'src/app/services/master-data.service';
+declare var dataLayer: any
 
 @Component({
   selector: "app-registerform",
@@ -333,23 +334,34 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       fileBankCertificate: this.fileBankCertificate,
       bankAccountNumber: btoa(this.externalForm.controls.numberAccount.value),
       typeBankAccount: this.externalForm.controls.typeAccount.value,
-      address: this.externalForm.controls.address.value
+      address: this.externalForm.controls.address.value,
+      acceptHabeasData: true,
+      acceptTerms: true
     };
 
     this.subscription = this.registerUser.registerUser(registerForm).subscribe(
       (resp: ResponseService) => {
         this.loading.hide();
         if (resp.state === "Success") {
+
+          dataLayer.push({
+            event: 'pushEventGA',
+            categoria: 'Registro',
+            accion: 'ClicLateralRegistro',
+            etiqueta: 'RegistroExitoso'
+          });
+        
           Swal.fire({
               title:'Revisa tu correo',
               html: `
               Activa tu cuenta siguiendo el enlace </br> que enviamos a tu correo.
               `,
             confirmButtonText: "Volver al inicio",
-            confirmButtonClass: "accept-register-alert-success"
+            confirmButtonClass: "accept-register-alert-success gtmRegistroClicModalValidacion"
           }).then(() => {
             this.utils.hideloginForm();
           });
+
         } else {
           Swal.fire({
             title: "Registro inválido",

@@ -10,6 +10,10 @@ import { DialogUserComponent } from "../../components/dialog-user/dialog-user.co
 import { Subscription } from "rxjs/internal/Subscription";
 import { UserService } from "src/app/services/user.service";
 import { ResponseService } from "src/app/interfaces/response";
+import { LinksService } from 'src/app/services/links.service';
+import * as moment from 'moment';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+moment.locale('es');
 
 @Component({
   selector: "app-users",
@@ -25,14 +29,39 @@ export class UsersComponent extends MatPaginatorIntl
   pageTo: number = 50;
   totalItems: number;
   paginate: string;
+  dateForm: FormGroup;
   private subscription: Subscription = new Subscription();
   ext: string;
   contentType: string;
+  email: string;
+  maxDate = moment(new Date());
+  orderOrigin: string;
+  orderBy:string;
+  from: any;
+  to: any;
+  dateParams: any;
+  disButon: boolean;
+
+  locale = {
+    locale: 'es',
+    direction: 'ltr', // could be rtl
+    weekLabel: 'W',
+    separator: ' a ', // default is ' - '
+    cancelLabel: 'Cancelar', // detault is 'Cancel'
+    applyLabel: 'Aplicar', // detault is 'Apply'
+    clearLabel: 'Limpiar', // detault is 'Clear'
+    customRangeLabel: 'Custom range',
+    daysOfWeek: moment.weekdaysMin(),
+    monthNames: moment.monthsShort(),
+    firstDay: 1 // first day is monday
+}
 
   constructor(
     private dialog: MatDialog,
     private usersService: UserService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private file: LinksService,
+    private fb: FormBuilder
   ) {
     super();
 
@@ -65,15 +94,29 @@ export class UsersComponent extends MatPaginatorIntl
 
   ngOnInit() {
     this.searchUser("");
+
+    this.usersService.userInfo$
+        .subscribe(val => {
+          if (!!val) {
+           this.email = val.email;
+          }
+        });
+
+        this.dateForm = this.fb.group(
+          {
+            dateRange: [null, Validators.required]
+          }
+        );
+
   }
 
-  public searchUser(term, from = 1, to = this.pageTo) {
+  public searchUser(term, from = 1, to = this.pageTo, orderOrigin = '' ,orderBy = '') {
     if (term !== this.paginate) {
       this.paginate = term;
       this.pageIndex = 0;
     }
-    const params = { term, from, to };
-    this.subscription = this.usersService
+    const params = { term, from, to, orderOrigin, orderBy };
+    this.subscription = this.file
       .searchUsers(params)
       .subscribe((user: any) => {
         this.users = user.users;
@@ -242,7 +285,7 @@ export class UsersComponent extends MatPaginatorIntl
   }
 
   private changeStateUser(userId, value) {
-    this.usersService.statusUser(userId, value).subscribe(() => {
+    this.subscription = this.usersService.statusUser(userId, value).subscribe(() => {
       if (value === true) {
         this.openSnackBar("El usuario ha sido activado", "Cerrar");
       } else {
@@ -252,7 +295,7 @@ export class UsersComponent extends MatPaginatorIntl
   }
 
   private changeVerified(userId, value) {
-    this.usersService.verifiedUser(userId, value).subscribe(() => {
+    this.subscription = this.usersService.verifiedUser(userId, value).subscribe(() => {
       if (value === true) {
         this.openSnackBar("Se ha verificado el usuario", "Cerrar");
       } else {
@@ -272,16 +315,47 @@ export class UsersComponent extends MatPaginatorIntl
 
   private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      duration: 2000
+      duration: 5000
     });
   }
 
   public pagination(paginate: any) {
     this.pageIndex = paginate.pageIndex;
     paginate.length = this.totalItems;
-    const from = paginate.pageSize * paginate.pageIndex + 1;
-    const to = paginate.pageSize * (paginate.pageIndex + 1);
-    this.searchUser(this.paginate, from, to);
+    this.from = paginate.pageSize * paginate.pageIndex + 1;
+    this.to = paginate.pageSize * (paginate.pageIndex + 1);
+    this.searchUser(this.paginate, this.from, this.to);
+  }
+
+  public getUserExcel() {
+    this.dateParams = {
+      email: this.email,
+      start: this.dateForm.controls.dateRange.value.startDate.format(),
+      end: this.dateForm.controls.dateRange.value.endDate.format()
+    }
+    
+    this.subscription = this.file.getUsersExcel(this.dateParams).subscribe((resp: ResponseService) => {
+      if(resp.state === 'Success') {
+        this.openSnackBar(resp.userMessage + ' a ' + this.email, 'Cerrar');
+        this.dateForm.reset();
+        if (this.dateForm.controls.dateRange.value.startDate === null) {
+          this.disButon = true;
+        }
+      }
+    });
+  }
+
+  change() {
+    this.disButon = false;
+  }
+
+  sort(event) {
+    let name = event.active.toUpperCase();
+    let direction = event.direction.toUpperCase();
+    if( direction === '') {
+      name = ''
+    }
+    this.searchUser(this.paginate, this.from, this.to, name, direction);
   }
 
   ngOnDestroy(): void {

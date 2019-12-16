@@ -1,7 +1,7 @@
-<form [formGroup]="searchForm" fxLayoutAlign="start" class="pt-2">
+<form [formGroup]="searchForm" fxLayoutAlign="start" class="pt-2 search">
     <mat-form-field appearance="outline" class="w-100">
       <span fxLayoutAlign="center space-between">
-      <input matInput type="text" id="BarSearch" placeholder="{{ 'GENERIC.SEARCH' | translate }}" formControlName="search">
+      <input matInput type="text" id="BarSearch" placeholder="{{ 'GENERIC.SEARCH' | translate }} por producto o PLU" formControlName="search">
         <button mat-button [disabled]="!searchForm.valid || searchForm.value.search===''" (click)="searchProduct()" id="BtnSearch" class="lupa" >
           <mat-icon matSuffix class="mr-1 blue cursor-pointer">search</mat-icon>
         </button>

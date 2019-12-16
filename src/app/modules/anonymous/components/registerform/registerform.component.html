@@ -385,12 +385,12 @@
   <button
     mat-raised-button
     id="next"
-    class="center button button-100"
+    class="center button button-100 gtmRegistroClicInfSiguiente"
     color="orange"
     (click)="nextStep()"
     [disabled]="!registerForm.valid"
   >
-    <span fxLayoutAlign="space-around center">
+    <span fxLayoutAlign="space-around center" class="gtmRegistroClicInfSiguiente">
       {{ "GENERIC.NEXT" | translate }} <mat-icon>arrow_forward</mat-icon>
     </span>
   </button>
@@ -784,12 +784,12 @@
   <button
     mat-raised-button
     id="nextClicker"
-    class="center button button-100"
+    class="center button button-100 gtmRegistroClicInfSiguientePaso2"
     color="orange"
     (click)="nextStepExternalClicker()"
     [disabled]="!externalForm.valid || (showErrorCed1 || showErrorCed2 || showErrorCert)"
   >
-    <span fxLayoutAlign="space-around center">
+    <span fxLayoutAlign="space-around center" class="gtmRegistroClicInfSiguientePaso2">
       {{ "GENERIC.NEXT" | translate }} <mat-icon>arrow_forward</mat-icon>
     </span>
   </button>

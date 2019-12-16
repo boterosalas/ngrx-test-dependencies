@@ -44,14 +44,14 @@
   </mat-form-field>
 <div class="text-center">
     <button
-    class="button button-100"
+    class="button button-100 gtmIniciarSesiónClicLtrlIniciarSesion"
     mat-raised-button
     id="login"
     color="orange"
     (click)="login()"
     [disabled]="!loginForm.valid"
   >
-    {{ "LOGIN.LOGIN" | translate }}
+   <span class="gtmIniciarSesiónClicLtrlIniciarSesion">{{ "LOGIN.LOGIN" | translate }}</span> 
   </button>
   
 </div>

@@ -12,13 +12,13 @@ import { DialogUserComponent } from "../../components/dialog-user/dialog-user.co
 import { AdminModule } from '../../admin.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
-import { UserService } from 'src/app/services/user.service';
+import { LinksService } from 'src/app/services/links.service';
 
 describe("UsersComponent", () => {
   let component: UsersComponent;
   let fixture: ComponentFixture<UsersComponent>;
 
-  const mockUserService = jasmine.createSpyObj("UserService", [
+  const mockLinksService = jasmine.createSpyObj("LinksService", [
     "searchUsers"
   ]);
 
@@ -106,7 +106,7 @@ describe("UsersComponent", () => {
         AdminModule
       ],
       providers: [
-        { provide: UserService, useValue: mockUserService }
+        { provide: LinksService, useValue: mockLinksService }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
@@ -120,7 +120,7 @@ describe("UsersComponent", () => {
 
   beforeEach(() => {
     localStorage.setItem('ACCESS_TOKEN', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU');
-    mockUserService.searchUsers.and.returnValue(of(dataUser));
+    mockLinksService.searchUsers.and.returnValue(of(dataUser));
     fixture = TestBed.createComponent(UsersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -133,10 +133,16 @@ describe("UsersComponent", () => {
 
   it("search user", () => {
     component.searchUser("david");
-    expect(mockUserService.searchUsers).toHaveBeenCalled();
+    expect(mockLinksService.searchUsers).toHaveBeenCalled();
   });
 
   it("modal data", () => {
     component.userData(dataUsers);
   });
+
+  it('pagination', () => {
+    component.pagination({previousPageIndex: 1, pageIndex: 0, pageSize: 20, length: 5});
+    expect(mockLinksService.searchUsers).toHaveBeenCalled();
+  });
+
 });

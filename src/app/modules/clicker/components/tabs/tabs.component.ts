@@ -30,6 +30,7 @@ import { environment } from "src/environments/environment";
 import { TokenService } from "src/app/services/token.service";
 import { ResponseService } from "src/app/interfaces/response";
 import Swal from "sweetalert2";
+declare var dataLayer: any
 
 @Component({
   selector: "app-tabs",
@@ -91,9 +92,9 @@ export class TabsComponent extends MatPaginatorIntl
   showNotFound: boolean;
   paginate: string;
   totalItems: number;
-  pageSize: number = 6;
-  pageTo: number = 6;
-  pageSizeOptions: number[] = [6, 12, 24, 50];
+  pageSize: number = 50;
+  pageTo: number = 50;
+  pageSizeOptions: number[] = [50];
   url: string;
   urlshorten: string;
   formLink: FormGroup;
@@ -128,7 +129,8 @@ export class TabsComponent extends MatPaginatorIntl
   nameAliance: any;
   percentModal: any;
   reference: boolean;
-
+  orderOptions: any;
+  orderValue:string;
   slideConfig = {
     slidesToShow: 5,
     slidesToScroll: 5,
@@ -165,6 +167,13 @@ export class TabsComponent extends MatPaginatorIntl
   };
 
   ngOnInit() {
+
+    setTimeout(() => {
+      document.querySelector('.mat-tab-label[aria-posinset="1"]').classList.add("gtmInicioClicFiltroExitocom");
+      document.querySelector('.mat-tab-label[aria-posinset="2"]').classList.add("gtmInicioClicFiltroSeguro");
+      document.querySelector('.mat-tab-label[aria-posinset="3"]').classList.add("gtmInicioClicFiltroViajes");
+    }, 1000);
+
     this.showNotFound = false;
     this.showResults = false;
 
@@ -178,6 +187,15 @@ export class TabsComponent extends MatPaginatorIntl
         ]
       ]
     });
+
+    this.orderOptions = [
+      {value: 'OrderByTopSaleDESC', description: 'Más Vendidos'},
+      {value: 'OrderByReleaseDateDESC', description: 'Más recientes'},
+      {value: 'OrderByPriceDESC', description: 'Mayor precio primero'},
+      {value: 'OrderByNameASC', description: 'Productos de la A-Z'},
+      {value: 'OrderByNameDESC', description: 'Productos de la Z-A'},
+    ]
+  
 
     /**
      * verifica si el usuario esta logueado y se obtiene la identificacion
@@ -199,12 +217,18 @@ export class TabsComponent extends MatPaginatorIntl
     this.getCategories();
     this.Trip();
     this.reference = false;
+    
   }
 
   private formShareLink() {
     this.formLink = this.fb.group({
       link: [this.url]
     });
+  }
+
+  order(option) {
+    this.searchProductPaginate(this.paginate, option, 1 , this.pageTo);
+    this.orderValue = option;
   }
 
   /**
@@ -215,12 +239,13 @@ export class TabsComponent extends MatPaginatorIntl
    *
    */
 
-  public searchProductPaginate(term: string, from = 1, to = this.pageTo) {
+public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pageTo) {
     if (term !== this.paginate) {
       this.paginate = term;
       this.pageIndex = 0;
     }
-    const params = { term, from, to };
+    
+    const params = { term, order, from, to };
     this.loading.show();
     this.subscription = this.sp.getProductsPagination(params).subscribe(
       (resp: any) => {
@@ -236,6 +261,12 @@ export class TabsComponent extends MatPaginatorIntl
           this.showNotFound = true;
           this.showResults = false;
         }
+        dataLayer.push({
+          event: 'pushEventGA',
+          categoria: 'Inicio',
+          accion: 'ClicFiltroExitocom',
+          etiqueta: term
+        });
       },
       error => {
         this.loading.hide();
@@ -315,7 +346,7 @@ export class TabsComponent extends MatPaginatorIntl
     paginate.length = this.totalItems;
     const from = paginate.pageSize * paginate.pageIndex + 1;
     const to = paginate.pageSize * (paginate.pageIndex + 1);
-    this.searchProductPaginate(this.paginate, from, to);
+    this.searchProductPaginate(this.paginate, this.orderValue, from, to);
   }
 
   ngOnDestroy(): void {
@@ -352,6 +383,33 @@ export class TabsComponent extends MatPaginatorIntl
     this.idCustomerForm.reset();
     setTimeout(() => {
       this.saveLink();
+      // if(document.querySelector('#facebook')) {
+
+      //   document.querySelector('#facebook').classList.add("gtmInicioClicFiltroExitocomFacebook");
+      //   document.querySelector('#facebook button').classList.add("gtmInicioClicFiltroExitocomFacebook");
+      //   document.querySelector('#facebook svg').classList.add("gtmInicioClicFiltroExitocomFacebook");
+      //   document.querySelectorAll('#facebook div').forEach(item => {
+      //     item.classList.add("gtmInicioClicFiltroExitocomFacebook");
+      //   });
+      //   document.querySelector('#facebook fa-icon').classList.add("gtmInicioClicFiltroExitocomFacebook");
+
+      //   document.querySelector('#twitter').classList.add("gtmInicioClicFiltroExitocomTwitter");
+      //   document.querySelector('#twitter button').classList.add("gtmInicioClicFiltroExitocomTwitter");
+      //   document.querySelector('#twitter svg').classList.add("gtmInicioClicFiltroExitocomTwitter");
+      //   document.querySelectorAll('#twitter div').forEach(item => {
+      //     item.classList.add("gtmInicioClicFiltroExitocomTwitter");
+      //   });
+      //   document.querySelector('#twitter fa-icon').classList.add("gtmInicioClicFiltroExitocomTwitter");
+
+      //   document.querySelector('#whatsapp').classList.add("gtmInicioClicFiltroExitocomWhatsapp");
+      //   document.querySelector('#whatsapp button').classList.add("gtmInicioClicFiltroExitocomWhatsapp");
+      //   document.querySelector('#whatsapp svg').classList.add("gtmInicioClicFiltroExitocomWhatsapp");
+      //   document.querySelectorAll('#whatsapp div').forEach(item => {
+      //     item.classList.add("gtmInicioClicFiltroExitocomWhatsapp");
+      //   });
+      //   document.querySelector('#whatsapp fa-icon').classList.add("gtmInicioClicFiltroExitocomWhatsapp");
+
+      // }
     }, 1500);
     this.formShareLink();
     const title = product.productName;

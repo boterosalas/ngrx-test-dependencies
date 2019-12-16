@@ -1,20 +1,15 @@
-import { HttpClient } from "@angular/common/http";
 import {
-  HttpClientTestingModule,
-  HttpTestingController
-} from "@angular/common/http/testing";
+  HttpClientTestingModule} from "@angular/common/http/testing";
 import { async, TestBed, ComponentFixture } from "@angular/core/testing";
 import {
-  TranslateLoader,
   TranslateModule,
   TranslateService
 } from "@ngx-translate/core";
 import { AppComponent } from "./app.component";
-import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { Router } from "@angular/router";
 import { RouterTestingModule } from "@angular/router/testing";
 import { JwtModule } from '@auth0/angular-jwt';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 // const TRANSLATIONS_ES = require('../assets/i18n/es.json');
 
@@ -42,7 +37,7 @@ describe("AppComponent", () => {
           }
         })
       ],
-      providers: [TranslateService],
+      providers: [TranslateService, BnNgIdleService],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
     // translate = TestBed.get(TranslateService);

@@ -13,7 +13,7 @@
     "DOCUMENT": "Documento",
     "REQUIRED": "El campo {{formValue}} es requerido",
     "NEXT": "Siguiente",
-    "REGISTER": "Regístro",
+    "REGISTER": "Registro",
     "REGISTER2": "Registrarse",
     "INVALID_FORMAT": "El campo {{val}} no puede contener caracteres especiales",
     "MAX_CHARACTERS": "El número máximo de caracteres es {{maxchar}}",
@@ -33,6 +33,7 @@
     "CUSTOMER_ID": "Ingrese la cédula del tomador del seguro",
     "CATEGORIES": "Categorías",
     "REFERENCE_TEXT": "O puedes referenciar a un cliente con su número de cédula",
+    "TRIPS_MSJ": "(refiere con cédula, si y solo si, tú serás quien pague en Viajes Éxito)",
     "REFERENCE": "Referenciar",
     "REFERENCE_IDENTIFICATION": "Ingresa la cédula del cliente a referir"
   },
@@ -40,7 +41,7 @@
     "LOGIN": "Iniciar sesión",
     "INVALID_EMAIL": "Email inválido",
     "INVALID_PASSWORD": "Contraseña invalida",
-    "FORGOT_PASSWORD": "Olvidó su contraseña?",
+    "FORGOT_PASSWORD": "¿Olvidó su contraseña?",
     "INTRODUCE_EMAIL": "Ingrese un correo",
     "INTRODUCE_PASSWORD": "Ingrese una contraseña",
     "DESCRIPTION": "Si todavía no tienes una cuenta puedes",
@@ -94,7 +95,8 @@
     "HOW_WORKS": "¿Cómo funciona?",
     "HOW_WORKS_DESCRIPTION": "Busca un producto o servicio de los comercios asociados, crea un link, compártelo en redes sociales y empieza a ganar comisiones.",
     "TITLE_RAISE": "Ingresos adicionales a solo un click",
-    "DESCRIPTION_RAISE": "¡Nunca fue tan fácil tener ingresos adicionales! Refiere y vende productos de los negocios asociados y obtén las mejores comisiones.",
+    "DESCRIPTION_RAISE": "¡Nunca fue tan fácil tener ingresos adicionales!",
+    "DESCRIPTION_RAISE2": "Refiere y vende productos de los negocios asociados y obtén las mejores comisiones.",
     "TITLE_SEARCH": "Busca y crea un link",
     "DESCRIPTION_SEARCH": "Elige el negocio asociado, selecciona un producto o servicio y compártelo para ganar ingresos adicionales."
   },
@@ -117,7 +119,7 @@
   "CLICKACADEMY": {
     "CLICKACADEMY": "Click Academy",
     "CLICKACADEMY_TAB_EXITO": "exito.com",
-    "CLICKACADEMY_TAB_EXITO_TABLE": "<table class='w-100 text-left mt-3'><thead><th>Categoría de producto</th><th>Comisiones</th></thead><tbody><tr><td>Textiles</td><td>9.60%</td></tr><tr><td>Ropa hogar y otros</td><td>6.40%</td></tr><tr><td>Colchones y muebles</td><td>4.00%</td></tr><tr><td>Accesorios de telefonía, Categoría genérica, Punto liquidación, Garantías extendidas, Ventilación, Calefacción, Combos sublínea 51, Cuidado pisos, Cuidado ropa, Cuidado personal, Aires acondicionados, Accesorios preparación alimentos, Bebidas, Cocción eléctrica, Preparación Alimentos</td><td>2.40%</td></tr><tr><td>DVD, Accesorios pata TV, Teatro en casa, Equipos de sonido, Portables de audio, Accesorios audio, Networking, Teléfonos, Accesorios TV-Audio y teatro en casa, Periféricos, Accesorios para PC.</td><td>1.60%</td></tr><tr><td>Televisores, Celulares gama alta</td><td>0.96%</td></tr><tr><td>Calefacción, Cocción, Refrigeración, Máquinas de coser, Lavadoras, Secadoras, Video juegos</td><td>0.80%</td></tr><tr><td>Celulares gama media, Celulares gama baja</td><td>0.64%</td></tr><tr><td>Informática, Impresión, Cámaras fotográficas y filmadoras.</td><td>0.48%</td></tr></tbody></table>",
+    "CLICKACADEMY_TAB_EXITO_TABLE": "<table class='w-100 text-left mt-3'><thead><th>Categoría de producto</th><th>Comisiones</th></thead><tbody><tr><td>Textiles</td><td>9.60%</td></tr><tr><td>Ropa hogar y otros</td><td>6.40%</td></tr><tr><td>Colchones y muebles</td><td>4.00%</td><tr><td>Mercado (Aplica por compras superiores a $200.000 pesos, este valor no incluye el costo del envio)</td><td>$ 8.000</td></tr><tr><td>Accesorios de telefonía, Categoría genérica, Punto liquidación, Garantías extendidas, Ventilación, Calefacción, Combos sublínea 51, Cuidado pisos, Cuidado ropa, Cuidado personal, Aires acondicionados, Accesorios preparación alimentos, Bebidas, Cocción eléctrica, Preparación Alimentos</td><td>2.40%</td></tr><tr><td>DVD, Accesorios pata TV, Teatro en casa, Equipos de sonido, Portables de audio, Accesorios audio, Networking, Teléfonos, Accesorios TV-Audio y teatro en casa, Periféricos, Accesorios para PC.</td><td>1.60%</td></tr><tr><td>Televisores, Celulares gama alta</td><td>0.96%</td></tr><tr><td>Calefacción, Cocción, Refrigeración, Máquinas de coser, Lavadoras, Secadoras, Video juegos</td><td>0.80%</td></tr><tr><td>Celulares gama media, Celulares gama baja</td><td>0.64%</td></tr><tr><td>Informática, Impresión, Cámaras fotográficas y filmadoras.</td><td>0.48%</td></tr></tbody></table>",
     "CLICKACADEMY_TAB_SEGUROS": "Seguros",
     "CLICKACADEMY_TAB_SEGUROS_TABLE": "<table class='w-100 text-left mt-3'><thead><th>Categoría de producto</th><th>Comisiones</th></thead><tbody><tr><td>SOAT Auto</td><td>$32.000</td></tr><tr><td>SOAT Moto</td><td>$8.000</td></tr><tr><td>Seguro viaje internacional</td><td>$16.000</td></tr><tr><td>Seguro Celular</td><td>$12.000</td></tr><tr><td>Seguro Smartwatch</td><td>$12.000</td></tr><tr><td>Seguro Tablet</td><td>$12.000</td></tr><tr><td>Seguro Portátil</td><td>$12.000</td></tr><tr><td>Seguro consola de videojuego</td><td>$12.000</td></tr><tr><td>Seguro mascotas</td><td>$12.000</td></tr><tr><td>Seguro motos</td><td>$12.000</td></tr><tr><td>Seguro bicicletas</td><td>$12.000</td></tr><tr><td>Seguro de viaje nacional</td><td>$4.800</td></tr></tbody></table>",
     "CLICKACADEMY_TAB_VIAJES": "Viajes",
@@ -198,13 +200,35 @@
   },
   "USERS": {
     "USERS": "Usuarios",
+    "USER": "USUARIO",
+    "SUBSCRIPTION": "INSCRITO",
+    "FIRST_SALE": "P.VENTA  ",
     "IDENTIFICATION": "CÉDULA",
     "NAME": "NOMBRE",
     "CELLPHONE": "CELULAR",
     "EMAIL": "CORREO",
     "ORIGIN": "ORIGEN",
     "VERIFIED": "VERIFICADO",
-    "STATUS":"ESTADO"
+    "STATUS":"ESTADO",
+    "COMUNICATION": "COMUNICADO"
+  },
+  "AUDIT": {
+    "AUDIT": "Auditoria"
+  },
+  "DASHBOARD": {
+    "USERS": "USUARIOS",
+    "TOTAL_USERS": "TOTAL USUARIOS",
+    "TOTAL_ACTIVE": "TOTAL ACTIVOS",
+    "TOTAL_MONTH": "REGISTRADOS (MES)",
+    "YESTERDAY": "AYER",
+    "YESTERDAY2": "Ayer",
+    "TODAY": "HOY",
+    "ACTIVE_MONTH": "ACTIVOS (MES)",
+    "MONTH": "MES",
+    "SELLS": "VENTAS",
+    "COMMISSIONS": "COMISIONES",
+    "LINKS_GENERATED": "LINKS GENERADOS",
+    "TOTAL": "Total"
   }
 
 }

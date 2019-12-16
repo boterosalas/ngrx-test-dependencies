@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import decode from 'jwt-decode';
+declare var dataLayer: any
 
 @Component({
   selector: "app-loginform",
@@ -72,9 +73,18 @@ export class LoginformComponent implements OnInit, OnDestroy {
       (resp: ResponseService) => {
         this.loading.hide();
         if (resp.state === "Success") {
+          
           localStorage.setItem("ACCESS_TOKEN", resp.objectResponse.token);
           this.utils.hideloginForm();
           this.routeBased();
+          
+          dataLayer.push({
+            event: 'pushEventGA',
+            categoria: 'IniciarSesión',
+            accion: 'ClicLateral',
+            etiqueta: 'IniciarSesionExitoso'
+          });
+
         } else {
           Swal.fire({
             title: "Login inválido",
