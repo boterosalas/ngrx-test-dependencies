@@ -19,10 +19,14 @@
   </mat-form-field>
 
   <mat-form-field>
+      <mat-pass-toggle-visibility
+      #toggleVisbility
+      matSuffix
+    ></mat-pass-toggle-visibility>
     <input
       matInput
       id="password"
-      type="password"
+      [type]="toggleVisbility.type"
       placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
       formControlName="Password"
       spacebar

@@ -74,16 +74,7 @@ export class AditionalInfoFormComponent implements OnInit {
   numberPeopleLiveOb = {};
   dependantOb = {};
   mobilityOb = {};
-  filteredDepartments: Observable<any>;
-  filteredCities: Observable<any>;
-  disabledCity: boolean;
-  departmentCode: string;
-  departmentDecription: string;
-  cityCode: string;
-  cityValue: string;
-  departments = [];
   banks = [];
-  cities: [];
   numberPattern = "^(0|[0-9][0-9]*)$";
   maxDate = new Date();
   receiveCommunications: boolean;
@@ -109,17 +100,12 @@ export class AditionalInfoFormComponent implements OnInit {
         this.dependantOb=  {id: val.dependents, description: this.dependant['description']};
         this.mobilityOb=  {id: val.mobility, description: val.mobilityDescription};
         this.addressInfo = val.address;
-        this.departmentInfo = val.departmentName;
-        this.municipalityInfo = val.municipalityName;
-        this.departmentDecription = val.departmentName;
         this.receiveCommunications = val.receiveCommunications;
      };
      this.getBasicData();
      this.personalFormInfo();
      this.profesionalFormInfo();
      this.livingFormInfo();
-     this.getDepartments();
-     this.filter();
 
   })};
 
@@ -142,9 +128,6 @@ export class AditionalInfoFormComponent implements OnInit {
 
   public livingFormInfo() {
     this.livingForm = this.fb.group({
-     address: [this.addressInfo, Validators.required],
-     department: [this.departmentInfo, Validators.required],
-     city: [this.municipalityInfo, Validators.required],
      stratum: [this.stratumOb['id'], Validators.required],
      typeHousing: [this.typeHousingOb['id'], Validators.required],
      numberPeopleLive: [this.numberPeopleLiveOb['id'], Validators.required],
@@ -165,88 +148,6 @@ export class AditionalInfoFormComponent implements OnInit {
     })
   }
 
-  public displayDepartment(departments?: any): string | undefined {
-    return departments ? departments.description : undefined;
-  }
-
-
-  public filter() {
-    this.filteredDepartments = this.livingForm.controls.department.valueChanges
-    .pipe(
-      map(department => typeof department === 'string' ? department : department.description),
-      map(department => department ? this._filterDepartments(department) : this.departments.slice())
-    );
-  }
-
-  public filterCities() {
-    this.filteredCities = this.livingForm.controls.city.valueChanges.pipe(
-      startWith(""),
-      map(city => (city ? this._filterCities(city) : this.cities.slice()))
-    );
-  }
-
-  private _filterDepartments(value: any) {
-    
-    const filterValue = value.toLowerCase();
-    return this.departments.filter(
-      department =>
-        department.description.toLowerCase().indexOf(filterValue) === 0
-    );
-  }
-
-  private _filterCities(value: string) {
-    const filterValue = value.toLowerCase();
-    return this.cities.filter(
-      (city: any) => city.description.toLowerCase().indexOf(filterValue) === 0
-    );
-  }
-
-
-  public selectDepartment(department) {
-    this.departmentDecription = department.description;
-    this.departmentCode = department.code;
-    this.cities = department.municipalities;
-    this.livingForm.controls.city.setValue('');
-    let valueDepartment = this.livingForm.controls.department.valueChanges;
-    this.filterCities();
-
-    valueDepartment.subscribe((resp) => {
-      if (resp !== '') {
-        this.getDepartments();
-      } else {
-        this.livingForm.controls.city.setValue('');
-      }
-    })
-  }
-
-  public checkDepartment() {
-    if ((this.livingForm.controls.department.value !== this.departmentDecription) || (this.livingForm.controls.department.value === undefined )) {
-      this.livingForm.controls.department.setErrors({'incorrect': true});
-    }
-  }
-
-  public selectCity(city) {
-    this.cityCode = city.code;
-    this.cityValue = city.description;
-  }
-
-  public checkCity() {
-    if (this.livingForm.controls.city.value !== this.cityValue) {
-      this.livingForm.controls.city.setErrors({'incorrectCity': true});
-    }
-  }
-
-  /**
-   * Metodo para listar los departamentos
-   */
-
-  public getDepartments() {
-    this.subscription = this.personalInfo
-      .getDepartments()
-      .subscribe((res: ResponseService) => {
-        this.departments = res.objectResponse;
-      });
-  }
 
   changeComunications(comunication) {
     if (comunication.checked === false) {
@@ -266,14 +167,11 @@ export class AditionalInfoFormComponent implements OnInit {
     this.userInfo.occupation = this.profesionalForm.controls.occupation.value;
     this.userInfo.fixedIncome = this.profesionalForm.controls.fixedIncome.value;
     this.userInfo.OtherIncome = this.profesionalForm.controls.OtherIncome.value;
-    this.userInfo.address = this.livingForm.controls.address.value;
     this.userInfo.stratum = this.livingForm.controls.stratum.value;
     this.userInfo.typeHousing = this.livingForm.controls.typeHousing.value;
     this.userInfo.numberPeopleLive = this.livingForm.controls.numberPeopleLive.value;
     this.userInfo.dependents = this.livingForm.controls.dependant.value;
     this.userInfo.mobility = this.livingForm.controls.mobility.value;
-    this.userInfo.department =  this.departmentCode;
-    this.userInfo.municipality =  this.cityCode;
     this.userInfo.receiveCommunications = this.receiveCommunications;
 
     this.subscription = this.user
@@ -282,7 +180,7 @@ export class AditionalInfoFormComponent implements OnInit {
         (resp: any) => {
           if (resp.state === "Success") {
             this.openSnackBar(resp.userMessage, "Cerrar");
-            // this.user.getProfile();
+            this.user.getProfile();
           }
         },
         err => {

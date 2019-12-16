@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfileFormComponent } from './profile-form.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormBuilder } from '@angular/forms';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -13,12 +13,88 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
 import { DialogEditComponent } from '../dialog-edit/dialog-edit.component';
 import { MatDialogRef } from '@angular/material';
+import { MasterDataService } from 'src/app/services/master-data.service';
+import { of } from 'rxjs/internal/observable/of';
 
 describe('ProfileFormComponent', () => {
   let component: ProfileFormComponent;
   let fixture: ComponentFixture<ProfileFormComponent>;
 
   const mockDialog = jasmine.createSpyObj("MatDialog", ["open"]);
+
+  const mockMasterDataService = jasmine.createSpyObj("MasterDataService", [
+    "getDepartments",
+    "getBanks"
+  ]);
+
+  let dataDepartments = {
+    state: "Success",
+    userMessage: "",
+    objectResponse: [
+      {
+        Id: 1,
+        code: "01",
+        description: "Bolivar",
+        municipalities: [
+          {
+            Id: 1,
+            code: "01",
+            description: "Turbaco",
+            idDeparment: 1
+          },
+          {
+            Id: 2,
+            code: "02",
+            description: "Cartagena",
+            idDeparment: 1
+          }
+        ]
+      },
+      {
+        Id: 2,
+        code: "02",
+        description: "Antioquia",
+        municipalities: [
+          {
+            Id: 3,
+            code: "03",
+            description: "Medellín",
+            idDeparment: 2
+          },
+          {
+            Id: 4,
+            code: "04",
+            description: "Bello",
+            idDeparment: 2
+          }
+        ]
+      }
+    ]
+  };
+
+  let department = {
+    Id: 1,
+    code: "01",
+    description: "Bolivar",
+    municipalities: [
+      {
+        Id: 1,
+        code: "01",
+        description: "Turbaco",
+        idDeparment: 1
+      },
+      {
+        Id: 2,
+        code: "02",
+        description: "Cartagena",
+        idDeparment: 1
+      }
+    ]
+  };
+
+let banks = [
+  {Id: 1, code: "01", description: "BANCO AGRARIO"}
+]
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -44,6 +120,7 @@ describe('ProfileFormComponent', () => {
       ],
       providers: [
         { provide: MatDialogRef, useValue: mockDialog },
+        { provide: MasterDataService, useValue: mockMasterDataService }
       ],
       schemas: [
         NO_ERRORS_SCHEMA
@@ -54,6 +131,8 @@ describe('ProfileFormComponent', () => {
       }
     })
     .compileComponents();
+    mockMasterDataService.getDepartments.and.returnValue(of(dataDepartments));
+    mockMasterDataService.getBanks.and.returnValue(of(banks));
   }));
 
   beforeEach(() => {
@@ -82,9 +161,29 @@ describe('ProfileFormComponent', () => {
     expect(mockDialog.open).toBeTruthy();
   });
 
+  it('editAddress', () => {
+    component.editAddres();
+    expect(mockDialog.open).toBeTruthy();
+  });
+
   it('changePassword', () => {
     component.changePassword();
     expect(mockDialog.open).toBeTruthy();
+  });
+
+  it("select city", () => {
+    component.cityCode = "01";
+    component.selectCity("Medellín");
+  });
+
+  it("select selectDepartment", () => {
+    let fb = new FormBuilder();
+    component.addressForm = fb.group({
+      department: ["Antioquia"],
+      city: ["Medellin"],
+      address: ["calle 123"]
+    });
+    component.selectDepartment(department);
   });
 
   // it('editUser', () => {
