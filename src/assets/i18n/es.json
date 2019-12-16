@@ -99,7 +99,9 @@
     "DESCRIPTION_RAISE": "¡Nunca fue tan fácil tener ingresos adicionales!",
     "DESCRIPTION_RAISE2": "Refiere y vende productos de los negocios asociados y obtén las mejores comisiones.",
     "TITLE_SEARCH": "Busca y crea un link",
-    "DESCRIPTION_SEARCH": "Elige el negocio asociado, selecciona un producto o servicio y compártelo para ganar ingresos adicionales."
+    "DESCRIPTION_SEARCH": "Elige el negocio asociado, selecciona un producto o servicio y compártelo para ganar ingresos adicionales.",
+    "MY_COMMISSIONS":"Mis comisiones",
+    "PAYMENT":"*Este valor te será consignado en el próximo pago"
   },
   "HEADER": {
     "PROFILE": "Mi perfil",

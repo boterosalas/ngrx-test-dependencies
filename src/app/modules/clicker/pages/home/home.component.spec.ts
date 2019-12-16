@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog.component";
 import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
 import { SharedModule } from "src/app/modules/shared/shared.module";
+import { JwtModule } from '@auth0/angular-jwt';
 
 describe("HomeComponent", () => {
   let component: HomeComponent;
@@ -27,7 +28,17 @@ describe("HomeComponent", () => {
         ReactiveFormsModule,
         RouterTestingModule.withRoutes([]),
         BrowserAnimationsModule,
-        SharedModule
+        SharedModule,
+        JwtModule.forRoot({
+          config: {
+            tokenGetter: () => {
+              return localStorage.getItem('ACCESS_TOKEN');
+            },
+            throwNoTokenError: true,
+            whitelistedDomains: [],
+            blacklistedRoutes: []
+          }
+        })
       ],
       providers: [
       ],

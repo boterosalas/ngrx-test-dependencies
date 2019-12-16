@@ -81,6 +81,32 @@
         /></a>
       </span>
     </span>
+
+    <span
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutGap="80px"
+      fxLayoutGap.xs="0px"
+      class="item"
+    >
+      <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+        "GENERIC.ADDRESS" | translate
+      }}</label>
+      <span fxLayout="row" fxLayoutAlign="space-between center " class="w-85">
+        <span
+          class="info"
+          fxLayout="column"
+          fxLayout.xs="row"
+          fxFLex="70"
+          fxFLex.xs="0"
+          >{{ address }} {{ department }} {{ municipality }}</span
+        >
+        <a mat-raised-button class="no-shadow" (click)="editAddres(userInfo)"
+          ><img src="/assets/img/icono-editar.svg" alt="editar"
+        /></a>
+      </span>
+    </span>
+
     <span
       fxLayout="row"
       fxLayout.xs="column"
@@ -361,6 +387,113 @@
   </form>
 </ng-template>
 
+<!-- template address-->
+
+<ng-template #templateDialogAddress>
+  <form [formGroup]="addressForm" fxLayout="column" fxFlex="100">
+    <mat-form-field>
+      <input
+        matInput
+        id="address"
+        type="text"
+        formControlName="address"
+        placeholder="{{ 'GENERIC.ADDRESS' | translate }}"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        id="departmentCode"
+        placeholder="{{ 'REGISTER.DEPARTMENT' | translate }}"
+        [matAutocomplete]="auto"
+        formControlName="department"
+        autocomplete="nope"
+        (blur)="checkDepartment()"
+      />
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option
+          (onSelectionChange)="selectDepartment(department)"
+          *ngFor="let department of filteredDepartments | async; let i = index"
+          [value]="department.description"
+        >
+          <span>{{ department.description }}</span>
+        </mat-option>
+      </mat-autocomplete>
+
+      <mat-error
+        id="requiredDepartment"
+        *ngIf="
+          addressForm.controls.department.invalid &&
+          addressForm.controls.department.errors.required
+        "
+        >{{
+          "GENERIC.REQUIRED" | translate: { formValue: "Departamento" }
+        }}</mat-error
+      >
+      <mat-error
+        id="selectDepartementError"
+        *ngIf="
+          addressForm.controls.department.invalid &&
+          addressForm.controls.department.errors.incorrect
+        "
+        >{{ "REGISTER.ERROR_DEPARTMENT" | translate }}</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        id="city"
+        placeholder="{{ 'REGISTER.CITY' | translate }}"
+        [matAutocomplete]="city"
+        formControlName="city"
+        autocomplete="nope"
+        (blur)="checkCity()"
+      />
+      <mat-autocomplete #city="matAutocomplete">
+        <mat-option
+          (onSelectionChange)="selectCity(city)"
+          *ngFor="let city of filteredCities | async"
+          [(value)]="city.description"
+        >
+          <span>{{ city.description }}</span>
+        </mat-option>
+      </mat-autocomplete>
+
+      <mat-error
+        id="selectCityError"
+        *ngIf="
+          addressForm.controls.city.invalid &&
+          addressForm.controls.city.errors.incorrectCity
+        "
+        >{{ "REGISTER.ERROR_CITY" | translate }}</mat-error
+      >
+
+      <mat-error
+        id="requiredCity"
+        *ngIf="
+          addressForm.controls.city.invalid &&
+          addressForm.controls.city.errors.required
+        "
+        >{{
+          "GENERIC.REQUIRED" | translate: { formValue: "Ciudad" }
+        }}</mat-error
+      >
+    </mat-form-field>
+    <button
+      mat-raised-button
+      id="editAddress"
+      class="center button button-100 mt-4"
+      color="orange"
+      (click)="changeAddress()"
+      [disabled]="!addressForm.valid"
+    >
+      {{ "GENERIC.SAVE" | translate }}
+    </button>
+  </form>
+</ng-template>
+
 <!-- template password-->
 
 <ng-template #templateDialogPass>
@@ -594,202 +727,207 @@
 
 <ng-template #templateDialogAccount>
   <div *ngIf="showPassword">
-  <p class="passText">{{ "PROFILE.TEXT_PASS" | translate }}</p>
-   <form class="login-container" [formGroup]="loginForm">
-     <mat-form-field>
+    <p class="passText">{{ "PROFILE.TEXT_PASS" | translate }}</p>
+    <form class="login-container" [formGroup]="loginForm">
+      <mat-form-field>
         <mat-pass-toggle-visibility
-        #toggleVisbilitypass
-        matSuffix
-      ></mat-pass-toggle-visibility>
-      <input
-        matInput
-        id="password"
-        [type]="toggleVisbilitypass.type"
-        placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
-        formControlName="Password"
-        spacebar
-        required
-      />
-      <span matPrefix><mat-icon color="gray">lock</mat-icon></span>
-      <mat-error
-        id="introducePassword"
-        *ngIf="
-          loginForm.controls.Password.invalid &&
-          loginForm.controls.Password.errors.required
-        "
-        >{{ "LOGIN.INTRODUCE_PASSWORD" | translate }}</mat-error
-      >
+          #toggleVisbilitypass
+          matSuffix
+        ></mat-pass-toggle-visibility>
+        <input
+          matInput
+          id="password"
+          [type]="toggleVisbilitypass.type"
+          placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
+          formControlName="Password"
+          spacebar
+          required
+        />
+        <span matPrefix><mat-icon color="gray">lock</mat-icon></span>
+        <mat-error
+          id="introducePassword"
+          *ngIf="
+            loginForm.controls.Password.invalid &&
+            loginForm.controls.Password.errors.required
+          "
+          >{{ "LOGIN.INTRODUCE_PASSWORD" | translate }}</mat-error
+        >
 
-      <mat-error
-        id="minPassword"
-        *ngIf="
-          loginForm.controls.Password.invalid &&
-          loginForm.controls.Password.errors.minlength
-        "
-        >{{
-          "GENERIC.MIN_CHARACTERS"
-            | translate
-              : {
-                  minchar:
-                    loginForm.controls.Password.errors.minlength.requiredLength
-                }
-        }}</mat-error
-      >
+        <mat-error
+          id="minPassword"
+          *ngIf="
+            loginForm.controls.Password.invalid &&
+            loginForm.controls.Password.errors.minlength
+          "
+          >{{
+            "GENERIC.MIN_CHARACTERS"
+              | translate
+                : {
+                    minchar:
+                      loginForm.controls.Password.errors.minlength
+                        .requiredLength
+                  }
+          }}</mat-error
+        >
 
-      <mat-error
-        id="maxPassword"
-        *ngIf="
-          loginForm.controls.Password.invalid &&
-          loginForm.controls.Password.errors.maxlength
-        "
-        >{{
-          "GENERIC.MAX_CHARACTERS"
-            | translate
-              : {
-                  maxchar:
-                    loginForm.controls.Password.errors.maxlength.requiredLength
-                }
-        }}</mat-error
-      >
-    </mat-form-field>
-    <div class="text-center">
-      <button
-        class="button button-100"
-        mat-raised-button
-        id="login"
-        color="orange"
-        (click)="showAccount()"
-        [disabled]="!loginForm.valid"
-      >
-        <span>{{ "GENERIC.ACCEPT" | translate }}</span>
-      </button>
-    </div>
-  </form> 
+        <mat-error
+          id="maxPassword"
+          *ngIf="
+            loginForm.controls.Password.invalid &&
+            loginForm.controls.Password.errors.maxlength
+          "
+          >{{
+            "GENERIC.MAX_CHARACTERS"
+              | translate
+                : {
+                    maxchar:
+                      loginForm.controls.Password.errors.maxlength
+                        .requiredLength
+                  }
+          }}</mat-error
+        >
+      </mat-form-field>
+      <div class="text-center">
+        <button
+          class="button button-100"
+          mat-raised-button
+          id="login"
+          color="orange"
+          (click)="showAccount()"
+          [disabled]="!loginForm.valid"
+        >
+          <span>{{ "GENERIC.ACCEPT" | translate }}</span>
+        </button>
+      </div>
+    </form>
   </div>
 
   <div *ngIf="showBankInfoUser">
+    <p class="passText">{{ "PROFILE.ACCOUNT_INFO" | translate }}</p>
 
-  <p class="passText">{{ 'PROFILE.ACCOUNT_INFO' | translate }}</p>
-
-  <form [formGroup]="accountForm" fxLayout="column">
-    <mat-form-field>
-      <mat-select
-        placeholder="{{ 'REGISTER.BANK' | translate }}"
-        id="bank"
-        formControlName="bank"
-      >
-        <mat-option *ngFor="let bank of banks" value="{{ bank.description }}">
-          <span>{{ bank.description }}</span></mat-option
+    <form [formGroup]="accountForm" fxLayout="column">
+      <mat-form-field>
+        <mat-select
+          placeholder="{{ 'REGISTER.BANK' | translate }}"
+          id="bank"
+          formControlName="bank"
         >
-      </mat-select>
+          <mat-option *ngFor="let bank of banks" value="{{ bank.description }}">
+            <span>{{ bank.description }}</span></mat-option
+          >
+        </mat-select>
 
-      <mat-error
-        id="requiredBank"
-        *ngIf="
-          accountForm.controls.bank.invalid &&
-          accountForm.controls.bank.errors.required
-        "
-        >{{ "GENERIC.REQUIRED" | translate: { formValue: "Banco" } }}</mat-error
-      >
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-select
-        placeholder="{{ 'REGISTER.TYPE_ACCOUNT' | translate }}"
-        id="typeAccount"
-        formControlName="typeAccount"
-      >
-        <mat-option *ngFor="let account of typeAccount" value="{{ account.id }}"
-          ><span>{{ account.description }}</span></mat-option
+        <mat-error
+          id="requiredBank"
+          *ngIf="
+            accountForm.controls.bank.invalid &&
+            accountForm.controls.bank.errors.required
+          "
+          >{{
+            "GENERIC.REQUIRED" | translate: { formValue: "Banco" }
+          }}</mat-error
         >
-      </mat-select>
+      </mat-form-field>
 
-      <mat-error
-        id="requiredTypeAccount"
-        *ngIf="
-          accountForm.controls.typeAccount.invalid &&
-          accountForm.controls.typeAccount.errors.required
-        "
-        >{{
-          "GENERIC.REQUIRED" | translate: { formValue: "Tipo de cuenta" }
-        }}</mat-error
+      <mat-form-field>
+        <mat-select
+          placeholder="{{ 'REGISTER.TYPE_ACCOUNT' | translate }}"
+          id="typeAccount"
+          formControlName="typeAccount"
+        >
+          <mat-option
+            *ngFor="let account of typeAccount"
+            value="{{ account.id }}"
+            ><span>{{ account.description }}</span></mat-option
+          >
+        </mat-select>
+
+        <mat-error
+          id="requiredTypeAccount"
+          *ngIf="
+            accountForm.controls.typeAccount.invalid &&
+            accountForm.controls.typeAccount.errors.required
+          "
+          >{{
+            "GENERIC.REQUIRED" | translate: { formValue: "Tipo de cuenta" }
+          }}</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          spacebar
+          matInput
+          id="numberAccount"
+          type="text"
+          placeholder="{{ 'REGISTER.NUMBER_ACCOUNT' | translate }}"
+          formControlName="numberAccount"
+        />
+
+        <mat-error
+          id="requiredTypeAccount"
+          *ngIf="
+            accountForm.controls.numberAccount.invalid &&
+            accountForm.controls.numberAccount.errors.required
+          "
+          >{{
+            "GENERIC.REQUIRED" | translate: { formValue: "Número de cuenta" }
+          }}</mat-error
+        >
+
+        <mat-error
+          id="invalidNumber"
+          *ngIf="
+            accountForm.controls.numberAccount.invalid &&
+            accountForm.controls.numberAccount.errors.pattern
+          "
+          >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+        >
+
+        <mat-error
+          id="minAccount"
+          *ngIf="
+            accountForm.controls.numberAccount.invalid &&
+            accountForm.controls.numberAccount.errors.minlength
+          "
+          >{{
+            "GENERIC.MIN_CHARACTERS"
+              | translate
+                : {
+                    minchar:
+                      accountForm.controls.numberAccount.errors.minlength
+                        .requiredLength
+                  }
+          }}</mat-error
+        >
+
+        <mat-error
+          id="maxAccount"
+          *ngIf="
+            accountForm.controls.numberAccount.invalid &&
+            accountForm.controls.numberAccount.errors.maxlength
+          "
+          >{{
+            "GENERIC.MAX_CHARACTERS"
+              | translate
+                : {
+                    maxchar:
+                      accountForm.controls.numberAccount.errors.maxlength
+                        .requiredLength
+                  }
+          }}</mat-error
+        >
+      </mat-form-field>
+      <button
+        mat-raised-button
+        id="nextClicker"
+        class="center button button-100"
+        color="orange"
+        (click)="updateAccount()"
+        [disabled]="!accountForm.valid"
       >
-    </mat-form-field>
-
-    <mat-form-field>
-      <input
-        spacebar
-        matInput
-        id="numberAccount"
-        type="text"
-        placeholder="{{ 'REGISTER.NUMBER_ACCOUNT' | translate }}"
-        formControlName="numberAccount"
-      />
-
-      <mat-error
-        id="requiredTypeAccount"
-        *ngIf="
-          accountForm.controls.numberAccount.invalid &&
-          accountForm.controls.numberAccount.errors.required
-        "
-        >{{
-          "GENERIC.REQUIRED" | translate: { formValue: "Número de cuenta" }
-        }}</mat-error
-      >
-
-      <mat-error
-        id="invalidNumber"
-        *ngIf="
-          accountForm.controls.numberAccount.invalid &&
-          accountForm.controls.numberAccount.errors.pattern
-        "
-        >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
-      >
-
-      <mat-error
-        id="minAccount"
-        *ngIf="
-          accountForm.controls.numberAccount.invalid &&
-          accountForm.controls.numberAccount.errors.minlength
-        "
-        >{{
-          "GENERIC.MIN_CHARACTERS"
-            | translate
-              : {
-                  minchar:
-                    accountForm.controls.numberAccount.errors.minlength
-                      .requiredLength
-                }
-        }}</mat-error
-      >
-
-      <mat-error
-        id="maxAccount"
-        *ngIf="
-          accountForm.controls.numberAccount.invalid &&
-          accountForm.controls.numberAccount.errors.maxlength
-        "
-        >{{
-          "GENERIC.MAX_CHARACTERS"
-            | translate
-              : {
-                  maxchar:
-                    accountForm.controls.numberAccount.errors.maxlength
-                      .requiredLength
-                }
-        }}</mat-error
-      >
-    </mat-form-field>
-    <button
-      mat-raised-button
-      id="nextClicker"
-      class="center button button-100"
-      color="orange"
-      (click)="updateAccount()"
-      [disabled]="!accountForm.valid"
-    >
-      Actualizar
-    </button>
-  </form>
-</div>
+        Actualizar
+      </button>
+    </form>
+  </div>
 </ng-template>

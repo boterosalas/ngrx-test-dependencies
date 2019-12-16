@@ -9,8 +9,8 @@ import {
   TemplateRef
 } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Subscription } from "rxjs";
-import { distinctUntilChanged } from "rxjs/operators";
+import { Subscription, Observable } from "rxjs";
+import { distinctUntilChanged, map, startWith } from "rxjs/operators";
 import { UserService } from "src/app/services/user.service";
 import { AuthService } from "src/app/services/auth.service";
 import { LoaderService } from "src/app/services/loader.service";
@@ -40,6 +40,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   @ViewChild("templateDialogCell", { static: false }) templateCell: TemplateRef<any>;
   @ViewChild("templateDialogPass", { static: false }) templatePass: TemplateRef<any>;
   @ViewChild("templateDialogAccount", { static: false}) templateAccount: TemplateRef<any>;
+  @ViewChild("templateDialogAddress", { static: false}) templateAddress: TemplateRef<any>;
 
   private subscription: Subscription = new Subscription();
   profileForm: FormGroup;
@@ -47,6 +48,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   profileFormPass: FormGroup;
   accountForm: FormGroup;
   loginForm: FormGroup;
+  addressForm: FormGroup;
   isLoggedIn: any;
   name: string;
   lastName: string;
@@ -54,14 +56,26 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   phone: string;
   id: string;
   address: string;
+  department: string;
+  municipality: string;
   bank: string;
   bankAccountNumber: string;
   typeBankAccount: string;
   userId: string;
   isEmployee: boolean;
   userInfo: any;
+  filteredDepartments: Observable<any>;
+  filteredCities: Observable<any>;
+  disabledCity: boolean;
+  departmentCode: string;
+  departmentDecription: string;
+  cityCode: string;
+  cityValue: string;
+  departments = [];
+  cities: [];
+
   numberPattern = "^(0|[0-9][0-9]*)$";
-  namePattern = "[a-zA-Z0-9 ]+";
+  namePattern = "[a-zA-Z0-9 àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]+";
   passwordPattern = "(?=.*[a-zA-Z])(?=.*[0-9])";
   msg:string;
   classMsg: string;
@@ -84,6 +98,8 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
         this.phone = val.cellphone;
         this.id = val.identification;
         this.address = val.address;
+        this.department  = val.departmentName;
+        this.municipality = val.municipalityName;
         this.bank = val.bank;
         this.bankAccountNumber = val.bankAccountNumber;
         this.typeBankAccount = val.typeBankAccount;
@@ -94,6 +110,9 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       this.formProfileCell();
       this.formProfilePass();
       this.formAccount();
+      this.formAddress();
+      this.getDepartments();
+      this.filter();
     });
     this.accountBankForm();
     this.getBanks();
@@ -140,6 +159,14 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       typeAccount: [this.typeBankAccount, Validators.required],
       numberAccount: ['' , [Validators.required, Validators.pattern(this.numberPattern), Validators.minLength(5), Validators.maxLength(20)]],
     });
+  }
+
+  public formAddress() {
+    this.addressForm = this.fb.group({
+     address: [this.address, Validators.required],
+     department: [this.department, Validators.required],
+     city: [this.municipality, Validators.required],
+    })
   }
 
   public accountBankForm() {
@@ -198,6 +225,20 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     });
   }
 
+  public editAddres() {
+    const title = "Editar dirección";
+    const id = "address";
+    const template = this.templateAddress;
+
+    this.dialog.open(DialogEditComponent, {
+      data: {
+        title,
+        template,
+        id
+      }
+    });
+  }
+
   public editAccount() {
     this.showBankInfoUser = false;
     this.showPassword = true;
@@ -244,7 +285,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  editUser() {
+  public editUser() {
     this.userInfo.firstNames = this.profileForm.controls.name.value;
     this.userInfo.lastNames = this.profileForm.controls.lastName.value;
     this.userInfo.cellphone = this.profileFormCell.controls.phone.value;
@@ -264,7 +305,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       );
   }
 
-  updateAccount() {
+  public updateAccount() {
 
     let data = {
       bank: this.accountForm.controls.bank.value,
@@ -294,7 +335,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  changePasswordUser() {
+  public changePasswordUser() {
     let data = {
       password: btoa(this.profileFormPass.controls.actualPassword.value),
       newPassword:btoa(this.profileFormPass.controls.password.value)
@@ -305,6 +346,8 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
           this.dialog.closeAll();
           this.user.getProfile();
           this.profileFormPass.reset();
+          this.openSnackBar(resp.userMessage, "Cerrar");
+        } else {
           this.openSnackBar(resp.userMessage, "Cerrar");
         }
       },
@@ -340,6 +383,110 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
         this.banks = res.objectResponse;
       });
   }
+
+  public displayDepartment(departments?: any): string | undefined {
+    return departments ? departments.description : undefined;
+  }
+
+
+  public filter() {
+    this.filteredDepartments = this.addressForm.controls.department.valueChanges
+    .pipe(
+      map(department => typeof department === 'string' ? department : department.description),
+      map(department => department ? this._filterDepartments(department) : this.departments.slice())
+    );
+  }
+
+  public filterCities() {
+    this.filteredCities = this.addressForm.controls.city.valueChanges.pipe(
+      startWith(""),
+      map(city => (city ? this._filterCities(city) : this.cities.slice()))
+    );
+  }
+
+  private _filterDepartments(value: any) {
+    
+    const filterValue = value.toLowerCase();
+    return this.departments.filter(
+      department =>
+        department.description.toLowerCase().indexOf(filterValue) === 0
+    );
+  }
+
+  private _filterCities(value: string) {
+    const filterValue = value.toLowerCase();
+    return this.cities.filter(
+      (city: any) => city.description.toLowerCase().indexOf(filterValue) === 0
+    );
+  }
+
+
+  public selectDepartment(department) {
+    this.departmentDecription = department.description;
+    this.departmentCode = department.code;
+    this.cities = department.municipalities;
+    this.addressForm.controls.city.setValue('');
+    let valueDepartment = this.addressForm.controls.department.valueChanges;
+    this.filterCities();
+
+    valueDepartment.subscribe((resp) => {
+      if (resp !== '') {
+        this.getDepartments();
+      } else {
+        this.addressForm.controls.city.setValue('');
+      }
+    })
+  }
+
+  public changeAddress() {
+    this.userInfo.address = this.addressForm.controls.address.value; 
+    this.userInfo.department = this.departmentCode;
+    this.userInfo.municipality = this.cityCode;
+    this.subscription = this.user
+    .updateUser(this.userId, this.userInfo)
+    .subscribe(
+      (resp: any) => {
+        if (resp.state === "Success") {
+          this.openSnackBar(resp.userMessage, "Cerrar");
+          this.user.getProfile();
+          this.dialog.closeAll();
+        }
+      },
+      err => {
+        this.openSnackBar(err.userMessage, "Cerrar");
+      }
+    );
+  }
+
+  public checkDepartment() {
+    if ((this.addressForm.controls.department.value !== this.departmentDecription) || (this.addressForm.controls.department.value === undefined )) {
+      this.addressForm.controls.department.setErrors({'incorrect': true});
+    }
+  }
+
+  public selectCity(city) {
+    this.cityCode = city.code;
+    this.cityValue = city.description;
+  }
+
+  public checkCity() {
+    if (this.addressForm.controls.city.value !== this.cityValue) {
+      this.addressForm.controls.city.setErrors({'incorrectCity': true});
+    }
+  }
+
+  /**
+   * Metodo para listar los departamentos
+   */
+
+  public getDepartments() {
+    this.subscription = this.personalInfo
+      .getDepartments()
+      .subscribe((res: ResponseService) => {
+        this.departments = res.objectResponse;
+      });
+  }
+
 
 
   ngOnDestroy(): void {
