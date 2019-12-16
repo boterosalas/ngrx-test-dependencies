@@ -13,13 +13,17 @@ import { AdminModule } from '../../admin.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LinksService } from 'src/app/services/links.service';
+import * as moment from 'moment';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+moment.locale('es');
 
 describe("UsersComponent", () => {
   let component: UsersComponent;
   let fixture: ComponentFixture<UsersComponent>;
 
   const mockLinksService = jasmine.createSpyObj("LinksService", [
-    "searchUsers"
+    "searchUsers",
+    "getUsersExcel"
   ]);
 
   const mockDialog = jasmine.createSpyObj("MatDialog", ["open"]);
@@ -59,6 +63,13 @@ describe("UsersComponent", () => {
     ]
   };
 
+  const getUserExcel = {
+    state: "Success",
+    userMessage: 'se ha enviado un correo a test@h.com',
+    objectResponse: [
+    ]
+  };
+
   const dataUsers = [
     {
       userId: 109,
@@ -93,6 +104,7 @@ describe("UsersComponent", () => {
         BrowserAnimationsModule,
         HttpClientTestingModule,
         RouterTestingModule.withRoutes([]),
+        NgxDaterangepickerMd,
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
@@ -121,6 +133,7 @@ describe("UsersComponent", () => {
   beforeEach(() => {
     localStorage.setItem('ACCESS_TOKEN', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU');
     mockLinksService.searchUsers.and.returnValue(of(dataUser));
+    mockLinksService.getUsersExcel.and.returnValue(of(getUserExcel));
     fixture = TestBed.createComponent(UsersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -144,5 +157,21 @@ describe("UsersComponent", () => {
     component.pagination({previousPageIndex: 1, pageIndex: 0, pageSize: 20, length: 5});
     expect(mockLinksService.searchUsers).toHaveBeenCalled();
   });
+
+  it('getUsersExcel', () => {
+      const nativeElement = fixture.nativeElement;
+      const input = nativeElement.querySelector('input');
+      input.dispatchEvent(new Event('click'));
+      const nativeElementDate = fixture.nativeElement;
+      const dateStart = nativeElementDate.querySelector('.today');
+      dateStart.dispatchEvent(new Event('click'));
+      const nativeElementbtn = fixture.nativeElement;
+      const btn = nativeElementbtn.querySelector('.btn');
+      btn.dispatchEvent(new Event('click'));
+      fixture.detectChanges();
+      component.getUserExcel();
+      expect(mockLinksService.getUsersExcel).toHaveBeenCalled();
+  });
+  
 
 });
