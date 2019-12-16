@@ -11,6 +11,7 @@ import { of, Observable, throwError } from "rxjs";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterTestingModule } from "@angular/router/testing";
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 
 describe("LoginformComponent", () => {
   let component: LoginformComponent;
@@ -56,6 +57,7 @@ describe("LoginformComponent", () => {
         RouterTestingModule.withRoutes([]),
         BrowserAnimationsModule,
         TranslateModule.forRoot({}),
+        MatPasswordStrengthModule
       ],
       providers: [
         { provide: Router, useValue: mockRouter},
