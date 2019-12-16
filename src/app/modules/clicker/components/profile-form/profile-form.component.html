@@ -390,7 +390,7 @@
 <!-- template address-->
 
 <ng-template #templateDialogAddress>
-  <form [formGroup]="addressForm" fxLayout="column" fxFlex="100">
+  <div [formGroup]="addressForm" fxLayout="column" fxFlex="100">
     <mat-form-field>
       <input
         matInput
@@ -491,7 +491,7 @@
     >
       {{ "GENERIC.SAVE" | translate }}
     </button>
-  </form>
+  </div>
 </ng-template>
 
 <!-- template password-->

@@ -165,7 +165,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.addressForm = this.fb.group({
      address: [this.address, Validators.required],
      department: [this.department, Validators.required],
-     city: [this.municipality, Validators.required],
+     city: [this.municipality, [Validators.required, Validators.minLength(4)]],
     })
   }
 
