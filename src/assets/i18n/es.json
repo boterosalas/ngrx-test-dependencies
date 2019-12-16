@@ -210,6 +210,7 @@
   },
   "REPORTS": {
     "REPORTS": "Reportes",
+    "DOWNLOAD_FILE": "Selecciona las fechas para descargar el archivo",
     "SELL_REPORTS": "Reporte de ventas",
     "PAYMENT_REPORTS": "REPORTE DE PAGOS",
     "DOWNLOAD_REPORT": "Descarga el reporte de las comisiones a pagar del último periodo de corte",

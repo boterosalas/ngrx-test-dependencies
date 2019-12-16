@@ -198,5 +198,10 @@ describe("AditionalInfoFormComponent", () => {
   it("should create", () => {
     expect(component).toBeTruthy();
   });
+
+  it('change components', () => {
+    component.changeComunications(true);
+  });
+  
   
 });
