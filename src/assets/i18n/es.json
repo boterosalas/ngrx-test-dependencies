@@ -211,18 +211,21 @@
   "REPORTS": {
     "REPORTS": "Reportes",
     "SELL_REPORTS": "Reporte de ventas",
-    "DOWNLOAD_REPORT": "Descarga el reporte de ventas",
+    "PAYMENT_REPORTS": "REPORTE DE PAGOS",
+    "DOWNLOAD_REPORT": "Descarga el reporte de las comisiones a pagar del último periodo de corte",
     "DOWNLOAD": "Descargar",
     "CROSS": "Cruzar ventas",
     "DATE_ERROR": "La fecha final no puede ser menor a la fecha inicial",
-    "UPLOAD": "Sube los archivos de cada negocio por separado.",
+    "UPLOAD": "Sube el archivo completo para cruzar las ventas",
     "TRIPS": "VENTAS VIAJES",
     "SELLS": "VENTAS",
     "ASSURED": "VENTAS SEGUROS",
     "HISTORICAL": "Historial pagos",
     "DATE": "FECHA",
     "AMOUNT": "MONTO",
-    "BANK": "BANCO DONDE SE PAGÓ"
+    "BANK": "BANCO DONDE SE PAGÓ",
+    "UPLOAD_FILE": "Carga un archivo con el reporte de pagos de las comisiones del último periodo de corte",
+    "SELECT_DATE": "Selecciona las fechas para descargar un archivo con todas las transacciones de todos los usuarios"
   },
   "USERS": {
     "USERS": "Usuarios",

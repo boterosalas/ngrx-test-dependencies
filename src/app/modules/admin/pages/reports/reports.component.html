@@ -23,6 +23,15 @@
     <a href="{{fileUrl}}"> 
       <button id="downloadReport" mat-raised-button color="orange"> {{ 'REPORTS.DOWNLOAD' | translate }} <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
     </a> 
+
+    <p>{{ 'REPORTS.UPLOAD_FILE' | translate }}</p>
+
+    <h4  id="trips" class="title-upload m-0">{{ 'REPORTS.PAYMENT_REPORTS' | translate }}</h4>
+    <app-load-form-file [fileForm]="fileFormPayment"  [nameFile]="nameFilePayment" label="Payment" (uploadFile)="onFileChangePayment($event)"></app-load-form-file>  
+    <mat-error *ngIf="showErrorExtPayment" class="small">
+      {{ "GENERIC.INVALID_FORMAT_FILE" | translate }}
+    </mat-error>
+
 </ng-template>
 
 <ng-template #templateCardCross>
@@ -87,11 +96,5 @@
         {{ "GENERIC.INVALID_FORMAT_FILE" | translate }}
       </mat-error>
     <br>
-
-    <!-- <h4 id="assured" ref="#inputAssured" class="title-upload">{{ 'REPORTS.ASSURED' | translate }}</h4>
-    <app-load-form-file [fileForm]="fileFormAssured"  [nameFile]="nameFileAssured" label="assured" (uploadFile)="onFileChangeAssured($event)"></app-load-form-file>  
-    <mat-error *ngIf="showErrorExtAssured" class="small">
-      {{ "GENERIC.INVALID_FORMAT_FILE" | translate }}
-    </mat-error> -->
 
 </ng-template>

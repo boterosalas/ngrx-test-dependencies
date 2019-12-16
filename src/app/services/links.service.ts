@@ -27,6 +27,7 @@ export class LinksService {
   apiFile = 'commissions/getUrlFileCommissions';
   apigenerateCommissions = 'commissions/generateCommissionsFile';
   apiHistory = 'commissions/getPaymentHistoryClicker';
+  apiupdatePaymentDate= 'commissions/updatePaymentDate';
 
   public saveLink(SaveLink: any) {
     const token = localStorage.getItem("ACCESS_TOKEN");
@@ -192,6 +193,22 @@ export class LinksService {
     };
     return this.http.post((`${environment.URL_COMISSION}${this.apigenerateCommissions}`), formdata , httpOptions );
   }
+
+  public updatePaymentDate(formdata) {
+    let token = localStorage.getItem("ACCESS_TOKEN");
+    let authorization = token;
+    let data = new FormData();
+    data.append("FileBase64", formdata.fileBase64);
+    data.append("email", formdata.email);
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + authorization,
+    })
+  };
+  return this.http.post((`${environment.URL_COMISSION}${this.apiupdatePaymentDate}`), formdata , httpOptions );
+}
 
   public searchUsers(term?: any) {
     const token = localStorage.getItem("ACCESS_TOKEN");
