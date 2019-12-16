@@ -18,6 +18,7 @@ describe("ReportsComponent", () => {
   let mockLinksService = jasmine.createSpyObj("LinksService", [
     "getFileReport",
     "sendfile",
+    "updatePaymentDate",
     "downloadReferrals"
   ]);
 
@@ -69,6 +70,7 @@ describe("ReportsComponent", () => {
     mockLinksService.getFileReport.and.returnValue(of(fileReport));
     mockLinksService.downloadReferrals.and.returnValue(of(fileReport));
     mockLinksService.sendfile.and.returnValue(of(data));
+    mockLinksService.updatePaymentDate.and.returnValue(of(data));
     fixture = TestBed.createComponent(ReportsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -95,6 +97,24 @@ describe("ReportsComponent", () => {
     component.onFileChangeTrip(mockEvt);
     component.showErrorExt = true;
     expect(component.showErrorExt).toBeTruthy();
+  });
+
+  it("on file change payment valid", () => {
+    const mockFile = new File([""], "name.xlsx", { type: "text/html" });
+    const mockEvt = { target: { files: [mockFile] } };
+    component.onFileChangePayment(mockEvt);
+    fixture.whenStable().then(() => {
+      tick();
+      expect(mockLinksService.updatePaymentDate).toHaveBeenCalled();
+    })
+  });
+
+  it("on file change trip invalid", () => {
+    const mockFile = new File([""], "name.txt", { type: "text/html" });
+    const mockEvt = { target: { files: [mockFile] } };
+    component.onFileChangePayment(mockEvt);
+    component.showErrorExtPayment = true;
+    expect(component.showErrorExtPayment).toBeTruthy();
   });
 
   it("download referal", () => {
