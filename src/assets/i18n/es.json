@@ -5,6 +5,7 @@
     "CONFIRM_EMAIL_PATTERN": "Los correos no son iguales",
     "PASSWORD": "Contraseña",
     "CONFIRM_PASSWORD": "Confirmar Contraseña",
+    "ACTUAL_PASSWORD": "Contraseña actual",
     "NAME": "Nombres",
     "LASTNAME": "Apellidos",
     "CELLPHONE": "Celular",
@@ -25,7 +26,7 @@
     "SEARCH": "Buscar",
     "ACCEPT": "Aceptar",
     "WHITE_SPACES": "No se permite más de un espacio en blanco",
-    "PASSWORD_PATTERN": "la contraseña debe contener al menos una letra minúscula, una letra mayúscula un número y un carácter especial",
+    "PASSWORD_PATTERN": "Debe contener al menos un número y una letra",
     "SHARE": "Compartir directamente en:",
     "COPY_LINK": "Copiar link",
     "INVALID_FORMAT_FILE": "Formato inválido solo se pueden subir archivos con la extensión xlsx, xls",
@@ -98,7 +99,9 @@
     "DESCRIPTION_RAISE": "¡Nunca fue tan fácil tener ingresos adicionales!",
     "DESCRIPTION_RAISE2": "Refiere y vende productos de los negocios asociados y obtén las mejores comisiones.",
     "TITLE_SEARCH": "Busca y crea un link",
-    "DESCRIPTION_SEARCH": "Elige el negocio asociado, selecciona un producto o servicio y compártelo para ganar ingresos adicionales."
+    "DESCRIPTION_SEARCH": "Elige el negocio asociado, selecciona un producto o servicio y compártelo para ganar ingresos adicionales.",
+    "MY_COMMISSIONS":"Mis comisiones",
+    "PAYMENT":"*Este valor te será consignado en el próximo pago"
   },
   "HEADER": {
     "PROFILE": "Mi perfil",
@@ -174,29 +177,56 @@
   },
   "PROFILE": {
     "PROFILE": "Perfil",
-    "PERSONAL_INFO": "Información personal",
+    "BASIC": "Información básica para el funcionamiento de tu cuenta",
+    "PERSONAL_INFO": "Cuenta",
     "ACOUNT_INFO": "Información bancaria",
     "ADITIONAL_FILE": "Archivos adicionales",
-    "INFO_ADDITIONAL": "Los siguientes documentos son necesarios para poder verificar tu cuenta y que empieces a recibir tus comisiones."
+    "INFO_ADDITIONAL": "Los siguientes documentos son necesarios para poder verificar tu cuenta y que empieces a recibir tus comisiones.",
+    "TEXT_PASS": "Ingresa tu contraseña para poder realizar estos cambios",
+    "ACCOUNT_INFO": "Actualiza tu información bancaria para tenerla en cuenta en tu próximo pago"
+  },
+  "ADDITIONAL": {
+    "COMUNICATIONS": "Recibir comunicaciones",
+    "PERSONAL": "Personal",
+    "BIRTHDATE": "FECHA DE NACIMIENTO",
+    "CIVIL_STATE": "ESTADO CIVIL",
+    "GENDER": "GÉNERO",
+    "EDUCATION_LEVEL": "NIVEL DE EDUCACIÓN",
+    "PROFESIONAL": "Profesional",
+    "ACTIVITY": "ACTIVIDAD LABORAL",
+    "INCOME_FIXED": "INGRESOS FIJOS",
+    "OTHER_INCOME": "OTROS INGRESOS",
+    "PLACE": "Vivienda",
+    "ADDRESS": "DIRECCIÓN",
+    "STRATUM": "ESTRATO",
+    "TYPE_PLACE": "TIPO DE VIVIENDA",
+    "LIVING_PEOPLE": "PERSONAS CON LAS QUE VIVES",
+    "CARGO_PERSONS": "PERSONAS A CARGO",
+    "MOVILITY": "PRINCIPAL MEDIO DE TRANSPORTE",
+    "ADD_VALUE": "Ingresa un valor"
   },
   "UNDER_CONSTRUCTION": {
     "SORRY": "Discúlpanos, está página esta en construcción"
   },
   "REPORTS": {
     "REPORTS": "Reportes",
+    "DOWNLOAD_FILE": "Selecciona las fechas para descargar el archivo",
     "SELL_REPORTS": "Reporte de ventas",
-    "DOWNLOAD_REPORT": "Descarga el reporte de ventas",
+    "PAYMENT_REPORTS": "REPORTE DE PAGOS",
+    "DOWNLOAD_REPORT": "Descarga el reporte de las comisiones a pagar del último periodo de corte",
     "DOWNLOAD": "Descargar",
     "CROSS": "Cruzar ventas",
     "DATE_ERROR": "La fecha final no puede ser menor a la fecha inicial",
-    "UPLOAD": "Sube los archivos de cada negocio por separado.",
+    "UPLOAD": "Sube el archivo completo para cruzar las ventas",
     "TRIPS": "VENTAS VIAJES",
     "SELLS": "VENTAS",
     "ASSURED": "VENTAS SEGUROS",
     "HISTORICAL": "Historial pagos",
     "DATE": "FECHA",
     "AMOUNT": "MONTO",
-    "BANK": "BANCO DONDE SE PAGÓ"
+    "BANK": "BANCO DONDE SE PAGÓ",
+    "UPLOAD_FILE": "Carga un archivo con el reporte de pagos de las comisiones del último periodo de corte",
+    "SELECT_DATE": "Selecciona las fechas para descargar un archivo con todas las transacciones de todos los usuarios"
   },
   "USERS": {
     "USERS": "Usuarios",

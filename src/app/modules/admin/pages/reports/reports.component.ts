@@ -17,6 +17,8 @@ import { ResponseService } from "src/app/interfaces/response";
 import { LoaderService } from "src/app/services/loader.service";
 import { Subscription } from "rxjs";
 import { ValidateDate } from "src/app/validators/validate-date.validators";
+import * as moment from 'moment';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: "app-reports",
@@ -30,12 +32,13 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
   fileUrl: string;
   fileForm: FormGroup;
-  fileFormAssured: FormGroup;
+  fileFormPayment: FormGroup;
   nameFile: string;
-  nameFileAssured: string;
+  nameFilePayment: string;
   dateForm: FormGroup;
+  dateFormSell: FormGroup;
   showErrorExt: boolean;
-  showErrorExtAssured: boolean;
+  showErrorExtPayment: boolean;
   validFormat: boolean;
   isLoggedIn: any;
   userName: string;
@@ -43,7 +46,28 @@ export class ReportsComponent implements OnInit, OnDestroy {
   EXCEL_TYPE =
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
   private subscription: Subscription = new Subscription();
-  maxDate = new Date();
+  maxDate = moment(new Date());
+  maxDate2 = new Date();
+
+  dateParams: any;
+  disButon: boolean;
+  email: string;
+
+  locale = {
+    locale: 'es',
+    direction: 'ltr', // could be rtl
+    weekLabel: 'W',
+    separator: ' a ', // default is ' - '
+    cancelLabel: 'Cancelar', // detault is 'Cancel'
+    applyLabel: 'Aplicar', // detault is 'Apply'
+    clearLabel: 'Limpiar', // detault is 'Clear'
+    customRangeLabel: 'Custom range',
+    daysOfWeek: moment.weekdaysMin(),
+    monthNames: moment.monthsShort(),
+    firstDay: 1 // first day is monday
+}
+
+
 
   constructor(
     private file: LinksService,
@@ -51,20 +75,35 @@ export class ReportsComponent implements OnInit, OnDestroy {
     private auth: AuthService,
     private user: UserService,
     private loading: LoaderService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private _snackBar: MatSnackBar,
+    private usersService: UserService,
   ) {}
 
   ngOnInit() {
     this.getFileReport();
 
+    this.usersService.userInfo$
+    .subscribe(val => {
+      if (!!val) {
+       this.email = val.email;
+      }
+    });
+
     this.nameFile = "";
-    this.nameFileAssured = "";
+    this.nameFilePayment = "";
+
+    this.dateFormSell = this.fb.group(
+      {
+        dateRange: [null, Validators.required]
+      }
+    );
 
     this.fileForm = this.fb.group({
       file: [null]
     });
 
-    this.fileFormAssured = this.fb.group({
+    this.fileFormPayment = this.fb.group({
       file: [null]
     });
 
@@ -100,6 +139,10 @@ export class ReportsComponent implements OnInit, OnDestroy {
     });
   }
 
+  change() {
+    this.disButon = false;
+  }
+
   public onFileChangeTrip(event) {
     this.nameFile = event.target.files[0].name;
     let reader = new FileReader();
@@ -127,28 +170,28 @@ export class ReportsComponent implements OnInit, OnDestroy {
     }
   }
 
-  // public onFileChangeAssured(event) {
-  //   this.nameFileAssured = event.target.files[0].name;
-  //   let reader = new FileReader();
-  //   if (event.target.files && event.target.files.length) {
-  //     const [file] = event.target.files;
-  //     let fileBlob = new Blob([file], {type: this.EXCEL_TYPE} )
-  //     let file2 = new File(([fileBlob]), this.nameFileAssured, { type: this.EXCEL_TYPE });
-  //     reader.readAsDataURL(file2);
-  //     reader.onload = () => {
-  //       this.fileFormAssured.controls.file.patchValue({
-  //         file: reader.result
-  //       });
-  //       this.getExtension(this.nameFileAssured);
-  //       if (this.validFormat === true) {
-  //         this.showErrorExtAssured = false;
-  //         this.sendFileAssured();
-  //       } else {
-  //         this.showErrorExtAssured = true;
-  //       }
-  //     };
-  //   }
-  // }
+  public onFileChangePayment(event) {
+    this.nameFilePayment = event.target.files[0].name;
+    let reader = new FileReader();
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      let fileBlob = new Blob([file], {type: this.EXCEL_TYPE} )
+      let file2 = new File(([fileBlob]), this.nameFilePayment, { type: this.EXCEL_TYPE });
+      reader.readAsDataURL(file2);
+      reader.onload = () => {
+        this.fileFormPayment.controls.file.patchValue({
+          file: reader.result
+        });
+        this.getExtension(this.nameFilePayment);
+        if (this.validFormat === true) {
+          this.showErrorExtPayment = false;
+          this.sendFilePayment();
+        } else {
+          this.showErrorExtPayment = true;
+        }
+      };
+    }
+  }
 
   private getExtension(nameFile: string) {
     let splitExt = nameFile.split(".");
@@ -207,53 +250,53 @@ export class ReportsComponent implements OnInit, OnDestroy {
     );
   }
 
-  // private sendFileAssured() {
-  //   let fileSplit = this.fileFormAssured.controls.file.value.file.split(',');
-  //   let file =  fileSplit[1];
-  //   let data = {
-  //     fileBase64:file,
-  //     business: "seguros",
-  //     email: this.userName
-  //   };
+  private sendFilePayment() {
+    let fileSplit = this.fileFormPayment.controls.file.value.file.split(',');
+    let file =  fileSplit[1];
+    let data = {
+      fileBase64:file,
+      business: "seguros",
+      email: this.userName
+    };
 
-  //   this.subscription = this.file.sendfile(data).subscribe(
-  //     (res: ResponseService) => {
-  //       if(res.state !== 'Error') {
-  //         Swal.fire({
-  //           title: "Carga exitosa",
-  //           text: res.userMessage,
-  //           type: "success",
-  //           confirmButtonText: "Aceptar",
-  //           confirmButtonClass: "upload-success"
-  //         }).then(()=> {
-  //           this.nameFileAssured ="";
-  //         });
-  //       } else {
-  //         Swal.fire({
-  //           title: 'Error en la Carga',
-  //           text: res.userMessage,
-  //           type: "error",
-  //           confirmButtonText: "Aceptar",
-  //           confirmButtonClass: "upload-error"
-  //         }).then(()=> {
-  //           this.nameFileAssured ="";
-  //         });
-  //       }
-  //     },
-  //     error => {
-  //       this.loading.hide();
-  //       Swal.fire({
-  //         title: error.statusText,
-  //         text: error.error.userMessage,
-  //         type: "error",
-  //         confirmButtonText: "Aceptar",
-  //         confirmButtonClass: "upload-invalid"
-  //       }).then(()=> {
-  //         this.nameFileAssured ="";
-  //       });
-  //     }
-  //   );
-  // }
+    this.subscription = this.file.updatePaymentDate(data).subscribe(
+      (res: ResponseService) => {
+        if(res.state !== 'Error') {
+          Swal.fire({
+            title: "Carga exitosa",
+            text: res.userMessage,
+            type: "success",
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: "upload-success"
+          }).then(()=> {
+            this.nameFilePayment ="";
+          });
+        } else {
+          Swal.fire({
+            title: 'Error en la Carga',
+            text: res.userMessage,
+            type: "error",
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: "upload-error"
+          }).then(()=> {
+            this.nameFilePayment ="";
+          });
+        }
+      },
+      error => {
+        this.loading.hide();
+        Swal.fire({
+          title: error.statusText,
+          text: error.error.userMessage,
+          type: "error",
+          confirmButtonText: "Aceptar",
+          confirmButtonClass: "upload-invalid"
+        }).then(()=> {
+          this.nameFilePayment ="";
+        });
+      }
+    );
+  }
 
   public downloadReferal() {
     let dates = {
@@ -280,6 +323,36 @@ export class ReportsComponent implements OnInit, OnDestroy {
     });
   }
 
+    /**
+   * Abre el mensaje de confirmacion de copiado del link
+   * @param message
+   * @param action
+   */
+
+  private openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5000
+    });
+  }
+
+  public getReportClickam() {
+    this.dateParams = {
+      email: this.email,
+      start: this.dateFormSell.controls.dateRange.value.startDate.format(),
+      end: this.dateFormSell.controls.dateRange.value.endDate.format()
+    }
+    
+   this.subscription = this.file.getReportClickam(this.dateParams).subscribe((resp: ResponseService) => {
+      if(resp.state === 'Success') {
+        this.openSnackBar(resp.userMessage + ' a ' + this.email, 'Cerrar');
+        this.dateFormSell.reset();
+        if (this.dateFormSell.controls.dateRange.value.startDate === null) {
+          this.disButon = true;
+        }
+      }
+    });
+  }
+  
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

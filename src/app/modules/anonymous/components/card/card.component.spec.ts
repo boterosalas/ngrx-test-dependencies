@@ -34,4 +34,9 @@ describe('CardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('open register', () => {
+    component.showRegister();
+  });
+
 });

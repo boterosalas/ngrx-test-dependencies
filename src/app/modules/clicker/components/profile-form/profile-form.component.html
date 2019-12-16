@@ -1,100 +1,933 @@
 <div>
+  <p>{{ "PROFILE.BASIC" | translate }}</p>
 
-<h3 class="gray border-left-orange">{{ "PROFILE.PERSONAL_INFO" | translate }}</h3>
-
-<mat-card class="p-0">
-  <span fxLayout="row"  fxLayout.xs="column" fxLayoutGap="80px" fxLayoutGap.xs="0px" class="item">
-    <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{ 'GENERIC.NAME' | translate }}</label>
-    <span class="info" fxLayout="column" fxLayout.xs="row" fxFLex="70" fxFLex.xs="0">{{name}}</span>
-  </span>
-  <span fxLayout="row"  fxLayout.xs="column" fxLayoutGap="80px" fxLayoutGap.xs="0px" class="item">
-    <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{ 'GENERIC.LASTNAME' | translate }}</label>
-    <span class="info" fxLayout="column" fxLayout.xs="row" fxFLex="70" fxFLex.xs="0">{{lastName}}</span>
-  </span>
-  <span fxLayout="row"  fxLayout.xs="column" fxLayoutGap="80px" fxLayoutGap.xs="0px" class="item">
-    <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{ 'GENERIC.EMAIL' | translate }}</label>
-    <span class="info" fxLayout="column" fxLayout.xs="row" fxFLex="70" fxFLex.xs="0">{{email}}</span>
-  </span>
-  <span fxLayout="row"  fxLayout.xs="column" fxLayoutGap="80px" fxLayoutGap.xs="0px" class="item" *ngIf="address !== ''">
-    <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{ 'GENERIC.ADDRESS' | translate }}</label>
-    <span class="info" fxLayout="column" fxLayout.xs="row" fxFLex="70" fxFLex.xs="0">{{address}}</span>
-  </span>
-  <span fxLayout="row"  fxLayout.xs="column" fxLayoutGap="80px" fxLayoutGap.xs="0px" class="item">
-    <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{ 'GENERIC.CELLPHONE' | translate }}</label>
-    <span class="info" fxLayout="column" fxLayout.xs="row" fxFLex="70" fxFLex.xs="0">{{phone}}</span>
-  </span>
-  <span fxLayout="row"  fxLayout.xs="column" fxLayoutGap="80px" fxLayoutGap.xs="0px" class="item">
-    <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{ 'GENERIC.DOCUMENT'  | translate }}</label>
-    <span class="info" fxLayout="column" fxLayout.xs="row" fxFLex="70" fxFLex.xs="0">{{id}}</span>
-  </span>
-</mat-card>
-
-<div *ngIf="isEmployee === false">
-  <h3 class="gray border-left-orange pt-3">{{ "PROFILE.ACOUNT_INFO" | translate }}</h3>
-
-  <mat-card class="p-0 mb-3">
-    <span fxLayout="row"  fxLayout.xs="column" fxLayoutGap="80px" fxLayoutGap.xs="0px" class="item">
-      <label fxLayout="column" fxFLex="50">{{ 'REGISTER.BANK' | translate }}</label>
-      <span class="info" fxLayout="column" fxLayout.xs="row" fxFLex="70" fxFLex.xs="0">{{bank}}</span>
+  <mat-card class="p-0 ml-1 mr-1">
+    <span
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutGap="80px"
+      fxLayoutGap.xs="0px"
+      class="item"
+    >
+      <h3 class="gray m-0">{{ "PROFILE.PERSONAL_INFO" | translate }}</h3>
     </span>
-    <span fxLayout="row"  fxLayout.xs="column" fxLayoutGap="80px" fxLayoutGap.xs="0px" class="item">
-      <label>{{ 'REGISTER.ACCOUNT' | translate }}</label>
-      <div class="info"> <span *ngIf="typeBankAccount === '1'"> Ahorros </span> <span *ngIf="typeBankAccount === '2'"> Corriente </span>  - {{bankAccountNumber}}</div>
+
+    <span
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutGap="80px"
+      fxLayoutGap.xs="0px"
+      class="item"
+    >
+      <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+        "GENERIC.NAME" | translate
+      }}</label>
+      <span fxLayout="row" fxLayoutAlign="space-between center " class="w-85">
+        <span
+          class="info"
+          fxLayout="column"
+          fxLayout.xs="row"
+          fxFLex="70"
+          fxFLex.xs="0"
+          >{{ name }} {{ lastName }}</span
+        >
+        <a mat-raised-button class="no-shadow" (click)="editName(userInfo)"
+          ><img src="/assets/img/icono-editar.svg" alt="editar"
+        /></a>
+      </span>
+    </span>
+
+    <span
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutGap="80px"
+      fxLayoutGap.xs="0px"
+      class="item"
+    >
+      <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+        "GENERIC.EMAIL" | translate
+      }}</label>
+      <span
+        class="info"
+        fxLayout="column"
+        fxLayout.xs="row"
+        fxFLex="70"
+        fxFLex.xs="0"
+        >{{ email }}</span
+      >
+    </span>
+
+    <span
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutGap="80px"
+      fxLayoutGap.xs="0px"
+      class="item"
+    >
+      <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+        "GENERIC.CELLPHONE" | translate
+      }}</label>
+      <span fxLayout="row" fxLayoutAlign="space-between center " class="w-85">
+        <span
+          class="info"
+          fxLayout="column"
+          fxLayout.xs="row"
+          fxFLex="70"
+          fxFLex.xs="0"
+          >{{ phone }}</span
+        >
+        <a mat-raised-button class="no-shadow" (click)="editCell(userInfo)"
+          ><img src="/assets/img/icono-editar.svg" alt="editar"
+        /></a>
+      </span>
+    </span>
+
+    <span
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutGap="80px"
+      fxLayoutGap.xs="0px"
+      class="item"
+    >
+      <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+        "GENERIC.ADDRESS" | translate
+      }}</label>
+      <span fxLayout="row" fxLayoutAlign="space-between center " class="w-85">
+        <span
+          class="info"
+          fxLayout="column"
+          fxLayout.xs="row"
+          fxFLex="70"
+          fxFLex.xs="0"
+          >{{ address }} {{ department }} {{ municipality }}</span
+        >
+        <a mat-raised-button class="no-shadow" (click)="editAddres(userInfo)"
+          ><img src="/assets/img/icono-editar.svg" alt="editar"
+        /></a>
+      </span>
+    </span>
+
+    <span
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutGap="80px"
+      fxLayoutGap.xs="0px"
+      class="item"
+    >
+      <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+        "GENERIC.DOCUMENT" | translate
+      }}</label>
+      <span
+        class="info"
+        fxLayout="column"
+        fxLayout.xs="row"
+        fxFLex="70"
+        fxFLex.xs="0"
+        >{{ id }}</span
+      >
+    </span>
+    <span
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutGap="80px"
+      fxLayoutGap.xs="0px"
+      class="item"
+    >
+      <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
+        "GENERIC.PASSWORD" | translate
+      }}</label>
+      <span fxLayout="row" fxLayoutAlign="space-between center " class="w-85">
+        <span
+          class="info"
+          fxLayout="column"
+          fxLayout.xs="row"
+          fxFLex="70"
+          fxFLex.xs="0"
+          >*******</span
+        >
+        <a
+          mat-raised-button
+          class="no-shadow"
+          (click)="changePassword(userInfo)"
+          ><img src="/assets/img/icono-editar.svg" alt="editar"
+        /></a>
+      </span>
     </span>
   </mat-card>
+
+  <div *ngIf="isEmployee === false" class="mt-3">
+    <mat-card class="p-0 mb-3 ml-1 mr-1">
+      <span
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="80px"
+        fxLayoutGap.xs="0px"
+        class="item"
+      >
+        <h3 class="gray m-0">{{ "PROFILE.ACOUNT_INFO" | translate }}</h3>
+      </span>
+      <span
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="80px"
+        fxLayoutGap.xs="0px"
+        fxLayoutAlign="start center"
+        fxLayoutAlign.xs="start start"
+        class="item"
+      >
+        <label>{{ "REGISTER.ACCOUNT" | translate }}</label>
+        <span fxLayout="row" fxLayoutAlign="space-between center " class="w-85">
+          <div class="info lineh">
+            <span class="d-block">{{ bank }}</span>
+            <span *ngIf="typeBankAccount === '1'"> Ahorros </span>
+            <span *ngIf="typeBankAccount === '2'"> Corriente </span> - *******{{
+              bankAccountNumber
+            }}
+          </div>
+
+          <a mat-raised-button class="no-shadow" (click)="editAccount(userInfo)"
+            ><img src="/assets/img/icono-editar.svg" alt="editar"
+          /></a>
+        </span>
+      </span>
+    </mat-card>
+  </div>
 </div>
-</div>
-<!-- <div fxLayout="row" class="border-rad">
-<form [formGroup]="profileForm" fxLayout="column" fxFlex="100" class="mat-elevation-z1">
-  <mat-form-field>
-    <input
-      matInput
-      id="name"
-      type="text"
-      placeholder="{{ 'GENERIC.NAME' | translate }}"
-      formControlName="name"
-      required
-    />
-  </mat-form-field>
-  <mat-form-field>
-    <input
-      matInput
-      id="lastname"
-      type="text"
-      placeholder="{{ 'GENERIC.LASTNAME' | translate }}"
-      formControlName="lastName"
-      required
-    />
-  </mat-form-field>
-  <mat-form-field>
-    <input
-      matInput
-      id="email"
-      type="text"
-      placeholder="{{ 'GENERIC.EMAIL' | translate }}"
-      formControlName="email"
-      required
-    />
-  </mat-form-field>
-  <mat-form-field>
-    <input
-      matInput
-      id="phone"
-      type="text"
-      placeholder="{{ 'GENERIC.CELLPHONE' | translate }}"
-      formControlName="phone"
-      required
-    />
-  </mat-form-field>
-  <mat-form-field>
-    <input
-      matInput
-      id="id"
-      type="text"
-      placeholder="{{ 'GENERIC.DOCUMENT_NUMBER' | translate }}"
-      formControlName="id"
-      required
-    />
-  </mat-form-field>
-</form>
-</div> -->
+
+<!-- template edit name and lastname -->
+
+<ng-template #templateDialog>
+  <form [formGroup]="profileForm" fxLayout="column" fxFlex="100">
+    <mat-form-field>
+      <input
+        matInput
+        id="name"
+        type="text"
+        placeholder="{{ 'GENERIC.NAME' | translate }}"
+        formControlName="name"
+        required
+      />
+
+      <mat-error
+        id="requiredName"
+        *ngIf="
+          profileForm.controls.name.invalid &&
+          profileForm.controls.name.errors.required
+        "
+        >{{
+          "GENERIC.REQUIRED" | translate: { formValue: "Nombre" }
+        }}</mat-error
+      >
+
+      <mat-error
+        id="maxName"
+        *ngIf="
+          profileForm.controls.name.invalid &&
+          profileForm.controls.name.errors.maxlength
+        "
+        >{{
+          "GENERIC.MAX_CHARACTERS"
+            | translate
+              : {
+                  maxchar:
+                    profileForm.controls.name.errors.maxlength.requiredLength
+                }
+        }}</mat-error
+      >
+
+      <mat-error
+        id="invalidName"
+        *ngIf="
+          profileForm.controls.name.invalid &&
+          profileForm.controls.name.errors.pattern
+        "
+        >{{
+          "GENERIC.INVALID_FORMAT" | translate: { val: "Nombre" }
+        }}</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        id="lastname"
+        type="text"
+        placeholder="{{ 'GENERIC.LASTNAME' | translate }}"
+        formControlName="lastName"
+        required
+      />
+      <mat-error
+        id="requiredLastName"
+        *ngIf="
+          profileForm.controls.lastName.invalid &&
+          profileForm.controls.lastName.errors.required
+        "
+        >{{
+          "GENERIC.REQUIRED" | translate: { formValue: "Apellidos" }
+        }}</mat-error
+      >
+
+      <mat-error
+        id="maxLastName"
+        *ngIf="
+          profileForm.controls.lastName.invalid &&
+          profileForm.controls.lastName.errors.maxlength
+        "
+        >{{
+          "GENERIC.MAX_CHARACTERS"
+            | translate
+              : {
+                  maxchar:
+                    profileForm.controls.lastName.errors.maxlength
+                      .requiredLength
+                }
+        }}</mat-error
+      >
+
+      <mat-error
+        id="invalidLastName"
+        *ngIf="
+          profileForm.controls.lastName.invalid &&
+          profileForm.controls.lastName.errors.pattern
+        "
+        >{{
+          "GENERIC.INVALID_FORMAT" | translate: { val: "Apellidos" }
+        }}</mat-error
+      >
+    </mat-form-field>
+    <button
+      mat-raised-button
+      id="editProfile"
+      class="center button button-100"
+      color="orange"
+      (click)="editUser()"
+      [disabled]="!profileForm.valid"
+    >
+      {{ "GENERIC.SAVE" | translate }}
+    </button>
+  </form>
+</ng-template>
+
+<!-- template cellPhone-->
+
+<ng-template #templateDialogCell>
+  <form [formGroup]="profileFormCell" fxLayout="column" fxFlex="100">
+    <mat-form-field>
+      <input
+        matInput
+        id="phone"
+        type="text"
+        placeholder="{{ 'GENERIC.CELLPHONE' | translate }}"
+        formControlName="phone"
+        required
+      />
+      <mat-error
+        id="requiredPhone"
+        *ngIf="
+          profileFormCell.controls.phone.invalid &&
+          profileFormCell.controls.phone.errors.required
+        "
+        >{{
+          "GENERIC.REQUIRED" | translate: { formValue: "Celular" }
+        }}</mat-error
+      >
+
+      <mat-error
+        id="minPhone"
+        *ngIf="
+          profileFormCell.controls.phone.invalid &&
+          profileFormCell.controls.phone.errors.minlength
+        "
+        >{{
+          "GENERIC.MIN_CHARACTERS"
+            | translate
+              : {
+                  minchar:
+                    profileFormCell.controls.phone.errors.minlength
+                      .requiredLength
+                }
+        }}</mat-error
+      >
+
+      <mat-error
+        id="maxPhone"
+        *ngIf="
+          profileFormCell.controls.phone.invalid &&
+          profileFormCell.controls.phone.errors.maxlength
+        "
+        >{{
+          "GENERIC.MAX_CHARACTERS"
+            | translate
+              : {
+                  maxchar:
+                    profileFormCell.controls.phone.errors.maxlength
+                      .requiredLength
+                }
+        }}</mat-error
+      >
+
+      <mat-error
+        id="numberPhone"
+        *ngIf="
+          profileFormCell.controls.phone.invalid &&
+          profileFormCell.controls.phone.errors.pattern
+        "
+        >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+      >
+    </mat-form-field>
+    <button
+      mat-raised-button
+      id="editProfile"
+      class="center button button-100 mt-4"
+      color="orange"
+      (click)="editUser()"
+      [disabled]="!profileFormCell.valid"
+    >
+      {{ "GENERIC.SAVE" | translate }}
+    </button>
+  </form>
+</ng-template>
+
+<!-- template address-->
+
+<ng-template #templateDialogAddress>
+  <div [formGroup]="addressForm" fxLayout="column" fxFlex="100">
+    <mat-form-field>
+      <input
+        matInput
+        id="address"
+        type="text"
+        formControlName="address"
+        placeholder="{{ 'GENERIC.ADDRESS' | translate }}"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        id="departmentCode"
+        placeholder="{{ 'REGISTER.DEPARTMENT' | translate }}"
+        [matAutocomplete]="auto"
+        formControlName="department"
+        autocomplete="nope"
+        (blur)="checkDepartment()"
+      />
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option
+          (onSelectionChange)="selectDepartment(department)"
+          *ngFor="let department of filteredDepartments | async; let i = index"
+          [value]="department.description"
+        >
+          <span>{{ department.description }}</span>
+        </mat-option>
+      </mat-autocomplete>
+
+      <mat-error
+        id="requiredDepartment"
+        *ngIf="
+          addressForm.controls.department.invalid &&
+          addressForm.controls.department.errors.required
+        "
+        >{{
+          "GENERIC.REQUIRED" | translate: { formValue: "Departamento" }
+        }}</mat-error
+      >
+      <mat-error
+        id="selectDepartementError"
+        *ngIf="
+          addressForm.controls.department.invalid &&
+          addressForm.controls.department.errors.incorrect
+        "
+        >{{ "REGISTER.ERROR_DEPARTMENT" | translate }}</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        id="city"
+        placeholder="{{ 'REGISTER.CITY' | translate }}"
+        [matAutocomplete]="city"
+        formControlName="city"
+        autocomplete="nope"
+        (blur)="checkCity()"
+      />
+      <mat-autocomplete #city="matAutocomplete">
+        <mat-option
+          (onSelectionChange)="selectCity(city)"
+          *ngFor="let city of filteredCities | async"
+          [(value)]="city.description"
+        >
+          <span>{{ city.description }}</span>
+        </mat-option>
+      </mat-autocomplete>
+
+      <mat-error
+        id="selectCityError"
+        *ngIf="
+          addressForm.controls.city.invalid &&
+          addressForm.controls.city.errors.incorrectCity
+        "
+        >{{ "REGISTER.ERROR_CITY" | translate }}</mat-error
+      >
+
+      <mat-error
+        id="requiredCity"
+        *ngIf="
+          addressForm.controls.city.invalid &&
+          addressForm.controls.city.errors.required
+        "
+        >{{
+          "GENERIC.REQUIRED" | translate: { formValue: "Ciudad" }
+        }}</mat-error
+      >
+    </mat-form-field>
+    <button
+      mat-raised-button
+      id="editAddress"
+      class="center button button-100 mt-4"
+      color="orange"
+      (click)="changeAddress()"
+      [disabled]="!addressForm.valid"
+    >
+      {{ "GENERIC.SAVE" | translate }}
+    </button>
+  </div>
+</ng-template>
+
+<!-- template password-->
+
+<ng-template #templateDialogPass>
+  <form
+    class="register-container"
+    [formGroup]="profileFormPass"
+    fxLayout="column"
+    fxFlex="100"
+  >
+    <mat-form-field>
+      <mat-label>{{ "GENERIC.ACTUAL_PASSWORD" | translate }}</mat-label>
+      <mat-pass-toggle-visibility
+        #toggleVisbility0
+        matSuffix
+      ></mat-pass-toggle-visibility>
+      <input
+        matInput
+        #passwordWithValidation
+        [type]="toggleVisbility0.type"
+        required
+        formControlName="actualPassword"
+        placeholder="{{ 'GENERIC.ACTUAL_PASSWORD' | translate }}"
+      />
+      <mat-error
+        id="requiredPassword"
+        *ngIf="
+          profileFormPass.controls.actualPassword.invalid &&
+          profileFormPass.controls.actualPassword.errors.required
+        "
+        >{{
+          "GENERIC.REQUIRED" | translate: { formValue: "Contraseña" }
+        }}</mat-error
+      >
+
+      <mat-error
+        id="minPassword"
+        *ngIf="
+          profileFormPass.controls.actualPassword.invalid &&
+          profileFormPass.controls.actualPassword.errors.minlength
+        "
+        >{{
+          "GENERIC.MIN_CHARACTERS"
+            | translate
+              : {
+                  minchar:
+                    profileFormPass.controls.actualPassword.errors.minlength
+                      .requiredLength
+                }
+        }}</mat-error
+      >
+
+      <mat-error
+        id="maxPassword"
+        *ngIf="
+          profileFormPass.controls.actualPassword.invalid &&
+          profileFormPass.controls.actualPassword.errors.maxlength
+        "
+        >{{
+          "GENERIC.MAX_CHARACTERS"
+            | translate
+              : {
+                  maxchar:
+                    profileFormPass.controls.actualPassword.errors.maxlength
+                      .requiredLength
+                }
+        }}</mat-error
+      >
+
+      <mat-error
+        id="patternPassword"
+        *ngIf="
+          profileFormPass.controls.actualPassword.invalid &&
+          profileFormPass.controls.actualPassword.errors.pattern
+        "
+        >{{ "GENERIC.PASSWORD_PATTERN" | translate }}</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Nueva contraseña</mat-label>
+      <mat-pass-toggle-visibility
+        #toggleVisbility
+        matSuffix
+      ></mat-pass-toggle-visibility>
+      <input
+        matInput
+        #passwordWithValidation
+        [type]="toggleVisbility.type"
+        required
+        formControlName="password"
+        placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
+      />
+      <mat-error
+        id="requiredPassword"
+        *ngIf="
+          profileFormPass.controls.password.invalid &&
+          profileFormPass.controls.password.errors.required
+        "
+        >{{
+          "GENERIC.REQUIRED" | translate: { formValue: "Contraseña" }
+        }}</mat-error
+      >
+
+      <mat-error
+        id="minPassword"
+        *ngIf="
+          profileFormPass.controls.password.invalid &&
+          profileFormPass.controls.password.errors.minlength
+        "
+        >{{
+          "GENERIC.MIN_CHARACTERS"
+            | translate
+              : {
+                  minchar:
+                    profileFormPass.controls.password.errors.minlength
+                      .requiredLength
+                }
+        }}</mat-error
+      >
+
+      <mat-error
+        id="maxPassword"
+        *ngIf="
+          profileFormPass.controls.password.invalid &&
+          profileFormPass.controls.password.errors.maxlength
+        "
+        >{{
+          "GENERIC.MAX_CHARACTERS"
+            | translate
+              : {
+                  maxchar:
+                    profileFormPass.controls.password.errors.maxlength
+                      .requiredLength
+                }
+        }}</mat-error
+      >
+
+      <mat-error
+        id="patternPassword"
+        *ngIf="
+          profileFormPass.controls.password.invalid &&
+          profileFormPass.controls.password.errors.pattern
+        "
+        >{{ "GENERIC.PASSWORD_PATTERN" | translate }}</mat-error
+      >
+    </mat-form-field>
+    <div></div>
+
+    <mat-form-field>
+      <mat-pass-toggle-visibility
+        #toggleVisbility2
+        matSuffix
+      ></mat-pass-toggle-visibility>
+      <input
+        matInput
+        id="confirmPassword"
+        [type]="toggleVisbility2.type"
+        placeholder="{{ 'GENERIC.CONFIRM_PASSWORD' | translate }}"
+        formControlName="confirmPassword"
+        required
+        spacebar
+      />
+      <mat-error
+        id="notmatchPassword"
+        *ngIf="
+          profileFormPass.get('confirmPassword').errors &&
+          profileFormPass.get('confirmPassword').errors.ConfirmPassword
+        "
+        >{{ "REGISTER.PASSWORD_NOT_MATCH" | translate }}</mat-error
+      >
+
+      <mat-error
+        id="requiredConfirmPassword"
+        *ngIf="
+          profileFormPass.controls.confirmPassword.invalid &&
+          profileFormPass.controls.confirmPassword.errors.required
+        "
+        >{{
+          "GENERIC.REQUIRED" | translate: { formValue: "Contraseña" }
+        }}</mat-error
+      >
+
+      <mat-error
+        id="minConfirmPassword"
+        *ngIf="
+          profileFormPass.controls.confirmPassword.invalid &&
+          profileFormPass.controls.confirmPassword.errors.minlength
+        "
+        >{{
+          "GENERIC.MIN_CHARACTERS"
+            | translate
+              : {
+                  minchar:
+                    profileFormPass.controls.confirmPassword.errors.minlength
+                      .requiredLength
+                }
+        }}</mat-error
+      >
+
+      <mat-error
+        id="maxConfirmPassword"
+        *ngIf="
+          profileFormPass.controls.confirmPassword.invalid &&
+          profileFormPass.controls.confirmPassword.errors.maxlength
+        "
+        >{{
+          "GENERIC.MAX_CHARACTERS"
+            | translate
+              : {
+                  maxchar:
+                    profileFormPass.controls.confirmPassword.errors.maxlength
+                      .requiredLength
+                }
+        }}</mat-error
+      >
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      id="editProfile"
+      class="center button button-100 mt-4"
+      color="orange"
+      (click)="changePasswordUser()"
+      [disabled]="!profileFormPass.valid"
+    >
+      {{ "GENERIC.SAVE" | translate }}
+    </button>
+  </form>
+</ng-template>
+
+<!-- template password-->
+
+<ng-template #templateDialogAccount>
+  <div *ngIf="showPassword">
+    <p class="passText">{{ "PROFILE.TEXT_PASS" | translate }}</p>
+    <form class="login-container" [formGroup]="loginForm">
+      <mat-form-field>
+        <mat-pass-toggle-visibility
+          #toggleVisbilitypass
+          matSuffix
+        ></mat-pass-toggle-visibility>
+        <input
+          matInput
+          id="password"
+          [type]="toggleVisbilitypass.type"
+          placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
+          formControlName="Password"
+          spacebar
+          required
+        />
+        <span matPrefix><mat-icon color="gray">lock</mat-icon></span>
+        <mat-error
+          id="introducePassword"
+          *ngIf="
+            loginForm.controls.Password.invalid &&
+            loginForm.controls.Password.errors.required
+          "
+          >{{ "LOGIN.INTRODUCE_PASSWORD" | translate }}</mat-error
+        >
+
+        <mat-error
+          id="minPassword"
+          *ngIf="
+            loginForm.controls.Password.invalid &&
+            loginForm.controls.Password.errors.minlength
+          "
+          >{{
+            "GENERIC.MIN_CHARACTERS"
+              | translate
+                : {
+                    minchar:
+                      loginForm.controls.Password.errors.minlength
+                        .requiredLength
+                  }
+          }}</mat-error
+        >
+
+        <mat-error
+          id="maxPassword"
+          *ngIf="
+            loginForm.controls.Password.invalid &&
+            loginForm.controls.Password.errors.maxlength
+          "
+          >{{
+            "GENERIC.MAX_CHARACTERS"
+              | translate
+                : {
+                    maxchar:
+                      loginForm.controls.Password.errors.maxlength
+                        .requiredLength
+                  }
+          }}</mat-error
+        >
+      </mat-form-field>
+      <div class="text-center">
+        <button
+          class="button button-100"
+          mat-raised-button
+          id="login"
+          color="orange"
+          (click)="showAccount()"
+          [disabled]="!loginForm.valid"
+        >
+          <span>{{ "GENERIC.ACCEPT" | translate }}</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="showBankInfoUser">
+    <p class="passText">{{ "PROFILE.ACCOUNT_INFO" | translate }}</p>
+
+    <form [formGroup]="accountForm" fxLayout="column">
+      <mat-form-field>
+        <mat-select
+          placeholder="{{ 'REGISTER.BANK' | translate }}"
+          id="bank"
+          formControlName="bank"
+        >
+          <mat-option *ngFor="let bank of banks" value="{{ bank.description }}">
+            <span>{{ bank.description }}</span></mat-option
+          >
+        </mat-select>
+
+        <mat-error
+          id="requiredBank"
+          *ngIf="
+            accountForm.controls.bank.invalid &&
+            accountForm.controls.bank.errors.required
+          "
+          >{{
+            "GENERIC.REQUIRED" | translate: { formValue: "Banco" }
+          }}</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select
+          placeholder="{{ 'REGISTER.TYPE_ACCOUNT' | translate }}"
+          id="typeAccount"
+          formControlName="typeAccount"
+        >
+          <mat-option
+            *ngFor="let account of typeAccount"
+            value="{{ account.id }}"
+            ><span>{{ account.description }}</span></mat-option
+          >
+        </mat-select>
+
+        <mat-error
+          id="requiredTypeAccount"
+          *ngIf="
+            accountForm.controls.typeAccount.invalid &&
+            accountForm.controls.typeAccount.errors.required
+          "
+          >{{
+            "GENERIC.REQUIRED" | translate: { formValue: "Tipo de cuenta" }
+          }}</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          spacebar
+          matInput
+          id="numberAccount"
+          type="text"
+          placeholder="{{ 'REGISTER.NUMBER_ACCOUNT' | translate }}"
+          formControlName="numberAccount"
+        />
+
+        <mat-error
+          id="requiredTypeAccount"
+          *ngIf="
+            accountForm.controls.numberAccount.invalid &&
+            accountForm.controls.numberAccount.errors.required
+          "
+          >{{
+            "GENERIC.REQUIRED" | translate: { formValue: "Número de cuenta" }
+          }}</mat-error
+        >
+
+        <mat-error
+          id="invalidNumber"
+          *ngIf="
+            accountForm.controls.numberAccount.invalid &&
+            accountForm.controls.numberAccount.errors.pattern
+          "
+          >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+        >
+
+        <mat-error
+          id="minAccount"
+          *ngIf="
+            accountForm.controls.numberAccount.invalid &&
+            accountForm.controls.numberAccount.errors.minlength
+          "
+          >{{
+            "GENERIC.MIN_CHARACTERS"
+              | translate
+                : {
+                    minchar:
+                      accountForm.controls.numberAccount.errors.minlength
+                        .requiredLength
+                  }
+          }}</mat-error
+        >
+
+        <mat-error
+          id="maxAccount"
+          *ngIf="
+            accountForm.controls.numberAccount.invalid &&
+            accountForm.controls.numberAccount.errors.maxlength
+          "
+          >{{
+            "GENERIC.MAX_CHARACTERS"
+              | translate
+                : {
+                    maxchar:
+                      accountForm.controls.numberAccount.errors.maxlength
+                        .requiredLength
+                  }
+          }}</mat-error
+        >
+      </mat-form-field>
+      <button
+        mat-raised-button
+        id="nextClicker"
+        class="center button button-100"
+        color="orange"
+        (click)="updateAccount()"
+        [disabled]="!accountForm.valid"
+      >
+        Actualizar
+      </button>
+    </form>
+  </div>
+</ng-template>

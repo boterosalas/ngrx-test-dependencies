@@ -13,6 +13,13 @@ input[type="file"] {
     color: #ffffff;
 }
 
+.rotate{
+  transform: rotate(180deg);
+  position: relative;
+  top: 4px;
+  margin-left: 10px;
+}
+
 .file-input{
   max-width: 269px;
     overflow: hidden;

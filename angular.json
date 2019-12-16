@@ -121,7 +121,10 @@
               ]
           },
             "codeCoverageExclude":[
-                "src/app/services/**/*"
+                "src/app/services/**/*",
+                "src/app/pipes/**/*",
+                "src/app/validators/**/*",
+                "src/app/interceptors/**/*"
               ],
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",

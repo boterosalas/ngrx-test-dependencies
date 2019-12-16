@@ -28,4 +28,10 @@ describe('TableHistorialComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('table history', () => {
+    component.userInfo([]);
+  });
+  
+
 });

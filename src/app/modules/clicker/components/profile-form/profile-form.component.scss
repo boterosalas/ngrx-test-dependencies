@@ -27,6 +27,16 @@ label {
     }
 }
 
+.w-85{
+    width: 85%;
+}
+
+
+.lineh{
+    line-height: 2;
+    padding: 10px 0px;
+}
+
 @media screen and (max-width: 450px) {
     .truncate{
       width: 100px;
@@ -35,5 +45,13 @@ label {
       white-space: nowrap;
       text-overflow: ellipsis;
     }
+
+    .info{
+        font-size: 14px;
+    }
+
   }
   
+  .passText{
+      width: 213px;
+  }

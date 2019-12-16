@@ -25,8 +25,12 @@ export class UserService {
   apiShorUrl= 'userprofile/getShortURL';
   apiCreateUser = 'userprofile/create';
   apiIdType = 'userprofile/getIdTypes';
+  apigetBankAccountNumber = 'userprofile/getBankAccountNumber';
+  apichangeBankInformation = 'userprofile/changeBankInformation';
   apiDisableUser = 'userprofile/disableUser';
+  apiUpdateUser = 'userprofile/updateUser';
   apiUsers = 'userprofile/getUsers';
+  apiGetBasicData = 'userprofile/getBasicData';
   apiComunications = 'userprofile/setReceiveCommunications';
   apiVerified = 'userprofile/verifyUser';
   apiDepartment = 'userprofile/getDeparments';
@@ -99,6 +103,24 @@ export class UserService {
     return this.http.get(apiShort, httpOptions).pipe(
       map((url: any) => {
         return url.objectResponse;
+      })
+    );
+  }
+
+  getBasicData()  {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.get((`${this.url}${this.apiGetBasicData}`), httpOptions).pipe(
+      map((user: any) => {
+        return user.objectResponse;
       })
     );
   }
@@ -182,6 +204,48 @@ export class UserService {
       })
     };
     return this.http.post((`${this.url}${this.apiDisableUser}`),{userid:id, value}, httpOptions);
+  }
+
+  public getBankAccountNumber(password: any) {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.post((`${this.url}${this.apigetBankAccountNumber}`),{password}, httpOptions);
+  }
+
+  public changeBankInformation(id: any, data:any) {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.post((`${this.url}${this.apichangeBankInformation}`),data, httpOptions);
+  }
+
+  public updateUser(id: any, data:any) {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.post((`${this.url}${this.apiUpdateUser}`),data, httpOptions);
   }
 
   public comunitcations(id: any, value: boolean) {

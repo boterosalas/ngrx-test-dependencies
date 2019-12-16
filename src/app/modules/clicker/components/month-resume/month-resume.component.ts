@@ -70,9 +70,9 @@ export class MonthResumeComponent implements OnInit, OnDestroy {
 
   private getInfomonth() {
     this.link.getReports(this.identification).subscribe((resume: any) => {
-      this.linksCreated = resume.MonthResume.TotalLink;
-      this.totalComissions = resume.MonthResume.TotalCommissions;
-      this.data = resume.MonthResume.DaysResume;
+      this.linksCreated = resume.monthResume.totalLink;
+      this.totalComissions = resume.monthResume.totalCommissions;
+      this.data = resume.monthResume.daysResume;
     });
   }
 
