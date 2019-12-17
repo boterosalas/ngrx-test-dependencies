@@ -1,0 +1,29 @@
+<div id={{data.id}} class="modal-width">
+    <div fxLayoutAlign="end">
+        <a id="closeDialog" matRipple (click)="onNoClick()"><mat-icon class="close cursor-pointer">close</mat-icon></a>
+    </div>
+    <h1 class="mb-1" mat-dialog-title>{{data.title}}</h1>
+    <div mat-dialog-content>
+        <p>
+        <span class="d-block black">{{data.bank}}</span>
+        <span class="d-block black">{{data.amount | currency : '' : 'symbol' : '1.0-0'}}</span>
+        <span class="d-block">{{data.paymentDate | date: 'yyyy-MM-dd'}}</span>
+        </p>
+        <h3 class="gray border-left-orange">{{data.detail}}</h3>
+        <table class="w-100 history-table">
+            <thead>
+                <th  class="text-left">PRODUCTO</th>
+                <th class="text-right">COMISIÓN</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of data.items">
+                    <td>{{item.product}}</td>
+                    <td class="text-right">
+                        <span class="black d-block">{{item.commissionValue | currency : '' : 'symbol' : '1.0-0'}}</span>
+                        <span class="small d-block">{{item.date | date: 'yyyy-MM-dd'}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -21,5 +21,5 @@
         </ng-container>
     
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr  mat-row *matRowDef="let row; columns: displayedColumns;let i= index;"></tr>
+        <tr class="cursor-pointer" mat-row *matRowDef="let row; columns: displayedColumns;let i= index;" (click)="userInfo((dataSource.data)[i])"></tr>
       </table>
