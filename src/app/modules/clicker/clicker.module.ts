@@ -27,6 +27,7 @@ import { AditionalInfoFormComponent } from "./components/aditional-info-form/adi
 import { DialogEditComponent } from "./components/dialog-edit/dialog-edit.component";
 import { MatPasswordStrengthModule } from "@angular-material-extensions/password-strength";
 import { CardDataComponent } from './components/card-data/card-data.component';
+import { DialogHistoryComponent } from './components/dialog-history/dialog-history.component';
 
 const routes: Routes = [
   {
@@ -60,7 +61,8 @@ const routes: Routes = [
     AditionalFilesComponent,
     AditionalInfoFormComponent,
     DialogEditComponent,
-    CardDataComponent
+    CardDataComponent,
+    DialogHistoryComponent
   ],
   imports: [
     CommonModule,
@@ -77,6 +79,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   providers: [{ provide: MatPaginatorIntl, useClass: TabsComponent }],
-  entryComponents: [DialogComponent, DialogEditComponent]
+  entryComponents: [DialogComponent, DialogEditComponent, DialogHistoryComponent]
 })
 export class ClickerModule {}
