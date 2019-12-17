@@ -1,14 +1,27 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogHistoryComponent } from './dialog-history.component';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 describe('DialogHistoryComponent', () => {
   let component: DialogHistoryComponent;
   let fixture: ComponentFixture<DialogHistoryComponent>;
 
+  const dialogMock = {
+    close: () => { }
+   };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DialogHistoryComponent ]
+      declarations: [ DialogHistoryComponent ],
+      imports: [
+        AppMaterialModule
+      ],
+      providers: [
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        {provide: MatDialogRef, useValue: dialogMock},
+      ]
     })
     .compileComponents();
   }));
