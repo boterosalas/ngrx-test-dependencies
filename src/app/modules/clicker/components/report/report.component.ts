@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { LinksService } from 'src/app/services/links.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
+import { DialogHistoryComponent } from '../dialog-history/dialog-history.component';
 
 @Component({
   selector: 'app-report',
@@ -24,11 +25,13 @@ export class ReportComponent implements OnInit {
   isLoggedIn: any;
   identification: string;
   private subscription: Subscription = new Subscription();
+  items= [];
 
   constructor(
     private payment: LinksService,
     private auth: AuthService,
-    private token: TokenService
+    private token: TokenService,
+    private dialog: MatDialog,
     ) {
   }
 
@@ -69,6 +72,34 @@ export class ReportComponent implements OnInit {
       this.account = resume.money.account;
     });
   }
+
+  public userData(user) {
+    const paymentDate = user.paymentDate;
+    const bank = user.bank;
+    const amount = user.amount;
+    const title = 'Pago';
+    const detail = 'Detalle de ventas';
+    let items;
+  
+    this.payment.getDetailPaymentClicker(paymentDate).subscribe(resp=> {
+      items = resp;
+      
+   this.dialog.open(DialogHistoryComponent, {
+        width: "649px",
+        data: {
+          items,
+          title,
+          detail,
+          paymentDate,
+          bank,
+          amount
+        }
+      });
+
+    });
+
+  }
+
 
   ngOnDestroy(): void {
    this.subscription.unsubscribe();
