@@ -23,7 +23,7 @@
     </div>
     <div fxLayout="row" class="w-100">
       <div fxLayout="column" class="w-100" fxLflex="100">
-        <app-table-historial [dataSource]="dataSource"></app-table-historial>
+        <app-table-historial (dataUser)="userData($event)" [dataSource]="dataSource"></app-table-historial>
         <mat-paginator
           [length]="totalItems"
           [pageSize]="pageSize"

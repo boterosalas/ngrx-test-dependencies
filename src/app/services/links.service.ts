@@ -17,15 +17,16 @@ export class LinksService {
   // comission = 'commissions';
   reports = 'Reports/ClickerPerformanceReport';
   apiKPI = 'Reports/getKPI';
-  apiUsersExcel= 'Reports/getUsersExcel'
-  apiAuditExcel= 'Reports/getAudit'
-  apigetReportClickam= 'Reports/getReportClickam'
-  apiUsers= 'Reports/getUsers'
-  insurance = 'Insurance/ProcessFiles'
+  apiUsersExcel= 'Reports/getUsersExcel';
+  apiAuditExcel= 'Reports/getAudit';
+  apigetReportClickam= 'Reports/getReportClickam';
+  apiUsers= 'Reports/getUsers';
+  insurance = 'Insurance/ProcessFiles';
   apiSaveLink = 'Link/SaveLink';
   apiPostReferrrals = 'Link/downloadReferrals';
   apiGetTotalLinks = 'Link/GetTotalLinksGenerated';
   apiFile = 'commissions/getUrlFileCommissions';
+  apigetDetailPaymentClicker = 'commissions/getDetailPaymentClicker';
   apigenerateCommissions = 'commissions/generateCommissionsFile';
   apiHistory = 'commissions/getPaymentHistoryClicker';
   apiupdatePaymentDate= 'commissions/updatePaymentDate';
@@ -144,6 +145,24 @@ export class LinksService {
       })
     };
     return this.http.get((`${this.urlComission}/${this.apiFile}`), httpOptions).pipe(
+      map((resp: ResponseService) => {
+        return resp.objectResponse;
+      })
+    );
+  }
+  
+  public getDetailPaymentClicker(date:string) {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.get((`${this.urlComission}/${this.apigetDetailPaymentClicker}?paymentDate=${date}`), httpOptions).pipe(
       map((resp: ResponseService) => {
         return resp.objectResponse;
       })

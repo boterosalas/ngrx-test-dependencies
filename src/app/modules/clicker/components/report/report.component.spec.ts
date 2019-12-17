@@ -9,6 +9,9 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { LinksService } from "src/app/services/links.service";
 import { of } from "rxjs/internal/observable/of";
 import { RouterTestingModule } from "@angular/router/testing";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { DialogHistoryComponent } from '../dialog-history/dialog-history.component';
 
 describe("ReportComponent", () => {
   let component: ReportComponent;
@@ -17,7 +20,16 @@ describe("ReportComponent", () => {
   let mockLinksService = jasmine.createSpyObj("LinksService", [
     "getPayment",
     "getInfomonth",
-    "getReports"
+    "getReports",
+    "getDetailPaymentClicker"
+  ]);
+
+  const mockDialog = jasmine.createSpyObj("MatDialog", ["open"]);
+  const mockDialogRef = jasmine.createSpyObj("MatDialogRef", [
+    "close",
+    "afterClosed",
+    "componentInstance",
+    "event "
   ]);
 
   const data = {users: [], total: 0}
@@ -33,13 +45,26 @@ describe("ReportComponent", () => {
     monthResume: { totalCommissions: 0, totalLink: 0, daysResume: [] }
   };
 
+  const user = {
+    paymentDate: '2019-12-12',
+    bank: 'Bancolombia',
+    amount: '10000000',
+    title: 'Pago',
+    detail: 'Detalle ventas'
+  } 
+
+  const getDetailPayment = {
+    product: "vuelos", commissionValue: 16000, date: "2019-11-10T20:33:01.207"
+  };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ReportComponent],
+      declarations: [ReportComponent, DialogHistoryComponent],
       imports: [
         AppMaterialModule,
         TranslateModule.forRoot({}),
         HttpClientTestingModule,
+        BrowserAnimationsModule,
         RouterTestingModule.withRoutes([]),
         JwtModule.forRoot({
           config: {
@@ -54,9 +79,16 @@ describe("ReportComponent", () => {
       ],
       providers: [{ provide: LinksService, useValue: mockLinksService }],
       schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+    })
+    .overrideModule(BrowserDynamicTestingModule, {
+      set: {
+        entryComponents: [DialogHistoryComponent]
+      }
+    })
+    .compileComponents();
     mockLinksService.getPayment.and.returnValue(of(data));
     mockLinksService.getReports.and.returnValue(of(infoMonth));
+    mockLinksService.getDetailPaymentClicker.and.returnValue(of(getDetailPayment));
   }));
 
   beforeEach(() => {
@@ -79,4 +111,11 @@ describe("ReportComponent", () => {
     });
     expect(mockLinksService.getPayment).toHaveBeenCalled();
   });
+
+  
+  it("get detail payment", () => {
+    component.userData(user);
+    expect(mockLinksService.getDetailPaymentClicker).toHaveBeenCalled();
+  });
+
 });

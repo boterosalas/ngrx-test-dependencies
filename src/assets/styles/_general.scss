@@ -158,6 +158,10 @@ body {
   color: $color-p;
 }
 
+.black {
+  color:#2B2A27;
+}
+
 h1,
 h2,
 h3,
@@ -718,7 +722,7 @@ footer {
 
 th.mat-header-cell {
   color: $th;
-  border-bottom-color: #3b3b3b;
+  // border-bottom-color: #3b3b3b;
 }
 
 .min-18 {
@@ -969,6 +973,18 @@ span.orange-border {
   .md-drppicker.double{
     min-width: 530px;
     // position: relative;
+  }
+}
+
+.history-table{
+  td{
+    padding: 10px;
+  }
+  thead{
+    background: none;
+    th {
+      border-bottom: 2px solid #ececec;
+    }
   }
 }
 
