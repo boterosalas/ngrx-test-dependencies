@@ -35,4 +35,9 @@ describe('DialogHistoryComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('close modal', () => {
+    component.onNoClick();
+  });
+
 });

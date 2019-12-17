@@ -36,4 +36,9 @@ describe('DialogEditComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('close modal', () => {
+    component.onNoClick();
+  });
+
 });
