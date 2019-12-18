@@ -266,7 +266,7 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
             });
             return _product;
           });
-          // this.aliance([this.productsList]);
+          this.aliance([this.productsList]);
         } else {
           this.showNotFound = true;
           this.showResults = false;

@@ -18,6 +18,7 @@ import { ContentService } from "src/app/services/content.service";
 import { UserService } from "src/app/services/user.service";
 import { SlickCarouselModule } from "ngx-slick-carousel";
 import { ShareButtonsModule } from "@ngx-share/buttons";
+import { LinksService } from 'src/app/services/links.service';
 
 describe("TabsComponent", () => {
   let component: TabsComponent;
@@ -39,6 +40,10 @@ describe("TabsComponent", () => {
     "afterClosed",
     "componentInstance"
   ]);
+
+  // const mockLinksService = jasmine.createSpyObj("LinksService", [
+  //   "saveLink"
+  // ]);
 
   let data = {
     total: 1,
@@ -1360,6 +1365,7 @@ describe("TabsComponent", () => {
         { provide: UserService, useValue: mockUserService },
         { provide: MatDialogRef, useValue: mockDialogRef },
         { provide: MAT_BOTTOM_SHEET_DATA, useValue: mockDialog },
+        // { provide: LinksService, useValue: mockLinksService },
         JwtHelperService
       ],
       schemas: [NO_ERRORS_SCHEMA]
@@ -1577,5 +1583,13 @@ describe("TabsComponent", () => {
       component.date = "2019/09/09";
       component.saveLinkReference();
     });
+
+    it('showReference', () => {
+      component.reference = false;
+      component.showReference();
+      expect(component.reference).toBeTruthy();
+    });
+    
+
   });
 });
