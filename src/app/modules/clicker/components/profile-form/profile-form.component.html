@@ -31,7 +31,7 @@
           fxFLex.xs="0"
           >{{ name }} {{ lastName }}</span
         >
-        <a mat-raised-button class="no-shadow" (click)="editName(userInfo)"
+        <a mat-raised-button class="no-shadow" (click)="editName()"
           ><img src="/assets/img/icono-editar.svg" alt="editar"
         /></a>
       </span>
@@ -76,7 +76,7 @@
           fxFLex.xs="0"
           >{{ phone }}</span
         >
-        <a mat-raised-button class="no-shadow" (click)="editCell(userInfo)"
+        <a mat-raised-button class="no-shadow" (click)="editCell()"
           ><img src="/assets/img/icono-editar.svg" alt="editar"
         /></a>
       </span>
@@ -101,7 +101,7 @@
           fxFLex.xs="0"
           >{{ address }} {{ department }} {{ municipality }}</span
         >
-        <a mat-raised-button class="no-shadow" (click)="editAddres(userInfo)"
+        <a mat-raised-button class="no-shadow" (click)="editAddres()"
           ><img src="/assets/img/icono-editar.svg" alt="editar"
         /></a>
       </span>
@@ -148,7 +148,7 @@
         <a
           mat-raised-button
           class="no-shadow"
-          (click)="changePassword(userInfo)"
+          (click)="changePassword()"
           ><img src="/assets/img/icono-editar.svg" alt="editar"
         /></a>
       </span>
@@ -185,7 +185,7 @@
             }}
           </div>
 
-          <a mat-raised-button class="no-shadow" (click)="editAccount(userInfo)"
+          <a mat-raised-button class="no-shadow" (click)="editAccount()"
             ><img src="/assets/img/icono-editar.svg" alt="editar"
           /></a>
         </span>
