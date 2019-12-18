@@ -87,7 +87,7 @@ export class TabsComponent extends MatPaginatorIntl
 
   term: string;
   private subscription: Subscription = new Subscription();
-  productsList: SearchProduct;
+  productsList: Array<SearchProduct>;
   showResults: boolean;
   showNotFound: boolean;
   paginate: string;
@@ -123,6 +123,7 @@ export class TabsComponent extends MatPaginatorIntl
   listPriceAliance: any;
   totalPriceAliance: any;
   totalPriceArrays = [];
+  price = [];
   totalArraysDesc: any;
   alianceSplit: string;
   alianceSplit2: string;
@@ -227,6 +228,7 @@ export class TabsComponent extends MatPaginatorIntl
   }
 
   order(option) {
+    this.pageIndex = 0;
     this.searchProductPaginate(this.paginate, option, 1 , this.pageTo);
     this.orderValue = option;
   }
@@ -250,13 +252,21 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     this.subscription = this.sp.getProductsPagination(params).subscribe(
       (resp: any) => {
         this.loading.hide();
-        const parsed = JSON.parse(resp.json);
+        this.productsList = JSON.parse(resp.json);
         this.totalItems = resp.total;
-        if (parsed.length > 0) {
+
+       
+        
+        if (this.productsList.length > 0) {
           this.showResults = true;
           this.showNotFound = false;
-          this.productsList = JSON.parse(resp.json);
-          this.aliance([this.productsList]);
+          this.productsList = this.productsList.map(_product => {
+            _product.items = _product.items.sort((a, b)  => {
+              return b.sellers[0].commertialOffer.Price - a.sellers[0].commertialOffer.Price
+            });
+            return _product;
+          });
+          // this.aliance([this.productsList]);
         } else {
           this.showNotFound = true;
           this.showResults = false;
