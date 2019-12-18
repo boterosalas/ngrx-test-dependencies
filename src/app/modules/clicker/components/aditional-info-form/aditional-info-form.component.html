@@ -78,7 +78,7 @@
               <mat-label>Selecciona tu estado civil</mat-label>
               <mat-select
                 formControlName="maritalStatus"
-                [(value)]="maritalStatusOb.id"
+                [value]="maritalStatusOb['id']"
               >
                 <mat-option
                   *ngFor="let item of maritalStatus"
