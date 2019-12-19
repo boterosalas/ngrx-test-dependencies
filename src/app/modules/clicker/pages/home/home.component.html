@@ -13,13 +13,14 @@
         </h2>
       <div fxLayout="row">
         <span fxLayout="column" fxFlex="100" class="available">
-          <app-card-data [number]="available | currency : '' : 'symbol' : '1.0-0'" text="Disponible*"></app-card-data>
+          <app-card-data [number]="available | currency : '' : 'symbol' : '1.0-0'" text="{{ 'REPORTS.AVAILABLE' | translate }}"></app-card-data>
         </span>
         <span fxLayout="column" fxFlex="100">
-          <app-card-data [number]="account | currency : '' : 'symbol' : '1.0-0'" text="En Cuenta"></app-card-data>
+          <app-card-data class="no-shadow" [number]="account | currency : '' : 'symbol' : '1.0-0'" text="{{ 'REPORTS.ACCOUNT' | translate }}"></app-card-data>
         </span>
       </div>
-      <p>{{ "HOME.PAYMENT" | translate }}</p>
+      <p class="mb-0">{{ 'REPORTS.AVAILABLE_TEXT' | translate }}</p>
+      <p>{{ 'REPORTS.ACCOUNT_TEXT' | translate }}</p>
         <div class="ofertas pb-2">
         <img [fxShow.gt-xs]="false" [routerLink]="['/ofertas']" class="responsive-img w-100 cursor-pointer" src="assets/img/ofertas-mob.png" alt="ofertas">
         <img  [fxShow.xs]="false" [routerLink]="['/ofertas']" class="responsive-img  w-100 cursor-pointer" src="assets/img/ofertas-desk.png" alt="ofertas">

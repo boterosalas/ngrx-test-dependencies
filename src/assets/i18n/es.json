@@ -34,7 +34,7 @@
     "CUSTOMER_ID": "Ingrese la cédula del tomador del seguro",
     "CATEGORIES": "Categorías",
     "REFERENCE_TEXT": "O puedes referenciar a un cliente con su número de cédula",
-    "TRIPS_MSJ": "(refiere con cédula, si y solo si, tú serás quien pague en Viajes Éxito)",
+    "TRIPS_MSJ": "Refiere con cedula si y solo si, tu seras quien pague en Viajes Exito",
     "REFERENCE": "Referenciar",
     "REFERENCE_IDENTIFICATION": "Ingresa la cédula del cliente a referir"
   },
@@ -226,7 +226,11 @@
     "AMOUNT": "MONTO",
     "BANK": "BANCO DONDE SE PAGÓ",
     "UPLOAD_FILE": "Carga un archivo con el reporte de pagos de las comisiones del último periodo de corte",
-    "SELECT_DATE": "Selecciona las fechas para descargar un archivo con todas las transacciones de todos los usuarios"
+    "SELECT_DATE": "Selecciona las fechas para descargar un archivo con todas las transacciones de todos los usuarios",
+    "AVAILABLE": "Disponible*",
+    "AVAILABLE_TEXT": "*Este valor te será consignado en el próximo pago",
+    "ACCOUNT": "En Cuenta**",
+    "ACCOUNT_TEXT": "**Estamos validando estas compras, una vez el negocio confirme los pagos, tu comisión pasará a estado disponible."
   },
   "USERS": {
     "USERS": "Usuarios",

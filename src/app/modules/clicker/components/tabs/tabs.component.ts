@@ -77,7 +77,7 @@ export class TabsComponent extends MatPaginatorIntl
       return startIndex + 1 + " de " + endIndex + " productos de " + length;
     };
   }
-
+  @ViewChild("templateTrips", { static: false }) templateTrips: TemplateRef<any>;
   @ViewChild("templateDialog", { static: false }) template: TemplateRef<any>;
   @ViewChild("templateDialogAssured", { static: false })
   templateAssured: TemplateRef<any>;
@@ -135,7 +135,7 @@ export class TabsComponent extends MatPaginatorIntl
   slideConfig = {
     slidesToShow: 5,
     slidesToScroll: 5,
-    infinite: true,
+    infinite: false,
     dots: true,
     dotClass: "slick-dots orange",
     autoplay: false,
@@ -272,12 +272,14 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
           this.showNotFound = true;
           this.showResults = false;
         }
+        
         dataLayer.push({
           event: 'pushEventGA',
           categoria: 'Inicio',
           accion: 'ClicFiltroExitocom',
           etiqueta: term
         });
+
       },
       error => {
         this.loading.hide();
@@ -669,7 +671,7 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     const id = trip.productId;
     const img = trip.imageurl;
     const price = trip.commission;
-    const template = this.template;
+    const template = this.templateTrips;
     const showClose = false;
     const showCloseIcon = true;
     const showProduct = true;
