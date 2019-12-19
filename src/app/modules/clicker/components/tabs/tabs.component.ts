@@ -255,12 +255,11 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
         this.productsList = JSON.parse(resp.json);
         this.totalItems = resp.total;
 
-       
-        
         if (this.productsList.length > 0) {
           this.showResults = true;
           this.showNotFound = false;
-          this.productsList = this.productsList.map(_product => {
+          let productListCopy = [...this.productsList];
+          this.productsList = productListCopy.map(_product => {
             _product.items = _product.items.sort((a, b)  => {
               return b.sellers[0].commertialOffer.Price - a.sellers[0].commertialOffer.Price
             });
