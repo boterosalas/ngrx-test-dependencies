@@ -88,7 +88,7 @@ export class LoginformComponent implements OnInit, OnDestroy {
           dataLayer.push({
             event: 'pushEventGA',
             categoria: 'Inicio',
-            accion: 'IniciarSesión ClicLateral @Correo',
+            accion: 'ClicLateral',
             etiqueta: this.loginForm.value.Username
           });
 

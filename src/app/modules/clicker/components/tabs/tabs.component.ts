@@ -396,33 +396,6 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     this.idCustomerForm.reset();
     setTimeout(() => {
       this.saveLink();
-      // if(document.querySelector('#facebook')) {
-
-      //   document.querySelector('#facebook').classList.add("gtmInicioClicFiltroExitocomFacebook");
-      //   document.querySelector('#facebook button').classList.add("gtmInicioClicFiltroExitocomFacebook");
-      //   document.querySelector('#facebook svg').classList.add("gtmInicioClicFiltroExitocomFacebook");
-      //   document.querySelectorAll('#facebook div').forEach(item => {
-      //     item.classList.add("gtmInicioClicFiltroExitocomFacebook");
-      //   });
-      //   document.querySelector('#facebook fa-icon').classList.add("gtmInicioClicFiltroExitocomFacebook");
-
-      //   document.querySelector('#twitter').classList.add("gtmInicioClicFiltroExitocomTwitter");
-      //   document.querySelector('#twitter button').classList.add("gtmInicioClicFiltroExitocomTwitter");
-      //   document.querySelector('#twitter svg').classList.add("gtmInicioClicFiltroExitocomTwitter");
-      //   document.querySelectorAll('#twitter div').forEach(item => {
-      //     item.classList.add("gtmInicioClicFiltroExitocomTwitter");
-      //   });
-      //   document.querySelector('#twitter fa-icon').classList.add("gtmInicioClicFiltroExitocomTwitter");
-
-      //   document.querySelector('#whatsapp').classList.add("gtmInicioClicFiltroExitocomWhatsapp");
-      //   document.querySelector('#whatsapp button').classList.add("gtmInicioClicFiltroExitocomWhatsapp");
-      //   document.querySelector('#whatsapp svg').classList.add("gtmInicioClicFiltroExitocomWhatsapp");
-      //   document.querySelectorAll('#whatsapp div').forEach(item => {
-      //     item.classList.add("gtmInicioClicFiltroExitocomWhatsapp");
-      //   });
-      //   document.querySelector('#whatsapp fa-icon').classList.add("gtmInicioClicFiltroExitocomWhatsapp");
-
-      // }
     }, 1500);
     this.formShareLink();
     const title = product.productName;
