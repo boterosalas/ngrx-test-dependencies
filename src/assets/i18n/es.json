@@ -34,7 +34,7 @@
     "CUSTOMER_ID": "Ingrese la cédula del tomador del seguro",
     "CATEGORIES": "Categorías",
     "REFERENCE_TEXT": "O puedes referenciar a un cliente con su número de cédula",
-    "TRIPS_MSJ": "Refiere con cedula si y solo si, tu seras quien pague en Viajes Exito",
+    "TRIPS_MSJ": "Refiere con cédula, si y solo si, tú serás quien pague en Viajes Éxito",
     "REFERENCE": "Referenciar",
     "REFERENCE_IDENTIFICATION": "Ingresa la cédula del cliente a referir"
   },
@@ -101,7 +101,7 @@
     "TITLE_SEARCH": "Busca y crea un link",
     "DESCRIPTION_SEARCH": "Elige el negocio asociado, selecciona un producto o servicio y compártelo para ganar ingresos adicionales.",
     "MY_COMMISSIONS":"Mis comisiones",
-    "PAYMENT":"*Este valor te será consignado en el próximo pago"
+    "PAYMENT":"*Este valor te será consignado en el próximo pago."
   },
   "HEADER": {
     "PROFILE": "Mi perfil",

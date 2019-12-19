@@ -1,6 +1,6 @@
 <h2 class="border-bottom-orange-init">{{ 'MONTH_RESUME.TITLE' | translate }}</h2>
 
-<div class="stadistic" fxLayout.gt-xs="row"  class="mr-2" fxLayout.xs="column" fxLayoutGap.xs="30px" fxLayoutGap.gt-xs="20px" fxLayoutAlign.xs="start center"  fxLayoutAlign.gt-xs="flex-start flex-start">
+<div class="stadistic" fxLayout.gt-xs="row"  class="mr-2" fxLayout.xs="column" fxLayoutGap.xs="30px" fxLayoutGap.gt-xs="0px" fxLayoutAlign.xs="start center"  fxLayoutAlign.gt-xs="flex-start flex-start">
     <div fxLayout="row" fxLayoutGap.xs="20px" fxLayoutAlign="space-around">
     <div fxLayout="column" fxFLex="50" class="card">
         <span class="number">{{totalComissions | currency : '' : 'symbol' : '1.0-0'}}</span>
@@ -22,6 +22,7 @@
         [data]="data"
         [columnNames]="columnNames"
         [options]="options"
+        width = '380'
         ></google-chart>
     </div>
     <div *ngIf="data.length === 0" class="pr-5 mr-2">

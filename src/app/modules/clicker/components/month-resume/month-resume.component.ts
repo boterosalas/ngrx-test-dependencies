@@ -48,7 +48,7 @@ export class MonthResumeComponent implements OnInit, OnDestroy {
     legend: { position: "top", alignment: "center" }
   };
 
-  width = 550;
+  width = 350;
   height = 400;
 
   ngOnInit() {
