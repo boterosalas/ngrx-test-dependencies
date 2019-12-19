@@ -260,9 +260,11 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
           this.showNotFound = false;
           let productListCopy = [...this.productsList];
           this.productsList = productListCopy.map(_product => {
-            _product.items = _product.items.sort((a, b)  => {
+            
+            _product.items = [..._product.items].sort((a, b)  => {
               return b.sellers[0].commertialOffer.Price - a.sellers[0].commertialOffer.Price
             });
+
             return _product;
           });
           this.aliance([this.productsList]);
