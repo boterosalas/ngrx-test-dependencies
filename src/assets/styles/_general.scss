@@ -1002,3 +1002,16 @@ span.orange-border {
 .no-shadow .card {
   box-shadow: none !important;
 }
+
+.sharebutton{
+  width: 49px;
+  height: 49px;
+  border-radius: 50%;
+  border: none;
+  background: #ececec;
+  cursor: pointer;
+  i{
+    font-size: 19px;
+    color: #86888a;
+  }
+}
