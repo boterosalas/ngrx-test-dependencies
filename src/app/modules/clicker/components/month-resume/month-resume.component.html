@@ -13,6 +13,9 @@
     </div>
     </div>
     <div *ngIf="data.length > 0">
+        <span fxLayoutAlign="end end">
+            <a class="underline" mat-button [routerLink]="[ '/reportes']">Ver reportes</a>
+        </span>
         <google-chart
         [title]="title"
         [type]="type"

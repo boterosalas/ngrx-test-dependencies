@@ -1,5 +1,8 @@
 <div id="{{ data.id }}" class="modal-width">
   <div fxLayoutAlign="end">
+    <a id="closeDialog" matRipple (click)="onNoClick()"><mat-icon class="close cursor-pointer">close</mat-icon></a>
+</div>
+  <div fxLayoutAlign="end">
     <a
       id="closeDialog"
       matRipple
