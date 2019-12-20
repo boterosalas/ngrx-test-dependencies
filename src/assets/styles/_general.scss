@@ -329,6 +329,11 @@ button {
     margin: 0 auto !important;
     height: auto;
   }
+  .img-container-viajes{
+    img{
+      height: 100%;
+    }
+  }
 }
 
 .card-exito {
@@ -1013,5 +1018,17 @@ span.orange-border {
   i{
     font-size: 19px;
     color: #86888a;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .share-mobile{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .share-desktop{
+    display: none;
   }
 }

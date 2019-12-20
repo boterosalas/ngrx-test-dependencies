@@ -29,6 +29,7 @@ import { LinksService } from "src/app/services/links.service";
 import { environment } from "src/environments/environment";
 import { TokenService } from "src/app/services/token.service";
 import { ResponseService } from "src/app/interfaces/response";
+import { NgNavigatorShareService } from 'ng-navigator-share';
 import Swal from "sweetalert2";
 declare var dataLayer: any
 
@@ -39,6 +40,7 @@ declare var dataLayer: any
 })
 export class TabsComponent extends MatPaginatorIntl
   implements OnInit, OnDestroy {
+  private ngNavigatorShareService: NgNavigatorShareService;
   constructor(
     private sp: ContentService,
     private loading: LoaderService,
@@ -49,10 +51,11 @@ export class TabsComponent extends MatPaginatorIntl
     private auth: AuthService,
     private content: ContentService,
     private links: LinksService,
-    private token: TokenService
+    private token: TokenService,
+    ngNavigatorShareService: NgNavigatorShareService
   ) {
     super();
-
+    this.ngNavigatorShareService = ngNavigatorShareService;
     /**
      * Traduccion del paginador
      */
@@ -859,4 +862,18 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     // this.idCustomerForm.controls.identification.setValue('');
     this.idCustomerForm.reset();
   }
+
+  share() {
+    this.ngNavigatorShareService.share({
+      title: '',
+      text: '',
+      url: this.urlshorten
+    }).then( (response) => {
+      console.log(response);
+    })
+    .catch( (error) => {
+      console.log(error);
+    });
+  }
+
 }
