@@ -8,7 +8,6 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { ProductComponent } from "./components/product/product.component";
 import { TranslateModule } from "@ngx-translate/core";
 import { DialogComponent } from "../shared/components/dialog/dialog.component";
-import { ShareButtonsModule } from "@ngx-share/buttons";
 import { SliderComponent } from "./components/slider/slider.component";
 import { SlickCarouselModule } from "ngx-slick-carousel";
 import { TabsComponent } from "./components/tabs/tabs.component";
@@ -28,6 +27,7 @@ import { DialogEditComponent } from "./components/dialog-edit/dialog-edit.compon
 import { MatPasswordStrengthModule } from "@angular-material-extensions/password-strength";
 import { CardDataComponent } from './components/card-data/card-data.component';
 import { DialogHistoryComponent } from './components/dialog-history/dialog-history.component';
+import { ShareModule } from '@ngx-share/core';
 
 const routes: Routes = [
   {
@@ -73,7 +73,7 @@ const routes: Routes = [
     TranslateModule,
     FlexLayoutModule,
     FormsModule,
-    ShareButtonsModule,
+    ShareModule,
     DragScrollModule,
     MatPasswordStrengthModule,
     RouterModule.forChild(routes)
