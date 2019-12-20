@@ -317,6 +317,8 @@
     <button  theme="circles-dark" shareButton="facebook" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomFacebook mr-2"><i class="fab fa-facebook-f gtmInicioClicFiltroExitocomFacebook"></i></button>
     <button  theme="circles-dark" shareButton="twitter" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomTwitter mr-2"><i class="fab fa-twitter gtmInicioClicFiltroExitocomTwitter"></i></button>
     <button  theme="circles-dark" shareButton="whatsapp" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomWhatsapp"><i class="fab fa-whatsapp gtmInicioClicFiltroExitocomWhatsapp"></i></button>
+    <button  mat-raised-button class="orange-border mb-2 mt-2 " (click)="share()">compartir</button>
+  
   </div>
   <p class="mt-0">{{'GENERIC.TRIPS_MSJ' | translate}}</p>
   <button mat-raised-button class="orange-border mb-2" color="primary" id="reference" (click)="showReference()">{{'GENERIC.REFERENCE' | translate}}</button>
