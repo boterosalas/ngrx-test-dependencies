@@ -275,6 +275,10 @@ describe("OffersComponent", () => {
     component.prev2();
     component.prev3();
   });
+
+  it('share mobile', () => {
+    component.share();
+   });
   
 
 });
