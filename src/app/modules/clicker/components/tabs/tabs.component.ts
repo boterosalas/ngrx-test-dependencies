@@ -87,7 +87,7 @@ export class TabsComponent extends MatPaginatorIntl
 
   term: string;
   private subscription: Subscription = new Subscription();
-  productsList: Array<SearchProduct>;
+  productsList: Array<any>;
   showResults: boolean;
   showNotFound: boolean;
   paginate: string;
