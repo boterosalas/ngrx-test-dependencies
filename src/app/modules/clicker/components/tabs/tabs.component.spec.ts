@@ -1589,6 +1589,10 @@ describe("TabsComponent", () => {
       component.showReference();
       expect(component.reference).toBeTruthy();
     });
+
+    it('share mobile', () => {
+     component.share();
+    });
     
 
   });
