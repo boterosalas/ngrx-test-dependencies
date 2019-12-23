@@ -30,5 +30,9 @@ describe('TopComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('close component', () => {
+    component.closeComponent();
+  });
   
 });

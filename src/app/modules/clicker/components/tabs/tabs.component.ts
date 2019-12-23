@@ -29,6 +29,7 @@ import { LinksService } from "src/app/services/links.service";
 import { environment } from "src/environments/environment";
 import { TokenService } from "src/app/services/token.service";
 import { ResponseService } from "src/app/interfaces/response";
+import { NgNavigatorShareService } from 'ng-navigator-share';
 import Swal from "sweetalert2";
 declare var dataLayer: any
 
@@ -39,6 +40,7 @@ declare var dataLayer: any
 })
 export class TabsComponent extends MatPaginatorIntl
   implements OnInit, OnDestroy {
+  private ngNavigatorShareService: NgNavigatorShareService;
   constructor(
     private sp: ContentService,
     private loading: LoaderService,
@@ -49,10 +51,11 @@ export class TabsComponent extends MatPaginatorIntl
     private auth: AuthService,
     private content: ContentService,
     private links: LinksService,
-    private token: TokenService
+    private token: TokenService,
+    ngNavigatorShareService: NgNavigatorShareService
   ) {
     super();
-
+    this.ngNavigatorShareService = ngNavigatorShareService;
     /**
      * Traduccion del paginador
      */
@@ -77,7 +80,7 @@ export class TabsComponent extends MatPaginatorIntl
       return startIndex + 1 + " de " + endIndex + " productos de " + length;
     };
   }
-
+  @ViewChild("templateTrips", { static: false }) templateTrips: TemplateRef<any>;
   @ViewChild("templateDialog", { static: false }) template: TemplateRef<any>;
   @ViewChild("templateDialogAssured", { static: false })
   templateAssured: TemplateRef<any>;
@@ -87,7 +90,7 @@ export class TabsComponent extends MatPaginatorIntl
 
   term: string;
   private subscription: Subscription = new Subscription();
-  productsList: SearchProduct;
+  productsList: Array<any>;
   showResults: boolean;
   showNotFound: boolean;
   paginate: string;
@@ -123,6 +126,7 @@ export class TabsComponent extends MatPaginatorIntl
   listPriceAliance: any;
   totalPriceAliance: any;
   totalPriceArrays = [];
+  price = [];
   totalArraysDesc: any;
   alianceSplit: string;
   alianceSplit2: string;
@@ -134,7 +138,7 @@ export class TabsComponent extends MatPaginatorIntl
   slideConfig = {
     slidesToShow: 5,
     slidesToScroll: 5,
-    infinite: true,
+    infinite: false,
     dots: true,
     dotClass: "slick-dots orange",
     autoplay: false,
@@ -227,6 +231,7 @@ export class TabsComponent extends MatPaginatorIntl
   }
 
   order(option) {
+    this.pageIndex = 0;
     this.searchProductPaginate(this.paginate, option, 1 , this.pageTo);
     this.orderValue = option;
   }
@@ -250,23 +255,34 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     this.subscription = this.sp.getProductsPagination(params).subscribe(
       (resp: any) => {
         this.loading.hide();
-        const parsed = JSON.parse(resp.json);
+        this.productsList = JSON.parse(resp.json);
         this.totalItems = resp.total;
-        if (parsed.length > 0) {
+
+        if (this.productsList.length > 0) {
           this.showResults = true;
           this.showNotFound = false;
-          this.productsList = JSON.parse(resp.json);
+          let productListCopy = [...this.productsList];
+          this.productsList = productListCopy.map(_product => {
+            
+            _product.items = [..._product.items].sort((a, b)  => {
+              return b.sellers[0].commertialOffer.Price - a.sellers[0].commertialOffer.Price
+            });
+
+            return _product;
+          });
           this.aliance([this.productsList]);
         } else {
           this.showNotFound = true;
           this.showResults = false;
         }
+        
         dataLayer.push({
           event: 'pushEventGA',
           categoria: 'Inicio',
           accion: 'ClicFiltroExitocom',
           etiqueta: term
         });
+
       },
       error => {
         this.loading.hide();
@@ -383,33 +399,6 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     this.idCustomerForm.reset();
     setTimeout(() => {
       this.saveLink();
-      // if(document.querySelector('#facebook')) {
-
-      //   document.querySelector('#facebook').classList.add("gtmInicioClicFiltroExitocomFacebook");
-      //   document.querySelector('#facebook button').classList.add("gtmInicioClicFiltroExitocomFacebook");
-      //   document.querySelector('#facebook svg').classList.add("gtmInicioClicFiltroExitocomFacebook");
-      //   document.querySelectorAll('#facebook div').forEach(item => {
-      //     item.classList.add("gtmInicioClicFiltroExitocomFacebook");
-      //   });
-      //   document.querySelector('#facebook fa-icon').classList.add("gtmInicioClicFiltroExitocomFacebook");
-
-      //   document.querySelector('#twitter').classList.add("gtmInicioClicFiltroExitocomTwitter");
-      //   document.querySelector('#twitter button').classList.add("gtmInicioClicFiltroExitocomTwitter");
-      //   document.querySelector('#twitter svg').classList.add("gtmInicioClicFiltroExitocomTwitter");
-      //   document.querySelectorAll('#twitter div').forEach(item => {
-      //     item.classList.add("gtmInicioClicFiltroExitocomTwitter");
-      //   });
-      //   document.querySelector('#twitter fa-icon').classList.add("gtmInicioClicFiltroExitocomTwitter");
-
-      //   document.querySelector('#whatsapp').classList.add("gtmInicioClicFiltroExitocomWhatsapp");
-      //   document.querySelector('#whatsapp button').classList.add("gtmInicioClicFiltroExitocomWhatsapp");
-      //   document.querySelector('#whatsapp svg').classList.add("gtmInicioClicFiltroExitocomWhatsapp");
-      //   document.querySelectorAll('#whatsapp div').forEach(item => {
-      //     item.classList.add("gtmInicioClicFiltroExitocomWhatsapp");
-      //   });
-      //   document.querySelector('#whatsapp fa-icon').classList.add("gtmInicioClicFiltroExitocomWhatsapp");
-
-      // }
     }, 1500);
     this.formShareLink();
     const title = product.productName;
@@ -658,7 +647,7 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     const id = trip.productId;
     const img = trip.imageurl;
     const price = trip.commission;
-    const template = this.template;
+    const template = this.templateTrips;
     const showClose = false;
     const showCloseIcon = true;
     const showProduct = true;
@@ -873,4 +862,18 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     // this.idCustomerForm.controls.identification.setValue('');
     this.idCustomerForm.reset();
   }
+
+  share() {
+    this.ngNavigatorShareService.share({
+      title: '',
+      text: '',
+      url: this.urlshorten
+    }).then( (response) => {
+      console.log(response);
+    })
+    .catch( (error) => {
+      console.log(error);
+    });
+  }
+
 }

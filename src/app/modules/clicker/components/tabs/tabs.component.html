@@ -48,15 +48,13 @@
                 id="productTitle{{ i }}"
                 btnid="btnLink{{ i }}"
                 [productName]="product.productName"
-                [discount]="product.items[0].sellers[0].commertialOffer.ListPrice"
-                [aliance]="totalPriceArrays[i]"
                 [logo]="imgLogoAliance[i]"
+                [discount]="product.items[0].sellers[0].commertialOffer.ListPrice"
                 [price]="product.items[0].sellers[0].commertialOffer.Price"
-                productDescription=""
-                [image]="product.items[0].images[0].imageUrl"
+                [image]="!!product.items[0].images ? product.items[0].images[0].imageUrl : '/assets/img/Na.svg'"
                 [alt]="product.productName"
-                textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
                 [plu]="product.items[0].itemId"
+                textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
                 exito="true"
                 (infoProduct)="dataProduct(product);"
               ></app-product>
@@ -94,6 +92,7 @@
               [photo]="category.imageurl"
               category="true"
               home
+              Class= "m-0 white absolute size gtmIniCategoria{{i}}"
               (infoProduct)="dataCategory(category)"
             ></app-product>
           </div>
@@ -171,7 +170,7 @@
 
 
 
-<!-- template bottomsheet -->
+<!-- template exito -->
 
 <ng-template #templateDialog>
   <div *ngIf="!reference">
@@ -205,32 +204,19 @@
   </div>
   </form>
 
-  <div id="share">
-    <h3 class="border-bottom-orange-init">{{ "GENERIC.SHARE" | translate }}</h3>
-    <share-button
-      id="facebook"
-      [url]="urlshorten"
-      button="facebook"
-      theme="circles-dark"
-      class="gtmInicioClicFiltroExitocomFacebook"
-    ></share-button>
-    <share-button
-      id="twitter"
-      [url]="urlshorten"
-      button="twitter"
-      theme="circles-dark"
-      class="gtmInicioClicFiltroExitocomTwitter"
-    ></share-button>
-    <share-button
-      id="whatsapp"
-      [url]="urlshorten"
-      button="whatsapp"
-      theme="circles-dark"
-      class="gtmInicioClicFiltroExitocomWhatsapp"
-    ></share-button>
+  <h3 class="border-bottom-orange-init">{{ "GENERIC.SHARE" | translate }}</h3>
+
+  <div class="share-desktop" id="share">
+    <button  theme="circles-dark" shareButton="facebook" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomFacebook mr-2"><i class="fab fa-facebook-f gtmInicioClicFiltroExitocomFacebook"></i></button>
+    <button  theme="circles-dark" shareButton="twitter" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomTwitter mr-2"><i class="fab fa-twitter gtmInicioClicFiltroExitocomTwitter"></i></button>
+    <button  theme="circles-dark" shareButton="whatsapp" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomWhatsapp"><i class="fab fa-whatsapp gtmInicioClicFiltroExitocomWhatsapp"></i></button>  
   </div>
-  <p class="mb-0">{{'GENERIC.REFERENCE_TEXT' | translate}}</p>
-  <p class="mt-0">{{'GENERIC.TRIPS_MSJ' | translate}}</p>
+
+  <div class="share-mobile">
+    <button  mat-raised-button class="gtmrs orange mb-2 mt-2 " color="orange" (click)="share()"> <span class="gtmrs">Compartir</span> </button>
+  </div>
+
+  <p>{{'GENERIC.REFERENCE_TEXT' | translate}}</p>
   <button mat-raised-button class="orange-border mb-2" color="primary" id="reference" (click)="showReference()">{{'GENERIC.REFERENCE' | translate}}</button>
 </div>
   <br>
@@ -286,18 +272,132 @@
       <div fxLayout="column">
       <button
         mat-raised-button
-        class="button button-100 p-1"
+        class="button button-100 p-1 gtmCrearCedulaSiguiente"
         id="recoverPassword"
         color="orange"
         (click)="saveLinkReference()"
         [disabled]="!idCustomerForm.valid"
       >
-       {{ "GENERIC.ACCEPT" | translate }}
+       <span class="gtmCrearCedulaSiguiente">{{ "GENERIC.ACCEPT" | translate }}</span>
       </button>
      </div>
     </form>
 
 </ng-template>
+
+<ng-template #templateTrips>
+  <div *ngIf="!reference">
+  <form [formGroup]="formLink">
+    <div fxLayout="row" fxLayoutGap="20px"> 
+    <div fxLayout="column" fxFlex="90">
+      <mat-form-field appearance="dashed" class="dashed mt-2">
+        <input
+          id="url"
+          matInput
+          formcontrolName="link"
+          [value]="urlshorten"
+          #linkInput
+          readonly
+        />
+      </mat-form-field>
+    </div>
+    <div fxLayout="column" fxFlex="10" class="mt-2">
+      <button
+        mat-mini-fab
+        id="btnCopy"
+        color="orange"
+        class="gtmInicioClicFiltroExitocomCopiarLink"
+        (click)="copyInputMessage(linkInput)"
+      >
+        <span fxLayoutAlign="space-between center" class="gtmInicioClicFiltroExitocomCopiarLink">
+          <mat-icon class="gtmInicioClicFiltroExitocomCopiarLink" matSuffix>link</mat-icon>
+        </span>
+      </button>
+    </div>
+  </div>
+  </form>
+
+  <h3 class="border-bottom-orange-init">{{ "GENERIC.SHARE" | translate }}</h3>
+
+  <div class="share-desktop" id="share">
+    <button  theme="circles-dark" shareButton="facebook" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomFacebook mr-2"><i class="fab fa-facebook-f gtmInicioClicFiltroExitocomFacebook"></i></button>
+    <button  theme="circles-dark" shareButton="twitter" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomTwitter mr-2"><i class="fab fa-twitter gtmInicioClicFiltroExitocomTwitter"></i></button>
+    <button  theme="circles-dark" shareButton="whatsapp" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomWhatsapp"><i class="fab fa-whatsapp gtmInicioClicFiltroExitocomWhatsapp"></i></button>  
+  </div>
+
+  <div class="share-mobile">
+    <button  mat-raised-button class="gtmrs orange mb-2 mt-2 " color="orange" (click)="share()"> <span class="gtmrs">Compartir</span> </button>
+  </div>
+
+  <p class="mt-0">{{'GENERIC.TRIPS_MSJ' | translate}}</p>
+  <button mat-raised-button class="orange mb-2 mt-2" color="primary" id="reference" (click)="showReference()"> {{'GENERIC.REFERENCE' | translate}}</button>
+</div>
+  <br>
+  <form class="forgotpassword-container" [formGroup]="idCustomerForm" fxLayout="column" *ngIf="reference">
+      <p>{{'GENERIC.REFERENCE_IDENTIFICATION' | translate}}</p>
+      <mat-form-field appearance="outline" class="mt-2">
+        <input
+          matInput
+          class="p-2"
+          id="idcustomer"
+          type="text"
+          placeholder="N° de Documento"
+          formControlName="identification"
+          required
+        />
+        <mat-error
+        id="reuiredId"
+        *ngIf="
+          idCustomerForm.controls.identification.invalid &&
+          idCustomerForm.controls.identification.errors.required
+        "
+        >{{
+          "GENERIC.REQUIRED" | translate: { formValue: "Número de documento" }
+        }}</mat-error
+      >
+    
+      <mat-error
+        id="maxId"
+        *ngIf="
+          idCustomerForm.controls.identification.invalid &&
+          idCustomerForm.controls.identification.errors.maxlength
+        "
+        >{{
+          "GENERIC.MAX_CHARACTERS"
+            | translate
+              : {
+                  maxchar:
+                    idCustomerForm.controls.identification.errors.maxlength.requiredLength
+                }
+        }}</mat-error
+      >
+    
+      <mat-error
+        id="numberId"
+        *ngIf="
+          idCustomerForm.controls.identification.invalid &&
+          idCustomerForm.controls.identification.errors.pattern
+        "
+        >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+      >
+      </mat-form-field>
+    
+      <div fxLayout="column">
+      <button
+        mat-raised-button
+        class="button button-100 p-1 gtmCrearCedulaSiguiente"
+        id="recoverPassword"
+        color="orange"
+        (click)="saveLinkReference()"
+        [disabled]="!idCustomerForm.valid"
+      >
+       <span class="gtmCrearCedulaSiguiente">{{ "GENERIC.ACCEPT" | translate }}</span>
+      </button>
+     </div>
+    </form>
+
+</ng-template>
+
 
 <!-- template categories -->
 
@@ -321,39 +421,30 @@
       <button
         mat-mini-fab
         id="btnCopy"
-        class="gtmOfertasClicLinkCopiarLink"
+        class="gtmIniCategoriaCopiarLin"
         color="orange"
         (click)="copyInputMessage(linkInput)"
       >
-        <span fxLayoutAlign="space-between center" class="gtmOfertasClicLinkCopiarLink">
-          <mat-icon class="gtmOfertasClicLinkCopiarLink" matSuffix>link</mat-icon>
+        <span fxLayoutAlign="space-between center" class="gtmIniCategoriaCopiarLin">
+          <mat-icon class="gtmIniCategoriaCopiarLin" matSuffix>link</mat-icon>
         </span>
       </button>
     </div>
   </div>
   </form>
 
-  <div id="share">
-    <h3 class="border-bottom-orange-init">{{ "GENERIC.SHARE" | translate }}</h3>
-    <share-button
-      id="facebook"
-      [url]="urlshorten"
-      button="facebook"
-      theme="circles-dark"
-    ></share-button>
-    <share-button
-      id="twitter"
-      [url]="urlshorten"
-      button="twitter"
-      theme="circles-dark"
-    ></share-button>
-    <share-button
-      id="whatsapp"
-      [url]="urlshorten"
-      button="whatsapp"
-      theme="circles-dark"
-    ></share-button>
+  <h3 class="border-bottom-orange-init">{{ "GENERIC.SHARE" | translate }}</h3>
+
+  <div class="share-desktop" id="share">
+    <button  theme="circles-dark" shareButton="facebook" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomFacebook mr-2"><i class="fab fa-facebook-f gtmInicioClicFiltroExitocomFacebook"></i></button>
+    <button  theme="circles-dark" shareButton="twitter" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomTwitter mr-2"><i class="fab fa-twitter gtmInicioClicFiltroExitocomTwitter"></i></button>
+    <button  theme="circles-dark" shareButton="whatsapp" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomWhatsapp"><i class="fab fa-whatsapp gtmInicioClicFiltroExitocomWhatsapp"></i></button>  
   </div>
+
+  <div class="share-mobile">
+    <button  mat-raised-button class="gtmrs orange mb-2 mt-2 " color="orange" (click)="share()"> <span class="gtmrs">Compartir</span> </button>
+  </div>
+
 </div>
 </ng-template>
 
@@ -414,13 +505,13 @@
             <div fxLayout="column">
             <button
               mat-raised-button
-              class="button button-100 p-1"
+              class="button button-100 p-1 gtmCrearCedulaSiguiente"
               id="recoverPassword"
               color="orange"
               (click)="nextStep()"
               [disabled]="!idCustomerForm.valid"
             >
-              <span fxLayout="row" fxLayoutAlign="space-between center" class="pl-3 pr-3">
+              <span fxLayout="row" fxLayoutAlign="space-between center" class="pl-3 pr-3 gtmCrearCedulaSiguiente">
                   {{ "GENERIC.NEXT" | translate }}
                   <mat-icon>arrow_forward</mat-icon>
                 </span>
@@ -461,27 +552,17 @@
         </div>
         </form>
 
-      <h3 class="border-bottom-orange-init">
-        {{ "GENERIC.SHARE" | translate }}
-      </h3>
-      <share-button
-        id="facebook"
-        [url]="urlshorten"
-        button="facebook"
-        theme="circles-dark"
-      ></share-button>
-      <share-button
-        id="twitter"
-        [url]="urlshorten"
-        button="twitter"
-        theme="circles-dark"
-      ></share-button>
-      <share-button
-        id="whatsapp"
-        [url]="urlshorten"
-        button="whatsapp"
-        theme="circles-dark"
-      ></share-button>
+        <h3 class="border-bottom-orange-init">{{ "GENERIC.SHARE" | translate }}</h3>
+
+        <div class="share-desktop" id="share">
+          <button  theme="circles-dark" shareButton="facebook" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomFacebook mr-2"><i class="fab fa-facebook-f gtmInicioClicFiltroExitocomFacebook"></i></button>
+          <button  theme="circles-dark" shareButton="twitter" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomTwitter mr-2"><i class="fab fa-twitter gtmInicioClicFiltroExitocomTwitter"></i></button>
+          <button  theme="circles-dark" shareButton="whatsapp" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomWhatsapp"><i class="fab fa-whatsapp gtmInicioClicFiltroExitocomWhatsapp"></i></button>  
+        </div>
+      
+        <div class="share-mobile">
+          <button  mat-raised-button class="gtmrs orange mb-2 mt-2 " color="orange" (click)="share()"> <span class="gtmrs">Compartir</span> </button>
+        </div>
     </div>
   </div>
 </ng-template>

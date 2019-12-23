@@ -11,6 +11,7 @@ import { distinctUntilChanged } from "rxjs/operators";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
 import { TokenService } from 'src/app/services/token.service';
+import { NgNavigatorShareService } from 'ng-navigator-share';
 
 @Component({
   selector: "app-offers",
@@ -19,7 +20,7 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class OffersComponent implements OnInit {
   @ViewChild("templateDialog", { static: false }) template: TemplateRef<any>;
-
+  private ngNavigatorShareService: NgNavigatorShareService;
   date: any;
   plu: string;
   business: string;
@@ -41,8 +42,11 @@ export class OffersComponent implements OnInit {
     private dialog: MatBottomSheet,
     private fb: FormBuilder,
     private content: ContentService,
-    private token: TokenService
-  ) {}
+    private token: TokenService,
+    ngNavigatorShareService: NgNavigatorShareService
+  ) {
+    this.ngNavigatorShareService = ngNavigatorShareService;
+  }
 
   ngOnInit() {
     this.getOffers();
@@ -212,4 +216,18 @@ export class OffersComponent implements OnInit {
       this.mostsold = offer.mostsold;
     });
   }
+
+  share() {
+    this.ngNavigatorShareService.share({
+      title: '',
+      text: '',
+      url: this.urlshorten
+    }).then( (response) => {
+      console.log(response);
+    })
+    .catch( (error) => {
+      console.log(error);
+    });
+  }
+
 }

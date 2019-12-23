@@ -21,18 +21,39 @@
 <ng-template #templateCardReport>
   <p id="reportSell">{{ 'REPORTS.DOWNLOAD_REPORT' | translate }}</p>
     <a href="{{fileUrl}}"> 
-      <button id="downloadReport" mat-raised-button color="orange"> {{ 'REPORTS.DOWNLOAD' | translate }} <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
+      <button id="downloadReport" class="mb-3" mat-raised-button color="orange"> {{ 'REPORTS.DOWNLOAD' | translate }} <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
     </a> 
+
+    <p>{{ 'REPORTS.UPLOAD_FILE' | translate }}</p>
+
+    <h4  id="trips" class="title-upload m-0">{{ 'REPORTS.PAYMENT_REPORTS' | translate }}</h4>
+    <app-load-form-file [fileForm]="fileFormPayment"  [nameFile]="nameFilePayment" label="Payment" (uploadFile)="onFileChangePayment($event)"></app-load-form-file>  
+    <mat-error *ngIf="showErrorExtPayment" class="small">
+      {{ "GENERIC.INVALID_FORMAT_FILE" | translate }}
+    </mat-error>
+    <br>
+    <p>{{ 'REPORTS.SELECT_DATE' | translate }}</p>
+
+    <form
+    [formGroup]="dateFormSell"
+    class="downloadUsers user-transactions"
+    >
+        <mat-icon class="icon-date" matPrefix>date_range</mat-icon>
+        <input (change)="change()" formControlName="dateRange" [locale]="locale" drops="up" placeholder="Seleccione fechas" type="text" [maxDate]="maxDate"  ngxDaterangepickerMd class="form-control border-input mat-elevation-z1 p-2 border-radius"/>
+        <button mat-raised-button color="orange" (click)="getReportClickam()" id="download-users" class="ml-2" [disabled]="!dateFormSell.valid || disButon">Exportar <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
+</form>
+
 </ng-template>
 
 <ng-template #templateCardCross>
   <br>
+  <p>{{ 'REPORTS.DOWNLOAD_FILE' | translate }}</p>
   <form
   [formGroup]="dateForm"
 >
   <div fxLayout="row">
     <mat-form-field class="pr-2">
-        <input matInput [matDatepicker]="picker" [max]="maxDate"  placeholder="Fecha inicial" formControlName="dateStart" readonly>
+        <input matInput [matDatepicker]="picker" [max]="maxDate2"  placeholder="Fecha inicial" formControlName="dateStart" readonly>
         <mat-datepicker-toggle matSuffix [for]="picker" id="dateStart"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-error
@@ -49,7 +70,7 @@
 
 
     <mat-form-field>
-        <input matInput [max]="maxDate" [min]="dateForm.controls.dateStart.value" [matDatepicker]="picker2" placeholder="Fecha final" formControlName="dateEnd" readonly>
+        <input matInput [max]="maxDate2" [min]="dateForm.controls.dateStart.value" [matDatepicker]="picker2" placeholder="Fecha final" formControlName="dateEnd" readonly>
         <mat-datepicker-toggle matSuffix id="dateEnd" [for]="picker2" [disabled]="dateForm.controls.dateStart.value === ''"></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
         <mat-error
@@ -73,12 +94,10 @@
       >
       </mat-form-field>
     </div>
-
-    
   <br>
-     <button (click)="downloadReferal()" id="downloadReportSell" mat-raised-button color="orange" [disabled]="!dateForm.valid"> {{ 'REPORTS.DOWNLOAD' | translate }} <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
+     <button  (click)="downloadReferal()" id="downloadReportSell" mat-raised-button color="orange" [disabled]="!dateForm.valid"> {{ 'REPORTS.DOWNLOAD' | translate }} <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
+  <br>
   </form>
-
     <p id="cross">{{ 'REPORTS.UPLOAD' | translate }}</p>
     <br>
     <h4  id="trips" class="title-upload m-0">{{ 'REPORTS.SELLS' | translate }}</h4>
@@ -87,11 +106,5 @@
         {{ "GENERIC.INVALID_FORMAT_FILE" | translate }}
       </mat-error>
     <br>
-
-    <!-- <h4 id="assured" ref="#inputAssured" class="title-upload">{{ 'REPORTS.ASSURED' | translate }}</h4>
-    <app-load-form-file [fileForm]="fileFormAssured"  [nameFile]="nameFileAssured" label="assured" (uploadFile)="onFileChangeAssured($event)"></app-load-form-file>  
-    <mat-error *ngIf="showErrorExtAssured" class="small">
-      {{ "GENERIC.INVALID_FORMAT_FILE" | translate }}
-    </mat-error> -->
 
 </ng-template>

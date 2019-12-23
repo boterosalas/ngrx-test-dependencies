@@ -17,16 +17,19 @@ export class LinksService {
   // comission = 'commissions';
   reports = 'Reports/ClickerPerformanceReport';
   apiKPI = 'Reports/getKPI';
-  apiUsersExcel= 'Reports/getUsersExcel'
-  apiAuditExcel= 'Reports/getAudit'
-  apiUsers= 'Reports/getUsers'
-  insurance = 'Insurance/ProcessFiles'
+  apiUsersExcel= 'Reports/getUsersExcel';
+  apiAuditExcel= 'Reports/getAudit';
+  apigetReportClickam= 'Reports/getReportClickam';
+  apiUsers= 'Reports/getUsers';
+  insurance = 'Insurance/ProcessFiles';
   apiSaveLink = 'Link/SaveLink';
   apiPostReferrrals = 'Link/downloadReferrals';
   apiGetTotalLinks = 'Link/GetTotalLinksGenerated';
   apiFile = 'commissions/getUrlFileCommissions';
+  apigetDetailPaymentClicker = 'commissions/getDetailPaymentClicker';
   apigenerateCommissions = 'commissions/generateCommissionsFile';
   apiHistory = 'commissions/getPaymentHistoryClicker';
+  apiupdatePaymentDate= 'commissions/updatePaymentDate';
 
   public saveLink(SaveLink: any) {
     const token = localStorage.getItem("ACCESS_TOKEN");
@@ -147,6 +150,24 @@ export class LinksService {
       })
     );
   }
+  
+  public getDetailPaymentClicker(date:string) {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.get((`${this.urlComission}/${this.apigetDetailPaymentClicker}?paymentDate=${date}`), httpOptions).pipe(
+      map((resp: ResponseService) => {
+        return resp.objectResponse;
+      })
+    );
+  }
 
   public getUsersExcel(params: any) {
     const token = localStorage.getItem("ACCESS_TOKEN");
@@ -176,6 +197,20 @@ export class LinksService {
     return this.http.get((`${this.urlComission}${this.apiAuditExcel}?email=${params.email}&start=${params.start}&end=${params.end}`), httpOptions);
   }
 
+  public getReportClickam(params: any) {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.get((`${this.urlComission}${this.apigetReportClickam}?email=${params.email}&start=${params.start}&end=${params.end}`), httpOptions);
+  }
+
   public sendfile(formdata) {
       let token = localStorage.getItem("ACCESS_TOKEN");
       let authorization = token;
@@ -192,6 +227,22 @@ export class LinksService {
     };
     return this.http.post((`${environment.URL_COMISSION}${this.apigenerateCommissions}`), formdata , httpOptions );
   }
+
+  public updatePaymentDate(formdata) {
+    let token = localStorage.getItem("ACCESS_TOKEN");
+    let authorization = token;
+    let data = new FormData();
+    data.append("FileBase64", formdata.fileBase64);
+    data.append("email", formdata.email);
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + authorization,
+    })
+  };
+  return this.http.post((`${environment.URL_COMISSION}${this.apiupdatePaymentDate}`), formdata , httpOptions );
+}
 
   public searchUsers(term?: any) {
     const token = localStorage.getItem("ACCESS_TOKEN");

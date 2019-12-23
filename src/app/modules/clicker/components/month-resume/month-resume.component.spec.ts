@@ -18,10 +18,10 @@ describe('MonthResumeComponent', () => {
   let mockLinksService = jasmine.createSpyObj("LinksService", ["getReports"]);
 
   let resume = {
-    MonthResume: {
-      TotalCommissions: 14806530,
-      TotalLink: 189,
-      DaysResume: [
+    monthResume: {
+      totalCommissions: 14806530,
+      totalLink: 189,
+      daysResume: [
         ["10/12/2019", 0, 490320],
         ["10/23/2019", 13, 12265210],
         ["10/25/2019", 11, 1299000],
@@ -31,11 +31,11 @@ describe('MonthResumeComponent', () => {
         ["11/06/2019", 0, 48000]
       ]
     },
-    GeneralResume: {
-      TotalCommissions: 14806530,
-      TotalLinks: 197,
-      TotalProducts: 56,
-      ConversionRate: 0.09137055837563451
+    generalResume: {
+      totalCommissions: 14806530,
+      totalLinks: 197,
+      totalProducts: 56,
+      conversionRate: 0.09137055837563451
     }
   };
 

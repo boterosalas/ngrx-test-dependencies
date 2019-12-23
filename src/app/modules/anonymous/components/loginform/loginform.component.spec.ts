@@ -11,11 +11,7 @@ import { of, Observable, throwError } from "rxjs";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterTestingModule } from "@angular/router/testing";
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-
-localStorage.setItem(
-      "ACCESS_TOKEN",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU"
-    );
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 
 describe("LoginformComponent", () => {
   let component: LoginformComponent;
@@ -61,6 +57,7 @@ describe("LoginformComponent", () => {
         RouterTestingModule.withRoutes([]),
         BrowserAnimationsModule,
         TranslateModule.forRoot({}),
+        MatPasswordStrengthModule
       ],
       providers: [
         { provide: Router, useValue: mockRouter},
@@ -98,10 +95,6 @@ describe("LoginformComponent", () => {
   });
 
   it("Login invalid", () => {
-    localStorage.setItem(
-      "ACCESS_TOKEN",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU"
-    );
     component.isSubmitted = false;
     component.loginForm.controls.Username.setValue("");
     component.loginForm.controls.Password.setValue("");
@@ -112,14 +105,13 @@ describe("LoginformComponent", () => {
   describe("Login invalid", () => {
 
     beforeEach(() => {
+      fixture = TestBed.createComponent(LoginformComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
       mockAuthService.login.and.returnValue(of(dataUserInvalid));
     });
 
     it("Login invalid", () => {
-      localStorage.setItem(
-        "ACCESS_TOKEN",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU"
-      );
       component.isSubmitted = true;
       component.loginForm.controls.Username.setValue(
         "david.betancur@pragma.com.co"
@@ -132,10 +124,6 @@ describe("LoginformComponent", () => {
 
   describe("invalid request", () => {
     beforeEach(() => {
-      // localStorage.setItem(
-      //   "ACCESS_TOKEN",
-      //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU"
-      // );
       mockAuthService.login.and.returnValue(throwError(InvalidRquest));
     });
 
@@ -144,7 +132,6 @@ describe("LoginformComponent", () => {
       component.loginForm.controls.Username.setValue("t@gmail.com");
       component.loginForm.controls.Password.setValue("123123");
       component.login();
-      // expect(mockAuthService.login).toHaveBeenCalled();
     });
   });
 });

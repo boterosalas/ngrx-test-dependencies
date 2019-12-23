@@ -229,6 +229,7 @@ describe("OffersComponent", () => {
     );
     fixture = TestBed.createComponent(OffersComponent);
     component = fixture.componentInstance;
+    window['slick'] = [];
     fixture.detectChanges();
   });
 
@@ -256,4 +257,28 @@ describe("OffersComponent", () => {
     component.date = "2019/09/09";
     component.saveLink();
   });
+
+  it('next', () => {
+    spyOn(component.slickModal, 'slickNext');
+    spyOn(component.slickModal2, 'slickNext');
+    spyOn(component.slickModal3, 'slickNext');
+    component.next();
+    component.next2();
+    component.next3();
+  });
+  
+  it('prev', () => {
+    spyOn(component.slickModal, 'slickPrev');
+    spyOn(component.slickModal2, 'slickPrev');
+    spyOn(component.slickModal3, 'slickPrev');
+    component.prev();
+    component.prev2();
+    component.prev3();
+  });
+
+  it('share mobile', () => {
+    component.share();
+   });
+  
+
 });

@@ -5,11 +5,17 @@ import { TranslateModule } from "@ngx-translate/core";
 import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { ReactiveFormsModule, FormsModule, FormGroup } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder } from "@angular/forms";
 import { RouterTestingModule } from "@angular/router/testing";
 import { JwtModule } from "@auth0/angular-jwt";
 import { LinksService } from "src/app/services/links.service";
 import { of } from "rxjs/internal/observable/of";
+import { NgxDaterangepickerMd, LocaleService, LOCALE_CONFIG } from 'ngx-daterangepicker-material';
+import { CardComponent } from 'src/app/modules/anonymous/components/card/card.component';
+import { LoadFormFileComponent } from '../../components/load-form-file/load-form-file.component';
+import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { config } from 'process';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe("ReportsComponent", () => {
   let component: ReportsComponent;
@@ -18,7 +24,9 @@ describe("ReportsComponent", () => {
   let mockLinksService = jasmine.createSpyObj("LinksService", [
     "getFileReport",
     "sendfile",
-    "downloadReferrals"
+    "updatePaymentDate",
+    "downloadReferrals",
+    "getReportClickam"
   ]);
 
   const fileReport = {
@@ -35,15 +43,26 @@ describe("ReportsComponent", () => {
     email: "david.betancur@pragma.com.co"
   };
 
+  const getReport= {
+    state: "Success",
+    userMessage: 'se ha enviado un correo a test@h.com',
+    objectResponse: [
+    ]
+  };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ReportsComponent],
+      declarations: [ReportsComponent, CardComponent, LoadFormFileComponent],
       imports: [
         TranslateModule.forRoot(),
         AppMaterialModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
         HttpClientTestingModule,
         ReactiveFormsModule,
         FormsModule,
+        BrowserAnimationsModule,
+        NgxDaterangepickerMd,
         RouterTestingModule.withRoutes([]),
         JwtModule.forRoot({
           config: {
@@ -56,8 +75,12 @@ describe("ReportsComponent", () => {
           }
         })
       ],
-      providers: [{ provide: LinksService, useValue: mockLinksService }],
-      schemas: [NO_ERRORS_SCHEMA]
+      providers: [
+        { provide: LinksService, useValue: mockLinksService },
+        { provide: LOCALE_CONFIG, useValue: config},
+        { provide: LocaleService, useClass: LocaleService, deps: [LOCALE_CONFIG]}
+      ],
+      // schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 
@@ -68,7 +91,9 @@ describe("ReportsComponent", () => {
     );
     mockLinksService.getFileReport.and.returnValue(of(fileReport));
     mockLinksService.downloadReferrals.and.returnValue(of(fileReport));
+    mockLinksService.getReportClickam.and.returnValue(of(getReport));
     mockLinksService.sendfile.and.returnValue(of(data));
+    mockLinksService.updatePaymentDate.and.returnValue(of(data));
     fixture = TestBed.createComponent(ReportsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -97,11 +122,52 @@ describe("ReportsComponent", () => {
     expect(component.showErrorExt).toBeTruthy();
   });
 
+  it("on file change payment valid", () => {
+    const mockFile = new File([""], "name.xlsx", { type: "text/html" });
+    const mockEvt = { target: { files: [mockFile] } };
+    component.onFileChangePayment(mockEvt);
+    fixture.whenStable().then(() => {
+      tick();
+      expect(mockLinksService.updatePaymentDate).toHaveBeenCalled();
+    })
+  });
+
+  it("on file change trip invalid", () => {
+    const mockFile = new File([""], "name.txt", { type: "text/html" });
+    const mockEvt = { target: { files: [mockFile] } };
+    component.onFileChangePayment(mockEvt);
+    component.showErrorExtPayment = true;
+    expect(component.showErrorExtPayment).toBeTruthy();
+  });
+
   it("download referal", () => {
     component.dateForm.controls.dateStart.setValue('2019-11-10');
     component.dateForm.controls.dateEnd.setValue('2019-11-10');
     component.downloadReferal();
     expect(mockLinksService.downloadReferrals).toHaveBeenCalled();
   });
+
+  it('change button', () => {
+    component.disButon = false;
+    component.change();
+    expect(component.disButon).toBeFalsy();
+  });
+
+  it('getReportClickam', () => {
+    const nativeElement = fixture.nativeElement;
+    const input = nativeElement.querySelector('input');
+    input.dispatchEvent(new Event('click'));
+    const nativeElementDate = fixture.nativeElement;
+    const dateStart = nativeElementDate.querySelector('.today');
+    dateStart.dispatchEvent(new Event('click'));
+    const nativeElementbtn = fixture.nativeElement;
+    const btn = nativeElementbtn.querySelector('.btn');
+    btn.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+    component.getReportClickam();
+    expect(mockLinksService.getReportClickam).toHaveBeenCalled();
+});
+
+  
 
 });

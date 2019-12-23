@@ -36,4 +36,20 @@ describe('LoadFormFileComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('reset form', () => {
+    component.reset();
+    expect(component.fileForm.valid).toBeTruthy();
+  });
+
+  it('file change', () => {
+    spyOn(component.uploadFile, 'emit');
+    const nativeElement = fixture.nativeElement;
+    const button = nativeElement.querySelector('input');
+    button.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+    expect(component.uploadFile.emit).toHaveBeenCalled();
+  });
+  
+
 });

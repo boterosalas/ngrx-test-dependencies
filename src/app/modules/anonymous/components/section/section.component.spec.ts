@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SectionComponent } from './section.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('SectionComponent', () => {
   let component: SectionComponent;
@@ -11,8 +12,9 @@ describe('SectionComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ SectionComponent ],
       imports: [
-        RouterTestingModule
-      ]
+        RouterTestingModule,
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));
@@ -26,4 +28,9 @@ describe('SectionComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('open register', () => {
+    component.openRegister();
+  });
+
 });

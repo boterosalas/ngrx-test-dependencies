@@ -62,3 +62,18 @@ input[type="file"] {
   width: 27.75px;
   height: 27.75px;
 }
+
+.weak{
+  color:#f44336;
+  font-size: 11px;
+}
+
+.normal{
+  color:$primary-color;
+  font-size: 11px;
+}
+
+.acceptable{
+  color:#6BC541;
+  font-size: 11px;
+}

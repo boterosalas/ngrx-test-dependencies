@@ -17,7 +17,8 @@ import { JwtHelperService, JwtModule } from "@auth0/angular-jwt";
 import { ContentService } from "src/app/services/content.service";
 import { UserService } from "src/app/services/user.service";
 import { SlickCarouselModule } from "ngx-slick-carousel";
-import { ShareButtonsModule } from '@ngx-share/buttons';
+import { ShareButtonsModule } from "@ngx-share/buttons";
+import { LinksService } from 'src/app/services/links.service';
 
 describe("TabsComponent", () => {
   let component: TabsComponent;
@@ -39,6 +40,10 @@ describe("TabsComponent", () => {
     "afterClosed",
     "componentInstance"
   ]);
+
+  // const mockLinksService = jasmine.createSpyObj("LinksService", [
+  //   "saveLink"
+  // ]);
 
   let data = {
     total: 1,
@@ -438,7 +443,7 @@ describe("TabsComponent", () => {
     ]
   };
 
-  let teaserColpatriascotiabank1= {
+  let teaserColpatriascotiabank1 = {
     linkText: "estufa-322",
     productName: "estufa322",
     productId: "12345687",
@@ -461,7 +466,8 @@ describe("TabsComponent", () => {
               price: "$1.000.000",
               Teasers: [
                 {
-                  "<Name>k__BackingField": "colpatriascotiabank1_49.96_aliado_oct29",
+                  "<Name>k__BackingField":
+                    "colpatriascotiabank1_49.96_aliado_oct29",
                   "<Conditions>k__BackingField": {
                     "<MinimumQuantity>k__BackingField": 0,
                     "<Parameters>k__BackingField": [
@@ -490,7 +496,7 @@ describe("TabsComponent", () => {
     ]
   };
 
-  let teaserColpatria2= {
+  let teaserColpatria2 = {
     linkText: "estufa-322",
     productName: "estufa322",
     productId: "12345687",
@@ -532,8 +538,7 @@ describe("TabsComponent", () => {
                       }
                     ]
                   }
-                },
-                
+                }
               ]
             }
           }
@@ -543,7 +548,7 @@ describe("TabsComponent", () => {
     ]
   };
 
-  let teaserColpatriascotiabank2= {
+  let teaserColpatriascotiabank2 = {
     linkText: "estufa-322",
     productName: "estufa322",
     productId: "12345687",
@@ -566,7 +571,8 @@ describe("TabsComponent", () => {
               price: "$1.000.000",
               Teasers: [
                 {
-                  "<Name>k__BackingField": "colpatriascotiabank2_49.96_aliado_oct29",
+                  "<Name>k__BackingField":
+                    "colpatriascotiabank2_49.96_aliado_oct29",
                   "<Conditions>k__BackingField": {
                     "<MinimumQuantity>k__BackingField": 0,
                     "<Parameters>k__BackingField": [
@@ -585,8 +591,7 @@ describe("TabsComponent", () => {
                       }
                     ]
                   }
-                },
-                
+                }
               ]
             }
           }
@@ -596,7 +601,7 @@ describe("TabsComponent", () => {
     ]
   };
 
-  let teaserscotiabank1= {
+  let teaserscotiabank1 = {
     linkText: "estufa-322",
     productName: "estufa322",
     productId: "12345687",
@@ -638,8 +643,7 @@ describe("TabsComponent", () => {
                       }
                     ]
                   }
-                },
-                
+                }
               ]
             }
           }
@@ -649,7 +653,7 @@ describe("TabsComponent", () => {
     ]
   };
 
-  let teasersVisa= {
+  let teasersVisa = {
     linkText: "estufa-322",
     productName: "estufa322",
     productId: "12345687",
@@ -691,8 +695,7 @@ describe("TabsComponent", () => {
                       }
                     ]
                   }
-                },
-                
+                }
               ]
             }
           }
@@ -744,8 +747,7 @@ describe("TabsComponent", () => {
                       }
                     ]
                   }
-                },
-                
+                }
               ]
             }
           }
@@ -797,8 +799,7 @@ describe("TabsComponent", () => {
                       }
                     ]
                   }
-                },
-                
+                }
               ]
             }
           }
@@ -850,8 +851,7 @@ describe("TabsComponent", () => {
                       }
                     ]
                   }
-                },
-                
+                }
               ]
             }
           }
@@ -903,8 +903,7 @@ describe("TabsComponent", () => {
                       }
                     ]
                   }
-                },
-                
+                }
               ]
             }
           }
@@ -913,7 +912,6 @@ describe("TabsComponent", () => {
       }
     ]
   };
-  
 
   let teaserDavivienda1 = {
     linkText: "estufa-322",
@@ -957,8 +955,7 @@ describe("TabsComponent", () => {
                       }
                     ]
                   }
-                },
-                
+                }
               ]
             }
           }
@@ -967,8 +964,8 @@ describe("TabsComponent", () => {
       }
     ]
   };
-  
-  let teaserDavivienda3= {
+
+  let teaserDavivienda3 = {
     linkText: "estufa-322",
     productName: "estufa322",
     productId: "12345687",
@@ -1010,8 +1007,7 @@ describe("TabsComponent", () => {
                       }
                     ]
                   }
-                },
-                
+                }
               ]
             }
           }
@@ -1021,7 +1017,7 @@ describe("TabsComponent", () => {
     ]
   };
 
-  let teaserCodensa1= {
+  let teaserCodensa1 = {
     linkText: "estufa-322",
     productName: "estufa322",
     productId: "12345687",
@@ -1063,8 +1059,7 @@ describe("TabsComponent", () => {
                       }
                     ]
                   }
-                },
-                
+                }
               ]
             }
           }
@@ -1073,8 +1068,8 @@ describe("TabsComponent", () => {
       }
     ]
   };
-  
-  let teaserBancolombia2= {
+
+  let teaserBancolombia2 = {
     linkText: "estufa-322",
     productName: "estufa322",
     productId: "12345687",
@@ -1116,8 +1111,7 @@ describe("TabsComponent", () => {
                       }
                     ]
                   }
-                },
-                
+                }
               ]
             }
           }
@@ -1126,8 +1120,8 @@ describe("TabsComponent", () => {
       }
     ]
   };
-  
-  let teaserBancolombia1= {
+
+  let teaserBancolombia1 = {
     linkText: "estufa-322",
     productName: "estufa322",
     productId: "12345687",
@@ -1169,8 +1163,7 @@ describe("TabsComponent", () => {
                       }
                     ]
                   }
-                },
-                
+                }
               ]
             }
           }
@@ -1179,7 +1172,7 @@ describe("TabsComponent", () => {
       }
     ]
   };
-  
+
   let teaserItau1 = {
     linkText: "estufa-322",
     productName: "estufa322",
@@ -1222,8 +1215,7 @@ describe("TabsComponent", () => {
                       }
                     ]
                   }
-                },
-                
+                }
               ]
             }
           }
@@ -1232,8 +1224,8 @@ describe("TabsComponent", () => {
       }
     ]
   };
-  
-  let teaserPopular1= {
+
+  let teaserPopular1 = {
     linkText: "estufa-322",
     productName: "estufa322",
     productId: "12345687",
@@ -1275,8 +1267,7 @@ describe("TabsComponent", () => {
                       }
                     ]
                   }
-                },
-                
+                }
               ]
             }
           }
@@ -1285,7 +1276,6 @@ describe("TabsComponent", () => {
       }
     ]
   };
-
 
   let dataAssured = {
     link: "www.exito.com",
@@ -1315,17 +1305,31 @@ describe("TabsComponent", () => {
     ]
   };
 
-  let category = [{
+  let category = [
+    {
+      id: 1,
+      ordercategory: 1,
+      link:
+        "https://www.exito.com/home-mercado?utm_source=clickam&utm_medium=referral&utm_campaign=hoteles&utm_term=",
+      imageurl:
+        "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-categories/Categoria_mercado.jpg",
+      description: "Mercado",
+      oncreatedate: "2019-11-18T00:00:00",
+      title: "Mercado"
+    }
+  ];
+
+  let categorys = {
     id: 1,
     ordercategory: 1,
     link:
       "https://www.exito.com/home-mercado?utm_source=clickam&utm_medium=referral&utm_campaign=hoteles&utm_term=",
     imageurl:
-      "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-categories/Categoria_mercado.jpg",
+      "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-categories/mercado.png",
     description: "Mercado",
     oncreatedate: "2019-11-18T00:00:00",
     title: "Mercado"
-  }];
+  };
 
   const shortUrl = "http://tynyurl.com/xixiaa";
 
@@ -1342,7 +1346,7 @@ describe("TabsComponent", () => {
         BrowserAnimationsModule,
         SharedModule,
         ShareButtonsModule.withConfig({
-          include: ['facebook', 'twitter', 'whatsapp'],
+          include: ["facebook", "twitter", "whatsapp"]
         }),
         SlickCarouselModule,
         JwtModule.forRoot({
@@ -1361,6 +1365,7 @@ describe("TabsComponent", () => {
         { provide: UserService, useValue: mockUserService },
         { provide: MatDialogRef, useValue: mockDialogRef },
         { provide: MAT_BOTTOM_SHEET_DATA, useValue: mockDialog },
+        // { provide: LinksService, useValue: mockLinksService },
         JwtHelperService
       ],
       schemas: [NO_ERRORS_SCHEMA]
@@ -1385,7 +1390,7 @@ describe("TabsComponent", () => {
     );
     fixture = TestBed.createComponent(TabsComponent);
     component = fixture.componentInstance;
-    window['dataLayer'] = [];
+    window["dataLayer"] = [];
     fixture.detectChanges();
   });
 
@@ -1393,7 +1398,7 @@ describe("TabsComponent", () => {
     expect(component).toBeTruthy();
     // expect(mockProductUserService.getProfile).toHaveBeenCalled();
   });
-  
+
   it("search products", () => {
     component.searchProductPaginate("cocina");
     fixture.detectChanges();
@@ -1542,11 +1547,16 @@ describe("TabsComponent", () => {
     expect(component.showForm).toBeTruthy();
   });
 
+  it("data category", () => {
+    component.dataCategory(categorys);
+    expect(mockDialog.open).toBeTruthy();
+  });
+
   describe("No results on search", () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(TabsComponent);
       component = fixture.componentInstance;
-      window['dataLayer'] = [];
+      window["dataLayer"] = [];
       fixture.detectChanges();
       mockContentService.getProductsPagination.and.returnValue(of(data));
     });
@@ -1564,5 +1574,26 @@ describe("TabsComponent", () => {
       component.date = "2019/09/09";
       component.saveLink();
     });
+
+    it("save reference", () => {
+      component.urlshorten = "https://tyny.url/xaxa";
+      component.identification = "123456789";
+      component.plu = "123456";
+      component.business = "exito";
+      component.date = "2019/09/09";
+      component.saveLinkReference();
+    });
+
+    it('showReference', () => {
+      component.reference = false;
+      component.showReference();
+      expect(component.reference).toBeTruthy();
+    });
+
+    it('share mobile', () => {
+     component.share();
+    });
+    
+
   });
 });

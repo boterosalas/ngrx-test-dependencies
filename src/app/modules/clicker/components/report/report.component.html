@@ -1,13 +1,39 @@
 <div class="container m-t4 fade-in">
   <h1 id="reportsTitle">{{ "REPORTS.REPORTS" | translate }}</h1>
-
-  <app-table-historial [dataSource]="dataSource"></app-table-historial>
-  <mat-paginator
-  [length]="totalItems"
-  [pageSize]="pageSize"
-  [pageSizeOptions]="[20]"
-  [pageIndex]="pageIndex"
-  (page)="pagination($event)"
- ></mat-paginator>
-
+  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px">
+    <div fxLayout="column" fxFlex="35" fxFlex.lt-md="100">
+      <h2 class="border-bottom-orange-init">
+        {{ "HOME.MY_COMMISSIONS" | translate }}
+      </h2>
+      <div fxLayout="row">
+        <span fxLayout="column" fxFlex="100" class="available">
+          <app-card-data
+            [number]="available | currency: '':'symbol':'1.0-0'"
+            text="{{ 'REPORTS.AVAILABLE' | translate }}"
+          ></app-card-data>
+        </span>
+        <span fxLayout="column" fxFlex="100">
+          <app-card-data class="no-shadow"
+            [number]="account | currency: '':'symbol':'1.0-0'"
+            text="{{ 'REPORTS.ACCOUNT' | translate }}">
+          ></app-card-data>
+        </span>
+      </div>
+      <p class="mb-0">{{ 'REPORTS.AVAILABLE_TEXT' | translate }}</p>
+      <p class="mb-0">{{ 'REPORTS.ACCOUNT_TEXT' | translate }}</p>
+      <app-general-resume></app-general-resume>
+    </div>
+    <div fxLayout="row" class="w-100">
+      <div fxLayout="column" class="w-100" fxLflex="100">
+        <app-table-historial (dataUser)="userData($event)" [dataSource]="dataSource"></app-table-historial>
+        <mat-paginator
+          [length]="totalItems"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="[20]"
+          [pageIndex]="pageIndex"
+          (page)="pagination($event)"
+        ></mat-paginator>
+      </div>
+    </div>
+  </div>
 </div>

@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-material-extensions/password-strength": "^4.1.1",
     "@angular/animations": "~8.2.4",
     "@angular/cdk": "^8.1.4",
     "@angular/common": "~8.2.4",
@@ -48,6 +49,7 @@
     "jwt-decode": "^2.2.0",
     "moment": "^2.24.0",
     "ng-circle-progress": "^1.5.1",
+    "ng-navigator-share": "^1.0.1",
     "ngx-daterangepicker-material": "^2.1.9",
     "ngx-drag-scroll": "^8.0.0-beta.2",
     "ngx-slick-carousel": "^0.4.6",

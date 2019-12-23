@@ -58,16 +58,19 @@ export class RegisterformComponent implements OnInit, OnDestroy {
 
   cities: [];
   emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
-  namePattern = "[a-zA-Z0-9 ]+";
+  namePattern = "[a-zA-Z0-9 àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]+";
   numberPattern = "^(0|[0-9][0-9]*)$";
-  passwordPattern =
-    "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[!#/_@#$%^&+-.*)(´}{><:;¡!})])";
+  // passwordPattern =
+  //   "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[!#/_@#$%^&+-.*)(´}{><:;¡!})])";
+  passwordPattern = "(?=.*[a-zA-Z])(?=.*[0-9])";
   filteredDepartments: Observable<any>;
   filteredCities: Observable<any>;
   disabledCity: boolean;
   departmentCode: string;
   cityCode: string;
   cityValue: string;
+  msg:string;
+  classMsg: string;
 
   ngOnInit() {
 
@@ -473,6 +476,26 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       .subscribe((res: ResponseService) => {
         this.banks = res.objectResponse;
       });
+  }
+
+  onStrengthChanged(event){
+   this.registerForm.controls.password.valueChanges.subscribe((resp) => {
+     if(resp === '') {
+       this.msg = '';
+     }
+   })
+    if(event <= 20) {
+      this.msg = 'Contraseña débil'
+      this.classMsg = 'weak';
+    } 
+    if(event > 20 && event < 100) {
+      this.msg = 'Contraseña aceptable'
+      this.classMsg = 'normal';
+    } 
+      if(event >= 100) {
+      this.msg = 'Contraseña segura';
+      this.classMsg = 'acceptable';
+    }
   }
 
   ngOnDestroy(): void {

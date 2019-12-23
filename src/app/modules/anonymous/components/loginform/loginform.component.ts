@@ -85,6 +85,14 @@ export class LoginformComponent implements OnInit, OnDestroy {
             etiqueta: 'IniciarSesionExitoso'
           });
 
+          dataLayer.push({
+            event: 'pushEventGA',
+            categoria: 'Inicio',
+            accion: 'ClicLateral',
+            etiqueta: this.loginForm.value.Username
+          });
+
+
         } else {
           Swal.fire({
             title: "Login inválido",

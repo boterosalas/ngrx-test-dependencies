@@ -254,16 +254,23 @@
     >
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field style="width: 100%">
+    <mat-label>Password</mat-label>
+    <mat-pass-toggle-visibility
+      #toggleVisbility
+      matSuffix
+    ></mat-pass-toggle-visibility>
     <input
       matInput
-      id="password"
-      type="password"
-      placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
-      formControlName="password"
+      #passwordWithValidation
+      [type]="toggleVisbility.type"
       required
-      spacebar
+      formControlName="password"
+      placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
     />
+    <mat-hint align="end" aria-live="polite">
+      {{ passwordWithValidation.value.length }} / 20
+    </mat-hint>
     <mat-error
       id="requiredPassword"
       *ngIf="
@@ -316,12 +323,25 @@
       >{{ "GENERIC.PASSWORD_PATTERN" | translate }}</mat-error
     >
   </mat-form-field>
+  <div>
+    <mat-password-strength
+      class="mb-2"
+      #passwordComponentWithValidation
+      [password]="registerForm.controls.password.value"
+      (onStrengthChanged)="onStrengthChanged($event)"
+    ></mat-password-strength>
+    <span [ngClass]="classMsg">{{ msg }}</span>
+  </div>
 
   <mat-form-field>
+    <mat-pass-toggle-visibility
+      #toggleVisbility2
+      matSuffix
+    ></mat-pass-toggle-visibility>
     <input
       matInput
       id="confirmPassword"
-      type="password"
+      [type]="toggleVisbility2.type"
       placeholder="{{ 'GENERIC.CONFIRM_PASSWORD' | translate }}"
       formControlName="confirmPassword"
       required
@@ -390,8 +410,11 @@
     (click)="nextStep()"
     [disabled]="!registerForm.valid"
   >
-    <span fxLayoutAlign="space-around center" class="gtmRegistroClicInfSiguiente">
-      {{ "GENERIC.NEXT" | translate }} <mat-icon>arrow_forward</mat-icon>
+    <span
+      fxLayoutAlign="space-around center"
+      class="gtmRegistroClicInfSiguiente"
+    >
+      {{ "GENERIC.NEXT" | translate }} <mat-icon class="gtmRegistroClicInfSiguiente">arrow_forward</mat-icon>
     </span>
   </button>
 </form>
@@ -462,9 +485,7 @@
         externalForm.controls.department.invalid &&
         externalForm.controls.department.errors.incorrect
       "
-      >{{
-        "REGISTER.ERROR_DEPARTMENT" | translate
-      }}</mat-error
+      >{{ "REGISTER.ERROR_DEPARTMENT" | translate }}</mat-error
     >
   </mat-form-field>
 
@@ -494,9 +515,8 @@
         externalForm.controls.city.invalid &&
         externalForm.controls.city.errors.incorrectCity
       "
-      >{{
-        "REGISTER.ERROR_CITY" | translate
-      }}</mat-error>
+      >{{ "REGISTER.ERROR_CITY" | translate }}</mat-error
+    >
 
     <mat-error
       id="requiredCity"
@@ -506,8 +526,6 @@
       "
       >{{ "GENERIC.REQUIRED" | translate: { formValue: "Ciudad" } }}</mat-error
     >
-
-    
   </mat-form-field>
 
   <mat-form-field>
@@ -617,26 +635,29 @@
         "GENERIC.MIN_CHARACTERS"
           | translate
             : {
-                minchar: externalForm.controls.numberAccount.errors.minlength.requiredLength
+                minchar:
+                  externalForm.controls.numberAccount.errors.minlength
+                    .requiredLength
               }
       }}</mat-error
     >
 
     <mat-error
-    id="maxAccount"
-    *ngIf="
-      externalForm.controls.numberAccount.invalid &&
-      externalForm.controls.numberAccount.errors.maxlength
-    "
-    >{{
-      "GENERIC.MAX_CHARACTERS"
-        | translate
-          : {
-              maxchar: externalForm.controls.numberAccount.errors.maxlength.requiredLength
-            }
-    }}</mat-error
-  >
-
+      id="maxAccount"
+      *ngIf="
+        externalForm.controls.numberAccount.invalid &&
+        externalForm.controls.numberAccount.errors.maxlength
+      "
+      >{{
+        "GENERIC.MAX_CHARACTERS"
+          | translate
+            : {
+                maxchar:
+                  externalForm.controls.numberAccount.errors.maxlength
+                    .requiredLength
+              }
+      }}</mat-error
+    >
   </mat-form-field>
 
   <p class="additional-info">{{ "REGISTER.ADITIONAL_FILE" | translate }}</p>
@@ -651,32 +672,32 @@
       <strong class="gray">{{ "REGISTER.CED1" | translate }}</strong>
       <span *ngIf="nameFileCed1 === ''">No hay archivo seleccionado</span>
       <span class="file-input" *ngIf="nameFileCed1 !== ''">{{
-        nameFileCed1 | truncate: '20'
+        nameFileCed1 | truncate: "20"
       }}</span>
     </div>
     <div fxLayout="column" fxLayoutAlign="center">
       <label for="ced1" id="upload" class="cursor-pointer">
         <span *ngIf="!showErrorCed1">
+          <img
+            class="mt-1"
+            *ngIf="nameFileCed1 === ''"
+            src="/assets/img/image-file-upload.svg"
+            alt="upload"
+          />
+          <img
+            class="mt-1"
+            *ngIf="nameFileCed1 !== ''"
+            src="/assets/img/image-file-upload-ok.svg"
+            alt="upload"
+          />
+        </span>
+
         <img
-          class="mt-1"
-          *ngIf="nameFileCed1 === ''"
-          src="/assets/img/image-file-upload.svg"
+          class="mt-1 w-icon"
+          *ngIf="showErrorCed1"
+          src="/assets/img/icono-error-carga.svg"
           alt="upload"
         />
-        <img
-          class="mt-1"
-          *ngIf="nameFileCed1 !== ''"
-          src="/assets/img/image-file-upload-ok.svg"
-          alt="upload"
-        />  
-      </span>
-
-      <img
-      class="mt-1 w-icon"
-      *ngIf="showErrorCed1"
-      src="/assets/img/icono-error-carga.svg"
-      alt="upload"
-    />
       </label>
     </div>
   </div>
@@ -697,31 +718,31 @@
       <strong class="gray">{{ "REGISTER.CED2" | translate }}</strong>
       <span *ngIf="nameFileCed2 === ''">No hay archivo seleccionado</span>
       <span class="file-input" *ngIf="nameFileCed2 !== ''">{{
-        nameFileCed2 | truncate: '20'
+        nameFileCed2 | truncate: "20"
       }}</span>
     </div>
     <div fxLayout="column" fxLayoutAlign="center">
       <label for="ced2" id="upload" class="cursor-pointer">
-        <span  *ngIf="!showErrorCed2">
+        <span *ngIf="!showErrorCed2">
+          <img
+            class="mt-1"
+            *ngIf="nameFileCed2 === ''"
+            src="/assets/img/image-file-upload.svg"
+            alt="upload"
+          />
+          <img
+            class="mt-1"
+            *ngIf="nameFileCed2 !== ''"
+            src="/assets/img/image-file-upload-ok.svg"
+            alt="upload"
+          />
+        </span>
         <img
-          class="mt-1"
-          *ngIf="nameFileCed2 === ''"
-          src="/assets/img/image-file-upload.svg"
+          class="mt-1 w-icon"
+          *ngIf="showErrorCed2"
+          src="/assets/img/icono-error-carga.svg"
           alt="upload"
         />
-        <img
-          class="mt-1"
-          *ngIf="nameFileCed2 !== ''"
-          src="/assets/img/image-file-upload-ok.svg"
-          alt="upload"
-        />
-      </span>
-        <img
-        class="mt-1 w-icon"
-        *ngIf="showErrorCed2"
-        src="/assets/img/icono-error-carga.svg"
-        alt="upload"
-      />
       </label>
     </div>
   </div>
@@ -741,31 +762,31 @@
       <strong class="gray">{{ "REGISTER.ACCOUNT_CERT" | translate }}</strong>
       <span *ngIf="nameFileCert === ''">No hay archivo seleccionado</span>
       <span class="file-input" *ngIf="nameFileCert !== ''">{{
-        nameFileCert | truncate: '20'
+        nameFileCert | truncate: "20"
       }}</span>
     </div>
     <div fxLayout="column" fxLayoutAlign="center">
       <label for="cert" id="upload" class="cursor-pointer">
         <span *ngIf="!showErrorCert">
+          <img
+            class="mt-1"
+            *ngIf="nameFileCert === ''"
+            src="/assets/img/image-file-upload.svg"
+            alt="upload"
+          />
+          <img
+            class="mt-1"
+            *ngIf="nameFileCert !== ''"
+            src="/assets/img/image-file-upload-ok.svg"
+            alt="upload"
+          />
+        </span>
         <img
-          class="mt-1"
-          *ngIf="nameFileCert === ''"
-          src="/assets/img/image-file-upload.svg"
+          class="mt-1 w-icon"
+          *ngIf="showErrorCert"
+          src="/assets/img/icono-error-carga.svg"
           alt="upload"
         />
-        <img
-          class="mt-1"
-          *ngIf="nameFileCert !== ''"
-          src="/assets/img/image-file-upload-ok.svg"
-          alt="upload"
-        />
-      </span>
-        <img
-        class="mt-1 w-icon"
-        *ngIf="showErrorCert"
-        src="/assets/img/icono-error-carga.svg"
-        alt="upload"
-      />
       </label>
     </div>
   </div>
@@ -787,10 +808,15 @@
     class="center button button-100 gtmRegistroClicInfSiguientePaso2"
     color="orange"
     (click)="nextStepExternalClicker()"
-    [disabled]="!externalForm.valid || (showErrorCed1 || showErrorCed2 || showErrorCert)"
+    [disabled]="
+      !externalForm.valid || showErrorCed1 || showErrorCed2 || showErrorCert
+    "
   >
-    <span fxLayoutAlign="space-around center" class="gtmRegistroClicInfSiguientePaso2">
-      {{ "GENERIC.NEXT" | translate }} <mat-icon>arrow_forward</mat-icon>
+    <span
+      fxLayoutAlign="space-around center"
+      class="gtmRegistroClicInfSiguientePaso2"
+    >
+      {{ "GENERIC.NEXT" | translate }} <mat-icon class="gtmRegistroClicInfSiguientePaso2">arrow_forward</mat-icon>
     </span>
   </button>
 </form>
