@@ -265,7 +265,11 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
           this.productsList = productListCopy.map(_product => {
             
             _product.items = [..._product.items].sort((a, b)  => {
-              return b.sellers[0].commertialOffer.Price - a.sellers[0].commertialOffer.Price
+              if(a.sellers[0].commertialOffer.Price > 0 && b.sellers[0].commertialOffer.Price > 0 ) {
+                return a.sellers[0].commertialOffer.Price - b.sellers[0].commertialOffer.Price
+              } else {
+                return b.sellers[0].commertialOffer.Price - a.sellers[0].commertialOffer.Price
+              }
             });
 
             return _product;
