@@ -144,7 +144,7 @@ export class LinksService {
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
       })
     };
-    return this.http.get((`${this.urlComission}/${this.apiFile}`), httpOptions).pipe(
+    return this.http.get((`${this.urlComission}${this.apiFile}`), httpOptions).pipe(
       map((resp: ResponseService) => {
         return resp.objectResponse;
       })
