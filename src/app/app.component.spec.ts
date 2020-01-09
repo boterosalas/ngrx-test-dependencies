@@ -10,6 +10,10 @@ import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { RouterTestingModule } from "@angular/router/testing";
 import { JwtModule } from '@auth0/angular-jwt';
 import { BnNgIdleService } from 'bn-ng-idle';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { AngularFireModule } from '@angular/fire';
 
 // const TRANSLATIONS_ES = require('../assets/i18n/es.json');
 
@@ -26,6 +30,19 @@ describe("AppComponent", () => {
         HttpClientTestingModule,
         TranslateModule.forRoot({}),
         RouterTestingModule.withRoutes([]),
+        AngularFireDatabaseModule,
+        AngularFireAuthModule,
+        AngularFireMessagingModule,
+        AngularFireModule.initializeApp({
+          apiKey: "AIzaSyBLEXtXZGfMEm6dLHtngNa_HWgEjjrk-14",
+          authDomain: "test-push-notification-633a0.firebaseapp.com",
+          databaseURL: "https://test-push-notification-633a0.firebaseio.com",
+          projectId: "test-push-notification-633a0",
+          storageBucket: "test-push-notification-633a0.appspot.com",
+          messagingSenderId: "374253972065",
+          appId: "1:374253972065:web:96a6651d3a2f816451d820",
+          measurementId: "G-BESRDNSPL1"
+        }),
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
