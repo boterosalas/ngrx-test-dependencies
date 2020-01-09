@@ -23,6 +23,7 @@ import * as SmartBanner from "../../node_modules/smart-app-banner/dist/smart-app
 import { BnNgIdleService } from "bn-ng-idle";
 import Swal from "sweetalert2";
 declare var dataLayer: any
+import { MessagingService } from "./shared/messaging.service";
 
 @Component({
   selector: "app-root",
@@ -87,13 +88,15 @@ export class AppComponent implements OnInit, OnDestroy {
   showAnimation1: boolean;
   showAnimation2: boolean;
   isLoggedIn: any;
+  message;
 
   constructor(
     private translate: TranslateService,
     private router: Router,
     private utils: UtilsService,
     public auth: AuthService,
-    private bnIdle: BnNgIdleService
+    private bnIdle: BnNgIdleService,
+    private messagingService: MessagingService
   ) {
     translate.setDefaultLang("es");
     translate.use("es");
@@ -160,6 +163,11 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+    const userId = 'user001';
+    this.messagingService.requestPermission(userId)
+    this.messagingService.receiveMessage()
+    this.message = this.messagingService.currentMessage
 
     this.showAnimation1 = true;
     this.innerWidth = window.innerWidth;

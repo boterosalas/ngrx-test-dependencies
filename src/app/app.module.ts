@@ -29,6 +29,14 @@ import { AuthInterceptor } from './interceptors/auth-interceptor.service';
 // sesion timeout
 import { BnNgIdleService } from 'bn-ng-idle';
 
+// angular fire notifications
+import { MessagingService } from './shared/messaging.service';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AsyncPipe } from '../../node_modules/@angular/common';
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
@@ -49,6 +57,19 @@ export function jwtTokenGetter() {
     SharedModule,
     AppMaterialModule,
     FlexLayoutModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AngularFireMessagingModule,
+    AngularFireModule.initializeApp({
+      apiKey: "AIzaSyBLEXtXZGfMEm6dLHtngNa_HWgEjjrk-14",
+      authDomain: "test-push-notification-633a0.firebaseapp.com",
+      databaseURL: "https://test-push-notification-633a0.firebaseio.com",
+      projectId: "test-push-notification-633a0",
+      storageBucket: "test-push-notification-633a0.appspot.com",
+      messagingSenderId: "374253972065",
+      appId: "1:374253972065:web:96a6651d3a2f816451d820",
+      measurementId: "G-BESRDNSPL1"
+    }),
     JwtModule.forRoot({
       config: {
         tokenGetter: jwtTokenGetter,
@@ -77,7 +98,9 @@ export function jwtTokenGetter() {
       useClass: AuthInterceptor,
       multi: true
     },
-    BnNgIdleService
+    BnNgIdleService,
+    MessagingService,
+    AsyncPipe
   ],
   bootstrap: [AppComponent]
 })
