@@ -1552,6 +1552,13 @@ describe("TabsComponent", () => {
     expect(mockDialog.open).toBeTruthy();
   });
 
+  it('copyInputMessage', () => {
+    const button = document.querySelector('.gtmIniCategoriaCopiarLin');
+    button.dispatchEvent(new Event('click'));
+    const nativeElementInput = fixture.nativeElement;
+    const input = nativeElementInput.querySelector('input');
+  });
+
   describe("No results on search", () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(TabsComponent);
@@ -1594,6 +1601,5 @@ describe("TabsComponent", () => {
      component.share();
     });
     
-
   });
 });

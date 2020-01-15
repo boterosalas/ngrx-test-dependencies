@@ -15,6 +15,11 @@ import { of, throwError } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { JwtModule } from '@auth0/angular-jwt';
+import { SectionbgComponent } from '../../components/sectionbg/sectionbg.component';
+import { WorksComponent } from '../../components/works/works.component';
+import { SectionComponent } from '../../components/section/section.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 describe("HomeComponent", () => {
   let component: HomeComponent;
@@ -53,10 +58,12 @@ let invalidRquest = {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeComponent],
+      declarations: [HomeComponent, SectionbgComponent,WorksComponent, SectionComponent],
       imports: [
         TranslateModule,
         AppMaterialModule,
+        FlexLayoutModule,
+        SlickCarouselModule,
         FormsModule,
         ReactiveFormsModule,
         HttpClientTestingModule,
@@ -84,7 +91,7 @@ let invalidRquest = {
         // AuthService
       ],
       schemas: [
-        NO_ERRORS_SCHEMA
+        // NO_ERRORS_SCHEMA
       ]
     }).compileComponents();
     mockAuthService.isLoggedIn.and.returnValue(false);
@@ -104,10 +111,10 @@ let invalidRquest = {
 
   it("should create", () => {
     expect(component).toBeTruthy();
-    fixture.whenStable().then(() =>{
+    fixture.whenStable().then(() => {
       tick();
-      expect(mockAuthService.isLoggedIn).toHaveBeenCalled();
-    });
+      expect(mockAuthService.isLoggedIn).toHaveBeenCalled(); 
+    })
   });
 
   it('open register', () => {
