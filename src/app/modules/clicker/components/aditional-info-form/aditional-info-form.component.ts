@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material';
@@ -12,7 +12,7 @@ import { MasterDataService } from 'src/app/services/master-data.service';
   templateUrl: './aditional-info-form.component.html',
   styleUrls: ['./aditional-info-form.component.scss']
 })
-export class AditionalInfoFormComponent implements OnInit {
+export class AditionalInfoFormComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
@@ -148,6 +148,10 @@ export class AditionalInfoFormComponent implements OnInit {
     })
   }
 
+  /**
+   * Metodo para activar o desactivar las comunicaciones
+   * @param comunication 
+   */
 
   changeComunications(comunication) {
     if (comunication.checked === false) {
@@ -158,6 +162,7 @@ export class AditionalInfoFormComponent implements OnInit {
     }
   }
 
+  // Metodo para editar la informacion adicional del usuario
 
   editInfo() {
     this.userInfo.birthDate = this.personalForm.controls.birthDate.value;
@@ -195,6 +200,8 @@ export class AditionalInfoFormComponent implements OnInit {
     });
   }
 
-
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
 }

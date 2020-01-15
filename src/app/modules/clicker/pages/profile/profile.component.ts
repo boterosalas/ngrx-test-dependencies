@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { distinctUntilChanged } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { ResponseService } from 'src/app/interfaces/response';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
   userId:string;
@@ -33,7 +33,7 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-   this.user.userInfo$.subscribe((val)=> {
+   this.subscription = this.user.userInfo$.subscribe((val)=> {
      if(!!val) {
        this.userId = val.userId;
        this.id = val.identification;
@@ -50,6 +50,11 @@ export class ProfileComponent implements OnInit {
     file.nameFileCert = "";
     file.fileBankCertificate = null;
   }
+
+  /**
+   * Metodo para enviar los archivos bancarios y de identificacion del usuario
+   * @param files 
+   */
   
   public sendFiles(files) {
 
@@ -64,7 +69,7 @@ export class ProfileComponent implements OnInit {
 
     
 
-    this.user.uploadFiles(sendvalues).subscribe((res:ResponseService) => {
+    this.subscription = this.user.uploadFiles(sendvalues).subscribe((res:ResponseService) => {
       if(res.state !== 'Error') {
         Swal.fire({
           title: "Carga de archivos correcta",
@@ -86,6 +91,10 @@ export class ProfileComponent implements OnInit {
       }
     });
 
+  }
+
+  ngOnDestroy(): void {
+   this.subscription.unsubscribe();
   }
 
 }

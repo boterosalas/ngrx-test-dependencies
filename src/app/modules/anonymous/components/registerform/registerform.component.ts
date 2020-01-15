@@ -155,6 +155,12 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     this.externalClickerForm();
   }
 
+  /**
+   * Metodo para el autocompletar los departamentos
+   * @param departments 
+   * 
+   */
+
   public displayDepartment(departments?: any): string | undefined {
     return departments ? departments.description : undefined;
   }
@@ -191,6 +197,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     );
   }
 
+  // Metodo que muestra el formulario del clicker externo
 
   nextStepExternalClicker() {
     this.showTerms = true;
@@ -216,7 +223,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       }
     }
 
-    this.registerUser
+    this.subscription = this.registerUser
       .validateEmployee(idEmployee, idTypeEmployee)
       .subscribe((employee: ResponseService) => {
         if (employee.objectResponse === true) {
@@ -248,6 +255,11 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Metodo para validar que la extension sea valida
+   * @param nameFile 
+   */
+
   private getExtension(nameFile: string) {
     let splitExt = nameFile.split(".");
     let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
@@ -256,6 +268,12 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       this.validFormat = true;
     }
   }
+
+  /**
+   * Metodo para leer y subir un archivo al  servidor
+   * @param event 
+   * @param param 
+   */
 
   public onFileChange(event, param: string) {
     let nameFile = event.target.files[0].name;
@@ -419,6 +437,12 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * Metodo para seleccionar el departamento
+   * @param department 
+   * 
+   */
+
   public selectDepartment(department) {
     this.departmentCode = department.code;
     this.cities = department.municipalities;
@@ -426,7 +450,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     let valueDepartment = this.externalForm.controls.department.valueChanges;
     this.filterCities();
 
-    valueDepartment.subscribe((resp) => {
+    this.subscription = valueDepartment.subscribe((resp) => {
       if (resp !== '') {
         this.getDepartments();
         // this.externalForm.controls.city.enable();
@@ -436,6 +460,8 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       }
     })
   }
+
+  // Metodo para validar el departamento
 
   public checkDepartment() {
     if ((this.externalForm.controls.department.value.code !== this.departmentCode) || (this.externalForm.controls.department.value.code === undefined || this.departmentCode === undefined )) {
@@ -447,6 +473,8 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     this.cityCode = city.code;
     this.cityValue = city.description;
   }
+
+  // Metodo para validar la ciudad
 
   public checkCity() {
     if (this.externalForm.controls.city.value !== this.cityValue) {
@@ -478,8 +506,13 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * Metodo para validar la fuerza de la contraseña
+   * @param event 
+   */
+
   onStrengthChanged(event){
-   this.registerForm.controls.password.valueChanges.subscribe((resp) => {
+   this.subscription = this.registerForm.controls.password.valueChanges.subscribe((resp) => {
      if(resp === '') {
        this.msg = '';
      }

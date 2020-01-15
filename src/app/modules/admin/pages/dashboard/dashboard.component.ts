@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LinksService } from 'src/app/services/links.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(private kpi: LinksService) { }
 
@@ -27,15 +28,16 @@ export class DashboardComponent implements OnInit {
   linksMonthTotalYesterday: string;
   percent: any;
   links = true;
-
   monthActiveUsersQuantity:string;
+
+  private subscription: Subscription = new Subscription();
 
   ngOnInit() {
     this.getKPI();
   }
 
   public getKPI(){
-    this.kpi.getKPI().subscribe(resp=> {
+    this.subscription = this.kpi.getKPI().subscribe(resp=> {
       this.totalUsers = resp.historicalUsersQuantity;
       this.totalActiveUsers = resp.historicalActiveUsersQuantity;
       this.totalMonthRegisterUsers = resp.monthUsersQuantity;
@@ -54,6 +56,10 @@ export class DashboardComponent implements OnInit {
       this.percent = (resp.historicalActiveUsersQuantity /resp.historicalUsersQuantity) * 100;
       this.monthActiveUsersQuantity = resp.monthActiveUsersQuantity;
     })
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

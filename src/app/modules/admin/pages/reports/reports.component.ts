@@ -134,7 +134,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
   }
 
   public getFileReport() {
-    this.file.getFileReport().subscribe(file => {
+    this.subscription = this.file.getFileReport().subscribe(file => {
       this.fileUrl = file;
     });
   }
@@ -303,7 +303,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
       dateStart: this.dateForm.controls.dateStart.value,
       dateEnd: this.dateForm.controls.dateEnd.value
     };
-    this.file.downloadReferrals(dates).subscribe((resp: ResponseService) => {
+    this.subscription = this.file.downloadReferrals(dates).subscribe((resp: ResponseService) => {
       let file = resp.objectResponse;
       let contentType = "application/vnd.ms-excel";
       const linkSource = `data:${contentType};base64,${file}`;

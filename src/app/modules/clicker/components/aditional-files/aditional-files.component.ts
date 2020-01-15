@@ -1,15 +1,16 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-aditional-files',
   templateUrl: './aditional-files.component.html',
   styleUrls: ['./aditional-files.component.scss']
 })
-export class AditionalFilesComponent implements OnInit {
+export class AditionalFilesComponent implements OnInit, OnDestroy {
 
-  constructor(private fb: FormBuilder,  private user: UserService,) { }
+  constructor(private fb: FormBuilder,  private user: UserService) { }
 
   externalForm: FormGroup;
   files = {
@@ -27,11 +28,13 @@ export class AditionalFilesComponent implements OnInit {
   }
   @Output() uploadFile = new EventEmitter;
   @Output() resetFormEmit = new EventEmitter;
+  private subscription: Subscription = new Subscription();
   
   ngOnInit() {
     this.formFiles();
     
-    this.user.userInfo$
+    // se valida si es empleado del exito
+    this.subscription = this.user.userInfo$
         .subscribe(val => {
           if (!!val) {
             this.files.isEmployee = val.isEmployeeGrupoExito;
@@ -46,6 +49,12 @@ export class AditionalFilesComponent implements OnInit {
       cert: [null],
     });
   }
+
+  /**
+   * Metodo para leer y subir archivos
+   * @param event 
+   * @param param 
+   */
 
   public onFileChangeFiles(event, param: string) {
     let reader = new FileReader();
@@ -94,6 +103,11 @@ export class AditionalFilesComponent implements OnInit {
     }
   }
 
+  /**
+   * Metodo para validar que extension sea valida
+   * @param name 
+   */
+
   private getExtension(name: string) {
     let splitExt = name.split(".");
     let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
@@ -123,6 +137,10 @@ export class AditionalFilesComponent implements OnInit {
         isEmployee:false,
       }
       );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

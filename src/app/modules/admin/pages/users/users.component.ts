@@ -110,6 +110,15 @@ export class UsersComponent extends MatPaginatorIntl
 
   }
 
+  /**
+   * Metodo para buscar usuarios
+   * @param term 
+   * @param from 
+   * @param to 
+   * @param orderOrigin 
+   * @param orderBy 
+   */
+
   public searchUser(term, from = 1, to = this.pageTo, orderOrigin = '' ,orderBy = '') {
     if (term !== this.paginate) {
       this.paginate = term;
@@ -247,7 +256,7 @@ export class UsersComponent extends MatPaginatorIntl
   }
 
   private changeComunications(userId, value) {
-    this.usersService.comunitcations(userId, value).subscribe((user: any) => {
+    this.subscription = this.usersService.comunitcations(userId, value).subscribe((user: any) => {
       if (value === true) {
         this.openSnackBar(
           "Se ha guardado el usuario para que reciba comunicaciones",
@@ -261,6 +270,11 @@ export class UsersComponent extends MatPaginatorIntl
       }
     });
   }
+
+  /**
+   * Metodo para descargar archivos del usuario
+   * @param fileDownload 
+   */
 
   private download(fileDownload) {
     let base64 = fileDownload.objectResponse;
