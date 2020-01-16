@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, tick } from "@angular/core/testing";
+import { async, ComponentFixture, TestBed, tick, fakeAsync } from "@angular/core/testing";
 
 import { ReportsComponent } from "./reports.component";
 import { TranslateModule } from "@ngx-translate/core";
@@ -16,6 +16,7 @@ import { LoadFormFileComponent } from '../../components/load-form-file/load-form
 import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { config } from 'process';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 describe("ReportsComponent", () => {
   let component: ReportsComponent;
@@ -104,12 +105,12 @@ describe("ReportsComponent", () => {
     expect(mockLinksService.getFileReport).toHaveBeenCalled();
   });
 
-  it("on file change trip valid", () => {
+  it("on file change trip valid", async() => {
     const mockFile = new File([""], "name.xlsx", { type: "text/html" });
     const mockEvt = { target: { files: [mockFile] } };
     component.onFileChangeTrip(mockEvt);
-    fixture.whenStable().then(() => {
-      tick();
+    fixture.detectChanges();
+    fixture.whenRenderingDone().then(() => {
       expect(mockLinksService.sendfile).toHaveBeenCalled();
     })
   });
@@ -126,8 +127,7 @@ describe("ReportsComponent", () => {
     const mockFile = new File([""], "name.xlsx", { type: "text/html" });
     const mockEvt = { target: { files: [mockFile] } };
     component.onFileChangePayment(mockEvt);
-    fixture.whenStable().then(() => {
-      tick();
+    fixture.whenRenderingDone().then(() => {
       expect(mockLinksService.updatePaymentDate).toHaveBeenCalled();
     })
   });

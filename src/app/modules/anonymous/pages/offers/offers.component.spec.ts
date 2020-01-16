@@ -18,6 +18,7 @@ import { ShareButtonsModule } from "@ngx-share/buttons";
 import { SlickCarouselModule } from "ngx-slick-carousel";
 import { UserService } from "src/app/services/user.service";
 import { AuthService } from "src/app/services/auth.service";
+import { CardOfferComponent } from '../../components/card-offer/card-offer.component';
 
 describe("OffersComponent", () => {
   let component: OffersComponent;
@@ -180,7 +181,7 @@ describe("OffersComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [OffersComponent, DialogComponent],
+      declarations: [OffersComponent, DialogComponent, CardOfferComponent],
       imports: [
         TranslateModule.forRoot({}),
         HttpClientTestingModule,
@@ -209,7 +210,7 @@ describe("OffersComponent", () => {
         { provide: MatDialogRef, useValue: mockDialogRef },
         { provide: MAT_BOTTOM_SHEET_DATA, useValue: mockDialog }
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      // schemas: [NO_ERRORS_SCHEMA]
     })
       .overrideModule(BrowserDynamicTestingModule, {
         set: {
@@ -235,18 +236,12 @@ describe("OffersComponent", () => {
 
   it("should create", () => {
     expect(component).toBeTruthy();
-    fixture.whenStable().then(() => {
-      tick();
-      expect(mockContentService.getOffers).toHaveBeenCalled();
-    });
+    expect(mockContentService.getOffers).toHaveBeenCalled();
   });
 
   it("data product", () => {
     component.dataProduct(mostprominent);
-    fixture.whenStable().then(() => {
-      tick();
-      expect(mockUserService.getShortUrl).toHaveBeenCalled();
-    });
+    expect(mockUserService.getShortUrl).toHaveBeenCalled();
   });
 
   it("save link", () => {
@@ -279,6 +274,14 @@ describe("OffersComponent", () => {
   it('share mobile', () => {
     component.share();
    });
+
+   it('copyInputMessage', () => {
+       const button = document.querySelector('.gtmOfertasClicLinkCopiarLink');
+       button.dispatchEvent(new Event('click'));
+       const nativeElementInput = fixture.nativeElement;
+       const input = nativeElementInput.querySelector('input');
+   });
+   
   
 
 });

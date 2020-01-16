@@ -384,6 +384,11 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * Metodo para autocompletar los departamentos
+   * @param departments 
+   */
+
   public displayDepartment(departments?: any): string | undefined {
     return departments ? departments.description : undefined;
   }

@@ -17,6 +17,7 @@ import {
   LocaleService
 } from "ngx-daterangepicker-material";
 import { config } from "process";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe("AuditComponent", () => {
   let component: AuditComponent;
@@ -39,6 +40,7 @@ describe("AuditComponent", () => {
         FormsModule,
         AppMaterialModule,
         HttpClientTestingModule,
+        BrowserAnimationsModule,
         NgxDaterangepickerMd,
         RouterTestingModule.withRoutes([]),
         JwtModule.forRoot({

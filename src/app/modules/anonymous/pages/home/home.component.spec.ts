@@ -15,6 +15,12 @@ import { of, throwError } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { JwtModule } from '@auth0/angular-jwt';
+import { SectionbgComponent } from '../../components/sectionbg/sectionbg.component';
+import { WorksComponent } from '../../components/works/works.component';
+import { SectionComponent } from '../../components/section/section.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import Swal from 'sweetalert2';
 
 describe("HomeComponent", () => {
   let component: HomeComponent;
@@ -27,8 +33,9 @@ describe("HomeComponent", () => {
   const dataUser = {
     state: "Success",
     userMessage: null,
-    objectResponse:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc…VzIn0.Bcsm-qVHHtRcLlQae_5tVwGpgbPQJkCEQ97ZbwRxz_4"
+    objectResponse:{
+      token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc…VzIn0.Bcsm-qVHHtRcLlQae_5tVwGpgbPQJkCEQ97ZbwRxz_4"
+    }
   };
 
   let data = {
@@ -53,10 +60,12 @@ let invalidRquest = {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeComponent],
+      declarations: [HomeComponent, SectionbgComponent,WorksComponent, SectionComponent],
       imports: [
         TranslateModule,
         AppMaterialModule,
+        FlexLayoutModule,
+        SlickCarouselModule,
         FormsModule,
         ReactiveFormsModule,
         HttpClientTestingModule,
@@ -84,7 +93,7 @@ let invalidRquest = {
         // AuthService
       ],
       schemas: [
-        NO_ERRORS_SCHEMA
+        // NO_ERRORS_SCHEMA
       ]
     }).compileComponents();
     mockAuthService.isLoggedIn.and.returnValue(false);
@@ -104,10 +113,17 @@ let invalidRquest = {
 
   it("should create", () => {
     expect(component).toBeTruthy();
-    fixture.whenStable().then(() =>{
+    spyOn(Swal,"fire").and.returnValue(Promise.resolve<any>({
+      title: "Activación exitosa",
+      text: "Activación exitosa",
+      type: "success",
+      confirmButtonText: "Aceptar",
+      confirmButtonClass: "accept-activation-alert-success"
+    }));
+    fixture.whenStable().then(() => {
       tick();
-      expect(mockAuthService.isLoggedIn).toHaveBeenCalled();
-    });
+      expect(mockAuthService.isLoggedIn).toHaveBeenCalled(); 
+    })
   });
 
   it('open register', () => {
@@ -133,6 +149,13 @@ let invalidRquest = {
 
     it('error activation', () => {
       component.ngOnInit();
+      spyOn(Swal,"fire").and.returnValue(Promise.resolve<any>({
+        title: "Activación errónea",
+        text:"Activación errónea",
+        type: "error",
+        confirmButtonText: "Aceptar",
+        confirmButtonClass: "accept-activation-alert-error"
+      }));
       component.activateUser();
       fixture.whenStable().then(() =>{
         tick();
@@ -154,6 +177,13 @@ let invalidRquest = {
 
     it('invalid request', () => {
       component.ngOnInit();
+      spyOn(Swal,"fire").and.returnValue(Promise.resolve<any>({
+        title: 'Error',
+          text: 'Internal server error',
+          type: "error",
+          confirmButtonText: "Aceptar",
+          confirmButtonClass: "accept-activation-alert-invalid"
+      }));
       component.activateUser();
       fixture.whenStable().then(() =>{
         tick();
