@@ -45,7 +45,7 @@ export class AuditComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.usersService.userInfo$
+    this.subscription = this.usersService.userInfo$
     .subscribe(val => {
       if (!!val) {
        this.email = val.email;
@@ -59,6 +59,8 @@ export class AuditComponent implements OnInit, OnDestroy {
     );
 
   }
+
+  // Metodo para exportar la auditoria
 
   public exportAudit() {
     this.dateParams = {

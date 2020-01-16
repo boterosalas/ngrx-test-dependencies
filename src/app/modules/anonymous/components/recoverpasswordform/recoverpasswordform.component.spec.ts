@@ -10,6 +10,7 @@ import { of, throwError } from 'rxjs';
 import { HomeComponent } from 'src/app/modules/clicker/pages/home/home.component';
 import { ClickerModule } from 'src/app/modules/clicker/clicker.module';
 import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
 
 describe('RecoverpasswordformComponent', () => {
   let component: RecoverpasswordformComponent;
@@ -74,6 +75,13 @@ describe('RecoverpasswordformComponent', () => {
   });
 
   it('recover password', () => {
+    spyOn(Swal,"fire").and.returnValue(Promise.resolve<any>({
+      title: "Se ha enviado un email",
+      text: 'texto enviado',
+      confirmButtonText: "Aceptar",
+      confirmButtonClass: 'accept-forgot-alert-success',
+      type: "success"
+    }));
     component.code= "123456";
     component.recoverPasswordForm.controls.password.setValue('123456');
     component.recoverPasswordForm.controls.confirmPassword.setValue('123456');

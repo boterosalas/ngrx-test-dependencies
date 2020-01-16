@@ -62,6 +62,13 @@ describe('AditionalFilesComponent', () => {
   it("on file change ced2", () => {
     const mockFile = new File([""], "name.jpg", { type: "text/html" });
     const mockEvt = { target: { files: [mockFile] } };
+    component.onFileChangeFiles(mockEvt, 'cedula2');
+    expect(component.onFileChangeFiles).not.toBeNull();
+  });
+
+  it("on file change ced2", () => {
+    const mockFile = new File([""], "name.jpg", { type: "text/html" });
+    const mockEvt = { target: { files: [mockFile] } };
     component.onFileChangeFiles(mockEvt, 'cedula1');
     expect(component.onFileChangeFiles).not.toBeNull();
   });
@@ -71,6 +78,15 @@ describe('AditionalFilesComponent', () => {
     const mockEvt = { target: { files: [mockFile] } };
     component.onFileChangeFiles(mockEvt, 'certificado');
     expect(component.onFileChangeFiles).not.toBeNull();
+  });
+
+  it('reset form', () => {
+    component.resetForm();
+    expect(component.externalForm.valid).toBeTruthy();
+  });
+
+  it('sendInfo', () => {
+    component.sendInfo();
   });
 
 });

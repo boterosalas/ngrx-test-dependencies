@@ -7,9 +7,11 @@ import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-mater
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { of, throwError } from 'rxjs';
+import { of, throwError, from } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
+
 
 describe('ForgotpasswordformComponent', () => {
   let component: ForgotpasswordformComponent;
@@ -74,6 +76,13 @@ describe('ForgotpasswordformComponent', () => {
 
 
   it('forgot password', () => {
+    spyOn(Swal,"fire").and.returnValue(Promise.resolve<any>({
+      title: "Se ha enviado un email",
+      text: 'texto enviado',
+      confirmButtonText: "Aceptar",
+      confirmButtonClass: 'accept-forgot-alert-success',
+      type: "success"
+    }))
     component.forgotPassword();
     component.forgotPaswordForm.controls.Username.setValue('david.betancur@pragma.com.co');
     expect(mockAuthService.forgotPassword).toHaveBeenCalled();

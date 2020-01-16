@@ -165,7 +165,7 @@ export class OffersComponent implements OnInit {
   }
 
   /**
-   * Metodo para dalvar los links generados
+   * Metodo para salvar los links generados
    */
 
   public saveLink() {
