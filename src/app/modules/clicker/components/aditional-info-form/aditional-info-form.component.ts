@@ -101,7 +101,7 @@ export class AditionalInfoFormComponent implements OnInit, OnDestroy {
         this.mobilityOb=  {id: val.mobility, description: val.mobilityDescription};
         this.addressInfo = val.address;
         this.receiveCommunications = val.receiveCommunications;
-     };
+     }
      this.getBasicData();
      this.personalFormInfo();
      this.profesionalFormInfo();
