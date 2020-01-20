@@ -10,7 +10,7 @@ import {
 import { LinksService } from "src/app/services/links.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "src/app/services/auth.service";
-import { distinctUntilChanged } from "rxjs/operators";
+import { distinctUntilChanged, pluck } from "rxjs/operators";
 import { UserService } from "src/app/services/user.service";
 import Swal from "sweetalert2";
 import { ResponseService } from "src/app/interfaces/response";
@@ -121,16 +121,14 @@ export class ReportsComponent implements OnInit, OnDestroy {
      * verifica si el usuario esta logueado y se obtiene la identificacion
      */
 
-    this.isLoggedIn = this.auth.isLoggedIn();
-    if (this.isLoggedIn) {
-      this.subscription = this.user.userInfo$
-        .pipe(distinctUntilChanged())
-        .subscribe(val => {
-          if (!!val) {
-            this.userName = val.email;
-          }
-        });
-    }
+    // this.isLoggedIn = this.auth.isLoggedIn();
+    // if (this.isLoggedIn) {
+    //   this.subscription = this.user.userInfo$
+    //     .pipe(distinctUntilChanged(), pluck('email'))
+    //     .subscribe(val => {
+    //         this.userName = val;
+    //     });
+    // }
   }
 
   public getFileReport() {

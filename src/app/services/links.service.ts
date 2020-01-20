@@ -78,7 +78,7 @@ export class LinksService {
     );
   }
 
-  public getReports(identification: string) {
+  public getReports() {
     const token = localStorage.getItem("ACCESS_TOKEN");
     const authorization = token;
 
@@ -89,7 +89,7 @@ export class LinksService {
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
       })
     };
-    let apiReport = `${this.reports}?identification=${identification}`;
+    let apiReport = `${this.reports}`;
     return this.http.get((`${this.urlComission}/${apiReport}`), httpOptions).pipe(
       map((resp: ResponseService) => {
         return resp.objectResponse;

@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit, OnDestroy {
    */
 
   private getInfomonth() {
-    this.subscription = this.link.getReports(this.identification).subscribe((resume: any) => {
+    this.subscription = this.link.getReports().subscribe((resume: any) => {
       this.available = resume.money.available;
       this.account = resume.money.account;
     });

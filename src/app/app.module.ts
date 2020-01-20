@@ -61,14 +61,14 @@ export function jwtTokenGetter() {
     AngularFireAuthModule,
     AngularFireMessagingModule,
     AngularFireModule.initializeApp({
-      apiKey: "AIzaSyBLEXtXZGfMEm6dLHtngNa_HWgEjjrk-14",
-      authDomain: "test-push-notification-633a0.firebaseapp.com",
-      databaseURL: "https://test-push-notification-633a0.firebaseio.com",
-      projectId: "test-push-notification-633a0",
-      storageBucket: "test-push-notification-633a0.appspot.com",
-      messagingSenderId: "374253972065",
-      appId: "1:374253972065:web:96a6651d3a2f816451d820",
-      measurementId: "G-BESRDNSPL1"
+      apiKey: "AIzaSyCo8Iq_u0Q1Znya-Qt5r9HWB-SLSeIf4uw",
+      authDomain: "notifications-6665e.firebaseapp.com",
+      databaseURL: "https://notifications-6665e.firebaseio.com",
+      projectId: "notifications-6665e",
+      storageBucket: "notifications-6665e.appspot.com",
+      messagingSenderId: "471373902459",
+      appId: "1:471373902459:web:84cbd92b19b458300528de",
+      measurementId: "G-SVL6VCELL4"
     }),
     JwtModule.forRoot({
       config: {

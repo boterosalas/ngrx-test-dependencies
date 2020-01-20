@@ -277,25 +277,29 @@ export class UsersComponent extends MatPaginatorIntl
    */
 
   private download(fileDownload) {
-    let base64 = fileDownload.objectResponse;
-    let splitbase64 = base64.split(",");
-    let file = splitbase64[1];
-
-    if (file.startsWith('/9j/')) {
-      this.ext = ".jpg";
-      this.contentType = "image/jpeg";
+    if(fileDownload.state !== 'Error') {
+      let base64 = fileDownload.objectResponse;
+      let splitbase64 = base64.split(",");
+      let file = splitbase64[1];
+  
+      if (file.startsWith('/9j/')) {
+        this.ext = ".jpg";
+        this.contentType = "image/jpeg";
+      } else {
+        this.ext = ".pdf";
+        this.contentType = "application/pdf";
+      }
+  
+      const linkSource = `data:${this.contentType};base64,${file}`;
+      const downloadLink = document.createElement("a");
+      const fileName = `archivo${this.ext}`;
+  
+      downloadLink.href = linkSource;
+      downloadLink.download = fileName;
+      downloadLink.click();
     } else {
-      this.ext = ".pdf";
-      this.contentType = "application/pdf";
+      this.openSnackBar(fileDownload.userMessage, 'Cerrar')
     }
-
-    const linkSource = `data:${this.contentType};base64,${file}`;
-    const downloadLink = document.createElement("a");
-    const fileName = `archivo${this.ext}`;
-
-    downloadLink.href = linkSource;
-    downloadLink.download = fileName;
-    downloadLink.click();
   }
 
   private changeStateUser(userId, value) {
