@@ -64,11 +64,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
    */
 
   initialNameLastName() {
-    // this.token.user$.subscribe(resp => {
-    //   const initialName = resp.firstnames.charAt(0);
-    //   const initialLastName = resp.lastnames.charAt(0);
-    //   this.initials = initialName + initialLastName;
-    // })
+
    this.subscription = this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
       if (!!val) {
         const initialName = val.firstNames.charAt(0);

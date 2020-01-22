@@ -180,7 +180,7 @@ export class LinksService {
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
       })
     };
-    return this.http.get((`${this.urlComission}${this.apiUsersExcel}?email=${params.email}&start=${params.start}&end=${params.end}`), httpOptions);
+    return this.http.get((`${this.urlComission}${this.apiUsersExcel}?&start=${params.start}&end=${params.end}`), httpOptions);
   }
 
   public getAudit(params: any) {
@@ -194,7 +194,7 @@ export class LinksService {
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
       })
     };
-    return this.http.get((`${this.urlComission}${this.apiAuditExcel}?email=${params.email}&start=${params.start}&end=${params.end}`), httpOptions);
+    return this.http.get((`${this.urlComission}${this.apiAuditExcel}?&start=${params.start}&end=${params.end}`), httpOptions);
   }
 
   public getReportClickam(params: any) {
@@ -208,7 +208,7 @@ export class LinksService {
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
       })
     };
-    return this.http.get((`${this.urlComission}${this.apigetReportClickam}?email=${params.email}&start=${params.start}&end=${params.end}`), httpOptions);
+    return this.http.get((`${this.urlComission}${this.apigetReportClickam}?&start=${params.start}&end=${params.end}`), httpOptions);
   }
 
   public sendfile(formdata) {

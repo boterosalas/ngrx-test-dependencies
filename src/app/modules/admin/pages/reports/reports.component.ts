@@ -335,7 +335,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
   public getReportClickam() {
     this.dateParams = {
-      email: this.email,
+      // email: this.email,
       start: this.dateFormSell.controls.dateRange.value.startDate.format(),
       end: this.dateFormSell.controls.dateRange.value.endDate.format()
     }
