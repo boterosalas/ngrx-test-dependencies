@@ -208,14 +208,6 @@ export class TabsComponent extends MatPaginatorIntl
     this.isLoggedIn = this.auth.isLoggedIn();
     this.identification = this.token.userInfo().identification;
 
-    // if (this.isLoggedIn) {
-    //  this.subscription = this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
-    //     if (!!val) {
-    //       this.identification = val.identification;
-    //     }
-    //   });
-    // }
-
     this.getDate();
     this.Assured();
     this.getCategories();

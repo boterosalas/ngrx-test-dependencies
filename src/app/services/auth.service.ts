@@ -113,7 +113,7 @@ export class AuthService implements OnDestroy {
         );
   }
 
-  public changePassword(id: any, data:any) {
+  public changePassword(data:any) {
     const token = localStorage.getItem("ACCESS_TOKEN");
     const authorization = token;
 

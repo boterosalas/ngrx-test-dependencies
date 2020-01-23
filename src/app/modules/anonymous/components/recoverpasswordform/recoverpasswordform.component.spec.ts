@@ -11,6 +11,7 @@ import { HomeComponent } from 'src/app/modules/clicker/pages/home/home.component
 import { ClickerModule } from 'src/app/modules/clicker/clicker.module';
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 
 describe('RecoverpasswordformComponent', () => {
   let component: RecoverpasswordformComponent;
@@ -49,6 +50,7 @@ describe('RecoverpasswordformComponent', () => {
         TranslateModule.forRoot({}),
         HttpClientTestingModule,
         BrowserAnimationsModule,
+        MatPasswordStrengthModule,
         AppMaterialModule,
         ClickerModule,
         RouterTestingModule.withRoutes([

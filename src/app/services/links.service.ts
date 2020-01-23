@@ -59,25 +59,6 @@ export class LinksService {
     return this.http.post((`${this.url + this.apiPostReferrrals}`), dates, httpOptions);
   }
 
-  public getLink(identification: string) {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
-      })
-    };
-    let apiGetLink = `${this.apiGetTotalLinks}=${identification}`;
-    return this.http.get((`${this.url + apiGetLink}`), httpOptions).pipe(
-      map((resp: ResponseService) => {
-        return resp.objectResponse;
-      })
-    );
-  }
-
   public getReports() {
     const token = localStorage.getItem("ACCESS_TOKEN");
     const authorization = token;

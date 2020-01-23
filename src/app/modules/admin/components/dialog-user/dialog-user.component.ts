@@ -8,7 +8,6 @@ import {
 } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { Subscription } from "rxjs";
-import { distinctUntilChanged } from "rxjs/operators";
 import { UserService } from "src/app/services/user.service";
 import { AuthService } from "src/app/services/auth.service";
 
@@ -66,20 +65,6 @@ export class DialogUserComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoggedIn = this.auth.isLoggedIn();
-
-    /**
-     * verifica si el usuario esta logueado y se obtiene la identificacion
-     */
-
-    // if (this.isLoggedIn) {
-    //   this.subscription = this.user.userInfo$
-    //     .pipe(distinctUntilChanged())
-    //     .subscribe(val => {
-    //       if (!!val) {
-    //         this.idAdmin = val.userId;
-    //       }
-    //     });
-    // }
   }
 
   ngOnDestroy(): void {
