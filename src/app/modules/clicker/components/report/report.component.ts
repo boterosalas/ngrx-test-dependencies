@@ -73,7 +73,7 @@ export class ReportComponent implements OnInit, OnDestroy {
    */
 
   private getInfomonth() {
-    this.subscription = this.payment.getReports(this.identification).subscribe((resume: any) => {
+    this.subscription = this.payment.getReports().subscribe((resume: any) => {
       this.available = resume.money.available;
       this.account = resume.money.account;
     });

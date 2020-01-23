@@ -49,7 +49,7 @@ export class GeneralResumeComponent implements OnInit, OnDestroy {
    */
 
   private getInfomonth() {
-   this.subscription = this.link.getReports(this.identification).subscribe((resume: any) => {
+   this.subscription = this.link.getReports().subscribe((resume: any) => {
       this.linksGenerated = resume.generalResume.totalLinks;
       this.totalComissions = resume.generalResume.totalCommissions;
       this.totalProducts = resume.generalResume.totalProducts;

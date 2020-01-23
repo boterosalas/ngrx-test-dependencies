@@ -71,15 +71,15 @@ export class DialogUserComponent implements OnInit, OnDestroy {
      * verifica si el usuario esta logueado y se obtiene la identificacion
      */
 
-    if (this.isLoggedIn) {
-      this.subscription = this.user.userInfo$
-        .pipe(distinctUntilChanged())
-        .subscribe(val => {
-          if (!!val) {
-            this.idAdmin = val.userId;
-          }
-        });
-    }
+    // if (this.isLoggedIn) {
+    //   this.subscription = this.user.userInfo$
+    //     .pipe(distinctUntilChanged())
+    //     .subscribe(val => {
+    //       if (!!val) {
+    //         this.idAdmin = val.userId;
+    //       }
+    //     });
+    // }
   }
 
   ngOnDestroy(): void {
