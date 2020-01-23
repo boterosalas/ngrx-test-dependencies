@@ -5,6 +5,7 @@ import { UserService } from "src/app/services/user.service";
 import { distinctUntilChanged } from "rxjs/operators";
 import { Subscription } from 'rxjs';
 import { NavigationStart, Router } from '@angular/router';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: "app-header",
@@ -25,7 +26,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private utils: UtilsService,
     public auth: AuthService,
     private user: UserService,
-    private router: Router
+    private router: Router,
+    private token: TokenService
   ) {}
 
   ngOnInit() {
@@ -62,6 +64,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
    */
 
   initialNameLastName() {
+
    this.subscription = this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
       if (!!val) {
         const initialName = val.firstNames.charAt(0);
