@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, TemplateRef } from "@angular/core";
-import { environment } from "src/environments/environment";
 import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog.component";
 import { Subscription } from "rxjs";
 import { MatSnackBar, MatBottomSheet } from "@angular/material";
@@ -7,7 +6,6 @@ import { UserService } from "src/app/services/user.service";
 import { AuthService } from "src/app/services/auth.service";
 import { ContentService } from "src/app/services/content.service";
 import { LinksService } from "src/app/services/links.service";
-import { distinctUntilChanged } from "rxjs/operators";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
 import { TokenService } from 'src/app/services/token.service';

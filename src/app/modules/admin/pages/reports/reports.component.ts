@@ -3,14 +3,12 @@ import {
   OnInit,
   ViewChild,
   TemplateRef,
-  ElementRef,
   ChangeDetectorRef,
   OnDestroy
 } from "@angular/core";
 import { LinksService } from "src/app/services/links.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "src/app/services/auth.service";
-import { distinctUntilChanged, pluck } from "rxjs/operators";
 import { UserService } from "src/app/services/user.service";
 import Swal from "sweetalert2";
 import { ResponseService } from "src/app/interfaces/response";
@@ -27,7 +25,6 @@ import { MatSnackBar } from '@angular/material';
 })
 export class ReportsComponent implements OnInit, OnDestroy {
   @ViewChild("templateCardReport, templateCardCross", { static: false })
-  // @ViewChild('input',{ static: false }) input: ElementRef;
   template: TemplateRef<any>;
 
   fileUrl: string;
@@ -116,19 +113,6 @@ export class ReportsComponent implements OnInit, OnDestroy {
         validator: [ValidateDate.CompareDates]
       }
     );
-
-    /**
-     * verifica si el usuario esta logueado y se obtiene la identificacion
-     */
-
-    // this.isLoggedIn = this.auth.isLoggedIn();
-    // if (this.isLoggedIn) {
-    //   this.subscription = this.user.userInfo$
-    //     .pipe(distinctUntilChanged(), pluck('email'))
-    //     .subscribe(val => {
-    //         this.userName = val;
-    //     });
-    // }
   }
 
   public getFileReport() {
@@ -335,7 +319,6 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
   public getReportClickam() {
     this.dateParams = {
-      // email: this.email,
       start: this.dateFormSell.controls.dateRange.value.startDate.format(),
       end: this.dateFormSell.controls.dateRange.value.endDate.format()
     }
