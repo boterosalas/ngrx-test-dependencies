@@ -347,7 +347,6 @@ export class UsersComponent extends MatPaginatorIntl
 
   public getUserExcel() {
     this.dateParams = {
-      // email: this.email,
       start: this.dateForm.controls.dateRange.value.startDate.format(),
       end: this.dateForm.controls.dateRange.value.endDate.format()
     }
