@@ -32,6 +32,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+   this.user.getProfile();
    this.subscription = this.user.userInfo$.subscribe((val)=> {
      if(!!val) {
        this.userId = val.userId;
