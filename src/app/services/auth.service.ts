@@ -8,6 +8,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 import decode from "jwt-decode";
 import { Forgotpassword } from '../interfaces/forgotpassword';
 import { Recoverpassword } from '../interfaces/recoverpassword';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: "root"
@@ -16,7 +17,7 @@ export class AuthService implements OnDestroy {
   constructor(
     private http: HttpClient,
     private router: Router,
-    public jwtHelper: JwtHelperService
+    public jwtHelper: JwtHelperService,
   ) {
     this.isLogged$.subscribe(val => {
       this.getRole();

@@ -78,10 +78,10 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   })
 
-  it('logout', () => {
-    component.logout();
-    // expect(mockAuthService.logout).toHaveBeenCalled();
-  });
+  // it('logout', () => {
+  //   component.logout();
+  //   expect(mockAuthService.logout).toHaveBeenCalled();
+  // });
   
 
   describe('show Login', () => {

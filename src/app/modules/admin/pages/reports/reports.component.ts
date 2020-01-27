@@ -80,12 +80,12 @@ export class ReportsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getFileReport();
 
-    this.usersService.userInfo$
-    .subscribe(val => {
-      if (!!val) {
-       this.email = val.email;
-      }
-    });
+    // this.usersService.userInfo$
+    // .subscribe(val => {
+    //   if (!!val) {
+    //    this.email = val.email;
+    //   }
+    // });
 
     this.nameFile = "";
     this.nameFilePayment = "";
@@ -325,7 +325,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
     
    this.subscription = this.file.getReportClickam(this.dateParams).subscribe((resp: ResponseService) => {
       if(resp.state === 'Success') {
-        this.openSnackBar(resp.userMessage + ' a ' + this.email, 'Cerrar');
+        this.openSnackBar(resp.userMessage, 'Cerrar');
         this.dateFormSell.reset();
         if (this.dateFormSell.controls.dateRange.value.startDate === null) {
           this.disButon = true;

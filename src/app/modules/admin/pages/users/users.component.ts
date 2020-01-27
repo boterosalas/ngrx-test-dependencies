@@ -95,12 +95,12 @@ export class UsersComponent extends MatPaginatorIntl
   ngOnInit() {
     this.searchUser("");
 
-    this.usersService.userInfo$
-        .subscribe(val => {
-          if (!!val) {
-           this.email = val.email;
-          }
-        });
+    // this.usersService.userInfo$
+    //     .subscribe(val => {
+    //       if (!!val) {
+    //        this.email = val.email;
+    //       }
+    //     });
 
         this.dateForm = this.fb.group(
           {
@@ -353,7 +353,7 @@ export class UsersComponent extends MatPaginatorIntl
     
     this.subscription = this.file.getUsersExcel(this.dateParams).subscribe((resp: ResponseService) => {
       if(resp.state === 'Success') {
-        this.openSnackBar(resp.userMessage + ' a ' + this.email, 'Cerrar');
+        this.openSnackBar(resp.userMessage, 'Cerrar');
         this.dateForm.reset();
         if (this.dateForm.controls.dateRange.value.startDate === null) {
           this.disButon = true;
