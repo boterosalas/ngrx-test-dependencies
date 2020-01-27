@@ -10,11 +10,12 @@ import { Observable } from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router, private auth:AuthService) {}
+  constructor(private router: Router, private auth:AuthService, private user: UserService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const currentUser = localStorage.getItem('ACCESS_TOKEN');
@@ -35,9 +36,10 @@ export class AuthInterceptor implements HttpInterceptor {
         }
         localStorage.removeItem("ACCESS_TOKEN");
         this.router.navigate(['/']);
-        this.auth.getRole$.next(null);
-        this.auth.isLogged$.next(false);
-        return false;
+        // this.auth.getRole$.next(null);
+        // this.auth.isLogged$.next(false);
+        // this.user.userInfo$.next(null);
+        // return false;
       }
     }));
   }

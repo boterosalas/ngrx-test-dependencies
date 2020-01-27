@@ -11,11 +11,11 @@ import { AuthService } from "./auth.service";
 })
 export class UserService {
   constructor(private http: HttpClient, private auth: AuthService) {
-    this.auth.isLogged$.pipe(distinctUntilChanged()).subscribe(val => {
-      if(!!val || this.auth.isLoggedIn()) {
-        this.getProfile();
-      }
-    })
+    // this.auth.isLogged$.pipe(distinctUntilChanged()).subscribe(val => {
+    //   if(!!val || this.auth.isLoggedIn()) {
+    //     this.getProfile();
+    //   }
+    // })
   }
 
   url = environment.URL_PROFILE;
@@ -37,6 +37,7 @@ export class UserService {
   apiBanks = 'userprofile/getBanks';
   apiUploadFiles = 'userprofile/upload';
   apiDownloadFile = 'userprofile/downloadBase64';
+  apiGetuserdata = "userprofile/getuserdata"
 
 
   token = localStorage.getItem("ACCESS_TOKEN");
@@ -119,6 +120,24 @@ export class UserService {
       })
     };
     return this.http.get((`${this.url}${this.apiGetBasicData}`), httpOptions).pipe(
+      map((user: any) => {
+        return user.objectResponse;
+      })
+    );
+  }
+
+  getuserdata()  {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.get((`${this.url}${this.apiGetuserdata}`), httpOptions).pipe(
       map((user: any) => {
         return user.objectResponse;
       })
