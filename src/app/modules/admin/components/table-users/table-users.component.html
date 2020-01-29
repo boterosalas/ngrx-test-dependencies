@@ -19,7 +19,12 @@
           <!-- Email Column -->
           <ng-container matColumnDef="email">
             <th mat-header-cell *matHeaderCellDef style="width: 15%;"> {{ 'USERS.EMAIL' | translate }} </th>
-            <td class="cursor-pointer" mat-cell *matCellDef="let element: let i = index" (click)="userEmail((dataSource.data)[i])"> {{element.email}} </td>
+            <td class="cursor-pointer" mat-cell *matCellDef="let element: let i = index" (click)="userEmail((dataSource.data)[i])">
+              <span fxLayout="row" fxLayoutAlign="space-between space-between">
+                {{element.email}} 
+                <img src="/assets/img/icono-editar.svg" alt="editar"/>
+              </span>
+            </td>
           </ng-container>
 
           <!-- Subscription Column -->

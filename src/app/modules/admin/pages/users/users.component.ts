@@ -21,6 +21,7 @@ import * as moment from "moment";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { DialogEditComponent } from "src/app/modules/clicker/components/dialog-edit/dialog-edit.component";
 moment.locale("es");
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-users",
@@ -169,14 +170,31 @@ export class UsersComponent extends MatPaginatorIntl
     this.userId = userId;
   }
 
+  public changeEmail(){
+    Swal.fire({
+      title: "Actualizar correo",
+      text: '¿Estás seguro de actualizar el correo?',
+      type: "info",
+      confirmButtonText: "Aceptar",
+      cancelButtonText: "Cancelar",
+      showCancelButton: true,
+      confirmButtonClass: "init-sesssion",
+      allowOutsideClick: false
+    }).then((resp: any) => {
+      if(resp.dismiss !== 'cancel') {
+        this.updateEmail();
+      }
+    })
+  }
+
   public updateEmail() {
     const id = this.userId;
     let email = this.emailForm.controls.email.value;
     this.subscription = this.usersService.updateUserEmail(id, email).subscribe(
       (resp: ResponseService) => {
-        this.openSnackBar(resp.userMessage, "Cerrar");
-        this.dialog.closeAll();
-        this.searchUser(this.paginate);
+          this.dialog.closeAll();
+          this.openSnackBar(resp.userMessage, "Cerrar");
+          this.searchUser(this.paginate);
       },
       err => {
         this.openSnackBar(err.userMessage, "Cerrar");
