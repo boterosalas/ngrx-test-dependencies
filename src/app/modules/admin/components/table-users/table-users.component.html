@@ -4,7 +4,7 @@
           <!-- Identificaton Column -->
           <ng-container matColumnDef="identification">
             <th mat-header-cell *matHeaderCellDef style="width: 30%;"> {{ 'USERS.USER' | translate }} </th>
-            <td mat-cell *matCellDef="let element"> 
+            <td class="cursor-pointer" mat-cell *matCellDef="let element: let i=index" (click)="userInfo((dataSource.data)[i])"> 
             <p class="m-0 galano-bold">{{element.firstNames}} {{element.lastNames}}</p>
             <p class="m-0 gray-light">C.C {{element.identification}}</p>
             </td>
@@ -19,7 +19,7 @@
           <!-- Email Column -->
           <ng-container matColumnDef="email">
             <th mat-header-cell *matHeaderCellDef style="width: 15%;"> {{ 'USERS.EMAIL' | translate }} </th>
-            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            <td class="cursor-pointer" mat-cell *matCellDef="let element: let i = index" (click)="userEmail((dataSource.data)[i])"> {{element.email}} </td>
           </ng-container>
 
           <!-- Subscription Column -->
@@ -91,6 +91,6 @@
           </ng-container>
       
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr class="cursor-pointer" id="user-{{i}}" mat-row *matRowDef="let row; columns: displayedColumns;let i= index;" (click)="userInfo((dataSource.data)[i])"></tr>
+          <tr id="user-{{i}}" mat-row *matRowDef="let row; columns: displayedColumns;let i= index;"></tr>
         </table>
       </div>

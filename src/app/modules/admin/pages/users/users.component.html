@@ -14,7 +14,7 @@
 
     <app-search-users (search)="searchUser($event)"></app-search-users>
     <div id="users-table">
-        <app-table-users (dataUser)="userData($event)" [dataSource]="dataSource" (sortDataUser)="sort($event)"></app-table-users>
+        <app-table-users (dataUser)="userData($event)" (dataEmail)="userEmail($event)" [dataSource]="dataSource" (sortDataUser)="sort($event)"></app-table-users>
         <mat-paginator
         [length]="totalItems"
             [pageSize]="pageSize"
@@ -24,3 +24,39 @@
        ></mat-paginator>
     </div>
 </div>
+
+<!-- template Email-->
+
+<ng-template #templateDialogEmail>
+    <form [formGroup]="emailForm" fxLayout="column" fxFlex="100" class="formw">
+        <mat-form-field>
+            <input
+              matInput
+              id="email"
+              type="email"
+              placeholder="{{ 'GENERIC.EMAIL' | translate }}"
+              formControlName="email"
+              spacebar
+              required
+            />
+            <span matPrefix><mat-icon color="gray">person</mat-icon></span>
+            <mat-error id="introduceEmail" *ngIf="emailForm.controls.email.invalid && emailForm.controls.email.errors.required">{{
+              "LOGIN.INTRODUCE_EMAIL" | translate
+            }}</mat-error>
+            <mat-error id="invalidEmail" *ngIf="emailForm.controls.email.invalid && emailForm.controls.email.errors.pattern">{{
+              "LOGIN.INVALID_EMAIL" | translate
+            }}</mat-error>
+          </mat-form-field>
+      <button
+        mat-raised-button
+        id="editProfile"
+        class="center button button-100 mt-4"
+        color="orange"
+        (click)="updateEmail()"
+        [disabled]="!emailForm.valid"
+      >
+        {{ "GENERIC.SAVE" | translate }}
+      </button>
+    </form>
+  </ng-template>
+  
