@@ -27,7 +27,8 @@ export class RecoverpasswordformComponent implements OnInit, OnDestroy {
   recoverPasswordForm: FormGroup;
   code: string;
   email: string;
-  passwordPattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[!#/_@#$%^&+-.*)(´}{><:;¡!})])";
+  // passwordPattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[!#/_@#$%^&+-.*)(´}{><:;¡!})])";
+  passwordPattern = "(?=.*[a-zA-Z])(?=.*[0-9])";
 
   ngOnInit() {
     this.recoverPasswordForm = this.fb.group({
@@ -81,7 +82,7 @@ export class RecoverpasswordformComponent implements OnInit, OnDestroy {
         this.loading.hide();
         if (resp.state === "Success") {
           Swal.fire({
-            title: "Recuperación de contraseña",
+            title: "cambio de contraseña",
             text: "Tu contraseña ha sido restablecida exitosamente",
             type: "success",
             confirmButtonText: "Aceptar",
