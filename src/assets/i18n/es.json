@@ -87,7 +87,7 @@
     "GET_LINK": "Crear link"
   },
   "HOME": {
-    "TITLE_SPEND": "¿Cuánto ganó?",
+    "TITLE_SPEND": "¿Cuánto gano?",
     "DESPCRIPTION_SPEND": "Consulta aquí los valores de las comisiones que puedes ganar por crear link y generar ventas a través de estos.",
     "TEXT_BUTTON_COMISIONS": "Ver comisiones",
     "TITLE_SELL": "¿Ofertas para ganar comisiones rápido?",
@@ -122,7 +122,7 @@
   "CLICKACADEMY": {
     "CLICKACADEMY": "Click Academy",
     "CLICKACADEMY_TAB_EXITO": "exito.com",
-    "CLICKACADEMY_TAB_EXITO_TABLE": "<table class='w-100 text-left mt-3'><thead><th>Categoría de producto</th><th>Comisiones</th></thead><tbody><tr><td>Textiles</td><td>9.60%</td></tr><tr><td>Ropa hogar y otros</td><td>6.40%</td></tr><tr><td>Colchones y muebles</td><td>4.00%</td><tr><td>Mercado (Aplica por compras superiores a $200.000 pesos, este valor no incluye el costo del envio)</td><td>$ 8.000</td></tr><tr><td>Accesorios de telefonía, Categoría genérica, Punto liquidación, Garantías extendidas, Ventilación, Calefacción, Combos sublínea 51, Cuidado pisos, Cuidado ropa, Cuidado personal, Aires acondicionados, Accesorios preparación alimentos, Bebidas, Cocción eléctrica, Preparación Alimentos</td><td>2.40%</td></tr><tr><td>DVD, Accesorios pata TV, Teatro en casa, Equipos de sonido, Portables de audio, Accesorios audio, Networking, Teléfonos, Accesorios TV-Audio y teatro en casa, Periféricos, Accesorios para PC.</td><td>1.60%</td></tr><tr><td>Televisores, Celulares gama alta</td><td>0.96%</td></tr><tr><td>Calefacción, Cocción, Refrigeración, Máquinas de coser, Lavadoras, Secadoras, Video juegos</td><td>0.80%</td></tr><tr><td>Celulares gama media, Celulares gama baja</td><td>0.64%</td></tr><tr><td>Informática, Impresión, Cámaras fotográficas y filmadoras.</td><td>0.48%</td></tr></tbody></table>",
+    "CLICKACADEMY_TAB_EXITO_TABLE": "<table class='w-100 text-left mt-3'><thead><th>Categoría de producto</th><th>Comisiones</th></thead><tbody><tr><td>Todos los textiles y categoría bebés</td><td>9.6%</td></tr><tr><td>Garantías extendidas</td><td>9.6%</td></tr><tr><td>Hogar: Ferretería, fiesta, papelería y navidad.</td><td>8%</td><tr><td>Hogar: Organizadores, mesas y decoración, deportes, ropa hogar y otros, muebles, hidrolavadoras, juguetería, Halloween, cocina y libros.</td><td>6.4%</td></tr><tr><td>Colchones</td><td>4%</td><tr><td>Mercado </td><td>3%</td></tr><tr><td>Pequeños electrodomésticos: Cuidado pisos, de ropa y personal, ventilación y calefacción, cocción eléctrica, bebidas, accesorios preparación alimentos, preparación alimentos y aires acondicionados.</td><td>2.4%</td></tr><tr><td>Accesorios telefonía</td><td>2.4%</td></tr><tr><td>Informática: Periféricos y accesorios para PC</td><td>1.6%</td></tr><tr><td>Audio y video: Accesorios de TV y audio, DVD, teatro en casa, portables audio, teléfonos, equipos de sonido.</td><td>1.6%</td></tr><tr><td>Celular gama alta</td><td>0.96%</td></tr><tr><td>Televisión</td><td>0.96%</td></tr><tr><td>Grandes electrodomésticos: Lavado y secado, refrigeración máquinas de coser y cocción.</td><td>0.8%</td></tr></tr><tr><td>Videojuegos</td><td>0.8%</td></tr><tr><td>Celular gama media</td><td>0.64%</td></tr><tr><td>Informática: Cámaras fotográficas y filmadoras, computadores, tablets, monitores, e impresión</td><td>0.6%</td></tr></tbody></table>",
     "CLICKACADEMY_TAB_SEGUROS": "Seguros",
     "CLICKACADEMY_TAB_SEGUROS_TABLE": "<table class='w-100 text-left mt-3'><thead><th>Categoría de producto</th><th>Comisiones</th></thead><tbody><tr><td>SOAT Auto</td><td>$32.000</td></tr><tr><td>SOAT Moto</td><td>$8.000</td></tr><tr><td>Seguro viaje internacional</td><td>$16.000</td></tr><tr><td>Seguro Celular</td><td>$12.000</td></tr><tr><td>Seguro Smartwatch</td><td>$12.000</td></tr><tr><td>Seguro Tablet</td><td>$12.000</td></tr><tr><td>Seguro Portátil</td><td>$12.000</td></tr><tr><td>Seguro consola de videojuego</td><td>$12.000</td></tr><tr><td>Seguro mascotas</td><td>$12.000</td></tr><tr><td>Seguro motos</td><td>$12.000</td></tr><tr><td>Seguro bicicletas</td><td>$12.000</td></tr><tr><td>Seguro de viaje nacional</td><td>$4.800</td></tr></tbody></table>",
     "CLICKACADEMY_TAB_VIAJES": "Viajes",
@@ -142,9 +142,9 @@
     "FREQUENT_QUESTIONS": "Preguntas Frecuentes",
     "FREQUENT_QUESTIONS_DESCRIPTION": "Bienvenido a la comunidad de ayuda de Clickam, acá podrás encontrar respuesta a las preguntas más frecuentes.",
     "HOW_WORKS_TITLE": "¿Cómo funciona?",
-    "HOW_WORKS_DESCRIPTION": "En Clickam ganas comisiones por referir y compartir link de productos y servicios en tus redes sociales, una vez las personas compren a través de estos, te ganaras una comisión según el producto o servicio vendido.",
+    "HOW_WORKS_DESCRIPTION": "En Clickam ganas comisiones por referir y compartir link de productos y servicios en tus redes sociales, una vez las personas compren a través de estos, te ganarás una comisión según el producto o servicio vendido.",
     "SALES_TITLE": "¿Cómo cruzan la venta?",
-    "SALES_DESCRIPTION": "Cuando crees un link y las personas compren a través de este, nuestro sistema rastreará de manera precisa el link desde donde se generará la compra, si es a través de uno de los link que tú como clicker creaste y compartiste, te ganarás la comisión correspondiente al producto o servicio.",
+    "SALES_DESCRIPTION": "Cuando crees un link y las personas compren a través de este, nuestro sistema rastreará de manera precisa el link desde donde se generó la compra, si es a través de uno de los link que tú como clicker creaste y compartiste, te ganarás la comisión correspondiente al producto o servicio.",
     "WON_COMISSION_TITLE": "¿Cómo veo las comisiones que gané?",
     "WON_COMISSION_DESCRIPTION": "Cuando inicies sesión podrás encontrar una tabla con los link creados y las comisiones ganadas los últimos 30 días, un gráfico con el desempeño de tu perfil, métricas del año en curso de tus comisiones ganadas, los link creados, el número de productos vendidos y la tasa de conversión (La tasa de conversión es la división entre el número de productos vendidos y los link generados).",
     "BEST_OFFER_TITLE": "¿Dónde puedo encontrar las mejores ofertas?",
@@ -156,7 +156,7 @@
     "WHERE_PAY_TITLE": "¿Dónde me pagan?",
     "WHERE_PAY_DESCRIPTION": "Tus comisiones se pagarán en la cuenta de nómina que tengas registrada dentro del Grupo Exito o la cuenta que hayas registrado.",
     "PAYMET_METHODS_TITLE": "¿Medios de pago?",
-    "PAYMET_METHODS_DESCRIPTION": "Cada negocio asociado cuenta con diferentes medios de pago que puedes utilizar a la hora de pagar tu producto o servicio, podrás encontrar desde pagos con tarjeta débito y crédito, hasta pagos contra entrega. Válida siempre las formas de pago de cada negocio para dar claridad a tus referidos.",
+    "PAYMET_METHODS_DESCRIPTION": "Cada negocio asociado cuenta con diferentes medios de pago que puedes utilizar a la hora de pagar tu producto o servicio, podrás encontrar desde pagos con tarjeta débito y crédito, hasta pagos contra entrega. Valida siempre las formas de pago de cada negocio para dar claridad a tus referidos.",
     "SHIPMENT_TITLE": "¿Envíos?",
     "SHIPMENT_DESC": "Los envíos aplican para <a href='https://www.exito.com' target='_blank'> www.exito.com </a>, este negocio asociado hace envíos a todo el País, los periodos de entrega son entre 2 y 10 días hábiles según la ubicación geográfica."
   },
