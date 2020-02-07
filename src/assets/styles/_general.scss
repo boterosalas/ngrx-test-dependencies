@@ -1021,6 +1021,17 @@ span.orange-border {
   }
 }
 
+button.swal2-confirm.updateok.order-last.swal2-styled {
+  background-color: #FF6F11 !important;
+  color: #fff !important;
+}
+
+button.swal2-cancel.updatecancel.swal2-styled {
+  background: none;
+  background-image: none !important;
+  color: #aaa;
+}
+
 @media screen and (min-width: 768px) {
   .share-mobile{
     display: none;
