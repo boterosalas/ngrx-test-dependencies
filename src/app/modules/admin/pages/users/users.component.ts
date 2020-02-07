@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, OnDestroy } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  OnDestroy,
+  TemplateRef
+} from "@angular/core";
 import {
   MatTableDataSource,
   MatPaginator,
@@ -10,10 +16,12 @@ import { DialogUserComponent } from "../../components/dialog-user/dialog-user.co
 import { Subscription } from "rxjs/internal/Subscription";
 import { UserService } from "src/app/services/user.service";
 import { ResponseService } from "src/app/interfaces/response";
-import { LinksService } from 'src/app/services/links.service';
-import * as moment from 'moment';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-moment.locale('es');
+import { LinksService } from "src/app/services/links.service";
+import * as moment from "moment";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { DialogEditComponent } from "src/app/modules/clicker/components/dialog-edit/dialog-edit.component";
+moment.locale("es");
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-users",
@@ -30,31 +38,37 @@ export class UsersComponent extends MatPaginatorIntl
   totalItems: number;
   paginate: string;
   dateForm: FormGroup;
+  emailForm: FormGroup;
   private subscription: Subscription = new Subscription();
   ext: string;
   contentType: string;
   email: string;
   maxDate = moment(new Date());
   orderOrigin: string;
-  orderBy:string;
+  orderBy: string;
   from: any;
   to: any;
   dateParams: any;
   disButon: boolean;
+  @ViewChild("templateDialogEmail", { static: false })
+  templateEmail: TemplateRef<any>;
+  emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
+  userId: string;
+  userMail: string;
 
   locale = {
-    locale: 'es',
-    direction: 'ltr', // could be rtl
-    weekLabel: 'W',
-    separator: ' a ', // default is ' - '
-    cancelLabel: 'Cancelar', // detault is 'Cancel'
-    applyLabel: 'Aplicar', // detault is 'Apply'
-    clearLabel: 'Limpiar', // detault is 'Clear'
-    customRangeLabel: 'Custom range',
+    locale: "es",
+    direction: "ltr", // could be rtl
+    weekLabel: "W",
+    separator: " a ", // default is ' - '
+    cancelLabel: "Cancelar", // detault is 'Cancel'
+    applyLabel: "Aplicar", // detault is 'Apply'
+    clearLabel: "Limpiar", // detault is 'Clear'
+    customRangeLabel: "Custom range",
     daysOfWeek: moment.weekdaysMin(),
     monthNames: moment.monthsShort(),
     firstDay: 1 // first day is monday
-}
+  };
 
   constructor(
     private dialog: MatDialog,
@@ -94,35 +108,112 @@ export class UsersComponent extends MatPaginatorIntl
 
   ngOnInit() {
     this.searchUser("");
+    this.formEmail();
 
-    this.usersService.userInfo$
-        .subscribe(val => {
-          if (!!val) {
-           this.email = val.email;
-          }
-        });
+    // this.usersService.userInfo$
+    //     .subscribe(val => {
+    //       if (!!val) {
+    //        this.email = val.email;
+    //       }
+    //     });
 
-        this.dateForm = this.fb.group(
-          {
-            dateRange: [null, Validators.required]
-          }
-        );
-
+    this.dateForm = this.fb.group({
+      dateRange: [null, Validators.required]
+    });
   }
 
-  public searchUser(term, from = 1, to = this.pageTo, orderOrigin = '' ,orderBy = '') {
+  /**
+   * Metodo para buscar usuarios
+   * @param term
+   * @param from
+   * @param to
+   * @param orderOrigin
+   * @param orderBy
+   */
+
+  public searchUser(
+    term,
+    from = 1,
+    to = this.pageTo,
+    orderOrigin = "",
+    orderBy = ""
+  ) {
     if (term !== this.paginate) {
       this.paginate = term;
       this.pageIndex = 0;
     }
     const params = { term, from, to, orderOrigin, orderBy };
-    this.subscription = this.file
-      .searchUsers(params)
-      .subscribe((user: any) => {
-        this.users = user.users;
-        this.totalItems = user.total;
-        this.dataSource = new MatTableDataSource<any>(this.users);
-      });
+    this.subscription = this.file.searchUsers(params).subscribe((user: any) => {
+      this.users = user.users;
+      this.totalItems = user.total;
+      this.dataSource = new MatTableDataSource<any>(this.users);
+    });
+  }
+
+  public userEmail(user) {
+    const userId = user.userId;
+    const email = user.email;
+    const template = this.templateEmail;
+    const title = "Actualizar correo";
+
+    this.dialog.open(DialogEditComponent, {
+      data: {
+        title,
+        template,
+        userId,
+        email
+      }
+    });
+
+    this.emailForm.controls.email.setValue(email);
+    this.userMail = email;
+    this.userId = userId;
+  }
+
+  public changeEmail(){
+    Swal.fire({
+      title: "Actualizar correo",
+      text: '¿Estás seguro de actualizar el correo?',
+      type: "info",
+      confirmButtonText: "Aceptar",
+      cancelButtonText: "Cancelar",
+      showCancelButton: true,
+      confirmButtonClass: "updateok order-last",
+      cancelButtonClass: "updatecancel",
+      allowOutsideClick: false
+    }).then((resp: any) => {
+      if(resp.dismiss !== 'cancel') {
+        this.updateEmail();
+      }
+    })
+  }
+
+  public updateEmail() {
+    const id = this.userId;
+    let email = this.emailForm.controls.email.value;
+    this.subscription = this.usersService.updateUserEmail(id, email).subscribe(
+      (resp: ResponseService) => {
+          this.dialog.closeAll();
+          this.openSnackBar(resp.userMessage, "Cerrar");
+          this.searchUser(this.paginate);
+      },
+      err => {
+        this.openSnackBar(err.userMessage, "Cerrar");
+      }
+    );
+  }
+
+  public formEmail() {
+    this.emailForm = this.fb.group({
+      email: [
+        "",
+        [
+          Validators.required,
+          Validators.pattern(this.emailPattern),
+          Validators.maxLength(64)
+        ]
+      ]
+    });
   }
 
   public userData(user) {
@@ -247,64 +338,79 @@ export class UsersComponent extends MatPaginatorIntl
   }
 
   private changeComunications(userId, value) {
-    this.usersService.comunitcations(userId, value).subscribe((user: any) => {
-      if (value === true) {
-        this.openSnackBar(
-          "Se ha guardado el usuario para que reciba comunicaciones",
-          "Cerrar"
-        );
-      } else {
-        this.openSnackBar(
-          "Se ha guardado el usuario para que no reciba comunicaciones",
-          "Cerrar"
-        );
-      }
-    });
+    this.subscription = this.usersService
+      .comunitcations(userId, value)
+      .subscribe((user: any) => {
+        if (value === true) {
+          this.openSnackBar(
+            "Se ha guardado el usuario para que reciba comunicaciones",
+            "Cerrar"
+          );
+        } else {
+          this.openSnackBar(
+            "Se ha guardado el usuario para que no reciba comunicaciones",
+            "Cerrar"
+          );
+        }
+      });
   }
 
+  /**
+   * Metodo para descargar archivos del usuario
+   * @param fileDownload
+   */
+
   private download(fileDownload) {
-    let base64 = fileDownload.objectResponse;
-    let splitbase64 = base64.split(",");
-    let file = splitbase64[1];
+    if (fileDownload.state !== "Error") {
+      let base64 = fileDownload.objectResponse;
+      let splitbase64 = base64.split(",");
+      let file = splitbase64[1];
 
-    if (file.startsWith('/9j/')) {
-      this.ext = ".jpg";
-      this.contentType = "image/jpeg";
+      if (file.startsWith("/9j/")) {
+        this.ext = ".jpg";
+        this.contentType = "image/jpeg";
+      } else {
+        this.ext = ".pdf";
+        this.contentType = "application/pdf";
+      }
+
+      const linkSource = `data:${this.contentType};base64,${file}`;
+      const downloadLink = document.createElement("a");
+      const fileName = `archivo${this.ext}`;
+
+      downloadLink.href = linkSource;
+      downloadLink.download = fileName;
+      downloadLink.click();
     } else {
-      this.ext = ".pdf";
-      this.contentType = "application/pdf";
+      this.openSnackBar(fileDownload.userMessage, "Cerrar");
     }
-
-    const linkSource = `data:${this.contentType};base64,${file}`;
-    const downloadLink = document.createElement("a");
-    const fileName = `archivo${this.ext}`;
-
-    downloadLink.href = linkSource;
-    downloadLink.download = fileName;
-    downloadLink.click();
   }
 
   private changeStateUser(userId, value) {
-    this.subscription = this.usersService.statusUser(userId, value).subscribe(() => {
-      if (value === true) {
-        this.openSnackBar("El usuario ha sido activado", "Cerrar");
-      } else {
-        this.openSnackBar("El usuario ha sido inactivado", "Cerrar");
-      }
-    });
+    this.subscription = this.usersService
+      .statusUser(userId, value)
+      .subscribe(() => {
+        if (value === true) {
+          this.openSnackBar("El usuario ha sido activado", "Cerrar");
+        } else {
+          this.openSnackBar("El usuario ha sido inactivado", "Cerrar");
+        }
+      });
   }
 
   private changeVerified(userId, value) {
-    this.subscription = this.usersService.verifiedUser(userId, value).subscribe(() => {
-      if (value === true) {
-        this.openSnackBar("Se ha verificado el usuario", "Cerrar");
-      } else {
-        this.openSnackBar(
-          "Se ha cambiado el usuario a no verificado",
-          "Cerrar"
-        );
-      }
-    });
+    this.subscription = this.usersService
+      .verifiedUser(userId, value)
+      .subscribe(() => {
+        if (value === true) {
+          this.openSnackBar("Se ha verificado el usuario", "Cerrar");
+        } else {
+          this.openSnackBar(
+            "Se ha cambiado el usuario a no verificado",
+            "Cerrar"
+          );
+        }
+      });
   }
 
   /**
@@ -329,20 +435,21 @@ export class UsersComponent extends MatPaginatorIntl
 
   public getUserExcel() {
     this.dateParams = {
-      email: this.email,
       start: this.dateForm.controls.dateRange.value.startDate.format(),
       end: this.dateForm.controls.dateRange.value.endDate.format()
-    }
-    
-    this.subscription = this.file.getUsersExcel(this.dateParams).subscribe((resp: ResponseService) => {
-      if(resp.state === 'Success') {
-        this.openSnackBar(resp.userMessage + ' a ' + this.email, 'Cerrar');
-        this.dateForm.reset();
-        if (this.dateForm.controls.dateRange.value.startDate === null) {
-          this.disButon = true;
+    };
+
+    this.subscription = this.file
+      .getUsersExcel(this.dateParams)
+      .subscribe((resp: ResponseService) => {
+        if (resp.state === "Success") {
+          this.openSnackBar(resp.userMessage, "Cerrar");
+          this.dateForm.reset();
+          if (this.dateForm.controls.dateRange.value.startDate === null) {
+            this.disButon = true;
+          }
         }
-      }
-    });
+      });
   }
 
   change() {
@@ -352,8 +459,8 @@ export class UsersComponent extends MatPaginatorIntl
   sort(event) {
     let name = event.active.toUpperCase();
     let direction = event.direction.toUpperCase();
-    if( direction === '') {
-      name = ''
+    if (direction === "") {
+      name = "";
     }
     this.searchUser(this.paginate, this.from, this.to, name, direction);
   }
