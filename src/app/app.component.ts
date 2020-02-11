@@ -117,8 +117,8 @@ export class AppComponent implements OnInit, OnDestroy {
     });
 
     new SmartBanner({
-      daysHidden: 5, // days to hide banner after close button is clicked (defaults to 15)
-      daysReminder: 20, // days to hide banner after "VIEW" button is clicked (defaults to 90)
+      daysHidden: 90, // days to hide banner after close button is clicked (defaults to 15)
+      daysReminder: 90, // days to hide banner after "VIEW" button is clicked (defaults to 90)
       appStoreLanguage: "es", // language code for the App Store (defaults to user's browser language)
       title: "Clickam",
       author: "",

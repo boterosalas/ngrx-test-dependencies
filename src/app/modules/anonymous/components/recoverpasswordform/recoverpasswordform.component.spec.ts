@@ -10,6 +10,7 @@ import { of, throwError } from 'rxjs';
 import { HomeComponent } from 'src/app/modules/clicker/pages/home/home.component';
 import { ClickerModule } from 'src/app/modules/clicker/clicker.module';
 import { AuthService } from 'src/app/services/auth.service';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 
 describe('RecoverpasswordformComponent', () => {
   let component: RecoverpasswordformComponent;
@@ -50,6 +51,7 @@ describe('RecoverpasswordformComponent', () => {
         BrowserAnimationsModule,
         AppMaterialModule,
         ClickerModule,
+        MatPasswordStrengthModule,
         RouterTestingModule.withRoutes([
           { path: 'inicio', component: HomeComponent},
           { path: 'clicker', component: HomeComponent},
