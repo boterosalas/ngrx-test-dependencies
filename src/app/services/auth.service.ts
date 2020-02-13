@@ -70,7 +70,8 @@ export class AuthService implements OnDestroy {
   }
 
   public logout() {
-    localStorage.removeItem("ACCESS_TOKEN");
+    localStorage.clear();
+    localStorage.removeItem('initials');
     this.router.navigate(["/"]);
     this.getRole$.next(null);
     this.isLogged$.next(false);

@@ -53,6 +53,7 @@ describe('RecoverpasswordformComponent', () => {
         MatPasswordStrengthModule,
         AppMaterialModule,
         ClickerModule,
+        MatPasswordStrengthModule,
         RouterTestingModule.withRoutes([
           { path: 'inicio', component: HomeComponent},
           { path: 'clicker', component: HomeComponent},

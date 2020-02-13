@@ -23,7 +23,7 @@ export class OffersComponent implements OnInit {
   plu: string;
   business: string;
   url: string;
-  urlshorten: string;
+  urlshorten: string = '';
   isLoggedIn: any;
   identification: string;
   formLink: FormGroup;
