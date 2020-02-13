@@ -37,7 +37,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+ 
     this.initialNameLastName();
+   
 
     /**
      * metodo para verificar la url si es home para aplicar estilos en la cabezera
@@ -68,22 +70,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
    * Meotodo para formar las inciales del nombre y el apellido
    */
 
-  initialNameLastName() {
-    this.subscription = this.auth.isLogged$.pipe(distinctUntilChanged()).subscribe(loged => {
-      if(loged !== false) {
-        this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
-          if (val !== null) {
-            const initialName = val.firstNames.charAt(0);
-            const initialLastName = val.lastNames.charAt(0);
-            this.initials = initialName + initialLastName;
-          } else {
-           this.subscription = this.user.getuserdata().subscribe(val => {
-            const initialName = val.firstNames.charAt(0);
-            const initialLastName = val.lastNames.charAt(0);
-            this.initials = initialName + initialLastName;
-           });
+  public initialNameLastName() {
+    this.subscription = this.user.userInfo$.subscribe(val => {
+      if (val !== null) {
+        const initialName = val.firstNames.charAt(0);
+        const initialLastName = val.lastNames.charAt(0);
+        this.initials = initialName + initialLastName;
+      } else {
+        this.auth.getRole$.subscribe(role => {
+          if(role === 'CLICKER') {
+            this.subscription = this.user.getuserdata().subscribe(val => {
+              const initialName = val.firstNames.charAt(0);
+              const initialLastName = val.lastNames.charAt(0);
+              this.initials = initialName + initialLastName;
+             });
           }
-        });
+        })
       }
     });
   }

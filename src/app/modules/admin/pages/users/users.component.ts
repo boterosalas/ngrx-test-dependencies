@@ -178,7 +178,8 @@ export class UsersComponent extends MatPaginatorIntl
       confirmButtonText: "Aceptar",
       cancelButtonText: "Cancelar",
       showCancelButton: true,
-      confirmButtonClass: "init-sesssion",
+      confirmButtonClass: "updateok order-last",
+      cancelButtonClass: "updatecancel",
       allowOutsideClick: false
     }).then((resp: any) => {
       if(resp.dismiss !== 'cancel') {

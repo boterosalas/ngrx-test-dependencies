@@ -99,7 +99,7 @@ export class TabsComponent extends MatPaginatorIntl
   pageTo: number = 50;
   pageSizeOptions: number[] = [50];
   url: string;
-  urlshorten: string;
+  urlshorten: string = '';
   formLink: FormGroup;
   identification: string;
   pageIndex: number = 0;
