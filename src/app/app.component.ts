@@ -22,7 +22,7 @@ import { AuthService } from "./services/auth.service";
 import { BnNgIdleService } from "bn-ng-idle";
 import Swal from "sweetalert2";
 declare var dataLayer: any
-import { MessagingService } from "./shared/messaging.service";
+// import { MessagingService } from "./shared/messaging.service";
 
 @Component({
   selector: "app-root",
@@ -95,7 +95,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private utils: UtilsService,
     public auth: AuthService,
     private bnIdle: BnNgIdleService,
-    private messagingService: MessagingService
+    // private messagingService: MessagingService
   ) {
     translate.setDefaultLang("es");
     translate.use("es");
@@ -148,10 +148,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    const userId = 'user001';
-    this.messagingService.requestPermission(userId)
-    this.messagingService.receiveMessage()
-    this.message = this.messagingService.currentMessage
+    // const userId = 'user001';
+    // this.messagingService.requestPermission(userId)
+    // this.messagingService.receiveMessage()
+    // this.message = this.messagingService.currentMessage
 
     this.showAnimation1 = true;
     this.innerWidth = window.innerWidth;
