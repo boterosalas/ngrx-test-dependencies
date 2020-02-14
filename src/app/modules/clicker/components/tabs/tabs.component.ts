@@ -31,6 +31,7 @@ import { TokenService } from "src/app/services/token.service";
 import { ResponseService } from "src/app/interfaces/response";
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import Swal from "sweetalert2";
+import { SlickCarouselComponent } from 'ngx-slick-carousel';
 declare var dataLayer: any
 
 @Component({
@@ -135,6 +136,8 @@ export class TabsComponent extends MatPaginatorIntl
   reference: boolean;
   orderOptions: any;
   orderValue:string;
+  enableCopy: boolean = true;
+  @ViewChild('slickModal', {static: true}) slickModal: SlickCarouselComponent;
   slideConfig = {
     slidesToShow: 5,
     slidesToScroll: 5,
@@ -390,6 +393,7 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
       .getShortUrl(this.url)
       .subscribe((resp: any) => {
         this.urlshorten = resp;
+        this.enableCopy = false;
       });
     this.idCustomerForm.controls.identification.setValue("");
     this.idCustomerForm.reset();
@@ -454,7 +458,7 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     const imgLogo = this.imgLogo;
     const aliance = this.percentModal;
 
-    this.dialog.open(DialogComponent, {
+    let dialogref = this.dialog.open(DialogComponent, {
       data: {
         title,
         template,
@@ -475,6 +479,12 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
         exito
       }
     });
+
+    dialogref.afterDismissed().subscribe(() => {
+      this.enableCopy = true;
+    })
+
+
   }
 
   private getImages(text: string) {
@@ -581,6 +591,7 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
       .getShortUrl(this.url)
       .subscribe((resp: any) => {
         this.urlshorten = resp;
+        this.enableCopy = false;
       });
     this.formShareLink();
     this.showForm = false;
@@ -601,7 +612,7 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     this.plu = assured.description;
     this.business = "seguros";
     const home = true;
-    this.dialog.open(DialogComponent, {
+    let dialogref = this.dialog.open(DialogComponent, {
       data: {
         title,
         template,
@@ -617,6 +628,11 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
         home
       }
     });
+
+    dialogref.afterDismissed().subscribe(() => {
+      this.enableCopy = true;
+    })
+
   }
 
   /**
@@ -632,6 +648,7 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
       .getShortUrl(this.url)
       .subscribe((resp: any) => {
         this.urlshorten = resp;
+        this.enableCopy = false;
       });
     this.idCustomerForm.controls.identification.setValue("");
     this.idCustomerForm.reset();
@@ -653,7 +670,7 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     this.plu = trip.description;
     this.business = "viajes";
     const home = true;
-    this.dialog.open(DialogComponent, {
+    let dialogref = this.dialog.open(DialogComponent, {
       data: {
         title,
         template,
@@ -669,6 +686,12 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
         home
       }
     });
+
+    dialogref.afterDismissed().subscribe(() => {
+      this.enableCopy = true;
+    })
+
+
   }
 
   /**
@@ -683,6 +706,7 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
       .getShortUrl(this.url)
       .subscribe((resp: any) => {
         this.urlshorten = resp;
+        this.enableCopy = false;
       });
     setTimeout(() => {
       this.saveLink();
@@ -700,7 +724,7 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     this.plu = category.description;
     this.business = "exito";
     const home = true;
-    this.dialog.open(DialogComponent, {
+    let dialogref = this.dialog.open(DialogComponent, {
       data: {
         title,
         template,
@@ -714,6 +738,12 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
         home
       }
     });
+
+    dialogref.afterDismissed().subscribe(() => {
+      this.enableCopy = true;
+    })
+
+
   }
 
   /**
@@ -870,6 +900,14 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     .catch( (error) => {
       console.log(error);
     });
+  }
+
+  next() {
+    this.slickModal.slickNext();
+  }
+  
+  prev() {
+    this.slickModal.slickPrev();
   }
 
 }

@@ -30,7 +30,7 @@ import { AuthInterceptor } from './interceptors/auth-interceptor.service';
 import { BnNgIdleService } from 'bn-ng-idle';
 
 // angular fire notifications
-import { MessagingService } from './shared/messaging.service';
+// import { MessagingService } from './shared/messaging.service';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { AngularFireModule } from '@angular/fire';
@@ -99,7 +99,7 @@ export function jwtTokenGetter() {
       multi: true
     },
     BnNgIdleService,
-    MessagingService,
+    // MessagingService,
     AsyncPipe
   ],
   bootstrap: [AppComponent]
