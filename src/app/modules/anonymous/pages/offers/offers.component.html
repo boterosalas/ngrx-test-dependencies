@@ -99,7 +99,7 @@
 <ng-template #templateDialog>
     <form [formGroup]="formLink">
         <div fxLayout="row" fxLayoutGap="20px"> 
-        <div fxLayout="column" fxFlex="90">
+        <div fxLayout="column" fxFlex="70" fxFlex.xs="60">
           <mat-form-field appearance="dashed" class="dashed mt-2">
             <input
               id="url"
@@ -111,16 +111,17 @@
             />
           </mat-form-field>
         </div>
-        <div fxLayout="column" fxFlex="10" class="mt-2">
+        <div fxLayout="column" class="mt-2">
           <button
-            mat-mini-fab
+            mat-button
             id="btnCopy"
             class="gtmOfertasClicLinkCopiarLink"
             color="orange"
+            [disabled]="enableCopy"
             (click)="copyInputMessage(linkInput)"
           >
             <span fxLayoutAlign="space-between center" class="gtmOfertasClicLinkCopiarLink">
-              <mat-icon matSuffix class="gtmOfertasClicLinkCopiarLink">link</mat-icon>
+              {{ "GENERIC.COPY_LINK" | translate }}
             </span>
           </button>
         </div>

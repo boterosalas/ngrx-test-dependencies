@@ -1021,6 +1021,14 @@ span.orange-border {
   }
 }
 
+.dashed .mat-form-field-infix{
+  padding: 9px !important;
+}
+
+button#btnCopy[disabled] {
+  background: #ececec;
+}
+
 button.swal2-confirm.updateok.order-last.swal2-styled {
   background-color: #FF6F11 !important;
   color: #fff !important;
