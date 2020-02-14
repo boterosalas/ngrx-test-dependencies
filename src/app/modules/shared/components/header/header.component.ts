@@ -78,7 +78,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.initials = initialName + initialLastName;
       } else {
         this.auth.getRole$.subscribe(role => {
-          if(role === 'CLICKER') {
+          if(role === 'CLICKER' || role === 'ADMIN') {
             this.subscription = this.user.getuserdata().subscribe(val => {
               const initialName = val.firstNames.charAt(0);
               const initialLastName = val.lastNames.charAt(0);

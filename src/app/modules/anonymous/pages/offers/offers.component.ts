@@ -30,6 +30,7 @@ export class OffersComponent implements OnInit {
   mostprominent = [];
   highercommission = [];
   mostsold = [];
+  enableCopy: boolean = true;
   private subscription: Subscription = new Subscription();
 
   constructor(
@@ -125,6 +126,7 @@ export class OffersComponent implements OnInit {
       .getShortUrl(this.url)
       .subscribe((resp: any) => {
         this.urlshorten = resp;
+        this.enableCopy = false;
       });
     setTimeout(() => {
       this.saveLink();
@@ -144,7 +146,7 @@ export class OffersComponent implements OnInit {
     const offers = true;
     this.plu = offer.title;
     this.business = offer.business;
-    this.dialog.open(DialogComponent, {
+    let dialogref = this.dialog.open(DialogComponent, {
       data: {
         title,
         template,
@@ -160,6 +162,11 @@ export class OffersComponent implements OnInit {
         offers
       }
     });
+
+    dialogref.afterDismissed().subscribe(() => {
+      this.enableCopy = true;
+    });
+
   }
 
   /**

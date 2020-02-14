@@ -101,6 +101,12 @@
   background: red;
 }
 
+.cursor{
+  &-pointer{
+    cursor: pointer;
+  }
+}
+
 .prices {
   max-height: 63px;
   min-height: 63px;
