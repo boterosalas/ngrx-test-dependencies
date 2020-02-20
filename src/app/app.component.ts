@@ -19,7 +19,6 @@ import {
 import { UtilsService } from "./services/utils.service";
 import { Subscription } from "rxjs";
 import { AuthService } from "./services/auth.service";
-import * as SmartBanner from "../../node_modules/smart-app-banner/dist/smart-app-banner.js";
 import { BnNgIdleService } from "bn-ng-idle";
 import Swal from "sweetalert2";
 declare var dataLayer: any
@@ -74,7 +73,7 @@ export class AppComponent implements OnInit, OnDestroy {
     static: false
   })
   template: TemplateRef<any>;
-  SmartBanner: any;
+
   isHome: boolean;
   internal: boolean;
   showLoginForm: boolean;
@@ -114,22 +113,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
       }
 
-    });
-
-    new SmartBanner({
-      daysHidden: 90, // days to hide banner after close button is clicked (defaults to 15)
-      daysReminder: 90, // days to hide banner after "VIEW" button is clicked (defaults to 90)
-      appStoreLanguage: "es", // language code for the App Store (defaults to user's browser language)
-      title: "Clickam",
-      author: "",
-      button: "Descargar",
-      price: {
-        android: "Descarga la app "
-      },
-      store: {
-        android: `</br> gratis en la Play Store`
-      }
-      // force: 'android' // Uncomment for platform emulation
     });
 
     this.isLoggedIn = this.auth.isLoggedIn();
