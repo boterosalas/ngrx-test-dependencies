@@ -110,12 +110,12 @@ export class UsersComponent extends MatPaginatorIntl
     this.searchUser("");
     this.formEmail();
 
-    // this.usersService.userInfo$
-    //     .subscribe(val => {
-    //       if (!!val) {
-    //        this.email = val.email;
-    //       }
-    //     });
+    this.usersService.userInfo$
+        .subscribe(val => {
+          if (!!val) {
+           this.email = val.email;
+          }
+        });
 
     this.dateForm = this.fb.group({
       dateRange: [null, Validators.required]
@@ -435,6 +435,7 @@ export class UsersComponent extends MatPaginatorIntl
 
   public getUserExcel() {
     this.dateParams = {
+      email: this.email,
       start: this.dateForm.controls.dateRange.value.startDate.format(),
       end: this.dateForm.controls.dateRange.value.endDate.format()
     };
