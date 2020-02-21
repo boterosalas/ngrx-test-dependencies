@@ -42,7 +42,7 @@ export class UsersComponent extends MatPaginatorIntl
   private subscription: Subscription = new Subscription();
   ext: string;
   contentType: string;
-  email: string;
+  // email: string;
   maxDate = moment(new Date());
   orderOrigin: string;
   orderBy: string;

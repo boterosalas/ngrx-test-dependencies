@@ -74,7 +74,7 @@ export class AppComponent implements OnInit, OnDestroy {
     static: false
   })
   template: TemplateRef<any>;
-  SmartBanner: any;
+
   isHome: boolean;
   internal: boolean;
   showLoginForm: boolean;
@@ -117,7 +117,6 @@ export class AppComponent implements OnInit, OnDestroy {
       }
 
     });
-
 
     this.isLoggedIn = this.auth.isLoggedIn();
 
