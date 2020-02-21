@@ -11,11 +11,26 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog.component";
 import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
 import { SharedModule } from "src/app/modules/shared/shared.module";
-import { JwtModule } from '@auth0/angular-jwt';
+import { JwtModule } from "@auth0/angular-jwt";
+import { LinksService } from "src/app/services/links.service";
+import { of } from "rxjs/internal/observable/of";
 
 describe("HomeComponent", () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
+
+  const mockLinksService = jasmine.createSpyObj("LinksService", ["getReports"]);
+
+  const data = {
+    monthResume: { totalCommissions: 0, totalLink: 108, daysResume: [] },
+    generalResume: {
+      totalCommissions: 1939390,
+      totalLinks: 133,
+      totalProducts: 18,
+      conversionRate: 0.03007518796992481
+    },
+    money: { available: 500000, account: 0 }
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -32,7 +47,7 @@ describe("HomeComponent", () => {
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
-              return localStorage.getItem('ACCESS_TOKEN');
+              return localStorage.getItem("ACCESS_TOKEN");
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
@@ -40,8 +55,7 @@ describe("HomeComponent", () => {
           }
         })
       ],
-      providers: [
-      ],
+      providers: [{ provide: LinksService, useValue: mockLinksService }],
       schemas: [NO_ERRORS_SCHEMA]
     })
       .overrideModule(BrowserDynamicTestingModule, {
@@ -50,7 +64,7 @@ describe("HomeComponent", () => {
         }
       })
       .compileComponents();
-
+    mockLinksService.getReports.and.returnValue(of(data));
   }));
 
   beforeEach(() => {
@@ -62,5 +76,4 @@ describe("HomeComponent", () => {
   it("should create", () => {
     expect(component).toBeTruthy();
   });
-
- });
+});

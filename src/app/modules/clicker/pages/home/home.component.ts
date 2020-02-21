@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { LinksService } from 'src/app/services/links.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -9,7 +9,7 @@ import { TokenService } from 'src/app/services/token.service';
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.scss"]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   constructor( 
     private link: LinksService,
     private auth: AuthService,
@@ -35,10 +35,14 @@ export class HomeComponent implements OnInit {
    */
 
   private getInfomonth() {
-    this.link.getReports(this.identification).subscribe((resume: any) => {
+    this.subscription = this.link.getReports().subscribe((resume: any) => {
       this.available = resume.money.available;
       this.account = resume.money.account;
     });
+  }
+
+  ngOnDestroy(): void {
+   this.subscription.unsubscribe();
   }
 
 

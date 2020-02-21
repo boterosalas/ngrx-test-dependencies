@@ -59,7 +59,7 @@ export class LinksService {
     return this.http.post((`${this.url + this.apiPostReferrrals}`), dates, httpOptions);
   }
 
-  public getLink(identification: string) {
+  public getReports() {
     const token = localStorage.getItem("ACCESS_TOKEN");
     const authorization = token;
 
@@ -70,26 +70,7 @@ export class LinksService {
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
       })
     };
-    let apiGetLink = `${this.apiGetTotalLinks}=${identification}`;
-    return this.http.get((`${this.url + apiGetLink}`), httpOptions).pipe(
-      map((resp: ResponseService) => {
-        return resp.objectResponse;
-      })
-    );
-  }
-
-  public getReports(identification: string) {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
-      })
-    };
-    let apiReport = `${this.reports}?identification=${identification}`;
+    let apiReport = `${this.reports}`;
     return this.http.get((`${this.urlComission}/${apiReport}`), httpOptions).pipe(
       map((resp: ResponseService) => {
         return resp.objectResponse;
@@ -144,7 +125,7 @@ export class LinksService {
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
       })
     };
-    return this.http.get((`${this.urlComission}/${this.apiFile}`), httpOptions).pipe(
+    return this.http.get((`${this.urlComission}${this.apiFile}`), httpOptions).pipe(
       map((resp: ResponseService) => {
         return resp.objectResponse;
       })
@@ -180,7 +161,7 @@ export class LinksService {
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
       })
     };
-    return this.http.get((`${this.urlComission}${this.apiUsersExcel}?email=${params.email}&start=${params.start}&end=${params.end}`), httpOptions);
+    return this.http.get((`${this.urlComission}${this.apiUsersExcel}?&start=${params.start}&end=${params.end}`), httpOptions);
   }
 
   public getAudit(params: any) {
@@ -194,7 +175,7 @@ export class LinksService {
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
       })
     };
-    return this.http.get((`${this.urlComission}${this.apiAuditExcel}?email=${params.email}&start=${params.start}&end=${params.end}`), httpOptions);
+    return this.http.get((`${this.urlComission}${this.apiAuditExcel}?&start=${params.start}&end=${params.end}`), httpOptions);
   }
 
   public getReportClickam(params: any) {
@@ -208,7 +189,7 @@ export class LinksService {
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
       })
     };
-    return this.http.get((`${this.urlComission}${this.apigetReportClickam}?email=${params.email}&start=${params.start}&end=${params.end}`), httpOptions);
+    return this.http.get((`${this.urlComission}${this.apigetReportClickam}?&start=${params.start}&end=${params.end}`), httpOptions);
   }
 
   public sendfile(formdata) {

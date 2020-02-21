@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { LinksService } from 'src/app/services/links.service';
@@ -11,7 +11,7 @@ import { DialogHistoryComponent } from '../dialog-history/dialog-history.compone
   templateUrl: './report.component.html',
   styleUrls: ['./report.component.scss']
 })
-export class ReportComponent implements OnInit {
+export class ReportComponent implements OnInit, OnDestroy {
 
   paymentUser: Array<any>;
   dataSource: any;
@@ -46,9 +46,15 @@ export class ReportComponent implements OnInit {
     }
   }
 
+  /**
+   * Metodo para listar los pagos
+   * @param from 
+   * @param to 
+   */
+
   public getPayments(from = 1, to = this.pageTo) {
     const params = {from, to};
-    this.payment.getPayment(params).subscribe((payment) => {
+    this.subscription = this.payment.getPayment(params).subscribe((payment) => {
       this.totalItems = payment.total;
       this.dataSource = new MatTableDataSource<any>(payment.users);
     });
@@ -67,11 +73,16 @@ export class ReportComponent implements OnInit {
    */
 
   private getInfomonth() {
-    this.payment.getReports(this.identification).subscribe((resume: any) => {
+    this.subscription = this.payment.getReports().subscribe((resume: any) => {
       this.available = resume.money.available;
       this.account = resume.money.account;
     });
   }
+
+  /**
+   * Metodo para listar la info bancaria del usuario
+   * @param user 
+   */
 
   public userData(user) {
     const paymentDate = user.paymentDate;
@@ -81,7 +92,7 @@ export class ReportComponent implements OnInit {
     const detail = 'Detalle de ventas';
     let items;
   
-    this.payment.getDetailPaymentClicker(paymentDate).subscribe(resp=> {
+    this.subscription = this.payment.getDetailPaymentClicker(paymentDate).subscribe(resp=> {
       items = resp;
       
    this.dialog.open(DialogHistoryComponent, {

@@ -122,15 +122,6 @@ export class ContentService {
     );
   }
 
-  // public getProductsPagination(params: {term: string, from:number, to:number}){
-  //   const apiSearchVetex = `${this.apiProducts}/getProducts?ft=${params.term}&_from=${params.from}&_to=${params.to}&fq=1`
-  //   return this.http.get(`${this.url + apiSearchVetex}`, this.httpOptions).pipe(
-  //     map((user: any) => {
-  //       return user.objectResponse;
-  //     })
-  //   );
-  // }
-
   public getProductsPagination(params: {term: any, from:number, to:number, order: string}){
     const token = localStorage.getItem("ACCESS_TOKEN");
     const authorization = token;

@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, TemplateRef } from "@angular/core";
-import { environment } from "src/environments/environment";
 import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog.component";
 import { Subscription } from "rxjs";
 import { MatSnackBar, MatBottomSheet } from "@angular/material";
@@ -7,7 +6,6 @@ import { UserService } from "src/app/services/user.service";
 import { AuthService } from "src/app/services/auth.service";
 import { ContentService } from "src/app/services/content.service";
 import { LinksService } from "src/app/services/links.service";
-import { distinctUntilChanged } from "rxjs/operators";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
 import { TokenService } from 'src/app/services/token.service';
@@ -25,13 +23,14 @@ export class OffersComponent implements OnInit {
   plu: string;
   business: string;
   url: string;
-  urlshorten: string;
+  urlshorten: string = '';
   isLoggedIn: any;
   identification: string;
   formLink: FormGroup;
   mostprominent = [];
   highercommission = [];
   mostsold = [];
+  enableCopy: boolean = true;
   private subscription: Subscription = new Subscription();
 
   constructor(
@@ -127,6 +126,7 @@ export class OffersComponent implements OnInit {
       .getShortUrl(this.url)
       .subscribe((resp: any) => {
         this.urlshorten = resp;
+        this.enableCopy = false;
       });
     setTimeout(() => {
       this.saveLink();
@@ -146,7 +146,7 @@ export class OffersComponent implements OnInit {
     const offers = true;
     this.plu = offer.title;
     this.business = offer.business;
-    this.dialog.open(DialogComponent, {
+    let dialogref = this.dialog.open(DialogComponent, {
       data: {
         title,
         template,
@@ -162,10 +162,15 @@ export class OffersComponent implements OnInit {
         offers
       }
     });
+
+    dialogref.afterDismissed().subscribe(() => {
+      this.enableCopy = true;
+    });
+
   }
 
   /**
-   * Metodo para dalvar los links generados
+   * Metodo para salvar los links generados
    */
 
   public saveLink() {

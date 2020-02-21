@@ -101,6 +101,12 @@
   background: red;
 }
 
+.cursor{
+  &-pointer{
+    cursor: pointer;
+  }
+}
+
 .prices {
   max-height: 63px;
   min-height: 63px;
@@ -109,6 +115,7 @@
 }
 
 .imageContainer {
+  width: 100%;
   img{
     max-width: 100%;
   }
@@ -172,10 +179,6 @@ h3.size {
 .exito-product{
   position: relative;
   margin-bottom: 1rem;
-}
-
-.imageContainer{
-  width: 100%;
 }
 
 .img-exito{

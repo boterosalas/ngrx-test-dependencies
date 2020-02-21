@@ -78,7 +78,13 @@
       </div>
 
       <!-- categorias -->
-      <h3>{{ 'GENERIC.CATEGORIES' | translate }}</h3>
+      <div class="arrows" fxLayout="row" fxLayoutAlign="space-between">
+          <h3>{{ 'GENERIC.CATEGORIES' | translate }}</h3>
+        <span fxLayout="row" fxLayoutAlign="end">
+          <button mat-button class="p-1" (click)="prev()"><mat-icon>keyboard_arrow_left</mat-icon></button>
+            <button mat-button class="p-1" (click)="next()"><mat-icon>keyboard_arrow_right</mat-icon></button>
+          </span>
+        </div>
       <ngx-slick-carousel class="carousel" 
                               #slickModal="slick-carousel" 
                               [config]="slideConfig" 
@@ -176,7 +182,7 @@
   <div *ngIf="!reference">
   <form [formGroup]="formLink">
     <div fxLayout="row" fxLayoutGap="20px"> 
-    <div fxLayout="column" fxFlex="90">
+    <div fxLayout="column" fxFlex="70" fxFlex.xs="60">
       <mat-form-field appearance="dashed" class="dashed mt-2">
         <input
           id="url"
@@ -188,16 +194,17 @@
         />
       </mat-form-field>
     </div>
-    <div fxLayout="column" fxFlex="10" class="mt-2">
+    <div fxLayout="column" class="mt-2">
       <button
-        mat-mini-fab
+        mat-button
         id="btnCopy"
         color="orange"
+        [disabled]="enableCopy"
         class="gtmInicioClicFiltroExitocomCopiarLink"
         (click)="copyInputMessage(linkInput)"
       >
         <span fxLayoutAlign="space-between center" class="gtmInicioClicFiltroExitocomCopiarLink">
-          <mat-icon class="gtmInicioClicFiltroExitocomCopiarLink" matSuffix>link</mat-icon>
+          {{ "GENERIC.COPY_LINK" | translate }}
         </span>
       </button>
     </div>
@@ -289,7 +296,7 @@
   <div *ngIf="!reference">
   <form [formGroup]="formLink">
     <div fxLayout="row" fxLayoutGap="20px"> 
-    <div fxLayout="column" fxFlex="90">
+    <div fxLayout="column" fxFlex="70" fxFlex.xs="60">
       <mat-form-field appearance="dashed" class="dashed mt-2">
         <input
           id="url"
@@ -301,16 +308,18 @@
         />
       </mat-form-field>
     </div>
-    <div fxLayout="column" fxFlex="10" class="mt-2">
+    <div fxLayout="column">
       <button
-        mat-mini-fab
+        mat-button
         id="btnCopy"
         color="orange"
+        [disabled]="enableCopy"
         class="gtmInicioClicFiltroExitocomCopiarLink"
         (click)="copyInputMessage(linkInput)"
       >
+      
         <span fxLayoutAlign="space-between center" class="gtmInicioClicFiltroExitocomCopiarLink">
-          <mat-icon class="gtmInicioClicFiltroExitocomCopiarLink" matSuffix>link</mat-icon>
+          {{ "GENERIC.COPY_LINK" | translate }}
         </span>
       </button>
     </div>
@@ -405,7 +414,7 @@
   <div *ngIf="!reference">
   <form [formGroup]="formLink">
     <div fxLayout="row" fxLayoutGap="20px"> 
-    <div fxLayout="column" fxFlex="90">
+    <div fxLayout="column" fxFlex="70" fxFlex.xs="60">
       <mat-form-field appearance="dashed" class="dashed mt-2">
         <input
           id="url"
@@ -417,16 +426,17 @@
         />
       </mat-form-field>
     </div>
-    <div fxLayout="column" fxFlex="10" class="mt-2">
+    <div fxLayout="column" class="mt-2">
       <button
-        mat-mini-fab
+        mat-button
         id="btnCopy"
         class="gtmIniCategoriaCopiarLin"
+        [disabled]="enableCopy"
         color="orange"
         (click)="copyInputMessage(linkInput)"
       >
         <span fxLayoutAlign="space-between center" class="gtmIniCategoriaCopiarLin">
-          <mat-icon class="gtmIniCategoriaCopiarLin" matSuffix>link</mat-icon>
+          {{ "GENERIC.COPY_LINK" | translate }}
         </span>
       </button>
     </div>
@@ -502,7 +512,7 @@
             >
             </mat-form-field>
           
-            <div fxLayout="column">
+            <div fxLayout="column" class="mt-2">
             <button
               mat-raised-button
               class="button button-100 p-1 gtmCrearCedulaSiguiente"
@@ -524,7 +534,7 @@
     <div *ngIf="showForm">
       <form [formGroup]="formLink">
           <div fxLayout="row" fxLayoutGap="20px"> 
-          <div fxLayout="column" fxFlex="90">
+          <div fxLayout="column" fxFlex="70" fxFlex.xs="60">
             <mat-form-field appearance="dashed" class="dashed mt-2">
               <input
                 id="url"
@@ -536,16 +546,17 @@
               />
             </mat-form-field>
           </div>
-          <div fxLayout="column" fxFlex="10" class="mt-2">
+          <div fxLayout="column" class="mt-2">
             <button
-              mat-mini-fab
+              mat-button
               id="btnCopy"
               class="gtmOfertasClicLinkCopiarLink"
+              [disabled]="enableCopy"
               color="orange"
               (click)="copyInputMessage(linkInput)"
             >
               <span fxLayoutAlign="space-between center" class="gtmOfertasClicLinkCopiarLink">
-                <mat-icon class="gtmOfertasClicLinkCopiarLink" matSuffix>link</mat-icon>
+                {{ "GENERIC.COPY_LINK" | translate }}
               </span>
             </button>
           </div>

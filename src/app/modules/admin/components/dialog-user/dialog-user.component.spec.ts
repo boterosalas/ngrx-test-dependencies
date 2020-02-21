@@ -90,6 +90,10 @@ describe('DialogUserComponent', () => {
   it('change bankCardDownload', () => {
     component.bankCardDownload();
   });
+
+  it('close modal', () => {
+    component.onNoClick();
+  });
   
 
 });

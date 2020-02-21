@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { LinksService } from "src/app/services/links.service";
 import { UserService } from "src/app/services/user.service";
 import { AuthService } from "src/app/services/auth.service";
-import { distinctUntilChanged } from "rxjs/operators";
 import { Subscription } from "rxjs";
 import { TokenService } from "src/app/services/token.service";
 
@@ -69,7 +68,7 @@ export class MonthResumeComponent implements OnInit, OnDestroy {
    */
 
   private getInfomonth() {
-    this.link.getReports(this.identification).subscribe((resume: any) => {
+    this.subscription = this.link.getReports().subscribe((resume: any) => {
       this.linksCreated = resume.monthResume.totalLink;
       this.totalComissions = resume.monthResume.totalCommissions;
       this.data = resume.monthResume.daysResume;

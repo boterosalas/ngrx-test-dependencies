@@ -1,10 +1,17 @@
-import { Component, OnInit, HostListener, Input, OnDestroy } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  HostListener,
+  Input,
+  OnDestroy
+} from "@angular/core";
 import { UtilsService } from "src/app/services/utils.service";
 import { AuthService } from "src/app/services/auth.service";
 import { UserService } from "src/app/services/user.service";
 import { distinctUntilChanged } from "rxjs/operators";
-import { Subscription } from 'rxjs';
-import { NavigationStart, Router } from '@angular/router';
+import { Subscription } from "rxjs";
+import { NavigationStart, Router } from "@angular/router";
+import { TokenService } from "src/app/services/token.service";
 
 @Component({
   selector: "app-header",
@@ -20,16 +27,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
   lastNames: string;
   initials: string;
   private subscription: Subscription = new Subscription();
-  
+
   constructor(
     private utils: UtilsService,
     public auth: AuthService,
     private user: UserService,
-    private router: Router
+    private router: Router,
+    private token: TokenService,
   ) {}
 
   ngOnInit() {
+ 
     this.initialNameLastName();
+   
 
     /**
      * metodo para verificar la url si es home para aplicar estilos en la cabezera
@@ -46,7 +56,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         }
       }
     });
-
   }
 
   /**
@@ -54,19 +63,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
    */
 
   public logout() {
-    this.auth.logout();
+    this.utils.logout();
   }
 
   /**
    * Meotodo para formar las inciales del nombre y el apellido
    */
 
-  initialNameLastName() {
-   this.subscription = this.user.userInfo$.pipe(distinctUntilChanged()).subscribe(val => {
-      if (!!val) {
+  public initialNameLastName() {
+    this.subscription = this.user.userInfo$.subscribe(val => {
+      if (val !== null) {
         const initialName = val.firstNames.charAt(0);
         const initialLastName = val.lastNames.charAt(0);
         this.initials = initialName + initialLastName;
+      } else {
+        this.auth.getRole$.subscribe(role => {
+          if(role === 'CLICKER' || role === 'ADMIN') {
+            this.subscription = this.user.getuserdata().subscribe(val => {
+              const initialName = val.firstNames.charAt(0);
+              const initialLastName = val.lastNames.charAt(0);
+              this.initials = initialName + initialLastName;
+             });
+          }
+        })
       }
     });
   }
@@ -81,7 +100,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.utils.showMenu();
   }
 
-  @HostListener('over')
+  @HostListener("over")
   openRegister() {
     this.utils.showRegisterForm();
   }
@@ -89,5 +108,4 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-  
 }
