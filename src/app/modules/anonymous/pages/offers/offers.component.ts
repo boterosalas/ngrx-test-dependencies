@@ -127,10 +127,8 @@ export class OffersComponent implements OnInit {
       .subscribe((resp: any) => {
         this.urlshorten = resp;
         this.enableCopy = false;
+        this.saveLink();
       });
-    setTimeout(() => {
-      this.saveLink();
-    }, 1500);
     this.formShareLink();
     const title = offer.title;
     const id = offer.productId;
