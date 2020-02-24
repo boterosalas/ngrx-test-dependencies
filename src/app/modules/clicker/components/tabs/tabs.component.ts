@@ -394,12 +394,10 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
       .subscribe((resp: any) => {
         this.urlshorten = resp;
         this.enableCopy = false;
+        this.saveLink();
       });
     this.idCustomerForm.controls.identification.setValue("");
     this.idCustomerForm.reset();
-    setTimeout(() => {
-      this.saveLink();
-    }, 1500);
     this.formShareLink();
     const title = product.productName;
     const id = product.productId;
@@ -649,12 +647,10 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
       .subscribe((resp: any) => {
         this.urlshorten = resp;
         this.enableCopy = false;
+        this.saveLink();
       });
     this.idCustomerForm.controls.identification.setValue("");
     this.idCustomerForm.reset();
-    setTimeout(() => {
-      this.saveLink();
-    }, 1500);
     this.formShareLink();
     const title = trip.description;
     const id = trip.productId;
@@ -707,10 +703,8 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
       .subscribe((resp: any) => {
         this.urlshorten = resp;
         this.enableCopy = false;
+        this.saveLink();
       });
-    setTimeout(() => {
-      this.saveLink();
-    }, 1500);
     this.formShareLink();
     const title = category.description;
     const id = category.productId;
@@ -736,13 +730,12 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
         buttonClose,
         id,
         home
-      }
+      },
     });
 
     dialogref.afterDismissed().subscribe(() => {
       this.enableCopy = true;
     })
-
 
   }
 
