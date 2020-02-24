@@ -392,9 +392,9 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     this.subscription = this.user
       .getShortUrl(this.url)
       .subscribe((resp: any) => {
+        this.saveLink();
         this.urlshorten = resp;
         this.enableCopy = false;
-        this.saveLink();
       });
     this.idCustomerForm.controls.identification.setValue("");
     this.idCustomerForm.reset();
@@ -646,8 +646,8 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
       .getShortUrl(this.url)
       .subscribe((resp: any) => {
         this.urlshorten = resp;
-        this.enableCopy = false;
         this.saveLink();
+        this.enableCopy = false;
       });
     this.idCustomerForm.controls.identification.setValue("");
     this.idCustomerForm.reset();
