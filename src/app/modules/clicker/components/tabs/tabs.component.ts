@@ -646,7 +646,9 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
       .getShortUrl(this.url)
       .subscribe((resp: any) => {
         this.urlshorten = resp;
-        this.saveLink();
+        if(resp !== '') {
+          this.saveLink();
+        }
         this.enableCopy = false;
       });
     this.idCustomerForm.controls.identification.setValue("");
