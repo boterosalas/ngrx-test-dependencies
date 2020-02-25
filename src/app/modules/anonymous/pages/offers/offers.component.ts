@@ -120,6 +120,7 @@ export class OffersComponent implements OnInit {
    */
 
   public dataProduct(offer) {
+    this.urlshorten = '';
     const dataurl = offer.link;
     this.url = `${dataurl}${this.identification}`;
     this.subscription = this.user
