@@ -381,6 +381,7 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
    */
 
   public dataProduct(product) {
+    this.urlshorten = '';
     this.reference = false;
     if (environment.production === false) {
       const productUrl = product.link;
@@ -583,6 +584,7 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
    */
 
   public dataAssured(assured) {
+    this.urlshorten = '';
     const dataAssuredUrl = `${assured.link}${this.identification}`;
     this.url = dataAssuredUrl;
     this.subscription = this.user
@@ -639,6 +641,7 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
    */
 
   public dataTrip(trip) {
+    this.urlshorten = '';
     this.reference = false;
     const datatripUrl = trip.link;
     this.url = `${datatripUrl}${this.identification}`;
@@ -698,6 +701,7 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
    */
 
   public dataCategory(category) {
+    this.urlshorten = '';
     const dataCategoryUrl = category.link;
     this.url = `${dataCategoryUrl}${this.identification}`;
     this.subscription = this.user
