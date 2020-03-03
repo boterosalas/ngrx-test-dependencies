@@ -19,7 +19,8 @@ export class SliderComponent implements OnInit, OnDestroy {
 
   slides: any = [];
 
-  slideConfig = {"slidesToShow": 1, "slidesToScroll": 1, "dots": true,  dotClass: 'slick-dots orange', autoplay: true, autoplaySpeed: 5000}
+  slideConfig = {"slidesToShow": 1, "slidesToScroll": 1, "dots": true, centerMode: true,
+  centerPadding: '40px', dotClass: 'slick-dots orange', autoplay: true, autoplaySpeed: 5000, infinite: false}
 
   public slider() {
     this.subscription = this.content.getNews().subscribe((slide: any)=> {

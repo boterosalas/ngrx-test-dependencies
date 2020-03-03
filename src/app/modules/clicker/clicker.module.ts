@@ -8,7 +8,6 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { ProductComponent } from "./components/product/product.component";
 import { TranslateModule } from "@ngx-translate/core";
 import { DialogComponent } from "../shared/components/dialog/dialog.component";
-import { SliderComponent } from "./components/slider/slider.component";
 import { SlickCarouselModule } from "ngx-slick-carousel";
 import { TabsComponent } from "./components/tabs/tabs.component";
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -50,7 +49,6 @@ const routes: Routes = [
   declarations: [
     HomeComponent,
     ProductComponent,
-    SliderComponent,
     TabsComponent,
     MonthResumeComponent,
     GeneralResumeComponent,

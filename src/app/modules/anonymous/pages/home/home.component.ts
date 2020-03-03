@@ -7,6 +7,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { trigger, state, style, transition, animate, group } from '@angular/animations';
 import { AuthService } from 'src/app/services/auth.service';
 import decode from 'jwt-decode';
+import { ContentService } from 'src/app/services/content.service';
 
 
 @Component({
@@ -53,13 +54,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   isOpen = false;
   private subscription: Subscription = new Subscription();
   email: string;
+  bussiness: Array<any> = [];
 
   constructor(
     public router: Router,
     private route: ActivatedRoute,
     private user: UserService,
     private utils: UtilsService,
-    private auth: AuthService
+    private auth: AuthService,
+    private content: ContentService
   ) {
 
     /**
@@ -88,6 +91,8 @@ export class HomeComponent implements OnInit, OnDestroy {
      */
 
      this.routeBased();
+
+     this.getBussiness();
 
     
   }
@@ -158,6 +163,13 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.auth.getRole$.next("ADMIN")
       }
     }
+  }
+
+  public getBussiness() {
+    this.content.getBusiness().subscribe(bussiness => {
+      console.log(bussiness);
+      this.bussiness = bussiness;
+    })
   }
 
 }

@@ -27,6 +27,8 @@ import { KeySpaceDirective } from 'src/directives/space.directive';
 import { CardOfferComponent } from './components/card-offer/card-offer.component';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+import { SliderComponent } from './components/slider/slider.component';
+import { BussinessCardComponent } from './components/bussiness-card/bussiness-card.component';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -85,6 +87,8 @@ const routes: Routes = [
     BlockCopyPasteDirective,
     KeySpaceDirective,
     CardOfferComponent,
+    SliderComponent,
+    BussinessCardComponent
     // ReportComponent
   ],
   imports: [
@@ -98,7 +102,7 @@ const routes: Routes = [
     SlickCarouselModule,
     ShareButtonsModule,
     RouterModule.forChild(routes),
-    MatPasswordStrengthModule
+    MatPasswordStrengthModule,
   ],
   exports: [
     RouterModule,

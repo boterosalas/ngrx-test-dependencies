@@ -5,7 +5,7 @@
   #slickModal="slick-carousel"
   [config]="slideConfig"
 >
-  <div ngxSlickItem *ngFor="let slide of slides.web; let i=index" class="slide text-center mt-4">
+  <div ngxSlickItem *ngFor="let slide of slides.web; let i=index" class="slide text-center">
     <a href="{{ slide.link }}" id="banner{{i}}" class="gtmHomeClicSupBannerPpal{{i}}">
       <img src="{{ slide.imageurl }}" class="responsive-img round-img gtmHomeClicSupBannerPpal{{i}}"  alt="{{ slide.description }}" />
     </a>
@@ -19,7 +19,7 @@
       #slickModal="slick-carousel"
       [config]="slideConfig"
     >
-      <div ngxSlickItem *ngFor="let slide of slides.mobile; let i=index" class="slide text-center mt-4">
+      <div ngxSlickItem *ngFor="let slide of slides.mobile; let i=index" class="slide text-center pl-3">
         <a href="{{ slide.link }}" target="_blank" id="banner{{i}}" class="gtmHomeClicSupBannerPpal{{i}}">
           <img class="responsive-img round-img gtmHomeClicSupBannerPpal{{i}}" src="{{ slide.imageurl }}"  alt="{{ slide.description }}" />
         </a>

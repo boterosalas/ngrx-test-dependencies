@@ -1,4 +1,4 @@
-<header [ngClass]="isHome ? 'headercolor' : 'border-orange' && auth.isLoggedIn() && (auth.getRole$ | async )  === 'ADMIN' ? 'shadow ' : 'border-orange' " >
+<!-- <header [ngClass]="isHome ? 'headercolor' : 'border-orange' && auth.isLoggedIn() && (auth.getRole$ | async )  === 'ADMIN' ? 'shadow ' : 'border-orange' " >
     <div fxLayout="row" fxLayoutAlign="space-between center" [ngClass]="isHome ? 'position-absolute container' : 'pt-2 pb-2 container' && auth.isLoggedIn() && (auth.getRole$ | async )  === 'ADMIN' ? 'container-fluid pt-3 pb-3 ' : 'container pt-2 pb-2 ' ">
         <div class="logo gtmHomeClicLatrlLogoClickam" id="logo-header">
         <a matRipple *ngIf="!auth.isLoggedIn()"  [routerLink]="['inicio']">
@@ -36,5 +36,20 @@
                 <a id="hamburguer" mat-button (click)="showMenu()"><mat-icon>menu</mat-icon></a>
             </div>
         </div>
+    </div>
+</header> -->
+
+<header class="shadow" fxLayout="column" fxLayoutAlign="center start">
+    <div fxLayout="row">
+        <span fxLayout="column" fxLayoutAlign="center center">
+            <img src="assets/img/menu.svg" alt="user"> 
+        </span>
+        <span fxLayout="column">
+            <a *ngIf="!auth.isLoggedIn()" class="gtmHomeClicSupIniciarSesion login-text" mat-button (click)="showLogin()" id="header-login"> 
+                <span class="gtmHomeClicSupIniciarSesion" fxLayout="row" fxLayoutAlign="space-between center">
+                <img class="pr-2" src="assets/img/usuario-black.svg" alt="user"> 
+                {{ 'LOGIN.LOGIN' | translate }}</span> 
+            </a>
+        </span>
     </div>
 </header>

@@ -1,2 +1,47 @@
 @import "variables.scss";
-@import 'general';
+@import "general";
+
+footer {
+
+    margin-left: 15px;
+    margin-right: 15px;
+
+  h3 {
+    font-size: 21px;
+  }
+
+  &.border-gray {
+    border-top: 1px solid $gray2;
+  }
+
+  .rotate {
+    transform: rotate(180deg);
+  }
+
+  i {
+    color: $gray2;
+  }
+
+  .terms {
+    margin-top: 2rem;
+    border-bottom: 1px solid $gray2;
+    padding-bottom: 1rem;
+    a {
+      text-decoration: underline;
+      font-size: $font-size-sm - 0.1rem;
+      color: $gray2;
+    }
+  }
+
+  .border-footer {
+    height: 1px;
+    background:$gray2;
+    width: 280px;
+  }
+
+  .copy{
+      color:#86888A;
+      font-size: 12px;
+  }
+
+}

@@ -10,13 +10,14 @@ body {
   margin: 0;
   font-family: $font-family-base;
   font-size: 0.9rem;
+  overflow-x: hidden;
   // background: #fff;
 }
 
-.maincontent {
-  overflow-x: hidden;
-  min-height: 520px;
-}
+// .maincontent {
+//   overflow-x: hidden;
+//   min-height: 520px;
+// }
 
 .login {
   .mat-card-header-text {
@@ -586,77 +587,77 @@ table {
   }
 }
 
-footer {
-  background: $footer-bg;
-  color: $white;
-  a {
-    cursor: pointer;
-    color: $white;
-  }
+// footer {
+//   background: $footer-bg;
+//   color: $white;
+//   a {
+//     cursor: pointer;
+//     color: $white;
+//   }
 
-  .social-links {
-    i {
-      font-size: 1.1rem;
-      color: $footer-social-links;
-      padding: 0 1.3rem;
-    }
+//   .social-links {
+//     i {
+//       font-size: 1.1rem;
+//       color: $footer-social-links;
+//       padding: 0 1.3rem;
+//     }
 
-    .orange {
-      color: $primary-color;
-      font-size: 1.5rem;
-    }
-  }
+//     .orange {
+//       color: $primary-color;
+//       font-size: 1.5rem;
+//     }
+//   }
 
-  .footer-links {
-    .border-bottom-orange {
-      &::after {
-        margin-top: 0.2rem;
-      }
-    }
-    .section {
-      font-family: $font-galano-bold;
-      padding: 0.8rem;
-    }
-    a {
-      color: $white;
-      text-decoration: none;
-    }
-    .item {
-      padding: 10px 10px;
-    }
-  }
+//   .footer-links {
+//     .border-bottom-orange {
+//       &::after {
+//         margin-top: 0.2rem;
+//       }
+//     }
+//     .section {
+//       font-family: $font-galano-bold;
+//       padding: 0.8rem;
+//     }
+//     a {
+//       color: $white;
+//       text-decoration: none;
+//     }
+//     .item {
+//       padding: 10px 10px;
+//     }
+//   }
 
-  .clickacedemy {
-    a {
-      font-size: $font-size-sm;
-      padding: 0.5rem 0;
-    }
-  }
+//   .clickacedemy {
+//     a {
+//       font-size: $font-size-sm;
+//       padding: 0.5rem 0;
+//     }
+//   }
 
-  .terms {
-    margin-top: 3rem;
-    a {
-      text-decoration: underline;
-      font-size: $font-size-sm - 0.1rem;
-      color: #b5b8bc;
-    }
-  }
+//   .terms {
+//     margin-top: 3rem;
+//     a {
+//       text-decoration: underline;
+//       font-size: $font-size-sm - 0.1rem;
+//       color: #b5b8bc;
+//     }
+//   }
 
-  .border-footer {
-    height: 2px;
-    background: #86888a;
-    width: 280px;
-  }
+//   .border-footer {
+//     height: 2px;
+//     background: #86888a;
+//     width: 280px;
+//   }
 
-  .copy {
-    font-size: $font-size-sm - 0.1rem;
-    color: #86888a;
-  }
+//   .copy {
+//     font-size: $font-size-sm - 0.1rem;
+//     color: #86888a;
+//   }
 
-  .rotate {
-    transform: rotate(180deg);
-  }
-}
+//   .rotate {
+//     transform: rotate(180deg);
+//   }
+// }
 
 @media screen and (min-width: 600px) {
   .terms {
@@ -859,7 +860,7 @@ th.mat-header-cell {
 }
 
 .slick-dots li button:before {
-  font-size: 12px;
+  font-size: 7px;
 }
 
 .mat-raised-button {

@@ -38,6 +38,10 @@
     "REFERENCE": "Referenciar",
     "REFERENCE_IDENTIFICATION": "Ingresa la cédula del cliente a referir"
   },
+  "FOOTER": {
+    "FOLLOW_US": "Síguenos",
+    "AVAILABLE_IN": "Disponible en"
+  },
   "LOGIN": {
     "LOGIN": "Iniciar sesión",
     "INVALID_EMAIL": "Email inválido",
@@ -101,7 +105,8 @@
     "TITLE_SEARCH": "Busca y crea un link",
     "DESCRIPTION_SEARCH": "Elige el negocio asociado, selecciona un producto o servicio y compártelo para ganar ingresos adicionales.",
     "MY_COMMISSIONS":"Mis comisiones",
-    "PAYMENT":"*Este valor te será consignado en el próximo pago."
+    "PAYMENT":"*Este valor te será consignado en el próximo pago.",
+    "BUSSINESS": "Negocios"
   },
   "HEADER": {
     "PROFILE": "Mi perfil",
