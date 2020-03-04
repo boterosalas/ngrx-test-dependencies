@@ -5,7 +5,6 @@ import { Routes, RouterModule } from "@angular/router";
 import { AppMaterialModule } from "../shared/app-material/app-material.module";
 import { SharedModule } from "../shared/shared.module";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { ProductComponent } from "./components/product/product.component";
 import { TranslateModule } from "@ngx-translate/core";
 import { DialogComponent } from "../shared/components/dialog/dialog.component";
 import { SlickCarouselModule } from "ngx-slick-carousel";
@@ -48,7 +47,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     HomeComponent,
-    ProductComponent,
     TabsComponent,
     MonthResumeComponent,
     GeneralResumeComponent,

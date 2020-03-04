@@ -272,6 +272,16 @@ button {
     width: 100%;
     max-width: 100%;
   }
+  &-height{
+    min-height: 48px;
+  }
+}
+
+.card-login{
+  footer{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
 }
 
 .swal2-styled.swal2-confirm {

@@ -20,7 +20,7 @@ import { SlickCarouselModule } from "ngx-slick-carousel";
 import { ShareButtonsModule } from "@ngx-share/buttons";
 import { LinksService } from 'src/app/services/links.service';
 
-describe("TabsComponent", () => {
+xdescribe("TabsComponent", () => {
   let component: TabsComponent;
   let fixture: ComponentFixture<TabsComponent>;
 

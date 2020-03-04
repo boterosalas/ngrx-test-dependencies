@@ -5,9 +5,9 @@
   #slickModal="slick-carousel"
   [config]="slideConfig"
 >
-  <div ngxSlickItem *ngFor="let slide of slides.web; let i=index" class="slide text-center">
-    <a href="{{ slide.link }}" id="banner{{i}}" class="gtmHomeClicSupBannerPpal{{i}}">
-      <img src="{{ slide.imageurl }}" class="responsive-img round-img gtmHomeClicSupBannerPpal{{i}}"  alt="{{ slide.description }}" />
+  <div ngxSlickItem *ngFor="let slide of sliderWeb; let i=index" class="slide text-center">
+    <a href="{{ slide.link }}" id="banner{{i}}">
+      <img src="{{ slide.imageurl }}" class="responsive-img round-img"  alt="{{ slide.description }}" />
     </a>
   </div>
 </ngx-slick-carousel>
@@ -19,10 +19,17 @@
       #slickModal="slick-carousel"
       [config]="slideConfig"
     >
-      <div ngxSlickItem *ngFor="let slide of slides.mobile; let i=index" class="slide text-center pl-3">
-        <a href="{{ slide.link }}" target="_blank" id="banner{{i}}" class="gtmHomeClicSupBannerPpal{{i}}">
-          <img class="responsive-img round-img gtmHomeClicSupBannerPpal{{i}}" src="{{ slide.imageurl }}"  alt="{{ slide.description }}" />
-        </a>
+      <div ngxSlickItem *ngFor="let slide of sliderMobile; let i=index" class="slide text-center pl-3">
+        <span (click)="openShare($event)">
+          <!-- <img class="responsive-img round-img" src="{{ slide.imageurl }}"  alt="{{ slide.description }}" /> -->
+          <app-product
+              id="slide{{i}}"
+              [photo]="slide.imageurl"
+              category="true"
+              home
+              (infoProduct)="dataCategory(slide)"
+            ></app-product>
+        </span>
       </div>
     </ngx-slick-carousel>
     </div>

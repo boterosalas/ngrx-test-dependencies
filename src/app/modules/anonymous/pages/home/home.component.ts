@@ -55,6 +55,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   email: string;
   bussiness: Array<any> = [];
+  newsSlider = [];
 
   constructor(
     public router: Router,
@@ -91,10 +92,10 @@ export class HomeComponent implements OnInit, OnDestroy {
      */
 
      this.routeBased();
-
      this.getBussiness();
+     this.getOffers();
+     this.slider();
 
-    
   }
 
   /**
@@ -151,14 +152,21 @@ export class HomeComponent implements OnInit, OnDestroy {
   openRegister() {
     this.utils.showRegisterForm();
   }
+  
+  @HostListener("over")
+  sliderOffers() {
+    this.auth.isLogged$.subscribe((val) => {
+      if(val !== true) {
+        this.utils.showloginForm();
+      }
+    });
+  }
 
   private routeBased() {
     let token = localStorage.getItem("ACCESS_TOKEN");
     if (token !== null) {
       let tokenDecode = decode(token);
-      if(tokenDecode.role === "CLICKER") {
-        this.router.navigate(['/clicker']);
-      } else {
+      if(tokenDecode.role === "ADMIN") {
         this.router.navigate(['/dashboard']);
         this.auth.getRole$.next("ADMIN")
       }
@@ -167,9 +175,20 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public getBussiness() {
     this.content.getBusiness().subscribe(bussiness => {
-      console.log(bussiness);
       this.bussiness = bussiness;
     })
+  }
+
+  public getOffers() {
+    this.subscription = this.content.getOffers().subscribe(offer => {
+      // console.log(offer);
+    });
+  }
+
+  public slider() {
+    this.subscription = this.content.getNews().subscribe((slide: any)=> {
+      this.newsSlider = slide;
+    });
   }
 
 }

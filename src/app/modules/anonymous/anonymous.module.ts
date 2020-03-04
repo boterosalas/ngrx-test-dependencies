@@ -7,10 +7,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TranslateModule } from "@ngx-translate/core";
 import { CommonModule } from "@angular/common";
 import { SharedModule } from "../shared/shared.module";
-import { SectionComponent } from "./components/section/section.component";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { WorksComponent } from "./components/works/works.component";
-import { SectionbgComponent } from "./components/sectionbg/sectionbg.component";
 import { SlickCarouselModule } from "ngx-slick-carousel";
 import { RegisterformComponent } from "./components/registerform/registerform.component";
 import { ForgotpasswordformComponent } from "./components/forgotpasswordform/forgotpasswordform.component";
@@ -29,6 +26,7 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { SliderComponent } from './components/slider/slider.component';
 import { BussinessCardComponent } from './components/bussiness-card/bussiness-card.component';
+import { ProductComponent } from './components/product/product.component';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -71,9 +69,6 @@ const routes: Routes = [
   declarations: [
     HomeComponent,
     LoginformComponent,
-    SectionComponent,
-    WorksComponent,
-    SectionbgComponent,
     RegisterformComponent,
     ForgotpasswordformComponent,
     RecoverpasswordComponent,
@@ -88,7 +83,8 @@ const routes: Routes = [
     KeySpaceDirective,
     CardOfferComponent,
     SliderComponent,
-    BussinessCardComponent
+    BussinessCardComponent,
+    ProductComponent
     // ReportComponent
   ],
   imports: [

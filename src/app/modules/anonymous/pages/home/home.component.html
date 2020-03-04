@@ -1,10 +1,64 @@
 <app-logo></app-logo>
-<app-slider></app-slider>
+<app-slider (action)="sliderOffers()"  [sliderMobile]="newsSlider.mobile" [sliderWeb]="newsSlider.web"></app-slider>
 
 
 <div class="container">
   <span class="border-gray d-block"></span>
   <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3>
   <app-bussiness-card *ngFor="let bussines of bussiness" [img]="bussines.imageurl" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
+  <span class="border-gray d-block"></span>
+  <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.OFFERS' | translate }}</h3>
+  <app-slider [sliderMobile]="newsSlider.mobile" [sliderWeb]="newsSlider.web" class="mb-3"></app-slider>
 </div>
+
+<!-- template newsSlider -->
+
+<ng-template #templateCategories>
+  <div *ngIf="!reference">
+  <form [formGroup]="formLink">
+    <div fxLayout="row" fxLayoutGap="20px"> 
+    <div fxLayout="column" fxFlex="70" fxFlex.xs="60">
+      <mat-form-field appearance="dashed" class="dashed mt-2">
+        <input
+          id="url"
+          matInput
+          formcontrolName="link"
+          [value]="urlshorten"
+          #linkInput
+          readonly
+        />
+      </mat-form-field>
+    </div>
+    <div fxLayout="column" class="mt-2">
+      <button
+        mat-button
+        id="btnCopy"
+        class="gtmIniCategoriaCopiarLin"
+        [disabled]="enableCopy"
+        color="orange"
+        (click)="copyInputMessage(linkInput)"
+      >
+        <span fxLayoutAlign="space-between center" class="gtmIniCategoriaCopiarLin">
+          {{ "GENERIC.COPY_LINK" | translate }}
+        </span>
+      </button>
+    </div>
+  </div>
+  </form>
+
+  <h3 class="border-bottom-orange-init">{{ "GENERIC.SHARE" | translate }}</h3>
+
+  <div class="share-desktop" id="share">
+    <button  theme="circles-dark" shareButton="facebook" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomFacebook mr-2"><i class="fab fa-facebook-f gtmInicioClicFiltroExitocomFacebook"></i></button>
+    <button  theme="circles-dark" shareButton="twitter" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomTwitter mr-2"><i class="fab fa-twitter gtmInicioClicFiltroExitocomTwitter"></i></button>
+    <button  theme="circles-dark" shareButton="whatsapp" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomWhatsapp"><i class="fab fa-whatsapp gtmInicioClicFiltroExitocomWhatsapp"></i></button>  
+  </div>
+
+  <div class="share-mobile">
+    <button  mat-raised-button class="gtmrs orange mb-2 mt-2 " color="orange" (click)="share()"> <span class="gtmrs">Compartir</span> </button>
+  </div>
+
+</div>
+</ng-template>
+
 

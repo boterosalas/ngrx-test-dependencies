@@ -15,12 +15,12 @@ import { of, throwError } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { JwtModule } from '@auth0/angular-jwt';
-import { SectionbgComponent } from '../../components/sectionbg/sectionbg.component';
-import { WorksComponent } from '../../components/works/works.component';
-import { SectionComponent } from '../../components/section/section.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import Swal from 'sweetalert2';
+import { LogoComponent } from 'src/app/modules/shared/components/logo/logo.component';
+import { SliderComponent } from '../../components/slider/slider.component';
+import { AnonymousModule } from '../../anonymous.module';
 
 describe("HomeComponent", () => {
   let component: HomeComponent;
@@ -60,8 +60,9 @@ let invalidRquest = {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeComponent, SectionbgComponent,WorksComponent, SectionComponent],
+      declarations: [],
       imports: [
+        AnonymousModule,
         TranslateModule,
         AppMaterialModule,
         FlexLayoutModule,

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BussinessCardComponent } from './bussiness-card.component';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 
 describe('BussinessCardComponent', () => {
   let component: BussinessCardComponent;
@@ -8,7 +9,10 @@ describe('BussinessCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BussinessCardComponent ]
+      declarations: [ BussinessCardComponent ],
+      imports:[
+        AppMaterialModule
+      ]
     })
     .compileComponents();
   }));

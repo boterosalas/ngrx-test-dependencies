@@ -6,7 +6,7 @@
 
 <div class="fullheight slide-in-top" *ngIf="isOpen"  @openClose>
   
-  <app-top (close)="hideLogin()"></app-top>
+  <app-top title="Login y registro" (close)="hideLogin()"></app-top>
 
   <app-card *ngIf="showLoginForm" idTitle="titleLogin" title="{{ 'LOGIN.LOGIN' | translate }}" description="{{ 'LOGIN.DESCRIPTION' | translate }}" idAction="registerHere" action="{{ 'LOGIN.REGISTER' | translate }}" (actionButton)="showRegister()" [template]="templateCardLogin"></app-card>
 

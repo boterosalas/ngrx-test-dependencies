@@ -50,7 +50,7 @@
     "INTRODUCE_EMAIL": "Ingrese un correo",
     "INTRODUCE_PASSWORD": "Ingrese una contraseña",
     "DESCRIPTION": "Si todavía no tienes una cuenta puedes",
-    "REGISTER": "registrarte aquí"
+    "REGISTER": "Registrarse"
   },
   "REGISTER": {
     "ACCEPT": "¿Acepta los términos y condiciones y políticas de privacidad de Clickam?",
@@ -106,7 +106,8 @@
     "DESCRIPTION_SEARCH": "Elige el negocio asociado, selecciona un producto o servicio y compártelo para ganar ingresos adicionales.",
     "MY_COMMISSIONS":"Mis comisiones",
     "PAYMENT":"*Este valor te será consignado en el próximo pago.",
-    "BUSSINESS": "Negocios"
+    "BUSSINESS": "Negocios",
+    "OFFERS": "Ofertas"
   },
   "HEADER": {
     "PROFILE": "Mi perfil",

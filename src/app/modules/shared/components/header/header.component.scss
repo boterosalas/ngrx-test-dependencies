@@ -31,6 +31,13 @@ header {
   }
 }
 
+.sticky{
+  position: sticky;
+  top: 0;
+  z-index: 9;
+  background: #fff;
+}
+
 .border-orange{
   border-bottom: 1px solid $primary-color;
 }

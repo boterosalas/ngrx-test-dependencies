@@ -5,6 +5,13 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ContentService } from 'src/app/services/content.service';
 import { of } from 'rxjs';
+import { ProductComponent } from '../product/product.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { JwtModule } from '@auth0/angular-jwt';
 
 describe('SliderComponent', () => {
   let component: SliderComponent;
@@ -57,10 +64,25 @@ describe('SliderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SliderComponent ],
+      declarations: [ SliderComponent, ProductComponent, TruncatePipe ],
       imports: [
         SlickCarouselModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        FlexLayoutModule,
+        AppMaterialModule,
+        ReactiveFormsModule,
+        FormsModule,
+        RouterTestingModule,
+        JwtModule.forRoot({
+          config: {
+            tokenGetter: () => {
+              return localStorage.getItem('ACCESS_TOKEN');
+            },
+            throwNoTokenError: true,
+            whitelistedDomains: [],
+            blacklistedRoutes: []
+          }
+        }),
       ],
       providers: [
         { provide: ContentService, useValue: mockContentService },
