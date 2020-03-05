@@ -7,6 +7,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { trigger, state, style, transition, animate, group } from '@angular/animations';
 import { AuthService } from 'src/app/services/auth.service';
 import decode from 'jwt-decode';
+import { ContentService } from 'src/app/services/content.service';
 
 
 @Component({
@@ -53,13 +54,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   isOpen = false;
   private subscription: Subscription = new Subscription();
   email: string;
+  bussiness: Array<any> = [];
+  newsSlider = [];
+  offers = [];
 
   constructor(
     public router: Router,
     private route: ActivatedRoute,
     private user: UserService,
     private utils: UtilsService,
-    private auth: AuthService
+    private auth: AuthService,
+    private content: ContentService
   ) {
 
     /**
@@ -88,8 +93,10 @@ export class HomeComponent implements OnInit, OnDestroy {
      */
 
      this.routeBased();
+     this.getBussiness();
+     this.getOffers();
+     this.slider();
 
-    
   }
 
   /**
@@ -146,18 +153,43 @@ export class HomeComponent implements OnInit, OnDestroy {
   openRegister() {
     this.utils.showRegisterForm();
   }
+  
+  @HostListener("over")
+  sliderOffers() {
+    let token = localStorage.getItem("ACCESS_TOKEN");
+    if(token === null) {
+        this.utils.showloginForm();
+    };
+  }
 
   private routeBased() {
     let token = localStorage.getItem("ACCESS_TOKEN");
     if (token !== null) {
       let tokenDecode = decode(token);
-      if(tokenDecode.role === "CLICKER") {
-        this.router.navigate(['/clicker']);
-      } else {
+      if(tokenDecode.role === "ADMIN") {
         this.router.navigate(['/dashboard']);
         this.auth.getRole$.next("ADMIN")
       }
     }
   }
+
+  public getBussiness() {
+    this.content.getBusiness().subscribe(bussiness => {
+      this.bussiness = bussiness;
+    })
+  }
+
+  public slider() {
+    this.subscription = this.content.getNews().subscribe((slide: any)=> {
+      this.newsSlider = slide;
+    });
+  }
+
+  public getOffers() {
+    this.subscription = this.content.getOffers().subscribe(offer => {
+      this.offers = offer;
+    });
+  }
+
 
 }

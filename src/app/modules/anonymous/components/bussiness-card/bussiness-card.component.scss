@@ -1,0 +1,18 @@
+@import 'variables';
+
+.bussiness{
+    img{
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .title-bussiness{
+        font-size: 20px;
+    }
+
+    .percent{
+        color: $primary-color;
+        font-size: 14px;
+    }
+
+}

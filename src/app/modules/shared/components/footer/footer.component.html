@@ -1,4 +1,4 @@
-<footer class="p-4">
+<!-- <footer class="p-4">
   <div fxLayout.gt-xs="row" fxLayout.lt-md="column" fxLayoutAlign.gt-xs="flex-start flex-start" fxLayoutAlign.lt-md="center center" class="mt-2">
       
     <span fxLayout.gt-xs="column" fxFlex.gt-xs="25" class="pt-1 border-bottom-orange">
@@ -28,4 +28,28 @@
     </div>
     
   </div>
+</footer> -->
+
+<footer class="text-center border-gray mt-3">
+  <h3> {{ 'FOOTER.AVAILABLE_IN' | translate }}</h3>
+
+  <app-app-store></app-app-store>
+
+  <h3> {{ 'FOOTER.FOLLOW_US' | translate }}</h3>
+
+  <div fxLayoutAlign="center center" class="social-links">
+    <img  src="assets/img/arrow-footer.svg" alt="Clickam" />
+    <app-sociallinks></app-sociallinks>
+    <img  class="rotate" src="assets/img/arrow-footer.svg" alt="Clickam" />
+  </div>
+
+
+  <div class="terms gtmHomeClicInfTerminos" id="terms-footer" fxLayout="column" fxLayoutAlign="center center">
+    <a [routerLink]="['terminos-y-condiciones']" class="gtmHomeClicInfTerminos">Términos y condiciones</a>
+</div>
+
+<div fxLayout="column" fxLayoutAlign="center center" class="width-border">
+  <span class="copy pt-3 pb-3">Copyright 2019 &copy;</span>
+</div>
+
 </footer>
