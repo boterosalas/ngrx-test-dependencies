@@ -1,9 +1,14 @@
-<app-sectionbg title="{{ 'HOME.TITLE_RAISE' | translate }}" textbutton="{{ 'GENERIC.REGISTER2' | translate }}" text-direction="text-left" (open)="openRegister()"></app-sectionbg>
+<app-logo></app-logo>
+<app-slider (action)="sliderOffers()"  [sliderMobile]="newsSlider.mobile" [sliderWeb]="newsSlider.web"></app-slider>
+
 
 <div class="container">
-  <app-works></app-works>
+  <span class="border-gray d-block"></span>
+  <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3>
+  <app-bussiness-card *ngFor="let bussines of bussiness" [img]="bussines.imageurl" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
+  <span class="border-gray d-block"></span>
+  <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.OFFERS' | translate }}</h3>
 </div>
-<div class="container-fluid bg-gray" fxLayoutGap.gt-sm="7%" fxLayoutGap.lt-sm="30px"  fxLayout.gt-sm="row" fxLayoutAlign.lt-sm="flex-end flex-end" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="space-around">
-  <app-section sectionLeft="true" title="{{ 'HOME.TITLE_SPEND' | translate }}" img="assets/img/home-comisiones.png" description="{{ 'HOME.DESPCRIPTION_SPEND' | translate }}" text-direction="text-right" textbutton="{{ 'HOME.TEXT_BUTTON_COMISIONS' | translate }}"></app-section>
-  <app-section sectionRight="true" title="{{ 'HOME.TITLE_SELL' | translate }}" img="assets/img/home-ofertas.png" description="{{ 'HOME.DESPCRIPTION_SELL' | translate }}"  text-direction="text-left" textbutton="{{ 'HOME.TEXT_BUTTON_OFFERS' | translate }}" ></app-section>
-</div>
+
+<app-slider (action)="sliderOffers()" [sliderMobile]="offers.mobile" [sliderWeb]="offers.web" class="mb-3"></app-slider>
+
