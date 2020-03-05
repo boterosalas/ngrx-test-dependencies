@@ -56,6 +56,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   email: string;
   bussiness: Array<any> = [];
   newsSlider = [];
+  offers = [];
 
   constructor(
     public router: Router,
@@ -155,11 +156,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   
   @HostListener("over")
   sliderOffers() {
-    this.auth.isLogged$.subscribe((val) => {
-      if(val !== true) {
+    let token = localStorage.getItem("ACCESS_TOKEN");
+    if(token === null) {
         this.utils.showloginForm();
-      }
-    });
+    };
   }
 
   private routeBased() {
@@ -179,16 +179,17 @@ export class HomeComponent implements OnInit, OnDestroy {
     })
   }
 
-  public getOffers() {
-    this.subscription = this.content.getOffers().subscribe(offer => {
-      // console.log(offer);
-    });
-  }
-
   public slider() {
     this.subscription = this.content.getNews().subscribe((slide: any)=> {
       this.newsSlider = slide;
     });
   }
+
+  public getOffers() {
+    this.subscription = this.content.getOffers().subscribe(offer => {
+      this.offers = offer;
+    });
+  }
+
 
 }

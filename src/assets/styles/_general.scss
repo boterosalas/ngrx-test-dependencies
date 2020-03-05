@@ -10,7 +10,7 @@ body {
   margin: 0;
   font-family: $font-family-base;
   font-size: 0.9rem;
-  overflow-x: hidden;
+  // overflow-x: hidden;
   // background: #fff;
 }
 
@@ -869,8 +869,11 @@ th.mat-header-cell {
   background: #b5b8bc;
 }
 
-.slick-dots li button:before {
-  font-size: 7px;
+.slick-dots li {
+  margin: 0;
+  button:before{
+    font-size: 5px;
+  }
 }
 
 .mat-raised-button {
@@ -1061,4 +1064,9 @@ button.swal2-cancel.updatecancel.swal2-styled {
   .share-desktop{
     display: none;
   }
+}
+
+
+.no-focus{
+  outline: none;
 }

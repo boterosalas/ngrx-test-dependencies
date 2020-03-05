@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild, TemplateRef } from '@angular/core';
 import { ContentService } from 'src/app/services/content.service';
 import { Subscription } from 'rxjs';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
 import { ResponseService } from 'src/app/interfaces/response';
 import { MatBottomSheet, MatSnackBar } from '@angular/material';
@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { LinksService } from 'src/app/services/links.service';
 import { TokenService } from 'src/app/services/token.service';
 import { NgNavigatorShareService } from 'ng-navigator-share';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-slider',
@@ -28,7 +29,8 @@ export class SliderComponent implements OnInit {
     private content: ContentService,
     private links: LinksService,
     private token: TokenService,
-    ngNavigatorShareService: NgNavigatorShareService
+    ngNavigatorShareService: NgNavigatorShareService,
+    private router: Router
   ) { }
 
   @Input() sliderWeb:Object;
@@ -49,8 +51,26 @@ export class SliderComponent implements OnInit {
   idCustomerForm: FormGroup;
   showForm = false;
   showFormCustomer = true;
+  reference: boolean;
+  numberPattern = "^(0|[0-9][0-9]*)$";
 
   ngOnInit() {
+
+    if(localStorage.getItem("ACCESS_TOKEN") !== null ) {
+      this.identification = this.token.userInfo().identification;
+    }
+
+    this.idCustomerForm = this.fb.group({
+      identification: [
+        "",
+        [
+          Validators.required,
+          Validators.pattern(this.numberPattern),
+          Validators.maxLength(10)
+        ]
+      ]
+    });
+
   }
 
   slideConfig = {"slidesToShow": 1, "slidesToScroll": 1, "dots": true, centerMode: true,
@@ -66,9 +86,10 @@ export class SliderComponent implements OnInit {
    */
 
   public dataCategory(category) {
-    this.auth.isLogged$.subscribe((val) => {
-      if(val === true) {
+    let token = localStorage.getItem("ACCESS_TOKEN");
+      if(token !== null && category.business !=='clickam') {
         this.urlshorten = '';
+        this.reference = false;
         const dataCategoryUrl = category.link;
         this.url = `${dataCategoryUrl}${this.identification}`;
         this.subscription = this.user
@@ -78,6 +99,8 @@ export class SliderComponent implements OnInit {
             this.enableCopy = false;
             this.saveLink();
           });
+        this.idCustomerForm.controls.identification.setValue("");
+        this.idCustomerForm.reset();
         this.formShareLink();
         const title = category.description;
         const id = category.productId;
@@ -89,7 +112,7 @@ export class SliderComponent implements OnInit {
         const showshowTitle = false;
         const buttonClose = "Cerrar";
         this.plu = category.description;
-        this.business = "exito";
+        this.business = category.business;
         const home = true;
         let dialogref = this.dialog.open(DialogComponent, {
           data: {
@@ -109,8 +132,10 @@ export class SliderComponent implements OnInit {
         dialogref.afterDismissed().subscribe(() => {
           this.enableCopy = true;
         })
+      } else {
+        this.router.navigate(['/'+category.link]);
       }
-    });
+  
 
   }
 
@@ -200,6 +225,20 @@ export class SliderComponent implements OnInit {
       duration: 5000
     });
   }
+
+    /* To copy Text from Textbox */
+    public copyInputMessage(inputElement: any) {
+      inputElement.select();
+      document.execCommand("copy");
+      inputElement.setSelectionRange(0, 0);
+      this.openSnackBar("Se ha copiado el link al portapapeles", "Cerrar");
+    }
+
+    public showReference() {
+      this.reference = !this.reference;
+      // this.idCustomerForm.controls.identification.setValue('');
+      this.idCustomerForm.reset();
+    }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
