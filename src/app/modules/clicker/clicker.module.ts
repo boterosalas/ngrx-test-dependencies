@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { HomeComponent } from "./pages/home/home.component";
 import { Routes, RouterModule } from "@angular/router";
 import { AppMaterialModule } from "../shared/app-material/app-material.module";
 import { SharedModule } from "../shared/shared.module";
@@ -28,10 +27,7 @@ import { ShareModule } from '@ngx-share/core';
 import { BussinessComponent } from './pages/profile/bussiness/bussiness.component';
 
 const routes: Routes = [
-  {
-    path: "",
-    component: HomeComponent
-  },
+ 
   {
     path: "mi-perfil",
     component: ProfileComponent,
@@ -51,7 +47,6 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    HomeComponent,
     MonthResumeComponent,
     GeneralResumeComponent,
     ReportComponent,
