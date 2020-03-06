@@ -31,8 +31,11 @@ export class SliderComponent implements OnInit {
     private token: TokenService,
     ngNavigatorShareService: NgNavigatorShareService,
     private router: Router
-  ) { }
+  ) { 
+    this.ngNavigatorShareService = ngNavigatorShareService;
+  }
 
+  private ngNavigatorShareService: NgNavigatorShareService;
   @Input() sliderWeb:Object;
   @Input() sliderMobile:Object;
   @Output() action = new EventEmitter();
@@ -238,6 +241,19 @@ export class SliderComponent implements OnInit {
       this.reference = !this.reference;
       // this.idCustomerForm.controls.identification.setValue('');
       this.idCustomerForm.reset();
+    }
+
+    share() {
+      this.ngNavigatorShareService.share({
+        title: '',
+        text: '',
+        url: this.urlshorten
+      }).then( (response) => {
+        console.log(response);
+      })
+      .catch( (error) => {
+        console.log(error);
+      });
     }
 
   ngOnDestroy() {
