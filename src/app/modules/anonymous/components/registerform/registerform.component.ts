@@ -155,55 +155,6 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     this.externalClickerForm();
   }
 
-  /**
-   * Metodo para el autocompletar los departamentos
-   * @param departments 
-   * 
-   */
-
-  public displayDepartment(departments?: any): string | undefined {
-    return departments ? departments.description : undefined;
-  }
-
-
-  public filter() {
-    this.filteredDepartments = this.externalForm.controls.department.valueChanges
-    .pipe(
-      map(department => typeof department === 'string' ? department : department.description),
-      map(department => department ? this._filterDepartments(department) : this.departments.slice())
-    );
-  }
-
-  public filterCities() {
-    this.filteredCities = this.externalForm.controls.city.valueChanges.pipe(
-      startWith(""),
-      map(city => (city ? this._filterCities(city) : this.cities.slice()))
-    );
-  }
-
-  private _filterDepartments(value: any) {
-    
-    const filterValue = value.toLowerCase();
-    return this.departments.filter(
-      department =>
-        department.description.toLowerCase().indexOf(filterValue) === 0
-    );
-  }
-
-  private _filterCities(value: string) {
-    const filterValue = value.toLowerCase();
-    return this.cities.filter(
-      (city: any) => city.description.toLowerCase().indexOf(filterValue) === 0
-    );
-  }
-
-  // Metodo que muestra el formulario del clicker externo
-
-  nextStepExternalClicker() {
-    this.showTerms = true;
-    this.showRegisterFormExternal = false;
-    this.acceptTerms = false;
-  }
 
   /**
    * Muestra los terminos y condiciones al dar clic en el boton siguiente del registro
@@ -233,10 +184,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
         } else {
           this.showRegisterForm = false;
           this.showRegisterFormExternal = true;
-          this.getDepartments();
-          this.getBanks();
           this.externalClickerForm();
-          this.filter();
         }
       });
   }
@@ -255,73 +203,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     });
   }
 
-  /**
-   * Metodo para validar que la extension sea valida
-   * @param nameFile 
-   */
-
-  private getExtension(nameFile: string) {
-    let splitExt = nameFile.split(".");
-    let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
-    this.validFormat = false;
-    if (getExt === "jpg" ||  getExt === "jpeg" ||  getExt === "pdf") {
-      this.validFormat = true;
-    }
-  }
-
-  /**
-   * Metodo para leer y subir un archivo al  servidor
-   * @param event 
-   * @param param 
-   */
-
-  public onFileChange(event, param: string) {
-    let nameFile = event.target.files[0].name;
-    let reader = new FileReader();
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      let fileBlob = new Blob([file])
-      let file2 = new File(([fileBlob]), nameFile);
-      reader.readAsDataURL(file2);
-      reader.onload = () => {
-        this.getExtension(nameFile);
-        if (this.validFormat === true) {
-          if(param === 'ced1') {
-            this.fileIdentificationCard1 = reader.result;
-            this.nameFileCed1 = nameFile;
-            this.showErrorCed1 = false;
-          } else {
-            if(param === 'ced2') {
-              this.fileIdentificationCard2 = reader.result;
-              this.nameFileCed2 = nameFile;
-              this.showErrorCed2 = false;
-            }
-            else {
-              this.fileBankCertificate = reader.result;
-              this.nameFileCert = nameFile;
-              this.showErrorCert = false;
-            }
-          }
-          
-        } else {
-          if(param === 'ced1') {
-              this.showErrorCed1 = true;
-              this.nameFileCed1 = nameFile;
-          } else {
-            if(param === 'ced2') {
-              this.showErrorCed2 = true;
-              this.nameFileCed2 = nameFile;
-            }
-            else {
-              this.showErrorCert = true;
-              this.nameFileCert = nameFile;
-            }
-          }
-        }
-      };
-    }
-  }
-
+  
   /**
    * Oculta los terminos y condiciones y muestra el registro
    */
@@ -437,74 +319,6 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       });
   }
 
-  /**
-   * Metodo para seleccionar el departamento
-   * @param department 
-   * 
-   */
-
-  public selectDepartment(department) {
-    this.departmentCode = department.code;
-    this.cities = department.municipalities;
-    this.externalForm.controls.city.setValue('');
-    let valueDepartment = this.externalForm.controls.department.valueChanges;
-    this.filterCities();
-
-    this.subscription = valueDepartment.subscribe((resp) => {
-      if (resp !== '') {
-        this.getDepartments();
-        // this.externalForm.controls.city.enable();
-      } else {
-        // this.externalForm.controls.city.disable();
-        this.externalForm.controls.city.setValue('');
-      }
-    })
-  }
-
-  // Metodo para validar el departamento
-
-  public checkDepartment() {
-    if ((this.externalForm.controls.department.value.code !== this.departmentCode) || (this.externalForm.controls.department.value.code === undefined || this.departmentCode === undefined )) {
-      this.externalForm.controls.department.setErrors({'incorrect': true});
-    }
-  }
-
-  public selectCity(city) {
-    this.cityCode = city.code;
-    this.cityValue = city.description;
-  }
-
-  // Metodo para validar la ciudad
-
-  public checkCity() {
-    if (this.externalForm.controls.city.value !== this.cityValue) {
-      this.externalForm.controls.city.setErrors({'incorrectCity': true});
-    }
-  }
-
-  /**
-   * Metodo para listar los departamentos
-   */
-
-  public getDepartments() {
-    this.subscription = this.personalInfo
-      .getDepartments()
-      .subscribe((res: ResponseService) => {
-        this.departments = res.objectResponse;
-      });
-  }
-
-  /**
-   * Metodo para listar los bancos
-   */
-
-  public getBanks() {
-    this.subscription = this.personalInfo
-      .getBanks()
-      .subscribe((res: ResponseService) => {
-        this.banks = res.objectResponse;
-      });
-  }
 
   /**
    * Metodo para validar la fuerza de la contraseña
