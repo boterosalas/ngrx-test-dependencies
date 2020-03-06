@@ -16,6 +16,7 @@ import { LoadFormFileComponent } from '../../components/load-form-file/load-form
 import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { config } from 'process';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AnonymousModule } from 'src/app/modules/anonymous/anonymous.module';
 
 
 describe("ReportsComponent", () => {
@@ -53,9 +54,10 @@ describe("ReportsComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ReportsComponent, CardComponent, LoadFormFileComponent],
+      declarations: [ReportsComponent , LoadFormFileComponent],
       imports: [
         TranslateModule.forRoot(),
+        AnonymousModule,
         AppMaterialModule,
         MatDatepickerModule,
         MatNativeDateModule,

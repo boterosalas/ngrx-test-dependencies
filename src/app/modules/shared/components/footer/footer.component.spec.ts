@@ -5,6 +5,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -18,6 +19,7 @@ describe('FooterComponent', () => {
        imports: [
         HttpClientTestingModule,
         RouterTestingModule.withRoutes([]),
+        TranslateModule.forRoot(),
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {

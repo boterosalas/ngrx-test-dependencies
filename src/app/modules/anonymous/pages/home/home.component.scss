@@ -31,3 +31,13 @@
   background: #ECECEC5F;
   overflow: hidden;
 }
+
+.border-gray{
+  border-top: 1px solid $gray2;
+}
+
+.title{
+  &-h3{
+    font-size: 23px;
+  }
+}

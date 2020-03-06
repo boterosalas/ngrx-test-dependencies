@@ -1,10 +1,14 @@
-<div fxLayout="row" fxLayoutAlign="space-between center" class="pt-3">
+<div fxLayout="row" class="bar sticky" fxLayoutAlign="start center"> 
+  <span fxLayout="column" fxLayoutAlign="start start" fxFlex="20">
+    <mat-icon class="cursor-pointer" (click)="closeComponent()">keyboard_arrow_left</mat-icon>
+  </span>
+  <span fxLayout="column" fxLayoutAlign="center center" fxFlex="60">
+    <h4 class="m-0">{{title}}</h4>
+  </span>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="center center" class="pt-5 mt-5">
   <div class="logo pl-3">
     <img src="assets/img/logo-header-2.svg" alt="" />
-  </div>
-  <div class="menu pr-4">
-    <mat-icon class="cursor-pointer" (click)="closeComponent()" id="headerClose"
-      >close</mat-icon
-    >
   </div>
 </div>

@@ -19,6 +19,9 @@ import { RouterModule } from '@angular/router';
 import { MenuOptionsComponent } from './components/menu-options/menu-options.component';
 import { UnderConstructionComponent } from './components/under-construction/under-construction.component';
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
+import { AppStoreComponent } from './components/app-store/app-store.component';
+import { LogoComponent } from './components/logo/logo.component';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +36,9 @@ import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
     TopComponent,
     MenuOptionsComponent,
     UnderConstructionComponent,
-    TruncatePipe
+    TruncatePipe,
+    AppStoreComponent,
+    LogoComponent,
   ],
   imports: [
     CommonModule,
@@ -64,7 +69,8 @@ import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
     RouterModule,
     MenuOptionsComponent,
     UnderConstructionComponent,
-    TruncatePipe
+    TruncatePipe,
+    LogoComponent
   ]
 })
 export class SharedModule {}

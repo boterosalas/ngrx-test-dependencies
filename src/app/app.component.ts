@@ -21,7 +21,7 @@ import { Subscription } from "rxjs";
 import { AuthService } from "./services/auth.service";
 import { BnNgIdleService } from "bn-ng-idle";
 import Swal from "sweetalert2";
-declare var dataLayer: any
+declare var dataLayer: any;
 // import { MessagingService } from "./shared/messaging.service";
 
 @Component({
@@ -94,34 +94,25 @@ export class AppComponent implements OnInit, OnDestroy {
     private router: Router,
     private utils: UtilsService,
     public auth: AuthService,
-    private bnIdle: BnNgIdleService,
-    // private messagingService: MessagingService
-  ) {
+    private bnIdle: BnNgIdleService
+  ) // private messagingService: MessagingService
+  {
     translate.setDefaultLang("es");
     translate.use("es");
 
     this.subscription = router.events.subscribe((url: any) => {
       if (url instanceof NavigationStart) {
-        if (url.url === "/") {
-          this.isHome = true;
-          this.internal = false;
-        } else {
-          this.isHome = false;
-          this.internal = true;
-        }
         dataLayer.push({
-        event: 'pageview',
-        virtualPageURL: url.url
-      })
-
+          event: "pageview",
+          virtualPageURL: url.url
+        });
       }
-
     });
 
     this.isLoggedIn = this.auth.isLoggedIn();
 
-   this.subscription = this.auth.isLogged$.subscribe((val) => {
-      if(!!val) {
+    this.subscription = this.auth.isLogged$.subscribe(val => {
+      if (!!val) {
         this.subscription = this.bnIdle.startWatching(3600).subscribe(res => {
           if (res) {
             localStorage.removeItem("ACCESS_TOKEN");
@@ -129,24 +120,21 @@ export class AppComponent implements OnInit, OnDestroy {
             this.auth.isLogged$.next(false);
             Swal.fire({
               title: "Ha expirado tu sesión",
-              text: 'Por favor vuelve a iniciar sesión',
+              text: "Por favor vuelve a iniciar sesión",
               type: "info",
               confirmButtonText: "Volver al inicio",
               confirmButtonClass: "init-sesssion",
               allowOutsideClick: false
             }).then(() => {
               window.location.reload();
-            })
+            });
           }
         });
       }
-
     });
-    
   }
 
   ngOnInit() {
-
     // const userId = 'user001';
     // this.messagingService.requestPermission(userId)
     // this.messagingService.receiveMessage()
