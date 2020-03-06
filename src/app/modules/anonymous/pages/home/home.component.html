@@ -5,7 +5,7 @@
 <div class="container">
   <span class="border-gray d-block"></span>
   <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3>
-  <app-bussiness-card *ngFor="let bussines of bussiness" [img]="bussines.imageurl" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
+  <app-bussiness-card *ngFor="let bussines of bussiness; let i = index" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
   <span class="border-gray d-block"></span>
   <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.OFFERS' | translate }}</h3>
 </div>

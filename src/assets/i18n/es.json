@@ -109,6 +109,9 @@
     "BUSSINESS": "Negocios",
     "OFFERS": "Ofertas"
   },
+  "BUSSINESS": {
+    "CATEGORIES": "Categorías"
+  },
   "HEADER": {
     "PROFILE": "Mi perfil",
     "LOGOUT": "Cerrar sesión"

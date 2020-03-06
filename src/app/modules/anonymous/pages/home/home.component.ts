@@ -191,5 +191,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
+  public bussinessNavigation(bussiness) {
+    console.log(bussiness);
+    let params = {
+      id: bussiness.id
+    }
+    this.router.navigate(['bussiness' + '/' + params.id])
+
+  }
+
 
 }

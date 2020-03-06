@@ -25,6 +25,7 @@ import { MatPasswordStrengthModule } from "@angular-material-extensions/password
 import { CardDataComponent } from './components/card-data/card-data.component';
 import { DialogHistoryComponent } from './components/dialog-history/dialog-history.component';
 import { ShareModule } from '@ngx-share/core';
+import { BussinessComponent } from './pages/profile/bussiness/bussiness.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,11 @@ const routes: Routes = [
   {
     path: "reportes",
     component: ReportComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "bussiness/:params",
+    component: BussinessComponent,
     canActivate: [AuthGuard]
   }
 ];
@@ -56,7 +62,8 @@ const routes: Routes = [
     AditionalInfoFormComponent,
     DialogEditComponent,
     CardDataComponent,
-    DialogHistoryComponent
+    DialogHistoryComponent,
+    BussinessComponent
   ],
   imports: [
     CommonModule,

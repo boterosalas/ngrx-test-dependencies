@@ -1,0 +1,26 @@
+<div class="full container">
+    <h3 class="border-bottom-orange-init title-h3">{{ 'BUSSINESS.CATEGORIES' | translate }}</h3>
+    <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="0px">
+        <div
+          fxLayout="column"
+          fxFlex.xs="100"
+          fxFlex.sm="30"
+          fxFlex.gt-sm="18"
+          class="mt-3 mb-3"
+          *ngFor="let bussiness of bussiness; let i = index"
+        >
+          <app-product
+            id="bussiness{{ i }}"
+            btnid="btnbussiness{{ i }}"
+            [productName]="bussiness.description"
+            [price]="bussiness.commission"
+            [image]="bussiness.imageurl"
+            [alt]="bussiness.description"
+            other="true"
+            Class="mb-1 button-100 gtmInicioClicLinkViaj{{i}}"
+            container="img-container-viajes"
+            textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+          ></app-product>
+        </div>
+      </div>
+</div>
