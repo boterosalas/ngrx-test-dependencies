@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BackNavigationComponent } from './back-navigation.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { AppMaterialModule } from '../../app-material/app-material.module';
 
 describe('BackNavigationComponent', () => {
   let component: BackNavigationComponent;
@@ -8,7 +10,11 @@ describe('BackNavigationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BackNavigationComponent ]
+      declarations: [ BackNavigationComponent ],
+      imports: [
+        FlexLayoutModule,
+        AppMaterialModule
+      ]
     })
     .compileComponents();
   }));

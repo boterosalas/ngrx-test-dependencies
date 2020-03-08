@@ -5,7 +5,6 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ContentService } from 'src/app/services/content.service';
 import { of } from 'rxjs';
-import { ProductComponent } from '../product/product.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
@@ -54,7 +53,7 @@ let categorys = {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SliderComponent, ProductComponent ],
+      declarations: [ SliderComponent ],
       imports: [
         SlickCarouselModule,
         HttpClientTestingModule,
