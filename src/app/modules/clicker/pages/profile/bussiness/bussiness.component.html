@@ -1,3 +1,4 @@
+<app-back-navigation [title]="title" [aditional]="percent" (close)="goback()"></app-back-navigation>
 <div class="full container">
     <h3 class="border-bottom-orange-init title-h3">{{ 'BUSSINESS.CATEGORIES' | translate }}</h3>
     <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="0px">
@@ -14,6 +15,7 @@
             btnid="btnbussiness{{ i }}"
             [productName]="bussiness.description"
             [price]="bussiness.commission"
+            [percent]="percentBussiness"
             [image]="bussiness.imageurl"
             [alt]="bussiness.description"
             other="true"

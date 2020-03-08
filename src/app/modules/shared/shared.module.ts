@@ -22,6 +22,7 @@ import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 import { AppStoreComponent } from './components/app-store/app-store.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { ProductComponent } from './components/product/product.component';
+import { BackNavigationComponent } from './components/back-navigation/back-navigation.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { ProductComponent } from './components/product/product.component';
     AppStoreComponent,
     LogoComponent,
     ProductComponent,
+    BackNavigationComponent,
   ],
   imports: [
     CommonModule,
@@ -74,6 +76,7 @@ import { ProductComponent } from './components/product/product.component';
     TruncatePipe,
     LogoComponent,
     ProductComponent,
+    BackNavigationComponent
   ]
 })
 export class SharedModule {}

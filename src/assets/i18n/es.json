@@ -36,7 +36,8 @@
     "REFERENCE_TEXT": "O puedes referenciar a un cliente con su número de cédula",
     "TRIPS_MSJ": "Refiere con cédula, si y solo si, tú serás quien pague en Viajes Éxito",
     "REFERENCE": "Referenciar",
-    "REFERENCE_IDENTIFICATION": "Ingresa la cédula del cliente a referir"
+    "REFERENCE_IDENTIFICATION": "Ingresa la cédula del cliente a referir",
+    "PERCENT": "Hasta 9.6%"
   },
   "FOOTER": {
     "FOLLOW_US": "Síguenos",
@@ -88,7 +89,7 @@
     "ENTER_PASSWORD": "Por favor, introduzca su nueva contraseña"
   },
   "PRODUCTS": {
-    "GET_LINK": "Crear link"
+    "GET_LINK": "Clickear"
   },
   "HOME": {
     "TITLE_SPEND": "¿Cuánto gano?",

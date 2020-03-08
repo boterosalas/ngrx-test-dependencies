@@ -8,6 +8,7 @@ import { trigger, state, style, transition, animate, group } from '@angular/anim
 import { AuthService } from 'src/app/services/auth.service';
 import decode from 'jwt-decode';
 import { ContentService } from 'src/app/services/content.service';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 
 @Component({
@@ -174,29 +175,38 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public getBussiness() {
-    this.content.getBusiness().subscribe(bussiness => {
+    this.content.getBusiness()
+    .pipe(distinctUntilChanged())
+    .subscribe(bussiness => {
       this.bussiness = bussiness;
     })
   }
 
   public slider() {
-    this.subscription = this.content.getNews().subscribe((slide: any)=> {
+    this.subscription = this.content.getNews()
+    .pipe(distinctUntilChanged())
+    .subscribe((slide: any)=> {
       this.newsSlider = slide;
     });
   }
 
   public getOffers() {
-    this.subscription = this.content.getOffers().subscribe(offer => {
+    this.subscription = this.content.getOffers()
+    .pipe(distinctUntilChanged())
+    .subscribe(offer => {
       this.offers = offer;
     });
   }
 
   public bussinessNavigation(bussiness) {
-    console.log(bussiness);
     let params = {
-      id: bussiness.id
+      id: bussiness.id,
+      code: bussiness.code,
+      infoAditional: bussiness.infoaditional
     }
-    this.router.navigate(['bussiness' + '/' + params.id])
+    this.router.navigate(['/bussiness', {id: params.id, code: params.code, infoAditional: params.infoAditional}]);
+    
+    
 
   }
 

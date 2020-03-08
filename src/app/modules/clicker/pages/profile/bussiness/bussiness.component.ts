@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterLink, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { ContentService } from 'src/app/services/content.service';
+import { UtilsService } from 'src/app/services/utils.service';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-bussiness',
@@ -10,15 +12,22 @@ import { ContentService } from 'src/app/services/content.service';
 export class BussinessComponent implements OnInit {
 
   id:string;
+  title: string;
+  percent: string;
+  percentBussiness:string = "Hasta 9.6%";
   bussiness = [];
 
   constructor(
     private route: ActivatedRoute,
-    private content: ContentService
+    private router: Router,
+    private content: ContentService,
+    private utils: UtilsService
   ) { 
 
     this.route.params.subscribe(route => {
-      this.id = route.params;
+      this.title = route.code;
+      this.percent = route.infoAditional;
+      this.id = route.id;
     });
 
   }
@@ -28,9 +37,16 @@ export class BussinessComponent implements OnInit {
   }
 
   public getContentBussiness() {
-    this.content.getBusinessContent(this.id).subscribe(bussiness => {
-      this.bussiness =bussiness;
+    this.content.getBusinessContent(this.id)
+    .pipe(distinctUntilChanged())
+    .subscribe(bussiness => {
+      console.log(bussiness);
+      this.bussiness = bussiness;
     })
   }
 
+  public goback() {
+    this.router.navigate(['./']);
+  }
+ 
 }
