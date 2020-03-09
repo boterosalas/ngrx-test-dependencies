@@ -139,4 +139,12 @@ let categorys = {
     const input = nativeElementInput.querySelector('input');
 });
 
+it('share mobile', () => {
+  component.share();
+});
+
+it('buy', () => {
+  component.buy();
+});
+
 });
