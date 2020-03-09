@@ -12,7 +12,7 @@ describe('ProductComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductComponent ],
+      declarations: [ ],
       imports: [
         SharedModule,
         AppMaterialModule,

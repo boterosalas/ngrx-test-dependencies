@@ -31,6 +31,7 @@ export class ContentService {
   apiCategories= 'offer/getCategories';
   apiProducts = 'product';
   apiGetBusiness = 'business/getBusiness';
+  apiGetBusinessContent = 'business/getContent';
   sendSearch = {};
 
   public getNews() {
@@ -55,6 +56,14 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiGetBusiness}`).pipe(
       map((user: ResponseService) => {
         return user.objectResponse;
+      })
+    );
+  }
+
+  public getBusinessContent(id: string) {
+    return this.http.get(`${this.url + this.apiGetBusinessContent}?idBusiness=${id}`).pipe(
+      map((business: ResponseService) => {
+        return business.objectResponse;
       })
     );
   }

@@ -43,6 +43,8 @@ export class SliderComponent implements OnInit {
   private subscription: Subscription = new Subscription();
   @ViewChild("templateCategories", { static: false })
   templateCategories: TemplateRef<any>;
+  @ViewChild("templateDialogAssured", { static: false })
+  templateAssured: TemplateRef<any>;
   urlshorten: string = '';
   url: string;
   identification: string;
@@ -56,6 +58,7 @@ export class SliderComponent implements OnInit {
   showFormCustomer = true;
   reference: boolean;
   numberPattern = "^(0|[0-9][0-9]*)$";
+  template: any;
 
   ngOnInit() {
 
@@ -79,69 +82,80 @@ export class SliderComponent implements OnInit {
   slideConfig = {"slidesToShow": 1, "slidesToScroll": 1, "dots": true, centerMode: true,
   centerPadding: '40px', dotClass: 'slick-dots orange', autoplay: true, autoplaySpeed: 5000, infinite: false}
 
+  public nextStep() {
+    this.showForm = !this.showForm;
+    this.showFormCustomer = !this.showFormCustomer;
+    this.saveLink("assured");
+  }
+
+  buy() {
+    window.open(this.urlshorten,'_blank')
+  }
+
+
   openShare() {
     this.action.emit(event);
   }
 
-  /**
-   * Metodo para abrir la modal con el producto seleccionado 
-   * 
-   */
-
-  public dataCategory(category) {
-    let token = localStorage.getItem("ACCESS_TOKEN");
-      if(token !== null && category.business !=='clickam') {
-        this.urlshorten = '';
-        this.reference = false;
-        const dataCategoryUrl = category.link;
-        this.url = `${dataCategoryUrl}${this.identification}`;
-        this.subscription = this.user
-          .getShortUrl(this.url)
-          .subscribe((resp: any) => {
-            this.urlshorten = resp;
-            this.enableCopy = false;
-            this.saveLink();
-          });
-        this.idCustomerForm.controls.identification.setValue("");
-        this.idCustomerForm.reset();
-        this.formShareLink();
-        const title = category.description;
-        const id = category.productId;
-        const img = category.imageurl;
-        const template = this.templateCategories;
-        const showClose = false;
-        const showCloseIcon = true;
-        const showProduct = true;
-        const showshowTitle = false;
-        const buttonClose = "Cerrar";
-        this.plu = category.description;
-        this.business = category.business;
-        const home = true;
-        let dialogref = this.dialog.open(DialogComponent, {
-          data: {
-            title,
-            template,
-            showClose,
-            showCloseIcon,
-            img,
-            showProduct,
-            showshowTitle,
-            buttonClose,
-            id,
-            home
-          },
-        });
-    
-        dialogref.afterDismissed().subscribe(() => {
-          this.enableCopy = true;
-        })
-      } else {
-        this.router.navigate(['/'+category.link]);
-      }
-  
-
+  share() {
+    this.ngNavigatorShareService.share({
+      title: '',
+      text: '',
+      url: this.urlshorten
+    }).then( (response) => {
+      console.log(response);
+    })
+    .catch( (error) => {
+      console.log(error);
+    });
   }
 
+  public showReference() {
+    this.reference = !this.reference;
+    // this.idCustomerForm.controls.identification.setValue('');
+    this.idCustomerForm.reset();
+  }
+
+    /* To copy Text from Textbox */
+    public copyInputMessage(inputElement: any) {
+      inputElement.select();
+      document.execCommand("copy");
+      inputElement.setSelectionRange(0, 0);
+      this.openSnackBar("Se ha copiado el link al portapapeles", "Cerrar");
+    }
+
+    /**
+   * Abre el mensaje de confirmacion de copiado del link
+   * @param message
+   * @param action
+   */
+
+ 
+
+    private openSnackBar(message: string, action: string) {
+      this._snackBar.open(message, action, {
+        duration: 5000
+      });
+    }
+  
+       /**
+   * Obtiene la fecha actual
+   */
+
+  public getDate() {
+    let today = new Date();
+    let date =
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getDate();
+    let time =
+      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    this.date = date + " " + time;
+  }
+
+  
    /**
    * Metodo para dalvar los links generados
    */
@@ -194,67 +208,82 @@ export class SliderComponent implements OnInit {
       });
   }
 
+
+
+  /**
+   * Metodo para abrir la modal con el producto seleccionado 
+   * 
+   */
+
+  public dataCategory(category) {
+    console.log(category);
+    let token = localStorage.getItem("ACCESS_TOKEN");
+      if(token !== null && category.business !=='clickam') {
+        this.urlshorten = '';
+        this.reference = false;
+        const dataCategoryUrl = category.link;
+        this.url = `${dataCategoryUrl}${this.identification}`;
+        this.subscription = this.user
+          .getShortUrl(this.url)
+          .subscribe((resp: any) => {
+            this.urlshorten = resp;
+            this.enableCopy = false;
+            this.saveLink();
+          });
+        this.idCustomerForm.controls.identification.setValue("");
+        this.idCustomerForm.reset();
+        this.formShareLink();
+        const title = category.description;
+        const id = category.productId;
+        const img = category.imageurl;
+        const showClose = false;
+        const showCloseIcon = true;
+        const showProduct = true;
+        const showshowTitle = false;
+        const buttonClose = "Cerrar";
+        this.plu = category.description;
+        this.business = category.idbusiness;
+        const home = true;
+        
+        if(category.business === 'seguros') {
+          this.template = this.templateAssured;
+        } else {
+          this.template = this.templateCategories;
+        }
+
+        const template = this.template;
+
+        let dialogref = this.dialog.open(DialogComponent, {
+          data: {
+            title,
+            template,
+            showClose,
+            showCloseIcon,
+            img,
+            showProduct,
+            showshowTitle,
+            buttonClose,
+            id,
+            home
+          },
+        });
+    
+        dialogref.afterDismissed().subscribe(() => {
+          this.enableCopy = true;
+        })
+      } else {
+        this.router.navigate(['/'+category.link]);
+      }
+  
+
+  }
+
   private formShareLink() {
     this.formLink = this.fb.group({
       link: [this.url]
     });
   }
-
-   /**
-   * Obtiene la fecha actual
-   */
-
-  public getDate() {
-    let today = new Date();
-    let date =
-      today.getFullYear() +
-      "-" +
-      (today.getMonth() + 1) +
-      "-" +
-      today.getDate();
-    let time =
-      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    this.date = date + " " + time;
-  }
-
-   /**
-   * Abre el mensaje de confirmacion de copiado del link
-   * @param message
-   * @param action
-   */
-
-  private openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 5000
-    });
-  }
-
-    /* To copy Text from Textbox */
-    public copyInputMessage(inputElement: any) {
-      inputElement.select();
-      document.execCommand("copy");
-      inputElement.setSelectionRange(0, 0);
-      this.openSnackBar("Se ha copiado el link al portapapeles", "Cerrar");
-    }
-
-    public showReference() {
-      this.reference = !this.reference;
-      // this.idCustomerForm.controls.identification.setValue('');
-      this.idCustomerForm.reset();
-    }
-
-    share() {
-      this.ngNavigatorShareService.share({
-        title: '',
-        text: '',
-        url: this.urlshorten
-      }).then( (response) => {
-        console.log(response);
-      })
-      .catch( (error) => {
-        console.log(error);
-      });
-    }
+   
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

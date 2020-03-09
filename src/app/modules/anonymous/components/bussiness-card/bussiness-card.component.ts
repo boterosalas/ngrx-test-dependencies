@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-bussiness-card',
@@ -11,7 +11,13 @@ export class BussinessCardComponent implements OnInit {
   @Input() title: string;
   @Input() percent: string;
 
+  @Output() bussiness = new EventEmitter();
+
   constructor() { }
+
+  navigateBussiness() {
+    this.bussiness.emit(event);
+  }
 
   ngOnInit() {
   }

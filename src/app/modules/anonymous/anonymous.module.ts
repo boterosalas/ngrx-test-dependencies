@@ -26,7 +26,6 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { SliderComponent } from './components/slider/slider.component';
 import { BussinessCardComponent } from './components/bussiness-card/bussiness-card.component';
-import { ProductComponent } from './components/product/product.component';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -84,7 +83,6 @@ const routes: Routes = [
     CardOfferComponent,
     SliderComponent,
     BussinessCardComponent,
-    ProductComponent
     // ReportComponent
   ],
   imports: [
