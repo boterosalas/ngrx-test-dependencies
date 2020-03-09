@@ -30,6 +30,8 @@ export class BussinessComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   @ViewChild("templateCategories", { static: false })
   templateCategories: TemplateRef<any>;
+  @ViewChild("templateDialogAssured", { static: false })
+  templateAssured: TemplateRef<any>;
   urlshorten: string = '';
   url: string;
   identification: string;
@@ -43,6 +45,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   showFormCustomer = true;
   reference: boolean;
   numberPattern = "^(0|[0-9][0-9]*)$";
+  template: any;
   private ngNavigatorShareService: NgNavigatorShareService;
 
   constructor(
@@ -129,7 +132,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
         const title = category.description;
         const id = category.productId;
         const img = category.imageurl;
-        const template = this.templateCategories;
         const showClose = false;
         const showCloseIcon = true;
         const showProduct = true;
@@ -138,6 +140,14 @@ export class BussinessComponent implements OnInit, OnDestroy {
         this.plu = category.description;
         this.business = category.business;
         const home = true;
+        if(category.idbusiness !== 3 && category.idbusiness !== 5) {
+          this.template = this.templateCategories;
+        } else {
+          this.template = this.templateAssured;
+        }
+
+        const template = this.template;
+
         let dialogref = this.dialog.open(DialogComponent, {
           data: {
             title,

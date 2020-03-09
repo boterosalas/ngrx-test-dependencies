@@ -43,6 +43,8 @@ export class SliderComponent implements OnInit {
   private subscription: Subscription = new Subscription();
   @ViewChild("templateCategories", { static: false })
   templateCategories: TemplateRef<any>;
+  @ViewChild("templateDialogAssured", { static: false })
+  templateAssured: TemplateRef<any>;
   urlshorten: string = '';
   url: string;
   identification: string;
@@ -56,6 +58,7 @@ export class SliderComponent implements OnInit {
   showFormCustomer = true;
   reference: boolean;
   numberPattern = "^(0|[0-9][0-9]*)$";
+  template: any;
 
   ngOnInit() {
 
@@ -108,7 +111,6 @@ export class SliderComponent implements OnInit {
         const title = category.description;
         const id = category.productId;
         const img = category.imageurl;
-        const template = this.templateCategories;
         const showClose = false;
         const showCloseIcon = true;
         const showProduct = true;
@@ -117,6 +119,15 @@ export class SliderComponent implements OnInit {
         this.plu = category.description;
         this.business = category.business;
         const home = true;
+        
+        if(category.business === 'seguros') {
+          this.template = this.templateAssured;
+        } else {
+          this.template = this.templateCategories;
+        }
+
+        const template = this.template;
+
         let dialogref = this.dialog.open(DialogComponent, {
           data: {
             title,

@@ -151,6 +151,124 @@
   
 </ng-template>
 
+<ng-template #templateDialogAssured>
+  <div id="share">
+    <div *ngIf="showFormCustomer">
+      <p class="text-id">{{"GENERIC.CUSTOMER_ID" | translate}}</p>
+        <form class="forgotpassword-container" [formGroup]="idCustomerForm" fxLayout="column">
+            <mat-form-field appearance="outline" class="mt-2">
+              <input
+                matInput
+                class="p-2"
+                id="idcustomer"
+                type="text"
+                placeholder="N° de Documento"
+                formControlName="identification"
+                required
+              />
+              <mat-error
+              id="reuiredId"
+              *ngIf="
+                idCustomerForm.controls.identification.invalid &&
+                idCustomerForm.controls.identification.errors.required
+              "
+              >{{
+                "GENERIC.REQUIRED" | translate: { formValue: "Número de documento" }
+              }}</mat-error
+            >
+          
+            <mat-error
+              id="maxId"
+              *ngIf="
+                idCustomerForm.controls.identification.invalid &&
+                idCustomerForm.controls.identification.errors.maxlength
+              "
+              >{{
+                "GENERIC.MAX_CHARACTERS"
+                  | translate
+                    : {
+                        maxchar:
+                          idCustomerForm.controls.identification.errors.maxlength.requiredLength
+                      }
+              }}</mat-error
+            >
+          
+            <mat-error
+              id="numberId"
+              *ngIf="
+                idCustomerForm.controls.identification.invalid &&
+                idCustomerForm.controls.identification.errors.pattern
+              "
+              >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+            >
+            </mat-form-field>
+          
+            <div fxLayout="column" class="mt-2">
+            <button
+              mat-raised-button
+              class="button button-100 p-1 gtmCrearCedulaSiguiente"
+              id="recoverPassword"
+              color="orange"
+              (click)="nextStep()"
+              [disabled]="!idCustomerForm.valid"
+            >
+              <span fxLayout="row" fxLayoutAlign="space-between center" class="pl-3 pr-3 gtmCrearCedulaSiguiente">
+                  {{ "GENERIC.NEXT" | translate }}
+                  <mat-icon>arrow_forward</mat-icon>
+                </span>
+            </button>
+           </div>
+          </form>
+          
+    </div>
+    
+    <div *ngIf="showForm">
+      <form [formGroup]="formLink">
+          <div fxLayout="row" fxLayoutGap="20px"> 
+          <div fxLayout="column" fxFlex="70" fxFlex.xs="60">
+            <mat-form-field appearance="dashed" class="dashed mt-2">
+              <input
+                id="url"
+                matInput
+                formcontrolName="link"
+                [value]="urlshorten"
+                #linkInput
+                readonly
+              />
+            </mat-form-field>
+          </div>
+          <div fxLayout="column" class="mt-2">
+            <button
+              mat-button
+              id="btnCopy"
+              class="gtmOfertasClicLinkCopiarLink"
+              [disabled]="enableCopy"
+              color="orange"
+              (click)="copyInputMessage(linkInput)"
+            >
+              <span fxLayoutAlign="space-between center" class="gtmOfertasClicLinkCopiarLink">
+                {{ "GENERIC.COPY_LINK" | translate }}
+              </span>
+            </button>
+          </div>
+        </div>
+        </form>
+
+        <h3 class="border-bottom-orange-init">{{ "GENERIC.SHARE" | translate }}</h3>
+
+        <div class="share-desktop" id="share">
+          <button  theme="circles-dark" shareButton="facebook" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomFacebook mr-2"><i class="fab fa-facebook-f gtmInicioClicFiltroExitocomFacebook"></i></button>
+          <button  theme="circles-dark" shareButton="twitter" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomTwitter mr-2"><i class="fab fa-twitter gtmInicioClicFiltroExitocomTwitter"></i></button>
+          <button  theme="circles-dark" shareButton="whatsapp" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomWhatsapp"><i class="fab fa-whatsapp gtmInicioClicFiltroExitocomWhatsapp"></i></button>  
+        </div>
+      
+        <div class="share-mobile">
+          <button  mat-raised-button class="gtmrs orange mb-2 mt-2 " color="orange" (click)="share()"> <span class="gtmrs">Compartir</span> </button>
+        </div>
+    </div>
+  </div>
+</ng-template>
+
 
 
     
