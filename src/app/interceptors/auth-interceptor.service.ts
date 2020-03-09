@@ -6,41 +6,43 @@ import {
   HttpInterceptor,
   HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import {tap} from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import {tap, catchError} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
+import { Injector } from '@angular/core';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router, private auth:AuthService, private user: UserService) {}
+  constructor(private router: Router, public auth:AuthService, private user: UserService, private injector: Injector) {}
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const currentUser = localStorage.getItem('ACCESS_TOKEN');
-    if (currentUser) {
-      request = request.clone({
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    this.auth = this.injector.get(AuthService);
+    const token: string = localStorage.getItem('ACCESS_TOKEN');
+
+    let request = req;
+
+    if (token) {
+      request = req.clone({
         setHeaders: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${currentUser}`
+          authorization: `Bearer ${ token }`
         }
       });
     }
 
-    return next.handle(request).pipe( tap(() => {},
-      (err: any) => {
-      if (err instanceof HttpErrorResponse) {
-        if (err.status !== 401) {
-         return;
+    return next.handle(request).pipe(
+      catchError((err: HttpErrorResponse) => {
+        if (err.status === 401) {
+         this.auth.refreshToken().subscribe(resp => {
+           console.log(resp);
+         })
         }
-        localStorage.removeItem("ACCESS_TOKEN");
-        this.router.navigate(['/']);
-        // this.auth.getRole$.next(null);
-        // this.auth.isLogged$.next(false);
-        // this.user.userInfo$.next(null);
-        // return false;
-      }
-    }));
+
+        return throwError( err );
+
+      })
+    );
   }
 }
