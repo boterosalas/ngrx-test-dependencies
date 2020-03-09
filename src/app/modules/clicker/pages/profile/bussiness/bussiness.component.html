@@ -1,41 +1,34 @@
-
-<div fxShow.xs="false" class="no-focus">
-<ngx-slick-carousel
-  class="carousel"
-  #slickModal="slick-carousel"
-  [config]="slideConfig"
->
-  <div ngxSlickItem *ngFor="let slide of sliderWeb; let i=index" class="slide text-center">
-    <a href="{{ slide.link }}" id="banner{{i}}">
-      <img src="{{ slide.imageurl }}" class="responsive-img round-img"  alt="{{ slide.description }}" />
-    </a>
-  </div>
-</ngx-slick-carousel>
+<app-back-navigation [title]="title" [aditional]="percent" (close)="goback()"></app-back-navigation>
+<div class="full container p-60">
+    <h3 class="border-bottom-orange-init title-h3">{{ 'BUSSINESS.CATEGORIES' | translate }}</h3>
+    <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="0px">
+        <div
+          fxLayout="column"
+          fxFlex.xs="100"
+          fxFlex.sm="30"
+          fxFlex.gt-sm="18"
+          class="mb-3"
+          *ngFor="let bussiness of bussiness; let i = index"
+        >
+          <app-product
+            id="bussiness{{ i }}"
+            btnid="btnbussiness{{ i }}"
+            [productName]="bussiness.description"
+            [price]="bussiness.commission"
+            [percent]="percentBussiness"
+            [image]="bussiness.imageurl"
+            [alt]="bussiness.description"
+            other="true"
+            Class="mb-1 button-100 gtmInicioClicLinkViaj{{i}}"
+            container="img-container-viajes"
+            textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+            (infoProduct)="dataCategory(bussiness)"
+          ></app-product>
+        </div>
+      </div>
 </div>
 
-<div fxShow.gt-xs="false" class="no-focus">
-    <ngx-slick-carousel
-      class="carousel"
-      #slickModal="slick-carousel"
-      [config]="slideConfig"
-    >
-      <div ngxSlickItem *ngFor="let slide of sliderMobile; let i=index" class="slide text-center pl-3">
-        <span (click)="openShare($event)">
-          <!-- <img class="responsive-img round-img" src="{{ slide.imageurl }}"  alt="{{ slide.description }}" /> -->
-          <app-product
-              id="slide{{i}}"
-              [photo]="slide.imageurl"
-              category="true"
-              home
-              (infoProduct)="dataCategory(slide)"
-            ></app-product>
-        </span>
-      </div>
-    </ngx-slick-carousel>
-    </div>
-
-
-   <!-- template share -->
+ <!-- template share -->
 
  <ng-template #templateCategories>
   <div *ngIf="!reference">
@@ -288,8 +281,3 @@
     </div>
   </div>
 </ng-template>
-
-
-
-    
-

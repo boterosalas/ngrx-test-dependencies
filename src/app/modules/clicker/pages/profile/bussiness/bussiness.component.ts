@@ -1,7 +1,10 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, TemplateRef, OnDestroy } from '@angular/core';
+import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { ContentService } from 'src/app/services/content.service';
+import { UtilsService } from 'src/app/services/utils.service';
+import { distinctUntilChanged } from 'rxjs/operators';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
 import { ResponseService } from 'src/app/interfaces/response';
 import { MatBottomSheet, MatSnackBar } from '@angular/material';
@@ -10,35 +13,19 @@ import { AuthService } from 'src/app/services/auth.service';
 import { LinksService } from 'src/app/services/links.service';
 import { TokenService } from 'src/app/services/token.service';
 import { NgNavigatorShareService } from 'ng-navigator-share';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-slider',
-  templateUrl: './slider.component.html',
-  styleUrls: ['./slider.component.scss']
+  selector: 'app-bussiness',
+  templateUrl: './bussiness.component.html',
+  styleUrls: ['./bussiness.component.scss']
 })
-export class SliderComponent implements OnInit {
+export class BussinessComponent implements OnInit, OnDestroy {
 
-  constructor(
-    private sp: ContentService,
-    private dialog: MatBottomSheet,
-    private fb: FormBuilder,
-    private _snackBar: MatSnackBar,
-    private user: UserService,
-    private auth: AuthService,
-    private content: ContentService,
-    private links: LinksService,
-    private token: TokenService,
-    ngNavigatorShareService: NgNavigatorShareService,
-    private router: Router
-  ) { 
-    this.ngNavigatorShareService = ngNavigatorShareService;
-  }
-
-  private ngNavigatorShareService: NgNavigatorShareService;
-  @Input() sliderWeb:Object;
-  @Input() sliderMobile:Object;
-  @Output() action = new EventEmitter();
+  id:string;
+  title: string;
+  percent: string;
+  percentBussiness:string = "Hasta 9.6%";
+  bussiness = [];
 
   private subscription: Subscription = new Subscription();
   @ViewChild("templateCategories", { static: false })
@@ -59,8 +46,36 @@ export class SliderComponent implements OnInit {
   reference: boolean;
   numberPattern = "^(0|[0-9][0-9]*)$";
   template: any;
+  private ngNavigatorShareService: NgNavigatorShareService;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private content: ContentService,
+    private utils: UtilsService,
+    private sp: ContentService,
+    private dialog: MatBottomSheet,
+    private fb: FormBuilder,
+    private _snackBar: MatSnackBar,
+    private user: UserService,
+    private auth: AuthService,
+    private links: LinksService,
+    private token: TokenService,
+    ngNavigatorShareService: NgNavigatorShareService,
+  ) { 
+    
+    this.ngNavigatorShareService = ngNavigatorShareService;
+
+    this.route.params.subscribe(route => {
+      this.title = route.code;
+      this.percent = route.infoAditional;
+      this.id = route.id;
+    });
+
+  }
 
   ngOnInit() {
+    this.getContentBussiness();
 
     if(localStorage.getItem("ACCESS_TOKEN") !== null ) {
       this.identification = this.token.userInfo().identification;
@@ -77,13 +92,19 @@ export class SliderComponent implements OnInit {
       ]
     });
 
+
   }
 
-  slideConfig = {"slidesToShow": 1, "slidesToScroll": 1, "dots": true, centerMode: true,
-  centerPadding: '40px', dotClass: 'slick-dots orange', autoplay: true, autoplaySpeed: 5000, infinite: false}
+  public getContentBussiness() {
+    this.content.getBusinessContent(this.id)
+    .pipe(distinctUntilChanged())
+    .subscribe(bussiness => {
+      this.bussiness = bussiness;
+    })
+  }
 
-  openShare() {
-    this.action.emit(event);
+  public goback() {
+    this.router.navigate(['./']);
   }
 
   /**
@@ -117,14 +138,15 @@ export class SliderComponent implements OnInit {
         const showProduct = true;
         const showshowTitle = false;
         const buttonClose = "Cerrar";
+        const infoaditional = category.infoaditional;
         this.plu = category.description;
         this.business = category.idbusiness;
         const home = true;
-        
-        if(category.business === 'seguros') {
-          this.template = this.templateAssured;
-        } else {
+
+        if(category.idbusiness !== 3 && category.idbusiness !== 5) {
           this.template = this.templateCategories;
+        } else {
+          this.template = this.templateAssured;
         }
 
         const template = this.template;
@@ -133,6 +155,7 @@ export class SliderComponent implements OnInit {
           data: {
             title,
             template,
+            infoaditional,
             showClose,
             showCloseIcon,
             img,
@@ -282,5 +305,5 @@ export class SliderComponent implements OnInit {
     this.subscription.unsubscribe();
   }
   
-
+ 
 }

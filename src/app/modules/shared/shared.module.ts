@@ -21,6 +21,8 @@ import { UnderConstructionComponent } from './components/under-construction/unde
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 import { AppStoreComponent } from './components/app-store/app-store.component';
 import { LogoComponent } from './components/logo/logo.component';
+import { ProductComponent } from './components/product/product.component';
+import { BackNavigationComponent } from './components/back-navigation/back-navigation.component';
 
 
 @NgModule({
@@ -39,6 +41,8 @@ import { LogoComponent } from './components/logo/logo.component';
     TruncatePipe,
     AppStoreComponent,
     LogoComponent,
+    ProductComponent,
+    BackNavigationComponent,
   ],
   imports: [
     CommonModule,
@@ -70,7 +74,9 @@ import { LogoComponent } from './components/logo/logo.component';
     MenuOptionsComponent,
     UnderConstructionComponent,
     TruncatePipe,
-    LogoComponent
+    LogoComponent,
+    ProductComponent,
+    BackNavigationComponent
   ]
 })
 export class SharedModule {}
