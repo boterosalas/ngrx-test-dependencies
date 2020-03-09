@@ -92,6 +92,7 @@ export class SliderComponent implements OnInit {
    */
 
   public dataCategory(category) {
+    console.log(category);
     let token = localStorage.getItem("ACCESS_TOKEN");
       if(token !== null && category.business !=='clickam') {
         this.urlshorten = '';
@@ -117,7 +118,7 @@ export class SliderComponent implements OnInit {
         const showshowTitle = false;
         const buttonClose = "Cerrar";
         this.plu = category.description;
-        this.business = category.business;
+        this.business = category.idbusiness;
         const home = true;
         
         if(category.business === 'seguros') {
@@ -265,6 +266,16 @@ export class SliderComponent implements OnInit {
       .catch( (error) => {
         console.log(error);
       });
+    }
+
+    buy() {
+      window.open(this.urlshorten,'_blank')
+    }
+
+    public nextStep() {
+      this.showForm = !this.showForm;
+      this.showFormCustomer = !this.showFormCustomer;
+      this.saveLink("assured");
     }
 
   ngOnDestroy() {

@@ -34,7 +34,7 @@
   <div *ngIf="!reference">
     <form [formGroup]="formLink">
       <div fxLayout="row" fxLayoutGap="20px"> 
-      <div fxLayout="column" fxFlex="70" fxFlex.xs="60">
+      <div fxLayout="column" fxFlex="70" fxFlex.xs="100">
         <mat-form-field appearance="dashed" class="dashed mt-2">
           <input
             id="url"
@@ -46,7 +46,7 @@
           />
         </mat-form-field>
       </div>
-      <div fxLayout="column" class="mt-2">
+      <div fxLayout="column" class="mt-2 share-desktop">
         <button
           mat-button
           id="btnCopy"
@@ -63,7 +63,7 @@
     </div>
     </form>
   
-    <h3 class="border-bottom-orange-init">{{ "GENERIC.SHARE" | translate }}</h3>
+    <h3 class="border-bottom-orange-init share-desktop">{{ "GENERIC.SHARE" | translate }}</h3>
   
     <div class="share-desktop" id="share">
       <button  theme="circles-dark" shareButton="facebook" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomFacebook mr-2"><i class="fab fa-facebook-f gtmInicioClicFiltroExitocomFacebook"></i></button>
@@ -72,11 +72,24 @@
     </div>
   
     <div class="share-mobile">
-      <button  mat-raised-button class="gtmrs orange mb-2 mt-2 " color="orange" (click)="share()"> <span class="gtmrs">Compartir</span> </button>
+      
+      <button  mat-button class="gtmrs  mb-2 mt-2 " (click)="share()" fxLayout="row" fxLayoutAlign="start start"> 
+        <span class="gtmrs f-15" fxLayout="row" fxLayoutAlign="center center"> <img class="icon-compartir pr-2" src="/assets/img/Compartir.svg" alt="user"> Compartir</span> 
+      </button>
+
+      <button  mat-button class="gtmrs  mb-2 mt-2 " (click)="showReference()" fxLayout="row" fxLayoutAlign="start start"> 
+        <span class="gtmrs f-15" fxLayout="row" fxLayoutAlign="center center"> <img class="icon-compartir pr-2" src="/assets/img/Referir.svg" alt="user"> Referir </span> 
+      </button>
+
+      <button  mat-button class="gtmrs  mb-2 mt-2 " (click)="buy()" fxLayout="row" fxLayoutAlign="start start"> 
+        <span class="gtmrs f-15" fxLayout="row" fxLayoutAlign="center center"> <img class="icon-compartir pr-2" src="/assets/img/Comprar.svg" alt="user"> Comprar </span> 
+      </button>
+
     </div>
   
-    <p>{{'GENERIC.REFERENCE_TEXT' | translate}}</p>
-    <button mat-raised-button class="orange-border mb-2" color="primary" id="reference" (click)="showReference()">{{'GENERIC.REFERENCE' | translate}}</button>
+    <!-- <p>{{'GENERIC.REFERENCE_TEXT' | translate}}</p>
+    <button mat-raised-button class="orange-border mb-2" color="primary" id="reference" (click)="showReference()">{{'GENERIC.REFERENCE' | translate}}</button> -->
+
   </div>
     <br>
     <form class="forgotpassword-container" [formGroup]="idCustomerForm" fxLayout="column" *ngIf="reference">
@@ -216,47 +229,55 @@
     
     <div *ngIf="showForm">
       <form [formGroup]="formLink">
-          <div fxLayout="row" fxLayoutGap="20px"> 
-          <div fxLayout="column" fxFlex="70" fxFlex.xs="60">
-            <mat-form-field appearance="dashed" class="dashed mt-2">
-              <input
-                id="url"
-                matInput
-                formcontrolName="link"
-                [value]="urlshorten"
-                #linkInput
-                readonly
-              />
-            </mat-form-field>
-          </div>
-          <div fxLayout="column" class="mt-2">
-            <button
-              mat-button
-              id="btnCopy"
-              class="gtmOfertasClicLinkCopiarLink"
-              [disabled]="enableCopy"
-              color="orange"
-              (click)="copyInputMessage(linkInput)"
-            >
-              <span fxLayoutAlign="space-between center" class="gtmOfertasClicLinkCopiarLink">
-                {{ "GENERIC.COPY_LINK" | translate }}
-              </span>
-            </button>
-          </div>
+        <div fxLayout="row" fxLayoutGap="20px"> 
+        <div fxLayout="column" fxFlex="70" fxFlex.xs="100">
+          <mat-form-field appearance="dashed" class="dashed mt-2">
+            <input
+              id="url"
+              matInput
+              formcontrolName="link"
+              [value]="urlshorten"
+              #linkInput
+              readonly
+            />
+          </mat-form-field>
         </div>
-        </form>
+        <div fxLayout="column" class="mt-2 share-desktop">
+          <button
+            mat-button
+            id="btnCopy"
+            color="orange"
+            [disabled]="enableCopy"
+            class="gtmInicioClicFiltroExitocomCopiarLink"
+            (click)="copyInputMessage(linkInput)"
+          >
+            <span fxLayoutAlign="space-between center" class="gtmInicioClicFiltroExitocomCopiarLink">
+              {{ "GENERIC.COPY_LINK" | translate }}
+            </span>
+          </button>
+        </div>
+      </div>
+      </form>
+    
+      <h3 class="border-bottom-orange-init share-desktop">{{ "GENERIC.SHARE" | translate }}</h3>
+    
+      <div class="share-desktop" id="share">
+        <button  theme="circles-dark" shareButton="facebook" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomFacebook mr-2"><i class="fab fa-facebook-f gtmInicioClicFiltroExitocomFacebook"></i></button>
+        <button  theme="circles-dark" shareButton="twitter" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomTwitter mr-2"><i class="fab fa-twitter gtmInicioClicFiltroExitocomTwitter"></i></button>
+        <button  theme="circles-dark" shareButton="whatsapp" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomWhatsapp"><i class="fab fa-whatsapp gtmInicioClicFiltroExitocomWhatsapp"></i></button>  
+      </div>
+    
+      <div class="share-mobile">
+        
+        <button  mat-button class="gtmrs  mb-2 mt-2 " (click)="share()" fxLayout="row" fxLayoutAlign="start start"> 
+          <span class="gtmrs f-15" fxLayout="row" fxLayoutAlign="center center"> <img class="icon-compartir pr-2" src="/assets/img/Compartir.svg" alt="user"> Compartir</span> 
+        </button>
 
-        <h3 class="border-bottom-orange-init">{{ "GENERIC.SHARE" | translate }}</h3>
-
-        <div class="share-desktop" id="share">
-          <button  theme="circles-dark" shareButton="facebook" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomFacebook mr-2"><i class="fab fa-facebook-f gtmInicioClicFiltroExitocomFacebook"></i></button>
-          <button  theme="circles-dark" shareButton="twitter" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomTwitter mr-2"><i class="fab fa-twitter gtmInicioClicFiltroExitocomTwitter"></i></button>
-          <button  theme="circles-dark" shareButton="whatsapp" [url]="urlshorten" class="sharebutton gtmInicioClicFiltroExitocomWhatsapp"><i class="fab fa-whatsapp gtmInicioClicFiltroExitocomWhatsapp"></i></button>  
-        </div>
-      
-        <div class="share-mobile">
-          <button  mat-raised-button class="gtmrs orange mb-2 mt-2 " color="orange" (click)="share()"> <span class="gtmrs">Compartir</span> </button>
-        </div>
+        <button  mat-button class="gtmrs  mb-2 mt-2 " (click)="buy()" fxLayout="row" fxLayoutAlign="start start"> 
+          <span class="gtmrs f-15" fxLayout="row" fxLayoutAlign="center center"> <img class="icon-compartir pr-2" src="/assets/img/Comprar.svg" alt="user"> Comprar </span> 
+        </button>
+  
+      </div>
     </div>
   </div>
 </ng-template>

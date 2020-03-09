@@ -113,6 +113,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
    */
 
   public dataCategory(category) {
+    console.log(category);
     let token = localStorage.getItem("ACCESS_TOKEN");
       if(token !== null && category.business !=='clickam') {
         this.urlshorten = '';
@@ -137,9 +138,11 @@ export class BussinessComponent implements OnInit, OnDestroy {
         const showProduct = true;
         const showshowTitle = false;
         const buttonClose = "Cerrar";
+        const infoaditional = category.infoaditional;
         this.plu = category.description;
-        this.business = category.business;
+        this.business = category.idbusiness;
         const home = true;
+
         if(category.idbusiness !== 3 && category.idbusiness !== 5) {
           this.template = this.templateCategories;
         } else {
@@ -152,6 +155,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
           data: {
             title,
             template,
+            infoaditional,
             showClose,
             showCloseIcon,
             img,
@@ -285,6 +289,16 @@ export class BussinessComponent implements OnInit, OnDestroy {
       .catch( (error) => {
         console.log(error);
       });
+    }
+
+    buy() {
+      window.open(this.urlshorten,'_blank')
+    }
+
+    public nextStep() {
+      this.showForm = !this.showForm;
+      this.showFormCustomer = !this.showFormCustomer;
+      this.saveLink("assured");
     }
 
   ngOnDestroy() {
