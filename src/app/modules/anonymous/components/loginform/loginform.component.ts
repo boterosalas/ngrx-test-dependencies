@@ -75,6 +75,7 @@ export class LoginformComponent implements OnInit, OnDestroy {
         if (resp.state === "Success") {
           
           localStorage.setItem("ACCESS_TOKEN", resp.objectResponse.token);
+          localStorage.setItem("REFRESH_TOKEN", resp.objectResponse.refreshToken);
           this.utils.hideloginForm();
           this.routeBased();
           

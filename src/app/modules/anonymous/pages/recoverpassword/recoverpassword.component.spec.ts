@@ -8,7 +8,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { JwtModule } from '@auth0/angular-jwt';
-import { HomeComponent } from 'src/app/modules/clicker/pages/home/home.component';
+import { HomeComponent } from '../home/home.component';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { AnonymousModule } from '../../anonymous.module';
 
 describe('RecoverpasswordComponent', () => {
   let component: RecoverpasswordComponent;
@@ -19,15 +21,15 @@ describe('RecoverpasswordComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ 
-        RecoverpasswordComponent,
-        HomeComponent
        ],
        imports: [
         TranslateModule,
         AppMaterialModule,
+        AnonymousModule,
+        SharedModule,
         HttpClientTestingModule,
         RouterTestingModule.withRoutes([
-          { path: 'clicker', component: HomeComponent}
+          { path: 'inicio', component: HomeComponent},
         ]),
         BrowserAnimationsModule,
         TranslateModule.forRoot({}),

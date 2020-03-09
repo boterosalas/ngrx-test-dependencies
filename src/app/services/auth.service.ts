@@ -135,7 +135,9 @@ export class AuthService implements OnDestroy {
   }
 
   public refreshToken() {
-    return this.http.post((`${this.url + this.apiRefresh}`), this.httpOptions);
+    const accesstoken = localStorage.getItem("ACCESS_TOKEN");
+    const refreshtoken = localStorage.getItem("REFRESH_TOKEN");
+    return this.http.post((`${this.url + this.apiRefresh}`), {accesstoken, refreshtoken}, this.httpOptions );
   }
 
   public recoverPassword(password: Recoverpassword) {

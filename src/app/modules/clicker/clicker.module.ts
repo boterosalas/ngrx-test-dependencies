@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { HomeComponent } from "./pages/home/home.component";
 import { Routes, RouterModule } from "@angular/router";
 import { AppMaterialModule } from "../shared/app-material/app-material.module";
 import { SharedModule } from "../shared/shared.module";
@@ -25,12 +24,10 @@ import { MatPasswordStrengthModule } from "@angular-material-extensions/password
 import { CardDataComponent } from './components/card-data/card-data.component';
 import { DialogHistoryComponent } from './components/dialog-history/dialog-history.component';
 import { ShareModule } from '@ngx-share/core';
+import { BussinessComponent } from './pages/profile/bussiness/bussiness.component';
 
 const routes: Routes = [
-  {
-    path: "",
-    component: HomeComponent
-  },
+ 
   {
     path: "mi-perfil",
     component: ProfileComponent,
@@ -40,12 +37,16 @@ const routes: Routes = [
     path: "reportes",
     component: ReportComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: "bussiness",
+    component: BussinessComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
 @NgModule({
   declarations: [
-    HomeComponent,
     MonthResumeComponent,
     GeneralResumeComponent,
     ReportComponent,
@@ -56,7 +57,8 @@ const routes: Routes = [
     AditionalInfoFormComponent,
     DialogEditComponent,
     CardDataComponent,
-    DialogHistoryComponent
+    DialogHistoryComponent,
+    BussinessComponent
   ],
   imports: [
     CommonModule,
