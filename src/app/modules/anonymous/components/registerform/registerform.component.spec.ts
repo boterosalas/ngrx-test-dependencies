@@ -26,8 +26,7 @@ describe("RegisterformComponent", () => {
 
   const mockUserService = jasmine.createSpyObj("UserService", [
     "idType",
-    "registerUser",
-    "validateEmployee"
+    "registerUser"
   ]);
 
   const idType = [
@@ -89,88 +88,6 @@ describe("RegisterformComponent", () => {
     }
   };
 
-  // let dataBanks = {
-  //   state: "Success",
-  //   userMessage: "",
-  //   objectResponse: [
-  //     {
-  //       Id: 1,
-  //       code: "BANCOLOMBIA",
-  //       description: " Bancolombia"
-  //     },
-  //     {
-  //       Id: 2,
-  //       code: "DAVIVIENDA",
-  //       description: " Davivienda"
-  //     }
-  //   ]
-  // };
-
-  // let dataDepartments = {
-  //   state: "Success",
-  //   userMessage: "",
-  //   objectResponse: [
-  //     {
-  //       Id: 1,
-  //       code: "01",
-  //       description: "Bolivar",
-  //       municipalities: [
-  //         {
-  //           Id: 1,
-  //           code: "01",
-  //           description: "Turbaco",
-  //           idDeparment: 1
-  //         },
-  //         {
-  //           Id: 2,
-  //           code: "02",
-  //           description: "Cartagena",
-  //           idDeparment: 1
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       Id: 2,
-  //       code: "02",
-  //       description: "Antioquia",
-  //       municipalities: [
-  //         {
-  //           Id: 3,
-  //           code: "03",
-  //           description: "Medellín",
-  //           idDeparment: 2
-  //         },
-  //         {
-  //           Id: 4,
-  //           code: "04",
-  //           description: "Bello",
-  //           idDeparment: 2
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // };
-
-  // let department = {
-  //   Id: 1,
-  //   code: "01",
-  //   description: "Bolivar",
-  //   municipalities: [
-  //     {
-  //       Id: 1,
-  //       code: "01",
-  //       description: "Turbaco",
-  //       idDeparment: 1
-  //     },
-  //     {
-  //       Id: 2,
-  //       code: "02",
-  //       description: "Cartagena",
-  //       idDeparment: 1
-  //     }
-  //   ]
-  // };
-
   let mockRouter = {
     navigate: jasmine.createSpy("navigate")
   };
@@ -214,14 +131,11 @@ describe("RegisterformComponent", () => {
       providers: [
         { provide: UserService, useValue: mockUserService },
         { provide: Router, useValue: mockRouter },
-        // { provide: MasterDataService, useValue: mockMasterDataService }
       ]
     }).compileComponents();
 
     mockUserService.idType.and.returnValue(of(idType));
     mockUserService.registerUser.and.returnValue(of(register));
-    // mockMasterDataService.getBanks.and.returnValue(of(dataBanks));
-    // mockMasterDataService.getDepartments.and.returnValue(of(dataDepartments));
   }));
 
   beforeEach(() => {
@@ -242,7 +156,6 @@ describe("RegisterformComponent", () => {
   it("next step register id 1", () => {
     component.registerForm.controls.idType.setValue("1");
     component.registerForm.controls.id.setValue("123456789");
-    component.nextStep();
     expect(component.showTerms).toBeTruthy();
     expect(component.showRegisterForm).toBeFalsy();
     expect(component.acceptTerms).toBeFalsy();
@@ -250,7 +163,6 @@ describe("RegisterformComponent", () => {
 
   it("next step register id 2", () => {
     component.registerForm.controls.idType.setValue("2");
-    component.nextStep();
     expect(component.showTerms).toBeTruthy();
     expect(component.showRegisterForm).toBeFalsy();
     expect(component.acceptTerms).toBeFalsy();
@@ -258,7 +170,6 @@ describe("RegisterformComponent", () => {
 
   it("next step register id 3", () => {
     component.registerForm.controls.idType.setValue("3");
-    component.nextStep();
     expect(component.showTerms).toBeTruthy();
     expect(component.showRegisterForm).toBeFalsy();
     expect(component.acceptTerms).toBeFalsy();
@@ -270,108 +181,34 @@ describe("RegisterformComponent", () => {
     expect(component.acceptTerms).toBeTruthy();
   });
 
-  it("back step", () => {
-    component.backStep();
-    component.showTerms = false;
-    component.showRegisterForm = true;
-    expect(component.showTerms).toBeFalsy();
-    expect(component.showRegisterForm).toBeTruthy();
-  });
-
-  // it("on file change trip valid ced 1", () => {
-  //   const mockFile = new File([""], "name.jpg", { type: "text/html" });
-  //   const mockEvt = { target: { files: [mockFile] } };
-  //   component.onFileChange(mockEvt, "ced1");
-  //   expect(component.showErrorCed1).toBeFalsy();
-  // });
-
-  // it("on file change trip valid ced 2", () => {
-  //   const mockFile = new File([""], "name.jpg", { type: "text/html" });
-  //   const mockEvt = { target: { files: [mockFile] } };
-  //   component.onFileChange(mockEvt, "ced2");
-  //   expect(component.showErrorCed2).toBeFalsy();
-  // });
-
-  // it("on file change trip valid ced 3", () => {
-  //   const mockFile = new File([""], "name.jpg", { type: "text/html" });
-  //   const mockEvt = { target: { files: [mockFile] } };
-  //   component.onFileChange(mockEvt, "cert");
-  //   expect(component.showErrorCert).toBeFalsy();
-  // });
-
   describe("register clicker", () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(RegisterformComponent);
       component = fixture.componentInstance;
-      mockUserService.validateEmployee.and.returnValue(
-        of(validateEmployeeFail)
-      );
       fixture.detectChanges();
     });
 
     it("next step register id 1", () => {
       component.registerForm.controls.idType.setValue("1");
       component.registerForm.controls.id.setValue("123456789");
-      component.nextStep();
+
       expect(component.showRegisterForm).toBeFalsy();
-      expect(component.showRegisterFormExternal).toBeTruthy();
-      // expect(mockMasterDataService.getDepartments).toHaveBeenCalled();
-      // expect(mockMasterDataService.getBanks).toHaveBeenCalled();
     });
 
     it("next step register id 2", () => {
       component.registerForm.controls.idType.setValue("2");
-      component.nextStep();
+
       expect(component.showRegisterForm).toBeFalsy();
-      expect(component.showRegisterFormExternal).toBeTruthy();
-      // expect(mockMasterDataService.getDepartments).toHaveBeenCalled();
-      // expect(mockMasterDataService.getBanks).toHaveBeenCalled();
     });
 
     it("next step register id 3", () => {
       component.registerForm.controls.idType.setValue("3");
-      component.nextStep();
+
       expect(component.showRegisterForm).toBeFalsy();
-      expect(component.showRegisterFormExternal).toBeTruthy();
-      // expect(mockMasterDataService.getDepartments).toHaveBeenCalled();
-      // expect(mockMasterDataService.getBanks).toHaveBeenCalled();
     });
   });
 
-  // it("select city", () => {
-  //   component.cityCode = "01";
-  //   component.selectCity("Medellín");
-  // });
-
-  // it("select selectDepartment", () => {
-  //   let fb = new FormBuilder();
-  //   component.externalForm =  fb.group({
-  //     department: ["Antioquia"],
-  //     city: ["Medellin"],
-  //     address:  [""],
-  //     bank:  [""],
-  //     typeAccount:  [""],
-  //     numberAccount: [""],
-  //     ced1: [null],
-  //     ced2: [null],
-  //     cert: [null],
-  //   });
-  //   component.selectDepartment(department);
-  // });
-
   it("register form", () => {
-    let fb = new FormBuilder();
-    component.externalForm =  fb.group({
-      department: [""],
-      city: [""],
-      address:  [""],
-      bank:  [""],
-      typeAccount:  [""],
-      numberAccount: [""],
-      ced1: [null],
-      ced2: [null],
-      cert: [null],
-    });
     component.registerForm.controls.email.setValue('david.betancur@pragma.com.co')
     component.registerForm.controls.name.setValue('David');
     component.registerForm.controls.lastName.setValue('Betancur');
@@ -379,31 +216,9 @@ describe("RegisterformComponent", () => {
     component.registerForm.controls.phone.setValue('30000000000');
     component.registerForm.controls.password.setValue('123456');
     component.registerForm.controls.idType.setValue('CC');
-    component.departmentCode = '01';
-    component.cityCode = '01';
-    component.externalForm.controls.bank.setValue('Bancolombia');
-    component.fileIdentificationCard1 = 'image1';
-    component.fileIdentificationCard2 = 'image2';
-    component.fileBankCertificate = 'cert';
-    component.externalForm.controls.numberAccount.setValue('123456');
-    component.externalForm.controls.typeAccount.setValue('Ahorros');
-    component.externalForm.controls.address.setValue('calle falsa 123');
-
     component.register();
     expect(mockUserService.registerUser).toHaveBeenCalled();
   });
-
-  // it('checkDepartment', () => {
-  //   component.externalForm.controls.department.setValue({code:'05'});
-  //   component.checkDepartment();
-  //   expect(component.externalForm.controls.department.hasError).toBeTruthy();
-  // });
-
-  // it('checkCity', () => {
-  //   component.checkCity();
-  //   expect(component.externalForm.controls.city.hasError).toBeTruthy();
-  // });
-  
 
   describe("register invalid", () => {
     beforeEach(() => {

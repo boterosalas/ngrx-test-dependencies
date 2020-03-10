@@ -5,29 +5,10 @@ class="row align-content-center justify-content-center card-login"
 <div class="col-sm-12">
   <mat-card color="transparent" class="login">
     <mat-card-header class="container p-0">
-      
-      <mat-card-title id="{{idTitle}}"
-        >
-        
-        <!-- <h2 class="border-bottom-orange-init">
-         {{title}}
-        
-        </h2> -->
-
-        </mat-card-title
-      >
-      <!-- <mat-card-subtitle>
-      
-        <p class="text-left">
-          {{ description }}
-          <span class="link {{Class}} d-block" (click)="showRegister()" id="{{idAction}}"
-          >{{ action }}
-        </span>
-      </p>
-
-      </mat-card-subtitle> -->
+      <mat-card-title id="{{idTitle}}">
+        </mat-card-title>
     </mat-card-header>
-
+    
     <mat-card-content>
         <ng-container *ngTemplateOutlet="template">
         </ng-container>
@@ -39,8 +20,6 @@ class="row align-content-center justify-content-center card-login"
         ngClass="orange-border button button-100 button-height mt-3"
         (click)="showRegister()"
       >{{ action }}</button>
-
-      <app-footer></app-footer>
 
   </mat-card>
 </div>
