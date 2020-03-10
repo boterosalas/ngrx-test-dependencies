@@ -407,7 +407,7 @@
   </mat-form-field>
   
     <mat-checkbox  formControlName="acceptTerms" id="chkaccept" (change)="acceptTermsCheck()">
-      <span class="accept-terms">
+      <span class="accept-terms" (click)="termsAndConditions()">
         {{
         "REGISTER.ACCEPT" | translate
       }}
@@ -427,3 +427,16 @@
 
 
 </form>
+
+<ng-template #templateTerms>
+  <div innerHtml="{{ 'TERMS.LEGAL' | translate }}"></div> 
+  <button
+  mat-raised-button
+  id="accept-modal"
+  class="mt-2 center button button-height button-100"
+  color="orange"
+  (click)="acceptModal()"
+>
+{{ "GENERIC.ACCEPT" | translate }}
+</button>
+</ng-template>

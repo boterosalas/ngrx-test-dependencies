@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
+import { Component, OnInit, OnDestroy, HostListener, ViewChild, TemplateRef } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ConfirmPasswordValidator } from "src/app/validators/confirm-password.validator";
 import Swal from "sweetalert2";
@@ -10,6 +10,8 @@ import { UtilsService } from "src/app/services/utils.service";
 import { ConfirmEmailValidator } from "src/app/validators/confirm-email.validator";
 import { UserService } from "src/app/services/user.service";
 import { MasterDataService } from "src/app/services/master-data.service";
+import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import { MatDialog } from '@angular/material';
 declare var dataLayer: any;
 
 @Component({
@@ -23,7 +25,8 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     private registerUser: UserService,
     private router: Router,
     private loading: LoaderService,
-    private utils: UtilsService
+    private utils: UtilsService,
+    private dialog: MatDialog,
   ) {}
 
   private subscription: Subscription = new Subscription();
@@ -33,6 +36,8 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   showLoginForm: boolean;
   acceptTerms: boolean = null;
   idUserType = [];
+  @ViewChild("templateTerms", { static: false })
+  templateTerms: TemplateRef<any>;
 
   emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
   namePattern =
@@ -116,6 +121,24 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     );
     this.showRegisterForm = true;
     this.getidType();
+  }
+
+  public termsAndConditions() {
+   
+    const template = this.templateTerms;
+    const title = "";
+
+    this.dialog.open(ModalGenericComponent, {
+      data: {
+        title,
+        template
+      }
+    });
+  }
+
+  public acceptModal() {
+    this.dialog.closeAll();
+    this.acceptTerms = true;
   }
 
   @HostListener('over')
