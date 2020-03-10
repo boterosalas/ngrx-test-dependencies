@@ -78,7 +78,8 @@
     "ACCOUNT_CERT": "Certificación bancaria",
     "NO_FILE": "Ningún archivo seleccionado",
     "ERROR_DEPARTMENT": "Selecciona un departamento",
-    "ERROR_CITY": "Selecciona una ciudad"
+    "ERROR_CITY": "Selecciona una ciudad",
+    "REGISTER_ACCOUNT": "Registra tu cuenta"
   },
   "FORGOTPASSWORD": {
     "FORGOT_PASSWORD": "Recuperar contraseña",

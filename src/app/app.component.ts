@@ -111,27 +111,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.isLoggedIn = this.auth.isLoggedIn();
 
-    // this.subscription = this.auth.isLogged$.subscribe(val => {
-    //   if (!!val) {
-    //     this.subscription = this.bnIdle.startWatching(3600).subscribe(res => {
-    //       if (res) {
-    //         localStorage.removeItem("ACCESS_TOKEN");
-    //         this.auth.getRole$.next(null);
-    //         this.auth.isLogged$.next(false);
-    //         Swal.fire({
-    //           title: "Ha expirado tu sesión",
-    //           text: "Por favor vuelve a iniciar sesión",
-    //           type: "info",
-    //           confirmButtonText: "Volver al inicio",
-    //           confirmButtonClass: "init-sesssion",
-    //           allowOutsideClick: false
-    //         }).then(() => {
-    //           window.location.reload();
-    //         });
-    //       }
-    //     });
-    //   }
-    // });
   }
 
   ngOnInit() {
@@ -162,6 +141,13 @@ export class AppComponent implements OnInit, OnDestroy {
       this.showRegisterForm = true;
       this.showLoginForm = false;
       this.showForgotForm = false;
+    });
+
+    this.subscription = this.utils.showForgotFormEmit.subscribe(isOpenForgot => {
+      this.isOpen = isOpenForgot;
+      this.showRegisterForm = false;
+      this.showLoginForm = false;
+      this.showForgotForm = true;
     });
 
     this.windowWidth();

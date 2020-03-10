@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ConfirmPasswordValidator } from "src/app/validators/confirm-password.validator";
 import Swal from "sweetalert2";
@@ -114,43 +114,14 @@ export class RegisterformComponent implements OnInit, OnDestroy {
         ]
       }
     );
-    // this.showTerms = false;
     this.showRegisterForm = true;
-    // this.acceptTerms = false;
     this.getidType();
   }
 
-  /**
-   * Muestra los terminos y condiciones al dar clic en el boton siguiente del registro
-   */
-
-  // public nextStep() {
-  //   let idEmployee = this.registerForm.controls.id.value;
-  //   let idTypeEmployee = this.registerForm.controls.idType.value;
-
-  //   if (idTypeEmployee === "1") {
-  //     idTypeEmployee = "CC";
-  //   } else {
-  //     if (idTypeEmployee === "2") {
-  //       idTypeEmployee = "CE";
-  //     } else {
-  //       idTypeEmployee = "NIT";
-  //     }
-  //   }
-
-  //   this.showTerms = true;
-  //   this.showRegisterForm = false;
-  //   this.acceptTerms = false;
-  // }
-
-  /**
-   * Oculta los terminos y condiciones y muestra el registro
-   */
-
-  // public backStep() {
-  //   this.showTerms = false;
-  //   this.showRegisterForm = true;
-  // }
+  @HostListener('over')
+  hideRegister() {
+    this.utils.showloginForm();
+  }
 
   /**
    * Metodo para registrar un usuario

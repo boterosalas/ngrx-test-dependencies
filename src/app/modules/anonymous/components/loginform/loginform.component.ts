@@ -122,6 +122,16 @@ export class LoginformComponent implements OnInit, OnDestroy {
     this.utils.hideloginForm();
   }
 
+  @HostListener('over')
+  showRegister() {
+    this.utils.showRegisterForm();
+  }
+
+  @HostListener('over')
+  showForgot() {
+    this.utils.showForgot();
+  }
+
   
   /** Al momento de hacer login determina la ruta por el perfil de usuario */
   
