@@ -14,15 +14,11 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { MasterDataService } from "src/app/services/master-data.service";
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 describe("RegisterformComponent", () => {
   let component: RegisterformComponent;
   let fixture: ComponentFixture<RegisterformComponent>;
-
-  // const mockMasterDataService = jasmine.createSpyObj("MasterDataService", [
-  //   "getDepartments",
-  //   "getBanks"
-  // ]);
 
   const mockUserService = jasmine.createSpyObj("UserService", [
     "idType",
@@ -106,7 +102,7 @@ describe("RegisterformComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [RegisterformComponent, TruncatePipe],
+      declarations: [RegisterformComponent],
       imports: [
         TranslateModule,
         AppMaterialModule,
@@ -115,6 +111,7 @@ describe("RegisterformComponent", () => {
         HttpClientTestingModule,
         BrowserAnimationsModule,
         MatPasswordStrengthModule,
+        SharedModule,
         RouterTestingModule.withRoutes([]),
         TranslateModule.forRoot({}),
         JwtModule.forRoot({
@@ -141,9 +138,6 @@ describe("RegisterformComponent", () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterformComponent);
     component = fixture.componentInstance;
-    mockUserService.validateEmployee.and.returnValue(
-      of(validateEmployeeSuccess)
-    );
     window['dataLayer'] = [];
     fixture.detectChanges();
   });
@@ -156,22 +150,16 @@ describe("RegisterformComponent", () => {
   it("next step register id 1", () => {
     component.registerForm.controls.idType.setValue("1");
     component.registerForm.controls.id.setValue("123456789");
-    expect(component.showTerms).toBeTruthy();
-    expect(component.showRegisterForm).toBeFalsy();
     expect(component.acceptTerms).toBeFalsy();
   });
 
   it("next step register id 2", () => {
     component.registerForm.controls.idType.setValue("2");
-    expect(component.showTerms).toBeTruthy();
-    expect(component.showRegisterForm).toBeFalsy();
     expect(component.acceptTerms).toBeFalsy();
   });
 
   it("next step register id 3", () => {
     component.registerForm.controls.idType.setValue("3");
-    expect(component.showTerms).toBeTruthy();
-    expect(component.showRegisterForm).toBeFalsy();
     expect(component.acceptTerms).toBeFalsy();
   });
 
@@ -191,20 +179,17 @@ describe("RegisterformComponent", () => {
     it("next step register id 1", () => {
       component.registerForm.controls.idType.setValue("1");
       component.registerForm.controls.id.setValue("123456789");
-
-      expect(component.showRegisterForm).toBeFalsy();
+      expect(component.showRegisterForm).toBeTruthy();
     });
 
     it("next step register id 2", () => {
       component.registerForm.controls.idType.setValue("2");
-
-      expect(component.showRegisterForm).toBeFalsy();
+      expect(component.showRegisterForm).toBeTruthy();
     });
 
     it("next step register id 3", () => {
       component.registerForm.controls.idType.setValue("3");
-
-      expect(component.showRegisterForm).toBeFalsy();
+      expect(component.showRegisterForm).toBeTruthy();
     });
   });
 

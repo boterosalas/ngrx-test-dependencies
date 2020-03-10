@@ -11,6 +11,7 @@ import { of, throwError, from } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 
 describe('ForgotpasswordformComponent', () => {
@@ -52,6 +53,7 @@ describe('ForgotpasswordformComponent', () => {
          BrowserAnimationsModule,
          AppMaterialModule,
          RouterTestingModule.withRoutes([]),
+         SharedModule
        ],
        providers: [
          {provide: AuthService, useValue: mockAuthService}
