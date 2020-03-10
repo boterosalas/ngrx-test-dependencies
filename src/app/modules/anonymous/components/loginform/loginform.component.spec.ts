@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterTestingModule } from "@angular/router/testing";
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 describe("LoginformComponent", () => {
   let component: LoginformComponent;
@@ -63,15 +64,16 @@ describe("LoginformComponent", () => {
         RouterTestingModule.withRoutes([]),
         BrowserAnimationsModule,
         TranslateModule.forRoot({}),
-        MatPasswordStrengthModule
+        MatPasswordStrengthModule,
+        SharedModule
       ],
       providers: [
-        { provide: Router, useValue: mockRouter},
+        // { provide: Router, useValue: mockRouter},
         TranslateService,
-        { provide: AuthService, useValue: mockAuthService }
+        { provide: AuthService, useValue: mockAuthService },
       ],
       schemas: [
-        // NO_ERRORS_SCHEMA
+        NO_ERRORS_SCHEMA
       ]
     }).compileComponents();
     
