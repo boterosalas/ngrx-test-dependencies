@@ -17,10 +17,12 @@ export class UtilsService {
   isOpen = false;
   isOpenMenu=  false;
   isRegisterOpen = false;
+  showForgotForm = false;
 
   @Output() change: EventEmitter<boolean> = new EventEmitter();
   @Output() changeMenu: EventEmitter<boolean> = new EventEmitter();
   @Output() changeRegister: EventEmitter<boolean> = new EventEmitter();
+  @Output() showForgotFormEmit: EventEmitter<boolean> = new EventEmitter();
 
   showloginForm() {
     this.isOpen = true;
@@ -45,6 +47,11 @@ export class UtilsService {
   hideMenu() {
     this.isOpenMenu = false;
     this.changeMenu.emit(this.isOpenMenu);
+  }
+
+  public showForgot() {
+    this.showForgotForm = true;
+    this.showForgotFormEmit.emit(this.showForgotForm);
   }
 
   public logout() {

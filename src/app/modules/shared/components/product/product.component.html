@@ -1,6 +1,6 @@
 
 
-<mat-card class="mat-elevation-z0 card-product card-other puff-in-center p-1" *ngIf="other">
+<mat-card class="mat-elevation-z0 card-product card-other fade-in p-1" *ngIf="other">
   <mat-card-content fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap="10px" fxLayoutAlign.xs="space-around">
     <span fxLayout="column" fxFlex="100"  fxFlex.xs="30" fxFLex.gt-xs="100" fxLayoutAlign="center">
       <div class="{{container}}">
@@ -43,7 +43,7 @@
   </mat-card-content>
 </mat-card>
 
-<mat-card class="mat-elevation-z0 border-rad puff-in-center p-0 pr-3" *ngIf="category">
+<mat-card class="mat-elevation-z0 border-rad p-0 pr-3 fade-in" *ngIf="category">
     <mat-card-content fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap="10px" fxLayoutAlign.xs="center center" class="category border-rad">
       <span class="border-rad" fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
         <img (click)="product()" [src]="photo" class="img-responsive border-rad cursor-pointer">

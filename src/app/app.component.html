@@ -5,20 +5,18 @@
 </div>
 
 <div class="fullheight slide-in-top" *ngIf="isOpen"  @openClose>
-  
-  <app-top title="Login y registro" (close)="hideLogin()"></app-top>
 
   <app-card *ngIf="showLoginForm" idTitle="titleLogin" title="{{ 'LOGIN.LOGIN' | translate }}" description="{{ 'LOGIN.DESCRIPTION' | translate }}" idAction="registerHere" action="{{ 'LOGIN.REGISTER' | translate }}" (actionButton)="showRegister()" [template]="templateCardLogin"></app-card>
 
   <ng-template #templateCardLogin>
     <app-loginform></app-loginform>
-    <p
+    <!-- <p
       id="forgotPass"
       class="cursor-pointer text-decoration text-center gtmIniciarSesiónClicLtrlOlvidoClave"
       (click)="showForgot()"
     >
       {{ "LOGIN.FORGOT_PASSWORD" | translate }}
-    </p>
+    </p> -->
   </ng-template>
 
   <app-card *ngIf="showRegisterForm" Class="gtmRegistroClicLatrlIniciarSesion" idTitle="titleRegister" title="{{ 'GENERIC.REGISTER' | translate }}" description="{{ 'REGISTER.HAVE_ACCOUNT' | translate }}" idAction="registerForm" action="{{ 'LOGIN.LOGIN' | translate }}" (actionButton)="showLogin()" [template]="templateCardRegister"></app-card>
@@ -43,7 +41,7 @@
 
 <div ngClass.lt-md="fullheight slide-in-right" ngClass.gt-md="fullheight slide-in-right p-5" *ngIf="isOpen"  @slideInOut>
   
-  <app-top (close)="hideLogin()"></app-top>
+  <!-- <app-top (close)="hideLogin()"></app-top> -->
 
   <app-card Class="gtmIniciarSesiónClicLtrlRegistrarte" *ngIf="showLoginForm" idTitle="titleLogin" title="{{ 'LOGIN.LOGIN' | translate }}" description="{{ 'LOGIN.DESCRIPTION' | translate }}" idAction="registerHere" action="{{ 'LOGIN.REGISTER' | translate }}" (actionButton)="showRegister()" [template]="templateCardLogin"></app-card>
 
