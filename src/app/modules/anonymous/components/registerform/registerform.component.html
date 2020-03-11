@@ -406,13 +406,17 @@
     >
   </mat-form-field>
   
-    <mat-checkbox  formControlName="acceptTerms" id="chkaccept" (change)="acceptTermsCheck()">
-      <span class="accept-terms" (click)="termsAndConditions()">
-        {{
-        "REGISTER.ACCEPT" | translate
-      }}
-      </span>
-  </mat-checkbox>
+  <div>
+    <span>
+      <mat-checkbox  formControlName="acceptTerms" id="chkaccept" (change)="acceptTermsCheck()">
+      </mat-checkbox>
+    </span>
+    <span class="accept-terms ml-2" (click)="termsAndConditions()">
+      {{
+      "REGISTER.ACCEPT" | translate
+    }}
+    </span>
+  </div>
 
     <button
       mat-raised-button
@@ -422,7 +426,7 @@
       (click)="register()"
       [disabled]="!registerForm.valid"
     >
-    {{ "GENERIC.REGISTER2" | translate }}
+    {{ "GENERIC.CONTINUE" | translate }}
   </button>
 
 

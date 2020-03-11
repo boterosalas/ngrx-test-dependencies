@@ -16,6 +16,7 @@
     "NEXT": "Siguiente",
     "REGISTER": "Registro",
     "REGISTER2": "Registrarse",
+    "CONTINUE": "Continuar",
     "INVALID_FORMAT": "El campo {{val}} no puede contener caracteres especiales",
     "MAX_CHARACTERS": "El número máximo de caracteres es {{maxchar}}",
     "MIN_CHARACTERS": "El número mínimo de caracteres es {{minchar}}",
