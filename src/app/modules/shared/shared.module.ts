@@ -23,6 +23,7 @@ import { AppStoreComponent } from './components/app-store/app-store.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { ProductComponent } from './components/product/product.component';
 import { BackNavigationComponent } from './components/back-navigation/back-navigation.component';
+import { ModalGenericComponent } from './components/modal-generic/modal-generic.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { BackNavigationComponent } from './components/back-navigation/back-navig
     LogoComponent,
     ProductComponent,
     BackNavigationComponent,
+    ModalGenericComponent,
   ],
   imports: [
     CommonModule,
@@ -77,6 +79,9 @@ import { BackNavigationComponent } from './components/back-navigation/back-navig
     LogoComponent,
     ProductComponent,
     BackNavigationComponent
+  ],
+  entryComponents: [
+    ModalGenericComponent
   ]
 })
 export class SharedModule {}

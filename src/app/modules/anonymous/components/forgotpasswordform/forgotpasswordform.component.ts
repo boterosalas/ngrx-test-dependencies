@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ResponseService } from "src/app/interfaces/response";
@@ -92,6 +92,11 @@ export class ForgotpasswordformComponent implements OnInit, OnDestroy {
         );
       }
     );
+  }
+
+  @HostListener('over')
+  hideForgot() {
+    this.utils.showloginForm();
   }
 
   ngOnDestroy(): void {

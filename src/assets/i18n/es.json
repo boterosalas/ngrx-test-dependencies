@@ -16,6 +16,7 @@
     "NEXT": "Siguiente",
     "REGISTER": "Registro",
     "REGISTER2": "Registrarse",
+    "CONTINUE": "Continuar",
     "INVALID_FORMAT": "El campo {{val}} no puede contener caracteres especiales",
     "MAX_CHARACTERS": "El número máximo de caracteres es {{maxchar}}",
     "MIN_CHARACTERS": "El número mínimo de caracteres es {{minchar}}",
@@ -78,7 +79,8 @@
     "ACCOUNT_CERT": "Certificación bancaria",
     "NO_FILE": "Ningún archivo seleccionado",
     "ERROR_DEPARTMENT": "Selecciona un departamento",
-    "ERROR_CITY": "Selecciona una ciudad"
+    "ERROR_CITY": "Selecciona una ciudad",
+    "REGISTER_ACCOUNT": "Registra tu cuenta"
   },
   "FORGOTPASSWORD": {
     "FORGOT_PASSWORD": "Recuperar contraseña",
