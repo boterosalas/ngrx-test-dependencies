@@ -139,6 +139,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   public acceptModal() {
     this.dialog.closeAll();
     this.acceptTerms = true;
+    this.registerForm.controls.acceptTerms.setValue(true);
   }
 
   @HostListener('over')
@@ -179,9 +180,14 @@ export class RegisterformComponent implements OnInit, OnDestroy {
 
           Swal.fire({
             title: "Revisa tu correo",
+            type:'info',
             html: `
-              Activa tu cuenta siguiendo el enlace </br> que enviamos a tu correo.
-              `,
+            <div class="text-center">
+            <h3 class="gray f-16">Recuerda ir a la bandeja de entrada de tu correo para activar tu cuenta.</h3>
+              <p class="f-11">*Revisa tambien tu bandeja de correo no deseado</p>
+              </div>`,
+              allowOutsideClick: false,
+              allowEscapeKey: false,
             confirmButtonText: "Volver al inicio",
             confirmButtonClass:
               "accept-register-alert-success gtmRegistroClicModalValidacion"
