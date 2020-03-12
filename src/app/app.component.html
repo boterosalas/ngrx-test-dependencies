@@ -12,7 +12,7 @@
         <p class="m-0 f-14 border-bottom-orange-init lh-20 galano">{{email}}</p>
       </span>     
     </mat-toolbar>
-        <div *ngIf="managedPayments === false" class="paymentInfo orange text-white p-2" fxLayout="row">
+        <div *ngIf="managedPayments === false && isEmployee === false" class="paymentInfo orange text-white p-2" fxLayout="row">
           <span fxLayout="column" fxFlex="12" fxLayoutAlign="center center">
             <img class="pr-2" src="assets/img/alerta.svg" alt="user"> 
           </span>

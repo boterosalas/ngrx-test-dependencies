@@ -102,8 +102,9 @@ export class AppComponent implements OnInit, OnDestroy {
   firstName:string;
   lastName: string;
   email: string;
-  userInfo = this.token.userInfo();
+  userInfo:any;
   managedPayments: boolean;
+  isEmployee: boolean;
 
   constructor(
     private translate: TranslateService,
@@ -139,8 +140,7 @@ export class AppComponent implements OnInit, OnDestroy {
     // this.messagingService.receiveMessage()
     // this.message = this.messagingService.currentMessage
     
-    this.email = this.userInfo.userName;
-    console.log(this.email);
+    // this.email = this.userInfo.userName;
 
     this.showAnimation1 = true;
     this.innerWidth = window.innerWidth;
@@ -205,10 +205,12 @@ export class AppComponent implements OnInit, OnDestroy {
   public getUserData() {
     this.auth.getRole$.subscribe(role => {
       if(role === 'CLICKER' || role === 'ADMIN') {
-    this.user.getuserdata().subscribe(user => {
-      this.firstName = user.firstNames;
-      this.lastName = user.lastNames;
-      this.managedPayments = user.managedPayments;
+        this.email = this.token.userInfo().userName;
+        this.user.getuserdata().subscribe(user => {
+        this.firstName = user.firstNames;
+        this.lastName = user.lastNames;
+        this.managedPayments = user.managedPayments;
+        this.isEmployee = user.IsEmployeeGrupoExito;
     });
     }
   })
