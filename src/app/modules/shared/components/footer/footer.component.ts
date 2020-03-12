@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-footer',
@@ -8,11 +10,16 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class FooterComponent implements OnInit {
 
-  constructor(public auth: AuthService) {
+  constructor(public auth: AuthService, private router: Router, private utils: UtilsService) {
 
    }
 
   ngOnInit() {
+  }
+
+  goTerms() {
+    this.router.navigate(['/terminos-y-condiciones']);
+    this.utils.hideloginForm();
   }
 
 }

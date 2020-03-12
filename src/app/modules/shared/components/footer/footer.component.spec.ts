@@ -11,6 +11,11 @@ describe('FooterComponent', () => {
   let component: FooterComponent;
   let fixture: ComponentFixture<FooterComponent>;
 
+  let router = {
+    navigate: jasmine.createSpy('navigate')
+  }
+  
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ 
@@ -49,4 +54,10 @@ describe('FooterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('go to terms', () => {
+    component.goTerms();
+  });
+  
+
 });

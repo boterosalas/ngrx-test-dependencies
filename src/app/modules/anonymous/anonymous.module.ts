@@ -51,10 +51,6 @@ const routes: Routes = [
     component: ClickAcademyComponent
   },
   {
-    path: "ofertas",
-    component: OffersComponent
-  },
-  {
     path: "preguntas-frecuentes",
     component: FrequentQuestionsComponent
   },

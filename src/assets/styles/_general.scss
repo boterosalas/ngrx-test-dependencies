@@ -14,10 +14,10 @@ body {
   // background: #fff;
 }
 
-// .maincontent {
-//   overflow-x: hidden;
-//   min-height: 520px;
-// }
+.maincontent {
+  overflow-x: hidden;
+  // min-height: 520px;
+}
 
 .login {
   .mat-card-header-text {
@@ -183,6 +183,10 @@ h6 {
 
 .galano-bold {
   font-family: $font-galano-bold;
+}
+
+.galano {
+  font-family: $font-galano;
 }
 
 .text-right {
@@ -443,7 +447,7 @@ table {
 }
 
 .mat-raised-button.mat-primary {
-  padding: 0 30px;
+  padding: 0 10px;
 }
 
 .fullheight {
@@ -555,7 +559,8 @@ table {
   }
 
   .mat-list-item-content {
-    padding: 0 25px !important;
+    // padding: 0 25px !important;
+    margin: 0 30px;
   }
 }
 
@@ -1080,6 +1085,11 @@ button.swal2-cancel.updatecancel.swal2-styled {
 
 }
 
+.mat-toolbar{
+  background: #fff;
+  font-family: $font-galano-bold;
+}
+
 
 .no-focus{
   outline: none;
@@ -1108,4 +1118,14 @@ button.swal2-cancel.updatecancel.swal2-styled {
     font-size: 22px;
   }
   
+}
+
+.lh{
+  &-20{
+    line-height: 20px;
+  }
+}
+
+.mat-drawer{
+  padding: 0 15px;
 }

@@ -113,7 +113,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
    */
 
   public dataCategory(category) {
-    console.log(category);
     let token = localStorage.getItem("ACCESS_TOKEN");
       if(token !== null && category.business !=='clickam') {
         this.urlshorten = '';
