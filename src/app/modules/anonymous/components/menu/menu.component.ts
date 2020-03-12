@@ -30,5 +30,4 @@ export class MenuComponent implements OnInit {
   hideMenu() {
     this.utils.hideMenu();
   }
-
 }
