@@ -17,10 +17,14 @@ import {
   animate
 } from "@angular/animations";
 import { UtilsService } from "./services/utils.service";
-import { Subscription } from "rxjs";
+import { Subscription, Observable } from "rxjs";
 import { AuthService } from "./services/auth.service";
 import { BnNgIdleService } from "bn-ng-idle";
 import Swal from "sweetalert2";
+import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { map, shareReplay } from 'rxjs/operators';
+import { UserService } from './services/user.service';
+import { TokenService } from './services/token.service';
 declare var dataLayer: any;
 // import { MessagingService } from "./shared/messaging.service";
 
@@ -70,6 +74,13 @@ declare var dataLayer: any;
   ]
 })
 export class AppComponent implements OnInit, OnDestroy {
+
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  .pipe(
+    map(result => result.matches),
+    shareReplay()
+  );
+
   @ViewChild("templateCardLogin, TemplateCardRegister, TemplateCardForgot", {
     static: false
   })
@@ -88,13 +99,23 @@ export class AppComponent implements OnInit, OnDestroy {
   showAnimation2: boolean;
   isLoggedIn: any;
   message;
+  firstName:string;
+  lastName: string;
+  email: string;
+  userInfo:any;
+  managedPayments: boolean;
+  isEmployee: boolean;
 
   constructor(
     private translate: TranslateService,
     private router: Router,
     private utils: UtilsService,
     public auth: AuthService,
-    private bnIdle: BnNgIdleService
+    private bnIdle: BnNgIdleService,
+    private breakpointObserver: BreakpointObserver,
+    private user: UserService,
+    private token: TokenService
+    
   ) // private messagingService: MessagingService
   {
     translate.setDefaultLang("es");
@@ -118,6 +139,8 @@ export class AppComponent implements OnInit, OnDestroy {
     // this.messagingService.requestPermission(userId)
     // this.messagingService.receiveMessage()
     // this.message = this.messagingService.currentMessage
+    
+    // this.email = this.userInfo.userName;
 
     this.showAnimation1 = true;
     this.innerWidth = window.innerWidth;
@@ -151,6 +174,7 @@ export class AppComponent implements OnInit, OnDestroy {
     });
 
     this.windowWidth();
+    this.getUserData();
   }
 
   public hideLogin() {
@@ -177,6 +201,20 @@ export class AppComponent implements OnInit, OnDestroy {
     this.showRegisterForm = false;
     this.showLoginForm = false;
   }
+
+  public getUserData() {
+    this.auth.getRole$.subscribe(role => {
+      if(role === 'CLICKER' || role === 'ADMIN') {
+        this.email = this.token.userInfo().userName;
+        this.user.getuserdata().subscribe(user => {
+        this.firstName = user.firstNames;
+        this.lastName = user.lastNames;
+        this.managedPayments = user.managedPayments;
+        this.isEmployee = user.IsEmployeeGrupoExito;
+    });
+    }
+  })
+};
 
   onActivate(event) {
     let scrollToTop = window.setInterval(() => {

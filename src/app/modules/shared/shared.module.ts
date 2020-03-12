@@ -24,6 +24,11 @@ import { LogoComponent } from './components/logo/logo.component';
 import { ProductComponent } from './components/product/product.component';
 import { BackNavigationComponent } from './components/back-navigation/back-navigation.component';
 import { ModalGenericComponent } from './components/modal-generic/modal-generic.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -57,7 +62,12 @@ import { ModalGenericComponent } from './components/modal-generic/modal-generic.
     MatRippleModule,
     MatMenuModule,
     GoogleChartsModule,
-    RouterModule
+    RouterModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule
   ],
   exports: [
     SearchComponent,

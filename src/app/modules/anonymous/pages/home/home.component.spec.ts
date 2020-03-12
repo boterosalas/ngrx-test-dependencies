@@ -155,6 +155,11 @@ let offers = {"mobile":[{"imageurl":"https://webclickamdev.blob.core.windows.net
     component.sliderOffers();
   });
 
+  it('bussiness navigation', () => {
+    component.bussinessNavigation('1');
+  });
+  
+
   describe('Error activation', () => {
 
     beforeEach(() => {

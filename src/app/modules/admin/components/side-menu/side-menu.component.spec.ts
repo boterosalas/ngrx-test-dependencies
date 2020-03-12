@@ -5,6 +5,7 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('SideMenuComponent', () => {
   let component: SideMenuComponent;
@@ -17,6 +18,7 @@ describe('SideMenuComponent', () => {
         SharedModule,
         HttpClientTestingModule,
         RouterTestingModule.withRoutes([]),
+        TranslateModule.forRoot(),
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
