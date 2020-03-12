@@ -3,7 +3,9 @@ import {
   OnInit,
   HostListener,
   Input,
-  OnDestroy
+  OnDestroy,
+  Output,
+  EventEmitter
 } from "@angular/core";
 import { UtilsService } from "src/app/services/utils.service";
 import { AuthService } from "src/app/services/auth.service";
@@ -21,6 +23,8 @@ import { TokenService } from "src/app/services/token.service";
 export class HeaderComponent implements OnInit, OnDestroy {
   @Input() isHome: boolean;
   @Input() internal: boolean;
+  @Output() sidenav = new EventEmitter();
+  
   isLoggedIn: any;
 
   firstNames: string;
@@ -37,58 +41,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
- 
-    // this.initialNameLastName();
-   
-
-    /**
-     * metodo para verificar la url si es home para aplicar estilos en la cabezera
-     */
-
-    // this.subscription = this.router.events.subscribe((url: any) => {
-    //   if (url instanceof NavigationStart) {
-    //     if (url.url === "/") {
-    //       this.isHome = true;
-    //       this.internal = false;
-    //     } else {
-    //       this.isHome = false;
-    //       this.internal = true;
-    //     }
-    //   }
-    // });
   }
 
-  /**
-   * metodo para cerrar sesion
-   */
-
-  public logout() {
-    this.utils.logout();
+  public open() {
+    this.sidenav.emit();
   }
-
-  /**
-   * Meotodo para formar las inciales del nombre y el apellido
-   */
-
-  // public initialNameLastName() {
-  //   this.subscription = this.user.userInfo$.subscribe(val => {
-  //     if (val !== null) {
-  //       const initialName = val.firstNames.charAt(0);
-  //       const initialLastName = val.lastNames.charAt(0);
-  //       this.initials = initialName + initialLastName;
-  //     } else {
-  //       this.auth.getRole$.subscribe(role => {
-  //         if(role === 'CLICKER' || role === 'ADMIN') {
-  //           this.subscription = this.user.getuserdata().subscribe(val => {
-  //             const initialName = val.firstNames.charAt(0);
-  //             const initialLastName = val.lastNames.charAt(0);
-  //             this.initials = initialName + initialLastName;
-  //            });
-  //         }
-  //       })
-  //     }
-  //   });
-  // }
 
   @HostListener("over")
   showLogin() {

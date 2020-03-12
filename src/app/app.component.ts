@@ -17,10 +17,12 @@ import {
   animate
 } from "@angular/animations";
 import { UtilsService } from "./services/utils.service";
-import { Subscription } from "rxjs";
+import { Subscription, Observable } from "rxjs";
 import { AuthService } from "./services/auth.service";
 import { BnNgIdleService } from "bn-ng-idle";
 import Swal from "sweetalert2";
+import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { map, shareReplay } from 'rxjs/operators';
 declare var dataLayer: any;
 // import { MessagingService } from "./shared/messaging.service";
 
@@ -70,6 +72,13 @@ declare var dataLayer: any;
   ]
 })
 export class AppComponent implements OnInit, OnDestroy {
+
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  .pipe(
+    map(result => result.matches),
+    shareReplay()
+  );
+
   @ViewChild("templateCardLogin, TemplateCardRegister, TemplateCardForgot", {
     static: false
   })
@@ -94,7 +103,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private router: Router,
     private utils: UtilsService,
     public auth: AuthService,
-    private bnIdle: BnNgIdleService
+    private bnIdle: BnNgIdleService,
+    private breakpointObserver: BreakpointObserver
   ) // private messagingService: MessagingService
   {
     translate.setDefaultLang("es");
@@ -118,6 +128,7 @@ export class AppComponent implements OnInit, OnDestroy {
     // this.messagingService.requestPermission(userId)
     // this.messagingService.receiveMessage()
     // this.message = this.messagingService.currentMessage
+    
 
     this.showAnimation1 = true;
     this.innerWidth = window.innerWidth;

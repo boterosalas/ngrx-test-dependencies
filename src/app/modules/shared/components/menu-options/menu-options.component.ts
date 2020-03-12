@@ -45,12 +45,22 @@ export class MenuOptionsComponent implements OnInit, OnDestroy {
     })
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
   @HostListener("over")
   hideMenu() {
     this.utils.hideMenu();
   }
+
+   /**
+   * metodo para cerrar sesion
+   */
+
+  public logout() {
+    this.utils.logout();
+  }
+
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }

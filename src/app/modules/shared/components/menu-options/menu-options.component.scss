@@ -1,3 +1,83 @@
 @import "variables";
 @import "general";
 
+.menu-mobile {
+    a{
+        font-family: $font-galano-bold;
+        height: 30px;
+        position: relative;
+    }
+
+    .Inicio{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/mi-perfil.svg") no-repeat;
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            top: 24%;
+            left: 10%;
+        }
+    }
+
+    .Click.Academy{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/clickacademy.svg") no-repeat;
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            top: 24%;
+            left: 10%;
+        }
+    }
+
+    .Preguntas.Frecuentes{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/preguntas-frecuentes.svg") no-repeat;
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            top: 24%;
+            left: 10%;
+        }
+    }
+
+    .Reportes{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/reportes.svg") no-repeat;
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            top: 24%;
+            left: 10%;
+        }
+    }
+
+    .whatsapp{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/whatsapp.svg") no-repeat;
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            top: 24%;
+            left: 10%;
+        }
+    }
+
+    .logout{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/cerrar-sesion.svg") no-repeat;
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            top: 33%;
+            left: 10%;
+        }
+    }
+
+}

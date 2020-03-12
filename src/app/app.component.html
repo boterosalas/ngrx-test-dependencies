@@ -1,94 +1,110 @@
-<div *ngIf="showAnimation2">
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <app-menu-options class="mobile-menu"></app-menu-options>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!-- Add Content Here -->
+    <div *ngIf="showAnimation2">
 
-<div  class="fullheight slide-in-top" *ngIf="isOpenMenu" @openClose>
-    <app-menu (close)="hideMenu()" ></app-menu>
-</div>
+      <div  class="fullheight slide-in-top" *ngIf="isOpenMenu" @openClose>
+          <app-menu (close)="hideMenu()" ></app-menu>
+      </div>
+      
+      <div class="fullheight slide-in-top" *ngIf="isOpen"  @openClose>
+      
+        <app-card *ngIf="showLoginForm" idTitle="titleLogin" title="{{ 'LOGIN.LOGIN' | translate }}" description="{{ 'LOGIN.DESCRIPTION' | translate }}" idAction="registerHere" action="{{ 'LOGIN.REGISTER' | translate }}" (actionButton)="showRegister()" [template]="templateCardLogin"></app-card>
+      
+        <ng-template #templateCardLogin>
+          <app-loginform></app-loginform>
+          <!-- <p
+            id="forgotPass"
+            class="cursor-pointer text-decoration text-center gtmIniciarSesiónClicLtrlOlvidoClave"
+            (click)="showForgot()"
+          >
+            {{ "LOGIN.FORGOT_PASSWORD" | translate }}
+          </p> -->
+        </ng-template>
+      
+        <app-card *ngIf="showRegisterForm" Class="gtmRegistroClicLatrlIniciarSesion" idTitle="titleRegister" title="{{ 'GENERIC.REGISTER' | translate }}" description="{{ 'REGISTER.HAVE_ACCOUNT' | translate }}" idAction="registerForm" action="{{ 'LOGIN.LOGIN' | translate }}" (actionButton)="showLogin()" [template]="templateCardRegister"></app-card>
+      
+        <ng-template #templateCardRegister>
+          <app-registerform></app-registerform>
+        </ng-template>
+      
+        <app-card *ngIf="showForgotForm" Class="gtmIniciarSesiónClicLtrlOlvidoClave" idTitle="titleForgot" title="{{ 'FORGOTPASSWORD.FORGOT_PASSWORD' | translate }}" description="{{ 'FORGOTPASSWORD.ENTER_EMAIL' | translate }}" [template]="templateCardForgot"></app-card>
+      
+        <ng-template #templateCardForgot>
+          <app-forgotpasswordform></app-forgotpasswordform>
+        </ng-template>
+        
+      </div>
+      </div>
+      
+      <div *ngIf="showAnimation1">
+      <div ngClass.lt-md="fullheight slide-in-right" ngClass.gt-md="fullheight slide-in-right p-5" *ngIf="isOpenMenu" @slideInOut>
+          <app-menu (close)="hideMenu()" ></app-menu>
+      </div>
+      
+      <div ngClass.lt-md="fullheight slide-in-right" ngClass.gt-md="fullheight slide-in-right p-5" *ngIf="isOpen"  @slideInOut>
+        
+        <!-- <app-top (close)="hideLogin()"></app-top> -->
+      
+        <app-card Class="gtmIniciarSesiónClicLtrlRegistrarte" *ngIf="showLoginForm" idTitle="titleLogin" title="{{ 'LOGIN.LOGIN' | translate }}" description="{{ 'LOGIN.DESCRIPTION' | translate }}" idAction="registerHere" action="{{ 'LOGIN.REGISTER' | translate }}" (actionButton)="showRegister()" [template]="templateCardLogin"></app-card>
+      
+        <ng-template #templateCardLogin>
+          <app-loginform></app-loginform>
+          <p
+            id="forgotPass"
+            class="cursor-pointer text-decoration text-center gtmIniciarSesiónClicLtrlOlvidoClave"
+            (click)="showForgot()"
+          >
+            {{ "LOGIN.FORGOT_PASSWORD" | translate }}
+          </p>
+        </ng-template>
+      
+        <app-card Class="gtmRegistroClicLatrlIniciarSesion" *ngIf="showRegisterForm" idTitle="titleRegister" title="{{ 'GENERIC.REGISTER' | translate }}" description="{{ 'REGISTER.HAVE_ACCOUNT' | translate }}" idAction="registerForm" action="{{ 'LOGIN.LOGIN' | translate }}" (actionButton)="showLogin()" [template]="templateCardRegister"></app-card>
+      
+        <ng-template #templateCardRegister>
+          <app-registerform></app-registerform>
+        </ng-template>
+      
+        <app-card *ngIf="showForgotForm" idTitle="titleForgot" title="{{ 'FORGOTPASSWORD.FORGOT_PASSWORD' | translate }}" description="{{ 'FORGOTPASSWORD.ENTER_EMAIL' | translate }}" [template]="templateCardForgot"></app-card>
+      
+        <ng-template #templateCardForgot>
+          <app-forgotpasswordform></app-forgotpasswordform>
+        </ng-template>
+        
+      </div>
+      </div>
+      
+      
+      <app-header (sidenav)="drawer.toggle()" *ngIf="isHandset$ | async"></app-header>
+      
+      <div class="maincontent" *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'ADMIN'">
+        <div fxLayout="row" class="container-fluid pl-0">
+          <div fxLayout="column" fxFlex="20" [fxHide.xs]="true" class="pt-4 shadow side-heigth" *ngIf="auth.isLoggedIn() && auth.role === 'ADMIN'">
+            <app-side-menu class="sideMenu"></app-side-menu>
+          </div>
+          <div fxLayout="column" fxFlex class="pl-3">
+            <router-outlet *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'ADMIN'" (activate)="onActivate($event)"></router-outlet>
+          </div>
+        </div>
+      </div>
+      
+        <div class="maincontent" *ngIf="!(auth.isLoggedIn() && (auth.getRole$  | async) === 'ADMIN')">
+              <router-outlet (activate)="onActivate($event)"></router-outlet>
+        </div>
+      
+      <app-footer></app-footer>
+      
+      <app-loader></app-loader>
+      
+  </mat-sidenav-content>
+</mat-sidenav-container>
 
-<div class="fullheight slide-in-top" *ngIf="isOpen"  @openClose>
-
-  <app-card *ngIf="showLoginForm" idTitle="titleLogin" title="{{ 'LOGIN.LOGIN' | translate }}" description="{{ 'LOGIN.DESCRIPTION' | translate }}" idAction="registerHere" action="{{ 'LOGIN.REGISTER' | translate }}" (actionButton)="showRegister()" [template]="templateCardLogin"></app-card>
-
-  <ng-template #templateCardLogin>
-    <app-loginform></app-loginform>
-    <!-- <p
-      id="forgotPass"
-      class="cursor-pointer text-decoration text-center gtmIniciarSesiónClicLtrlOlvidoClave"
-      (click)="showForgot()"
-    >
-      {{ "LOGIN.FORGOT_PASSWORD" | translate }}
-    </p> -->
-  </ng-template>
-
-  <app-card *ngIf="showRegisterForm" Class="gtmRegistroClicLatrlIniciarSesion" idTitle="titleRegister" title="{{ 'GENERIC.REGISTER' | translate }}" description="{{ 'REGISTER.HAVE_ACCOUNT' | translate }}" idAction="registerForm" action="{{ 'LOGIN.LOGIN' | translate }}" (actionButton)="showLogin()" [template]="templateCardRegister"></app-card>
-
-  <ng-template #templateCardRegister>
-    <app-registerform></app-registerform>
-  </ng-template>
-
-  <app-card *ngIf="showForgotForm" Class="gtmIniciarSesiónClicLtrlOlvidoClave" idTitle="titleForgot" title="{{ 'FORGOTPASSWORD.FORGOT_PASSWORD' | translate }}" description="{{ 'FORGOTPASSWORD.ENTER_EMAIL' | translate }}" [template]="templateCardForgot"></app-card>
-
-  <ng-template #templateCardForgot>
-    <app-forgotpasswordform></app-forgotpasswordform>
-  </ng-template>
-  
-</div>
-</div>
-
-<div *ngIf="showAnimation1">
-<div ngClass.lt-md="fullheight slide-in-right" ngClass.gt-md="fullheight slide-in-right p-5" *ngIf="isOpenMenu" @slideInOut>
-    <app-menu (close)="hideMenu()" ></app-menu>
-</div>
-
-<div ngClass.lt-md="fullheight slide-in-right" ngClass.gt-md="fullheight slide-in-right p-5" *ngIf="isOpen"  @slideInOut>
-  
-  <!-- <app-top (close)="hideLogin()"></app-top> -->
-
-  <app-card Class="gtmIniciarSesiónClicLtrlRegistrarte" *ngIf="showLoginForm" idTitle="titleLogin" title="{{ 'LOGIN.LOGIN' | translate }}" description="{{ 'LOGIN.DESCRIPTION' | translate }}" idAction="registerHere" action="{{ 'LOGIN.REGISTER' | translate }}" (actionButton)="showRegister()" [template]="templateCardLogin"></app-card>
-
-  <ng-template #templateCardLogin>
-    <app-loginform></app-loginform>
-    <p
-      id="forgotPass"
-      class="cursor-pointer text-decoration text-center gtmIniciarSesiónClicLtrlOlvidoClave"
-      (click)="showForgot()"
-    >
-      {{ "LOGIN.FORGOT_PASSWORD" | translate }}
-    </p>
-  </ng-template>
-
-  <app-card Class="gtmRegistroClicLatrlIniciarSesion" *ngIf="showRegisterForm" idTitle="titleRegister" title="{{ 'GENERIC.REGISTER' | translate }}" description="{{ 'REGISTER.HAVE_ACCOUNT' | translate }}" idAction="registerForm" action="{{ 'LOGIN.LOGIN' | translate }}" (actionButton)="showLogin()" [template]="templateCardRegister"></app-card>
-
-  <ng-template #templateCardRegister>
-    <app-registerform></app-registerform>
-  </ng-template>
-
-  <app-card *ngIf="showForgotForm" idTitle="titleForgot" title="{{ 'FORGOTPASSWORD.FORGOT_PASSWORD' | translate }}" description="{{ 'FORGOTPASSWORD.ENTER_EMAIL' | translate }}" [template]="templateCardForgot"></app-card>
-
-  <ng-template #templateCardForgot>
-    <app-forgotpasswordform></app-forgotpasswordform>
-  </ng-template>
-  
-</div>
-</div>
-
-
-<app-header></app-header>
-
-<div class="maincontent" *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'ADMIN'">
-  <div fxLayout="row" class="container-fluid pl-0">
-    <div fxLayout="column" fxFlex="20" [fxHide.xs]="true" class="pt-4 shadow side-heigth" *ngIf="auth.isLoggedIn() && auth.role === 'ADMIN'">
-      <app-side-menu class="sideMenu"></app-side-menu>
-    </div>
-    <div fxLayout="column" fxFlex class="pl-3">
-      <router-outlet *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'ADMIN'" (activate)="onActivate($event)"></router-outlet>
-    </div>
-  </div>
-</div>
-
-  <div class="maincontent" *ngIf="!(auth.isLoggedIn() && (auth.getRole$  | async) === 'ADMIN')">
-        <router-outlet (activate)="onActivate($event)"></router-outlet>
-  </div>
-
-<app-footer></app-footer>
-
-<app-loader></app-loader>
