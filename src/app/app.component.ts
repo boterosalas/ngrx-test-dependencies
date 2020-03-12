@@ -23,6 +23,7 @@ import { BnNgIdleService } from "bn-ng-idle";
 import Swal from "sweetalert2";
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map, shareReplay } from 'rxjs/operators';
+import { UserService } from './services/user.service';
 declare var dataLayer: any;
 // import { MessagingService } from "./shared/messaging.service";
 
@@ -97,6 +98,8 @@ export class AppComponent implements OnInit, OnDestroy {
   showAnimation2: boolean;
   isLoggedIn: any;
   message;
+  firstName:string;
+  lastName: string;
 
   constructor(
     private translate: TranslateService,
@@ -104,7 +107,9 @@ export class AppComponent implements OnInit, OnDestroy {
     private utils: UtilsService,
     public auth: AuthService,
     private bnIdle: BnNgIdleService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private user: UserService
+    
   ) // private messagingService: MessagingService
   {
     translate.setDefaultLang("es");
@@ -162,6 +167,7 @@ export class AppComponent implements OnInit, OnDestroy {
     });
 
     this.windowWidth();
+    this.getUserData();
   }
 
   public hideLogin() {
@@ -187,6 +193,13 @@ export class AppComponent implements OnInit, OnDestroy {
     this.showForgotForm = true;
     this.showRegisterForm = false;
     this.showLoginForm = false;
+  }
+
+  public getUserData() {
+    this.user.getuserdata().subscribe(user => {
+      this.firstName = user.firstNames;
+      this.lastName = user.lastNames;
+    });
   }
 
   onActivate(event) {

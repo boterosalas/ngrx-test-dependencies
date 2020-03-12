@@ -50,6 +50,10 @@
                 <img class="pr-2" src="assets/img/usuario-black.svg" alt="user"> 
                 {{ 'LOGIN.LOGIN' | translate }}</span> 
             </a>
+            <span *ngIf="auth.isLoggedIn()" fxLayout="row">
+                <img src="assets/img/usuario-blue.svg" alt="userLogged" class="pl-2"> 
+                <h3 class="pl-2">Hola, {{name}}</h3>
+            </span>
         </span>
     </div>
 </header>

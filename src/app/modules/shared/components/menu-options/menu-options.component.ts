@@ -4,6 +4,7 @@ import { Subscription } from "rxjs";
 import { UtilsService } from "src/app/services/utils.service";
 import { LoaderService } from "src/app/services/loader.service";
 import { distinctUntilChanged } from "rxjs/operators";
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-menu-options",
@@ -14,7 +15,8 @@ export class MenuOptionsComponent implements OnInit, OnDestroy {
   constructor(
     public auth: AuthService,
     private utils: UtilsService,
-    private loader: LoaderService
+    private loader: LoaderService,
+    private router: Router
   ) {}
 
   options = [];
@@ -56,6 +58,10 @@ export class MenuOptionsComponent implements OnInit, OnDestroy {
 
   public logout() {
     this.utils.logout();
+  }
+
+  public  goTerms() {
+    this.router.navigate(['/terminos-y-condiciones']);
   }
 
 

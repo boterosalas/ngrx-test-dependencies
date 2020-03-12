@@ -1,9 +1,16 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
+  <mat-sidenav #drawer class="sidenav pt-3" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar>
+      <span *ngIf="!auth.isLoggedIn()">
+        Menú
+      </span>
+      <span *ngIf="auth.isLoggedIn()">
+        <h3>Hola, {{firstName}}</h3>
+      </span>
+    </mat-toolbar>
     <mat-nav-list>
       <app-menu-options class="mobile-menu"></app-menu-options>
     </mat-nav-list>
@@ -84,7 +91,7 @@
       </div>
       
       
-      <app-header (sidenav)="drawer.toggle()" *ngIf="isHandset$ | async"></app-header>
+      <app-header (sidenav)="drawer.toggle()" [name]="firstName" *ngIf="isHandset$ | async"></app-header>
       
       <div class="maincontent" *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'ADMIN'">
         <div fxLayout="row" class="container-fluid pl-0">
