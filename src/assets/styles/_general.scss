@@ -443,7 +443,7 @@ table {
 }
 
 .mat-raised-button.mat-primary {
-  padding: 0 30px;
+  padding: 0 10px;
 }
 
 .fullheight {
@@ -1114,4 +1114,14 @@ button.swal2-cancel.updatecancel.swal2-styled {
     font-size: 22px;
   }
   
+}
+
+.lh{
+  &-20{
+    line-height: 20px;
+  }
+}
+
+.mat-drawer{
+  padding: 0 15px;
 }

@@ -33,19 +33,19 @@
       <a
       mat-list-item
       (click)="logout()"
-      class="cursor-pointer f-16 mt-3 logout gtmHomeClicSupCerrarSesionPerfil"
+      class="cursor-pointer f-16 logout gtmHomeClicSupCerrarSesionPerfil"
       >{{ 'HEADER.LOGOUT' | translate }}</a
     >  
     </span>
   </span>
 
   <span class="text-center">
-    <h3 class="f-21">{{ 'GENERIC.SUPPORT' | translate }} </h3>
+    <h3 class="f-21 m-2">{{ 'GENERIC.SUPPORT' | translate }} </h3>
     <p class="f-12">{{ 'GENERIC.EMAIL_SUPPORT' | translate }}</p>
   </span>
 
   <div class="text-center">
-      <h3> {{ 'FOOTER.FOLLOW_US' | translate }}</h3>
+      <h3 class="m-2"> {{ 'FOOTER.FOLLOW_US' | translate }}</h3>
     
       <div fxLayoutAlign="center center" class="social-links">
         <img  src="assets/img/arrow-footer.svg" alt="Clickam" />
@@ -59,7 +59,7 @@
     </div>
     
     <div fxLayout="column" fxLayoutAlign="center center" class="width-border">
-      <span class="copy pt-3 pb-3">Copyright 2019 &copy;</span>
+      <span class="copy pt-3 pb-3">{{ 'GENERIC.COPYRIGHT' | translate }} &copy;</span>
     </div>
   </div>
 

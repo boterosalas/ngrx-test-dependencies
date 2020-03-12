@@ -24,6 +24,7 @@ import Swal from "sweetalert2";
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map, shareReplay } from 'rxjs/operators';
 import { UserService } from './services/user.service';
+import { TokenService } from './services/token.service';
 declare var dataLayer: any;
 // import { MessagingService } from "./shared/messaging.service";
 
@@ -100,6 +101,9 @@ export class AppComponent implements OnInit, OnDestroy {
   message;
   firstName:string;
   lastName: string;
+  email: string;
+  userInfo = this.token.userInfo();
+  managedPayments: boolean;
 
   constructor(
     private translate: TranslateService,
@@ -108,7 +112,8 @@ export class AppComponent implements OnInit, OnDestroy {
     public auth: AuthService,
     private bnIdle: BnNgIdleService,
     private breakpointObserver: BreakpointObserver,
-    private user: UserService
+    private user: UserService,
+    private token: TokenService
     
   ) // private messagingService: MessagingService
   {
@@ -134,6 +139,8 @@ export class AppComponent implements OnInit, OnDestroy {
     // this.messagingService.receiveMessage()
     // this.message = this.messagingService.currentMessage
     
+    this.email = this.userInfo.userName;
+    console.log(this.email);
 
     this.showAnimation1 = true;
     this.innerWidth = window.innerWidth;
@@ -196,11 +203,16 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   public getUserData() {
+    this.auth.getRole$.subscribe(role => {
+      if(role === 'CLICKER' || role === 'ADMIN') {
     this.user.getuserdata().subscribe(user => {
       this.firstName = user.firstNames;
       this.lastName = user.lastNames;
+      this.managedPayments = user.managedPayments;
     });
-  }
+    }
+  })
+};
 
   onActivate(event) {
     let scrollToTop = window.setInterval(() => {
