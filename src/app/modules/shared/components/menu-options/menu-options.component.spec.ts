@@ -9,6 +9,7 @@ import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UtilsService } from 'src/app/services/utils.service';
 import { JwtModule } from '@auth0/angular-jwt';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('MenuOptionsComponent', () => {
   let component: MenuOptionsComponent;
@@ -41,6 +42,7 @@ describe('MenuOptionsComponent', () => {
       declarations: [ MenuOptionsComponent ],
       imports: [
         RouterTestingModule.withRoutes([]),
+        TranslateModule.forRoot(),
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
