@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, OnChanges, DoCheck, Input, OnDestroy } from "@angular/core";
+import { Component, OnInit, HostListener, OnChanges, DoCheck, Input, OnDestroy, ViewChild, Output, EventEmitter } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
 import { Subscription } from "rxjs";
 import { UtilsService } from "src/app/services/utils.service";
@@ -29,6 +29,7 @@ export class MenuOptionsComponent implements OnInit, OnDestroy {
   @Input() showIcon = false;
   @Input() icon:string;
   @Input() section:string="menuTop";
+  @Output() hideSidenav = new EventEmitter();
 
   isOpenMenu: boolean;
   private subscription: Subscription = new Subscription();
@@ -47,10 +48,16 @@ export class MenuOptionsComponent implements OnInit, OnDestroy {
     })
   }
 
+  public hide() {
+    this.hideSidenav.emit();
+  }
+  
+
   @HostListener("over")
   hideMenu() {
     this.utils.hideMenu();
   }
+
 
    /**
    * metodo para cerrar sesion

@@ -8,6 +8,7 @@
     *ngFor="let item of options; let i = index"
     routerLink="{{ item.route }}"
     routerLinkActive="active"
+    (click)="hide()"
     class="menu-mobile"
     matRipple
   >
@@ -32,7 +33,7 @@
     <span *ngIf="auth.isLoggedIn()">
       <a
       mat-list-item
-      (click)="logout()"
+      (click)="logout();hide()"
       class="cursor-pointer f-16 logout gtmHomeClicSupCerrarSesionPerfil"
       >{{ 'HEADER.LOGOUT' | translate }}</a
     >  
@@ -55,7 +56,7 @@
     
     
       <div class="terms gtmHomeClicInfTerminos" id="terms-footer" fxLayout="column" fxLayoutAlign="center center">
-        <a (click)="goTerms()" class="gtmHomeClicInfTerminos">Términos y condiciones</a>
+        <a (click)="goTerms();hide()" class="gtmHomeClicInfTerminos">Términos y condiciones</a>
     </div>
     
     <div fxLayout="column" fxLayoutAlign="center center" class="width-border">

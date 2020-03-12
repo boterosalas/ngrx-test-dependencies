@@ -9,7 +9,7 @@
       </span>
       <span *ngIf="auth.isLoggedIn()">
         <h3 class="m-0">Hola, {{firstName}}</h3>
-        <p class="m-0 f-14 border-bottom-orange-init lh-20">{{email}}</p>
+        <p class="m-0 f-14 border-bottom-orange-init lh-20 galano">{{email}}</p>
       </span>     
     </mat-toolbar>
         <div *ngIf="managedPayments === false" class="paymentInfo orange text-white p-2" fxLayout="row">
@@ -22,7 +22,7 @@
           </span>
         </div>
     <mat-nav-list>
-      <app-menu-options class="mobile-menu"></app-menu-options>
+      <app-menu-options (hideSidenav)="drawer.toggle()" class="mobile-menu"></app-menu-options>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
