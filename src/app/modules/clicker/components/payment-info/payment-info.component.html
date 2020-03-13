@@ -1,5 +1,5 @@
 <form
-  autocomplete="nope"
+  autocomplete="off"
   class="info-basic"
   [formGroup]="externalForm"
 >
@@ -42,7 +42,7 @@
               id="departmentCode"
               [matAutocomplete]="auto"
               formControlName="department"
-              autocomplete="nope"
+              autocomplete="off"
               (blur)="checkDepartment()"
             />
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayDepartment">
@@ -107,7 +107,7 @@
               id="city"
               [matAutocomplete]="city"
               formControlName="city"
-              autocomplete="nope"
+              autocomplete="off"
               (blur)="checkCity()"
             />
             <mat-autocomplete #city="matAutocomplete">
@@ -171,7 +171,7 @@
         id="address"
         type="text"
         formControlName="address"
-        autocomplete="nope"
+        autocomplete="off"
       />
   
       <mat-error
@@ -400,7 +400,7 @@
         nameFileCed1 | truncate: '20'
       }}</span>
     </div>
-    <div fxLayout="column" fxLayoutAlign="center" fxLayoutAlign.xs="flex-end flex-end"  class="space">
+    <div   class="space">
       <label for="ced1" id="upload" class="cursor-pointer">
         <span *ngIf="!showErrorCed1">
         <img
@@ -447,7 +447,7 @@
         nameFileCed2 | truncate: '20'
       }}</span>
     </div>
-    <div fxLayout="column" fxLayoutAlign="center" fxLayoutAlign.xs="flex-end flex-end" class="space">
+    <div  class="space">
       <label for="ced2" id="upload" class="cursor-pointer">
         <span  *ngIf="!showErrorCed2">
         <img
@@ -492,7 +492,7 @@
         nameFileCert | truncate: '20'
       }}</span>
     </div>
-    <div fxLayout="column" fxLayoutAlign="center" fxLayoutAlign.xs="flex-end flex-end" class="space">
+    <div  class="space">
       <label for="cert" id="upload" class="cursor-pointer">
         <span  *ngIf="!showErrorCert">
         <img
@@ -533,6 +533,8 @@
     id="sendFiles"
     class="button button-100 button-height"
     color="orange"
+    (click)="sendPayment()"
+    [disabled] = "!externalForm.valid"
   >
   {{ "GENERIC.CONTINUE" | translate }}
   </button>

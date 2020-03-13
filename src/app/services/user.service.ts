@@ -267,7 +267,7 @@ export class UserService {
     return this.http.post((`${this.url}${this.apichangeBankInformation}`),data, httpOptions);
   }
 
-  public updateUser(id: any, data:any) {
+  public updateUser(data:any) {
     const token = localStorage.getItem("ACCESS_TOKEN");
     const authorization = token;
 

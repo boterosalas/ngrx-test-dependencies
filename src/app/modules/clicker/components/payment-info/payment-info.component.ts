@@ -131,9 +131,9 @@ export class PaymentInfoComponent implements OnInit {
           Validators.maxLength(20)
         ]
       ],
-      ced1: [null],
-      ced2: [null],
-      cert: [null]
+      ced1: [null, Validators.required],
+      ced2: [null, Validators.required],
+      cert: [null, Validators.required]
     });
   }
 
@@ -157,7 +157,7 @@ export class PaymentInfoComponent implements OnInit {
    * @param param
    */
 
-  public onFileChange(event, param: string) {
+  public onFileChangeFiles(event, param: string) {
     let nameFile = event.target.files[0].name;
     let reader = new FileReader();
     if (event.target.files && event.target.files.length) {
@@ -206,9 +206,7 @@ export class PaymentInfoComponent implements OnInit {
    * @params Email, FirstNames, LastNames, Identification, Cellphone. Password, IdType
    */
 
-  public register() {
-    this.loading.show();
-
+  public sendPayment() {
     let registerForm = {
       department: this.departmentCode,
       municipality: this.cityCode,
@@ -219,25 +217,23 @@ export class PaymentInfoComponent implements OnInit {
       bankAccountNumber: btoa(this.externalForm.controls.numberAccount.value),
       typeBankAccount: this.externalForm.controls.typeAccount.value,
       address: this.externalForm.controls.address.value,
-      acceptHabeasData: true,
-      acceptTerms: true
     };
 
-    this.subscription = this.registerUser.registerUser(registerForm).subscribe(
+    // console.log(registerForm);
+
+    this.subscription = this.registerUser.updateUser(registerForm).subscribe(
       (resp: ResponseService) => {
         this.loading.hide();
         if (resp.state === "Success") {
           Swal.fire({
-            title: "Revisa tu correo",
+            title: "Información guardada",
             html: `
-              Activa tu cuenta siguiendo el enlace </br> que enviamos a tu correo.
+              Se ha guardado tu información correctamente
               `,
-            confirmButtonText: "Volver al inicio",
+            confirmButtonText: "Aceptar",
             confirmButtonClass:
-              "accept-register-alert-success gtmRegistroClicModalValidacion"
-          }).then(() => {
-            this.utils.hideloginForm();
-          });
+              "accept-register-alert-success"
+          })
         } else {
           Swal.fire({
             title: "Registro inválido",
