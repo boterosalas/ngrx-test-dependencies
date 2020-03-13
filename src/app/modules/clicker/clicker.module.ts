@@ -25,6 +25,7 @@ import { CardDataComponent } from './components/card-data/card-data.component';
 import { DialogHistoryComponent } from './components/dialog-history/dialog-history.component';
 import { ShareModule } from '@ngx-share/core';
 import { BussinessComponent } from './pages/profile/bussiness/bussiness.component';
+import { PaymentInfoComponent } from './components/payment-info/payment-info.component';
 
 const routes: Routes = [
  
@@ -58,7 +59,8 @@ const routes: Routes = [
     DialogEditComponent,
     CardDataComponent,
     DialogHistoryComponent,
-    BussinessComponent
+    BussinessComponent,
+    PaymentInfoComponent
   ],
   imports: [
     CommonModule,
