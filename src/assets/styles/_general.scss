@@ -560,7 +560,7 @@ table {
 
   .mat-list-item-content {
     // padding: 0 25px !important;
-    margin: 0 30px;
+    margin: 0 10px;
   }
 }
 
@@ -1128,4 +1128,5 @@ button.swal2-cancel.updatecancel.swal2-styled {
 
 .mat-drawer{
   padding: 0 15px;
+  display: none;
 }

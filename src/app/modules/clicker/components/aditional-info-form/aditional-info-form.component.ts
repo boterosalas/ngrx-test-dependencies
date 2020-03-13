@@ -146,20 +146,6 @@ export class AditionalInfoFormComponent implements OnInit, OnDestroy {
     })
   }
 
-  /**
-   * Metodo para activar o desactivar las comunicaciones
-   * @param comunication 
-   */
-
-  changeComunications(comunication) {
-    if (comunication.checked === false) {
-      this.receiveCommunications = false;
-    }
-    if (comunication.checked === true) {
-      this.receiveCommunications = true;
-    }
-  }
-
   // Metodo para editar la informacion adicional del usuario
 
   editInfo() {
