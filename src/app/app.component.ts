@@ -210,7 +210,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.firstName = user.firstNames;
         this.lastName = user.lastNames;
         this.managedPayments = user.managedPayments;
-        this.isEmployee = user.IsEmployeeGrupoExito;
+        this.isEmployee = user.isEmployeeGrupoExito;
     });
     }
   })
