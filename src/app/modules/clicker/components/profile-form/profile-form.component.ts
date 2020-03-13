@@ -287,7 +287,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.userInfo.lastNames = this.profileForm.controls.lastName.value;
     this.userInfo.cellphone = this.profileFormCell.controls.phone.value;
     this.subscription = this.user
-      .updateUser(this.userId, this.userInfo)
+      .updateUser(this.userInfo)
       .subscribe(
         (resp: any) => {
           if (resp.state === "Success") {
@@ -445,7 +445,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.userInfo.department = this.departmentCode;
     this.userInfo.municipality = this.cityCode;
     this.subscription = this.user
-    .updateUser(this.userId, this.userInfo)
+    .updateUser(this.userInfo)
     .subscribe(
       (resp: any) => {
         if (resp.state === "Success") {

@@ -61,7 +61,7 @@ export class ContentService {
   }
 
   public getBusinessContent(id: string) {
-    return this.http.get(`${this.url + this.apiGetBusinessContent}?idBusiness=${id}`).pipe(
+    return this.http.get(`${this.url + this.apiGetBusinessContent}?idBusiness=${id}`, this.httpOptions).pipe(
       map((business: ResponseService) => {
         return business.objectResponse;
       })
