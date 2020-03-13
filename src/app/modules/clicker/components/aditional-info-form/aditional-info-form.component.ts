@@ -146,20 +146,6 @@ export class AditionalInfoFormComponent implements OnInit, OnDestroy {
     })
   }
 
-  /**
-   * Metodo para activar o desactivar las comunicaciones
-   * @param comunication 
-   */
-
-  changeComunications(comunication) {
-    if (comunication.checked === false) {
-      this.receiveCommunications = false;
-    }
-    if (comunication.checked === true) {
-      this.receiveCommunications = true;
-    }
-  }
-
   // Metodo para editar la informacion adicional del usuario
 
   editInfo() {
@@ -178,7 +164,7 @@ export class AditionalInfoFormComponent implements OnInit, OnDestroy {
     this.userInfo.receiveCommunications = this.receiveCommunications;
 
     this.subscription = this.user
-      .updateUser(this.userId, this.userInfo)
+      .updateUser(this.userInfo)
       .subscribe(
         (resp: any) => {
           if (resp.state === "Success") {

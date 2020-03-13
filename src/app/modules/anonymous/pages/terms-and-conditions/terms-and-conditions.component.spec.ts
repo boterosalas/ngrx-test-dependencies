@@ -4,6 +4,8 @@ import { TermsAndConditionsComponent } from './terms-and-conditions.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('TermsAndConditionsComponent', () => {
   let component: TermsAndConditionsComponent;
@@ -15,7 +17,9 @@ describe('TermsAndConditionsComponent', () => {
       imports: [
         TranslateModule.forRoot({}),
         AppMaterialModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        SharedModule,
+        RouterTestingModule
       ]
     })
     .compileComponents();
