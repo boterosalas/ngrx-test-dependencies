@@ -164,7 +164,7 @@ export class AditionalInfoFormComponent implements OnInit, OnDestroy {
     this.userInfo.receiveCommunications = this.receiveCommunications;
 
     this.subscription = this.user
-      .updateUser(this.userId, this.userInfo)
+      .updateUser(this.userInfo)
       .subscribe(
         (resp: any) => {
           if (resp.state === "Success") {
