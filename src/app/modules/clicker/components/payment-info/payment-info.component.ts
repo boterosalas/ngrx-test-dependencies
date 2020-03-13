@@ -206,64 +206,64 @@ export class PaymentInfoComponent implements OnInit {
    * @params Email, FirstNames, LastNames, Identification, Cellphone. Password, IdType
    */
 
-  public sendPayment() {
-    let registerForm = {
-      department: this.departmentCode,
-      municipality: this.cityCode,
-      bank: this.externalForm.controls.bank.value,
-      fileIdentificationCard1: this.fileIdentificationCard1,
-      fileIdentificationCard2: this.fileIdentificationCard2,
-      fileBankCertificate: this.fileBankCertificate,
-      bankAccountNumber: btoa(this.externalForm.controls.numberAccount.value),
-      typeBankAccount: this.externalForm.controls.typeAccount.value,
-      address: this.externalForm.controls.address.value,
-    };
+  // public sendPayment() {
+  //   let registerForm = {
+  //     department: this.departmentCode,
+  //     municipality: this.cityCode,
+  //     bank: this.externalForm.controls.bank.value,
+  //     fileIdentificationCard1: this.fileIdentificationCard1,
+  //     fileIdentificationCard2: this.fileIdentificationCard2,
+  //     fileBankCertificate: this.fileBankCertificate,
+  //     bankAccountNumber: btoa(this.externalForm.controls.numberAccount.value),
+  //     typeBankAccount: this.externalForm.controls.typeAccount.value,
+  //     address: this.externalForm.controls.address.value,
+  //   };
 
-    // console.log(registerForm);
+  //   // console.log(registerForm);
 
-    this.subscription = this.registerUser.updateUser(registerForm).subscribe(
-      (resp: ResponseService) => {
-        this.loading.hide();
-        if (resp.state === "Success") {
-          Swal.fire({
-            title: "Información guardada",
-            html: `
-              Se ha guardado tu información correctamente
-              `,
-            confirmButtonText: "Aceptar",
-            confirmButtonClass:
-              "accept-register-alert-success"
-          })
-        } else {
-          Swal.fire({
-            title: "Registro inválido",
-            text: resp.userMessage,
-            type: "error",
-            confirmButtonText: "Aceptar",
-            confirmButtonClass: "accept-register-alert-error"
-          }).then(() => {
-            this.nameFileCed1 = "";
-            this.nameFileCed2 = "";
-            this.nameFileCert = "";
-            this.externalForm.reset();
-            this.showErrorCed1 = false;
-            this.showErrorCed2 = false;
-            this.showErrorCert = false;
-          });
-        }
-      },
-      error => {
-        this.loading.hide();
-        Swal.fire({
-          title: error.statusText,
-          text: error.error.userMessage,
-          type: "error",
-          confirmButtonText: "Aceptar",
-          confirmButtonClass: "accept-register-alert-invalid"
-        })
-      }
-    );
-  }
+  //   this.subscription = this.registerUser.updateUser(registerForm).subscribe(
+  //     (resp: ResponseService) => {
+  //       this.loading.hide();
+  //       if (resp.state === "Success") {
+  //         Swal.fire({
+  //           title: "Información guardada",
+  //           html: `
+  //             Se ha guardado tu información correctamente
+  //             `,
+  //           confirmButtonText: "Aceptar",
+  //           confirmButtonClass:
+  //             "accept-register-alert-success"
+  //         })
+  //       } else {
+  //         Swal.fire({
+  //           title: "Registro inválido",
+  //           text: resp.userMessage,
+  //           type: "error",
+  //           confirmButtonText: "Aceptar",
+  //           confirmButtonClass: "accept-register-alert-error"
+  //         }).then(() => {
+  //           this.nameFileCed1 = "";
+  //           this.nameFileCed2 = "";
+  //           this.nameFileCert = "";
+  //           this.externalForm.reset();
+  //           this.showErrorCed1 = false;
+  //           this.showErrorCed2 = false;
+  //           this.showErrorCert = false;
+  //         });
+  //       }
+  //     },
+  //     error => {
+  //       this.loading.hide();
+  //       Swal.fire({
+  //         title: error.statusText,
+  //         text: error.error.userMessage,
+  //         type: "error",
+  //         confirmButtonText: "Aceptar",
+  //         confirmButtonClass: "accept-register-alert-invalid"
+  //       })
+  //     }
+  //   );
+  // }
 
   /**
    * Metodo para seleccionar el departamento
