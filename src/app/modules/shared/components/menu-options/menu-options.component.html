@@ -1,9 +1,4 @@
-<div
-  fxLayout.lt-md="{{ layoutmd }}"
-  fxLayout.gt-xs="{{ layoutxs }}"
-  fxLayoutAlign="{{ aligmentdesktop }}"
-  fxLayoutAlign.xs="{{ aligment }}"
->
+<div fxLayout="column">
   <span
     *ngFor="let item of options; let i = index"
     routerLink="{{ item.route }}"

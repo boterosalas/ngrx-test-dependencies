@@ -39,21 +39,29 @@
     </div>
 </header> -->
 
-<header class="shadow sticky" fxLayout="column" fxLayoutAlign="center start">
-    <div fxLayout="row">
-        <span fxLayout="column" fxLayoutAlign="center center" (click)="open()">
-            <img src="assets/img/menu.svg" alt="user"> 
-        </span>
-        <span fxLayout="column">
-            <a *ngIf="!auth.isLoggedIn()" class="gtmHomeClicSupIniciarSesion login-text" mat-button (click)="showLogin()" id="header-login"> 
-                <span class="gtmHomeClicSupIniciarSesion" fxLayout="row" fxLayoutAlign="space-between center">
-                <img class="pr-2" src="assets/img/usuario-black.svg" alt="user"> 
-                {{ 'LOGIN.LOGIN' | translate }}</span> 
-            </a>
-            <span *ngIf="auth.isLoggedIn()" fxLayout="row">
-                <img src="assets/img/usuario-blue.svg" alt="userLogged" class="pl-2"> 
-                <h3 class="pl-2">Hola, {{name}}</h3>
+<header class="shadow sticky" fxLayout="column" fxLayoutAlign="center start" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="start center">
+    <div ngClass.gt-xs="container" fxLayout="row">
+        <div fxLayout="row" fxLayoutAlign.gt-xs="start center" fxFlex.gt-xs="20" fxHide.xs="true">
+            <img [routerLink]="['inicio']" class="cursor-pointer" src="assets/img/logo-header-2.svg" alt="logo-clickam">
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex.gt-xs="80" fxLayoutAlign.gt-xs="end center">
+            <span fxLayout="column" fxLayoutAlign="end center" (click)="open()">
+                <img class="cursor-pointer" src="assets/img/menu.svg" alt="menu"> 
             </span>
-        </span>
+            <span fxLayout.gt-xs="row">
+                <span fxLayoutAlign.gt-xs="center center" *ngIf="!auth.isLoggedIn()">
+                    <a  class="gtmHomeClicSupIniciarSesion login-text" mat-button (click)="showLogin()" id="header-login"> 
+                        <span class="gtmHomeClicSupIniciarSesion" fxLayout="row" fxLayoutAlign="space-between center">
+                        <img class="pr-2" src="assets/img/usuario-black.svg" alt="user"> 
+                        {{ 'LOGIN.LOGIN' | translate }}</span> 
+                    </a>
+                    <a fxHide.xs="true" class="gtmHomeClicSupRegistrarse login-text" mat-button (click)="openRegister()" id="header-register"><span class="gtmHomeClicSupRegistrarse" >{{ 'GENERIC.REGISTER2' | translate }}</span></a>
+                </span>
+                <span *ngIf="auth.isLoggedIn()" fxLayout="row">
+                    <img src="assets/img/usuario-blue.svg" alt="userLogged" class="pl-2"> 
+                    <h3 class="pl-2">Hola, {{name}}</h3>
+                </span>
+            </span>
+        </div>
     </div>
 </header>

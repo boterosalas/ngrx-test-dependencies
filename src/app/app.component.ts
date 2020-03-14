@@ -75,7 +75,7 @@ declare var dataLayer: any;
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Web)
   .pipe(
     map(result => result.matches),
     shareReplay()
