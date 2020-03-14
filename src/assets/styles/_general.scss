@@ -467,6 +467,10 @@ table {
 
 @media screen and (min-width: 600px) {
 
+  .store{
+    width: 220px;
+  }
+
   .slick-dots li button:before {
     font-size: 8px !important;
   }
@@ -1162,4 +1166,10 @@ app-product.no-slider img {
 .mat-drawer{
   padding: 0 15px;
   // display: none;
+}
+
+.round-img{
+  img{
+    border-radius: 10px;
+  }
 }

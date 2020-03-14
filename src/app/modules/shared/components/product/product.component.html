@@ -43,10 +43,10 @@
   </mat-card-content>
 </mat-card>
 
-<mat-card class="mat-elevation-z0 border-rad p-0 pr-3 fade-in" *ngIf="category">
+<mat-card class="mat-elevation-z0 p-0 fade-in" *ngIf="category">
     <mat-card-content fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap="10px" fxLayoutAlign.xs="center center" class="category border-rad">
-      <span class="border-rad" fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
-        <img (click)="product()" [src]="photo" class="img-responsive border-rad cursor-pointer">
+      <span fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
+        <img (click)="product()" [src]="photo" class="img-responsive cursor-pointer">
             <h3 (click)="product()" [(ngClass)]="Class" id="{{ id }}">{{ categoryName }}</h3>
       </span>
     </mat-card-content>

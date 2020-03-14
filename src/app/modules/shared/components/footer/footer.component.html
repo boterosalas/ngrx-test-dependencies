@@ -31,16 +31,20 @@
 </footer> -->
 
 <footer class="text-center border-gray mt-3">
-  <h3> {{ 'FOOTER.AVAILABLE_IN' | translate }}</h3>
-
-  <app-app-store></app-app-store>
-
-  <h3> {{ 'FOOTER.FOLLOW_US' | translate }}</h3>
-
-  <div fxLayoutAlign="center center" class="social-links">
-    <img  src="assets/img/arrow-footer.svg" alt="Clickam" />
-    <app-sociallinks></app-sociallinks>
-    <img  class="rotate" src="assets/img/arrow-footer.svg" alt="Clickam" />
+  <div fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-around center" ngClass.gt-xs="pt-4">
+    <div fxLayout.gt-xs="row">
+      <h3 class="pr-3"> {{ 'FOOTER.AVAILABLE_IN' | translate }}</h3>
+      <app-app-store></app-app-store>
+    </div>
+  
+    <div fxLayout.gt-xs="row">
+      <h3 class="pr-3"> {{ 'FOOTER.FOLLOW_US' | translate }}</h3>
+      <div fxLayoutAlign="center center" class="social-links">
+        <img  src="assets/img/arrow-footer.svg" alt="Clickam" />
+        <app-sociallinks></app-sociallinks>
+        <img  class="rotate" src="assets/img/arrow-footer.svg" alt="Clickam" />
+      </div>
+    </div>
   </div>
 
 
