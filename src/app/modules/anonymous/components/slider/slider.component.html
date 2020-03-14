@@ -4,24 +4,47 @@
   class="carousel"
   #slickModal="slick-carousel"
   [config]="slideConfig"
+  *ngIf="isSlider === true"
 >
   <div ngxSlickItem *ngFor="let slide of sliderWeb; let i=index" class="slide text-center">
-    <a href="{{ slide.link }}" id="banner{{i}}">
-      <img src="{{ slide.imageurl }}" class="responsive-img"  alt="{{ slide.description }}" />
-    </a>
+    <span (click)="openShare($event)">
+      <app-product
+          id="slide{{i}}"
+          [photo]="slide.imageurl"
+          category="true"
+          home
+          (infoProduct)="dataCategory(slide)"
+        ></app-product>
+    </span>
   </div>
 </ngx-slick-carousel>
 </div>
 
+<div *ngIf="isSlider === false" fxLayout="row wrap" class="container" fxLayoutAlign="space-between">
+  <div fxLayout="column" *ngFor="let slide of sliderMobile; let i=index" class="slide text-center">
+    <span (click)="openShare($event)">
+      <app-product
+          id="slide{{i}}"
+          class="no-slider"
+          [photo]="slide.imageurl"
+          category="true"
+          home
+          (infoProduct)="dataCategory(slide)"
+        ></app-product>
+    </span>
+  
+  </div>
+</div>
+
 <div fxShow.gt-xs="false" class="no-focus">
     <ngx-slick-carousel
+    *ngIf="isSlider === true"
       class="carousel"
       #slickModal="slick-carousel"
       [config]="slideConfig"
     >
       <div ngxSlickItem *ngFor="let slide of sliderMobile; let i=index" class="slide text-center pl-3">
         <span (click)="openShare($event)">
-          <!-- <img class="responsive-img round-img" src="{{ slide.imageurl }}"  alt="{{ slide.description }}" /> -->
           <app-product
               id="slide{{i}}"
               [photo]="slide.imageurl"

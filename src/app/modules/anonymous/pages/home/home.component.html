@@ -1,14 +1,20 @@
 <app-logo></app-logo>
-<app-slider (action)="sliderOffers()"  [sliderMobile]="newsSlider.mobile" [sliderWeb]="newsSlider.web"></app-slider>
+<app-slider [isSlider]="true" (action)="sliderOffers()"  [sliderMobile]="newsSlider.mobile" [sliderWeb]="newsSlider.web"></app-slider>
 
 
 <div class="container">
   <span class="border-gray d-block"></span>
   <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3>
-  <app-bussiness-card *ngFor="let bussines of bussiness; let i = index" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
+  <p class="f-20" fxHide.xs>{{ 'HOME.BUSSINESS_TEXT' | translate }}</p>
+  <div fxLayout="column" fxLayout.gt-xs="row wrap" fxLayoutAlign="space-between center" >
+    <app-bussiness-card *ngFor="let bussines of bussiness; let i = index" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
+  </div>
   <span class="border-gray d-block"></span>
   <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.OFFERS' | translate }}</h3>
+  <p class="f-20" fxHide.xs>{{ 'HOME.OFFERS_TEXT' | translate }}</p>
 </div>
 
-<app-slider (action)="sliderOffers()" [sliderMobile]="offers.mobile" [sliderWeb]="offers.web" class="mb-3"></app-slider>
+<app-slider [isSlider]="true" fxShow.gt-xs="false" (action)="sliderOffers()" [sliderMobile]="offers.mobile" [sliderWeb]="offers.web" class="mb-3"></app-slider>
+
+<app-slider [isSlider]="false" fxShow.xs="false" (action)="sliderOffers()" [sliderMobile]="offers.mobile" class="mb-3"></app-slider>
 

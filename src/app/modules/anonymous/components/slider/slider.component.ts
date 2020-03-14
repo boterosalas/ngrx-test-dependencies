@@ -38,6 +38,7 @@ export class SliderComponent implements OnInit {
   private ngNavigatorShareService: NgNavigatorShareService;
   @Input() sliderWeb:Object;
   @Input() sliderMobile:Object;
+  @Input() isSlider:boolean;
   @Output() action = new EventEmitter();
 
   private subscription: Subscription = new Subscription();

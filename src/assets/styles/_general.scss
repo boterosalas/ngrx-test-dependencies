@@ -1124,6 +1124,21 @@ button.swal2-cancel.updatecancel.swal2-styled {
   &-16{
     font-size: 16px;
   }
+  &-17{
+    font-size: 17px;
+  }
+  &-18{
+    font-size: 18px;
+  }
+  &-19{
+    font-size: 19px;
+  }
+  &-20{
+    font-size: 20px;
+  }
+  &-21{
+    font-size: 21px;
+  }
   &-22{
     font-size: 22px;
   }
@@ -1134,6 +1149,10 @@ button.swal2-cancel.updatecancel.swal2-styled {
   &-20{
     line-height: 20px;
   }
+}
+
+app-product.no-slider img {
+  width: 345px;
 }
 
 .mat-tab-body-content{
