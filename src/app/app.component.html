@@ -76,13 +76,6 @@
       
         <ng-template #templateCardLogin>
           <app-loginform></app-loginform>
-          <p
-            id="forgotPass"
-            class="cursor-pointer text-decoration text-center gtmIniciarSesiónClicLtrlOlvidoClave"
-            (click)="showForgot()"
-          >
-            {{ "LOGIN.FORGOT_PASSWORD" | translate }}
-          </p>
         </ng-template>
       
         <app-card Class="gtmRegistroClicLatrlIniciarSesion" *ngIf="showRegisterForm" idTitle="titleRegister" title="{{ 'GENERIC.REGISTER' | translate }}" description="{{ 'REGISTER.HAVE_ACCOUNT' | translate }}" idAction="registerForm" action="{{ 'LOGIN.LOGIN' | translate }}" (actionButton)="showLogin()" [template]="templateCardRegister"></app-card>

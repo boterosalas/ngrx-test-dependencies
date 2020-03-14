@@ -17,6 +17,10 @@
 
 }
 
+span.img-responsive img {
+    max-width: 100%;
+}
+
 @media screen and (min-width: 600px) {
     img{
         max-width: 100%;
