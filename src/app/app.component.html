@@ -98,9 +98,6 @@
       
       <div class="maincontent" *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'ADMIN'">
         <div fxLayout="row" class="container-fluid pl-0">
-          <div fxLayout="column" fxFlex="20" [fxHide.xs]="true" class="pt-4 shadow side-heigth" *ngIf="auth.isLoggedIn() && auth.role === 'ADMIN'">
-            <app-side-menu class="sideMenu"></app-side-menu>
-          </div>
           <div fxLayout="column" fxFlex class="pl-3">
             <router-outlet *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'ADMIN'" (activate)="onActivate($event)"></router-outlet>
           </div>
