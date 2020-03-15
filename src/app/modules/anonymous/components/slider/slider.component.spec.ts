@@ -147,4 +147,15 @@ it('buy', () => {
   component.buy();
 });
 
+it('next step', () => {
+  component.nextStep();
+  expect(component.showForm).toBeTruthy();
+});
+
+it('openshare', () => {
+  component.openShare();
+});
+
+
+
 });
