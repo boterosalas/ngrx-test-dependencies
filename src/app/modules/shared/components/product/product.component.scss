@@ -53,7 +53,7 @@
   display: flex;
   margin-top: 0;
   img {
-    border-radius: 10px !important;
+    border-radius: 10px;
   }
 }
 
@@ -67,7 +67,7 @@
   .img-container-viajes {
     .card-product {
       padding: 0 !important;
-      border-radius: 10px !important;
+      border-radius: 10px;
     }
     width: 100%;
     display: flex;
@@ -198,4 +198,9 @@ h3.size {
     }
   }
 
+}
+
+.button-wrap{
+  width: 80%;
+  margin: 0 auto;
 }

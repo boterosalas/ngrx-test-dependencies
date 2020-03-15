@@ -115,7 +115,9 @@
     "MY_COMMISSIONS":"Mis comisiones",
     "PAYMENT":"*Este valor te será consignado en el próximo pago.",
     "BUSSINESS": "Negocios",
-    "OFFERS": "Ofertas"
+    "BUSSINESS_TEXT": "Obtén ganancias refiriendo o comprando en cada negocio",
+    "OFFERS": "Ofertas",
+    "OFFERS_TEXT": "Descubre nuestras ofertas, refiere y obtén ganancias refiriendo ó comprando"
   },
   "BUSSINESS": {
     "CATEGORIES": "Categorías"

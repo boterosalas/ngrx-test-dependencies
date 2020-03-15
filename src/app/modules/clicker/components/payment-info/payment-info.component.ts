@@ -58,8 +58,21 @@ export class PaymentInfoComponent implements OnInit {
   departmentCode: string;
   cityCode: string;
   cityValue: string;
+  name: string;
+  lastName: string;
+  email: string;
+  phone: string;
 
   ngOnInit() {
+
+    this.subscription = this.registerUser.userInfo$.subscribe(val => {
+      if (!!val) {
+        this.name = val.firstNames;
+        this.lastName = val.lastNames;
+        this.phone = val.cellphone;
+      }
+    });
+
     this.disabledCity = true;
     this.nameFileCed1 = "";
     this.nameFileCed2 = "";
@@ -206,64 +219,68 @@ export class PaymentInfoComponent implements OnInit {
    * @params Email, FirstNames, LastNames, Identification, Cellphone. Password, IdType
    */
 
-  // public sendPayment() {
-  //   let registerForm = {
-  //     department: this.departmentCode,
-  //     municipality: this.cityCode,
-  //     bank: this.externalForm.controls.bank.value,
-  //     fileIdentificationCard1: this.fileIdentificationCard1,
-  //     fileIdentificationCard2: this.fileIdentificationCard2,
-  //     fileBankCertificate: this.fileBankCertificate,
-  //     bankAccountNumber: btoa(this.externalForm.controls.numberAccount.value),
-  //     typeBankAccount: this.externalForm.controls.typeAccount.value,
-  //     address: this.externalForm.controls.address.value,
-  //   };
+  public sendPayment() {
+    let registerForm = {
+      cellphone: this.phone,
+      firstNames: this.name,
+      lastNames: this.lastName,
+      department: this.departmentCode,
+      municipality: this.cityCode,
+      bank: this.externalForm.controls.bank.value,
+      fileIdentificationCard1: this.fileIdentificationCard1,
+      fileIdentificationCard2: this.fileIdentificationCard2,
+      fileBankCertificate: this.fileBankCertificate,
+      bankAccountNumber: btoa(this.externalForm.controls.numberAccount.value),
+      typeBankAccount: this.externalForm.controls.typeAccount.value,
+      address: this.externalForm.controls.address.value,
+    };
 
-  //   // console.log(registerForm);
-
-  //   this.subscription = this.registerUser.updateUser(registerForm).subscribe(
-  //     (resp: ResponseService) => {
-  //       this.loading.hide();
-  //       if (resp.state === "Success") {
-  //         Swal.fire({
-  //           title: "Información guardada",
-  //           html: `
-  //             Se ha guardado tu información correctamente
-  //             `,
-  //           confirmButtonText: "Aceptar",
-  //           confirmButtonClass:
-  //             "accept-register-alert-success"
-  //         })
-  //       } else {
-  //         Swal.fire({
-  //           title: "Registro inválido",
-  //           text: resp.userMessage,
-  //           type: "error",
-  //           confirmButtonText: "Aceptar",
-  //           confirmButtonClass: "accept-register-alert-error"
-  //         }).then(() => {
-  //           this.nameFileCed1 = "";
-  //           this.nameFileCed2 = "";
-  //           this.nameFileCert = "";
-  //           this.externalForm.reset();
-  //           this.showErrorCed1 = false;
-  //           this.showErrorCed2 = false;
-  //           this.showErrorCert = false;
-  //         });
-  //       }
-  //     },
-  //     error => {
-  //       this.loading.hide();
-  //       Swal.fire({
-  //         title: error.statusText,
-  //         text: error.error.userMessage,
-  //         type: "error",
-  //         confirmButtonText: "Aceptar",
-  //         confirmButtonClass: "accept-register-alert-invalid"
-  //       })
-  //     }
-  //   );
-  // }
+    this.subscription = this.registerUser.updateUser(registerForm).subscribe(
+      (resp: ResponseService) => {
+        this.loading.hide();
+        if (resp.state === "Success") {
+          Swal.fire({
+            title: "Información guardada",
+            type:"success",
+            html: `
+              Se ha guardado tu información correctamente
+              `,
+            confirmButtonText: "Aceptar",
+            confirmButtonClass:
+              "accept-register-alert-success"
+          })
+        } else {
+          Swal.fire({
+            title: "Registro inválido",
+            text: resp.userMessage,
+            type: "error",
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: "accept-register-alert-error"
+          }).then(() => {
+            this.nameFileCed1 = "";
+            this.nameFileCed2 = "";
+            this.nameFileCert = "";
+            this.showErrorCed1 = false;
+            this.showErrorCed2 = false;
+            this.showErrorCert = false;
+            this.externalForm.controls.ced1.setValue(null);
+            this.externalForm.controls.ced2.setValue(null);
+            this.externalForm.controls.cert.setValue(null);
+          });
+        }
+      },
+      error => {
+        this.loading.hide();
+        Swal.fire({
+          title: error.statusText,
+          text: error.error.userMessage,
+          type: "error",
+          confirmButtonText: "Aceptar",
+          confirmButtonClass: "accept-register-alert-invalid"
+        })
+      }
+    );
+  }
 
   /**
    * Metodo para seleccionar el departamento

@@ -466,11 +466,21 @@ table {
 }
 
 @media screen and (min-width: 600px) {
+
+  .store{
+    width: 220px;
+  }
+
+  .slick-dots li button:before {
+    font-size: 8px !important;
+  }
+
   .fullheight {
     width: 28%;
     right: 0;
     overflow-x: hidden;
     overflow-y: auto;
+    border-left: 1px solid #ccc;
   }
 
   .hide-pag {
@@ -1118,6 +1128,21 @@ button.swal2-cancel.updatecancel.swal2-styled {
   &-16{
     font-size: 16px;
   }
+  &-17{
+    font-size: 17px;
+  }
+  &-18{
+    font-size: 18px;
+  }
+  &-19{
+    font-size: 19px;
+  }
+  &-20{
+    font-size: 20px;
+  }
+  &-21{
+    font-size: 21px;
+  }
   &-22{
     font-size: 22px;
   }
@@ -1130,6 +1155,10 @@ button.swal2-cancel.updatecancel.swal2-styled {
   }
 }
 
+app-product.no-slider img {
+  width: 345px;
+}
+
 .mat-tab-body-content{
   overflow: hidden !important;
 }
@@ -1137,4 +1166,10 @@ button.swal2-cancel.updatecancel.swal2-styled {
 .mat-drawer{
   padding: 0 15px;
   // display: none;
+}
+
+.round-img{
+  img{
+    border-radius: 10px;
+  }
 }
