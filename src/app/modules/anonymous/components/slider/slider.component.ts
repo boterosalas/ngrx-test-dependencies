@@ -38,6 +38,7 @@ export class SliderComponent implements OnInit {
   private ngNavigatorShareService: NgNavigatorShareService;
   @Input() sliderWeb:Object;
   @Input() sliderMobile:Object;
+  @Input() isSlider:boolean;
   @Output() action = new EventEmitter();
 
   private subscription: Subscription = new Subscription();
@@ -79,8 +80,7 @@ export class SliderComponent implements OnInit {
 
   }
 
-  slideConfig = {"slidesToShow": 1, "slidesToScroll": 1, "dots": true, centerMode: true,
-  centerPadding: '10px', dotClass: 'slick-dots orange', autoplay: true, autoplaySpeed: 5000, infinite: false}
+  slideConfig = {"slidesToShow": 1, "slidesToScroll": 1, "dots": true, dotClass: 'slick-dots orange', autoplay: true, autoplaySpeed: 500000, infinite: false}
 
   public nextStep() {
     this.showForm = !this.showForm;

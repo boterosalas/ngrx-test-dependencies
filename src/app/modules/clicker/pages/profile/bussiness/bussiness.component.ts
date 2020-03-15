@@ -46,6 +46,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   reference: boolean;
   numberPattern = "^(0|[0-9][0-9]*)$";
   template: any;
+  image:string;
   private ngNavigatorShareService: NgNavigatorShareService;
 
   constructor(
@@ -67,9 +68,11 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.ngNavigatorShareService = ngNavigatorShareService;
 
     this.route.params.subscribe(route => {
+      console.log(route);
       this.title = route.code;
       this.percent = route.infoAditional;
       this.id = route.id;
+      this.image = route.imageurl;
     });
 
   }

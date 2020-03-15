@@ -208,9 +208,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     let params = {
       id: bussiness.id,
       code: bussiness.code,
-      infoAditional: bussiness.infoaditional
+      infoAditional: bussiness.infoaditional,
+      imageurl: bussiness.imageurl
     }
-    this.router.navigate(['/bussiness', {id: params.id, code: params.code, infoAditional: params.infoAditional}]);
+    this.router.navigate(['/bussiness', {id: params.id, code: params.code, infoAditional: params.infoAditional, imageurl: params.imageurl}]);
     
     
 

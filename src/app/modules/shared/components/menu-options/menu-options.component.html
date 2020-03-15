@@ -1,9 +1,4 @@
-<div
-  fxLayout.lt-md="{{ layoutmd }}"
-  fxLayout.gt-xs="{{ layoutxs }}"
-  fxLayoutAlign="{{ aligmentdesktop }}"
-  fxLayoutAlign.xs="{{ aligment }}"
->
+<div fxLayout="column">
   <span
     *ngFor="let item of options; let i = index"
     routerLink="{{ item.route }}"
@@ -24,6 +19,7 @@
   </span>
   <span class="menu-mobile">
     <a
+    *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'CLICKER'"
     mat-list-item
     href="https://api.whatsapp.com/send?phone=573052559105&text=Hola,%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20Clickam."
     target="_blank"
@@ -40,12 +36,12 @@
     </span>
   </span>
 
-  <span class="text-center">
+  <span class="text-center" *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'CLICKER'">
     <h3 class="f-21 m-2">{{ 'GENERIC.SUPPORT' | translate }} </h3>
     <p class="f-12">{{ 'GENERIC.EMAIL_SUPPORT' | translate }}</p>
   </span>
 
-  <div class="text-center">
+  <div class="text-center" *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'CLICKER'">
       <h3 class="m-2"> {{ 'FOOTER.FOLLOW_US' | translate }}</h3>
     
       <div fxLayoutAlign="center center" class="social-links">
