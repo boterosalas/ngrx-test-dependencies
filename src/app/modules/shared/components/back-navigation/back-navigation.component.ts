@@ -10,6 +10,7 @@ export class BackNavigationComponent implements OnInit {
   @Output() close = new EventEmitter();
   @Input() title: string;
   @Input() aditional: string;
+  @Input() imageurl: string;
   
 
   constructor() { }
