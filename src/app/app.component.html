@@ -1,8 +1,8 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav pt-3" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
+      [attr.role]="navigation"
+      [mode]="side"
+      [opened]="false">
     <mat-toolbar class="p-0">
       <span *ngIf="!auth.isLoggedIn()">
         Menú
@@ -94,7 +94,7 @@
       </div>
       
       
-      <app-header (sidenav)="drawer.toggle()" [name]="firstName" *ngIf="isHandset$ | async"></app-header>
+      <app-header (sidenav)="drawer.toggle()" [name]="firstName"></app-header>
       
       <div class="maincontent" *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'ADMIN'">
         <div fxLayout="row" class="container-fluid pl-0">

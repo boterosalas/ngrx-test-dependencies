@@ -75,11 +75,11 @@ declare var dataLayer: any;
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Web)
-  .pipe(
-    map(result => result.matches),
-    shareReplay()
-  );
+  // isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Web)
+  // .pipe(
+  //   map(result => result.matches),
+  //   shareReplay()
+  // );
 
   @ViewChild("templateCardLogin, TemplateCardRegister, TemplateCardForgot", {
     static: false
