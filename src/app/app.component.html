@@ -1,8 +1,8 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav pt-3" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
+      [attr.role]="navigation"
+      [mode]="side"
+      [opened]="false">
     <mat-toolbar class="p-0">
       <span *ngIf="!auth.isLoggedIn()">
         Menú
@@ -76,13 +76,6 @@
       
         <ng-template #templateCardLogin>
           <app-loginform></app-loginform>
-          <p
-            id="forgotPass"
-            class="cursor-pointer text-decoration text-center gtmIniciarSesiónClicLtrlOlvidoClave"
-            (click)="showForgot()"
-          >
-            {{ "LOGIN.FORGOT_PASSWORD" | translate }}
-          </p>
         </ng-template>
       
         <app-card Class="gtmRegistroClicLatrlIniciarSesion" *ngIf="showRegisterForm" idTitle="titleRegister" title="{{ 'GENERIC.REGISTER' | translate }}" description="{{ 'REGISTER.HAVE_ACCOUNT' | translate }}" idAction="registerForm" action="{{ 'LOGIN.LOGIN' | translate }}" (actionButton)="showLogin()" [template]="templateCardRegister"></app-card>
@@ -101,13 +94,10 @@
       </div>
       
       
-      <app-header (sidenav)="drawer.toggle()" [name]="firstName" *ngIf="isHandset$ | async"></app-header>
+      <app-header (sidenav)="drawer.toggle()" [name]="firstName"></app-header>
       
       <div class="maincontent" *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'ADMIN'">
         <div fxLayout="row" class="container-fluid pl-0">
-          <div fxLayout="column" fxFlex="20" [fxHide.xs]="true" class="pt-4 shadow side-heigth" *ngIf="auth.isLoggedIn() && auth.role === 'ADMIN'">
-            <app-side-menu class="sideMenu"></app-side-menu>
-          </div>
           <div fxLayout="column" fxFlex class="pl-3">
             <router-outlet *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'ADMIN'" (activate)="onActivate($event)"></router-outlet>
           </div>

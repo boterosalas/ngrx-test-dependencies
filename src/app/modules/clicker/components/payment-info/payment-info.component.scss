@@ -102,3 +102,9 @@ label {
 span.info {
     width: 220px;
 }
+
+@media screen and (min-width: 600px) {
+  .button-files{
+    width: 280px;
+  }
+}

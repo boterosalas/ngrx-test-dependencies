@@ -205,6 +205,23 @@ describe("RegisterformComponent", () => {
     expect(mockUserService.registerUser).toHaveBeenCalled();
   });
 
+  it('accept Modal', () => {
+    component.acceptModal();
+    component.acceptTerms = true;
+    expect(component.acceptTerms).toBeTruthy();
+  });
+
+  it('hide register', () => {
+    component.hideRegister();
+  });
+
+  it('show term', () => {
+    component.termsAndConditions();
+  });
+  
+  
+  
+
   describe("register invalid", () => {
     beforeEach(() => {
       window['dataLayer'] = [];
