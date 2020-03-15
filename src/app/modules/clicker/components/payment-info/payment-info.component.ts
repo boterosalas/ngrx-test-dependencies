@@ -241,6 +241,7 @@ export class PaymentInfoComponent implements OnInit {
         if (resp.state === "Success") {
           Swal.fire({
             title: "Información guardada",
+            type:"success",
             html: `
               Se ha guardado tu información correctamente
               `,

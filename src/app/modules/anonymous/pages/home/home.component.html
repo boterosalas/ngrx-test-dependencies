@@ -6,7 +6,7 @@
   <span class="border-gray d-block"></span>
   <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3>
   <p class="f-20" fxHide.xs>{{ 'HOME.BUSSINESS_TEXT' | translate }}</p>
-  <div fxLayout="column" fxLayout.gt-xs="row wrap" fxLayoutAlign="space-between center" >
+  <div fxLayout="column" fxLayout.gt-xs="row wrap" ngClass.gt-xs="pb-5" fxLayoutAlign="space-between center" >
     <app-bussiness-card *ngFor="let bussines of bussiness; let i = index" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
   </div>
   <span class="border-gray d-block"></span>

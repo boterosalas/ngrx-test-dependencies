@@ -2,6 +2,11 @@
 @import "general";
 
 .menu-mobile {
+    &.active{
+        a{
+            color: $primary-color;
+        }
+    }
     a{
         font-family: $font-galano-bold;
         height: 30px;
