@@ -68,7 +68,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.ngNavigatorShareService = ngNavigatorShareService;
 
     this.route.params.subscribe(route => {
-      console.log(route);
       this.title = route.code;
       this.percent = route.infoAditional;
       this.id = route.id;
