@@ -30,6 +30,11 @@ import { PaymentInfoComponent } from './components/payment-info/payment-info.com
 const routes: Routes = [
  
   {
+    path: "mi-perfil/:pagos",
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: "mi-perfil",
     component: ProfileComponent,
     canActivate: [AuthGuard]
