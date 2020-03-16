@@ -102,8 +102,9 @@
         </div>
         <div
           fxLayout="row"
-          fxLayoutAlign="space-between"
+          fxLayoutAlign="center space-between"
           class="mt-2 share-desktop"
+          fxLayoutGap="8px"
         >
           <button
             mat-button
@@ -114,7 +115,7 @@
             (click)="copyInputMessage(linkInput)"
           >
             <span
-              fxLayoutAlign="space-between center"
+              fxLayoutAlign="center space-between"
               class="gtmInicioClicFiltroExitocomCopiarLink"
             >
               {{ "GENERIC.COPY_LINK" | translate }}
@@ -127,7 +128,7 @@
             color="orange"
             (click)="showReference()"
           >
-            <span fxLayoutAlign="space-between center">
+            <span fxLayoutAlign="center space-between">
               Referir
             </span>
           </button>
@@ -139,7 +140,7 @@
             class="orange-border"
             (click)="buy()"
           >
-            <span fxLayoutAlign="space-between center">
+            <span fxLayoutAlign="center space-between ">
               Comprar
             </span>
           </button>
