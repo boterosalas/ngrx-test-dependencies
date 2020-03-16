@@ -184,7 +184,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
             html: `
             <div class="text-center">
             <h3 class="gray f-16">Recuerda ir a la bandeja de entrada de tu correo para activar tu cuenta.</h3>
-              <p class="f-11">*Revisa tambien tu bandeja de correo no deseado</p>
+              <p class="f-11">*Revisa también tu bandeja de correo no deseado</p>
               </div>`,
               allowOutsideClick: false,
               allowEscapeKey: false,
