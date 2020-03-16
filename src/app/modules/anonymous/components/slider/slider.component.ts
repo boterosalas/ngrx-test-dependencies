@@ -230,7 +230,6 @@ export class SliderComponent implements OnInit {
    */
 
   public dataCategory(category) {
-    console.log(category);
     let token = localStorage.getItem("ACCESS_TOKEN");
       if(token !== null && category.business !=='clickam') {
         this.urlshorten = '';
@@ -255,6 +254,7 @@ export class SliderComponent implements OnInit {
         const showProduct = true;
         const showshowTitle = false;
         const buttonClose = "Cerrar";
+        const infoaditional = category.infoaditional;
         this.plu = category.description;
         this.business = category.idbusiness;
         const home = true;
@@ -273,6 +273,7 @@ export class SliderComponent implements OnInit {
             template,
             showClose,
             showCloseIcon,
+            infoaditional,
             img,
             showProduct,
             showshowTitle,
