@@ -28,26 +28,26 @@ export class BussinessComponent implements OnInit, OnDestroy {
   bussiness = [];
 
   private subscription: Subscription = new Subscription();
+  private ngNavigatorShareService: NgNavigatorShareService;
+  image:string;
+  template: any;
+  numberPattern = "^(0|[0-9][0-9]*)$";
+  showFormCustomer = true;
+  reference: boolean;
+  showForm = false;
+  idCustomerForm: FormGroup;
+  date: any;
+  business: string;
+  plu: string;
+  formLink: FormGroup;
+  enableCopy: boolean = true;
+  identification: string;
   @ViewChild("templateCategories", { static: false })
   templateCategories: TemplateRef<any>;
   @ViewChild("templateDialogAssured", { static: false })
   templateAssured: TemplateRef<any>;
   urlshorten: string = '';
   url: string;
-  identification: string;
-  enableCopy: boolean = true;
-  formLink: FormGroup;
-  plu: string;
-  business: string;
-  date: any;
-  idCustomerForm: FormGroup;
-  showForm = false;
-  showFormCustomer = true;
-  reference: boolean;
-  numberPattern = "^(0|[0-9][0-9]*)$";
-  template: any;
-  image:string;
-  private ngNavigatorShareService: NgNavigatorShareService;
 
   constructor(
     private route: ActivatedRoute,
@@ -109,75 +109,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.router.navigate(['./']);
   }
 
-  /**
-   * Metodo para abrir la modal con el producto seleccionado 
-   * 
-   */
-
-  public dataCategory(category) {
-    let token = localStorage.getItem("ACCESS_TOKEN");
-      if(token !== null && category.business !=='clickam') {
-        this.urlshorten = '';
-        this.reference = false;
-        const dataCategoryUrl = category.link;
-        this.url = `${dataCategoryUrl}${this.identification}`;
-        this.subscription = this.user
-          .getShortUrl(this.url)
-          .subscribe((resp: any) => {
-            this.urlshorten = resp;
-            this.enableCopy = false;
-            this.saveLink();
-          });
-        this.idCustomerForm.controls.identification.setValue("");
-        this.idCustomerForm.reset();
-        this.formShareLink();
-        const title = category.description;
-        const id = category.productId;
-        const img = category.imageurl;
-        const showClose = false;
-        const showCloseIcon = true;
-        const showProduct = true;
-        const showshowTitle = false;
-        const buttonClose = "Cerrar";
-        const infoaditional = category.infoaditional;
-        this.plu = category.description;
-        this.business = category.idbusiness;
-        const home = true;
-
-        if(category.idbusiness !== 3 && category.idbusiness !== 5) {
-          this.template = this.templateCategories;
-        } else {
-          this.template = this.templateAssured;
-        }
-
-        const template = this.template;
-
-        let dialogref = this.dialog.open(DialogComponent, {
-          data: {
-            title,
-            template,
-            infoaditional,
-            showClose,
-            showCloseIcon,
-            img,
-            showProduct,
-            showshowTitle,
-            buttonClose,
-            id,
-            home
-          },
-        });
-    
-        dialogref.afterDismissed().subscribe(() => {
-          this.enableCopy = true;
-        })
-      } else {
-        this.router.navigate(['/'+category.link]);
-      }
   
-
-  }
-
    /**
    * Metodo para dalvar los links generados
    */
@@ -301,6 +233,76 @@ export class BussinessComponent implements OnInit, OnDestroy {
       this.showFormCustomer = !this.showFormCustomer;
       this.saveLink("assured");
     }
+
+    /**
+   * Metodo para abrir la modal con el producto seleccionado 
+   * 
+   */
+
+  public dataCategory(category) {
+    let token = localStorage.getItem("ACCESS_TOKEN");
+      if(token !== null && category.business !=='clickam') {
+        this.urlshorten = '';
+        this.reference = false;
+        const dataCategoryUrl = category.link;
+        this.url = `${dataCategoryUrl}${this.identification}`;
+        this.subscription = this.user
+          .getShortUrl(this.url)
+          .subscribe((resp: any) => {
+            this.urlshorten = resp;
+            this.enableCopy = false;
+            this.saveLink();
+          });
+        this.idCustomerForm.controls.identification.setValue("");
+        this.idCustomerForm.reset();
+        this.formShareLink();
+        const title = category.description;
+        const id = category.productId;
+        const img = category.imageurl;
+        const showClose = false;
+        const showCloseIcon = true;
+        const showProduct = true;
+        const showshowTitle = false;
+        const buttonClose = "Cerrar";
+        const infoaditional = category.infoaditional;
+        this.plu = category.description;
+        this.business = category.idbusiness;
+        const home = true;
+
+        if(category.idbusiness !== 3 && category.idbusiness !== 5) {
+          this.template = this.templateCategories;
+        } else {
+          this.template = this.templateAssured;
+        }
+
+        const template = this.template;
+
+        let dialogref = this.dialog.open(DialogComponent, {
+          data: {
+            title,
+            template,
+            infoaditional,
+            showClose,
+            showCloseIcon,
+            img,
+            showProduct,
+            showshowTitle,
+            buttonClose,
+            id,
+            home
+          },
+        });
+    
+        dialogref.afterDismissed().subscribe(() => {
+          this.enableCopy = true;
+        })
+      } else {
+        this.router.navigate(['/'+category.link]);
+      }
+  
+
+  }
+
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

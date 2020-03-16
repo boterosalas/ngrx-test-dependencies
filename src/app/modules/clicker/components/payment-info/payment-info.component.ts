@@ -106,28 +106,7 @@ export class PaymentInfoComponent implements OnInit {
     );
   }
 
-  public filterCities() {
-    this.filteredCities = this.externalForm.controls.city.valueChanges.pipe(
-      startWith(""),
-      map(city => (city ? this._filterCities(city) : this.cities.slice()))
-    );
-  }
-
-  private _filterDepartments(value: any) {
-    const filterValue = value.toLowerCase();
-    return this.departments.filter(
-      department =>
-        department.description.toLowerCase().indexOf(filterValue) === 0
-    );
-  }
-
-  private _filterCities(value: string) {
-    const filterValue = value.toLowerCase();
-    return this.cities.filter(
-      (city: any) => city.description.toLowerCase().indexOf(filterValue) === 0
-    );
-  }  
-
+  
   private externalClickerForm() {
     this.externalForm = this.fb.group({
       department: [null, Validators.required],
@@ -355,6 +334,29 @@ export class PaymentInfoComponent implements OnInit {
         this.banks = res.objectResponse;
       });
   }
+
+  public filterCities() {
+    this.filteredCities = this.externalForm.controls.city.valueChanges.pipe(
+      startWith(""),
+      map(city => (city ? this._filterCities(city) : this.cities.slice()))
+    );
+  }
+
+  private _filterDepartments(value: any) {
+    const filterValue = value.toLowerCase();
+    return this.departments.filter(
+      department =>
+        department.description.toLowerCase().indexOf(filterValue) === 0
+    );
+  }
+
+  private _filterCities(value: string) {
+    const filterValue = value.toLowerCase();
+    return this.cities.filter(
+      (city: any) => city.description.toLowerCase().indexOf(filterValue) === 0
+    );
+  }  
+
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
