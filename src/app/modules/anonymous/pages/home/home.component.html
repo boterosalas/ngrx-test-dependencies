@@ -1,5 +1,5 @@
 <app-logo></app-logo>
-<app-slider [isSlider]="true" (action)="sliderOffers()"  [sliderMobile]="newsSlider.mobile" [sliderWeb]="newsSlider.web"></app-slider>
+<app-slider [showArrows]="true" [isSlider]="true" (next)="next()" (prev)="prev()" (action)="sliderOffers()"  [sliderMobile]="newsSlider.mobile" [sliderWeb]="newsSlider.web"></app-slider>
 
 
 <div class="container">
@@ -14,7 +14,7 @@
   <p class="f-20" fxHide.xs>{{ 'HOME.OFFERS_TEXT' | translate }}</p>
 </div>
 
-<app-slider [isSlider]="true" fxShow.gt-xs="false" (action)="sliderOffers()" [sliderMobile]="offers.mobile" [sliderWeb]="offers.web" class="mb-3"></app-slider>
+<app-slider [showArrows]="false" [isSlider]="true" fxShow.gt-xs="false" (action)="sliderOffers()" [sliderMobile]="offers.mobile" [sliderWeb]="offers.web" class="mb-3"></app-slider>
 
-<app-slider [isSlider]="false" fxShow.xs="false" (action)="sliderOffers()" [sliderMobile]="offers.mobile" class="mb-3"></app-slider>
+<app-slider [showArrows]="false" [isSlider]="false" fxShow.xs="false" (action)="sliderOffers()" [sliderMobile]="offers.mobile" class="mb-3"></app-slider>
 

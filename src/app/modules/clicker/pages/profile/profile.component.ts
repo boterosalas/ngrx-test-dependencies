@@ -1,9 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
 import Swal from "sweetalert2";
 import { ResponseService } from 'src/app/interfaces/response';
+import { ActivatedRoute } from '@angular/router';
+import { MatTabGroup } from '@angular/material';
 
 @Component({
   selector: 'app-profile',
@@ -25,10 +27,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
   bankAccountNumber: string;
   typeBankAccount: string;
   verified: boolean;
+  @ViewChild('tabGroup', {static: true}) tabGroup: MatTabGroup;
 
   constructor(
     private user: UserService,
-    private auth: AuthService
+    private auth: AuthService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -40,6 +44,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
        this.verified = val.verified;
      }
    })
+
+   this.route.params.subscribe(param => {
+     if(param.pagos === 'pagos') {
+       this.tabGroup.selectedIndex = 2;
+     }
+   })
+
   }
 
  public reset(file) {

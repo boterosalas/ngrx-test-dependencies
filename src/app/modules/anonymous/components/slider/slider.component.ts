@@ -11,6 +11,7 @@ import { LinksService } from 'src/app/services/links.service';
 import { TokenService } from 'src/app/services/token.service';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import { Router } from '@angular/router';
+import { SlickCarouselComponent } from 'ngx-slick-carousel';
 
 @Component({
   selector: 'app-slider',
@@ -39,7 +40,10 @@ export class SliderComponent implements OnInit {
   @Input() sliderWeb:Object;
   @Input() sliderMobile:Object;
   @Input() isSlider:boolean;
+  @Input() showArrows:boolean;
   @Output() action = new EventEmitter();
+
+  @ViewChild('slickModal', {static: false}) slickModal: SlickCarouselComponent;
 
   private subscription: Subscription = new Subscription();
   @ViewChild("templateCategories", { static: false })
@@ -80,7 +84,7 @@ export class SliderComponent implements OnInit {
 
   }
 
-  slideConfig = {"slidesToShow": 1, "slidesToScroll": 1, "dots": true, dotClass: 'slick-dots orange', autoplay: true, autoplaySpeed: 500000, infinite: false}
+  slideConfig = {"slidesToShow": 1, "slidesToScroll": 1, "dots": true, dotClass: 'slick-dots orange', autoplay: true, autoplaySpeed: 5000, infinite: false, arrows: true}
 
   public nextStep() {
     this.showForm = !this.showForm;
@@ -91,6 +95,16 @@ export class SliderComponent implements OnInit {
   buy() {
     window.open(this.urlshorten,'_blank')
   }
+
+  next() {
+    this.slickModal.slickNext();
+    // console.log(this.slickModal);
+  }
+  
+  prev() {
+    this.slickModal.slickPrev();
+  }
+  
 
 
   openShare() {
