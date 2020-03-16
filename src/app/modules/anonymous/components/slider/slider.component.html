@@ -50,6 +50,7 @@
         id="slide{{ i }}"
         class="no-slider round-img"
         [photo]="slide.imageurl"
+        infoaditional="slide.infoaditional"
         category="true"
         home
         (infoProduct)="dataCategory(slide)"
@@ -74,6 +75,7 @@
         <app-product
           id="slide{{ i }}"
           [photo]="slide.imageurl"
+          infoaditional="slide.infoaditional"
           category="true"
           home
           (infoProduct)="dataCategory(slide)"
