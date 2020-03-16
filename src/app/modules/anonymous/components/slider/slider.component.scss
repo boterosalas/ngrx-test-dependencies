@@ -16,3 +16,14 @@
         border-radius: 10px;
       }
   }
+
+  .position-absolute {
+    position: absolute;
+    top: 50%;
+    z-index: 99;
+    width: 100%;
+}
+
+.rotate{
+  transform: rotate(180deg);
+}
