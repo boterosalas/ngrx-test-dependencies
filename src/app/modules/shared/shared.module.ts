@@ -9,7 +9,6 @@ import { LoaderComponent } from "./components/loader/loader.component";
 import { DialogComponent } from "./components/dialog/dialog.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { WhatsappComponent } from "./components/whatsapp/whatsapp.component";
 import { HeaderComponent } from './components/header/header.component';
 import { MatListModule, MatRippleModule, MatMenuModule } from '@angular/material';
 import { SociallinksComponent } from './components/sociallinks/sociallinks.component';
@@ -38,7 +37,6 @@ import { MatIconModule } from '@angular/material/icon';
     LoaderComponent,
     DialogComponent,
     FooterComponent,
-    WhatsappComponent,
     HeaderComponent,
     SociallinksComponent,
     TopComponent,
@@ -74,7 +72,6 @@ import { MatIconModule } from '@angular/material/icon';
     NotFoundComponent,
     LoaderComponent,
     FooterComponent,
-    WhatsappComponent,
     HeaderComponent,
     MatListModule,
     MatRippleModule,

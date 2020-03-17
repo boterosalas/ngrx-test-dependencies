@@ -60,6 +60,8 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   typeBankAccount: string;
   userId: string;
   isEmployee: boolean;
+  isEmployeeUser: boolean;
+  managedPayments: boolean;
   userInfo: any;
   filteredDepartments: Observable<any>;
   filteredCities: Observable<any>;
@@ -103,6 +105,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
         this.userId = val.userId;
         this.isEmployee = val.isEmployeeGrupoExito;
       }
+    
       this.formProfile();
       this.formProfileCell();
       this.formProfilePass();
@@ -113,7 +116,16 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     });
     this.accountBankForm();
     this.getBanks();
+    this.getUserData();
   }
+
+  public getUserData() {
+    this.subscription = this.user.getuserdata().subscribe(user => {
+        this.managedPayments = user.managedPayments;
+        this.isEmployeeUser = user.isEmployeeGrupoExito;
+    });
+  }
+  
 
   public formProfile() {
     this.profileForm = this.fb.group({
@@ -286,6 +298,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.userInfo.firstNames = this.profileForm.controls.name.value;
     this.userInfo.lastNames = this.profileForm.controls.lastName.value;
     this.userInfo.cellphone = this.profileFormCell.controls.phone.value;
+    this.userInfo.bankAccountNumber = null;
     this.subscription = this.user
       .updateUser(this.userInfo)
       .subscribe(
@@ -444,6 +457,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.userInfo.address = this.addressForm.controls.address.value; 
     this.userInfo.department = this.departmentCode;
     this.userInfo.municipality = this.cityCode;
+    this.userInfo.bankAccountNumber = null;
     this.subscription = this.user
     .updateUser(this.userInfo)
     .subscribe(

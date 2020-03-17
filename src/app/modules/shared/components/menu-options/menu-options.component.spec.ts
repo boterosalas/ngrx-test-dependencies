@@ -15,7 +15,6 @@ describe('MenuOptionsComponent', () => {
   let component: MenuOptionsComponent;
   let fixture: ComponentFixture<MenuOptionsComponent>;
 
-  // const mockAuthService = jasmine.createSpyObj("AuthService", ["getMenu$"]);
   const mockUtilsService = jasmine.createSpyObj("UtilsService", ["showRegisterForm", "hideMenu"]);
 
   let menuAnymous = {
@@ -82,5 +81,12 @@ describe('MenuOptionsComponent', () => {
     expect(mockUtilsService.hideMenu).toHaveBeenCalled();
   });
 
+  it('hide sidenav', () => {
+    component.hide();
+  });
+  
+  it('go to terms', () => {
+    component.goTerms();
+  });
 
 });

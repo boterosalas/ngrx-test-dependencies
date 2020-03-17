@@ -20,14 +20,17 @@ import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/t
 import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommentStmt } from '@angular/compiler';
+import { UserService } from 'src/app/services/user.service';
 
 describe("BussinessComponent", () => {
   let component: BussinessComponent;
   let fixture: ComponentFixture<BussinessComponent>;
 
   const mockContentService = jasmine.createSpyObj("ContentService", [
-    "getBusinessContent"
+    "getBusinessContent",
   ]);
+
+  const mockUserService = jasmine.createSpyObj("UserService", ["getShortUrl"]);
 
   const mockDialog = jasmine.createSpyObj("MatDialog", ["open"]);
 
@@ -92,8 +95,9 @@ describe("BussinessComponent", () => {
       ],
       providers: [
         { provide: ContentService, useValue: mockContentService },
+        { provide: UserService, useValue: mockUserService },
         { provide: MatDialogRef, useValue: mockDialogRef },
-        { provide: MAT_BOTTOM_SHEET_DATA, useValue: mockDialog }
+        { provide: MAT_BOTTOM_SHEET_DATA, useValue: mockDialog },
       ]
     })
       .overrideModule(BrowserDynamicTestingModule, {
@@ -103,6 +107,7 @@ describe("BussinessComponent", () => {
       })
       .compileComponents();
     mockContentService.getBusinessContent.and.returnValue(of(bussiness));
+    mockUserService.getShortUrl.and.returnValue(of('http://tynyurl.com/12kusw'));
   }));
 
   beforeEach(() => {
@@ -157,6 +162,15 @@ describe("BussinessComponent", () => {
     expect(component.showFormCustomer).toBeTruthy();
   });
 
+  it("back step", () => {
+    component.showForm = true;
+    component.reference = false;
+    component.backStep();
+    expect(component.showForm).toBeFalsy();
+    expect(component.reference).toBeTruthy();
+  });
+  
+
   it('share mobile', () => {
     component.share();
   });
@@ -164,6 +178,11 @@ describe("BussinessComponent", () => {
   it('buy', () => {
     component.buy();
   });
+
+  it('get date', () => {
+    component.getDate();
+  });
+  
   
 
   it("copyInputMessage", () => {
