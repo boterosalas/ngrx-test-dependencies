@@ -89,6 +89,11 @@ describe('ForgotpasswordformComponent', () => {
     component.forgotPaswordForm.controls.Username.setValue('david.betancur@pragma.com.co');
     expect(mockAuthService.forgotPassword).toHaveBeenCalled();
   });
+
+  it('hide forgot', () => {
+    component.hideForgot();
+  });
+  
   
   describe('invalid password', () => {
 

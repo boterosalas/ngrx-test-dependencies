@@ -26,4 +26,10 @@ describe('BussinessCardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('navigate bussiness', () => {
+     component.navigateBussiness();
+  });
+  
+
 });
