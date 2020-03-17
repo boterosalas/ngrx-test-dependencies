@@ -11,7 +11,7 @@
         *ngFor="let slide of sliderWeb; let i = index"
         class="slide text-center"
       >
-        <span (click)="openShare($event)">
+        <span (click)="openShare()">
           <app-product
             id="slide{{ i }}"
             [photo]="slide.imageurl"
@@ -45,7 +45,7 @@
     *ngFor="let slide of sliderMobile; let i = index"
     class="slide text-center"
   >
-    <span (click)="openShare($event)">
+    <span (click)="openShare()">
       <app-product
         id="slide{{ i }}"
         class="no-slider round-img"
@@ -71,7 +71,7 @@
       *ngFor="let slide of sliderMobile; let i = index"
       class="slide text-center pl-3"
     >
-      <span (click)="openShare($event)">
+      <span (click)="openShare()">
         <app-product
           id="slide{{ i }}"
           [photo]="slide.imageurl"

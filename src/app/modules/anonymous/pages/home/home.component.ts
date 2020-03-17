@@ -56,8 +56,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   email: string;
   bussiness: Array<any> = [];
-  newsSlider = [];
-  offers = [];
+  sliderMobile: any;
+  sliderMobileOffers: any;
+  sliderWeb: any;
+  offersMobile: any;
+  offersWeb: any;
 
   constructor(
     public router: Router,
@@ -186,7 +189,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscription = this.content.getNews()
     .pipe(distinctUntilChanged())
     .subscribe((slide: any)=> {
-      this.newsSlider = slide;
+      this.sliderWeb = slide.web;
+      this.sliderMobile = slide.mobile;
     });
   }
 
@@ -194,7 +198,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscription = this.content.getOffers()
     .pipe(distinctUntilChanged())
     .subscribe(offer => {
-      this.offers = offer;
+      this.offersMobile = offer.mobile;
+      this.offersWeb = offer.web;
     });
   }
 
