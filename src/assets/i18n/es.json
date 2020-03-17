@@ -1,6 +1,7 @@
 {
   "GENERIC": {
     "EMAIL": "Correo electrónico",
+    "EMAIL_SHORT": "Correo",
     "CONFIRM_EMAIL": "Confirmar Correo electrónico",
     "CONFIRM_EMAIL_PATTERN": "Los correos no son iguales",
     "PASSWORD": "Contraseña",
@@ -8,7 +9,8 @@
     "ACTUAL_PASSWORD": "Contraseña actual",
     "NAME": "Nombres",
     "LASTNAME": "Apellidos",
-    "CELLPHONE": "Número de celular",
+    "CELLPHONE": "Celular",
+    "CELLPHONE_SHORT": "Número de celular",
     "ADDRESS": "Dirección",
     "DOCUMENT_NUMBER": "Número de documento",
     "DOCUMENT": "Documento",
