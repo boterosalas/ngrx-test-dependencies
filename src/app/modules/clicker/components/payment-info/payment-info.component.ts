@@ -227,7 +227,18 @@ export class PaymentInfoComponent implements OnInit {
             confirmButtonText: "Aceptar",
             confirmButtonClass:
               "accept-register-alert-success"
-          })
+          }).then(() => {
+            this.nameFileCed1 = "";
+            this.nameFileCed2 = "";
+            this.nameFileCert = "";
+            this.showErrorCed1 = false;
+            this.showErrorCed2 = false;
+            this.showErrorCert = false;
+            this.externalForm.controls.ced1.setValue(null);
+            this.externalForm.controls.ced2.setValue(null);
+            this.externalForm.controls.cert.setValue(null);
+            window.location.reload();
+          });
         } else {
           Swal.fire({
             title: "Registro inválido",

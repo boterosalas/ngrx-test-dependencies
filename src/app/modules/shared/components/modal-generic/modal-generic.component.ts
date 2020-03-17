@@ -14,6 +14,9 @@ export class ModalGenericComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    setTimeout(() => {
+      document.querySelector('.mat-dialog-content').scroll(0,0);
+    },400);
   }
 
   onNoClick(): void {

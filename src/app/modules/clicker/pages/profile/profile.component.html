@@ -10,7 +10,7 @@
     <mat-tab label="Información adicional" *ngIf="(auth.getRole$ | async ) !== 'ADMIN'">
       <app-aditional-info-form></app-aditional-info-form>
     </mat-tab>
-  <mat-tab label="Gestionar pagos" *ngIf="(auth.getRole$ | async ) !== 'ADMIN'">
+  <mat-tab label="Gestionar pagos" *ngIf="(auth.getRole$ | async ) !== 'ADMIN' && managedPayments === false && isEmployee === false">
     <app-payment-info></app-payment-info>
   </mat-tab>
 </mat-tab-group>

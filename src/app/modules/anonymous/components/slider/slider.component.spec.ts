@@ -152,6 +152,14 @@ it('next step', () => {
   expect(component.showForm).toBeTruthy();
 });
 
+it("back step", () => {
+  component.showForm = true;
+  component.reference = false;
+  component.backStep();
+  expect(component.showForm).toBeFalsy();
+  expect(component.reference).toBeTruthy();
+});
+
 it('openshare', () => {
   component.openShare();
 });

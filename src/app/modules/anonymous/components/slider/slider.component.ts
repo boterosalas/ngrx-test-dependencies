@@ -105,7 +105,10 @@ export class SliderComponent implements OnInit {
     this.slickModal.slickPrev();
   }
   
-
+  public backStep() {
+    this.reference = !this.reference;
+    this.showForm = !this.showForm;
+  }
 
   openShare() {
     this.action.emit(event);

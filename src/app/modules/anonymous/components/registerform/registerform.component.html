@@ -104,6 +104,7 @@
       placeholder="{{ 'REGISTER.ID_TYPE' | translate }}"
       id="idtype"
       formControlName="idType"
+      required
     >
       <mat-option>{{ "REGISTER.ID_TYPE" | translate }}</mat-option>
       <mat-option *ngFor="let typeId of idUserType" value="{{ typeId.id }}">{{
@@ -433,7 +434,7 @@
 </form>
 
 <ng-template #templateTerms>
-  <div innerHtml="{{ 'TERMS.LEGAL' | translate }}"></div> 
+  <div class="fade-in" innerHtml="{{ 'TERMS.LEGAL' | translate }}"></div> 
   <button
   mat-raised-button
   id="accept-modal"

@@ -47,7 +47,7 @@
             />
           </mat-form-field>
         </div>
-        <div fxLayout="row" fxLayoutAlign="space-between" class="mt-2 share-desktop">
+        <div fxLayout="row" fxLayoutAlign="center space-between" fxLayoutGap="10px" class="mt-2 share-desktop">
           <button
             mat-button
             id="btnCopy"
@@ -56,7 +56,7 @@
             class="gtmInicioClicFiltroExitocomCopiarLink"
             (click)="copyInputMessage(linkInput)"
           >
-            <span fxLayoutAlign="space-between center" class="gtmInicioClicFiltroExitocomCopiarLink">
+            <span fxLayoutAlign="center space-between" class="gtmInicioClicFiltroExitocomCopiarLink">
               {{ "GENERIC.COPY_LINK" | translate }}
             </span>
           </button>
@@ -67,7 +67,7 @@
           color="orange"
           (click)="showReference()"
         >
-          <span fxLayoutAlign="space-between center">
+          <span fxLayoutAlign="center space-between">
             Referir
           </span>
         </button>
@@ -79,7 +79,7 @@
           class="orange-border"
           (click)="buy()"
         >
-          <span fxLayoutAlign="space-between center">
+          <span fxLayoutAlign="center space-between">
             Comprar
           </span>
         </button>
@@ -115,6 +115,11 @@
     </div>
       <br>
       <form class="forgotpassword-container" [formGroup]="idCustomerForm" fxLayout="column" *ngIf="reference">
+        <span (click)="backStep()" class="cursor-pointer gray" fxLayout="row" fxLayoutAlign="start start" fxFlex="12">
+          <mat-icon
+            >keyboard_arrow_left</mat-icon
+          > <span class="text-back">Volver</span> 
+        </span>
           <p>{{'GENERIC.REFERENCE_IDENTIFICATION' | translate}}</p>
           <mat-form-field appearance="outline" class="mt-2">
             <input

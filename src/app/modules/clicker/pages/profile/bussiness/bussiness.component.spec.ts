@@ -157,6 +157,15 @@ describe("BussinessComponent", () => {
     expect(component.showFormCustomer).toBeTruthy();
   });
 
+  it("back step", () => {
+    component.showForm = true;
+    component.reference = false;
+    component.backStep();
+    expect(component.showForm).toBeFalsy();
+    expect(component.reference).toBeTruthy();
+  });
+  
+
   it('share mobile', () => {
     component.share();
   });
