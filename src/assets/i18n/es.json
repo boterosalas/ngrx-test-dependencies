@@ -1,7 +1,8 @@
 {
   "GENERIC": {
-    "EMAIL": "Correo",
-    "CONFIRM_EMAIL": "Confirmar Correo",
+    "EMAIL": "Correo electrónico",
+    "EMAIL_SHORT": "Correo",
+    "CONFIRM_EMAIL": "Confirmar Correo electrónico",
     "CONFIRM_EMAIL_PATTERN": "Los correos no son iguales",
     "PASSWORD": "Contraseña",
     "CONFIRM_PASSWORD": "Confirmar Contraseña",
@@ -9,6 +10,7 @@
     "NAME": "Nombres",
     "LASTNAME": "Apellidos",
     "CELLPHONE": "Celular",
+    "CELLPHONE_SHORT": "Número de celular",
     "ADDRESS": "Dirección",
     "DOCUMENT_NUMBER": "Número de documento",
     "DOCUMENT": "Documento",
@@ -53,7 +55,7 @@
     "LOGIN": "Iniciar sesión",
     "INVALID_EMAIL": "Email inválido",
     "INVALID_PASSWORD": "Contraseña invalida",
-    "FORGOT_PASSWORD": "¿Olvidó su contraseña?",
+    "FORGOT_PASSWORD": "Olvidaste tu contraseña",
     "INTRODUCE_EMAIL": "Ingrese un correo",
     "INTRODUCE_PASSWORD": "Ingrese una contraseña",
     "DESCRIPTION": "Si todavía no tienes una cuenta puedes",
