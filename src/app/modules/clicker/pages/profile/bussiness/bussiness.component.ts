@@ -233,6 +233,11 @@ export class BussinessComponent implements OnInit, OnDestroy {
       this.showFormCustomer = !this.showFormCustomer;
       this.saveLink("assured");
     }
+    
+    public backStep() {
+      this.reference = !this.reference;
+      this.showForm = !this.showForm;
+    }
 
     /**
    * Metodo para abrir la modal con el producto seleccionado 

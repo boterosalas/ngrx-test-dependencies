@@ -60,6 +60,8 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   typeBankAccount: string;
   userId: string;
   isEmployee: boolean;
+  isEmployeeUser: boolean;
+  managedPayments: boolean;
   userInfo: any;
   filteredDepartments: Observable<any>;
   filteredCities: Observable<any>;
@@ -113,7 +115,16 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     });
     this.accountBankForm();
     this.getBanks();
+    this.getUserData();
   }
+
+  public getUserData() {
+    this.subscription = this.user.getuserdata().subscribe(user => {
+        this.managedPayments = user.managedPayments;
+        this.isEmployeeUser = user.isEmployeeGrupoExito;
+    });
+  }
+  
 
   public formProfile() {
     this.profileForm = this.fb.group({

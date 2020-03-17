@@ -28,6 +28,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   typeBankAccount: string;
   verified: boolean;
   @ViewChild('tabGroup', {static: true}) tabGroup: MatTabGroup;
+  managedPayments: boolean;
+  isEmployee: boolean;
 
   constructor(
     private user: UserService,
@@ -37,6 +39,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
    this.user.getProfile();
+   this.getUserData();
    this.subscription = this.user.userInfo$.subscribe((val)=> {
      if(!!val) {
        this.userId = val.userId;
@@ -103,6 +106,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
     });
 
   }
+
+  public getUserData() {
+    this.subscription = this.user.getuserdata().subscribe(user => {
+        this.managedPayments = user.managedPayments;
+        this.isEmployee = user.isEmployeeGrupoExito;
+    });
+  }
+  
 
   ngOnDestroy(): void {
    this.subscription.unsubscribe();
