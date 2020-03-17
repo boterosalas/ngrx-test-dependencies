@@ -16,7 +16,6 @@ import { RecoverpasswordComponent } from "./pages/recoverpassword/recoverpasswor
 import { MenuComponent } from "./components/menu/menu.component";
 import { CardComponent } from './components/card/card.component';
 import { ClickAcademyComponent } from './pages/click-academy/click-academy.component';
-import { OffersComponent } from './pages/offers/offers.component';
 import { FrequentQuestionsComponent } from './pages/frequent-questions/frequent-questions.component';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
 import { BlockCopyPasteDirective } from 'src/directives/copy.directive';
@@ -71,7 +70,6 @@ const routes: Routes = [
     MenuComponent,
     CardComponent,
     ClickAcademyComponent,
-    OffersComponent,
     FrequentQuestionsComponent,
     TermsAndConditionsComponent,
     BlockCopyPasteDirective,
