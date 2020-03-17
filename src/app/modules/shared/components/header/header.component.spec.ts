@@ -98,6 +98,11 @@ describe('HeaderComponent', () => {
       expect(mockUtilsService.showloginForm).toHaveBeenCalled();
     });
 
+    it('open side', () => {
+      component.open();
+    });
+    
+
   });
 
   describe('show menu', () => {
