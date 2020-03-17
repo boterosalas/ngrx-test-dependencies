@@ -33,7 +33,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   constructor(
     private user: UserService,
-    private auth: AuthService,
+    public auth: AuthService,
     private route: ActivatedRoute
   ) { }
 
