@@ -59,7 +59,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private _snackBar: MatSnackBar,
     private user: UserService,
-    private auth: AuthService,
+    public auth: AuthService,
     private links: LinksService,
     private token: TokenService,
     ngNavigatorShareService: NgNavigatorShareService,
