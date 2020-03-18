@@ -395,8 +395,8 @@
 
     <div *ngIf="showForm">
       <form [formGroup]="formLink">
-        <div fxLayout="row" fxLayoutGap="20px">
-          <div fxLayout="column" fxFlex="70" fxFlex.xs="100">
+        <div fxLayout="column" fxLayoutGap="0">
+          <div fxLayout="column" fxFlex="100" fxFlex.xs="100">
             <mat-form-field appearance="dashed" class="dashed mt-2">
               <input
                 id="url"
@@ -408,7 +408,12 @@
               />
             </mat-form-field>
           </div>
-          <div fxLayout="column" class="mt-2 share-desktop">
+          <div
+            fxLayout="row"
+            fxLayoutAlign="center space-between"
+            fxLayoutGap="10px"
+            class="mt-2 share-desktop"
+          >
             <button
               mat-button
               id="btnCopy"
@@ -418,10 +423,22 @@
               (click)="copyInputMessage(linkInput)"
             >
               <span
-                fxLayoutAlign="space-between center"
+                fxLayoutAlign="center space-between"
                 class="gtmInicioClicFiltroExitocomCopiarLink"
               >
                 {{ "GENERIC.COPY_LINK" | translate }}
+              </span>
+            </button>
+
+            <button
+              mat-button
+              id="buy"
+              color="orange"
+              class="orange-border"
+              (click)="buy()"
+            >
+              <span fxLayoutAlign="center space-between">
+                Comprar
               </span>
             </button>
           </div>
