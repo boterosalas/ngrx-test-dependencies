@@ -4,14 +4,27 @@
   <h2 class="border-bottom-orange-init">{{ "PROFILE.PROFILE" | translate }}</h2>
 
   <mat-tab-group #tabGroup>
-    <mat-tab label="Cuenta">
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+           <span class="gtmPerfilClicCuentaClickam">Cuenta</span>
+      </ng-template>
       <app-profile-form></app-profile-form>
-    </mat-tab>
-    <mat-tab label="Información adicional" *ngIf="(auth.getRole$ | async ) !== 'ADMIN'">
-      <app-aditional-info-form></app-aditional-info-form>
-    </mat-tab>
-  <mat-tab label="Gestionar pagos" *ngIf="(auth.getRole$ | async ) !== 'ADMIN' && managedPayments === false && isEmployee === false">
-    <app-payment-info></app-payment-info>
   </mat-tab>
+
+    <mat-tab *ngIf="(auth.getRole$ | async ) !== 'ADMIN'">
+      <ng-template mat-tab-label>
+           <span class="gtmPerfilClicInfoirmacionAdicionalClickam">Información adicional</span>
+      </ng-template>
+      <app-aditional-info-form></app-aditional-info-form>
+  </mat-tab>
+
+  <mat-tab *ngIf="(auth.getRole$ | async ) !== 'ADMIN' && managedPayments === false && isEmployee === false">
+    <ng-template mat-tab-label>
+         <span class="gtmPerfilClicGestionarPagosClickam">Gestionar pagos</span>
+    </ng-template>
+    <app-payment-info></app-payment-info>
+</mat-tab>
+
 </mat-tab-group>
 </div>

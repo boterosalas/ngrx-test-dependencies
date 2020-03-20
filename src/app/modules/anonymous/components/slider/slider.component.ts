@@ -42,6 +42,7 @@ export class SliderComponent implements OnInit {
   @Input() isSlider:boolean;
   @Input() showArrows:boolean;
   @Output() action = new EventEmitter();
+  @Input() Class: string;
 
   @ViewChild('slickModal', {static: false}) slickModal: SlickCarouselComponent;
 

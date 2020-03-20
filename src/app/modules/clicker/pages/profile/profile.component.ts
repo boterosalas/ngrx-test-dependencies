@@ -56,6 +56,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
      }
    })
 
+   setTimeout(() => {
+    document.querySelector('.mat-tab-label[aria-posinset="1"]').classList.add("gtmPerfilClicCuentaClickam");
+    document.querySelector('.mat-tab-label[aria-posinset="2"]').classList.add("gtmPerfilClicInfoirmacionAdicionalClickam");
+    if(document.querySelector('.mat-tab-label[aria-posinset="3"]')) {
+      document.querySelector('.mat-tab-label[aria-posinset="3"]').classList.add("gtmPerfilClicGestionarPagosClickam");
+    }
+  }, 1000);
+
   }
 
  public reset(file) {

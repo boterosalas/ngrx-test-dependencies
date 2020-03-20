@@ -52,14 +52,14 @@
   </mat-form-field>
 <div class="text-center">
     <button
-    class="button button-100 button-height gtmIniciarSesiónClicLtrlIniciarSesion"
+    class="button button-100 button-height gtmIniciarSesionClicLightboxIniciar"
     mat-raised-button
     id="login"
     color="orange"
     (click)="login()"
     [disabled]="!loginForm.valid"
   >
-   <span class="gtmIniciarSesiónClicLtrlIniciarSesion">{{ "LOGIN.LOGIN" | translate }}</span> 
+   <span class="gtmIniciarSesionClicLightboxIniciar">{{ "LOGIN.LOGIN" | translate }}</span> 
   </button>
   
 </div>
@@ -68,7 +68,7 @@
 
 <p
       id="forgotPass"
-      class="cursor-pointer f-13 text-decoration text-center gtmIniciarSesiónClicLtrlOlvidoClave"
+      class="cursor-pointer f-13 text-decoration text-center gtmIniciarSesionClicLightboxOlvidasteTuContrasena"
       (click)="showForgot()"
     >
       {{ "LOGIN.FORGOT_PASSWORD" | translate }}
@@ -77,8 +77,8 @@
      <button 
         mat-raised-button
         color="orange"
-        ngClass="orange-border button button-100 button-height mt-3"
+        ngClass="orange-border button button-100 button-height mt-3 gtmIniciarSesionClicLightboxRegistrarse"
         (click)="showRegister()"
-      >{{ "GENERIC.REGISTER2" | translate }}</button>
+      > <span class="gtmIniciarSesionClicLightboxRegistrarteAqui">{{ "GENERIC.REGISTER2" | translate }}</span></button>
 
 <app-footer fxHide.gt-xs="true"></app-footer> 

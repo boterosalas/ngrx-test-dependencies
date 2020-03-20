@@ -1,5 +1,5 @@
 <app-logo></app-logo>
-<app-slider [showArrows]="true" [isSlider]="true"  (action)="sliderOffers()"  [sliderMobile]="sliderMobile" [sliderWeb]="sliderWeb"></app-slider>
+<app-slider Class="gtmHomeClicBanner" [showArrows]="true" [isSlider]="true"  (action)="sliderOffers()"  [sliderMobile]="sliderMobile" [sliderWeb]="sliderWeb"></app-slider>
 
 
 <div class="container">
@@ -14,7 +14,7 @@
   <p class="f-20" fxHide.xs>{{ 'HOME.OFFERS_TEXT' | translate }}</p>
 </div>
 
-<app-slider [showArrows]="false" [isSlider]="true" fxShow.gt-xs="false" (action)="sliderOffers()" [sliderMobile]="offersMobile" [sliderWeb]="offersWeb" class="mb-3"></app-slider>
+<app-slider Class="gtmHomeClicOfertas" [showArrows]="false" [isSlider]="true" fxShow.gt-xs="false" (action)="sliderOffers()" [sliderMobile]="offersMobile" [sliderWeb]="offersWeb" class="mb-3"></app-slider>
 
-<app-slider [showArrows]="false" [isSlider]="false" fxShow.xs="false" (action)="sliderOffers()" [sliderMobile]="offersMobile" class="mb-3"></app-slider>
+<app-slider Class="gtmHomeClicOfertas" [showArrows]="false" [isSlider]="false" fxShow.xs="false" (action)="sliderOffers()" [sliderMobile]="offersMobile" class="mb-3"></app-slider>
 
