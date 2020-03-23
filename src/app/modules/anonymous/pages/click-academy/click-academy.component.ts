@@ -11,9 +11,9 @@ export class ClickAcademyComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      document.querySelector('.mat-tab-label[aria-posinset="1"]').classList.add("gtmAcademyClicSupExitocom");
-      document.querySelector('.mat-tab-label[aria-posinset="2"]').classList.add("gtmAcademyClicSupSeguros");
-      document.querySelector('.mat-tab-label[aria-posinset="3"]').classList.add("gtmAcademuClicSupViajes");
+      document.querySelector('.mat-tab-label[aria-posinset="1"]').classList.add("gtmClicAcademyClicExitocom");
+      document.querySelector('.mat-tab-label[aria-posinset="2"]').classList.add("gtmClicAcademyClicSeguros");
+      document.querySelector('.mat-tab-label[aria-posinset="3"]').classList.add("gtmClicAcademyClicViajes");
     }, 1000);
   }
 

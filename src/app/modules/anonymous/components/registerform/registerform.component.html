@@ -409,10 +409,10 @@
   
   <div>
     <span>
-      <mat-checkbox  formControlName="acceptTerms" id="chkaccept" (change)="acceptTermsCheck()">
+      <mat-checkbox class="gtmResgistraTuCuentaClicAceptarTerminosPoliticas"  formControlName="acceptTerms" id="chkaccept" (change)="acceptTermsCheck()">
       </mat-checkbox>
     </span>
-    <span class="accept-terms ml-2" (click)="termsAndConditions()">
+    <span class="accept-terms ml-2 cursor-pointer gtmResgistraTuCuentaClicAceptarTerminosPoliticas" (click)="termsAndConditions()">
       {{
       "REGISTER.ACCEPT" | translate
     }}
@@ -422,12 +422,12 @@
     <button
       mat-raised-button
       id="register"
-      class="mt-2 center button button-height button-100"
+      class="mt-2 center button button-height button-100 gtmRegistraTuCuentaClicContinuarDatosPrincipales"
       color="orange"
       (click)="register()"
       [disabled]="!registerForm.valid"
     >
-    {{ "GENERIC.CONTINUE" | translate }}
+    <span class="gtmRegistraTuCuentaClicContinuarDatosPrincipales">{{ "GENERIC.CONTINUE" | translate }}</span>
   </button>
 
 

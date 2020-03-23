@@ -10,6 +10,12 @@ export class TermsAndConditionsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    setTimeout(() => {
+      document.querySelector('.mat-tab-label[aria-posinset="1"]').classList.add("gtmTerminosCondicionesClicTerminosLegales");
+      document.querySelector('.mat-tab-label[aria-posinset="2"]').classList.add("gtmTerminosCondicionesClicEmprendedor");
+      document.querySelector('.mat-tab-label[aria-posinset="3"]').classList.add("gtmTerminosCondicionesClicProteccionDatos");
+    }, 1000);
+  
   }
 
 }
