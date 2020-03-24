@@ -10,12 +10,17 @@ body {
   margin: 0;
   font-family: $font-family-base;
   font-size: 0.9rem;
+  // overflow-x: hidden;
   // background: #fff;
+}
+
+.mat-drawer-container{
+  background: none !important;
 }
 
 .maincontent {
   overflow-x: hidden;
-  min-height: 520px;
+  // min-height: 520px;
 }
 
 .login {
@@ -26,6 +31,10 @@ body {
 
 .text-center {
   text-align: center;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
 }
 
 .h {
@@ -149,6 +158,10 @@ body {
   color: $primary-color;
 }
 
+.orange-text {
+  color: $primary-color;
+}
+
 .mat-orange {
   background: $primary-color;
   color: $white;
@@ -174,6 +187,10 @@ h6 {
 
 .galano-bold {
   font-family: $font-galano-bold;
+}
+
+.galano {
+  font-family: $font-galano;
 }
 
 .text-right {
@@ -270,6 +287,16 @@ button {
   &-100 {
     width: 100%;
     max-width: 100%;
+  }
+  &-height{
+    min-height: 48px;
+  }
+}
+
+.card-login{
+  footer{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 }
 
@@ -424,7 +451,7 @@ table {
 }
 
 .mat-raised-button.mat-primary {
-  padding: 0 30px;
+  padding: 0 10px;
 }
 
 .fullheight {
@@ -438,12 +465,31 @@ table {
   padding: 0px 30px;
 }
 
+
+.text-back {
+  padding: 2px 0;
+}
+
+.space {
+  min-width: 250px;
+}
+
 @media screen and (min-width: 600px) {
+
+  .store{
+    width: 220px;
+  }
+
+  .slick-dots li button:before {
+    font-size: 8px !important;
+  }
+
   .fullheight {
     width: 28%;
     right: 0;
     overflow-x: hidden;
     overflow-y: auto;
+    border-left: 1px solid #ccc;
   }
 
   .hide-pag {
@@ -536,7 +582,8 @@ table {
   }
 
   .mat-list-item-content {
-    padding: 0 25px !important;
+    // padding: 0 25px !important;
+    margin: 0 10px;
   }
 }
 
@@ -586,77 +633,77 @@ table {
   }
 }
 
-footer {
-  background: $footer-bg;
-  color: $white;
-  a {
-    cursor: pointer;
-    color: $white;
-  }
+// footer {
+//   background: $footer-bg;
+//   color: $white;
+//   a {
+//     cursor: pointer;
+//     color: $white;
+//   }
 
-  .social-links {
-    i {
-      font-size: 1.1rem;
-      color: $footer-social-links;
-      padding: 0 1.3rem;
-    }
+//   .social-links {
+//     i {
+//       font-size: 1.1rem;
+//       color: $footer-social-links;
+//       padding: 0 1.3rem;
+//     }
 
-    .orange {
-      color: $primary-color;
-      font-size: 1.5rem;
-    }
-  }
+//     .orange {
+//       color: $primary-color;
+//       font-size: 1.5rem;
+//     }
+//   }
 
-  .footer-links {
-    .border-bottom-orange {
-      &::after {
-        margin-top: 0.2rem;
-      }
-    }
-    .section {
-      font-family: $font-galano-bold;
-      padding: 0.8rem;
-    }
-    a {
-      color: $white;
-      text-decoration: none;
-    }
-    .item {
-      padding: 10px 10px;
-    }
-  }
+//   .footer-links {
+//     .border-bottom-orange {
+//       &::after {
+//         margin-top: 0.2rem;
+//       }
+//     }
+//     .section {
+//       font-family: $font-galano-bold;
+//       padding: 0.8rem;
+//     }
+//     a {
+//       color: $white;
+//       text-decoration: none;
+//     }
+//     .item {
+//       padding: 10px 10px;
+//     }
+//   }
 
-  .clickacedemy {
-    a {
-      font-size: $font-size-sm;
-      padding: 0.5rem 0;
-    }
-  }
+//   .clickacedemy {
+//     a {
+//       font-size: $font-size-sm;
+//       padding: 0.5rem 0;
+//     }
+//   }
 
-  .terms {
-    margin-top: 3rem;
-    a {
-      text-decoration: underline;
-      font-size: $font-size-sm - 0.1rem;
-      color: #b5b8bc;
-    }
-  }
+//   .terms {
+//     margin-top: 3rem;
+//     a {
+//       text-decoration: underline;
+//       font-size: $font-size-sm - 0.1rem;
+//       color: #b5b8bc;
+//     }
+//   }
 
-  .border-footer {
-    height: 2px;
-    background: #86888a;
-    width: 280px;
-  }
+//   .border-footer {
+//     height: 2px;
+//     background: #86888a;
+//     width: 280px;
+//   }
 
-  .copy {
-    font-size: $font-size-sm - 0.1rem;
-    color: #86888a;
-  }
+//   .copy {
+//     font-size: $font-size-sm - 0.1rem;
+//     color: #86888a;
+//   }
 
-  .rotate {
-    transform: rotate(180deg);
-  }
-}
+//   .rotate {
+//     transform: rotate(180deg);
+//   }
+// }
 
 @media screen and (min-width: 600px) {
   .terms {
@@ -858,8 +905,11 @@ th.mat-header-cell {
   background: #b5b8bc;
 }
 
-.slick-dots li button:before {
-  font-size: 12px;
+.slick-dots li {
+  margin: 0;
+  button:before{
+    font-size: 5px;
+  }
 }
 
 .mat-raised-button {
@@ -1021,6 +1071,14 @@ span.orange-border {
   }
 }
 
+.dashed .mat-form-field-infix{
+  padding: 9px !important;
+}
+
+button#btnCopy[disabled] {
+  background: #ececec;
+}
+
 button.swal2-confirm.updateok.order-last.swal2-styled {
   background-color: #FF6F11 !important;
   color: #fff !important;
@@ -1040,6 +1098,102 @@ button.swal2-cancel.updatecancel.swal2-styled {
 
 @media screen and (max-width: 768px) {
   .share-desktop{
-    display: none;
+    display: none !important;
   }
+
+  .mat-bottom-sheet-container {
+    padding: 8px 25px !important;
+  }
+  
+
+}
+
+.mat-toolbar{
+  background: #fff;
+  font-family: $font-galano-bold;
+}
+
+
+.no-focus{
+  outline: none;
+}
+
+.f{
+  &-11{
+    font-size: 11px;
+  }
+  &-12{
+    font-size: 12px;
+  }
+  &-13{
+    font-size: 13px;
+  }
+  &-14{
+    font-size: 14px;
+  }
+  &-15{
+    font-size: 15px;
+  }
+  &-16{
+    font-size: 16px;
+  }
+  &-17{
+    font-size: 17px;
+  }
+  &-18{
+    font-size: 18px;
+  }
+  &-19{
+    font-size: 19px;
+  }
+  &-20{
+    font-size: 20px;
+  }
+  &-21{
+    font-size: 21px;
+  }
+  &-22{
+    font-size: 22px;
+  }
+  
+}
+
+.lh{
+  &-20{
+    line-height: 20px;
+  }
+}
+
+app-product.no-slider img {
+  width: 345px;
+}
+
+.mat-tab-body-content{
+  overflow: hidden !important;
+}
+
+.mat-drawer{
+  padding: 0 15px;
+  // display: none;
+}
+
+.round-img{
+  img{
+    border-radius: 10px;
+  }
+}
+
+.op{
+  opacity: 0.7;
+  span{
+    line-height: 0 !important;
+  }
+}
+
+.mt-2.share-desktop button{
+  min-width: 125px;
+}
+
+.rotate {
+  transform: rotate(180deg);
 }

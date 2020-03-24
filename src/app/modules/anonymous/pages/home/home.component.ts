@@ -7,6 +7,8 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { trigger, state, style, transition, animate, group } from '@angular/animations';
 import { AuthService } from 'src/app/services/auth.service';
 import decode from 'jwt-decode';
+import { ContentService } from 'src/app/services/content.service';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 
 @Component({
@@ -53,13 +55,20 @@ export class HomeComponent implements OnInit, OnDestroy {
   isOpen = false;
   private subscription: Subscription = new Subscription();
   email: string;
+  bussiness: Array<any> = [];
+  sliderMobile: any;
+  sliderMobileOffers: any;
+  sliderWeb: any;
+  offersMobile: any;
+  offersWeb: any;
 
   constructor(
     public router: Router,
     private route: ActivatedRoute,
     private user: UserService,
     private utils: UtilsService,
-    private auth: AuthService
+    private auth: AuthService,
+    private content: ContentService
   ) {
 
     /**
@@ -88,8 +97,10 @@ export class HomeComponent implements OnInit, OnDestroy {
      */
 
      this.routeBased();
+     this.getBussiness();
+     this.getOffers();
+     this.slider();
 
-    
   }
 
   /**
@@ -146,18 +157,70 @@ export class HomeComponent implements OnInit, OnDestroy {
   openRegister() {
     this.utils.showRegisterForm();
   }
+  
+  @HostListener("over")
+  sliderOffers() {
+    let token = localStorage.getItem("ACCESS_TOKEN");
+    if(token === null) {
+        this.utils.showloginForm();
+    };
+  }
 
   private routeBased() {
     let token = localStorage.getItem("ACCESS_TOKEN");
     if (token !== null) {
       let tokenDecode = decode(token);
-      if(tokenDecode.role === "CLICKER") {
-        this.router.navigate(['/clicker']);
-      } else {
+      if(tokenDecode.role === "ADMIN") {
         this.router.navigate(['/dashboard']);
         this.auth.getRole$.next("ADMIN")
       }
     }
   }
+
+  public getBussiness() {
+    this.content.getBusiness()
+    .pipe(distinctUntilChanged())
+    .subscribe(bussiness => {
+      this.bussiness = bussiness;
+    })
+  }
+
+  public slider() {
+    this.subscription = this.content.getNews()
+    .pipe(distinctUntilChanged())
+    .subscribe((slide: any)=> {
+      this.sliderWeb = slide.web;
+      this.sliderMobile = slide.mobile;
+    });
+  }
+
+  public getOffers() {
+    this.subscription = this.content.getOffers()
+    .pipe(distinctUntilChanged())
+    .subscribe(offer => {
+      this.offersMobile = offer.mobile;
+      this.offersWeb = offer.web;
+    });
+  }
+
+  public bussinessNavigation(bussiness) {
+
+    let token = localStorage.getItem("ACCESS_TOKEN");
+    if(token === null) {
+        this.utils.showloginForm();
+    };
+
+    let params = {
+      id: bussiness.id,
+      code: bussiness.code,
+      infoAditional: bussiness.infoaditional,
+      imageurl: bussiness.imageurl
+    }
+    this.router.navigate(['/bussiness', {id: params.id, code: params.code, infoAditional: params.infoAditional, imageurl: params.imageurl}]);
+    
+    
+
+  }
+
 
 }

@@ -45,7 +45,7 @@
       class="item"
     >
       <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
-        "GENERIC.EMAIL" | translate
+        "GENERIC.EMAIL_SHORT" | translate
       }}</label>
       <span
         class="info"
@@ -82,7 +82,7 @@
       </span>
     </span>
 
-    <span
+    <span *ngIf="isEmployee === false && managedPayments === true"
       fxLayout="row"
       fxLayout.xs="column"
       fxLayoutGap="80px"
@@ -155,7 +155,7 @@
     </span>
   </mat-card>
 
-  <div *ngIf="isEmployee === false" class="mt-3">
+  <div *ngIf="isEmployee === false && managedPayments === true" class="mt-3">
     <mat-card class="p-0 mb-3 ml-1 mr-1">
       <span
         fxLayout="row"
@@ -192,6 +192,7 @@
       </span>
     </mat-card>
   </div>
+
 </div>
 
 <!-- template edit name and lastname -->
@@ -316,7 +317,7 @@
         matInput
         id="phone"
         type="text"
-        placeholder="{{ 'GENERIC.CELLPHONE' | translate }}"
+        placeholder="{{ 'GENERIC.CELLPHONE_SHORT' | translate }}"
         formControlName="phone"
         required
       />

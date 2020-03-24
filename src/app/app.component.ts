@@ -17,11 +17,16 @@ import {
   animate
 } from "@angular/animations";
 import { UtilsService } from "./services/utils.service";
-import { Subscription } from "rxjs";
+import { Subscription, Observable } from "rxjs";
 import { AuthService } from "./services/auth.service";
 import { BnNgIdleService } from "bn-ng-idle";
 import Swal from "sweetalert2";
-declare var dataLayer: any
+import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { map, shareReplay } from 'rxjs/operators';
+import { UserService } from './services/user.service';
+import { TokenService } from './services/token.service';
+declare var dataLayer: any;
+// import { MessagingService } from "./shared/messaging.service";
 
 @Component({
   selector: "app-root",
@@ -69,6 +74,13 @@ declare var dataLayer: any
   ]
 })
 export class AppComponent implements OnInit, OnDestroy {
+
+  // isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Web)
+  // .pipe(
+  //   map(result => result.matches),
+  //   shareReplay()
+  // );
+
   @ViewChild("templateCardLogin, TemplateCardRegister, TemplateCardForgot", {
     static: false
   })
@@ -86,63 +98,49 @@ export class AppComponent implements OnInit, OnDestroy {
   showAnimation1: boolean;
   showAnimation2: boolean;
   isLoggedIn: any;
+  message;
+  firstName:string;
+  lastName: string;
+  email: string;
+  userInfo:any;
+  managedPayments: boolean;
+  isEmployee: boolean;
 
   constructor(
     private translate: TranslateService,
     private router: Router,
     private utils: UtilsService,
     public auth: AuthService,
-    private bnIdle: BnNgIdleService
-  ) {
+    private bnIdle: BnNgIdleService,
+    private breakpointObserver: BreakpointObserver,
+    private user: UserService,
+    private token: TokenService
+    
+  ) // private messagingService: MessagingService
+  {
     translate.setDefaultLang("es");
     translate.use("es");
 
     this.subscription = router.events.subscribe((url: any) => {
       if (url instanceof NavigationStart) {
-        if (url.url === "/") {
-          this.isHome = true;
-          this.internal = false;
-        } else {
-          this.isHome = false;
-          this.internal = true;
-        }
         dataLayer.push({
-        event: 'pageview',
-        virtualPageURL: url.url
-      })
-
+          event: "pageview",
+          virtualPageURL: url.url
+        });
       }
-
     });
 
     this.isLoggedIn = this.auth.isLoggedIn();
 
-   this.subscription = this.auth.isLogged$.subscribe((val) => {
-      if(!!val) {
-        this.subscription = this.bnIdle.startWatching(3600).subscribe(res => {
-          if (res) {
-            localStorage.removeItem("ACCESS_TOKEN");
-            this.auth.getRole$.next(null);
-            this.auth.isLogged$.next(false);
-            Swal.fire({
-              title: "Ha expirado tu sesión",
-              text: 'Por favor vuelve a iniciar sesión',
-              type: "info",
-              confirmButtonText: "Volver al inicio",
-              confirmButtonClass: "init-sesssion",
-              allowOutsideClick: false
-            }).then(() => {
-              window.location.reload();
-            })
-          }
-        });
-      }
-
-    });
-    
   }
 
   ngOnInit() {
+    // const userId = 'user001';
+    // this.messagingService.requestPermission(userId)
+    // this.messagingService.receiveMessage()
+    // this.message = this.messagingService.currentMessage
+    
+    // this.email = this.userInfo.userName;
 
     this.showAnimation1 = true;
     this.innerWidth = window.innerWidth;
@@ -168,7 +166,15 @@ export class AppComponent implements OnInit, OnDestroy {
       this.showForgotForm = false;
     });
 
+    this.subscription = this.utils.showForgotFormEmit.subscribe(isOpenForgot => {
+      this.isOpen = isOpenForgot;
+      this.showRegisterForm = false;
+      this.showLoginForm = false;
+      this.showForgotForm = true;
+    });
+
     this.windowWidth();
+    this.getUserData();
   }
 
   public hideLogin() {
@@ -196,6 +202,20 @@ export class AppComponent implements OnInit, OnDestroy {
     this.showLoginForm = false;
   }
 
+  public getUserData() {
+    this.auth.getRole$.subscribe(role => {
+      if(role === 'CLICKER' || role === 'ADMIN') {
+        this.email = this.token.userInfo().userName;
+        this.user.getuserdata().subscribe(user => {
+        this.firstName = user.firstNames;
+        this.lastName = user.lastNames;
+        this.managedPayments = user.managedPayments;
+        this.isEmployee = user.isEmployeeGrupoExito;
+    });
+    }
+  })
+};
+
   onActivate(event) {
     let scrollToTop = window.setInterval(() => {
       let pos = window.pageYOffset;
@@ -214,6 +234,7 @@ export class AppComponent implements OnInit, OnDestroy {
   @HostListener("over")
   hideMenu() {
     this.utils.hideMenu();
+    console.log("click");
   }
 
   @HostListener("window:resize", ["$event"])

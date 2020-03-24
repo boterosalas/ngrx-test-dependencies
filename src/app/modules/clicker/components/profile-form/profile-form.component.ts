@@ -2,19 +2,16 @@ import {
   Component,
   OnInit,
   OnDestroy,
-  Output,
-  EventEmitter,
-  Input,
   ViewChild,
   TemplateRef
 } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subscription, Observable } from "rxjs";
-import { distinctUntilChanged, map, startWith } from "rxjs/operators";
+import { map, startWith } from "rxjs/operators";
 import { UserService } from "src/app/services/user.service";
 import { AuthService } from "src/app/services/auth.service";
 import { LoaderService } from "src/app/services/loader.service";
-import { MatDialogRef, MatDialog, MatSnackBar } from "@angular/material";
+import { MatDialog, MatSnackBar } from "@angular/material";
 import { DialogEditComponent } from "../dialog-edit/dialog-edit.component";
 import { ConfirmPasswordValidator } from "src/app/validators/confirm-password.validator";
 import { MasterDataService } from 'src/app/services/master-data.service';
@@ -63,6 +60,8 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   typeBankAccount: string;
   userId: string;
   isEmployee: boolean;
+  isEmployeeUser: boolean;
+  managedPayments: boolean;
   userInfo: any;
   filteredDepartments: Observable<any>;
   filteredCities: Observable<any>;
@@ -106,6 +105,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
         this.userId = val.userId;
         this.isEmployee = val.isEmployeeGrupoExito;
       }
+    
       this.formProfile();
       this.formProfileCell();
       this.formProfilePass();
@@ -116,7 +116,16 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     });
     this.accountBankForm();
     this.getBanks();
+    this.getUserData();
   }
+
+  public getUserData() {
+    this.subscription = this.user.getuserdata().subscribe(user => {
+        this.managedPayments = user.managedPayments;
+        this.isEmployeeUser = user.isEmployeeGrupoExito;
+    });
+  }
+  
 
   public formProfile() {
     this.profileForm = this.fb.group({
@@ -289,8 +298,9 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.userInfo.firstNames = this.profileForm.controls.name.value;
     this.userInfo.lastNames = this.profileForm.controls.lastName.value;
     this.userInfo.cellphone = this.profileFormCell.controls.phone.value;
+    this.userInfo.bankAccountNumber = null;
     this.subscription = this.user
-      .updateUser(this.userId, this.userInfo)
+      .updateUser(this.userInfo)
       .subscribe(
         (resp: any) => {
           if (resp.state === "Success") {
@@ -340,7 +350,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       password: btoa(this.profileFormPass.controls.actualPassword.value),
       newPassword:btoa(this.profileFormPass.controls.password.value)
     }
-    this.subscription = this.auth.changePassword(this.userId, data).subscribe(
+    this.subscription = this.auth.changePassword(data).subscribe(
       (resp: any) => {
         if (resp.state === "Success") {
           this.dialog.closeAll();
@@ -383,6 +393,11 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
         this.banks = res.objectResponse;
       });
   }
+
+  /**
+   * Metodo para autocompletar los departamentos
+   * @param departments 
+   */
 
   public displayDepartment(departments?: any): string | undefined {
     return departments ? departments.description : undefined;
@@ -442,8 +457,9 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.userInfo.address = this.addressForm.controls.address.value; 
     this.userInfo.department = this.departmentCode;
     this.userInfo.municipality = this.cityCode;
+    this.userInfo.bankAccountNumber = null;
     this.subscription = this.user
-    .updateUser(this.userId, this.userInfo)
+    .updateUser(this.userInfo)
     .subscribe(
       (resp: any) => {
         if (resp.state === "Success") {

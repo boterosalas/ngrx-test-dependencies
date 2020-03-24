@@ -9,12 +9,12 @@ import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UtilsService } from 'src/app/services/utils.service';
 import { JwtModule } from '@auth0/angular-jwt';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('MenuOptionsComponent', () => {
   let component: MenuOptionsComponent;
   let fixture: ComponentFixture<MenuOptionsComponent>;
 
-  // const mockAuthService = jasmine.createSpyObj("AuthService", ["getMenu$"]);
   const mockUtilsService = jasmine.createSpyObj("UtilsService", ["showRegisterForm", "hideMenu"]);
 
   let menuAnymous = {
@@ -41,6 +41,7 @@ describe('MenuOptionsComponent', () => {
       declarations: [ MenuOptionsComponent ],
       imports: [
         RouterTestingModule.withRoutes([]),
+        TranslateModule.forRoot(),
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
@@ -80,5 +81,12 @@ describe('MenuOptionsComponent', () => {
     expect(mockUtilsService.hideMenu).toHaveBeenCalled();
   });
 
+  it('hide sidenav', () => {
+    component.hide();
+  });
+  
+  it('go to terms', () => {
+    component.goTerms();
+  });
 
 });

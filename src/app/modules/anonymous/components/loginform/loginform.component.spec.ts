@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterTestingModule } from "@angular/router/testing";
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 describe("LoginformComponent", () => {
   let component: LoginformComponent;
@@ -22,15 +23,20 @@ describe("LoginformComponent", () => {
   const dataUser = {
     state: "Success",
     userMessage: null,
-    objectResponse:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU"
+    objectResponse: {token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU"}
+  };
+
+  const dataUserAdmin = {
+    state: "Success",
+    userMessage: null,
+    objectResponse: {token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJBRE1JTiIsImlkZW50aWZpY2F0aW9uIjoiMTIzNDU2IiwiZmlyc3RuYW1lcyI6IkRhdmlkIiwibGFzdG5hbWVzIjoiQmV0YW5jdXIiLCJkb2N1bWVudFR5cGUiOiJDw6lkdWxhIGRlIGNpdWRhZGFuw61hIiwidXNlcmlkIjoiNDk2IiwiZXhwIjoxNTc5MjMwMDgzLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.vjmluGEacAY_Wwf9cp0gm121-P1MoAcSCnyE-8M45EI"}
   };
 
   const dataUserInvalid = {
     state: "Error",
     userMessage: null,
     objectResponse:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc…VzIn0.Bcsm-qVHHtRcLlQae_5tVwGpgbPQJkCEQ97ZbwRxz_4"
+    {token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU"}
   };
 
   const InvalidRquest = {
@@ -58,21 +64,23 @@ describe("LoginformComponent", () => {
         RouterTestingModule.withRoutes([]),
         BrowserAnimationsModule,
         TranslateModule.forRoot({}),
-        MatPasswordStrengthModule
+        MatPasswordStrengthModule,
+        SharedModule
       ],
       providers: [
-        { provide: Router, useValue: mockRouter},
+        // { provide: Router, useValue: mockRouter},
         TranslateService,
-        { provide: AuthService, useValue: mockAuthService }
+        { provide: AuthService, useValue: mockAuthService },
       ],
       schemas: [
         NO_ERRORS_SCHEMA
       ]
     }).compileComponents();
-    mockAuthService.login.and.returnValue(of(dataUser));
+    
   }));
 
   beforeEach(() => {    
+    mockAuthService.login.and.returnValue(of(dataUser));
     fixture = TestBed.createComponent(LoginformComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -117,6 +125,7 @@ describe("LoginformComponent", () => {
       component.login();
       expect(mockAuthService.login).toHaveBeenCalled();
     });
+
   });
 
   describe("invalid request", () => {
@@ -131,4 +140,23 @@ describe("LoginformComponent", () => {
       component.login();
     });
   });
+
+  describe("Admin login", () => {
+    beforeEach(() => {
+
+      mockAuthService.login.and.returnValue(of(dataUserAdmin));
+      
+    });
+
+    it("login valid", () => {
+      component.isSubmitted = true;
+      component.loginForm.controls.Username.setValue("test@test.com");
+      component.loginForm.controls.Password.setValue("123456789");
+      component.login();
+      expect(component.loginForm.invalid).toBeFalsy();
+      expect(mockAuthService.login).toHaveBeenCalled();
+    });
+
+  });
+
 });

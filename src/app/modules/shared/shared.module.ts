@@ -9,7 +9,6 @@ import { LoaderComponent } from "./components/loader/loader.component";
 import { DialogComponent } from "./components/dialog/dialog.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { WhatsappComponent } from "./components/whatsapp/whatsapp.component";
 import { HeaderComponent } from './components/header/header.component';
 import { MatListModule, MatRippleModule, MatMenuModule } from '@angular/material';
 import { SociallinksComponent } from './components/sociallinks/sociallinks.component';
@@ -19,6 +18,17 @@ import { RouterModule } from '@angular/router';
 import { MenuOptionsComponent } from './components/menu-options/menu-options.component';
 import { UnderConstructionComponent } from './components/under-construction/under-construction.component';
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
+import { AppStoreComponent } from './components/app-store/app-store.component';
+import { LogoComponent } from './components/logo/logo.component';
+import { ProductComponent } from './components/product/product.component';
+import { BackNavigationComponent } from './components/back-navigation/back-navigation.component';
+import { ModalGenericComponent } from './components/modal-generic/modal-generic.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+
 
 @NgModule({
   declarations: [
@@ -27,13 +37,17 @@ import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
     LoaderComponent,
     DialogComponent,
     FooterComponent,
-    WhatsappComponent,
     HeaderComponent,
     SociallinksComponent,
     TopComponent,
     MenuOptionsComponent,
     UnderConstructionComponent,
-    TruncatePipe
+    TruncatePipe,
+    AppStoreComponent,
+    LogoComponent,
+    ProductComponent,
+    BackNavigationComponent,
+    ModalGenericComponent,
   ],
   imports: [
     CommonModule,
@@ -46,14 +60,18 @@ import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
     MatRippleModule,
     MatMenuModule,
     GoogleChartsModule,
-    RouterModule
+    RouterModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule
   ],
   exports: [
     SearchComponent,
     NotFoundComponent,
     LoaderComponent,
     FooterComponent,
-    WhatsappComponent,
     HeaderComponent,
     MatListModule,
     MatRippleModule,
@@ -64,7 +82,13 @@ import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
     RouterModule,
     MenuOptionsComponent,
     UnderConstructionComponent,
-    TruncatePipe
+    TruncatePipe,
+    LogoComponent,
+    ProductComponent,
+    BackNavigationComponent
+  ],
+  entryComponents: [
+    ModalGenericComponent
   ]
 })
 export class SharedModule {}

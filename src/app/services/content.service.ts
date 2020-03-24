@@ -30,6 +30,8 @@ export class ContentService {
   apiOffers= 'offer/getOffers';
   apiCategories= 'offer/getCategories';
   apiProducts = 'product';
+  apiGetBusiness = 'business/getBusiness';
+  apiGetBusinessContent = 'business/getContent';
   sendSearch = {};
 
   public getNews() {
@@ -46,6 +48,22 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiNews}`, httpOptions).pipe(
       map((user: ResponseService) => {
         return user.objectResponse;
+      })
+    );
+  }
+
+  public getBusiness() {
+    return this.http.get(`${this.url + this.apiGetBusiness}`, this.httpOptions).pipe(
+      map((user: ResponseService) => {
+        return user.objectResponse;
+      })
+    );
+  }
+
+  public getBusinessContent(id: string) {
+    return this.http.get(`${this.url + this.apiGetBusinessContent}?idBusiness=${id}`, this.httpOptions).pipe(
+      map((business: ResponseService) => {
+        return business.objectResponse;
       })
     );
   }
@@ -121,15 +139,6 @@ export class ContentService {
       })
     );
   }
-
-  // public getProductsPagination(params: {term: string, from:number, to:number}){
-  //   const apiSearchVetex = `${this.apiProducts}/getProducts?ft=${params.term}&_from=${params.from}&_to=${params.to}&fq=1`
-  //   return this.http.get(`${this.url + apiSearchVetex}`, this.httpOptions).pipe(
-  //     map((user: any) => {
-  //       return user.objectResponse;
-  //     })
-  //   );
-  // }
 
   public getProductsPagination(params: {term: any, from:number, to:number, order: string}){
     const token = localStorage.getItem("ACCESS_TOKEN");

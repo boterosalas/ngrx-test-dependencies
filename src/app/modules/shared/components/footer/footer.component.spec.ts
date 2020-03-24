@@ -5,10 +5,16 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
   let fixture: ComponentFixture<FooterComponent>;
+
+  let router = {
+    navigate: jasmine.createSpy('navigate')
+  }
+  
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -18,6 +24,7 @@ describe('FooterComponent', () => {
        imports: [
         HttpClientTestingModule,
         RouterTestingModule.withRoutes([]),
+        TranslateModule.forRoot(),
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
@@ -47,4 +54,10 @@ describe('FooterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('go to terms', () => {
+    component.goTerms();
+  });
+  
+
 });

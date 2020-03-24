@@ -1,17 +1,17 @@
+<app-logo></app-logo>
+
 <div class="container mb-4">
   <h2 class="border-bottom-orange-init">{{ "PROFILE.PROFILE" | translate }}</h2>
 
-  <mat-tab-group>
+  <mat-tab-group #tabGroup>
     <mat-tab label="Cuenta">
       <app-profile-form></app-profile-form>
-      <app-aditional-files
-        *ngIf="verified === false"
-        (uploadFile)="sendFiles($event)"
-        (resetForm)="reset($event)"
-      ></app-aditional-files>
     </mat-tab>
-    <mat-tab label="Información adicional">
+    <mat-tab label="Información adicional" *ngIf="(auth.getRole$ | async ) !== 'ADMIN'">
       <app-aditional-info-form></app-aditional-info-form>
     </mat-tab>
-  </mat-tab-group>
+  <mat-tab label="Gestionar pagos" *ngIf="(auth.getRole$ | async ) !== 'ADMIN' && managedPayments === false && isEmployee === false">
+    <app-payment-info></app-payment-info>
+  </mat-tab>
+</mat-tab-group>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
 import {
   FormGroup,
   Validators,
@@ -75,6 +75,7 @@ export class LoginformComponent implements OnInit, OnDestroy {
         if (resp.state === "Success") {
           
           localStorage.setItem("ACCESS_TOKEN", resp.objectResponse.token);
+          localStorage.setItem("REFRESH_TOKEN", resp.objectResponse.refreshToken);
           this.utils.hideloginForm();
           this.routeBased();
           
@@ -116,17 +117,29 @@ export class LoginformComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  @HostListener('over')
+  hideLogin() {
+    this.utils.hideloginForm();
   }
 
-  /** Al momento de hacer login determina la ruta por el perfil de usuario */
+  @HostListener('over')
+  showRegister() {
+    this.utils.showRegisterForm();
+  }
 
+  @HostListener('over')
+  showForgot() {
+    this.utils.showForgot();
+  }
+
+  
+  /** Al momento de hacer login determina la ruta por el perfil de usuario */
+  
   private routeBased() {
     let token = localStorage.getItem("ACCESS_TOKEN");
     let tokenDecode = decode(token);
     if(tokenDecode.role === "CLICKER") {
-      this.router.navigate(['/clicker']);
+      this.router.navigate(['/inicio']);
       this.authService.isLogged$.next(true);
     } else {
       this.router.navigate(['/dashboard']);
@@ -134,6 +147,9 @@ export class LoginformComponent implements OnInit, OnDestroy {
       this.authService.getRole$.next("ADMIN")
     }
   }
-
+  
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
 }

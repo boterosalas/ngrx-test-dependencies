@@ -4,6 +4,9 @@ import { ClickAcademyComponent } from './click-academy.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { RouterTestingModule } from '@angular/router/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('ClickAcademyComponent', () => {
   let component: ClickAcademyComponent;
@@ -15,8 +18,11 @@ describe('ClickAcademyComponent', () => {
       imports: [
         TranslateModule.forRoot({}),
         AppMaterialModule,
-        BrowserAnimationsModule
-      ]
+        BrowserAnimationsModule,
+        SharedModule,
+        RouterTestingModule,
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));

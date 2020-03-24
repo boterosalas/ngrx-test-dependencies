@@ -15,6 +15,7 @@ import { DialogEditComponent } from '../dialog-edit/dialog-edit.component';
 import { MatDialogRef } from '@angular/material';
 import { MasterDataService } from 'src/app/services/master-data.service';
 import { of } from 'rxjs/internal/observable/of';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 
 describe('ProfileFormComponent', () => {
   let component: ProfileFormComponent;
@@ -105,6 +106,8 @@ let banks = [
         AppMaterialModule,
         FormsModule,
         HttpClientTestingModule,
+        AppMaterialModule,
+        MatPasswordStrengthModule,
         BrowserAnimationsModule,
         RouterTestingModule.withRoutes([]),
         JwtModule.forRoot({
@@ -123,7 +126,7 @@ let banks = [
         { provide: MasterDataService, useValue: mockMasterDataService }
       ],
       schemas: [
-        NO_ERRORS_SCHEMA
+        // NO_ERRORS_SCHEMA
       ],
     }).overrideModule(BrowserDynamicTestingModule, {
       set: {

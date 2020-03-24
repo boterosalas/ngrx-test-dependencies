@@ -15,6 +15,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { LinksService } from 'src/app/services/links.service';
 import * as moment from 'moment';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { DialogEditComponent } from 'src/app/modules/clicker/components/dialog-edit/dialog-edit.component';
 moment.locale('es');
 
 describe("UsersComponent", () => {
@@ -95,9 +96,16 @@ describe("UsersComponent", () => {
     }
   ];
 
+  let user =  {
+    userId: '1',
+    email: 'david.betancur@pragma.com.co',
+    templateEmail: [],
+    title: 'Actualizar correo'
+  }
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [],
+      declarations: [DialogEditComponent],
       imports: [
         AppMaterialModule,
         TranslateModule.forRoot({}),
@@ -124,7 +132,7 @@ describe("UsersComponent", () => {
     })
       .overrideModule(BrowserDynamicTestingModule, {
         set: {
-          entryComponents: [DialogUserComponent]
+          entryComponents: [DialogUserComponent, DialogEditComponent]
         }
       })
       .compileComponents();
@@ -172,6 +180,19 @@ describe("UsersComponent", () => {
       component.getUserExcel();
       expect(mockLinksService.getUsersExcel).toHaveBeenCalled();
   });
+
+  it('change email', () => {
+    component.changeEmail();
+  });
+  
+  it('open modal', () => {
+    component.userEmail(user);
+  });
+
+  it('update email', () => {
+    component.updateEmail();
+  });
+  
   
 
 });

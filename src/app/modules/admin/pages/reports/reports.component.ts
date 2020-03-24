@@ -3,14 +3,12 @@ import {
   OnInit,
   ViewChild,
   TemplateRef,
-  ElementRef,
   ChangeDetectorRef,
   OnDestroy
 } from "@angular/core";
 import { LinksService } from "src/app/services/links.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "src/app/services/auth.service";
-import { distinctUntilChanged } from "rxjs/operators";
 import { UserService } from "src/app/services/user.service";
 import Swal from "sweetalert2";
 import { ResponseService } from "src/app/interfaces/response";
@@ -27,7 +25,6 @@ import { MatSnackBar } from '@angular/material';
 })
 export class ReportsComponent implements OnInit, OnDestroy {
   @ViewChild("templateCardReport, templateCardCross", { static: false })
-  // @ViewChild('input',{ static: false }) input: ElementRef;
   template: TemplateRef<any>;
 
   fileUrl: string;
@@ -83,12 +80,12 @@ export class ReportsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getFileReport();
 
-    this.usersService.userInfo$
-    .subscribe(val => {
-      if (!!val) {
-       this.email = val.email;
-      }
-    });
+    // this.usersService.userInfo$
+    // .subscribe(val => {
+    //   if (!!val) {
+    //    this.email = val.email;
+    //   }
+    // });
 
     this.nameFile = "";
     this.nameFilePayment = "";
@@ -116,25 +113,10 @@ export class ReportsComponent implements OnInit, OnDestroy {
         validator: [ValidateDate.CompareDates]
       }
     );
-
-    /**
-     * verifica si el usuario esta logueado y se obtiene la identificacion
-     */
-
-    this.isLoggedIn = this.auth.isLoggedIn();
-    if (this.isLoggedIn) {
-      this.subscription = this.user.userInfo$
-        .pipe(distinctUntilChanged())
-        .subscribe(val => {
-          if (!!val) {
-            this.userName = val.email;
-          }
-        });
-    }
   }
 
   public getFileReport() {
-    this.file.getFileReport().subscribe(file => {
+    this.subscription = this.file.getFileReport().subscribe(file => {
       this.fileUrl = file;
     });
   }
@@ -303,7 +285,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
       dateStart: this.dateForm.controls.dateStart.value,
       dateEnd: this.dateForm.controls.dateEnd.value
     };
-    this.file.downloadReferrals(dates).subscribe((resp: ResponseService) => {
+    this.subscription = this.file.downloadReferrals(dates).subscribe((resp: ResponseService) => {
       let file = resp.objectResponse;
       let contentType = "application/vnd.ms-excel";
       const linkSource = `data:${contentType};base64,${file}`;
@@ -337,14 +319,13 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
   public getReportClickam() {
     this.dateParams = {
-      email: this.email,
       start: this.dateFormSell.controls.dateRange.value.startDate.format(),
       end: this.dateFormSell.controls.dateRange.value.endDate.format()
     }
     
    this.subscription = this.file.getReportClickam(this.dateParams).subscribe((resp: ResponseService) => {
       if(resp.state === 'Success') {
-        this.openSnackBar(resp.userMessage + ' a ' + this.email, 'Cerrar');
+        this.openSnackBar(resp.userMessage, 'Cerrar');
         this.dateFormSell.reset();
         if (this.dateFormSell.controls.dateRange.value.startDate === null) {
           this.disButon = true;

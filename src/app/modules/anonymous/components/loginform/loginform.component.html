@@ -1,3 +1,7 @@
+<app-top title="Login y registro" (close)="hideLogin()"></app-top> 
+
+<h3 class="text-center title-login">{{ 'LOGIN.LOGIN' | translate }}</h3>
+
 <form class="login-container" [formGroup]="loginForm">
   <mat-form-field>
     <input
@@ -48,7 +52,7 @@
   </mat-form-field>
 <div class="text-center">
     <button
-    class="button button-100 gtmIniciarSesiónClicLtrlIniciarSesion"
+    class="button button-100 button-height gtmIniciarSesiónClicLtrlIniciarSesion"
     mat-raised-button
     id="login"
     color="orange"
@@ -61,3 +65,20 @@
 </div>
  
 </form>
+
+<p
+      id="forgotPass"
+      class="cursor-pointer f-13 text-decoration text-center gtmIniciarSesiónClicLtrlOlvidoClave"
+      (click)="showForgot()"
+    >
+      {{ "LOGIN.FORGOT_PASSWORD" | translate }}
+    </p>
+
+     <button 
+        mat-raised-button
+        color="orange"
+        ngClass="orange-border button button-100 button-height mt-3"
+        (click)="showRegister()"
+      >{{ "GENERIC.REGISTER2" | translate }}</button>
+
+<app-footer fxHide.gt-xs="true"></app-footer> 

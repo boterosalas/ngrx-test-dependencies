@@ -45,12 +45,6 @@ export class AuditComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.usersService.userInfo$
-    .subscribe(val => {
-      if (!!val) {
-       this.email = val.email;
-      }
-    });
 
     this.dateForm = this.fb.group(
       {
@@ -60,16 +54,17 @@ export class AuditComponent implements OnInit, OnDestroy {
 
   }
 
+  // Metodo para exportar la auditoria
+
   public exportAudit() {
     this.dateParams = {
-      email: this.email,
       start: this.dateForm.controls.dateRange.value.startDate.format(),
       end: this.dateForm.controls.dateRange.value.endDate.format()
     }
     
    this.subscription = this.file.getAudit(this.dateParams).subscribe((resp: ResponseService) => {
       if(resp.state === 'Success') {
-        this.openSnackBar(resp.userMessage + ' a ' + this.email, 'Cerrar');
+        this.openSnackBar(resp.userMessage, 'Cerrar');
         this.dateForm.reset();
         if (this.dateForm.controls.dateRange.value.startDate === null) {
           this.disButon = true;

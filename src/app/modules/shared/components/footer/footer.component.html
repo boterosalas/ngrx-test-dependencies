@@ -1,31 +1,27 @@
-<footer class="p-4">
-  <div fxLayout.gt-xs="row" fxLayout.lt-md="column" fxLayoutAlign.gt-xs="flex-start flex-start" fxLayoutAlign.lt-md="center center" class="mt-2">
-      
-    <span fxLayout.gt-xs="column" fxFlex.gt-xs="25" class="pt-1 border-bottom-orange">
-          <img src="assets/img/logo-footer.svg" alt="Clickam" />
-      </span>
-
-    <div fxLayoutAlign="center center" fxFlex.gt-xs="25" ngClass.xs="social-links pt-4" ngClass.gt-xs="pt-3 social-links"  fxFlexOrder.gt-md="4" fxFlexOrder.md="4">
-      <img [fxShow.gt-xs]="false" src="assets/img/arrow-footer.svg" alt="Clickam" />
-      <app-sociallinks></app-sociallinks>
-      <img [fxShow.gt-xs]="false" class="rotate" src="assets/img/arrow-footer.svg" alt="Clickam" />
+<footer class="text-center border-gray mt-3">
+  <div fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-around center" ngClass.gt-xs="pt-4">
+    <div fxLayout.gt-xs="row">
+      <h3 class="pr-3"> {{ 'FOOTER.AVAILABLE_IN' | translate }}</h3>
+      <app-app-store></app-app-store>
     </div>
-
-    <div fxLayout.gt-xs="column" fxLayout.lt-md="column" fxLayoutAlign="center center" fxFlex.gt-xs="50">
-
-    <div ngClass.lt-md="footer-links pt-4" ngClass.gt-xs="footer-links" fxLayout.lt-md="column" fxLayout.gt-xs="row"  fxFlex.gt-xs="33" fxLayoutAlign="center center">
-        <app-menu-options section="footerMenu" aligment="center center"></app-menu-options>
+  
+    <div fxLayout.gt-xs="row">
+      <h3 class="pr-3"> {{ 'FOOTER.FOLLOW_US' | translate }}</h3>
+      <div fxLayoutAlign="center center" class="social-links">
+        <img  src="assets/img/arrow-footer.svg" alt="Clickam" />
+        <app-sociallinks></app-sociallinks>
+        <img  class="rotate" src="assets/img/arrow-footer.svg" alt="Clickam" />
+      </div>
     </div>
-
-
-    <div class="terms gtmHomeClicInfTerminos" id="terms-footer" fxLayout="row"  fxFlex.gt-xs="100" fxLayoutAlign="center center">
-        <a [routerLink]="['terminos-y-condiciones']" class="gtmHomeClicInfTerminos">Términos y condiciones</a>
-    </div>
-  <div fxLayout.lt-md="column" fxLayout.gt-xs="column" fxLayoutAlign="center center" class="width-border">
-    <div  class="border-footer mt-3"></div>
-    <span class="copy pt-3">Copyright 2019 &copy;</span>
   </div>
-    </div>
-    
-  </div>
+
+
+  <div class="terms gtmHomeClicInfTerminos" id="terms-footer" fxLayout="column" fxLayoutAlign="center center">
+    <a (click)="goTerms()" class="cursor-pointer gtmHomeClicInfTerminos">Términos y condiciones</a>
+</div>
+
+<div fxLayout="column" fxLayoutAlign="center center" class="width-border">
+  <span class="copy pt-3 pb-3">{{ 'GENERIC.COPYRIGHT' | translate }} &copy;</span>
+</div>
+
 </footer>

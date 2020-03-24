@@ -1,7 +1,8 @@
 {
   "GENERIC": {
-    "EMAIL": "Correo",
-    "CONFIRM_EMAIL": "Confirmar Correo",
+    "EMAIL": "Correo electrónico",
+    "EMAIL_SHORT": "Correo",
+    "CONFIRM_EMAIL": "Confirmar Correo electrónico",
     "CONFIRM_EMAIL_PATTERN": "Los correos no son iguales",
     "PASSWORD": "Contraseña",
     "CONFIRM_PASSWORD": "Confirmar Contraseña",
@@ -9,6 +10,7 @@
     "NAME": "Nombres",
     "LASTNAME": "Apellidos",
     "CELLPHONE": "Celular",
+    "CELLPHONE_SHORT": "Número de celular",
     "ADDRESS": "Dirección",
     "DOCUMENT_NUMBER": "Número de documento",
     "DOCUMENT": "Documento",
@@ -16,6 +18,7 @@
     "NEXT": "Siguiente",
     "REGISTER": "Registro",
     "REGISTER2": "Registrarse",
+    "CONTINUE": "Continuar",
     "INVALID_FORMAT": "El campo {{val}} no puede contener caracteres especiales",
     "MAX_CHARACTERS": "El número máximo de caracteres es {{maxchar}}",
     "MIN_CHARACTERS": "El número mínimo de caracteres es {{minchar}}",
@@ -36,17 +39,27 @@
     "REFERENCE_TEXT": "O puedes referenciar a un cliente con su número de cédula",
     "TRIPS_MSJ": "Refiere con cédula, si y solo si, tú serás quien pague en Viajes Éxito",
     "REFERENCE": "Referenciar",
-    "REFERENCE_IDENTIFICATION": "Ingresa la cédula del cliente a referir"
+    "REFERENCE_IDENTIFICATION": "Ingresa la cédula del cliente a referir",
+    "PERCENT": "Hasta 9.6%",
+    "SUPPORT": "Soporte",
+    "EMAIL_SUPPORT": "soporte.clickam@grupoexito.com",
+    "COMPLETE_REGISTER": "Completa tu registro",
+    "COMPLETE_REGISTER_INFO": "Recuerda que para obtener tus pagos es necesario completar tu registro.",
+    "COPYRIGHT": "Copyright 2020"
+  },
+  "FOOTER": {
+    "FOLLOW_US": "Síguenos",
+    "AVAILABLE_IN": "Disponible en"
   },
   "LOGIN": {
     "LOGIN": "Iniciar sesión",
     "INVALID_EMAIL": "Email inválido",
     "INVALID_PASSWORD": "Contraseña invalida",
-    "FORGOT_PASSWORD": "¿Olvidó su contraseña?",
+    "FORGOT_PASSWORD": "Olvidaste tu contraseña",
     "INTRODUCE_EMAIL": "Ingrese un correo",
     "INTRODUCE_PASSWORD": "Ingrese una contraseña",
     "DESCRIPTION": "Si todavía no tienes una cuenta puedes",
-    "REGISTER": "registrarte aquí"
+    "REGISTER": "Registrarse"
   },
   "REGISTER": {
     "ACCEPT": "¿Acepta los términos y condiciones y políticas de privacidad de Clickam?",
@@ -73,7 +86,8 @@
     "ACCOUNT_CERT": "Certificación bancaria",
     "NO_FILE": "Ningún archivo seleccionado",
     "ERROR_DEPARTMENT": "Selecciona un departamento",
-    "ERROR_CITY": "Selecciona una ciudad"
+    "ERROR_CITY": "Selecciona una ciudad",
+    "REGISTER_ACCOUNT": "Registra tu cuenta"
   },
   "FORGOTPASSWORD": {
     "FORGOT_PASSWORD": "Recuperar contraseña",
@@ -84,7 +98,7 @@
     "ENTER_PASSWORD": "Por favor, introduzca su nueva contraseña"
   },
   "PRODUCTS": {
-    "GET_LINK": "Crear link"
+    "GET_LINK": "Clickear"
   },
   "HOME": {
     "TITLE_SPEND": "¿Cuánto gano?",
@@ -101,7 +115,14 @@
     "TITLE_SEARCH": "Busca y crea un link",
     "DESCRIPTION_SEARCH": "Elige el negocio asociado, selecciona un producto o servicio y compártelo para ganar ingresos adicionales.",
     "MY_COMMISSIONS":"Mis comisiones",
-    "PAYMENT":"*Este valor te será consignado en el próximo pago."
+    "PAYMENT":"*Este valor te será consignado en el próximo pago.",
+    "BUSSINESS": "Negocios",
+    "BUSSINESS_TEXT": "Obtén ganancias refiriendo o comprando en cada negocio",
+    "OFFERS": "Ofertas",
+    "OFFERS_TEXT": "Descubre nuestras ofertas, refiere y obtén ganancias refiriendo ó comprando"
+  },
+  "BUSSINESS": {
+    "CATEGORIES": "Categorías"
   },
   "HEADER": {
     "PROFILE": "Mi perfil",

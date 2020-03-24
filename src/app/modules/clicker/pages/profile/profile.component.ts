@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { distinctUntilChanged } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import Swal from "sweetalert2";
 import { ResponseService } from 'src/app/interfaces/response';
+import { ActivatedRoute } from '@angular/router';
+import { MatTabGroup } from '@angular/material';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
   userId:string;
@@ -26,20 +27,35 @@ export class ProfileComponent implements OnInit {
   bankAccountNumber: string;
   typeBankAccount: string;
   verified: boolean;
+  @ViewChild('tabGroup', {static: true}) tabGroup: MatTabGroup;
+  managedPayments: boolean;
+  isEmployee: boolean;
 
   constructor(
     private user: UserService,
-    private auth: AuthService
+    public auth: AuthService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-   this.user.userInfo$.subscribe((val)=> {
+   this.user.getProfile();
+   this.getUserData();
+   this.subscription = this.user.userInfo$.subscribe((val)=> {
      if(!!val) {
        this.userId = val.userId;
        this.id = val.identification;
        this.verified = val.verified;
      }
    })
+
+   this.route.params.subscribe(param => {
+     if(param.pagos === 'pagos') {
+       setTimeout(() => {
+         this.tabGroup.selectedIndex = 2
+       }, 500);
+     }
+   })
+
   }
 
  public reset(file) {
@@ -50,6 +66,11 @@ export class ProfileComponent implements OnInit {
     file.nameFileCert = "";
     file.fileBankCertificate = null;
   }
+
+  /**
+   * Metodo para enviar los archivos bancarios y de identificacion del usuario
+   * @param files 
+   */
   
   public sendFiles(files) {
 
@@ -64,7 +85,7 @@ export class ProfileComponent implements OnInit {
 
     
 
-    this.user.uploadFiles(sendvalues).subscribe((res:ResponseService) => {
+    this.subscription = this.user.uploadFiles(sendvalues).subscribe((res:ResponseService) => {
       if(res.state !== 'Error') {
         Swal.fire({
           title: "Carga de archivos correcta",
@@ -86,6 +107,18 @@ export class ProfileComponent implements OnInit {
       }
     });
 
+  }
+
+  public getUserData() {
+    this.subscription = this.user.getuserdata().subscribe(user => {
+        this.managedPayments = user.managedPayments;
+        this.isEmployee = user.isEmployeeGrupoExito;
+    });
+  }
+  
+
+  ngOnDestroy(): void {
+   this.subscription.unsubscribe();
   }
 
 }

@@ -4,8 +4,6 @@ import {
   Inject
 } from "@angular/core";
 import {
-  MatDialogRef,
-  MAT_DIALOG_DATA,
   MatBottomSheetRef,
   MAT_BOTTOM_SHEET_DATA
 } from "@angular/material";
@@ -18,9 +16,7 @@ import {
 export class DialogComponent implements OnInit {
   constructor(
     public dialogRef: MatBottomSheetRef<any>,
-    // public dialogRef: MatDialogRef<any>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
-    // @Inject(MAT_DIALOG_DATA) public data: any,
   ) {}
 
   onNoClick(): void {

@@ -8,6 +8,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 import decode from "jwt-decode";
 import { Forgotpassword } from '../interfaces/forgotpassword';
 import { Recoverpassword } from '../interfaces/recoverpassword';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: "root"
@@ -16,7 +17,7 @@ export class AuthService implements OnDestroy {
   constructor(
     private http: HttpClient,
     private router: Router,
-    public jwtHelper: JwtHelperService
+    public jwtHelper: JwtHelperService,
   ) {
     this.isLogged$.subscribe(val => {
       this.getRole();
@@ -41,6 +42,7 @@ export class AuthService implements OnDestroy {
   apiForgotPassword = 'Authentication/recoveryPassword';
   apiRecoverPassword = 'Authentication/resetpassword';
   apiChangePassword = 'Authentication/changePassword';
+  apiRefresh = "token/refresh"
 
   role = "";
 
@@ -69,7 +71,8 @@ export class AuthService implements OnDestroy {
   }
 
   public logout() {
-    localStorage.removeItem("ACCESS_TOKEN");
+    localStorage.clear();
+    localStorage.removeItem('initials');
     this.router.navigate(["/"]);
     this.getRole$.next(null);
     this.isLogged$.next(false);
@@ -113,7 +116,7 @@ export class AuthService implements OnDestroy {
         );
   }
 
-  public changePassword(id: any, data:any) {
+  public changePassword(data:any) {
     const token = localStorage.getItem("ACCESS_TOKEN");
     const authorization = token;
 
@@ -129,6 +132,12 @@ export class AuthService implements OnDestroy {
 
   public forgotPassword(username: Forgotpassword) {
     return this.http.post((`${this.url + this.apiForgotPassword}`),{email:username}, this.httpOptions);
+  }
+
+  public refreshToken() {
+    const accesstoken = localStorage.getItem("ACCESS_TOKEN");
+    const refreshtoken = localStorage.getItem("REFRESH_TOKEN");
+    return this.http.post((`${this.url + this.apiRefresh}`), {accesstoken, refreshtoken}, this.httpOptions );
   }
 
   public recoverPassword(password: Recoverpassword) {

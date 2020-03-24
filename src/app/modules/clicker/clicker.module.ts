@@ -1,16 +1,12 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { HomeComponent } from "./pages/home/home.component";
 import { Routes, RouterModule } from "@angular/router";
 import { AppMaterialModule } from "../shared/app-material/app-material.module";
 import { SharedModule } from "../shared/shared.module";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { ProductComponent } from "./components/product/product.component";
 import { TranslateModule } from "@ngx-translate/core";
 import { DialogComponent } from "../shared/components/dialog/dialog.component";
-import { SliderComponent } from "./components/slider/slider.component";
 import { SlickCarouselModule } from "ngx-slick-carousel";
-import { TabsComponent } from "./components/tabs/tabs.component";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MonthResumeComponent } from "./components/month-resume/month-resume.component";
 import { GeneralResumeComponent } from "./components/general-resume/general-resume.component";
@@ -28,11 +24,15 @@ import { MatPasswordStrengthModule } from "@angular-material-extensions/password
 import { CardDataComponent } from './components/card-data/card-data.component';
 import { DialogHistoryComponent } from './components/dialog-history/dialog-history.component';
 import { ShareModule } from '@ngx-share/core';
+import { BussinessComponent } from './pages/profile/bussiness/bussiness.component';
+import { PaymentInfoComponent } from './components/payment-info/payment-info.component';
 
 const routes: Routes = [
+ 
   {
-    path: "",
-    component: HomeComponent
+    path: "mi-perfil/:pagos",
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: "mi-perfil",
@@ -43,15 +43,16 @@ const routes: Routes = [
     path: "reportes",
     component: ReportComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: "bussiness",
+    component: BussinessComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
 @NgModule({
   declarations: [
-    HomeComponent,
-    ProductComponent,
-    SliderComponent,
-    TabsComponent,
     MonthResumeComponent,
     GeneralResumeComponent,
     ReportComponent,
@@ -62,7 +63,9 @@ const routes: Routes = [
     AditionalInfoFormComponent,
     DialogEditComponent,
     CardDataComponent,
-    DialogHistoryComponent
+    DialogHistoryComponent,
+    BussinessComponent,
+    PaymentInfoComponent
   ],
   imports: [
     CommonModule,
@@ -78,7 +81,6 @@ const routes: Routes = [
     MatPasswordStrengthModule,
     RouterModule.forChild(routes)
   ],
-  providers: [{ provide: MatPaginatorIntl, useClass: TabsComponent }],
   entryComponents: [DialogComponent, DialogEditComponent, DialogHistoryComponent]
 })
 export class ClickerModule {}

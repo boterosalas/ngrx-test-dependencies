@@ -11,11 +11,11 @@ import { AuthService } from "./auth.service";
 })
 export class UserService {
   constructor(private http: HttpClient, private auth: AuthService) {
-    this.auth.isLogged$.pipe(distinctUntilChanged()).subscribe(val => {
-      if(!!val || this.auth.isLoggedIn()) {
-        this.getProfile();
-      }
-    })
+    // this.auth.isLogged$.pipe(distinctUntilChanged()).subscribe(val => {
+    //   if(!!val || this.auth.isLoggedIn()) {
+    //     this.getProfile();
+    //   }
+    // })
   }
 
   url = environment.URL_PROFILE;
@@ -267,7 +267,7 @@ export class UserService {
     return this.http.post((`${this.url}${this.apichangeBankInformation}`),data, httpOptions);
   }
 
-  public updateUser(id: any, data:any) {
+  public updateUser(data:any) {
     const token = localStorage.getItem("ACCESS_TOKEN");
     const authorization = token;
 

@@ -1,0 +1,472 @@
+<app-back-navigation
+  [imageurl]="image"
+  [title]="title"
+  [aditional]="percent"
+  (close)="goback()"
+></app-back-navigation>
+<div class="container">
+  <h3 class="border-bottom-orange-init title-h3">
+    {{ "BUSSINESS.CATEGORIES" | translate }}
+  </h3>
+  <p class="f-20" fxHide.xs>{{ "HOME.BUSSINESS_TEXT" | translate }}</p>
+  <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="0px">
+    <div
+      fxLayout="column"
+      fxFlex.xs="100"
+      fxFlex.sm="30"
+      fxFlex.gt-sm="24"
+      class="mb-3"
+      *ngFor="let bussiness of bussiness; let i = index"
+    >
+      <app-product
+        id="bussiness{{ i }}"
+        btnid="btnbussiness{{ i }}"
+        [productName]="bussiness.description"
+        [price]="bussiness.commission"
+        [percent]="bussiness.infoaditional"
+        [image]="bussiness.imageurl"
+        [alt]="bussiness.description"
+        other="true"
+        Class="mb-1 button-100 gtmInicioClicLinkViaj{{ i }}"
+        container="img-container-viajes"
+        textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+        (infoProduct)="dataCategory(bussiness)"
+      ></app-product>
+    </div>
+  </div>
+</div>
+
+<!-- template share -->
+
+<ng-template #templateCategories>
+  <div *ngIf="!reference">
+    <form [formGroup]="formLink">
+      <div fxLayout="column">
+        <div fxLayout="column" fxFlex="100" fxFlex.xs="100">
+          <mat-form-field appearance="dashed" class="dashed mt-2">
+            <input
+              id="url"
+              matInput
+              formcontrolName="link"
+              [value]="urlshorten"
+              #linkInput
+              readonly
+            />
+          </mat-form-field>
+        </div>
+        <div
+          fxLayout="row"
+          fxLayoutAlign="center space-between"
+          fxLayoutGap="10px"
+          class="mt-2 share-desktop"
+        >
+          <button
+            mat-button
+            id="btnCopy"
+            color="orange"
+            [disabled]="enableCopy"
+            class="gtmInicioClicFiltroExitocomCopiarLink"
+            (click)="copyInputMessage(linkInput)"
+          >
+            <span
+              fxLayoutAlign="center space-between"
+              class="gtmInicioClicFiltroExitocomCopiarLink"
+            >
+              {{ "GENERIC.COPY_LINK" | translate }}
+            </span>
+          </button>
+
+          <button
+            mat-button
+            id="refer"
+            color="orange"
+            (click)="showReference()"
+          >
+            <span fxLayoutAlign="center space-between">
+              Referir
+            </span>
+          </button>
+
+          <button
+            mat-button
+            id="buy"
+            color="orange"
+            class="orange-border"
+            (click)="buy()"
+          >
+            <span fxLayoutAlign="center space-between">
+              Comprar
+            </span>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <h3 class="border-bottom-orange-init share-desktop">
+      {{ "GENERIC.SHARE" | translate }}
+    </h3>
+
+    <div class="share-desktop" id="share">
+      <button
+        theme="circles-dark"
+        shareButton="facebook"
+        [url]="urlshorten"
+        class="sharebutton gtmInicioClicFiltroExitocomFacebook mr-2"
+      >
+        <i class="fab fa-facebook-f gtmInicioClicFiltroExitocomFacebook"></i>
+      </button>
+      <button
+        theme="circles-dark"
+        shareButton="twitter"
+        [url]="urlshorten"
+        class="sharebutton gtmInicioClicFiltroExitocomTwitter mr-2"
+      >
+        <i class="fab fa-twitter gtmInicioClicFiltroExitocomTwitter"></i>
+      </button>
+      <button
+        theme="circles-dark"
+        shareButton="whatsapp"
+        [url]="urlshorten"
+        class="sharebutton gtmInicioClicFiltroExitocomWhatsapp"
+      >
+        <i class="fab fa-whatsapp gtmInicioClicFiltroExitocomWhatsapp"></i>
+      </button>
+    </div>
+
+    <div class="share-mobile">
+      <button
+        mat-button
+        class="gtmrs  mb-2 mt-2 "
+        (click)="share()"
+        fxLayout="row"
+        fxLayoutAlign="start start"
+      >
+        <span class="gtmrs f-15" fxLayout="row" fxLayoutAlign="center center">
+          <img
+            class="icon-compartir pr-2"
+            src="/assets/img/Compartir.svg"
+            alt="user"
+          />
+          Compartir</span
+        >
+      </button>
+
+      <button
+        mat-button
+        class="gtmrs  mb-2 mt-2 "
+        (click)="showReference()"
+        fxLayout="row"
+        fxLayoutAlign="start start"
+      >
+        <span class="gtmrs f-15" fxLayout="row" fxLayoutAlign="center center">
+          <img
+            class="icon-compartir pr-2"
+            src="/assets/img/Referir.svg"
+            alt="user"
+          />
+          Referir
+        </span>
+      </button>
+
+      <button
+        mat-button
+        class="gtmrs  mb-2 mt-2 "
+        (click)="buy()"
+        fxLayout="row"
+        fxLayoutAlign="start start"
+      >
+        <span class="gtmrs f-15" fxLayout="row" fxLayoutAlign="center center">
+          <img
+            class="icon-compartir pr-2"
+            src="/assets/img/Comprar.svg"
+            alt="user"
+          />
+          Comprar
+        </span>
+      </button>
+    </div>
+  </div>
+  <br />
+  <form
+    class="forgotpassword-container"
+    [formGroup]="idCustomerForm"
+    fxLayout="column"
+    *ngIf="reference"
+  >
+    <span
+      (click)="backStep()"
+      class="cursor-pointer gray"
+      fxLayout="row"
+      fxLayoutAlign="start start"
+      fxFlex="12"
+    >
+      <mat-icon>keyboard_arrow_left</mat-icon>
+      <span class="text-back">Volver</span>
+    </span>
+    <p>{{ "GENERIC.REFERENCE_IDENTIFICATION" | translate }}</p>
+    <mat-form-field appearance="outline" class="mt-2">
+      <input
+        matInput
+        class="p-2"
+        id="idcustomer"
+        type="text"
+        placeholder="N° de Documento"
+        formControlName="identification"
+        required
+      />
+      <mat-error
+        id="reuiredId"
+        *ngIf="
+          idCustomerForm.controls.identification.invalid &&
+          idCustomerForm.controls.identification.errors.required
+        "
+        >{{
+          "GENERIC.REQUIRED" | translate: { formValue: "Número de documento" }
+        }}</mat-error
+      >
+
+      <mat-error
+        id="maxId"
+        *ngIf="
+          idCustomerForm.controls.identification.invalid &&
+          idCustomerForm.controls.identification.errors.maxlength
+        "
+        >{{
+          "GENERIC.MAX_CHARACTERS"
+            | translate
+              : {
+                  maxchar:
+                    idCustomerForm.controls.identification.errors.maxlength
+                      .requiredLength
+                }
+        }}</mat-error
+      >
+
+      <mat-error
+        id="numberId"
+        *ngIf="
+          idCustomerForm.controls.identification.invalid &&
+          idCustomerForm.controls.identification.errors.pattern
+        "
+        >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+      >
+    </mat-form-field>
+
+    <div fxLayout="column">
+      <button
+        mat-raised-button
+        class="button button-100 p-1 gtmCrearCedulaSiguiente"
+        id="recoverPassword"
+        color="orange"
+        (click)="saveLinkReference()"
+        [disabled]="!idCustomerForm.valid"
+      >
+        <span class="gtmCrearCedulaSiguiente">{{
+          "GENERIC.ACCEPT" | translate
+        }}</span>
+      </button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #templateDialogAssured>
+  <div id="share">
+    <div *ngIf="showFormCustomer">
+      <p class="text-id">{{ "GENERIC.CUSTOMER_ID" | translate }}</p>
+      <form
+        class="forgotpassword-container"
+        [formGroup]="idCustomerForm"
+        fxLayout="column"
+      >
+        <mat-form-field appearance="outline" class="mt-2">
+          <input
+            matInput
+            class="p-2"
+            id="idcustomer"
+            type="text"
+            placeholder="N° de Documento"
+            formControlName="identification"
+            required
+          />
+          <mat-error
+            id="reuiredId"
+            *ngIf="
+              idCustomerForm.controls.identification.invalid &&
+              idCustomerForm.controls.identification.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED"
+                | translate: { formValue: "Número de documento" }
+            }}</mat-error
+          >
+
+          <mat-error
+            id="maxId"
+            *ngIf="
+              idCustomerForm.controls.identification.invalid &&
+              idCustomerForm.controls.identification.errors.maxlength
+            "
+            >{{
+              "GENERIC.MAX_CHARACTERS"
+                | translate
+                  : {
+                      maxchar:
+                        idCustomerForm.controls.identification.errors.maxlength
+                          .requiredLength
+                    }
+            }}</mat-error
+          >
+
+          <mat-error
+            id="numberId"
+            *ngIf="
+              idCustomerForm.controls.identification.invalid &&
+              idCustomerForm.controls.identification.errors.pattern
+            "
+            >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+          >
+        </mat-form-field>
+
+        <div fxLayout="column" class="mt-2">
+          <button
+            mat-raised-button
+            class="button button-100 p-1 gtmCrearCedulaSiguiente"
+            id="recoverPassword"
+            color="orange"
+            (click)="nextStep()"
+            [disabled]="!idCustomerForm.valid"
+          >
+            <span
+              fxLayout="row"
+              fxLayoutAlign="space-between center"
+              class="pl-3 pr-3 gtmCrearCedulaSiguiente"
+            >
+              {{ "GENERIC.NEXT" | translate }}
+              <mat-icon>arrow_forward</mat-icon>
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div *ngIf="showForm">
+      <form [formGroup]="formLink">
+        <div fxLayout="column" fxLayoutGap="0">
+          <div fxLayout="column" fxFlex="100" fxFlex.xs="100">
+            <mat-form-field appearance="dashed" class="dashed mt-2">
+              <input
+                id="url"
+                matInput
+                formcontrolName="link"
+                [value]="urlshorten"
+                #linkInput
+                readonly
+              />
+            </mat-form-field>
+          </div>
+          <div
+            fxLayout="row"
+            fxLayoutAlign="center space-between"
+            fxLayoutGap="10px"
+            class="mt-2 share-desktop"
+          >
+            <button
+              mat-button
+              id="btnCopy"
+              color="orange"
+              [disabled]="enableCopy"
+              class="gtmInicioClicFiltroExitocomCopiarLink"
+              (click)="copyInputMessage(linkInput)"
+            >
+              <span
+                fxLayoutAlign="center space-between"
+                class="gtmInicioClicFiltroExitocomCopiarLink"
+              >
+                {{ "GENERIC.COPY_LINK" | translate }}
+              </span>
+            </button>
+
+            <button
+              mat-button
+              id="buy"
+              color="orange"
+              class="orange-border"
+              (click)="buy()"
+            >
+              <span fxLayoutAlign="center space-between">
+                Comprar
+              </span>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <h3 class="border-bottom-orange-init share-desktop">
+        {{ "GENERIC.SHARE" | translate }}
+      </h3>
+
+      <div class="share-desktop" id="share">
+        <button
+          theme="circles-dark"
+          shareButton="facebook"
+          [url]="urlshorten"
+          class="sharebutton gtmInicioClicFiltroExitocomFacebook mr-2"
+        >
+          <i class="fab fa-facebook-f gtmInicioClicFiltroExitocomFacebook"></i>
+        </button>
+        <button
+          theme="circles-dark"
+          shareButton="twitter"
+          [url]="urlshorten"
+          class="sharebutton gtmInicioClicFiltroExitocomTwitter mr-2"
+        >
+          <i class="fab fa-twitter gtmInicioClicFiltroExitocomTwitter"></i>
+        </button>
+        <button
+          theme="circles-dark"
+          shareButton="whatsapp"
+          [url]="urlshorten"
+          class="sharebutton gtmInicioClicFiltroExitocomWhatsapp"
+        >
+          <i class="fab fa-whatsapp gtmInicioClicFiltroExitocomWhatsapp"></i>
+        </button>
+      </div>
+
+      <div class="share-mobile">
+        <button
+          mat-button
+          class="gtmrs  mb-2 mt-2 "
+          (click)="share()"
+          fxLayout="row"
+          fxLayoutAlign="start start"
+        >
+          <span class="gtmrs f-15" fxLayout="row" fxLayoutAlign="center center">
+            <img
+              class="icon-compartir pr-2"
+              src="/assets/img/Compartir.svg"
+              alt="user"
+            />
+            Compartir</span
+          >
+        </button>
+
+        <button
+          mat-button
+          class="gtmrs  mb-2 mt-2 "
+          (click)="buy()"
+          fxLayout="row"
+          fxLayoutAlign="start start"
+        >
+          <span class="gtmrs f-15" fxLayout="row" fxLayoutAlign="center center">
+            <img
+              class="icon-compartir pr-2"
+              src="/assets/img/Comprar.svg"
+              alt="user"
+            />
+            Comprar
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>

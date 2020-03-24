@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material';
-import { Subscription, Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import { ResponseService } from 'src/app/interfaces/response';
+import { Subscription } from 'rxjs';
 import { MasterDataService } from 'src/app/services/master-data.service';
 
 @Component({
@@ -12,7 +10,7 @@ import { MasterDataService } from 'src/app/services/master-data.service';
   templateUrl: './aditional-info-form.component.html',
   styleUrls: ['./aditional-info-form.component.scss']
 })
-export class AditionalInfoFormComponent implements OnInit {
+export class AditionalInfoFormComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
@@ -101,7 +99,7 @@ export class AditionalInfoFormComponent implements OnInit {
         this.mobilityOb=  {id: val.mobility, description: val.mobilityDescription};
         this.addressInfo = val.address;
         this.receiveCommunications = val.receiveCommunications;
-     };
+     }
      this.getBasicData();
      this.personalFormInfo();
      this.profesionalFormInfo();
@@ -148,16 +146,7 @@ export class AditionalInfoFormComponent implements OnInit {
     })
   }
 
-
-  changeComunications(comunication) {
-    if (comunication.checked === false) {
-      this.receiveCommunications = false;
-    }
-    if (comunication.checked === true) {
-      this.receiveCommunications = true;
-    }
-  }
-
+  // Metodo para editar la informacion adicional del usuario
 
   editInfo() {
     this.userInfo.birthDate = this.personalForm.controls.birthDate.value;
@@ -175,7 +164,7 @@ export class AditionalInfoFormComponent implements OnInit {
     this.userInfo.receiveCommunications = this.receiveCommunications;
 
     this.subscription = this.user
-      .updateUser(this.userId, this.userInfo)
+      .updateUser(this.userInfo)
       .subscribe(
         (resp: any) => {
           if (resp.state === "Success") {
@@ -195,6 +184,8 @@ export class AditionalInfoFormComponent implements OnInit {
     });
   }
 
-
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
 }
