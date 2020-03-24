@@ -2,16 +2,28 @@
 
 <div class="terms container mb-3">
   <mat-tab-group>
-    <mat-tab label="{{ 'TERMS.CONDITION_TAB' | translate }}">
-      <h2 class="border-bottom-orange-init">{{ "TERMS.TITLE" | translate }}</h2>
-      <div innerHtml="{{ 'TERMS.CONDITION' | translate }}"></div> 
-    </mat-tab>
 
-    <mat-tab label="{{ 'TERMS.LEGAL_TAB' | translate }}"> 
+  <mat-tab>
+      <ng-template mat-tab-label>
+           <span class="gtmTerminosCondicionesClicTerminosLegales">{{ 'TERMS.CONDITION_TAB' | translate }}</span>
+      </ng-template>
+      <div innerHtml="{{ 'TERMS.CONDITION' | translate }}"></div>  
+  </mat-tab>
+
+  <mat-tab>
+      <ng-template mat-tab-label>
+           <span class="gtmTerminosCondicionesClicEmprendedor">{{ 'TERMS.LEGAL_TAB' | translate }}</span>
+      </ng-template>
       <div innerHtml="{{ 'TERMS.LEGAL' | translate }}"></div> 
   </mat-tab>
-    <mat-tab label="{{ 'TERMS.PROTECTION_TAB' | translate }}"> 
+
+  <mat-tab>
+      <ng-template mat-tab-label>
+           <span class="gtmTerminosCondicionesClicProteccionDatos">{{ 'TERMS.PROTECTION_TAB' | translate }}</span>
+      </ng-template>
       <div innerHtml="{{ 'TERMS.PROTECTION' | translate }}"></div> 
-    </mat-tab>
+  </mat-tab>
+
   </mat-tab-group>
+
 </div>

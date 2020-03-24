@@ -133,7 +133,7 @@ let categorys = {
 
 
   it('copyInputMessage', () => {
-    const button = document.querySelector('.gtmInicioClicFiltroExitocomCopiarLink');
+    const button = document.querySelector('#btnCopy');
     button.dispatchEvent(new Event('click'));
     const nativeElementInput = fixture.nativeElement;
     const input = nativeElementInput.querySelector('input');

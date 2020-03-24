@@ -48,6 +48,13 @@ export class BussinessComponent implements OnInit, OnDestroy {
   templateAssured: TemplateRef<any>;
   urlshorten: string = '';
   url: string;
+  classButtonCopy: string;
+  classButtonRefer: string;
+  classButtonBuy: string;
+  classButtonFacebook: string;
+  classButtonTwitter: string;
+  classButtonWhatsapp: string;
+  classButtonShare: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -273,7 +280,14 @@ export class BussinessComponent implements OnInit, OnDestroy {
         this.plu = category.description;
         this.business = category.idbusiness;
         const home = true;
-
+        // this.classButton = (category.description).replace(" ", "");
+        this.classButtonCopy = `gtm${this.title}${category.description}ClicLightboxCopiarLink`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonRefer = `gtm${this.title}${category.description}ClicLightboxReferir`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonBuy = `gtm${this.title}${category.description}ClicLightboxComprar`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonShare = `gtm${this.title}${category.description}ClicLightboxCompartir`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonFacebook = `gtm${this.title}${category.description}ClicLightboxIconoFacebook`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonTwitter = `gtm${this.title}${category.description}ClicLightboxIconoTwitter`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonWhatsapp= `gtm${this.title}${category.description}ClicLightboxIconoWhatsApp`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         if(category.idbusiness !== 3 && category.idbusiness !== 5) {
           this.template = this.templateCategories;
         } else {

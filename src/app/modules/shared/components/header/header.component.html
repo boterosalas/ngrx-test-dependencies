@@ -19,8 +19,8 @@
         <div [ngClass]="isHome ? 'menu-desktop' : 'menu-desktop colorlinks'" fxLayout="row" fxLayoutAlign="space-around center" [fxShow.lt-md]="false">
                 <app-menu-options aligment="start start" *ngIf="(auth.getRole$ | async) !== 'ADMIN'"></app-menu-options>
                 <span class="border-right-white"></span>
-                <a *ngIf="!auth.isLoggedIn()" class="gtmHomeClicSupRegistrarse" mat-button (click)="openRegister()" id="header-register"><span class="gtmHomeClicSupRegistrarse" >{{ 'GENERIC.REGISTER2' | translate }}</span></a>
-                <a *ngIf="!auth.isLoggedIn()" class="gtmHomeClicSupIniciarSesion" mat-button (click)="showLogin()" id="header-login"> <span class="gtmHomeClicSupIniciarSesion" >{{ 'LOGIN.LOGIN' | translate }}</span> </a>
+                <a *ngIf="!auth.isLoggedIn()" class="gtmHomeClicRegistrarseClickam" mat-button (click)="openRegister()" id="header-register"><span class="gtmHomeClicRegistrarseClickam" >{{ 'GENERIC.REGISTER2' | translate }}</span></a>
+                <a *ngIf="!auth.isLoggedIn()" class="gtmHomeClicIniciarSesionClickam" mat-button (click)="showLogin()" id="header-login"> <span class="gtmHomeClicIniciarSesionClickam" >{{ 'LOGIN.LOGIN' | translate }}</span> </a>
             </div>
             
             <span *ngIf="auth.isLoggedIn()">
@@ -42,7 +42,7 @@
 <header class="shadow sticky" fxLayout="column" fxLayoutAlign="center start" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="start center">
     <div ngClass.gt-xs="container" fxLayout="row">
         <div fxLayout="row" fxLayoutAlign.gt-xs="start center" fxFlex.gt-xs="20" fxHide.xs="true">
-            <img [routerLink]="['inicio']" class="cursor-pointer" src="assets/img/logo-header-2.svg" alt="logo-clickam">
+            <img [routerLink]="['inicio']" class="cursor-pointer gtmHomeClicLogoClickam" src="assets/img/logo-header-2.svg" alt="logo-clickam">
         </div>
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex.gt-xs="80" fxLayoutAlign.gt-xs="end center">
             <span fxLayout="column" fxLayoutAlign="end center" (click)="open()">
@@ -50,12 +50,12 @@
             </span>
             <span fxLayout.gt-xs="row">
                 <span fxLayoutAlign.gt-xs="center center" *ngIf="!auth.isLoggedIn()">
-                    <a  class="gtmHomeClicSupIniciarSesion login-text" mat-button (click)="showLogin()" id="header-login"> 
-                        <span class="gtmHomeClicSupIniciarSesion" fxLayout="row" fxLayoutAlign="space-between center">
-                        <img class="pr-2" src="assets/img/usuario-black.svg" alt="user"> 
-                        {{ 'LOGIN.LOGIN' | translate }}</span> 
+                    <a  class="gtmHomeClicIniciarSesionClickam login-text" mat-button (click)="showLogin()" id="header-login"> 
+                        <span class="gtmHomeClicIniciarSesionClickam" fxLayout="row" fxLayoutAlign="space-between center">
+                        <img class="pr-2 gtmHomeClicIniciarSesionClickam" src="assets/img/usuario-black.svg" alt="user"> 
+                        <span class="gtmHomeClicIniciarSesionClickam"> {{ 'LOGIN.LOGIN' | translate }}</span></span> 
                     </a>
-                    <a fxHide.xs="true" class="gtmHomeClicSupRegistrarse login-text" mat-button (click)="openRegister()" id="header-register"><span class="gtmHomeClicSupRegistrarse" >{{ 'GENERIC.REGISTER2' | translate }}</span></a>
+                    <a fxHide.xs="true" class="gtmHomeClicRegistrarseClickam login-text" mat-button (click)="openRegister()" id="header-register"><span class="gtmHomeClicRegistrarseClickam" >{{ 'GENERIC.REGISTER2' | translate }}</span></a>
                 </span>
                 <span *ngIf="auth.isLoggedIn()" fxLayout="row">
                     <img src="assets/img/usuario-blue.svg" alt="userLogged" class="pl-2"> 
