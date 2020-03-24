@@ -188,7 +188,7 @@ describe("BussinessComponent", () => {
   it("copyInputMessage", () => {
     // const buttonModal = document.querySelector(".gtmInicioClicL");
     // buttonModal.dispatchEvent(new Event("click"));
-    const button = document.querySelector(".gtmInicioClicFiltroExitocomCopiarLink");
+    const button = document.querySelector("#btnCopy");
     button.dispatchEvent(new Event("click"));
     const nativeElementInput = fixture.nativeElement;
     const input = nativeElementInput.querySelector("input");
