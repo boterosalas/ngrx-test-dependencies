@@ -55,7 +55,7 @@ export class UtilsService {
   }
 
   public logout() {
-    localStorage.removeItem("ACCESS_TOKEN");
+    localStorage.clear();
     this.router.navigate(["/"]);
     this.auth.getRole$.next(null);
     this.auth.isLogged$.next(false);

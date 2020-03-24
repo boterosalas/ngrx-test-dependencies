@@ -71,11 +71,12 @@ export class AuthService implements OnDestroy {
   }
 
   public logout() {
-    localStorage.clear();
-    localStorage.removeItem('initials');
-    this.router.navigate(["/"]);
     this.getRole$.next(null);
     this.isLogged$.next(false);
+    setTimeout(() => {
+      this.router.navigate(["/"]);
+    }, 500);
+    localStorage.clear();
   }
 
   public getRole() {

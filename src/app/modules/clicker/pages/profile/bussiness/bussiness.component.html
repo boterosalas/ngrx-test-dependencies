@@ -4,36 +4,47 @@
   [aditional]="percent"
   (close)="goback()"
 ></app-back-navigation>
+
 <div class="container">
-  <h3 class="border-bottom-orange-init title-h3">
-    {{ "BUSSINESS.CATEGORIES" | translate }}
-  </h3>
-  <p class="f-20" fxHide.xs>{{ "HOME.BUSSINESS_TEXT" | translate }}</p>
-  <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="0px">
-    <div
-      fxLayout="column"
-      fxFlex.xs="100"
-      fxFlex.sm="30"
-      fxFlex.gt-sm="24"
-      class="mb-3"
-      *ngFor="let bussiness of bussiness; let i = index"
-    >
-      <app-product
-        id="bussiness{{ i }}"
-        btnid="btnbussiness{{ i }}"
-        [productName]="bussiness.description"
-        [price]="bussiness.commission"
-        [percent]="bussiness.infoaditional"
-        [image]="bussiness.imageurl"
-        [alt]="bussiness.description"
-        other="true"
-        Class="mb-1 button-100 gtmNegocio{{title}}{{bussiness.description}}"
-        container="img-container-viajes"
-        textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
-        (infoProduct)="dataCategory(bussiness)"
-      ></app-product>
+
+  <div class="products" *ngIf="bussiness.length !== 0"> 
+    <h3 class="border-bottom-orange-init title-h3">
+      {{ "BUSSINESS.CATEGORIES" | translate }}
+    </h3>
+  
+    <p class="f-20" fxHide.xs>{{ "HOME.BUSSINESS_TEXT" | translate }}</p>
+  
+    <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="0px">
+      <div
+        fxLayout="column"
+        fxFlex.xs="100"
+        fxFlex.sm="30"
+        fxFlex.gt-sm="24"
+        class="mb-3"
+        *ngFor="let bussiness of bussiness; let i = index"
+      >
+        <app-product
+          id="bussiness{{ i }}"
+          btnid="btnbussiness{{ i }}"
+          [productName]="bussiness.description"
+          [price]="bussiness.commission"
+          [percent]="bussiness.infoaditional"
+          [image]="bussiness.imageurl"
+          [alt]="bussiness.description"
+          other="true"
+          Class="mb-1 button-100 gtmNegocio{{title}}{{bussiness.description}}"
+          container="img-container-viajes"
+          textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+          (infoProduct)="dataCategory(bussiness)"
+        ></app-product>
+      </div>
     </div>
   </div>
+
+  <div class="deliver mt-3" *ngIf="bussiness.length === 0">
+    <app-slider-deliver></app-slider-deliver>
+  </div>
+
 </div>
 
 <!-- template share -->
