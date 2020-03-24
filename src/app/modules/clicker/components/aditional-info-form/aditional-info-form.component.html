@@ -2,10 +2,10 @@
   <p>{{ "PROFILE.BASIC" | translate }}</p>
 
   <mat-accordion class="ml-2 mr-2 additional-info">
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <h3 class="gray m-0">{{ "ADDITIONAL.PERSONAL" | translate }}</h3>
+    <mat-expansion-panel class="gtmInformacionAdicionalClicPersonal">
+      <mat-expansion-panel-header class="gtmInformacionAdicionalClicPersonal">
+        <mat-panel-title class="gtmInformacionAdicionalClicPersonal">
+          <h3 class="gray m-0 gtmInformacionAdicionalClicPersonal">{{ "ADDITIONAL.PERSONAL" | translate }}</h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <form [formGroup]="personalForm" fxLayout="column" fxFlex="100">
@@ -168,12 +168,12 @@
             <button
               mat-raised-button
               id="editPersonal"
-              class="center button button-100"
+              class="center button button-100 gtmPerfilInfoPersonalClicGuardar"
               color="orange"
               (click)="editInfo()"
               [disabled]="!personalForm.valid"
             >
-              {{ "GENERIC.SAVE" | translate }}
+              <span class="gtmPerfilInfoPersonalClicGuardar">{{ "GENERIC.SAVE" | translate }}</span>
             </button>
           </span>
         </div>
@@ -182,10 +182,10 @@
   </mat-accordion>
 
   <mat-accordion class="ml-2 mr-2 additional-info">
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <h3 class="gray m-0">{{ "ADDITIONAL.PROFESIONAL" | translate }}</h3>
+    <mat-expansion-panel class="gtmInformacionAdicionalClicProfesional">
+      <mat-expansion-panel-header class="gtmInformacionAdicionalClicProfesional">
+        <mat-panel-title class="gtmInformacionAdicionalClicProfesional">
+          <h3 class="gray m-0 gtmInformacionAdicionalClicProfesional">{{ "ADDITIONAL.PROFESIONAL" | translate }}</h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <form [formGroup]="profesionalForm" fxLayout="column" fxFlex="100">
@@ -322,12 +322,12 @@
             <button
               mat-raised-button
               id="editPersonal"
-              class="center button button-100"
+              class="center button button-100 gtmPerfilInfoProfesionalClicGuardar"
               color="orange"
               (click)="editInfo()"
               [disabled]="!profesionalForm.valid"
             >
-              {{ "GENERIC.SAVE" | translate }}
+              <span class="gtmPerfilInfoProfesionalClicGuardar">{{ "GENERIC.SAVE" | translate }}</span>
             </button>
           </span>
         </div>
@@ -336,10 +336,10 @@
   </mat-accordion>
 
   <mat-accordion class="ml-2 mr-2 additional-info">
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <h3 class="gray m-0">{{ "ADDITIONAL.PLACE" | translate }}</h3>
+    <mat-expansion-panel class="gtmInformacionAdicionalClicVivienda">
+      <mat-expansion-panel-header class="gtmInformacionAdicionalClicVivienda">
+        <mat-panel-title class="gtmInformacionAdicionalClicVivienda">
+          <h3 class="gray m-0 gtmInformacionAdicionalClicVivienda">{{ "ADDITIONAL.PLACE" | translate }}</h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <form [formGroup]="livingForm" fxLayout="column" fxFlex="100">
@@ -522,12 +522,12 @@
             <button
               mat-raised-button
               id="editPersonal"
-              class="center button button-100"
+              class="center button button-100 gtmPerfilInfoViviendaClicGuardar"
               color="orange"
               (click)="editInfo()"
               [disabled]="!livingForm.valid"
             >
-              {{ "GENERIC.SAVE" | translate }}
+              <span class="gtmPerfilInfoViviendaClicGuardar">{{ "GENERIC.SAVE" | translate }}</span>
             </button>
           </span>
         </div>

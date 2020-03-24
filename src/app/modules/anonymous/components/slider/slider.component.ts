@@ -42,6 +42,7 @@ export class SliderComponent implements OnInit {
   @Input() isSlider:boolean;
   @Input() showArrows:boolean;
   @Output() action = new EventEmitter();
+  @Input() Class: string;
 
   @ViewChild('slickModal', {static: false}) slickModal: SlickCarouselComponent;
 
@@ -64,6 +65,14 @@ export class SliderComponent implements OnInit {
   reference: boolean;
   numberPattern = "^(0|[0-9][0-9]*)$";
   template: any;
+  classButtonCopy: string;
+  classButtonRefer: string;
+  classButtonBuy: string;
+  classButtonFacebook: string;
+  classButtonTwitter: string;
+  classButtonWhatsapp: string;
+  classButtonShare: string;
+
 
   ngOnInit() {
 
@@ -260,7 +269,15 @@ export class SliderComponent implements OnInit {
         const infoaditional = category.infoaditional;
         this.plu = category.description;
         this.business = category.idbusiness;
+        const bussinessType = category.business;
         const home = true;
+        this.classButtonCopy = `gtm${bussinessType}${category.description}ClicLightboxCopiarLink`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonRefer = `gtm${bussinessType}${category.description}ClicLightboxReferir`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonBuy = `gtm${bussinessType}${category.description}ClicLightboxComprar`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonShare = `gtm${bussinessType}${category.description}ClicLightboxCompartir`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonFacebook = `gtm${bussinessType}${category.description}ClicLightboxIconoFacebook`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonTwitter = `gtm${bussinessType}${category.description}ClicLightboxIconoTwitter`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonWhatsapp= `gtm${bussinessType}${category.description}ClicLightboxIconoWhatsApp`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         
         if(category.business === 'seguros') {
           this.template = this.templateAssured;
