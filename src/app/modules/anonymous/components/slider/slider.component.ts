@@ -93,7 +93,7 @@ export class SliderComponent implements OnInit {
   }
 
   buy() {
-    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if(iOS) {
       window.location.assign(this.urlshorten)
     } else {

@@ -225,7 +225,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     }
 
     buy() {
-      var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
       if(iOS) {
         window.location.assign(this.urlshorten)
       } else {
