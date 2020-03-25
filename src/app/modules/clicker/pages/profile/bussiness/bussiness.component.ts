@@ -232,7 +232,12 @@ export class BussinessComponent implements OnInit, OnDestroy {
     }
 
     buy() {
-      window.open(this.urlshorten,'_blank')
+      var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      if(iOS) {
+        window.location.assign(this.urlshorten)
+      } else {
+        window.open(this.urlshorten,'_blank');
+      }
     }
 
     public nextStep() {
