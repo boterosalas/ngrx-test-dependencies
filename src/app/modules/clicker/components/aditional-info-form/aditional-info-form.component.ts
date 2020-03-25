@@ -162,6 +162,7 @@ export class AditionalInfoFormComponent implements OnInit, OnDestroy {
     this.userInfo.dependents = this.livingForm.controls.dependant.value;
     this.userInfo.mobility = this.livingForm.controls.mobility.value;
     this.userInfo.receiveCommunications = this.receiveCommunications;
+    this.userInfo.bankAccountNumber = null;
 
     this.subscription = this.user
       .updateUser(this.userInfo)
