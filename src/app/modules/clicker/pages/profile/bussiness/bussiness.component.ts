@@ -7,12 +7,13 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
 import { ResponseService } from 'src/app/interfaces/response';
-import { MatBottomSheet, MatSnackBar } from '@angular/material';
+import { MatBottomSheet, MatSnackBar, MatDialog } from '@angular/material';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LinksService } from 'src/app/services/links.service';
 import { TokenService } from 'src/app/services/token.service';
 import { NgNavigatorShareService } from 'ng-navigator-share';
+import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 
 @Component({
   selector: 'app-bussiness',
@@ -27,6 +28,9 @@ export class BussinessComponent implements OnInit, OnDestroy {
   percentBussiness:string = "Hasta 9.6%";
   bussiness = [];
 
+  @ViewChild("templateTerms", { static: false })
+  templateTerms: TemplateRef<any>;
+
   private subscription: Subscription = new Subscription();
   private ngNavigatorShareService: NgNavigatorShareService;
   image:string;
@@ -35,6 +39,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   showFormCustomer = true;
   reference: boolean;
   showForm = false;
+  termsForm: FormGroup;
   idCustomerForm: FormGroup;
   date: any;
   business: string;
@@ -55,6 +60,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   classButtonTwitter: string;
   classButtonWhatsapp: string;
   classButtonShare: string;
+  acceptTerms: boolean = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -70,6 +76,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     private links: LinksService,
     private token: TokenService,
     ngNavigatorShareService: NgNavigatorShareService,
+    private dialogModal: MatDialog
   ) { 
     
     this.ngNavigatorShareService = ngNavigatorShareService;
@@ -101,6 +108,9 @@ export class BussinessComponent implements OnInit, OnDestroy {
       ]
     });
 
+    this.termsForm = this.fb.group({
+      acceptTerms: [null, Validators.required]
+    })
 
   }
 
@@ -288,13 +298,13 @@ export class BussinessComponent implements OnInit, OnDestroy {
         this.business = category.idbusiness;
         const home = true;
         // this.classButton = (category.description).replace(" ", "");
-        this.classButtonCopy = `gtm${this.title}${category.description}ClicLightboxCopiarLink`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonRefer = `gtm${this.title}${category.description}ClicLightboxReferir`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonBuy = `gtm${this.title}${category.description}ClicLightboxComprar`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonShare = `gtm${this.title}${category.description}ClicLightboxCompartir`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonFacebook = `gtm${this.title}${category.description}ClicLightboxIconoFacebook`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonTwitter = `gtm${this.title}${category.description}ClicLightboxIconoTwitter`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonWhatsapp= `gtm${this.title}${category.description}ClicLightboxIconoWhatsApp`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonCopy = `gtmClicLightboxCopiarLink${this.title}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonRefer = `gtmClicLightboxReferir${this.title}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonBuy = `gtmClicLightboxComprar${this.title}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonShare = `gtmClicLightboxCompartir${this.title}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonFacebook = `gtmClicLightboxIconoFacebook${this.title}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonTwitter = `gtmClicLightboxIconoTwitter${this.title}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonWhatsapp= `gtmClicLightboxIconoWhatsApp${this.title}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         if(category.idbusiness !== 3 && category.idbusiness !== 5) {
           this.template = this.templateCategories;
         } else {
@@ -328,6 +338,37 @@ export class BussinessComponent implements OnInit, OnDestroy {
   
 
   }
+
+  public acceptModal() {
+    this.dialogModal.closeAll();
+    this.acceptTerms = true;
+    this.termsForm.controls.acceptTerms.setValue(true);
+  }
+
+  /**
+   * check para aceptar terminos y condiciones
+   */
+
+  public acceptTermsCheck() {
+    this.acceptTerms = !this.acceptTerms;
+    if(this.acceptTerms === false) {
+      this.termsForm.controls.acceptTerms.setValue(null);
+    }
+  }
+
+  public termsAndConditions() {
+   
+    const template = this.templateTerms;
+    const title = "";
+
+    this.dialogModal.open(ModalGenericComponent, {
+      data: {
+        title,
+        template
+      }
+    });
+  }
+
 
 
   ngOnDestroy() {

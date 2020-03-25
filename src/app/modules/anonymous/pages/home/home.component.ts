@@ -62,6 +62,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   email: string;
   bussiness: Array<any> = [];
+  bussinessClicker: Array<any> = [];
   sliderMobile: any;
   sliderMobileOffers: any;
   sliderWeb: any;
@@ -100,6 +101,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.routeBased();
     this.getBussiness();
+    this.getBussinessClicker();
     this.getOffers();
     this.slider();
     this.getUserData();
@@ -188,12 +190,24 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public getBussiness() {
-   this.subscription = this.content
+    this.subscription = this.content
       .getBusiness()
       .pipe(distinctUntilChanged())
       .subscribe(bussiness => {
         this.bussiness = bussiness;
       });
+  }
+
+  public getBussinessClicker() {
+    this.subscription = this.auth.isLogged$.subscribe(val => {
+      if (!!val) {
+        this.subscription = this.content
+          .getBusinessClicker()
+          .subscribe(bussiness => {
+            this.bussinessClicker = bussiness;
+          });
+      }
+    });
   }
 
   public slider() {
