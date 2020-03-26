@@ -152,7 +152,7 @@ describe("BussinessComponent", () => {
   });
 
   it("data category", () => {
-    component.dataCategory(categorys);
+    component.dataSliderCategory(categorys);
     expect(mockDialog.open).toBeTruthy();
   });
 

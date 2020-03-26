@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private user: UserService,
     private utils: UtilsService,
-    private auth: AuthService,
+    public auth: AuthService,
     private content: ContentService
   ) {
     /**
