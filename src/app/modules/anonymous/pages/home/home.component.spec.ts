@@ -11,7 +11,7 @@ import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from 'src/app/services/user.service';
-import { of, throwError } from 'rxjs';
+import { of, throwError, Observable, BehaviorSubject } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -23,18 +23,44 @@ import { SliderComponent } from '../../components/slider/slider.component';
 import { AnonymousModule } from '../../anonymous.module';
 import { ContentService } from 'src/app/services/content.service';
 
+/**
+ * Create a mock of an existing service
+ * by simply extending it and overriding some 
+ * of the methods you wish to use in your tests
+ */
+class MockAuthService extends AuthService {
+
+  /**
+   * This method is implemented in the AuthService
+   * we extend, but we overload it to make sure we
+   * return a value we wish to test against
+   */
+  isLoggedIn() {
+      return true;
+  }
+
+  isLogged$ = new BehaviorSubject<boolean>(true);
+
+  getRole$ = new BehaviorSubject<any>('CLICKER');
+}
+
 describe("HomeComponent", () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
-  const mockUserService= jasmine.createSpyObj("UserService", ["activateProfile"]);
-  const mockAuthService = jasmine.createSpyObj("AuthService", ["login", "isLoggedIn"]);
+  const mockUserService= jasmine.createSpyObj("UserService", ["activateProfile", "getuserdata"]);
+  const mockAuthService = jasmine.createSpyObj("AuthService", ["login", "isLoggedIn", "isLogged$"]);
   const mockUtilsService = jasmine.createSpyObj("UtilsService", ["showRegisterForm"]);
   const mockContentService = jasmine.createSpyObj("ContentService", [
     "getNews",
     "getOffers",
-    "getBusiness"
+    "getBusiness",
+    "getBusinessClicker"
   ]);
+
+  let dataUserC = {
+    isEmployeeGrupoExito: true
+  }
 
   const dataUser = {
     state: "Success",
@@ -101,7 +127,7 @@ let offers = {"mobile":[{"imageurl":"https://webclickamdev.blob.core.windows.net
       ],
       providers: [
         { provide: UserService, useValue: mockUserService },
-        { provide: AuthService, useValue: mockAuthService },
+        { provide: AuthService, useClass: MockAuthService },
         { provide: UtilsService, useValue: mockUtilsService },
         { provide: ContentService, useValue: mockContentService },
         // AuthService
@@ -110,12 +136,14 @@ let offers = {"mobile":[{"imageurl":"https://webclickamdev.blob.core.windows.net
         // NO_ERRORS_SCHEMA
       ]
     }).compileComponents();
-    mockAuthService.isLoggedIn.and.returnValue(false);
+
     mockUserService.activateProfile.and.returnValue(of(data));
+    mockUserService.getuserdata.and.returnValue(of(dataUserC));
     mockUtilsService.showRegisterForm.and.returnValue({});
     mockContentService.getNews.and.returnValue(of(news));
     mockContentService.getOffers.and.returnValue(of(offers));
     mockContentService.getBusiness.and.returnValue(of(business));
+    mockContentService.getBusinessClicker.and.returnValue(of(business));
   }));
 
   beforeEach(() => {

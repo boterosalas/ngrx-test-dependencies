@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SliderDeliverComponent } from './slider-deliver.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 describe('SliderDeliverComponent', () => {
   let component: SliderDeliverComponent;
@@ -8,7 +9,10 @@ describe('SliderDeliverComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SliderDeliverComponent ]
+      declarations: [ SliderDeliverComponent ],
+      imports:[
+        SlickCarouselModule
+      ]
     })
     .compileComponents();
   }));
