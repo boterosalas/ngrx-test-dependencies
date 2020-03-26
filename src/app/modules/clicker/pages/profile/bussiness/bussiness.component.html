@@ -4,36 +4,87 @@
   [aditional]="percent"
   (close)="goback()"
 ></app-back-navigation>
+
 <div class="container">
-  <h3 class="border-bottom-orange-init title-h3">
-    {{ "BUSSINESS.CATEGORIES" | translate }}
-  </h3>
-  <p class="f-20" fxHide.xs>{{ "HOME.BUSSINESS_TEXT" | translate }}</p>
-  <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="0px">
-    <div
-      fxLayout="column"
-      fxFlex.xs="100"
-      fxFlex.sm="30"
-      fxFlex.gt-sm="24"
-      class="mb-3"
-      *ngFor="let bussiness of bussiness; let i = index"
-    >
-      <app-product
-        id="bussiness{{ i }}"
-        btnid="btnbussiness{{ i }}"
-        [productName]="bussiness.description"
-        [price]="bussiness.commission"
-        [percent]="bussiness.infoaditional"
-        [image]="bussiness.imageurl"
-        [alt]="bussiness.description"
-        other="true"
-        Class="mb-1 button-100 gtmNegocio{{title}}{{bussiness.description}}"
-        container="img-container-viajes"
-        textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
-        (infoProduct)="dataCategory(bussiness)"
-      ></app-product>
+
+  <div class="products" *ngIf="bussiness.length !== 0"> 
+    <h3 class="border-bottom-orange-init title-h3">
+      {{ "BUSSINESS.CATEGORIES" | translate }}
+    </h3>
+  
+    <p class="f-20" fxHide.xs>{{ "HOME.BUSSINESS_TEXT" | translate }}</p>
+  
+    <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="0px">
+      <div
+        fxLayout="column"
+        fxFlex.xs="100"
+        fxFlex.sm="30"
+        fxFlex.gt-sm="24"
+        class="mb-3"
+        *ngFor="let bussiness of bussiness; let i = index"
+      >
+        <app-product
+          id="bussiness{{ i }}"
+          btnid="btnbussiness{{ i }}"
+          [productName]="bussiness.description"
+          [price]="bussiness.commission"
+          [percent]="bussiness.infoaditional"
+          [image]="bussiness.imageurl"
+          [alt]="bussiness.description"
+          other="true"
+          Class="mb-1 button-100 gtmNegocio{{title}}{{bussiness.description}}"
+          container="img-container-viajes"
+          textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+          (infoProduct)="dataCategory(bussiness)"
+        ></app-product>
+      </div>
     </div>
   </div>
+
+  <div class="deliver mt-3" *ngIf="bussiness.length === 0">
+    <app-slider-deliver></app-slider-deliver>
+    <form
+      [formGroup]="termsForm"
+      class="text-center mt-5"
+      *ngIf="terms === false"
+    >
+    <div>
+      <span>
+        <mat-checkbox  formControlName="acceptTerms" id="chkaccept" (change)="acceptTermsCheck()">
+        </mat-checkbox>
+      </span>
+      <span class="accept-terms ml-2 cursor-pointer" (click)="termsAndConditions()">
+        {{
+        "REGISTER.ACCEPT" | translate
+      }}
+      </span>
+    </div>
+  
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
+      <button
+        mat-button
+        id="register"
+        class="mt-2 button button-height pl-2 pr-2"
+        [routerLink]="[ '/inicio']"
+      >
+      <span class="orange-text">{{ "BUSSINESS.DELIVER_BUTTON_CANCEL" | translate }}</span>
+    </button>
+    
+      <button
+        mat-raised-button
+        id="register"
+        class="mt-2 button button-height pl-2 pr-2"
+        color="orange"
+        (click)="registerUser()"
+        [disabled]="!termsForm.valid"
+      >
+      <span>{{ "BUSSINESS.DELIVER_BUTTON_OK" | translate }}</span>
+    </button>
+    </div>
+    
+    </form>
+  </div>
+
 </div>
 
 <!-- template share -->
@@ -488,4 +539,19 @@
       </div>
     </div>
   </div>
+</ng-template>
+
+<!-- template terms and conditions -->
+
+<ng-template #templateTerms>
+  <div class="fade-in" innerHtml="{{ 'BUSSINESS.TERMS_LEGAL' | translate }}"></div> 
+  <button
+  mat-raised-button
+  id="accept-modal"
+  class="mt-2 center button button-height button-100 register-button"
+  color="orange"
+  (click)="acceptModal()"
+>
+{{ "GENERIC.ACCEPT" | translate }}
+</button>
 </ng-template>
