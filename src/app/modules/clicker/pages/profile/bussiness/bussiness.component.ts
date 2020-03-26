@@ -225,7 +225,12 @@ export class BussinessComponent implements OnInit, OnDestroy {
     }
 
     buy() {
-      window.open(this.urlshorten,'_blank')
+      var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      if(iOS) {
+        window.location.assign(this.urlshorten)
+      } else {
+        window.open(this.urlshorten,'_blank');
+      }
     }
 
     public nextStep() {
@@ -247,6 +252,8 @@ export class BussinessComponent implements OnInit, OnDestroy {
   public dataCategory(category) {
     let token = localStorage.getItem("ACCESS_TOKEN");
       if(token !== null && category.business !=='clickam') {
+        this.showFormCustomer = true;
+        this.showForm = false;
         this.urlshorten = '';
         this.reference = false;
         const dataCategoryUrl = category.link;
