@@ -61,6 +61,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   classButtonWhatsapp: string;
   classButtonShare: string;
   acceptTerms: boolean = null;
+  terms: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -367,6 +368,14 @@ export class BussinessComponent implements OnInit, OnDestroy {
         template
       }
     });
+  }
+
+  public registerUser() {
+    this.user.registeruserterms(this.id).subscribe( (resp:any) => {
+      if(resp.state === 'Success') {
+       console.log(resp); 
+      }
+    })
   }
 
 

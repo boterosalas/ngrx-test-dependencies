@@ -199,8 +199,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public getBussinessClicker() {
+    let token = localStorage.getItem("ACCESS_TOKEN");
     this.subscription = this.auth.isLogged$.subscribe(val => {
-      if (!!val) {
+      if (!!val || token !== null) {
         this.subscription = this.content
           .getBusinessClicker()
           .subscribe(bussiness => {
