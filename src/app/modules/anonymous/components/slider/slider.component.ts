@@ -72,7 +72,8 @@ export class SliderComponent implements OnInit {
   classButtonTwitter: string;
   classButtonWhatsapp: string;
   classButtonShare: string;
-
+  tokenInfo: any;
+  idClicker: string;
 
   ngOnInit() {
 
@@ -90,6 +91,9 @@ export class SliderComponent implements OnInit {
         ]
       ]
     });
+
+    this.tokenInfo = this.token.userInfo();
+    this.idClicker = this.tokenInfo.idclicker.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
   }
 
@@ -254,7 +258,7 @@ export class SliderComponent implements OnInit {
         this.urlshorten = '';
         this.reference = false;
         const dataCategoryUrl = category.link;
-        this.url = `${dataCategoryUrl}${this.identification}`;
+        this.url = `${dataCategoryUrl}${this.idClicker}`;
         this.subscription = this.user
           .getShortUrl(this.url)
           .subscribe((resp: any) => {
