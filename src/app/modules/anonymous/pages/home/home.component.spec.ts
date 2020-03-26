@@ -23,18 +23,8 @@ import { SliderComponent } from '../../components/slider/slider.component';
 import { AnonymousModule } from '../../anonymous.module';
 import { ContentService } from 'src/app/services/content.service';
 
-/**
- * Create a mock of an existing service
- * by simply extending it and overriding some 
- * of the methods you wish to use in your tests
- */
 class MockAuthService extends AuthService {
 
-  /**
-   * This method is implemented in the AuthService
-   * we extend, but we overload it to make sure we
-   * return a value we wish to test against
-   */
   isLoggedIn() {
       return true;
   }
