@@ -115,84 +115,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   }
 
-      /**
-   * Metodo para abrir la modal con el producto seleccionado 
-   * 
-   */
-
-  public dataCategory(category) {
-    let token = localStorage.getItem("ACCESS_TOKEN");
-      if(token !== null && category.business !=='clickam') {
-        this.showFormCustomer = true;
-        this.showForm = false;
-        this.urlshorten = '';
-        this.reference = false;
-        const dataCategoryUrl = category.link;
-        this.url = `${dataCategoryUrl}${this.identification}`;
-        this.subscription = this.user
-          .getShortUrl(this.url)
-          .subscribe((resp: any) => {
-            this.urlshorten = resp;
-            this.enableCopy = false;
-            this.saveLink();
-          });
-        this.idCustomerForm.controls.identification.setValue("");
-        this.idCustomerForm.reset();
-        this.formShareLink();
-        const title = category.description;
-        const id = category.productId;
-        const img = category.imageurl;
-        const showClose = false;
-        const showCloseIcon = true;
-        const showProduct = true;
-        const showshowTitle = false;
-        const buttonClose = "Cerrar";
-        const infoaditional = category.infoaditional;
-        this.plu = category.description;
-        this.business = category.idbusiness;
-        const home = true;
-        // this.classButton = (category.description).replace(" ", "");
-        this.classButtonCopy = `gtmClicLightboxCopiarLink${this.title}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonRefer = `gtmClicLightboxReferir${this.title}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonBuy = `gtmClicLightboxComprar${this.title}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonShare = `gtmClicLightboxCompartir${this.title}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonFacebook = `gtmClicLightboxIconoFacebook${this.title}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonTwitter = `gtmClicLightboxIconoTwitter${this.title}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonWhatsapp= `gtmClicLightboxIconoWhatsApp${this.title}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        if(category.idbusiness !== 3 && category.idbusiness !== 5) {
-          this.template = this.templateCategories;
-        } else {
-          this.template = this.templateAssured;
-        }
-
-        const template = this.template;
-
-        let dialogref = this.dialog.open(DialogComponent, {
-          data: {
-            title,
-            template,
-            infoaditional,
-            showClose,
-            showCloseIcon,
-            img,
-            showProduct,
-            showshowTitle,
-            buttonClose,
-            id,
-            home
-          },
-        });
-    
-        dialogref.afterDismissed().subscribe(() => {
-          this.enableCopy = true;
-        })
-      } else {
-        this.router.navigate(['/'+category.link]);
-      }
-  
-
-  }
-
   public getContentBussiness() {
     this.content.getBusinessContent(this.id)
     .pipe(distinctUntilChanged())
@@ -205,12 +127,41 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.router.navigate(['./']);
   }
 
+  
+   /**
+   * Metodo para salvar los links generados
+   */
+
+  public saveLink(param?: string) {
+
+    let dataSaveLink = {
+      link: this.urlshorten,
+      identification: this.identification,
+      plu: this.plu,
+      business: this.business,
+      creationDate: this.date,
+      identificationcustomer: this.idCustomerForm.controls.identification.value
+    };
+
+    this.subscription = this.links
+      .saveLink(dataSaveLink)
+      .subscribe((resp: ResponseService) => {
+        if (param === "assured") {
+          if (resp.state === "Error") {
+            this.openSnackBar(resp.userMessage, "cerrar");
+            this.showForm = false;
+            this.showFormCustomer = true;
+          }
+        }
+      });
+  }
+
   /**
    * Metodo para dalvar los links reference
    */
 
   public saveLinkReference() {
-    let data = {
+    let dataSaveLinkReference = {
       link: this.urlshorten,
       identification: this.identification,
       plu: this.plu,
@@ -219,13 +170,12 @@ export class BussinessComponent implements OnInit, OnDestroy {
       identificationcustomer: this.idCustomerForm.controls.identification.value
     };
     this.subscription = this.links
-      .saveLink(data)
+      .saveLink(dataSaveLinkReference)
       .subscribe((resp: ResponseService) => {
         if (resp.state === "Error") {
           this.openSnackBar(resp.userMessage, "cerrar");
         } else {
           this.openSnackBar(resp.userMessage, "cerrar");
-          // this.idCustomerForm.controls.identificacion.setValue('');
           this.dialog.dismiss();
         }
       });
@@ -313,7 +263,83 @@ export class BussinessComponent implements OnInit, OnDestroy {
       this.showForm = !this.showForm;
     }
 
+    /**
+   * Metodo para abrir la modal con el producto seleccionado 
+   * 
+   */
 
+  public dataSliderCategory(sliderInfo) {
+    let token = localStorage.getItem("ACCESS_TOKEN");
+      if(token !== null && sliderInfo.business !=='clickam') {
+        const dataCategoryUrl = sliderInfo.link;
+        this.showForm = false;
+        this.urlshorten = '';
+        this.reference = false;
+        this.showFormCustomer = true;
+        this.url = `${dataCategoryUrl}${this.identification}`;
+        this.subscription = this.user
+          .getShortUrl(this.url)
+          .subscribe((resp: any) => {
+            this.urlshorten = resp;
+            this.enableCopy = false;
+            this.saveLink();
+          });
+        this.idCustomerForm.controls.identification.setValue("");
+        this.idCustomerForm.reset();
+        this.formShareLink();
+        const home = true;
+        this.business = sliderInfo.idbusiness;
+        this.plu = sliderInfo.description;
+        const infoaditional = sliderInfo.infoaditional;
+        const img = sliderInfo.imageurl;
+        const showCloseIcon = true;
+        const showClose = false;
+        const buttonClose = "Cerrar";
+        const showshowTitle = false;
+        const title = sliderInfo.description;
+        const showProduct = true;
+        const id = sliderInfo.productId;
+        // this.classButton = (sliderInfo.description).replace(" ", "");
+        this.classButtonWhatsapp= `gtmClicLightboxIconoWhatsApp${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonTwitter = `gtmClicLightboxIconoTwitter${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonFacebook = `gtmClicLightboxIconoFacebook${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonShare = `gtmClicLightboxCompartir${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonBuy = `gtmClicLightboxComprar${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonRefer = `gtmClicLightboxReferir${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonCopy = `gtmClicLightboxCopiarLink${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        if(sliderInfo.idbusiness !== 3 && sliderInfo.idbusiness !== 5) {
+          this.template = this.templateCategories;
+        } else {
+          this.template = this.templateAssured;
+        }
+
+        const template = this.template;
+
+        let dialogref = this.dialog.open(DialogComponent, {
+          data: {
+            template,
+            infoaditional,
+            showClose,
+            img,
+            showCloseIcon,
+            showProduct,
+            buttonClose,
+            showshowTitle,
+            id,
+            title,
+            home
+          },
+        });
+    
+        dialogref.afterDismissed().subscribe(() => {
+          this.enableCopy = true;
+        })
+      } else {
+        this.router.navigate(['/'+sliderInfo.link]);
+      }
+  
+
+  }
 
   public acceptModal() {
     this.dialogModal.closeAll();
@@ -351,33 +377,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
        console.log(resp); 
       }
     })
-  }
-
-  
-   /**
-   * Metodo para dalvar los links generados
-   */
-
-  public saveLink(param?: string) {
-    let data = {
-      link: this.urlshorten,
-      identification: this.identification,
-      plu: this.plu,
-      business: this.business,
-      creationDate: this.date,
-      identificationcustomer: this.idCustomerForm.controls.identification.value
-    };
-    this.subscription = this.links
-      .saveLink(data)
-      .subscribe((resp: ResponseService) => {
-        if (param === "assured") {
-          if (resp.state === "Error") {
-            this.openSnackBar(resp.userMessage, "cerrar");
-            this.showForm = false;
-            this.showFormCustomer = true;
-          }
-        }
-      });
   }
 
 
