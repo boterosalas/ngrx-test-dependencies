@@ -102,7 +102,12 @@ export class SliderComponent implements OnInit {
   }
 
   buy() {
-    window.open(this.urlshorten,'_blank')
+    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    if(iOS) {
+      window.location.assign(this.urlshorten)
+    } else {
+      window.open(this.urlshorten,'_blank');
+    }
   }
 
   next() {
@@ -244,6 +249,8 @@ export class SliderComponent implements OnInit {
   public dataCategory(category) {
     let token = localStorage.getItem("ACCESS_TOKEN");
       if(token !== null && category.business !=='clickam') {
+        this.showFormCustomer = true;
+        this.showForm = false;
         this.urlshorten = '';
         this.reference = false;
         const dataCategoryUrl = category.link;
@@ -271,13 +278,13 @@ export class SliderComponent implements OnInit {
         this.business = category.idbusiness;
         const bussinessType = category.business;
         const home = true;
-        this.classButtonCopy = `gtm${bussinessType}${category.description}ClicLightboxCopiarLink`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonRefer = `gtm${bussinessType}${category.description}ClicLightboxReferir`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonBuy = `gtm${bussinessType}${category.description}ClicLightboxComprar`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonShare = `gtm${bussinessType}${category.description}ClicLightboxCompartir`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonFacebook = `gtm${bussinessType}${category.description}ClicLightboxIconoFacebook`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonTwitter = `gtm${bussinessType}${category.description}ClicLightboxIconoTwitter`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonWhatsapp= `gtm${bussinessType}${category.description}ClicLightboxIconoWhatsApp`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonCopy = `gtmClicLightboxCopiarLink${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonRefer = `gtmClicLightboxReferir${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonBuy = `gtmClicLightboxComprar${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonShare = `gtmClicLightboxCompartir${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonFacebook = `gtmClicLightboxIconoFacebook${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonTwitter = `gtmClicLightboxIconoTwitter${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonWhatsapp= `gtmClicLightboxIconoWhatsApp${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         
         if(category.business === 'seguros') {
           this.template = this.templateAssured;

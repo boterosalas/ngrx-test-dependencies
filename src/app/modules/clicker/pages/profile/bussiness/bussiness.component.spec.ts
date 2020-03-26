@@ -21,6 +21,7 @@ import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommentStmt } from '@angular/compiler';
 import { UserService } from 'src/app/services/user.service';
+import { ClickerModule } from '../../../clicker.module';
 
 describe("BussinessComponent", () => {
   let component: BussinessComponent;
@@ -70,7 +71,7 @@ describe("BussinessComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [BussinessComponent],
+      declarations: [],
       imports: [
         SharedModule,
         TranslateModule.forRoot(),
@@ -78,6 +79,7 @@ describe("BussinessComponent", () => {
         ReactiveFormsModule,
         MatFormFieldModule,
         ShareModule,
+        ClickerModule,
         AppMaterialModule,
         RouterTestingModule,
         HttpClientTestingModule,
