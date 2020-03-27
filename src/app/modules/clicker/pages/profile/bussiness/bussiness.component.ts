@@ -385,7 +385,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   public registerUser() {
     this.user.registeruserterms(this.id).subscribe( (resp:any) => {
       if(resp.state === 'Success') {
-       this.showDeliver = true;
+       this.acceptTermsDeliver = true;
       }
     })
   }
