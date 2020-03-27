@@ -42,6 +42,7 @@ export class SliderComponent implements OnInit {
   @Input() isSlider:boolean;
   @Input() showArrows:boolean;
   @Output() action = new EventEmitter();
+  @Input() Class: string;
 
   @ViewChild('slickModal', {static: false}) slickModal: SlickCarouselComponent;
 
@@ -64,6 +65,15 @@ export class SliderComponent implements OnInit {
   reference: boolean;
   numberPattern = "^(0|[0-9][0-9]*)$";
   template: any;
+  classButtonCopy: string;
+  classButtonRefer: string;
+  classButtonBuy: string;
+  classButtonFacebook: string;
+  classButtonTwitter: string;
+  classButtonWhatsapp: string;
+  classButtonShare: string;
+  tokenInfo: any;
+  idClicker: string;
 
   ngOnInit() {
 
@@ -240,12 +250,14 @@ export class SliderComponent implements OnInit {
   public dataCategory(category) {
     let token = localStorage.getItem("ACCESS_TOKEN");
       if(token !== null && category.business !=='clickam') {
+        this.tokenInfo = this.token.userInfo();
+        this.idClicker = this.tokenInfo.idclicker;
         this.showFormCustomer = true;
         this.showForm = false;
         this.urlshorten = '';
         this.reference = false;
         const dataCategoryUrl = category.link;
-        this.url = `${dataCategoryUrl}${this.identification}`;
+        this.url = `${dataCategoryUrl}${this.idClicker}`;
         this.subscription = this.user
           .getShortUrl(this.url)
           .subscribe((resp: any) => {
@@ -267,7 +279,15 @@ export class SliderComponent implements OnInit {
         const infoaditional = category.infoaditional;
         this.plu = category.description;
         this.business = category.idbusiness;
+        const bussinessType = category.business;
         const home = true;
+        this.classButtonCopy = `gtmClicLightboxCopiarLink${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonRefer = `gtmClicLightboxReferir${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonBuy = `gtmClicLightboxComprar${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonShare = `gtmClicLightboxCompartir${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonFacebook = `gtmClicLightboxIconoFacebook${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonTwitter = `gtmClicLightboxIconoTwitter${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonWhatsapp= `gtmClicLightboxIconoWhatsApp${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         
         if(category.business === 'seguros') {
           this.template = this.templateAssured;

@@ -26,6 +26,7 @@ import { DialogHistoryComponent } from './components/dialog-history/dialog-histo
 import { ShareModule } from '@ngx-share/core';
 import { BussinessComponent } from './pages/profile/bussiness/bussiness.component';
 import { PaymentInfoComponent } from './components/payment-info/payment-info.component';
+import { SliderDeliverComponent } from './components/slider-deliver/slider-deliver.component';
 
 const routes: Routes = [
  
@@ -65,7 +66,8 @@ const routes: Routes = [
     CardDataComponent,
     DialogHistoryComponent,
     BussinessComponent,
-    PaymentInfoComponent
+    PaymentInfoComponent,
+    SliderDeliverComponent
   ],
   imports: [
     CommonModule,

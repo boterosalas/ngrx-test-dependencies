@@ -10,8 +10,8 @@ import { UtilsService } from "src/app/services/utils.service";
 import { ConfirmEmailValidator } from "src/app/validators/confirm-email.validator";
 import { UserService } from "src/app/services/user.service";
 import { MasterDataService } from "src/app/services/master-data.service";
-import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { MatDialog } from '@angular/material';
+import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 declare var dataLayer: any;
 
 @Component({
@@ -174,7 +174,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
           dataLayer.push({
             event: "pushEventGA",
             categoria: "Registro",
-            accion: "ClicLateralRegistro",
+            accion: "ClicContinuar",
             etiqueta: "RegistroExitoso"
           });
 

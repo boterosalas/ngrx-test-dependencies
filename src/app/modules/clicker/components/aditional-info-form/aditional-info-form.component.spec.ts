@@ -11,6 +11,14 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { UserService } from "src/app/services/user.service";
 import { of } from "rxjs/internal/observable/of";
 import { MasterDataService } from "src/app/services/master-data.service";
+import { BehaviorSubject } from 'rxjs';
+
+
+class MockUserService extends UserService {
+
+  userInfo$ = new BehaviorSubject<any>(true);
+
+}
 
 describe("AditionalInfoFormComponent", () => {
   let component: AditionalInfoFormComponent;
@@ -179,13 +187,13 @@ describe("AditionalInfoFormComponent", () => {
         })
       ],
       providers: [
-        // { provide: UserService, useValue: mockUserService },
+        { provide: UserService, useClass: MockUserService },
         { provide: MasterDataService, useValue: mockMasterDataService }
       ]
     }).compileComponents();
-    mockUserService.userInfo.and.returnValue(true);
-    mockUserService.getBasicData.and.returnValue(of(basicData));
-    mockUserService.updateUser.and.returnValue(of(dataUser));
+    // mockUserService.userInfo.and.returnValue(true);
+    // mockUserService.getBasicData.and.returnValue(of(basicData));
+    // mockUserService.updateUser.and.returnValue(of(dataUser));
     mockMasterDataService.getBanks.and.returnValue(of(dataBanks));
   }));
 
@@ -198,6 +206,32 @@ describe("AditionalInfoFormComponent", () => {
   it("should create", () => {
     expect(component).toBeTruthy();
   });
+  
+  it('get basic data', () => {
+    let service = fixture.debugElement.injector.get(UserService);
+   spyOn(service, 'getBasicData').and.returnValue(of(basicData));
+   component.getBasicData();
+   expect(service.getBasicData).toHaveBeenCalled();
+  });
+
+  // it('edit info ', () => {
+  //   component.userInfo.birthDate = '12/12/12';
+  //   component.userInfo.maritalStatus = 'Soltero';
+  //   component.userInfo.gender = 'Otro';
+  //   component.userInfo.educationLevel = 'Bachiller';
+  //   component.userInfo.occupation = 'Desempleado';
+  //   component.userInfo.fixedIncome = '10000';
+  //   component.userInfo.OtherIncome = '10000';
+  //   component.userInfo.stratum = '3';
+  //   component.userInfo.typeHousing = 'Arrendada';
+  //   component.userInfo.numberPeopleLive = '2';
+  //   component.userInfo.dependents = '2';
+  //   component.userInfo.mobility = 'Bus';
+  //   component.userInfo.receiveCommunications = null;
+  //   component.userInfo.bankAccountNumber = null;
+  //   component.editInfo();
+  // })
+  
   
   
 });

@@ -31,6 +31,7 @@ export class ContentService {
   apiCategories= 'offer/getCategories';
   apiProducts = 'product';
   apiGetBusiness = 'business/getBusiness';
+  apiGetBusinessClicker = 'business/getbusinessclicker';
   apiGetBusinessContent = 'business/getContent';
   sendSearch = {};
 
@@ -54,6 +55,14 @@ export class ContentService {
 
   public getBusiness() {
     return this.http.get(`${this.url + this.apiGetBusiness}`, this.httpOptions).pipe(
+      map((user: ResponseService) => {
+        return user.objectResponse;
+      })
+    );
+  }
+
+  public getBusinessClicker() {
+    return this.http.get(`${this.url + this.apiGetBusinessClicker}`, this.httpOptions).pipe(
       map((user: ResponseService) => {
         return user.objectResponse;
       })
