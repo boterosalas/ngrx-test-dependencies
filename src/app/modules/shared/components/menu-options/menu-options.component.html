@@ -23,14 +23,14 @@
     href="https://api.whatsapp.com/send?phone=573052559105&text=Hola,%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20Clickam."
     target="_blank"
     class="cursor-pointer f-16 whatsapp gtmHomeClicMenuLightboxWhatsApp"
-    >WhatsApp</a
+    ><span class="gtmHomeClicMenuLightboxWhatsApp">WhatsApp</span></a
   >
     <span *ngIf="auth.isLoggedIn()">
       <a
       mat-list-item
       (click)="logout();hide()"
       class="cursor-pointer f-16 logout gtmHomeClicMenuLightboxCerrarSesion"
-      >{{ 'HEADER.LOGOUT' | translate }}</a
+      > <span class="gtmHomeClicMenuLightboxCerrarSesion">{{ 'HEADER.LOGOUT' | translate }}</span> </a
     >  
     </span>
   </span>
@@ -50,8 +50,8 @@
       </div>
     
     
-      <div class="terms gtmHomeClicInfTerminos" id="terms-footer" fxLayout="column" fxLayoutAlign="center center">
-        <a (click)="goTerms();hide()" class="gtmHomeClicInfTerminos">Términos y condiciones</a>
+      <div class="terms gtmHomeTerminosCondicionesClickam" id="terms-footer" fxLayout="column" fxLayoutAlign="center center">
+        <a (click)="goTerms();hide()" class="gtmHomeTerminosCondicionesClickam">Términos y condiciones</a>
     </div>
     
     <div fxLayout="column" fxLayoutAlign="center center" class="width-border">
