@@ -62,6 +62,8 @@ export class BussinessComponent implements OnInit, OnDestroy {
   classButtonShare: string;
   acceptTerms: boolean = null;
   terms: boolean = false;
+  tokenInfo: any;
+  idClicker: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -114,6 +116,8 @@ export class BussinessComponent implements OnInit, OnDestroy {
     })
 
   }
+
+
 
   public getContentBussiness() {
     this.content.getBusinessContent(this.id)
@@ -226,7 +230,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
     public showReference() {
       this.reference = !this.reference;
-      // this.idCustomerForm.controls.identification.setValue('');
       this.idCustomerForm.reset();
     }
 
@@ -271,12 +274,15 @@ export class BussinessComponent implements OnInit, OnDestroy {
   public dataSliderCategory(sliderInfo) {
     let token = localStorage.getItem("ACCESS_TOKEN");
       if(token !== null && sliderInfo.business !=='clickam') {
+        this.tokenInfo = this.token.userInfo();
+        this.idClicker = this.tokenInfo.idclicker;
+        // this.idClicker = this.tokenInfo.idclicker.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         const dataCategoryUrl = sliderInfo.link;
         this.showForm = false;
         this.urlshorten = '';
         this.reference = false;
         this.showFormCustomer = true;
-        this.url = `${dataCategoryUrl}${this.identification}`;
+        this.url = `${dataCategoryUrl}${this.idClicker}`;
         this.subscription = this.user
           .getShortUrl(this.url)
           .subscribe((resp: any) => {
