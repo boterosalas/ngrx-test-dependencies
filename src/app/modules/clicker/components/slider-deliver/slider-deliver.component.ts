@@ -14,7 +14,7 @@ export class SliderDeliverComponent implements OnInit {
   }
   
   slideConfig = {"slidesToShow": 1, "slidesToScroll": 1, "dots": true, dotClass: 'slick-dots orange', autoplay: true, autoplaySpeed: 10000, infinite: true, arrows: true}
-  sliderWeb = ['/assets/img/deliver/web/Slider-Inicio-2-Web-Colchones-Paraiso.jpg', '/assets/img/deliver/web/Slider-Inicio-3-Web-Arkitect.jpg' ];
+  sliderWeb = ['/assets/img/deliver/web/BannerOmniMobile.png'];
   sliderMobile = ['/assets/img/deliver/mobile/Slider-Inicio-2-Mobile-Colchones-Paraiso.jpg', '/assets/img/deliver/mobile/Slider-Inicio-2-Mobile-Colchones-Paraiso.jpg'];
 
 }

@@ -64,6 +64,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   terms: boolean = false;
   tokenInfo: any;
   idClicker: string;
+  showDeliver: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -123,6 +124,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.content.getBusinessContent(this.id)
     .pipe(distinctUntilChanged())
     .subscribe(bussiness => {
+      this.showDeliver = true;
       this.bussiness = bussiness;
     })
   }
