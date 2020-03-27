@@ -65,6 +65,9 @@ export class BussinessComponent implements OnInit, OnDestroy {
   tokenInfo: any;
   idClicker: string;
   showDeliver: boolean = false;
+  acceptTermsDeliver: boolean;
+  urlPlaystore:string = 'https://play.google.com/store/apps/details?id=com.sewayplus';
+  urlAppstore:string = 'https://apps.apple.com/co/app/seway/id1414489414';
 
   constructor(
     private route: ActivatedRoute,
@@ -96,7 +99,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getContentBussiness();
-
+    this.getUserData();
     if(localStorage.getItem("ACCESS_TOKEN") !== null ) {
       this.identification = this.token.userInfo().identification;
     }
@@ -382,11 +385,31 @@ export class BussinessComponent implements OnInit, OnDestroy {
   public registerUser() {
     this.user.registeruserterms(this.id).subscribe( (resp:any) => {
       if(resp.state === 'Success') {
-       console.log(resp); 
+       this.showDeliver = true;
       }
     })
   }
 
+  public getUserData() {
+    this.subscription = this.auth.getRole$.subscribe(role => {
+      if (role === "CLICKER" || role === "ADMIN") {
+        this.subscription = this.user.getuserdata().subscribe(user => {
+          this.acceptTermsDeliver = user.acceptTerms;
+        });
+      }
+    });
+  }
+
+
+  public goSeway() {
+    var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    if(iOS || isSafari) {
+      window.location.assign(this.urlAppstore)
+    } else {
+      window.open(this.urlPlaystore,'_blank');
+    }
+  }
 
 
   ngOnDestroy() {

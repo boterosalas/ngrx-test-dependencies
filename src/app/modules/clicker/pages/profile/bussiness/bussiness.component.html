@@ -53,7 +53,7 @@
         <img class="responsive-img" src="/assets/img/deliver/web/banner_envios.png" alt="banner">
       </div>
   
-      <mat-card class="mt-3 mb-3" fxFlex="50">
+      <mat-card class="mt-3 mb-3" fxFlex="50" *ngIf="acceptTermsDeliver === false">
         <img class="responsive-img" src="/assets/img/terminos_y_condiciones.svg" alt="icon-deliver">
         
         <h3 class="f-22 border-bottom-orange-init">{{ "BUSSINESS.TITLE" | translate }}</h3>
@@ -99,6 +99,24 @@
         
         </form>
       </mat-card>
+
+      <mat-card class="mt-3 mb-3" fxFlex="50" fxFlex.xs="100" *ngIf="acceptTermsDeliver === true" fxLayoutAlign="center center" fxLayout="column">
+        <span class="accept-terms text-center cursor-pointer" (click)="termsAndConditions()">
+          {{
+          "BUSSINESS.ACCEPT" | translate
+        }}
+        </span>
+     
+        <button
+        mat-raised-button
+        id="seway"
+        class="mt-2 button button-height pl-2 pr-2 button-100"
+        color="orange"
+        (click)="goSeway()"
+      > IR A SEWAY </button>
+
+      </mat-card>
+      
     </div>
 
 
@@ -580,6 +598,7 @@
 <ng-template #templateTerms>
   <div class="fade-in" innerHtml="{{ 'BUSSINESS.TERMS_LEGAL' | translate }}"></div> 
   <button
+  *ngIf="acceptTermsDeliver === false"
   mat-raised-button
   id="accept-modal"
   class="mt-2 center button button-height button-100 register-button"
