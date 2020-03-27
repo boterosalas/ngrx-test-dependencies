@@ -16,7 +16,7 @@ export class TableUsersComponent implements OnInit {
   
   infoUpdate = {};
 
-  displayedColumns: string[] = ['identification', 'cellphone', 'email', 'subscription', 'firstsale' ,'origin', 'comunication', 'verified', 'status'];
+  displayedColumns: string[] = ['identification','idclicker', 'cellphone', 'email', 'subscription', 'firstsale' ,'origin', 'comunication', 'verified', 'status'];
 
   ngOnInit() {
   }
