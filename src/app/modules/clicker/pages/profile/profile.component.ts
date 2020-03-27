@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   @ViewChild('tabGroup', {static: true}) tabGroup: MatTabGroup;
   managedPayments: boolean;
   isEmployee: boolean;
+  profile:boolean = false;
 
   constructor(
     private user: UserService,
@@ -121,6 +122,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.subscription = this.user.getuserdata().subscribe(user => {
         this.managedPayments = user.managedPayments;
         this.isEmployee = user.isEmployeeGrupoExito;
+        this.profile = true;
     });
   }
   
