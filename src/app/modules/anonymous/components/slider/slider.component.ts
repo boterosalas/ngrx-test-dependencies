@@ -92,9 +92,6 @@ export class SliderComponent implements OnInit {
       ]
     });
 
-    this.tokenInfo = this.token.userInfo();
-    this.idClicker = this.tokenInfo.idclicker.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-
   }
 
   slideConfig = {"slidesToShow": 1, "slidesToScroll": 1, "dots": true, dotClass: 'slick-dots orange', autoplay: true, autoplaySpeed: 5000, infinite: false, arrows: true}
@@ -253,6 +250,8 @@ export class SliderComponent implements OnInit {
   public dataCategory(category) {
     let token = localStorage.getItem("ACCESS_TOKEN");
       if(token !== null && category.business !=='clickam') {
+        this.tokenInfo = this.token.userInfo();
+        this.idClicker = this.tokenInfo.idclicker;
         this.showFormCustomer = true;
         this.showForm = false;
         this.urlshorten = '';
