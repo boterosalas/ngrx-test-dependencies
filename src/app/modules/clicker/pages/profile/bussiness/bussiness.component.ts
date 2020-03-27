@@ -291,7 +291,8 @@ export class BussinessComponent implements OnInit, OnDestroy {
         this.subscription = this.user
           .getShortUrl(this.url)
           .subscribe((resp: any) => {
-            this.urlshorten = resp;
+            let splice = resp.split('//');
+            this.urlshorten = 'https://'+ splice[1];
             this.enableCopy = false;
             this.saveLink();
           });
