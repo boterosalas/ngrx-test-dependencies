@@ -528,6 +528,11 @@ table {
 }
 
 @media screen and (max-width: 600px) {
+
+  app-bussiness-card {
+    width: 100%;
+  }
+
   .mat-paginator-page-size {
     display: none !important;
     .ch-100 {
@@ -1196,4 +1201,8 @@ app-product.no-slider img {
 
 .rotate {
   transform: rotate(180deg);
+}
+
+.gtmHomeClicNegociosEnvíos {
+  padding: 18px 8px !important;
 }
