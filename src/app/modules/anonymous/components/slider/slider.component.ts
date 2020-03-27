@@ -72,7 +72,8 @@ export class SliderComponent implements OnInit {
   classButtonTwitter: string;
   classButtonWhatsapp: string;
   classButtonShare: string;
-
+  tokenInfo: any;
+  idClicker: string;
 
   ngOnInit() {
 
@@ -249,12 +250,14 @@ export class SliderComponent implements OnInit {
   public dataCategory(category) {
     let token = localStorage.getItem("ACCESS_TOKEN");
       if(token !== null && category.business !=='clickam') {
+        this.tokenInfo = this.token.userInfo();
+        this.idClicker = this.tokenInfo.idclicker;
         this.showFormCustomer = true;
         this.showForm = false;
         this.urlshorten = '';
         this.reference = false;
         const dataCategoryUrl = category.link;
-        this.url = `${dataCategoryUrl}${this.identification}`;
+        this.url = `${dataCategoryUrl}${this.idClicker}`;
         this.subscription = this.user
           .getShortUrl(this.url)
           .subscribe((resp: any) => {
