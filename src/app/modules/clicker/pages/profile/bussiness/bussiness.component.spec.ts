@@ -31,7 +31,7 @@ describe("BussinessComponent", () => {
     "getBusinessContent",
   ]);
 
-  const mockUserService = jasmine.createSpyObj("UserService", ["getShortUrl"]);
+  const mockUserService = jasmine.createSpyObj("UserService", ["getShortUrl", "getuserdata"]);
 
   const mockDialog = jasmine.createSpyObj("MatDialog", ["open"]);
 
@@ -40,6 +40,10 @@ describe("BussinessComponent", () => {
     "afterClosed",
     "componentInstance"
   ]);
+
+  let dataUserC = {
+    acceptTermsDeliver: true
+  }
 
   let categorys = {
     id: 25,
@@ -109,6 +113,7 @@ describe("BussinessComponent", () => {
       })
       .compileComponents();
     mockContentService.getBusinessContent.and.returnValue(of(bussiness));
+    mockUserService.getuserdata.and.returnValue(of(dataUserC));
     mockUserService.getShortUrl.and.returnValue(of('http://tynyurl.com/12kusw'));
   }));
 
