@@ -19,6 +19,7 @@
   </span>
   <span class="menu-mobile">
     <a
+    *ngIf="(auth.getRole$ | async ) !== 'ADMIN'"
     mat-list-item
     href="https://api.whatsapp.com/send?phone=573052559105&text=Hola,%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20Clickam."
     target="_blank"
@@ -35,12 +36,12 @@
     </span>
   </span>
 
-  <span class="text-center" *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'CLICKER'">
+  <span class="text-center" *ngIf="(auth.getRole$ | async ) !== 'ADMIN'">
     <h3 class="f-21 m-2">{{ 'GENERIC.SUPPORT' | translate }} </h3>
     <p class="f-12">{{ 'GENERIC.EMAIL_SUPPORT' | translate }}</p>
   </span>
 
-  <div class="text-center" *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'CLICKER'">
+  <div class="text-center" *ngIf="(auth.getRole$ | async ) !== 'ADMIN'">
       <h3 class="m-2"> {{ 'FOOTER.FOLLOW_US' | translate }}</h3>
     
       <div fxLayoutAlign="center center" class="social-links">
@@ -50,7 +51,7 @@
       </div>
     
     
-      <div class="terms gtmHomeTerminosCondicionesClickam" id="terms-footer" fxLayout="column" fxLayoutAlign="center center">
+      <div class="terms gtmHomeTerminosCondicionesClickam cursor-pointer" id="terms-footer" fxLayout="column" fxLayoutAlign="center center">
         <a (click)="goTerms();hide()" class="gtmHomeTerminosCondicionesClickam">Términos y condiciones</a>
     </div>
     
