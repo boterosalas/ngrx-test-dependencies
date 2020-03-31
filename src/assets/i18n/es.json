@@ -172,6 +172,9 @@
     "PRODUCTS_SELLER": "Productos vendidos",
     "CONVERSION": "Tasa de conversión"
   },
+  "COMMISION_TABLE": {
+    "COMMISION_TABLE": "Tabla de comisiones"
+  },
   "CLICKACADEMY": {
     "CLICKACADEMY": "Click Academy",
     "CLICKACADEMY_TAB_EXITO": "exito.com",

@@ -25,6 +25,7 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { SliderComponent } from './components/slider/slider.component';
 import { BussinessCardComponent } from './components/bussiness-card/bussiness-card.component';
+import { ComissionTableComponent } from './pages/comission-table/comission-table.component';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -56,6 +57,10 @@ const routes: Routes = [
   {
     path: "terminos-y-condiciones",
     component: TermsAndConditionsComponent
+  },
+  {
+    path: "tabla-comisiones",
+    component: ComissionTableComponent
   }
 ];
 
@@ -77,6 +82,7 @@ const routes: Routes = [
     CardOfferComponent,
     SliderComponent,
     BussinessCardComponent,
+    ComissionTableComponent,
     // ReportComponent
   ],
   imports: [

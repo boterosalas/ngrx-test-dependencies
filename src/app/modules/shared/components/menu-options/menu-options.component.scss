@@ -25,6 +25,30 @@
         }
     }
 
+    .Tabla.de.Comisiones{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/tabla_comisiones.svg") no-repeat;
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            top: 24%;
+            left: 2%;
+        }
+    }
+
+    .Historial.de.Links{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/historial_links.svg") no-repeat;
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            top: 24%;
+            left: 2%;
+        }
+    }
+
     .Inicio, .DashBoard{
         &::before {
             content: "";
