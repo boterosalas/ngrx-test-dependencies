@@ -16,6 +16,7 @@ import { LinksService } from 'src/app/services/links.service';
 import * as moment from 'moment';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { DialogEditComponent } from 'src/app/modules/clicker/components/dialog-edit/dialog-edit.component';
+import { UserService } from 'src/app/services/user.service';
 moment.locale('es');
 
 describe("UsersComponent", () => {
@@ -34,6 +35,8 @@ describe("UsersComponent", () => {
     "componentInstance",
     "event "
   ]);
+
+  const mockUserService = jasmine.createSpyObj("UserService", ["updateUserEmail"]);
 
   const dataUser = {
     state: "Success",
@@ -103,6 +106,18 @@ describe("UsersComponent", () => {
     title: 'Actualizar correo'
   }
 
+  const resp = {
+    state: "Success",
+    userMessage: "se ha actualizado el email",
+    objectResponse: []
+  };
+
+  const respError = {
+    state: "Error",
+    userMessage: "No se ha actualizado el email",
+    objectResponse: []
+  };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [DialogEditComponent],
@@ -126,7 +141,8 @@ describe("UsersComponent", () => {
         AdminModule
       ],
       providers: [
-        { provide: LinksService, useValue: mockLinksService }
+        { provide: LinksService, useValue: mockLinksService },
+        { provide: UserService, useValue: mockUserService },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
@@ -142,6 +158,7 @@ describe("UsersComponent", () => {
     localStorage.setItem('ACCESS_TOKEN', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU');
     mockLinksService.searchUsers.and.returnValue(of(dataUser));
     mockLinksService.getUsersExcel.and.returnValue(of(getUserExcel));
+    mockUserService.updateUserEmail.and.returnValue(of(resp));
     fixture = TestBed.createComponent(UsersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -152,6 +169,17 @@ describe("UsersComponent", () => {
     expect(component).toBeTruthy();
   });
 
+  it('updateEmail', () => {
+    component.updateEmail();
+    expect(mockUserService.updateUserEmail).toHaveBeenCalled();
+  });
+  
+  it('updateEmail', () => {
+    component.updateEmail();
+    expect(mockUserService.updateUserEmail).toHaveBeenCalled();
+  });
+  
+
   it("search user", () => {
     component.searchUser("david");
     expect(mockLinksService.searchUsers).toHaveBeenCalled();
@@ -159,6 +187,7 @@ describe("UsersComponent", () => {
 
   it("modal data", () => {
     component.userData(dataUsers);
+    expect(dataUsers).not.toBeUndefined();
   });
 
   it('pagination', () => {
@@ -183,16 +212,17 @@ describe("UsersComponent", () => {
 
   it('change email', () => {
     component.changeEmail();
+    expect(component.changeEmail).toBeTruthy();
   });
   
   it('open modal', () => {
     component.userEmail(user);
+    expect(user).not.toBeUndefined();
   });
 
   it('update email', () => {
     component.updateEmail();
+    expect(mockUserService.updateUserEmail).toHaveBeenCalled();
   });
-  
-  
 
 });
