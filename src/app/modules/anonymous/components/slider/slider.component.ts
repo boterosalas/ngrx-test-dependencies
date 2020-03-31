@@ -290,13 +290,13 @@ export class SliderComponent implements OnInit {
         this.classButtonTwitter = `gtmClicLightboxIconoTwitter${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         this.classButtonWhatsapp= `gtmClicLightboxIconoWhatsApp${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         
-        if(category.business === 'seguros') {
-          this.template = this.templateAssured;
-        } else {
-          this.template = this.templateCategories;
-        }
+        // if(category.business === 'seguros') {
+        //   this.template = this.templateAssured;
+        // } else {
+        //   this.template = this.templateCategories;
+        // }
 
-        const template = this.template;
+        const template = this.templateCategories;
 
         let dialogref = this.dialog.open(DialogComponent, {
           data: {
