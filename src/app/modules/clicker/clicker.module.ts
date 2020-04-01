@@ -27,6 +27,7 @@ import { ShareModule } from '@ngx-share/core';
 import { BussinessComponent } from './pages/profile/bussiness/bussiness.component';
 import { PaymentInfoComponent } from './components/payment-info/payment-info.component';
 import { SliderDeliverComponent } from './components/slider-deliver/slider-deliver.component';
+import { LinksHistorialComponent } from './pages/profile/links-historial/links-historial.component';
 
 const routes: Routes = [
  
@@ -49,6 +50,11 @@ const routes: Routes = [
     path: "bussiness",
     component: BussinessComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: "historial-links",
+    component: LinksHistorialComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
@@ -67,7 +73,8 @@ const routes: Routes = [
     DialogHistoryComponent,
     BussinessComponent,
     PaymentInfoComponent,
-    SliderDeliverComponent
+    SliderDeliverComponent,
+    LinksHistorialComponent
   ],
   imports: [
     CommonModule,

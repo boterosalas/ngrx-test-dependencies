@@ -86,7 +86,9 @@ describe('AditionalFilesComponent', () => {
   });
 
   it('sendInfo', () => {
+    spyOn(component.uploadFile, 'emit');
     component.sendInfo();
+    expect(component.uploadFile.emit).toHaveBeenCalled();
   });
 
 });

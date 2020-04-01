@@ -138,6 +138,7 @@ describe("LoginformComponent", () => {
       component.loginForm.controls.Username.setValue("t@gmail.com");
       component.loginForm.controls.Password.setValue("123123");
       component.login();
+      expect(mockAuthService.login).toHaveBeenCalled();
     });
   });
 

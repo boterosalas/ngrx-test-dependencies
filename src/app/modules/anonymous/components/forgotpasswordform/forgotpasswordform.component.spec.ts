@@ -12,11 +12,14 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { UtilsService } from 'src/app/services/utils.service';
 
 
 describe('ForgotpasswordformComponent', () => {
   let component: ForgotpasswordformComponent;
   let fixture: ComponentFixture<ForgotpasswordformComponent>;
+
+  const mockUtilsService = jasmine.createSpyObj("UtilsService", ["showloginForm"]);
 
   const mockAuthService= jasmine.createSpyObj("AuthService", [
     "forgotPassword"
@@ -56,7 +59,8 @@ describe('ForgotpasswordformComponent', () => {
          SharedModule
        ],
        providers: [
-         {provide: AuthService, useValue: mockAuthService}
+         {provide: AuthService, useValue: mockAuthService},
+         { provide: UtilsService, useValue: mockUtilsService },
        ],
        schemas: [
          NO_ERRORS_SCHEMA
@@ -92,6 +96,7 @@ describe('ForgotpasswordformComponent', () => {
 
   it('hide forgot', () => {
     component.hideForgot();
+    expect(mockUtilsService.showloginForm).toHaveBeenCalled();
   });
   
   

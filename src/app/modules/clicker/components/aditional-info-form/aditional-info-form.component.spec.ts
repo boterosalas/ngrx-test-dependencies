@@ -16,7 +16,22 @@ import { BehaviorSubject } from 'rxjs';
 
 class MockUserService extends UserService {
 
-  userInfo$ = new BehaviorSubject<any>(true);
+  userInfo$ = new BehaviorSubject<any>({
+     birthDate: '12/12/12',
+     maritalStatusOb :{id: '2', description: 'casado'},
+     genderOb: {id: '1', description: 'Masculino'},
+     educationLevelOb: {id: '1', description: 'Bachiller'},
+     occupationOb: {id: '1', description: 'prueba'},
+     fixedIncomeOb : {id: '1', description: '1'},
+    otherIncome: '11',
+    stratumOb: {id: 1, description: 'otros'},
+    typeHousingOb: {id: '1', description: 'propia'},
+    numberPeopleLiveOb:  {id: '1', description: 'personas'},
+    dependantOb: {id: '1', description: 'personas'},
+    mobilityOb: {id: '1', description: 'Bus'},
+    address: 'calle falsa 123',
+    receiveCommunications: true
+  });
 
 }
 
@@ -164,6 +179,13 @@ describe("AditionalInfoFormComponent", () => {
     dateLastUpdate: "2019-12-10T18:30:16.368Z"
   };
 
+  const resp = {
+    state: "Success",
+    userMessage: "se ha actualizado el email",
+    objectResponse: []
+  };
+
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AditionalInfoFormComponent],
@@ -214,24 +236,11 @@ describe("AditionalInfoFormComponent", () => {
    expect(service.getBasicData).toHaveBeenCalled();
   });
 
-  // it('edit info ', () => {
-  //   component.userInfo.birthDate = '12/12/12';
-  //   component.userInfo.maritalStatus = 'Soltero';
-  //   component.userInfo.gender = 'Otro';
-  //   component.userInfo.educationLevel = 'Bachiller';
-  //   component.userInfo.occupation = 'Desempleado';
-  //   component.userInfo.fixedIncome = '10000';
-  //   component.userInfo.OtherIncome = '10000';
-  //   component.userInfo.stratum = '3';
-  //   component.userInfo.typeHousing = 'Arrendada';
-  //   component.userInfo.numberPeopleLive = '2';
-  //   component.userInfo.dependents = '2';
-  //   component.userInfo.mobility = 'Bus';
-  //   component.userInfo.receiveCommunications = null;
-  //   component.userInfo.bankAccountNumber = null;
-  //   component.editInfo();
-  // })
-  
-  
+  it('edit info', () => {
+    let service = fixture.debugElement.injector.get(UserService);
+   spyOn(service, 'updateUser').and.returnValue(of(resp));
+   component.editInfo();
+   expect(service.updateUser).toHaveBeenCalled();
+  });  
   
 });

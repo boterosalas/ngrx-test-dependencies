@@ -39,7 +39,9 @@ describe('ModalGenericComponent', () => {
 
   
   it('close modal', () => {
+    let spy = spyOn(component.dialogRef, 'close').and.callThrough();
     component.onNoClick();
+    expect(spy).toHaveBeenCalled(); 
   });
 
 });

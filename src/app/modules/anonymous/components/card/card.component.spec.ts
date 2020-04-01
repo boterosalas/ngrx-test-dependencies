@@ -36,7 +36,9 @@ describe('CardComponent', () => {
   });
 
   it('open register', () => {
+    spyOn(component.actionButton, 'emit');
     component.showRegister();
+    expect(component.actionButton.emit).toHaveBeenCalled();
   });
 
 });
