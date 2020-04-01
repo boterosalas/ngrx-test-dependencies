@@ -35,11 +35,15 @@ describe('TableUsersComponent', () => {
   });
 
   it('user info', () => {
+    spyOn(component.dataUser, 'emit');
     component.userInfo([]);
+    expect(component.dataUser.emit).toHaveBeenCalled();
   });
 
   it('sort data', () => {
+    spyOn(component.sortDataUser, 'emit');
     component.sortData([]);
+    expect(component.sortDataUser.emit).toHaveBeenCalled();
   });
 
 });

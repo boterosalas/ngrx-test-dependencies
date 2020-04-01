@@ -38,7 +38,9 @@ describe('ProductComponent', () => {
   });
 
   it('product change', () => {
+    spyOn(component.infoProduct, 'emit');
     component.product();
+    expect(component.infoProduct.emit).toHaveBeenCalled();
   });
 
 });

@@ -15,6 +15,8 @@ import { MasterDataService } from "src/app/services/master-data.service";
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { UtilsService } from 'src/app/services/utils.service';
+import { MatDialog } from '@angular/material';
 
 describe("RegisterformComponent", () => {
   let component: RegisterformComponent;
@@ -24,6 +26,10 @@ describe("RegisterformComponent", () => {
     "idType",
     "registerUser"
   ]);
+
+  const mockDialog = jasmine.createSpyObj("MatDialog", ["open", "closeAll"]);
+
+  const mockUtilsService = jasmine.createSpyObj("UtilsService", ["showloginForm"]);
 
   const idType = [
     {
@@ -127,7 +133,9 @@ describe("RegisterformComponent", () => {
       ],
       providers: [
         { provide: UserService, useValue: mockUserService },
+        { provide: UtilsService, useValue: mockUtilsService },
         { provide: Router, useValue: mockRouter },
+        { provide: MatDialog, useValue: mockDialog}
       ]
     }).compileComponents();
 
@@ -213,10 +221,12 @@ describe("RegisterformComponent", () => {
 
   it('hide register', () => {
     component.hideRegister();
+    expect(mockUtilsService.showloginForm).toHaveBeenCalled();
   });
 
   it('show term', () => {
     component.termsAndConditions();
+    expect(mockDialog.open).toHaveBeenCalled();
   });
   
   

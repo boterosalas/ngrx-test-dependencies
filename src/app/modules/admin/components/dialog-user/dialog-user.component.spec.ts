@@ -56,44 +56,46 @@ describe('DialogUserComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('change status', () => {
-  //   spyOn(component.state, 'emit');
-  //   // trigger the click
-  //   const nativeElement = fixture.nativeElement;
-  //   const toggle = nativeElement.querySelector('.mat-slide-toggle');
-  //   toggle.dispatchEvent(new Event('change'));
-  //   fixture.detectChanges();
- 
-  //   expect(component.state.emit).toHaveBeenCalledTimes(0);
-  // });
-
   it('change status', () => {
+    spyOn(component.state, 'emit');
     component.changeStatus();
+    expect(component.state.emit).toHaveBeenCalled();
   });
 
   it('change comunications', () => {
+    spyOn(component.comunications, 'emit');
     component.changeComunications();
+    expect(component.comunications.emit).toHaveBeenCalled();
   });
 
   it('change verified', () => {
+    spyOn(component.verified, 'emit');
     component.changeVerified();
+    expect(component.verified.emit).toHaveBeenCalled();
   });
 
   it('change IdentificationCard1Download', () => {
+    spyOn(component.IdentificationCard1, 'emit');
     component.IdentificationCard1Download();
+    expect(component.IdentificationCard1.emit).toHaveBeenCalled();
   });
 
   it('change IdentificationCard12ownload', () => {
+    spyOn(component.IdentificationCard2, 'emit');
     component.IdentificationCard2Download();
+    expect(component.IdentificationCard2.emit).toHaveBeenCalled();
   });
 
   it('change bankCardDownload', () => {
+    spyOn(component.bankCertificate, 'emit');
     component.bankCardDownload();
+    expect(component.bankCertificate.emit).toHaveBeenCalled();
   });
 
   it('close modal', () => {
+    let spy = spyOn(component.dialogRef, 'close').and.callThrough();
     component.onNoClick();
+    expect(spy).toHaveBeenCalled(); 
   });
   
-
 });

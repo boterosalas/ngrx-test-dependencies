@@ -28,7 +28,9 @@ describe('BussinessCardComponent', () => {
   });
 
   it('navigate bussiness', () => {
+    spyOn(component.bussiness, 'emit');
      component.navigateBussiness();
+     expect(component.bussiness.emit).toHaveBeenCalled();
   });
   
 

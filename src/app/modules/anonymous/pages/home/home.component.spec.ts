@@ -40,7 +40,7 @@ describe("HomeComponent", () => {
 
   const mockUserService= jasmine.createSpyObj("UserService", ["activateProfile", "getuserdata"]);
   const mockAuthService = jasmine.createSpyObj("AuthService", ["login", "isLoggedIn", "isLogged$"]);
-  const mockUtilsService = jasmine.createSpyObj("UtilsService", ["showRegisterForm"]);
+  const mockUtilsService = jasmine.createSpyObj("UtilsService", ["showRegisterForm","showloginForm"]);
   const mockContentService = jasmine.createSpyObj("ContentService", [
     "getNews",
     "getOffers",
@@ -163,19 +163,16 @@ let offers = {"mobile":[{"imageurl":"https://webclickamdev.blob.core.windows.net
 
   it('open register', () => {
     component.openRegister();
-    fixture.whenStable().then(() =>{
-      tick();
-      expect(mockUtilsService.showRegisterForm).toHaveBeenCalled();
-    });
+    expect(mockUtilsService.showRegisterForm).toHaveBeenCalled();
   });
 
-  it('showlogin logged', () => {
-    component.sliderOffers();
-  });
+  // it('showlogin logged', () => {
+  //   component.sliderOffers();
+  // });
 
-  it('bussiness navigation', () => {
-    component.bussinessNavigation('1');
-  });
+  // it('bussiness navigation', () => {
+  //   component.bussinessNavigation('1');
+  // });
   
 
   describe('Error activation', () => {

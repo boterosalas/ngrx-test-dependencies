@@ -30,7 +30,9 @@ describe('TableHistorialComponent', () => {
   });
 
   it('table history', () => {
+    spyOn(component.dataUser, 'emit');
     component.userInfo([]);
+    expect(component.dataUser.emit).toHaveBeenCalled();
   });
   
 

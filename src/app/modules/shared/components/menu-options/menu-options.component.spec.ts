@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
 import { MenuOptionsComponent } from './menu-options.component';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 import { UtilsService } from 'src/app/services/utils.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateModule } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 describe('MenuOptionsComponent', () => {
   let component: MenuOptionsComponent;
@@ -82,11 +83,15 @@ describe('MenuOptionsComponent', () => {
   });
 
   it('hide sidenav', () => {
+    spyOn(component.hideSidenav, 'emit');
     component.hide();
+    expect(component.hideSidenav.emit).toHaveBeenCalled();
   });
   
-  it('go to terms', () => {
+  it('go to terms', inject([Router], (router: Router) => {
+    spyOn(router, 'navigate').and.stub();
     component.goTerms();
-  });
+    expect(router.navigate).toHaveBeenCalledWith(['/terminos-y-condiciones']);
+  }));
 
 });
