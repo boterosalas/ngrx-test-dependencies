@@ -3,7 +3,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from "@angular/forms";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { of, throwError } from "rxjs";
+import { of, throwError, BehaviorSubject } from "rxjs";
 import { RouterTestingModule } from "@angular/router/testing";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { Router } from "@angular/router";
@@ -13,6 +13,16 @@ import { MasterDataService } from "src/app/services/master-data.service";
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { PaymentInfoComponent } from './payment-info.component';
+
+class MockUserService extends UserService {
+
+  userInfo$ = new BehaviorSubject<any>({
+    firstNames: 'David',
+    lastNames: 'Betancur',
+    cellphone: '3000000000'
+  });
+
+}
 
 describe("('PaymentInfoComponent', ", () => {
   let component: PaymentInfoComponent;
@@ -184,6 +194,13 @@ describe("('PaymentInfoComponent', ", () => {
     objectResponse: false
   };
 
+  const resp = {
+    state: "Success",
+    userMessage: "se ha actualizado el usuario",
+    objectResponse: []
+  };
+  
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [PaymentInfoComponent, TruncatePipe],
@@ -209,7 +226,7 @@ describe("('PaymentInfoComponent', ", () => {
         })
       ],
       providers: [
-        // { provide: UserService, useValue: mockUserService },
+        { provide: UserService, useClass: MockUserService },
         { provide: Router, useValue: mockRouter },
         { provide: MasterDataService, useValue: mockMasterDataService }
       ]
@@ -235,6 +252,14 @@ describe("('PaymentInfoComponent', ", () => {
   //   expect(component).toBeTruthy();
   //   expect(mockUserService.idType).toHaveBeenCalled();
   // });
+
+  it('send sendPayment', () => {
+    let service = fixture.debugElement.injector.get(UserService);
+    spyOn(service, 'updateUser').and.returnValue(of(resp));
+    component.sendPayment();
+    expect(service.updateUser).toHaveBeenCalled();
+  });
+  
 
   
 
@@ -274,6 +299,7 @@ describe("('PaymentInfoComponent', ", () => {
   it("select city", () => {
     component.cityCode = "01";
     component.selectCity("Medellín");
+    expect(component.selectCity).toBeTruthy();
   });
 
   it("select selectDepartment", () => {
@@ -290,6 +316,7 @@ describe("('PaymentInfoComponent', ", () => {
       cert: [null],
     });
     component.selectDepartment(department);
+    expect(department).not.toBeUndefined();
   });
 
   it("register form", () => {
@@ -316,6 +343,7 @@ describe("('PaymentInfoComponent', ", () => {
     component.externalForm.controls.numberAccount.setValue('123456');
     component.externalForm.controls.typeAccount.setValue('Ahorros');
     component.externalForm.controls.address.setValue('calle falsa 123');
+    expect(component.externalForm.valid).toBeTruthy();
   });
 
   it('checkDepartment', () => {

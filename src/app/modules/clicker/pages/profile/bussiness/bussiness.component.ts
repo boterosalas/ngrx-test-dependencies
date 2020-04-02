@@ -319,13 +319,13 @@ export class BussinessComponent implements OnInit, OnDestroy {
         this.classButtonBuy = `gtmClicLightboxComprar${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         this.classButtonRefer = `gtmClicLightboxReferir${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         this.classButtonCopy = `gtmClicLightboxCopiarLink${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        if(sliderInfo.idbusiness !== 3 && sliderInfo.idbusiness !== 5) {
-          this.template = this.templateCategories;
-        } else {
-          this.template = this.templateAssured;
-        }
+        // if(sliderInfo.idbusiness !== 3 && sliderInfo.idbusiness !== 5) {
+        //   this.template = this.templateCategories;
+        // } else {
+        //   this.template = this.templateAssured;
+        // }
 
-        const template = this.template;
+        const template = this.templateCategories;
 
         let dialogref = this.dialog.open(DialogComponent, {
           data: {

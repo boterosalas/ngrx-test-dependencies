@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
 import { FooterComponent } from './footer.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -6,14 +6,11 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateModule } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
   let fixture: ComponentFixture<FooterComponent>;
-
-  let router = {
-    navigate: jasmine.createSpy('navigate')
-  }
   
 
   beforeEach(async(() => {
@@ -23,7 +20,7 @@ describe('FooterComponent', () => {
        ],
        imports: [
         HttpClientTestingModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule,
         TranslateModule.forRoot(),
         JwtModule.forRoot({
           config: {
@@ -55,9 +52,11 @@ describe('FooterComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('go to terms', () => {
+  it('go to terms', inject([Router], (router: Router) => {
+    spyOn(router, 'navigate').and.stub();
     component.goTerms();
-  });
+    expect(router.navigate).toHaveBeenCalledWith(['/terminos-y-condiciones']);
+  }));
   
 
 });
