@@ -29,6 +29,7 @@ export class LinksService {
   apigetDetailPaymentClicker = 'commissions/getDetailPaymentClicker';
   apigenerateCommissions = 'commissions/generateCommissionsFile';
   apiHistory = 'commissions/getPaymentHistoryClicker';
+  apiLinkHistory = 'linkhistory/getlinkhistory';
   apiupdatePaymentDate= 'commissions/updatePaymentDate';
 
   public saveLink(SaveLink: any) {
@@ -108,6 +109,24 @@ export class LinksService {
       })
     };
     return this.http.get((`${this.urlComission}${this.apiHistory}?from=${params.from}&to=${params.to}`), httpOptions).pipe(
+      map((resp: ResponseService) => {
+        return resp.objectResponse;
+      })
+    );
+  }
+
+  public getLinkHistory(params) {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.get((`${this.urlComission}${this.apiLinkHistory}?from=${params.from}&to=${params.to}&orderBy=${params.orderBy}`), httpOptions).pipe(
       map((resp: ResponseService) => {
         return resp.objectResponse;
       })

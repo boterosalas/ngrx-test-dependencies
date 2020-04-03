@@ -194,7 +194,7 @@ export class SliderComponent implements OnInit {
 
   public saveLink(param?: string) {
     let data = {
-      link: this.urlshorten,
+      link: this.url,
       identification: this.identification,
       plu: this.plu,
       business: this.business,
@@ -204,6 +204,10 @@ export class SliderComponent implements OnInit {
     this.subscription = this.links
       .saveLink(data)
       .subscribe((resp: ResponseService) => {
+        let splice = resp.objectResponse.link.split('//');
+        this.urlshorten = 'https://'+ splice[1];
+        this.enableCopy = false;
+        
         if (param === "assured") {
           if (resp.state === "Error") {
             this.openSnackBar(resp.userMessage, "cerrar");
@@ -247,7 +251,7 @@ export class SliderComponent implements OnInit {
    * 
    */
 
-  public dataCategory(category) {
+  public async dataCategory(category) {
     let token = localStorage.getItem("ACCESS_TOKEN");
       if(token !== null && category.business !=='clickam') {
         this.tokenInfo = this.token.userInfo();
@@ -258,14 +262,9 @@ export class SliderComponent implements OnInit {
         this.reference = false;
         const dataCategoryUrl = category.link;
         this.url = `${dataCategoryUrl}${this.idClicker}`;
-        this.subscription = this.user
-          .getShortUrl(this.url)
-          .subscribe((resp: any) => {
-            let splice = resp.split('//');
-            this.urlshorten = 'https://'+ splice[1];
-            this.enableCopy = false;
-            this.saveLink();
-          });
+        setTimeout(() => {
+          this.saveLink();
+        }, 500);
         this.idCustomerForm.controls.identification.setValue("");
         this.idCustomerForm.reset();
         this.formShareLink();

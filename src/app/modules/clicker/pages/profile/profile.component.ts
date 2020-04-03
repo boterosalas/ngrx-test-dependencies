@@ -52,8 +52,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
    this.route.params.subscribe(param => {
      if(param.pagos === 'pagos') {
        setTimeout(() => {
-         this.tabGroup.selectedIndex = 2
-       }, 500);
+         this.tabGroup.selectedIndex = 3;
+       }, 1000);
      }
    })
 
