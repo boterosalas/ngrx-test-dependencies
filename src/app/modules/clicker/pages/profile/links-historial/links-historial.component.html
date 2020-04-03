@@ -1,6 +1,26 @@
 <app-logo></app-logo>
 
-<div class="container">
+<div class="container historical">
     <h1 class="border-bottom-orange-init">{{ 'HISTORICAL.HISTORY_LINKS' | translate }}</h1>
-    <app-table-historical-links></app-table-historical-links>
+
+    <div class="order border-bottom-gray" fxLayout="row" fxLayoutAlign="flex-start center">
+        
+        <label class="mr-4 f-17 gray">Ordenar por: </label>
+        <mat-form-field>
+          <mat-select value="DATEASC">
+              <mat-option *ngFor="let option of orderOptions" [value]="option.value" (click)="order(option.value)">
+                  <span>{{option.description}}</span></mat-option
+                >
+          </mat-select>
+        </mat-form-field>
+      
+      </div>
+
+    <app-table-historical-links [dataSource]="dataSource"></app-table-historical-links>
+    <mat-paginator
+        [length]="totalItems"
+        [pageSize]="pageSize"
+        [pageIndex]="pageIndex"
+        (page)="pagination($event)"
+   ></mat-paginator>
 </div>

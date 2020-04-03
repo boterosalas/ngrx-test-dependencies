@@ -556,6 +556,10 @@ table {
   //   padding: 18px 8px !important;
   // }
 
+  .users-table{
+    width: 800px;
+  }
+
   app-bussiness-card {
     width: 100%;
   }
@@ -1241,4 +1245,14 @@ app-product.no-slider img {
 
 table {
   border-collapse: collapse;
+}
+
+.historical {
+  .mat-paginator-page-size{
+    display: none;
+  }
+}
+
+.overflow-auto{
+  overflow: auto;
 }
