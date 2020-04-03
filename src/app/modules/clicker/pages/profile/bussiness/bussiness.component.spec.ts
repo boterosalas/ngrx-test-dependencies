@@ -80,7 +80,16 @@ describe("BussinessComponent", () => {
   const resp = {
     state: "Success",
     userMessage: "se ha guardado el link",
-    objectResponse: []
+    objectResponse: 
+    {
+      id: 2656,
+      link: "http://tinyurl.com/t7c5ouj",
+      creationDate: "2020-04-03T12:07:15.3146043-05:00",
+      userId: 220,
+      plu: "C-HOME",
+      business: "1",
+      identification: null,
+    }
   };
 
   beforeEach(async(() => {
@@ -173,11 +182,13 @@ describe("BussinessComponent", () => {
   });
 
   it("data category", () => {
+    component.urlshorten = 'http://tynyurl.com/xsxsx';
     component.dataSliderCategory(categorys);
     expect(mockDialog.open).toBeTruthy();
   });
 
   it("next step", () => {
+    component.urlshorten = 'http://tynyurl.com/xsxsx';
     component.showForm = true;
     component.showFormCustomer = false;
     component.nextStep();
@@ -186,6 +197,7 @@ describe("BussinessComponent", () => {
   });
 
   it("back step", () => {
+    component.urlshorten = 'http://tynyurl.com/xsxsx';
     component.showForm = true;
     component.reference = false;
     component.backStep();

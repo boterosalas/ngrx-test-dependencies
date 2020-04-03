@@ -43,8 +43,18 @@ describe("SliderComponent", () => {
   const resp = {
     state: "Success",
     userMessage: "se ha guardado el link",
-    objectResponse: []
+    objectResponse: 
+    {
+      id: 2656,
+      link: "http://tinyurl.com/t7c5ouj",
+      creationDate: "2020-04-03T12:07:15.3146043-05:00",
+      userId: 220,
+      plu: "C-HOME",
+      business: "1",
+      identification: null,
+    }
   };
+
 
   let news = [
     {
@@ -218,11 +228,13 @@ describe("SliderComponent", () => {
   // });
 
   it("next step", () => {
+    component.urlshorten = 'http://tynyurl.com/xsxsx';
     component.nextStep();
     expect(component.showForm).toBeTruthy();
   });
 
   it("back step", () => {
+    component.urlshorten = 'http://tynyurl.com/xsxsx';
     component.showForm = true;
     component.reference = false;
     component.backStep();
