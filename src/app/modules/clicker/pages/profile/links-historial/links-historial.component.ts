@@ -23,7 +23,7 @@ import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog
   templateUrl: "./links-historial.component.html",
   styleUrls: ["./links-historial.component.scss"]
 })
-export class LinksHistorialComponent implements OnInit, OnDestroy {
+export class LinksHistorialComponent implements OnInit {
   dataSource: any;
   pageIndex: number = 0;
   pageSize: number = 20;
@@ -233,7 +233,7 @@ export class LinksHistorialComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
+  // ngOnDestroy() {
+  //   this.subscription.unsubscribe();
+  // }
 }
