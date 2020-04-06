@@ -51,9 +51,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
    this.route.params.subscribe(param => {
      if(param.pagos === 'pagos') {
-       setTimeout(() => {
-         this.tabGroup.selectedIndex = 3;
+       let interval = setInterval(() => {
+           this.tabGroup.selectedIndex = 3;
+           if(document.querySelector('.mat-tab-label[aria-posinset="3"]')) {
+            clearInterval(interval);
+          }
        }, 1000);
+
      }
    })
 
