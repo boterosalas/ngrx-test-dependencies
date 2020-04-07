@@ -25,6 +25,7 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map, shareReplay } from 'rxjs/operators';
 import { UserService } from './services/user.service';
 import { TokenService } from './services/token.service';
+import { Meta } from '@angular/platform-browser';
 declare var dataLayer: any;
 // import { MessagingService } from "./shared/messaging.service";
 
@@ -114,8 +115,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private bnIdle: BnNgIdleService,
     private breakpointObserver: BreakpointObserver,
     private user: UserService,
-    private token: TokenService
-    
+    private token: TokenService,
+    private metaTagService: Meta
   ) // private messagingService: MessagingService
   {
     translate.setDefaultLang("es");
@@ -141,6 +142,11 @@ export class AppComponent implements OnInit, OnDestroy {
     // this.message = this.messagingService.currentMessage
     
     // this.email = this.userInfo.userName;
+
+    this.metaTagService.addTags([
+      { name: 'keywords', content: 'clickam, exito.com, carulla.com, seguros, referidos, viajes, cashback ' },
+      { name: 'description', content: 'Clickam es una plataforma donde ganas comisiones por referir productos y servicios de negocios asociados, creando y compartiendo link con tus amigos en redes sociales o de manera digital, una vez estos realicen una compra a través de estos y sea verificada, clickam te pagara la comisión correspondiente al producto o servicio.' }
+    ]);
 
     this.showAnimation1 = true;
     this.innerWidth = window.innerWidth;
