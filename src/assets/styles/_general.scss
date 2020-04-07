@@ -45,7 +45,10 @@ body {
 
 .w {
   &-100 {
-    width: 100%;
+    width: 99.9%;
+  }
+  &-80 {
+    width: 80%;
   }
 }
 
@@ -436,6 +439,26 @@ table {
   }
 }
 
+.tableComission {
+  color: $color-p;
+  thead {
+    background: #ececec;
+    color: #707070;
+    box-shadow: 0px 3px 6px #00000029;
+    line-height: 2;
+  }
+  th {
+    padding: 5px 10px;
+  }
+  td {
+    padding: 20px 10px;
+    border: 1px solid #ececec;
+    &:nth-child(2){
+      text-align: center;
+    }
+  }
+}
+
 .mat-expansion-indicator::after,
 .mat-expansion-panel-header-description {
   color: $blue !important;
@@ -532,6 +555,10 @@ table {
   // .gtmHomeClicNegociosEnvíos {
   //   padding: 18px 8px !important;
   // }
+
+  .users-table{
+    width: 800px;
+  }
 
   app-bussiness-card {
     width: 100%;
@@ -912,6 +939,10 @@ th.mat-header-cell {
     0 2px 2px 0 rgba(255, 111, 17, 0.18), 0 1px 5px 0 rgba(255, 111, 17, 0.18);
 }
 
+// .mat-raised-button:not([class*="mat-elevation-z"]) {
+//   box-shadow: 0 3px 1px -2px rgba(61, 47, 86,0.18), 0 2px 2px 0 rgba(61, 47, 86,0.18), 0 1px 5px 0 rgba(61, 47, 86,0.18);
+// }
+
 .mat-raised-button[disabled]:not([class*="mat-elevation-z"]) {
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(0, 0, 0, 0.14),
     0 0 0 0 rgba(0, 0, 0, 0.12) !important;
@@ -1210,4 +1241,18 @@ app-product.no-slider img {
 
 .rotate {
   transform: rotate(180deg);
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.historical {
+  .mat-paginator-page-size{
+    display: none;
+  }
+}
+
+.overflow-auto{
+  overflow: auto;
 }

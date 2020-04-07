@@ -144,7 +144,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   public saveLink(param?: string) {
 
     let dataSaveLink = {
-      link: this.urlshorten,
+      link: this.url,
       identification: this.identification,
       plu: this.plu,
       business: this.business,
@@ -155,6 +155,9 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.subscription = this.links
       .saveLink(dataSaveLink)
       .subscribe((resp: ResponseService) => {
+        let splice = resp.objectResponse.link.split('//');
+        this.urlshorten = 'https://'+ splice[1];
+        this.enableCopy = false;
         if (param === "assured") {
           if (resp.state === "Error") {
             this.openSnackBar(resp.userMessage, "cerrar");
@@ -288,14 +291,9 @@ export class BussinessComponent implements OnInit, OnDestroy {
         this.reference = false;
         this.showFormCustomer = true;
         this.url = `${dataCategoryUrl}${this.idClicker}`;
-        this.subscription = this.user
-          .getShortUrl(this.url)
-          .subscribe((resp: any) => {
-            let splice = resp.split('//');
-            this.urlshorten = 'https://'+ splice[1];
-            this.enableCopy = false;
-            this.saveLink();
-          });
+        setTimeout(() => {
+          this.saveLink();
+        }, 500);
         this.idCustomerForm.controls.identification.setValue("");
         this.idCustomerForm.reset();
         this.formShareLink();
@@ -319,13 +317,13 @@ export class BussinessComponent implements OnInit, OnDestroy {
         this.classButtonBuy = `gtmClicLightboxComprar${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         this.classButtonRefer = `gtmClicLightboxReferir${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         this.classButtonCopy = `gtmClicLightboxCopiarLink${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        if(sliderInfo.idbusiness !== 3 && sliderInfo.idbusiness !== 5) {
-          this.template = this.templateCategories;
-        } else {
-          this.template = this.templateAssured;
-        }
+        // if(sliderInfo.idbusiness !== 3 && sliderInfo.idbusiness !== 5) {
+        //   this.template = this.templateCategories;
+        // } else {
+        //   this.template = this.templateAssured;
+        // }
 
-        const template = this.template;
+        const template = this.templateCategories;
 
         let dialogref = this.dialog.open(DialogComponent, {
           data: {

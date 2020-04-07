@@ -1,65 +1,69 @@
 <app-logo></app-logo>
 
 <div class="click-academy container">
-    <h1>{{'CLICKACADEMY.CLICKACADEMY' | translate}}</h1>
+    <h1 class="border-bottom-orange-init">{{'CLICKACADEMY.CLICKACADEMY' | translate}}</h1>
+    <p>{{'CLICKACADEMY.CLICKACADEMY_TEXT' | translate}}</p>
     <div class="video-responsive mb-3">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/pWK0PApymSI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <!-- 
+        
 
     <div class="tools">
         <h2 class="border-bottom-orange-init">{{'CLICKACADEMY.TOOLS' | translate}}</h2>
         <p>{{'CLICKACADEMY.TOOLS_DESCRIPTION' | translate}}</p>
+        
 
-        <div fxLayout="row" fxLayoutGap="10px">
-            <span fxLayout="column" fxFlex="33">
-                <img class="responsive-img" src="https://dummyimage.com/300x300/#D5D5D/#D5D5D.png">
-                <p>{{'CLICKACADEMY.TOOLS_TEXT1' | translate}}</p>
+        <div fxLayout.gt-xs="row" fxLayoutGap.gt-xs="20px" fxLayoutAlign.gt-xs="center start" fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="start">
+            
+            <span fxLayout="column" fxFlex.gt-xs="18" fxFlex="100">
+                <a class="no-decoration" href="https://webclickamdev.blob.core.windows.net/clickacademy/pdf/pdf1-procesoregistro.pdf" target="_blank">
+                    <span class="p-0 position-relative" fxLayout="row" fxLayout.gt-xs="column">
+                        <span fxFlex.xs="100">
+                            <img class="responsive-img" fxHide.xs="true" src="/assets/img/pdf-1.png">
+                            <img fxHide.gt-xs="true" class="responsive-img w-100" src="/assets/img/pdf-1-mobile.png">
+                            <img class="position-absolute t-0 r-0" src="/assets/img/descargar.svg">
+                        </span>
+                    </span>
+                </a>
             </span>
-            <span fxLayout="column" fxFlex="33">
-                <img class="responsive-img" src="https://dummyimage.com/300x300/#D5D5D/#D5D5D.png">
-                <p>{{'CLICKACADEMY.TOOLS_TEXT2' | translate}}</p>
+
+            <span fxLayout="column" fxFlex.gt-xs="18" fxFlex="100">
+                <a class="no-decoration" href="https://webclickamdev.blob.core.windows.net/clickacademy/pdf/pdf2-cuentabancaria.pdf" target="_blank">
+                    <span class="p-0 position-relative" fxLayout="row" fxLayout.gt-xs="column">
+                        <span fxFlex.xs="100">
+                            <img class="responsive-img" fxHide.xs="true" src="/assets/img/pdf-2.png">
+                            <img fxHide.gt-xs="true" class="responsive-img w-100" src="/assets/img/pdf-2-mobile.png">
+                            <img class="position-absolute t-0 r-0" src="/assets/img/descargar.svg">
+                        </span>
+                    </span>
+                </a>
             </span>
-            <span fxLayout="column" fxFlex="33">
-                <img class="responsive-img" src="https://dummyimage.com/300x300/#D5D5D/#D5D5D.png">
-                <p>{{'CLICKACADEMY.TOOLS_TEXT3' | translate}}</p>
+
+            <span fxLayout="column" fxFlex.gt-xs="18" fxFlex="100">
+                <a class="no-decoration" href="https://webclickamdev.blob.core.windows.net/clickacademy/pdf/pdf3-comprasonlineexito.com.pdf" target="_blank">
+                    <span class="p-0 position-relative" fxLayout="row" fxLayout.gt-xs="column">
+                        <span fxFlex.xs="100">
+                            <img class="responsive-img" fxHide.xs="true" src="/assets/img/pdf-3.png">
+                            <img fxHide.gt-xs="true" class="responsive-img w-100" src="/assets/img/pdf-3-mobile.png">
+                            <img class="position-absolute t-0 r-0" src="/assets/img/descargar.svg">
+                        </span>
+                    </span>
+                </a>
             </span>
+
+            <span fxLayout="column" fxFlex="18" class="mb-2">
+                <a class="no-decoration" href="https://webclickamdev.blob.core.windows.net/clickacademy/pdf/pdf4-atencionlinks.pdf" target="_blank">
+                    <span class="p-0 position-relative" fxLayout="row" fxLayout.gt-xs="column">
+                        <span fxFlex.xs="100">
+                            <img class="responsive-img" fxHide.xs="true" src="/assets/img/pdf-4.png">
+                            <img fxHide.gt-xs="true" class="responsive-img w-100" src="/assets/img/pdf-4-mobile.png">
+                            <img class="position-absolute t-0 r-0" src="/assets/img/descargar.svg">
+                        </span>
+                    </span>
+                </a>
+            </span>
+            
         </div>
-    </div> -->
-
-    <div class="comissions">
-        <h2 class="border-bottom-orange-init">{{'CLICKACADEMY.COMISSIONS' | translate}}</h2>
-        <p>{{'CLICKACADEMY.COMISSIONS_TEXT' | translate}}</p>
     </div>
-
     
-  <mat-tab-group>
-        <!-- exito -->
-        <mat-tab>
-            <ng-template mat-tab-label>
-                 <span class="gtmClicAcademyClicExitocom">{{'CLICKACADEMY.CLICKACADEMY_TAB_EXITO' | translate}}</span>
-            </ng-template>
-            <div innerHtml="{{ 'CLICKACADEMY.CLICKACADEMY_TAB_EXITO_TABLE' | translate }}"></div> 
-        </mat-tab>
-    
-         <!-- seguros -->
-        <mat-tab> 
-                <ng-template mat-tab-label>
-                        <span class="gtmClicAcademyClicSeguros">{{'CLICKACADEMY.CLICKACADEMY_TAB_SEGUROS' | translate}}</span>
-                   </ng-template>
-            <div innerHtml="{{ 'CLICKACADEMY.CLICKACADEMY_TAB_SEGUROS_TABLE' | translate }}"></div> 
-        </mat-tab>
-    
-         <!-- viajes -->
-        <mat-tab>
-                <ng-template mat-tab-label>
-                        <span class="gtmClicAcademyClicViajes">{{'CLICKACADEMY.CLICKACADEMY_TAB_VIAJES' | translate}}</span>
-                   </ng-template>
-            <div innerHtml="{{ 'CLICKACADEMY.CLICKACADEMY_TAB_VIAJES_TABLE' | translate }}"></div> 
-        </mat-tab>
-    
-      </mat-tab-group>
-
-      <p>{{'CLICKACADEMY.MARKETPLACE' | translate}}</p>
-
 </div>
