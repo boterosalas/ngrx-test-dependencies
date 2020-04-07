@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   @ViewChild('tabGroup', {static: true}) tabGroup: MatTabGroup;
   managedPayments: boolean;
   isEmployee: boolean;
+  profile:boolean = false;
 
   constructor(
     private user: UserService,
@@ -50,11 +51,23 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
    this.route.params.subscribe(param => {
      if(param.pagos === 'pagos') {
-       setTimeout(() => {
-         this.tabGroup.selectedIndex = 2
-       }, 500);
+       let interval = setInterval(() => {
+           this.tabGroup.selectedIndex = 3;
+           if(document.querySelector('.mat-tab-label[aria-posinset="3"]')) {
+            clearInterval(interval);
+          }
+       }, 1000);
+
      }
    })
+
+   setTimeout(() => {
+    document.querySelector('.mat-tab-label[aria-posinset="1"]').classList.add("gtmPerfilClicCuentaClickam");
+    document.querySelector('.mat-tab-label[aria-posinset="2"]').classList.add("gtmPerfilClicInfoirmacionAdicionalClickam");
+    if(document.querySelector('.mat-tab-label[aria-posinset="3"]')) {
+      document.querySelector('.mat-tab-label[aria-posinset="3"]').classList.add("gtmPerfilClicGestionarPagosClickam");
+    }
+  }, 1000);
 
   }
 
@@ -113,6 +126,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.subscription = this.user.getuserdata().subscribe(user => {
         this.managedPayments = user.managedPayments;
         this.isEmployee = user.isEmployeeGrupoExito;
+        this.profile = true;
     });
   }
   

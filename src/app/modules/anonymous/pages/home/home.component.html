@@ -1,5 +1,5 @@
 <app-logo></app-logo>
-<app-slider [showArrows]="true" [isSlider]="true"  (action)="sliderOffers()"  [sliderMobile]="sliderMobile" [sliderWeb]="sliderWeb"></app-slider>
+<app-slider Class="gtmHomeClicBanner" [showArrows]="true" [isSlider]="true"  (action)="sliderOffers()"  [sliderMobile]="sliderMobile" [sliderWeb]="sliderWeb"></app-slider>
 
 
 <div class="container">
@@ -7,14 +7,19 @@
   <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3>
   <p class="f-20" fxHide.xs>{{ 'HOME.BUSSINESS_TEXT' | translate }}</p>
   <div fxLayout="column" fxLayout.gt-xs="row wrap" ngClass.gt-xs="pb-5" fxLayoutAlign="space-between center" >
-    <app-bussiness-card *ngFor="let bussines of bussiness; let i = index" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
+    <ng-container *ngFor="let bussines of bussiness; let i = index">
+      <app-bussiness-card *ngIf="bussines.code !== 'envios-clickam'" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
+    </ng-container>
+    <!-- <ng-container *ngFor="let bussines of bussinessClicker; let i = index">
+      <app-bussiness-card *ngIf="isEmployee === true && bussines.code === 'envios-clickam' && auth.isLoggedIn()" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
+    </ng-container> -->
   </div>
   <span class="border-gray d-block"></span>
   <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.OFFERS' | translate }}</h3>
   <p class="f-20" fxHide.xs>{{ 'HOME.OFFERS_TEXT' | translate }}</p>
 </div>
 
-<app-slider [showArrows]="false" [isSlider]="true" fxShow.gt-xs="false" (action)="sliderOffers()" [sliderMobile]="offersMobile" [sliderWeb]="offersWeb" class="mb-3"></app-slider>
+<app-slider Class="gtmHomeClicOfertas" [showArrows]="false" [isSlider]="true" fxShow.gt-xs="false" (action)="sliderOffers()" [sliderMobile]="offersMobile" [sliderWeb]="offersWeb" class="mb-3"></app-slider>
 
-<app-slider [showArrows]="false" [isSlider]="false" fxShow.xs="false" (action)="sliderOffers()" [sliderMobile]="offersMobile" class="mb-3"></app-slider>
+<app-slider Class="gtmHomeClicOfertas" [showArrows]="false" [isSlider]="false" fxShow.xs="false" (action)="sliderOffers()" [sliderMobile]="offersMobile" class="mb-3"></app-slider>
 

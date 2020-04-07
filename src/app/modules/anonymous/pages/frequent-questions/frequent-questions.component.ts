@@ -10,15 +10,15 @@ export class FrequentQuestionsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    document.querySelector('.gtmPreguntaClicLatrlFunciona span').classList.add("gtmPreguntaClicLatrlFunciona");
-    document.querySelector('.grmPreguntaClicLatrlVenta span').classList.add("grmPreguntaClicLatrlVenta");
-    document.querySelector('.gtmPreguntaClicLatrlComisiones span').classList.add("gtmPreguntaClicLatrlComisiones");
-    document.querySelector('.gtmPreguntaClicLatrlOfertas span').classList.add("gtmPreguntaClicLatrlOfertas");
-    document.querySelector('.gtmPreguntaClicLatrlNegocios span').classList.add("gtmPreguntaClicLatrlNegocios");
-    document.querySelector('.gtmPreguntaClicLatrlFechasPago span').classList.add("gtmPreguntaClicLatrlFechasPago");
-    document.querySelector('.gtmPreguntaClicLatrlDondePagan span').classList.add("gtmPreguntaClicLatrlDondePagan");
-    document.querySelector('.gtmPreguntaClicLatrlMediosPagos span').classList.add("gtmPreguntaClicLatrlMediosPagos");
-    document.querySelector('.gtmPreguntaClicLatrlEnvios span').classList.add("gtmPreguntaClicLatrlEnvios");
+    document.querySelector('.gtmPreguntaFrecuenteClicFunciona span').classList.add("gtmPreguntaFrecuenteClicFunciona");
+    document.querySelector('.grmPreguntaFrecuenteClicCruzanVenta span').classList.add("grmPreguntaFrecuenteClicCruzanVenta");
+    document.querySelector('.gtmPreguntaFrecuenteClicComisiones span').classList.add("gtmPreguntaFrecuenteClicComisiones");
+    document.querySelector('.gtmPreguntaFrecuenteClicOfertas span').classList.add("gtmPreguntaFrecuenteClicOfertas");
+    document.querySelector('.gtmPreguntaFrecuenteClicNegocios span').classList.add("gtmPreguntaFrecuenteClicNegocios");
+    document.querySelector('.gtmPreguntaFrecuenteClicFechasPago span').classList.add("gtmPreguntaFrecuenteClicFechasPago");
+    document.querySelector('.gtmPreguntaFrecuenteClicDondePagan span').classList.add("gtmPreguntaFrecuenteClicDondePagan");
+    document.querySelector('.gtmPreguntaFrecuenteClicMediosPagos span').classList.add("gtmPreguntaFrecuenteClicMediosPagos");
+    document.querySelector('.gtmPreguntaFrecuenteClicEnvios span').classList.add("gtmPreguntaFrecuenteClicEnvios");
   }
 
 }

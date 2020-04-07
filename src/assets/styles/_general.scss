@@ -528,6 +528,15 @@ table {
 }
 
 @media screen and (max-width: 600px) {
+
+  // .gtmHomeClicNegociosEnvíos {
+  //   padding: 18px 8px !important;
+  // }
+
+  app-bussiness-card {
+    width: 100%;
+  }
+
   .mat-paginator-page-size {
     display: none !important;
     .ch-100 {
@@ -706,6 +715,11 @@ table {
 // }
 
 @media screen and (min-width: 600px) {
+
+  app-bussiness-card .gtmHomeClicNegociosEnvíos {
+    padding: 2px;
+  }
+
   .terms {
     margin-top: 2rem !important;
   }

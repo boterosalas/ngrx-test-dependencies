@@ -21,6 +21,7 @@ import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommentStmt } from '@angular/compiler';
 import { UserService } from 'src/app/services/user.service';
+import { ClickerModule } from '../../../clicker.module';
 
 describe("BussinessComponent", () => {
   let component: BussinessComponent;
@@ -30,7 +31,7 @@ describe("BussinessComponent", () => {
     "getBusinessContent",
   ]);
 
-  const mockUserService = jasmine.createSpyObj("UserService", ["getShortUrl"]);
+  const mockUserService = jasmine.createSpyObj("UserService", ["getShortUrl", "getuserdata"]);
 
   const mockDialog = jasmine.createSpyObj("MatDialog", ["open"]);
 
@@ -39,6 +40,10 @@ describe("BussinessComponent", () => {
     "afterClosed",
     "componentInstance"
   ]);
+
+  let dataUserC = {
+    acceptTermsDeliver: true
+  }
 
   let categorys = {
     id: 25,
@@ -70,7 +75,7 @@ describe("BussinessComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [BussinessComponent],
+      declarations: [],
       imports: [
         SharedModule,
         TranslateModule.forRoot(),
@@ -78,6 +83,7 @@ describe("BussinessComponent", () => {
         ReactiveFormsModule,
         MatFormFieldModule,
         ShareModule,
+        ClickerModule,
         AppMaterialModule,
         RouterTestingModule,
         HttpClientTestingModule,
@@ -107,6 +113,7 @@ describe("BussinessComponent", () => {
       })
       .compileComponents();
     mockContentService.getBusinessContent.and.returnValue(of(bussiness));
+    mockUserService.getuserdata.and.returnValue(of(dataUserC));
     mockUserService.getShortUrl.and.returnValue(of('http://tynyurl.com/12kusw'));
   }));
 
@@ -150,7 +157,7 @@ describe("BussinessComponent", () => {
   });
 
   it("data category", () => {
-    component.dataCategory(categorys);
+    component.dataSliderCategory(categorys);
     expect(mockDialog.open).toBeTruthy();
   });
 
@@ -188,7 +195,7 @@ describe("BussinessComponent", () => {
   it("copyInputMessage", () => {
     // const buttonModal = document.querySelector(".gtmInicioClicL");
     // buttonModal.dispatchEvent(new Event("click"));
-    const button = document.querySelector(".gtmInicioClicFiltroExitocomCopiarLink");
+    const button = document.querySelector("#btnCopy");
     button.dispatchEvent(new Event("click"));
     const nativeElementInput = fixture.nativeElement;
     const input = nativeElementInput.querySelector("input");

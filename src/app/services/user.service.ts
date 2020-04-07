@@ -39,6 +39,7 @@ export class UserService {
   apiDownloadFile = 'userprofile/downloadBase64';
   apiGetuserdata = "userprofile/getuserdata"
   apiUpdateUserEmail = "userprofile/updateUserEmail"
+  apiRegisterUserTerms = 'userprofile/registeruserterms';
 
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
@@ -279,6 +280,20 @@ export class UserService {
       })
     };
     return this.http.post((`${this.url}${this.apiUpdateUser}`),data, httpOptions);
+  }
+
+  public registeruserterms(id:any) {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.post((`${this.url}${this.apiRegisterUserTerms}`),{idbusiness:id}, httpOptions);
   }
 
   public comunitcations(id: any, value: boolean) {

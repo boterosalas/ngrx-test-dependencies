@@ -4,36 +4,223 @@
   [aditional]="percent"
   (close)="goback()"
 ></app-back-navigation>
+
 <div class="container">
-  <h3 class="border-bottom-orange-init title-h3">
-    {{ "BUSSINESS.CATEGORIES" | translate }}
-  </h3>
-  <p class="f-20" fxHide.xs>{{ "HOME.BUSSINESS_TEXT" | translate }}</p>
-  <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="0px">
-    <div
-      fxLayout="column"
-      fxFlex.xs="100"
-      fxFlex.sm="30"
-      fxFlex.gt-sm="24"
-      class="mb-3"
-      *ngFor="let bussiness of bussiness; let i = index"
-    >
-      <app-product
-        id="bussiness{{ i }}"
-        btnid="btnbussiness{{ i }}"
-        [productName]="bussiness.description"
-        [price]="bussiness.commission"
-        [percent]="bussiness.infoaditional"
-        [image]="bussiness.imageurl"
-        [alt]="bussiness.description"
-        other="true"
-        Class="mb-1 button-100 gtmInicioClicLinkViaj{{ i }}"
-        container="img-container-viajes"
-        textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
-        (infoProduct)="dataCategory(bussiness)"
-      ></app-product>
+
+  <div class="products" *ngIf="bussiness.length !== 0"> 
+    <h3 class="border-bottom-orange-init title-h3">
+      {{ "BUSSINESS.CATEGORIES" | translate }}
+    </h3>
+  
+    <p class="f-20" fxHide.xs>{{ "HOME.BUSSINESS_TEXT" | translate }}</p>
+  
+    <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="0px">
+      <div
+        fxLayout="column"
+        fxFlex.xs="100"
+        fxFlex.sm="30"
+        fxFlex.gt-sm="24"
+        class="mb-3"
+        *ngFor="let bussiness of bussiness; let i = index"
+      >
+        <app-product
+          id="bussiness{{ i }}"
+          btnid="btnbussiness{{ i }}"
+          [productName]="bussiness.description"
+          [price]="bussiness.commission"
+          [percent]="bussiness.infoaditional"
+          [image]="bussiness.imageurl"
+          [alt]="bussiness.description"
+          other="true"
+          Class="mb-1 button-100 gtmNegocio{{title}}{{bussiness.description}}"
+          container="img-container-viajes"
+          textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+          (infoProduct)="dataSliderCategory(bussiness)"
+        ></app-product>
+      </div>
     </div>
   </div>
+
+  <div class="deliver mt-3" *ngIf="bussiness.length === 0 && showDeliver === true">
+
+    <div fxLayout.xs="column" fxLayout="row" fxLayoutGap.xs="0px" fxLayoutGap="20px" fxLayoutAlign="space-around">
+
+      <div fxShow.xs="true" fxHide.gt-xs="true">
+        <img class="responsive-img" src="/assets/img/deliver/mobile/banner_envios.png" alt="banner">
+      </div>
+
+      <div fxHide.xs="true" fxFlex="39"  class="mt-3 mb-3">
+        <img class="responsive-img" src="/assets/img/deliver/web/banner_envios.png" alt="banner">
+      </div>
+  
+      <mat-card class="mt-3 mb-3" fxFlex="50" *ngIf="acceptTermsDeliver === false">
+        <img class="responsive-img" src="/assets/img/terminos_y_condiciones.svg" alt="icon-deliver">
+        
+        <h3 class="f-22 border-bottom-orange-init">{{ "BUSSINESS.TITLE" | translate }}</h3>
+  
+        <form
+          [formGroup]="termsForm"
+          class="text-center mt-4 mb-4"
+          *ngIf="terms === false"
+        >
+        <div class="mb-3 mt-3">
+          <span>
+            <mat-checkbox  formControlName="acceptTerms" id="chkaccept" (change)="acceptTermsCheck()">
+            </mat-checkbox>
+          </span>
+          <span class="accept-terms ml-2 cursor-pointer" (click)="termsAndConditions()">
+            {{
+            "REGISTER.ACCEPT" | translate
+          }}
+          </span>
+        </div>
+      
+        <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
+          <button
+            mat-button
+            id="register"
+            class="mt-2 button button-height pl-2 pr-2"
+            [routerLink]="[ '/inicio']"
+          >
+          <span class="orange-text">{{ "BUSSINESS.DELIVER_BUTTON_CANCEL" | translate }}</span>
+        </button>
+        
+          <button
+            mat-raised-button
+            id="register"
+            class="mt-2 button button-height pl-2 pr-2"
+            color="orange"
+            (click)="registerUser()"
+            [disabled]="!termsForm.valid"
+          >
+          <span>{{ "BUSSINESS.DELIVER_BUTTON_OK" | translate }}</span>
+        </button>
+        </div>
+        
+        </form>
+      </mat-card>
+
+      <mat-card class="mt-3 mb-3" fxFlex="50" fxFlex.xs="100" *ngIf="acceptTermsDeliver === true" fxLayoutAlign="center center" fxLayout="column">
+        <span class="accept-terms text-center cursor-pointer" (click)="termsAndConditions()">
+          {{
+          "BUSSINESS.ACCEPT" | translate
+        }}
+        </span>
+     
+        <button
+        mat-raised-button
+        id="seway"
+        class="mt-2 button button-height pl-2 pr-2 button-100"
+        color="orange"
+        (click)="goSeway()"
+      > IR A SEWAY </button>
+
+      </mat-card>
+      
+    </div>
+
+
+    <h3 class="f-20 border-bottom-orange-init">{{ "BUSSINESS.TITLE_QUESTION" | translate }}</h3>
+
+    <div class="questions">
+      <mat-accordion class="mt-3 mb-3">
+        
+        <mat-expansion-panel class="mt-3 mb-3">
+          <mat-expansion-panel-header>
+            <span class="f-16 gray galano-bold">{{ "BUSSINESS.DELIVER_WORKS_TITLE" | translate }}</span>
+          </mat-expansion-panel-header>
+          <div innerHtml=" {{ 'BUSSINESS.DELIVER_WORKS' | translate }}"></div> 
+        </mat-expansion-panel>
+
+        <mat-expansion-panel class="mt-3 mb-3">
+          <mat-expansion-panel-header>
+            <span class="f-16 gray galano-bold">{{ "BUSSINESS.PARTICIPATE_CAN_TITLE" | translate }}</span>
+          </mat-expansion-panel-header>
+          <div innerHtml="{{ 'BUSSINESS.PARTICIPATE_CAN_TEXT' | translate }}"></div> 
+        </mat-expansion-panel>
+        
+        <mat-expansion-panel class="mt-3 mb-3">
+          <mat-expansion-panel-header>
+            <span class="f-16 gray galano-bold">{{ "BUSSINESS.PARTICIPATE_TITLE" | translate }}</span>
+          </mat-expansion-panel-header>
+          <div innerHtml="{{ 'BUSSINESS.PARTICIPATE_TEXT' | translate }}"></div>
+        </mat-expansion-panel>
+            
+        <mat-expansion-panel class="mt-3 mb-3">
+          <mat-expansion-panel-header>
+            <span class="f-16 gray galano-bold">{{ "BUSSINESS.REQUIREMENT_TITLE" | translate }}</span>
+          </mat-expansion-panel-header>
+          <div innerHtml="{{ 'BUSSINESS.REQUIREMENT_TEXT' | translate }}"></div>
+        </mat-expansion-panel>
+        
+        <mat-expansion-panel class="mt-3 mb-3">
+          <mat-expansion-panel-header>
+            <span class="f-16 gray galano-bold">{{ "BUSSINESS.TRANSPORT_TITLE" | translate }}</span>
+          </mat-expansion-panel-header>
+          <div innerHtml="{{ 'BUSSINESS.TRANSPORT_TEXT' | translate }}"></div>
+        </mat-expansion-panel>
+        
+        <mat-expansion-panel class="mt-3 mb-3">
+          <mat-expansion-panel-header>
+            <span class="f-16 gray galano-bold">{{ "BUSSINESS.VEHICULE_TITLE" | translate }}</span>
+          </mat-expansion-panel-header>
+          <div innerHtml="{{ 'BUSSINESS.VEHICULE_TEXT' | translate }}"></div>
+        </mat-expansion-panel>
+        
+        <mat-expansion-panel class="mt-3 mb-3">
+          <mat-expansion-panel-header>
+            <span class="f-16 gray galano-bold">{{ "BUSSINESS.HOUR_TITLE" | translate }}</span>
+          </mat-expansion-panel-header>
+          <div innerHtml="{{ 'BUSSINESS.HOUR_TEXT' | translate }}"></div>
+        </mat-expansion-panel>
+        
+        <mat-expansion-panel class="mt-3 mb-3">
+          <mat-expansion-panel-header>
+            <span class="f-16 gray galano-bold">{{ "BUSSINESS.DELIVER_TITLE" | translate }}</span>
+          </mat-expansion-panel-header>
+          <div innerHtml="{{ 'BUSSINESS.DELIVER_TEXT' | translate }}"></div>
+        </mat-expansion-panel>
+        
+        <mat-expansion-panel class="mt-3 mb-3">
+          <mat-expansion-panel-header>
+            <span class="f-16 gray galano-bold">{{ "BUSSINESS.PRODUCT_TITLE" | translate }}</span>
+          </mat-expansion-panel-header>
+          <div innerHtml="{{ 'BUSSINESS.PRODUCT_TEXT' | translate }}"></div>
+        </mat-expansion-panel>
+        
+        <mat-expansion-panel class="mt-3 mb-3">
+          <mat-expansion-panel-header>
+            <span class="f-16 gray galano-bold">{{ "BUSSINESS.PAYMENT_TITLE" | translate }}</span>
+          </mat-expansion-panel-header>
+          <div innerHtml="{{ 'BUSSINESS.PAYMENT_TEXT' | translate }}"></div>
+        </mat-expansion-panel>
+                
+        <mat-expansion-panel class="mt-3 mb-3">
+          <mat-expansion-panel-header>
+            <span class="f-16 gray galano-bold">{{ "BUSSINESS.PAYMENTS_TITLE" | translate }}</span>
+          </mat-expansion-panel-header>
+          <div innerHtml="{{ 'BUSSINESS.PAYMENTS_TEXT' | translate }}"></div>
+        </mat-expansion-panel>
+        
+        <mat-expansion-panel class="mt-3 mb-3">
+          <mat-expansion-panel-header>
+            <span class="f-16 gray galano-bold">{{ "BUSSINESS.OTHER_TITLE" | translate }}</span>
+          </mat-expansion-panel-header>
+          <div innerHtml="{{ 'BUSSINESS.OTHER_TEXT' | translate }}"></div>
+        </mat-expansion-panel>
+        
+        <mat-expansion-panel class="mt-3 mb-3">
+          <mat-expansion-panel-header>
+            <span class="f-16 gray galano-bold">{{ "BUSSINESS.RESPONSABILITY_TITLE" | translate }}</span>
+          </mat-expansion-panel-header>
+          <div innerHtml="{{ 'BUSSINESS.RESPONSABILITY_TEXT' | translate }}"></div>
+        </mat-expansion-panel>
+    
+      </mat-accordion>
+    </div>
+
+  </div>
+
 </div>
 
 <!-- template share -->
@@ -65,12 +252,12 @@
             id="btnCopy"
             color="orange"
             [disabled]="enableCopy"
-            class="gtmInicioClicFiltroExitocomCopiarLink"
+            ngClass="{{classButtonCopy}}"
             (click)="copyInputMessage(linkInput)"
           >
             <span
               fxLayoutAlign="center space-between"
-              class="gtmInicioClicFiltroExitocomCopiarLink"
+              ngClass="{{classButtonCopy}}"
             >
               {{ "GENERIC.COPY_LINK" | translate }}
             </span>
@@ -80,9 +267,10 @@
             mat-button
             id="refer"
             color="orange"
+            ngClass="{{classButtonRefer}}"
             (click)="showReference()"
           >
-            <span fxLayoutAlign="center space-between">
+            <span ngClass="{{classButtonRefer}}" fxLayoutAlign="center space-between">
               Referir
             </span>
           </button>
@@ -91,10 +279,10 @@
             mat-button
             id="buy"
             color="orange"
-            class="orange-border"
+            ngClass="orange-border {{classButtonBuy}}"
             (click)="buy()"
           >
-            <span fxLayoutAlign="center space-between">
+            <span ngClass="{{classButtonBuy}}" fxLayoutAlign="center space-between">
               Comprar
             </span>
           </button>
@@ -111,39 +299,39 @@
         theme="circles-dark"
         shareButton="facebook"
         [url]="urlshorten"
-        class="sharebutton gtmInicioClicFiltroExitocomFacebook mr-2"
+        ngClass="sharebutton {{classButtonFacebook}} mr-2"
       >
-        <i class="fab fa-facebook-f gtmInicioClicFiltroExitocomFacebook"></i>
+        <i ngClass="fab fa-facebook-f {{classButtonFacebook}}"></i>
       </button>
       <button
         theme="circles-dark"
         shareButton="twitter"
         [url]="urlshorten"
-        class="sharebutton gtmInicioClicFiltroExitocomTwitter mr-2"
+        ngClass="sharebutton {{classButtonTwitter}} mr-2"
       >
-        <i class="fab fa-twitter gtmInicioClicFiltroExitocomTwitter"></i>
+        <i ngClass="fab fa-twitter {{classButtonTwitter}}"></i>
       </button>
       <button
         theme="circles-dark"
         shareButton="whatsapp"
         [url]="urlshorten"
-        class="sharebutton gtmInicioClicFiltroExitocomWhatsapp"
+        ngClass="sharebutton {{classButtonWhatsapp}}"
       >
-        <i class="fab fa-whatsapp gtmInicioClicFiltroExitocomWhatsapp"></i>
+        <i ngClass="fab fa-whatsapp {{classButtonWhatsapp}}"></i>
       </button>
     </div>
 
     <div class="share-mobile">
       <button
         mat-button
-        class="gtmrs  mb-2 mt-2 "
+        ngClass="gtmrs  mb-2 mt-2 {{classButtonShare}}"
         (click)="share()"
         fxLayout="row"
         fxLayoutAlign="start start"
       >
-        <span class="gtmrs f-15" fxLayout="row" fxLayoutAlign="center center">
+        <span ngClass="gtmrs f-15 {{classButtonShare}}" fxLayout="row" fxLayoutAlign="center center">
           <img
-            class="icon-compartir pr-2"
+            ngClass="icon-compartir pr-2 {{classButtonShare}}"
             src="/assets/img/Compartir.svg"
             alt="user"
           />
@@ -153,14 +341,14 @@
 
       <button
         mat-button
-        class="gtmrs  mb-2 mt-2 "
+        ngClass="gtmrs  mb-2 mt-2 {{classButtonRefer}}"
         (click)="showReference()"
         fxLayout="row"
         fxLayoutAlign="start start"
       >
-        <span class="gtmrs f-15" fxLayout="row" fxLayoutAlign="center center">
+        <span ngClass="gtmrs f-15 {{classButtonRefer}}" fxLayout="row" fxLayoutAlign="center center">
           <img
-            class="icon-compartir pr-2"
+            ngClass="icon-compartir pr-2 {{classButtonRefer}}"
             src="/assets/img/Referir.svg"
             alt="user"
           />
@@ -170,14 +358,14 @@
 
       <button
         mat-button
-        class="gtmrs  mb-2 mt-2 "
+        ngClass="gtmrs  mb-2 mt-2 {{classButtonBuy}}"
         (click)="buy()"
         fxLayout="row"
         fxLayoutAlign="start start"
       >
-        <span class="gtmrs f-15" fxLayout="row" fxLayoutAlign="center center">
+        <span ngClass="gtmrs f-15 {{classButtonBuy}}" fxLayout="row" fxLayoutAlign="center center">
           <img
-            class="icon-compartir pr-2"
+            ngClass="icon-compartir pr-2 {{classButtonBuy}}"
             src="/assets/img/Comprar.svg"
             alt="user"
           />
@@ -375,12 +563,12 @@
               id="btnCopy"
               color="orange"
               [disabled]="enableCopy"
-              class="gtmInicioClicFiltroExitocomCopiarLink"
+              ngClass="{{classButtonCopy}}"
               (click)="copyInputMessage(linkInput)"
             >
               <span
                 fxLayoutAlign="center space-between"
-                class="gtmInicioClicFiltroExitocomCopiarLink"
+                ngClass="{{classButtonCopy}}"
               >
                 {{ "GENERIC.COPY_LINK" | translate }}
               </span>
@@ -390,10 +578,10 @@
               mat-button
               id="buy"
               color="orange"
-              class="orange-border"
+              ngClass="orange-border {{classButtonBuy}}"
               (click)="buy()"
             >
-              <span fxLayoutAlign="center space-between">
+              <span ngClass="{{classButtonBuy}}" fxLayoutAlign="center space-between">
                 Comprar
               </span>
             </button>
@@ -410,56 +598,74 @@
           theme="circles-dark"
           shareButton="facebook"
           [url]="urlshorten"
-          class="sharebutton gtmInicioClicFiltroExitocomFacebook mr-2"
+          ngClass="sharebutton {{classButtonFacebook}} mr-2"
         >
-          <i class="fab fa-facebook-f gtmInicioClicFiltroExitocomFacebook"></i>
+          <i ngClass="fab fa-facebook-f {{classButtonFacebook}}"></i>
         </button>
         <button
           theme="circles-dark"
           shareButton="twitter"
           [url]="urlshorten"
-          class="sharebutton gtmInicioClicFiltroExitocomTwitter mr-2"
+          ngClass="sharebutton {{classButtonTwitter}} mr-2"
         >
-          <i class="fab fa-twitter gtmInicioClicFiltroExitocomTwitter"></i>
+          <i ngClass="fab fa-twitter {{classButtonTwitter}}"></i>
         </button>
         <button
           theme="circles-dark"
           shareButton="whatsapp"
           [url]="urlshorten"
-          class="sharebutton gtmInicioClicFiltroExitocomWhatsapp"
+          ngClass="sharebutton {{classButtonWhatsapp}}"
         >
-          <i class="fab fa-whatsapp gtmInicioClicFiltroExitocomWhatsapp"></i>
+          <i ngClass="fab fa-whatsapp {{classButtonWhatsapp}}"></i>
         </button>
       </div>
+  
 
       <div class="share-mobile">
         <button
           mat-button
-          class="gtmrs  mb-2 mt-2 "
+          ngClass="gtmrs  mb-2 mt-2 {{classButtonShare}}"
           (click)="share()"
           fxLayout="row"
           fxLayoutAlign="start start"
         >
-          <span class="gtmrs f-15" fxLayout="row" fxLayoutAlign="center center">
+          <span ngClass="gtmrs f-15 {{classButtonShare}}" fxLayout="row" fxLayoutAlign="center center">
             <img
-              class="icon-compartir pr-2"
+              ngClass="icon-compartir pr-2 {{classButtonShare}}"
               src="/assets/img/Compartir.svg"
               alt="user"
             />
             Compartir</span
           >
         </button>
-
+  
         <button
           mat-button
-          class="gtmrs  mb-2 mt-2 "
+          ngClass="gtmrs  mb-2 mt-2 {{classButtonRefer}}"
+          (click)="showReference()"
+          fxLayout="row"
+          fxLayoutAlign="start start"
+        >
+          <span ngClass="gtmrs f-15 {{classButtonRefer}}" fxLayout="row" fxLayoutAlign="center center">
+            <img
+              ngClass="icon-compartir pr-2 {{classButtonRefer}}"
+              src="/assets/img/Referir.svg"
+              alt="user"
+            />
+            Referir
+          </span>
+        </button>
+  
+        <button
+          mat-button
+          ngClass="gtmrs  mb-2 mt-2 {{classButtonBuy}}"
           (click)="buy()"
           fxLayout="row"
           fxLayoutAlign="start start"
         >
-          <span class="gtmrs f-15" fxLayout="row" fxLayoutAlign="center center">
+          <span ngClass="gtmrs f-15 {{classButtonBuy}}" fxLayout="row" fxLayoutAlign="center center">
             <img
-              class="icon-compartir pr-2"
+              ngClass="icon-compartir pr-2 {{classButtonBuy}}"
               src="/assets/img/Comprar.svg"
               alt="user"
             />
@@ -469,4 +675,20 @@
       </div>
     </div>
   </div>
+</ng-template>
+
+<!-- template terms and conditions -->
+
+<ng-template #templateTerms>
+  <div class="fade-in" innerHtml="{{ 'BUSSINESS.TERMS_LEGAL' | translate }}"></div> 
+  <button
+  *ngIf="acceptTermsDeliver === false"
+  mat-raised-button
+  id="accept-modal"
+  class="mt-2 center button button-height button-100 register-button"
+  color="orange"
+  (click)="acceptModal()"
+>
+{{ "GENERIC.ACCEPT" | translate }}
+</button>
 </ng-template>

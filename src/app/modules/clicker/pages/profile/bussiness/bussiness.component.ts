@@ -7,12 +7,13 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
 import { ResponseService } from 'src/app/interfaces/response';
-import { MatBottomSheet, MatSnackBar } from '@angular/material';
+import { MatBottomSheet, MatSnackBar, MatDialog } from '@angular/material';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LinksService } from 'src/app/services/links.service';
 import { TokenService } from 'src/app/services/token.service';
 import { NgNavigatorShareService } from 'ng-navigator-share';
+import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 
 @Component({
   selector: 'app-bussiness',
@@ -27,6 +28,9 @@ export class BussinessComponent implements OnInit, OnDestroy {
   percentBussiness:string = "Hasta 9.6%";
   bussiness = [];
 
+  @ViewChild("templateTerms", { static: false })
+  templateTerms: TemplateRef<any>;
+
   private subscription: Subscription = new Subscription();
   private ngNavigatorShareService: NgNavigatorShareService;
   image:string;
@@ -35,6 +39,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   showFormCustomer = true;
   reference: boolean;
   showForm = false;
+  termsForm: FormGroup;
   idCustomerForm: FormGroup;
   date: any;
   business: string;
@@ -48,6 +53,21 @@ export class BussinessComponent implements OnInit, OnDestroy {
   templateAssured: TemplateRef<any>;
   urlshorten: string = '';
   url: string;
+  classButtonCopy: string;
+  classButtonRefer: string;
+  classButtonBuy: string;
+  classButtonFacebook: string;
+  classButtonTwitter: string;
+  classButtonWhatsapp: string;
+  classButtonShare: string;
+  acceptTerms: boolean = null;
+  terms: boolean = false;
+  tokenInfo: any;
+  idClicker: string;
+  showDeliver: boolean = false;
+  acceptTermsDeliver: boolean;
+  urlPlaystore:string = 'https://play.google.com/store/apps/details?id=com.sewayplus';
+  urlAppstore:string = 'https://apps.apple.com/co/app/seway/id1414489414';
 
   constructor(
     private route: ActivatedRoute,
@@ -63,6 +83,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     private links: LinksService,
     private token: TokenService,
     ngNavigatorShareService: NgNavigatorShareService,
+    private dialogModal: MatDialog
   ) { 
     
     this.ngNavigatorShareService = ngNavigatorShareService;
@@ -78,7 +99,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getContentBussiness();
-
+    this.getUserData();
     if(localStorage.getItem("ACCESS_TOKEN") !== null ) {
       this.identification = this.token.userInfo().identification;
     }
@@ -94,13 +115,19 @@ export class BussinessComponent implements OnInit, OnDestroy {
       ]
     });
 
+    this.termsForm = this.fb.group({
+      acceptTerms: [null, Validators.required]
+    })
 
   }
+
+
 
   public getContentBussiness() {
     this.content.getBusinessContent(this.id)
     .pipe(distinctUntilChanged())
     .subscribe(bussiness => {
+      this.showDeliver = true;
       this.bussiness = bussiness;
     })
   }
@@ -111,11 +138,12 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   
    /**
-   * Metodo para dalvar los links generados
+   * Metodo para salvar los links generados
    */
 
   public saveLink(param?: string) {
-    let data = {
+
+    let dataSaveLink = {
       link: this.urlshorten,
       identification: this.identification,
       plu: this.plu,
@@ -123,8 +151,9 @@ export class BussinessComponent implements OnInit, OnDestroy {
       creationDate: this.date,
       identificationcustomer: this.idCustomerForm.controls.identification.value
     };
+
     this.subscription = this.links
-      .saveLink(data)
+      .saveLink(dataSaveLink)
       .subscribe((resp: ResponseService) => {
         if (param === "assured") {
           if (resp.state === "Error") {
@@ -141,7 +170,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
    */
 
   public saveLinkReference() {
-    let data = {
+    let dataSaveLinkReference = {
       link: this.urlshorten,
       identification: this.identification,
       plu: this.plu,
@@ -150,13 +179,12 @@ export class BussinessComponent implements OnInit, OnDestroy {
       identificationcustomer: this.idCustomerForm.controls.identification.value
     };
     this.subscription = this.links
-      .saveLink(data)
+      .saveLink(dataSaveLinkReference)
       .subscribe((resp: ResponseService) => {
         if (resp.state === "Error") {
           this.openSnackBar(resp.userMessage, "cerrar");
         } else {
           this.openSnackBar(resp.userMessage, "cerrar");
-          // this.idCustomerForm.controls.identificacion.setValue('');
           this.dialog.dismiss();
         }
       });
@@ -207,7 +235,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
     public showReference() {
       this.reference = !this.reference;
-      // this.idCustomerForm.controls.identification.setValue('');
       this.idCustomerForm.reset();
     }
 
@@ -249,39 +276,50 @@ export class BussinessComponent implements OnInit, OnDestroy {
    * 
    */
 
-  public dataCategory(category) {
+  public dataSliderCategory(sliderInfo) {
     let token = localStorage.getItem("ACCESS_TOKEN");
-      if(token !== null && category.business !=='clickam') {
-        this.showFormCustomer = true;
+      if(token !== null && sliderInfo.business !=='clickam') {
+        this.tokenInfo = this.token.userInfo();
+        this.idClicker = this.tokenInfo.idclicker;
+        // this.idClicker = this.tokenInfo.idclicker.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        const dataCategoryUrl = sliderInfo.link;
         this.showForm = false;
         this.urlshorten = '';
         this.reference = false;
-        const dataCategoryUrl = category.link;
-        this.url = `${dataCategoryUrl}${this.identification}`;
+        this.showFormCustomer = true;
+        this.url = `${dataCategoryUrl}${this.idClicker}`;
         this.subscription = this.user
           .getShortUrl(this.url)
           .subscribe((resp: any) => {
-            this.urlshorten = resp;
+            let splice = resp.split('//');
+            this.urlshorten = 'https://'+ splice[1];
             this.enableCopy = false;
             this.saveLink();
           });
         this.idCustomerForm.controls.identification.setValue("");
         this.idCustomerForm.reset();
         this.formShareLink();
-        const title = category.description;
-        const id = category.productId;
-        const img = category.imageurl;
-        const showClose = false;
-        const showCloseIcon = true;
-        const showProduct = true;
-        const showshowTitle = false;
-        const buttonClose = "Cerrar";
-        const infoaditional = category.infoaditional;
-        this.plu = category.description;
-        this.business = category.idbusiness;
         const home = true;
-
-        if(category.idbusiness !== 3 && category.idbusiness !== 5) {
+        this.business = sliderInfo.idbusiness;
+        this.plu = sliderInfo.description;
+        const infoaditional = sliderInfo.infoaditional;
+        const img = sliderInfo.imageurl;
+        const showCloseIcon = true;
+        const showClose = false;
+        const buttonClose = "Cerrar";
+        const showshowTitle = false;
+        const title = sliderInfo.description;
+        const showProduct = true;
+        const id = sliderInfo.productId;
+        // this.classButton = (sliderInfo.description).replace(" ", "");
+        this.classButtonWhatsapp= `gtmClicLightboxIconoWhatsApp${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonTwitter = `gtmClicLightboxIconoTwitter${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonFacebook = `gtmClicLightboxIconoFacebook${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonShare = `gtmClicLightboxCompartir${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonBuy = `gtmClicLightboxComprar${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonRefer = `gtmClicLightboxReferir${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        this.classButtonCopy = `gtmClicLightboxCopiarLink${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        if(sliderInfo.idbusiness !== 3 && sliderInfo.idbusiness !== 5) {
           this.template = this.templateCategories;
         } else {
           this.template = this.templateAssured;
@@ -291,16 +329,16 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
         let dialogref = this.dialog.open(DialogComponent, {
           data: {
-            title,
             template,
             infoaditional,
             showClose,
-            showCloseIcon,
             img,
+            showCloseIcon,
             showProduct,
-            showshowTitle,
             buttonClose,
+            showshowTitle,
             id,
+            title,
             home
           },
         });
@@ -309,10 +347,69 @@ export class BussinessComponent implements OnInit, OnDestroy {
           this.enableCopy = true;
         })
       } else {
-        this.router.navigate(['/'+category.link]);
+        this.router.navigate(['/'+sliderInfo.link]);
       }
   
 
+  }
+
+  public acceptModal() {
+    this.dialogModal.closeAll();
+    this.acceptTerms = true;
+    this.termsForm.controls.acceptTerms.setValue(true);
+  }
+
+  /**
+   * check para aceptar terminos y condiciones
+   */
+
+  public acceptTermsCheck() {
+    this.acceptTerms = !this.acceptTerms;
+    if(this.acceptTerms === false) {
+      this.termsForm.controls.acceptTerms.setValue(null);
+    }
+  }
+
+  public termsAndConditions() {
+   
+    const template = this.templateTerms;
+    const title = "";
+
+    this.dialogModal.open(ModalGenericComponent, {
+      data: {
+        title,
+        template
+      }
+    });
+  }
+
+  public registerUser() {
+    this.user.registeruserterms(this.id).subscribe( (resp:any) => {
+      if(resp.state === 'Success') {
+       this.acceptTermsDeliver = true;
+      }
+    })
+  }
+
+  public getUserData() {
+    this.subscription = this.auth.getRole$.subscribe(role => {
+      if (role === "CLICKER" || role === "ADMIN") {
+        this.subscription = this.user.getuserdata().subscribe(user => {
+          this.acceptTermsDeliver = user.acceptTerms;
+        });
+      }
+    });
+  }
+
+
+  public goSeway() {
+    var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    if(iOS || isSafari) {
+      window.location.assign(this.urlAppstore)
+    } else {
+      window.open(this.urlPlaystore,'_blank');
+    }
   }
 
 

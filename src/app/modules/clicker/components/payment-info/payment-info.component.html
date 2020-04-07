@@ -531,12 +531,12 @@
   <button
     mat-raised-button
     id="sendFiles"
-    class="button button-100 button-height button-files"
+    class="button button-100 button-height button-files gtmPerfilClicGestionarPagosClickam"
     color="orange"
     (click)="sendPayment()"
     [disabled] = "!externalForm.valid"
   >
-  {{ "GENERIC.CONTINUE" | translate }}
+  <span class="gtmPerfilClicGestionarPagosClickam">{{ "GENERIC.CONTINUE" | translate }}</span>
   </button>
 
 

@@ -9,6 +9,14 @@
             <p class="m-0 gray-light">C.C {{element.identification}}</p>
             </td>
           </ng-container>
+
+          <!-- Identificaton clicker -->
+          <ng-container matColumnDef="idclicker">
+            <th mat-header-cell *matHeaderCellDef style="width: 30%;"> {{ 'USERS.ID' | translate }} </th>
+            <td mat-cell *matCellDef="let element"> 
+            <p class="m-0 gray-light">{{element.idclicker}}</p>
+            </td>
+          </ng-container>
       
           <!-- CellPhone Column -->
           <ng-container matColumnDef="cellphone">
