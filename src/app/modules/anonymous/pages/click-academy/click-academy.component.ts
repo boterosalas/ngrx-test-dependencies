@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-click-academy',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClickAcademyComponent implements OnInit {
 
-  constructor() { }
+  pdf:string;
+
+  constructor(
+  ) { }
 
   ngOnInit() {
     setTimeout(() => {
@@ -15,6 +19,7 @@ export class ClickAcademyComponent implements OnInit {
       document.querySelector('.mat-tab-label[aria-posinset="2"]').classList.add("gtmClicAcademyClicSeguros");
       document.querySelector('.mat-tab-label[aria-posinset="3"]').classList.add("gtmClicAcademyClicViajes");
     }, 1000);
+    this.pdf = environment.PDF;
   }
 
 }
