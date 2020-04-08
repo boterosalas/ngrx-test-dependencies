@@ -7,5 +7,6 @@ export const environment = {
     URL_REFERAL: 'https://apitestexito.azure-api.net/QA-clickam-md-apireferral/api/',
     URL_COMISSION: 'https://apitestexito.azure-api.net/QA-clickam-md-apicommission/api/',
     URL_MASTER: 'https://apitestexito.azure-api.net/QA-clickam-md-apimasterdata/api/',
+    PDF: 'https://webclickamqa.blob.core.windows.net/clickacademy/pdf/',
     SUBSCRIPTION: 'f5edbcd2315e479aad33d80c58052fcc'
   };
