@@ -7,7 +7,7 @@
         
         <label class="mr-4 f-17 gray">Ordenar por: </label>
         <mat-form-field>
-          <mat-select value="DATEASC">
+          <mat-select value="DATEDESC">
               <mat-option *ngFor="let option of orderOptions" [value]="option.value" (click)="order(option.value)">
                   <span>{{option.description}}</span></mat-option
                 >
