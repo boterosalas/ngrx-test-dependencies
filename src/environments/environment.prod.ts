@@ -7,5 +7,6 @@ export const environment = {
   URL_REFERAL: 'https://apimexito.azure-api.net/PD-clickam-md-apireferral/api/',
   URL_COMISSION: 'https://apimexito.azure-api.net/PD-clickam-md-apicommission/api/',
   URL_MASTER: 'https://apimexito.azure-api.net/PD-clickam-md-apimasterdata/api/',
+  PDF: 'https://www.clickam.com.co/clickacademy/pdf/',
   SUBSCRIPTION: 'e2d3328d254d4e52a11495b223f56e86'
 };
