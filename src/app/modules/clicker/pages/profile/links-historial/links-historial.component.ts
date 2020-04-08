@@ -76,10 +76,10 @@ export class LinksHistorialComponent implements OnInit {
 
   ngOnInit() {
     this.orderOptions = [
-      { value: "DATEASC", description: "Más recientes" },
-      { value: "DATEDESC", description: "Menos recientes" },
-      { value: "EFFECTIVEASC", description: "Más efectivo" },
-      { value: "EFFECTIVEDESC", description: "Menos efectivo" }
+      { value: "DATEDESC", description: "Más recientes" },
+      { value: "DATEASC", description: "Menos recientes" },
+      { value: "EFFECTIVEDESC", description: "Más efectivo" },
+      { value: "EFFECTIVEASC", description: "Menos efectivo" },
     ];
 
     this.getLinksHistory();
@@ -93,7 +93,7 @@ export class LinksHistorialComponent implements OnInit {
     this.getLinksHistory(this.from, this.to);
   }
 
-  public getLinksHistory(from = 1, to = this.pageTo, orderBy = "DATEASC") {
+  public getLinksHistory(from = 1, to = this.pageTo, orderBy = "DATEDESC") {
     const params = { from, to, orderBy };
     this.subscription = this.links.getLinkHistory(params).subscribe(resp => {
       this.dataSource = new MatTableDataSource<any>(resp.listLinkHistory);
