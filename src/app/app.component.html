@@ -10,7 +10,7 @@
         <p class="m-0 f-14 border-bottom-orange-init lh-20 galano">{{email}}</p>
       </span>     
     </mat-toolbar>
-        <div *ngIf="managedPayments === false && isEmployee === false && (auth.getRole$ | async ) === 'CLICKER'" class="paymentInfo orange text-white p-2 cursor-pointer" (click)="drawer.toggle()"  fxLayout="row" [routerLink]="[ '/mi-perfil', 'pagos' ]">
+        <div *ngIf="managedPayments === false && isEmployee === false && (auth.getRole$ | async ) === 'CLICKER'" class="paymentInfo text-white p-2 cursor-pointer" (click)="drawer.toggle()"  fxLayout="row" [routerLink]="[ '/mi-perfil', 'pagos' ]">
           <span fxLayout="column" fxFlex="12" fxLayoutAlign="center center">
             <img class="pr-2" src="assets/img/alerta.svg" alt="user"> 
           </span>

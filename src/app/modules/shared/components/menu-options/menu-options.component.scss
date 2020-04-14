@@ -4,10 +4,11 @@
 .menu-mobile {
     &.active{
         a{
-            color: $primary-color;
+            color: $secondary-color;
         }
     }
     a{
+        color: $primary-color;
         font-family: $font-galano-bold;
         height: 30px;
         position: relative;
