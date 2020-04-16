@@ -22,8 +22,8 @@
                 ".",
                 "src/assets/styles"
               ]
-            },
-            "outputPath": "dist/browser",
+          },
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -51,7 +51,7 @@
             ]
           },
           "configurations": {
-            "production": {
+            "prod": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -181,28 +181,6 @@
           "configurations": {
             "production": {
               "devServerTarget": "clickam:serve:production"
-            }
-          }
-        },
-        "server": {
-          "builder": "@angular-devkit/build-angular:server",
-          "options": {
-            "outputPath": "dist/server",
-            "main": "src/main.server.ts",
-            "tsConfig": "tsconfig.server.json",
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "src/assets/styles"
-              ]
-            }
-          },
-          "configurations": {
-            "production": {
-              "sourceMap": false,
-              "optimization": {
-                "scripts": false,
-                "styles": true
-              }
             }
           }
         }

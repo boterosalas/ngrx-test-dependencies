@@ -48,7 +48,7 @@ export function jwtTokenGetter() {
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     AnonymousModule,
