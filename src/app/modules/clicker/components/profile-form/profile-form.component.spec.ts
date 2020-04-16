@@ -16,6 +16,19 @@ import { MatDialogRef } from '@angular/material';
 import { MasterDataService } from 'src/app/services/master-data.service';
 import { of } from 'rxjs/internal/observable/of';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+import { UserService } from 'src/app/services/user.service';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
+
+
+class MockUserService extends UserService {
+  private subscription: Subscription = new Subscription();
+
+  userInfo$ = new BehaviorSubject<any>({
+    firstNames: 'David'
+  });
+
+}
 
 describe('ProfileFormComponent', () => {
   let component: ProfileFormComponent;
@@ -23,10 +36,21 @@ describe('ProfileFormComponent', () => {
 
   const mockDialog = jasmine.createSpyObj("MatDialog", ["open"]);
 
+  const mockUserService = jasmine.createSpyObj("UserService", ["getuserdata"]);
+
   const mockMasterDataService = jasmine.createSpyObj("MasterDataService", [
     "getDepartments",
     "getBanks"
   ]);
+
+  const mockAuthService= jasmine.createSpyObj("AuthService", [
+    "changePassword"
+    ]);
+
+  let dataUserC = {
+    managedPayments : true,
+    isEmployeeUser: true
+  }
 
   let dataDepartments = {
     state: "Success",
@@ -97,6 +121,18 @@ let banks = [
   {Id: 1, code: "01", description: "BANCO AGRARIO"}
 ]
 
+const resp = {
+  state: "Success",
+  userMessage: "se ha actualizado el usuario",
+  objectResponse: []
+};
+
+const ErrorUptade = {
+  state: "Success",
+  userMessage: "No se ha actualizado el usuario",
+  objectResponse: []
+};
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ProfileFormComponent, DialogEditComponent ],
@@ -123,7 +159,9 @@ let banks = [
       ],
       providers: [
         { provide: MatDialogRef, useValue: mockDialog },
-        { provide: MasterDataService, useValue: mockMasterDataService }
+        { provide: MasterDataService, useValue: mockMasterDataService },
+        { provide: UserService, useClass: MockUserService },
+        {provide: AuthService, useValue: mockAuthService}
       ],
       schemas: [
         // NO_ERRORS_SCHEMA
@@ -135,7 +173,9 @@ let banks = [
     })
     .compileComponents();
     mockMasterDataService.getDepartments.and.returnValue(of(dataDepartments));
+    mockUserService.getuserdata.and.returnValue(of(dataUserC));
     mockMasterDataService.getBanks.and.returnValue(of(banks));
+    mockAuthService.changePassword.and.returnValue(of(resp));
   }));
 
   beforeEach(() => {
@@ -143,11 +183,67 @@ let banks = [
     fixture = TestBed.createComponent(ProfileFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    component.name = 'David';
+    component.lastName = 'Betancur';
+    component.email = 'test@test.com'
+    component.phone = '3005490912';
+    component.id = '12345';
+    component.address = 'calle falsa 123';
+    component.department  = 'Antioquia';
+    component.municipality = 'Bello';
+    component.bank = 'Bancolombia';
+    component.bankAccountNumber = '12345678';
+    component.typeBankAccount = 'Ahorros';
+    component.userId = '0000';
+    component.isEmployee = true;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('get user data', () => {
+    let service = fixture.debugElement.injector.get(UserService);
+    spyOn(service, 'getuserdata').and.returnValue(of(dataUserC));
+    component.getUserData();
+    expect(service.getuserdata).toHaveBeenCalled();
+  });
+
+  it('update account', () => {
+    let service = fixture.debugElement.injector.get(UserService);
+    spyOn(service, 'changeBankInformation').and.returnValue(of(resp));
+    component.updateAccount();
+    expect(service.changeBankInformation).toHaveBeenCalled();
+  });
+  
+  it('change address', () => {
+    let service = fixture.debugElement.injector.get(UserService);
+    spyOn(service, 'updateUser').and.returnValue(of(resp));
+    component.changeAddress();
+    expect(service.updateUser).toHaveBeenCalled();
+  });
+  
+
+  it('update User', () => {
+    let service = fixture.debugElement.injector.get(UserService);
+    spyOn(service, 'updateUser').and.returnValue(of(resp));
+    component.editUser();
+    expect(service.updateUser).toHaveBeenCalled();
+  });
+
+  it('showAccount', () => {
+    let service = fixture.debugElement.injector.get(UserService);
+    spyOn(service, 'getBankAccountNumber').and.returnValue(of(resp));
+    component.showAccount();
+    expect(service.getBankAccountNumber).toHaveBeenCalled();
+  });
+  
+  it('changePasswordUser', () => {
+    component.changePasswordUser();
+    expect( mockAuthService.changePassword).toHaveBeenCalled();
+  });
+  
+  
 
   it('editName', () => {
     component.editName();
@@ -177,6 +273,8 @@ let banks = [
   it("select city", () => {
     component.cityCode = "01";
     component.selectCity("Medellín");
+    fixture.detectChanges();
+    expect(component.cityCode).toBeUndefined();
   });
 
   it("select selectDepartment", () => {
@@ -187,14 +285,7 @@ let banks = [
       address: ["calle 123"]
     });
     component.selectDepartment(department);
+    expect(component.addressForm.valid).toBeTruthy();
   });
-
-  // it('editUser', () => {
-  //   component.userId = '123445';
-  //   component.profileForm.controls.name.setValue('test');
-  //   component.profileForm.controls.lastName.setValue('test');
-  //   component.profileFormCell.controls.phone.setValue('123456789');
-  //   component.editUser();
-  // });
 
 });

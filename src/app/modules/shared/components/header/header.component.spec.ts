@@ -99,7 +99,9 @@ describe('HeaderComponent', () => {
     });
 
     it('open side', () => {
+      spyOn(component.sidenav, 'emit');
       component.open();
+      expect(component.sidenav.emit).toHaveBeenCalled();
     });
     
 

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { async, ComponentFixture, TestBed, inject } from "@angular/core/testing";
 
 import { BussinessComponent } from "./bussiness.component";
 import { SharedModule } from "src/app/modules/shared/shared.module";
@@ -22,6 +22,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommentStmt } from '@angular/compiler';
 import { UserService } from 'src/app/services/user.service';
 import { ClickerModule } from '../../../clicker.module';
+import { LinksService } from 'src/app/services/links.service';
+import { Router } from '@angular/router';
 
 describe("BussinessComponent", () => {
   let component: BussinessComponent;
@@ -30,6 +32,8 @@ describe("BussinessComponent", () => {
   const mockContentService = jasmine.createSpyObj("ContentService", [
     "getBusinessContent",
   ]);
+
+  const mockLinksService = jasmine.createSpyObj("LinksService", ["saveLink"]);
 
   const mockUserService = jasmine.createSpyObj("UserService", ["getShortUrl", "getuserdata"]);
 
@@ -73,6 +77,21 @@ describe("BussinessComponent", () => {
     }
   ];
 
+  const resp = {
+    state: "Success",
+    userMessage: "se ha guardado el link",
+    objectResponse: 
+    {
+      id: 2656,
+      link: "http://tinyurl.com/t7c5ouj",
+      creationDate: "2020-04-03T12:07:15.3146043-05:00",
+      userId: 220,
+      plu: "C-HOME",
+      business: "1",
+      identification: null,
+    }
+  };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [],
@@ -104,6 +123,7 @@ describe("BussinessComponent", () => {
         { provide: UserService, useValue: mockUserService },
         { provide: MatDialogRef, useValue: mockDialogRef },
         { provide: MAT_BOTTOM_SHEET_DATA, useValue: mockDialog },
+        { provide: LinksService, useValue: mockLinksService }
       ]
     })
       .overrideModule(BrowserDynamicTestingModule, {
@@ -115,6 +135,7 @@ describe("BussinessComponent", () => {
     mockContentService.getBusinessContent.and.returnValue(of(bussiness));
     mockUserService.getuserdata.and.returnValue(of(dataUserC));
     mockUserService.getShortUrl.and.returnValue(of('http://tynyurl.com/12kusw'));
+    mockLinksService.saveLink.and.returnValue(of(resp));
   }));
 
   beforeEach(() => {
@@ -128,9 +149,11 @@ describe("BussinessComponent", () => {
     expect(mockContentService.getBusinessContent).toHaveBeenCalled();
   });
 
-  it("go back", () => {
+  it('go back', inject([Router], (router: Router) => {
+    spyOn(router, 'navigate').and.stub();
     component.goback();
-  });
+    expect(router.navigate).toHaveBeenCalledWith(['./']);
+  }));
 
   it("save link", () => {
     component.urlshorten = "https://tyny.url/xaxa";
@@ -139,6 +162,7 @@ describe("BussinessComponent", () => {
     component.business = "exito";
     component.date = "2019/09/09";
     component.saveLink();
+    expect(mockLinksService.saveLink).toHaveBeenCalled();
   });
 
   it("save reference", () => {
@@ -148,6 +172,7 @@ describe("BussinessComponent", () => {
     component.business = "exito";
     component.date = "2019/09/09";
     component.saveLinkReference();
+    expect(mockLinksService.saveLink).toHaveBeenCalled();
   });
 
   it("showReference", () => {
@@ -157,11 +182,13 @@ describe("BussinessComponent", () => {
   });
 
   it("data category", () => {
+    component.urlshorten = 'http://tynyurl.com/xsxsx';
     component.dataSliderCategory(categorys);
     expect(mockDialog.open).toBeTruthy();
   });
 
   it("next step", () => {
+    component.urlshorten = 'http://tynyurl.com/xsxsx';
     component.showForm = true;
     component.showFormCustomer = false;
     component.nextStep();
@@ -170,6 +197,7 @@ describe("BussinessComponent", () => {
   });
 
   it("back step", () => {
+    component.urlshorten = 'http://tynyurl.com/xsxsx';
     component.showForm = true;
     component.reference = false;
     component.backStep();
@@ -180,18 +208,19 @@ describe("BussinessComponent", () => {
 
   it('share mobile', () => {
     component.share();
+    expect(component.urlshorten).not.toBeUndefined();
   });
 
-  it('buy', () => {
-    component.buy();
-  });
+  // it('buy', () => {
+  //   component.buy();
+  // });
 
   it('get date', () => {
+    let date = new Date();
     component.getDate();
+    expect(date).toBeDefined();
   });
   
-  
-
   it("copyInputMessage", () => {
     // const buttonModal = document.querySelector(".gtmInicioClicL");
     // buttonModal.dispatchEvent(new Event("click"));
@@ -199,6 +228,7 @@ describe("BussinessComponent", () => {
     button.dispatchEvent(new Event("click"));
     const nativeElementInput = fixture.nativeElement;
     const input = nativeElementInput.querySelector("input");
+    expect(input).not.toBeUndefined();
   });
   
 });

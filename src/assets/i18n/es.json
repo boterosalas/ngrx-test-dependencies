@@ -172,19 +172,27 @@
     "PRODUCTS_SELLER": "Productos vendidos",
     "CONVERSION": "Tasa de conversión"
   },
+  "COMMISION_TABLE": {
+    "COMMISION_TABLE": "Tabla de comisiones"
+  },
   "CLICKACADEMY": {
     "CLICKACADEMY": "Click Academy",
+    "CLICKACADEMY_TEXT": "¿Cómo te imaginas tu negocio? Conoce como Clickam puede ayudarte a crecer.",
     "CLICKACADEMY_TAB_EXITO": "exito.com",
-    "CLICKACADEMY_TAB_EXITO_TABLE": "<table class='w-100 text-left mt-3'><thead><th>Categoría de producto</th><th>Comisiones</th></thead><tbody><tr><td>Todos los textiles y categoría bebés</td><td>9.6%</td></tr><tr><td>Garantías extendidas</td><td>9.6%</td></tr><tr><td>Hogar: Ferretería, fiesta, papelería y navidad.</td><td>8%</td><tr><td>Hogar: Organizadores, mesas y decoración, deportes, ropa hogar y otros, muebles, hidrolavadoras, juguetería, Halloween, cocina y libros.</td><td>6.4%</td></tr><tr><td>Colchones</td><td>4%</td><tr><td>Mercado </td><td>3%</td></tr><tr><td>Pequeños electrodomésticos: Cuidado pisos, de ropa y personal, ventilación y calefacción, cocción eléctrica, bebidas, accesorios preparación alimentos, preparación alimentos y aires acondicionados.</td><td>2.4%</td></tr><tr><td>Accesorios telefonía</td><td>2.4%</td></tr><tr><td>Informática: Periféricos y accesorios para PC</td><td>1.6%</td></tr><tr><td>Audio y video: Accesorios de TV y audio, DVD, teatro en casa, portables audio, teléfonos, equipos de sonido.</td><td>1.6%</td></tr><tr><td>Celular gama alta</td><td>0.96%</td></tr><tr><td>Televisión</td><td>0.96%</td></tr><tr><td>Grandes electrodomésticos: Lavado y secado, refrigeración máquinas de coser y cocción.</td><td>0.8%</td></tr></tr><tr><td>Videojuegos</td><td>0.8%</td></tr><tr><td>Celular gama media</td><td>0.64%</td></tr><tr><td>Informática: Cámaras fotográficas y filmadoras, computadores, tablets, monitores, e impresión</td><td>0.6%</td></tr></tbody></table>",
-    "CLICKACADEMY_TAB_SEGUROS": "Seguros",
-    "CLICKACADEMY_TAB_SEGUROS_TABLE": "<table class='w-100 text-left mt-3'><thead><th>Categoría de producto</th><th>Comisiones</th></thead><tbody><tr><td>SOAT Auto</td><td>$32.000</td></tr><tr><td>SOAT Moto</td><td>$8.000</td></tr><tr><td>Seguro viaje internacional</td><td>$16.000</td></tr><tr><td>Seguro Celular</td><td>$12.000</td></tr><tr><td>Seguro Smartwatch</td><td>$12.000</td></tr><tr><td>Seguro Tablet</td><td>$12.000</td></tr><tr><td>Seguro Portátil</td><td>$12.000</td></tr><tr><td>Seguro consola de videojuego</td><td>$12.000</td></tr><tr><td>Seguro mascotas</td><td>$12.000</td></tr><tr><td>Seguro motos</td><td>$12.000</td></tr><tr><td>Seguro bicicletas</td><td>$12.000</td></tr><tr><td>Seguro de viaje nacional</td><td>$4.800</td></tr></tbody></table>",
-    "CLICKACADEMY_TAB_VIAJES": "Viajes",
-    "CLICKACADEMY_TAB_VIAJES_TABLE": "<table class='w-100 text-left mt-3'><thead><th>Categoría de producto</th><th>Comisiones</th></thead><tbody><tr><td>Paquetes de viaje</td><td>$40.000</td></tr><tr><td>Vuelos, actividades, autos, circuitos, hoteles</td><td>$16.000</td></tr></tbody></table>",
-    "TOOLS": "Herramientas",
-    "TOOLS_DESCRIPTION": "Guías rápidas para que ganes tus primeras comisiones, aprendas los trucos de los mejores clickers y le saques el mayor provecho a la plataforma.",
-    "TOOLS_TEXT1": "Entendiendo la plataforma nueva",
-    "TOOLS_TEXT2": "¿Cómo vendo producto de exito.com?",
-    "TOOLS_TEXT3": "¿Cómo vendo un seguro?",
+    "CLICKACADEMY_TAB_CARULLA": "carulla.com",
+    "CLICKACADEMY_TAB_EXITO_TABLE": "<table class='tableComission w-100 text-left mt-3'><thead><th class='w-80'>Categoría de producto</th><th class='text-center'>Comisiones</th></thead><tbody><tr><td>Todos los textiles y categoría bebés</td><td>9.6%</td></tr><tr><td>Garantías extendidas</td><td>9.6%</td></tr><tr><td>Hogar: Ferretería, fiesta, papelería y navidad.</td><td>8%</td><tr><td>Hogar: Organizadores, mesas y decoración, deportes, ropa hogar y otros, muebles, hidrolavadoras, juguetería, Halloween, cocina y libros.</td><td>6.4%</td></tr><tr><td>Colchones</td><td>4%</td><tr><td>Mercado </td><td>3%</td></tr><tr><td>Pequeños electrodomésticos: Cuidado pisos, de ropa y personal, ventilación y calefacción, cocción eléctrica, bebidas, accesorios preparación alimentos, preparación alimentos y aires acondicionados.</td><td>2.4%</td></tr><tr><td>Accesorios telefonía</td><td>2.4%</td></tr><tr><td>Informática: Periféricos y accesorios para PC</td><td>1.6%</td></tr><tr><td>Audio y video: Accesorios de TV y audio, DVD, teatro en casa, portables audio, teléfonos, equipos de sonido.</td><td>1.6%</td></tr><tr><td>Celular gama alta</td><td>0.96%</td></tr><tr><td>Televisión</td><td>0.96%</td></tr><tr><td>Grandes electrodomésticos: Lavado y secado, refrigeración máquinas de coser y cocción.</td><td>0.8%</td></tr></tr><tr><td>Videojuegos</td><td>0.8%</td></tr><tr><td>Celular gama media</td><td>0.64%</td></tr><tr><td>Informática: Cámaras fotográficas y filmadoras, computadores, tablets, monitores, e impresión</td><td>0.6%</td></tr></tbody></table>",
+    "CLICKACADEMY_TAB_SEGUROS": "Seguros Éxito",
+    "CLICKACADEMY_TAB_SEGUROS_TABLE": "<table class='tableComission w-100 text-left mt-3'><thead><th class='w-80'>Categoría de producto</th><th class='text-center'>Comisiones</th></thead><tbody><tr><td>SOAT Auto</td><td>$32.000</td></tr><tr><td>SOAT Moto</td><td>$8.000</td></tr><tr><td>Seguro viaje internacional</td><td>$16.000</td></tr><tr><td>Seguro de viaje nacional</td><td>$4.800</td></tr></tbody></table>",
+    "CLICKACADEMY_TAB_WESURA": "WeSura",
+    "CLICKACADEMY_TAB_WESURA_TABLE": "<table class='tableComission w-100 text-left mt-3'><thead><th class='w-80'>Categoría de producto</th><th class='text-center'>Comisiones</th></thead><tbody><tr><td>Seguro Celular</td><td>$12.000</td></tr><tr><td>Seguro Smartwatch</td><td>$12.000</td></tr><tr><td>Seguro Tablet</td><td>$12.000</td></tr><tr><td>Seguro Portátil</td><td>$12.000</td></tr><tr><td>Seguro consola de videojuego</td><td>$12.000</td></tr><tr><td>Seguro mascotas</td><td>$12.000</td></tr><tr><td>Seguro motos</td><td>$12.000</td></tr><tr><td>Seguro bicicletas</td><td>$12.000</td></tr></tbody></table>",
+    "CLICKACADEMY_TAB_VIAJES": "Viajes Éxito",
+    "CLICKACADEMY_TAB_VIAJES_TABLE": "<table class='tableComission w-100 text-left mt-3'><thead><th class='w-80'>Categoría de producto</th><th class='text-center'>Comisiones</th></thead><tbody><tr><td>Paquetes de viaje</td><td>$40.000</td></tr><tr><td>Vuelos, actividades, autos, circuitos, hoteles</td><td>$16.000</td></tr></tbody></table>",
+    "TOOLS": "¿Cómo funciona Clickam?",
+    "TOOLS_DESCRIPTION": "Aquí puedes encontrar mucha información valiosa sobre como puedes ganar usando Clickam.",
+    "TOOLS_TEXT1": "Registro y primera venta",
+    "TOOLS_TEXT2": "Certificación bancaria",
+    "TOOLS_TEXT3": "¿Cómo comprar por Éxito.com?",
+    "TOOLS_TEXT4": "¿Cómo agregar valor a mis links?",
     "COMISSIONS": "Comisiones",
     "COMISSIONS_TEXT": "Conoce nuestras comisiones",
     "CATEGORY": "Categoría de producto",
@@ -284,6 +292,13 @@
     "AVAILABLE_TEXT": "*Este valor te será consignado en el próximo pago",
     "ACCOUNT": "En Cuenta**",
     "ACCOUNT_TEXT": "**Estamos validando estas compras, una vez el negocio confirme los pagos, tu comisión pasará a estado disponible."
+  },
+  "HISTORICAL": {
+    "HISTORY_LINKS": "Historial de links",
+    "LINK": "LINK",
+    "DATE": "FECHA",
+    "GENERATED_COMISSIONS":"COMISIONES GENERADAS",
+    "TOTAL_SELL": "CANTIDAD DE PRODUCTOS VENDIDOS"
   },
   "USERS": {
     "USERS": "Usuarios",

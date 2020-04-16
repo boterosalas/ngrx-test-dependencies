@@ -1,0 +1,23 @@
+@import 'variables';
+@import 'general';
+
+table {
+    width: 100%;
+  }
+
+  .red {
+    color: red;
+    font-size: 16px;
+  }
+
+  .text-center {
+    text-align: center !important;
+  }
+
+  .gray-light{
+    color: #969696;
+  }
+
+  td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type{
+    padding-left: 0 !important;
+  }

@@ -10,6 +10,24 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from 'src/app/services/user.service';
 import { of } from 'rxjs/internal/observable/of';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+
+
+class MockUserService extends UserService {
+
+  userInfo$ = new BehaviorSubject<any>({
+    userId: '220',
+    identification: '1223345',
+    verified: true
+  });
+
+}
+
+let dataUserC = {
+  managedPayments : true,
+  isEmployeeUser: true
+}
+
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -50,6 +68,7 @@ describe('ProfileComponent', () => {
       ],
       providers: [
         // { provide: UserService, useValue: mockUserService },
+        { provide: UserService, useClass: MockUserService },
       ],
       schemas: [
         NO_ERRORS_SCHEMA
@@ -74,12 +93,20 @@ describe('ProfileComponent', () => {
     component.userId = '260';
     component.id = '131516'
     component.sendFiles({fileIdentificationCard1: 'data:application/octet-stream;base64, 84dq8d9qdqd', fileIdentificationCard2: 'data:application/octet-stream;base64, dqdqdqsqsq', fileBankCertificate: 'data:application/octet-stream;base64, ddp0d9aida0d'  });
+    expect(component.userId).not.toBeUndefined();
   });
 
   it('reset files', () => {
     component.reset({});
     let file = '';
     expect(file).toBe('');
+  });
+
+  it('get user data', () => {
+    let service = fixture.debugElement.injector.get(UserService);
+    spyOn(service, 'getuserdata').and.returnValue(of(dataUserC));
+    component.getUserData();
+    expect(service.getuserdata).toHaveBeenCalled();
   });
 
 });
