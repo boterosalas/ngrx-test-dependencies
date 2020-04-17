@@ -1,1 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><defs><style>.a{fill:#00a9b3;}.b{fill:none;}</style></defs><g transform="translate(-195 -194)"><path class="a" d="M8.578,2.1a.485.485,0,0,0-.6,0L1,7.541l.6.767.854-.67v6.01a.971.971,0,0,0,.971.971h9.71a.971.971,0,0,0,.971-.971V7.643l.854.665.6-.762Zm.675,11.549H7.311V9.765H9.253Zm.971,0h0V9.765a.971.971,0,0,0-.971-.971H7.311a.971.971,0,0,0-.971.971v3.884H3.427V6.881L8.282,3.1l4.855,3.787v6.763Z" transform="translate(194.23 193.337)"/><rect class="b" width="15" height="15" transform="translate(195 194)"/></g></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 15 15" style="enable-background:new 0 0 15 15;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFAF51;}
+	.st1{fill:none;}
+</style>
+<g transform="translate(-195 -194)">
+	<path class="st0" d="M202.8,195.4c-0.2-0.1-0.4-0.1-0.6,0l-7,5.4l0.6,0.8l0.9-0.7v6c0,0.5,0.4,1,1,1h9.7c0.5,0,1-0.4,1-1v-6
+		l0.9,0.7l0.6-0.8L202.8,195.4z M203.5,207h-1.9v-3.9h1.9V207z M204.5,207L204.5,207v-3.9c0-0.5-0.4-1-1-1h-1.9c-0.5,0-1,0.4-1,1
+		v3.9h-2.9v-6.8l4.9-3.8l4.9,3.8v6.8L204.5,207z"/>
+	<rect x="195" y="194" class="st1" width="15" height="15"/>
+</g>
+</svg>

@@ -18,10 +18,10 @@
           <h3 class="m-0 gray" ngClass.gt-xs="f-18" id="{{ id }}" matTooltip={{productName}}>{{ productName | truncate: '30' }}</h3>
           <p>
             <span class="f-13" ngClass.gt-xs="f-18">Comisión:</span>
-            <span class="d-block orange-text" *ngIf="price !== 0">
+            <!-- <span class="d-block orange-text" *ngIf="price !== 0">
               {{ price | currency : '' : 'symbol' : '1.0-0' }}
-            </span>
-            <span class="d-block orange-text f-13" ngClass.gt-xs="f-18" *ngIf="price === 0">
+            </span> -->
+            <span class="d-block orange-text f-13" ngClass.gt-xs="f-18">
               {{ percent }}
             </span>
           </p>

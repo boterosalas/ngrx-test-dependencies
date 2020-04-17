@@ -5,8 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --output-hashing=all",
-    "build-qa": "ng build --output-hashing=all --configuration=qa",
-    "build-pr": "ng build --output-hashing=all --configuration=prod",
+    "build-qa": "ng build --output-hashing=all --configuration=qa && cp src/index-qa.html dist/index.html",
+    "build-pr": "ng build --output-hashing=all --configuration=prod && cp src/index-prod.html dist/index.html",
     "test": "ng test --code-coverage --karma-config=./karma.conf.js",
     "lint": "ng lint",
     "e2e": "ng e2e"
