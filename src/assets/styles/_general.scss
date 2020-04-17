@@ -499,6 +499,10 @@ table {
 
 @media screen and (min-width: 600px) {
 
+  .img-container-viajes img[alt^="Seguro"], .img-container-viajes img[alt^="Wesura"], .img-container-viajes img[alt^="SOAT"],  {
+    height: 135px !important;
+}
+
   .store{
     width: 220px;
   }
@@ -551,6 +555,17 @@ table {
 }
 
 @media screen and (max-width: 600px) {
+
+  .container-info {
+    h3 {
+      min-width: 200px;
+    }
+
+    .button-mar {
+      margin-left: 20px;
+    }
+
+  }
 
   // .gtmHomeClicNegociosEnvíos {
   //   padding: 18px 8px !important;
