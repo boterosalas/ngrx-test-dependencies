@@ -26,6 +26,8 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
 import { SliderComponent } from './components/slider/slider.component';
 import { BussinessCardComponent } from './components/bussiness-card/bussiness-card.component';
 import { ComissionTableComponent } from './pages/comission-table/comission-table.component';
+import { NewBusinessComponent } from './components/new-business/new-business.component';
+import { NewBusinessFormComponent } from './components/new-business-form/new-business-form.component';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -83,6 +85,8 @@ const routes: Routes = [
     SliderComponent,
     BussinessCardComponent,
     ComissionTableComponent,
+    NewBusinessComponent,
+    NewBusinessFormComponent,
     // ReportComponent
   ],
   imports: [

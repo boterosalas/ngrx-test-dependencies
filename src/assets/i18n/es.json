@@ -19,6 +19,7 @@
     "REGISTER": "Registro",
     "REGISTER2": "Registrarse",
     "CONTINUE": "Continuar",
+    "INVALID_DOMAIN": "Ingrese un nombre de dominio valido Ej:www.clickam.com.co",
     "INVALID_FORMAT": "El campo {{val}} no puede contener caracteres especiales",
     "MAX_CHARACTERS": "El número máximo de caracteres es {{maxchar}}",
     "MIN_CHARACTERS": "El número mínimo de caracteres es {{minchar}}",
@@ -45,7 +46,11 @@
     "EMAIL_SUPPORT": "clickam@grupo-exito.com",
     "COMPLETE_REGISTER": "Completa tu registro",
     "COMPLETE_REGISTER_INFO": "Recuerda que para obtener tus pagos es necesario completar tu registro.",
-    "COPYRIGHT": "Copyright 2020"
+    "COPYRIGHT": "Copyright 2020",
+    "BUSINESS_NAME": "Nombre del negocio",
+    "SITE_NAME": "Sitio web",
+    "CONTACT_PERSON": "Persona de contacto",
+    "BUSINESS_CATEGORY": "Categoría del negocio"
   },
   "FOOTER": {
     "FOLLOW_US": "Síguenos",
@@ -332,6 +337,11 @@
     "COMMISSIONS": "COMISIONES",
     "LINKS_GENERATED": "LINKS GENERADOS",
     "TOTAL": "Total"
+  },
+  "NEWBUSINESS": {
+    "REGISTER":"Registra tu negocio",
+    "TITLE":"Registro de nuevos negocios",
+    "TEXT": "Registra tu negocio y haz parte de nuestra familia Clicker para ofrecer tus beneficios a nuestros clientes."
   }
 
 }

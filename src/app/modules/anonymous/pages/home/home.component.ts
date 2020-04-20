@@ -3,7 +3,9 @@ import {
   OnInit,
   HostBinding,
   HostListener,
-  OnDestroy
+  OnDestroy,
+  ViewChild,
+  TemplateRef
 } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import Swal from "sweetalert2";
@@ -22,6 +24,8 @@ import { AuthService } from "src/app/services/auth.service";
 import decode from "jwt-decode";
 import { ContentService } from "src/app/services/content.service";
 import { distinctUntilChanged } from "rxjs/operators";
+import { MatDialog } from '@angular/material';
+import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 
 @Component({
   selector: "app-login",
@@ -69,6 +73,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   offersMobile: any;
   offersWeb: any;
   isEmployee: any;
+  @ViewChild("templateBusiness", { static: false })
+  templateBusiness: TemplateRef<any>;
+  categories =[{id:'1', value:'Test'}]
 
   constructor(
     public router: Router,
@@ -76,7 +83,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     private user: UserService,
     private utils: UtilsService,
     public auth: AuthService,
-    private content: ContentService
+    private content: ContentService,
+    private dialog: MatDialog
   ) {
     /**
      *  Verifica que en la ruta de inicio exista el parametro de email y activa el usuario
@@ -253,4 +261,17 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     ]);
   }
+
+  public openRegisterBusiness() {
+    const template = this.templateBusiness;
+    const title = "";
+
+    this.dialog.open(ModalGenericComponent, {
+      data: {
+        title,
+        template
+      }
+    });
+  }
+
 }
