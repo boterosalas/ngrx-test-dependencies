@@ -1,10 +1,11 @@
 <mat-card class="mb-3 bussiness" (click)="navigateBussiness()" class="cursor-pointer gtmHomeClicNegocios{{title}}" ngClass.xs="mb-4">
-    <div class="gtmHomeClicNegocios{{title}}" fxLayout.gt-xs="column" fxLayoutGap.gt-xs="0" fxLayout="row"  fxLayoutAlign="center center" fxLayoutGap="30px">
+    <div class="gtmHomeClicNegocios{{title}} inner-business" fxLayout.gt-xs="column" fxLayoutGap.gt-xs="0" fxLayout="row"  fxLayoutAlign="center center" fxLayoutGap="30px">
         <span fxLayout="column" fxFlex="20" class="img-responsive gtmHomeClicNegocios{{title}}">
             <img [src]="img" class="gtmHomeClicNegocios{{title}}" alt="{{title}}">
         </span>
         <span fxLayout="column" fxFlex="80" class="gtmHomeClicNegocios{{title}}">
             <h4 class="title-bussiness m-0 gtmHomeClicNegocios{{title}}">{{title}}</h4>
+            <p *ngIf="title === 'Movil Éxito'" class="m-0">Antes el 5%</p>
             <span class="percent orange-text gtmHomeClicNegocios{{title}}">{{percent}}</span>
         </span>
     </div>

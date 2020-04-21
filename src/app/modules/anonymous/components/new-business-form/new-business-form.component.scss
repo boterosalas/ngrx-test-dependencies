@@ -1,0 +1,17 @@
+@import 'variables';
+@import 'general';
+
+.register-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .register-container > * {
+    width: 100%;
+  }
+
+  @media screen and (min-width: 600px) {
+    .termsBusiness{
+      width: 540px;
+    }
+  }

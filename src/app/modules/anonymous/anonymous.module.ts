@@ -26,6 +26,9 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
 import { SliderComponent } from './components/slider/slider.component';
 import { BussinessCardComponent } from './components/bussiness-card/bussiness-card.component';
 import { ComissionTableComponent } from './pages/comission-table/comission-table.component';
+import { NewBusinessComponent } from './components/new-business/new-business.component';
+import { NewBusinessFormComponent } from './components/new-business-form/new-business-form.component';
+import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module, RecaptchaFormsModule, RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -83,11 +86,15 @@ const routes: Routes = [
     SliderComponent,
     BussinessCardComponent,
     ComissionTableComponent,
+    NewBusinessComponent,
+    NewBusinessFormComponent,
     // ReportComponent
   ],
   imports: [
     FormsModule,
     ReactiveFormsModule,
+    RecaptchaFormsModule,
+    RecaptchaModule,
     AppMaterialModule,
     TranslateModule,
     SharedModule,
@@ -97,6 +104,7 @@ const routes: Routes = [
     ShareButtonsModule,
     RouterModule.forChild(routes),
     MatPasswordStrengthModule,
+    RecaptchaV3Module
   ],
   exports: [
     RouterModule,
@@ -106,6 +114,12 @@ const routes: Routes = [
     ForgotpasswordformComponent,
     MenuComponent,
     CardComponent
-  ]
-})
+  ],
+    providers: [{
+      provide: RECAPTCHA_SETTINGS,
+      useValue: {
+        siteKey: '6LfYROwUAAAAAGBQR5PgNXRgLOHvkv2DOSBHerjH',
+      } as RecaptchaSettings,
+}]}
+)
 export class AnonymousModule {}

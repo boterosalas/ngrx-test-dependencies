@@ -499,6 +499,19 @@ table {
 
 @media screen and (min-width: 600px) {
 
+  app-bussiness-card{
+    min-height: 212px;
+    min-width: 230px;
+  }
+
+  .inner-business{
+    min-height: 182px;
+  }
+
+  .img-container-viajes img[alt^="Seguro"], .img-container-viajes img[alt^="Wesura"], .img-container-viajes img[alt^="SOAT"],  {
+    height: 135px !important;
+}
+
   .store{
     width: 220px;
   }
@@ -551,6 +564,17 @@ table {
 }
 
 @media screen and (max-width: 600px) {
+
+  .container-info {
+    h3 {
+      min-width: 200px;
+    }
+
+    .button-mar {
+      margin-left: 20px;
+    }
+
+  }
 
   // .gtmHomeClicNegociosEnvíos {
   //   padding: 18px 8px !important;
@@ -743,9 +767,9 @@ table {
 
 @media screen and (min-width: 600px) {
 
-  app-bussiness-card .gtmHomeClicNegociosEnvíos {
-    padding: 2px;
-  }
+  // app-bussiness-card .gtmHomeClicNegociosEnvíos {
+  //   padding: 2px;
+  // }
 
   .terms {
     margin-top: 2rem !important;
@@ -1200,6 +1224,9 @@ button.swal2-cancel.updatecancel.swal2-styled {
   &-22{
     font-size: 22px;
   }
+  &-23{
+    font-size: 23px;
+  }
   
 }
 
@@ -1259,4 +1286,9 @@ table {
 
 .mat-toolbar{
   color: $primary-color !important;
+}
+
+re-captcha {
+  display: flex;
+  justify-content: center;
 }
