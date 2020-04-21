@@ -33,6 +33,9 @@ export class ContentService {
   apiGetBusiness = 'business/getBusiness';
   apiGetBusinessClicker = 'business/getbusinessclicker';
   apiGetBusinessContent = 'business/getContent';
+  apiGetcategoriesbusiness = 'business/getcategoriesbusiness';
+  apiRegisterbusiness= 'business/registerbusiness';
+  apiGetbusinessexcel= 'business/getbusinessexcel';
   sendSearch = {};
 
   public getNews() {
@@ -69,8 +72,24 @@ export class ContentService {
     );
   }
 
+  public businessExcel() {
+    return this.http.post(`${this.url + this.apiGetbusinessexcel}`, this.httpOptions);
+  }
+
+  public registerBusinessClicker(data:object) {
+    return this.http.post(`${this.url + this.apiRegisterbusiness}`,data, this.httpOptions);
+  }
+
   public getBusinessContent(id: string) {
     return this.http.get(`${this.url + this.apiGetBusinessContent}?idBusiness=${id}`, this.httpOptions).pipe(
+      map((business: ResponseService) => {
+        return business.objectResponse;
+      })
+    );
+  }
+
+  public getCategoriesBusiness() {
+    return this.http.get(`${this.url + this.apiGetcategoriesbusiness}`, this.httpOptions).pipe(
       map((business: ResponseService) => {
         return business.objectResponse;
       })

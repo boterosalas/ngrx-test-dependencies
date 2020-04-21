@@ -1,0 +1,39 @@
+@import 'variables';
+@import 'general';
+@import 'animations';
+
+.border-input {
+    border: none;
+    outline: none;
+    height: 32px;
+}
+
+.border-radius{
+    border-radius: 5px;
+}
+
+.icon-download {
+    position: relative;
+    left: 5px;
+    bottom: 2px;
+  }
+
+  .icon-date{
+    position: relative;
+    top: 7px;
+    left: 30px;
+  }
+
+  .form-control {
+      padding-left: 35px !important;
+      font-family: $font-galano !important;
+  }
+
+  .downloadUsers {
+    position: relative;
+    left: -23px;
+}
+
+.minaud{
+  min-height: 500px;
+}

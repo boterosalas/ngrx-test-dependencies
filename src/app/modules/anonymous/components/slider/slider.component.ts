@@ -224,7 +224,7 @@ export class SliderComponent implements OnInit {
 
   public saveLinkReference() {
     let data = {
-      link: this.urlshorten,
+      link: this.url,
       identification: this.identification,
       plu: this.plu,
       business: this.business,
