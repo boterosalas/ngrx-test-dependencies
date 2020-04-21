@@ -336,7 +336,8 @@
     "SELLS": "VENTAS",
     "COMMISSIONS": "COMISIONES",
     "LINKS_GENERATED": "LINKS GENERADOS",
-    "TOTAL": "Total"
+    "TOTAL": "Total",
+    "NEW_BUSINESS": "Negocios"
   },
   "NEWBUSINESS": {
     "REGISTER":"Registra tu negocio",
