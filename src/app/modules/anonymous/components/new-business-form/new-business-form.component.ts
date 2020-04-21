@@ -35,7 +35,7 @@ export class NewBusinessFormComponent implements OnInit {
   domainPattern = "[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+";
   showBusinessForm:boolean = true;
   showTermsBusiness:boolean = false;
-
+  acceptTerms: boolean = null;
 
   ngOnInit() {
     this.registerBusiness();
@@ -80,6 +80,7 @@ export class NewBusinessFormComponent implements OnInit {
             ]
           ],
           category: [this.categories, Validators.required],
+          recaptchaReactive: [null, Validators.required],
           acceptTerms: [null, Validators.required]
         }
       );
@@ -100,6 +101,13 @@ export class NewBusinessFormComponent implements OnInit {
     this.showBusinessForm = true;
     this.showTermsBusiness = false;
     this.registerForm.controls.acceptTerms.setValue(null);
+  }
+
+  public acceptTermsCheck() {
+    this.acceptTerms = !this.acceptTerms;
+    if(this.acceptTerms === false) {
+      this.registerForm.controls.acceptTerms.setValue(null);
+    }
   }
 
 }
