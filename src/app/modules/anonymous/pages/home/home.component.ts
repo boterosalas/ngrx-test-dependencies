@@ -5,7 +5,7 @@ import {
   HostListener,
   OnDestroy,
   ViewChild,
-  TemplateRef
+  TemplateRef,
 } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import Swal from "sweetalert2";
@@ -18,14 +18,15 @@ import {
   style,
   transition,
   animate,
-  group
+  group,
 } from "@angular/animations";
 import { AuthService } from "src/app/services/auth.service";
 import decode from "jwt-decode";
 import { ContentService } from "src/app/services/content.service";
 import { distinctUntilChanged } from "rxjs/operators";
-import { MatDialog } from '@angular/material';
-import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import { MatDialog } from "@angular/material";
+import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
+import { ResponseService } from "src/app/interfaces/response";
 
 @Component({
   selector: "app-login",
@@ -42,9 +43,9 @@ import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-g
           animate(
             "600ms ease-in-out",
             style({ transform: "translateY(-1000px)" })
-          )
-        ])
-      ])
+          ),
+        ]),
+      ]),
     ]),
     trigger("simpleFadeAnimation", [
       // the "in" style determines the "resting" state of the element when it is visible.
@@ -54,9 +55,9 @@ import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-g
       transition(":enter", [style({ opacity: 0 }), animate(600)]),
 
       // fade out when destroyed. this could also be written as transition('void => *')
-      transition(":leave", animate(600, style({ opacity: 0 })))
-    ])
-  ]
+      transition(":leave", animate(600, style({ opacity: 0 }))),
+    ]),
+  ],
 })
 export class HomeComponent implements OnInit, OnDestroy {
   showLoginForm: boolean;
@@ -75,7 +76,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   isEmployee: any;
   @ViewChild("templateBusiness", { static: false })
   templateBusiness: TemplateRef<any>;
-  categories =[{id:'1', value:'Test'}]
+  categories = [];
 
   constructor(
     public router: Router,
@@ -91,7 +92,7 @@ export class HomeComponent implements OnInit, OnDestroy {
      * @param email
      */
 
-    this.subscription = this.route.queryParams.subscribe(params => {
+    this.subscription = this.route.queryParams.subscribe((params) => {
       if (params.email) {
         this.email = params.email;
 
@@ -116,9 +117,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public getUserData() {
-    this.subscription = this.auth.getRole$.subscribe(role => {
+    this.subscription = this.auth.getRole$.subscribe((role) => {
       if (role === "CLICKER" || role === "ADMIN") {
-        this.subscription = this.user.getuserdata().subscribe(user => {
+        this.subscription = this.user.getuserdata().subscribe((user) => {
           this.isEmployee = user.isEmployeeGrupoExito;
         });
       }
@@ -139,7 +140,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             text: user.userMessage,
             type: "success",
             confirmButtonText: "Aceptar",
-            confirmButtonClass: "accept-activation-alert-success"
+            confirmButtonClass: "accept-activation-alert-success",
           }).then(() => {
             this.router.navigate(["/inicio"]);
           });
@@ -149,19 +150,19 @@ export class HomeComponent implements OnInit, OnDestroy {
             text: user.userMessage,
             type: "error",
             confirmButtonText: "Aceptar",
-            confirmButtonClass: "accept-activation-alert-error"
+            confirmButtonClass: "accept-activation-alert-error",
           }).then(() => {
             this.router.navigate(["/inicio"]);
           });
         }
       },
-      error => {
+      (error) => {
         Swal.fire({
           title: error.statusText,
           text: error.error,
           type: "error",
           confirmButtonText: "Aceptar",
-          confirmButtonClass: "accept-activation-alert-invalid"
+          confirmButtonClass: "accept-activation-alert-invalid",
         }).then(() => {
           this.router.navigate(["/inicio"]);
         });
@@ -201,18 +202,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscription = this.content
       .getBusiness()
       .pipe(distinctUntilChanged())
-      .subscribe(bussiness => {
+      .subscribe((bussiness) => {
         this.bussiness = bussiness;
       });
   }
 
   public getBussinessClicker() {
     let token = localStorage.getItem("ACCESS_TOKEN");
-    this.subscription = this.auth.isLogged$.subscribe(val => {
+    this.subscription = this.auth.isLogged$.subscribe((val) => {
       if (!!val || token !== null) {
         this.subscription = this.content
           .getBusinessClicker()
-          .subscribe(bussiness => {
+          .subscribe((bussiness) => {
             this.bussinessClicker = bussiness;
           });
       }
@@ -233,7 +234,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscription = this.content
       .getOffers()
       .pipe(distinctUntilChanged())
-      .subscribe(offer => {
+      .subscribe((offer) => {
         this.offersMobile = offer.mobile;
         this.offersWeb = offer.web;
       });
@@ -249,7 +250,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       id: bussiness.id,
       code: bussiness.code,
       infoAditional: bussiness.infoaditional,
-      imageurl: bussiness.imageurl
+      imageurl: bussiness.imageurl,
     };
     this.router.navigate([
       "/bussiness",
@@ -257,21 +258,76 @@ export class HomeComponent implements OnInit, OnDestroy {
         id: params.id,
         code: params.code,
         infoAditional: params.infoAditional,
-        imageurl: params.imageurl
-      }
+        imageurl: params.imageurl,
+      },
     ]);
   }
 
   public openRegisterBusiness() {
+    this.getCategoriesBusiness();
     const template = this.templateBusiness;
     const title = "";
 
     this.dialog.open(ModalGenericComponent, {
       data: {
         title,
-        template
-      }
+        template,
+      },
     });
   }
 
+  public getCategoriesBusiness() {
+    this.subscription = this.content
+      .getCategoriesBusiness()
+      .subscribe((categories) => (this.categories = categories));
+  }
+
+  public sendDataBusiness(data) {
+    let formInfo = data.value;
+    let infoBusiness = {
+      description: formInfo.name,
+      website: formInfo.domain,
+      contactname: formInfo.contact,
+      contactphone: formInfo.phone,
+      contactemail: formInfo.email,
+      category: formInfo.category,
+      acceptTerms: formInfo.acceptTerms,
+      acceptHabeasData: true,
+    };
+    this.subscription = this.content
+      .registerBusinessClicker(infoBusiness)
+      .subscribe(
+        (resp: ResponseService) => {
+          if (resp.state === "Success") {
+            this.dialog.closeAll();
+            Swal.fire({
+              title: "Registro exitoso",
+              text: resp.userMessage,
+              type: "success",
+              confirmButtonText: "Aceptar",
+              confirmButtonClass: "accept-register-alert-success",
+            });
+          } else {
+            this.dialog.closeAll();
+            Swal.fire({
+              title: "Registro erróneo",
+              text: resp.userMessage,
+              type: "error",
+              confirmButtonText: "Aceptar",
+              confirmButtonClass: "accept-register-alert-error",
+            });
+          }
+        },
+        (error) => {
+          this.dialog.closeAll();
+          Swal.fire({
+            title: error.statusText,
+            text: error.error,
+            type: "error",
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: "accept-register-alert-invalid",
+          });
+        }
+      );
+  }
 }

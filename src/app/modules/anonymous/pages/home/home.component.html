@@ -29,7 +29,7 @@
 </div>
 
 <ng-template #templateBusiness>
-    <app-new-business-form [categories]="categories"></app-new-business-form>
+    <app-new-business-form (registerBusinessEmit)="sendDataBusiness($event)" [categories]="categories"></app-new-business-form>
 </ng-template>
 
 

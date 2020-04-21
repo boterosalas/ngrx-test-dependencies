@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { LinksService } from 'src/app/services/links.service';
-import { UserService } from 'src/app/services/user.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
+import { ContentService } from 'src/app/services/content.service';
+import { ResponseService } from 'src/app/interfaces/response';
 
 
 @Component({
@@ -10,11 +10,10 @@ import { Subscription } from 'rxjs';
   templateUrl: './business.component.html',
   styleUrls: ['./business.component.scss']
 })
-export class BusinessComponent implements OnInit {
+export class BusinessComponent implements OnInit, OnDestroy {
 
   constructor(
-    private file: LinksService,
-    private usersService: UserService,
+    private content: ContentService,
     private _snackBar: MatSnackBar,
   ) { }
 
@@ -38,7 +37,11 @@ export class BusinessComponent implements OnInit {
   }
 
   public exportBusiness() {
-    console.log('export');
+    this.subscription = this.content.businessExcel().subscribe((resp:ResponseService) => {
+      if(resp.state === 'Success') {
+        this.openSnackBar(resp.userMessage, 'Cerrar');
+      }
+    });
   }
 
   ngOnDestroy() {

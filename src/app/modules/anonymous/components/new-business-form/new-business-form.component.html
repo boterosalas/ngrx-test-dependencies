@@ -102,6 +102,52 @@
     >
   </mat-form-field>
 
+  <!-- contact business -->
+  <mat-form-field>
+    <input
+      matInput
+      id="contact"
+      type="text"
+      placeholder="{{ 'GENERIC.CONTACT_PERSON' | translate }}"
+      formControlName="contact"
+      required
+    />
+    <mat-error
+      id="requiredcontact"
+      *ngIf="
+        registerForm.controls.contact.invalid &&
+        registerForm.controls.contact.errors.required
+      "
+      >{{ "GENERIC.REQUIRED" | translate: { formValue: "Nombre del contacto" } }}</mat-error
+    >
+
+    <mat-error
+      id="maxcontact"
+      *ngIf="
+        registerForm.controls.contact.invalid &&
+        registerForm.controls.contact.errors.maxlength
+      "
+      >{{
+        "GENERIC.MAX_CHARACTERS"
+          | translate
+            : {
+                maxchar:
+                  registerForm.controls.contact.errors.maxlength.requiredLength
+              }
+      }}</mat-error
+    >
+
+    <mat-error
+      id="invalidcontact"
+      *ngIf="
+        registerForm.controls.contact.invalid &&
+        registerForm.controls.contact.errors.pattern
+      "
+      >{{ "GENERIC.INVALID_FORMAT" | translate: { val: "Nombre del contacto" } }}</mat-error
+    >
+  </mat-form-field>
+
+
   <mat-form-field>
     <input
       matInput
@@ -186,7 +232,7 @@
     >
       <mat-option>{{ 'GENERIC.BUSINESS_CATEGORY' | translate }}</mat-option>
       <mat-option *ngFor="let category of categories" value="{{ category.id }}">{{
-        category.value
+        category.description
       }}</mat-option>
     </mat-select>
     <mat-error
@@ -218,7 +264,7 @@
       id="register"
       class="mt-2 center button button-height button-100"
       color="orange"
-      (click)="register()"
+      (click)="register(registerForm)"
       [disabled]="!registerForm.valid"
     >
     <span>{{ "GENERIC.CONTINUE" | translate }}</span>

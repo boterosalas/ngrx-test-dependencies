@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { group } from 'console';
@@ -27,6 +27,8 @@ export class NewBusinessFormComponent implements OnInit {
   ) { }
 
   @Input() categories: Array<any> = [];
+  @Output() registerBusinessEmit = new EventEmitter;
+
   registerForm: FormGroup;
   emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
   namePattern =
@@ -61,7 +63,14 @@ export class NewBusinessFormComponent implements OnInit {
               Validators.pattern(this.domainPattern)
             ]
           ],
-          
+          contact: [
+            "",
+            [
+              Validators.required,
+              Validators.maxLength(50),
+              Validators.pattern(this.namePattern)
+            ]
+          ],
           phone: [
             "",
             [
@@ -108,6 +117,10 @@ export class NewBusinessFormComponent implements OnInit {
     if(this.acceptTerms === false) {
       this.registerForm.controls.acceptTerms.setValue(null);
     }
+  }
+
+  register(data) {
+    this.registerBusinessEmit.emit(data);
   }
 
 }
