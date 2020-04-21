@@ -38,6 +38,19 @@
         }
     }
 
+    .Negocios{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/menu-dash.svg") no-repeat;
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            top: 24%;
+            left: 2%;
+            background-size: 100%;
+        }
+    }
+
     .Historial.de.Links{
         &::before {
             content: "";
