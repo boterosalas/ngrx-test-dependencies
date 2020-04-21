@@ -93,6 +93,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
       this.percent = route.infoAditional;
       this.id = route.id;
       this.image = route.imageurl;
+      console.log(this.title);
     });
 
   }

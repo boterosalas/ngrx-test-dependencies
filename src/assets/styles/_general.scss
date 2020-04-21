@@ -499,6 +499,15 @@ table {
 
 @media screen and (min-width: 600px) {
 
+  app-bussiness-card{
+    min-height: 212px;
+    min-width: 230px;
+  }
+
+  .inner-business{
+    min-height: 182px;
+  }
+
   .img-container-viajes img[alt^="Seguro"], .img-container-viajes img[alt^="Wesura"], .img-container-viajes img[alt^="SOAT"],  {
     height: 135px !important;
 }
