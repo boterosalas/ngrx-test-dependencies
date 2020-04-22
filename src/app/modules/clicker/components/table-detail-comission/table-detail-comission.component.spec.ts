@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TableDetailComissionComponent } from './table-detail-comission.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 
 describe('TableDetailComissionComponent', () => {
   let component: TableDetailComissionComponent;
@@ -8,7 +11,14 @@ describe('TableDetailComissionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TableDetailComissionComponent ]
+      declarations: [ TableDetailComissionComponent ],
+      imports: [
+        TranslateModule.forRoot(),
+        AppMaterialModule
+      ],
+      schemas: [
+        NO_ERRORS_SCHEMA
+      ]
     })
     .compileComponents();
   }));
