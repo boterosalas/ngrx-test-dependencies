@@ -1,0 +1,13 @@
+@import 'variables';
+
+table {
+    width: 100%;
+    th{
+      width: 33.3%;
+      font-family: $font-galano-bold;
+      color: $gray2;
+    }
+    td{
+      padding-right: 15px;
+    }
+  }

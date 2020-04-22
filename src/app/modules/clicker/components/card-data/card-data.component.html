@@ -1,4 +1,7 @@
 <div fxLayout="column" fxFLex="100" class="card">
   <span class="number">{{number}}</span>
-  <span class="gray border-bottom-blue-init">{{text}}</span>
+  <span class="gray border-bottom-orange-init">{{text}}
+    <img class="pl-2 icon-alert" src="assets/img/alert-report.svg" alt="alert" matTooltip="{{textToolTip}}" matTooltipClass="purple-tip">
+  </span>
+  <a class="purple-text text-underline mt-2 cursor-pointer" (click)="detail()"> {{ 'GENERIC.SEE_DETAIL' | translate }} </a>
 </div>

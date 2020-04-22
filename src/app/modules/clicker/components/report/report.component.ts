@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, TemplateRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { LinksService } from 'src/app/services/links.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
 import { DialogHistoryComponent } from '../dialog-history/dialog-history.component';
+import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 
 @Component({
   selector: 'app-report',
@@ -26,6 +27,12 @@ export class ReportComponent implements OnInit, OnDestroy {
   identification: string;
   private subscription: Subscription = new Subscription();
   items= [];
+  dataBreak1:any;
+  dataBreak2:any;
+  @ViewChild("templateBreak", { static: false })
+  templateBreak: TemplateRef<any>;
+  @ViewChild("templateBreak2", { static: false })
+  templateBreak2: TemplateRef<any>;
 
   constructor(
     private payment: LinksService,
@@ -74,8 +81,10 @@ export class ReportComponent implements OnInit, OnDestroy {
 
   private getInfomonth() {
     this.subscription = this.payment.getReports().subscribe((resume: any) => {
-      this.available = resume.money.available;
-      this.account = resume.money.account;
+      this.available = resume.money.cutOff1;
+      this.account = resume.money.cutOff2;
+      this.dataBreak1 = new MatTableDataSource<any>(resume.money.detail1);
+      this.dataBreak2 = new MatTableDataSource<any>(resume.money.detail2);
     });
   }
 
@@ -109,6 +118,34 @@ export class ReportComponent implements OnInit, OnDestroy {
 
     });
 
+  }
+
+  public break1() {
+    const template = this.templateBreak;
+    const title = "Detalle corte 1";
+    const id="break1-modal"
+
+    this.dialog.open(ModalGenericComponent, {
+      data: {
+        title,
+        id,
+        template,
+      },
+    });
+  }
+
+  public break2() {
+    const template = this.templateBreak2;
+    const title = "Detalle corte 2";
+    const id="break2-modal"
+
+    this.dialog.open(ModalGenericComponent, {
+      data: {
+        title,
+        id,
+        template,
+      },
+    });
   }
 
 
