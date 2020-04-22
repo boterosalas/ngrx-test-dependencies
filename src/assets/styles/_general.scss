@@ -71,6 +71,7 @@ body {
 .mat-tab-group,
 .mat-table,
 .mat-bottom-sheet-container,
+.mat-tooltip,
 .mat-form-field {
   font-family: $font-family-base !important;
 }
@@ -163,6 +164,10 @@ body {
 
 .orange-text {
   color: $secondary-color;
+}
+
+.purple-text {
+  color: $primary-color;
 }
 
 .mat-orange {
@@ -505,12 +510,12 @@ table {
   }
 
   .inner-business{
-    min-height: 182px;
+    min-height: 230px;
   }
 
-  .img-container-viajes img[alt^="Seguro"], .img-container-viajes img[alt^="Wesura"], .img-container-viajes img[alt^="SOAT"],  {
+  .img-container-viajes img[alt^="Seguro"], .img-container-viajes img[alt^="Wesura"], .img-container-viajes img[alt^="SOAT"]  {
     height: 135px !important;
-}
+  }
 
   .store{
     width: 220px;
@@ -1087,11 +1092,11 @@ span.orange-border {
   }
 }
 
-.available {
-  span{
-    color: #000 !important;
-  }
-}
+// .available {
+//   span{
+//     color: #000 !important;
+//   }
+// }
 
 .user-transactions {
   .md-drppicker.double{
@@ -1291,4 +1296,9 @@ table {
 re-captcha {
   display: flex;
   justify-content: center;
+}
+
+
+.purple-tip{
+  background: rgba($primary-color, 0.8);
 }

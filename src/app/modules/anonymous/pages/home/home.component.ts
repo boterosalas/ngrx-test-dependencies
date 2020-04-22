@@ -267,10 +267,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getCategoriesBusiness();
     const template = this.templateBusiness;
     const title = "";
+    const id="business-modal"
 
     this.dialog.open(ModalGenericComponent, {
       data: {
         title,
+        id,
         template,
       },
     });

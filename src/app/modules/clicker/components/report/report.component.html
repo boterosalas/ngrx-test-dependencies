@@ -4,7 +4,7 @@
   <h1 class="border-bottom-orange-init" id="reportsTitle">{{ "REPORTS.REPORTS" | translate }}</h1>
   <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px">
     <div fxLayout="column" fxFlex="35" fxFlex.lt-md="100">
-      <h3 class="f-22">
+      <h3 class="border-bottom-orange-init f-20">
         {{ "HOME.MY_COMMISSIONS" | translate }}
       </h3>
       <div fxLayout="row">
@@ -12,12 +12,17 @@
           <app-card-data
             [number]="available | currency: '':'symbol':'1.0-0'"
             text="{{ 'REPORTS.AVAILABLE' | translate }}"
+            textToolTip ="Corte 1 Son las comisiones por ventas entre el 1 y el 15 de cada mes."
+            (openDetail)="break1()"
           ></app-card-data>
         </span>
         <span fxLayout="column" fxFlex="100">
-          <app-card-data class="no-shadow"
+          <app-card-data
             [number]="account | currency: '':'symbol':'1.0-0'"
-            text="{{ 'REPORTS.ACCOUNT' | translate }}">
+            text="{{ 'REPORTS.ACCOUNT' | translate }}"
+            textToolTip ="Corte 2 Son las comisiones por ventas entre el 16 y el 28/30/31 de cada mes."
+            (openDetail)="break2()"
+            >
           ></app-card-data>
         </span>
       </div>
@@ -39,3 +44,14 @@
     </div>
   </div>
 </div>
+
+
+<ng-template #templateBreak>
+  <p>Estas son las comisiones de ventas efectivas del 1 al 15 del mes en curso.</p>
+  <app-table-detail-comission [dataSource]="dataBreak1"></app-table-detail-comission>
+</ng-template>
+
+<ng-template #templateBreak2>
+  <p>Estas son las comisiones de ventas efectivas del 16 y el 28/30/31 de cada mes.</p>
+  <app-table-detail-comission [dataSource]="dataBreak2"></app-table-detail-comission>
+</ng-template>

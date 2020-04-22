@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CardDataComponent } from './card-data.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('CardDataComponent', () => {
   let component: CardDataComponent;
@@ -8,7 +9,10 @@ describe('CardDataComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CardDataComponent ]
+      declarations: [ CardDataComponent ],
+      imports: [
+        TranslateModule.forRoot()
+      ]
     })
     .compileComponents();
   }));
