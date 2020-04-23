@@ -93,7 +93,7 @@ export class ContentService {
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
       })
     };
-    return this.http.post(`${this.url + this.apiGetbusinessexcel}`, httpOptions);
+    return this.http.post(`${this.url + this.apiGetbusinessexcel}`,{}, httpOptions);
   }
 
   public registerBusinessClicker(data:object) {
