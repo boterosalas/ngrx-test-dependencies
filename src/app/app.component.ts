@@ -26,6 +26,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { UserService } from './services/user.service';
 import { TokenService } from './services/token.service';
 import { Meta } from '@angular/platform-browser';
+import { SwUpdate } from '@angular/service-worker'
 declare var dataLayer: any;
 // import { MessagingService } from "./shared/messaging.service";
 
@@ -116,7 +117,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private breakpointObserver: BreakpointObserver,
     private user: UserService,
     private token: TokenService,
-    private metaTagService: Meta
+    private metaTagService: Meta,
+    public updates:SwUpdate
   ) // private messagingService: MessagingService
   {
     translate.setDefaultLang("es");
@@ -133,7 +135,27 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.isLoggedIn = this.auth.isLoggedIn();
 
+    updates.available.subscribe(event => {
+      console.log('current version is', event.current);
+      console.log('available version is', event.available);
+    });
+
+    updates.activated.subscribe(event => {
+      console.log('old version was', event.previous);
+      console.log('new version is', event.current);
+    });
+
+    updates.available.subscribe(event => {
+        updates.activateUpdate().then(() => this.updateApp());
+    });
+
   }
+
+  updateApp(){
+    document.location.reload();
+    console.log("The app is updating right now");
+   }
+   
 
   ngOnInit() {
     // const userId = 'user001';
