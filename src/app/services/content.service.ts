@@ -65,7 +65,17 @@ export class ContentService {
   }
 
   public getBusinessClicker() {
-    return this.http.get(`${this.url + this.apiGetBusinessClicker}`, this.httpOptions).pipe(
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.get(`${this.url + this.apiGetBusinessClicker}`, httpOptions).pipe(
       map((user: ResponseService) => {
         return user.objectResponse;
       })
@@ -73,7 +83,17 @@ export class ContentService {
   }
 
   public businessExcel() {
-    return this.http.post(`${this.url + this.apiGetbusinessexcel}`, this.httpOptions);
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.post(`${this.url + this.apiGetbusinessexcel}`, httpOptions);
   }
 
   public registerBusinessClicker(data:object) {
