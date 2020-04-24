@@ -294,9 +294,9 @@
     "BANK": "BANCO DONDE SE PAGÓ",
     "UPLOAD_FILE": "Carga un archivo con el reporte de pagos de las comisiones del último periodo de corte",
     "SELECT_DATE": "Selecciona las fechas para descargar un archivo con todas las transacciones de todos los usuarios",
-    "AVAILABLE": "Corte 1*",
+    "AVAILABLE": "Corte 1",
     "AVAILABLE_TEXT": "*Este valor te será consignado en el próximo pago",
-    "ACCOUNT": "Corte 2**",
+    "ACCOUNT": "Corte 2",
     "ACCOUNT_TEXT": "** Estamos validando las compras del Corte 2, una vez el negocio confirme los pagos, tu comisión pasará a estar disponible."
   },
   "HISTORICAL": {
