@@ -10,9 +10,9 @@
     <ng-container *ngFor="let bussines of bussiness; let i = index">
       <app-bussiness-card *ngIf="bussines.code !== 'envios-clickam'" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
     </ng-container>
-    <ng-container *ngFor="let bussines of bussinessClicker; let i = index">
+    <!-- <ng-container *ngFor="let bussines of bussinessClicker; let i = index">
       <app-bussiness-card *ngIf="isEmployee === true && bussines.code === 'envios-clickam' && auth.isLoggedIn()" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
-    </ng-container>
+    </ng-container> -->
   </div>
 
   <span class="border-gray d-block"></span>
