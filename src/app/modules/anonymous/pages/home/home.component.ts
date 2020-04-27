@@ -208,8 +208,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public getBussinessClicker() {
-    let token = localStorage.getItem("ACCESS_TOKEN");
     this.subscription = this.auth.isLogged$.subscribe((val) => {
+      let token = localStorage.getItem("ACCESS_TOKEN");
       if (!!val || token !== null) {
         this.subscription = this.content
           .getBusinessClicker()
@@ -267,7 +267,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getCategoriesBusiness();
     const template = this.templateBusiness;
     const title = "";
-    const id="business-modal"
+    const id = "business-modal";
 
     this.dialog.open(ModalGenericComponent, {
       data: {

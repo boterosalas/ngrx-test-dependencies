@@ -1,13 +1,21 @@
 import { Injectable, OnInit } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "src/environments/environment";
-import { map, tap, distinctUntilChanged } from "rxjs/operators";
+import {
+  map,
+  tap,
+  distinctUntilChanged,
+  retry,
+  delay,
+  retryWhen,
+  take,
+} from "rxjs/operators";
 import { ResponseService } from "../interfaces/response";
 import { BehaviorSubject, Observable } from "rxjs";
 import { AuthService } from "./auth.service";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class UserService {
   constructor(private http: HttpClient, private auth: AuthService) {
@@ -22,35 +30,34 @@ export class UserService {
   urlEmployee = environment.URL_VALIDATE_EMPLOYEE;
   apiProfile = "userprofile/GetUserProfile";
   apiActivateProfile = "userprofile/activateUser";
-  apiShorUrl= 'userprofile/getShortURL';
-  apiCreateUser = 'userprofile/create';
-  apiIdType = 'userprofile/getIdTypes';
-  apigetBankAccountNumber = 'userprofile/getBankAccountNumber';
-  apichangeBankInformation = 'userprofile/changeBankInformation';
-  apiDisableUser = 'userprofile/disableUser';
-  apiUpdateUser = 'userprofile/updateUser';
-  apiUsers = 'userprofile/getUsers';
-  apiGetBasicData = 'userprofile/getBasicData';
-  apiComunications = 'userprofile/setReceiveCommunications';
-  apiVerified = 'userprofile/verifyUser';
-  apiDepartment = 'userprofile/getDeparments';
-  apiBanks = 'userprofile/getBanks';
-  apiUploadFiles = 'userprofile/upload';
-  apiDownloadFile = 'userprofile/downloadBase64';
-  apiGetuserdata = "userprofile/getuserdata"
-  apiUpdateUserEmail = "userprofile/updateUserEmail"
-  apiRegisterUserTerms = 'userprofile/registeruserterms';
+  apiShorUrl = "userprofile/getShortURL";
+  apiCreateUser = "userprofile/create";
+  apiIdType = "userprofile/getIdTypes";
+  apigetBankAccountNumber = "userprofile/getBankAccountNumber";
+  apichangeBankInformation = "userprofile/changeBankInformation";
+  apiDisableUser = "userprofile/disableUser";
+  apiUpdateUser = "userprofile/updateUser";
+  apiUsers = "userprofile/getUsers";
+  apiGetBasicData = "userprofile/getBasicData";
+  apiComunications = "userprofile/setReceiveCommunications";
+  apiVerified = "userprofile/verifyUser";
+  apiDepartment = "userprofile/getDeparments";
+  apiBanks = "userprofile/getBanks";
+  apiUploadFiles = "userprofile/upload";
+  apiDownloadFile = "userprofile/downloadBase64";
+  apiGetuserdata = "userprofile/getuserdata";
+  apiUpdateUserEmail = "userprofile/updateUserEmail";
+  apiRegisterUserTerms = "userprofile/registeruserterms";
 
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
-
 
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
       Authorization: "Bearer " + this.authorization,
-      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
-    })
+      "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+    }),
   };
 
   userInfo$ = new BehaviorSubject<any>(null);
@@ -63,8 +70,8 @@ export class UserService {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
-      })
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
     };
 
     return this.http
@@ -83,14 +90,28 @@ export class UserService {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
-      })
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
     };
 
-    return this.http.post(`${this.url + this.apiActivateProfile}`, {email:email}, httpOptions);
+    return this.http
+      .post(
+        `${this.url + this.apiActivateProfile}`,
+        { email: email },
+        httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(10),
+            tap((errorStatus) => {})
+          )
+        )
+      );
   }
 
-  getShortUrl(url: string)  {
+  getShortUrl(url: string) {
     const token = localStorage.getItem("ACCESS_TOKEN");
     const authorization = token;
 
@@ -98,10 +119,12 @@ export class UserService {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
-      })
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
     };
-    const apiShort= `${this.url}${this.apiShorUrl}?url=${encodeURIComponent(url)}`
+    const apiShort = `${this.url}${this.apiShorUrl}?url=${encodeURIComponent(
+      url
+    )}`;
     return this.http.get(apiShort, httpOptions).pipe(
       map((url: any) => {
         return url.objectResponse;
@@ -109,7 +132,7 @@ export class UserService {
     );
   }
 
-  getBasicData()  {
+  getBasicData() {
     const token = localStorage.getItem("ACCESS_TOKEN");
     const authorization = token;
 
@@ -117,17 +140,58 @@ export class UserService {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
-      })
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
     };
-    return this.http.get((`${this.url}${this.apiGetBasicData}`), httpOptions).pipe(
+    return this.http
+      .get(`${this.url}${this.apiGetBasicData}`, httpOptions)
+      .pipe(
+        map((user: any) => {
+          return user.objectResponse;
+        })
+      );
+  }
+
+  getuserdata() {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
+    };
+    return this.http.get(`${this.url}${this.apiGetuserdata}`, httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(10),
+          tap((errorStatus) => {})
+        )
+      ),
       map((user: any) => {
         return user.objectResponse;
       })
     );
   }
 
-  getuserdata()  {
+  public registerUser(userInfo: any) {
+    return this.http
+      .post(`${this.url}${this.apiCreateUser}`, userInfo, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(10),
+            tap((errorStatus) => {})
+          )
+        )
+      );
+  }
+
+  public uploadFiles(params: any) {
     const token = localStorage.getItem("ACCESS_TOKEN");
     const authorization = token;
 
@@ -135,64 +199,57 @@ export class UserService {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
-      })
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
     };
-    return this.http.get((`${this.url}${this.apiGetuserdata}`), httpOptions).pipe(
-      map((user: any) => {
-        return user.objectResponse;
-      })
-    );
+    return this.http
+      .post(`${this.url}${this.apiUploadFiles}`, params, httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(10),
+            tap((errorStatus) => {})
+          )
+        )
+      );
   }
 
-  public registerUser(userInfo: any){
-    return this.http.post((`${this.url}${this.apiCreateUser}`), userInfo, this.httpOptions);
+  public idType() {
+    return this.http.get(`${this.url}${this.apiIdType}`, this.httpOptions);
   }
 
-  public uploadFiles(params: any){
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
-      })
-    };
-    return this.http.post((`${this.url}${this.apiUploadFiles}`), params, httpOptions);
-  }
-
-  public idType(){
-    return this.http.get((`${this.url}${this.apiIdType}`), this.httpOptions);
-  }
-
-  public downloadFile(identification: string, typeDocument: string){
+  public downloadFile(identification: string, typeDocument: string) {
     let httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "APPLICATION/octet-stream",
         Authorization: "Bearer " + this.authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
-        responseType : 'blob',
-        Accept : 'application/pdf',
-        observe : 'response'
-      })
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+        responseType: "blob",
+        Accept: "application/pdf",
+        observe: "response",
+      }),
     };
-    return this.http.get((`${this.url}${this.apiDownloadFile}?identification=${identification}&typeDocument=${typeDocument}`), httpOptions);
+    return this.http.get(
+      `${this.url}${this.apiDownloadFile}?identification=${identification}&typeDocument=${typeDocument}`,
+      httpOptions
+    );
   }
 
-  public getDepartments(){
-    return this.http.get((`${this.url}${this.apiDepartment}`), this.httpOptions);
+  public getDepartments() {
+    return this.http.get(`${this.url}${this.apiDepartment}`, this.httpOptions);
   }
 
-  public getBanks(){
-    return this.http.get((`${this.url}${this.apiBanks}`), this.httpOptions);
+  public getBanks() {
+    return this.http.get(`${this.url}${this.apiBanks}`, this.httpOptions);
   }
 
-  public validateEmployee(id: string, document: string){
-    return this.http.get((`${this.urlEmployee}validateEmployee?id=${id}&documentType=${document}`), this.httpOptions);
+  public validateEmployee(id: string, document: string) {
+    return this.http.get(
+      `${this.urlEmployee}validateEmployee?id=${id}&documentType=${document}`,
+      this.httpOptions
+    );
   }
-
 
   public searchUsers(term?: any) {
     const token = localStorage.getItem("ACCESS_TOKEN");
@@ -202,14 +259,19 @@ export class UserService {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
-      })
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
     };
-    return this.http.get((`${this.url}${this.apiUsers}?searchText=${term.term}&from=${term.from}&to=${term.to}`), httpOptions).pipe(
-      map((user: any) => {
-        return user.objectResponse;
-      })
-    );
+    return this.http
+      .get(
+        `${this.url}${this.apiUsers}?searchText=${term.term}&from=${term.from}&to=${term.to}`,
+        httpOptions
+      )
+      .pipe(
+        map((user: any) => {
+          return user.objectResponse;
+        })
+      );
   }
 
   public statusUser(id: any, value: boolean) {
@@ -220,10 +282,24 @@ export class UserService {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
-      })
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
     };
-    return this.http.post((`${this.url}${this.apiDisableUser}`),{userid:id, value}, httpOptions);
+    return this.http
+      .post(
+        `${this.url}${this.apiDisableUser}`,
+        { userid: id, value },
+        httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(10),
+            tap((errorStatus) => {})
+          )
+        )
+      );
   }
 
   public updateUserEmail(userid: string, email: string) {
@@ -234,10 +310,24 @@ export class UserService {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
-      })
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
     };
-    return this.http.post((`${this.url}${this.apiUpdateUserEmail}`),{userid, email}, httpOptions);
+    return this.http
+      .post(
+        `${this.url}${this.apiUpdateUserEmail}`,
+        { userid, email },
+        httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(10),
+            tap((errorStatus) => {})
+          )
+        )
+      );
   }
 
   public getBankAccountNumber(password: any) {
@@ -248,13 +338,27 @@ export class UserService {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
-      })
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
     };
-    return this.http.post((`${this.url}${this.apigetBankAccountNumber}`),{password}, httpOptions);
+    return this.http
+      .post(
+        `${this.url}${this.apigetBankAccountNumber}`,
+        { password },
+        httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(10),
+            tap((errorStatus) => {})
+          )
+        )
+      );
   }
 
-  public changeBankInformation(id: any, data:any) {
+  public changeBankInformation(id: any, data: any) {
     const token = localStorage.getItem("ACCESS_TOKEN");
     const authorization = token;
 
@@ -262,13 +366,23 @@ export class UserService {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
-      })
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
     };
-    return this.http.post((`${this.url}${this.apichangeBankInformation}`),data, httpOptions);
+    return this.http
+      .post(`${this.url}${this.apichangeBankInformation}`, data, httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(10),
+            tap((errorStatus) => {})
+          )
+        )
+      );
   }
 
-  public updateUser(data:any) {
+  public updateUser(data: any) {
     const token = localStorage.getItem("ACCESS_TOKEN");
     const authorization = token;
 
@@ -276,13 +390,23 @@ export class UserService {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
-      })
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
     };
-    return this.http.post((`${this.url}${this.apiUpdateUser}`),data, httpOptions);
+    return this.http
+      .post(`${this.url}${this.apiUpdateUser}`, data, httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(10),
+            tap((errorStatus) => {})
+          )
+        )
+      );
   }
 
-  public registeruserterms(id:any) {
+  public registeruserterms(id: any) {
     const token = localStorage.getItem("ACCESS_TOKEN");
     const authorization = token;
 
@@ -290,10 +414,24 @@ export class UserService {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
-      })
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
     };
-    return this.http.post((`${this.url}${this.apiRegisterUserTerms}`),{idbusiness:id}, httpOptions);
+    return this.http
+      .post(
+        `${this.url}${this.apiRegisterUserTerms}`,
+        { idbusiness: id },
+        httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(10),
+            tap((errorStatus) => {})
+          )
+        )
+      );
   }
 
   public comunitcations(id: any, value: boolean) {
@@ -304,10 +442,24 @@ export class UserService {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
-      })
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
     };
-    return this.http.post((`${this.url}${this.apiComunications}`),{userid:id, value}, httpOptions);
+    return this.http
+      .post(
+        `${this.url}${this.apiComunications}`,
+        { userid: id, value },
+        httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(10),
+            tap((errorStatus) => {})
+          )
+        )
+      );
   }
 
   public verifiedUser(id: any, value: boolean) {
@@ -318,11 +470,23 @@ export class UserService {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
-      })
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
     };
-    return this.http.post((`${this.url}${this.apiVerified}`),{userid:id, value}, httpOptions);
+    return this.http
+      .post(
+        `${this.url}${this.apiVerified}`,
+        { userid: id, value },
+        httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(10),
+            tap((errorStatus) => {})
+          )
+        )
+      );
   }
-
-  
 }
