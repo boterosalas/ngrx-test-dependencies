@@ -57,6 +57,7 @@ export class LinksService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+take(10),
             tap((errorStatus) => {})
           )
         )
@@ -80,6 +81,7 @@ export class LinksService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+take(10),
             tap((errorStatus) => {})
           )
         )
@@ -102,6 +104,7 @@ export class LinksService {
       retryWhen((errors) =>
         errors.pipe(
           delay(1000),
+take(10),
           tap((errorStatus) => {})
         )
       ),
@@ -128,6 +131,7 @@ export class LinksService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+take(10),
             tap((errorStatus) => {})
           )
         ),
@@ -157,6 +161,7 @@ export class LinksService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+take(10),
             tap((errorStatus) => {})
           )
         ),
@@ -186,6 +191,7 @@ export class LinksService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+take(10),
             tap((errorStatus) => {})
           )
         ),
@@ -212,6 +218,7 @@ export class LinksService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+take(10),
             tap((errorStatus) => {})
           )
         ),
@@ -241,6 +248,7 @@ export class LinksService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+take(10),
             tap((errorStatus) => {})
           )
         ),
@@ -261,10 +269,20 @@ export class LinksService {
         "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
       }),
     };
-    return this.http.get(
-      `${this.urlComission}${this.apiUsersExcel}?&start=${params.start}&end=${params.end}`,
-      httpOptions
-    );
+    return this.http
+      .get(
+        `${this.urlComission}${this.apiUsersExcel}?&start=${params.start}&end=${params.end}`,
+        httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+take(10),
+            tap((errorStatus) => {})
+          )
+        )
+      );
   }
 
   public getAudit(params: any) {
@@ -278,10 +296,20 @@ export class LinksService {
         "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
       }),
     };
-    return this.http.get(
-      `${this.urlComission}${this.apiAuditExcel}?&start=${params.start}&end=${params.end}`,
-      httpOptions
-    );
+    return this.http
+      .get(
+        `${this.urlComission}${this.apiAuditExcel}?&start=${params.start}&end=${params.end}`,
+        httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+take(10),
+            tap((errorStatus) => {})
+          )
+        )
+      );
   }
 
   public getReportClickam(params: any) {
@@ -295,10 +323,20 @@ export class LinksService {
         "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
       }),
     };
-    return this.http.get(
-      `${this.urlComission}${this.apigetReportClickam}?&start=${params.start}&end=${params.end}`,
-      httpOptions
-    );
+    return this.http
+      .get(
+        `${this.urlComission}${this.apigetReportClickam}?&start=${params.start}&end=${params.end}`,
+        httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+take(10),
+            tap((errorStatus) => {})
+          )
+        )
+      );
   }
 
   public sendfile(formdata) {
@@ -325,6 +363,7 @@ export class LinksService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+take(10),
             tap((errorStatus) => {})
           )
         )
@@ -354,6 +393,7 @@ export class LinksService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+take(10),
             tap((errorStatus) => {})
           )
         )
@@ -380,6 +420,7 @@ export class LinksService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+take(10),
             tap((errorStatus) => {})
           )
         ),

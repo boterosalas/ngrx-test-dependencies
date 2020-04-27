@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { map, retry, delay } from "rxjs/operators";
+import { map, retry, delay, retryWhen, tap, take } from "rxjs/operators";
 import { BehaviorSubject, Subscription } from "rxjs";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import decode from "jwt-decode";
@@ -98,8 +98,13 @@ export class AuthService implements OnDestroy {
     return this.http
       .get(`${this.url + this.apiGetmenus}`, this.httpOptions)
       .pipe(
-        retry(5),
-        delay(500),
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(10),
+            tap((errorStatus) => {})
+          )
+        ),
         map((resp: any) => {
           return resp.objectResponse;
         })
@@ -119,8 +124,13 @@ export class AuthService implements OnDestroy {
     return this.http
       .get(`${this.url + this.apiGetmenusClicker}`, httpOptions)
       .pipe(
-        retry(5),
-        delay(500),
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(10),
+            tap((errorStatus) => {})
+          )
+        ),
         map((resp: any) => {
           return resp.objectResponse;
         })

@@ -8,6 +8,7 @@ import {
   retry,
   delay,
   retryWhen,
+  take,
 } from "rxjs/operators";
 import { ResponseService } from "../interfaces/response";
 import { BehaviorSubject, Observable } from "rxjs";
@@ -103,6 +104,7 @@ export class UserService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+            take(10),
             tap((errorStatus) => {})
           )
         )
@@ -165,6 +167,7 @@ export class UserService {
       retryWhen((errors) =>
         errors.pipe(
           delay(1000),
+          take(10),
           tap((errorStatus) => {})
         )
       ),
@@ -181,6 +184,7 @@ export class UserService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+            take(10),
             tap((errorStatus) => {})
           )
         )
@@ -204,6 +208,7 @@ export class UserService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+            take(10),
             tap((errorStatus) => {})
           )
         )
@@ -290,6 +295,7 @@ export class UserService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+            take(10),
             tap((errorStatus) => {})
           )
         )
@@ -317,6 +323,7 @@ export class UserService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+            take(10),
             tap((errorStatus) => {})
           )
         )
@@ -344,6 +351,7 @@ export class UserService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+            take(10),
             tap((errorStatus) => {})
           )
         )
@@ -367,6 +375,7 @@ export class UserService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+            take(10),
             tap((errorStatus) => {})
           )
         )
@@ -390,6 +399,7 @@ export class UserService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+            take(10),
             tap((errorStatus) => {})
           )
         )
@@ -417,6 +427,7 @@ export class UserService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+            take(10),
             tap((errorStatus) => {})
           )
         )
@@ -444,6 +455,7 @@ export class UserService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+            take(10),
             tap((errorStatus) => {})
           )
         )
@@ -471,6 +483,7 @@ export class UserService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+            take(10),
             tap((errorStatus) => {})
           )
         )

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "src/environments/environment";
-import { map, retry, delay, retryWhen, tap } from "rxjs/operators";
+import { map, retry, delay, retryWhen, tap, take } from "rxjs/operators";
 import { ResponseService } from "../interfaces/response";
 
 @Injectable({
@@ -61,6 +61,7 @@ export class ContentService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+            take(10),
             tap((errorStatus) => {})
           )
         ),
@@ -87,6 +88,7 @@ export class ContentService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+            take(10),
             tap((errorStatus) => {})
           )
         ),
@@ -107,11 +109,17 @@ export class ContentService {
         "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
       }),
     };
-    return this.http.post(
-      `${this.url + this.apiGetbusinessexcel}`,
-      {},
-      httpOptions
-    );
+    return this.http
+      .post(`${this.url + this.apiGetbusinessexcel}`, {}, httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(10),
+            tap((errorStatus) => {})
+          )
+        )
+      );
   }
 
   public registerBusinessClicker(data: object) {
@@ -132,6 +140,7 @@ export class ContentService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
+            take(10),
             tap((errorStatus) => {})
           )
         ),
@@ -145,6 +154,13 @@ export class ContentService {
     return this.http
       .get(`${this.url + this.apiGetcategoriesbusiness}`, this.httpOptions)
       .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(10),
+            tap((errorStatus) => {})
+          )
+        ),
         map((business: ResponseService) => {
           return business.objectResponse;
         })
@@ -163,6 +179,13 @@ export class ContentService {
       }),
     };
     return this.http.get(`${this.url + this.apiAssured}`, httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(10),
+          tap((errorStatus) => {})
+        )
+      ),
       map((user: ResponseService) => {
         return user.objectResponse;
       })
@@ -181,6 +204,13 @@ export class ContentService {
       }),
     };
     return this.http.get(`${this.url + this.apiTrips}`, httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(10),
+          tap((errorStatus) => {})
+        )
+      ),
       map((user: ResponseService) => {
         return user.objectResponse;
       })
@@ -199,6 +229,13 @@ export class ContentService {
       }),
     };
     return this.http.get(`${this.url + this.apiCategories}`, httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(10),
+          tap((errorStatus) => {})
+        )
+      ),
       map((user: ResponseService) => {
         return user.objectResponse;
       })
