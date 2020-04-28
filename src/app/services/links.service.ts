@@ -40,24 +40,25 @@ export class LinksService {
   apiLinkHistory = "linkhistory/getlinkhistory";
   apiupdatePaymentDate = "commissions/updatePaymentDate";
 
-  public saveLink(SaveLink: any) {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
+  token = localStorage.getItem("ACCESS_TOKEN");
+  authorization = this.token;
 
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
+  httpOptions = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + this.authorization,
+      "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+    }),
+  };
+
+  public saveLink(SaveLink: any) {
     return this.http
-      .post(`${this.url + this.apiSaveLink}`, SaveLink, httpOptions)
+      .post(`${this.url + this.apiSaveLink}`, SaveLink, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
-take(10),
+            take(10),
             tap((errorStatus) => {})
           )
         )
@@ -65,23 +66,13 @@ take(10),
   }
 
   public downloadReferrals(dates: any) {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
     return this.http
-      .post(`${this.url + this.apiPostReferrrals}`, dates, httpOptions)
+      .post(`${this.url + this.apiPostReferrrals}`, dates, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
-take(10),
+            take(10),
             tap((errorStatus) => {})
           )
         )
@@ -89,22 +80,12 @@ take(10),
   }
 
   public getReports() {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
     let apiReport = `${this.reports}`;
-    return this.http.get(`${this.urlComission}/${apiReport}`, httpOptions).pipe(
+    return this.http.get(`${this.urlComission}/${apiReport}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(1000),
-take(10),
+          take(10),
           tap((errorStatus) => {})
         )
       ),
@@ -115,23 +96,13 @@ take(10),
   }
 
   public getKPI() {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
     return this.http
-      .get(`${this.urlComission}/${this.apiKPI}`, httpOptions)
+      .get(`${this.urlComission}/${this.apiKPI}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
-take(10),
+            take(10),
             tap((errorStatus) => {})
           )
         ),
@@ -142,26 +113,16 @@ take(10),
   }
 
   public getPayment(params) {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
     return this.http
       .get(
         `${this.urlComission}${this.apiHistory}?from=${params.from}&to=${params.to}`,
-        httpOptions
+        this.httpOptions
       )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
-take(10),
+            take(10),
             tap((errorStatus) => {})
           )
         ),
@@ -172,26 +133,16 @@ take(10),
   }
 
   public getLinkHistory(params) {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
     return this.http
       .get(
         `${this.urlComission}${this.apiLinkHistory}?from=${params.from}&to=${params.to}&orderBy=${params.orderBy}`,
-        httpOptions
+        this.httpOptions
       )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
-take(10),
+            take(10),
             tap((errorStatus) => {})
           )
         ),
@@ -202,23 +153,13 @@ take(10),
   }
 
   public getFileReport() {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
     return this.http
-      .get(`${this.urlComission}${this.apiFile}`, httpOptions)
+      .get(`${this.urlComission}${this.apiFile}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
-take(10),
+            take(10),
             tap((errorStatus) => {})
           )
         ),
@@ -229,26 +170,16 @@ take(10),
   }
 
   public getDetailPaymentClicker(date: string) {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
     return this.http
       .get(
         `${this.urlComission}/${this.apigetDetailPaymentClicker}?paymentDate=${date}`,
-        httpOptions
+        this.httpOptions
       )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
-take(10),
+            take(10),
             tap((errorStatus) => {})
           )
         ),
@@ -259,26 +190,16 @@ take(10),
   }
 
   public getUsersExcel(params: any) {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
     return this.http
       .get(
         `${this.urlComission}${this.apiUsersExcel}?&start=${params.start}&end=${params.end}`,
-        httpOptions
+        this.httpOptions
       )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
-take(10),
+            take(10),
             tap((errorStatus) => {})
           )
         )
@@ -286,26 +207,16 @@ take(10),
   }
 
   public getAudit(params: any) {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
     return this.http
       .get(
         `${this.urlComission}${this.apiAuditExcel}?&start=${params.start}&end=${params.end}`,
-        httpOptions
+        this.httpOptions
       )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
-take(10),
+            take(10),
             tap((errorStatus) => {})
           )
         )
@@ -313,26 +224,16 @@ take(10),
   }
 
   public getReportClickam(params: any) {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
     return this.http
       .get(
         `${this.urlComission}${this.apigetReportClickam}?&start=${params.start}&end=${params.end}`,
-        httpOptions
+        this.httpOptions
       )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
-take(10),
+            take(10),
             tap((errorStatus) => {})
           )
         )
@@ -340,30 +241,22 @@ take(10),
   }
 
   public sendfile(formdata) {
-    let token = localStorage.getItem("ACCESS_TOKEN");
-    let authorization = token;
     let data = new FormData();
     data.append("FileBase64", formdata.fileBase64);
     // data.append("Business", formdata.business);
     data.append("email", formdata.email);
-    const httpOptions = {
-      headers: new HttpHeaders({
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-      }),
-    };
+
     return this.http
       .post(
         `${environment.URL_COMISSION}${this.apigenerateCommissions}`,
         formdata,
-        httpOptions
+        this.httpOptions
       )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
-take(10),
+            take(10),
             tap((errorStatus) => {})
           )
         )
@@ -371,29 +264,20 @@ take(10),
   }
 
   public updatePaymentDate(formdata) {
-    let token = localStorage.getItem("ACCESS_TOKEN");
-    let authorization = token;
     let data = new FormData();
     data.append("FileBase64", formdata.fileBase64);
     data.append("email", formdata.email);
-    const httpOptions = {
-      headers: new HttpHeaders({
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-      }),
-    };
     return this.http
       .post(
         `${environment.URL_COMISSION}${this.apiupdatePaymentDate}`,
         formdata,
-        httpOptions
+        this.httpOptions
       )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
-take(10),
+            take(10),
             tap((errorStatus) => {})
           )
         )
@@ -401,26 +285,16 @@ take(10),
   }
 
   public searchUsers(term?: any) {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
     return this.http
       .get(
         `${this.urlComission}${this.apiUsers}?searchText=${term.term}&from=${term.from}&to=${term.to}&orderBy=${term.orderOrigin}&ordination=${term.orderBy}`,
-        httpOptions
+        this.httpOptions
       )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
-take(10),
+            take(10),
             tap((errorStatus) => {})
           )
         ),
