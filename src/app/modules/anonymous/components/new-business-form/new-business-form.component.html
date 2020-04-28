@@ -1,0 +1,302 @@
+
+<img class="gtmHomeClicLogoClickam" src="assets/img/clickam-horizontal.svg" alt="clickam">
+
+<h3 class="border-bottom-orange-init f-22">{{ 'NEWBUSINESS.REGISTER' | translate }}</h3>
+<form
+  class="register-container"
+  [formGroup]="registerForm"
+  *ngIf="showBusinessForm" @simpleFadeAnimation
+>
+<!-- name business -->
+  <mat-form-field>
+    <input
+      matInput
+      id="name"
+      type="text"
+      placeholder="{{ 'GENERIC.BUSINESS_NAME' | translate }}"
+      formControlName="name"
+      required
+    />
+    <mat-error
+      id="requiredName"
+      *ngIf="
+        registerForm.controls.name.invalid &&
+        registerForm.controls.name.errors.required
+      "
+      >{{ "GENERIC.REQUIRED" | translate: { formValue: "Nombre del negocio" } }}</mat-error
+    >
+
+    <mat-error
+      id="maxName"
+      *ngIf="
+        registerForm.controls.name.invalid &&
+        registerForm.controls.name.errors.maxlength
+      "
+      >{{
+        "GENERIC.MAX_CHARACTERS"
+          | translate
+            : {
+                maxchar:
+                  registerForm.controls.name.errors.maxlength.requiredLength
+              }
+      }}</mat-error
+    >
+
+    <mat-error
+      id="invalidName"
+      *ngIf="
+        registerForm.controls.name.invalid &&
+        registerForm.controls.name.errors.pattern
+      "
+      >{{ "GENERIC.INVALID_FORMAT" | translate: { val: "Nombre del negocio" } }}</mat-error
+    >
+  </mat-form-field>
+
+  <!-- domain name -->
+
+  <mat-form-field>
+    <input
+      matInput
+      id="domain"
+      type="text"
+      placeholder="{{ 'GENERIC.SITE_NAME' | translate }}"
+      formControlName="domain"
+      required
+    />
+    <mat-error
+      id="requireddomain"
+      *ngIf="
+        registerForm.controls.domain.invalid &&
+        registerForm.controls.domain.errors.required
+      "
+      >{{
+        "GENERIC.REQUIRED" | translate: { formValue: "Sitio web" }
+      }}</mat-error
+    >
+
+    <mat-error
+      id="maxLastdomain"
+      *ngIf="
+        registerForm.controls.domain.invalid &&
+        registerForm.controls.domain.errors.maxlength
+      "
+      >{{
+        "GENERIC.MAX_CHARACTERS"
+          | translate
+            : {
+                maxchar:
+                  registerForm.controls.domain.errors.maxlength.requiredLength
+              }
+      }}</mat-error
+    >
+
+    <mat-error
+      id="invaliddomain"
+      *ngIf="
+        registerForm.controls.domain.invalid &&
+        registerForm.controls.domain.errors.pattern
+      "
+      >{{
+        "GENERIC.INVALID_DOMAIN" | translate
+      }}</mat-error
+    >
+  </mat-form-field>
+
+  <!-- contact business -->
+  <mat-form-field>
+    <input
+      matInput
+      id="contact"
+      type="text"
+      placeholder="{{ 'GENERIC.CONTACT_PERSON' | translate }}"
+      formControlName="contact"
+      required
+    />
+    <mat-error
+      id="requiredcontact"
+      *ngIf="
+        registerForm.controls.contact.invalid &&
+        registerForm.controls.contact.errors.required
+      "
+      >{{ "GENERIC.REQUIRED" | translate: { formValue: "Nombre del contacto" } }}</mat-error
+    >
+
+    <mat-error
+      id="maxcontact"
+      *ngIf="
+        registerForm.controls.contact.invalid &&
+        registerForm.controls.contact.errors.maxlength
+      "
+      >{{
+        "GENERIC.MAX_CHARACTERS"
+          | translate
+            : {
+                maxchar:
+                  registerForm.controls.contact.errors.maxlength.requiredLength
+              }
+      }}</mat-error
+    >
+
+    <mat-error
+      id="invalidcontact"
+      *ngIf="
+        registerForm.controls.contact.invalid &&
+        registerForm.controls.contact.errors.pattern
+      "
+      >{{ "GENERIC.INVALID_FORMAT" | translate: { val: "Nombre del contacto" } }}</mat-error
+    >
+  </mat-form-field>
+
+
+  <mat-form-field>
+    <input
+      matInput
+      id="phone"
+      type="text"
+      placeholder="{{ 'GENERIC.CELLPHONE' | translate }}"
+      formControlName="phone"
+      required
+    />
+    <mat-error
+      id="requiredPhone"
+      *ngIf="
+        registerForm.controls.phone.invalid &&
+        registerForm.controls.phone.errors.required
+      "
+      >{{ "GENERIC.REQUIRED" | translate: { formValue: "Celular" } }}</mat-error
+    >
+
+    <mat-error
+      id="minPhone"
+      *ngIf="
+        registerForm.controls.phone.invalid &&
+        registerForm.controls.phone.errors.minlength
+      "
+      >{{
+        "GENERIC.MIN_CHARACTERS"
+          | translate
+            : {
+                minchar:
+                  registerForm.controls.phone.errors.minlength.requiredLength
+              }
+      }}</mat-error
+    >
+
+    <mat-error
+      id="maxPhone"
+      *ngIf="
+        registerForm.controls.phone.invalid &&
+        registerForm.controls.phone.errors.maxlength
+      "
+      >{{
+        "GENERIC.MAX_CHARACTERS"
+          | translate
+            : {
+                maxchar:
+                  registerForm.controls.phone.errors.maxlength.requiredLength
+              }
+      }}</mat-error
+    >
+
+    <mat-error
+      id="numberPhone"
+      *ngIf="
+        registerForm.controls.phone.invalid &&
+        registerForm.controls.phone.errors.pattern
+      "
+      >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+    >
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      id="email"
+      type="email"
+      placeholder="{{ 'GENERIC.EMAIL' | translate }}"
+      formControlName="email"
+      spacebar
+      required
+    />
+    <mat-error id="invalidEmail" *ngIf="registerForm.controls.email.invalid">{{
+      "LOGIN.INVALID_EMAIL" | translate: { formValue: "Email" }
+    }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select
+    placeholder="{{ 'GENERIC.BUSINESS_CATEGORY' | translate }}"
+      id="category"
+      formControlName="category"
+      required
+    >
+      <mat-option>{{ 'GENERIC.BUSINESS_CATEGORY' | translate }}</mat-option>
+      <mat-option *ngFor="let category of categories" value="{{ category.id }}">{{
+        category.description
+      }}</mat-option>
+    </mat-select>
+    <mat-error
+      id="requiredcategory"
+      *ngIf="registerForm.controls.category.invalid"
+      >{{ "GENERIC.REQUIRED" | translate: { formValue: "" } }}</mat-error
+    >
+  </mat-form-field>
+  
+  <div>
+    <span>
+      <mat-checkbox formControlName="acceptTerms" id="chkaccept" (change)="acceptTermsCheck()">
+      </mat-checkbox>
+    </span>
+    <span class="accept-terms ml-2 cursor-pointer text-underline" (click)="termsAndConditions()">
+      {{
+      "REGISTER.ACCEPT" | translate
+    }}
+    </span>
+  </div>
+
+  
+  <div class="text-center mb-2 mt-3">
+    <re-captcha formControlName="recaptchaReactive"></re-captcha>
+  </div>
+
+    <button
+      mat-raised-button
+      id="register"
+      class="mt-2 center button button-height button-100"
+      color="orange"
+      (click)="register(registerForm)"
+      [disabled]="!registerForm.valid"
+    >
+    <span>{{ "GENERIC.CONTINUE" | translate }}</span>
+  </button>
+
+
+</form>
+
+<div class="termsBusiness" *ngIf="showTermsBusiness" @simpleFadeAnimation>
+    
+    <h3 class="f-18">Aviso de Privacidad.</h3>
+    <p>Los datos de las personas que actúan en nombre del cliente empresarial y que son recolectados a través del presente formato por Almacenes Éxito S.A. y Marketplace Internacional serán tratados de manera confiable y segura para comunicar, sea a través de medios físicos o virtuales, información relacionada al programa Clickam, entre otras acciones derivadas de la alianza que pudieren llegar a celebrar las empresas.  El tratamiento de datos personales por parte de esta compañía se realizará  en cumplimiento a lo dispuesto en la Ley 1581 de 2012 y las demás normas que le sean complementarias. Con la suscripción del presente formato, la persona manifiesta que la información personal suministrada es veraz y ha sido entregada  por el titular de esta, su representante o persona autorizada.</p> 
+    <p>Consulta nuestra política de protección de datos personales en <a href="www.grupoexito.com.co" target="blank">www.grupoexito.com.co</a>  y ten presente que entre los canales para el ejercicio de tus derechos de habeas data a consultar, actualizar, corregir, rectificar, suprimir tus datos o revocar tu autorización, tenemos a tu disposición el correo electrónico <a href="mailto:proteccion.datos@grupo-exito.com">proteccion.datos@grupo-exito.com</a> </p>
+    <div class="buttons" fxLayout="row" fxLayoutGap="20px">
+        <button
+        mat-raised-button
+        id="register"
+        class="mt-2 center button button-height button-100"
+        color="orange"
+        (click)="decline()"
+      >
+      <span>{{ "GENERIC.CANCEL" | translate }}</span>
+    </button>
+        <button
+          mat-raised-button
+          id="register"
+          class="mt-2 center button button-height button-100"
+          color="orange"
+          (click)="accept()"
+        >
+        <span>{{ "GENERIC.ACCEPT" | translate }}</span>
+      </button>
+    </div>
+</div>
+

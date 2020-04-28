@@ -47,11 +47,15 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/slick-carousel/slick/slick.min.js",
+              "node_modules/slick-carousel/slick/slick.min.js"
             ]
           },
           "configurations": {
             "prod": {
+              "index": {
+                "input": "src/index-prod.html",
+                "output": "index.html"
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -83,6 +87,10 @@
               "ngswConfigPath": "ngsw-config.json"
             },
             "qa": {
+              "index": {
+                "input": "src/index-qa.html",
+                "output": "index.html"
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",

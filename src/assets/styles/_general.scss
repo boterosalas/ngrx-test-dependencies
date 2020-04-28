@@ -71,6 +71,7 @@ body {
 .mat-tab-group,
 .mat-table,
 .mat-bottom-sheet-container,
+.mat-tooltip,
 .mat-form-field {
   font-family: $font-family-base !important;
 }
@@ -78,7 +79,7 @@ body {
 .border-bottom-orange {
   &::after {
     content: "";
-    background: $primary-color;
+    background: $secondary-color;
     height: 4px;
     width: 25px;
     position: relative;
@@ -91,7 +92,7 @@ body {
   &-init {
     &::after {
       content: "";
-      background: $primary-color;
+      background: $secondary-color;
       height: 4px;
       width: 25px;
       position: relative;
@@ -105,7 +106,7 @@ body {
 .border-bottom-orange-2 {
   &::after {
     content: "";
-    background: $primary-color;
+    background: $secondary-color;
     height: 4px;
     width: 25px;
     position: relative;
@@ -118,7 +119,7 @@ body {
   &-init {
     &::after {
       content: "";
-      background: $primary-color;
+      background: $secondary-color;
       height: 4px;
       width: 25px;
       position: absolute;
@@ -162,6 +163,10 @@ body {
 }
 
 .orange-text {
+  color: $secondary-color;
+}
+
+.purple-text {
   color: $primary-color;
 }
 
@@ -313,7 +318,7 @@ button {
 }
 
 .mat-ink-bar {
-  background-color: #00a9b3 !important;
+  background-color: $third-color !important;
   height: 3px !important;
   border-top-right-radius: 7px;
   border-top-left-radius: 7px;
@@ -461,7 +466,7 @@ table {
 
 .mat-expansion-indicator::after,
 .mat-expansion-panel-header-description {
-  color: $blue !important;
+  color: $third-color !important;
 }
 .mat-content {
   font-size: 15px;
@@ -498,6 +503,19 @@ table {
 }
 
 @media screen and (min-width: 600px) {
+
+  app-bussiness-card{
+    min-height: 212px;
+    min-width: 230px;
+  }
+
+  .inner-business{
+    min-height: 230px;
+  }
+
+  .img-container-viajes img[alt^="Seguro"], .img-container-viajes img[alt^="Wesura"], .img-container-viajes img[alt^="SOAT"]  {
+    height: 135px !important;
+  }
 
   .store{
     width: 220px;
@@ -551,6 +569,17 @@ table {
 }
 
 @media screen and (max-width: 600px) {
+
+  .container-info {
+    h3 {
+      min-width: 200px;
+    }
+
+    .button-mar {
+      margin-left: 20px;
+    }
+
+  }
 
   // .gtmHomeClicNegociosEnvíos {
   //   padding: 18px 8px !important;
@@ -743,9 +772,9 @@ table {
 
 @media screen and (min-width: 600px) {
 
-  app-bussiness-card .gtmHomeClicNegociosEnvíos {
-    padding: 2px;
-  }
+  // app-bussiness-card .gtmHomeClicNegociosEnvíos {
+  //   padding: 2px;
+  // }
 
   .terms {
     margin-top: 2rem !important;
@@ -934,14 +963,14 @@ th.mat-header-cell {
   }
 }
 
-.mat-raised-button:not([class*="mat-elevation-z"]) {
-  box-shadow: 0 3px 1px -2px rgba(255, 111, 17, 0.18),
-    0 2px 2px 0 rgba(255, 111, 17, 0.18), 0 1px 5px 0 rgba(255, 111, 17, 0.18);
-}
-
 // .mat-raised-button:not([class*="mat-elevation-z"]) {
-//   box-shadow: 0 3px 1px -2px rgba(61, 47, 86,0.18), 0 2px 2px 0 rgba(61, 47, 86,0.18), 0 1px 5px 0 rgba(61, 47, 86,0.18);
+//   box-shadow: 0 3px 1px -2px rgba(255, 111, 17, 0.18),
+//     0 2px 2px 0 rgba(255, 111, 17, 0.18), 0 1px 5px 0 rgba(255, 111, 17, 0.18);
 // }
+
+.mat-raised-button:not([class*="mat-elevation-z"]) {
+  box-shadow: 0 3px 1px -2px rgba(61, 47, 86,0.18), 0 2px 2px 0 rgba(61, 47, 86,0.18), 0 1px 5px 0 rgba(61, 47, 86,0.18);
+}
 
 .mat-raised-button[disabled]:not([class*="mat-elevation-z"]) {
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(0, 0, 0, 0.14),
@@ -1063,11 +1092,11 @@ span.orange-border {
   }
 }
 
-.available {
-  span{
-    color: #000 !important;
-  }
-}
+// .available {
+//   span{
+//     color: #000 !important;
+//   }
+// }
 
 .user-transactions {
   .md-drppicker.double{
@@ -1200,6 +1229,9 @@ button.swal2-cancel.updatecancel.swal2-styled {
   &-22{
     font-size: 22px;
   }
+  &-23{
+    font-size: 23px;
+  }
   
 }
 
@@ -1255,4 +1287,22 @@ table {
 
 .overflow-auto{
   overflow: auto;
+}
+
+.mat-toolbar{
+  color: $primary-color !important;
+}
+
+re-captcha {
+  display: flex;
+  justify-content: center;
+}
+
+
+.purple-tip{
+  background: rgba($primary-color, 0.8);
+}
+
+.text-underline {
+  text-decoration: underline;
 }

@@ -5,26 +5,28 @@
 
 // Color system
 
-$primary-color: #FF6F11;
+$primary-color: #37236A;
+$secondary-color: #FF5555;
+$third-color: #FFAF51;
 $footer-bg: #2B2A27;
 $black: #000000;
 $white: #ffffff;
 
 $footer-social-links: #B5B8BC;
 $social-share: #ECECEC;
-$color-p: #86888A;
+$color-p: #726D7E;
 $color-border: #e0e0e0;
-$color-headings: #2B2A27;
+$color-headings:$primary-color;
 $blue: #00A9B3;
 $gray: #707070;
 $gray2: #B5B8BC;
 $blue: #00A9B3;
 $th: #3B3B3B;
 
-h2{
-    color: #2B2A27;
-    font-size: 2rem;
-}
+// h2{
+//     color: #2B2A27;
+//     font-size: 2rem;
+// }
 
 // Typography
 //

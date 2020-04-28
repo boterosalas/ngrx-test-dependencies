@@ -14,6 +14,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { AngularFireModule } from '@angular/fire';
+import { SwUpdate, ServiceWorkerModule } from '@angular/service-worker';
 
 // const TRANSLATIONS_ES = require('../assets/i18n/es.json');
 
@@ -33,6 +34,7 @@ describe("AppComponent", () => {
         AngularFireDatabaseModule,
         AngularFireAuthModule,
         AngularFireMessagingModule,
+        ServiceWorkerModule.register('', {enabled: false}),
         AngularFireModule.initializeApp({
           apiKey: "AIzaSyBLEXtXZGfMEm6dLHtngNa_HWgEjjrk-14",
           authDomain: "test-push-notification-633a0.firebaseapp.com",
@@ -54,7 +56,7 @@ describe("AppComponent", () => {
           }
         })
       ],
-      providers: [TranslateService, BnNgIdleService],
+      providers: [TranslateService, BnNgIdleService, SwUpdate],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
     // translate = TestBed.get(TranslateService);

@@ -6,7 +6,7 @@
   <span class="border-gray d-block"></span>
   <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3>
   <p class="f-20" fxHide.xs>{{ 'HOME.BUSSINESS_TEXT' | translate }}</p>
-  <div fxLayout="column" fxLayout.gt-xs="row wrap" ngClass.gt-xs="pb-5" fxLayoutAlign="space-between center" >
+  <div fxLayout="column" fxLayout.gt-xs="row wrap" ngClass.gt-xs="pb-3" fxLayoutAlign="center center" fxLayoutGap="1%">
     <ng-container *ngFor="let bussines of bussiness; let i = index">
       <app-bussiness-card *ngIf="bussines.code !== 'envios-clickam'" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
     </ng-container>
@@ -14,12 +14,22 @@
       <app-bussiness-card *ngIf="isEmployee === true && bussines.code === 'envios-clickam' && auth.isLoggedIn()" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
     </ng-container> -->
   </div>
+
   <span class="border-gray d-block"></span>
   <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.OFFERS' | translate }}</h3>
-  <p class="f-20" fxHide.xs>{{ 'HOME.OFFERS_TEXT' | translate }}</p>
+  <p class="f-20" fxHide.xs>{{ 'HOME.OFFERS_TEXT' | translate }}</p>  
 </div>
 
 <app-slider Class="gtmHomeClicOfertas" [showArrows]="false" [isSlider]="true" fxShow.gt-xs="false" (action)="sliderOffers()" [sliderMobile]="offersMobile" [sliderWeb]="offersWeb" class="mb-3"></app-slider>
-
 <app-slider Class="gtmHomeClicOfertas" [showArrows]="false" [isSlider]="false" fxShow.xs="false" (action)="sliderOffers()" [sliderMobile]="offersMobile" class="mb-3"></app-slider>
+
+<div class="container">
+  <span class="border-gray d-block mt-3"></span>
+  <app-new-business (openModal)="openRegisterBusiness()"></app-new-business>
+</div>
+
+<ng-template #templateBusiness>
+    <app-new-business-form (registerBusinessEmit)="sendDataBusiness($event)" [categories]="categories"></app-new-business-form>
+</ng-template>
+
 

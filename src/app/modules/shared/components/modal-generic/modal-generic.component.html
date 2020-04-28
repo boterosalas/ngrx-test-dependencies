@@ -1,5 +1,6 @@
 <div id="{{ data.id }}" class="modal-width">
-    <div fxLayoutAlign="end">
+    <div fxLayoutAlign="space-between">
+      <h1 class="f-18 galano-bold" mat-dialog-title>{{ data.title }}</h1>
       <a id="closeDialog" matRipple (click)="onNoClick()"><mat-icon class="close cursor-pointer">close</mat-icon></a>
   </div>
     <div fxLayoutAlign="end">
@@ -11,7 +12,6 @@
         ><mat-icon class="close">close</mat-icon></a
       >
     </div>
-    <h1 mat-dialog-title>{{ data.title }}</h1>
     <div mat-dialog-content>
       <ng-container *ngTemplateOutlet="data.template"> </ng-container>
     </div>

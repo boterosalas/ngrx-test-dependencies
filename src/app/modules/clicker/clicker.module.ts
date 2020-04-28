@@ -29,6 +29,7 @@ import { PaymentInfoComponent } from './components/payment-info/payment-info.com
 import { SliderDeliverComponent } from './components/slider-deliver/slider-deliver.component';
 import { LinksHistorialComponent } from './pages/profile/links-historial/links-historial.component';
 import { TableHistoricalLinksComponent } from './components/table-historical-links/table-historical-links.component';
+import { TableDetailComissionComponent } from './components/table-detail-comission/table-detail-comission.component';
 
 const routes: Routes = [
  
@@ -76,7 +77,8 @@ const routes: Routes = [
     PaymentInfoComponent,
     SliderDeliverComponent,
     LinksHistorialComponent,
-    TableHistoricalLinksComponent
+    TableHistoricalLinksComponent,
+    TableDetailComissionComponent
   ],
   imports: [
     CommonModule,

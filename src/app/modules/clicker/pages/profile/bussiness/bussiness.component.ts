@@ -174,7 +174,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   public saveLinkReference() {
     let dataSaveLinkReference = {
-      link: this.urlshorten,
+      link: this.url,
       identification: this.identification,
       plu: this.plu,
       business: this.business,

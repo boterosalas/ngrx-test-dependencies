@@ -33,6 +33,9 @@ export class ContentService {
   apiGetBusiness = 'business/getBusiness';
   apiGetBusinessClicker = 'business/getbusinessclicker';
   apiGetBusinessContent = 'business/getContent';
+  apiGetcategoriesbusiness = 'business/getcategoriesbusiness';
+  apiRegisterbusiness= 'business/registerbusiness';
+  apiGetbusinessexcel= 'business/getbusinessexcel';
   sendSearch = {};
 
   public getNews() {
@@ -62,15 +65,51 @@ export class ContentService {
   }
 
   public getBusinessClicker() {
-    return this.http.get(`${this.url + this.apiGetBusinessClicker}`, this.httpOptions).pipe(
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.get(`${this.url + this.apiGetBusinessClicker}`, httpOptions).pipe(
       map((user: ResponseService) => {
         return user.objectResponse;
       })
     );
   }
 
+  public businessExcel() {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+      })
+    };
+    return this.http.post(`${this.url + this.apiGetbusinessexcel}`,{}, httpOptions);
+  }
+
+  public registerBusinessClicker(data:object) {
+    return this.http.post(`${this.url + this.apiRegisterbusiness}`,data, this.httpOptions);
+  }
+
   public getBusinessContent(id: string) {
     return this.http.get(`${this.url + this.apiGetBusinessContent}?idBusiness=${id}`, this.httpOptions).pipe(
+      map((business: ResponseService) => {
+        return business.objectResponse;
+      })
+    );
+  }
+
+  public getCategoriesBusiness() {
+    return this.http.get(`${this.url + this.apiGetcategoriesbusiness}`, this.httpOptions).pipe(
       map((business: ResponseService) => {
         return business.objectResponse;
       })

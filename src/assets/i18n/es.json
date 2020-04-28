@@ -19,6 +19,7 @@
     "REGISTER": "Registro",
     "REGISTER2": "Registrarse",
     "CONTINUE": "Continuar",
+    "INVALID_DOMAIN": "Ingrese un nombre de dominio valido Ej:www.clickam.com.co",
     "INVALID_FORMAT": "El campo {{val}} no puede contener caracteres especiales",
     "MAX_CHARACTERS": "El número máximo de caracteres es {{maxchar}}",
     "MIN_CHARACTERS": "El número mínimo de caracteres es {{minchar}}",
@@ -45,7 +46,12 @@
     "EMAIL_SUPPORT": "clickam@grupo-exito.com",
     "COMPLETE_REGISTER": "Completa tu registro",
     "COMPLETE_REGISTER_INFO": "Recuerda que para obtener tus pagos es necesario completar tu registro.",
-    "COPYRIGHT": "Copyright 2020"
+    "COPYRIGHT": "Copyright 2020",
+    "BUSINESS_NAME": "Nombre del negocio",
+    "SITE_NAME": "Sitio web",
+    "CONTACT_PERSON": "Persona de contacto",
+    "BUSINESS_CATEGORY": "Categoría del negocio",
+    "SEE_DETAIL":"Ver detalle"
   },
   "FOOTER": {
     "FOLLOW_US": "Síguenos",
@@ -288,10 +294,10 @@
     "BANK": "BANCO DONDE SE PAGÓ",
     "UPLOAD_FILE": "Carga un archivo con el reporte de pagos de las comisiones del último periodo de corte",
     "SELECT_DATE": "Selecciona las fechas para descargar un archivo con todas las transacciones de todos los usuarios",
-    "AVAILABLE": "Disponible*",
+    "AVAILABLE": "Corte 1",
     "AVAILABLE_TEXT": "*Este valor te será consignado en el próximo pago",
-    "ACCOUNT": "En Cuenta**",
-    "ACCOUNT_TEXT": "**Estamos validando estas compras, una vez el negocio confirme los pagos, tu comisión pasará a estado disponible."
+    "ACCOUNT": "Corte 2",
+    "ACCOUNT_TEXT": "** Estamos validando las compras del Corte 2, una vez el negocio confirme los pagos, tu comisión pasará a estar disponible."
   },
   "HISTORICAL": {
     "HISTORY_LINKS": "Historial de links",
@@ -331,7 +337,20 @@
     "SELLS": "VENTAS",
     "COMMISSIONS": "COMISIONES",
     "LINKS_GENERATED": "LINKS GENERADOS",
-    "TOTAL": "Total"
+    "TOTAL": "Total",
+    "NEW_BUSINESS": "Negocios"
+  },
+  "NEWBUSINESS": {
+    "REGISTER":"Registra tu negocio",
+    "TITLE":"Registro de nuevos negocios",
+    "TEXT": "Registra tu negocio y haz parte de nuestra familia Clicker para ofrecer tus beneficios a nuestros clientes."
+  },
+  "DETAILCOMISSION":{
+    "DETAILS": "Detalle de ventas",
+    "DATE":"FECHA",
+    "PRODUCT":"PRODUCTO",
+    "STATE":"ESTADO",
+    "COMMISION":"COMISIÓN"
   }
 
 }

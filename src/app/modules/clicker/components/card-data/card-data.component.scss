@@ -3,7 +3,7 @@
 
 .number {
     font-size: 1.5rem;
-    color: $color-p;
+    color:$primary-color;
     padding-bottom: 5px;
 }
 
@@ -15,4 +15,13 @@
     box-shadow: 0px 0px 4px 0px #00000029;
     min-width: 130px;
     margin-right: 10px;
+}
+
+.icon-alert{
+    position: absolute;
+    width: 25px;
+}
+
+.text-underline{
+    text-decoration: underline;
 }
