@@ -7,7 +7,7 @@ import {
   HttpErrorResponse
 } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
-import { catchError } from "rxjs/operators";
+import { catchError, distinctUntilChanged } from "rxjs/operators";
 import { AuthService } from "../services/auth.service";
 import { Injector } from "@angular/core";
 import { ResponseService } from '../interfaces/response';
@@ -39,7 +39,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
         if (err.status === 401 && token !== null) {
-           this.auth.refreshToken().subscribe((resp:ResponseService) => {
+           this.auth.refreshToken().pipe(distinctUntilChanged()).subscribe((resp:ResponseService) => {
             let token = resp.objectResponse.token;
             let refreshToken = resp.objectResponse.refreshToken;
             localStorage.setItem("ACCESS_TOKEN", token);
