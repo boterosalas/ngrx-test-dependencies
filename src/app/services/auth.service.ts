@@ -46,8 +46,13 @@ export class AuthService implements OnDestroy {
 
   role = "";
 
+  token = localStorage.getItem("ACCESS_TOKEN");
+  authorization = this.token;
+
   httpOptions = {
     headers: new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + this.authorization,
       "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
     }),
   };
@@ -112,17 +117,8 @@ export class AuthService implements OnDestroy {
   }
 
   public getMenuClicker() {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
     return this.http
-      .get(`${this.url + this.apiGetmenusClicker}`, httpOptions)
+      .get(`${this.url + this.apiGetmenusClicker}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
@@ -138,20 +134,10 @@ export class AuthService implements OnDestroy {
   }
 
   public changePassword(data: any) {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
     return this.http.post(
       `${this.url}${this.apiChangePassword}`,
       data,
-      httpOptions
+      this.httpOptions
     );
   }
 

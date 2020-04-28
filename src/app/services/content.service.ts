@@ -37,17 +37,7 @@ export class ContentService {
   sendSearch = {};
 
   public getNews() {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
-    return this.http.get(`${this.url + this.apiNews}`, httpOptions).pipe(
+    return this.http.get(`${this.url + this.apiNews}`, this.httpOptions).pipe(
       map((user: ResponseService) => {
         return user.objectResponse;
       })
@@ -72,18 +62,8 @@ export class ContentService {
   }
 
   public getBusinessClicker() {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
     return this.http
-      .get(`${this.url + this.apiGetBusinessClicker}`, httpOptions)
+      .get(`${this.url + this.apiGetBusinessClicker}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
@@ -99,18 +79,8 @@ export class ContentService {
   }
 
   public businessExcel() {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
     return this.http
-      .post(`${this.url + this.apiGetbusinessexcel}`, {}, httpOptions)
+      .post(`${this.url + this.apiGetbusinessexcel}`, {}, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
@@ -168,17 +138,7 @@ export class ContentService {
   }
 
   public getAssured() {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
-    return this.http.get(`${this.url + this.apiAssured}`, httpOptions).pipe(
+    return this.http.get(`${this.url + this.apiAssured}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(1000),
@@ -193,17 +153,7 @@ export class ContentService {
   }
 
   public getTrips() {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
-    return this.http.get(`${this.url + this.apiTrips}`, httpOptions).pipe(
+    return this.http.get(`${this.url + this.apiTrips}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(1000),
@@ -218,17 +168,7 @@ export class ContentService {
   }
 
   public getCategory() {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
-    return this.http.get(`${this.url + this.apiCategories}`, httpOptions).pipe(
+    return this.http.get(`${this.url + this.apiCategories}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(1000),
@@ -243,17 +183,7 @@ export class ContentService {
   }
 
   public getOffers() {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
-    return this.http.get(`${this.url + this.apiOffers}`, httpOptions).pipe(
+    return this.http.get(`${this.url + this.apiOffers}`, this.httpOptions).pipe(
       map((user: ResponseService) => {
         return user.objectResponse;
       })
@@ -266,16 +196,6 @@ export class ContentService {
     to: number;
     order: string;
   }) {
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    const authorization = token;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
     if (isNaN(params.term) === true) {
       if (params.order !== "") {
         this.sendSearch = {
@@ -291,7 +211,7 @@ export class ContentService {
     }
     const apiSearchVetex = `${this.apiProducts}/getProducts`;
     return this.http
-      .post(`${this.url + apiSearchVetex}`, this.sendSearch, httpOptions)
+      .post(`${this.url + apiSearchVetex}`, this.sendSearch, this.httpOptions)
       .pipe(
         map((user: any) => {
           return user.objectResponse;
