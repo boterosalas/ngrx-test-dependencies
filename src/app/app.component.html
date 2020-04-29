@@ -37,13 +37,6 @@
       
         <ng-template #templateCardLogin>
           <app-loginform></app-loginform>
-          <!-- <p
-            id="forgotPass"
-            class="cursor-pointer text-decoration text-center gtmIniciarSesiónClicLtrlOlvidoClave"
-            (click)="showForgot()"
-          >
-            {{ "LOGIN.FORGOT_PASSWORD" | translate }}
-          </p> -->
         </ng-template>
       
         <app-card *ngIf="showRegisterForm" Class="gtmRegistroClicLatrlIniciarSesion" idTitle="titleRegister" title="{{ 'GENERIC.REGISTER' | translate }}" description="{{ 'REGISTER.HAVE_ACCOUNT' | translate }}" idAction="registerForm" action="{{ 'LOGIN.LOGIN' | translate }}" (actionButton)="showLogin()" [template]="templateCardRegister"></app-card>
@@ -67,8 +60,6 @@
       </div>
       
       <div ngClass.lt-md="fullheight slide-in-right" ngClass.gt-md="fullheight slide-in-right p-5" *ngIf="isOpen"  @slideInOut>
-        
-        <!-- <app-top (close)="hideLogin()"></app-top> -->
       
         <app-card Class="gtmIniciarSesiónClicLtrlRegistrarte" *ngIf="showLoginForm" idTitle="titleLogin" title="{{ 'LOGIN.LOGIN' | translate }}" description="{{ 'LOGIN.DESCRIPTION' | translate }}" idAction="registerHere" action="{{ 'LOGIN.REGISTER' | translate }}" (actionButton)="showRegister()" [template]="templateCardLogin"></app-card>
       
@@ -112,4 +103,12 @@
       
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<!-- <ng-template #templatePayment>
+  
+    <span fxLayout="column" fxLayoutAlign="center center">
+      <p class="f-16">{{ "GENERIC.COMPLETE_REGISTER_INFO" | translate }}</p>
+    </span>
+  
+</ng-template> -->
 
