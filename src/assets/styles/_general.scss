@@ -1306,3 +1306,22 @@ re-captcha {
 .text-underline {
   text-decoration: underline;
 }
+
+button.swal2-confirm.payment-success.swal2-styled {
+  background-color: $primary-color !important;
+  color: #fff !important;
+}
+
+button.swal2-cancel.payment-cancel.swal2-styled{
+  background: none !important;
+  color: $primary-color !important;
+}
+
+.paymentData .swal2-actions {
+  flex-direction: row-reverse;
+}
+
+.paymentData .swal2-icon.swal2-info {
+  border-color:$third-color;
+  color: $third-color;
+}
