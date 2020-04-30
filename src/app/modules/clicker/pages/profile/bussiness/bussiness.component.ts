@@ -69,6 +69,14 @@ export class BussinessComponent implements OnInit, OnDestroy {
   urlPlaystore:string = 'https://play.google.com/store/apps/details?id=com.sewayplus';
   urlAppstore:string = 'https://apps.apple.com/co/app/seway/id1414489414';
 
+  paginate: string;
+  pageIndex: number = 0;
+  pageTo: number = 50;
+  productsList: Array<any>;
+  totalItems: number;
+  showResults: boolean;
+  showNotFound: boolean;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -409,6 +417,55 @@ export class BussinessComponent implements OnInit, OnDestroy {
       window.open(this.urlPlaystore,'_blank');
     }
   }
+
+   /**
+   * Metodo para buscar los productos paginados
+   * @param term
+   * @param from
+   * @param to
+   *
+   */
+
+public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pageTo) {
+  if (term !== this.paginate) {
+    this.paginate = term;
+    this.pageIndex = 0;
+  }
+  
+  const params = { term, order, from, to };
+  this.subscription = this.sp.getProductsPagination(params).subscribe(
+    (resp: any) => {
+      this.productsList = JSON.parse(resp.json);
+      this.totalItems = resp.total;
+
+      if (this.productsList.length > 0) {
+        this.showResults = true;
+        this.showNotFound = false;
+        let productListCopy = [...this.productsList];
+        this.productsList = productListCopy.map(_product => {
+          
+          _product.items = [..._product.items].sort((a, b)  => {
+            if(a.sellers[0].commertialOffer.Price > 0 && b.sellers[0].commertialOffer.Price > 0 ) {
+              return a.sellers[0].commertialOffer.Price - b.sellers[0].commertialOffer.Price
+            } else {
+              return b.sellers[0].commertialOffer.Price - a.sellers[0].commertialOffer.Price
+            }
+          });
+
+          return _product;
+        });
+      } else {
+        this.showNotFound = true;
+        this.showResults = false;
+      }
+    },
+    error => {
+      this.showNotFound = true;
+      this.showResults = false;
+    }
+  );
+}
+
 
 
   ngOnDestroy() {
