@@ -10,6 +10,16 @@ export class AppStoreComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.detectIos();
+  }
+
+  showLogo:boolean = true;
+
+  public detectIos() {
+    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    if(iOS) {
+      this.showLogo = false;
+    }
   }
 
 }
