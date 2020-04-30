@@ -4,6 +4,27 @@
     </div>
     <h1 mat-dialog-title *ngIf="data.showTitle">{{data.title}}</h1>
     <div mat-dialog-content>
+        <!-- exito -->
+        <div fxLayout="row" *ngIf="data.exito === true" fxLayoutGap="15px" class="mb-2">
+            <div fxLayout="column" fxFlex="26">
+                <img class="responsive-img img-desk" src="{{data.img}}" alt="{{data.title}}">
+            </div>
+            <div fxLayout="column" fxFlex="50" *ngIf="data.home">
+                <h3 class="title m-0">{{data.title}}</h3>
+                <span class="f-13 gray"></span>
+                <span class="d-block orange-text">
+                  {{ data.infoaditional }}
+                </span>
+                <span *ngIf="data.showComission"></span>
+                <span class="discount small text-line" *ngIf="data.discount !== data.price">{{data.discount | currency : '' : 'symbol' : '1.0-0'}}</span>
+                <span class="discount">{{data.price | currency : '' : 'symbol' : '1.0-0'}}</span>
+                <span class="plu" *ngIf="data.showPlu">PLU:{{data.plu}} </span>
+            </div>
+            <div fxLayout="column" fxFlex="50" *ngIf="data.offers">
+                <h3 class="title m-0">{{data.title}}</h3>
+            </div>
+        </div>
+        <!-- others -->
         <div fxLayout="row" *ngIf="data.showProduct && data.infoaditional" fxLayoutGap="15px" class="mb-2">
             <div fxLayout="column" fxFlex="26">
                 <img class="responsive-img img-desk" src="{{data.img}}" alt="{{data.title}}">
@@ -16,10 +37,6 @@
                 </span>
                 <span *ngIf="data.showComission">Comisión:</span>
                 <span class="discount small text-line" *ngIf="data.discount !== data.price">{{data.discount | currency : '' : 'symbol' : '1.0-0'}}</span>
-                <!-- <div *ngIf="data.aliance !== '0' && data.exito === true" fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start center">
-                    <span class="discount discount-aliance" fxLayout="column">{{  (data.discount - (data.discount * (data.aliance/100))) | currency : '' : 'symbol' : '1.0-0'}}</span>
-                    <span *ngIf="data.imgLogo !== ''" fxLayout="column"><img class="aliance-img" src="{{data.imgLogo}}" alt="logo"></span>
-                </div> -->
                 <span class="discount">{{data.price | currency : '' : 'symbol' : '1.0-0'}}</span>
                 <span class="plu" *ngIf="data.showPlu">PLU:{{data.plu}} </span>
             </div>
