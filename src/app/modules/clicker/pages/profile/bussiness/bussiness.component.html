@@ -5,7 +5,73 @@
   (close)="goback()"
 ></app-back-navigation>
 
+
 <div class="container">
+  
+  <app-search *ngIf="id=== '1' || id==='2'" (search)="searchProductPaginate($event)"></app-search>
+
+  <div class="order border-bottom-gray" fxLayout="row" fxLayoutAlign="flex-end center" *ngIf="showResults">
+        
+    <label class="mr-4">Ordenar por: </label>
+    <mat-form-field>
+      <mat-select value="OrderByTopSaleDESC">
+          <mat-option *ngFor="let option of orderOptions" [value]="option.value" (click)="order(option.value)">
+              <span>{{option.description}}</span></mat-option
+            >
+      </mat-select>
+    </mat-form-field>
+  
+  </div>
+
+  <div *ngIf="showResults">
+    <mat-paginator
+      class="mb-3"
+      id="paginator"
+      [length]="totalItems"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      [pageIndex]="pageIndex"
+      (page)="pagination($event)"
+    >
+    </mat-paginator>
+      <div fxLayout="row wrap"  fxLayoutGap="10px">
+          <app-product
+            *ngFor="let product of productsList;let i = index;"
+            class="product-exito"
+            fxLayout="column"
+            fxFlex="24"
+            fxFlex.xs="100"
+            fxFlex.sm="30"
+            id="productTitle{{ i }}"
+            btnid="btnLink{{ i }}"
+            [productName]="product.productName"
+            [discount]="product.items[0].sellers[0].commertialOffer.ListPrice"
+            [price]="product.items[0].sellers[0].commertialOffer.Price"
+            [image]="!!product.items[0].images ? product.items[0].images[0].imageUrl : '/assets/img/Na.svg'"
+            [alt]="product.productName"
+            [plu]="product.items[0].itemId"
+            textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+            exito="true"
+            (infoProduct)="dataProduct(product);"
+          ></app-product>
+        </div>
+
+      <mat-paginator
+        class="mb-3 hide-pag"
+        id="paginator"
+        [length]="totalItems"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        [pageIndex]="pageIndex"
+        (page)="pagination($event)"
+      >
+      </mat-paginator>
+    
+  </div>
+
+  <div class="not-found" *ngIf="showNotFound">
+    <app-not-found></app-not-found>
+  </div>
 
   <div class="products" *ngIf="bussiness.length !== 0"> 
     <h3 class="border-bottom-orange-init title-h3">
@@ -456,6 +522,241 @@
     </div>
   </form>
 </ng-template>
+
+<!-- template exito, carulla -->
+
+<ng-template #templateEC>
+  <div *ngIf="!reference">
+    <form [formGroup]="formLink">
+      <div fxLayout="column">
+        <div fxLayout="column" fxFlex="100" fxFlex.xs="100">
+          <mat-form-field appearance="dashed" class="dashed mt-2">
+            <input
+              id="url"
+              matInput
+              formcontrolName="link"
+              [value]="urlshorten"
+              #linkInput
+              readonly
+            />
+          </mat-form-field>
+        </div>
+        <div
+          fxLayout="row"
+          fxLayoutAlign="center space-between"
+          fxLayoutGap="10px"
+          class="mt-2 share-desktop"
+        >
+          <button
+            mat-button
+            id="btnCopy"
+            color="orange"
+            [disabled]="enableCopy"
+            ngClass="{{classButtonCopy}}"
+            (click)="copyInputMessage(linkInput)"
+          >
+            <span
+              fxLayoutAlign="center space-between"
+              ngClass="{{classButtonCopy}}"
+            >
+              {{ "GENERIC.COPY_LINK" | translate }}
+            </span>
+          </button>
+
+          <button
+            mat-button
+            id="refer"
+            color="orange"
+            ngClass="{{classButtonRefer}}"
+            (click)="showReference()"
+          >
+            <span ngClass="{{classButtonRefer}}" fxLayoutAlign="center space-between">
+              Referir
+            </span>
+          </button>
+
+          <button
+            mat-button
+            id="buy"
+            color="orange"
+            ngClass="orange-border {{classButtonBuy}}"
+            (click)="buy()"
+          >
+            <span ngClass="{{classButtonBuy}}" fxLayoutAlign="center space-between">
+              Comprar
+            </span>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <h3 class="border-bottom-orange-init share-desktop">
+      {{ "GENERIC.SHARE" | translate }}
+    </h3>
+
+    <div class="share-desktop" id="share">
+      <button
+        theme="circles-dark"
+        shareButton="facebook"
+        [url]="urlshorten"
+        ngClass="sharebutton {{classButtonFacebook}} mr-2"
+      >
+        <i ngClass="fab fa-facebook-f {{classButtonFacebook}}"></i>
+      </button>
+      <button
+        theme="circles-dark"
+        shareButton="twitter"
+        [url]="urlshorten"
+        ngClass="sharebutton {{classButtonTwitter}} mr-2"
+      >
+        <i ngClass="fab fa-twitter {{classButtonTwitter}}"></i>
+      </button>
+      <button
+        theme="circles-dark"
+        shareButton="whatsapp"
+        [url]="urlshorten"
+        ngClass="sharebutton {{classButtonWhatsapp}}"
+      >
+        <i ngClass="fab fa-whatsapp {{classButtonWhatsapp}}"></i>
+      </button>
+    </div>
+
+    <div class="share-mobile">
+      <button
+        mat-button
+        ngClass="gtmrs  mb-2 mt-2 {{classButtonShare}}"
+        (click)="share()"
+        fxLayout="row"
+        fxLayoutAlign="start start"
+      >
+        <span ngClass="gtmrs f-15 {{classButtonShare}}" fxLayout="row" fxLayoutAlign="center center">
+          <img
+            ngClass="icon-compartir pr-2 {{classButtonShare}}"
+            src="/assets/img/Compartir.svg"
+            alt="user"
+          />
+          Compartir</span
+        >
+      </button>
+
+      <button
+        mat-button
+        ngClass="gtmrs  mb-2 mt-2 {{classButtonRefer}}"
+        (click)="showReference()"
+        fxLayout="row"
+        fxLayoutAlign="start start"
+      >
+        <span ngClass="gtmrs f-15 {{classButtonRefer}}" fxLayout="row" fxLayoutAlign="center center">
+          <img
+            ngClass="icon-compartir pr-2 {{classButtonRefer}}"
+            src="/assets/img/Referir.svg"
+            alt="user"
+          />
+          Referir
+        </span>
+      </button>
+
+      <button
+        mat-button
+        ngClass="gtmrs  mb-2 mt-2 {{classButtonBuy}}"
+        (click)="buy()"
+        fxLayout="row"
+        fxLayoutAlign="start start"
+      >
+        <span ngClass="gtmrs f-15 {{classButtonBuy}}" fxLayout="row" fxLayoutAlign="center center">
+          <img
+            ngClass="icon-compartir pr-2 {{classButtonBuy}}"
+            src="/assets/img/Comprar.svg"
+            alt="user"
+          />
+          Comprar
+        </span>
+      </button>
+    </div>
+  </div>
+  <br />
+  <form
+    class="forgotpassword-container"
+    [formGroup]="idCustomerForm"
+    fxLayout="column"
+    *ngIf="reference"
+  >
+    <span
+      (click)="backStep()"
+      class="cursor-pointer gray"
+      fxLayout="row"
+      fxLayoutAlign="start start"
+      fxFlex="12"
+    >
+      <mat-icon>keyboard_arrow_left</mat-icon>
+      <span class="text-back">Volver</span>
+    </span>
+    <p>{{ "GENERIC.REFERENCE_IDENTIFICATION" | translate }}</p>
+    <mat-form-field appearance="outline" class="mt-2">
+      <input
+        matInput
+        class="p-2"
+        id="idcustomer"
+        type="text"
+        placeholder="N° de Documento"
+        formControlName="identification"
+        required
+      />
+      <mat-error
+        id="reuiredId"
+        *ngIf="
+          idCustomerForm.controls.identification.invalid &&
+          idCustomerForm.controls.identification.errors.required
+        "
+        >{{
+          "GENERIC.REQUIRED" | translate: { formValue: "Número de documento" }
+        }}</mat-error
+      >
+
+      <mat-error
+        id="maxId"
+        *ngIf="
+          idCustomerForm.controls.identification.invalid &&
+          idCustomerForm.controls.identification.errors.maxlength
+        "
+        >{{
+          "GENERIC.MAX_CHARACTERS"
+            | translate
+              : {
+                  maxchar:
+                    idCustomerForm.controls.identification.errors.maxlength
+                      .requiredLength
+                }
+        }}</mat-error
+      >
+
+      <mat-error
+        id="numberId"
+        *ngIf="
+          idCustomerForm.controls.identification.invalid &&
+          idCustomerForm.controls.identification.errors.pattern
+        "
+        >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+      >
+    </mat-form-field>
+
+    <div fxLayout="column">
+      <button
+        mat-raised-button
+        class="button button-100 p-1 gtmCrearCedulaSiguiente"
+        id="recoverPassword"
+        color="orange"
+        (click)="saveLinkReference()"
+        [disabled]="!idCustomerForm.valid"
+      >
+        <span class="gtmCrearCedulaSiguiente">{{
+          "GENERIC.ACCEPT" | translate
+        }}</span>
+      </button>
+    </div>
+  </form>
+</ng-template>
+
 
 <ng-template #templateDialogAssured>
   <div id="share">
