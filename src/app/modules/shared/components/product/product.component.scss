@@ -19,8 +19,8 @@
 }
 
 .discount {
-  color: $primary-color;
-  font-size: 1rem;
+  color: $secondary-color;
+  // font-size: 1rem;
   &-height {
     min-height: 34px;
   }
@@ -52,9 +52,13 @@
   width: 100%;
   display: flex;
   margin-top: 0;
-  img {
-    // border-radius: 10px;
+}
+
+@media screen and (max-width: 400px) {
+  .badge-product {
+    font-size: 60% !important;
   }
+
 }
 
 @media screen and (max-width: 600px) {
@@ -203,4 +207,13 @@ h3.size {
 .button-wrap{
   width: 80%;
   margin: 0 auto;
+}
+
+.container-card-info{
+  min-height: 190px;
+  padding: 0 20px;
+}
+
+.widb{
+  width: 150px;
 }

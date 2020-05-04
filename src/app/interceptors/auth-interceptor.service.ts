@@ -7,27 +7,24 @@ import {
   HttpErrorResponse
 } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
-import { tap, catchError } from "rxjs/operators";
-import { Router } from "@angular/router";
+import { catchError, distinctUntilChanged } from "rxjs/operators";
 import { AuthService } from "../services/auth.service";
-import { UserService } from "../services/user.service";
 import { Injector } from "@angular/core";
+import { ResponseService } from '../interfaces/response';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor(
-    private router: Router,
     public auth: AuthService,
-    private user: UserService,
     private injector: Injector
   ) {}
-
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     this.auth = this.injector.get(AuthService);
     const token: string = localStorage.getItem("ACCESS_TOKEN");
+    
 
     let request = req;
 
@@ -41,15 +38,14 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
-        if (err.status === 401) {
-          //  this.auth.refreshToken().subscribe((resp:any) => {
-          //   localStorage.setItem("ACCESS_TOKEN", resp.objectResponse.token);
-          //   localStorage.setItem("REFRESH_TOKEN", resp.objectResponse.refreshToken);
-          //  })
-          localStorage.clear();
-          setTimeout(() => {
-            this.router.navigate(["/"]);
-          }, 500);
+        if (err.status === 401 && token !== null) {
+           this.auth.refreshToken().pipe(distinctUntilChanged()).subscribe((resp:ResponseService) => {
+            let token = resp.objectResponse.token;
+            let refreshToken = resp.objectResponse.refreshToken;
+            localStorage.setItem("ACCESS_TOKEN", token);
+            localStorage.setItem("REFRESH_TOKEN", refreshToken);
+            // document.location.reload();
+           })
         }
 
         return throwError(err);

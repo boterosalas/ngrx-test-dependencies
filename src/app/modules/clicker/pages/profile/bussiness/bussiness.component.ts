@@ -14,6 +14,7 @@ import { LinksService } from 'src/app/services/links.service';
 import { TokenService } from 'src/app/services/token.service';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-bussiness',
@@ -47,10 +48,11 @@ export class BussinessComponent implements OnInit, OnDestroy {
   formLink: FormGroup;
   enableCopy: boolean = true;
   identification: string;
-  @ViewChild("templateCategories", { static: false })
-  templateCategories: TemplateRef<any>;
-  @ViewChild("templateDialogAssured", { static: false })
-  templateAssured: TemplateRef<any>;
+
+  @ViewChild("templateCategories", { static: false }) templateCategories: TemplateRef<any>;
+  @ViewChild("templateDialogAssured", { static: false }) templateAssured: TemplateRef<any>;
+  @ViewChild("templateEC", { static: false }) templateEC: TemplateRef<any>;
+
   urlshorten: string = '';
   url: string;
   classButtonCopy: string;
@@ -68,6 +70,17 @@ export class BussinessComponent implements OnInit, OnDestroy {
   acceptTermsDeliver: boolean;
   urlPlaystore:string = 'https://play.google.com/store/apps/details?id=com.sewayplus';
   urlAppstore:string = 'https://apps.apple.com/co/app/seway/id1414489414';
+
+  paginate: string;
+  pageIndex: number = 0;
+  pageTo: number = 50;
+  pageSize: number = 50;
+  productsList: Array<any>;
+  totalItems: number;
+  showResults: boolean;
+  showNotFound: boolean;
+  orderOptions: any;
+  orderValue:string;
 
   constructor(
     private route: ActivatedRoute,
@@ -119,8 +132,21 @@ export class BussinessComponent implements OnInit, OnDestroy {
       acceptTerms: [null, Validators.required]
     })
 
+    this.orderOptions = [
+      {value: 'OrderByTopSaleDESC', description: 'Más Vendidos'},
+      {value: 'OrderByReleaseDateDESC', description: 'Más recientes'},
+      {value: 'OrderByPriceDESC', description: 'Mayor precio primero'},
+      {value: 'OrderByNameASC', description: 'Productos de la A-Z'},
+      {value: 'OrderByNameDESC', description: 'Productos de la Z-A'},
+    ]
+
   }
 
+  public order(option:string) {
+    this.pageIndex = 0;
+    this.searchProductPaginate(this.paginate, option, 1 , this.pageTo);
+    this.orderValue = option;
+  }
 
 
   public getContentBussiness() {
@@ -409,6 +435,134 @@ export class BussinessComponent implements OnInit, OnDestroy {
       window.open(this.urlPlaystore,'_blank');
     }
   }
+
+   /**
+   * Metodo para buscar los productos paginados
+   * @param term
+   * @param from
+   * @param to
+   *
+   */
+
+public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pageTo) {
+  if (term !== this.paginate) {
+    this.paginate = term;
+    this.pageIndex = 0;
+  }
+  
+  const params = { term, order, from, to };
+  this.subscription = this.sp.getProductsPagination(params).subscribe(
+    (resp: any) => {
+      this.productsList = JSON.parse(resp.json);
+      this.totalItems = resp.total;
+      if (this.productsList.length > 0) {
+        this.showResults = true;
+        this.showNotFound = false;
+        let productListCopy = [...this.productsList];
+        this.productsList = productListCopy.map(_product => {
+          
+          _product.items = [..._product.items].sort((a, b)  => {
+            if(a.sellers[0].commertialOffer.Price > 0 && b.sellers[0].commertialOffer.Price > 0 ) {
+              return a.sellers[0].commertialOffer.Price - b.sellers[0].commertialOffer.Price
+            } else {
+              return b.sellers[0].commertialOffer.Price - a.sellers[0].commertialOffer.Price
+            }
+          });
+
+          return _product;
+        });
+      } else {
+        this.showNotFound = true;
+        this.showResults = false;
+      }
+    },
+    error => {
+      this.showNotFound = true;
+      this.showResults = false;
+    }
+  );
+}
+
+ /**
+   * Metodo para abrir la modal con el producto seleccionado del exito
+   * @param product
+   */
+
+  public dataProduct(product) {
+    this.tokenInfo = this.token.userInfo();
+    this.idClicker = this.tokenInfo.idclicker;
+    this.reference = false;
+    this.urlshorten = '';
+    if (environment.production === false) {
+      const productUrl = product.link;
+      this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=${this.idClicker}`;
+    } else {
+      const productUrl = product.linkText;
+      this.url = `https://www.${this.title}.com/${productUrl}/p?utm_source=clickam&utm_medium=referral&utm_campaign=${this.idClicker}`;
+    }
+    this.idCustomerForm.controls.identification.setValue("");
+    this.idCustomerForm.reset();
+    setTimeout(() => {
+      this.saveLink();
+    }, 500);
+    this.formShareLink();
+    const title = product.productName;
+    const id = product.productId;
+    const img = product.items[0].images[0].imageUrl;
+    const price = product.items[0].sellers[0].commertialOffer.Price;
+    const discount = product.items[0].sellers[0].commertialOffer.ListPrice;
+    const template = this.templateEC;
+    const showClose = false;
+    const showCloseIcon = true;
+    const showProduct = true;
+    const showshowTitle = false;
+    const buttonClose = "Cerrar";
+    const showPlu = true;
+    const plu = product.items[0].itemId;
+    this.plu = product.items[0].itemId;
+    this.business = this.id;
+    const home = true;
+    let teasers = product.items[0].sellers[0].commertialOffer.Teasers;
+    const exito = true;
+
+    let dialogref = this.dialog.open(DialogComponent, {
+      data: {
+        title,
+        template,
+        showClose,
+        showCloseIcon,
+        img,
+        plu,
+        price,
+        showProduct,
+        showPlu,
+        showshowTitle,
+        buttonClose,
+        id,
+        discount,
+        home,
+        exito
+      }
+    });
+
+    dialogref.afterDismissed().subscribe(() => {
+      this.enableCopy = true;
+    })
+  }
+
+   /**
+   * Paginacion
+   * @param paginate
+   */
+
+  public pagination(paginate: any) {
+    this.pageIndex = paginate.pageIndex;
+    paginate.length = this.totalItems;
+    const from = paginate.pageSize * paginate.pageIndex + 1;
+    const to = paginate.pageSize * (paginate.pageIndex + 1);
+    this.searchProductPaginate(this.paginate, this.orderValue, from, to);
+  }
+
 
 
   ngOnDestroy() {
