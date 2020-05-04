@@ -77,6 +77,8 @@ export class SliderComponent implements OnInit {
 
   ngOnInit() {
 
+    this.getDate();
+
     if(localStorage.getItem("ACCESS_TOKEN") !== null ) {
       this.identification = this.token.userInfo().identification;
     }

@@ -28,6 +28,12 @@
         <th mat-header-cell *matHeaderCellDef class="text-center" > <span class="galano-bold gray-light">{{ 'HISTORICAL.TOTAL_SELL' | translate }}</span></th>
         <td mat-cell class="text-center" *matCellDef="let element"> {{element.products}} </td>
       </ng-container>
+
+      <!-- visits Column -->
+      <ng-container matColumnDef="visits">
+        <th mat-header-cell *matHeaderCellDef class="text-center" > <span class="galano-bold gray-light">{{ 'HISTORICAL.VISITS' | translate }}</span></th>
+        <td mat-cell class="text-center" *matCellDef="let element"> {{element.visits}} </td>
+      </ng-container>
   
       <!-- Buttons Column -->
       <ng-container matColumnDef="button">

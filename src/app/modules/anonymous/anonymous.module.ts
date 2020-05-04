@@ -29,6 +29,7 @@ import { ComissionTableComponent } from './pages/comission-table/comission-table
 import { NewBusinessComponent } from './components/new-business/new-business.component';
 import { NewBusinessFormComponent } from './components/new-business-form/new-business-form.component';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module, RecaptchaFormsModule, RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
+import { UrlComponent } from './pages/url/url.component';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -64,6 +65,10 @@ const routes: Routes = [
   {
     path: "tabla-comisiones",
     component: ComissionTableComponent
+  },
+  {
+    path: "url/:shortCode",
+    component: UrlComponent
   }
 ];
 
@@ -88,6 +93,7 @@ const routes: Routes = [
     ComissionTableComponent,
     NewBusinessComponent,
     NewBusinessFormComponent,
+    UrlComponent,
     // ReportComponent
   ],
   imports: [
