@@ -27,7 +27,6 @@ export class UrlComponent implements OnInit {
 
   public getUrl() {
     this.link.getUrl(this.code).subscribe(url=> {
-      console.log(url);
       if(url !== null) {
         window.location.replace(url);
       } 
