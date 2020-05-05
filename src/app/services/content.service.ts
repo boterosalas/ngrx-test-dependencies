@@ -51,7 +51,7 @@ export class ContentService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
-            take(10),
+            take(3),
             tap((errorStatus) => {})
           )
         ),
@@ -68,7 +68,7 @@ export class ContentService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
-            take(10),
+            take(3),
             tap((errorStatus) => {})
           )
         ),
@@ -85,7 +85,7 @@ export class ContentService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
-            take(10),
+            take(3),
             tap((errorStatus) => {})
           )
         )
@@ -110,7 +110,7 @@ export class ContentService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
-            take(10),
+            take(3),
             tap((errorStatus) => {})
           )
         ),
@@ -127,7 +127,7 @@ export class ContentService {
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
-            take(10),
+            take(3),
             tap((errorStatus) => {})
           )
         ),
@@ -142,7 +142,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(1000),
-          take(10),
+          take(3),
           tap((errorStatus) => {})
         )
       ),
@@ -157,7 +157,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(1000),
-          take(10),
+          take(3),
           tap((errorStatus) => {})
         )
       ),
@@ -172,7 +172,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(1000),
-          take(10),
+          take(3),
           tap((errorStatus) => {})
         )
       ),
@@ -214,7 +214,7 @@ export class ContentService {
       .post(`${this.url + apiSearchVetex}`, this.sendSearch, this.httpOptions)
       .pipe(
         delay(1000),
-        take(10),
+        take(3),
         tap((errorStatus) => {}),
         map((user: any) => {
           return user.objectResponse;
