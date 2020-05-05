@@ -11,7 +11,7 @@ export class TableHistoricalLinksComponent implements OnInit {
   @Output() dataUser = new EventEmitter;
   @Output() product = new EventEmitter;
 
-  displayedColumns: string[] = ['link','date', 'comission', 'total','visits', 'button'];
+  displayedColumns: string[] = ['productname','date', 'comission', 'total','visits', 'button'];
 
   ngOnInit() {
   }

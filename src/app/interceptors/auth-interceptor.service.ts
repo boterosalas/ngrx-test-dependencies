@@ -40,6 +40,8 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError((err: HttpErrorResponse) => {
         if (err.status === 401 && token !== null) {
            this.auth.refreshToken().subscribe((resp:ResponseService) => {
+            //  console.log('respuesta servicio', resp);
+            //  localStorage.clear();
              if(resp.state !== 'Error') {
                let token = resp.objectResponse.token;
                let refreshToken = resp.objectResponse.refreshToken;
