@@ -5,6 +5,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatBottomSheetRef, MAT_BOTTOM
 import { AppMaterialModule } from '../../app-material/app-material.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('DialogComponent', () => {
   let component: DialogComponent;
@@ -20,7 +21,8 @@ describe('DialogComponent', () => {
         DialogComponent
        ],
        imports: [
-        AppMaterialModule
+        AppMaterialModule,
+        TranslateModule.forRoot()
        ],
        providers: [
         { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} },

@@ -1,11 +1,11 @@
 <div class="mat-elevation-z0 mt-4 mb-4 overflow-auto">
     <table mat-table [dataSource]="dataSource" class="users-table">
   
-      <!-- Links Column -->
-      <ng-container matColumnDef="link">
-        <th mat-header-cell *matHeaderCellDef> <span class="galano-bold gray-light">{{ 'HISTORICAL.LINK' | translate }} </span></th>
+      <!-- Product Name Column -->
+      <ng-container matColumnDef="productname">
+        <th mat-header-cell *matHeaderCellDef> <span class="galano-bold gray-light">{{ 'HISTORICAL.PRODUCT' | translate }} </span></th>
         <td mat-cell *matCellDef="let element; let i=index"> 
-          <span class="orange-text">{{element.link}}</span>
+          <span class="orange-text">{{element.productname}}</span>
         </td>
       </ng-container>
 
@@ -27,6 +27,12 @@
       <ng-container matColumnDef="total">
         <th mat-header-cell *matHeaderCellDef class="text-center" > <span class="galano-bold gray-light">{{ 'HISTORICAL.TOTAL_SELL' | translate }}</span></th>
         <td mat-cell class="text-center" *matCellDef="let element"> {{element.products}} </td>
+      </ng-container>
+
+      <!-- visits Column -->
+      <ng-container matColumnDef="visits">
+        <th mat-header-cell *matHeaderCellDef class="text-center" > <span class="galano-bold gray-light">{{ 'HISTORICAL.VISITS' | translate }}</span></th>
+        <td mat-cell class="text-center" *matCellDef="let element"> {{element.visits}} </td>
       </ng-container>
   
       <!-- Buttons Column -->

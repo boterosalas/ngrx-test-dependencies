@@ -111,6 +111,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.getDate();
     this.getContentBussiness();
     this.getUserData();
     if(localStorage.getItem("ACCESS_TOKEN") !== null ) {
@@ -493,13 +494,15 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     this.idClicker = this.tokenInfo.idclicker;
     this.reference = false;
     this.urlshorten = '';
-    if (environment.production === false) {
-      const productUrl = product.link;
-      this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=${this.idClicker}`;
-    } else {
-      const productUrl = product.linkText;
-      this.url = `https://www.${this.title}.com/${productUrl}/p?utm_source=clickam&utm_medium=referral&utm_campaign=${this.idClicker}`;
-    }
+    // if (environment.production === false) {
+    //   const productUrl = product.link;
+    //   this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=${this.idClicker}`;
+    // } else {
+    //   const productUrl = product.linkText;
+    //   this.url = `https://www.${this.title}.com/${productUrl}/p?utm_source=clickam&utm_medium=referral&utm_campaign=${this.idClicker}`;
+    // }
+    const productUrl = product.linkText;
+    this.url = `https://www.${this.title}.com/${productUrl}/p?utm_source=clickam&utm_medium=referral&utm_campaign=${this.idClicker}`;
     this.idCustomerForm.controls.identification.setValue("");
     this.idCustomerForm.reset();
     setTimeout(() => {

@@ -1,7 +1,14 @@
 <div id={{data.id}} class="modal-width">
-    <div fxLayoutAlign="end">
+
+    <div fxLayoutAlign="space-between">
+        <h1 class="f-18 galano-bold" mat-dialog-title *ngIf="data.history">{{ 'HISTORICAL.PRODUCT' | translate }} : {{ data.title }}</h1>
+        <a id="closeDialog" matRipple (click)="onNoClick()" *ngIf="data.history"><mat-icon class="close cursor-pointer">close</mat-icon></a>
+    </div>
+
+    <div fxLayoutAlign="end" *ngIf="!data.history">
         <a id="closeDialog" matRipple (click)="onNoClick()" *ngIf="data.showCloseIcon"><mat-icon class="close">close</mat-icon></a>
     </div>
+
     <h1 mat-dialog-title *ngIf="data.showTitle">{{data.title}}</h1>
     <div mat-dialog-content>
         <!-- exito -->
