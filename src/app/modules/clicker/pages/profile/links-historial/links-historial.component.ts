@@ -172,9 +172,10 @@ export class LinksHistorialComponent implements OnInit {
     const showClose = false;
     const buttonClose = "Cerrar";
     const showshowTitle = false;
-    const title = product.description;
+    const title = product.productname;
     const showProduct = true;
     const id = product.productId;
+    const history = true;
     this.classButtonWhatsapp = `gtmClicLightboxIconoWhatsApp${this.title}${product.description}`
       .replace(/\s/g, "")
       .normalize("NFD")
@@ -218,7 +219,8 @@ export class LinksHistorialComponent implements OnInit {
         showshowTitle,
         id,
         title,
-        home
+        home,
+        history
       }
     });
 
