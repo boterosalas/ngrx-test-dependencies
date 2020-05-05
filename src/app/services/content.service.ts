@@ -213,6 +213,9 @@ export class ContentService {
     return this.http
       .post(`${this.url + apiSearchVetex}`, this.sendSearch, this.httpOptions)
       .pipe(
+        delay(1000),
+        take(10),
+        tap((errorStatus) => {}),
         map((user: any) => {
           return user.objectResponse;
         })

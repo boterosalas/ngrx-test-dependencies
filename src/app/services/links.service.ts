@@ -33,6 +33,7 @@ export class LinksService {
   apiSaveLink = "Link/SaveLink";
   apiPostReferrrals = "Link/downloadReferrals";
   apiGetTotalLinks = "Link/GetTotalLinksGenerated";
+  apiGetUrl = "link/geturl";
   apiFile = "commissions/getUrlFileCommissions";
   apigetDetailPaymentClicker = "commissions/getDetailPaymentClicker";
   apigenerateCommissions = "commissions/generateCommissionsFile";
@@ -93,6 +94,14 @@ export class LinksService {
         return resp.objectResponse;
       })
     );
+  }
+
+  public getUrl(code: string) {
+    return this.http.get(`${this.url}${this.apiGetUrl}?code=${code}`, this.httpOptions).pipe(
+      map((resp: ResponseService) => {
+        return resp.objectResponse;
+      }));
+      
   }
 
   public getKPI() {
