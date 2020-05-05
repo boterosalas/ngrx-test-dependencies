@@ -7,16 +7,22 @@ import {
   HttpErrorResponse
 } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
-import { catchError, distinctUntilChanged } from "rxjs/operators";
+import { catchError, distinctUntilChanged, takeLast, mergeAll, switchMap, mergeMap, tap, take } from "rxjs/operators";
 import { AuthService } from "../services/auth.service";
 import { Injector } from "@angular/core";
 import { ResponseService } from '../interfaces/response';
+import { LoaderService } from '../services/loader.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+
+  
+  countError:number = 0;
+
   constructor(
     public auth: AuthService,
-    private injector: Injector
+    private injector: Injector,
+    private loaderService: LoaderService
   ) {}
   intercept(
     req: HttpRequest<any>,
@@ -27,6 +33,7 @@ export class AuthInterceptor implements HttpInterceptor {
     
 
     let request = req;
+    
 
     if (token) {
       request = req.clone({
@@ -36,21 +43,33 @@ export class AuthInterceptor implements HttpInterceptor {
       });
     }
 
+    this.loaderService.show();
+
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
+        console.log(err.ok);
+        this.loaderService.hide();
         if (err.status === 401 && token !== null) {
-           this.auth.refreshToken().subscribe((resp:ResponseService) => {
-            //  console.log('respuesta servicio', resp);
-            //  localStorage.clear();
-             if(resp.state !== 'Error') {
-               let token = resp.objectResponse.token;
-               let refreshToken = resp.objectResponse.refreshToken;
-               localStorage.setItem("ACCESS_TOKEN", token);
-               localStorage.setItem("REFRESH_TOKEN", refreshToken);
-             } else {
-               return;
-             }
-           })
+          this.countError += 1;
+          if(this.countError === 1) {
+            this.auth.refreshToken().subscribe((resp:ResponseService) => {
+             //  console.log('respuesta servicio', resp);
+              if(resp.state !== 'Error') {
+                let token = resp.objectResponse.token;
+                let refreshToken = resp.objectResponse.refreshToken;
+                localStorage.setItem("ACCESS_TOKEN", token);
+                localStorage.setItem("REFRESH_TOKEN", refreshToken);
+                setTimeout(() => {
+                  this.countError = 0;
+                }, 15000);
+              } else {
+                if(resp.objectResponse.result === false) {
+                  localStorage.clear();
+                  document.location.reload();
+                }
+              }
+            })
+          }
         } else {
           if(err.status === 500) {
             return;
