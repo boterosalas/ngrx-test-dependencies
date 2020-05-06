@@ -1325,3 +1325,7 @@ button.swal2-cancel.payment-cancel.swal2-styled{
   border-color:$third-color;
   color: $third-color;
 }
+
+.orange-spinner .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: $third-color !important;
+}
