@@ -47,7 +47,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
-        console.log(err.ok);
         this.loaderService.hide();
         if (err.status === 401 && token !== null) {
           this.countError += 1;
