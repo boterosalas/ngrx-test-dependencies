@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LinksService } from 'src/app/services/links.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-url',
@@ -11,10 +11,12 @@ export class UrlComponent implements OnInit {
 
   code: string;
   showMessage: boolean = false;
+  show:boolean = true;
 
   constructor(
     private link: LinksService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { 
     this.route.params.subscribe(param => {
       this.code = param.shortCode;
@@ -31,7 +33,9 @@ export class UrlComponent implements OnInit {
         window.location.replace(url);
       } 
       if(url === null){
-       this.showMessage = true;
+      //  this.showMessage = true;
+      this.router.navigate(['/']);
+       this.show = false;
       }
     });
   }
