@@ -139,9 +139,19 @@ export class AppComponent implements OnInit, OnDestroy {
 
     if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe(()=> {
-        if(confirm("Nueva version disponible. Deseas cargar nueva versión?")) {
+        Swal.fire({
+          title: "¡Nueva versión disponible!",
+          text:
+            "Haz clic en el botón aceptar.",
+          type: "info",
+          allowEscapeKey: false,
+          allowOutsideClick: false,
+          confirmButtonText: "Aceptar",
+          confirmButtonClass: "update-success",
+          customClass:"paymentData"
+        }).then(() => {
           window.location.reload();
-        }
+        });
       });
     }
 
