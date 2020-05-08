@@ -547,6 +547,8 @@ export class BussinessComponent implements OnInit, OnDestroy {
               this.productsListExito.push(object);
             }
 
+            return object;
+
         });
 
         this.totalItems = this.productsListExito.length;
@@ -601,6 +603,8 @@ export class BussinessComponent implements OnInit, OnDestroy {
             if((object.seller === '1' || object.seller === '10078') && object.oldprice !== 0) {
               this.productsListExito.push(object);
             }
+
+            return object;
 
         });
 
