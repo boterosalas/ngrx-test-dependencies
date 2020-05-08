@@ -22,6 +22,9 @@ export class ContentService {
   };
 
   url = environment.URL_CONTENT;
+  urlbiggyExito = "https://search.biggylabs.com.br/search-api/v1/exitocol/api/";
+  urlbiggyCarulla = "https://search.biggylabs.com.br/search-api/v1/carulla/api/";
+  apibiggy="search/trade-policy/1"
   apiNews = "product/getNews";
   apiAssured = "product/getProductsSegurosExito";
   apiTrips = "product/getProductsViajesExito";
@@ -188,6 +191,28 @@ export class ContentService {
         return user.objectResponse;
       })
     );
+  }
+
+  public biggySearchExito(
+    params: {
+      term: any;
+      page: number;
+      count: number;
+      order: string;
+    }
+  ) {
+    return this.http.get(`${this.urlbiggyExito}${this.apibiggy}?query=${params.term}&sort=orders:dsc&page=${params.page}&count=${params.count}`);
+  }
+
+  public biggySearchCarulla(
+    params: {
+      term: any;
+      page: number;
+      count: number;
+      order: string;
+    }
+  ) {
+    return this.http.get(`${this.urlbiggyCarulla}${this.apibiggy}?query=${params.term}&sort=orders:dsc&page=${params.page}&count=${params.count}`);
   }
 
   public getProductsPagination(params: {
