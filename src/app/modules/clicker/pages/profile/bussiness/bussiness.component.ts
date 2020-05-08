@@ -515,10 +515,10 @@ export class BussinessComponent implements OnInit, OnDestroy {
   }
 
   public searchBiggyExito(term: any, order:string ='', page = 1, count = 1000) {
+    this.productsListExito = [];
     if (term !== this.paginate) {
       this.paginate = term;
       this.pageIndex = 0;
-      this.productsListExito = []
       this.mostrarProductos = 52;
     }
     

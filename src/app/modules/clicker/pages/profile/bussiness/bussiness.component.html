@@ -12,7 +12,7 @@
   <app-search *ngIf="id==='2'" (search)="searchBiggyCarulla($event)"></app-search>
 
   <div *ngIf="showResults">
-    
+    <p class="f-18 mt-0">Clicker recuerda que los precios pueden variar al entrar al comercio.</p>
       <div fxLayout="row wrap"  fxLayoutGap="10px">
           
           <ng-container class="mt-4" *ngFor="let product of productsListExito | slice:0:mostrarProductos ; let i = index">
