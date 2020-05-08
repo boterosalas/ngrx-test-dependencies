@@ -449,15 +449,12 @@ export class BussinessComponent implements OnInit, OnDestroy {
    */
 
   public dataProduct(product) {
-    console.log(product);
-    console.log(product);
     this.tokenInfo = this.token.userInfo();
     this.idClicker = this.tokenInfo.idclicker;
     this.reference = false;
     this.urlshorten = '';
     const productUrl = product.url;
     this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=${this.idClicker}`;
-    console.log(this.url);
     this.idCustomerForm.controls.identification.setValue("");
     this.idCustomerForm.reset();
     setTimeout(() => {
@@ -553,7 +550,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
         });
 
         this.totalItems = this.productsListExito.length;
-        console.log(this.productsListExito);
 
         if (this.productsListExito.length > 0) {
           this.showResults = true;
