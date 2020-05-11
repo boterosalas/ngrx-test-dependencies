@@ -525,7 +525,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
         this.productsListBiggy = resp.products;
         this.productsListTransform = [...this.productsListBiggy];
         
-        this.productsListTransform.map(resp=> {
+        this.productsListTransform.forEach(resp=> {
 
           if(!!resp.skus[0] &&  !!resp.skus[0].sellers[0]) {
             this.sellerId = resp.skus[0].sellers[0].id;
@@ -582,7 +582,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
         this.productsListBiggy = resp.products;
         this.productsListTransform = [...this.productsListBiggy];
         
-        this.productsListTransform.map(resp=> {
+        this.productsListTransform.forEach(resp=> {
 
           if(!!resp.skus[0] &&  !!resp.skus[0].sellers[0]) {
             this.sellerId = resp.skus[0].sellers[0].id;
