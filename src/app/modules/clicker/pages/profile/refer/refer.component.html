@@ -1,0 +1,27 @@
+<app-back-navigation
+fxHide.gt-xs="true"
+title="Referir"
+(close)="goback()"
+></app-back-navigation>
+
+<div class="container mt-2">
+    <mat-tab-group>
+        <!-- REFERS -->
+        <mat-tab>
+            <ng-template mat-tab-label>
+                 <span class="gtmClicAcademyClicExitocom">{{'REFER.REFER' | translate}}</span>
+            </ng-template>
+            <app-refer-email (email)="sendEmail($event)"></app-refer-email>
+            <app-refer-share (urlClicker)="copyInputMessage($event)"></app-refer-share>
+        </mat-tab>
+
+        <!-- MY REFERS -->
+        <mat-tab>
+            <ng-template mat-tab-label>
+                 <span class="gtmClicAcademyClicExitocom">{{'REFER.MY_REFERS' | translate}}</span>
+            </ng-template>
+            <app-my-refers></app-my-refers>
+        </mat-tab>
+    
+      </mat-tab-group>
+</div>

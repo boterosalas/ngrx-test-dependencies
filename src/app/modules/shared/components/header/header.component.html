@@ -17,9 +17,10 @@
                     </a>
                     <a fxHide.xs="true" class="gtmHomeClicRegistrarseClickam login-text" mat-button (click)="openRegister()" id="header-register"><span class="gtmHomeClicRegistrarseClickam" >{{ 'GENERIC.REGISTER2' | translate }}</span></a>
                 </span>
-                <span *ngIf="auth.isLoggedIn()" fxLayout="row">
+                <span *ngIf="auth.isLoggedIn()" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
                     <img src="assets/img/usuario-blue.svg" alt="userLogged" class="pl-2"> 
-                    <h3 class="pl-2">Hola, {{name}}</h3>
+                    <h3>Hola, {{name}}</h3>
+                    <a [routerLink]="[ '/referidos']" *ngIf="(auth.getRole$ | async ) === 'CLICKER'" mat-raised-button color="orange" class="button10k" id="win-10k"><span>{{ 'GENERIC.WIN10K' | translate }}</span></a>
                 </span>
             </span>
         </div>

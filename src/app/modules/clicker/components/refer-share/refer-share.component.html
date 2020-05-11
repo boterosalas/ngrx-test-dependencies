@@ -1,0 +1,49 @@
+<p>{{'REFER.SHARE' | translate}}</p>
+
+<form [formGroup]="formLink">
+    <div fxLayout="column">
+      <div fxLayout="column" fxFlex="100" fxFlex.xs="100">
+        <mat-form-field appearance="dashed" class="dashed mt-2">
+          <input
+            id="url"
+            matInput
+            formcontrolName="link"
+            [value]="url"
+            #linkInput
+            readonly
+          />
+        </mat-form-field>
+      </div>
+      <div
+        fxLayout="row"
+        fxLayoutAlign="center space-between"
+        fxLayoutGap="10px"
+        class="mt-2 share-desktop"
+      >
+        <button
+          mat-button
+          id="btnCopy"
+          color="orange"
+          (click)="copyUrl()"
+        >
+          <span
+            fxLayoutAlign="center space-between"
+          >
+            {{ "REFER.COPY" | translate }}
+          </span>
+        </button>
+
+        <!-- <button
+          mat-button
+          id="refer"
+          color="orange"
+          (click)="showReference()"
+        >
+          <span fxLayoutAlign="center space-between">
+            Referir
+          </span>
+        </button> -->
+
+      </div>
+    </div>
+  </form>

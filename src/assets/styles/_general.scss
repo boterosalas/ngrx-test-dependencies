@@ -158,6 +158,12 @@ body {
   }
 }
 
+.mat-border-button{
+    background: none;
+    color: $primary-color;
+    border: 1px solid !important;
+}
+
 .orange {
   color: $primary-color;
 }

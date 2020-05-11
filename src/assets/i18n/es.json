@@ -51,7 +51,8 @@
     "SITE_NAME": "Sitio web",
     "CONTACT_PERSON": "Persona de contacto",
     "BUSINESS_CATEGORY": "Categoría del negocio",
-    "SEE_DETAIL":"Ver detalle"
+    "SEE_DETAIL":"Ver detalle",
+    "WIN10K":"Gana 10k"
   },
   "FOOTER": {
     "FOLLOW_US": "Síguenos",
@@ -353,6 +354,18 @@
     "PRODUCT":"PRODUCTO",
     "STATE":"ESTADO",
     "COMMISION":"COMISIÓN"
+  },
+  "REFER": {
+    "REFER":"Referir",
+    "MY_REFERS": "Mis referencias",
+    "GUESTS":"INVITADOS",
+    "REGISTERED":"REGISTRADOS",
+    "SEND_INVITATION":"Enviar invitación",
+    "REFER_WIN":"Por cada referido cualificado te vamos a regalar 10K",
+    "EMAIL":"Invita a tus amigos por correo",
+    "EMAIL_CONTACT":"Ingresa el correo de tu contacto",
+    "SHARE":"Comparte tu invitación",
+    "COPY":"Copiar"
   }
 
 }

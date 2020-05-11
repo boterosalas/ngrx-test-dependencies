@@ -77,6 +77,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild("templateBusiness", { static: false })
   templateBusiness: TemplateRef<any>;
   categories = [];
+  code: string;
 
   constructor(
     public router: Router,
@@ -95,10 +96,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscription = this.route.queryParams.subscribe((params) => {
       if (params.email) {
         this.email = params.email;
-
         this.activateUser();
-      } else {
-        router.navigate(["/"]);
+      } 
+      else {
+        if(params.code) {
+          this.code = params.code;
+        }
+        else {
+          router.navigate(["/"]);
+        }
       }
     });
   }
