@@ -300,7 +300,6 @@ export class AppComponent implements OnInit, OnDestroy {
   @HostListener("over")
   hideMenu() {
     this.utils.hideMenu();
-    console.log("click");
   }
 
   @HostListener("window:resize", ["$event"])

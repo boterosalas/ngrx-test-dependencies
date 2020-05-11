@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener, ViewChild, TemplateRef, OnDestroy } fr
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { ContentService } from 'src/app/services/content.service';
 import { UtilsService } from 'src/app/services/utils.service';
-import { distinctUntilChanged } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
@@ -74,13 +74,19 @@ export class BussinessComponent implements OnInit, OnDestroy {
   paginate: string;
   pageIndex: number = 0;
   pageTo: number = 50;
-  pageSize: number = 50;
+  pageSize: number = 52;
   productsList: Array<any>;
+  productsListBiggy: Array<any>;
+  productsListTransform: Array<any>;
+  productsListExito = [];
   totalItems: number;
   showResults: boolean;
   showNotFound: boolean;
   orderOptions: any;
   orderValue:string;
+  sellerId:string;
+  mostrarProductos:number = 52;
+  sellerName: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -143,11 +149,11 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   }
 
-  public order(option:string) {
-    this.pageIndex = 0;
-    this.searchProductPaginate(this.paginate, option, 1 , this.pageTo);
-    this.orderValue = option;
-  }
+  // public order(option:string) {
+  //   this.pageIndex = 0;
+  //   this.searchProductPaginate(this.paginate, option, 1 , this.pageTo);
+  //   this.orderValue = option;
+  // }
 
 
   public getContentBussiness() {
@@ -182,8 +188,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.subscription = this.links
       .saveLink(dataSaveLink)
       .subscribe((resp: ResponseService) => {
-        let splice = resp.objectResponse.link.split('//');
-        this.urlshorten = 'https://'+ splice[1];
+        this.urlshorten = resp.objectResponse.link
         this.enableCopy = false;
         if (param === "assured") {
           if (resp.state === "Error") {
@@ -437,52 +442,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
     }
   }
 
-   /**
-   * Metodo para buscar los productos paginados
-   * @param term
-   * @param from
-   * @param to
-   *
-   */
-
-public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pageTo) {
-  if (term !== this.paginate) {
-    this.paginate = term;
-    this.pageIndex = 0;
-  }
-  
-  const params = { term, order, from, to };
-  this.subscription = this.sp.getProductsPagination(params).subscribe(
-    (resp: any) => {
-      this.productsList = JSON.parse(resp.json);
-      this.totalItems = resp.total;
-      if (this.productsList.length > 0) {
-        this.showResults = true;
-        this.showNotFound = false;
-        let productListCopy = [...this.productsList];
-        this.productsList = productListCopy.map(_product => {
-          
-          _product.items = [..._product.items].sort((a, b)  => {
-            if(a.sellers[0].commertialOffer.Price > 0 && b.sellers[0].commertialOffer.Price > 0 ) {
-              return a.sellers[0].commertialOffer.Price - b.sellers[0].commertialOffer.Price
-            } else {
-              return b.sellers[0].commertialOffer.Price - a.sellers[0].commertialOffer.Price
-            }
-          });
-
-          return _product;
-        });
-      } else {
-        this.showNotFound = true;
-        this.showResults = false;
-      }
-    },
-    error => {
-      this.showNotFound = true;
-      this.showResults = false;
-    }
-  );
-}
 
  /**
    * Metodo para abrir la modal con el producto seleccionado del exito
@@ -494,26 +453,19 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     this.idClicker = this.tokenInfo.idclicker;
     this.reference = false;
     this.urlshorten = '';
-    // if (environment.production === false) {
-    //   const productUrl = product.link;
-    //   this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=${this.idClicker}`;
-    // } else {
-    //   const productUrl = product.linkText;
-    //   this.url = `https://www.${this.title}.com/${productUrl}/p?utm_source=clickam&utm_medium=referral&utm_campaign=${this.idClicker}`;
-    // }
-    const productUrl = product.linkText;
-    this.url = `https://www.${this.title}.com/${productUrl}/p?utm_source=clickam&utm_medium=referral&utm_campaign=${this.idClicker}`;
+    const productUrl = product.url;
+    this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=${this.idClicker}`;
     this.idCustomerForm.controls.identification.setValue("");
     this.idCustomerForm.reset();
     setTimeout(() => {
       this.saveLink();
     }, 500);
     this.formShareLink();
-    const title = product.productName;
-    const id = product.productId;
-    const img = product.items[0].images[0].imageUrl;
-    const price = product.items[0].sellers[0].commertialOffer.Price;
-    const discount = product.items[0].sellers[0].commertialOffer.ListPrice;
+    const title = product.title;
+    const id = product.plu;
+    const img = product.image.value;
+    const price = product.price;
+    const discount = product.oldprice;
     const template = this.templateEC;
     const showClose = false;
     const showCloseIcon = true;
@@ -521,12 +473,12 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     const showshowTitle = false;
     const buttonClose = "Cerrar";
     const showPlu = true;
-    const plu = product.items[0].itemId;
-    this.plu = product.items[0].itemId;
-    this.business = this.id;
+    const plu = product.plu;
+    this.plu = product.plu;
+    const business = product.business;
     const home = true;
-    let teasers = product.items[0].sellers[0].commertialOffer.Teasers;
     const exito = true;
+    this.business = this.id;
 
     let dialogref = this.dialog.open(DialogComponent, {
       data: {
@@ -543,9 +495,11 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
         buttonClose,
         id,
         discount,
+        business,
         home,
         exito
       }
+
     });
 
     dialogref.afterDismissed().subscribe(() => {
@@ -553,20 +507,123 @@ public searchProductPaginate(term: any, order:string ='', from = 1, to = this.pa
     })
   }
 
-   /**
-   * Paginacion
-   * @param paginate
-   */
-
-  public pagination(paginate: any) {
-    this.pageIndex = paginate.pageIndex;
-    paginate.length = this.totalItems;
-    const from = paginate.pageSize * paginate.pageIndex + 1;
-    const to = paginate.pageSize * (paginate.pageIndex + 1);
-    this.searchProductPaginate(this.paginate, this.orderValue, from, to);
+  verMasProductos() {
+    this.mostrarProductos += 52; 
   }
 
+  public searchBiggyExito(term: any, order:string ='', page = 1, count = 1000) {
+    this.productsListExito = [];
+    if (term !== this.paginate) {
+      this.paginate = term;
+      this.pageIndex = 0;
+      this.mostrarProductos = 52;
+    }
+    
+    const params = { term, order, page, count };
+    this.subscription = this.sp.biggySearchExito(params).subscribe(
+      (resp: any) => {
+        this.productsListBiggy = resp.products;
+        this.productsListTransform = [...this.productsListBiggy];
+        
+        this.productsListTransform.map(resp=> {
 
+          if(!!resp.skus[0] &&  !!resp.skus[0].sellers[0]) {
+            this.sellerId = resp.skus[0].sellers[0].id;
+            this.sellerName = resp.skus[0].sellers[0].name;
+          } 
+
+            let object = {
+              title: resp.name,
+              plu: resp.id,
+              url: resp.url,
+              oldprice: resp.oldPrice,
+              price: resp.price,
+              image: resp.images[0],
+              seller: this.sellerId,
+              business: this.sellerName
+            }
+  
+            if((object.seller === '1' || object.seller === '10078') && object.oldprice !== 0) {
+              this.productsListExito.push(object);
+            }
+
+            return object;
+
+        });
+
+        this.totalItems = this.productsListExito.length;
+
+        if (this.productsListExito.length > 0) {
+          this.showResults = true;
+          this.showNotFound = false;
+        } else {
+          this.showNotFound = true;
+          this.showResults = false;
+        }
+      },
+      error => {
+        this.showNotFound = true;
+        this.showResults = false;
+      }
+    );
+  }
+
+  public searchBiggyCarulla(term: any, order:string ='', page = 1, count = 1000) {
+    if (term !== this.paginate) {
+      this.paginate = term;
+      this.pageIndex = 0;
+      this.productsListExito = []
+      this.mostrarProductos = 52;
+    }
+    
+    const params = { term, order, page, count };
+    this.subscription = this.sp.biggySearchCarulla(params).subscribe(
+      (resp: any) => {
+        this.productsListBiggy = resp.products;
+        this.productsListTransform = [...this.productsListBiggy];
+        
+        this.productsListTransform.map(resp=> {
+
+          if(!!resp.skus[0] &&  !!resp.skus[0].sellers[0]) {
+            this.sellerId = resp.skus[0].sellers[0].id;
+            this.sellerName = resp.skus[0].sellers[0].name;
+          } 
+
+            let object = {
+              title: resp.name,
+              plu: resp.id,
+              url: resp.url,
+              oldprice: resp.oldPrice,
+              price: resp.price,
+              image: resp.images[0],
+              seller: this.sellerId,
+              business: this.sellerName
+            }
+  
+            if((object.seller === '1' || object.seller === '10078') && object.oldprice !== 0) {
+              this.productsListExito.push(object);
+            }
+
+            return object;
+
+        });
+
+        this.totalItems = this.productsListExito.length;
+
+        if (this.productsListExito.length > 0) {
+          this.showResults = true;
+          this.showNotFound = false;
+        } else {
+          this.showNotFound = true;
+          this.showResults = false;
+        }
+      },
+      error => {
+        this.showNotFound = true;
+        this.showResults = false;
+      }
+    );
+  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

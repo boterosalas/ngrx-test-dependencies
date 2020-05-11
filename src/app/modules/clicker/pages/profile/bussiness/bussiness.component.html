@@ -7,63 +7,39 @@
 
 
 <div class="container">
-  
-  <app-search *ngIf="id=== '1' || id==='2'" (search)="searchProductPaginate($event)"></app-search>
 
-  <div class="order border-bottom-gray" fxLayout="row" fxLayoutAlign="flex-end center" *ngIf="showResults">
-        
-    <label class="mr-4">Ordenar por: </label>
-    <mat-form-field>
-      <mat-select value="OrderByTopSaleDESC">
-          <mat-option *ngFor="let option of orderOptions" [value]="option.value" (click)="order(option.value)">
-              <span>{{option.description}}</span></mat-option
-            >
-      </mat-select>
-    </mat-form-field>
-  
-  </div>
+  <app-search *ngIf="id=== '1'" (search)="searchBiggyExito($event)"></app-search>
+  <app-search *ngIf="id==='2'" (search)="searchBiggyCarulla($event)"></app-search>
 
   <div *ngIf="showResults">
-    <mat-paginator
-      class="mb-3"
-      id="paginator"
-      [length]="totalItems"
-      [pageSize]="pageSize"
-      [pageIndex]="pageIndex"
-      (page)="pagination($event)"
-    >
-    </mat-paginator>
+    <p class="f-18 mt-0">Clicker recuerda que los precios pueden variar al entrar al comercio.</p>
       <div fxLayout="row wrap"  fxLayoutGap="10px">
-          <app-product
-            *ngFor="let product of productsList;let i = index;"
-            class="product-exito"
-            fxLayout="column"
-            fxFlex="24"
-            fxFlex.xs="100"
-            fxFlex.sm="30"
-            id="productTitle{{ i }}"
-            btnid="btnLink{{ i }}"
-            [productName]="product.productName"
-            [discount]="product.items[0].sellers[0].commertialOffer.ListPrice"
-            [price]="product.items[0].sellers[0].commertialOffer.Price"
-            [image]="!!product.items[0].images ? product.items[0].images[0].imageUrl : '/assets/img/Na.svg'"
-            [alt]="product.productName"
-            [plu]="product.items[0].itemId"
-            textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
-            exito="true"
-            (infoProduct)="dataProduct(product);"
-          ></app-product>
+          
+          <ng-container class="mt-4" *ngFor="let product of productsListExito | slice:0:mostrarProductos ; let i = index">
+            <app-product 
+              class="product-exito"
+              fxLayout="column"
+              fxFlex="24"
+              fxFlex.xs="100"
+              fxFlex.sm="30"
+              id="productTitle{{ i }}"
+              btnid="btnLink{{ i }}"
+              [productName]="product.title"
+              [discount]="product.oldprice"
+              [price]="product.price"
+              [image]="!!product.image.value ? product.image.value : '/assets/img/Na.svg'"
+              [alt]="product.name"
+              [plu]="product.plu"
+              textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+              exito="true"
+              (infoProduct)="dataProduct(product);"
+            ></app-product>
+          </ng-container>
+          <span class="w-100" fxLayout="row" fxLayoutAlign="center center">
+            <button mat-raised-button color="orange" class="button-height f-18 bw" (click)="verMasProductos()" [disabled]=' mostrarProductos > totalItems'>Mostrar más</button>
+          </span>
+          
         </div>
-
-      <mat-paginator
-        class="mb-3 hide-pag"
-        id="paginator"
-        [length]="totalItems"
-        [pageSize]="pageSize"
-        [pageIndex]="pageIndex"
-        (page)="pagination($event)"
-      >
-      </mat-paginator>
     
   </div>
 

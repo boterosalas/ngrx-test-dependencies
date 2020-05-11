@@ -8,10 +8,45 @@ import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-mater
 import { ClickerModule } from '../../../clicker.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LinksService } from 'src/app/services/links.service';
+import { of } from 'rxjs/internal/observable/of';
 
 describe('LinksHistorialComponent', () => {
   let component: LinksHistorialComponent;
   let fixture: ComponentFixture<LinksHistorialComponent>;
+
+  const mockLinksService = jasmine.createSpyObj("LinksService", ["getLinkHistory"]);
+
+  let dataHistory = {
+    state: "Success", 
+    userMessage: "", 
+    objectResponse: {
+      total: 82,
+      listLinkHistory: [{
+        commission: 0,
+        date: "2020-05-08T16:25:56.977",
+        link: "https://webclickamdev.z13.web.core.windows.net/#/url/pe6etseatL",
+        productname: "100123688",
+        products: 0,
+        visits: 0,
+      }]
+    }
+  }
+
+  let historyModal = {
+    commission: 0,
+        date: "2020-05-08T16:25:56.977",
+        link: "https://webclickamdev.z13.web.core.windows.net/#/url/pe6etseatL",
+        productname: "100123688",
+        products: 0,
+        visits: 0
+  }
+
+  let pagination = {
+    pageIndex: 0,
+    pageSize:20,
+    length: 80
+  }
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -24,9 +59,13 @@ describe('LinksHistorialComponent', () => {
         ClickerModule,
         HttpClientTestingModule,
         BrowserAnimationsModule
+      ],
+      providers: [
+        { provide: LinksService, useValue: mockLinksService }
       ]
     })
     .compileComponents();
+    mockLinksService.getLinkHistory.and.returnValue(of(dataHistory));
   }));
 
   beforeEach(() => {
@@ -38,4 +77,34 @@ describe('LinksHistorialComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it("share mobile", () => {
+    component.share();
+    expect(component.urlshorten).not.toBeUndefined();
+  });
+
+  it('open modal history', () => {
+    component.dataHistory(historyModal);
+    expect(dataHistory).not.toBeUndefined();
+  });
+
+  it('order', () => {
+    component.order('ASC');
+    expect(mockLinksService.getLinkHistory).toHaveBeenCalled();
+  });
+  
+  it('pagination', () => {
+    component.pagination(pagination);
+    expect(mockLinksService.getLinkHistory).toHaveBeenCalled();
+  });
+  
+
+  it("copyInputMessage", () => {
+    const button = document.querySelector("#btnCopy");
+    button.dispatchEvent(new Event("click"));
+    const nativeElementInput = fixture.nativeElement;
+    const input = nativeElementInput.querySelector("input");
+    expect(input).not.toBeUndefined();
+  });
+
 });
