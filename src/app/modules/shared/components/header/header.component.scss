@@ -77,10 +77,11 @@ header {
 }
 
 .button10k{
-    line-height: 10px;
-    position: relative;
-    padding: 5px 15px;
-    margin-bottom: 3px;
+  line-height: 20px;
+  position: relative;
+  padding: 5px 15px;
+  margin-bottom: 3px;
+  height: 35px;
 }
 
 .border-right-white{
@@ -97,8 +98,20 @@ header {
 }
 
 @media screen and (max-width: 600px) {
-  // #logo-header{
-  //   padding-left: 30px;
-  // }
+  .button10k{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+  
+}
+
+
+@media screen and (max-width: 350px) {
+  .button10k{
+    font-size: 11px;
+    padding: 5px;
+  }
+  
 }
 

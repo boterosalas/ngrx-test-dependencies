@@ -20,7 +20,7 @@
                 <span *ngIf="auth.isLoggedIn()" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
                     <img src="assets/img/usuario-blue.svg" alt="userLogged" class="pl-2"> 
                     <h3>Hola, {{name}}</h3>
-                    <a [routerLink]="[ '/referidos']" *ngIf="(auth.getRole$ | async ) === 'CLICKER'" mat-raised-button color="orange" class="button10k" id="win-10k"><span>{{ 'GENERIC.WIN10K' | translate }}</span></a>
+                    <a [routerLink]="[ '/referidos']" *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'CLICKER'" mat-raised-button color="orange-button" class="button10k" id="win-10k"><span>{{ 'GENERIC.WIN10K' | translate }}</span></a>
                 </span>
             </span>
         </div>
