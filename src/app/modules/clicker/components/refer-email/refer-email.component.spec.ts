@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReferEmailComponent } from './refer-email.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ReferEmailComponent', () => {
   let component: ReferEmailComponent;
@@ -8,7 +12,14 @@ describe('ReferEmailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReferEmailComponent ]
+      declarations: [ ReferEmailComponent ],
+      imports: [
+        TranslateModule.forRoot(),
+        AppMaterialModule,
+        ReactiveFormsModule,
+        FormsModule,
+        BrowserAnimationsModule
+      ]
     })
     .compileComponents();
   }));
