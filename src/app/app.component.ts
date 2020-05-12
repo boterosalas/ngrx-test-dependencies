@@ -4,7 +4,7 @@ import {
   ViewChild,
   TemplateRef,
   HostListener,
-  OnDestroy
+  OnDestroy,
 } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { Router, NavigationStart } from "@angular/router";
@@ -14,19 +14,19 @@ import {
   style,
   transition,
   group,
-  animate
+  animate,
 } from "@angular/animations";
 import { UtilsService } from "./services/utils.service";
 import { Subscription, Observable } from "rxjs";
 import { AuthService } from "./services/auth.service";
 import { BnNgIdleService } from "bn-ng-idle";
 import Swal from "sweetalert2";
-import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { map, shareReplay } from 'rxjs/operators';
-import { UserService } from './services/user.service';
-import { TokenService } from './services/token.service';
-import { Meta } from '@angular/platform-browser';
-import { SwUpdate } from '@angular/service-worker'
+import { Breakpoints, BreakpointObserver } from "@angular/cdk/layout";
+import { map, shareReplay } from "rxjs/operators";
+import { UserService } from "./services/user.service";
+import { TokenService } from "./services/token.service";
+import { Meta } from "@angular/platform-browser";
+import { SwUpdate } from "@angular/service-worker";
 declare var dataLayer: any;
 // import { MessagingService } from "./shared/messaging.service";
 
@@ -45,9 +45,9 @@ declare var dataLayer: any;
           animate(
             "600ms ease-in-out",
             style({ transform: "translateY(-1000px)" })
-          )
-        ])
-      ])
+          ),
+        ]),
+      ]),
     ]),
     trigger("slideInOut", [
       state("in", style({ height: "*", opacity: 1 })),
@@ -59,9 +59,9 @@ declare var dataLayer: any;
           animate(
             "600ms ease-in-out",
             style({ transform: "translateX(1000px)" })
-          )
-        ])
-      ])
+          ),
+        ]),
+      ]),
     ]),
     trigger("simpleFadeAnimation", [
       // the "in" style determines the "resting" state of the element when it is visible.
@@ -71,12 +71,11 @@ declare var dataLayer: any;
       transition(":enter", [style({ opacity: 0 }), animate(600)]),
 
       // fade out when destroyed. this could also be written as transition('void => *')
-      transition(":leave", animate(600, style({ opacity: 0 })))
-    ])
-  ]
+      transition(":leave", animate(600, style({ opacity: 0 }))),
+    ]),
+  ],
 })
 export class AppComponent implements OnInit, OnDestroy {
-
   // isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Web)
   // .pipe(
   //   map(result => result.matches),
@@ -84,10 +83,9 @@ export class AppComponent implements OnInit, OnDestroy {
   // );
 
   @ViewChild("templateCardLogin, TemplateCardRegister, TemplateCardForgot", {
-    static: false
+    static: false,
   })
   template: TemplateRef<any>;
-
   isHome: boolean;
   internal: boolean;
   showLoginForm: boolean;
@@ -101,12 +99,13 @@ export class AppComponent implements OnInit, OnDestroy {
   showAnimation2: boolean;
   isLoggedIn: any;
   message;
-  firstName:string;
+  firstName: string;
   lastName: string;
   email: string;
-  userInfo:any;
+  userInfo: any;
   managedPayments: boolean;
   isEmployee: boolean;
+  role: String;
 
   constructor(
     private translate: TranslateService,
@@ -118,9 +117,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private user: UserService,
     private token: TokenService,
     private metaTagService: Meta,
-    public updates:SwUpdate
-  ) // private messagingService: MessagingService
-  {
+    private swUpdate: SwUpdate
+  ) {
     translate.setDefaultLang("es");
     translate.use("es");
 
@@ -128,46 +126,53 @@ export class AppComponent implements OnInit, OnDestroy {
       if (url instanceof NavigationStart) {
         dataLayer.push({
           event: "pageview",
-          virtualPageURL: url.url
+          virtualPageURL: url.url,
         });
       }
     });
 
     this.isLoggedIn = this.auth.isLoggedIn();
-
-    updates.available.subscribe(event => {
-      console.log('current version is', event.current);
-      console.log('available version is', event.available);
-    });
-
-    updates.activated.subscribe(event => {
-      console.log('old version was', event.previous);
-      console.log('new version is', event.current);
-    });
-
-    updates.available.subscribe(event => {
-        updates.activateUpdate().then(() => this.updateApp());
-    });
-
   }
 
-  updateApp(){
-    document.location.reload();
-    console.log("The app is updating right now");
-   }
-   
 
   ngOnInit() {
+
+    if (this.swUpdate.isEnabled) {
+      this.swUpdate.available.subscribe(()=> {
+        Swal.fire({
+          title: "¡Nueva versión disponible!",
+          text:
+            "Haz clic en el botón aceptar.",
+          type: "info",
+          allowEscapeKey: false,
+          allowOutsideClick: false,
+          confirmButtonText: "Aceptar",
+          confirmButtonClass: "update-success",
+          customClass:"paymentData"
+        }).then(() => {
+          window.location.reload();
+        });
+      });
+    }
+
     // const userId = 'user001';
     // this.messagingService.requestPermission(userId)
     // this.messagingService.receiveMessage()
     // this.message = this.messagingService.currentMessage
-    
+
     // this.email = this.userInfo.userName;
 
     this.metaTagService.addTags([
-      { name: 'keywords', content: 'clickam, exito.com, carulla.com, seguros, referidos, viajes, cashback ' },
-      { name: 'description', content: 'Clickam es una plataforma donde ganas comisiones por referir productos y servicios de negocios asociados, creando y compartiendo link con tus amigos en redes sociales o de manera digital, una vez estos realicen una compra a través de estos y sea verificada, clickam te pagara la comisión correspondiente al producto o servicio.' }
+      {
+        name: "keywords",
+        content:
+          "clickam, exito.com, carulla.com, seguros, referidos, viajes, cashback ",
+      },
+      {
+        name: "description",
+        content:
+          "Clickam es una plataforma donde ganas comisiones por referir productos y servicios de negocios asociados, creando y compartiendo link con tus amigos en redes sociales o de manera digital, una vez estos realicen una compra a través de estos y sea verificada, clickam te pagara la comisión correspondiente al producto o servicio.",
+      },
     ]);
 
     this.showAnimation1 = true;
@@ -176,33 +181,62 @@ export class AppComponent implements OnInit, OnDestroy {
     this.showRegisterForm = false;
     this.showForgotForm = false;
 
-    this.subscription = this.utils.change.subscribe(isOpen => {
+    this.subscription = this.utils.change.subscribe((isOpen) => {
       this.isOpen = isOpen;
       this.showRegisterForm = false;
       this.showLoginForm = true;
       this.showForgotForm = false;
     });
 
-    this.subscription = this.utils.changeMenu.subscribe(isOpenMenu => {
+    this.subscription = this.utils.changeMenu.subscribe((isOpenMenu) => {
       this.isOpenMenu = isOpenMenu;
     });
 
-    this.subscription = this.utils.changeRegister.subscribe(isOpenRegister => {
-      this.isOpen = isOpenRegister;
-      this.showRegisterForm = true;
-      this.showLoginForm = false;
-      this.showForgotForm = false;
-    });
+    this.subscription = this.utils.changeRegister.subscribe(
+      (isOpenRegister) => {
+        this.isOpen = isOpenRegister;
+        this.showRegisterForm = true;
+        this.showLoginForm = false;
+        this.showForgotForm = false;
+      }
+    );
 
-    this.subscription = this.utils.showForgotFormEmit.subscribe(isOpenForgot => {
-      this.isOpen = isOpenForgot;
-      this.showRegisterForm = false;
-      this.showLoginForm = false;
-      this.showForgotForm = true;
-    });
+    this.subscription = this.utils.showForgotFormEmit.subscribe(
+      (isOpenForgot) => {
+        this.isOpen = isOpenForgot;
+        this.showRegisterForm = false;
+        this.showLoginForm = false;
+        this.showForgotForm = true;
+      }
+    );
 
     this.windowWidth();
     this.getUserData();
+ 
+  }
+
+  public showModalPayment() {
+    if(this.role === 'CLICKER' && this.managedPayments === false && this.isEmployee === false ) {
+      Swal.fire({
+        title: "¡Registra tus datos bancarios!",
+        text:
+          "Recuerda que para recibir el pago de tus comisiones, debes registrar tus datos bancarios.",
+        type: "info",
+        showCancelButton: true,
+        showCloseButton: true,
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        confirmButtonText: "Ingresar datos",
+        cancelButtonText: "Ahora no",
+        confirmButtonClass: "payment-success",
+        cancelButtonClass: "payment-cancel",
+        customClass:"paymentData"
+      }).then((resp) => {
+        if (resp.value === true) {
+          this.router.navigate(["/mi-perfil", "pagos"]);
+        }
+      });
+    }
   }
 
   public hideLogin() {
@@ -231,18 +265,22 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   public getUserData() {
-    this.auth.getRole$.subscribe(role => {
-      if(role === 'CLICKER' || role === 'ADMIN') {
+    this.auth.getRole$.subscribe((role) => {
+      this.role = role;
+      if (role === "CLICKER" || role === "ADMIN") {
         this.email = this.token.userInfo().userName;
-        this.user.getuserdata().subscribe(user => {
-        this.firstName = user.firstNames;
-        this.lastName = user.lastNames;
-        this.managedPayments = user.managedPayments;
-        this.isEmployee = user.isEmployeeGrupoExito;
+        this.user.getuserdata().subscribe((user) => {
+          this.firstName = user.firstNames;
+          this.lastName = user.lastNames;
+          this.managedPayments = user.managedPayments;
+          this.isEmployee = user.isEmployeeGrupoExito;
+        });
+      }
+      setTimeout(() => {
+        this.showModalPayment();
+      }, 1000);
     });
-    }
-  })
-};
+  }
 
   onActivate(event) {
     let scrollToTop = window.setInterval(() => {
@@ -262,7 +300,6 @@ export class AppComponent implements OnInit, OnDestroy {
   @HostListener("over")
   hideMenu() {
     this.utils.hideMenu();
-    console.log("click");
   }
 
   @HostListener("window:resize", ["$event"])

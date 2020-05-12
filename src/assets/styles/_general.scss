@@ -504,6 +504,15 @@ table {
 
 @media screen and (min-width: 600px) {
 
+  .product-exito img {
+    height: 250px !important;
+    width: auto !important;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+}
+
+
   app-bussiness-card{
     min-height: 212px;
     min-width: 230px;
@@ -1305,4 +1314,27 @@ re-captcha {
 
 .text-underline {
   text-decoration: underline;
+}
+
+button.swal2-confirm.payment-success.swal2-styled {
+  background-color: $primary-color !important;
+  color: #fff !important;
+}
+
+button.swal2-cancel.payment-cancel.swal2-styled{
+  background: none !important;
+  color: $primary-color !important;
+}
+
+.paymentData .swal2-actions {
+  flex-direction: row-reverse;
+}
+
+.paymentData .swal2-icon.swal2-info {
+  border-color:$third-color;
+  color: $third-color;
+}
+
+.orange-spinner .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: $third-color !important;
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener, ViewChild, TemplateRef, OnDestroy } fr
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { ContentService } from 'src/app/services/content.service';
 import { UtilsService } from 'src/app/services/utils.service';
-import { distinctUntilChanged } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
@@ -14,6 +14,7 @@ import { LinksService } from 'src/app/services/links.service';
 import { TokenService } from 'src/app/services/token.service';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-bussiness',
@@ -47,10 +48,11 @@ export class BussinessComponent implements OnInit, OnDestroy {
   formLink: FormGroup;
   enableCopy: boolean = true;
   identification: string;
-  @ViewChild("templateCategories", { static: false })
-  templateCategories: TemplateRef<any>;
-  @ViewChild("templateDialogAssured", { static: false })
-  templateAssured: TemplateRef<any>;
+
+  @ViewChild("templateCategories", { static: false }) templateCategories: TemplateRef<any>;
+  @ViewChild("templateDialogAssured", { static: false }) templateAssured: TemplateRef<any>;
+  @ViewChild("templateEC", { static: false }) templateEC: TemplateRef<any>;
+
   urlshorten: string = '';
   url: string;
   classButtonCopy: string;
@@ -68,6 +70,23 @@ export class BussinessComponent implements OnInit, OnDestroy {
   acceptTermsDeliver: boolean;
   urlPlaystore:string = 'https://play.google.com/store/apps/details?id=com.sewayplus';
   urlAppstore:string = 'https://apps.apple.com/co/app/seway/id1414489414';
+
+  paginate: string;
+  pageIndex: number = 0;
+  pageTo: number = 50;
+  pageSize: number = 52;
+  productsList: Array<any>;
+  productsListBiggy: Array<any>;
+  productsListTransform: Array<any>;
+  productsListExito = [];
+  totalItems: number;
+  showResults: boolean;
+  showNotFound: boolean;
+  orderOptions: any;
+  orderValue:string;
+  sellerId:string;
+  mostrarProductos:number = 52;
+  sellerName: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -98,6 +117,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.getDate();
     this.getContentBussiness();
     this.getUserData();
     if(localStorage.getItem("ACCESS_TOKEN") !== null ) {
@@ -119,8 +139,21 @@ export class BussinessComponent implements OnInit, OnDestroy {
       acceptTerms: [null, Validators.required]
     })
 
+    this.orderOptions = [
+      {value: 'OrderByTopSaleDESC', description: 'Más Vendidos'},
+      {value: 'OrderByReleaseDateDESC', description: 'Más recientes'},
+      {value: 'OrderByPriceDESC', description: 'Mayor precio primero'},
+      {value: 'OrderByNameASC', description: 'Productos de la A-Z'},
+      {value: 'OrderByNameDESC', description: 'Productos de la Z-A'},
+    ]
+
   }
 
+  // public order(option:string) {
+  //   this.pageIndex = 0;
+  //   this.searchProductPaginate(this.paginate, option, 1 , this.pageTo);
+  //   this.orderValue = option;
+  // }
 
 
   public getContentBussiness() {
@@ -155,8 +188,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.subscription = this.links
       .saveLink(dataSaveLink)
       .subscribe((resp: ResponseService) => {
-        let splice = resp.objectResponse.link.split('//');
-        this.urlshorten = 'https://'+ splice[1];
+        this.urlshorten = resp.objectResponse.link
         this.enableCopy = false;
         if (param === "assured") {
           if (resp.state === "Error") {
@@ -410,6 +442,188 @@ export class BussinessComponent implements OnInit, OnDestroy {
     }
   }
 
+
+ /**
+   * Metodo para abrir la modal con el producto seleccionado del exito
+   * @param product
+   */
+
+  public dataProduct(product) {
+    this.tokenInfo = this.token.userInfo();
+    this.idClicker = this.tokenInfo.idclicker;
+    this.reference = false;
+    this.urlshorten = '';
+    const productUrl = product.url;
+    this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=${this.idClicker}`;
+    this.idCustomerForm.controls.identification.setValue("");
+    this.idCustomerForm.reset();
+    setTimeout(() => {
+      this.saveLink();
+    }, 500);
+    this.formShareLink();
+    const title = product.title;
+    const id = product.plu;
+    const img = product.image.value;
+    const price = product.price;
+    const discount = product.oldprice;
+    const template = this.templateEC;
+    const showClose = false;
+    const showCloseIcon = true;
+    const showProduct = true;
+    const showshowTitle = false;
+    const buttonClose = "Cerrar";
+    const showPlu = true;
+    const plu = product.plu;
+    this.plu = product.plu;
+    const business = product.business;
+    const home = true;
+    const exito = true;
+    this.business = this.id;
+
+    let dialogref = this.dialog.open(DialogComponent, {
+      data: {
+        title,
+        template,
+        showClose,
+        showCloseIcon,
+        img,
+        plu,
+        price,
+        showProduct,
+        showPlu,
+        showshowTitle,
+        buttonClose,
+        id,
+        discount,
+        business,
+        home,
+        exito
+      }
+
+    });
+
+    dialogref.afterDismissed().subscribe(() => {
+      this.enableCopy = true;
+    })
+  }
+
+  verMasProductos() {
+    this.mostrarProductos += 52; 
+  }
+
+  public searchBiggyExito(term: any, order:string ='', page = 1, count = 1000) {
+    this.productsListExito = [];
+    if (term !== this.paginate) {
+      this.paginate = term;
+      this.pageIndex = 0;
+      this.mostrarProductos = 52;
+    }
+    
+    const params = { term, order, page, count };
+    this.subscription = this.sp.biggySearchExito(params).subscribe(
+      (resp: any) => {
+        this.productsListBiggy = resp.products;
+        this.productsListTransform = [...this.productsListBiggy];
+        
+        this.productsListTransform.forEach(resp=> {
+
+          if(!!resp.skus[0] &&  !!resp.skus[0].sellers[0]) {
+            this.sellerId = resp.skus[0].sellers[0].id;
+            this.sellerName = resp.skus[0].sellers[0].name;
+          } 
+
+            let object = {
+              title: resp.name,
+              plu: resp.id,
+              url: resp.url,
+              oldprice: resp.oldPrice,
+              price: resp.price,
+              image: resp.images[0],
+              seller: this.sellerId,
+              business: this.sellerName
+            }
+  
+            if((object.seller === '1' || object.seller === '10078') && object.oldprice !== 0) {
+              this.productsListExito.push(object);
+            }
+
+            return object;
+
+        });
+
+        this.totalItems = this.productsListExito.length;
+
+        if (this.productsListExito.length > 0) {
+          this.showResults = true;
+          this.showNotFound = false;
+        } else {
+          this.showNotFound = true;
+          this.showResults = false;
+        }
+      },
+      error => {
+        this.showNotFound = true;
+        this.showResults = false;
+      }
+    );
+  }
+
+  public searchBiggyCarulla(term: any, order:string ='', page = 1, count = 1000) {
+    if (term !== this.paginate) {
+      this.paginate = term;
+      this.pageIndex = 0;
+      this.productsListExito = []
+      this.mostrarProductos = 52;
+    }
+    
+    const params = { term, order, page, count };
+    this.subscription = this.sp.biggySearchCarulla(params).subscribe(
+      (resp: any) => {
+        this.productsListBiggy = resp.products;
+        this.productsListTransform = [...this.productsListBiggy];
+        
+        this.productsListTransform.forEach(resp=> {
+
+          if(!!resp.skus[0] &&  !!resp.skus[0].sellers[0]) {
+            this.sellerId = resp.skus[0].sellers[0].id;
+            this.sellerName = resp.skus[0].sellers[0].name;
+          } 
+
+            let object = {
+              title: resp.name,
+              plu: resp.id,
+              url: resp.url,
+              oldprice: resp.oldPrice,
+              price: resp.price,
+              image: resp.images[0],
+              seller: this.sellerId,
+              business: this.sellerName
+            }
+  
+            if((object.seller === '1' || object.seller === '10078') && object.oldprice !== 0) {
+              this.productsListExito.push(object);
+            }
+
+            return object;
+
+        });
+
+        this.totalItems = this.productsListExito.length;
+
+        if (this.productsListExito.length > 0) {
+          this.showResults = true;
+          this.showNotFound = false;
+        } else {
+          this.showNotFound = true;
+          this.showResults = false;
+        }
+      },
+      error => {
+        this.showNotFound = true;
+        this.showResults = false;
+      }
+    );
+  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

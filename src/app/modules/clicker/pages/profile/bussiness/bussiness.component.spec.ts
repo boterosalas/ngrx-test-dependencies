@@ -92,6 +92,9 @@ describe("BussinessComponent", () => {
     }
   };
 
+ 
+
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [],
@@ -136,6 +139,7 @@ describe("BussinessComponent", () => {
     mockUserService.getuserdata.and.returnValue(of(dataUserC));
     mockUserService.getShortUrl.and.returnValue(of('http://tynyurl.com/12kusw'));
     mockLinksService.saveLink.and.returnValue(of(resp));
+    
   }));
 
   beforeEach(() => {
@@ -230,5 +234,27 @@ describe("BussinessComponent", () => {
     const input = nativeElementInput.querySelector("input");
     expect(input).not.toBeUndefined();
   });
+
+  // it("search products", () => {
+  //   component.searchProductPaginate("cocina");
+  //   fixture.detectChanges();
+  //   expect(mockContentService.getProductsPagination).toHaveBeenCalled();
+  // });
+
+  // it("paginate", () => {
+  //   const dataPaginate = {
+  //     previousPageIndex: 0,
+  //     pageIndex: 1,
+  //     pageSize: 5,
+  //     length: 10
+  //   };
+  //   component.pagination(dataPaginate);
+  //   expect(mockContentService.getProductsPagination).toHaveBeenCalled();
+  // });
+  
+  // it("search products not found", () => {
+  //   component.searchProductPaginate("playstation");
+  //   expect(mockContentService.getProductsPagination).toHaveBeenCalled();
+  // });
   
 });
