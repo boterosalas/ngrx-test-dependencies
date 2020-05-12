@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MyRefersComponent } from './my-refers.component';
+import { TableReferComponent } from './table-refer.component';
 
-describe('MyRefersComponent', () => {
-  let component: MyRefersComponent;
-  let fixture: ComponentFixture<MyRefersComponent>;
+describe('TableReferComponent', () => {
+  let component: TableReferComponent;
+  let fixture: ComponentFixture<TableReferComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MyRefersComponent ]
+      declarations: [ TableReferComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MyRefersComponent);
+    fixture = TestBed.createComponent(TableReferComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

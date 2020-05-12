@@ -33,7 +33,7 @@ import { TableDetailComissionComponent } from './components/table-detail-comissi
 import { ReferComponent } from './pages/profile/refer/refer.component';
 import { ReferEmailComponent } from './components/refer-email/refer-email.component';
 import { ReferShareComponent } from './components/refer-share/refer-share.component';
-import { MyRefersComponent } from './components/my-refers/my-refers.component';
+import { TableReferComponent } from './components/table-refer/table-refer.component';
 
 const routes: Routes = [
  
@@ -91,7 +91,7 @@ const routes: Routes = [
     ReferComponent,
     ReferEmailComponent,
     ReferShareComponent,
-    MyRefersComponent
+    TableReferComponent
   ],
   imports: [
     CommonModule,

@@ -11,8 +11,15 @@ title="Referir"
             <ng-template mat-tab-label>
                  <span class="gtmClicAcademyClicExitocom">{{'REFER.REFER' | translate}}</span>
             </ng-template>
-            <app-refer-email (email)="sendEmail($event)"></app-refer-email>
-            <app-refer-share (urlClicker)="copyInputMessage($event)"></app-refer-share>
+            <p>{{'REFER.REFER_WIN' | translate}}</p>
+            <div fxLayout.gt-xs="row" fxLayout="column" fxLayoutGap.gt-xs="30px">
+                <span fxLayout="column" fxFlex.gt-xs="35">
+                    <app-refer-email ngClass.gt-xs="box-shadow" (email)="sendEmail($event)"></app-refer-email>
+                </span>
+                <span fxLayout="column" fxFlex.gt-xs="35">
+                    <app-refer-share ngClass.gt-xs="box-shadow" (urlClicker)="copyInputMessage($event)" (shareMobile)="share($event)"></app-refer-share>
+                </span>
+            </div>
         </mat-tab>
 
         <!-- MY REFERS -->
@@ -20,7 +27,7 @@ title="Referir"
             <ng-template mat-tab-label>
                  <span class="gtmClicAcademyClicExitocom">{{'REFER.MY_REFERS' | translate}}</span>
             </ng-template>
-            <app-my-refers></app-my-refers>
+            <app-table-refer></app-table-refer>
         </mat-tab>
     
       </mat-tab-group>

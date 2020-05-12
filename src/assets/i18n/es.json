@@ -360,12 +360,17 @@
     "MY_REFERS": "Mis referencias",
     "GUESTS":"INVITADOS",
     "REGISTERED":"REGISTRADOS",
+    "CUALIFIED":"CALIFICADO",
     "SEND_INVITATION":"Enviar invitación",
     "REFER_WIN":"Por cada referido cualificado te vamos a regalar 10K",
     "EMAIL":"Invita a tus amigos por correo",
     "EMAIL_CONTACT":"Ingresa el correo de tu contacto",
     "SHARE":"Comparte tu invitación",
-    "COPY":"Copiar"
+    "COPY":"Copiar",
+    "INVITE_FRIENDS":"Invita a tus amigos por correo",
+    "SHARE_FRIENDS":"Comparte tu link con tus amigos",
+    "MY_REFERS2":"Mis Referidos",
+    "ACTIVITY":"Revisa la actividad de tus referidos, para que puedas hacerles seguimiento."
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { NgNavigatorShareService } from 'ng-navigator-share';
 
 @Component({
   selector: 'app-refer',
@@ -9,10 +10,15 @@ import { MatSnackBar } from '@angular/material';
 })
 export class ReferComponent implements OnInit {
 
+  private ngNavigatorShareService: NgNavigatorShareService;
+
   constructor(
     private router: Router,
     private _snackBar: MatSnackBar,
-  ) { }
+    ngNavigatorShareService: NgNavigatorShareService
+  ) { 
+    this.ngNavigatorShareService = ngNavigatorShareService;
+  }
 
   ngOnInit() {
   }
@@ -43,6 +49,19 @@ export class ReferComponent implements OnInit {
   private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 5000
+    });
+  }
+
+  share(url:string) {
+    this.ngNavigatorShareService.share({
+      title: '',
+      text: '',
+      url: url
+    }).then( (response) => {
+      console.log(response);
+    })
+    .catch( (error) => {
+      console.log(error);
     });
   }
 
