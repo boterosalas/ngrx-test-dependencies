@@ -30,6 +30,7 @@ import { NgCircleProgressModule } from "ng-circle-progress";
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { AuditComponent } from './pages/audit/audit.component';
 import { BusinessComponent } from './pages/business/business.component';
+import { RefersComponent } from './pages/refers/refers.component';
 
 const routes: Routes = [
   {
@@ -71,6 +72,14 @@ const routes: Routes = [
     data: {
       role: "ADMIN"
     },
+  },
+  {
+    path: "referidos-admin",
+    component: RefersComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN"
+    },
   }
 ];
 
@@ -89,7 +98,8 @@ const routes: Routes = [
     CardDashboardComponent,
     CardDashboardInfoComponent,
     AuditComponent,
-    BusinessComponent
+    BusinessComponent,
+    RefersComponent
   ],
   imports: [
     CommonModule,

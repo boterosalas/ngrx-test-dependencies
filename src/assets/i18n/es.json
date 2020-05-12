@@ -370,7 +370,8 @@
     "INVITE_FRIENDS":"Invita a tus amigos por correo",
     "SHARE_FRIENDS":"Comparte tu link con tus amigos",
     "MY_REFERS2":"Mis Referidos",
-    "ACTIVITY":"Revisa la actividad de tus referidos, para que puedas hacerles seguimiento."
+    "ACTIVITY":"Revisa la actividad de tus referidos, para que puedas hacerles seguimiento.",
+    "REFERED":"Referidos"
   }
 
 }
