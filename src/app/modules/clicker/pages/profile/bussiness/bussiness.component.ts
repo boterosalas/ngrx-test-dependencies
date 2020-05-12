@@ -517,6 +517,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
       this.paginate = term;
       this.pageIndex = 0;
       this.mostrarProductos = 52;
+      // this.productsListExito = [];
     }
     
     const params = { term, order, page, count };
@@ -569,6 +570,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   }
 
   public searchBiggyCarulla(term: any, order:string ='', page = 1, count = 1000) {
+    this.productsListExito = [];
     if (term !== this.paginate) {
       this.paginate = term;
       this.pageIndex = 0;
