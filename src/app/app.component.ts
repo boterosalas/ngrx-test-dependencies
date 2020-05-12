@@ -220,7 +220,7 @@ export class AppComponent implements OnInit, OnDestroy {
       Swal.fire({
         title: "¡Registra tus datos bancarios!",
         text:
-          "Recuerda que para obtener tus pagos es necesario completar tu registro.",
+          "Recuerda que para recibir el pago de tus comisiones, debes registrar tus datos bancarios.",
         type: "info",
         showCancelButton: true,
         showCloseButton: true,
