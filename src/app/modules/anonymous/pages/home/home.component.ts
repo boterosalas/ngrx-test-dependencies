@@ -101,6 +101,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       else {
         if(params.code) {
           this.code = params.code;
+          this.openRegister();
         }
         else {
           router.navigate(["/"]);
