@@ -77,6 +77,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild("templateBusiness", { static: false })
   templateBusiness: TemplateRef<any>;
   categories = [];
+  managedPayments: boolean;
+  role: String;
 
   constructor(
     public router: Router,
@@ -124,11 +126,16 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public getUserData() {
     this.subscription = this.auth.getRole$.subscribe((role) => {
+      this.role = role;
       if (role === "CLICKER" || role === "ADMIN") {
         this.subscription = this.user.getuserdata().subscribe((user) => {
           this.isEmployee = user.isEmployeeGrupoExito;
+          this.managedPayments = user.managedPayments;
         });
       }
+      setTimeout(() => {
+        this.showModalPayment();
+      }, 1000);
     });
   }
 
@@ -338,4 +345,30 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
       );
   }
+
+  public showModalPayment() {
+    if(this.role === 'CLICKER' && this.managedPayments === false && this.isEmployee === false ) {
+      Swal.fire({
+        title: "¡Registra tus datos bancarios!",
+        text:
+          "Recuerda que para recibir el pago de tus comisiones, debes registrar tus datos bancarios.",
+        type: "info",
+        showCancelButton: true,
+        showCloseButton: true,
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        confirmButtonText: "Ingresar datos",
+        cancelButtonText: "Ahora no",
+        confirmButtonClass: "payment-success",
+        cancelButtonClass: "payment-cancel",
+        customClass:"paymentData"
+      }).then((resp) => {
+        if (resp.value === true) {
+          this.router.navigate(["/mi-perfil", "pagos"]);
+        }
+      });
+    }
+  }
+
+
 }
