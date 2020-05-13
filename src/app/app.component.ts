@@ -215,29 +215,6 @@ export class AppComponent implements OnInit, OnDestroy {
  
   }
 
-  public showModalPayment() {
-    if(this.role === 'CLICKER' && this.managedPayments === false && this.isEmployee === false ) {
-      Swal.fire({
-        title: "¡Registra tus datos bancarios!",
-        text:
-          "Recuerda que para recibir el pago de tus comisiones, debes registrar tus datos bancarios.",
-        type: "info",
-        showCancelButton: true,
-        showCloseButton: true,
-        allowEscapeKey: false,
-        allowOutsideClick: false,
-        confirmButtonText: "Ingresar datos",
-        cancelButtonText: "Ahora no",
-        confirmButtonClass: "payment-success",
-        cancelButtonClass: "payment-cancel",
-        customClass:"paymentData"
-      }).then((resp) => {
-        if (resp.value === true) {
-          this.router.navigate(["/mi-perfil", "pagos"]);
-        }
-      });
-    }
-  }
 
   public hideLogin() {
     this.isOpen = !this.isOpen;
@@ -276,9 +253,6 @@ export class AppComponent implements OnInit, OnDestroy {
           this.isEmployee = user.isEmployeeGrupoExito;
         });
       }
-      setTimeout(() => {
-        this.showModalPayment();
-      }, 1000);
     });
   }
 
