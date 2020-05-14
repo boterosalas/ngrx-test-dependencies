@@ -42,7 +42,7 @@
               id="departmentCode"
               [matAutocomplete]="auto"
               formControlName="department"
-              autocomplete="off"
+              autocomplete="nope"
               (blur)="checkDepartment()"
             />
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayDepartment">
@@ -107,7 +107,7 @@
               id="city"
               [matAutocomplete]="city"
               formControlName="city"
-              autocomplete="off"
+              autocomplete="nope"
               (blur)="checkCity()"
             />
             <mat-autocomplete #city="matAutocomplete">
