@@ -87,6 +87,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   sellerId:string;
   mostrarProductos:number = 52;
   sellerName: string;
+  showReferenceButton:boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -117,6 +118,10 @@ export class BussinessComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    if(this.title === 'movil-exito') {
+      this.showReferenceButton = false;
+    }
+
     this.getDate();
     this.getContentBussiness();
     this.getUserData();
