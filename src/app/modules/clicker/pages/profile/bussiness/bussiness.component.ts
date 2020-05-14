@@ -87,6 +87,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   sellerId:string;
   mostrarProductos:number = 52;
   sellerName: string;
+  showReferenceButton:boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -117,6 +118,10 @@ export class BussinessComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    if(this.title === 'movil-exito') {
+      this.showReferenceButton = false;
+    }
+
     this.getDate();
     this.getContentBussiness();
     this.getUserData();
@@ -455,10 +460,10 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.urlshorten = '';
     let productUrl = product.url;
     if(this.id === '1') {
-      this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=${this.idClicker}/p`;
+      this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=${this.idClicker}`;
     } 
     if(this.id === '2') {
-      this.url = `https://www.carulla.com${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=${this.idClicker}/p`;
+      this.url = `https://www.carulla.com${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=${this.idClicker}`;
     } 
     this.idCustomerForm.controls.identification.setValue("");
     this.idCustomerForm.reset();
