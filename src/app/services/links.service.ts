@@ -31,6 +31,7 @@ export class LinksService {
   apiUsers = "Reports/getUsers";
   insurance = "Insurance/ProcessFiles";
   apiSaveLink = "Link/SaveLink";
+  apiSaveLinkRefered = "link/savelinkreferred";
   apiPostReferrrals = "Link/downloadReferrals";
   apiGetTotalLinks = "Link/GetTotalLinksGenerated";
   apiGetUrl = "link/geturl";
@@ -55,6 +56,20 @@ export class LinksService {
   public saveLink(SaveLink: any) {
     return this.http
       .post(`${this.url + this.apiSaveLink}`, SaveLink, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        )
+      );
+  }
+
+  public saveLinkRefer(SaveLink: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveLinkRefered}`, SaveLink, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(

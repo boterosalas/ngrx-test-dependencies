@@ -12,11 +12,10 @@ export class ReferShareComponent implements OnInit {
   @Output() urlClicker = new EventEmitter();
   @Output() shareMobile = new EventEmitter();
   @ViewChild("linkInput", { static: false }) copy: ElementRef<any>;
+  @Input() urlValue:string;
 
-
-  
-  formLink: FormGroup;
   url:string;
+  formLink: FormGroup;
   tokenInfo: any;
   idClicker: string;
 
@@ -27,9 +26,8 @@ export class ReferShareComponent implements OnInit {
 
   ngOnInit() {
     this.generateUrl();
+    this.urlValue = this.formLink.controls.link.value;
   }
-
-
 
   public generateUrl(){
     this.tokenInfo = this.token.userInfo();

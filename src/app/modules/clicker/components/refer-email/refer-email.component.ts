@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -36,6 +36,10 @@ export class ReferEmailComponent implements OnInit {
 
   public sendEmail() {
     this.email.emit(this.referForm.controls.email.value);
+    setTimeout(() => {
+      this.referForm.reset();
+      this.referForm.controls.email.setErrors({'required': false});
+    }, 500);
   }
 
 }
