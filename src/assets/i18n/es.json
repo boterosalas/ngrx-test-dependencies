@@ -66,7 +66,8 @@
     "INTRODUCE_EMAIL": "Ingrese un correo",
     "INTRODUCE_PASSWORD": "Ingrese una contraseña",
     "DESCRIPTION": "Si todavía no tienes una cuenta puedes",
-    "REGISTER": "Registrarse"
+    "REGISTER": "Registrarse",
+    "ACTIVATE": "Reenviar código de activación"
   },
   "REGISTER": {
     "ACCEPT": "¿Acepta los términos y condiciones y políticas de privacidad de Clickam?",
@@ -99,6 +100,9 @@
   "FORGOTPASSWORD": {
     "FORGOT_PASSWORD": "Recuperar contraseña",
     "ENTER_EMAIL": "Ingresa tu correo electrónico registrado para recuperar tu contraseña"
+  },
+  "ACTIVATE": {
+    "TEXT": "¿Aún no te ha llegado tu correo de activación?"
   },
   "RECOVERPASSWORD": {
     "RECOVER_PASSWORD": "Recuperar contraseña",

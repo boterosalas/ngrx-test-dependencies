@@ -7,19 +7,33 @@
         <!-- guest Column -->
         <ng-container matColumnDef="guest">
           <th mat-header-cell *matHeaderCellDef> {{ 'REFER.GUESTS' | translate }} </th>
-          <td mat-cell *matCellDef="let element"> {{element.guest}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
         </ng-container>
     
         <!-- register Column -->
         <ng-container matColumnDef="register">
           <th mat-header-cell *matHeaderCellDef> {{ 'REFER.REGISTERED' | translate }} </th>
-          <td mat-cell *matCellDef="let element"> {{element.register}}</td>
+          <td mat-cell *matCellDef="let element">
+            <span *ngIf="element.registered === false">
+              No
+            </span>
+            <span *ngIf="element.registered === true">
+              Si
+            </span>
+          </td>
         </ng-container>
     
         <!-- cualified Column -->
         <ng-container matColumnDef="cualified">
           <th mat-header-cell *matHeaderCellDef> {{ 'REFER.CUALIFIED' | translate }} </th>
-          <td mat-cell *matCellDef="let element"> {{element.cualified}} </td>
+          <td mat-cell *matCellDef="let element">
+            <span *ngIf="element.qualified === false">
+              Pendiente
+            </span>
+            <span *ngIf="element.qualified === true">
+              Calificado
+            </span>
+          </td>
         </ng-container>
     
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

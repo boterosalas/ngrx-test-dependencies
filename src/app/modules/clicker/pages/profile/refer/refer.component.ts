@@ -6,7 +6,7 @@ import {
   OnDestroy,
 } from "@angular/core";
 import { Router } from "@angular/router";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar, MatPaginator, MatTableDataSource } from "@angular/material";
 import { NgNavigatorShareService } from "ng-navigator-share";
 import { LinksService } from "src/app/services/links.service";
 import { Subscription } from "rxjs";
@@ -25,7 +25,18 @@ export class ReferComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
 
   @ViewChild("share", { static: false }) refer: any;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
   urlClicker: string;
+  dataSource: any;
+  pageIndex: number = 0;
+  pageSize: number = 20;
+  pageTo: number = 20;
+  totalItems: number;
+  paginate: string;
+  orderBy: string;
+  from: any;
+  to: any;
 
   constructor(
     private router: Router,
@@ -36,7 +47,9 @@ export class ReferComponent implements OnInit, OnDestroy {
     this.ngNavigatorShareService = ngNavigatorShareService;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // this.getReferrals();
+  }
 
   ngAfterViewInit() {
     this.urlClicker = this.refer.urlValue;
@@ -117,6 +130,15 @@ export class ReferComponent implements OnInit, OnDestroy {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  public getReferrals(from = 1, to = this.pageTo) {
+    let params = { from, to };
+    this.subscription = this.link.getReferrals(params).subscribe(resp => {
+      console.log(resp);
+      // this.dataSource = new MatTableDataSource<any>(resp.listLinkHistory);
+      // this.totalItems = resp.total;
+    });
   }
 
   ngOnDestroy(): void {
