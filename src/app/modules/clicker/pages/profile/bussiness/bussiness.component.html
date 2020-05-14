@@ -304,6 +304,7 @@
           </button>
 
           <button
+            *ngIf="showReferenceButton"
             mat-button
             id="refer"
             color="orange"
@@ -380,6 +381,7 @@
       </button>
 
       <button
+        *ngIf="showReferenceButton"
         mat-button
         ngClass="gtmrs  mb-2 mt-2 {{classButtonRefer}}"
         (click)="showReference()"
