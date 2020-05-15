@@ -23,17 +23,16 @@ export class ActivateAccountFormComponent implements OnInit, OnDestroy {
     private utils: UtilsService
   ) {}
   
-  private subscription: Subscription = new Subscription();
+  text:any;
   emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
   activateForm: FormGroup;
-  text:any;
+  private subscription: Subscription = new Subscription();
 
-  swalOptSuccess: Object = {
-      title: "Se ha enviado un email",
-      text: this.text,
-      confirmButtonText: "Aceptar",
-      confirmButtonClass: 'accept-forgot-alert-success',
-      type: "success"
+  swalOptInvalid: Object = {
+    title: this.text,
+    confirmButtonText: "Aceptar",
+    confirmButtonClass: 'accept-forgot-alert-invalid',
+    type: "error"
   }
 
   swalOptError: Object = {
@@ -44,12 +43,15 @@ export class ActivateAccountFormComponent implements OnInit, OnDestroy {
     type: "error"
   }
 
-  swalOptInvalid: Object = {
-    title: this.text,
+  swalOptSuccess: Object = {
+    title: "Se ha enviado un email",
+    text: this.text,
     confirmButtonText: "Aceptar",
-    confirmButtonClass: 'accept-forgot-alert-invalid',
-    type: "error"
-  }
+    confirmButtonClass: 'accept-forgot-alert-success',
+    type: "success"
+}
+
+ 
 
   ngOnInit() {
     this.activateForm = this.fb.group({
@@ -64,17 +66,20 @@ export class ActivateAccountFormComponent implements OnInit, OnDestroy {
     });
   }
 
+  @HostListener('over')
+  hideActivate() {
+    this.utils.showloginForm();
+  }
+
   /**
    * Metodo para enviar correo cuando se olvido la contreña
    * @param email  recibe el nombre del usuario que es el correo.
    */
 
-  public forgotPassword() {
-    this.loading.show();
+  public activateAccount() {
     let email = this.activateForm.controls.email.value;
     this.subscription = this.forgot.forgotPassword(email).subscribe(
       (resp: ResponseService) => {
-        this.loading.hide();
         if (resp.state === "Success") {
           this.swalOptSuccess = {...this.swalOptSuccess, text: resp.userMessage};
           Swal.fire(this.swalOptSuccess).then(()=> {
@@ -95,10 +100,7 @@ export class ActivateAccountFormComponent implements OnInit, OnDestroy {
     );
   }
 
-  @HostListener('over')
-  hideActivate() {
-    this.utils.showloginForm();
-  }
+ 
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
