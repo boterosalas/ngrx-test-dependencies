@@ -158,6 +158,17 @@ body {
   }
 }
 
+.mat-border-button{
+    background: none;
+    color: $primary-color;
+    border: 1px solid !important;
+}
+
+.mat-orange-button{
+  background: $third-color;
+  color: #ffffff;
+}
+
 .orange {
   color: $primary-color;
 }

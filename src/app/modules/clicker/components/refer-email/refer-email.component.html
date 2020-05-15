@@ -1,0 +1,36 @@
+<h3 class="border-bottom-orange-init m-0" fxHide.xs="true">{{ 'REFER.INVITE_FRIENDS' | translate }}</h3>
+
+<form class="email-container w-100" [formGroup]="referForm">
+    <mat-form-field class="w-100">
+      <input
+        matInput
+        id="email"
+        type="email"
+        placeholder="{{ 'REFER.EMAIL_CONTACT' | translate }}"
+        formControlName="email"
+        spacebar
+        required
+      />
+      <mat-error id="introduceEmail" *ngIf="referForm.controls.email.invalid && referForm.controls.email.errors.required">{{
+        "LOGIN.INTRODUCE_EMAIL" | translate
+      }}</mat-error>
+      <mat-error id="invalidEmail" *ngIf="referForm.controls.email.invalid && referForm.controls.email.errors.pattern">{{
+        "LOGIN.INVALID_EMAIL" | translate
+      }}</mat-error>
+    </mat-form-field>
+  
+  <div class="text-center">
+      <button
+      class="button button-100 button-height f-16"
+      mat-raised-button
+      id="sendEmail"
+      color="border-button"
+      (click)="sendEmail()"
+      [disabled]="!referForm.valid"
+    >
+     <span>{{ "REFER.SEND_INVITATION" | translate }}</span> 
+    </button>
+    
+  </div>
+   
+  </form>
