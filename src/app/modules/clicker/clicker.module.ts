@@ -30,6 +30,10 @@ import { SliderDeliverComponent } from './components/slider-deliver/slider-deliv
 import { LinksHistorialComponent } from './pages/profile/links-historial/links-historial.component';
 import { TableHistoricalLinksComponent } from './components/table-historical-links/table-historical-links.component';
 import { TableDetailComissionComponent } from './components/table-detail-comission/table-detail-comission.component';
+import { ReferComponent } from './pages/profile/refer/refer.component';
+import { ReferEmailComponent } from './components/refer-email/refer-email.component';
+import { ReferShareComponent } from './components/refer-share/refer-share.component';
+import { TableReferComponent } from './components/table-refer/table-refer.component';
 
 const routes: Routes = [
  
@@ -57,6 +61,11 @@ const routes: Routes = [
     path: "historial-links",
     component: LinksHistorialComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: "referidos",
+    component: ReferComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
@@ -78,7 +87,11 @@ const routes: Routes = [
     SliderDeliverComponent,
     LinksHistorialComponent,
     TableHistoricalLinksComponent,
-    TableDetailComissionComponent
+    TableDetailComissionComponent,
+    ReferComponent,
+    ReferEmailComponent,
+    ReferShareComponent,
+    TableReferComponent
   ],
   imports: [
     CommonModule,

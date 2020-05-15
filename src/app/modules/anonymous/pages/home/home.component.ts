@@ -97,10 +97,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscription = this.route.queryParams.subscribe((params) => {
       if (params.email) {
         this.email = params.email;
-
         this.activateUser();
-      } else {
-        router.navigate(["/"]);
+      } 
+      else {
+        if(params.code) {
+          localStorage.setItem('idClicker',params.code);
+          this.openRegister();
+        }
+        else {
+          router.navigate(["/"]);
+        }
       }
     });
   }

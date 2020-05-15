@@ -51,7 +51,8 @@
     "SITE_NAME": "Sitio web",
     "CONTACT_PERSON": "Persona de contacto",
     "BUSINESS_CATEGORY": "Categoría del negocio",
-    "SEE_DETAIL":"Ver detalle"
+    "SEE_DETAIL":"Ver detalle",
+    "WIN10K":"Refiere y gana $10.000"
   },
   "FOOTER": {
     "FOLLOW_US": "Síguenos",
@@ -65,7 +66,8 @@
     "INTRODUCE_EMAIL": "Ingrese un correo",
     "INTRODUCE_PASSWORD": "Ingrese una contraseña",
     "DESCRIPTION": "Si todavía no tienes una cuenta puedes",
-    "REGISTER": "Registrarse"
+    "REGISTER": "Registrarse",
+    "ACTIVATE": "Reenviar código de activación"
   },
   "REGISTER": {
     "ACCEPT": "¿Acepta los términos y condiciones y políticas de privacidad de Clickam?",
@@ -98,6 +100,9 @@
   "FORGOTPASSWORD": {
     "FORGOT_PASSWORD": "Recuperar contraseña",
     "ENTER_EMAIL": "Ingresa tu correo electrónico registrado para recuperar tu contraseña"
+  },
+  "ACTIVATE": {
+    "TEXT": "¿Aún no te ha llegado tu correo de activación?"
   },
   "RECOVERPASSWORD": {
     "RECOVER_PASSWORD": "Recuperar contraseña",
@@ -353,6 +358,24 @@
     "PRODUCT":"PRODUCTO",
     "STATE":"ESTADO",
     "COMMISION":"COMISIÓN"
+  },
+  "REFER": {
+    "REFER":"Referir",
+    "MY_REFERS": "Mis referencias",
+    "GUESTS":"INVITADOS",
+    "REGISTERED":"REGISTRADOS",
+    "CUALIFIED":"CALIFICADO",
+    "SEND_INVITATION":"Enviar invitación",
+    "REFER_WIN":"Por cada referido cualificado te vamos a regalar 10K",
+    "EMAIL":"Invita a tus amigos por correo",
+    "EMAIL_CONTACT":"Ingresa el correo de tu contacto",
+    "SHARE":"Comparte tu invitación",
+    "COPY":"Copiar",
+    "INVITE_FRIENDS":"Invita a tus amigos por correo",
+    "SHARE_FRIENDS":"Comparte tu link con tus amigos",
+    "MY_REFERS2":"Mis Referidos",
+    "ACTIVITY":"Revisa la actividad de tus referidos, para que puedas hacerles seguimiento.",
+    "REFERED":"Referidos"
   }
 
 }

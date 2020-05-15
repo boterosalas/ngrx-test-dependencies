@@ -76,6 +76,14 @@ header {
   }
 }
 
+.button10k{
+  line-height: 20px;
+  position: relative;
+  padding: 5px 15px;
+  margin-bottom: 3px;
+  height: 35px;
+}
+
 .border-right-white{
   border-right: 1px solid $color-p;
   z-index: 1;
@@ -90,8 +98,20 @@ header {
 }
 
 @media screen and (max-width: 600px) {
-  // #logo-header{
-  //   padding-left: 30px;
-  // }
+  .button10k{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+  
+}
+
+
+@media screen and (max-width: 350px) {
+  .button10k{
+    font-size: 11px;
+    padding: 5px;
+  }
+  
 }
 

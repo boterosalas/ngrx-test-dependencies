@@ -1,31 +1,31 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BusinessComponent } from './business.component';
+import { RefersComponent } from './refers.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxDaterangepickerMd, LOCALE_CONFIG, LocaleService } from 'ngx-daterangepicker-material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
-import { ContentService } from 'src/app/services/content.service';
-import { of } from 'rxjs';
+import { config } from 'process';
 
-describe('BusinessComponent', () => {
-  let component: BusinessComponent;
-  let fixture: ComponentFixture<BusinessComponent>;
-
-  const mockContentService = jasmine.createSpyObj("ContentService", [
-    "businessExcel"
-  ]);
+describe('RefersComponent', () => {
+  let component: RefersComponent;
+  let fixture: ComponentFixture<RefersComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BusinessComponent ],
+      declarations: [ RefersComponent ],
       imports: [
         TranslateModule.forRoot(),
+        ReactiveFormsModule,
+        FormsModule,
         AppMaterialModule,
         HttpClientTestingModule,
         BrowserAnimationsModule,
+        NgxDaterangepickerMd,
         RouterTestingModule.withRoutes([]),
         JwtModule.forRoot({
           config: {
@@ -36,17 +36,21 @@ describe('BusinessComponent', () => {
             whitelistedDomains: [],
             blacklistedRoutes: []
           }
-        })
-      ],
-      providers: [
-        { provide: ContentService, useValue: mockContentService }
-      ]
+        })],
+        providers: [
+          { provide: LOCALE_CONFIG, useValue: config },
+          {
+            provide: LocaleService,
+            useClass: LocaleService,
+            deps: [LOCALE_CONFIG]
+          }
+        ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BusinessComponent);
+    fixture = TestBed.createComponent(RefersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -54,20 +58,4 @@ describe('BusinessComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('export bussiness Success', () => {
-    let data = {state: "Success", userMessage: "Al terminar de procesar el archivo se enviará un correo"};
-    mockContentService.businessExcel.and.returnValue(of(data));
-    component.exportBusiness();
-    expect(mockContentService.businessExcel).toHaveBeenCalled();
-  });
-
-  it('export bussiness error', () => {
-    let data = {state: "Error", userMessage: "Ha ocurrido un error"};
-    mockContentService.businessExcel.and.returnValue(of(data));
-    component.exportBusiness();
-    expect(mockContentService.businessExcel).toHaveBeenCalled();
-  });
-  
-
 });

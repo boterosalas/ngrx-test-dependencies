@@ -31,6 +31,7 @@ export class LinksService {
   apiUsers = "Reports/getUsers";
   insurance = "Insurance/ProcessFiles";
   apiSaveLink = "Link/SaveLink";
+  apiSaveLinkRefered = "link/savelinkreferred";
   apiPostReferrrals = "Link/downloadReferrals";
   apiGetTotalLinks = "Link/GetTotalLinksGenerated";
   apiGetUrl = "link/geturl";
@@ -40,6 +41,7 @@ export class LinksService {
   apiHistory = "commissions/getPaymentHistoryClicker";
   apiLinkHistory = "linkhistory/getlinkhistory";
   apiupdatePaymentDate = "commissions/updatePaymentDate";
+  apiGetReferrals = "referrals/getreferrals";
 
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
@@ -55,6 +57,20 @@ export class LinksService {
   public saveLink(SaveLink: any) {
     return this.http
       .post(`${this.url + this.apiSaveLink}`, SaveLink, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        )
+      );
+  }
+
+  public saveLinkRefer(SaveLink: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveLinkRefered}`, SaveLink, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
@@ -83,6 +99,26 @@ export class LinksService {
   public getReports() {
     let apiReport = `${this.reports}`;
     return this.http.get(`${this.urlComission}/${apiReport}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: ResponseService) => {
+        return resp.objectResponse;
+      })
+    );
+  }
+
+  public getReferrals(params) {
+    return this.http
+    .get(
+      `${this.urlComission}${this.apiGetReferrals}?from=${params.from}&to=${params.to}&orderBy=DATE&ordination=DESC`,
+      this.httpOptions
+    )
+    .pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(1000),
