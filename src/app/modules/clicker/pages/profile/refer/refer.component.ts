@@ -48,7 +48,7 @@ export class ReferComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // this.getReferrals();
+    this.getReferrals();
   }
 
   ngAfterViewInit() {
