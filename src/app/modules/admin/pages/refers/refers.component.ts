@@ -21,13 +21,6 @@ export class RefersComponent implements OnInit, OnDestroy {
     private _snackBar: MatSnackBar,
   ) { }
 
-  dateForm: FormGroup;
-  private subscription: Subscription = new Subscription();
-  maxDate = moment(new Date());
-  dateParams: any;
-  disButon: boolean;
-  email: string;
-
   locale = {
     locale: 'es',
     direction: 'ltr', // could be rtl
@@ -42,6 +35,12 @@ export class RefersComponent implements OnInit, OnDestroy {
     firstDay: 1 // first day is monday
 }
 
+  dateRange: any;
+  private subscription: Subscription = new Subscription();
+  maxDate = moment(new Date());
+  dateForm: FormGroup;
+  email: string;
+  disButon: boolean;
 
   ngOnInit() {
 
@@ -53,8 +52,28 @@ export class RefersComponent implements OnInit, OnDestroy {
 
   }
 
-  change() {
+  public changeState() {
     this.disButon = false;
+  }
+
+
+  // Metodo para exportar los usuarios referidos
+
+  public exportRefers() {
+    this.dateRange = {
+      start: this.dateForm.controls.dateRange.value.startDate.format(),
+      end: this.dateForm.controls.dateRange.value.endDate.format()
+    }
+    
+  //  this.subscription = this.file.getAudit(this.dateParams).subscribe((resp: ResponseService) => {
+  //     if(resp.state === 'Success') {
+  //       this.openSnackBar(resp.userMessage, 'Cerrar');
+  //       this.dateForm.reset();
+  //       if (this.dateForm.controls.dateRange.value.startDate === null) {
+  //         this.disButon = true;
+  //       }
+  //     }
+  //   });
   }
 
     /**
@@ -63,30 +82,11 @@ export class RefersComponent implements OnInit, OnDestroy {
    * @param action
    */
 
-  private openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 5000
-    });
-  }
-
-  // Metodo para exportar los usuarios referidos
-
-  public exportRefers() {
-    this.dateParams = {
-      start: this.dateForm.controls.dateRange.value.startDate.format(),
-      end: this.dateForm.controls.dateRange.value.endDate.format()
-    }
-    
-   this.subscription = this.file.getAudit(this.dateParams).subscribe((resp: ResponseService) => {
-      if(resp.state === 'Success') {
-        this.openSnackBar(resp.userMessage, 'Cerrar');
-        this.dateForm.reset();
-        if (this.dateForm.controls.dateRange.value.startDate === null) {
-          this.disButon = true;
-        }
-      }
-    });
-  }
+  // private openSnackBar(message: string, action: string) {
+  //   this._snackBar.open(message, action, {
+  //     duration: 5000
+  //   });
+  // }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
