@@ -9,7 +9,7 @@ title="Referir"
         <!-- REFERS -->
         <mat-tab>
             <ng-template mat-tab-label>
-                 <span class="gtmClicAcademyClicExitocom">{{'REFER.REFER' | translate}}</span>
+                 <span>{{'REFER.REFER' | translate}}</span>
             </ng-template>
             <p>{{'REFER.REFER_WIN' | translate}}</p>
             <div fxLayout.gt-xs="row" fxLayout="column" fxLayoutGap.gt-xs="30px">
@@ -25,9 +25,15 @@ title="Referir"
         <!-- MY REFERS -->
         <mat-tab>
             <ng-template mat-tab-label>
-                 <span class="gtmClicAcademyClicExitocom">{{'REFER.MY_REFERS' | translate}}</span>
+                 <span>{{'REFER.MY_REFERS' | translate}}</span>
             </ng-template>
-            <app-table-refer></app-table-refer>
+            <app-table-refer [dataSource]="dataSource"></app-table-refer>
+            <mat-paginator
+                    [length]="totalItems"
+                    [pageSize]="pageSize"
+                    [pageIndex]="pageIndex"
+                    (page)="pagination($event)"
+            ></mat-paginator>
         </mat-tab>
     
       </mat-tab-group>

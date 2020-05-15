@@ -135,9 +135,9 @@ export class ReferComponent implements OnInit, OnDestroy {
   public getReferrals(from = 1, to = this.pageTo) {
     let params = { from, to };
     this.subscription = this.link.getReferrals(params).subscribe(resp => {
-      console.log(resp);
-      // this.dataSource = new MatTableDataSource<any>(resp.listLinkHistory);
-      // this.totalItems = resp.total;
+      console.log(resp.referrals);
+      this.dataSource = new MatTableDataSource<any>(resp.referrals);
+      this.totalItems = resp.total;
     });
   }
 

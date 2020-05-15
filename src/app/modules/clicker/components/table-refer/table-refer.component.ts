@@ -16,8 +16,4 @@ export class TableReferComponent implements OnInit {
   ngOnInit() {
   }
 
-  userInfo(dataSource){
-    this.dataUser.emit(dataSource);
-  }
-
 }

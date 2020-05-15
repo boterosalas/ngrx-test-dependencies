@@ -35,7 +35,7 @@ export class ReferEmailComponent implements OnInit {
   }
 
   public sendEmail() {
-    this.email.emit(this.referForm.controls.email.value);
+    this.email.emit(this.referForm.controls.email.value.toLowerCase());
     setTimeout(() => {
       this.referForm.reset();
       this.referForm.controls.email.setErrors({'required': false});
