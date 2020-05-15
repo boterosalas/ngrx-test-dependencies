@@ -7,7 +7,7 @@
         class="downloadUsers"
         >
             <mat-icon class="icon-date" matPrefix>date_range</mat-icon>
-            <input (change)="change()" formControlName="dateRange" [locale]="locale" placeholder="Seleccione fechas" type="text" [maxDate]="maxDate"  ngxDaterangepickerMd class="form-control border-input mat-elevation-z1 p-2 border-radius"/>
+            <input (change)="changeState()" formControlName="dateRange" [locale]="locale" placeholder="Seleccione fechas" type="text" [maxDate]="maxDate"  ngxDaterangepickerMd class="form-control border-input mat-elevation-z1 p-2 border-radius"/>
             <button mat-raised-button color="orange" (click)="exportRefers()" id="download-users" class="ml-2" [disabled]="!dateForm.valid || disButon">Exportar <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
     </form>
 </div>
