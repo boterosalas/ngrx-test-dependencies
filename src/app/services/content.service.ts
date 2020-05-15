@@ -201,7 +201,7 @@ export class ContentService {
       order: string;
     }
   ) {
-    return this.http.get(`${this.urlbiggyExito}${this.apibiggy}?query=${params.term}&sort=orders:dsc&page=${params.page}&count=${params.count}`);
+    return this.http.get(`${this.urlbiggyExito}${this.apibiggy}?query=${params.term}&page=${params.page}&count=${params.count}`);
   }
 
   public biggySearchCarulla(
@@ -212,7 +212,7 @@ export class ContentService {
       order: string;
     }
   ) {
-    return this.http.get(`${this.urlbiggyCarulla}${this.apibiggy}?query=${params.term}&sort=orders:dsc&page=${params.page}&count=${params.count}`);
+    return this.http.get(`${this.urlbiggyCarulla}${this.apibiggy}?query=${params.term}&page=${params.page}&count=${params.count}`);
   }
 
   public getProductsPagination(params: {

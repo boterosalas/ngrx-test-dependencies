@@ -123,6 +123,18 @@
         }
     }
 
+    .Referidos{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/referidos.svg") no-repeat;
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            top: 24%;
+            left: 2%;
+        }
+    }
+
     .logout{
         &::before {
             content: "";

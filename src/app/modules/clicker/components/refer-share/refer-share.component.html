@@ -1,0 +1,68 @@
+<h3 class="border-bottom-orange-init mt-0" fxShow.gt-xs="true" fxHide.xs="true">{{ 'REFER.SHARE_FRIENDS' | translate }}</h3>
+<p fxHide.gt-xs="true">{{'REFER.SHARE' | translate}}</p>
+
+<form [formGroup]="formLink">
+    <div fxLayout="column">
+      <div fxLayout="column" fxFlex="100" fxFlex.xs="100">
+        <mat-form-field appearance="dashed" class="dashed mt-2 f-11">
+          <input
+            id="url"
+            matInput
+            formcontrolName="link"
+            [value]="url"
+            #linkInput
+            readonly
+          />
+          <button
+            mat-button
+            id="btnCopy"
+            class="copyinput"
+            color="orange"
+            (click)="copyUrl()"
+          >
+           {{ "REFER.COPY" | translate }}
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+
+  <div class="share-desktop" id="share">
+    <button
+      theme="circles-dark"
+      shareButton="facebook"
+      [url]="url"
+      ngClass="sharebutton  mr-2"
+    >
+      <i ngClass="fab fa-facebook-f "></i>
+    </button>
+    <button
+      theme="circles-dark"
+      shareButton="twitter"
+      [url]="url"
+      ngClass="sharebutton  mr-2"
+    >
+      <i ngClass="fab fa-twitter "></i>
+    </button>
+    <!-- <button
+      theme="circles-dark"
+      shareButton="whatsapp"
+      [url]="url"
+      ngClass="sharebutton {{classButtonWhatsapp}}"
+    >
+      <i ngClass="fab fa-whatsapp {{classButtonWhatsapp}}"></i>
+    </button> -->
+  </div>
+
+  <div class="share-mobile">
+    <button
+    class="button button-100 button-height f-16"
+    mat-raised-button
+    id="ShareInvite"
+    color="border-button"
+    (click)="share()"
+  >
+        Compartir
+    </button>
+
+  </div>

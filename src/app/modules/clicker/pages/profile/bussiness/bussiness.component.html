@@ -304,6 +304,7 @@
           </button>
 
           <button
+            *ngIf="showReferenceButton"
             mat-button
             id="refer"
             color="orange"
@@ -351,14 +352,14 @@
       >
         <i ngClass="fab fa-twitter {{classButtonTwitter}}"></i>
       </button>
-      <button
+      <!-- <button
         theme="circles-dark"
         shareButton="whatsapp"
         [url]="urlshorten"
         ngClass="sharebutton {{classButtonWhatsapp}}"
       >
         <i ngClass="fab fa-whatsapp {{classButtonWhatsapp}}"></i>
-      </button>
+      </button> -->
     </div>
 
     <div class="share-mobile">
@@ -380,6 +381,7 @@
       </button>
 
       <button
+        *ngIf="showReferenceButton"
         mat-button
         ngClass="gtmrs  mb-2 mt-2 {{classButtonRefer}}"
         (click)="showReference()"
@@ -585,14 +587,14 @@
       >
         <i ngClass="fab fa-twitter {{classButtonTwitter}}"></i>
       </button>
-      <button
+      <!-- <button
         theme="circles-dark"
         shareButton="whatsapp"
         [url]="urlshorten"
         ngClass="sharebutton {{classButtonWhatsapp}}"
       >
         <i ngClass="fab fa-whatsapp {{classButtonWhatsapp}}"></i>
-      </button>
+      </button> -->
     </div>
 
     <div class="share-mobile">
@@ -885,14 +887,14 @@
         >
           <i ngClass="fab fa-twitter {{classButtonTwitter}}"></i>
         </button>
-        <button
+        <!-- <button
           theme="circles-dark"
           shareButton="whatsapp"
           [url]="urlshorten"
           ngClass="sharebutton {{classButtonWhatsapp}}"
         >
           <i ngClass="fab fa-whatsapp {{classButtonWhatsapp}}"></i>
-        </button>
+        </button> -->
       </div>
   
 

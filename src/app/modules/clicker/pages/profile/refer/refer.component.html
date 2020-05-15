@@ -1,0 +1,40 @@
+<app-back-navigation
+fxHide.gt-xs="true"
+title="Referir"
+(close)="goback()"
+></app-back-navigation>
+
+<div class="container mt-2">
+    <mat-tab-group>
+        <!-- REFERS -->
+        <mat-tab>
+            <ng-template mat-tab-label>
+                 <span>{{'REFER.REFER' | translate}}</span>
+            </ng-template>
+            <p>{{'REFER.REFER_WIN' | translate}}</p>
+            <div fxLayout.gt-xs="row" fxLayout="column" fxLayoutGap.gt-xs="30px">
+                <span fxLayout="column" fxFlex.gt-xs="35">
+                    <app-refer-email ngClass.gt-xs="box-shadow" (email)="sendEmail($event)"></app-refer-email>
+                </span>
+                <span fxLayout="column" fxFlex.gt-xs="35">
+                    <app-refer-share #share ngClass.gt-xs="box-shadow" (urlClicker)="copyInputMessage($event)" (shareMobile)="share($event)" urlValue></app-refer-share>
+                </span>
+            </div>
+        </mat-tab>
+
+        <!-- MY REFERS -->
+        <mat-tab>
+            <ng-template mat-tab-label>
+                 <span>{{'REFER.MY_REFERS' | translate}}</span>
+            </ng-template>
+            <app-table-refer [dataSource]="dataSource"></app-table-refer>
+            <mat-paginator
+                    [length]="totalItems"
+                    [pageSize]="pageSize"
+                    [pageIndex]="pageIndex"
+                    (page)="pagination($event)"
+            ></mat-paginator>
+        </mat-tab>
+    
+      </mat-tab-group>
+</div>

@@ -132,6 +132,11 @@ export class LoginformComponent implements OnInit, OnDestroy {
     this.utils.showForgot();
   }
 
+  @HostListener('over')
+  showActivate() {
+    this.utils.showActivate();
+  }
+
   
   /** Al momento de hacer login determina la ruta por el perfil de usuario */
   
