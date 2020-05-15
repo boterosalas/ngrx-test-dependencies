@@ -574,10 +574,11 @@ table {
 }
 
 .mat-bottom-sheet-container-large {
-  min-width: 430px !important;
+  min-width: 510px !important;
 }
 
 @media screen and (max-width: 600px) {
+  
 
   .container-info {
     h3 {
@@ -780,6 +781,10 @@ table {
 // }
 
 @media screen and (min-width: 600px) {
+
+  .mat-bottom-sheet-container-large {
+    max-width: 510px !important;
+  }
 
   // app-bussiness-card .gtmHomeClicNegociosEnvíos {
   //   padding: 2px;
