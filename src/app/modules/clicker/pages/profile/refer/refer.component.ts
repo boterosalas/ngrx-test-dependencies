@@ -50,7 +50,7 @@ export class ReferComponent implements OnInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-      this.urlClicker = this.refer.urlValue;
+      this.urlClicker = this.refer['urlValue'];
   }
 
   public goback() {
