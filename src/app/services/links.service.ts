@@ -43,6 +43,9 @@ export class LinksService {
   apiLinkHistory = "linkhistory/getlinkhistory";
   apiupdatePaymentDate = "commissions/updatePaymentDate";
   apiGetReferrals = "referrals/getreferrals";
+  apiGetAmounts = "amount/getamounts";
+  apiSaveAmountCommission = "amount/saveamountcommission";
+  apiSaveAmountReferred = "amount/saveamountreferred";
 
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
@@ -83,6 +86,34 @@ export class LinksService {
       );
   }
 
+  public saveAmountCommission(amount: any) {
+    return this.http
+      .post(`${this.urlComission+ this.apiSaveAmountCommission}`, amount, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        )
+      );
+  }
+
+  public saveAmountReferred(amount: any) {
+    return this.http
+      .post(`${this.urlComission+ this.apiSaveAmountReferred}`, amount, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        )
+      );
+  }
+
   public downloadReferrals(dates: any) {
     return this.http
       .post(`${this.url + this.apiPostReferrrals}`, dates, this.httpOptions)
@@ -100,6 +131,21 @@ export class LinksService {
   public getReports() {
     let apiReport = `${this.reports}`;
     return this.http.get(`${this.urlComission}/${apiReport}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: ResponseService) => {
+        return resp.objectResponse;
+      })
+    );
+  }
+
+  public getAmount() {
+    return this.http.get(`${this.urlComission}/${this.apiGetAmounts}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(1000),

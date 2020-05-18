@@ -12,7 +12,7 @@ import { ResponseService } from 'src/app/interfaces/response';
   styleUrls: ['./refers.component.scss']
 })
 export class RefersComponent implements OnInit, OnDestroy {
-
+  
   constructor(
     private fb: FormBuilder,
     private file: LinksService,
@@ -37,17 +37,49 @@ export class RefersComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   maxDate = moment(new Date());
   dateForm: FormGroup;
+  comissionForm: FormGroup;
+  referedForm: FormGroup;
   email: string;
   disButon: boolean;
+  amount: number;
+  amountMin: number;
+  numberPattern = "^(0|[0-9][0-9]*)$";
 
   ngOnInit() {
+    this.exportForm();
+    this.comissionClickerForm();
+    this.referedClickerForm();
+    this.getAmountClicker();
+  }
 
+  public exportForm() {
     this.dateForm = this.fb.group(
       {
         dateRange: [null, Validators.required]
       }
     );
+  }
 
+  public comissionClickerForm() {
+    this.comissionForm = this.fb.group(
+      {
+        amount: [this.amount,  [
+          Validators.required,
+          Validators.pattern(this.numberPattern)
+        ]]
+      }
+    );
+  }
+
+  public referedClickerForm() {
+    this.referedForm = this.fb.group(
+      {
+        refered: [this.amountMin,  [
+          Validators.required,
+          Validators.pattern(this.numberPattern)
+        ]]
+      }
+    );
   }
 
   public changeState() {
@@ -74,6 +106,15 @@ export class RefersComponent implements OnInit, OnDestroy {
     });
   }
 
+  public getAmountClicker() {
+    this.subscription = this.file.getAmount().subscribe(amount => {
+      this.amount = amount.amountsCommission;
+      this.amountMin = amount.amountsReferred;
+      this.comissionForm.controls.amount.setValue(this.amount);
+      this.referedForm.controls.refered.setValue(this.amountMin);
+    })
+  }
+
     /**
    * Abre el mensaje de confirmacion
    * @param message
@@ -84,6 +125,34 @@ export class RefersComponent implements OnInit, OnDestroy {
     this._snackBar.open(message, action, {
       duration: 5000
     });
+  }
+
+  public saveCommission() {
+    let commission =  {
+      amount: this.comissionForm.controls.amount.value
+    }
+    this.subscription = this.file.saveAmountCommission(commission).subscribe((resp:ResponseService)=> {
+      if(resp.state === 'Success') {
+        this.openSnackBar(resp.userMessage, 'Cerrar');
+        this.getAmountClicker();
+      } else{
+        this.openSnackBar(resp.userMessage, 'Cerrar');
+      }
+    })
+  }
+
+  public saveRefered() {
+    let commission =  {
+      amount: this.referedForm.controls.refered.value
+    }
+    this.subscription = this.file.saveAmountReferred(commission).subscribe((resp:ResponseService)=> {
+      if(resp.state === 'Success') {
+        this.openSnackBar(resp.userMessage, 'Cerrar');
+        this.getAmountClicker();
+      } else{
+        this.openSnackBar(resp.userMessage, 'Cerrar');
+      }
+    })
   }
 
   ngOnDestroy() {
