@@ -35,6 +35,7 @@ export class ReferComponent implements OnInit, OnDestroy {
   orderBy: string;
   from: any;
   to: any;
+  amount: any;
 
   constructor(
     private router: Router,
@@ -47,6 +48,7 @@ export class ReferComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getReferrals();
+    this.amount = localStorage.getItem('Amount');
   }
 
   ngAfterViewInit() {

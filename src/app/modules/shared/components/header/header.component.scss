@@ -112,6 +112,24 @@ header {
     font-size: 11px;
     padding: 5px;
   }
+
+  .elipsis{
+    width: 105px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+}
+
+@media screen and (max-width: 425px) {
+ 
+  .elipsis{
+    width: 105px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
   
 }
 

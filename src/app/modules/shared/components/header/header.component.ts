@@ -9,6 +9,8 @@ import {
 } from "@angular/core";
 import { UtilsService } from "src/app/services/utils.service";
 import { AuthService } from "src/app/services/auth.service";
+import { LinksService } from 'src/app/services/links.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: "app-header",
   templateUrl: "./header.component.html",
@@ -23,13 +25,14 @@ export class HeaderComponent implements OnInit {
   isLoggedIn: any;
   firstNames: string;
   lastNames: string;
+  amount: any;
 
   constructor(
     private utils: UtilsService,
-    public auth: AuthService
-  ) {}
+    public auth: AuthService  ) {}
 
   ngOnInit() {
+    this.getAmount();
   }
 
   public open() {
@@ -50,5 +53,19 @@ export class HeaderComponent implements OnInit {
   openRegister() {
     this.utils.showRegisterForm();
   }
+
+  public getAmount() {
+    let count = 0;
+    let interval = setInterval(() => {
+      this.amount =  localStorage.getItem('Amount');
+      count ++;
+    }, 500);
+
+    if(count === 3) {
+      clearInterval(interval);
+    }
+    
+  }
+
 
 }
