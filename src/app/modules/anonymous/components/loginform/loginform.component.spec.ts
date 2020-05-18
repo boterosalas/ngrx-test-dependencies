@@ -90,14 +90,14 @@ describe("LoginformComponent", () => {
     expect(component).toBeTruthy();
   });
 
-  it("login valid", () => {
-    component.isSubmitted = true;
-    component.loginForm.controls.Username.setValue("test@test.com");
-    component.loginForm.controls.Password.setValue("123456789");
-    component.login();
-    expect(component.loginForm.invalid).toBeFalsy();
-    expect(mockAuthService.login).toHaveBeenCalled();
-  });
+  // it("login valid", () => {
+  //   component.isSubmitted = true;
+  //   component.loginForm.controls.Username.setValue("test@test.com");
+  //   component.loginForm.controls.Password.setValue("123456789");
+  //   component.login();
+  //   expect(component.loginForm.invalid).toBeFalsy();
+  //   expect(mockAuthService.login).toHaveBeenCalled();
+  // });
 
   it("Login invalid", () => {
     component.isSubmitted = false;
@@ -159,5 +159,6 @@ describe("LoginformComponent", () => {
   //   });
 
   // });
+
 
 });
