@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LinksService } from 'src/app/services/links.service';
-import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
 import * as moment from 'moment';
@@ -17,7 +16,6 @@ export class RefersComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private file: LinksService,
-    private usersService: UserService,
     private _snackBar: MatSnackBar,
   ) { }
 
@@ -65,15 +63,15 @@ export class RefersComponent implements OnInit, OnDestroy {
       end: this.dateForm.controls.dateRange.value.endDate.format()
     }
     
-  //  this.subscription = this.file.getAudit(this.dateParams).subscribe((resp: ResponseService) => {
-  //     if(resp.state === 'Success') {
-  //       this.openSnackBar(resp.userMessage, 'Cerrar');
-  //       this.dateForm.reset();
-  //       if (this.dateForm.controls.dateRange.value.startDate === null) {
-  //         this.disButon = true;
-  //       }
-  //     }
-  //   });
+   this.subscription = this.file.getReportReferral(this.dateRange).subscribe((resp: ResponseService) => {
+      if(resp.state === 'Success') {
+        this.openSnackBar(resp.userMessage, 'Cerrar');
+        this.dateForm.reset();
+        if (this.dateForm.controls.dateRange.value.startDate === null) {
+          this.disButon = true;
+        }
+      }
+    });
   }
 
     /**
@@ -82,11 +80,11 @@ export class RefersComponent implements OnInit, OnDestroy {
    * @param action
    */
 
-  // private openSnackBar(message: string, action: string) {
-  //   this._snackBar.open(message, action, {
-  //     duration: 5000
-  //   });
-  // }
+  private openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5000
+    });
+  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
