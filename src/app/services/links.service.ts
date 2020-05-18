@@ -27,6 +27,7 @@ export class LinksService {
   apiKPI = "Reports/getKPI";
   apiUsersExcel = "Reports/getUsersExcel";
   apiAuditExcel = "Reports/getAudit";
+  apiGetReportReferral = "Reports/getreportreferral";
   apigetReportClickam = "Reports/getReportClickam";
   apiUsers = "Reports/getUsers";
   insurance = "Insurance/ProcessFiles";
@@ -265,6 +266,23 @@ export class LinksService {
     return this.http
       .get(
         `${this.urlComission}${this.apiAuditExcel}?&start=${params.start}&end=${params.end}`,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        )
+      );
+  }
+
+  public getReportReferral(params: any) {
+    return this.http
+      .get(
+        `${this.urlComission}${this.apiGetReportReferral}?&start=${params.start}&end=${params.end}`,
         this.httpOptions
       )
       .pipe(

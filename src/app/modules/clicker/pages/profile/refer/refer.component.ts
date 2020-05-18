@@ -1,7 +1,6 @@
 import {
   Component,
   OnInit,
-  ViewChildren,
   ViewChild,
   OnDestroy,
 } from "@angular/core";
@@ -11,9 +10,8 @@ import { NgNavigatorShareService } from "ng-navigator-share";
 import { LinksService } from "src/app/services/links.service";
 import { Subscription } from "rxjs";
 import Swal from "sweetalert2";
-import { share } from "rxjs/operators";
-import { url } from "inspector";
 import { ResponseService } from "src/app/interfaces/response";
+import { Refer } from 'src/app/interfaces/refer';
 
 @Component({
   selector: "app-refer",
@@ -24,10 +22,10 @@ export class ReferComponent implements OnInit, OnDestroy {
   private ngNavigatorShareService: NgNavigatorShareService;
   private subscription: Subscription = new Subscription();
 
-  @ViewChild("share", { static: false }) refer: any;
+  @ViewChild("share", { static: false }) public refer: Refer;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  urlClicker: string;
+  public urlClicker: Object;
   dataSource: any;
   pageIndex: number = 0;
   pageSize: number = 20;
@@ -52,7 +50,7 @@ export class ReferComponent implements OnInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.urlClicker = this.refer.urlValue;
+      this.urlClicker = this.refer['urlValue'];
   }
 
   public goback() {
@@ -117,7 +115,7 @@ export class ReferComponent implements OnInit, OnDestroy {
     });
   }
 
-  share(url: string) {
+  public shareEvent(url: string) {
     this.ngNavigatorShareService
       .share({
         title: "",
@@ -135,10 +133,17 @@ export class ReferComponent implements OnInit, OnDestroy {
   public getReferrals(from = 1, to = this.pageTo) {
     let params = { from, to };
     this.subscription = this.link.getReferrals(params).subscribe(resp => {
-      console.log(resp.referrals);
       this.dataSource = new MatTableDataSource<any>(resp.referrals);
       this.totalItems = resp.total;
     });
+  }
+
+  public pagination(paginate: any) {
+    this.pageIndex = paginate.pageIndex;
+    paginate.length = this.totalItems;
+    this.from = paginate.pageSize * paginate.pageIndex + 1;
+    this.to = paginate.pageSize * (paginate.pageIndex + 1);
+    this.getReferrals(this.from, this.to);
   }
 
   ngOnDestroy(): void {

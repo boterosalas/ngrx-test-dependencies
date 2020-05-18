@@ -17,7 +17,7 @@ title="Referir"
                     <app-refer-email ngClass.gt-xs="box-shadow" (email)="sendEmail($event)"></app-refer-email>
                 </span>
                 <span fxLayout="column" fxFlex.gt-xs="35">
-                    <app-refer-share #share ngClass.gt-xs="box-shadow" (urlClicker)="copyInputMessage($event)" (shareMobile)="share($event)" urlValue></app-refer-share>
+                    <app-refer-share #share ngClass.gt-xs="box-shadow" (shareMobile)="shareEvent($event)" (urlClicker)="copyInputMessage($event)"></app-refer-share>
                 </span>
             </div>
         </mat-tab>
