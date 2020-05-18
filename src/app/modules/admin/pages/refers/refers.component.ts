@@ -47,9 +47,9 @@ export class RefersComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.exportForm();
-    this.getAmount();
     this.comissionClickerForm();
     this.referedClickerForm();
+    this.getAmountClicker();
   }
 
   public exportForm() {
@@ -106,7 +106,7 @@ export class RefersComponent implements OnInit, OnDestroy {
     });
   }
 
-  public getAmount() {
+  public getAmountClicker() {
     this.subscription = this.file.getAmount().subscribe(amount => {
       this.amount = amount.amountsCommission;
       this.amountMin = amount.amountsReferred;
@@ -134,7 +134,7 @@ export class RefersComponent implements OnInit, OnDestroy {
     this.subscription = this.file.saveAmountCommission(commission).subscribe((resp:ResponseService)=> {
       if(resp.state === 'Success') {
         this.openSnackBar(resp.userMessage, 'Cerrar');
-        this.getAmount();
+        this.getAmountClicker();
       } else{
         this.openSnackBar(resp.userMessage, 'Cerrar');
       }
@@ -148,7 +148,7 @@ export class RefersComponent implements OnInit, OnDestroy {
     this.subscription = this.file.saveAmountReferred(commission).subscribe((resp:ResponseService)=> {
       if(resp.state === 'Success') {
         this.openSnackBar(resp.userMessage, 'Cerrar');
-        this.getAmount();
+        this.getAmountClicker();
       } else{
         this.openSnackBar(resp.userMessage, 'Cerrar');
       }
