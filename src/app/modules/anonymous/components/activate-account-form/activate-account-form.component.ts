@@ -78,7 +78,7 @@ export class ActivateAccountFormComponent implements OnInit, OnDestroy {
 
   public activateAccount() {
     let email = this.activateForm.controls.email.value;
-    this.subscription = this.forgot.forgotPassword(email).subscribe(
+    this.subscription = this.forgot.sendActivation(email).subscribe(
       (resp: ResponseService) => {
         if (resp.state === "Success") {
           this.swalOptSuccess = {...this.swalOptSuccess, text: resp.userMessage};

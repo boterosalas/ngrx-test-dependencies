@@ -217,7 +217,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.subscription = this.utils.showActivateFormEmit.subscribe(
       (isOpenActivate) => {
-        console.log(isOpenActivate);
         this.isOpen = isOpenActivate;
         this.showActivateForm = true;
         this.showRegisterForm = false;
