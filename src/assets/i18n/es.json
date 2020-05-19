@@ -67,7 +67,7 @@
     "INTRODUCE_PASSWORD": "Ingrese una contraseña",
     "DESCRIPTION": "Si todavía no tienes una cuenta puedes",
     "REGISTER": "Registrarse",
-    "ACTIVATE": "Reenviar código de activación"
+    "ACTIVATE": "¿Aún no te ha llegado tu correo de activación?"
   },
   "REGISTER": {
     "ACCEPT": "¿Acepta los términos y condiciones y políticas de privacidad de Clickam?",
