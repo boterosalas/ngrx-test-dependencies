@@ -42,6 +42,7 @@ export class AuthService implements OnDestroy {
   apiForgotPassword = "Authentication/recoveryPassword";
   apiRecoverPassword = "Authentication/resetpassword";
   apiChangePassword = "Authentication/changePassword";
+  apisendactivation = "activation/sendactivation";
   apiRefresh = "token/refresh";
 
   role = "";
@@ -144,6 +145,14 @@ export class AuthService implements OnDestroy {
   public forgotPassword(username: Forgotpassword) {
     return this.http.post(
       `${this.url + this.apiForgotPassword}`,
+      { email: username },
+      this.httpOptions
+    );
+  }
+  
+  public sendActivation(username: string) {
+    return this.http.post(
+      `${this.url + this.apisendactivation}`,
       { email: username },
       this.httpOptions
     );
