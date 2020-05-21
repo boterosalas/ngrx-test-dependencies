@@ -9,6 +9,7 @@ export class BussinessCardComponent implements OnInit {
 
   @Input() img: string;
   @Input() title: string;
+  @Input() code: string;
   @Input() percent: string;
 
   @Output() bussiness = new EventEmitter();

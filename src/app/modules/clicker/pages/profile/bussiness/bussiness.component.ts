@@ -15,6 +15,7 @@ import { TokenService } from 'src/app/services/token.service';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { environment } from 'src/environments/environment';
+import { JoyrideService } from 'ngx-joyride';
 
 @Component({
   selector: 'app-bussiness',
@@ -103,16 +104,23 @@ export class BussinessComponent implements OnInit, OnDestroy {
     private links: LinksService,
     private token: TokenService,
     ngNavigatorShareService: NgNavigatorShareService,
-    private dialogModal: MatDialog
+    private dialogModal: MatDialog,
   ) { 
     
     this.ngNavigatorShareService = ngNavigatorShareService;
 
     this.route.params.subscribe(route => {
-      this.title = route.code;
-      this.percent = route.infoAditional;
-      this.id = route.id;
-      this.image = route.imageurl;
+      if(this.id === undefined && this.title === undefined && this.image === undefined && this.percent === undefined) {
+        this.id = '1';
+        this.title = 'exito'
+        this.image = 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg'
+        this.percent = 'Hasta 9.6% de ganancia'
+      } else {
+        this.id = route.id;
+        this.title = route.code;
+        this.image = route.imageurl;
+        this.percent = route.infoAditional;
+      }
     });
 
   }
