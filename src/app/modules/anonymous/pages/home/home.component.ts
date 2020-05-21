@@ -28,9 +28,9 @@ import { distinctUntilChanged } from "rxjs/operators";
 import { MatDialog } from "@angular/material";
 import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
 import { ResponseService } from "src/app/interfaces/response";
-import { LinksService } from 'src/app/services/links.service';
-import { JoyrideService } from 'ngx-joyride';
-import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
+import { LinksService } from "src/app/services/links.service";
+import { JoyrideService } from "ngx-joyride";
+import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog.component";
 
 @Component({
   selector: "app-login",
@@ -78,12 +78,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   offersMobile: any;
   offersWeb: any;
   isEmployee: any;
+  userOnboarding: boolean;
   @ViewChild("templateBusiness", { static: false })
   templateBusiness: TemplateRef<any>;
   categories = [];
   managedPayments: boolean;
   role: String;
-  bussinessRoute:string = `@bussiness@id@5`;
+  numberSteps:any;
 
   constructor(
     public router: Router,
@@ -95,7 +96,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private link: LinksService,
     private readonly joyrideService: JoyrideService,
-    private elementRef:ElementRef
+    private elementRef: ElementRef
   ) {
     /**
      *  Verifica que en la ruta de inicio exista el parametro de email y activa el usuario
@@ -106,13 +107,11 @@ export class HomeComponent implements OnInit, OnDestroy {
       if (params.email) {
         this.email = params.email;
         this.activateUser();
-      } 
-      else {
-        if(params.code) {
-          localStorage.setItem('idClicker',params.code);
+      } else {
+        if (params.code) {
+          localStorage.setItem("idClicker", params.code);
           this.openRegister();
-        }
-        else {
+        } else {
           router.navigate(["/"]);
         }
       }
@@ -130,7 +129,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getOffers();
     this.slider();
     this.getUserData();
-    this.starTour();
   }
 
   public getUserData() {
@@ -140,6 +138,10 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.subscription = this.user.getuserdata().subscribe((user) => {
           this.isEmployee = user.isEmployeeGrupoExito;
           this.managedPayments = user.managedPayments;
+          this.userOnboarding = user.onBoardingViewed;
+          if (this.userOnboarding === false) {
+            this.starTour();
+          }
         });
       }
       setTimeout(() => {
@@ -147,7 +149,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       }, 1000);
     });
   }
-
 
   /**
    * Metodo para activar el usuario
@@ -194,9 +195,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public getAmount() {
-    this.subscription = this.link.getAmount().subscribe(amount => {
-      localStorage.setItem('Amount', amount.amountsCommission);
-    })
+    this.subscription = this.link.getAmount().subscribe((amount) => {
+      localStorage.setItem("Amount", amount.amountsCommission);
+    });
   }
 
   ngOnDestroy() {
@@ -238,46 +239,70 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public starTour() {
     this.joyrideService.closeTour();
-    this.joyrideService.startTour({steps: ["firstStep","secondStep0@inicio","thirdStep1@bussiness","fourthStep", "fifthStep", "lastStep"], waitingTime: 800, customTexts:{ prev: 'Anterior', next: 'Siguiente', done: 'Terminar'}}).subscribe(
-      step=> {
+    if (window.outerWidth > 600) {
+      this.numberSteps = {
+        steps: [
+          "firstStep",
+          "secondStep0@inicio",
+          "thirdStep1@bussiness",
+          "fourthStep",
+          "fifthStep",
+          "lastStep",
+        ],
+      };
+    } else {
+      this.numberSteps = {
+        steps: [
+          "firstStep",
+          "secondStep0@inicio",
+          "thirdStep1@bussiness",
+          "fourthStepMobile",
+          "lastStep",
+        ],
+      };
+    }
+    this.joyrideService
+      .startTour({
+        steps: this.numberSteps.steps,
+        waitingTime: 1000,
+        customTexts: { prev: "Anterior", next: "Siguiente", done: "Terminar" },
+      })
+      .subscribe(
+        (step) => {
+          const hook = document.querySelector("#bussinessHook");
 
-        const hook = document.querySelector('#bussinessHook');
-        
-      if(step.number === 2) {
-        hook.scrollIntoView();
-      }
+          if (step.number === 2) {
+            hook.scrollIntoView();
+          }
 
-      if(step.number === 3) {
-          const nextButton = document.querySelector('#joyride-step-thirdStep1 .joyride-step__next-container joyride-button button');
-          console.log(nextButton);
-          const button = document.querySelector('#btnbussiness1');
-          console.log(button);
-          nextButton.addEventListener('click', () => {
-            console.log('click');
-            button.dispatchEvent(new Event('click'));
-          })
-      }
+          if (step.number === 3) {
+            const nextButton = document.querySelector(
+              "#joyride-step-thirdStep1 .joyride-step__next-container joyride-button button"
+            );
+            const button = document.querySelector("#btnbussiness1");
+            nextButton.addEventListener("click", () => {
+              button.dispatchEvent(new Event("click"));
+            });
+          }
 
-      if(step.number === 3 && step.actionType === 'PREV') {
-          const close = document.querySelector('#closeDialog');
-          close.dispatchEvent(new Event('click'));
-      }
-
-    },
-    error => {
-      /*handle error*/
-  },
-    () => {
-        /*Tour is finished here, do something*/
-        this.user.saveOnboarding(true).subscribe();
-        this.router.navigate(['/inicio']);
-        if(document.querySelector('#closeDialog')) {
-          const close = document.querySelector('#closeDialog');
-          close.dispatchEvent(new Event('click'));
+          if (step.number === 3 && step.actionType === "PREV") {
+            const close = document.querySelector("#closeDialog");
+            close.dispatchEvent(new Event("click"));
+          }
+        },
+        (error) => {
+          /*handle error*/
+        },
+        () => {
+          /*Tour is finished here, do something*/
+          this.user.saveOnboarding(true).subscribe();
+          this.router.navigate(["/inicio"]);
+          if (document.querySelector("#closeDialog")) {
+            const close = document.querySelector("#closeDialog");
+            close.dispatchEvent(new Event("click"));
+          }
         }
-
-    } 
-    )
+      );
   }
 
   public getBussinessClicker() {
@@ -408,7 +433,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public showModalPayment() {
-    if(this.role === 'CLICKER' && this.managedPayments === false && this.isEmployee === false ) {
+    if (
+      this.role === "CLICKER" &&
+      this.managedPayments === false &&
+      this.isEmployee === false &&
+      this.userOnboarding === true
+    ) {
       Swal.fire({
         title: "¡Registra tus datos bancarios!",
         text:
@@ -422,7 +452,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         cancelButtonText: "Ahora no",
         confirmButtonClass: "payment-success",
         cancelButtonClass: "payment-cancel",
-        customClass:"paymentData"
+        customClass: "paymentData",
       }).then((resp) => {
         if (resp.value === true) {
           this.router.navigate(["/mi-perfil", "pagos"]);
@@ -430,6 +460,4 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
     }
   }
-
-
 }
