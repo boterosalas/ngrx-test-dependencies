@@ -4,11 +4,11 @@
 
 <div class="container">
   <span class="border-gray d-block"></span>
-  <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3>
+  <h3 class="border-bottom-orange-init title-h3" id="bussinessHook">{{ 'HOME.BUSSINESS' | translate }}</h3>
   <p class="f-20" fxHide.xs>{{ 'HOME.BUSSINESS_TEXT' | translate }}</p>
   <div fxLayout="column" fxLayout.gt-xs="row wrap" ngClass.gt-xs="pb-3" fxLayoutAlign="center center" fxLayoutGap="1%">
     <ng-container *ngFor="let bussines of bussiness; let i = index">
-      <app-bussiness-card *ngIf="bussines.code !== 'envios-clickam'" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [code]="bussines.code" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
+      <app-bussiness-card joyrideStep="secondStep{{i}}" stepPosition="right" [stepContent]="secondStep"  *ngIf="bussines.code !== 'envios-clickam'" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [code]="bussines.code" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
     </ng-container>
     <ng-container *ngFor="let bussines of bussinessClicker; let i = index">
       <app-bussiness-card *ngIf="isEmployee === true && bussines.code === 'envios-clickam' && auth.isLoggedIn()" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
@@ -30,4 +30,23 @@
 
 <ng-template #templateBusiness>
     <app-new-business-form (registerBusinessEmit)="sendDataBusiness($event)" [categories]="categories"></app-new-business-form>
+</ng-template>
+
+<div joyrideStep="firstStep" stepPosition="center" [stepContent]="customContent">
+</div>
+
+<ng-template #customContent>
+  <div class="text-center">
+    <img src="assets/img/share/tutorial_clickear.svg" alt="sobre">
+    <h2 class="white">¡Es hora de Clickear!</h2>
+    <p class="white"> En Clickam puedes obtener ganancias refiriendo o comprando productos de cada uno de nuestros negocios aliados</p>
+    <!-- <button mat-raised-button (click)="onNext()">Conoce cómo</button> -->
+  </div>
+</ng-template>
+
+<ng-template #secondStep>
+  <div class="text-center">
+    <h2 class="title-tour m-0">1. Elige un negocio aliado</h2>
+    <p class="white"> Todos tienen diferentes porcentajes de ganancia.</p>
+  </div>
 </ng-template>

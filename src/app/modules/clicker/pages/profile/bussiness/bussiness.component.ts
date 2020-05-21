@@ -15,6 +15,7 @@ import { TokenService } from 'src/app/services/token.service';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { environment } from 'src/environments/environment';
+import { JoyrideService } from 'ngx-joyride';
 
 @Component({
   selector: 'app-bussiness',
@@ -103,7 +104,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     private links: LinksService,
     private token: TokenService,
     ngNavigatorShareService: NgNavigatorShareService,
-    private dialogModal: MatDialog
+    private dialogModal: MatDialog,
   ) { 
     
     this.ngNavigatorShareService = ngNavigatorShareService;
@@ -111,7 +112,11 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(route => {
       this.title = route.code;
       this.percent = route.infoAditional;
-      this.id = route.id;
+      if(this.id === undefined) {
+        this.id = '1';
+      } else {
+        this.id = route.id;
+      }
       this.image = route.imageurl;
     });
 

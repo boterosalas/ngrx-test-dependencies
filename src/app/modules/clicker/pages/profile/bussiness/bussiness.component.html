@@ -76,6 +76,7 @@
           container="img-container-viajes"
           textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
           (infoProduct)="dataSliderCategory(bussiness)"
+          joyrideStep="thirdStep{{i}}" [stepContent]="thirdStep1" stepPosition="right"
         ></app-product>
       </div>
     </div>
@@ -268,7 +269,7 @@
 <ng-template #templateCategories>
   <div *ngIf="!reference">
     <form [formGroup]="formLink">
-      <div fxLayout="column">
+      <div fxLayout="column" >
         <div fxLayout="column" fxFlex="100" fxFlex.xs="100">
           <mat-form-field appearance="dashed" class="dashed mt-2">
             <input
@@ -286,6 +287,7 @@
           fxLayoutAlign="center space-between"
           fxLayoutGap="10px"
           class="mt-2 share-desktop"
+          joyrideStep="fourthStep" stepPosition="top" [stepContent]="fourthStep"
         >
           <button
             mat-button
@@ -335,7 +337,7 @@
       {{ "GENERIC.SHARE" | translate }}
     </h3>
 
-    <div class="share-desktop" id="share">
+    <div class="share-desktop" id="share" joyrideStep="fifthStep" stepPosition="top" [stepContent]="fifthStep">
       <button
         theme="circles-dark"
         shareButton="facebook"
@@ -969,3 +971,88 @@
 {{ "GENERIC.ACCEPT" | translate }}
 </button>
 </ng-template>
+
+<!-- tour -->
+
+<ng-template #thirdStep1>
+  <div class="text-center">
+    <h2 class="title-tour m-0">2. Elige una categoría y Clickea</h2>
+    <p class="white"> Al Clickear se generará un link que puedes compartir o usar tu mismo, con cada compra efectiva sumarás comisiones</p>
+  </div>
+</ng-template>
+
+<ng-template #fourthStep>
+  <div class="text-center">
+    <h2 class="title-tour m-0">3. Tendrás varias opciones</h2>
+    <div
+          fxLayout="row"
+          fxLayoutAlign="center space-between"
+          fxLayoutGap="10px"
+          class="mt-2 share-desktop"
+        >
+
+        <span fxLayout="column">
+          <button
+            mat-button
+            id="btnCopy"
+            color="border-white"
+          >
+            <span
+              fxLayoutAlign="center space-between"
+            >
+              {{ "GENERIC.COPY_LINK" | translate }}
+            </span>
+          </button>
+
+          <p class="white">Podrás copiar el link y pegarlo donde quieras.</p>
+        </span>
+
+        <span fxLayout="column">
+          <button
+            mat-button
+            id="refer"
+            color="border-white"
+          >
+            <span fxLayoutAlign="center space-between">
+              Referir
+            </span>
+          </button>
+
+          <p class="white">Podrás referir un comprador con su número cédula</p>
+        </span>
+        <span fxLayout="column">
+          <button
+          mat-button
+          id="buy"
+          color="white"
+        >
+          <span fxLayoutAlign="center space-between">
+            Comprar
+          </span>
+        </button>
+
+        <p class="white">Podrás comprar tú mismo y ganar la comisión</p>
+        </span>
+
+        </div>
+  </div>
+</ng-template>
+
+<ng-template #fifthStep>
+  <div class="text-center">
+    <h2 class="title-tour m-0">4. También pueder compartir directamente en tus redes sociales</h2>
+  </div>
+</ng-template>
+
+<div joyrideStep="lastStep" stepPosition="center" [stepContent]="lastStep">
+</div>
+
+<ng-template #lastStep>
+  <div class="text-center">
+    <img src="assets/img/share/tutorial_clickear_fin.svg" alt="sobre">
+    <h2 class="white">¡Ahora estás listo!</h2>
+    <p class="white"> Ya sabes cómo puedes aprovechar al máximo ser un Clicker, es momento que empieces a recibir comisiones por tus compras y referidos.</p>
+  </div>
+</ng-template>
+
+

@@ -6,6 +6,7 @@ import {
   OnDestroy,
   ViewChild,
   TemplateRef,
+  ElementRef,
 } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import Swal from "sweetalert2";
@@ -28,6 +29,8 @@ import { MatDialog } from "@angular/material";
 import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
 import { ResponseService } from "src/app/interfaces/response";
 import { LinksService } from 'src/app/services/links.service';
+import { JoyrideService } from 'ngx-joyride';
+import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
 
 @Component({
   selector: "app-login",
@@ -80,6 +83,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   categories = [];
   managedPayments: boolean;
   role: String;
+  bussinessRoute:string = `@bussiness@id@5`;
 
   constructor(
     public router: Router,
@@ -89,7 +93,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     public auth: AuthService,
     private content: ContentService,
     private dialog: MatDialog,
-    private link: LinksService
+    private link: LinksService,
+    private readonly joyrideService: JoyrideService,
+    private elementRef:ElementRef
   ) {
     /**
      *  Verifica que en la ruta de inicio exista el parametro de email y activa el usuario
@@ -124,6 +130,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getOffers();
     this.slider();
     this.getUserData();
+    this.starTour();
   }
 
   public getUserData() {
@@ -140,6 +147,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       }, 1000);
     });
   }
+
 
   /**
    * Metodo para activar el usuario
@@ -226,6 +234,50 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe((bussiness) => {
         this.bussiness = bussiness;
       });
+  }
+
+  public starTour() {
+    this.joyrideService.closeTour();
+    this.joyrideService.startTour({steps: ["firstStep","secondStep0@inicio","thirdStep1@bussiness","fourthStep", "fifthStep", "lastStep"], waitingTime: 800, customTexts:{ prev: 'Anterior', next: 'Siguiente', done: 'Terminar'}}).subscribe(
+      step=> {
+
+        const hook = document.querySelector('#bussinessHook');
+        
+      if(step.number === 2) {
+        hook.scrollIntoView();
+      }
+
+      if(step.number === 3) {
+          const nextButton = document.querySelector('#joyride-step-thirdStep1 .joyride-step__next-container joyride-button button');
+          console.log(nextButton);
+          const button = document.querySelector('#btnbussiness1');
+          console.log(button);
+          nextButton.addEventListener('click', () => {
+            console.log('click');
+            button.dispatchEvent(new Event('click'));
+          })
+      }
+
+      if(step.number === 3 && step.actionType === 'PREV') {
+          const close = document.querySelector('#closeDialog');
+          close.dispatchEvent(new Event('click'));
+      }
+
+    },
+    error => {
+      /*handle error*/
+  },
+    () => {
+        /*Tour is finished here, do something*/
+        this.user.saveOnboarding(true).subscribe();
+        this.router.navigate(['/inicio']);
+        if(document.querySelector('#closeDialog')) {
+          const close = document.querySelector('#closeDialog');
+          close.dispatchEvent(new Event('click'));
+        }
+
+    } 
+    )
   }
 
   public getBussinessClicker() {

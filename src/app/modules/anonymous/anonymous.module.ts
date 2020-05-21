@@ -31,6 +31,7 @@ import { NewBusinessFormComponent } from './components/new-business-form/new-bus
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module, RecaptchaFormsModule, RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
 import { UrlComponent } from './pages/url/url.component';
 import { ActivateAccountFormComponent } from './components/activate-account-form/activate-account-form.component';
+import { JoyrideModule } from 'ngx-joyride';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -112,7 +113,8 @@ const routes: Routes = [
     ShareButtonsModule,
     RouterModule.forChild(routes),
     MatPasswordStrengthModule,
-    RecaptchaV3Module
+    RecaptchaV3Module,
+    JoyrideModule.forChild()
   ],
   exports: [
     RouterModule,
