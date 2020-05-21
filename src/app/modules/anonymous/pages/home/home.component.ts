@@ -139,7 +139,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.isEmployee = user.isEmployeeGrupoExito;
           this.managedPayments = user.managedPayments;
           this.userOnboarding = user.onBoardingViewed;
-          if (this.userOnboarding === false) {
+          if (this.userOnboarding === false && role === "CLICKER") {
             this.starTour();
           }
         });
