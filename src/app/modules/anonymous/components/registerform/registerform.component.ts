@@ -156,7 +156,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     this.loading.show();
 
     let registerForm = {
-      Email: this.registerForm.controls.email.value,
+      Email: this.registerForm.controls.email.value.toLowerCase(),
       FirstNames: this.registerForm.controls.name.value,
       LastNames: this.registerForm.controls.lastName.value,
       Identification: this.registerForm.controls.id.value,

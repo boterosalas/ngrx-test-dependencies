@@ -169,6 +169,16 @@ body {
   color: #ffffff;
 }
 
+.mat-border-white{
+  background: $primary-color;
+  color: #ffffff;
+  border:1px solid #ffffff;
+}
+.mat-white {
+  background: #ffffff;
+  color: $primary-color;
+}
+
 .orange {
   color: $primary-color;
 }
@@ -513,7 +523,16 @@ table {
   min-width: 250px;
 }
 
+
+
 @media screen and (min-width: 600px) {
+
+  .joyride-step__holder{
+    width: 500px;
+    img{
+      max-width: 100%;
+    }
+  }
 
   .product-exito img {
     height: 250px !important;
@@ -527,6 +546,7 @@ table {
   app-bussiness-card{
     min-height: 212px;
     min-width: 230px;
+    position: relative;
   }
 
   .inner-business{
@@ -589,6 +609,10 @@ table {
 }
 
 @media screen and (max-width: 600px) {
+
+  // .joyride-step__holder{
+  //   width: 100%;
+  // }
   
 
   .container-info {
@@ -1353,4 +1377,77 @@ button.swal2-cancel.payment-cancel.swal2-styled{
 
 .orange-spinner .mat-progress-spinner circle, .mat-spinner circle {
   stroke: $third-color !important;
+}
+
+.white{
+  color: #ffffff;
+}
+
+// tour
+
+.joyride-step__container{
+  background-color: $primary-color !important;
+  border-radius: 10px;
+}
+
+.joyride-arrow__left{
+  border-right: 11px solid $primary-color !important;
+}
+
+.joyride-arrow__top{
+  border-bottom: 11px solid $primary-color !important;
+}
+
+.joyride-arrow__bottom{
+  border-top: 11px solid $primary-color !important;
+}
+
+.joyride-step__holder{
+  font-family: $font-galano !important;
+}
+
+.joyride-step__title{
+  color: #8D7EB7 !important;
+}
+
+.joyride-step__body{
+  color: #ffffff;
+}
+
+.joyride-step__counter{
+  color: #ffffff;
+}
+
+.joyride-step__close {
+  background:  #8D7EB7;
+  border-radius: 50%;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+joy-close-button.joyride-step__close svg {
+  width: 12px;
+  right: 4px;
+  position: absolute;
+  top: 4px;
+}
+
+#joyride-step-thirdStep1 .joyride-step__prev-container{
+  display: none;
+}
+
+// #joyride-step-firstStep {
+//   .joyride-step__footer{
+//     display: none;
+//   }
+// }
+
+#joyride-step-secondStep0 {
+  .joyride-step__title{
+    display: none;
+  }
+}
+
+.title-tour{
+  color: #8D7EB7;
 }

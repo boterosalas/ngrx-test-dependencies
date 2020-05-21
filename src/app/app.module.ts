@@ -36,6 +36,7 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AsyncPipe } from '../../node_modules/@angular/common';
+import { JoyrideModule } from 'ngx-joyride';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -60,6 +61,7 @@ export function jwtTokenGetter() {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireMessagingModule,
+    JoyrideModule.forRoot(),
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyCo8Iq_u0Q1Znya-Qt5r9HWB-SLSeIf4uw",
       authDomain: "notifications-6665e.firebaseapp.com",
