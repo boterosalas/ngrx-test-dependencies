@@ -44,14 +44,14 @@
     >
       <i ngClass="fab fa-twitter "></i>
     </button>
-    <!-- <button
-      theme="circles-dark"
-      shareButton="whatsapp"
-      [url]="url"
-      ngClass="sharebutton {{classButtonWhatsapp}}"
-    >
-      <i ngClass="fab fa-whatsapp {{classButtonWhatsapp}}"></i>
-    </button> -->
+      <a 
+      href="https://web.whatsapp.com/send?text={{url}}" 
+      target="_blank"
+      data-action="share/whatsapp/share"
+      ngClass="sharebutton p-3 {{classButtonWhatsapp}}"
+      >
+        <i ngClass="fab fa-whatsapp {{classButtonWhatsapp}}"></i>
+    </a>
   </div>
 
   <div class="share-mobile">
