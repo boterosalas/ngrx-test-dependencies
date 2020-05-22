@@ -208,7 +208,11 @@
     "COMISSIONS_TEXT": "Conoce nuestras comisiones",
     "CATEGORY": "Categoría de producto",
     "COMISSION": "Comisión",
-    "MARKETPLACE": "*Marketplace está excluido y ninguno de sus productos generan comisión."
+    "MARKETPLACE": "*Marketplace está excluido y ninguno de sus productos generan comisión.",
+    "TUTORIAL": "Tutoriales",
+    "TUTORIAL_INTRO": "Aprende más sobre Clickam, acá podrás dar un recorrido guiado por cada funcionalidad de Clickam",
+    "TUTORIAL_SHARE_TITLE": "Comprar, Compartir o Referir",
+    "TUTORIAL_SHARE_TEXT": "Aprende cómo comprar para ganar comisiones, compartir o referir productos a tus conocidos por medio de la plataforma"
   },
   "FREQUENT": {
     "FREQUENT_QUESTIONS": "Preguntas Frecuentes",
