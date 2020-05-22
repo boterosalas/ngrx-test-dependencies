@@ -110,7 +110,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.ngNavigatorShareService = ngNavigatorShareService;
 
     this.route.params.subscribe(route => {
-      if(this.id === undefined && this.title === undefined && this.image === undefined && this.percent === undefined) {
+      if(route.id === undefined && route.code === undefined && route.imageurl === undefined && route.infoAditional === undefined) {
         this.id = '1';
         this.title = 'exito'
         this.image = 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg'
