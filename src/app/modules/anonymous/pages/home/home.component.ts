@@ -264,7 +264,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.joyrideService
       .startTour({
         steps: this.numberSteps.steps,
-        waitingTime: 1000,
+        waitingTime: 1500,
         customTexts: { prev: "Anterior", next: "Siguiente", done: "Terminar" },
       })
       .subscribe(
