@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { JwtModule } from '@auth0/angular-jwt';
 
 describe('ClickAcademyComponent', () => {
   let component: ClickAcademyComponent;
@@ -21,6 +23,17 @@ describe('ClickAcademyComponent', () => {
         BrowserAnimationsModule,
         SharedModule,
         RouterTestingModule,
+        HttpClientTestingModule,
+        JwtModule.forRoot({
+          config: {
+            tokenGetter: () => {
+              return localStorage.getItem("ACCESS_TOKEN");
+            },
+            throwNoTokenError: true,
+            whitelistedDomains: [],
+            blacklistedRoutes: []
+          }
+        })
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
