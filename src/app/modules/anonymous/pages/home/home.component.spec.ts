@@ -22,7 +22,6 @@ import { LogoComponent } from 'src/app/modules/shared/components/logo/logo.compo
 import { SliderComponent } from '../../components/slider/slider.component';
 import { AnonymousModule } from '../../anonymous.module';
 import { ContentService } from 'src/app/services/content.service';
-import { JoyrideModule, JoyrideService, JoyrideStepService, JoyrideBackdropService, DocumentService, DomRefService, JoyrideOptionsService, EventListenerService, JoyrideStepsContainerService, LoggerService, StepDrawerService, TemplatesService } from 'ngx-joyride';
 
 class MockAuthService extends AuthService {
 

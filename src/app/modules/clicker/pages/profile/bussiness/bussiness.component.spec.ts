@@ -29,7 +29,6 @@ import { UserService } from "src/app/services/user.service";
 import { ClickerModule } from "../../../clicker.module";
 import { LinksService } from "src/app/services/links.service";
 import { Router } from "@angular/router";
-import { JoyrideModule, JoyrideService, JoyrideStepService, JoyrideBackdropService, DocumentService, DomRefService, JoyrideOptionsService, EventListenerService, JoyrideStepsContainerService, LoggerService, StepDrawerService, TemplatesService } from 'ngx-joyride';
 
 describe("BussinessComponent", () => {
   let component: BussinessComponent;
