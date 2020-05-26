@@ -15,7 +15,6 @@ import { TokenService } from 'src/app/services/token.service';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { environment } from 'src/environments/environment';
-import { JoyrideService } from 'ngx-joyride';
 
 @Component({
   selector: 'app-bussiness',
