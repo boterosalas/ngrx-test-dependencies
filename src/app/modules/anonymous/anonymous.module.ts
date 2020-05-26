@@ -113,8 +113,7 @@ const routes: Routes = [
     ShareButtonsModule,
     RouterModule.forChild(routes),
     MatPasswordStrengthModule,
-    RecaptchaV3Module,
-    JoyrideModule.forChild()
+    RecaptchaV3Module
   ],
   exports: [
     RouterModule,

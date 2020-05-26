@@ -106,8 +106,7 @@ const routes: Routes = [
     ShareModule,
     DragScrollModule,
     MatPasswordStrengthModule,
-    RouterModule.forChild(routes),
-    JoyrideModule.forChild()
+    RouterModule.forChild(routes)
   ],
   entryComponents: [DialogComponent, DialogEditComponent, DialogHistoryComponent]
 })

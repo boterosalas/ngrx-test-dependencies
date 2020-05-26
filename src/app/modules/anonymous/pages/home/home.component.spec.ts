@@ -99,7 +99,6 @@ let offers = {"mobile":[{"imageurl":"https://webclickamdev.blob.core.windows.net
         FormsModule,
         ReactiveFormsModule,
         HttpClientTestingModule,
-        JoyrideModule.forChild(),
         RouterTestingModule.withRoutes([
           { path: 'clicker', component: HomeComponent},
           { path: 'inicio', component: HomeComponent},
@@ -121,19 +120,7 @@ let offers = {"mobile":[{"imageurl":"https://webclickamdev.blob.core.windows.net
         { provide: UserService, useValue: mockUserService },
         { provide: AuthService, useClass: MockAuthService },
         { provide: UtilsService, useValue: mockUtilsService },
-        { provide: ContentService, useValue: mockContentService },
-        JoyrideService,
-        JoyrideStepService,
-        JoyrideBackdropService,
-        DocumentService,
-        DomRefService,
-        JoyrideOptionsService,
-        EventListenerService,
-        JoyrideStepsContainerService,
-        LoggerService,
-        StepDrawerService,
-        TemplatesService
-        // AuthService
+        { provide: ContentService, useValue: mockContentService }
       ],
       schemas: [
         // NO_ERRORS_SCHEMA

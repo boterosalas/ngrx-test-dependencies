@@ -134,7 +134,6 @@ describe("BussinessComponent", () => {
         RouterTestingModule,
         HttpClientTestingModule,
         BrowserAnimationsModule,
-        JoyrideModule.forChild(),
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
@@ -151,18 +150,7 @@ describe("BussinessComponent", () => {
         { provide: UserService, useValue: mockUserService },
         { provide: MatDialogRef, useValue: mockDialogRef },
         { provide: MAT_BOTTOM_SHEET_DATA, useValue: mockDialog },
-        { provide: LinksService, useValue: mockLinksService },
-        JoyrideService,
-        JoyrideStepService,
-        JoyrideBackdropService,
-        DocumentService,
-        DomRefService,
-        JoyrideOptionsService,
-        EventListenerService,
-        JoyrideStepsContainerService,
-        LoggerService,
-        StepDrawerService,
-        TemplatesService
+        { provide: LinksService, useValue: mockLinksService }
       ],
     })
       .overrideModule(BrowserDynamicTestingModule, {
