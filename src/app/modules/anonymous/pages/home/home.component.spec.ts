@@ -22,6 +22,11 @@ import { LogoComponent } from 'src/app/modules/shared/components/logo/logo.compo
 import { SliderComponent } from '../../components/slider/slider.component';
 import { AnonymousModule } from '../../anonymous.module';
 import { ContentService } from 'src/app/services/content.service';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { AngularFireModule } from '@angular/fire';
 
 class MockAuthService extends AuthService {
 
@@ -104,6 +109,20 @@ let offers = {"mobile":[{"imageurl":"https://webclickamdev.blob.core.windows.net
         ]),
         BrowserAnimationsModule,
         TranslateModule.forRoot({}),
+        AngularFireDatabaseModule,
+        AngularFireAuthModule,
+        AngularFireMessagingModule,
+        ServiceWorkerModule.register('', {enabled: false}),
+        AngularFireModule.initializeApp({
+          apiKey: "AIzaSyBLEXtXZGfMEm6dLHtngNa_HWgEjjrk-14",
+          authDomain: "test-push-notification-633a0.firebaseapp.com",
+          databaseURL: "https://test-push-notification-633a0.firebaseio.com",
+          projectId: "test-push-notification-633a0",
+          storageBucket: "test-push-notification-633a0.appspot.com",
+          messagingSenderId: "374253972065",
+          appId: "1:374253972065:web:96a6651d3a2f816451d820",
+          measurementId: "G-BESRDNSPL1"
+        }),
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {

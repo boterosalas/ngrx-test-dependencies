@@ -49,6 +49,7 @@ export class UserService {
   apiUpdateUserEmail = "userprofile/updateUserEmail";
   apiRegisterUserTerms = "userprofile/registeruserterms";
   apiSaveUserOnboardingViewed = "userprofile/saveuseronboardingviewed";
+  apiSaveUserDevice = "notification/saveuserdevice";
 
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
@@ -156,6 +157,11 @@ export class UserService {
           )
         )
       );
+  }
+
+  public saveUserDevice(userid: string, token: string) {
+    return this.http
+      .post(`${this.url}${this.apiSaveUserDevice}`, {userid:userid, device: token}, this.httpOptions);
   }
 
   public uploadFiles(params: any) {
