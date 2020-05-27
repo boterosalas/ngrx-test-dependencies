@@ -30,7 +30,7 @@ import { AuthInterceptor } from './interceptors/auth-interceptor.service';
 import { BnNgIdleService } from 'bn-ng-idle';
 
 // angular fire notifications
-// import { MessagingService } from './shared/messaging.service';
+import { MessagingService } from './shared/messaging.service';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { AngularFireModule } from '@angular/fire';
@@ -60,16 +60,7 @@ export function jwtTokenGetter() {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireMessagingModule,
-    AngularFireModule.initializeApp({
-      apiKey: "AIzaSyCo8Iq_u0Q1Znya-Qt5r9HWB-SLSeIf4uw",
-      authDomain: "notifications-6665e.firebaseapp.com",
-      databaseURL: "https://notifications-6665e.firebaseio.com",
-      projectId: "notifications-6665e",
-      storageBucket: "notifications-6665e.appspot.com",
-      messagingSenderId: "471373902459",
-      appId: "1:471373902459:web:84cbd92b19b458300528de",
-      measurementId: "G-SVL6VCELL4"
-    }),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     JwtModule.forRoot({
       config: {
         tokenGetter: jwtTokenGetter,
@@ -99,7 +90,7 @@ export function jwtTokenGetter() {
       multi: true
     },
     BnNgIdleService,
-    // MessagingService,
+    MessagingService,
     AsyncPipe
   ],
   bootstrap: [AppComponent]

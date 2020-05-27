@@ -29,6 +29,8 @@ import { MatDialog } from "@angular/material";
 import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
 import { ResponseService } from "src/app/interfaces/response";
 import { LinksService } from "src/app/services/links.service";
+import { MessagingService } from 'src/app/shared/messaging.service';
+
 
 @Component({
   selector: "app-login",
@@ -81,6 +83,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   categories = [];
   managedPayments: boolean;
   role: String;
+  userId: any;
+  message: any;
 
   constructor(
     public router: Router,
@@ -90,7 +94,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     public auth: AuthService,
     private content: ContentService,
     private dialog: MatDialog,
-    private link: LinksService
+    private link: LinksService,
+    private messagingService: MessagingService
   ) {
     /**
      *  Verifica que en la ruta de inicio exista el parametro de email y activa el usuario
@@ -126,6 +131,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public getUserData() {
+    let token = localStorage.getItem("ACCESS_TOKEN");
     this.subscription = this.auth.getRole$.subscribe((role) => {
       this.role = role;
       if (role === "CLICKER" || role === "ADMIN") {
@@ -133,6 +139,13 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.isEmployee = user.isEmployeeGrupoExito;
           this.managedPayments = user.managedPayments;
         });
+      }
+      if(role === "CLICKER" && token !== null) {
+        let tokenDecode = decode(token);
+        this.userId = tokenDecode.userid;
+        this.messagingService.requestPermission(this.userId);
+        this.messagingService.receiveMessage();
+        this.message = this.messagingService.currentMessage;
       }
       setTimeout(() => {
         this.showModalPayment();
