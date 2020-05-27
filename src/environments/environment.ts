@@ -19,14 +19,13 @@ export const environment = {
   SUBSCRIPTION: 'f5edbcd2315e479aad33d80c58052fcc',
   // SUBSCRIPTION: 'e2d3328d254d4e52a11495b223f56e86'
   firebaseConfig: {
-    apiKey: "AIzaSyCo8Iq_u0Q1Znya-Qt5r9HWB-SLSeIf4uw",
-    authDomain: "notifications-6665e.firebaseapp.com",
-    databaseURL: "https://notifications-6665e.firebaseio.com",
-    projectId: "notifications-6665e",
-    storageBucket: "notifications-6665e.appspot.com",
-    messagingSenderId: "471373902459",
-    appId: "1:471373902459:web:84cbd92b19b458300528de",
-    measurementId: "G-SVL6VCELL4"
+    apiKey: "AIzaSyDi89VEe3hUKkOxIoGyd4RUz_lv_9oazrc",
+    authDomain: "app-clickam-dev-278016.firebaseapp.com",
+    databaseURL: "https://app-clickam-dev-278016.firebaseio.com",
+    projectId: "app-clickam-dev-278016",
+    storageBucket: "app-clickam-dev-278016.appspot.com",
+    messagingSenderId: "158450297764",
+    appId: "1:158450297764:web:0ab01b0d9b7f175aa26f31"
   }
 };
 

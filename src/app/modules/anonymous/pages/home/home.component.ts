@@ -140,7 +140,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.managedPayments = user.managedPayments;
         });
       }
-      if(role === "CLICKER" && token !== null) {
+      if(role === "CLICKER") {
         let tokenDecode = decode(token);
         this.userId = tokenDecode.userid;
         this.messagingService.requestPermission(this.userId);
