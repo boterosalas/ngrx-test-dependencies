@@ -5,6 +5,7 @@ import { AngularFireMessaging } from '@angular/fire/messaging';
 import { mergeMapTo } from 'rxjs/operators';
 import { take } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs'
+import { UserService } from '../services/user.service';
 
 @Injectable({
     providedIn: "root"
@@ -14,6 +15,7 @@ export class MessagingService {
   currentMessage = new BehaviorSubject(null);
 
   constructor(
+    private user: UserService,
     private angularFireDB: AngularFireDatabase,
     private angularFireAuth: AngularFireAuth,
     private angularFireMessaging: AngularFireMessaging) {
@@ -39,6 +41,10 @@ export class MessagingService {
         data[userId] = token
         this.angularFireDB.object('fcmTokens/').update(data)
       })
+      
+
+      this.user.saveUserDevice(userId, token).subscribe();
+
   }
 
   /**
@@ -49,7 +55,7 @@ export class MessagingService {
   requestPermission(userId) {
     this.angularFireMessaging.requestToken.subscribe(
       (token) => {
-        // console.log(token);
+        console.log(token);
         this.updateToken(userId, token);
       },
       (err) => {

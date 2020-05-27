@@ -28,7 +28,8 @@ import { TokenService } from "./services/token.service";
 import { Meta } from "@angular/platform-browser";
 import { SwUpdate } from "@angular/service-worker";
 declare var dataLayer: any;
-// import { MessagingService } from "./shared/messaging.service";
+import { MessagingService } from "./shared/messaging.service";
+
 
 @Component({
   selector: "app-root",
@@ -99,7 +100,6 @@ export class AppComponent implements OnInit, OnDestroy {
   showAnimation1: boolean;
   showAnimation2: boolean;
   isLoggedIn: any;
-  message;
   firstName: string;
   lastName: string;
   email: string;
@@ -155,11 +155,6 @@ export class AppComponent implements OnInit, OnDestroy {
         });
       });
     }
-
-    // const userId = 'user001';
-    // this.messagingService.requestPermission(userId)
-    // this.messagingService.receiveMessage()
-    // this.message = this.messagingService.currentMessage
 
     // this.email = this.userInfo.userName;
 
