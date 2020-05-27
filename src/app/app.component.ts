@@ -28,7 +28,7 @@ import { TokenService } from "./services/token.service";
 import { Meta } from "@angular/platform-browser";
 import { SwUpdate } from "@angular/service-worker";
 declare var dataLayer: any;
-// import { MessagingService } from "./shared/messaging.service";
+import { MessagingService } from "./shared/messaging.service";
 
 @Component({
   selector: "app-root",
@@ -118,7 +118,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private user: UserService,
     private token: TokenService,
     private metaTagService: Meta,
-    private swUpdate: SwUpdate
+    private swUpdate: SwUpdate,
+    private messagingService: MessagingService
   ) {
     translate.setDefaultLang("es");
     translate.use("es");
@@ -156,10 +157,10 @@ export class AppComponent implements OnInit, OnDestroy {
       });
     }
 
-    // const userId = 'user001';
-    // this.messagingService.requestPermission(userId)
-    // this.messagingService.receiveMessage()
-    // this.message = this.messagingService.currentMessage
+    const userId = 'user001';
+    this.messagingService.requestPermission(userId)
+    this.messagingService.receiveMessage()
+    this.message = this.messagingService.currentMessage
 
     // this.email = this.userInfo.userName;
 
