@@ -131,7 +131,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public getUserData() {
-    let token = localStorage.getItem("ACCESS_TOKEN");
     this.subscription = this.auth.getRole$.subscribe((role) => {
       this.role = role;
       if (role === "CLICKER" || role === "ADMIN") {
@@ -140,16 +139,19 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.managedPayments = user.managedPayments;
         });
       }
+      setTimeout(() => {
+        this.showModalPayment();
+      }, 1000);
+
       if(role === "CLICKER") {
+        let token = localStorage.getItem("ACCESS_TOKEN");
         let tokenDecode = decode(token);
         this.userId = tokenDecode.userid;
         this.messagingService.requestPermission(this.userId);
         this.messagingService.receiveMessage();
         this.message = this.messagingService.currentMessage;
       }
-      setTimeout(() => {
-        this.showModalPayment();
-      }, 1000);
+
     });
   }
 
