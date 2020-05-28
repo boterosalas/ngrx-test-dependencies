@@ -10,13 +10,12 @@ export const environment = {
   PDF: 'https://webclickampdn.blob.core.windows.net/clickacademy/pdf/',
   SUBSCRIPTION: 'e2d3328d254d4e52a11495b223f56e86',
   firebaseConfig: {
-    apiKey: "AIzaSyCo8Iq_u0Q1Znya-Qt5r9HWB-SLSeIf4uw",
-    authDomain: "notifications-6665e.firebaseapp.com",
-    databaseURL: "https://notifications-6665e.firebaseio.com",
-    projectId: "notifications-6665e",
-    storageBucket: "notifications-6665e.appspot.com",
-    messagingSenderId: "471373902459",
-    appId: "1:471373902459:web:84cbd92b19b458300528de",
-    measurementId: "G-SVL6VCELL4"
+    apiKey: "AIzaSyAZNoC1LqIWsTtXhjaWBneju-b_-xSIpnw",
+    authDomain: "app-clickam-pdn.firebaseapp.com",
+    databaseURL: "https://app-clickam-pdn.firebaseio.com",
+    projectId: "app-clickam-pdn",
+    storageBucket: "app-clickam-pdn.appspot.com",
+    messagingSenderId: "7696742342",
+    appId: "1:7696742342:web:f00112d7856e1a917da4c7"
   }
 };
