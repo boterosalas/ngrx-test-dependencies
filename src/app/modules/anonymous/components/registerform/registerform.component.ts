@@ -156,12 +156,13 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     this.loading.show();
 
     let registerForm = {
-      Email: this.registerForm.controls.email.value,
+      Email: this.registerForm.controls.email.value.toLowerCase(),
       FirstNames: this.registerForm.controls.name.value,
       LastNames: this.registerForm.controls.lastName.value,
       Identification: this.registerForm.controls.id.value,
       Cellphone: this.registerForm.controls.phone.value,
       Password: btoa(this.registerForm.controls.password.value),
+      idReferrer: localStorage.getItem('idClicker'),
       IdType: this.registerForm.controls.idType.value,
       acceptHabeasData: true,
       acceptTerms: true

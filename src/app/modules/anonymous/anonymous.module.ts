@@ -30,6 +30,7 @@ import { NewBusinessComponent } from './components/new-business/new-business.com
 import { NewBusinessFormComponent } from './components/new-business-form/new-business-form.component';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module, RecaptchaFormsModule, RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
 import { UrlComponent } from './pages/url/url.component';
+import { ActivateAccountFormComponent } from './components/activate-account-form/activate-account-form.component';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -94,6 +95,7 @@ const routes: Routes = [
     NewBusinessComponent,
     NewBusinessFormComponent,
     UrlComponent,
+    ActivateAccountFormComponent,
     // ReportComponent
   ],
   imports: [
@@ -118,6 +120,7 @@ const routes: Routes = [
     RegisterformComponent,
     RecoverpasswordformComponent,
     ForgotpasswordformComponent,
+    ActivateAccountFormComponent,
     MenuComponent,
     CardComponent
   ],

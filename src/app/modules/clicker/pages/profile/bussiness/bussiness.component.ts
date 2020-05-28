@@ -103,16 +103,23 @@ export class BussinessComponent implements OnInit, OnDestroy {
     private links: LinksService,
     private token: TokenService,
     ngNavigatorShareService: NgNavigatorShareService,
-    private dialogModal: MatDialog
+    private dialogModal: MatDialog,
   ) { 
     
     this.ngNavigatorShareService = ngNavigatorShareService;
 
     this.route.params.subscribe(route => {
-      this.title = route.code;
-      this.percent = route.infoAditional;
-      this.id = route.id;
-      this.image = route.imageurl;
+      if(route.id === undefined && route.code === undefined && route.imageurl === undefined && route.infoAditional === undefined) {
+        this.id = '1';
+        this.title = 'exito'
+        this.image = 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg'
+        this.percent = 'Hasta 9.6% de ganancia'
+      } else {
+        this.id = route.id;
+        this.title = route.code;
+        this.image = route.imageurl;
+        this.percent = route.infoAditional;
+      }
     });
 
   }

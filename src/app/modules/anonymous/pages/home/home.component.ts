@@ -6,6 +6,7 @@ import {
   OnDestroy,
   ViewChild,
   TemplateRef,
+  ElementRef,
 } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import Swal from "sweetalert2";
@@ -27,6 +28,7 @@ import { distinctUntilChanged } from "rxjs/operators";
 import { MatDialog } from "@angular/material";
 import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
 import { ResponseService } from "src/app/interfaces/response";
+import { LinksService } from "src/app/services/links.service";
 
 @Component({
   selector: "app-login",
@@ -87,7 +89,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     private utils: UtilsService,
     public auth: AuthService,
     private content: ContentService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private link: LinksService
   ) {
     /**
      *  Verifica que en la ruta de inicio exista el parametro de email y activa el usuario
@@ -97,10 +100,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscription = this.route.queryParams.subscribe((params) => {
       if (params.email) {
         this.email = params.email;
-
         this.activateUser();
       } else {
-        router.navigate(["/"]);
+        if (params.code) {
+          localStorage.setItem("idClicker", params.code);
+          this.openRegister();
+        } else {
+          router.navigate(["/"]);
+        }
       }
     });
   }
@@ -177,6 +184,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     );
   }
 
+  public getAmount() {
+    this.subscription = this.link.getAmount().subscribe((amount) => {
+      localStorage.setItem("Amount", amount.amountsCommission);
+    });
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
@@ -218,6 +231,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscription = this.auth.isLogged$.subscribe((val) => {
       let token = localStorage.getItem("ACCESS_TOKEN");
       if (!!val || token !== null) {
+        this.getAmount();
         this.subscription = this.content
           .getBusinessClicker()
           .subscribe((bussiness) => {
@@ -341,7 +355,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public showModalPayment() {
-    if(this.role === 'CLICKER' && this.managedPayments === false && this.isEmployee === false ) {
+    if (
+      this.role === "CLICKER" &&
+      this.managedPayments === false &&
+      this.isEmployee === false
+    ) {
       Swal.fire({
         title: "¡Registra tus datos bancarios!",
         text:
@@ -355,7 +373,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         cancelButtonText: "Ahora no",
         confirmButtonClass: "payment-success",
         cancelButtonClass: "payment-cancel",
-        customClass:"paymentData"
+        customClass: "paymentData",
       }).then((resp) => {
         if (resp.value === true) {
           this.router.navigate(["/mi-perfil", "pagos"]);
@@ -363,6 +381,4 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
     }
   }
-
-
 }

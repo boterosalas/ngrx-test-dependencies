@@ -27,10 +27,12 @@ export class LinksService {
   apiKPI = "Reports/getKPI";
   apiUsersExcel = "Reports/getUsersExcel";
   apiAuditExcel = "Reports/getAudit";
+  apiGetReportReferral = "Reports/getreportreferral";
   apigetReportClickam = "Reports/getReportClickam";
   apiUsers = "Reports/getUsers";
   insurance = "Insurance/ProcessFiles";
   apiSaveLink = "Link/SaveLink";
+  apiSaveLinkRefered = "link/savelinkreferred";
   apiPostReferrrals = "Link/downloadReferrals";
   apiGetTotalLinks = "Link/GetTotalLinksGenerated";
   apiGetUrl = "link/geturl";
@@ -40,6 +42,10 @@ export class LinksService {
   apiHistory = "commissions/getPaymentHistoryClicker";
   apiLinkHistory = "linkhistory/getlinkhistory";
   apiupdatePaymentDate = "commissions/updatePaymentDate";
+  apiGetReferrals = "referrals/getreferrals";
+  apiGetAmounts = "amount/getamounts";
+  apiSaveAmountCommission = "amount/saveamountcommission";
+  apiSaveAmountReferred = "amount/saveamountreferred";
 
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
@@ -55,6 +61,48 @@ export class LinksService {
   public saveLink(SaveLink: any) {
     return this.http
       .post(`${this.url + this.apiSaveLink}`, SaveLink, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        )
+      );
+  }
+
+  public saveLinkRefer(SaveLink: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveLinkRefered}`, SaveLink, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        )
+      );
+  }
+
+  public saveAmountCommission(amount: any) {
+    return this.http
+      .post(`${this.urlComission+ this.apiSaveAmountCommission}`, amount, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        )
+      );
+  }
+
+  public saveAmountReferred(amount: any) {
+    return this.http
+      .post(`${this.urlComission+ this.apiSaveAmountReferred}`, amount, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
@@ -83,6 +131,41 @@ export class LinksService {
   public getReports() {
     let apiReport = `${this.reports}`;
     return this.http.get(`${this.urlComission}/${apiReport}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: ResponseService) => {
+        return resp.objectResponse;
+      })
+    );
+  }
+
+  public getAmount() {
+    return this.http.get(`${this.urlComission}/${this.apiGetAmounts}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: ResponseService) => {
+        return resp.objectResponse;
+      })
+    );
+  }
+
+  public getReferrals(params) {
+    return this.http
+    .get(
+      `${this.urlComission}${this.apiGetReferrals}?from=${params.from}&to=${params.to}&orderBy=DATE&ordination=DESC`,
+      this.httpOptions
+    )
+    .pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(1000),
@@ -229,6 +312,23 @@ export class LinksService {
     return this.http
       .get(
         `${this.urlComission}${this.apiAuditExcel}?&start=${params.start}&end=${params.end}`,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        )
+      );
+  }
+
+  public getReportReferral(params: any) {
+    return this.http
+      .get(
+        `${this.urlComission}${this.apiGetReportReferral}?&start=${params.start}&end=${params.end}`,
         this.httpOptions
       )
       .pipe(

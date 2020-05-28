@@ -46,9 +46,15 @@
         </ng-template>
       
         <app-card *ngIf="showForgotForm" Class="gtmIniciarSesiónClicLtrlOlvidoClave" idTitle="titleForgot" title="{{ 'FORGOTPASSWORD.FORGOT_PASSWORD' | translate }}" description="{{ 'FORGOTPASSWORD.ENTER_EMAIL' | translate }}" [template]="templateCardForgot"></app-card>
-      
+        
         <ng-template #templateCardForgot>
           <app-forgotpasswordform></app-forgotpasswordform>
+        </ng-template>
+
+        <app-card *ngIf="showActivateForm" idTitle="titleActivate" title="{{ 'FORGOTPASSWORD.FORGOT_PASSWORD' | translate }}" description="{{ 'FORGOTPASSWORD.ENTER_EMAIL' | translate }}" [template]="templateCardActivate"></app-card>
+
+        <ng-template #templateCardActivate>
+          <app-activate-account-form></app-activate-account-form>
         </ng-template>
         
       </div>
@@ -77,6 +83,12 @@
       
         <ng-template #templateCardForgot>
           <app-forgotpasswordform></app-forgotpasswordform>
+        </ng-template>
+
+        <app-card *ngIf="showActivateForm" idTitle="titleActivate" title="{{ 'FORGOTPASSWORD.FORGOT_PASSWORD' | translate }}" description="{{ 'FORGOTPASSWORD.ENTER_EMAIL' | translate }}" [template]="templateCardActivate"></app-card>
+
+        <ng-template #templateCardActivate>
+          <app-activate-account-form></app-activate-account-form>
         </ng-template>
         
       </div>

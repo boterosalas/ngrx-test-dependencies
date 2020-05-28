@@ -7,10 +7,16 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
+import { ContentService } from 'src/app/services/content.service';
+import { of } from 'rxjs';
 
 describe('BusinessComponent', () => {
   let component: BusinessComponent;
   let fixture: ComponentFixture<BusinessComponent>;
+
+  const mockContentService = jasmine.createSpyObj("ContentService", [
+    "businessExcel"
+  ]);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -31,6 +37,9 @@ describe('BusinessComponent', () => {
             blacklistedRoutes: []
           }
         })
+      ],
+      providers: [
+        { provide: ContentService, useValue: mockContentService }
       ]
     })
     .compileComponents();
@@ -45,4 +54,20 @@ describe('BusinessComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('export bussiness Success', () => {
+    let data = {state: "Success", userMessage: "Al terminar de procesar el archivo se enviará un correo"};
+    mockContentService.businessExcel.and.returnValue(of(data));
+    component.exportBusiness();
+    expect(mockContentService.businessExcel).toHaveBeenCalled();
+  });
+
+  it('export bussiness error', () => {
+    let data = {state: "Error", userMessage: "Ha ocurrido un error"};
+    mockContentService.businessExcel.and.returnValue(of(data));
+    component.exportBusiness();
+    expect(mockContentService.businessExcel).toHaveBeenCalled();
+  });
+  
+
 });

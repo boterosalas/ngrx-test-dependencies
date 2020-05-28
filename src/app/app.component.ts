@@ -82,7 +82,7 @@ export class AppComponent implements OnInit, OnDestroy {
   //   shareReplay()
   // );
 
-  @ViewChild("templateCardLogin, TemplateCardRegister, TemplateCardForgot", {
+  @ViewChild("templateCardLogin, TemplateCardRegister, TemplateCardForgot, templateCardActivate", {
     static: false,
   })
   template: TemplateRef<any>;
@@ -91,6 +91,7 @@ export class AppComponent implements OnInit, OnDestroy {
   showLoginForm: boolean;
   showRegisterForm: boolean;
   showForgotForm: boolean;
+  showActivateForm: boolean;
   isOpen = false;
   isOpenMenu = false;
   private subscription: Subscription = new Subscription();
@@ -180,12 +181,14 @@ export class AppComponent implements OnInit, OnDestroy {
     this.showLoginForm = true;
     this.showRegisterForm = false;
     this.showForgotForm = false;
+    this.showActivateForm = false;
 
     this.subscription = this.utils.change.subscribe((isOpen) => {
       this.isOpen = isOpen;
       this.showRegisterForm = false;
       this.showLoginForm = true;
       this.showForgotForm = false;
+      this.showActivateForm = false;
     });
 
     this.subscription = this.utils.changeMenu.subscribe((isOpenMenu) => {
@@ -198,6 +201,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.showRegisterForm = true;
         this.showLoginForm = false;
         this.showForgotForm = false;
+        this.showActivateForm = false;
       }
     );
 
@@ -206,7 +210,18 @@ export class AppComponent implements OnInit, OnDestroy {
         this.isOpen = isOpenForgot;
         this.showRegisterForm = false;
         this.showLoginForm = false;
+        this.showActivateForm = false;
         this.showForgotForm = true;
+      }
+    );
+
+    this.subscription = this.utils.showActivateFormEmit.subscribe(
+      (isOpenActivate) => {
+        this.isOpen = isOpenActivate;
+        this.showActivateForm = true;
+        this.showRegisterForm = false;
+        this.showLoginForm = false;
+        this.showForgotForm = false;
       }
     );
 
@@ -221,24 +236,35 @@ export class AppComponent implements OnInit, OnDestroy {
     this.showLoginForm = true;
     this.showRegisterForm = false;
     this.showForgotForm = false;
+    this.showActivateForm = false;
   }
 
   public showRegister() {
     this.showRegisterForm = true;
     this.showLoginForm = false;
     this.showForgotForm = false;
+    this.showActivateForm = false;
   }
 
   public showLogin() {
     this.showRegisterForm = false;
     this.showForgotForm = false;
     this.showLoginForm = true;
+    this.showActivateForm = false;
   }
 
   public showForgot() {
     this.showForgotForm = true;
     this.showRegisterForm = false;
     this.showLoginForm = false;
+    this.showActivateForm = false;
+  }
+
+  public showActivate() {
+    this.showForgotForm = false;
+    this.showRegisterForm = false;
+    this.showLoginForm = false;
+    this.showActivateForm = true;
   }
 
   public getUserData() {

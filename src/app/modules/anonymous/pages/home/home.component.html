@@ -4,15 +4,15 @@
 
 <div class="container">
   <span class="border-gray d-block"></span>
-  <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3>
+  <h3 class="border-bottom-orange-init title-h3" id="bussinessHook">{{ 'HOME.BUSSINESS' | translate }}</h3>
   <p class="f-20" fxHide.xs>{{ 'HOME.BUSSINESS_TEXT' | translate }}</p>
   <div fxLayout="column" fxLayout.gt-xs="row wrap" ngClass.gt-xs="pb-3" fxLayoutAlign="center center" fxLayoutGap="1%">
     <ng-container *ngFor="let bussines of bussiness; let i = index">
-      <app-bussiness-card *ngIf="bussines.code !== 'envios-clickam'" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
+      <app-bussiness-card *ngIf="bussines.code !== 'envios-clickam'" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [code]="bussines.code" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
     </ng-container>
-    <!-- <ng-container *ngFor="let bussines of bussinessClicker; let i = index">
+    <ng-container *ngFor="let bussines of bussinessClicker; let i = index">
       <app-bussiness-card *ngIf="isEmployee === true && bussines.code === 'envios-clickam' && auth.isLoggedIn()" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
-    </ng-container> -->
+    </ng-container>
   </div>
 
   <span class="border-gray d-block"></span>
@@ -31,5 +31,3 @@
 <ng-template #templateBusiness>
     <app-new-business-form (registerBusinessEmit)="sendDataBusiness($event)" [categories]="categories"></app-new-business-form>
 </ng-template>
-
-

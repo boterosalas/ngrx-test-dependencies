@@ -51,7 +51,8 @@
     "SITE_NAME": "Sitio web",
     "CONTACT_PERSON": "Persona de contacto",
     "BUSINESS_CATEGORY": "Categoría del negocio",
-    "SEE_DETAIL":"Ver detalle"
+    "SEE_DETAIL":"Ver detalle",
+    "WIN10K":"Refiere y gana"
   },
   "FOOTER": {
     "FOLLOW_US": "Síguenos",
@@ -65,7 +66,8 @@
     "INTRODUCE_EMAIL": "Ingrese un correo",
     "INTRODUCE_PASSWORD": "Ingrese una contraseña",
     "DESCRIPTION": "Si todavía no tienes una cuenta puedes",
-    "REGISTER": "Registrarse"
+    "REGISTER": "Registrarse",
+    "ACTIVATE": "¿Aún no te ha llegado tu correo de activación?"
   },
   "REGISTER": {
     "ACCEPT": "¿Acepta los términos y condiciones y políticas de privacidad de Clickam?",
@@ -98,6 +100,9 @@
   "FORGOTPASSWORD": {
     "FORGOT_PASSWORD": "Recuperar contraseña",
     "ENTER_EMAIL": "Ingresa tu correo electrónico registrado para recuperar tu contraseña"
+  },
+  "ACTIVATE": {
+    "TEXT": "¿Aún no te ha llegado tu correo de activación?"
   },
   "RECOVERPASSWORD": {
     "RECOVER_PASSWORD": "Recuperar contraseña",
@@ -203,7 +208,11 @@
     "COMISSIONS_TEXT": "Conoce nuestras comisiones",
     "CATEGORY": "Categoría de producto",
     "COMISSION": "Comisión",
-    "MARKETPLACE": "*Marketplace está excluido y ninguno de sus productos generan comisión."
+    "MARKETPLACE": "*Marketplace está excluido y ninguno de sus productos generan comisión.",
+    "TUTORIAL": "Tutoriales",
+    "TUTORIAL_INTRO": "Aprende más sobre Clickam, acá podrás dar un recorrido guiado por cada funcionalidad de Clickam",
+    "TUTORIAL_SHARE_TITLE": "Comprar, Compartir o Referir",
+    "TUTORIAL_SHARE_TEXT": "Aprende cómo comprar para ganar comisiones, compartir o referir productos a tus conocidos por medio de la plataforma"
   },
   "FREQUENT": {
     "FREQUENT_QUESTIONS": "Preguntas Frecuentes",
@@ -353,6 +362,28 @@
     "PRODUCT":"PRODUCTO",
     "STATE":"ESTADO",
     "COMMISION":"COMISIÓN"
+  },
+  "REFER": {
+    "REFER":"Referir",
+    "MY_REFERS": "Mis referencias",
+    "GUESTS":"INVITADOS",
+    "REGISTERED":"REGISTRADOS",
+    "CUALIFIED":"CALIFICADO",
+    "SEND_INVITATION":"Enviar invitación",
+    "REFER_WIN":"Por cada referido cualificado te vamos a regalar",
+    "EMAIL":"Invita a tus amigos por correo",
+    "EMAIL_CONTACT":"Ingresa el correo de tu contacto",
+    "SHARE":"Comparte tu invitación",
+    "COPY":"Copiar",
+    "INVITE_FRIENDS":"Invita a tus amigos por correo",
+    "SHARE_FRIENDS":"Comparte tu link con tus amigos",
+    "MY_REFERS2":"Mis Referidos",
+    "ACTIVITY":"Revisa la actividad de tus referidos, para que puedas hacerles seguimiento.",
+    "REFERED":"Referidos",
+    "CLICKER_COMISSION_TITLE": "Comisión para el clicker",
+    "CLICKER_COMISSION_TEXT": "Ingrese cual es la comisión para el clicker por referir",
+    "CLICKER_REFERED_TITLE": "Monto para ser un clicker calificado",
+    "CLICKER_REFERED_TEXT": "Ingrese cual es el monto para que un clicker pase a ser calificado"
   }
 
 }
