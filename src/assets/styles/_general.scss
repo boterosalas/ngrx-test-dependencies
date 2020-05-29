@@ -26,6 +26,10 @@ ul {
   border-radius: 10px !important;
 }
 
+.refer-tabs .mat-tab-labels {
+  justify-content: center;
+}
+
 ul li::before {
   content: "\2022";
   color: $primary-color;

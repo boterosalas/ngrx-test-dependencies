@@ -4,7 +4,7 @@ title="Referir"
 (close)="goback()"
 ></app-back-navigation>
 
-<div class="container mt-2">
+<div class="container mt-2 refer-tabs">
     <mat-tab-group>
         <!-- REFERS -->
         <mat-tab>
@@ -14,7 +14,7 @@ title="Referir"
             <div>
                 <app-refer-share #share (shareMobile)="shareEvent($event)" (urlClicker)="copyInputMessage($event)"></app-refer-share>
                 <app-refer-email (email)="sendEmail($event)"></app-refer-email>
-                <p>{{'REFER.REFER_WIN' | translate: { amount: amount | currency : '' : 'symbol' : '1.0-0' } }}</p>
+                <p ngClass.gt-xs="f-20">{{'REFER.REFER_WIN' | translate: { amount: amount | currency : '' : 'symbol' : '1.0-0' } }}</p>
                 <div  innerHtml="{{'REFER.CONDITIONS' | translate: { sale: amountReferred | currency : '' : 'symbol' : '1.0-0' } }}"></div> 
             </div>
         </mat-tab>
