@@ -76,6 +76,8 @@ export class ReferComponent implements OnInit, OnDestroy {
             type: "success",
             confirmButtonText: "Aceptar",
             confirmButtonClass: "accept-refer-alert-success",
+          }).then(()=>{
+            this.getReferrals();
           })
         } else {
           Swal.fire({
