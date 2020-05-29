@@ -1,12 +1,30 @@
-.copyinput{
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 31px;
-    line-height: 11px;
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-    padding-left: 8px;
-    padding-right: 6px;
-    z-index: 9;
+@import 'variables';
+
+// .copyinput{
+//     position: absolute;
+//     top: 0;
+//     right: 0;
+//     height: 31px;
+//     line-height: 11px;
+//     border-top-left-radius: 0px;
+//     border-bottom-left-radius: 0px;
+//     padding-left: 8px;
+//     padding-right: 6px;
+//     z-index: 9;
+// }
+
+.share-refer{
+    padding: 20px;
+    border: 1px solid #8D7EB7;
+    border-radius: 10px;
+}
+
+i{
+    color: $primary-color;
+}
+
+.bg-gray{
+    background: $gray3;
+    padding: 20px;
+    border-radius: 10px;
 }
