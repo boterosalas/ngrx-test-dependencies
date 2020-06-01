@@ -9,6 +9,7 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { JwtModule } from '@auth0/angular-jwt';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('SlideVideoComponent', () => {
   let component: SlideVideoComponent;
@@ -24,6 +25,7 @@ describe('SlideVideoComponent', () => {
         ShareModule,
         SharedModule,
         BrowserAnimationsModule,
+        RouterTestingModule,
         TranslateModule.forRoot(),
         JwtModule.forRoot({
           config: {
