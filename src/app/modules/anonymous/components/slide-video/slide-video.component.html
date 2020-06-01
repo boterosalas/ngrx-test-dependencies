@@ -1,7 +1,7 @@
 <div class="position-relative">
     <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
-        <div ngxSlickItem *ngFor="let slide of sliderVideo; let i = index" class="slide mat-card m-2">
-            <div class="cursor-pointer" (click)="openVideo(slide)">
+        <div ngxSlickItem *ngFor="let slide of sliderVideo; let i = index" class="slide mat-card m-2 p-0">
+            <div id="video{{i}}" class="cursor-pointer" (click)="openVideo(slide)">
                 <img class="responsive-img" [src]="slide.img" [alt]="slide.title">
                 <div class="pl-2 pr-2">
                     <h3>{{slide.title}}</h3>

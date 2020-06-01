@@ -57,6 +57,10 @@ const routes: Routes = [
     component: ClickAcademyComponent
   },
   {
+    path: "click-academy/:video",
+    component: ClickAcademyComponent
+  },
+  {
     path: "preguntas-frecuentes",
     component: FrequentQuestionsComponent
   },
