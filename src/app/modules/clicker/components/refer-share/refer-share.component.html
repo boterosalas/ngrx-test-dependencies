@@ -1,49 +1,10 @@
-<h3 class="border-bottom-orange-init mt-0" fxShow.gt-xs="true" fxHide.xs="true">{{ 'REFER.SHARE_FRIENDS' | translate }}</h3>
-<p fxHide.gt-xs="true">{{'REFER.SHARE' | translate}}</p>
+<h2 class="border-bottom-orange-init" fxShow.gt-xs="true" fxHide.xs="true">{{ 'REFER.SHARE_FRIENDS' | translate }}</h2>
+<p>{{'REFER.SHARE' | translate}}</p>
 
-<form [formGroup]="formLink">
-    <div fxLayout="column">
-      <div fxLayout="column" fxFlex="100" fxFlex.xs="100">
-        <mat-form-field appearance="dashed" class="dashed mt-2 f-11">
-          <input
-            id="url"
-            matInput
-            formcontrolName="link"
-            [value]="url"
-            #linkInput
-            readonly
-          />
-          <button
-            mat-button
-            id="btnCopy"
-            class="copyinput"
-            color="orange"
-            (click)="copyUrl()"
-          >
-           {{ "REFER.COPY" | translate }}
-          </button>
-        </mat-form-field>
-      </div>
-    </div>
-  </form>
+  <div class="share-desktop w-100" id="share" fxLayout="row" fxLayoutAlign="space-around" fxLayoutGap="20px">
 
-  <div class="share-desktop" id="share">
-    <button
-      theme="circles-dark"
-      shareButton="facebook"
-      [url]="url"
-      ngClass="sharebutton  mr-2"
-    >
-      <i ngClass="fab fa-facebook-f "></i>
-    </button>
-    <button
-      theme="circles-dark"
-      shareButton="twitter"
-      [url]="url"
-      ngClass="sharebutton  mr-2"
-    >
-      <i ngClass="fab fa-twitter "></i>
-    </button>
+
+    <span class="share-refer" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
       <a 
       href="https://web.whatsapp.com/send?text={{url}}" 
       target="_blank"
@@ -52,6 +13,34 @@
       >
         <i ngClass="fab fa-whatsapp"></i>
     </a>
+    <p class="galano-bold f-20"> {{ "REFER.WHATSAPP" | translate }}</p>
+    </span>
+    
+    <span class="share-refer" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
+      <button
+        theme="circles-dark"
+        shareButton="facebook"
+        [url]="url"
+        ngClass="sharebutton  mr-2"
+      >
+        <i ngClass="fab fa-facebook-f "></i>
+      </button> 
+      <p class="galano-bold f-20"> {{ "REFER.FACEBOOK" | translate }}</p>
+    </span>
+
+    <span class="share-refer" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
+      <button
+        theme="circles-dark"
+        shareButton="twitter"
+        [url]="url"
+        ngClass="sharebutton  mr-2"
+      >
+        <i ngClass="fab fa-twitter "></i>
+      </button>
+      <p class="galano-bold f-20"> {{ "REFER.TWITTER" | translate }}</p>
+    </span>
+  
+
   </div>
 
   <div class="share-mobile">
@@ -59,10 +48,45 @@
     class="button button-100 button-height f-16"
     mat-raised-button
     id="ShareInvite"
-    color="border-button"
+    color="orange"
     (click)="share()"
   >
-        Compartir
+  <span fxLayout="row" fxLayoutAlign="space-between">
+    {{ "REFER.SEND_INVITATION" | translate }}
+    <img src="/assets/img/share/compartir-button.svg" alt="share-button">
+  </span>
     </button>
 
+  </div>
+
+  <div class="bg-gray mt-3">
+    <h3 class="border-bottom-orange-init">{{ "REFER.SHARE_INVITATION" | translate }}</h3>
+    <form [formGroup]="formLink">
+      <div fxLayout.gt-xs="row" fxLayout="column" fxLayoutGap="15px">
+        <div fxLayout="column" fxFlex="80" fxFlex.xs="100">
+          <mat-form-field appearance="dashed" class="dashed-2 f-11">
+            <input
+              id="url"
+              matInput
+              formcontrolName="link"
+              [value]="url"
+              #linkInput
+              readonly
+            />
+          </mat-form-field>
+        </div>
+        <div fxLayout="column" fxFlex="20" fxFlex.xs="100">
+        <button
+          mat-button
+          id="btnCopy"
+          class="copyinput"
+          ngClass.xs="button-height"
+          color="orange"
+          (click)="copyUrl()"
+        >
+         {{ "REFER.COPY" | translate }}
+        </button>
+      </div>
+      </div>
+  </form>
   </div>

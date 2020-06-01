@@ -365,25 +365,31 @@
   },
   "REFER": {
     "REFER":"Referir",
-    "MY_REFERS": "Mis referencias",
+    "MY_REFERS": "Mis referidos",
     "GUESTS":"INVITADOS",
     "REGISTERED":"REGISTRADOS",
     "CUALIFIED":"CALIFICADO",
     "SEND_INVITATION":"Enviar invitación",
-    "REFER_WIN":"Por cada referido cualificado te vamos a regalar",
+    "REFER_WIN":"¡Clicker! Para ganar {{amount}}, tu referido debe:",
     "EMAIL":"Invita a tus amigos por correo",
     "EMAIL_CONTACT":"Ingresa el correo de tu contacto",
-    "SHARE":"Comparte tu invitación",
-    "COPY":"Copiar",
+    "SHARE":"Invita a tus amigos por redes sociales",
+    "COPY":"Copiar Link",
     "INVITE_FRIENDS":"Invita a tus amigos por correo",
-    "SHARE_FRIENDS":"Comparte tu link con tus amigos",
+    "SHARE_FRIENDS":"Invita a tus amigos",
     "MY_REFERS2":"Mis Referidos",
     "ACTIVITY":"Revisa la actividad de tus referidos, para que puedas hacerles seguimiento.",
     "REFERED":"Referidos",
     "CLICKER_COMISSION_TITLE": "Comisión para el clicker",
     "CLICKER_COMISSION_TEXT": "Ingrese cual es la comisión para el clicker por referir",
     "CLICKER_REFERED_TITLE": "Monto para ser un clicker calificado",
-    "CLICKER_REFERED_TEXT": "Ingrese cual es el monto para que un clicker pase a ser calificado"
+    "CLICKER_REFERED_TEXT": "Ingrese cual es el monto para que un clicker pase a ser calificado",
+    "WHATSAPP": "Compartir en Whatsapp",
+    "FACEBOOK": "Compartir en Facebook",
+    "TWITTER": "Compartir en Twitter",
+    "SHARE_INVITATION":"Comparte tu invitación",
+    "CONDITIONS": "<h3>¿Cómo funciona el programa? </h3><p>En Clickam creamos un link asignado para ti, el cual puedes encontrar al clickear “Refiere y gana {{amount}}”, simplemente envía este link a tu círculo social, o publícalo en tus redes sociales como Facebook, Instagram, estado de WhatsApp, Twitter, entre otras. Y si alguna persona: </p><ul> <li>Ingresa a la plataforma por medio del link enviado por ti.</li><li>Realiza el proceso de registro.</li><li>Acumula {{sale}} en compras o ventas efectivas.</li></ul><p>Entonces, ¡ganarás una comisión! </p>",
+    "TERMS":"<h3>Refiere y Gana Términos y Condiciones</h3><h4>Términos del Programa de Referidos</h4><p>De acuerdo con los Términos del Programa de Referidos. Clickam te pagará un bono de COP{{amount}} en tu cuenta inscrita en la plataforma por cada referido calificado en el periodo que inicia el 28 de Mayo de 2020 y finaliza el 31 de Diciembre de 2020. (“Periodo de Oferta”).</p><p>A pesar de todo lo contrario en los Términos del Programa de referidos, esta oferta es válida solo si el referido se registra y completa su compra calificada durante el Período de la oferta.</p>"
   }
 
 }

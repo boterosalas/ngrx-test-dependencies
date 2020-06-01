@@ -36,6 +36,7 @@ export class ReferComponent implements OnInit, OnDestroy {
   from: any;
   to: any;
   amount: any;
+  amountReferred:any;
 
   constructor(
     private router: Router,
@@ -49,6 +50,7 @@ export class ReferComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getReferrals();
     this.amount = localStorage.getItem('Amount');
+    this.amountReferred = localStorage.getItem('AmonuntReferred');
   }
 
   ngAfterViewInit() {
@@ -74,6 +76,8 @@ export class ReferComponent implements OnInit, OnDestroy {
             type: "success",
             confirmButtonText: "Aceptar",
             confirmButtonClass: "accept-refer-alert-success",
+          }).then(()=>{
+            this.getReferrals();
           })
         } else {
           Swal.fire({
