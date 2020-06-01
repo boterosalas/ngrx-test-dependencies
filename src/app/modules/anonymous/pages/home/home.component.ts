@@ -201,7 +201,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public getAmount() {
     this.subscription = this.link.getAmount().subscribe((amount) => {
-      console.log(amount);
       localStorage.setItem("Amount", amount.amountsCommission);
       localStorage.setItem("AmonuntReferred", amount.amountsReferred);
     });
