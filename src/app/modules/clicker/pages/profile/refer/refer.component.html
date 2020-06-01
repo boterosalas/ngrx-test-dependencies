@@ -14,7 +14,6 @@ title="Referir"
             <div>
                 <app-refer-share #share (shareMobile)="shareEvent($event)" (urlClicker)="copyInputMessage($event)"></app-refer-share>
                 <app-refer-email (email)="sendEmail($event)"></app-refer-email>
-                <div  innerHtml="{{'REFER.CONDITIONS' | translate: { sale: amountReferred | currency : '' : 'symbol' : '1.0-0', amount: amount | currency : '' : 'symbol' : '1.0-0' } }}"></div> 
             </div>
         </mat-tab>
 
@@ -33,5 +32,6 @@ title="Referir"
         </mat-tab>
     
       </mat-tab-group>
+      <div  innerHtml="{{'REFER.CONDITIONS' | translate: { sale: amountReferred | currency : '' : 'symbol' : '1.0-0', amount: amount | currency : '' : 'symbol' : '1.0-0' } }}"></div> 
       <div  innerHtml="{{'REFER.TERMS' | translate: { amount: amount | currency : '' : 'symbol' : '1.0-0' } }}"></div> 
 </div>
