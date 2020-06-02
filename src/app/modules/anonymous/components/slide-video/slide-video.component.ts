@@ -62,7 +62,7 @@ export class SlideVideoComponent implements OnInit {
       id:'video3',
       title: "¿Cómo ver los reportes de clickam?",
       description: "Aprende a leer los reportes, visualiza tu dinero y sigue ganando.",
-      img: "/assets/img/video/reportes.jpeg",
+      img: "/assets/img/video/reportes.jpg",
       video: "qd1eb38ypjk?rel=0&amp;autoplay=1",
     },
   ];
