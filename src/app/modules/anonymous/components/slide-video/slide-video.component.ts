@@ -39,31 +39,31 @@ export class SlideVideoComponent implements OnInit {
   sliderVideo = [
     {
       id:'video0',
-      title: "Clickeando las renovaciones",
-      description: "Aprende a cómo hacer seguimiento a tus renovaciones",
-      img: "/assets/img/video/ejemplo.png",
-      video: "https://www.youtube.com/embed/pWK0PApymSI?rel=0&amp;autoplay=1",
+      title: "¿Cómo me registro en clickam?",
+      description: "Aprende cómo registrarte en la plataforma.",
+      img: "/assets/img/video/registro.jpg",
+      video: "cD-9xyZeT2Y?rel=0&amp;autoplay=1",
     },
     {
       id:'video1',
-      title: "Clickeando las renovaciones 2",
-      description: "Aprende a cómo hacer seguimiento a tus renovaciones",
-      img: "/assets/img/video/ejemplo.png",
-      video: "https://www.youtube.com/embed/xcSK4-Hrjic?rel=0&amp;autoplay=1",
+      title: "¿Cómo refiero en clickam?",
+      description: "Aprende a generar ingresos por clickear.",
+      img: "/assets/img/video/referir.jpg",
+      video: "oR5bFl4PoCM?rel=0&amp;autoplay=1",
     },
     {
       id:'video2',
-      title: "Clickeando las renovaciones 3",
-      description: "Aprende a cómo hacer seguimiento a tus renovaciones",
-      img: "/assets/img/video/ejemplo.png",
-      video: "https://www.youtube.com/embed/pWK0PApymSI?rel=0&amp;autoplay=1",
+      title: "¿Cómo ver el historial de links?",
+      description: "Aprende cuales son los links que más ganancias te generan y que tu público más visita.",
+      img: "/assets/img/video/historial.jpg",
+      video: "8RMdatgfaoU?rel=0&amp;autoplay=1",
     },
     {
       id:'video3',
-      title: "Clickeando las renovaciones 4",
-      description: "Aprende a cómo hacer seguimiento a tus renovaciones",
-      img: "/assets/img/video/ejemplo.png",
-      video: "https://www.youtube.com/embed/pWK0PApymSI?rel=0&amp;autoplay=1",
+      title: "¿Cómo ver los reportes de clickam?",
+      description: "Aprende a leer los reportes, visualiza tu dinero y sigue ganando.",
+      img: "/assets/img/video/reportes.jpeg",
+      video: "qd1eb38ypjk?rel=0&amp;autoplay=1",
     },
   ];
 
@@ -101,7 +101,7 @@ export class SlideVideoComponent implements OnInit {
     const id = "video-modal";
     const template = this.templateVideo;
     const title = "";
-    this.video = this.sanitizer.bypassSecurityTrustResourceUrl(data.video);
+    this.video = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + data.video);
 
     this.dialog.open(ModalGenericComponent, {
       panelClass: "video-clickacademy",
