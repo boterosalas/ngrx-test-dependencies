@@ -1,0 +1,15 @@
+<app-logo></app-logo>
+
+<div class="container">
+    <span fxLayout="row" fxLayoutAlign="space-between center">
+        <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3>
+        <p class="cursor-pointer text-underline purple-text f-20" [routerLink]="[ '/inicio']" >{{ 'HOME.HOME' | translate }}</p>
+      </span>
+
+      <div fxLayout="row wrap" fxLayout.gt-xs="row wrap" ngClass.gt-xs="pb-3" fxLayoutAlign="center center" fxLayoutGap="10px">
+        <ng-container *ngFor="let bussines of bussiness; let i = index">
+          <app-bussiness-card *ngIf="bussines.code !== 'envios-clickam'" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [code]="bussines.code" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
+        </ng-container>
+      </div>    
+
+</div>

@@ -34,6 +34,8 @@ import { ReferComponent } from './pages/profile/refer/refer.component';
 import { ReferEmailComponent } from './components/refer-email/refer-email.component';
 import { ReferShareComponent } from './components/refer-share/refer-share.component';
 import { TableReferComponent } from './components/table-refer/table-refer.component';
+import { AllBussinessComponent } from './pages/all-bussiness/all-bussiness.component';
+import { AnonymousModule } from '../anonymous/anonymous.module';
 
 const routes: Routes = [
  
@@ -66,6 +68,11 @@ const routes: Routes = [
     path: "referidos",
     component: ReferComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: "negocios",
+    component: AllBussinessComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
@@ -91,7 +98,8 @@ const routes: Routes = [
     ReferComponent,
     ReferEmailComponent,
     ReferShareComponent,
-    TableReferComponent
+    TableReferComponent,
+    AllBussinessComponent
   ],
   imports: [
     CommonModule,
@@ -105,7 +113,8 @@ const routes: Routes = [
     ShareModule,
     DragScrollModule,
     MatPasswordStrengthModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes), 
+    AnonymousModule
   ],
   entryComponents: [DialogComponent, DialogEditComponent, DialogHistoryComponent]
 })

@@ -664,7 +664,13 @@ table {
   }
 
   app-bussiness-card {
-    width: 100%;
+    width: 46%;
+    @media screen and (max-width: 600px) {
+      .mat-card{
+        padding: 11px !important;
+        min-height: 225px;
+      }
+    }
   }
 
   .mat-paginator-page-size {
