@@ -128,7 +128,8 @@ const routes: Routes = [
     ForgotpasswordformComponent,
     ActivateAccountFormComponent,
     MenuComponent,
-    CardComponent
+    CardComponent,
+    BussinessCardComponent
   ],
     providers: [{
       provide: RECAPTCHA_SETTINGS,

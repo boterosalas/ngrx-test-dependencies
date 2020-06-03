@@ -130,7 +130,9 @@
     "BUSSINESS": "Negocios",
     "BUSSINESS_TEXT": "Obtén ganancias refiriendo o comprando en cada negocio",
     "OFFERS": "Ofertas",
-    "OFFERS_TEXT": "Descubre nuestras ofertas, refiere y obtén ganancias refiriendo ó comprando"
+    "OFFERS_TEXT": "Descubre nuestras ofertas, refiere y obtén ganancias refiriendo ó comprando",
+    "ALL_BUSSINESS":"Ver todos los negocios",
+    "HOME":"Volver al inicio"
   },
   "BUSSINESS": {
     "CATEGORIES": "Categorías",
