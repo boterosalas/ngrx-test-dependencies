@@ -5,8 +5,8 @@
 <div class="container">
   <span class="border-gray d-block"></span>
   <span fxLayout="row" fxLayoutAlign="space-between center">
-    <h3 class="border-bottom-orange-init title-h3 mb-0" id="bussinessHook">{{ 'HOME.BUSSINESS' | translate }}</h3>
-    <p *ngIf="auth.isLoggedIn()" class="cursor-pointer text-underline purple-text mb-0 f-20" [routerLink]="[ '/negocios']" >{{ 'HOME.ALL_BUSSINESS' | translate }}</p>
+    <h3 ngClass.gt-xs="mb-0" class="border-bottom-orange-init title-h3" id="bussinessHook">{{ 'HOME.BUSSINESS' | translate }}</h3>
+    <p *ngIf="auth.isLoggedIn()" ngClass.gt-xs="mb-0 f-20" class="cursor-pointer text-underline purple-text" [routerLink]="[ '/negocios']" >{{ 'HOME.ALL_BUSSINESS' | translate }}</p>
   </span>
   <p class="f-20" fxHide.xs>{{ 'HOME.BUSSINESS_TEXT' | translate }}</p>
   <div fxLayout="row wrap" fxLayout.gt-xs="row wrap" ngClass.gt-xs="pb-3" fxLayoutAlign="center center" fxLayoutGap="10px">
