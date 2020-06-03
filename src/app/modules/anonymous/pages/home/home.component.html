@@ -4,10 +4,13 @@
 
 <div class="container">
   <span class="border-gray d-block"></span>
-  <h3 class="border-bottom-orange-init title-h3" id="bussinessHook">{{ 'HOME.BUSSINESS' | translate }}</h3>
+  <span fxLayout="row" fxLayoutAlign="space-between center">
+    <h3 ngClass.gt-xs="mb-0" class="border-bottom-orange-init title-h3" id="bussinessHook">{{ 'HOME.BUSSINESS' | translate }}</h3>
+    <p *ngIf="auth.isLoggedIn()" ngClass.gt-xs="mb-0 f-20" class="cursor-pointer text-underline purple-text" [routerLink]="[ '/negocios']" >{{ 'HOME.ALL_BUSSINESS' | translate }}</p>
+  </span>
   <p class="f-20" fxHide.xs>{{ 'HOME.BUSSINESS_TEXT' | translate }}</p>
-  <div fxLayout="column" fxLayout.gt-xs="row wrap" ngClass.gt-xs="pb-3" fxLayoutAlign="center center" fxLayoutGap="1%">
-    <ng-container *ngFor="let bussines of bussiness; let i = index">
+  <div fxLayout="row wrap" fxLayout.gt-xs="row wrap" ngClass.gt-xs="pb-3" fxLayoutAlign="center center" fxLayoutGap="10px grid">
+    <ng-container *ngFor="let bussines of bussiness | slice:0:4; let i = index">
       <app-bussiness-card *ngIf="bussines.code !== 'envios-clickam'" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [code]="bussines.code" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
     </ng-container>
     <ng-container *ngFor="let bussines of bussinessClicker; let i = index">
@@ -20,7 +23,7 @@
   <p class="f-20" fxHide.xs>{{ 'HOME.OFFERS_TEXT' | translate }}</p>  
 </div>
 
-<app-slider Class="gtmHomeClicOfertas" [showArrows]="false" [isSlider]="true" fxShow.gt-xs="false" (action)="sliderOffers()" [sliderMobile]="offersMobile" [sliderWeb]="offersWeb" class="mb-3"></app-slider>
+<app-slider Class="gtmHomeClicOfertas" [showArrows]="false" [isSlider]="true" fxShow.gt-xs="false" (action)="sliderOffers()" [sliderMobile]="offersMobile" [sliderWeb]="offersWeb"></app-slider>
 <app-slider Class="gtmHomeClicOfertas" [showArrows]="false" [isSlider]="false" fxShow.xs="false" (action)="sliderOffers()" [sliderMobile]="offersMobile" class="mb-3"></app-slider>
 
 <div class="container">

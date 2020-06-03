@@ -88,6 +88,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   mostrarProductos:number = 52;
   sellerName: string;
   showReferenceButton:boolean = true;
+  allBussiness:string;
 
   constructor(
     private route: ActivatedRoute,
@@ -119,6 +120,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
         this.title = route.code;
         this.image = route.imageurl;
         this.percent = route.infoAditional;
+        this.allBussiness = route.allBussiness;
       }
     });
 
@@ -178,7 +180,11 @@ export class BussinessComponent implements OnInit, OnDestroy {
   }
 
   public goback() {
-    this.router.navigate(['./']);
+    if(this.allBussiness === 'true') {
+      this.router.navigate(['/negocios'])
+    } else {
+      this.router.navigate(['./']);
+    }
   }
 
   
