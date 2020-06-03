@@ -34,3 +34,9 @@
 <ng-template #templateBusiness>
     <app-new-business-form (registerBusinessEmit)="sendDataBusiness($event)" [categories]="categories"></app-new-business-form>
 </ng-template>
+
+<ng-template #templatePromo>
+  <a [href]="modalHref" [target]="modalTarget">
+    <img [src]="modalSrc" class="img-responsive cursor-pointer" alt="promo">
+  </a>
+</ng-template>

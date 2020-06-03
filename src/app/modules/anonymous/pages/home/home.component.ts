@@ -80,11 +80,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   isEmployee: any;
   @ViewChild("templateBusiness", { static: false })
   templateBusiness: TemplateRef<any>;
+  @ViewChild("templatePromo", { static: false })
+  templatePromo: TemplateRef<any>;
   categories = [];
   managedPayments: boolean;
   role: String;
   userId: any;
   message: any;
+  modalHref:string;
+  modalTarget:string = "_self";
+  modalSrc:string;
+
 
   constructor(
     public router: Router,
@@ -118,21 +124,18 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    /**
-     * verifica si el usuario esta logueado y lo envia a la pagina de clicker, para no mostrar la pagina inicial anonima
-     */
-
     this.routeBased();
     this.getBussiness();
     this.getBussinessClicker();
     this.getOffers();
     this.slider();
-    this.getUserData();
+    this.getUserDataUser();
   }
 
-  public getUserData() {
+  public getUserDataUser() {
     this.subscription = this.auth.getRole$.subscribe((role) => {
       this.role = role;
+      let promoOpen = localStorage.getItem('ModalPromo')
       if (role === "CLICKER" || role === "ADMIN") {
         this.subscription = this.user.getuserdata().subscribe((user) => {
           this.isEmployee = user.isEmployeeGrupoExito;
@@ -140,10 +143,15 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
       }
       setTimeout(() => {
-        this.showModalPayment();
+        if(promoOpen === '1') {
+          this.showModalPayment();
+        }
       }, 1000);
 
       if(role === "CLICKER") {
+        if(promoOpen !== '1') {
+          this.getModalPromo();
+        }
         let token = localStorage.getItem("ACCESS_TOKEN");
         let tokenDecode = decode(token);
         this.userId = tokenDecode.userid;
@@ -397,4 +405,31 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
     }
   }
+
+  public getModalPromo() {
+    this.content.getPopupus().subscribe(resp=>{
+      localStorage.setItem('ModalPromo', '1');
+      this.modalHref = resp[0].link;
+      this.modalSrc = resp[0].imageurl;
+
+      const template = this.templatePromo;
+      const title = "";
+      const id = "promo-modal";
+  
+      this.dialog.open(ModalGenericComponent, {
+        data: {
+          title,
+          id,
+          template,
+        },
+      });
+
+      this.dialog.afterAllClosed.subscribe(() => {
+        localStorage.setItem('ModalPromo', '1');
+        this.showModalPayment();
+      });
+
+    });
+  }
+
 }
