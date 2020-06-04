@@ -87,9 +87,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   role: String;
   userId: any;
   message: any;
+
   modalHref:string;
+  modalAltMobile:string;
+  modalAltWeb:string;
+  modalHrefMobile:string;
   modalTarget:string = "_self";
-  modalSrc:string;
+  modalSrcWeb:string;
+  modalSrcMobile:string;
 
 
   constructor(
@@ -410,13 +415,17 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.content.getPopupus().subscribe(resp=>{
       localStorage.setItem('ModalPromo', '1');
       this.modalHref = resp[0].link;
-      this.modalSrc = resp[0].imageurl;
+      this.modalSrcWeb = resp[0].imageUrlWeb;
+      this.modalSrcMobile = resp[0].imageUrlMobile;
+      this.modalAltWeb = resp[0].imageAltMobile;
+      this.modalAltMobile = resp[0].imageAltMobile;
 
       const template = this.templatePromo;
       const title = "";
       const id = "promo-modal";
   
       this.dialog.open(ModalGenericComponent, {
+        panelClass: "promo-home",
         data: {
           title,
           id,
