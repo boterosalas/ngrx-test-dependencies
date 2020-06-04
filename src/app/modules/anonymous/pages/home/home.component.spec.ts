@@ -50,7 +50,8 @@ describe("HomeComponent", () => {
     "getNews",
     "getOffers",
     "getBusiness",
-    "getBusinessClicker"
+    "getBusinessClicker",
+    "getPopupus"
   ]);
 
   let dataUserC = {
@@ -83,6 +84,17 @@ let invalidRquest = {
     userMessage: 'Internal server error'
   }
 }
+
+let popups = [
+  {
+    "title": "Popup número 1",
+    "imageUrlWeb": "https://dev-realidad-aumentada.pantheonsite.io/sites/default/files/2020-05/Slider-Inicio-13-Web-Bronzini_0.svg",
+    "imageUrlMobile": "https://dev-realidad-aumentada.pantheonsite.io/sites/default/files/2020-05/Slider-Inicio-10-Web-SOAT-Carro_2.svg",
+    "imageAltWeb": "Popup número 1",
+    "imageAltMobile": "Popup número 1 mobile",
+    "link": "http://example.com"
+  }
+]
 
 let business = [{"id":1,"code":"exito","imageurl":"https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.png","infoaditional":"Hasta 9.6% de ganancia","description":"Almacenes Éxito","orderby":1},{"id":2,"code":"carulla","imageurl":"https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-carulla.png","infoaditional":"Hasta 9.6% de ganancia","description":"Almacenes Carulla","orderby":2},{"id":3,"code":"seguros","imageurl":"https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.png","infoaditional":"Hasta $32.000 de ganancia","description":"Seguros Éxito","orderby":3},{"id":4,"code":"viajes","imageurl":"https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-viajes.png","infoaditional":"Hasta $40.000 de ganancia","description":"Viajes Éxito","orderby":4},{"id":5,"code":"wesura","imageurl":"https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-wesura.png","infoaditional":"Hasta 12.000 de ganancia","description":"Tu seguro","orderby":5}]
 
@@ -152,6 +164,7 @@ let offers = {"mobile":[{"imageurl":"https://webclickamdev.blob.core.windows.net
     mockContentService.getOffers.and.returnValue(of(offers));
     mockContentService.getBusiness.and.returnValue(of(business));
     mockContentService.getBusinessClicker.and.returnValue(of(business));
+    mockContentService.getPopupus.and.returnValue(of(popups));
   }));
 
   beforeEach(() => {

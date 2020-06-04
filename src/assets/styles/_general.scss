@@ -1494,6 +1494,7 @@ joy-close-button.joyride-step__close svg {
 }
 
 .video-clickacademy {
+  position: relative !important;
   @media screen and (max-width: 600px) {
     iframe {
       width: 100%;
@@ -1513,6 +1514,26 @@ joy-close-button.joyride-step__close svg {
   .mat-dialog-content {
     padding: 0;
     margin: 0;
+  }
+
+  .mat-dialog-container {
+    padding: 0;
+    overflow: hidden;
+  }
+}
+
+.promo-home {
+  position: relative !important;
+  width: 100%;
+
+  .top-generic {
+    position: absolute;
+    right: 0;
+  }
+
+  .mat-dialog-content {
+    padding: 0;
+    // margin: 0;
   }
 
   .mat-dialog-container {
