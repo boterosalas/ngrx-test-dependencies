@@ -14,7 +14,7 @@ import { LinksService } from 'src/app/services/links.service';
 import { of } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-xdescribe('RefersComponent', () => {
+describe('RefersComponent', () => {
   let component: RefersComponent;
   let fixture: ComponentFixture<RefersComponent>;
 
@@ -85,6 +85,7 @@ xdescribe('RefersComponent', () => {
         ]
     })
     .compileComponents();
+    mockLinksService.getAmount.and.returnValue(of(amount));
   }));
 
   beforeEach(() => {
@@ -94,12 +95,8 @@ xdescribe('RefersComponent', () => {
   });
 
   it('should create', () => {
-    mockLinksService.getAmount.and.returnValue(of(amount));
-    fixture.whenStable().then(()=> {
-      tick();
       expect(mockLinksService.getAmount).toHaveBeenCalled();
       expect(component).toBeTruthy();
-    })
   });
 
   it('save comission', () => {
