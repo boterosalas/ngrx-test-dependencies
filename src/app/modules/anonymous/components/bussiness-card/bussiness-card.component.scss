@@ -1,7 +1,7 @@
 @import 'variables';
 
 .bussiness{
-
+    box-shadow: 0 3px 6px 3px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
     @media screen and (max-width: 600px) {
         .title-bussiness{
             font-size: 11px !important;
@@ -45,6 +45,6 @@ span.img-responsive img {
 
     img{
         max-width: 100%;
-        width: 175px !important;
+        width: 230px !important;
     }
 }
