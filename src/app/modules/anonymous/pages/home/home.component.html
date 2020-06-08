@@ -10,7 +10,7 @@
   </span>
   <p class="f-20" fxHide.xs>{{ 'HOME.BUSSINESS_TEXT' | translate }}</p>
   <div fxLayout="row wrap" fxLayout.gt-xs="row wrap" ngClass.gt-xs="pb-3" fxLayoutAlign="center center" fxLayoutGap="10px grid">
-    <ng-container *ngFor="let bussines of bussiness | slice:0:4; let i = index">
+    <ng-container *ngFor="let bussines of bussiness | slice:0:6; let i = index">
       <app-bussiness-card *ngIf="bussines.code !== 'envios-clickam'" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [code]="bussines.code" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
     </ng-container>
     <ng-container *ngFor="let bussines of bussinessClicker; let i = index">
@@ -45,7 +45,7 @@
 
   <div fxShow.gt-xs="false" fxShow.xs="true">
     <a [href]="modalHref" [target]="modalTarget">
-      <img [src]="modalSrcMobile" class="img-responsive w-100 cursor-pointer pl-2 pr-2" [alt]="modalAltMobile">
+      <img [src]="modalSrcMobile" class="img-responsive w-100 cursor-pointer" [alt]="modalAltMobile">
     </a>
   </div>
 
