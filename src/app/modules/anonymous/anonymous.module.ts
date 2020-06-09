@@ -16,7 +16,6 @@ import { RecoverpasswordComponent } from "./pages/recoverpassword/recoverpasswor
 import { MenuComponent } from "./components/menu/menu.component";
 import { CardComponent } from './components/card/card.component';
 import { ClickAcademyComponent } from './pages/click-academy/click-academy.component';
-import { FrequentQuestionsComponent } from './pages/frequent-questions/frequent-questions.component';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
 import { BlockCopyPasteDirective } from 'src/directives/copy.directive';
 import { KeySpaceDirective } from 'src/directives/space.directive';
@@ -32,6 +31,14 @@ import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module, RecaptchaFormsModule, Recaptc
 import { UrlComponent } from './pages/url/url.component';
 import { ActivateAccountFormComponent } from './components/activate-account-form/activate-account-form.component';
 import { SlideVideoComponent } from './components/slide-video/slide-video.component';
+import { ClickamComponent } from './pages/help-center/about/clickam/clickam.component';
+import { RegisterComponent } from './pages/help-center/about/register/register.component';
+import { DownloadComponent } from './pages/help-center/about/download/download.component';
+import { HowWorksComponent } from './pages/help-center/about/how-works/how-works.component';
+import { WinComissionComponent } from './pages/help-center/about/win-comission/win-comission.component';
+import { BenefitsComponent } from './pages/help-center/about/benefits/benefits.component';
+import { PartnersComponent } from './pages/help-center/about/partners/partners.component';
+import { MenuHelpCenterComponent } from './components/menu-help-center/menu-help-center.component';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -61,8 +68,38 @@ const routes: Routes = [
     component: ClickAcademyComponent
   },
   {
-    path: "preguntas-frecuentes",
-    component: FrequentQuestionsComponent
+    path: "centro-de-ayuda",
+    // component: ClickamComponent,
+    children: [
+      {
+        path:'que-es-clickam',
+        component: ClickamComponent
+      },
+      {
+        path: 'como-me-puedo-registrar',
+        component: RegisterComponent
+      },
+      {
+        path:'por-cuales-medios-puedo-descargar-la-app',
+        component: DownloadComponent
+      },
+      {
+        path: 'como-funciona-clickam',
+        component: HowWorksComponent
+      },
+      {
+        path:'como-gano-comisiones',
+        component: WinComissionComponent
+      },
+      {
+        path:'cuales-son-los-beneficios-de-un-clicker',
+        component: BenefitsComponent
+      },
+      {
+        path: 'cuales-son-los-negocios-asociados',
+        component: PartnersComponent
+      }
+    ]
   },
   {
     path: "terminos-y-condiciones",
@@ -89,7 +126,6 @@ const routes: Routes = [
     MenuComponent,
     CardComponent,
     ClickAcademyComponent,
-    FrequentQuestionsComponent,
     TermsAndConditionsComponent,
     BlockCopyPasteDirective,
     KeySpaceDirective,
@@ -102,6 +138,14 @@ const routes: Routes = [
     UrlComponent,
     ActivateAccountFormComponent,
     SlideVideoComponent,
+    ClickamComponent,
+    RegisterComponent,
+    DownloadComponent,
+    HowWorksComponent,
+    WinComissionComponent,
+    BenefitsComponent,
+    PartnersComponent,
+    MenuHelpCenterComponent,
     // ReportComponent
   ],
   imports: [
