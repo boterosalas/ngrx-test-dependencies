@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CardHelpCenterComponent } from './card-help-center.component';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { AnonymousModule } from '../../anonymous.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('CardHelpCenterComponent', () => {
   let component: CardHelpCenterComponent;
@@ -8,7 +14,15 @@ describe('CardHelpCenterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CardHelpCenterComponent ]
+      declarations: [],
+      imports:[
+        TranslateModule.forRoot({}),
+        SharedModule,
+        AppMaterialModule,
+        AnonymousModule,
+        BrowserAnimationsModule,
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   }));
