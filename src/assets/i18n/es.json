@@ -395,6 +395,7 @@
   },
 
   "HELP_CENTER":  {
+    "TOPICS": "Temas principales",
     "ABOUT_CLICKAM": {
       "ABOUT_CLICKAM":"SOBRE CLICKAM",
       "CLICKAM_TITLE": "¿Qué es Clickam?",
@@ -412,6 +413,9 @@
       "PARTNERS_TITLE":"¿Cuáles son los negocios asociados?",
       "PARTNERS_TEXT":"<p>A la fecha contamos con <a href='https://www.exito.com/' target='_blank'>www.exito.com</a>, <a href='https://www.carulla.com/' target='_blank'>www.carulla.com</a>, <a href='https://www.segurosexito.com/' target='_blank'>www.segurosexito.com</a>, <a href='https://www.wesura.com/' target='_blank'>www.wesura.com</a>, <a href='https://www.viajesexito.com/' target='_blank'>www.viajesexito.com</a> y <a href='https://www.movilexito.com/' target='_blank'>www.movilexito.com</a> muy pronto tendremos otros negocios para que ganes más. </p>"
     }
+  },
+  "BANNERS": {
+    "HELP_CENTER":"Centro de ayuda"
   }
 
 }

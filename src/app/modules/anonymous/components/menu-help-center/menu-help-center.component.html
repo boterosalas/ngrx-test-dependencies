@@ -1,7 +1,9 @@
+<p class="galano-bold f-20 purple-text op mt-0">{{'HELP_CENTER.TOPICS' | translate}}</p>
+
 <mat-accordion>
-    <mat-expansion-panel [expanded]="true">
-      <mat-expansion-panel-header>
-        {{'HELP_CENTER.ABOUT_CLICKAM.ABOUT_CLICKAM' | translate}}
+    <mat-expansion-panel [expanded]="true" class="help-center">
+      <mat-expansion-panel-header  class="head">
+       <span [routerLink]="['/centro-de-ayuda']" routerLinkActive="active-topic">{{'HELP_CENTER.ABOUT_CLICKAM.ABOUT_CLICKAM' | translate}}</span> 
       </mat-expansion-panel-header>
   
       <mat-list role="list" *ngFor="let item of aboutClickam; let i = index">

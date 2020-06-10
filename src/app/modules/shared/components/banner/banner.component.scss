@@ -1,0 +1,30 @@
+@import 'variables';
+@import 'general';
+
+.text-banner{
+    top: 30%;
+}
+
+.text-banner-mobile{
+    top: 10%;
+}
+
+.position{
+    &-relative{
+        position: relative;
+    }
+    &-absolute{
+        position: absolute;
+    }
+}
+
+.banner{
+    min-height: 170px;
+    img{
+        object-fit: cover;
+        height: 100%;
+    }
+}
+
+
+

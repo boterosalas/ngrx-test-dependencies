@@ -3,11 +3,17 @@
 
 footer {
 
-    margin-left: 15px;
-    margin-right: 15px;
+    // margin-left: 15px;
+    // margin-right: 15px;
+    background: transparent linear-gradient(180deg, #452F80 0%, #37236A 100%) 0% 0% no-repeat padding-box;
 
   h3 {
     font-size: 21px;
+    color: #ffffff;
+  }
+
+  p{
+    color: #ffffff !important;
   }
 
   &.border-gray {
@@ -29,7 +35,7 @@ footer {
     a {
       text-decoration: underline;
       font-size: $font-size-sm - 0.1rem;
-      color: $gray2;
+      color: #ffffff;
     }
   }
 
@@ -40,7 +46,7 @@ footer {
   }
 
   .copy{
-      color:#86888A;
+      color:#ffffff;
       font-size: 12px;
   }
 

@@ -39,6 +39,8 @@ import { WinComissionComponent } from './pages/help-center/about/win-comission/w
 import { BenefitsComponent } from './pages/help-center/about/benefits/benefits.component';
 import { PartnersComponent } from './pages/help-center/about/partners/partners.component';
 import { MenuHelpCenterComponent } from './components/menu-help-center/menu-help-center.component';
+import { AboutClickamComponent } from './pages/help-center/about/about-clickam/about-clickam.component';
+import { CardHelpCenterComponent } from './components/card-help-center/card-help-center.component';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -69,8 +71,11 @@ const routes: Routes = [
   },
   {
     path: "centro-de-ayuda",
-    // component: ClickamComponent,
     children: [
+      {
+        path:'',
+        component: AboutClickamComponent
+      },
       {
         path:'que-es-clickam',
         component: ClickamComponent
@@ -146,6 +151,8 @@ const routes: Routes = [
     BenefitsComponent,
     PartnersComponent,
     MenuHelpCenterComponent,
+    AboutClickamComponent,
+    CardHelpCenterComponent,
     // ReportComponent
   ],
   imports: [
