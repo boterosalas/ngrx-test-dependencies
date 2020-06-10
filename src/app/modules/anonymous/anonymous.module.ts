@@ -41,6 +41,9 @@ import { PartnersComponent } from './pages/help-center/about/partners/partners.c
 import { MenuHelpCenterComponent } from './components/menu-help-center/menu-help-center.component';
 import { AboutClickamComponent } from './pages/help-center/about/about-clickam/about-clickam.component';
 import { CardHelpCenterComponent } from './components/card-help-center/card-help-center.component';
+import { ChangeDataProfileComponent } from './pages/help-center/configurations/change-data-profile/change-data-profile.component';
+import { ResetPasswordComponent } from './pages/help-center/configurations/reset-password/reset-password.component';
+import { ConfigurationAccountComponent } from './pages/help-center/configurations/configuration-account/configuration-account.component';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -103,6 +106,18 @@ const routes: Routes = [
       {
         path: 'cuales-son-los-negocios-asociados',
         component: PartnersComponent
+      },
+      {
+        path: 'configuraciones-de-cuenta',
+        component: ConfigurationAccountComponent
+      },
+      {
+        path: 'cambios-de-tus-datos-personales',
+        component: ChangeDataProfileComponent
+      },
+      {
+        path: 'restablecer-contrasena',
+        component: ResetPasswordComponent
       }
     ]
   },
@@ -153,6 +168,9 @@ const routes: Routes = [
     MenuHelpCenterComponent,
     AboutClickamComponent,
     CardHelpCenterComponent,
+    ChangeDataProfileComponent,
+    ResetPasswordComponent,
+    ConfigurationAccountComponent,
     // ReportComponent
   ],
   imports: [

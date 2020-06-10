@@ -12,13 +12,15 @@
 
     </mat-expansion-panel>
   
-    <!-- <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        This is the expansion 2 title
+    <mat-expansion-panel class="help-center">
+      <mat-expansion-panel-header  class="head">
+       <span [routerLink]="['/centro-de-ayuda/configuraciones-de-cuenta']" routerLinkActive="active-topic">{{'HELP_CENTER.CONFIGURATIONS.CONFIGURATIONS' | translate}}</span> 
       </mat-expansion-panel-header>
   
-      This the expansion 2 content
-  
-    </mat-expansion-panel> -->
+      <mat-list role="list" *ngFor="let item of configurations; let i = index">
+        <mat-list-item class="cursor-pointer" role="listitem" [routerLink]="item.route"  routerLinkActive="active">{{item.name}}</mat-list-item>
+      </mat-list>
+
+    </mat-expansion-panel>
   
   </mat-accordion>

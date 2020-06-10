@@ -19,6 +19,11 @@ export class MenuHelpCenterComponent implements OnInit {
     {name:'¿Cuáles son los negocios asociados?', route:'/centro-de-ayuda/cuales-son-los-negocios-asociados'},
   ]
 
+  configurations = [
+    {name:'Cambios de tus datos personales', route:'/centro-de-ayuda/cambios-de-tus-datos-personales'},
+    {name:'Restablecer contraseña', route:'/centro-de-ayuda/restablecer-contrasena'},
+  ]
+
   ngOnInit() {
   }
 
