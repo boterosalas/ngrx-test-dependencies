@@ -1,24 +1,24 @@
 <p class="galano-bold f-20 purple-text op mt-0">{{'HELP_CENTER.TOPICS' | translate}}</p>
 
 <mat-accordion>
-    <mat-expansion-panel [expanded]="true" class="help-center">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)"  class="help-center">
       <mat-expansion-panel-header  class="head">
-       <span [routerLink]="['/centro-de-ayuda']" routerLinkActive="active-topic">{{'HELP_CENTER.ABOUT_CLICKAM.ABOUT_CLICKAM' | translate}}</span> 
+       <span [routerLink]="['/centro-de-ayuda']" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">{{'HELP_CENTER.ABOUT_CLICKAM.ABOUT_CLICKAM' | translate}}</span> 
       </mat-expansion-panel-header>
   
       <mat-list role="list" *ngFor="let item of aboutClickam; let i = index">
-        <mat-list-item class="cursor-pointer" role="listitem" [routerLink]="item.route"  routerLinkActive="active">{{item.name}}</mat-list-item>
+        <mat-list-item (click)="setStep(0)" class="cursor-pointer" role="listitem" [routerLink]="item.route"  routerLinkActive="active">{{item.name}}</mat-list-item>
       </mat-list>
 
     </mat-expansion-panel>
   
-    <mat-expansion-panel class="help-center">
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)"  class="help-center">
       <mat-expansion-panel-header  class="head">
-       <span [routerLink]="['/centro-de-ayuda/configuraciones-de-cuenta']" routerLinkActive="active-topic">{{'HELP_CENTER.CONFIGURATIONS.CONFIGURATIONS' | translate}}</span> 
+       <span [routerLink]="['/centro-de-ayuda/configuraciones-de-cuenta']" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">{{'HELP_CENTER.CONFIGURATIONS.CONFIGURATIONS' | translate}}</span> 
       </mat-expansion-panel-header>
   
       <mat-list role="list" *ngFor="let item of configurations; let i = index">
-        <mat-list-item class="cursor-pointer" role="listitem" [routerLink]="item.route"  routerLinkActive="active">{{item.name}}</mat-list-item>
+        <mat-list-item (click)="setStep(1)" class="cursor-pointer" role="listitem" [routerLink]="item.route"  routerLinkActive="active">{{item.name}}</mat-list-item>
       </mat-list>
 
     </mat-expansion-panel>

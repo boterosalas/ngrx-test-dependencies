@@ -73,7 +73,11 @@ const routes: Routes = [
     component: ClickAcademyComponent
   },
   {
-    path: "centro-de-ayuda",
+    path:'centro-de-ayuda',
+    component: AboutClickamComponent
+  },
+  {
+    path: "centro-de-ayuda/sobre-clickam",
     children: [
       {
         path:'',
@@ -106,9 +110,14 @@ const routes: Routes = [
       {
         path: 'cuales-son-los-negocios-asociados',
         component: PartnersComponent
-      },
+      }
+    ]
+  },
+  {
+    path: "centro-de-ayuda/configuraciones-de-cuenta",
+    children: [
       {
-        path: 'configuraciones-de-cuenta',
+        path: '',
         component: ConfigurationAccountComponent
       },
       {
