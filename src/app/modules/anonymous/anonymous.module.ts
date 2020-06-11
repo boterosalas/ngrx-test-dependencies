@@ -51,6 +51,10 @@ import { EffectiveBuyComponent } from './pages/help-center/commissions/effective
 import { NotCommissionComponent } from './pages/help-center/commissions/not-commission/not-commission.component';
 import { PayDateComponent } from './pages/help-center/commissions/pay-date/pay-date.component';
 import { PaymentProcessComponent } from './pages/help-center/commissions/payment-process/payment-process.component';
+import { LinkHistoryComponent } from './pages/help-center/reports/link-history/link-history.component';
+import { ProductsCommissionComponent } from './pages/help-center/reports/products-commission/products-commission.component';
+import { ReportClickamComponent } from './pages/help-center/reports/report-clickam/report-clickam.component';
+import { WinCommissionComponent } from './pages/help-center/reports/win-commission/win-commission.component';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -171,6 +175,27 @@ const routes: Routes = [
     ]
   },
   {
+    path: "centro-de-ayuda/reportes",
+    children: [
+      {
+        path: '',
+        component: ReportClickamComponent
+      },
+      {
+        path: 'donde-puedo-encontrar-un-historial-de-mis-links',
+        component: LinkHistoryComponent
+      },
+      {
+        path: 'como-veo-las-comisiones-que-he-ganado',
+        component: WinCommissionComponent
+      },
+      {
+        path: 'como-puedo-saber-por-cuales-productos-me-pagaron-comision',
+        component: ProductsCommissionComponent
+      },
+    ]
+  },
+  {
     path: "terminos-y-condiciones",
     component: TermsAndConditionsComponent
   },
@@ -227,6 +252,10 @@ const routes: Routes = [
     NotCommissionComponent,
     PayDateComponent,
     PaymentProcessComponent,
+    LinkHistoryComponent,
+    ProductsCommissionComponent,
+    ReportClickamComponent,
+    WinCommissionComponent,
     // ReportComponent
   ],
   imports: [

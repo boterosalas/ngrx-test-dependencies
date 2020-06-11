@@ -22,6 +22,9 @@ export class MenuHelpCenterComponent implements OnInit {
       case "comisiones":
         this.step = 2;
         break;
+      case "reportes":
+        this.step = 3;
+        break;
 
       default:
         this.step = 0;
@@ -105,6 +108,24 @@ export class MenuHelpCenterComponent implements OnInit {
       name: "¿Cuándo se considera una compra efectiva por el negocio?",
       route:
         "/centro-de-ayuda/comisiones/cuando-se-considera-una-compra-efectiva-por-el-negocio",
+    },
+  ];
+
+  reports = [
+    {
+      name: "¿Dónde puedo encontrar un historial de mis links?",
+      route:
+        "/centro-de-ayuda/reportes/donde-puedo-encontrar-un-historial-de-mis-links",
+    },
+    {
+      name: "¿Cómo veo las comisiones que he ganado?",
+      route:
+        "/centro-de-ayuda/reportes/como-veo-las-comisiones-que-he-ganado",
+    },
+    {
+      name: "¿Cómo puedo saber por cuales productos me pagaron comisión?",
+      route:
+        "/centro-de-ayuda/reportes/como-puedo-saber-por-cuales-productos-me-pagaron-comision",
     },
   ];
 

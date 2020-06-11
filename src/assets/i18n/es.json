@@ -434,6 +434,9 @@
       "PROCESS_TEXT":"<p>A los Clickers que son colaboradores del Grupo Éxito se les pagará en su cuenta de nómina, en caso de ser por <em>presente</em> encontrarás tu dinero en el disponible. Recuerda que las comisiones de Clickam NO aparecerán en tu recibo de pago. Si dejas de trabajar en la compañía y cambias de cuenta bancaria, debes enviarnos tus documentos para poder realizar los pagos al banco correspondiente. </p><p>A los Clickers que NO están vinculados con el Grupo Éxito, se les pedirá que adjunten en “mi perfil” o envíen sus documentos al correo <a href='mailto:clickam@grupo-exito.com' target='_blank'><u>clickam@grupo-exito.com</u></a> para realizar el pago, certificado bancario y fotocopia de la cedula. </p><p>Una vez tenemos los documentos, nuestro equipo realizara algunas validaciones y matricularemos tu cuenta para realizar los pagos. El proceso de matrícula puede tomar hasta 15 días, de igual forma, puedes acumular comisiones durante estos días para que cuando sea confirmada la cuenta bancaria, se te pague lo acumulado según las fechas de cortes de pago.</p>",
       "EFFECTIVE_TITLE":"¿Cuándo se considera una compra efectiva por el negocio?",  
       "EFFECTIVE_TEXT":"<p>En exito.com y carulla.com el estado del producto puede demorarse hasta 5 días hábiles para pasar a ser una compra “efectiva”, esto debido a la legislación de Ley 1480 de 2011 sobre Derecho de Retracto, donde el comprador tiene 5 días hábiles para retractarse de su compra.  </p><p>En Seguros Éxito y Viajes Éxito la compra puede demorarse hasta 3 días hábiles para tener el estado de compra “efectiva” en Clickam.  En Móvil Éxito, puede demorarse entre 2 y 5 días hábiles.</p>"  
+    },
+    "REPORTS":{
+      "REPORTS":"REPORTES"
     }
   },
   "BANNERS": {
