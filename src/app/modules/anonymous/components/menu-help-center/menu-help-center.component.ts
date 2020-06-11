@@ -19,6 +19,9 @@ export class MenuHelpCenterComponent implements OnInit {
       case "configuraciones-de-cuenta":
         this.step = 1;
         break;
+      case "comisiones":
+        this.step = 2;
+        break;
 
       default:
         this.step = 0;
@@ -69,6 +72,39 @@ export class MenuHelpCenterComponent implements OnInit {
       name: "Restablecer contraseña",
       route:
         "/centro-de-ayuda/configuraciones-de-cuenta/restablecer-contrasena",
+    },
+  ];
+
+  commissions = [
+    {
+      name: "¿Qué es la ruta de compra Clickam?",
+      route:
+        "/centro-de-ayuda/comisiones/que-es-la-ruta-de-compra-clickam",
+    },
+    {
+      name: "¿Cómo cruzan la venta?",
+      route:
+        "/centro-de-ayuda/comisiones/como-cruzan-la-venta",
+    },
+    {
+      name: "¿Cuáles son las fechas de pago?",
+      route:
+        "/centro-de-ayuda/comisiones/cuales-son-las-fechas-de-pago",
+    },
+    {
+      name: "¿Por qué no me llegó la comisión?",
+      route:
+        "/centro-de-ayuda/comisiones/porque-no-me-llego-la-comision",
+    },
+    {
+      name: "¿Cómo es el proceso de pago?",
+      route:
+        "/centro-de-ayuda/comisiones/como-es-el-proceso-de-pago",
+    },
+    {
+      name: "¿Cuándo se considera una compra efectiva por el negocio?",
+      route:
+        "/centro-de-ayuda/comisiones/cuando-se-considera-una-compra-efectiva-por-el-negocio",
     },
   ];
 

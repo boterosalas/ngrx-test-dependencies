@@ -22,5 +22,16 @@
       </mat-list>
 
     </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)"  class="help-center">
+      <mat-expansion-panel-header  class="head">
+       <span [routerLink]="['/centro-de-ayuda/comisiones']" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">{{'HELP_CENTER.COMMISSIONS.COMMISSIONS' | translate}}</span> 
+      </mat-expansion-panel-header>
+  
+      <mat-list role="list" *ngFor="let item of commissions; let i = index">
+        <mat-list-item (click)="setStep(2)" class="cursor-pointer" role="listitem" [routerLink]="item.route"  routerLinkActive="active">{{item.name}}</mat-list-item>
+      </mat-list>
+
+    </mat-expansion-panel>
   
   </mat-accordion>

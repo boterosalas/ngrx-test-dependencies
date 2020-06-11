@@ -44,6 +44,13 @@ import { CardHelpCenterComponent } from './components/card-help-center/card-help
 import { ChangeDataProfileComponent } from './pages/help-center/configurations/change-data-profile/change-data-profile.component';
 import { ResetPasswordComponent } from './pages/help-center/configurations/reset-password/reset-password.component';
 import { ConfigurationAccountComponent } from './pages/help-center/configurations/configuration-account/configuration-account.component';
+import { RouteBuyComponent } from './pages/help-center/commissions/route-buy/route-buy.component';
+import { CommissionClickamComponent } from './pages/help-center/commissions/commission-clickam/commission-clickam.component';
+import { CrossSellComponent } from './pages/help-center/commissions/cross-sell/cross-sell.component';
+import { EffectiveBuyComponent } from './pages/help-center/commissions/effective-buy/effective-buy.component';
+import { NotCommissionComponent } from './pages/help-center/commissions/not-commission/not-commission.component';
+import { PayDateComponent } from './pages/help-center/commissions/pay-date/pay-date.component';
+import { PaymentProcessComponent } from './pages/help-center/commissions/payment-process/payment-process.component';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -131,6 +138,39 @@ const routes: Routes = [
     ]
   },
   {
+    path: "centro-de-ayuda/comisiones",
+    children: [
+      {
+        path: '',
+        component: CommissionClickamComponent
+      },
+      {
+        path: 'que-es-la-ruta-de-compra-clickam',
+        component: RouteBuyComponent
+      },
+      {
+        path: 'como-cruzan-la-venta',
+        component: CrossSellComponent
+      },
+      {
+        path: 'cuales-son-las-fechas-de-pago',
+        component: PayDateComponent
+      },
+      {
+        path: 'porque-no-me-llego-la-comision',
+        component: NotCommissionComponent
+      },
+      {
+        path: 'como-es-el-proceso-de-pago',
+        component: PaymentProcessComponent
+      },
+      {
+        path: 'cuando-se-considera-una-compra-efectiva-por-el-negocio',
+        component: EffectiveBuyComponent
+      }
+    ]
+  },
+  {
     path: "terminos-y-condiciones",
     component: TermsAndConditionsComponent
   },
@@ -180,6 +220,13 @@ const routes: Routes = [
     ChangeDataProfileComponent,
     ResetPasswordComponent,
     ConfigurationAccountComponent,
+    RouteBuyComponent,
+    CommissionClickamComponent,
+    CrossSellComponent,
+    EffectiveBuyComponent,
+    NotCommissionComponent,
+    PayDateComponent,
+    PaymentProcessComponent,
     // ReportComponent
   ],
   imports: [

@@ -1592,3 +1592,17 @@ joy-close-button.joyride-step__close svg {
     color: $secondary-color;
   }
 }
+
+
+.table-payment{
+  width: 100%;
+  text-align: center;
+  border: 1px solid #F3F1F6;
+  thead{
+      th{
+          background: #F3F1F6;
+          text-transform: uppercase;
+          color: $primary-color;
+      }
+  }
+}
