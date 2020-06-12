@@ -31,6 +31,9 @@ export class MenuHelpCenterComponent implements OnInit {
       case "ofertas":
         this.step = 5;
         break;
+      case "otras-preguntas-frecuentes":
+        this.step = 6;
+        break;
 
       default:
         this.step = 0;
@@ -163,6 +166,24 @@ export class MenuHelpCenterComponent implements OnInit {
       name: "Preferencias de correo",
       route:
         "/centro-de-ayuda/ofertas/preferencias-de-correo",
+    }
+  ];
+
+  questions = [
+    {
+      name: "¿Quién es el tomador de un seguro?",
+      route:
+        "/centro-de-ayuda/otras-preguntas-frecuentes/quien-es-el-tomador-de-un-seguro",
+    },
+    {
+      name: "¿Qué es un producto Marketplace?",
+      route:
+        "/centro-de-ayuda/otras-preguntas-frecuentes/que-es-un-producto-marketplace",
+    },
+    {
+      name: "¿Cuáles son los medios de pago de cada negocio?",
+      route:
+        "/centro-de-ayuda/otras-preguntas-frecuentes/cuales-son-los-medios-de-pago-de-cada-negocio",
     }
   ];
 

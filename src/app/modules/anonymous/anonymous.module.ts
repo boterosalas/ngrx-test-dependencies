@@ -69,6 +69,10 @@ import { WorksReferComponent } from "./pages/help-center/refer/works-refer/works
 import { BestOffersComponent } from "./pages/help-center/offers/best-offers/best-offers.component";
 import { MailPreferencesComponent } from "./pages/help-center/offers/mail-preferences/mail-preferences.component";
 import { OffersClickamComponent } from "./pages/help-center/offers/offers-clickam/offers-clickam.component";
+import { MarketplaceComponent } from './pages/help-center/questions/marketplace/marketplace.component';
+import { PayMethodsComponent } from './pages/help-center/questions/pay-methods/pay-methods.component';
+import { QuestionsClickamComponent } from './pages/help-center/questions/questions-clickam/questions-clickam.component';
+import { TakeAssuredComponent } from './pages/help-center/questions/take-assured/take-assured.component';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -248,6 +252,27 @@ const routes: Routes = [
     ],
   },
   {
+    path: "centro-de-ayuda/otras-preguntas-frecuentes",
+    children: [
+      {
+        path: "",
+        component: QuestionsClickamComponent,
+      },
+      {
+        path: "quien-es-el-tomador-de-un-seguro",
+        component: TakeAssuredComponent,
+      },
+      {
+        path: "que-es-un-producto-marketplace",
+        component: MarketplaceComponent,
+      },
+      {
+        path: "cuales-son-los-medios-de-pago-de-cada-negocio",
+        component: PayMethodsComponent,
+      }
+    ],
+  },
+  {
     path: "terminos-y-condiciones",
     component: TermsAndConditionsComponent,
   },
@@ -315,6 +340,10 @@ const routes: Routes = [
     BestOffersComponent,
     MailPreferencesComponent,
     OffersClickamComponent,
+    MarketplaceComponent,
+    PayMethodsComponent,
+    QuestionsClickamComponent,
+    TakeAssuredComponent,
     // ReportComponent
   ],
   imports: [
