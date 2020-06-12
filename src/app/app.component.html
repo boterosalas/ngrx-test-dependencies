@@ -100,13 +100,13 @@
       <div class="maincontent" *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'ADMIN'">
         <div fxLayout="row" class="container-fluid pl-0">
           <div fxLayout="column" fxFlex class="pl-3">
-            <router-outlet *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'ADMIN'" (activate)="onActivate($event)"></router-outlet>
+            <router-outlet *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'ADMIN'"></router-outlet>
           </div>
         </div>
       </div>
       
         <div class="maincontent" *ngIf="!(auth.isLoggedIn() && (auth.getRole$  | async) === 'ADMIN')">
-              <router-outlet (activate)="onActivate($event)"></router-outlet>
+              <router-outlet></router-outlet>
         </div>
       
       <app-footer></app-footer>

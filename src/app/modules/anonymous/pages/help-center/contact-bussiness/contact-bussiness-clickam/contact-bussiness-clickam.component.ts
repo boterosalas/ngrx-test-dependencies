@@ -9,7 +9,7 @@ export class ContactBussinessClickamComponent implements OnInit {
 
   contacts = [
     {
-      name: "Contactos",
+      name: "Contactos de los negocios",
       route:
         "/centro-de-ayuda/contacta-los-negocios/contactos-negocios",
         icon: "/assets/img/ayuda/contactanos/contacta-negocios.svg"

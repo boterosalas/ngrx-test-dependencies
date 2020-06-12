@@ -6,10 +6,12 @@
         </div>
         <div fxLayout.gt-xs="column" fxShow.xs="false">
             <div fxLayout="row" fxLayoutGap="10px">
-                <span *ngFor="let item of contacts; let i = index" fxLayout="column" fxFlex="100">
+                <span *ngFor="let item of contacts let i = index" fxLayout="column" fxFlex="50">
                     <app-card-help-center [name]="item.name" [route]="item.route" [icon]="item.icon"></app-card-help-center>
                 </span>
             </div>
         </div>
     </div>
 </div>
+
+
