@@ -205,7 +205,7 @@ export class MenuHelpCenterComponent implements OnInit {
     {
       name: "Dónde puedo contactarme si tengo preguntas extras",
       route:
-        "/centro-de-ayuda/contactanos/donnde-puedo-contactarme-si-tengo-preguntas-extras",
+        "/centro-de-ayuda/contactanos/donde-puedo-contactarme-si-tengo-preguntas-extras",
     }
   ];
 
