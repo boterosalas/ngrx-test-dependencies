@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReferFriendComponent } from './refer-friend.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { AnonymousModule } from 'src/app/modules/anonymous/anonymous.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ReferFriendComponent', () => {
   let component: ReferFriendComponent;
@@ -8,7 +14,15 @@ describe('ReferFriendComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReferFriendComponent ]
+      declarations: [],
+      imports:[
+        TranslateModule.forRoot({}),
+        SharedModule,
+        AppMaterialModule,
+        AnonymousModule,
+        BrowserAnimationsModule,
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   }));
