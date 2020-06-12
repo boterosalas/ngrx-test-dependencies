@@ -51,8 +51,8 @@
     "SITE_NAME": "Sitio web",
     "CONTACT_PERSON": "Persona de contacto",
     "BUSINESS_CATEGORY": "Categoría del negocio",
-    "SEE_DETAIL":"Ver detalle",
-    "WIN10K":"Refiere y gana"
+    "SEE_DETAIL": "Ver detalle",
+    "WIN10K": "Refiere y gana"
   },
   "FOOTER": {
     "FOLLOW_US": "Síguenos",
@@ -125,14 +125,14 @@
     "DESCRIPTION_RAISE2": "Refiere y vende productos de los negocios asociados y obtén las mejores comisiones.",
     "TITLE_SEARCH": "Busca y crea un link",
     "DESCRIPTION_SEARCH": "Elige el negocio asociado, selecciona un producto o servicio y compártelo para ganar ingresos adicionales.",
-    "MY_COMMISSIONS":"Mis comisiones",
-    "PAYMENT":"*Este valor te será consignado en el próximo pago.",
+    "MY_COMMISSIONS": "Mis comisiones",
+    "PAYMENT": "*Este valor te será consignado en el próximo pago.",
     "BUSSINESS": "Negocios",
     "BUSSINESS_TEXT": "Obtén ganancias refiriendo o comprando en cada negocio",
     "OFFERS": "Ofertas",
     "OFFERS_TEXT": "Descubre nuestras ofertas, refiere y obtén ganancias refiriendo ó comprando",
-    "ALL_BUSSINESS":"Ver todos los negocios",
-    "HOME":"Volver al inicio"
+    "ALL_BUSSINESS": "Ver todos los negocios",
+    "HOME": "Volver al inicio"
   },
   "BUSSINESS": {
     "CATEGORIES": "Categorías",
@@ -150,24 +150,24 @@
     "PARTICIPATE_TEXT": "<ul> <li> Inicia sesión en Clickam a través de la página web o aplicación móvil.</li><li> Busca el negocio “Envíos Clickam”</li><li> Lee las políticas y cómo funciona</li><li> Acepta términos y condiciones</li><li> Clickam te redigirá a una plataforma llamada “SEWAY”</li><li> ¡En “SEWAY” se te asignarán los pedidos para hacer tus domicilios!</li></ul><p>*Valida con el lider de tu almacén si puedes ser parte del programa.</p>",
     "REQUIREMENT_TITLE": "Para participar en Clickam Envios, ¿Cuáles requisitos debo cumplir?",
     "REQUIREMENT_TEXT": "Clicker, es importante que tengas una edad inferior o igual a 45 años, que estés en óptimas condiciones de salud, no sufras de patologías como: Inmunosupresión, vértigo, osteomusculares de columna o síndrome del túnel de carpio. Para convertirte en repartidora, no puedes estar en estado de embarazo. No puedes hacer parte del programa 4R, ni haber presentado ausentismo por accidentes de tránsito en el último año, por último, no debes tener antecedentes de procesos disciplinarios ni sanciones que se hayan considerado graves.",
-    "TRANSPORT_TITLE":"¿Por cuales medio de transporte los puedo hacer?",
-    "TRANSPORT_TEXT":"<p>Lo puedes hacer en carro particular, moto, bicicleta, o caminando.</p><p>Si realizas los domicilios en moto o carro debes tener experiencia de mínimo 6 meses en conducción, y haber cursado satisfactoriamente el colegio de motos (Si aplica) de ARL SURA, el cual consta de una formación virtual de 30 minutos máximo y el curso de PESV de Almacenes Éxito S.A de 20 minutos máximo, previa inscripción del personal elegido al correo de Nancy Victoria Lopez (Nlopez@grupo-éxito.com).</p>",
+    "TRANSPORT_TITLE": "¿Por cuales medio de transporte los puedo hacer?",
+    "TRANSPORT_TEXT": "<p>Lo puedes hacer en carro particular, moto, bicicleta, o caminando.</p><p>Si realizas los domicilios en moto o carro debes tener experiencia de mínimo 6 meses en conducción, y haber cursado satisfactoriamente el colegio de motos (Si aplica) de ARL SURA, el cual consta de una formación virtual de 30 minutos máximo y el curso de PESV de Almacenes Éxito S.A de 20 minutos máximo, previa inscripción del personal elegido al correo de Nancy Victoria Lopez (Nlopez@grupo-éxito.com).</p>",
     "VEHICULE_TITLE": "¿Cuáles características debe tener mi vehículo?",
     "VEHICULE_TEXT": "<ul> <li>Para el caso de las motocicletas, preferiblemente modelo 2015 a la fecha</li><li>Tarjeta de propiedad a nombre del Clicker trabajador. </li><li>Licencia de conducción vigente. </li><li>SOAT y tecno mecánica vigente. </li><li>No tener comparendos pendientes de pago.</li><li>Hacer revisión preoperacional del vehículo (lista de chequeo), por parte del Clicker trabajador. </li><li>Dotar al vehículo con mecanismos para transporte seguro de cargas (Canastillas, morral, etc.), la compañía facilitará el préstamo según disponibilidad.</li></ul>",
     "HOUR_TITLE": "¿A qué hora puedo hacer los domicilios?",
     "HOUR_TEXT": "<p>La franja horaria en la que puedes realizar los domicilios es de 7am a 8 pm (1 hora antes del cierre del almacén), sin embargo, el inicio y finalización del turno de trabajo se ejecuta en la dependencia y debes reportarle al líder responsable cada vez que te retires a entregar un domicilio, como también tu llegada a la dependencia.</p> <p>Solo podrás hacer entregas durante horario laboral, una vez finalice tu turno no podrás realizar esta actividad, por lo que te pedimos que salgas de la app de Seway mientras no estés laborando.</p>",
-    "DELIVER_TITLE":"¿Cuántos domicilios puedo hacer?",
-    "DELIVER_TEXT":"Clicker, puedes hacer máximo 3 domicilios en un recorrido, y no deben superar los 20 kg.",
-    "PRODUCT_TITLE":"¿Cuáles productos puedo transportar?",
-    "PRODUCT_TEXT":"Los domicilios serán de productos de supermercado, no se autorizaran elementos de valor o peso superior (Celulares, electrodomésticos, textil, hogar, etc)",
-    "PAYMENT_TITLE":"¿Cómo es el pago de Envíos Clickam?",
-    "PAYMENT_TEXT":"<p>El programa de Clickam Envios no generara pagos de horas extras, ya que deben estar dentro de tu jornada laboral y turno, dicho esto, se asignará un pago de $5.000 pesos como flete de transporte por cada servicio domiciliario realizado exitosamente.</p> <p>Estos domicilios tienen un límite de distancia, en moto o Vehículo desde el almacén hasta el lugar de entrega del domicilio 5 kilómetros máximo de distancia, en bicicleta o caminando 2 kilómetros máximo, teniendo en cuenta las cargas del mismo.</p>",
-    "PAYMENTS_TITLE":"¿Cuándo me pagan lo que gané?",
-    "PAYMENTS_TEXT":"En Clickam Envíos aplican las mismas fechas en las que pagamos tus comisiones por referir productos de los negocios aliados, del 1 al 15 se pagan los 20  y del 16 al 20 ó 31 se pagan los 5 de cada mes.",
+    "DELIVER_TITLE": "¿Cuántos domicilios puedo hacer?",
+    "DELIVER_TEXT": "Clicker, puedes hacer máximo 3 domicilios en un recorrido, y no deben superar los 20 kg.",
+    "PRODUCT_TITLE": "¿Cuáles productos puedo transportar?",
+    "PRODUCT_TEXT": "Los domicilios serán de productos de supermercado, no se autorizaran elementos de valor o peso superior (Celulares, electrodomésticos, textil, hogar, etc)",
+    "PAYMENT_TITLE": "¿Cómo es el pago de Envíos Clickam?",
+    "PAYMENT_TEXT": "<p>El programa de Clickam Envios no generara pagos de horas extras, ya que deben estar dentro de tu jornada laboral y turno, dicho esto, se asignará un pago de $5.000 pesos como flete de transporte por cada servicio domiciliario realizado exitosamente.</p> <p>Estos domicilios tienen un límite de distancia, en moto o Vehículo desde el almacén hasta el lugar de entrega del domicilio 5 kilómetros máximo de distancia, en bicicleta o caminando 2 kilómetros máximo, teniendo en cuenta las cargas del mismo.</p>",
+    "PAYMENTS_TITLE": "¿Cuándo me pagan lo que gané?",
+    "PAYMENTS_TEXT": "En Clickam Envíos aplican las mismas fechas en las que pagamos tus comisiones por referir productos de los negocios aliados, del 1 al 15 se pagan los 20  y del 16 al 20 ó 31 se pagan los 5 de cada mes.",
     "OTHER_TITLE": "¿Cuáles otros aspectos debo tener en cuenta?",
     "OTHER_TEXT": "<ul> <li>Por ningún motivo se debe ingresar a la casa del cliente.</li><li>Los recorridos permitidos serán aquellos que se lleven a cabo bajo el estricto cumplimiento de la labor asignada. </li><li>El domicilio a entregar debe estar previamente cancelado, no se autoriza manipulación de efectivo ni datáfono.</li><li>Validar las restricciones de movilidad implementadas en cada ciudad ( Toque de Queda)</li><li>Si tienes un accidente en tu vehículo, éste se tomará como accidente laboral.</li></ul>",
-    "RESPONSABILITY_TITLE":"¿Cuáles son mis responsabilidades?",
-    "RESPONSABILITY_TEXT":"<p>Clicker, debes asumir la responsabilidad de:</p><ul><li>Distribuir y entregar diferentes tipos de productos del supermercado a clientes que realicen sus compras a domicilio y que se encuentren ubicados en el área de influencia de la tienda definida para este fin. </li><li>Dar continuidad al cumplimiento de todos y cada uno de tus deberes, obligaciones y compromisos como empleado de Almacenes Éxito, recuerda disciplina, servicio, respeto, transparencia, lealtad, honestidad, entre otros.</li><li>Reclamar las bolsas plásticas con los productos para entrega.</li><li>Recibir y organizar las bolsas que contienen los productos en los cajones, canastillas o morrales que está ubicado en el vehículo, moto o bicicleta.</li><li>Diligenciar bitácora de domicilios o entregas realizadas.</li><li>Realizar diariamente la lista de chequeo de las condiciones del vehículo, antes de salir de la tienda.</li><li>Informar permanentemente sobre problemas, inconvenientes o irregularidades que se presenten o puedan presentarse en alguna de las entregas que se te asignen.</li><li>Cumplir con las normas y procedimientos de seguridad y salud en el trabajo establecidos por la empresa.</li><li>Atender en forma correcta y oportuna a los clientes visitados.</li><li>Darle un adecuado uso y cuidado a los bienes, muebles o inmuebles que estén bajo tu custodia</li><li>Diligenciar el formato de declaración de salud.</li></ul><p>En caso de hurto del vehículo, multa, comparendo o sanción, o de deterioro o daño de la mercancía por descuido o negligencia debes asumir la responsabilidad.</p>"
+    "RESPONSABILITY_TITLE": "¿Cuáles son mis responsabilidades?",
+    "RESPONSABILITY_TEXT": "<p>Clicker, debes asumir la responsabilidad de:</p><ul><li>Distribuir y entregar diferentes tipos de productos del supermercado a clientes que realicen sus compras a domicilio y que se encuentren ubicados en el área de influencia de la tienda definida para este fin. </li><li>Dar continuidad al cumplimiento de todos y cada uno de tus deberes, obligaciones y compromisos como empleado de Almacenes Éxito, recuerda disciplina, servicio, respeto, transparencia, lealtad, honestidad, entre otros.</li><li>Reclamar las bolsas plásticas con los productos para entrega.</li><li>Recibir y organizar las bolsas que contienen los productos en los cajones, canastillas o morrales que está ubicado en el vehículo, moto o bicicleta.</li><li>Diligenciar bitácora de domicilios o entregas realizadas.</li><li>Realizar diariamente la lista de chequeo de las condiciones del vehículo, antes de salir de la tienda.</li><li>Informar permanentemente sobre problemas, inconvenientes o irregularidades que se presenten o puedan presentarse en alguna de las entregas que se te asignen.</li><li>Cumplir con las normas y procedimientos de seguridad y salud en el trabajo establecidos por la empresa.</li><li>Atender en forma correcta y oportuna a los clientes visitados.</li><li>Darle un adecuado uso y cuidado a los bienes, muebles o inmuebles que estén bajo tu custodia</li><li>Diligenciar el formato de declaración de salud.</li></ul><p>En caso de hurto del vehículo, multa, comparendo o sanción, o de deterioro o daño de la mercancía por descuido o negligencia debes asumir la responsabilidad.</p>"
   },
   "HEADER": {
     "PROFILE": "Mi perfil",
@@ -312,10 +312,10 @@
   },
   "HISTORICAL": {
     "HISTORY_LINKS": "Historial de links",
-    "PRODUCT":"PRODUCTO O PLU",
+    "PRODUCT": "PRODUCTO O PLU",
     "LINK": "LINK",
     "DATE": "FECHA",
-    "GENERATED_COMISSIONS":"COMISIONES GENERADAS",
+    "GENERATED_COMISSIONS": "COMISIONES GENERADAS",
     "TOTAL_SELL": "CANTIDAD DE PRODUCTOS VENDIDOS",
     "VISITS": "VISITAS"
   },
@@ -331,7 +331,7 @@
     "EMAIL": "CORREO",
     "ORIGIN": "ORIGEN",
     "VERIFIED": "VERIFICADO",
-    "STATUS":"ESTADO",
+    "STATUS": "ESTADO",
     "COMUNICATION": "COMUNICADO"
   },
   "AUDIT": {
@@ -354,34 +354,34 @@
     "NEW_BUSINESS": "Negocios"
   },
   "NEWBUSINESS": {
-    "REGISTER":"Registra tu negocio",
-    "TITLE":"Registro de nuevos negocios",
+    "REGISTER": "Registra tu negocio",
+    "TITLE": "Registro de nuevos negocios",
     "TEXT": "Registra tu negocio y haz parte de nuestra familia Clicker para ofrecer tus beneficios a nuestros clientes."
   },
-  "DETAILCOMISSION":{
+  "DETAILCOMISSION": {
     "DETAILS": "Detalle de ventas",
-    "DATE":"FECHA",
-    "PRODUCT":"PRODUCTO",
-    "STATE":"ESTADO",
-    "COMMISION":"COMISIÓN"
+    "DATE": "FECHA",
+    "PRODUCT": "PRODUCTO",
+    "STATE": "ESTADO",
+    "COMMISION": "COMISIÓN"
   },
   "REFER": {
-    "REFER":"Referir",
+    "REFER": "Referir",
     "MY_REFERS": "Mis referidos",
-    "GUESTS":"INVITADOS",
-    "REGISTERED":"REGISTRADOS",
-    "CUALIFIED":"CALIFICADO",
-    "SEND_INVITATION":"Enviar invitación",
-    "REFER_WIN":"¡Clicker! Para ganar {{amount}}, tu referido debe:",
-    "EMAIL":"Invita a tus amigos por correo",
-    "EMAIL_CONTACT":"Ingresa el correo de tu contacto",
-    "SHARE":"Invita a tus amigos por redes sociales",
-    "COPY":"Copiar Link",
-    "INVITE_FRIENDS":"Invita a tus amigos por correo",
-    "SHARE_FRIENDS":"Invita a tus amigos",
-    "MY_REFERS2":"Mis Referidos",
-    "ACTIVITY":"Revisa la actividad de tus referidos, para que puedas hacerles seguimiento.",
-    "REFERED":"Referidos",
+    "GUESTS": "INVITADOS",
+    "REGISTERED": "REGISTRADOS",
+    "CUALIFIED": "CALIFICADO",
+    "SEND_INVITATION": "Enviar invitación",
+    "REFER_WIN": "¡Clicker! Para ganar {{amount}}, tu referido debe:",
+    "EMAIL": "Invita a tus amigos por correo",
+    "EMAIL_CONTACT": "Ingresa el correo de tu contacto",
+    "SHARE": "Invita a tus amigos por redes sociales",
+    "COPY": "Copiar Link",
+    "INVITE_FRIENDS": "Invita a tus amigos por correo",
+    "SHARE_FRIENDS": "Invita a tus amigos",
+    "MY_REFERS2": "Mis Referidos",
+    "ACTIVITY": "Revisa la actividad de tus referidos, para que puedas hacerles seguimiento.",
+    "REFERED": "Referidos",
     "CLICKER_COMISSION_TITLE": "Comisión para el clicker",
     "CLICKER_COMISSION_TEXT": "Ingrese cual es la comisión para el clicker por referir",
     "CLICKER_REFERED_TITLE": "Monto para ser un clicker calificado",
@@ -389,9 +389,98 @@
     "WHATSAPP": "Compartir en Whatsapp",
     "FACEBOOK": "Compartir en Facebook",
     "TWITTER": "Compartir en Twitter",
-    "SHARE_INVITATION":"Comparte tu invitación",
+    "SHARE_INVITATION": "Comparte tu invitación",
     "CONDITIONS": "<h3>¿Cómo funciona el programa? </h3><p>En Clickam creamos un link asignado para ti, el cual puedes encontrar al clickear “Refiere y gana {{amount}}”, simplemente envía este link a tu círculo social, o publícalo en tus redes sociales como Facebook, Instagram, estado de WhatsApp, Twitter, entre otras. Y si alguna persona: </p><ul> <li>Ingresa a la plataforma por medio del link enviado por ti.</li><li>Realiza el proceso de registro.</li><li>Acumula {{sale}} en compras o ventas efectivas.</li></ul><p>Entonces, ¡ganarás una comisión! </p>",
-    "TERMS":"<h3>Refiere y Gana Términos y Condiciones</h3><h4>Términos del Programa de Referidos</h4><p>De acuerdo con los Términos del Programa de Referidos. Clickam te pagará un bono de COP{{amount}} en tu cuenta inscrita en la plataforma por cada referido calificado en el periodo que inicia el 28 de Mayo de 2020 y finaliza el 31 de Diciembre de 2020. (“Periodo de Oferta”).</p><p>A pesar de todo lo contrario en los Términos del Programa de referidos, esta oferta es válida solo si el referido se registra y completa su compra calificada durante el Período de la oferta.</p>"
-  }
+    "TERMS": "<h3>Refiere y Gana Términos y Condiciones</h3><h4>Términos del Programa de Referidos</h4><p>De acuerdo con los Términos del Programa de Referidos. Clickam te pagará un bono de COP{{amount}} en tu cuenta inscrita en la plataforma por cada referido calificado en el periodo que inicia el 28 de Mayo de 2020 y finaliza el 31 de Diciembre de 2020. (“Periodo de Oferta”).</p><p>A pesar de todo lo contrario en los Términos del Programa de referidos, esta oferta es válida solo si el referido se registra y completa su compra calificada durante el Período de la oferta.</p>"
+  },
 
+  "HELP_CENTER": {
+    "TOPICS": "Temas principales",
+    "ABOUT_CLICKAM": {
+      "ABOUT_CLICKAM": "SOBRE CLICKAM",
+      "CLICKAM_TITLE": "¿Qué es Clickam?",
+      "CLICKAM_TEXT": "Clickam es una plataforma digital que permite a los usuarios generar ingresos adicionales por medio de comisiones, las cuales ganan por hacer difusión/referir/compartir y obtener compras efectivas de los productos y servicios de las marcas más reconocidas. La compra por estos links puede ser hecha por el mismo Clicker, sus familiares, amigos o conocidos.",
+      "REGISTER_TITLE": "¿Cómo me puedo registrar?",
+      "REGISTER_TEXT": "<p>Para registrarte, debes descargar la aplicaci&oacute;n Clickam en tu celular o ir a la p&aacute;gina&nbsp;<a href='http://www.clickam.com.co/' target='_blank'>www.clickam.com.co</a>,&nbsp;clickear&nbsp;en &ldquo;Iniciar sesi&oacute;n&rdquo;, y seleccionar registrarse, completa el formulario, recuerda que tu contrase&ntilde;a debe contener por lo menos 6 caracteres, con m&iacute;nimo una letra may&uacute;scula, letra min&uacute;scula y un n&uacute;mero; por ejemplo:&nbsp;Clickam1.</p><p>Te llegar&aacute; un correo para activarte, debes tener en cuenta que este correo puede estar en &ldquo;No deseados&rdquo; o &ldquo;spam&rdquo; por ser un nuevo remitente.</p><p>Cuando te registras y activas tu cuenta, te conviertes en&nbsp;Clicker.</p>",
+      "DOWNLOAD_TITLE": "¿Por cuáles medios puedo descargar la app?",
+      "DOWNLOAD_TEXT": "<p>La app la puedes descargar desde: App Store, Play Store y Huawei App Gallery, buscas “Clickam” e inmediatamente te va a aparecer la opción para descargarla, ¡Hazlo!, te consume poco espacio en el celular y es muy fácil de usar.</p>",
+      "WORKS_TITLE": "¿Cómo funciona Clickam?",
+      "WORKS_TEXT": "<ol><li><p>Inicia sesión en Clickam a través de la página web o aplicación móvil.  </p></li><li><p>Busca el negocio y luego el producto, servicio o categoría asociado al negocio que vas a referir.  </p></li><li><p>Clickea para crear el link.</p></li><li><p>Compártelo en tus redes y por cada persona que ingrese a él y realice la compra, ganarás comisiones.</p></li><li><p>Refiere a una persona con su cédula y por las compras que realice durante 7 días, vendidas por el negocio, ganarás comisiones.</p></li><li><p>Clickea en comprar, esto te redirigirá al negocio, realiza la compra y podrás también ganar comisiones.</p></li><li><p>Tus comisiones aparecerán en la plataforma una vez la confirme el negocio</p></li><li><p>Recibe tu dinero en tu cuente inscrita según las fechas de pago.</p></li></ol>",
+      "WIN_TITLE": "¿Cómo gano comisiones?",
+      "WIN_TEXT": "<p><strong>Nuestra mejor recomendación para ganar comisiones, es poner a trabajar tus links 24/7, las 24 horas de los 7 días de la semana, ¿cómo puedes lograrlo? </strong> </p><p>Publicando en tus redes sociales como Facebook, Instagram, estados de WhatsApp, Twitter, entre otros; los productos que quieres referir, y agregas los links creados en Clickam para que tus contactos ingresen y realicen la compra.  </p><p>La mejor manera de que tu círculo social se anime a ingresar y comprar, es agregándole valor al link, explicando las características del producto que estas refiriendo o los beneficios de su uso.</p><p>Recuerda que puedes generar también comisiones con tus compras, construye el hábito de hacer tus compras online, y al hacerlas por medio de tu link de Clickam ganas comisiones y ahorras.</p>",
+      "BENEFITS_TITLE": "¿Cuáles son los beneficios de ser un Clicker?",
+      "BENEFITS_TEXT": "<p>Los beneficios como Clicker son:  </p><ul><li>Ganar ingresos adicionales sin realizar una inversión.  </li><li>Links que trabajan por el las 24 horas de los 7 días de la semana.  </li><li>No debe preocuparse por el servicio al cliente, el negocio o tienda online se encarga.  </li><li>No maneja inventario, no tiene que preocuparse o pensar en la logística, los envíos, el transporte, reembolsos o devoluciones.  </li><li>Tiene la facilidad de referir productos y/o servicios desde su hogar o cualquier otro lugar donde tenga un computador o un celular e internet.   </li></ul>",
+      "PARTNERS_TITLE": "¿Cuáles son los negocios asociados?",
+      "PARTNERS_TEXT": "<p>A la fecha contamos con <a href='https://www.exito.com/' target='_blank'>www.exito.com</a>, <a href='https://www.carulla.com/' target='_blank'>www.carulla.com</a>, <a href='https://www.segurosexito.com/' target='_blank'>www.segurosexito.com</a>, <a href='https://www.wesura.com/' target='_blank'>www.wesura.com</a>, <a href='https://www.viajesexito.com/' target='_blank'>www.viajesexito.com</a> y <a href='https://www.movilexito.com/' target='_blank'>www.movilexito.com</a> muy pronto tendremos otros negocios para que ganes más. </p>"
+    },
+    "CONFIGURATIONS": {
+      "CONFIGURATIONS": "CONFIGURACIONES DE CUENTA",
+      "DATA_TITLE": "Cambios de tus datos personales",
+      "DATA_TEXT": "<p>En la plataforma, en el menú, clickea “mi perfil”, allí puedes hacer cambios de tu celular y contraseña, y también puedes adjuntar tus documentos necesarios para realizar el pago de comisiones, como certificado bancario y fotocopia de la cédula.</p><p>Si requieres hacer cambio de tu correo puedes escribirnos a <a href='mailto:clickam@grupo-exito.com' target='_blank'><u>clickam@grupo-éxito.com</u></a> con el asunto: CAMBIO CORREO, envíanos tu nombre completo, cédula, correo anterior (si lo recuerdas) y el nuevo correo con el cual quieres iniciar sesión en Clickam.</p>",
+      "RESET_TITLE": "Restablecer contraseña",
+      "RESET_TEXT": "<p>Para restablecer tu contraseña debes seguir los siguientes pasos:</p><ol><li><p>Ingresa a la app Clickam o a <u><a href='https://www.clickam.com.co/'>www.clickam.com.co</a></u> y clickea en iniciar sesión.</p></li><li><p>Dale click a “Olvidaste tu contraseña” e ingresa el correo electrónico con el que te encuentras registrado</p></li><li><p>Al dar click en guardar, te aparecerá un letrero que dice “Se ha enviado un email”</p></li><li><p>Ingresa a tu correo electrónico y busca en tu bandeja de entrada o en correos no deseados o spam.</p></li><li><p>Haz click en el espacio naranjado que dice “restablecer contraseña”, en caso de que no te abra la página web de clickam, también puedes copiar y pegar en una nueva pestaña el link que aparece en la parte inferior.</p></li><li><p>Te aparecerán los espacios donde debes ingresar la nueva contraseña, recuerda que ésta debe constar de mínimo: 6 caracteres, una letra mayúscula, una letra minúscula, un número y un símbolo.</p></li><li><p>Clickea en Guardar y vuelve al inicio de la página de clickam.</p></li><li><p>Ahora podrás iniciar sesión con tu correo y tu nueva contraseña.</p></li></ol>"
+    },
+    "COMMISSIONS": {
+      "COMMISSIONS": "COMISIONES",
+      "ROUTE_TITLE": "¿Qué es la ruta de compra Clickam?",
+      "ROUTE_TEXT": "<p>Cuando hayas creado un link en Clickam para referir, has creado una ruta de compra Clickam. A esa ruta internamente se le hace un seguimiento para verificar la compra con el negocio aliado.</p><p>Tus comisiones te llegarán solo si se completa la ruta de compra de Clickam, si no creas el link, lo compartes y por este medio se hace la compra, internamente no tenemos como demostrarle al negocio aliado que eres un miembro de Clickam para el pago de tu comisión.</p>",
+      "CROSS_TITLE": "¿Cómo cruzan la venta?",
+      "CROSS_TEXT": "<p>Cuando crees un link y las personas compren a través de este, nuestro sistema rastreará de manera precisa el link desde donde se generó la compra, si es a través de uno de los link que tú como Clicker creaste y compartiste, te ganarás la comisión correspondiente al producto o servicio.</p>",
+      "PAYMENT_TITLE": "¿Cuáles son las fechas de pago?",
+      "PAYMENT_TEXT": "<p>Las comisiones tienen dos cortes: </p><ul><li>Del 1° al 15 de cada mes: Las compras de tus referidos efectivas que se generen por medio de tus links dentro de este periodo, se pagarán en la fecha indicada en el cuadro.</li><li>Del 16 al 30 o 31 de cada mes: Las compras efectivas de tus referidos que se generen en este periodo se pagarán en la fecha indicada en el cuadro.</li></ul><p> *Las compras efectivas pueden completarse los días posteriores a la fecha en la que el cliente compra, ya que pasa por varios estados de validación antes de hacerse efectiva.</p><table class='table-payment w-100'><tbody><thead><th><strong>Fechas de corte</strong></th><th><strong>Semana de pago</strong></th></thead><tr><td>Del 1° al 15 de enero</td><td>Semana del 20 al 27 de enero</td></tr><tr><td>Del 16 al 31 de enero</td><td>Semana del 3 al 10 de febrero</td></tr><tr><td>Del 1° al 15 de febrero</td><td>Semana del 17 al 24 de febrero</td></tr><tr><td>Del 16 al 29 de febrero</td><td>Semana del 2 al 9 de marzo</td></tr><tr><td>Del 1° al 15 de marzo</td><td>Semana del 16 al 23 de marzo</td></tr><tr><td>Del 16 al 31 de marzo</td><td>Semana del 6 al 13 de abril</td></tr><tr><td>Del 1° al 15 de abril</td><td>Semana del 20 al 27 de abril</td></tr><tr><td>Del 16 al 30 de abril</td><td>Semana del 4 al 11 de mayo</td></tr><tr><td>Del 1° al 15 de mayo</td><td>Semana del 18 al 25 de mayo</td></tr><tr><td>Del 16 al 31 de mayo</td><td>Semana del 1 al 8 de junio</td></tr><tr><td>Del 1° al 15 de junio</td><td>Semana del 22 al 29 de junio</td></tr><tr><td>Del 16 al 30 de junio</td><td>Semana del 6 al 13 de julio</td></tr><tr><td>Del 1° al 15 de julio</td><td>Semana del 20 al 27 de julio</td></tr><tr><td>Del 16 al 31 de julio</td><td>Semana del 3 al 10 de agosto</td></tr><tr><td>Del 1° al 15 de agosto</td><td>Semana del 17 al 24 de agosto</td></tr><tr><td>Del 16 al 31 de agosto</td><td>Semana del 7 al 14 de septiembre</td></tr><tr><td>Del 1° al 15 de septiembre</td><td>Semana del 21 al 28 de septiembre</td></tr><tr><td>Del 16 al 30 de septiembre</td><td>Semana del 5 al 12 de octubre</td></tr><tr><td>Del 1° al 15 de octubre</td><td>Semana del 19 al 26 de octubre</td></tr><tr><td>Del 16 al 31 de octubre</td><td>Semana del 2 al 9 de noviembre</td></tr><tr><td>Del 1° al 15 de noviembre</td><td>Semana del 16 al 23 de noviembre</td></tr><tr><td>Del 16 al 30 de noviembre</td><td>Semana del 7 al 14 de diciembre</td></tr><tr><td>Del 1° al 15 de diciembre</td><td>Semana del 21 al 28 de diciembre</td></tr><tr><td>Del 16 al 31 de diciembre</td><td>Semana del 4 al 11 de enero 2021</td></tr></tbody></table>",
+      "COMMISSION_TITLE": "¿Por qué no me llegó la comisión?",
+      "COMMISSION_TEXT": "<ul><li><p>No has adjuntado en la plataforma o enviado tus documentos a nuestro correo <a href='mailto:clickam@grupo-exito.com' target='_blank'>clickam@grupo-exito.com</a>: Certificado bancario y fotocopia de la cédula.</p></li><li><p>Referiste un producto y tu referido hizo la compra pero ésta no ha pasado a estado “efectivo” para el negocio (<em>ver: ¿Cuándo se considera una compra efectiva por el negocio?),</em> o pasó a estado efectivo después de las fechas de corte, por lo cual, te llegaría en la próxima fecha de pago.  </p></li><li><p>Hay algún inconveniente interno como: Pago rechazado por el banco, cuenta aún no matriculada. </p></li><li><p>Referiste al comprador, después de que éste realizó la compra.</p></li><li><p>No acumulaste la cantidad mínima para el pago: COP $10.000</p></li></ul><p>En el proceso se cometieron algunos errores como:  </p><ul><li><p>Realizar la compra por otra pestaña en la página web y no por medio del link de Clickam, el cual redirige a una página que nosotros podemos rastrear para atribuir la comisión. Tu referido no compró por el link que le enviaste.</p></li></ul><ul><li><p>En SOAT, referiste la cédula o el NIT del comprador, no del tomador del seguro. O referiste una cédula o un NIT pero en la cotización del SOAT, se ingresó otra/o. Recuerda que si refieres el NIT, no debes poner el guion, pero si el último dígito.</p></li><li><p>Compra de un producto Marketplace. Estos son productos vendidos por un tercero por medio de <a href='http://www.exito.com/' target='_blank'>www.exito.com</a> o www.carulla.com. Los únicos productos Marketplace que SI generan comisión, son los colchones marca Paraíso.<br /> </p></li></ul><p>Si tienes alguna novedad con tu pago de comisiones, para obtener una respuesta de nuestro equipo, debes enviarnos un correo a <u><a href='mailto:clickam@grupo-exito.com'>clickam@grupo-exito.</a>com</u> con el asunto: Novedad en comisiones, y en el correo ingresa:</p><ul><li><p>Nombre completo</p></li><li><p>Cédula</p></li><li><p>Fecha de la compra</p></li><li><p>Producto referido o número de orden</p></li><li><p>Cédula del referido</p></li></ul><p>En caso de ser una novedad relacionada con SOAT, adicional a lo anterior: Placa del vehículo</p><p>En caso de ser una novedad relacionada con Móvil Éxito, adicional a lo anterior: Número de celular.</p><p>Si no tienes en el momento cómo enviar un correo, puedes comunicarte por medio de llamada o WhatsApp al celular: 3052559105</p><p>“<strong>Hice una compra pero se me olvidó hacerla por medio del link de </strong><strong>clickam</strong><strong>, ¿puedo ganar comisiones por esa compra?” </strong> </p><p>Desafortunadamente, solo puedes ganar comisiones si haces la ruta de compra de Clickam (<em>Ver: ¿Qué es la ruta de compra Clickam?)</em><em>, </em>ya que no tenemos manera de agregarte una comisión si la compra ya fue realizada.  </p><p><br /><br /></p>",
+      "PROCESS_TITLE": "¿Cómo es el proceso de pago?",
+      "PROCESS_TEXT": "<p>A los Clickers que son colaboradores del Grupo Éxito se les pagará en su cuenta de nómina, en caso de ser por <em>presente</em> encontrarás tu dinero en el disponible. Recuerda que las comisiones de Clickam NO aparecerán en tu recibo de pago. Si dejas de trabajar en la compañía y cambias de cuenta bancaria, debes enviarnos tus documentos para poder realizar los pagos al banco correspondiente. </p><p>A los Clickers que NO están vinculados con el Grupo Éxito, se les pedirá que adjunten en “mi perfil” o envíen sus documentos al correo <a href='mailto:clickam@grupo-exito.com' target='_blank'><u>clickam@grupo-exito.com</u></a> para realizar el pago, certificado bancario y fotocopia de la cedula. </p><p>Una vez tenemos los documentos, nuestro equipo realizara algunas validaciones y matricularemos tu cuenta para realizar los pagos. El proceso de matrícula puede tomar hasta 15 días, de igual forma, puedes acumular comisiones durante estos días para que cuando sea confirmada la cuenta bancaria, se te pague lo acumulado según las fechas de cortes de pago.</p>",
+      "EFFECTIVE_TITLE": "¿Cuándo se considera una compra efectiva por el negocio?",
+      "EFFECTIVE_TEXT": "<p>En exito.com y carulla.com el estado del producto puede demorarse hasta 5 días hábiles para pasar a ser una compra “efectiva”, esto debido a la legislación de Ley 1480 de 2011 sobre Derecho de Retracto, donde el comprador tiene 5 días hábiles para retractarse de su compra.  </p><p>En Seguros Éxito y Viajes Éxito la compra puede demorarse hasta 3 días hábiles para tener el estado de compra “efectiva” en Clickam.  En Móvil Éxito, puede demorarse entre 2 y 5 días hábiles.</p>"
+    },
+    "REPORTS": {
+      "REPORTS": "REPORTES",
+      "HISTORY_TITLE": "¿Dónde puedo encontrar un historial de mis links?",
+      "HISTORY_TEXT": "<p>Al iniciar sesión ve al menú y clickea en historial de links, esta función es excelente para hacer un seguimiento de tus links creados, tienes la opción de ver la fecha en la cual creaste el link, las comisiones generadas gracias a ese link, la cantidad de productos vendidos y las visitas, lo que equivale a las veces que abrieron tu link. Tendrás la opción de “Clickear” y volver a compartirlo o comprar por medio de él.</p>",
+      "WIN_TITLE": "¿Cómo veo las comisiones que he ganado?",
+      "WIN_TEXT": "<p>Cuando inicies sesión, ve al menú y clickea en “reportes”; allí podrás encontrar en el corte 1 o corte 2 las comisiones que has generado, al dar click podrás ver por cuáles productos.<br />En resumen general, encuentra el total de tus comisiones desde que generas comisiones en Clickam, los link creados, el número de productos vendidos y la tasa de conversión (La tasa de conversión es la división entre el número de productos vendidos y los links generados).  </p><p>Para saber si te ganaste la comisión de un producto, debes estar pendiente ya que esta se agregará a la plataforma cuando la compra sea efectiva en el negocio y sea notificada a Clickam.  </p>",
+      "PRODUCT_TITLE": "¿Cómo puedo saber por cuales productos me pagaron comisión?",
+      "PRODUCT_TEXT": "<p>Cuando inicies sesión, ve al menú y clickea en “reportes”, podrás encontrar el historial de los pagos que se te han realizado, allí podrás ver la fecha de compra, el producto y la comisión ganada por éste.</p>"
+    },
+    "REFER": {
+      "REFER": "REFIERE A UN AMIGO",
+      "PROGRAM_TITLE": "¿Qué es el programa refiere a tu amigo?",
+      "PROGRAM_TEXT": "<p>Con Clickam tienes varias formas de generar ingresos, una de ellas es referir a otras personas para que se unan a nuestra plataforma y se conviertan en Clickers calificados, cuando esto suceda, te ganaras {{amount}}, por cada persona que hayas referido. </p><p>Este beneficio se gana una única vez por persona referida. Para que el Clicker sea efectivo debe tener una venta o compra acumulada por {{sale}}.</p>",
+      "WORKS_TITLE":"¿Cómo funciona el programa?",
+      "WORKS_TEXT":"<p>En Clickam creamos un link asignado para ti, el cual puedes encontrar al clickear “Refiere y gana {{amount}}”, simplemente envía este link a tu círculo social, o publícalo en tus redes sociales como Facebook, Instagram, estado de WhatsApp, Twitter, entre otras. Y si alguna persona: </p><ul> <li>Ingresa a la plataforma por medio del link enviado por ti.</li><li>Realiza el proceso de registro.</li><li>Acumula {{sale}} en compras o ventas efectivas.</li></ul><p>Entonces, ¡ganarás una comisión! </p>",
+      "INVITE_TITLE":"¿Cuántos amigos puedo invitar?",
+      "INVITE_TEXT":"<p>¡Todos los que quieras! Pueden ser tus familiares, amigos, vecinos, compañeros de trabajo, cualquiera que tenga interés en generar ingresos adicionales.</p>"
+    },
+    "OFFERS": {
+      "OFFERS":"OFERTAS",
+      "BEST_TITLE":"¿Dónde puedo encontrar las mejores ofertas?",
+      "BEST_TEXT":"<p>Las ofertas las podrás ver en el “Home” de nuestra plataforma, en nuestros banners publicitarios en la App o página web, también si deseas estar actualizado de las ofertas diarias, puedes comunicarte con nosotros por Whatsapp y te agregaremos a un grupo donde enviamos imágenes de los mejores descuentos de nuestros negocios aliados.   </p><p>En algunos de los negocios hay fechas especiales durante el año, por ejemplo, en <a href='http://www.exito.com' target='_blank'>www.exito.com</a> podrás encontrar el Aniversario Éxito, Jueves Online, Megaprima, Black Friday, Black Days, Días de Precios Especiales, entre otros.</p><p>En Seguros Éxito generalmente en las quincenas se hacen descuentos, por esto, te invitamos a estar atentos de sus redes sociales, para que sepas cuál es el mejor momento de referir y ganar comisiones con Clickam.  </p>",
+      "MAIL_TITLE":"Preferencias de correo",
+      "MAIL_TEXT":"<p>A tu correo también enviaremos ofertas que pueden ser de tu interés, recuerda que por ser un nuevo remitente, estos pueden estar en las carpetas “no deseados” o “spam”. </p><p>Si en algún momento no quieres recibir más, puedes escribirnos a <a href='mailto:clickam@grupo-exito.com' target='_blank'><u>clickam@grupo-exito.com</u></a> con el asunto: Cancelar suscripción de correos, es importante que en éste nos envíes tu nombre completo y cédula. </p><p>Dejaremos de enviarte información publicitaria, pero continuaremos enviándote novedades del pago de comisiones y novedades de la plataforma. </p>"
+    },
+    "QUESTIONS":{
+      "QUESTIONS": "OTRAS PREGUNTAS FRECUENTES",
+      "ASSURED_TITLE":"¿Quién es el tomador de un seguro?",
+      "ASSURED_TEXT":"<p>El tomador del seguro es la persona que se beneficiará de éste, en el caso del SOAT, por lo general, es el propietario del vehículo que aparece en la matricula.  </p><p>En el caso de seguros de Mascotas, Celulares, Computadores, bicicletas, Smartwatch, Tablet, o Consolas, es el propietario.  </p><p>Es importante que tengas en cuenta que en la región Costa, Seguros Éxito no tiene presencia, si la placa es de otras ciudades, es posible que puedas realizar la compra. </p>",
+      "MARKETPLACE_TITLE":"¿Qué es un producto Marketplace?",
+      "MARKETPLACE_TEXT":"<p>Un producto Marketplace, es un producto que puedes encontrar  y comprar en <a href='http://www.exito.com/' target='_blank'><u>www.exito.com</u></a> o <a href='http://www.carulla.com/' target='_blank'><u>www.carulla.com</u></a> pero es vendido por una marca diferente a éxito o Carulla, esto lo puedes ver en la descripción del producto.</p><p>En el caso de que aparezca vendido por: (Marca diferente a Éxito o Carulla), entonces, este producto no generará comisión.</p><p>Los únicos productos que generan comisión de Marketplace, son los colchones marca <em>Paraíso</em>. </p>",
+      "PAY_TITLE":"¿Cuáles son los medios de pago de cada negocio?",
+      "PAY_TEXT":"<p><strong>Exito.com y Carulla.com:</strong><br />Tarjeta de crédito, PSE, consignación, Tarjeta Éxito, Tarjeta Carulla, Éxito MasterCard, Carulla Mastercard, Codensa, Tarjeta Presente, Pago presencial con tu número de pedido en Almacenes Éxito, Carulla, Surtimax y Super Inter.</p><p><strong>Seguros éxito:</strong><br /> Tarjeta de crédito y en ocasiones se permite PSE. </p><p><strong>Wesura:</strong><br /> Tarjeta crédito o débito por PSE.</p><p><strong>Viajes Éxito: <br /></strong>Tarjeta de crédito Master Card, Visa, Amex, Dinners, Tarjeta Éxito, Tarjeta Carulla, Pago PSE, pagos en efectivo en cajas de almacenes. </p><p><strong>Móvil Éxito: <br /></strong>Tarjeta débito por PSE.</p>"
+    },
+    "CONTACTS":{
+      "CONTACTS":"CONTACTA LOS NEGOCIOS",
+      "CONTACTS_TITLE": "Contactos",
+      "CONTACTS_TEXT": "<p>Si tienes preguntas sobre los productos o servicios, cómo comprarlos, qué incluyen, su entrega, devoluciones, cancelaciones, cambios o garantía, debes comunicarte tu o tu referido directamente con el negocio, ya que ellos son los encargados de esta gestión.  </p><p>Puedes ingresar a sus páginas web, te dejamos los datos de preguntas frecuentes de cada uno y sus líneas de atención:   </p><p><strong>Exito.com: </strong><u><a href='https://www.exito.com/centro-ayuda-preguntas-frecuentes' target='_blank'>https://www.exito.com/centro-ayuda-preguntas-frecuentes</a> </u> <br /><strong>Bogotá:</strong> (1) 745 5444  <br /><strong>Medellín:</strong> (4) 604 1919  <br /><strong>Cali:</strong> (2) 489 1222  <br /><strong>Barranquilla:</strong> (5) 311 7979  <br /><strong>Cartagena:</strong> (5) 694 5959  <br /><strong>Bucaramanga:</strong> (7) 697 2929  <br /><strong>Manizales:</strong> (6) 896 1444  <br /><strong>Resto del País:</strong> 01 8000 428 800  <br /><strong>Horario: </strong>De 7:00 a.m. a 9:00 p.m de Lunes a Sábado.  </p><p><strong>Carulla.com: </strong><a href='https://www.carulla.com/preguntas-frecuentes'><u>https://www.carulla.com/preguntas-frecuentes</u></a><u><br /></u><strong>Bogotá:</strong><strong> </strong>(1) 745 5777<br /><strong>Medellín:</strong> (4) 604 4250<br /><strong>Cali:</strong> (2) 489 0555<strong><br /></strong><strong>Barranquilla:</strong> (5) 311 7888<strong><br /></strong><strong>Cartagena:</strong> (5) 693 0777<strong><br /></strong><strong>Pereira:</strong> (6) 340 0393<strong><br /></strong><strong>Manizales:</strong> (6) 895 6969<strong><br /></strong><strong>Santa Marta:</strong> (5) 436 6081<strong><br /></strong><strong>Resto del País:</strong> 01 8000 110 007<br /><strong>Horarios de Atención:</strong> Lunes a Sábado. De 7:00 a.m. a 9:00 p.m.</p><p><strong>Viajes Éxito: </strong><u><a href='https://www.viajesexito.com/preguntas-frecuentes' target='_blank'>https://www.viajesexito.com/preguntas-frecuentes</a> </u> <br /><strong>Medellín</strong>: (4) 6049407  <br /><strong>Bogotá:</strong> (1) 7425656  <br /><strong>Cali:</strong> (2) 4851818  <br /><strong>Barranquilla:</strong> (5) 3855009  <br /><strong>Resto del País:</strong> 01 8000 428 800<u> </u>  <br /><strong>Horario:</strong> 8:00 a.m. a 9:30 p.m. de lunes a sábados y de 11 a.m. a 7:00 p.m. los domingos y festivos.  </p><p><strong>Seguros éxito: </strong>En Bogotá, Cali y Medellín: 448 65 56, desde cualquier lugar del país al 01 8000 526 556 y desde cualquier celular marcando #556.  </p><p><strong>Wesura: </strong><a href='https://www.wesura.com/seguro-entre-amigos/preguntas-frecuentes'>https://www.wesura.com/seguro-entre-amigos/preguntas-frecuentes</a></p><p>Chatea en línea por <a href='https://www.wesura.com/seguro-entre-amigos/contactanos'>https://www.wesura.com/seguro-entre-amigos/contactanos</a></p><p><strong>Móvil Éxito: </strong>Marca gratis desde tu equipo terminal móvil *999 o desde un teléfono fijo 018000517677</p>"
+    },
+    "CONTACTUS": {
+      "CONTACTUS": "CONTÁCTANOS",
+      "EXTRA_TITLE":"Dónde puedo contactarme si tengo preguntas extras",
+      "EXTRA_TEXT":"<p>Si tienes alguna duda, puedes comunicarte por medio de llamada o WhatsApp a la línea telefónica: 3052559105 o a nuestro correo: <u><a href='mailto:clickam@grupo-exito.com' target='_blank'>Clickam@grupo-exito.com</a> </u> </p>"
+    }
+  },
+  "BANNERS": {
+    "HELP_CENTER": "Centro de ayuda"
+  }
 }

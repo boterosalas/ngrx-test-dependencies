@@ -1,0 +1,103 @@
+<p class="galano-bold f-20 purple-text op mt-0">{{'HELP_CENTER.TOPICS' | translate}}</p>
+
+<mat-accordion>
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)"  class="help-center">
+      <mat-expansion-panel-header  class="head">
+       <span [routerLink]="['/centro-de-ayuda']" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">{{'HELP_CENTER.ABOUT_CLICKAM.ABOUT_CLICKAM' | translate}}</span> 
+      </mat-expansion-panel-header>
+  
+      <mat-list role="list" *ngFor="let item of aboutClickam; let i = index">
+        <mat-list-item (click)="setStep(0)" class="cursor-pointer" role="listitem" [routerLink]="item.route"  routerLinkActive="active">{{item.name}}</mat-list-item>
+      </mat-list>
+
+    </mat-expansion-panel>
+  
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)"  class="help-center">
+      <mat-expansion-panel-header  class="head">
+       <span [routerLink]="['/centro-de-ayuda/configuraciones-de-cuenta']" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">{{'HELP_CENTER.CONFIGURATIONS.CONFIGURATIONS' | translate}}</span> 
+      </mat-expansion-panel-header>
+  
+      <mat-list role="list" *ngFor="let item of configurations; let i = index">
+        <mat-list-item (click)="setStep(1)" class="cursor-pointer" role="listitem" [routerLink]="item.route"  routerLinkActive="active">{{item.name}}</mat-list-item>
+      </mat-list>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)"  class="help-center">
+      <mat-expansion-panel-header  class="head">
+       <span [routerLink]="['/centro-de-ayuda/comisiones']" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">{{'HELP_CENTER.COMMISSIONS.COMMISSIONS' | translate}}</span> 
+      </mat-expansion-panel-header>
+  
+      <mat-list role="list" *ngFor="let item of commissions; let i = index">
+        <mat-list-item (click)="setStep(2)" class="cursor-pointer" role="listitem" [routerLink]="item.route"  routerLinkActive="active">{{item.name}}</mat-list-item>
+      </mat-list>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)"  class="help-center">
+      <mat-expansion-panel-header  class="head">
+       <span [routerLink]="['/centro-de-ayuda/reportes']" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">{{'HELP_CENTER.REPORTS.REPORTS' | translate}}</span> 
+      </mat-expansion-panel-header>
+  
+      <mat-list role="list" *ngFor="let item of reports; let i = index">
+        <mat-list-item (click)="setStep(3)" class="cursor-pointer" role="listitem" [routerLink]="item.route"  routerLinkActive="active">{{item.name}}</mat-list-item>
+      </mat-list>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)"  class="help-center">
+      <mat-expansion-panel-header  class="head">
+       <span [routerLink]="['/centro-de-ayuda/refiere-a-un-amigo']" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">{{'HELP_CENTER.REFER.REFER' | translate}}</span> 
+      </mat-expansion-panel-header>
+  
+      <mat-list role="list" *ngFor="let item of refer; let i = index">
+        <mat-list-item (click)="setStep(4)" class="cursor-pointer" role="listitem" [routerLink]="item.route"  routerLinkActive="active">{{item.name}}</mat-list-item>
+      </mat-list>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 5" (opened)="setStep(5)"  class="help-center">
+      <mat-expansion-panel-header  class="head">
+       <span [routerLink]="['/centro-de-ayuda/ofertas']" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">{{'HELP_CENTER.OFFERS.OFFERS' | translate}}</span> 
+      </mat-expansion-panel-header>
+  
+      <mat-list role="list" *ngFor="let item of offers; let i = index">
+        <mat-list-item (click)="setStep(5)" class="cursor-pointer" role="listitem" [routerLink]="item.route"  routerLinkActive="active">{{item.name}}</mat-list-item>
+      </mat-list>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 6" (opened)="setStep(6)"  class="help-center">
+      <mat-expansion-panel-header  class="head">
+       <span [routerLink]="['/centro-de-ayuda/otras-preguntas-frecuentes']" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">{{'HELP_CENTER.QUESTIONS.QUESTIONS' | translate}}</span> 
+      </mat-expansion-panel-header>
+  
+      <mat-list role="list" *ngFor="let item of questions; let i = index">
+        <mat-list-item (click)="setStep(6)" class="cursor-pointer" role="listitem" [routerLink]="item.route"  routerLinkActive="active">{{item.name}}</mat-list-item>
+      </mat-list>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 7" (opened)="setStep(7)"  class="help-center">
+      <mat-expansion-panel-header  class="head">
+       <span [routerLink]="['/centro-de-ayuda/contacta-los-negocios']" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">{{'HELP_CENTER.CONTACTS.CONTACTS' | translate}}</span> 
+      </mat-expansion-panel-header>
+  
+      <mat-list role="list" *ngFor="let item of contacts; let i = index">
+        <mat-list-item (click)="setStep(7)" class="cursor-pointer" role="listitem" [routerLink]="item.route"  routerLinkActive="active">{{item.name}}</mat-list-item>
+      </mat-list>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 8" (opened)="setStep(8)"  class="help-center">
+      <mat-expansion-panel-header  class="head">
+       <span [routerLink]="['/centro-de-ayuda/contactanos']" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">{{'HELP_CENTER.CONTACTUS.CONTACTUS' | translate}}</span> 
+      </mat-expansion-panel-header>
+  
+      <mat-list role="list" *ngFor="let item of contactUs; let i = index">
+        <mat-list-item (click)="setStep(8)" class="cursor-pointer" role="listitem" [routerLink]="item.route"  routerLinkActive="active">{{item.name}}</mat-list-item>
+      </mat-list>
+
+    </mat-expansion-panel>
+  
+  </mat-accordion>
