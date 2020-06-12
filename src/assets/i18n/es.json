@@ -452,6 +452,13 @@
       "WORKS_TEXT":"<p>En Clickam creamos un link asignado para ti, el cual puedes encontrar al clickear “Refiere y gana {{amount}}”, simplemente envía este link a tu círculo social, o publícalo en tus redes sociales como Facebook, Instagram, estado de WhatsApp, Twitter, entre otras. Y si alguna persona: </p><ul> <li>Ingresa a la plataforma por medio del link enviado por ti.</li><li>Realiza el proceso de registro.</li><li>Acumula {{sale}} en compras o ventas efectivas.</li></ul><p>Entonces, ¡ganarás una comisión! </p>",
       "INVITE_TITLE":"¿Cuántos amigos puedo invitar?",
       "INVITE_TEXT":"<p>¡Todos los que quieras! Pueden ser tus familiares, amigos, vecinos, compañeros de trabajo, cualquiera que tenga interés en generar ingresos adicionales.</p>"
+    },
+    "OFFERS": {
+      "OFFERS":"OFERTAS",
+      "BEST_TITLE":"¿Dónde puedo encontrar las mejores ofertas?",
+      "BEST_TEXT":"<p>Las ofertas las podrás ver en el “Home” de nuestra plataforma, en nuestros banners publicitarios en la App o página web, también si deseas estar actualizado de las ofertas diarias, puedes comunicarte con nosotros por Whatsapp y te agregaremos a un grupo donde enviamos imágenes de los mejores descuentos de nuestros negocios aliados.   </p><p>En algunos de los negocios hay fechas especiales durante el año, por ejemplo, en <a href='http://www.exito.com' target='_blank'>www.exito.com</a> podrás encontrar el Aniversario Éxito, Jueves Online, Megaprima, Black Friday, Black Days, Días de Precios Especiales, entre otros.</p><p>En Seguros Éxito generalmente en las quincenas se hacen descuentos, por esto, te invitamos a estar atentos de sus redes sociales, para que sepas cuál es el mejor momento de referir y ganar comisiones con Clickam.  </p>",
+      "MAIL_TITLE":"Preferencias de correo",
+      "MAIL_TEXT":"<p>A tu correo también enviaremos ofertas que pueden ser de tu interés, recuerda que por ser un nuevo remitente, estos pueden estar en las carpetas “no deseados” o “spam”. </p><p>Si en algún momento no quieres recibir más, puedes escribirnos a <a href='mailto:clickam@grupo-exito.com' target='_blank'><u>clickam@grupo-exito.com</u></a> con el asunto: Cancelar suscripción de correos, es importante que en éste nos envíes tu nombre completo y cédula. </p><p>Dejaremos de enviarte información publicitaria, pero continuaremos enviándote novedades del pago de comisiones y novedades de la plataforma. </p>"
     }
   },
   "BANNERS": {

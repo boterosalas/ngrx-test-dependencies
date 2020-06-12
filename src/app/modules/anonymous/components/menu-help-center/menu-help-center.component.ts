@@ -28,6 +28,9 @@ export class MenuHelpCenterComponent implements OnInit {
       case "refiere-a-un-amigo":
         this.step = 4;
         break;
+      case "ofertas":
+        this.step = 5;
+        break;
 
       default:
         this.step = 0;
@@ -147,6 +150,19 @@ export class MenuHelpCenterComponent implements OnInit {
       name: "¿Cuántos amigos puedo invitar?",
       route:
         "/centro-de-ayuda/refiere-a-un-amigo/cuantos-amigos-puedo-invitar",
+    }
+  ];
+
+  offers = [
+    {
+      name: "¿Dónde puedo encontrar las mejores ofertas?",
+      route:
+        "/centro-de-ayuda/ofertas/donde-puedo-encontrar-las-mejores-ofertas",
+    },
+    {
+      name: "Preferencias de correo",
+      route:
+        "/centro-de-ayuda/ofertas/preferencias-de-correo",
     }
   ];
 

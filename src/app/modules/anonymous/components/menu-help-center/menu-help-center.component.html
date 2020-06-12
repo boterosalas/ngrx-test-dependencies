@@ -55,5 +55,16 @@
       </mat-list>
 
     </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 5" (opened)="setStep(5)"  class="help-center">
+      <mat-expansion-panel-header  class="head">
+       <span [routerLink]="['/centro-de-ayuda/ofertas']" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">{{'HELP_CENTER.OFFERS.OFFERS' | translate}}</span> 
+      </mat-expansion-panel-header>
+  
+      <mat-list role="list" *ngFor="let item of offers; let i = index">
+        <mat-list-item (click)="setStep(5)" class="cursor-pointer" role="listitem" [routerLink]="item.route"  routerLinkActive="active">{{item.name}}</mat-list-item>
+      </mat-list>
+
+    </mat-expansion-panel>
   
   </mat-accordion>

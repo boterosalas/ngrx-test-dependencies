@@ -14,224 +14,251 @@ import { ForgotpasswordformComponent } from "./components/forgotpasswordform/for
 import { RecoverpasswordformComponent } from "./components/recoverpasswordform/recoverpasswordform.component";
 import { RecoverpasswordComponent } from "./pages/recoverpassword/recoverpassword.component";
 import { MenuComponent } from "./components/menu/menu.component";
-import { CardComponent } from './components/card/card.component';
-import { ClickAcademyComponent } from './pages/click-academy/click-academy.component';
-import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
-import { BlockCopyPasteDirective } from 'src/directives/copy.directive';
-import { KeySpaceDirective } from 'src/directives/space.directive';
-import { CardOfferComponent } from './components/card-offer/card-offer.component';
-import { ShareButtonsModule } from '@ngx-share/buttons';
-import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
-import { SliderComponent } from './components/slider/slider.component';
-import { BussinessCardComponent } from './components/bussiness-card/bussiness-card.component';
-import { ComissionTableComponent } from './pages/comission-table/comission-table.component';
-import { NewBusinessComponent } from './components/new-business/new-business.component';
-import { NewBusinessFormComponent } from './components/new-business-form/new-business-form.component';
-import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module, RecaptchaFormsModule, RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
-import { UrlComponent } from './pages/url/url.component';
-import { ActivateAccountFormComponent } from './components/activate-account-form/activate-account-form.component';
-import { SlideVideoComponent } from './components/slide-video/slide-video.component';
-import { ClickamComponent } from './pages/help-center/about/clickam/clickam.component';
-import { RegisterComponent } from './pages/help-center/about/register/register.component';
-import { DownloadComponent } from './pages/help-center/about/download/download.component';
-import { HowWorksComponent } from './pages/help-center/about/how-works/how-works.component';
-import { WinComissionComponent } from './pages/help-center/about/win-comission/win-comission.component';
-import { BenefitsComponent } from './pages/help-center/about/benefits/benefits.component';
-import { PartnersComponent } from './pages/help-center/about/partners/partners.component';
-import { MenuHelpCenterComponent } from './components/menu-help-center/menu-help-center.component';
-import { AboutClickamComponent } from './pages/help-center/about/about-clickam/about-clickam.component';
-import { CardHelpCenterComponent } from './components/card-help-center/card-help-center.component';
-import { ChangeDataProfileComponent } from './pages/help-center/configurations/change-data-profile/change-data-profile.component';
-import { ResetPasswordComponent } from './pages/help-center/configurations/reset-password/reset-password.component';
-import { ConfigurationAccountComponent } from './pages/help-center/configurations/configuration-account/configuration-account.component';
-import { RouteBuyComponent } from './pages/help-center/commissions/route-buy/route-buy.component';
-import { CommissionClickamComponent } from './pages/help-center/commissions/commission-clickam/commission-clickam.component';
-import { CrossSellComponent } from './pages/help-center/commissions/cross-sell/cross-sell.component';
-import { EffectiveBuyComponent } from './pages/help-center/commissions/effective-buy/effective-buy.component';
-import { NotCommissionComponent } from './pages/help-center/commissions/not-commission/not-commission.component';
-import { PayDateComponent } from './pages/help-center/commissions/pay-date/pay-date.component';
-import { PaymentProcessComponent } from './pages/help-center/commissions/payment-process/payment-process.component';
-import { LinkHistoryComponent } from './pages/help-center/reports/link-history/link-history.component';
-import { ProductsCommissionComponent } from './pages/help-center/reports/products-commission/products-commission.component';
-import { ReportClickamComponent } from './pages/help-center/reports/report-clickam/report-clickam.component';
-import { WinCommissionComponent } from './pages/help-center/reports/win-commission/win-commission.component';
-import { FriendInviteComponent } from './pages/help-center/refer/friend-invite/friend-invite.component';
-import { ProgramFriendComponent } from './pages/help-center/refer/program-friend/program-friend.component';
-import { ReferFriendComponent } from './pages/help-center/refer/refer-friend/refer-friend.component';
-import { WorksReferComponent } from './pages/help-center/refer/works-refer/works-refer.component';
+import { CardComponent } from "./components/card/card.component";
+import { ClickAcademyComponent } from "./pages/click-academy/click-academy.component";
+import { TermsAndConditionsComponent } from "./pages/terms-and-conditions/terms-and-conditions.component";
+import { BlockCopyPasteDirective } from "src/directives/copy.directive";
+import { KeySpaceDirective } from "src/directives/space.directive";
+import { CardOfferComponent } from "./components/card-offer/card-offer.component";
+import { ShareButtonsModule } from "@ngx-share/buttons";
+import { MatPasswordStrengthModule } from "@angular-material-extensions/password-strength";
+import { SliderComponent } from "./components/slider/slider.component";
+import { BussinessCardComponent } from "./components/bussiness-card/bussiness-card.component";
+import { ComissionTableComponent } from "./pages/comission-table/comission-table.component";
+import { NewBusinessComponent } from "./components/new-business/new-business.component";
+import { NewBusinessFormComponent } from "./components/new-business-form/new-business-form.component";
+import {
+  RECAPTCHA_V3_SITE_KEY,
+  RecaptchaV3Module,
+  RecaptchaFormsModule,
+  RecaptchaModule,
+  RECAPTCHA_SETTINGS,
+  RecaptchaSettings,
+} from "ng-recaptcha";
+import { UrlComponent } from "./pages/url/url.component";
+import { ActivateAccountFormComponent } from "./components/activate-account-form/activate-account-form.component";
+import { SlideVideoComponent } from "./components/slide-video/slide-video.component";
+import { ClickamComponent } from "./pages/help-center/about/clickam/clickam.component";
+import { RegisterComponent } from "./pages/help-center/about/register/register.component";
+import { DownloadComponent } from "./pages/help-center/about/download/download.component";
+import { HowWorksComponent } from "./pages/help-center/about/how-works/how-works.component";
+import { WinComissionComponent } from "./pages/help-center/about/win-comission/win-comission.component";
+import { BenefitsComponent } from "./pages/help-center/about/benefits/benefits.component";
+import { PartnersComponent } from "./pages/help-center/about/partners/partners.component";
+import { MenuHelpCenterComponent } from "./components/menu-help-center/menu-help-center.component";
+import { AboutClickamComponent } from "./pages/help-center/about/about-clickam/about-clickam.component";
+import { CardHelpCenterComponent } from "./components/card-help-center/card-help-center.component";
+import { ChangeDataProfileComponent } from "./pages/help-center/configurations/change-data-profile/change-data-profile.component";
+import { ResetPasswordComponent } from "./pages/help-center/configurations/reset-password/reset-password.component";
+import { ConfigurationAccountComponent } from "./pages/help-center/configurations/configuration-account/configuration-account.component";
+import { RouteBuyComponent } from "./pages/help-center/commissions/route-buy/route-buy.component";
+import { CommissionClickamComponent } from "./pages/help-center/commissions/commission-clickam/commission-clickam.component";
+import { CrossSellComponent } from "./pages/help-center/commissions/cross-sell/cross-sell.component";
+import { EffectiveBuyComponent } from "./pages/help-center/commissions/effective-buy/effective-buy.component";
+import { NotCommissionComponent } from "./pages/help-center/commissions/not-commission/not-commission.component";
+import { PayDateComponent } from "./pages/help-center/commissions/pay-date/pay-date.component";
+import { PaymentProcessComponent } from "./pages/help-center/commissions/payment-process/payment-process.component";
+import { LinkHistoryComponent } from "./pages/help-center/reports/link-history/link-history.component";
+import { ProductsCommissionComponent } from "./pages/help-center/reports/products-commission/products-commission.component";
+import { ReportClickamComponent } from "./pages/help-center/reports/report-clickam/report-clickam.component";
+import { WinCommissionComponent } from "./pages/help-center/reports/win-commission/win-commission.component";
+import { FriendInviteComponent } from "./pages/help-center/refer/friend-invite/friend-invite.component";
+import { ProgramFriendComponent } from "./pages/help-center/refer/program-friend/program-friend.component";
+import { ReferFriendComponent } from "./pages/help-center/refer/refer-friend/refer-friend.component";
+import { WorksReferComponent } from "./pages/help-center/refer/works-refer/works-refer.component";
+import { BestOffersComponent } from "./pages/help-center/offers/best-offers/best-offers.component";
+import { MailPreferencesComponent } from "./pages/help-center/offers/mail-preferences/mail-preferences.component";
+import { OffersClickamComponent } from "./pages/help-center/offers/offers-clickam/offers-clickam.component";
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
   {
     path: "",
-    redirectTo: 'inicio',
-    pathMatch: 'full'
+    redirectTo: "inicio",
+    pathMatch: "full",
   },
   {
     path: "inicio",
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path: "?",
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path: "recuperar-contrasena/:id",
-    component: RecoverpasswordComponent
+    component: RecoverpasswordComponent,
   },
   {
     path: "click-academy",
-    component: ClickAcademyComponent
+    component: ClickAcademyComponent,
   },
   {
     path: "click-academy/:video",
-    component: ClickAcademyComponent
+    component: ClickAcademyComponent,
   },
   {
-    path:'centro-de-ayuda',
-    component: AboutClickamComponent
+    path: "centro-de-ayuda",
+    component: AboutClickamComponent,
   },
   {
     path: "centro-de-ayuda/sobre-clickam",
     children: [
       {
-        path:'',
-        component: AboutClickamComponent
+        path: "",
+        component: AboutClickamComponent,
       },
       {
-        path:'que-es-clickam',
-        component: ClickamComponent
+        path: "que-es-clickam",
+        component: ClickamComponent,
       },
       {
-        path: 'como-me-puedo-registrar',
-        component: RegisterComponent
+        path: "como-me-puedo-registrar",
+        component: RegisterComponent,
       },
       {
-        path:'por-cuales-medios-puedo-descargar-la-app',
-        component: DownloadComponent
+        path: "por-cuales-medios-puedo-descargar-la-app",
+        component: DownloadComponent,
       },
       {
-        path: 'como-funciona-clickam',
-        component: HowWorksComponent
+        path: "como-funciona-clickam",
+        component: HowWorksComponent,
       },
       {
-        path:'como-gano-comisiones',
-        component: WinComissionComponent
+        path: "como-gano-comisiones",
+        component: WinComissionComponent,
       },
       {
-        path:'cuales-son-los-beneficios-de-un-clicker',
-        component: BenefitsComponent
+        path: "cuales-son-los-beneficios-de-un-clicker",
+        component: BenefitsComponent,
       },
       {
-        path: 'cuales-son-los-negocios-asociados',
-        component: PartnersComponent
-      }
-    ]
+        path: "cuales-son-los-negocios-asociados",
+        component: PartnersComponent,
+      },
+    ],
   },
   {
     path: "centro-de-ayuda/configuraciones-de-cuenta",
     children: [
       {
-        path: '',
-        component: ConfigurationAccountComponent
+        path: "",
+        component: ConfigurationAccountComponent,
       },
       {
-        path: 'cambios-de-tus-datos-personales',
-        component: ChangeDataProfileComponent
+        path: "cambios-de-tus-datos-personales",
+        component: ChangeDataProfileComponent,
       },
       {
-        path: 'restablecer-contrasena',
-        component: ResetPasswordComponent
-      }
-    ]
+        path: "restablecer-contrasena",
+        component: ResetPasswordComponent,
+      },
+    ],
   },
   {
     path: "centro-de-ayuda/comisiones",
     children: [
       {
-        path: '',
-        component: CommissionClickamComponent
+        path: "",
+        component: CommissionClickamComponent,
       },
       {
-        path: 'que-es-la-ruta-de-compra-clickam',
-        component: RouteBuyComponent
+        path: "que-es-la-ruta-de-compra-clickam",
+        component: RouteBuyComponent,
       },
       {
-        path: 'como-cruzan-la-venta',
-        component: CrossSellComponent
+        path: "como-cruzan-la-venta",
+        component: CrossSellComponent,
       },
       {
-        path: 'cuales-son-las-fechas-de-pago',
-        component: PayDateComponent
+        path: "cuales-son-las-fechas-de-pago",
+        component: PayDateComponent,
       },
       {
-        path: 'porque-no-me-llego-la-comision',
-        component: NotCommissionComponent
+        path: "porque-no-me-llego-la-comision",
+        component: NotCommissionComponent,
       },
       {
-        path: 'como-es-el-proceso-de-pago',
-        component: PaymentProcessComponent
+        path: "como-es-el-proceso-de-pago",
+        component: PaymentProcessComponent,
       },
       {
-        path: 'cuando-se-considera-una-compra-efectiva-por-el-negocio',
-        component: EffectiveBuyComponent
-      }
-    ]
+        path: "cuando-se-considera-una-compra-efectiva-por-el-negocio",
+        component: EffectiveBuyComponent,
+      },
+    ],
   },
   {
     path: "centro-de-ayuda/reportes",
     children: [
       {
-        path: '',
-        component: ReportClickamComponent
+        path: "",
+        component: ReportClickamComponent,
       },
       {
-        path: 'donde-puedo-encontrar-un-historial-de-mis-links',
-        component: LinkHistoryComponent
+        path: "donde-puedo-encontrar-un-historial-de-mis-links",
+        component: LinkHistoryComponent,
       },
       {
-        path: 'como-veo-las-comisiones-que-he-ganado',
-        component: WinCommissionComponent
+        path: "como-veo-las-comisiones-que-he-ganado",
+        component: WinCommissionComponent,
       },
       {
-        path: 'como-puedo-saber-por-cuales-productos-me-pagaron-comision',
-        component: ProductsCommissionComponent
+        path: "como-puedo-saber-por-cuales-productos-me-pagaron-comision",
+        component: ProductsCommissionComponent,
       },
-    ]
+    ],
   },
   {
     path: "centro-de-ayuda/refiere-a-un-amigo",
     children: [
       {
-        path: '',
-        component: ReferFriendComponent
+        path: "",
+        component: ReferFriendComponent,
       },
       {
-        path: 'que-es-el-programa-refiere-a-tu-amigo',
-        component: ProgramFriendComponent
+        path: "que-es-el-programa-refiere-a-tu-amigo",
+        component: ProgramFriendComponent,
       },
       {
-        path: 'como-funciona-el-programa',
-        component: WorksReferComponent
+        path: "como-funciona-el-programa",
+        component: WorksReferComponent,
       },
       {
-        path: 'cuantos-amigos-puedo-invitar',
-        component: FriendInviteComponent
+        path: "cuantos-amigos-puedo-invitar",
+        component: FriendInviteComponent,
       },
-    ]
+    ],
+  },
+  {
+    path: "centro-de-ayuda/ofertas",
+    children: [
+      {
+        path: "",
+        component: OffersClickamComponent,
+      },
+      {
+        path: "donde-puedo-encontrar-las-mejores-ofertas",
+        component: BestOffersComponent,
+      },
+      {
+        path: "preferencias-de-correo",
+        component: MailPreferencesComponent,
+      },
+    ],
   },
   {
     path: "terminos-y-condiciones",
-    component: TermsAndConditionsComponent
+    component: TermsAndConditionsComponent,
   },
   {
     path: "tabla-comisiones",
-    component: ComissionTableComponent
+    component: ComissionTableComponent,
   },
   {
     path: "url/:shortCode",
-    component: UrlComponent
-  }
+    component: UrlComponent,
+  },
 ];
 
 @NgModule({
@@ -285,6 +312,9 @@ const routes: Routes = [
     ProgramFriendComponent,
     ReferFriendComponent,
     WorksReferComponent,
+    BestOffersComponent,
+    MailPreferencesComponent,
+    OffersClickamComponent,
     // ReportComponent
   ],
   imports: [
@@ -301,7 +331,7 @@ const routes: Routes = [
     ShareButtonsModule,
     RouterModule.forChild(routes),
     MatPasswordStrengthModule,
-    RecaptchaV3Module
+    RecaptchaV3Module,
   ],
   exports: [
     RouterModule,
@@ -312,13 +342,15 @@ const routes: Routes = [
     ActivateAccountFormComponent,
     MenuComponent,
     CardComponent,
-    BussinessCardComponent
+    BussinessCardComponent,
   ],
-    providers: [{
+  providers: [
+    {
       provide: RECAPTCHA_SETTINGS,
       useValue: {
-        siteKey: '6LfYROwUAAAAAGBQR5PgNXRgLOHvkv2DOSBHerjH',
+        siteKey: "6LfYROwUAAAAAGBQR5PgNXRgLOHvkv2DOSBHerjH",
       } as RecaptchaSettings,
-}]}
-)
+    },
+  ],
+})
 export class AnonymousModule {}
