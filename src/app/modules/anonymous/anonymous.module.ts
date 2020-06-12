@@ -55,6 +55,10 @@ import { LinkHistoryComponent } from './pages/help-center/reports/link-history/l
 import { ProductsCommissionComponent } from './pages/help-center/reports/products-commission/products-commission.component';
 import { ReportClickamComponent } from './pages/help-center/reports/report-clickam/report-clickam.component';
 import { WinCommissionComponent } from './pages/help-center/reports/win-commission/win-commission.component';
+import { FriendInviteComponent } from './pages/help-center/refer/friend-invite/friend-invite.component';
+import { ProgramFriendComponent } from './pages/help-center/refer/program-friend/program-friend.component';
+import { ReferFriendComponent } from './pages/help-center/refer/refer-friend/refer-friend.component';
+import { WorksReferComponent } from './pages/help-center/refer/works-refer/works-refer.component';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -196,6 +200,27 @@ const routes: Routes = [
     ]
   },
   {
+    path: "centro-de-ayuda/refiere-a-un-amigo",
+    children: [
+      {
+        path: '',
+        component: ReferFriendComponent
+      },
+      {
+        path: 'que-es-el-programa-refiere-a-tu-amigo',
+        component: ProgramFriendComponent
+      },
+      {
+        path: 'como-funciona-el-programa',
+        component: WorksReferComponent
+      },
+      {
+        path: 'cuantos-amigos-puedo-invitar',
+        component: FriendInviteComponent
+      },
+    ]
+  },
+  {
     path: "terminos-y-condiciones",
     component: TermsAndConditionsComponent
   },
@@ -256,6 +281,10 @@ const routes: Routes = [
     ProductsCommissionComponent,
     ReportClickamComponent,
     WinCommissionComponent,
+    FriendInviteComponent,
+    ProgramFriendComponent,
+    ReferFriendComponent,
+    WorksReferComponent,
     // ReportComponent
   ],
   imports: [

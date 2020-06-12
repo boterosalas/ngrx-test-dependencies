@@ -25,6 +25,9 @@ export class MenuHelpCenterComponent implements OnInit {
       case "reportes":
         this.step = 3;
         break;
+      case "refiere-a-un-amigo":
+        this.step = 4;
+        break;
 
       default:
         this.step = 0;
@@ -127,6 +130,24 @@ export class MenuHelpCenterComponent implements OnInit {
       route:
         "/centro-de-ayuda/reportes/como-puedo-saber-por-cuales-productos-me-pagaron-comision",
     },
+  ];
+
+  refer = [
+    {
+      name: "¿Qué es el programa refiere a tu amigo?",
+      route:
+        "/centro-de-ayuda/refiere-a-un-amigo/que-es-el-programa-refiere-a-tu-amigo",
+    },
+    {
+      name: "¿Cómo funciona el programa?",
+      route:
+        "/centro-de-ayuda/refiere-a-un-amigo/como-funciona-el-programa",
+    },
+    {
+      name: "¿Cuántos amigos puedo invitar?",
+      route:
+        "/centro-de-ayuda/refiere-a-un-amigo/cuantos-amigos-puedo-invitar",
+    }
   ];
 
   ngOnInit() {}
