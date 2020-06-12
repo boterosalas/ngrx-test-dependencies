@@ -37,6 +37,9 @@ export class MenuHelpCenterComponent implements OnInit {
       case "contacta-los-negocios":
         this.step = 7;
         break;
+      case "contactanos":
+        this.step = 8;
+        break;
 
       default:
         this.step = 0;
@@ -195,6 +198,14 @@ export class MenuHelpCenterComponent implements OnInit {
       name: "Contactos",
       route:
         "/centro-de-ayuda/contacta-los-negocios/contactos-negocios",
+    }
+  ];
+
+  contactUs = [
+    {
+      name: "Dónde puedo contactarme si tengo preguntas extras",
+      route:
+        "/centro-de-ayuda/contactanos/donnde-puedo-contactarme-si-tengo-preguntas-extras",
     }
   ];
 

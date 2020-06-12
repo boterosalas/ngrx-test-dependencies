@@ -75,6 +75,8 @@ import { QuestionsClickamComponent } from './pages/help-center/questions/questio
 import { TakeAssuredComponent } from './pages/help-center/questions/take-assured/take-assured.component';
 import { ContactBussinessClickamComponent } from './pages/help-center/contact-bussiness/contact-bussiness-clickam/contact-bussiness-clickam.component';
 import { BussinessContactsComponent } from './pages/help-center/contact-bussiness/bussiness-contacts/bussiness-contacts.component';
+import { ContactUsClickamComponent } from './pages/help-center/contact-us/contact-us-clickam/contact-us-clickam.component';
+import { ExtraQuestionsComponent } from './pages/help-center/contact-us/extra-questions/extra-questions.component';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -288,6 +290,19 @@ const routes: Routes = [
     ]
   },
   {
+    path: "centro-de-ayuda/contactanos",
+    children: [
+      {
+        path: "",
+        component: ContactUsClickamComponent,
+      },
+      {
+        path: "donnde-puedo-contactarme-si-tengo-preguntas-extras",
+        component: ExtraQuestionsComponent,
+      },
+    ]
+  },
+  {
     path: "terminos-y-condiciones",
     component: TermsAndConditionsComponent,
   },
@@ -361,6 +376,8 @@ const routes: Routes = [
     TakeAssuredComponent,
     ContactBussinessClickamComponent,
     BussinessContactsComponent,
+    ContactUsClickamComponent,
+    ExtraQuestionsComponent,
     // ReportComponent
   ],
   imports: [
