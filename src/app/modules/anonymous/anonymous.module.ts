@@ -297,7 +297,7 @@ const routes: Routes = [
         component: ContactUsClickamComponent,
       },
       {
-        path: "donnde-puedo-contactarme-si-tengo-preguntas-extras",
+        path: "donde-puedo-contactarme-si-tengo-preguntas-extras",
         component: ExtraQuestionsComponent,
       },
     ]
