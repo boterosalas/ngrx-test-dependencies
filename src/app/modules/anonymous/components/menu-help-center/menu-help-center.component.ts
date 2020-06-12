@@ -34,6 +34,9 @@ export class MenuHelpCenterComponent implements OnInit {
       case "otras-preguntas-frecuentes":
         this.step = 6;
         break;
+      case "contacta-los-negocios":
+        this.step = 7;
+        break;
 
       default:
         this.step = 0;
@@ -184,6 +187,14 @@ export class MenuHelpCenterComponent implements OnInit {
       name: "¿Cuáles son los medios de pago de cada negocio?",
       route:
         "/centro-de-ayuda/otras-preguntas-frecuentes/cuales-son-los-medios-de-pago-de-cada-negocio",
+    }
+  ];
+
+  contacts = [
+    {
+      name: "Contactos",
+      route:
+        "/centro-de-ayuda/contacta-los-negocios/contactos-negocios",
     }
   ];
 

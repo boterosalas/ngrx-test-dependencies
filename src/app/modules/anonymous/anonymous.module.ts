@@ -73,6 +73,8 @@ import { MarketplaceComponent } from './pages/help-center/questions/marketplace/
 import { PayMethodsComponent } from './pages/help-center/questions/pay-methods/pay-methods.component';
 import { QuestionsClickamComponent } from './pages/help-center/questions/questions-clickam/questions-clickam.component';
 import { TakeAssuredComponent } from './pages/help-center/questions/take-assured/take-assured.component';
+import { ContactBussinessClickamComponent } from './pages/help-center/contact-bussiness/contact-bussiness-clickam/contact-bussiness-clickam.component';
+import { BussinessContactsComponent } from './pages/help-center/contact-bussiness/bussiness-contacts/bussiness-contacts.component';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -273,6 +275,19 @@ const routes: Routes = [
     ],
   },
   {
+    path: "centro-de-ayuda/contacta-los-negocios",
+    children: [
+      {
+        path: "",
+        component: ContactBussinessClickamComponent,
+      },
+      {
+        path: "contactos-negocios",
+        component: BussinessContactsComponent,
+      },
+    ]
+  },
+  {
     path: "terminos-y-condiciones",
     component: TermsAndConditionsComponent,
   },
@@ -344,6 +359,8 @@ const routes: Routes = [
     PayMethodsComponent,
     QuestionsClickamComponent,
     TakeAssuredComponent,
+    ContactBussinessClickamComponent,
+    BussinessContactsComponent,
     // ReportComponent
   ],
   imports: [
