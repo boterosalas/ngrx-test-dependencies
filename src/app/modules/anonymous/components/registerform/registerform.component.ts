@@ -46,8 +46,13 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   passwordPattern = "(?=.*[a-zA-Z])(?=.*[0-9])";
   msg: string;
   classMsg: string;
+  amount: any;
+  amountReferred:any;
 
   ngOnInit() {
+    this.amount = localStorage.getItem('Amount');
+    this.amountReferred = localStorage.getItem('AmonuntReferred');
+    
     this.registerForm = this.fb.group(
       {
         name: [

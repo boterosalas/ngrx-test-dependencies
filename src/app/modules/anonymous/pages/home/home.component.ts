@@ -135,6 +135,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getOffers();
     this.slider();
     this.getUserDataUser();
+    this.getAmount();
   }
 
   public getUserDataUser() {
@@ -260,7 +261,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscription = this.auth.isLogged$.subscribe((val) => {
       let token = localStorage.getItem("ACCESS_TOKEN");
       if (!!val || token !== null) {
-        this.getAmount();
         this.subscription = this.content
           .getBusinessClicker()
           .subscribe((bussiness) => {
