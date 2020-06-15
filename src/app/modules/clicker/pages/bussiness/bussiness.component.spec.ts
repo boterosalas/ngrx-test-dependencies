@@ -26,7 +26,7 @@ import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CommentStmt } from "@angular/compiler";
 import { UserService } from "src/app/services/user.service";
-import { ClickerModule } from "../../../clicker.module";
+import { ClickerModule } from "../../clicker.module";
 import { LinksService } from "src/app/services/links.service";
 import { Router } from "@angular/router";
 

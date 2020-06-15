@@ -130,7 +130,7 @@ export class LinksService {
 
   public getReports() {
     let apiReport = `${this.reports}`;
-    return this.http.get(`${this.urlComission}/${apiReport}`, this.httpOptions).pipe(
+    return this.http.get(`${this.urlComission}${apiReport}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(1000),

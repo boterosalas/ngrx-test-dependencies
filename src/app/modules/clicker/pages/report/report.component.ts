@@ -4,8 +4,8 @@ import { MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { LinksService } from 'src/app/services/links.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
-import { DialogHistoryComponent } from '../dialog-history/dialog-history.component';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import { DialogHistoryComponent } from '../../components/dialog-history/dialog-history.component';
 
 @Component({
   selector: 'app-report',

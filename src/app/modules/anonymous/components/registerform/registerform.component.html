@@ -437,6 +437,7 @@
 
 <ng-template #templateTerms>
   <div class="fade-in" innerHtml="{{ 'TERMS.LEGAL' | translate }}"></div> 
+  <div innerHtml="{{ 'TERMS.REFER' | translate: { sale: amountReferred | currency : '' : 'symbol' : '1.0-0', amount: amount | currency : '' : 'symbol' : '1.0-0' } }}"></div> 
   <button
   mat-raised-button
   id="accept-modal"
