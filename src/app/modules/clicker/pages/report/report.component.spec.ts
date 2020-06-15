@@ -11,7 +11,7 @@ import { of } from "rxjs/internal/observable/of";
 import { RouterTestingModule } from "@angular/router/testing";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { DialogHistoryComponent } from '../dialog-history/dialog-history.component';
+import { DialogHistoryComponent } from '../../components/dialog-history/dialog-history.component';
 
 describe("ReportComponent", () => {
   let component: ReportComponent;
