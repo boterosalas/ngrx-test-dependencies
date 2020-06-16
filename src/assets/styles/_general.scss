@@ -1606,3 +1606,30 @@ joy-close-button.joyride-step__close svg {
       }
   }
 }
+
+
+.mat-sidenav{
+  .social-links i{
+    color:#b5b8bc;
+  }
+}
+
+.fullheight {
+  footer{
+    background: #ffffff !important;
+  }
+  .social-links i{
+    color:#b5b8bc !important;
+  }
+  h3{
+    color: $primary-color !important;
+  }
+  p, a{
+    color: $color-p !important;
+  }
+  .width-border{
+    span {
+      color: $color-p !important;
+    }
+  }
+}
