@@ -29,8 +29,7 @@ export class HowWorksClickamComponent implements OnInit {
     autoplay: true,
     autoplaySpeed: 5000,
     infinite: true,
-    arrows: true,
-  
+    arrows: false,
   };
 
 }

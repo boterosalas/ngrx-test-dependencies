@@ -6,6 +6,7 @@ import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-mater
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('TermsAndConditionsComponent', () => {
   let component: TermsAndConditionsComponent;
@@ -19,7 +20,8 @@ describe('TermsAndConditionsComponent', () => {
         AppMaterialModule,
         BrowserAnimationsModule,
         SharedModule,
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientTestingModule
       ]
     })
     .compileComponents();

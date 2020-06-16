@@ -29,8 +29,7 @@ import { MatDialog } from "@angular/material";
 import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
 import { ResponseService } from "src/app/interfaces/response";
 import { LinksService } from "src/app/services/links.service";
-import { MessagingService } from 'src/app/shared/messaging.service';
-
+import { MessagingService } from "src/app/shared/messaging.service";
 
 @Component({
   selector: "app-login",
@@ -88,14 +87,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   userId: any;
   message: any;
 
-  modalHref:string;
-  modalAltMobile:string;
-  modalAltWeb:string;
-  modalHrefMobile:string;
-  modalTarget:string = "_self";
-  modalSrcWeb:string;
-  modalSrcMobile:string;
-
+  modalHref: string;
+  modalAltMobile: string;
+  modalAltWeb: string;
+  modalHrefMobile: string;
+  modalTarget: string = "_self";
+  modalSrcWeb: string;
+  modalSrcMobile: string;
 
   constructor(
     public router: Router,
@@ -141,7 +139,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public getUserDataUser() {
     this.subscription = this.auth.getRole$.subscribe((role) => {
       this.role = role;
-      let promoOpen = localStorage.getItem('ModalPromo')
+      let promoOpen = localStorage.getItem("ModalPromo");
       if (role === "CLICKER" || role === "ADMIN") {
         this.subscription = this.user.getuserdata().subscribe((user) => {
           this.isEmployee = user.isEmployeeGrupoExito;
@@ -149,13 +147,13 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
       }
       setTimeout(() => {
-        if(promoOpen === '1') {
+        if (promoOpen === "1") {
           this.showModalPayment();
         }
       }, 1000);
 
-      if(role === "CLICKER") {
-        if(promoOpen !== '1') {
+      if (role === "CLICKER") {
+        if (promoOpen !== "1") {
           this.getModalPromo();
         }
         let token = localStorage.getItem("ACCESS_TOKEN");
@@ -165,7 +163,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.messagingService.receiveMessage();
         this.message = this.messagingService.currentMessage;
       }
-
     });
   }
 
@@ -412,33 +409,35 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public getModalPromo() {
-    this.content.getPopupus().subscribe(resp=>{
-      localStorage.setItem('ModalPromo', '1');
-      this.modalHref = resp[0].link;
-      this.modalSrcWeb = resp[0].imageUrlWeb;
-      this.modalSrcMobile = resp[0].imageUrlMobile;
-      this.modalAltWeb = resp[0].imageAltMobile;
-      this.modalAltMobile = resp[0].imageAltMobile;
+    this.content.getPopupus().subscribe((resp) => {
+      if (resp.length > 0) {
+        localStorage.setItem("ModalPromo", "1");
+        this.modalHref = resp[0].link;
+        this.modalSrcWeb = resp[0].imageUrlWeb;
+        this.modalSrcMobile = resp[0].imageUrlMobile;
+        this.modalAltWeb = resp[0].imageAltMobile;
+        this.modalAltMobile = resp[0].imageAltMobile;
 
-      const template = this.templatePromo;
-      const title = "";
-      const id = "promo-modal";
-  
-      this.dialog.open(ModalGenericComponent, {
-        panelClass: "promo-home",
-        data: {
-          title,
-          id,
-          template,
-        },
-      });
+        const template = this.templatePromo;
+        const title = "";
+        const id = "promo-modal";
 
-      this.dialog.afterAllClosed.subscribe(() => {
-        localStorage.setItem('ModalPromo', '1');
+        this.dialog.open(ModalGenericComponent, {
+          panelClass: "promo-home",
+          data: {
+            title,
+            id,
+            template,
+          },
+        });
+
+        this.dialog.afterAllClosed.subscribe(() => {
+          localStorage.setItem("ModalPromo", "1");
+          this.showModalPayment();
+        });
+      } else {
         this.showModalPayment();
-      });
-
+      }
     });
   }
-
 }

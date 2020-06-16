@@ -78,6 +78,7 @@ import { BussinessContactsComponent } from './pages/help-center/contact-bussines
 import { ContactUsClickamComponent } from './pages/help-center/contact-us/contact-us-clickam/contact-us-clickam.component';
 import { ExtraQuestionsComponent } from './pages/help-center/contact-us/extra-questions/extra-questions.component';
 import { HowWorksClickamComponent } from './components/how-works-clickam/how-works-clickam.component';
+import { SliderWorksComponent } from './components/slider-works/slider-works.component';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -380,6 +381,7 @@ const routes: Routes = [
     ContactUsClickamComponent,
     ExtraQuestionsComponent,
     HowWorksClickamComponent,
+    SliderWorksComponent,
     // ReportComponent
   ],
   imports: [
