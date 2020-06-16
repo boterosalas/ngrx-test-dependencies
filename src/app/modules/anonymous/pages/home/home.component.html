@@ -2,10 +2,19 @@
 <app-slider Class="gtmHomeClicBanner" [showArrows]="true" [isSlider]="true"  (action)="sliderOffers()"  [sliderMobile]="sliderMobile" [sliderWeb]="sliderWeb"></app-slider>
 
 
-<div class="container">
+<div class="container" *ngIf="!auth.isLoggedIn()">
   <span class="border-gray d-block"></span>
   <app-how-works-clickam></app-how-works-clickam>
   <app-slider-works></app-slider-works>
+</div>
+
+<div class="container-fluid bg-slide" *ngIf="!auth.isLoggedIn()">
+  <div class="container">
+    <app-home-slide-video></app-home-slide-video>
+  </div>
+</div>
+
+<div class="container">
   <span fxLayout="row" fxLayoutAlign="space-between center">
     <h3 ngClass.gt-xs="mb-0" class="border-bottom-orange-init title-h3" id="bussinessHook">{{ 'HOME.BUSSINESS' | translate }}</h3>
     <p *ngIf="auth.isLoggedIn()" ngClass.gt-xs="mb-0 f-20" class="cursor-pointer text-underline purple-text" [routerLink]="[ '/negocios']" >{{ 'HOME.ALL_BUSSINESS' | translate }}</p>

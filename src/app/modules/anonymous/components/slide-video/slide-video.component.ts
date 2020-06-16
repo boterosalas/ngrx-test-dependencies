@@ -90,7 +90,6 @@ export class SlideVideoComponent implements OnInit {
 
   public next() {
     this.slickModal.slickNext();
-    // console.log(this.slickModal);
   }
 
   public prev() {

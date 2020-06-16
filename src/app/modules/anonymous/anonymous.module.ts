@@ -79,6 +79,7 @@ import { ContactUsClickamComponent } from './pages/help-center/contact-us/contac
 import { ExtraQuestionsComponent } from './pages/help-center/contact-us/extra-questions/extra-questions.component';
 import { HowWorksClickamComponent } from './components/how-works-clickam/how-works-clickam.component';
 import { SliderWorksComponent } from './components/slider-works/slider-works.component';
+import { HomeSlideVideoComponent } from './components/home-slide-video/home-slide-video.component';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -382,6 +383,7 @@ const routes: Routes = [
     ExtraQuestionsComponent,
     HowWorksClickamComponent,
     SliderWorksComponent,
+    HomeSlideVideoComponent,
     // ReportComponent
   ],
   imports: [

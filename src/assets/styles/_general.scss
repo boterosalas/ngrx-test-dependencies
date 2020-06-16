@@ -1638,3 +1638,7 @@ joy-close-button.joyride-step__close svg {
 app-menu-help-center {
   margin-bottom: 10px;
 }
+
+.slick-prev:before, .slick-next:before{
+  font-size: 40px !important;
+}
