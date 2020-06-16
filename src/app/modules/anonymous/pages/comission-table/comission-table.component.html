@@ -1,3 +1,4 @@
+<app-banner title="{{'COMMISION_TABLE.COMMISION_TABLE' | translate}}" img="/assets/img/banners/banner-comisiones-pc-.jpg" imgMobile="/assets/img/banners/banner-comisiones-mobile.jpg"></app-banner>
 <app-logo></app-logo>
 
 <div class="container">
@@ -42,6 +43,14 @@
                         <span class="gtmClicAcademyClicViajes">{{'CLICKACADEMY.CLICKACADEMY_TAB_VIAJES' | translate}}</span>
                    </ng-template>
             <div innerHtml="{{ 'CLICKACADEMY.CLICKACADEMY_TAB_VIAJES_TABLE' | translate }}"></div> 
+        </mat-tab>
+
+         <!-- movil -->
+        <mat-tab>
+                <ng-template mat-tab-label>
+                        <span class="gtmClicAcademyClicMovil">{{'CLICKACADEMY.CLICKACADEMY_TAB_MOVIL' | translate}}</span>
+                   </ng-template>
+            <div innerHtml="{{ 'CLICKACADEMY.CLICKACADEMY_TAB_MOVIL_TABLE' | translate }}"></div> 
         </mat-tab>
     
       </mat-tab-group>
