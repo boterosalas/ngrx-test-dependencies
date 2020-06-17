@@ -1,0 +1,19 @@
+<h3 class="text-center f-23">{{ "HOME.HOW_WORKS" | translate }}</h3>
+
+<div fxHide.xs="true" class="works-desk" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+    <div *ngFor="let item of works">
+        <span fxLayout="column" class="card">
+            <img [src]="item.icon" alt="item.name">
+            <p class="purple-text text-center f-18">{{item.title}}</p>
+        </span>
+    </div>
+</div>
+
+<ngx-slick-carousel fxHide.gt-xs="true" class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+    <div ngxSlickItem *ngFor="let item of works">
+        <span fxLayout="column" class="card">
+            <img [src]="item.icon" alt="item.name">
+            <p class="purple-text text-center f-14">{{item.title}}</p>
+        </span>
+    </div>
+</ngx-slick-carousel>

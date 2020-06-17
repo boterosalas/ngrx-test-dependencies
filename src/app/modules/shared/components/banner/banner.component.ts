@@ -10,6 +10,7 @@ export class BannerComponent implements OnInit {
   @Input() title:string;
   @Input() img:string;
   @Input() imgMobile:string;
+  @Input() color:string = 'white';
 
   constructor() { }
 

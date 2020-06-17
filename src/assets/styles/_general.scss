@@ -52,6 +52,7 @@ body {
 
 .maincontent {
   overflow-x: hidden;
+  padding-bottom: 5px;
   // min-height: 520px;
 }
 
@@ -287,7 +288,7 @@ button {
 }
 
 .slick-dots li.slick-active button:before {
-  color: $primary-color !important;
+  color: $secondary-color !important;
 }
 
 .cursor-pointer {
@@ -1109,7 +1110,7 @@ th.mat-header-cell {
 .slick-dots li {
   margin: 0;
   button:before {
-    font-size: 5px;
+    font-size: 9px;
   }
 }
 
@@ -1605,4 +1606,39 @@ joy-close-button.joyride-step__close svg {
           color: $primary-color;
       }
   }
+}
+
+
+.mat-sidenav{
+  .social-links i{
+    color:#b5b8bc;
+  }
+}
+
+.fullheight {
+  footer{
+    background: #ffffff !important;
+  }
+  .social-links i{
+    color:#b5b8bc !important;
+  }
+  h3{
+    color: $primary-color !important;
+  }
+  p, a{
+    color: $color-p !important;
+  }
+  .width-border{
+    span {
+      color: $color-p !important;
+    }
+  }
+}
+
+app-menu-help-center {
+  margin-bottom: 10px;
+}
+
+.slick-prev:before, .slick-next:before{
+  font-size: 40px !important;
 }
