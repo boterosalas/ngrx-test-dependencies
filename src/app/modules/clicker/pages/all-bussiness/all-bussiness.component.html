@@ -1,8 +1,8 @@
 <!-- <app-logo></app-logo> -->
-
+<app-banner color="purple" title="{{'HOME.BUSSINESS' | translate}}" img="/assets/img/banners/banner-negocios-pc.jpg" imgMobile="/assets/img/banners/banner-negocios-mobile.jpg"></app-banner>
 <div class="container">
-    <span fxLayout="row" fxLayoutAlign="space-between center">
-        <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3>
+    <span fxLayout="row" fxLayoutAlign="end center">
+        <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
         <p ngClass.gt-xs="f-20" class="cursor-pointer text-underline purple-text" [routerLink]="[ '/inicio']" >{{ 'HOME.HOME' | translate }}</p>
       </span>
 
