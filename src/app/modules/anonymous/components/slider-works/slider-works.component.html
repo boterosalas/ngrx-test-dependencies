@@ -2,7 +2,7 @@
     <ngx-slick-carousel  #slickModal="slick-carousel" [config]="slideConfig" class="mt-4">
         <div ngxSlickItem *ngFor="let item of slider" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap.gt-xs="40px">
             <span fxLayout="column" fxFlex="30">
-                <h3 class="f-20 mt-1 mb-1">{{item.title}}</h3>
+                <h3 ngClass.gt-xs="f-20" ngClass.xs="f-16" class="mt-1 mb-1">{{item.title}}</h3>
                 <p>{{item.text}}</p>
             </span>
             <span fxLayout="column">

@@ -29,10 +29,14 @@ export class ReportComponent implements OnInit, OnDestroy {
   items= [];
   dataBreak1:any;
   dataBreak2:any;
+  dataAcumulated:any;
+  totalAcumulated: string;
   @ViewChild("templateBreak", { static: false })
   templateBreak: TemplateRef<any>;
   @ViewChild("templateBreak2", { static: false })
   templateBreak2: TemplateRef<any>;
+  @ViewChild("templateAcumulated", { static: false })
+  templateAcumulated: TemplateRef<any>;
 
   constructor(
     private payment: LinksService,
@@ -85,6 +89,8 @@ export class ReportComponent implements OnInit, OnDestroy {
       this.account = resume.money.cutOff2;
       this.dataBreak1 = new MatTableDataSource<any>(resume.money.detail1);
       this.dataBreak2 = new MatTableDataSource<any>(resume.money.detail2);
+      this.dataAcumulated = new MatTableDataSource<any>(resume.money.detailAccumulated);
+      this.totalAcumulated = resume.money.accumulated;
     });
   }
 
@@ -138,6 +144,20 @@ export class ReportComponent implements OnInit, OnDestroy {
     const template = this.templateBreak2;
     const title = "Detalle corte 2";
     const id="break2-modal"
+
+    this.dialog.open(ModalGenericComponent, {
+      data: {
+        title,
+        id,
+        template,
+      },
+    });
+  }
+
+  public acumulated() {
+    const template = this.templateAcumulated;
+    const title = "Detalle saldo acumulado";
+    const id="acumulated-modal"
 
     this.dialog.open(ModalGenericComponent, {
       data: {
