@@ -42,7 +42,9 @@ describe("ReportComponent", () => {
       conversionRate: 0
     },
     money: { available: 0, account: 0 },
-    monthResume: { totalCommissions: 0, totalLink: 0, daysResume: [] }
+    monthResume: { totalCommissions: 0, totalLink: 0, daysResume: [] },
+    accumulated: '9999',
+    detailAccumulated: [{commissionGenerationDate: "2020-05-01T00:00:00", productName: "Garbanzo", commissionValue: 259, paymentDate: null, statusCommission: "Pendiente de pago"}]
   };
 
   const user = {
