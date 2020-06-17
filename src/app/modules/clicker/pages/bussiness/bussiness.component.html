@@ -1,3 +1,5 @@
+<app-banner title="{{'BUSSINESS.CATEGORIES' | translate}}" [color]="colorText" [img]="imgBanner" [imgMobile]="imgBannerMobile"></app-banner>
+
 <app-back-navigation
   [imageurl]="image"
   [(title)]="title"
@@ -48,9 +50,9 @@
   </div>
 
   <div class="products" *ngIf="bussiness.length !== 0"> 
-    <h3 class="border-bottom-orange-init title-h3">
+    <!-- <h3 class="border-bottom-orange-init title-h3">
       {{ "BUSSINESS.CATEGORIES" | translate }}
-    </h3>
+    </h3> -->
   
     <p class="f-20" fxHide.xs>{{ "HOME.BUSSINESS_TEXT" | translate }}</p>
   
