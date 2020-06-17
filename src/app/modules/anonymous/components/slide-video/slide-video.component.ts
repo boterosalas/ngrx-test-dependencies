@@ -64,7 +64,7 @@ export class SlideVideoComponent implements OnInit {
       description: "Aprende a leer los reportes, visualiza tu dinero y sigue ganando.",
       img: "/assets/img/video/reportes.jpg",
       video: "qd1eb38ypjk?rel=0&amp;autoplay=1",
-    },
+    }
   ];
 
   constructor(
@@ -90,7 +90,6 @@ export class SlideVideoComponent implements OnInit {
 
   public next() {
     this.slickModal.slickNext();
-    // console.log(this.slickModal);
   }
 
   public prev() {

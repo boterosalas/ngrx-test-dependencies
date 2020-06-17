@@ -48,6 +48,9 @@ export class BussinessComponent implements OnInit, OnDestroy {
   formLink: FormGroup;
   enableCopy: boolean = true;
   identification: string;
+  imgBanner:string;
+  imgBannerMobile:string;
+  colorText:string;
 
   @ViewChild("templateCategories", { static: false }) templateCategories: TemplateRef<any>;
   @ViewChild("templateDialogAssured", { static: false }) templateAssured: TemplateRef<any>;
@@ -121,6 +124,49 @@ export class BussinessComponent implements OnInit, OnDestroy {
         this.image = route.imageurl;
         this.percent = route.infoAditional;
         this.allBussiness = route.allBussiness;
+        switch (this.title) {
+          case 'carulla':
+            this.imgBanner = "/assets/img/banners/negocios/carulla-pc.jpg";
+            this.imgBannerMobile = "/assets/img/banners/negocios/carulla-mobile.jpg";
+            this.colorText = "white";
+            break;
+
+          case 'exito':
+            this.imgBanner = "/assets/img/banners/negocios/exito-pc.jpg";
+            this.imgBannerMobile = "/assets/img/banners/negocios/exito-mobile.jpg";
+            this.colorText = "purple";
+            break;
+
+          case 'movil-exito':
+            this.imgBanner = "/assets/img/banners/negocios/movil-pc.jpg";
+            this.imgBannerMobile = "/assets/img/banners/negocios/movil-mobile.jpg";
+            this.colorText = "white";
+            break;
+
+          case 'seguros':
+            this.imgBanner = "/assets/img/banners/negocios/seguros-pc.jpg";
+            this.imgBannerMobile = "/assets/img/banners/negocios/seguros-pc.jpg";
+            this.colorText = "white";
+            break;
+
+          case 'viajes':
+            this.imgBanner = "/assets/img/banners/negocios/viajes-pc.jpg";
+            this.imgBannerMobile = "/assets/img/banners/negocios/viajes-mobile.jpg";
+            this.colorText = "white";
+            break;
+
+          case 'wesura':
+            this.imgBanner = "/assets/img/banners/negocios/we-sura.jpg";
+            this.imgBannerMobile = "/assets/img/banners/negocios/wesura-mobile.jpg";
+            this.colorText = "purple";
+            break;
+        
+          default:
+            this.imgBanner = "/assets/img/banners/negocios/exito-pc.jpg";
+            this.imgBannerMobile = "/assets/img/banners/negocios/exito-mobile.jpg";
+            this.colorText = "purple";
+            break;
+        }
       }
     });
 
