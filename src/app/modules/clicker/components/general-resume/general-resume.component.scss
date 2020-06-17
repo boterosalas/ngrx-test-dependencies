@@ -8,7 +8,7 @@
 }
 
 .subtitle{
-    text-transform: uppercase;
+    // text-transform: uppercase;
     color: $color-p;
 }
 
@@ -26,4 +26,11 @@
 
 .card-height {
     min-height: 142px;
+}
+
+.sell {
+    background: $primary-color;
+    .number, .subtitle{
+        color: #ffffff;
+    }
 }
