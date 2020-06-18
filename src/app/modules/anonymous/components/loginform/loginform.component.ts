@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import decode from 'jwt-decode';
+import { LinksService } from 'src/app/services/links.service';
 declare var dataLayer: any
 
 @Component({
@@ -25,7 +26,8 @@ export class LoginformComponent implements OnInit, OnDestroy {
     private router: Router,
     private fb: FormBuilder,
     private loading: LoaderService,
-    private utils: UtilsService
+    private utils: UtilsService,
+    private link: LinksService
   ) {}
 
   private subscription: Subscription = new Subscription();
@@ -73,7 +75,9 @@ export class LoginformComponent implements OnInit, OnDestroy {
       (resp: ResponseService) => {
         this.loading.hide();
         if (resp.state === "Success") {
-          
+          setTimeout(() => {
+            this.getAmount();
+          }, 500);
           localStorage.setItem("ACCESS_TOKEN", resp.objectResponse.token);
           localStorage.setItem("REFRESH_TOKEN", resp.objectResponse.refreshToken);
           this.utils.hideloginForm();
@@ -151,6 +155,13 @@ export class LoginformComponent implements OnInit, OnDestroy {
       this.authService.isLogged$.next(true);
       this.authService.getRole$.next("ADMIN")
     }
+  }
+
+  public getAmount() {
+    this.subscription = this.link.getAmount().subscribe((amount) => {
+      localStorage.setItem("Amount", amount.amountsCommission);
+      localStorage.setItem("AmonuntReferred", amount.amountsReferred);
+    });
   }
   
   ngOnDestroy(): void {
