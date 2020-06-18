@@ -14,7 +14,7 @@ body {
   // background: #fff;
 }
 
-.mat-drawer-container{
+.mat-drawer-container, .mat-dialog-container{
   color: $color-p;
 }
 
@@ -1645,4 +1645,10 @@ app-menu-help-center {
 
 .purple2{
   color: $purple2;
+}
+
+#newTerms {
+  #closeDialog{
+    display: none;
+  }
 }
