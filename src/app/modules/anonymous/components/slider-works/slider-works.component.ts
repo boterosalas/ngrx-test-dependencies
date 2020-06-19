@@ -22,9 +22,9 @@ export class SliderWorksComponent implements OnInit {
       image: "/assets/img/home/tarjeta-1.png",
     },
     {
-      title: "Gana dinero por referir y comprar",
+      title: "Gana hasta el 10% en comisiones.",
       text:
-        "Clickea nuestros links, comparte, compra o refiere y gana dinero por las ventas y las compras que generen estos links.",
+        "Por comprar o referir los comercios aliados de clickam, los comercios aliados le pagan a clickam una comisión por enviar tráfico a sus sitios web y clickam comparte esta comisión con los usuarios.",
       image: "/assets/img/home/tarjeta-2.png",
     },
     {
