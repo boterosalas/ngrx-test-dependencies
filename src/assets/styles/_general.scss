@@ -6,6 +6,18 @@ body {
   color: $color-p;
 }
 
+.mat-row:nth-child(even), thead{
+  background-color:#F3F1F6 !important;
+}
+
+table tr:nth-child(even){
+  background-color:#F3F1F6 !important;
+}
+
+thead, th.mat-header-cell{
+  color: $primary-color !important;
+}
+
 body {
   margin: 0;
   font-family: $font-family-base;
@@ -495,7 +507,7 @@ table {
   color: $color-p;
   thead {
     background: #ececec;
-    color: #707070;
+    color: $primary-color;
   }
   th {
     padding: 5px 10px;
@@ -508,9 +520,7 @@ table {
 .tableComission {
   color: $color-p;
   thead {
-    background: #ececec;
-    color: #707070;
-    box-shadow: 0px 3px 6px #00000029;
+    color: $primary-color;
     line-height: 2;
   }
   th {
