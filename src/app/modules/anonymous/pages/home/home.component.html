@@ -90,7 +90,9 @@
       <button
       mat-raised-button
       id="accept-modal"
-      class="mt-2 center button pl-5 pr-5 register-button"
+      class="mt-2 center button register-button"
+      ngClass.gt-xs="pl-5 pr-5"
+      ngClass.xs="pl-2 pr-2"
       color="orange"
       [disabled]="!activateButton"
       (click)="sendReferalsTerm()"
@@ -100,7 +102,9 @@
 
     <button 
     (click)="logout()"
-    class="mt-2 center button pl-5 pr-5 register-button"
+    class="mt-2 center button register-button"
+    ngClass.gt-xs="pl-5 pr-5"
+    ngClass.xs="pl-2 pr-2"
     mat-raised-button>{{ "GENERIC.CANCEL" | translate }}</button>
     </span>
 
