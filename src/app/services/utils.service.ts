@@ -66,11 +66,12 @@ export class UtilsService {
     this.showActivateFormEmit.emit(this.showActivateForm);
   }
 
-  public logout() {
+  public async logout() {
     localStorage.clear();
     this.auth.getRole$.next(null);
     this.auth.isLogged$.next(false);
     this.user.userInfo$.next(null);
+    await this.router.navigate(['/inicio']);
   }
 
 }
