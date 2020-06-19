@@ -25,7 +25,7 @@ import { AuthService } from "src/app/services/auth.service";
 import decode from "jwt-decode";
 import { ContentService } from "src/app/services/content.service";
 import { distinctUntilChanged } from "rxjs/operators";
-import { MatDialog } from "@angular/material";
+import { MatDialog, MatCheckboxChange, MatSnackBar } from "@angular/material";
 import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
 import { ResponseService } from "src/app/interfaces/response";
 import { LinksService } from "src/app/services/links.service";
@@ -86,7 +86,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   role: String;
   userId: any;
   message: any;
-
   modalHref: string;
   modalAltMobile: string;
   modalAltWeb: string;
@@ -94,6 +93,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   modalTarget: string = "_self";
   modalSrcWeb: string;
   modalSrcMobile: string;
+  newTerms:boolean;
+  acceptTerms: boolean = null;
+  @ViewChild("templateTerms", { static: false })
+  templateTerms: TemplateRef<any>;
+  newTermsHTML:boolean = false;
+  stepTerms:boolean = true;
+  activateButton: boolean = false;
+  amount: any;
+  amountReferred:any;
 
   constructor(
     public router: Router,
@@ -103,8 +111,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     public auth: AuthService,
     private content: ContentService,
     private dialog: MatDialog,
+    private dialog2: MatDialog,
     private link: LinksService,
-    private messagingService: MessagingService
+    private messagingService: MessagingService,
+    private _snackBar: MatSnackBar
   ) {
     /**
      *  Verifica que en la ruta de inicio exista el parametro de email y activa el usuario
@@ -134,6 +144,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.slider();
     this.getUserDataUser();
     this.getAmount();
+    this.amount = localStorage.getItem('Amount');
+    this.amountReferred = localStorage.getItem('AmonuntReferred');
   }
 
   public getUserDataUser() {
@@ -144,6 +156,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.subscription = this.user.getuserdata().subscribe((user) => {
           this.isEmployee = user.isEmployeeGrupoExito;
           this.managedPayments = user.managedPayments;
+          this.newTerms = user.acceptTermsReferrals;
         });
       }
       setTimeout(() => {
@@ -153,6 +166,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       }, 1000);
 
       if (role === "CLICKER") {
+        setTimeout(() => {
+          if(this.newTerms === false) {
+            this.termsAndConditions();
+          }
+        }, 1000);
+
         if (promoOpen !== "1") {
           this.getModalPromo();
         }
@@ -162,6 +181,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.messagingService.requestPermission(this.userId);
         this.messagingService.receiveMessage();
         this.message = this.messagingService.currentMessage;
+       
       }
     });
   }
@@ -384,7 +404,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (
       this.role === "CLICKER" &&
       this.managedPayments === false &&
-      this.isEmployee === false
+      this.isEmployee === false &&
+      this.newTerms  === true
     ) {
       Swal.fire({
         title: "¡Registra tus datos bancarios!",
@@ -440,4 +461,65 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+  public termsAndConditions() {
+    const template = this.templateTerms;
+    const title = "";
+    const id = "newTerms";
+
+    this.dialog2.open(ModalGenericComponent, {
+      disableClose: true,
+      data: {
+        title,
+        id,
+        template
+      }
+    });
+  }
+
+  public showTerms() {
+    this.stepTerms = false;
+    this.newTermsHTML =  true;
+  }
+
+  public logout() {
+    this.stepTerms = true;
+    this.newTermsHTML =  false;
+    this.activateButton = false;
+    this.utils.logout();
+    this.dialog.closeAll();
+  }
+
+  public acceptTermsCheck(buttonState: MatCheckboxChange) {
+    if(buttonState.checked === true) {
+      this.activateButton = true;
+    } else {
+      this.activateButton = false;
+    }
+  }
+
+      /**
+   * Abre el mensaje de confirmacion
+   * @param message
+   * @param action
+   */
+
+  private openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5000
+    });
+  }
+
+  public sendReferalsTerm() {
+    this.user.saveUserAcceptTermsReferrals().subscribe((resp: ResponseService)=> {
+      this.stepTerms = true;
+      this.newTermsHTML =  false;
+      this.activateButton = false;
+      this.dialog2.closeAll();
+      this.newTerms = true;
+      this.showModalPayment();
+      this.openSnackBar(resp.userMessage, 'Cerrar');
+    })
+  }
+
 }

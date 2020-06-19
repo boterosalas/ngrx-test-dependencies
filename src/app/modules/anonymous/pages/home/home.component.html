@@ -20,7 +20,7 @@
     <p *ngIf="auth.isLoggedIn()" ngClass.gt-xs="mb-0 f-20" class="cursor-pointer text-underline purple-text" [routerLink]="[ '/negocios']" >{{ 'HOME.ALL_BUSSINESS' | translate }}</p>
   </span>
   <p class="f-20" fxHide.xs>{{ 'HOME.BUSSINESS_TEXT' | translate }}</p>
-  <div fxLayout="row wrap" fxLayout.gt-xs="row wrap" ngClass.gt-xs="pb-3" fxLayoutAlign="center center" fxLayoutGap="10px grid">
+  <div fxLayout="row wrap" fxLayout.gt-xs="row wrap" ngClass.gt-xs="pb-3" ngClass.xs="mb-3" fxLayoutAlign="center center" fxLayoutGap="10px grid">
     <ng-container *ngFor="let bussines of bussiness | slice:0:6; let i = index">
       <app-bussiness-card *ngIf="bussines.code !== 'envios-clickam'" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [code]="bussines.code" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
     </ng-container>
@@ -60,4 +60,49 @@
     </a>
   </div>
 
+</ng-template>
+
+<ng-template #templateTerms>
+  
+  <div class="terms text-center" *ngIf="stepTerms">
+    <img class="icon" src="/assets/img/icon.svg" alt="icon">
+    <div innerHtml="{{ 'GENERIC.NEW_TERMS' | translate }}"></div>
+    <button mat-raised-button color="orange" (click)="showTerms()">Conócelos aquí</button>
+  </div>
+
+  <div class="terms" *ngIf="newTermsHTML">
+    <div class="fade-in" innerHtml="{{ 'TERMS.LEGAL' | translate }}"></div>
+    <div innerHtml="{{ 'TERMS.REFER' | translate: { sale: amountReferred | currency : '' : 'symbol' : '1.0-0', amount: amount | currency : '' : 'symbol' : '1.0-0' } }}"></div> 
+    
+    <div class="mb-3">
+      <span>
+        <mat-checkbox  id="chkaccept" (change)="acceptTermsCheck($event)">
+        </mat-checkbox>
+      </span>
+      <span class="accept-terms ml-2">
+        {{
+        "REGISTER.ACCEPT" | translate
+      }}
+      </span>
+    </div>
+
+    <span fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
+      <button
+      mat-raised-button
+      id="accept-modal"
+      class="mt-2 center button pl-5 pr-5 register-button"
+      color="orange"
+      [disabled]="!activateButton"
+      (click)="sendReferalsTerm()"
+    >
+    {{ "GENERIC.ACCEPT" | translate }}
+    </button>
+
+    <button 
+    (click)="logout()"
+    class="mt-2 center button pl-5 pr-5 register-button"
+    mat-raised-button>{{ "GENERIC.CANCEL" | translate }}</button>
+    </span>
+
+  </div>
 </ng-template>

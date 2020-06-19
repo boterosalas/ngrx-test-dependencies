@@ -68,7 +68,6 @@ export class UtilsService {
 
   public logout() {
     localStorage.clear();
-    this.router.navigate(["/"]);
     this.auth.getRole$.next(null);
     this.auth.isLogged$.next(false);
     this.user.userInfo$.next(null);

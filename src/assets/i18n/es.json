@@ -52,7 +52,8 @@
     "CONTACT_PERSON": "Persona de contacto",
     "BUSINESS_CATEGORY": "Categoría del negocio",
     "SEE_DETAIL": "Ver detalle",
-    "WIN10K": "Refiere y gana"
+    "WIN10K": "Refiere y gana",
+    "NEW_TERMS": "<p>Actualizamos los términos y condiciones de </br> nuestro sitio para que sigas ganando dinero con Clickam.</p>"
   },
   "FOOTER": {
     "FOLLOW_US": "Síguenos",
@@ -444,7 +445,7 @@
       "HISTORY_TITLE": "¿Dónde puedo encontrar un historial de mis links?",
       "HISTORY_TEXT": "<p>Al iniciar sesión ve al menú y clickea en historial de links, esta función es excelente para hacer un seguimiento de tus links creados, tienes la opción de ver la fecha en la cual creaste el link, las comisiones generadas gracias a ese link, la cantidad de productos vendidos y las visitas, lo que equivale a las veces que abrieron tu link. Tendrás la opción de “Clickear” y volver a compartirlo o comprar por medio de él.</p>",
       "WIN_TITLE": "¿Cómo veo las comisiones que he ganado?",
-      "WIN_TEXT": "<p>Cuando inicies sesión, ve al menú y clickea en “reportes”; allí podrás encontrar en el corte 1 o corte 2 las comisiones que has generado, al dar click podrás ver por cuáles productos.<br />En resumen general, encuentra el total de tus comisiones desde que generas comisiones en Clickam, los link creados, el número de productos vendidos y la tasa de conversión (La tasa de conversión es la división entre el número de productos vendidos y los links generados).  </p><p>Para saber si te ganaste la comisión de un producto, debes estar pendiente ya que esta se agregará a la plataforma cuando la compra sea efectiva en el negocio y sea notificada a Clickam.  </p>",
+      "WIN_TEXT": "<p>Cuando inicies sesión, ve al menú y clickea en “reportes”; allí podrás encontrar en el corte 1 o corte 2 las comisiones que has generado, al dar click podrás ver por cuáles productos.<br />En resumen general, encuentra el total de tus comisiones desde que generas comisiones en Clickam, los link creados, el número de productos vendidos y la tasa de conversión (La tasa de conversión es la división entre: Número de links creados y número de órdenes).  </p><p>Para saber si te ganaste la comisión de un producto, debes estar pendiente ya que esta se agregará a la plataforma cuando la compra sea efectiva en el negocio y sea notificada a Clickam.  </p>",
       "PRODUCT_TITLE": "¿Cómo puedo saber por cuales productos me pagaron comisión?",
       "PRODUCT_TEXT": "<p>Cuando inicies sesión, ve al menú y clickea en “reportes”, podrás encontrar el historial de los pagos que se te han realizado, allí podrás ver la fecha de compra, el producto y la comisión ganada por éste.</p>"
     },

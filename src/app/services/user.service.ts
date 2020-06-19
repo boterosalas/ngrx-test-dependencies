@@ -49,6 +49,7 @@ export class UserService {
   apiUpdateUserEmail = "userprofile/updateUserEmail";
   apiRegisterUserTerms = "userprofile/registeruserterms";
   apiSaveUserOnboardingViewed = "userprofile/saveuseronboardingviewed";
+  apiSaveUserAccepttermsReferrals = "userprofile/saveuseraccepttermsreferrals";
   apiSaveUserDevice = "notification/saveuserdevice";
 
   token = localStorage.getItem("ACCESS_TOKEN");
@@ -134,6 +135,20 @@ export class UserService {
   public registerUser(userInfo: any) {
     return this.http
       .post(`${this.url}${this.apiCreateUser}`, userInfo, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        )
+      );
+  }
+
+  public saveUserAcceptTermsReferrals() {
+    return this.http
+      .post(`${this.url}${this.apiSaveUserAccepttermsReferrals}`, {}, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
