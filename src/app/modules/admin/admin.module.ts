@@ -66,7 +66,7 @@ const routes: Routes = [
     },
   },
   {
-    path: "negocios",
+    path: "negocios-admin",
     component: BusinessComponent,
     canActivate: [RoleGuard],
     data: {
