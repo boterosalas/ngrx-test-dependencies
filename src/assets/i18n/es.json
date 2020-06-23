@@ -305,7 +305,7 @@
     "SELLS": "VENTAS",
     "ASSURED": "VENTAS SEGUROS",
     "HISTORICAL": "Historial pagos",
-    "DATE": "FECHA",
+    "DATE": "FECHA (DD/MM/AA)",
     "AMOUNT": "MONTO",
     "BANK": "BANCO DONDE SE PAGÓ",
     "UPLOAD_FILE": "Carga un archivo con el reporte de pagos de las comisiones del último periodo de corte",
