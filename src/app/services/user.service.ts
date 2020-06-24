@@ -51,6 +51,7 @@ export class UserService {
   apiSaveUserOnboardingViewed = "userprofile/saveuseronboardingviewed";
   apiSaveUserAccepttermsReferrals = "userprofile/saveuseraccepttermsreferrals";
   apiSaveUserDevice = "notification/saveuserdevice";
+  apiUpdateEmployees="userprofile/updateemployees";
 
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
@@ -149,6 +150,20 @@ export class UserService {
   public saveUserAcceptTermsReferrals() {
     return this.http
       .post(`${this.url}${this.apiSaveUserAccepttermsReferrals}`, {}, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        )
+      );
+  }
+  
+  public updateEmployees() {
+    return this.http
+      .post(`${this.url}${this.apiUpdateEmployees}`, {}, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(

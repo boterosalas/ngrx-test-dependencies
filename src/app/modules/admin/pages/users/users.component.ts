@@ -465,6 +465,12 @@ export class UsersComponent extends MatPaginatorIntl
     this.searchUser(this.paginate, this.from, this.to, name, direction);
   }
 
+  public updateEmployee() {
+    this.subscription = this.usersService.updateEmployees().subscribe((resp: ResponseService)=> {
+      this.openSnackBar(resp.userMessage, 'Cerrar');
+    })
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
