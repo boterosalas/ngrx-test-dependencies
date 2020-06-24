@@ -252,7 +252,7 @@ export class SliderComponent implements OnInit {
    * 
    */
 
-  public async dataCategory(category) {
+  public dataCategory(category) {
     let token = localStorage.getItem("ACCESS_TOKEN");
       if(token !== null && category.business !=='clickam') {
         this.tokenInfo = this.token.userInfo();
@@ -317,11 +317,10 @@ export class SliderComponent implements OnInit {
         dialogref.afterDismissed().subscribe(() => {
           this.enableCopy = true;
         })
-      } else {
+      }
+      if(category.business ==='clickam' && !!token) {
         window.location.replace(category.link);
       }
-  
-
   }
 
   private formShareLink() {
