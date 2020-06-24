@@ -1,9 +1,9 @@
 @import 'variables';
 
 table {
-    width: 100%;
+    width: 500px;
     th{
-      width: 33.3%;
+      width: 20%;
       font-family: $font-galano-bold;
       color: $primary-color;
     }
@@ -11,3 +11,10 @@ table {
       padding-right: 15px;
     }
   }
+
+  
+@media screen and (min-width: 600px) {
+ table{
+   width: 100%;
+ }
+}
