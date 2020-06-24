@@ -115,7 +115,6 @@ export class SliderComponent implements OnInit {
 
   next() {
     this.slickModal.slickNext();
-    // console.log(this.slickModal);
   }
   
   prev() {
@@ -319,7 +318,7 @@ export class SliderComponent implements OnInit {
           this.enableCopy = true;
         })
       } else {
-        this.router.navigate(['/'+category.link]);
+        window.location.replace(category.link);
       }
   
 
