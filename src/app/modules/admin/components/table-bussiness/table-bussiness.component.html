@@ -1,0 +1,42 @@
+
+<div fxLayout="row" fxLayoutGap="15px">
+    
+    <div fxLayout="column" fxFlex="30">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+            <!--bussiness Column -->
+            <ng-container matColumnDef="bussiness">
+                <th mat-header-cell *matHeaderCellDef> {{ 'DASHBOARD.NEW_BUSINESS' | translate }} </th>
+                <td mat-cell *matCellDef="let element"> {{ element.bussiness }}</td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;let i= index;"></tr>
+        </table>
+    </div>
+    <div fxLayout="column" fxFlex="70">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+    
+        <!-- links generated Column -->
+        <ng-container matColumnDef="linksGenerated">
+          <th mat-header-cell *matHeaderCellDef> {{ 'DASHBOARD.LINKS_GENERATED' | translate }} </th>
+          <td mat-cell *matCellDef="let element"> {{element.linksGenerated}}</td>
+        </ng-container>
+    
+        <!-- links clicked Column -->
+        <ng-container matColumnDef="linksClicked">
+          <th mat-header-cell *matHeaderCellDef> {{ 'DASHBOARD.LINKS_CLICKS' | translate }} </th>
+          <td mat-cell *matCellDef="let element"> {{element.linksClicked}}</td>
+        </ng-container>
+    
+        <!-- total Column -->
+        <ng-container matColumnDef="total">
+          <th mat-header-cell *matHeaderCellDef> {{ 'DASHBOARD.TOTAL' | translate }} </th>
+          <td mat-cell *matCellDef="let element"> {{element.total | currency: "":"symbol":"1.0-0"}}</td>
+        </ng-container>
+    
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns2;let i= index;"></tr>
+      </table>
+    </div>
+
+</div>

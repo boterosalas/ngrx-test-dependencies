@@ -30,6 +30,78 @@ export class DashboardComponent implements OnInit, OnDestroy {
   links = true;
   monthActiveUsersQuantity:string;
 
+  resume = [
+    {
+      icon: 'assets/img/dashboard/resumen/icon-total-registros.svg',
+      number: '5.670',
+      title: 'Total registros'
+    },
+    {
+      icon: 'assets/img/dashboard/resumen/icon-total-activos.svg',
+      number: '3.670',
+      title: 'Total activos'
+    },
+    {
+      icon: 'assets/img/dashboard/resumen/icon-total-ventas.svg',
+      number: '3.670',
+      title: 'Total ventas'
+    },
+    {
+      icon: 'assets/img/dashboard/resumen/icon-total-comisiones.svg',
+      number: '8.908',
+      title: 'Total comisiones'
+    },
+    {
+      icon: 'assets/img/dashboard/resumen/icon-links-generados.svg',
+      number: '3.506',
+      title: 'Total links generados'
+    },
+    {
+      icon: 'assets/img/dashboard/resumen/icon-links-clickeados.svg',
+      number: '2.506',
+      title: 'Total links clickeados por cliente final'
+    }
+  ];
+
+  items = [
+    {
+      icon: 'assets/img/dashboard/icon-registros.svg',
+      title: 'Registros',
+      number: '57',
+      subtitle: 'Usuarios registrados'
+    },
+    {
+      icon: 'assets/img/dashboard/icon-activos.svg',
+      title: 'Activos',
+      number: '985',
+      subtitle: 'Usuarios Activos'
+    },
+    {
+      icon: 'assets/img/dashboard/icon-ventas.svg',
+      title: 'Ventas',
+      number: '12',
+      subtitle: 'Ventas'
+    },
+    {
+      icon: 'assets/img/dashboard/icon-comisiones.svg',
+      title: 'Comisiones',
+      number: '18',
+      subtitle: 'Comisiones'
+    },
+    {
+      icon: 'assets/img/dashboard/icon-links-generados.svg',
+      title: 'Links generados',
+      number: '350',
+      subtitle: 'Links generados'
+    },
+    {
+      icon: 'assets/img/dashboard/icon-links-clickeados.svg',
+      title: 'Links clickeados',
+      number: '350',
+      subtitle: 'Links clickeados'
+    },
+  ]
+
   private subscription: Subscription = new Subscription();
 
   ngOnInit() {

@@ -355,8 +355,11 @@
     "SELLS": "VENTAS",
     "COMMISSIONS": "COMISIONES",
     "LINKS_GENERATED": "LINKS GENERADOS",
-    "TOTAL": "Total",
-    "NEW_BUSINESS": "Negocios"
+    "LINKS_CLICKS": "LINKS CLICKEADOS",
+    "TOTAL": "VENTA ACUMULADA",
+    "NEW_BUSINESS": "NEGOCIOS",
+    "CONTROL_TOWER":"Torre de control",
+    "RESUME": "Resumen"
   },
   "NEWBUSINESS": {
     "REGISTER": "Registra tu negocio",

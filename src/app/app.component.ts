@@ -29,7 +29,7 @@ import { Meta } from "@angular/platform-browser";
 import { SwUpdate } from "@angular/service-worker";
 declare var dataLayer: any;
 import { MessagingService } from "./shared/messaging.service";
-
+import { Location } from "@angular/common";
 
 @Component({
   selector: "app-root",
@@ -83,9 +83,12 @@ export class AppComponent implements OnInit, OnDestroy {
   //   shareReplay()
   // );
 
-  @ViewChild("templateCardLogin, TemplateCardRegister, TemplateCardForgot, templateCardActivate", {
-    static: false,
-  })
+  @ViewChild(
+    "templateCardLogin, TemplateCardRegister, TemplateCardForgot, templateCardActivate",
+    {
+      static: false,
+    }
+  )
   template: TemplateRef<any>;
   isHome: boolean;
   internal: boolean;
@@ -107,6 +110,8 @@ export class AppComponent implements OnInit, OnDestroy {
   managedPayments: boolean;
   isEmployee: boolean;
   role: String;
+  classPage: string;
+  location: Location;
 
   constructor(
     private translate: TranslateService,
@@ -118,7 +123,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private user: UserService,
     private token: TokenService,
     private metaTagService: Meta,
-    private swUpdate: SwUpdate
+    private swUpdate: SwUpdate,
+    location: Location
   ) {
     translate.setDefaultLang("es");
     translate.use("es");
@@ -133,23 +139,26 @@ export class AppComponent implements OnInit, OnDestroy {
     });
 
     this.isLoggedIn = this.auth.isLoggedIn();
+
+    this.router.events.subscribe(() => {
+      let urlLocation = location.prepareExternalUrl(location.path());
+      let SplitLocation = urlLocation.split("/");
+      this.classPage = SplitLocation[1];
+    });
   }
 
-
   ngOnInit() {
-
     if (this.swUpdate.isEnabled) {
-      this.swUpdate.available.subscribe(()=> {
+      this.swUpdate.available.subscribe(() => {
         Swal.fire({
           title: "¡Nueva versión disponible!",
-          text:
-            "Haz clic en el botón aceptar.",
+          text: "Haz clic en el botón aceptar.",
           type: "info",
           allowEscapeKey: false,
           allowOutsideClick: false,
           confirmButtonText: "Aceptar",
           confirmButtonClass: "update-success",
-          customClass:"paymentData"
+          customClass: "paymentData",
         }).then(() => {
           window.location.reload();
         });
@@ -222,9 +231,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.windowWidth();
     this.getUserData();
- 
   }
-
 
   public hideLogin() {
     this.isOpen = !this.isOpen;
