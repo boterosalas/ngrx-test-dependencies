@@ -143,8 +143,8 @@ form = this.formBuilder.group({
   ]
 
   dataSource = [
-    {icon: 'assets/img/dashboard/exito.png', bussiness: 'Almacenes Éxito', linksGenerated:'120', linksClicked:'50', total:'50000000'},
-    {icon: 'assets/img/dashboard/carulla.png', bussiness: 'Almacenes Carulla', linksGenerated:'120', linksClicked:'50', total:'50000000'},
+    {icon: 'assets/img/dashboard/exito.png', bussiness: 'Almacenes Éxito', linksGenerated:'120', linksClicked:'50', commission:'10000000', total:'50000000'},
+    {icon: 'assets/img/dashboard/carulla.png', bussiness: 'Almacenes Carulla', linksGenerated:'120', linksClicked:'50', commission:'10000000', total:'50000000'},
   ];
 
   private subscription: Subscription = new Subscription();

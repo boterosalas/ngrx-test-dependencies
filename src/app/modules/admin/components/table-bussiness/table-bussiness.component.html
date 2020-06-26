@@ -36,6 +36,12 @@
           <td mat-cell *matCellDef="let element"> {{element.linksClicked}}</td>
         </ng-container>
     
+        <!-- commission Column -->
+        <ng-container matColumnDef="commission">
+          <th mat-header-cell *matHeaderCellDef> {{ 'DASHBOARD.COMMISSION' | translate }} </th>
+          <td mat-cell *matCellDef="let element"> {{element.commission | currency: "":"symbol":"1.0-0"}}</td>
+        </ng-container>
+
         <!-- total Column -->
         <ng-container matColumnDef="total">
           <th mat-header-cell *matHeaderCellDef> {{ 'DASHBOARD.TOTAL' | translate }} </th>
