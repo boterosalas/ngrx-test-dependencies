@@ -4,17 +4,17 @@
   imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
 ></app-banner>
 <div class="container mt-4">
-  <div fxLayout="row" fxLayoutGap="15px">
+  <div fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutGap="15px">
     <div fxLayout="column" fxFlex="30">
       <app-resume [resume]="resume"></app-resume>
     </div>
     <div fxLayout="column" fxFlex="70">
-      <div fxLayout="row">
+      <div fxLayout.gt-xs="row" fxLayout.xs="column">
         <span fxLayout="column">
           <p>{{ "DASHBOARD.RANGE" | translate }}</p>
         </span>
         <span fxLayout="column">
-        <form [formGroup]="form">
+        <form [formGroup]="form" ngClass.xs="fp">
           <mat-icon class="icon-date" matPrefix>date_range</mat-icon>
           <input
             formControlName="selected"
@@ -36,6 +36,7 @@
       <app-card-dashboard
         [items]="items"
         fxLayout.gt-xs="row wrap"
+        fxLayout.xs="column"
         fxLayoutAlign="center space-between "
       ></app-card-dashboard>
     </div>
