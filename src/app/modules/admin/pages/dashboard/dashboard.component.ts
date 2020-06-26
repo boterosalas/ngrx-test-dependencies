@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LinksService } from 'src/app/services/links.service';
 import { Subscription } from 'rxjs';
+import * as moment from 'moment';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
-  constructor(private kpi: LinksService) { }
+  constructor(private kpi: LinksService, private formBuilder: FormBuilder) { }
 
   totalUsers: string;
   totalActiveUsers: string;
@@ -29,6 +31,44 @@ export class DashboardComponent implements OnInit, OnDestroy {
   percent: any;
   links = true;
   monthActiveUsersQuantity:string;
+  dateParams: any;
+
+  maxDate = moment(new Date());
+  inlineDateTime;
+  
+  locale = {
+    locale: 'es',
+    direction: 'ltr', // could be rtl
+    weekLabel: 'W',
+    separator: ' a ', // default is ' - '
+    cancelLabel: 'Cancelar', // detault is 'Cancel'
+    applyLabel: 'Aplicar', // detault is 'Apply'
+    clearLabel: 'Limpiar', // detault is 'Clear'
+    customRangeLabel: 'Custom range',
+    daysOfWeek: moment.weekdaysMin(),
+    monthNames: moment.monthsShort(),
+    firstDay: 1 // first day is monday
+};
+
+ranges = {
+  Hoy: [moment(), moment()],
+  Ayer: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+  'Los últimos 7 días': [moment().subtract(6, 'days'), moment()],
+  'Los últimos 30 días': [moment().subtract(29, 'days'), moment()],
+  'Este Mes': [moment().startOf('month'), moment().endOf('month')],
+  'El mes pasado': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+  'Últimos 3 meses': [moment().subtract(3, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+};
+
+form = this.formBuilder.group({
+  selected: {
+      startDate: moment(new Date(), "DD/MM/YYYY"),
+      endDate: moment(new Date(), "DD/MM/YYYY"),
+  },
+  alwaysShowCalendars: true,
+  keepCalendarOpeningWithRange: true,
+  showRangeLabelOnInput: true,
+});
 
   resume = [
     {
@@ -102,6 +142,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     },
   ]
 
+  dataSource = [
+    {icon: 'assets/img/dashboard/exito.png', bussiness: 'Almacenes Éxito', linksGenerated:'120', linksClicked:'50', total:'50000000'},
+    {icon: 'assets/img/dashboard/carulla.png', bussiness: 'Almacenes Carulla', linksGenerated:'120', linksClicked:'50', total:'50000000'},
+  ];
+
   private subscription: Subscription = new Subscription();
 
   ngOnInit() {
@@ -128,6 +173,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.percent = (resp.historicalActiveUsersQuantity /resp.historicalUsersQuantity) * 100;
       this.monthActiveUsersQuantity = resp.monthActiveUsersQuantity;
     })
+  }
+
+  public change() {
+    this.dateParams = {
+      start: this.form.controls.selected.value.startDate.format(),
+      end: this.form.controls.selected.value.endDate.format()
+    }
+    console.log(this.dateParams)
   }
 
   ngOnDestroy(): void {

@@ -1,14 +1,46 @@
-<app-banner title="{{'DASHBOARD.CONTROL_TOWER' | translate}}" img="/assets/img/banners/banner-dashboard-pc.jpg" imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"></app-banner>
+<app-banner
+  title="{{ 'DASHBOARD.CONTROL_TOWER' | translate }}"
+  img="/assets/img/banners/banner-dashboard-pc.jpg"
+  imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
+></app-banner>
 <div class="container mt-4">
   <div fxLayout="row" fxLayoutGap="15px">
     <div fxLayout="column" fxFlex="30">
       <app-resume [resume]="resume"></app-resume>
     </div>
     <div fxLayout="column" fxFlex="70">
-      <app-card-dashboard [items]="items" fxLayout.gt-xs="row wrap" fxLayoutAlign="center space-between "></app-card-dashboard>
+      <div fxLayout="row">
+        <span fxLayout="column">
+          <p>{{ "DASHBOARD.RANGE" | translate }}</p>
+        </span>
+        <span fxLayout="column">
+        <form [formGroup]="form">
+          <mat-icon class="icon-date" matPrefix>date_range</mat-icon>
+          <input
+            formControlName="selected"
+            [locale]="locale"
+            [showCustomRangeLabel]="true"
+            placeholder="Seleccione fechas"
+            type="text"
+            [maxDate]="maxDate"
+            [ranges]="ranges"
+            [alwaysShowCalendars]="form.get('alwaysShowCalendars').value"
+            [showRangeLabelOnInput]="form.get('showRangeLabelOnInput').value"
+            ngxDaterangepickerMd
+            class="form-control border-input mat-elevation-z1 p-2 border-radius"
+            (change)="change()"
+          />
+        </form>
+      </span>
+      </div>
+      <app-card-dashboard
+        [items]="items"
+        fxLayout.gt-xs="row wrap"
+        fxLayoutAlign="center space-between "
+      ></app-card-dashboard>
     </div>
   </div>
   <div class="mt-3">
-    <app-table-bussiness></app-table-bussiness>
+    <app-table-bussiness [dataSource]="dataSource"></app-table-bussiness>
   </div>
 </div>
