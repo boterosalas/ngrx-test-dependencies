@@ -18,6 +18,7 @@ import {
 } from "ngx-daterangepicker-material";
 import { config } from "process";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 describe("AuditComponent", () => {
   let component: AuditComponent;
@@ -42,6 +43,7 @@ describe("AuditComponent", () => {
         HttpClientTestingModule,
         BrowserAnimationsModule,
         NgxDaterangepickerMd,
+        SharedModule,
         RouterTestingModule.withRoutes([]),
         JwtModule.forRoot({
           config: {

@@ -17,6 +17,7 @@ import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { config } from 'process';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AnonymousModule } from 'src/app/modules/anonymous/anonymous.module';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 
 describe("ReportsComponent", () => {
@@ -65,6 +66,7 @@ describe("ReportsComponent", () => {
         ReactiveFormsModule,
         FormsModule,
         BrowserAnimationsModule,
+        SharedModule,
         NgxDaterangepickerMd,
         RouterTestingModule.withRoutes([]),
         JwtModule.forRoot({

@@ -17,6 +17,7 @@ import * as moment from 'moment';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { DialogEditComponent } from 'src/app/modules/clicker/components/dialog-edit/dialog-edit.component';
 import { UserService } from 'src/app/services/user.service';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 moment.locale('es');
 
 describe("UsersComponent", () => {
@@ -140,6 +141,7 @@ describe("UsersComponent", () => {
         HttpClientTestingModule,
         RouterTestingModule.withRoutes([]),
         NgxDaterangepickerMd,
+        SharedModule,
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
