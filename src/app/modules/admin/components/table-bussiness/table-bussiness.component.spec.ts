@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TableBussinessComponent } from './table-bussiness.component';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('TableBussinessComponent', () => {
   let component: TableBussinessComponent;
@@ -8,7 +10,11 @@ describe('TableBussinessComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TableBussinessComponent ]
+      declarations: [ TableBussinessComponent ],
+      imports: [
+        AppMaterialModule,
+        TranslateModule.forRoot()
+      ]
     })
     .compileComponents();
   }));

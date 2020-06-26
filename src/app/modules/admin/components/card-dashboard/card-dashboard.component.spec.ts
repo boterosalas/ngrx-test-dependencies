@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CardDashboardComponent } from './card-dashboard.component';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('CardDashboardComponent', () => {
   let component: CardDashboardComponent;
@@ -8,7 +10,11 @@ describe('CardDashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CardDashboardComponent ]
+      declarations: [ CardDashboardComponent ],
+      imports: [
+        AppMaterialModule,
+        TranslateModule.forRoot()
+      ]
     })
     .compileComponents();
   }));

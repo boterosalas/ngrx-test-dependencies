@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ResumeComponent } from './resume.component';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatListModule } from '@angular/material';
 
 describe('ResumeComponent', () => {
   let component: ResumeComponent;
@@ -8,7 +11,12 @@ describe('ResumeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResumeComponent ]
+      declarations: [ ResumeComponent ],
+      imports: [
+        AppMaterialModule,
+        MatListModule,
+        TranslateModule.forRoot()
+      ]
     })
     .compileComponents();
   }));
