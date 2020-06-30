@@ -51,7 +51,7 @@ export class UserService {
   apiSaveUserOnboardingViewed = "userprofile/saveuseronboardingviewed";
   apiSaveUserAccepttermsReferrals = "userprofile/saveuseraccepttermsreferrals";
   apiSaveUserDevice = "notification/saveuserdevice";
-  apiUpdateEmployees="userprofile/updateemployees";
+  apiUpdateEmployees = "userprofile/updateemployees";
 
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
@@ -67,10 +67,18 @@ export class UserService {
   userInfo$ = new BehaviorSubject<any>(null);
 
   public getProfile() {
-   
     return this.http
       .get(this.url + this.apiProfile, this.httpOptions)
-      .pipe(map((res: ResponseService) => res.objectResponse))
+      .pipe(
+        map((res: ResponseService) => res.objectResponse),
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        )
+      )
       .subscribe((resp: ResponseService) => {
         this.userInfo$.next(resp);
       });
@@ -119,18 +127,20 @@ export class UserService {
   }
 
   getuserdata() {
-    return this.http.get(`${this.url}${this.apiGetuserdata}`, this.httpOptions).pipe(
-      retryWhen((errors) =>
-        errors.pipe(
-          delay(1000),
-          take(3),
-          tap((errorStatus) => {})
-        )
-      ),
-      map((user: any) => {
-        return user.objectResponse;
-      })
-    );
+    return this.http
+      .get(`${this.url}${this.apiGetuserdata}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        ),
+        map((user: any) => {
+          return user.objectResponse;
+        })
+      );
   }
 
   public registerUser(userInfo: any) {
@@ -149,7 +159,11 @@ export class UserService {
 
   public saveUserAcceptTermsReferrals() {
     return this.http
-      .post(`${this.url}${this.apiSaveUserAccepttermsReferrals}`, {}, this.httpOptions)
+      .post(
+        `${this.url}${this.apiSaveUserAccepttermsReferrals}`,
+        {},
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
@@ -160,7 +174,7 @@ export class UserService {
         )
       );
   }
-  
+
   public updateEmployees() {
     return this.http
       .post(`${this.url}${this.apiUpdateEmployees}`, {}, this.httpOptions)
@@ -177,7 +191,11 @@ export class UserService {
 
   public saveOnboarding(save: any) {
     return this.http
-      .post(`${this.url}${this.apiSaveUserOnboardingViewed}`, {viewed:save}, this.httpOptions)
+      .post(
+        `${this.url}${this.apiSaveUserOnboardingViewed}`,
+        { viewed: save },
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
@@ -190,8 +208,11 @@ export class UserService {
   }
 
   public saveUserDevice(userid: string, token: string) {
-    return this.http
-      .post(`${this.url}${this.apiSaveUserDevice}`, {userid:userid, device: token}, this.httpOptions);
+    return this.http.post(
+      `${this.url}${this.apiSaveUserDevice}`,
+      { userid: userid, device: token },
+      this.httpOptions
+    );
   }
 
   public uploadFiles(params: any) {
@@ -313,7 +334,11 @@ export class UserService {
 
   public changeBankInformation(id: any, data: any) {
     return this.http
-      .post(`${this.url}${this.apichangeBankInformation}`, data, this.httpOptions)
+      .post(
+        `${this.url}${this.apichangeBankInformation}`,
+        data,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(

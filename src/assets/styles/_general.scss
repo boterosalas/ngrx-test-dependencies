@@ -1715,3 +1715,10 @@ app-menu-help-center {
 .md-drppicker .ranges ul li button.active{
   background: $primary-color !important;
 }
+
+
+#account{
+  .mat-dialog-content{
+      overflow-x: hidden;
+  }
+}
