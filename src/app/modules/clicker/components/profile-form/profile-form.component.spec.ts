@@ -19,6 +19,7 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
 import { UserService } from 'src/app/services/user.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 
 
 class MockUserService extends UserService {
@@ -135,7 +136,7 @@ const ErrorUptade = {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileFormComponent, DialogEditComponent ],
+      declarations: [ ProfileFormComponent, DialogEditComponent, TruncatePipe ],
       imports: [
         TranslateModule.forRoot({}),
         ReactiveFormsModule,

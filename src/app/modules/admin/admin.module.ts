@@ -19,8 +19,6 @@ import { SearchUsersComponent } from "./components/search-users/search-users.com
 import { DialogUserComponent } from "./components/dialog-user/dialog-user.component";
 import { MatPaginatorIntl } from "@angular/material";
 import { KeySpaceDirectiveAdmin } from "src/directives/space.admin.directive";
-import { CardDashboardComponent } from "./components/card-dashboard/card-dashboard.component";
-import { CardDashboardInfoComponent } from './components/card-dashboard-info/card-dashboard-info.component';
 
 // Import ng-circle-progress
 import { NgCircleProgressModule } from "ng-circle-progress";
@@ -31,6 +29,9 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { AuditComponent } from './pages/audit/audit.component';
 import { BusinessComponent } from './pages/business/business.component';
 import { RefersComponent } from './pages/refers/refers.component';
+import { ResumeComponent } from './components/resume/resume.component';
+import { CardDashboardComponent } from './components/card-dashboard/card-dashboard.component';
+import { TableBussinessComponent } from './components/table-bussiness/table-bussiness.component';
 
 const routes: Routes = [
   {
@@ -95,11 +96,12 @@ const routes: Routes = [
     SearchUsersComponent,
     DialogUserComponent,
     KeySpaceDirectiveAdmin,
-    CardDashboardComponent,
-    CardDashboardInfoComponent,
     AuditComponent,
     BusinessComponent,
-    RefersComponent
+    RefersComponent,
+    ResumeComponent,
+    CardDashboardComponent,
+    TableBussinessComponent
   ],
   imports: [
     CommonModule,

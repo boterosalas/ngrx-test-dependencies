@@ -97,15 +97,7 @@
       
       <app-header (sidenav)="drawer.toggle()" [name]="firstName"></app-header>
       
-      <div class="maincontent" *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'ADMIN'">
-        <div fxLayout="row" class="container-fluid pl-0">
-          <div fxLayout="column" fxFlex class="pl-3">
-            <router-outlet *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'ADMIN'"></router-outlet>
-          </div>
-        </div>
-      </div>
-      
-        <div class="maincontent" *ngIf="!(auth.isLoggedIn() && (auth.getRole$  | async) === 'ADMIN')">
+        <div ngClass="maincontent {{classPage}}-page">
               <router-outlet></router-outlet>
         </div>
       
@@ -115,12 +107,3 @@
       
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-<!-- <ng-template #templatePayment>
-  
-    <span fxLayout="column" fxLayoutAlign="center center">
-      <p class="f-16">{{ "GENERIC.COMPLETE_REGISTER_INFO" | translate }}</p>
-    </span>
-  
-</ng-template> -->
-

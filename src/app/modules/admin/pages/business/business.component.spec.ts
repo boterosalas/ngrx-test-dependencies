@@ -9,6 +9,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { ContentService } from 'src/app/services/content.service';
 import { of } from 'rxjs';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 describe('BusinessComponent', () => {
   let component: BusinessComponent;
@@ -26,6 +27,7 @@ describe('BusinessComponent', () => {
         AppMaterialModule,
         HttpClientTestingModule,
         BrowserAnimationsModule,
+        SharedModule,
         RouterTestingModule.withRoutes([]),
         JwtModule.forRoot({
           config: {

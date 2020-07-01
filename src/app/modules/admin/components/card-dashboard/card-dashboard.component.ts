@@ -7,18 +7,9 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CardDashboardComponent implements OnInit {
 
+  @Input() items:object;
+
   constructor() { }
-
-  @Input() title:string;
-  @Input() circle:string;
-  @Input() aligment:string;
-  @Input() icon:string;
-  @Input() dataNumber:string;
-  @Input() cifer:string;
-  @Input() textData:string;
-  @Input() cifer2:string;
-  @Input() textData2:string;
-
 
   ngOnInit() {
   }

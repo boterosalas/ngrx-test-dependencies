@@ -187,7 +187,7 @@ export class LinksService {
       
   }
 
-  public getKPI() {
+  public getKPI(date:any) {
     const token = localStorage.getItem("ACCESS_TOKEN");
     const authorization = token;
   
@@ -199,7 +199,7 @@ export class LinksService {
       }),
     };
     return this.http
-      .get(`${this.urlComission}/${this.apiKPI}`, httpOptions)
+      .get(`${this.urlComission}${this.apiKPI}?start=${date.start}&end=${date.end}`, httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(

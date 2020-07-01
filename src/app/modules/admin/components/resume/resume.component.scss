@@ -1,0 +1,11 @@
+@import 'variables';
+
+.color-text{
+    color: $color-p;
+}
+
+mat-list{
+    mat-list-item:last-child{
+        border-bottom: none;
+    }
+}

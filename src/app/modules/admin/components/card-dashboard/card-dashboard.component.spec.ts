@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { CardDashboardComponent } from './card-dashboard.component';
-import { NgCircleProgressModule } from 'ng-circle-progress';
-import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('CardDashboardComponent', () => {
   let component: CardDashboardComponent;
@@ -12,9 +12,8 @@ describe('CardDashboardComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ CardDashboardComponent ],
       imports: [
-        NgCircleProgressModule.forRoot({}),
-        TranslateModule.forRoot(),
         AppMaterialModule,
+        TranslateModule.forRoot()
       ]
     })
     .compileComponents();

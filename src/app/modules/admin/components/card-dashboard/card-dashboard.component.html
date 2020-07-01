@@ -1,18 +1,23 @@
-<mat-card class="card">
-    <mat-card-content>
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-            <span fxLayout="column" fxFlex="35">
-                    <circle-progress
-                    percent="{{circle}}"
-                  ></circle-progress>
-            </span>
-            <span fxLayout="column" fxLayoutAlign="flex-end flex-end" fxFlex="55">
-                <img class="icon-dashboard" src="/assets/img/dashboard/icono-usuarios1.svg" alt="user">
-                <p class="mb-0 font-12">{{ 'DASHBOARD.TOTAL_USERS' | translate }}</p>
-                <span class="number"> {{cifer}}</span>
-                <p class="mb-0 mt-2 font-12">{{ 'DASHBOARD.TOTAL_ACTIVE' | translate }}</p>
-                <span class="number">{{cifer2}}</span>
-            </span>
+
+<div *ngFor="let item of items; let i = index" class="card-{{i}} white" ngClass.gt-xs="card-dash mr-2">
+    <h3 class="f-18">{{item.title}}</h3>
+    
+    <mat-card>
+        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
+            <div fxLayout="column">
+
+                <span class="galano-bold f-24" *ngIf="i === 2 || i === 3 ">
+                    {{item.number | currency: "":"symbol":"1.0-0"}}
+                </span>
+                <span class="galano-bold f-24" *ngIf="i !== 2 && i !== 3 ">
+                    {{item.number}}
+                </span>
+
+                <span class="galono-bold f-13">{{item.subtitle}}</span>
+            </div>
+            <div fxLayout="column">
+                <img [src]="item.icon" [alt]="item.subtitle">
+            </div>
         </div>
-    </mat-card-content>  
-</mat-card>
+    </mat-card>
+</div>

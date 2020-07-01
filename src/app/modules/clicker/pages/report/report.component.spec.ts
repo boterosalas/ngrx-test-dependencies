@@ -12,6 +12,8 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { DialogHistoryComponent } from '../../components/dialog-history/dialog-history.component';
+import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 describe("ReportComponent", () => {
   let component: ReportComponent;
@@ -61,7 +63,7 @@ describe("ReportComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ReportComponent, DialogHistoryComponent],
+      declarations: [ReportComponent, DialogHistoryComponent, ModalGenericComponent],
       imports: [
         AppMaterialModule,
         TranslateModule.forRoot({}),
@@ -79,12 +81,16 @@ describe("ReportComponent", () => {
           }
         })
       ],
-      providers: [{ provide: LinksService, useValue: mockLinksService }],
+      providers: [
+        { provide: LinksService, useValue: mockLinksService },
+        { provide: MatDialogRef, useValue: mockDialogRef },
+        { provide: MatDialog, useValue: mockDialog },
+      ],
       schemas: [NO_ERRORS_SCHEMA]
     })
     .overrideModule(BrowserDynamicTestingModule, {
       set: {
-        entryComponents: [DialogHistoryComponent]
+        entryComponents: [DialogHistoryComponent, ModalGenericComponent]
       }
     })
     .compileComponents();
@@ -119,5 +125,21 @@ describe("ReportComponent", () => {
     component.userData(user);
     expect(mockLinksService.getDetailPaymentClicker).toHaveBeenCalled();
   });
+
+  it('break 1', () => {
+    component.break1();
+    expect(mockDialog.open).toBeTruthy();
+  });
+  
+  it('break 2', () => {
+    component.break2();
+    expect(mockDialog.open).toBeTruthy();
+  });
+
+  it('accumulated', () => {
+    component.acumulated();
+    expect(mockDialog.open).toBeTruthy();
+  });
+  
 
 });
