@@ -3,6 +3,7 @@ import { LinksService } from 'src/app/services/links.service';
 import { Subscription } from 'rxjs';
 import * as moment from 'moment';
 import { FormBuilder } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,6 +33,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   links = true;
   monthActiveUsersQuantity:string;
   dateParams: any;
+  dataSource: any;
+  resume = [];
+  items = [];
+  
 
   maxDate = moment(new Date());
   inlineDateTime;
@@ -70,83 +75,6 @@ form = this.formBuilder.group({
   showRangeLabelOnInput: true,
 });
 
-  resume = [
-    {
-      icon: 'assets/img/dashboard/resumen/icon-total-registros.svg',
-      number: '5.670',
-      title: 'Total registros'
-    },
-    {
-      icon: 'assets/img/dashboard/resumen/icon-total-activos.svg',
-      number: '3.670',
-      title: 'Total activos'
-    },
-    {
-      icon: 'assets/img/dashboard/resumen/icon-total-ventas.svg',
-      number: '3.670',
-      title: 'Total ventas'
-    },
-    {
-      icon: 'assets/img/dashboard/resumen/icon-total-comisiones.svg',
-      number: '8.908',
-      title: 'Total comisiones'
-    },
-    {
-      icon: 'assets/img/dashboard/resumen/icon-links-generados.svg',
-      number: '3.506',
-      title: 'Total links generados'
-    },
-    {
-      icon: 'assets/img/dashboard/resumen/icon-links-clickeados.svg',
-      number: '2.506',
-      title: 'Total links clickeados por cliente final'
-    }
-  ];
-
-  items = [
-    {
-      icon: 'assets/img/dashboard/icon-registros.svg',
-      title: 'Registros',
-      number: '57',
-      subtitle: 'Usuarios registrados'
-    },
-    {
-      icon: 'assets/img/dashboard/icon-activos.svg',
-      title: 'Activos',
-      number: '985',
-      subtitle: 'Usuarios Activos'
-    },
-    {
-      icon: 'assets/img/dashboard/icon-ventas.svg',
-      title: 'Ventas',
-      number: '12',
-      subtitle: 'Ventas'
-    },
-    {
-      icon: 'assets/img/dashboard/icon-comisiones.svg',
-      title: 'Comisiones',
-      number: '18',
-      subtitle: 'Comisiones'
-    },
-    {
-      icon: 'assets/img/dashboard/icon-links-generados.svg',
-      title: 'Links generados',
-      number: '350',
-      subtitle: 'Links generados'
-    },
-    {
-      icon: 'assets/img/dashboard/icon-links-clickeados.svg',
-      title: 'Links clickeados',
-      number: '350',
-      subtitle: 'Links clickeados'
-    },
-  ]
-
-  dataSource = [
-    {icon: 'assets/img/dashboard/exito.png', bussiness: 'Almacenes Éxito', linksGenerated:'120', linksClicked:'50', commission:'10000000', total:'50000000'},
-    {icon: 'assets/img/dashboard/carulla.png', bussiness: 'Almacenes Carulla', linksGenerated:'120', linksClicked:'50', commission:'10000000', total:'50000000'},
-  ];
-
   private subscription: Subscription = new Subscription();
 
   ngOnInit() {
@@ -154,25 +82,17 @@ form = this.formBuilder.group({
   }
 
   public getKPI(){
-    this.subscription = this.kpi.getKPI().subscribe(resp=> {
-      this.totalUsers = resp.historicalUsersQuantity;
-      this.totalActiveUsers = resp.historicalActiveUsersQuantity;
-      this.totalMonthRegisterUsers = resp.monthUsersQuantity;
-      this.todayRegisterUsers = resp.todayUsersQuantity;
-      this.totalMonthRegisterActive = resp.historicalActiveUsersQuantity;
-      this.todayActiveUsers = resp.yesterdayActiveUsersQuantity;
-      this.salesMonth = resp.monthSales;
-      this.salesMonthYesterday = resp.yesterdaySales;
-      this.salesMonthTotalYesterday = resp.historicalSales;
-      this.commissionMonth = resp.monthCommissionValue;
-      this.commissionMonthYesterday = resp.yesterdayCommissionValue;
-      this.commissionMonthTotalYesterday = resp.historicalCommissionValue;
-      this.linksMonth = resp.monthGeneratedLinks;
-      this.linksMonthYesterday = resp.todayGeneratedLinks;
-      this.linksMonthTotalYesterday = resp.historicalGeneratedLinks;
-      this.percent = (resp.historicalActiveUsersQuantity /resp.historicalUsersQuantity) * 100;
-      this.monthActiveUsersQuantity = resp.monthActiveUsersQuantity;
+    let date = {
+      start: this.form.controls.selected.value.startDate.format(),
+      end: this.form.controls.selected.value.endDate.format()
+    }
+    
+    this.subscription = this.kpi.getKPI(date).subscribe(resp=> {
+      this.resume = resp.resume;
+      this.items = resp.kpi;
+      this.dataSource = new MatTableDataSource<any>(resp.listbusiness);
     })
+
   }
 
   public change() {
@@ -180,7 +100,11 @@ form = this.formBuilder.group({
       start: this.form.controls.selected.value.startDate.format(),
       end: this.form.controls.selected.value.endDate.format()
     }
-    console.log(this.dateParams)
+    this.subscription = this.kpi.getKPI(this.dateParams).subscribe(resp=> {
+      this.resume = resp.resume;
+      this.items = resp.kpi;
+      this.dataSource = new MatTableDataSource<any>(resp.listbusiness);
+    })
   }
 
   ngOnDestroy(): void {

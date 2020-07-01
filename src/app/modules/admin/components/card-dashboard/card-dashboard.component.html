@@ -5,7 +5,14 @@
     <mat-card>
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
             <div fxLayout="column">
-                <span class="galano-bold f-30">{{item.number}}</span>
+
+                <span class="galano-bold f-24" *ngIf="i === 2 || i === 3 ">
+                    {{item.number | currency: "":"symbol":"1.0-0"}}
+                </span>
+                <span class="galano-bold f-24" *ngIf="i !== 2 && i !== 3 ">
+                    {{item.number}}
+                </span>
+
                 <span class="galono-bold f-13">{{item.subtitle}}</span>
             </div>
             <div fxLayout="column">

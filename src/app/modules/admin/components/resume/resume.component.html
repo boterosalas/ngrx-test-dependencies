@@ -3,10 +3,15 @@
     <mat-list role="list">
             <mat-list-item *ngFor="let item of resume; let i = index" fxLayout="row" class="border-bottom-gray">
                 <span fxLayout="column" class="pl-2">
-                   <img [src]="item.icon" alt="item.title">
+                   <img [src]="item.icon" [alt]="item.title">
                 </span>
-                <span fxLayout="column" class="pl-2 color-text f-22 galano-bold">
-                    {{item.number}}
+                <span fxLayout="column" class="pl-2 color-text f-18 galano-bold">
+                    <span *ngIf="i === 2 || i === 3 ">
+                        {{item.number | currency: "":"symbol":"1.0-0"}}
+                    </span>
+                    <span *ngIf="i !== 2 && i !== 3 ">
+                        {{item.number}}
+                    </span>
                 </span>
                 <span fxLayout="column" class="pl-2 color-text f-14 galano-bold">
                     {{item.title}}
