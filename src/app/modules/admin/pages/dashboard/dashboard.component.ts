@@ -1,6 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LinksService } from 'src/app/services/links.service';
 import { Subscription } from 'rxjs';
+import * as moment from 'moment';
+import { FormBuilder } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
-  constructor(private kpi: LinksService) { }
+  constructor(private kpi: LinksService, private formBuilder: FormBuilder) { }
 
   totalUsers: string;
   totalActiveUsers: string;
@@ -29,6 +32,48 @@ export class DashboardComponent implements OnInit, OnDestroy {
   percent: any;
   links = true;
   monthActiveUsersQuantity:string;
+  dateParams: any;
+  dataSource: any;
+  resume = [];
+  items = [];
+  
+
+  maxDate = moment(new Date());
+  inlineDateTime;
+  
+  locale = {
+    locale: 'es',
+    direction: 'ltr', // could be rtl
+    weekLabel: 'W',
+    separator: ' a ', // default is ' - '
+    cancelLabel: 'Cancelar', // detault is 'Cancel'
+    applyLabel: 'Aplicar', // detault is 'Apply'
+    clearLabel: 'Limpiar', // detault is 'Clear'
+    customRangeLabel: 'Custom range',
+    daysOfWeek: moment.weekdaysMin(),
+    monthNames: moment.monthsShort(),
+    firstDay: 1 // first day is monday
+};
+
+ranges = {
+  Hoy: [moment(), moment()],
+  Ayer: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+  'Los últimos 7 días': [moment().subtract(6, 'days'), moment()],
+  'Los últimos 30 días': [moment().subtract(29, 'days'), moment()],
+  'Este Mes': [moment().startOf('month'), moment().endOf('month')],
+  'El mes pasado': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+  'Últimos 3 meses': [moment().subtract(3, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+};
+
+form = this.formBuilder.group({
+  selected: {
+      startDate: moment(new Date(), "DD/MM/YYYY"),
+      endDate: moment(new Date(), "DD/MM/YYYY"),
+  },
+  alwaysShowCalendars: true,
+  keepCalendarOpeningWithRange: true,
+  showRangeLabelOnInput: true,
+});
 
   private subscription: Subscription = new Subscription();
 
@@ -37,24 +82,28 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   public getKPI(){
-    this.subscription = this.kpi.getKPI().subscribe(resp=> {
-      this.totalUsers = resp.historicalUsersQuantity;
-      this.totalActiveUsers = resp.historicalActiveUsersQuantity;
-      this.totalMonthRegisterUsers = resp.monthUsersQuantity;
-      this.todayRegisterUsers = resp.todayUsersQuantity;
-      this.totalMonthRegisterActive = resp.historicalActiveUsersQuantity;
-      this.todayActiveUsers = resp.yesterdayActiveUsersQuantity;
-      this.salesMonth = resp.monthSales;
-      this.salesMonthYesterday = resp.yesterdaySales;
-      this.salesMonthTotalYesterday = resp.historicalSales;
-      this.commissionMonth = resp.monthCommissionValue;
-      this.commissionMonthYesterday = resp.yesterdayCommissionValue;
-      this.commissionMonthTotalYesterday = resp.historicalCommissionValue;
-      this.linksMonth = resp.monthGeneratedLinks;
-      this.linksMonthYesterday = resp.todayGeneratedLinks;
-      this.linksMonthTotalYesterday = resp.historicalGeneratedLinks;
-      this.percent = (resp.historicalActiveUsersQuantity /resp.historicalUsersQuantity) * 100;
-      this.monthActiveUsersQuantity = resp.monthActiveUsersQuantity;
+    let date = {
+      start: this.form.controls.selected.value.startDate.format(),
+      end: this.form.controls.selected.value.endDate.format()
+    }
+    
+    this.subscription = this.kpi.getKPI(date).subscribe(resp=> {
+      this.resume = resp.resume;
+      this.items = resp.kpi;
+      this.dataSource = new MatTableDataSource<any>(resp.listbusiness);
+    })
+
+  }
+
+  public change() {
+    this.dateParams = {
+      start: this.form.controls.selected.value.startDate.format(),
+      end: this.form.controls.selected.value.endDate.format()
+    }
+    this.subscription = this.kpi.getKPI(this.dateParams).subscribe(resp=> {
+      this.resume = resp.resume;
+      this.items = resp.kpi;
+      this.dataSource = new MatTableDataSource<any>(resp.listbusiness);
     })
   }
 

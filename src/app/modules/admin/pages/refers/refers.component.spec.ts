@@ -13,6 +13,7 @@ import { config } from 'process';
 import { LinksService } from 'src/app/services/links.service';
 import { of } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 describe('RefersComponent', () => {
   let component: RefersComponent;
@@ -60,6 +61,7 @@ describe('RefersComponent', () => {
         HttpClientTestingModule,
         BrowserAnimationsModule,
         NgxDaterangepickerMd,
+        SharedModule,
         RouterTestingModule.withRoutes([]),
         JwtModule.forRoot({
           config: {

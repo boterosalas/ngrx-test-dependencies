@@ -6,6 +6,16 @@ body {
   color: $color-p;
 }
 
+.bg-gray{
+  background: $bg-gray;
+}
+
+.dashboard{
+  &-page{
+    background: $bg-gray;
+  }
+}
+
 .mat-row:nth-child(even), thead{
   background-color:#F3F1F6 !important;
 }
@@ -1367,6 +1377,12 @@ button.swal2-cancel.updatecancel.swal2-styled {
   &-23 {
     font-size: 23px;
   }
+  &-24 {
+    font-size: 24px;
+  }
+  &-30 {
+    font-size: 30px;
+  }
 }
 
 .lh {
@@ -1660,5 +1676,49 @@ app-menu-help-center {
 #newTerms {
   #closeDialog{
     display: none;
+  }
+}
+
+.card {
+  &-0 {
+      .mat-card{
+          background: transparent linear-gradient(90deg, #735CF2 0%, #968BF4 100%) 0% 0% no-repeat padding-box;
+      }
+  }
+  &-1 {
+      .mat-card{
+         background: transparent linear-gradient(90deg, #5F71DA 0%, #608DDD 100%) 0% 0% no-repeat padding-box;
+      }
+  }
+  &-2 {
+      .mat-card{
+        background: transparent linear-gradient(90deg, #92D4D4 0%, #70C2CB 100%) 0% 0% no-repeat padding-box;
+      }
+  }
+  &-3 {
+      .mat-card{
+        background: transparent linear-gradient(90deg, #FF9696 0%, #FF7C7C 100%) 0% 0% no-repeat padding-box;
+      }
+  }
+  &-4 {
+      .mat-card{
+        background: transparent linear-gradient(90deg, #FCCA90 0%, #FFB664 100%) 0% 0% no-repeat padding-box;
+      }
+  }
+  &-5 {
+      .mat-card{
+        background: transparent linear-gradient(90deg, #A3BCF9 0%, #868FF8 100%) 0% 0% no-repeat padding-box;
+      }
+  }
+}
+
+.md-drppicker .ranges ul li button.active{
+  background: $primary-color !important;
+}
+
+
+#account{
+  .mat-dialog-content{
+      overflow-x: hidden;
   }
 }

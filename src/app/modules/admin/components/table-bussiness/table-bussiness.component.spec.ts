@@ -1,16 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CardDashboardComponent } from './card-dashboard.component';
+import { TableBussinessComponent } from './table-bussiness.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { TranslateModule } from '@ngx-translate/core';
 
-describe('CardDashboardComponent', () => {
-  let component: CardDashboardComponent;
-  let fixture: ComponentFixture<CardDashboardComponent>;
+describe('TableBussinessComponent', () => {
+  let component: TableBussinessComponent;
+  let fixture: ComponentFixture<TableBussinessComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CardDashboardComponent ],
+      declarations: [ TableBussinessComponent ],
       imports: [
         AppMaterialModule,
         TranslateModule.forRoot()
@@ -20,7 +20,7 @@ describe('CardDashboardComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CardDashboardComponent);
+    fixture = TestBed.createComponent(TableBussinessComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

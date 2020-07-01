@@ -17,6 +17,7 @@ import * as moment from 'moment';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { DialogEditComponent } from 'src/app/modules/clicker/components/dialog-edit/dialog-edit.component';
 import { UserService } from 'src/app/services/user.service';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 moment.locale('es');
 
 describe("UsersComponent", () => {
@@ -36,7 +37,7 @@ describe("UsersComponent", () => {
     "event "
   ]);
 
-  const mockUserService = jasmine.createSpyObj("UserService", ["updateUserEmail"]);
+  const mockUserService = jasmine.createSpyObj("UserService", ["updateUserEmail", "updateEmployees"]);
 
   const dataUser = {
     state: "Success",
@@ -118,6 +119,18 @@ describe("UsersComponent", () => {
     objectResponse: []
   };
 
+  const updtaeEmployee = {
+    state: "Success",
+    userMessage: "se ha actualizado los usuarios",
+    objectResponse: []
+  };
+
+  const updtaeEmployeeError = {
+    state: "Error",
+    userMessage: "No se ha actualizado los usuarios",
+    objectResponse: []
+  };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [DialogEditComponent],
@@ -128,6 +141,7 @@ describe("UsersComponent", () => {
         HttpClientTestingModule,
         RouterTestingModule.withRoutes([]),
         NgxDaterangepickerMd,
+        SharedModule,
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
@@ -159,6 +173,8 @@ describe("UsersComponent", () => {
     mockLinksService.searchUsers.and.returnValue(of(dataUser));
     mockLinksService.getUsersExcel.and.returnValue(of(getUserExcel));
     mockUserService.updateUserEmail.and.returnValue(of(resp));
+    mockUserService.updateEmployees.and.returnValue(of(updtaeEmployee));
+    mockUserService.updateEmployees.and.returnValue(of(updtaeEmployeeError));
     fixture = TestBed.createComponent(UsersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -167,6 +183,11 @@ describe("UsersComponent", () => {
 
   it("should create", () => {
     expect(component).toBeTruthy();
+  });
+
+  it('updateEmployee', () => {
+    component.updateEmployee();
+    expect(mockUserService.updateEmployees).toHaveBeenCalled();
   });
 
   it('updateEmail', () => {

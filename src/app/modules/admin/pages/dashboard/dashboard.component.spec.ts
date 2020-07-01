@@ -57,4 +57,11 @@ describe("DashboardComponent", () => {
     expect(component).toBeTruthy();
     expect(mockLinksService.getKPI).toHaveBeenCalled();
   });
+
+  it('change date', () => {
+    component.change();
+    expect(mockLinksService.getKPI).toHaveBeenCalled();
+  });
+  
+
 });
