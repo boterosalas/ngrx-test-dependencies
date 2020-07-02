@@ -87,12 +87,13 @@
                 </div>
               </div>
 
-              <div class="files" fxLayout="column" *ngIf="data.isEmployeeGrupoExito === false">
+              <div class="files" fxLayout="column">
                   <h3 class="gray-title">Archivos adjuntos</h3>
-                    <a class="text-underline cursor-pointer" (click)="IdentificationCard1Download()"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cédula 1</a>
-                    <a class="text-underline cursor-pointer" (click)="IdentificationCard2Download()" target="_blank" id="ced2"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cédula 2</a>
+                  <span *ngIf="data.isEmployeeGrupoExito === false" fxLayout="column">
+                      <a class="text-underline cursor-pointer" (click)="IdentificationCard1Download()"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cédula 1</a>
+                      <a class="text-underline cursor-pointer" (click)="IdentificationCard2Download()" target="_blank" id="ced2"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cédula 2</a>
+                  </span>
                     <a class="text-underline cursor-pointer" (click)="bankCardDownload()" target="_blank" id="certbank"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cert.bancaria</a>
-
               </div>
 
           </div>
