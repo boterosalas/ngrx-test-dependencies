@@ -347,7 +347,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       bank: this.accountForm.controls.bank.value,
       typebankaccount: this.accountForm.controls.typeAccount.value,
       bankaccountnumber: btoa(this.accountForm.controls.numberAccount.value),
-      fileBankCertificate: this.fileBankCertificate,
+      bankcertificate: this.fileBankCertificate,
     };
 
     this.subscription = this.user
