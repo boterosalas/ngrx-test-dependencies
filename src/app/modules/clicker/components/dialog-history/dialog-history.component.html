@@ -13,11 +13,13 @@
         <table class="w-100 history-table">
             <thead>
                 <th  class="text-left">PRODUCTO</th>
+                <th  class="text-center">CANTIDAD</th>
                 <th class="text-right">COMISIÓN</th>
             </thead>
             <tbody>
                 <tr *ngFor="let item of data.items">
                     <td>{{item.product}}</td>
+                    <td class="text-center">{{item.quantity}}</td>
                     <td class="text-right">
                         <span class="black d-block">{{item.commissionValue | currency : '' : 'symbol' : '1.0-0'}}</span>
                         <span class="small d-block">{{item.date | date: 'yyyy-MM-dd'}}</span>
