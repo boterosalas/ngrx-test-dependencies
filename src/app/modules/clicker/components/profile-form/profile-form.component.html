@@ -178,11 +178,16 @@
         <label>{{ "REGISTER.ACCOUNT" | translate }}</label>
         <span fxLayout="row" fxLayoutAlign="space-between center " class="w-85">
           <div class="info lineh">
-            <span class="d-block">{{ bank }}</span>
-            <span *ngIf="typeBankAccount === '1'"> Ahorros </span>
-            <span *ngIf="typeBankAccount === '2'"> Corriente </span> - *******{{
-              bankAccountNumber
-            }}
+            <div *ngIf="bankAccountNumber">
+              <span class="d-block">{{ bank }}</span>
+              <span *ngIf="typeBankAccount === '1'"> Ahorros </span>
+              <span *ngIf="typeBankAccount === '2'"> Corriente </span> - *******{{
+                bankAccountNumber
+              }}
+           </div>
+           <div *ngIf="!bankAccountNumber">
+             <span>Cuenta de Nómina</span>
+           </div>
           </div>
 
           <a mat-raised-button class="no-shadow" (click)="editAccount()"
