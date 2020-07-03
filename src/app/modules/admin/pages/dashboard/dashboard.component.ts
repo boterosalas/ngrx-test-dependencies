@@ -59,6 +59,7 @@ ranges = {
   Hoy: [moment(), moment()],
   Ayer: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
   'Los últimos 7 días': [moment().subtract(6, 'days'), moment()],
+  'Los últimos 15 días': [moment().subtract(14, 'days'), moment()],
   'Los últimos 30 días': [moment().subtract(29, 'days'), moment()],
   'Este Mes': [moment().startOf('month'), moment().endOf('month')],
   'El mes pasado': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
