@@ -281,6 +281,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.nameFileCert = "";
     this.dialog.open(DialogEditComponent, {
       maxWidth: '450px',
+      panelClass: 'editaccount',
       data: {
         title,
         template,
