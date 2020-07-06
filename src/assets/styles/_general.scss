@@ -705,6 +705,11 @@ table {
 }
 
 @media screen and (max-width: 600px) {
+
+  .editaccount{
+    width: 90%;
+  }
+
   .title-tour {
     font-size: 20px;
   }
@@ -1726,3 +1731,4 @@ app-menu-help-center {
 .mat-sort-header-button{
   font-family:$font-galano-bold !important;
 }
+

@@ -82,6 +82,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   validFormat: boolean;
   showErrorCert: boolean = false;
   fileBankCertificate: any;
+  activebutton: boolean = false;
 
   numberPattern = "^(0|[0-9][0-9]*)$";
   namePattern =
@@ -269,6 +270,8 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   }
 
   public editAccount() {
+    this.activebutton = false;
+    console.log(this.activebutton);
     this.showBankInfoUser = false;
     this.showPassword = true;
     this.loginForm.reset();
@@ -278,9 +281,11 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     if(this.bank === null) {
       this.accountForm.reset();
     }
+    
     this.nameFileCert = "";
     this.dialog.open(DialogEditComponent, {
       maxWidth: '450px',
+      panelClass: 'editaccount',
       data: {
         title,
         template,
@@ -560,9 +565,11 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
           this.fileBankCertificate = reader.result;
           this.nameFileCert = nameFile;
           this.showErrorCert = false;
+          this.activebutton = true;
         } else {
           this.showErrorCert = true;
           this.nameFileCert = nameFile;
+          this.activebutton = false;
         }
       };
     }
