@@ -10,7 +10,7 @@ body {
   background: $bg-gray;
 }
 
-.dashboard, .generador-links{
+.dashboard, .generador-links, .reportes-admin, .usuarios, .auditoria, .negocios-admin, .referidos-admin{
   &-page{
     background: $bg-gray;
   }
@@ -1735,3 +1735,14 @@ app-menu-help-center {
   font-family:$font-galano-bold !important;
 }
 
+.forml{
+  .mat-form-field-infix{
+    background: #fff !important;
+  }
+}
+
+.searchUser{
+  .mat-form-field-appearance-outline .mat-form-field-outline{
+    background: #fff !important;
+  }
+}
