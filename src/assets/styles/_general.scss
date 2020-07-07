@@ -10,7 +10,7 @@ body {
   background: $bg-gray;
 }
 
-.dashboard{
+.dashboard, .generador-links{
   &-page{
     background: $bg-gray;
   }
@@ -374,6 +374,9 @@ button {
   }
   &-height {
     min-height: 48px;
+  }
+  &-small{
+    width: 160px;
   }
 }
 
