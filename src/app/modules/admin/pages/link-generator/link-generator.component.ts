@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subscription } from "rxjs";
 import { ContentService } from "src/app/services/content.service";
 
@@ -7,7 +7,7 @@ import { ContentService } from "src/app/services/content.service";
   templateUrl: "./link-generator.component.html",
   styleUrls: ["./link-generator.component.scss"],
 })
-export class LinkGeneratorComponent implements OnInit {
+export class LinkGeneratorComponent implements OnInit, OnDestroy {
   constructor(private content: ContentService) {}
 
   ngOnInit() {
@@ -32,6 +32,10 @@ export class LinkGeneratorComponent implements OnInit {
         this.enableButton = true;
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }
