@@ -32,6 +32,7 @@ export class ContentService {
   apiCategories = "offer/getCategories";
   apiProducts = "product";
   apiGetBusiness = "business/getBusiness";
+  apiGetLinkBusiness = "business/generatelinkbusiness";
   apiGetBusinessClicker = "business/getbusinessclicker";
   apiGetBusinessContent = "business/getContent";
   apiGetcategoriesbusiness = "business/getcategoriesbusiness";
@@ -51,6 +52,23 @@ export class ContentService {
   public getBusiness() {
     return this.http
       .get(`${this.url + this.apiGetBusiness}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        ),
+        map((user: ResponseService) => {
+          return user.objectResponse;
+        })
+      );
+  }
+
+  public getLinkBusiness(bussiness) {
+    return this.http
+      .post(`${this.url + this.apiGetLinkBusiness}`, bussiness , this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(

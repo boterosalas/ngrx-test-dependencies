@@ -18,11 +18,11 @@
         &::before {
             content: "";
             background: url("/assets/img/menu-mobile/mi-perfil.svg") no-repeat;
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             position: absolute;
             top: 24%;
-            left: 2%;
+            left: 1%;
         }
     }
 
@@ -30,23 +30,23 @@
         &::before {
             content: "";
             background: url("/assets/img/menu-mobile/tabla_comisiones.svg") no-repeat;
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             position: absolute;
             top: 24%;
-            left: 2%;
+            left: 1%;
         }
     }
 
     .Negocios{
         &::before {
             content: "";
-            background: url("/assets/img/menu-mobile/menu-dash.svg") no-repeat;
-            width: 16px;
-            height: 16px;
+            background: url("/assets/img/menu-mobile/negocios.svg") no-repeat;
+            width: 20px;
+            height: 20px;
             position: absolute;
             top: 24%;
-            left: 2%;
+            left: 1%;
             background-size: 100%;
         }
     }
@@ -55,23 +55,23 @@
         &::before {
             content: "";
             background: url("/assets/img/menu-mobile/historial_links.svg") no-repeat;
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             position: absolute;
             top: 24%;
-            left: 2%;
+            left: 1%;
         }
     }
 
     .Inicio, .DashBoard{
         &::before {
             content: "";
-            background: url("/assets/img/menu-mobile/inicio.svg") no-repeat;
-            width: 16px;
-            height: 16px;
+            background: url("/assets/img/menu-mobile/dashboard.svg") no-repeat;
+            width: 20px;
+            height: 20px;
             position: absolute;
             top: 24%;
-            left: 2%;
+            left: 1%;
         }
     }
 
@@ -79,11 +79,11 @@
         &::before {
             content: "";
             background: url("/assets/img/menu-mobile/clickacademy.svg") no-repeat;
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             position: absolute;
             top: 24%;
-            left: 2%;
+            left: 1%;
         }
     }
 
@@ -91,11 +91,11 @@
         &::before {
             content: "";
             background: url("/assets/img/menu-mobile/preguntas-frecuentes.svg") no-repeat;
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             position: absolute;
             top: 24%;
-            left: 2%;
+            left: 1%;
         }
     }
 
@@ -103,11 +103,11 @@
         &::before {
             content: "";
             background: url("/assets/img/menu-mobile/reportes.svg") no-repeat;
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             position: absolute;
             top: 24%;
-            left: 2%;
+            left: 1%;
         }
     }
 
@@ -115,11 +115,23 @@
         &::before {
             content: "";
             background: url("/assets/img/menu-mobile/whatsapp.svg") no-repeat;
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             position: absolute;
             top: 24%;
-            left: 2%;
+            left: 1%;
+        }
+    }
+
+    .Generador.de.Links{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/icon-generados-links.svg") no-repeat;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 24%;
+            left: 1%;
         }
     }
 
@@ -127,11 +139,11 @@
         &::before {
             content: "";
             background: url("/assets/img/menu-mobile/referidos.svg") no-repeat;
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             position: absolute;
             top: 24%;
-            left: 2%;
+            left: 1%;
         }
     }
 
@@ -139,11 +151,11 @@
         &::before {
             content: "";
             background: url("/assets/img/menu-mobile/cerrar-sesion.svg") no-repeat;
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             position: absolute;
             top: 33%;
-            left: 2%;
+            left: 1%;
         }
     }
 
