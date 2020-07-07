@@ -110,12 +110,11 @@
           id="btnCopy"
           color="orange"
           [disabled]="enableButton === false"
-          ngClass="{{classButtonCopy}}"
+          class="button-height"
           (click)="copyInputMessage(linkInput)"
         >
           <span
             fxLayoutAlign="center space-between"
-            ngClass="{{classButtonCopy}}"
           >
             {{ "GENERIC.COPY_LINK" | translate }}
           </span>
