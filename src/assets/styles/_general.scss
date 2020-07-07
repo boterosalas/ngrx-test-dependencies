@@ -23,10 +23,15 @@ body {
 .reportes,
 .historial-links,
 .centro-de-ayuda,
-.inicio {
+.inicio
+{
   &-page {
     background: $bg-gray;
   }
+}
+
+.maincontent{
+  background: $bg-gray;
 }
 
 .slide {
@@ -1063,8 +1068,8 @@ th.mat-header-cell {
 .mat-select-arrow {
   border: none !important;
   background: url("/assets/img/arrow-down.svg") no-repeat;
-  width: 20px !important;
-  height: 20px !important;
+  width: 26px !important;
+  height: 26px !important;
   background-size: 25px;
   position: relative;
   bottom: 4px;
@@ -1768,7 +1773,7 @@ app-menu-help-center {
   }
 }
 
-.searchUser {
+.searchUser, .search {
   .mat-form-field-appearance-outline .mat-form-field-outline {
     background: #fff !important;
   }
