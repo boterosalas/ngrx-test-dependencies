@@ -32,6 +32,8 @@ import { RefersComponent } from './pages/refers/refers.component';
 import { ResumeComponent } from './components/resume/resume.component';
 import { CardDashboardComponent } from './components/card-dashboard/card-dashboard.component';
 import { TableBussinessComponent } from './components/table-bussiness/table-bussiness.component';
+import { LinkGeneratorComponent } from './pages/link-generator/link-generator.component';
+import { LinkGeneratorFormComponent } from './components/link-generator-form/link-generator-form.component';
 
 const routes: Routes = [
   {
@@ -81,6 +83,14 @@ const routes: Routes = [
     data: {
       role: "ADMIN"
     },
+  },
+  {
+    path: "generador-links",
+    component: LinkGeneratorComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN"
+    },
   }
 ];
 
@@ -101,7 +111,9 @@ const routes: Routes = [
     RefersComponent,
     ResumeComponent,
     CardDashboardComponent,
-    TableBussinessComponent
+    TableBussinessComponent,
+    LinkGeneratorComponent,
+    LinkGeneratorFormComponent
   ],
   imports: [
     CommonModule,

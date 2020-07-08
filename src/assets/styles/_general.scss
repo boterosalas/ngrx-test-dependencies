@@ -6,25 +6,51 @@ body {
   color: $color-p;
 }
 
-.bg-gray{
+.bg-gray {
   background: $bg-gray;
 }
 
-.dashboard{
-  &-page{
+.dashboard,
+.generador-links,
+.reportes-admin,
+.usuarios,
+.auditoria,
+.negocios-admin,
+.referidos-admin,
+.click-academy,
+.tabla-comisiones,
+.mi-perfil,
+.reportes,
+.historial-links,
+.centro-de-ayuda,
+.inicio
+{
+  &-page {
     background: $bg-gray;
   }
 }
 
-.mat-row:nth-child(even), thead{
-  background-color:#F3F1F6 !important;
+.maincontent{
+  background: $bg-gray;
 }
 
-table tr:nth-child(even){
-  background-color:#F3F1F6 !important;
+.slide {
+  span{
+    background: $bg-gray;
+  }
 }
 
-thead, th.mat-header-cell{
+.mat-row:nth-child(even),
+thead {
+  background-color: #f3f1f6 !important;
+}
+
+table tr:nth-child(even) {
+  background-color: #f3f1f6 !important;
+}
+
+thead,
+th.mat-header-cell {
   color: $primary-color !important;
 }
 
@@ -36,7 +62,8 @@ body {
   // background: #fff;
 }
 
-.mat-drawer-container, .mat-dialog-container{
+.mat-drawer-container,
+.mat-dialog-container {
   color: $color-p;
 }
 
@@ -375,6 +402,9 @@ button {
   &-height {
     min-height: 48px;
   }
+  &-small {
+    width: 160px;
+  }
 }
 
 .card-login {
@@ -546,41 +576,43 @@ table {
 }
 
 .head {
-  .mat-expansion-indicator::after{
-      position: relative;
-      top: -5px;
+  .mat-expansion-indicator::after {
+    position: relative;
+    top: -5px;
   }
 }
 
-.help-center{
+.help-center {
   .mat-content {
     color: $color-p;
     font-family: $font-galano-bold;
     font-size: 13px;
   }
-  .mat-expansion-panel-content{
+  .mat-expansion-panel-content {
     background: #ffffff;
   }
-  .mat-list-item{
+  .mat-list-item {
     color: $gray4;
-    &.active{
+    &.active {
       color: $primary-color;
     }
   }
-  .mat-expansion-panel-body{
+  .mat-expansion-panel-body {
     padding: 0 !important;
   }
-  .mat-list-base .mat-list-item, .mat-list-base .mat-list-option {
+  .mat-list-base .mat-list-item,
+  .mat-list-base .mat-list-option {
     height: auto !important;
     padding: 4px 0px !important;
   }
-  .mat-list-base .mat-list-item .mat-list-item-content, .mat-list-base .mat-list-option .mat-list-item-content{
+  .mat-list-base .mat-list-item .mat-list-item-content,
+  .mat-list-base .mat-list-option .mat-list-item-content {
     font-size: 14px;
     padding: 0px 23px !important;
   }
 }
 
-.mat-expansion-panel-header{
+.mat-expansion-panel-header {
   position: relative;
 }
 
@@ -705,8 +737,7 @@ table {
 }
 
 @media screen and (max-width: 600px) {
-
-  .editaccount{
+  .editaccount {
     width: 90%;
   }
 
@@ -735,7 +766,7 @@ table {
   app-bussiness-card {
     width: 46%;
     @media screen and (max-width: 600px) {
-      .mat-card{
+      .mat-card {
         padding: 11px !important;
         min-height: 132px;
       }
@@ -1037,8 +1068,8 @@ th.mat-header-cell {
 .mat-select-arrow {
   border: none !important;
   background: url("/assets/img/arrow-down.svg") no-repeat;
-  width: 20px !important;
-  height: 20px !important;
+  width: 26px !important;
+  height: 26px !important;
   background-size: 25px;
   position: relative;
   bottom: 4px;
@@ -1617,49 +1648,47 @@ joy-close-button.joyride-step__close svg {
   }
 }
 
-
-.inf{
-  p{
+.inf {
+  p {
     margin: 0;
     color: $secondary-color;
   }
 }
 
-
-.table-payment{
+.table-payment {
   width: 100%;
   text-align: center;
-  border: 1px solid #F3F1F6;
-  thead{
-      th{
-          background: #F3F1F6;
-          text-transform: uppercase;
-          color: $primary-color;
-      }
+  border: 1px solid #f3f1f6;
+  thead {
+    th {
+      background: #f3f1f6;
+      text-transform: uppercase;
+      color: $primary-color;
+    }
   }
 }
 
-
-.mat-sidenav{
-  .social-links i{
-    color:#b5b8bc;
+.mat-sidenav {
+  .social-links i {
+    color: #b5b8bc;
   }
 }
 
 .fullheight {
-  footer{
+  footer {
     background: #ffffff !important;
   }
-  .social-links i{
-    color:#b5b8bc !important;
+  .social-links i {
+    color: #b5b8bc !important;
   }
-  h3{
+  h3 {
     color: $primary-color !important;
   }
-  p, a{
+  p,
+  a {
     color: $color-p !important;
   }
-  .width-border{
+  .width-border {
     span {
       color: $color-p !important;
     }
@@ -1670,65 +1699,82 @@ app-menu-help-center {
   margin-bottom: 10px;
 }
 
-.slick-prev:before, .slick-next:before{
+.slick-prev:before,
+.slick-next:before {
   font-size: 40px !important;
 }
 
-.purple2{
+.purple2 {
   color: $purple2;
 }
 
 #newTerms {
-  #closeDialog{
+  #closeDialog {
     display: none;
   }
 }
 
 .card {
   &-0 {
-      .mat-card{
-          background: transparent linear-gradient(90deg, #735CF2 0%, #968BF4 100%) 0% 0% no-repeat padding-box;
-      }
+    .mat-card {
+      background: transparent linear-gradient(90deg, #735cf2 0%, #968bf4 100%)
+        0% 0% no-repeat padding-box;
+    }
   }
   &-1 {
-      .mat-card{
-         background: transparent linear-gradient(90deg, #5F71DA 0%, #608DDD 100%) 0% 0% no-repeat padding-box;
-      }
+    .mat-card {
+      background: transparent linear-gradient(90deg, #5f71da 0%, #608ddd 100%)
+        0% 0% no-repeat padding-box;
+    }
   }
   &-2 {
-      .mat-card{
-        background: transparent linear-gradient(90deg, #92D4D4 0%, #70C2CB 100%) 0% 0% no-repeat padding-box;
-      }
+    .mat-card {
+      background: transparent linear-gradient(90deg, #92d4d4 0%, #70c2cb 100%)
+        0% 0% no-repeat padding-box;
+    }
   }
   &-3 {
-      .mat-card{
-        background: transparent linear-gradient(90deg, #FF9696 0%, #FF7C7C 100%) 0% 0% no-repeat padding-box;
-      }
+    .mat-card {
+      background: transparent linear-gradient(90deg, #ff9696 0%, #ff7c7c 100%)
+        0% 0% no-repeat padding-box;
+    }
   }
   &-4 {
-      .mat-card{
-        background: transparent linear-gradient(90deg, #FCCA90 0%, #FFB664 100%) 0% 0% no-repeat padding-box;
-      }
+    .mat-card {
+      background: transparent linear-gradient(90deg, #fcca90 0%, #ffb664 100%)
+        0% 0% no-repeat padding-box;
+    }
   }
   &-5 {
-      .mat-card{
-        background: transparent linear-gradient(90deg, #A3BCF9 0%, #868FF8 100%) 0% 0% no-repeat padding-box;
-      }
+    .mat-card {
+      background: transparent linear-gradient(90deg, #a3bcf9 0%, #868ff8 100%)
+        0% 0% no-repeat padding-box;
+    }
   }
 }
 
-.md-drppicker .ranges ul li button.active{
+.md-drppicker .ranges ul li button.active {
   background: $primary-color !important;
 }
 
-
-#account{
-  .mat-dialog-content{
-      overflow-x: hidden;
+#account {
+  .mat-dialog-content {
+    overflow-x: hidden;
   }
 }
 
-.mat-sort-header-button{
-  font-family:$font-galano-bold !important;
+.mat-sort-header-button {
+  font-family: $font-galano-bold !important;
 }
 
+.forml {
+  .mat-form-field-infix {
+    background: #fff !important;
+  }
+}
+
+.searchUser, .search {
+  .mat-form-field-appearance-outline .mat-form-field-outline {
+    background: #fff !important;
+  }
+}
