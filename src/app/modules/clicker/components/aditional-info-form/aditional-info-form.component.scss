@@ -25,3 +25,14 @@ label {
 span.info {
     width: 220px;
 }
+
+.info-basic{
+    .mat-card-header{
+        background: #F3F1F6;
+        color: $primary-color;
+    }
+}
+
+.iph{
+    min-height: 140px;
+}
