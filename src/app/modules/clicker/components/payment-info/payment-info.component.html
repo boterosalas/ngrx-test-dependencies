@@ -3,393 +3,387 @@
   class="info-basic"
   [formGroup]="externalForm"
 >
+<div fxLayout.gt-xs="row" fxLayoutGap.gt-xs="20px" class="mt-3">
+  <mat-card class="p-0 mb-3">
+    <mat-card-header>
+      <mat-card-title><h3 class="mt-2 mb-2 f-18">{{ "REGISTER.INFO_HOME" | translate }}</h3></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
 
-<mat-accordion class="ml-2 mr-2 additional-info">
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <h3 class="gray m-0">{{ "REGISTER.INFO_HOME" | translate }}</h3>
-      </mat-panel-title>
-    </mat-expansion-panel-header>
+      <span
+            fxLayout="row"
+            fxLayout.xs="column"
+            fxLayoutGap="80px"
+            fxLayoutGap.xs="0px"
+            class="item"
+            fxLayoutAlign="start center"
+            fxLayoutAlign.xs="start start"
+          >
+            <label
+              fxLayout="column"
+              fxFLex="50"
+              fxFLex.xs="0"
+              fxLayout.xs="row"
+              >{{ 'REGISTER.DEPARTMENT' | translate }}</label
+            >
+            <span
+              class="info"
+              ngClass.xs="w-100"
+              fxLayout="column"
+              fxLayout.xs="row"
+              fxFLex="70"
+              fxFLex.xs="0"
+            >
+              <mat-form-field>
+                <input
+                matInput
+                id="departmentCode"
+                [matAutocomplete]="auto"
+                formControlName="department"
+                autocomplete="nope"
+                (blur)="checkDepartment()"
+              />
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayDepartment">
+                <mat-option
+                  (onSelectionChange)="selectDepartment(department)"
+                  *ngFor="let department of filteredDepartments | async; let i = index"
+                  [value]="department"
+                >
+                  <span>{{ department.description }}</span>
+                </mat-option>
+              </mat-autocomplete>
+          
+              <mat-error
+                id="requiredDepartment"
+                *ngIf="
+                  externalForm.controls.department.invalid &&
+                  externalForm.controls.department.errors.required
+                "
+                >{{
+                  "GENERIC.REQUIRED" | translate: { formValue: "Departamento" }
+                }}</mat-error
+              >
+              <mat-error
+                id="selectDepartementError"
+                *ngIf="
+                  externalForm.controls.department.invalid &&
+                  externalForm.controls.department.errors.incorrect
+                "
+                >{{ "REGISTER.ERROR_DEPARTMENT" | translate }}</mat-error
+              >
+              </mat-form-field>
+            </span>
+      </span>
 
-    <span
-          fxLayout="row"
-          fxLayout.xs="column"
-          fxLayoutGap="80px"
-          fxLayoutGap.xs="0px"
-          class="item"
-          fxLayoutAlign="start center"
-          fxLayoutAlign.xs="start start"
-        >
-          <label
-            fxLayout="column"
-            fxFLex="50"
-            fxFLex.xs="0"
-            fxLayout.xs="row"
-            >{{ 'REGISTER.DEPARTMENT' | translate }}</label
+      <span
+            fxLayout="row"
+            fxLayout.xs="column"
+            fxLayoutGap="80px"
+            fxLayoutGap.xs="0px"
+            class="item"
+            fxLayoutAlign="start center"
+            fxLayoutAlign.xs="start start"
           >
-          <span
-            class="info"
-            ngClass.xs="w-100"
-            fxLayout="column"
-            fxLayout.xs="row"
-            fxFLex="70"
-            fxFLex.xs="0"
-          >
+            <label
+              fxLayout="column"
+              fxFLex="50"
+              fxFLex.xs="0"
+              fxLayout.xs="row"
+              >{{ 'REGISTER.CITY' | translate }}</label
+            >
+            <span
+              class="info"
+              ngClass.xs="w-100"
+              fxLayout="column"
+              fxLayout.xs="row"
+              fxFLex="70"
+              fxFLex.xs="0"
+            >
             <mat-form-field>
               <input
-              matInput
-              id="departmentCode"
-              [matAutocomplete]="auto"
-              formControlName="department"
-              autocomplete="nope"
-              (blur)="checkDepartment()"
-            />
-            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayDepartment">
-              <mat-option
-                (onSelectionChange)="selectDepartment(department)"
-                *ngFor="let department of filteredDepartments | async; let i = index"
-                [value]="department"
+                matInput
+                id="city"
+                [matAutocomplete]="city"
+                formControlName="city"
+                autocomplete="nope"
+                (blur)="checkCity()"
+              />
+              <mat-autocomplete #city="matAutocomplete">
+                <mat-option
+                  (onSelectionChange)="selectCity(city)"
+                  *ngFor="let city of filteredCities | async"
+                  [(value)]="city.description"
+                >
+                  <span>{{ city.description }}</span>
+                </mat-option>
+              </mat-autocomplete>
+          
+              <mat-error
+                id="selectCityError"
+                *ngIf="
+                  externalForm.controls.city.invalid &&
+                  externalForm.controls.city.errors.incorrectCity
+                "
+                >{{ "REGISTER.ERROR_CITY" | translate }}</mat-error
               >
-                <span>{{ department.description }}</span>
-              </mat-option>
-            </mat-autocomplete>
-        
-            <mat-error
-              id="requiredDepartment"
-              *ngIf="
-                externalForm.controls.department.invalid &&
-                externalForm.controls.department.errors.required
-              "
-              >{{
-                "GENERIC.REQUIRED" | translate: { formValue: "Departamento" }
-              }}</mat-error
-            >
-            <mat-error
-              id="selectDepartementError"
-              *ngIf="
-                externalForm.controls.department.invalid &&
-                externalForm.controls.department.errors.incorrect
-              "
-              >{{ "REGISTER.ERROR_DEPARTMENT" | translate }}</mat-error
-            >
+          
+              <mat-error
+                id="requiredCity"
+                *ngIf="
+                  externalForm.controls.city.invalid &&
+                  externalForm.controls.city.errors.required
+                "
+                >{{ "GENERIC.REQUIRED" | translate: { formValue: "Ciudad" } }}</mat-error
+              >
             </mat-form-field>
-          </span>
-    </span>
-
-    <span
-          fxLayout="row"
-          fxLayout.xs="column"
-          fxLayoutGap="80px"
-          fxLayoutGap.xs="0px"
-          class="item"
-          fxLayoutAlign="start center"
-          fxLayoutAlign.xs="start start"
+            </span>
+      </span>
+    
+      <span
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutGap="80px"
+      fxLayoutGap.xs="0px"
+      class="item"
+      fxLayoutAlign="start center"
+      fxLayoutAlign.xs="start start"
+    >
+      <label
+        fxLayout="column"
+        fxFLex="50"
+        fxFLex.xs="0"
+        fxLayout.xs="row"
+        >{{ 'REGISTER.ADDRESS' | translate }}</label
+      >
+      <span
+        class="info"
+        ngClass.xs="w-100"
+        fxLayout="column"
+        fxLayout.xs="row"
+        fxFLex="70"
+        fxFLex.xs="0"
+      >
+      <mat-form-field>
+        <input
+          matInput
+          id="address"
+          type="text"
+          formControlName="address"
+          autocomplete="off"
+        />
+    
+        <mat-error
+          id="requiredAddress"
+          *ngIf="
+            externalForm.controls.address.invalid &&
+            externalForm.controls.address.errors.required
+          "
+          >{{ "GENERIC.REQUIRED" | translate: { formValue: "Ciudad" } }}</mat-error
         >
-          <label
-            fxLayout="column"
-            fxFLex="50"
-            fxFLex.xs="0"
-            fxLayout.xs="row"
-            >{{ 'REGISTER.CITY' | translate }}</label
+      </mat-form-field>
+      </span>
+      </span>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="p-0 mb-3">
+    <mat-card-header>
+      <mat-card-title><h3 class="mt-2 mb-2 f-18">{{ "REGISTER.ACOUNT_INFO" | translate }}</h3></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <span
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutGap="80px"
+      fxLayoutGap.xs="0px"
+      class="item"
+      fxLayoutAlign="start center"
+      fxLayoutAlign.xs="start start"
+    >
+      <label
+        fxLayout="column"
+        fxFLex="50"
+        fxFLex.xs="0"
+        fxLayout.xs="row"
+        >{{ 'REGISTER.BANK' | translate }}</label
+      >
+      <span
+        class="info"
+        ngClass.xs="w-100"
+        fxLayout="column"
+        fxLayout.xs="row"
+        fxFLex="70"
+        fxFLex.xs="0"
+      >
+      <mat-form-field>
+        <mat-select
+          placeholder="Seleccione"
+          id="bank"
+          formControlName="bank"
+        >
+          <!-- <mat-option>{{ "REGISTER.BANK" | translate }}</mat-option> -->
+          <mat-option *ngFor="let bank of banks" value="{{ bank.description }}">
+            <span>{{ bank.description }}</span></mat-option
           >
-          <span
-            class="info"
-            ngClass.xs="w-100"
-            fxLayout="column"
-            fxLayout.xs="row"
-            fxFLex="70"
-            fxFLex.xs="0"
+        </mat-select>
+    
+        <mat-error
+          id="requiredBank"
+          *ngIf="
+            externalForm.controls.bank.invalid &&
+            externalForm.controls.bank.errors.required
+          "
+          >{{ "GENERIC.REQUIRED" | translate: { formValue: "Banco" } }}</mat-error
+        >
+      </mat-form-field>
+      </span>
+      </span>
+
+      <span
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutGap="80px"
+      fxLayoutGap.xs="0px"
+      class="item"
+      fxLayoutAlign="start center"
+      fxLayoutAlign.xs="start start"
+    >
+      <label
+        fxLayout="column"
+        fxFLex="50"
+        fxFLex.xs="0"
+        fxLayout.xs="row"
+        >{{ 'REGISTER.TYPE_ACCOUNT' | translate }}</label
+      >
+      <span
+        class="info"
+        ngClass.xs="w-100"
+        fxLayout="column"
+        fxLayout.xs="row"
+        fxFLex="70"
+        fxFLex.xs="0"
+      >
+      <mat-form-field>
+        <mat-select
+          placeholder="Seleccione"
+          id="typeAccount"
+          formControlName="typeAccount"
+        >
+          <mat-option *ngFor="let account of typeAccount" value="{{ account.id }}"
+            ><span>{{ account.description }}</span></mat-option
           >
-          <mat-form-field>
-            <input
-              matInput
-              id="city"
-              [matAutocomplete]="city"
-              formControlName="city"
-              autocomplete="nope"
-              (blur)="checkCity()"
-            />
-            <mat-autocomplete #city="matAutocomplete">
-              <mat-option
-                (onSelectionChange)="selectCity(city)"
-                *ngFor="let city of filteredCities | async"
-                [(value)]="city.description"
-              >
-                <span>{{ city.description }}</span>
-              </mat-option>
-            </mat-autocomplete>
-        
-            <mat-error
-              id="selectCityError"
-              *ngIf="
-                externalForm.controls.city.invalid &&
-                externalForm.controls.city.errors.incorrectCity
-              "
-              >{{ "REGISTER.ERROR_CITY" | translate }}</mat-error
-            >
-        
-            <mat-error
-              id="requiredCity"
-              *ngIf="
-                externalForm.controls.city.invalid &&
-                externalForm.controls.city.errors.required
-              "
-              >{{ "GENERIC.REQUIRED" | translate: { formValue: "Ciudad" } }}</mat-error
-            >
-          </mat-form-field>
-          </span>
-    </span>
-  
-    <span
-    fxLayout="row"
-    fxLayout.xs="column"
-    fxLayoutGap="80px"
-    fxLayoutGap.xs="0px"
-    class="item"
-    fxLayoutAlign="start center"
-    fxLayoutAlign.xs="start start"
-  >
-    <label
-      fxLayout="column"
-      fxFLex="50"
-      fxFLex.xs="0"
-      fxLayout.xs="row"
-      >{{ 'REGISTER.ADDRESS' | translate }}</label
-    >
-    <span
-      class="info"
-      ngClass.xs="w-100"
-      fxLayout="column"
-      fxLayout.xs="row"
-      fxFLex="70"
-      fxFLex.xs="0"
-    >
-    <mat-form-field>
-      <input
-        matInput
-        id="address"
-        type="text"
-        formControlName="address"
-        autocomplete="off"
-      />
-  
-      <mat-error
-        id="requiredAddress"
-        *ngIf="
-          externalForm.controls.address.invalid &&
-          externalForm.controls.address.errors.required
-        "
-        >{{ "GENERIC.REQUIRED" | translate: { formValue: "Ciudad" } }}</mat-error
-      >
-    </mat-form-field>
-    </span>
-    </span>
- 
-  </mat-expansion-panel>
-</mat-accordion>
-
-<mat-accordion class="ml-2 mr-2 additional-info">
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <h3 class="gray m-0">{{ "REGISTER.ACOUNT_INFO" | translate }}</h3>
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-
-    <span
-    fxLayout="row"
-    fxLayout.xs="column"
-    fxLayoutGap="80px"
-    fxLayoutGap.xs="0px"
-    class="item"
-    fxLayoutAlign="start center"
-    fxLayoutAlign.xs="start start"
-  >
-    <label
-      fxLayout="column"
-      fxFLex="50"
-      fxFLex.xs="0"
-      fxLayout.xs="row"
-      >{{ 'REGISTER.BANK' | translate }}</label
-    >
-    <span
-      class="info"
-      ngClass.xs="w-100"
-      fxLayout="column"
-      fxLayout.xs="row"
-      fxFLex="70"
-      fxFLex.xs="0"
-    >
-    <mat-form-field>
-      <mat-select
-        placeholder="Seleccione"
-        id="bank"
-        formControlName="bank"
-      >
-        <!-- <mat-option>{{ "REGISTER.BANK" | translate }}</mat-option> -->
-        <mat-option *ngFor="let bank of banks" value="{{ bank.description }}">
-          <span>{{ bank.description }}</span></mat-option
+        </mat-select>
+    
+        <mat-error
+          id="requiredTypeAccount"
+          *ngIf="
+            externalForm.controls.typeAccount.invalid &&
+            externalForm.controls.typeAccount.errors.required
+          "
+          >{{
+            "GENERIC.REQUIRED" | translate: { formValue: "Tipo de cuenta" }
+          }}</mat-error
         >
-      </mat-select>
-  
-      <mat-error
-        id="requiredBank"
-        *ngIf="
-          externalForm.controls.bank.invalid &&
-          externalForm.controls.bank.errors.required
-        "
-        >{{ "GENERIC.REQUIRED" | translate: { formValue: "Banco" } }}</mat-error
-      >
-    </mat-form-field>
-    </span>
-    </span>
-
-    <span
-    fxLayout="row"
-    fxLayout.xs="column"
-    fxLayoutGap="80px"
-    fxLayoutGap.xs="0px"
-    class="item"
-    fxLayoutAlign="start center"
-    fxLayoutAlign.xs="start start"
-  >
-    <label
-      fxLayout="column"
-      fxFLex="50"
-      fxFLex.xs="0"
-      fxLayout.xs="row"
-      >{{ 'REGISTER.TYPE_ACCOUNT' | translate }}</label
+      </mat-form-field>
+      </span>
+      </span>
+    
+      <span
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutGap="80px"
+      fxLayoutGap.xs="0px"
+      class="item"
+      fxLayoutAlign="start center"
+      fxLayoutAlign.xs="start start"
     >
-    <span
-      class="info"
-      ngClass.xs="w-100"
-      fxLayout="column"
-      fxLayout.xs="row"
-      fxFLex="70"
-      fxFLex.xs="0"
-    >
-    <mat-form-field>
-      <mat-select
-        placeholder="Seleccione"
-        id="typeAccount"
-        formControlName="typeAccount"
+      <label
+        fxLayout="column"
+        fxFLex="50"
+        fxFLex.xs="0"
+        fxLayout.xs="row"
+        >{{ 'REGISTER.NUMBER_ACCOUNT' | translate }}</label
       >
-        <mat-option *ngFor="let account of typeAccount" value="{{ account.id }}"
-          ><span>{{ account.description }}</span></mat-option
+      <span
+        class="info"
+        ngClass.xs="w-100"
+        fxLayout="column"
+        fxLayout.xs="row"
+        fxFLex="70"
+        fxFLex.xs="0"
+      >
+      <mat-form-field>
+        <input
+          spacebar
+          matInput
+          id="numberAccount"
+          type="text"
+          formControlName="numberAccount"
+        />
+    
+        <mat-error
+          id="requiredTypeAccount"
+          *ngIf="
+            externalForm.controls.numberAccount.invalid &&
+            externalForm.controls.numberAccount.errors.required
+          "
+          >{{
+            "GENERIC.REQUIRED" | translate: { formValue: "Número de cuenta" }
+          }}</mat-error
         >
-      </mat-select>
-  
-      <mat-error
-        id="requiredTypeAccount"
-        *ngIf="
-          externalForm.controls.typeAccount.invalid &&
-          externalForm.controls.typeAccount.errors.required
-        "
-        >{{
-          "GENERIC.REQUIRED" | translate: { formValue: "Tipo de cuenta" }
-        }}</mat-error
-      >
-    </mat-form-field>
-    </span>
-    </span>
-  
-    <span
-    fxLayout="row"
-    fxLayout.xs="column"
-    fxLayoutGap="80px"
-    fxLayoutGap.xs="0px"
-    class="item"
-    fxLayoutAlign="start center"
-    fxLayoutAlign.xs="start start"
-  >
-    <label
-      fxLayout="column"
-      fxFLex="50"
-      fxFLex.xs="0"
-      fxLayout.xs="row"
-      >{{ 'REGISTER.NUMBER_ACCOUNT' | translate }}</label
-    >
-    <span
-      class="info"
-      ngClass.xs="w-100"
-      fxLayout="column"
-      fxLayout.xs="row"
-      fxFLex="70"
-      fxFLex.xs="0"
-    >
-    <mat-form-field>
-      <input
-        spacebar
-        matInput
-        id="numberAccount"
-        type="text"
-        formControlName="numberAccount"
-      />
-  
-      <mat-error
-        id="requiredTypeAccount"
-        *ngIf="
-          externalForm.controls.numberAccount.invalid &&
-          externalForm.controls.numberAccount.errors.required
-        "
-        >{{
-          "GENERIC.REQUIRED" | translate: { formValue: "Número de cuenta" }
-        }}</mat-error
-      >
-  
-      <mat-error
-        id="invalidNumber"
-        *ngIf="
-          externalForm.controls.numberAccount.invalid &&
-          externalForm.controls.numberAccount.errors.pattern
-        "
-        >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
-      >
-  
-      <mat-error
-        id="minAccount"
-        *ngIf="
-          externalForm.controls.numberAccount.invalid &&
-          externalForm.controls.numberAccount.errors.minlength
-        "
-        >{{
-          "GENERIC.MIN_CHARACTERS"
-            | translate
-              : {
-                  minchar:
-                    externalForm.controls.numberAccount.errors.minlength
-                      .requiredLength
-                }
-        }}</mat-error
-      >
-  
-      <mat-error
-        id="maxAccount"
-        *ngIf="
-          externalForm.controls.numberAccount.invalid &&
-          externalForm.controls.numberAccount.errors.maxlength
-        "
-        >{{
-          "GENERIC.MAX_CHARACTERS"
-            | translate
-              : {
-                  maxchar:
-                    externalForm.controls.numberAccount.errors.maxlength
-                      .requiredLength
-                }
-        }}</mat-error
-      >
-    </mat-form-field>
-    </span>
-    </span>
-  </mat-expansion-panel>
-</mat-accordion>
-
-  <p class="additional-info">{{ "REGISTER.ADITIONAL_FILE" | translate }}</p>
+    
+        <mat-error
+          id="invalidNumber"
+          *ngIf="
+            externalForm.controls.numberAccount.invalid &&
+            externalForm.controls.numberAccount.errors.pattern
+          "
+          >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+        >
+    
+        <mat-error
+          id="minAccount"
+          *ngIf="
+            externalForm.controls.numberAccount.invalid &&
+            externalForm.controls.numberAccount.errors.minlength
+          "
+          >{{
+            "GENERIC.MIN_CHARACTERS"
+              | translate
+                : {
+                    minchar:
+                      externalForm.controls.numberAccount.errors.minlength
+                        .requiredLength
+                  }
+          }}</mat-error
+        >
+    
+        <mat-error
+          id="maxAccount"
+          *ngIf="
+            externalForm.controls.numberAccount.invalid &&
+            externalForm.controls.numberAccount.errors.maxlength
+          "
+          >{{
+            "GENERIC.MAX_CHARACTERS"
+              | translate
+                : {
+                    maxchar:
+                      externalForm.controls.numberAccount.errors.maxlength
+                        .requiredLength
+                  }
+          }}</mat-error
+        >
+      </mat-form-field>
+      </span>
+      </span>
+    </mat-card-content>
+  </mat-card>
+</div>
+  <h3 class="f-18">{{ "REGISTER.ADITIONAL_FILE" | translate }}</h3>
 
   <p>{{ "REGISTER.INFO_ADDITIONAL" | translate }}</p>
-  <p class="black">
+  <p class="purple-text">
     <strong>{{ "REGISTER.INFO_ADDITIONAL_2" | translate }}</strong>
   </p>
   <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px">
