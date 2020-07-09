@@ -1,6 +1,21 @@
 <!-- <app-logo></app-logo> -->
 <app-slider Class="gtmHomeClicBanner" [showArrows]="true" [isSlider]="true"  (action)="sliderOffers()"  [sliderMobile]="sliderMobile" [sliderWeb]="sliderWeb"></app-slider>
 
+<div class="medals container pt-3" *ngIf="auth.isLoggedIn()" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card fxLayout="row" fxLayoutAlign="center center">
+    <div fxLayout="column" fxLayoutAlign="center space-between" fxLayoutGap="5px">
+      <span fxLayout="column">
+        <img class="icon-medal" src="/assets/img/gamification/medalla.svg" alt="icon">
+      </span>
+      <span fxLayout="column" class="f-18 galano-bold white">
+        {{ 'MEDALS.MEDALS' | translate }}
+      </span>
+      <span fxLayout="column">
+        <button mat-raised-button class="purple-text" [routerLink]="[ '/logros']">{{ 'MEDALS.MEDALS_SEE' | translate }}</button>
+      </span>
+    </div>
+  </mat-card>
+</div>
 
 <div class="container" *ngIf="!auth.isLoggedIn()">
   <span class="border-gray d-block"></span>

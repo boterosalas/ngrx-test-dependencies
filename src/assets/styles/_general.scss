@@ -34,6 +34,14 @@ body {
   background: $bg-gray;
 }
 
+.mat-sidenav{
+  background: $bg-gray;
+  .mat-toolbar{
+    background: $bg-gray !important;
+  }
+}
+
+
 .slide {
   span{
     background: $bg-gray;

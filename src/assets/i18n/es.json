@@ -495,5 +495,9 @@
   },
   "BANNERS": {
     "HELP_CENTER": "Centro de ayuda"
+  },
+  "MEDALS": {
+    "MEDALS":"Tus medallas",
+    "MEDALS_SEE":"Ver tus medallas"
   }
 }

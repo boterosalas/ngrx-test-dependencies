@@ -1,4 +1,10 @@
 <div fxLayout="column">
+
+  <span routerLink="logros" (click)="hide()"  *ngIf="(auth.getRole$ | async ) !== 'ADMIN' && auth.isLoggedIn()" class="goals">
+    <span matPrefix class="pr-2"><img src="assets/img/gamification/icon-prize-btn-menu.svg" alt="prize" /></span>
+    {{ 'MEDALS.MEDALS' | translate }}
+  </span>
+
   <span
     *ngFor="let item of options; let i = index"
     routerLink="{{ item.route }}"

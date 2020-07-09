@@ -36,6 +36,7 @@ import { ReferShareComponent } from './components/refer-share/refer-share.compon
 import { TableReferComponent } from './components/table-refer/table-refer.component';
 import { AllBussinessComponent } from './pages/all-bussiness/all-bussiness.component';
 import { AnonymousModule } from '../anonymous/anonymous.module';
+import { AchievementsComponent } from './pages/achievements/achievements.component';
 
 const routes: Routes = [
  
@@ -73,6 +74,11 @@ const routes: Routes = [
     path: "negocios",
     component: AllBussinessComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: "logros",
+    component: AchievementsComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
@@ -99,7 +105,8 @@ const routes: Routes = [
     ReferEmailComponent,
     ReferShareComponent,
     TableReferComponent,
-    AllBussinessComponent
+    AllBussinessComponent,
+    AchievementsComponent
   ],
   imports: [
     CommonModule,
