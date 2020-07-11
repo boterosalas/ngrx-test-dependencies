@@ -37,6 +37,7 @@ import { TableReferComponent } from './components/table-refer/table-refer.compon
 import { AllBussinessComponent } from './pages/all-bussiness/all-bussiness.component';
 import { AnonymousModule } from '../anonymous/anonymous.module';
 import { AchievementsComponent } from './pages/achievements/achievements.component';
+import { CardMedalComponent } from './components/card-medal/card-medal.component';
 
 const routes: Routes = [
  
@@ -106,7 +107,8 @@ const routes: Routes = [
     ReferShareComponent,
     TableReferComponent,
     AllBussinessComponent,
-    AchievementsComponent
+    AchievementsComponent,
+    CardMedalComponent
   ],
   imports: [
     CommonModule,

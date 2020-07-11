@@ -23,27 +23,25 @@ body {
 .reportes,
 .historial-links,
 .centro-de-ayuda,
-.inicio
-{
+.inicio {
   &-page {
     background: $bg-gray;
   }
 }
 
-.maincontent{
+.maincontent {
   background: $bg-gray;
 }
 
-.mat-sidenav{
+.mat-sidenav {
   background: $bg-gray;
-  .mat-toolbar{
+  .mat-toolbar {
     background: $bg-gray !important;
   }
 }
 
-
 .slide {
-  span{
+  span {
     background: $bg-gray;
   }
 }
@@ -665,6 +663,34 @@ table {
 }
 
 @media screen and (min-width: 600px) {
+  .logros-page {
+    padding-bottom: 0;
+    overflow: hidden;
+    min-height: 600px;
+    background: url("/assets/img/gamification/bg-home-gamification.svg")
+        no-repeat,
+      url("/assets/img/gamification/bg-form.svg") no-repeat;
+    background-position: bottom right;
+    background-size: 35%, contain;
+    .mat-card{
+      width: 215px !important;
+      margin-bottom: 1em;
+      p{
+        min-width: 205px;
+      }
+    }
+
+    .percent{
+      bottom: -30px;
+      left: 27px;
+    }
+
+    .block-text {
+      margin-top: 70px;
+    }
+  
+  }
+
   .joyride-step__holder {
     width: 500px;
     img {
@@ -1784,8 +1810,77 @@ app-menu-help-center {
   }
 }
 
-.searchUser, .search {
+.searchUser,
+.search {
   .mat-form-field-appearance-outline .mat-form-field-outline {
     background: #fff !important;
+  }
+}
+
+.logros-page {
+
+  .percent{
+    position: absolute;
+    background: white;
+    color: #4B4853;
+    font-family: $font-galano-bold;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+    line-height: 52px;
+    text-align: center;
+    z-index: 1;
+    bottom: -36px;
+    left: 18px;
+  }
+
+  .text-banner {
+    top: 15% !important;
+  }
+
+  .block-text {
+    margin-top: 45px;
+  }
+
+  .charts-container {
+    margin-top: 110px;
+  }
+
+  .mat-card {
+    width: 43.5%;
+    margin-bottom: 0.8em;
+    p {
+      color: #fff;
+      margin: 3px 0px;
+      text-align: center;
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 350px) {
+    .mat-card {
+      width: 41%;
+    }
+  }
+
+  .medal-0 {
+    background: transparent linear-gradient(180deg, #ff8686 0%, #fd5555 100%) 0%
+      0% no-repeat padding-box;
+  }
+
+  .medal-1 {
+    background: transparent linear-gradient(180deg, #958af3 0%, #735cf2 100%) 0%
+      0% no-repeat padding-box;
+  }
+
+  .medal-2 {
+    background: transparent linear-gradient(180deg, #91d3d3 0%, #70c2cb 100%) 0%
+      0% no-repeat padding-box;
+  }
+
+  .medal-3 {
+    background: transparent linear-gradient(180deg, #608ddd 0%, #5f72da 100%) 0%
+      0% no-repeat padding-box;
   }
 }
