@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-achievements',
@@ -9,6 +10,7 @@ export class AchievementsComponent implements OnInit {
 
   medals = [
     {
+      id:'0',
       classLevel:'bronze',
       percent:'20',
       icon: '/assets/img/gamification/Icon-perfil-completo.svg',
@@ -17,6 +19,7 @@ export class AchievementsComponent implements OnInit {
       nextLevel: 'plata'
      },
     {
+      id:'1',
       classLevel:'silver',
       percent:'85',
       icon: '/assets/img/gamification/Icon-comprador-inteligente.svg',
@@ -25,6 +28,7 @@ export class AchievementsComponent implements OnInit {
       nextLevel: 'Oro'
      },
     {
+      id:'2',
       classLevel:'silver',
       percent:'66',
       icon: '/assets/img/gamification/Icon-vendedor-innato.svg',
@@ -33,6 +37,7 @@ export class AchievementsComponent implements OnInit {
       nextLevel: 'Oro'
      },
     {
+      id:'3',
       classLevel:'gold',
       percent:'100',
       icon: '/assets/img/gamification/Icon-reclutador-estrella.svg',
@@ -42,9 +47,15 @@ export class AchievementsComponent implements OnInit {
      }
   ]
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
+  }
+
+  goToMedal(medal:any) {
+    this.router.navigate(['/medalla', medal.id])
   }
 
 }

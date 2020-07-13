@@ -1,0 +1,35 @@
+<p class="f-20 text-level">Para subir de nivel:</p>
+
+<div fxLayout="row" fxLayoutGap="20px">
+    <mat-card *ngFor="let item of items">
+    
+        <div fxLayout="row" fxLayoutAlign="space-between center " fxLayoutGap="10px">
+            <span fxLayout="column">
+                <img [src]="item.icon" [alt]="item.title">
+            </span>
+            <span fxLayout="column">
+                <h3 class="m-0">{{item.title}}</h3>
+                <p class="m-1">{{item.description}}</p>
+            </span>
+            <div fxLayout="column">
+                <span *ngIf="item.complete === true">
+                    <img src="/assets/img/gamification/Icon-check.svg" alt="check">
+                </span>
+                <span *ngIf="item.complete === false">
+                    <img src="/assets/img/gamification/Icon-check-disabled.svg" alt="check incomplete">
+                </span>
+            </div>
+        </div>
+    
+        <div fxLayoutAlign="center center" fxLayoutGap="10px" class="pt-2">
+            <span fxLayout="column" fxFlex="75">
+                <mat-progress-bar mode="determinate" [value]="(item.progress/item.totalProgress)*100"></mat-progress-bar>
+                
+            </span>
+            <span fxLayout="column" fxFlex="25">
+                {{item.progress}} de {{item.totalProgress}}
+            </span>
+        </div>
+        
+    </mat-card>
+</div>

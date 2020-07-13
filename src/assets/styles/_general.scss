@@ -1453,6 +1453,12 @@ button.swal2-cancel.updatecancel.swal2-styled {
   &-24 {
     font-size: 24px;
   }
+  &-25 {
+    font-size: 25px;
+  }
+  &-26 {
+    font-size: 26px;
+  }
   &-30 {
     font-size: 30px;
   }
@@ -1888,5 +1894,70 @@ app-menu-help-center {
   .medal-3 {
     background: transparent linear-gradient(180deg, #608ddd 0%, #5f72da 100%) 0%
       0% no-repeat padding-box;
+  }
+}
+
+
+.medalla-page{
+  .banner {
+    p{
+        color: #4B4853;
+        margin-bottom: 0;
+        margin: 2px 0px;
+        font-family: $font-galano-bold;
+    }
+  }
+
+  
+  .block-text {
+    padding-top: 55px;
+  }
+
+  .color{
+    &-Oro{
+      color: $gold;
+    }
+    &-Plata{
+      color: $silver;
+    }
+    &-Bronce{
+      color: $bronze;
+    }
+  }
+
+  .g-light{
+    color: #A7A3B1;
+  }
+
+}
+
+.bg-white{
+  background: #ffffff;
+}
+
+.mat-progress-bar {
+  height: 6px !important;
+  border-radius: 10px;
+}
+
+.vendedor-innato{
+  .mat-progress-bar-fill::after{
+    background: $innato !important;
+  }
+}
+
+.comprador-inteligente{
+  .mat-progress-bar-fill::after{
+    background: $comprador !important;
+  }
+}
+
+// .perfil-completo{
+ 
+// }
+
+.reclutador-estrella{
+  .mat-progress-bar-fill::after{
+    background: $reclutador !important;
   }
 }

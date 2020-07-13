@@ -2,5 +2,5 @@
 
 <div class="container" ngClass.gt-xs="minh">
   <p>{{'MEDALS.INTRO' | translate}}</p>
-  <app-card-medal [medals]="medals"></app-card-medal>
+  <app-card-medal [medals]="medals" (medal)="goToMedal($event)"></app-card-medal>
 </div>

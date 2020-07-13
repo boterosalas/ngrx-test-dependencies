@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-card-medal',
@@ -8,10 +8,15 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CardMedalComponent implements OnInit {
 
   @Input() medals:object;
+  @Output() medal = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  infoMedal(event) {
+    this.medal.emit(event);
   }
 
 }

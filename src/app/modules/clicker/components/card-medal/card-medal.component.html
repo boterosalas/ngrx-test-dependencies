@@ -1,6 +1,6 @@
 <div class="set-size charts-container" fxLayout="row wrap" fxLayoutGap="20px">
 
-    <mat-card fxLayout="column" ngClass="position-relative medal-{{i}}" *ngFor="let item of medals; let i = index" fxLayoutAlign="center center">
+    <mat-card fxLayout="column" ngClass="position-relative medal-{{i}} cursor-pointer" *ngFor="let item of medals; let i = index" fxLayoutAlign="center center" (click)="infoMedal(item)">
         <div fxLayout="column" ngClass="pie-wrapper {{item.classLevel}} progress-{{item.percent}}" fxLayoutAlign="center center">
           <div fxLayout="column">
               <div ngClass="label label-bg-{{item.percent}}">
