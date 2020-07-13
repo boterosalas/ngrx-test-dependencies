@@ -1839,6 +1839,12 @@ app-menu-help-center {
     top: 15% !important;
   }
 
+  @media screen and (max-width: 600px) {
+    .text-banner-mobile {
+      top: 0% !important;
+    }
+  }
+
   .block-text {
     margin-top: 45px;
   }
