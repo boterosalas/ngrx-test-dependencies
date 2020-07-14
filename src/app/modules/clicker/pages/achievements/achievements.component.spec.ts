@@ -7,6 +7,8 @@ import { AnonymousModule } from 'src/app/modules/anonymous/anonymous.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { ClickerModule } from '../../clicker.module';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { JwtModule } from '@auth0/angular-jwt';
 
 describe('AchievementsComponent', () => {
   let component: AchievementsComponent;
@@ -20,7 +22,18 @@ describe('AchievementsComponent', () => {
         AppMaterialModule,
         SharedModule,
         ClickerModule,
-        RouterTestingModule.withRoutes([])
+        HttpClientTestingModule,
+        RouterTestingModule.withRoutes([]),
+        JwtModule.forRoot({
+          config: {
+            tokenGetter: () => {
+              return localStorage.getItem("ACCESS_TOKEN");
+            },
+            throwNoTokenError: true,
+            whitelistedDomains: [],
+            blacklistedRoutes: [],
+          },
+        }),
       ]
     })
     .compileComponents();
