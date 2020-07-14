@@ -9,7 +9,6 @@ export class MedalComponent implements OnInit {
   constructor() {}
 
   medal = {
-    id: "0",
     classLevel: "bronze",
     class:"vendedor-innato",
     percent: "65",

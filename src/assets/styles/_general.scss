@@ -1928,6 +1928,14 @@ app-menu-help-center {
   .g-light{
     color: #A7A3B1;
   }
+  
+  @media screen and (max-width: 600px) {
+    .banner{
+      .responsive-img{
+        min-height: 90px;
+      }
+    }
+  }
 
 }
 
@@ -1944,20 +1952,67 @@ app-menu-help-center {
   .mat-progress-bar-fill::after{
     background: $innato !important;
   }
+
+  .levcard{
+    background: transparent linear-gradient(180deg, #71C2CB 0%, #90D2D2 100%) 0% 0% no-repeat padding-box;
+    color: #ffffff;
+  }
+
 }
 
 .comprador-inteligente{
   .mat-progress-bar-fill::after{
     background: $comprador !important;
   }
+
+  .levcard{
+    background: transparent linear-gradient(180deg, #735CF2 0%, #9387F2 100%) 0% 0% no-repeat padding-box;
+    color: #ffffff;
+  }
+
 }
 
-// .perfil-completo{
- 
-// }
+.perfil-completo{
+  .levcard{
+    background: transparent linear-gradient(180deg, #FD6A6A 0%, #FF7C7C 100%) 0% 0% no-repeat padding-box;
+    color: #ffffff;
+  }
+}
 
 .reclutador-estrella{
   .mat-progress-bar-fill::after{
     background: $reclutador !important;
+  }
+
+  .levcard{
+    background: transparent linear-gradient(180deg, #5F72DA 0%, #5F8BDC 100%) 0% 0% no-repeat padding-box;
+    color: #ffffff;
+  }
+
+}
+
+.levcard{
+
+  @media screen and (min-width: 600px) {
+    &::after{
+      content: "";
+      background-image: url("/assets/img/gamification/img-prize.svg");
+      background-repeat: no-repeat;
+      background-position: right center;
+      background-size: 100%;
+      width: 160px;
+      height: 160px;
+      position: absolute;
+      right: -100px;
+      top: -46px;
+      z-index: 100;
+    }
+  }
+}
+
+
+@media screen and (min-width: 1600px) {
+  .whigh{
+    width: 100%;
   }
 }

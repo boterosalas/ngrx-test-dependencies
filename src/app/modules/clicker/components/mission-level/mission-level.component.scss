@@ -5,8 +5,15 @@
     font-family: $font-galano-bold;
 }
 
+@media screen and (min-width: 600px) {
+    
+    .levcard {
+        width: 50%;
+        margin: 0 auto;
+        padding: 30px;
+    }
+}
+
 .levcard {
-    width: 50%;
-    margin: 0 auto;
     text-align: center;
 }

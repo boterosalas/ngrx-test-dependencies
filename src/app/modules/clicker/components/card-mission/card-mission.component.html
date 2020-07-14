@@ -1,6 +1,6 @@
-<p class="f-20 text-level">Para subir de nivel:</p>
+<p class="f-20 text-level" ngClass.xs="text-center">Para subir de nivel:</p>
 
-<div fxLayout="row" fxLayoutGap="20px">
+<div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
     <mat-card *ngFor="let item of items">
     
         <div fxLayout="row" fxLayoutAlign="space-between center " fxLayoutGap="10px">
@@ -21,7 +21,7 @@
             </div>
         </div>
     
-        <div fxLayoutAlign="center center" fxLayoutGap="10px" class="pt-2">
+        <div fxLayoutAlign="center center" fxLayoutGap="10px" class="pt-2" *ngIf="item.progress !== null">
             <span fxLayout="column" fxFlex="75">
                 <mat-progress-bar mode="determinate" [value]="(item.progress/item.totalProgress)*100"></mat-progress-bar>
                 
