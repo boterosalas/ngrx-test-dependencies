@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MissionLevelComponent } from './mission-level.component';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 
 describe('MissionLevelComponent', () => {
   let component: MissionLevelComponent;
@@ -8,7 +9,10 @@ describe('MissionLevelComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MissionLevelComponent ]
+      declarations: [ MissionLevelComponent ],
+      imports: [
+        AppMaterialModule
+      ]
     })
     .compileComponents();
   }));
