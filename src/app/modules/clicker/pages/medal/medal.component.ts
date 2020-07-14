@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { UtilsService } from "src/app/services/utils.service";
 
 @Component({
   selector: "app-medal",
@@ -6,46 +8,14 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./medal.component.scss"],
 })
 export class MedalComponent implements OnInit {
-  constructor() {}
+  constructor(private utils: UtilsService, private router: Router) {}
 
-  medal = {
-    classLevel: "bronze",
-    class:"vendedor-innato",
-    percent: "65",
-    icon: "/assets/img/gamification/Icon-vendedor-innato.svg",
-    level: "Plata",
-    title: "Vendedor innato",
-    nextLevel: "Oro",
-    banner: "/assets/img/gamification/banner-vendedor-innato-pc.jpg",
-    titleMission: "Generar ventas efectivas",
-    missionDescription:"Que los links que compartas se hagan efectivos (Esta medalla solo aplica con links, no aplica referido por cédula)",
-    detail: [
-      {
-        icon: '/assets/img/gamification/icon-ventas-efectivas.svg',
-        title: '50 Ventas efectivas',
-        description: 'a través de links, no aplica referido por cédula.',
-        complete: true,
-        progress: 50,
-        totalProgress: 50
-      },
-      {
-        icon: '/assets/img/gamification/icon-ventas-efectivas.svg',
-        title: '500 Ventas efectivas',
-        description: 'a través de links, no aplica referido por cédula.',
-        complete: false,
-        progress: 50,
-        totalProgress: 500
-      },
-      {
-        icon: '/assets/img/gamification/icon-ventas-efectivas.svg',
-        title: '1000 Ventas efectivas',
-        description: 'a través de links, no aplica referido por cédula.',
-        complete: false,
-        progress: 50,
-        totalProgress: 1000
-      }
-    ]
-  };
+  medal: object;
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.medal = this.utils.medals;
+    if (this.medal === undefined) {
+      this.router.navigate(["/logros"]);
+    }
+  }
 }

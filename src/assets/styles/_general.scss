@@ -1973,6 +1973,11 @@ app-menu-help-center {
 }
 
 .perfil-completo{
+  
+  .mat-progress-bar-fill::after{
+    background: $completo !important;
+  }
+
   .levcard{
     background: transparent linear-gradient(180deg, #FD6A6A 0%, #FF7C7C 100%) 0% 0% no-repeat padding-box;
     color: #ffffff;
