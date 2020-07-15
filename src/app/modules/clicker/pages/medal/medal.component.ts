@@ -10,7 +10,7 @@ import { UtilsService } from "src/app/services/utils.service";
 export class MedalComponent implements OnInit {
   constructor(private utils: UtilsService, private router: Router) {}
 
-  medal: object;
+  medal: any;
 
   ngOnInit() {
     this.medal = this.utils.medals;

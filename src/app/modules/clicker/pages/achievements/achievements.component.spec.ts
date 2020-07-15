@@ -9,10 +9,59 @@ import { ClickerModule } from '../../clicker.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { JwtModule } from '@auth0/angular-jwt';
+import { LinksService } from 'src/app/services/links.service';
+import { of } from 'rxjs';
 
 describe('AchievementsComponent', () => {
   let component: AchievementsComponent;
   let fixture: ComponentFixture<AchievementsComponent>;
+
+  const mockLinksService = jasmine.createSpyObj("LinksService", ["getMedals"]);
+
+  let medals = [
+    {
+      classLevel: "bronze",
+      percent: 35,
+      icon: "/assets/img/gamification/Icon-perfil-completo.svg",
+      level: "Bronce",
+      title: "Perfil Completo",
+      nextLevel: "Oro",
+      titleMission: "Completar tu perfil al 100%",
+      banner: "/assets/img/gamification/banner-perfil-completo-pc.jpg",
+      class: "perfil-completo",
+      missionDescription:
+        "Así podamos hacer los pagos de forma correcta y podamos compartir contigo los productos y servicios mas afines a ti y así puedas ganar más dinero.",
+      detail: [
+        {
+          icon: "/assets/img/gamification/Icon-cuenta.svg",
+          title: "Cuenta",
+          description: "Completa la información básica de tu cuenta",
+          complete: true,
+          progress: 5,
+          totalProgress: 5,
+        },
+        {
+          icon: "/assets/img/gamification/icon-informacion-bancaria.svg",
+          title: "Información Bancaria",
+          description:
+            "Completa los datos bancarios para consignar tu comisión",
+          complete: false,
+          progress: 0,
+          totalProgress: 9,
+        },
+        {
+          icon: "/assets/img/gamification/icon-informacion-adicional.svg",
+          title: "Información Adicional",
+          description:
+            "Completa esta información para el funcionamiento de tu cuenta",
+          complete: false,
+          progress: 4,
+          totalProgress: 12,
+        },
+      ],
+    }
+  ];
+
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -34,9 +83,13 @@ describe('AchievementsComponent', () => {
             blacklistedRoutes: [],
           },
         }),
+      ],
+      providers: [
+        { provide: LinksService, useValue: mockLinksService },
       ]
     })
     .compileComponents();
+    mockLinksService.getMedals.and.returnValue(of(medals));
   }));
 
   beforeEach(() => {
@@ -47,5 +100,6 @@ describe('AchievementsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    expect(mockLinksService.getMedals).toHaveBeenCalled();
   });
 });

@@ -46,6 +46,7 @@ export class LinksService {
   apiGetAmounts = "amount/getamounts";
   apiSaveAmountCommission = "amount/saveamountcommission";
   apiSaveAmountReferred = "amount/saveamountreferred";
+  apiGetmedals="medal/getmedals"
 
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
@@ -131,6 +132,21 @@ export class LinksService {
   public getReports() {
     let apiReport = `${this.reports}`;
     return this.http.get(`${this.urlComission}${apiReport}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: ResponseService) => {
+        return resp.objectResponse;
+      })
+    );
+  }
+
+  public getMedals() {
+    return this.http.get(`${this.urlComission}${this.apiGetmedals}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(1000),
