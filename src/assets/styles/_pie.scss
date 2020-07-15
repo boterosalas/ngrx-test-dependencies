@@ -137,7 +137,7 @@ $gold: #ffce00;
     }
   }
 
-  @for $var from 1 to 33 {
+  @for $var from 0 to 34 {
     .label-bg-#{$var} {
       background: $bronze !important;
     }

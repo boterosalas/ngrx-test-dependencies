@@ -10,12 +10,12 @@ export class BannerMedalComponent implements OnInit {
   constructor() { }
 
   @Input() img:string;
-  @Input() classLevel:string;;
-  @Input() percent:string;;
-  @Input() icon:string;;
-  @Input() level:string;;
-  @Input() title:string;;
-  @Input() nextLevel:string;;
+  @Input() classLevel:string;
+  @Input() percent:string;
+  @Input() icon:string;
+  @Input() level:string;
+  @Input() title:string;
+  @Input() nextLevel:string;
 
   ngOnInit() {
   }
