@@ -1,0 +1,19 @@
+@import 'variables';
+
+.text-level{
+    color: #8D7EB7;
+    font-family: $font-galano-bold;
+}
+
+@media screen and (min-width: 600px) {
+    
+    .levcard {
+        width: 50%;
+        margin: 0 auto;
+        padding: 30px;
+    }
+}
+
+.levcard {
+    text-align: center;
+}

@@ -183,3 +183,16 @@
       color:#86888A;
       font-size: 12px;
   }
+
+  .goals{
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 5px 10px;
+    width: 180px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #8D7EB7;
+    font-family:$font-galano-bold;
+    cursor: pointer;
+  }
