@@ -36,6 +36,12 @@ import { ReferShareComponent } from './components/refer-share/refer-share.compon
 import { TableReferComponent } from './components/table-refer/table-refer.component';
 import { AllBussinessComponent } from './pages/all-bussiness/all-bussiness.component';
 import { AnonymousModule } from '../anonymous/anonymous.module';
+import { AchievementsComponent } from './pages/achievements/achievements.component';
+import { CardMedalComponent } from './components/card-medal/card-medal.component';
+import { MedalComponent } from './pages/medal/medal.component';
+import { BannerMedalComponent } from './components/banner-medal/banner-medal.component';
+import { CardMissionComponent } from './components/card-mission/card-mission.component';
+import { MissionLevelComponent } from './components/mission-level/mission-level.component';
 
 const routes: Routes = [
  
@@ -73,6 +79,16 @@ const routes: Routes = [
     path: "negocios",
     component: AllBussinessComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: "logros",
+    component: AchievementsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "medalla/:id",
+    component: MedalComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
@@ -99,7 +115,13 @@ const routes: Routes = [
     ReferEmailComponent,
     ReferShareComponent,
     TableReferComponent,
-    AllBussinessComponent
+    AllBussinessComponent,
+    AchievementsComponent,
+    CardMedalComponent,
+    MedalComponent,
+    BannerMedalComponent,
+    CardMissionComponent,
+    MissionLevelComponent
   ],
   imports: [
     CommonModule,

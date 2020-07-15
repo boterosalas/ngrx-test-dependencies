@@ -50,3 +50,18 @@
   background: url('/assets/img/home/bg-videos.jpg') no-repeat;
   background-size: cover;
 }
+
+.medals{
+  position: relative;
+  .mat-card{
+    background: transparent linear-gradient(180deg, #FD6A6A 0%, #FF7C7C 100%) 0% 0% no-repeat padding-box;
+    min-height: 90px;
+    width: 360px;
+  }
+}
+
+.icon-medal{
+  position: absolute;
+  top: 0;
+  left: 20px;
+}

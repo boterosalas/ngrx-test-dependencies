@@ -1,0 +1,47 @@
+<div class="set-size charts-container" fxLayout="row wrap" fxLayoutGap="20px">
+
+    <mat-card fxLayout="column" ngClass="position-relative medal-{{i}} cursor-pointer" *ngFor="let item of medals; let i = index" fxLayoutAlign="center center" (click)="infoMedal(item)">
+        <div fxLayout="column" ngClass="pie-wrapper {{item.classLevel}} progress-{{item.percent}}" fxLayoutAlign="center center">
+          <div fxLayout="column">
+              <div ngClass="label label-bg-{{item.percent}}">
+                  <span>
+                      <img [src]="item.icon" [alt]="item.title">
+                  </span>
+                  <span class="percent">
+                      {{item.percent}}%
+                  </span>
+              </div>
+          </div>
+          <div class="pie">
+            <div class="left-side half-circle"></div>
+            <div class="right-side half-circle"></div>
+          </div>
+          <div class="shadow"></div>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="center center" class="block-text">
+            <p class="f-15">{{item.level}}</p>
+            <p ngClass.gt-xs="f-18" ngClass.xs="f-15">{{item.title}}</p>
+            <p class="f-12">Siguiente nivel: {{item.nextLevel}}</p>
+        </div>
+    </mat-card>
+
+  
+    <!-- <div class="pie-wrapper progress-60">
+      <span class="label">60<span class="smaller">%</span></span>
+      <div class="pie">
+        <div class="left-side half-circle"></div>
+        <div class="right-side half-circle"></div>
+      </div>
+      <div class="shadow"></div>
+    </div>
+  
+    <div class="pie-wrapper progress-90">
+      <span class="label">90<span class="smaller">%</span></span>
+      <div class="pie">
+        <div class="left-side half-circle"></div>
+        <div class="right-side half-circle"></div>
+      </div>
+      <div class="shadow"></div>
+    </div> -->
+  
+  </div>

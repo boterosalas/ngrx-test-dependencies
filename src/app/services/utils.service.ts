@@ -19,6 +19,7 @@ export class UtilsService {
   isRegisterOpen = false;
   showForgotForm = false;
   showActivateForm = false;
+  medals:any;
 
   @Output() change: EventEmitter<boolean> = new EventEmitter();
   @Output() changeMenu: EventEmitter<boolean> = new EventEmitter();

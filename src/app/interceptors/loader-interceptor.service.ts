@@ -18,6 +18,11 @@ export class LoaderInterceptorService implements HttpInterceptor {
     },
       (err: any) => {
         this.onEnd();
+        if(err.status > 400) {
+          setTimeout(() => {
+            this.onEnd();
+          }, 2000);
+        }
     }));
   }
   private onEnd(): void {
