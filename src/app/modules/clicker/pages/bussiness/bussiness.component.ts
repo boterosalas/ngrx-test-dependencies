@@ -112,7 +112,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     
     this.ngNavigatorShareService = ngNavigatorShareService;
 
-    this.route.params.subscribe(route => {
+    this.subscription =  this.route.params.subscribe(route => {
       if(route.id === undefined && route.code === undefined && route.imageurl === undefined && route.infoAditional === undefined) {
         this.id = '1';
         this.title = 'exito'
@@ -217,7 +217,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
 
   public getContentBussiness() {
-    this.content.getBusinessContent(this.id)
+    this.subscription = this.content.getBusinessContent(this.id)
     .pipe(distinctUntilChanged())
     .subscribe(bussiness => {
       this.showDeliver = true;

@@ -80,13 +80,6 @@ export class ReportsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getFileReport();
 
-    // this.usersService.userInfo$
-    // .subscribe(val => {
-    //   if (!!val) {
-    //    this.email = val.email;
-    //   }
-    // });
-
     this.nameFile = "";
     this.nameFilePayment = "";
 
