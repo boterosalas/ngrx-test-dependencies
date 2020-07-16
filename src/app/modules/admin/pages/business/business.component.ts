@@ -52,7 +52,7 @@ export class BusinessComponent implements OnInit, OnDestroy {
       value: business.active,
     };
 
-    this.content.saveActiveBusiness(businessActivate).subscribe(resp => {
+    this.subscription =  this.content.saveActiveBusiness(businessActivate).subscribe(resp => {
       this.openSnackBar(resp.userMessage, "Cerrar");
     })
 
@@ -60,7 +60,7 @@ export class BusinessComponent implements OnInit, OnDestroy {
   }
 
   public getAllBusiness() {
-    this.content.getAllBusiness().subscribe(resp=> {
+    this.subscription =  this.content.getAllBusiness().subscribe(resp=> {
       this.dataSource = new MatTableDataSource<any>(resp);
     })
   }
