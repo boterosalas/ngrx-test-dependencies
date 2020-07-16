@@ -110,13 +110,6 @@ export class UsersComponent extends MatPaginatorIntl
     this.searchUser("");
     this.formEmail();
 
-    // this.usersService.userInfo$
-    //     .subscribe(val => {
-    //       if (!!val) {
-    //        this.email = val.email;
-    //       }
-    //     });
-
     this.dateForm = this.fb.group({
       dateRange: [null, Validators.required]
     });
@@ -467,6 +460,12 @@ export class UsersComponent extends MatPaginatorIntl
 
   public updateEmployee() {
     this.subscription = this.usersService.updateEmployees().subscribe((resp: ResponseService)=> {
+      this.openSnackBar(resp.userMessage, 'Cerrar');
+    })
+  }
+
+  public exportusers() {
+    this.subscription = this.usersService.getExternalUsers().subscribe((resp: ResponseService)=> {
       this.openSnackBar(resp.userMessage, 'Cerrar');
     })
   }

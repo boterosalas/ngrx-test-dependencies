@@ -34,6 +34,7 @@ import { CardDashboardComponent } from './components/card-dashboard/card-dashboa
 import { TableBussinessComponent } from './components/table-bussiness/table-bussiness.component';
 import { LinkGeneratorComponent } from './pages/link-generator/link-generator.component';
 import { LinkGeneratorFormComponent } from './components/link-generator-form/link-generator-form.component';
+import { TableActivateBusinessComponent } from './components/table-activate-business/table-activate-business.component';
 
 const routes: Routes = [
   {
@@ -113,7 +114,8 @@ const routes: Routes = [
     CardDashboardComponent,
     TableBussinessComponent,
     LinkGeneratorComponent,
-    LinkGeneratorFormComponent
+    LinkGeneratorFormComponent,
+    TableActivateBusinessComponent
   ],
   imports: [
     CommonModule,

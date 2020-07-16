@@ -140,7 +140,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.isLoggedIn = this.auth.isLoggedIn();
 
-    this.router.events.subscribe(() => {
+    this.subscription =  this.router.events.subscribe(() => {
       let urlLocation = location.prepareExternalUrl(location.path());
       let SplitLocation = urlLocation.split("/");
       this.classPage = SplitLocation[1];
@@ -270,11 +270,11 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   public getUserData() {
-    this.auth.getRole$.subscribe((role) => {
+    this.subscription = this.auth.getRole$.subscribe((role) => {
       this.role = role;
       if (role === "CLICKER" || role === "ADMIN") {
         this.email = this.token.userInfo().userName;
-        this.user.getuserdata().subscribe((user) => {
+        this.subscription = this.user.getuserdata().subscribe((user) => {
           this.firstName = user.firstNames;
           this.lastName = user.lastNames;
           this.managedPayments = user.managedPayments;
@@ -283,17 +283,6 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     });
   }
-
-  // onActivate(event) {
-  //   let scrollToTop = window.setInterval(() => {
-  //     let pos = window.pageYOffset;
-  //     if (pos > 0) {
-  //       window.scrollTo(0, pos - 20); // how far to scroll on each step
-  //     } else {
-  //       window.clearInterval(scrollToTop);
-  //     }
-  //   }, 1);
-  // }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

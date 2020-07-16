@@ -220,7 +220,7 @@ export class SliderComponent implements OnInit {
   }
 
   /**
-   * Metodo para dalvar los links reference
+   * Metodo para salvar los links reference
    */
 
   public saveLinkReference() {
@@ -289,12 +289,6 @@ export class SliderComponent implements OnInit {
         this.classButtonFacebook = `gtmClicLightboxIconoFacebook${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         this.classButtonTwitter = `gtmClicLightboxIconoTwitter${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         this.classButtonWhatsapp= `gtmClicLightboxIconoWhatsApp${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        
-        // if(category.business === 'seguros') {
-        //   this.template = this.templateAssured;
-        // } else {
-        //   this.template = this.templateCategories;
-        // }
 
         const template = this.templateCategories;
 
