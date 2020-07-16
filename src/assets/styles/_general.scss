@@ -672,15 +672,15 @@ table {
       url("/assets/img/gamification/bg-form.svg") no-repeat;
     background-position: bottom right;
     background-size: 35%, contain;
-    .mat-card{
+    .mat-card {
       width: 215px !important;
       margin-bottom: 1em;
-      p{
+      p {
         min-width: 205px;
       }
     }
 
-    .percent{
+    .percent {
       bottom: -30px;
       left: 27px;
     }
@@ -688,7 +688,6 @@ table {
     .block-text {
       margin-top: 70px;
     }
-  
   }
 
   .joyride-step__holder {
@@ -1074,13 +1073,35 @@ th.mat-header-cell {
 }
 
 .mat-orange-toggle {
-  .mat-slide-toggle.mat-checked,
   .mat-slide-toggle-thumb {
-    background: $primary-color !important;
+    background: #acacac;
   }
 }
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background: #ff5555 !important;
+}
+
 .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
-  background-color: rgba($primary-color, 0.54) !important;
+  background-color: #ff55554d !important;
+}
+
+.negocios-admin-page {
+  .mat-slide-toggle {
+    &.mat-checked {
+      .mat-slide-toggle-thumb {
+        background: #ff5555;
+      }
+    }
+
+    .mat-slide-toggle-thumb {
+      background: #acacac;
+    }
+  }
+
+  .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+    background-color: #ff55554d;
+  }
 }
 
 .slick-track {
@@ -1824,11 +1845,10 @@ app-menu-help-center {
 }
 
 .logros-page {
-
-  .percent{
+  .percent {
     position: absolute;
     background: white;
-    color: #4B4853;
+    color: #4b4853;
     font-family: $font-galano-bold;
     border-radius: 50%;
     width: 50px;
@@ -1897,49 +1917,46 @@ app-menu-help-center {
   }
 }
 
-
-.medalla-page{
+.medalla-page {
   .banner {
-    p{
-        color: #4B4853;
-        margin-bottom: 0;
-        margin: 2px 0px;
-        font-family: $font-galano-bold;
+    p {
+      color: #4b4853;
+      margin-bottom: 0;
+      margin: 2px 0px;
+      font-family: $font-galano-bold;
     }
   }
 
-  
   .block-text {
     padding-top: 55px;
   }
 
-  .color{
-    &-Oro{
+  .color {
+    &-Oro {
       color: $gold;
     }
-    &-Plata{
+    &-Plata {
       color: $silver;
     }
-    &-Bronce{
+    &-Bronce {
       color: $bronze;
     }
   }
 
-  .g-light{
-    color: #A7A3B1;
+  .g-light {
+    color: #a7a3b1;
   }
-  
+
   @media screen and (max-width: 600px) {
-    .banner{
-      .responsive-img{
+    .banner {
+      .responsive-img {
         min-height: 90px;
       }
     }
   }
-
 }
 
-.bg-white{
+.bg-white {
   background: #ffffff;
 }
 
@@ -1948,58 +1965,57 @@ app-menu-help-center {
   border-radius: 10px;
 }
 
-.vendedor-innato{
-  .mat-progress-bar-fill::after{
+.vendedor-innato {
+  .mat-progress-bar-fill::after {
     background: $innato !important;
   }
 
-  .levcard{
-    background: transparent linear-gradient(180deg, #71C2CB 0%, #90D2D2 100%) 0% 0% no-repeat padding-box;
+  .levcard {
+    background: transparent linear-gradient(180deg, #71c2cb 0%, #90d2d2 100%) 0%
+      0% no-repeat padding-box;
     color: #ffffff;
   }
-
 }
 
-.comprador-inteligente{
-  .mat-progress-bar-fill::after{
+.comprador-inteligente {
+  .mat-progress-bar-fill::after {
     background: $comprador !important;
   }
 
-  .levcard{
-    background: transparent linear-gradient(180deg, #735CF2 0%, #9387F2 100%) 0% 0% no-repeat padding-box;
+  .levcard {
+    background: transparent linear-gradient(180deg, #735cf2 0%, #9387f2 100%) 0%
+      0% no-repeat padding-box;
     color: #ffffff;
   }
-
 }
 
-.perfil-completo{
-  
-  .mat-progress-bar-fill::after{
+.perfil-completo {
+  .mat-progress-bar-fill::after {
     background: $completo !important;
   }
 
-  .levcard{
-    background: transparent linear-gradient(180deg, #FD6A6A 0%, #FF7C7C 100%) 0% 0% no-repeat padding-box;
+  .levcard {
+    background: transparent linear-gradient(180deg, #fd6a6a 0%, #ff7c7c 100%) 0%
+      0% no-repeat padding-box;
     color: #ffffff;
   }
 }
 
-.reclutador-estrella{
-  .mat-progress-bar-fill::after{
+.reclutador-estrella {
+  .mat-progress-bar-fill::after {
     background: $reclutador !important;
   }
 
-  .levcard{
-    background: transparent linear-gradient(180deg, #5F72DA 0%, #5F8BDC 100%) 0% 0% no-repeat padding-box;
+  .levcard {
+    background: transparent linear-gradient(180deg, #5f72da 0%, #5f8bdc 100%) 0%
+      0% no-repeat padding-box;
     color: #ffffff;
   }
-
 }
 
-.levcard{
-
+.levcard {
   @media screen and (min-width: 600px) {
-    &::after{
+    &::after {
       content: "";
       background-image: url("/assets/img/gamification/img-prize.svg");
       background-repeat: no-repeat;
@@ -2015,9 +2031,8 @@ app-menu-help-center {
   }
 }
 
-
 @media screen and (min-width: 1600px) {
-  .whigh{
+  .whigh {
     width: 100%;
   }
 }

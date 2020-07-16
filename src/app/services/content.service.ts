@@ -32,6 +32,8 @@ export class ContentService {
   apiCategories = "offer/getCategories";
   apiProducts = "product";
   apiGetBusiness = "business/getBusiness";
+  apiGetAllBusiness = "business/getallbusiness";
+  apiSaveActiveBusiness = "business/saveactivebusiness";
   apiGetLinkBusiness = "business/generatelinkbusiness";
   apiGetBusinessClicker = "business/getbusinessclicker";
   apiGetBusinessContent = "business/getContent";
@@ -62,6 +64,40 @@ export class ContentService {
         ),
         map((user: ResponseService) => {
           return user.objectResponse;
+        })
+      );
+  }
+
+  public getAllBusiness() {
+    return this.http
+      .get(`${this.url + this.apiGetAllBusiness}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        ),
+        map((user: ResponseService) => {
+          return user.objectResponse;
+        })
+      );
+  }
+
+  public saveActiveBusiness(bussiness:any) {
+    return this.http
+      .post(`${this.url + this.apiSaveActiveBusiness}`, bussiness , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
         })
       );
   }
