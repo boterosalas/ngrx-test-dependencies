@@ -464,6 +464,12 @@ export class UsersComponent extends MatPaginatorIntl
     })
   }
 
+  public exportusers() {
+    this.subscription = this.usersService.getExternalUsers().subscribe((resp: ResponseService)=> {
+      this.openSnackBar(resp.userMessage, 'Cerrar');
+    })
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

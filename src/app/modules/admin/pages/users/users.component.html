@@ -17,8 +17,9 @@
             <input (change)="change()" formControlName="dateRange" [locale]="locale" placeholder="Seleccione fechas" type="text" [maxDate]="maxDate"  ngxDaterangepickerMd class="form-control border-input mat-elevation-z1 p-2 border-radius"/>
             <button mat-raised-button color="orange" (click)="getUserExcel()" id="download-users" class="ml-2" [disabled]="!dateForm.valid || disButon">Exportar <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
     </form>
-    <div fxLayout="row" fxLayoutAlign="end center">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
       <!-- <button mat-raised-button color="orange" (click)="updateEmployee()">Actualizar Usuarios</button> -->
+      <button mat-raised-button color="orange" (click)="exportusers()">Exportar usuarios externos <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
       <app-search-users class="searchUser" (search)="searchUser($event)"></app-search-users>
     </div>
 
