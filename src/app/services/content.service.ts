@@ -40,6 +40,7 @@ export class ContentService {
   apiGetcategoriesbusiness = "business/getcategoriesbusiness";
   apiRegisterbusiness = "business/registerbusiness";
   apiGetbusinessexcel = "business/getbusinessexcel";
+  apiGetCommissions= "business/getcommissions";
   apiGetpopups= "popups/getpopups";
   sendSearch = {};
 
@@ -54,6 +55,22 @@ export class ContentService {
   public getBusiness() {
     return this.http
       .get(`${this.url + this.apiGetBusiness}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        ),
+        map((user: ResponseService) => {
+          return user.objectResponse;
+        })
+      );
+  }
+  public getCommissions() {
+    return this.http
+      .get(`${this.url + this.apiGetCommissions}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
