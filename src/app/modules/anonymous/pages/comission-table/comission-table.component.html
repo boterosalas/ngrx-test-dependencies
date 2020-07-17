@@ -2,57 +2,29 @@
 <!-- <app-logo></app-logo> -->
 
 <div class="container">
-    <!-- <h1 class="border-bottom-orange-init">{{'COMMISION_TABLE.COMMISION_TABLE' | translate}}</h1> -->
-    <!-- <p>{{'CLICKACADEMY.COMISSIONS_TEXT' | translate}}</p> -->
+    
     <mat-tab-group>
-        <!-- exito -->
-        <mat-tab>
+
+        <mat-tab *ngFor="let item of tableComission | keyvalue; let i = index">
             <ng-template mat-tab-label>
-                 <span class="gtmClicAcademyClicExitocom">{{'CLICKACADEMY.CLICKACADEMY_TAB_EXITO' | translate}}</span>
+                 <span>{{item.key}}</span>
             </ng-template>
-            <div innerHtml="{{ 'CLICKACADEMY.CLICKACADEMY_TAB_EXITO_TABLE' | translate }}"></div> 
-        </mat-tab>
 
-        <!-- carulla -->
-        <mat-tab>
-            <ng-template mat-tab-label>
-                 <span class="gtmClicAcademyClicExitocom">{{'CLICKACADEMY.CLICKACADEMY_TAB_CARULLA' | translate}}</span>
-            </ng-template>
-            <div innerHtml="{{ 'CLICKACADEMY.CLICKACADEMY_TAB_EXITO_TABLE' | translate }}"></div> 
-        </mat-tab>
-    
-         <!-- seguros -->
-        <mat-tab> 
-                <ng-template mat-tab-label>
-                        <span class="gtmClicAcademyClicSeguros">{{'CLICKACADEMY.CLICKACADEMY_TAB_SEGUROS' | translate}}</span>
-                   </ng-template>
-            <div innerHtml="{{ 'CLICKACADEMY.CLICKACADEMY_TAB_SEGUROS_TABLE' | translate }}"></div> 
-        </mat-tab>
+            <table class='tableComission w-100 text-left mt-3'>
+                <thead>
+                    <th class='w-80'>Categoría de producto</th>
+                    <th class='text-center'>Comisiones</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let table of item.value; let i = index">
+                        <td>{{table.description}}</td>
+                        <td>{{table.commission}}</td>
+                    </tr>
+                </tbody>
+            </table>
 
-         <!-- weSura -->
-        <mat-tab> 
-                <ng-template mat-tab-label>
-                        <span class="gtmClicAcademyClicSeguros">{{'CLICKACADEMY.CLICKACADEMY_TAB_WESURA' | translate}}</span>
-                   </ng-template>
-            <div innerHtml="{{ 'CLICKACADEMY.CLICKACADEMY_TAB_WESURA_TABLE' | translate }}"></div> 
-        </mat-tab>
-    
-         <!-- viajes -->
-        <mat-tab>
-                <ng-template mat-tab-label>
-                        <span class="gtmClicAcademyClicViajes">{{'CLICKACADEMY.CLICKACADEMY_TAB_VIAJES' | translate}}</span>
-                   </ng-template>
-            <div innerHtml="{{ 'CLICKACADEMY.CLICKACADEMY_TAB_VIAJES_TABLE' | translate }}"></div> 
-        </mat-tab>
+        </mat-tab> 
 
-         <!-- movil -->
-        <mat-tab>
-                <ng-template mat-tab-label>
-                        <span class="gtmClicAcademyClicMovil">{{'CLICKACADEMY.CLICKACADEMY_TAB_MOVIL' | translate}}</span>
-                   </ng-template>
-            <div innerHtml="{{ 'CLICKACADEMY.CLICKACADEMY_TAB_MOVIL_TABLE' | translate }}"></div> 
-        </mat-tab>
-    
       </mat-tab-group>
     
       <p>{{'CLICKACADEMY.MARKETPLACE' | translate}}</p>
