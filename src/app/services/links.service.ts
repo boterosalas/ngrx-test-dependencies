@@ -161,7 +161,7 @@ export class LinksService {
   }
 
   public getAmount() {
-    return this.http.get(`${this.urlComission}/${this.apiGetAmounts}`, this.httpOptions).pipe(
+    return this.http.get(`${this.urlComission}${this.apiGetAmounts}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(1000),

@@ -1,7 +1,7 @@
 <!-- <app-logo></app-logo> -->
 <app-slider Class="gtmHomeClicBanner" [showArrows]="true" [isSlider]="true"  (action)="sliderOffers()"  [sliderMobile]="sliderMobile" [sliderWeb]="sliderWeb"></app-slider>
 
-<div class="medals container pt-3" *ngIf="auth.isLoggedIn()" fxLayout="row" fxLayoutAlign="center center">
+<div class="medals container pt-3" fxHide.gt-xs="true" *ngIf="auth.isLoggedIn()" fxLayout="row" fxLayoutAlign="center center">
   <mat-card fxLayout="row" fxLayoutAlign="center center">
     <div fxLayout="column" fxLayoutAlign="center space-between" fxLayoutGap="5px">
       <span fxLayout="column">
