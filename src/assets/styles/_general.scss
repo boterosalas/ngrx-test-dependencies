@@ -2036,3 +2036,28 @@ app-menu-help-center {
     width: 100%;
   }
 }
+
+.no-level {
+  .bglabel{
+    background: $no-medal !important;
+  }
+}
+
+.bronze{
+  .bglabel{
+    background: $bronze !important;
+  }
+}
+
+.silver{
+  .bglabel{
+    background: $silver !important;
+  }
+}
+
+.gold{
+  .bglabel{
+    background: $gold !important;
+  }
+}
+
