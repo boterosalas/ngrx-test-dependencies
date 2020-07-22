@@ -3,7 +3,7 @@
     <mat-card fxLayout="column" ngClass="position-relative {{item.class}} cursor-pointer" *ngFor="let item of medals; let i = index" fxLayoutAlign="center center" (click)="infoMedal(item)">
         <div fxLayout="column" ngClass="pie-wrapper {{item.classLevel}} progress-{{item.percent}}" fxLayoutAlign="center center">
           <div fxLayout="column">
-              <div ngClass="label label-bg-{{item.percent}}">
+              <div ngClass="label bglabel label-bg-{{item.percent}}">
                   <span>
                       <img [src]="item.icon" [alt]="item.title">
                   </span>
