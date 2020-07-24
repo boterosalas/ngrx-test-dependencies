@@ -29,6 +29,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { BannerComponent } from './components/banner/banner.component';
+import { TrimPipe } from 'src/app/pipes/trim.pipe';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { BannerComponent } from './components/banner/banner.component';
     MenuOptionsComponent,
     UnderConstructionComponent,
     TruncatePipe,
+    TrimPipe,
     AppStoreComponent,
     LogoComponent,
     ProductComponent,
@@ -85,6 +87,7 @@ import { BannerComponent } from './components/banner/banner.component';
     MenuOptionsComponent,
     UnderConstructionComponent,
     TruncatePipe,
+    TrimPipe,
     LogoComponent,
     ProductComponent,
     BackNavigationComponent,
