@@ -13,6 +13,7 @@
           <app-card-data
             [number]="available | currency: '':'symbol':'1.0-0'"
             Classborder="border-bottom-orange-init"
+            Classtag="gtmReportesClicMisComisionesVerDetalle1"
             text="{{ 'REPORTS.AVAILABLE' | translate }}"
             textToolTip ="Comisiones generadas entre el 1ro y 15 y se te pagará en la tercera o cuarta semana de este mes."
             (openDetail)="break1()"
@@ -22,6 +23,7 @@
           <app-card-data
             [number]="account | currency: '':'symbol':'1.0-0'"
             Classborder="border-bottom-orange-init"
+            Classtag="gtmReportesClicMisComisionesVerDetalle2"
             text="{{ 'REPORTS.ACCOUNT' | translate }}"
             textToolTip ="Comisiones generadas entre el 16 y 30-31 y se te pagará en la primera o segunda semana del próximo mes."
             (openDetail)="break2()"
@@ -33,6 +35,7 @@
         <app-card-data
             [number]="totalAcumulated | currency: '':'symbol':'1.0-0'"
             text="Saldo acumulado de cortes anteriores"
+            Classtag="gtmReportesClicMisComisionesSaldoAcumulado"
             textToolTip ="Este dinero corresponde a los saldos acumulados en los saldos anteriores, y te será pagado cuándo completes el monto mínimo ($10,000)."
             (openDetail)="acumulated()"
           ></app-card-data>

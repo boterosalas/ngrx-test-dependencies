@@ -4,40 +4,40 @@
   <div class="share-desktop w-100" id="share" fxLayout="row" fxLayoutAlign="space-around" fxLayoutGap="20px">
 
 
-    <span class="share-refer" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
+    <span class="share-refer gtmRfiereYGanaClicReferirwhatsapp" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
       <a 
       href="https://web.whatsapp.com/send?text={{urlWhatsapp}}" 
       target="_blank"
       data-action="share/whatsapp/share"
-      ngClass="sharebutton p-3"
+      ngClass="sharebutton p-3 gtmRfiereYGanaClicReferirwhatsapp"
       >
-        <i ngClass="fab fa-whatsapp"></i>
+        <i ngClass="fab fa-whatsapp gtmRfiereYGanaClicReferirwhatsapp"></i>
     </a>
-    <p class="galano-bold f-20"> {{ "REFER.WHATSAPP" | translate }}</p>
+    <p class="galano-bold f-20 gtmRfiereYGanaClicReferirwhatsapp"> {{ "REFER.WHATSAPP" | translate }}</p>
     </span>
     
-    <span class="share-refer" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
+    <span class="share-refer gtmRfiereYGanaClicReferirFacebook" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
       <button
         theme="circles-dark"
         shareButton="facebook"
         [url]="url"
-        ngClass="sharebutton  mr-2"
+        ngClass="sharebutton  mr-2 gtmRfiereYGanaClicReferirFacebook"
       >
-        <i ngClass="fab fa-facebook-f "></i>
+        <i ngClass="fab fa-facebook-f gtmRfiereYGanaClicReferirFacebook"></i>
       </button> 
-      <p class="galano-bold f-20"> {{ "REFER.FACEBOOK" | translate }}</p>
+      <p class="galano-bold f-20 gtmRfiereYGanaClicReferirFacebook"> {{ "REFER.FACEBOOK" | translate }}</p>
     </span>
 
-    <span class="share-refer" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
+    <span class="share-refer gtmRfiereYGanaClicReferirTwitter" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
       <button
         theme="circles-dark"
         shareButton="twitter"
         [url]="url"
-        ngClass="sharebutton  mr-2"
+        ngClass="sharebutton  mr-2 gtmRfiereYGanaClicReferirTwitter"
       >
-        <i ngClass="fab fa-twitter "></i>
+        <i ngClass="fab fa-twitter gtmRfiereYGanaClicReferirTwitter"></i>
       </button>
-      <p class="galano-bold f-20"> {{ "REFER.TWITTER" | translate }}</p>
+      <p class="galano-bold f-20 gtmRfiereYGanaClicReferirTwitter"> {{ "REFER.TWITTER" | translate }}</p>
     </span>
   
 
@@ -79,12 +79,14 @@
         <button
           mat-button
           id="btnCopy"
-          class="copyinput"
+          class="copyinput gtmRfiereYGanaClicReferirCopiarLink"
           ngClass.xs="button-height"
           color="orange"
           (click)="copyUrl()"
         >
-         {{ "REFER.COPY" | translate }}
+        <span class="gtmRfiereYGanaClicReferirCopiarLink">
+          {{ "REFER.COPY" | translate }}
+        </span>
         </button>
       </div>
       </div>

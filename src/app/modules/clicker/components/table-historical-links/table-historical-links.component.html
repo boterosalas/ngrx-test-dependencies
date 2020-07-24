@@ -41,6 +41,7 @@
         <td mat-cell class="text-center" *matCellDef="let element; let i=index"> 
             <button
             mat-raised-button
+            ngClass="gtmHistorialTablaLink{{element.productname | trim}}"
             color="orange"
             (click)="infoProduct((dataSource.data)[i])"
           >

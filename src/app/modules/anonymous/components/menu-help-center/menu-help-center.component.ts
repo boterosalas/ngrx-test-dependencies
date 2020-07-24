@@ -51,32 +51,39 @@ export class MenuHelpCenterComponent implements OnInit {
     {
       name: "¿Qué es Clickam?",
       route: "/centro-de-ayuda/sobre-clickam/que-es-clickam",
+      class: "queesclickam",
     },
     {
       name: "¿Cómo me puedo registrar?",
       route: "/centro-de-ayuda/sobre-clickam/como-me-puedo-registrar",
+      class: "comomepuedoregistrar",
     },
     {
       name: "¿Por cuáles medios puedo descargar la app?",
       route:
         "/centro-de-ayuda/sobre-clickam/por-cuales-medios-puedo-descargar-la-app",
+      class: "porcualesmediospuedodescargarlaapp",
     },
     {
       name: "¿Cómo funciona Clickam?",
       route: "/centro-de-ayuda/sobre-clickam/como-funciona-clickam",
+      class: "comofuncionaclickam",
     },
     {
       name: "¿Cómo gano comisiones?",
       route: "/centro-de-ayuda/sobre-clickam/como-gano-comisiones",
+      class: "comoganocomisiones",
     },
     {
       name: "¿Cuáles son los beneficios de ser un Clicker?",
       route:
         "/centro-de-ayuda/sobre-clickam/cuales-son-los-beneficios-de-un-clicker",
+      class: "cualessonlosbeneficiosdeserunclicker",
     },
     {
       name: "¿Cuáles son los negocios asociados?",
       route: "/centro-de-ayuda/sobre-clickam/cuales-son-los-negocios-asociados",
+      class: "cualessonlosnegociosasociados",
     },
   ];
 
@@ -85,44 +92,47 @@ export class MenuHelpCenterComponent implements OnInit {
       name: "Cambios de tus datos personales",
       route:
         "/centro-de-ayuda/configuraciones-de-cuenta/cambios-de-tus-datos-personales",
+      class: "cambiosdetusdatospersonales",
     },
     {
       name: "Restablecer contraseña",
       route:
         "/centro-de-ayuda/configuraciones-de-cuenta/restablecer-contrasena",
+      class: "restablecercontrasena",
     },
   ];
 
   commissions = [
     {
       name: "¿Qué es la ruta de compra Clickam?",
-      route:
-        "/centro-de-ayuda/comisiones/que-es-la-ruta-de-compra-clickam",
+      route: "/centro-de-ayuda/comisiones/que-es-la-ruta-de-compra-clickam",
+      class: "queeslarutadecompraclickam",
     },
     {
       name: "¿Cómo cruzan la venta?",
-      route:
-        "/centro-de-ayuda/comisiones/como-cruzan-la-venta",
+      route: "/centro-de-ayuda/comisiones/como-cruzan-la-venta",
+      class: "comocruzanlaventa",
     },
     {
       name: "¿Cuáles son las fechas de pago?",
-      route:
-        "/centro-de-ayuda/comisiones/cuales-son-las-fechas-de-pago",
+      route: "/centro-de-ayuda/comisiones/cuales-son-las-fechas-de-pago",
+      class: "cualessonlasfechasdepago",
     },
     {
       name: "¿Por qué no me llegó la comisión?",
-      route:
-        "/centro-de-ayuda/comisiones/porque-no-me-llego-la-comision",
+      route: "/centro-de-ayuda/comisiones/porque-no-me-llego-la-comision",
+      class: "porquenomellegolacomision",
     },
     {
       name: "¿Cómo es el proceso de pago?",
-      route:
-        "/centro-de-ayuda/comisiones/como-es-el-proceso-de-pago",
+      route: "/centro-de-ayuda/comisiones/como-es-el-proceso-de-pago",
+      class: "comoeselprocesodepago",
     },
     {
       name: "¿Cuándo se considera una compra efectiva por el negocio?",
       route:
         "/centro-de-ayuda/comisiones/cuando-se-considera-una-compra-efectiva-por-el-negocio",
+      class: "cuandoseconsideraunacompraefectivaporelnegocio",
     },
   ];
 
@@ -131,16 +141,18 @@ export class MenuHelpCenterComponent implements OnInit {
       name: "¿Dónde puedo encontrar un historial de mis links?",
       route:
         "/centro-de-ayuda/reportes/donde-puedo-encontrar-un-historial-de-mis-links",
+      class: "dondepuedoencontrarunhistorialdemislinks",
     },
     {
       name: "¿Cómo veo las comisiones que he ganado?",
-      route:
-        "/centro-de-ayuda/reportes/como-veo-las-comisiones-que-he-ganado",
+      route: "/centro-de-ayuda/reportes/como-veo-las-comisiones-que-he-ganado",
+      class: "comoveolascomisionesqueheganado",
     },
     {
       name: "¿Cómo puedo saber por cuales productos me pagaron comisión?",
       route:
         "/centro-de-ayuda/reportes/como-puedo-saber-por-cuales-productos-me-pagaron-comision",
+      class: "comopuedosaberporcualesproductosmepagaroncomision",
     },
   ];
 
@@ -149,17 +161,18 @@ export class MenuHelpCenterComponent implements OnInit {
       name: "¿Qué es el programa refiere a tu amigo?",
       route:
         "/centro-de-ayuda/refiere-a-un-amigo/que-es-el-programa-refiere-a-tu-amigo",
+      class: "queeselprogramarefiereatuamigo",
     },
     {
       name: "¿Cómo funciona el programa?",
-      route:
-        "/centro-de-ayuda/refiere-a-un-amigo/como-funciona-el-programa",
+      route: "/centro-de-ayuda/refiere-a-un-amigo/como-funciona-el-programa",
+      class: "comofuncionaelprograma",
     },
     {
       name: "¿Cuántos amigos puedo invitar?",
-      route:
-        "/centro-de-ayuda/refiere-a-un-amigo/cuantos-amigos-puedo-invitar",
-    }
+      route: "/centro-de-ayuda/refiere-a-un-amigo/cuantos-amigos-puedo-invitar",
+      class: "cuantosamigospuedoinvitar",
+    },
   ];
 
   offers = [
@@ -167,12 +180,13 @@ export class MenuHelpCenterComponent implements OnInit {
       name: "¿Dónde puedo encontrar las mejores ofertas?",
       route:
         "/centro-de-ayuda/ofertas/donde-puedo-encontrar-las-mejores-ofertas",
+        class: "dondepuedoencontrarlasmejoresofertas",
     },
     {
       name: "Preferencias de correo",
-      route:
-        "/centro-de-ayuda/ofertas/preferencias-de-correo",
-    }
+      route: "/centro-de-ayuda/ofertas/preferencias-de-correo",
+      class: "preferenciasdecorreo",
+    },
   ];
 
   questions = [
@@ -180,25 +194,28 @@ export class MenuHelpCenterComponent implements OnInit {
       name: "¿Quién es el tomador de un seguro?",
       route:
         "/centro-de-ayuda/otras-preguntas-frecuentes/quien-es-el-tomador-de-un-seguro",
+        class: "quieneseltomadordeunseguro",
     },
     {
       name: "¿Qué es un producto Marketplace?",
       route:
         "/centro-de-ayuda/otras-preguntas-frecuentes/que-es-un-producto-marketplace",
+        class: "queesunproductomarketplace",
     },
     {
       name: "¿Cuáles son los medios de pago de cada negocio?",
       route:
         "/centro-de-ayuda/otras-preguntas-frecuentes/cuales-son-los-medios-de-pago-de-cada-negocio",
-    }
+        class: "cualessonlosmediosdepagodecadanegocio",
+    },
   ];
 
   contacts = [
     {
       name: "Contactos",
-      route:
-        "/centro-de-ayuda/contacta-los-negocios/contactos-negocios",
-    }
+      route: "/centro-de-ayuda/contacta-los-negocios/contactos-negocios",
+      class: "contactos",
+    },
   ];
 
   contactUs = [
@@ -206,7 +223,8 @@ export class MenuHelpCenterComponent implements OnInit {
       name: "Dónde puedo contactarme si tengo preguntas extras",
       route:
         "/centro-de-ayuda/contactanos/donde-puedo-contactarme-si-tengo-preguntas-extras",
-    }
+        class: "dondepuedocontactarmesitengopreguntasextras",
+    },
   ];
 
   ngOnInit() {}
