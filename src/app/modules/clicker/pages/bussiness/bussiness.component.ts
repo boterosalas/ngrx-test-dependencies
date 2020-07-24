@@ -15,6 +15,7 @@ import { TokenService } from 'src/app/services/token.service';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { environment } from 'src/environments/environment';
+declare var dataLayer: any
 
 @Component({
   selector: 'app-bussiness',
@@ -588,6 +589,13 @@ export class BussinessComponent implements OnInit, OnDestroy {
       this.mostrarProductos = 52;
       // this.productsListExito = [];
     }
+
+    dataLayer.push({
+      event: 'pushEventGA',
+      categoria: 'NegocioExito',
+      accion: 'ClicBuscar',
+      etiqueta: term,
+    });
     
     const params = { term, order, page, count };
     this.subscription = this.sp.biggySearchExito(params).subscribe(
@@ -646,6 +654,13 @@ export class BussinessComponent implements OnInit, OnDestroy {
       this.productsListExito = []
       this.mostrarProductos = 52;
     }
+
+    dataLayer.push({
+      event: 'pushEventGA',
+      categoria: 'NegocioCarulla',
+      accion: 'ClicBuscar',
+      etiqueta: term,
+    });
     
     const params = { term, order, page, count };
     this.subscription = this.sp.biggySearchCarulla(params).subscribe(
