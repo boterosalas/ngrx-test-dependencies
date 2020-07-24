@@ -6,6 +6,7 @@ $label-font-size-redo: $default-size * 4;
 $bronze: #efb648;
 $silver: #b8b6be;
 $gold: #ffce00;
+$no-medal: #bdc3c7;
 
 // -- mixins
 @mixin size($width, $height) {
@@ -137,31 +138,23 @@ $gold: #ffce00;
     }
   }
 
-  @for $var from 0 to 34 {
-    .label-bg-#{$var} {
-      background: $bronze !important;
-    }
+  .label.label-bg-0{
+    background:$no-medal !important;
+  }
 
+  @for $var from 0 to 34 {
     &.progress-#{$var} {
       @include draw-progress($var, $bronze);
     }
   }
 
   @for $var from 34 to 99 {
-    .label-bg-#{$var} {
-      background: $silver !important;
-    }
-
     &.progress-#{$var} {
       @include draw-progress($var, $silver);
     }
   }
 
   @for $var from 100 to 101 {
-    .label-bg-#{$var} {
-      background: $gold;
-    }
-
     &.progress-#{$var} {
       @include draw-progress($var, $gold);
     }

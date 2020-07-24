@@ -27,6 +27,7 @@ export class TermsAndConditionsComponent implements OnInit {
       document.querySelector('.mat-tab-label[aria-posinset="1"]').classList.add("gtmTerminosCondicionesClicTerminosLegales");
       document.querySelector('.mat-tab-label[aria-posinset="2"]').classList.add("gtmTerminosCondicionesClicEmprendedor");
       document.querySelector('.mat-tab-label[aria-posinset="3"]').classList.add("gtmTerminosCondicionesClicProteccionDatos");
+      document.querySelector('.mat-tab-label[aria-posinset="4"]').classList.add("gtmTerminosCondicionesClicProgramaReferidos");
     }, 1000);
   
   }

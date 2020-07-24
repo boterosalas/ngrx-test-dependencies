@@ -85,8 +85,8 @@ export class LoginformComponent implements OnInit, OnDestroy {
           
           dataLayer.push({
             event: 'pushEventGA',
-            categoria: 'IniciarSesión',
-            accion: 'ClicLateral',
+            categoria: 'IniciarSesion',
+            accion: 'ClicLightboxIniciar',
             etiqueta: 'IniciarSesionExitoso'
           });
 

@@ -13,6 +13,7 @@ export class CardDataComponent implements OnInit {
   @Input() text:string;
   @Input() textToolTip:string;
   @Input() Classborder:string;
+  @Input() Classtag:string;
   @Output() openDetail = new EventEmitter;
 
   ngOnInit() {

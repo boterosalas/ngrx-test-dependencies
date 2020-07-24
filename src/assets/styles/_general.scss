@@ -863,8 +863,21 @@ table {
   }
 
   .mat-list-item-content {
-    // padding: 0 25px !important;
-    margin: 0 10px;
+    margin: 0 16px;
+    span {
+      position: relative;
+      top: 2px;
+    }
+  }
+
+  .endSession {
+    .mat-list-item-content {
+      margin: 0 10px;
+      span {
+        position: relative;
+        top: 0px;
+      }
+    }
   }
 }
 
@@ -1577,7 +1590,7 @@ button.swal2-cancel.payment-cancel.swal2-styled {
 
 .orange-spinner .mat-progress-spinner circle,
 .mat-spinner circle {
-  stroke: $third-color !important;
+  stroke: #ff5555 !important;
 }
 
 .white {
@@ -2036,3 +2049,28 @@ app-menu-help-center {
     width: 100%;
   }
 }
+
+.no-level {
+  .bglabel{
+    background: $no-medal !important;
+  }
+}
+
+.bronze{
+  .bglabel{
+    background: $bronze !important;
+  }
+}
+
+.silver{
+  .bglabel{
+    background: $silver !important;
+  }
+}
+
+.gold{
+  .bglabel{
+    background: $gold !important;
+  }
+}
+

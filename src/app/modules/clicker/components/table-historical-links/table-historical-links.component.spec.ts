@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TableHistoricalLinksComponent } from './table-historical-links.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 describe('TableHistoricalLinksComponent', () => {
   let component: TableHistoricalLinksComponent;
@@ -13,7 +14,8 @@ describe('TableHistoricalLinksComponent', () => {
       declarations: [ TableHistoricalLinksComponent ],
       imports: [
         AppMaterialModule, 
-        TranslateModule.forRoot()
+        TranslateModule.forRoot(),
+        SharedModule
       ]
     })
     .compileComponents();

@@ -196,3 +196,18 @@
     font-family:$font-galano-bold;
     cursor: pointer;
   }
+
+  .hc{
+    color: #8D7EB7;  
+  }
+
+  .endSession{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+    left: 0;
+    padding: 4px 25px;
+    background: #ffffff;
+    border-top: 1px solid #ececec;
+  }

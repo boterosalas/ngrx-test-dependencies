@@ -1,3 +1,4 @@
+
 <div fxLayout="column">
 
   <span routerLink="logros" (click)="hide()"  *ngIf="(auth.getRole$ | async ) !== 'ADMIN' && auth.isLoggedIn()" class="goals">
@@ -32,39 +33,24 @@
     class="cursor-pointer f-16 whatsapp gtmHomeClicMenuLightboxWhatsApp"
     ><span class="gtmHomeClicMenuLightboxWhatsApp">WhatsApp</span></a
   >
-    <span *ngIf="auth.isLoggedIn()">
-      <a
-      mat-list-item
-      (click)="logout();hide()"
-      class="cursor-pointer f-16 logout gtmHomeClicMenuLightboxCerrarSesion"
-      > <span class="gtmHomeClicMenuLightboxCerrarSesion">{{ 'HEADER.LOGOUT' | translate }}</span> </a
-    >  
-    </span>
   </span>
 
-  <span class="text-center" *ngIf="(auth.getRole$ | async ) !== 'ADMIN'">
-    <h3 class="f-21 m-2">{{ 'GENERIC.SUPPORT' | translate }} </h3>
-    <p class="f-12">{{ 'GENERIC.EMAIL_SUPPORT' | translate }}</p>
+  <span *ngIf="(auth.getRole$ | async ) !== 'ADMIN'">
+    <mat-card class="mt-2">
+      <h3 class="f-16 mb-2 hc">{{ 'GENERIC.SUPPORT' | translate }} </h3>
+      <p class="f-12 m-0">{{ 'GENERIC.TEXT_SUPPORT' | translate }}</p>
+      <p class="f-12 m-0 black">{{ 'GENERIC.EMAIL_SUPPORT' | translate }}</p>
+    </mat-card>
   </span>
-
-  <div class="text-center" *ngIf="(auth.getRole$ | async ) !== 'ADMIN'">
-      <h3 class="m-2"> {{ 'FOOTER.FOLLOW_US' | translate }}</h3>
-    
-      <div fxLayoutAlign="center center" class="social-links">
-        <img  src="assets/img/arrow-footer.svg" alt="Clickam" />
-        <app-sociallinks></app-sociallinks>
-        <img  class="rotate" src="assets/img/arrow-footer.svg" alt="Clickam" />
-      </div>
-    
-    
-      <div class="terms gtmHomeTerminosCondicionesClickam cursor-pointer" id="terms-footer" fxLayout="column" fxLayoutAlign="center center">
-        <a (click)="goTerms();hide()" class="gtmHomeTerminosCondicionesClickam">Términos y condiciones</a>
-    </div>
-    
-    <div fxLayout="column" fxLayoutAlign="center center" class="width-border">
-      <span class="copy pt-3 pb-3">{{ 'GENERIC.COPYRIGHT' | translate }} &copy;</span>
-    </div>
-  </div>
-
 
 </div>
+
+
+<span *ngIf="auth.isLoggedIn()" class="menu-mobile endSession">
+  <a
+  mat-list-item
+  (click)="logout();hide()"
+  class="cursor-pointer f-16 logout gtmHomeClicMenuLightboxCerrarSesion"
+  > <span class="gtmHomeClicMenuLightboxCerrarSesion">{{ 'HEADER.LOGOUT' | translate }}</span> </a
+>  
+</span>

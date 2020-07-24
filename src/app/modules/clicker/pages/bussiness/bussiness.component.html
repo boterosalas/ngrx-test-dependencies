@@ -74,7 +74,7 @@
           [image]="bussiness.imageurl"
           [alt]="bussiness.description"
           other="true"
-          Class="mb-1 button-100 gtmNegocio{{title}}{{bussiness.description}}"
+          Class="mb-1 button-100 gtmNegocio{{title}}{{bussiness.description | trim}}"
           container="img-container-viajes"
           textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
           (infoProduct)="dataSliderCategory(bussiness)"
