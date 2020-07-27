@@ -132,11 +132,11 @@ export class BussinessComponent implements OnInit, OnDestroy {
             this.colorText = "white";
             break;
 
-          case 'exito':
-            this.imgBanner = "/assets/img/banners/negocios/exito-pc.jpg";
-            this.imgBannerMobile = "/assets/img/banners/negocios/exito-mobile.jpg";
-            this.colorText = "purple";
-            break;
+          // case 'exito':
+          //   this.imgBanner = "/assets/img/banners/negocios/exito-pc.jpg";
+          //   this.imgBannerMobile = "/assets/img/banners/negocios/exito-mobile.jpg";
+          //   this.colorText = "purple";
+          //   break;
 
           case 'movil-exito':
             this.imgBanner = "/assets/img/banners/negocios/movil-pc.jpg";
@@ -599,24 +599,24 @@ export class BussinessComponent implements OnInit, OnDestroy {
     
     const params = { term, order, page, count };
     this.subscription = this.sp.biggySearchExito(params).subscribe(
-      (resp: any) => {
-        this.productsListBiggy = resp.products;
+      (searchExito: any) => {
+        this.productsListBiggy = searchExito.products;
         this.productsListTransform = [...this.productsListBiggy];
         
-        this.productsListTransform.forEach(resp=> {
+        this.productsListTransform.forEach(searchExito=> {
 
-          if(!!resp.skus[0] &&  !!resp.skus[0].sellers[0]) {
-            this.sellerId = resp.skus[0].sellers[0].id;
-            this.sellerName = resp.skus[0].sellers[0].name;
+          if(!!searchExito.skus[0] &&  !!searchExito.skus[0].sellers[0]) {
+            this.sellerId = searchExito.skus[0].sellers[0].id;
+            this.sellerName = searchExito.skus[0].sellers[0].name;
           } 
 
             let object = {
-              title: resp.name,
-              plu: resp.id,
-              url: resp.url,
-              oldprice: resp.oldPrice,
-              price: resp.price,
-              image: resp.images[0],
+              title: searchExito.name,
+              plu: searchExito.id,
+              url: searchExito.url,
+              oldprice: searchExito.oldPrice,
+              price: searchExito.price,
+              image: searchExito.images[0],
               seller: this.sellerId,
               business: this.sellerName
             }
@@ -664,24 +664,24 @@ export class BussinessComponent implements OnInit, OnDestroy {
     
     const params = { term, order, page, count };
     this.subscription = this.sp.biggySearchCarulla(params).subscribe(
-      (resp: any) => {
-        this.productsListBiggy = resp.products;
+      (searchCarulla: any) => {
+        this.productsListBiggy = searchCarulla.products;
         this.productsListTransform = [...this.productsListBiggy];
         
-        this.productsListTransform.forEach(resp=> {
+        this.productsListTransform.forEach(searchCarulla=> {
 
-          if(!!resp.skus[0] &&  !!resp.skus[0].sellers[0]) {
-            this.sellerId = resp.skus[0].sellers[0].id;
-            this.sellerName = resp.skus[0].sellers[0].name;
+          if(!!searchCarulla.skus[0] &&  !!searchCarulla.skus[0].sellers[0]) {
+            this.sellerId = searchCarulla.skus[0].sellers[0].id;
+            this.sellerName = searchCarulla.skus[0].sellers[0].name;
           } 
 
             let object = {
-              title: resp.name,
-              plu: resp.id,
-              url: resp.url,
-              oldprice: resp.oldPrice,
-              price: resp.price,
-              image: resp.images[0],
+              title: searchCarulla.name,
+              plu: searchCarulla.id,
+              url: searchCarulla.url,
+              oldprice: searchCarulla.oldPrice,
+              price: searchCarulla.price,
+              image: searchCarulla.images[0],
               seller: this.sellerId,
               business: this.sellerName
             }
