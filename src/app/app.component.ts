@@ -109,7 +109,7 @@ export class AppComponent implements OnInit, OnDestroy {
   userInfo: any;
   managedPayments: boolean;
   isEmployee: boolean;
-  role: String;
+  role: string;
   classPage: string;
   location: Location;
 
