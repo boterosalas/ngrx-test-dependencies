@@ -383,10 +383,10 @@ export class UsersComponent extends MatPaginatorIntl
     this.subscription = this.usersService
       .statusUser(userId, value)
       .subscribe(() => {
-        if (value === true) {
-          this.openSnackBar("El usuario ha sido activado", "Cerrar");
-        } else {
+        if (value === false) {
           this.openSnackBar("El usuario ha sido inactivado", "Cerrar");
+        } else {
+          this.openSnackBar("El usuario ha sido activado", "Cerrar");
         }
       });
   }
@@ -395,7 +395,7 @@ export class UsersComponent extends MatPaginatorIntl
     this.subscription = this.usersService
       .verifiedUser(userId, value)
       .subscribe(() => {
-        if (value === true) {
+        if (value !== false) {
           this.openSnackBar("Se ha verificado el usuario", "Cerrar");
         } else {
           this.openSnackBar(
