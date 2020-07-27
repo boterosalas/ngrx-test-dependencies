@@ -14,7 +14,7 @@ export class AllBussinessComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   bussiness: Array<any> = [];
   isEmployee: any;
-  role: String;
+  role: string;
   userId: any;
   message: any;
 
