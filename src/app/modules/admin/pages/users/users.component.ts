@@ -185,9 +185,9 @@ export class UsersComponent extends MatPaginatorIntl
     const id = this.userId;
     let email = this.emailForm.controls.email.value;
     this.subscription = this.usersService.updateUserEmail(id, email).subscribe(
-      (resp: ResponseService) => {
+      (respEmail: ResponseService) => {
           this.dialog.closeAll();
-          this.openSnackBar(resp.userMessage, "Cerrar");
+          this.openSnackBar(respEmail.userMessage, "Cerrar");
           this.searchUser(this.paginate);
       },
       err => {
@@ -299,8 +299,8 @@ export class UsersComponent extends MatPaginatorIntl
       () => {
         this.usersService
           .downloadFile(identification, "IdentificationCard1")
-          .subscribe((resp: ResponseService) => {
-            this.download(resp);
+          .subscribe((respid1: ResponseService) => {
+            this.download(respid1);
           });
       }
     );
@@ -309,8 +309,8 @@ export class UsersComponent extends MatPaginatorIntl
       () => {
         this.usersService
           .downloadFile(identification, "IdentificationCard2")
-          .subscribe((resp: ResponseService) => {
-            this.download(resp);
+          .subscribe((respid2: ResponseService) => {
+            this.download(respid2);
           });
       }
     );
@@ -319,8 +319,8 @@ export class UsersComponent extends MatPaginatorIntl
       () => {
         this.usersService
           .downloadFile(identification, "BankCertificate")
-          .subscribe((resp: ResponseService) => {
-            this.download(resp);
+          .subscribe((respBank: ResponseService) => {
+            this.download(respBank);
           });
       }
     );
@@ -434,9 +434,9 @@ export class UsersComponent extends MatPaginatorIntl
 
     this.subscription = this.file
       .getUsersExcel(this.dateParams)
-      .subscribe((resp: ResponseService) => {
-        if (resp.state === "Success") {
-          this.openSnackBar(resp.userMessage, "Cerrar");
+      .subscribe((respExcel: ResponseService) => {
+        if (respExcel.state === "Success") {
+          this.openSnackBar(respExcel.userMessage, "Cerrar");
           this.dateForm.reset();
           if (this.dateForm.controls.dateRange.value.startDate === null) {
             this.disButon = true;
@@ -459,14 +459,14 @@ export class UsersComponent extends MatPaginatorIntl
   }
 
   public updateEmployee() {
-    this.subscription = this.usersService.updateEmployees().subscribe((resp: ResponseService)=> {
-      this.openSnackBar(resp.userMessage, 'Cerrar');
+    this.subscription = this.usersService.updateEmployees().subscribe((respUpdate: ResponseService)=> {
+      this.openSnackBar(respUpdate.userMessage, 'Cerrar');
     })
   }
 
   public exportusers() {
-    this.subscription = this.usersService.getExternalUsers().subscribe((resp: ResponseService)=> {
-      this.openSnackBar(resp.userMessage, 'Cerrar');
+    this.subscription = this.usersService.getExternalUsers().subscribe((respExport: ResponseService)=> {
+      this.openSnackBar(respExport.userMessage, 'Cerrar');
     })
   }
 
