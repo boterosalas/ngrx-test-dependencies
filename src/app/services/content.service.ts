@@ -212,7 +212,7 @@ export class ContentService {
       );
   }
 
-  public getCategoriesBusiness() {
+  public getCategoriesBusinessHome() {
     return this.http
       .get(`${this.url + this.apiGetcategoriesbusiness}`, this.httpOptions)
       .pipe(
