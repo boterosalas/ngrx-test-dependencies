@@ -131,12 +131,12 @@ export class RefersComponent implements OnInit, OnDestroy {
     let commission =  {
       amount: this.comissionForm.controls.amount.value
     }
-    this.subscription = this.file.saveAmountCommission(commission).subscribe((resp:ResponseService)=> {
-      if(resp.state === 'Success') {
-        this.openSnackBar(resp.userMessage, 'Cerrar');
+    this.subscription = this.file.saveAmountCommission(commission).subscribe((save:ResponseService)=> {
+      if(save.state === 'Success') {
+        this.openSnackBar(save.userMessage, 'Cerrar');
         this.getAmountClicker();
       } else{
-        this.openSnackBar(resp.userMessage, 'Cerrar');
+        this.openSnackBar(save.userMessage, 'Cerrar');
       }
     })
   }
