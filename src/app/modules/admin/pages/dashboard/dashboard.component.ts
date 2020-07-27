@@ -101,10 +101,10 @@ form = this.formBuilder.group({
       start: this.form.controls.selected.value.startDate.format(),
       end: this.form.controls.selected.value.endDate.format()
     }
-    this.subscription = this.kpi.getKPI(this.dateParams).subscribe(resp=> {
-      this.resume = resp.resume;
-      this.items = resp.kpi;
-      this.dataSource = new MatTableDataSource<any>(resp.listbusiness);
+    this.subscription = this.kpi.getKPI(this.dateParams).subscribe(dashboard=> {
+      this.resume = dashboard.resume;
+      this.items = dashboard.kpi;
+      this.dataSource = new MatTableDataSource<any>(dashboard.listbusiness);
     })
   }
 
