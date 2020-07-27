@@ -334,11 +334,11 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.userInfo.cellphone = this.profileFormCell.controls.phone.value;
     this.userInfo.bankAccountNumber = null;
     this.subscription = this.user.updateUser(this.userInfo).subscribe(
-      (resp: any) => {
-        if (resp.state === "Success") {
+      (user: any) => {
+        if (user.state === "Success") {
           this.dialog.closeAll();
           this.user.getProfile();
-          this.openSnackBar(resp.userMessage, "Cerrar");
+          this.openSnackBar(user.userMessage, "Cerrar");
         }
       },
       (err) => {
@@ -358,11 +358,11 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.subscription = this.user
       .changeBankInformation(this.userId, data)
       .subscribe(
-        (resp: any) => {
-          if (resp.state === "Success") {
+        (account: any) => {
+          if (account.state === "Success") {
             this.dialog.closeAll();
             this.user.getProfile();
-            this.openSnackBar(resp.userMessage, "Cerrar");
+            this.openSnackBar(account.userMessage, "Cerrar");
           }
         },
         (err) => {
@@ -383,14 +383,14 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       newPassword: btoa(this.profileFormPass.controls.password.value),
     };
     this.subscription = this.auth.changePassword(data).subscribe(
-      (resp: any) => {
-        if (resp.state === "Success") {
+      (password: any) => {
+        if (password.state === "Success") {
           this.dialog.closeAll();
           this.user.getProfile();
           this.profileFormPass.reset();
-          this.openSnackBar(resp.userMessage, "Cerrar");
+          this.openSnackBar(password.userMessage, "Cerrar");
         } else {
-          this.openSnackBar(resp.userMessage, "Cerrar");
+          this.openSnackBar(password.userMessage, "Cerrar");
         }
       },
       (err) => {
@@ -499,9 +499,9 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.userInfo.municipality = this.cityCode;
     this.userInfo.bankAccountNumber = null;
     this.subscription = this.user.updateUser(this.userInfo).subscribe(
-      (resp: any) => {
-        if (resp.state === "Success") {
-          this.openSnackBar(resp.userMessage, "Cerrar");
+      (address: any) => {
+        if (address.state === "Success") {
+          this.openSnackBar(address.userMessage, "Cerrar");
           this.user.getProfile();
           this.dialog.closeAll();
         }
