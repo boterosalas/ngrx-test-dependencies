@@ -13,12 +13,23 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { LinksService } from 'src/app/services/links.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 describe("LoginformComponent", () => {
   let component: LoginformComponent;
   let fixture: ComponentFixture<LoginformComponent>;
 
   const mockAuthService = jasmine.createSpyObj("AuthService", ["login"]);
+
+  const mockLinksService = jasmine.createSpyObj("LinksService", ["getAmount"]);
+
+  const mockUtilsService = jasmine.createSpyObj("UtilsService", ["hideloginForm", "showRegisterForm", "showForgot", "showActivate"]);
+
+  let amount = {
+    amountsCommission: 10000,
+    amountsReferred: 500000
+  }
 
   const dataUser = {
     state: "Success",
@@ -71,12 +82,13 @@ describe("LoginformComponent", () => {
         // { provide: Router, useValue: mockRouter},
         TranslateService,
         { provide: AuthService, useValue: mockAuthService },
+        { provide: LinksService, useValue: mockLinksService },
+        { provide: UtilsService, useValue: mockUtilsService }
       ],
       schemas: [
         NO_ERRORS_SCHEMA
       ]
     }).compileComponents();
-    
   }));
 
   beforeEach(() => {    
@@ -90,14 +102,31 @@ describe("LoginformComponent", () => {
     expect(component).toBeTruthy();
   });
 
-  // it("login valid", () => {
-  //   component.isSubmitted = true;
-  //   component.loginForm.controls.Username.setValue("test@test.com");
-  //   component.loginForm.controls.Password.setValue("123456789");
-  //   component.login();
-  //   expect(component.loginForm.invalid).toBeFalsy();
-  //   expect(mockAuthService.login).toHaveBeenCalled();
-  // });
+  it('getamount', () => {
+    mockLinksService.getAmount.and.returnValue(of(amount));
+    component.getAmount();
+    expect(mockLinksService.getAmount).toHaveBeenCalled();
+  });
+
+  it("utils functions", () => {
+    component.hideLogin();
+    component.showRegister();
+    component.showForgot();
+    component.showActivate();
+    expect(mockUtilsService.hideloginForm).toHaveBeenCalled();
+    expect(mockUtilsService.showRegisterForm).toHaveBeenCalled();
+    expect(mockUtilsService.showForgot).toHaveBeenCalled();
+    expect(mockUtilsService.showActivate).toHaveBeenCalled();
+  });
+
+  it("login valid", () => {
+    component.isSubmitted = true;
+    component.loginForm.controls.Username.setValue("test@test.com");
+    component.loginForm.controls.Password.setValue("123456789");
+    component.login();
+    expect(component.loginForm.invalid).toBeFalsy();
+    expect(mockAuthService.login).toHaveBeenCalled();
+  });
 
   it("Login invalid", () => {
     component.isSubmitted = false;

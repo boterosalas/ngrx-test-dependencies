@@ -74,15 +74,15 @@ export class ForgotpasswordformComponent implements OnInit, OnDestroy {
     this.subscription = this.forgot.forgotPassword(userName).subscribe(
       (resp: ResponseService) => {
         this.loading.hide();
-        if (resp.state === "Success") {
+        if (resp.state !== "Success") {
+          Swal.fire(
+            this.swalOptError = {...this.swalOptError, text: resp.userMessage}
+          );
+        } else {
           this.swalOptSuccess = {...this.swalOptSuccess, text: resp.userMessage};
           Swal.fire(this.swalOptSuccess).then(()=> {
             this.utils.hideloginForm();
           });
-        } else {
-          Swal.fire(
-            this.swalOptError = {...this.swalOptError, text: resp.userMessage}
-          );
         }
       },
       error => {
