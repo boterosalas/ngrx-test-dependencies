@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   templatePromo: TemplateRef<any>;
   categories = [];
   managedPayments: boolean;
-  role: String;
+  role: string;
   userId: any;
   message: any;
   modalHref: string;
