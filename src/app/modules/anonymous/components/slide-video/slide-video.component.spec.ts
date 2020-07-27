@@ -51,4 +51,29 @@ describe('SlideVideoComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('open video', () => {
+    let data = {
+      video: 'RWQQ-OVkVpI',
+      title: 'video modal',
+      id: 'modal'
+    }
+
+    component.openVideo(data);
+    expect(data).toBeDefined();
+
+  });
+
+  it('next', () => {
+    component.next();
+    expect(component.next).toBeTruthy();
+  });
+
+  it('prev', () => {
+    component.prev();
+    expect(component.prev).toBeTruthy();
+  });
+  
+  
+
 });

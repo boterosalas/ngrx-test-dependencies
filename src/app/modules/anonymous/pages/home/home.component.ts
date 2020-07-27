@@ -347,7 +347,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public getCategoriesBusiness() {
     this.subscription = this.content
-      .getCategoriesBusiness()
+      .getCategoriesBusinessHome()
       .subscribe((categories) => (this.categories = categories));
   }
 
