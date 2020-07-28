@@ -22,14 +22,7 @@ export class TermsAndConditionsComponent implements OnInit {
     this.amount = localStorage.getItem('Amount');
     this.amountReferred = localStorage.getItem('AmonuntReferred');
     this.getAmount();
-
-    setTimeout(() => {
-      document.querySelector('.mat-tab-label[aria-posinset="1"]').classList.add("gtmTerminosCondicionesClicTerminosLegales");
-      document.querySelector('.mat-tab-label[aria-posinset="2"]').classList.add("gtmTerminosCondicionesClicEmprendedor");
-      document.querySelector('.mat-tab-label[aria-posinset="3"]').classList.add("gtmTerminosCondicionesClicProteccionDatos");
-      document.querySelector('.mat-tab-label[aria-posinset="4"]').classList.add("gtmTerminosCondicionesClicProgramaReferidos");
-    }, 1000);
-  
+    this.addTagsclass();
   }
 
   public getAmount() {
@@ -37,6 +30,16 @@ export class TermsAndConditionsComponent implements OnInit {
       localStorage.setItem("Amount", amount.amountsCommission);
       localStorage.setItem("AmonuntReferred", amount.amountsReferred);
     });
+  }
+
+  public addTagsclass() {
+    setTimeout(() => {
+      document.querySelector('.mat-tab-label[aria-posinset="1"]').classList.add("gtmTerminosCondicionesClicTerminosLegales");
+      document.querySelector('.mat-tab-label[aria-posinset="2"]').classList.add("gtmTerminosCondicionesClicEmprendedor");
+      document.querySelector('.mat-tab-label[aria-posinset="3"]').classList.add("gtmTerminosCondicionesClicProteccionDatos");
+      document.querySelector('.mat-tab-label[aria-posinset="4"]').classList.add("gtmTerminosCondicionesClicProgramaReferidos");
+    }, 1000);
+  
   }
 
 }

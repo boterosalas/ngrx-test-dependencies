@@ -28,4 +28,15 @@ describe('SliderWorksComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('next', () => {
+    component.next();
+    expect(component.next).toBeTruthy();
+  });
+
+  it('prev', () => {
+    component.prev();
+    expect(component.prev).toBeTruthy();
+  });
+
 });
