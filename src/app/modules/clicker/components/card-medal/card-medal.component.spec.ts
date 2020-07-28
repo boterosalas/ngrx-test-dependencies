@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CardMedalComponent } from './card-medal.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 describe('CardMedalComponent', () => {
   let component: CardMedalComponent;
@@ -11,7 +13,8 @@ describe('CardMedalComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ CardMedalComponent ],
       imports: [
-        AppMaterialModule
+        AppMaterialModule,
+        FlexLayoutModule
       ]
     })
     .compileComponents();
