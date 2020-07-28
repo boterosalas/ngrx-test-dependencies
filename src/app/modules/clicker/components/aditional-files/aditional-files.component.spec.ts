@@ -52,19 +52,19 @@ describe('AditionalFilesComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it("on file change ced1", () => {
-    const mockFile = new File([""], "name.jpg", { type: "text/html" });
-    const mockEvt = { target: { files: [mockFile] } };
-    component.onFileChangeFiles(mockEvt, 'cedula1');
-    expect(component.onFileChangeFiles).not.toBeNull();
-  });
+  // it("on file change ced1", () => {
+  //   const mockFile = new File([""], "name.jpg", { type: "text/html" });
+  //   const mockEvt = { target: { files: [mockFile] } };
+  //   component.onFileChangeFiles(mockEvt, 'cedula1');
+  //   expect(component.onFileChangeFiles).not.toBeNull();
+  // });
 
-  it("on file change ced2", () => {
-    const mockFile = new File([""], "name.jpg", { type: "text/html" });
-    const mockEvt = { target: { files: [mockFile] } };
-    component.onFileChangeFiles(mockEvt, 'cedula2');
-    expect(component.onFileChangeFiles).not.toBeNull();
-  });
+  // it("on file change ced2", () => {
+  //   const mockFile = new File([""], "name.jpg", { type: "text/html" });
+  //   const mockEvt = { target: { files: [mockFile] } };
+  //   component.onFileChangeFiles(mockEvt, 'cedula2');
+  //   expect(component.onFileChangeFiles).not.toBeNull();
+  // });
 
   it("on file change cert", () => {
     const mockFile = new File([""], "name.pdf", { type: "text/html" });
