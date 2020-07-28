@@ -315,25 +315,25 @@ describe("BussinessComponent", () => {
     expect(product).toBeDefined();
   });
 
-  it("modal product carulla", () => {
-    const product = {
-      business: "carulla",
-      image: {
-        value:
-          "https://carulla.vteximg.com.br/arquivos/ids/821167…Pague-5-Lleve-6-720042_a.png?v=637185259801000000",
-      },
-      oldprice: 7750,
-      plu: "131805",
-      price: 7300,
-      seller: "1",
-      title: "Agua Cristal Pague 5 lleve 6 Pet x 600 ml",
-      url: "/agua-600ml-pague-5-lleve-6-131805/p",
-    };
+  // it("modal product carulla", () => {
+  //   const product = {
+  //     business: "carulla",
+  //     image: {
+  //       value:
+  //         "https://carulla.vteximg.com.br/arquivos/ids/821167…Pague-5-Lleve-6-720042_a.png?v=637185259801000000",
+  //     },
+  //     oldprice: 7750,
+  //     plu: "131805",
+  //     price: 7300,
+  //     seller: "1",
+  //     title: "Agua Cristal Pague 5 lleve 6 Pet x 600 ml",
+  //     url: "/agua-600ml-pague-5-lleve-6-131805/p",
+  //   };
 
-    component.id = "2";
-    component.dataProduct(product);
-    expect(product).toBeDefined();
-  });
+  //   component.id = "2";
+  //   component.dataProduct(product);
+  //   expect(product).toBeDefined();
+  // });
 
   it("search products exito", () => {
     const products = {

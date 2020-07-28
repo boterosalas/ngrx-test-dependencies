@@ -66,17 +66,17 @@ describe('AditionalFilesComponent', () => {
   //   expect(component.onFileChangeFiles).not.toBeNull();
   // });
 
-  it("on file change cert", () => {
-    const mockFile = new File([""], "name.pdf", { type: "text/html" });
-    const mockEvt = { target: { files: [mockFile] } };
-    component.onFileChangeFiles(mockEvt, 'certificado');
-    expect(component.onFileChangeFiles).not.toBeNull();
-  });
+  // it("on file change cert", () => {
+  //   const mockFile = new File([""], "name.pdf", { type: "text/html" });
+  //   const mockEvt = { target: { files: [mockFile] } };
+  //   component.onFileChangeFiles(mockEvt, 'certificado');
+  //   expect(component.onFileChangeFiles).not.toBeNull();
+  // });
 
-  it('reset form', () => {
-    component.resetForm();
-    expect(component.externalForm.valid).toBeTruthy();
-  });
+  // it('reset form', () => {
+  //   component.resetForm();
+  //   expect(component.externalForm.valid).toBeTruthy();
+  // });
 
   it('sendInfo', () => {
     spyOn(component.uploadFile, 'emit');
