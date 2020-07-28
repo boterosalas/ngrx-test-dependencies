@@ -3,14 +3,14 @@ import {
   OnInit,
   OnDestroy,
   ViewChild,
-  TemplateRef
+  TemplateRef,
 } from "@angular/core";
 import {
   MatTableDataSource,
   MatPaginator,
   MatDialog,
   MatSnackBar,
-  MatBottomSheet
+  MatBottomSheet,
 } from "@angular/material";
 import { LinksService } from "src/app/services/links.service";
 import { Subscription } from "rxjs";
@@ -21,7 +21,7 @@ import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog
 @Component({
   selector: "app-links-historial",
   templateUrl: "./links-historial.component.html",
-  styleUrls: ["./links-historial.component.scss"]
+  styleUrls: ["./links-historial.component.scss"],
 })
 export class LinksHistorialComponent implements OnInit {
   dataSource: any;
@@ -95,7 +95,7 @@ export class LinksHistorialComponent implements OnInit {
 
   public getLinksHistory(from = 1, to = this.pageTo, orderBy = "DATEDESC") {
     const params = { from, to, orderBy };
-    this.subscription = this.links.getLinkHistory(params).subscribe(resp => {
+    this.subscription = this.links.getLinkHistory(params).subscribe((resp) => {
       this.dataSource = new MatTableDataSource<any>(resp.listLinkHistory);
       this.totalItems = resp.total;
     });
@@ -115,7 +115,7 @@ export class LinksHistorialComponent implements OnInit {
 
   private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      duration: 5000
+      duration: 5000,
     });
   }
 
@@ -132,12 +132,12 @@ export class LinksHistorialComponent implements OnInit {
       .share({
         title: "",
         text: "",
-        url: this.urlshorten
+        url: this.urlshorten,
       })
-      .then(response => {
+      .then((response) => {
         console.log(response);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
@@ -152,6 +152,7 @@ export class LinksHistorialComponent implements OnInit {
   }
 
   public dataHistory(product) {
+    console.log(product);
     this.enableCopy = false;
     const dataCategoryUrl = product.link;
     this.showForm = false;
@@ -159,9 +160,9 @@ export class LinksHistorialComponent implements OnInit {
     this.reference = false;
     this.showFormCustomer = true;
     this.url = `${dataCategoryUrl}${this.idClicker}`;
-    this.subscription = this.user
-    let splice = product.link.split('//');
-    this.urlshorten = 'https://'+ splice[1];
+    this.subscription = this.user;
+    let splice = product.link.split("//");
+    this.urlshorten = "https://" + splice[1];
     this.formShareLink();
     const home = true;
     this.business = product.idbusiness;
@@ -176,31 +177,31 @@ export class LinksHistorialComponent implements OnInit {
     const showProduct = true;
     const id = product.productId;
     const history = true;
-    this.classButtonWhatsapp = `gtmClicLightboxIconoWhatsApp${this.title}${product.description}`
+    this.classButtonWhatsapp = `gtmClicLightboxIconoWhatsApp${title}`
       .replace(/\s/g, "")
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
-    this.classButtonTwitter = `gtmClicLightboxIconoTwitter${this.title}${product.description}`
+    this.classButtonTwitter = `gtmClicLightboxIconoTwitter${title}`
       .replace(/\s/g, "")
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
-    this.classButtonFacebook = `gtmClicLightboxIconoFacebook${this.title}${product.description}`
+    this.classButtonFacebook = `gtmClicLightboxIconoFacebook${title}`
       .replace(/\s/g, "")
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
-    this.classButtonShare = `gtmClicLightboxCompartir${this.title}${product.description}`
+    this.classButtonShare = `gtmClicLightboxCompartir${title}`
       .replace(/\s/g, "")
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
-    this.classButtonBuy = `gtmClicLightboxComprar${this.title}${product.description}`
+    this.classButtonBuy = `gtmClicLightboxComprar${title}`
       .replace(/\s/g, "")
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
-    this.classButtonRefer = `gtmClicLightboxReferir${this.title}${product.description}`
+    this.classButtonRefer = `gtmClicLightboxReferir${title}`
       .replace(/\s/g, "")
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
-    this.classButtonCopy = `gtmClicLightboxCopiarLink${this.title}${product.description}`
+    this.classButtonCopy = `gtmClicLightboxCopiarLink${title}`
       .replace(/\s/g, "")
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
@@ -220,8 +221,8 @@ export class LinksHistorialComponent implements OnInit {
         id,
         title,
         home,
-        history
-      }
+        history,
+      },
     });
 
     dialogref.afterDismissed().subscribe(() => {
@@ -231,7 +232,7 @@ export class LinksHistorialComponent implements OnInit {
 
   private formShareLink() {
     this.formLink = this.fb.group({
-      link: [this.url]
+      link: [this.url],
     });
   }
 

@@ -28,7 +28,7 @@ export class ComissionTableComponent implements OnInit {
 
   public addTagsTableComission(){
     
-    setTimeout(() => {
+    let interval = setInterval(() => {
       
       document.querySelector('.mat-tab-label[aria-posinset="1"]').classList.add("gtmTablaComiClicMenuMovilExito");
       document.querySelector('.mat-tab-label[aria-posinset="1"] .mat-tab-label-content').classList.add("gtmTablaComiClicMenuMovilExito");
@@ -48,7 +48,9 @@ export class ComissionTableComponent implements OnInit {
       document.querySelector('.mat-tab-label[aria-posinset="5"]').classList.add("gtmTablaComiClicMenuExito");
       document.querySelector('.mat-tab-label[aria-posinset="5"] .mat-tab-label-content').classList.add("gtmTablaComiClicMenuExito");
 
-
+      if(document.querySelector('.mat-tab-label[aria-posinset="1"]')) {
+        clearInterval(interval);
+      }
 
     }, 1000);
   }
