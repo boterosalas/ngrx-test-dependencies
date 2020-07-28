@@ -33,4 +33,11 @@ describe('ReferEmailComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('send email', () => {
+    component.sendEmail();
+    expect(component.referForm.errors).toBeFalsy();
+  });
+  
+  
 });

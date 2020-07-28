@@ -179,7 +179,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
         if (resp.state === "Success") {
           dataLayer.push({
             event: "pushEventGA",
-            categoria: "TerminosCondiciones",
+            categoria: "Registro",
             accion: "ClicContinuar",
             etiqueta: "RegistroExitoso"
           });

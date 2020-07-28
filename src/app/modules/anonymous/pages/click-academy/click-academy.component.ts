@@ -25,9 +25,11 @@ export class ClickAcademyComponent implements OnInit {
 
   public resetOnboarding() {
     this.user.saveOnboarding(false).subscribe();
+
     setTimeout(() => {
       this.router.navigate(['./inicio']);
     }, 500);
+    
   }
 
 }
