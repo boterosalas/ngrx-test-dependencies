@@ -17,7 +17,17 @@ export class ComissionTableComponent implements OnInit {
 
   ngOnInit() {
     this.getComission();
+    this.addTagsTableComission();
+  }
 
+  public getComission() {
+    this.content.getCommissions().subscribe(resp => {
+      this.tableComission = resp;
+    })
+  }
+
+  public addTagsTableComission(){
+    
     setTimeout(() => {
       
       document.querySelector('.mat-tab-label[aria-posinset="1"]').classList.add("gtmTablaComiClicMenuMovilExito");
@@ -41,13 +51,6 @@ export class ComissionTableComponent implements OnInit {
 
 
     }, 1000);
-
-  }
-
-  public getComission() {
-    this.content.getCommissions().subscribe(resp => {
-      this.tableComission = resp;
-    })
   }
 
 }

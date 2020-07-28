@@ -401,4 +401,14 @@ describe("ComissionTableComponent", () => {
     expect(component).toBeTruthy();
     expect(mockContentService.getCommissions).toHaveBeenCalled();
   });
+
+  it("class tags", () => {
+    component.addTagsTableComission();
+    fixture.whenStable().then(()=> {
+      const nativeElementInput = fixture.nativeElement;
+      const tab = nativeElementInput.querySelector("'.mat-tab-label[aria-posinset='1']'");
+      expect(tab).toHaveClass('gtmTablaComiClicMenuMovilExito');
+    })
+  });
+
 });
