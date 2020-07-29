@@ -46,7 +46,8 @@ export class LinksService {
   apiGetAmounts = "amount/getamounts";
   apiSaveAmountCommission = "amount/saveamountcommission";
   apiSaveAmountReferred = "amount/saveamountreferred";
-  apiGetmedals="medal/getmedals"
+  apiGetmedals="medal/getmedals";
+  apiPicking = "picking/importfilepickingcommissions"
 
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
@@ -62,6 +63,29 @@ export class LinksService {
   public saveLink(SaveLink: any) {
     return this.http
       .post(`${this.url + this.apiSaveLink}`, SaveLink, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        )
+      );
+  }
+
+  public sendPickingfile(formdata) {
+    let data = new FormData();
+    data.append("FileBase64", formdata.fileBase64);
+    // data.append("Business", formdata.business);
+    // data.append("email", formdata.email);
+
+    return this.http
+      .post(
+        `${environment.URL_COMISSION}${this.apiPicking}`,
+        formdata,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
