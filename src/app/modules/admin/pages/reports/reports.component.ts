@@ -312,12 +312,12 @@ export class ReportsComponent implements OnInit, OnDestroy {
     };
     this.loading.show();
     this.subscription = this.file.sendPickingfile(data).subscribe(
-      (res: ResponseService) => {
+      (picking: ResponseService) => {
         this.loading.hide();
-        if (res.state !== "Error") {
+        if (picking.state !== "Error") {
           Swal.fire({
             title: "Carga exitosa",
-            text: res.userMessage,
+            text: picking.userMessage,
             type: "success",
             confirmButtonText: "Aceptar",
             confirmButtonClass: "upload-success"
@@ -327,7 +327,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
         } else {
           Swal.fire({
             title: "Error en la Carga",
-            text: res.userMessage,
+            text: picking.userMessage,
             type: "error",
             confirmButtonText: "Aceptar",
             confirmButtonClass: "upload-error"
