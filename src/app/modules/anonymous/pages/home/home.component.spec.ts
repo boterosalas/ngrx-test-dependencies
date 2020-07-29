@@ -568,10 +568,10 @@ describe("HomeComponent", () => {
     expect(component.newTermsHTML).toBeTruthy();
   });
 
-  it('modal promo', () => {
-    component.getModalPromo();
-    expect(mockContentService.getPopupus).toHaveBeenCalled();
-  });
+  // it('modal promo', () => {
+  //   component.getModalPromo();
+  //   expect(mockContentService.getPopupus).toHaveBeenCalled();
+  // });
   
   
 

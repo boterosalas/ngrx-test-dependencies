@@ -161,11 +161,13 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.getInfomonth();
         });
       }
-      setTimeout(() => {
-        if (promoOpen === "1") {
-          this.showModalPayment();
+      let interval = setInterval(() => {
+        this.showModalPayment();
+        if(this.paymentPending > 10000){
+          clearInterval(interval);
         }
-      }, 1000);
+
+      }, 3000);
 
       if (role === "CLICKER") {
         setTimeout(() => {
@@ -174,9 +176,10 @@ export class HomeComponent implements OnInit, OnDestroy {
           }
         }, 1000);
 
-        if (promoOpen !== "1") {
-          this.getModalPromo();
-        }
+        // if (promoOpen !== "1") {
+        //   this.getModalPromo();
+        // }
+
         let token = localStorage.getItem("ACCESS_TOKEN");
         let tokenDecode = decode(token);
         this.userId = tokenDecode.userid;
@@ -402,7 +405,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       );
   }
 
-  public showModalPayment() {
+  private showModalPayment() {
     if (
       this.role === "CLICKER" &&
       this.managedPayments === false &&
@@ -432,38 +435,38 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  public getModalPromo() {
-    this.content.getPopupus().subscribe((resp) => {
-      if (resp.length > 0) {
-        localStorage.setItem("ModalPromo", "1");
-        this.modalHref = resp[0].link;
-        this.modalSrcWeb = resp[0].imageUrlWeb;
-        this.modalSrcMobile = resp[0].imageUrlMobile;
-        this.modalAltWeb = resp[0].imageAltMobile;
-        this.modalAltMobile = resp[0].imageAltMobile;
+  // public getModalPromo() {
+  //   this.content.getPopupus().subscribe((resp) => {
+  //     if (resp.length > 0) {
+  //       localStorage.setItem("ModalPromo", "1");
+  //       this.modalHref = resp[0].link;
+  //       this.modalSrcWeb = resp[0].imageUrlWeb;
+  //       this.modalSrcMobile = resp[0].imageUrlMobile;
+  //       this.modalAltWeb = resp[0].imageAltMobile;
+  //       this.modalAltMobile = resp[0].imageAltMobile;
 
-        const template = this.templatePromo;
-        const title = "";
-        const id = "promo-modal";
+  //       const template = this.templatePromo;
+  //       const title = "";
+  //       const id = "promo-modal";
 
-        this.dialog.open(ModalGenericComponent, {
-          panelClass: "promo-home",
-          data: {
-            title,
-            id,
-            template,
-          },
-        });
+  //       this.dialog.open(ModalGenericComponent, {
+  //         panelClass: "promo-home",
+  //         data: {
+  //           title,
+  //           id,
+  //           template,
+  //         },
+  //       });
 
-        this.dialog.afterAllClosed.subscribe(() => {
-          localStorage.setItem("ModalPromo", "1");
-          this.showModalPayment();
-        });
-      } else {
-        this.showModalPayment();
-      }
-    });
-  }
+  //       this.dialog.afterAllClosed.subscribe(() => {
+  //         localStorage.setItem("ModalPromo", "1");
+  //         this.showModalPayment();
+  //       });
+  //     } else {
+  //       this.showModalPayment();
+  //     }
+  //   });
+  // }
 
   public termsAndConditions() {
     const template = this.templateTerms;
