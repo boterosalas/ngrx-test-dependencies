@@ -102,6 +102,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   activateButton: boolean = false;
   amount: any;
   amountReferred:any;
+  paymentPending:number;
 
   constructor(
     public router: Router,
@@ -157,6 +158,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.isEmployee = user.isEmployeeGrupoExito;
           this.managedPayments = user.managedPayments;
           this.newTerms = user.acceptTermsReferrals;
+          this.getInfomonth();
         });
       }
       setTimeout(() => {
@@ -405,12 +407,13 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.role === "CLICKER" &&
       this.managedPayments === false &&
       this.isEmployee === false &&
-      this.newTerms  === true
+      this.newTerms  === true &&
+      this.paymentPending >= 10000
     ) {
       Swal.fire({
         title: "¡Registra tus datos bancarios!",
         text:
-          "Recuerda que para recibir el pago de tus comisiones, debes registrar tus datos bancarios.",
+        `Recuerda que para recibir el pago de tus comisiones , debes registrar tus datos bancarios. (Tienes comisiones pendientes por $${this.paymentPending})`,
         type: "info",
         showCancelButton: true,
         showCloseButton: true,
@@ -520,6 +523,16 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.showModalPayment();
       this.openSnackBar(resp.userMessage, 'Cerrar');
     })
+  }
+
+  /**
+   * Metodo para obtener el resumen del mes generados
+   */
+
+  public getInfomonth() {
+    this.subscription = this.link.getReports().subscribe((resume: any) => {
+      this.paymentPending = resume.money.paymentPending;
+    });
   }
 
 }
