@@ -152,7 +152,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public getUserDataUser() {
     this.subscription = this.auth.getRole$.subscribe((role) => {
       this.role = role;
-      let promoOpen = localStorage.getItem("ModalPromo");
+      // let promoOpen = localStorage.getItem("ModalPromo");
       if (role === "CLICKER" || role === "ADMIN") {
         this.subscription = this.user.getuserdata().subscribe((user) => {
           this.isEmployee = user.isEmployeeGrupoExito;
