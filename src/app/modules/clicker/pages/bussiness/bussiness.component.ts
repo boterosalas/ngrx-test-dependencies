@@ -1,33 +1,39 @@
-import { Component, OnInit, HostListener, ViewChild, TemplateRef, OnDestroy } from '@angular/core';
-import { RouterLink, ActivatedRoute, Router } from '@angular/router';
-import { ContentService } from 'src/app/services/content.service';
-import { UtilsService } from 'src/app/services/utils.service';
-import { distinctUntilChanged, filter, map } from 'rxjs/operators';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
-import { ResponseService } from 'src/app/interfaces/response';
-import { MatBottomSheet, MatSnackBar, MatDialog } from '@angular/material';
-import { UserService } from 'src/app/services/user.service';
-import { AuthService } from 'src/app/services/auth.service';
-import { LinksService } from 'src/app/services/links.service';
-import { TokenService } from 'src/app/services/token.service';
-import { NgNavigatorShareService } from 'ng-navigator-share';
-import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
-import { environment } from 'src/environments/environment';
-declare var dataLayer: any
+import {
+  Component,
+  OnInit,
+  HostListener,
+  ViewChild,
+  TemplateRef,
+  OnDestroy,
+} from "@angular/core";
+import { RouterLink, ActivatedRoute, Router } from "@angular/router";
+import { ContentService } from "src/app/services/content.service";
+import { UtilsService } from "src/app/services/utils.service";
+import { distinctUntilChanged, filter, map } from "rxjs/operators";
+import { FormGroup, Validators, FormBuilder } from "@angular/forms";
+import { Subscription } from "rxjs";
+import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog.component";
+import { ResponseService } from "src/app/interfaces/response";
+import { MatBottomSheet, MatSnackBar, MatDialog } from "@angular/material";
+import { UserService } from "src/app/services/user.service";
+import { AuthService } from "src/app/services/auth.service";
+import { LinksService } from "src/app/services/links.service";
+import { TokenService } from "src/app/services/token.service";
+import { NgNavigatorShareService } from "ng-navigator-share";
+import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
+import { environment } from "src/environments/environment";
+declare var dataLayer: any;
 
 @Component({
-  selector: 'app-bussiness',
-  templateUrl: './bussiness.component.html',
-  styleUrls: ['./bussiness.component.scss']
+  selector: "app-bussiness",
+  templateUrl: "./bussiness.component.html",
+  styleUrls: ["./bussiness.component.scss"],
 })
 export class BussinessComponent implements OnInit, OnDestroy {
-
-  id:string;
+  id: string;
   title: string;
   percent: string;
-  percentBussiness:string = "Hasta 9.6%";
+  percentBussiness: string = "Hasta 9.6%";
   bussiness = [];
 
   @ViewChild("templateTerms", { static: false })
@@ -35,7 +41,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
   private ngNavigatorShareService: NgNavigatorShareService;
-  image:string;
+  image: string;
   template: any;
   numberPattern = "^(0|[0-9][0-9]*)$";
   showFormCustomer = true;
@@ -49,15 +55,17 @@ export class BussinessComponent implements OnInit, OnDestroy {
   formLink: FormGroup;
   enableCopy: boolean = true;
   identification: string;
-  imgBanner:string;
-  imgBannerMobile:string;
-  colorText:string;
+  imgBanner: string;
+  imgBannerMobile: string;
+  colorText: string;
 
-  @ViewChild("templateCategories", { static: false }) templateCategories: TemplateRef<any>;
-  @ViewChild("templateDialogAssured", { static: false }) templateAssured: TemplateRef<any>;
+  @ViewChild("templateCategories", { static: false })
+  templateCategories: TemplateRef<any>;
+  @ViewChild("templateDialogAssured", { static: false })
+  templateAssured: TemplateRef<any>;
   @ViewChild("templateEC", { static: false }) templateEC: TemplateRef<any>;
 
-  urlshorten: string = '';
+  urlshorten: string = "";
   url: string;
   classButtonCopy: string;
   classButtonRefer: string;
@@ -72,8 +80,9 @@ export class BussinessComponent implements OnInit, OnDestroy {
   idClicker: string;
   showDeliver: boolean = false;
   acceptTermsDeliver: boolean;
-  urlPlaystore:string = 'https://play.google.com/store/apps/details?id=com.sewayplus';
-  urlAppstore:string = 'https://apps.apple.com/co/app/seway/id1414489414';
+  urlPlaystore: string =
+    "https://play.google.com/store/apps/details?id=com.sewayplus";
+  urlAppstore: string = "https://apps.apple.com/co/app/seway/id1414489414";
 
   paginate: string;
   pageIndex: number = 0;
@@ -87,12 +96,12 @@ export class BussinessComponent implements OnInit, OnDestroy {
   showResults: boolean;
   showNotFound: boolean;
   orderOptions: any;
-  orderValue:string;
-  sellerId:string;
-  mostrarProductos:number = 52;
+  orderValue: string;
+  sellerId: string;
+  mostrarProductos: number = 52;
   sellerName: string;
-  showReferenceButton:boolean = true;
-  allBussiness:string;
+  showReferenceButton: boolean = true;
+  allBussiness: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -108,17 +117,22 @@ export class BussinessComponent implements OnInit, OnDestroy {
     private links: LinksService,
     private token: TokenService,
     ngNavigatorShareService: NgNavigatorShareService,
-    private dialogModal: MatDialog,
-  ) { 
-    
+    private dialogModal: MatDialog
+  ) {
     this.ngNavigatorShareService = ngNavigatorShareService;
 
-    this.subscription =  this.route.params.subscribe(route => {
-      if(route.id === undefined && route.code === undefined && route.imageurl === undefined && route.infoAditional === undefined) {
-        this.id = '1';
-        this.title = 'exito'
-        this.image = 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg'
-        this.percent = 'Hasta 9.6% de ganancia'
+    this.subscription = this.route.params.subscribe((route) => {
+      if (
+        route.id === undefined &&
+        route.code === undefined &&
+        route.imageurl === undefined &&
+        route.infoAditional === undefined
+      ) {
+        this.id = "1";
+        this.title = "exito";
+        this.image =
+          "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg";
+        this.percent = "Hasta 9.6% de ganancia";
       } else {
         this.id = route.id;
         this.title = route.code;
@@ -126,9 +140,10 @@ export class BussinessComponent implements OnInit, OnDestroy {
         this.percent = route.infoAditional;
         this.allBussiness = route.allBussiness;
         switch (this.title) {
-          case 'carulla':
+          case "carulla":
             this.imgBanner = "/assets/img/banners/negocios/carulla-pc.jpg";
-            this.imgBannerMobile = "/assets/img/banners/negocios/carulla-mobile.jpg";
+            this.imgBannerMobile =
+              "/assets/img/banners/negocios/carulla-mobile.jpg";
             this.colorText = "white";
             break;
 
@@ -138,50 +153,54 @@ export class BussinessComponent implements OnInit, OnDestroy {
           //   this.colorText = "purple";
           //   break;
 
-          case 'movil-exito':
+          case "movil-exito":
             this.imgBanner = "/assets/img/banners/negocios/movil-pc.jpg";
-            this.imgBannerMobile = "/assets/img/banners/negocios/movil-mobile.jpg";
+            this.imgBannerMobile =
+              "/assets/img/banners/negocios/movil-mobile.jpg";
             this.colorText = "white";
             break;
 
-          case 'seguros':
+          case "seguros":
             this.imgBanner = "/assets/img/banners/negocios/seguros-pc.jpg";
-            this.imgBannerMobile = "/assets/img/banners/negocios/seguros-mobile.jpg";
+            this.imgBannerMobile =
+              "/assets/img/banners/negocios/seguros-mobile.jpg";
             this.colorText = "white";
             break;
 
-          case 'viajes':
+          case "viajes":
             this.imgBanner = "/assets/img/banners/negocios/viajes-pc.jpg";
-            this.imgBannerMobile = "/assets/img/banners/negocios/viajes-mobile.jpg";
+            this.imgBannerMobile =
+              "/assets/img/banners/negocios/viajes-mobile.jpg";
             this.colorText = "white";
             break;
 
-          case 'wesura':
+          case "wesura":
             this.imgBanner = "/assets/img/banners/negocios/we-sura.jpg";
-            this.imgBannerMobile = "/assets/img/banners/negocios/wesura-mobile.jpg";
+            this.imgBannerMobile =
+              "/assets/img/banners/negocios/wesura-mobile.jpg";
             this.colorText = "purple";
             break;
-        
+
           default:
             this.imgBanner = "/assets/img/banners/negocios/exito-pc.jpg";
-            this.imgBannerMobile = "/assets/img/banners/negocios/exito-mobile.jpg";
+            this.imgBannerMobile =
+              "/assets/img/banners/negocios/exito-mobile.jpg";
             this.colorText = "purple";
             break;
         }
       }
     });
-
   }
 
   ngOnInit() {
-    if(this.title === 'movil-exito') {
+    if (this.title === "movil-exito") {
       this.showReferenceButton = false;
     }
 
     this.getDate();
     this.getContentBussiness();
     this.getUserData();
-    if(localStorage.getItem("ACCESS_TOKEN") !== null ) {
+    if (localStorage.getItem("ACCESS_TOKEN") !== null) {
       this.identification = this.token.userInfo().identification;
     }
 
@@ -191,23 +210,22 @@ export class BussinessComponent implements OnInit, OnDestroy {
         [
           Validators.required,
           Validators.pattern(this.numberPattern),
-          Validators.maxLength(10)
-        ]
-      ]
+          Validators.maxLength(10),
+        ],
+      ],
     });
 
     this.termsForm = this.fb.group({
-      acceptTerms: [null, Validators.required]
-    })
+      acceptTerms: [null, Validators.required],
+    });
 
     this.orderOptions = [
-      {value: 'OrderByTopSaleDESC', description: 'Más Vendidos'},
-      {value: 'OrderByReleaseDateDESC', description: 'Más recientes'},
-      {value: 'OrderByPriceDESC', description: 'Mayor precio primero'},
-      {value: 'OrderByNameASC', description: 'Productos de la A-Z'},
-      {value: 'OrderByNameDESC', description: 'Productos de la Z-A'},
-    ]
-
+      { value: "OrderByTopSaleDESC", description: "Más Vendidos" },
+      { value: "OrderByReleaseDateDESC", description: "Más recientes" },
+      { value: "OrderByPriceDESC", description: "Mayor precio primero" },
+      { value: "OrderByNameASC", description: "Productos de la A-Z" },
+      { value: "OrderByNameDESC", description: "Productos de la Z-A" },
+    ];
   }
 
   // public order(option:string) {
@@ -216,44 +234,42 @@ export class BussinessComponent implements OnInit, OnDestroy {
   //   this.orderValue = option;
   // }
 
-
   public getContentBussiness() {
-    this.subscription = this.content.getBusinessContent(this.id)
-    .pipe(distinctUntilChanged())
-    .subscribe(bussiness => {
-      this.showDeliver = true;
-      this.bussiness = bussiness;
-    })
+    this.subscription = this.content
+      .getBusinessContent(this.id)
+      .pipe(distinctUntilChanged())
+      .subscribe((bussiness) => {
+        this.showDeliver = true;
+        this.bussiness = bussiness;
+      });
   }
 
   public goback() {
-    if(this.allBussiness === 'true') {
-      this.router.navigate(['/negocios'])
+    if (this.allBussiness === "true") {
+      this.router.navigate(["/negocios"]);
     } else {
-      this.router.navigate(['./']);
+      this.router.navigate(["./"]);
     }
   }
 
-  
-   /**
+  /**
    * Metodo para salvar los links generados
    */
 
   public saveLink(param?: string) {
-
     let dataSaveLink = {
       link: this.url,
       identification: this.identification,
       plu: this.plu,
       business: this.business,
       creationDate: this.date,
-      identificationcustomer: this.idCustomerForm.controls.identification.value
+      identificationcustomer: this.idCustomerForm.controls.identification.value,
     };
 
     this.subscription = this.links
       .saveLink(dataSaveLink)
       .subscribe((resp: ResponseService) => {
-        this.urlshorten = resp.objectResponse.link
+        this.urlshorten = resp.objectResponse.link;
         this.enableCopy = false;
         if (param === "assured") {
           if (resp.state === "Error") {
@@ -276,7 +292,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
       plu: this.plu,
       business: this.business,
       creationDate: this.date,
-      identificationcustomer: this.idCustomerForm.controls.identification.value
+      identificationcustomer: this.idCustomerForm.controls.identification.value,
     };
     this.subscription = this.links
       .saveLink(dataSaveLinkReference)
@@ -292,11 +308,11 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   private formShareLink() {
     this.formLink = this.fb.group({
-      link: [this.url]
+      link: [this.url],
     });
   }
 
-   /**
+  /**
    * Obtiene la fecha actual
    */
 
@@ -313,7 +329,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.date = date + " " + time;
   }
 
-   /**
+  /**
    * Abre el mensaje de confirmacion de copiado del link
    * @param message
    * @param action
@@ -321,131 +337,152 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      duration: 5000
+      duration: 5000,
     });
   }
 
-    /* To copy Text from Textbox */
-    public copyInputMessage(inputElement: any) {
-      inputElement.select();
-      document.execCommand("copy");
-      inputElement.setSelectionRange(0, 0);
-      this.openSnackBar("Se ha copiado el link al portapapeles", "Cerrar");
-    }
+  /* To copy Text from Textbox */
+  public copyInputMessage(inputElement: any) {
+    inputElement.select();
+    document.execCommand("copy");
+    inputElement.setSelectionRange(0, 0);
+    this.openSnackBar("Se ha copiado el link al portapapeles", "Cerrar");
+  }
 
-    public showReference() {
-      this.reference = !this.reference;
-      this.idCustomerForm.reset();
-    }
+  public showReference() {
+    this.reference = !this.reference;
+    this.idCustomerForm.reset();
+  }
 
-    share() {
-      this.ngNavigatorShareService.share({
-        title: '',
-        text: '',
-        url: this.urlshorten
-      }).then( (response) => {
+  share() {
+    this.ngNavigatorShareService
+      .share({
+        title: "",
+        text: "",
+        url: this.urlshorten,
+      })
+      .then((response) => {
         console.log(response);
       })
-      .catch( (error) => {
+      .catch((error) => {
         console.log(error);
       });
-    }
+  }
 
-    buy() {
-      var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-      if(iOS) {
-        window.location.assign(this.urlshorten)
-      } else {
-        window.open(this.urlshorten,'_blank');
-      }
+  buy() {
+    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    if (iOS) {
+      window.location.assign(this.urlshorten);
+    } else {
+      window.open(this.urlshorten, "_blank");
     }
+  }
 
-    public nextStep() {
-      this.showForm = !this.showForm;
-      this.showFormCustomer = !this.showFormCustomer;
-      this.saveLink("assured");
-    }
-    
-    public backStep() {
-      this.reference = !this.reference;
-      this.showForm = !this.showForm;
-    }
+  public nextStep() {
+    this.showForm = !this.showForm;
+    this.showFormCustomer = !this.showFormCustomer;
+    this.saveLink("assured");
+  }
 
-    /**
-   * Metodo para abrir la modal con el producto seleccionado 
-   * 
+  public backStep() {
+    this.reference = !this.reference;
+    this.showForm = !this.showForm;
+  }
+
+  /**
+   * Metodo para abrir la modal con el producto seleccionado
+   *
    */
 
   public dataSliderCategory(sliderInfo) {
     let token = localStorage.getItem("ACCESS_TOKEN");
-      if(token !== null && sliderInfo.business !=='clickam') {
-        this.tokenInfo = this.token.userInfo();
-        this.idClicker = this.tokenInfo.idclicker;
-        // this.idClicker = this.tokenInfo.idclicker.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        const dataCategoryUrl = sliderInfo.link;
-        this.showForm = false;
-        this.urlshorten = '';
-        this.reference = false;
-        this.showFormCustomer = true;
-        this.url = `${dataCategoryUrl}${this.idClicker}`;
-        setTimeout(() => {
-          this.saveLink();
-        }, 500);
-        this.idCustomerForm.controls.identification.setValue("");
-        this.idCustomerForm.reset();
-        this.formShareLink();
-        const home = true;
-        this.business = sliderInfo.idbusiness;
-        this.plu = sliderInfo.description;
-        const infoaditional = sliderInfo.infoaditional;
-        const img = sliderInfo.imageurl;
-        const showCloseIcon = true;
-        const showClose = false;
-        const buttonClose = "Cerrar";
-        const showshowTitle = false;
-        const title = sliderInfo.description;
-        const showProduct = true;
-        const id = sliderInfo.productId;
-        // this.classButton = (sliderInfo.description).replace(" ", "");
-        this.classButtonWhatsapp= `gtmClicLightboxIconoWhatsApp${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonTwitter = `gtmClicLightboxIconoTwitter${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonFacebook = `gtmClicLightboxIconoFacebook${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonShare = `gtmClicLightboxCompartir${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonBuy = `gtmClicLightboxComprar${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonRefer = `gtmClicLightboxReferir${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonCopy = `gtmClicLightboxCopiarLink${this.title}${sliderInfo.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        // if(sliderInfo.idbusiness !== 3 && sliderInfo.idbusiness !== 5) {
-        //   this.template = this.templateCategories;
-        // } else {
-        //   this.template = this.templateAssured;
-        // }
+    if (token !== null && sliderInfo.business !== "clickam") {
+      this.tokenInfo = this.token.userInfo();
+      this.idClicker = this.tokenInfo.idclicker;
+      // this.idClicker = this.tokenInfo.idclicker.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      const dataCategoryUrl = sliderInfo.link;
+      this.showForm = false;
+      this.urlshorten = "";
+      this.reference = false;
+      this.showFormCustomer = true;
+      this.url = `${dataCategoryUrl}${this.idClicker}`;
+      setTimeout(() => {
+        this.saveLink();
+      }, 500);
+      this.idCustomerForm.controls.identification.setValue("");
+      this.idCustomerForm.reset();
+      this.formShareLink();
+      const home = true;
+      this.business = sliderInfo.idbusiness;
+      this.plu = sliderInfo.description;
+      const infoaditional = sliderInfo.infoaditional;
+      const img = sliderInfo.imageurl;
+      const showCloseIcon = true;
+      const showClose = false;
+      const buttonClose = "Cerrar";
+      const showshowTitle = false;
+      const title = sliderInfo.description;
+      const showProduct = true;
+      const id = sliderInfo.productId;
+      // this.classButton = (sliderInfo.description).replace(" ", "");
+      this.classButtonWhatsapp = `gtmClicLightboxIconoWhatsApp${this.title}${sliderInfo.description}`
+        .replace(/\s/g, "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+      this.classButtonTwitter = `gtmClicLightboxIconoTwitter${this.title}${sliderInfo.description}`
+        .replace(/\s/g, "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+      this.classButtonFacebook = `gtmClicLightboxIconoFacebook${this.title}${sliderInfo.description}`
+        .replace(/\s/g, "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+      this.classButtonShare = `gtmClicLightboxCompartir${this.title}${sliderInfo.description}`
+        .replace(/\s/g, "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+      this.classButtonBuy = `gtmClicLightboxComprar${this.title}${sliderInfo.description}`
+        .replace(/\s/g, "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+      this.classButtonRefer = `gtmClicLightboxReferir${this.title}${sliderInfo.description}`
+        .replace(/\s/g, "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+      this.classButtonCopy = `gtmClicLightboxCopiarLink${this.title}${sliderInfo.description}`
+        .replace(/\s/g, "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+      // if(sliderInfo.idbusiness !== 3 && sliderInfo.idbusiness !== 5) {
+      //   this.template = this.templateCategories;
+      // } else {
+      //   this.template = this.templateAssured;
+      // }
 
-        const template = this.templateCategories;
+      const template = this.templateCategories;
 
-        let dialogref = this.dialog.open(DialogComponent, {
-          data: {
-            template,
-            infoaditional,
-            showClose,
-            img,
-            showCloseIcon,
-            showProduct,
-            buttonClose,
-            showshowTitle,
-            id,
-            title,
-            home
-          },
-        });
-    
-        dialogref.afterDismissed().subscribe(() => {
-          this.enableCopy = true;
-        })
-      } else {
-        this.router.navigate(['/'+sliderInfo.link]);
-      }
-  
+      let dialogref = this.dialog.open(DialogComponent, {
+        data: {
+          template,
+          infoaditional,
+          showClose,
+          img,
+          showCloseIcon,
+          showProduct,
+          buttonClose,
+          showshowTitle,
+          id,
+          title,
+          home,
+        },
+      });
 
+      dialogref.afterDismissed().subscribe(() => {
+        this.enableCopy = true;
+      });
+    } else {
+      this.router.navigate(["/" + sliderInfo.link]);
+    }
   }
 
   public acceptModal() {
@@ -460,55 +497,52 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   public acceptTermsCheck() {
     this.acceptTerms = !this.acceptTerms;
-    if(this.acceptTerms === false) {
+    if (this.acceptTerms === false) {
       this.termsForm.controls.acceptTerms.setValue(null);
     }
   }
 
   public termsAndConditions() {
-   
     const template = this.templateTerms;
     const title = "";
 
     this.dialogModal.open(ModalGenericComponent, {
       data: {
         title,
-        template
-      }
+        template,
+      },
     });
   }
 
   public registerUser() {
-    this.user.registeruserterms(this.id).subscribe( (resp:any) => {
-      if(resp.state === 'Success') {
-       this.acceptTermsDeliver = true;
+    this.user.registeruserterms(this.id).subscribe((resp: any) => {
+      if (resp.state === "Success") {
+        this.acceptTermsDeliver = true;
       }
-    })
+    });
   }
 
   public getUserData() {
-    this.subscription = this.auth.getRole$.subscribe(role => {
+    this.subscription = this.auth.getRole$.subscribe((role) => {
       if (role === "CLICKER" || role === "ADMIN") {
-        this.subscription = this.user.getuserdata().subscribe(user => {
+        this.subscription = this.user.getuserdata().subscribe((user) => {
           this.acceptTermsDeliver = user.acceptTerms;
         });
       }
     });
   }
 
-
   public goSeway() {
     var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
     var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    if(iOS || isSafari) {
-      window.location.assign(this.urlAppstore)
+    if (iOS || isSafari) {
+      window.location.assign(this.urlAppstore);
     } else {
-      window.open(this.urlPlaystore,'_blank');
+      window.open(this.urlPlaystore, "_blank");
     }
   }
 
-
- /**
+  /**
    * Metodo para abrir la modal con el producto seleccionado del exito
    * @param product
    */
@@ -517,14 +551,14 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.tokenInfo = this.token.userInfo();
     this.idClicker = this.tokenInfo.idclicker;
     this.reference = false;
-    this.urlshorten = '';
+    this.urlshorten = "";
     let productUrl = product.url;
-    if(this.id === '1') {
+    if (this.id === "1") {
       this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=${this.idClicker}`;
-    } 
-    if(this.id === '2') {
+    }
+    if (this.id === "2") {
       this.url = `https://www.carulla.com${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=${this.idClicker}`;
-    } 
+    }
     this.idCustomerForm.controls.identification.setValue("");
     this.idCustomerForm.reset();
     setTimeout(() => {
@@ -567,21 +601,25 @@ export class BussinessComponent implements OnInit, OnDestroy {
         discount,
         business,
         home,
-        exito
-      }
-
+        exito,
+      },
     });
 
     dialogref.afterDismissed().subscribe(() => {
       this.enableCopy = true;
-    })
+    });
   }
 
   verMasProductos() {
-    this.mostrarProductos += 52; 
+    this.mostrarProductos += 52;
   }
 
-  public searchBiggyExito(term: any, order:string ='', page = 1, count = 1000) {
+  public searchBiggyExito(
+    term: any,
+    order: string = "",
+    page = 1,
+    count = 1000
+  ) {
     this.productsListExito = [];
     if (term !== this.paginate) {
       this.paginate = term;
@@ -591,42 +629,52 @@ export class BussinessComponent implements OnInit, OnDestroy {
     }
 
     dataLayer.push({
-      event: 'pushEventGA',
-      categoria: 'NegocioExito',
-      accion: 'ClicBuscar',
+      event: "pushEventGA",
+      categoria: "NegocioExito",
+      accion: "ClicBuscar",
       etiqueta: term,
     });
-    
+
     const params = { term, order, page, count };
     this.subscription = this.sp.biggySearchExito(params).subscribe(
       (searchExito: any) => {
         this.productsListBiggy = searchExito.products;
         this.productsListTransform = [...this.productsListBiggy];
-        
-        this.productsListTransform.forEach(searchExito=> {
 
-          if(!!searchExito.skus[0] &&  !!searchExito.skus[0].sellers[0]) {
-            this.sellerId = searchExito.skus[0].sellers[0].id;
-            this.sellerName = searchExito.skus[0].sellers[0].name;
-          } 
-
-            let object = {
-              title: searchExito.name,
-              plu: searchExito.id,
-              url: searchExito.url,
-              oldprice: searchExito.oldPrice,
-              price: searchExito.price,
-              image: searchExito.images[0],
-              seller: this.sellerId,
-              business: this.sellerName
+        this.productsListTransform.forEach((searchExito) => {
+          if (!!searchExito.skus[0] && !!searchExito.skus[0].sellers[0]) {
+            let sellerSkus = searchExito.skus[0].sellers;
+            let filterSkus = sellerSkus.filter(
+              (idSeller) => idSeller.id === "1" || idSeller.id === "10078"
+            );
+            if (!!filterSkus[0]) {
+              this.sellerId = filterSkus[0].id;
+              this.sellerName = filterSkus[0].name;
+            } else {
+              this.sellerId = "";
+              this.sellerName = "";
             }
-  
-            if((object.seller === '1' || object.seller === '10078') && object.oldprice !== 0) {
-              this.productsListExito.push(object);
-            }
+          }
 
-            return object;
+          let object = {
+            title: searchExito.name,
+            plu: searchExito.id,
+            url: searchExito.url,
+            oldprice: searchExito.oldPrice,
+            price: searchExito.price,
+            image: searchExito.images[0],
+            seller: this.sellerId,
+            business: this.sellerName,
+          };
 
+          if (
+            (object.seller === "1" || object.seller === "10078") &&
+            object.oldprice !== 0
+          ) {
+            this.productsListExito.push(object);
+          }
+
+          return object;
         });
 
         this.totalItems = this.productsListExito.length;
@@ -639,59 +687,74 @@ export class BussinessComponent implements OnInit, OnDestroy {
           this.showResults = false;
         }
       },
-      error => {
+      (error) => {
         this.showNotFound = true;
         this.showResults = false;
       }
     );
   }
 
-  public searchBiggyCarulla(term: any, order:string ='', page = 1, count = 1000) {
+  public searchBiggyCarulla(
+    term: any,
+    order: string = "",
+    page = 1,
+    count = 1000
+  ) {
     this.productsListExito = [];
     if (term !== this.paginate) {
       this.paginate = term;
       this.pageIndex = 0;
-      this.productsListExito = []
+      this.productsListExito = [];
       this.mostrarProductos = 52;
     }
 
     dataLayer.push({
-      event: 'pushEventGA',
-      categoria: 'NegocioCarulla',
-      accion: 'ClicBuscar',
+      event: "pushEventGA",
+      categoria: "NegocioCarulla",
+      accion: "ClicBuscar",
       etiqueta: term,
     });
-    
+
     const params = { term, order, page, count };
     this.subscription = this.sp.biggySearchCarulla(params).subscribe(
       (searchCarulla: any) => {
         this.productsListBiggy = searchCarulla.products;
         this.productsListTransform = [...this.productsListBiggy];
-        
-        this.productsListTransform.forEach(searchCarulla=> {
 
-          if(!!searchCarulla.skus[0] &&  !!searchCarulla.skus[0].sellers[0]) {
-            this.sellerId = searchCarulla.skus[0].sellers[0].id;
-            this.sellerName = searchCarulla.skus[0].sellers[0].name;
-          } 
-
-            let object = {
-              title: searchCarulla.name,
-              plu: searchCarulla.id,
-              url: searchCarulla.url,
-              oldprice: searchCarulla.oldPrice,
-              price: searchCarulla.price,
-              image: searchCarulla.images[0],
-              seller: this.sellerId,
-              business: this.sellerName
+        this.productsListTransform.forEach((searchCarulla) => {
+          if (!!searchCarulla.skus[0] && !!searchCarulla.skus[0].sellers[0]) {
+            let sellerSkus = searchCarulla.skus[0].sellers;
+            let filterSkus = sellerSkus.filter(
+              (idSeller) => idSeller.id === "1" || idSeller.id === "10078"
+            );
+            if (!!filterSkus[0]) {
+              this.sellerId = filterSkus[0].id;
+              this.sellerName = filterSkus[0].name;
+            } else {
+              this.sellerId = "";
+              this.sellerName = "";
             }
-  
-            if((object.seller === '1' || object.seller === '10078') && object.oldprice !== 0) {
-              this.productsListExito.push(object);
-            }
+          }
 
-            return object;
+          let object = {
+            title: searchCarulla.name,
+            plu: searchCarulla.id,
+            url: searchCarulla.url,
+            oldprice: searchCarulla.oldPrice,
+            price: searchCarulla.price,
+            image: searchCarulla.images[0],
+            seller: this.sellerId,
+            business: this.sellerName,
+          };
 
+          if (
+            (object.seller === "1" || object.seller === "10078") &&
+            object.oldprice !== 0
+          ) {
+            this.productsListExito.push(object);
+          }
+
+          return object;
         });
 
         this.totalItems = this.productsListExito.length;
@@ -704,7 +767,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
           this.showResults = false;
         }
       },
-      error => {
+      (error) => {
         this.showNotFound = true;
         this.showResults = false;
       }
@@ -714,6 +777,4 @@ export class BussinessComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-  
- 
 }
