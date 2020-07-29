@@ -113,4 +113,10 @@
       </mat-error>
     <br>
 
+    <h4  id="trips" class="title-upload m-0">{{ 'REPORTS.PICKING' | translate }}</h4>
+      <app-load-form-file [fileForm]="fileFormPicking" [nameFile]="nameFilePicking" label="picking" (uploadFile)="onFileChangePicking($event)"></app-load-form-file>
+      <mat-error *ngIf="showErrorExtPicking" class="small">
+        {{ "GENERIC.INVALID_FORMAT_FILE" | translate }}
+      </mat-error>
+
 </ng-template>

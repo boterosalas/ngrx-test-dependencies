@@ -29,13 +29,16 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
   fileUrl: string;
   fileForm: FormGroup;
+  fileFormPicking: FormGroup;
   fileFormPayment: FormGroup;
   nameFile: string;
   nameFilePayment: string;
+  nameFilePicking: string;
   dateForm: FormGroup;
   dateFormSell: FormGroup;
   showErrorExt: boolean;
   showErrorExtPayment: boolean;
+  showErrorExtPicking: boolean;
   validFormat: boolean;
   isLoggedIn: any;
   userName: string;
@@ -82,6 +85,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
     this.nameFile = "";
     this.nameFilePayment = "";
+    this.nameFilePicking = "";
 
     this.dateFormSell = this.fb.group(
       {
@@ -94,6 +98,10 @@ export class ReportsComponent implements OnInit, OnDestroy {
     });
 
     this.fileFormPayment = this.fb.group({
+      file: [null]
+    });
+    
+    this.fileFormPicking = this.fb.group({
       file: [null]
     });
 
@@ -163,6 +171,29 @@ export class ReportsComponent implements OnInit, OnDestroy {
           this.sendFilePayment();
         } else {
           this.showErrorExtPayment = true;
+        }
+      };
+    }
+  }
+
+  public onFileChangePicking(event) {
+    this.nameFilePicking = event.target.files[0].name;
+    let reader = new FileReader();
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      let fileBlob = new Blob([file], {type: this.EXCEL_TYPE} )
+      let filePicking = new File(([fileBlob]), this.nameFilePicking, { type: this.EXCEL_TYPE });
+      reader.readAsDataURL(filePicking);
+      reader.onload = () => {
+        this.fileFormPicking.controls.file.patchValue({
+          file: reader.result
+        });
+        this.getExtension(this.nameFilePicking);
+        if (this.validFormat === true) {
+          this.showErrorExtPicking = false;
+          this.sendFilePicking();
+        } else {
+          this.showErrorExtPicking = true;
         }
       };
     }
@@ -268,6 +299,53 @@ export class ReportsComponent implements OnInit, OnDestroy {
           confirmButtonClass: "upload-invalid"
         }).then(()=> {
           this.nameFilePayment ="";
+        });
+      }
+    );
+  }
+
+  private sendFilePicking() {
+    let fileSplit = this.fileFormPicking.controls.file.value.file.split(',');
+    let file = fileSplit[1];
+    let data = {
+      file: file,
+    };
+    this.loading.show();
+    this.subscription = this.file.sendPickingfile(data).subscribe(
+      (res: ResponseService) => {
+        this.loading.hide();
+        if (res.state !== "Error") {
+          Swal.fire({
+            title: "Carga exitosa",
+            text: res.userMessage,
+            type: "success",
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: "upload-success"
+          }).then(() => {
+            this.nameFile = "";
+          });
+        } else {
+          Swal.fire({
+            title: "Error en la Carga",
+            text: res.userMessage,
+            type: "error",
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: "upload-error"
+          }).then(() => {
+            this.nameFile = "";
+          });
+        }
+      },
+      error => {
+        this.loading.hide();
+        Swal.fire({
+          title: error.statusText,
+          text: error.error.userMessage,
+          type: "error",
+          confirmButtonText: "Aceptar",
+          confirmButtonClass: "upload-invalid"
+        }).then(() => {
+          this.nameFile = "";
         });
       }
     );
