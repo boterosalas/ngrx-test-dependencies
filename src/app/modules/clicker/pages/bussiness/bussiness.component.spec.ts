@@ -383,117 +383,118 @@ describe("BussinessComponent", () => {
     expect(mockContentService.biggySearchExito).toHaveBeenCalled();
   });
 
-  it("search products carulla", () => {
-    const products = {
-      total: 1000,
-      products: [
-        {
-          skus: [
-            {
-              reference: "1508076",
-              policies: [
-                {
-                  id: "1",
-                  sellers: [
-                    {
-                      name: "carulla",
-                      id: "1",
-                    },
-                  ],
-                },
-              ],
-              attributes: [],
-              id: "1508076",
-              sellers: [
-                {
-                  name: "carulla",
-                  id: "1",
-                },
-              ],
-            },
-          ],
-          year: 0,
-          extraData: [],
-          release: 1579737600000,
-          link: "nevera-samsung-inverter-no-frost-394-litros-112401",
-          wear: 0,
-          description:
-            "\nContenido suministrado a Almacenes Éxito directamente por SAMSUNG ELECTRONICS COLOMBIA S.A.\n\n\n \n \n \n \n  \n        \n\n         \n            \n                \n                    \n \n                    \nCongelador Superior\n                    \nEstilo Nevera\n                \n                \n                    \n \n                    \n368 L / 394 L\n                    \nCapacidad Neta/Bruta\n                \n                \n                    \n \n                    \nNo Frost\n                    \n \n                \n                \n                    \n \n                    \nSí\n                    \nDispensador Agua\n                \n                \n                    \n \n                    \nNo. Ice Maker Automático\n                    \nDispensador Hielo\n                \n                \n                    \n \n                    \n10 años\n                    \nGarantía de Compresor\n                \n            \n        \n    \n            \nSiempre Fresco\n    \nLa tecnología Twin Cooling Plus te permite disfrutar de alimentos frescos por más tiempo ya que ayuda a preservar su humedad hasta un 70% más que los refrigeradores convencionales\n        \n        \n\n        \n            \n                \n                    \n                        \n\n                    \n                \n            \n        \n    \n                \nAlimentos frescos y deliciosos sin malos olores\n    \nEl sistema Twin Cooling Plus, enfría los compartimientos de forma separada para prevenir que los malos olores se propaguen del refrigerador al congelador. De este modo, la comida congelada mantiene su sabor original.\n        \n        \n\n        \n            \n                \n                    \n                        \n\n                    \n                \n            \n        \n    \n                \n5 Modos de Conversión\n    \nControla la temperatura de tu refrigerador para usar los espacios pasando fácilmente de congelar a conservar o simplemente a modo apagado para ahorrar energía\n        \n        \n\n        \n            \n                \n                    \n                        \n\n                    \n                \n            \n        \n    \n                \nEnfría a tu gusto\n    \nCon el simple toque de un botón, Power Cool enfría tus alimentos y bebidas rápidamente, mientras que Power Freeze es ideal para congelar o endurecer comidas preparadas y haver más hielo.\n        \n        \n\n        \n            \n                \n                    \n                        \n\n                    \n                \n            \n        \n    \n                \nMenor consumo energético\n    \nDigital Inverter ajusta la velocidad del compresor en forma automática para usar menos energía, reducir el ruido al mínimo logrando un rendimiento de larga duración.\n        \n        \n\n        \n            \n                \n                    \n                        \n\n                    \n                \n            \n        \n    \n                \nVea claramente todo lo de adentro\n    \nSu iluminación LED de alta eficiencia es más delgada, fría y energéticamente más eficiente que la iluminación convencional. Está ubicada en la parte superior y sobre los laterales, iluminando en forma atractiva y brillante cada rincón, asegurando        una mejor visibilidad.\n        \n        \n\n        \n            \n                \n                    \n                        \n\n                    \n                \n            \n        \n    \n                \nEspecificaciones\n    \n        \n            \n \n            \nAlto                \n 178.5                \ncm\n            \n        \n        \n            \n \n            \nAncho                \n 67.5                \ncm\n            \n        \n        \n            \n \n            \nProfundidad                \n 66.8                \ncm\n            \n        \n    \n    \n        \nTIPS para medir tu espacio\n        \n            \n \n            \n \n            \nMide tu puerta principal:                \nEl domiciliario puede ayudarte a quitar la puerta temporalmente de ser necesario\n            \n        \n        \n            \n \n            \n \n            \nRecorre el camino por donde pasará el producto                \nMide el espacio de un marco de la puerta a otro\n            \n        \n        \n            \n \n            \n \n            \nMide la cabina: con la puerta abierta                \nRevisa, techo, laterales, marcos y mide el espacio en su totalidad\n            \n        \n    \n    \n        \nADVERTENCIA\n        \nÉste artículo cuenta con 1 año de garantía general por defectos de fabricación y 10 en el compresor, no incluye daños por uso inadecuado del producto por parte del usuario.\n Comunicarse directamente con Samsung a la línea 018000112112. Desde cualquier celular marcando #726. El desmonte de puertas tiene un costo adicional.        \n    \n\n\n",
-          discount: 0,
-          reference: "112401",
-          showIfNotAvailable: true,
-          price: 3346900,
-          customSort: 0,
-          stickers: [
-            {
-              image: "cont-samsung-com-843",
-              name: "cont-SAMSUNG-com-843",
-              location: "cluster",
-              target: "",
-            },
-          ],
-          id: "112401",
-          categories: ["Electrodomésticos", "Refrigeración", "Neveras"],
-          stock: 1,
-          brand: "SAMSUNG",
-          availableTradePolicies: ["1"],
-          timestamp: 1590951369132,
-          product: "112401",
-          images: [
-            {
-              value:
-                "https://carulla.vteximg.com.br/arquivos/ids/1397660/Nevera-Samsung-Inverter-No-Frost-394-Litros-1508076_a.jpg?v=637261344845070000",
-            },
-            {
-              value:
-                "https://carulla.vteximg.com.br/arquivos/ids/1397661/Nevera-Samsung-Inverter-No-Frost-394-Litros-1508076_b.jpg?v=637261344849130000",
-            },
-            {
-              value:
-                "https://carulla.vteximg.com.br/arquivos/ids/1397662/Nevera-Samsung-Inverter-No-Frost-394-Litros-1508076_c.jpg?v=637261344850830000",
-            },
-            {
-              value:
-                "https://carulla.vteximg.com.br/arquivos/ids/1397663/Nevera-Samsung-Inverter-No-Frost-394-Litros-1508076_d.jpg?v=637261344864430000",
-            },
-            {
-              value:
-                "https://carulla.vteximg.com.br/arquivos/ids/1397664/Nevera-Samsung-Inverter-No-Frost-394-Litros-1508076_e.jpg?v=637261344866930000",
-            },
-            {
-              value:
-                "https://carulla.vteximg.com.br/arquivos/ids/1397665/Nevera-Samsung-Inverter-No-Frost-394-Litros-1508076_f.jpg?v=637261344868670000",
-            },
-          ],
-          oldPrice: 3346900,
-          locationAttributes: [],
-          url: "/nevera-samsung-inverter-no-frost-394-litros-112401/p",
-          installment: {
-            interest: false,
-            count: 36,
-            value: 92970,
-            valueText: "$ 92.970",
-          },
-          name: "Nevera Samsung Inverter No Frost 394 Litros",
-          boost: {
-            newness: 0,
-            image: 1,
-            revenue: 0,
-            discount: 0,
-            click: 0.0038786219484371436,
-            availableSpecsCount: 0.01694915254237288,
-            promotion: 1,
-            order: 0,
-          },
-          extraInfo: {},
-          oldPriceText: "$ 3.346.900",
-          priceText: "$ 3.346.900",
-        },
-      ],
-    };
-    component.sellerId = "10";
-    mockContentService.biggySearchCarulla.and.returnValue(of(products));
-    component.searchBiggyCarulla("112401");
-    expect(mockContentService.biggySearchCarulla).toHaveBeenCalled();
-  });
+  // it("search products carulla", () => {
+  //   const products = {
+  //     total: 1000,
+  //     products: [
+  //       {
+  //         skus: [
+  //           {
+  //             reference: "1508076",
+  //             policies: [
+  //               {
+  //                 id: "1",
+  //                 sellers: [
+  //                   {
+  //                     name: "carulla",
+  //                     id: "1",
+  //                   },
+  //                 ],
+  //               },
+  //             ],
+  //             attributes: [],
+  //             id: "1508076",
+  //             sellers: [
+  //               {
+  //                 name: "carulla",
+  //                 id: "1",
+  //               },
+  //             ],
+  //           },
+  //         ],
+  //         year: 0,
+  //         extraData: [],
+  //         release: 1579737600000,
+  //         link: "nevera-samsung-inverter-no-frost-394-litros-112401",
+  //         wear: 0,
+  //         description:
+  //           "\nContenido suministrado a Almacenes Éxito directamente por SAMSUNG ELECTRONICS COLOMBIA S.A.\n\n\n \n \n \n \n  \n        \n\n         \n            \n                \n                    \n \n                    \nCongelador Superior\n                    \nEstilo Nevera\n                \n                \n                    \n \n                    \n368 L / 394 L\n                    \nCapacidad Neta/Bruta\n                \n                \n                    \n \n                    \nNo Frost\n                    \n \n                \n                \n                    \n \n                    \nSí\n                    \nDispensador Agua\n                \n                \n                    \n \n                    \nNo. Ice Maker Automático\n                    \nDispensador Hielo\n                \n                \n                    \n \n                    \n10 años\n                    \nGarantía de Compresor\n                \n            \n        \n    \n            \nSiempre Fresco\n    \nLa tecnología Twin Cooling Plus te permite disfrutar de alimentos frescos por más tiempo ya que ayuda a preservar su humedad hasta un 70% más que los refrigeradores convencionales\n        \n        \n\n        \n            \n                \n                    \n                        \n\n                    \n                \n            \n        \n    \n                \nAlimentos frescos y deliciosos sin malos olores\n    \nEl sistema Twin Cooling Plus, enfría los compartimientos de forma separada para prevenir que los malos olores se propaguen del refrigerador al congelador. De este modo, la comida congelada mantiene su sabor original.\n        \n        \n\n        \n            \n                \n                    \n                        \n\n                    \n                \n            \n        \n    \n                \n5 Modos de Conversión\n    \nControla la temperatura de tu refrigerador para usar los espacios pasando fácilmente de congelar a conservar o simplemente a modo apagado para ahorrar energía\n        \n        \n\n        \n            \n                \n                    \n                        \n\n                    \n                \n            \n        \n    \n                \nEnfría a tu gusto\n    \nCon el simple toque de un botón, Power Cool enfría tus alimentos y bebidas rápidamente, mientras que Power Freeze es ideal para congelar o endurecer comidas preparadas y haver más hielo.\n        \n        \n\n        \n            \n                \n                    \n                        \n\n                    \n                \n            \n        \n    \n                \nMenor consumo energético\n    \nDigital Inverter ajusta la velocidad del compresor en forma automática para usar menos energía, reducir el ruido al mínimo logrando un rendimiento de larga duración.\n        \n        \n\n        \n            \n                \n                    \n                        \n\n                    \n                \n            \n        \n    \n                \nVea claramente todo lo de adentro\n    \nSu iluminación LED de alta eficiencia es más delgada, fría y energéticamente más eficiente que la iluminación convencional. Está ubicada en la parte superior y sobre los laterales, iluminando en forma atractiva y brillante cada rincón, asegurando        una mejor visibilidad.\n        \n        \n\n        \n            \n                \n                    \n                        \n\n                    \n                \n            \n        \n    \n                \nEspecificaciones\n    \n        \n            \n \n            \nAlto                \n 178.5                \ncm\n            \n        \n        \n            \n \n            \nAncho                \n 67.5                \ncm\n            \n        \n        \n            \n \n            \nProfundidad                \n 66.8                \ncm\n            \n        \n    \n    \n        \nTIPS para medir tu espacio\n        \n            \n \n            \n \n            \nMide tu puerta principal:                \nEl domiciliario puede ayudarte a quitar la puerta temporalmente de ser necesario\n            \n        \n        \n            \n \n            \n \n            \nRecorre el camino por donde pasará el producto                \nMide el espacio de un marco de la puerta a otro\n            \n        \n        \n            \n \n            \n \n            \nMide la cabina: con la puerta abierta                \nRevisa, techo, laterales, marcos y mide el espacio en su totalidad\n            \n        \n    \n    \n        \nADVERTENCIA\n        \nÉste artículo cuenta con 1 año de garantía general por defectos de fabricación y 10 en el compresor, no incluye daños por uso inadecuado del producto por parte del usuario.\n Comunicarse directamente con Samsung a la línea 018000112112. Desde cualquier celular marcando #726. El desmonte de puertas tiene un costo adicional.        \n    \n\n\n",
+  //         discount: 0,
+  //         reference: "112401",
+  //         showIfNotAvailable: true,
+  //         price: 3346900,
+  //         customSort: 0,
+  //         stickers: [
+  //           {
+  //             image: "cont-samsung-com-843",
+  //             name: "cont-SAMSUNG-com-843",
+  //             location: "cluster",
+  //             target: "",
+  //           },
+  //         ],
+  //         id: "112401",
+  //         categories: ["Electrodomésticos", "Refrigeración", "Neveras"],
+  //         stock: 1,
+  //         brand: "SAMSUNG",
+  //         availableTradePolicies: ["1"],
+  //         timestamp: 1590951369132,
+  //         product: "112401",
+  //         images: [
+  //           {
+  //             value:
+  //               "https://carulla.vteximg.com.br/arquivos/ids/1397660/Nevera-Samsung-Inverter-No-Frost-394-Litros-1508076_a.jpg?v=637261344845070000",
+  //           },
+  //           {
+  //             value:
+  //               "https://carulla.vteximg.com.br/arquivos/ids/1397661/Nevera-Samsung-Inverter-No-Frost-394-Litros-1508076_b.jpg?v=637261344849130000",
+  //           },
+  //           {
+  //             value:
+  //               "https://carulla.vteximg.com.br/arquivos/ids/1397662/Nevera-Samsung-Inverter-No-Frost-394-Litros-1508076_c.jpg?v=637261344850830000",
+  //           },
+  //           {
+  //             value:
+  //               "https://carulla.vteximg.com.br/arquivos/ids/1397663/Nevera-Samsung-Inverter-No-Frost-394-Litros-1508076_d.jpg?v=637261344864430000",
+  //           },
+  //           {
+  //             value:
+  //               "https://carulla.vteximg.com.br/arquivos/ids/1397664/Nevera-Samsung-Inverter-No-Frost-394-Litros-1508076_e.jpg?v=637261344866930000",
+  //           },
+  //           {
+  //             value:
+  //               "https://carulla.vteximg.com.br/arquivos/ids/1397665/Nevera-Samsung-Inverter-No-Frost-394-Litros-1508076_f.jpg?v=637261344868670000",
+  //           },
+  //         ],
+  //         oldPrice: 3346900,
+  //         locationAttributes: [],
+  //         url: "/nevera-samsung-inverter-no-frost-394-litros-112401/p",
+  //         installment: {
+  //           interest: false,
+  //           count: 36,
+  //           value: 92970,
+  //           valueText: "$ 92.970",
+  //         },
+  //         name: "Nevera Samsung Inverter No Frost 394 Litros",
+  //         boost: {
+  //           newness: 0,
+  //           image: 1,
+  //           revenue: 0,
+  //           discount: 0,
+  //           click: 0.0038786219484371436,
+  //           availableSpecsCount: 0.01694915254237288,
+  //           promotion: 1,
+  //           order: 0,
+  //         },
+  //         extraInfo: {},
+  //         oldPriceText: "$ 3.346.900",
+  //         priceText: "$ 3.346.900",
+  //       },
+  //     ],
+  //   };
+  //   component.sellerId = "10";
+  //   mockContentService.biggySearchCarulla.and.returnValue(of(products));
+  //   component.searchBiggyCarulla("112401");
+  //   expect(mockContentService.biggySearchCarulla).toHaveBeenCalled();
+  // });
+
 });
