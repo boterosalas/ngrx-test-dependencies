@@ -322,7 +322,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
             confirmButtonText: "Aceptar",
             confirmButtonClass: "upload-success"
           }).then(() => {
-            this.nameFile = "";
+            this.nameFilePicking = "";
           });
         } else {
           Swal.fire({
@@ -332,20 +332,20 @@ export class ReportsComponent implements OnInit, OnDestroy {
             confirmButtonText: "Aceptar",
             confirmButtonClass: "upload-error"
           }).then(() => {
-            this.nameFile = "";
+            this.nameFilePicking = "";
           });
         }
       },
-      error => {
+      errorPicking => {
         this.loading.hide();
         Swal.fire({
-          title: error.statusText,
-          text: error.error.userMessage,
+          title: errorPicking.statusText,
+          text: errorPicking.error.userMessage,
           type: "error",
           confirmButtonText: "Aceptar",
           confirmButtonClass: "upload-invalid"
         }).then(() => {
-          this.nameFile = "";
+          this.nameFilePicking = "";
         });
       }
     );
