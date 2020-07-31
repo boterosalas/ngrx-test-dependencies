@@ -37,7 +37,7 @@ export class UrlComponent implements OnInit {
       {
         name: "description",
         content:
-          "Clickam",
+          "¡Te han referido! Realiza tus compras, disfruta los mejores productos y servicios del mercado. Con Clickam gana dinero al recomendar lo que más te gusta.",
       },
     ]);
 
