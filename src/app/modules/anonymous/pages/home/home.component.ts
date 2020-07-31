@@ -30,6 +30,7 @@ import { ModalGenericComponent } from "src/app/modules/shared/components/modal-g
 import { ResponseService } from "src/app/interfaces/response";
 import { LinksService } from "src/app/services/links.service";
 import { MessagingService } from "src/app/shared/messaging.service";
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: "app-login",
@@ -115,7 +116,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     private dialog2: MatDialog,
     private link: LinksService,
     private messagingService: MessagingService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private metaTagService: Meta,
   ) {
     /**
      *  Verifica que en la ruta de inicio exista el parametro de email y activa el usuario
@@ -138,6 +140,21 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+    
+    this.metaTagService.addTags([
+      {
+        name: "keywords",
+        content:
+          "clickam, exito.com, carulla.com, seguros, referidos, viajes, cashback ",
+      },
+      {
+        name: "description",
+        content:
+          "Clickam es una plataforma donde ganas comisiones por referir productos y servicios de negocios asociados, creando y compartiendo link con tus amigos en redes sociales o de manera digital, una vez estos realicen una compra a través de estos y sea verificada, clickam te pagara la comisión correspondiente al producto o servicio.",
+      },
+    ]);
+
     this.routeBased();
     this.getBussiness();
     this.getBussinessClicker();
@@ -174,7 +191,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           if(this.newTerms === false) {
             this.termsAndConditions();
           }
-        }, 1000);
+        }, 3000);
 
         // if (promoOpen !== "1") {
         //   this.getModalPromo();
