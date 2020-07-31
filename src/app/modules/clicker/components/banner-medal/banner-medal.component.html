@@ -24,7 +24,7 @@
           <div fxLayout="column" fxLayoutAlign="center center" class="block-text">
               <p class="f-16">{{level}}</p>
               <p ngClass.gt-xs="f-25" ngClass.xs="f-15">{{title}}</p>
-              <p class="f-16 g-light">Siguiente nivel: <span ngClass="color-{{nextLevel}}">{{nextLevel}}</span></p>
+              <p class="f-16 g-light" *ngIf="nextLevel !== 'Último Nivel'">Siguiente nivel: <span ngClass="color-{{nextLevel}}">{{nextLevel}}</span></p>
           </div>
     </div>
 </div>

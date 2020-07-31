@@ -21,7 +21,8 @@
         <div fxLayout="column" fxLayoutAlign="center center" class="block-text gtmtusmeda{{item.class}}">
             <p class="f-15 gtmtusmeda{{item.class}}">{{item.level}}</p>
             <p ngClass.gt-xs="f-18 gtmtusmeda{{item.class}}" ngClass.xs="f-15 gtmtusmeda{{item.class}}">{{item.title}}</p>
-            <p class="f-12 gtmtusmeda{{item.class}}">Siguiente nivel: {{item.nextLevel}}</p>
+            <p *ngIf="item.nextLevel !== 'Último Nivel'" class="f-12 gtmtusmeda{{item.class}}">Siguiente nivel: {{item.nextLevel}}</p>
+            <p *ngIf="item.nextLevel === 'Último Nivel'" class="f-12 gtmtusmeda{{item.class}}">Medalla completada</p>
         </div>
     </mat-card>
   

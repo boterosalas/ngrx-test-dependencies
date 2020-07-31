@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LinksService } from 'src/app/services/links.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-url',
@@ -16,7 +17,8 @@ export class UrlComponent implements OnInit {
   constructor(
     private link: LinksService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private metaTagService: Meta,
   ) { 
     this.route.params.subscribe(param => {
       this.code = param.shortCode;
@@ -25,6 +27,21 @@ export class UrlComponent implements OnInit {
 
   ngOnInit() {
     this.getUrl();
+
+    this.metaTagService.addTags([
+      {
+        name: "keywords",
+        content:
+          "clickam, exito.com, carulla.com, seguros, referidos, viajes, cashback ",
+      },
+      {
+        name: "description",
+        content:
+          "Clickam",
+      },
+    ]);
+
+
   }
 
   public getUrl() {
@@ -33,7 +50,7 @@ export class UrlComponent implements OnInit {
         window.location.replace(url);
       } 
       if(url === null){
-      //  this.showMessage = true;
+       this.showMessage = true;
       this.router.navigate(['/']);
        this.show = false;
       }

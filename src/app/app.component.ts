@@ -122,7 +122,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private breakpointObserver: BreakpointObserver,
     private user: UserService,
     private token: TokenService,
-    private metaTagService: Meta,
     private swUpdate: SwUpdate,
     location: Location
   ) {
@@ -166,19 +165,6 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     // this.email = this.userInfo.userName;
-
-    this.metaTagService.addTags([
-      {
-        name: "keywords",
-        content:
-          "clickam, exito.com, carulla.com, seguros, referidos, viajes, cashback ",
-      },
-      {
-        name: "description",
-        content:
-          "Clickam es una plataforma donde ganas comisiones por referir productos y servicios de negocios asociados, creando y compartiendo link con tus amigos en redes sociales o de manera digital, una vez estos realicen una compra a través de estos y sea verificada, clickam te pagara la comisión correspondiente al producto o servicio.",
-      },
-    ]);
 
     this.showAnimation1 = true;
     this.innerWidth = window.innerWidth;
