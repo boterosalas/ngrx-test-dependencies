@@ -193,7 +193,13 @@ export class BussinessComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (this.title === "movil-exito") {
+    if (this.title === "movil-exito" ||
+        this.title === "haceb" || 
+        this.title === "puntos-colombia" ||
+        this.title === "seguros" ||
+        this.title === "viajes" ||
+        this.title === "wesura"
+        ) {
       this.showReferenceButton = false;
     }
 
