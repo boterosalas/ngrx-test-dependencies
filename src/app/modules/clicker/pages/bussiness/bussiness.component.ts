@@ -191,7 +191,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
       }
     });
   }
-
+  // NUEVO CAMBIO REFERER BUTTON
   ngOnInit() {
     if (this.title === "movil-exito" ||
         this.title === "haceb" || 
