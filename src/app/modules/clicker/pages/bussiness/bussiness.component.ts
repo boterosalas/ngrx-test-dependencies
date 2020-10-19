@@ -136,7 +136,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
       } else {
         this.id = route.id;
         this.title = route.code;
-        console.log(this.title);
         this.image = route.imageurl;
         this.percent = route.infoAditional;
         this.allBussiness = route.allBussiness;
