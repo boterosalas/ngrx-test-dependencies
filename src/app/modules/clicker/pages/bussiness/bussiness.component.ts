@@ -159,6 +159,20 @@ export class BussinessComponent implements OnInit, OnDestroy {
               "/assets/img/banners/negocios/movil-mobile.jpg";
             this.colorText = "white";
             break;
+          
+          case "haceb":
+            this.imgBanner = "/assets/img/banners/negocios/haceb-pc.jpg";
+            this.imgBannerMobile =
+              "/assets/img/banners/negocios/haceb-mobile.jpg";
+            this.colorText = "white";
+            break;
+
+          case "puntos-colombia":
+            this.imgBanner = "/assets/img/banners/negocios/puntos-colombia-pc.jpg";
+            this.imgBannerMobile =
+              "/assets/img/banners/negocios/puntos-colombia-mobile.jpg";
+            this.colorText = "purple";
+            break;
 
           case "seguros":
             this.imgBanner = "/assets/img/banners/negocios/seguros-pc.jpg";
