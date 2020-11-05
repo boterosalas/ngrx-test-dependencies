@@ -638,7 +638,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     term: any,
     order: string = "",
     page = 1,
-    count = 1000
+    count = 100
   ) {
     this.productsListExito = [];
     if (term !== this.paginate) {
@@ -718,7 +718,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     term: any,
     order: string = "",
     page = 1,
-    count = 1000
+    count = 100
   ) {
     this.productsListExito = [];
     if (term !== this.paginate) {
