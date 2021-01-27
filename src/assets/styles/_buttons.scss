@@ -1,10 +1,23 @@
-.orange-border{
-    background-color: transparent !important;
-    border: 1px solid $primary-color !important;
-    color: $primary-color !important;
+.orange-border {
+  background-color: transparent !important;
+  border: 1px solid $primary-color !important;
+  color: $primary-color !important;
 }
 
-.orange{
-    background-color: $primary-color !important;
-    border: 1px solid $primary-color !important;
+.orange {
+  background-color: $primary-color !important;
+  border: 1px solid $primary-color !important;
+}
+
+.red-border {
+  background-color: transparent !important;
+  border: 1px solid $secondary-color !important;
+  color: $secondary-color !important;
+  background-color: $white !important;
+  width: 200px !important;
+}
+.red {
+  background-color: $secondary-color !important;
+  border: 1px solid $secondary-color !important;
+  color: $white !important;
 }

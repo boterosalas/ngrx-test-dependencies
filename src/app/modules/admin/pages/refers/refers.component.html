@@ -6,15 +6,13 @@
 
 <div class="container minaud">
     <!-- <h1 class="border-bottom-orange-init">{{ 'REFER.REFERED' | translate}}</h1> -->
-    <p>Elige un rango de fechas para exportar los usuarios referidos</p>
+    <p>Exportar los usuarios referidos</p>
     
     <form
         [formGroup]="dateForm"
         class="downloadUsers"
         >
-            <mat-icon class="icon-date" matPrefix>date_range</mat-icon>
-            <input (change)="changeState()" formControlName="dateRange" id="date" [locale]="locale" placeholder="Seleccione fechas" type="text" [maxDate]="maxDate"  ngxDaterangepickerMd class="form-control border-input mat-elevation-z1 p-2 border-radius"/>
-            <button mat-raised-button color="orange" (click)="exportRefers()" id="download-users" class="ml-2" [disabled]="!dateForm.valid || disButon">Exportar <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
+            <button mat-raised-button color="orange" (click)="exportRefers()" id="download-users" class="ml-2" >Exportar <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
     </form>
     <br>
     <hr>

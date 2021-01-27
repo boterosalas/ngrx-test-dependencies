@@ -28,7 +28,7 @@ export class LoginformComponent implements OnInit, OnDestroy {
     private loading: LoaderService,
     private utils: UtilsService,
     private link: LinksService
-  ) {}
+  ) { }
 
   private subscription: Subscription = new Subscription();
 
@@ -69,9 +69,9 @@ export class LoginformComponent implements OnInit, OnDestroy {
       Username: this.loginForm.value.Username
     };
 
-  this.loading.show();
+    this.loading.show();
 
-   this.subscription = this.authService.login(loginData).subscribe(
+    this.subscription = this.authService.login(loginData).subscribe(
       (resp: ResponseService) => {
         this.loading.hide();
         if (resp.state === "Success") {
@@ -82,7 +82,7 @@ export class LoginformComponent implements OnInit, OnDestroy {
           localStorage.setItem("REFRESH_TOKEN", resp.objectResponse.refreshToken);
           this.utils.hideloginForm();
           this.routeBased();
-          
+
           dataLayer.push({
             event: 'pushEventGA',
             categoria: 'IniciarSesion',
@@ -141,13 +141,13 @@ export class LoginformComponent implements OnInit, OnDestroy {
     this.utils.showActivate();
   }
 
-  
+
   /** Al momento de hacer login determina la ruta por el perfil de usuario */
-  
+
   private routeBased() {
     let token = localStorage.getItem("ACCESS_TOKEN");
     let tokenDecode = decode(token);
-    if(tokenDecode.role === "CLICKER") {
+    if (tokenDecode.role === "CLICKER") {
       this.router.navigate(['/inicio']);
       this.authService.isLogged$.next(true);
     } else {
@@ -163,7 +163,7 @@ export class LoginformComponent implements OnInit, OnDestroy {
       localStorage.setItem("AmonuntReferred", amount.amountsReferred);
     });
   }
-  
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

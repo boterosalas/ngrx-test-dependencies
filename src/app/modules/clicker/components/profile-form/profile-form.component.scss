@@ -1,71 +1,83 @@
-@import 'variables';
-@import 'animations';
+@import "variables";
+@import "animations";
 
-.border-rad{
-    border-radius: 10px;
+.border-rad {
+  border-radius: 10px;
 }
 
 label {
-    width: 80px;
-    color:$gray2;
-    text-transform: uppercase;
-    font-family: $font-galano-bold;
+  width: 80px;
+  color: $gray2;
+  text-transform: uppercase;
+  font-family: $font-galano-bold;
 }
 
-.info{
-    color: #2B2A27;
-    font-family: $font-galano;
-    font-size: 16px;
+.info {
+  color: #2b2a27;
+  font-family: $font-galano;
+  font-size: 16px;
 }
 
-.item{
-    line-height: 3;
-    border-bottom: 1px solid #ECECEC;
-    padding-left: 2rem;
-    &:last-child{
-        border-bottom: none;
-    }
+.item {
+  line-height: 3;
+  border-bottom: 1px solid #ececec;
+  padding-left: 2rem;
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
-.w-85{
-    width: 85%;
+.w-85 {
+  width: 85%;
 }
 
-
-.lineh{
-    line-height: 2;
-    padding: 10px 0px;
+.lineh {
+  line-height: 2;
+  padding: 10px 0px;
 }
 
 @media screen and (max-width: 450px) {
-    .truncate{
-      width: 100px;
-      overflow: hidden;
-      display: block !important;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-
-    .info{
-        font-size: 14px;
-    }
-
-  }
-  
-  .passText{
-      width: 213px;
+  .truncate {
+    width: 100px;
+    overflow: hidden;
+    display: block !important;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
-  input[type="file"] {
-    display: none;
+  .info {
+    font-size: 14px;
+  }
 }
 
-.header{
-    background: #F3F1F6;
-    color: #37236A;
-    text-transform: uppercase;
+.passText {
+  width: 213px;
 }
 
-.address{
-    line-height: 1;
+input[type="file"] {
+  display: none;
+}
+
+.header {
+  background: #f3f1f6;
+  color: #37236a;
+  text-transform: uppercase;
+}
+
+.address {
+  line-height: 1;
+}
+.delete-container {
+  max-width: 395px;
+  text-align: center;
+}
+.title_delete {
+  color: #f21905;
+}
+.button_cancel {
+  color: #3a226a;
+}
+
+.text-container {
+  max-width: 365px;
 }

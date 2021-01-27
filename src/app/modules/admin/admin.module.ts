@@ -19,7 +19,7 @@ import { SearchUsersComponent } from "./components/search-users/search-users.com
 import { DialogUserComponent } from "./components/dialog-user/dialog-user.component";
 import { MatPaginatorIntl } from "@angular/material";
 import { KeySpaceDirectiveAdmin } from "src/directives/space.admin.directive";
-
+import { DragDropModule } from '@angular/cdk/drag-drop';
 // Import ng-circle-progress
 import { NgCircleProgressModule } from "ng-circle-progress";
 
@@ -119,6 +119,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    DragDropModule,
     RouterModule.forChild(routes),
     SharedModule,
     TranslateModule,
@@ -159,4 +160,4 @@ const routes: Routes = [
   entryComponents: [DialogUserComponent],
   providers: [{ provide: MatPaginatorIntl, useClass: UsersComponent }]
 })
-export class AdminModule {}
+export class AdminModule { }

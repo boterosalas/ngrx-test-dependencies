@@ -1,3 +1,4 @@
+//Check for testing in cloud
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AditionalFilesComponent } from './aditional-files.component';
@@ -15,7 +16,7 @@ describe('AditionalFilesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AditionalFilesComponent, TruncatePipe ],
+      declarations: [AditionalFilesComponent, TruncatePipe],
       imports: [
         TranslateModule.forRoot(),
         ReactiveFormsModule,
@@ -35,7 +36,7 @@ describe('AditionalFilesComponent', () => {
         })
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -51,32 +52,36 @@ describe('AditionalFilesComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  //it('should get extension',()=>{
+  //  component.getExtension("reporte.pdf")
+  //})
 
-  // it("on file change ced1", () => {
-  //   const mockFile = new File([""], "name.jpg", { type: "text/html" });
-  //   const mockEvt = { target: { files: [mockFile] } };
-  //   component.onFileChangeFiles(mockEvt, 'cedula1');
-  //   expect(component.onFileChangeFiles).not.toBeNull();
-  // });
+  it("on file change ced1", () => {
+    const mockFile = new File([""], "name.jpg", { type: "text/html" });
+    const mockEvt = { target: { files: [mockFile] } };
+    component.onFileChangeFiles(mockEvt, 'cedula1');
+    expect(component.onFileChangeFiles).not.toBeNull();
+  });
 
-  // it("on file change ced2", () => {
-  //   const mockFile = new File([""], "name.jpg", { type: "text/html" });
-  //   const mockEvt = { target: { files: [mockFile] } };
-  //   component.onFileChangeFiles(mockEvt, 'cedula2');
-  //   expect(component.onFileChangeFiles).not.toBeNull();
-  // });
+  it("on file change ced2", () => {
+    const mockFile = new File([""], "name.jpg", { type: "text/html" });
+    const mockEvt = { target: { files: [mockFile] } };
+    component.onFileChangeFiles(mockEvt, 'cedula2');
+    expect(component.onFileChangeFiles).not.toBeNull();
+  });
 
-  // it("on file change cert", () => {
-  //   const mockFile = new File([""], "name.pdf", { type: "text/html" });
-  //   const mockEvt = { target: { files: [mockFile] } };
-  //   component.onFileChangeFiles(mockEvt, 'certificado');
-  //   expect(component.onFileChangeFiles).not.toBeNull();
-  // });
+  it("on file change cert", () => {
+    const mockFile = new File([""], "name.pdf", { type: "text/html" });
+    const mockEvt = { target: { files: [mockFile] } };
+    component.onFileChangeFiles(mockEvt, 'certificado');
+    expect(component.onFileChangeFiles).not.toBeNull();
+  });
 
-  // it('reset form', () => {
-  //   component.resetForm();
-  //   expect(component.externalForm.valid).toBeTruthy();
-  // });
+  it('reset form', () => {
+    spyOn(component.resetFormEmit, 'emit');
+    component.resetForm();
+    expect(component.resetFormEmit.emit).toHaveBeenCalled;
+  });
 
   it('sendInfo', () => {
     spyOn(component.uploadFile, 'emit');

@@ -154,6 +154,24 @@
           /></a>
         </span>
       </span>
+      <span
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="80px"
+        fxLayoutGap.xs="0px"
+        class="item mt-2 mb-2 mr-4"
+        dir="rtl"
+        
+      >
+      <button mat-button ngClass="red-border w-70"><span
+        fxLayoutAlign="center space-between" (click)="deleteAccount()"
+      >
+      {{
+        "PROFILE.DELETE" | translate
+      }}
+      </span>
+    </button>
+      </span>
     </mat-card>
   
     <div *ngIf="managedPayments === true" ngClass.xs="mt-3 w-100" ngClass.gt-xs="w-50">
@@ -988,4 +1006,52 @@
       </button>
     </form>
   </div>
+</ng-template>
+
+
+<ng-template #templateDeleteAccount>
+  <div [formGroup]="profileFormDelete" ngClass="delete-container">
+      <h3 ngClass="title_delete">Eliminar Cuenta</h3>
+      <p ngClass="text-container">{{"PROFILE.INFO_ADDITIONAL_DELETE" | translate}}</p>
+      <mat-form-field ngClass="mb-2">
+          <mat-pass-toggle-visibility
+          #toggleVisbility
+          matSuffix
+        ></mat-pass-toggle-visibility>
+        <input
+          matInput
+          id="password"
+          [type]="toggleVisbility.type"
+          placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
+          formControlName="Password"
+          spacebar
+          required
+        />
+        
+        <mat-error id="introducePassword" *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Password.errors.required">{{
+          "LOGIN.INTRODUCE_PASSWORD" | translate
+        }}</mat-error>
+    
+        <mat-error id="minPassword" *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Password.errors.minlength">{{
+          "GENERIC.MIN_CHARACTERS" | translate: {minchar:loginForm.controls.Password.errors.minlength.requiredLength}
+        }}</mat-error>
+    
+        <mat-error id="maxPassword" *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Password.errors.maxlength">{{
+          "GENERIC.MAX_CHARACTERS" | translate: {maxchar:loginForm.controls.Password.errors.maxlength.requiredLength}
+        }}</mat-error>
+      </mat-form-field>
+    <div>
+      <button mat-button ngClass="red" (click)="deleteAccountService()"
+      ><span
+      fxLayoutAlign="center space-between"
+      >
+      {{
+        "PROFILE.DELETE" | translate
+      }}
+      </span></button>
+    </div>
+    <div ngClass="mt-3 mb-2">
+      <button mat-button ngClass="button_cancel" (click)="cancelDelete()"> Cancelar </button>
+    </div>
+  </div>    
 </ng-template>

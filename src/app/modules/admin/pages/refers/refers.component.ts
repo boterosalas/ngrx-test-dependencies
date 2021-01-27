@@ -12,7 +12,7 @@ import { ResponseService } from 'src/app/interfaces/response';
   styleUrls: ['./refers.component.scss']
 })
 export class RefersComponent implements OnInit, OnDestroy {
-  
+
   constructor(
     private fb: FormBuilder,
     private file: LinksService,
@@ -31,7 +31,7 @@ export class RefersComponent implements OnInit, OnDestroy {
     daysOfWeek: moment.weekdaysMin(),
     monthNames: moment.monthsShort(),
     firstDay: 1 // first day is monday
-}
+  }
 
   dateRange: any;
   private subscription: Subscription = new Subscription();
@@ -63,7 +63,7 @@ export class RefersComponent implements OnInit, OnDestroy {
   public comissionClickerForm() {
     this.comissionForm = this.fb.group(
       {
-        amount: [this.amount,  [
+        amount: [this.amount, [
           Validators.required,
           Validators.pattern(this.numberPattern)
         ]]
@@ -74,7 +74,7 @@ export class RefersComponent implements OnInit, OnDestroy {
   public referedClickerForm() {
     this.referedForm = this.fb.group(
       {
-        refered: [this.amountMin,  [
+        refered: [this.amountMin, [
           Validators.required,
           Validators.pattern(this.numberPattern)
         ]]
@@ -90,13 +90,13 @@ export class RefersComponent implements OnInit, OnDestroy {
   // Metodo para exportar los usuarios referidos
 
   public exportRefers() {
-    this.dateRange = {
-      start: this.dateForm.controls.dateRange.value.startDate.format(),
-      end: this.dateForm.controls.dateRange.value.endDate.format()
-    }
-    
-   this.subscription = this.file.getReportReferral(this.dateRange).subscribe((resp: ResponseService) => {
-      if(resp.state === 'Success') {
+    //this.dateRange = {
+    //  start: this.dateForm.controls.dateRange.value.startDate.format(),
+    //  end: this.dateForm.controls.dateRange.value.endDate.format()
+    //}
+
+    this.subscription = this.file.getReportReferral().subscribe((resp: ResponseService) => {
+      if (resp.state === 'Success') {
         this.openSnackBar(resp.userMessage, 'Cerrar');
         this.dateForm.reset();
         if (this.dateForm.controls.dateRange.value.startDate === null) {
@@ -115,11 +115,11 @@ export class RefersComponent implements OnInit, OnDestroy {
     })
   }
 
-    /**
-   * Abre el mensaje de confirmacion
-   * @param message
-   * @param action
-   */
+  /**
+ * Abre el mensaje de confirmacion
+ * @param message
+ * @param action
+ */
 
   private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
@@ -128,28 +128,28 @@ export class RefersComponent implements OnInit, OnDestroy {
   }
 
   public saveCommission() {
-    let commission =  {
+    let commission = {
       amount: this.comissionForm.controls.amount.value
     }
-    this.subscription = this.file.saveAmountCommission(commission).subscribe((save:ResponseService)=> {
-      if(save.state === 'Success') {
+    this.subscription = this.file.saveAmountCommission(commission).subscribe((save: ResponseService) => {
+      if (save.state === 'Success') {
         this.openSnackBar(save.userMessage, 'Cerrar');
         this.getAmountClicker();
-      } else{
+      } else {
         this.openSnackBar(save.userMessage, 'Cerrar');
       }
     })
   }
 
   public saveRefered() {
-    let commission =  {
+    let commission = {
       amount: this.referedForm.controls.refered.value
     }
-    this.subscription = this.file.saveAmountReferred(commission).subscribe((resp:ResponseService)=> {
-      if(resp.state === 'Success') {
+    this.subscription = this.file.saveAmountReferred(commission).subscribe((resp: ResponseService) => {
+      if (resp.state === 'Success') {
         this.openSnackBar(resp.userMessage, 'Cerrar');
         this.getAmountClicker();
-      } else{
+      } else {
         this.openSnackBar(resp.userMessage, 'Cerrar');
       }
     })
