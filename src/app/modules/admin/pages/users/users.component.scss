@@ -1,39 +1,48 @@
-@import 'variables';
-@import 'general';
-@import 'animations';
+@import "variables";
+@import "general";
+@import "animations";
 
 .border-input {
-    border: none;
-    outline: none;
-    height: 32px;
+  border: none;
+  outline: none;
+  height: 32px;
 }
 
-.border-radius{
-    border-radius: 5px;
+.border-radius {
+  border-radius: 5px;
 }
 
 .icon-download {
-    position: relative;
-    left: 5px;
-    bottom: 2px;
-  }
-
-  .icon-date{
-    position: relative;
-    top: 7px;
-    left: 30px;
-  }
-
-  .form-control {
-      padding-left: 35px !important;
-      font-family: $font-galano !important;
-  }
-
-  .downloadUsers {
-    position: relative;
-    left: -23px;
+  position: relative;
+  left: 5px;
+  bottom: 2px;
 }
 
-.formw{
+.icon-date {
+  position: relative;
+  top: 7px;
+  left: 30px;
+}
+
+.form-control {
+  padding-left: 35px !important;
+  font-family: $font-galano !important;
+}
+
+.downloadUsers {
+  position: relative;
+  left: -23px;
+}
+
+.formw {
   width: 270px;
+}
+
+.border-separators {
+  margin-left: 30px;
+  padding-left: 40px;
+  border-left: 1px solid #d1d2f9;
+}
+.container-search {
+  width: 300px;
 }

@@ -52,7 +52,7 @@ describe('RefersComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RefersComponent ],
+      declarations: [RefersComponent],
       imports: [
         TranslateModule.forRoot(),
         ReactiveFormsModule,
@@ -73,20 +73,20 @@ describe('RefersComponent', () => {
             blacklistedRoutes: []
           }
         })],
-        providers: [
-          { provide: LinksService, useValue: mockLinksService },
-          { provide: LOCALE_CONFIG, useValue: config },
-          {
-            provide: LocaleService,
-            useClass: LocaleService,
-            deps: [LOCALE_CONFIG]
-          }
-        ],
-        schemas: [
-          NO_ERRORS_SCHEMA
-        ]
+      providers: [
+        { provide: LinksService, useValue: mockLinksService },
+        { provide: LOCALE_CONFIG, useValue: config },
+        {
+          provide: LocaleService,
+          useClass: LocaleService,
+          deps: [LOCALE_CONFIG]
+        }
+      ],
+      schemas: [
+        NO_ERRORS_SCHEMA
+      ]
     })
-    .compileComponents();
+      .compileComponents();
     mockLinksService.getAmount.and.returnValue(of(amount));
   }));
 
@@ -97,8 +97,8 @@ describe('RefersComponent', () => {
   });
 
   it('should create', () => {
-      expect(mockLinksService.getAmount).toHaveBeenCalled();
-      expect(component).toBeTruthy();
+    expect(mockLinksService.getAmount).toHaveBeenCalled();
+    expect(component).toBeTruthy();
   });
 
   it('save comission', () => {
@@ -106,68 +106,71 @@ describe('RefersComponent', () => {
     component.saveCommission();
     expect(mockLinksService.saveAmountCommission).toHaveBeenCalled();
   });
-  
+
   it('save refered', () => {
     mockLinksService.saveAmountReferred.and.returnValue(of(saveCommision));
     component.saveRefered();
     expect(mockLinksService.saveAmountReferred).toHaveBeenCalled();
   });
-  
+
   it('save comission Error', () => {
     mockLinksService.saveAmountCommission.and.returnValue(of(saveCommisionError));
     component.saveCommission();
     expect(mockLinksService.saveAmountCommission).toHaveBeenCalled();
   });
-  
+
   it('save refered Error', () => {
     mockLinksService.saveAmountReferred.and.returnValue(of(saveCommisionError));
     component.saveRefered();
     expect(mockLinksService.saveAmountReferred).toHaveBeenCalled();
   });
-  
+
 
   it("export Report", () => {
     mockLinksService.getReportReferral.and.returnValue(of(report));
-    component.dateRange = {
-      email: "david@test.com",
-      start: "Sat 20Dec 2007 202019 2000:00:00 20GMT-0500",
-      end: "Sat 20Dec 2007 202019 2000:00:00 20GMT-0500"
-    };
-    component.dateForm.controls.dateRange.setValue({startDate: null});
-    const nativeElement = fixture.nativeElement;
-    const input = nativeElement.querySelector("#date");
-    input.dispatchEvent(new Event("click"));
-    const nativeElementDate = fixture.nativeElement;
-    const dateStart = nativeElementDate.querySelector(".today");
-    dateStart.dispatchEvent(new Event("click"));
-    const nativeElementbtn = fixture.nativeElement;
-    const btn = nativeElementbtn.querySelector(".btn");
-    btn.dispatchEvent(new Event("click"));
-    fixture.detectChanges();
+    //component.dateRange = {
+    //email: "david@test.com",
+    //start: "Sat 20Dec 2007 202019 2000:00:00 20GMT-0500",
+    //end: "Sat 20Dec 2007 202019 2000:00:00 20GMT-0500"
+    //};
+    //component.dateForm.controls.dateRange.setValue({startDate: null});
+    //const nativeElement = fixture.nativeElement;
+    //const input = nativeElement.querySelector("#date");
+    //input.dispatchEvent(new Event("click"));
+    //const nativeElementDate = fixture.nativeElement;
+    //const dateStart = nativeElementDate.querySelector(".today");
+    //dateStart.dispatchEvent(new Event("click"));
+    //const nativeElementbtn = fixture.nativeElement;
+    //const btn = nativeElementbtn.querySelector(".btn");
+    //btn.dispatchEvent(new Event("click"));
+    //fixture.detectChanges();
     component.exportRefers();
     expect(mockLinksService.getReportReferral).toHaveBeenCalled();
   });
 
   it("export Report Error", () => {
     mockLinksService.getReportReferral.and.returnValue(of(reportError));
-    component.dateRange = {
-      email: "david@test.com",
-      start: "Sat 20Dec 2007 202019 2000:00:00 20GMT-0500",
-      end: "Sat 20Dec 2007 202019 2000:00:00 20GMT-0500"
-    };
+    //component.dateRange = {
+    //  email: "david@test.com",
+    //  start: "Sat 20Dec 2007 202019 2000:00:00 20GMT-0500",
+    //  end: "Sat 20Dec 2007 202019 2000:00:00 20GMT-0500"
+    //};
     // component.dateForm.controls.dateRange.setValue({startDate: null});
-    const nativeElement = fixture.nativeElement;
-    const input = nativeElement.querySelector("#date");
-    input.dispatchEvent(new Event("click"));
-    const nativeElementDate = fixture.nativeElement;
-    const dateStart = nativeElementDate.querySelector(".today");
-    dateStart.dispatchEvent(new Event("click"));
-    const nativeElementbtn = fixture.nativeElement;
-    const btn = nativeElementbtn.querySelector(".btn");
-    btn.dispatchEvent(new Event("click"));
-    fixture.detectChanges();
+    //const nativeElement = fixture.nativeElement;
+    //const input = nativeElement.querySelector("#date");
+    //input.dispatchEvent(new Event("click"));
+    //const nativeElementDate = fixture.nativeElement;
+    //const dateStart = nativeElementDate.querySelector(".today");
+    //dateStart.dispatchEvent(new Event("click"));
+    //const nativeElementbtn = fixture.nativeElement;
+    //const btn = nativeElementbtn.querySelector(".btn");
+    //btn.dispatchEvent(new Event("click"));
+    //fixture.detectChanges();
     component.exportRefers();
     expect(mockLinksService.getReportReferral).toHaveBeenCalled();
   });
-
+  it('change state', () => {
+    component.changeState();
+    expect(component.disButon).toBeFalsy;
+  })
 });

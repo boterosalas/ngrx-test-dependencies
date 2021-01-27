@@ -267,7 +267,9 @@
     "ADITIONAL_FILE": "Archivos adicionales",
     "INFO_ADDITIONAL": "Los siguientes documentos son necesarios para poder verificar tu cuenta y que empieces a recibir tus comisiones.",
     "TEXT_PASS": "Ingresa tu contraseña para poder realizar estos cambios",
-    "ACCOUNT_INFO": "Actualiza tu información bancaria para tenerla en cuenta en tu próximo pago"
+    "ACCOUNT_INFO": "Actualiza tu información bancaria para tenerla en cuenta en tu próximo pago",
+    "DELETE":"Eliminar mi cuenta",
+    "INFO_ADDITIONAL_DELETE":"Esta Acción es Definitiva: Si eliminas tu cuenta de Clickam, no podrás recuperar tu contraseña ni la información que se encuentra en la plataforma. Todos tus datos personales se eliminara definitivamente."
   },
   "ADDITIONAL": {
     "COMUNICATIONS": "Recibir comunicaciones",

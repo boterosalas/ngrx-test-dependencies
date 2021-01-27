@@ -1,25 +1,26 @@
-@import 'variables';
+@import "variables";
 
 table {
-    width: 100%;
-    th{
-      font-family: $font-galano-bold;
-      color: $primary-color;
-    }
-    td{
-      padding-right: 15px;
-      text-align: center;
-    }
+  width: 100%;
+  th {
+    font-family: $font-galano-bold;
+    color: $primary-color;
   }
+  td {
+    padding-right: 15px;
+    text-align: center;
+  }
+}
 
-  .iconb{
-    height: 35px;
-  }
+.iconb {
+  height: 35px;
+  width: 100px;
+}
 
-  .overflow-auto{
-    overflow: auto;
-  }
+.overflow-auto {
+  overflow: auto;
+}
 
-  .tr{
-    text-align: right;
-  }
+.tr {
+  text-align: right;
+}

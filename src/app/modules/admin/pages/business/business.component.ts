@@ -13,11 +13,11 @@ export class BusinessComponent implements OnInit, OnDestroy {
   constructor(
     private content: ContentService,
     private _snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   private subscription: Subscription = new Subscription();
   email: string;
-  dataSource:any;
+  dataSource: any;
 
   ngOnInit() {
     this.getAllBusiness();
@@ -46,13 +46,13 @@ export class BusinessComponent implements OnInit, OnDestroy {
   }
 
   public activateBusiness(business) {
-    
+
     let businessActivate = {
       idbusiness: business.id,
       value: business.active,
     };
 
-    this.subscription =  this.content.saveActiveBusiness(businessActivate).subscribe(resp => {
+    this.subscription = this.content.saveActiveBusiness(businessActivate).subscribe(resp => {
       this.openSnackBar(resp.userMessage, "Cerrar");
     })
 
@@ -60,9 +60,10 @@ export class BusinessComponent implements OnInit, OnDestroy {
   }
 
   public getAllBusiness() {
-    this.subscription =  this.content.getAllBusiness().subscribe(resp=> {
-      this.dataSource = new MatTableDataSource<any>(resp);
+    this.subscription = this.content.getAllBusiness().subscribe(resp => {
+      this.dataSource = resp;
     })
+
   }
 
   ngOnDestroy() {

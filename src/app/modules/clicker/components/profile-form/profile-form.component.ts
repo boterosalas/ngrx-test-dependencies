@@ -16,6 +16,7 @@ import { DialogEditComponent } from "../dialog-edit/dialog-edit.component";
 import { ConfirmPasswordValidator } from "src/app/validators/confirm-password.validator";
 import { MasterDataService } from "src/app/services/master-data.service";
 import { ResponseService } from "src/app/interfaces/response";
+import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 
 @Component({
   selector: "app-profile-form",
@@ -31,7 +32,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private personalInfo: MasterDataService
-  ) {}
+  ) { }
 
   @ViewChild("templateDialog", { static: false }) template: TemplateRef<any>;
   @ViewChild("templateDialogCell", { static: false }) templateCell: TemplateRef<
@@ -45,10 +46,14 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   @ViewChild("templateDialogAddress", { static: false })
   templateAddress: TemplateRef<any>;
 
+  @ViewChild("templateDeleteAccount", { static: false })
+  templateDelete: TemplateRef<any>;
+
   private subscription: Subscription = new Subscription();
   profileForm: FormGroup;
   profileFormCell: FormGroup;
   profileFormPass: FormGroup;
+  profileFormDelete: FormGroup;
   accountForm: FormGroup;
   loginForm: FormGroup;
   addressForm: FormGroup;
@@ -126,9 +131,23 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       this.getDepartments();
       this.filter();
     });
+    this.formProfileDelete();
     this.accountBankForm();
     this.getBanks();
     this.getUserData();
+  }
+
+  public formProfileDelete() {
+    this.profileFormDelete = this.fb.group({
+      Password: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(20),
+        ],
+      ],
+    });
   }
 
   public getUserData() {
@@ -278,10 +297,10 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     const title = "Actualizar información bancaria";
     const id = "account";
     const template = this.templateAccount;
-    if(this.bank === null) {
+    if (this.bank === null) {
       this.accountForm.reset();
     }
-    
+
     this.nameFileCert = "";
     this.dialog.open(DialogEditComponent, {
       maxWidth: '450px',
@@ -292,11 +311,11 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
         id,
       },
     });
-    this.dialog.afterAllClosed.subscribe(()=> {
-      if(this.bank === null) {
+    this.dialog.afterAllClosed.subscribe(() => {
+      if (this.bank === null) {
         this.accountForm.reset();
       }
-    }); 
+    });
   }
 
   public editCell() {
@@ -515,7 +534,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   public checkDepartment() {
     if (
       this.addressForm.controls.department.value !==
-        this.departmentDecription ||
+      this.departmentDecription ||
       this.addressForm.controls.department.value === undefined
     ) {
       this.addressForm.controls.department.setErrors({ incorrect: true });
@@ -575,10 +594,10 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     }
   }
 
-    /**
-   * Metodo para validar que la extension sea valida
-   * @param nameFile
-   */
+  /**
+ * Metodo para validar que la extension sea valida
+ * @param nameFile
+ */
 
   private getExtension(nameFile: string) {
     let splitExt = nameFile.split(".");
@@ -591,5 +610,23 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  public deleteAccount() {
+    const title = "";
+    const template = this.templateDelete;
+
+    this.dialog.open(ModalGenericComponent, {
+      data: {
+        title,
+        template,
+      },
+    });
+  }
+  public cancelDelete() {
+    this.dialog.closeAll();
+  }
+  public deleteAccountService() {
+    console.log("Eliminando Cuenta");
   }
 }

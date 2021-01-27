@@ -39,6 +39,7 @@ export class UsersComponent extends MatPaginatorIntl
   paginate: string;
   dateForm: FormGroup;
   emailForm: FormGroup;
+  dateReportChangeForm: FormGroup;
   private subscription: Subscription = new Subscription();
   ext: string;
   contentType: string;
@@ -49,6 +50,7 @@ export class UsersComponent extends MatPaginatorIntl
   from: any;
   to: any;
   dateParams: any;
+  dateParamsReport: any;
   disButon: boolean;
   @ViewChild("templateDialogEmail", { static: false })
   templateEmail: TemplateRef<any>;
@@ -89,7 +91,7 @@ export class UsersComponent extends MatPaginatorIntl
     this.lastPageLabel = "Última página";
     this.firstPageLabel = "Primera página";
 
-    this.getRangeLabel = function(page, pageSize, length) {
+    this.getRangeLabel = function (page, pageSize, length) {
       if (length === 0 || pageSize === 0) {
         return "0 de " + length;
       }
@@ -111,6 +113,9 @@ export class UsersComponent extends MatPaginatorIntl
     this.formEmail();
 
     this.dateForm = this.fb.group({
+      dateRange: [null, Validators.required]
+    });
+    this.dateReportChangeForm = this.fb.group({
       dateRange: [null, Validators.required]
     });
   }
@@ -163,7 +168,7 @@ export class UsersComponent extends MatPaginatorIntl
     this.userId = userId;
   }
 
-  public changeEmail(){
+  public changeEmail() {
     Swal.fire({
       title: "Actualizar correo",
       text: '¿Estás seguro de actualizar el correo?',
@@ -175,7 +180,7 @@ export class UsersComponent extends MatPaginatorIntl
       cancelButtonClass: "updatecancel",
       allowOutsideClick: false
     }).then((resp: any) => {
-      if(resp.dismiss !== 'cancel') {
+      if (resp.dismiss !== 'cancel') {
         this.updateEmail();
       }
     })
@@ -186,9 +191,9 @@ export class UsersComponent extends MatPaginatorIntl
     let email = this.emailForm.controls.email.value;
     this.subscription = this.usersService.updateUserEmail(id, email).subscribe(
       (respEmail: ResponseService) => {
-          this.dialog.closeAll();
-          this.openSnackBar(respEmail.userMessage, "Cerrar");
-          this.searchUser(this.paginate);
+        this.dialog.closeAll();
+        this.openSnackBar(respEmail.userMessage, "Cerrar");
+        this.searchUser(this.paginate);
       },
       err => {
         this.openSnackBar(err.userMessage, "Cerrar");
@@ -444,6 +449,13 @@ export class UsersComponent extends MatPaginatorIntl
         }
       });
   }
+  public getReportChangeExcel() {
+    this.dateParamsReport = {
+      start: this.dateReportChangeForm.controls.dateRange.value.startDate.format(),
+      end: this.dateReportChangeForm.controls.dateRange.value.endDate.format()
+    };
+    console.log(this.dateParamsReport)
+  }
 
   change() {
     this.disButon = false;
@@ -459,13 +471,13 @@ export class UsersComponent extends MatPaginatorIntl
   }
 
   public updateEmployee() {
-    this.subscription = this.usersService.updateEmployees().subscribe((respUpdate: ResponseService)=> {
+    this.subscription = this.usersService.updateEmployees().subscribe((respUpdate: ResponseService) => {
       this.openSnackBar(respUpdate.userMessage, 'Cerrar');
     })
   }
 
   public exportusers() {
-    this.subscription = this.usersService.getExternalUsers().subscribe((respExport: ResponseService)=> {
+    this.subscription = this.usersService.getExternalUsers().subscribe((respExport: ResponseService) => {
       this.openSnackBar(respExport.userMessage, 'Cerrar');
     })
   }
