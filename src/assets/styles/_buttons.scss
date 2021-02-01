@@ -14,7 +14,13 @@
   border: 1px solid $secondary-color !important;
   color: $secondary-color !important;
   background-color: $white !important;
-  width: 200px !important;
+  width: 160px !important;
+}
+@media screen and (max-width: 450px) {
+  .red-border {
+    font-size: 13px !important;
+    width: 155px !important;
+  }
 }
 .red {
   background-color: $secondary-color !important;

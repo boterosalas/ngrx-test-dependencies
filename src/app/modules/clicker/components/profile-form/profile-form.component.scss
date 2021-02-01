@@ -81,3 +81,30 @@ input[type="file"] {
 .text-container {
   max-width: 365px;
 }
+.delete-card {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.title-delete {
+  color: #ff5555;
+  width: 100%;
+  margin-right: 0px !important;
+}
+.card-delete {
+  background-color: #ffeeeb !important;
+}
+@media screen and (max-width: 450px) {
+  .title-delete {
+    font-size: 11px;
+  }
+}
+.delete-container-text {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+.red-disable {
+  background-color: #ff8f84 !important;
+  color: #ffffff !important;
+  border-color: #ff8f84 !important;
+}

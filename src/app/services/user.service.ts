@@ -53,6 +53,7 @@ export class UserService {
   apiSaveUserDevice = "notification/saveuserdevice";
   apiUpdateEmployees = "userprofile/updateemployees";
   apiGetExternalUsers = "userprofile/getexternalusers";
+  apiDeleteUser = "userprofile/deleteaccount"
 
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
@@ -76,7 +77,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         )
       )
@@ -100,7 +101,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         )
       );
@@ -135,7 +136,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         ),
         map((user: any) => {
@@ -152,7 +153,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         )
       );
@@ -170,7 +171,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         )
       );
@@ -184,7 +185,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         )
       );
@@ -198,7 +199,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         )
       );
@@ -216,7 +217,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         )
       );
@@ -238,7 +239,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         )
       );
@@ -305,7 +306,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         )
       );
@@ -323,7 +324,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         )
       );
@@ -341,7 +342,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         )
       );
@@ -359,7 +360,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         )
       );
@@ -373,7 +374,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         )
       );
@@ -391,7 +392,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         )
       );
@@ -409,7 +410,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         )
       );
@@ -427,9 +428,27 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         )
       );
+  }
+
+  public deleteUser() {
+    return this.http
+      .post(
+        `${this.url}${this.apiDeleteUser}`,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+    //`${this.url}${this.apiDeleteUser}`
   }
 }

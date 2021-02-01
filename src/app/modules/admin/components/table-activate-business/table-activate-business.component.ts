@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatTable } from '@angular/material';
+import { LinksService } from "src/app/services/links.service";
 export interface PeriodicElement {
   drag: any;
   bussiness: any;
@@ -15,7 +16,9 @@ export interface PeriodicElement {
 
 export class TableActivateBusinessComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private file: LinksService,
+  ) { }
   //dataSource: any;
   @Input() dataSource;
   @Output() activateBusiness = new EventEmitter;
@@ -32,7 +35,11 @@ export class TableActivateBusinessComponent implements OnInit {
     const prevIndex = this.dataSource.findIndex((d) => d === event.item.data);
     moveItemInArray(this.dataSource, prevIndex, event.currentIndex);
     this.table.renderRows();
+    this.saveOrder();
     console.log(this.dataSource);
+  }
+  saveOrder() {
+    this.file.putOrder(this.dataSource)
   }
 
 }
