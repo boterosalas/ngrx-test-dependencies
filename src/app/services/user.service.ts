@@ -434,10 +434,11 @@ export class UserService {
       );
   }
 
-  public deleteUser() {
+  public deleteUser(data: any) {
     return this.http
       .post(
         `${this.url}${this.apiDeleteUser}`,
+        data,
         this.httpOptions
       )
       .pipe(
