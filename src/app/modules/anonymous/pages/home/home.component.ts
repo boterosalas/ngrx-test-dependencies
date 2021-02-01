@@ -94,16 +94,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   modalTarget: string = "_self";
   modalSrcWeb: string;
   modalSrcMobile: string;
-  newTerms:boolean;
+  newTerms: boolean;
   acceptTerms: boolean = null;
   @ViewChild("templateTerms", { static: false })
   templateTerms: TemplateRef<any>;
-  newTermsHTML:boolean = false;
-  stepTerms:boolean = true;
+  newTermsHTML: boolean = false;
+  stepTerms: boolean = true;
   activateButton: boolean = false;
   amount: any;
-  amountReferred:any;
-  paymentPending:number;
+  amountReferred: any;
+  paymentPending: number;
 
   constructor(
     public router: Router,
@@ -141,7 +141,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    
+
     this.metaTagService.addTags([
       {
         name: "keywords",
@@ -180,7 +180,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
       let interval = setInterval(() => {
         this.showModalPayment();
-        if(this.paymentPending > 10000){
+        if (this.paymentPending > 10000) {
           clearInterval(interval);
         }
 
@@ -188,7 +188,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
       if (role === "CLICKER") {
         setTimeout(() => {
-          if(this.newTerms === false) {
+          if (this.newTerms === false) {
             this.termsAndConditions();
           }
         }, 3000);
@@ -203,7 +203,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.messagingService.requestPermission(this.userId);
         this.messagingService.receiveMessage();
         this.message = this.messagingService.currentMessage;
-       
+
       }
     });
   }
@@ -292,7 +292,18 @@ export class HomeComponent implements OnInit, OnDestroy {
       .getBusiness()
       .pipe(distinctUntilChanged())
       .subscribe((bussiness) => {
+        bussiness.sort(function (a, b) {
+          if (a.id > b.id) {
+            return 1;
+          }
+          if (a.id < b.id) {
+            return -1;
+          }
+          return 0;
+        });
         this.bussiness = bussiness;
+
+        console.log(this.bussiness)
       });
   }
 
@@ -427,13 +438,13 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.role === "CLICKER" &&
       this.managedPayments === false &&
       this.isEmployee === false &&
-      this.newTerms  === true &&
+      this.newTerms === true &&
       this.paymentPending >= 10000
     ) {
       Swal.fire({
         title: "¡Registra tus datos bancarios!",
         text:
-        `Recuerda que para recibir el pago de tus comisiones , debes registrar tus datos bancarios. (Tienes comisiones pendientes por $${this.paymentPending})`,
+          `Recuerda que para recibir el pago de tus comisiones , debes registrar tus datos bancarios. (Tienes comisiones pendientes por $${this.paymentPending})`,
         type: "info",
         showCancelButton: true,
         showCloseButton: true,
@@ -502,30 +513,30 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public showTerms() {
     this.stepTerms = false;
-    this.newTermsHTML =  true;
+    this.newTermsHTML = true;
   }
 
   public logout() {
     this.stepTerms = true;
-    this.newTermsHTML =  false;
+    this.newTermsHTML = false;
     this.activateButton = false;
     this.utils.logout();
     this.dialog.closeAll();
   }
 
   public acceptTermsCheck(buttonState: MatCheckboxChange) {
-    if(buttonState.checked === true) {
+    if (buttonState.checked === true) {
       this.activateButton = true;
     } else {
       this.activateButton = false;
     }
   }
 
-      /**
-   * Abre el mensaje de confirmacion
-   * @param message
-   * @param action
-   */
+  /**
+* Abre el mensaje de confirmacion
+* @param message
+* @param action
+*/
 
   private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
@@ -534,9 +545,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public sendReferalsTerm() {
-    this.user.saveUserAcceptTermsReferrals().subscribe((resp: ResponseService)=> {
+    this.user.saveUserAcceptTermsReferrals().subscribe((resp: ResponseService) => {
       this.stepTerms = true;
-      this.newTermsHTML =  false;
+      this.newTermsHTML = false;
       this.activateButton = false;
       this.dialog2.closeAll();
       this.newTerms = true;

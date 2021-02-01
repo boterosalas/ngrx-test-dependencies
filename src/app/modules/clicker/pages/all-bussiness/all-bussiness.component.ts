@@ -21,30 +21,39 @@ export class AllBussinessComponent implements OnInit, OnDestroy {
   constructor(
     public router: Router,
     public auth: AuthService,
-    private content: ContentService  ) {
+    private content: ContentService) {
   }
 
   ngOnInit() {
     this.getBussiness();
   }
 
-  
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
-  
+
   public getBussiness() {
     this.subscription = this.content
       .getBusiness()
       .pipe(distinctUntilChanged())
       .subscribe((bussiness) => {
+        bussiness.sort(function (a, b) {
+          if (a.id > b.id) {
+            return 1;
+          }
+          if (a.id < b.id) {
+            return -1;
+          }
+          return 0;
+        });
         this.bussiness = bussiness;
       });
   }
 
   public bussinessNavigation(bussiness) {
-    
+
     let params = {
       id: bussiness.id,
       code: bussiness.code,

@@ -462,4 +462,7 @@ export class LinksService {
         })
       );
   }
+  public putOrder(datos?: any) {
+    return `Devuelve un JSON`
+  }
 }

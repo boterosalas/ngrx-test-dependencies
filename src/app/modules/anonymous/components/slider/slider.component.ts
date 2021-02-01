@@ -32,19 +32,19 @@ export class SliderComponent implements OnInit {
     private token: TokenService,
     ngNavigatorShareService: NgNavigatorShareService,
     private router: Router
-  ) { 
+  ) {
     this.ngNavigatorShareService = ngNavigatorShareService;
   }
 
   private ngNavigatorShareService: NgNavigatorShareService;
-  @Input() sliderWeb:Object;
-  @Input() sliderMobile:Object;
-  @Input() isSlider:boolean;
-  @Input() showArrows:boolean;
+  @Input() sliderWeb: Object;
+  @Input() sliderMobile: Object;
+  @Input() isSlider: boolean;
+  @Input() showArrows: boolean;
   @Output() action = new EventEmitter();
   @Input() Class: string;
 
-  @ViewChild('slickModal', {static: false}) slickModal: SlickCarouselComponent;
+  @ViewChild('slickModal', { static: false }) slickModal: SlickCarouselComponent;
 
   private subscription: Subscription = new Subscription();
   @ViewChild("templateCategories", { static: false })
@@ -79,7 +79,7 @@ export class SliderComponent implements OnInit {
 
     this.getDate();
 
-    if(localStorage.getItem("ACCESS_TOKEN") !== null ) {
+    if (localStorage.getItem("ACCESS_TOKEN") !== null) {
       this.identification = this.token.userInfo().identification;
     }
 
@@ -96,7 +96,7 @@ export class SliderComponent implements OnInit {
 
   }
 
-  slideConfig = {"slidesToShow": 1, "slidesToScroll": 1, "dots": true, dotClass: 'slick-dots orange', autoplay: true, autoplaySpeed: 5000, infinite: false, arrows: true}
+  slideConfig = { "slidesToShow": 1, "slidesToScroll": 1, "dots": true, dotClass: 'slick-dots orange', autoplay: true, autoplaySpeed: 5000, infinite: false, arrows: true }
 
   public nextStep() {
     this.showForm = !this.showForm;
@@ -106,21 +106,22 @@ export class SliderComponent implements OnInit {
 
   buy() {
     var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    if(iOS) {
+    if (iOS) {
       window.location.assign(this.urlshorten)
+
     } else {
-      window.open(this.urlshorten,'_blank');
+      window.open(this.urlshorten, '_blank');
     }
   }
 
   next() {
     this.slickModal.slickNext();
   }
-  
+
   prev() {
     this.slickModal.slickPrev();
   }
-  
+
   public backStep() {
     this.reference = !this.reference;
     this.showForm = !this.showForm;
@@ -135,12 +136,12 @@ export class SliderComponent implements OnInit {
       title: '',
       text: '',
       url: this.urlshorten
-    }).then( (response) => {
+    }).then((response) => {
       console.log(response);
     })
-    .catch( (error) => {
-      console.log(error);
-    });
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   public showReference() {
@@ -149,31 +150,31 @@ export class SliderComponent implements OnInit {
     this.idCustomerForm.reset();
   }
 
-    /* To copy Text from Textbox */
-    public copyInputMessage(inputElement: any) {
-      inputElement.select();
-      document.execCommand("copy");
-      inputElement.setSelectionRange(0, 0);
-      this.openSnackBar("Se ha copiado el link al portapapeles", "Cerrar");
-    }
+  /* To copy Text from Textbox */
+  public copyInputMessage(inputElement: any) {
+    inputElement.select();
+    document.execCommand("copy");
+    inputElement.setSelectionRange(0, 0);
+    this.openSnackBar("Se ha copiado el link al portapapeles", "Cerrar");
+  }
 
-    /**
-   * Abre el mensaje de confirmacion de copiado del link
-   * @param message
-   * @param action
-   */
+  /**
+ * Abre el mensaje de confirmacion de copiado del link
+ * @param message
+ * @param action
+ */
 
- 
 
-    private openSnackBar(message: string, action: string) {
-      this._snackBar.open(message, action, {
-        duration: 5000
-      });
-    }
-  
-       /**
-   * Obtiene la fecha actual
-   */
+
+  private openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5000
+    });
+  }
+
+  /**
+* Obtiene la fecha actual
+*/
 
   public getDate() {
     let today = new Date();
@@ -188,10 +189,10 @@ export class SliderComponent implements OnInit {
     this.date = date + " " + time;
   }
 
-  
-   /**
-   * Metodo para dalvar los links generados
-   */
+
+  /**
+  * Metodo para dalvar los links generados
+  */
 
   public saveLink(param?: string) {
     let data = {
@@ -206,9 +207,9 @@ export class SliderComponent implements OnInit {
       .saveLink(data)
       .subscribe((resp: ResponseService) => {
         let splice = resp.objectResponse.link.split('//');
-        this.urlshorten = 'https://'+ splice[1];
+        this.urlshorten = 'https://' + splice[1];
         this.enableCopy = false;
-        
+
         if (param === "assured") {
           if (resp.state === "Error") {
             this.openSnackBar(resp.userMessage, "cerrar");
@@ -254,67 +255,67 @@ export class SliderComponent implements OnInit {
 
   public dataCategory(category) {
     let token = localStorage.getItem("ACCESS_TOKEN");
-      if(token !== null && category.business !=='clickam') {
-        this.tokenInfo = this.token.userInfo();
-        this.idClicker = this.tokenInfo.idclicker;
-        this.showFormCustomer = true;
-        this.showForm = false;
-        this.urlshorten = '';
-        this.reference = false;
-        const dataCategoryUrl = category.link;
-        this.url = `${dataCategoryUrl}${this.idClicker}`;
-        setTimeout(() => {
-          this.saveLink();
-        }, 500);
-        this.idCustomerForm.controls.identification.setValue("");
-        this.idCustomerForm.reset();
-        this.formShareLink();
-        const title = category.description;
-        const id = category.productId;
-        const img = category.imageurl;
-        const showClose = false;
-        const showCloseIcon = true;
-        const showProduct = true;
-        const showshowTitle = false;
-        const buttonClose = "Cerrar";
-        const infoaditional = category.infoaditional;
-        this.plu = category.description;
-        this.business = category.idbusiness;
-        const bussinessType = category.business;
-        const home = true;
-        this.classButtonCopy = `gtmClicLightboxCopiarLink${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonRefer = `gtmClicLightboxReferir${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonBuy = `gtmClicLightboxComprar${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonShare = `gtmClicLightboxCompartir${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonFacebook = `gtmClicLightboxIconoFacebook${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonTwitter = `gtmClicLightboxIconoTwitter${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        this.classButtonWhatsapp= `gtmClicLightboxIconoWhatsApp${bussinessType}${category.description}`.replace(/\s/g,'').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    if (token !== null && category.business !== 'clickam') {
+      this.tokenInfo = this.token.userInfo();
+      this.idClicker = this.tokenInfo.idclicker;
+      this.showFormCustomer = true;
+      this.showForm = false;
+      this.urlshorten = '';
+      this.reference = false;
+      const dataCategoryUrl = category.link;
+      this.url = `${dataCategoryUrl}${this.idClicker}`;
+      setTimeout(() => {
+        this.saveLink();
+      }, 500);
+      this.idCustomerForm.controls.identification.setValue("");
+      this.idCustomerForm.reset();
+      this.formShareLink();
+      const title = category.description;
+      const id = category.productId;
+      const img = category.imageurl;
+      const showClose = false;
+      const showCloseIcon = true;
+      const showProduct = true;
+      const showshowTitle = false;
+      const buttonClose = "Cerrar";
+      const infoaditional = category.infoaditional;
+      this.plu = category.description;
+      this.business = category.idbusiness;
+      const bussinessType = category.business;
+      const home = true;
+      this.classButtonCopy = `gtmClicLightboxCopiarLink${bussinessType}${category.description}`.replace(/\s/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      this.classButtonRefer = `gtmClicLightboxReferir${bussinessType}${category.description}`.replace(/\s/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      this.classButtonBuy = `gtmClicLightboxComprar${bussinessType}${category.description}`.replace(/\s/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      this.classButtonShare = `gtmClicLightboxCompartir${bussinessType}${category.description}`.replace(/\s/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      this.classButtonFacebook = `gtmClicLightboxIconoFacebook${bussinessType}${category.description}`.replace(/\s/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      this.classButtonTwitter = `gtmClicLightboxIconoTwitter${bussinessType}${category.description}`.replace(/\s/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      this.classButtonWhatsapp = `gtmClicLightboxIconoWhatsApp${bussinessType}${category.description}`.replace(/\s/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-        const template = this.templateCategories;
+      const template = this.templateCategories;
 
-        let dialogref = this.dialog.open(DialogComponent, {
-          data: {
-            title,
-            template,
-            showClose,
-            showCloseIcon,
-            infoaditional,
-            img,
-            showProduct,
-            showshowTitle,
-            buttonClose,
-            id,
-            home
-          },
-        });
-    
-        dialogref.afterDismissed().subscribe(() => {
-          this.enableCopy = true;
-        })
-      }
-      if(category.business ==='clickam' && !!token) {
-        window.location.replace(category.link);
-      }
+      let dialogref = this.dialog.open(DialogComponent, {
+        data: {
+          title,
+          template,
+          showClose,
+          showCloseIcon,
+          infoaditional,
+          img,
+          showProduct,
+          showshowTitle,
+          buttonClose,
+          id,
+          home
+        },
+      });
+
+      dialogref.afterDismissed().subscribe(() => {
+        this.enableCopy = true;
+      })
+    }
+    if (category.business === 'clickam' && !!token) {
+      window.location.replace(category.link);
+    }
   }
 
   private formShareLink() {
@@ -322,11 +323,11 @@ export class SliderComponent implements OnInit {
       link: [this.url]
     });
   }
-   
+
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-  
+
 
 }

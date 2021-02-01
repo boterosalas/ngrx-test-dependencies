@@ -17,6 +17,7 @@ import { ConfirmPasswordValidator } from "src/app/validators/confirm-password.va
 import { MasterDataService } from "src/app/services/master-data.service";
 import { ResponseService } from "src/app/interfaces/response";
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-profile-form",
@@ -627,6 +628,23 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.dialog.closeAll();
   }
   public deleteAccountService() {
-    console.log("Eliminando Cuenta");
+    this.user.deleteUser().subscribe(
+      (resp: any) => {
+        Swal.fire({
+          text: "Tu cuenta se ha eliminado con exito",
+          type: "success",
+          confirmButtonText: "Aceptar",
+          confirmButtonClass: "upload-success"
+        }).then(() => {
+          console.log("Eliminado")
+        });
+      },
+      (err) => {
+        this.openSnackBar(err.userMessage, "Cerrar");
+      }
+    )
+    //console.log(this.user.deleteUser());
   }
 }
+
+
