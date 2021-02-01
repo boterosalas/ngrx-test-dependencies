@@ -5,6 +5,7 @@ import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-mater
 import { TranslateModule } from '@ngx-translate/core';
 import { MatSlideToggleModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 //import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 
 describe('TableActivateBusinessComponent', () => {
@@ -19,7 +20,8 @@ describe('TableActivateBusinessComponent', () => {
         TranslateModule.forRoot(),
         MatSlideToggleModule,
         FormsModule,
-        DragDropModule
+        DragDropModule,
+        HttpClientTestingModule,
       ]
     })
       .compileComponents();

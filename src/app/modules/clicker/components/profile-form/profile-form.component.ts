@@ -628,7 +628,10 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.dialog.closeAll();
   }
   public deleteAccountService() {
-    this.user.deleteUser().subscribe(
+    let data = {
+      password: btoa(this.profileFormDelete.controls.Password.value),
+    };
+    this.user.deleteUser(data).subscribe(
       (resp: any) => {
         Swal.fire({
           text: "Tu cuenta se ha eliminado con exito",
