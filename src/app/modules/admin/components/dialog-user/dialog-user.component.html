@@ -74,7 +74,7 @@
                     <span *ngIf="data.isEmployeeGrupoExito === false">
                         Externo
                     </span>
-                    <div *ngIf="data.isEmployeeGrupoExito === false">
+                    <div >
                   <p class="galano-bold gray">VERIFICACIÓN</p>
                     <mat-slide-toggle [(ngModel)]="data.verified" (change)="changeVerified()" color="orange-toggle" labelPosition="before" id="verified-toggle">
                         <span *ngIf="data.verified === true">
@@ -89,7 +89,7 @@
 
               <div class="files" fxLayout="column">
                   <h3 class="gray-title">Archivos adjuntos</h3>
-                  <span *ngIf="data.isEmployeeGrupoExito === false" fxLayout="column">
+                  <span  fxLayout="column">
                       <a class="text-underline cursor-pointer" (click)="IdentificationCard1Download()"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cédula 1</a>
                       <a class="text-underline cursor-pointer" (click)="IdentificationCard2Download()" target="_blank" id="ced2"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cédula 2</a>
                   </span>

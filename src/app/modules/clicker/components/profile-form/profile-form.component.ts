@@ -17,6 +17,7 @@ import { ConfirmPasswordValidator } from "src/app/validators/confirm-password.va
 import { MasterDataService } from "src/app/services/master-data.service";
 import { ResponseService } from "src/app/interfaces/response";
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import { UtilsService } from "src/app/services/utils.service";
 import Swal from "sweetalert2";
 
 @Component({
@@ -32,6 +33,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     private loader: LoaderService,
     private dialog: MatDialog,
     private _snackBar: MatSnackBar,
+    private utils: UtilsService,
     private personalInfo: MasterDataService
   ) { }
 
@@ -85,9 +87,15 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   departments = [];
   cities: [];
   nameFileCert = "";
+  nameFileCed1 = "";
+  nameFileCed2 = "";
   validFormat: boolean;
   showErrorCert: boolean = false;
+  showErrorCed1: boolean = false;
+  showErrorCed2: boolean = false;
   fileBankCertificate: any;
+  fileCed1: any;
+  fileCed2: any;
   activebutton: boolean = false;
 
   numberPattern = "^(0|[0-9][0-9]*)$";
@@ -207,6 +215,8 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
         ],
       ],
       cert: [null, Validators.required],
+      ced1: [null, Validators.required],
+      ced2: [null, Validators.required],
     });
   }
 
@@ -303,6 +313,8 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     }
 
     this.nameFileCert = "";
+    this.nameFileCed1 = "";
+    this.nameFileCed2 = "";
     this.dialog.open(DialogEditComponent, {
       maxWidth: '450px',
       panelClass: 'editaccount',
@@ -373,6 +385,8 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       typebankaccount: this.accountForm.controls.typeAccount.value,
       bankaccountnumber: btoa(this.accountForm.controls.numberAccount.value),
       bankcertificate: this.fileBankCertificate,
+      fileIdentificationCard1: this.fileCed1,
+      fileIdentificationCard2: this.fileCed2
     };
 
     this.subscription = this.user
@@ -595,6 +609,53 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     }
   }
 
+  public onFileChangeFilesCed1(event, param: string) {
+    console.log("Ejecuta 2")
+    let nameFile = event.target.files[0].name;
+    let reader = new FileReader();
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      let fileBlob = new Blob([file]);
+      let file2 = new File([fileBlob], nameFile);
+      reader.readAsDataURL(file2);
+      reader.onload = () => {
+        this.getExtension(nameFile);
+        if (this.validFormat === true) {
+          this.fileCed1 = reader.result;
+          this.nameFileCed1 = nameFile;
+          this.showErrorCed1 = false;
+          this.activebutton = true;
+        } else {
+          this.showErrorCed1 = true;
+          this.nameFileCed1 = nameFile;
+          this.activebutton = false;
+        }
+      };
+    }
+  }
+  public onFileChangeFilesCed2(event, param: string) {
+    let nameFile = event.target.files[0].name;
+    let reader = new FileReader();
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      let fileBlob = new Blob([file]);
+      let file2 = new File([fileBlob], nameFile);
+      reader.readAsDataURL(file2);
+      reader.onload = () => {
+        this.getExtension(nameFile);
+        if (this.validFormat === true) {
+          this.fileCed2 = reader.result;
+          this.nameFileCed2 = nameFile;
+          this.showErrorCed2 = false;
+          this.activebutton = true;
+        } else {
+          this.showErrorCed2 = true;
+          this.nameFileCed2 = nameFile;
+          this.activebutton = false;
+        }
+      };
+    }
+  }
   /**
  * Metodo para validar que la extension sea valida
  * @param nameFile
@@ -626,6 +687,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   }
   public cancelDelete() {
     this.dialog.closeAll();
+    this.profileFormDelete.controls.Password.setValue("");
   }
   public deleteAccountService() {
     let data = {
@@ -633,14 +695,19 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     };
     this.user.deleteUser(data).subscribe(
       (resp: any) => {
-        Swal.fire({
-          text: "Tu cuenta se ha eliminado con exito",
-          type: "success",
-          confirmButtonText: "Aceptar",
-          confirmButtonClass: "upload-success"
-        }).then(() => {
-          console.log("Eliminado")
-        });
+        if (resp.state === "Success") {
+          Swal.fire({
+            text: "Tu cuenta se ha eliminado con exito",
+            type: "success",
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: "upload-success"
+          }).then(() => {
+            this.dialog.closeAll();
+            this.utils.logout();
+          });
+        } else {
+          this.openSnackBar(resp.userMessage, "Cerrar");
+        }
       },
       (err) => {
         this.openSnackBar(err.userMessage, "Cerrar");

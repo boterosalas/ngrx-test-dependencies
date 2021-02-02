@@ -16,10 +16,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   totalUsers: string;
   totalActiveUsers: string;
-  totalMonthRegisterUsers:string;
-  todayRegisterUsers:string;
-  totalMonthRegisterActive:string;
-  todayActiveUsers:string;
+  totalMonthRegisterUsers: string;
+  todayRegisterUsers: string;
+  totalMonthRegisterActive: string;
+  todayActiveUsers: string;
   salesMonth: string;
   salesMonthYesterday: string;
   salesMonthTotalYesterday: string;
@@ -31,16 +31,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
   linksMonthTotalYesterday: string;
   percent: any;
   links = true;
-  monthActiveUsersQuantity:string;
+  monthActiveUsersQuantity: string;
   dateParams: any;
   dataSource: any;
   resume = [];
   items = [];
-  
+
 
   maxDate = moment(new Date());
   inlineDateTime;
-  
+
   locale = {
     locale: 'es',
     direction: 'ltr', // could be rtl
@@ -53,28 +53,28 @@ export class DashboardComponent implements OnInit, OnDestroy {
     daysOfWeek: moment.weekdaysMin(),
     monthNames: moment.monthsShort(),
     firstDay: 1 // first day is monday
-};
+  };
 
-ranges = {
-  Hoy: [moment(), moment()],
-  Ayer: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-  'Los últimos 7 días': [moment().subtract(6, 'days'), moment()],
-  'Los últimos 15 días': [moment().subtract(14, 'days'), moment()],
-  'Los últimos 30 días': [moment().subtract(29, 'days'), moment()],
-  'Este Mes': [moment().startOf('month'), moment().endOf('month')],
-  'El mes pasado': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-  'Últimos 3 meses': [moment().subtract(3, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-};
+  ranges = {
+    Hoy: [moment(), moment()],
+    Ayer: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+    'Los últimos 7 días': [moment().subtract(6, 'days'), moment()],
+    'Los últimos 15 días': [moment().subtract(14, 'days'), moment()],
+    'Los últimos 30 días': [moment().subtract(29, 'days'), moment()],
+    'Este Mes': [moment().startOf('month'), moment().endOf('month')],
+    'El mes pasado': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+    'Últimos 3 meses': [moment().subtract(3, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+  };
 
-form = this.formBuilder.group({
-  selected: {
+  form = this.formBuilder.group({
+    selected: {
       startDate: moment(new Date(), "DD/MM/YYYY"),
       endDate: moment(new Date(), "DD/MM/YYYY"),
-  },
-  alwaysShowCalendars: true,
-  keepCalendarOpeningWithRange: true,
-  showRangeLabelOnInput: true,
-});
+    },
+    alwaysShowCalendars: true,
+    keepCalendarOpeningWithRange: true,
+    showRangeLabelOnInput: true,
+  });
 
   private subscription: Subscription = new Subscription();
 
@@ -82,17 +82,21 @@ form = this.formBuilder.group({
     this.getKPI();
   }
 
-  public getKPI(){
+  public getKPI() {
     let date = {
       start: this.form.controls.selected.value.startDate.format(),
       end: this.form.controls.selected.value.endDate.format()
     }
-    
-    this.subscription = this.kpi.getKPI(date).subscribe(resp=> {
+
+    this.subscription = this.kpi.getKPI(date).subscribe(resp => {
       this.resume = resp.resume;
       this.items = resp.kpi;
       this.dataSource = new MatTableDataSource<any>(resp.listbusiness);
     })
+    //this.subscription = this.kpi.getResume().subscribe(resp => {
+    //this.resume = resp.resume;
+    //https://apitestexito.azure-api.net/Dllo-clickam-md-apicommission/api/Reports/getkpiresume
+    //})
 
   }
 
@@ -101,7 +105,7 @@ form = this.formBuilder.group({
       start: this.form.controls.selected.value.startDate.format(),
       end: this.form.controls.selected.value.endDate.format()
     }
-    this.subscription = this.kpi.getKPI(this.dateParams).subscribe(dashboard=> {
+    this.subscription = this.kpi.getKPI(this.dateParams).subscribe(dashboard => {
       this.resume = dashboard.resume;
       this.items = dashboard.kpi;
       this.dataSource = new MatTableDataSource<any>(dashboard.listbusiness);

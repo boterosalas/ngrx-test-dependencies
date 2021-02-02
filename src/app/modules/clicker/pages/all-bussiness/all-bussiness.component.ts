@@ -39,16 +39,17 @@ export class AllBussinessComponent implements OnInit, OnDestroy {
       .getBusiness()
       .pipe(distinctUntilChanged())
       .subscribe((bussiness) => {
-        bussiness.sort(function (a, b) {
-          if (a.id > b.id) {
-            return 1;
-          }
-          if (a.id < b.id) {
-            return -1;
-          }
-          return 0;
-        });
+        //bussiness.sort(function (a, b) {
+        //  if (a.orderby > b.orderby) {
+        //    return 1;
+        //  }
+        //  if (a.orderby < b.orderby) {
+        //    return -1;
+        //  }
+        //  return 0;
+        //});
         this.bussiness = bussiness;
+        //console.log(this.bussiness)
       });
   }
 
