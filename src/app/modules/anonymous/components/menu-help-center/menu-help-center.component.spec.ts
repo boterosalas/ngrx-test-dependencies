@@ -15,7 +15,7 @@ describe('MenuHelpCenterComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [],
-      imports:[
+      imports: [
         TranslateModule.forRoot({}),
         SharedModule,
         AppMaterialModule,
@@ -23,9 +23,9 @@ describe('MenuHelpCenterComponent', () => {
         BrowserAnimationsModule,
         RouterTestingModule
       ]
-      
+
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -37,4 +37,5 @@ describe('MenuHelpCenterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

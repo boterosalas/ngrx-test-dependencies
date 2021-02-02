@@ -14,6 +14,8 @@ export const environment = {
   URL_REFERAL: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apireferral/api/',
   URL_COMISSION: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apicommission/api/',
   // URL_COMISSION: ' http://10.125.65.230/commission/api/',
+  URL_REPORTS: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apireport/api/',
+  //https://apitestexito.azure-api.net/Dllo-clickam-md-apireport/api/Reports/getkpiresume
   URL_MASTER: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apimasterdata/api/',
   PDF: 'https://webclickamdev.blob.core.windows.net/clickacademy/pdf/',
   SUBSCRIPTION: 'f5edbcd2315e479aad33d80c58052fcc',

@@ -3,7 +3,7 @@
 
   <div fxLayout.gt-xs="row" fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="20px">
     <div class="p-0 mb-2" ngClass.xs="mt-3 w-100" ngClass.gt-xs="w-100">
-    <mat-card class="p-0 mb-2" ngClass.xs="mt-3 w-100" ngClass.gt-xs="w-50">
+    <mat-card class="p-0 mb-2" ngClass.xs="mt-3 w-100" ngClass.gt-xs="w-50" [class]="(managedPayments === true)?'container-profile':'my-class2'">
       <span
         fxLayout="row"
         fxLayout.xs="column"
@@ -155,7 +155,7 @@
         </span>
       </span>
     </mat-card>
-    <mat-card class="p-0 mb-2 card-delete" ngClass.xs="mt-3 w-100 " ngClass.gt-xs="w-50">
+    <mat-card class="p-0 mb-2 card-delete" ngClass.xs="mt-3 w-100 " ngClass.gt-xs="w-50" [class]="(managedPayments === true)?'container-profile':'my-class2'">
       <span
         fxLayout="row"
         fxLayout.xs="column"
@@ -182,7 +182,7 @@
       </span>
     </mat-card>
   </div>
-    <div *ngIf="managedPayments === true" ngClass.xs="mt-3 w-100" ngClass.gt-xs="w-50">
+    <div *ngIf="managedPayments === true" ngClass.xs="mt-3 w-100" ngClass.gt-xs="w-50" class="container-account">
       <mat-card class="p-0 mb-3">
         <span
           fxLayout="row"
@@ -1003,6 +1003,99 @@
         formControlName="cert"
       />
       
+      <!-- Cedula 1-->
+      <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
+        <div fxLayout="column" fxLayoutAlign="center" class="space">
+          <strong class="gray">{{ "REGISTER.CED1" | translate }}</strong>
+          <span *ngIf="nameFileCed1 === ''">No hay archivo seleccionado</span>
+          <span class="file-input" *ngIf="nameFileCed1 !== ''">{{
+            nameFileCed1 | truncate: '20'
+          }}</span>
+        </div>
+        <div  class="space">
+          <label for="ced1" id="upload" class="cursor-pointer">
+            <span  *ngIf="!showErrorCed1">
+            <img
+              class="mt-1"
+              *ngIf="nameFileCed1 === ''"
+              src="/assets/img/image-file-upload.svg"
+              alt="upload"
+            />
+            <img
+              class="mt-1"
+              *ngIf="nameFileCed1 !== ''"
+              src="/assets/img/image-file-upload-ok.svg"
+              alt="upload"
+            />
+          </span>
+            <img
+            class="mt-1 w-icon"
+            *ngIf="showErrorCed1"
+            src="/assets/img/icono-error-carga.svg"
+            alt="upload"
+          />
+          </label>
+        </div>
+      </div>
+      <mat-error *ngIf="showErrorCed1" class="small pb-2 d-block">
+          {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
+      </mat-error>
+    
+      <input
+        (change)="onFileChangeFilesCed1($event, 'ced1')"
+        id="ced1"
+        type="file"
+        formControlName="ced1"
+      />
+
+      
+      <!-- Cedula 2-->
+      <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
+        <div fxLayout="column" fxLayoutAlign="center" class="space">
+          <strong class="gray">{{ "REGISTER.CED2" | translate }}</strong>
+          <span *ngIf="nameFileCed2 === ''">No hay archivo seleccionado</span>
+          <span class="file-input" *ngIf="nameFileCed2 !== ''">{{
+            nameFileCed2 | truncate: '20'
+          }}</span>
+        </div>
+        <div  class="space">
+          <label for="ced2" id="upload" class="cursor-pointer">
+            <span  *ngIf="!showErrorCed2">
+            <img
+              class="mt-1"
+              *ngIf="nameFileCed2 === ''"
+              src="/assets/img/image-file-upload.svg"
+              alt="upload"
+            />
+            <img
+              class="mt-1"
+              *ngIf="nameFileCed2 !== ''"
+              src="/assets/img/image-file-upload-ok.svg"
+              alt="upload"
+            />
+          </span>
+            <img
+            class="mt-1 w-icon"
+            *ngIf="showErrorCed2"
+            src="/assets/img/icono-error-carga.svg"
+            alt="upload"
+          />
+          </label>
+        </div>
+      </div>
+      <mat-error *ngIf="showErrorCed2" class="small pb-2 d-block">
+          {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
+      </mat-error>
+    
+      <input
+        (change)="onFileChangeFilesCed2($event, 'ced2')"
+        id="ced2"
+        type="file"
+        formControlName="ced2"
+      />
+
+
+
       <button
         mat-raised-button
         id="nextClicker"
@@ -1049,7 +1142,12 @@
           "GENERIC.MAX_CHARACTERS" | translate: {maxchar:loginForm.controls.Password.errors.maxlength.requiredLength}
         }}</mat-error>
       </mat-form-field>
-    <div>
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-start center" fxLayoutGap="30px" fxLayoutGap.xs="5px" class="center-buttons">
+      <div ngClass="mt-3 mb-2 hide-button-on-mobile">
+        <button mat-button ngClass="button_cancel" (click)="cancelDelete()"
+        > Cancelar </button>
+      </div>
+      <div>
       <button mat-button class="red" (click)="deleteAccountService()"
       [disabled]="!profileFormDelete.valid"
       [ngClass]="{'red-disable' : !profileFormDelete.valid}"
@@ -1059,9 +1157,12 @@
       Eliminar mi cuenta
       </span></button>
     </div>
-    <div ngClass="mt-3 mb-2">
+    <div ngClass="mt-3 mb-2 hide-button-on-desktop">
       <button mat-button ngClass="button_cancel" (click)="cancelDelete()"
       > Cancelar </button>
     </div>
+
+    
+  </div>
   </div>    
 </ng-template>

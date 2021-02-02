@@ -21,10 +21,12 @@ export class LinksService {
 
   url = environment.URL_REFERAL;
   urlComission = environment.URL_COMISSION;
-
+  urlReports = environment.URL_REPORTS;
+  urlApiContent = environment.URL_CONTENT;
   // comission = 'commissions';
   reports = "Reports/ClickerPerformanceReport";
   apiKPI = "Reports/getKPI";
+  apikpiresume = "Reports/getkpiresume";
   apiUsersExcel = "Reports/getUsersExcel";
   apiAuditExcel = "Reports/getAudit";
   apiGetReportReferral = "Reports/getreportreferral";
@@ -48,7 +50,7 @@ export class LinksService {
   apiSaveAmountReferred = "amount/saveamountreferred";
   apiGetmedals = "medal/getmedals";
   apiPicking = "picking/importfilepickingcommissions"
-
+  apiOrder = "business/orderbusiness"
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
 
@@ -253,7 +255,32 @@ export class LinksService {
         })
       );
   }
+  public getResume() {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
 
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
+    };
+    return this.http
+      .get(`${this.urlReports}${this.apikpiresume}`, httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((resp: ResponseService) => {
+          return resp.objectResponse;
+        })
+      );
+  }
   public getPayment(params) {
     return this.http
       .get(
@@ -463,6 +490,20 @@ export class LinksService {
       );
   }
   public putOrder(datos?: any) {
-    return `Devuelve un JSON`
+    return this.http
+      .post(
+        `${environment.URL_CONTENT}${this.apiOrder}`,
+        datos,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
   }
 }

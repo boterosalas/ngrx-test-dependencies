@@ -35,11 +35,20 @@ export class TableActivateBusinessComponent implements OnInit {
     const prevIndex = this.dataSource.findIndex((d) => d === event.item.data);
     moveItemInArray(this.dataSource, prevIndex, event.currentIndex);
     this.table.renderRows();
-    this.saveOrder();
-    console.log(this.dataSource);
+    let datosSourceSend = []
+    for (let i = 0; i < this.dataSource.length; i++) {
+      this.dataSource[i].orderby = i + 1
+      datosSourceSend.push({
+        idbusiness: this.dataSource[i].id,
+        order: i + 1
+      })
+    }
+    this.saveOrder(datosSourceSend)
   }
-  saveOrder() {
-    this.file.putOrder(this.dataSource)
+  saveOrder(datos: any) {
+    this.file.putOrder(datos).subscribe(resp => {
+      console.log(resp)
+    })
   }
 
 }

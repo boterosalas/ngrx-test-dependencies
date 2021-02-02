@@ -6,12 +6,17 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatSlideToggleModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { LinksService } from "src/app/services/links.service";
+import { of } from 'rxjs';
 //import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 
 describe('TableActivateBusinessComponent', () => {
   let component: TableActivateBusinessComponent;
   let fixture: ComponentFixture<TableActivateBusinessComponent>;
-
+  let mockLinksService = jasmine.createSpyObj("LinksService", ["putOrder"]);
+  let response = {
+    Status: "Success"
+  }
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [TableActivateBusinessComponent],
@@ -22,9 +27,11 @@ describe('TableActivateBusinessComponent', () => {
         FormsModule,
         DragDropModule,
         HttpClientTestingModule,
-      ]
+      ],
+      providers: [{ provide: LinksService, useValue: mockLinksService }],
     })
       .compileComponents();
+    mockLinksService.putOrder.and.returnValue(of(response));
   }));
 
   beforeEach(() => {
@@ -41,5 +48,19 @@ describe('TableActivateBusinessComponent', () => {
     component.activate([]);
     expect(component.activateBusiness.emit).toHaveBeenCalled();
   });
+  it('should saveOrder', () => {
 
+    let datosOrder = [{ idbusiness: 1, order: 10 },
+    { idbusiness: 2, order: 9 },
+    { idbusiness: 3, order: 8 },
+    { idbusiness: 4, order: 7 },
+    { idbusiness: 5, order: 6 },
+    { idbusiness: 14, order: 5 },
+    { idbusiness: 19, order: 4 },
+    { idbusiness: 20, order: 3 },
+    { idbusiness: 21, order: 2 },
+    { idbusiness: 22, order: 1 }];
+    component.saveOrder(datosOrder);
+    expect(mockLinksService.putOrder).toHaveBeenCalled();
+  })
 });
