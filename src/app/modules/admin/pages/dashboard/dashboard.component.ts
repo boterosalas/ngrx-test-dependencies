@@ -94,8 +94,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.dataSource = new MatTableDataSource<any>(resp.listbusiness);
     })
     //this.subscription = this.kpi.getResume().subscribe(resp => {
-    //this.resume = resp.resume;
-    //https://apitestexito.azure-api.net/Dllo-clickam-md-apicommission/api/Reports/getkpiresume
+    //  this.resume = resp.objectResponse;
+    //})
+    //this.subscription = this.kpi.getTotalKPI().subscribe(resp => {
+    //  this.items = resp.objectResponse;
+    //})
+    //this.subscription = this.kpi.getBussinessKPI().subscribe(resp => {
+    //this.dataSource = new MatTableDataSource<any>(resp.objectResponse);
     //})
 
   }

@@ -454,6 +454,16 @@ export class UsersComponent extends MatPaginatorIntl
       start: this.dateReportChangeForm.controls.dateRange.value.startDate.format(),
       end: this.dateReportChangeForm.controls.dateRange.value.endDate.format()
     };
+    this.subscription = this.file.getHistoricalBankInformation(this.dateParamsReport)
+      .subscribe((respExcel: ResponseService) => {
+        if (respExcel.state === "Success") {
+          this.openSnackBar(respExcel.userMessage, "Cerrar");
+          this.dateForm.reset();
+          if (this.dateForm.controls.dateRange.value.startDate === null) {
+            this.disButon = true;
+          }
+        }
+      });
     console.log(this.dateParamsReport)
   }
 

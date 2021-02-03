@@ -6,16 +6,16 @@ import { RoleGuard } from './role.guard';
 
 const routes: Routes = [
   {
-    path: '',  loadChildren: () => import('./modules/anonymous/anonymous.module').then(m => m.AnonymousModule),
+    path: '', loadChildren: () => import('./modules/anonymous/anonymous.module').then(m => m.AnonymousModule),
   },
   {
-    path: 'clicker',  loadChildren: () => import('./modules/clicker/clicker.module').then(m => m.ClickerModule), canActivate: [AuthGuard, RoleGuard],
+    path: 'clicker', loadChildren: () => import('./modules/clicker/clicker.module').then(m => m.ClickerModule), canActivate: [AuthGuard, RoleGuard],
     data: {
       role: "CLICKER"
     }
   },
   {
-    path: 'dashboard',  loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule)
+    path: 'dashboard', loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule)
   }
 ];
 
@@ -24,7 +24,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes, {
       enableTracing: false, // <-- debugging purposes only
       preloadingStrategy: PreloadAllModules,
-      useHash: true
+      useHash: true,
+      scrollPositionRestoration: 'top'
     })
   ],
   exports: [RouterModule]
