@@ -6,6 +6,7 @@ import {
   TemplateRef,
 } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+
 import { Subscription, Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import { UserService } from "src/app/services/user.service";
@@ -385,8 +386,8 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       typebankaccount: this.accountForm.controls.typeAccount.value,
       bankaccountnumber: btoa(this.accountForm.controls.numberAccount.value),
       bankcertificate: this.fileBankCertificate,
-      fileIdentificationCard1: this.fileCed1,
-      fileIdentificationCard2: this.fileCed2
+      FileIdentificationCard1: this.fileCed1,
+      FileIdentificationCard2: this.fileCed2
     };
 
     this.subscription = this.user
@@ -677,7 +678,13 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   public deleteAccount() {
     const title = "";
     const template = this.templateDelete;
-
+    var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    if (iOS || isSafari) {
+      window.document.body.scrollTop = 0;
+    } else {
+      window.document.documentElement.scrollTop = 0;
+    }
     this.dialog.open(ModalGenericComponent, {
       data: {
         title,
@@ -686,6 +693,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     });
   }
   public cancelDelete() {
+
     this.dialog.closeAll();
     this.profileFormDelete.controls.Password.setValue("");
   }
@@ -707,6 +715,21 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
           });
         } else {
           this.openSnackBar(resp.userMessage, "Cerrar");
+          //this.dialog.closeAll();
+          //document.documentElement.scrollTop = 0;
+          //window.scroll(0, 0)
+          //window.document.documentElement.scrollTop = 0
+          //this.utils.logout();
+          //var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+          //var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+          //console.log(iOS);
+          //console.log(isSafari);
+          //if (iOS || isSafari) {
+          //  document.body.scrollTop = 0;
+          //} else {
+          //  document.documentElement.scrollTop = 0;
+          //}
+
         }
       },
       (err) => {

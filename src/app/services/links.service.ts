@@ -27,7 +27,13 @@ export class LinksService {
   reports = "Reports/ClickerPerformanceReport";
   apiKPI = "Reports/getKPI";
   apikpiresume = "Reports/getkpiresume";
+  //https://apitestexito.azure-api.net/Dllo-clickam-md-apireport/api/Reports/getkpibusiness
+  apikpibussiness = "Reports/getkpibusiness";
+  //https://apitestexito.azure-api.net/Dllo-clickam-md-apireport/api/Reports/getkpitotaldata
+  apikpiTotal = "Reports/getkpitotaldata";
   apiUsersExcel = "Reports/getUsersExcel";
+  //https://apitestexito.azure-api.net/Dllo-clickam-md-apireport/api/admin/gethistoricalbankinformation
+  apiUsersHistoricalBankInformation = "admin/gethistoricalbankinformation"
   apiAuditExcel = "Reports/getAudit";
   apiGetReportReferral = "Reports/getreportreferral";
   apigetReportClickam = "Reports/getReportClickam";
@@ -281,6 +287,58 @@ export class LinksService {
         })
       );
   }
+  public getBussinessKPI(date: any) {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
+    };
+    return this.http
+      .get(`${this.urlReports}${this.apikpibussiness}?start=${date.start}&end=${date.end}`, httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((resp: ResponseService) => {
+          return resp.objectResponse;
+        })
+      );
+  }
+  public getTotalKPI(date: any) {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
+    };
+    return this.http
+      .get(`${this.urlReports}${this.apikpiTotal}?start=${date.start}&end=${date.end}`, httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((resp: ResponseService) => {
+          return resp.objectResponse;
+        })
+      );
+  }
   public getPayment(params) {
     return this.http
       .get(
@@ -359,9 +417,27 @@ export class LinksService {
   }
 
   public getUsersExcel(params: any) {
+    //Falta cambio en urlReports
     return this.http
       .get(
         `${this.urlComission}${this.apiUsersExcel}?&start=${params.start}&end=${params.end}`,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+  }
+  public getHistoricalBankInformation(params: any) {
+    //Cambio la urlReports
+    return this.http
+      .get(
+        `${this.urlReports}${this.apiUsersHistoricalBankInformation}?&start=${params.start}&end=${params.end}`,
         this.httpOptions
       )
       .pipe(
@@ -471,6 +547,7 @@ export class LinksService {
   }
 
   public searchUsers(term?: any) {
+    //Falta cambio en urlReports
     return this.http
       .get(
         `${this.urlComission}${this.apiUsers}?searchText=${term.term}&from=${term.from}&to=${term.to}&orderBy=${term.orderOrigin}&ordination=${term.orderBy}`,
