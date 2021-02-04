@@ -32,7 +32,8 @@ export class LinksService {
   //https://apitestexito.azure-api.net/Dllo-clickam-md-apireport/api/Reports/getkpitotaldata
   apikpiTotal = "Reports/getkpitotaldata";
   apiUsersExcel = "Reports/getUsersExcel";
-  apiUsersHistoricalBankInformation = "Reports/gethistoricalbankinformation"
+  //https://apitestexito.azure-api.net/Dllo-clickam-md-apireport/api/admin/gethistoricalbankinformation
+  apiUsersHistoricalBankInformation = "admin/gethistoricalbankinformation"
   apiAuditExcel = "Reports/getAudit";
   apiGetReportReferral = "Reports/getreportreferral";
   apigetReportClickam = "Reports/getReportClickam";
