@@ -1,33 +1,36 @@
-@import 'variables';
+@import "variables";
 
 .border-input {
-    border: none;
-    outline: none;
-    height: 32px;
+  border: none;
+  outline: none;
+  height: 32px;
 }
 
-.border-radius{
-    border-radius: 5px;
+.border-radius {
+  border-radius: 5px;
 }
 
 .icon-download {
-    position: relative;
-    left: 5px;
-    bottom: 2px;
-  }
+  position: relative;
+  left: 5px;
+  bottom: 2px;
+}
 
-  .icon-date{
-    position: relative;
-    top: 7px;
-    left: 30px;
-  }
+.icon-date {
+  position: relative;
+  top: 7px;
+  left: 30px;
+}
 
-  .form-control {
-      padding-left: 35px !important;
-      font-family: $font-galano !important;
-  }
+.form-control {
+  padding-left: 35px !important;
+  font-family: $font-galano !important;
+}
 
-  .fp{
-    position: relative;
-    left: -22px;
-  }
+.fp {
+  position: relative;
+  left: -22px;
+}
+.card-start {
+  justify-content: flex-start !important;
+}

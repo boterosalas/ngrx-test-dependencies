@@ -12,7 +12,7 @@ describe("DashboardComponent", () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
 
-  let mockLinksService = jasmine.createSpyObj("LinksService", ["getKPI"]);
+  let mockLinksService = jasmine.createSpyObj("LinksService", ["getResume", "getTotalKPI", "getBussinessKPI"]);
 
   let kpi = {
     historicalCommissionValue: 1809775.3,
@@ -44,7 +44,9 @@ describe("DashboardComponent", () => {
       providers: [{ provide: LinksService, useValue: mockLinksService }],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
-    mockLinksService.getKPI.and.returnValue(of(kpi));
+    mockLinksService.getResume.and.returnValue(of(kpi));
+    mockLinksService.getTotalKPI.and.returnValue(of(kpi));
+    mockLinksService.getBussinessKPI.and.returnValue(of(kpi));
   }));
 
   beforeEach(() => {
@@ -55,13 +57,13 @@ describe("DashboardComponent", () => {
 
   it("should create", () => {
     expect(component).toBeTruthy();
-    expect(mockLinksService.getKPI).toHaveBeenCalled();
+    //expect(mockLinksService.getResume).toHaveBeenCalled();
   });
 
   it('change date', () => {
     component.change();
-    expect(mockLinksService.getKPI).toHaveBeenCalled();
+    expect(mockLinksService.getResume).toHaveBeenCalled();
   });
-  
+
 
 });

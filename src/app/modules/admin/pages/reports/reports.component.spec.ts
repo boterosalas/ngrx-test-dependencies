@@ -46,7 +46,7 @@ describe("ReportsComponent", () => {
     email: "david.betancur@pragma.com.co"
   };
 
-  const getReport= {
+  const getReport = {
     state: "Success",
     userMessage: 'se ha enviado un correo a test@h.com',
     objectResponse: [
@@ -55,7 +55,7 @@ describe("ReportsComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ReportsComponent , LoadFormFileComponent],
+      declarations: [ReportsComponent, LoadFormFileComponent],
       imports: [
         TranslateModule.forRoot(),
         AnonymousModule,
@@ -82,8 +82,8 @@ describe("ReportsComponent", () => {
       ],
       providers: [
         { provide: LinksService, useValue: mockLinksService },
-        { provide: LOCALE_CONFIG, useValue: config},
-        { provide: LocaleService, useClass: LocaleService, deps: [LOCALE_CONFIG]}
+        { provide: LOCALE_CONFIG, useValue: config },
+        { provide: LocaleService, useClass: LocaleService, deps: [LOCALE_CONFIG] }
       ],
       // schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
@@ -109,7 +109,7 @@ describe("ReportsComponent", () => {
     expect(mockLinksService.getFileReport).toHaveBeenCalled();
   });
 
-  it("on file change trip valid", async() => {
+  it("on file change trip valid", async () => {
     const mockFile = new File([""], "name.xlsx", { type: "text/html" });
     const mockEvt = { target: { files: [mockFile] } };
     component.onFileChangeTrip(mockEvt);
@@ -141,6 +141,19 @@ describe("ReportsComponent", () => {
     component.showErrorExtPayment = true;
     expect(component.showErrorExtPayment).toBeTruthy();
   });
+  it("on file change picking", () => {
+    const mockFile1 = new File([""], "name.xlsx", { type: "text/html" });
+    const mockEvt1 = { target: { files: [mockFile1] } };
+    component.onFileChangePicking(mockEvt1);
+    expect(mockEvt1).toBeDefined();
+  })
+  it("on file change picking invalid", () => {
+    const mockFile2 = new File([""], "name.txt", { type: "text/html" });
+    const mockEvt2 = { target: { files: [mockFile2] } };
+    component.onFileChangePicking(mockEvt2);
+    component.showErrorExtPicking = true;
+    expect(component.showErrorExtPicking).toBeTruthy();
+  })
 
   it("download referal", () => {
     component.dateForm.controls.dateStart.setValue('2019-11-10');
@@ -168,8 +181,8 @@ describe("ReportsComponent", () => {
     fixture.detectChanges();
     component.getReportClickam();
     expect(mockLinksService.getReportClickam).toHaveBeenCalled();
-});
+  });
 
-  
+
 
 });

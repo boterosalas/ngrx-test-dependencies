@@ -420,7 +420,7 @@ export class LinksService {
     //Falta cambio en urlReports
     return this.http
       .get(
-        `${this.urlComission}${this.apiUsersExcel}?&start=${params.start}&end=${params.end}`,
+        `${this.urlReports}${this.apiUsersExcel}?&start=${params.start}&end=${params.end}`,
         this.httpOptions
       )
       .pipe(
@@ -488,7 +488,7 @@ export class LinksService {
   public getReportClickam(params: any) {
     return this.http
       .get(
-        `${this.urlComission}${this.apigetReportClickam}?&start=${params.start}&end=${params.end}`,
+        `${this.urlReports}${this.apigetReportClickam}?&start=${params.start}&end=${params.end}`,
         this.httpOptions
       )
       .pipe(
@@ -550,7 +550,7 @@ export class LinksService {
     //Falta cambio en urlReports
     return this.http
       .get(
-        `${this.urlComission}${this.apiUsers}?searchText=${term.term}&from=${term.from}&to=${term.to}&orderBy=${term.orderOrigin}&ordination=${term.orderBy}`,
+        `${this.urlReports}${this.apiUsers}?searchText=${term.term}&from=${term.from}&to=${term.to}&orderBy=${term.orderOrigin}&ordination=${term.orderBy}`,
         this.httpOptions
       )
       .pipe(

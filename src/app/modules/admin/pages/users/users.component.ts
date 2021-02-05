@@ -142,6 +142,7 @@ export class UsersComponent extends MatPaginatorIntl
     }
     const params = { term, from, to, orderOrigin, orderBy };
     this.subscription = this.file.searchUsers(params).subscribe((user: any) => {
+      console.log(user);
       this.users = user.users;
       this.totalItems = user.total;
       this.dataSource = new MatTableDataSource<any>(this.users);
