@@ -1,11 +1,15 @@
-@import 'variables';
+@import "variables";
 
-.color-text{
-    color: $color-p;
+.color-text {
+  color: $color-p;
 }
 
-mat-list{
-    mat-list-item:last-child{
-        border-bottom: none;
-    }
+mat-list {
+  mat-list-item:last-child {
+    border-bottom: none;
+  }
+}
+.imagen-resume {
+  width: 30px !important;
+  height: 20px;
 }

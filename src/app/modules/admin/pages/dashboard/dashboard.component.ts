@@ -88,20 +88,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
       end: this.form.controls.selected.value.endDate.format()
     }
 
-    this.subscription = this.kpi.getKPI(date).subscribe(resp => {
-      this.resume = resp.resume;
-      this.items = resp.kpi;
-      this.dataSource = new MatTableDataSource<any>(resp.listbusiness);
+    //this.subscription = this.kpi.getKPI(date).subscribe(resp => {
+    //  this.resume = resp.resume;
+    //  this.items = resp.kpi;
+    //  this.dataSource = new MatTableDataSource<any>(resp.listbusiness);
+    //})
+    this.subscription = this.kpi.getResume().subscribe(resp => {
+      this.resume = resp;
     })
-    //this.subscription = this.kpi.getResume().subscribe(resp => {
-    //  this.resume = resp;
-    //})
-    //this.subscription = this.kpi.getTotalKPI(date).subscribe(resp => {
-    //  this.items = resp;
-    //})
-    //this.subscription = this.kpi.getBussinessKPI(date).subscribe(resp => {
-    //  this.dataSource = new MatTableDataSource<any>(resp);
-    //})
+    this.subscription = this.kpi.getTotalKPI(date).subscribe(resp => {
+      this.items = resp;
+    })
+    this.subscription = this.kpi.getBussinessKPI(date).subscribe(resp => {
+      this.dataSource = new MatTableDataSource<any>(resp);
+    })
 
   }
 
@@ -110,10 +110,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
       start: this.form.controls.selected.value.startDate.format(),
       end: this.form.controls.selected.value.endDate.format()
     }
-    this.subscription = this.kpi.getKPI(this.dateParams).subscribe(dashboard => {
-      this.resume = dashboard.resume;
-      this.items = dashboard.kpi;
-      this.dataSource = new MatTableDataSource<any>(dashboard.listbusiness);
+    //this.subscription = this.kpi.getKPI(this.dateParams).subscribe(dashboard => {
+    //  this.resume = dashboard.resume;
+    //  this.items = dashboard.kpi;
+    //  this.dataSource = new MatTableDataSource<any>(dashboard.listbusiness);
+    //})
+    this.subscription = this.kpi.getResume().subscribe(resp => {
+      this.resume = resp;
+    })
+    this.subscription = this.kpi.getTotalKPI(this.dateParams).subscribe(resp => {
+      this.items = resp;
+    })
+    this.subscription = this.kpi.getBussinessKPI(this.dateParams).subscribe(resp => {
+      this.dataSource = new MatTableDataSource<any>(resp);
     })
   }
 
