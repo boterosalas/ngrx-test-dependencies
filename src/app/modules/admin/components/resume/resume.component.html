@@ -3,7 +3,7 @@
     <mat-list role="list">
             <mat-list-item *ngFor="let item of resume; let i = index" fxLayout="row" class="border-bottom-gray">
                 <span fxLayout="column" class="pl-2">
-                   <img [src]="item.icon" [alt]="item.title" [class]="(item.icon ==='https://webclickamdev.blob.core.windows.net/img-ofertas/dashboard/resumen/icon-eliminar.svg')?'imagen-resume':''" >
+                   <img [src]="item.icon" [alt]="item.title" [class]="(item.icon ==='https://webclickamdev.blob.core.windows.net/img-ofertas/dashboard/resumen/icon-eliminar.svg' || item.icon === 'https://webclickamqa.blob.core.windows.net/img-ofertas/dashboard/resumen/icon-eliminar.svg' || item.icon==='https://webclickamdev.blob.core.windows.net/img-ofertas/dashboard/resumen/icon-eliminar.svg' || item.icon === 'https://webclickampdn.blob.core.windows.net/img-ofertas/dashboard/resumen/icon-eliminar.svg')?'imagen-resume':''" >
                 </span>
                 <span fxLayout="column" class="pl-2 color-text f-18 galano-bold">
                     <span *ngIf="i === 2 || i === 3 ">

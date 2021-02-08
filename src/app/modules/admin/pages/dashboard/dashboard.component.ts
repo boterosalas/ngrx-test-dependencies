@@ -98,6 +98,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     })
     this.subscription = this.kpi.getTotalKPI(date).subscribe(resp => {
       this.items = resp;
+      console.log(this.items);
     })
     this.subscription = this.kpi.getBussinessKPI(date).subscribe(resp => {
       this.dataSource = new MatTableDataSource<any>(resp);
