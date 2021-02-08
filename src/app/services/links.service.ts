@@ -298,8 +298,10 @@ export class LinksService {
         "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
       }),
     };
+    let datesGet0 = date.start.split("T")
+    let datesGet1 = date.end.split("T")
     return this.http
-      .get(`${this.urlReports}${this.apikpibussiness}?start=${date.start}&end=${date.end}`, httpOptions)
+      .get(`${this.urlReports}${this.apikpibussiness}?start=${datesGet0[0]}&end=${datesGet1[0]}`, httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
@@ -324,8 +326,10 @@ export class LinksService {
         "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
       }),
     };
+    let datesGet0 = date.start.split("T")
+    let datesGet1 = date.end.split("T")
     return this.http
-      .get(`${this.urlReports}${this.apikpiTotal}?start=${date.start}&end=${date.end}`, httpOptions)
+      .get(`${this.urlReports}${this.apikpiTotal}?start=${datesGet0[0]}&end=${datesGet1[0]}`, httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
