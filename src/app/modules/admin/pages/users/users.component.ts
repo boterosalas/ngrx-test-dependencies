@@ -228,13 +228,14 @@ export class UsersComponent extends MatPaginatorIntl
     const account = user.account;
     const bankAccountNumber = user.bankAccountNumber;
     let state = user.state;
-    const receiveCommunications = user.receiveCommunications;
-    const isEmployeeGrupoExito = user.isEmployeeGrupoExito;
-    const verified = user.verified;
+    let receiveCommunications = user.receiveCommunications;
+    let isEmployeeGrupoExito = user.isEmployeeGrupoExito;
+    let verified = user.verified;
     const fileIdentificationCard1 = user.fileIdentificationCard1;
     const fileIdentificationCard2 = user.fileIdentificationCard2;
     const fileBankCertificate = user.fileBankCertificate;
-
+    console.log(verified === "No");
+    console.log(user.receiveCommunications)
     if (state === "Inactivo") {
       state = false;
     } else {
@@ -242,7 +243,23 @@ export class UsersComponent extends MatPaginatorIntl
         state = true;
       }
     }
-
+    if (receiveCommunications === "Si") {
+      receiveCommunications = true;
+    } else {
+      receiveCommunications = false;
+    }
+    if (verified === "No") {
+      verified = false;
+    } else {
+      verified = true;
+    }
+    console.log("Antes de enviar")
+    console.log(verified)
+    if (isEmployeeGrupoExito === "INTERNO") {
+      isEmployeeGrupoExito = true;
+    } else {
+      isEmployeeGrupoExito = false;
+    }
     const dialogRef = this.dialog.open(DialogUserComponent, {
       width: "649px",
       data: {
