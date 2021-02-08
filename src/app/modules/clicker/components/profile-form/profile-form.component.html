@@ -1114,7 +1114,7 @@
 <ng-template #templateDeleteAccount>
   <div [formGroup]="profileFormDelete" ngClass="delete-container">
       <h3 ngClass="title_delete">Eliminar Cuenta</h3>
-      <p ngClass="text-container">Esta Acción es Definitiva: Si eliminas tu cuenta de Clickam, no podrás recuperar tu contraseña ni la información que se encuentra en la plataforma. Todos tus datos personales se eliminara definitivamente.</p>
+      <p ngClass="text-container">Esta acción es definitiva: Si eliminas tu cuenta de Clickam, no podrás recuperar tu contraseña ni la información que se encuentra en la plataforma. Todos tus datos personales se eliminarán definitivamente.</p>
       <mat-form-field ngClass="mb-2">
           <mat-pass-toggle-visibility
           #toggleVisbility
@@ -1128,17 +1128,18 @@
           formControlName="Password"
           spacebar
           required
+          onchange="changeData()"
         />
         
-        <mat-error id="introducePassword" *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Password.errors.required">{{
+        <mat-error id="introducePassword" *ngIf="profileFormDelete.controls.Password.invalid && profileFormDelete.controls.Password.errors.required">{{
           "LOGIN.INTRODUCE_PASSWORD" | translate
         }}</mat-error>
-    
-        <mat-error id="minPassword" *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Password.errors.minlength">{{
+        
+        <mat-error id="minPassword" *ngIf="profileFormDelete.controls.Password.invalid && profileFormDelete.controls.Password.errors.minlength">{{
           "GENERIC.MIN_CHARACTERS" | translate: {minchar:loginForm.controls.Password.errors.minlength.requiredLength}
         }}</mat-error>
     
-        <mat-error id="maxPassword" *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Password.errors.maxlength">{{
+        <mat-error id="maxPassword" *ngIf="profileFormDelete.controls.Password.invalid && profileFormDelete.controls.Password.errors.maxlength">{{
           "GENERIC.MAX_CHARACTERS" | translate: {maxchar:loginForm.controls.Password.errors.maxlength.requiredLength}
         }}</mat-error>
       </mat-form-field>

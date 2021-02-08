@@ -98,7 +98,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   fileCed1: any;
   fileCed2: any;
   activebutton: boolean = false;
-
+  wrongPass: boolean = false;
   numberPattern = "^(0|[0-9][0-9]*)$";
   namePattern =
     "[a-zA-Z0-9 àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]+";
@@ -733,11 +733,16 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
         }
       },
       (err) => {
+        //this.wrongPass = true;
         this.openSnackBar(err.userMessage, "Cerrar");
+
       }
     )
     //console.log(this.user.deleteUser());
   }
+  //changeData() {
+  //  this.wrongPass = false;
+  //}
 }
 
 
