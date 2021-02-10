@@ -1,57 +1,81 @@
 <div id="{{ data.id }}">
-  <div fxLayout="column" fxLayoutAlign="center" class="border-bottom-gray">
+  <div fxLayout="column" fxLayoutAlign="center" class="border-bottom-gray border-blue">
       <div fxLayout="row" fxLayoutAlign="space-between center">
-        <h3 class="mb-3 gray-title">  <img class="icon-dashboard" src="/assets/img/dashboard/usuario.svg" alt="user"> {{ data.name }} {{data.lastNames}}</h3>
+        <h3 class="mb-3 title-name">  <img class="icon-dashboard" src="/assets/img/dashboard/icon-perfil.svg" alt="user"> {{ data.name }} {{data.lastNames}}</h3>
         <a id="closeDialog" matRipple (click)="onNoClick()"
           ><mat-icon class="close">close</mat-icon></a
           >
       </div>
   </div>
-  <div mat-dialog-content>  
+  <div mat-dialog-content class="dialog-height" >  
       <div fxLayout="row" fxLayoutGap="50px">
           <div fxLayout="column" fxFlex="75">
               <div class="personal-information">
-                  <h3 class="gray-title">Información personal</h3>
+                  <h3 class="secundary-text">Información personal</h3>
                   <p fxLayout="row">
                       <span class="galano-bold gray w-label">DOCUMENTO</span> 
-                      <span>{{data.identification}}</span>
+                      <span class="normal-text">{{data.identification}}</span>
                   </p>
                   <p fxLayout="row">
                       <span class="galano-bold gray w-label">CORREO ELECTRÓNICO </span>
-                      <span>{{data.email}}</span>
+                      <span class="normal-text">{{data.email}}</span>
                     </p>
                   <p fxLayout="row">
                       <span class="galano-bold gray w-label">CELULAR</span> 
-                      <span>{{data.cellphone}}</span>
+                      <span class="normal-text">{{data.cellphone}}</span>
                     </p>
                   <p fxLayout="row">
                       <span class="galano-bold gray w-label">DIRECCIÓN</span> 
-                      <span>{{data.address}}</span>
+                      <span class="normal-text">{{data.address}}</span>
                     </p>
               </div>
               <div class="bank-information">
-                  <h3 class="gray-title">Información Bancaria</h3>
+                  <h3 class="secundary-text">Información Bancaria</h3>
                   <p fxLayout="row">
                       <span class="galano-bold gray w-label">BANCO</span> 
-                      <span>{{data.bank}}</span>
+                      <span class="normal-text">{{data.bank}}</span>
                     </p>
                   <p fxLayout="row">
-                      <span class="galano-bold gray w-label">CUENTA</span> <span *ngIf="data.typeBankAccount === '1'"> Ahorros</span> <span *ngIf="data.typeBankAccount === '2'"> Corriente</span> <span> - {{data.bankAccountNumber}}</span></p>
+                      <span class="galano-bold gray w-label">CUENTA</span> <span class="normal-text" *ngIf="data.typeBankAccount === '1'"> Ahorros</span> <span class="normal-text" *ngIf="data.typeBankAccount === '2'"> Corriente</span> <span class="normal-text"> - {{data.bankAccountNumber}}</span></p>
+                      <p fxLayout="row">
+                        <span class="galano-bold gray w-label">FECHA DE CARGA</span> <span class="normal-text" *ngIf="data.typeBankAccount === '1'"> 2020-02-12</span> </p>
               </div>
-
+              <div class="add-information">
+                <h3 class="secundary-text">Archivos Adjuntos</h3>
+                <p fxLayout="row">
+                    <span class="galano-bold gray w-label">ARCHIVO</span> 
+                    <span class="galano-bold gray wx-label ">PRIMERA CARGA</span> 
+                    <span class="galano-bold gray wx-label ">ULTIMA CARGA</span>     
+                </p>
+                <p fxLayout="row">
+                    <span class="w-label"><a class="text-link text-underline cursor-pointer" (click)="IdentificationCard1Download()"> Cédula 1</a></span>
+                    <span class="wx-label normal-text">2020/01/01 18:05:32</span>  
+                    <span class=" wx-label normal-text">2020/01/01 18:05:32</span>  
+                </p>
+                <p fxLayout="row">
+                    <span class="w-label"><a class="text-link text-underline cursor-pointer" (click)="IdentificationCard2Download()" target="_blank" id="ced2"> Cédula 2</a></span>
+                    <span class="wx-label normal-text">2020/01/01 18:05:32</span>  
+                    <span class="wx-label normal-text">2020/01/01 18:05:32</span>  
+                </p>
+                <p fxLayout="row">
+                    <span class="w-label"><a class="text-link text-underline cursor-pointer" (click)="bankCardDownload()" target="_blank" id="certbank"> Cert.bancaria</a></span>
+                    <span class="wx-label normal-text">2020/01/01 18:05:32</span>  
+                    <span class="wx-label normal-text">2020/01/01 18:05:32</span>  
+                </p>
+            </div>
           </div>
           <div fxLayout="column" fxFlex="25" fxLayoutAlign="start start">
               <div class="user-status">
-                  <h3 class="gray-title">Usuario</h3>
+                  <h3 class="secundary-text">Usuario</h3>
                   
                   <div *ngIf="data.userId !== idAdmin">
                       <p class="galano-bold gray">ESTADO</p>
     
                       <mat-slide-toggle  [(ngModel)]="data.state" (change)="changeStatus()" color="orange-toggle" labelPosition="before" id="state-toggle">
-                            <span *ngIf="data.state === true">
+                            <span class="third-text" *ngIf="data.state === true">
                                 Activo
                             </span>
-                            <span *ngIf="data.state === false">
+                            <span class="third-text" *ngIf="data.state === false">
                                 Inactivo
                             </span>
                         </mat-slide-toggle>
@@ -59,43 +83,35 @@
 
                   <p class="galano-bold gray">RECIBE COMUNICACIONES</p>
                   <mat-slide-toggle [(ngModel)]="data.receiveCommunications" (change)="changeComunications()" color="orange-toggle" labelPosition="before" id="comunications-toggle">
-                      <span *ngIf="data.receiveCommunications === true">
+                      <span class="third-text" *ngIf="data.receiveCommunications === true">
                           Si
                       </span>
-                      <span *ngIf="data.receiveCommunications === false">
+                      <span class="third-text" *ngIf="data.receiveCommunications === false">
                           No
                       </span>
                   </mat-slide-toggle>
 
                   <p class="galano-bold gray">ORIGEN</p>
-                     <span *ngIf="data.isEmployeeGrupoExito === true">
+                     <span class="normal-text" *ngIf="data.isEmployeeGrupoExito === true">
                         Interno
                     </span>
-                    <span *ngIf="data.isEmployeeGrupoExito === false">
+                    <span class="normal-text" *ngIf="data.isEmployeeGrupoExito === false">
                         Externo
                     </span>
                     <div >
                   <p class="galano-bold gray">VERIFICACIÓN</p>
                     <mat-slide-toggle [(ngModel)]="data.verified" (change)="changeVerified()" color="orange-toggle" labelPosition="before" id="verified-toggle">
-                        <span *ngIf="data.verified === true">
+                        <span class="third-text" *ngIf="data.verified === true">
                             Aprobado
                         </span>
-                        <span *ngIf="data.verified === false">
+                        <span class="third-text" *ngIf="data.verified === false">
                              Pendiente
                         </span>
                     </mat-slide-toggle>
                 </div>
               </div>
 
-              <div class="files" fxLayout="column">
-                  <h3 class="gray-title">Archivos adjuntos</h3>
-                  <span  fxLayout="column">
-                      <a class="text-underline cursor-pointer" (click)="IdentificationCard1Download()"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cédula 1</a>
-                      <a class="text-underline cursor-pointer" (click)="IdentificationCard2Download()" target="_blank" id="ced2"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cédula 2</a>
-                  </span>
-                    <a class="text-underline cursor-pointer" (click)="bankCardDownload()" target="_blank" id="certbank"><img src="/assets/img/icono-descarga.svg" alt="descarga"> Cert.bancaria</a>
-              </div>
-
+              
           </div>
       </div>
   </div>

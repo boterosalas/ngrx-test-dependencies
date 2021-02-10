@@ -455,6 +455,9 @@ button {
 .border-bottom-gray {
   border-bottom: 1px solid $color-border;
 }
+.border-bottom-blue {
+  border-bottom: 1px solid #352767;
+}
 
 .mat-card {
   color: inherit;
@@ -1187,7 +1190,9 @@ th.mat-header-cell {
 
 .icon-dashboard {
   width: 30px;
-  height: 20px;
+  height: 30px;
+  position: relative;
+  top: 6px;
 }
 
 .icon-dashboard-bottom {

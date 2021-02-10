@@ -35,6 +35,7 @@ import { TableBussinessComponent } from './components/table-bussiness/table-buss
 import { LinkGeneratorComponent } from './pages/link-generator/link-generator.component';
 import { LinkGeneratorFormComponent } from './components/link-generator-form/link-generator-form.component';
 import { TableActivateBusinessComponent } from './components/table-activate-business/table-activate-business.component';
+import { BussinessAdminComponent } from './pages/bussiness-admin/bussiness-admin.component';
 
 const routes: Routes = [
   {
@@ -92,6 +93,14 @@ const routes: Routes = [
     data: {
       role: "ADMIN"
     },
+  },
+  {
+    path: "bussiness-admin",
+    component: BussinessAdminComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN"
+    },
   }
 ];
 
@@ -115,7 +124,8 @@ const routes: Routes = [
     TableBussinessComponent,
     LinkGeneratorComponent,
     LinkGeneratorFormComponent,
-    TableActivateBusinessComponent
+    TableActivateBusinessComponent,
+    BussinessAdminComponent
   ],
   imports: [
     CommonModule,

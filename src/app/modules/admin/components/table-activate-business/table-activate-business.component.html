@@ -1,7 +1,7 @@
 
 <div fxLayout="row" fxLayoutGap="15px" class="mb-3 mt-3">
     
-    <div fxLayout="column" fxFlex="50">
+    <div fxLayout="column" fxFlex="70">
         <table mat-table #table class="mat-elevation-z2"  
         [dataSource]="dataSource" 
         cdkDropList
@@ -38,7 +38,15 @@
                     </div>
                 </td>
             </ng-container>
-
+            <ng-container matColumnDef="category">
+                <th mat-header-cell  *matHeaderCellDef class="center-text"> CATEGORIA </th>
+                <td mat-cell *matCellDef="let element;let i= index"> 
+                    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign.gt-xs="center" fxLayoutAlign.xs="center center">
+                        <img class="cursor-pointer" (click)="editCategory(element)"  src="/assets/img/dashboard/icon-view.svg" alt="">
+                        
+                    </div>
+                </td>
+            </ng-container>
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;let i= index" cdkDrag [cdkDragData]="row"></tr>
         </table>

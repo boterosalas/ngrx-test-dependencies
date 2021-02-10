@@ -18,10 +18,11 @@ import { UserService } from "src/app/services/user.service";
 import { ResponseService } from "src/app/interfaces/response";
 import { LinksService } from "src/app/services/links.service";
 import * as moment from "moment";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { DialogEditComponent } from "src/app/modules/clicker/components/dialog-edit/dialog-edit.component";
 moment.locale("es");
 import Swal from "sweetalert2";
+import { observable, Observable } from "rxjs";
 
 @Component({
   selector: "app-users",
@@ -43,7 +44,8 @@ export class UsersComponent extends MatPaginatorIntl
   private subscription: Subscription = new Subscription();
   ext: string;
   contentType: string;
-  // email: string;
+  tipoReporte: any;
+  aux: number;
   maxDate = moment(new Date());
   orderOrigin: string;
   orderBy: string;
@@ -51,13 +53,27 @@ export class UsersComponent extends MatPaginatorIntl
   to: any;
   dateParams: any;
   dateParamsReport: any;
-  disButon: boolean;
+  dateRango: any;
+  disButon$: Observable<boolean>;
+  disableButon: boolean;
   @ViewChild("templateDialogEmail", { static: false })
   templateEmail: TemplateRef<any>;
   emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
   userId: string;
   userMail: string;
-
+  dateNoVisible: boolean;
+  selecteds = [{
+    titulo: "General"
+  }, {
+    titulo: "Usuarios Externos"
+  },
+  {
+    titulo: "Cambios de Datos bancarios"
+  },
+  {
+    titulo: "Datos de Gamificación"
+  }
+  ]
   locale = {
     locale: "es",
     direction: "ltr", // could be rtl
@@ -84,7 +100,10 @@ export class UsersComponent extends MatPaginatorIntl
     /**
      * Traduccion del paginador
      */
-
+    this.disButon$ = Observable.create(observer => {
+      observer.next(true);
+      observer.complete();
+    });
     this.itemsPerPageLabel = "Items por página";
     this.nextPageLabel = "Página siguiente";
     this.previousPageLabel = "Página anterior";
@@ -111,9 +130,13 @@ export class UsersComponent extends MatPaginatorIntl
   ngOnInit() {
     this.searchUser("");
     this.formEmail();
-
+    this.dateNoVisible = true;
+    //this.disButon = true;
+    this.disableButon = true;
+    this.aux = 0;
     this.dateForm = this.fb.group({
-      dateRange: [null, Validators.required]
+      dateRange: [null],
+      tipoReport: [null, Validators.required]
     });
     this.dateReportChangeForm = this.fb.group({
       dateRange: [null, Validators.required]
@@ -462,15 +485,16 @@ export class UsersComponent extends MatPaginatorIntl
           this.openSnackBar(respExcel.userMessage, "Cerrar");
           this.dateForm.reset();
           if (this.dateForm.controls.dateRange.value.startDate === null) {
-            this.disButon = true;
+            //this.disButon = true;
+            this.disableButon = true;
           }
         }
       });
   }
   public getReportChangeExcel() {
     this.dateParamsReport = {
-      start: this.dateReportChangeForm.controls.dateRange.value.startDate.format(),
-      end: this.dateReportChangeForm.controls.dateRange.value.endDate.format()
+      start: this.dateForm.controls.dateRange.value.startDate.format(),
+      end: this.dateForm.controls.dateRange.value.endDate.format()
     };
     this.subscription = this.file.getHistoricalBankInformation(this.dateParamsReport)
       .subscribe((respExcel: ResponseService) => {
@@ -478,7 +502,8 @@ export class UsersComponent extends MatPaginatorIntl
           this.openSnackBar(respExcel.userMessage, "Cerrar");
           this.dateForm.reset();
           if (this.dateForm.controls.dateRange.value.startDate === null) {
-            this.disButon = true;
+            //this.disButon = true;
+            this.disableButon = true;
           }
         }
       });
@@ -486,7 +511,24 @@ export class UsersComponent extends MatPaginatorIntl
   }
 
   change() {
-    this.disButon = false;
+    console.log("Carga")
+    if (this.aux === 0 || this.aux === 1) {
+      this.aux = 2
+    }
+    else {
+      this.disableButon = false
+    }
+    //console.log("Entra")
+
+
+    //this.disButon = false;
+    //  console.log("Entra por aqui");
+
+    //this.disButon$ = Observable.create(observer => {
+    //  observer.next(false);
+    //  observer.complete();
+    //});
+
   }
 
   sort(event) {
@@ -506,11 +548,55 @@ export class UsersComponent extends MatPaginatorIntl
 
   public exportusers() {
     this.subscription = this.usersService.getExternalUsers().subscribe((respExport: ResponseService) => {
+      this.dateForm.reset();
+      if (this.dateForm.controls.dateRange.value.startDate === null) {
+        //this.disButon = true;
+        this.disableButon = true;
+      }
       this.openSnackBar(respExport.userMessage, 'Cerrar');
     })
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+  onChangeSelected(event) {
+    if (event === "General" || event === "Datos de Gamificación") {
+      this.dateNoVisible = true;
+      //this.dateForm.get('dateRange').clearValidators();
+      //this.dateForm.updateValueAndValidity();
+      this.disableButon = false
+
+      //this.dateRango = null;
+      this.dateForm.get('dateRange').setValue(null)
+    } else {
+      this.dateNoVisible = false;
+      //this.dateForm.get('dateRange').setValidators([Validators.required]);
+      //this.dateForm.updateValueAndValidity();
+      this.aux = 1
+      this.disableButon = true
+
+      //this.dateRango = null;
+      this.dateForm.get('dateRange').setValue(null)
+    }
+
+  }
+  public getAnyReport() {
+    if (this.dateForm.controls.tipoReport.value === "General") {
+      console.log("General");
+      this.exportusers();
+      //this.disableButon = false;
+    } else if (this.dateForm.controls.tipoReport.value === "Cambios de Datos bancarios") {
+      console.log("Usuarios");
+      this.getReportChangeExcel();
+      //this.disableButon = false;
+    } else if (this.dateForm.controls.tipoReport.value === "Usuarios Externos") {
+      console.log("Cambio");
+      this.getUserExcel();
+      //this.disableButon = false;
+    } else {
+      console.log("Gamificacion")
+    }
+
   }
 }

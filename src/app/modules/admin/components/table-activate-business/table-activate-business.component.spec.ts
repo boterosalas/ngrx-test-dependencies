@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { LinksService } from "src/app/services/links.service";
 import { of } from 'rxjs';
+import { RouterTestingModule } from '@angular/router/testing';
 //import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 
 describe('TableActivateBusinessComponent', () => {
@@ -27,6 +28,7 @@ describe('TableActivateBusinessComponent', () => {
         FormsModule,
         DragDropModule,
         HttpClientTestingModule,
+        RouterTestingModule
       ],
       providers: [{ provide: LinksService, useValue: mockLinksService }],
     })
