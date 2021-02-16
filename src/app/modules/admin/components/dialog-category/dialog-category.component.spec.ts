@@ -17,6 +17,8 @@ import { ContentService } from 'src/app/services/content.service';
 describe("DialogCategoryComponent", () => {
   let component: DialogCategoryComponent;
   let fixture: ComponentFixture<DialogCategoryComponent>;
+  let component2: DialogCategoryComponent;
+  let fixture2: ComponentFixture<DialogCategoryComponent>;
   const mockContentService = jasmine.createSpyObj("ContentService", [
     "addCategory"
   ]);
@@ -69,6 +71,12 @@ describe("DialogCategoryComponent", () => {
   })
   it("should create", () => {
     expect(component).toBeTruthy();
+
+    fixture2 = TestBed.createComponent(DialogCategoryComponent);
+    component2 = fixture2.componentInstance;
+    fixture2.detectChanges();
+    component2.data = { edit: 1 };
+    expect(component2).toBeTruthy();
   });
   it("on file change ced1", () => {
     const mockFile = new File([""], "name.jpg", { type: "text/html" });
