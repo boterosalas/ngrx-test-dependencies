@@ -23,10 +23,21 @@ describe("ControllerAdminComponent", () => {
     close: () => { },
     beforeClosed: () => { }
   };
+  const audit = {
+    state: "Success",
+    userMessage: "se ha enviado un correo",
+    objectResponse: []
+  };
+  const error = {
+    state: "Error",
+    userMessage: "se ha enviado un correo",
+    objectResponse: []
+  };
   const mockDialog = jasmine.createSpyObj("MatDialog", [
     "open",
     "closeAll"
   ]);
+  //const mockDialogR = jasmine.createSpy(component.dialogRef,['beforeClosed'])
   const mockDialogRef = jasmine.createSpyObj("MatDialogRef", [
     "close",
     "afterClosed",
@@ -95,8 +106,8 @@ describe("ControllerAdminComponent", () => {
       .compileComponents();
     mockContentService.getBusinessContent.and.returnValue(of(bussiness));
     mockContentService.getAllBusinessContent.and.returnValue(of(bussiness));
-    mockContentService.orderCategory.and.returnValue(of(bussiness));
-    mockContentService.deleteCategory.and.returnValue(of(bussiness));
+    mockContentService.orderCategory.and.returnValue(of(audit));
+
   }));
 
   beforeEach(() => {
@@ -110,25 +121,39 @@ describe("ControllerAdminComponent", () => {
     expect(mockContentService.getAllBusinessContent).toHaveBeenCalled();
   });
   it('save Order', () => {
+    mockContentService.orderCategory.and.returnValue(of(audit));
+    component.saveOrder([{ id: 1, orderby: 2 }, { id: 2, orderby: 1 }]);
+    expect(mockContentService.orderCategory).toHaveBeenCalled();
+    mockContentService.orderCategory.and.returnValue(of(error));
     component.saveOrder([{ id: 1, orderby: 2 }, { id: 2, orderby: 1 }]);
     expect(mockContentService.orderCategory).toHaveBeenCalled();
   });
-
   it('delete a category', () => {
+    mockContentService.deleteCategory.and.returnValue(of(audit));
+    component.datosEliminar = { id: 1 };
+    component.deleteCategoryService();
+    expect(mockContentService.deleteCategory).toHaveBeenCalled();
+    mockContentService.deleteCategory.and.returnValue(of(error));
     component.datosEliminar = { id: 1 };
     component.deleteCategoryService();
     expect(mockContentService.deleteCategory).toHaveBeenCalled();
   });
   it('cancel delete', () => {
+
     component.cancelDelete();
     expect(mockDialog.closeAll).toHaveBeenCalled();
+
+    //spyOn(component.dialogRef, 'beforeClosed').and.returnValue(of(audit));
+    //component.deleteCategory({ id: 1 });
+    //expect(bussiness).not.toBeUndefined();
+
+    //  expect(mockDialogRef.beforeClosed).toHaveBeenCalled();
   });
   //it('delete Category', () => {
   //jasmine.createSpy(component.dialogRef,['beforeClosed']).and.callThrough();
-  //spyOn(component.dialogRef, 'beforeClosed');
-
-  //component.deleteCategory({ id: 1 });
-  //expect(bussiness).not.toBeUndefined();
+  //  spyOn(component.dialogRef, 'beforeClosed');
+  //  component.deleteCategory({ id: 1 });
+  //  expect(mockDialogRef.beforeClosed).toHaveBeenCalled();
   //});
   //it('add Category', () => {
   //  component.id = "1";
