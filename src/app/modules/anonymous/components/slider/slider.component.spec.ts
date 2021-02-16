@@ -43,7 +43,7 @@ describe("SliderComponent", () => {
   const resp = {
     state: "Success",
     userMessage: "se ha guardado el link",
-    objectResponse: 
+    objectResponse:
     {
       id: 2656,
       link: "http://tinyurl.com/t7c5ouj",
@@ -246,5 +246,9 @@ describe("SliderComponent", () => {
     component.openShare();
     expect(component.urlshorten).not.toBeUndefined();
   });
+  it("Change", () => {
+    let datos = true;
+    expect(datos).toBeTruthy();
+  })
 
 });

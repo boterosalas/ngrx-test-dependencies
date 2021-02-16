@@ -30,6 +30,12 @@ export class DialogUserComponent implements OnInit, OnDestroy {
   @Output() verified = new EventEmitter();
   @Output() IdentificationCard1 = new EventEmitter();
   @Output() IdentificationCard2 = new EventEmitter();
+  //@Output() dateCed1 = new EventEmitter();
+  //@Output() dateCed2 = new EventEmitter();
+  //@Output() dateCertBank = new EventEmitter();
+  //@Output() AntdateCed1 = new EventEmitter();
+  //@Output() AntdateCed2 = new EventEmitter();
+  //@Output() AntdateCertBank = new EventEmitter();
   @Output() bankCertificate = new EventEmitter();
   isLoggedIn: any;
   private subscription: Subscription = new Subscription();
@@ -65,6 +71,7 @@ export class DialogUserComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoggedIn = this.auth.isLoggedIn();
+    //console.log(this.AntdateCed1)
   }
 
   ngOnDestroy(): void {

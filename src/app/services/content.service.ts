@@ -8,7 +8,7 @@ import { ResponseService } from "../interfaces/response";
   providedIn: "root",
 })
 export class ContentService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
@@ -24,7 +24,7 @@ export class ContentService {
   url = environment.URL_CONTENT;
   urlbiggyExito = "https://search.biggylabs.com.br/search-api/v1/exitocol/api/";
   urlbiggyCarulla = "https://search.biggylabs.com.br/search-api/v1/carulla/api/";
-  apibiggy="search/trade-policy/1"
+  apibiggy = "search/trade-policy/1"
   apiNews = "product/getNews";
   apiAssured = "product/getProductsSegurosExito";
   apiTrips = "product/getProductsViajesExito";
@@ -40,8 +40,12 @@ export class ContentService {
   apiGetcategoriesbusiness = "business/getcategoriesbusiness";
   apiRegisterbusiness = "business/registerbusiness";
   apiGetbusinessexcel = "business/getbusinessexcel";
-  apiGetCommissions= "business/getcommissions";
-  apiGetpopups= "popups/getpopups";
+  apiAddCategory = "business/savecategory";
+  apiDeleteCategory = "business/deletecategory";
+  apiGetCommissions = "business/getcommissions";
+  apiGetAllCategory = "business/getallcategories"
+  apiOrderCategory = "business/ordercategories";
+  apiGetpopups = "popups/getpopups";
   sendSearch = {};
 
   public getNews() {
@@ -60,7 +64,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         ),
         map((user: ResponseService) => {
@@ -76,7 +80,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         ),
         map((user: ResponseService) => {
@@ -93,7 +97,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         ),
         map((user: ResponseService) => {
@@ -102,15 +106,15 @@ export class ContentService {
       );
   }
 
-  public saveActiveBusiness(bussiness:any) {
+  public saveActiveBusiness(bussiness: any) {
     return this.http
-      .post(`${this.url + this.apiSaveActiveBusiness}`, bussiness , this.httpOptions)
+      .post(`${this.url + this.apiSaveActiveBusiness}`, bussiness, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         ),
         map((bussiness: ResponseService) => {
@@ -121,13 +125,13 @@ export class ContentService {
 
   public getLinkBusiness(bussiness) {
     return this.http
-      .post(`${this.url + this.apiGetLinkBusiness}`, bussiness , this.httpOptions)
+      .post(`${this.url + this.apiGetLinkBusiness}`, bussiness, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         ),
         map((user: ResponseService) => {
@@ -144,7 +148,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         ),
         map((user: ResponseService) => {
@@ -161,7 +165,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         ),
         map((user: ResponseService) => {
@@ -178,7 +182,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         )
       );
@@ -203,7 +207,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         ),
         map((business: ResponseService) => {
@@ -220,7 +224,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         ),
         map((business: ResponseService) => {
@@ -235,7 +239,7 @@ export class ContentService {
         errors.pipe(
           delay(1000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((user: ResponseService) => {
@@ -250,7 +254,7 @@ export class ContentService {
         errors.pipe(
           delay(1000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((user: ResponseService) => {
@@ -265,7 +269,7 @@ export class ContentService {
         errors.pipe(
           delay(1000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((user: ResponseService) => {
@@ -329,9 +333,75 @@ export class ContentService {
       .pipe(
         delay(1000),
         take(3),
-        tap((errorStatus) => {}),
+        tap((errorStatus) => { }),
         map((user: any) => {
           return user.objectResponse;
+        })
+      );
+  }
+
+  public deleteCategory(datos: any) {
+    return this.http
+      .delete(`${this.url + this.apiDeleteCategory}?id=${datos.id}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+    //return `Eliminando Categoria`
+  }
+  public addCategory(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiAddCategory}`, datos, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
+  public orderCategory(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiOrderCategory}`, datos, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
+  public getAllBusinessContent(id: string) {
+    return this.http
+      .get(
+        `${this.url + this.apiGetAllCategory}?idbusiness=${id}`,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((business: ResponseService) => {
+          return business.objectResponse;
         })
       );
   }

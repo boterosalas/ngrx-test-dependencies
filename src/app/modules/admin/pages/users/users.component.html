@@ -9,19 +9,18 @@
     <div class="mt-4 container-forms" fxLayout="row">
     <div class=" ml-4 downloadUsers user-transactions">
     <form
-        [formGroup]="dateForm"
-                  
+        [formGroup]="dateForm"    
         >
         <mat-form-field class="selected-report">
+          <mat-placeholder [class]="selected-placeholder">TIPO DE REPORTE</mat-placeholder>
           <mat-select
-            placeholder="TIPO DE REPORTE"
+            
             id="tipoReport"
             formControlName="tipoReport"
             class="selected-report"
-            
           >
             <mat-option (click)="onChangeSelected(selected.titulo)" *ngFor="let selected of selecteds" value="{{ selected.titulo }}">
-              <span>{{ selected.titulo }}</span>
+              <span >{{ selected.titulo }}</span>
             </mat-option>
           </mat-select>
         </mat-form-field>

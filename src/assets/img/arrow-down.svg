@@ -1,1 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><defs><style>.a{fill:#fff;}.b{fill:#86888a;}</style></defs><g transform="translate(12.97 6.334) rotate(90)"><rect class="a" width="15" height="15" rx="7.5" transform="translate(-6.334 -2.03)"/><path class="b" d="M101.377,4.238,98.06,7.554A.54.54,0,0,1,97.3,6.79l2.934-2.934L97.3.922a.54.54,0,0,1,.764-.764l3.316,3.316a.54.54,0,0,1,0,.764Z" transform="translate(-98.176 1.829)"/></g></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="15px" height="15px" viewBox="0 0 15 15" enable-background="new 0 0 15 15" xml:space="preserve">
+<path fill="#86888A" d="M6.903,9.535L3.587,6.218C3.391,5.993,3.415,5.652,3.64,5.456c0.204-0.178,0.508-0.177,0.711,0.002
+	l2.934,2.935l2.934-2.935c0.211-0.211,0.553-0.211,0.764,0s0.211,0.553,0,0.764l0,0L7.667,9.538
+	C7.456,9.749,7.114,9.749,6.903,9.539c0-0.001,0-0.001,0-0.001V9.535z"/>
+</svg>

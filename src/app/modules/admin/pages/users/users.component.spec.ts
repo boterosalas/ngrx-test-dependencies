@@ -13,11 +13,13 @@ import { AdminModule } from '../../admin.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LinksService } from 'src/app/services/links.service';
+
 import * as moment from 'moment';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { DialogEditComponent } from 'src/app/modules/clicker/components/dialog-edit/dialog-edit.component';
 import { UserService } from 'src/app/services/user.service';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+
 moment.locale('es');
 
 describe("UsersComponent", () => {
@@ -26,7 +28,8 @@ describe("UsersComponent", () => {
 
   const mockLinksService = jasmine.createSpyObj("LinksService", [
     "searchUsers",
-    "getUsersExcel"
+    "getUsersExcel",
+    "getHistoricalBankInformation"
   ]);
 
   const mockDialog = jasmine.createSpyObj("MatDialog", ["open"]);
@@ -37,7 +40,12 @@ describe("UsersComponent", () => {
     "event "
   ]);
 
-  const mockUserService = jasmine.createSpyObj("UserService", ["updateUserEmail", "updateEmployees"]);
+  const mockUserService = jasmine.createSpyObj("UserService", [
+    "updateUserEmail",
+    "updateEmployees",
+    "getExternalUsers",
+    "getReportGamification"
+  ]);
 
   const dataUser = {
     state: "Success",
@@ -172,9 +180,13 @@ describe("UsersComponent", () => {
     localStorage.setItem('ACCESS_TOKEN', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU');
     mockLinksService.searchUsers.and.returnValue(of(dataUser));
     mockLinksService.getUsersExcel.and.returnValue(of(getUserExcel));
+    mockLinksService.getHistoricalBankInformation.and.returnValue(of(getUserExcel));
+    mockUserService.getExternalUsers.and.returnValue(of(getUserExcel))
     mockUserService.updateUserEmail.and.returnValue(of(resp));
     mockUserService.updateEmployees.and.returnValue(of(updtaeEmployee));
     mockUserService.updateEmployees.and.returnValue(of(updtaeEmployeeError));
+    mockUserService.getReportGamification.and.returnValue(of(getUserExcel))
+    //mockUserService.getExternalUser.and.returnValue(of(getUserExcel));
     fixture = TestBed.createComponent(UsersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -227,6 +239,11 @@ describe("UsersComponent", () => {
     //const btn = nativeElementbtn.querySelector('.btn');
     //btn.dispatchEvent(new Event('click'));
     //fixture.detectChanges();
+    let start = moment();
+    let end = moment("12-01-2020");
+    //let start = new Date(2020, 11, 25);
+    //let end = new Date(2021, 1, 25);
+    component.dateForm.controls.dateRange.setValue({ startDate: start, endDate: end });
     component.getUserExcel();
     let datos = true;
     expect(datos).toBeTruthy;
@@ -246,5 +263,52 @@ describe("UsersComponent", () => {
     component.updateEmail();
     expect(mockUserService.updateUserEmail).toHaveBeenCalled();
   });
+  it("general change", () => {
+    component.onChangeSelected("General");
+    expect(component.disableButon).toBeFalsy();
+  })
+  it("other change", () => {
+    component.onChangeSelected("Reporte Gamificación");
+    expect(component.disableButon).toBeTruthy();
+  })
+  it('get first report', () => {
+    component.dateForm.controls.tipoReport.setValue("General");
+    component.getAnyReport();
+    let datos = true;
+    expect(datos).toBeTruthy();
+  })
+  it('get second report', () => {
+    let start = moment();
+    let end = moment("12-01-2020");
+    component.dateForm.controls.dateRange.setValue({ startDate: start, endDate: end });
+    component.dateForm.controls.tipoReport.setValue("Cambios de Datos bancarios");
+    component.getAnyReport();
 
+    let datos = true;
+    expect(datos).toBeTruthy()
+  })
+  it('get third report', () => {
+    let start = moment();
+    let end = moment("12-01-2020");
+    component.dateForm.controls.dateRange.setValue({ startDate: start, endDate: end });
+    component.dateForm.controls.tipoReport.setValue("Cambios de Datos bancarios");
+    component.getAnyReport();
+    let datos = true;
+    expect(datos).toBeTruthy()
+  });
+  it('get fifth report', () => {
+    let start = moment();
+    let end = moment("12-01-2020");
+    component.dateForm.controls.dateRange.setValue({ startDate: start, endDate: end });
+    component.dateForm.controls.tipoReport.setValue("Usuarios Externos");
+    component.getAnyReport();
+    let datos = true;
+    expect(datos).toBeTruthy()
+  })
+  it('get fourth report', () => {
+    component.dateForm.controls.tipoReport.setValue("Gamificación");
+    component.getAnyReport();
+    let datos = true;
+    expect(datos).toBeTruthy();
+  })
 });

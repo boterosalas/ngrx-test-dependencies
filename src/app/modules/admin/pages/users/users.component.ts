@@ -65,13 +65,13 @@ export class UsersComponent extends MatPaginatorIntl
   selecteds = [{
     titulo: "General"
   }, {
-    titulo: "Usuarios Externos"
+    titulo: "Usuarios externos"
   },
   {
-    titulo: "Cambios de Datos bancarios"
+    titulo: "Cambios de datos bancarios"
   },
   {
-    titulo: "Datos de Gamificación"
+    titulo: "Datos de gamificación"
   }
   ]
   locale = {
@@ -100,10 +100,10 @@ export class UsersComponent extends MatPaginatorIntl
     /**
      * Traduccion del paginador
      */
-    this.disButon$ = Observable.create(observer => {
-      observer.next(true);
-      observer.complete();
-    });
+    //this.disButon$ = Observable.create(observer => {
+    //  observer.next(true);
+    //  observer.complete();
+    //});
     this.itemsPerPageLabel = "Items por página";
     this.nextPageLabel = "Página siguiente";
     this.previousPageLabel = "Página anterior";
@@ -257,6 +257,13 @@ export class UsersComponent extends MatPaginatorIntl
     const fileIdentificationCard1 = user.fileIdentificationCard1;
     const fileIdentificationCard2 = user.fileIdentificationCard2;
     const fileBankCertificate = user.fileBankCertificate;
+    const dateCed1 = user.maxdateidentificationcard1;
+    const dateCed2 = user.maxdateidentificationcard2;
+    const dateCertBank = user.maxdatebankcertificate;
+    const AntdateCed1 = user.mindateidentificationcard1;
+    const AntdateCed2 = user.mindateidentificationcard2;
+    const AntdateCertBank = user.mindatebankcertificate;
+
     console.log(verified === "No");
     console.log(user.receiveCommunications)
     if (state === "Inactivo") {
@@ -276,8 +283,6 @@ export class UsersComponent extends MatPaginatorIntl
     } else {
       verified = true;
     }
-    console.log("Antes de enviar")
-    console.log(verified)
     if (isEmployeeGrupoExito === "INTERNO") {
       isEmployeeGrupoExito = true;
     } else {
@@ -303,7 +308,13 @@ export class UsersComponent extends MatPaginatorIntl
         verified,
         fileIdentificationCard1,
         fileIdentificationCard2,
-        fileBankCertificate
+        fileBankCertificate,
+        dateCed1,
+        dateCed2,
+        dateCertBank,
+        AntdateCed1,
+        AntdateCed2,
+        AntdateCertBank
       }
     });
 
@@ -561,7 +572,7 @@ export class UsersComponent extends MatPaginatorIntl
     this.subscription.unsubscribe();
   }
   onChangeSelected(event) {
-    if (event === "General" || event === "Datos de Gamificación") {
+    if (event === "General" || event === "Datos de gamificación") {
       this.dateNoVisible = true;
       //this.dateForm.get('dateRange').clearValidators();
       //this.dateForm.updateValueAndValidity();
@@ -581,20 +592,30 @@ export class UsersComponent extends MatPaginatorIntl
     }
 
   }
+  public getGamification() {
+    this.subscription = this.usersService.getReportGamification().subscribe((respExport: ResponseService) => {
+      this.dateForm.reset();
+      if (this.dateForm.controls.dateRange.value.startDate === null) {
+        this.disableButon = true;
+      }
+      this.openSnackBar(respExport.userMessage, 'Cerrar');
+    })
+  }
   public getAnyReport() {
     if (this.dateForm.controls.tipoReport.value === "General") {
       console.log("General");
       this.exportusers();
       //this.disableButon = false;
-    } else if (this.dateForm.controls.tipoReport.value === "Cambios de Datos bancarios") {
+    } else if (this.dateForm.controls.tipoReport.value === "Cambios de datos bancarios") {
       console.log("Usuarios");
       this.getReportChangeExcel();
       //this.disableButon = false;
-    } else if (this.dateForm.controls.tipoReport.value === "Usuarios Externos") {
+    } else if (this.dateForm.controls.tipoReport.value === "Usuarios externos") {
       console.log("Cambio");
       this.getUserExcel();
       //this.disableButon = false;
     } else {
+      this.getGamification();
       console.log("Gamificacion")
     }
 

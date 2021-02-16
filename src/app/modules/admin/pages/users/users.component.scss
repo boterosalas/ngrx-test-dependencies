@@ -49,7 +49,31 @@
 }
 .selected-report {
   width: 280px !important;
+  color: #37236a;
+  div {
+    div {
+      span {
+        color: #37236a;
+      }
+    }
+  }
 }
+.selected-placeholder {
+  color: #37236a;
+}
+.mat-select-arrow {
+  border: none !important;
+  background: url("/assets/img/icon-arrow-down.svg") no-repeat !important;
+  width: 26px !important;
+  height: 26px !important;
+  background-size: 25px;
+  position: relative;
+  bottom: 4px;
+}
+.selected-title {
+  color: #37236a;
+}
+
 .container-forms {
   justify-content: space-between;
 }
