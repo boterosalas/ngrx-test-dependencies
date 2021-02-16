@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angu
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatTable } from '@angular/material';
 import { LinksService } from "src/app/services/links.service";
+import { Router } from '@angular/router';
 export interface PeriodicElement {
   drag: any;
   bussiness: any;
@@ -18,13 +19,14 @@ export class TableActivateBusinessComponent implements OnInit {
 
   constructor(
     private file: LinksService,
+    public router: Router,
   ) { }
   //dataSource: any;
   @Input() dataSource;
   @Output() activateBusiness = new EventEmitter;
   @ViewChild('table', { static: false }) table: MatTable<PeriodicElement>;
 
-  displayedColumns: string[] = ['drag', 'bussiness', 'activate'];
+  displayedColumns: string[] = ['drag', 'bussiness', 'activate', 'category'];
   ngOnInit() {
   }
 
@@ -51,4 +53,15 @@ export class TableActivateBusinessComponent implements OnInit {
     })
   }
 
+  editCategory(element: any) {
+    console.log(element)
+    this.router.navigate([
+      "/bussiness-admin",
+      {
+        id: element.id,
+        titulo: element.description,
+        imagen: element.imageurl
+      },
+    ]);
+  }
 }

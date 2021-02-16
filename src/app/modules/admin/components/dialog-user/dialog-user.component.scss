@@ -1,43 +1,82 @@
-@import 'variables';
-@import 'general';
+@import "variables";
+@import "general";
 
 .close {
-    background:$gray2;
-    border-radius: 50%;
-    color: #ffffff;
-    font-size: 16px;
-    text-align: center;
-    line-height: 24px;
-    cursor: pointer;
-  }
+  background: $gray2;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 16px;
+  text-align: center;
+  line-height: 24px;
+  cursor: pointer;
+}
 
-  .gray{
-    color:$gray2;
-  }
+.gray {
+  color: $gray2;
+}
 
-  .gray-title{
-    color:$gray;
-    font-size: 14px;
-  }
+.gray-title {
+  color: $gray;
+  font-size: 14px;
+}
 
-  p{
-    color: #231F20;
-    font-size: 14px;
-  }
+p {
+  color: #231f20;
+  font-size: 14px;
+}
 
-  .galano-bold{
-    font-size: 11px;
-  }
+.galano-bold {
+  font-size: 11px;
+}
 
-  a{
-    color: #00A9B3;
-    line-height: 20px;
-  }
+a {
+  color: #00a9b3;
+  line-height: 20px;
+}
 
-  .text-underline{
-    text-decoration: underline;
-  }
+.text-underline {
+  text-decoration: underline;
+}
 
 .w-label {
-    width: 110px;
+  width: 110px;
+}
+
+.title-name {
+  color: #37236a;
+  font-size: 20px;
+  line-height: 28px;
+}
+.secundary-text {
+  color: #37236a;
+  font-size: 16px;
+  line-height: 28px;
+}
+.third-text {
+  color: #37236a;
+  font-size: 14px;
+  line-height: 28px;
+  font-weight: bold;
+}
+.normal-text {
+  color: #37236a;
+  font-size: 14px;
+  //line-height: 28px;
+  font-family: "galano-medium";
+}
+.border-blue {
+  border-bottom-color: #352767 !important;
+}
+.wx-label {
+  width: 155px;
+}
+.text-link {
+  color: #8d7eb7 !important;
+  font-size: 14px !important;
+}
+p {
+  margin-bottom: 0;
+}
+.dialog-height {
+  max-height: 75vh !important;
 }

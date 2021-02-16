@@ -5,41 +5,38 @@
 ></app-banner>
 
 <div class="container m-t4 fade-in">
-    
-    <!-- <h1 class="border-bottom-orange-init">{{ 'USERS.USERS' | translate}}</h1> -->
-    <div class="mt-4" fxLayout="row">
-    <div class="">
-    <p class="mt-0">Elige un rango de fechas para exportar usuarios</p>
-    
+    <p class="title-blue">REPORTE DE USUARIOS </p>
+    <div class="mt-4 container-forms" fxLayout="row">
+    <div class=" ml-4 downloadUsers user-transactions">
     <form
-        [formGroup]="dateForm"
-        class="downloadUsers user-transactions"
+        [formGroup]="dateForm"    
         >
-            <mat-icon class="icon-date" matPrefix>date_range</mat-icon>
-            <input (change)="change()" formControlName="dateRange" [locale]="locale" placeholder="Seleccione fechas" type="text" [maxDate]="maxDate"  ngxDaterangepickerMd class="form-control border-input mat-elevation-z1 p-2 border-radius"/>
-            <button mat-raised-button color="orange" (click)="getUserExcel()" id="download-users" class="ml-2" [disabled]="!dateForm.valid || disButon">Exportar <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
+        <mat-form-field class="selected-report">
+          <mat-placeholder [class]="selected-placeholder">TIPO DE REPORTE</mat-placeholder>
+          <mat-select
+            
+            id="tipoReport"
+            formControlName="tipoReport"
+            class="selected-report"
+          >
+            <mat-option (click)="onChangeSelected(selected.titulo)" *ngFor="let selected of selecteds" value="{{ selected.titulo }}">
+              <span >{{ selected.titulo }}</span>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <mat-icon [hidden]="dateNoVisible"  class="icon-date" matPrefix>date_range</mat-icon>
+        <input [hidden]="dateNoVisible"  (change)="change()" formControlName="dateRange"  [locale]="locale" placeholder="Seleccione fechas" type="text" [maxDate]="maxDate"  ngxDaterangepickerMd class="form-control border-input mat-elevation-z1 p-2 border-radius"/>
+        <button mat-raised-button color="orange" (click)="getAnyReport()" id="download-users" class="ml-2" [disabled]="disableButon">Exportar <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>    
     </form>
+    
   </div>
-  <div class="border-separators ">
-    <p class="mt-0">Reporte Cambio de Datos Bancarios</p>
-    <form
-        [formGroup]="dateReportChangeForm"
-        class="downloadUsers user-transactions"
-        >
-            <mat-icon class="icon-date" matPrefix>date_range</mat-icon>
-            <input (change)="change()" formControlName="dateRange" [locale]="locale" placeholder="Seleccione fechas" type="text" [maxDate]="maxDate"  ngxDaterangepickerMd class="form-control border-input mat-elevation-z1 p-2 border-radius"/>
-            <button mat-raised-button color="orange" (click)="getReportChangeExcel()" id="download-users" class="ml-2" [disabled]="!dateReportChangeForm.valid || disButon">Exportar <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
-    </form>
-  </div>
+  
   <div class="container-search">
     <app-search-users class="searchUser" (search)="searchUser($event)"></app-search-users>
   </div>
 </div>
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <!-- <button mat-raised-button color="orange" (click)="updateEmployee()">Actualizar Usuarios</button> -->
-      <button mat-raised-button color="orange" (click)="exportusers()">Exportar usuarios externos <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
-      
-    </div>
+    
 
     <div id="users-table">
         <app-table-users (dataUser)="userData($event)" (dataEmail)="userEmail($event)" [dataSource]="dataSource" (sortDataUser)="sort($event)"></app-table-users>

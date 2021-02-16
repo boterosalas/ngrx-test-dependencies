@@ -7,6 +7,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 describe('DialogUserComponent', () => {
   let component: DialogUserComponent;
@@ -14,14 +16,15 @@ describe('DialogUserComponent', () => {
 
   const dialogMock = {
     close: () => { }
-   };
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DialogUserComponent ],
+      declarations: [DialogUserComponent],
       imports: [
         AppMaterialModule,
         HttpClientTestingModule,
+        BrowserAnimationsModule,
         RouterTestingModule.withRoutes([]),
         JwtModule.forRoot({
           config: {
@@ -36,13 +39,13 @@ describe('DialogUserComponent', () => {
       ],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
-        {provide: MatDialogRef, useValue: dialogMock},
-       ],
+        { provide: MatDialogRef, useValue: dialogMock },
+      ],
       schemas: [
         NO_ERRORS_SCHEMA
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -95,7 +98,7 @@ describe('DialogUserComponent', () => {
   it('close modal', () => {
     let spy = spyOn(component.dialogRef, 'close').and.callThrough();
     component.onNoClick();
-    expect(spy).toHaveBeenCalled(); 
+    expect(spy).toHaveBeenCalled();
   });
-  
+
 });

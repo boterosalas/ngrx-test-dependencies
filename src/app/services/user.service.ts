@@ -25,7 +25,7 @@ export class UserService {
     //   }
     // })
   }
-
+  urlReports = environment.URL_REPORTS;
   url = environment.URL_PROFILE;
   urlEmployee = environment.URL_VALIDATE_EMPLOYEE;
   apiProfile = "userprofile/GetUserProfile";
@@ -54,7 +54,7 @@ export class UserService {
   apiUpdateEmployees = "userprofile/updateemployees";
   apiGetExternalUsers = "userprofile/getexternalusers";
   apiDeleteUser = "userprofile/deleteaccount"
-
+  apiReporUserGamification = "reports/getreportgamification";
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
 
@@ -451,5 +451,18 @@ export class UserService {
         )
       );
     //`${this.url}${this.apiDeleteUser}`
+  }
+  public getReportGamification() {
+    return this.http
+      .get(`${this.urlReports}${this.apiReporUserGamification}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
   }
 }
