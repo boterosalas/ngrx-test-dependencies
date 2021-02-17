@@ -165,7 +165,6 @@ export class UsersComponent extends MatPaginatorIntl
     }
     const params = { term, from, to, orderOrigin, orderBy };
     this.subscription = this.file.searchUsers(params).subscribe((user: any) => {
-      console.log(user);
       this.users = user.users;
       this.totalItems = user.total;
       this.dataSource = new MatTableDataSource<any>(this.users);
@@ -264,8 +263,6 @@ export class UsersComponent extends MatPaginatorIntl
     const AntdateCed2 = user.mindateidentificationcard2;
     const AntdateCertBank = user.mindatebankcertificate;
 
-    console.log(verified === "No");
-    console.log(user.receiveCommunications)
     if (state === "Inactivo") {
       state = false;
     } else {
@@ -518,11 +515,9 @@ export class UsersComponent extends MatPaginatorIntl
           }
         }
       });
-    console.log(this.dateParamsReport)
   }
 
   change() {
-    console.log("Carga")
     if (this.aux === 0 || this.aux === 1) {
       this.aux = 2
     }
@@ -603,20 +598,20 @@ export class UsersComponent extends MatPaginatorIntl
   }
   public getAnyReport() {
     if (this.dateForm.controls.tipoReport.value === "General") {
-      console.log("General");
+
       this.exportusers();
       //this.disableButon = false;
     } else if (this.dateForm.controls.tipoReport.value === "Cambios de datos bancarios") {
-      console.log("Usuarios");
+
       this.getReportChangeExcel();
       //this.disableButon = false;
     } else if (this.dateForm.controls.tipoReport.value === "Usuarios externos") {
-      console.log("Cambio");
+
       this.getUserExcel();
       //this.disableButon = false;
     } else {
       this.getGamification();
-      console.log("Gamificacion")
+
     }
 
   }

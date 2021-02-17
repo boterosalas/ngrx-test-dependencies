@@ -40,9 +40,9 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
     this.loadFormCategory();
   }
   public loadFormCategory() {
-    console.log("Cargando datos")
+
     if (this.data.edit === 0) {
-      console.log("Cargando h")
+
       this.dateForm = this.fb.group({
         category: [null, Validators.required],
         description: [null, Validators.required],
@@ -71,7 +71,7 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
       this.activebutton = true;
 
     } else {
-      console.log("Cargando else")
+
       this.dateForm = this.fb.group({
         category: [null, Validators.required],
         description: [null, Validators.required],
@@ -102,7 +102,6 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
     let nameFile = event.target.files[0].name;
     let reader = new FileReader();
     let sizeFile = event.target.files[0].size;
-    console.log(event.target.files[0]);
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       let fileBlob = new Blob([file]);
@@ -140,7 +139,6 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
       }
       this.content.addCategory(addCategory).subscribe((resp: ResponseService) => {
         if (resp.state === "Success") {
-          console.log("Categoria creada")
           this.dialogRef.close();
         } else {
           console.log("Upss Hubo un problema vuelve a intentarlo")
@@ -165,7 +163,6 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
         }
         this.content.addCategory(editCategory).subscribe((resp: ResponseService) => {
           if (resp.state === "Success") {
-            console.log("Categoria modificada");
             this.dialogRef.close();
           } else {
             console.log("Upss Hubo un problema vuelve a intentarlo")
@@ -189,7 +186,6 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
 
         this.content.addCategory(editCategory).subscribe((resp: ResponseService) => {
           if (resp.state === "Success") {
-            console.log("Categoria modificada");
             this.dialogRef.close();
           } else {
             console.log("Upss Hubo un problema vuelve a intentarlo")
