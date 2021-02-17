@@ -302,7 +302,6 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
 
   public editAccount() {
     this.activebutton = false;
-    console.log(this.activebutton);
     this.showBankInfoUser = false;
     this.showPassword = true;
     this.loginForm.reset();

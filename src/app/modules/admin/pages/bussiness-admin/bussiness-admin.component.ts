@@ -67,7 +67,6 @@ export class BussinessAdminComponent implements OnInit {
       .subscribe((bussiness) => {
         this.showDeliver = true;
         this.bussinessCategory = bussiness;
-        console.log(bussiness)
       });
 
     //getAllBusinessContent
@@ -84,13 +83,12 @@ export class BussinessAdminComponent implements OnInit {
         orderby: i + 1
       })
     }
-    console.log(datosSourceSend);
     this.saveOrder(datosSourceSend)
   }
   public saveOrder(datos: any) {
     this.content.orderCategory(datos).subscribe((resp: ResponseService) => {
       if (resp.state === "Success") {
-        console.log("Categoria eliminada")
+        console.log("Categoria Ordenada")
       } else {
         console.log("Upss Hubo un problema vuelve a intentarlo")
       }
@@ -173,7 +171,6 @@ export class BussinessAdminComponent implements OnInit {
     let datos = { id: this.datosEliminar.id }
     this.content.deleteCategory(datos).subscribe((resp: ResponseService) => {
       if (resp.state === "Success") {
-        console.log("Categoria eliminada")
         this.dialog.closeAll();
       } else {
         console.log("Upss Hubo un problema vuelve a intentarlo")

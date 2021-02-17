@@ -54,7 +54,6 @@ export class TableActivateBusinessComponent implements OnInit {
   }
 
   editCategory(element: any) {
-    console.log(element)
     this.router.navigate([
       "/bussiness-admin",
       {
