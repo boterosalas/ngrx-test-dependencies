@@ -159,7 +159,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
               "/assets/img/banners/negocios/movil-mobile.jpg";
             this.colorText = "white";
             break;
-          
+
           case "haceb":
             this.imgBanner = "/assets/img/banners/negocios/haceb-pc.jpg";
             this.imgBannerMobile =
@@ -205,15 +205,15 @@ export class BussinessComponent implements OnInit, OnDestroy {
       }
     });
   }
-  
+
   ngOnInit() {
     if (this.title === "movil-exito" ||
-        this.title === "haceb" || 
-        this.title === "puntos-colombia" ||
-        this.title === "seguros" ||
-        this.title === "viajes" ||
-        this.title === "wesura"
-        ) {
+      this.title === "haceb" ||
+      this.title === "puntos-colombia" ||
+      this.title === "seguros" ||
+      this.title === "viajes" ||
+      this.title === "wesura"
+    ) {
       this.showReferenceButton = false;
     }
 
@@ -664,9 +664,10 @@ export class BussinessComponent implements OnInit, OnDestroy {
         this.productsListTransform.forEach((searchExito) => {
           if (!!searchExito.skus[0] && !!searchExito.skus[0].sellers[0]) {
             let sellerSkus = searchExito.skus[0].sellers;
-            let filterSkus = sellerSkus.filter(
-              (idSeller) => idSeller.id === "1" || idSeller.id === "10078"
-            );
+            let filterSkus = sellerSkus
+            //let filterSkus = sellerSkus.filter(
+            //  (idSeller) => idSeller.id === "1" || idSeller.id === "10078"
+            //);
             if (!!filterSkus[0]) {
               this.sellerId = filterSkus[0].id;
               this.sellerName = filterSkus[0].name;
@@ -688,7 +689,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
           };
 
           if (
-            (object.seller === "1" || object.seller === "10078") &&
+            //(object.seller === "1" || object.seller === "10078") &&
             object.oldprice !== 0
           ) {
             this.productsListExito.push(object);
