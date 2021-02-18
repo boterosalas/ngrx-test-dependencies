@@ -91,12 +91,12 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
     let splitExt = nameFile.split(".");
     let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
     this.validFormat = false;
-    if (getExt === "jpg" || getExt === "jpeg" || getExt === "svg") {
+    if (getExt === "svg") {
       this.validFormat = true;
     }
-    if (getSize / 1000 > 100) {
-      this.validFormat = false;
-    }
+    //if (getSize / 1000 > 100) {
+    //  this.validFormat = false;
+    //}
   }
   public onFileChangeFiles(event, param: string) {
     let nameFile = event.target.files[0].name;
