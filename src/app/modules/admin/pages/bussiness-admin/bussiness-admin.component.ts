@@ -8,7 +8,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { DialogCategoryComponent } from '../../components/dialog-category/dialog-category.component'
 import { ResponseService } from 'src/app/interfaces/response';
-
+//import { Router } from '@angular/router';
 export interface PeriodicElement {
   drag: any;
   bussiness: any;
@@ -31,7 +31,7 @@ export class BussinessAdminComponent implements OnInit {
   @ViewChild('table', { static: false }) table: MatTable<PeriodicElement>;
   @ViewChild("templateDeleteCategory", { static: false })
   templateDelete: TemplateRef<any>;
-  displayedColumns: string[] = ['drag', 'image', 'name', 'comission', 'typeCommision', 'commisionBussiness', 'state', 'actions'];
+  displayedColumns: string[] = ['drag', 'image', 'name', 'comission', 'typeCommision', 'commisionClicker', 'commisionBussiness', 'state', 'actions'];
   constructor(
     private content: ContentService,
     private route: ActivatedRoute,

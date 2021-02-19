@@ -4,10 +4,17 @@
   imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
 ></app-banner>
 <div class="container mt-3">
-    <div fxLayout="row" >
-        <img class="image-bussiness" [src]="image" alt="">
-        <span> <h3>{{title}} / Categorias</h3></span>
+    <div fxLayout="row" fxLayoutAlign="space-between" >
+        <div fxLayout="row">
+            <img class="image-bussiness" [src]="image" alt="">
+            <span> <h3>{{title}} / Categorías</h3></span>
+        </div>
+        <span fxLayout="row" >
+            <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
+            <p ngClass.gt-xs="f-20" class="cursor-pointer text-underline purple-text" [routerLink]="[ '/negocios-admin']" >Regresar</p>
+          </span>
     </div>
+    
     <div fxLayout="row" fxLayoutGap="15px" class="mb-3 mt-3">
         <div fxLayout="column" fxFlex="100">
             <table mat-table #table class="mat-elevation-z2"  
@@ -63,6 +70,16 @@
                             </span>
                             <span *ngIf="element.typecommission === 'FIJO'" fxLayout="column" class="text-information" >
                                 Fijo ($)
+                            </span>
+                        </div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="commisionClicker">
+                    <th class="w-th2" mat-header-cell *matHeaderCellDef> COMISIÓN DEL CLICKER </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign.gt-xs="start center" fxLayoutAlign.xs="center center">
+                            <span fxLayout="column" class="text-information" >
+                                {{ element.commission }}
                             </span>
                         </div>
                     </td>
