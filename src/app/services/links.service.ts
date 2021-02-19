@@ -56,7 +56,8 @@ export class LinksService {
   apiSaveAmountReferred = "amount/saveamountreferred";
   apiGetmedals = "medal/getmedals";
   apiPicking = "picking/importfilepickingcommissions"
-  apiOrder = "business/orderbusiness"
+  apiOrder = "business/orderbusiness";
+  apiSellers = "seller/getsellers";
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
 
@@ -585,6 +586,27 @@ export class LinksService {
             tap((errorStatus) => { })
           )
         )
+      );
+  }
+
+  public getSellers() {
+    //apiSellers
+    return this.http
+      .get(
+        `${this.urlComission}${this.apiSellers}`,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((user: any) => {
+          return user.objectResponse;
+        })
       );
   }
 }
