@@ -40,7 +40,7 @@ describe("BussinessComponent", () => {
     "biggySearchCarulla",
   ]);
 
-  const mockLinksService = jasmine.createSpyObj("LinksService", ["saveLink"]);
+  const mockLinksService = jasmine.createSpyObj("LinksService", ["saveLink", "getSellers"]);
 
   const mockUserService = jasmine.createSpyObj("UserService", [
     "getShortUrl",
@@ -102,6 +102,14 @@ describe("BussinessComponent", () => {
     },
   };
 
+  const respseller = {
+    state: "Success",
+    userMessage: "se ha listado los vendedores",
+    objectResponse: {
+      sellersExito: ["1"],
+      sellersMarketPlace: ["10003"]
+    },
+  };
   const registerOk = {
     state: "Success",
     userMessage: "se ha registrado",
@@ -163,7 +171,9 @@ describe("BussinessComponent", () => {
     mockUserService.getShortUrl.and.returnValue(
       of("http://tynyurl.com/12kusw")
     );
+    //getSellers
     mockLinksService.saveLink.and.returnValue(of(resp));
+    mockLinksService.getSellers.and.returnValue(of(respseller));
   }));
 
   beforeEach(() => {
