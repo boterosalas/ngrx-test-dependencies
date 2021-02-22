@@ -610,7 +610,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   }
 
   public onFileChangeFilesCed1(event, param: string) {
-    console.log("Ejecuta 2")
+    //console.log("Ejecuta 2")
     let nameFile = event.target.files[0].name;
     let reader = new FileReader();
     if (event.target.files && event.target.files.length) {

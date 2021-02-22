@@ -35,7 +35,8 @@ export class BussinessComponent implements OnInit, OnDestroy {
   percent: string;
   percentBussiness: string = "Hasta 9.6%";
   bussiness = [];
-
+  sellersExito: Array<any>
+  sellersMarketPlace: Array<any>
   @ViewChild("templateTerms", { static: false })
   templateTerms: TemplateRef<any>;
 
@@ -58,7 +59,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   imgBanner: string;
   imgBannerMobile: string;
   colorText: string;
-  exceptionsMarketPlace: Array<string>;
+
   @ViewChild("templateCategories", { static: false })
   templateCategories: TemplateRef<any>;
   @ViewChild("templateDialogAssured", { static: false })
@@ -220,6 +221,11 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.getDate();
     this.getContentBussiness();
     this.getUserData();
+    this.links.getSellers().subscribe((resp: any) => {
+      //this.sellers = [...resp.sellersExito, ...resp.sellersMarketPlace]
+      this.sellersExito = resp.sellersExito;
+      this.sellersMarketPlace = resp.sellersMarketPlace;
+    })
     if (localStorage.getItem("ACCESS_TOKEN") !== null) {
       this.identification = this.token.userInfo().identification;
     }
@@ -246,42 +252,8 @@ export class BussinessComponent implements OnInit, OnDestroy {
       { value: "OrderByNameASC", description: "Productos de la A-Z" },
       { value: "OrderByNameDESC", description: "Productos de la Z-A" },
     ];
-    this.exceptionsMarketPlace = [
-      "100001",
-      "100002",
-      "100003",
-      "100005",
-      "100006",
-      "100007",
-      "100008",
-      "100010",
-      "100011",
-      "100012",
-      "100013",
-      "100014",
-      "100015",
-      "100016",
-      "100023",
-      "100024",
-      "100026",
-      "100027",
-      "100029",
-      "100030",
-      "100031",
-      "100037",
-      "100041",
-      "100042",
-      "100048",
-      "100051",
-      "100060",
-      "100062",
-      "100066"
-    ]
+
   }
-
-
-
-
 
 
   // public order(option:string) {
@@ -690,13 +662,11 @@ export class BussinessComponent implements OnInit, OnDestroy {
       accion: "ClicBuscar",
       etiqueta: term,
     });
-
     const params = { term, order, page, count };
     this.subscription = this.sp.biggySearchExito(params).subscribe(
       (searchExito: any) => {
         this.productsListBiggy = searchExito.products;
         this.productsListTransform = [...this.productsListBiggy];
-
         this.productsListTransform.forEach((searchExito) => {
           if (!!searchExito.skus[0] && !!searchExito.skus[0].sellers[0]) {
             let sellerSkus = searchExito.skus[0].sellers;
@@ -705,21 +675,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
             //  (idSeller) => idSeller.id === "1" || idSeller.id === "10078"
             //);
             let filterSkus = sellerSkus.filter(
-              (idSeller) => idSeller.id !== this.exceptionsMarketPlace[0] ||
-                idSeller.id !== this.exceptionsMarketPlace[1] || idSeller.id !== this.exceptionsMarketPlace[2] ||
-                idSeller.id !== this.exceptionsMarketPlace[3] || idSeller.id !== this.exceptionsMarketPlace[4] ||
-                idSeller.id !== this.exceptionsMarketPlace[5] || idSeller.id !== this.exceptionsMarketPlace[6] ||
-                idSeller.id !== this.exceptionsMarketPlace[7] || idSeller.id !== this.exceptionsMarketPlace[8] ||
-                idSeller.id !== this.exceptionsMarketPlace[9] || idSeller.id !== this.exceptionsMarketPlace[10] ||
-                idSeller.id !== this.exceptionsMarketPlace[11] || idSeller.id !== this.exceptionsMarketPlace[12] ||
-                idSeller.id !== this.exceptionsMarketPlace[13] || idSeller.id !== this.exceptionsMarketPlace[14] ||
-                idSeller.id !== this.exceptionsMarketPlace[15] || idSeller.id !== this.exceptionsMarketPlace[16] ||
-                idSeller.id !== this.exceptionsMarketPlace[17] || idSeller.id !== this.exceptionsMarketPlace[18] ||
-                idSeller.id !== this.exceptionsMarketPlace[19] || idSeller.id !== this.exceptionsMarketPlace[20] ||
-                idSeller.id !== this.exceptionsMarketPlace[21] || idSeller.id !== this.exceptionsMarketPlace[22] ||
-                idSeller.id !== this.exceptionsMarketPlace[23] || idSeller.id !== this.exceptionsMarketPlace[24] ||
-                idSeller.id !== this.exceptionsMarketPlace[25] || idSeller.id !== this.exceptionsMarketPlace[26] ||
-                idSeller.id !== this.exceptionsMarketPlace[27]
+              (idSeller) => this.sellersExito.includes(idSeller.id) || this.sellersMarketPlace.includes(idSeller.id)
             );
             if (!!filterSkus[0]) {
               this.sellerId = filterSkus[0].id;
@@ -742,20 +698,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
           };
 
           if (
-            (object.seller !== this.exceptionsMarketPlace[0] || object.seller !== this.exceptionsMarketPlace[1] ||
-              object.seller !== this.exceptionsMarketPlace[2] || object.seller !== this.exceptionsMarketPlace[3] ||
-              object.seller !== this.exceptionsMarketPlace[4] || object.seller !== this.exceptionsMarketPlace[5] ||
-              object.seller !== this.exceptionsMarketPlace[6] || object.seller !== this.exceptionsMarketPlace[7] ||
-              object.seller !== this.exceptionsMarketPlace[8] || object.seller !== this.exceptionsMarketPlace[9] ||
-              object.seller !== this.exceptionsMarketPlace[10] || object.seller !== this.exceptionsMarketPlace[11] ||
-              object.seller !== this.exceptionsMarketPlace[12] || object.seller !== this.exceptionsMarketPlace[13] ||
-              object.seller !== this.exceptionsMarketPlace[14] || object.seller !== this.exceptionsMarketPlace[15] ||
-              object.seller !== this.exceptionsMarketPlace[16] || object.seller !== this.exceptionsMarketPlace[17] ||
-              object.seller !== this.exceptionsMarketPlace[18] || object.seller !== this.exceptionsMarketPlace[19] ||
-              object.seller !== this.exceptionsMarketPlace[20] || object.seller !== this.exceptionsMarketPlace[21] ||
-              object.seller !== this.exceptionsMarketPlace[22] || object.seller !== this.exceptionsMarketPlace[23] ||
-              object.seller !== this.exceptionsMarketPlace[24] || object.seller !== this.exceptionsMarketPlace[25] ||
-              object.seller !== this.exceptionsMarketPlace[26] || object.seller !== this.exceptionsMarketPlace[27]
+            (this.sellersExito.includes(object.seller) || this.sellersMarketPlace.includes(object.seller)
             ) &&
             object.oldprice !== 0
           ) {
