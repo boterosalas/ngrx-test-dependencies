@@ -264,7 +264,7 @@ describe("UsersComponent", () => {
     expect(mockUserService.updateUserEmail).toHaveBeenCalled();
   });
   it("general change", () => {
-    component.onChangeSelected("General");
+    component.onChangeSelected("Datos de gamificación");
     expect(component.disableButon).toBeFalsy();
   })
   it("other change", () => {
@@ -273,6 +273,9 @@ describe("UsersComponent", () => {
   })
   it('get first report', () => {
     component.dateForm.controls.tipoReport.setValue("General");
+    let start = moment();
+    let end = moment("12-01-2020");
+    component.dateForm.controls.dateRange.setValue({ startDate: start, endDate: end });
     component.getAnyReport();
     let datos = true;
     expect(datos).toBeTruthy();
