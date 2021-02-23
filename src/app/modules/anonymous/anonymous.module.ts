@@ -35,6 +35,7 @@ import {
   RECAPTCHA_SETTINGS,
   RecaptchaSettings,
 } from "ng-recaptcha";
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { UrlComponent } from "./pages/url/url.component";
 import { ActivateAccountFormComponent } from "./components/activate-account-form/activate-account-form.component";
 import { SlideVideoComponent } from "./components/slide-video/slide-video.component";
@@ -80,6 +81,7 @@ import { ExtraQuestionsComponent } from './pages/help-center/contact-us/extra-qu
 import { HowWorksClickamComponent } from './components/how-works-clickam/how-works-clickam.component';
 import { SliderWorksComponent } from './components/slider-works/slider-works.component';
 import { HomeSlideVideoComponent } from './components/home-slide-video/home-slide-video.component';
+import { ReportNewsComponent } from './pages/help-center/report-news/report-news.component';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 
 const routes: Routes = [
@@ -306,6 +308,15 @@ const routes: Routes = [
     ]
   },
   {
+    path: "centro-de-ayuda/reportar",
+    children: [
+      {
+        path: "",
+        component: ReportNewsComponent,
+      }
+    ]
+  },
+  {
     path: "terminos-y-condiciones",
     component: TermsAndConditionsComponent,
   },
@@ -384,6 +395,7 @@ const routes: Routes = [
     HowWorksClickamComponent,
     SliderWorksComponent,
     HomeSlideVideoComponent,
+    ReportNewsComponent,
     // ReportComponent
   ],
   imports: [
@@ -401,6 +413,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     MatPasswordStrengthModule,
     RecaptchaV3Module,
+    NgxDaterangepickerMd.forRoot(),
   ],
   exports: [
     RouterModule,
@@ -422,4 +435,4 @@ const routes: Routes = [
     },
   ],
 })
-export class AnonymousModule {}
+export class AnonymousModule { }

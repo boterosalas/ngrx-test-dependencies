@@ -99,5 +99,11 @@
       </mat-list>
 
     </mat-expansion-panel>
+    
+    <mat-expansion-panel *ngIf="reportVisible" [expanded]="step === 9" (opened)="setStep(9)"  class="help-center">
+      <mat-expansion-panel-header  class="head gtmCentroDeAyudaClicMenuscontactanos">
+       <span class="gtmCentroDeAyudaClicMenuscontactanos" [routerLink]="['/centro-de-ayuda/reportar']" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">REPORTAR NOVEDAD</span> 
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
   
   </mat-accordion>
