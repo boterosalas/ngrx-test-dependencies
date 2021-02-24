@@ -41,18 +41,7 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
   }
   public loadFormCategory() {
 
-    if (this.data.edit === 0) {
-
-      this.dateForm = this.fb.group({
-        category: [null, Validators.required],
-        description: [null, Validators.required],
-        tipoCommision: [null, Validators.required],
-        commision: [null, Validators.required],
-        link: [null, Validators.required],
-        image: [null, Validators.required],
-        commisionBussiness: [null, Validators.required]
-      });
-    } else if (this.data.edit === 1) {
+    if (this.data.edit === 1) {
       let dataImage = this.data.image;
       let datosImg = dataImage.split("/")
       this.nameFileCert = datosImg[datosImg.length - 1];
@@ -124,8 +113,9 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
     }
   }
   public agregarCategory() {
+    let addCategory;
     if (this.data.edit === 0) {
-      let addCategory = {
+      addCategory = {
         description: this.dateForm.controls.category.value,
         infoAditional: this.dateForm.controls.description.value,
         typeCommission: this.dateForm.controls.tipoCommision.value,
@@ -137,18 +127,10 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
         commissionBusiness: this.dateForm.controls.commisionBussiness.value,
         idBusiness: this.data.idBussiness
       }
-      this.content.addCategory(addCategory).subscribe((resp: ResponseService) => {
-        if (resp.state === "Success") {
-          this.dialogRef.close();
-        } else {
-          console.log("Upss Hubo un problema vuelve a intentarlo")
-        }
-      });
 
     } else {
-      let editCategory
       if (this.fileImgCat) {
-        editCategory = {
+        addCategory = {
           id: this.data.id,
           description: this.dateForm.controls.category.value,
           infoAditional: this.dateForm.controls.description.value,
@@ -161,16 +143,9 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
           commissionBusiness: this.dateForm.controls.commisionBussiness.value,
           idBusiness: this.data.idBussiness
         }
-        this.content.addCategory(editCategory).subscribe((resp: ResponseService) => {
-          if (resp.state === "Success") {
-            this.dialogRef.close();
-          } else {
-            console.log("Upss Hubo un problema vuelve a intentarlo")
-          }
-        });
       } else {
 
-        editCategory = {
+        addCategory = {
           id: this.data.id,
           description: this.dateForm.controls.category.value,
           infoAditional: this.dateForm.controls.description.value,
@@ -183,16 +158,15 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
           commissionBusiness: this.dateForm.controls.commisionBussiness.value,
           idBusiness: this.data.idBussiness
         }
-
-        this.content.addCategory(editCategory).subscribe((resp: ResponseService) => {
-          if (resp.state === "Success") {
-            this.dialogRef.close();
-          } else {
-            console.log("Upss Hubo un problema vuelve a intentarlo")
-          }
-        });
       }
     }
+    this.content.addCategory(addCategory).subscribe((resp: ResponseService) => {
+      if (resp.state === "Success") {
+        this.dialogRef.close();
+      } else {
+        console.log("Upss Hubo un problema vuelve a intentarlo")
+      }
+    });
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
