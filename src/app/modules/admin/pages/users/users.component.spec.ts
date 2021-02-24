@@ -44,7 +44,10 @@ describe("UsersComponent", () => {
     "updateUserEmail",
     "updateEmployees",
     "getExternalUsers",
-    "getReportGamification"
+    "getReportGamification",
+    "statusUser",
+    "comunitcations",
+    "verifiedUser"
   ]);
 
   const dataUser = {
@@ -186,7 +189,10 @@ describe("UsersComponent", () => {
     mockUserService.updateEmployees.and.returnValue(of(updtaeEmployee));
     mockUserService.updateEmployees.and.returnValue(of(updtaeEmployeeError));
     mockUserService.getReportGamification.and.returnValue(of(getUserExcel))
-    //mockUserService.getExternalUser.and.returnValue(of(getUserExcel));
+    mockUserService.statusUser.and.returnValue(of(getUserExcel))
+    mockUserService.comunitcations.and.returnValue(of(getUserExcel))
+    mockUserService.verifiedUser.and.returnValue(of(getUserExcel))
+    //mockUserService.getExternalUser.and.returnValue(of(getUserExcel));verifiedUser
     fixture = TestBed.createComponent(UsersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -313,5 +319,6 @@ describe("UsersComponent", () => {
     component.getAnyReport();
     let datos = true;
     expect(datos).toBeTruthy();
-  })
+  });
+
 });

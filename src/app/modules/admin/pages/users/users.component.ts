@@ -384,7 +384,7 @@ export class UsersComponent extends MatPaginatorIntl
     });
   }
 
-  private changeComunications(userId, value) {
+  public changeComunications(userId, value) {
     this.subscription = this.usersService
       .comunitcations(userId, value)
       .subscribe((user: any) => {
@@ -433,7 +433,7 @@ export class UsersComponent extends MatPaginatorIntl
     }
   }
 
-  private changeStateUser(userId, value) {
+  public changeStateUser(userId, value) {
     this.subscription = this.usersService
       .statusUser(userId, value)
       .subscribe(() => {
@@ -445,7 +445,7 @@ export class UsersComponent extends MatPaginatorIntl
       });
   }
 
-  private changeVerified(userId, value) {
+  public changeVerified(userId, value) {
     this.subscription = this.usersService
       .verifiedUser(userId, value)
       .subscribe(() => {
@@ -592,12 +592,12 @@ export class UsersComponent extends MatPaginatorIntl
 
   }
   public getGamification() {
-    this.subscription = this.usersService.getReportGamification().subscribe((respExport: ResponseService) => {
+    this.subscription = this.usersService.getReportGamification().subscribe((respuExportGamification: ResponseService) => {
       this.dateForm.reset();
       if (this.dateForm.controls.dateRange.value.startDate === null) {
         this.disableButon = true;
       }
-      this.openSnackBar(respExport.userMessage, 'Cerrar');
+      this.openSnackBar(respuExportGamification.userMessage, 'Cerrar');
     })
   }
   public getAnyReport() {
