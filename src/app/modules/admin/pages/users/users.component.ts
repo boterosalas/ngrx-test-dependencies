@@ -488,9 +488,9 @@ export class UsersComponent extends MatPaginatorIntl
 
     this.subscription = this.file
       .getUsersExcel(this.dateParams)
-      .subscribe((respExcel: ResponseService) => {
-        if (respExcel.state === "Success") {
-          this.openSnackBar(respExcel.userMessage, "Cerrar");
+      .subscribe((responseExcel: ResponseService) => {
+        if (responseExcel.state === "Success") {
+          this.openSnackBar(responseExcel.userMessage, "Cerrar");
           this.dateForm.reset();
           if (this.dateForm.controls.dateRange.value.startDate === null) {
             //this.disButon = true;
