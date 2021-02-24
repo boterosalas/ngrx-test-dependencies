@@ -37,6 +37,9 @@ import { LinkGeneratorFormComponent } from './components/link-generator-form/lin
 import { TableActivateBusinessComponent } from './components/table-activate-business/table-activate-business.component';
 import { BussinessAdminComponent } from './pages/bussiness-admin/bussiness-admin.component';
 import { DialogCategoryComponent } from './components/dialog-category/dialog-category.component';
+import { NewsAdminComponent } from './pages/news-admin/news-admin.component';
+import { DialogNewsComponent } from './components/dialog-news/dialog-news.component';
+
 
 const routes: Routes = [
   {
@@ -96,6 +99,14 @@ const routes: Routes = [
     },
   },
   {
+    path: "novedades",
+    component: NewsAdminComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN"
+    },
+  },
+  {
     path: "bussiness-admin",
     component: BussinessAdminComponent,
     canActivate: [RoleGuard],
@@ -128,6 +139,8 @@ const routes: Routes = [
     TableActivateBusinessComponent,
     BussinessAdminComponent,
     DialogCategoryComponent,
+    NewsAdminComponent,
+    DialogNewsComponent,
   ],
   imports: [
     CommonModule,
@@ -169,7 +182,7 @@ const routes: Routes = [
     })
   ],
   exports: [SideMenuComponent],
-  entryComponents: [DialogUserComponent, DialogCategoryComponent],
+  entryComponents: [DialogUserComponent, DialogCategoryComponent, DialogNewsComponent],
   providers: [{ provide: MatPaginatorIntl, useClass: UsersComponent }]
 })
 export class AdminModule { }
