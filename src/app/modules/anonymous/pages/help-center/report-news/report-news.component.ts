@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms"
 import * as moment from "moment";
 import { ContentService } from 'src/app/services/content.service';
 import { UserService } from 'src/app/services/user.service';
-
+import Swal from "sweetalert2";
 moment.locale("es");
 @Component({
   selector: 'app-report-news',
@@ -44,10 +44,6 @@ export class ReportNewsComponent implements OnInit {
       this.dataSource = resp;
       console.log(this.dataSource)
     })
-
-  }
-  public change() {
-    console.log("Change")
   }
   private getExtension(nameFile: string, getSize: number) {
     let splitExt = nameFile.split(".");
@@ -86,32 +82,44 @@ export class ReportNewsComponent implements OnInit {
     }
   }
   public onChangeSelected(selected: string) {
-    console.log(selected);
     this.visibleLeft = true;
     this.placeholder = selected;
 
   }
   public sendMessage() {
     let data = {
-      dateReport: this.dateForm.controls.dateRange.value,
-      bussiness: this.dateForm.controls.bussiness.value,
-      reference: this.dateForm.controls.reference.value,
+      datenovelty: this.dateForm.controls.dateRange.value,
+      idbusiness: this.dateForm.controls.bussiness.value,
+      code: this.dateForm.controls.reference.value,
       description: this.dateForm.controls.description.value,
-      imageName: this.nameFileCert
+      document: this.fileImgCat,
+      documenturl: this.nameFileCert
     }
-    let dataImg = {
-      image: this.fileImgCat
-    }
-    this.users.saveNews(data).subscribe(resp => {
-      this.dataSource = resp;
-      console.log(this.dataSource)
+    //let dataImg = {
+    //  image: this.fileImgCat
+    //}
+
+    this.users.saveNews(data).subscribe((resp: any) => {
+      if (resp.state === "Success") {
+        this.dateForm.reset();
+        this.visibleLeft = false;
+        this.nameFileCert = "";
+        this.fileImgCat = "";
+        Swal.fire({
+          text: 'Tu reporte ha sido enviado con éxito, el número de radicado es: ' + resp.objectResponse,
+          type: "success",
+          confirmButtonText: "Aceptar",
+          confirmButtonClass: "upload-success"
+        });
+      }
+
     });
-    if (this.nameFileCert) {
-      this.users.uploadFileNews(dataImg).subscribe(resp => {
-        this.dataSource = resp;
-        console.log(this.dataSource)
-      });
-    }
+    //if (this.nameFileCert) {
+    //  this.users.uploadFileNews(dataImg).subscribe(resp => {
+    //    this.dataSource = resp;
+    //    console.log(this.dataSource)
+    //  });
+    //}
 
   }
 

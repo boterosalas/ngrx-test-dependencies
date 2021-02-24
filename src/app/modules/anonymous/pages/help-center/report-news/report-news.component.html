@@ -58,7 +58,7 @@
                                   formControlName="bussiness"
                                   class="selected-bussiness"
                                 >
-                                  <mat-option (click)="onChangeSelected(selected.description)" *ngFor="let selected of dataSource" value="{{ selected.id }}">
+                                  <mat-option (click)="onChangeSelected(selected.placeholder)" *ngFor="let selected of dataSource" value="{{ selected.id }}">
                                     <span >{{ selected.description }}</span>
                                   </mat-option>
                                 </mat-select>

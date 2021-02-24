@@ -139,7 +139,9 @@ input[type="file"] {
     width: 100%;
   }
   .form-control {
-    width: 100%;
+    width: 90%;
+    position: absolute;
+    right: 20px;
   }
   .selected-bussiness {
     width: 100%;
