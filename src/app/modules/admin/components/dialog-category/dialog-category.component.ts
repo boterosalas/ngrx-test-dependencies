@@ -80,7 +80,7 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
     let splitExt = nameFile.split(".");
     let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
     this.validFormat = false;
-    if (getExt === "svg") {
+    if (getExt === "svg" || getExt === "jpg") {
       this.validFormat = true;
     }
     //if (getSize / 1000 > 100) {
