@@ -57,7 +57,8 @@ export class UserService {
   apiReporUserGamification = "reports/getreportgamification";
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
-
+  apiSaveNews = "new/savenew";
+  apiUploadNews = "new/uploadnew";
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
@@ -464,5 +465,41 @@ export class UserService {
           )
         )
       );
+  }
+  public saveNews(data: any) {
+    return this.http
+      .post(
+        `${this.url}${this.apiSaveNews}`,
+        data,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+    //`${this.url}${this.apiDeleteUser}`
+  }
+  public uploadFileNews(data: any) {
+    return this.http
+      .post(
+        `${this.url}${this.apiUploadNews}`,
+        data,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+    //`${this.url}${this.apiDeleteUser}`
   }
 }

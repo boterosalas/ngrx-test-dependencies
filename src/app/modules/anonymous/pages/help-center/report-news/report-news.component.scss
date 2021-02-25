@@ -1,0 +1,152 @@
+@import "variables";
+@import "general";
+@import "animations";
+
+.card-report-dark {
+  background-color: #f1f3f6;
+  padding: 18px;
+  border-radius: 10px;
+}
+.margin-zero-bottom {
+  margin-bottom: 0;
+}
+.margin-zero-top {
+  margin-top: 0;
+}
+.report-news {
+  border-bottom: 1px solid #d2d0d4;
+}
+.form-control {
+  padding-left: 35px !important;
+  font-family: $font-galano !important;
+  text-align: end;
+  width: 250px;
+  position: relative;
+  right: 40px;
+}
+.border-input {
+  border: none;
+  outline: none;
+  height: 32px;
+}
+
+.border-radius {
+  border-radius: 5px;
+}
+.icon-date {
+  position: relative;
+  bottom: 8px;
+  //left: 15px;
+}
+.border-bottom-zero {
+  border-bottom: 0px;
+}
+.label-up-text {
+  color: #a7a3b1;
+  font-family: $font-galano-bold !important;
+  margin-top: 15px;
+  font-size: 11px;
+}
+.label-up-text-selected {
+  color: #a7a3b1;
+  font-family: $font-galano-bold !important;
+  margin-top: 15px;
+  font-size: 14px;
+}
+.selected-bussiness {
+  width: 250px;
+  border-bottom: 1px solid #949494;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.selected-bussiness-text {
+  width: 250px;
+  margin-top: 10px;
+}
+
+.description-bussiness {
+  width: 80%;
+  height: 139px;
+}
+.text-area-heigth {
+  width: 80%;
+  height: 90px;
+  border-bottom: 1px solid #949494;
+  margin-bottom: 5px;
+}
+textarea::placeholder {
+  color: #d2d0d4;
+  font-size: 16px;
+  font-family: $font-galano !important;
+}
+
+input[type="file"] {
+  display: none;
+}
+.file-width-space {
+  width: 80%;
+}
+
+//___________
+.w-icon {
+  width: 30px;
+}
+
+.title-gray {
+  color: #a7a3b1;
+  font-size: 11px;
+  font-family: "galano-bold", sans-serif;
+}
+.title-secondary {
+  color: #a7a3b1;
+  font-size: 12px;
+}
+.file-input {
+  color: #37236a;
+  font-weight: bold;
+  font-size: 12px;
+}
+.text-small {
+  font-size: 11px;
+  width: 80%;
+}
+.send-button {
+  width: 100px;
+}
+.send-area {
+  width: 80%;
+}
+.w-status {
+  width: 80%;
+}
+@media screen and (max-width: 425px) {
+  .w-status {
+    width: 100%;
+  }
+  .send-area {
+    width: 100%;
+  }
+  .text-small {
+    width: 100%;
+  }
+  .file-width-space {
+    width: 100%;
+  }
+  .text-area-heigth {
+    width: 100%;
+  }
+  .description-bussiness {
+    width: 100%;
+  }
+  .form-control {
+    width: 90%;
+    right: 20px;
+    position: absolute;
+  }
+  .selected-bussiness {
+    width: 100%;
+  }
+  .selected-bussiness-text {
+    width: 100%;
+  }
+}

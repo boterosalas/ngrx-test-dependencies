@@ -1709,7 +1709,37 @@ joy-close-button.joyride-step__close svg {
     overflow: hidden;
   }
 }
+.image-clickacademy {
+  position: relative !important;
+  @media screen and (max-width: 600px) {
+    image {
+      width: 100%;
+      height: auto;
+    }
+  }
 
+  #image-modal {
+    position: relative;
+  }
+
+  .top-generic {
+    position: absolute;
+    right: 0;
+  }
+
+  .mat-dialog-content {
+    padding: 0;
+    margin: 0;
+  }
+
+  .mat-dialog-container {
+    padding: 0;
+    overflow: hidden;
+  }
+}
+.backdropBackground {
+  background: rgb(0 0 0 / 74%) !important;
+}
 .promo-home {
   position: relative !important;
   // width: 100%;

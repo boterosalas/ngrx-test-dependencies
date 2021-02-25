@@ -12,7 +12,7 @@ describe('ProductComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ],
+      declarations: [],
       imports: [
         SharedModule,
         AppMaterialModule,
@@ -24,7 +24,7 @@ describe('ProductComponent', () => {
         NO_ERRORS_SCHEMA
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -35,12 +35,10 @@ describe('ProductComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('product change', () => {
     spyOn(component.infoProduct, 'emit');
     component.product();
     expect(component.infoProduct.emit).toHaveBeenCalled();
   });
+
 
 });

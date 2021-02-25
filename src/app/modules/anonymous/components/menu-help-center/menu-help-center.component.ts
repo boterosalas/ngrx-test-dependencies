@@ -8,7 +8,9 @@ import { Location } from "@angular/common";
 })
 export class MenuHelpCenterComponent implements OnInit {
   step: number = 0;
-
+  token = localStorage.getItem("ACCESS_TOKEN");
+  authorization = this.token;
+  reportVisible: boolean;
   constructor(location: Location) {
     let urlLocation = location.prepareExternalUrl(location.path());
     let SplitLocation = urlLocation.split("/");
@@ -40,7 +42,9 @@ export class MenuHelpCenterComponent implements OnInit {
       case "contactanos":
         this.step = 8;
         break;
-
+      case "reportar":
+        this.step = 9;
+        break;
       default:
         this.step = 0;
         break;
@@ -180,7 +184,7 @@ export class MenuHelpCenterComponent implements OnInit {
       name: "¿Dónde puedo encontrar las mejores ofertas?",
       route:
         "/centro-de-ayuda/ofertas/donde-puedo-encontrar-las-mejores-ofertas",
-        class: "dondepuedoencontrarlasmejoresofertas",
+      class: "dondepuedoencontrarlasmejoresofertas",
     },
     {
       name: "Preferencias de correo",
@@ -194,19 +198,19 @@ export class MenuHelpCenterComponent implements OnInit {
       name: "¿Quién es el tomador de un seguro?",
       route:
         "/centro-de-ayuda/otras-preguntas-frecuentes/quien-es-el-tomador-de-un-seguro",
-        class: "quieneseltomadordeunseguro",
+      class: "quieneseltomadordeunseguro",
     },
     {
       name: "¿Qué es un producto Marketplace?",
       route:
         "/centro-de-ayuda/otras-preguntas-frecuentes/que-es-un-producto-marketplace",
-        class: "queesunproductomarketplace",
+      class: "queesunproductomarketplace",
     },
     {
       name: "¿Cuáles son los medios de pago de cada negocio?",
       route:
         "/centro-de-ayuda/otras-preguntas-frecuentes/cuales-son-los-medios-de-pago-de-cada-negocio",
-        class: "cualessonlosmediosdepagodecadanegocio",
+      class: "cualessonlosmediosdepagodecadanegocio",
     },
   ];
 
@@ -223,11 +227,17 @@ export class MenuHelpCenterComponent implements OnInit {
       name: "Dónde puedo contactarme si tengo preguntas extras",
       route:
         "/centro-de-ayuda/contactanos/donde-puedo-contactarme-si-tengo-preguntas-extras",
-        class: "dondepuedocontactarmesitengopreguntasextras",
+      class: "dondepuedocontactarmesitengopreguntasextras",
     },
   ];
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.authorization) {
+      this.reportVisible = true;
+    } else {
+      this.reportVisible = false;
+    }
+  }
 
   setStep(index: number) {
     this.step = index;
