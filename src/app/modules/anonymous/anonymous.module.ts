@@ -81,7 +81,7 @@ import { HowWorksClickamComponent } from './components/how-works-clickam/how-wor
 import { SliderWorksComponent } from './components/slider-works/slider-works.component';
 import { HomeSlideVideoComponent } from './components/home-slide-video/home-slide-video.component';
 // import { ReportComponent } from '../clicker/components/report/report.component';
-
+import { ReportNewsComponent } from './pages/help-center/report-news/report-news.component';
 const routes: Routes = [
   {
     path: "",
@@ -306,6 +306,15 @@ const routes: Routes = [
     ]
   },
   {
+    path: "centro-de-ayuda/reportar",
+    children: [
+      {
+        path: "",
+        component: ReportNewsComponent,
+      }
+    ]
+  },
+  {
     path: "terminos-y-condiciones",
     component: TermsAndConditionsComponent,
   },
@@ -384,6 +393,7 @@ const routes: Routes = [
     HowWorksClickamComponent,
     SliderWorksComponent,
     HomeSlideVideoComponent,
+    ReportNewsComponent
     // ReportComponent
   ],
   imports: [
@@ -422,4 +432,4 @@ const routes: Routes = [
     },
   ],
 })
-export class AnonymousModule {}
+export class AnonymousModule { }
