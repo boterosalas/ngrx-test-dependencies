@@ -102,10 +102,11 @@ export class ReportNewsComponent implements OnInit {
             documenturl: this.nameFileCert
         }
 
+
         this.users.saveNews(data).subscribe((resp: any) => {
             if (resp.state === "Success") {
                 Swal.fire({
-                    text: "Tu reporte ha sido enviado con éxito, el número de radicado es: " + resp.objectResponse,
+                    html: "Tu reporte ha sido enviado con éxito, el número de radicado es: <b class='bold-blue'>" + 12222 + "</b>",
                     type: "success",
                     confirmButtonText: "Aceptar",
                     confirmButtonClass: "upload-success"

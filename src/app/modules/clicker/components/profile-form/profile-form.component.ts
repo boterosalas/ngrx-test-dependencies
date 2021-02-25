@@ -704,7 +704,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       (resp: any) => {
         if (resp.state === "Success") {
           Swal.fire({
-            text: "Tu cuenta se ha eliminado con exito",
+            text: "Tu cuenta se ha eliminado con éxito",
             type: "success",
             confirmButtonText: "Aceptar",
             confirmButtonClass: "upload-success"

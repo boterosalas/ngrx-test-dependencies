@@ -266,7 +266,7 @@
                           </mat-form-field>
                           <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
                             <div fxLayout="column" fxLayoutAlign="center" class="space">
-                              <strong class="title-gray">ADJUNTAR IMAGEN (500X500PX, FORMATO .SVG, MAX 100KB)</strong>
+                              <strong class="title-gray">ADJUNTAR IMAGEN (500X500PX, FORMATO .SVG .JPG, MAX 100KB)</strong>
                               <span class="title-secondary" *ngIf="nameFileCert === ''">No hay archivo seleccionado</span>
                               <span class="file-input" *ngIf="nameFileCert !== ''">{{
                                 nameFileCert | truncate: '20'
@@ -298,7 +298,7 @@
                             </div>
                           </div>
                           <mat-error *ngIf="showErrorCert" class="text-small small pb-2 d-block">
-                            Formato inválido solo se pueden subir archivos con la extensión SVG y menores de 100KB
+                            Formato inválido solo se pueden subir archivos con la extensión SVG, JPG y menores de 100KB
                           </mat-error>
                         
                           <input
