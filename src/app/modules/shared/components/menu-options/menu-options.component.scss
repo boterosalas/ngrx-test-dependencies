@@ -2,226 +2,212 @@
 @import "general";
 
 .menu-mobile {
-  &.active {
-    a {
-      color: $secondary-color;
+    &.active{
+        a{
+            color: $secondary-color;
+        }
     }
-  }
-  a {
-    color: $primary-color;
-    font-family: $font-galano-bold;
-    height: 30px;
-    position: relative;
-  }
+    a{
+        color: $primary-color;
+        font-family: $font-galano-bold;
+        height: 30px;
+        position: relative;
+    }
 
-  .Mi.perfil,
-  .Usuarios {
-    &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/mi-perfil.svg") no-repeat;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 1%;
+    .Mi.perfil, .Usuarios{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/mi-perfil.svg") no-repeat;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 24%;
+            left: 1%;
+        }
     }
-  }
 
-  .Tabla.de.Comisiones {
-    &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/tabla_comisiones.svg") no-repeat;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 1%;
+    .Tabla.de.Comisiones{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/tabla_comisiones.svg") no-repeat;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 24%;
+            left: 1%;
+        }
     }
-  }
 
-  .Negocios {
-    &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/negocios.svg") no-repeat;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 1%;
-      background-size: 100%;
+    .Negocios{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/negocios.svg") no-repeat;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 24%;
+            left: 1%;
+            background-size: 100%;
+        }
     }
-  }
-  .Novedades {
-    &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/novedades.svg") no-repeat;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 1%;
-      background-size: 100%;
-    }
-  }
-  .Historial.de.Links {
-    &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/historial_links.svg") no-repeat;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 1%;
-    }
-  }
 
-  .Inicio,
-  .DashBoard {
-    &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/dashboard.svg") no-repeat;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 1%;
+    .Historial.de.Links{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/historial_links.svg") no-repeat;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 24%;
+            left: 1%;
+        }
     }
-  }
 
-  .Click.Academy {
-    &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/clickacademy.svg") no-repeat;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 1%;
+    .Inicio, .DashBoard{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/dashboard.svg") no-repeat;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 24%;
+            left: 1%;
+        }
     }
-  }
 
-  .Centro.de.Ayuda {
-    &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/preguntas-frecuentes.svg")
-        no-repeat;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 1%;
+    .Click.Academy{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/clickacademy.svg") no-repeat;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 24%;
+            left: 1%;
+        }
     }
-  }
 
-  .Reportes,
-  .Auditoría {
-    &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/reportes.svg") no-repeat;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 1%;
+    .Centro.de.Ayuda{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/preguntas-frecuentes.svg") no-repeat;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 24%;
+            left: 1%;
+        }
     }
-  }
 
-  .whatsapp {
-    &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/whatsapp.svg") no-repeat;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 1%;
+    .Reportes, .Auditoría{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/reportes.svg") no-repeat;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 24%;
+            left: 1%;
+        }
     }
-  }
 
-  .Generador.de.Links {
-    &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/icon-generados-links.svg")
-        no-repeat;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 1%;
+    .whatsapp{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/whatsapp.svg") no-repeat;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 24%;
+            left: 1%;
+        }
     }
-  }
 
-  .Referidos {
-    &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/referidos.svg") no-repeat;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 1%;
+    .Generador.de.Links{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/icon-generados-links.svg") no-repeat;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 24%;
+            left: 1%;
+        }
     }
-  }
 
-  .logout {
-    &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/cerrar-sesion.svg") no-repeat;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 33%;
-      left: 1%;
+    .Referidos{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/referidos.svg") no-repeat;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 24%;
+            left: 1%;
+        }
     }
-  }
+
+    .logout{
+        &::before {
+            content: "";
+            background: url("/assets/img/menu-mobile/cerrar-sesion.svg") no-repeat;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 33%;
+            left: 1%;
+        }
+    }
+
 }
+
 
 .terms {
-  margin-top: 2rem;
-  border-bottom: 1px solid $gray2;
-  padding-bottom: 1rem;
-  a {
-    text-decoration: underline;
-    font-size: $font-size-sm - 0.1rem;
-    color: $gray2;
+    margin-top: 2rem;
+    border-bottom: 1px solid $gray2;
+    padding-bottom: 1rem;
+    a {
+      text-decoration: underline;
+      font-size: $font-size-sm - 0.1rem;
+      color: $gray2;
+    }
   }
-}
 
-.border-footer {
-  height: 1px;
-  background: $gray2;
-  width: 280px;
-}
+  .border-footer {
+    height: 1px;
+    background:$gray2;
+    width: 280px;
+  }
 
-.copy {
-  color: #86888a;
-  font-size: 12px;
-}
+  .copy{
+      color:#86888A;
+      font-size: 12px;
+  }
 
-.goals {
-  background: #ffffff;
-  border-radius: 22px;
-  padding: 5px 10px;
-  width: 180px;
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  color: #8d7eb7;
-  font-family: $font-galano-bold;
-  cursor: pointer;
-}
+  .goals{
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 5px 10px;
+    width: 180px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #8D7EB7;
+    font-family:$font-galano-bold;
+    cursor: pointer;
+  }
 
-.hc {
-  color: #8d7eb7;
-}
+  .hc{
+    color: #8D7EB7;  
+  }
 
-.endSession {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  overflow: hidden;
-  left: 0;
-  padding: 4px 25px;
-  background: #ffffff;
-  border-top: 1px solid #ececec;
-}
+  .endSession{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+    left: 0;
+    padding: 4px 25px;
+    background: #ffffff;
+    border-top: 1px solid #ececec;
+  }

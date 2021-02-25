@@ -55,8 +55,6 @@ export class UserService {
   apiGetExternalUsers = "userprofile/getexternalusers";
   apiDeleteUser = "userprofile/deleteaccount"
   apiReporUserGamification = "reports/getreportgamification";
-  apiSaveNews = "new/savenew";
-  apiUploadNews = "new/uploadnew";
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
 
@@ -466,42 +464,5 @@ export class UserService {
           )
         )
       );
-  }
-  //apiSaveNews
-  public saveNews(data: any) {
-    return this.http
-      .post(
-        `${this.url}${this.apiSaveNews}`,
-        data,
-        this.httpOptions
-      )
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => { })
-          )
-        )
-      );
-    //`${this.url}${this.apiDeleteUser}`
-  }
-  public uploadFileNews(data: any) {
-    return this.http
-      .post(
-        `${this.url}${this.apiUploadNews}`,
-        data,
-        this.httpOptions
-      )
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => { })
-          )
-        )
-      );
-    //`${this.url}${this.apiDeleteUser}`
   }
 }
