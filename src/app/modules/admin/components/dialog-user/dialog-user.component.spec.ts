@@ -93,12 +93,10 @@ describe('DialogUserComponent', () => {
     spyOn(component.bankCertificate, 'emit');
     component.bankCardDownload();
     expect(component.bankCertificate.emit).toHaveBeenCalled();
-  });
-
-  it('close modal', () => {
     let spy = spyOn(component.dialogRef, 'close').and.callThrough();
     component.onNoClick();
     expect(spy).toHaveBeenCalled();
   });
+
 
 });

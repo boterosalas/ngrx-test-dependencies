@@ -71,7 +71,6 @@ describe("DialogCategoryComponent", () => {
   })
   it("should create", () => {
     expect(component).toBeTruthy();
-
     fixture2 = TestBed.createComponent(DialogCategoryComponent);
     component2 = fixture2.componentInstance;
     fixture2.detectChanges();
@@ -83,12 +82,11 @@ describe("DialogCategoryComponent", () => {
     const mockEvt = { target: { files: [mockFile] } };
     component.onFileChangeFiles(mockEvt, 'cedula1');
     expect(component.onFileChangeFiles).not.toBeNull();
-  });
-  it("close modal", () => {
     let spy = spyOn(component.dialogRef, 'close').and.callThrough();
     component.onNoClick();
     expect(spy).toHaveBeenCalled();
   });
+
   it("edit category", () => {
     component.data = { edit: 0 };
     component.dateForm.controls.category.setValue("Salud");
@@ -101,7 +99,6 @@ describe("DialogCategoryComponent", () => {
     component.statusAc = true;
     component.dateForm.controls.commisionBussiness.setValue(3);
     component.data = { idBussiness: 1 };
-
     component.agregarCategory();
     expect(mockContentService.addCategory).toHaveBeenCalled();
   })

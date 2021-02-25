@@ -1,0 +1,90 @@
+@import "variables";
+@import "general";
+@import "animations";
+
+.border-input {
+  border: none;
+  outline: none;
+  height: 32px;
+}
+
+.border-radius {
+  border-radius: 5px;
+}
+
+.icon-date {
+  position: relative;
+  top: 4px;
+  left: 30px;
+}
+
+.form-control {
+  padding-left: 35px !important;
+  font-family: $font-galano !important;
+}
+.container-forms {
+  justify-content: space-between;
+}
+.mw {
+  min-width: 270px;
+}
+.title-blue {
+  color: #37236a;
+  font-weight: bold;
+  font-size: 16px;
+}
+.downloadUsers {
+  margin-left: 0px !important;
+}
+.form-relative {
+  right: 28px;
+  position: relative;
+}
+.label-up-text {
+  color: #a7a3b1;
+  font-family: $font-galano-bold !important;
+  margin-bottom: 15px;
+  margin-left: 25px;
+  font-size: 11px;
+}
+.text-link {
+  color: #8d7eb7 !important;
+  text-decoration: underline;
+}
+.border-blue {
+  border-bottom-color: #352767 !important;
+}
+.title-name {
+  color: #37236a;
+  font-size: 20px;
+  line-height: 28px;
+}
+.w-label {
+  width: 160px;
+}
+.w-label-info {
+  width: 178px;
+}
+.gray {
+  color: $gray2;
+  font-size: 11px;
+}
+.normal-text {
+  color: #37236a;
+  font-size: 14px;
+  //line-height: 28px;
+  //font-family: "galano-medium";
+}
+.margin-zero-bottom {
+  margin-bottom: 0px !important;
+}
+.margin-zero-top {
+  margin-top: 0px !important;
+}
+.w-description {
+  width: 350px;
+}
+.normal-link {
+  color: #8d7eb7 !important;
+  text-decoration: underline;
+}
