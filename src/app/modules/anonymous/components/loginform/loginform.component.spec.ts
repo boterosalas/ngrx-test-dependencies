@@ -117,6 +117,12 @@ describe("LoginformComponent", () => {
     expect(mockUtilsService.showRegisterForm).toHaveBeenCalled();
     expect(mockUtilsService.showForgot).toHaveBeenCalled();
     expect(mockUtilsService.showActivate).toHaveBeenCalled();
+    component.isSubmitted = false;
+    component.loginForm.controls.Username.setValue("");
+    component.loginForm.controls.Password.setValue("");
+    component.login();
+    let valid = true
+    expect(valid).toBeTruthy();
   });
 
   it("login valid", () => {
@@ -128,14 +134,9 @@ describe("LoginformComponent", () => {
     expect(mockAuthService.login).toHaveBeenCalled();
   });
 
-  it("Login invalid", () => {
-    component.isSubmitted = false;
-    component.loginForm.controls.Username.setValue("");
-    component.loginForm.controls.Password.setValue("");
-    component.login();
-    let valid = true
-    expect(valid).toBeTruthy();
-  });
+  //it("Login invalid", () => {
+
+  //});
 
   // describe("Login invalid", () => {
 
