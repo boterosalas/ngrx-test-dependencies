@@ -60,5 +60,8 @@ describe('DialogNewsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    let spy = spyOn(component.dialogRef, 'close').and.callThrough();
+    component.onNoClick();
+    expect(spy).toHaveBeenCalled();
   });
 });
