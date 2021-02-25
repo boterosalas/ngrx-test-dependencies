@@ -83,9 +83,9 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
     if (getExt === "svg") {
       this.validFormat = true;
     }
-    if (getSize / 1000 > 100) {
-      this.validFormat = false;
-    }
+    //if (getSize / 1000 > 100) {
+    //  this.validFormat = false;
+    //}
   }
   public onFileChangeFiles(event, param: string) {
     let nameFile = event.target.files[0].name;
