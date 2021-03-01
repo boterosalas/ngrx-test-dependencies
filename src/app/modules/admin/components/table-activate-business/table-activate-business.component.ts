@@ -26,7 +26,7 @@ export class TableActivateBusinessComponent implements OnInit {
   @Output() activateBusiness = new EventEmitter;
   @ViewChild('table', { static: false }) table: MatTable<PeriodicElement>;
 
-  displayedColumns: string[] = ['drag', 'bussiness', 'activate', 'category'];
+  displayedColumns: string[] = ['drag', 'bussiness', 'activate', 'category', 'library'];
   ngOnInit() {
   }
 
@@ -56,6 +56,17 @@ export class TableActivateBusinessComponent implements OnInit {
   editCategory(element: any) {
     this.router.navigate([
       "/bussiness-admin",
+      {
+        id: element.id,
+        titulo: element.description,
+        imagen: element.imageurl
+      },
+    ]);
+  }
+
+  contentBussiness(element: any) {
+    this.router.navigate([
+      "/content-admin",
       {
         id: element.id,
         titulo: element.description,

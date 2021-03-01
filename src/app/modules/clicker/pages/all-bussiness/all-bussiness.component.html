@@ -19,7 +19,7 @@
         <div class="position-relative banner-mobile" fxShow.gt-xs="false" fxShow.xs="true">
           <div class="position-absolute" fxLayout="column">
             <h3>Descarga aquí las mejores ofertas del día</h3>
-            <button mat-raised-button class="button-oferts" color="orange" (click)="getAnyReport()" id="download-users"  [disabled]="disableButon">Ver Ofertas</button>    
+            <button mat-raised-button class="button-oferts" color="orange" [routerLink]="[ '/biblioteca']" id="download-users"  [disabled]="disableButon">Ver Ofertas</button>    
           </div>
           <img class="responsive-img" src="/assets/img/banners/oferts_mobile.png" [alt]="title">
         </div>

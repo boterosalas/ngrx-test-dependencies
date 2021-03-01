@@ -171,6 +171,6 @@ describe('RefersComponent', () => {
   //});
   it('change state', () => {
     component.changeState();
-    expect(component.disButon).toBeFalsy;
+    expect(component.disButon).toBeFalsy();
   })
 });

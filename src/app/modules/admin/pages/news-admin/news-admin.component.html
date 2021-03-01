@@ -15,7 +15,7 @@
         <div fxLayout="row">
             <mat-icon [hidden]="dateNoVisible"  class="icon-date" matPrefix>date_range</mat-icon>
             <input [hidden]="dateNoVisible" formControlName="dateRange"  [locale]="locale" placeholder="Seleccione fechas" type="text" [maxDate]="maxDate"  ngxDaterangepickerMd class="form-control border-input mat-elevation-z1 p-2 border-radius"/>
-            <button mat-raised-button color="orange" (click)="getAnyReport()" id="download-users" class="ml-2"  [disabled]="disableButon">Exportar <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>    
+            <button mat-raised-button color="orange" (click)="getReportExcel()" id="download-users" class="ml-2"  [disabled]="disableButon">Exportar <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>    
         </div>
     </div>
     </form>
@@ -23,27 +23,7 @@
   <div class="container-search">
     <div fxLayout="row" fxLayoutAlign="end end" class="border-bottom-gray">
         <div fxLayout="column" fxFlex="100">
-            <form [formGroup]="searchForm" class="pt-1">
-              <mat-form-field appearance="outline" class="w-100 mw">
-                <span fxLayoutAlign="center space-between">
-                  <input
-                    matInput
-                    type="text"
-                    id="BarSearch"
-                    placeholder="{{ 'GENERIC.SEARCH' | translate }}"
-                    formControlName="search"
-                  />
-                  <button
-                    mat-button
-                    (click)="searchProduct()"
-                    id="BtnSearch"
-                    class="lupa"
-                  >
-                    <mat-icon matSuffix class="mr-1 blue cursor-pointer">search</mat-icon>
-                  </button>
-                </span>
-              </mat-form-field>
-            </form>
+          <app-search-users class="searchUser" (search)="searchUser($event)"></app-search-users>
         </div>
     </div>
   </div>
@@ -55,19 +35,19 @@
       <ng-container matColumnDef="idclicker">
         <th mat-header-cell class="pl-3" *matHeaderCellDef style="width: 9%;" mat-sort-header="idclicker"> NO. DE CASO </th>
         <td mat-cell *matCellDef="let element" class="pl-3"> 
-        <p class="m-0 gray-light text-link cursor-pointer" (click)="openDialog()">{{element.idclicker}}</p>
+        <p class="m-0 gray-light text-link cursor-pointer" (click)="openDialog(element)">{{element.consecutive}}</p>
         </td>
       </ng-container>
       <!-- Date Solicitud Column -->
       <ng-container matColumnDef="subscription">
         <th mat-header-cell *matHeaderCellDef style="width: 10%;" mat-sort-header="solicitud" > FECHA SOLICITUD </th>
-        <td mat-cell *matCellDef="let element" class="text-font" > {{element.solicitud}}</td>
+        <td mat-cell *matCellDef="let element" class="text-font" > {{element.datenovelty}}</td>
       </ng-container>
       <!-- User Column -->
       <ng-container matColumnDef="users">
         <th mat-header-cell *matHeaderCellDef style="width: 15%;" mat-sort-header="username"> {{ 'USERS.USER' | translate }} </th>
         <td mat-cell *matCellDef="let element: let i=index" > 
-        <p class="m-0 gray-light text-font">{{element.firstNames}} {{element.lastNames}}</p>
+        <p class="m-0 gray-light text-font">{{element.name}} </p>
         </td>
       </ng-container>
       <!-- Identificaton Column -->
@@ -99,18 +79,28 @@
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef style="width: 10%;" mat-sort-header="state"> {{ 'USERS.STATUS' | translate }} </th>
         <td mat-cell *matCellDef="let element" > 
-            <span *ngIf="element.state !== 'Inactivo'">
-                <img src="/assets/img/dashboard/checked-ok.svg" alt="ok"> Solucionado
+            <span *ngIf="element.statusnovelty === 'Solucionado'">
+                <img class="status-img" src="/assets/img/dashboard/icon-check-new.svg" alt="ok"> Solucionado
             </span>
-            <span *ngIf="element.state === 'Inactivo'">
-                <img src="/assets/img/dashboard/checked-pend.svg" alt="pendind"> Pendiente
+            <span *ngIf="element.statusnovelty === 'Pendiente'">
+                <img class="status-img" src="/assets/img/dashboard/icon-info.svg" alt="pendind"> Pendiente
             </span>
+            <span *ngIf="element.statusnovelty === 'Revision'">
+              <img class="status-img" src="/assets/img/dashboard/icon-revision.svg" alt="pendind"> En revisión
+          </span>
         </td>
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr id="user-{{i}}" mat-row *matRowDef="let row; columns: displayedColumns;let i= index;"></tr>
     </table>
+    <mat-paginator
+        [length]="totalItems"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[50]"
+            [pageIndex]="pageIndex"
+            (page)="pagination($event)"
+       ></mat-paginator>
   </div>
 </div>
 

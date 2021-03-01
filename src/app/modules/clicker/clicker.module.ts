@@ -42,9 +42,9 @@ import { MedalComponent } from './pages/medal/medal.component';
 import { BannerMedalComponent } from './components/banner-medal/banner-medal.component';
 import { CardMissionComponent } from './components/card-mission/card-mission.component';
 import { MissionLevelComponent } from './components/mission-level/mission-level.component';
-
+import { LibraryComponent } from './pages/library/library.component';
 const routes: Routes = [
- 
+
   {
     path: "mi-perfil/:pagos",
     component: ProfileComponent,
@@ -89,6 +89,11 @@ const routes: Routes = [
     path: "medalla/:id",
     component: MedalComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: "biblioteca",
+    component: LibraryComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
@@ -121,7 +126,8 @@ const routes: Routes = [
     MedalComponent,
     BannerMedalComponent,
     CardMissionComponent,
-    MissionLevelComponent
+    MissionLevelComponent,
+    LibraryComponent
   ],
   imports: [
     CommonModule,
@@ -135,9 +141,9 @@ const routes: Routes = [
     ShareModule,
     DragScrollModule,
     MatPasswordStrengthModule,
-    RouterModule.forChild(routes), 
+    RouterModule.forChild(routes),
     AnonymousModule
   ],
   entryComponents: [DialogComponent, DialogEditComponent, DialogHistoryComponent]
 })
-export class ClickerModule {}
+export class ClickerModule { }

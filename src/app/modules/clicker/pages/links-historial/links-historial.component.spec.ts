@@ -18,8 +18,8 @@ describe('LinksHistorialComponent', () => {
   const mockLinksService = jasmine.createSpyObj("LinksService", ["getLinkHistory"]);
 
   let dataHistory = {
-    state: "Success", 
-    userMessage: "", 
+    state: "Success",
+    userMessage: "",
     objectResponse: {
       total: 82,
       listLinkHistory: [{
@@ -35,23 +35,23 @@ describe('LinksHistorialComponent', () => {
 
   let historyModal = {
     commission: 0,
-        date: "2020-05-08T16:25:56.977",
-        link: "https://webclickamdev.z13.web.core.windows.net/#/url/pe6etseatL",
-        productname: "100123688",
-        products: 0,
-        visits: 0
+    date: "2020-05-08T16:25:56.977",
+    link: "https://webclickamdev.z13.web.core.windows.net/#/url/pe6etseatL",
+    productname: "100123688",
+    products: 0,
+    visits: 0
   }
 
   let pagination = {
     pageIndex: 0,
-    pageSize:20,
+    pageSize: 20,
     length: 80
   }
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ],
-      imports:[
+      declarations: [],
+      imports: [
         SharedModule,
         RouterTestingModule,
         TranslateModule.forRoot(),
@@ -64,7 +64,7 @@ describe('LinksHistorialComponent', () => {
         { provide: LinksService, useValue: mockLinksService }
       ]
     })
-    .compileComponents();
+      .compileComponents();
     mockLinksService.getLinkHistory.and.returnValue(of(dataHistory));
   }));
 
@@ -92,12 +92,12 @@ describe('LinksHistorialComponent', () => {
     component.order('ASC');
     expect(mockLinksService.getLinkHistory).toHaveBeenCalled();
   });
-  
+
   it('pagination', () => {
     component.pagination(pagination);
     expect(mockLinksService.getLinkHistory).toHaveBeenCalled();
   });
-  
+
 
   it("copyInputMessage", () => {
     const button = document.querySelector("#btnCopy");

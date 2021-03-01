@@ -23,11 +23,12 @@ export class DialogNewsComponent implements OnInit {
     >;
     selecteds = [{
         titulo: "Pendiente"
-    }, {
-        titulo: "Solucionado"
     },
     {
         titulo: "En revisión"
+    },
+    {
+        titulo: "Solucionado"
     }
     ]
     constructor(
@@ -41,26 +42,34 @@ export class DialogNewsComponent implements OnInit {
     }
 
     ngOnInit() {
+
         this.dateForm = this.fb.group({
             status: [null],
         });
+
+
     }
     onNoClick(): void {
         this.dialogRef.close();
     }
     public viewerImage() {
-        const title = "";
-        const template = this.templateVideo;
-        const id = "video-modal";
-        this.dialog.open(ModalGenericComponent, {
-            panelClass: "image-clickacademy",
-            maxWidth: "600px",
-            data: {
-                id,
-                title,
-                template,
-            },
-            backdropClass: 'backdropBackground'
-        });
+        if (this.data.element.urlImage === "") {
+
+        } else {
+            const title = "";
+            const template = this.templateVideo;
+            const id = "video-modal";
+            this.dialog.open(ModalGenericComponent, {
+                panelClass: "image-clickacademy",
+                maxWidth: "600px",
+                data: {
+                    id,
+                    title,
+                    template,
+                },
+                backdropClass: 'backdropBackground'
+            });
+        }
+
     }
 }

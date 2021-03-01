@@ -47,9 +47,7 @@ export class ReportNewsComponent implements OnInit {
         })
 
     }
-    public change() {
-        console.log("Change")
-    }
+
     private getExtension(nameFile: string, getSize: number) {
         let splitExt = nameFile.split(".");
         let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();

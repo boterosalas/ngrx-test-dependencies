@@ -134,13 +134,13 @@ describe("ReportsComponent", () => {
     expect(mockEvt).toBeDefined();
   });
 
-  it("on file change trip invalid", () => {
-    const mockFile = new File([""], "name.txt", { type: "text/html" });
-    const mockEvt = { target: { files: [mockFile] } };
-    component.onFileChangePayment(mockEvt);
-    component.showErrorExtPayment = true;
-    expect(component.showErrorExtPayment).toBeTruthy();
-  });
+  //it("on file change trip invalid", () => {
+  //  const mockFile = new File([""], "name.txt", { type: "text/html" });
+  //  const mockEvt = { target: { files: [mockFile] } };
+  //  component.onFileChangePayment(mockEvt);
+  //  component.showErrorExtPayment = true;
+  //  expect(component.showErrorExtPayment).toBeTruthy();
+  //});
   it("on file change picking", () => {
     const mockFile1 = new File([""], "name.xlsx", { type: "text/html" });
     const mockEvt1 = { target: { files: [mockFile1] } };
