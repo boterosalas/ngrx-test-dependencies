@@ -54,7 +54,7 @@ export class DialogNewsComponent implements OnInit {
     }
     public viewerImage() {
         if (this.data.element.urlImage === "") {
-
+            console.log("No hay imagenes")
         } else {
             const title = "";
             const template = this.templateVideo;
@@ -71,5 +71,14 @@ export class DialogNewsComponent implements OnInit {
             });
         }
 
+    }
+    public saveChanges() {
+        let datos = {
+            id: this.data.element.id,
+            status: this.dateForm.controls.status.value
+        }
+        this.user.setStatus(datos).subscribe((resp) => {
+            console.log("Estado cambiado")
+        })
     }
 }

@@ -61,6 +61,7 @@ export class UserService {
   apiUploadNews = "new/uploadnew";
   apiGetNews = "new/getnews";
   apiGetExcelNews = "new/getnewsexcel";
+  apiSetStatusNew = "new/changestatusnew";
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
@@ -519,6 +520,23 @@ export class UserService {
   public getExportNewsExcel(data: any) {
     return this.http
       .get(`${this.url}${this.apiGetExcelNews}?&start=${data.start}&end=${data.end}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+  }
+  public setStatus(data: any) {
+    return this.http
+      .post(
+        `${this.url}${this.apiSetStatusNew}`,
+        data,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(

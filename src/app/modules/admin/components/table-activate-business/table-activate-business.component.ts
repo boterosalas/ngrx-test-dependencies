@@ -64,13 +64,13 @@ export class TableActivateBusinessComponent implements OnInit {
     ]);
   }
 
-  contentBussiness(element: any) {
+  contentBussiness(contenido: any) {
     this.router.navigate([
       "/content-admin",
       {
-        id: element.id,
-        titulo: element.description,
-        imagen: element.imageurl
+        id: contenido.id,
+        titulo: contenido.description,
+        imagen: contenido.imageurl
       },
     ]);
   }

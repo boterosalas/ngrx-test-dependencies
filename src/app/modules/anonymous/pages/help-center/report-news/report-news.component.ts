@@ -104,7 +104,7 @@ export class ReportNewsComponent implements OnInit {
         this.users.saveNews(data).subscribe((resp: any) => {
             if (resp.state === "Success") {
                 Swal.fire({
-                    html: "Tu reporte ha sido enviado con éxito, el número de radicado es: <b class='bold-blue'>" + 12222 + "</b>",
+                    html: "Tu reporte ha sido enviado con éxito, el número de radicado es: <b class='bold-blue'>" + resp.objectResponse + "</b>",
                     type: "success",
                     confirmButtonText: "Aceptar",
                     confirmButtonClass: "upload-success"
