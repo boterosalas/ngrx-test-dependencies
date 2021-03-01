@@ -59,66 +59,7 @@ export class NewsAdminComponent implements OnInit {
         this.searchForm = this.fb.group({
             search: [null],
         });
-        this.dataSource = [{
-            consecutive: "000001",
-            name: "Santiago Teran",
-            cellphone: "3224981267",
-            idclicker: "santer457",
-            identification: "12121212",
-            email: "hamil@unicauca.edu.co",
-            urlImage: "",
-            statusnovelty: "Pendiente",
-            datenovelty: "2020-02-04",
-            businessdescription: "Haceb",
-            date: "2021-02-25",
-            code: "12223444",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-        },
-        {
-            consecutive: "000002",
-            name: "Santiago Teran",
-            identification: "12121212",
-            idclicker: "santer457",
-            cellphone: "3224981267",
-            date: "2021-02-25",
-            email: "hamil@unicauca.edu.co",
-            statusnovelty: "Revision",
-            urlImage: "https://d500.epimg.net/cincodias/imagenes/2018/11/13/lifestyle/1542113135_776401_1542116070_noticia_normal.jpg",
-            datenovelty: "2020-02-04",
-            businessdescription: "Haceb",
-            code: "12223444",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-        },
-        {
-            consecutive: "000003",
-            name: "Santiago Teran",
-            date: "2021-02-25",
-            cellphone: "3224981267",
-            idclicker: "santer457",
-            identification: "12121212",
-            email: "hamil@unicauca.edu.co",
-            statusnovelty: "Revision",
-            urlImage: "https://d500.epimg.net/cincodias/imagenes/2018/11/13/lifestyle/1542113135_776401_1542116070_noticia_normal.jpg",
-            datenovelty: "2020-02-04",
-            businessdescription: "Haceb",
-            code: "12223444",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-        },
-        {
-            consecutive: "000004",
-            name: "Santiago Teran",
-            cellphone: "3224981267",
-            date: "2021-02-25",
-            idclicker: "santer457",
-            identification: "12121212",
-            urlImage: "https://d500.epimg.net/cincodias/imagenes/2018/11/13/lifestyle/1542113135_776401_1542116070_noticia_normal.jpg",
-            email: "hamil@unicauca.edu.co",
-            statusnovelty: "Solucionado",
-            businessdescription: "Haceb",
-            datenovelty: "2020-02-04",
-            code: "12223444",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-        }]
+
     }
 
     public searchUser(
