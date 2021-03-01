@@ -1,0 +1,153 @@
+<app-banner color="purple" title="Biblioteca de contenido" img="/assets/img/banners/banner-negocios-pc.jpg" imgMobile="/assets/img/banners/banner-negocios-mobile.jpg"></app-banner>
+
+<div class="container">
+    <div fxLayout.gt-xs="row" fxLayoutGap.gt-xs="30px" ngClass.gt-xs="mt-3">
+        <div fxLayout.gt-xs="column" fxFlex.gt-xs="25" fxShow.xs="false">
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="true"  class="help-center">
+                  <mat-expansion-panel-header  class="head head-library">
+                   <span class="" [routerLink]="['/biblioteca']" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">NEGOCIOS</span> 
+                  </mat-expansion-panel-header>
+                  <mat-list *ngFor="let item of bussiness; let i = index">
+                    <mat-list-item (click)="setStep(i)" ngClass="cursor-pointer" ><span [class]="(step===i)?'activo':'no-activo'"><img class="mini-img" [src]="item.imageurl" alt="logo"> {{item.description}} </span></mat-list-item>
+                  </mat-list>
+                </mat-expansion-panel>        
+              </mat-accordion>
+            
+        </div>
+        <div fxLayout.gt-xs="column" fxFlex.gt-xs="25" fxShow.gt-xs = "false" *ngIf="!visible_step_mobile">
+            <mat-accordion class="width-total">
+                <mat-expansion-panel [expanded]="true"  class="help-center">
+                  <mat-expansion-panel-header  class="head head-library">
+                   <span class="sub-item"  [routerLink]="['/biblioteca']" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">NEGOCIOS</span> 
+                  </mat-expansion-panel-header>
+                  <mat-list *ngFor="let item of bussiness; let i = index">
+                    <mat-list-item (click)="setStepMovil(item)" ngClass="cursor-pointer" ><span class="sub-item" ><img class="mini-img" [src]="item.imageurl" alt="logo"> {{item.description}} </span></mat-list-item>
+                  </mat-list>
+                </mat-expansion-panel>        
+              </mat-accordion>
+            
+        </div>
+    
+    <div fxLayout.gt-xs="column" fxShow.xs="false">
+        <div fxLayout="row" fxLayoutAlign="space-between">
+            <div fxLayout="row">
+                <button  mat-raised-button  color="orange" (click)="selectAll()" class="button-selected"><img class="icon-download" src="assets/img/dashboard/icon-check.svg" alt="descarga"> Seleccionar todos</button>        
+                <button mat-raised-button  color="orange" (click)="getAnyReport()" class="ml-2 button-selected-normal"><img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"> Descargar</button>        
+            </div>
+        </div>
+        <div fxLayout="row" >
+            <h3>Imágenes</h3> 
+            <hr class="separator-img">
+        </div>
+        <div  fxLayout="row wrap"  fxLayoutGap="5px">
+            <ng-container class="mt-4" *ngFor="let product of data; let i = index">
+                <div class="image-hover">
+                    <img class="image-size" [src]="product.ulrImg" alt="">
+                    <div class="image-background">
+                        <div class="image-viewer-x"  (click)="viewerPhoto()"></div>
+                        <div class="image-viewer-y"  (click)="viewerPhoto()"></div>
+                        <img class="cursor-pointer image-vysor" (click)="viewerPhoto()" src="assets/img/dashboard/icon-view-img.svg" alt="">
+                        <div class="custom-color-primary">
+                            <mat-checkbox [(ngModel)]="product.dataR" class="check-margin">
+                            </mat-checkbox>
+                        </div>
+                        
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div fxLayout="row" >
+            <h3>Videos</h3> 
+            <hr class="separator-img">
+        </div>
+        <div  fxLayout="row wrap"  fxLayoutGap="5px">
+            <ng-container class="mt-4" *ngFor="let product of data; let i = index">
+                <div class="image-hover">
+                    <img class="image-size" [src]="product.ulrImg" alt="">
+                    <div class="image-background">
+                        <div class="image-viewer-x"  (click)="viewerPhoto()"></div>
+                        <div class="image-viewer-y"  (click)="viewerPhoto()"></div>
+                        <img class="cursor-pointer image-vysor" (click)="viewerPhoto()" src="assets/img/dashboard/descarga.svg" alt="">
+                        <div class="custom-color-primary">
+                            <mat-checkbox [(ngModel)]="product.dataR" class="check-margin">
+                            </mat-checkbox>
+                        </div>
+                        
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div fxLayout.gt-xs="column" fxShow.gt-xs = "false" *ngIf="visible_step_mobile">
+        <span class="mt-2 mb-2" fxLayout="row" >
+            <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
+            <button mat-button (click)="returnAcordeon()">
+                <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                    Volver
+                </span>
+            </button>
+        </span>
+        <span class="mt-2 mb-2" fxLayout="row" >
+            <img class="image-bussiness" [src]="step_mobile.imageurl" alt="">
+            <span> <h3>{{step_mobile.description}}</h3></span>
+        </span>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+            <div fxLayout="row">
+                <button  mat-raised-button  color="orange" (click)="selectAll()" class="button-selected"><img class="icon-download" src="assets/img/dashboard/icon-check.svg" alt="descarga"> Seleccionar todos</button>        
+                <button mat-raised-button  color="orange" (click)="getAnyReport()" class="ml-2 button-selected-normal"><img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"> Descargar</button>        
+            </div>
+        </div>
+        <div fxLayout="row" >
+            <h3 class="size-text">Imágenes</h3> 
+            <hr class="separator-img">
+        </div>
+        <div class="center-class-wrap"  fxLayout="row wrap"  fxLayoutAlign="center center" fxLayoutGap="10px">
+            <ng-container class="mt-4" *ngFor="let product of data; let i = index">
+                <div class="image-hover">
+                    <img class="image-size" [src]="product.ulrImg" alt="">
+                    <div class="image-background">
+                        <div class="image-viewer-x"  (click)="viewerPhoto()"></div>
+                        <div class="image-viewer-y"  (click)="viewerPhoto()"></div>
+                        <img class="cursor-pointer image-vysor" (click)="viewerPhoto()" src="assets/img/dashboard/icon-view-img.svg" alt="">
+                        <div class="custom-color-primary">
+                            <mat-checkbox [(ngModel)]="product.dataR" class="check-margin">
+                            </mat-checkbox>
+                        </div>
+                        
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div fxLayout="row" >
+            <h3 class="size-text">Videos</h3> 
+            <hr class="separator-img">
+        </div>
+        <div  fxLayout="row wrap"  fxLayoutGap="10px" fxLayoutAlign="center center">
+            <ng-container class="mt-4" *ngFor="let product of data; let i = index">
+                <div class="image-hover">
+                    <img class="image-size" [src]="product.ulrImg" alt="">
+                    <div class="image-background">
+                        <div class="image-viewer-x"  (click)="viewerPhoto()"></div>
+                        <div class="image-viewer-y"  (click)="viewerPhoto()"></div>
+                        <img class="cursor-pointer image-vysor" (click)="viewerPhoto()" src="assets/img/dashboard/descarga.svg" alt="">
+                        <div class="custom-color-primary">
+                            <mat-checkbox [(ngModel)]="product.dataR" class="check-margin">
+                            </mat-checkbox>
+                        </div>
+                        
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
+</div>
+
+<ng-template #templateImage>
+    <div>
+        <img class="w-image" src="https://d500.epimg.net/cincodias/imagenes/2018/11/13/lifestyle/1542113135_776401_1542116070_noticia_normal.jpg" alt="">
+        <a class="download-file"><img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"> Descargar </a>
+    </div>
+</ng-template>

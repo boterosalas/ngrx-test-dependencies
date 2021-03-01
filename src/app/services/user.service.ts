@@ -59,6 +59,8 @@ export class UserService {
   authorization = this.token;
   apiSaveNews = "new/savenew";
   apiUploadNews = "new/uploadnew";
+  apiGetNews = "new/getnews";
+  apiGetExcelNews = "new/getnewsexcel";
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
@@ -501,5 +503,30 @@ export class UserService {
         )
       );
     //`${this.url}${this.apiDeleteUser}`
+  }
+  public getAllNews(term?: any) {
+    return this.http
+      .get(
+        `${this.url}${this.apiGetNews}?searchText=${term.term}&from=${term.from}&to=${term.to}`,
+        this.httpOptions
+      )
+      .pipe(
+        map((user: any) => {
+          return user.objectResponse;
+        })
+      );
+  }
+  public getExportNewsExcel(data: any) {
+    return this.http
+      .get(`${this.url}${this.apiGetExcelNews}?&start=${data.start}&end=${data.end}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
   }
 }

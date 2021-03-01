@@ -274,9 +274,6 @@ describe("BussinessComponent", () => {
     component.acceptModal();
     let datos = true;
     expect(datos).toBeTruthy();
-  });
-
-  it("accept terms check true", () => {
     component.acceptTerms = false;
     component.termsForm.controls.acceptTerms.setValue(true);
     component.acceptTermsCheck();
@@ -288,25 +285,19 @@ describe("BussinessComponent", () => {
     component.termsForm.controls.acceptTerms.setValue(null);
     component.acceptTermsCheck();
     expect(component.acceptTerms).toBeFalsy();
+    mockUserService.registeruserterms.and.returnValue(of(registerFail));
+    component.registerUser();
+    expect(mockUserService.registeruserterms).toHaveBeenCalled();
   });
 
   // it("Terms and condition modal", () => {
   //   component.termsAndConditions();
   // });
 
-  it("register user fail", () => {
-    mockUserService.registeruserterms.and.returnValue(of(registerFail));
-    component.registerUser();
-    expect(mockUserService.registeruserterms).toHaveBeenCalled();
-  });
-
   it("register user ok", () => {
     mockUserService.registeruserterms.and.returnValue(of(registerOk));
     component.registerUser();
     expect(mockUserService.registeruserterms).toHaveBeenCalled();
-  });
-
-  it("modal product exito", () => {
     const product = {
       business: "exito",
       image: {

@@ -39,6 +39,8 @@ import { BussinessAdminComponent } from './pages/bussiness-admin/bussiness-admin
 import { DialogCategoryComponent } from './components/dialog-category/dialog-category.component';
 import { NewsAdminComponent } from './pages/news-admin/news-admin.component'
 import { DialogNewsComponent } from './components/dialog-news/dialog-news.component'
+import { ContentLibraryComponent } from './pages/content-library/content-library.component'
+import { DialogVideoPlayerComponent } from './components/dialog-video-player/dialog-video-player.component';
 
 const routes: Routes = [
   {
@@ -112,6 +114,14 @@ const routes: Routes = [
     data: {
       role: "ADMIN"
     },
+  },
+  {
+    path: "content-admin",
+    component: ContentLibraryComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN"
+    },
   }
 ];
 
@@ -139,7 +149,9 @@ const routes: Routes = [
     BussinessAdminComponent,
     DialogCategoryComponent,
     NewsAdminComponent,
-    DialogNewsComponent
+    DialogNewsComponent,
+    ContentLibraryComponent,
+    DialogVideoPlayerComponent
   ],
   imports: [
     CommonModule,
@@ -181,7 +193,7 @@ const routes: Routes = [
     })
   ],
   exports: [SideMenuComponent],
-  entryComponents: [DialogUserComponent, DialogCategoryComponent, DialogNewsComponent],
+  entryComponents: [DialogUserComponent, DialogCategoryComponent, DialogNewsComponent, DialogVideoPlayerComponent],
   providers: [{ provide: MatPaginatorIntl, useClass: UsersComponent }]
 })
 export class AdminModule { }

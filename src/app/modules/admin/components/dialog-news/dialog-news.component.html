@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutAlign="center" class="border-bottom-gray border-blue">
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <h3 class="mb-3 title-name">  <img class="icon-dashboard" src="/assets/img/ayuda/reportar-novedad/icon-reportar-novedad.svg" alt="user"> <strong> No. de caso </strong> 215222</h3>
+      <h3 class="mb-3 title-name">  <img class="icon-dashboard" src="/assets/img/ayuda/reportar-novedad/icon-reportar-novedad.svg" alt="user"> <strong> No. de caso </strong> {{data.element.consecutive}}</h3>
       <a id="closeDialog" matRipple (click)="onNoClick()"
           ><mat-icon class="close">close</mat-icon></a
           >
@@ -11,54 +11,56 @@
         <h3>Información de novedad</h3>
         <p fxLayout="row" class="margin-zero-bottom">
             <span class="galano-bold gray w-label">FECHA DE LA SOLICITUD</span> 
-            <span class="normal-text">20/12/2020</span>
+            <span class="normal-text">{{data.element.date}}</span>
         </p>
         <p fxLayout="row" class="margin-zero-bottom">
             <span class="galano-bold gray w-label">FECHA DE NOVEDAD</span> 
-            <span class="normal-text">12/12/2020</span>
+            <span class="normal-text">{{data.element.datenovelty}}</span>
         </p>
         <p fxLayout="row" class="margin-zero-bottom">
             <span class="galano-bold gray w-label">NEGOCIO</span> 
-            <span class="normal-text">Almacenes Éxito</span>
+            <span class="normal-text">{{data.element.businessdescription}}</span>
         </p>
         <p fxLayout="row" class="margin-zero-bottom">
             <span class="galano-bold gray w-label">REFERENCIA DE ORDEN/SERVICIO</span> 
-            <span class="normal-text">Almacenes Éxito</span>
+            <span class="normal-text">{{data.element.code}} </span>
         </p>
         <p fxLayout="column" class="margin-zero-bottom">
             <span class="galano-bold gray ">DESCRIPCIÓN DE LA NOVEDAD</span> 
-            <span class="normal-text w-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </span>
+            <span class="normal-text w-description">{{data.element.description}}</span>
         </p>
         <p fxLayout="column" class="margin-zero-bottom">
             <span class="galano-bold gray w-label">EVIDENCIA</span> 
-            <span (click)="viewerImage()" class="normal-link">elemento.jpg</span>
+            <span (click)="viewerImage()" class="normal-link cursor-pointer">imagen.jpg</span>
         </p>
         <p fxLayout="row" class="margin-zero-bottom">
             <span class="galano-bold gray ">ESTADO</span> 
-            <span class="ml-2 normal-text">Pendiente</span>
+            <span *ngIf="data.element.statusnovelty === 'Pendiente'" class="span-relative-new ml-2 normal-text"><img class="status-img" src="/assets/img/dashboard/icon-info.svg" alt="pendind"> Pendiente</span>
+            <span *ngIf="data.element.statusnovelty === 'Solucionado'" class="span-relative-new ml-2 normal-text"><img class="status-img" src="/assets/img/dashboard/icon-check-new.svg" alt="pendind"> Solucionado</span>
+            <span *ngIf="data.element.statusnovelty === 'Revision'" class="span-relative-new ml-2 normal-text"><img class="status-img" src="/assets/img/dashboard/icon-revision.svg" alt="pendind"> En Revición</span>
         </p>
     </div>
     <div fxLayout="column">
         <h3>Información del clicker</h3>
         <p fxLayout="column" class="margin-zero-bottom">
             <span class="galano-bold gray w-label-info">NOMBRE</span> 
-            <span class="normal-text ">Andres Acosta</span>
+            <span class="normal-text ">{{data.element.name}}</span>
         </p>
         <p fxLayout="column" class="margin-zero-bottom">
             <span class="galano-bold gray w-label-info">ID</span> 
-            <span class="normal-text ">andres.a</span>
+            <span class="normal-text ">{{data.element.idclicker}}</span>
         </p>
         <p fxLayout="column" class="margin-zero-bottom">
             <span class="galano-bold gray w-label-info">CEDULA</span> 
-            <span class="normal-text ">11002910212</span>
+            <span class="normal-text ">{{data.element.identification}}</span>
         </p>
         <p fxLayout="column" class="margin-zero-bottom">
             <span class="galano-bold gray w-label-info">CELULAR</span> 
-            <span class="normal-text ">3224981222</span>
+            <span class="normal-text ">{{data.element.cellphone}}</span>
         </p>
         <p fxLayout="column" class="margin-zero-bottom">
             <span class="galano-bold gray w-label-info">CORREO</span> 
-            <span class="normal-text ">corre.correo@gmail.com</span>
+            <span class="normal-text ">{{data.element.email}}</span>
         </p>
     </div>
 
@@ -84,7 +86,6 @@
 
 <ng-template #templateImage>
     <div>
-        <img class="w-image" src="https://d500.epimg.net/cincodias/imagenes/2018/11/13/lifestyle/1542113135_776401_1542116070_noticia_normal.jpg" alt="">
-        <a class="download-file"><img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"> Descargar </a>
+        <img class="w-image" [src]="data.element.urlImage" alt="">
     </div>
 </ng-template>

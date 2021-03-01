@@ -1,0 +1,89 @@
+<app-banner
+  title="Biblioteca de contenido"
+  img="/assets/img/banners/banner-dashboard-pc.jpg"
+  imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
+></app-banner>
+
+<div class="container mt-3">
+    <div fxLayout="row" fxLayoutAlign="space-between" >
+        <div fxLayout="row">
+            <img class="image-bussiness" [src]="image" alt="">
+            <span> <h3>{{title}} / Biblioteca de contenido</h3></span>
+        </div>
+        <span  fxLayout="row" >
+            <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
+            <button mat-button [routerLink]="[ '/negocios-admin']">
+                <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                    Volver
+                </span>
+            </button>
+          </span>
+    </div>
+    
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <div fxLayout="row">
+            <button  mat-raised-button  color="orange" (click)="selectAll()" class="button-selected mr-2"><img class="icon-download" src="assets/img/dashboard/icon-check.svg" alt="descarga"> Seleccionar todos</button>        
+            <button mat-raised-button  (click)="deleteEvery()" [ngClass]="(active===true)? 'button-selected-red':'button-selected-red-disabled'" [disabled] = "!active" ><img class="icon-download" src="assets/img/dashboard/icon-trash-red.svg" alt="descarga"> Borrar</button>        
+        </div>    
+        <span fxLayout="row" >
+            <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
+            <button mat-raised-button  color="orange" (click)="getAnyReport()" class="button-selected-normal"><img class="icon-download" src="assets/img/dashboard/icon-upload-img.svg" alt="descarga"> Cargar Contenido</button>        
+          </span>
+    </div>
+
+    <div fxLayout="row" >
+        <h3>Imágenes</h3> 
+        <hr class="separator-img">
+    </div>
+    <div  fxLayout="row wrap"  fxLayoutGap="5px">
+        <ng-container class="mt-4" *ngFor="let product of data; let i = index">
+            <div class="image-hover">
+                <img class="image-size" [src]="product.ulrImg" alt="">
+                <div class="image-background">
+                    <div class="image-viewer-x"  (click)="viewerPhoto()"></div>
+                    <div class="image-viewer-y"  (click)="viewerPhoto()"></div>
+                    <img class="cursor-pointer image-vysor" (click)="viewerPhoto()" src="assets/img/dashboard/icon-view-img.svg" alt="">
+                    <div class="custom-color-primary">
+                        <mat-checkbox [(ngModel)]="product.dataR" (change)="loadDelete()" class="check-margin">
+                        </mat-checkbox>
+                    </div>
+                    
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <div fxLayout="row" >
+        <h3>Videos</h3> 
+        <hr class="separator-img">
+    </div>
+    <div  fxLayout="row wrap"  fxLayoutGap="5px">
+        <ng-container class="mt-4" *ngFor="let product of dataVideo; let i = index">
+            <div class="image-hover">
+                <video class="image-size" [src]="product.ulrImg"></video>
+                
+                <div class="image-background">
+                    <div class="image-viewer-x"  (click)="viewerVideo()"></div>
+                    <div class="image-viewer-y"  (click)="viewerVideo()"></div>
+                    <img class="cursor-pointer image-vysor" (click)="viewerVideo()" src="assets/img/dashboard/icon-view-img.svg" alt="">
+                    <div class="custom-color-primary">
+                        <mat-checkbox [(ngModel)]="product.dataR" class="check-margin">
+                        </mat-checkbox>
+                    </div>
+                    
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<ng-template #templateImage>
+    <div>
+        <img class="w-image" src="https://d500.epimg.net/cincodias/imagenes/2018/11/13/lifestyle/1542113135_776401_1542116070_noticia_normal.jpg" alt="">
+    </div>
+</ng-template>
+<ng-template #templateVideo>
+    <div>
+        <video class="w-image" src="http://v2v.cc/~j/theora_testsuite/320x240.ogg" controls></video>
+    </div>
+</ng-template>
