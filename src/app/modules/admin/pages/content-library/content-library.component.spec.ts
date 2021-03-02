@@ -14,6 +14,7 @@ import { MatDatepickerModule, MatDialog, MatNativeDateModule } from '@angular/ma
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AnonymousModule } from 'src/app/modules/anonymous/anonymous.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import Swal from 'sweetalert2';
 describe('ContentLibraryComponent', () => {
     let component: ContentLibraryComponent;
     let fixture: ComponentFixture<ContentLibraryComponent>;
@@ -73,5 +74,23 @@ describe('ContentLibraryComponent', () => {
         expect(component.active).toBeTruthy();
         component.viewerPhoto();
         expect(mockDialog.open).toHaveBeenCalled();
+        component.viewerVideo();
+        expect(mockDialog.open).toHaveBeenCalled();
+        spyOn(Swal, "fire").and.returnValue(
+            Promise.resolve<any>({
+                text: "Extensión erronea",
+                type: "error",
+                confirmButtonText: "Aceptar",
+                confirmButtonClass: "accept-activation-alert-error",
+            })
+        );
+        component.getExtension("archivo.jpg", 20000)
+        expect(component.validFormat).toBeTruthy();
+        component.getExtension("archivo.xls", 20000)
+        expect(component.validFormat).toBeFalsy();
+        component.getExtension("archivo.jpg", 20000000)
+        expect(component.validFormat).toBeFalsy();
+        component.getExtension("archivo.mp4", 80000000)
+        expect(component.validFormat).toBeFalsy();
     });
 });

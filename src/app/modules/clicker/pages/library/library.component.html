@@ -1,7 +1,16 @@
 <app-banner color="purple" title="Biblioteca de contenido" img="/assets/img/banners/banner-negocios-pc.jpg" imgMobile="/assets/img/banners/banner-negocios-mobile.jpg"></app-banner>
 
 <div class="container">
-    <div fxLayout.gt-xs="row" fxLayoutGap.gt-xs="30px" ngClass.gt-xs="mt-3">
+    <div fxLayout.gt-xs="row" fxLayoutGap.gt-xs="30px" ngClass.gt-xs="mt-3" >
+        <span class="mt-2 mb-2" fxLayout="row" fxShow.gt-xs = "false" *ngIf="!visible_step_mobile">
+            <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
+            <button mat-button [routerLink]="['/negocios']" class="pl-0">
+                <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                    Volver a negocios
+                </span>
+            </button>
+        </span>
         <div fxLayout.gt-xs="column" fxFlex.gt-xs="25" fxShow.xs="false">
             <mat-accordion>
                 <mat-expansion-panel [expanded]="true"  class="help-center">
@@ -35,6 +44,15 @@
                 <button  mat-raised-button  color="orange" (click)="selectAll()" class="button-selected"><img class="icon-download" src="assets/img/dashboard/icon-check.svg" alt="descarga"> Seleccionar todos</button>        
                 <button mat-raised-button  color="orange" (click)="getAnyReport()" class="ml-2 button-selected-normal"><img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"> Descargar</button>        
             </div>
+            <span class="mt-2 mb-2" fxLayout="row" fxShow.xs = "false" *ngIf="!visible_step_mobile">
+                <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
+                <button mat-button [routerLink]="['/negocios']" class="pl-0">
+                    <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon>keyboard_arrow_left</mat-icon>
+                        Volver a negocios
+                    </span>
+                </button>
+            </span>
         </div>
         <div fxLayout="row" >
             <h3>Imágenes</h3> 
@@ -82,7 +100,7 @@
     <div fxLayout.gt-xs="column" fxShow.gt-xs = "false" *ngIf="visible_step_mobile">
         <span class="mt-2 mb-2" fxLayout="row" >
             <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
-            <button mat-button (click)="returnAcordeon()">
+            <button mat-button (click)="returnAcordeon()" class="pl-0">
                 <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
                     <mat-icon>keyboard_arrow_left</mat-icon>
                     Volver
@@ -97,6 +115,7 @@
             <div fxLayout="row">
                 <button  mat-raised-button  color="orange" (click)="selectAll()" class="button-selected"><img class="icon-download" src="assets/img/dashboard/icon-check.svg" alt="descarga"> Seleccionar todos</button>        
                 <button mat-raised-button  color="orange" (click)="getAnyReport()" class="ml-2 button-selected-normal"><img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"> Descargar</button>        
+
             </div>
         </div>
         <div fxLayout="row" >
@@ -148,6 +167,6 @@
 <ng-template #templateImage>
     <div>
         <img class="w-image" src="https://d500.epimg.net/cincodias/imagenes/2018/11/13/lifestyle/1542113135_776401_1542116070_noticia_normal.jpg" alt="">
-        <a class="download-file"><img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"> Descargar </a>
+        <a class="download-file cursor-pointer"><img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"> Descargar </a>
     </div>
 </ng-template>

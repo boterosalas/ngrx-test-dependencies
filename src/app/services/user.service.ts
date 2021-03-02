@@ -508,7 +508,7 @@ export class UserService {
   public getAllNews(term?: any) {
     return this.http
       .get(
-        `${this.url}${this.apiGetNews}?searchText=${term.term}&from=${term.from}&to=${term.to}`,
+        `${this.urlReports}${this.apiGetNews}?searchText=${term.term}&from=${term.from}&to=${term.to}&orderBy=${term.orderOrigin}&ordination=${term.orderBy}`,
         this.httpOptions
       )
       .pipe(
@@ -519,7 +519,7 @@ export class UserService {
   }
   public getExportNewsExcel(data: any) {
     return this.http
-      .get(`${this.url}${this.apiGetExcelNews}?&start=${data.start}&end=${data.end}`, this.httpOptions)
+      .get(`${this.urlReports}${this.apiGetExcelNews}?&start=${data.start}&end=${data.end}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(

@@ -90,6 +90,9 @@ export class NewsAdminComponent implements OnInit {
                 element
             },
         });
+        this.dialog.afterAllClosed.subscribe(() => {
+            this.searchUser("");
+        });
     }
     public getReportExcel() {
         let dateParams = {
@@ -109,5 +112,13 @@ export class NewsAdminComponent implements OnInit {
         this.from = paginate.pageSize * paginate.pageIndex + 1;
         this.to = paginate.pageSize * (paginate.pageIndex + 1);
         this.searchUser(this.paginate, this.from, this.to);
+    }
+    sort(event) {
+        let name = event.active.toUpperCase();
+        let direction = event.direction.toUpperCase();
+        if (direction === "") {
+            name = "";
+        }
+        this.searchUser(this.paginate, this.from, this.to, name, direction);
     }
 }

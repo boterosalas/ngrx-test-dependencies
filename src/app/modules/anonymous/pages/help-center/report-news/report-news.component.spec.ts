@@ -13,6 +13,7 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { ReportNewsComponent } from './report-news.component';
 import { UserService } from 'src/app/services/user.service';
 import { of } from "rxjs/internal/observable/of";
+import Swal from 'sweetalert2';
 
 describe('ReportNewsComponent', () => {
     let component: ReportNewsComponent;
@@ -21,7 +22,7 @@ describe('ReportNewsComponent', () => {
         "saveNews"
     ]);
     const resp = {
-        status: "error"
+        state: "Success"
     }
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -77,8 +78,14 @@ describe('ReportNewsComponent', () => {
         component.dateForm.controls.reference.setValue("23323");
         component.dateForm.controls.description.setValue("No funciono");
         component.fileImgCat = "data:base64";
+        spyOn(Swal, "fire").and.returnValue(Promise.resolve<any>({
+            title: "Se ha enviado un email",
+            text: 'texto enviado',
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: 'accept-forgot-alert-success',
+            type: "success"
+        }));
         component.sendMessage();
-
         expect(mockContentService.saveNews).toHaveBeenCalled();
     });
 
