@@ -70,7 +70,7 @@ export class ReportNewsComponent implements OnInit {
         let splitExt = nameFile.split(".");
         let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
         this.validFormat = false;
-        if (getExt === "jpg" || getExt === "png") {
+        if (getExt === "jpg" || getExt === "png" || getExt === "pdf") {
             this.validFormat = true;
         }
         if (getSize / 1000 > 100) {
