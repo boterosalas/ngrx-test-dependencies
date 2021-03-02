@@ -18,7 +18,7 @@ import * as moment from 'moment';
 import { UserService } from 'src/app/services/user.service';
 import { of } from 'rxjs';
 moment.locale('es');
-fdescribe('NewsAdminComponent', () => {
+describe('NewsAdminComponent', () => {
   let component: NewsAdminComponent;
   let fixture: ComponentFixture<NewsAdminComponent>;
   const mockDialog = jasmine.createSpyObj("MatDialog", ["open", "closeAll", "afterAllClosed"]);
