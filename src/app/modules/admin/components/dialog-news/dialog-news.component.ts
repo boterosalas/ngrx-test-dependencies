@@ -58,23 +58,43 @@ export class DialogNewsComponent implements OnInit {
         this.dialogRef.close();
     }
     public viewerImage() {
-        if (this.data.element.urlImage === "") {
-            console.log("No hay imagenes")
-        } else {
-            const title = "";
-            const template = this.templateVideo;
-            const id = "video-modal";
-            this.dialog.open(ModalGenericComponent, {
-                panelClass: "image-clickacademy",
-                maxWidth: "600px",
-                data: {
-                    id,
-                    title,
-                    template,
-                },
-                backdropClass: 'backdropBackground'
-            });
+
+
+        let splitExt = this.image.split(".");
+        let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
+        if (getExt === "jpg" || getExt === "png") {
+            if (this.data.element.urlImage === "") {
+                console.log("No hay imagenes")
+            } else {
+                const title = "";
+                const template = this.templateVideo;
+                const id = "video-modal";
+                this.dialog.open(ModalGenericComponent, {
+                    panelClass: "image-clickacademy",
+                    maxWidth: "600px",
+                    data: {
+                        id,
+                        title,
+                        template,
+                    },
+                    backdropClass: 'backdropBackground'
+                });
+            }
+        } else if (getExt === "pdf") {
+            if (this.data.element.urlImage === "") {
+                console.log("No hay nada")
+            } else {
+                var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+                if (iOS) {
+                    window.location.assign(this.data.element.documenturl);
+                } else {
+                    window.open(this.data.element.documenturl, "_blank");
+                }
+
+            }
+
         }
+
 
     }
     public saveChanges() {

@@ -81,6 +81,7 @@ export class NewsAdminComponent implements OnInit {
         });
     }
     public openDialog(element: any) {
+
         const title = "";
         const template = "";
         this.dialog.open(DialogNewsComponent, {

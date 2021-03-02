@@ -43,13 +43,13 @@
         <hr class="separator-img">
     </div>
     <div  fxLayout="row wrap"  fxLayoutGap="5px">
-        <ng-container class="mt-4" *ngFor="let product of data; let i = index">
+        <ng-container class="mt-4" *ngFor="let product of dataReal; let i = index">
             <div class="image-hover">
-                <img class="image-size" [src]="product.ulrImg" alt="">
+                <img class="image-size" [src]="product.url" alt="">
                 <div class="image-background">
-                    <div class="image-viewer-x"  (click)="viewerPhoto()"></div>
-                    <div class="image-viewer-y"  (click)="viewerPhoto()"></div>
-                    <img class="cursor-pointer image-vysor" (click)="viewerPhoto()" src="assets/img/dashboard/icon-view-img.svg" alt="">
+                    <div class="image-viewer-x"  (click)="viewerPhoto(product)"></div>
+                    <div class="image-viewer-y"  (click)="viewerPhoto(product)"></div>
+                    <img class="cursor-pointer image-vysor" (click)="viewerPhoto(product)" src="assets/img/dashboard/icon-view-img.svg" alt="">
                     <div class="custom-color-primary">
                         <mat-checkbox [(ngModel)]="product.dataR" (change)="loadDelete()" class="check-margin">
                         </mat-checkbox>
@@ -64,14 +64,14 @@
         <hr class="separator-img">
     </div>
     <div  fxLayout="row wrap"  fxLayoutGap="5px">
-        <ng-container class="mt-4" *ngFor="let product of dataVideo; let i = index">
+        <ng-container class="mt-4" *ngFor="let product of dataRealVideo; let i = index">
             <div class="image-hover">
-                <video class="image-size" [src]="product.ulrImg"></video>
+                <video class="image-size" [src]="product.url"></video>
                 
                 <div class="image-background">
-                    <div class="image-viewer-x"  (click)="viewerVideo()"></div>
-                    <div class="image-viewer-y"  (click)="viewerVideo()"></div>
-                    <img class="cursor-pointer image-vysor" (click)="viewerVideo()" src="assets/img/dashboard/icon-view-img.svg" alt="">
+                    <div class="image-viewer-x"  (click)="viewerVideo(product)"></div>
+                    <div class="image-viewer-y"  (click)="viewerVideo(product)"></div>
+                    <img class="cursor-pointer image-vysor" (click)="viewerVideo(product)" src="assets/img/dashboard/icon-view-img.svg" alt="">
                     <div class="custom-color-primary">
                         <mat-checkbox [(ngModel)]="product.dataR" class="check-margin">
                         </mat-checkbox>
@@ -85,12 +85,12 @@
 
 <ng-template #templateImage>
     <div>
-        <img class="w-image" src="https://d500.epimg.net/cincodias/imagenes/2018/11/13/lifestyle/1542113135_776401_1542116070_noticia_normal.jpg" alt="">
+        <img class="w-image" [src]="url" alt="">
     </div>
 </ng-template>
 <ng-template #templateVideo>
     <div>
-        <video class="w-image" src="http://v2v.cc/~j/theora_testsuite/320x240.ogg" controls></video>
+        <video class="w-image" [src]="url" controls></video>
     </div>
 </ng-template>
 <ng-template #templateDeleteContent>

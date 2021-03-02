@@ -15,10 +15,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AnonymousModule } from 'src/app/modules/anonymous/anonymous.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import Swal from 'sweetalert2';
+import { ContentService } from 'src/app/services/content.service';
+import { of } from 'rxjs';
 describe('ContentLibraryComponent', () => {
     let component: ContentLibraryComponent;
     let fixture: ComponentFixture<ContentLibraryComponent>;
     const mockDialog = jasmine.createSpyObj("MatDialog", ["open", "closeAll"]);
+    const mockContentService = jasmine.createSpyObj("ContentService", [
+        "getVideosImage", "setContentImgVi"
+    ]);
+    const audit = {
+        state: "success",
+        userMessage: "se ha enviado un correo",
+        objectResponse: [{
+        }]
+    };
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ContentLibraryComponent],
@@ -51,10 +62,13 @@ describe('ContentLibraryComponent', () => {
                 NO_ERRORS_SCHEMA
             ],
             providers: [
-                { provide: MatDialog, useValue: mockDialog }
+                { provide: MatDialog, useValue: mockDialog },
+                { provide: ContentService, useValue: mockContentService },
             ]
         })
             .compileComponents();
+        mockContentService.getVideosImage.and.returnValue(of(audit));
+        mockContentService.setContentImgVi.and.returnValue(of(audit));
     }));
 
     beforeEach(() => {
@@ -72,9 +86,9 @@ describe('ContentLibraryComponent', () => {
         expect(component.active).toBeFalsy();
         component.selectAll();
         expect(component.active).toBeTruthy();
-        component.viewerPhoto();
+        component.viewerPhoto("url");
         expect(mockDialog.open).toHaveBeenCalled();
-        component.viewerVideo();
+        component.viewerVideo("url");
         expect(mockDialog.open).toHaveBeenCalled();
         spyOn(Swal, "fire").and.returnValue(
             Promise.resolve<any>({
@@ -92,5 +106,15 @@ describe('ContentLibraryComponent', () => {
         expect(component.validFormat).toBeFalsy();
         component.getExtension("archivo.mp4", 80000000)
         expect(component.validFormat).toBeFalsy();
+        component.id = "1";
+        component.nameFileCont = "archivo.jpg"
+        component.fileCont = "base64"
+        component.saveFormat();
     });
+    it('new file', () => {
+        const mockFile = new File([""], "name.jpg", { type: "text/html" });
+        const mockEvt = { target: { files: [mockFile] } };
+        component.onFileChangeFilesCont(mockEvt, 'ced');
+        expect(mockEvt).toBeDefined();
+    })
 });

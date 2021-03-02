@@ -46,6 +46,9 @@ export class ContentService {
   apiGetAllCategory = "business/getallcategories"
   apiOrderCategory = "business/ordercategories";
   apiGetpopups = "popups/getpopups";
+  apiUploadContent = "library/uploadcontentlibrary";
+  apiGetContentVideo = "library/getcontentlibrary";
+  apiDeleteContent = "library/deletecontentslibrary"
   sendSearch = {};
 
   public getNews() {
@@ -402,6 +405,41 @@ export class ContentService {
         ),
         map((business: ResponseService) => {
           return business.objectResponse;
+        })
+      );
+  }
+  public getVideosImage(id: any) {
+    return this.http
+      .get(
+        `${this.url + this.apiGetContentVideo}?idbusiness=${id}`,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((business: ResponseService) => {
+          return business;
+        })
+      );
+  }
+  public setContentImgVi(data: any) {
+    return this.http
+      .post(`${this.url + this.apiUploadContent}`, data, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
         })
       );
   }
