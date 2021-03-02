@@ -13,7 +13,7 @@ moment.locale("es");
 })
 export class ReportNewsComponent implements OnInit {
     dateForm: FormGroup;
-    maxDate: Date;
+    maxDate = new Date();
     nameFileCert: string = '';
     showErrorCert: boolean;
     validFormat: boolean;
@@ -27,7 +27,7 @@ export class ReportNewsComponent implements OnInit {
         private users: UserService,
     ) {
         const currentYear = new Date().getFullYear()
-        this.maxDate = new Date(currentYear + 1, 11, 31);
+        //this.maxDate = new Date(currentYear + 1, 11, 31);
     }
     dataSource: any;
     ngOnInit() {

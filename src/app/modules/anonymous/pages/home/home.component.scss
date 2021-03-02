@@ -1,67 +1,104 @@
-@import 'animations';
-@import 'variables';
-@import 'general';
+@import "animations";
+@import "variables";
+@import "general";
 
-.login{
-    box-shadow: none !important;
-  }
+.login {
+  box-shadow: none !important;
+}
 
-  .mat-transparent{
-    background: transparent;
-  }
+.mat-transparent {
+  background: transparent;
+}
 
-  .link{
-    color: $primary-color;
-    text-decoration: underline;
+.link {
+  color: $primary-color;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.cursor {
+  &-pointer {
     cursor: pointer;
   }
+}
 
-  .cursor{
-    &-pointer{
-      cursor: pointer;
-    }
-  }
-  
-  .text-decoration{
-      text-decoration: underline;
-  }
-  
+.text-decoration {
+  text-decoration: underline;
+}
 
-.bg-gray{
-  background: #ECECEC5F;
+.bg-gray {
+  background: #ececec5f;
   overflow: hidden;
 }
 
-.border-gray{
+.border-gray {
   border-top: 1px solid $gray2;
 }
 
-.title{
-  &-h3{
+.title {
+  &-h3 {
     font-size: 23px;
   }
 }
 
-.img-responsive{
+.img-responsive {
   max-width: 100%;
 }
 
-.bg-slide{
-  background: url('/assets/img/home/bg-videos.jpg') no-repeat;
+.bg-slide {
+  background: url("/assets/img/home/bg-videos.jpg") no-repeat;
   background-size: cover;
 }
 
-.medals{
+.medals {
   position: relative;
-  .mat-card{
-    background: transparent linear-gradient(180deg, #FD6A6A 0%, #FF7C7C 100%) 0% 0% no-repeat padding-box;
+  .mat-card {
+    background: transparent linear-gradient(180deg, #fd6a6a 0%, #ff7c7c 100%) 0%
+      0% no-repeat padding-box;
     min-height: 90px;
     width: 360px;
   }
 }
 
-.icon-medal{
+.icon-medal {
   position: absolute;
   top: 0;
   left: 20px;
+}
+
+.card-library {
+  border-radius: 10px;
+  background-color: #947fba;
+  color: #ffffff;
+  margin-bottom: 15px;
+  padding-left: 20px;
+  h3 {
+    color: #ffffff;
+    font-size: 24px;
+    margin-top: 20px !important;
+    margin-bottom: 12px !important;
+  }
+}
+.button-oferts {
+  width: 140px;
+}
+.position-absolute {
+  position: absolute;
+}
+.heigth-image {
+  height: 118px;
+}
+@media screen and (max-width: 600px) {
+  .card-library {
+    h3 {
+      font-size: 14px;
+      width: 200px;
+    }
+    .button-oferts {
+      width: 110px;
+    }
+  }
+  .heigth-image {
+    height: auto;
+  }
 }

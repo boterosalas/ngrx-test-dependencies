@@ -21,7 +21,7 @@
                     </div>
                     <h4>¿Tienes una novedad con la plataforma o los negocios aliados? Vamos a resolverlo!, Por favor completa el siguiente formulario con la información requerida para que nuestro equipo lo empiece a resolver ágilmente.</h4>
                     <div class="card-report-dark">
-                        <p class="margin-zero-top">Evite reportar las siguientes novedades: </p>    
+                        <p class="margin-zero-top">Evita reportar las siguientes novedades: </p>    
                         <p class="margin-zero-bottom">- Si tu novedad es referente a tiempos de entrega. </p>
                         <p class="margin-zero-top margin-zero-bottom">- Novedades en pasarelas de pagos de los negocios aliados.</p>    
                         <p class="margin-zero-top">- Modificación de datos en las compras de los negocios aliados o retractos. </p>
@@ -29,17 +29,23 @@
                     </div>
 
                     <div>
+                      
                         <form [formGroup]="dateForm" class="mt-4" >
+
                             <div fxLayout="row" fxLayout.xs="column">
                             <div fxLayout="column">
-                            <label class="label-up-text " for="picker"> FECHA DE REPORTE</label>
+                              
+                            <label class="label-up-text " for="picker"> FECHA DE NOVEDAD</label>
+
                             <div fxLayout="row" class="mt-2">
+                              
                                 <mat-datepicker class="icon-date" touchUi #picker></mat-datepicker>
                                 <mat-datepicker-toggle
                                   class="icon-date"
+                                  matSuffix
                                   [for]="picker"
                                 ></mat-datepicker-toggle>
-                                <input #inputData
+                                <input
                                   matInput
                                   (click)="picker.open()"
                                   [matDatepicker]="picker"
@@ -48,6 +54,7 @@
                                   readonly
                                   class="form-control border-input mat-elevation-z1 p-2 border-radius"
                                 />
+                              
                             </div>
                             <div>
                               <label class="label-up-text " for="picker">NEGOCIO</label>
@@ -81,7 +88,7 @@
                             <div class="mt-3">
                                     <textarea
                                       matInput
-                                      placeholder="Cuéntanos sobre tu novedad, se muy especifico con las fechas, la forma en que referiste"
+                                      placeholder="Cuéntanos sobre tu novedad, se muy específico con las fechas y la forma en que referiste"
                                       id="description"
                                       type="text"
                                       formControlName="description"

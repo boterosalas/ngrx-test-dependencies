@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import Swal from 'sweetalert2';
 import { DialogVideoPlayerComponent } from '../../components/dialog-video-player/dialog-video-player.component';
 
 @Component({
@@ -18,11 +19,17 @@ export class ContentLibraryComponent implements OnInit {
     @ViewChild("templateVideo", { static: false }) templateVideoP: TemplateRef<
         any
     >;
+    @ViewChild("templateDeleteContent", { static: false }) templateDelete: TemplateRef<
+        any
+    >;
     title: string;
     active: boolean;
     image: string;
     data: any;
+    validFormat: boolean;
     dataVideo: any;
+    nameFileCont: any;
+    fileCont: any;
     private subscription: Subscription = new Subscription();
     constructor(
         private dialog: MatDialog,
@@ -63,9 +70,9 @@ export class ContentLibraryComponent implements OnInit {
         ]
         this.dataVideo = [
             { id: 1, ulrImg: "http://v2v.cc/~j/theora_testsuite/320x240.ogg", dataR: false },
-            { id: 2, ulrImg: "http://v2v.cc/~j/theora_testsuite/320x240.ogg", dataR: false },
-            { id: 3, ulrImg: "http://v2v.cc/~j/theora_testsuite/320x240.ogg", dataR: false },
-            { id: 4, ulrImg: "http://v2v.cc/~j/theora_testsuite/320x240.ogg", dataR: false },
+            { id: 2, ulrImg: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4", dataR: false },
+            { id: 3, ulrImg: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4", dataR: false },
+            { id: 4, ulrImg: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4", dataR: false },
             { id: 5, ulrImg: "http://v2v.cc/~j/theora_testsuite/320x240.ogg", dataR: false },
             { id: 6, ulrImg: "http://v2v.cc/~j/theora_testsuite/320x240.ogg", dataR: false },
             { id: 7, ulrImg: "http://v2v.cc/~j/theora_testsuite/320x240.ogg", dataR: false },
@@ -97,7 +104,17 @@ export class ContentLibraryComponent implements OnInit {
         });
     }
     public deleteEvery() {
-
+        let id = '';
+        let title = '';
+        let template = this.templateDelete;
+        this.dialog.open(ModalGenericComponent, {
+            maxWidth: "600px",
+            data: {
+                id,
+                title,
+                template,
+            },
+        });
     }
     public loadDelete() {
         let index = []
@@ -128,5 +145,59 @@ export class ContentLibraryComponent implements OnInit {
             },
             backdropClass: 'backdropBackground'
         });
+    }
+
+    public getExtension(nameFile: string, getSize: number) {
+        let splitExt = nameFile.split(".");
+        let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
+        this.validFormat = false;
+        if (getExt === "jpg" || getExt === "jpeg" || getExt === "mp4") {
+            this.validFormat = true;
+        } else {
+            Swal.fire({
+                text: "El formato a cargar no es permitido recuerda que deben ser videos en formato mp4 o imagenes en jpg",
+                type: "error",
+                confirmButtonText: "Aceptar",
+                confirmButtonClass: 'accept-login-alert-error'
+            });
+        }
+        if (getSize / 1000 > 7000 && (getExt === "jpg" || getExt === "jpeg")) {
+            this.validFormat = false;
+            Swal.fire({
+                text: "No pudimos cargar el contenido, ten en cuenta que cada imagen no puede superar el tamaño de 7mb.",
+                type: "error",
+                confirmButtonText: "Aceptar",
+                confirmButtonClass: 'accept-login-alert-error'
+            });
+        } else if (getSize / 1000 > 70000 && (getExt === "mp4")) {
+            this.validFormat = false;
+            Swal.fire({
+                text: "No pudimos cargar el contenido, ten en cuenta que cada video no puede superar el tamaño de 70mb.",
+                type: "error",
+                confirmButtonText: "Aceptar",
+                confirmButtonClass: 'accept-login-alert-error'
+            });
+        }
+    }
+    public onFileChangeFilesCont(event, param: string) {
+        let nameFile = event.target.files[0].name;
+        let reader = new FileReader();
+        let sizeFile = event.target.files[0].size;
+        if (event.target.files && event.target.files.length) {
+            const [file] = event.target.files;
+            let fileBlob = new Blob([file]);
+            let file2 = new File([fileBlob], nameFile);
+            reader.readAsDataURL(file2);
+            reader.onload = () => {
+                this.getExtension(nameFile, sizeFile);
+                if (this.validFormat === true) {
+                    this.fileCont = reader.result;
+                    this.nameFileCont = nameFile;
+                    console.log(this.fileCont)
+                } else {
+                    console.log("Error en la carga")
+                }
+            };
+        }
     }
 }

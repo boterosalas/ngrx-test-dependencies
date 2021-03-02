@@ -42,6 +42,25 @@
     <ng-container *ngFor="let bussines of bussinessClicker; let i = index">
       <app-bussiness-card *ngIf="isEmployee === true && bussines.code === 'envios-clickam' && auth.isLoggedIn()" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
     </ng-container>
+    
+  </div>
+  <div *ngIf="auth.isLoggedIn()" fxLayout="row" class="card-library"  fxShow.gt-xs="true" fxShow.xs="false">
+    <div class="position-relative banner-mobile heigth-image" fxShow.gt-xs="true" fxShow.xs="false">
+      <div class="position-absolute" fxLayout="column">
+        <h3>Descarga las mejores ofertas para compartir.</h3>
+        <button mat-raised-button class="button-oferts" color="orange" [routerLink]="[ '/biblioteca']" id="download-users"  [disabled]="disableButon">Ver Ofertas</button>    
+      </div>  
+      <img class="responsive-img" src="/assets/img/banners/oferts.png" [alt]="title">
+    </div>
+  </div>
+  <div *ngIf="auth.isLoggedIn()" fxLayout="row" class="card-library"  fxShow.gt-xs="false" fxShow.xs="true">
+    <div class="position-relative banner-mobile heigth-image" fxShow.gt-xs="false" fxShow.xs="true">
+      <div class="position-absolute" fxLayout="column">
+        <h3>Descarga aquí las mejores ofertas del día</h3>
+        <button mat-raised-button class="button-oferts" color="orange" [routerLink]="[ '/biblioteca']" id="download-users"  [disabled]="disableButon">Ver Ofertas</button>    
+      </div>
+      <img class="responsive-img" src="/assets/img/banners/oferts_mobile.png" [alt]="title">
+    </div>
   </div>
 
   <span class="border-gray d-block"></span>

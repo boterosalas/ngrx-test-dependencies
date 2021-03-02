@@ -22,7 +22,9 @@
 .position-absolute {
   position: absolute;
 }
-
+.heigth-image {
+  height: 118px;
+}
 @media screen and (max-width: 600px) {
   .card-library {
     h3 {
@@ -32,5 +34,8 @@
     .button-oferts {
       width: 110px;
     }
+  }
+  .heigth-image {
+    height: auto;
   }
 }

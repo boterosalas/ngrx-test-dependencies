@@ -110,4 +110,12 @@ export class NewsAdminComponent implements OnInit {
         this.to = paginate.pageSize * (paginate.pageIndex + 1);
         this.searchUser(this.paginate, this.from, this.to);
     }
+    //sort(event) {
+    //    let name = event.active.toUpperCase();
+    //    let direction = event.direction.toUpperCase();
+    //    if (direction === "") {
+    //        name = "";
+    //    }
+    //    this.searchUser(this.paginate, this.from, this.to, name, direction);
+    // }
 }
