@@ -19,6 +19,7 @@ export class ReportNewsComponent implements OnInit {
     validFormat: boolean;
     fileImgCat: any;
     activebutton: boolean;
+    referencia: string;
     visibleLeft: boolean = false;
     placeholder: string = "REFERENCIA";
     constructor(
@@ -34,7 +35,7 @@ export class ReportNewsComponent implements OnInit {
         this.dateForm = this.fb.group({
             dateRange: [null, Validators.required],
             bussiness: [null, Validators.required],
-            reference: [null],
+            reference: [null, Validators.required],
             description: [null, Validators.required],
             image: [null]
         });
@@ -43,8 +44,25 @@ export class ReportNewsComponent implements OnInit {
     public getAllBusiness() {
         this.content.getBusiness().subscribe(resp => {
             this.dataSource = resp;
+            this.dataSource.push({
+                code: "clickam",
+                description: "Clickam",
+                id: 0,
+                placeholder: "NÚMERO DE REFERIDO"
+            })
+            this.dataSource.sort(function (a, b) {
+                if (a.description > b.description) {
+                    return 1;
+                }
+                if (a.description < b.description) {
+                    return -1;
+                }
+                // a must be equal to b
+                return 0;
+            });
             console.log(this.dataSource)
         })
+
 
     }
 
@@ -52,7 +70,7 @@ export class ReportNewsComponent implements OnInit {
         let splitExt = nameFile.split(".");
         let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
         this.validFormat = false;
-        if (getExt === "jpg") {
+        if (getExt === "jpg" || getExt === "png") {
             this.validFormat = true;
         }
         if (getSize / 1000 > 100) {
@@ -85,21 +103,37 @@ export class ReportNewsComponent implements OnInit {
         }
     }
     public onChangeSelected(selected: string) {
-        console.log(selected);
         this.visibleLeft = true;
         this.placeholder = selected;
 
+
     }
     public sendMessage() {
-        let data = {
-            datenovelty: this.dateForm.controls.dateRange.value,
-            idbusiness: this.dateForm.controls.bussiness.value,
-            code: this.dateForm.controls.reference.value,
-            description: this.dateForm.controls.description.value,
-            document: this.fileImgCat,
-            documenturl: this.nameFileCert
-        }
+        let codeBussiness = "";
+        let data = {};
+        if (this.dateForm.controls.bussiness.value === 0 || this.dateForm.controls.bussiness.value === "0") {
+            codeBussiness = "";
+            console.log("Entrando")
+            data = {
+                datenovelty: this.dateForm.controls.dateRange.value,
+                code: this.dateForm.controls.reference.value,
+                description: this.dateForm.controls.description.value,
+                document: this.fileImgCat,
+                documenturl: this.nameFileCert
+            }
+        } else {
+            codeBussiness = this.dateForm.controls.bussiness.value;
+            console.log("Entrando no value")
+            data = {
+                datenovelty: this.dateForm.controls.dateRange.value,
+                idbusiness: codeBussiness,
+                code: this.dateForm.controls.reference.value,
+                description: this.dateForm.controls.description.value,
+                document: this.fileImgCat,
+                documenturl: this.nameFileCert
+            }
 
+        }
 
         this.users.saveNews(data).subscribe((resp: any) => {
             if (resp.state === "Success") {

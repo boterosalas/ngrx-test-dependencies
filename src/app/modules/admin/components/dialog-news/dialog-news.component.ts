@@ -21,6 +21,7 @@ export class DialogNewsComponent implements OnInit {
     @ViewChild("templateImage", { static: false }) templateVideo: TemplateRef<
         any
     >;
+    image: string;
     selecteds = [{
         titulo: "Pendiente"
     },
@@ -46,8 +47,12 @@ export class DialogNewsComponent implements OnInit {
         this.dateForm = this.fb.group({
             status: [null],
         });
-
-
+        if (this.data.documenturl === "") {
+            this.image = ""
+        } else {
+            let datos = this.data.element.documenturl.split("/");
+            this.image = datos[datos.length - 1]
+        }
     }
     onNoClick(): void {
         this.dialogRef.close();
@@ -77,8 +82,12 @@ export class DialogNewsComponent implements OnInit {
             id: this.data.element.id,
             status: this.dateForm.controls.status.value
         }
-        this.user.setStatus(datos).subscribe((resp) => {
+        this.user.setStatus(datos).subscribe((resp: any) => {
             console.log("Estado cambiado")
+            if (resp.state === "Success") {
+                this.dialogRef.close();
+            }
+
         })
     }
 }

@@ -9,7 +9,7 @@ import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder } from "@angul
 import { RouterTestingModule } from "@angular/router/testing";
 import { JwtModule } from "@auth0/angular-jwt";
 import { NgxDaterangepickerMd, LocaleService, LOCALE_CONFIG } from 'ngx-daterangepicker-material';
-import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { MatDatepickerModule, MatDialog, MatNativeDateModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AnonymousModule } from 'src/app/modules/anonymous/anonymous.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
@@ -18,9 +18,10 @@ import * as moment from 'moment';
 import { UserService } from 'src/app/services/user.service';
 import { of } from 'rxjs';
 moment.locale('es');
-describe('NewsAdminComponent', () => {
+fdescribe('NewsAdminComponent', () => {
   let component: NewsAdminComponent;
   let fixture: ComponentFixture<NewsAdminComponent>;
+  const mockDialog = jasmine.createSpyObj("MatDialog", ["open", "closeAll", "afterAllClosed"]);
   const mockUserService = jasmine.createSpyObj("UserService", [
     "getExportNewsExcel", "getAllNews"
   ]);
@@ -130,10 +131,12 @@ describe('NewsAdminComponent', () => {
           useClass: LocaleService,
           deps: [LOCALE_CONFIG]
         },
+        { provide: MatDialog, useValue: mockDialog },
         { provide: UserService, useValue: mockUserService },
       ]
     })
       .compileComponents();
+    mockDialog.afterAllClosed.and.returnValue(of(getUserExcel));
   }));
 
   beforeEach(() => {
