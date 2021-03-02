@@ -17,7 +17,7 @@ describe('SlideVideoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SlideVideoComponent ],
+      declarations: [SlideVideoComponent],
       imports: [
         SlickCarouselModule,
         FlexLayoutModule,
@@ -39,7 +39,7 @@ describe('SlideVideoComponent', () => {
         })
       ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -61,19 +61,13 @@ describe('SlideVideoComponent', () => {
 
     component.openVideo(data);
     expect(data).toBeDefined();
-
-  });
-
-  it('next', () => {
     component.next();
     expect(component.next).toBeTruthy();
-  });
-
-  it('prev', () => {
     component.prev();
     expect(component.prev).toBeTruthy();
   });
-  
-  
+
+
+
 
 });

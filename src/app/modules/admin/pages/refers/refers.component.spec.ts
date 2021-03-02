@@ -146,6 +146,9 @@ describe('RefersComponent', () => {
     //fixture.detectChanges();
     component.exportRefers();
     expect(mockLinksService.getReportReferral).toHaveBeenCalled();
+    component.changeState();
+    expect(component.disButon).toBeFalsy();
+
   });
 
   //it("export Report Error", () => {
@@ -169,8 +172,5 @@ describe('RefersComponent', () => {
   //    component.exportRefers();
   //  expect(mockLinksService.getReportReferral).toHaveBeenCalled();
   //});
-  it('change state', () => {
-    component.changeState();
-    expect(component.disButon).toBeFalsy();
-  })
+
 });

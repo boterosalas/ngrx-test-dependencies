@@ -73,7 +73,7 @@ export class ReportNewsComponent implements OnInit {
         if (getExt === "jpg" || getExt === "png" || getExt === "pdf") {
             this.validFormat = true;
         }
-        if (getSize / 1000 > 100) {
+        if (getSize / 1000 > 10000) {
             this.validFormat = false;
         }
     }

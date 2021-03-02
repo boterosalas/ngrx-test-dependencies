@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import { ContentService } from 'src/app/services/content.service';
 import Swal from 'sweetalert2';
 import { DialogVideoPlayerComponent } from '../../components/dialog-video-player/dialog-video-player.component';
 
@@ -26,13 +27,17 @@ export class ContentLibraryComponent implements OnInit {
     active: boolean;
     image: string;
     data: any;
+    dataReal = [];
     validFormat: boolean;
     dataVideo: any;
+    dataRealVideo = [];
     nameFileCont: any;
     fileCont: any;
+    url: string;
     private subscription: Subscription = new Subscription();
     constructor(
         private dialog: MatDialog,
+        private content: ContentService,
         private route: ActivatedRoute,
     ) {
         this.subscription = this.route.params.subscribe((route) => {
@@ -81,6 +86,24 @@ export class ContentLibraryComponent implements OnInit {
 
 
         ]
+        this.content.getVideosImage(this.id).subscribe((resp: any) => {
+            console.log(resp)
+            if (resp.state === "Success") {
+                resp.objectResponse.forEach(element => {
+                    if (element.filename.includes("mp4")) {
+                        element.dataR = false;
+                        this.dataRealVideo.push(element)
+                    } else {
+                        element.dataR = false;
+                        this.dataReal.push(element)
+                    }
+                });
+            }
+
+            console.log(this.dataReal)
+            console.log(this.dataRealVideo)
+        })
+
     }
     public selectAll() {
         this.data.forEach(element => {
@@ -88,10 +111,11 @@ export class ContentLibraryComponent implements OnInit {
         });
         this.active = true;
     }
-    public viewerPhoto() {
+    public viewerPhoto(element: any) {
         const title = "";
         const template = this.templateVideo;
         const id = "video-modal";
+        this.url = element.url;
         this.dialog.open(ModalGenericComponent, {
             panelClass: "image-clickacademy",
             maxWidth: "600px",
@@ -131,10 +155,12 @@ export class ContentLibraryComponent implements OnInit {
         }
 
     }
-    public viewerVideo() {
+    public viewerVideo(element: any) {
         const title = "";
         const template = this.templateVideoP;
         const id = "video-modal";
+        this.url = element.url;
+        let urlVideo = element.url
         this.dialog.open(DialogVideoPlayerComponent, {
             panelClass: "image-clickacademy",
             maxWidth: "600px",
@@ -142,6 +168,7 @@ export class ContentLibraryComponent implements OnInit {
                 id,
                 title,
                 template,
+                urlVideo
             },
             backdropClass: 'backdropBackground'
         });
@@ -192,12 +219,24 @@ export class ContentLibraryComponent implements OnInit {
                 this.getExtension(nameFile, sizeFile);
                 if (this.validFormat === true) {
                     this.fileCont = reader.result;
+                    this.fileCont = this.fileCont.split(",")[1]
                     this.nameFileCont = nameFile;
-                    console.log(this.fileCont)
+                    console.log(this.fileCont);
+                    this.saveFormat();
                 } else {
                     console.log("Error en la carga")
                 }
             };
         }
+    }
+    public saveFormat() {
+        let datos = {
+            idBusiness: this.id,
+            url: this.nameFileCont,
+            content: this.fileCont
+        }
+        this.content.setContentImgVi(datos).subscribe(() => {
+            console.log(datos);
+        })
     }
 }
