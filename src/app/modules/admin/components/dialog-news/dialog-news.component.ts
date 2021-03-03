@@ -47,7 +47,7 @@ export class DialogNewsComponent implements OnInit {
         this.dateForm = this.fb.group({
             status: [null],
         });
-        if (this.data.documenturl === "") {
+        if (this.data.element.documenturl === "") {
             this.image = ""
         } else {
             let datos = this.data.element.documenturl.split("/");

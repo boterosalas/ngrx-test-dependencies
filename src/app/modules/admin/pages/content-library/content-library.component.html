@@ -31,7 +31,7 @@
             
             <label  for="cont" class="button-selected-label cursor-pointer"><img class="icon-download-file" src="assets/img/dashboard/icon-upload-img.svg" alt="descarga"> Cargar Contenido</label>
             <input
-                (change)="onFileChangeFilesCont($event, 'ced1')"
+                (change)="handleFileInput($event)"
                 id="cont"
                 type="file"
             />
@@ -43,6 +43,7 @@
         <hr class="separator-img">
     </div>
     <div  fxLayout="row wrap"  fxLayoutGap="5px">
+        <h3 style="color:#726D7E;" *ngIf="!imagenDispo">No hay imágenes disponibles para este negocio.</h3>
         <ng-container class="mt-4" *ngFor="let product of dataReal; let i = index">
             <div class="image-hover">
                 <img class="image-size" [src]="product.url" alt="">
@@ -64,6 +65,7 @@
         <hr class="separator-img">
     </div>
     <div  fxLayout="row wrap"  fxLayoutGap="5px">
+        <h3 style="color:#726D7E;" *ngIf="!videosDispo">No hay videos disponibles para este negocio.</h3>
         <ng-container class="mt-4" *ngFor="let product of dataRealVideo; let i = index">
             <div class="image-hover">
                 <video class="image-size" [src]="product.url"></video>
@@ -73,7 +75,7 @@
                     <div class="image-viewer-y"  (click)="viewerVideo(product)"></div>
                     <img class="cursor-pointer image-vysor" (click)="viewerVideo(product)" src="assets/img/dashboard/icon-view-img.svg" alt="">
                     <div class="custom-color-primary">
-                        <mat-checkbox [(ngModel)]="product.dataR" class="check-margin">
+                        <mat-checkbox [(ngModel)]="product.dataR"  (change)="loadDelete()"  class="check-margin">
                         </mat-checkbox>
                     </div>
                     
@@ -103,9 +105,7 @@
               > Cancelar </button>
             </div>
             <div>
-            <button mat-button class="red" (click)="deleteAccountService()"
-            [disabled]="!profileFormDelete.valid"
-            [ngClass]="{'red-disable' : !profileFormDelete.valid}"
+            <button mat-button class="red" (click)="deleteVideos()"
             ><span
             fxLayoutAlign="center space-between"
             >

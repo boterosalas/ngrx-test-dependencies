@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { map, retry, delay, retryWhen, tap, take } from "rxjs/operators";
 import { ResponseService } from "../interfaces/response";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -48,7 +49,8 @@ export class ContentService {
   apiGetpopups = "popups/getpopups";
   apiUploadContent = "library/uploadcontentlibrary";
   apiGetContentVideo = "library/getcontentlibrary";
-  apiDeleteContent = "library/deletecontentslibrary"
+  apiDeleteContent = "library/deletecontentslibrary";
+  apiDownloadContent = "library/downloadzip";
   sendSearch = {};
 
   public getNews() {
@@ -427,9 +429,20 @@ export class ContentService {
         })
       );
   }
-  public setContentImgVi(data: any) {
+  public setContentImgVi(data) {
+    let httpOptionsSet = {
+      headers: new HttpHeaders({
+        Authorization: "Bearer " + this.authorization,
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
+    };
     return this.http
-      .post(`${this.url + this.apiUploadContent}`, data, this.httpOptions)
+      .post(`${this.url + this.apiUploadContent}`, data, httpOptionsSet);
+  }
+  //apiDeleteContent
+  public deleteContent(data: any) {
+    return this.http
+      .post(`${this.url + this.apiDeleteContent}`, data, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
@@ -443,4 +456,20 @@ export class ContentService {
         })
       );
   }
+  public downloadF(data: any) {
+    let httpOptionsDow = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + this.authorization,
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
+      responseType: 'blob' as 'json'
+    };
+
+    return this.http
+      .post(`${this.url + this.apiDownloadContent}`, data, httpOptionsDow);
+
+  }
+
+
 }
