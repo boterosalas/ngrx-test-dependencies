@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
@@ -26,19 +26,24 @@ export class ContentLibraryComponent implements OnInit {
     title: string;
     active: boolean;
     image: string;
+    fileToUpload: File = null;
     data: any;
     dataReal = [];
     validFormat: boolean;
     dataVideo: any;
     dataRealVideo = [];
     nameFileCont: any;
+    deleteVideoImg = [];
     fileCont: any;
+    videosDispo: boolean = true;
+    imagenDispo: boolean = true;
     url: string;
     private subscription: Subscription = new Subscription();
     constructor(
         private dialog: MatDialog,
         private content: ContentService,
         private route: ActivatedRoute,
+        private _snackBar: MatSnackBar,
     ) {
         this.subscription = this.route.params.subscribe((route) => {
             if (
@@ -86,8 +91,13 @@ export class ContentLibraryComponent implements OnInit {
 
 
         ]
+
+        this.getVideosImages();
+    }
+    public getVideosImages() {
+        this.dataRealVideo = [];
+        this.dataReal = [];
         this.content.getVideosImage(this.id).subscribe((resp: any) => {
-            console.log(resp)
             if (resp.state === "Success") {
                 resp.objectResponse.forEach(element => {
                     if (element.filename.includes("mp4")) {
@@ -98,18 +108,34 @@ export class ContentLibraryComponent implements OnInit {
                         this.dataReal.push(element)
                     }
                 });
+                if (this.dataRealVideo.length > 0) {
+                    this.videosDispo = true
+                } else {
+                    this.videosDispo = false
+                }
+                if (this.dataReal.length > 0) {
+                    this.imagenDispo = true
+                } else {
+                    this.imagenDispo = false
+                }
             }
-
-            console.log(this.dataReal)
-            console.log(this.dataRealVideo)
-        })
+        });
 
     }
     public selectAll() {
-        this.data.forEach(element => {
-            element.dataR = true;
-        });
-        this.active = true;
+        for (let i = 0; i < this.dataReal.length; i++) {
+            this.dataReal[i].dataR = true;
+        }
+        for (let j = 0; j < this.dataRealVideo.length; j++) {
+            this.dataRealVideo[j].dataR = true;
+        }
+        console.log(this.dataRealVideo);
+        console.log(this.dataReal.length);
+        if (this.dataReal.length > 0 || this.dataRealVideo.length > 0) {
+            this.active = false;
+        }
+        console.log(this.active);
+
     }
     public viewerPhoto(element: any) {
         const title = "";
@@ -143,7 +169,12 @@ export class ContentLibraryComponent implements OnInit {
     public loadDelete() {
         let index = []
 
-        this.data.forEach((elem, i) => {
+        this.dataReal.forEach((elem, i) => {
+            if (elem.dataR === true) {
+                index.push(i);
+            }
+        });
+        this.dataRealVideo.forEach((elem, i) => {
             if (elem.dataR === true) {
                 index.push(i);
             }
@@ -182,7 +213,7 @@ export class ContentLibraryComponent implements OnInit {
             this.validFormat = true;
         } else {
             Swal.fire({
-                text: "El formato a cargar no es permitido recuerda que deben ser videos en formato mp4 o imagenes en jpg",
+                text: "El formato a cargar no es permitido recuerda que deben ser videos en formato .mp4 o imagenes en .jpg",
                 type: "error",
                 confirmButtonText: "Aceptar",
                 confirmButtonClass: 'accept-login-alert-error'
@@ -196,7 +227,7 @@ export class ContentLibraryComponent implements OnInit {
                 confirmButtonText: "Aceptar",
                 confirmButtonClass: 'accept-login-alert-error'
             });
-        } else if (getSize / 1000 > 70000 && (getExt === "mp4")) {
+        } else if (getSize / 1000 > 75000 && (getExt === "mp4")) {
             this.validFormat = false;
             Swal.fire({
                 text: "No pudimos cargar el contenido, ten en cuenta que cada video no puede superar el tamaño de 70mb.",
@@ -206,6 +237,33 @@ export class ContentLibraryComponent implements OnInit {
             });
         }
     }
+    private openSnackBar(message: string, action: string) {
+        this._snackBar.open(message, action, {
+            duration: 5000
+        });
+    }
+    handleFileInput(event) {
+        let fileList: FileList = event.target.files;
+        this.fileToUpload = fileList[0];
+        console.log(this.fileToUpload);
+        let formData: FormData = new FormData();
+        formData.append('file', this.fileToUpload, this.fileToUpload.name);
+        formData.append('idBusiness', this.id);
+        formData.append('url', this.fileToUpload.name);
+        console.log(formData)
+        this.getExtension(this.fileToUpload.name, this.fileToUpload.size);
+        if (this.validFormat === true) {
+            this.content.setContentImgVi(formData).subscribe((resp: any) => {
+                console.log(resp);
+                if (resp.state === "Success") {
+                    this.openSnackBar(resp.userMessage, "Cerrar")
+                }
+                this.getVideosImages()
+            })
+        }
+
+    }
+
     public onFileChangeFilesCont(event, param: string) {
         let nameFile = event.target.files[0].name;
         let reader = new FileReader();
@@ -238,5 +296,26 @@ export class ContentLibraryComponent implements OnInit {
         this.content.setContentImgVi(datos).subscribe(() => {
             console.log(datos);
         })
+    }
+
+    public deleteVideos() {
+        this.deleteVideoImg = []
+        for (let i = 0; i < this.dataReal.length; i++) {
+            if (this.dataReal[i].dataR === true) {
+                this.deleteVideoImg.push(this.dataReal[i].id)
+            }
+        }
+        for (let i = 0; i < this.dataRealVideo.length; i++) {
+            if (this.dataRealVideo[i].dataR === true) {
+                this.deleteVideoImg.push(this.dataRealVideo[i].id)
+            }
+        }
+        this.content.deleteContent(this.deleteVideoImg).subscribe((resp) => {
+            this.getVideosImages();
+            this.dialog.closeAll();
+        })
+    }
+    public cancelDelete() {
+        this.dialog.closeAll();
     }
 }

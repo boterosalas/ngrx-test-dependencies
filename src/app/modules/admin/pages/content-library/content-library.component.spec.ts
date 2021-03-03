@@ -22,7 +22,7 @@ describe('ContentLibraryComponent', () => {
     let fixture: ComponentFixture<ContentLibraryComponent>;
     const mockDialog = jasmine.createSpyObj("MatDialog", ["open", "closeAll"]);
     const mockContentService = jasmine.createSpyObj("ContentService", [
-        "getVideosImage", "setContentImgVi"
+        "getVideosImage", "setContentImgVi", "deleteContent"
     ]);
     const audit = {
         state: "success",
@@ -69,6 +69,8 @@ describe('ContentLibraryComponent', () => {
             .compileComponents();
         mockContentService.getVideosImage.and.returnValue(of(audit));
         mockContentService.setContentImgVi.and.returnValue(of(audit));
+        //deleteContent
+        mockContentService.deleteContent.and.returnValue(of(audit));
     }));
 
     beforeEach(() => {
@@ -80,12 +82,7 @@ describe('ContentLibraryComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
         component.deleteEvery();
-        let datos = true;
-        expect(datos).toBeTruthy();
-        component.loadDelete();
-        expect(component.active).toBeFalsy();
-        component.selectAll();
-        expect(component.active).toBeTruthy();
+
         component.viewerPhoto("url");
         expect(mockDialog.open).toHaveBeenCalled();
         component.viewerVideo("url");
@@ -110,11 +107,26 @@ describe('ContentLibraryComponent', () => {
         component.nameFileCont = "archivo.jpg"
         component.fileCont = "base64"
         component.saveFormat();
+        component.dataReal = [{ dataR: true }, { dataR: false }]
+        component.dataRealVideo = [{ dataR: true }, { dataR: false }]
+        component.loadDelete();
+        expect(component.active).toBeTruthy;
     });
+
     it('new file', () => {
         const mockFile = new File([""], "name.jpg", { type: "text/html" });
         const mockEvt = { target: { files: [mockFile] } };
         component.onFileChangeFilesCont(mockEvt, 'ced');
         expect(mockEvt).toBeDefined();
+        component.dataReal = [{ id: 1, dataR: true }, { id: 2, dataR: false }]
+        component.dataRealVideo = [{ id: 1, dataR: true }, { id: 2, dataR: false }]
+        component.selectAll();
+        expect(component.active).toBeFalsy()
+        component.cancelDelete();
+        expect(mockDialog.closeAll).toHaveBeenCalled();
+        component.dataReal = [{ id: 1, dataR: true }, { id: 2, dataR: false }]
+        component.dataRealVideo = [{ id: 1, dataR: true }, { id: 2, dataR: false }]
+        component.deleteVideos();
+        expect(mockContentService.deleteContent).toHaveBeenCalled();
     })
 });

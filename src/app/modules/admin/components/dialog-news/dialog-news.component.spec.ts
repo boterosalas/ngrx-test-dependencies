@@ -12,12 +12,21 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { UserService } from 'src/app/services/user.service';
+import { of } from 'rxjs';
 describe('DialogNewsComponent', () => {
   let component: DialogNewsComponent;
   let fixture: ComponentFixture<DialogNewsComponent>;
   const dialogMock = {
     close: () => { }
   };
+  const mockUserService = jasmine.createSpyObj("UserService", [
+    "setStatus"
+  ]);
+  const dataResp = {
+    state: "Success"
+  }
+  const data = { element: { id: 1, documenturl: "http/archivo.jpg" } }
   const mockDialog = jasmine.createSpyObj("MatDialog", ["open", "closeAll"]);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -43,15 +52,17 @@ describe('DialogNewsComponent', () => {
         })
       ],
       providers: [
-        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: data },
         { provide: MatDialogRef, useValue: dialogMock },
-        { provide: MatDialog, useValue: mockDialog }
+        { provide: MatDialog, useValue: mockDialog },
+        { provide: UserService, useValue: mockUserService },
       ],
       schemas: [
         NO_ERRORS_SCHEMA
       ]
     })
       .compileComponents();
+    mockUserService.setStatus.and.returnValue(of(dataResp));
   }));
 
   beforeEach(() => {
@@ -59,6 +70,15 @@ describe('DialogNewsComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+  it('should create', () => {
+    component.data = { element: { id: 1, documenturl: "http/archivo.jpg" } }
+    expect(component).toBeTruthy();
+    let spy = spyOn(component.dialogRef, 'close').and.callThrough();
+    component.onNoClick();
+    expect(spy).toHaveBeenCalled();
+    component.saveChanges();
+    expect(mockUserService.setStatus).toHaveBeenCalled();
 
+  })
 
 });

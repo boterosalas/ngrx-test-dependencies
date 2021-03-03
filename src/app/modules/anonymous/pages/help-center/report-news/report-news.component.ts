@@ -27,7 +27,7 @@ export class ReportNewsComponent implements OnInit {
         private content: ContentService,
         private users: UserService,
     ) {
-        const currentYear = new Date().getFullYear()
+
         //this.maxDate = new Date(currentYear + 1, 11, 31);
     }
     dataSource: any;
@@ -48,7 +48,7 @@ export class ReportNewsComponent implements OnInit {
                 code: "clickam",
                 description: "Clickam",
                 id: 0,
-                placeholder: "NÚMERO DE REFERIDO"
+                placeholder: "TIPO DE REPORTE"
             })
             this.dataSource.sort(function (a, b) {
                 if (a.description > b.description) {
@@ -70,7 +70,7 @@ export class ReportNewsComponent implements OnInit {
         let splitExt = nameFile.split(".");
         let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
         this.validFormat = false;
-        if (getExt === "jpg" || getExt === "png" || getExt === "pdf") {
+        if (getExt === "jpg" || getExt === "png" || getExt === "pdf" || getExt === "zip") {
             this.validFormat = true;
         }
         if (getSize / 1000 > 10000) {
@@ -112,8 +112,6 @@ export class ReportNewsComponent implements OnInit {
         let codeBussiness = "";
         let data = {};
         if (this.dateForm.controls.bussiness.value === 0 || this.dateForm.controls.bussiness.value === "0") {
-            codeBussiness = "";
-            console.log("Entrando")
             data = {
                 datenovelty: this.dateForm.controls.dateRange.value,
                 code: this.dateForm.controls.reference.value,
@@ -123,7 +121,6 @@ export class ReportNewsComponent implements OnInit {
             }
         } else {
             codeBussiness = this.dateForm.controls.bussiness.value;
-            console.log("Entrando no value")
             data = {
                 datenovelty: this.dateForm.controls.dateRange.value,
                 idbusiness: codeBussiness,
@@ -147,6 +144,7 @@ export class ReportNewsComponent implements OnInit {
                     this.visibleLeft = false;
                     this.fileImgCat = "";
                     this.nameFileCert = "";
+                    this.placeholder = "REFERENCIA"
                 });
             }
 
