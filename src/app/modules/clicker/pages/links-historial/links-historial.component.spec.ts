@@ -91,12 +91,10 @@ describe('LinksHistorialComponent', () => {
   it('order', () => {
     component.order('ASC');
     expect(mockLinksService.getLinkHistory).toHaveBeenCalled();
-  });
-
-  it('pagination', () => {
     component.pagination(pagination);
     expect(mockLinksService.getLinkHistory).toHaveBeenCalled();
   });
+
 
 
   it("copyInputMessage", () => {

@@ -174,7 +174,7 @@ export class LibraryComponent implements OnInit {
             }
         }
     }
-    private download(data, type) {
+    public download(data, type) {
         let blob = new Blob([data], { type: type });
         let url = window.URL.createObjectURL(blob);
         const downloadLink = document.createElement("a");
