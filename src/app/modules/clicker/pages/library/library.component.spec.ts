@@ -100,6 +100,12 @@ describe('LibraryComponent', () => {
         expect(component.active).toBeFalsy()
         component.downloadFile();
         component.downloadVideo({ id: 1 });
-
+        component.download("string", "video/mp4")
+        component.download("string", "image/jpg")
+        component.download("string", "application/zip")
+        component.dataReal = [{ id: 1, dataR: true }, { id: 2, dataR: false }]
+        component.dataRealVideo = [{ id: 1, dataR: true }, { id: 2, dataR: false }]
+        component.downloadFiles()
     })
 });
+
