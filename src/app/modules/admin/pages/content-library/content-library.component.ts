@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -23,6 +23,7 @@ export class ContentLibraryComponent implements OnInit {
     @ViewChild("templateDeleteContent", { static: false }) templateDelete: TemplateRef<
         any
     >;
+    @ViewChild('inputFile', { static: false }) myInputVariable: ElementRef;
     title: string;
     active: boolean;
     image: string;
@@ -243,6 +244,7 @@ export class ContentLibraryComponent implements OnInit {
         });
     }
     handleFileInput(event) {
+        console.log("Estatus");
         let fileList: FileList = event.target.files;
         this.fileToUpload = fileList[0];
         console.log(this.fileToUpload);
@@ -257,8 +259,9 @@ export class ContentLibraryComponent implements OnInit {
                 console.log(resp);
                 if (resp.state === "Success") {
                     this.openSnackBar(resp.userMessage, "Cerrar")
+                    this.myInputVariable.nativeElement.value = '';
                 }
-                this.getVideosImages()
+                //this.getVideosImages()
             })
         }
 

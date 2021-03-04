@@ -106,6 +106,12 @@ describe('LibraryComponent', () => {
         component.dataReal = [{ id: 1, dataR: true }, { id: 2, dataR: false }]
         component.dataRealVideo = [{ id: 1, dataR: true }, { id: 2, dataR: false }]
         component.downloadFiles()
+        component.dataReal = [{ id: 1, dataR: false }, { id: 2, dataR: false }]
+        component.dataRealVideo = [{ id: 1, dataR: true }, { id: 2, dataR: false }]
+        component.downloadFiles()
+        component.dataReal = [{ id: 1, dataR: true }, { id: 2, dataR: false }]
+        component.dataRealVideo = [{ id: 1, dataR: false }, { id: 2, dataR: false }]
+        component.downloadFiles()
     })
 });
 
