@@ -51,6 +51,7 @@ export class ContentService {
   apiGetContentVideo = "library/getcontentlibrary";
   apiDeleteContent = "library/deletecontentslibrary";
   apiDownloadContent = "library/downloadzip";
+
   sendSearch = {};
 
   public getNews() {

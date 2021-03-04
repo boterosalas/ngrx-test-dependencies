@@ -37,7 +37,7 @@
             <span class="galano-bold gray ">ESTADO</span> 
             <span *ngIf="data.element.statusnovelty === 'Pendiente'" class="span-relative-new ml-2 normal-text"><img class="status-img" src="/assets/img/dashboard/icon-info.svg" alt="pendind"> Pendiente</span>
             <span *ngIf="data.element.statusnovelty === 'Solucionado'" class="span-relative-new ml-2 normal-text"><img class="status-img" src="/assets/img/dashboard/icon-check-new.svg" alt="pendind"> Solucionado</span>
-            <span *ngIf="data.element.statusnovelty === 'En revisión'" class="span-relative-new ml-2 normal-text"><img class="status-img" src="/assets/img/dashboard/icon-revision.svg" alt="pendind"> En Revición</span>
+            <span *ngIf="data.element.statusnovelty === 'En revisión'" class="span-relative-new ml-2 normal-text"><img class="status-img" src="/assets/img/dashboard/icon-revision.svg" alt="pendind"> En revición</span>
         </p>
     </div>
     <div fxLayout="column">
@@ -51,7 +51,7 @@
             <span class="normal-text ">{{data.element.idclicker}}</span>
         </p>
         <p fxLayout="column" class="margin-zero-bottom">
-            <span class="galano-bold gray w-label-info">CEDULA</span> 
+            <span class="galano-bold gray w-label-info">CÉDULA</span> 
             <span class="normal-text ">{{data.element.identification}}</span>
         </p>
         <p fxLayout="column" class="margin-zero-bottom">
@@ -80,7 +80,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <button mat-raised-button color="orange" (click)="saveChanges()" id="download-users" class="ml-2 send-button" >Guardar</button>    
+          <button mat-raised-button color="orange" [disabled]="active" (click)="saveChanges()" id="download-users" class="ml-2 send-button" >Guardar</button>    
     </form>
 </div>
 

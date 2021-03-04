@@ -22,6 +22,7 @@ export class DialogNewsComponent implements OnInit {
         any
     >;
     image: string;
+    active: boolean = true;
     selecteds = [{
         titulo: "Pendiente"
     },
@@ -45,7 +46,7 @@ export class DialogNewsComponent implements OnInit {
     ngOnInit() {
 
         this.dateForm = this.fb.group({
-            status: [null],
+            status: [this.data.element.statusnovelty],
         });
         if (this.data.element.documenturl === "") {
             this.image = ""
@@ -71,7 +72,7 @@ export class DialogNewsComponent implements OnInit {
                 const id = "video-modal";
                 this.dialog.open(ModalGenericComponent, {
                     panelClass: "image-clickacademy",
-                    maxWidth: "600px",
+
                     data: {
                         id,
                         title,
@@ -109,5 +110,14 @@ export class DialogNewsComponent implements OnInit {
             }
 
         })
+    }
+    public onChangeSelected(element: any) {
+        let data = element;
+        if (data === this.data.element.statusnovelty) {
+            this.active = true
+        } else {
+            this.active = false
+        }
+
     }
 }

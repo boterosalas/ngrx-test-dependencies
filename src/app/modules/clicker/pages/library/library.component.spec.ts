@@ -24,7 +24,7 @@ describe('LibraryComponent', () => {
     let fixture: ComponentFixture<LibraryComponent>;
     const mockDialog = jasmine.createSpyObj("MatDialog", ["open", "closeAll"]);
     const mockContentService = jasmine.createSpyObj("ContentService", [
-        "getVideosImage", "setContentImgVi", "getBusiness"
+        "getVideosImage", "setContentImgVi", "getBusiness", "downloadF"
     ]);
     const audit = {
         state: "success",
@@ -65,6 +65,7 @@ describe('LibraryComponent', () => {
             .compileComponents();
         mockContentService.getVideosImage.and.returnValue(of(audit));
         mockContentService.getBusiness.and.returnValue(of(audit));
+        mockContentService.downloadF.and.returnValue(of(audit));
 
     }));
 
@@ -97,6 +98,8 @@ describe('LibraryComponent', () => {
         component.selectAll();
         //component.downloadFiles();
         expect(component.active).toBeFalsy()
+        component.downloadFile();
+        component.downloadVideo({ id: 1 });
 
     })
 });

@@ -26,7 +26,7 @@ describe('DialogNewsComponent', () => {
   const dataResp = {
     state: "Success"
   }
-  const data = { element: { id: 1, documenturl: "http/archivo.jpg" } }
+  const data = { element: { id: 1, documenturl: "http/archivo.jpg", statusnovelty: "Pendiente" } }
   const mockDialog = jasmine.createSpyObj("MatDialog", ["open", "closeAll"]);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -78,7 +78,7 @@ describe('DialogNewsComponent', () => {
     expect(spy).toHaveBeenCalled();
     component.saveChanges();
     expect(mockUserService.setStatus).toHaveBeenCalled();
-
+    component.onChangeSelected("Pendiente")
   })
 
 });
