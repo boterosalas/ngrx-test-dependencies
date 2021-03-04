@@ -121,7 +121,7 @@ export class UsersComponent extends MatPaginatorIntl
         startIndex < length
           ? Math.min(startIndex + pageSize, length)
           : startIndex + pageSize;
-      return startIndex + 1 + " de " + endIndex + " items de " + length;
+      return startIndex + 1 + " de " + endIndex + " ítems de " + length;
     };
   }
 

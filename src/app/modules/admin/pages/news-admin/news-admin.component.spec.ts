@@ -149,8 +149,6 @@ describe('NewsAdminComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-  it('get report excel', () => {
     let start = moment();
     let end = moment("12-01-2020");
     component.dateForm.controls.dateRange.setValue({ startDate: start, endDate: end });
@@ -159,6 +157,5 @@ describe('NewsAdminComponent', () => {
     component.pagination({ previousPageIndex: 1, pageIndex: 0, pageSize: 20, length: 5 });
     expect(mockUserService.getAllNews).toHaveBeenCalled();
   });
-
 
 });

@@ -86,9 +86,9 @@
                 <div class="image-hover">
                     <video class="image-size" [src]="product.url" ></video> 
                     <div class="image-background">
-                        <div class="image-viewer-x"  (click)="downloadVideo()"></div>
-                        <div class="image-viewer-y"  (click)="downloadVideo()"></div>
-                        <img class="cursor-pointer image-vysor" (click)="downloadVideo()" src="assets/img/dashboard/descarga.svg" alt="">
+                        <div class="image-viewer-x"  (click)="downloadVideo(product)"></div>
+                        <div class="image-viewer-y"  (click)="downloadVideo(product)"></div>
+                        <img class="cursor-pointer image-vysor" (click)="downloadVideo(product)" src="assets/img/dashboard/descarga.svg" alt="">
                         <div class="custom-color-primary">
                             <mat-checkbox [(ngModel)]="product.dataR" class="check-margin" (change)="loadDelete()">
                             </mat-checkbox>
@@ -123,7 +123,7 @@
             <h3 class="size-text">Imágenes</h3> 
             <hr class="separator-img">
         </div>
-        <div class="center-class-wrap"  fxLayout="row wrap"  fxLayoutAlign="center center" fxLayoutGap="10px">
+        <div class="ml-2"  fxLayout="row wrap"  fxLayoutAlign="start center" fxLayoutGap="13px">
             <h3 style="color:#726D7E;" *ngIf="!imagenDispo">No hay imágenes disponibles para este negocio.</h3>
             <ng-container class="mt-4" *ngFor="let product of dataReal; let i = index">
                 <div class="image-hover">
@@ -145,15 +145,15 @@
             <h3 class="size-text">Videos</h3> 
             <hr class="separator-img">
         </div>
-        <div  fxLayout="row wrap"  fxLayoutGap="10px" fxLayoutAlign="center center">
+        <div class="ml-2" fxLayout="row wrap"  fxLayoutGap="10px" fxLayoutAlign="start center">
             <h3 style="color:#726D7E;" *ngIf="!videosDispo">No hay videos disponibles para este negocio.</h3>
             <ng-container class="mt-4" *ngFor="let product of dataRealVideo; let i = index">
                 <div class="image-hover">
                     <video class="image-size" [src]="product.url" ></video> 
                     <div class="image-background">
-                        <div class="image-viewer-x"  (click)="downloadVideo()"></div>
-                        <div class="image-viewer-y"  (click)="downloadVideo()"></div>
-                        <img class="cursor-pointer image-vysor" (click)="downloadVideo()" src="assets/img/dashboard/descarga.svg" alt="">
+                        <div class="image-viewer-x"  (click)="downloadVideo(product)"></div>
+                        <div class="image-viewer-y"  (click)="downloadVideo(product)"></div>
+                        <img class="cursor-pointer image-vysor" (click)="downloadVideo(product)" src="assets/img/dashboard/descarga.svg" alt="">
                         <div class="custom-color-primary">
                             <mat-checkbox [(ngModel)]="product.dataR" class="check-margin" (change)="loadDelete()">
                             </mat-checkbox>
@@ -170,6 +170,6 @@
 <ng-template #templateImage>
     <div>
         <img class="w-image" [src]="url" alt="contenido-negocio">
-        <a class="download-file cursor-pointer"><img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"> Descargar </a>
+        <button class="download-file cursor-pointer" (click)="downloadFile()"><img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"> Descargar </button>
     </div>
 </ng-template>

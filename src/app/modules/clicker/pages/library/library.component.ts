@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog } from '@angular/material';
 @Component({
     selector: 'app-library',
     templateUrl: './library.component.html',
@@ -22,6 +22,7 @@ export class LibraryComponent implements OnInit {
     dataRealVideo = [];
     url: string;
     active: boolean = true;
+    idDownload: string;
     bussiness: Array<any> = [];
     deleteVideoImg = [];
     @ViewChild("templateImage", { static: false }) templateVideo: TemplateRef<
@@ -30,8 +31,6 @@ export class LibraryComponent implements OnInit {
     constructor(
         private dialog: MatDialog,
         private content: ContentService,
-        private _snackBar: MatSnackBar,
-
     ) { }
 
     ngOnInit() {
@@ -106,6 +105,7 @@ export class LibraryComponent implements OnInit {
         const template = this.templateVideo;
         const id = "video-modal";
         this.url = element.url;
+        this.idDownload = element.id;
         this.dialog.open(ModalGenericComponent, {
             panelClass: "image-clickacademy",
             maxWidth: "600px",
@@ -142,37 +142,68 @@ export class LibraryComponent implements OnInit {
     }
     public downloadFiles() {
         this.deleteVideoImg = []
+        let variableImg = false;
+        let variableVideo = false;
         for (let i = 0; i < this.dataReal.length; i++) {
             if (this.dataReal[i].dataR === true) {
                 this.deleteVideoImg.push(this.dataReal[i].id)
+                variableImg = true;
             }
         }
         for (let i = 0; i < this.dataRealVideo.length; i++) {
             if (this.dataRealVideo[i].dataR === true) {
-                this.deleteVideoImg.push(this.dataRealVideo[i].id)
+                this.deleteVideoImg.push(this.dataRealVideo[i].id);
+                variableVideo = true;
             }
         }
-        this.content.downloadF(this.deleteVideoImg).subscribe((resp) => {
-            //console.log(resp)
-            this.download(resp)
-        })
+        if (this.deleteVideoImg.length > 1) {
+            this.content.downloadF(this.deleteVideoImg).subscribe((resp) => {
+                //console.log(resp)
+                this.download(resp, "application/zip")
+            })
+        } else {
+            if (variableImg === true) {
+                this.content.downloadF(this.deleteVideoImg).subscribe((resp) => {
+                    this.download(resp, "image/jpg")
+                });
+            }
+            if (variableVideo === true) {
+                this.content.downloadF(this.deleteVideoImg).subscribe((resp) => {
+                    this.download(resp, "video/mp4")
+                });
+            }
+        }
+    }
+    private download(data, type) {
+        let blob = new Blob([data], { type: type });
+        let url = window.URL.createObjectURL(blob);
+        const downloadLink = document.createElement("a");
+        if (type.includes("zip")) {
+            downloadLink.href = url;
+            downloadLink.download = "archivo.zip";
+            downloadLink.click();
+        } else if (type.includes("jpg")) {
+            downloadLink.href = url;
+            downloadLink.download = "archivo.jpg";
+            downloadLink.click();
+        } else if (type.includes("mp4")) {
+            downloadLink.href = url;
+            downloadLink.download = "archivo.mp4";
+            downloadLink.click();
+        }
 
     }
-    private download(data) {
-        let blob = new Blob([data], { type: "application/zip" });
-        let url = window.URL.createObjectURL(blob);
-        //let pwa = window.open(url);
-        const downloadLink = document.createElement("a");
-        downloadLink.href = url;
-        downloadLink.download = "archivo.zip";
-        downloadLink.click();
-        //if (!pwa || pwa.closed || typeof pwa.closed == 'undefined') {
-        //    alert('Please disable your Pop-up blocker and try again.');
-        //}
+
+    public downloadFile() {
+        let datos = [this.idDownload]
+        this.content.downloadF(datos).subscribe((resp) => {
+            this.download(resp, "image/jpg")
+        });
     }
-    private openSnackBar(message: string, action: string) {
-        this._snackBar.open(message, action, {
-            duration: 5000
+    public downloadVideo(element: any) {
+        let datos = [element.id]
+        this.content.downloadF(datos).subscribe((resp) => {
+            this.download(resp, "video/mp4")
         });
     }
 }
