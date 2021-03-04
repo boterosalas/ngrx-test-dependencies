@@ -31,6 +31,7 @@
             
             <label  for="cont" class="button-selected-label cursor-pointer"><img class="icon-download-file" src="assets/img/dashboard/icon-upload-img.svg" alt="descarga"> Cargar Contenido</label>
             <input
+                #inputFile
                 (change)="handleFileInput($event)"
                 id="cont"
                 type="file"
