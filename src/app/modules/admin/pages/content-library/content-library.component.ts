@@ -326,7 +326,9 @@ export class ContentLibraryComponent implements OnInit {
         }
         this.content.deleteContent(this.deleteVideoImg).subscribe((resp) => {
             this.getVideosImages();
+            this.active = false;
             this.dialog.closeAll();
+
         })
     }
     public cancelDelete() {
