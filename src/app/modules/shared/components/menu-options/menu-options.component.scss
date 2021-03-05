@@ -38,6 +38,18 @@
       left: 1%;
     }
   }
+  .Biblioteca {
+    &::before {
+      content: "";
+      background: url("/assets/img/menu-mobile/icon-upload-library.svg")
+        no-repeat;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
 
   .Negocios {
     &::before {

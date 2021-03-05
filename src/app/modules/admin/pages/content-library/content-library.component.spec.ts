@@ -121,7 +121,13 @@ describe('ContentLibraryComponent', () => {
         component.dataReal = [{ id: 1, dataR: true }, { id: 2, dataR: false }]
         component.dataRealVideo = [{ id: 1, dataR: true }, { id: 2, dataR: false }]
         component.selectAll();
+        component.selectAllVideosImg = "Deseleccionar todo"
+        component.dataReal = [{ id: 1, dataR: true }, { id: 2, dataR: false }]
+        component.dataRealVideo = [{ id: 1, dataR: true }, { id: 2, dataR: false }]
+        component.selectAll();
+
         expect(component.active).toBeFalsy()
+
         component.cancelDelete();
         expect(mockDialog.closeAll).toHaveBeenCalled();
         component.dataReal = [{ id: 1, dataR: true }, { id: 2, dataR: false }]

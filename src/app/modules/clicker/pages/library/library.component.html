@@ -41,8 +41,8 @@
     <div fxLayout.gt-xs="column" fxShow.xs="false" style="    width: 100%;">
         <div fxLayout="row" fxLayoutAlign="space-between">
             <div fxLayout="row">
-                <button  mat-raised-button  color="orange" (click)="selectAll()" class="button-selected"><img class="icon-download" src="assets/img/dashboard/icon-check.svg" alt="descarga"> Seleccionar todos</button>        
-                <button mat-raised-button  color="orange" [disabled]="active" (click)="downloadFiles()" class="ml-2 button-selected-normal"><img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"> Descargar</button>        
+                <button  mat-raised-button  color="orange" (click)="selectAll()" class="button-selected"><img class="icon-download" src="assets/img/dashboard/icon-check.svg" alt="descarga"> {{selectAllVideosImg}} </button>        
+                <button mat-raised-button  color="orange" [disabled]="active" (click)="downloadFiles()" class="ml-4 button-selected-normal"><img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"> Descargar</button>        
             </div>
             <span class="mt-2 mb-2" fxLayout="row" fxShow.xs = "false" *ngIf="!visible_step_mobile">
                 <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
@@ -115,8 +115,8 @@
         </span>
         <div fxLayout="row" fxLayoutAlign="space-between">
             <div fxLayout="row">
-                <button  mat-raised-button  color="orange" (click)="selectAll()" class="button-selected"><img class="icon-download" src="assets/img/dashboard/icon-check.svg" alt="descarga"> Seleccionar todos</button>        
-                <button mat-raised-button [disabled]="active" color="orange" (click)="downloadFiles()" class="ml-2 button-selected-normal"><img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"> Descargar</button>        
+                <button  mat-raised-button  color="orange" (click)="selectAll()" class="button-selected"><img class="icon-download" src="assets/img/dashboard/icon-check.svg" alt="descarga"> {{selectAllVideosImg}}</button>        
+                <button mat-raised-button [disabled]="active" color="orange" (click)="downloadFiles()" class="ml-3 button-selected-normal"><img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"> Descargar</button>        
             </div>
         </div>
         <div fxLayout="row" >
