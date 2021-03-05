@@ -26,6 +26,7 @@ export class LibraryComponent implements OnInit {
     selectAllVideosImg: string = "Seleccionar todos";
     bussiness: Array<any> = [];
     deleteVideoImg = [];
+    iosDevices: boolean;
     @ViewChild("templateImage", { static: false }) templateVideo: TemplateRef<
         any
     >;
@@ -35,6 +36,12 @@ export class LibraryComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        if (iOS) {
+            this.iosDevices = true
+        } else {
+            this.iosDevices = false
+        }
         this.getBussiness();
     }
     setStep(index: number, item: any) {

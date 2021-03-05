@@ -84,7 +84,9 @@
             <h3 style="color:#726D7E;" *ngIf="!videosDispo">No hay videos disponibles para este negocio.</h3>
             <ng-container class="mt-4" *ngFor="let product of dataRealVideo; let i = index">
                 <div class="image-hover">
-                    <video class="image-size" [src]="product.url" ></video> 
+                    <video class="image-size"  playsinline  >
+                        <source [src]="product.url" type="video/mp4">                   
+                    </video> 
                     <div class="image-background">
                         <div class="image-viewer-x"  (click)="downloadVideo(product)"></div>
                         <div class="image-viewer-y"  (click)="downloadVideo(product)"></div>
@@ -149,7 +151,12 @@
             <h3 style="color:#726D7E;" *ngIf="!videosDispo">No hay videos disponibles para este negocio.</h3>
             <ng-container class="mt-4" *ngFor="let product of dataRealVideo; let i = index">
                 <div class="image-hover">
-                    <video class="image-size" [src]="product.url" ></video> 
+                    <video *ngIf="iosDevices === false" class="image-size" >
+                        <source [src]="product.url" type="video/mp4">                   
+                    </video> 
+                    <video *ngIf="iosDevices === true" class="image-size" poster="https://i0.wp.com/masqueapple.com/wp-content/uploads/2018/12/pantalla-negra-mac-imac-macbook-encender-iniciar.jpg">
+                        <source [src]="product.url" type="video/mp4">                   
+                    </video> 
                     <div class="image-background">
                         <div class="image-viewer-x"  (click)="downloadVideo(product)"></div>
                         <div class="image-viewer-y"  (click)="downloadVideo(product)"></div>
