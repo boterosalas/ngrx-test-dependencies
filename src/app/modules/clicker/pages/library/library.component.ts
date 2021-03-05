@@ -26,7 +26,7 @@ export class LibraryComponent implements OnInit {
     selectAllVideosImg: string = "Seleccionar todos";
     bussiness: Array<any> = [];
     deleteVideoImg = [];
-    iosDevices: boolean;
+    iosDevices: boolean = false;
     @ViewChild("templateImage", { static: false }) templateVideo: TemplateRef<
         any
     >;
@@ -36,7 +36,7 @@ export class LibraryComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
         if (iOS) {
             this.iosDevices = true
         } else {
