@@ -34,14 +34,14 @@
   
       <!-- Identificaton clicker -->
       <ng-container matColumnDef="idclicker">
-        <th mat-header-cell class="pl-3" *matHeaderCellDef style="width: 9%;" mat-sort-header="idclicker"> NO. DE CASO </th>
+        <th mat-header-cell class="pl-3" *matHeaderCellDef style="width: 9%;" mat-sort-header="consecutive"> NO. DE CASO </th>
         <td mat-cell *matCellDef="let element" class="pl-3"> 
         <p class="m-0 gray-light text-link cursor-pointer" (click)="openDialog(element)">{{element.consecutive}}</p>
         </td>
       </ng-container>
       <!-- Date Solicitud Column -->
       <ng-container matColumnDef="subscription">
-        <th class="left-text" mat-header-cell *matHeaderCellDef style="width: 12%; text-align: left;" mat-sort-header="solicitud" > FECHA SOLICITUD </th>
+        <th class="left-text" mat-header-cell *matHeaderCellDef style="width: 12%; text-align: left;" mat-sort-header="date" > FECHA SOLICITUD </th>
         <td mat-cell *matCellDef="let element" class="text-font" > {{element.date | date: 'dd/MM/yyyy'}}</td>
       </ng-container>
       <!-- User Column -->
@@ -78,7 +78,7 @@
       </ng-container>
       <!-- Status Column -->
       <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef style="width: 10%;" mat-sort-header="state"> {{ 'USERS.STATUS' | translate }} </th>
+        <th mat-header-cell *matHeaderCellDef style="width: 10%;" mat-sort-header="statusnovelty"> {{ 'USERS.STATUS' | translate }} </th>
         <td mat-cell *matCellDef="let element" > 
             <span *ngIf="element.statusnovelty === 'Solucionado'">
                 <img class="status-img" src="/assets/img/dashboard/icon-check-new.svg" alt="ok"> Solucionado
