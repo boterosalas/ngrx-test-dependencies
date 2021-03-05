@@ -23,6 +23,7 @@ export class LibraryComponent implements OnInit {
     url: string;
     active: boolean = true;
     idDownload: string;
+    selectAllVideosImg: string = "Seleccionar todos";
     bussiness: Array<any> = [];
     deleteVideoImg = [];
     @ViewChild("templateImage", { static: false }) templateVideo: TemplateRef<
@@ -70,19 +71,29 @@ export class LibraryComponent implements OnInit {
         })
     }
     public selectAll() {
-        for (let i = 0; i < this.dataReal.length; i++) {
-            this.dataReal[i].dataR = true;
+        if (this.selectAllVideosImg === "Seleccionar todos") {
+            for (let i = 0; i < this.dataReal.length; i++) {
+                this.dataReal[i].dataR = true;
+            }
+            for (let j = 0; j < this.dataRealVideo.length; j++) {
+                this.dataRealVideo[j].dataR = true;
+            }
+            if (this.dataReal.length > 0 || this.dataRealVideo.length > 0) {
+                this.active = false;
+                this.selectAllVideosImg = "Deseleccionar todos";
+            }
+        } else {
+            for (let i = 0; i < this.dataReal.length; i++) {
+                this.dataReal[i].dataR = false;
+            }
+            for (let j = 0; j < this.dataRealVideo.length; j++) {
+                this.dataRealVideo[j].dataR = false;
+            }
+            if (this.dataReal.length > 0 || this.dataRealVideo.length > 0) {
+                this.active = true;
+                this.selectAllVideosImg = "Seleccionar todos";
+            }
         }
-        for (let j = 0; j < this.dataRealVideo.length; j++) {
-            this.dataRealVideo[j].dataR = true;
-        }
-
-
-        if (this.dataReal.length > 0 || this.dataRealVideo.length > 0) {
-            this.active = false;
-        }
-
-
     }
     public getBussiness() {
         this.subscription = this.content

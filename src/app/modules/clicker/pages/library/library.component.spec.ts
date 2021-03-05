@@ -98,6 +98,10 @@ describe('LibraryComponent', () => {
         component.selectAll();
         //component.downloadFiles();
         expect(component.active).toBeFalsy()
+        component.selectAllVideosImg = "Deseleccionar todo"
+        component.dataReal = [{ id: 1, dataR: true }, { id: 2, dataR: false }]
+        component.dataRealVideo = [{ id: 1, dataR: true }, { id: 2, dataR: false }]
+        component.selectAll();
         component.downloadFile();
         component.downloadVideo({ id: 1 });
         component.download("string", "video/mp4")
