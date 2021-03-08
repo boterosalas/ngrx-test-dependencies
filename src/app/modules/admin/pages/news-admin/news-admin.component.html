@@ -13,9 +13,9 @@
         <div fxLayout="column">
         <label class="label-up-text " for="picker"> RANGO DE FECHAS</label>
         <div fxLayout="row">
-            <mat-icon [hidden]="dateNoVisible"  class="icon-date" matPrefix>date_range</mat-icon>
-            <input [hidden]="dateNoVisible" formControlName="dateRange"  [locale]="locale" placeholder="Seleccione fechas" type="text" [maxDate]="maxDate"  ngxDaterangepickerMd class="form-control border-input mat-elevation-z1 p-2 border-radius"/>
-            <button mat-raised-button color="orange" (click)="getReportExcel()" id="download-users" class="ml-2"  [disabled]="disableButon">Exportar <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>    
+            <mat-icon   class="icon-date" matPrefix>date_range</mat-icon>
+            <input  formControlName="dateRange"  [locale]="locale" placeholder="Seleccione fechas" type="text" [maxDate]="maxDate"  ngxDaterangepickerMd class="form-control border-input mat-elevation-z1 p-2 border-radius"/>
+            <button mat-raised-button color="orange" (click)="getReportExcel()" id="download-users" class="ml-2"  >Exportar <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>    
         </div>
     </div>
     </form>

@@ -48,18 +48,18 @@
     <div class="position-relative banner-mobile heigth-image" fxShow.gt-xs="true" fxShow.xs="false">
       <div class="position-absolute" fxLayout="column">
         <h3>Descarga las mejores ofertas para compartir.</h3>
-        <button mat-raised-button class="button-oferts" color="orange" [routerLink]="[ '/biblioteca']" id="download-users"  [disabled]="disableButon">Ver Ofertas</button>    
+        <button mat-raised-button class="button-oferts" color="orange" [routerLink]="[ '/biblioteca']" id="download-users"  >Ver Ofertas</button>    
       </div>  
-      <img class="responsive-img" src="/assets/img/banners/oferts.png" [alt]="title">
+      <img class="responsive-img" src="/assets/img/banners/oferts.png" alt="ofertas">
     </div>
   </div>
   <div *ngIf="auth.isLoggedIn()" fxLayout="row" class="card-library"  fxShow.gt-xs="false" fxShow.xs="true">
     <div class="position-relative banner-mobile heigth-image" fxShow.gt-xs="false" fxShow.xs="true">
       <div class="position-absolute" fxLayout="column">
         <h3>Descarga aquí las mejores ofertas del día</h3>
-        <button mat-raised-button class="button-oferts" color="orange" [routerLink]="[ '/biblioteca']" id="download-users"  [disabled]="disableButon">Ver Ofertas</button>    
+        <button mat-raised-button class="button-oferts" color="orange" [routerLink]="[ '/biblioteca']" id="download-users" >Ver Ofertas</button>    
       </div>
-      <img class="responsive-img" src="/assets/img/banners/oferts_mobile.png" [alt]="title">
+      <img class="responsive-img" src="/assets/img/banners/oferts_mobile.png" alt="ofertas">
     </div>
   </div>
 
