@@ -22,6 +22,7 @@ export class NewsAdminComponent implements OnInit {
     pageIndex: number = 0;
     totalItems: number;
     newsUser: Array<any>;
+    pageSize: number;
     from: any;
     to: any;
     private subscription: Subscription = new Subscription();
