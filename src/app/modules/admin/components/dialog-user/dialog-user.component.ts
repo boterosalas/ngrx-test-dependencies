@@ -10,7 +10,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { Subscription } from "rxjs";
 import { UserService } from "src/app/services/user.service";
 import { AuthService } from "src/app/services/auth.service";
-
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import * as moment from "moment";
+moment.locale("es");
 @Component({
   selector: "app-dialog-user",
   templateUrl: "./dialog-user.component.html",
@@ -21,26 +23,41 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private user: UserService,
-    private auth: AuthService
+    private auth: AuthService,
+    private fb: FormBuilder,
   ) {
   }
+  dateForm: FormGroup;
 
+  nextPayment: any;
+  afterPayment: any;
+  displayedColumns: string[] = ['negocio', 'linksgenerator', 'linksclicker', 'commision', 'sells'];
+  selectedTab: number = 1;
+  dateLastPayment: any;
   @Output() state = new EventEmitter();
   @Output() comunications = new EventEmitter();
   @Output() verified = new EventEmitter();
   @Output() IdentificationCard1 = new EventEmitter();
   @Output() IdentificationCard2 = new EventEmitter();
-  //@Output() dateCed1 = new EventEmitter();
-  //@Output() dateCed2 = new EventEmitter();
-  //@Output() dateCertBank = new EventEmitter();
-  //@Output() AntdateCed1 = new EventEmitter();
-  //@Output() AntdateCed2 = new EventEmitter();
-  //@Output() AntdateCertBank = new EventEmitter();
   @Output() bankCertificate = new EventEmitter();
   isLoggedIn: any;
   private subscription: Subscription = new Subscription();
   idAdmin: string;
-
+  dataSourceBusi = [];
+  maxDate = moment(new Date());
+  locale = {
+    locale: "es",
+    direction: "ltr", // could be rtl
+    weekLabel: "W",
+    separator: " a ", // default is ' - '
+    cancelLabel: "Cancelar", // detault is 'Cancel'
+    applyLabel: "Aplicar", // detault is 'Apply'
+    clearLabel: "Limpiar", // detault is 'Clear'
+    customRangeLabel: "Custom range",
+    daysOfWeek: moment.weekdaysMin(),
+    monthNames: moment.monthsShort(),
+    firstDay: 1 // first day is monday
+  };
   changeStatus() {
     this.state.emit(event);
   }
@@ -68,13 +85,59 @@ export class DialogUserComponent implements OnInit, OnDestroy {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
+  pad(number) {
+    if (number < 10) {
+      return '0' + number;
+    }
+    return number;
+  }
   ngOnInit() {
     this.isLoggedIn = this.auth.isLoggedIn();
-    //console.log(this.AntdateCed1)
+    this.dateForm = this.fb.group({
+      dateRange: [null, Validators.required],
+    });
+    let endDate = new Date();
+    let m = endDate.getMonth() + 1
+    let datesEnd = endDate.getFullYear() + "-" + this.pad(m) + "-" + this.pad(endDate.getDate());
+    let datesStart = endDate.getFullYear() + "-" + this.pad(m) + "-" + '01';
+    let datos = {
+      start: datesStart,
+      end: datesEnd,
+      userId: this.data.userId
+    }
+    this.getDatasHoja(datos);
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+  changeTabs(tabSelected: number) {
+    this.dateForm.controls.dateRange.setValue(null);
+    this.selectedTab = tabSelected;
+  }
+  getDatas() {
+    let data = {
+      start: this.dateForm.controls.dateRange.value.startDate.format("YYYY-MM-DD"),
+      end: this.dateForm.controls.dateRange.value.endDate.format("YYYY-MM-DD"),
+      userId: this.data.userId
+    }
+    this.getDatasHoja(data);
+  }
+  getDatasHoja(data: any) {
+    this.user.getHojaVida(data).subscribe((resp: any) => {
+      this.dataSourceBusi = resp.objectResponse;
+      this.nextPayment = resp.objectResponse[0].proximopago;
+      this.afterPayment = resp.objectResponse[0].ultimovalorpagado;
+      this.dateLastPayment = resp.objectResponse[0].ultimafechapago;
+      this.dataSourceBusi.push({
+        negocio: "TOTAL",
+        icondashboard: "",
+        linksgenerados: resp.objectResponse[0].totallinkgenerados,
+        linkclickeados: resp.objectResponse[0].totallinkclickeados,
+        comisiones: resp.objectResponse[0].totalcomisiones,
+        ventas: resp.objectResponse[0].totalventas
+      })
+    });
+
   }
 }

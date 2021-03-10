@@ -3,7 +3,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TableActivateBusinessComponent } from './table-activate-business.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { MatSlideToggleModule } from '@angular/material';
+import { MatMenuModule, MatSlideToggleModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { LinksService } from "src/app/services/links.service";
@@ -32,7 +32,8 @@ describe('TableActivateBusinessComponent', () => {
         FormsModule,
         DragDropModule,
         HttpClientTestingModule,
-        RouterTestingModule
+        RouterTestingModule,
+        MatMenuModule
       ],
       providers: [
         { provide: LinksService, useValue: mockLinksService },

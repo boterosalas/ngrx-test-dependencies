@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, TemplateRef } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { MatTable } from '@angular/material';
+import { MatDialog, MatTable } from '@angular/material';
 import { LinksService } from "src/app/services/links.service";
 import { Router } from '@angular/router';
+import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 export interface PeriodicElement {
   drag: any;
   bussiness: any;
@@ -20,16 +21,30 @@ export class TableActivateBusinessComponent implements OnInit {
   constructor(
     private file: LinksService,
     public router: Router,
+    private dialog: MatDialog,
   ) { }
   //dataSource: any;
   @Input() dataSource;
   @Output() activateBusiness = new EventEmitter;
   @ViewChild('table', { static: false }) table: MatTable<PeriodicElement>;
-
-  displayedColumns: string[] = ['drag', 'bussiness', 'activate', 'category', 'library'];
+  @ViewChild("templateComision", { static: false }) templateComision: TemplateRef<
+    any
+  >;
+  displayedColumns: string[] = ['drag', 'bussiness', 'activate', 'category'];
   ngOnInit() {
   }
-
+  dataComision = [{
+    description: "Plan familiar",
+    comision: "5%"
+  },
+  {
+    description: "Plan familiar",
+    comision: "5%"
+  },
+  {
+    description: "Plan familiar",
+    comision: "5%"
+  }]
   activate(dataSource) {
     this.activateBusiness.emit(dataSource);
   }
@@ -73,5 +88,18 @@ export class TableActivateBusinessComponent implements OnInit {
         imagen: contenido.imageurl
       },
     ]);
+  }
+  comisionTable(contenido: any) {
+    let title = 'Comisiones'
+    let template = this.templateComision;
+    this.dialog.open(ModalGenericComponent, {
+      data: {
+        title,
+        template,
+      },
+    });
+  }
+  newComision() {
+    this.dataComision.push({ description: '', comision: '' })
   }
 }

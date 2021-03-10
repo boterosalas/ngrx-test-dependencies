@@ -1,0 +1,51 @@
+@import "variables";
+@import "general";
+@import "animations";
+
+.card-report-dark {
+  background-color: #f1f3f6;
+  padding: 18px;
+  border-radius: 10px;
+}
+.margin-zero-bottom {
+  margin-bottom: 0;
+}
+.margin-zero-top {
+  margin-top: 0;
+  color: #8d7eb7;
+  margin-bottom: 0px !important;
+}
+.report-news {
+  border-bottom: 1px solid #d2d0d4;
+}
+.radications-p {
+  font-size: 11px;
+  color: #a7a3b1;
+  font-family: $font-galano-bold;
+}
+.span-data {
+  color: #37236a;
+  font-family: $font-galano-bold;
+  font-size: 16px;
+}
+.norma-data {
+  color: #37236a;
+  font-size: 16px;
+}
+.between-datas {
+  justify-content: space-between;
+}
+.data-details {
+  color: #726d7e;
+}
+.text-description {
+  color: #504c58;
+}
+@media screen and (max-width: 425px) {
+  .margin-mobile {
+    margin-right: 20px !important;
+  }
+}
+.data-detail-color {
+  color: #37236a;
+}

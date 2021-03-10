@@ -286,7 +286,7 @@ export class UsersComponent extends MatPaginatorIntl
       isEmployeeGrupoExito = false;
     }
     const dialogRef = this.dialog.open(DialogUserComponent, {
-      width: "649px",
+
       data: {
         userId,
         identification,
