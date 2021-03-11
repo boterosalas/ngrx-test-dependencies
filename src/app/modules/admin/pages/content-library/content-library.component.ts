@@ -67,33 +67,6 @@ export class ContentLibraryComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.data = [
-            { id: 1, ulrImg: "https://d500.epimg.net/cincodias/imagenes/2018/11/13/lifestyle/1542113135_776401_1542116070_noticia_normal.jpg", dataR: false },
-            { id: 2, ulrImg: "https://hotbook.com.mx/wp-content/uploads/2019/04/hotbook-se-revela-la-primera-imagen-de-un-agujero-negro-portada.jpg", dataR: false },
-            { id: 3, ulrImg: "https://blogs.unsw.edu.au/nowideas/files/2019/06/cambiar-imagen-corporativa.jpg", dataR: false },
-            { id: 4, ulrImg: "https://d500.epimg.net/cincodias/imagenes/2018/11/13/lifestyle/1542113135_776401_1542116070_noticia_normal.jpg", dataR: false },
-            { id: 5, ulrImg: "https://hotbook.com.mx/wp-content/uploads/2019/04/hotbook-se-revela-la-primera-imagen-de-un-agujero-negro-portada.jpg", dataR: false },
-            { id: 6, ulrImg: "https://blogs.unsw.edu.au/nowideas/files/2019/06/cambiar-imagen-corporativa.jpg", dataR: false },
-            { id: 7, ulrImg: "https://blogs.unsw.edu.au/nowideas/files/2019/06/cambiar-imagen-corporativa.jpg", dataR: false },
-            { id: 8, ulrImg: "https://hotbook.com.mx/wp-content/uploads/2019/04/hotbook-se-revela-la-primera-imagen-de-un-agujero-negro-portada.jpg", dataR: false },
-            { id: 9, ulrImg: "https://blogs.unsw.edu.au/nowideas/files/2019/06/cambiar-imagen-corporativa.jpg", dataR: false },
-            { id: 10, ulrImg: "https://blogs.unsw.edu.au/nowideas/files/2019/06/cambiar-imagen-corporativa.jpg", dataR: false },
-
-        ]
-        this.dataVideo = [
-            { id: 1, ulrImg: "http://v2v.cc/~j/theora_testsuite/320x240.ogg", dataR: false },
-            { id: 2, ulrImg: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4", dataR: false },
-            { id: 3, ulrImg: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4", dataR: false },
-            { id: 4, ulrImg: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4", dataR: false },
-            { id: 5, ulrImg: "http://v2v.cc/~j/theora_testsuite/320x240.ogg", dataR: false },
-            { id: 6, ulrImg: "http://v2v.cc/~j/theora_testsuite/320x240.ogg", dataR: false },
-            { id: 7, ulrImg: "http://v2v.cc/~j/theora_testsuite/320x240.ogg", dataR: false },
-            { id: 8, ulrImg: "http://v2v.cc/~j/theora_testsuite/320x240.ogg", dataR: false },
-            { id: 9, ulrImg: "http://v2v.cc/~j/theora_testsuite/320x240.ogg", dataR: false },
-
-
-        ]
-
         this.getVideosImages();
     }
     public getVideosImages() {
@@ -260,7 +233,7 @@ export class ContentLibraryComponent implements OnInit {
         this.fileToUpload = fileList[0];
         console.log(this.fileToUpload);
         let formData: FormData = new FormData();
-        formData.append('file', this.fileToUpload, this.fileToUpload.name);
+        formData.append('file', this.fileToUpload, this.fileToUpload.name.replace(' ', '_'));
         formData.append('idBusiness', this.id);
         formData.append('url', this.fileToUpload.name);
         console.log(formData)

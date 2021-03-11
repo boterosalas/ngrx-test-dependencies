@@ -6,6 +6,7 @@
 
     <span class="share-refer gtmRfiereYGanaClicReferirwhatsapp" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
       <a 
+      (click)="generateLink()"
       href="https://web.whatsapp.com/send?text={{urlWhatsapp}}" 
       target="_blank"
       data-action="share/whatsapp/share"
@@ -22,6 +23,7 @@
         shareButton="facebook"
         [url]="url"
         ngClass="sharebutton  mr-2 gtmRfiereYGanaClicReferirFacebook"
+        (click)="generateLink()"
       >
         <i ngClass="fab fa-facebook-f gtmRfiereYGanaClicReferirFacebook"></i>
       </button> 
@@ -33,6 +35,7 @@
         theme="circles-dark"
         shareButton="twitter"
         [url]="url"
+        (click)="generateLink()"
         ngClass="sharebutton  mr-2 gtmRfiereYGanaClicReferirTwitter"
       >
         <i ngClass="fab fa-twitter gtmRfiereYGanaClicReferirTwitter"></i>

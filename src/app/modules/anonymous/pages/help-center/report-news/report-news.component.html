@@ -99,7 +99,7 @@
                             </div>
                             <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3 file-width-space">
                                 <div fxLayout="column" fxLayoutAlign="center" class="space">
-                                  <strong class="title-gray">ADJUNTAR EVIDENCIA (FORMATO .JPG, .PNG .PDF, MAX 10MB)</strong>
+                                  <strong class="title-gray">ADJUNTAR EVIDENCIA (FORMATO .JPG, .PNG, .PDF, .MSG, MAX 10MB)</strong>
                                   <span class="title-secondary" *ngIf="nameFileCert === ''">No hay archivo seleccionado</span>
                                   <span class="file-input" *ngIf="nameFileCert !== ''">{{
                                     nameFileCert | truncate: '20'
@@ -131,7 +131,7 @@
                                 </div>
                               </div>
                               <mat-error *ngIf="showErrorCert" class="text-small small pb-2 d-block">
-                                Formato inválido solo se pueden subir archivos con la extensión JPG y menores de 100KB
+                                Formato inválido solo se pueden subir archivos con la extensión .JPG, .PDF, .PNG, .MSG y menores de 10MB
                               </mat-error>
                             
                               <input
@@ -141,7 +141,8 @@
                                 formControlName="image"
                               />
                               <div class="send-area" fxLayout="row" fxLayoutAlign="end">
-                                <button mat-raised-button color="orange" (click)="sendMessage()" id="download-users" class="ml-2 send-button" [disabled]="!dateForm.valid">Enviar</button>    
+                                <button mat-raised-button color="orange" (click)="sendMessage()" id="download-users" class="ml-2 send-button" [disabled]="!dateForm.valid || validFormat ">Enviar</button>    
+                                
                               </div>
                         </div>
                     </div>

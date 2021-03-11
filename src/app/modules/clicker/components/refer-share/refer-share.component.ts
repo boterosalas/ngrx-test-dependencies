@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, Input } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { ContentService } from 'src/app/services/content.service';
 import { TokenService } from 'src/app/services/token.service';
 
 @Component({
@@ -12,17 +13,18 @@ export class ReferShareComponent implements OnInit {
   @Output() urlClicker = new EventEmitter();
   @Output() shareMobile = new EventEmitter();
   @ViewChild("linkInput", { static: false }) copy: ElementRef<any>;
-  @Input() urlValue:string;
+  @Input() urlValue: string;
 
-  url:string;
-  urlWhatsapp:string;
+  url: string;
+  urlWhatsapp: string;
   formLink: FormGroup;
   tokenInfo: any;
   idClicker: string;
 
   constructor(
     private fb: FormBuilder,
-    private token: TokenService
+    private token: TokenService,
+    private content: ContentService
   ) { }
 
   ngOnInit() {
@@ -30,7 +32,7 @@ export class ReferShareComponent implements OnInit {
     this.urlValue = this.formLink.controls.link.value;
   }
 
-  public generateUrl(){
+  public generateUrl() {
     this.tokenInfo = this.token.userInfo();
     this.idClicker = this.tokenInfo.idclicker;
     let domain = document.location.origin;
@@ -40,13 +42,24 @@ export class ReferShareComponent implements OnInit {
       link: [this.url]
     });
   }
-  
+
   public copyUrl() {
+    this.generateLink();
     this.urlClicker.emit(this.copy.nativeElement);
   }
 
   public share() {
+    this.generateLink();
     this.shareMobile.emit(this.url);
   }
-  
+  public generateLink() {
+    console.log("Estatus")
+    let formData: FormData = new FormData();
+    formData.append('idClicker', this.idClicker);
+    formData.append('type', 'Visit');
+    this.content.setClick(formData).subscribe((resp) => {
+      console.log("Responde")
+    })
+  }
+
 }

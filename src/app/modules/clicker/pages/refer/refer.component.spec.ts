@@ -27,6 +27,7 @@ describe("ReferComponent", () => {
     "getReferrals",
   ]);
 
+
   let sendError = {
     objectResponse: null,
     state: "Error",
@@ -35,6 +36,11 @@ describe("ReferComponent", () => {
   };
 
   let sendOk = {
+    objectResponse: null,
+    state: "Success",
+    userMessage: "Se ha guardado correctament",
+  };
+  let split = {
     objectResponse: null,
     state: "Success",
     userMessage: "Se ha guardado correctament",
@@ -103,11 +109,13 @@ describe("ReferComponent", () => {
         RouterTestingModule,
         HttpClientTestingModule,
         BrowserAnimationsModule,
+
       ],
       schemas: [
         NO_ERRORS_SCHEMA
       ],
-      providers: [{ provide: LinksService, useValue: mockLinksService }],
+      providers: [{ provide: LinksService, useValue: mockLinksService },
+      ],
     }).compileComponents();
     mockLinksService.getReferrals.and.returnValue(of(referals));
   }));
@@ -116,6 +124,7 @@ describe("ReferComponent", () => {
     fixture = TestBed.createComponent(ReferComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
   });
 
   it("should create", () => {
@@ -144,6 +153,7 @@ describe("ReferComponent", () => {
   }));
 
   it("send email ok", () => {
+
     mockLinksService.saveLinkRefer.and.returnValue(of(sendOk));
     let email = "davidbet2@hotmail.com";
     component.sendEmail(email);
@@ -151,20 +161,23 @@ describe("ReferComponent", () => {
   });
 
   it("send email error", () => {
+
     mockLinksService.saveLinkRefer.and.returnValue(of(sendError));
+
     let email = "davidbet2@hotmail.com";
     component.sendEmail(email);
     expect(mockLinksService.saveLinkRefer).toHaveBeenCalled();
   });
 
   it("send email invalid request", () => {
+
     mockLinksService.saveLinkRefer.and.returnValue(throwError(sendError));
     let email = "davidbet2@hotmail.com";
     component.sendEmail(email);
     expect(mockLinksService.saveLinkRefer).toHaveBeenCalled();
   });
 
-  
+
   it('token exist', () => {
     localStorage.setItem('ACCESS_TOKEN', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU');
     let token = localStorage.getItem(('ACCESS_TOKEN'));

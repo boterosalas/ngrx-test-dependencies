@@ -3,13 +3,14 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TableActivateBusinessComponent } from './table-activate-business.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { MatMenuModule, MatSlideToggleModule } from '@angular/material';
+import { MatDialog, MatMenuModule, MatSlideToggleModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { LinksService } from "src/app/services/links.service";
 import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
+import { ContentService } from 'src/app/services/content.service';
 //import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 
 describe('TableActivateBusinessComponent', () => {
@@ -18,10 +19,14 @@ describe('TableActivateBusinessComponent', () => {
   let mockRouter = {
     navigate: jasmine.createSpy('navigate')
   }
+  const mockDialog = jasmine.createSpyObj("MatDialog", ["open", "closeAll", "afterAllClosed"]);
   let mockLinksService = jasmine.createSpyObj("LinksService", ["putOrder"]);
   let response = {
     Status: "Success"
   }
+  const mockContentService = jasmine.createSpyObj("ContentService", [
+    "getCommissionsData"
+  ]);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [TableActivateBusinessComponent],
@@ -38,10 +43,13 @@ describe('TableActivateBusinessComponent', () => {
       providers: [
         { provide: LinksService, useValue: mockLinksService },
         { provide: Router, useValue: mockRouter },
+        { provide: MatDialog, useValue: mockDialog },
+        { provide: ContentService, useValue: mockContentService },
       ],
     })
       .compileComponents();
     mockLinksService.putOrder.and.returnValue(of(response));
+    mockContentService.getCommissionsData.and.returnValue(of(response));
   }));
 
   beforeEach(() => {
@@ -82,7 +90,15 @@ describe('TableActivateBusinessComponent', () => {
     }
     let datos = true;
     component.editCategory(bussiness);
+    component.contentBussiness(bussiness);
     expect(datos).toBeTruthy();
   });
+
+  it('comision table', () => {
+    component.comisionTable({ id: 1 })
+    component.idBussinessSelected = 1;
+    component.updateComision();
+    expect(mockDialog.open).toHaveBeenCalled();
+  })
 
 });

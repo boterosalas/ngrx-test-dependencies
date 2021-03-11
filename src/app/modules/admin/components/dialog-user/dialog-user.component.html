@@ -128,10 +128,10 @@
       <p class="p-range">RANGO DE FECHAS</p>
       <form
         class="form-relative "
-        [formGroup]="dateForm">
+        [formGroup]="dateFormHoja">
         <div fxLayout="row">
             <mat-icon   class="icon-date" matPrefix>date_range</mat-icon>
-            <input (change)="getDatas()" formControlName="dateRange"  [locale]="locale" placeholder="Seleccione fechas" type="text" [maxDate]="maxDate"  ngxDaterangepickerMd class="form-control border-input mat-elevation-z1 p-2 border-radius"/>
+            <input  formControlName="dateRange"  (change)="getDatas()" [locale]="locale" [placeholder]="placeholder" type="text" [maxDate]="maxDate"  ngxDaterangepickerMd class="form-control border-input mat-elevation-z1 p-2 border-radius"/>
         </div>
        </form>
        </div>

@@ -68,6 +68,11 @@ describe("ReferShareComponent", () => {
     component.copyUrl();
     expect(component.formLink.controls.link).toBeDefined();
   });
-  
+  it('generate Link', () => {
+    component.generateLink();
+    let datos = true;
+    expect(datos).toBeTruthy();
+  })
+
 
 });

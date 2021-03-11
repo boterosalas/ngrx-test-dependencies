@@ -4,6 +4,7 @@ import { MatDialog, MatTable } from '@angular/material';
 import { LinksService } from "src/app/services/links.service";
 import { Router } from '@angular/router';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import { ContentService } from 'src/app/services/content.service';
 export interface PeriodicElement {
   drag: any;
   bussiness: any;
@@ -22,6 +23,7 @@ export class TableActivateBusinessComponent implements OnInit {
     private file: LinksService,
     public router: Router,
     private dialog: MatDialog,
+    private content: ContentService,
   ) { }
   //dataSource: any;
   @Input() dataSource;
@@ -30,21 +32,12 @@ export class TableActivateBusinessComponent implements OnInit {
   @ViewChild("templateComision", { static: false }) templateComision: TemplateRef<
     any
   >;
+  idBussinessSelected: number;
   displayedColumns: string[] = ['drag', 'bussiness', 'activate', 'category'];
+  arrayComision: any[];
   ngOnInit() {
   }
-  dataComision = [{
-    description: "Plan familiar",
-    comision: "5%"
-  },
-  {
-    description: "Plan familiar",
-    comision: "5%"
-  },
-  {
-    description: "Plan familiar",
-    comision: "5%"
-  }]
+  dataComision: any;
   activate(dataSource) {
     this.activateBusiness.emit(dataSource);
   }
@@ -90,6 +83,10 @@ export class TableActivateBusinessComponent implements OnInit {
     ]);
   }
   comisionTable(contenido: any) {
+    console.log(this.arrayComision);
+    this.idBussinessSelected = contenido.id;
+    this.updateComision()
+
     let title = 'Comisiones'
     let template = this.templateComision;
     this.dialog.open(ModalGenericComponent, {
@@ -99,7 +96,35 @@ export class TableActivateBusinessComponent implements OnInit {
       },
     });
   }
+  updateComision() {
+    this.content.getCommissionsData(this.idBussinessSelected).subscribe((resp) => {
+      this.arrayComision = resp;
+      console.log(this.arrayComision);
+      let datosComision = Object.values(this.arrayComision);
+      this.dataComision = datosComision[0];
+      for (let index = 0; index < this.dataComision.length; index++) {
+        delete this.dataComision[index].tab;
+      }
+    })
+  }
   newComision() {
-    this.dataComision.push({ description: '', comision: '' })
+    //console.log(this.dataComision);
+    if (this.dataComision === undefined) {
+      this.dataComision = [];
+      this.dataComision.push({ idBusiness: this.idBussinessSelected, commission: '', description: '' })
+    } else {
+      this.dataComision.push({ idBusiness: this.idBussinessSelected, commission: '', description: '' })
+    }
+
+  }
+  saveComision() {
+    this.content.saveComision(this.dataComision).subscribe((resp) => {
+      this.updateComision()
+    })
+  }
+  deleteComision(content: any) {
+    this.content.deleteComision(content.id).subscribe((resp) => {
+      this.updateComision()
+    })
   }
 }

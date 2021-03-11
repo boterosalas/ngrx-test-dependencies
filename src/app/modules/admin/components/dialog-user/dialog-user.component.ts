@@ -27,13 +27,14 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
   ) {
   }
-  dateForm: FormGroup;
+  dateFormHoja: FormGroup;
 
   nextPayment: any;
   afterPayment: any;
   displayedColumns: string[] = ['negocio', 'linksgenerator', 'linksclicker', 'commision', 'sells'];
   selectedTab: number = 1;
   dateLastPayment: any;
+  placeholder: string;
   @Output() state = new EventEmitter();
   @Output() comunications = new EventEmitter();
   @Output() verified = new EventEmitter();
@@ -93,35 +94,43 @@ export class DialogUserComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     this.isLoggedIn = this.auth.isLoggedIn();
-    this.dateForm = this.fb.group({
-      dateRange: [null, Validators.required],
-    });
-    let endDate = new Date();
-    let m = endDate.getMonth() + 1
-    let datesEnd = endDate.getFullYear() + "-" + this.pad(m) + "-" + this.pad(endDate.getDate());
-    let datesStart = endDate.getFullYear() + "-" + this.pad(m) + "-" + '01';
-    let datos = {
-      start: datesStart,
-      end: datesEnd,
-      userId: this.data.userId
-    }
-    this.getDatasHoja(datos);
+
+
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
   changeTabs(tabSelected: number) {
-    this.dateForm.controls.dateRange.setValue(null);
+    //this.dateFormHoja.controls.dateRange.setValue(null);
     this.selectedTab = tabSelected;
+    if (this.selectedTab === 2) {
+      let endDate = new Date();
+      let m = endDate.getMonth() + 1
+      let datesEnd = endDate.getFullYear() + "-" + this.pad(m) + "-" + this.pad(endDate.getDate());
+      let datesStart = endDate.getFullYear() + "-" + this.pad(m) + "-" + '01';
+      let datos = {
+        start: datesStart,
+        end: datesEnd,
+        userId: this.data.userId
+      }
+      this.placeholder = endDate.getFullYear() + "/" + this.pad(m) + "/" + '01' + " a " + endDate.getFullYear() + "/" + this.pad(m) + "/" + this.pad(endDate.getDate());
+      this.dateFormHoja = this.fb.group({
+        dateRange: [null, Validators.required],
+      });
+      this.getDatasHoja(datos);
+    }
   }
   getDatas() {
-    let data = {
-      start: this.dateForm.controls.dateRange.value.startDate.format("YYYY-MM-DD"),
-      end: this.dateForm.controls.dateRange.value.endDate.format("YYYY-MM-DD"),
-      userId: this.data.userId
+    if (this.dateFormHoja.controls.dateRange.value != null) {
+      let data = {
+        start: this.dateFormHoja.controls.dateRange.value.startDate.format("YYYY-MM-DD"),
+        end: this.dateFormHoja.controls.dateRange.value.endDate.format("YYYY-MM-DD"),
+        userId: this.data.userId
+      }
+      this.getDatasHoja(data);
     }
-    this.getDatasHoja(data);
+
   }
   getDatasHoja(data: any) {
     this.user.getHojaVida(data).subscribe((resp: any) => {

@@ -4,6 +4,7 @@ import { ContentService } from 'src/app/services/content.service';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { MatDialog } from '@angular/material';
+import { DialogImagePlayerComponent } from '../../components/dialog-visualization-image/dialog-image-player.component';
 @Component({
     selector: 'app-library',
     templateUrl: './library.component.html',
@@ -120,17 +121,21 @@ export class LibraryComponent implements OnInit {
     }
     public viewerPhoto(element: any) {
         const title = "";
-        const template = this.templateVideo;
+        const template = '';
         const id = "video-modal";
         this.url = element.url;
+        let urlVideo = element.url;
         this.idDownload = element.id;
-        this.dialog.open(ModalGenericComponent, {
+        let datosDownload = element.id;
+        this.dialog.open(DialogImagePlayerComponent, {
             panelClass: "image-clickacademy",
             maxWidth: "600px",
             data: {
                 id,
                 title,
                 template,
+                urlVideo,
+                datosDownload
             },
             backdropClass: 'backdropBackground'
         });
@@ -193,20 +198,31 @@ export class LibraryComponent implements OnInit {
         }
     }
     public download(data, type) {
+        let reader = new FileReader();
         let blob = new Blob([data], { type: type });
+        //reader.onload = function (e) {
+        //  window.location.href = reader.result;
+        //}
+        reader.onload = function (e) {
+            window.location.href = reader.result as string;
+        }
+        reader.readAsDataURL(blob);
         let url = window.URL.createObjectURL(blob);
         const downloadLink = document.createElement("a");
         if (type.includes("zip")) {
             downloadLink.href = url;
             downloadLink.download = "archivo.zip";
+            document.body.appendChild(downloadLink);
             downloadLink.click();
         } else if (type.includes("jpg")) {
             downloadLink.href = url;
             downloadLink.download = "archivo.jpg";
+            document.body.appendChild(downloadLink);
             downloadLink.click();
         } else if (type.includes("mp4")) {
             downloadLink.href = url;
             downloadLink.download = "archivo.mp4";
+            document.body.appendChild(downloadLink);
             downloadLink.click();
         }
 

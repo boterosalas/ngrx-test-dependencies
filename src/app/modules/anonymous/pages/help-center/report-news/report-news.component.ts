@@ -67,14 +67,15 @@ export class ReportNewsComponent implements OnInit {
     }
 
     private getExtension(nameFile: string, getSize: number) {
+        //let nameF = nameFile.replace(' ', '%20')
         let splitExt = nameFile.split(".");
         let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
-        this.validFormat = false;
-        if (getExt === "jpg" || getExt === "png" || getExt === "pdf" || getExt === "zip") {
-            this.validFormat = true;
+        this.validFormat = true;
+        if (getExt === "jpg" || getExt === "png" || getExt === "pdf" || getExt === "msg") {
+            this.validFormat = false;
         }
         if (getSize / 1000 > 10000) {
-            this.validFormat = false;
+            this.validFormat = true;
         }
     }
     public onFileChangeFiles(event, param: string) {
@@ -88,7 +89,7 @@ export class ReportNewsComponent implements OnInit {
             reader.readAsDataURL(file2);
             reader.onload = () => {
                 this.getExtension(nameFile, sizeFile);
-                if (this.validFormat === true) {
+                if (this.validFormat === false) {
                     this.fileImgCat = reader.result;
                     this.fileImgCat = this.fileImgCat.split(",")[1]
                     this.nameFileCert = nameFile;
@@ -127,7 +128,7 @@ export class ReportNewsComponent implements OnInit {
                 code: this.dateForm.controls.reference.value,
                 description: this.dateForm.controls.description.value,
                 document: this.fileImgCat,
-                documenturl: this.nameFileCert
+                documenturl: this.nameFileCert.replace(' ', '_')
             }
 
         }

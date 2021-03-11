@@ -42,9 +42,7 @@ export class DialogNewsComponent implements OnInit {
         private auth: AuthService
     ) {
     }
-
     ngOnInit() {
-
         this.dateForm = this.fb.group({
             status: [this.data.element.statusnovelty],
         });
@@ -59,8 +57,6 @@ export class DialogNewsComponent implements OnInit {
         this.dialogRef.close();
     }
     public viewerImage() {
-
-
         let splitExt = this.image.split(".");
         let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
         if (getExt === "jpg" || getExt === "png") {
@@ -91,12 +87,19 @@ export class DialogNewsComponent implements OnInit {
                 } else {
                     window.open(this.data.element.documenturl, "_blank");
                 }
-
             }
-
+        } else {
+            if (this.data.element.urlImage === "") {
+                console.log("No hay nada")
+            } else {
+                var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+                if (iOS) {
+                    window.location.assign(this.data.element.documenturl);
+                } else {
+                    window.open(this.data.element.documenturl, "_blank");
+                }
+            }
         }
-
-
     }
     public saveChanges() {
         let datos = {

@@ -125,5 +125,9 @@ describe('DialogUserComponent', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-
+  it('changeTabs', () => {
+    component.changeTabs(2);
+    expect(component.selectedTab).toBe(2)
+    expect(component.pad(2)).toBe("02")
+  })
 });
