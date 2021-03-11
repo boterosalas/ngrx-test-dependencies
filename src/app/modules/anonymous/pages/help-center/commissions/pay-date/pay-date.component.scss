@@ -1,1 +1,14 @@
-@import 'variables';
+@import "variables";
+
+.table-payment-dispar {
+  width: 100%;
+  text-align: center;
+  border: 1px solid #f3f1f6;
+  tr {
+    th {
+      background: #f3f1f6;
+      text-transform: uppercase;
+      color: $primary-color;
+    }
+  }
+}
