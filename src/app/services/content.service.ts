@@ -21,7 +21,7 @@ export class ContentService {
       "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
     }),
   };
-
+  urlRefer = environment.URL_REFERAL;
   url = environment.URL_CONTENT;
   urlbiggyExito = "https://search.biggylabs.com.br/search-api/v1/exitocol/api/";
   urlbiggyCarulla = "https://search.biggylabs.com.br/search-api/v1/carulla/api/";
@@ -51,7 +51,9 @@ export class ContentService {
   apiGetContentVideo = "library/getcontentlibrary";
   apiDeleteContent = "library/deletecontentslibrary";
   apiDownloadContent = "library/downloadzip";
-
+  apiSaveComision = "business/savecommissiontable";
+  apiDeleteComision = "business/deletecommissiontable";
+  apiSaverefer = "link/savelinkreferredvisit"
   sendSearch = {};
 
   public getNews() {
@@ -92,6 +94,51 @@ export class ContentService {
         map((user: ResponseService) => {
           return user.objectResponse;
         })
+      );
+  }
+  public getCommissionsData(data: any) {
+    return this.http
+      .get(`${this.url + this.apiGetCommissions}?idbusiness=${data}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((user: ResponseService) => {
+          return user.objectResponse;
+        })
+      );
+  }
+  public saveComision(data: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveComision}`, data, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((user: ResponseService) => {
+          return user.objectResponse;
+        })
+      );
+  }
+  public deleteComision(data: any) {
+    return this.http
+      .delete(`${this.url + this.apiDeleteComision}?id=${data}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
       );
   }
 
@@ -470,6 +517,28 @@ export class ContentService {
     return this.http
       .post(`${this.url + this.apiDownloadContent}`, data, httpOptionsDow);
 
+  }
+  public setClick(datos: any) {
+    let httpOptionsSet = {
+      headers: new HttpHeaders({
+        Authorization: "Bearer " + this.authorization,
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
+    };
+    return this.http
+      .post(`${this.urlRefer + this.apiSaverefer}`, datos, httpOptionsSet)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
   }
 
 

@@ -12,6 +12,8 @@ import { Subscription } from "rxjs";
 import Swal from "sweetalert2";
 import { ResponseService } from "src/app/interfaces/response";
 import { Refer } from 'src/app/interfaces/refer';
+import { ContentService } from "src/app/services/content.service";
+import { TokenService } from "src/app/services/token.service";
 
 @Component({
   selector: "app-refer",
@@ -36,10 +38,12 @@ export class ReferComponent implements OnInit, OnDestroy {
   from: any;
   to: any;
   amount: any;
-  amountReferred:any;
+  amountReferred: any;
 
   constructor(
     private router: Router,
+    private content: ContentService,
+    private token: TokenService,
     private _snackBar: MatSnackBar,
     ngNavigatorShareService: NgNavigatorShareService,
     private link: LinksService
@@ -54,7 +58,7 @@ export class ReferComponent implements OnInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-      this.urlClicker = this.refer['urlValue'];
+    this.urlClicker = this.refer['urlValue'];
   }
 
   public goback() {
@@ -66,7 +70,7 @@ export class ReferComponent implements OnInit, OnDestroy {
       email,
       link: this.urlClicker,
     };
-
+    this.generateLink(dataEmail)
     this.subscription = this.link.saveLinkRefer(dataEmail).subscribe(
       (resp: ResponseService) => {
         if (resp.state === "Success") {
@@ -76,7 +80,7 @@ export class ReferComponent implements OnInit, OnDestroy {
             type: "success",
             confirmButtonText: "Aceptar",
             confirmButtonClass: "accept-refer-alert-success",
-          }).then(()=>{
+          }).then(() => {
             this.getReferrals();
           })
         } else {
@@ -100,7 +104,17 @@ export class ReferComponent implements OnInit, OnDestroy {
       }
     );
   }
-
+  public generateLink(dataEmail: any) {
+    console.log("Estatus")
+    let tokenInfo = this.token.userInfo();
+    let idClicker = tokenInfo.idclicker;
+    let formData: FormData = new FormData();
+    formData.append('idClicker', idClicker);
+    formData.append('type', 'Visit');
+    this.content.setClick(formData).subscribe((resp) => {
+      console.log("Responde")
+    })
+  }
   /* To copy Text from Textbox */
   public copyInputMessage(inputElement: any) {
     inputElement.select();

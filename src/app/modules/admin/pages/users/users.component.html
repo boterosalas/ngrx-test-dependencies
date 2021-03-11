@@ -19,7 +19,7 @@
             formControlName="tipoReport"
             class="selected-report"
           >
-            <mat-option (click)="onChangeSelected(selected.titulo)" *ngFor="let selected of selecteds" value="{{ selected.titulo }}">
+            <mat-option (click)="onChangeSelected(selected.titulo)" *ngFor="let selected of selecteds" value="{{ selected.value }}">
               <span >{{ selected.titulo }}</span>
             </mat-option>
           </mat-select>

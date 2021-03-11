@@ -62,6 +62,7 @@ export class UserService {
   apiGetNews = "new/getnews";
   apiGetExcelNews = "new/getnewsexcel";
   apiSetStatusNew = "new/changestatusnew";
+  apiReportLife = "report/getcommissionsbyuser";
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
@@ -537,6 +538,19 @@ export class UserService {
         data,
         this.httpOptions
       )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+  }
+  public getHojaVida(data: any) {
+    return this.http
+      .get(`${this.urlReports}${this.apiReportLife}?&userid=${data.userId}&start=${data.start}&end=${data.end}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(

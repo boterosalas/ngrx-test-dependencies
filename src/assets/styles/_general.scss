@@ -1737,6 +1737,30 @@ joy-close-button.joyride-step__close svg {
     overflow: hidden;
   }
 }
+.user-clickacademy {
+  position: relative !important;
+  #image-modal {
+    position: relative;
+  }
+
+  .top-generic {
+    position: absolute;
+    right: 0;
+  }
+
+  .mat-dialog-content {
+    padding: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  .mat-dialog-container {
+    padding: 0;
+    overflow: hidden;
+  }
+}
 .backdropBackground {
   background: rgb(0 0 0 / 74%) !important;
 }
@@ -2132,4 +2156,16 @@ h3#bussiness2 {
 
 .custom-color-primary .mat-checkbox-frame {
   border-color: #ffffff;
+}
+.panel-spacing {
+  .mat-expansion-panel-spacing {
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
+  .mat-expansion-panel-content {
+    background-color: #ffffff;
+  }
+  .mat-expansion-panel-body {
+    padding-top: 0px !important;
+  }
 }

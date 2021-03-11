@@ -230,6 +230,18 @@ export class MenuHelpCenterComponent implements OnInit {
       class: "dondepuedocontactarmesitengopreguntasextras",
     },
   ];
+  report = [
+    {
+      name: "Reportar novedad",
+      route: "/centro-de-ayuda/reportar/novedad",
+      class: "reportar",
+    },
+    {
+      name: "Estado de novedades",
+      route: "/centro-de-ayuda/reportar/estado-novedades",
+      class: "estadonovedades",
+    },
+  ]
 
   ngOnInit() {
     if (this.authorization) {

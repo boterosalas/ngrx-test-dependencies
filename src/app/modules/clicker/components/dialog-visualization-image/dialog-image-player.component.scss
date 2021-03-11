@@ -1,0 +1,22 @@
+.close-button-relative {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  z-index: 100;
+}
+.dialog-height {
+  max-height: 75vh !important;
+}
+.w.image {
+  width: 100% !important;
+}
+.download-file {
+  border-radius: 10px;
+  padding: 10px;
+  color: #ffffff;
+  position: absolute;
+  bottom: -45px;
+  right: 0px;
+  background-color: #8e7cbb;
+  border-color: rgba(0, 0, 0, 0.74) !important;
+}

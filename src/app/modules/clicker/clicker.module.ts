@@ -43,6 +43,7 @@ import { BannerMedalComponent } from './components/banner-medal/banner-medal.com
 import { CardMissionComponent } from './components/card-mission/card-mission.component';
 import { MissionLevelComponent } from './components/mission-level/mission-level.component';
 import { LibraryComponent } from './pages/library/library.component';
+import { DialogImagePlayerComponent } from './components/dialog-visualization-image/dialog-image-player.component';
 const routes: Routes = [
 
   {
@@ -127,7 +128,8 @@ const routes: Routes = [
     BannerMedalComponent,
     CardMissionComponent,
     MissionLevelComponent,
-    LibraryComponent
+    LibraryComponent,
+    DialogImagePlayerComponent
   ],
   imports: [
     CommonModule,
@@ -144,6 +146,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     AnonymousModule
   ],
-  entryComponents: [DialogComponent, DialogEditComponent, DialogHistoryComponent]
+  entryComponents: [DialogComponent, DialogEditComponent, DialogHistoryComponent, DialogImagePlayerComponent]
 })
 export class ClickerModule { }

@@ -12,6 +12,7 @@ import { UserService } from "src/app/services/user.service";
 import { MasterDataService } from "src/app/services/master-data.service";
 import { MatDialog } from '@angular/material';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import { ContentService } from "src/app/services/content.service";
 declare var dataLayer: any;
 
 @Component({
@@ -27,7 +28,8 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     private loading: LoaderService,
     private utils: UtilsService,
     private dialog: MatDialog,
-  ) {}
+    private content: ContentService,
+  ) { }
 
   private subscription: Subscription = new Subscription();
   registerForm: FormGroup;
@@ -47,12 +49,12 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   msg: string;
   classMsg: string;
   amount: any;
-  amountReferred:any;
+  amountReferred: any;
 
   ngOnInit() {
     this.amount = localStorage.getItem('Amount');
     this.amountReferred = localStorage.getItem('AmonuntReferred');
-    
+
     this.registerForm = this.fb.group(
       {
         name: [
@@ -129,7 +131,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   }
 
   public termsAndConditions() {
-   
+
     const template = this.templateTerms;
     const title = "";
 
@@ -172,7 +174,18 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       acceptHabeasData: true,
       acceptTerms: true
     };
+    if (registerForm.idReferrer != null) {
 
+      console.log("Estatus")
+      let idClicker = registerForm.idReferrer;
+      let formData: FormData = new FormData();
+      formData.append('idClicker', idClicker[1]);
+      formData.append('type', 'Visit');
+      this.content.setClick(formData).subscribe((resp) => {
+        console.log("Responde")
+      })
+
+    }
     this.subscription = this.registerUser.registerUser(registerForm).subscribe(
       (resp: ResponseService) => {
         this.loading.hide();
@@ -186,14 +199,14 @@ export class RegisterformComponent implements OnInit, OnDestroy {
 
           Swal.fire({
             title: "Revisa tu correo",
-            type:'info',
+            type: 'info',
             html: `
             <div class="text-center">
             <h3 class="gray f-16">Recuerda ir a la bandeja de entrada de tu correo para activar tu cuenta.</h3>
               <p class="f-11">*Revisa también tu bandeja de correo no deseado</p>
               </div>`,
-              allowOutsideClick: false,
-              allowEscapeKey: false,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
             confirmButtonText: "Volver al inicio",
             confirmButtonClass:
               "accept-register-alert-success gtmRegistroClicModalValidacion"
@@ -229,7 +242,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
 
   public acceptTermsCheck() {
     this.acceptTerms = !this.acceptTerms;
-    if(this.acceptTerms === false) {
+    if (this.acceptTerms === false) {
       this.registerForm.controls.acceptTerms.setValue(null);
     }
   }

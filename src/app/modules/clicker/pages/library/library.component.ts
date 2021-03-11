@@ -4,6 +4,8 @@ import { ContentService } from 'src/app/services/content.service';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { MatDialog } from '@angular/material';
+import { saveAs } from 'file-saver';
+import { DialogImagePlayerComponent } from '../../components/dialog-visualization-image/dialog-image-player.component';
 @Component({
     selector: 'app-library',
     templateUrl: './library.component.html',
@@ -22,6 +24,7 @@ export class LibraryComponent implements OnInit {
     dataRealVideo = [];
     url: string;
     active: boolean = true;
+    FileSaver = require('../../../../services/FileSaver');
     idDownload: string;
     selectAllVideosImg: string = "Seleccionar todos";
     bussiness: Array<any> = [];
@@ -120,17 +123,21 @@ export class LibraryComponent implements OnInit {
     }
     public viewerPhoto(element: any) {
         const title = "";
-        const template = this.templateVideo;
+        const template = '';
         const id = "video-modal";
         this.url = element.url;
+        let urlVideo = element.url;
         this.idDownload = element.id;
-        this.dialog.open(ModalGenericComponent, {
+        let datosDownload = element.id;
+        this.dialog.open(DialogImagePlayerComponent, {
             panelClass: "image-clickacademy",
             maxWidth: "600px",
             data: {
                 id,
                 title,
                 template,
+                urlVideo,
+                datosDownload
             },
             backdropClass: 'backdropBackground'
         });
@@ -194,22 +201,13 @@ export class LibraryComponent implements OnInit {
     }
     public download(data, type) {
         let blob = new Blob([data], { type: type });
-        let url = window.URL.createObjectURL(blob);
-        const downloadLink = document.createElement("a");
         if (type.includes("zip")) {
-            downloadLink.href = url;
-            downloadLink.download = "archivo.zip";
-            downloadLink.click();
+            saveAs(blob, "archivo.zip")
         } else if (type.includes("jpg")) {
-            downloadLink.href = url;
-            downloadLink.download = "archivo.jpg";
-            downloadLink.click();
+            saveAs(blob, "archivo.jpg")
         } else if (type.includes("mp4")) {
-            downloadLink.href = url;
-            downloadLink.download = "archivo.mp4";
-            downloadLink.click();
+            saveAs(blob, "archivo.mp4")
         }
-
     }
 
     public downloadFile() {

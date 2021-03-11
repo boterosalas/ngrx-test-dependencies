@@ -80,8 +80,10 @@ import { ExtraQuestionsComponent } from './pages/help-center/contact-us/extra-qu
 import { HowWorksClickamComponent } from './components/how-works-clickam/how-works-clickam.component';
 import { SliderWorksComponent } from './components/slider-works/slider-works.component';
 import { HomeSlideVideoComponent } from './components/home-slide-video/home-slide-video.component';
+import { ReportIconsClickamComponent } from './pages/help-center/report-files/report-icons/report-icons-clickam.component';
 // import { ReportComponent } from '../clicker/components/report/report.component';
 import { ReportNewsComponent } from './pages/help-center/report-news/report-news.component';
+import { ReportStatusComponent } from "./pages/help-center/report-files/report-status/report-status.component";
 const routes: Routes = [
   {
     path: "",
@@ -306,11 +308,28 @@ const routes: Routes = [
     ]
   },
   {
-    path: "centro-de-ayuda/reportar",
+    path: "centro-de-ayuda/reportar/novedad",
     children: [
       {
         path: "",
         component: ReportNewsComponent,
+      }
+    ]
+  }, {
+    path: "centro-de-ayuda/reportar/estado-novedades",
+    children: [
+      {
+        path: "",
+        component: ReportStatusComponent,
+      }
+    ]
+  },
+  {
+    path: "centro-de-ayuda/reportar",
+    children: [
+      {
+        path: "",
+        component: ReportIconsClickamComponent,
       }
     ]
   },
@@ -393,8 +412,9 @@ const routes: Routes = [
     HowWorksClickamComponent,
     SliderWorksComponent,
     HomeSlideVideoComponent,
-    ReportNewsComponent
-    // ReportComponent
+    ReportNewsComponent,
+    ReportIconsClickamComponent,
+    ReportStatusComponent
   ],
   imports: [
     FormsModule,
