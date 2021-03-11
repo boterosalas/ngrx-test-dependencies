@@ -4,6 +4,7 @@ import { ContentService } from 'src/app/services/content.service';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { MatDialog } from '@angular/material';
+
 import { DialogImagePlayerComponent } from '../../components/dialog-visualization-image/dialog-image-player.component';
 @Component({
     selector: 'app-library',
@@ -23,6 +24,7 @@ export class LibraryComponent implements OnInit {
     dataRealVideo = [];
     url: string;
     active: boolean = true;
+    FileSaver = require('../../../../services/FileSaver');
     idDownload: string;
     selectAllVideosImg: string = "Seleccionar todos";
     bussiness: Array<any> = [];
@@ -200,9 +202,6 @@ export class LibraryComponent implements OnInit {
     public download(data, type) {
         let reader = new FileReader();
         let blob = new Blob([data], { type: type });
-        //reader.onload = function (e) {
-        //  window.location.href = reader.result;
-        //}
         reader.onload = function (e) {
             window.location.href = reader.result as string;
         }

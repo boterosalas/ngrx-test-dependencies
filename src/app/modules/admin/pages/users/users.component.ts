@@ -63,15 +63,19 @@ export class UsersComponent extends MatPaginatorIntl
   userMail: string;
   dateNoVisible: boolean;
   selecteds = [{
-    titulo: "General"
+    titulo: "General",
+    value: 1
   }, {
-    titulo: "Usuarios externos"
+    titulo: "Usuarios externos",
+    value: 2
   },
   {
-    titulo: "Cambios de datos bancarios"
+    titulo: "Cambios de datos bancarios",
+    value: 3
   },
   {
-    titulo: "Datos de gamificación"
+    titulo: "Datos de gamificación",
+    value: 4
   }
   ]
   locale = {
@@ -601,21 +605,17 @@ export class UsersComponent extends MatPaginatorIntl
     })
   }
   public getAnyReport() {
-    if (this.dateForm.controls.tipoReport.value === "General") {
+    if (this.dateForm.controls.tipoReport.value === "1") {
       this.getUserExcel();
-
       //this.disableButon = false;
-    } else if (this.dateForm.controls.tipoReport.value === "Cambios de datos bancarios") {
-
+    } else if (this.dateForm.controls.tipoReport.value === "2") {
       this.getReportChangeExcel();
       //this.disableButon = false;
-    } else if (this.dateForm.controls.tipoReport.value === "Usuarios externos") {
-
+    } else if (this.dateForm.controls.tipoReport.value === "3") {
       this.exportusers();
       //this.disableButon = false;
-    } else {
+    } else if (this.dateForm.controls.tipoReport.value === "4") {
       this.getGamification();
-
     }
 
   }
