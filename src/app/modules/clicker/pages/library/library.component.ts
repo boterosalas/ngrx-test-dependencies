@@ -4,7 +4,7 @@ import { ContentService } from 'src/app/services/content.service';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { MatDialog } from '@angular/material';
-
+import { saveAs } from 'file-saver';
 import { DialogImagePlayerComponent } from '../../components/dialog-visualization-image/dialog-image-player.component';
 @Component({
     selector: 'app-library',
@@ -200,31 +200,14 @@ export class LibraryComponent implements OnInit {
         }
     }
     public download(data, type) {
-        let reader = new FileReader();
         let blob = new Blob([data], { type: type });
-        reader.onload = function (e) {
-            window.location.href = reader.result as string;
-        }
-        reader.readAsDataURL(blob);
-        let url = window.URL.createObjectURL(blob);
-        const downloadLink = document.createElement("a");
         if (type.includes("zip")) {
-            downloadLink.href = url;
-            downloadLink.download = "archivo.zip";
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
+            saveAs(blob, "archivo.zip")
         } else if (type.includes("jpg")) {
-            downloadLink.href = url;
-            downloadLink.download = "archivo.jpg";
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
+            saveAs(blob, "archivo.jpg")
         } else if (type.includes("mp4")) {
-            downloadLink.href = url;
-            downloadLink.download = "archivo.mp4";
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
+            saveAs(blob, "archivo.mp4")
         }
-
     }
 
     public downloadFile() {
