@@ -120,11 +120,15 @@ export class TableActivateBusinessComponent implements OnInit {
   saveComision() {
     this.content.saveComision(this.dataComision).subscribe((resp) => {
       this.updateComision()
+      this.dialog.closeAll();
     })
   }
   deleteComision(content: any) {
     this.content.deleteComision(content.id).subscribe((resp) => {
       this.updateComision()
     })
+  }
+  onNoClick() {
+    this.dialog.closeAll();
   }
 }

@@ -80,6 +80,7 @@
             </mat-form-field>
             <mat-form-field style="width: 90px;">
                 <input
+                style="height: 50px;"
                   matInput
                   [id]="category+i"
                   type="text"
@@ -94,7 +95,7 @@
             <span>AGREGAR NUEVA CATEGORÍA</span>
         </div>
         <div class="mt-3 mb-3" fxLayout="row" fxLayoutAlign="end">
-            <button mat-button ngClass="button_cancel" (click)="onNoClick()"  
+            <button mat-button class="mr-3" ngClass="button_cancel" (click)="onNoClick()"  
             > Cancelar </button>
             <button mat-button class="button-save" (click)="saveComision()"  
             > Guardar </button>
