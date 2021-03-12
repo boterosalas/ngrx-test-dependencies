@@ -4,7 +4,7 @@ import { ContentService } from 'src/app/services/content.service';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { MatDialog } from '@angular/material';
-import { saveAs } from 'file-saver';
+
 import { DialogImagePlayerComponent } from '../../components/dialog-visualization-image/dialog-image-player.component';
 @Component({
     selector: 'app-library',
@@ -24,7 +24,7 @@ export class LibraryComponent implements OnInit {
     dataRealVideo = [];
     url: string;
     active: boolean = true;
-    FileSaver = require('../../../../services/FileSaver');
+
     idDownload: string;
     selectAllVideosImg: string = "Seleccionar todos";
     bussiness: Array<any> = [];
@@ -184,29 +184,94 @@ export class LibraryComponent implements OnInit {
         if (this.deleteVideoImg.length > 1) {
             this.content.downloadF(this.deleteVideoImg).subscribe((resp) => {
                 //console.log(resp)
-                this.download(resp, "application/zip")
+                this.downloadDes(resp, "application/zip")
             })
         } else {
             if (variableImg === true) {
                 this.content.downloadF(this.deleteVideoImg).subscribe((resp) => {
-                    this.download(resp, "image/jpg")
+                    this.downloadDes(resp, "image/jpg")
                 });
             }
             if (variableVideo === true) {
                 this.content.downloadF(this.deleteVideoImg).subscribe((resp) => {
-                    this.download(resp, "video/mp4")
+                    this.downloadDes(resp, "video/mp4")
                 });
             }
         }
     }
+    downloadDes(content, types) {
+        var file = new Blob([content],
+            {
+                type: types
+            });
+        var reader = new FileReader();
+        if (types.includes("zip")) {
+            reader.onload = function () {
+                var popup = window.open();
+                var link = document.createElement('a');
+                link.setAttribute('href', reader.result as string);
+                link.setAttribute('download', 'filename.zip');
+                popup.document.body.appendChild(link);
+                link.click();
+                popup.document.body.removeChild(link);
+                popup.close()
+            }
+        } else if (types.includes("jpg")) {
+            reader.onload = function () {
+                var popup = window.open();
+                var link = document.createElement('a');
+                link.setAttribute('href', reader.result as string);
+                link.setAttribute('download', 'filename.jpg');
+                popup.document.body.appendChild(link);
+                link.click();
+                popup.document.body.removeChild(link);
+                popup.close()
+            }
+        } else if (types.includes("mp4")) {
+            reader.onload = function () {
+                var popup = window.open();
+                var link = document.createElement('a');
+                link.setAttribute('href', reader.result as string);
+                link.setAttribute('download', 'filename.jpg');
+                popup.document.body.appendChild(link);
+                link.click();
+                popup.document.body.removeChild(link);
+                popup.close()
+            }
+        }
+        reader.readAsDataURL(file);
+    }
     public download(data, type) {
+        let reader = new FileReader();
         let blob = new Blob([data], { type: type });
+        //reader.onload = function (e) {
+        //    window.location.href = reader.result as string;
+        //}
+        reader.readAsDataURL(blob);
+        let url = URL.createObjectURL(blob);
+        const downloadLink = document.createElement("a");
+        downloadLink.style.visibility = 'hidden';
         if (type.includes("zip")) {
-            saveAs(blob, "archivo.zip")
+            downloadLink.href = url;
+            downloadLink.target = '_blank';
+            downloadLink.download = "archivo.zip";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
         } else if (type.includes("jpg")) {
-            saveAs(blob, "archivo.jpg")
+            downloadLink.href = url;
+            downloadLink.target = '_blank';
+            downloadLink.download = "archivo.jpg";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
         } else if (type.includes("mp4")) {
-            saveAs(blob, "archivo.mp4")
+            downloadLink.href = url;
+            downloadLink.target = '_blank';
+            downloadLink.download = "archivo.mp4";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
         }
     }
 

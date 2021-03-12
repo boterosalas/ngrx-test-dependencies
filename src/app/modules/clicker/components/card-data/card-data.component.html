@@ -1,8 +1,41 @@
-<div fxLayout="column" fxFLex="100" class="card">
-  <span class="number">{{number}}</span>
-  <span class="gray {{Classborder}}">
-    {{text}}
-    <img class="pl-2 icon-alert" src="assets/img/tooltip.svg" alt="alert" matTooltip="{{textToolTip}}" matTooltipClass="purple-tip">
-  </span>
-  <a class="purple-text text-underline mt-2 cursor-pointer {{Classtag}}" (click)="detail()"> {{ 'GENERIC.SEE_DETAIL' | translate }} </a>
+<div *ngIf="total==='1'" fxLayout="column" fxFLex="100" class="card color-card {{classCard}}">
+  <div fxLayout="row" class="space-between-card">
+    <div fxLayout="column">
+    <span class="payment-card">{{number}}</span>
+    <span class="text-white">
+      {{text}}
+      <img class="pl-2 icon-alert" src="assets/img/icon-info-white.svg" alt="alert" matTooltip="{{textToolTip}}" matTooltipClass="purple-tip">
+    </span>
+  </div>
+    <img class="z-index-top" [src]="imgCard" alt="icono comisiones" >
+  </div>
+  <a class="button-card text-underline mt-2 cursor-pointer {{Classtag}}" (click)="detail()"> {{ 'GENERIC.SEE_DETAIL' | translate }} </a>
+  <img class="position-absolute" src="assets/img/icon-clickam-white.svg" alt="fondo-clickam">
+</div>
+<div *ngIf="total==='0'" fxLayout="column" fxFLex="100" class="card color-card {{classCard}}">
+  <div fxLayout="row" class="space-between-card">
+    <div fxLayout="column">
+    <span class="payment-card">{{number}} </span>
+    <span class="text-white">
+      {{text}}
+      <img class="pl-2 icon-alert" src="assets/img/icon-info-white.svg" alt="alert" matTooltip="{{textToolTip}}" matTooltipClass="purple-tip">
+    </span>
+  </div>
+    <img class="z-index-top" [src]="imgCard" alt="icono comisiones" >
+  </div>
+  <div class="space-between-card mt-2" fxLayout="row">
+    <div class="marco-mini-card" fxLayout="column">
+      <p>{{totalLinks}}</p>
+      <span>Links Creados</span>
+    </div>
+    <div class="marco-mini-card" fxLayout="column">
+      <p>{{totalProducts}}</p>
+      <span>Productos vendidos</span>
+    </div>
+    <div class="marco-mini-card" fxLayout="column">
+      <p>{{conversionRate}}%</p>
+      <span>Tasa de conversión</span>
+    </div>
+  </div>
+  <img class="position-absolute" src="assets/img/icon-clickam-white.svg" alt="fondo-clickam">
 </div>

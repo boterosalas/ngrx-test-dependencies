@@ -4,7 +4,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { ResponseService } from 'src/app/interfaces/response';
 import { ContentService } from 'src/app/services/content.service';
-
 @Component({
   selector: 'app-dialog-image-player',
   templateUrl: './dialog-image-player.component.html',
@@ -38,29 +37,33 @@ export class DialogImagePlayerComponent implements OnInit, OnDestroy {
     let reader = new FileReader();
     let blob = new Blob([data], { type: type });
     //reader.onload = function (e) {
-    //  window.location.href = reader.result;
+    //    window.location.href = reader.result as string;
     //}
-    reader.onload = function (e) {
-      window.location.href = reader.result as string;
-    }
     reader.readAsDataURL(blob);
-    let url = window.URL.createObjectURL(blob);
+    let url = URL.createObjectURL(blob);
     const downloadLink = document.createElement("a");
+    downloadLink.style.visibility = 'hidden';
     if (type.includes("zip")) {
       downloadLink.href = url;
+      downloadLink.target = '_blank';
       downloadLink.download = "archivo.zip";
       document.body.appendChild(downloadLink);
       downloadLink.click();
+      document.body.removeChild(downloadLink);
     } else if (type.includes("jpg")) {
       downloadLink.href = url;
+      downloadLink.target = '_blank';
       downloadLink.download = "archivo.jpg";
       document.body.appendChild(downloadLink);
       downloadLink.click();
+      document.body.removeChild(downloadLink);
     } else if (type.includes("mp4")) {
       downloadLink.href = url;
+      downloadLink.target = '_blank';
       downloadLink.download = "archivo.mp4";
       document.body.appendChild(downloadLink);
       downloadLink.click();
+      document.body.removeChild(downloadLink);
     }
 
   }

@@ -469,6 +469,12 @@ button {
   border-radius: 4px;
   margin-right: 15px;
 }
+.border-left-red::before {
+  content: "";
+  border-left: 3px solid $secondary-color;
+  border-radius: 4px;
+  margin-right: 15px;
+}
 
 .card-product {
   // border: 1px solid $color-border;
@@ -1567,7 +1573,8 @@ re-captcha {
 }
 
 .purple-tip {
-  background: rgba($primary-color, 0.8);
+  background: #37236abf 0% 0% no-repeat padding-box;
+  font-size: 14px;
 }
 
 .text-underline {

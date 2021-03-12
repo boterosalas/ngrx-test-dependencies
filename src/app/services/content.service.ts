@@ -510,6 +510,7 @@ export class ContentService {
         "Content-Type": "application/json",
         Authorization: "Bearer " + this.authorization,
         "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+        "Content-Disposition": "attachment"
       }),
       responseType: 'blob' as 'json'
     };

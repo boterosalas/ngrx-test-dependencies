@@ -8,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class PayDateComponent implements OnInit {
 
   constructor() { }
-
+  month: number;
   ngOnInit() {
+    let meses = new Date();
+    this.month = meses.getMonth() + 1;
+    console.log(this.month)
   }
 
 }

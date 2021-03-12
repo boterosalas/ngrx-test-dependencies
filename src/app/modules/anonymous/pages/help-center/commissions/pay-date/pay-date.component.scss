@@ -2,13 +2,130 @@
 
 .table-payment-dispar {
   width: 100%;
-  text-align: center;
-  border: 1px solid #f3f1f6;
+  text-align: start;
+  padding-left: 30px;
+  //border: 1px solid #f3f1f6;
   tr {
     th {
       background: #f3f1f6;
       text-transform: uppercase;
       color: $primary-color;
     }
+    td {
+      padding-left: 40px !important;
+      color: #37236a;
+    }
   }
+}
+.title-payment-table {
+  td {
+    background: #f3f1f6;
+    text-transform: uppercase;
+    color: $primary-color;
+    font-family: $font-galano-bold !important;
+  }
+}
+.card-p {
+  background-color: #f3f1f6;
+  padding: 18px;
+  border-radius: 10px;
+  color: #8d7eb7 !important;
+}
+.par-row {
+  background-color: #ffffff !important;
+}
+.par-row-opaco {
+  background-color: #8d7eb7 !important;
+  td {
+    color: #ffffff !important;
+  }
+}
+.par-row-opaco-text {
+  background-color: #ffffff !important;
+  td {
+    color: #878195 !important;
+  }
+}
+.impar-row-opaco-text {
+  background-color: #f3f1f6 !important;
+  td {
+    color: #878195 !important;
+  }
+}
+.impar-row {
+  background-color: #f3f1f6 !important;
+}
+.impar-row-opaco {
+  background-color: #8d7eb7 !important;
+  td {
+    color: #ffffff !important;
+  }
+}
+.header-payment {
+  border-bottom: 1px solid #0000001a;
+}
+.header-payment-mobile {
+  background-color: #37236a;
+  padding: 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  h3 {
+    color: #ffffff;
+  }
+}
+.content-payment-mobile {
+  padding-top: 5px;
+  padding-left: 20px;
+  padding-bottom: 5px;
+  p {
+    color: #37236a;
+  }
+}
+.content-payment-mobile-impar {
+  padding-top: 5px;
+  padding-left: 20px;
+  padding-bottom: 5px;
+  background-color: #f1f3f6;
+  p {
+    color: #37236a;
+  }
+}
+
+.content-payment-mobile-impar-opaco-text {
+  padding-top: 5px;
+  padding-left: 20px;
+  padding-bottom: 5px;
+  background-color: #f1f3f6;
+
+  p {
+    color: #878195;
+  }
+}
+
+.content-payment-mobile-opaco-text {
+  padding-top: 5px;
+  padding-left: 20px;
+  padding-bottom: 5px;
+
+  p {
+    color: #878195;
+  }
+}
+.content-payment-mobile-opaco {
+  padding-top: 5px;
+  padding-left: 20px;
+  padding-bottom: 5px;
+  background-color: #8d7eb7 !important;
+  h3 {
+    color: #ffffff;
+  }
+  p {
+    color: #ffffff;
+  }
+}
+.border-right-top {
+  border-top-right-radius: 10px;
+}
+.border-left-top {
+  border-top-left-radius: 10px;
 }
