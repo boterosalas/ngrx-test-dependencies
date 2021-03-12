@@ -20,6 +20,7 @@ export class LinksService {
   constructor(private http: HttpClient) { }
 
   url = environment.URL_REFERAL;
+  ulrReport = environment.URL_REPORTS;
   urlComission = environment.URL_COMISSION;
   urlReports = environment.URL_REPORTS;
   urlApiContent = environment.URL_CONTENT;
@@ -58,6 +59,7 @@ export class LinksService {
   apiPicking = "picking/importfilepickingcommissions"
   apiOrder = "business/orderbusiness";
   apiSellers = "seller/getsellers";
+  apiGetReport = "reports/clickerperformancereport";
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
 
@@ -489,7 +491,22 @@ export class LinksService {
         )
       );
   }
-
+  public getReportUser() {
+    return this.http
+      .get(
+        `${this.ulrReport}${this.apiGetReport}`,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+  }
   public getReportClickam(params: any) {
     return this.http
       .get(

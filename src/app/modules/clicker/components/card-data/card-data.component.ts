@@ -9,15 +9,24 @@ export class CardDataComponent implements OnInit {
 
   constructor() { }
 
-  @Input() number:string;
-  @Input() text:string;
-  @Input() textToolTip:string;
-  @Input() Classborder:string;
-  @Input() Classtag:string;
+  @Input() number: string;
+  @Input() text: string;
+  @Input() textToolTip: string;
+  @Input() Classborder: string;
+  @Input() Classtag: string;
+  @Input() classCard: string;
+  @Input() imgCard: string;
+  @Input() totalLinks: number;
+  @Input() totalProducts: number;
+  @Input() conversionRate: number;
+
+  @Input() total: boolean;
   @Output() openDetail = new EventEmitter;
 
   ngOnInit() {
+
   }
+
 
   public detail() {
     this.openDetail.emit();

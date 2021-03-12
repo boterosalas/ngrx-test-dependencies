@@ -22,14 +22,17 @@ export class ReportComponent implements OnInit, OnDestroy {
   totalItems: number;
   paginate: string;
   available: string;
-  account:string;
+  conversionRate: number;
+  totalLinks: number;
+  totalProducts: number;
+  account: string;
   isLoggedIn: any;
   identification: string;
   private subscription: Subscription = new Subscription();
-  items= [];
-  dataBreak1:any;
-  dataBreak2:any;
-  dataAcumulated:any;
+  items = [];
+  dataBreak1: any;
+  dataBreak2: any;
+  dataAcumulated: any;
   totalAcumulated: string;
   @ViewChild("templateBreak", { static: false })
   templateBreak: TemplateRef<any>;
@@ -43,7 +46,7 @@ export class ReportComponent implements OnInit, OnDestroy {
     private auth: AuthService,
     private token: TokenService,
     private dialog: MatDialog,
-    ) {
+  ) {
   }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -64,7 +67,7 @@ export class ReportComponent implements OnInit, OnDestroy {
    */
 
   public getPayments(from = 1, to = this.pageTo) {
-    const params = {from, to};
+    const params = { from, to };
     this.subscription = this.payment.getPayment(params).subscribe((payment) => {
       this.totalItems = payment.total;
       this.dataSource = new MatTableDataSource<any>(payment.users);
@@ -79,19 +82,25 @@ export class ReportComponent implements OnInit, OnDestroy {
     this.getPayments(from, to)
   }
 
-   /**
-   * Metodo para obtener el resumen del mes generados
-   */
+  /**
+  * Metodo para obtener el resumen del mes generados
+  */
 
   private getInfomonth() {
+
     this.subscription = this.payment.getReports().subscribe((resume: any) => {
-      this.available = resume.money.cutOff1;
-      this.account = resume.money.cutOff2;
       this.dataBreak1 = new MatTableDataSource<any>(resume.money.detail1);
       this.dataBreak2 = new MatTableDataSource<any>(resume.money.detail2);
       this.dataAcumulated = new MatTableDataSource<any>(resume.money.detailAccumulated);
-      this.totalAcumulated = resume.money.accumulated;
     });
+    this.payment.getReportUser().subscribe((resp: any) => {
+      this.totalAcumulated = resp.objectResponse.generalResume.totalCommissions;
+      this.available = resp.objectResponse.money.accumulated;
+      this.account = resp.objectResponse.money.cutOffValue;
+      this.conversionRate = resp.objectResponse.generalResume.conversionRate;
+      this.totalLinks = resp.objectResponse.generalResume.totalLinks;
+      this.totalProducts = resp.objectResponse.generalResume.totalProducts;
+    })
   }
 
   /**
@@ -106,11 +115,11 @@ export class ReportComponent implements OnInit, OnDestroy {
     const title = 'Pago';
     const detail = 'Detalle de ventas';
     let items;
-  
-    this.subscription = this.payment.getDetailPaymentClicker(paymentDate).subscribe(resp=> {
+
+    this.subscription = this.payment.getDetailPaymentClicker(paymentDate).subscribe(resp => {
       items = resp;
-      
-   this.dialog.open(DialogHistoryComponent, {
+
+      this.dialog.open(DialogHistoryComponent, {
         width: "649px",
         data: {
           items,
@@ -128,8 +137,8 @@ export class ReportComponent implements OnInit, OnDestroy {
 
   public break1() {
     const template = this.templateBreak;
-    const title = "Detalle corte 1";
-    const id="break1-modal"
+    const title = "Detalle comisiones de este mes";
+    const id = "break1-modal"
 
     this.dialog.open(ModalGenericComponent, {
       data: {
@@ -142,8 +151,8 @@ export class ReportComponent implements OnInit, OnDestroy {
 
   public break2() {
     const template = this.templateBreak2;
-    const title = "Detalle corte 2";
-    const id="break2-modal"
+    const title = "Detalle saldo pendiente por pagar";
+    const id = "break2-modal"
 
     this.dialog.open(ModalGenericComponent, {
       data: {
@@ -157,7 +166,7 @@ export class ReportComponent implements OnInit, OnDestroy {
   public acumulated() {
     const template = this.templateAcumulated;
     const title = "Detalle saldo acumulado";
-    const id="acumulated-modal"
+    const id = "acumulated-modal"
 
     this.dialog.open(ModalGenericComponent, {
       data: {
@@ -170,7 +179,7 @@ export class ReportComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
-   this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
 }

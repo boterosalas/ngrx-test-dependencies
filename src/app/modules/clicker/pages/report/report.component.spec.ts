@@ -23,7 +23,8 @@ describe("ReportComponent", () => {
     "getPayment",
     "getInfomonth",
     "getReports",
-    "getDetailPaymentClicker"
+    "getDetailPaymentClicker",
+    "getReportUser"
   ]);
 
   const mockDialog = jasmine.createSpyObj("MatDialog", ["open"]);
@@ -34,7 +35,7 @@ describe("ReportComponent", () => {
     "event "
   ]);
 
-  const data = {users: [], total: 0}
+  const data = { users: [], total: 0 }
 
   let infoMonth = {
     generalResume: {
@@ -43,19 +44,32 @@ describe("ReportComponent", () => {
       totalProducts: 0,
       conversionRate: 0
     },
-    money: { available: 0, account: 0 },
+    money: { available: 0, account: 0, cutOffValue: 0, accumulated: 0 },
     monthResume: { totalCommissions: 0, totalLink: 0, daysResume: [] },
     accumulated: '9999',
-    detailAccumulated: [{commissionGenerationDate: "2020-05-01T00:00:00", productName: "Garbanzo", commissionValue: 259, paymentDate: null, statusCommission: "Pendiente de pago"}]
+    detailAccumulated: [{ commissionGenerationDate: "2020-05-01T00:00:00", productName: "Garbanzo", commissionValue: 259, paymentDate: null, statusCommission: "Pendiente de pago" }]
   };
-
+  let infoMonthNew = {
+    objectResponse: {
+      generalResume: {
+        totalCommissions: 0,
+        totalLinks: 0,
+        totalProducts: 0,
+        conversionRate: 0
+      },
+      money: { available: 0, account: 0, cutOffValue: 0, accumulated: 0 },
+      monthResume: { totalCommissions: 0, totalLink: 0, daysResume: [] },
+      accumulated: '9999',
+      detailAccumulated: [{ commissionGenerationDate: "2020-05-01T00:00:00", productName: "Garbanzo", commissionValue: 259, paymentDate: null, statusCommission: "Pendiente de pago" }]
+    }
+  };
   const user = {
     paymentDate: '2019-12-12',
     bank: 'Bancolombia',
     amount: '10000000',
     title: 'Pago',
     detail: 'Detalle ventas'
-  } 
+  }
 
   const getDetailPayment = {
     product: "vuelos", commissionValue: 16000, date: "2019-11-10T20:33:01.207"
@@ -88,14 +102,15 @@ describe("ReportComponent", () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
-    .overrideModule(BrowserDynamicTestingModule, {
-      set: {
-        entryComponents: [DialogHistoryComponent, ModalGenericComponent]
-      }
-    })
-    .compileComponents();
+      .overrideModule(BrowserDynamicTestingModule, {
+        set: {
+          entryComponents: [DialogHistoryComponent, ModalGenericComponent]
+        }
+      })
+      .compileComponents();
     mockLinksService.getPayment.and.returnValue(of(data));
     mockLinksService.getReports.and.returnValue(of(infoMonth));
+    mockLinksService.getReportUser.and.returnValue(of(infoMonthNew));
     mockLinksService.getDetailPaymentClicker.and.returnValue(of(getDetailPayment));
   }));
 
@@ -103,7 +118,7 @@ describe("ReportComponent", () => {
     fixture = TestBed.createComponent(ReportComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    component.identification= "123456789";
+    component.identification = "123456789";
   });
 
   it("should create", () => {
@@ -120,7 +135,7 @@ describe("ReportComponent", () => {
     expect(mockLinksService.getPayment).toHaveBeenCalled();
   });
 
-  
+
   it("get detail payment", () => {
     component.userData(user);
     expect(mockLinksService.getDetailPaymentClicker).toHaveBeenCalled();
@@ -130,7 +145,7 @@ describe("ReportComponent", () => {
     component.break1();
     expect(mockDialog.open).toBeTruthy();
   });
-  
+
   it('break 2', () => {
     component.break2();
     expect(mockDialog.open).toBeTruthy();
@@ -140,6 +155,6 @@ describe("ReportComponent", () => {
     component.acumulated();
     expect(mockDialog.open).toBeTruthy();
   });
-  
+
 
 });

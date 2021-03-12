@@ -1,15 +1,23 @@
-@import 'variables';
+@import "variables";
 
 table {
-    width: 100%;
-    th{
-      width: 33.3%;
-      font-family: $font-galano-bold;
-      color: $primary-color;
-      text-align: center;
-    }
-    td{
-      padding-right: 15px;
-      text-align: center;
-    }
+  width: 100%;
+  th {
+    width: 33.3%;
+    font-family: $font-galano-bold;
+    color: $primary-color;
+    text-align: center;
   }
+  td {
+    padding-right: 15px;
+    text-align: center;
+  }
+}
+
+.left-table-date {
+  text-align: left;
+  img {
+    position: relative;
+    top: 4px;
+  }
+}
