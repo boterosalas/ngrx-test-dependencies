@@ -137,13 +137,11 @@ export class TableActivateBusinessComponent implements OnInit {
   deleteComision(content: any, index: number) {
 
     Swal.fire({
-      title: "Eliminar comisión",
-      text: '¿Estás seguro de eliminar la comisión?',
-      type: "info",
-      confirmButtonText: "Aceptar",
+      html: "<h3 class='delete-title-comision'>Eliminar comisión</h3> <p class='w-container'>¿Estás seguro de eliminar la comisión seleccionada?</p>",
+      confirmButtonText: "Eliminar comisión",
       cancelButtonText: "Cancelar",
       showCancelButton: true,
-      confirmButtonClass: "updateok order-last",
+      confirmButtonClass: "updateokdelete order-last",
       cancelButtonClass: "updatecancel",
       allowOutsideClick: false
     }).then((resp: any) => {
