@@ -26,12 +26,8 @@
 
 <ng-template #templateCardReport>
   <p id="reportSell">{{ 'REPORTS.DOWNLOAD_REPORT' | translate }}</p>
-    <a href="{{fileUrl}}"> 
-      <button id="downloadReport" class="mb-3" mat-raised-button color="orange"> {{ 'REPORTS.DOWNLOAD' | translate }} <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
-    </a> 
-
+    <button  (click)="getFileReport()" id="downloadReport" class="mb-3" mat-raised-button color="orange"> Exportar <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
     <p>{{ 'REPORTS.UPLOAD_FILE' | translate }}</p>
-
     <h4  id="trips" class="title-upload m-0">{{ 'REPORTS.PAYMENT_REPORTS' | translate }}</h4>
     <app-load-form-file [fileForm]="fileFormPayment"  [nameFile]="nameFilePayment" label="Payment" (uploadFile)="onFileChangePayment($event)"></app-load-form-file>  
     <mat-error *ngIf="showErrorExtPayment" class="small">

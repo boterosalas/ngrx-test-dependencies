@@ -60,6 +60,7 @@ export class LinksService {
   apiOrder = "business/orderbusiness";
   apiSellers = "seller/getsellers";
   apiGetReport = "reports/clickerperformancereport";
+  apiGetReportMonth = "reports/getcommissionpaymentreport"
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
 
@@ -388,7 +389,7 @@ export class LinksService {
 
   public getFileReport() {
     return this.http
-      .get(`${this.urlComission}${this.apiFile}`, this.httpOptions)
+      .get(`${this.ulrReport}${this.apiGetReportMonth}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
@@ -398,7 +399,7 @@ export class LinksService {
           )
         ),
         map((resp: ResponseService) => {
-          return resp.objectResponse;
+          return resp;
         })
       );
   }

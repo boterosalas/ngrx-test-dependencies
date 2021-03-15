@@ -22,7 +22,7 @@ export class ReportComponent implements OnInit, OnDestroy {
   totalItems: number;
   paginate: string;
   available: string;
-  conversionRate: number;
+  conversionRate: any;
   totalLinks: number;
   totalProducts: number;
   account: string;
@@ -98,6 +98,8 @@ export class ReportComponent implements OnInit, OnDestroy {
       this.available = resp.objectResponse.money.accumulated;
       this.account = resp.objectResponse.money.cutOffValue;
       this.conversionRate = resp.objectResponse.generalResume.conversionRate;
+      console.log(resp.objectResponse.generalResume.conversionRate)
+      console.log(this.conversionRate)
       this.totalLinks = resp.objectResponse.generalResume.totalLinks;
       this.totalProducts = resp.objectResponse.generalResume.totalProducts;
     })

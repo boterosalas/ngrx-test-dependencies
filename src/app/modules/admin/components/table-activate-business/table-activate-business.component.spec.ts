@@ -98,6 +98,7 @@ describe('TableActivateBusinessComponent', () => {
     component.comisionTable({ id: 1 })
     component.idBussinessSelected = 1;
     component.updateComision();
+    component.updateComisionDelete();
     expect(mockDialog.open).toHaveBeenCalled();
   })
 

@@ -5,6 +5,7 @@ import { LinksService } from "src/app/services/links.service";
 import { Router } from '@angular/router';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { ContentService } from 'src/app/services/content.service';
+import Swal from 'sweetalert2';
 export interface PeriodicElement {
   drag: any;
   bussiness: any;
@@ -35,6 +36,7 @@ export class TableActivateBusinessComponent implements OnInit {
   idBussinessSelected: number;
   displayedColumns: string[] = ['drag', 'bussiness', 'activate', 'category'];
   arrayComision: any[];
+  disabledButton: boolean = true;
   ngOnInit() {
   }
   dataComision: any;
@@ -83,12 +85,11 @@ export class TableActivateBusinessComponent implements OnInit {
     ]);
   }
   comisionTable(contenido: any) {
-    console.log(this.arrayComision);
     this.idBussinessSelected = contenido.id;
     this.updateComision()
-
     let title = 'Comisiones'
     let template = this.templateComision;
+    this.disabledButton = true;
     this.dialog.open(ModalGenericComponent, {
       data: {
         title,
@@ -99,7 +100,6 @@ export class TableActivateBusinessComponent implements OnInit {
   updateComision() {
     this.content.getCommissionsData(this.idBussinessSelected).subscribe((resp) => {
       this.arrayComision = resp;
-      console.log(this.arrayComision);
       let datosComision = Object.values(this.arrayComision);
       this.dataComision = datosComision[0];
       for (let index = 0; index < this.dataComision.length; index++) {
@@ -107,15 +107,26 @@ export class TableActivateBusinessComponent implements OnInit {
       }
     })
   }
+  updateComisionDelete() {
+    this.content.getCommissionsData(this.idBussinessSelected).subscribe((resp) => {
+      this.arrayComision = resp;
+      let datosComision = Object.values(this.arrayComision);
+      this.dataComision = datosComision[0];
+      for (let index = 0; index < this.dataComision.length; index++) {
+        delete this.dataComision[index].tab;
+      }
+      this.validation()
+    })
+  }
   newComision() {
-    //console.log(this.dataComision);
     if (this.dataComision === undefined) {
       this.dataComision = [];
       this.dataComision.push({ idBusiness: this.idBussinessSelected, commission: '', description: '' })
+      document.getElementById("description0").focus();
     } else {
       this.dataComision.push({ idBusiness: this.idBussinessSelected, commission: '', description: '' })
     }
-
+    this.disabledButton = true;
   }
   saveComision() {
     this.content.saveComision(this.dataComision).subscribe((resp) => {
@@ -123,12 +134,43 @@ export class TableActivateBusinessComponent implements OnInit {
       this.dialog.closeAll();
     })
   }
-  deleteComision(content: any) {
-    this.content.deleteComision(content.id).subscribe((resp) => {
-      this.updateComision()
+  deleteComision(content: any, index: number) {
+
+    Swal.fire({
+      title: "Eliminar comisión",
+      text: '¿Estás seguro de eliminar la comisión?',
+      type: "info",
+      confirmButtonText: "Aceptar",
+      cancelButtonText: "Cancelar",
+      showCancelButton: true,
+      confirmButtonClass: "updateok order-last",
+      cancelButtonClass: "updatecancel",
+      allowOutsideClick: false
+    }).then((resp: any) => {
+      if (resp.dismiss !== 'cancel') {
+        if (content.hasOwnProperty('id')) {
+          this.content.deleteComision(content.id).subscribe((resp) => {
+            this.updateComisionDelete()
+          })
+        } else {
+          this.dataComision.splice(index, 1);
+          this.validation()
+        }
+      }
     })
+
   }
   onNoClick() {
     this.dialog.closeAll();
+  }
+  validation() {
+    console.log("Cambio")
+    for (let index = 0; index < this.dataComision.length; index++) {
+      if (this.dataComision[index].commission != "" && this.dataComision[index].description != "") {
+        this.disabledButton = false;
+      } else {
+        this.disabledButton = true;
+      }
+    }
   }
 }

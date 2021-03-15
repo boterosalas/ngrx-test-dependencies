@@ -19,10 +19,24 @@ describe('ReportStatusComponent', () => {
     let component: ReportStatusComponent;
     let fixture: ComponentFixture<ReportStatusComponent>;
     const mockContentService = jasmine.createSpyObj("UserService", [
-        "saveNews"
+        "saveNews", "getNovetlyUser"
     ]);
     const resp = {
         state: "Success"
+    }
+    const respNovelty = {
+        state: "Success",
+        objectResponse: {
+            novelties: [{
+                id: 222,
+                description: "Hola mundo",
+                statusnovelty: "En revisión"
+            }, {
+                id: 222,
+                description: "Hola mundo",
+                statusnovelty: "En revisión"
+            }]
+        }
     }
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -57,6 +71,7 @@ describe('ReportStatusComponent', () => {
         })
             .compileComponents();
         mockContentService.saveNews.and.returnValue(of(resp));
+        mockContentService.getNovetlyUser.and.returnValue(of(respNovelty));
     }));
 
     beforeEach(() => {
