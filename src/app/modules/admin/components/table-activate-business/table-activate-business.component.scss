@@ -82,3 +82,19 @@ table {
   position: relative;
   right: 20px;
 }
+.center-template {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.delete-title {
+  color: #f21905;
+}
+.w-container {
+  width: 80%;
+  text-align: center;
+}
+.icon-update {
+  position: relative;
+  bottom: 3px;
+}
