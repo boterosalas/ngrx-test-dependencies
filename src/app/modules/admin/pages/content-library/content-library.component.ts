@@ -230,13 +230,15 @@ export class ContentLibraryComponent implements OnInit {
     handleFileInput(event) {
         console.log("Estatus");
         let fileList: FileList = event.target.files;
-        this.fileToUpload = fileList[0];
-        console.log(this.fileToUpload);
         let formData: FormData = new FormData();
-        formData.append('file', this.fileToUpload, this.fileToUpload.name.replace(' ', '_'));
+        for (let index = 0; index < fileList.length; index++) {
+            this.fileToUpload = fileList[index];
+            formData.append('files', this.fileToUpload, this.fileToUpload.name.replace(' ', '_'));
+        }
+
+        //formData.append('file', this.fileToUpload, this.fileToUpload.name.replace(' ', '_'));
         formData.append('idBusiness', this.id);
-        formData.append('url', this.fileToUpload.name);
-        console.log(formData)
+        //formData.append('url', this.fileToUpload.name.replace(" ", "_"));
         this.getExtension(this.fileToUpload.name, this.fileToUpload.size);
         if (this.validFormat === true) {
             this.content.setContentImgVi(formData).subscribe((resp: any) => {

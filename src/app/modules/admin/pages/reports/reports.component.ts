@@ -65,7 +65,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
     daysOfWeek: moment.weekdaysMin(),
     monthNames: moment.monthsShort(),
     firstDay: 1 // first day is monday
-}
+  }
 
 
 
@@ -78,10 +78,10 @@ export class ReportsComponent implements OnInit, OnDestroy {
     private cd: ChangeDetectorRef,
     private _snackBar: MatSnackBar,
     private usersService: UserService,
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.getFileReport();
+    //this.getFileReport();
 
     this.nameFile = "";
     this.nameFilePayment = "";
@@ -100,7 +100,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
     this.fileFormPayment = this.fb.group({
       file: [null]
     });
-    
+
     this.fileFormPicking = this.fb.group({
       file: [null]
     });
@@ -118,7 +118,13 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
   public getFileReport() {
     this.subscription = this.file.getFileReport().subscribe(file => {
-      this.fileUrl = file;
+      if (file.state === 'Success') {
+        this.openSnackBar(file.userMessage, 'Cerrar');
+        this.dateFormSell.reset();
+        if (this.dateFormSell.controls.dateRange.value.startDate === null) {
+          this.disButon = true;
+        }
+      }
     });
   }
 
@@ -158,7 +164,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
     let reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      let fileBlob = new Blob([file], {type: this.EXCEL_TYPE} )
+      let fileBlob = new Blob([file], { type: this.EXCEL_TYPE })
       let file2 = new File(([fileBlob]), this.nameFilePayment, { type: this.EXCEL_TYPE });
       reader.readAsDataURL(file2);
       reader.onload = () => {
@@ -181,7 +187,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
     let reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      let fileBlob = new Blob([file], {type: this.EXCEL_TYPE} )
+      let fileBlob = new Blob([file], { type: this.EXCEL_TYPE })
       let filePicking = new File(([fileBlob]), this.nameFilePicking, { type: this.EXCEL_TYPE });
       reader.readAsDataURL(filePicking);
       reader.onload = () => {
@@ -258,24 +264,24 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
   private sendFilePayment() {
     let fileSplit = this.fileFormPayment.controls.file.value.file.split(',');
-    let file =  fileSplit[1];
+    let file = fileSplit[1];
     let data = {
-      fileBase64:file,
+      fileBase64: file,
       business: "seguros",
       email: this.userName
     };
 
     this.subscription = this.file.updatePaymentDate(data).subscribe(
       (res: ResponseService) => {
-        if(res.state !== 'Error') {
+        if (res.state !== 'Error') {
           Swal.fire({
             title: "Carga exitosa",
             text: res.userMessage,
             type: "success",
             confirmButtonText: "Aceptar",
             confirmButtonClass: "upload-success"
-          }).then(()=> {
-            this.nameFilePayment ="";
+          }).then(() => {
+            this.nameFilePayment = "";
           });
         } else {
           Swal.fire({
@@ -284,8 +290,8 @@ export class ReportsComponent implements OnInit, OnDestroy {
             type: "error",
             confirmButtonText: "Aceptar",
             confirmButtonClass: "upload-error"
-          }).then(()=> {
-            this.nameFilePayment ="";
+          }).then(() => {
+            this.nameFilePayment = "";
           });
         }
       },
@@ -297,8 +303,8 @@ export class ReportsComponent implements OnInit, OnDestroy {
           type: "error",
           confirmButtonText: "Aceptar",
           confirmButtonClass: "upload-invalid"
-        }).then(()=> {
-          this.nameFilePayment ="";
+        }).then(() => {
+          this.nameFilePayment = "";
         });
       }
     );
@@ -376,11 +382,11 @@ export class ReportsComponent implements OnInit, OnDestroy {
     });
   }
 
-    /**
-   * Abre el mensaje de confirmacion de copiado del link
-   * @param message
-   * @param action
-   */
+  /**
+ * Abre el mensaje de confirmacion de copiado del link
+ * @param message
+ * @param action
+ */
 
   private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
@@ -393,9 +399,9 @@ export class ReportsComponent implements OnInit, OnDestroy {
       start: this.dateFormSell.controls.dateRange.value.startDate.format(),
       end: this.dateFormSell.controls.dateRange.value.endDate.format()
     }
-    
-   this.subscription = this.file.getReportClickam(this.dateParams).subscribe((resp: ResponseService) => {
-      if(resp.state === 'Success') {
+
+    this.subscription = this.file.getReportClickam(this.dateParams).subscribe((resp: ResponseService) => {
+      if (resp.state === 'Success') {
         this.openSnackBar(resp.userMessage, 'Cerrar');
         this.dateFormSell.reset();
         if (this.dateFormSell.controls.dateRange.value.startDate === null) {
@@ -404,7 +410,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
       }
     });
   }
-  
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

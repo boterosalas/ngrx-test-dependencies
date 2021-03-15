@@ -60,7 +60,7 @@ export class ReportNewsComponent implements OnInit {
                 // a must be equal to b
                 return 0;
             });
-            console.log(this.dataSource)
+
         })
 
 

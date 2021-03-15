@@ -31,6 +31,10 @@
 .norma-data {
   color: #37236a;
   font-size: 16px;
+  img{
+    position: relative;
+    top: 4px;
+  }
 }
 .between-datas {
   justify-content: space-between;
@@ -45,7 +49,18 @@
   .margin-mobile {
     margin-right: 20px !important;
   }
+  .padding-mobile{
+    padding-top: 7px;
+  }
 }
 .data-detail-color {
   color: #37236a;
+}
+.bold-report{
+  font-size: $font-galano-bold;
+  font-size: 18px;
+  color: #726D7E !important;
+}
+.size-status{
+  width: 122px;
 }

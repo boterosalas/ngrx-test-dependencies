@@ -65,14 +65,14 @@
             <p class="header-standar mr-2">ACCIONES</p>
         </div>
         <div class="content-comision mt-2" fxLayout="row" *ngFor="let item of dataComision; let i = index">
-            <mat-form-field style="width: 490px;">
-                
+            <mat-form-field [id]="description+i" style="width: 490px;">
                 <textarea
                     matInput
                     placeholder="NOMBRE"
-                    id="description"
+                    [id]="description+i"
                     type="text"
                     [(ngModel)]="item.description"
+                    (ngModelChange)="validation(item.description)"
                     required
                     class="text-area-heigth"
                     style="height: 50px;"
@@ -86,10 +86,11 @@
                   type="text"
                   placeholder="COMISIÓN"
                   [(ngModel)]="item.commission"
+                  (ngModelChange)="validation(item.description)"
                   required
                 />
             </mat-form-field>
-            <button class="button-delete-comision" mat-button (click)="deleteComision(item)" ><img class="cursor-pointer "   src="/assets/img/dashboard/icon-remove-comision.svg" alt=""></button>
+            <button class="button-delete-comision" mat-button (click)="deleteComision(item, i)" ><img class="cursor-pointer "   src="/assets/img/dashboard/icon-remove-comision.svg" alt=""></button>
         </div>
         <div (click)="newComision()" class="new-category cursor-pointer" fxLayout="row">
             <span>AGREGAR NUEVA CATEGORÍA</span>
@@ -97,7 +98,7 @@
         <div class="mt-3 mb-3" fxLayout="row" fxLayoutAlign="end">
             <button mat-button class="mr-3" ngClass="button_cancel" (click)="onNoClick()"  
             > Cancelar </button>
-            <button mat-button class="button-save" (click)="saveComision()"  
+            <button mat-raised-button class="button-save" (click)="saveComision()"   [disabled]="disabledButton"
             > Guardar </button>
         </div>
     </div>    

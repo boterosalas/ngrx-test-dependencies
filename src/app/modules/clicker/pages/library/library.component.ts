@@ -4,7 +4,7 @@ import { ContentService } from 'src/app/services/content.service';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { MatDialog } from '@angular/material';
-
+import { saveAs } from 'file-saver-ios-bugfix';
 import { DialogImagePlayerComponent } from '../../components/dialog-visualization-image/dialog-image-player.component';
 @Component({
     selector: 'app-library',
@@ -24,7 +24,6 @@ export class LibraryComponent implements OnInit {
     dataRealVideo = [];
     url: string;
     active: boolean = true;
-
     idDownload: string;
     selectAllVideosImg: string = "Seleccionar todos";
     bussiness: Array<any> = [];
@@ -184,70 +183,101 @@ export class LibraryComponent implements OnInit {
         if (this.deleteVideoImg.length > 1) {
             this.content.downloadF(this.deleteVideoImg).subscribe((resp) => {
                 //console.log(resp)
-                this.downloadDes(resp, "application/zip")
+                this.download(resp, "application/zip")
             })
         } else {
             if (variableImg === true) {
                 this.content.downloadF(this.deleteVideoImg).subscribe((resp) => {
-                    this.downloadDes(resp, "image/jpg")
+                    this.download(resp, "image/jpg")
                 });
             }
             if (variableVideo === true) {
                 this.content.downloadF(this.deleteVideoImg).subscribe((resp) => {
-                    this.downloadDes(resp, "video/mp4")
+                    this.download(resp, "video/mp4")
                 });
             }
         }
     }
     downloadDes(content, types) {
-        var file = new Blob([content],
+        let file = new Blob([content],
             {
                 type: types
             });
-        var reader = new FileReader();
+
+        //var reader = new FileReader();
         if (types.includes("zip")) {
-            reader.onload = function () {
-                var popup = window.open();
-                var link = document.createElement('a');
-                link.setAttribute('href', reader.result as string);
-                link.setAttribute('download', 'filename.zip');
-                popup.document.body.appendChild(link);
-                link.click();
-                popup.document.body.removeChild(link);
-                popup.close()
-            }
+            //const fileStream = this.streamSaver.createWriteStream('sample.zip', {
+            //    size: file.size // Makes the procentage visiable in the download
+            //})
+
+            // One quick alternetive way if you don't want the hole blob.js thing:
+            // const readableStream = new Response(
+            //   Blob || String || ArrayBuffer || ArrayBufferView
+            // ).body
+            //const readableStream = file.stream()
+
+            // more optimized pipe version
+            // (Safari may have pipeTo but it's useless without the WritableStream)
+            //if (window.WritableStream && readableStream.pipeTo) {
+            //    return readableStream.pipeTo(fileStream)
+            //        .then(() => console.log('done writing'))
+            //}
+
+            // Write (pipe) manually
+
+            //document.write = fileStream.getWriter();
+            //const reader = readableStream.getReader()
+            //const pump = () => reader.read()
+            //    .then(res => res.done
+            //        ? writer.close()
+            //        : writer.write(res.value).then(pump))
+
+            //pump()
+            //reader.onload = function () {
+            //    var popup = window.open();
+            //    var link = document.createElement('a');
+            //    link.setAttribute('href', reader.result as string);
+            //    link.setAttribute('download', 'filename.zip');
+            //    popup.document.body.appendChild(link);
+            //    link.click();
+            //    popup.document.body.removeChild(link);
+            //    popup.close()
+            //}
         } else if (types.includes("jpg")) {
-            reader.onload = function () {
-                var popup = window.open();
-                var link = document.createElement('a');
-                link.setAttribute('href', reader.result as string);
-                link.setAttribute('download', 'filename.jpg');
-                popup.document.body.appendChild(link);
-                link.click();
-                popup.document.body.removeChild(link);
-                popup.close()
-            }
+            saveAs(file, "archivo.jpg");
+            //reader.onload = function () {
+            //    var popup = window.open();
+            //    var link = document.createElement('a');
+            //    link.setAttribute('href', reader.result as string);
+            //    link.setAttribute('download', 'filename.jpg');
+            //    popup.document.body.appendChild(link);
+            //    link.click();
+            //    popup.document.body.removeChild(link);
+            //    popup.close()
+            //}
         } else if (types.includes("mp4")) {
-            reader.onload = function () {
-                var popup = window.open();
-                var link = document.createElement('a');
-                link.setAttribute('href', reader.result as string);
-                link.setAttribute('download', 'filename.jpg');
-                popup.document.body.appendChild(link);
-                link.click();
-                popup.document.body.removeChild(link);
-                popup.close()
-            }
+            saveAs(file, "archivo.mp4");
+            //reader.onload = function () {
+            //    var popup = window.open();
+            //    var link = document.createElement('a');
+            //    link.setAttribute('href', reader.result as string);
+            //    link.setAttribute('download', 'filename.jpg');
+            //    popup.document.body.appendChild(link);
+            //    link.click();
+            //    popup.document.body.removeChild(link);
+            //    popup.close()
+            //}
         }
-        reader.readAsDataURL(file);
+        //reader.readAsDataURL(file);
     }
     public download(data, type) {
         let reader = new FileReader();
         let blob = new Blob([data], { type: type });
-        //reader.onload = function (e) {
-        //    window.location.href = reader.result as string;
-        //}
+        reader.onload = function (e) {
+            window.location.href = reader.result as string;
+        }
         reader.readAsDataURL(blob);
+        //reader.readAsBinaryString(blob);
         let url = URL.createObjectURL(blob);
         const downloadLink = document.createElement("a");
         downloadLink.style.visibility = 'hidden';

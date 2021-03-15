@@ -18,29 +18,14 @@ export class ReportStatusComponent implements OnInit {
         private users: UserService,
     ) {
     }
-    dataSourceNews = [{
-        consecutive: "00001",
-        dateReport: "12/12/2021",
-        dateClose: "12/12/2021",
-        status: "Activo",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-    },
-    {
-        consecutive: "00002",
-        dateReport: "12/12/2021",
-        dateClose: "12/12/2021",
-        status: "Activo",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-    },
-    {
-        consecutive: "00003",
-        dateReport: "12/12/2021",
-        dateClose: "12/12/2021",
-        status: "Activo",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-    }]
+    //dataSourceNews: any
     selectedInic: any;
+    dataSourceNews: any;
     ngOnInit() {
+        this.users.getNovetlyUser().subscribe((resp: any) => {
+            console.log(resp);
+            this.dataSourceNews = resp.objectResponse.novelties
+        })
     }
     stepIni(elem: any) {
         this.selectedInic = elem;
