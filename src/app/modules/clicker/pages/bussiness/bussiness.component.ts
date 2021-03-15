@@ -423,17 +423,19 @@ export class BussinessComponent implements OnInit, OnDestroy {
    */
 
   public dataSliderCategory(sliderInfo) {
+    console.log("Test")
     let token = localStorage.getItem("ACCESS_TOKEN");
     if (token !== null && sliderInfo.business !== "clickam") {
       this.tokenInfo = this.token.userInfo();
       this.idClicker = this.tokenInfo.idclicker;
       // this.idClicker = this.tokenInfo.idclicker.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      console.log(sliderInfo);
       const dataCategoryUrl = sliderInfo.link;
       this.showForm = false;
       this.urlshorten = "";
       this.reference = false;
       this.showFormCustomer = true;
-      this.url = `${dataCategoryUrl}${this.idClicker}`;
+      this.url = `${dataCategoryUrl}`;
       setTimeout(() => {
         this.saveLink();
       }, 500);
@@ -582,10 +584,10 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.urlshorten = "";
     let productUrl = product.url;
     if (this.id === "1") {
-      this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=${this.idClicker}`;
+      this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=`;
     }
     if (this.id === "2") {
-      this.url = `https://www.carulla.com${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=${this.idClicker}`;
+      this.url = `https://www.carulla.com${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign=`;
     }
     this.idCustomerForm.controls.identification.setValue("");
     this.idCustomerForm.reset();
