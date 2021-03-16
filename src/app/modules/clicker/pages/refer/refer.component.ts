@@ -105,12 +105,11 @@ export class ReferComponent implements OnInit, OnDestroy {
     );
   }
   public generateLink(dataEmail: any) {
-    console.log("Estatus")
     let tokenInfo = this.token.userInfo();
     let idClicker = tokenInfo.idclicker;
     let formData: FormData = new FormData();
     formData.append('idClicker', idClicker);
-    formData.append('type', 'Visit');
+    formData.append('type', 'Generate');
     this.content.setClick(formData).subscribe((resp) => {
       console.log("Responde")
     })

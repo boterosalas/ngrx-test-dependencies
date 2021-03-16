@@ -174,18 +174,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       acceptHabeasData: true,
       acceptTerms: true
     };
-    if (registerForm.idReferrer != null) {
 
-      console.log("Estatus")
-      let idClicker = registerForm.idReferrer;
-      let formData: FormData = new FormData();
-      formData.append('idClicker', idClicker[1]);
-      formData.append('type', 'Visit');
-      this.content.setClick(formData).subscribe((resp) => {
-        console.log("Responde")
-      })
-
-    }
     this.subscription = this.registerUser.registerUser(registerForm).subscribe(
       (resp: ResponseService) => {
         this.loading.hide();

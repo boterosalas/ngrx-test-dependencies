@@ -572,8 +572,8 @@ describe("HomeComponent", () => {
   //   component.getModalPromo();
   //   expect(mockContentService.getPopupus).toHaveBeenCalled();
   // });
-  
-  
+
+
 
   // it('send data', () => {
 

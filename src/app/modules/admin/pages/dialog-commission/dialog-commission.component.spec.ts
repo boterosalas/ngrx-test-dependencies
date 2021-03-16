@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogCommissionComponent } from './dialog-commission.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MatMenuModule, MatSlideToggleModule } from '@angular/material';
+import { MatDialog, MatMenuModule, MatSlideToggleModule } from '@angular/material';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -14,12 +14,17 @@ import { of } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 import Swal from 'sweetalert2';
 describe('DialogCommissionComponent', () => {
   let component: DialogCommissionComponent;
   let fixture: ComponentFixture<DialogCommissionComponent>;
   const mockContentService = jasmine.createSpyObj("ContentService", [
     "getCommissionsData", "saveComision"
+  ]);
+  const mockDialog = jasmine.createSpyObj("MatDialog", [
+    "open",
+    "closeAll"
   ]);
   let response = [{
     orderby: 0,
@@ -40,6 +45,7 @@ describe('DialogCommissionComponent', () => {
         HttpClientTestingModule,
         ReactiveFormsModule,
         FormsModule,
+
         NoopAnimationsModule,
         BrowserAnimationsModule,
         TranslateModule.forRoot(),
@@ -47,6 +53,7 @@ describe('DialogCommissionComponent', () => {
         MatMenuModule,
         MatSlideToggleModule,
         DragDropModule,
+        SharedModule,
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
@@ -63,6 +70,7 @@ describe('DialogCommissionComponent', () => {
       ],
       providers: [
         { provide: ContentService, useValue: mockContentService },
+        { provide: MatDialog, useValue: mockDialog },
       ]
 
     })
@@ -80,9 +88,7 @@ describe('DialogCommissionComponent', () => {
   });
   it('should create', () => {
     component.dataSource = response;
-
     expect(component).toBeTruthy();
-    //expect(mockContentService.getCommissionsData).toHaveBeenCalled();
   })
   it('updateDelete', () => {
     component.updateComisionDelete();
@@ -90,7 +96,13 @@ describe('DialogCommissionComponent', () => {
     let datos = true;
     component.saveComision();
     component.dataSource = response;
-    component.validation();
+    component.elemento = { description: "", commission: "" }
+    component.validation("hola");
+    component.elemento = { description: "ddddd", commission: "2%" }
+    component.validation("hola");
+    expect(datos).toBeTruthy();
+  })
+  it('testing commission', () => {
     spyOn(Swal, "fire").and.returnValue(
       Promise.resolve<any>({
         text: "Extensión erronea",
@@ -100,6 +112,8 @@ describe('DialogCommissionComponent', () => {
       })
     );
     component.deleteComision({ id: 2 }, 2);
+    component.newComision();
+    let datos = true;
     expect(datos).toBeTruthy();
   })
 });
