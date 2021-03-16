@@ -30,11 +30,13 @@ export class TableActivateBusinessComponent implements OnInit {
   @Input() dataSource;
   @Output() activateBusiness = new EventEmitter;
   @ViewChild('table', { static: false }) table: MatTable<PeriodicElement>;
+  @ViewChild('table2', { static: false }) table2: MatTable<PeriodicElement>;
   @ViewChild("templateComision", { static: false }) templateComision: TemplateRef<
     any
   >;
   idBussinessSelected: number;
   displayedColumns: string[] = ['drag', 'bussiness', 'activate', 'category'];
+  displayedColumnsComision: string[] = ['drag', 'bussiness', 'comision', 'button'];
   arrayComision: any[];
   disabledButton: boolean = true;
   ngOnInit() {
@@ -56,6 +58,16 @@ export class TableActivateBusinessComponent implements OnInit {
       })
     }
     this.saveOrder(datosSourceSend)
+  }
+  dropTableComision(event: CdkDragDrop<PeriodicElement[]>) {
+    const prevIndex = this.dataComision.findIndex((d) => d === event.item.data);
+    moveItemInArray(this.dataComision, prevIndex, event.currentIndex);
+    this.table2.renderRows();
+    for (let i = 0; i < this.dataComision.length; i++) {
+      this.dataComision[i].orderby = i + 1
+    }
+    this.validation()
+
   }
   saveOrder(datos: any) {
     this.file.putOrder(datos).subscribe(resp => {
@@ -104,6 +116,7 @@ export class TableActivateBusinessComponent implements OnInit {
       this.dataComision = datosComision[0];
       for (let index = 0; index < this.dataComision.length; index++) {
         delete this.dataComision[index].tab;
+        this.dataComision[index].orderby = index;
       }
     })
   }
@@ -114,6 +127,7 @@ export class TableActivateBusinessComponent implements OnInit {
       this.dataComision = datosComision[0];
       for (let index = 0; index < this.dataComision.length; index++) {
         delete this.dataComision[index].tab;
+        this.dataComision[index].orderby = index;
       }
       this.validation()
     })
@@ -127,6 +141,7 @@ export class TableActivateBusinessComponent implements OnInit {
       this.dataComision.push({ idBusiness: this.idBussinessSelected, commission: '', description: '' })
     }
     this.disabledButton = true;
+    this.table2.renderRows();
   }
   saveComision() {
     this.content.saveComision(this.dataComision).subscribe((resp) => {
@@ -162,7 +177,6 @@ export class TableActivateBusinessComponent implements OnInit {
     this.dialog.closeAll();
   }
   validation() {
-    console.log("Cambio")
     for (let index = 0; index < this.dataComision.length; index++) {
       if (this.dataComision[index].commission != "" && this.dataComision[index].description != "") {
         this.disabledButton = false;
