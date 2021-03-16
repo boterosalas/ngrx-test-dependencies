@@ -132,16 +132,23 @@ export class HomeComponent implements OnInit, OnDestroy {
         if (params.code) {
           localStorage.setItem("idClicker", params.code);
           this.openRegister();
+          this.generateLink(params.code);
         } else {
           router.navigate(["/"]);
         }
       }
     });
   }
-
+  public generateLink(dataEmail: any) {
+    let idClicker = dataEmail;
+    let formData: FormData = new FormData();
+    formData.append('idClicker', idClicker);
+    formData.append('type', 'Visit');
+    this.content.setClick(formData).subscribe((resp) => {
+      console.log("Responde")
+    })
+  }
   ngOnInit() {
-
-
     this.metaTagService.addTags([
       {
         name: "keywords",
@@ -165,6 +172,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.amount = localStorage.getItem('Amount');
     this.amountReferred = localStorage.getItem('AmonuntReferred');
   }
+
 
   public getUserDataUser() {
     this.subscription = this.auth.getRole$.subscribe((role) => {

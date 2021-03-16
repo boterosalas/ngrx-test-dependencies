@@ -1,6 +1,7 @@
 import {
     Component,
     OnInit,
+    TemplateRef,
     ViewChild
 } from "@angular/core";
 import { MatDialog, MatTable } from "@angular/material";
@@ -9,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ContentService } from 'src/app/services/content.service';
 import Swal from 'sweetalert2';
 import { Subscription } from "rxjs";
+import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
 export interface PeriodicElementComision {
     drag: any;
     bussiness: any;
@@ -25,9 +27,11 @@ export class DialogCommissionComponent implements OnInit {
     disabledButton: boolean = true;
     arrayComision: any;
     id: any;
+    elemento: any;
     title: any;
     displayedColumnsComision: string[] = ['drag', 'bussiness', 'comision', 'button'];
     image: any;
+    @ViewChild("templateNewEdit", { static: false }) templateDelete: TemplateRef<any>;
     componentLector: boolean = true;
     @ViewChild('table2', { static: false }) table2: MatTable<PeriodicElementComision>;
     private subscription: Subscription = new Subscription();
@@ -69,16 +73,14 @@ export class DialogCommissionComponent implements OnInit {
         for (let i = 0; i < this.dataSource.length; i++) {
             this.dataSource[i].orderby = i + 1
         }
-        this.validation()
-
+        //this.validation();
+        this.saveComision();
     }
-    validation() {
-        for (let index = 0; index < this.dataSource.length; index++) {
-            if (this.dataSource[index].commission != "" && this.dataSource[index].description != "") {
-                this.disabledButton = false;
-            } else {
-                this.disabledButton = true;
-            }
+    validation(elemento: any) {
+        if (this.elemento.description === "" || this.elemento.commission === "") {
+            this.disabledButton = true;
+        } else {
+            this.disabledButton = false;
         }
     }
     updateComision() {
@@ -102,25 +104,58 @@ export class DialogCommissionComponent implements OnInit {
                 //delete this.dataSource[index].tab;
                 this.dataSource[index].orderby = index;
             }
-            this.validation()
+            //this.validation()
         })
     }
     newComision() {
-        if (this.dataSource === undefined) {
-            this.dataSource = [];
-            this.dataSource.push({ idBusiness: this.id, commission: '', description: '', orderby: 0 })
-
-        } else {
-            this.dataSource.push({ idBusiness: this.id, commission: '', description: '', orderby: this.dataSource.length - 1 })
-        }
         this.disabledButton = true;
-        this.table2.renderRows();
+        if (this.dataSource === undefined) {
+            this.elemento = { description: '', commission: '', orderby: 0, idBusiness: this.id }
+        } else {
+            this.elemento = { description: '', commission: '', orderby: this.dataSource.length - 1, idBusiness: this.id }
+        }
+        let title = "Nueva Comisión"
+        let template = this.templateDelete
+        this.dialog.open(ModalGenericComponent, {
+            data: {
+                title,
+                template,
+            },
+        });
+
     }
     saveComision() {
         this.content.saveComision(this.dataSource).subscribe((resp) => {
             this.updateComision()
             this.disabledButton = true;
         })
+    }
+    saveComisionSend(data) {
+        this.content.saveComision([data]).subscribe((resp) => {
+            this.updateComision()
+            this.dialog.closeAll();
+        })
+    }
+    cancelEdit() {
+        this.dialog.closeAll();
+    }
+    editCategory(element) {
+        this.disabledButton = true;
+        this.elemento = element
+        let title = "Editar Comisión"
+        let template = this.templateDelete
+        this.dialog.open(ModalGenericComponent, {
+            data: {
+                title,
+                template,
+            },
+        });
+        this.dialog.afterAllClosed.subscribe(() => {
+            this.updateComisionDelete()
+        })
+    }
+    saveInformation() {
+        this.saveComisionSend(this.elemento);
     }
     deleteComision(content: any, index: number) {
         Swal.fire({
@@ -140,7 +175,7 @@ export class DialogCommissionComponent implements OnInit {
                     })
                 } else {
                     this.dataSource.splice(index, 1);
-                    this.validation()
+                    //this.validation()
                     this.table2.renderRows();
                 }
             }

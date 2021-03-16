@@ -56,7 +56,7 @@ export class ReferShareComponent implements OnInit {
     console.log("Estatus")
     let formData: FormData = new FormData();
     formData.append('idClicker', this.idClicker);
-    formData.append('type', 'Visit');
+    formData.append('type', 'Generate');
     this.content.setClick(formData).subscribe((resp) => {
       console.log("Responde")
     })
