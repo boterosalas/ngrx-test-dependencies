@@ -1,0 +1,86 @@
+<app-banner
+  title="{{ 'DASHBOARD.BUSINESS' | translate}}"
+  img="/assets/img/banners/banner-dashboard-pc.jpg"
+  imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
+></app-banner>
+<div class="container mt-3">
+    <div fxLayout="row" fxLayoutAlign="space-between" >
+        <div fxLayout="row">
+            <img class="image-bussiness" [src]="image" alt="">
+            <span> <h3>{{title}} / Comisiones</h3></span>
+        </div>
+        <span fxLayout="row" >
+            <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
+            <p ngClass.gt-xs="f-20" class="cursor-pointer text-underline purple-text" [routerLink]="[ '/negocios-admin']" >Regresar</p>
+          </span>
+    </div>
+<div class="container m-t4 fade-in">
+    <div ngClass="comision-container" > 
+        <table mat-table #table2  
+        [dataSource]="dataSource" 
+        cdkDropList
+        [cdkDropListData]="dataSource"
+        (cdkDropListDropped)="dropTableComision($event)">
+        <ng-container matColumnDef="drag">
+            <th class="header-color-cell-ini" mat-header-cell *matHeaderCellDef> </th>
+            <td class="pt-2" mat-cell *matCellDef="let element;let i= index" > 
+                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign.gt-xs="end center" fxLayoutAlign.xs="center center">
+                    <mat-icon  matSuffix class="mr-1 blue cursor-pointer" cdkDragHandle>drag_indicator</mat-icon>
+                </div>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="bussiness">
+            <th class="header-color-cell" style="width: 890px;" mat-header-cell *matHeaderCellDef> CATEGORÍA DE PRODUCTO </th>
+            <td class="pt-2" mat-cell *matCellDef="let element"> 
+                <mat-form-field [id]="description+i" style="width: 790px;">
+                    <textarea
+                        matInput
+                        placeholder="NOMBRE"
+                        [id]="description+i"
+                        type="text"
+                        [(ngModel)]="element.description"
+                        (ngModelChange)="validation(element.description)"
+                        required
+                        class="text-area-heigth"
+                        style="height: 50px;"
+                    ></textarea>  
+                </mat-form-field>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="comision">
+            <th class="header-color-cell" mat-header-cell *matHeaderCellDef> COMISIÓN </th>
+            <td class="pt-2" mat-cell *matCellDef="let element"> 
+                <mat-form-field style="width: 90px;">
+                    <input
+                    style="height: 50px;"
+                      matInput
+                      [id]="category+i"
+                      type="text"
+                      placeholder="COMISIÓN"
+                      [(ngModel)]="element.commission"
+                      (ngModelChange)="validation(element.description)"
+                      required
+                    />
+                </mat-form-field>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="button">
+            <th class="header-color-cell-fin" mat-header-cell *matHeaderCellDef> ACCIONES </th>
+            <td class="pt-2" mat-cell *matCellDef="let element;let i= index"> 
+                <button class="button-delete-comision" mat-button (click)="deleteComision(element, i)" ><img class="cursor-pointer "   src="/assets/img/dashboard/icon-remove-comision.svg" alt=""></button>
+            </td>
+        </ng-container>
+        <tr class="background-white-header" mat-header-row *matHeaderRowDef="displayedColumnsComision"></tr>
+                <tr ngClass="background-white" mat-row *matRowDef="let rowComision; columns: displayedColumnsComision;let i= index" cdkDrag [cdkDragData]="rowComision"></tr>
+        </table>
+        
+    </div>    
+    <div (click)="newComision()" class="new-category cursor-pointer" fxLayout="row">
+        <span>AGREGAR NUEVA CATEGORÍA</span>
+    </div>
+    <div class="mt-3 mb-3" fxLayout="row" fxLayoutAlign="end">
+        
+        <button mat-raised-button class="button-save" (click)="saveComision()"   [disabled]="disabledButton"
+        > Guardar </button>
+    </div>
+</div>

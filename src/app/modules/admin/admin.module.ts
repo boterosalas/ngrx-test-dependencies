@@ -41,7 +41,7 @@ import { NewsAdminComponent } from './pages/news-admin/news-admin.component'
 import { DialogNewsComponent } from './components/dialog-news/dialog-news.component'
 import { ContentLibraryComponent } from './pages/content-library/content-library.component'
 import { DialogVideoPlayerComponent } from './components/dialog-video-player/dialog-video-player.component';
-
+import { DialogCommissionComponent } from './pages/dialog-commission/dialog-commission.component'
 const routes: Routes = [
   {
     path: "",
@@ -122,6 +122,14 @@ const routes: Routes = [
     data: {
       role: "ADMIN"
     },
+  },
+  {
+    path: "comision-admin",
+    component: DialogCommissionComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN"
+    },
   }
 ];
 
@@ -151,7 +159,8 @@ const routes: Routes = [
     NewsAdminComponent,
     DialogNewsComponent,
     ContentLibraryComponent,
-    DialogVideoPlayerComponent
+    DialogVideoPlayerComponent,
+    DialogCommissionComponent
   ],
   imports: [
     CommonModule,

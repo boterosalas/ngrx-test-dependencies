@@ -2,16 +2,16 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, TemplateRef 
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatDialog, MatTable } from '@angular/material';
 import { LinksService } from "src/app/services/links.service";
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { ContentService } from 'src/app/services/content.service';
-import Swal from 'sweetalert2';
+
 export interface PeriodicElement {
   drag: any;
   bussiness: any;
   activated: any;
-
 }
+
 @Component({
   selector: 'app-table-activate-business',
   templateUrl: './table-activate-business.component.html',
@@ -25,12 +25,13 @@ export class TableActivateBusinessComponent implements OnInit {
     public router: Router,
     private dialog: MatDialog,
     private content: ContentService,
+
   ) { }
   //dataSource: any;
   @Input() dataSource;
   @Output() activateBusiness = new EventEmitter;
   @ViewChild('table', { static: false }) table: MatTable<PeriodicElement>;
-  @ViewChild('table2', { static: false }) table2: MatTable<PeriodicElement>;
+
   @ViewChild("templateComision", { static: false }) templateComision: TemplateRef<
     any
   >;
@@ -59,16 +60,7 @@ export class TableActivateBusinessComponent implements OnInit {
     }
     this.saveOrder(datosSourceSend)
   }
-  dropTableComision(event: CdkDragDrop<PeriodicElement[]>) {
-    const prevIndex = this.dataComision.findIndex((d) => d === event.item.data);
-    moveItemInArray(this.dataComision, prevIndex, event.currentIndex);
-    this.table2.renderRows();
-    for (let i = 0; i < this.dataComision.length; i++) {
-      this.dataComision[i].orderby = i + 1
-    }
-    this.validation()
 
-  }
   saveOrder(datos: any) {
     this.file.putOrder(datos).subscribe(resp => {
       console.log(resp)
@@ -97,92 +89,14 @@ export class TableActivateBusinessComponent implements OnInit {
     ]);
   }
   comisionTable(contenido: any) {
-    this.idBussinessSelected = contenido.id;
-    this.updateComision()
-    let title = 'Comisiones'
-    let template = this.templateComision;
-    this.disabledButton = true;
-    this.dialog.open(ModalGenericComponent, {
-      data: {
-        title,
-        template,
+    this.router.navigate([
+      "/comision-admin",
+      {
+        id: contenido.id,
+        titulo: contenido.description,
+        imagen: contenido.imageurl
       },
-    });
-  }
-  updateComision() {
-    this.content.getCommissionsData(this.idBussinessSelected).subscribe((resp) => {
-      this.arrayComision = resp;
-      let datosComision = Object.values(this.arrayComision);
-      this.dataComision = datosComision[0];
-      for (let index = 0; index < this.dataComision.length; index++) {
-        delete this.dataComision[index].tab;
-        this.dataComision[index].orderby = index;
-      }
-    })
-  }
-  updateComisionDelete() {
-    this.content.getCommissionsData(this.idBussinessSelected).subscribe((resp) => {
-      this.arrayComision = resp;
-      let datosComision = Object.values(this.arrayComision);
-      this.dataComision = datosComision[0];
-      for (let index = 0; index < this.dataComision.length; index++) {
-        delete this.dataComision[index].tab;
-        this.dataComision[index].orderby = index;
-      }
-      this.validation()
-    })
-  }
-  newComision() {
-    if (this.dataComision === undefined) {
-      this.dataComision = [];
-      this.dataComision.push({ idBusiness: this.idBussinessSelected, commission: '', description: '' })
-      document.getElementById("description0").focus();
-    } else {
-      this.dataComision.push({ idBusiness: this.idBussinessSelected, commission: '', description: '' })
-    }
-    this.disabledButton = true;
-    this.table2.renderRows();
-  }
-  saveComision() {
-    this.content.saveComision(this.dataComision).subscribe((resp) => {
-      this.updateComision()
-      this.dialog.closeAll();
-    })
-  }
-  deleteComision(content: any, index: number) {
+    ]);
 
-    Swal.fire({
-      html: "<h3 class='delete-title-comision'>Eliminar comisión</h3> <p class='w-container'>¿Estás seguro de eliminar la comisión seleccionada?</p>",
-      confirmButtonText: "Eliminar comisión",
-      cancelButtonText: "Cancelar",
-      showCancelButton: true,
-      confirmButtonClass: "updateokdelete order-last",
-      cancelButtonClass: "updatecancel",
-      allowOutsideClick: false
-    }).then((resp: any) => {
-      if (resp.dismiss !== 'cancel') {
-        if (content.hasOwnProperty('id')) {
-          this.content.deleteComision(content.id).subscribe((resp) => {
-            this.updateComisionDelete()
-          })
-        } else {
-          this.dataComision.splice(index, 1);
-          this.validation()
-        }
-      }
-    })
-
-  }
-  onNoClick() {
-    this.dialog.closeAll();
-  }
-  validation() {
-    for (let index = 0; index < this.dataComision.length; index++) {
-      if (this.dataComision[index].commission != "" && this.dataComision[index].description != "") {
-        this.disabledButton = false;
-      } else {
-        this.disabledButton = true;
-      }
-    }
   }
 }
