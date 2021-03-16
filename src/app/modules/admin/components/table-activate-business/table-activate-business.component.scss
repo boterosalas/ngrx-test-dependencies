@@ -8,7 +8,7 @@ table {
   }
   td {
     padding-right: 15px;
-    text-align: center;
+    text-align: start;
   }
 }
 
@@ -80,7 +80,7 @@ table {
 }
 .button-delete-comision {
   position: relative;
-  right: 20px;
+  //right: 20px;
 }
 .center-template {
   display: flex;
@@ -97,4 +97,28 @@ table {
 .icon-update {
   position: relative;
   bottom: 3px;
+}
+.background-white{
+  background-color: #ffffff !important;
+  th{
+    border: none;
+  }
+}
+.background-white-header{
+  background-color: #ffffff !important;
+}
+.header-color-cell-ini{
+  background-color: #f3f1f6;
+  border-top-left-radius: 10px;
+  border-bottom: none;
+}
+.header-color-cell{
+  background-color: #f3f1f6;
+  border-bottom: none;
+  
+}
+.header-color-cell-fin{
+  background-color: #f3f1f6;
+  border-top-right-radius: 10px;
+  border-bottom: none;
 }
