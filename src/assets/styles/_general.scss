@@ -11,6 +11,21 @@ body {
   background: $bg-gray;
 }
 
+.comision-container{
+  table{
+    tr{
+      background-color: #ffffff !important;
+    }
+    th{
+      font-family: $font-galano-bold;
+    }
+  }
+  td.mat-cell{
+    border-bottom-style:none;
+  }
+  
+}
+
 .dashboard,
 .generador-links,
 .reportes-admin,
@@ -2183,10 +2198,5 @@ h3#bussiness2 {
   }
   .mat-expansion-panel-body {
     padding-top: 0px !important;
-  }
-}
-.comision-container{
-  td.mat-cell{
-    border-bottom-style:none;
   }
 }
