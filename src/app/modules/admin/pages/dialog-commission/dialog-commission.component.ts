@@ -114,7 +114,7 @@ export class DialogCommissionComponent implements OnInit {
         } else {
             this.elemento = { description: '', commission: '', orderby: this.dataSource.length - 1, idBusiness: this.id }
         }
-        let title = "Nueva Comisión"
+        let title = "Nueva categoría"
         let template = this.templateDelete
         this.dialog.open(ModalGenericComponent, {
             data: {
@@ -142,7 +142,7 @@ export class DialogCommissionComponent implements OnInit {
     editCategory(element) {
         this.disabledButton = true;
         this.elemento = element
-        let title = "Editar Comisión"
+        let title = "Editar categoría"
         let template = this.templateDelete
         this.dialog.open(ModalGenericComponent, {
             data: {
@@ -159,8 +159,8 @@ export class DialogCommissionComponent implements OnInit {
     }
     deleteComision(content: any, index: number) {
         Swal.fire({
-            html: "<h3 class='delete-title-comision'>Eliminar comisión</h3> <p class='w-container'>¿Estás seguro de eliminar la comisión seleccionada?</p>",
-            confirmButtonText: "Eliminar comisión",
+            html: "<h3 class='delete-title-comision'>Eliminar categoría</h3> <p class='w-container'>¿Estás seguro de eliminar la categoría seleccionada?</p>",
+            confirmButtonText: "Eliminar categoría",
             cancelButtonText: "Cancelar",
             showCancelButton: true,
             confirmButtonClass: "updateokdelete order-last",
