@@ -22,6 +22,7 @@ import { AditionalInfoFormComponent } from "./components/aditional-info-form/adi
 import { DialogEditComponent } from "./components/dialog-edit/dialog-edit.component";
 import { MatPasswordStrengthModule } from "@angular-material-extensions/password-strength";
 import { CardDataComponent } from './components/card-data/card-data.component';
+import { CardDataTotalComponent } from './components/card-data-total/card-data-total.component';
 import { DialogHistoryComponent } from './components/dialog-history/dialog-history.component';
 import { ShareModule } from '@ngx-share/core';
 import { BussinessComponent } from './pages/bussiness/bussiness.component';
@@ -110,6 +111,7 @@ const routes: Routes = [
     AditionalInfoFormComponent,
     DialogEditComponent,
     CardDataComponent,
+    CardDataTotalComponent,
     DialogHistoryComponent,
     BussinessComponent,
     PaymentInfoComponent,

@@ -31,15 +31,15 @@
                           <mat-expansion-panel-header>
                             <mat-panel-title class="between-datas">
                               <div fxLayout="column" class="padding-mobile mr-4">
-                                <p class="mt-0 mb-0 radications-p">NO. DE RADICADO</p>
+                                <p class="mt-0 mb-1 radications-p">NO. DE RADICADO</p>
                                 <span class="span-data">{{item.consecutive}}</span>
                               </div>
                               <div fxLayout="column" class="mr-4" fxShow.gt-xs="true" fxShow.xs="false">
-                                <p class="mt-0 mb-0 radications-p">FECHA DE REPORTE</p>
+                                <p class="mt-0 mb-1 radications-p">FECHA DE REPORTE</p>
                                 <span class="norma-data">{{item.date | date: 'dd/MM/yyyy'}}</span>
                               </div>
                               <div fxLayout="column" class="mr-4" fxShow.gt-xs="true" fxShow.xs="false">
-                                <p class="mt-0 mb-0 radications-p">FECHA DE CIERRE</p>
+                                <p class="mt-0 mb-1 radications-p">FECHA DE CIERRE</p>
                                 <span class="norma-data">{{item.solutiondate | date: 'dd/MM/yyyy'}}</span>
                               </div>
                               <div  fxLayout="column" class="mr-4 size-status" fxShow.gt-xs="true" fxShow.xs="false">
@@ -60,7 +60,7 @@
                             </mat-panel-title>
                             
                           </mat-expansion-panel-header>
-                          <div fxLayout="row">
+                          <div class="mb-2" fxLayout="row">
                           <div fxLayout="column" class="mr-4 margin-mobile" fxShow.gt-xs="false" fxShow.xs="true">
                             <p class="mt-0 mb-0 radications-p">FECHA DE REPORTE</p>
                             <span class="norma-data">{{item.date | date: 'dd/MM/yyyy'}}</span>
@@ -71,7 +71,7 @@
                             <span class="norma-data">{{item.solutiondate | date: 'dd/MM/yyyy'}}</span>
                           </div>
                         </div>
-                        <div fxLayout="column" class="mr-4 " fxShow.gt-xs="false" fxShow.xs="true">
+                        <div fxLayout="column" class="mr-4 mb-3 " fxShow.gt-xs="false" fxShow.xs="true">
                           <p class="mt-0 mb-0 radications-p">ESTADO</p>
                           <span class="norma-data" *ngIf="item.statusnovelty === 'Solucionado'">
                             <img class="status-img" src="/assets/img/dashboard/icon-check-new.svg" alt="ok"> Solucionado

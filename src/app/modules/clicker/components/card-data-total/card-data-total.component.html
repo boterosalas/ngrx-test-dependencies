@@ -1,0 +1,27 @@
+<div fxLayout="column"  class="card-basic {{classCard}}">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxLayout="column">
+    <span class="payment-card">{{number}} </span>
+    <span class="text-white">
+      {{text}}
+      
+    </span>
+  </div>
+    <img class="z-index-top" [src]="imgCard" alt="icono comisiones" >
+  </div>
+  <div fxLayoutAlign="space-between center" class="mt-2" fxLayout="row">
+    <div class="marco-mini-card" fxLayout="column">
+      <p class="marco-p-text">{{totalLinks}}</p>
+      <span class="marco-span-text">Links Creados</span>
+    </div>
+    <div class="marco-mini-card" fxLayout="column">
+      <p class="marco-p-text">{{totalProducts}}</p>
+      <span class="marco-span-text">Productos vendidos</span>
+    </div>
+    <div class="marco-mini-card" fxLayout="column">
+      <p class="marco-p-text">{{conversionRate*100}}%</p>
+      <span class="marco-span-text">Tasa de conversión</span>
+    </div>
+  </div>
+  <img class="position-absolute" src="assets/img/icon-clickam-white.svg" alt="fondo-clickam">
+</div>

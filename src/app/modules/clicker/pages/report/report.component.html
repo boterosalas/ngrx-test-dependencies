@@ -9,14 +9,14 @@
       <div fxLayout="row" class="mt-4 mb-2">
         <span fxLayout="column" fxFlex="100">
           <app-card-data
-            [number]="available | currency: '':'symbol':'1.0-0'"
+            [number]="account | currency: '':'symbol':'1.0-0'"
             Classborder="border-bottom-orange-init"
             Classtag="gtmReportesClicMisComisionesVerDetalle1"
             classCard="color-card"
             total="1"
             imgCard = "assets/img/icon-com.svg"
-            text="Saldo pendiente por pagar"
-            textToolTip ="Este dinero corresponde a los saldos acumulados en los saldos anteriores, y te será pagado cuándo completes el monto mínimo ."
+            text="Comisiones de este mes"
+            textToolTip ="Las compras de tus referidos efectivas que se generen por medio de tus links durante el mes, se pagarán al siguiente mes entre los días 15 y 20."
             (openDetail)="break1()"
           ></app-card-data>
         </span>
@@ -25,21 +25,21 @@
       <div fxLayout="row">
         <span fxLayout="column" fxFlex="100">
           <app-card-data
-            [number]="account | currency: '':'symbol':'1.0-0'"
+            [number]="available | currency: '':'symbol':'1.0-0'"
             Classborder="border-bottom-orange-init"
             Classtag="gtmReportesClicMisComisionesVerDetalle2"
             total=1
             classCard="color-card-1"
             imgCard = "assets/img/icon-pay.svg"
-            text="Comisiones de este mes"
-            textToolTip ="Las compras de tus referidos efectivas que se generen por medio de tus links durante el mes, se pagarán al siguiente mes entre los días 15 y 20."
+            text="Saldo pendiente por pagar"
+            textToolTip ="Este dinero corresponde a los saldos acumulados en los saldos anteriores, y te será pagado cuándo completes el monto mínimo ."
             (openDetail)="break2()"
             >
           ></app-card-data>
         </span>
       </div>
       <div class="acumulated mt-2">
-        <app-card-data
+        <app-card-data-total
             [number]="totalAcumulated | currency: '':'symbol':'1.0-0'"
             text="Total comisiones"
             classCard="color-card-2"
@@ -50,7 +50,7 @@
             imgCard = "assets/img/icon-total.svg"
             Classtag="gtmReportesClicMisComisionesSaldoAcumulado"
             (openDetail)="acumulated()"
-          ></app-card-data>
+          ></app-card-data-total>
       </div>
       <!-- <p class="mb-0">{{ 'REPORTS.AVAILABLE_TEXT' | translate }}</p>
       <p class="mb-0">{{ 'REPORTS.ACCOUNT_TEXT' | translate }}</p> -->
