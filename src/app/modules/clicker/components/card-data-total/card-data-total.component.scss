@@ -43,13 +43,14 @@
 .position-absolute {
   height: 100px;
   width: 100px;
-  position: relative;
-  bottom: 90px;
-  left: 200px;
+  position: absolute;
+  right: 20px;
+  
   z-index: 0;
 }
 
 .z-index-top {
+  position: relative;
   z-index: 100;
 }
 .marco-mini-card {
