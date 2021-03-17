@@ -64,7 +64,7 @@
     <div class="mt-3 mb-3" fxLayout="row" fxLayoutAlign="end">
         
         <button mat-raised-button class="button-save" (click)="newComision()" 
-        > Agregar Nueva Comisión </button>
+        > Agregar categoría </button>
     </div>
 </div>
 
@@ -74,7 +74,7 @@
             <mat-form-field [id]="description+i" style="width: 385px;">
                 <textarea
                     matInput
-                    placeholder="NOMBRE"
+                    placeholder="Categorías"
                     
                     type="text"
                     [(ngModel)]="elemento.description"
