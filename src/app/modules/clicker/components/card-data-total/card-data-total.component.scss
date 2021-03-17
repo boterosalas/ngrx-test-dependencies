@@ -1,7 +1,8 @@
 @import "variables";
-//@import "general";
+@import "general";
 
-.card {
+
+.card-basic {
   // border: 1px solid #00000029;
   border-radius: 5px;
   padding: 10px;
@@ -15,9 +16,8 @@
   width: 25px;
 }
 
-
-.color-card {
-  background: transparent linear-gradient(90deg, #ffae5e 0%, #ffc183 100%) 0% 0%
+.color-card-2 {
+  background: transparent linear-gradient(90deg, #735cf2 0%, #968bf4 100%) 0% 0%
     no-repeat padding-box;
   border-radius: 10px !important;
   height: 142px;
@@ -25,36 +25,12 @@
   padding-left: 24px;
   width: 335px;
 }
-
-.color-card-1 {
-  background: transparent linear-gradient(90deg, #f27f5c 0%, #f4a78b 100%) 0% 0%
-    no-repeat padding-box;
-  border-radius: 10px !important;
-  height: 142px;
-  padding-top: 20px;
-  padding-left: 24px;
-  width: 335px;
-}
-
 @media screen and (max-width: 425px) {
-  .color-card {
+  .color-card-2 {
     width: 100%;
   }
-  .color-card-1 {
-    width: 100%;
-  }
-  
 }
-.button-card {
-  background: #ffffff40 0% 0% no-repeat padding-box;
-  color: #ffffff;
-  width: 110px;
-  height: 32px;
-  padding-left: 18px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-radius: 10px;
-}
+
 .text-white {
   color: #ffffff;
   font-size: 13px;
@@ -76,4 +52,28 @@
 
 .z-index-top {
   z-index: 100;
+}
+.marco-mini-card {
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  width: 72px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 50px;
+ 
+}
+
+.marco-p-text{
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: #ffffff;
+  font-family: $font-galano-bold;
+}
+.marco-span-text{
+  margin-top: 0px;
+    margin-bottom: 0px;
+    color: #ffffff;
+    font-size: 11px;
+  
 }
