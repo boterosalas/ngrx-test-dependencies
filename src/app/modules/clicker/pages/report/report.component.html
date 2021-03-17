@@ -10,10 +10,8 @@
         <span fxLayout="column" fxFlex="100">
           <app-card-data
             [number]="account | currency: '':'symbol':'1.0-0'"
-            Classborder="border-bottom-orange-init"
             Classtag="gtmReportesClicMisComisionesVerDetalle1"
             classCard="color-card"
-            total="1"
             imgCard = "assets/img/icon-com.svg"
             text="Comisiones de este mes"
             textToolTip ="Las compras de tus referidos efectivas que se generen por medio de tus links durante el mes, se pagarán al siguiente mes entre los días 15 y 20."
@@ -26,9 +24,7 @@
         <span fxLayout="column" fxFlex="100">
           <app-card-data
             [number]="available | currency: '':'symbol':'1.0-0'"
-            Classborder="border-bottom-orange-init"
             Classtag="gtmReportesClicMisComisionesVerDetalle2"
-            total=1
             classCard="color-card-1"
             imgCard = "assets/img/icon-pay.svg"
             text="Saldo pendiente por pagar"
@@ -43,7 +39,6 @@
             [number]="totalAcumulated | currency: '':'symbol':'1.0-0'"
             text="Total comisiones"
             classCard="color-card-2"
-            total=0
             [totalLinks]="totalLinks"
             [totalProducts] ="totalProducts"
             [conversionRate]="conversionRate"

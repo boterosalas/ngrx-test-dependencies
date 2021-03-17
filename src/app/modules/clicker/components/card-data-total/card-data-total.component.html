@@ -1,24 +1,23 @@
-<div   class="card-basic {{classCard}}" style="display: flex; flex-direction: column;">
-  <div   style="display: flex; flex-direction: row; justify-content: space-between;">
-    <div style="display: flex; flex-direction: column;">
-    <span class="payment-card">{{number}} </span>
-    <span class="text-white">
-      {{text}}
-      
-    </span>
-  </div>
+<div   class="card-basic {{classCard}}" style="display: flex !important; flex-direction: column !important;">
+  <div   style="display: flex !important; flex-direction: row !important; justify-content: space-between !important;">
+    <div style="display: flex !important; flex-direction: column !important; ">
+      <span class="payment-card">{{number}} </span>
+      <span class="text-white">
+        {{text}}
+      </span>
+    </div>
     <img class="z-index-top" [src]="imgCard" alt="icono comisiones" >
   </div>
-  <div  class="mt-2" style="display:flex; flex-direction:row; justify-content: space-between;">
-    <div class="marco-mini-card" style="display: flex; flex-direction: column;">
+  <div  class="mt-2" style="display:flex !important; flex-direction:row !important; justify-content: space-between !important;">
+    <div class="marco-mini-card" style="display: flex !important; flex-direction: column !important;">
       <p class="marco-p-text">{{totalLinks}}</p>
       <span class="marco-span-text">Links Creados</span>
     </div>
-    <div class="marco-mini-card" style="display: flex; flex-direction: column;">
+    <div class="marco-mini-card" style="display: flex !important; flex-direction: column !important;">
       <p class="marco-p-text">{{totalProducts}}</p>
       <span class="marco-span-text">Productos vendidos</span>
     </div>
-    <div class="marco-mini-card" style="display: flex; flex-direction: column;">
+    <div class="marco-mini-card" style="display: flex !important; flex-direction: column !important;">
       <p class="marco-p-text">{{conversionRate*100}}%</p>
       <span class="marco-span-text">Tasa de conversión</span>
     </div>

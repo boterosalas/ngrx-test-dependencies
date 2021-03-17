@@ -22,9 +22,14 @@ export class CardDataComponent implements OnInit {
 
   @Input() total: boolean;
   @Output() openDetail = new EventEmitter;
-
+  isiOS: boolean;
   ngOnInit() {
-
+    let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    if (iOS) {
+      this.isiOS = true;
+    } else {
+      this.isiOS = false
+    }
   }
 
 
