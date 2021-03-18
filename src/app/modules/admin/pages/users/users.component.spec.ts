@@ -281,7 +281,7 @@ describe("UsersComponent", () => {
     component.dateForm.controls.tipoReport.setValue("General");
     let start = moment();
     let end = moment("12-01-2020");
-    component.dateForm.controls.dateRange.setValue({ startDate: start, endDate: end });
+    component.dateForm.controls.dateRange.setValue({ startDate: end, endDate: start });
     component.getAnyReport();
     let datos = true;
     expect(datos).toBeTruthy();
@@ -289,7 +289,7 @@ describe("UsersComponent", () => {
   it('get second report', () => {
     let start = moment();
     let end = moment("12-01-2020");
-    component.dateForm.controls.dateRange.setValue({ startDate: start, endDate: end });
+    component.dateForm.controls.dateRange.setValue({ startDate: end, endDate: start });
     component.dateForm.controls.tipoReport.setValue("Cambios de Datos bancarios");
     component.getAnyReport();
 
@@ -299,7 +299,7 @@ describe("UsersComponent", () => {
   it('get third report', () => {
     let start = moment();
     let end = moment("12-01-2020");
-    component.dateForm.controls.dateRange.setValue({ startDate: start, endDate: end });
+    component.dateForm.controls.dateRange.setValue({ startDate: end, endDate: start });
     component.dateForm.controls.tipoReport.setValue("Cambios de Datos bancarios");
     component.getAnyReport();
     let datos = true;
@@ -308,7 +308,7 @@ describe("UsersComponent", () => {
   it('get fifth report', () => {
     let start = moment();
     let end = moment("12-01-2020");
-    component.dateForm.controls.dateRange.setValue({ startDate: start, endDate: end });
+    component.dateForm.controls.dateRange.setValue({ startDate: end, endDate: start });
     component.dateForm.controls.tipoReport.setValue("Usuarios Externos");
     component.getAnyReport();
     let datos = true;

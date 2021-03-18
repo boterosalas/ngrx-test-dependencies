@@ -557,11 +557,11 @@ export class UsersComponent extends MatPaginatorIntl
   }
 
   public exportusers() {
-    this.dateParamsReport = {
-      start: this.dateForm.controls.dateRange.value.startDate.format(),
-      end: this.dateForm.controls.dateRange.value.endDate.format()
-    };
-    this.subscription = this.usersService.getExternalUsers(this.dateParamsReport).subscribe((respExport: ResponseService) => {
+    //this.dateParamsReport = {
+    //  start: this.dateForm.controls.dateRange.value.startDate.format(),
+    //  end: this.dateForm.controls.dateRange.value.endDate.format()
+    //};
+    this.subscription = this.usersService.getExternalUsers().subscribe((respExport: ResponseService) => {
       this.dateForm.reset();
       if (this.dateForm.controls.dateRange.value.startDate === null) {
         //this.disButon = true;
@@ -575,7 +575,7 @@ export class UsersComponent extends MatPaginatorIntl
     this.subscription.unsubscribe();
   }
   onChangeSelected(event) {
-    if (event === "Datos de gamificación") {
+    if (event === "Datos de gamificación" || event === "Usuarios externos") {
       this.dateNoVisible = true;
       //this.dateForm.get('dateRange').clearValidators();
       //this.dateForm.updateValueAndValidity();
