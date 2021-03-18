@@ -197,9 +197,9 @@ export class UserService {
       );
   }
 
-  public getExternalUsers(params: any) {
+  public getExternalUsers() {
     return this.http
-      .get(`${this.url}${this.apiGetExternalUsers}?&start=${params.start}&end=${params.end}`, this.httpOptions)
+      .get(`${this.url}${this.apiGetExternalUsers}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
