@@ -609,10 +609,10 @@ export class UsersComponent extends MatPaginatorIntl
       this.getUserExcel();
       //this.disableButon = false;
     } else if (this.dateForm.controls.tipoReport.value === "2") {
-      this.getReportChangeExcel();
+      this.exportusers();
       //this.disableButon = false;
     } else if (this.dateForm.controls.tipoReport.value === "3") {
-      this.exportusers();
+      this.getReportChangeExcel();
       //this.disableButon = false;
     } else if (this.dateForm.controls.tipoReport.value === "4") {
       this.getGamification();
