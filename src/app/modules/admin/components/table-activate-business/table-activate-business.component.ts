@@ -88,13 +88,13 @@ export class TableActivateBusinessComponent implements OnInit {
       },
     ]);
   }
-  comisionTable(contenido: any) {
+  comisionTable(item: any) {
     this.router.navigate([
       "/comision-admin",
       {
-        id: contenido.id,
-        titulo: contenido.description,
-        imagen: contenido.imageurl
+        id: item.id,
+        titulo: item.description,
+        imagen: item.imageurl
       },
     ]);
 
