@@ -12,7 +12,6 @@ export class PayDateComponent implements OnInit {
   ngOnInit() {
     let meses = new Date();
     this.month = meses.getMonth() + 1;
-    console.log(this.month)
   }
 
 }

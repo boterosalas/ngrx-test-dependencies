@@ -53,7 +53,6 @@ export class ReferShareComponent implements OnInit {
     this.shareMobile.emit(this.url);
   }
   public generateLink() {
-    console.log("Estatus")
     let formData: FormData = new FormData();
     formData.append('idClicker', this.idClicker);
     formData.append('type', 'Generate');

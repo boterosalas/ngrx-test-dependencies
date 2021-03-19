@@ -78,26 +78,20 @@ export class DialogNewsComponent implements OnInit {
                 });
             }
         } else if (getExt === "pdf") {
-            if (this.data.element.urlImage === "") {
-                console.log("No hay nada")
-            } else {
-                var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-                if (iOS) {
-                    window.location.assign(this.data.element.documenturl);
-                } else {
-                    window.open(this.data.element.documenturl, "_blank");
-                }
-            }
+            this.openPDForFile();
         } else {
-            if (this.data.element.urlImage === "") {
-                console.log("No hay nada")
+            this.openPDForFile();
+        }
+    }
+    public openPDForFile() {
+        if (this.data.element.urlImage === "") {
+            console.log("No hay nada")
+        } else {
+            var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+            if (iOS) {
+                window.location.assign(this.data.element.documenturl);
             } else {
-                var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-                if (iOS) {
-                    window.location.assign(this.data.element.documenturl);
-                } else {
-                    window.open(this.data.element.documenturl, "_blank");
-                }
+                window.open(this.data.element.documenturl, "_blank");
             }
         }
     }
@@ -107,7 +101,6 @@ export class DialogNewsComponent implements OnInit {
             status: this.dateForm.controls.status.value
         }
         this.user.setStatus(datos).subscribe((resp: any) => {
-            console.log("Estado cambiado")
             if (resp.state === "Success") {
                 this.dialogRef.close();
             }

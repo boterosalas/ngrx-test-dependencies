@@ -152,7 +152,7 @@ export class LinksHistorialComponent implements OnInit {
   }
 
   public dataHistory(product) {
-    console.log(product);
+
     this.enableCopy = false;
     const dataCategoryUrl = product.link;
     this.showForm = false;

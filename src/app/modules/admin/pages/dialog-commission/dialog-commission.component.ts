@@ -95,18 +95,7 @@ export class DialogCommissionComponent implements OnInit {
 
         })
     }
-    updateComisionDelete() {
-        this.content.getCommissionsData(this.id).subscribe((resp) => {
-            this.arrayComision = resp;
-            let datosComision = Object.values(this.arrayComision);
-            this.dataSource = datosComision[0];
-            for (let index = 0; index < this.dataSource.length; index++) {
-                //delete this.dataSource[index].tab;
-                this.dataSource[index].orderby = index;
-            }
-            //this.validation()
-        })
-    }
+
     newComision() {
         this.disabledButton = true;
         if (this.dataSource === undefined) {
@@ -151,7 +140,7 @@ export class DialogCommissionComponent implements OnInit {
             },
         });
         this.dialog.afterAllClosed.subscribe(() => {
-            this.updateComisionDelete()
+            this.updateComision()
         })
     }
     saveInformation() {
@@ -170,7 +159,7 @@ export class DialogCommissionComponent implements OnInit {
             if (resp.dismiss !== 'cancel') {
                 if (content.hasOwnProperty('id')) {
                     this.content.deleteComision(content.id).subscribe((resp) => {
-                        this.updateComisionDelete()
+                        this.updateComision()
                         this.table2.renderRows();
                     })
                 } else {

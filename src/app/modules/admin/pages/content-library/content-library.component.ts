@@ -154,8 +154,8 @@ export class ContentLibraryComponent implements OnInit {
     public loadDelete() {
         let index = []
 
-        this.dataReal.forEach((elem, i) => {
-            if (elem.dataR === true) {
+        this.dataReal.forEach((content, i) => {
+            if (content.dataR === true) {
                 index.push(i);
             }
         });
@@ -228,7 +228,6 @@ export class ContentLibraryComponent implements OnInit {
         });
     }
     handleFileInput(event) {
-        console.log("Estatus");
         let fileList: FileList = event.target.files;
         let formData: FormData = new FormData();
         for (let index = 0; index < fileList.length; index++) {
@@ -242,7 +241,7 @@ export class ContentLibraryComponent implements OnInit {
         this.getExtension(this.fileToUpload.name, this.fileToUpload.size);
         if (this.validFormat === true) {
             this.content.setContentImgVi(formData).subscribe((resp: any) => {
-                console.log(resp);
+
                 if (resp.state === "Success") {
                     this.openSnackBar(resp.userMessage, "Cerrar")
                     this.myInputVariable.nativeElement.value = '';
@@ -268,7 +267,6 @@ export class ContentLibraryComponent implements OnInit {
                     this.fileCont = reader.result;
                     this.fileCont = this.fileCont.split(",")[1]
                     this.nameFileCont = nameFile;
-                    console.log(this.fileCont);
                     this.saveFormat();
                 } else {
                     console.log("Error en la carga")

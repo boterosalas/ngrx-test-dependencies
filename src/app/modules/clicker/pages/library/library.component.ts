@@ -198,111 +198,25 @@ export class LibraryComponent implements OnInit {
             }
         }
     }
-    downloadDes(content, types) {
-        let file = new Blob([content],
-            {
-                type: types
-            });
 
-        //var reader = new FileReader();
-        if (types.includes("zip")) {
-            //const fileStream = this.streamSaver.createWriteStream('sample.zip', {
-            //    size: file.size // Makes the procentage visiable in the download
-            //})
-
-            // One quick alternetive way if you don't want the hole blob.js thing:
-            // const readableStream = new Response(
-            //   Blob || String || ArrayBuffer || ArrayBufferView
-            // ).body
-            //const readableStream = file.stream()
-
-            // more optimized pipe version
-            // (Safari may have pipeTo but it's useless without the WritableStream)
-            //if (window.WritableStream && readableStream.pipeTo) {
-            //    return readableStream.pipeTo(fileStream)
-            //        .then(() => console.log('done writing'))
-            //}
-
-            // Write (pipe) manually
-
-            //document.write = fileStream.getWriter();
-            //const reader = readableStream.getReader()
-            //const pump = () => reader.read()
-            //    .then(res => res.done
-            //        ? writer.close()
-            //        : writer.write(res.value).then(pump))
-
-            //pump()
-            //reader.onload = function () {
-            //    var popup = window.open();
-            //    var link = document.createElement('a');
-            //    link.setAttribute('href', reader.result as string);
-            //    link.setAttribute('download', 'filename.zip');
-            //    popup.document.body.appendChild(link);
-            //    link.click();
-            //    popup.document.body.removeChild(link);
-            //    popup.close()
-            //}
-        } else if (types.includes("jpg")) {
-            saveAs(file, "archivo.jpg");
-            //reader.onload = function () {
-            //    var popup = window.open();
-            //    var link = document.createElement('a');
-            //    link.setAttribute('href', reader.result as string);
-            //    link.setAttribute('download', 'filename.jpg');
-            //    popup.document.body.appendChild(link);
-            //    link.click();
-            //    popup.document.body.removeChild(link);
-            //    popup.close()
-            //}
-        } else if (types.includes("mp4")) {
-            saveAs(file, "archivo.mp4");
-            //reader.onload = function () {
-            //    var popup = window.open();
-            //    var link = document.createElement('a');
-            //    link.setAttribute('href', reader.result as string);
-            //    link.setAttribute('download', 'filename.jpg');
-            //    popup.document.body.appendChild(link);
-            //    link.click();
-            //    popup.document.body.removeChild(link);
-            //    popup.close()
-            //}
-        }
-        //reader.readAsDataURL(file);
-    }
     public download(data, type) {
-        let reader = new FileReader();
         let blob = new Blob([data], { type: type });
-        reader.onload = function (e) {
-            window.location.href = reader.result as string;
-        }
-        reader.readAsDataURL(blob);
-        //reader.readAsBinaryString(blob);
-        let url = URL.createObjectURL(blob);
+        let url = window.URL.createObjectURL(blob);
         const downloadLink = document.createElement("a");
-        downloadLink.style.visibility = 'hidden';
         if (type.includes("zip")) {
             downloadLink.href = url;
-            downloadLink.target = '_blank';
             downloadLink.download = "archivo.zip";
-            document.body.appendChild(downloadLink);
             downloadLink.click();
-            document.body.removeChild(downloadLink);
         } else if (type.includes("jpg")) {
             downloadLink.href = url;
-            downloadLink.target = '_blank';
             downloadLink.download = "archivo.jpg";
-            document.body.appendChild(downloadLink);
             downloadLink.click();
-            document.body.removeChild(downloadLink);
         } else if (type.includes("mp4")) {
             downloadLink.href = url;
-            downloadLink.target = '_blank';
             downloadLink.download = "archivo.mp4";
-            document.body.appendChild(downloadLink);
             downloadLink.click();
-            document.body.removeChild(downloadLink);
         }
+
     }
 
     public downloadFile() {
