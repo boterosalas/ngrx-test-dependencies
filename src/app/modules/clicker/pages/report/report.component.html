@@ -28,7 +28,7 @@
             classCard="color-card-1"
             imgCard = "assets/img/icon-pay.svg"
             text="Saldo pendiente por pagar"
-            textToolTip ="Este dinero corresponde a los saldos acumulados en los saldos anteriores, y te será pagado cuándo completes el monto mínimo ."
+            textToolTip ="Este dinero corresponde a los saldos acumulados en los saldos anteriores, y te será pagado cuando completes el monto mínimo ."
             (openDetail)="break2()"
             >
           ></app-card-data>
@@ -44,7 +44,7 @@
             [conversionRate]="conversionRate"
             imgCard = "assets/img/icon-total.svg"
             Classtag="gtmReportesClicMisComisionesSaldoAcumulado"
-            (openDetail)="acumulated()"
+            
           ></app-card-data-total>
       </div>
       <!-- <p class="mb-0">{{ 'REPORTS.AVAILABLE_TEXT' | translate }}</p>
@@ -73,7 +73,8 @@
 </ng-template>
 
 <ng-template #templateBreak2>
-  <p>Este dinero corresponde a los saldos acumulados en los saldos anteriores, y te será pagado cuando completes el monto mínimo ($ 10,000).</p>
+  <p>Este es el dinero que acumulaste y te será pagado.</p>
+  <p>*Recuerda que el pago mínimo que hace Clickam a tu cuenta bancaria es de $10.000</p>
   <app-table-detail-comission [dataSource]="dataBreak2"></app-table-detail-comission>
 </ng-template>
 

@@ -88,18 +88,18 @@ export class ReportComponent implements OnInit, OnDestroy {
 
   private getInfomonth() {
 
-    this.subscription = this.payment.getReports().subscribe((resume: any) => {
-      this.dataBreak1 = new MatTableDataSource<any>(resume.money.detail1);
-      this.dataBreak2 = new MatTableDataSource<any>(resume.money.detail2);
-      this.dataAcumulated = new MatTableDataSource<any>(resume.money.detailAccumulated);
-    });
+    //this.subscription = this.payment.getReports().subscribe((resume: any) => {
+    //this.dataBreak1 = new MatTableDataSource<any>(resume.money.detail1);
+    //this.dataBreak2 = new MatTableDataSource<any>(resume.money.detail2);
+    //this.dataAcumulated = new MatTableDataSource<any>(resume.money.detailAccumulated);
+    //});
     this.payment.getReportUser().subscribe((resp: any) => {
       this.totalAcumulated = resp.objectResponse.generalResume.totalCommissions;
       this.available = resp.objectResponse.money.accumulated;
       this.account = resp.objectResponse.money.cutOffValue;
       this.conversionRate = resp.objectResponse.generalResume.conversionRate;
-      console.log(resp.objectResponse.generalResume.conversionRate)
-      console.log(this.conversionRate)
+      this.dataBreak1 = new MatTableDataSource<any>(resp.objectResponse.money.detailCutOff);
+      this.dataBreak2 = new MatTableDataSource<any>(resp.objectResponse.money.detailAccumulated);
       this.totalLinks = resp.objectResponse.generalResume.totalLinks;
       this.totalProducts = resp.objectResponse.generalResume.totalProducts;
     })
