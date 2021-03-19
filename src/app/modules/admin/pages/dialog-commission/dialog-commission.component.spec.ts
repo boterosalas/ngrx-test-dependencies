@@ -91,7 +91,6 @@ describe('DialogCommissionComponent', () => {
     expect(component).toBeTruthy();
   })
   it('updateDelete', () => {
-    component.updateComisionDelete();
     component.updateComision();
     let datos = true;
     component.saveComision();
