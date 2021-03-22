@@ -136,13 +136,13 @@
        </form>
        </div>
        <div>
-       <table mat-table [dataSource]="dataSourceBusi" class="users-table" matSort (matSortChange)="sortData($event)">
+       <table mat-table [dataSource]="dataSourceBusi" class="users-table" >
         <ng-container matColumnDef="negocio">
             <th mat-header-cell *matHeaderCellDef style="width: 40%; border-top-left-radius: 10px; font-weight: bold; padding-left: 10px;"> NEGOCIOS </th>
             <td [class]="(element.negocio==='TOTAL')?'color-last-left':'padding-top-bottom'" mat-cell *matCellDef="let element: let i=index" > 
                 <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign.gt-xs="start center" fxLayoutAlign.xs="center center">
                     <span fxLayout="column">
-                        <img *ngIf="element.icondashboard != ''" class="iconb" [src]="element.icondashboard" [alt]=" negocios ">
+                        <img *ngIf="element.icondashboard != ''" class="iconb" [src]="element.icondashboard" alt=" negocios ">
                     </span>
                     <span fxLayout="column" [class]="(element.icondashboard != '')?'galano-bold f-16 text-color-table':'text-color-total galano-bold'" fxHide.xs="true">
                         {{ element.negocio }}
