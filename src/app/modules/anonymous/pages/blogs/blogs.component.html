@@ -1,0 +1,46 @@
+<app-banner title="Blog" img="/assets/img/banners/banner-perfil-pc.jpg" imgMobile="/assets/img/banners/banner-academy-mobile.jpg"></app-banner>
+<div class="over-flow-none container">
+    <a href="">
+    <div class="over-flow-none container-relative mt-4" fxLayout="row" fxLayoutAlign="center center">
+        
+        <img class="imagen-general" src="https://blog.hotmart.com/blog/2018/03/BLOG_tipos-de-blog.png" alt="">
+        <div class="background-image"></div>
+        <div class="text-blog" fxLayout="column">
+            <h3 class="text-title">Burbujas y colores: 3 bebidas gasificadas para refrescar tu feed de Instagram</h3>
+            <p class="text-mini"> <strong> 2021/01/12    </strong> Andrés Acosta </p>
+        </div>
+        
+    </div>
+</a>
+    <div class="over-flow-none  container-blogs mt-4" fxLayout="column">
+        <div class="container-blogs-width" fxLayout="row" fxLayout.xs="column">
+        <h2 class="border-bottom-orange-init mt-0">Últimos Artículos</h2>
+        <mat-form-field class="selected-report">
+            <mat-select
+              placeholder="ORDENAR"
+              id="order"
+              formControlName="order"
+              class="selected-report"
+              
+            >
+              <mat-option *ngFor="let selected of selecteds" value="{{ selected.titulo }}">
+                <span>{{ selected.titulo }}</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="over-flow-none" fxLayout="row wrap"  fxLayoutGap="30px grid" fxLayoutAlign="start" fxLayoutAlign.xs="center center">
+            <div *ngFor="let item of blogsData">
+                <a href="">
+                <img class="blog-image" [src]="item.image" alt="">
+                <h4 class="mt-0 blog-text-mini">{{item.titulo}}</h4>
+                <div class="blog-text-sub" fxLayout="row" fxLayoutAlign="space-between">
+                    <p class="mt-0 mb-0 text-autor"> {{item.author}}</p>
+                    <span class="text-date">{{item.date}}</span>
+                </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>

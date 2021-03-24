@@ -13,11 +13,11 @@ export class AppStoreComponent implements OnInit {
     this.detectIos();
   }
 
-  showLogo:boolean = true;
+  showLogo: boolean = true;
 
   public detectIos() {
-    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    if(iOS) {
+    let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    if (iOS) {
       this.showLogo = false;
     }
   }

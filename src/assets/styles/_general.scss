@@ -11,18 +11,16 @@ body {
   background: $bg-gray;
 }
 
-.comision-container{
-  table{
-    
-    th{
+.comision-container {
+  table {
+    th {
       font-family: $font-galano-bold;
       font-size: 15px;
     }
   }
-  td.mat-cell{
-    border-bottom-style:none;
+  td.mat-cell {
+    border-bottom-style: none;
   }
-  
 }
 
 .dashboard,
@@ -1442,10 +1440,9 @@ button.swal2-confirm.updateokdelete.order-last.swal2-styled {
   background-color: #f21905 !important;
   color: #fff !important;
 }
-.delete-title-comision{
+.delete-title-comision {
   color: #f21905;
 }
-
 
 button.swal2-cancel.updatecancel.swal2-styled {
   background: none;
@@ -2198,4 +2195,13 @@ h3#bussiness2 {
   .mat-expansion-panel-body {
     padding-top: 0px !important;
   }
+}
+.angular-editor-textarea {
+  border-radius: 10px;
+}
+.angular-editor-toolbar {
+  border-radius: 10px;
+}
+.select-heading {
+  width: 140px !important;
 }

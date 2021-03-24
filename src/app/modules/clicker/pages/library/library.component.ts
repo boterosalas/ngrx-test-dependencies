@@ -183,25 +183,44 @@ export class LibraryComponent implements OnInit {
         if (this.deleteVideoImg.length > 1) {
             this.content.downloadF(this.deleteVideoImg).subscribe((resp) => {
                 //console.log(resp)
-                this.download(resp, "application/zip")
+                if (this.iosDevices) {
+                    this.downloadiOS(resp, "application/zip")
+                } else {
+                    this.download(resp, "application/zip")
+                }
+
             })
         } else {
             if (variableImg === true) {
                 this.content.downloadF(this.deleteVideoImg).subscribe((resp) => {
-                    this.download(resp, "image/jpg")
+                    if (this.iosDevices) {
+                        this.downloadiOS(resp, "image/jpg")
+                    } else {
+                        this.download(resp, "image/jpg")
+                    }
+
                 });
             }
             if (variableVideo === true) {
                 this.content.downloadF(this.deleteVideoImg).subscribe((resp) => {
-                    this.download(resp, "video/mp4")
+                    if (this.iosDevices) {
+                        this.downloadiOS(resp, "video/mp4")
+                    } else {
+                        this.download(resp, "video/mp4")
+                    }
+
                 });
             }
         }
     }
+    ///window.location.assign(this.urlshorten)
+
+    //} else {
+    //    window.open(this.urlshorten, '_blank');
 
     public download(data, type) {
         let blob = new Blob([data], { type: type });
-        let url = window.URL.createObjectURL(blob);
+        let url = URL.createObjectURL(blob);
         const downloadLink = document.createElement("a");
         if (type.includes("zip")) {
             downloadLink.href = url;
@@ -218,7 +237,24 @@ export class LibraryComponent implements OnInit {
         }
 
     }
-
+    downloadiOS(data, type) {
+        let blob = new Blob([data], { type: type });
+        let url = webkitURL.createObjectURL(blob);
+        const downloadLink = document.createElement("a");
+        if (type.includes("zip")) {
+            downloadLink.href = url;
+            downloadLink.download = "archivo.zip";
+            downloadLink.click();
+        } else if (type.includes("jpg")) {
+            downloadLink.href = url;
+            downloadLink.download = "archivo.jpg";
+            downloadLink.click();
+        } else if (type.includes("mp4")) {
+            downloadLink.href = url;
+            downloadLink.download = "archivo.mp4";
+            downloadLink.click();
+        }
+    }
     public downloadFile() {
         let datos = [this.idDownload]
         this.content.downloadF(datos).subscribe((resp) => {

@@ -36,7 +36,9 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AsyncPipe } from '../../node_modules/@angular/common';
-
+//import { CKEditorModule } from 'ckeditor4-angular';
+//import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+//import { CKEditorModule } from 'ng2-ckeditor';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
@@ -48,6 +50,7 @@ export function jwtTokenGetter() {
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    //CKEditorModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -95,4 +98,4 @@ export function jwtTokenGetter() {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

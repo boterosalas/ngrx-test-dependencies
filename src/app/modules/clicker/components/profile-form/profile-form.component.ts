@@ -677,8 +677,8 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   public deleteAccount() {
     const title = "";
     const template = this.templateDelete;
-    var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    let isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (iOS || isSafari) {
       window.document.body.scrollTop = 0;
     } else {

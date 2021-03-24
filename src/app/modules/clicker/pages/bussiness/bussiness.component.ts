@@ -398,7 +398,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   }
 
   buy() {
-    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (iOS) {
       window.location.assign(this.urlshorten);
     } else {
@@ -563,8 +563,8 @@ export class BussinessComponent implements OnInit, OnDestroy {
   }
 
   public goSeway() {
-    var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    let isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (iOS || isSafari) {
       window.location.assign(this.urlAppstore);
     } else {

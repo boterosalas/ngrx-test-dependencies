@@ -87,7 +87,7 @@ export class DialogNewsComponent implements OnInit {
         if (this.data.element.urlImage === "") {
             console.log("No hay nada")
         } else {
-            var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+            let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
             if (iOS) {
                 window.location.assign(this.data.element.documenturl);
             } else {
