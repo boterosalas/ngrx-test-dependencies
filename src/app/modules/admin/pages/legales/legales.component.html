@@ -1,0 +1,91 @@
+<app-banner
+  title="Legales"
+  img="/assets/img/banners/banner-dashboard-pc.jpg"
+  imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
+></app-banner>
+<div class="container mt-3">
+    <mat-tab-group>
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                 <span class="gtmTerminosCondicionesClicTerminosLegales">Términos y Condiciones</span>
+            </ng-template>
+            <div class="mt-3">
+                <mat-form-field style="width: 720px;">
+                    <input
+                      matInput
+                      style="color: #37236A;"
+                      id="commisionBussiness"
+                      type="text"
+                      placeholder="TITULO"
+                      required
+                    />
+                  </mat-form-field>
+                <h3>CONTENIDO</h3>
+                <angular-editor [config]="editorConfig" [(ngModel)]="htmlContent"></angular-editor>
+            </div>
+        </mat-tab>
+      
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <span class="gtmTerminosCondicionesClicProteccionDatos">Política de Protección de Datos</span>
+           </ng-template>
+           <div class="mt-3">
+            <mat-form-field style="width: 720px;">
+                <input
+                  matInput
+                  style="color: #37236A;"
+                  id="commisionBussiness"
+                  type="text"
+                  placeholder="TITULO"
+                  required
+                />
+              </mat-form-field>
+            <h3>CONTENIDO</h3>
+            <angular-editor [config]="editorConfig" [(ngModel)]="htmlContent"></angular-editor>
+           </div>
+        </mat-tab>
+      
+        <mat-tab>
+            
+            <ng-template mat-tab-label>
+                <span class="gtmTerminosCondicionesClicEmprendedor">Políticas de Transparencia</span>
+           </ng-template>
+           <div class="mt-3">
+            <mat-form-field style="width: 720px;">
+                <input
+                  matInput
+                  style="color: #37236A;"
+                  id="commisionBussiness"
+                  type="text"
+                  placeholder="TITULO"
+                  required
+                />
+              </mat-form-field>
+            <h3>CONTENIDO</h3>
+            <angular-editor [config]="editorConfig" [(ngModel)]="htmlContent"></angular-editor>
+           </div> 
+        </mat-tab>
+      
+        <mat-tab>
+            <ng-template mat-tab-label>
+                 <span class="gtmTerminosCondicionesClicProgramaReferidos">Politicas del Programa de Referidos</span>
+            </ng-template>
+            <div class="mt-3">
+                <mat-form-field style="width: 720px;">
+                    <input
+                    style="color: #37236A;"
+                      matInput
+                      id="commisionBussiness"
+                      type="text"
+                      placeholder="TITULO"
+                      required
+                    />
+                  </mat-form-field>
+                <h3>CONTENIDO</h3>
+                <angular-editor [config]="editorConfig" [(ngModel)]="htmlContent"></angular-editor>
+            </div> 
+        </mat-tab>
+      
+        </mat-tab-group>
+</div>

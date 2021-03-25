@@ -4,7 +4,7 @@ import { ContentService } from 'src/app/services/content.service';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { MatDialog } from '@angular/material';
-import { saveAs } from 'file-saver-ios-bugfix';
+//import { saveAs } from 'file-saver-ios-bugfix';
 import { DialogImagePlayerComponent } from '../../components/dialog-visualization-image/dialog-image-player.component';
 @Component({
     selector: 'app-library',

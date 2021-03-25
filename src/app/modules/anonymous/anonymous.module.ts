@@ -86,7 +86,6 @@ import { ReportNewsComponent } from './pages/help-center/report-news/report-news
 import { ReportStatusComponent } from "./pages/help-center/report-files/report-status/report-status.component";
 import { BlogsComponent } from './pages/blogs/blogs.component';
 import { BlogContentComponent } from './pages/blog-content/blog-content.component';
-//import { CKEditorModule } from 'ckeditor4-angular';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
 const routes: Routes = [

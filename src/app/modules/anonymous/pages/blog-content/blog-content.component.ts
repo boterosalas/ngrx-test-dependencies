@@ -1,38 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
+
 @Component({
   selector: 'app-blog-content',
   templateUrl: './blog-content.component.html',
   styleUrls: ['./blog-content.component.scss']
 })
 export class BlogContentComponent implements OnInit {
-  editorConfig: AngularEditorConfig = {
-    editable: true,
-    spellcheck: true,
-    height: '300px',
-    minHeight: '0',
-    maxHeight: 'auto',
-    width: 'auto',
-    minWidth: '0',
-    translate: 'yes',
-    enableToolbar: true,
-    showToolbar: true,
-    placeholder: 'Escriba su articulo...',
-    defaultParagraphSeparator: 'p',
-    defaultFontName: '',
-    defaultFontSize: '',
-    sanitize: true,
-    toolbarPosition: 'top',
-    toolbarHiddenButtons: [
-      ['heading', 'insertImage', 'insertVideo',
-        'customClasses', 'link', 'unlink',
-        'removeFormat', 'fontName', 'backgroundColor',
-        'insertHorizontalRule', 'toggleEditorMode', 'undo',
-        'redo', 'strikeThrough']
-    ]
-  };
-  htmlContent: string;
+
   constructor(
 
     private _snackBar: MatSnackBar,
@@ -65,7 +40,5 @@ export class BlogContentComponent implements OnInit {
       duration: 5000
     });
   }
-  mostrarContenido() {
-    console.log(this.htmlContent);
-  }
+
 }

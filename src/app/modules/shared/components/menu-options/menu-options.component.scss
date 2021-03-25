@@ -75,6 +75,30 @@
       background-size: 100%;
     }
   }
+  .Blog {
+    &::before {
+      content: "";
+      background: url("/assets/img/menu-mobile/blog.svg") no-repeat;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+      background-size: 100%;
+    }
+  }
+  .Legales {
+    &::before {
+      content: "";
+      background: url("/assets/img/menu-mobile/document.svg") no-repeat;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+      background-size: 100%;
+    }
+  }
   .Historial.de.Links {
     &::before {
       content: "";
