@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-add-edit-blog-admin',
   templateUrl: './add-edit-blog-admin.component.html',
@@ -12,6 +13,12 @@ export class AddEditBlogAdminComponent implements OnInit {
   showErrorCert: boolean;
   activebutton: boolean;
   visualizationImag: any;
+  titleArticle: string;
+  author: string;
+  etiquetas: string;
+  visible: boolean = false;
+  datePublication: string;
+  hourDate: string;
   constructor() { }
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -24,7 +31,7 @@ export class AddEditBlogAdminComponent implements OnInit {
     translate: 'yes',
     enableToolbar: true,
     showToolbar: true,
-    placeholder: 'Escriba su articulo...',
+    placeholder: 'Contenido...',
     defaultParagraphSeparator: 'p',
     defaultFontName: '',
     defaultFontSize: '',
@@ -60,35 +67,47 @@ export class AddEditBlogAdminComponent implements OnInit {
       this.nameFileCert = nameFile;
       const reader = new FileReader();
       reader.onload = e => this.visualizationImag = reader.result;
-
       reader.readAsDataURL(file);
     }
   }
-  public onFileChangeFiles(event, param: string) {
-    let nameFile = event.target.files[0].name;
-    let reader = new FileReader();
-    let sizeFile = event.target.files[0].size;
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      let fileBlob = new Blob([file]);
-      let file2 = new File([fileBlob], nameFile);
-      reader.readAsDataURL(file2);
-      reader.onload = () => {
-        this.getExtension(nameFile, sizeFile);
-        if (this.validFormat === true) {
-          this.fileImgCat = reader.result;
-          //this.visualizationImag = reader.result;
-          this.fileImgCat = this.fileImgCat.split(",")[1]
-          this.nameFileCert = nameFile;
-          this.showErrorCert = false;
-          this.activebutton = true;
-        } else {
-          this.showErrorCert = true;
-          this.nameFileCert = nameFile;
-          this.activebutton = false;
-        }
-      };
+  saveeraser() {
+    let datos = {
+      titleArticle: this.titleArticle,
+      author: this.author,
+      etiquetas: this.etiquetas,
+      visible: this.visible,
+      datePublication: this.datePublication,
+      hourDate: this.hourDate,
+      content: this.htmlContent
     }
+    console.log(datos);
+  }
+  saveprogrammer() {
+    let datos = {
+      titleArticle: this.titleArticle,
+      author: this.author,
+      etiquetas: this.etiquetas,
+      visible: this.visible,
+      datePublication: this.datePublication,
+      hourDate: this.hourDate,
+      content: this.htmlContent
+    }
+    console.log(datos);
+  }
+  deleteArticle() {
+    Swal.fire({
+      html: "<h3 class='delete-title-comision'>Eliminar artículo</h3> <p class='w-container'>¿Estás seguro de eliminar el artículo seleccionado?</p>",
+      confirmButtonText: "Eliminar artículo",
+      cancelButtonText: "Cancelar",
+      showCancelButton: true,
+      confirmButtonClass: "updateokdelete order-last",
+      cancelButtonClass: "updatecancel",
+      allowOutsideClick: false
+    }).then((resp: any) => {
+      if (resp.dismiss !== 'cancel') {
+
+      }
+    })
   }
 
 }

@@ -14,7 +14,8 @@ export class BlogsComponent implements OnInit {
   {
     titulo: "Más antiguo"
   }]
-  blogsData = [{
+  blogsData = [];
+  blogsData2 = [{
     titulo: "Burbujas y colores: 3 bebidas gasificadas para refrescar tu feed de Instagram",
     date: "2020/11/22",
     author: "Andrés Acosta",

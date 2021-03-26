@@ -1,7 +1,7 @@
 <app-banner title="Blog" img="/assets/img/banners/banner-perfil-pc.jpg" imgMobile="/assets/img/banners/banner-academy-mobile.jpg"></app-banner>
 <div class="over-flow-none container">
     <a href="">
-    <div class="over-flow-none container-relative mt-4" fxLayout="row" fxLayoutAlign="center center">
+    <div *ngIf="blogsData.length > 0" class="over-flow-none container-relative mt-4" fxLayout="row" fxLayoutAlign="center center">
         
         <img class="imagen-general" src="https://blog.hotmart.com/blog/2018/03/BLOG_tipos-de-blog.png" alt="">
         <div class="background-image"></div>
@@ -12,9 +12,9 @@
         
     </div>
 </a>
-    <div class="over-flow-none  container-blogs mt-4" fxLayout="column">
+    <div  class="over-flow-none  container-blogs mt-4" fxLayout="column">
         <div class="container-blogs-width" fxLayout="row" fxLayout.xs="column">
-        <h2 class="border-bottom-orange-init mt-0">Últimos Artículos</h2>
+        <h2 class="border-bottom-orange-init mt-0 secundary-data">Últimos Artículos</h2>
         <mat-form-field class="selected-report">
             <mat-select
               placeholder="ORDENAR"
@@ -29,7 +29,7 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="over-flow-none" fxLayout="row wrap"  fxLayoutGap="30px grid" fxLayoutAlign="start" fxLayoutAlign.xs="center center">
+        <div *ngIf="blogsData.length > 0"   class="over-flow-none" fxLayout="row wrap"  fxLayoutGap="30px grid" fxLayoutAlign="start" fxLayoutAlign.xs="center center">
             <div *ngFor="let item of blogsData">
                 <a href="">
                 <img class="blog-image" [src]="item.image" alt="">
@@ -40,6 +40,11 @@
                 </div>
                 </a>
             </div>
+        </div>
+        <div *ngIf="blogsData.length === 0" fxLayout="column" fxLayoutAlign="center center">
+            <mat-icon class="nothing-icon">push_pin</mat-icon>
+            <p class="nothing-text">Aún no tenemos artículos</p>
+
         </div>
     </div>
 

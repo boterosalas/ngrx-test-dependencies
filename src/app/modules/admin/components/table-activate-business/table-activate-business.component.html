@@ -45,6 +45,7 @@
                           <button mat-menu-item (click)="editCategory(element)">Categorías</button>
                           <button mat-menu-item (click)="contentBussiness(element)">Biblioteca de Contenido</button>
                           <button mat-menu-item (click)="comisionTable(element)">Comisiones</button>
+                          <button mat-menu-item (click)="editBussiness(element)">Editar negocio</button>
                         </mat-menu>
                         <button mat-button [matMenuTriggerFor]="menu"><img class="cursor-pointer "   src="/assets/img/dashboard/icon-settings.svg" alt=""></button>    
                     </div>
@@ -54,10 +55,310 @@
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;let i= index" cdkDrag [cdkDragData]="row"></tr>
         </table>
+        <div class="container-blogs  mt-3 mb-3" fxLayout="row" fxLayoutAlign="end">
+            <button mat-raised-button class="button-save"    (click)="agregarBussiness()"
+            >Agregar negocio </button>
+        </div>
     </div>
+    
 
 </div>
-<ng-template #templateComision>
-    
-  </ng-template>
+<ng-template #templateBussiness>
+    <form [formGroup]="dateForm" fxLayout="column" style="width: 380px;" >
+        <mat-form-field>
+            <input
+              matInput
+              id="nameBussiness"
+              type="text"
+              placeholder="NOMBRE DEL NEGOCIO"
+              formControlName="nameBussiness"
+              required
+            />
+      
+            <mat-error
+              id="requiredName"
+              *ngIf="
+              dateForm.controls.nameBussiness.invalid &&
+              dateForm.controls.nameBussiness.errors.required
+              "
+              >{{
+                "GENERIC.REQUIRED" | translate: { formValue: "Nombre del negocio" }
+              }}</mat-error
+            >
+      
+            <mat-error
+              id="maxName"
+              *ngIf="
+              dateForm.controls.nameBussiness.invalid &&
+              dateForm.controls.nameBussiness.errors.maxlength
+              "
+              >{{
+                "GENERIC.MAX_CHARACTERS"
+                  | translate
+                    : {
+                        maxchar:
+                        dateForm.controls.nameBussiness.errors.maxlength.requiredLength
+                      }
+              }}</mat-error
+            >
+      
+            <mat-error
+              id="invalidName"
+              *ngIf="
+              dateForm.controls.nameBussiness.invalid &&
+              dateForm.controls.nameBussiness.errors.pattern
+              "
+              >{{
+                "GENERIC.INVALID_FORMAT" | translate: { val: "Nombre del negocio" }
+              }}</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              id="detailCommision"
+              type="text"
+              placeholder="DETALLE DE LA COMISIÓN"
+              formControlName="detailBussiness"
+              required
+            />
+      
+            <mat-error
+              id="requiredName"
+              *ngIf="
+              dateForm.controls.detailBussiness.invalid &&
+              dateForm.controls.detailBussiness.errors.required
+              "
+              >{{
+                "GENERIC.REQUIRED" | translate: { formValue: "Detalle de la comisión" }
+              }}</mat-error
+            >
+      
+            <mat-error
+              id="maxName"
+              *ngIf="
+              dateForm.controls.detailBussiness.invalid &&
+              dateForm.controls.detailBussiness.errors.maxlength
+              "
+              >{{
+                "GENERIC.MAX_CHARACTERS"
+                  | translate
+                    : {
+                        maxchar:
+                        dateForm.controls.detailBussiness.errors.maxlength.requiredLength
+                      }
+              }}</mat-error
+            >
+      
+            <mat-error
+              id="invalidName"
+              *ngIf="
+              dateForm.controls.detailBussiness.invalid &&
+              dateForm.controls.detailBussiness.errors.pattern
+              "
+              >{{
+                "GENERIC.INVALID_FORMAT" | translate: { val: "Detalle de la comisión" }
+              }}</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              id="nombreTabla"
+              type="text"
+              placeholder="NOMBRE EN TABLA DE COMISIONES"
+              formControlName="nameTableCommision"
+              required
+            />
+      
+            <mat-error
+              id="requiredName"
+              *ngIf="
+              dateForm.controls.nameTableCommision.invalid &&
+              dateForm.controls.nameTableCommision.errors.required
+              "
+              >{{
+                "GENERIC.REQUIRED" | translate: { formValue: "nombre en tabla de comisiones" }
+              }}</mat-error
+            >
+      
+            <mat-error
+              id="maxName"
+              *ngIf="
+              dateForm.controls.nameTableCommision.invalid &&
+              dateForm.controls.nameTableCommision.errors.maxlength
+              "
+              >{{
+                "GENERIC.MAX_CHARACTERS"
+                  | translate
+                    : {
+                        maxchar:
+                        dateForm.controls.nameTableCommision.errors.maxlength.requiredLength
+                      }
+              }}</mat-error
+            >
+      
+            <mat-error
+              id="invalidName"
+              *ngIf="
+              dateForm.controls.nameTableCommision.invalid &&
+              dateForm.controls.nameTableCommision.errors.pattern
+              "
+              >{{
+                "GENERIC.INVALID_FORMAT" | translate: { val: "nombre en tabla de comisiones" }
+              }}</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              id="placeholderBusi"
+              type="text"
+              placeholder="PLACE HOLDER (REFERENCIA DE COMPRA)"
+              formControlName="placeholderBussiness"
+              required
+            />
+      
+            <mat-error
+              id="requiredName"
+              *ngIf="
+              dateForm.controls.placeholderBussiness.invalid &&
+              dateForm.controls.placeholderBussiness.errors.required
+              "
+              >{{
+                "GENERIC.REQUIRED" | translate: { formValue: "Place holder (referencia de compra)" }
+              }}</mat-error
+            >
+      
+            <mat-error
+              id="maxName"
+              *ngIf="
+              dateForm.controls.placeholderBussiness.invalid &&
+              dateForm.controls.placeholderBussiness.errors.maxlength
+              "
+              >{{
+                "GENERIC.MAX_CHARACTERS"
+                  | translate
+                    : {
+                        maxchar:
+                        dateForm.controls.placeholderBussiness.errors.maxlength.requiredLength
+                      }
+              }}</mat-error
+            >
+      
+            <mat-error
+              id="invalidName"
+              *ngIf="
+              dateForm.controls.placeholderBussiness.invalid &&
+              dateForm.controls.placeholderBussiness.errors.pattern
+              "
+              >{{
+                "GENERIC.INVALID_FORMAT" | translate: { val: "Place holder (referencia de compra)" }
+              }}</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              id="codeReference"
+              type="text"
+              placeholder="CÓDIGO DE REFERENCIA"
+              formControlName="codeReference"
+              required
+            />
+      
+            <mat-error
+              id="requiredName"
+              *ngIf="
+              dateForm.controls.codeReference.invalid &&
+              dateForm.controls.codeReference.errors.required
+              "
+              >{{
+                "GENERIC.REQUIRED" | translate: { formValue: "Código de referencia" }
+              }}</mat-error
+            >
+      
+            <mat-error
+              id="maxName"
+              *ngIf="
+              dateForm.controls.codeReference.invalid &&
+              dateForm.controls.codeReference.errors.maxlength
+              "
+              >{{
+                "GENERIC.MAX_CHARACTERS"
+                  | translate
+                    : {
+                        maxchar:
+                        dateForm.controls.codeReference.errors.maxlength.requiredLength
+                      }
+              }}</mat-error
+            >
+      
+            <mat-error
+              id="invalidName"
+              *ngIf="
+              dateForm.controls.codeReference.invalid &&
+              dateForm.controls.codeReference.errors.pattern
+              "
+              >{{
+                "GENERIC.INVALID_FORMAT" | translate: { val: "Código de referencia" }
+              }}</mat-error
+            >
+          </mat-form-field>
+
+          <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
+            <div fxLayout="column" fxLayoutAlign="center" class="space">
+              <strong class="title-gray">ADJUNTAR IMAGEN (500X500PX, FORMATO .SVG .JPG, MAX 100KB)</strong>
+              <span class="title-secondary" *ngIf="nameFileCert === ''">No hay archivo seleccionado</span>
+              <span class="file-input" *ngIf="nameFileCert !== ''">{{
+                nameFileCert | truncate: '20'
+              }}</span>
+            </div>
+            <div >
+              <label for="image" id="upload" class="cursor-pointer">
+                <span  *ngIf="!showErrorCert">
+                <img
+                  class="mt-1"
+                  *ngIf="nameFileCert === ''"
+                  src="/assets/img/image-file-upload.svg"
+                  alt="upload"
+                />
+                <img
+                  class="mt-1"
+                  *ngIf="nameFileCert !== ''"
+                  src="/assets/img/image-file-upload-ok.svg"
+                  alt="upload"
+                />
+              </span>
+                <img
+                class="mt-1 w-icon"
+                *ngIf="showErrorCert"
+                src="/assets/img/icono-error-carga.svg"
+                alt="upload"
+              />
+              </label>
+            </div>
+          </div>
+          <mat-error *ngIf="showErrorCert" class="text-small small pb-2 d-block">
+            Formato inválido solo se pueden subir archivos con la extensión SVG, JPG y menores de 100KB
+          </mat-error>
+        
+          <input
+            (change)="onFileChangeFiles($event, 'image')"
+            id="image"
+            type="file"
+            style="display: none;"
+            formControlName="image"
+          />
+    </form>
+    <div class="container button-padding mb-4 mt-4">
+        <div fxLayout="row" fxLayoutAlign.gt-xs="end center" fxLayoutAlign.xs="center center">
+            <button mat-button ngClass="button_cancel" (click)="onNoClick()"  
+        > Cancelar </button>
+        <button mat-raised-button color="orange" (click)="saveBussiness()" id="download-users" class="ml-2" [disabled]="!dateForm.valid || !activebutton">
+            Guardar
+        </button>    
+        </div>
+    </div>  
+</ng-template>
   

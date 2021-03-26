@@ -87,7 +87,7 @@ import { ReportStatusComponent } from "./pages/help-center/report-files/report-s
 import { BlogsComponent } from './pages/blogs/blogs.component';
 import { BlogContentComponent } from './pages/blog-content/blog-content.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-
+import { NewBlogComponent } from './components/new-blogs/new-blog.component';
 const routes: Routes = [
   {
     path: "",
@@ -378,6 +378,7 @@ const routes: Routes = [
     BussinessCardComponent,
     ComissionTableComponent,
     NewBusinessComponent,
+    NewBlogComponent,
     NewBusinessFormComponent,
     UrlComponent,
     ActivateAccountFormComponent,

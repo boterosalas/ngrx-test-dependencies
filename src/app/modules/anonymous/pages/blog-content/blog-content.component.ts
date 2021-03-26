@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 
 @Component({
   selector: 'app-blog-content',
@@ -7,13 +9,17 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./blog-content.component.scss']
 })
 export class BlogContentComponent implements OnInit {
-
+  dateForm: FormGroup
   constructor(
-
+    private fb: FormBuilder,
     private _snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) {
 
   }
+  @ViewChild("templateSendEmail", { static: false }) templateBussiness: TemplateRef<
+    any
+  >;
   url: string;
   datas = {
     titulo: "Burbujas y colores: 3 bebidas gasificadas para refrescar tu feed de Instagram",
@@ -28,6 +34,9 @@ export class BlogContentComponent implements OnInit {
     let domain = document.location;
     this.url = encodeURI(`${domain}`);
     this.valueLink = encodeURI(`${domain}`);
+    this.dateForm = this.fb.group({
+      nameBussiness: [null, Validators.required]
+    });
   }
   public copyLink(inputElement) {
     inputElement.select();
@@ -39,6 +48,22 @@ export class BlogContentComponent implements OnInit {
     this._snackBar.open(message, action, {
       duration: 5000
     });
+  }
+  sendEmail() {
+    const title = "Enviar Email";
+    const template = this.templateBussiness;
+    const id = "video-modal";
+    this.dialog.open(ModalGenericComponent, {
+      data: {
+        id,
+        title,
+        template,
+      },
+
+    });
+  }
+  sendMessage() {
+    console.log("Mensaje enviado");
   }
 
 }

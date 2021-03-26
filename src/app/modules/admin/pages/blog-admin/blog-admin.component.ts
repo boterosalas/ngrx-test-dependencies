@@ -9,7 +9,8 @@ import Swal from 'sweetalert2';
 export class BlogAdminComponent implements OnInit {
 
   constructor() { }
-  blogPublicado = [
+  blogPublicado = []
+  blogPublicado1 = [
     {
       titulo: "Burbujas y colores: 3 bebidas gasificadas para refrescar tu feed de Instagram",
       date: "2020/11/22",
@@ -39,7 +40,8 @@ export class BlogAdminComponent implements OnInit {
       visible: true
     }
   ]
-  blogHidden = [
+  blogHidden = []
+  blogHidden1 = [
     {
       titulo: "Burbujas y colores: 3 bebidas gasificadas para refrescar tu feed de Instagram",
       date: "2020/11/22",

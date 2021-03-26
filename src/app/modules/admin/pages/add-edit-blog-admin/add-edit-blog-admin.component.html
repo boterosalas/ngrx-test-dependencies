@@ -22,9 +22,10 @@
             <input
               matInput
               style="color: #37236A;"
-              id="commisionBussiness"
+              id="titleArticles"
               type="text"
               placeholder="TITULO DEL ARTÍCULO"
+              [(ngModel)]="titleArticle"
               required
             />
           </mat-form-field>
@@ -37,9 +38,10 @@
             <input
               matInput
               style="color: #37236A;"
-              id="commisionBussiness"
+              id="athortext"
               type="text"
               placeholder="AUTOR"
+              [(ngModel)]="author"
               required
             />
           </mat-form-field>
@@ -85,14 +87,14 @@
             (change)="readURL($event)"
             id="image"
             type="file"
-            formControlName="image"
           />
           <mat-form-field style="width: 300px;">
             <input
               matInput
               style="color: #37236A;"
-              id="commisionBussiness"
+              id="etiquetastext"
               type="text"
+              [(ngModel)]="etiquetas"
               placeholder="ETIQUETAS"
               required
             />
@@ -101,7 +103,7 @@
     <mat-card class="ml-2 mt-2">
         <h4 class="publications-style">PUBLICACIÓN</h4>
         <div>
-            Visible <mat-slide-toggle style="margin-left:5px; position: relative;
+            Visible <mat-slide-toggle [(ngModel)]="visible" style="margin-left:5px; position: relative;
             top: 2px;"  color="orange2-toggle" ></mat-slide-toggle>
         </div>
         
@@ -120,8 +122,8 @@
               (click)="picker.open()"
               [matDatepicker]="picker"
               [max]="maxDate"
-              formControlName="dateRange"
               readonly
+              [(ngModel)]="datePublication"
               class=" border-input mat-elevation-z1 p-2 border-radius"
             />
         </div>
@@ -130,20 +132,20 @@
             <label class="label-up-text mt-2" for="picker"> HORA DE PUBLICACIÓN <b style="color: #F21905;">*</b> </label>               
             <div>
                 <mat-icon class="clock-time">alarm</mat-icon>
-                <input matInput aria-label="default time" [ngxTimepicker]="defaultValue" readonly class="form-control  mat-elevation-z1 p-2 border-radius">
+                <input [(ngModel)]="hourDate" matInput aria-label="default time" [ngxTimepicker]="defaultValue" readonly class="form-control  mat-elevation-z1 p-2 border-radius">
                 <ngx-material-timepicker #defaultValue></ngx-material-timepicker>
             </div>
         </div>
 
         </div>
         <div class="mt-2">
-            <button mat-raised-button class="button-save"    [routerLink]="[ '/add-edit-blog-admin' ]"
+            <button mat-raised-button class="button-save" (click)="saveeraser()"
             >Guardar como borrador </button>
         </div>
         <div class="mt-2" fxLayout="row" fxLayoutAlign="space-between">
-            <button mat-raised-button class="button-save-programmer"    [routerLink]="[ '/add-edit-blog-admin' ]"
+            <button mat-raised-button class="button-save-programmer" (click)="saveprogrammer"
             >Programar </button>
-            <button mat-raised-button class="button-delete"    [routerLink]="[ '/add-edit-blog-admin' ]"
+            <button mat-raised-button class="button-delete"     (click)="deleteArticle()"
             >Eliminar </button>
         </div>
        

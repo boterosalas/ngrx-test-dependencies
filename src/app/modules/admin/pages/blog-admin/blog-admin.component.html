@@ -8,7 +8,7 @@
         <h3>Artículos publicados</h3>
         <hr class="line-medium">
     </div>
-    <div class="container-blogs">
+    <div *ngIf="blogPublicado.length>0" class="container-blogs">
         <div *ngFor="let item of blogPublicado">
         <mat-card class="card-padding">
             <div fxLayout="row" fxLayoutAlign="space-between">
@@ -34,11 +34,14 @@
         </mat-card>
         </div>
     </div>
+    <div *ngIf="blogPublicado.length===0" >
+        <p style="font-size: 18px; font-weight: bold;">No hay artículos publicados</p>
+    </div>
     <div fxLayout="row">
         <h3>Borradores</h3>
         <hr class="line-medium" style="    width: 87%;">
     </div>
-    <div class="container-blogs">
+    <div *ngIf="blogHidden.length>0" class="container-blogs">
         <div *ngFor="let item of blogHidden">
             <mat-card class="card-padding">
                 <div fxLayout="row" fxLayoutAlign="space-between">
@@ -63,6 +66,9 @@
     
             </mat-card>
             </div>
+    </div>
+    <div *ngIf="blogHidden.length===0" >
+        <p style="font-size: 18px; font-weight: bold;">No hay artículos en borrador</p>
     </div>
     <div class="container-blogs  mt-3 mb-3" fxLayout="row" fxLayoutAlign="end">
         <button mat-raised-button class="button-save"    [routerLink]="[ '/add-edit-blog-admin' ]"
