@@ -48,7 +48,7 @@
             />
           </mat-form-field>
           <p class="place-holeder-image">PORTADA (1560X840PX, FORMATO .JPG, MAX 300kb)</p>
-          <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px">
+          <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" >
             <div fxLayout="column" fxLayoutAlign="center" class="space">
                 <div >
                     <label for="image" id="upload" class="cursor-pointer">
@@ -107,19 +107,18 @@
         <h4 class="publications-style">PUBLICACIÓN</h4>
         <div>
             Visible <mat-slide-toggle [(ngModel)]="visible" style="margin-left:5px; position: relative;
-            top: 2px;"  color="orange2-toggle" ></mat-slide-toggle>
+            top: 2px;" (change)="activate(item)"  color="orange2-toggle" ></mat-slide-toggle>
         </div>
         
         <div fxLayout="row" class="mt-2" style="position: relative;">
             <div>
             <label class="label-up-text mt-2" for="picker"> FECHA DE PUBLICACIÓN <b style="color: #F21905;">*</b> </label>               
             <div fxLayout="row" class="mt-2">
-            <mat-datepicker  (ngModelChange)="comprobarText()" class="icon-date" touchUi #picker></mat-datepicker>
+            <mat-datepicker class="icon-date" touchUi #picker></mat-datepicker>
             <mat-datepicker-toggle
               class="icon-date"
               matSuffix
               [for]="picker"
-              (ngModelChange)="comprobarText()"
             ></mat-datepicker-toggle>
             <input
               matInput
@@ -138,7 +137,7 @@
             <div>
                 <mat-icon class="clock-time">alarm</mat-icon>
                 <input (ngModelChange)="comprobarText()" [(ngModel)]="hourDate"  matInput aria-label="default time" [ngxTimepicker]="defaultValue" readonly class="form-control  mat-elevation-z1 p-2 border-radius">
-                <ngx-material-timepicker (ngModelChange)="comprobarText()" #defaultValue></ngx-material-timepicker>
+                <ngx-material-timepicker  #defaultValue></ngx-material-timepicker>
             </div>
         </div>
 
@@ -149,7 +148,7 @@
         </div>
         <div class="mt-2" fxLayout="row" fxLayoutAlign="space-between">
             <button mat-raised-button class="button-save-programmer" (click)="saveprogrammer()" [disabled]="disabledButtonPublication"
-            >Programar </button>
+            >Publicar cambios </button>
             <button mat-raised-button class="button-delete"     (click)="deleteArticle()"
             >Eliminar </button>
         </div>

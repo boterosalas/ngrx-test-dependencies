@@ -4,7 +4,7 @@ import { TableActivateBusinessComponent } from './table-activate-business.compon
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatDialog, MatMenuModule, MatSlideToggleModule } from '@angular/material';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { LinksService } from "src/app/services/links.service";
 import { of } from 'rxjs';
@@ -14,7 +14,7 @@ import { ContentService } from 'src/app/services/content.service';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 //import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 
-describe('TableActivateBusinessComponent', () => {
+fdescribe('TableActivateBusinessComponent', () => {
   let component: TableActivateBusinessComponent;
   let fixture: ComponentFixture<TableActivateBusinessComponent>;
   let mockRouter = {
@@ -35,6 +35,7 @@ describe('TableActivateBusinessComponent', () => {
         AppMaterialModule,
         TranslateModule.forRoot(),
         MatSlideToggleModule,
+        ReactiveFormsModule,
         FormsModule,
         SharedModule,
         DragDropModule,
@@ -97,12 +98,6 @@ describe('TableActivateBusinessComponent', () => {
     expect(datos).toBeTruthy();
   });
 
-  it('comision table', () => {
-    //component.comisionTable({ id: 1 })
-    //component.idBussinessSelected = 1;
-    //component.updateComision();
-    //component.updateComisionDelete();
-    //expect(mockDialog.open).toHaveBeenCalled();
-  })
+
 
 });

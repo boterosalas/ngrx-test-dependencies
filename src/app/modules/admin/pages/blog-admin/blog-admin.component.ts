@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
+import { ContentService } from 'src/app/services/content.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -8,72 +11,43 @@ import Swal from 'sweetalert2';
 })
 export class BlogAdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private content: ContentService,
+    private _snackBar: MatSnackBar,
+    public router: Router,
+  ) { }
   blogPublicado = []
-  blogPublicado1 = [
-    {
-      titulo: "Burbujas y colores: 3 bebidas gasificadas para refrescar tu feed de Instagram",
-      date: "2020/11/22",
-      author: "Andrés Acosta",
-      image: "https://blog.hotmart.com/blog/2018/03/BLOG_tipos-de-blog.png",
-      visible: true
-    },
-    {
-      titulo: "Burbujas y colores: 3 bebidas gasificadas para refrescar tu feed de Instagram",
-      date: "2020/11/22",
-      author: "Andrés Acosta",
-      image: "https://blog.hotmart.com/blog/2018/03/BLOG_tipos-de-blog.png",
-      visible: true
-    },
-    {
-      titulo: "Burbujas y colores: 3 bebidas gasificadas para refrescar tu feed de Instagram",
-      date: "2020/11/22",
-      author: "Andrés Acosta",
-      image: "https://blog.hotmart.com/blog/2018/03/BLOG_tipos-de-blog.png",
-      visible: true
-    },
-    {
-      titulo: "Burbujas y colores: 3 bebidas gasificadas para refrescar tu feed de Instagram",
-      date: "2020/11/22",
-      author: "Andrés Acosta",
-      image: "https://blog.hotmart.com/blog/2018/03/BLOG_tipos-de-blog.png",
-      visible: true
-    }
-  ]
+
   blogHidden = []
-  blogHidden1 = [
-    {
-      titulo: "Burbujas y colores: 3 bebidas gasificadas para refrescar tu feed de Instagram",
-      date: "2020/11/22",
-      author: "Andrés Acosta",
-      image: "https://blog.hotmart.com/blog/2018/03/BLOG_tipos-de-blog.png",
-      visible: false
-    },
-    {
-      titulo: "Burbujas y colores: 3 bebidas gasificadas para refrescar tu feed de Instagram",
-      date: "2020/11/22",
-      author: "Andrés Acosta",
-      image: "https://blog.hotmart.com/blog/2018/03/BLOG_tipos-de-blog.png",
-      visible: false
-    },
-    {
-      titulo: "Burbujas y colores: 3 bebidas gasificadas para refrescar tu feed de Instagram",
-      date: "2020/11/22",
-      author: "Andrés Acosta",
-      image: "https://blog.hotmart.com/blog/2018/03/BLOG_tipos-de-blog.png",
-      visible: false
-    },
-    {
-      titulo: "Burbujas y colores: 3 bebidas gasificadas para refrescar tu feed de Instagram",
-      date: "2020/11/22",
-      author: "Andrés Acosta",
-      image: "https://blog.hotmart.com/blog/2018/03/BLOG_tipos-de-blog.png",
-      visible: false
-    }
-  ]
+
   ngOnInit() {
+    this.getBlogs();
   }
-  deleteArticle() {
+  getBlogs() {
+    let data = {
+      from: 1,
+      orderBy: "RELEVANT"
+    }
+    this.content.getBlogsAdmin(data).subscribe((resp) => {
+      console.log(resp)
+      let visibles = resp.objectResponse.blogs
+      let visiblesBlog = [];
+      let invisiblesBlog = [];
+      for (let index = 0; index < visibles.length; index++) {
+        if (visibles[index].visible === true) {
+          visiblesBlog.push(visibles[index]);
+        }
+        else {
+          invisiblesBlog.push(visibles[index]);
+        }
+      }
+      console.log(visiblesBlog);
+      console.log(invisiblesBlog);
+      this.blogPublicado = visiblesBlog;
+      this.blogHidden = invisiblesBlog;
+    })
+  }
+  deleteArticle(item) {
     Swal.fire({
       html: "<h3 class='delete-title-comision'>Eliminar artículo</h3> <p class='w-container'>¿Estás seguro de eliminar el artículo seleccionado?</p>",
       confirmButtonText: "Eliminar artículo",
@@ -84,10 +58,35 @@ export class BlogAdminComponent implements OnInit {
       allowOutsideClick: false
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
-
+        this.content.deleteBlog(item.id).subscribe((resp) => {
+          this.getBlogs();
+        })
       }
     })
 
   }
+  activate(element) {
+    let formData: FormData = new FormData();
+    formData.append('id', element.id);
+    formData.append('value', '' + element.visible);
+    this.content.activeBlog(formData).subscribe(resp => {
+      this.getBlogs();
+      this.openSnackBar("El Blog se actualizó correctamente", "Cerrar");
 
+    })
+  }
+  private openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5000,
+    });
+  }
+  editArticle(item) {
+    this.router.navigate([
+      "/edit-blog-admin",
+      {
+        id: item.id,
+      },
+    ]);
+  }
 }
+

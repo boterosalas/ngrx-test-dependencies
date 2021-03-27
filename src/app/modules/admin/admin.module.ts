@@ -46,6 +46,7 @@ import { LegalesComponent } from './pages/legales/legales.component'
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { BlogAdminComponent } from './pages/blog-admin/blog-admin.component';
 import { AddEditBlogAdminComponent } from './pages/add-edit-blog-admin/add-edit-blog-admin.component';
+import { EditBlogAdminComponent } from './pages/edit-blog-admin/edit-blog-admin.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { ConfigurationsComponent } from './pages/configurations/configurations.component';
 const routes: Routes = [
@@ -162,6 +163,14 @@ const routes: Routes = [
     },
   },
   {
+    path: "edit-blog-admin",
+    component: EditBlogAdminComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN"
+    },
+  },
+  {
     path: "configurations",
     component: ConfigurationsComponent,
     canActivate: [RoleGuard],
@@ -174,6 +183,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     DashboardComponent,
+    EditBlogAdminComponent,
     SideMenuComponent,
     ReportsComponent,
     CardComponent,

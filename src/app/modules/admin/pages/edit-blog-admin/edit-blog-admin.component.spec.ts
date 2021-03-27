@@ -4,27 +4,32 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 
-import { BlogsComponent } from './blogs.component';
+import { EditBlogAdminComponent } from './edit-blog-admin.component';
 
-fdescribe('BlogsComponent', () => {
-  let component: BlogsComponent;
-  let fixture: ComponentFixture<BlogsComponent>;
+describe('EditBlogAdminComponent', () => {
+  let component: EditBlogAdminComponent;
+  let fixture: ComponentFixture<EditBlogAdminComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [BlogsComponent],
+      declarations: [EditBlogAdminComponent],
       imports: [
+        AngularEditorModule,
         AppMaterialModule,
         TranslateModule.forRoot({}),
         BrowserAnimationsModule,
         HttpClientTestingModule,
         RouterTestingModule.withRoutes([]),
+        NgxDaterangepickerMd,
         SharedModule,
-
+        NgxMaterialTimepickerModule,
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
@@ -44,7 +49,7 @@ fdescribe('BlogsComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BlogsComponent);
+    fixture = TestBed.createComponent(EditBlogAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

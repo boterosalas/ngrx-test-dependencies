@@ -13,20 +13,20 @@
         <mat-card class="card-padding">
             <div fxLayout="row" fxLayoutAlign="space-between">
                 <div fxLayout="row">
-                    <img class="imagen-blog" [src]="item.image" alt="">
+                    <img class="imagen-blog" [src]="item.imageurl" alt="">
                     <div class="ml-3" fxLayout="column">
-                        <h4 class="title-content mt-2">{{item.titulo}}</h4>
-                        <p class="mt-0 mb-0"><strong>{{item.author}} </strong> {{item.date}}</p>
+                        <h4 class="title-content mt-2">{{item.title}}</h4>
+                        <p class="mt-0 mb-0"><strong>{{item.author}} </strong> {{item.date  | date: 'yyyy/MM/dd'}}</p>
                     </div>
                 </div>
                 <div class="mt-2 mr-3">
                     <div>
                         Mostrar / ocultar <mat-slide-toggle style="margin-left:5px; position: relative;
-                        top: 2px;" [(ngModel)]="item.visible" color="orange2-toggle" (change)="activate(element)"></mat-slide-toggle>
+                        top: 2px;" [(ngModel)]="item.visible" color="orange2-toggle" (change)="activate(item)"></mat-slide-toggle>
                     </div>
                     <div class="mt-2" fxLayout="row" fxLayoutAlign="end">
-                        <img class="cursor-pointer" src="/assets/img/dashboard/icon-edit-full.svg" alt="">
-                        <img class="cursor-pointer" src="/assets/img/dashboard/icon-remove-comision.svg" alt=""  (click)="deleteArticle()">
+                        <img class="cursor-pointer" src="/assets/img/dashboard/icon-edit-full.svg" alt="" (click)="editArticle(item)">
+                        <img class="cursor-pointer" src="/assets/img/dashboard/icon-remove-comision.svg" alt=""  (click)="deleteArticle(item)">
                     </div>
                 </div>
             </div>
@@ -46,20 +46,20 @@
             <mat-card class="card-padding">
                 <div fxLayout="row" fxLayoutAlign="space-between">
                     <div fxLayout="row">
-                        <img class="imagen-blog" [src]="item.image" alt="">
+                        <img class="imagen-blog" [src]="item.imageurl" alt="">
                         <div class="ml-3" fxLayout="column">
-                            <h4 class="title-content mt-2">{{item.titulo}}</h4>
-                            <p class="mt-0 mb-0"><strong>{{item.author}} </strong> {{item.date}}</p>
+                            <h4 class="title-content mt-2">{{item.title}}</h4>
+                            <p class="mt-0 mb-0"><strong>{{item.author}} </strong> {{item.date  | date: 'yyyy/MM/dd'}}</p>
                         </div>
                     </div>
                     <div class="mt-2 mr-3">
                         <div>
                             Mostrar / ocultar <mat-slide-toggle style="margin-left:5px; position: relative;
-                            top: 2px;" [(ngModel)]="item.visible" color="orange2-toggle" (change)="activate(element)"></mat-slide-toggle>
+                            top: 2px;" [(ngModel)]="item.visible" color="orange2-toggle" (change)="activate(item)"></mat-slide-toggle>
                         </div>
                         <div class="mt-2" fxLayout="row" fxLayoutAlign="end">
-                            <img class="cursor-pointer" src="/assets/img/dashboard/icon-edit-full.svg" alt="">
-                            <img class="cursor-pointer" src="/assets/img/dashboard/icon-remove-comision.svg" alt="" (click)="deleteArticle()">
+                            <img class="cursor-pointer" src="/assets/img/dashboard/icon-edit-full.svg" alt="" (click)="editArticle(item)">
+                            <img class="cursor-pointer" src="/assets/img/dashboard/icon-remove-comision.svg" alt="" (click)="deleteArticle(item)">
                         </div>
                     </div>
                 </div>
