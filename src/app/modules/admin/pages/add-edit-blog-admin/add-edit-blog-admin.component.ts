@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import * as moment from "moment";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContentService } from 'src/app/services/content.service';
+import { Router } from '@angular/router';
 moment.locale("es");
 @Component({
   selector: 'app-add-edit-blog-admin',
@@ -25,6 +26,7 @@ export class AddEditBlogAdminComponent implements OnInit {
   datePublication: any = "";
   hourDate: any = "";
   constructor(
+    public router: Router,
     private content: ContentService,
   ) { }
   editorConfig: AngularEditorConfig = {
@@ -108,9 +110,10 @@ export class AddEditBlogAdminComponent implements OnInit {
     this.formData.append('tags', this.etiquetas);
     this.formData.append('visible', '' + this.visible);
     this.formData.append('publicationDate', datePublication + ' ' + hour + ':00');
-    console.log(this.formData);
     this.content.saveBlog(this.formData).subscribe((resp) => {
-      console.log(resp);
+      this.router.navigate([
+        "/blog-admin"
+      ]);
     })
 
   }
@@ -138,26 +141,7 @@ export class AddEditBlogAdminComponent implements OnInit {
       }
     }
   }
-  saveprogrammer() {
-    let datePublication = moment(this.datePublication).format("YYYY-MM-DD");
-    let hour;
 
-    if (this.hourDate != undefined) {
-      hour = this.HrFormat(this.hourDate);
-    } else {
-      hour = ""
-    }
-
-    //console.log(datePublication + ' ' + hour);
-    this.formData.append('title', this.titleArticle);
-    this.formData.append('content', this.htmlContent);
-    this.formData.append('author', this.author);
-    this.formData.append('tags', this.etiquetas);
-    this.formData.append('visible', '' + this.visible);
-    this.formData.append('publicationDate', datePublication + ' ' + hour + ':00');
-    console.log(this.formData);
-
-  }
   comprobarText() {
     if (this.titleArticle != "" && this.htmlContent != "" && this.author != "" && this.etiquetas != "") {
       this.disabledButtonEraser = false;
@@ -181,7 +165,9 @@ export class AddEditBlogAdminComponent implements OnInit {
       allowOutsideClick: false
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
-
+        this.router.navigate([
+          "/blog-admin"
+        ]);
       }
     })
   }

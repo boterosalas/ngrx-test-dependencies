@@ -17,13 +17,14 @@
                       style="color: #37236A;"
                       id="commisionBussiness"
                       type="text"
+                      [(ngModel)]="texto1"
                       placeholder="TITULO"
                       required
                     />
                   </mat-form-field>
                 <h3>CONTENIDO</h3>
                 <angular-editor [config]="editorConfig" [(ngModel)]="htmlContent1"></angular-editor>
-                <button mat-raised-button class="button-save" (click)="saveLegal(1)" [disabled]="disabledButtonPublication"
+                <button mat-raised-button class="button-save" (click)="saveLegal('1')" [disabled]="disabledButtonPublication"
             >Guardar </button>
             </div>
         </mat-tab>
@@ -39,13 +40,14 @@
                   style="color: #37236A;"
                   id="commisionBussiness"
                   type="text"
+                  [(ngModel)]="texto2"
                   placeholder="TITULO"
                   required
                 />
               </mat-form-field>
             <h3>CONTENIDO</h3>
             <angular-editor [config]="editorConfig" [(ngModel)]="htmlContent2"></angular-editor>
-            <button mat-raised-button class="button-save" (click)="saveLegal(2)" [disabled]="disabledButtonPublication"
+            <button mat-raised-button class="button-save" (click)="saveLegal('2')" [disabled]="disabledButtonPublication"
             >Guardar </button>
            </div>
         </mat-tab>
@@ -63,12 +65,13 @@
                   id="commisionBussiness"
                   type="text"
                   placeholder="TITULO"
+                  [(ngModel)]="texto3"
                   required
                 />
               </mat-form-field>
             <h3>CONTENIDO</h3>
             <angular-editor [config]="editorConfig" [(ngModel)]="htmlContent3"></angular-editor>
-            <button mat-raised-button class="button-save" (click)="saveLegal(3)" [disabled]="disabledButtonPublication"
+            <button mat-raised-button class="button-save" (click)="saveLegal('3')" [disabled]="disabledButtonPublication"
             >Guardar </button>
            </div> 
         </mat-tab>
@@ -86,11 +89,12 @@
                       type="text"
                       placeholder="TITULO"
                       required
+                      [(ngModel)]="texto4"
                     />
                   </mat-form-field>
                 <h3>CONTENIDO</h3>
                 <angular-editor [config]="editorConfig" [(ngModel)]="htmlContent4"></angular-editor>
-                <button mat-raised-button class="button-save" (click)="saveLegal(4)" [disabled]="disabledButtonPublication"
+                <button mat-raised-button class="button-save" (click)="saveLegal('4')" [disabled]="disabledButtonPublication"
             >Guardar </button>
             </div> 
         </mat-tab>

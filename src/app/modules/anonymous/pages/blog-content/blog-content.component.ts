@@ -44,7 +44,8 @@ export class BlogContentComponent implements OnInit {
     this.url = encodeURI(`${domain}`);
     this.valueLink = encodeURI(`${domain}`);
     this.dateForm = this.fb.group({
-      nameBussiness: [null, Validators.required]
+      nameBussiness: [null, Validators.required],
+      namePerson: [null, Validators.required]
     });
   }
   public searchBlog(element) {
@@ -57,7 +58,7 @@ export class BlogContentComponent implements OnInit {
       }
     })
   }
-  public copyLink(inputElement) {
+  public copyLink(inputElement: any) {
     inputElement.select();
     document.execCommand("copy");
     inputElement.setSelectionRange(0, 0);
@@ -82,7 +83,15 @@ export class BlogContentComponent implements OnInit {
     });
   }
   sendMessage() {
-    console.log("Mensaje enviado");
+    let formData = new FormData();
+    formData.append('address', this.dateForm.controls.nameBussiness.value)
+    formData.append('subject', "Artículo compartido")
+    let mensaje = this.dateForm.controls.namePerson.value + " cree que te puede interesar el siguiente post: " + this.url
+    formData.append('message', mensaje);
+    this.content.sendMessage(formData).subscribe((resp) => {
+      this.openSnackBar("Se ha compartido el link", "Cerrar");
+      this.dialog.closeAll();
+    })
   }
 
 }

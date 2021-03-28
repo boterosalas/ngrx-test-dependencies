@@ -14,7 +14,7 @@ import { ContentService } from 'src/app/services/content.service';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 //import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 
-fdescribe('TableActivateBusinessComponent', () => {
+describe('TableActivateBusinessComponent', () => {
   let component: TableActivateBusinessComponent;
   let fixture: ComponentFixture<TableActivateBusinessComponent>;
   let mockRouter = {
@@ -26,7 +26,7 @@ fdescribe('TableActivateBusinessComponent', () => {
     Status: "Success"
   }
   const mockContentService = jasmine.createSpyObj("ContentService", [
-    "getCommissionsData"
+    "getCommissionsData", "saveBussiness"
   ]);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -53,6 +53,7 @@ fdescribe('TableActivateBusinessComponent', () => {
       .compileComponents();
     mockLinksService.putOrder.and.returnValue(of(response));
     mockContentService.getCommissionsData.and.returnValue(of(response));
+    mockContentService.saveBussiness.and.returnValue(of(response));
   }));
 
   beforeEach(() => {
@@ -98,6 +99,21 @@ fdescribe('TableActivateBusinessComponent', () => {
     expect(datos).toBeTruthy();
   });
 
-
+  it('on change item', () => {
+    const mockFile = new File([""], "name.jpg", { type: "text/html" });
+    const mockEvt = { target: { files: [mockFile] } };
+    component.onFileChangeFiles(mockEvt, 'cedula1');
+    component.saveBussiness();
+    let datos = {
+      description: "Hello",
+      infoaditional: "Hasta",
+      code: "eess",
+      placeholder: "No. Orden",
+      imageurl: "imagen.svg",
+    }
+    component.editBussiness(datos);
+    component.agregarBussiness();
+    expect(component.onFileChangeFiles).not.toBeNull();
+  })
 
 });

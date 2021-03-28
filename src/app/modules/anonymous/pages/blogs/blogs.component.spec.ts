@@ -5,15 +5,37 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateModule } from '@ngx-translate/core';
+import { of } from 'rxjs';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { ContentService } from 'src/app/services/content.service';
 
 import { BlogsComponent } from './blogs.component';
-
-fdescribe('BlogsComponent', () => {
+import * as moment from "moment";
+describe('BlogsComponent', () => {
   let component: BlogsComponent;
   let fixture: ComponentFixture<BlogsComponent>;
+  const mockContentService = jasmine.createSpyObj("ContentService", [
+    "getBlogs"
+  ]);
+  let response = {
+    Status: "Success",
+    objectResponse: {
+      blogs: [{
+        title: "Any",
+        content: "Anyd",
+        author: "Any3",
+        tags: "Anss",
+        visible: "true",
 
+        date: moment("12-01-2020"),
+        imageurl: ""
+      }
+      ],
+      total: 1
+
+    }
+  }
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [BlogsComponent],
@@ -38,9 +60,11 @@ fdescribe('BlogsComponent', () => {
 
       ],
 
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [{ provide: ContentService, useValue: mockContentService },]
     })
       .compileComponents();
+    mockContentService.getBlogs.and.returnValue(of(response));
   }));
 
   beforeEach(() => {
@@ -52,4 +76,10 @@ fdescribe('BlogsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('order by', () => {
+    component.orderByFun({ value: "RECENT" });
+    let datos = true;
+    expect(datos).toBeTruthy();
+
+  })
 });

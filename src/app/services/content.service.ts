@@ -59,6 +59,8 @@ export class ContentService {
   apiDeleteBlog = "blog/deleteblog";
   apiSaveBlog = "blog/saveblog";
   apiActivateBlog = "blog/activeblog";
+  apiSaveBussiness = "business/savebusiness"
+  apiSendMessage = "blog/sendmail";
   sendSearch = {};
 
   public getNews() {
@@ -654,5 +656,25 @@ export class ContentService {
     };
     return this.http
       .post(`${this.url + this.apiActivateBlog}`, data, httpOptionsSet);
+  }
+  public saveBussiness(data: any) {
+    let httpOptionsSet = {
+      headers: new HttpHeaders({
+        Authorization: "Bearer " + this.authorization,
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
+    };
+    return this.http
+      .post(`${this.url + this.apiSaveBussiness}`, data, httpOptionsSet);
+  }
+  public sendMessage(data: any) {
+    let httpOptionsSet = {
+      headers: new HttpHeaders({
+        Authorization: "Bearer " + this.authorization,
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
+    };
+    return this.http
+      .post(`${this.url + this.apiSendMessage}`, data, httpOptionsSet);
   }
 }

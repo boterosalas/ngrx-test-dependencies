@@ -12,7 +12,7 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 import { ConfigurationsComponent } from './configurations.component';
 
-fdescribe('ConfigurationsComponent', () => {
+describe('ConfigurationsComponent', () => {
   let component: ConfigurationsComponent;
   let fixture: ComponentFixture<ConfigurationsComponent>;
 

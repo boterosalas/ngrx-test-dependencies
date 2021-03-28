@@ -41,6 +41,7 @@ export class TableActivateBusinessComponent implements OnInit {
   displayedColumnsComision: string[] = ['drag', 'bussiness', 'comision', 'button'];
   arrayComision: any[];
   disabledButton: boolean = true;
+  formData: FormData = new FormData();
   selectedItem: any;
   fileImgCat: any;
   nameFileCert: string = '';
@@ -130,6 +131,21 @@ export class TableActivateBusinessComponent implements OnInit {
     let nameFile = event.target.files[0].name;
     let reader = new FileReader();
     let sizeFile = event.target.files[0].size;
+    const file = event.target.files[0];
+    let fileList: FileList = event.target.files;
+    this.getExtension(fileList[0].name, fileList[0].size);
+    //let sizeFile = event.target.files[0].size;
+    this.getExtension(fileList[0].name, fileList[0].size);
+    if (this.validFormat === true) {
+      this.formData.append('File', fileList[0], fileList[0].name.replace(' ', '_'));
+      this.formData.append('imageUrl', file.name.replace(' ', '_'));
+      let nameFile = event.target.files[0].name;
+      this.nameFileCert = nameFile;
+      //const reader = new FileReader();
+      //reader.onload = e => this.visualizationImag = reader.result;
+      //reader.readAsDataURL(file);
+      //this.comprobarText();
+    }
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       let fileBlob = new Blob([file]);
@@ -158,6 +174,8 @@ export class TableActivateBusinessComponent implements OnInit {
     this.dateForm.controls.nameTableCommision.setValue(this.selectedItem.code);
     this.dateForm.controls.placeholderBussiness.setValue(this.selectedItem.placeholder);
     this.dateForm.controls.codeReference.setValue(this.selectedItem.code);
+    this.nameFileCert = this.selectedItem.imageurl;
+    this.activebutton = true;
     const title = "Editar Negocio";
     const template = this.templateBussiness;
     const id = "video-modal";
@@ -176,6 +194,7 @@ export class TableActivateBusinessComponent implements OnInit {
     this.dateForm.controls.nameTableCommision.setValue(null);
     this.dateForm.controls.placeholderBussiness.setValue(null);
     this.dateForm.controls.codeReference.setValue(null);
+    this.nameFileCert = "";
     const title = "Agregar Negocio";
     const template = this.templateBussiness;
     const id = "video-modal";
@@ -190,5 +209,32 @@ export class TableActivateBusinessComponent implements OnInit {
   }
   onNoClick() {
     this.dialog.closeAll();
+  }
+  saveBussiness() {
+    //let datosSend = new FormData();
+
+    this.formData.append('nameBussiness', this.dateForm.controls.nameBussiness.value);
+    this.formData.append('detailBussiness', this.dateForm.controls.detailBussiness.value);
+    this.formData.append('nameTableCommision', this.dateForm.controls.nameTableCommision.value);
+    this.formData.append('placeholderBussiness', this.dateForm.controls.placeholderBussiness.value);
+    this.formData.append('codeReference', this.dateForm.controls.codeReference.value);
+
+    //let datos = {
+    //  nameBussiness: this.dateForm.controls.nameBussiness.value,
+    //detailBussiness: this.dateForm.controls.detailBussiness.value,
+    //nameTableCommision: this.dateForm.controls.nameTableCommision.value,
+    //placeholderBussiness:this.dateForm.controls.placeholderBussiness.value,
+    //codeReference: this.dateForm.controls.codeReference.value
+    //}
+    this.content.saveBussiness(this.formData).subscribe((resp) => {
+      this.formData.delete('nameBussiness');
+      this.formData.delete('detailBussiness');
+      this.formData.delete('nameTableCommision');
+      this.formData.delete('placeholderBussiness');
+      this.formData.delete('codeReference');
+      this.formData.delete('File');
+      this.formData.delete('imageUrl');
+
+    })
   }
 }

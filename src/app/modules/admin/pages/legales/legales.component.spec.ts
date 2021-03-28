@@ -8,15 +8,23 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { of } from 'rxjs';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { MasterDataService } from 'src/app/services/master-data.service';
 
 import { LegalesComponent } from './legales.component';
 
 describe('LegalesComponent', () => {
   let component: LegalesComponent;
   let fixture: ComponentFixture<LegalesComponent>;
+  let response = {
+    Status: "Success",
 
+  }
+  const mockMasterService = jasmine.createSpyObj("MasterDataService", [
+    "getTerms", "setTerms"
+  ]);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [LegalesComponent],
@@ -43,9 +51,12 @@ describe('LegalesComponent', () => {
 
       ],
 
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [{ provide: MasterDataService, useValue: mockMasterService },]
     })
       .compileComponents();
+    mockMasterService.getTerms.and.returnValue(of(response));
+    mockMasterService.setTerms.and.returnValue(of(response));
   }));
 
   beforeEach(() => {
@@ -57,4 +68,13 @@ describe('LegalesComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('save terms', () => {
+    component.saveLegal("1");
+    component.saveLegal("2");
+    component.saveLegal("3");
+    component.saveLegal("4");
+    let datos = true;
+    expect(datos).toBeTruthy();
+  })
 });
+

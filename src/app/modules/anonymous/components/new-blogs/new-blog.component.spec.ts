@@ -4,7 +4,7 @@ import { NewBlogComponent } from './new-blog.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 
-fdescribe('NewBusinessComponent', () => {
+describe('NewBusinessComponent', () => {
   let component: NewBlogComponent;
   let fixture: ComponentFixture<NewBlogComponent>;
 

@@ -67,23 +67,24 @@ export class LegalesComponent implements OnInit {
   texto4: string;
 
   ngOnInit() {
+    this.getTerms();
   }
   getTerms() {
     this.personalInfo.getTerms().subscribe((resp) => {
 
     })
   }
-  setTerms(elemento) {
-    if (elemento === 1) {
+  saveLegal(elemento) {
+    if (elemento === "1") {
       let datos = {
         texto1: this.texto1,
         htmlContent1: this.htmlContent1
       }
       this.personalInfo.setTerms(datos).subscribe((resp) => {
-
+        console.log(resp);
       })
     }
-    else if (elemento === 2) {
+    else if (elemento === "2") {
       let datos = {
         texto1: this.texto2,
         htmlContent1: this.htmlContent2
@@ -92,7 +93,7 @@ export class LegalesComponent implements OnInit {
 
       })
     }
-    else if (elemento === 3) {
+    else if (elemento === "3") {
       let datos = {
         texto1: this.texto3,
         htmlContent1: this.htmlContent3
@@ -101,7 +102,7 @@ export class LegalesComponent implements OnInit {
 
       })
     }
-    else if (elemento === 4) {
+    else if (elemento === "4") {
       let datos = {
         texto1: this.texto4,
         htmlContent1: this.htmlContent4

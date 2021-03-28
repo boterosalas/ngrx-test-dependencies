@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import * as moment from "moment";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContentService } from 'src/app/services/content.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 moment.locale("es");
 @Component({
@@ -29,6 +29,7 @@ export class EditBlogAdminComponent implements OnInit {
   id: any = "";
   private subscription: Subscription = new Subscription();
   constructor(
+    public router: Router,
     private content: ContentService,
     private route: ActivatedRoute,
   ) {
@@ -136,7 +137,9 @@ export class EditBlogAdminComponent implements OnInit {
     this.formData.append('visible', '' + this.visible);
     this.formData.append('publicationDate', datePublication + ' ' + hour + ':00');
     this.content.saveBlog(this.formData).subscribe((resp) => {
-      console.log(resp);
+      this.router.navigate([
+        "/blog-admin"
+      ]);
     })
 
   }
@@ -164,27 +167,7 @@ export class EditBlogAdminComponent implements OnInit {
       }
     }
   }
-  saveprogrammer() {
-    let datePublication = moment(this.datePublication).format("YYYY-MM-DD");
-    let hour;
-    if (this.hourDate != undefined) {
-      hour = this.HrFormat(this.hourDate);
-    } else {
-      hour = ""
-    }
-    //console.log(datePublication + ' ' + hour);
-    this.formData.append('id', this.id);
-    this.formData.append('title', this.titleArticle);
-    this.formData.append('content', this.htmlContent);
-    this.formData.append('author', this.author);
-    this.formData.append('tags', this.etiquetas);
-    this.formData.append('visible', '' + this.visible);
-    this.formData.append('publicationDate', datePublication + ' ' + hour + ':00');
-    this.content.saveBlog(this.formData).subscribe((resp) => {
-      console.log(resp);
-    })
 
-  }
   comprobarText() {
     if (this.titleArticle != "" || this.htmlContent != "" || this.author != "" || this.etiquetas != "" || this.datePublication != "" || this.hourDate != "") {
       this.disabledButtonEraser = false;
@@ -204,7 +187,11 @@ export class EditBlogAdminComponent implements OnInit {
       allowOutsideClick: false
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
-
+        this.content.deleteBlog(this.id).subscribe((resp) => {
+          this.router.navigate([
+            "/blog-admin"
+          ]);
+        })
       }
     })
   }

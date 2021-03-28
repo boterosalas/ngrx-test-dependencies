@@ -66,7 +66,6 @@ export class BlogsComponent implements OnInit {
       this.blogsData = user.objectResponse.blogs;
       this.blogMain = user.objectResponse.blogs[0];
       this.totalItems = user.objectResponse.total;
-      //this.dataSource = new MatTableDataSource<any>(this.newsUser);
     });
   }
   public pagination(paginate: any) {

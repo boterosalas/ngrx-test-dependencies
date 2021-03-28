@@ -29,16 +29,16 @@
                 
                 <img shareButton="facebook" [url]="url" src="/assets/img/ico-facebook.svg" alt="shared-facebook">
                 <img src="/assets/img/ico-mail.svg" (click)="sendEmail()" alt="shared-email">
-                <img (click)="copyLink(linkInput)" src="/assets/img/ico-copy.svg" alt="copy-link">
+                <img #btnCopy (click)="copyLink(linkInput)" src="/assets/img/ico-copy.svg" alt="copy-link">
             </div>
         </div>
     </div>
     
 </div>
-<input class="hiden-link" type="text" [value]="valueLink" #linkInput/>
+<input class="hiden-link" type="text" [value]="valueLink" #linkInput readonly/>
 
 <ng-template #templateSendEmail>
-    <form [formGroup]="dateForm" >
+    <form [formGroup]="dateForm" fxLayout="column" >
       <mat-form-field>
         <input
           matInput
@@ -46,6 +46,53 @@
           type="text"
           placeholder="EMAIL"
           formControlName="nameBussiness"
+          required
+        />
+        <mat-error
+          id="requiredName"
+          *ngIf="
+          dateForm.controls.nameBussiness.invalid &&
+          dateForm.controls.nameBussiness.errors.required
+          "
+          >{{
+            "GENERIC.REQUIRED" | translate: { formValue: "Email" }
+          }}</mat-error
+        >
+  
+        <mat-error
+          id="maxName"
+          *ngIf="
+          dateForm.controls.nameBussiness.invalid &&
+          dateForm.controls.nameBussiness.errors.maxlength
+          "
+          >{{
+            "GENERIC.MAX_CHARACTERS"
+              | translate
+                : {
+                    maxchar:
+                    dateForm.controls.nameBussiness.errors.maxlength.requiredLength
+                  }
+          }}</mat-error
+        >
+  
+        <mat-error
+          id="invalidName"
+          *ngIf="
+          dateForm.controls.nameBussiness.invalid &&
+          dateForm.controls.nameBussiness.errors.pattern
+          "
+          >{{
+            "GENERIC.INVALID_FORMAT" | translate: { val: "Email" }
+          }}</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          id="nameBussiness"
+          type="text"
+          placeholder="TU NOMBRE"
+          formControlName="namePerson"
           required
         />
         <mat-error

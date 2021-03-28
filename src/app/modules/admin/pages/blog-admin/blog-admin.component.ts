@@ -29,7 +29,6 @@ export class BlogAdminComponent implements OnInit {
       orderBy: "RELEVANT"
     }
     this.content.getBlogsAdmin(data).subscribe((resp) => {
-      console.log(resp)
       let visibles = resp.objectResponse.blogs
       let visiblesBlog = [];
       let invisiblesBlog = [];
@@ -41,8 +40,6 @@ export class BlogAdminComponent implements OnInit {
           invisiblesBlog.push(visibles[index]);
         }
       }
-      console.log(visiblesBlog);
-      console.log(invisiblesBlog);
       this.blogPublicado = visiblesBlog;
       this.blogHidden = invisiblesBlog;
     })
