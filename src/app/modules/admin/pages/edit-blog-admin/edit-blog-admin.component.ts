@@ -68,7 +68,10 @@ export class EditBlogAdminComponent implements OnInit {
         'removeFormat', 'fontName', 'backgroundColor',
         'insertHorizontalRule', 'toggleEditorMode', 'undo',
         'redo', 'strikeThrough', 'subscript',
-        'superscript']
+        'superscript', 'justifyLeft',
+        'justifyCenter',
+        'justifyRight',
+        'justifyFull']
     ]
   };
   htmlContent: string;
