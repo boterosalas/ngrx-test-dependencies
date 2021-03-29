@@ -76,6 +76,7 @@ export class EditBlogAdminComponent implements OnInit {
   };
   htmlContent: string;
   disabledButtonEraser: boolean = true;
+  datePublicationHolder: string;
   disabledButtonPublication: boolean = true;
   ngOnInit() {
     this.content.getIndividualBlogId(this.id).subscribe((resp) => {
@@ -85,6 +86,7 @@ export class EditBlogAdminComponent implements OnInit {
       this.etiquetas = resp.objectResponse.tags;
       this.visible = resp.objectResponse.visible;
       this.datePublication = moment(resp.objectResponse.date).format("YYYY/MM/DD");
+      this.datePublicationHolder = this.datePublication;
       this.hourDate = moment(resp.objectResponse.date).format("HH:MM");
       if (resp.objectResponse.imageurl != "") {
         this.visualizationImag = resp.objectResponse.imageurl;
@@ -128,7 +130,7 @@ export class EditBlogAdminComponent implements OnInit {
     let datePublication = moment(this.datePublication).format("YYYY-MM-DD");
     let hour;
     if (this.hourDate != undefined) {
-      hour = this.HrFormat(this.hourDate);
+      hour = this.HoraMilitar(this.hourDate);
     } else {
       hour = ""
     }
@@ -140,13 +142,53 @@ export class EditBlogAdminComponent implements OnInit {
     this.formData.append('visible', '' + this.visible);
     this.formData.append('publicationDate', datePublication + ' ' + hour + ':00');
     this.content.saveBlog(this.formData).subscribe((resp) => {
-      this.router.navigate([
-        "/blog-admin"
-      ]);
+      this.regresarBlogs();
     })
 
   }
-  public HrFormat(time) {
+  regresarBlogs() {
+    this.router.navigate([
+      "/blog-admin"
+    ]);
+  }
+  comprobarText() {
+    if (this.titleArticle != "" || this.htmlContent != "" || this.author != "" || this.etiquetas != "" || this.datePublication != "" || this.hourDate != "") {
+      this.disabledButtonEraser = false;
+    }
+    if (this.titleArticle != "" && this.htmlContent != "" && this.author != "" && this.etiquetas != "" && this.datePublication != "" && this.hourDate != "") {
+      this.disabledButtonPublication = false;
+    }
+  }
+  deleteArticle() {
+    Swal.fire({
+      html: "<h3 class='delete-title-comision'>Eliminar artículo</h3> <p class='w-container'>¿Estás seguro de eliminar el artículo seleccionado?</p>",
+      confirmButtonText: "Eliminar artículo",
+      cancelButtonText: "Cancelar",
+      showCancelButton: true,
+      confirmButtonClass: "updateokdelete order-last",
+      cancelButtonClass: "updatecancel",
+      allowOutsideClick: false
+    }).then((resp: any) => {
+      if (resp.dismiss !== 'cancel') {
+        this.content.deleteBlog(this.id).subscribe((resp) => {
+          this.regresarBlogs();
+        })
+      }
+    })
+  }
+  activate() {
+    if (this.titleArticle != "" || this.htmlContent != "" || this.author != "" || this.etiquetas != "" || this.datePublication != "" || this.hourDate != "") {
+      this.disabledButtonEraser = false;
+    }
+    if (this.titleArticle != "" && this.htmlContent != "" && this.author != "" && this.etiquetas != "" && this.datePublication != "" && this.hourDate != "") {
+      this.disabledButtonPublication = false;
+    }
+    if (this.nameFileCert === "") {
+      this.disabledButtonPublication = true;
+      this.disabledButtonEraser = true;
+    }
+  }
+  public HoraMilitar(time) {
     let format = time.toString().split(" ")[1]
     let hour = time.toString().split(" ")[0].split(":")[0]
     if (hour == 12) {
@@ -171,44 +213,5 @@ export class EditBlogAdminComponent implements OnInit {
     }
   }
 
-  comprobarText() {
-    if (this.titleArticle != "" || this.htmlContent != "" || this.author != "" || this.etiquetas != "" || this.datePublication != "" || this.hourDate != "") {
-      this.disabledButtonEraser = false;
-    }
-    if (this.titleArticle != "" && this.htmlContent != "" && this.author != "" && this.etiquetas != "" && this.datePublication != "" && this.hourDate != "") {
-      this.disabledButtonPublication = false;
-    }
-  }
-  deleteArticle() {
-    Swal.fire({
-      html: "<h3 class='delete-title-comision'>Eliminar artículo</h3> <p class='w-container'>¿Estás seguro de eliminar el artículo seleccionado?</p>",
-      confirmButtonText: "Eliminar artículo",
-      cancelButtonText: "Cancelar",
-      showCancelButton: true,
-      confirmButtonClass: "updateokdelete order-last",
-      cancelButtonClass: "updatecancel",
-      allowOutsideClick: false
-    }).then((resp: any) => {
-      if (resp.dismiss !== 'cancel') {
-        this.content.deleteBlog(this.id).subscribe((resp) => {
-          this.router.navigate([
-            "/blog-admin"
-          ]);
-        })
-      }
-    })
-  }
-  activate() {
-    if (this.titleArticle != "" || this.htmlContent != "" || this.author != "" || this.etiquetas != "" || this.datePublication != "" || this.hourDate != "") {
-      this.disabledButtonEraser = false;
-    }
-    if (this.titleArticle != "" && this.htmlContent != "" && this.author != "" && this.etiquetas != "" && this.datePublication != "" && this.hourDate != "") {
-      this.disabledButtonPublication = false;
-    }
-    if (this.nameFileCert === "") {
-      this.disabledButtonPublication = true;
-      this.disabledButtonEraser = true;
-    }
-  }
 }
 

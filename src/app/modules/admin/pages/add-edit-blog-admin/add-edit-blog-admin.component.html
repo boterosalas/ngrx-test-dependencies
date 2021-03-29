@@ -25,13 +25,13 @@
               id="titleArticles"
               type="text"
               placeholder="TITULO DEL ARTÍCULO"
-              [(ngModel)]="titleArticle"
-              (ngModelChange)="comprobarText()"
+              [(ngModel)]="title"
+              (ngModelChange)="checkInput()"
               required
             />
           </mat-form-field>
         <h4>CONTENIDO</h4>
-        <angular-editor (ngModelChange)="comprobarText()" [config]="editorConfig" [(ngModel)]="htmlContent"></angular-editor>
+        <angular-editor (ngModelChange)="checkInput()" [config]="configurationEditor" [(ngModel)]="contenidoHTML"></angular-editor>
     </mat-card>
     <div>
     <mat-card class="ml-2" style="width: 330px; height: 390px;">
@@ -42,8 +42,8 @@
               id="athortext"
               type="text"
               placeholder="AUTOR"
-              [(ngModel)]="author"
-              (ngModelChange)="comprobarText()"
+              [(ngModel)]="escritor"
+              (ngModelChange)="checkInput()"
               required
             />
           </mat-form-field>
@@ -98,7 +98,7 @@
               type="text"
               [(ngModel)]="etiquetas"
               placeholder="ETIQUETAS"
-              (ngModelChange)="comprobarText()"
+              (ngModelChange)="checkInput()"
               required
             />
           </mat-form-field>
@@ -114,12 +114,12 @@
             <div>
             <label class="label-up-text mt-2" for="picker"> FECHA DE PUBLICACIÓN <b style="color: #F21905;">*</b> </label>               
             <div fxLayout="row" class="mt-2">
-            <mat-datepicker  (ngModelChange)="comprobarText()" class="icon-date" touchUi #picker></mat-datepicker>
+            <mat-datepicker  (ngModelChange)="checkInput('Cambio')" class="icon-date" touchUi #picker></mat-datepicker>
             <mat-datepicker-toggle
               class="icon-date"
               matSuffix
               [for]="picker"
-              (ngModelChange)="comprobarText()"
+              (ngModelChange)="checkInput('Cambio')"
             ></mat-datepicker-toggle>
             <input
               matInput
@@ -127,7 +127,7 @@
               [matDatepicker]="picker"
               [max]="maxDate"
               readonly
-              (ngModelChange)="comprobarText()"
+              (ngModelChange)="checkInput('Cambio')"
               [(ngModel)]="datePublication"
               class=" border-input mat-elevation-z1 p-2 border-radius"
             />
@@ -137,20 +137,21 @@
             <label class="label-up-text mt-2" for="picker"> HORA DE PUBLICACIÓN <b style="color: #F21905;">*</b> </label>               
             <div>
                 <mat-icon class="clock-time">alarm</mat-icon>
-                <input (ngModelChange)="comprobarText()" [(ngModel)]="hourDate"  matInput aria-label="default time" [ngxTimepicker]="defaultValue" readonly class="form-control  mat-elevation-z1 p-2 border-radius">
-                <ngx-material-timepicker (ngModelChange)="comprobarText()" #defaultValue></ngx-material-timepicker>
+                <input (ngModelChange)="checkInput('Cambio')" [(ngModel)]="hourDate"  matInput aria-label="default time" [ngxTimepicker]="defaultValue" readonly class="form-control  mat-elevation-z1 p-2 border-radius">
+                <ngx-material-timepicker #defaultValue></ngx-material-timepicker>
+                
             </div>
         </div>
 
         </div>
         <div class="mt-2">
-            <button mat-raised-button class="button-save" (click)="saveeraser()" [disabled]="disabledButtonEraser"
+            <button mat-raised-button class="button-save" (click)="saveeraser()" [disabled]="disabledButtonEr"
             >Guardar como borrador </button>
         </div>
         <div class="mt-2" fxLayout="row" fxLayoutAlign="space-between">
-            <button mat-raised-button class="button-save-programmer" (click)="saveeraser()" [disabled]="disabledButtonPublication"
+            <button mat-raised-button class="button-save-programmer" (click)="saveeraser()" [disabled]="disabledButtonPu"
             >Programar </button>
-            <button mat-raised-button class="button-delete"     (click)="deleteArticle()"
+            <button mat-raised-button class="button-delete"     (click)="delete()"
             >Eliminar </button>
         </div>
        

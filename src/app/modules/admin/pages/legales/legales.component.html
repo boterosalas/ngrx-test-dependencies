@@ -5,7 +5,6 @@
 ></app-banner>
 <div class="container mt-3">
     <mat-tab-group>
-
         <mat-tab>
             <ng-template mat-tab-label>
                  <span class="gtmTerminosCondicionesClicTerminosLegales">Términos y Condiciones</span>
@@ -17,13 +16,13 @@
                       style="color: #37236A;"
                       id="commisionBussiness"
                       type="text"
-                      [(ngModel)]="texto1"
+                      [(ngModel)]="textoTerminos"
                       placeholder="TITULO"
                       required
                     />
                   </mat-form-field>
                 <h3>CONTENIDO</h3>
-                <angular-editor [config]="editorConfig" [(ngModel)]="htmlContent1"></angular-editor>
+                <angular-editor [config]="configurarEditor" [(ngModel)]="htmlContentTerminos"></angular-editor>
                 <button mat-raised-button class="button-save" (click)="saveLegal('1')" [disabled]="disabledButtonPublication"
             >Guardar </button>
             </div>
@@ -40,13 +39,13 @@
                   style="color: #37236A;"
                   id="commisionBussiness"
                   type="text"
-                  [(ngModel)]="texto2"
+                  [(ngModel)]="textoProteccion"
                   placeholder="TITULO"
                   required
                 />
               </mat-form-field>
             <h3>CONTENIDO</h3>
-            <angular-editor [config]="editorConfig" [(ngModel)]="htmlContent2"></angular-editor>
+            <angular-editor [config]="configurarEditor" [(ngModel)]="htmlContentProteccion"></angular-editor>
             <button mat-raised-button class="button-save" (click)="saveLegal('2')" [disabled]="disabledButtonPublication"
             >Guardar </button>
            </div>
@@ -65,12 +64,12 @@
                   id="commisionBussiness"
                   type="text"
                   placeholder="TITULO"
-                  [(ngModel)]="texto3"
+                  [(ngModel)]="textoTransparencia"
                   required
                 />
               </mat-form-field>
             <h3>CONTENIDO</h3>
-            <angular-editor [config]="editorConfig" [(ngModel)]="htmlContent3"></angular-editor>
+            <angular-editor [config]="configurarEditor" [(ngModel)]="htmlContentTransparencia"></angular-editor>
             <button mat-raised-button class="button-save" (click)="saveLegal('3')" [disabled]="disabledButtonPublication"
             >Guardar </button>
            </div> 
@@ -89,11 +88,11 @@
                       type="text"
                       placeholder="TITULO"
                       required
-                      [(ngModel)]="texto4"
+                      [(ngModel)]="textoPrograma"
                     />
                   </mat-form-field>
                 <h3>CONTENIDO</h3>
-                <angular-editor [config]="editorConfig" [(ngModel)]="htmlContent4"></angular-editor>
+                <angular-editor [config]="configurarEditor" [(ngModel)]="htmlContentPrograma"></angular-editor>
                 <button mat-raised-button class="button-save" (click)="saveLegal('4')" [disabled]="disabledButtonPublication"
             >Guardar </button>
             </div> 

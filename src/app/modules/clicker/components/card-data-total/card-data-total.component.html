@@ -1,23 +1,23 @@
-<div   class="card-basic {{classCard}}" style="position: relative; display: flex !important; display: -webkit-flex !important; flex-direction: column !important; -webkit-flex-direction: column !important;">
+<div   class="card-basic {{classTotal}}" style="position: relative; display: flex !important; display: -webkit-flex !important; flex-direction: column !important; -webkit-flex-direction: column !important;">
   <img class="position-absolute" src="assets/img/icon-clickam-white.svg" alt="fondo-clickam">
   <div   style="display: flex !important; flex-direction: row !important; justify-content: space-between !important;">
     <div style="display: flex !important; flex-direction: column !important; ">
-      <span class="payment-card">{{number}} </span>
+      <span class="payment-card">{{radicado}} </span>
       <span class="text-white">
-        {{text}}
+        {{description}}
       </span>
     </div>
     <div>
-      <img class="z-index-top" [src]="imgCard" alt="icono comisiones" >
+      <img class="z-index-top" [src]="imgTotal" alt="icono comisiones" >
     </div>
   </div>
   <div  class="mt-2" style="display:flex !important; flex-direction:row !important; justify-content: space-between !important;">
     <div class="marco-mini-card" style="display: flex !important; flex-direction: column !important;">
-      <p class="marco-p-text">{{totalLinks}}</p>
+      <p class="marco-p-text">{{linksTotal}}</p>
       <span class="marco-span-text">Links Creados</span>
     </div>
     <div class="marco-mini-card" style="display: flex !important; flex-direction: column !important;">
-      <p class="marco-p-text">{{totalProducts}}</p>
+      <p class="marco-p-text">{{productosTotales}}</p>
       <span class="marco-span-text">Productos vendidos</span>
     </div>
     <div class="marco-mini-card" style="display: flex !important; flex-direction: column !important;">

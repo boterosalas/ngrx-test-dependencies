@@ -18,18 +18,13 @@ export class CardDataComponent implements OnInit {
   @Input() imgCard: string;
   @Input() totalLinks: number;
   @Input() totalProducts: number;
-  @Input() conversionRate: number;
+
 
   @Input() total: boolean;
   @Output() openDetail = new EventEmitter;
-  isiOS: boolean;
+
   ngOnInit() {
-    let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    if (iOS) {
-      this.isiOS = true;
-    } else {
-      this.isiOS = false
-    }
+
   }
 
 

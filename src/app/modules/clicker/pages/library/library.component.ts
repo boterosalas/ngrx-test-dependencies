@@ -182,35 +182,30 @@ export class LibraryComponent implements OnInit {
         }
         if (this.deleteVideoImg.length > 1) {
             this.content.downloadF(this.deleteVideoImg).subscribe((resp) => {
-                //console.log(resp)
-                if (this.iosDevices) {
-                    this.downloadiOS(resp, "application/zip")
-                } else {
-                    this.download(resp, "application/zip")
-                }
 
+                this.checkDevices(resp, "application/zip")
             })
         } else {
             if (variableImg === true) {
                 this.content.downloadF(this.deleteVideoImg).subscribe((resp) => {
-                    if (this.iosDevices) {
-                        this.downloadiOS(resp, "image/jpg")
-                    } else {
-                        this.download(resp, "image/jpg")
-                    }
 
+                    this.checkDevices(resp, "image/jpg")
                 });
             }
             if (variableVideo === true) {
                 this.content.downloadF(this.deleteVideoImg).subscribe((resp) => {
-                    if (this.iosDevices) {
-                        this.downloadiOS(resp, "video/mp4")
-                    } else {
-                        this.download(resp, "video/mp4")
-                    }
+
+                    this.checkDevices(resp, "video/mp4")
 
                 });
             }
+        }
+    }
+    checkDevices(respuesta, type) {
+        if (this.iosDevices) {
+            this.downloadiOS(respuesta, type)
+        } else {
+            this.download(respuesta, type)
         }
     }
     ///window.location.assign(this.urlshorten)

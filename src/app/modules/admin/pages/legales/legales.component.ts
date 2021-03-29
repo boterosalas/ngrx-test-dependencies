@@ -11,27 +11,8 @@ export class LegalesComponent implements OnInit {
   constructor(
     private personalInfo: MasterDataService
   ) { }
-  terminos: [{
-    seccion: 1
-    titulo: "",
-    contenido: "Contenido"
-  },
-    {
-      seccion: 2
-      titulo: "",
-      contenido: "Contenido"
-    },
-    {
-      seccion: 3
-      titulo: "",
-      contenido: "Contenido"
-    },
-    {
-      seccion: 4
-      titulo: "",
-      contenido: "Contenido"
-    }]
-  editorConfig: AngularEditorConfig = {
+
+  configurarEditor: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
     height: '300px',
@@ -60,59 +41,62 @@ export class LegalesComponent implements OnInit {
         'justifyFull']
     ]
   };
-  htmlContent1: string;
-  htmlContent2: string;
-  htmlContent3: string;
-  htmlContent4: string;
-  texto1: string;
-  texto2: string;
-  texto3: string;
-  texto4: string;
-
+  htmlContentTerminos: string;
+  htmlContentProteccion: string;
+  htmlContentTransparencia: string;
+  htmlContentPrograma: string;
+  textoTerminos: string;
+  textoProteccion: string;
+  textoTransparencia: string;
+  textoPrograma: string;
+  datos: any;
   ngOnInit() {
     this.getTerms();
   }
   getTerms() {
-    this.personalInfo.getTerms().subscribe((resp) => {
+    this.personalInfo.getTerms().subscribe((resp: any) => {
+      console.log(resp);
+      this.htmlContentTerminos = resp.objectResponse[0].sectionValue
+      this.htmlContentProteccion = resp.objectResponse[1].sectionValue
+      this.htmlContentTransparencia = resp.objectResponse[2].sectionValue
+      this.htmlContentPrograma = resp.objectResponse[3].sectionValue
+      this.textoTerminos = resp.objectResponse[0].sectionTitle
+      this.textoProteccion = resp.objectResponse[1].sectionTitle
+      this.textoTransparencia = resp.objectResponse[2].sectionTitle
+      this.textoPrograma = resp.objectResponse[3].sectionTitle
+    })
+  }
+  saveLegalEndpoint() {
+    this.personalInfo.setTerms(this.datos).subscribe((resp) => {
 
     })
   }
+  saveStatus(id, keyUp, texto, htmlContenido) {
+    this.datos = {
+      id: id,
+      sectionKey: keyUp,
+      sectionTitle: texto,
+      sectionValue: htmlContenido
+    }
+    this.saveLegalEndpoint();
+  }
   saveLegal(elemento) {
     if (elemento === "1") {
-      let datos = {
-        texto1: this.texto1,
-        htmlContent1: this.htmlContent1
-      }
-      this.personalInfo.setTerms(datos).subscribe((resp) => {
-        console.log(resp);
-      })
+      this.saveStatus(1, "TerminosCondiciones", this.textoTerminos, this.htmlContentTerminos)
+
     }
     else if (elemento === "2") {
-      let datos = {
-        texto1: this.texto2,
-        htmlContent1: this.htmlContent2
-      }
-      this.personalInfo.setTerms(datos).subscribe((resp) => {
+      this.saveStatus(2, "ProteccionDatos", this.textoProteccion, this.htmlContentProteccion)
 
-      })
     }
     else if (elemento === "3") {
-      let datos = {
-        texto1: this.texto3,
-        htmlContent1: this.htmlContent3
-      }
-      this.personalInfo.setTerms(datos).subscribe((resp) => {
-
-      })
+      this.saveStatus(3, "Transparencia", this.textoTransparencia, this.htmlContentTransparencia)
     }
     else if (elemento === "4") {
-      let datos = {
-        texto1: this.texto4,
-        htmlContent1: this.htmlContent4
-      }
-      this.personalInfo.setTerms(datos).subscribe((resp) => {
+      this.saveStatus(4, "ProgramaReferidos", this.textoPrograma, this.htmlContentPrograma)
 
-      })
+    } else {
+      console.warn("Ocurrio algo extraño")
     }
 
 

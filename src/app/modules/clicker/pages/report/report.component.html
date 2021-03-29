@@ -36,13 +36,13 @@
       </div>
       <div class="acumulated mt-2">
         <app-card-data-total
-            [number]="totalAcumulated | currency: '':'symbol':'1.0-0'"
-            text="Total comisiones"
-            classCard="color-card-2"
-            [totalLinks]="totalLinks"
-            [totalProducts] ="totalProducts"
+            [radicado]="totalAcumulated | currency: '':'symbol':'1.0-0'"
+            description="Total comisiones"
+            classTotal="color-card-2"
+            [linksTotal]="totalLinks"
+            [productosTotales] ="totalProducts"
             [conversionRate]="conversionRate"
-            imgCard = "assets/img/icon-total.svg"
+            imgTotal = "assets/img/icon-total.svg"
             Classtag="gtmReportesClicMisComisionesSaldoAcumulado"
             
           ></app-card-data-total>
