@@ -9,18 +9,18 @@ export class CardDataTotalComponent implements OnInit {
 
   constructor() { }
 
-  @Input() number: string;
-  @Input() text: string;
-  @Input() textToolTip: string;
-  @Input() Classborder: string;
-  @Input() Classtag: string;
-  @Input() classCard: string;
-  @Input() imgCard: string;
-  @Input() totalLinks: number;
-  @Input() totalProducts: number;
+  @Input() radicado: string;
+  @Input() description: string;
+
+
+
+  @Input() classTotal: string;
+  @Input() imgTotal: string;
+  @Input() linksTotal: number;
+  @Input() productosTotales: number;
   @Input() conversionRate: number;
 
-  @Input() total: boolean;
+
   @Output() openDetail = new EventEmitter;
 
   ngOnInit() {

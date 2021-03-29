@@ -80,8 +80,8 @@ describe('AddEditBlogAdminComponent', () => {
     component.readURL(mockEvt);
     let datos = true
     component.saveeraser();
-    component.comprobarText();
-    component.deleteArticle();
+    component.checkInput("texto");
+    component.delete();
     expect(datos).toBeTruthy();
   })
 });

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
 import Swal from 'sweetalert2';
 import * as moment from "moment";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContentService } from 'src/app/services/content.service';
 import { Router } from '@angular/router';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 moment.locale("es");
 @Component({
   selector: 'app-add-edit-blog-admin',
@@ -12,6 +11,11 @@ moment.locale("es");
   styleUrls: ['./add-edit-blog-admin.component.scss']
 })
 export class AddEditBlogAdminComponent implements OnInit {
+
+  constructor(
+    public router: Router,
+    private content: ContentService,
+  ) { }
   validFormat: boolean;
   fileImgCat: any;
   formData: FormData = new FormData();
@@ -19,17 +23,16 @@ export class AddEditBlogAdminComponent implements OnInit {
   showErrorCert: boolean;
   activebutton: boolean;
   visualizationImag: any;
-  titleArticle: string = "";
-  author: string = "";
+  title: string = "";
+  escritor: string = "";
   etiquetas: string = "";
+  disabledButtonEr: boolean = true;
+  disabledButtonPu: boolean = true;
   visible: boolean = false;
   datePublication: any = "";
   hourDate: any = "";
-  constructor(
-    public router: Router,
-    private content: ContentService,
-  ) { }
-  editorConfig: AngularEditorConfig = {
+  contadorDates: number = 0;
+  configurationEditor: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
     height: '450px',
@@ -58,14 +61,13 @@ export class AddEditBlogAdminComponent implements OnInit {
         'justifyFull']
     ]
   };
-  htmlContent: string;
-  disabledButtonEraser: boolean = true;
-  disabledButtonPublication: boolean = true;
+  contenidoHTML: string;
+
   ngOnInit() {
 
   }
 
-  private getExtension(nameFile: string, getSize: number) {
+  private setExten(nameFile: string, getSize: number) {
     let splitExt = nameFile.split(".");
     let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
     this.validFormat = false;
@@ -83,7 +85,7 @@ export class AddEditBlogAdminComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
       let fileList: FileList = event.target.files;
-      this.getExtension(fileList[0].name, fileList[0].size);
+      this.setExten(fileList[0].name, fileList[0].size);
       if (this.validFormat === true) {
         this.formData.append('File', fileList[0], fileList[0].name.replace(' ', '_'));
         this.formData.append('imageUrl', file.name.replace(' ', '_'));
@@ -92,7 +94,7 @@ export class AddEditBlogAdminComponent implements OnInit {
         const reader = new FileReader();
         reader.onload = e => this.visualizationImag = reader.result;
         reader.readAsDataURL(file);
-        this.comprobarText();
+        this.checkInput("texto");
       }
     }
   }
@@ -107,16 +109,14 @@ export class AddEditBlogAdminComponent implements OnInit {
     }
 
     //console.log(datePublication + ' ' + hour);
-    this.formData.append('title', this.titleArticle);
-    this.formData.append('content', this.htmlContent);
-    this.formData.append('author', this.author);
+    this.formData.append('title', this.title);
+    this.formData.append('content', this.contenidoHTML);
+    this.formData.append('author', this.escritor);
     this.formData.append('tags', this.etiquetas);
     this.formData.append('visible', '' + this.visible);
     this.formData.append('publicationDate', datePublication + ' ' + hour + ':00');
     this.content.saveBlog(this.formData).subscribe((resp) => {
-      this.router.navigate([
-        "/blog-admin"
-      ]);
+      this.GoToBack()
     })
 
   }
@@ -145,19 +145,35 @@ export class AddEditBlogAdminComponent implements OnInit {
     }
   }
 
-  comprobarText() {
-    if (this.titleArticle != "" && this.htmlContent != "" && this.author != "" && this.etiquetas != "") {
-      this.disabledButtonEraser = false;
+  checkInput(elemento) {
+    console.log("Texto");
+    if (this.title != "" && this.contenidoHTML != "" && this.escritor != "" && this.etiquetas != "") {
+      this.disabledButtonEr = false;
     }
-    if (this.titleArticle != "" && this.htmlContent != "" && this.author != "" && this.etiquetas != "" && this.datePublication != "" && this.hourDate != "") {
-      this.disabledButtonPublication = false;
+    console.log(elemento);
+    if (elemento != undefined) {
+      this.contadorDates += 1
+    }
+
+    if (this.title != "" && this.contenidoHTML != "" && this.escritor != "" && this.etiquetas != "") {
+      if (this.contadorDates > 2) {
+        this.disabledButtonPu = false;
+      } else {
+        this.disabledButtonPu = true;
+      }
+
     }
     if (this.nameFileCert === "") {
-      this.disabledButtonPublication = true;
-      this.disabledButtonEraser = true;
+      this.disabledButtonPu = true;
+      this.disabledButtonEr = true;
     }
   }
-  deleteArticle() {
+  GoToBack() {
+    this.router.navigate([
+      "/blog-admin"
+    ]);
+  }
+  delete() {
     Swal.fire({
       html: "<h3 class='delete-title-comision'>Eliminar artículo</h3> <p class='w-container'>¿Estás seguro de eliminar el artículo seleccionado?</p>",
       confirmButtonText: "Eliminar artículo",
@@ -168,9 +184,7 @@ export class AddEditBlogAdminComponent implements OnInit {
       allowOutsideClick: false
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
-        this.router.navigate([
-          "/blog-admin"
-        ]);
+        this.GoToBack()
       }
     })
   }

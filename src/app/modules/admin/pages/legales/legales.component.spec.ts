@@ -22,6 +22,25 @@ describe('LegalesComponent', () => {
     Status: "Success",
 
   }
+  let responseTerms = {
+    Status: "Success",
+    objectResponse: [{
+      sectionValue: "Contenido",
+      sectionTitle: "Title"
+    },
+    {
+      sectionValue: "Contenido",
+      sectionTitle: "Title"
+    },
+    {
+      sectionValue: "Contenido",
+      sectionTitle: "Title"
+    },
+    {
+      sectionValue: "Contenido",
+      sectionTitle: "Title"
+    }]
+  }
   const mockMasterService = jasmine.createSpyObj("MasterDataService", [
     "getTerms", "setTerms"
   ]);
@@ -55,7 +74,7 @@ describe('LegalesComponent', () => {
       providers: [{ provide: MasterDataService, useValue: mockMasterService },]
     })
       .compileComponents();
-    mockMasterService.getTerms.and.returnValue(of(response));
+    mockMasterService.getTerms.and.returnValue(of(responseTerms));
     mockMasterService.setTerms.and.returnValue(of(response));
   }));
 
@@ -68,7 +87,7 @@ describe('LegalesComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('save terms', () => {
+  it('component', () => {
     component.saveLegal("1");
     component.saveLegal("2");
     component.saveLegal("3");
@@ -76,5 +95,6 @@ describe('LegalesComponent', () => {
     let datos = true;
     expect(datos).toBeTruthy();
   })
+
 });
 

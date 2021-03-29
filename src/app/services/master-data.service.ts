@@ -12,14 +12,21 @@ import { Observable } from "rxjs";
 export class MasterDataService {
 
   constructor(private http: HttpClient, private auth: AuthService) { }
-
+  token = localStorage.getItem("ACCESS_TOKEN");
+  authorization = this.token;
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
       'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
     })
   };
-
+  httpOptionsSet = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + this.authorization,
+      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
+    })
+  };
   url = environment.URL_MASTER;
   apiDepartment = 'data/getDeparments';
   apiBanks = 'data/getBanks';
@@ -37,7 +44,7 @@ export class MasterDataService {
   }
   public setTerms(data: any) {
     return this.http
-      .post(`${this.url + this.apiSetTerms}`, data, this.httpOptions)
+      .post(`${this.url + this.apiSetTerms}`, data, this.httpOptionsSet)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
