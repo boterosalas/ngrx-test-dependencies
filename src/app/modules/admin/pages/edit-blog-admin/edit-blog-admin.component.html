@@ -1,0 +1,159 @@
+<app-banner
+  title="Blog"
+  img="/assets/img/banners/banner-dashboard-pc.jpg"
+  imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
+></app-banner>
+<div class="container">
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <h3>Crear / Editar artículo</h3>
+        <span  fxLayout="row" >
+            <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
+            <button mat-button [routerLink]="[ '/blog-admin']">
+                <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                    Volver
+                </span>
+            </button>
+          </span>
+    </div>
+    <div fxLayout="row"> 
+    <mat-card style="width: 745px;">
+        <mat-form-field style="width: 710px;">
+            <input
+              matInput
+              style="color: #37236A;"
+              id="titleArticles"
+              type="text"
+              placeholder="TITULO DEL ARTÍCULO"
+              [(ngModel)]="titleArticle"
+              (ngModelChange)="comprobarText()"
+              required
+            />
+          </mat-form-field>
+        <h4>CONTENIDO</h4>
+        <angular-editor (ngModelChange)="comprobarText()" [config]="editorConfig" [(ngModel)]="htmlContent"></angular-editor>
+    </mat-card>
+    <div>
+    <mat-card class="ml-2" style="width: 330px; height: 390px;">
+        <mat-form-field style="width: 300px;">
+            <input
+              matInput
+              style="color: #37236A;"
+              id="athortext"
+              type="text"
+              placeholder="AUTOR"
+              [(ngModel)]="author"
+              (ngModelChange)="comprobarText()"
+              required
+            />
+          </mat-form-field>
+          <p class="place-holeder-image">PORTADA (1560X840PX, FORMATO .JPG, MAX 300kb)</p>
+          <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" >
+            <div fxLayout="column" fxLayoutAlign="center" class="space">
+                <div >
+                    <label for="image" id="upload" class="cursor-pointer">
+                      <span  *ngIf="!showErrorCert">
+                      <img
+                        class="mt-1 image-load-visual"
+                        *ngIf="nameFileCert === ''"
+                        src="/assets/img/image-file-upload.svg"
+                        alt="upload"
+                      />
+                      <img
+                        class="mt-1 imagen-visual"
+                        *ngIf="nameFileCert !== ''"
+                        [src]="visualizationImag"
+                        alt="upload"
+                      />
+                    </span>
+                      <img
+                      class="mt-1 w-icon image-load-visual"
+                      *ngIf="showErrorCert"
+                      src="/assets/img/icono-error-carga.svg"
+                      alt="upload"
+                    />
+                    </label>
+                  </div>
+              <span class="title-secondary" *ngIf="nameFileCert === ''">Seleccionar un archivo</span>
+              <span class="file-input-name" *ngIf="nameFileCert !== ''">{{
+                nameFileCert | truncate: '20'
+              }}</span>
+            </div>
+            
+          </div>
+          <mat-error *ngIf="showErrorCert" class="text-small small pb-2 d-block">
+            Formato inválido solo se pueden subir archivos con la extensión JPG y menores de 300KB
+          </mat-error>
+        
+          <input
+            (change)="readURL($event)"
+            id="image"
+            type="file"
+          />
+          <mat-form-field style="width: 300px;">
+            <input
+              matInput
+              style="color: #37236A;"
+              id="etiquetastext"
+              type="text"
+              [(ngModel)]="etiquetas"
+              placeholder="ETIQUETAS"
+              (ngModelChange)="comprobarText()"
+              required
+            />
+          </mat-form-field>
+    </mat-card>
+    <mat-card class="ml-2 mt-2">
+        <h4 class="publications-style">PUBLICACIÓN</h4>
+        <div>
+            Visible <mat-slide-toggle [(ngModel)]="visible" style="margin-left:5px; position: relative;
+            top: 2px;" (change)="activate(item)"  color="orange2-toggle" ></mat-slide-toggle>
+        </div>
+        
+        <div fxLayout="row" class="mt-2" style="position: relative;">
+            <div>
+            <label class="label-up-text mt-2" for="picker"> FECHA DE PUBLICACIÓN <b style="color: #F21905;">*</b> </label>               
+            <div fxLayout="row" class="mt-2">
+            <mat-datepicker class="icon-date" touchUi #picker></mat-datepicker>
+            <mat-datepicker-toggle
+              class="icon-date"
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <input
+              matInput
+              (click)="picker.open()"
+              [matDatepicker]="picker"
+              [max]="maxDate"
+              readonly
+              (ngModelChange)="comprobarText()"
+              [(ngModel)]="datePublication"
+              class=" border-input mat-elevation-z1 p-2 border-radius"
+            />
+        </div>
+        </div>
+        <div style="position: relative;">
+            <label class="label-up-text mt-2" for="picker"> HORA DE PUBLICACIÓN <b style="color: #F21905;">*</b> </label>               
+            <div>
+                <mat-icon class="clock-time">alarm</mat-icon>
+                <input (ngModelChange)="comprobarText()" [(ngModel)]="hourDate"  matInput aria-label="default time" [ngxTimepicker]="defaultValue" readonly class="form-control  mat-elevation-z1 p-2 border-radius">
+                <ngx-material-timepicker  #defaultValue></ngx-material-timepicker>
+            </div>
+        </div>
+
+        </div>
+        <div class="mt-2">
+            <button mat-raised-button class="button-save" (click)="saveeraser()" [disabled]="disabledButtonEraser"
+            >Guardar como borrador </button>
+        </div>
+        <div class="mt-2" fxLayout="row" fxLayoutAlign="space-between">
+            <button mat-raised-button class="button-save-programmer" (click)="saveeraser()" [disabled]="disabledButtonPublication"
+            >Publicar cambios </button>
+            <button mat-raised-button class="button-delete"     (click)="deleteArticle()"
+            >Eliminar </button>
+        </div>
+       
+    </mat-card>
+</div>
+    </div>
+</div>

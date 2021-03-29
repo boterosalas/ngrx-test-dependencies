@@ -84,6 +84,10 @@ import { ReportIconsClickamComponent } from './pages/help-center/report-files/re
 // import { ReportComponent } from '../clicker/components/report/report.component';
 import { ReportNewsComponent } from './pages/help-center/report-news/report-news.component';
 import { ReportStatusComponent } from "./pages/help-center/report-files/report-status/report-status.component";
+import { BlogsComponent } from './pages/blogs/blogs.component';
+import { BlogContentComponent } from './pages/blog-content/blog-content.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { NewBlogComponent } from './components/new-blogs/new-blog.component';
 const routes: Routes = [
   {
     path: "",
@@ -109,6 +113,14 @@ const routes: Routes = [
   {
     path: "click-academy/:video",
     component: ClickAcademyComponent,
+  },
+  {
+    path: "blog",
+    component: BlogsComponent,
+  },
+  {
+    path: "blog/:blog",
+    component: BlogContentComponent,
   },
   {
     path: "centro-de-ayuda",
@@ -366,6 +378,7 @@ const routes: Routes = [
     BussinessCardComponent,
     ComissionTableComponent,
     NewBusinessComponent,
+    NewBlogComponent,
     NewBusinessFormComponent,
     UrlComponent,
     ActivateAccountFormComponent,
@@ -414,7 +427,9 @@ const routes: Routes = [
     HomeSlideVideoComponent,
     ReportNewsComponent,
     ReportIconsClickamComponent,
-    ReportStatusComponent
+    ReportStatusComponent,
+    BlogsComponent,
+    BlogContentComponent
   ],
   imports: [
     FormsModule,
@@ -431,6 +446,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     MatPasswordStrengthModule,
     RecaptchaV3Module,
+    AngularEditorModule
+
   ],
   exports: [
     RouterModule,

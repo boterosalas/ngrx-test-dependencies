@@ -53,7 +53,14 @@ export class ContentService {
   apiDownloadContent = "library/downloadzip";
   apiSaveComision = "business/savecommissiontable";
   apiDeleteComision = "business/deletecommissiontable";
-  apiSaverefer = "link/savelinkreferredvisit"
+  apiSaverefer = "link/savelinkreferredvisit";
+  apiGetBlog = "blog/getblogs";
+  apiGetBlogIndividual = "blog/getblog";
+  apiDeleteBlog = "blog/deleteblog";
+  apiSaveBlog = "blog/saveblog";
+  apiActivateBlog = "blog/activeblog";
+  apiSaveBussiness = "business/savebusiness"
+  apiSendMessage = "blog/sendmail";
   sendSearch = {};
 
   public getNews() {
@@ -541,6 +548,133 @@ export class ContentService {
         })
       );
   }
-
-
+  public getBlogs(data) {
+    return this.http
+      .get(
+        `${this.url + this.apiGetBlog}?from=${data.from}&to=${data.to}&orderBy=${data.orderBy}`,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((business: ResponseService) => {
+          return business;
+        })
+      );
+  }
+  public getBlogsAdmin(data) {
+    return this.http
+      .get(
+        `${this.url + this.apiGetBlog}?from=${data.from}&to=${200}&orderBy=${data.orderBy}&visible=true`,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((business: ResponseService) => {
+          return business;
+        })
+      );
+  }
+  public getIndividualBlog(data) {
+    return this.http
+      .get(
+        `${this.url + this.apiGetBlogIndividual}?path=${data}`,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((business: ResponseService) => {
+          return business;
+        })
+      );
+  }
+  public getIndividualBlogId(data) {
+    return this.http
+      .get(
+        `${this.url + this.apiGetBlogIndividual}?id=${data}`,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((business: ResponseService) => {
+          return business;
+        })
+      );
+  }
+  public deleteBlog(data: any) {
+    return this.http
+      .delete(`${this.url + this.apiDeleteBlog}?id=${data}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+  }
+  public saveBlog(data: any) {
+    let httpOptionsSet = {
+      headers: new HttpHeaders({
+        Authorization: "Bearer " + this.authorization,
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
+    };
+    return this.http
+      .post(`${this.url + this.apiSaveBlog}`, data, httpOptionsSet);
+  }
+  public activeBlog(data: any) {
+    let httpOptionsSet = {
+      headers: new HttpHeaders({
+        Authorization: "Bearer " + this.authorization,
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
+    };
+    return this.http
+      .post(`${this.url + this.apiActivateBlog}`, data, httpOptionsSet);
+  }
+  public saveBussiness(data: any) {
+    let httpOptionsSet = {
+      headers: new HttpHeaders({
+        Authorization: "Bearer " + this.authorization,
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
+    };
+    return this.http
+      .post(`${this.url + this.apiSaveBussiness}`, data, httpOptionsSet);
+  }
+  public sendMessage(data: any) {
+    let httpOptionsSet = {
+      headers: new HttpHeaders({
+        Authorization: "Bearer " + this.authorization,
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
+    };
+    return this.http
+      .post(`${this.url + this.apiSendMessage}`, data, httpOptionsSet);
+  }
 }

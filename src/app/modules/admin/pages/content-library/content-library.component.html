@@ -50,15 +50,12 @@
         <ng-container class="mt-4" *ngFor="let product of dataReal; let i = index">
             <div class="image-hover">
                 <img class="image-size" [src]="product.url" alt="">
-                <div class="image-background">
-                    <div class="image-viewer-x"  (click)="viewerPhoto(product)"></div>
-                    <div class="image-viewer-y"  (click)="viewerPhoto(product)"></div>
-                    <img class="cursor-pointer image-vysor" (click)="viewerPhoto(product)" src="assets/img/dashboard/icon-view-img.svg" alt="">
-                    <div class="custom-color-primary">
-                        <mat-checkbox [(ngModel)]="product.dataR" (change)="loadDelete()" class="check-margin">
-                        </mat-checkbox>
-                    </div>
-                    
+                <div class="manager-check custom-color-primary">
+                    <mat-checkbox [(ngModel)]="product.dataR" (change)="loadDelete()" class="check-margin">
+                    </mat-checkbox>
+                </div>
+                <div class="cursor-pointer image-background" (click)="viewerPhoto(product)">
+                    <mat-icon class="cursor-pointer image-vysor">remove_red_eye</mat-icon>
                 </div>
             </div>
         </ng-container>

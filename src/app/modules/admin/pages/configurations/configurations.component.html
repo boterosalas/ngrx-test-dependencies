@@ -1,0 +1,44 @@
+<app-banner
+  title="Configuración"
+  img="/assets/img/banners/banner-dashboard-pc.jpg"
+  imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
+></app-banner>
+<div class="container">
+    <form [formGroup]="dateForm"  >
+        <div fxLayout="row">
+    <mat-form-field class="selected-report">
+        <mat-placeholder class="selected-placeholder">USUARIO</mat-placeholder>
+        <mat-select
+          id="tipoReport"
+          class="selected-report"
+          formControlName="users"
+        >
+          <mat-option (click)="onChangeSelected(selected.titulo)" *ngFor="let selected of selecteds" value="{{ selected.titulo }}">
+            <span >{{ selected.titulo }}</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="super-admin">
+          SUPER ADMIN
+      </div>
+    </div>
+    </form>
+    <table mat-table [dataSource]="servicios" class="users-table"  >
+        <ng-container matColumnDef="modulo">
+            <th mat-header-cell *matHeaderCellDef style="width: 40%; font-weight: bold; ">MODULO</th>
+            <td  mat-cell *matCellDef="let element: let i=index" (click)="userInfo((dataSource.data)[i])"> 
+            <p class="m-0 galano-bold text-font">{{element.titulo}}</p>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="activations">
+            <th mat-header-cell *matHeaderCellDef style="width: 40%; font-weight: bold; text-align: end;">ACTIVAR/DESACTIVAR</th>
+            <td mat-cell *matCellDef="let element: let i=index" (click)="userInfo((dataSource.data)[i])"> 
+                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign.gt-xs="end center" fxLayoutAlign.xs="center center">
+                    <mat-slide-toggle [(ngModel)]="element.activo" color="orange2-toggle" (change)="activate(element)"></mat-slide-toggle>
+                </div>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;let i= index" ></tr>
+    </table>
+</div>

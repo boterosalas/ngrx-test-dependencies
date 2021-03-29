@@ -143,7 +143,7 @@ export class LinksHistorialComponent implements OnInit {
   }
 
   buy() {
-    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (iOS) {
       window.location.assign(this.urlshorten);
     } else {

@@ -1,0 +1,48 @@
+@import "variables";
+@import "general";
+
+.radius {
+  border-radius: 10px;
+}
+.link-refer {
+  text-align: end;
+  margin-top: 40px;
+  font-size: 17px;
+}
+.newblog__text {
+  margin-bottom: 10px;
+}
+.newblog__img {
+  position: relative;
+  height: 300px;
+}
+.imagen-responsive-blog {
+  position: absolute;
+}
+.content-type {
+  position: absolute;
+  top: 70px;
+  z-index: 10;
+  left: 20px;
+}
+.imagen-responsive-blog-mobile {
+  position: relative;
+}
+.text-title-blog {
+  font-size: 22px !important;
+  margin-bottom: 0px !important;
+}
+.text-line-blog {
+  font-size: 18px;
+  color: #ffffff;
+  margin-top: 0px !important;
+  width: 55%;
+}
+@media screen and (max-width: 600px) {
+  .content-type {
+    position: absolute;
+    top: 0px;
+    z-index: 10;
+    left: 20px;
+  }
+}

@@ -60,8 +60,10 @@
   position: relative;
   bottom: 0px;
   visibility: hidden;
+  color: #ffffff;
 }
 .image-hover {
+  position: relative;
   height: 148px;
   margin-bottom: 10px;
 }
@@ -150,4 +152,10 @@ input[type="file"] {
 .icon-update {
   position: relative;
   bottom: 3px;
+}
+.manager-check {
+  position: absolute;
+  top: 8px;
+  right: 0px;
+  z-index: 100;
 }

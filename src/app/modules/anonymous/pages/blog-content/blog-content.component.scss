@@ -1,0 +1,41 @@
+@import "variables";
+.blog-image-content {
+  width: 100%;
+  height: 240px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.text-author-content {
+  font-style: italic;
+  font-family: $font-galano;
+}
+
+.text-date-content {
+  color: #726d7e;
+  font-family: $font-galano-bold;
+  font-size: 18px;
+}
+.container-blogs {
+  max-width: 780px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.button-padding {
+  padding-left: 0px !important;
+}
+.hiden-link {
+  color: transparent;
+  border-color: transparent;
+  background-color: transparent;
+}
+.button-save {
+  background-color: #37236a;
+  box-shadow: 0px 3px 9px #3a226a80;
+  color: #ffffff;
+}
+.style-blogs {
+  text-align: justify;
+  p {
+    text-align: justify;
+  }
+}

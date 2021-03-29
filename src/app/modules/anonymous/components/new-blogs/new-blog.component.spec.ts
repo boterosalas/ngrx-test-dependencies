@@ -1,0 +1,31 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { NewBlogComponent } from './new-blog.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+
+describe('NewBusinessComponent', () => {
+  let component: NewBlogComponent;
+  let fixture: ComponentFixture<NewBlogComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [NewBlogComponent],
+      imports: [
+        TranslateModule.forRoot(),
+        AppMaterialModule
+      ]
+    })
+      .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(NewBlogComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

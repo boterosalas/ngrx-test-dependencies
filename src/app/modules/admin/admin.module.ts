@@ -41,7 +41,14 @@ import { NewsAdminComponent } from './pages/news-admin/news-admin.component'
 import { DialogNewsComponent } from './components/dialog-news/dialog-news.component'
 import { ContentLibraryComponent } from './pages/content-library/content-library.component'
 import { DialogVideoPlayerComponent } from './components/dialog-video-player/dialog-video-player.component';
-import { DialogCommissionComponent } from './pages/dialog-commission/dialog-commission.component'
+import { DialogCommissionComponent } from './pages/dialog-commission/dialog-commission.component';
+import { LegalesComponent } from './pages/legales/legales.component'
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { BlogAdminComponent } from './pages/blog-admin/blog-admin.component';
+import { AddEditBlogAdminComponent } from './pages/add-edit-blog-admin/add-edit-blog-admin.component';
+import { EditBlogAdminComponent } from './pages/edit-blog-admin/edit-blog-admin.component';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { ConfigurationsComponent } from './pages/configurations/configurations.component';
 const routes: Routes = [
   {
     path: "",
@@ -130,12 +137,53 @@ const routes: Routes = [
     data: {
       role: "ADMIN"
     },
+  },
+  {
+    path: "legales",
+    component: LegalesComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN"
+    },
+  },
+  {
+    path: "blog-admin",
+    component: BlogAdminComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN"
+    },
+  },
+  {
+    path: "add-edit-blog-admin",
+    component: AddEditBlogAdminComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN"
+    },
+  },
+  {
+    path: "edit-blog-admin",
+    component: EditBlogAdminComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN"
+    },
+  },
+  {
+    path: "configurations",
+    component: ConfigurationsComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN"
+    },
   }
 ];
 
 @NgModule({
   declarations: [
     DashboardComponent,
+    EditBlogAdminComponent,
     SideMenuComponent,
     ReportsComponent,
     CardComponent,
@@ -160,10 +208,16 @@ const routes: Routes = [
     DialogNewsComponent,
     ContentLibraryComponent,
     DialogVideoPlayerComponent,
-    DialogCommissionComponent
+    DialogCommissionComponent,
+    LegalesComponent,
+    BlogAdminComponent,
+    AddEditBlogAdminComponent,
+    ConfigurationsComponent
   ],
   imports: [
+    AngularEditorModule,
     CommonModule,
+    NgxMaterialTimepickerModule,
     DragDropModule,
     RouterModule.forChild(routes),
     SharedModule,

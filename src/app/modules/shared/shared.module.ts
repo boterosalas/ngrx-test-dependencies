@@ -97,4 +97,4 @@ import { TrimPipe } from 'src/app/pipes/trim.pipe';
     ModalGenericComponent
   ]
 })
-export class SharedModule {}
+export class SharedModule { }

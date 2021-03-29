@@ -1,0 +1,86 @@
+@import "variables";
+.place-holeder-image {
+  color: #a7a3b1;
+  font-family: $font-galano-bold;
+  font-size: 11px;
+}
+input[type="file"] {
+  display: none;
+}
+.imagen-visual {
+  width: 300px;
+  height: 169px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.image-load-visual {
+  width: 300px;
+  height: 169px;
+  border-radius: 10px;
+  border: 1px dashed #8c80b4;
+  object-fit: none;
+}
+.file-input-name {
+  color: #37236a;
+  font-size: 12px;
+}
+.publications-style {
+  border-bottom: 1px solid #8d8d8d9a;
+  padding-bottom: 2px;
+}
+.icon-date {
+  position: absolute;
+  z-index: 100;
+  bottom: 0px;
+}
+.form-control {
+  width: 140px;
+  right: 0px;
+  position: absolute;
+  margin-top: 4px;
+  padding-left: 35px !important;
+}
+.border-input {
+  width: 140px;
+  margin-right: 10px;
+  padding-left: 35px !important;
+}
+
+.border-radius {
+  border: none;
+  outline: none;
+  height: 32px;
+  border-radius: 5px;
+}
+.label-up-text {
+  color: #a7a3b1;
+  font-family: $font-galano-bold !important;
+  margin-top: 15px;
+  font-size: 11px;
+}
+.clock-time {
+  position: relative;
+  z-index: 100;
+  top: 8px;
+  left: 8px;
+}
+.button-save {
+  background-color: #8d7eb7;
+  box-shadow: 0px 3px 9px #8d7eb780;
+  color: #ffffff;
+}
+.button-save-programmer {
+  background-color: #37236a;
+  box-shadow: 0px 3px 9px #3a226a80;
+  color: #ffffff;
+}
+.button-delete {
+  background-color: #f21905;
+  box-shadow: 0px 3px 9px #f2190580;
+  color: #ffffff;
+}
+
+.text-small {
+  font-size: 10px;
+  margin-top: 0px;
+}

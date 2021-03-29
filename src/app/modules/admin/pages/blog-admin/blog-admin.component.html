@@ -1,0 +1,77 @@
+<app-banner
+  title="Blog"
+  img="/assets/img/banners/banner-dashboard-pc.jpg"
+  imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
+></app-banner>
+<div class="container">
+    <div fxLayout="row">
+        <h3>Artículos publicados</h3>
+        <hr class="line-medium">
+    </div>
+    <div *ngIf="blogPublicado.length>0" class="container-blogs">
+        <div *ngFor="let item of blogPublicado">
+        <mat-card class="card-padding">
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <div fxLayout="row">
+                    <img class="imagen-blog" [src]="item.imageurl" alt="">
+                    <div class="ml-3" fxLayout="column">
+                        <h4 class="title-content mt-2">{{item.title}}</h4>
+                        <p class="mt-0 mb-0"><strong>{{item.author}} </strong> {{item.date  | date: 'yyyy/MM/dd'}}</p>
+                    </div>
+                </div>
+                <div class="mt-2 mr-3">
+                    <div>
+                        Mostrar / ocultar <mat-slide-toggle style="margin-left:5px; position: relative;
+                        top: 2px;" [(ngModel)]="item.visible" color="orange2-toggle" (change)="activate(item)"></mat-slide-toggle>
+                    </div>
+                    <div class="mt-2" fxLayout="row" fxLayoutAlign="end">
+                        <img class="cursor-pointer" src="/assets/img/dashboard/icon-edit-full.svg" alt="" (click)="editArticle(item)">
+                        <img class="cursor-pointer" src="/assets/img/dashboard/icon-remove-comision.svg" alt=""  (click)="deleteArticle(item)">
+                    </div>
+                </div>
+            </div>
+
+        </mat-card>
+        </div>
+    </div>
+    <div *ngIf="blogPublicado.length===0" >
+        <p style="font-size: 18px; font-weight: bold;">No hay artículos publicados</p>
+    </div>
+    <div fxLayout="row">
+        <h3>Borradores</h3>
+        <hr class="line-medium" style="    width: 87%;">
+    </div>
+    <div *ngIf="blogHidden.length>0" class="container-blogs">
+        <div *ngFor="let item of blogHidden">
+            <mat-card class="card-padding">
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                    <div fxLayout="row">
+                        <img class="imagen-blog" [src]="item.imageurl" alt="">
+                        <div class="ml-3" fxLayout="column">
+                            <h4 class="title-content mt-2">{{item.title}}</h4>
+                            <p class="mt-0 mb-0"><strong>{{item.author}} </strong> {{item.date  | date: 'yyyy/MM/dd'}}</p>
+                        </div>
+                    </div>
+                    <div class="mt-2 mr-3">
+                        <div>
+                            Mostrar / ocultar <mat-slide-toggle style="margin-left:5px; position: relative;
+                            top: 2px;" [(ngModel)]="item.visible" color="orange2-toggle" (change)="activate(item)"></mat-slide-toggle>
+                        </div>
+                        <div class="mt-2" fxLayout="row" fxLayoutAlign="end">
+                            <img class="cursor-pointer" src="/assets/img/dashboard/icon-edit-full.svg" alt="" (click)="editArticle(item)">
+                            <img class="cursor-pointer" src="/assets/img/dashboard/icon-remove-comision.svg" alt="" (click)="deleteArticle(item)">
+                        </div>
+                    </div>
+                </div>
+    
+            </mat-card>
+            </div>
+    </div>
+    <div *ngIf="blogHidden.length===0" >
+        <p style="font-size: 18px; font-weight: bold;">No hay artículos en borrador</p>
+    </div>
+    <div class="container-blogs  mt-3 mb-3" fxLayout="row" fxLayoutAlign="end">
+        <button mat-raised-button class="button-save"    [routerLink]="[ '/add-edit-blog-admin' ]"
+        >Agregar artículo </button>
+    </div>
+</div>
