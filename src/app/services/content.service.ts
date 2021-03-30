@@ -658,14 +658,21 @@ export class ContentService {
       .post(`${this.url + this.apiActivateBlog}`, data, httpOptionsSet);
   }
   public saveBussiness(data: any) {
-    let httpOptionsSet = {
-      headers: new HttpHeaders({
-        Authorization: "Bearer " + this.authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-      }),
-    };
+
     return this.http
-      .post(`${this.url + this.apiSaveBussiness}`, data, httpOptionsSet);
+      .post(`${this.url + this.apiSaveBussiness}`, data, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
   }
   public sendMessage(data: any) {
     let httpOptionsSet = {

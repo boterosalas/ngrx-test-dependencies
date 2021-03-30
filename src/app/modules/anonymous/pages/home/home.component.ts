@@ -178,7 +178,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscription = this.auth.getRole$.subscribe((role) => {
       this.role = role;
       // let promoOpen = localStorage.getItem("ModalPromo");
-      if (role === "CLICKER" || role === "ADMIN") {
+      if (role === "CLICKER" || role === "ADMIN" || role === "SUPERADMIN") {
         this.subscription = this.user.getuserdata().subscribe((user) => {
           this.isEmployee = user.isEmployeeGrupoExito;
           this.managedPayments = user.managedPayments;
@@ -288,7 +288,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     let token = localStorage.getItem("ACCESS_TOKEN");
     if (token !== null) {
       let tokenDecode = decode(token);
-      if (tokenDecode.role === "ADMIN") {
+      if (tokenDecode.role === "ADMIN" || tokenDecode.role === "SUPERADMIN") {
         this.router.navigate(["/dashboard"]);
         this.auth.getRole$.next("ADMIN");
       }

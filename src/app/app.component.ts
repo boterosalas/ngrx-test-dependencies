@@ -139,7 +139,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.isLoggedIn = this.auth.isLoggedIn();
 
-    this.subscription =  this.router.events.subscribe(() => {
+    this.subscription = this.router.events.subscribe(() => {
       let urlLocation = location.prepareExternalUrl(location.path());
       let SplitLocation = urlLocation.split("/");
       this.classPage = SplitLocation[1];
@@ -258,7 +258,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public getUserData() {
     this.subscription = this.auth.getRole$.subscribe((role) => {
       this.role = role;
-      if (role === "CLICKER" || role === "ADMIN") {
+      if (role === "CLICKER" || role === "ADMIN" || role === "SUPERADMIN") {
         this.email = this.token.userInfo().userName;
         this.subscription = this.user.getuserdata().subscribe((user) => {
           this.firstName = user.firstNames;

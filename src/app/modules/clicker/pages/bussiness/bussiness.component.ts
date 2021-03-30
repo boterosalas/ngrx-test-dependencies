@@ -554,7 +554,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   public getUserData() {
     this.subscription = this.auth.getRole$.subscribe((role) => {
-      if (role === "CLICKER" || role === "ADMIN") {
+      if (role === "CLICKER" || role === "ADMIN" || role === "SUPERADMIN") {
         this.subscription = this.user.getuserdata().subscribe((user) => {
           this.acceptTermsDeliver = user.acceptTerms;
         });

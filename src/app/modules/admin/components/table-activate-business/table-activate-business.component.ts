@@ -31,6 +31,7 @@ export class TableActivateBusinessComponent implements OnInit {
   //dataSource: any;
   @Input() dataSource;
   @Output() activateBusiness = new EventEmitter;
+  @Output() updateBusiness = new EventEmitter;
   @ViewChild('table', { static: false }) table: MatTable<PeriodicElement>;
 
   @ViewChild("templateBussiness", { static: false }) templateBussiness: TemplateRef<
@@ -56,6 +57,8 @@ export class TableActivateBusinessComponent implements OnInit {
       placeholderBussiness: [null, Validators.required],
       codeReference: [null, Validators.required],
       image: [null],
+      generateExcel: [false],
+      visible: [false]
 
     });
   }
@@ -120,10 +123,10 @@ export class TableActivateBusinessComponent implements OnInit {
     let splitExt = nameFile.split(".");
     let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
     this.validFormat = false;
-    if (getExt === "svg" || getExt === "jpg") {
+    if (getExt === "svg") {
       this.validFormat = true;
     }
-    if (getSize / 1000 > 100) {
+    if (getSize / 1000 > 300) {
       this.validFormat = false;
     }
   }
@@ -136,16 +139,7 @@ export class TableActivateBusinessComponent implements OnInit {
     this.getExtension(fileList[0].name, fileList[0].size);
     //let sizeFile = event.target.files[0].size;
     this.getExtension(fileList[0].name, fileList[0].size);
-    if (this.validFormat === true) {
-      this.formData.append('File', fileList[0], fileList[0].name.replace(' ', '_'));
-      this.formData.append('imageUrl', file.name.replace(' ', '_'));
-      let nameFile = event.target.files[0].name;
-      this.nameFileCert = nameFile;
-      //const reader = new FileReader();
-      //reader.onload = e => this.visualizationImag = reader.result;
-      //reader.readAsDataURL(file);
-      //this.comprobarText();
-    }
+
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       let fileBlob = new Blob([file]);
@@ -169,11 +163,14 @@ export class TableActivateBusinessComponent implements OnInit {
   }
   editBussiness(element: any) {
     this.selectedItem = element;
+
     this.dateForm.controls.nameBussiness.setValue(this.selectedItem.description);
     this.dateForm.controls.detailBussiness.setValue(this.selectedItem.infoaditional);
     this.dateForm.controls.nameTableCommision.setValue(this.selectedItem.code);
     this.dateForm.controls.placeholderBussiness.setValue(this.selectedItem.placeholder);
-    this.dateForm.controls.codeReference.setValue(this.selectedItem.code);
+    this.dateForm.controls.codeReference.setValue(this.selectedItem.urlquerystring);
+    this.dateForm.controls.generateExcel.setValue(this.selectedItem.excelcommission);
+    this.dateForm.controls.visible.setValue(this.selectedItem.active);
     this.nameFileCert = this.selectedItem.imageurl;
     this.activebutton = true;
     const title = "Editar Negocio";
@@ -213,28 +210,44 @@ export class TableActivateBusinessComponent implements OnInit {
   saveBussiness() {
     //let datosSend = new FormData();
 
-    this.formData.append('nameBussiness', this.dateForm.controls.nameBussiness.value);
-    this.formData.append('detailBussiness', this.dateForm.controls.detailBussiness.value);
-    this.formData.append('nameTableCommision', this.dateForm.controls.nameTableCommision.value);
-    this.formData.append('placeholderBussiness', this.dateForm.controls.placeholderBussiness.value);
-    this.formData.append('codeReference', this.dateForm.controls.codeReference.value);
+    //this.formData.append('nameBussiness', this.dateForm.controls.nameBussiness.value);
+    //this.formData.append('detailBussiness', this.dateForm.controls.detailBussiness.value);
+    //this.formData.append('nameTableCommision', this.dateForm.controls.nameTableCommision.value);
+    //this.formData.append('placeholderBussiness', this.dateForm.controls.placeholderBussiness.value);
+    //this.formData.append('codeReference', this.dateForm.controls.codeReference.value);
+    let datos;
+    if (this.selectedItem) {
+      datos = {
+        id: this.selectedItem.id,
+        description: this.dateForm.controls.nameBussiness.value,
+        infoAditional: this.dateForm.controls.detailBussiness.value,
+        tabTableCommission: this.dateForm.controls.nameTableCommision.value,
+        placeHolder: this.dateForm.controls.placeholderBussiness.value,
+        active: this.dateForm.controls.visible.value,
+        urlQueryString: this.dateForm.controls.codeReference.value,
+        excelCommission: this.dateForm.controls.generateExcel.value,
+        imagen: this.fileImgCat,
+        imageURL: this.nameFileCert
+      }
+    } else {
+      datos = {
+        description: this.dateForm.controls.nameBussiness.value,
+        infoAditional: this.dateForm.controls.detailBussiness.value,
+        tabTableCommission: this.dateForm.controls.nameTableCommision.value,
+        placeHolder: this.dateForm.controls.placeholderBussiness.value,
+        active: this.dateForm.controls.visible.value,
+        urlQueryString: this.dateForm.controls.codeReference.value,
+        excelCommission: this.dateForm.controls.generateExcel.value,
+        imagen: this.fileImgCat,
+        imageURL: this.nameFileCert
+      }
+    }
 
-    //let datos = {
-    //  nameBussiness: this.dateForm.controls.nameBussiness.value,
-    //detailBussiness: this.dateForm.controls.detailBussiness.value,
-    //nameTableCommision: this.dateForm.controls.nameTableCommision.value,
-    //placeholderBussiness:this.dateForm.controls.placeholderBussiness.value,
-    //codeReference: this.dateForm.controls.codeReference.value
-    //}
-    this.content.saveBussiness(this.formData).subscribe((resp) => {
-      this.formData.delete('nameBussiness');
-      this.formData.delete('detailBussiness');
-      this.formData.delete('nameTableCommision');
-      this.formData.delete('placeholderBussiness');
-      this.formData.delete('codeReference');
-      this.formData.delete('File');
-      this.formData.delete('imageUrl');
-
+    this.content.saveBussiness(datos).subscribe((resp) => {
+      this.dateForm.reset();
+      this.selectedItem = "";
+      this.dialog.closeAll();
+      this.updateBusiness.emit();
     })
   }
 }

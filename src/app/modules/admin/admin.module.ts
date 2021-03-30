@@ -55,7 +55,8 @@ const routes: Routes = [
     component: DashboardComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN"
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
     }
   },
   {
@@ -63,15 +64,18 @@ const routes: Routes = [
     component: ReportsComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN"
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
     }
+
   },
   {
     path: "usuarios",
     component: UsersComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN"
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
     }
   },
   {
@@ -79,7 +83,8 @@ const routes: Routes = [
     component: AuditComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN"
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
     },
   },
   {
@@ -87,7 +92,8 @@ const routes: Routes = [
     component: BusinessComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN"
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
     },
   },
   {
@@ -95,7 +101,8 @@ const routes: Routes = [
     component: RefersComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN"
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
     },
   },
   {
@@ -103,7 +110,8 @@ const routes: Routes = [
     component: LinkGeneratorComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN"
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
     },
   },
   {
@@ -111,7 +119,8 @@ const routes: Routes = [
     component: NewsAdminComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN"
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
     },
   },
   {
@@ -119,7 +128,8 @@ const routes: Routes = [
     component: BussinessAdminComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN"
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
     },
   },
   {
@@ -127,7 +137,8 @@ const routes: Routes = [
     component: ContentLibraryComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN"
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
     },
   },
   {
@@ -135,7 +146,8 @@ const routes: Routes = [
     component: DialogCommissionComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN"
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
     },
   },
   {
@@ -143,7 +155,8 @@ const routes: Routes = [
     component: LegalesComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN"
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
     },
   },
   {
@@ -151,7 +164,8 @@ const routes: Routes = [
     component: BlogAdminComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN"
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
     },
   },
   {
@@ -159,7 +173,8 @@ const routes: Routes = [
     component: AddEditBlogAdminComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN"
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
     },
   },
   {
@@ -167,15 +182,17 @@ const routes: Routes = [
     component: EditBlogAdminComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN"
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
     },
   },
   {
-    path: "configurations",
+    path: "configuracion",
     component: ConfigurationsComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN"
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
     },
   }
 ];
