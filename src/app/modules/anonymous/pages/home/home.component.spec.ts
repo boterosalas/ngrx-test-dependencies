@@ -27,6 +27,7 @@ import { ServiceWorkerModule } from "@angular/service-worker";
 import { AngularFireModule } from "@angular/fire";
 import { LinksService } from "src/app/services/links.service";
 import { By } from '@angular/platform-browser';
+import { MasterDataService } from "src/app/services/master-data.service";
 
 class MockAuthService extends AuthService {
   isLoggedIn() {
@@ -55,6 +56,9 @@ describe("HomeComponent", () => {
   const mockUtilsService = jasmine.createSpyObj("UtilsService", [
     "showRegisterForm",
     "showloginForm",
+  ]);
+  const mockMasterService = jasmine.createSpyObj("MasterDataService", [
+    "getTerms", "setTerms"
   ]);
   const mockContentService = jasmine.createSpyObj("ContentService", [
     "getNews",
@@ -431,6 +435,25 @@ describe("HomeComponent", () => {
     ],
     web: [],
   };
+  let responseTerms = {
+    Status: "Success",
+    objectResponse: [{
+      sectionValue: "Contenido",
+      sectionTitle: "Title"
+    },
+    {
+      sectionValue: "Contenido",
+      sectionTitle: "Title"
+    },
+    {
+      sectionValue: "Contenido",
+      sectionTitle: "Title"
+    },
+    {
+      sectionValue: "Contenido",
+      sectionTitle: "Title"
+    }]
+  }
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -480,13 +503,14 @@ describe("HomeComponent", () => {
         { provide: AuthService, useClass: MockAuthService },
         { provide: UtilsService, useValue: mockUtilsService },
         { provide: ContentService, useValue: mockContentService },
+        { provide: MasterDataService, useValue: mockMasterService }
         // { provide: LinksService, useValue: mockLinksService },
       ],
       schemas: [
         // NO_ERRORS_SCHEMA
       ],
     }).compileComponents();
-
+    mockMasterService.getTerms.and.returnValue(of(responseTerms));
     mockUserService.activateProfile.and.returnValue(of(data));
     mockUserService.getuserdata.and.returnValue(of(dataUserC));
     mockUserService.saveUserAcceptTermsReferrals.and.returnValue(of(dataTerms));

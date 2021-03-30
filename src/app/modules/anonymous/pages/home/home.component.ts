@@ -31,6 +31,7 @@ import { ResponseService } from "src/app/interfaces/response";
 import { LinksService } from "src/app/services/links.service";
 import { MessagingService } from "src/app/shared/messaging.service";
 import { Meta } from '@angular/platform-browser';
+import { MasterDataService } from "src/app/services/master-data.service";
 
 @Component({
   selector: "app-login",
@@ -104,7 +105,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   amount: any;
   amountReferred: any;
   paymentPending: number;
-
+  //terms
+  contentTerminos: any;
+  contentProteccion: any;
+  contentTransparencia: any;
+  contentPrograma: any;
+  textTerminos: any;
+  textProteccion: any;
+  textTransparencia: any;
+  textPrograma: any;
   constructor(
     public router: Router,
     private route: ActivatedRoute,
@@ -118,6 +127,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private messagingService: MessagingService,
     private _snackBar: MatSnackBar,
     private metaTagService: Meta,
+    private personalInfo: MasterDataService,
   ) {
     /**
      *  Verifica que en la ruta de inicio exista el parametro de email y activa el usuario
@@ -171,9 +181,22 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getAmount();
     this.amount = localStorage.getItem('Amount');
     this.amountReferred = localStorage.getItem('AmonuntReferred');
+    this.getTerms();
   }
 
-
+  getTerms() {
+    this.personalInfo.getTerms().subscribe((resp: any) => {
+      console.log(resp);
+      this.contentTerminos = resp.objectResponse[0].sectionValue
+      this.contentProteccion = resp.objectResponse[1].sectionValue
+      this.contentTransparencia = resp.objectResponse[2].sectionValue
+      this.contentPrograma = resp.objectResponse[3].sectionValue
+      this.textTerminos = resp.objectResponse[0].sectionTitle
+      this.textProteccion = resp.objectResponse[1].sectionTitle
+      this.textTransparencia = resp.objectResponse[2].sectionTitle
+      this.textPrograma = resp.objectResponse[3].sectionTitle
+    })
+  }
   public getUserDataUser() {
     this.subscription = this.auth.getRole$.subscribe((role) => {
       this.role = role;
@@ -184,6 +207,9 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.managedPayments = user.managedPayments;
           this.newTerms = user.acceptTermsReferrals;
           this.getInfomonth();
+          if (this.newTerms === false) {
+            this.termsAndConditions();
+          }
         });
       }
       let interval = setInterval(() => {

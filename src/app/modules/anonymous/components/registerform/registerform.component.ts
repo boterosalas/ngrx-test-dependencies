@@ -29,6 +29,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     private utils: UtilsService,
     private dialog: MatDialog,
     private content: ContentService,
+    private personalInfo: MasterDataService,
   ) { }
 
   private subscription: Subscription = new Subscription();
@@ -50,7 +51,15 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   classMsg: string;
   amount: any;
   amountReferred: any;
-
+  //terms
+  contentTerminos: any;
+  contentProteccion: any;
+  contentTransparencia: any;
+  contentPrograma: any;
+  textTerminos: any;
+  textProteccion: any;
+  textTransparencia: any;
+  textPrograma: any;
   ngOnInit() {
     this.amount = localStorage.getItem('Amount');
     this.amountReferred = localStorage.getItem('AmonuntReferred');
@@ -127,11 +136,12 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       }
     );
     this.showRegisterForm = true;
+
     this.getidType();
   }
 
   public termsAndConditions() {
-
+    this.getTerms();
     const template = this.templateTerms;
     const title = "";
 
@@ -224,7 +234,19 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       }
     );
   }
-
+  getTerms() {
+    this.personalInfo.getTerms().subscribe((resp: any) => {
+      console.log(resp);
+      this.contentTerminos = resp.objectResponse[0].sectionValue
+      this.contentProteccion = resp.objectResponse[1].sectionValue
+      this.contentTransparencia = resp.objectResponse[2].sectionValue
+      this.contentPrograma = resp.objectResponse[3].sectionValue
+      this.textTerminos = resp.objectResponse[0].sectionTitle
+      this.textProteccion = resp.objectResponse[1].sectionTitle
+      this.textTransparencia = resp.objectResponse[2].sectionTitle
+      this.textPrograma = resp.objectResponse[3].sectionTitle
+    })
+  }
   /**
    * check para aceptar terminos y condiciones
    */

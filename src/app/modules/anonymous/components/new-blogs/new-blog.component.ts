@@ -8,16 +8,11 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class NewBlogComponent implements OnInit {
 
-  @Output() openModal = new EventEmitter;
-
   constructor() { }
 
   ngOnInit() {
   }
 
-  public registerBusiness() {
-    this.openModal.emit();
 
-  }
 
 }

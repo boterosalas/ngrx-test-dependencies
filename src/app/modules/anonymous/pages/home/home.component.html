@@ -73,7 +73,7 @@
 
 <div class="container">
   <span class="border-gray d-block mt-3"></span>
-  <app-blog-business (openModal)="openRegisterBusiness()"></app-blog-business>
+  <app-blog-business ></app-blog-business>
 </div>
 <div class="container">
   <span class=" d-block mt-3"></span>
@@ -108,9 +108,12 @@
   </div>
 
   <div class="terms" *ngIf="newTermsHTML">
-    <div class="fade-in" innerHtml="{{ 'TERMS.LEGAL' | translate }}"></div>
-    <div innerHtml="{{ 'TERMS.REFER' | translate: { sale: amountReferred | currency : '' : 'symbol' : '1.0-0', amount: amount | currency : '' : 'symbol' : '1.0-0' } }}"></div> 
     
+    <h2 class='border-bottom-orange-init'>{{textProteccion}}</h2>
+    <div [innerHtml]="contentProteccion"></div> 
+    
+    <h2 class='border-bottom-orange-init'>{{textPrograma}}</h2>
+    <div [innerHtml]="contentPrograma"></div> 
     <div class="mb-3">
       <span>
         <mat-checkbox  id="chkaccept" (change)="acceptTermsCheck($event)">

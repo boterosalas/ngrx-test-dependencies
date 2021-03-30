@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { MasterDataService } from 'src/app/services/master-data.service';
 @Component({
@@ -9,7 +10,8 @@ import { MasterDataService } from 'src/app/services/master-data.service';
 export class LegalesComponent implements OnInit {
 
   constructor(
-    private personalInfo: MasterDataService
+    private personalInfo: MasterDataService,
+    private _snackBar: MatSnackBar,
   ) { }
 
   configurarEditor: AngularEditorConfig = {
@@ -66,9 +68,16 @@ export class LegalesComponent implements OnInit {
       this.textoPrograma = resp.objectResponse[3].sectionTitle
     })
   }
+  private openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5000
+    });
+  }
   saveLegalEndpoint() {
     this.personalInfo.setTerms(this.datos).subscribe((resp) => {
-
+      if (resp.state === "Success") {
+        this.openSnackBar(resp.userMessage, 'Cerrar');
+      }
     })
   }
   saveStatus(id, keyUp, texto, htmlContenido) {

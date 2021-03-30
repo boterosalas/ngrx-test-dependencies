@@ -26,7 +26,9 @@ describe("RegisterformComponent", () => {
     "idType",
     "registerUser"
   ]);
-
+  const mockMasterService = jasmine.createSpyObj("MasterDataService", [
+    "getTerms", "setTerms"
+  ]);
   const mockDialog = jasmine.createSpyObj("MatDialog", ["open", "closeAll"]);
 
   const mockUtilsService = jasmine.createSpyObj("UtilsService", ["showloginForm"]);
@@ -105,7 +107,25 @@ describe("RegisterformComponent", () => {
     userMessage: null,
     objectResponse: false
   };
-
+  let responseTerms = {
+    Status: "Success",
+    objectResponse: [{
+      sectionValue: "Contenido",
+      sectionTitle: "Title"
+    },
+    {
+      sectionValue: "Contenido",
+      sectionTitle: "Title"
+    },
+    {
+      sectionValue: "Contenido",
+      sectionTitle: "Title"
+    },
+    {
+      sectionValue: "Contenido",
+      sectionTitle: "Title"
+    }]
+  }
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [RegisterformComponent],
@@ -132,13 +152,14 @@ describe("RegisterformComponent", () => {
         })
       ],
       providers: [
+        { provide: MasterDataService, useValue: mockMasterService },
         { provide: UserService, useValue: mockUserService },
         { provide: UtilsService, useValue: mockUtilsService },
         { provide: Router, useValue: mockRouter },
-        { provide: MatDialog, useValue: mockDialog}
+        { provide: MatDialog, useValue: mockDialog }
       ]
     }).compileComponents();
-
+    mockMasterService.getTerms.and.returnValue(of(responseTerms));
     mockUserService.idType.and.returnValue(of(idType));
     mockUserService.registerUser.and.returnValue(of(register));
   }));
@@ -228,9 +249,9 @@ describe("RegisterformComponent", () => {
     component.termsAndConditions();
     expect(mockDialog.open).toHaveBeenCalled();
   });
-  
-  
-  
+
+
+
 
   describe("register invalid", () => {
     beforeEach(() => {
@@ -245,7 +266,7 @@ describe("RegisterformComponent", () => {
   });
 
   describe("invalid request", () => {
-    beforeEach(function() {
+    beforeEach(function () {
       mockUserService.registerUser.and.returnValue(throwError(InvalidRquest));
     });
 
