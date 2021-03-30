@@ -13,6 +13,7 @@ moment.locale("es");
   styleUrls: ['./edit-blog-admin.component.scss']
 })
 export class EditBlogAdminComponent implements OnInit {
+
   validFormat: boolean;
   fileImgCat: any;
   formData: FormData = new FormData();
@@ -28,10 +29,13 @@ export class EditBlogAdminComponent implements OnInit {
   hourDate: any = "";
   id: any = "";
   private subscription: Subscription = new Subscription();
+  minDate = new Date();
+  minHours: any;
   constructor(
     public router: Router,
     private content: ContentService,
     private route: ActivatedRoute,
+    private fb: FormBuilder
   ) {
     this.subscription = this.route.params.subscribe((route) => {
       if (
@@ -45,6 +49,7 @@ export class EditBlogAdminComponent implements OnInit {
       }
     });
   }
+  formDataContent: FormGroup;
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -78,22 +83,38 @@ export class EditBlogAdminComponent implements OnInit {
   disabledButtonEraser: boolean = true;
   datePublicationHolder: string;
   disabledButtonPublication: boolean = true;
+  contadorDates: number = 0;
   ngOnInit() {
+    this.formDataContent = this.fb.group({
+      titulo: [null, Validators.maxLength(250)],
+      autor: [null, Validators.required],
+      etiquetas: [null, Validators.required],
+      html: [null, Validators.required]
+    });
     this.content.getIndividualBlogId(this.id).subscribe((resp) => {
-      this.titleArticle = resp.objectResponse.title;
-      this.htmlContent = resp.objectResponse.content;
-      this.author = resp.objectResponse.author;
-      this.etiquetas = resp.objectResponse.tags;
+      //this.titleArticle = resp.objectResponse.title;
+      //this.htmlContent = resp.objectResponse.content;
+      //this.author = resp.objectResponse.author;
+      //this.etiquetas = resp.objectResponse.tags;
       this.visible = resp.objectResponse.visible;
-      this.datePublication = moment(resp.objectResponse.date).format("YYYY/MM/DD");
+      //this.datePublication = moment(resp.objectResponse.date).format("YYYY/MM/DD");
       this.datePublicationHolder = this.datePublication;
-      this.hourDate = moment(resp.objectResponse.date).format("HH:MM");
+      this.formDataContent.controls.titulo.setValue(resp.objectResponse.title);
+      this.formDataContent.controls.autor.setValue(resp.objectResponse.author);
+      this.formDataContent.controls.etiquetas.setValue(resp.objectResponse.tags);
+      this.formDataContent.controls.html.setValue(resp.objectResponse.content);
+      //this.hourDate = moment(resp.objectResponse.date).format("HH:MM");
       if (resp.objectResponse.imageurl != "") {
         this.visualizationImag = resp.objectResponse.imageurl;
         let datos = resp.objectResponse.imageurl.split("/")
         this.nameFileCert = datos[datos.length - 1]
       }
+      this.disabledButtonPublication = true
+      this.disabledButtonEraser = true
     })
+
+    this.minHours = moment(this.minDate).format("hh:mm A");
+
   }
 
   private getExtension(nameFile: string, getSize: number) {
@@ -135,10 +156,10 @@ export class EditBlogAdminComponent implements OnInit {
       hour = ""
     }
     this.formData.append('id', this.id);
-    this.formData.append('title', this.titleArticle);
-    this.formData.append('content', this.htmlContent);
-    this.formData.append('author', this.author);
-    this.formData.append('tags', this.etiquetas);
+    this.formData.append('title', this.formDataContent.controls.titulo.value);
+    this.formData.append('content', this.formDataContent.controls.html.value);
+    this.formData.append('author', this.formDataContent.controls.autor.value);
+    this.formData.append('tags', this.formDataContent.controls.etiquetas.value);
     this.formData.append('visible', '' + this.visible);
     this.formData.append('publicationDate', datePublication + ' ' + hour + ':00');
     this.content.saveBlog(this.formData).subscribe((resp) => {
@@ -151,12 +172,47 @@ export class EditBlogAdminComponent implements OnInit {
       "/blog-admin"
     ]);
   }
-  comprobarText() {
-    if (this.titleArticle != "" || this.htmlContent != "" || this.author != "" || this.etiquetas != "" || this.datePublication != "" || this.hourDate != "") {
+
+  comprobarText(elemento) {
+    this.disabledButtonEraser = false;
+    if (elemento === 'Cambio') {
+      this.contadorDates += 1
+    }
+
+
+    if (this.contadorDates > 1) {
+      this.disabledButtonPublication = false;
+    } else {
+      this.disabledButtonPublication = true;
+    }
+
+    console.log("Antes")
+    console.log(this.disabledButtonPublication)
+    if (this.visible === true) {
+      this.disabledButtonPublication = false;
+      this.disabledButtonEraser = true;
+    }
+    console.log("Luego")
+    console.log(this.disabledButtonPublication)
+    if (this.nameFileCert === "") {
+      this.disabledButtonPublication = true;
+      this.disabledButtonEraser = true;
+    }
+    console.log("Finalmente")
+    console.log(this.disabledButtonPublication)
+  }
+  checkAllDates() {
+    if (this.visible === true) {
+      this.disabledButtonPublication = false;
+      this.disabledButtonEraser = true;
+    } else {
+      this.disabledButtonPublication = true;
       this.disabledButtonEraser = false;
     }
-    if (this.titleArticle != "" && this.htmlContent != "" && this.author != "" && this.etiquetas != "" && this.datePublication != "" && this.hourDate != "") {
-      this.disabledButtonPublication = false;
+
+    if (this.nameFileCert === "") {
+      this.disabledButtonPublication = true;
+      this.disabledButtonEraser = true;
     }
   }
   deleteArticle() {
@@ -177,10 +233,10 @@ export class EditBlogAdminComponent implements OnInit {
     })
   }
   activate() {
-    if (this.titleArticle != "" || this.htmlContent != "" || this.author != "" || this.etiquetas != "" || this.datePublication != "" || this.hourDate != "") {
+    if (this.datePublication != "" || this.hourDate != "") {
       this.disabledButtonEraser = false;
     }
-    if (this.titleArticle != "" && this.htmlContent != "" && this.author != "" && this.etiquetas != "" && this.datePublication != "" && this.hourDate != "") {
+    if (this.datePublication != "" && this.hourDate != "") {
       this.disabledButtonPublication = false;
     }
     if (this.nameFileCert === "") {

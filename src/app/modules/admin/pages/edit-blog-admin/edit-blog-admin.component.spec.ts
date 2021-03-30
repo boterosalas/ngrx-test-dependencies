@@ -92,7 +92,7 @@ describe('EditBlogAdminComponent', () => {
     component.readURL(mockEvt);
     let datos = true
     component.saveeraser();
-    component.comprobarText();
+    component.comprobarText('texto');
     component.activate();
     component.deleteArticle();
     expect(datos).toBeTruthy();

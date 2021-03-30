@@ -187,7 +187,7 @@ const routes: Routes = [
     },
   },
   {
-    path: "configurations",
+    path: "configuracion",
     component: ConfigurationsComponent,
     canActivate: [RoleGuard],
     data: {

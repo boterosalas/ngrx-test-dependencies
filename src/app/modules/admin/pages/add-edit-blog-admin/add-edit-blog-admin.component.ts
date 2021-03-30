@@ -34,7 +34,8 @@ export class AddEditBlogAdminComponent implements OnInit {
   hourDate: any = "";
   dateForm: FormGroup;
   contadorDates: number = 0;
-  maxDate = moment(new Date());
+  maxDate = new Date();
+  minHours: any;
   configurationEditor: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -67,8 +68,12 @@ export class AddEditBlogAdminComponent implements OnInit {
   contenidoHTML: string;
 
   ngOnInit() {
+    this.minHours = moment(this.maxDate).format("hh:mm A");
     this.dateForm = this.fb.group({
       title: [null, Validators.maxLength(250)],
+      author: [null, Validators.required],
+      tags: [null, Validators.required],
+      contenido: [null, Validators.required]
     });
   }
 
@@ -115,9 +120,9 @@ export class AddEditBlogAdminComponent implements OnInit {
 
     //console.log(datePublication + ' ' + hour);
     this.formData.append('title', this.dateForm.controls.title.value);
-    this.formData.append('content', this.contenidoHTML);
-    this.formData.append('author', this.escritor);
-    this.formData.append('tags', this.etiquetas);
+    this.formData.append('content', this.dateForm.controls.contenido.value);
+    this.formData.append('author', this.dateForm.controls.author.value);
+    this.formData.append('tags', this.dateForm.controls.tags.value);
     this.formData.append('visible', '' + this.visible);
     if (this.visible === true) {
       this.formData.append('publicationDate', "");
@@ -154,24 +159,29 @@ export class AddEditBlogAdminComponent implements OnInit {
       }
     }
   }
-
-  checkInput(elemento) {
-    console.log("Texto");
-    if (this.contenidoHTML != "" && this.escritor != "" && this.etiquetas != "") {
-      this.disabledButtonEr = false;
+  checkAllDates() {
+    if (this.visible === true) {
+      this.disabledButtonPu = false;
+    } else {
+      this.disabledButtonPu = true;
     }
-    console.log(elemento);
-    if (elemento != undefined) {
+
+    if (this.nameFileCert === "") {
+      this.disabledButtonPu = true;
+      this.disabledButtonEr = true;
+    }
+  }
+  checkInput(elemento) {
+    this.disabledButtonEr = false;
+    if (elemento === 'Cambio') {
       this.contadorDates += 1
     }
-
-    if (this.contenidoHTML != "" && this.escritor != "" && this.etiquetas != "") {
-      if (this.contadorDates > 2) {
+    if (this.dateForm.controls.contenido.value != "") {
+      if (this.contadorDates > 1) {
         this.disabledButtonPu = false;
       } else {
         this.disabledButtonPu = true;
       }
-
     }
     if (this.nameFileCert === "") {
       this.disabledButtonPu = true;

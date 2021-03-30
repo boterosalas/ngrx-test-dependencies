@@ -9,6 +9,7 @@ import decode from "jwt-decode";
 import { Forgotpassword } from "../interfaces/forgotpassword";
 import { Recoverpassword } from "../interfaces/recoverpassword";
 import { UserService } from "./user.service";
+import { ResponseService } from "../interfaces/response";
 
 @Injectable({
   providedIn: "root",
@@ -43,6 +44,9 @@ export class AuthService implements OnDestroy {
   apiRecoverPassword = "Authentication/resetpassword";
   apiChangePassword = "Authentication/changePassword";
   apisendactivation = "activation/sendactivation";
+  apiGetsAdmins = "permissions/getusersadmin";
+  apiGetPermisionAdmin = "permissions/getpermissionsbyuser";
+  apiSavePermision = "permissions/savepermissions";
   apiRefresh = "token/refresh";
 
   role = "";
@@ -108,7 +112,7 @@ export class AuthService implements OnDestroy {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         ),
         map((resp: any) => {
@@ -125,7 +129,7 @@ export class AuthService implements OnDestroy {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         ),
         map((resp: any) => {
@@ -149,7 +153,7 @@ export class AuthService implements OnDestroy {
       this.httpOptions
     );
   }
-  
+
   public sendActivation(username: string) {
     return this.http.post(
       `${this.url + this.apisendactivation}`,
@@ -163,7 +167,7 @@ export class AuthService implements OnDestroy {
     const refreshtoken = localStorage.getItem("REFRESH_TOKEN");
     return this.http.post(
       `${this.url + this.apiRefresh}`,
-      { AccessToken:accesstoken, refreshtoken },
+      { AccessToken: accesstoken, refreshtoken },
       this.httpOptions
     );
   }
@@ -175,7 +179,55 @@ export class AuthService implements OnDestroy {
       this.httpOptions
     );
   }
+  public getUsersAdmin() {
+    return this.http
+      .get(`${this.url + this.apiGetsAdmins}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((resp: any) => {
+          return resp.objectResponse;
+        })
+      );
+  }
+  public getPermisionByUser(id) {
+    return this.http
+      .get(`${this.url + this.apiGetPermisionAdmin}?userid=${id}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((resp: any) => {
+          return resp.objectResponse;
+        })
+      );
+  }
+  public savePermision(data: any) {
 
+    return this.http
+      .post(`${this.url + this.apiSavePermision}`, data, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
   ngOnDestroy(): void {
     this.subs.length > 0 &&
       this.subs.forEach((sub: Subscription) => sub.unsubscribe());

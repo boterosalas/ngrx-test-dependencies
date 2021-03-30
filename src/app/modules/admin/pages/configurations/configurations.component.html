@@ -5,7 +5,7 @@
 ></app-banner>
 <div class="container">
     <form [formGroup]="dateForm"  >
-    <div fxLayout="row">
+    <div class="mt-2" fxLayout="row">
     <mat-form-field class="selected-report">
         <mat-placeholder class="selected-placeholder">USUARIO</mat-placeholder>
         <mat-select
@@ -13,32 +13,35 @@
           class="selected-report"
           formControlName="users"
         >
-          <mat-option (click)="onChangeSelected(selected.titulo)" *ngFor="let selected of selecteds" value="{{ selected.titulo }}">
-            <span >{{ selected.titulo }}</span>
+          <mat-option (click)="onChangeSelected(selected)" *ngFor="let selected of selecteds" value="{{ selected.userId }}">
+            <span >{{ selected.firstNames }} {{selected.lastNames}}</span>
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <div class="super-admin">
+      <div *ngIf="!activarPermision" class="super-admin">
           SUPER ADMIN
       </div>
     </div>
     </form>
-    <table mat-table [dataSource]="servicios" class="users-table"  >
+    <table *ngIf="visible" mat-table [dataSource]="servicios" class="users-table"  >
         <ng-container matColumnDef="modulo">
-            <th mat-header-cell *matHeaderCellDef style="width: 40%; font-weight: bold; ">MODULO</th>
-            <td  mat-cell *matCellDef="let element: let i=index" (click)="userInfo((dataSource.data)[i])"> 
-            <p class="m-0 galano-bold text-font">{{element.titulo}}</p>
+            <th mat-header-cell *matHeaderCellDef style="width: 40%; font-weight: bold; ">MÓDULO</th>
+            <td  mat-cell *matCellDef="let element: let i=index" > 
+            <p class="m-0 galano-bold text-font">{{element.menu}}</p>
             </td>
           </ng-container>
           <ng-container matColumnDef="activations">
             <th mat-header-cell *matHeaderCellDef style="width: 40%; font-weight: bold; text-align: end;">ACTIVAR/DESACTIVAR</th>
-            <td mat-cell *matCellDef="let element: let i=index" (click)="userInfo((dataSource.data)[i])"> 
+            <td mat-cell *matCellDef="let element: let i=index"> 
                 <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign.gt-xs="end center" fxLayoutAlign.xs="center center">
-                    <mat-slide-toggle [(ngModel)]="element.activo" color="orange2-toggle" (change)="activate(element)"></mat-slide-toggle>
+                    <mat-slide-toggle [disabled]="activarPermision" [(ngModel)]="element.permission" color="orange2-toggle"></mat-slide-toggle>
                 </div>
             </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;let i= index" ></tr>
     </table>
+    <div *ngIf="visible" class="mt-2" fxLayout="row" fxLayoutAlign="end" style="width: 407px;">
+      <button mat-raised-button class="button-save" (click)="saveeraser()" [disabled]="activarPermision" >Guardar </button>
+  </div>
 </div>

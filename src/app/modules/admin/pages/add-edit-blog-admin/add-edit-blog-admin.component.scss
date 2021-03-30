@@ -84,3 +84,10 @@ input[type="file"] {
   font-size: 10px;
   margin-top: 0px;
 }
+.clock-time-opaco {
+  position: relative;
+  z-index: 100;
+  top: 8px;
+  left: 8px;
+  color: #bdbdbd;
+}

@@ -16,9 +16,10 @@
             </button>
           </span>
     </div>
+    <form [formGroup]="dateForm" >
     <div fxLayout="row"> 
     <mat-card style="width: 745px;">
-      <form [formGroup]="dateForm" >
+      
         <mat-form-field style="width: 710px;">
             <input
               matInput
@@ -68,9 +69,9 @@
             }}</mat-error
           >
           </mat-form-field>
-        </form>
+        
         <h4>CONTENIDO</h4>
-        <angular-editor (ngModelChange)="checkInput()" [config]="configurationEditor" [(ngModel)]="contenidoHTML"></angular-editor>
+        <angular-editor (ngModelChange)="checkInput()" [config]="configurationEditor" formControlName="contenido" ></angular-editor>
     </mat-card>
     <div>
     <mat-card class="ml-2" style="width: 330px; height: 390px;">
@@ -81,10 +82,47 @@
               id="athortext"
               type="text"
               placeholder="AUTOR"
-              [(ngModel)]="escritor"
+              formControlName="author" 
               (ngModelChange)="checkInput()"
               required
             />
+            <mat-error
+            id="requiredName"
+            *ngIf="
+            dateForm.controls.author.invalid &&
+            dateForm.controls.author.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED" | translate: { formValue: "Autor" }
+            }}</mat-error
+          >
+    
+          <mat-error
+            id="maxName"
+            *ngIf="
+            dateForm.controls.author.invalid &&
+            dateForm.controls.author.errors.maxlength
+            "
+            >{{
+              "GENERIC.MAX_CHARACTERS"
+                | translate
+                  : {
+                      maxchar:
+                      dateForm.controls.author.errors.maxlength.requiredLength
+                    }
+            }}</mat-error
+          >
+    
+          <mat-error
+            id="invalidName"
+            *ngIf="
+            dateForm.controls.author.invalid &&
+            dateForm.controls.author.errors.pattern
+            "
+            >{{
+              "GENERIC.INVALID_FORMAT" | translate: { val: "Título del artículo" }
+            }}</mat-error
+          >
           </mat-form-field>
           <p class="place-holeder-image">PORTADA (1560X840PX, FORMATO .JPG, MAX 300kb)</p>
           <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px">
@@ -136,22 +174,60 @@
               id="etiquetastext"
               type="text"
               [(ngModel)]="etiquetas"
+              formControlName="tags" 
               placeholder="ETIQUETAS"
               (ngModelChange)="checkInput()"
               required
             />
+            <mat-error
+            id="requiredName"
+            *ngIf="
+            dateForm.controls.author.invalid &&
+            dateForm.controls.author.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED" | translate: { formValue: "Autor" }
+            }}</mat-error
+          >
+    
+          <mat-error
+            id="maxName"
+            *ngIf="
+            dateForm.controls.author.invalid &&
+            dateForm.controls.author.errors.maxlength
+            "
+            >{{
+              "GENERIC.MAX_CHARACTERS"
+                | translate
+                  : {
+                      maxchar:
+                      dateForm.controls.author.errors.maxlength.requiredLength
+                    }
+            }}</mat-error
+          >
+    
+          <mat-error
+            id="invalidName"
+            *ngIf="
+            dateForm.controls.author.invalid &&
+            dateForm.controls.author.errors.pattern
+            "
+            >{{
+              "GENERIC.INVALID_FORMAT" | translate: { val: "Título del artículo" }
+            }}</mat-error
+          >
           </mat-form-field>
     </mat-card>
     <mat-card class="ml-2 mt-2">
         <h4 class="publications-style">PUBLICACIÓN</h4>
         <div>
-            {{visible?'Visible':'Oculto'}} <mat-slide-toggle [(ngModel)]="visible" style="margin-left:5px; position: relative;
-            top: 2px;"  color="orange2-toggle" ></mat-slide-toggle>
+            {{visible?'Visible':'Oculto'}} <mat-slide-toggle [ngModelOptions]="{standalone: true}" [(ngModel)]="visible" style="margin-left:5px; position: relative;
+            top: 2px;"  color="orange2-toggle" (change)="checkAllDates()" ></mat-slide-toggle>
         </div>
         
         <div fxLayout="row" class="mt-2" style="position: relative;">
             <div>
-            <label class="label-up-text mt-2" for="picker"> FECHA DE PUBLICACIÓN <b style="color: #F21905;">*</b> </label>               
+            <label class="label-up-text mt-2" for="picker"> FECHA DE PUBLICACIÓN  </label>               
             <div fxLayout="row" class="mt-2">
             <mat-datepicker  (ngModelChange)="checkInput('Cambio')" class="icon-date" touchUi #picker></mat-datepicker>
             <mat-datepicker-toggle
@@ -166,18 +242,21 @@
               [matDatepicker]="picker"
               [min]="maxDate"
               readonly
+              [ngModelOptions]="{standalone: true}"
               (ngModelChange)="checkInput('Cambio')"
               [(ngModel)]="datePublication"
               class=" border-input mat-elevation-z1 p-2 border-radius"
+              [disabled]="visible"
             />
         </div>
         </div>
         <div style="position: relative;">
-            <label class="label-up-text mt-2" for="picker"> HORA DE PUBLICACIÓN <b style="color: #F21905;">*</b> </label>               
+            <label class="label-up-text mt-2" for="picker"> HORA DE PUBLICACIÓN  </label>               
             <div>
-                <mat-icon class="clock-time">alarm</mat-icon>
-                <input (ngModelChange)="checkInput('Cambio')" [(ngModel)]="hourDate"  matInput aria-label="default time" [ngxTimepicker]="defaultValue" readonly class="form-control  mat-elevation-z1 p-2 border-radius">
-                <ngx-material-timepicker #defaultValue></ngx-material-timepicker>
+                <mat-icon *ngIf="!visible" class="clock-time">alarm</mat-icon>
+                <mat-icon *ngIf="visible" class="clock-time-opaco">alarm</mat-icon>
+                <input [ngModelOptions]="{standalone: true}" (ngModelChange)="checkInput('Cambio')" [ngxTimepicker]="min"  [disabled]="visible" [(ngModel)]="hourDate"  matInput aria-label="default time" [ngxTimepicker]="defaultValue" readonly class="form-control  mat-elevation-z1 p-2 border-radius" >
+                <ngx-material-timepicker  #min></ngx-material-timepicker>
                 
             </div>
         </div>
@@ -195,6 +274,9 @@
         </div>
        
     </mat-card>
-</div>
+  
+  </div>
+  
     </div>
+  </form>
 </div>
