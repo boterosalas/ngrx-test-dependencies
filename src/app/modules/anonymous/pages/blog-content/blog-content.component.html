@@ -24,6 +24,7 @@
                 <span class="mt-4 text-date-content">{{datas.date  | date: 'yyyy/MM/dd'}}</span>
                 <h3 class="mt-0 text-author-content">{{datas.author}}</h3>
                 <div class="style-blogs" [innerHtml]="datas.content"></div>
+                <div class="border-gray-blog mt-2" > <p> <strong>Etiquetas: </strong> {{datas.tags}} </p> </div>
             </div>
             <div class="mr-3" fxLayout="row" fxShow.gt-xs="false" fxLayoutGap="10px" fxLayoutAlign="center center">
                 
@@ -58,38 +59,16 @@
             "GENERIC.REQUIRED" | translate: { formValue: "Email" }
           }}</mat-error
         >
-  
-        <mat-error
-          id="maxName"
-          *ngIf="
-          dateForm.controls.nameBussiness.invalid &&
-          dateForm.controls.nameBussiness.errors.maxlength
-          "
-          >{{
-            "GENERIC.MAX_CHARACTERS"
-              | translate
-                : {
-                    maxchar:
-                    dateForm.controls.nameBussiness.errors.maxlength.requiredLength
-                  }
-          }}</mat-error
-        >
-  
-        <mat-error
-          id="invalidName"
-          *ngIf="
-          dateForm.controls.nameBussiness.invalid &&
-          dateForm.controls.nameBussiness.errors.pattern
-          "
-          >{{
-            "GENERIC.INVALID_FORMAT" | translate: { val: "Email" }
-          }}</mat-error
-        >
+        <mat-error id="invalidEmail" *ngIf="dateForm.controls.nameBussiness.invalid">{{
+          "LOGIN.INVALID_EMAIL" | translate: { formValue: "Email" }
+        }}</mat-error>
+        
+        
       </mat-form-field>
       <mat-form-field>
         <input
           matInput
-          id="nameBussiness"
+          id="namePerson"
           type="text"
           placeholder="TU NOMBRE"
           formControlName="namePerson"
@@ -98,35 +77,50 @@
         <mat-error
           id="requiredName"
           *ngIf="
-          dateForm.controls.nameBussiness.invalid &&
-          dateForm.controls.nameBussiness.errors.required
+          dateForm.controls.namePerson.invalid &&
+          dateForm.controls.namePerson.errors.required
           "
           >{{
-            "GENERIC.REQUIRED" | translate: { formValue: "Email" }
+            "GENERIC.REQUIRED" | translate: { formValue: "Nombre" }
           }}</mat-error
         >
   
         <mat-error
           id="maxName"
           *ngIf="
-          dateForm.controls.nameBussiness.invalid &&
-          dateForm.controls.nameBussiness.errors.maxlength
+          dateForm.controls.namePerson.invalid &&
+          dateForm.controls.namePerson.errors.maxlength
           "
           >{{
             "GENERIC.MAX_CHARACTERS"
               | translate
                 : {
                     maxchar:
-                    dateForm.controls.nameBussiness.errors.maxlength.requiredLength
+                    dateForm.controls.namePerson.errors.maxlength.requiredLength
                   }
           }}</mat-error
         >
-  
+        <mat-error
+        id="minName"
+        *ngIf="
+        dateForm.controls.namePerson.invalid &&
+        dateForm.controls.namePerson.errors.minlength
+        "
+        >{{
+          "GENERIC.MIN_CHARACTERS"
+            | translate
+              : {
+                  minchar:
+                  dateForm.controls.namePerson.errors.minlength
+                      .requiredLength
+                }
+        }}</mat-error
+      >
         <mat-error
           id="invalidName"
           *ngIf="
-          dateForm.controls.nameBussiness.invalid &&
-          dateForm.controls.nameBussiness.errors.pattern
+          dateForm.controls.namePerson.invalid &&
+          dateForm.controls.namePerson.errors.pattern
           "
           >{{
             "GENERIC.INVALID_FORMAT" | translate: { val: "Email" }
@@ -135,7 +129,7 @@
       </mat-form-field>
     </form>
     <div class="container-blogs  mt-3 mb-3" fxLayout="row" fxLayoutAlign="end">
-        <button mat-raised-button class="button-save"    (click)="sendMessage()"
+        <button mat-raised-button class="button-save"    (click)="sendMessage()" [disabled]="!dateForm.valid"
         >Enviar </button>
     </div>
 </ng-template>

@@ -23,8 +23,10 @@
                   </mat-form-field>
                 <h3>CONTENIDO</h3>
                 <angular-editor [config]="configurarEditor" [(ngModel)]="htmlContentTerminos"></angular-editor>
+                <div style="width: 720px ;" fxLayout="row" fxLayoutAlign="end">
                 <button mat-raised-button class="button-save" (click)="saveLegal('1')" [disabled]="disabledButtonPublication"
             >Guardar </button>
+          </div>
             </div>
         </mat-tab>
       
@@ -46,8 +48,10 @@
               </mat-form-field>
             <h3>CONTENIDO</h3>
             <angular-editor [config]="configurarEditor" [(ngModel)]="htmlContentProteccion"></angular-editor>
+            <div style="width: 720px ;" fxLayout="row" fxLayoutAlign="end">
             <button mat-raised-button class="button-save" (click)="saveLegal('2')" [disabled]="disabledButtonPublication"
             >Guardar </button>
+          </div>
            </div>
         </mat-tab>
       
@@ -70,8 +74,10 @@
               </mat-form-field>
             <h3>CONTENIDO</h3>
             <angular-editor [config]="configurarEditor" [(ngModel)]="htmlContentTransparencia"></angular-editor>
+            <div style="width: 720px ;" fxLayout="row" fxLayoutAlign="end">
             <button mat-raised-button class="button-save" (click)="saveLegal('3')" [disabled]="disabledButtonPublication"
             >Guardar </button>
+          </div>
            </div> 
         </mat-tab>
       
@@ -93,8 +99,10 @@
                   </mat-form-field>
                 <h3>CONTENIDO</h3>
                 <angular-editor [config]="configurarEditor" [(ngModel)]="htmlContentPrograma"></angular-editor>
+                <div style="width: 720px ;" fxLayout="row" fxLayoutAlign="end">
                 <button mat-raised-button class="button-save" (click)="saveLegal('4')" [disabled]="disabledButtonPublication"
             >Guardar </button>
+          </div>
             </div> 
         </mat-tab>
       

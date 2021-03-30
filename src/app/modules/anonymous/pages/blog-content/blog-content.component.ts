@@ -27,6 +27,7 @@ export class BlogContentComponent implements OnInit {
   @ViewChild("templateSendEmail", { static: false }) templateBussiness: TemplateRef<
     any
   >;
+  emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
   url: string;
   datas: any;
   valueLink: string;
@@ -44,8 +45,8 @@ export class BlogContentComponent implements OnInit {
     this.url = encodeURI(`${domain}`);
     this.valueLink = encodeURI(`${domain}`);
     this.dateForm = this.fb.group({
-      nameBussiness: [null, Validators.required],
-      namePerson: [null, Validators.required]
+      nameBussiness: [null, [Validators.required, Validators.pattern(this.emailPattern),]],
+      namePerson: [null, [Validators.required, Validators.minLength(5)]]
     });
   }
   public searchBlog(element) {

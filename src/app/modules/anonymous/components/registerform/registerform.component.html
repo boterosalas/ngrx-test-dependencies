@@ -436,14 +436,16 @@
 </form>
 
 <ng-template #templateTerms>
-  <div class="fade-in" innerHtml="{{ 'TERMS.LEGAL' | translate }}"></div> 
-  <div innerHtml="{{ 'TERMS.REFER' | translate: { sale: amountReferred | currency : '' : 'symbol' : '1.0-0', amount: amount | currency : '' : 'symbol' : '1.0-0' } }}"></div> 
+    <h2 class='border-bottom-orange-init'>{{textProteccion}}</h2>
+    <div [innerHtml]="contentProteccion"></div> 
+    <h2 class='border-bottom-orange-init'>{{textPrograma}}</h2>
+    <div [innerHtml]="contentPrograma"></div> 
   <button
   mat-raised-button
   id="accept-modal"
   class="mt-2 center button button-height button-100 register-button"
   color="orange"
-  (click)="acceptModal()"
+  (click)="acceptModal()"   
 >
 {{ "GENERIC.ACCEPT" | translate }}
 </button>
