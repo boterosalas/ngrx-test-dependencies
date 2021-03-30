@@ -262,7 +262,7 @@
               matInput
               id="codeReference"
               type="text"
-              placeholder="CÓDIGO DE REFERENCIA"
+              placeholder="URL"
               formControlName="codeReference"
               required
             />
@@ -308,7 +308,7 @@
 
           <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
             <div fxLayout="column" fxLayoutAlign="center" class="space">
-              <strong class="title-gray">ADJUNTAR IMAGEN (500X500PX, FORMATO .SVG .JPG, MAX 100KB)</strong>
+              <strong class="title-gray">ADJUNTAR IMAGEN (500X500PX, FORMATO .SVG, MAX 300KB)</strong>
               <span class="title-secondary" *ngIf="nameFileCert === ''">No hay archivo seleccionado</span>
               <span class="file-input" *ngIf="nameFileCert !== ''">{{
                 nameFileCert | truncate: '20'
@@ -350,6 +350,12 @@
             style="display: none;"
             formControlName="image"
           />
+        <div>
+          Genera comisión excel <mat-slide-toggle formControlName="generateExcel" color="orange2-toggle" (change)="activate(element)"></mat-slide-toggle>
+        </div>
+        <div>
+          Oculto/Visible <mat-slide-toggle formControlName="visible" color="orange2-toggle" (change)="activate(element)"></mat-slide-toggle>
+        </div>
     </form>
     <div class="container button-padding mb-4 mt-4">
         <div fxLayout="row" fxLayoutAlign.gt-xs="end center" fxLayoutAlign.xs="center center">

@@ -5,7 +5,7 @@ import { UtilsService } from "src/app/services/utils.service";
 import { LoaderService } from "src/app/services/loader.service";
 import { distinctUntilChanged } from "rxjs/operators";
 import { Router } from '@angular/router';
-
+import decode from "jwt-decode";
 @Component({
   selector: "app-menu-options",
   templateUrl: "./menu-options.component.html",
@@ -17,18 +17,19 @@ export class MenuOptionsComponent implements OnInit, OnDestroy {
     private utils: UtilsService,
     private loader: LoaderService,
     private router: Router
-  ) {}
+  ) { }
 
   options = [];
-
+  token = localStorage.getItem("ACCESS_TOKEN");
+  authorization = this.token;
   @Input() colfooter;
   @Input() aligmentdesktop = 'center center';
   @Input() aligment;
   @Input() layoutxs = "row";
   @Input() layoutmd = "column";
   @Input() showIcon = false;
-  @Input() icon:string;
-  @Input() section:string="menuTop";
+  @Input() icon: string;
+  @Input() section: string = "menuTop";
   @Output() hideSidenav = new EventEmitter();
 
   isOpenMenu: boolean;
@@ -41,17 +42,18 @@ export class MenuOptionsComponent implements OnInit, OnDestroy {
   /**
    * Metodo para obtener los menus
    */
-  
-  public getMenu () {
-   this.subscription = this.auth.getMenu$.subscribe(val => {
+
+  public getMenu() {
+    this.subscription = this.auth.getMenu$.subscribe(val => {
       this.options = val;
+
     })
   }
 
   public hide() {
     this.hideSidenav.emit();
   }
-  
+
 
   @HostListener("over")
   hideMenu() {
@@ -59,15 +61,15 @@ export class MenuOptionsComponent implements OnInit, OnDestroy {
   }
 
 
-   /**
-   * metodo para cerrar sesion
-   */
+  /**
+  * metodo para cerrar sesion
+  */
 
   public logout() {
     this.utils.logout();
   }
 
-  public  goTerms() {
+  public goTerms() {
     this.router.navigate(['/terminos-y-condiciones']);
   }
 

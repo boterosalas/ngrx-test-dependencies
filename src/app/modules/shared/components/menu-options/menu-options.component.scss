@@ -99,6 +99,18 @@
       background-size: 100%;
     }
   }
+  .Configuración {
+    &::before {
+      content: "";
+      background: url("/assets/img/menu-mobile/settings-menu.svg") no-repeat;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+      background-size: 100%;
+    }
+  }
   .Historial.de.Links {
     &::before {
       content: "";

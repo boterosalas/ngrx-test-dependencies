@@ -10,6 +10,6 @@
     
     <button mat-raised-button color="orange" (click)="exportBusiness()" id="download-users" class="ml-2">Exportar <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
 
-    <app-table-activate-business [dataSource]="dataSource" (activateBusiness)="activateBusiness($event)"></app-table-activate-business>
+    <app-table-activate-business [dataSource]="dataSource" (updateBusiness)="getAllBusiness()" (activateBusiness)="activateBusiness($event)"></app-table-activate-business>
 
 </div>

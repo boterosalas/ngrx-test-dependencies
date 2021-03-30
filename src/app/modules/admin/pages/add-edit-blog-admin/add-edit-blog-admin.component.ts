@@ -4,6 +4,7 @@ import * as moment from "moment";
 import { ContentService } from 'src/app/services/content.service';
 import { Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 moment.locale("es");
 @Component({
   selector: 'app-add-edit-blog-admin',
@@ -15,6 +16,7 @@ export class AddEditBlogAdminComponent implements OnInit {
   constructor(
     public router: Router,
     private content: ContentService,
+    private fb: FormBuilder
   ) { }
   validFormat: boolean;
   fileImgCat: any;
@@ -23,7 +25,6 @@ export class AddEditBlogAdminComponent implements OnInit {
   showErrorCert: boolean;
   activebutton: boolean;
   visualizationImag: any;
-  title: string = "";
   escritor: string = "";
   etiquetas: string = "";
   disabledButtonEr: boolean = true;
@@ -31,7 +32,9 @@ export class AddEditBlogAdminComponent implements OnInit {
   visible: boolean = false;
   datePublication: any = "";
   hourDate: any = "";
+  dateForm: FormGroup;
   contadorDates: number = 0;
+  maxDate = moment(new Date());
   configurationEditor: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -64,7 +67,9 @@ export class AddEditBlogAdminComponent implements OnInit {
   contenidoHTML: string;
 
   ngOnInit() {
-
+    this.dateForm = this.fb.group({
+      title: [null, Validators.maxLength(250)],
+    });
   }
 
   private setExten(nameFile: string, getSize: number) {
@@ -109,12 +114,17 @@ export class AddEditBlogAdminComponent implements OnInit {
     }
 
     //console.log(datePublication + ' ' + hour);
-    this.formData.append('title', this.title);
+    this.formData.append('title', this.dateForm.controls.title.value);
     this.formData.append('content', this.contenidoHTML);
     this.formData.append('author', this.escritor);
     this.formData.append('tags', this.etiquetas);
     this.formData.append('visible', '' + this.visible);
-    this.formData.append('publicationDate', datePublication + ' ' + hour + ':00');
+    if (this.visible === true) {
+      this.formData.append('publicationDate', "");
+    }
+    else {
+      this.formData.append('publicationDate', datePublication + ' ' + hour + ':00');
+    }
     this.content.saveBlog(this.formData).subscribe((resp) => {
       this.GoToBack()
     })
@@ -147,7 +157,7 @@ export class AddEditBlogAdminComponent implements OnInit {
 
   checkInput(elemento) {
     console.log("Texto");
-    if (this.title != "" && this.contenidoHTML != "" && this.escritor != "" && this.etiquetas != "") {
+    if (this.contenidoHTML != "" && this.escritor != "" && this.etiquetas != "") {
       this.disabledButtonEr = false;
     }
     console.log(elemento);
@@ -155,7 +165,7 @@ export class AddEditBlogAdminComponent implements OnInit {
       this.contadorDates += 1
     }
 
-    if (this.title != "" && this.contenidoHTML != "" && this.escritor != "" && this.etiquetas != "") {
+    if (this.contenidoHTML != "" && this.escritor != "" && this.etiquetas != "") {
       if (this.contadorDates > 2) {
         this.disabledButtonPu = false;
       } else {

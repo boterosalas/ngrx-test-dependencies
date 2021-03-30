@@ -1,4 +1,4 @@
-<app-banner title="Blog" img="/assets/img/banners/banner-perfil-pc.jpg" imgMobile="/assets/img/banners/banner-academy-mobile.jpg"></app-banner>
+<app-banner title="Blog" img="/assets/img/banners/banner-perfil-pc.jpg" imgMobile="/assets/img/banners/banner-perfil-mobile.jpg"></app-banner>
 <div class="container">
     <div class="mt-3">
       <span fxLayout="row" >
@@ -12,7 +12,7 @@
       </span>
     </div>
     <div>
-        <h2>{{datas.titulo}}</h2>
+        <h2 class="center-title-text">{{datas.title}}</h2>
         <img class="blog-image-content" [src]="datas.imageurl" alt="" fxShow.xs="false" >
         <div class="mt-3 container-blogs" fxLayout="row" fxLayout.xs="column">
             <div class="mr-3" fxLayout="column" fxShow.xs="false" fxLayoutGap="5px">

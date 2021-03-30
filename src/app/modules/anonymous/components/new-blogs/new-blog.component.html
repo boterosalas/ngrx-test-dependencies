@@ -1,15 +1,15 @@
 <div class="newbusiness  " fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap.gt-xs="50px" fxLayoutAlign="center center" fxLayoutAlign.xs="none">
-    <div class="newblog__text" fxLayout.gt-xs="column" fxFlex="30">
+    <div [routerLink]="[ '/blog']" class="newblog__text cursor-pointer" fxLayout.gt-xs="column" fxFlex="30">
         <h3 class="border-bottom-orange-init f-23">Nuestro blog</h3>
         <p class="f-15">Descubre las últimas novedades y artículos relacionados con nuestra plataforma.</p>
-        <a class="link-refer mb-2" href="/blog">Ver todos los artículos</a>
+        <a class="link-refer mb-2"[routerLink]="[ '/blog']" >Ver todos los artículos</a>
     </div>
     <div class="newblog__img gtmHomeClicRgistroNuevosNegociosIrAlRegistro" fxLayout.gt-xs="column" fxFlex="50">
         <div class="content-type">
             <h3 class="text-title-blog">Blog</h3>
             <p class="text-line-blog">No te pierdas lo último en novedades de Clickam.</p>
         </div>
-        <img fxShow.xs="false" (click)="registerBusiness()" class="imagen-responsive-blog responsive-img radius pt-2 mt-5 cursor-pointer gtmHomeClicRgistroNuevosNegociosIrAlRegistro" src="assets/img/blog-banner.png" alt="nuevosnegociosdesktop">
-        <img fxShow.gt-xs="false" (click)="registerBusiness()" class="imagen-responsive-blog-mobile responsive-img radius gtmHomeClicRgistroNuevosNegociosIrAlRegistro" src="assets/img/blog-banner.png" alt="nuevosnegociosmobile">
+        <img fxShow.xs="false" [routerLink]="[ '/blog']" class="imagen-responsive-blog responsive-img radius pt-2 mt-5 cursor-pointer gtmHomeClicRgistroNuevosNegociosIrAlRegistro" src="assets/img/blog-banner.png" alt="nuevosnegociosdesktop">
+        <img fxShow.gt-xs="false" [routerLink]="[ '/blog']" class="imagen-responsive-blog-mobile responsive-img radius gtmHomeClicRgistroNuevosNegociosIrAlRegistro" src="assets/img/blog-banner.png" alt="nuevosnegociosmobile">
     </div>
 </div>
