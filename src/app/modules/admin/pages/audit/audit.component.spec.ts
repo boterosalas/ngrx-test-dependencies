@@ -70,7 +70,7 @@ describe("AuditComponent", () => {
   }));
 
   beforeEach(() => {
-    mockLinksService.getAudit.and.returnValue(of(audit));
+    mockLinksService.getAuditoria.and.returnValue(of(audit));
     fixture = TestBed.createComponent(AuditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -97,7 +97,7 @@ describe("AuditComponent", () => {
     btn.dispatchEvent(new Event("click"));
     fixture.detectChanges();
     component.exportAudit();
-    expect(mockLinksService.getAudit).toHaveBeenCalled();
+    expect(mockLinksService.getAuditoria).toHaveBeenCalled();
   });
 
   it('token exist', () => {

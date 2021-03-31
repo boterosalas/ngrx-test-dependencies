@@ -7,7 +7,6 @@
     <div fxLayout="row" fxLayoutAlign="space-between">
         <h3>Crear / Editar artículo</h3>
         <span  fxLayout="row" >
-            <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
             <button mat-button [routerLink]="[ '/blog-admin']">
                 <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
                     <mat-icon>keyboard_arrow_left</mat-icon>
@@ -155,7 +154,7 @@
       <div class="mt-2" fxLayout="row" fxLayoutAlign="space-between">
           <button mat-raised-button class="button-save-programmer" (click)="saveeraser()" [disabled]="!formDataContent.valid || disabledButtonPublication"
           >{{visible?'Publicar cambios':'Programar'}}  </button>
-          <button mat-raised-button class="button-delete"     (click)="delete()"
+          <button mat-raised-button class="button-delete"     (click)="deleteArticle()"
           >Eliminar </button>
       </div>
        
