@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
 import * as moment from 'moment';
 import { ResponseService } from 'src/app/interfaces/response';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-refers',
@@ -17,6 +18,8 @@ export class RefersComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private file: LinksService,
     private _snackBar: MatSnackBar,
+    public utils: UtilsService
+
   ) { }
 
   locale = {
@@ -50,8 +53,11 @@ export class RefersComponent implements OnInit, OnDestroy {
     this.comissionClickerForm();
     this.referedClickerForm();
     this.getAmountClicker();
+    this.checkRole();
   }
-
+  checkRole() {
+    this.utils.checkPermision();
+  }
   public exportForm() {
     this.dateForm = this.fb.group(
       {

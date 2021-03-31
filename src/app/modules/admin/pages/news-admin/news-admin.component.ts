@@ -5,6 +5,7 @@ import * as moment from "moment";
 import { Subscription } from 'rxjs';
 import { ResponseService } from 'src/app/interfaces/response';
 import { UserService } from 'src/app/services/user.service';
+import { UtilsService } from 'src/app/services/utils.service';
 //import { ModalGeneicComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { DialogNewsComponent } from '../../components/dialog-news/dialog-news.component';
 moment.locale("es");
@@ -32,6 +33,7 @@ export class NewsAdminComponent implements OnInit {
         private fb: FormBuilder,
         private usersService: UserService,
         private _snackBar: MatSnackBar,
+        public utils: UtilsService
     ) {
 
         this.paginator.itemsPerPageLabel = "Ítems por página";
@@ -78,9 +80,11 @@ export class NewsAdminComponent implements OnInit {
         this.searchForm = this.fb.group({
             search: [null],
         });
-
+        this.checkRole();
     }
-
+    checkRole() {
+        this.utils.checkPermision();
+    }
     public searchUser(
         term,
         from = 1,

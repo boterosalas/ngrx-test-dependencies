@@ -5,9 +5,13 @@ import { TranslateModule } from "@ngx-translate/core";
 import { BannerComponent } from "src/app/modules/shared/components/banner/banner.component";
 import { AdminModule } from "../../admin.module";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserAnimationsModule, NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { ContentService } from "src/app/services/content.service";
 import { of } from "rxjs";
+import { RouterTestingModule } from "@angular/router/testing";
+import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
+import { SharedModule } from "src/app/modules/shared/shared.module";
+import { JwtModule } from "@auth0/angular-jwt";
 
 describe("LinkGeneratorComponent", () => {
   let component: LinkGeneratorComponent;
@@ -37,6 +41,20 @@ describe("LinkGeneratorComponent", () => {
         AdminModule,
         HttpClientTestingModule,
         NoopAnimationsModule,
+        RouterTestingModule.withRoutes([]),
+        AppMaterialModule,
+        BrowserAnimationsModule,
+        SharedModule,
+        JwtModule.forRoot({
+          config: {
+            tokenGetter: () => {
+              return localStorage.getItem('ACCESS_TOKEN');
+            },
+            throwNoTokenError: true,
+            whitelistedDomains: [],
+            blacklistedRoutes: []
+          }
+        }),
       ],
       providers: [{ provide: ContentService, useValue: mockContentService }],
     }).compileComponents();

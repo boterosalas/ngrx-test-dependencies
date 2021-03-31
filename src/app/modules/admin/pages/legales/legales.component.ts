@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { MasterDataService } from 'src/app/services/master-data.service';
+import { UtilsService } from 'src/app/services/utils.service';
 @Component({
   selector: 'app-legales',
   templateUrl: './legales.component.html',
@@ -12,6 +13,7 @@ export class LegalesComponent implements OnInit {
   constructor(
     private personalInfo: MasterDataService,
     private _snackBar: MatSnackBar,
+    private utils: UtilsService
   ) { }
 
   configurarEditor: AngularEditorConfig = {
@@ -54,6 +56,10 @@ export class LegalesComponent implements OnInit {
   datos: any;
   ngOnInit() {
     this.getTerms();
+    this.checkRole();
+  }
+  checkRole() {
+    this.utils.checkPermision();
   }
   getTerms() {
     this.personalInfo.getTerms().subscribe((resp: any) => {

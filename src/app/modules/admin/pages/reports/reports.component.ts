@@ -17,6 +17,7 @@ import { Subscription } from "rxjs";
 import { ValidateDate } from "src/app/validators/validate-date.validators";
 import * as moment from 'moment';
 import { MatSnackBar } from '@angular/material';
+import { UtilsService } from "src/app/services/utils.service";
 
 @Component({
   selector: "app-reports",
@@ -78,6 +79,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
     private cd: ChangeDetectorRef,
     private _snackBar: MatSnackBar,
     private usersService: UserService,
+    public utils: UtilsService
   ) { }
 
   ngOnInit() {
@@ -114,8 +116,11 @@ export class ReportsComponent implements OnInit, OnDestroy {
         validator: [ValidateDate.CompareDates]
       }
     );
+    this.checkRole();
   }
-
+  checkRole() {
+    this.utils.checkPermision();
+  }
   public getFileReport() {
     this.subscription = this.file.getFileReport().subscribe(file => {
       if (file.state === 'Success') {

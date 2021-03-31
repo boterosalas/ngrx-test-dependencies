@@ -8,6 +8,7 @@ import { ResponseService } from 'src/app/interfaces/response';
 import {
   MatSnackBar
 } from "@angular/material";
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-audit',
@@ -21,7 +22,7 @@ export class AuditComponent implements OnInit, OnDestroy {
     private file: LinksService,
     private usersService: UserService,
     private _snackBar: MatSnackBar,
-
+    private utils: UtilsService
   ) { }
 
   dateForm: FormGroup;
@@ -53,9 +54,11 @@ export class AuditComponent implements OnInit, OnDestroy {
         dateRange: [null, Validators.required]
       }
     );
-
+    this.checkRole();
   }
-
+  checkRole() {
+    this.utils.checkPermision();
+  }
   // Metodo para exportar la auditoria
 
   public exportAudit() {
