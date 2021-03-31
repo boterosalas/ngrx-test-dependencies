@@ -44,7 +44,7 @@ export class TableActivateBusinessComponent implements OnInit {
   disabledButton: boolean = true;
   formData: FormData = new FormData();
   selectedItem: any;
-  fileImgCat: any;
+  fileImgCat: any = "";
   nameFileCert: string = '';
   showErrorCert: boolean;
   activebutton: boolean;
@@ -171,7 +171,9 @@ export class TableActivateBusinessComponent implements OnInit {
     this.dateForm.controls.codeReference.setValue(this.selectedItem.urlquerystring);
     this.dateForm.controls.generateExcel.setValue(this.selectedItem.excelcommission);
     this.dateForm.controls.visible.setValue(this.selectedItem.active);
-    this.nameFileCert = this.selectedItem.imageurl;
+    let datos = this.selectedItem.imageurl.split("/");
+    this.nameFileCert = datos[datos.length - 1];
+
     this.activebutton = true;
     const title = "Editar Negocio";
     const template = this.templateBussiness;
@@ -217,18 +219,33 @@ export class TableActivateBusinessComponent implements OnInit {
     //this.formData.append('codeReference', this.dateForm.controls.codeReference.value);
     let datos;
     if (this.selectedItem) {
-      datos = {
-        id: this.selectedItem.id,
-        description: this.dateForm.controls.nameBussiness.value,
-        infoAditional: this.dateForm.controls.detailBussiness.value,
-        tabTableCommission: this.dateForm.controls.nameTableCommision.value,
-        placeHolder: this.dateForm.controls.placeholderBussiness.value,
-        active: this.dateForm.controls.visible.value,
-        urlQueryString: this.dateForm.controls.codeReference.value,
-        excelCommission: this.dateForm.controls.generateExcel.value,
-        imagen: this.fileImgCat,
-        imageURL: this.nameFileCert
+      console.log(this.fileImgCat);
+      if (this.fileImgCat != "") {
+        datos = {
+          id: this.selectedItem.id,
+          description: this.dateForm.controls.nameBussiness.value,
+          infoAditional: this.dateForm.controls.detailBussiness.value,
+          tabTableCommission: this.dateForm.controls.nameTableCommision.value,
+          placeHolder: this.dateForm.controls.placeholderBussiness.value,
+          active: this.dateForm.controls.visible.value,
+          urlQueryString: this.dateForm.controls.codeReference.value,
+          excelCommission: this.dateForm.controls.generateExcel.value,
+          imagen: this.fileImgCat,
+          imageURL: this.nameFileCert
+        }
+      } else {
+        datos = {
+          id: this.selectedItem.id,
+          description: this.dateForm.controls.nameBussiness.value,
+          infoAditional: this.dateForm.controls.detailBussiness.value,
+          tabTableCommission: this.dateForm.controls.nameTableCommision.value,
+          placeHolder: this.dateForm.controls.placeholderBussiness.value,
+          active: this.dateForm.controls.visible.value,
+          urlQueryString: this.dateForm.controls.codeReference.value,
+          excelCommission: this.dateForm.controls.generateExcel.value
+        }
       }
+
     } else {
       datos = {
         description: this.dateForm.controls.nameBussiness.value,
@@ -247,6 +264,8 @@ export class TableActivateBusinessComponent implements OnInit {
       this.dateForm.reset();
       this.selectedItem = "";
       this.dialog.closeAll();
+      this.fileImgCat = "";
+      this.nameFileCert = "";
       this.updateBusiness.emit();
     })
   }

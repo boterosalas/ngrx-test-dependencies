@@ -144,8 +144,10 @@ export class EditBlogAdminComponent implements OnInit {
         const reader = new FileReader();
         reader.onload = e => this.visualizationImag = reader.result;
         reader.readAsDataURL(file);
+        this.checkAllDates()
       }
     }
+
   }
   saveeraser() {
     let datePublication = moment(this.datePublication).format("YYYY-MM-DD");
@@ -178,28 +180,19 @@ export class EditBlogAdminComponent implements OnInit {
     if (elemento === 'Cambio') {
       this.contadorDates += 1
     }
-
-
     if (this.contadorDates > 1) {
       this.disabledButtonPublication = false;
     } else {
       this.disabledButtonPublication = true;
     }
-
-    console.log("Antes")
-    console.log(this.disabledButtonPublication)
     if (this.visible === true) {
       this.disabledButtonPublication = false;
       this.disabledButtonEraser = true;
     }
-    console.log("Luego")
-    console.log(this.disabledButtonPublication)
     if (this.nameFileCert === "") {
       this.disabledButtonPublication = true;
       this.disabledButtonEraser = true;
     }
-    console.log("Finalmente")
-    console.log(this.disabledButtonPublication)
   }
   checkAllDates() {
     if (this.visible === true) {

@@ -6,7 +6,8 @@ import { UserService } from 'src/app/services/user.service';
 import { LinksService } from 'src/app/services/links.service';
 import { ResponseService } from 'src/app/interfaces/response';
 import {
-  MatSnackBar} from "@angular/material";
+  MatSnackBar
+} from "@angular/material";
 
 @Component({
   selector: 'app-audit',
@@ -20,6 +21,7 @@ export class AuditComponent implements OnInit, OnDestroy {
     private file: LinksService,
     private usersService: UserService,
     private _snackBar: MatSnackBar,
+
   ) { }
 
   dateForm: FormGroup;
@@ -41,7 +43,7 @@ export class AuditComponent implements OnInit, OnDestroy {
     daysOfWeek: moment.weekdaysMin(),
     monthNames: moment.monthsShort(),
     firstDay: 1 // first day is monday
-}
+  }
 
 
   ngOnInit() {
@@ -58,12 +60,12 @@ export class AuditComponent implements OnInit, OnDestroy {
 
   public exportAudit() {
     this.dateParams = {
-      start: this.dateForm.controls.dateRange.value.startDate.format(),
-      end: this.dateForm.controls.dateRange.value.endDate.format()
+      start: this.dateForm.controls.dateRange.value.startDate.format("YYYY-MM-DD"),
+      end: this.dateForm.controls.dateRange.value.endDate.format("YYYY-MM-DD")
     }
-    
-   this.subscription = this.file.getAudit(this.dateParams).subscribe((resp: ResponseService) => {
-      if(resp.state === 'Success') {
+
+    this.subscription = this.file.getAuditoria(this.dateParams).subscribe((resp: ResponseService) => {
+      if (resp.state === 'Success') {
         this.openSnackBar(resp.userMessage, 'Cerrar');
         this.dateForm.reset();
         if (this.dateForm.controls.dateRange.value.startDate === null) {
@@ -77,11 +79,11 @@ export class AuditComponent implements OnInit, OnDestroy {
     this.disButon = false;
   }
 
-    /**
-   * Abre el mensaje de confirmacion de copiado del link
-   * @param message
-   * @param action
-   */
+  /**
+ * Abre el mensaje de confirmacion de copiado del link
+ * @param message
+ * @param action
+ */
 
   private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
