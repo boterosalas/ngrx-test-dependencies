@@ -568,10 +568,20 @@ export class ContentService {
       );
   }
   public getBlogsAdmin(data) {
+    let httpCache = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + this.authorization,
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+        'Cache-Control': 'no-cache, no-store, must-revalidate, post-check=0, pre-check=0',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      }),
+    }
     return this.http
       .get(
         `${this.url + this.apiGetBlog}?from=${data.from}&to=${200}&orderBy=${data.orderBy}&visible=true`,
-        this.httpOptions
+        httpCache
       )
       .pipe(
         retryWhen((errors) =>

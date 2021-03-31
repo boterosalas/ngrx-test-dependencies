@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import Swal from 'sweetalert2';
 import * as moment from "moment";
@@ -12,7 +12,7 @@ moment.locale("es");
   templateUrl: './edit-blog-admin.component.html',
   styleUrls: ['./edit-blog-admin.component.scss']
 })
-export class EditBlogAdminComponent implements OnInit {
+export class EditBlogAdminComponent implements OnInit, OnDestroy {
 
   validFormat: boolean;
   fileImgCat: any;
@@ -48,6 +48,9 @@ export class EditBlogAdminComponent implements OnInit {
         this.id = route.id;
       }
     });
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
   formDataContent: FormGroup;
   editorConfig: AngularEditorConfig = {

@@ -219,7 +219,6 @@ export class TableActivateBusinessComponent implements OnInit {
     //this.formData.append('codeReference', this.dateForm.controls.codeReference.value);
     let datos;
     if (this.selectedItem) {
-      console.log(this.fileImgCat);
       if (this.fileImgCat != "") {
         datos = {
           id: this.selectedItem.id,
@@ -230,7 +229,7 @@ export class TableActivateBusinessComponent implements OnInit {
           active: this.dateForm.controls.visible.value,
           urlQueryString: this.dateForm.controls.codeReference.value,
           excelCommission: this.dateForm.controls.generateExcel.value,
-          imagen: this.fileImgCat
+          image: this.fileImgCat
         }
       } else {
         datos = {
@@ -254,7 +253,7 @@ export class TableActivateBusinessComponent implements OnInit {
         active: this.dateForm.controls.visible.value,
         urlQueryString: this.dateForm.controls.codeReference.value,
         excelCommission: this.dateForm.controls.generateExcel.value,
-        imagen: this.fileImgCat,
+        image: this.fileImgCat,
       }
     }
 

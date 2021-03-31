@@ -15,6 +15,7 @@ export class BlogAdminComponent implements OnInit {
     private content: ContentService,
     private _snackBar: MatSnackBar,
     public router: Router,
+
   ) { }
   blogPublicado = []
 
