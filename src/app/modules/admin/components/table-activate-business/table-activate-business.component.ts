@@ -55,7 +55,7 @@ export class TableActivateBusinessComponent implements OnInit {
       detailBussiness: [null, Validators.required],
       nameTableCommision: [null, Validators.required],
       placeholderBussiness: [null, Validators.required],
-      codeReference: [null, Validators.required],
+      codeReference: [null],
       image: [null],
       generateExcel: [false],
       visible: [false]

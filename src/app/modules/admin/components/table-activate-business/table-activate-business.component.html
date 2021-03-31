@@ -264,7 +264,6 @@
               type="text"
               placeholder="URL"
               formControlName="codeReference"
-              required
             />
       
             <mat-error
@@ -274,7 +273,7 @@
               dateForm.controls.codeReference.errors.required
               "
               >{{
-                "GENERIC.REQUIRED" | translate: { formValue: "Código de referencia" }
+                "GENERIC.REQUIRED" | translate: { formValue: "URL" }
               }}</mat-error
             >
       
@@ -301,7 +300,7 @@
               dateForm.controls.codeReference.errors.pattern
               "
               >{{
-                "GENERIC.INVALID_FORMAT" | translate: { val: "Código de referencia" }
+                "GENERIC.INVALID_FORMAT" | translate: { val: "URL" }
               }}</mat-error
             >
           </mat-form-field>
