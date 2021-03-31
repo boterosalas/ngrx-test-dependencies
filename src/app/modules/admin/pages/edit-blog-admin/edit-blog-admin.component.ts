@@ -138,7 +138,6 @@ export class EditBlogAdminComponent implements OnInit {
       this.getExtension(fileList[0].name, fileList[0].size);
       if (this.validFormat === true) {
         this.formData.append('File', fileList[0], fileList[0].name.replace(' ', '_'));
-        this.formData.append('imageUrl', file.name.replace(' ', '_'));
         let nameFile = event.target.files[0].name;
         this.nameFileCert = nameFile;
         const reader = new FileReader();

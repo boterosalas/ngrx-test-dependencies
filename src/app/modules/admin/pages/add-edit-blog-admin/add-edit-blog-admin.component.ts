@@ -98,7 +98,6 @@ export class AddEditBlogAdminComponent implements OnInit {
       this.setExten(fileList[0].name, fileList[0].size);
       if (this.validFormat === true) {
         this.formData.append('File', fileList[0], fileList[0].name.replace(' ', '_'));
-        this.formData.append('imageUrl', file.name.replace(' ', '_'));
         let nameFile = event.target.files[0].name;
         this.nameFileCert = nameFile;
         const reader = new FileReader();
@@ -162,8 +161,10 @@ export class AddEditBlogAdminComponent implements OnInit {
   checkAllDates() {
     if (this.visible === true) {
       this.disabledButtonPu = false;
+      this.disabledButtonEr = true;
     } else {
       this.disabledButtonPu = true;
+      this.disabledButtonEr = false;
     }
 
     if (this.nameFileCert === "") {
