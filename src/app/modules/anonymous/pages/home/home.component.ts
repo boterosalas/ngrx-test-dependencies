@@ -207,9 +207,6 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.managedPayments = user.managedPayments;
           this.newTerms = user.acceptTermsReferrals;
           this.getInfomonth();
-          if (this.newTerms === false) {
-            this.termsAndConditions();
-          }
         });
       }
       let interval = setInterval(() => {

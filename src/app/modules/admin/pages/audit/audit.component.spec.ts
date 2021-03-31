@@ -24,7 +24,7 @@ describe("AuditComponent", () => {
   let component: AuditComponent;
   let fixture: ComponentFixture<AuditComponent>;
 
-  const mockLinksService = jasmine.createSpyObj("LinksService", ["getAudit"]);
+  const mockLinksService = jasmine.createSpyObj("LinksService", ["getAuditoria"]);
 
   const audit = {
     state: "Success",
@@ -105,6 +105,6 @@ describe("AuditComponent", () => {
     let token = localStorage.getItem(('ACCESS_TOKEN'));
     expect(token).not.toBeUndefined()
   });
-  
+
 
 });

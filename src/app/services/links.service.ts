@@ -61,6 +61,7 @@ export class LinksService {
   apiSellers = "seller/getsellers";
   apiGetReport = "reports/clickerperformancereport";
   apiGetReportMonth = "reports/getcommissionpaymentreport"
+  apiAudit = "reports/getaudit";
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
 
@@ -524,7 +525,22 @@ export class LinksService {
         )
       );
   }
-
+  public getAuditoria(params: any) {
+    return this.http
+      .get(
+        `${this.urlReports}${this.apiAudit}?&start=${params.start}&end=${params.end}`,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+  }
   public sendfile(formdata) {
     let data = new FormData();
     data.append("FileBase64", formdata.fileBase64);

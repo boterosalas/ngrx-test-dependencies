@@ -340,7 +340,7 @@
             </div>
           </div>
           <mat-error *ngIf="showErrorCert" class="text-small small pb-2 d-block">
-            Formato inválido solo se pueden subir archivos con la extensión SVG, JPG y menores de 100KB
+            Formato inválido solo se pueden subir archivos con la extensión SVG y menores de 300KB
           </mat-error>
         
           <input
@@ -351,10 +351,12 @@
             formControlName="image"
           />
         <div>
-          Genera comisión excel <mat-slide-toggle formControlName="generateExcel" color="orange2-toggle" (change)="activate(element)"></mat-slide-toggle>
+          Genera comisión excel: <mat-slide-toggle style="    position: relative;
+          top: 1px;" formControlName="generateExcel" color="orange2-toggle" (change)="activate(element)"></mat-slide-toggle>
         </div>
         <div>
-          Oculto/Visible <mat-slide-toggle formControlName="visible" color="orange2-toggle" (change)="activate(element)"></mat-slide-toggle>
+          Oculto/Visible: <mat-slide-toggle style="    position: relative;
+          top: 1px;" formControlName="visible" color="orange2-toggle" (change)="activate(element)"></mat-slide-toggle>
         </div>
     </form>
     <div class="container button-padding mb-4 mt-4">
