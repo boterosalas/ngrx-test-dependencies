@@ -2,6 +2,7 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { UserService } from './user.service';
+import decode from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -75,5 +76,25 @@ export class UtilsService {
     this.user.userInfo$.next(null);
     await this.router.navigate(['/inicio']);
   }
-
+  public checkPermision() {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    // decode the token to get its payload
+    const tokenPayload = decode(token);
+    this.auth.getPermisionByUser(tokenPayload.userid).subscribe((resp) => {
+      let ubication = location.href;
+      let route = ubication.split("/");
+      let routeslite = '/' + route[route.length - 1];
+      for (let index = 0; index < resp.length; index++) {
+        if (resp[index].route === routeslite) {
+          if (resp[index].permission === true) {
+            //return true;
+          } else if (resp[index].permission === false) {
+            console.log("Entra aca");
+            this.router.navigate(["configuracion"]);
+            //return false;
+          }
+        }
+      }
+    })
+  }
 }

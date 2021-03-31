@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { ContentService } from 'src/app/services/content.service';
+import { UtilsService } from 'src/app/services/utils.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -15,7 +16,7 @@ export class BlogAdminComponent implements OnInit {
     private content: ContentService,
     private _snackBar: MatSnackBar,
     public router: Router,
-
+    private utils: UtilsService
   ) { }
   blogPublicado = []
 
@@ -23,6 +24,10 @@ export class BlogAdminComponent implements OnInit {
 
   ngOnInit() {
     this.getBlogs();
+    this.checkRole();
+  }
+  checkRole() {
+    this.utils.checkPermision();
   }
   getBlogs() {
     let data = {

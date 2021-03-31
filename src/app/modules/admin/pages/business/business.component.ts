@@ -3,6 +3,7 @@ import { MatSnackBar, MatTableDataSource } from "@angular/material";
 import { Subscription } from "rxjs";
 import { ContentService } from "src/app/services/content.service";
 import { ResponseService } from "src/app/interfaces/response";
+import { UtilsService } from "src/app/services/utils.service";
 
 @Component({
   selector: "app-business",
@@ -12,7 +13,8 @@ import { ResponseService } from "src/app/interfaces/response";
 export class BusinessComponent implements OnInit, OnDestroy {
   constructor(
     private content: ContentService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private utils: UtilsService
   ) { }
 
   private subscription: Subscription = new Subscription();
@@ -21,8 +23,11 @@ export class BusinessComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getAllBusiness();
+    this.checkRole();
   }
-
+  checkRole() {
+    this.utils.checkPermision();
+  }
   /**
    * Abre el mensaje de confirmacion
    * @param message

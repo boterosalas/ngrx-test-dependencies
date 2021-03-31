@@ -23,6 +23,7 @@ import { DialogEditComponent } from "src/app/modules/clicker/components/dialog-e
 moment.locale("es");
 import Swal from "sweetalert2";
 import { observable, Observable } from "rxjs";
+import { UtilsService } from "src/app/services/utils.service";
 
 @Component({
   selector: "app-users",
@@ -97,7 +98,8 @@ export class UsersComponent extends MatPaginatorIntl
     private usersService: UserService,
     private _snackBar: MatSnackBar,
     private file: LinksService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public utils: UtilsService
   ) {
     super();
 
@@ -145,8 +147,11 @@ export class UsersComponent extends MatPaginatorIntl
     this.dateReportChangeForm = this.fb.group({
       dateRange: [null, Validators.required]
     });
+    this.checkRole();
   }
-
+  checkRole() {
+    this.utils.checkPermision();
+  }
   /**
    * Metodo para buscar usuarios
    * @param term

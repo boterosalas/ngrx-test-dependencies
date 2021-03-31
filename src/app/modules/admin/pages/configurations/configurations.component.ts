@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import decode from "jwt-decode";
 import { MatSnackBar } from '@angular/material';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-configurations',
   templateUrl: './configurations.component.html',
@@ -12,8 +13,7 @@ export class ConfigurationsComponent implements OnInit {
   dateForm: FormGroup;
   constructor(
     private fb: FormBuilder,
-    public auth: AuthService,
-    private _snackBar: MatSnackBar,
+    public auth: AuthService
   ) { }
   displayedColumns: string[] = ['modulo', 'activations'];
   selecteds: any;
@@ -21,6 +21,7 @@ export class ConfigurationsComponent implements OnInit {
   servicios: any;
   visible: boolean = false;
   activarPermision: boolean = true;
+  disableBoton: boolean = true;
   ngOnInit() {
     this.dateForm = this.fb.group({
       users: [null],
@@ -35,7 +36,6 @@ export class ConfigurationsComponent implements OnInit {
     })
   }
   onChangeSelected(item) {
-
     this.auth.getPermisionByUser(item.userId).subscribe((resp) => {
       this.servicios = resp;
       this.visible = true;
@@ -44,13 +44,29 @@ export class ConfigurationsComponent implements OnInit {
   saveeraser() {
     this.auth.savePermision(this.servicios).subscribe((resp) => {
       if (resp.state === "Success") {
-        this.openSnackBar("Cambios almacenados", "Cerrar")
+        Swal.fire({
+          text: "Los cambios se han guardado correctamente.",
+          type: "success",
+          confirmButtonText: "Aceptar",
+          confirmButtonClass: "upload-success"
+        }).then(() => {
+
+        });
+      }
+      else {
+        Swal.fire({
+          text: "Debe seleccionar al menos un permiso.",
+          type: "error",
+          confirmButtonText: "Aceptar",
+          confirmButtonClass: "upload-success"
+        }).then(() => {
+
+        });
       }
     })
   }
-  private openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 5000
-    });
+  cambio() {
+    this.disableBoton = false;
   }
+
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subscription } from "rxjs";
 import { ContentService } from "src/app/services/content.service";
+import { UtilsService } from "src/app/services/utils.service";
 
 @Component({
   selector: "app-link-generator",
@@ -8,15 +9,18 @@ import { ContentService } from "src/app/services/content.service";
   styleUrls: ["./link-generator.component.scss"],
 })
 export class LinkGeneratorComponent implements OnInit, OnDestroy {
-  constructor(private content: ContentService) {}
+  constructor(private content: ContentService, private utils: UtilsService) { }
 
   ngOnInit() {
     this.getBussiness();
+    this.checkRole();
   }
-
+  checkRole() {
+    this.utils.checkPermision();
+  }
   private subscription: Subscription = new Subscription();
   bussiness = [];
-  url:string = "";
+  url: string = "";
   enableButton = false;
 
   public getBussiness() {
@@ -26,9 +30,9 @@ export class LinkGeneratorComponent implements OnInit, OnDestroy {
   }
 
   public generateLink(formValue) {
-    this.subscription = this.content.getLinkBusiness(formValue).subscribe(resp=> {
+    this.subscription = this.content.getLinkBusiness(formValue).subscribe(resp => {
       this.url = resp;
-      if(this.url !== '') {
+      if (this.url !== '') {
         this.enableButton = true;
       }
     });

@@ -7,6 +7,10 @@ import { TranslateModule } from "@ngx-translate/core";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { LinksService } from "src/app/services/links.service";
 import { of } from 'rxjs/internal/observable/of';
+import { RouterTestingModule } from "@angular/router/testing";
+import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { JwtModule } from "@auth0/angular-jwt";
 
 describe("DashboardComponent", () => {
   let component: DashboardComponent;
@@ -39,7 +43,22 @@ describe("DashboardComponent", () => {
       imports: [
         SharedModule,
         TranslateModule.forRoot(),
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        RouterTestingModule.withRoutes([]),
+
+        AppMaterialModule,
+        BrowserAnimationsModule,
+
+        JwtModule.forRoot({
+          config: {
+            tokenGetter: () => {
+              return localStorage.getItem('ACCESS_TOKEN');
+            },
+            throwNoTokenError: true,
+            whitelistedDomains: [],
+            blacklistedRoutes: []
+          }
+        }),
       ],
       providers: [{ provide: LinksService, useValue: mockLinksService }],
       schemas: [NO_ERRORS_SCHEMA]

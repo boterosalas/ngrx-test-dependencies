@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs';
 import * as moment from 'moment';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material';
+import { AuthService } from 'src/app/services/auth.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +14,7 @@ import { MatTableDataSource } from '@angular/material';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
-  constructor(private kpi: LinksService, private formBuilder: FormBuilder) { }
+  constructor(private kpi: LinksService, private formBuilder: FormBuilder, public auth: AuthService, public utils: UtilsService) { }
 
   totalUsers: string;
   totalActiveUsers: string;
@@ -80,8 +82,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getKPI();
+    this.checkRole();
   }
-
+  checkRole() {
+    this.utils.checkPermision();
+  }
   public getKPI() {
     let date = {
       start: this.form.controls.selected.value.startDate.format(),
