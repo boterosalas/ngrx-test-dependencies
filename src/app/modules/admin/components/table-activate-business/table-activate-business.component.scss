@@ -15,8 +15,12 @@ table {
 .iconb {
   height: 35px;
   width: 100px;
+  object-fit: cover;
 }
-
+.iconclick {
+  height: 35px;
+  width: 100px;
+}
 .overflow-auto {
   overflow: auto;
 }
