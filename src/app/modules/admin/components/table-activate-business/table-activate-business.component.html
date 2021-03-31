@@ -19,7 +19,7 @@
                 <td mat-cell *matCellDef="let element"> 
                     <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign.gt-xs="start center" fxLayoutAlign.xs="center center">
                         <span fxLayout="column">
-                            <img class="iconb" [src]="element.imageurl" [alt]="element.description">
+                            <img [class]="(element.description==='Envíos Clickam')?'iconclick': 'iconb'" [src]="element.imageurl" [alt]="element.description">
                         </span>
                         <span fxLayout="column" class="galano-bold f-16" fxHide.xs="true">
                             {{ element.description }}
