@@ -47,6 +47,9 @@ export class TableActivateBusinessComponent implements OnInit {
   fileImgCat: any = "";
   nameFileCert: string = '';
   showErrorCert: boolean;
+  fileImgCat2: any = "";
+  nameFileCert2: string = '';
+  showErrorCert2: boolean;
   activebutton: boolean;
   validFormat: boolean;
   ngOnInit() {
@@ -161,6 +164,33 @@ export class TableActivateBusinessComponent implements OnInit {
       };
     }
   }
+  public onFileChangeFilesSecond(event, param: string) {
+    let nameFile = event.target.files[0].name;
+    let reader = new FileReader();
+    let sizeFile = event.target.files[0].size;
+    let fileList: FileList = event.target.files;
+    this.getExtension(fileList[0].name, fileList[0].size);
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      let fileBlob = new Blob([file]);
+      let file2 = new File([fileBlob], nameFile);
+      reader.readAsDataURL(file2);
+      reader.onload = () => {
+        this.getExtension(nameFile, sizeFile);
+        if (this.validFormat === true) {
+          this.fileImgCat2 = reader.result;
+          this.fileImgCat2 = this.fileImgCat2.split(",")[1]
+          this.nameFileCert2 = nameFile;
+          this.showErrorCert2 = false;
+          this.activebutton = true;
+        } else {
+          this.showErrorCert2 = true;
+          this.nameFileCert2 = nameFile;
+          this.activebutton = false;
+        }
+      };
+    }
+  }
   editBussiness(element: any) {
     this.selectedItem = element;
 
@@ -193,6 +223,8 @@ export class TableActivateBusinessComponent implements OnInit {
     this.dateForm.controls.nameTableCommision.setValue(null);
     this.dateForm.controls.placeholderBussiness.setValue(null);
     this.dateForm.controls.codeReference.setValue(null);
+    this.dateForm.controls.visible.setValue(false);
+    this.dateForm.controls.generateExcel.setValue(false);
     this.nameFileCert = "";
     const title = "Agregar Negocio";
     const template = this.templateBussiness;
@@ -229,7 +261,8 @@ export class TableActivateBusinessComponent implements OnInit {
           active: this.dateForm.controls.visible.value,
           urlQueryString: this.dateForm.controls.codeReference.value,
           excelCommission: this.dateForm.controls.generateExcel.value,
-          image: this.fileImgCat
+          image: this.fileImgCat,
+          image2: this.fileImgCat2
         }
       } else {
         datos = {
@@ -254,6 +287,7 @@ export class TableActivateBusinessComponent implements OnInit {
         urlQueryString: this.dateForm.controls.codeReference.value,
         excelCommission: this.dateForm.controls.generateExcel.value,
         image: this.fileImgCat,
+        image2: this.fileImgCat2,
       }
     }
 
