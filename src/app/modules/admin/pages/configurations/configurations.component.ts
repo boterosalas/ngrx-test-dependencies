@@ -50,7 +50,7 @@ export class ConfigurationsComponent implements OnInit {
           confirmButtonText: "Aceptar",
           confirmButtonClass: "upload-success"
         }).then(() => {
-
+          this.disableBoton = true;
         });
       }
       else {
