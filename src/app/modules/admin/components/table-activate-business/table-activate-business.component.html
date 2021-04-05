@@ -444,7 +444,7 @@
           >No hay archivo seleccionado</span
         >
         <span class="file-input" *ngIf="nameFileCert2 !== ''">{{
-          nameFileCert | truncate: "20"
+          nameFileCert2 | truncate: "20"
         }}</span>
       </div>
       <div>
@@ -481,7 +481,7 @@
       id="image2"
       type="file"
       style="display: none"
-      formControlName="image"
+      formControlName="image2"
     />
     <div>
       Genera comisión excel:

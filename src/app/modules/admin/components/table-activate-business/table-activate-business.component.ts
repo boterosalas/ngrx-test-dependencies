@@ -60,6 +60,7 @@ export class TableActivateBusinessComponent implements OnInit {
       placeholderBussiness: [null, Validators.required],
       codeReference: [null],
       image: [null],
+      image2: [null],
       generateExcel: [false],
       visible: [false]
 
@@ -193,7 +194,6 @@ export class TableActivateBusinessComponent implements OnInit {
   }
   editBussiness(element: any) {
     this.selectedItem = element;
-
     this.dateForm.controls.nameBussiness.setValue(this.selectedItem.description);
     this.dateForm.controls.detailBussiness.setValue(this.selectedItem.infoaditional);
     this.dateForm.controls.nameTableCommision.setValue(this.selectedItem.code);
@@ -203,7 +203,7 @@ export class TableActivateBusinessComponent implements OnInit {
     this.dateForm.controls.visible.setValue(this.selectedItem.active);
     let datos = this.selectedItem.imageurl.split("/");
     this.nameFileCert = datos[datos.length - 1];
-
+    this.nameFileCert2 = this.selectedItem.icondashboard;
     this.activebutton = true;
     const title = "Editar Negocio";
     const template = this.templateBussiness;
@@ -262,7 +262,7 @@ export class TableActivateBusinessComponent implements OnInit {
           urlQueryString: this.dateForm.controls.codeReference.value,
           excelCommission: this.dateForm.controls.generateExcel.value,
           image: this.fileImgCat,
-          image2: this.fileImgCat2
+          icondashboardimage: this.fileImgCat2
         }
       } else {
         datos = {
@@ -287,7 +287,7 @@ export class TableActivateBusinessComponent implements OnInit {
         urlQueryString: this.dateForm.controls.codeReference.value,
         excelCommission: this.dateForm.controls.generateExcel.value,
         image: this.fileImgCat,
-        image2: this.fileImgCat2,
+        icondashboardimage: this.fileImgCat2,
       }
     }
 
@@ -296,6 +296,8 @@ export class TableActivateBusinessComponent implements OnInit {
       this.selectedItem = "";
       this.dialog.closeAll();
       this.fileImgCat = "";
+      this.fileImgCat2 = "";
+      this.nameFileCert2 = "";
       this.nameFileCert = "";
       this.updateBusiness.emit();
     })
