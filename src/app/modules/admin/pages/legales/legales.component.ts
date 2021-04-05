@@ -64,14 +64,14 @@ export class LegalesComponent implements OnInit {
   getTerms() {
     this.personalInfo.getTerms().subscribe((resp: any) => {
       console.log(resp);
-      this.htmlContentTerminos = resp.objectResponse[0].sectionValue
-      this.htmlContentProteccion = resp.objectResponse[1].sectionValue
-      this.htmlContentTransparencia = resp.objectResponse[2].sectionValue
-      this.htmlContentPrograma = resp.objectResponse[3].sectionValue
-      this.textoTerminos = resp.objectResponse[0].sectionTitle
-      this.textoProteccion = resp.objectResponse[1].sectionTitle
-      this.textoTransparencia = resp.objectResponse[2].sectionTitle
-      this.textoPrograma = resp.objectResponse[3].sectionTitle
+      this.htmlContentTerminos = resp.objectResponse[0].sectionvalue
+      this.htmlContentProteccion = resp.objectResponse[1].sectionvalue
+      this.htmlContentTransparencia = resp.objectResponse[2].sectionvalue
+      this.htmlContentPrograma = resp.objectResponse[3].sectionvalue
+      this.textoTerminos = resp.objectResponse[0].sectiontitle
+      this.textoProteccion = resp.objectResponse[1].sectiontitle
+      this.textoTransparencia = resp.objectResponse[2].sectiontitle
+      this.textoPrograma = resp.objectResponse[3].sectiontitle
     })
   }
   private openSnackBar(message: string, action: string) {
