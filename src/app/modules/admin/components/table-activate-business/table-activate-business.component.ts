@@ -251,7 +251,7 @@ export class TableActivateBusinessComponent implements OnInit {
     //this.formData.append('codeReference', this.dateForm.controls.codeReference.value);
     let datos;
     if (this.selectedItem) {
-      if (this.fileImgCat != "") {
+      if (this.fileImgCat != "" && this.fileImgCat2 != "") {
         datos = {
           id: this.selectedItem.id,
           description: this.dateForm.controls.nameBussiness.value,
@@ -264,7 +264,33 @@ export class TableActivateBusinessComponent implements OnInit {
           image: this.fileImgCat,
           icondashboardimage: this.fileImgCat2
         }
-      } else {
+      } else if (this.fileImgCat != "" && this.fileImgCat2 === "") {
+        datos = {
+          id: this.selectedItem.id,
+          description: this.dateForm.controls.nameBussiness.value,
+          infoAditional: this.dateForm.controls.detailBussiness.value,
+          tabTableCommission: this.dateForm.controls.nameTableCommision.value,
+          placeHolder: this.dateForm.controls.placeholderBussiness.value,
+          active: this.dateForm.controls.visible.value,
+          urlQueryString: this.dateForm.controls.codeReference.value,
+          excelCommission: this.dateForm.controls.generateExcel.value,
+          image: this.fileImgCat,
+        }
+      } else if (this.fileImgCat === "" && this.fileImgCat2 != "") {
+        datos = {
+          id: this.selectedItem.id,
+          description: this.dateForm.controls.nameBussiness.value,
+          infoAditional: this.dateForm.controls.detailBussiness.value,
+          tabTableCommission: this.dateForm.controls.nameTableCommision.value,
+          placeHolder: this.dateForm.controls.placeholderBussiness.value,
+          active: this.dateForm.controls.visible.value,
+          urlQueryString: this.dateForm.controls.codeReference.value,
+          excelCommission: this.dateForm.controls.generateExcel.value,
+          icondashboardimage: this.fileImgCat2
+        }
+      }
+
+      else {
         datos = {
           id: this.selectedItem.id,
           description: this.dateForm.controls.nameBussiness.value,
