@@ -94,19 +94,26 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
       etiquetas: [null, Validators.required],
       html: [null, Validators.required]
     });
+    this.datePublication = "";
+    this.hourDate = "";
     this.content.getIndividualBlogId(this.id).subscribe((resp) => {
       //this.titleArticle = resp.objectResponse.title;
       //this.htmlContent = resp.objectResponse.content;
       //this.author = resp.objectResponse.author;
       //this.etiquetas = resp.objectResponse.tags;
       this.visible = resp.objectResponse.visible;
-      //this.datePublication = moment(resp.objectResponse.date).format("YYYY/MM/DD");
-      this.datePublicationHolder = this.datePublication;
+      //
+
       this.formDataContent.controls.titulo.setValue(resp.objectResponse.title);
       this.formDataContent.controls.autor.setValue(resp.objectResponse.author);
       this.formDataContent.controls.etiquetas.setValue(resp.objectResponse.tags);
       this.formDataContent.controls.html.setValue(resp.objectResponse.content);
-      //this.hourDate = moment(resp.objectResponse.date).format("HH:MM");
+      if (resp.objectResponse.publicationdate != null) {
+        //this.datePublicationHolder = moment(resp.objectResponse.date).format("YYYY-MM-DD");
+        this.datePublication = moment(resp.objectResponse.publicationdate).format();
+        this.hourDate = moment(resp.objectResponse.publicationdate).format("HH:MM");
+      }
+
       if (resp.objectResponse.imageurl != "") {
         this.visualizationImag = resp.objectResponse.imageurl;
         let datos = resp.objectResponse.imageurl.split("/")
@@ -116,7 +123,7 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
       this.disabledButtonEraser = true
     })
 
-    this.minHours = moment(this.minDate).format("hh:mm A");
+
 
   }
 
@@ -237,6 +244,18 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
     if (this.nameFileCert === "") {
       this.disabledButtonPublication = true;
       this.disabledButtonEraser = true;
+    }
+  }
+  hourChange(horu) {
+    let data = new Date();
+    let dataH = moment(data).format("YYYY-MM-DD");
+    let dataOp = moment(horu.value).format("YYYY-MM-DD");
+    if (dataH === dataOp) {
+      this.hourDate = ""
+      this.minHours = moment(data).format("hh:mm A");
+    } else {
+      this.hourDate = ""
+      this.minHours = "12:00 AM";
     }
   }
   public HoraMilitar(time) {
