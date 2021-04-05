@@ -156,7 +156,12 @@ export class TableActivateBusinessComponent implements OnInit {
           this.fileImgCat = this.fileImgCat.split(",")[1]
           this.nameFileCert = nameFile;
           this.showErrorCert = false;
-          this.activebutton = true;
+          if (this.nameFileCert2 != "") {
+            this.activebutton = true;
+          } else {
+            this.activebutton = false;
+          }
+
         } else {
           this.showErrorCert = true;
           this.nameFileCert = nameFile;
@@ -183,7 +188,11 @@ export class TableActivateBusinessComponent implements OnInit {
           this.fileImgCat2 = this.fileImgCat2.split(",")[1]
           this.nameFileCert2 = nameFile;
           this.showErrorCert2 = false;
-          this.activebutton = true;
+          if (this.nameFileCert != "") {
+            this.activebutton = true;
+          } else {
+            this.activebutton = false;
+          }
         } else {
           this.showErrorCert2 = true;
           this.nameFileCert2 = nameFile;
