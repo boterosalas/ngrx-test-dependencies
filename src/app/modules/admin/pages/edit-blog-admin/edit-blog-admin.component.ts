@@ -111,7 +111,12 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
       if (resp.objectResponse.publicationdate != null) {
         //this.datePublicationHolder = moment(resp.objectResponse.date).format("YYYY-MM-DD");
         this.datePublication = moment(resp.objectResponse.publicationdate).format();
-        this.hourDate = moment(resp.objectResponse.publicationdate).format("HH:MM");
+
+        let hour = resp.objectResponse.publicationdate.split("T");
+        console.log(hour[1]);
+        //"DD MM YYYY hh:mm:ss"
+
+        this.hourDate = this.timeFormat(hour[1]);
       }
 
       if (resp.objectResponse.imageurl != "") {
@@ -126,7 +131,26 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
 
 
   }
+  timeFormat(time) {
+    let hour = time.split(':')[0];
+    let minute = time.split(':')[1];
 
+    if (hour >= 12) {
+      if (hour == 12) {
+        let h = hour
+        let m = minute + ' PM'
+        return h + ":" + m
+      } else {
+        let h = hour - 12
+        let m = minute + ' PM'
+        return h + ":" + m
+      }
+
+    } else {
+      let h = parseInt(hour)
+      return h + ':' + minute + ' AM'
+    }
+  }
   private getExtension(nameFile: string, getSize: number) {
     let splitExt = nameFile.split(".");
     let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
