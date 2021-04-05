@@ -72,7 +72,7 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
     toolbarPosition: 'top',
     toolbarHiddenButtons: [
       ['heading', 'insertImage', 'insertVideo',
-        'customClasses', 'link', 'unlink',
+        'customClasses',
         'removeFormat', 'fontName', 'backgroundColor',
         'insertHorizontalRule', 'toggleEditorMode', 'undo',
         'redo', 'strikeThrough', 'subscript',
