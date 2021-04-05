@@ -68,9 +68,9 @@ export class AddEditBlogAdminComponent implements OnInit {
   contenidoHTML: string;
 
   ngOnInit() {
-    this.minHours = moment(this.maxDate).format("hh:mm A");
+
     this.dateForm = this.fb.group({
-      title: [null, Validators.maxLength(250)],
+      title: [null, [Validators.maxLength(250), Validators.required]],
       author: [null, Validators.required],
       tags: [null, Validators.required],
       contenido: [null, Validators.required]
@@ -135,6 +135,7 @@ export class AddEditBlogAdminComponent implements OnInit {
 
   }
   public HrFormat(time) {
+
     let format = time.toString().split(" ")[1]
     let hour = time.toString().split(" ")[0].split(":")[0]
     if (hour == 12) {
@@ -193,6 +194,18 @@ export class AddEditBlogAdminComponent implements OnInit {
     this.router.navigate([
       "/blog-admin"
     ]);
+  }
+  hourChange(horu) {
+    let data = new Date();
+    let dataH = moment(data).format("YYYY-MM-DD");
+    let dataOp = moment(horu.value).format("YYYY-MM-DD");
+    if (dataH === dataOp) {
+      this.hourDate = ""
+      this.minHours = moment(data).format("hh:mm A");
+    } else {
+      this.hourDate = ""
+      this.minHours = "12:00 AM";
+    }
   }
   delete() {
     Swal.fire({
