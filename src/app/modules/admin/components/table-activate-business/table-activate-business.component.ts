@@ -262,7 +262,7 @@ export class TableActivateBusinessComponent implements OnInit {
           urlQueryString: this.dateForm.controls.codeReference.value,
           excelCommission: this.dateForm.controls.generateExcel.value,
           image: this.fileImgCat,
-          image2: this.fileImgCat2
+          icondashboardimage: this.fileImgCat2
         }
       } else {
         datos = {
@@ -287,7 +287,7 @@ export class TableActivateBusinessComponent implements OnInit {
         urlQueryString: this.dateForm.controls.codeReference.value,
         excelCommission: this.dateForm.controls.generateExcel.value,
         image: this.fileImgCat,
-        image2: this.fileImgCat2,
+        icondashboardimage: this.fileImgCat2,
       }
     }
 
