@@ -89,9 +89,7 @@ export class UtilsService {
           if (resp[index].permission === true) {
             //return true;
           } else if (resp[index].permission === false) {
-            console.log("Entra aca");
             this.router.navigate(["configuracion"]);
-            //return false;
           }
         }
       }

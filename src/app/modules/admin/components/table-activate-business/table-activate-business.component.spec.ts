@@ -116,4 +116,12 @@ describe('TableActivateBusinessComponent', () => {
     expect(component.onFileChangeFiles).not.toBeNull();
   })
 
+  it('on change item', () => {
+    const mockFile = new File([""], "name.jpg", { type: "text/html" });
+    const mockEvt = { target: { files: [mockFile] } };
+    component.onFileChangeFilesSecond(mockEvt, 'cedula1');
+
+    expect(component.onFileChangeFilesSecond).not.toBeNull();
+  })
+
 });
