@@ -202,11 +202,11 @@ export class LibraryComponent implements OnInit {
         }
     }
     checkDevices(respuesta, type) {
-        if (this.iosDevices) {
-            this.downloadiOS(respuesta, type)
-        } else {
-            this.download(respuesta, type)
-        }
+        //if (this.iosDevices) {
+        //    this.downloadiOS(respuesta, type)
+        //} else {
+        this.download(respuesta, type)
+        //}
     }
     ///window.location.assign(this.urlshorten)
 
@@ -215,7 +215,7 @@ export class LibraryComponent implements OnInit {
 
     public download(data, type) {
         let blob = new Blob([data], { type: type });
-        let url = URL.createObjectURL(blob);
+        let url = window.URL.createObjectURL(blob);
         const downloadLink = document.createElement("a");
         if (type.includes("zip")) {
             downloadLink.href = url;

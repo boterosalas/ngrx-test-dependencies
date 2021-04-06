@@ -244,6 +244,8 @@
   </div>
 
   <div class="terms" *ngIf="newTermsHTML">
+    <h2 class="border-bottom-orange-init">{{ textTerminos }}</h2>
+    <div [innerHtml]="contentTerminos"></div>
     <h2 class="border-bottom-orange-init">{{ textProteccion }}</h2>
     <div [innerHtml]="contentProteccion"></div>
     <h2 class="border-bottom-orange-init">{{ textTransparencia }}</h2>

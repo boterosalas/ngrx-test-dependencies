@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatPaginatorIntl } from '@angular/material';
+import { Meta } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
@@ -26,6 +27,7 @@ export class BlogsComponent implements OnInit {
     private content: ContentService,
     private util: UtilsService,
     private paginator: MatPaginatorIntl,
+    private metaTagService: Meta,
   ) {
     this.paginator.getRangeLabel = function (page, pageSize, length) {
       if (length === 0 || pageSize === 0) {
@@ -54,6 +56,18 @@ export class BlogsComponent implements OnInit {
   ngOnInit() {
     this.orderBy = "RELEVANT";
     this.getBlogs();
+    this.metaTagService.addTags([
+      {
+        name: "keywords",
+        content:
+          "blog, clickam, marketing de afiliados",
+      },
+      {
+        name: "description",
+        content:
+          "Clickam es una plataforma marketplace de marketing de afiliados, donde ganarás dinero por referir y comprar. Aumenta el tráfico de tu negocio con afiliados. Una idea Grupo Éxito.  Exito - Carulla - Haceb - SURA - Puntos Colombia - Viajes Éxito - Nequi.",
+      },
+    ]);
   }
   public searchUser(
     from = 1,
