@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
+import { Meta } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { ContentService } from 'src/app/services/content.service';
@@ -20,7 +21,8 @@ export class BlogContentComponent implements OnInit {
     private dialog: MatDialog,
     private utils: UtilsService,
     private content: ContentService,
-    private router: Router
+    private router: Router,
+    private metaTagService: Meta,
   ) {
 
   }
@@ -56,6 +58,18 @@ export class BlogContentComponent implements OnInit {
       }
       else {
         this.datas = resp.objectResponse;
+        this.metaTagService.addTags([
+          {
+            name: "keywords",
+            content:
+              resp.objectResponse.tags,
+          },
+          {
+            name: "description",
+            content:
+              "Clickam es una plataforma marketplace de marketing de afiliados, donde ganarás dinero por referir y comprar. Aumenta el tráfico de tu negocio con afiliados. Una idea Grupo Éxito.  Exito - Carulla - Haceb - SURA - Puntos Colombia - Viajes Éxito - Nequi.",
+          },
+        ]);
       }
     })
   }
