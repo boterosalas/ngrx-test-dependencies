@@ -301,7 +301,7 @@ export class ContentLibraryComponent implements OnInit {
             this.getVideosImages();
             this.active = false;
             this.dialog.closeAll();
-
+            this.selectAllVideosImg = "Seleccionar todos";
         })
     }
     public cancelDelete() {
