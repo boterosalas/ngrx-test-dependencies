@@ -23,13 +23,11 @@ export class ReportStatusComponent implements OnInit {
     dataSourceNews: any;
     ngOnInit() {
         this.users.getNovetlyUser().subscribe((resp: any) => {
-            console.log(resp);
             this.dataSourceNews = resp.objectResponse.novelties
         })
     }
     stepIni(elem: any) {
         this.selectedInic = elem;
-        console.log(this.selectedInic)
     }
 
 }

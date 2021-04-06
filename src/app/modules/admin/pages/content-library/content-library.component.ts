@@ -281,7 +281,7 @@ export class ContentLibraryComponent implements OnInit {
             content: this.fileCont
         }
         this.content.setContentImgVi(datos).subscribe(() => {
-            console.log(datos);
+            //console.log(datos);
         })
     }
 

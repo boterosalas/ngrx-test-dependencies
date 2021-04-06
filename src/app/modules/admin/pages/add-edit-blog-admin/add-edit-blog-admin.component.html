@@ -31,7 +31,7 @@
             type="text"
             placeholder="TÍTULO DEL ARTÍCULO"
             formControlName="title"
-            (ngModelChange)="checkInput()"
+            (ngModelChange)="checkInput('R')"
             required
           />
           <mat-error
@@ -77,7 +77,7 @@
 
         <h4>CONTENIDO</h4>
         <angular-editor
-          (ngModelChange)="checkInput()"
+          (ngModelChange)="checkInput('R')"
           [config]="configurationEditor"
           formControlName="contenido"
         ></angular-editor>
@@ -92,7 +92,7 @@
               type="text"
               placeholder="AUTOR"
               formControlName="author"
-              (ngModelChange)="checkInput()"
+              (ngModelChange)="checkInput('R')"
               required
             />
             <mat-error
@@ -195,7 +195,7 @@
               [(ngModel)]="etiquetas"
               formControlName="tags"
               placeholder="ETIQUETAS"
-              (ngModelChange)="checkInput()"
+              (ngModelChange)="checkInput('R')"
               required
             />
             <mat-error

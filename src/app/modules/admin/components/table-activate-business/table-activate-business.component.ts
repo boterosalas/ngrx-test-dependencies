@@ -87,7 +87,7 @@ export class TableActivateBusinessComponent implements OnInit {
 
   saveOrder(datos: any) {
     this.file.putOrder(datos).subscribe(resp => {
-      console.log(resp)
+      //console.log(resp)
     })
   }
 
@@ -205,7 +205,7 @@ export class TableActivateBusinessComponent implements OnInit {
     this.selectedItem = element;
     this.dateForm.controls.nameBussiness.setValue(this.selectedItem.description);
     this.dateForm.controls.detailBussiness.setValue(this.selectedItem.infoaditional);
-    this.dateForm.controls.nameTableCommision.setValue(this.selectedItem.code);
+    this.dateForm.controls.nameTableCommision.setValue(this.selectedItem.tabtablecommission);
     this.dateForm.controls.placeholderBussiness.setValue(this.selectedItem.placeholder);
     this.dateForm.controls.codeReference.setValue(this.selectedItem.urlquerystring);
     this.dateForm.controls.generateExcel.setValue(this.selectedItem.excelcommission);

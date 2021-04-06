@@ -109,13 +109,8 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
       this.formDataContent.controls.etiquetas.setValue(resp.objectResponse.tags);
       this.formDataContent.controls.html.setValue(resp.objectResponse.content);
       if (resp.objectResponse.publicationdate != null) {
-        //this.datePublicationHolder = moment(resp.objectResponse.date).format("YYYY-MM-DD");
         this.datePublication = moment(resp.objectResponse.publicationdate).format();
-
         let hour = resp.objectResponse.publicationdate.split("T");
-        console.log(hour[1]);
-        //"DD MM YYYY hh:mm:ss"
-
         this.hourDate = this.timeFormat(hour[1]);
       }
 

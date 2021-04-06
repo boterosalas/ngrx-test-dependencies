@@ -63,7 +63,6 @@ export class LegalesComponent implements OnInit {
   }
   getTerms() {
     this.personalInfo.getTerms().subscribe((resp: any) => {
-      console.log(resp);
       this.htmlContentTerminos = resp.objectResponse[0].sectionvalue
       this.htmlContentProteccion = resp.objectResponse[1].sectionvalue
       this.htmlContentTransparencia = resp.objectResponse[2].sectionvalue

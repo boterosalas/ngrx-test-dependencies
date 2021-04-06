@@ -236,7 +236,6 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   }
   getTerms() {
     this.personalInfo.getTerms().subscribe((resp: any) => {
-      console.log(resp);
       this.contentTerminos = resp.objectResponse[0].sectionvalue
       this.contentProteccion = resp.objectResponse[1].sectionvalue
       this.contentTransparencia = resp.objectResponse[2].sectionvalue
