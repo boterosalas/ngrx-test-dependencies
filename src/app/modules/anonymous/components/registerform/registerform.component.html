@@ -1,6 +1,6 @@
 <app-top title="Registro" (close)="hideRegister()"></app-top>
 
-<h3 class="text-center f-22">{{ 'REGISTER.REGISTER_ACCOUNT' | translate }}</h3>
+<h3 class="text-center f-22">{{ "REGISTER.REGISTER_ACCOUNT" | translate }}</h3>
 
 <form
   class="register-container"
@@ -408,45 +408,53 @@
       }}</mat-error
     >
   </mat-form-field>
-  
+
   <div>
     <span>
-      <mat-checkbox class="gtmResgistraTuCuentaClicAceptarTerminosPoliticas"  formControlName="acceptTerms" id="chkaccept" (change)="acceptTermsCheck()">
+      <mat-checkbox
+        class="gtmResgistraTuCuentaClicAceptarTerminosPoliticas"
+        formControlName="acceptTerms"
+        id="chkaccept"
+        (change)="acceptTermsCheck()"
+      >
       </mat-checkbox>
     </span>
-    <span class="accept-terms ml-2 cursor-pointer gtmResgistraTuCuentaClicAceptarTerminosPoliticas" (click)="termsAndConditions()">
-      {{
-      "REGISTER.ACCEPT" | translate
-    }}
+    <span
+      class="accept-terms ml-2 cursor-pointer gtmResgistraTuCuentaClicAceptarTerminosPoliticas"
+      (click)="termsAndConditions()"
+    >
+      {{ "REGISTER.ACCEPT" | translate }}
     </span>
   </div>
 
-    <button
-      mat-raised-button
-      id="register"
-      class="mt-2 center button button-height button-100 gtmRegistraTuCuentaClicContinuarDatosPrincipales"
-      color="orange"
-      (click)="register()"
-      [disabled]="!registerForm.valid"
-    >
-    <span class="gtmRegistraTuCuentaClicContinuarDatosPrincipales">{{ "GENERIC.CONTINUE" | translate }}</span>
+  <button
+    mat-raised-button
+    id="register"
+    class="mt-2 center button button-height button-100 gtmRegistraTuCuentaClicContinuarDatosPrincipales"
+    color="orange"
+    (click)="register()"
+    [disabled]="!registerForm.valid"
+  >
+    <span class="gtmRegistraTuCuentaClicContinuarDatosPrincipales">{{
+      "GENERIC.CONTINUE" | translate
+    }}</span>
   </button>
-
-
 </form>
 
 <ng-template #templateTerms>
-    <h2 class='border-bottom-orange-init'>{{textProteccion}}</h2>
-    <div [innerHtml]="contentProteccion"></div> 
-    <h2 class='border-bottom-orange-init'>{{textPrograma}}</h2>
-    <div [innerHtml]="contentPrograma"></div> 
+  <h2 class="border-bottom-orange-init">{{ textProteccion }}</h2>
+  <div [innerHtml]="contentProteccion"></div>
+  <h2 class="border-bottom-orange-init">{{ textTransparencia }}</h2>
+  <div [innerHtml]="contentTransparencia"></div>
+  <h2 class="border-bottom-orange-init">{{ textPrograma }}</h2>
+  <div [innerHtml]="contentPrograma"></div>
   <button
-  mat-raised-button
-  id="accept-modal"
-  class="mt-2 center button button-height button-100 register-button"
-  color="orange"
-  (click)="acceptModal()"   
->
-{{ "GENERIC.ACCEPT" | translate }}
-</button>
+    mat-raised-button
+    id="accept-modal"
+    class="mt-2 center button button-height button-100 register-button"
+    color="orange"
+    (click)="acceptModal()"
+  >
+    {{ "GENERIC.ACCEPT" | translate }}
+  </button>
 </ng-template>
