@@ -12,7 +12,6 @@
       >
     </div>
     <span fxLayout="row">
-      <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
       <p
         ngClass.gt-xs="f-20"
         class="cursor-pointer text-underline purple-text"
@@ -21,5 +20,93 @@
         Regresar
       </p>
     </span>
+  </div>
+  <div>
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="users-table"
+      matSort
+      (matSortChange)="sortData($event)"
+    >
+      <ng-container matColumnDef="code">
+        <th mat-header-cell *matHeaderCellDef style="width: 20%">
+          CÓDIGO DE CATEGORÍA
+        </th>
+        <td
+          class="cursor-pointer"
+          mat-cell
+          *matCellDef="let element: let i=index"
+          (click)="userInfo(dataSource.data[i])"
+        >
+          <p class="m-0 text-font">{{ element.codigo }}</p>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="nombreCat">
+        <th mat-header-cell *matHeaderCellDef style="width: 20%">
+          NOMBRE DE CATEGORÍA
+        </th>
+        <td
+          class="cursor-pointer"
+          mat-cell
+          *matCellDef="let element: let i=index"
+          (click)="userInfo(dataSource.data[i])"
+        >
+          <p class="m-0 text-font">{{ element.nombreCat }}</p>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="comisionClik">
+        <th mat-header-cell *matHeaderCellDef style="width: 20%">
+          COMISIÓN DE CLICKER
+        </th>
+        <td
+          class="cursor-pointer"
+          mat-cell
+          *matCellDef="let element: let i=index"
+          (click)="userInfo(dataSource.data[i])"
+        >
+          <p class="m-0 text-font">{{ element.commisionClic }}</p>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="comisionBus">
+        <th mat-header-cell *matHeaderCellDef style="width: 20%">
+          COMISIÓN DE NEGOCIO
+        </th>
+        <td mat-cell *matCellDef="let element: let i=index">
+          <p class="m-0 text-font">{{ element.commisionBuss }}</p>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="comisionTotal">
+        <th mat-header-cell *matHeaderCellDef style="width: 20%">
+          COMISIÓN TOTAL
+        </th>
+        <td mat-cell *matCellDef="let element: let i=index">
+          <p class="m-0 text-font">{{ element.commisionTotal }}</p>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef style="width: 10%">ACCIONES</th>
+        <td mat-cell *matCellDef="let element: let i=index">
+          <img
+            class="cursor-pointer"
+            (click)="editCategory(element)"
+            src="/assets/img/dashboard/icon-edit.svg"
+            alt=""
+          />
+          <img
+            class="cursor-pointer"
+            (click)="deleteCategory(element)"
+            src="/assets/img/dashboard/icon-trash.svg"
+            alt=""
+          />
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        id="user-{{ i }}"
+        mat-row
+        *matRowDef="let row; columns: displayedColumns; let i = index"
+      ></tr>
+    </table>
   </div>
 </div>

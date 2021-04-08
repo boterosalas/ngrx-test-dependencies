@@ -1,0 +1,365 @@
+<app-banner
+  title="Carrousel & Ofertas"
+  img="/assets/img/banners/banner-dashboard-pc.jpg"
+  imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
+></app-banner>
+<div class="container">
+  <mat-tab-group>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class="gtmTerminosCondicionesClicTerminosLegales">Carrusel</span>
+      </ng-template>
+      <div class="mt-3">
+        <table
+          mat-table
+          #table
+          class="mat-elevation-z2"
+          [dataSource]="dataSource"
+          cdkDropList
+          [cdkDropListData]="dataSource"
+          (cdkDropListDropped)="dropTable($event)"
+        >
+          <ng-container matColumnDef="drag">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <div
+                fxLayout="row"
+                fxLayoutGap="10px"
+                fxLayoutAlign.gt-xs="end center"
+                fxLayoutAlign.xs="center center"
+              >
+                <mat-icon
+                  matSuffix
+                  class="mr-1 blue cursor-pointer"
+                  cdkDragHandle
+                  >drag_indicator</mat-icon
+                >
+                <mat-checkbox
+                  [(ngModel)]="element.selected"
+                  class="check-margin mr-2"
+                >
+                </mat-checkbox>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="imagenWeb">
+            <th mat-header-cell *matHeaderCellDef>IMAGEN WEB</th>
+            <td mat-cell *matCellDef="let element">
+              <div
+                fxLayout="row"
+                fxLayoutGap="10px"
+                fxLayoutAlign.gt-xs="start center"
+                fxLayoutAlign.xs="center center"
+              >
+                <span fxLayout="column">
+                  <img
+                    class="iconb-bussiness mt-2 mb-2 mr-2"
+                    [src]="element.imagenWeb"
+                    style="width: 125px; height: 42px; border-radius: 10px"
+                  />
+                </span>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="imagenMobile">
+            <th mat-header-cell *matHeaderCellDef>IMAGEN MOBILE</th>
+            <td mat-cell *matCellDef="let element">
+              <div
+                fxLayout="row"
+                fxLayoutGap="10px"
+                fxLayoutAlign.gt-xs="start center"
+                fxLayoutAlign.xs="center center"
+              >
+                <span fxLayout="column">
+                  <img
+                    class="iconb-bussiness mt-2 mb-2 mr-2"
+                    [src]="element.imagenMobile"
+                    style="width: 75px; height: 42px; border-radius: 10px"
+                  />
+                </span>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="nameContent">
+            <th mat-header-cell *matHeaderCellDef style="width: 20%">
+              NOMBRE DE CONTENIDO
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <div
+                fxLayout="row"
+                fxLayoutGap="10px"
+                fxLayoutAlign.gt-xs="start center"
+                fxLayoutAlign.xs="center center"
+              >
+                <span fxLayout="column" class="f-16 mr-2" fxHide.xs="true">
+                  {{ element.nameContent }}
+                </span>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="link">
+            <th mat-header-cell class="tr" *matHeaderCellDef style="width: 10%">
+              LINK
+            </th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <div fxLayout="row">
+                <textarea
+                  fxLayout="column"
+                  class="f-16 mr-2"
+                  fxHide.xs="true"
+                  style="
+                    width: 145px;
+                    height: 70px;
+                    text-decoration: underline;
+                    overflow: hidden;
+                    border: none;
+                    resize: none;
+                    color: #8d7eb7 !important;
+                    background: transparent;
+                  "
+                  readonly
+                  >{{ element.link }}</textarea
+                >
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="bussiness">
+            <th mat-header-cell class="tr" *matHeaderCellDef style="width: 20%">
+              NEGOCIO
+            </th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <div fxLayout="row" fxLayoutGap="10px">
+                <span fxLayout="column" class="f-16" fxHide.xs="true">
+                  {{ element.bussiness }}
+                </span>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="comision">
+            <th mat-header-cell class="tr" *matHeaderCellDef style="width: 20%">
+              COMISIÓN
+            </th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <div fxLayout="row" fxLayoutGap="10px">
+                <span fxLayout="column" class="f-16" fxHide.xs="true">
+                  {{ element.comision }}
+                </span>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="active">
+            <th mat-header-cell class="tr" *matHeaderCellDef style="width: 7%">
+              ACTIVO / INACTIVO
+            </th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <div fxLayout="row" fxLayoutGap="10px">
+                <mat-slide-toggle
+                  [(ngModel)]="element.active"
+                  color="orange2-toggle"
+                ></mat-slide-toggle>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef class="center-text">
+              ACCIONES
+            </th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <div
+                fxLayout="row"
+                fxLayoutGap="10px"
+                fxLayoutAlign.gt-xs="center"
+                fxLayoutAlign.xs="center center"
+              >
+                <img
+                  class="cursor-pointer"
+                  (click)="editCategory(element)"
+                  src="/assets/img/dashboard/icon-edit.svg"
+                  alt=""
+                />
+                <img
+                  class="cursor-pointer"
+                  (click)="deleteComision(element, i)"
+                  src="/assets/img/dashboard/icon-remove-comision.svg"
+                  alt=""
+                />
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: displayedColumns; let i = index"
+            cdkDrag
+            [cdkDragData]="row"
+          ></tr>
+        </table>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class="gtmTerminosCondicionesClicTerminosLegales">Ofertas</span>
+      </ng-template>
+      <div class="mt-3">
+        <table
+          mat-table
+          #table
+          class="mat-elevation-z2"
+          [dataSource]="dataSourceOfer"
+          cdkDropList
+          [cdkDropListData]="dataSourceOfer"
+          (cdkDropListDropped)="dropTable2($event)"
+        >
+          <ng-container matColumnDef="drag">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <div
+                fxLayout="row"
+                fxLayoutGap="10px"
+                fxLayoutAlign.gt-xs="end center"
+                fxLayoutAlign.xs="center center"
+              >
+                <mat-icon
+                  matSuffix
+                  class="mr-1 blue cursor-pointer"
+                  cdkDragHandle
+                  >drag_indicator</mat-icon
+                >
+                <mat-checkbox
+                  [(ngModel)]="element.selected"
+                  class="check-margin mr-2"
+                >
+                </mat-checkbox>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="image">
+            <th mat-header-cell *matHeaderCellDef>IMAGEN</th>
+            <td mat-cell *matCellDef="let element">
+              <div
+                fxLayout="row"
+                fxLayoutGap="10px"
+                fxLayoutAlign.gt-xs="start center"
+                fxLayoutAlign.xs="center center"
+              >
+                <span fxLayout="column">
+                  <img
+                    class="iconb-bussiness mt-2 mb-2 mr-2"
+                    [src]="element.image"
+                    style="width: 75px; height: 42px; border-radius: 10px"
+                  />
+                </span>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nameContent">
+            <th mat-header-cell *matHeaderCellDef style="width: 20%">
+              NOMBRE DE CONTENIDO
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <div
+                fxLayout="row"
+                fxLayoutGap="10px"
+                fxLayoutAlign.gt-xs="start center"
+                fxLayoutAlign.xs="center center"
+              >
+                <span fxLayout="column" class="f-16 mr-2" fxHide.xs="true">
+                  {{ element.nameContent }}
+                </span>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="link">
+            <th mat-header-cell class="tr" *matHeaderCellDef style="width: 30%">
+              LINK
+            </th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <div fxLayout="row">
+                <textarea
+                  fxLayout="column"
+                  class="f-16 mr-2"
+                  fxHide.xs="true"
+                  style="
+                    width: 245px;
+                    height: 70px;
+                    text-decoration: underline;
+                    overflow: hidden;
+                    border: none;
+                    resize: none;
+                    color: #8d7eb7 !important;
+                    background: transparent;
+                  "
+                  readonly
+                  >{{ element.link }}</textarea
+                >
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="bussiness">
+            <th mat-header-cell class="tr" *matHeaderCellDef style="width: 20%">
+              NEGOCIO
+            </th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <div fxLayout="row" fxLayoutGap="10px">
+                <span fxLayout="column" class="f-16" fxHide.xs="true">
+                  {{ element.bussiness }}
+                </span>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="comision">
+            <th mat-header-cell class="tr" *matHeaderCellDef style="width: 20%">
+              COMISIÓN
+            </th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <div fxLayout="row" fxLayoutGap="10px">
+                <span fxLayout="column" class="f-16" fxHide.xs="true">
+                  {{ element.comision }}
+                </span>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef class="center-text">
+              ACCIONES
+            </th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <div
+                fxLayout="row"
+                fxLayoutGap="10px"
+                fxLayoutAlign.gt-xs="center"
+                fxLayoutAlign.xs="center center"
+              >
+                <img
+                  class="cursor-pointer"
+                  (click)="editCategory(element)"
+                  src="/assets/img/dashboard/icon-edit.svg"
+                  alt=""
+                />
+                <img
+                  class="cursor-pointer"
+                  (click)="deleteComision(element, i)"
+                  src="/assets/img/dashboard/icon-remove-comision.svg"
+                  alt=""
+                />
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: displayedColumns2; let i = index"
+            cdkDrag
+            [cdkDragData]="row"
+          ></tr>
+        </table>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

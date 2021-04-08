@@ -51,6 +51,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { ConfigurationsComponent } from './pages/configurations/configurations.component';
 import { InformationBussinessComponent } from './pages/information-bussiness/information-bussiness.component';
 import { ManageComisionBussinessComponent } from './pages/manage-comision-bussiness/manage-comision-bussiness.component';
+import { CarrouselAdminComponent } from './pages/carrousel-admin/carrousel-admin.component';
 const routes: Routes = [
   {
     path: "",
@@ -133,9 +134,19 @@ const routes: Routes = [
       role: "ADMIN",
       superRole: "SUPERADMIN"
     },
-  }, {
+  },
+  {
     path: "manage-comision-admin",
     component: ManageComisionBussinessComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
+    },
+  },
+  {
+    path: "carrousel-admin",
+    component: CarrouselAdminComponent,
     canActivate: [RoleGuard],
     data: {
       role: "ADMIN",
@@ -250,7 +261,8 @@ const routes: Routes = [
     AddEditBlogAdminComponent,
     ConfigurationsComponent,
     InformationBussinessComponent,
-    ManageComisionBussinessComponent
+    ManageComisionBussinessComponent,
+    CarrouselAdminComponent
   ],
   imports: [
     AngularEditorModule,

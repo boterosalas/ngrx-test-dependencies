@@ -12,7 +12,26 @@ import { ContentService } from 'src/app/services/content.service';
 export class ManageComisionBussinessComponent implements OnInit {
   id: string;
   title: string;
-  displayedColumns: string[] = ['drag', 'title', 'description', 'edition'];
+  dataSource = [{
+    codigo: 2,
+    nombreCat: "Tecnología",
+    commisionClic: "4.3%",
+    commisionBuss: "4.3%",
+    commisionTotal: "4.3%"
+  }, {
+    codigo: 3,
+    nombreCat: "Tecnología",
+    commisionClic: "4.3%",
+    commisionBuss: "4.3%",
+    commisionTotal: "4.3%"
+  }, {
+    codigo: 4,
+    nombreCat: "Tecnología",
+    commisionClic: "4.3%",
+    commisionBuss: "4.3%",
+    commisionTotal: "4.3%"
+  }]
+  displayedColumns: string[] = ['code', 'nombreCat', 'comisionClik', 'comisionBus', 'comisionTotal', 'actions'];
   image: string;
   private subscription: Subscription = new Subscription();
   constructor(
