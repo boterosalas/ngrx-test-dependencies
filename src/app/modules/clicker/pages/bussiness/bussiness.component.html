@@ -1,268 +1,507 @@
-<app-banner title="{{'BUSSINESS.CATEGORIES' | translate}}" [color]="colorText" [img]="imgBanner" [imgMobile]="imgBannerMobile"></app-banner>
-
-<app-back-navigation
-  [imageurl]="image"
-  [(title)]="title"
-  [aditional]="percent"
-  (close)="goback()"
-></app-back-navigation>
-
+<app-banner
+  color="purple"
+  title="{{ 'HOME.BUSSINESS' | translate }}"
+  img="/assets/img/banners/banner-negocios-pc.jpg"
+  imgMobile="/assets/img/banners/banner-negocios-mobile.jpg"
+></app-banner>
 
 <div class="container">
-
-  <app-search *ngIf="id=== '1'" (search)="searchBiggyExito($event)"></app-search>
-  <app-search *ngIf="id==='2'" (search)="searchBiggyCarulla($event)"></app-search>
-
-  <div *ngIf="showResults">
-    <p class="f-18 mt-0">Clicker recuerda que los precios pueden variar al entrar al comercio.</p>
-      <div fxLayout="row wrap"  fxLayoutGap="10px">
-          
-          <ng-container class="mt-4" *ngFor="let product of productsListExito | slice:0:mostrarProductos ; let i = index">
-            <app-product 
-              class="product-exito"
-              fxLayout="column"
-              fxFlex="24"
-              fxFlex.xs="100"
-              fxFlex.sm="30"
-              id="productTitle{{ i }}"
-              btnid="btnLink{{ i }}"
-              [productName]="product.title"
-              [discount]="product.oldprice"
-              [price]="product.price"
-              [image]="!!product.image.value ? product.image.value : '/assets/img/Na.svg'"
-              [alt]="product.name"
-              [plu]="product.plu"
-              textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
-              exito="true"
-              (infoProduct)="dataProduct(product);"
-            ></app-product>
-          </ng-container>
-          <span class="w-100" fxLayout="row" fxLayoutAlign="center center">
-            <button mat-raised-button color="orange" class="button-height f-18 bw mb-3" (click)="verMasProductos()" [disabled]=' mostrarProductos > totalItems'>Mostrar más</button>
-          </span>
-          
-        </div>
-    
-  </div>
-
-  <div class="not-found" *ngIf="showNotFound">
-    <app-not-found></app-not-found>
-  </div>
-
-  <div class="products" *ngIf="bussiness.length !== 0"> 
-    <!-- <h3 class="border-bottom-orange-init title-h3">
-      {{ "BUSSINESS.CATEGORIES" | translate }}
-    </h3> -->
-  
-    <p class="f-20" fxHide.xs>{{ "HOME.BUSSINESS_TEXT" | translate }}</p>
-  
-    <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="0px">
-      <div
-        fxLayout="column"
-        fxFlex.xs="100"
-        fxFlex.sm="30"
-        fxFlex.gt-sm="24"
-        class="mb-3"
-        *ngFor="let bussiness of bussiness; let i = index"
+  <span>
+    <button mat-button (click)="goback()">
+      <span
+        class="galano-bold f-16"
+        fxLayout="row"
+        fxLayoutAlign="start center"
       >
-        <app-product
-          id="bussiness{{ i }}"
-          btnid="gtmNegocio{{title}}{{bussiness.description | trim}}"
-          [productName]="bussiness.description"
-          [price]="bussiness.commission"
-          [percent]="bussiness.infoaditional"
-          [image]="bussiness.imageurl"
-          [alt]="bussiness.description"
-          other="true"
-          Class="mb-1 button-100 gtmNegocio{{title}}{{bussiness.description | trim}}"
-          container="img-container-viajes"
-          textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
-          (infoProduct)="dataSliderCategory(bussiness)"
-        ></app-product>
+        <mat-icon>keyboard_arrow_left</mat-icon>
+        Volver
+      </span>
+    </button>
+  </span>
+</div>
+
+<div class="container" fxLayout="row" fxLayout.xs="column">
+  <div class="container-right mt-2">
+    <mat-card>
+      <div fxLayout="column">
+        <span
+          class="border-inferior"
+          fxLayout="column"
+          fxLayoutAlign="center center"
+        >
+          <img [src]="image" alt="logo afiliado" />
+          <h3 class="red-text">{{ percent }}</h3>
+        </span>
+        <div></div>
+        <div>
+          <h4 class="mb-0 mt-2">Sobre el negocio:</h4>
+          <p class="m-0">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </div>
+      </div>
+    </mat-card>
+    <mat-card class="mt-2">
+      <div>
+        <h3 class="border-inferior">Comisiones</h3>
+        <p>Nuestros clickers han recibido desde 2020 con Almacenes Éxito:</p>
+        <span> +200 M </span>
+        <span>
+          <p>COMISIONES PAGADAS A LA FECHA</p>
+        </span>
+      </div>
+    </mat-card>
+    <mat-card class="mt-2">
+      <div>
+        <h3 class="border-inferior">Tips de venta</h3>
+        <h4>Satisfacción</h4>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+        <h4>Descuentos</h4>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+        <h4>Días especiales</h4>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+        <h4>Medios de pago</h4>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+        <h4>Categorías</h4>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+      </div>
+    </mat-card>
+  </div>
+  <div class="container-left">
+    <div
+      fxLayout="row"
+      class="card-library mt-2"
+      fxShow.gt-xs="true"
+      fxShow.xs="false"
+    >
+      <img
+        class="imagen-absolute-oferts"
+        src="/assets/img/banners/oferts.png"
+        alt="ofertas"
+      />
+      <div
+        class="position-relative banner-mobile heigth-image"
+        fxShow.gt-xs="true"
+        fxShow.xs="false"
+      >
+        <h3>Descarga las mejores ofertas para compartir.</h3>
+        <button
+          mat-raised-button
+          class="button-oferts"
+          color="orange"
+          [routerLink]="['/biblioteca']"
+          id="download-users"
+        >
+          Ver Ofertas
+        </button>
       </div>
     </div>
-  </div>
-
-  <div class="deliver mt-3" *ngIf="bussiness.length === 0 && showDeliver === true">
-
-    <div fxLayout.xs="column" fxLayout="row" fxLayoutGap.xs="0px" fxLayoutGap="20px" fxLayoutAlign="space-around">
-
-      <div fxShow.xs="true" fxHide.gt-xs="true">
-        <img class="responsive-img" src="/assets/img/deliver/mobile/banner_envios.png" alt="banner">
-      </div>
-
-      <div fxHide.xs="true" fxFlex="39"  class="mt-3 mb-3">
-        <img class="responsive-img" src="/assets/img/deliver/web/banner_envios.png" alt="banner">
-      </div>
-  
-      <mat-card class="mt-3 mb-3" fxFlex="50" *ngIf="acceptTermsDeliver === false">
-        <img class="responsive-img" src="/assets/img/terminos_y_condiciones.svg" alt="icon-deliver">
-        
-        <h3 class="f-22 border-bottom-orange-init">{{ "BUSSINESS.TITLE" | translate }}</h3>
-  
-        <form
-          [formGroup]="termsForm"
-          class="text-center mt-4 mb-4"
-          *ngIf="terms === false"
+    <div
+      fxLayout="row"
+      class="card-library mt-2"
+      fxShow.gt-xs="false"
+      fxShow.xs="true"
+    >
+      <img
+        class="imagen-resposive-mobile"
+        src="/assets/img/banners/oferts_mobile.png"
+        alt="ofertas"
+      />
+      <div
+        class="position-relative heigth-image"
+        fxShow.gt-xs="false"
+        fxShow.xs="true"
+      >
+        <h3>Descarga aquí las mejores ofertas del día</h3>
+        <button
+          mat-raised-button
+          class="button-oferts mb-2"
+          color="orange"
+          [routerLink]="['/biblioteca']"
+          id="download-users"
         >
-        <div class="mb-3 mt-3">
-          <span>
-            <mat-checkbox  formControlName="acceptTerms" id="chkaccept" (change)="acceptTermsCheck()">
-            </mat-checkbox>
-          </span>
-          <span class="accept-terms ml-2 cursor-pointer" (click)="termsAndConditions()">
-            {{
-            "REGISTER.ACCEPT" | translate
-          }}
-          </span>
-        </div>
-      
-        <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
-          <button
-            mat-button
-            id="register"
-            class="mt-2 button button-height pl-2 pr-2"
-            [routerLink]="[ '/inicio']"
-          >
-          <span class="orange-text">{{ "BUSSINESS.DELIVER_BUTTON_CANCEL" | translate }}</span>
+          Ver Ofertas
         </button>
-        
+      </div>
+    </div>
+    <app-search
+      *ngIf="id === '1'"
+      (search)="searchBiggyExito($event)"
+    ></app-search>
+    <app-search
+      *ngIf="id === '2'"
+      (search)="searchBiggyCarulla($event)"
+    ></app-search>
+
+    <div *ngIf="showResults">
+      <h3 class="text-productos border-bottom-orange-init">
+        Resultados de búsqueda
+      </h3>
+
+      <div fxLayout="column" fxLayoutGap="10px">
+        <ng-container
+          class="mt-4"
+          *ngFor="
+            let product of productsListExito | slice: 0:mostrarProductos;
+            let i = index
+          "
+        >
+          <app-product-bussiness
+            class="product-exito"
+            fxLayout="column"
+            fxFlex="24"
+            fxFlex.xs="100"
+            fxFlex.sm="30"
+            id="productTitle{{ i }}"
+            btnid="btnLink{{ i }}"
+            [productName]="product.title"
+            [discount]="product.oldprice"
+            [price]="product.price"
+            [image]="
+              !!product.image.value ? product.image.value : '/assets/img/Na.svg'
+            "
+            [alt]="product.name"
+            [plu]="product.plu"
+            textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+            exito="true"
+            (infoProduct)="dataProduct(product)"
+          ></app-product-bussiness>
+        </ng-container>
+        <span class="w-100" fxLayout="row" fxLayoutAlign="center center">
           <button
             mat-raised-button
-            id="register"
-            class="mt-2 button button-height pl-2 pr-2"
-            color="orange"
-            (click)="registerUser()"
-            [disabled]="!termsForm.valid"
+            class="button-height f-18 bw mb-3 blue-ligth"
+            (click)="verMasProductos()"
+            [disabled]="mostrarProductos > totalItems"
           >
-          <span>{{ "BUSSINESS.DELIVER_BUTTON_OK" | translate }}</span>
-        </button>
-        </div>
-        
-        </form>
-      </mat-card>
-
-      <mat-card class="mt-3 mb-3" fxFlex="50" fxFlex.xs="100" *ngIf="acceptTermsDeliver === true" fxLayoutAlign="center center" fxLayout="column">
-        <span class="accept-terms text-center cursor-pointer" (click)="termsAndConditions()">
-          {{
-          "BUSSINESS.ACCEPT" | translate
-        }}
+            Mostrar más
+          </button>
         </span>
-     
-        <button
-        mat-raised-button
-        id="seway"
-        class="mt-2 button button-height pl-2 pr-2 button-100"
-        color="orange"
-        (click)="goSeway()"
-      > IR A SEWAY </button>
-
-      </mat-card>
-      
+      </div>
     </div>
 
-
-    <h3 class="f-20 border-bottom-orange-init">{{ "BUSSINESS.TITLE_QUESTION" | translate }}</h3>
-
-    <div class="questions">
-      <mat-accordion class="mt-3 mb-3">
-        
-        <mat-expansion-panel class="mt-3 mb-3">
-          <mat-expansion-panel-header>
-            <span class="f-16 gray galano-bold">{{ "BUSSINESS.DELIVER_WORKS_TITLE" | translate }}</span>
-          </mat-expansion-panel-header>
-          <div innerHtml=" {{ 'BUSSINESS.DELIVER_WORKS' | translate }}"></div> 
-        </mat-expansion-panel>
-
-        <mat-expansion-panel class="mt-3 mb-3">
-          <mat-expansion-panel-header>
-            <span class="f-16 gray galano-bold">{{ "BUSSINESS.PARTICIPATE_CAN_TITLE" | translate }}</span>
-          </mat-expansion-panel-header>
-          <div innerHtml="{{ 'BUSSINESS.PARTICIPATE_CAN_TEXT' | translate }}"></div> 
-        </mat-expansion-panel>
-        
-        <mat-expansion-panel class="mt-3 mb-3">
-          <mat-expansion-panel-header>
-            <span class="f-16 gray galano-bold">{{ "BUSSINESS.PARTICIPATE_TITLE" | translate }}</span>
-          </mat-expansion-panel-header>
-          <div innerHtml="{{ 'BUSSINESS.PARTICIPATE_TEXT' | translate }}"></div>
-        </mat-expansion-panel>
-            
-        <mat-expansion-panel class="mt-3 mb-3">
-          <mat-expansion-panel-header>
-            <span class="f-16 gray galano-bold">{{ "BUSSINESS.REQUIREMENT_TITLE" | translate }}</span>
-          </mat-expansion-panel-header>
-          <div innerHtml="{{ 'BUSSINESS.REQUIREMENT_TEXT' | translate }}"></div>
-        </mat-expansion-panel>
-        
-        <mat-expansion-panel class="mt-3 mb-3">
-          <mat-expansion-panel-header>
-            <span class="f-16 gray galano-bold">{{ "BUSSINESS.TRANSPORT_TITLE" | translate }}</span>
-          </mat-expansion-panel-header>
-          <div innerHtml="{{ 'BUSSINESS.TRANSPORT_TEXT' | translate }}"></div>
-        </mat-expansion-panel>
-        
-        <mat-expansion-panel class="mt-3 mb-3">
-          <mat-expansion-panel-header>
-            <span class="f-16 gray galano-bold">{{ "BUSSINESS.VEHICULE_TITLE" | translate }}</span>
-          </mat-expansion-panel-header>
-          <div innerHtml="{{ 'BUSSINESS.VEHICULE_TEXT' | translate }}"></div>
-        </mat-expansion-panel>
-        
-        <mat-expansion-panel class="mt-3 mb-3">
-          <mat-expansion-panel-header>
-            <span class="f-16 gray galano-bold">{{ "BUSSINESS.HOUR_TITLE" | translate }}</span>
-          </mat-expansion-panel-header>
-          <div innerHtml="{{ 'BUSSINESS.HOUR_TEXT' | translate }}"></div>
-        </mat-expansion-panel>
-        
-        <mat-expansion-panel class="mt-3 mb-3">
-          <mat-expansion-panel-header>
-            <span class="f-16 gray galano-bold">{{ "BUSSINESS.DELIVER_TITLE" | translate }}</span>
-          </mat-expansion-panel-header>
-          <div innerHtml="{{ 'BUSSINESS.DELIVER_TEXT' | translate }}"></div>
-        </mat-expansion-panel>
-        
-        <mat-expansion-panel class="mt-3 mb-3">
-          <mat-expansion-panel-header>
-            <span class="f-16 gray galano-bold">{{ "BUSSINESS.PRODUCT_TITLE" | translate }}</span>
-          </mat-expansion-panel-header>
-          <div innerHtml="{{ 'BUSSINESS.PRODUCT_TEXT' | translate }}"></div>
-        </mat-expansion-panel>
-        
-        <mat-expansion-panel class="mt-3 mb-3">
-          <mat-expansion-panel-header>
-            <span class="f-16 gray galano-bold">{{ "BUSSINESS.PAYMENT_TITLE" | translate }}</span>
-          </mat-expansion-panel-header>
-          <div innerHtml="{{ 'BUSSINESS.PAYMENT_TEXT' | translate }}"></div>
-        </mat-expansion-panel>
-                
-        <mat-expansion-panel class="mt-3 mb-3">
-          <mat-expansion-panel-header>
-            <span class="f-16 gray galano-bold">{{ "BUSSINESS.PAYMENTS_TITLE" | translate }}</span>
-          </mat-expansion-panel-header>
-          <div innerHtml="{{ 'BUSSINESS.PAYMENTS_TEXT' | translate }}"></div>
-        </mat-expansion-panel>
-        
-        <mat-expansion-panel class="mt-3 mb-3">
-          <mat-expansion-panel-header>
-            <span class="f-16 gray galano-bold">{{ "BUSSINESS.OTHER_TITLE" | translate }}</span>
-          </mat-expansion-panel-header>
-          <div innerHtml="{{ 'BUSSINESS.OTHER_TEXT' | translate }}"></div>
-        </mat-expansion-panel>
-        
-        <mat-expansion-panel class="mt-3 mb-3">
-          <mat-expansion-panel-header>
-            <span class="f-16 gray galano-bold">{{ "BUSSINESS.RESPONSABILITY_TITLE" | translate }}</span>
-          </mat-expansion-panel-header>
-          <div innerHtml="{{ 'BUSSINESS.RESPONSABILITY_TEXT' | translate }}"></div>
-        </mat-expansion-panel>
-    
-      </mat-accordion>
+    <div class="not-found" *ngIf="showNotFound">
+      <app-not-found></app-not-found>
     </div>
 
+    <div class="products" *ngIf="bussiness.length !== 0">
+      <!-- <h3 class="border-bottom-orange-init title-h3">
+      {{ "BUSSINESS.CATEGORIES" | translate }}
+    </h3> -->
+
+      <h3 class="text-productos border-bottom-orange-init">Categorías</h3>
+
+      <div fxLayout="column" fxLayoutGap="10px" fxLayoutGap.xs="0px">
+        <div
+          fxLayout="column"
+          fxFlex.xs="100"
+          fxFlex.sm="30"
+          fxFlex.gt-sm="24"
+          class="mb-3"
+          *ngFor="let bussiness of bussiness; let i = index"
+        >
+          <app-product-bussiness
+            id="bussiness{{ i }}"
+            btnid="gtmNegocio{{ title }}{{ bussiness.description | trim }}"
+            [productName]="bussiness.description"
+            [price]="bussiness.commission"
+            [percent]="bussiness.infoaditional"
+            [image]="bussiness.imageurl"
+            [alt]="bussiness.description"
+            other="true"
+            Class="mb-1 button-20 gtmNegocio{{ title }}{{
+              bussiness.description | trim
+            }}"
+            container="img-container-viajes"
+            textbutton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+            (infoProduct)="dataSliderCategory(bussiness)"
+          ></app-product-bussiness>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="deliver mt-3"
+      *ngIf="bussiness.length === 0 && showDeliver === true"
+    >
+      <div
+        fxLayout.xs="column"
+        fxLayout="row"
+        fxLayoutGap.xs="0px"
+        fxLayoutGap="20px"
+        fxLayoutAlign="space-around"
+      >
+        <div fxShow.xs="true" fxHide.gt-xs="true">
+          <img
+            class="responsive-img"
+            src="/assets/img/deliver/mobile/banner_envios.png"
+            alt="banner"
+          />
+        </div>
+
+        <div fxHide.xs="true" fxFlex="39" class="mt-3 mb-3">
+          <img
+            class="responsive-img"
+            src="/assets/img/deliver/web/banner_envios.png"
+            alt="banner"
+          />
+        </div>
+
+        <mat-card
+          class="mt-3 mb-3"
+          fxFlex="50"
+          *ngIf="acceptTermsDeliver === false"
+        >
+          <img
+            class="responsive-img"
+            src="/assets/img/terminos_y_condiciones.svg"
+            alt="icon-deliver"
+          />
+
+          <h3 class="f-22 border-bottom-orange-init">
+            {{ "BUSSINESS.TITLE" | translate }}
+          </h3>
+
+          <form
+            [formGroup]="termsForm"
+            class="text-center mt-4 mb-4"
+            *ngIf="terms === false"
+          >
+            <div class="mb-3 mt-3">
+              <span>
+                <mat-checkbox
+                  formControlName="acceptTerms"
+                  id="chkaccept"
+                  (change)="acceptTermsCheck()"
+                >
+                </mat-checkbox>
+              </span>
+              <span
+                class="accept-terms ml-2 cursor-pointer"
+                (click)="termsAndConditions()"
+              >
+                {{ "REGISTER.ACCEPT" | translate }}
+              </span>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
+              <button
+                mat-button
+                id="register"
+                class="mt-2 button button-height pl-2 pr-2"
+                [routerLink]="['/inicio']"
+              >
+                <span class="orange-text">{{
+                  "BUSSINESS.DELIVER_BUTTON_CANCEL" | translate
+                }}</span>
+              </button>
+
+              <button
+                mat-raised-button
+                id="register"
+                class="mt-2 button button-height pl-2 pr-2"
+                color="orange"
+                (click)="registerUser()"
+                [disabled]="!termsForm.valid"
+              >
+                <span>{{ "BUSSINESS.DELIVER_BUTTON_OK" | translate }}</span>
+              </button>
+            </div>
+          </form>
+        </mat-card>
+
+        <mat-card
+          class="mt-3 mb-3"
+          fxFlex="50"
+          fxFlex.xs="100"
+          *ngIf="acceptTermsDeliver === true"
+          fxLayoutAlign="center center"
+          fxLayout="column"
+        >
+          <span
+            class="accept-terms text-center cursor-pointer"
+            (click)="termsAndConditions()"
+          >
+            {{ "BUSSINESS.ACCEPT" | translate }}
+          </span>
+
+          <button
+            mat-raised-button
+            id="seway"
+            class="mt-2 button button-height pl-2 pr-2 button-100"
+            color="orange"
+            (click)="goSeway()"
+          >
+            IR A SEWAY
+          </button>
+        </mat-card>
+      </div>
+
+      <h3 class="f-20 border-bottom-orange-init">
+        {{ "BUSSINESS.TITLE_QUESTION" | translate }}
+      </h3>
+
+      <div class="questions">
+        <mat-accordion class="mt-3 mb-3">
+          <mat-expansion-panel class="mt-3 mb-3">
+            <mat-expansion-panel-header>
+              <span class="f-16 gray galano-bold">{{
+                "BUSSINESS.DELIVER_WORKS_TITLE" | translate
+              }}</span>
+            </mat-expansion-panel-header>
+            <div innerHtml=" {{ 'BUSSINESS.DELIVER_WORKS' | translate }}"></div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="mt-3 mb-3">
+            <mat-expansion-panel-header>
+              <span class="f-16 gray galano-bold">{{
+                "BUSSINESS.PARTICIPATE_CAN_TITLE" | translate
+              }}</span>
+            </mat-expansion-panel-header>
+            <div
+              innerHtml="{{ 'BUSSINESS.PARTICIPATE_CAN_TEXT' | translate }}"
+            ></div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="mt-3 mb-3">
+            <mat-expansion-panel-header>
+              <span class="f-16 gray galano-bold">{{
+                "BUSSINESS.PARTICIPATE_TITLE" | translate
+              }}</span>
+            </mat-expansion-panel-header>
+            <div
+              innerHtml="{{ 'BUSSINESS.PARTICIPATE_TEXT' | translate }}"
+            ></div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="mt-3 mb-3">
+            <mat-expansion-panel-header>
+              <span class="f-16 gray galano-bold">{{
+                "BUSSINESS.REQUIREMENT_TITLE" | translate
+              }}</span>
+            </mat-expansion-panel-header>
+            <div
+              innerHtml="{{ 'BUSSINESS.REQUIREMENT_TEXT' | translate }}"
+            ></div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="mt-3 mb-3">
+            <mat-expansion-panel-header>
+              <span class="f-16 gray galano-bold">{{
+                "BUSSINESS.TRANSPORT_TITLE" | translate
+              }}</span>
+            </mat-expansion-panel-header>
+            <div innerHtml="{{ 'BUSSINESS.TRANSPORT_TEXT' | translate }}"></div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="mt-3 mb-3">
+            <mat-expansion-panel-header>
+              <span class="f-16 gray galano-bold">{{
+                "BUSSINESS.VEHICULE_TITLE" | translate
+              }}</span>
+            </mat-expansion-panel-header>
+            <div innerHtml="{{ 'BUSSINESS.VEHICULE_TEXT' | translate }}"></div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="mt-3 mb-3">
+            <mat-expansion-panel-header>
+              <span class="f-16 gray galano-bold">{{
+                "BUSSINESS.HOUR_TITLE" | translate
+              }}</span>
+            </mat-expansion-panel-header>
+            <div innerHtml="{{ 'BUSSINESS.HOUR_TEXT' | translate }}"></div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="mt-3 mb-3">
+            <mat-expansion-panel-header>
+              <span class="f-16 gray galano-bold">{{
+                "BUSSINESS.DELIVER_TITLE" | translate
+              }}</span>
+            </mat-expansion-panel-header>
+            <div innerHtml="{{ 'BUSSINESS.DELIVER_TEXT' | translate }}"></div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="mt-3 mb-3">
+            <mat-expansion-panel-header>
+              <span class="f-16 gray galano-bold">{{
+                "BUSSINESS.PRODUCT_TITLE" | translate
+              }}</span>
+            </mat-expansion-panel-header>
+            <div innerHtml="{{ 'BUSSINESS.PRODUCT_TEXT' | translate }}"></div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="mt-3 mb-3">
+            <mat-expansion-panel-header>
+              <span class="f-16 gray galano-bold">{{
+                "BUSSINESS.PAYMENT_TITLE" | translate
+              }}</span>
+            </mat-expansion-panel-header>
+            <div innerHtml="{{ 'BUSSINESS.PAYMENT_TEXT' | translate }}"></div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="mt-3 mb-3">
+            <mat-expansion-panel-header>
+              <span class="f-16 gray galano-bold">{{
+                "BUSSINESS.PAYMENTS_TITLE" | translate
+              }}</span>
+            </mat-expansion-panel-header>
+            <div innerHtml="{{ 'BUSSINESS.PAYMENTS_TEXT' | translate }}"></div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="mt-3 mb-3">
+            <mat-expansion-panel-header>
+              <span class="f-16 gray galano-bold">{{
+                "BUSSINESS.OTHER_TITLE" | translate
+              }}</span>
+            </mat-expansion-panel-header>
+            <div innerHtml="{{ 'BUSSINESS.OTHER_TEXT' | translate }}"></div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="mt-3 mb-3">
+            <mat-expansion-panel-header>
+              <span class="f-16 gray galano-bold">{{
+                "BUSSINESS.RESPONSABILITY_TITLE" | translate
+              }}</span>
+            </mat-expansion-panel-header>
+            <div
+              innerHtml="{{ 'BUSSINESS.RESPONSABILITY_TEXT' | translate }}"
+            ></div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </div>
   </div>
-
 </div>
 
 <!-- template share -->
@@ -270,7 +509,7 @@
 <ng-template #templateCategories>
   <div *ngIf="!reference">
     <form [formGroup]="formLink">
-      <div fxLayout="column" >
+      <div fxLayout="column">
         <div fxLayout="column" fxFlex="100" fxFlex.xs="100">
           <mat-form-field appearance="dashed" class="dashed mt-2">
             <input
@@ -294,12 +533,12 @@
             id="btnCopy"
             color="orange"
             [disabled]="enableCopy"
-            ngClass="{{classButtonCopy}}"
+            ngClass="{{ classButtonCopy }}"
             (click)="copyInputMessage(linkInput)"
           >
             <span
               fxLayoutAlign="center space-between"
-              ngClass="{{classButtonCopy}}"
+              ngClass="{{ classButtonCopy }}"
             >
               {{ "GENERIC.COPY_LINK" | translate }}
             </span>
@@ -310,10 +549,13 @@
             mat-button
             id="refer"
             color="orange"
-            ngClass="{{classButtonRefer}}"
+            ngClass="{{ classButtonRefer }}"
             (click)="showReference()"
           >
-            <span ngClass="{{classButtonRefer}}" fxLayoutAlign="center space-between">
+            <span
+              ngClass="{{ classButtonRefer }}"
+              fxLayoutAlign="center space-between"
+            >
               Referir
             </span>
           </button>
@@ -322,10 +564,13 @@
             mat-button
             id="buy"
             color="orange"
-            ngClass="orange-border {{classButtonBuy}}"
+            ngClass="orange-border {{ classButtonBuy }}"
             (click)="buy()"
           >
-            <span ngClass="{{classButtonBuy}}" fxLayoutAlign="center space-between">
+            <span
+              ngClass="{{ classButtonBuy }}"
+              fxLayoutAlign="center space-between"
+            >
               Comprar
             </span>
           </button>
@@ -342,39 +587,43 @@
         theme="circles-dark"
         shareButton="facebook"
         [url]="urlshorten"
-        ngClass="sharebutton {{classButtonFacebook}} mr-2"
+        ngClass="sharebutton {{ classButtonFacebook }} mr-2"
       >
-        <i ngClass="fab fa-facebook-f {{classButtonFacebook}}"></i>
+        <i ngClass="fab fa-facebook-f {{ classButtonFacebook }}"></i>
       </button>
       <button
         theme="circles-dark"
         shareButton="twitter"
         [url]="urlshorten"
-        ngClass="sharebutton {{classButtonTwitter}} mr-2"
+        ngClass="sharebutton {{ classButtonTwitter }} mr-2"
       >
-        <i ngClass="fab fa-twitter {{classButtonTwitter}}"></i>
+        <i ngClass="fab fa-twitter {{ classButtonTwitter }}"></i>
       </button>
-      <a 
-      href="https://web.whatsapp.com/send?text={{urlshorten}}" 
-      target="_blank"
-      data-action="share/whatsapp/share"
-      ngClass="sharebutton p-3 {{classButtonWhatsapp}}"
+      <a
+        href="https://web.whatsapp.com/send?text={{ urlshorten }}"
+        target="_blank"
+        data-action="share/whatsapp/share"
+        ngClass="sharebutton p-3 {{ classButtonWhatsapp }}"
       >
-        <i ngClass="fab fa-whatsapp {{classButtonWhatsapp}}"></i>
-    </a>
+        <i ngClass="fab fa-whatsapp {{ classButtonWhatsapp }}"></i>
+      </a>
     </div>
 
     <div class="share-mobile">
       <button
         mat-button
-        ngClass="gtmrs  mb-2 mt-2 {{classButtonShare}}"
+        ngClass="gtmrs  mb-2 mt-2 {{ classButtonShare }}"
         (click)="share()"
         fxLayout="row"
         fxLayoutAlign="start start"
       >
-        <span ngClass="gtmrs f-15 {{classButtonShare}}" fxLayout="row" fxLayoutAlign="center center">
+        <span
+          ngClass="gtmrs f-15 {{ classButtonShare }}"
+          fxLayout="row"
+          fxLayoutAlign="center center"
+        >
           <img
-            ngClass="icon-compartir pr-2 {{classButtonShare}}"
+            ngClass="icon-compartir pr-2 {{ classButtonShare }}"
             src="/assets/img/Compartir.svg"
             alt="user"
           />
@@ -385,14 +634,18 @@
       <button
         *ngIf="showReferenceButton"
         mat-button
-        ngClass="gtmrs  mb-2 mt-2 {{classButtonRefer}}"
+        ngClass="gtmrs  mb-2 mt-2 {{ classButtonRefer }}"
         (click)="showReference()"
         fxLayout="row"
         fxLayoutAlign="start start"
       >
-        <span ngClass="gtmrs f-15 {{classButtonRefer}}" fxLayout="row" fxLayoutAlign="center center">
+        <span
+          ngClass="gtmrs f-15 {{ classButtonRefer }}"
+          fxLayout="row"
+          fxLayoutAlign="center center"
+        >
           <img
-            ngClass="icon-compartir pr-2 {{classButtonRefer}}"
+            ngClass="icon-compartir pr-2 {{ classButtonRefer }}"
             src="/assets/img/Referir.svg"
             alt="user"
           />
@@ -402,14 +655,18 @@
 
       <button
         mat-button
-        ngClass="gtmrs  mb-2 mt-2 {{classButtonBuy}}"
+        ngClass="gtmrs  mb-2 mt-2 {{ classButtonBuy }}"
         (click)="buy()"
         fxLayout="row"
         fxLayoutAlign="start start"
       >
-        <span ngClass="gtmrs f-15 {{classButtonBuy}}" fxLayout="row" fxLayoutAlign="center center">
+        <span
+          ngClass="gtmrs f-15 {{ classButtonBuy }}"
+          fxLayout="row"
+          fxLayoutAlign="center center"
+        >
           <img
-            ngClass="icon-compartir pr-2 {{classButtonBuy}}"
+            ngClass="icon-compartir pr-2 {{ classButtonBuy }}"
             src="/assets/img/Comprar.svg"
             alt="user"
           />
@@ -530,12 +787,12 @@
             id="btnCopy"
             color="orange"
             [disabled]="enableCopy"
-            ngClass="{{classButtonCopy}}"
+            ngClass="{{ classButtonCopy }}"
             (click)="copyInputMessage(linkInput)"
           >
             <span
               fxLayoutAlign="center space-between"
-              ngClass="{{classButtonCopy}}"
+              ngClass="{{ classButtonCopy }}"
             >
               {{ "GENERIC.COPY_LINK" | translate }}
             </span>
@@ -545,10 +802,13 @@
             mat-button
             id="refer"
             color="orange"
-            ngClass="{{classButtonRefer}}"
+            ngClass="{{ classButtonRefer }}"
             (click)="showReference()"
           >
-            <span ngClass="{{classButtonRefer}}" fxLayoutAlign="center space-between">
+            <span
+              ngClass="{{ classButtonRefer }}"
+              fxLayoutAlign="center space-between"
+            >
               Referir
             </span>
           </button>
@@ -557,10 +817,13 @@
             mat-button
             id="buy"
             color="orange"
-            ngClass="orange-border {{classButtonBuy}}"
+            ngClass="orange-border {{ classButtonBuy }}"
             (click)="buy()"
           >
-            <span ngClass="{{classButtonBuy}}" fxLayoutAlign="center space-between">
+            <span
+              ngClass="{{ classButtonBuy }}"
+              fxLayoutAlign="center space-between"
+            >
               Comprar
             </span>
           </button>
@@ -577,39 +840,43 @@
         theme="circles-dark"
         shareButton="facebook"
         [url]="urlshorten"
-        ngClass="sharebutton {{classButtonFacebook}} mr-2"
+        ngClass="sharebutton {{ classButtonFacebook }} mr-2"
       >
-        <i ngClass="fab fa-facebook-f {{classButtonFacebook}}"></i>
+        <i ngClass="fab fa-facebook-f {{ classButtonFacebook }}"></i>
       </button>
       <button
         theme="circles-dark"
         shareButton="twitter"
         [url]="urlshorten"
-        ngClass="sharebutton {{classButtonTwitter}} mr-2"
+        ngClass="sharebutton {{ classButtonTwitter }} mr-2"
       >
-        <i ngClass="fab fa-twitter {{classButtonTwitter}}"></i>
+        <i ngClass="fab fa-twitter {{ classButtonTwitter }}"></i>
       </button>
-      <a 
-      href="https://web.whatsapp.com/send?text={{urlshorten}}" 
-      target="_blank"
-      data-action="share/whatsapp/share"
-      ngClass="sharebutton p-3 {{classButtonWhatsapp}}"
+      <a
+        href="https://web.whatsapp.com/send?text={{ urlshorten }}"
+        target="_blank"
+        data-action="share/whatsapp/share"
+        ngClass="sharebutton p-3 {{ classButtonWhatsapp }}"
       >
-        <i ngClass="fab fa-whatsapp {{classButtonWhatsapp}}"></i>
-    </a>
+        <i ngClass="fab fa-whatsapp {{ classButtonWhatsapp }}"></i>
+      </a>
     </div>
 
     <div class="share-mobile">
       <button
         mat-button
-        ngClass="gtmrs  mb-2 mt-2 {{classButtonShare}}"
+        ngClass="gtmrs  mb-2 mt-2 {{ classButtonShare }}"
         (click)="share()"
         fxLayout="row"
         fxLayoutAlign="start start"
       >
-        <span ngClass="gtmrs f-15 {{classButtonShare}}" fxLayout="row" fxLayoutAlign="center center">
+        <span
+          ngClass="gtmrs f-15 {{ classButtonShare }}"
+          fxLayout="row"
+          fxLayoutAlign="center center"
+        >
           <img
-            ngClass="icon-compartir pr-2 {{classButtonShare}}"
+            ngClass="icon-compartir pr-2 {{ classButtonShare }}"
             src="/assets/img/Compartir.svg"
             alt="user"
           />
@@ -619,14 +886,18 @@
 
       <button
         mat-button
-        ngClass="gtmrs  mb-2 mt-2 {{classButtonRefer}}"
+        ngClass="gtmrs  mb-2 mt-2 {{ classButtonRefer }}"
         (click)="showReference()"
         fxLayout="row"
         fxLayoutAlign="start start"
       >
-        <span ngClass="gtmrs f-15 {{classButtonRefer}}" fxLayout="row" fxLayoutAlign="center center">
+        <span
+          ngClass="gtmrs f-15 {{ classButtonRefer }}"
+          fxLayout="row"
+          fxLayoutAlign="center center"
+        >
           <img
-            ngClass="icon-compartir pr-2 {{classButtonRefer}}"
+            ngClass="icon-compartir pr-2 {{ classButtonRefer }}"
             src="/assets/img/Referir.svg"
             alt="user"
           />
@@ -636,14 +907,18 @@
 
       <button
         mat-button
-        ngClass="gtmrs  mb-2 mt-2 {{classButtonBuy}}"
+        ngClass="gtmrs  mb-2 mt-2 {{ classButtonBuy }}"
         (click)="buy()"
         fxLayout="row"
         fxLayoutAlign="start start"
       >
-        <span ngClass="gtmrs f-15 {{classButtonBuy}}" fxLayout="row" fxLayoutAlign="center center">
+        <span
+          ngClass="gtmrs f-15 {{ classButtonBuy }}"
+          fxLayout="row"
+          fxLayoutAlign="center center"
+        >
           <img
-            ngClass="icon-compartir pr-2 {{classButtonBuy}}"
+            ngClass="icon-compartir pr-2 {{ classButtonBuy }}"
             src="/assets/img/Comprar.svg"
             alt="user"
           />
@@ -734,7 +1009,6 @@
     </div>
   </form>
 </ng-template>
-
 
 <ng-template #templateDialogAssured>
   <div id="share">
@@ -842,12 +1116,12 @@
               id="btnCopy"
               color="orange"
               [disabled]="enableCopy"
-              ngClass="{{classButtonCopy}}"
+              ngClass="{{ classButtonCopy }}"
               (click)="copyInputMessage(linkInput)"
             >
               <span
                 fxLayoutAlign="center space-between"
-                ngClass="{{classButtonCopy}}"
+                ngClass="{{ classButtonCopy }}"
               >
                 {{ "GENERIC.COPY_LINK" | translate }}
               </span>
@@ -857,10 +1131,13 @@
               mat-button
               id="buy"
               color="orange"
-              ngClass="orange-border {{classButtonBuy}}"
+              ngClass="orange-border {{ classButtonBuy }}"
               (click)="buy()"
             >
-              <span ngClass="{{classButtonBuy}}" fxLayoutAlign="center space-between">
+              <span
+                ngClass="{{ classButtonBuy }}"
+                fxLayoutAlign="center space-between"
+              >
                 Comprar
               </span>
             </button>
@@ -877,74 +1154,85 @@
           theme="circles-dark"
           shareButton="facebook"
           [url]="urlshorten"
-          ngClass="sharebutton {{classButtonFacebook}} mr-2"
+          ngClass="sharebutton {{ classButtonFacebook }} mr-2"
         >
-          <i ngClass="fab fa-facebook-f {{classButtonFacebook}}"></i>
+          <i ngClass="fab fa-facebook-f {{ classButtonFacebook }}"></i>
         </button>
         <button
           theme="circles-dark"
           shareButton="twitter"
           [url]="urlshorten"
-          ngClass="sharebutton {{classButtonTwitter}} mr-2"
+          ngClass="sharebutton {{ classButtonTwitter }} mr-2"
         >
-          <i ngClass="fab fa-twitter {{classButtonTwitter}}"></i>
+          <i ngClass="fab fa-twitter {{ classButtonTwitter }}"></i>
         </button>
-        <a 
-        href="https://web.whatsapp.com/send?text={{urlshorten}}" 
-        target="_blank"
-        data-action="share/whatsapp/share"
-        ngClass="sharebutton p-3 {{classButtonWhatsapp}}"
+        <a
+          href="https://web.whatsapp.com/send?text={{ urlshorten }}"
+          target="_blank"
+          data-action="share/whatsapp/share"
+          ngClass="sharebutton p-3 {{ classButtonWhatsapp }}"
         >
-          <i ngClass="fab fa-whatsapp {{classButtonWhatsapp}}"></i>
-      </a>
+          <i ngClass="fab fa-whatsapp {{ classButtonWhatsapp }}"></i>
+        </a>
       </div>
-  
 
       <div class="share-mobile">
         <button
           mat-button
-          ngClass="gtmrs  mb-2 mt-2 {{classButtonShare}}"
+          ngClass="gtmrs  mb-2 mt-2 {{ classButtonShare }}"
           (click)="share()"
           fxLayout="row"
           fxLayoutAlign="start start"
         >
-          <span ngClass="gtmrs f-15 {{classButtonShare}}" fxLayout="row" fxLayoutAlign="center center">
+          <span
+            ngClass="gtmrs f-15 {{ classButtonShare }}"
+            fxLayout="row"
+            fxLayoutAlign="center center"
+          >
             <img
-              ngClass="icon-compartir pr-2 {{classButtonShare}}"
+              ngClass="icon-compartir pr-2 {{ classButtonShare }}"
               src="/assets/img/Compartir.svg"
               alt="user"
             />
             Compartir</span
           >
         </button>
-  
+
         <button
           mat-button
-          ngClass="gtmrs  mb-2 mt-2 {{classButtonRefer}}"
+          ngClass="gtmrs  mb-2 mt-2 {{ classButtonRefer }}"
           (click)="showReference()"
           fxLayout="row"
           fxLayoutAlign="start start"
         >
-          <span ngClass="gtmrs f-15 {{classButtonRefer}}" fxLayout="row" fxLayoutAlign="center center">
+          <span
+            ngClass="gtmrs f-15 {{ classButtonRefer }}"
+            fxLayout="row"
+            fxLayoutAlign="center center"
+          >
             <img
-              ngClass="icon-compartir pr-2 {{classButtonRefer}}"
+              ngClass="icon-compartir pr-2 {{ classButtonRefer }}"
               src="/assets/img/Referir.svg"
               alt="user"
             />
             Referir
           </span>
         </button>
-  
+
         <button
           mat-button
-          ngClass="gtmrs  mb-2 mt-2 {{classButtonBuy}}"
+          ngClass="gtmrs  mb-2 mt-2 {{ classButtonBuy }}"
           (click)="buy()"
           fxLayout="row"
           fxLayoutAlign="start start"
         >
-          <span ngClass="gtmrs f-15 {{classButtonBuy}}" fxLayout="row" fxLayoutAlign="center center">
+          <span
+            ngClass="gtmrs f-15 {{ classButtonBuy }}"
+            fxLayout="row"
+            fxLayoutAlign="center center"
+          >
             <img
-              ngClass="icon-compartir pr-2 {{classButtonBuy}}"
+              ngClass="icon-compartir pr-2 {{ classButtonBuy }}"
               src="/assets/img/Comprar.svg"
               alt="user"
             />
@@ -959,15 +1247,18 @@
 <!-- template terms and conditions -->
 
 <ng-template #templateTerms>
-  <div class="fade-in" innerHtml="{{ 'BUSSINESS.TERMS_LEGAL' | translate }}"></div> 
+  <div
+    class="fade-in"
+    innerHtml="{{ 'BUSSINESS.TERMS_LEGAL' | translate }}"
+  ></div>
   <button
-  *ngIf="acceptTermsDeliver === false"
-  mat-raised-button
-  id="accept-modal"
-  class="mt-2 center button button-height button-100 register-button"
-  color="orange"
-  (click)="acceptModal()"
->
-{{ "GENERIC.ACCEPT" | translate }}
-</button>
+    *ngIf="acceptTermsDeliver === false"
+    mat-raised-button
+    id="accept-modal"
+    class="mt-2 center button button-height button-100 register-button"
+    color="orange"
+    (click)="acceptModal()"
+  >
+    {{ "GENERIC.ACCEPT" | translate }}
+  </button>
 </ng-template>

@@ -1,14 +1,20 @@
-@import 'variables';
-@import 'general';
+@import "variables";
+@import "general";
 
-.blue{
-    color: $blue;
+.blue {
+  color: $blue;
 }
 
 .lupa {
-    position: relative;
+  position: relative;
 }
 
-#BarSearch{
-    font-style: italic;
+#BarSearch {
+  font-style: italic;
+}
+.card-search {
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px #0000001a;
 }

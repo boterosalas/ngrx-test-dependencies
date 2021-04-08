@@ -112,6 +112,16 @@ export class TableActivateBusinessComponent implements OnInit {
       },
     ]);
   }
+  adminComisionBussiness(contenido: any) {
+    this.router.navigate([
+      "/manage-comision-admin",
+      {
+        id: contenido.id,
+        titulo: contenido.description,
+        imagen: contenido.imageurl
+      },
+    ]);
+  }
   comisionTable(item: any) {
     this.router.navigate([
       "/comision-admin",
@@ -122,6 +132,16 @@ export class TableActivateBusinessComponent implements OnInit {
       },
     ]);
 
+  }
+  informationBussiness(item: any) {
+    this.router.navigate([
+      "/information-bussiness-admin",
+      {
+        id: item.id,
+        titulo: item.description,
+        imagen: item.imageurl
+      },
+    ]);
   }
   private getExtension(nameFile: string, getSize: number) {
     let splitExt = nameFile.split(".");

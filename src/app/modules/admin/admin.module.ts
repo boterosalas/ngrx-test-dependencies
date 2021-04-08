@@ -49,6 +49,8 @@ import { AddEditBlogAdminComponent } from './pages/add-edit-blog-admin/add-edit-
 import { EditBlogAdminComponent } from './pages/edit-blog-admin/edit-blog-admin.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { ConfigurationsComponent } from './pages/configurations/configurations.component';
+import { InformationBussinessComponent } from './pages/information-bussiness/information-bussiness.component';
+import { ManageComisionBussinessComponent } from './pages/manage-comision-bussiness/manage-comision-bussiness.component';
 const routes: Routes = [
   {
     path: "",
@@ -126,6 +128,23 @@ const routes: Routes = [
   {
     path: "bussiness-admin",
     component: BussinessAdminComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
+    },
+  }, {
+    path: "manage-comision-admin",
+    component: ManageComisionBussinessComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
+    },
+  },
+  {
+    path: "information-bussiness-admin",
+    component: InformationBussinessComponent,
     canActivate: [RoleGuard],
     data: {
       role: "ADMIN",
@@ -229,7 +248,9 @@ const routes: Routes = [
     LegalesComponent,
     BlogAdminComponent,
     AddEditBlogAdminComponent,
-    ConfigurationsComponent
+    ConfigurationsComponent,
+    InformationBussinessComponent,
+    ManageComisionBussinessComponent
   ],
   imports: [
     AngularEditorModule,
