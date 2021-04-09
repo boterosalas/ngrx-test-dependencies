@@ -115,7 +115,7 @@ export class NewsAdminComponent implements OnInit {
             },
         });
         this.dialog.afterAllClosed.subscribe(() => {
-            this.searchUser("");
+            this.searchUser(this.paginate, this.from, this.to);
         });
     }
     public getReportExcel() {
