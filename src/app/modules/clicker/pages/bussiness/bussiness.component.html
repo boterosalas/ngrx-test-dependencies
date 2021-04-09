@@ -47,17 +47,19 @@
         </div>
       </div>
     </mat-card>
-    <mat-card class="mt-2">
+    <mat-card class="mt-2" fxShow.xs="false">
       <div>
         <h3 class="border-inferior">Comisiones</h3>
         <p>Nuestros clickers han recibido desde 2020 con Almacenes Éxito:</p>
-        <span> +200 M </span>
         <span>
-          <p>COMISIONES PAGADAS A LA FECHA</p>
+          <p class="payment-date">+200 M</p>
+        </span>
+        <span>
+          <p class="commision-payment">COMISIONES PAGADAS A LA FECHA</p>
         </span>
       </div>
     </mat-card>
-    <mat-card class="mt-2">
+    <mat-card class="mt-2" fxShow.xs="false">
       <div>
         <h3 class="border-inferior">Tips de venta</h3>
         <h4>Satisfacción</h4>
@@ -157,9 +159,47 @@
     </div>
     <div class="mt-2">
       <mat-card>
-        <div fxLayout="row" fxLayoutAlign="space-between">
-          <h3 class="text-productos mt-0 mb-0">Terminos & Condiciones</h3>
-          <span class="pointer">Ver Más</span>
+        <div class="mb-1">
+          <div
+            fxLayout="row"
+            fxLayoutAlign="space-between"
+            fxLayout.xs="column"
+          >
+            <h3 class="text-productos mt-0 mb-0">Términos & Condiciones</h3>
+            <span
+              class="text-terms-conditions cursor-pointer"
+              (click)="vermas()"
+            >
+              {{ visibleTerms ? "Ver Menos" : "Ver Más" }}
+              <mat-icon *ngIf="visibleTerms" class="arrow-down"
+                >keyboard_arrow_up</mat-icon
+              >
+              <mat-icon *ngIf="!visibleTerms" class="arrow-down"
+                >keyboard_arrow_down</mat-icon
+              >
+            </span>
+          </div>
+          <div class="border-up-gray" *ngIf="visibleTerms">
+            <h4 class="mt-1 mb-0">Excepciones</h4>
+            <p class="mt-0">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              proident, sunt in culpa qui officia deserunt mollit anim id est
+              laborum.
+            </p>
+            <h4 class="mb-0">Casos especiales</h4>
+            <p class="mt-0">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              proident, sunt in culpa qui officia deserunt mollit anim id est
+              laborum.
+            </p>
+            <h4 class="mb-0">Tiempos de verificación</h4>
+            <p class="mt-0">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+          </div>
         </div>
       </mat-card>
     </div>
@@ -509,6 +549,58 @@
         </mat-accordion>
       </div>
     </div>
+    <mat-card class="mt-2" fxShow.gt-xs="false">
+      <div>
+        <h3 class="border-inferior">Comisiones</h3>
+        <p>Nuestros clickers han recibido desde 2020 con Almacenes Éxito:</p>
+        <span>
+          <p class="payment-date">+200 M</p>
+        </span>
+        <span>
+          <p class="commision-payment">COMISIONES PAGADAS A LA FECHA</p>
+        </span>
+      </div>
+    </mat-card>
+    <mat-card class="mt-2" fxShow.gt-xs="false">
+      <div>
+        <h3 class="border-inferior">Tips de venta</h3>
+        <h4>Satisfacción</h4>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+        <h4>Descuentos</h4>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+        <h4>Días especiales</h4>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+        <h4>Medios de pago</h4>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+        <h4>Categorías</h4>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+      </div>
+    </mat-card>
   </div>
 </div>
 

@@ -103,7 +103,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   sellerName: string;
   showReferenceButton: boolean = true;
   allBussiness: string;
-
+  visibleTerms: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -261,7 +261,13 @@ export class BussinessComponent implements OnInit, OnDestroy {
   //   this.searchProductPaginate(this.paginate, option, 1 , this.pageTo);
   //   this.orderValue = option;
   // }
-
+  public vermas() {
+    if (this.visibleTerms === true) {
+      this.visibleTerms = false;
+    } else {
+      this.visibleTerms = true;
+    }
+  }
   public getContentBussiness() {
     this.subscription = this.content
       .getBusinessContent(this.id)

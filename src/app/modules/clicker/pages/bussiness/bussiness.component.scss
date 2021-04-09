@@ -24,6 +24,10 @@
 .title-h3 {
   font-size: 23px;
 }
+.text-terms-conditions {
+  //padding-top: 7px;
+  color: #8d7eb7;
+}
 @media screen and (max-width: 600px) {
   .text-productos {
     font-size: 23px;
@@ -34,6 +38,9 @@
   .container-left {
     width: 100%;
     margin-right: 0px;
+  }
+  .text-terms-conditions {
+    text-align: center;
   }
 }
 .p {
@@ -121,4 +128,22 @@
   height: 100%;
   border-radius: 10px;
   width: 94%;
+}
+
+.arrow-down {
+  position: relative;
+  top: 6px;
+}
+.border-up-gray {
+  border-top: 1px solid #e8e7e9;
+}
+.payment-date {
+  color: #37236a;
+  font-size: 27px;
+  text-align: center;
+}
+.commision-payment {
+  color: #a7a3b1;
+  font-size: 14px;
+  text-align: center;
 }
