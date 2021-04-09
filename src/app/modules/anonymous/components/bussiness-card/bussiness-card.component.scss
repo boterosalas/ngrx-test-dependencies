@@ -1,50 +1,52 @@
-@import 'variables';
+@import "variables";
 
-.bussiness{
-    box-shadow: 0 3px 6px 3px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
-    @media screen and (max-width: 600px) {
-        .title-bussiness{
-            font-size: 11px !important;
-        }
-    
-        .percent{
-            font-size: 12px !important;
-            margin-top: 5px;
-        }
+.bussiness {
+  box-shadow: 0 3px 6px 3px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 1px 3px 0 rgba(0, 0, 0, 0.12);
+  @media screen and (max-width: 600px) {
+    .title-bussiness {
+      font-size: 11px !important;
     }
 
-    text-align: center;
-
-    img{
-        max-width: 100%;
-        width: 100%;
+    .percent {
+      font-size: 12px !important;
+      margin-top: 5px;
     }
-    
-    .title-bussiness{
-        font-size: 14px;
-        font-family: $font-galano;
-    }
+  }
 
-    .percent{
-        color: $secondary-color;
-        font-size: 16px;
-    }
+  text-align: center;
 
+  img {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .title-bussiness {
+    font-size: 14px;
+    font-family: $font-galano;
+  }
+
+  .percent {
+    color: $secondary-color;
+    font-size: 16px;
+  }
 }
 
 span.img-responsive img {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 @media screen and (min-width: 600px) {
+  .bussiness {
+    max-width: 250px;
+    min-width: 250px;
+  }
 
-    .bussiness{
-        max-width: 250px;
-        min-width: 250px;
-    }
-
-    img{
-        max-width: 100%;
-        width: 230px !important;
-    }
+  img {
+    max-width: 100%;
+    width: 230px !important;
+  }
+}
+.heigth-imagen {
+  height: 76.03px;
 }
