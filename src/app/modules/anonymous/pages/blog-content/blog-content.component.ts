@@ -58,6 +58,7 @@ export class BlogContentComponent implements OnInit {
       }
       else {
         this.datas = resp.objectResponse;
+        this.metaTagService.removeTag("name='og:title'")
         this.metaTagService.addTags([
           {
             name: "keywords",
@@ -69,10 +70,38 @@ export class BlogContentComponent implements OnInit {
             content:
               "Clickam es una plataforma marketplace de marketing de afiliados, donde ganarás dinero por referir y comprar. Aumenta el tráfico de tu negocio con afiliados. Una idea Grupo Éxito.  Exito - Carulla - Haceb - SURA - Puntos Colombia - Viajes Éxito - Nequi.",
           },
+          {
+            name: "og:site_name",
+            content: resp.objectResponse.title
+          }, {
+            name: "og:title",
+            content: resp.objectResponse.title
+          },//og:title
+          {
+            name: "og:type",
+            content: "image/jpg"
+          },
+          {
+            name: "og:image",
+            content: resp.objectResponse.imageurl
+          }
+          ,
+          {
+            name: "twitter:image",
+            content: resp.objectResponse.imageurl
+          }
+          ,
+          {
+            name: "twitter:title",
+            content: resp.objectResponse.title
+          }
         ]);
       }
     })
   }
+  //<meta property="og:type" content="image/svg" />
+  //<meta property="og:title" content="Clickam" />
+  //<meta property="og:image" content="assets/img/clickam-horizontal.svg" />
   public copyLink(inputElement: any) {
     inputElement.select();
     document.execCommand("copy");
