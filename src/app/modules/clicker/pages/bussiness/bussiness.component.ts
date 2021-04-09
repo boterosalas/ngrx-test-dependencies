@@ -197,9 +197,9 @@ export class BussinessComponent implements OnInit, OnDestroy {
             break;
 
           default:
-            this.imgBanner = "/assets/img/banners/negocios/exito-pc.jpg";
+            this.imgBanner = "/assets/img/banners/banner-negocios-pc.jpg";
             this.imgBannerMobile =
-              "/assets/img/banners/negocios/exito-mobile.jpg";
+              "/assets/img/banners/banner-negocios-mobile.jpg";
             this.colorText = "purple";
             break;
         }
