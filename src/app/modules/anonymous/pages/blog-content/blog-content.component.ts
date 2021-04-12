@@ -68,31 +68,6 @@ export class BlogContentComponent implements OnInit {
             name: "description",
             content:
               "Clickam es una plataforma marketplace de marketing de afiliados, donde ganarás dinero por referir y comprar. Aumenta el tráfico de tu negocio con afiliados. Una idea Grupo Éxito.  Exito - Carulla - Haceb - SURA - Puntos Colombia - Viajes Éxito - Nequi.",
-          },
-          {
-            name: "og:site_name",
-            content: resp.objectResponse.title
-          }, {
-            name: "og:title",
-            content: resp.objectResponse.title
-          },//og:title
-          {
-            name: "og:type",
-            content: "image/jpg"
-          },
-          {
-            name: "og:image",
-            content: resp.objectResponse.imageurl
-          }
-          ,
-          {
-            name: "twitter:image",
-            content: resp.objectResponse.imageurl
-          }
-          ,
-          {
-            name: "twitter:title",
-            content: resp.objectResponse.title
           }
         ]);
       }
