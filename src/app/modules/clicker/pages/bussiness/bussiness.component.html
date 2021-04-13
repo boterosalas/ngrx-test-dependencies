@@ -273,11 +273,15 @@
         </div>
       </div>
     </div>
-
     <div
-      class="deliver mt-3"
-      *ngIf="bussiness.length === 0 && showDeliver === true"
+      *ngIf="bussiness.length === 0 && showDeliver === true && id !== '19'"
+      fxLayout="column"
+      fxLayoutAlign="center center"
     >
+      <mat-icon class="nothing-icon">push_pin</mat-icon>
+      <p class="nothing-text">Aún no tenemos categorías para este negocio</p>
+    </div>
+    <div class="deliver mt-3" *ngIf="id === '19'">
       <div
         fxLayout.xs="column"
         fxLayout="row"

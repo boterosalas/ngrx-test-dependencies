@@ -26,7 +26,8 @@ export class InformationBussinessComponent implements OnInit {
   idSaveTip: number;
   generalInfo: string;
   idInfo: number;
-  dataTip: FormGroup
+  dataTip: FormGroup;
+  aboutBuss: FormGroup;
   dataEditTip: FormGroup
   @ViewChild("templateAddTips", { static: false }) templateAddTip: TemplateRef<any>;
   @ViewChild("templateEditTips", { static: false }) templateEditTip: TemplateRef<any>;
@@ -46,6 +47,9 @@ export class InformationBussinessComponent implements OnInit {
     this.dataTip = this.fb.group({
       title: [null, Validators.required],
       description: [null, Validators.required]
+    });
+    this.aboutBuss = this.fb.group({
+      aboutBuss: [null, [Validators.maxLength(1800), Validators.required, Validators.minLength(10)]]
     });
     this.dataEditTip = this.fb.group({
       title: [null, Validators.required],
@@ -76,7 +80,8 @@ export class InformationBussinessComponent implements OnInit {
   }
   getBusinessData() {
     this.content.getBusinessById(this.id).subscribe((resp) => {
-      this.aboutBusiness = resp.about;
+      this.aboutBuss.controls.aboutBuss.setValue(resp.about)
+      //this.aboutBusiness = resp.about;
       this.dataSource = resp.tips;
       if (resp.terms.length > 0) {
         this.generalInfo = resp.terms[0].description;
@@ -114,7 +119,7 @@ export class InformationBussinessComponent implements OnInit {
   addAboutBussiness() {
     let datos = {
       id: this.id, //idbusiness
-      about: this.aboutBusiness
+      about: this.aboutBuss.controls.aboutBuss.value
     }
     this.content.saveInfoBusiness(datos).subscribe((resp) => {
       Swal.fire({
@@ -177,22 +182,31 @@ export class InformationBussinessComponent implements OnInit {
     this.dialog.closeAll();
   }
   addTip() {
-    const title = "Nuevo Tip";
-    const idBussiness = this.id;
-    const edit = 0;
-    const template = this.templateAddTip;
-    let dialogRef1 = this.dialog.open(ModalGenericComponent, {
-      width: "450px",
-      data: {
-        title,
-        idBussiness,
-        template,
-        edit
-      },
-    });
-    this.subscription = dialogRef1.beforeClosed().subscribe(() => {
-      this.getBusinessData();
-    });
+    if (this.dataSource.length > 4) {
+      Swal.fire({
+        text: "Recuerda que se permiten solo 5 tips por negocio.",
+        type: "error",
+        confirmButtonText: "Aceptar",
+        confirmButtonClass: "upload-success"
+      }).then(() => {
+      });
+    } else {
+      const title = "Nuevo Tip";
+      const idBussiness = this.id;
+      const edit = 0;
+      const template = this.templateAddTip;
+      let dialogRef1 = this.dialog.open(ModalGenericComponent, {
+        width: "450px",
+        data: {
+          title,
+          idBussiness,
+          template,
+          edit
+        },
+      });
+
+    }
+
   }
   saveTip() {
     let datos = {
@@ -222,9 +236,7 @@ export class InformationBussinessComponent implements OnInit {
         edit
       },
     });
-    this.subscription = dialogRef1.beforeClosed().subscribe(() => {
-      this.getBusinessData();
-    });
+
   }
   editTip() {
     let datos = {

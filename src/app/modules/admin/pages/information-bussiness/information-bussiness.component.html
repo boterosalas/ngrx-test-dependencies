@@ -36,17 +36,73 @@
         <div class="mt-3">
           <mat-card style="width: 800px">
             <h3>Sobre el negocio</h3>
-            <mat-form-field style="width: 755px">
-              <textarea
-                matInput
-                placeholder="SOBRE EL NEGOCIO"
-                type="text"
-                required
-                class="text-area-heigth"
-                style="height: 160px; color: #37236a"
-                [(ngModel)]="aboutBusiness"
-              ></textarea>
-            </mat-form-field>
+            <form [formGroup]="aboutBuss">
+              <mat-form-field style="width: 755px">
+                <textarea
+                  matInput
+                  placeholder="SOBRE EL NEGOCIO"
+                  type="text"
+                  required
+                  formControlName="aboutBuss"
+                  class="text-area-heigth"
+                  style="height: 160px; color: #37236a"
+                ></textarea>
+                <mat-error
+                  id="requiredName"
+                  *ngIf="
+                    aboutBuss.controls.aboutBuss.invalid &&
+                    aboutBuss.controls.aboutBuss.errors.required
+                  "
+                  >{{
+                    "GENERIC.REQUIRED"
+                      | translate: { formValue: "Sobre el negocio" }
+                  }}</mat-error
+                >
+                <mat-error
+                  id="maxName"
+                  *ngIf="
+                    aboutBuss.controls.aboutBuss.invalid &&
+                    aboutBuss.controls.aboutBuss.errors.maxlength
+                  "
+                  >{{
+                    "GENERIC.MAX_CHARACTERS"
+                      | translate
+                        : {
+                            maxchar:
+                              aboutBuss.controls.aboutBuss.errors.maxlength
+                                .requiredLength
+                          }
+                  }}</mat-error
+                >
+                <mat-error
+                  id="invalidName"
+                  *ngIf="
+                    aboutBuss.controls.aboutBuss.invalid &&
+                    aboutBuss.controls.aboutBuss.errors.pattern
+                  "
+                  >{{
+                    "GENERIC.INVALID_FORMAT"
+                      | translate: { val: "Sobre el negocio" }
+                  }}</mat-error
+                >
+                <mat-error
+                  id="minPhone"
+                  *ngIf="
+                    aboutBuss.controls.aboutBuss.invalid &&
+                    aboutBuss.controls.aboutBuss.errors.minlength
+                  "
+                  >{{
+                    "GENERIC.MIN_CHARACTERS"
+                      | translate
+                        : {
+                            minchar:
+                              aboutBuss.controls.aboutBuss.errors.minlength
+                                .requiredLength
+                          }
+                  }}</mat-error
+                >
+              </mat-form-field>
+            </form>
             <div fxLayout="row" fxLayoutAlign="end end">
               <button
                 mat-button
@@ -61,6 +117,7 @@
                 (click)="addAboutBussiness()"
                 id="download-users"
                 class="ml-2"
+                [disabled]="!aboutBuss.valid"
               >
                 Guardar Cambios
               </button>
