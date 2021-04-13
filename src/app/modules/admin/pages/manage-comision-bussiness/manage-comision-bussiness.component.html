@@ -12,13 +12,17 @@
       >
     </div>
     <span fxLayout="row">
-      <p
-        ngClass.gt-xs="f-20"
-        class="cursor-pointer text-underline purple-text"
-        [routerLink]="['/negocios-admin']"
-      >
-        Regresar
-      </p>
+      <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
+      <button mat-button [routerLink]="['/negocios-admin']">
+        <span
+          class="galano-bold f-16"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+        >
+          <mat-icon>keyboard_arrow_left</mat-icon>
+          Volver
+        </span>
+      </button>
     </span>
   </div>
   <div>
@@ -89,13 +93,13 @@
         <td mat-cell *matCellDef="let element: let i=index">
           <img
             class="cursor-pointer"
-            (click)="editCategory(element)"
+            (click)="editCategoryCom(element)"
             src="/assets/img/dashboard/icon-edit.svg"
             alt=""
           />
           <img
             class="cursor-pointer"
-            (click)="deleteCategory(element)"
+            (click)="deleteCategoryCom(element)"
             src="/assets/img/dashboard/icon-trash.svg"
             alt=""
           />
@@ -108,5 +112,154 @@
         *matRowDef="let row; columns: displayedColumns; let i = index"
       ></tr>
     </table>
+    <div class="mt-2 mb-2" fxLayout="row" fxLayoutAlign="end end">
+      <button
+        mat-raised-button
+        color="orange"
+        (click)="addComisionCategory()"
+        id="download-users"
+        class="ml-2"
+      >
+        Agregar categoría
+      </button>
+    </div>
   </div>
 </div>
+
+<ng-template #templateAddCategory>
+  <div ngClass="delete-container">
+    <div>
+      <form [formGroup]="dataTip">
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="CÓDIGO DE CATEGORÍA"
+            formControlName="codCategory"
+            type="text"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="NOMBRE DE CATEGORÍA"
+            type="text"
+            formControlName="nameCategory"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="COMISIÓN DE CLICKER (%)"
+            type="text"
+            formControlName="comisionClicker"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="COMISIÓN DE NEGOCIO (%)"
+            type="text"
+            formControlName="commisionBussiness"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+      </form>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="end end">
+      <button mat-button ngClass="button_cancel" (click)="onNoClick()">
+        Cancelar
+      </button>
+      <button
+        mat-raised-button
+        color="orange"
+        (click)="saveComisionCategory()"
+        id="download-users"
+        class="ml-2"
+        [disabled]="!dataTip.valid"
+      >
+        Guardar
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #templateEditCategory>
+  <div ngClass="delete-container">
+    <div>
+      <form [formGroup]="dataEditTip">
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="CÓDIGO DE CATEGORÍA"
+            formControlName="codEditCategory"
+            type="text"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="NOMBRE DE CATEGORÍA"
+            type="text"
+            formControlName="nameEditCategory"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="COMISIÓN DE CLICKER (%)"
+            type="text"
+            formControlName="comisionEditClicker"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="COMISIÓN DE NEGOCIO (%)"
+            type="text"
+            formControlName="commisionEditBussiness"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+      </form>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="end end">
+      <button mat-button ngClass="button_cancel" (click)="onNoClick()">
+        Cancelar
+      </button>
+      <button
+        mat-raised-button
+        color="orange"
+        (click)="editSaveComisionCategory()"
+        id="download-users"
+        class="ml-2"
+        [disabled]="!dataEditTip.valid"
+      >
+        Guardar
+      </button>
+    </div>
+  </div>
+</ng-template>

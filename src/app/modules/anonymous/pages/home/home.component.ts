@@ -381,6 +381,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       code: bussiness.code,
       infoAditional: bussiness.infoaditional,
       imageurl: bussiness.imageurl,
+      description: bussiness.description
     };
     this.router.navigate([
       "/bussiness",
@@ -389,6 +390,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         code: params.code,
         infoAditional: params.infoAditional,
         imageurl: params.imageurl,
+        description: params.description,
       },
     ]);
   }

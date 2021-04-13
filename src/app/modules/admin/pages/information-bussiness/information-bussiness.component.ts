@@ -25,12 +25,15 @@ export class InformationBussinessComponent implements OnInit {
   aboutBusiness: string;
   idSaveTip: number;
   generalInfo: string;
+  idInfo: number;
   dataTip: FormGroup
   dataEditTip: FormGroup
   @ViewChild("templateAddTips", { static: false }) templateAddTip: TemplateRef<any>;
   @ViewChild("templateEditTips", { static: false }) templateEditTip: TemplateRef<any>;
   exceptionsInfo: string;
+  idExceptions: number;
   caseSpecial: string;
+  idCaseSpecial: number;
   @ViewChild('table', { static: false }) table: MatTable<PeriodicElement>;
   dataSource = []
   private subscription: Subscription = new Subscription();
@@ -75,6 +78,18 @@ export class InformationBussinessComponent implements OnInit {
     this.content.getBusinessById(this.id).subscribe((resp) => {
       this.aboutBusiness = resp.about;
       this.dataSource = resp.tips;
+      if (resp.terms.length > 0) {
+        this.generalInfo = resp.terms[0].description;
+        this.idInfo = resp.terms[0].id
+        this.exceptionsInfo = resp.terms[1].description;
+        this.idExceptions = resp.terms[1].id
+        this.caseSpecial = resp.terms[2].description;
+        this.idCaseSpecial = resp.terms[2].id
+      }
+
+      console.log(this.idCaseSpecial);
+      console.log(this.idExceptions);
+      console.log(this.idInfo);
     })
   }
   dropTable(event: CdkDragDrop<PeriodicElement[]>) {
@@ -111,23 +126,43 @@ export class InformationBussinessComponent implements OnInit {
       });
     })
   }
+  comprobarText(id, datos) {
+    if (id === undefined) {
+      return {
+        dmBusinessId: this.id,
+        title: datos.title,
+        description: datos.description
+      }
+    } else {
+      return {
+        id: id,
+        dmBusinessId: this.id,
+        title: datos.title,
+        description: datos.description
+      }
+    }
+  }
   addTermsConditions() {
     let datos = {
       dmBusinessId: this.id,
       title: "General",
       description: this.generalInfo
-    }
+    };
+    let datosSend = this.comprobarText(this.idInfo, datos)
     let datos2 = {
       dmBusinessId: this.id,
       title: "Excepciones",
       description: this.exceptionsInfo
     }
+    let datosSend2 = this.comprobarText(this.idExceptions, datos2)
     let datos3 = {
       dmBusinessId: this.id,
       title: "Casos Especiales",
       description: this.caseSpecial
     }
-    this.content.saveTermsConditions(datos).subscribe((resp) => {
+    let datosSend3 = this.comprobarText(this.idCaseSpecial, datos3);
+    let array = [datosSend, datosSend2, datosSend3];
+    this.content.saveTermsConditions(array).subscribe((resp) => {
       Swal.fire({
         text: "Los cambios se han guardado correctamente.",
         type: "success",
@@ -136,24 +171,7 @@ export class InformationBussinessComponent implements OnInit {
       }).then(() => {
       });
     })
-    this.content.saveTermsConditions(datos2).subscribe((resp) => {
-      Swal.fire({
-        text: "Los cambios se han guardado correctamente.",
-        type: "success",
-        confirmButtonText: "Aceptar",
-        confirmButtonClass: "upload-success"
-      }).then(() => {
-      });
-    })
-    this.content.saveTermsConditions(datos3).subscribe((resp) => {
-      Swal.fire({
-        text: "Los cambios se han guardado correctamente.",
-        type: "success",
-        confirmButtonText: "Aceptar",
-        confirmButtonClass: "upload-success"
-      }).then(() => {
-      });
-    })
+
   }
   onNoClick() {
     this.dialog.closeAll();

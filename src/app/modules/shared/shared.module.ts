@@ -33,6 +33,7 @@ import { BannerComponent } from './components/banner/banner.component';
 import { TrimPipe } from 'src/app/pipes/trim.pipe';
 
 
+
 @NgModule({
   declarations: [
     SearchComponent,
@@ -94,7 +95,8 @@ import { TrimPipe } from 'src/app/pipes/trim.pipe';
     ProductComponent,
     ProductBussinessComponent,
     BackNavigationComponent,
-    BannerComponent
+    BannerComponent,
+
   ],
   entryComponents: [
     ModalGenericComponent

@@ -53,6 +53,8 @@ export class ContentService {
   apiSaveTerms = "business/savetermbusiness";
   apiGetBussinessById = "business/getbusinessbyid";
   apiSaveBusinessOrderTip = "business/saveordertipbusiness";
+  apiManageComisionBusiness = "business/savemanagecomisionbusiness"
+  apiDeleteManageCom = "business/deletecomisionbusiness"
   apiGetpopups = "popups/getpopups";
   apiUploadContent = "library/uploadcontentlibrary";
   apiGetContentVideo = "library/getcontentlibrary";
@@ -145,6 +147,35 @@ export class ContentService {
   public getCommissionsByBussiness(data: any) {
     return this.http
       .get(`${this.url + this.apiComisionByBusiness}?idbusiness=${data}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((user: ResponseService) => {
+          return user.objectResponse;
+        })
+      );
+  }
+  deleteComisionCategoryBusiness(data) {
+    return this.http
+      .delete(`${this.url + this.apiDeleteManageCom}?id=${data}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+  }
+  public saveComisionCategory(data: any) {
+    return this.http
+      .post(`${this.url + this.apiManageComisionBusiness}`, data, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(

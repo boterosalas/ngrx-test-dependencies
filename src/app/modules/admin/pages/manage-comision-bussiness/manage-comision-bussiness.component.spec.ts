@@ -1,4 +1,13 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatMenuModule, MatSlideToggleModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateModule } from '@ngx-translate/core';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 import { ManageComisionBussinessComponent } from './manage-comision-bussiness.component';
 
@@ -8,9 +17,22 @@ describe('ManageComisionBussinessComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ManageComisionBussinessComponent ]
+      declarations: [ManageComisionBussinessComponent],
+      imports: [
+        AppMaterialModule,
+        TranslateModule.forRoot(),
+        MatSlideToggleModule,
+        ReactiveFormsModule,
+        FormsModule,
+        SharedModule,
+        DragDropModule,
+        HttpClientTestingModule,
+        RouterTestingModule,
+        MatMenuModule,
+        BrowserAnimationsModule
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

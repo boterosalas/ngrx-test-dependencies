@@ -22,6 +22,8 @@ import { TokenService } from "src/app/services/token.service";
 import { NgNavigatorShareService } from "ng-navigator-share";
 import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
 import { environment } from "src/environments/environment";
+
+
 declare var dataLayer: any;
 
 @Component({
@@ -107,7 +109,13 @@ export class BussinessComponent implements OnInit, OnDestroy {
   commision: number;
   description: string;
   infoBussiness: string;
+  generalInfo: string;
+  exceptionsInfo: string;
+  caseSpecial: string;
   tips = [];
+  invisible: boolean = false;
+  nonEditedContent: string;
+  isContentToggled: boolean;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -151,7 +159,15 @@ export class BussinessComponent implements OnInit, OnDestroy {
         });
         this.content.getBusinessById(this.id).subscribe((resp) => {
           this.infoBussiness = resp.about;
+          //this.infoBussiness = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure";
           this.tips = resp.tips;
+          this.nonEditedContent = this.infoBussiness;
+          this.infoBussiness = this.formatContent(this.infoBussiness);
+          if (resp.terms.length > 0) {
+            this.generalInfo = resp.terms[0].description;
+            this.exceptionsInfo = resp.terms[1].description;
+            this.caseSpecial = resp.terms[2].description;
+          }
         })
         switch (this.title) {
           case "carulla":
@@ -268,7 +284,19 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   }
 
+  formatContent(content: string) {
+    if (content.length > 250) {
+      return `${content.substr(0, 250)}...`;
+    } else {
+      this.invisible = true;
+      return `${content.substr(0, 250)}`;
+    }
 
+  }
+  toggleContent() {
+    this.isContentToggled = !this.isContentToggled;
+    this.infoBussiness = this.isContentToggled ? this.nonEditedContent : this.formatContent(this.infoBussiness);
+  }
   // public order(option:string) {
   //   this.pageIndex = 0;
   //   this.searchProductPaginate(this.paginate, option, 1 , this.pageTo);

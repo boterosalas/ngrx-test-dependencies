@@ -35,9 +35,28 @@
         <div></div>
         <div>
           <h4 class="mb-0 mt-2">Sobre el negocio:</h4>
-          <p class="m-0">
+          <p fxShow.xs="false">{{ nonEditedContent }}</p>
+          <p fxShow.gt-xs="false">
             {{ infoBussiness }}
           </p>
+          <div fxShow.gt-xs="false" fxLayout="row" fxLayoutAlign="end end">
+            <a
+              *ngIf="!isContentToggled && invisible === false"
+              (click)="toggleContent()"
+              style="color: #8d7eb7"
+              i18n
+              >Ver más
+              <mat-icon class="arrow-down">keyboard_arrow_down</mat-icon>
+            </a>
+            <a
+              *ngIf="isContentToggled && invisible === false"
+              (click)="toggleContent()"
+              style="color: #8d7eb7"
+              i18n
+              >Ver menos
+              <mat-icon class="arrow-down">keyboard_arrow_up</mat-icon></a
+            >
+          </div>
         </div>
       </div>
     </mat-card>
@@ -143,24 +162,17 @@
             </span>
           </div>
           <div class="border-up-gray" *ngIf="visibleTerms">
+            <h4 class="mb-0">General</h4>
+            <p class="mt-0">
+              {{ generalInfo }}
+            </p>
             <h4 class="mt-1 mb-0">Excepciones</h4>
             <p class="mt-0">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              proident, sunt in culpa qui officia deserunt mollit anim id est
-              laborum.
+              {{ exceptionsInfo }}
             </p>
             <h4 class="mb-0">Casos especiales</h4>
             <p class="mt-0">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              proident, sunt in culpa qui officia deserunt mollit anim id est
-              laborum.
-            </p>
-            <h4 class="mb-0">Tiempos de verificación</h4>
-            <p class="mt-0">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              {{ caseSpecial }}
             </p>
           </div>
         </div>
