@@ -46,6 +46,15 @@ export class ContentService {
   apiGetCommissions = "business/getcommissions";
   apiGetAllCategory = "business/getallcategories"
   apiOrderCategory = "business/ordercategories";
+  apiComisionByBusiness = "business/getcommissionsbybusiness";
+  apiSaveTips = "business/savetipbusiness";
+  apiInfoBusiness = "business/saveinfobusiness";
+  apiDeleteTip = "business/deletetipbusiness";
+  apiSaveTerms = "business/savetermbusiness";
+  apiGetBussinessById = "business/getbusinessbyid";
+  apiSaveBusinessOrderTip = "business/saveordertipbusiness";
+  apiManageComisionBusiness = "business/savemanagecomisionbusiness"
+  apiDeleteManageCom = "business/deletecomisionbusiness"
   apiGetpopups = "popups/getpopups";
   apiUploadContent = "library/uploadcontentlibrary";
   apiGetContentVideo = "library/getcontentlibrary";
@@ -74,6 +83,22 @@ export class ContentService {
   public getBusiness() {
     return this.http
       .get(`${this.url + this.apiGetBusiness}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((user: ResponseService) => {
+          return user.objectResponse;
+        })
+      );
+  }
+  public getBusinessById(data) {
+    return this.http
+      .get(`${this.url + this.apiGetBussinessById}?id=${data}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
@@ -117,6 +142,128 @@ export class ContentService {
         map((user: ResponseService) => {
           return user.objectResponse;
         })
+      );
+  }
+  public getCommissionsByBussiness(data: any) {
+    return this.http
+      .get(`${this.url + this.apiComisionByBusiness}?idbusiness=${data}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((user: ResponseService) => {
+          return user.objectResponse;
+        })
+      );
+  }
+  deleteComisionCategoryBusiness(data) {
+    return this.http
+      .delete(`${this.url + this.apiDeleteManageCom}?id=${data}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+  }
+  public saveComisionCategory(data: any) {
+    return this.http
+      .post(`${this.url + this.apiManageComisionBusiness}`, data, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((user: ResponseService) => {
+          return user.objectResponse;
+        })
+      );
+  }
+  public saveOrderTipBusiness(data: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveBusinessOrderTip}`, data, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((user: ResponseService) => {
+          return user.objectResponse;
+        })
+      );
+  }
+  public saveInfoBusiness(data: any) {
+    return this.http
+      .post(`${this.url + this.apiInfoBusiness}`, data, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((user: ResponseService) => {
+          return user.objectResponse;
+        })
+      );
+  }
+  public saveTermsConditions(data: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveTerms}`, data, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((user: ResponseService) => {
+          return user.objectResponse;
+        })
+      );
+  }
+  public saveTipBusiness(data: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveTips}`, data, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((user: ResponseService) => {
+          return user.objectResponse;
+        })
+      );
+  }
+  public deleteTipBusiness(data: any) {
+    return this.http
+      .delete(`${this.url + this.apiDeleteTip}?id=${data}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
       );
   }
   public saveComision(data: any) {

@@ -38,6 +38,8 @@ describe("BussinessComponent", () => {
     "getBusinessContent",
     "biggySearchExito",
     "biggySearchCarulla",
+    "getCommissionsByBussiness",
+    "getBusinessById"
   ]);
 
   const mockLinksService = jasmine.createSpyObj("LinksService", ["saveLink", "getSellers"]);
@@ -87,7 +89,14 @@ describe("BussinessComponent", () => {
       infoaditional: "",
     },
   ];
+  const info = {
+    about: "Informacion sobre el negocio seleccionado",
+    tips: [{ title: "Tip 1", description: "Hola mundo" }],
 
+  }
+  const comison = [{
+    commissionvalue: 100000000
+  }]
   const resp = {
     state: "Success",
     userMessage: "se ha guardado el link",
@@ -168,6 +177,8 @@ describe("BussinessComponent", () => {
       .compileComponents();
     mockContentService.getBusinessContent.and.returnValue(of(bussiness));
     mockUserService.getuserdata.and.returnValue(of(dataUserC));
+    mockContentService.getCommissionsByBussiness.and.returnValue(of(comison));
+    mockContentService.getBusinessById.and.returnValue(of(info));
     mockUserService.getShortUrl.and.returnValue(
       of("http://tynyurl.com/12kusw")
     );

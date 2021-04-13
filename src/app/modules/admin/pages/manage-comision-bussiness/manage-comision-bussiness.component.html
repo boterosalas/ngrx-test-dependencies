@@ -1,0 +1,291 @@
+<app-banner
+  title="{{ 'DASHBOARD.BUSINESS' | translate }}"
+  img="/assets/img/banners/banner-dashboard-pc.jpg"
+  imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
+></app-banner>
+<div class="container mt-3">
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <div fxLayout="row">
+      <img class="image-bussiness" [src]="image" alt="" />
+      <span>
+        <h3>{{ title }} / Administrar comisiones</h3></span
+      >
+    </div>
+    <span fxLayout="row">
+      <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
+      <button mat-button [routerLink]="['/negocios-admin']">
+        <span
+          class="galano-bold f-16"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+        >
+          <mat-icon>keyboard_arrow_left</mat-icon>
+          Volver
+        </span>
+      </button>
+    </span>
+  </div>
+  <div>
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="users-table"
+      matSort
+      (matSortChange)="sortData($event)"
+    >
+      <ng-container matColumnDef="code">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          style="width: 20%; font-weight: bold"
+        >
+          CÓDIGO DE CATEGORÍA
+        </th>
+        <td
+          class="cursor-pointer"
+          mat-cell
+          *matCellDef="let element: let i=index"
+          (click)="userInfo(dataSource.data[i])"
+        >
+          <p class="m-0 text-font">{{ element.codigo }}</p>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="nombreCat">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          style="width: 20%; font-weight: bold"
+        >
+          NOMBRE DE CATEGORÍA
+        </th>
+        <td
+          class="cursor-pointer"
+          mat-cell
+          *matCellDef="let element: let i=index"
+          (click)="userInfo(dataSource.data[i])"
+        >
+          <p class="m-0 text-font">{{ element.nombreCat }}</p>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="comisionClik">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          style="width: 20%; font-weight: bold"
+        >
+          COMISIÓN DE CLICKER
+        </th>
+        <td
+          class="cursor-pointer"
+          mat-cell
+          *matCellDef="let element: let i=index"
+          (click)="userInfo(dataSource.data[i])"
+        >
+          <p class="m-0 text-font">{{ element.commisionClic }}</p>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="comisionBus">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          style="width: 20%; font-weight: bold"
+        >
+          COMISIÓN DE NEGOCIO
+        </th>
+        <td mat-cell *matCellDef="let element: let i=index">
+          <p class="m-0 text-font">{{ element.commisionBuss }}</p>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="comisionTotal">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          style="width: 20%; font-weight: bold"
+        >
+          COMISIÓN TOTAL
+        </th>
+        <td mat-cell *matCellDef="let element: let i=index">
+          <p class="m-0 text-font">{{ element.commisionTotal }}</p>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          style="width: 10%; font-weight: bold"
+        >
+          ACCIONES
+        </th>
+        <td mat-cell *matCellDef="let element: let i=index">
+          <img
+            class="cursor-pointer"
+            (click)="editCategoryCom(element)"
+            src="/assets/img/dashboard/icon-edit.svg"
+            alt=""
+          />
+          <img
+            class="cursor-pointer"
+            (click)="deleteCategoryCom(element)"
+            src="/assets/img/dashboard/icon-trash.svg"
+            alt=""
+          />
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        id="user-{{ i }}"
+        mat-row
+        *matRowDef="let row; columns: displayedColumns; let i = index"
+      ></tr>
+    </table>
+    <div class="mt-2 mb-2" fxLayout="row" fxLayoutAlign="end end">
+      <button
+        mat-raised-button
+        color="orange"
+        (click)="addComisionCategory()"
+        id="download-users"
+        class="ml-2"
+      >
+        Agregar categoría
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #templateAddCategory>
+  <div ngClass="delete-container">
+    <div>
+      <form [formGroup]="dataTip">
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="CÓDIGO DE CATEGORÍA"
+            formControlName="codCategory"
+            type="text"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="NOMBRE DE CATEGORÍA"
+            type="text"
+            formControlName="nameCategory"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="COMISIÓN DE CLICKER (%)"
+            type="text"
+            formControlName="comisionClicker"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="COMISIÓN DE NEGOCIO (%)"
+            type="text"
+            formControlName="commisionBussiness"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+      </form>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="end end">
+      <button mat-button ngClass="button_cancel" (click)="onNoClick()">
+        Cancelar
+      </button>
+      <button
+        mat-raised-button
+        color="orange"
+        (click)="saveComisionCategory()"
+        id="download-users"
+        class="ml-2"
+        [disabled]="!dataTip.valid"
+      >
+        Guardar
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #templateEditCategory>
+  <div ngClass="delete-container">
+    <div>
+      <form [formGroup]="dataEditTip">
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="CÓDIGO DE CATEGORÍA"
+            formControlName="codEditCategory"
+            type="text"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="NOMBRE DE CATEGORÍA"
+            type="text"
+            formControlName="nameEditCategory"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="COMISIÓN DE CLICKER (%)"
+            type="text"
+            formControlName="comisionEditClicker"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="COMISIÓN DE NEGOCIO (%)"
+            type="text"
+            formControlName="commisionEditBussiness"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+      </form>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="end end">
+      <button mat-button ngClass="button_cancel" (click)="onNoClick()">
+        Cancelar
+      </button>
+      <button
+        mat-raised-button
+        color="orange"
+        (click)="editSaveComisionCategory()"
+        id="download-users"
+        class="ml-2"
+        [disabled]="!dataEditTip.valid"
+      >
+        Guardar
+      </button>
+    </div>
+  </div>
+</ng-template>

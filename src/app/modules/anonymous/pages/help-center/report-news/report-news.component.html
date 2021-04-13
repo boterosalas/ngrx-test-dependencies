@@ -1,157 +1,229 @@
-<app-banner title="{{'BANNERS.HELP_CENTER' | translate}}" img="/assets/img/banners/centro-ayuda-pc.jpg" imgMobile="/assets/img/banners/centro-ayuda-mobile.jpg"></app-banner>
+<app-banner
+  title="{{ 'BANNERS.HELP_CENTER' | translate }}"
+  img="/assets/img/banners/centro-ayuda-pc.jpg"
+  imgMobile="/assets/img/banners/centro-ayuda-mobile.jpg"
+></app-banner>
 <div class="container">
-    <div fxLayout.gt-xs="row" fxLayoutGap.gt-xs="30px" ngClass.gt-xs="mt-3">
-        <span fxHide.gt-xs="true">
-            <button mat-button [routerLink]="[ '/centro-de-ayuda/reportar' ]">
-                <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
-                    <mat-icon>keyboard_arrow_left</mat-icon>
-                    Volver
-                </span>
-            </button>
+  <div fxLayout.gt-xs="row" fxLayoutGap.gt-xs="30px" ngClass.gt-xs="mt-3">
+    <span fxHide.gt-xs="true">
+      <button mat-button [routerLink]="['/centro-de-ayuda/reportar']">
+        <span
+          class="galano-bold f-16"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+        >
+          <mat-icon>keyboard_arrow_left</mat-icon>
+          Volver
         </span>
-        <div fxLayout.gt-xs="column" fxFlex.gt-xs="25" fxShow.gt-xs="true" fxShow.xs="false">
-            <app-menu-help-center></app-menu-help-center>
-        </div>
-        <div  fxLayout.gt-xs="column" class="mt-3">
-            <div fxLayout="row" fxLayoutGap="10px">
-                <mat-card>
-                    <div fxLayout="row" fxLayoutGap="10px" class="report-news">
-                        <img src="/assets/img/ayuda/reportar-novedad/icon-reportar-novedad.svg" alt="">
-                        <h3>Reportar novedad</h3>
-                    </div>
-                    <h4>¿Tienes una novedad con la plataforma o los negocios aliados? ¡Vamos a resolverlo!, Por favor completa el siguiente formulario con la información requerida para que nuestro equipo lo empiece a resolver ágilmente.</h4>
-                    <div class="card-report-dark">
-                        <p class="margin-zero-top">Evita reportar las siguientes novedades: </p>    
-                        <p class="margin-zero-bottom">- Si tu novedad es referente a tiempos de entrega. </p>
-                        <p class="margin-zero-top margin-zero-bottom">- Novedades en pasarelas de pagos de los negocios aliados.</p>    
-                        <p class="margin-zero-top">- Modificación de datos en las compras de los negocios aliados o retractos. </p>
-                        <p class="margin-zero-bottom">Deberás reportarlo directamente con los negocios aliados.</p>
-                    </div>
-                    <div class="card-report-dark-1 mt-3">
-                      <p class="margin-zero-top mb-0 status-news">El tiempo de respuesta para cada novedad puede tomar hasta 15 días hábiles después de reportada la novedad o desde que se notifique un rechazo por parte del banco al realizar el pago.</p>    
-                  </div>
-                    <div>
-                      
-                        <form [formGroup]="dateForm" class="mt-4" >
-
-                            <div fxLayout="row" fxLayout.xs="column">
-                            <div fxLayout="column">
-                              <span style="color: #F21905;">* (Campo requerido)</span>
-                            <label class="label-up-text " for="picker"> FECHA DE NOVEDAD <b style="color: #F21905;">*</b> </label>
-
-                            <div fxLayout="row" class="mt-2">
-                              
-                                <mat-datepicker class="icon-date" touchUi #picker></mat-datepicker>
-                                <mat-datepicker-toggle
-                                  class="icon-date"
-                                  matSuffix
-                                  [for]="picker"
-                                ></mat-datepicker-toggle>
-                                <input
-                                  matInput
-                                  (click)="picker.open()"
-                                  [matDatepicker]="picker"
-                                  [max]="maxDate"
-                                  formControlName="dateRange"
-                                  readonly
-                                  class="form-control border-input mat-elevation-z1 p-2 border-radius"
-                                />
-                              
-                            </div>
-                            <div>
-                              <label class="label-up-text " for="picker">NEGOCIO <b style="color: #F21905;">*</b></label>
-                                <div>
-                                <mat-select
-                                  placeholder="Seleccionar"
-                                  id="tipoReport"
-                                  formControlName="bussiness"
-                                  class="selected-bussiness"
-                                >
-                                  <mat-option (click)="onChangeSelected(selected.placeholder)" *ngFor="let selected of dataSource" value="{{ selected.id }}">
-                                    <span >{{ selected.description }}</span>
-                                  </mat-option>
-                                </mat-select>
-                              </div>
-                            </div>
-                            <div>
-                                <mat-form-field class="selected-bussiness-text">
-                                    <mat-placeholder class="label-up-text-selected ">{{placeholder}} <b style="color: #F21905;">*</b></mat-placeholder>
-                                    <input
-                                      matInput
-                                      id="bussiness"
-                                      type="text"
-                                      formControlName="reference"
-                                    />                                   
-                                </mat-form-field>
-                            </div>
-                        </div>
-                        <div *ngIf="visibleLeft" fxLayout="column" class="w-status">
-                          <label class="label-up-text " for="picker">DESCRIPCIÓN DE LA NOVEDAD <b style="color: #F21905;">*</b></label>
-                            <div class="mt-3">
-                                    <textarea
-                                      matInput
-                                      placeholder="Cuéntanos sobre tu novedad, sé muy específico con las fechas y la forma en que referiste"
-                                      id="description"
-                                      type="text"
-                                      formControlName="description"
-                                      required
-                                      class="text-area-heigth"
-                                    ></textarea>                                   
-                                
-                            </div>
-                            <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3 file-width-space">
-                                <div fxLayout="column" fxLayoutAlign="center" class="space">
-                                  <strong class="title-gray">ADJUNTAR EVIDENCIA (FORMATO .JPG, .PNG, .PDF, .MSG, MAX 10MB)</strong>
-                                  <span class="title-secondary" *ngIf="nameFileCert === ''">No hay archivo seleccionado</span>
-                                  <span class="file-input" *ngIf="nameFileCert !== ''">{{
-                                    nameFileCert | truncate: '20'
-                                  }}</span>
-                                </div>
-                                <div >
-                                  <label for="image" id="upload" class="cursor-pointer">
-                                    <span  *ngIf="!showErrorCert">
-                                    <img
-                                      class="mt-1"
-                                      *ngIf="nameFileCert === ''"
-                                      src="/assets/img/image-file-upload.svg"
-                                      alt="upload"
-                                    />
-                                    <img
-                                      class="mt-1"
-                                      *ngIf="nameFileCert !== ''"
-                                      src="/assets/img/image-file-upload-ok.svg"
-                                      alt="upload"
-                                    />
-                                  </span>
-                                    <img
-                                    class="mt-1 w-icon"
-                                    *ngIf="showErrorCert"
-                                    src="/assets/img/icono-error-carga.svg"
-                                    alt="upload"
-                                  />
-                                  </label>
-                                </div>
-                              </div>
-                              <mat-error *ngIf="showErrorCert" class="text-small small pb-2 d-block">
-                                Formato inválido solo se pueden subir archivos con la extensión .JPG, .PDF, .PNG, .MSG y menores de 10MB
-                              </mat-error>
-                            
-                              <input
-                                (change)="onFileChangeFiles($event, 'image')"
-                                id="image"
-                                type="file"
-                                formControlName="image"
-                              />
-                              <div class="send-area" fxLayout="row" fxLayoutAlign="end">
-                                <button mat-raised-button color="orange" (click)="sendMessage()" id="download-users" class="ml-2 send-button" [disabled]="!dateForm.valid || validFormat ">Enviar</button>    
-                                
-                              </div>
-                        </div>
-                    </div>
-                        </form>
-                    </div>
-                </mat-card>
-            </div>
-        </div>
+      </button>
+    </span>
+    <div
+      fxLayout.gt-xs="column"
+      fxFlex.gt-xs="25"
+      fxShow.gt-xs="true"
+      fxShow.xs="false"
+    >
+      <app-menu-help-center></app-menu-help-center>
     </div>
+    <div fxLayout.gt-xs="column" class="mt-3">
+      <div fxLayout="row" fxLayoutGap="10px">
+        <mat-card>
+          <div fxLayout="row" fxLayoutGap="10px" class="report-news">
+            <img
+              src="/assets/img/ayuda/reportar-novedad/icon-reportar-novedad.svg"
+              alt=""
+            />
+            <h3>Reportar novedad</h3>
+          </div>
+          <h4>
+            ¿Tienes una novedad con la plataforma o los negocios aliados? ¡Vamos
+            a resolverlo!, Por favor completa el siguiente formulario con la
+            información requerida para que nuestro equipo lo empiece a resolver
+            ágilmente.
+          </h4>
+          <div class="card-report-dark">
+            <p class="margin-zero-top">
+              Evita reportar las siguientes novedades:
+            </p>
+            <p class="margin-zero-bottom">
+              - Si tu novedad es referente a tiempos de entrega.
+            </p>
+            <p class="margin-zero-top margin-zero-bottom">
+              - Novedades en pasarelas de pagos de los negocios aliados.
+            </p>
+            <p class="margin-zero-top">
+              - Modificación de datos en las compras de los negocios aliados o
+              retractos.
+            </p>
+            <p class="margin-zero-bottom">
+              Deberás reportarlo directamente con los negocios aliados.
+            </p>
+          </div>
+          <div class="card-report-dark-1 mt-3">
+            <p class="margin-zero-top mb-0 status-news">
+              El tiempo de respuesta para cada novedad puede tomar hasta 15 días
+              hábiles después de reportada la novedad o desde que se notifique
+              un rechazo por parte del banco al realizar el pago.
+            </p>
+          </div>
+          <div>
+            <form [formGroup]="dateForm" class="mt-4">
+              <div fxLayout="row" fxLayout.xs="column">
+                <div fxLayout="column">
+                  <span style="color: #f21905">* (Campo requerido)</span>
+                  <label class="label-up-text" for="picker">
+                    FECHA DE NOVEDAD <b style="color: #f21905">*</b>
+                  </label>
+
+                  <div fxLayout="row" class="mt-2">
+                    <mat-datepicker
+                      class="icon-date"
+                      touchUi
+                      #picker
+                    ></mat-datepicker>
+                    <mat-datepicker-toggle
+                      class="icon-date"
+                      matSuffix
+                      [for]="picker"
+                    ></mat-datepicker-toggle>
+                    <input
+                      matInput
+                      (click)="picker.open()"
+                      [matDatepicker]="picker"
+                      [max]="maxDate"
+                      formControlName="dateRange"
+                      readonly
+                      class="form-control border-input mat-elevation-z1 p-2 border-radius"
+                    />
+                  </div>
+                  <div>
+                    <label class="label-up-text" for="picker"
+                      >NEGOCIO <b style="color: #f21905">*</b></label
+                    >
+                    <div>
+                      <mat-select
+                        placeholder="Seleccionar"
+                        id="tipoReport"
+                        formControlName="bussiness"
+                        class="selected-bussiness"
+                      >
+                        <mat-option
+                          (click)="onChangeSelected(selected.placeholder)"
+                          *ngFor="let selected of dataSource"
+                          value="{{ selected.id }}"
+                        >
+                          <span>{{ selected.tabtablecommission }}</span>
+                        </mat-option>
+                      </mat-select>
+                    </div>
+                  </div>
+                  <div>
+                    <mat-form-field class="selected-bussiness-text">
+                      <mat-placeholder class="label-up-text-selected"
+                        >{{ placeholder }}
+                        <b style="color: #f21905">*</b></mat-placeholder
+                      >
+                      <input
+                        matInput
+                        id="bussiness"
+                        type="text"
+                        formControlName="reference"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div *ngIf="visibleLeft" fxLayout="column" class="w-status">
+                  <label class="label-up-text" for="picker"
+                    >DESCRIPCIÓN DE LA NOVEDAD
+                    <b style="color: #f21905">*</b></label
+                  >
+                  <div class="mt-3">
+                    <textarea
+                      matInput
+                      placeholder="Cuéntanos sobre tu novedad, sé muy específico con las fechas y la forma en que referiste"
+                      id="description"
+                      type="text"
+                      formControlName="description"
+                      required
+                      class="text-area-heigth"
+                    ></textarea>
+                  </div>
+                  <div
+                    fxLayout="row"
+                    fxLayoutAlign="space-start center"
+                    fxLayoutGap="50px"
+                    fxLayoutGap.xs="5px"
+                    class="pb-3 file-width-space"
+                  >
+                    <div fxLayout="column" fxLayoutAlign="center" class="space">
+                      <strong class="title-gray"
+                        >ADJUNTAR EVIDENCIA (FORMATO .JPG, .PNG, .PDF, .MSG, MAX
+                        10MB)</strong
+                      >
+                      <span class="title-secondary" *ngIf="nameFileCert === ''"
+                        >No hay archivo seleccionado</span
+                      >
+                      <span class="file-input" *ngIf="nameFileCert !== ''">{{
+                        nameFileCert | truncate: "20"
+                      }}</span>
+                    </div>
+                    <div>
+                      <label for="image" id="upload" class="cursor-pointer">
+                        <span *ngIf="!showErrorCert">
+                          <img
+                            class="mt-1"
+                            *ngIf="nameFileCert === ''"
+                            src="/assets/img/image-file-upload.svg"
+                            alt="upload"
+                          />
+                          <img
+                            class="mt-1"
+                            *ngIf="nameFileCert !== ''"
+                            src="/assets/img/image-file-upload-ok.svg"
+                            alt="upload"
+                          />
+                        </span>
+                        <img
+                          class="mt-1 w-icon"
+                          *ngIf="showErrorCert"
+                          src="/assets/img/icono-error-carga.svg"
+                          alt="upload"
+                        />
+                      </label>
+                    </div>
+                  </div>
+                  <mat-error
+                    *ngIf="showErrorCert"
+                    class="text-small small pb-2 d-block"
+                  >
+                    Formato inválido solo se pueden subir archivos con la
+                    extensión .JPG, .PDF, .PNG, .MSG y menores de 10MB
+                  </mat-error>
+
+                  <input
+                    (change)="onFileChangeFiles($event, 'image')"
+                    id="image"
+                    type="file"
+                    formControlName="image"
+                  />
+                  <div class="send-area" fxLayout="row" fxLayoutAlign="end">
+                    <button
+                      mat-raised-button
+                      color="orange"
+                      (click)="sendMessage()"
+                      id="download-users"
+                      class="ml-2 send-button"
+                      [disabled]="!dateForm.valid || validFormat"
+                    >
+                      Enviar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
 </div>

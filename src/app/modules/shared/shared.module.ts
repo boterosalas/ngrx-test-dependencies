@@ -21,6 +21,7 @@ import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 import { AppStoreComponent } from './components/app-store/app-store.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { ProductComponent } from './components/product/product.component';
+import { ProductBussinessComponent } from './components/product-bussiness/product-bussiness.component';
 import { BackNavigationComponent } from './components/back-navigation/back-navigation.component';
 import { ModalGenericComponent } from './components/modal-generic/modal-generic.component';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -30,6 +31,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { BannerComponent } from './components/banner/banner.component';
 import { TrimPipe } from 'src/app/pipes/trim.pipe';
+
 
 
 @NgModule({
@@ -49,6 +51,7 @@ import { TrimPipe } from 'src/app/pipes/trim.pipe';
     AppStoreComponent,
     LogoComponent,
     ProductComponent,
+    ProductBussinessComponent,
     BackNavigationComponent,
     ModalGenericComponent,
     BannerComponent,
@@ -90,8 +93,10 @@ import { TrimPipe } from 'src/app/pipes/trim.pipe';
     TrimPipe,
     LogoComponent,
     ProductComponent,
+    ProductBussinessComponent,
     BackNavigationComponent,
-    BannerComponent
+    BannerComponent,
+
   ],
   entryComponents: [
     ModalGenericComponent
