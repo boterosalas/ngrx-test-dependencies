@@ -1,4 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component, OnInit,
+  Input, Output, EventEmitter
+} from '@angular/core';
 
 @Component({
   selector: 'app-product-bussiness',
@@ -7,29 +10,28 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ProductBussinessComponent implements OnInit {
 
-  @Output() infoProduct = new EventEmitter();
 
-  @Input() productName: string;
-  @Input() categoryName: string;
-  @Input() productDescription: string;
-  @Input() price: number;
-  @Input() percent: string;
-  @Input() discount: number;
-  @Input() aliance: any;
-  @Input() logo: any;
-  @Input() image: string;
-  @Input() plu: string;
-  @Input() alt: string;
-  @Input() textbutton: string;
-  @Input() id: string;
-  @Input() btnid: string;
+
+
+  @Input() altimagen: string;
+  @Input() textoboton: string;
+  @Input() idne: string;
+  @Input() butonid: string;
   @Input() exito: boolean;
-  @Input() other: boolean;
-  @Input() category: boolean;
+  @Input() otro: boolean;
+  @Input() categoria: boolean;
   @Input() container: boolean;
-  @Input() photo: string;
+  @Input() foto: string;
   @Input() Class: string;
-
+  @Input() nombreProducto: string;
+  @Input() precio: number;
+  @Input() porcentaje: string;
+  @Input() descuento: number;
+  @Input() alianza: any;
+  @Input() svglogo: any;
+  @Input() imagen: string;
+  @Input() pluexito: string;
+  @Output() infoProduct = new EventEmitter();
   constructor() { }
 
 
