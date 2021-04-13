@@ -37,22 +37,6 @@ export class AddEditBlogAdminComponent implements OnInit {
   maxDate = new Date();
   minHours: any;
   configurationEditor: AngularEditorConfig = {
-    editable: true,
-    spellcheck: true,
-    height: '450px',
-    minHeight: '0',
-    maxHeight: 'auto',
-    width: '710px',
-    minWidth: '0',
-    translate: 'yes',
-    enableToolbar: true,
-    showToolbar: true,
-    placeholder: 'Contenido...',
-    defaultParagraphSeparator: 'p',
-    defaultFontName: '',
-    defaultFontSize: '',
-    sanitize: true,
-    toolbarPosition: 'top',
     toolbarHiddenButtons: [
       ['heading', 'insertImage', 'insertVideo',
         'customClasses',
@@ -63,7 +47,25 @@ export class AddEditBlogAdminComponent implements OnInit {
         'justifyCenter',
         'justifyRight',
         'justifyFull']
-    ]
+    ],
+    editable: true,
+    spellcheck: true,
+    height: '450px',
+    minHeight: '0',
+    maxHeight: 'auto',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: '',
+    defaultFontSize: '',
+    sanitize: true,
+    toolbarPosition: 'top',
+    width: '710px',
+    minWidth: '0',
+    translate: 'yes',
+    enableToolbar: true,
+    showToolbar: true,
+    placeholder: 'Contenido...',
+
+
   };
   contenidoHTML: string;
 

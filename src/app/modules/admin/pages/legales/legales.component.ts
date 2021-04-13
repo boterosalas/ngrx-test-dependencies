@@ -25,14 +25,8 @@ export class LegalesComponent implements OnInit {
     width: '720px',
     minWidth: '0',
     translate: 'yes',
-    enableToolbar: true,
     showToolbar: true,
     placeholder: 'Escriba su articulo...',
-    defaultParagraphSeparator: 'p',
-    defaultFontName: '',
-    defaultFontSize: '',
-    sanitize: true,
-    toolbarPosition: 'top',
     toolbarHiddenButtons: [
       ['heading', 'insertImage', 'insertVideo',
         'customClasses',
@@ -43,7 +37,14 @@ export class LegalesComponent implements OnInit {
         'justifyCenter',
         'justifyRight',
         'justifyFull']
-    ]
+    ],
+    defaultParagraphSeparator: 'p',
+    defaultFontName: '',
+    defaultFontSize: '',
+    enableToolbar: true,
+    sanitize: true,
+    toolbarPosition: 'top',
+
   };
   htmlContentTerminos: string;
   htmlContentProteccion: string;

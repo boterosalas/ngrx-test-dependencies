@@ -19,8 +19,8 @@
         <img
           class="img-responsive ch-100 heigth-automatic"
           mat-card-image
-          src="{{ image }}"
-          alt="{{ alt }}"
+          src="{{ imagen }}"
+          alt="{{ altimagen }}"
         />
       </div>
     </span>
@@ -39,14 +39,18 @@
           ngClass.gt-xs="container-card-info"
           fxLayoutAlign="end start"
         >
-          <h3 ngClass.gt-xs="f-18" id="{{ id }}" matTooltip="{{ productName }}">
-            {{ productName | truncate: "50" }}
+          <h3
+            ngClass.gt-xs="f-18"
+            id="{{ idne }}"
+            matTooltip="{{ nombreProducto }}"
+          >
+            {{ nombreProducto | truncate: "50" }}
           </h3>
           <div class="w-100">
-            <span class="f-13" ngClass.gt-xs="f-18" *ngIf="price !== 0"></span>
+            <span class="f-13" ngClass.gt-xs="f-18" *ngIf="precio !== 0"></span>
 
             <span
-              *ngIf="price !== 0"
+              *ngIf="precio !== 0"
               fxLayout="row"
               fxLayout.gt-xs="column"
               fxLayoutAlign="start space-between"
@@ -55,10 +59,10 @@
             >
               <span>
                 <span
-                  *ngIf="discount !== price"
+                  *ngIf="descuento !== precio"
                   class="d-block discount text-line small"
                 >
-                  {{ discount | currency: "":"symbol":"1.0-0" }}
+                  {{ descuento | currency: "":"symbol":"1.0-0" }}
                 </span>
                 <span>
                   <span
@@ -66,10 +70,10 @@
                     ngClass.gt-xs="f-18"
                     class="d-block discount"
                   >
-                    {{ price | currency: "":"symbol":"1.0-0" }}
+                    {{ precio | currency: "":"symbol":"1.0-0" }}
                   </span>
                   <span ngClass.xs="f-13" ngClass.gt-xs="f-18" class="plu">
-                    PLU:{{ plu }}
+                    PLU:{{ pluexito }}
                   </span>
                 </span>
               </span>
@@ -80,21 +84,21 @@
                 ngClass.gt-xs="button-wrap pb-3"
               >
                 <button
-                  id="{{ btnid }}"
+                  id="{{ butonid }}"
                   mat-raised-button
                   color="orange"
                   ngClass.xs="widb"
                   class="mb-1 button-properties"
                   (click)="product()"
-                  [disabled]="price === 0"
+                  [disabled]="precio === 0"
                 >
-                  <span id="{{ btnid }}">{{ textbutton }}</span>
+                  <span id="{{ butonid }}">{{ textoboton }}</span>
                 </button>
               </span>
             </span>
 
             <span
-              *ngIf="price === 0"
+              *ngIf="precio === 0"
               fxLayout.gt-xs="column"
               fxLayout="row"
               fxLayoutAlign="start start"
@@ -110,9 +114,9 @@
                 ngClass.xs="widb"
                 class="mb-1 button-20"
                 (click)="product()"
-                [disabled]="price === 0"
+                [disabled]="precio === 0"
               >
-                <span>{{ textbutton }}</span>
+                <span>{{ textoboton }}</span>
               </button>
             </span>
           </div>
@@ -124,7 +128,7 @@
 
 <mat-card
   class="mat-elevation-z0 card-product card-other fade-in p-1"
-  *ngIf="other"
+  *ngIf="otro"
 >
   <mat-card-content
     fxLayout="row"
@@ -143,8 +147,8 @@
         <img
           class="img-responsive ch-100"
           mat-card-image
-          src="{{ image }}"
-          alt="{{ alt }}"
+          src="{{ imagen }}"
+          alt="{{ altimagen }}"
         />
       </div>
     </span>
@@ -166,15 +170,15 @@
           <h3
             class="mt-3 mb-0"
             ngClass.gt-xs="f-18"
-            id="{{ id }}"
-            matTooltip="{{ productName }}"
+            id="{{ idne }}"
+            matTooltip="{{ nombreProducto }}"
           >
-            {{ productName | truncate: "30" }}
+            {{ nombreProducto | truncate: "30" }}
           </h3>
           <p>
             <span class="f-13" ngClass.gt-xs="f-18">Comisión:</span>
             <span class="d-block orange-text f-13" ngClass.gt-xs="f-18">
-              {{ percent }}
+              {{ porcentaje }}
             </span>
           </p>
         </span>
@@ -184,7 +188,7 @@
           ngClass.gt-xs="button-wrap pb-3"
         >
           <button
-            id="{{ btnid }}"
+            id="{{ butonid }}"
             mat-raised-button
             color="orange"
             [(ngClass)]="Class"
@@ -198,7 +202,7 @@
   </mat-card-content>
 </mat-card>
 
-<mat-card class="mat-elevation-z0 p-0 fade-in" *ngIf="category">
+<mat-card class="mat-elevation-z0 p-0 fade-in" *ngIf="categoria">
   <mat-card-content
     fxLayout="row"
     fxLayout.gt-xs="column"
@@ -209,8 +213,10 @@
     <span fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
       <img
         (click)="product()"
-        [src]="photo"
-        class="img-responsive mb-3 cursor-pointer {{ Class }}{{ productName }}"
+        [src]="foto"
+        class="img-responsive mb-3 cursor-pointer {{ Class }}{{
+          nombreProducto
+        }}"
       />
       <!-- <h3></h3> -->
     </span>
