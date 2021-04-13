@@ -54,12 +54,13 @@ export class AllBussinessComponent implements OnInit, OnDestroy {
   }
 
   public bussinessNavigation(bussiness) {
-
+    console.log(bussiness);
     let params = {
       id: bussiness.id,
       code: bussiness.code,
       infoAditional: bussiness.infoaditional,
       imageurl: bussiness.imageurl,
+      description: bussiness.description
     };
     this.router.navigate([
       "/bussiness",
@@ -68,7 +69,8 @@ export class AllBussinessComponent implements OnInit, OnDestroy {
         code: params.code,
         infoAditional: params.infoAditional,
         imageurl: params.imageurl,
-        allBussiness: true
+        allBussiness: true,
+        description: params.description,
       },
     ]);
   }

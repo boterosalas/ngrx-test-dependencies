@@ -104,6 +104,10 @@ export class BussinessComponent implements OnInit, OnDestroy {
   showReferenceButton: boolean = true;
   allBussiness: string;
   visibleTerms: boolean = false;
+  commision: number;
+  description: string;
+  infoBussiness: string;
+  tips = [];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -134,12 +138,21 @@ export class BussinessComponent implements OnInit, OnDestroy {
         this.image =
           "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg";
         this.percent = "Hasta 9.6% de ganancia";
+        this.description = "Almacenes Éxito";
       } else {
         this.id = route.id;
         this.title = route.code;
+        this.description = route.description;
         this.image = route.imageurl;
         this.percent = route.infoAditional;
         this.allBussiness = route.allBussiness;
+        this.content.getCommissionsByBussiness(this.id).subscribe((resp) => {
+          this.commision = Math.trunc(resp[0].commissionvalue / 1000000);
+        });
+        this.content.getBusinessById(this.id).subscribe((resp) => {
+          this.infoBussiness = resp.about;
+          this.tips = resp.tips;
+        })
         switch (this.title) {
           case "carulla":
             this.imgBanner = "/assets/img/banners/negocios/carulla-pc.jpg";

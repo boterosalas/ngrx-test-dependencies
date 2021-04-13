@@ -116,7 +116,6 @@ export class CarrouselAdminComponent implements OnInit {
     active: true,
     selected: true,
   }]
-  //https://live-realidad-aumentada.pantheonsite.io/sites/default/files/2020-08/mobilebienvenida.jpg
   ngOnInit() {
   }
   dropTable(event: CdkDragDrop<PeriodicElement[]>) {
@@ -136,7 +135,7 @@ export class CarrouselAdminComponent implements OnInit {
   dropTable2(event: CdkDragDrop<PeriodicElement[]>) {
     const prevIndex = this.dataSourceOfer.findIndex((d) => d === event.item.data);
     moveItemInArray(this.dataSourceOfer, prevIndex, event.currentIndex);
-    this.table.renderRows();
+    this.table2.renderRows();
     let datosSourceSend = []
     for (let i = 0; i < this.dataSourceOfer.length; i++) {
       this.dataSourceOfer[i].orderby = i + 1
