@@ -52,7 +52,7 @@ const mockContentService = jasmine.createSpyObj("ContentService", [
   "saveTipBusiness",
   "deleteTipBusiness"
 ]);
-fdescribe('InformationBussinessComponent', () => {
+describe('InformationBussinessComponent', () => {
   let component: InformationBussinessComponent;
   let fixture: ComponentFixture<InformationBussinessComponent>;
 

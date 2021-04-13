@@ -132,9 +132,9 @@ export class ManageComisionBussinessComponent implements OnInit {
         edit
       },
     });
-    this.subscription = dialogRef1.beforeClosed().subscribe(() => {
-      //this.getBusinessData();
-    });
+    //this.subscription = dialogRef1.beforeClosed().subscribe(() => {
+    //this.getBusinessData();
+    //});
   }
   editSaveComisionCategory() {
     let datos = {
@@ -163,8 +163,8 @@ export class ManageComisionBussinessComponent implements OnInit {
         edit
       },
     });
-    this.subscription = dialogRef1.beforeClosed().subscribe(() => {
-      //this.getBusinessData();
-    });
+    //this.subscription = dialogRef1.beforeClosed().subscribe(() => {
+    //this.getBusinessData();
+    //});
   }
 }

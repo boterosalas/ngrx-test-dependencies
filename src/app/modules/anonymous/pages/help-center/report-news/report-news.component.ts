@@ -48,7 +48,8 @@ export class ReportNewsComponent implements OnInit {
                 code: "clickam",
                 description: "Clickam",
                 id: 0,
-                placeholder: "TIPO DE REPORTE"
+                placeholder: "TIPO DE REPORTE",
+                tabtablecommission: "Clickam"
             })
             this.dataSource.sort(function (a, b) {
                 if (a.description > b.description) {
@@ -57,9 +58,9 @@ export class ReportNewsComponent implements OnInit {
                 if (a.description < b.description) {
                     return -1;
                 }
-                // a must be equal to b
                 return 0;
             });
+
 
         })
 

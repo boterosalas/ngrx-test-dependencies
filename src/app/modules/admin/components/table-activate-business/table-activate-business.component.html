@@ -91,7 +91,11 @@
               <button mat-menu-item (click)="comisionTable(element)">
                 Información de comisiones
               </button>
-              <button mat-menu-item (click)="adminComisionBussiness(element)">
+              <button
+                *ngIf="element.code === 'exito' || element.code === 'carulla'"
+                mat-menu-item
+                (click)="adminComisionBussiness(element)"
+              >
                 Administrar comisiones
               </button>
               <button mat-menu-item (click)="editBussiness(element)">

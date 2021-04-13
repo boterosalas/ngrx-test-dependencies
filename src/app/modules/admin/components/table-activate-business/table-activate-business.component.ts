@@ -82,6 +82,7 @@ export class TableActivateBusinessComponent implements OnInit {
         order: i + 1
       })
     }
+    console.log(this.dataSource);
     this.saveOrder(datosSourceSend)
   }
 
@@ -158,7 +159,7 @@ export class TableActivateBusinessComponent implements OnInit {
     let nameFile = event.target.files[0].name;
     let reader = new FileReader();
     let sizeFile = event.target.files[0].size;
-    const file = event.target.files[0];
+
     let fileList: FileList = event.target.files;
     this.getExtension(fileList[0].name, fileList[0].size);
     //let sizeFile = event.target.files[0].size;

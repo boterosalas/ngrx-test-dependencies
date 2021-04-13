@@ -11,7 +11,7 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 import { CarrouselAdminComponent } from './carrousel-admin.component';
 
-fdescribe('CarrouselAdminComponent', () => {
+describe('CarrouselAdminComponent', () => {
   let component: CarrouselAdminComponent;
   let fixture: ComponentFixture<CarrouselAdminComponent>;
 
