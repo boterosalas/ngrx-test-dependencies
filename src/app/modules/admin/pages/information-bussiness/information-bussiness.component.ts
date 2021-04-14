@@ -27,6 +27,7 @@ export class InformationBussinessComponent implements OnInit {
   generalInfo: string;
   idInfo: number;
   dataTip: FormGroup;
+  termsData: FormGroup;
   aboutBuss: FormGroup;
   dataEditTip: FormGroup
   @ViewChild("templateAddTips", { static: false }) templateAddTip: TemplateRef<any>;
@@ -47,6 +48,11 @@ export class InformationBussinessComponent implements OnInit {
     this.dataTip = this.fb.group({
       title: [null, Validators.required],
       description: [null, Validators.required]
+    });
+    this.termsData = this.fb.group({
+      general: [null, [Validators.required]],
+      exceptions: [null, [Validators.required]],
+      caseSpecial: [null, [Validators.required]],
     });
     this.aboutBuss = this.fb.group({
       aboutBuss: [null, [Validators.maxLength(1800), Validators.required, Validators.minLength(10)]]
@@ -84,17 +90,17 @@ export class InformationBussinessComponent implements OnInit {
       //this.aboutBusiness = resp.about;
       this.dataSource = resp.tips;
       if (resp.terms.length > 0) {
-        this.generalInfo = resp.terms[0].description;
+        //this.generalInfo = resp.terms[0].description;
+        this.termsData.controls.general.setValue(resp.terms[0].description);
         this.idInfo = resp.terms[0].id
-        this.exceptionsInfo = resp.terms[1].description;
+        //this.exceptionsInfo = resp.terms[1].description;
+        this.termsData.controls.exceptions.setValue(resp.terms[1].description);
         this.idExceptions = resp.terms[1].id
-        this.caseSpecial = resp.terms[2].description;
+        //this.caseSpecial = resp.terms[2].description;
+        this.termsData.controls.caseSpecial.setValue(resp.terms[2].description);
         this.idCaseSpecial = resp.terms[2].id
       }
 
-      console.log(this.idCaseSpecial);
-      console.log(this.idExceptions);
-      console.log(this.idInfo);
     })
   }
   dropTable(event: CdkDragDrop<PeriodicElement[]>) {
@@ -151,19 +157,19 @@ export class InformationBussinessComponent implements OnInit {
     let datos = {
       dmBusinessId: this.id,
       title: "General",
-      description: this.generalInfo
+      description: this.termsData.controls.general.value
     };
     let datosSend = this.comprobarText(this.idInfo, datos)
     let datos2 = {
       dmBusinessId: this.id,
       title: "Excepciones",
-      description: this.exceptionsInfo
+      description: this.termsData.controls.exceptions.value
     }
     let datosSend2 = this.comprobarText(this.idExceptions, datos2)
     let datos3 = {
       dmBusinessId: this.id,
       title: "Casos Especiales",
-      description: this.caseSpecial
+      description: this.termsData.controls.caseSpecial.value  //caseSpecial
     }
     let datosSend3 = this.comprobarText(this.idCaseSpecial, datos3);
     let array = [datosSend, datosSend2, datosSend3];
