@@ -134,6 +134,7 @@ export class InformationBussinessComponent implements OnInit {
         confirmButtonText: "Aceptar",
         confirmButtonClass: "upload-success"
       }).then(() => {
+        //this.aboutBuss.reset();
       });
     })
   }
@@ -180,6 +181,7 @@ export class InformationBussinessComponent implements OnInit {
         confirmButtonText: "Aceptar",
         confirmButtonClass: "upload-success"
       }).then(() => {
+        //this.termsData.reset();
       });
     })
 
@@ -216,13 +218,15 @@ export class InformationBussinessComponent implements OnInit {
   }
   saveTip() {
     let datos = {
-      dmBusinessId: 1,
+      dmBusinessId: this.id,
       title: this.dataTip.controls.title.value,
       description: this.dataTip.controls.description.value
     }
     this.content.saveTipBusiness(datos).subscribe((resp) => {
       this.getBusinessData();
       this.dialog.closeAll();
+      this.dataTip.reset();
+
     })
   }
   editTipModal(element) {
@@ -254,6 +258,7 @@ export class InformationBussinessComponent implements OnInit {
     this.content.saveTipBusiness(datos).subscribe((resp) => {
       this.getBusinessData();
       this.dialog.closeAll();
+      this.dataEditTip.reset();
     })
   }
   deleteTip(item) {

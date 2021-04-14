@@ -204,6 +204,17 @@
             class="text-area-heigth"
             style="color: #37236a"
           />
+          <mat-error
+            id="requiredName"
+            *ngIf="
+              dataTip.controls.codCategory.invalid &&
+              dataTip.controls.codCategory.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED"
+                | translate: { formValue: "Código de categoría" }
+            }}</mat-error
+          >
         </mat-form-field>
         <mat-form-field style="width: 370px">
           <input
@@ -215,6 +226,17 @@
             class="text-area-heigth"
             style="color: #37236a"
           />
+          <mat-error
+            id="requiredName"
+            *ngIf="
+              dataTip.controls.nameCategory.invalid &&
+              dataTip.controls.nameCategory.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED"
+                | translate: { formValue: "Nombre de categoría" }
+            }}</mat-error
+          >
         </mat-form-field>
         <mat-form-field style="width: 370px">
           <input
@@ -226,6 +248,17 @@
             class="text-area-heigth"
             style="color: #37236a"
           />
+          <mat-error
+            id="requiredName"
+            *ngIf="
+              dataTip.controls.comisionClicker.invalid &&
+              dataTip.controls.comisionClicker.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED"
+                | translate: { formValue: "Comisión de clicker" }
+            }}</mat-error
+          >
         </mat-form-field>
         <mat-form-field style="width: 370px">
           <input
@@ -237,6 +270,17 @@
             class="text-area-heigth"
             style="color: #37236a"
           />
+          <mat-error
+            id="requiredName"
+            *ngIf="
+              dataTip.controls.commisionBussiness.invalid &&
+              dataTip.controls.commisionBussiness.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED"
+                | translate: { formValue: "Comisión de negocio" }
+            }}</mat-error
+          >
         </mat-form-field>
       </form>
     </div>
@@ -273,6 +317,17 @@
             class="text-area-heigth"
             style="color: #37236a"
           />
+          <mat-error
+            id="requiredName"
+            *ngIf="
+              dataEditTip.controls.codEditCategory.invalid &&
+              dataEditTip.controls.codEditCategory.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED"
+                | translate: { formValue: "Código de categoría" }
+            }}</mat-error
+          >
         </mat-form-field>
         <mat-form-field style="width: 370px">
           <input
@@ -284,6 +339,17 @@
             class="text-area-heigth"
             style="color: #37236a"
           />
+          <mat-error
+            id="requiredName"
+            *ngIf="
+              dataEditTip.controls.nameEditCategory.invalid &&
+              dataEditTip.controls.nameEditCategory.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED"
+                | translate: { formValue: "Nombre de categoría" }
+            }}</mat-error
+          >
         </mat-form-field>
         <mat-form-field style="width: 370px">
           <input
@@ -295,6 +361,17 @@
             class="text-area-heigth"
             style="color: #37236a"
           />
+          <mat-error
+            id="requiredName"
+            *ngIf="
+              dataEditTip.controls.comisionEditClicker.invalid &&
+              dataEditTip.controls.comisionEditClicker.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED"
+                | translate: { formValue: "Comisión de clicker" }
+            }}</mat-error
+          >
         </mat-form-field>
         <mat-form-field style="width: 370px">
           <input
@@ -306,6 +383,17 @@
             class="text-area-heigth"
             style="color: #37236a"
           />
+          <mat-error
+            id="requiredName"
+            *ngIf="
+              dataEditTip.controls.commisionEditBussiness.invalid &&
+              dataEditTip.controls.commisionEditBussiness.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED"
+                | translate: { formValue: "Comisión de negocio" }
+            }}</mat-error
+          >
         </mat-form-field>
       </form>
     </div>
