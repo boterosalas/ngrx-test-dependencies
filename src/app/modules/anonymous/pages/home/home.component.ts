@@ -206,6 +206,12 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.managedPayments = user.managedPayments;
           this.newTerms = user.acceptTermsReferrals;
           this.getInfomonth();
+          if (role === "CLICKER") {
+            if (this.newTerms === false) {
+              this.termsAndConditions();
+            }
+          }
+
         });
       }
       let interval = setInterval(() => {
@@ -217,11 +223,11 @@ export class HomeComponent implements OnInit, OnDestroy {
       }, 3000);
 
       if (role === "CLICKER") {
-        setTimeout(() => {
-          if (this.newTerms === false) {
-            this.termsAndConditions();
-          }
-        }, 3000);
+        //setTimeout(() => {
+        //  if (this.newTerms === false) {
+        //    this.termsAndConditions();
+        //  }
+        //}, 3000);
 
         // if (promoOpen !== "1") {
         //   this.getModalPromo();

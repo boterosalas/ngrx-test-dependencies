@@ -23,6 +23,7 @@ export class ContentService {
   };
   urlRefer = environment.URL_REFERAL;
   url = environment.URL_CONTENT;
+  urlComission = environment.URL_COMISSION;
   urlbiggyExito = "https://search.biggylabs.com.br/search-api/v1/exitocol/api/";
   urlbiggyCarulla = "https://search.biggylabs.com.br/search-api/v1/carulla/api/";
   apibiggy = "search/trade-policy/1"
@@ -53,8 +54,9 @@ export class ContentService {
   apiSaveTerms = "business/savetermbusiness";
   apiGetBussinessById = "business/getbusinessbyid";
   apiSaveBusinessOrderTip = "business/saveordertipbusiness";
-  apiManageComisionBusiness = "business/savemanagecomisionbusiness"
-  apiDeleteManageCom = "business/deletecomisionbusiness"
+  apiGetManageCommisionBus = "category/getcategoriesbyidbusiness";
+  apiManageComisionBusiness = "category/savecategory";
+  apiDeleteManageCom = "category/deletecategory";
   apiGetpopups = "popups/getpopups";
   apiUploadContent = "library/uploadcontentlibrary";
   apiGetContentVideo = "library/getcontentlibrary";
@@ -78,6 +80,18 @@ export class ContentService {
         return user.objectResponse;
       })
     );
+  }
+  public getComisionManage(term?: any) {
+    return this.http
+      .get(
+        `${this.urlComission}${this.apiGetManageCommisionBus}?searchText=${term.term}&from=${term.from}&to=${term.to}&orderBy=${term.orderOrigin}&ordination=${term.orderBy}`,
+        this.httpOptions
+      )
+      .pipe(
+        map((user: any) => {
+          return user.objectResponse;
+        })
+      );
   }
 
   public getBusiness() {
@@ -162,7 +176,7 @@ export class ContentService {
   }
   deleteComisionCategoryBusiness(data) {
     return this.http
-      .delete(`${this.url + this.apiDeleteManageCom}?id=${data}`, this.httpOptions)
+      .delete(`${this.urlComission + this.apiDeleteManageCom}?id=${data}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
@@ -175,7 +189,7 @@ export class ContentService {
   }
   public saveComisionCategory(data: any) {
     return this.http
-      .post(`${this.url + this.apiManageComisionBusiness}`, data, this.httpOptions)
+      .post(`${this.urlComission + this.apiManageComisionBusiness}`, data, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(

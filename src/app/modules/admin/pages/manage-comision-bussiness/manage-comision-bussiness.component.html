@@ -26,28 +26,54 @@
     </span>
   </div>
   <div>
+    <div class="container-search">
+      <div fxLayout="row">
+        <div fxLayout="row">
+          <app-search-users
+            class="searchUser"
+            (search)="searchUser($event)"
+          ></app-search-users>
+          <div
+            style="
+              margin-top: 25px;
+              margin-left: 20px;
+              color: #37236a;
+              font-weight: bold;
+            "
+            fxLayout="row"
+          >
+            Mostrar Marketplace:
+            <mat-slide-toggle
+              style="position: relative; bottom: 2px; margin-left: 5px"
+              [(ngModel)]="marketplace"
+              color="orange2-toggle"
+            ></mat-slide-toggle>
+          </div>
+        </div>
+      </div>
+    </div>
     <table
       mat-table
       [dataSource]="dataSource"
       class="users-table"
       matSort
-      (matSortChange)="sortData($event)"
+      (matSortChange)="sort($event)"
     >
       <ng-container matColumnDef="code">
         <th
           mat-header-cell
           *matHeaderCellDef
           style="width: 20%; font-weight: bold"
+          mat-sort-header="code"
         >
           CÓDIGO DE CATEGORÍA
         </th>
         <td
-          class="cursor-pointer"
           mat-cell
           *matCellDef="let element: let i=index"
           (click)="userInfo(dataSource.data[i])"
         >
-          <p class="m-0 text-font">{{ element.codigo }}</p>
+          <p class="m-0 text-font">{{ element.code }}</p>
         </td>
       </ng-container>
       <ng-container matColumnDef="nombreCat">
@@ -55,16 +81,16 @@
           mat-header-cell
           *matHeaderCellDef
           style="width: 20%; font-weight: bold"
+          mat-sort-header="description"
         >
           NOMBRE DE CATEGORÍA
         </th>
         <td
-          class="cursor-pointer"
           mat-cell
           *matCellDef="let element: let i=index"
           (click)="userInfo(dataSource.data[i])"
         >
-          <p class="m-0 text-font">{{ element.nombreCat }}</p>
+          <p class="m-0 text-font">{{ element.description }}</p>
         </td>
       </ng-container>
       <ng-container matColumnDef="comisionClik">
@@ -72,16 +98,16 @@
           mat-header-cell
           *matHeaderCellDef
           style="width: 20%; font-weight: bold"
+          mat-sort-header="commissionClicker"
         >
           COMISIÓN DE CLICKER
         </th>
         <td
-          class="cursor-pointer"
           mat-cell
           *matCellDef="let element: let i=index"
           (click)="userInfo(dataSource.data[i])"
         >
-          <p class="m-0 text-font">{{ element.commisionClic }}</p>
+          <p class="m-0 text-font">{{ element.commissionClicker }}</p>
         </td>
       </ng-container>
       <ng-container matColumnDef="comisionBus">
@@ -89,11 +115,12 @@
           mat-header-cell
           *matHeaderCellDef
           style="width: 20%; font-weight: bold"
+          mat-sort-header="commissionBusiness"
         >
           COMISIÓN DE NEGOCIO
         </th>
         <td mat-cell *matCellDef="let element: let i=index">
-          <p class="m-0 text-font">{{ element.commisionBuss }}</p>
+          <p class="m-0 text-font">{{ element.commissionBusiness }}</p>
         </td>
       </ng-container>
       <ng-container matColumnDef="comisionTotal">
@@ -101,11 +128,12 @@
           mat-header-cell
           *matHeaderCellDef
           style="width: 20%; font-weight: bold"
+          mat-sort-header="commissionTotal"
         >
           COMISIÓN TOTAL
         </th>
         <td mat-cell *matCellDef="let element: let i=index">
-          <p class="m-0 text-font">{{ element.commisionTotal }}</p>
+          <p class="m-0 text-font">{{ element.commissionTotal }}</p>
         </td>
       </ng-container>
       <ng-container matColumnDef="actions">
@@ -113,6 +141,7 @@
           mat-header-cell
           *matHeaderCellDef
           style="width: 10%; font-weight: bold"
+          mat-sort-header="actions"
         >
           ACCIONES
         </th>
@@ -138,6 +167,15 @@
         *matRowDef="let row; columns: displayedColumns; let i = index"
       ></tr>
     </table>
+    <div class="mt-3">
+      <mat-paginator
+        [length]="totalItems"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="[50]"
+        [pageIndex]="pageIndex"
+        (page)="pagination($event)"
+      ></mat-paginator>
+    </div>
     <div class="mt-2 mb-2" fxLayout="row" fxLayoutAlign="end end">
       <button
         mat-raised-button
