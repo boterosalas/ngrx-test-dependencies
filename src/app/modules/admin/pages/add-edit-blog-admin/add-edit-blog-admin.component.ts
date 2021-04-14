@@ -64,8 +64,6 @@ export class AddEditBlogAdminComponent implements OnInit {
     enableToolbar: true,
     showToolbar: true,
     placeholder: 'Contenido...',
-
-
   };
   contenidoHTML: string;
 

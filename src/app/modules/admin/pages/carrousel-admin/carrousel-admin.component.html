@@ -10,6 +10,38 @@
         <span class="gtmTerminosCondicionesClicTerminosLegales">Carrusel</span>
       </ng-template>
       <div class="mt-3">
+        <div fxLayout="row">
+          <button
+            mat-raised-button
+            color="orange"
+            (click)="selectAll()"
+            class="button-selected mr-4"
+          >
+            <img
+              class="icon-download"
+              src="assets/img/dashboard/icon-check.svg"
+              alt="descarga"
+            />
+            {{ selectAllVideosImg }}
+          </button>
+          <button
+            mat-raised-button
+            (click)="deleteEvery()"
+            [ngClass]="
+              active === true
+                ? 'button-selected-red'
+                : 'button-selected-red-disabled'
+            "
+            [disabled]="!active"
+          >
+            <img
+              class="icon-download"
+              src="assets/img/dashboard/icon-trash-red.svg"
+              alt="descarga"
+            />
+            Borrar
+          </button>
+        </div>
         <table
           mat-table
           #table
@@ -37,6 +69,7 @@
                 <mat-checkbox
                   [(ngModel)]="element.selected"
                   class="check-margin mr-2"
+                  (change)="loadDelete()"
                 >
                 </mat-checkbox>
               </div>
@@ -213,7 +246,7 @@
                 />
                 <img
                   class="cursor-pointer"
-                  (click)="deleteComision(element, i)"
+                  (click)="deleteComisionCarousel(element)"
                   src="/assets/img/dashboard/icon-remove-comision.svg"
                   alt=""
                 />
@@ -229,6 +262,17 @@
             [cdkDragData]="row"
           ></tr>
         </table>
+        <div class="mt-3 mb-3" fxLayout="row" fxLayoutAlign="end end">
+          <button
+            mat-raised-button
+            color="orange"
+            (click)="saveCarouselModal()"
+            id="download-users"
+            class="ml-2"
+          >
+            Agregar imagen
+          </button>
+        </div>
       </div>
     </mat-tab>
     <mat-tab>
@@ -236,6 +280,38 @@
         <span class="gtmTerminosCondicionesClicTerminosLegales">Ofertas</span>
       </ng-template>
       <div class="mt-3">
+        <div fxLayout="row">
+          <button
+            mat-raised-button
+            color="orange"
+            (click)="selectAllOfertas()"
+            class="button-selected mr-4"
+          >
+            <img
+              class="icon-download"
+              src="assets/img/dashboard/icon-check.svg"
+              alt="descarga"
+            />
+            {{ selectAllVideosImgOfer }}
+          </button>
+          <button
+            mat-raised-button
+            (click)="deleteEveryOfertas()"
+            [ngClass]="
+              active2 === true
+                ? 'button-selected-red'
+                : 'button-selected-red-disabled'
+            "
+            [disabled]="!active2"
+          >
+            <img
+              class="icon-download"
+              src="assets/img/dashboard/icon-trash-red.svg"
+              alt="descarga"
+            />
+            Borrar
+          </button>
+        </div>
         <table
           mat-table
           #table2
@@ -263,6 +339,7 @@
                 <mat-checkbox
                   [(ngModel)]="element.selected"
                   class="check-margin mr-2"
+                  (change)="loadDelete2()"
                 >
                 </mat-checkbox>
               </div>
@@ -402,7 +479,7 @@
                 />
                 <img
                   class="cursor-pointer"
-                  (click)="deleteComision(element, i)"
+                  (click)="deleteComisionOferta(element)"
                   src="/assets/img/dashboard/icon-remove-comision.svg"
                   alt=""
                 />
@@ -418,7 +495,347 @@
             [cdkDragData]="row"
           ></tr>
         </table>
+        <div class="mt-3 mb-3" fxLayout="row" fxLayoutAlign="end end">
+          <button
+            mat-raised-button
+            color="orange"
+            (click)="saveOfertasModal()"
+            id="download-users"
+            class="ml-2"
+          >
+            Agregar imagen
+          </button>
+        </div>
       </div>
     </mat-tab>
   </mat-tab-group>
 </div>
+
+<ng-template #templateAddImagenCarousel>
+  <div ngClass="delete-container">
+    <div>
+      <form [formGroup]="dataAddImagen">
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="NOMBRE DE CONTENIDO"
+            formControlName="nameContent"
+            type="text"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="LINK"
+            type="text"
+            formControlName="link"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="NEGOCIO"
+            type="text"
+            formControlName="business"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="COMISIÓN"
+            type="text"
+            formControlName="comision"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+
+        <div
+          fxLayout="row"
+          fxLayoutAlign="space-start center"
+          fxLayoutGap="50px"
+          fxLayoutGap.xs="5px"
+          class="pb-3"
+        >
+          <div fxLayout="column" fxLayoutAlign="center" class="space">
+            <strong class="title-gray" style="color: #a7a3b1; font-size: 11px"
+              >ADJUNTAR IMAGEN (500X500PX, FORMATO .JPG, MAX 250KB)</strong
+            >
+            <span
+              class="title-secondary"
+              *ngIf="nameFileCert === ''"
+              style="font-size: 11px"
+              >No hay archivo seleccionado</span
+            >
+            <span
+              class="file-input"
+              *ngIf="nameFileCert !== ''"
+              style="color: #37236a; font-size: 11px"
+              >{{ nameFileCert | truncate: "20" }}</span
+            >
+          </div>
+          <div>
+            <label for="image" id="upload" class="cursor-pointer">
+              <span *ngIf="!showErrorCert">
+                <img
+                  class="mt-1"
+                  *ngIf="nameFileCert === ''"
+                  src="/assets/img/image-file-upload.svg"
+                  alt="upload"
+                />
+                <img
+                  class="mt-1"
+                  *ngIf="nameFileCert !== ''"
+                  src="/assets/img/image-file-upload-ok.svg"
+                  alt="upload"
+                />
+              </span>
+              <img
+                class="mt-1 w-icon"
+                *ngIf="showErrorCert"
+                src="/assets/img/icono-error-carga.svg"
+                alt="upload"
+              />
+            </label>
+          </div>
+        </div>
+        <mat-error *ngIf="showErrorCert" class="text-small small pb-2 d-block">
+          Formato inválido solo se pueden subir archivos con la extensión JPG y
+          menores de 250KB
+        </mat-error>
+        <input
+          (change)="onFileChangeFiles($event, 'image')"
+          id="image"
+          type="file"
+          style="display: none"
+          formControlName="image"
+        />
+        <div
+          fxLayout="row"
+          fxLayoutAlign="space-start center"
+          fxLayoutGap="50px"
+          fxLayoutGap.xs="5px"
+          class="pb-3"
+        >
+          <div fxLayout="column" fxLayoutAlign="center" class="space">
+            <strong class="title-gray" style="color: #a7a3b1; font-size: 11px"
+              >ADJUNTAR IMAGEN DASHBOARD (500X500PX, FORMATO .SVG, MAX
+              300KB)</strong
+            >
+            <span
+              class="title-secondary"
+              *ngIf="nameFileCert2 === ''"
+              style="font-size: 11px"
+              >No hay archivo seleccionado</span
+            >
+            <span
+              class="file-input"
+              *ngIf="nameFileCert2 !== ''"
+              style="color: #37236a; font-size: 11px"
+              >{{ nameFileCert2 | truncate: "20" }}</span
+            >
+          </div>
+          <div>
+            <label for="image2" id="upload" class="cursor-pointer">
+              <span *ngIf="!showErrorCert2">
+                <img
+                  class="mt-1"
+                  *ngIf="nameFileCert2 === ''"
+                  src="/assets/img/image-file-upload.svg"
+                  alt="upload"
+                />
+                <img
+                  class="mt-1"
+                  *ngIf="nameFileCert2 !== ''"
+                  src="/assets/img/image-file-upload-ok.svg"
+                  alt="upload"
+                />
+              </span>
+              <img
+                class="mt-1 w-icon"
+                *ngIf="showErrorCert2"
+                src="/assets/img/icono-error-carga.svg"
+                alt="upload"
+              />
+            </label>
+          </div>
+        </div>
+        <mat-error *ngIf="showErrorCert2" class="text-small small pb-2 d-block">
+          Formato inválido solo se pueden subir archivos con la extensión SVG y
+          menores de 300KB
+        </mat-error>
+        <input
+          (change)="onFileChangeFilesSecond($event, 'image')"
+          id="image2"
+          type="file"
+          style="display: none"
+          formControlName="image2"
+        />
+        <div fxLayout="row" fxLayoutAlign="end end">
+          Activa
+          <mat-slide-toggle
+            style="margin-left: 5px; position: relative; top: 2px"
+            color="orange2-toggle"
+            formControlName="visible"
+          ></mat-slide-toggle>
+        </div>
+      </form>
+    </div>
+
+    <div class="mt-3 mb-2" fxLayout="row" fxLayoutAlign="end end">
+      <button mat-button ngClass="button_cancel" (click)="onNoClick()">
+        Cancelar
+      </button>
+      <button
+        mat-raised-button
+        color="orange"
+        (click)="saveImagenCarousel()"
+        id="download-users"
+        class="ml-2"
+        [disabled]="!dataAddImagen.valid"
+      >
+        Guardar Cambios
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #templateAddImagenOfertas>
+  <div ngClass="delete-container">
+    <div>
+      <form [formGroup]="dataAddImagenOfertas">
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="NOMBRE DE CONTENIDO"
+            formControlName="nameContent"
+            type="text"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="LINK"
+            type="text"
+            formControlName="link"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="NEGOCIO"
+            type="text"
+            formControlName="business"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="COMISIÓN"
+            type="text"
+            formControlName="comision"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+
+        <div
+          fxLayout="row"
+          fxLayoutAlign="space-start center"
+          fxLayoutGap="50px"
+          fxLayoutGap.xs="5px"
+          class="pb-3"
+        >
+          <div fxLayout="column" fxLayoutAlign="center" class="space">
+            <strong class="title-gray" style="color: #a7a3b1; font-size: 11px"
+              >ADJUNTAR IMAGEN (500X500PX, FORMATO .JPG, MAX 250KB)</strong
+            >
+            <span
+              class="title-secondary"
+              *ngIf="nameFileCert === ''"
+              style="font-size: 11px"
+              >No hay archivo seleccionado</span
+            >
+            <span
+              class="file-input"
+              *ngIf="nameFileCert !== ''"
+              style="color: #37236a; font-size: 11px"
+              >{{ nameFileCert | truncate: "20" }}</span
+            >
+          </div>
+          <div>
+            <label for="image" id="upload" class="cursor-pointer">
+              <span *ngIf="!showErrorCert">
+                <img
+                  class="mt-1"
+                  *ngIf="nameFileCert === ''"
+                  src="/assets/img/image-file-upload.svg"
+                  alt="upload"
+                />
+                <img
+                  class="mt-1"
+                  *ngIf="nameFileCert !== ''"
+                  src="/assets/img/image-file-upload-ok.svg"
+                  alt="upload"
+                />
+              </span>
+              <img
+                class="mt-1 w-icon"
+                *ngIf="showErrorCert"
+                src="/assets/img/icono-error-carga.svg"
+                alt="upload"
+              />
+            </label>
+          </div>
+        </div>
+        <mat-error *ngIf="showErrorCert" class="text-small small pb-2 d-block">
+          Formato inválido solo se pueden subir archivos con la extensión JPG y
+          menores de 250KB
+        </mat-error>
+        <input
+          (change)="onFileChangeFiles($event, 'image')"
+          id="image"
+          type="file"
+          style="display: none"
+          formControlName="image"
+        />
+      </form>
+    </div>
+
+    <div class="mt-3 mb-2" fxLayout="row" fxLayoutAlign="end end">
+      <button mat-button ngClass="button_cancel" (click)="onNoClick()">
+        Cancelar
+      </button>
+      <button
+        mat-raised-button
+        color="orange"
+        (click)="saveImagenOfertas()"
+        id="download-users"
+        class="ml-2"
+        [disabled]="!dataAddImagen.valid"
+      >
+        Guardar Cambios
+      </button>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,34 @@
+.w-icon {
+  width: 30px;
+}
+.button-selected {
+  background-color: #ffffff;
+  color: #3d136e;
+  height: 35px;
+  border: 1px solid #3d136e;
+  img {
+    position: relative;
+    bottom: 3px;
+  }
+}
+.button-selected-red {
+  background-color: #ffffff;
+  color: #ff5658;
+  height: 35px;
+  border: 1px solid #ff5658;
+  img {
+    position: relative;
+    bottom: 3px;
+  }
+}
+.button-selected-red-disabled {
+  background-color: #ffffff !important;
+  color: #d2d0d4 !important;
+  height: 35px;
+  border: 1px solid #d2d0d4 !important;
+  img {
+    position: relative;
+    bottom: 3px;
+    filter: opacity(0.5) grayscale(1);
+  }
+}
