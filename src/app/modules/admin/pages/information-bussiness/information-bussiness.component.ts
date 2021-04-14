@@ -190,7 +190,7 @@ export class InformationBussinessComponent implements OnInit {
   addTip() {
     if (this.dataSource.length > 4) {
       Swal.fire({
-        text: "Recuerda que se permiten solo 5 tips por negocio.",
+        text: "Recuerda que se permiten sólo 5 tips por negocio.",
         type: "error",
         confirmButtonText: "Aceptar",
         confirmButtonClass: "upload-success"

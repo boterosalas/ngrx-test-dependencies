@@ -1,12 +1,14 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDialog, MatDialogRef, MatMenuModule, MatSlideToggleModule, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDatepickerModule, MatDialog, MatDialogRef, MatMenuModule, MatNativeDateModule, MatSlideToggleModule, MAT_DIALOG_DATA } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
+import { AnonymousModule } from 'src/app/modules/anonymous/anonymous.module';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { ContentService } from 'src/app/services/content.service';
@@ -23,7 +25,8 @@ describe('ManageComisionBussinessComponent', () => {
   let fixture: ComponentFixture<ManageComisionBussinessComponent>;
   const mockContentService = jasmine.createSpyObj("ContentService", [
     "saveComisionCategory",
-    "deleteComisionCategoryBusiness"
+    "deleteComisionCategoryBusiness",
+    "getComisionManage"
   ]);
   const audit = {
     state: "Success",
@@ -48,17 +51,32 @@ describe('ManageComisionBussinessComponent', () => {
         HttpClientTestingModule,
         RouterTestingModule,
         MatMenuModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+
+        AnonymousModule,
+
+        MatDatepickerModule,
+        MatNativeDateModule,
+
+
+
+
+
+
       ],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: ContentService, useValue: mockContentService },
         { provide: MatDialogRef, useValue: dialogMock },
         { provide: MatDialog, useValue: mockDialog },
-      ]
+      ],
+      schemas: [
+        NO_ERRORS_SCHEMA
+      ],
     })
       .compileComponents();
     mockContentService.saveComisionCategory.and.returnValue(of(audit));
+    mockContentService.getComisionManage.and.returnValue(of(audit));
     mockContentService.deleteComisionCategoryBusiness.and.returnValue(of(audit));
 
   }));
@@ -92,6 +110,7 @@ describe('ManageComisionBussinessComponent', () => {
     component.addComisionCategory();
     component.editCategoryCom({ codigo: 1, nombreCat: "Hola", comisionClic: "4%", comisionBuss: "5%" });
     //component.editSaveComisionCategory();
+    component.pagination({ previousPageIndex: 1, pageIndex: 0, pageSize: 20, length: 5 });
     let datos = true;
     expect(datos).toBeTruthy();
   })
