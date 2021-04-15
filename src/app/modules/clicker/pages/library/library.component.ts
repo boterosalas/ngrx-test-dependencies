@@ -24,6 +24,7 @@ export class LibraryComponent implements OnInit {
     videosDispo: boolean = true;
     dataRealVideo = [];
     url: string;
+    isNormal: boolean;
     active: boolean = true;
     idDownload: string;
     selectAllVideosImg: string = "Seleccionar todos";
@@ -44,10 +45,13 @@ export class LibraryComponent implements OnInit {
             if (
                 route.id === undefined
             ) {
+                this.isNormal = true;
                 this.id = 1;
             } else {
+                this.isNormal = false;
                 this.id = route.id;
             }
+
         });
     }
 
@@ -67,6 +71,7 @@ export class LibraryComponent implements OnInit {
         this.dataSource(item);
     }
     public dataSource(item: any) {
+        console.log(item)
         this.content.getVideosImage(item.id).subscribe((resp: any) => {
 
             if (resp.state === "Success") {
@@ -131,16 +136,20 @@ export class LibraryComponent implements OnInit {
 
     }
     public stepPaso(data) {
-        console.log(data);
         for (let index = 0; index < data.length; index++) {
-            console.log(this.id);
-            console.log(data[index].id.toString());
+            //console.log(this.id);
+            //console.log(data[index].id.toString());
             if (data[index].id.toString() === this.id) {
-                console.log(index);
+                //console.log(index);
                 this.step = index
+                if (this.isNormal === false) {
+                    //console.log(data[index]);
+                    this.setStepMovil(data[index], data[index])
+                }
             }
 
         }
+
     }
     public setStepMovil(index: any, item: any) {
         this.step_mobile = index;

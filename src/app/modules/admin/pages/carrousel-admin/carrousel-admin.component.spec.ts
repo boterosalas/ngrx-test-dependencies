@@ -6,8 +6,10 @@ import { MatDialog, MatDialogRef, MatMenuModule, MatSlideToggleModule, MAT_DIALO
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
+import { of } from 'rxjs';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { ContentService } from 'src/app/services/content.service';
 import Swal from 'sweetalert2';
 
 import { CarrouselAdminComponent } from './carrousel-admin.component';
@@ -19,6 +21,13 @@ describe('CarrouselAdminComponent', () => {
     close: () => { },
     beforeClosed: () => { }
   };
+  const mockContentService = jasmine.createSpyObj("ContentService", [
+    "getOffersbyType",
+    "saveOrderOfertBusiness",
+    "getAllBusiness",
+    "deleteOfer",
+    "saveOfertBusiness"
+  ]);
   const audit = {
     state: "Success",
     userMessage: "se ha enviado un correo",
@@ -52,10 +61,17 @@ describe('CarrouselAdminComponent', () => {
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: dialogMock },
+        { provide: ContentService, useValue: mockContentService },
         { provide: MatDialog, useValue: mockDialog },
       ]
     })
       .compileComponents();
+    mockContentService.getOffersbyType.and.returnValue(of(audit));
+    mockContentService.saveOrderOfertBusiness.and.returnValue(of(audit));
+    mockContentService.getAllBusiness.and.returnValue(of(audit));
+    mockContentService.deleteOfer.and.returnValue(of(audit));
+    mockContentService.saveOfertBusiness.and.returnValue(of(audit));
+
   }));
 
   beforeEach(() => {
@@ -83,8 +99,15 @@ describe('CarrouselAdminComponent', () => {
     );
     component.selectAll();
     component.selectAllOfertas();
+    component.saveImagenOfertas();
+    component.saveOrder([{ id: 1, orderBy: 1 }, { id: 2, orderBy: 2 }]);
+    component.saveImagenCarousel();
     component.deleteComisionCarousel({ id: 1 });
     component.deleteComisionOferta({ id: 1 });
+    component.editOfertasModal({ id: 1, nameContent: "HE", link: "link", bussiness: "buss", comision: "Hasta 4%" });
+    component.editCarouselModal({ id: 1, nameContent: "HE", link: "link", bussiness: "buss", comision: "Hasta 4%" });
+    component.deleteEveryOfertas();
+    component.deleteEvery();
     let datos = true;
     expect(datos).toBeTruthy();
   });

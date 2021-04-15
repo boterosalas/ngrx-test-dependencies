@@ -101,7 +101,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   orderOptions: any;
   orderValue: string;
   sellerId: string;
-  mostrarProductos: number = 52;
+  mostrarProductos: number = 3;
   sellerName: string;
   showReferenceButton: boolean = true;
   allBussiness: string;
@@ -688,7 +688,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   }
 
   verMasProductos() {
-    this.mostrarProductos += 52;
+    this.mostrarProductos += 3;
   }
 
   public searchBiggyExito(
@@ -701,7 +701,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     if (term !== this.paginate) {
       this.paginate = term;
       this.pageIndex = 0;
-      this.mostrarProductos = 52;
+      this.mostrarProductos = 3;
       // this.productsListExito = [];
     }
 
@@ -785,7 +785,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
       this.paginate = term;
       this.pageIndex = 0;
       this.productsListExito = [];
-      this.mostrarProductos = 52;
+      this.mostrarProductos = 3;
     }
 
     dataLayer.push({

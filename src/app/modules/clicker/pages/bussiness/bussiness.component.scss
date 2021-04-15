@@ -19,7 +19,7 @@
   width: 70%;
 }
 .text-productos {
-  font-size: 24px;
+  font-size: 22px;
 }
 .title-h3 {
   font-size: 23px;
@@ -40,7 +40,7 @@
     margin-right: 0px;
   }
   .text-terms-conditions {
-    text-align: center;
+    text-align: end;
   }
 }
 .p {
@@ -105,6 +105,9 @@
   position: relative;
   left: 20px;
 }
+.about-bussiness {
+  padding: 16px;
+}
 @media screen and (max-width: 600px) {
   .card-library {
     padding-left: 20px;
@@ -115,6 +118,9 @@
     .button-oferts {
       width: 110px;
     }
+  }
+  .about-bussiness {
+    padding: 8px;
   }
   .position-relative {
     left: 0px;
@@ -171,4 +177,13 @@
 }
 .description-tip {
   margin-top: 0px !important;
+}
+.subtitle-about {
+  font-size: 18px;
+}
+.subtitle-tips-other {
+  font-size: 20px;
+}
+.break {
+  white-space: break-spaces;
 }

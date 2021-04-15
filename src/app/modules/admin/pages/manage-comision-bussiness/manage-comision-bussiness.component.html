@@ -44,6 +44,7 @@
           >
             Mostrar Marketplace:
             <mat-slide-toggle
+              (change)="changeStatus()"
               style="position: relative; bottom: 2px; margin-left: 5px"
               [(ngModel)]="marketplace"
               color="orange2-toggle"
@@ -107,7 +108,7 @@
           *matCellDef="let element: let i=index"
           (click)="userInfo(dataSource.data[i])"
         >
-          <p class="m-0 text-font">{{ element.commissionClicker }}</p>
+          <p class="m-0 text-font">{{ element.commissionclicker }}</p>
         </td>
       </ng-container>
       <ng-container matColumnDef="comisionBus">
@@ -120,7 +121,7 @@
           COMISIÓN DE NEGOCIO
         </th>
         <td mat-cell *matCellDef="let element: let i=index">
-          <p class="m-0 text-font">{{ element.commissionBusiness }}</p>
+          <p class="m-0 text-font">{{ element.commissionbusiness }}</p>
         </td>
       </ng-container>
       <ng-container matColumnDef="comisionTotal">
@@ -171,7 +172,7 @@
       <mat-paginator
         [length]="totalItems"
         [pageSize]="pageSize"
-        [pageSizeOptions]="[50]"
+        [pageSizeOptions]="[20]"
         [pageIndex]="pageIndex"
         (page)="pagination($event)"
       ></mat-paginator>
@@ -242,7 +243,7 @@
           <input
             matInput
             placeholder="COMISIÓN DE CLICKER (%)"
-            type="text"
+            type="number"
             formControlName="comisionClicker"
             required
             class="text-area-heigth"
@@ -264,7 +265,7 @@
           <input
             matInput
             placeholder="COMISIÓN DE NEGOCIO (%)"
-            type="text"
+            type="number"
             formControlName="commisionBussiness"
             required
             class="text-area-heigth"
@@ -355,7 +356,7 @@
           <input
             matInput
             placeholder="COMISIÓN DE CLICKER (%)"
-            type="text"
+            type="number"
             formControlName="comisionEditClicker"
             required
             class="text-area-heigth"
@@ -377,7 +378,7 @@
           <input
             matInput
             placeholder="COMISIÓN DE NEGOCIO (%)"
-            type="text"
+            type="number"
             formControlName="commisionEditBussiness"
             required
             class="text-area-heigth"

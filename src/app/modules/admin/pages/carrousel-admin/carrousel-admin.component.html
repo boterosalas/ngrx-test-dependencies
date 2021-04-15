@@ -240,7 +240,7 @@
               >
                 <img
                   class="cursor-pointer"
-                  (click)="editCategory(element)"
+                  (click)="editCarouselModal(element)"
                   src="/assets/img/dashboard/icon-edit.svg"
                   alt=""
                 />
@@ -473,7 +473,7 @@
               >
                 <img
                   class="cursor-pointer"
-                  (click)="editCategory(element)"
+                  (click)="editOfertasModal(element)"
                   src="/assets/img/dashboard/icon-edit.svg"
                   alt=""
                 />
@@ -559,25 +559,19 @@
           >
         </mat-form-field>
         <mat-form-field style="width: 370px">
-          <input
-            matInput
+          <mat-select
             placeholder="NEGOCIO"
-            type="text"
+            id="tipoComision"
+            class="selected-report"
             formControlName="business"
-            required
-            class="text-area-heigth"
-            style="color: #37236a"
-          />
-          <mat-error
-            id="requiredName"
-            *ngIf="
-              dataAddImagen.controls.business.invalid &&
-              dataAddImagen.controls.business.errors.required
-            "
-            >{{
-              "GENERIC.REQUIRED" | translate: { formValue: "Negocio" }
-            }}</mat-error
           >
+            <mat-option
+              *ngFor="let selected of selectedBuss"
+              value="{{ selected.id }}"
+            >
+              <span>{{ selected.description }}</span>
+            </mat-option>
+          </mat-select>
         </mat-form-field>
         <mat-form-field style="width: 370px">
           <input
@@ -799,25 +793,19 @@
           >
         </mat-form-field>
         <mat-form-field style="width: 370px">
-          <input
-            matInput
+          <mat-select
             placeholder="NEGOCIO"
-            type="text"
+            id="tipoComision"
             formControlName="business"
-            required
-            class="text-area-heigth"
-            style="color: #37236a"
-          />
-          <mat-error
-            id="requiredName"
-            *ngIf="
-              dataAddImagenOfertas.controls.business.invalid &&
-              dataAddImagenOfertas.controls.business.errors.required
-            "
-            >{{
-              "GENERIC.REQUIRED" | translate: { formValue: "Negocio" }
-            }}</mat-error
+            class="selected-report"
           >
+            <mat-option
+              *ngFor="let selected of selectedBuss"
+              value="{{ selected.id }}"
+            >
+              <span>{{ selected.description }}</span>
+            </mat-option>
+          </mat-select>
         </mat-form-field>
         <mat-form-field style="width: 370px">
           <input
@@ -914,7 +902,7 @@
         (click)="saveImagenOfertas()"
         id="download-users"
         class="ml-2"
-        [disabled]="!dataAddImagen.valid"
+        [disabled]="!dataAddImagenOfertas.valid"
       >
         Guardar Cambios
       </button>

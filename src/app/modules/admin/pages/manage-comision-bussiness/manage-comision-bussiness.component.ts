@@ -13,12 +13,12 @@ import Swal from 'sweetalert2';
   styleUrls: ['./manage-comision-bussiness.component.scss']
 })
 export class ManageComisionBussinessComponent implements OnInit {
-  id: string;
+  id: number;
   title: string;
   dataTip: FormGroup;
   dataEditTip: FormGroup;
   pageIndex: number = 0;
-  pageTo: number = 50;
+  pageTo: number = 20;
   totalItems: number;
   newsUser: Array<any>;
   pageSize: number;
@@ -27,7 +27,8 @@ export class ManageComisionBussinessComponent implements OnInit {
   paginate: string;
   @ViewChild("templateAddCategory", { static: false }) templateAddCategory: TemplateRef<any>;
   @ViewChild("templateEditCategory", { static: false }) templateEditCategory: TemplateRef<any>;
-  dataSource = [{
+  dataSource = []
+  dataSource2 = [{
     code: 2,
     description: "Tecnología",
     commissionClicker: "4.3%",
@@ -76,7 +77,7 @@ export class ManageComisionBussinessComponent implements OnInit {
         route.imagen === undefined
 
       ) {
-        this.id = "1";
+        this.id = 1;
         this.title = "exito";
         this.image =
           "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg";
@@ -97,10 +98,12 @@ export class ManageComisionBussinessComponent implements OnInit {
       description: this.dataTip.controls.nameCategory.value,
       commissionClicker: this.dataTip.controls.comisionClicker.value,
       commissionBusiness: this.dataTip.controls.commisionBussiness.value,
-      idBussiness: this.id
+      idBussiness: Number(this.id)
     }
     this.content.saveComisionCategory(datos).subscribe((resp) => {
-
+      this.searchUser(this.paginate, this.from, this.to);
+      this.dialog.closeAll()
+      this.dataEditTip.reset()
     })
 
   }
@@ -126,14 +129,14 @@ export class ManageComisionBussinessComponent implements OnInit {
   }
   editCategoryCom(element) {
     const title = "Editar Categoría";
-    const idBussiness = this.id;
+    const idBussiness = Number(this.id);
     const edit = 0;
     const template = this.templateEditCategory;
-    this.dataEditTip.controls.codEditCategory.setValue(element.codigo)
-    this.dataEditTip.controls.nameEditCategory.setValue(element.nombreCat)
-    this.dataEditTip.controls.comisionEditClicker.setValue(element.commisionClic)
-    this.dataEditTip.controls.commisionEditBussiness.setValue(element.commisionBuss)
-    this.idComision = element.codigo;
+    this.dataEditTip.controls.codEditCategory.setValue(element.code)
+    this.dataEditTip.controls.nameEditCategory.setValue(element.description)
+    this.dataEditTip.controls.comisionEditClicker.setValue(element.commissionclicker)
+    this.dataEditTip.controls.commisionEditBussiness.setValue(element.commissionbusiness)
+    this.idComision = element.id;
     let dialogRef1 = this.dialog.open(ModalGenericComponent, {
       width: "450px",
       data: {
@@ -148,16 +151,19 @@ export class ManageComisionBussinessComponent implements OnInit {
     //});
   }
   editSaveComisionCategory() {
+    console.log("No funciona");
     let datos = {
       id: this.idComision,
-      code: this.dataEditTip.controls.codCategory.value,
-      description: this.dataEditTip.controls.nameCategory.value,
-      commissionClicker: this.dataEditTip.controls.comisionClicker.value,
-      commissionBusiness: this.dataEditTip.controls.commisionBussiness.value,
-      idBussiness: this.id
+      code: this.dataEditTip.controls.codEditCategory.value,
+      description: this.dataEditTip.controls.nameEditCategory.value,
+      commissionClicker: this.dataEditTip.controls.comisionEditClicker.value,
+      commissionBusiness: this.dataEditTip.controls.commisionEditBussiness.value,
+      idBussiness: Number(this.id)
     }
     this.content.saveComisionCategory(datos).subscribe((resp) => {
-
+      this.searchUser(this.paginate, this.from, this.to);
+      this.dialog.closeAll()
+      this.dataEditTip.reset()
     })
 
   }
@@ -194,12 +200,20 @@ export class ManageComisionBussinessComponent implements OnInit {
       this.paginate = term;
       this.pageIndex = 0;
     }
-    const params = { term, from, to, orderOrigin, orderBy };
+    let idbussiness = this.id;
+    let marketplace = this.marketplace
+    const params = { term, from, to, orderOrigin, orderBy, idbussiness, marketplace };
+    //const params = { term: "playa", from: 1, to: 50, orderBy: "VERIFIED", idbussiness: idbussiness, marketplace: marketplace };
+    //idBusiness=1&marketplace=false&from=1&to=50&searchText=playa&orderBy=VERIFIED&ordination=ASC
     this.subscription = this.content.getComisionManage(params).subscribe((user: any) => {
-      this.newsUser = user.novelties;
+      //this.newsUser = user.objectResponse.novelties;
       this.totalItems = user.total;
+      this.dataSource = user.categories;
       //this.dataSource = new MatTableDataSource<any>(this.newsUser);
     });
+  }
+  changeStatus() {
+    this.searchUser(this.paginate, this.from, this.to);
   }
   sort(event) {
     let name = event.active.toUpperCase();

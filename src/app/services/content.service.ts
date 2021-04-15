@@ -72,6 +72,9 @@ export class ContentService {
   apiActivateBlog = "blog/activeblog";
   apiSaveBussiness = "business/savebusiness"
   apiSendMessage = "blog/sendmail";
+  apiSaveOrderOfer = "offer/saveorderoffers";
+  apiDeleteOfer = "offer/deleteoffers";
+  apiSaveOfer = "offer/saveoffers";
   sendSearch = {};
 
   public getNews() {
@@ -84,7 +87,7 @@ export class ContentService {
   public getComisionManage(term?: any) {
     return this.http
       .get(
-        `${this.urlComission}${this.apiGetManageCommisionBus}?searchText=${term.term}&from=${term.from}&to=${term.to}&orderBy=${term.orderOrigin}&ordination=${term.orderBy}`,
+        `${this.urlComission}${this.apiGetManageCommisionBus}?searchText=${term.term}&from=${term.from}&to=${term.to}&orderBy=${term.orderOrigin}&ordination=${term.orderBy}&idBusiness=${term.idbussiness}&marketplace=${term.marketplace}`,
         this.httpOptions
       )
       .pipe(
@@ -506,6 +509,13 @@ export class ContentService {
       })
     );
   }
+  public getOffersbyType(type) {
+    return this.http.get(`${this.url + this.apiOffers}?type=${type}`, this.httpOptions).pipe(
+      map((user: ResponseService) => {
+        return user.objectResponse;
+      })
+    );
+  }
 
   public biggySearchExito(
     params: {
@@ -854,5 +864,54 @@ export class ContentService {
     };
     return this.http
       .post(`${this.url + this.apiSendMessage}`, data, httpOptionsSet);
+  }
+  public deleteOfer(data) {
+
+    return this.http
+      .post(`${this.url + this.apiDeleteOfer}`, data, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((user: ResponseService) => {
+          return user.objectResponse;
+        })
+      );
+  }
+  public saveOrderOfertBusiness(data: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveOrderOfer}`, data, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((user: ResponseService) => {
+          return user.objectResponse;
+        })
+      );
+  }
+  public saveOfertBusiness(data: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveOfer}`, data, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((user: ResponseService) => {
+          return user.objectResponse;
+        })
+      );
   }
 }
