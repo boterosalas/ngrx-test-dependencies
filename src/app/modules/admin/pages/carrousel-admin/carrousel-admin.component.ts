@@ -3,6 +3,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatTable } from '@angular/material';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import { ContentService } from 'src/app/services/content.service';
 import Swal from 'sweetalert2';
 export interface PeriodicElement {
   drag: any;
@@ -28,8 +29,11 @@ export class CarrouselAdminComponent implements OnInit {
   selectAllVideosImgOfer: string = "Seleccionar todos";
   active: boolean;
   active2: boolean;
+  idCarousel: number = 0;
+  idOfertas: number = 0;
   constructor(
     private dialog: MatDialog,
+    private content: ContentService,
     private fb: FormBuilder,
   ) {
     this.dataAddImagen = this.fb.group({
@@ -58,12 +62,13 @@ export class CarrouselAdminComponent implements OnInit {
   fileImgCat: any = "";
   nameFileCert: string = '';
   showErrorCert: boolean;
-
+  selectedBuss = []
   fileImgCat2: any = "";
   nameFileCert2: string = '';
   showErrorCert2: boolean;
   activebutton: boolean;
   validFormat: boolean;
+  business: any;
   dataSourceOfer = [{
     id: 1,
     orderby: 1,
@@ -163,7 +168,22 @@ export class CarrouselAdminComponent implements OnInit {
     selected: true,
   }]
   ngOnInit() {
+
+    this.content.getOffersbyType("OFERTA").subscribe((resp) => {
+      console.log(resp)
+    })
+    this.content.getOffersbyType("CARROUSEL").subscribe((resp) => {
+      console.log(resp)
+    })
+    this.getAllBusiness();
   }
+  public getAllBusiness() {
+    this.content.getAllBusiness().subscribe(resp => {
+      this.selectedBuss = resp;
+    })
+
+  }
+
   dropTable(event: CdkDragDrop<PeriodicElement[]>) {
     const prevIndex = this.dataSource.findIndex((d) => d === event.item.data);
     moveItemInArray(this.dataSource, prevIndex, event.currentIndex);
@@ -176,6 +196,7 @@ export class CarrouselAdminComponent implements OnInit {
         order: i + 1
       })
     }
+    this.saveOrder(datosSourceSend)
     //this.saveOrder(datosSourceSend)
   }
   dropTable2(event: CdkDragDrop<PeriodicElement[]>) {
@@ -186,11 +207,16 @@ export class CarrouselAdminComponent implements OnInit {
     for (let i = 0; i < this.dataSourceOfer.length; i++) {
       this.dataSourceOfer[i].orderby = i + 1
       datosSourceSend.push({
-        idbusiness: this.dataSourceOfer[i].id,
-        order: i + 1
+        id: this.dataSourceOfer[i].id,
+        orderby: i + 1
       })
     }
-    //this.saveOrder(datosSourceSend)
+    this.saveOrder(datosSourceSend)
+  }
+  saveOrder(datos: any) {
+    this.content.saveOrderOfertBusiness(datos).subscribe(resp => {
+      //console.log(resp)
+    })
   }
   private getExtension(nameFile: string, getSize: number) {
     let splitExt = nameFile.split(".");
@@ -199,7 +225,7 @@ export class CarrouselAdminComponent implements OnInit {
     if (getExt === "jpg") {
       this.validFormat = true;
     }
-    if (getSize / 1000 > 250) {
+    if (getSize / 1000 > 300) {
       this.validFormat = false;
     }
   }
@@ -266,11 +292,62 @@ export class CarrouselAdminComponent implements OnInit {
       };
     }
   }
+  editCarouselModal(element) {
+    const title = "Editar Imagen";
+    const idBussiness = 1;
+    const edit = 0;
+    const template = this.templateAddImagenCarousel;
+    this.dataAddImagen.controls.nameContent.setValue(element.nameContent)
+    this.dataAddImagen.controls.link.setValue(element.link)
+    this.dataAddImagen.controls.business.setValue(element.business)
+    this.dataAddImagen.controls.comision.setValue(element.comision)
+    this.idCarousel = element.id;
+
+    //this.idSaveTip = element.id;
+    //this.dataEditTip.controls.title.setValue(element.title);
+    //this.dataEditTip.controls.description.setValue(element.description);
+    let dialogRef1 = this.dialog.open(ModalGenericComponent, {
+      width: "450px",
+      data: {
+        title,
+        idBussiness,
+        template,
+        edit
+      },
+    });
+
+  }
+  editOfertasModal(element) {
+    const title = "Editar Imagen";
+    const idBussiness = 1;
+    const edit = 0;
+    const template = this.templateAddImagenOfertas;
+    this.dataAddImagenOfertas.controls.nameContent.setValue(element.nameContent)
+    this.dataAddImagenOfertas.controls.link.setValue(element.link)
+    this.dataAddImagenOfertas.controls.business.setValue(element.business)
+    this.dataAddImagenOfertas.controls.comision.setValue(element.comision)
+    this.idCarousel = element.id;
+
+    //this.idSaveTip = element.id;
+    //this.dataEditTip.controls.title.setValue(element.title);
+    //this.dataEditTip.controls.description.setValue(element.description);
+    let dialogRef1 = this.dialog.open(ModalGenericComponent, {
+      width: "450px",
+      data: {
+        title,
+        idBussiness,
+        template,
+        edit
+      },
+    });
+
+  }
   saveCarouselModal() {
     const title = "Nueva Imagen";
     const idBussiness = 1;
     const edit = 0;
     const template = this.templateAddImagenCarousel;
+    this.idCarousel = 0;
     //this.idSaveTip = element.id;
     //this.dataEditTip.controls.title.setValue(element.title);
     //this.dataEditTip.controls.description.setValue(element.description);
@@ -290,6 +367,7 @@ export class CarrouselAdminComponent implements OnInit {
     const idBussiness = 1;
     const edit = 0;
     const template = this.templateAddImagenOfertas;
+    this.idOfertas = 0;
     let dialogRef1 = this.dialog.open(ModalGenericComponent, {
       width: "450px",
       data: {
@@ -312,7 +390,9 @@ export class CarrouselAdminComponent implements OnInit {
       allowOutsideClick: false
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
-        console.log(element)
+        this.content.deleteOfer([element.id]).subscribe((resp) => {
+
+        })
       }
     })
   }
@@ -327,15 +407,88 @@ export class CarrouselAdminComponent implements OnInit {
       allowOutsideClick: false
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
-        console.log(element)
+        this.content.deleteOfer([element.id]).subscribe((resp) => {
+
+        })
       }
     })
   }
   saveImagenCarousel() {
-    console.log("Enviando post");
+    let visible = 0;
+    if (this.dataAddImagen.controls.visible.value) {
+      visible = 1;
+    } else {
+      visible = 0;
+    }
+    //let bussiness = this.business;
+    let datos;
+    if (this.idCarousel === 0) {
+      datos = [{
+        description: this.dataAddImagen.controls.nameContent.value,
+        link: this.dataAddImagen.controls.link.value,
+        idBusiness: this.dataAddImagen.controls.business.value,
+        //business: bussiness.code,
+        infoAditional: this.dataAddImagen.controls.comision.value,
+        active: visible,
+        imageWeb: this.fileImgCat,
+        imageMobile: this.fileImgCat2,
+        //CARROUSEL
+        type: "CARROUSEL",
+      }]
+    } else {
+      datos = [{
+        id: this.idCarousel,
+        description: this.dataAddImagen.controls.nameContent.value,
+        link: this.dataAddImagen.controls.link.value,
+        idBusiness: this.dataAddImagen.controls.business.value,
+        //business: bussiness.code,
+        infoAditional: this.dataAddImagen.controls.comision.value,
+        active: visible,
+        imageWeb: this.fileImgCat,
+        imageMobile: this.fileImgCat2,
+        //CARROUSEL
+        type: "CARROUSEL",
+      }]
+    }
+
+    this.content.saveOfertBusiness(datos).subscribe((resp) => {
+      this.dataAddImagen.reset()
+      this.dialog.closeAll()
+    })
   }
   saveImagenOfertas() {
-    console.log("Enviando post ofertas");
+    let bussiness = this.business;
+    let datos;
+    if (this.idOfertas === 0) {
+      datos = [{
+        description: this.dataAddImagenOfertas.controls.nameContent.value,
+        link: this.dataAddImagenOfertas.controls.link.value,
+        idBusiness: this.dataAddImagenOfertas.controls.business.value,
+        //business: bussiness.code,
+        infoAditional: this.dataAddImagenOfertas.controls.comision.value,
+        active: 1,
+        type: "OFERTA",
+        imageWeb: this.fileImgCat
+      }]
+    } else {
+      datos = [{
+        id: this.idOfertas,
+        description: this.dataAddImagenOfertas.controls.nameContent.value,
+        link: this.dataAddImagenOfertas.controls.link.value,
+        idBusiness: this.dataAddImagenOfertas.controls.business.value,
+        //business: bussiness.code,
+        infoAditional: this.dataAddImagenOfertas.controls.comision.value,
+        active: 1,
+        type: "OFERTA",
+        imageWeb: this.fileImgCat
+      }]
+    }
+
+    this.content.saveOfertBusiness(datos).subscribe((resp) => {
+      this.dataAddImagenOfertas.reset()
+      this.dialog.closeAll()
+    })
+
   }
   public selectAll() {
     if (this.selectAllVideosImg === "Seleccionar todos") {
@@ -403,4 +556,55 @@ export class CarrouselAdminComponent implements OnInit {
       }
     }
   }
+  deleteEveryOfertas() {
+    Swal.fire({
+      html: "<h3 class='delete-title-comision'>Eliminar Imagenes</h3> <p class='w-container'>¿Estás seguro de eliminar las imagenes seleccionadas?</p>",
+      confirmButtonText: "Eliminar imagen",
+      cancelButtonText: "Cancelar",
+      showCancelButton: true,
+      confirmButtonClass: "updateokdelete order-last",
+      cancelButtonClass: "updatecancel",
+      allowOutsideClick: false
+    }).then((resp: any) => {
+      if (resp.dismiss !== 'cancel') {
+        //this.content.deleteOfer([element.id]).subscribe((resp) => {
+        let datos = []
+        for (let index = 0; index < this.dataSourceOfer.length; index++) {
+          if (this.dataSourceOfer[index].selected === true) {
+            datos.push(this.dataSourceOfer[index].id);
+          }
+        }
+        this.content.deleteOfer(datos).subscribe((resp) => {
+
+        })
+
+      }
+    })
+  }
+  deleteEvery() {
+    Swal.fire({
+      html: "<h3 class='delete-title-comision'>Eliminar Imagenes</h3> <p class='w-container'>¿Estás seguro de eliminar las imagenes seleccionadas?</p>",
+      confirmButtonText: "Eliminar imagen",
+      cancelButtonText: "Cancelar",
+      showCancelButton: true,
+      confirmButtonClass: "updateokdelete order-last",
+      cancelButtonClass: "updatecancel",
+      allowOutsideClick: false
+    }).then((resp: any) => {
+      if (resp.dismiss !== 'cancel') {
+        //this.content.deleteOfer([element.id]).subscribe((resp) => {
+        let datos = []
+        for (let index = 0; index < this.dataSource.length; index++) {
+          if (this.dataSource[index].selected === true) {
+            datos.push(this.dataSource[index].id);
+          }
+        }
+        this.content.deleteOfer(datos).subscribe((resp) => {
+
+        })
+
+      }
+    })
+  }
+
 }

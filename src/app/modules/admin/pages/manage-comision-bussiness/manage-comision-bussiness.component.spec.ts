@@ -109,6 +109,7 @@ describe('ManageComisionBussinessComponent', () => {
   it('modal create and edit', () => {
     component.addComisionCategory();
     component.editCategoryCom({ codigo: 1, nombreCat: "Hola", comisionClic: "4%", comisionBuss: "5%" });
+    component.changeStatus();
     //component.editSaveComisionCategory();
     component.pagination({ previousPageIndex: 1, pageIndex: 0, pageSize: 20, length: 5 });
     let datos = true;
