@@ -852,7 +852,14 @@ export class BussinessComponent implements OnInit, OnDestroy {
       }
     );
   }
-
+  libraryRoute() {
+    this.router.navigate([
+      "/biblioteca",
+      {
+        id: this.id
+      },
+    ]);
+  }
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
