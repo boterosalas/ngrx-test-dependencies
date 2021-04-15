@@ -76,8 +76,8 @@
       <div>
         <h3 class="border-inferior">Tips de venta</h3>
         <div *ngFor="let item of tips">
-          <h4>{{ item.title }}</h4>
-          <p>{{ item.description }}</p>
+          <h4 class="title-tip">{{ item.title }}</h4>
+          <p class="description-tip">{{ item.description }}</p>
         </div>
       </div>
     </mat-card>
@@ -104,7 +104,7 @@
           mat-raised-button
           class="button-oferts"
           color="orange"
-          [routerLink]="['/biblioteca']"
+          (click)="libraryRoute()"
           id="download-users"
         >
           Ver Ofertas
@@ -132,7 +132,7 @@
           mat-raised-button
           class="button-oferts mb-2"
           color="orange"
-          [routerLink]="['/biblioteca']"
+          (click)="libraryRoute()"
           id="download-users"
         >
           Ver Ofertas
@@ -163,17 +163,11 @@
           </div>
           <div class="border-up-gray" *ngIf="visibleTerms">
             <h4 class="mb-0">Excepciones</h4>
-            <p class="mt-0">
-              {{ generalInfo }}
-            </p>
+            <p class="mt-0">{{ generalInfo }}</p>
             <h4 class="mt-1 mb-0">Casos especiales</h4>
-            <p class="mt-0">
-              {{ exceptionsInfo }}
-            </p>
+            <p class="mt-0">{{ exceptionsInfo }}</p>
             <h4 class="mb-0">Tiempos de verificación</h4>
-            <p class="mt-0">
-              {{ caseSpecial }}
-            </p>
+            <p class="mt-0">{{ caseSpecial }}</p>
           </div>
         </div>
       </mat-card>
@@ -544,8 +538,8 @@
       <div>
         <h3 class="border-inferior">Tips de venta</h3>
         <div *ngFor="let item of tips">
-          <h4>{{ item.title }}</h4>
-          <p>{{ item.description }}</p>
+          <h4 class="title-tip">{{ item.title }}</h4>
+          <p class="description-tip">{{ item.description }}</p>
         </div>
       </div>
     </mat-card>

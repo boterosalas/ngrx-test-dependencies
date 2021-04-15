@@ -525,6 +525,17 @@
             class="text-area-heigth"
             style="color: #37236a"
           />
+          <mat-error
+            id="requiredName"
+            *ngIf="
+              dataAddImagen.controls.nameContent.invalid &&
+              dataAddImagen.controls.nameContent.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED"
+                | translate: { formValue: "Nombre de contenido" }
+            }}</mat-error
+          >
         </mat-form-field>
         <mat-form-field style="width: 370px">
           <input
@@ -536,6 +547,16 @@
             class="text-area-heigth"
             style="color: #37236a"
           />
+          <mat-error
+            id="requiredName"
+            *ngIf="
+              dataAddImagen.controls.link.invalid &&
+              dataAddImagen.controls.link.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED" | translate: { formValue: "Link" }
+            }}</mat-error
+          >
         </mat-form-field>
         <mat-form-field style="width: 370px">
           <input
@@ -547,6 +568,16 @@
             class="text-area-heigth"
             style="color: #37236a"
           />
+          <mat-error
+            id="requiredName"
+            *ngIf="
+              dataAddImagen.controls.business.invalid &&
+              dataAddImagen.controls.business.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED" | translate: { formValue: "Negocio" }
+            }}</mat-error
+          >
         </mat-form-field>
         <mat-form-field style="width: 370px">
           <input
@@ -558,6 +589,16 @@
             class="text-area-heigth"
             style="color: #37236a"
           />
+          <mat-error
+            id="requiredName"
+            *ngIf="
+              dataAddImagen.controls.comision.invalid &&
+              dataAddImagen.controls.comision.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED" | translate: { formValue: "Comisión" }
+            }}</mat-error
+          >
         </mat-form-field>
 
         <div
@@ -724,6 +765,17 @@
             class="text-area-heigth"
             style="color: #37236a"
           />
+          <mat-error
+            id="requiredName"
+            *ngIf="
+              dataAddImagenOfertas.controls.nameContent.invalid &&
+              dataAddImagenOfertas.controls.nameContent.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED"
+                | translate: { formValue: "Nombre de contenido" }
+            }}</mat-error
+          >
         </mat-form-field>
         <mat-form-field style="width: 370px">
           <input
@@ -735,6 +787,16 @@
             class="text-area-heigth"
             style="color: #37236a"
           />
+          <mat-error
+            id="requiredName"
+            *ngIf="
+              dataAddImagenOfertas.controls.link.invalid &&
+              dataAddImagenOfertas.controls.link.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED" | translate: { formValue: "Link" }
+            }}</mat-error
+          >
         </mat-form-field>
         <mat-form-field style="width: 370px">
           <input
@@ -746,6 +808,16 @@
             class="text-area-heigth"
             style="color: #37236a"
           />
+          <mat-error
+            id="requiredName"
+            *ngIf="
+              dataAddImagenOfertas.controls.business.invalid &&
+              dataAddImagenOfertas.controls.business.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED" | translate: { formValue: "Negocio" }
+            }}</mat-error
+          >
         </mat-form-field>
         <mat-form-field style="width: 370px">
           <input
@@ -757,6 +829,16 @@
             class="text-area-heigth"
             style="color: #37236a"
           />
+          <mat-error
+            id="requiredName"
+            *ngIf="
+              dataAddImagenOfertas.controls.comision.invalid &&
+              dataAddImagenOfertas.controls.comision.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED" | translate: { formValue: "Comisión" }
+            }}</mat-error
+          >
         </mat-form-field>
 
         <div

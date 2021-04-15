@@ -19,7 +19,7 @@
   width: 70%;
 }
 .text-productos {
-  font-size: 26px;
+  font-size: 24px;
 }
 .title-h3 {
   font-size: 23px;
@@ -30,7 +30,7 @@
 }
 @media screen and (max-width: 600px) {
   .text-productos {
-    font-size: 23px;
+    font-size: 22px;
   }
   .container-right {
     width: 100%;
@@ -82,7 +82,7 @@
   background-color: #947fba;
   color: #ffffff;
   margin-bottom: 15px;
-  padding-left: 20px;
+  //padding-left: 20px;
   position: relative;
   h3 {
     color: #ffffff;
@@ -100,8 +100,14 @@
 .heigth-image {
   height: 118px;
 }
+
+.position-relative {
+  position: relative;
+  left: 20px;
+}
 @media screen and (max-width: 600px) {
   .card-library {
+    padding-left: 20px;
     h3 {
       font-size: 14px;
       width: 200px;
@@ -110,12 +116,12 @@
       width: 110px;
     }
   }
+  .position-relative {
+    left: 0px;
+  }
   .heigth-image {
     height: auto;
   }
-}
-.position-relative {
-  position: relative;
 }
 .imagen-absolute-oferts {
   position: absolute;
@@ -159,4 +165,10 @@
   color: #b9b6c1;
   width: 30px;
   height: 30px;
+}
+.title-tip {
+  margin-bottom: 0px !important;
+}
+.description-tip {
+  margin-top: 0px !important;
 }

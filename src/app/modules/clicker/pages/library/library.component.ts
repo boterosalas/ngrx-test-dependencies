@@ -6,6 +6,7 @@ import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-g
 import { MatDialog } from '@angular/material';
 //import { saveAs } from 'file-saver-ios-bugfix';
 import { DialogImagePlayerComponent } from '../../components/dialog-visualization-image/dialog-image-player.component';
+import { ActivatedRoute } from '@angular/router';
 @Component({
     selector: 'app-library',
     templateUrl: './library.component.html',
@@ -29,13 +30,26 @@ export class LibraryComponent implements OnInit {
     bussiness: Array<any> = [];
     deleteVideoImg = [];
     iosDevices: boolean = false;
+    id: number;
+
     @ViewChild("templateImage", { static: false }) templateVideo: TemplateRef<
         any
     >;
     constructor(
+        private route: ActivatedRoute,
         private dialog: MatDialog,
         private content: ContentService,
-    ) { }
+    ) {
+        this.subscription = this.route.params.subscribe((route) => {
+            if (
+                route.id === undefined
+            ) {
+                this.id = 1;
+            } else {
+                this.id = route.id;
+            }
+        });
+    }
 
     ngOnInit() {
         let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -105,13 +119,28 @@ export class LibraryComponent implements OnInit {
         }
     }
     public getBussiness() {
+
         this.subscription = this.content
             .getBusiness()
             .pipe(distinctUntilChanged())
             .subscribe((bussiness) => {
                 this.bussiness = bussiness;
+                this.stepPaso(this.bussiness);
             });
-        this.dataSource({ id: 1 })
+        this.dataSource({ id: this.id })
+
+    }
+    public stepPaso(data) {
+        console.log(data);
+        for (let index = 0; index < data.length; index++) {
+            console.log(this.id);
+            console.log(data[index].id.toString());
+            if (data[index].id.toString() === this.id) {
+                console.log(index);
+                this.step = index
+            }
+
+        }
     }
     public setStepMovil(index: any, item: any) {
         this.step_mobile = index;
