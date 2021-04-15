@@ -420,14 +420,22 @@ export class CarrouselAdminComponent implements OnInit {
     } else {
       visible = 0;
     }
-    //let bussiness = this.business;
+
+    let bussiness = this.dataAddImagen.controls.business.value;
     let datos;
+    let buss = ""
+    for (let index = 0; index < this.selectedBuss.length; index++) {
+      if (this.selectedBuss[index].id.toString() === bussiness) {
+        buss = this.selectedBuss[index].description
+      }
+
+    }
     if (this.idCarousel === 0) {
       datos = [{
         description: this.dataAddImagen.controls.nameContent.value,
         link: this.dataAddImagen.controls.link.value,
         idBusiness: this.dataAddImagen.controls.business.value,
-        //business: bussiness.code,
+        Business: buss,
         infoAditional: this.dataAddImagen.controls.comision.value,
         active: visible,
         imageWeb: this.fileImgCat,
@@ -441,7 +449,7 @@ export class CarrouselAdminComponent implements OnInit {
         description: this.dataAddImagen.controls.nameContent.value,
         link: this.dataAddImagen.controls.link.value,
         idBusiness: this.dataAddImagen.controls.business.value,
-        //business: bussiness.code,
+        Business: buss,
         infoAditional: this.dataAddImagen.controls.comision.value,
         active: visible,
         imageWeb: this.fileImgCat,
@@ -457,14 +465,22 @@ export class CarrouselAdminComponent implements OnInit {
     })
   }
   saveImagenOfertas() {
-    let bussiness = this.business;
+    let bussiness = this.dataAddImagenOfertas.controls.business.value;
     let datos;
+    let buss = ""
+    for (let index = 0; index < this.selectedBuss.length; index++) {
+      if (this.selectedBuss[index].id.toString() === bussiness) {
+        buss = this.selectedBuss[index].description
+      }
+
+    }
+
     if (this.idOfertas === 0) {
       datos = [{
         description: this.dataAddImagenOfertas.controls.nameContent.value,
         link: this.dataAddImagenOfertas.controls.link.value,
         idBusiness: this.dataAddImagenOfertas.controls.business.value,
-        //business: bussiness.code,
+        Business: buss,
         infoAditional: this.dataAddImagenOfertas.controls.comision.value,
         active: 1,
         type: "OFERTA",
@@ -476,7 +492,7 @@ export class CarrouselAdminComponent implements OnInit {
         description: this.dataAddImagenOfertas.controls.nameContent.value,
         link: this.dataAddImagenOfertas.controls.link.value,
         idBusiness: this.dataAddImagenOfertas.controls.business.value,
-        //business: bussiness.code,
+        Business: buss,
         infoAditional: this.dataAddImagenOfertas.controls.comision.value,
         active: 1,
         type: "OFERTA",

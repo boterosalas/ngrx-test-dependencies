@@ -196,9 +196,19 @@
     ></app-search>
 
     <div *ngIf="showResults">
-      <h3 class="text-productos border-bottom-orange-init">
-        Resultados de búsqueda
-      </h3>
+      <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.xs="column">
+        <h3 class="text-productos border-bottom-orange-init">
+          Resultados de búsqueda
+        </h3>
+        <button
+          mat-raised-button
+          color="orange"
+          (click)="deleteSearch()"
+          class="button-selected mr-4 mb-4"
+        >
+          Borrar resultados
+        </button>
+      </div>
 
       <div fxLayout="column" fxLayoutGap="10px">
         <ng-container

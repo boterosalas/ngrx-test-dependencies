@@ -98,7 +98,7 @@ export class ManageComisionBussinessComponent implements OnInit {
       description: this.dataTip.controls.nameCategory.value,
       commissionClicker: this.dataTip.controls.comisionClicker.value,
       commissionBusiness: this.dataTip.controls.commisionBussiness.value,
-      idBussiness: Number(this.id)
+      idBusiness: Number(this.id)
     }
     this.content.saveComisionCategory(datos).subscribe((resp) => {
       this.searchUser(this.paginate, this.from, this.to);
@@ -120,6 +120,7 @@ export class ManageComisionBussinessComponent implements OnInit {
       if (resp.dismiss !== 'cancel') {
         this.content.deleteComisionCategoryBusiness(item.id).subscribe((resp) => {
           //this.getBusinessData();
+          this.searchUser(this.paginate, this.from, this.to);
         })
       }
     })
@@ -158,7 +159,7 @@ export class ManageComisionBussinessComponent implements OnInit {
       description: this.dataEditTip.controls.nameEditCategory.value,
       commissionClicker: this.dataEditTip.controls.comisionEditClicker.value,
       commissionBusiness: this.dataEditTip.controls.commisionEditBussiness.value,
-      idBussiness: Number(this.id)
+      idBusiness: Number(this.id)
     }
     this.content.saveComisionCategory(datos).subscribe((resp) => {
       this.searchUser(this.paginate, this.from, this.to);
