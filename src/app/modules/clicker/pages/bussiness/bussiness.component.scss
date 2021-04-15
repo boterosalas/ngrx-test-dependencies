@@ -108,6 +108,17 @@
 .about-bussiness {
   padding: 16px;
 }
+.button-selected {
+  background-color: #ffffff;
+  color: #3d136e;
+  height: 35px;
+  border: 1px solid #3d136e;
+  margin-top: 22px;
+  img {
+    position: relative;
+    bottom: 3px;
+  }
+}
 @media screen and (max-width: 600px) {
   .card-library {
     padding-left: 20px;
@@ -127,6 +138,10 @@
   }
   .heigth-image {
     height: auto;
+  }
+  .button-selected {
+    margin-top: 10px;
+    width: 200px;
   }
 }
 .imagen-absolute-oferts {

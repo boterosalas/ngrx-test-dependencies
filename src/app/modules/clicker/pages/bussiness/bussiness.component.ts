@@ -106,7 +106,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   showReferenceButton: boolean = true;
   allBussiness: string;
   visibleTerms: boolean = false;
-  commision: number;
+  commision: any;
   description: string;
   infoBussiness: string;
   generalInfo: string;
@@ -155,11 +155,10 @@ export class BussinessComponent implements OnInit, OnDestroy {
         this.percent = route.infoAditional;
         this.allBussiness = route.allBussiness;
         this.content.getCommissionsByBussiness(this.id).subscribe((resp) => {
-          this.commision = Math.trunc(resp[0].commissionvalue / 1000000);
+          this.commision = (resp[0].commissionvalue / 1000000).toFixed(1);
         });
         this.content.getBusinessById(this.id).subscribe((resp) => {
           this.infoBussiness = resp.about;
-          //this.infoBussiness = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure";
           this.tips = resp.tips;
           this.nonEditedContent = this.infoBussiness;
           this.infoBussiness = this.formatContent(this.infoBussiness);
@@ -859,6 +858,9 @@ export class BussinessComponent implements OnInit, OnDestroy {
         id: this.id
       },
     ]);
+  }
+  deleteSearch() {
+    this.showResults = false;
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
