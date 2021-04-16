@@ -271,8 +271,8 @@ export class SliderComponent implements OnInit {
       this.idCustomerForm.reset();
       this.formShareLink();
       const title = category.description;
-      const id = category.productId;
-      const img = category.imageurl;
+      const id = category.id;
+      const img = category.imageurlweb;
       const showClose = false;
       const showCloseIcon = true;
       const showProduct = true;

@@ -16,17 +16,22 @@
         <span (click)="openShare()">
           <app-product
             id="slide{{ i }}"
-            [photo]="slide.imageurl"
+            [photo]="slide.imageurlweb"
             infoaditional="slide.infoaditional"
             category="true"
             home
-            productName="{{Class}}{{slide.description}}"
+            productName="{{ Class }}{{ slide.description }}"
             (infoProduct)="dataCategory(slide)"
           ></app-product>
         </span>
       </div>
     </ngx-slick-carousel>
-    <div class="position-absolute" fxLayout="row" fxLayoutAlign="space-between" *ngIf="showArrows === true">
+    <div
+      class="position-absolute"
+      fxLayout="row"
+      fxLayoutAlign="space-between"
+      *ngIf="showArrows === true"
+    >
       <button mat-mini-fab color="orange" class="ml-4 op" (click)="prev()">
         <img class="rotate" src="/assets/img/arrow-right.svg" alt="upload" />
       </button>
@@ -52,8 +57,8 @@
       <app-product
         id="slide{{ i }}"
         class="no-slider round-img"
-        [photo]="slide.imageurl"
-        productName="{{Class}}{{slide.description}}"
+        [photo]="slide.imageurlmobile"
+        productName="{{ Class }}{{ slide.description }}"
         infoaditional="slide.infoaditional"
         category="true"
         home
@@ -74,14 +79,14 @@
   >
     <div
       ngxSlickItem
-      *ngFor="let slide of sliderMobile; let i = index"
-      class="slide text-center "
+      *ngFor="let slide of sliderWeb; let i = index"
+      class="slide text-center"
     >
       <span (click)="openShare()">
         <app-product
           id="slide{{ i }}"
-          [photo]="slide.imageurl"
-          productName="{{Class}}{{slide.description}}"
+          [photo]="slide.imageurlmobile"
+          productName="{{ Class }}{{ slide.description }}"
           infoaditional="slide.infoaditional"
           category="true"
           home
@@ -121,12 +126,12 @@
             id="btnCopy"
             color="orange"
             [disabled]="enableCopy"
-            ngClass="{{classButtonCopy}}"
+            ngClass="{{ classButtonCopy }}"
             (click)="copyInputMessage(linkInput)"
           >
             <span
               fxLayoutAlign="center space-between"
-              ngClass="{{classButtonCopy}}"
+              ngClass="{{ classButtonCopy }}"
             >
               {{ "GENERIC.COPY_LINK" | translate }}
             </span>
@@ -136,10 +141,13 @@
             mat-button
             id="refer"
             color="orange"
-            ngClass="{{classButtonRefer}}"
+            ngClass="{{ classButtonRefer }}"
             (click)="showReference()"
           >
-            <span ngClass="{{classButtonRefer}}" fxLayoutAlign="center space-between">
+            <span
+              ngClass="{{ classButtonRefer }}"
+              fxLayoutAlign="center space-between"
+            >
               Referir
             </span>
           </button>
@@ -148,10 +156,13 @@
             mat-button
             id="buy"
             color="orange"
-            ngClass="orange-border {{classButtonBuy}}"
+            ngClass="orange-border {{ classButtonBuy }}"
             (click)="buy()"
           >
-            <span ngClass="{{classButtonBuy}}" fxLayoutAlign="center space-between">
+            <span
+              ngClass="{{ classButtonBuy }}"
+              fxLayoutAlign="center space-between"
+            >
               Comprar
             </span>
           </button>
@@ -168,39 +179,43 @@
         theme="circles-dark"
         shareButton="facebook"
         [url]="urlshorten"
-        ngClass="sharebutton {{classButtonFacebook}} mr-2"
+        ngClass="sharebutton {{ classButtonFacebook }} mr-2"
       >
-        <i ngClass="fab fa-facebook-f {{classButtonFacebook}}"></i>
+        <i ngClass="fab fa-facebook-f {{ classButtonFacebook }}"></i>
       </button>
       <button
         theme="circles-dark"
         shareButton="twitter"
         [url]="urlshorten"
-        ngClass="sharebutton {{classButtonTwitter}} mr-2"
+        ngClass="sharebutton {{ classButtonTwitter }} mr-2"
       >
-        <i ngClass="fab fa-twitter {{classButtonTwitter}}"></i>
+        <i ngClass="fab fa-twitter {{ classButtonTwitter }}"></i>
       </button>
-      <a 
-      href="https://web.whatsapp.com/send?text={{urlshorten}}" 
-      target="_blank"
-      data-action="share/whatsapp/share"
-      ngClass="sharebutton p-3 {{classButtonWhatsapp}}"
+      <a
+        href="https://web.whatsapp.com/send?text={{ urlshorten }}"
+        target="_blank"
+        data-action="share/whatsapp/share"
+        ngClass="sharebutton p-3 {{ classButtonWhatsapp }}"
       >
-        <i ngClass="fab fa-whatsapp {{classButtonWhatsapp}}"></i>
-    </a>
+        <i ngClass="fab fa-whatsapp {{ classButtonWhatsapp }}"></i>
+      </a>
     </div>
 
     <div class="share-mobile">
       <button
         mat-button
-        ngClass="gtmrs  mb-2 mt-2 {{classButtonShare}}"
+        ngClass="gtmrs  mb-2 mt-2 {{ classButtonShare }}"
         (click)="share()"
         fxLayout="row"
         fxLayoutAlign="start start"
       >
-        <span ngClass="gtmrs f-15 {{classButtonShare}}" fxLayout="row" fxLayoutAlign="center center">
+        <span
+          ngClass="gtmrs f-15 {{ classButtonShare }}"
+          fxLayout="row"
+          fxLayoutAlign="center center"
+        >
           <img
-            ngClass="icon-compartir pr-2 {{classButtonShare}}"
+            ngClass="icon-compartir pr-2 {{ classButtonShare }}"
             src="/assets/img/Compartir.svg"
             alt="user"
           />
@@ -210,14 +225,18 @@
 
       <button
         mat-button
-        ngClass="gtmrs  mb-2 mt-2 {{classButtonRefer}}"
+        ngClass="gtmrs  mb-2 mt-2 {{ classButtonRefer }}"
         (click)="showReference()"
         fxLayout="row"
         fxLayoutAlign="start start"
       >
-        <span ngClass="gtmrs f-15 {{classButtonRefer}}" fxLayout="row" fxLayoutAlign="center center">
+        <span
+          ngClass="gtmrs f-15 {{ classButtonRefer }}"
+          fxLayout="row"
+          fxLayoutAlign="center center"
+        >
           <img
-            ngClass="icon-compartir pr-2 {{classButtonRefer}}"
+            ngClass="icon-compartir pr-2 {{ classButtonRefer }}"
             src="/assets/img/Referir.svg"
             alt="user"
           />
@@ -227,14 +246,18 @@
 
       <button
         mat-button
-        ngClass="gtmrs  mb-2 mt-2 {{classButtonBuy}}"
+        ngClass="gtmrs  mb-2 mt-2 {{ classButtonBuy }}"
         (click)="buy()"
         fxLayout="row"
         fxLayoutAlign="start start"
       >
-        <span ngClass="gtmrs f-15 {{classButtonBuy}}" fxLayout="row" fxLayoutAlign="center center">
+        <span
+          ngClass="gtmrs f-15 {{ classButtonBuy }}"
+          fxLayout="row"
+          fxLayoutAlign="center center"
+        >
           <img
-            ngClass="icon-compartir pr-2 {{classButtonBuy}}"
+            ngClass="icon-compartir pr-2 {{ classButtonBuy }}"
             src="/assets/img/Comprar.svg"
             alt="user"
           />
@@ -396,7 +419,7 @@
             <span
               fxLayout="row"
               fxLayoutAlign="space-between center"
-              class=" pr-3 gtmCrearCedulaSiguiente"
+              class="pr-3 gtmCrearCedulaSiguiente"
             >
               {{ "GENERIC.NEXT" | translate }}
               <mat-icon>arrow_forward</mat-icon>
@@ -432,12 +455,12 @@
               id="btnCopy"
               color="orange"
               [disabled]="enableCopy"
-              ngClass="{{classButtonCopy}}"
+              ngClass="{{ classButtonCopy }}"
               (click)="copyInputMessage(linkInput)"
             >
               <span
                 fxLayoutAlign="center space-between"
-                ngClass="{{classButtonCopy}}"
+                ngClass="{{ classButtonCopy }}"
               >
                 {{ "GENERIC.COPY_LINK" | translate }}
               </span>
@@ -447,10 +470,13 @@
               mat-button
               id="buy"
               color="orange"
-              ngClass="orange-border {{classButtonBuy}}"
+              ngClass="orange-border {{ classButtonBuy }}"
               (click)="buy()"
             >
-              <span ngClass="{{classButtonBuy}}" fxLayoutAlign="center space-between">
+              <span
+                ngClass="{{ classButtonBuy }}"
+                fxLayoutAlign="center space-between"
+              >
                 Comprar
               </span>
             </button>
@@ -467,74 +493,85 @@
           theme="circles-dark"
           shareButton="facebook"
           [url]="urlshorten"
-          ngClass="sharebutton {{classButtonFacebook}} mr-2"
+          ngClass="sharebutton {{ classButtonFacebook }} mr-2"
         >
-          <i ngClass="fab fa-facebook-f {{classButtonFacebook}}"></i>
+          <i ngClass="fab fa-facebook-f {{ classButtonFacebook }}"></i>
         </button>
         <button
           theme="circles-dark"
           shareButton="twitter"
           [url]="urlshorten"
-          ngClass="sharebutton {{classButtonTwitter}} mr-2"
+          ngClass="sharebutton {{ classButtonTwitter }} mr-2"
         >
-          <i ngClass="fab fa-twitter {{classButtonTwitter}}"></i>
+          <i ngClass="fab fa-twitter {{ classButtonTwitter }}"></i>
         </button>
-        <a 
-        href="https://web.whatsapp.com/send?text={{urlshorten}}" 
-        target="_blank"
-        data-action="share/whatsapp/share"
-        ngClass="sharebutton p-3 {{classButtonWhatsapp}}"
+        <a
+          href="https://web.whatsapp.com/send?text={{ urlshorten }}"
+          target="_blank"
+          data-action="share/whatsapp/share"
+          ngClass="sharebutton p-3 {{ classButtonWhatsapp }}"
         >
-          <i ngClass="fab fa-whatsapp {{classButtonWhatsapp}}"></i>
-      </a>
+          <i ngClass="fab fa-whatsapp {{ classButtonWhatsapp }}"></i>
+        </a>
       </div>
-  
 
       <div class="share-mobile">
         <button
           mat-button
-          ngClass="gtmrs  mb-2 mt-2 {{classButtonShare}}"
+          ngClass="gtmrs  mb-2 mt-2 {{ classButtonShare }}"
           (click)="share()"
           fxLayout="row"
           fxLayoutAlign="start start"
         >
-          <span ngClass="gtmrs f-15 {{classButtonShare}}" fxLayout="row" fxLayoutAlign="center center">
+          <span
+            ngClass="gtmrs f-15 {{ classButtonShare }}"
+            fxLayout="row"
+            fxLayoutAlign="center center"
+          >
             <img
-              ngClass="icon-compartir pr-2 {{classButtonShare}}"
+              ngClass="icon-compartir pr-2 {{ classButtonShare }}"
               src="/assets/img/Compartir.svg"
               alt="user"
             />
             Compartir</span
           >
         </button>
-  
+
         <button
           mat-button
-          ngClass="gtmrs  mb-2 mt-2 {{classButtonRefer}}"
+          ngClass="gtmrs  mb-2 mt-2 {{ classButtonRefer }}"
           (click)="showReference()"
           fxLayout="row"
           fxLayoutAlign="start start"
         >
-          <span ngClass="gtmrs f-15 {{classButtonRefer}}" fxLayout="row" fxLayoutAlign="center center">
+          <span
+            ngClass="gtmrs f-15 {{ classButtonRefer }}"
+            fxLayout="row"
+            fxLayoutAlign="center center"
+          >
             <img
-              ngClass="icon-compartir pr-2 {{classButtonRefer}}"
+              ngClass="icon-compartir pr-2 {{ classButtonRefer }}"
               src="/assets/img/Referir.svg"
               alt="user"
             />
             Referir
           </span>
         </button>
-  
+
         <button
           mat-button
-          ngClass="gtmrs  mb-2 mt-2 {{classButtonBuy}}"
+          ngClass="gtmrs  mb-2 mt-2 {{ classButtonBuy }}"
           (click)="buy()"
           fxLayout="row"
           fxLayoutAlign="start start"
         >
-          <span ngClass="gtmrs f-15 {{classButtonBuy}}" fxLayout="row" fxLayoutAlign="center center">
+          <span
+            ngClass="gtmrs f-15 {{ classButtonBuy }}"
+            fxLayout="row"
+            fxLayoutAlign="center center"
+          >
             <img
-              ngClass="icon-compartir pr-2 {{classButtonBuy}}"
+              ngClass="icon-compartir pr-2 {{ classButtonBuy }}"
               src="/assets/img/Comprar.svg"
               alt="user"
             />

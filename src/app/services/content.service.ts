@@ -75,6 +75,7 @@ export class ContentService {
   apiSaveOrderOfer = "offer/saveorderoffers";
   apiDeleteOfer = "offer/deleteoffers";
   apiSaveOfer = "offer/saveoffers";
+  apiSaveOferActive = "offer/saveactiveoffers";
   sendSearch = {};
 
   public getNews() {
@@ -190,6 +191,7 @@ export class ContentService {
         )
       );
   }
+
   public saveComisionCategory(data: any) {
     return this.http
       .post(`${this.urlComission + this.apiManageComisionBusiness}`, data, this.httpOptions)
@@ -209,6 +211,22 @@ export class ContentService {
   public saveOrderTipBusiness(data: any) {
     return this.http
       .post(`${this.url + this.apiSaveBusinessOrderTip}`, data, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((user: ResponseService) => {
+          return user.objectResponse;
+        })
+      );
+  }
+  public saveActiveBanner(data: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveOferActive}`, data, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
@@ -510,7 +528,7 @@ export class ContentService {
     );
   }
   public getOffersbyType(type) {
-    return this.http.get(`${this.url + this.apiOffers}?type=${type}`, this.httpOptions).pipe(
+    return this.http.get(`${this.url + this.apiOffers}?type=${type.id}&visible=${type.admin}`, this.httpOptions).pipe(
       map((user: ResponseService) => {
         return user.objectResponse;
       })

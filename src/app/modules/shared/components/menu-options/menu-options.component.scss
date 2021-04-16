@@ -63,6 +63,18 @@
       background-size: 100%;
     }
   }
+  .Carrusel {
+    &::before {
+      content: "";
+      background: url("/assets/img/menu-mobile/carousel.svg") no-repeat;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+      background-size: 100%;
+    }
+  }
   .Novedades {
     &::before {
       content: "";
