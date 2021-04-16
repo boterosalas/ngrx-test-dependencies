@@ -80,15 +80,15 @@
               <span
                 fxLayout="column"
                 fxLayoutAlign="flex-end flex-end"
-                fxLayoutAlign.xs="flex-start flex-start"
-                ngClass.gt-xs="button-wrap pb-3"
+                fxLayoutAlign.xs="flex-end flex-end"
+                ngClass.gt-xs="button-wrap pb-3 "
               >
                 <button
                   id="{{ butonid }}"
                   mat-raised-button
                   color="orange"
                   ngClass.xs="widb"
-                  class="mb-1 button-properties"
+                  class="mb-1 button-properties mr-1"
                   (click)="product()"
                   [disabled]="precio === 0"
                 >
