@@ -108,7 +108,7 @@ export class ManageComisionBussinessComponent implements OnInit {
       } else {
         this.searchUser(this.paginate, this.from, this.to);
         this.dialog.closeAll()
-        this.dataEditTip.reset()
+        this.dataTip.reset()
       }
 
     })
@@ -159,7 +159,6 @@ export class ManageComisionBussinessComponent implements OnInit {
     //});
   }
   editSaveComisionCategory() {
-    console.log("No funciona");
     let datos = {
       id: this.idComision,
       code: this.dataEditTip.controls.codEditCategory.value,
@@ -181,7 +180,7 @@ export class ManageComisionBussinessComponent implements OnInit {
 
   }
   addComisionCategory() {
-    const title = "Nuevo Categoría";
+    const title = "Nueva Categoría";
     const idBussiness = this.id;
     const edit = 0;
     const template = this.templateAddCategory;
