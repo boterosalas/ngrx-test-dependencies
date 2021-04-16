@@ -560,19 +560,15 @@
           >
         </mat-form-field>
         <mat-form-field style="width: 370px">
-          <mat-select
-            placeholder="NEGOCIO"
-            id="tipoComision"
-            class="selected-report"
-            formControlName="business"
-          >
-            <mat-option
+          <mat-label>NEGOCIO</mat-label>
+          <select formControlName="business" matNativeControl required>
+            <option
               *ngFor="let selected of selectedBuss"
               value="{{ selected.id }}"
             >
               <span style="color: #37236a">{{ selected.description }}</span>
-            </mat-option>
-          </mat-select>
+            </option>
+          </select>
         </mat-form-field>
         <mat-form-field style="width: 370px">
           <input
@@ -794,19 +790,15 @@
           >
         </mat-form-field>
         <mat-form-field style="width: 370px">
-          <mat-select
-            placeholder="NEGOCIO"
-            id="tipoComision"
-            formControlName="business"
-            class="selected-report"
-          >
-            <mat-option
+          <mat-label>NEGOCIO</mat-label>
+          <select formControlName="business" matNativeControl required>
+            <option
               *ngFor="let selected of selectedBuss"
               value="{{ selected.id }}"
             >
-              <span>{{ selected.description }}</span>
-            </mat-option>
-          </mat-select>
+              <span style="color: #37236a">{{ selected.description }}</span>
+            </option>
+          </select>
         </mat-form-field>
         <mat-form-field style="width: 370px">
           <input

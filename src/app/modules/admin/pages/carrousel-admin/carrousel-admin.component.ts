@@ -31,6 +31,7 @@ export class CarrouselAdminComponent implements OnInit {
   active2: boolean;
   idCarousel: number = 0;
   idOfertas: number = 0;
+  selected: any;
   constructor(
     private dialog: MatDialog,
     private content: ContentService,
@@ -86,10 +87,10 @@ export class CarrouselAdminComponent implements OnInit {
       for (let index = 0; index < this.dataSource.length; index++) {
         this.dataSource[index].selected = false;
       }
-      console.log(this.dataSource)
+
     })
     this.content.getOffersbyType({ id: "OFERTA", admin: true }).subscribe((resp) => {
-      console.log(resp)
+
       this.dataSourceOfer = resp;
       for (let index = 0; index < this.dataSourceOfer.length; index++) {
         this.dataSourceOfer[index].selected = false;
@@ -216,8 +217,10 @@ export class CarrouselAdminComponent implements OnInit {
   checkButton() {
     if (this.nameFileCert != "" && this.nameFileCert2 != "") {
       this.activebutton = true;
+      this.activeButtonOfer = true;
     } else {
       this.activebutton = false;
+      this.activeButtonOfer = false;
     }
   }
   editCarouselModal(element) {
@@ -226,6 +229,7 @@ export class CarrouselAdminComponent implements OnInit {
     const edit = 0;
     const template = this.templateAddImagenCarousel;
     this.dataAddImagen.reset();
+
     if (element.imageurlweb != "") {
       let datos = element.imageurlweb.split("/")
       this.nameFileCert = datos[datos.length - 1]
@@ -237,9 +241,12 @@ export class CarrouselAdminComponent implements OnInit {
     this.fileImgCat2 = "";
     this.dataAddImagen.controls.nameContent.setValue(element.description)
     this.dataAddImagen.controls.visible.setValue(element.active)
-    this.dataAddImagen.controls.link.setValue(element.link)
+    this.dataAddImagen.controls.link.setValue(element.link);
+
     this.dataAddImagen.controls.business.setValue(element.idbusiness)
+
     this.dataAddImagen.controls.comision.setValue(element.infoaditional)
+    this.selected = element.business;
     this.idCarousel = element.id;
     let dialogRef1 = this.dialog.open(ModalGenericComponent, {
       width: "450px",
@@ -252,6 +259,7 @@ export class CarrouselAdminComponent implements OnInit {
     });
 
   }
+
   activate(element) {
     let datos = [{ id: element.id, active: element.active }]
     this.content.saveActiveBanner(datos).subscribe((resp) => {
@@ -263,6 +271,7 @@ export class CarrouselAdminComponent implements OnInit {
     const idBussiness = 1;
     const edit = 0;
     const template = this.templateAddImagenOfertas;
+
     if (element.imageurlweb != "") {
       let datos = element.imageurlweb.split("/")
       this.nameFileCert = datos[datos.length - 1]
@@ -270,15 +279,17 @@ export class CarrouselAdminComponent implements OnInit {
       this.nameFileCert2 = datos2[datos2.length - 1]
       this.checkButton();
     }
+
     this.fileImgCat = "";
     this.fileImgCat2 = "";
-    this.nameFileCert2 = ""
+    //this.nameFileCert2 = ""
     this.dataAddImagenOfertas.reset();
     this.dataAddImagenOfertas.controls.nameContent.setValue(element.description)
     this.dataAddImagenOfertas.controls.link.setValue(element.link)
-    this.dataAddImagenOfertas.controls.business.setValue(element.business)
+    this.dataAddImagenOfertas.controls.business.setValue(element.idbusiness);
+
     this.dataAddImagenOfertas.controls.comision.setValue(element.infoaditional)
-    this.idCarousel = element.id;
+    this.idOfertas = element.id;
     //this.idSaveTip = element.id;
     //this.dataEditTip.controls.title.setValue(element.title);
     //this.dataEditTip.controls.description.setValue(element.description);
@@ -303,9 +314,8 @@ export class CarrouselAdminComponent implements OnInit {
     this.dataAddImagen.reset();
     this.nameFileCert2 = "";
     this.nameFileCert = "";
-    //this.idSaveTip = element.id;
-    //this.dataEditTip.controls.title.setValue(element.title);
-    //this.dataEditTip.controls.description.setValue(element.description);
+
+    this.activebutton = false;
     let dialogRef1 = this.dialog.open(ModalGenericComponent, {
       width: "450px",
       data: {
@@ -325,7 +335,9 @@ export class CarrouselAdminComponent implements OnInit {
     this.dataAddImagenOfertas.reset();
     this.idOfertas = 0;
     this.nameFileCert2 = "";
+
     this.nameFileCert = "";
+    this.activeButtonOfer = false;
     let dialogRef1 = this.dialog.open(ModalGenericComponent, {
       width: "450px",
       data: {
@@ -378,12 +390,11 @@ export class CarrouselAdminComponent implements OnInit {
     } else {
       visible = 0;
     }
-
     let bussiness = this.dataAddImagen.controls.business.value;
     let datos;
     let buss = ""
     for (let index = 0; index < this.selectedBuss.length; index++) {
-      if (this.selectedBuss[index].id.toString() === bussiness) {
+      if (this.selectedBuss[index].id.toString() === bussiness.toString()) {
         buss = this.selectedBuss[index].description
       }
 
@@ -471,12 +482,10 @@ export class CarrouselAdminComponent implements OnInit {
     let datos;
     let buss = ""
     for (let index = 0; index < this.selectedBuss.length; index++) {
-      if (this.selectedBuss[index].id.toString() === bussiness) {
+      if (this.selectedBuss[index].id.toString() === bussiness.toString()) {
         buss = this.selectedBuss[index].description
       }
-
     }
-
     if (this.idOfertas === 0) {
       datos = [{
         description: this.dataAddImagenOfertas.controls.nameContent.value,
@@ -612,6 +621,7 @@ export class CarrouselAdminComponent implements OnInit {
         }
         this.content.deleteOfer(datos).subscribe((resp) => {
           this.getOffers();
+          this.active2 = false;
         })
 
       }
@@ -637,6 +647,7 @@ export class CarrouselAdminComponent implements OnInit {
         }
         this.content.deleteOfer(datos).subscribe((resp) => {
           this.getOffers();
+          this.active = false;
         })
 
       }
