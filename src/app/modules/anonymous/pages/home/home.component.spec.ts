@@ -47,6 +47,7 @@ describe("HomeComponent", () => {
     "activateProfile",
     "getuserdata",
     "saveUserAcceptTermsReferrals",
+
   ]);
   const mockAuthService = jasmine.createSpyObj("AuthService", [
     "login",
@@ -63,6 +64,7 @@ describe("HomeComponent", () => {
   const mockContentService = jasmine.createSpyObj("ContentService", [
     "getNews",
     "getOffers",
+    "getOffersbyType",
     "getBusiness",
     "getBusinessClicker",
     "getPopupus",
@@ -309,8 +311,8 @@ describe("HomeComponent", () => {
     web: [],
   };
 
-  let offers = {
-    mobile: [
+  let offers =
+    [
       {
         imageurl:
           "https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-1-Mobile-Bienvenida.jpg",
@@ -432,9 +434,8 @@ describe("HomeComponent", () => {
           "https://www.exito.com/2118/huawei?bgy_leap=1&map=productClusterIds,b&pauta=t&utm_source=clickam&utm_medium=referral&utm_campaign=",
         business: "exito",
       },
-    ],
-    web: [],
-  };
+    ]
+    ;
   let responseTerms = {
     Status: "Success",
     objectResponse: [{
@@ -507,7 +508,7 @@ describe("HomeComponent", () => {
         // { provide: LinksService, useValue: mockLinksService },
       ],
       schemas: [
-        // NO_ERRORS_SCHEMA
+        NO_ERRORS_SCHEMA
       ],
     }).compileComponents();
     mockMasterService.getTerms.and.returnValue(of(responseTerms));
@@ -517,6 +518,7 @@ describe("HomeComponent", () => {
     mockUtilsService.showRegisterForm.and.returnValue({});
     mockContentService.getNews.and.returnValue(of(news));
     mockContentService.getOffers.and.returnValue(of(offers));
+    mockContentService.getOffersbyType.and.returnValue(of(offers));
     mockContentService.getBusiness.and.returnValue(of(business));
     mockContentService.getBusinessClicker.and.returnValue(of(business));
     mockContentService.getPopupus.and.returnValue(of(popups));

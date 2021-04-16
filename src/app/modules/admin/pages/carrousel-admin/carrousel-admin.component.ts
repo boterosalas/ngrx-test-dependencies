@@ -69,113 +69,32 @@ export class CarrouselAdminComponent implements OnInit {
   activebutton: boolean;
   validFormat: boolean;
   business: any;
-  dataSourceOfer = [{
-    id: 1,
-    orderby: 1,
-    image: "https://live-realidad-aumentada.pantheonsite.io/sites/default/files/2020-10/freidoraoster%201407112_0.jpg",
-    nameContent: "Freidora Oster 3%",
-    link: "https://www.clickam.com.co/#/url/cdsagfair3",
-    bussiness: "Almacenes Éxito",
-    comision: "3%",
-    selected: false
-  }, {
-    id: 2,
-    orderby: 2,
-    image: "https://live-realidad-aumentada.pantheonsite.io/sites/default/files/2020-10/smarttvsamsung%201734612_0.jpg",
-    nameContent: "Freidora Oster 3%",
-    link: "https://www.clickam.com.co/#/url/cdsagfair3",
-    bussiness: "Almacenes Éxito",
-    comision: "3%",
-    selected: false
-  }, {
-    id: 3,
-    orderby: 3,
-    image: "https://live-realidad-aumentada.pantheonsite.io/sites/default/files/2020-10/neverahaceb1%201637150_0.jpg",
-    nameContent: "Freidora Oster 3%",
-    link: "https://www.clickam.com.co/#/url/cdsagfair3",
-    bussiness: "Almacenes Éxito",
-    comision: "3%",
-    selected: false
-  }, {
-    id: 4,
-    orderby: 4,
-    image: "https://live-realidad-aumentada.pantheonsite.io/sites/default/files/2020-09/1revisacomisionesmobile.jpg",
-    nameContent: "Freidora Oster 3%",
-    link: "https://www.clickam.com.co/#/url/cdsagfair3",
-    bussiness: "Almacenes Éxito",
-    comision: "3%",
-    selected: false
-  }]
-  dataSource = [{
-    id: 1,
-    orderby: 1,
-    imagenWeb: "https://live-realidad-aumentada.pantheonsite.io/sites/default/files/2021-04/Web-banner-bienvenido-Marketplace.jpg",
-    imagenMobile: "https://live-realidad-aumentada.pantheonsite.io/sites/default/files/2021-04/Mobile-banner-bienvenido-Marketplace.jpg",
-    nameContent: "Actualización Viajes Éxito",
-    link: "https://www.clickam.com.co/#/url/cdsagfair3",
-    bussiness: "Viajes Exito",
-    comision: "Hasta el 5.3%",
-    active: true,
-    selected: true,
-  },
-  {
-    id: 2,
-    orderby: 2,
-    imagenWeb: "https://live-realidad-aumentada.pantheonsite.io/sites/default/files/2021-03/bannerwebpagosmensuales.jpg",
-    imagenMobile: "https://live-realidad-aumentada.pantheonsite.io/sites/default/files/2021-03/bannermobilepagosmensuales.jpg",
-    nameContent: "Actualización Viajes Éxito",
-    link: "https://www.clickam.com.co/#/url/cdsagfair3",
-    bussiness: "Viajes Exito",
-    comision: "Hasta el 5.3%",
-    active: true,
-    selected: true,
-  },
-  {
-    id: 3,
-    orderby: 3,
-    imagenWeb: "https://live-realidad-aumentada.pantheonsite.io/sites/default/files/2021-03/websoatgenerico.jpg",
-    imagenMobile: "https://live-realidad-aumentada.pantheonsite.io/sites/default/files/2021-03/mobilesoatgenerico.jpg",
-    nameContent: "Actualización Viajes Éxito",
-    link: "https://www.clickam.com.co/#/url/cdsagfair3",
-    bussiness: "Viajes Exito",
-    comision: "Hasta el 5.3%",
-    active: true,
-    selected: true,
-  },
-  {
-    id: 4,
-    orderby: 4,
-    imagenWeb: "https://live-realidad-aumentada.pantheonsite.io/sites/default/files/2021-02/bannerwebcomunicadoviajes.jpg",
-    imagenMobile: "https://live-realidad-aumentada.pantheonsite.io/sites/default/files/2021-02/bannermobilecomunicadoviajes.jpg",
-    nameContent: "Actualización Viajes Éxito",
-    link: "https://www.clickam.com.co/#/url/cdsagfair3",
-    bussiness: "Viajes Exito",
-    comision: "Hasta el 5.3%",
-    active: true,
-    selected: true,
-  }
-    ,
-  {
-    id: 5,
-    orderby: 5,
-    imagenWeb: "https://live-realidad-aumentada.pantheonsite.io/sites/default/files/2020-08/webbienvenida.jpg",
-    imagenMobile: "https://live-realidad-aumentada.pantheonsite.io/sites/default/files/2020-08/mobilebienvenida.jpg",
-    nameContent: "Actualización Viajes Éxito",
-    link: "https://www.clickam.com.co/#/url/cdsagfair3",
-    bussiness: "Viajes Exito",
-    comision: "Hasta el 5.3%",
-    active: true,
-    selected: true,
-  }]
+  dataSourceOfer = [];
+  activeButtonOfer: boolean;
+
+  dataSource = [];
+
   ngOnInit() {
 
-    this.content.getOffersbyType("OFERTA").subscribe((resp) => {
-      console.log(resp)
-    })
-    this.content.getOffersbyType("CARROUSEL").subscribe((resp) => {
-      console.log(resp)
-    })
+    this.getOffers();
     this.getAllBusiness();
+  }
+  public getOffers() {
+    this.content.getOffersbyType({ id: "CARROUSEL", admin: true }).subscribe((resp) => {
+      //console.log(resp)
+      this.dataSource = resp;
+      for (let index = 0; index < this.dataSource.length; index++) {
+        this.dataSource[index].selected = false;
+      }
+      console.log(this.dataSource)
+    })
+    this.content.getOffersbyType({ id: "OFERTA", admin: true }).subscribe((resp) => {
+      console.log(resp)
+      this.dataSourceOfer = resp;
+      for (let index = 0; index < this.dataSourceOfer.length; index++) {
+        this.dataSourceOfer[index].selected = false;
+      }
+    })
   }
   public getAllBusiness() {
     this.content.getAllBusiness().subscribe(resp => {
@@ -247,6 +166,7 @@ export class CarrouselAdminComponent implements OnInit {
           this.fileImgCat = this.fileImgCat.split(",")[1]
           this.nameFileCert = nameFile;
           this.showErrorCert = false;
+          this.activeButtonOfer = true;
           if (this.nameFileCert2 != "") {
             this.activebutton = true;
           } else {
@@ -257,6 +177,7 @@ export class CarrouselAdminComponent implements OnInit {
           this.showErrorCert = true;
           this.nameFileCert = nameFile;
           this.activebutton = false;
+          this.activeButtonOfer = false;
         }
       };
     }
@@ -292,20 +213,34 @@ export class CarrouselAdminComponent implements OnInit {
       };
     }
   }
+  checkButton() {
+    if (this.nameFileCert != "" && this.nameFileCert2 != "") {
+      this.activebutton = true;
+    } else {
+      this.activebutton = false;
+    }
+  }
   editCarouselModal(element) {
     const title = "Editar Imagen";
     const idBussiness = 1;
     const edit = 0;
     const template = this.templateAddImagenCarousel;
-    this.dataAddImagen.controls.nameContent.setValue(element.nameContent)
+    this.dataAddImagen.reset();
+    if (element.imageurlweb != "") {
+      let datos = element.imageurlweb.split("/")
+      this.nameFileCert = datos[datos.length - 1]
+      let datos2 = element.imageurlmobile.split("/")
+      this.nameFileCert2 = datos2[datos2.length - 1]
+      this.checkButton();
+    }
+    this.fileImgCat = "";
+    this.fileImgCat2 = "";
+    this.dataAddImagen.controls.nameContent.setValue(element.description)
+    this.dataAddImagen.controls.visible.setValue(element.active)
     this.dataAddImagen.controls.link.setValue(element.link)
-    this.dataAddImagen.controls.business.setValue(element.business)
-    this.dataAddImagen.controls.comision.setValue(element.comision)
+    this.dataAddImagen.controls.business.setValue(element.idbusiness)
+    this.dataAddImagen.controls.comision.setValue(element.infoaditional)
     this.idCarousel = element.id;
-
-    //this.idSaveTip = element.id;
-    //this.dataEditTip.controls.title.setValue(element.title);
-    //this.dataEditTip.controls.description.setValue(element.description);
     let dialogRef1 = this.dialog.open(ModalGenericComponent, {
       width: "450px",
       data: {
@@ -317,17 +252,33 @@ export class CarrouselAdminComponent implements OnInit {
     });
 
   }
+  activate(element) {
+    let datos = [{ id: element.id, active: element.active }]
+    this.content.saveActiveBanner(datos).subscribe((resp) => {
+
+    })
+  }
   editOfertasModal(element) {
     const title = "Editar Imagen";
     const idBussiness = 1;
     const edit = 0;
     const template = this.templateAddImagenOfertas;
-    this.dataAddImagenOfertas.controls.nameContent.setValue(element.nameContent)
+    if (element.imageurlweb != "") {
+      let datos = element.imageurlweb.split("/")
+      this.nameFileCert = datos[datos.length - 1]
+      let datos2 = element.imageurlmobile.split("/")
+      this.nameFileCert2 = datos2[datos2.length - 1]
+      this.checkButton();
+    }
+    this.fileImgCat = "";
+    this.fileImgCat2 = "";
+    this.nameFileCert2 = ""
+    this.dataAddImagenOfertas.reset();
+    this.dataAddImagenOfertas.controls.nameContent.setValue(element.description)
     this.dataAddImagenOfertas.controls.link.setValue(element.link)
     this.dataAddImagenOfertas.controls.business.setValue(element.business)
-    this.dataAddImagenOfertas.controls.comision.setValue(element.comision)
+    this.dataAddImagenOfertas.controls.comision.setValue(element.infoaditional)
     this.idCarousel = element.id;
-
     //this.idSaveTip = element.id;
     //this.dataEditTip.controls.title.setValue(element.title);
     //this.dataEditTip.controls.description.setValue(element.description);
@@ -340,6 +291,7 @@ export class CarrouselAdminComponent implements OnInit {
         edit
       },
     });
+
 
   }
   saveCarouselModal() {
@@ -348,6 +300,9 @@ export class CarrouselAdminComponent implements OnInit {
     const edit = 0;
     const template = this.templateAddImagenCarousel;
     this.idCarousel = 0;
+    this.dataAddImagen.reset();
+    this.nameFileCert2 = "";
+    this.nameFileCert = "";
     //this.idSaveTip = element.id;
     //this.dataEditTip.controls.title.setValue(element.title);
     //this.dataEditTip.controls.description.setValue(element.description);
@@ -367,7 +322,10 @@ export class CarrouselAdminComponent implements OnInit {
     const idBussiness = 1;
     const edit = 0;
     const template = this.templateAddImagenOfertas;
+    this.dataAddImagenOfertas.reset();
     this.idOfertas = 0;
+    this.nameFileCert2 = "";
+    this.nameFileCert = "";
     let dialogRef1 = this.dialog.open(ModalGenericComponent, {
       width: "450px",
       data: {
@@ -391,7 +349,7 @@ export class CarrouselAdminComponent implements OnInit {
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
         this.content.deleteOfer([element.id]).subscribe((resp) => {
-
+          this.getOffers();
         })
       }
     })
@@ -408,7 +366,7 @@ export class CarrouselAdminComponent implements OnInit {
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
         this.content.deleteOfer([element.id]).subscribe((resp) => {
-
+          this.getOffers();
         })
       }
     })
@@ -444,24 +402,68 @@ export class CarrouselAdminComponent implements OnInit {
         type: "CARROUSEL",
       }]
     } else {
-      datos = [{
-        id: this.idCarousel,
-        description: this.dataAddImagen.controls.nameContent.value,
-        link: this.dataAddImagen.controls.link.value,
-        idBusiness: this.dataAddImagen.controls.business.value,
-        Business: buss,
-        infoAditional: this.dataAddImagen.controls.comision.value,
-        active: visible,
-        imageWeb: this.fileImgCat,
-        imageMobile: this.fileImgCat2,
-        //CARROUSEL
-        type: "CARROUSEL",
-      }]
+      if (this.fileImgCat != "") {
+        datos = [{
+          id: this.idCarousel,
+          description: this.dataAddImagen.controls.nameContent.value,
+          link: this.dataAddImagen.controls.link.value,
+          idBusiness: this.dataAddImagen.controls.business.value,
+          Business: buss,
+          infoAditional: this.dataAddImagen.controls.comision.value,
+          active: visible,
+          imageWeb: this.fileImgCat,
+
+          //CARROUSEL
+          type: "CARROUSEL",
+        }]
+      } else if (this.fileImgCat2 != "") {
+        datos = [{
+          id: this.idCarousel,
+          description: this.dataAddImagen.controls.nameContent.value,
+          link: this.dataAddImagen.controls.link.value,
+          idBusiness: this.dataAddImagen.controls.business.value,
+          Business: buss,
+          infoAditional: this.dataAddImagen.controls.comision.value,
+          active: visible,
+
+          imageMobile: this.fileImgCat2,
+          //CARROUSEL
+          type: "CARROUSEL",
+        }]
+      } else if (this.fileImgCat != "" && this.fileImgCat2 != "") {
+        datos = [{
+          id: this.idCarousel,
+          description: this.dataAddImagen.controls.nameContent.value,
+          link: this.dataAddImagen.controls.link.value,
+          idBusiness: this.dataAddImagen.controls.business.value,
+          Business: buss,
+          infoAditional: this.dataAddImagen.controls.comision.value,
+          active: visible,
+          imageWeb: this.fileImgCat,
+          imageMobile: this.fileImgCat2,
+          //CARROUSEL
+          type: "CARROUSEL",
+        }]
+      } else {
+        datos = [{
+          id: this.idCarousel,
+          description: this.dataAddImagen.controls.nameContent.value,
+          link: this.dataAddImagen.controls.link.value,
+          idBusiness: this.dataAddImagen.controls.business.value,
+          Business: buss,
+          infoAditional: this.dataAddImagen.controls.comision.value,
+          active: visible,
+
+          //CARROUSEL
+          type: "CARROUSEL",
+        }]
+      }
     }
 
     this.content.saveOfertBusiness(datos).subscribe((resp) => {
       this.dataAddImagen.reset()
       this.dialog.closeAll()
+      this.getOffers();
     })
   }
   saveImagenOfertas() {
@@ -484,25 +486,43 @@ export class CarrouselAdminComponent implements OnInit {
         infoAditional: this.dataAddImagenOfertas.controls.comision.value,
         active: 1,
         type: "OFERTA",
-        imageWeb: this.fileImgCat
+        imageWeb: this.fileImgCat,
+        imageMobile: this.fileImgCat
       }]
     } else {
-      datos = [{
-        id: this.idOfertas,
-        description: this.dataAddImagenOfertas.controls.nameContent.value,
-        link: this.dataAddImagenOfertas.controls.link.value,
-        idBusiness: this.dataAddImagenOfertas.controls.business.value,
-        Business: buss,
-        infoAditional: this.dataAddImagenOfertas.controls.comision.value,
-        active: 1,
-        type: "OFERTA",
-        imageWeb: this.fileImgCat
-      }]
+      if (this.fileImgCat != "") {
+        datos = [{
+          id: this.idOfertas,
+          description: this.dataAddImagenOfertas.controls.nameContent.value,
+          link: this.dataAddImagenOfertas.controls.link.value,
+          idBusiness: this.dataAddImagenOfertas.controls.business.value,
+          Business: buss,
+          infoAditional: this.dataAddImagenOfertas.controls.comision.value,
+          active: 1,
+          type: "OFERTA",
+          imageWeb: this.fileImgCat,
+          imageMobile: this.fileImgCat
+        }]
+      } else {
+        datos = [{
+          id: this.idOfertas,
+          description: this.dataAddImagenOfertas.controls.nameContent.value,
+          link: this.dataAddImagenOfertas.controls.link.value,
+          idBusiness: this.dataAddImagenOfertas.controls.business.value,
+          Business: buss,
+          infoAditional: this.dataAddImagenOfertas.controls.comision.value,
+          active: 1,
+          type: "OFERTA",
+
+        }]
+      }
+
     }
 
     this.content.saveOfertBusiness(datos).subscribe((resp) => {
       this.dataAddImagenOfertas.reset()
       this.dialog.closeAll()
+      this.getOffers();
     })
 
   }
@@ -591,7 +611,7 @@ export class CarrouselAdminComponent implements OnInit {
           }
         }
         this.content.deleteOfer(datos).subscribe((resp) => {
-
+          this.getOffers();
         })
 
       }
@@ -616,11 +636,15 @@ export class CarrouselAdminComponent implements OnInit {
           }
         }
         this.content.deleteOfer(datos).subscribe((resp) => {
-
+          this.getOffers();
         })
 
       }
     })
   }
+  onNoClick() {
+    this.dialog.closeAll();
+  }
 
 }
+

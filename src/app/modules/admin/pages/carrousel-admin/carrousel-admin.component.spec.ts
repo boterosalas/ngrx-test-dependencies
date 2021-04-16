@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 
 import { CarrouselAdminComponent } from './carrousel-admin.component';
 
-describe('CarrouselAdminComponent', () => {
+fdescribe('CarrouselAdminComponent', () => {
   let component: CarrouselAdminComponent;
   let fixture: ComponentFixture<CarrouselAdminComponent>;
   const dialogMock = {
@@ -28,6 +28,12 @@ describe('CarrouselAdminComponent', () => {
     "deleteOfer",
     "saveOfertBusiness"
   ]);
+  const datos = [
+    { id: 1, description: "Algo", business: "Exito" },
+    { id: 1, description: "Algo", business: "Exito" },
+    { id: 1, description: "Algo", business: "Exito" }
+
+  ]
   const audit = {
     state: "Success",
     userMessage: "se ha enviado un correo",
@@ -66,7 +72,7 @@ describe('CarrouselAdminComponent', () => {
       ]
     })
       .compileComponents();
-    mockContentService.getOffersbyType.and.returnValue(of(audit));
+    mockContentService.getOffersbyType.and.returnValue(of(datos));
     mockContentService.saveOrderOfertBusiness.and.returnValue(of(audit));
     mockContentService.getAllBusiness.and.returnValue(of(audit));
     mockContentService.deleteOfer.and.returnValue(of(audit));
@@ -104,9 +110,11 @@ describe('CarrouselAdminComponent', () => {
     component.saveImagenCarousel();
     component.deleteComisionCarousel({ id: 1 });
     component.deleteComisionOferta({ id: 1 });
-    component.editOfertasModal({ id: 1, nameContent: "HE", link: "link", bussiness: "buss", comision: "Hasta 4%" });
-    component.editCarouselModal({ id: 1, nameContent: "HE", link: "link", bussiness: "buss", comision: "Hasta 4%" });
+    component.checkButton();
+    //component.editOfertasModal({ id: 1, nameContent: "HE", link: "link", bussiness: "buss", comision: "Hasta 4%" });
+    //component.editCarouselModal({ id: 1, nameContent: "HE", link: "link", bussiness: "buss", comision: "Hasta 4%" });
     component.deleteEveryOfertas();
+    component.onNoClick();
     component.deleteEvery();
     let datos = true;
     expect(datos).toBeTruthy();
