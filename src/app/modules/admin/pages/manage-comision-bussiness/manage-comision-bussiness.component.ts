@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatSnackBar, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
@@ -53,6 +53,7 @@ export class ManageComisionBussinessComponent implements OnInit {
   idComision: string;
   private subscription: Subscription = new Subscription();
   constructor(
+    private _snackBar: MatSnackBar,
     private content: ContentService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
@@ -98,12 +99,18 @@ export class ManageComisionBussinessComponent implements OnInit {
       description: this.dataTip.controls.nameCategory.value,
       commissionClicker: this.dataTip.controls.comisionClicker.value,
       commissionBusiness: this.dataTip.controls.commisionBussiness.value,
-      idBusiness: Number(this.id)
+      idBusiness: Number(this.id),
+      marketplace: this.marketplace
     }
     this.content.saveComisionCategory(datos).subscribe((resp) => {
-      this.searchUser(this.paginate, this.from, this.to);
-      this.dialog.closeAll()
-      this.dataEditTip.reset()
+      if (resp.state === 'Error') {
+        this.openSnackBar(resp.userMessage, "Cerrar");
+      } else {
+        this.searchUser(this.paginate, this.from, this.to);
+        this.dialog.closeAll()
+        this.dataEditTip.reset()
+      }
+
     })
 
   }
@@ -118,7 +125,7 @@ export class ManageComisionBussinessComponent implements OnInit {
       allowOutsideClick: false
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
-        this.content.deleteComisionCategoryBusiness(item.idcommission).subscribe((resp) => {
+        this.content.deleteComisionCategoryBusiness({ id: item.idcommission, marketplace: this.marketplace }).subscribe((resp) => {
           //this.getBusinessData();
           this.searchUser(this.paginate, this.from, this.to);
         })
@@ -159,12 +166,17 @@ export class ManageComisionBussinessComponent implements OnInit {
       description: this.dataEditTip.controls.nameEditCategory.value,
       commissionClicker: this.dataEditTip.controls.comisionEditClicker.value,
       commissionBusiness: this.dataEditTip.controls.commisionEditBussiness.value,
-      idBusiness: Number(this.id)
+      idBusiness: Number(this.id),
+      marketplace: this.marketplace
     }
     this.content.saveComisionCategory(datos).subscribe((resp) => {
-      this.searchUser(this.paginate, this.from, this.to);
-      this.dialog.closeAll()
-      this.dataEditTip.reset()
+      if (resp.state === 'Error') {
+        this.openSnackBar(resp.userMessage, "Cerrar");
+      } else {
+        this.searchUser(this.paginate, this.from, this.to);
+        this.dialog.closeAll()
+        this.dataEditTip.reset()
+      }
     })
 
   }
@@ -224,4 +236,10 @@ export class ManageComisionBussinessComponent implements OnInit {
     }
     this.searchUser(this.paginate, this.from, this.to, name, direction);
   }
+  private openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5000
+    });
+  }
+
 }
