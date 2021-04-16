@@ -263,7 +263,7 @@ export class SliderComponent implements OnInit {
       this.urlshorten = '';
       this.reference = false;
       const dataCategoryUrl = category.link;
-      this.url = `${dataCategoryUrl}${this.idClicker}`;
+      this.url = `${dataCategoryUrl}`;
       setTimeout(() => {
         this.saveLink();
       }, 500);

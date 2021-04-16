@@ -335,7 +335,6 @@ export class CarrouselAdminComponent implements OnInit {
     this.dataAddImagenOfertas.reset();
     this.idOfertas = 0;
     this.nameFileCert2 = "";
-
     this.nameFileCert = "";
     this.activeButtonOfer = false;
     let dialogRef1 = this.dialog.open(ModalGenericComponent, {
