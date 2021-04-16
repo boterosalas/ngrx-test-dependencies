@@ -168,69 +168,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
             this.caseSpecial = resp.terms[2].description;
           }
         })
-        switch (this.title) {
-          case "carulla":
-            this.imgBanner = "/assets/img/banners/negocios/carulla-pc.jpg";
-            this.imgBannerMobile =
-              "/assets/img/banners/negocios/carulla-mobile.jpg";
-            this.colorText = "white";
-            break;
 
-          case 'exito':
-            this.imgBanner = "/assets/img/banners/negocios/exito-pc.jpg";
-            this.imgBannerMobile = "/assets/img/banners/negocios/exito-mobile.jpg";
-            this.colorText = "purple";
-            break;
-
-          case "movil-exito":
-            this.imgBanner = "/assets/img/banners/negocios/movil-pc.jpg";
-            this.imgBannerMobile =
-              "/assets/img/banners/negocios/movil-mobile.jpg";
-            this.colorText = "white";
-            break;
-
-          case "haceb":
-            this.imgBanner = "/assets/img/banners/negocios/haceb-pc.jpg";
-            this.imgBannerMobile =
-              "/assets/img/banners/negocios/haceb-mobile.jpg";
-            this.colorText = "white";
-            break;
-
-          case "puntos-colombia":
-            this.imgBanner = "/assets/img/banners/negocios/puntos-colombia-pc.jpg";
-            this.imgBannerMobile =
-              "/assets/img/banners/negocios/puntos-colombia-mobile.jpg";
-            this.colorText = "purple";
-            break;
-
-          case "seguros":
-            this.imgBanner = "/assets/img/banners/negocios/seguros-pc.jpg";
-            this.imgBannerMobile =
-              "/assets/img/banners/negocios/seguros-mobile.jpg";
-            this.colorText = "white";
-            break;
-
-          case "viajes":
-            this.imgBanner = "/assets/img/banners/negocios/viajes-pc.jpg";
-            this.imgBannerMobile =
-              "/assets/img/banners/negocios/viajes-mobile.jpg";
-            this.colorText = "white";
-            break;
-
-          case "wesura":
-            this.imgBanner = "/assets/img/banners/negocios/we-sura.jpg";
-            this.imgBannerMobile =
-              "/assets/img/banners/negocios/wesura-mobile.jpg";
-            this.colorText = "purple";
-            break;
-
-          default:
-            this.imgBanner = "/assets/img/banners/banner-negocios-pc.jpg";
-            this.imgBannerMobile =
-              "/assets/img/banners/banner-negocios-mobile.jpg";
-            this.colorText = "purple";
-            break;
-        }
       }
     });
   }

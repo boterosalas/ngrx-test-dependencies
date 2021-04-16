@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 
 import { CarrouselAdminComponent } from './carrousel-admin.component';
 
-fdescribe('CarrouselAdminComponent', () => {
+describe('CarrouselAdminComponent', () => {
   let component: CarrouselAdminComponent;
   let fixture: ComponentFixture<CarrouselAdminComponent>;
   const dialogMock = {

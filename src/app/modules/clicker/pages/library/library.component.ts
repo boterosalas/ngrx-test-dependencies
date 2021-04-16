@@ -270,24 +270,7 @@ export class LibraryComponent implements OnInit {
         }
 
     }
-    downloadiOS(data, type) {
-        let blob = new Blob([data], { type: type });
-        let url = webkitURL.createObjectURL(blob);
-        const downloadLink = document.createElement("a");
-        if (type.includes("zip")) {
-            downloadLink.href = url;
-            downloadLink.download = "archivo.zip";
-            downloadLink.click();
-        } else if (type.includes("jpg")) {
-            downloadLink.href = url;
-            downloadLink.download = "archivo.jpg";
-            downloadLink.click();
-        } else if (type.includes("mp4")) {
-            downloadLink.href = url;
-            downloadLink.download = "archivo.mp4";
-            downloadLink.click();
-        }
-    }
+
     public downloadFile() {
         let datos = [this.idDownload]
         this.content.downloadF(datos).subscribe((resp) => {
