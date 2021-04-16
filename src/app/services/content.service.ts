@@ -179,7 +179,7 @@ export class ContentService {
   }
   deleteComisionCategoryBusiness(data) {
     return this.http
-      .delete(`${this.urlComission + this.apiDeleteManageCom}?id=${data}`, this.httpOptions)
+      .delete(`${this.urlComission + this.apiDeleteManageCom}?id=${data.id}&marketplace=${data.marketplace}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
@@ -202,7 +202,7 @@ export class ContentService {
           )
         ),
         map((user: ResponseService) => {
-          return user.objectResponse;
+          return user;
         })
       );
   }
