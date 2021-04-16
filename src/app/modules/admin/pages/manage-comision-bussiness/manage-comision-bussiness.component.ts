@@ -118,7 +118,7 @@ export class ManageComisionBussinessComponent implements OnInit {
       allowOutsideClick: false
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
-        this.content.deleteComisionCategoryBusiness(item.id).subscribe((resp) => {
+        this.content.deleteComisionCategoryBusiness(item.idcommission).subscribe((resp) => {
           //this.getBusinessData();
           this.searchUser(this.paginate, this.from, this.to);
         })
@@ -137,7 +137,7 @@ export class ManageComisionBussinessComponent implements OnInit {
     this.dataEditTip.controls.nameEditCategory.setValue(element.description)
     this.dataEditTip.controls.comisionEditClicker.setValue(element.commissionclicker)
     this.dataEditTip.controls.commisionEditBussiness.setValue(element.commissionbusiness)
-    this.idComision = element.id;
+    this.idComision = element.idcommission;
     let dialogRef1 = this.dialog.open(ModalGenericComponent, {
       width: "450px",
       data: {
