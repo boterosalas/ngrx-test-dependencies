@@ -100,6 +100,14 @@ export class CarrouselAdminComponent implements OnInit {
   public getAllBusiness() {
     this.content.getAllBusiness().subscribe(resp => {
       this.selectedBuss = resp;
+      this.selectedBuss.push({
+        code: "clickam",
+        description: "Clickam",
+        id: 0,
+        placeholder: "TIPO DE REPORTE",
+        tabtablecommission: "Clickam"
+      })
+
     })
 
   }
@@ -399,17 +407,20 @@ export class CarrouselAdminComponent implements OnInit {
       }
 
     }
+    let idBuss;
+    if (this.dataAddImagen.controls.business.value === 0) {
+      idBuss = null;
+    }
     if (this.idCarousel === 0) {
       datos = [{
         description: this.dataAddImagen.controls.nameContent.value,
         link: this.dataAddImagen.controls.link.value,
-        idBusiness: this.dataAddImagen.controls.business.value,
+        idBusiness: idBuss,
         Business: buss,
         infoAditional: this.dataAddImagen.controls.comision.value,
         active: visible,
         imageWeb: this.fileImgCat,
         imageMobile: this.fileImgCat2,
-        //CARROUSEL
         type: "CARROUSEL",
       }]
     } else {
@@ -418,13 +429,12 @@ export class CarrouselAdminComponent implements OnInit {
           id: this.idCarousel,
           description: this.dataAddImagen.controls.nameContent.value,
           link: this.dataAddImagen.controls.link.value,
-          idBusiness: this.dataAddImagen.controls.business.value,
+          idBusiness: idBuss,
           Business: buss,
           infoAditional: this.dataAddImagen.controls.comision.value,
           active: visible,
           imageWeb: this.fileImgCat,
           imageMobile: this.fileImgCat2,
-          //CARROUSEL
           type: "CARROUSEL",
         }]
       } else if (this.fileImgCat2 != "") {
@@ -432,7 +442,7 @@ export class CarrouselAdminComponent implements OnInit {
           id: this.idCarousel,
           description: this.dataAddImagen.controls.nameContent.value,
           link: this.dataAddImagen.controls.link.value,
-          idBusiness: this.dataAddImagen.controls.business.value,
+          idBusiness: idBuss,
           Business: buss,
           infoAditional: this.dataAddImagen.controls.comision.value,
           active: visible,
@@ -446,7 +456,7 @@ export class CarrouselAdminComponent implements OnInit {
           id: this.idCarousel,
           description: this.dataAddImagen.controls.nameContent.value,
           link: this.dataAddImagen.controls.link.value,
-          idBusiness: this.dataAddImagen.controls.business.value,
+          idBusiness: idBuss,
           Business: buss,
           infoAditional: this.dataAddImagen.controls.comision.value,
           active: visible,
@@ -460,7 +470,7 @@ export class CarrouselAdminComponent implements OnInit {
           id: this.idCarousel,
           description: this.dataAddImagen.controls.nameContent.value,
           link: this.dataAddImagen.controls.link.value,
-          idBusiness: this.dataAddImagen.controls.business.value,
+          idBusiness: idBuss,
           Business: buss,
           infoAditional: this.dataAddImagen.controls.comision.value,
           active: visible,
@@ -486,11 +496,15 @@ export class CarrouselAdminComponent implements OnInit {
         buss = this.selectedBuss[index].description
       }
     }
+    let idBuss;
+    if (this.dataAddImagenOfertas.controls.business.value === 0) {
+      idBuss = null;
+    }
     if (this.idOfertas === 0) {
       datos = [{
         description: this.dataAddImagenOfertas.controls.nameContent.value,
         link: this.dataAddImagenOfertas.controls.link.value,
-        idBusiness: this.dataAddImagenOfertas.controls.business.value,
+        idBusiness: idBuss,
         Business: buss,
         infoAditional: this.dataAddImagenOfertas.controls.comision.value,
         active: 1,
@@ -504,7 +518,7 @@ export class CarrouselAdminComponent implements OnInit {
           id: this.idOfertas,
           description: this.dataAddImagenOfertas.controls.nameContent.value,
           link: this.dataAddImagenOfertas.controls.link.value,
-          idBusiness: this.dataAddImagenOfertas.controls.business.value,
+          idBusiness: idBuss,
           Business: buss,
           infoAditional: this.dataAddImagenOfertas.controls.comision.value,
           active: 1,
@@ -517,7 +531,7 @@ export class CarrouselAdminComponent implements OnInit {
           id: this.idOfertas,
           description: this.dataAddImagenOfertas.controls.nameContent.value,
           link: this.dataAddImagenOfertas.controls.link.value,
-          idBusiness: this.dataAddImagenOfertas.controls.business.value,
+          idBusiness: idBuss,
           Business: buss,
           infoAditional: this.dataAddImagenOfertas.controls.comision.value,
           active: 1,
