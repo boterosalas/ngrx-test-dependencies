@@ -654,6 +654,8 @@ export class CarrouselAdminComponent implements OnInit {
     })
   }
   onNoClick() {
+    this.dataAddImagenOfertas.reset();
+    this.dataAddImagen.reset();
     this.dialog.closeAll();
   }
 
