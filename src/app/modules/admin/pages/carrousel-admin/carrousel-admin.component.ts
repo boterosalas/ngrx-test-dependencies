@@ -254,7 +254,9 @@ export class CarrouselAdminComponent implements OnInit {
     this.dataAddImagen.controls.link.setValue(element.link);
 
     this.dataAddImagen.controls.business.setValue(element.idbusiness)
-
+    if (element.idbusiness === null) {
+      this.dataAddImagen.controls.business.setValue(0)
+    }
     this.dataAddImagen.controls.comision.setValue(element.infoaditional)
     this.selected = element.business;
     this.idCarousel = element.id;
@@ -297,7 +299,9 @@ export class CarrouselAdminComponent implements OnInit {
     this.dataAddImagenOfertas.controls.nameContent.setValue(element.description)
     this.dataAddImagenOfertas.controls.link.setValue(element.link)
     this.dataAddImagenOfertas.controls.business.setValue(element.idbusiness);
-
+    if (element.idbusiness === null) {
+      this.dataAddImagen.controls.business.setValue(0)
+    }
     this.dataAddImagenOfertas.controls.comision.setValue(element.infoaditional)
     this.idOfertas = element.id;
     //this.idSaveTip = element.id;
@@ -405,13 +409,15 @@ export class CarrouselAdminComponent implements OnInit {
     let buss = ""
     for (let index = 0; index < this.selectedBuss.length; index++) {
       if (this.selectedBuss[index].id.toString() === bussiness.toString()) {
-        buss = this.selectedBuss[index].description
+        buss = this.selectedBuss[index].code
       }
 
     }
     let idBuss;
     if (this.dataAddImagen.controls.business.value === 0) {
       idBuss = null;
+    } else {
+      idBuss = this.dataAddImagen.controls.business.value;
     }
     if (this.idCarousel === 0) {
       datos = [{
@@ -495,12 +501,14 @@ export class CarrouselAdminComponent implements OnInit {
     let buss = ""
     for (let index = 0; index < this.selectedBuss.length; index++) {
       if (this.selectedBuss[index].id.toString() === bussiness.toString()) {
-        buss = this.selectedBuss[index].description
+        buss = this.selectedBuss[index].code
       }
     }
     let idBuss;
     if (this.dataAddImagenOfertas.controls.business.value === 0) {
       idBuss = null;
+    } else {
+      idBuss = this.dataAddImagenOfertas.controls.business.value;
     }
     if (this.idOfertas === 0) {
       datos = [{
