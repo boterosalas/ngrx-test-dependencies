@@ -229,7 +229,7 @@ export class CarrouselAdminComponent implements OnInit {
     const edit = 0;
     const template = this.templateAddImagenCarousel;
     this.dataAddImagen.reset();
-
+    this.showErrorCert = false;
     if (element.imageurlweb != "") {
       let datos = element.imageurlweb.split("/")
       this.nameFileCert = datos[datos.length - 1]
@@ -271,7 +271,7 @@ export class CarrouselAdminComponent implements OnInit {
     const idBussiness = 1;
     const edit = 0;
     const template = this.templateAddImagenOfertas;
-
+    this.showErrorCert = false;
     if (element.imageurlweb != "") {
       let datos = element.imageurlweb.split("/")
       this.nameFileCert = datos[datos.length - 1]
@@ -314,7 +314,7 @@ export class CarrouselAdminComponent implements OnInit {
     this.dataAddImagen.reset();
     this.nameFileCert2 = "";
     this.nameFileCert = "";
-
+    this.showErrorCert = false;
     this.activebutton = false;
     let dialogRef1 = this.dialog.open(ModalGenericComponent, {
       width: "450px",
@@ -334,6 +334,7 @@ export class CarrouselAdminComponent implements OnInit {
     const template = this.templateAddImagenOfertas;
     this.dataAddImagenOfertas.reset();
     this.idOfertas = 0;
+    this.showErrorCert = false;
     this.nameFileCert2 = "";
     this.nameFileCert = "";
     this.activeButtonOfer = false;
@@ -412,7 +413,7 @@ export class CarrouselAdminComponent implements OnInit {
         type: "CARROUSEL",
       }]
     } else {
-      if (this.fileImgCat != "") {
+      if (this.fileImgCat != "" && this.fileImgCat2 != "") {
         datos = [{
           id: this.idCarousel,
           description: this.dataAddImagen.controls.nameContent.value,
@@ -422,7 +423,7 @@ export class CarrouselAdminComponent implements OnInit {
           infoAditional: this.dataAddImagen.controls.comision.value,
           active: visible,
           imageWeb: this.fileImgCat,
-
+          imageMobile: this.fileImgCat2,
           //CARROUSEL
           type: "CARROUSEL",
         }]
@@ -440,7 +441,7 @@ export class CarrouselAdminComponent implements OnInit {
           //CARROUSEL
           type: "CARROUSEL",
         }]
-      } else if (this.fileImgCat != "" && this.fileImgCat2 != "") {
+      } else if (this.fileImgCat != "") {
         datos = [{
           id: this.idCarousel,
           description: this.dataAddImagen.controls.nameContent.value,

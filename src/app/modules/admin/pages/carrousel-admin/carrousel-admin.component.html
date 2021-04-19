@@ -569,7 +569,18 @@
               <span style="color: #37236a">{{ selected.description }}</span>
             </option>
           </select>
+          <mat-error
+            id="requiredName"
+            *ngIf="
+              dataAddImagen.controls.business.invalid &&
+              dataAddImagen.controls.business.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED" | translate: { formValue: "Negocio" }
+            }}</mat-error
+          >
         </mat-form-field>
+
         <mat-form-field style="width: 370px">
           <input
             matInput
@@ -642,7 +653,7 @@
           </div>
         </div>
         <mat-error *ngIf="showErrorCert" class="text-small small pb-2 d-block">
-          Formato inválido solo se pueden subir archivos con la extensión JPG y
+          Formato inválido, sólo se pueden subir archivos con la extensión JPG y
           menores de 300KB
         </mat-error>
         <input
@@ -703,7 +714,7 @@
           </div>
         </div>
         <mat-error *ngIf="showErrorCert2" class="text-small small pb-2 d-block">
-          Formato inválido solo se pueden subir archivos con la extensión JPG y
+          Formato inválido, sólo se pueden subir archivos con la extensión JPG y
           menores de 300KB
         </mat-error>
         <input
@@ -799,6 +810,16 @@
               <span style="color: #37236a">{{ selected.description }}</span>
             </option>
           </select>
+          <mat-error
+            id="requiredName"
+            *ngIf="
+              dataAddImagenOfertas.controls.business.invalid &&
+              dataAddImagenOfertas.controls.business.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED" | translate: { formValue: "Negocio" }
+            }}</mat-error
+          >
         </mat-form-field>
         <mat-form-field style="width: 370px">
           <input
@@ -872,7 +893,7 @@
           </div>
         </div>
         <mat-error *ngIf="showErrorCert" class="text-small small pb-2 d-block">
-          Formato inválido solo se pueden subir archivos con la extensión JPG y
+          Formato inválido, sólo se pueden subir archivos con la extensión JPG y
           menores de 300KB
         </mat-error>
         <input
