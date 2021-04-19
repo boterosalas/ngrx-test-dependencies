@@ -100,6 +100,8 @@ export class CarrouselAdminComponent implements OnInit {
   public getAllBusiness() {
     this.content.getAllBusiness().subscribe(resp => {
       this.selectedBuss = resp;
+      console.log(resp);
+
       this.selectedBuss.push({
         code: "clickam",
         description: "Clickam",
