@@ -601,7 +601,7 @@
         >
           <div fxLayout="column" fxLayoutAlign="center" class="space">
             <strong class="title-gray" style="color: #a7a3b1; font-size: 11px"
-              >ADJUNTAR IMAGEN WEB (2000X671PX, FORMATO .JPG, MAX 250KB)</strong
+              >ADJUNTAR IMAGEN WEB (2000X671PX, FORMATO .JPG, MAX 300KB)</strong
             >
             <span
               class="title-secondary"
@@ -643,7 +643,7 @@
         </div>
         <mat-error *ngIf="showErrorCert" class="text-small small pb-2 d-block">
           Formato inválido solo se pueden subir archivos con la extensión JPG y
-          menores de 250KB
+          menores de 300KB
         </mat-error>
         <input
           (change)="onFileChangeFiles($event, 'image')"
@@ -703,7 +703,7 @@
           </div>
         </div>
         <mat-error *ngIf="showErrorCert2" class="text-small small pb-2 d-block">
-          Formato inválido solo se pueden subir archivos con la extensión SVG y
+          Formato inválido solo se pueden subir archivos con la extensión JPG y
           menores de 300KB
         </mat-error>
         <input
