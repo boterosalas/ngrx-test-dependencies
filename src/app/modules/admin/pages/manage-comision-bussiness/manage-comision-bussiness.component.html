@@ -69,11 +69,7 @@
         >
           CÓDIGO DE CATEGORÍA
         </th>
-        <td
-          mat-cell
-          *matCellDef="let element: let i=index"
-          (click)="userInfo(dataSource.data[i])"
-        >
+        <td mat-cell *matCellDef="let element: let i=index">
           <p class="m-0 text-font">{{ element.code }}</p>
         </td>
       </ng-container>
@@ -86,11 +82,7 @@
         >
           NOMBRE DE CATEGORÍA
         </th>
-        <td
-          mat-cell
-          *matCellDef="let element: let i=index"
-          (click)="userInfo(dataSource.data[i])"
-        >
+        <td mat-cell *matCellDef="let element: let i=index">
           <p class="m-0 text-font">{{ element.description }}</p>
         </td>
       </ng-container>
@@ -103,11 +95,7 @@
         >
           COMISIÓN DE CLICKER
         </th>
-        <td
-          mat-cell
-          *matCellDef="let element: let i=index"
-          (click)="userInfo(dataSource.data[i])"
-        >
+        <td mat-cell *matCellDef="let element: let i=index">
           <p class="m-0 text-font">{{ element.commissionclicker }} %</p>
         </td>
       </ng-container>
