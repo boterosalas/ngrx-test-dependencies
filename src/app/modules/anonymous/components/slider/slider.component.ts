@@ -255,7 +255,7 @@ export class SliderComponent implements OnInit {
 
   public dataCategory(category) {
     let token = localStorage.getItem("ACCESS_TOKEN");
-    if (token !== null && category.business !== 'Clickam') {
+    if (token !== null && category.business !== 'clickam') {
       this.tokenInfo = this.token.userInfo();
       this.idClicker = this.tokenInfo.idclicker;
       this.showFormCustomer = true;
@@ -313,7 +313,7 @@ export class SliderComponent implements OnInit {
         this.enableCopy = true;
       })
     }
-    if (category.business === 'Clickam' && !!token) {
+    if (category.business === 'clickam' && !!token) {
       window.location.replace(category.link);
     }
   }
