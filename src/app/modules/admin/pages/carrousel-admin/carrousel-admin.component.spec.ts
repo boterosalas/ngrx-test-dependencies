@@ -1,5 +1,6 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog, MatDialogRef, MatMenuModule, MatSlideToggleModule, MAT_DIALOG_DATA } from '@angular/material';
@@ -39,6 +40,13 @@ describe('CarrouselAdminComponent', () => {
     userMessage: "se ha enviado un correo",
     objectResponse: []
   };
+  const busss = [{
+    code: "clickam",
+    description: "Clickam",
+    id: 0,
+    placeholder: "TIPO DE REPORTE",
+    tabtablecommission: "Clickam"
+  }]
   const error = {
     state: "Error",
     userMessage: "se ha enviado un correo",
@@ -63,7 +71,7 @@ describe('CarrouselAdminComponent', () => {
         RouterTestingModule,
         MatMenuModule,
         BrowserAnimationsModule
-      ],
+      ], schemas: [NO_ERRORS_SCHEMA],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: dialogMock },
@@ -74,7 +82,7 @@ describe('CarrouselAdminComponent', () => {
       .compileComponents();
     mockContentService.getOffersbyType.and.returnValue(of(datos));
     mockContentService.saveOrderOfertBusiness.and.returnValue(of(audit));
-    mockContentService.getAllBusiness.and.returnValue(of(audit));
+    mockContentService.getAllBusiness.and.returnValue(of(busss));
     mockContentService.deleteOfer.and.returnValue(of(audit));
     mockContentService.saveOfertBusiness.and.returnValue(of(audit));
 
@@ -105,9 +113,9 @@ describe('CarrouselAdminComponent', () => {
     );
     component.selectAll();
     component.selectAllOfertas();
-    component.saveImagenOfertas();
+    //component.saveImagenOfertas();
     component.saveOrder([{ id: 1, orderBy: 1 }, { id: 2, orderBy: 2 }]);
-    component.saveImagenCarousel();
+    //component.saveImagenCarousel();
     component.deleteComisionCarousel({ id: 1 });
     component.deleteComisionOferta({ id: 1 });
     component.checkButton();
