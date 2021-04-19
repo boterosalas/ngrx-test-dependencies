@@ -112,8 +112,8 @@ export class CarrouselAdminComponent implements OnInit {
     for (let i = 0; i < this.dataSource.length; i++) {
       this.dataSource[i].orderby = i + 1
       datosSourceSend.push({
-        idbusiness: this.dataSource[i].id,
-        order: i + 1
+        id: this.dataSource[i].id,
+        orderby: i + 1
       })
     }
     this.saveOrder(datosSourceSend)
