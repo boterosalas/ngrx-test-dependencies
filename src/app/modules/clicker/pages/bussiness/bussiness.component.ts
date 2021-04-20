@@ -407,13 +407,13 @@ export class BussinessComponent implements OnInit, OnDestroy {
    */
 
   public dataSliderCategory(sliderInfo) {
-    console.log("Test")
+
     let token = localStorage.getItem("ACCESS_TOKEN");
     if (token !== null && sliderInfo.business !== "clickam") {
       this.tokenInfo = this.token.userInfo();
       this.idClicker = this.tokenInfo.idclicker;
       // this.idClicker = this.tokenInfo.idclicker.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-      console.log(sliderInfo);
+
       const dataCategoryUrl = sliderInfo.link;
       this.showForm = false;
       this.urlshorten = "";

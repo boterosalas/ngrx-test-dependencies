@@ -54,7 +54,7 @@ export class AllBussinessComponent implements OnInit, OnDestroy {
   }
 
   public bussinessNavigation(bussiness) {
-    console.log(bussiness);
+
     let params = {
       id: bussiness.id,
       code: bussiness.code,

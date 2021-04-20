@@ -375,11 +375,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     //this.offersWeb = offer.web;
     //});
     this.subscription = this.content.getOffersbyType({ id: "OFERTA", admin: false }).subscribe((resp) => {
-      console.log(resp);
+
       this.offersWeb = resp;
     })
     this.subscription = this.content.getOffersbyType({ id: "CARROUSEL", admin: false }).subscribe((resp) => {
-      console.log(resp);
+
       this.sliderWeb = resp;
       //this.sliderMobile = slide.mobile;
     })
