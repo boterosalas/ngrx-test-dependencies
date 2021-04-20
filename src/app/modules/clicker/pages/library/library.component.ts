@@ -71,7 +71,7 @@ export class LibraryComponent implements OnInit {
         this.dataSource(item);
     }
     public dataSource(item: any) {
-        console.log(item)
+
         this.content.getVideosImage(item.id).subscribe((resp: any) => {
 
             if (resp.state === "Success") {
