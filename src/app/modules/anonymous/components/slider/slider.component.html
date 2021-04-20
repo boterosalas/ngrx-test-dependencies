@@ -138,6 +138,10 @@
           </button>
 
           <button
+            *ngIf="
+              buttonReferir.business === 'exito' ||
+              buttonReferir.business === 'carulla'
+            "
             mat-button
             id="refer"
             color="orange"
@@ -229,6 +233,10 @@
         (click)="showReference()"
         fxLayout="row"
         fxLayoutAlign="start start"
+        *ngIf="
+          buttonReferir.business === 'exito' ||
+          buttonReferir.business === 'carulla'
+        "
       >
         <span
           ngClass="gtmrs f-15 {{ classButtonRefer }}"
@@ -539,6 +547,10 @@
 
         <button
           mat-button
+          *ngIf="
+            buttonReferir.business === 'exito' ||
+            buttonReferir.business === 'carulla'
+          "
           ngClass="gtmrs  mb-2 mt-2 {{ classButtonRefer }}"
           (click)="showReference()"
           fxLayout="row"
