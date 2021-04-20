@@ -1,23 +1,25 @@
+<div
+  *ngFor="let item of items; let i = index"
+  class="card-{{ i }} white"
+  ngClass.gt-xs="card-dash mr-2"
+>
+  <h3 class="f-18">{{ item.title }}</h3>
 
-<div *ngFor="let item of items; let i = index" class="card-{{i}} white" ngClass.gt-xs="card-dash mr-2">
-    <h3 class="f-18">{{item.title}}</h3>
-    
-    <mat-card>
-        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
-            <div fxLayout="column">
+  <mat-card style="border-radius: 10px !important">
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
+      <div fxLayout="column">
+        <span class="galano-bold f-22" *ngIf="i === 3 || i === 4">
+          {{ item.number | currency: "":"symbol":"1.0-0" }}
+        </span>
+        <span class="galano-bold f-22" *ngIf="i !== 3 && i !== 4">
+          {{ item.number }}
+        </span>
 
-                <span class="galano-bold f-22" *ngIf="i === 3 || i === 4 ">
-                    {{item.number | currency: "":"symbol":"1.0-0"}}
-                </span>
-                <span class="galano-bold f-22" *ngIf="i !== 3 && i !== 4 ">
-                    {{item.number}}
-                </span>
-
-                <span class="galono-bold f-13">{{item.subtitle}}</span>
-            </div>
-            <div fxLayout="column">
-                <img [src]="item.icon" [alt]="item.subtitle">
-            </div>
-        </div>
-    </mat-card>
+        <span class="galono-bold f-13">{{ item.subtitle }}</span>
+      </div>
+      <div fxLayout="column">
+        <img [src]="item.icon" [alt]="item.subtitle" />
+      </div>
+    </div>
+  </mat-card>
 </div>
