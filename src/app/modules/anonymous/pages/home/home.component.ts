@@ -32,6 +32,7 @@ import { LinksService } from "src/app/services/links.service";
 import { MessagingService } from "src/app/shared/messaging.service";
 import { Meta } from '@angular/platform-browser';
 import { MasterDataService } from "src/app/services/master-data.service";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-login",
@@ -114,6 +115,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   textProteccion: any;
   textTransparencia: any;
   textPrograma: any;
+  formData: boolean = false;
+  sendData: boolean = false;
+  dateForm: FormGroup;
   constructor(
     public router: Router,
     private route: ActivatedRoute,
@@ -127,13 +131,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     private messagingService: MessagingService,
     private _snackBar: MatSnackBar,
     private metaTagService: Meta,
+    private fb: FormBuilder,
     private personalInfo: MasterDataService,
   ) {
     /**
      *  Verifica que en la ruta de inicio exista el parametro de email y activa el usuario
      * @param email
      */
+    this.dateForm = this.fb.group({
 
+      description: [null, Validators.required],
+
+    });
     this.subscription = this.route.queryParams.subscribe((params) => {
       if (params.email) {
         this.email = params.email;
@@ -613,4 +622,19 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
+  public saveProposal() {
+    let datos = {
+      message: this.dateForm.controls.description.value
+    }
+    this.user.saveFeedback(datos).subscribe((resp) => {
+      this.sendData = true;
+    })
+  }
+  public cerrarForm() {
+    this.formData = false;
+    this.sendData = false;
+  }
+  public openForm() {
+    this.formData = true;
+  }
 }

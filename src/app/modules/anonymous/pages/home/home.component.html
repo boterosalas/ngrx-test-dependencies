@@ -205,97 +205,182 @@
 <div class="container">
   <app-new-business (openModal)="openRegisterBusiness()"></app-new-business>
 </div>
-<div class="forms-help" fxLayout="row" fxLayoutAlign="center">
-  <div class="mt-4">
-    <img src="/assets/img/compartir_testimonial.svg" alt="" />
+<div
+  *ngIf="auth.isLoggedIn()"
+  class="forms-help"
+  fxLayout="row"
+  fxLayoutAlign="center"
+>
+  <div fxLayout="column" fxLayoutAlign="center">
+    <div fxLayout="row" fxLayoutAlign="center">
+      <div class="mt-4">
+        <img src="/assets/img/compartir_testimonial.svg" alt="" />
+      </div>
+      <div class="mt-4">
+        <h4 class="text-cuentanos mt-0 mb-0 ml-3">
+          ¿Crees que en Clickam podemos mejorar algo?
+        </h4>
+        <p class="expresion-cuentanos mt-0 mb-0 ml-3">¡Cuéntanos!</p>
+      </div>
+    </div>
+    <div
+      *ngIf="!formData && !sendData"
+      class="mt-2 mb-4"
+      fxLayout="row"
+      fxLayoutAlign="center"
+    >
+      <button class="cursor-pointer open-form" (click)="openForm()">
+        Abrir formulario
+        <mat-icon class="arrow-down">keyboard_arrow_down</mat-icon>
+      </button>
+    </div>
+    <div
+      *ngIf="formData && !sendData"
+      class="mt-2 mb-4 pl-2 pr-2"
+      fxLayout="column"
+      fxLayoutAlign="center"
+    >
+      <form [formGroup]="dateForm">
+        <label class="label-up-text" for="picker">Mensaje </label>
+        <div class="mt-1">
+          <textarea
+            matInput
+            placeholder="Cuéntanos en qué podemos mejorar."
+            id="description"
+            type="text"
+            formControlName="description"
+            required
+            class="text-area-heigth"
+          ></textarea>
+        </div>
+      </form>
+      <div>
+        <div class="mt-3 mb-2" fxLayout="row" fxLayoutAlign="end end">
+          <button
+            mat-button
+            ngClass="button_cancel"
+            style="color: #ffffff"
+            (click)="cerrarForm()"
+          >
+            Cancelar
+          </button>
+          <button
+            mat-raised-button
+            class="button-oferts ml-2"
+            color="orange"
+            (click)="saveProposal()"
+            id="download-users"
+            [disabled]="!dateForm.valid"
+          >
+            Enviar
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      *ngIf="formData && sendData"
+      class="mt-2 mb-4"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      style="text-align: center"
+    >
+      <i
+        class="tio-checkmark_circle"
+        style="font-size: 38px; color: #ffffff"
+      ></i>
+      <p class="expresion-cuentanos mt-0 mb-0 ml-3">
+        ¡Tu comentario ha sido enviado!
+      </p>
+      <button
+        class="cursor-pointer open-form mt-2"
+        style="width: 125px"
+        (click)="cerrarForm()"
+      >
+        Cerrar
+      </button>
+    </div>
   </div>
-  <div class="mt-4">
-    <h4 class="text-cuentanos mt-0 mb-0 ml-3">
-      ¿Crees que en Clickam podemos mejorar algo?
-    </h4>
-    <p class="expresion-cuentanos mt-0 mb-0 ml-3">¡Cuéntanos!</p>
-  </div>
-</div>
-<ng-template #templateBusiness>
-  <app-new-business-form
-    (registerBusinessEmit)="sendDataBusiness($event)"
-    [categories]="categories"
-  ></app-new-business-form>
-</ng-template>
+  <ng-template #templateBusiness>
+    <app-new-business-form
+      (registerBusinessEmit)="sendDataBusiness($event)"
+      [categories]="categories"
+    ></app-new-business-form>
+  </ng-template>
 
-<ng-template #templatePromo>
-  <div fxShow.gt-xs="true" fxShow.xs="false">
-    <a [href]="modalHref" [target]="modalTarget">
-      <img
-        [src]="modalSrcWeb"
-        class="img-responsive w-100 cursor-pointer"
-        [alt]="modalAltWeb"
-      />
-    </a>
-  </div>
-
-  <div fxShow.gt-xs="false" fxShow.xs="true">
-    <a [href]="modalHref" [target]="modalTarget">
-      <img
-        [src]="modalSrcMobile"
-        class="img-responsive w-100 cursor-pointer"
-        [alt]="modalAltMobile"
-      />
-    </a>
-  </div>
-</ng-template>
-
-<ng-template #templateTerms>
-  <div class="terms text-center" *ngIf="stepTerms">
-    <img class="icon" src="/assets/img/icon.svg" alt="icon" />
-    <div innerHtml="{{ 'GENERIC.NEW_TERMS' | translate }}"></div>
-    <button mat-raised-button color="orange" (click)="showTerms()">
-      Conócelos aquí
-    </button>
-  </div>
-
-  <div class="terms" *ngIf="newTermsHTML">
-    <h2 class="border-bottom-orange-init">{{ textTerminos }}</h2>
-    <div [innerHtml]="contentTerminos"></div>
-    <h2 class="border-bottom-orange-init">{{ textProteccion }}</h2>
-    <div [innerHtml]="contentProteccion"></div>
-    <h2 class="border-bottom-orange-init">{{ textTransparencia }}</h2>
-    <div [innerHtml]="contentTransparencia"></div>
-    <h2 class="border-bottom-orange-init">{{ textPrograma }}</h2>
-    <div [innerHtml]="contentPrograma"></div>
-    <div class="mb-3">
-      <span>
-        <mat-checkbox id="chkaccept" (change)="acceptTermsCheck($event)">
-        </mat-checkbox>
-      </span>
-      <span class="accept-terms ml-2">
-        {{ "REGISTER.ACCEPT" | translate }}
-      </span>
+  <ng-template #templatePromo>
+    <div fxShow.gt-xs="true" fxShow.xs="false">
+      <a [href]="modalHref" [target]="modalTarget">
+        <img
+          [src]="modalSrcWeb"
+          class="img-responsive w-100 cursor-pointer"
+          [alt]="modalAltWeb"
+        />
+      </a>
     </div>
 
-    <span fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
-      <button
-        mat-raised-button
-        id="accept-modal"
-        class="mb-2 mt-2 center button register-button"
-        ngClass.gt-xs="pl-5 pr-5"
-        ngClass.xs="pl-2 pr-2"
-        color="orange"
-        [disabled]="!activateButton"
-        (click)="sendReferalsTerm()"
-      >
-        {{ "GENERIC.ACCEPT" | translate }}
-      </button>
+    <div fxShow.gt-xs="false" fxShow.xs="true">
+      <a [href]="modalHref" [target]="modalTarget">
+        <img
+          [src]="modalSrcMobile"
+          class="img-responsive w-100 cursor-pointer"
+          [alt]="modalAltMobile"
+        />
+      </a>
+    </div>
+  </ng-template>
 
-      <button
-        (click)="logout()"
-        class="mt-2 center button register-button"
-        ngClass.gt-xs="pl-5 pr-5"
-        ngClass.xs="pl-2 pr-2"
-        mat-raised-button
-      >
-        {{ "GENERIC.CANCEL" | translate }}
+  <ng-template #templateTerms>
+    <div class="terms text-center" *ngIf="stepTerms">
+      <img class="icon" src="/assets/img/icon.svg" alt="icon" />
+      <div innerHtml="{{ 'GENERIC.NEW_TERMS' | translate }}"></div>
+      <button mat-raised-button color="orange" (click)="showTerms()">
+        Conócelos aquí
       </button>
-    </span>
-  </div>
-</ng-template>
+    </div>
+
+    <div class="terms" *ngIf="newTermsHTML">
+      <h2 class="border-bottom-orange-init">{{ textTerminos }}</h2>
+      <div [innerHtml]="contentTerminos"></div>
+      <h2 class="border-bottom-orange-init">{{ textProteccion }}</h2>
+      <div [innerHtml]="contentProteccion"></div>
+      <h2 class="border-bottom-orange-init">{{ textTransparencia }}</h2>
+      <div [innerHtml]="contentTransparencia"></div>
+      <h2 class="border-bottom-orange-init">{{ textPrograma }}</h2>
+      <div [innerHtml]="contentPrograma"></div>
+      <div class="mb-3">
+        <span>
+          <mat-checkbox id="chkaccept" (change)="acceptTermsCheck($event)">
+          </mat-checkbox>
+        </span>
+        <span class="accept-terms ml-2">
+          {{ "REGISTER.ACCEPT" | translate }}
+        </span>
+      </div>
+
+      <span fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
+        <button
+          mat-raised-button
+          id="accept-modal"
+          class="mb-2 mt-2 center button register-button"
+          ngClass.gt-xs="pl-5 pr-5"
+          ngClass.xs="pl-2 pr-2"
+          color="orange"
+          [disabled]="!activateButton"
+          (click)="sendReferalsTerm()"
+        >
+          {{ "GENERIC.ACCEPT" | translate }}
+        </button>
+
+        <button
+          (click)="logout()"
+          class="mt-2 center button register-button"
+          ngClass.gt-xs="pl-5 pr-5"
+          ngClass.xs="pl-2 pr-2"
+          mat-raised-button
+        >
+          {{ "GENERIC.CANCEL" | translate }}
+        </button>
+      </span>
+    </div>
+  </ng-template>
+</div>

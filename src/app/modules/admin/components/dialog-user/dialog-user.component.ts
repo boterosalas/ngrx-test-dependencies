@@ -104,7 +104,7 @@ export class DialogUserComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isLoggedIn = this.auth.isLoggedIn();
     this.dataAddImagen = this.fb.group({
-      numberDoc: [null, Validators.required],
+      number: [null, Validators.required],
       email: [null, Validators.required],
       cellphone: [null, Validators.required],
     });
@@ -169,7 +169,7 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     const template = this.templateAddImagenCarousel;
 
     this.dataAddImagen.reset();
-    this.dataAddImagen.controls.numberDoc.setValue(this.data.identification)
+    this.dataAddImagen.controls.number.setValue(this.data.identification)
     this.dataAddImagen.controls.cellphone.setValue(this.data.cellphone)
     this.dataAddImagen.controls.email.setValue(this.data.email)
     this.dialogRef2 = this.dialog.open(ModalGenericComponent, {
@@ -181,5 +181,16 @@ export class DialogUserComponent implements OnInit, OnDestroy {
         edit
       },
     });
+  }
+  public saveInfoPersonal() {
+    let datos = {
+      userId: this.data.userId,
+      email: this.dataAddImagen.controls.email.value,
+      cellPhone: this.dataAddImagen.controls.cellphone.value,
+      identification: this.dataAddImagen.controls.number.value,
+    }
+    this.user.updateInfoClicker(datos).subscribe((resp) => {
+      this.onNoClickEdit();
+    })
   }
 }

@@ -469,7 +469,7 @@
         <input
           matInput
           placeholder="NÚMERO DE DOCUMENTO"
-          formControlName="numberDoc"
+          formControlName="number"
           type="text"
           required
           class="text-area-heigth"
@@ -478,8 +478,8 @@
         <mat-error
           id="requiredName"
           *ngIf="
-            dataAddImagen.controls.numberDoc.invalid &&
-            dataAddImagen.controls.numberDoc.errors.required
+            dataAddImagen.controls.number.invalid &&
+            dataAddImagen.controls.number.errors.required
           "
           >{{
             "GENERIC.REQUIRED" | translate: { formValue: "Número de documento" }

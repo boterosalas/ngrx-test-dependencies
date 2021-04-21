@@ -63,7 +63,9 @@ export class UserService {
   apiGetExcelNews = "new/getnewsexcel";
   apiSetStatusNew = "new/changestatusnew";
   apiReportLife = "report/getcommissionsbyuser";
-  apiReportNovetly = "novelty/getnoveltiesbyuser"
+  apiReportNovetly = "novelty/getnoveltiesbyuser";
+  apiUpdateInfoClicker = "userprofile/updateinfoclicker";
+  apiSaveFeedBack = "userprofile/savefeedback";
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
@@ -565,6 +567,40 @@ export class UserService {
   public getNovetlyUser() {
     return this.http
       .get(`${this.urlReports}${this.apiReportNovetly}?from=1&to=50&orderBy=CONSECUTIVE&ordination=DESC`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+  }
+  public updateInfoClicker(data: any) {
+    return this.http
+      .post(
+        `${this.url}${this.apiUpdateInfoClicker}`,
+        data,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+  }
+  public saveFeedback(data: any) {
+    return this.http
+      .post(
+        `${this.url}${this.apiSaveFeedBack}`,
+        data,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(

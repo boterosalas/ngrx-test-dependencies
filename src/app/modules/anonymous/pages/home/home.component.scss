@@ -88,6 +88,22 @@
 .heigth-image {
   height: 118px;
 }
+.text-area-heigth {
+  width: 100%;
+  height: 80px;
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+.text-area-heigth::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #f3f1f680;
+}
+.label-up-text {
+  color: #ffffff;
+  font-size: 14px;
+}
 @media screen and (max-width: 600px) {
   .card-library {
     h3 {
@@ -101,18 +117,35 @@
   .heigth-image {
     height: auto;
   }
+  .text-area-heigth {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
 }
 .forms-help {
   background-color: #8d7eb7;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  height: 175px;
 }
 .text-cuentanos {
   font-size: 24px;
   color: #ffffff;
 }
 .expresion-cuentanos {
-  font-size: 18;
+  font-size: 18px;
   color: #ffffff;
+}
+.open-form {
+  border-radius: 10px;
+  border: 1px solid #ffffff;
+  background-color: transparent;
+  color: #ffffff;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+.arrow-down {
+  position: relative;
+  top: 6px;
 }
