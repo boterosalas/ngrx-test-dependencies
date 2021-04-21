@@ -4,14 +4,17 @@ import {
   Inject,
   Output,
   EventEmitter,
-  OnDestroy
+  OnDestroy,
+  ViewChild,
+  TemplateRef
 } from "@angular/core";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { Subscription } from "rxjs";
 import { UserService } from "src/app/services/user.service";
 import { AuthService } from "src/app/services/auth.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import * as moment from "moment";
+import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
 moment.locale("es");
 @Component({
   selector: "app-dialog-user",
@@ -21,20 +24,23 @@ moment.locale("es");
 export class DialogUserComponent implements OnInit, OnDestroy {
   constructor(
     public dialogRef: MatDialogRef<any>,
+    public dialogRef2: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private user: UserService,
     private auth: AuthService,
+    private dialog: MatDialog,
     private fb: FormBuilder,
   ) {
   }
   dateFormHoja: FormGroup;
-
+  dataAddImagen: FormGroup;
   nextPayment: any;
   afterPayment: any;
   displayedColumns: string[] = ['negocio', 'linksgenerator', 'linksclicker', 'commision', 'sells'];
   selectedTab: number = 1;
   dateLastPayment: any;
   placeholder: string;
+  @ViewChild("templateInfoPersonal", { static: false }) templateAddImagenCarousel: TemplateRef<any>;
   @Output() state = new EventEmitter();
   @Output() comunications = new EventEmitter();
   @Output() verified = new EventEmitter();
@@ -86,6 +92,9 @@ export class DialogUserComponent implements OnInit, OnDestroy {
   onNoClick(): void {
     this.dialogRef.close();
   }
+  onNoClickEdit(): void {
+    this.dialogRef2.close();
+  }
   pad(number) {
     if (number < 10) {
       return '0' + number;
@@ -94,7 +103,11 @@ export class DialogUserComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     this.isLoggedIn = this.auth.isLoggedIn();
-
+    this.dataAddImagen = this.fb.group({
+      numberDoc: [null, Validators.required],
+      email: [null, Validators.required],
+      cellphone: [null, Validators.required],
+    });
 
   }
 
@@ -148,5 +161,25 @@ export class DialogUserComponent implements OnInit, OnDestroy {
       })
     });
 
+  }
+  editInfoPersonal() {
+    const title = "Editar datos personales";
+    const idBussiness = 1;
+    const edit = 0;
+    const template = this.templateAddImagenCarousel;
+
+    this.dataAddImagen.reset();
+    this.dataAddImagen.controls.numberDoc.setValue(this.data.identification)
+    this.dataAddImagen.controls.cellphone.setValue(this.data.cellphone)
+    this.dataAddImagen.controls.email.setValue(this.data.email)
+    this.dialogRef2 = this.dialog.open(ModalGenericComponent, {
+      width: "450px",
+      data: {
+        title,
+        idBussiness,
+        template,
+        edit
+      },
+    });
   }
 }

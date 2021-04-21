@@ -1,87 +1,124 @@
 <app-banner
-  title="{{ 'USERS.USERS' | translate}}"
+  title="{{ 'USERS.USERS' | translate }}"
   img="/assets/img/banners/banner-dashboard-pc.jpg"
   imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
 ></app-banner>
 
 <div class="container m-t4 fade-in">
-    <p class="title-blue">REPORTE DE USUARIOS </p>
-    <div class="mt-4 container-forms" fxLayout="row">
-    <div class=" ml-4 downloadUsers user-transactions">
-    <form
-        [formGroup]="dateForm"    
-        >
+  <p class="title-blue">REPORTE DE USUARIOS</p>
+  <div class="mt-4 container-forms" fxLayout="row">
+    <div class="ml-4 downloadUsers user-transactions">
+      <form [formGroup]="dateForm">
         <mat-form-field class="selected-report">
-          <mat-placeholder class="selected-placeholder">TIPO DE REPORTE</mat-placeholder>
+          <mat-placeholder class="selected-placeholder"
+            >TIPO DE REPORTE</mat-placeholder
+          >
           <mat-select
-            
             id="tipoReport"
             formControlName="tipoReport"
             class="selected-report"
           >
-            <mat-option (click)="onChangeSelected(selected.titulo)" *ngFor="let selected of selecteds" value="{{ selected.value }}">
-              <span >{{ selected.titulo }}</span>
+            <mat-option
+              (click)="onChangeSelected(selected.titulo)"
+              *ngFor="let selected of selecteds"
+              value="{{ selected.value }}"
+            >
+              <span>{{ selected.titulo }}</span>
             </mat-option>
           </mat-select>
         </mat-form-field>
-        
-        <mat-icon [hidden]="dateNoVisible"  class="icon-date" matPrefix>date_range</mat-icon>
-        <input [hidden]="dateNoVisible"  (change)="change()" formControlName="dateRange"  [locale]="locale" placeholder="Seleccione fechas" type="text" [maxDate]="maxDate"  ngxDaterangepickerMd class="form-control border-input mat-elevation-z1 p-2 border-radius"/>
-        <button mat-raised-button color="orange" (click)="getAnyReport()" id="download-users" class="ml-2" [disabled]="disableButon">Exportar <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>    
-    </form>
-    
-  </div>
-  
-  <div class="container-search">
-    <app-search-users class="searchUser" (search)="searchUser($event)"></app-search-users>
-  </div>
-</div>
-    
-
-    <div id="users-table">
-        <app-table-users (dataUser)="userData($event)" (dataEmail)="userEmail($event)" [dataSource]="dataSource" (sortDataUser)="sort($event)"></app-table-users>
-        <mat-paginator
-        [length]="totalItems"
-            [pageSize]="pageSize"
-            [pageSizeOptions]="[50]"
-            [pageIndex]="pageIndex"
-            (page)="pagination($event)"
-       ></mat-paginator>
+        <i [hidden]="dateNoVisible" class="tio-date_range icon-date"></i>
+        <input
+          [hidden]="dateNoVisible"
+          (change)="change()"
+          formControlName="dateRange"
+          [locale]="locale"
+          placeholder="Seleccione fechas"
+          type="text"
+          [maxDate]="maxDate"
+          ngxDaterangepickerMd
+          class="form-control border-input mat-elevation-z1 p-2 border-radius"
+        />
+        <button
+          mat-raised-button
+          color="orange"
+          (click)="getAnyReport()"
+          id="download-users"
+          class="ml-2"
+          [disabled]="disableButon"
+        >
+          Exportar
+          <i class="tio-download_from_cloud style-icon"></i>
+        </button>
+      </form>
     </div>
+
+    <div class="container-search">
+      <app-search-users
+        class="searchUser"
+        (search)="searchUser($event)"
+      ></app-search-users>
+    </div>
+  </div>
+
+  <div id="users-table">
+    <app-table-users
+      (dataUser)="userData($event)"
+      (dataEmail)="userEmail($event)"
+      [dataSource]="dataSource"
+      (sortDataUser)="sort($event)"
+    ></app-table-users>
+    <mat-paginator
+      [length]="totalItems"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[50]"
+      [pageIndex]="pageIndex"
+      (page)="pagination($event)"
+    ></mat-paginator>
+  </div>
 </div>
 
 <!-- template Email-->
 
 <ng-template #templateDialogEmail>
-    <form [formGroup]="emailForm" fxLayout="column" fxFlex="100" class="formw">
-        <mat-form-field>
-            <input
-              matInput
-              id="email"
-              type="email"
-              placeholder="{{ 'GENERIC.EMAIL' | translate }}"
-              formControlName="email"
-              spacebar
-              required
-            />
-            <span matPrefix><mat-icon color="gray">person</mat-icon></span>
-            <mat-error id="introduceEmail" *ngIf="emailForm.controls.email.invalid && emailForm.controls.email.errors.required">{{
-              "LOGIN.INTRODUCE_EMAIL" | translate
-            }}</mat-error>
-            <mat-error id="invalidEmail" *ngIf="emailForm.controls.email.invalid && emailForm.controls.email.errors.pattern">{{
-              "LOGIN.INVALID_EMAIL" | translate
-            }}</mat-error>
-          </mat-form-field>
-      <button
-        mat-raised-button
-        id="editProfile"
-        class="center button button-100 mt-4"
-        color="orange"
-        (click)="changeEmail()"
-        [disabled]="!emailForm.valid"
+  <form [formGroup]="emailForm" fxLayout="column" fxFlex="100" class="formw">
+    <mat-form-field>
+      <input
+        matInput
+        id="email"
+        type="email"
+        placeholder="{{ 'GENERIC.EMAIL' | translate }}"
+        formControlName="email"
+        spacebar
+        required
+      />
+      <span matPrefix><mat-icon color="gray">person</mat-icon></span>
+      <mat-error
+        id="introduceEmail"
+        *ngIf="
+          emailForm.controls.email.invalid &&
+          emailForm.controls.email.errors.required
+        "
+        >{{ "LOGIN.INTRODUCE_EMAIL" | translate }}</mat-error
       >
-        {{ "GENERIC.SAVE" | translate }}
-      </button>
-    </form>
-  </ng-template>
-  
+      <mat-error
+        id="invalidEmail"
+        *ngIf="
+          emailForm.controls.email.invalid &&
+          emailForm.controls.email.errors.pattern
+        "
+        >{{ "LOGIN.INVALID_EMAIL" | translate }}</mat-error
+      >
+    </mat-form-field>
+    <button
+      mat-raised-button
+      id="editProfile"
+      class="center button button-100 mt-4"
+      color="orange"
+      (click)="changeEmail()"
+      [disabled]="!emailForm.valid"
+    >
+      {{ "GENERIC.SAVE" | translate }}
+    </button>
+  </form>
+</ng-template>

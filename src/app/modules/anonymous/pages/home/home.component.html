@@ -205,6 +205,17 @@
 <div class="container">
   <app-new-business (openModal)="openRegisterBusiness()"></app-new-business>
 </div>
+<div class="forms-help" fxLayout="row" fxLayoutAlign="center">
+  <div class="mt-4">
+    <img src="/assets/img/compartir_testimonial.svg" alt="" />
+  </div>
+  <div class="mt-4">
+    <h4 class="text-cuentanos mt-0 mb-0 ml-3">
+      ¿Crees que en Clickam podemos mejorar algo?
+    </h4>
+    <p class="expresion-cuentanos mt-0 mb-0 ml-3">¡Cuéntanos!</p>
+  </div>
+</div>
 <ng-template #templateBusiness>
   <app-new-business-form
     (registerBusinessEmit)="sendDataBusiness($event)"

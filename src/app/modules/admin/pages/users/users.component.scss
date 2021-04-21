@@ -20,8 +20,10 @@
 
 .icon-date {
   position: relative;
-  top: 7px;
+  top: 4px;
   left: 30px;
+  font-size: 22px;
+  color: #8d7eb7;
 }
 
 .form-control {
@@ -81,4 +83,9 @@
   color: #37236a;
   font-weight: bold;
   font-size: 16px;
+}
+.style-icon {
+  font-size: 18px;
+  position: relative;
+  bottom: 4px;
 }

@@ -1,12 +1,23 @@
-<form [formGroup]="fileForm" fxLayout="row" fxLayoutAlign="space-between center" #form>
+<form
+  [formGroup]="fileForm"
+  fxLayout="row"
+  fxLayoutAlign="space-between center"
+  #form
+>
   <span *ngIf="nameFile === ''">No hay archivo seleccionado</span>
   <span class="file-input" *ngIf="nameFile !== ''">{{ nameFile }}</span>
 
-  <label for="file-upload{{label}}" class="custom-file-upload mat-elevation-z1">
-    Cargar <img class="icon-download rotate" src="assets/img/dashboard/descarga.svg" alt="descarga">
+  <label
+    for="file-upload{{ label }}"
+    class="custom-file-upload mat-elevation-z1"
+  >
+    Cargar <i class="tio-upload_on_cloud style-icon"></i>
   </label>
 
-  <input id="file-upload{{label}}" type="file" (click)="reset()" (change)="onFileChange($event)" />
-  
+  <input
+    id="file-upload{{ label }}"
+    type="file"
+    (click)="reset()"
+    (change)="onFileChange($event)"
+  />
 </form>
-

@@ -1,188 +1,260 @@
 <div>
   <p>{{ "PROFILE.BASIC" | translate }}</p>
 
-  <div fxLayout.gt-xs="row" fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="20px">
+  <div
+    fxLayout.gt-xs="row"
+    fxLayout="column"
+    fxLayoutAlign="space-between start"
+    fxLayoutGap="20px"
+  >
     <div class="p-0 mb-2" ngClass.xs="mt-3 w-100" ngClass.gt-xs="w-100">
-    <mat-card class="p-0 mb-2" ngClass.xs="mt-3 w-100" ngClass.gt-xs="w-50" [class]="(managedPayments === true)?'container-profile':'my-class2'">
-      <span
-        fxLayout="row"
-        fxLayout.xs="column"
-        fxLayoutGap="80px"
-        fxLayoutGap.xs="0px"
-        class="item header"
+      <mat-card
+        class="p-0 mb-2"
+        ngClass.xs="mt-3 w-100"
+        ngClass.gt-xs="w-50"
+        [class]="managedPayments === true ? 'container-profile' : 'my-class2'"
       >
-        <h3 class="m-0 f-18">{{ "PROFILE.PERSONAL_INFO" | translate }}</h3>
-      </span>
-      <span
-        fxLayout="row"
-        fxLayout.xs="column"
-        fxLayoutGap="88px"
-        fxLayoutGap.xs="0px"
-        class="item"
-      >
-        <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
-          "GENERIC.NAME" | translate
-        }}</label>
-        <span fxLayout="row" fxLayoutAlign="space-between center " class="w-100">
-          <span
-            class="info"
+        <span
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutGap="80px"
+          fxLayoutGap.xs="0px"
+          class="item header"
+        >
+          <h3 class="m-0 f-18">{{ "PROFILE.PERSONAL_INFO" | translate }}</h3>
+        </span>
+        <span
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutGap="88px"
+          fxLayoutGap.xs="0px"
+          class="item"
+        >
+          <label
             fxLayout="column"
-            fxLayout.xs="row"
-            fxFLex="70"
+            fxFLex="50"
             fxFLex.xs="0"
-            >{{ name }} {{ lastName }}</span
+            fxLayout.xs="row"
+            >{{ "GENERIC.NAME" | translate }}</label
           >
-          <!-- <a mat-raised-button class="no-shadow" (click)="editName()"
+          <span
+            fxLayout="row"
+            fxLayoutAlign="space-between center "
+            class="w-100"
+          >
+            <span
+              class="info"
+              fxLayout="column"
+              fxLayout.xs="row"
+              fxFLex="70"
+              fxFLex.xs="0"
+              >{{ name }} {{ lastName }}</span
+            >
+            <!-- <a mat-raised-button class="no-shadow" (click)="editName()"
             ><img src="/assets/img/icono-editar.svg" alt="editar"
           /></a> -->
+          </span>
         </span>
-      </span>
-  
-      <span
-        fxLayout="row"
-        fxLayout.xs="column"
-        fxLayoutGap="80px"
-        fxLayoutGap.xs="0px"
-        class="item"
-      >
-        <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
-          "GENERIC.EMAIL_SHORT" | translate
-        }}</label>
+
         <span
-          class="info"
-          fxLayout="column"
-          fxLayout.xs="row"
-          fxFLex="70"
-          fxFLex.xs="0"
-          >{{ email }}</span
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutGap="80px"
+          fxLayoutGap.xs="0px"
+          class="item"
         >
-      </span>
-  
-      <span
-        fxLayout="row"
-        fxLayout.xs="column"
-        fxLayoutGap="93px"
-        fxLayoutGap.xs="0px"
-        class="item"
-      >
-        <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
-          "GENERIC.CELLPHONE" | translate
-        }}</label>
-        <span fxLayout="row" fxLayoutAlign="space-between center " class="w-100">
+          <label
+            fxLayout="column"
+            fxFLex="50"
+            fxFLex.xs="0"
+            fxLayout.xs="row"
+            >{{ "GENERIC.EMAIL_SHORT" | translate }}</label
+          >
           <span
             class="info"
             fxLayout="column"
             fxLayout.xs="row"
             fxFLex="70"
             fxFLex.xs="0"
-            >{{ phone }}</span
+            >{{ email }}</span
           >
-          <a mat-raised-button class="no-shadow gtmPerfilClicCuentaClickamModificarCelular" (click)="editCell()"
-            ><img src="/assets/img/icono-editar.svg" alt="editar"
-          /></a>
         </span>
-      </span>
-  
-      <span *ngIf="isEmployee === false && managedPayments === true"
-        fxLayout="row"
-        fxLayout.xs="column"
-        fxLayoutGap="80px"
-        fxLayoutGap.xs="0px"
-        class="item"
-      >
-        <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
-          "GENERIC.ADDRESS" | translate
-        }}</label>
-        <span fxLayout="row" fxLayoutAlign="space-between center " class="w-100">
-          <span
-            class="info address"
-            fxLayout="column"
-            fxLayout.xs="row"
-            fxFLex="70"
-            fxFLex.xs="0"
-            >{{ address }} {{ department }} {{ municipality }}</span
-          >
-          <a mat-raised-button class="no-shadow gtmPerfilClicCuentaClickamModificarDireccion" (click)="editAddres()"
-            ><img src="/assets/img/icono-editar.svg" alt="editar"
-          /></a>
-        </span>
-      </span>
-  
-      <span
-        fxLayout="row"
-        fxLayout.xs="column"
-        fxLayoutGap="80px"
-        fxLayoutGap.xs="0px"
-        class="item"
-      >
-        <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
-          "GENERIC.DOCUMENT" | translate
-        }}</label>
+
         <span
-          class="info"
-          fxLayout="column"
-          fxLayout.xs="row"
-          fxFLex="70"
-          fxFLex.xs="0"
-          >{{ id }}</span
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutGap="93px"
+          fxLayoutGap.xs="0px"
+          class="item"
         >
-      </span>
-      <span
-        fxLayout="row"
-        fxLayout.xs="column"
-        fxLayoutGap="80px"
-        fxLayoutGap.xs="0px"
-        class="item"
-      >
-        <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">{{
-          "GENERIC.PASSWORD" | translate
-        }}</label>
-        <span fxLayout="row" fxLayoutAlign="space-between center " class="w-100">
+          <label
+            fxLayout="column"
+            fxFLex="50"
+            fxFLex.xs="0"
+            fxLayout.xs="row"
+            >{{ "GENERIC.CELLPHONE" | translate }}</label
+          >
+          <span
+            fxLayout="row"
+            fxLayoutAlign="space-between center "
+            class="w-100"
+          >
+            <span
+              class="info"
+              fxLayout="column"
+              fxLayout.xs="row"
+              fxFLex="70"
+              fxFLex.xs="0"
+              >{{ phone }}</span
+            >
+            <a
+              mat-raised-button
+              class="no-shadow gtmPerfilClicCuentaClickamModificarCelular"
+              (click)="editCell()"
+              ><i class="tio-edit style-icon cursor-pointer"></i
+            ></a>
+          </span>
+        </span>
+
+        <span
+          *ngIf="isEmployee === false && managedPayments === true"
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutGap="80px"
+          fxLayoutGap.xs="0px"
+          class="item"
+        >
+          <label
+            fxLayout="column"
+            fxFLex="50"
+            fxFLex.xs="0"
+            fxLayout.xs="row"
+            >{{ "GENERIC.ADDRESS" | translate }}</label
+          >
+          <span
+            fxLayout="row"
+            fxLayoutAlign="space-between center "
+            class="w-100"
+          >
+            <span
+              class="info address"
+              fxLayout="column"
+              fxLayout.xs="row"
+              fxFLex="70"
+              fxFLex.xs="0"
+              >{{ address }} {{ department }} {{ municipality }}</span
+            >
+            <a
+              mat-raised-button
+              class="no-shadow gtmPerfilClicCuentaClickamModificarDireccion"
+              (click)="editAddres()"
+              ><i class="tio-edit style-icon cursor-pointer"></i
+            ></a>
+          </span>
+        </span>
+
+        <span
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutGap="80px"
+          fxLayoutGap.xs="0px"
+          class="item"
+        >
+          <label
+            fxLayout="column"
+            fxFLex="50"
+            fxFLex.xs="0"
+            fxLayout.xs="row"
+            >{{ "GENERIC.DOCUMENT" | translate }}</label
+          >
           <span
             class="info"
             fxLayout="column"
             fxLayout.xs="row"
             fxFLex="70"
             fxFLex.xs="0"
-            >*******</span
+            >{{ id }}</span
           >
-          <a
-            mat-raised-button
-            class="no-shadow gtmPerfilClicCuentaClickamModificarContrasena"
-            (click)="changePassword()"
-            ><img src="/assets/img/icono-editar.svg" alt="editar"
-          /></a>
         </span>
-      </span>
-    </mat-card>
-    <mat-card class="p-0 mb-2 card-delete" ngClass.xs="mt-3 w-100 " ngClass.gt-xs="w-50" [class]="(managedPayments === true)?'container-profile':'my-class2'">
-      <span
-        fxLayout="row"
-        fxLayout.xs="column"
-        fxLayoutGap="80px"
-        fxLayoutGap.xs="0px"
-        class="item mt-2 mb-2 mr-4 delete-card"
-        
-      >
-      <div class="delete-container-text">
-      <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row" ngClass="title-delete">
-        ELIMINAR CUENTA
-      </label>
-      <span fxLayout="row" fxLayoutAlign="end center " class="w-100">
-      <button mat-button ngClass="red-border w-40">
         <span
-          fxLayoutAlign="center space-between" (click)="deleteAccount()"
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutGap="80px"
+          fxLayoutGap.xs="0px"
+          class="item"
         >
-          Eliminar mi cuenta
+          <label
+            fxLayout="column"
+            fxFLex="50"
+            fxFLex.xs="0"
+            fxLayout.xs="row"
+            >{{ "GENERIC.PASSWORD" | translate }}</label
+          >
+          <span
+            fxLayout="row"
+            fxLayoutAlign="space-between center "
+            class="w-100"
+          >
+            <span
+              class="info"
+              fxLayout="column"
+              fxLayout.xs="row"
+              fxFLex="70"
+              fxFLex.xs="0"
+              >*******</span
+            >
+            <a
+              mat-raised-button
+              class="no-shadow gtmPerfilClicCuentaClickamModificarContrasena"
+              (click)="changePassword()"
+              ><i class="tio-edit style-icon cursor-pointer"></i
+            ></a>
+          </span>
         </span>
-      </button>
-      
-    </span>
-  </div>
-      </span>
-    </mat-card>
-  </div>
-    <div *ngIf="managedPayments === true" ngClass.xs="mt-3 w-100" ngClass.gt-xs="w-50" class="container-account">
+      </mat-card>
+      <mat-card
+        class="p-0 mb-2 card-delete"
+        ngClass.xs="mt-3 w-100 "
+        ngClass.gt-xs="w-50"
+        [class]="managedPayments === true ? 'container-profile' : 'my-class2'"
+      >
+        <span
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutGap="80px"
+          fxLayoutGap.xs="0px"
+          class="item mt-2 mb-2 mr-4 delete-card"
+        >
+          <div class="delete-container-text">
+            <label
+              fxLayout="column"
+              fxFLex="50"
+              fxFLex.xs="0"
+              fxLayout.xs="row"
+              ngClass="title-delete"
+            >
+              ELIMINAR CUENTA
+            </label>
+            <span fxLayout="row" fxLayoutAlign="end center " class="w-100">
+              <button mat-button ngClass="red-border w-40">
+                <span
+                  fxLayoutAlign="center space-between"
+                  (click)="deleteAccount()"
+                >
+                  Eliminar mi cuenta
+                </span>
+              </button>
+            </span>
+          </div>
+        </span>
+      </mat-card>
+    </div>
+    <div
+      *ngIf="managedPayments === true"
+      ngClass.xs="mt-3 w-100"
+      ngClass.gt-xs="w-50"
+      class="container-account"
+    >
       <mat-card class="p-0 mb-3">
         <span
           fxLayout="row"
@@ -203,30 +275,31 @@
           class="item"
         >
           <label>{{ "REGISTER.ACCOUNT" | translate }}</label>
-          <span fxLayout="row" fxLayoutAlign="space-between center " class="w-100">
+          <span
+            fxLayout="row"
+            fxLayoutAlign="space-between center "
+            class="w-100"
+          >
             <div class="info lineh">
               <div *ngIf="bankAccountNumber">
                 <span class="d-block">{{ bank }}</span>
                 <span *ngIf="typeBankAccount === '1'"> Ahorros </span>
-                <span *ngIf="typeBankAccount === '2'"> Corriente </span> - *******{{
-                  bankAccountNumber
-                }}
-             </div>
-             <div *ngIf="!bankAccountNumber">
-               <span>Cuenta de Nómina</span>
-             </div>
+                <span *ngIf="typeBankAccount === '2'"> Corriente </span> -
+                *******{{ bankAccountNumber }}
+              </div>
+              <div *ngIf="!bankAccountNumber">
+                <span>Cuenta de Nómina</span>
+              </div>
             </div>
-  
+
             <a mat-raised-button class="no-shadow" (click)="editAccount()"
-              ><img src="/assets/img/icono-editar.svg" alt="editar"
-            /></a>
+              ><i class="tio-edit style-icon cursor-pointer"></i
+            ></a>
           </span>
         </span>
       </mat-card>
     </div>
   </div>
-
-
 </div>
 
 <!-- template edit name and lastname -->
@@ -417,7 +490,9 @@
       (click)="editUser()"
       [disabled]="!profileFormCell.valid"
     >
-      <span class="gtmPerfilClicCuentaClickamGuardarCelular">{{ "GENERIC.SAVE" | translate }}</span>
+      <span class="gtmPerfilClicCuentaClickamGuardarCelular">{{
+        "GENERIC.SAVE" | translate
+      }}</span>
     </button>
   </form>
 </ng-template>
@@ -523,9 +598,10 @@
       color="orange"
       (click)="changeAddress()"
       [disabled]="!addressForm.valid"
-    ><span class="gtmPerfilClicCuentaClickamGuardarDireccion">
-      {{ "GENERIC.SAVE" | translate }}
-    </span>
+    >
+      <span class="gtmPerfilClicCuentaClickamGuardarDireccion">
+        {{ "GENERIC.SAVE" | translate }}
+      </span>
     </button>
   </div>
 </ng-template>
@@ -753,9 +829,10 @@
       color="orange"
       (click)="changePasswordUser()"
       [disabled]="!profileFormPass.valid"
-    > <span class="gtmPerfilClicCuentaClickamGuardarContrasena">
-      {{ "GENERIC.SAVE" | translate }}
-    </span>
+    >
+      <span class="gtmPerfilClicCuentaClickamGuardarContrasena">
+        {{ "GENERIC.SAVE" | translate }}
+      </span>
     </button>
   </form>
 </ng-template>
@@ -827,7 +904,6 @@
       <div class="text-center">
         <button
           class="button button-100"
-          
           mat-raised-button
           id="login"
           color="orange"
@@ -840,7 +916,7 @@
     </form>
   </div>
 
-  <div  *ngIf="showBankInfoUser">
+  <div *ngIf="showBankInfoUser">
     <p>{{ "PROFILE.ACCOUNT_INFO" | translate }}</p>
 
     <form [formGroup]="accountForm" fxLayout="column">
@@ -959,88 +1035,102 @@
 
       <!-- certificado -->
 
-      <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
+      <div
+        fxLayout="row"
+        fxLayoutAlign="space-start center"
+        fxLayoutGap="50px"
+        fxLayoutGap.xs="5px"
+        class="pb-3"
+      >
         <div fxLayout="column" fxLayoutAlign="center" class="space">
-          <strong class="gray">{{ "REGISTER.ACCOUNT_CERT" | translate }}</strong>
+          <strong class="gray">{{
+            "REGISTER.ACCOUNT_CERT" | translate
+          }}</strong>
           <span *ngIf="nameFileCert === ''">No hay archivo seleccionado</span>
           <span class="file-input" *ngIf="nameFileCert !== ''">{{
-            nameFileCert | truncate: '20'
+            nameFileCert | truncate: "20"
           }}</span>
         </div>
-        <div  class="space">
+        <div class="space">
           <label for="cert" id="upload" class="cursor-pointer">
-            <span  *ngIf="!showErrorCert">
+            <span *ngIf="!showErrorCert">
+              <img
+                class="mt-1"
+                *ngIf="nameFileCert === ''"
+                src="/assets/img/image-file-upload.svg"
+                alt="upload"
+              />
+              <img
+                class="mt-1"
+                *ngIf="nameFileCert !== ''"
+                src="/assets/img/image-file-upload-ok.svg"
+                alt="upload"
+              />
+            </span>
             <img
-              class="mt-1"
-              *ngIf="nameFileCert === ''"
-              src="/assets/img/image-file-upload.svg"
+              class="mt-1 w-icon"
+              *ngIf="showErrorCert"
+              src="/assets/img/icono-error-carga.svg"
               alt="upload"
             />
-            <img
-              class="mt-1"
-              *ngIf="nameFileCert !== ''"
-              src="/assets/img/image-file-upload-ok.svg"
-              alt="upload"
-            />
-          </span>
-            <img
-            class="mt-1 w-icon"
-            *ngIf="showErrorCert"
-            src="/assets/img/icono-error-carga.svg"
-            alt="upload"
-          />
           </label>
         </div>
       </div>
       <mat-error *ngIf="showErrorCert" class="small pb-2 d-block">
-          {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
+        {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
       </mat-error>
-    
+
       <input
         (change)="onFileChangeFiles($event, 'cert')"
         id="cert"
         type="file"
         formControlName="cert"
       />
-      
+
       <!-- Cedula 1-->
-      <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
+      <div
+        fxLayout="row"
+        fxLayoutAlign="space-start center"
+        fxLayoutGap="50px"
+        fxLayoutGap.xs="5px"
+        class="pb-3"
+      >
         <div fxLayout="column" fxLayoutAlign="center" class="space">
           <strong class="gray">{{ "REGISTER.CED1" | translate }}</strong>
           <span *ngIf="nameFileCed1 === ''">No hay archivo seleccionado</span>
           <span class="file-input" *ngIf="nameFileCed1 !== ''">{{
-            nameFileCed1 | truncate: '20'
+            nameFileCed1 | truncate: "20"
           }}</span>
         </div>
-        <div  class="space">
+        <div class="space">
           <label for="ced1" id="upload" class="cursor-pointer">
-            <span  *ngIf="!showErrorCed1">
+            <span *ngIf="!showErrorCed1">
+              <img
+                class="mt-1"
+                *ngIf="nameFileCed1 === ''"
+                src="/assets/img/image-file-upload.svg"
+                alt="upload"
+              />
+              <img
+                class="mt-1"
+                *ngIf="nameFileCed1 !== ''"
+                src="/assets/img/image-file-upload-ok.svg"
+                alt="upload"
+              />
+            </span>
             <img
-              class="mt-1"
-              *ngIf="nameFileCed1 === ''"
-              src="/assets/img/image-file-upload.svg"
+              class="mt-1 w-icon"
+              *ngIf="showErrorCed1"
+              src="/assets/img/icono-error-carga.svg"
               alt="upload"
             />
-            <img
-              class="mt-1"
-              *ngIf="nameFileCed1 !== ''"
-              src="/assets/img/image-file-upload-ok.svg"
-              alt="upload"
-            />
-          </span>
-            <img
-            class="mt-1 w-icon"
-            *ngIf="showErrorCed1"
-            src="/assets/img/icono-error-carga.svg"
-            alt="upload"
-          />
           </label>
         </div>
       </div>
       <mat-error *ngIf="showErrorCed1" class="small pb-2 d-block">
-          {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
+        {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
       </mat-error>
-    
+
       <input
         (change)="onFileChangeFilesCed1($event, 'ced1')"
         id="ced1"
@@ -1048,53 +1138,56 @@
         formControlName="ced1"
       />
 
-      
       <!-- Cedula 2-->
-      <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
+      <div
+        fxLayout="row"
+        fxLayoutAlign="space-start center"
+        fxLayoutGap="50px"
+        fxLayoutGap.xs="5px"
+        class="pb-3"
+      >
         <div fxLayout="column" fxLayoutAlign="center" class="space">
           <strong class="gray">{{ "REGISTER.CED2" | translate }}</strong>
           <span *ngIf="nameFileCed2 === ''">No hay archivo seleccionado</span>
           <span class="file-input" *ngIf="nameFileCed2 !== ''">{{
-            nameFileCed2 | truncate: '20'
+            nameFileCed2 | truncate: "20"
           }}</span>
         </div>
-        <div  class="space">
+        <div class="space">
           <label for="ced2" id="upload" class="cursor-pointer">
-            <span  *ngIf="!showErrorCed2">
+            <span *ngIf="!showErrorCed2">
+              <img
+                class="mt-1"
+                *ngIf="nameFileCed2 === ''"
+                src="/assets/img/image-file-upload.svg"
+                alt="upload"
+              />
+              <img
+                class="mt-1"
+                *ngIf="nameFileCed2 !== ''"
+                src="/assets/img/image-file-upload-ok.svg"
+                alt="upload"
+              />
+            </span>
             <img
-              class="mt-1"
-              *ngIf="nameFileCed2 === ''"
-              src="/assets/img/image-file-upload.svg"
+              class="mt-1 w-icon"
+              *ngIf="showErrorCed2"
+              src="/assets/img/icono-error-carga.svg"
               alt="upload"
             />
-            <img
-              class="mt-1"
-              *ngIf="nameFileCed2 !== ''"
-              src="/assets/img/image-file-upload-ok.svg"
-              alt="upload"
-            />
-          </span>
-            <img
-            class="mt-1 w-icon"
-            *ngIf="showErrorCed2"
-            src="/assets/img/icono-error-carga.svg"
-            alt="upload"
-          />
           </label>
         </div>
       </div>
       <mat-error *ngIf="showErrorCed2" class="small pb-2 d-block">
-          {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
+        {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
       </mat-error>
-    
+
       <input
         (change)="onFileChangeFilesCed2($event, 'ced2')"
         id="ced2"
         type="file"
         formControlName="ced2"
       />
-
-
 
       <button
         mat-raised-button
@@ -1110,60 +1203,100 @@
   </div>
 </ng-template>
 
-
 <ng-template #templateDeleteAccount>
   <div [formGroup]="profileFormDelete" ngClass="delete-container">
-      <h3 ngClass="title_delete">Eliminar Cuenta</h3>
-      <p ngClass="text-container">Esta acción es definitiva: Si eliminas tu cuenta de Clickam, no podrás recuperar tu contraseña ni la información que se encuentra en la plataforma. Todos tus datos personales se eliminarán definitivamente.</p>
-      <mat-form-field ngClass="mb-2">
-          <mat-pass-toggle-visibility
-          #toggleVisbility
-          matSuffix
-        ></mat-pass-toggle-visibility>
-        <input
-          matInput
-          id="password"
-          [type]="toggleVisbility.type"
-          placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
-          formControlName="Password"
-          spacebar
-          required
-          onchange="changeData()"
-        />
-        
-        <mat-error id="introducePassword" *ngIf="profileFormDelete.controls.Password.invalid && profileFormDelete.controls.Password.errors.required">{{
-          "LOGIN.INTRODUCE_PASSWORD" | translate
-        }}</mat-error>
-        
-        <mat-error id="minPassword" *ngIf="profileFormDelete.controls.Password.invalid && profileFormDelete.controls.Password.errors.minlength">{{
-          "GENERIC.MIN_CHARACTERS" | translate: {minchar:loginForm.controls.Password.errors.minlength.requiredLength}
-        }}</mat-error>
-    
-        <mat-error id="maxPassword" *ngIf="profileFormDelete.controls.Password.invalid && profileFormDelete.controls.Password.errors.maxlength">{{
-          "GENERIC.MAX_CHARACTERS" | translate: {maxchar:loginForm.controls.Password.errors.maxlength.requiredLength}
-        }}</mat-error>
-      </mat-form-field>
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-start center" fxLayoutGap="30px" fxLayoutGap.xs="5px" class="center-buttons">
+    <h3 ngClass="title_delete">Eliminar Cuenta</h3>
+    <p ngClass="text-container">
+      Esta acción es definitiva: Si eliminas tu cuenta de Clickam, no podrás
+      recuperar tu contraseña ni la información que se encuentra en la
+      plataforma. Todos tus datos personales se eliminarán definitivamente.
+    </p>
+    <mat-form-field ngClass="mb-2">
+      <mat-pass-toggle-visibility
+        #toggleVisbility
+        matSuffix
+      ></mat-pass-toggle-visibility>
+      <input
+        matInput
+        id="password"
+        [type]="toggleVisbility.type"
+        placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
+        formControlName="Password"
+        spacebar
+        required
+        onchange="changeData()"
+      />
+
+      <mat-error
+        id="introducePassword"
+        *ngIf="
+          profileFormDelete.controls.Password.invalid &&
+          profileFormDelete.controls.Password.errors.required
+        "
+        >{{ "LOGIN.INTRODUCE_PASSWORD" | translate }}</mat-error
+      >
+
+      <mat-error
+        id="minPassword"
+        *ngIf="
+          profileFormDelete.controls.Password.invalid &&
+          profileFormDelete.controls.Password.errors.minlength
+        "
+        >{{
+          "GENERIC.MIN_CHARACTERS"
+            | translate
+              : {
+                  minchar:
+                    loginForm.controls.Password.errors.minlength.requiredLength
+                }
+        }}</mat-error
+      >
+
+      <mat-error
+        id="maxPassword"
+        *ngIf="
+          profileFormDelete.controls.Password.invalid &&
+          profileFormDelete.controls.Password.errors.maxlength
+        "
+        >{{
+          "GENERIC.MAX_CHARACTERS"
+            | translate
+              : {
+                  maxchar:
+                    loginForm.controls.Password.errors.maxlength.requiredLength
+                }
+        }}</mat-error
+      >
+    </mat-form-field>
+    <div
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutAlign="space-start center"
+      fxLayoutGap="30px"
+      fxLayoutGap.xs="5px"
+      class="center-buttons"
+    >
       <div ngClass="mt-3 mb-2 hide-button-on-mobile">
-        <button mat-button ngClass="button_cancel" (click)="cancelDelete()"
-        > Cancelar </button>
+        <button mat-button ngClass="button_cancel" (click)="cancelDelete()">
+          Cancelar
+        </button>
       </div>
       <div>
-      <button mat-button class="red" (click)="deleteAccountService()"
-      [disabled]="!profileFormDelete.valid"
-      [ngClass]="{'red-disable' : !profileFormDelete.valid}"
-      ><span
-      fxLayoutAlign="center space-between"
-      >
-      Eliminar mi cuenta
-      </span></button>
+        <button
+          mat-button
+          class="red"
+          (click)="deleteAccountService()"
+          [disabled]="!profileFormDelete.valid"
+          [ngClass]="{ 'red-disable': !profileFormDelete.valid }"
+        >
+          <span fxLayoutAlign="center space-between"> Eliminar mi cuenta </span>
+        </button>
+      </div>
+      <div ngClass="mt-3 mb-2 hide-button-on-desktop">
+        <button mat-button ngClass="button_cancel" (click)="cancelDelete()">
+          Cancelar
+        </button>
+      </div>
     </div>
-    <div ngClass="mt-3 mb-2 hide-button-on-desktop">
-      <button mat-button ngClass="button_cancel" (click)="cancelDelete()"
-      > Cancelar </button>
-    </div>
-
-    
   </div>
-  </div>    
 </ng-template>
