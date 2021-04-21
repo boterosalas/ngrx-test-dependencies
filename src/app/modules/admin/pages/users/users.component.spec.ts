@@ -318,6 +318,10 @@ describe("UsersComponent", () => {
     component.dateForm.controls.tipoReport.setValue("Gamificación");
     component.getAnyReport();
     let datos = true;
+    let start = moment();
+    let end = moment("12-01-2020");
+    component.dateForm.controls.dateRange.setValue({ startDate: end, endDate: start });
+    component.getComments();
     expect(datos).toBeTruthy();
   });
 
