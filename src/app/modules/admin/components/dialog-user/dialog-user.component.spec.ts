@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogUserComponent } from './dialog-user.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatSlideToggleModule, MatMenuModule } from '@angular/material';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -11,12 +11,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from 'src/app/services/user.service';
 import { of } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 describe('DialogUserComponent', () => {
   let component: DialogUserComponent;
   let fixture: ComponentFixture<DialogUserComponent>;
   const mockUserService = jasmine.createSpyObj("UserService", [
-    "getHojaVida"
+    "getHojaVida", "updateInfoClicker"
   ]);
   const dialogMock = {
     close: () => { }
@@ -45,6 +47,10 @@ describe('DialogUserComponent', () => {
     TestBed.configureTestingModule({
       declarations: [DialogUserComponent],
       imports: [
+        TranslateModule.forRoot(),
+        MatSlideToggleModule,
+        SharedModule,
+        MatMenuModule,
         AppMaterialModule,
         HttpClientTestingModule,
         BrowserAnimationsModule,
@@ -73,6 +79,7 @@ describe('DialogUserComponent', () => {
     })
       .compileComponents();
     mockUserService.getHojaVida.and.returnValue(of(getUserExcel));
+    mockUserService.updateInfoClicker.and.returnValue(of(getUserExcel));
   }));
 
   beforeEach(() => {
@@ -127,6 +134,8 @@ describe('DialogUserComponent', () => {
 
   it('changeTabs', () => {
     component.changeTabs(2);
+    component.saveInfoPersonal();
+    component.onNoClickEdit();
     expect(component.selectedTab).toBe(2)
     expect(component.pad(2)).toBe("02")
   })

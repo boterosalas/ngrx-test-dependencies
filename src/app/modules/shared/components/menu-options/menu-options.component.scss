@@ -2,23 +2,41 @@
 @import "general";
 
 .menu-mobile {
+  &.active::before {
+    content: "";
+    background: #ff5555;
+    height: 4px;
+    width: 20px;
+    position: relative;
+    z-index: 10;
+    border-radius: 3px;
+    right: 9px;
+    display: -webkit-box;
+    display: flex;
+    margin-top: 0px;
+    transform: rotate(90deg);
+    top: 15px;
+  }
   &.active {
     a {
-      color: $secondary-color;
+      color: #ff5555;
+      margin-left: 5px;
     }
   }
   a {
     color: $primary-color;
     font-family: $font-galano-bold;
     height: 30px;
+    margin-left: 5px;
     position: relative;
   }
 
   .Mi.perfil,
   .Usuarios {
     &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/mi-perfil.svg") no-repeat;
+      font-family: "The-Icon-of";
+      content: "\ece7";
+      font-size: 19px;
       width: 20px;
       height: 20px;
       position: absolute;
@@ -29,8 +47,10 @@
 
   .Tabla.de.Comisiones {
     &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/tabla_comisiones.svg") no-repeat;
+      font-family: "The-Icon-of";
+      content: "\ebf3";
+      font-size: 19px;
+
       width: 20px;
       height: 20px;
       position: absolute;
@@ -40,9 +60,9 @@
   }
   .Biblioteca {
     &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/icon-upload-library.svg")
-        no-repeat;
+      font-family: "The-Icon-of";
+      content: "\ec6b";
+      font-size: 19px;
       width: 20px;
       height: 20px;
       position: absolute;
@@ -53,8 +73,10 @@
 
   .Negocios {
     &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/negocios.svg") no-repeat;
+      font-family: "The-Icon-of";
+      content: "\eaf1";
+      font-size: 19px;
+
       width: 20px;
       height: 20px;
       position: absolute;
@@ -65,8 +87,10 @@
   }
   .Carrusel {
     &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/carousel.svg") no-repeat;
+      content: "\e915";
+
+      font-family: "The-Icon-of";
+      font-size: 19px;
       width: 20px;
       height: 20px;
       position: absolute;
@@ -77,8 +101,9 @@
   }
   .Novedades {
     &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/novedades.svg") no-repeat;
+      content: "\e981";
+      font-family: "The-Icon-of";
+      font-size: 19px;
       width: 20px;
       height: 20px;
       position: absolute;
@@ -89,8 +114,9 @@
   }
   .Blog {
     &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/blog.svg") no-repeat;
+      content: "\eae1";
+      font-family: "The-Icon-of";
+      font-size: 19px;
       width: 20px;
       height: 20px;
       position: absolute;
@@ -101,8 +127,9 @@
   }
   .Legales {
     &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/document.svg") no-repeat;
+      content: "\ea61";
+      font-family: "The-Icon-of";
+      font-size: 19px;
       width: 20px;
       height: 20px;
       position: absolute;
@@ -113,8 +140,9 @@
   }
   .Configuración {
     &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/settings-menu.svg") no-repeat;
+      content: "\ecdb";
+      font-family: "The-Icon-of";
+      font-size: 19px;
       width: 20px;
       height: 20px;
       position: absolute;
@@ -125,8 +153,9 @@
   }
   .Historial.de.Links {
     &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/historial_links.svg") no-repeat;
+      font-family: "The-Icon-of";
+      content: "\ec6f";
+      font-size: 19px;
       width: 20px;
       height: 20px;
       position: absolute;
@@ -138,10 +167,11 @@
   .Inicio,
   .DashBoard {
     &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/dashboard.svg") no-repeat;
+      font-family: "The-Icon-of";
+      content: "\ecc3";
       width: 20px;
       height: 20px;
+      font-size: 19px;
       position: absolute;
       top: 24%;
       left: 1%;
@@ -150,8 +180,9 @@
 
   .Click.Academy {
     &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/clickacademy.svg") no-repeat;
+      font-family: "The-Icon-of";
+      content: "\eac8";
+      font-size: 19px;
       width: 20px;
       height: 20px;
       position: absolute;
@@ -162,9 +193,9 @@
 
   .Centro.de.Ayuda {
     &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/preguntas-frecuentes.svg")
-        no-repeat;
+      font-family: "The-Icon-of";
+      content: "\e934";
+      font-size: 19px;
       width: 20px;
       height: 20px;
       position: absolute;
@@ -172,12 +203,23 @@
       left: 1%;
     }
   }
-
-  .Reportes,
   .Auditoría {
     &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/reportes.svg") no-repeat;
+      font-family: "The-Icon-of";
+      content: "\e934";
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+  .Reportes {
+    &::before {
+      font-family: "The-Icon-of";
+      content: "\ec5b";
+      font-size: 19px;
       width: 20px;
       height: 20px;
       position: absolute;
@@ -188,8 +230,9 @@
 
   .whatsapp {
     &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/whatsapp.svg") no-repeat;
+      font-family: "The-Icon-of";
+      content: "\ec4a";
+      font-size: 19px;
       width: 20px;
       height: 20px;
       position: absolute;
@@ -200,9 +243,10 @@
 
   .Generador.de.Links {
     &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/icon-generados-links.svg")
-        no-repeat;
+      font-family: "The-Icon-of";
+      content: "\ec6f";
+      font-size: 19px;
+
       width: 20px;
       height: 20px;
       position: absolute;
@@ -213,8 +257,10 @@
 
   .Referidos {
     &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/referidos.svg") no-repeat;
+      font-family: "The-Icon-of";
+      content: "\ecee";
+      font-size: 19px;
+
       width: 20px;
       height: 20px;
       position: absolute;
@@ -225,13 +271,14 @@
 
   .logout {
     &::before {
-      content: "";
-      background: url("/assets/img/menu-mobile/cerrar-sesion.svg") no-repeat;
+      font-family: "The-Icon-of";
+      color: red;
+      content: "\ecdf";
+      font-size: 22px;
       width: 20px;
       height: 20px;
       position: absolute;
-      top: 33%;
-      left: 1%;
+      top: 3px;
     }
   }
 }

@@ -1,16 +1,26 @@
-
 <app-banner
-  title="{{ 'DASHBOARD.BUSINESS' | translate}}"
+  title="{{ 'DASHBOARD.BUSINESS' | translate }}"
   img="/assets/img/banners/banner-dashboard-pc.jpg"
   imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
 ></app-banner>
 
 <div class="container minaud">
-    <!-- <h1 class="border-bottom-orange-init">{{ 'DASHBOARD.NEW_BUSINESS' | translate}}</h1> -->
-    <p>Haz click en el botón para exportar los negocios</p>
-    
-    <button mat-raised-button color="orange" (click)="exportBusiness()" id="download-users" class="ml-2">Exportar <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>
+  <!-- <h1 class="border-bottom-orange-init">{{ 'DASHBOARD.NEW_BUSINESS' | translate}}</h1> -->
+  <p>Haz click en el botón para exportar los negocios</p>
 
-    <app-table-activate-business [dataSource]="dataSource" (updateBusiness)="getAllBusiness()" (activateBusiness)="activateBusiness($event)"></app-table-activate-business>
+  <button
+    mat-raised-button
+    color="orange"
+    (click)="exportBusiness()"
+    id="download-users"
+    class="ml-2"
+  >
+    Exportar <i class="tio-download_from_cloud style-icon"></i>
+  </button>
 
+  <app-table-activate-business
+    [dataSource]="dataSource"
+    (updateBusiness)="getAllBusiness()"
+    (activateBusiness)="activateBusiness($event)"
+  ></app-table-activate-business>
 </div>

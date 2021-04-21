@@ -56,8 +56,10 @@
 
 .icon-date {
   position: relative;
-  top: 7px;
+  top: 4px;
   left: 30px;
+  font-size: 22px;
+  color: #8d7eb7;
 }
 
 .form-control {
@@ -68,4 +70,9 @@
 .downloadUsers {
   position: relative;
   left: -23px;
+}
+.style-icon {
+  font-size: 18px;
+  position: relative;
+  bottom: 4px;
 }

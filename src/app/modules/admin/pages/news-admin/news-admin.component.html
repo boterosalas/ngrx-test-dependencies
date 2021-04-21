@@ -4,108 +4,210 @@
   imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
 ></app-banner>
 <div class="container m-t4 fade-in">
-    <p class="title-blue">REPORTE DE NOVEDADES</p>
-    <div class="mt-4 container-forms" fxLayout="row">
-    <div class=" ml-4 downloadUsers user-transactions">
-    <form
-        class="form-relative "
-        [formGroup]="dateForm">
+  <p class="title-blue">REPORTE DE NOVEDADES</p>
+  <div class="mt-4 container-forms" fxLayout="row">
+    <div class="ml-4 downloadUsers user-transactions">
+      <form class="form-relative" [formGroup]="dateForm">
         <div fxLayout="column">
-        <label class="label-up-text " for="picker"> RANGO DE FECHAS</label>
-        <div fxLayout="row">
-            <mat-icon   class="icon-date" matPrefix>date_range</mat-icon>
-            <input  formControlName="dateRange"  [locale]="locale" placeholder="Seleccione fechas" type="text" [maxDate]="maxDate"  ngxDaterangepickerMd class="form-control border-input mat-elevation-z1 p-2 border-radius"/>
-            <button mat-raised-button color="orange" (click)="getReportExcel()" id="download-users" class="ml-2"  >Exportar <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga"></button>    
+          <label class="label-up-text" for="picker"> RANGO DE FECHAS</label>
+          <div fxLayout="row">
+            <i class="tio-date_range icon-date"></i>
+
+            <input
+              formControlName="dateRange"
+              [locale]="locale"
+              placeholder="Seleccione fechas"
+              type="text"
+              [maxDate]="maxDate"
+              ngxDaterangepickerMd
+              class="form-control border-input mat-elevation-z1 p-2 border-radius"
+            />
+            <button
+              mat-raised-button
+              color="orange"
+              (click)="getReportExcel()"
+              id="download-users"
+              class="ml-2"
+            >
+              Exportar <i class="tio-download_from_cloud style-icon"></i>
+            </button>
+          </div>
         </div>
+      </form>
     </div>
-    </form>
-  </div>
-  <div class="container-search">
-    <div fxLayout="row" fxLayoutAlign="end end" >
+    <div class="container-search">
+      <div fxLayout="row" fxLayoutAlign="end end">
         <div fxLayout="column" fxFlex="100">
-          <app-search-users class="searchUser" (search)="searchUser($event)"></app-search-users>
+          <app-search-users
+            class="searchUser"
+            (search)="searchUser($event)"
+          ></app-search-users>
         </div>
+      </div>
     </div>
   </div>
-</div>
-<div class="mat-elevation-z0 mt-4 mb-4">
-  
-    <table mat-table [dataSource]="dataSource" class="users-table" matSort (matSortChange)="sort($event)" >
-  
+  <div class="mat-elevation-z0 mt-4 mb-4">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="users-table"
+      matSort
+      (matSortChange)="sort($event)"
+    >
       <!-- Identificaton clicker -->
       <ng-container matColumnDef="idclicker">
-        <th mat-header-cell class="pl-3" *matHeaderCellDef style="width: 9%;" mat-sort-header="consecutive"> NO. DE CASO </th>
-        <td mat-cell *matCellDef="let element" class="pl-3"> 
-        <p class="m-0 gray-light text-link cursor-pointer" (click)="openDialog(element)">{{element.consecutive}}</p>
+        <th
+          mat-header-cell
+          class="pl-3"
+          *matHeaderCellDef
+          style="width: 9%"
+          mat-sort-header="consecutive"
+        >
+          NO. DE CASO
+        </th>
+        <td mat-cell *matCellDef="let element" class="pl-3">
+          <p
+            class="m-0 gray-light text-link cursor-pointer"
+            (click)="openDialog(element)"
+          >
+            {{ element.consecutive }}
+          </p>
         </td>
       </ng-container>
       <!-- Date Solicitud Column -->
       <ng-container matColumnDef="subscription">
-        <th class="left-text" mat-header-cell *matHeaderCellDef style="width: 12%; text-align: left;" mat-sort-header="date" > FECHA SOLICITUD </th>
-        <td mat-cell *matCellDef="let element" class="text-font" > {{element.date | date: 'dd/MM/yyyy'}}</td>
+        <th
+          class="left-text"
+          mat-header-cell
+          *matHeaderCellDef
+          style="width: 12%; text-align: left"
+          mat-sort-header="date"
+        >
+          FECHA SOLICITUD
+        </th>
+        <td mat-cell *matCellDef="let element" class="text-font">
+          {{ element.date | date: "dd/MM/yyyy" }}
+        </td>
       </ng-container>
       <!-- User Column -->
       <ng-container matColumnDef="users">
-        <th mat-header-cell *matHeaderCellDef style="width: 15%;" mat-sort-header="username"> NOMBRE DE USUARIO </th>
-        <td mat-cell *matCellDef="let element: let i=index" > 
-        <p class="m-0 gray-light text-font">{{element.name}} </p>
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          style="width: 15%"
+          mat-sort-header="username"
+        >
+          NOMBRE DE USUARIO
+        </th>
+        <td mat-cell *matCellDef="let element: let i=index">
+          <p class="m-0 gray-light text-font">{{ element.name }}</p>
         </td>
       </ng-container>
       <!-- Identificaton Column -->
-      <ng-container matColumnDef="identification"> 
-        <th mat-header-cell *matHeaderCellDef style="width: 10%;" mat-sort-header="identification"> CÉDULA </th>
-        <td mat-cell *matCellDef="let element: let i=index" > 
-        <p class="m-0 gray-light text-font-cc">{{element.identification}}</p>
+      <ng-container matColumnDef="identification">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          style="width: 10%"
+          mat-sort-header="identification"
+        >
+          CÉDULA
+        </th>
+        <td mat-cell *matCellDef="let element: let i=index">
+          <p class="m-0 gray-light text-font-cc">
+            {{ element.identification }}
+          </p>
         </td>
       </ng-container>
 
-      
-  
       <!-- CellPhone Column -->
       <ng-container matColumnDef="cellphone">
-        <th mat-header-cell *matHeaderCellDef style="width: 10%;" mat-sort-header="cellphone"> {{ 'USERS.CELLPHONE' | translate }}</th>
-        <td mat-cell *matCellDef="let element" class="text-font"> {{element.cellphone}} </td>
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          style="width: 10%"
+          mat-sort-header="cellphone"
+        >
+          {{ "USERS.CELLPHONE" | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element" class="text-font">
+          {{ element.cellphone }}
+        </td>
       </ng-container>
-  
+
       <!-- Email Column -->
       <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef style="width: 15%;" mat-sort-header="email"> {{ 'USERS.EMAIL' | translate }} </th>
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          style="width: 15%"
+          mat-sort-header="email"
+        >
+          {{ "USERS.EMAIL" | translate }}
+        </th>
         <td mat-cell *matCellDef="let element: let i = index">
-          <span class="text-font" fxLayout="row" fxLayoutAlign="space-between space-between">
-            {{element.email}} 
+          <span
+            class="text-font"
+            fxLayout="row"
+            fxLayoutAlign="space-between space-between"
+          >
+            {{ element.email }}
           </span>
         </td>
       </ng-container>
       <!-- Status Column -->
       <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef style="width: 10%;" mat-sort-header="statusnovelty"> {{ 'USERS.STATUS' | translate }} </th>
-        <td mat-cell *matCellDef="let element" > 
-            <span *ngIf="element.statusnovelty === 'Solucionado'">
-                <img class="status-img" src="/assets/img/dashboard/icon-check-new.svg" alt="ok"> Solucionado
-            </span>
-            <span *ngIf="element.statusnovelty === 'Pendiente'">
-                <img class="status-img" src="/assets/img/dashboard/icon-info.svg" alt="pendind"> Pendiente
-            </span>
-            <span *ngIf="element.statusnovelty === 'En revisión'">
-              <img class="status-img" src="/assets/img/dashboard/icon-revision.svg" alt="pendind"> En revisión
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          style="width: 10%"
+          mat-sort-header="statusnovelty"
+        >
+          {{ "USERS.STATUS" | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.statusnovelty === 'Solucionado'">
+            <img
+              class="status-img"
+              src="/assets/img/dashboard/icon-check-new.svg"
+              alt="ok"
+            />
+            Solucionado
+          </span>
+          <span *ngIf="element.statusnovelty === 'Pendiente'">
+            <img
+              class="status-img"
+              src="/assets/img/dashboard/icon-info.svg"
+              alt="pendind"
+            />
+            Pendiente
+          </span>
+          <span *ngIf="element.statusnovelty === 'En revisión'">
+            <img
+              class="status-img"
+              src="/assets/img/dashboard/icon-revision.svg"
+              alt="pendind"
+            />
+            En revisión
           </span>
         </td>
       </ng-container>
-  
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr id="user-{{i}}" mat-row *matRowDef="let row; columns: displayedColumns;let i= index;"></tr>
+      <tr
+        id="user-{{ i }}"
+        mat-row
+        *matRowDef="let row; columns: displayedColumns; let i = index"
+      ></tr>
     </table>
     <div class="mt-3">
-    <mat-paginator
+      <mat-paginator
         [length]="totalItems"
-            [pageSize]="pageSize"
-            [pageSizeOptions]="[50]"
-            [pageIndex]="pageIndex"
-            (page)="pagination($event)"
-       ></mat-paginator>
-      </div>
+        [pageSize]="pageSize"
+        [pageSizeOptions]="[50]"
+        [pageIndex]="pageIndex"
+        (page)="pagination($event)"
+      ></mat-paginator>
+    </div>
   </div>
 </div>
-
-
-  

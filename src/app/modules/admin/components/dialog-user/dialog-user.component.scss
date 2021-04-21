@@ -114,11 +114,15 @@ a {
 .img-tabs {
   position: relative;
   top: 3px;
+  color: #37236a;
+  font-size: 20px;
 }
 .img-tabs-selected {
   position: relative;
   top: 3px;
-  filter: grayscale(100%) invert(1);
+  font-size: 20px;
+  //filter: grayscale(100%) invert(1);
+  color: #ffffff;
 }
 .p-range {
   font-size: 11px;
@@ -129,7 +133,10 @@ a {
   position: relative;
   top: 4px;
   left: 30px;
+  font-size: 22px;
+  color: #8d7eb7;
 }
+
 .form-control {
   padding-left: 35px !important;
   font-family: $font-galano !important;
@@ -222,4 +229,9 @@ a {
 
 .iconb {
   width: 45px;
+}
+
+.style-icon {
+  font-size: 22px;
+  color: #8d7eb7;
 }

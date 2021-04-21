@@ -1,9 +1,18 @@
-
 <div fxLayout="column">
-
-  <span routerLink="logros" (click)="hide()"  *ngIf="(auth.getRole$ | async ) !== 'ADMIN' && (auth.getRole$ | async ) !== 'SUPERADMIN' && auth.isLoggedIn()" class="goals gtmHomeClicMenuLightboxtusmedallas">
-    <span matPrefix class="pr-2 gtmHomeClicMenuLightboxtusmedallas"><img src="assets/img/gamification/icon-prize-btn-menu.svg" alt="prize" /></span>
-    {{ 'MEDALS.MEDALS' | translate }}
+  <span
+    routerLink="logros"
+    (click)="hide()"
+    *ngIf="
+      (auth.getRole$ | async) !== 'ADMIN' &&
+      (auth.getRole$ | async) !== 'SUPERADMIN' &&
+      auth.isLoggedIn()
+    "
+    class="goals gtmHomeClicMenuLightboxtusmedallas"
+  >
+    <span matPrefix class="pr-2 gtmHomeClicMenuLightboxtusmedallas"
+      ><img src="assets/img/gamification/icon-prize-btn-menu.svg" alt="prize"
+    /></span>
+    {{ "MEDALS.MEDALS" | translate }}
   </span>
 
   <span
@@ -19,39 +28,53 @@
     </span>
     <a
       mat-list-item
-      ngClass="cursor-pointer gtmHomeClicMenuLightbox{{ item.name }} f-16 {{item.name}}"
+      ngClass="cursor-pointer gtmHomeClicMenuLightbox{{ item.name }} f-16 {{
+        item.name
+      }}"
       id="{{ section }}{{ i }}"
-      > <span ngClass="gtmHomeClicMenuLightbox{{ item.name }}">{{ item.name }}</span></a
+    >
+      <span ngClass="gtmHomeClicMenuLightbox{{ item.name }}">{{
+        item.name
+      }}</span></a
     >
   </span>
   <span class="menu-mobile">
     <a
-    *ngIf="(auth.getRole$ | async ) !== 'ADMIN' && (auth.getRole$ | async ) !== 'SUPERADMIN' "
-    mat-list-item
-    rel="noopener noreferrer"
-    href="https://api.whatsapp.com/send?phone=573052559105&text=Hola,%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20Clickam."
-    target="_blank"
-    class="cursor-pointer f-16 whatsapp gtmHomeClicMenuLightboxWhatsApp"
-    ><span class="gtmHomeClicMenuLightboxWhatsApp">WhatsApp</span></a
-  >
+      *ngIf="
+        (auth.getRole$ | async) !== 'ADMIN' &&
+        (auth.getRole$ | async) !== 'SUPERADMIN'
+      "
+      mat-list-item
+      rel="noopener noreferrer"
+      href="https://api.whatsapp.com/send?phone=573052559105&text=Hola,%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20Clickam."
+      target="_blank"
+      class="cursor-pointer f-16 whatsapp gtmHomeClicMenuLightboxWhatsApp"
+      ><span class="gtmHomeClicMenuLightboxWhatsApp">WhatsApp</span></a
+    >
   </span>
 
-  <span *ngIf="(auth.getRole$ | async ) !== 'ADMIN' && (auth.getRole$ | async ) !== 'SUPERADMIN'">
+  <span
+    *ngIf="
+      (auth.getRole$ | async) !== 'ADMIN' &&
+      (auth.getRole$ | async) !== 'SUPERADMIN'
+    "
+  >
     <mat-card class="mt-2">
-      <h3 class="f-16 mb-2 hc">{{ 'GENERIC.SUPPORT' | translate }} </h3>
-      <p class="f-12 m-0">{{ 'GENERIC.TEXT_SUPPORT' | translate }}</p>
-      <p class="f-12 m-0 black">{{ 'GENERIC.EMAIL_SUPPORT' | translate }}</p>
+      <h3 class="f-16 mb-2 hc">{{ "GENERIC.SUPPORT" | translate }}</h3>
+      <p class="f-12 m-0">{{ "GENERIC.TEXT_SUPPORT" | translate }}</p>
+      <p class="f-12 m-0 black">{{ "GENERIC.EMAIL_SUPPORT" | translate }}</p>
     </mat-card>
   </span>
-
 </div>
-
 
 <span *ngIf="auth.isLoggedIn()" class="menu-mobile endSession">
   <a
-  mat-list-item
-  (click)="logout();hide()"
-  class="cursor-pointer f-16 logout gtmHomeClicMenuLightboxCerrarSesion"
-  > <span class="gtmHomeClicMenuLightboxCerrarSesion">{{ 'HEADER.LOGOUT' | translate }}</span> </a
->  
+    mat-list-item
+    (click)="logout(); hide()"
+    class="cursor-pointer f-16 logout gtmHomeClicMenuLightboxCerrarSesion"
+  >
+    <span class="gtmHomeClicMenuLightboxCerrarSesion">{{
+      "HEADER.LOGOUT" | translate
+    }}</span>
+  </a>
 </span>

@@ -47,7 +47,7 @@ describe("HomeComponent", () => {
     "activateProfile",
     "getuserdata",
     "saveUserAcceptTermsReferrals",
-
+    "saveFeedback"
   ]);
   const mockAuthService = jasmine.createSpyObj("AuthService", [
     "login",
@@ -513,6 +513,7 @@ describe("HomeComponent", () => {
     }).compileComponents();
     mockMasterService.getTerms.and.returnValue(of(responseTerms));
     mockUserService.activateProfile.and.returnValue(of(data));
+    mockUserService.saveFeedback.and.returnValue(of(data));
     mockUserService.getuserdata.and.returnValue(of(dataUserC));
     mockUserService.saveUserAcceptTermsReferrals.and.returnValue(of(dataTerms));
     mockUtilsService.showRegisterForm.and.returnValue({});

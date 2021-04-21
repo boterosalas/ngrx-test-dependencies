@@ -107,27 +107,30 @@
   position: relative;
   bottom: 3px;
 }
-.background-white{
+.background-white {
   background-color: #ffffff !important;
-  th{
+  th {
     border: none;
   }
 }
-.background-white-header{
+.background-white-header {
   background-color: #ffffff !important;
 }
-.header-color-cell-ini{
+.header-color-cell-ini {
   background-color: #f3f1f6;
   border-top-left-radius: 10px;
   border-bottom: none;
 }
-.header-color-cell{
+.header-color-cell {
   background-color: #f3f1f6;
   border-bottom: none;
-  
 }
-.header-color-cell-fin{
+.header-color-cell-fin {
   background-color: #f3f1f6;
   border-top-right-radius: 10px;
   border-bottom: none;
+}
+.style-icon {
+  font-size: 22px;
+  color: #37236a;
 }

@@ -135,18 +135,14 @@
           ACCIONES
         </th>
         <td mat-cell *matCellDef="let element: let i=index">
-          <img
-            class="cursor-pointer mr-2"
+          <i
+            class="tio-edit style-icon cursor-pointer mr-2"
             (click)="editCategoryCom(element)"
-            src="/assets/img/dashboard/icon-edit.svg"
-            alt=""
-          />
-          <img
-            class="cursor-pointer"
+          ></i>
+          <i
+            class="tio-delete style-icon-delete cursor-pointer"
             (click)="deleteCategoryCom(element)"
-            src="/assets/img/dashboard/icon-trash.svg"
-            alt=""
-          />
+          ></i>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

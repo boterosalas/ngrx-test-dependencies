@@ -291,7 +291,7 @@ export class SliderComponent implements OnInit {
       this.classButtonTwitter = `gtmClicLightboxIconoTwitter${bussinessType}${category.description}`.replace(/\s/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
       this.classButtonWhatsapp = `gtmClicLightboxIconoWhatsApp${bussinessType}${category.description}`.replace(/\s/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
       this.buttonReferir = category;
-      console.log(this.buttonReferir);
+
       const template = this.templateCategories;
 
       let dialogref = this.dialog.open(DialogComponent, {

@@ -15,23 +15,23 @@
           <p>{{ "DASHBOARD.RANGE" | translate }}</p>
         </span>
         <span fxLayout="column">
-        <form [formGroup]="form" ngClass.xs="fp">
-          <mat-icon class="icon-date" matPrefix>date_range</mat-icon>
-          <input
-            formControlName="selected"
-            [locale]="locale"
-            placeholder="Seleccione fechas"
-            type="text"
-            [maxDate]="maxDate"
-            [ranges]="ranges"
-            [alwaysShowCalendars]="form.get('alwaysShowCalendars').value"
-            [showRangeLabelOnInput]="form.get('showRangeLabelOnInput').value"
-            ngxDaterangepickerMd
-            class="form-control border-input mat-elevation-z1 p-2 border-radius"
-            (change)="change()"
-          />
-        </form>
-      </span>
+          <form [formGroup]="form" ngClass.xs="fp">
+            <i class="tio-date_range icon-date"></i>
+            <input
+              formControlName="selected"
+              [locale]="locale"
+              placeholder="Seleccione fechas"
+              type="text"
+              [maxDate]="maxDate"
+              [ranges]="ranges"
+              [alwaysShowCalendars]="form.get('alwaysShowCalendars').value"
+              [showRangeLabelOnInput]="form.get('showRangeLabelOnInput').value"
+              ngxDaterangepickerMd
+              class="form-control border-input mat-elevation-z1 p-2 border-radius"
+              (change)="change()"
+            />
+          </form>
+        </span>
       </div>
       <app-card-dashboard
         class="card-start"

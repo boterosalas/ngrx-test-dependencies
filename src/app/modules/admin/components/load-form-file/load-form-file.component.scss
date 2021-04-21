@@ -1,32 +1,36 @@
-
 input[type="file"] {
-    display: none;
+  display: none;
 }
 
 .custom-file-upload {
-    border: 1px solid #707070;
-    display: inline-block;
-    border-radius:5px;
-    padding: 6px 12px;
-    cursor: pointer;
-    background: #707070;
-    color: #ffffff;
+  border: 1px solid #707070;
+  display: inline-block;
+  border-radius: 5px;
+  padding: 6px 12px;
+  cursor: pointer;
+  background: #707070;
+  color: #ffffff;
 }
 
-.rotate{
+.rotate {
   transform: rotate(180deg);
   position: relative;
   top: 4px;
   margin-left: 10px;
 }
 
-.file-input{
+.file-input {
   max-width: 269px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .small {
   font-size: 11px;
+}
+.style-icon {
+  font-size: 18px;
+  position: relative;
+  top: 3px;
 }
