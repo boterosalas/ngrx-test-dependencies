@@ -36,6 +36,7 @@ export class LinksService {
   //https://apitestexito.azure-api.net/Dllo-clickam-md-apireport/api/admin/gethistoricalbankinformation
   apiUsersHistoricalBankInformation = "admin/gethistoricalbankinformation"
   apiAuditExcel = "Reports/getAudit";
+  apiAuditUserInfo = "admin/getreportupdateinfoclicker";
   apiGetReportReferral = "Reports/getreportreferral";
   apigetReportClickam = "Reports/getReportClickam";
   apiUsers = "Reports/getUsers";
@@ -529,6 +530,22 @@ export class LinksService {
     return this.http
       .get(
         `${this.urlReports}${this.apiAudit}?&start=${params.start}&end=${params.end}`,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+  }
+  public getAuditoriaDatosUser(params: any) {
+    return this.http
+      .get(
+        `${this.urlReports}${this.apiAuditUserInfo}?&start=${params.start}&end=${params.end}`,
         this.httpOptions
       )
       .pipe(

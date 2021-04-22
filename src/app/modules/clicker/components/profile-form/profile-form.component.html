@@ -901,6 +901,7 @@
           }}</mat-error
         >
       </mat-form-field>
+
       <div class="text-center">
         <button
           class="button button-100"
@@ -1188,7 +1189,17 @@
         type="file"
         formControlName="ced2"
       />
-
+      <div fxLayout="column">
+        <label class="label-up-text" for="picker">RAZÓN DE CAMBIO </label>
+        <textarea
+          matInput
+          class="text-area-heigth"
+          formControlName="description"
+          style="height: 95px"
+          placeholder="Cuéntanos por qué razón vas a cambiar tu cuenta bancaria."
+        >
+        </textarea>
+      </div>
       <button
         mat-raised-button
         id="nextClicker"

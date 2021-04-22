@@ -584,7 +584,7 @@ export class UsersComponent extends MatPaginatorIntl
     this.subscription.unsubscribe();
   }
   onChangeSelected(event) {
-    if (event === "Datos de gamificación" || event === "Usuarios externos" || event === "Comentarios & Sugerencias") {
+    if (event === "Datos de gamificación" || event === "Usuarios externos") {
       this.dateNoVisible = true;
       //this.dateForm.get('dateRange').clearValidators();
       //this.dateForm.updateValueAndValidity();
@@ -615,10 +615,10 @@ export class UsersComponent extends MatPaginatorIntl
   }
   public getComments() {
     this.dateParamsReport = {
-      start: this.dateForm.controls.dateRange.value.startDate.format(),
-      end: this.dateForm.controls.dateRange.value.endDate.format()
+      start: this.dateForm.controls.dateRange.value.startDate.format("YYYY-MM-DD"),
+      end: this.dateForm.controls.dateRange.value.endDate.format("YYYY-MM-DD")
     };
-    this.subscription = this.file.getHistoricalBankInformation(this.dateParamsReport)
+    this.subscription = this.usersService.getReportCommets(this.dateParamsReport)
       .subscribe((respExcel: ResponseService) => {
         if (respExcel.state === "Success") {
           this.openSnackBar(respExcel.userMessage, "Cerrar");

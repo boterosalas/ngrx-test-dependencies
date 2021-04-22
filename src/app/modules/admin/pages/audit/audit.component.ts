@@ -46,11 +46,19 @@ export class AuditComponent implements OnInit, OnDestroy {
     firstDay: 1 // first day is monday
   }
 
-
+  selecteds = [{
+    titulo: "General",
+    value: 1
+  },
+  {
+    titulo: "Datos de usuario",
+    value: 2
+  }]
   ngOnInit() {
 
     this.dateForm = this.fb.group(
       {
+        typeRepor: [null, Validators.required],
         dateRange: [null, Validators.required]
       }
     );
@@ -62,20 +70,37 @@ export class AuditComponent implements OnInit, OnDestroy {
   // Metodo para exportar la auditoria
 
   public exportAudit() {
-    this.dateParams = {
-      start: this.dateForm.controls.dateRange.value.startDate.format("YYYY-MM-DD"),
-      end: this.dateForm.controls.dateRange.value.endDate.format("YYYY-MM-DD")
+    if (this.dateForm.controls.typeRepor.value === "1") {
+      this.dateParams = {
+        start: this.dateForm.controls.dateRange.value.startDate.format("YYYY-MM-DD"),
+        end: this.dateForm.controls.dateRange.value.endDate.format("YYYY-MM-DD")
+      }
+
+      this.subscription = this.file.getAuditoria(this.dateParams).subscribe((resp: ResponseService) => {
+        if (resp.state === 'Success') {
+          this.openSnackBar(resp.userMessage, 'Cerrar');
+          this.dateForm.reset();
+          if (this.dateForm.controls.dateRange.value.startDate === null) {
+            this.disButon = true;
+          }
+        }
+      });
+    } else {
+      this.dateParams = {
+        start: this.dateForm.controls.dateRange.value.startDate.format("YYYY-MM-DD"),
+        end: this.dateForm.controls.dateRange.value.endDate.format("YYYY-MM-DD")
+      }
+      this.subscription = this.file.getAuditoriaDatosUser(this.dateParams).subscribe((resp: ResponseService) => {
+        if (resp.state === 'Success') {
+          this.openSnackBar(resp.userMessage, 'Cerrar');
+          this.dateForm.reset();
+          if (this.dateForm.controls.dateRange.value.startDate === null) {
+            this.disButon = true;
+          }
+        }
+      });
     }
 
-    this.subscription = this.file.getAuditoria(this.dateParams).subscribe((resp: ResponseService) => {
-      if (resp.state === 'Success') {
-        this.openSnackBar(resp.userMessage, 'Cerrar');
-        this.dateForm.reset();
-        if (this.dateForm.controls.dateRange.value.startDate === null) {
-          this.disButon = true;
-        }
-      }
-    });
   }
 
   change() {

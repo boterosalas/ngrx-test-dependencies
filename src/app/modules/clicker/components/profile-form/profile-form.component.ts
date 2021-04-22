@@ -218,6 +218,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       cert: [null, Validators.required],
       ced1: [null, Validators.required],
       ced2: [null, Validators.required],
+      description: [null, Validators.required]
     });
   }
 
@@ -386,7 +387,8 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       bankaccountnumber: btoa(this.accountForm.controls.numberAccount.value),
       bankcertificate: this.fileBankCertificate,
       FileIdentificationCard1: this.fileCed1,
-      FileIdentificationCard2: this.fileCed2
+      FileIdentificationCard2: this.fileCed2,
+      description: this.accountForm.controls.description.value
     };
 
     this.subscription = this.user

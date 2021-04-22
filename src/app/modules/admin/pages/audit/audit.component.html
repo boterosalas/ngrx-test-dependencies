@@ -7,28 +7,43 @@
 <div class="container minaud">
   <!-- <h1 class="border-bottom-orange-init">{{ 'AUDIT.AUDIT' | translate}}</h1> -->
   <p>Elige un rango de fechas para exportar la audioria</p>
-
-  <form [formGroup]="dateForm" class="downloadUsers">
-    <i class="tio-date_range icon-date"></i>
-    <input
-      (change)="change()"
-      formControlName="dateRange"
-      [locale]="locale"
-      placeholder="Seleccione fechas"
-      type="text"
-      [maxDate]="maxDate"
-      ngxDaterangepickerMd
-      class="form-control border-input mat-elevation-z1 p-2 border-radius"
-    />
-    <button
-      mat-raised-button
-      color="orange"
-      (click)="exportAudit()"
-      id="download-users"
-      class="ml-2"
-      [disabled]="!dateForm.valid || disButon"
-    >
-      Exportar <i class="tio-download_from_cloud style-icon"></i>
-    </button>
-  </form>
+  <div fxLayout="row">
+    <form [formGroup]="dateForm" class="downloadUsers">
+      <mat-form-field class="ml-2">
+        <mat-select
+          placeholder="Tipo de Reporte"
+          formControlName="typeRepor"
+          class="selected-report"
+        >
+          <mat-option
+            *ngFor="let selected of selecteds"
+            value="{{ selected.value }}"
+          >
+            <span>{{ selected.titulo }}</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <i class="tio-date_range icon-date"></i>
+      <input
+        (change)="change()"
+        formControlName="dateRange"
+        [locale]="locale"
+        placeholder="Seleccione fechas"
+        type="text"
+        [maxDate]="maxDate"
+        ngxDaterangepickerMd
+        class="form-control border-input mat-elevation-z1 p-2 border-radius"
+      />
+      <button
+        mat-raised-button
+        color="orange"
+        (click)="exportAudit()"
+        id="download-users"
+        class="ml-2"
+        [disabled]="!dateForm.valid || disButon"
+      >
+        Exportar <i class="tio-download_from_cloud style-icon"></i>
+      </button>
+    </form>
+  </div>
 </div>

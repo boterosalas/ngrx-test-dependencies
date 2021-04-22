@@ -55,6 +55,7 @@ export class UserService {
   apiGetExternalUsers = "userprofile/getexternalusers";
   apiDeleteUser = "userprofile/deleteaccount"
   apiReporUserGamification = "reports/getreportgamification";
+  apiReportCambios = "reports/getreportfeedback"; //Falta el endpoint bien
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
   apiSaveNews = "new/savenew";
@@ -599,6 +600,23 @@ export class UserService {
       .post(
         `${this.url}${this.apiSaveFeedBack}`,
         data,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+  }
+  public getReportCommets(params: any) {
+    //Cambio la urlReports
+    return this.http
+      .get(
+        `${this.urlReports}${this.apiReportCambios}?&start=${params.start}&end=${params.end}`,
         this.httpOptions
       )
       .pipe(
