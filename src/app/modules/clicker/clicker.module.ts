@@ -45,11 +45,17 @@ import { CardMissionComponent } from './components/card-mission/card-mission.com
 import { MissionLevelComponent } from './components/mission-level/mission-level.component';
 import { LibraryComponent } from './pages/library/library.component';
 import { DialogImagePlayerComponent } from './components/dialog-visualization-image/dialog-image-player.component';
+import { DeleteformComponent } from './pages/deleteform/deleteform.component';
 const routes: Routes = [
 
   {
     path: "mi-perfil/:pagos",
     component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "eliminar-cuenta",
+    component: DeleteformComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -131,7 +137,8 @@ const routes: Routes = [
     CardMissionComponent,
     MissionLevelComponent,
     LibraryComponent,
-    DialogImagePlayerComponent
+    DialogImagePlayerComponent,
+    DeleteformComponent
   ],
   imports: [
     CommonModule,

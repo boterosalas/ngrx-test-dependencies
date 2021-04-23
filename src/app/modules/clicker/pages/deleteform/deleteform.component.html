@@ -1,0 +1,165 @@
+<app-banner
+  title="{{ 'HEADER.PROFILE' | translate }}"
+  img="/assets/img/banners/banner-perfil-pc.jpg"
+  imgMobile="/assets/img/banners/banner-perfil-mobile.jpg"
+></app-banner>
+
+<div class="container">
+  <mat-card class="mt-3 card-width">
+    <p class="texto-description">Hola {{ name }},</p>
+    <p class="texto-description">Lamentamos que quieras eliminar tu cuenta.</p>
+    <p class="texto-description">
+      Recuerda que en caso de tener un saldo pendiente por pagar, si eliminas tu
+      cuenta, éste no podrá ser consignado, ya que no tendremos tus datos
+      personales para gestionar esta acción. Te invitamos a que esperes mientras
+      tu pago es realizado, para luego eliminar tu cuenta.
+    </p>
+    <div fxLayout="row" class="section-saldo">
+      <img src="/assets/img/icon-comision.svg" alt="comision clickam" />
+      <div fxLayout="column">
+        <p class="mt-0 mb-0">TU SALDO</p>
+        <span class="mt-0 saldo-pendiente">{{
+          available + account | currency: "":"symbol":"1.0-0"
+        }}</span>
+      </div>
+    </div>
+    <h4>¿Por qué quieres eliminar tu cuenta?</h4>
+    <div fxLayout="row" *ngFor="let item of descriptionVal">
+      <div class="mb-2">
+        <mat-checkbox
+          class="check-margin mr-3 mb-2"
+          [(ngModel)]="item.value"
+          (change)="changeValue(item.title)"
+        >
+        </mat-checkbox>
+        {{ item.title }}
+      </div>
+    </div>
+    <textarea
+      matInput
+      [disabled]="activeText"
+      class="text-area-heigth"
+      [(ngModel)]="causeSurvey"
+      placeholder="Cuéntanos qué otras razones tienes para eliminar tu cuenta."
+      (ngModelChange)="checkSurvey()"
+    ></textarea>
+    <div fxLayout="row" fxLayoutAlign="end end">
+      <button
+        mat-button
+        [ngClass]="disableButton === '1' ? button_delete : button_display"
+        (click)="deleteAccount()"
+        [disabled]="disableButtonOr"
+      >
+        Eliminar
+      </button>
+      <button
+        mat-raised-button
+        color="orange"
+        (click)="saveImagenOfertas()"
+        id="download-users"
+        class="ml-2"
+        [routerLink]="['/mi-perfil']"
+      >
+        Volver a mi perfil
+      </button>
+    </div>
+  </mat-card>
+</div>
+
+<ng-template #templateDeleteAccount>
+  <div [formGroup]="profileFormDelete" ngClass="delete-container">
+    <h3 ngClass="title_delete">Eliminar Cuenta</h3>
+    <p ngClass="text-container">
+      Esta acción es definitiva: Si eliminas tu cuenta de Clickam, no podrás
+      recuperar tu contraseña ni la información que se encuentra en la
+      plataforma. Todos tus datos personales se eliminarán definitivamente.
+    </p>
+    <mat-form-field ngClass="mb-2">
+      <mat-pass-toggle-visibility
+        #toggleVisbility
+        matSuffix
+      ></mat-pass-toggle-visibility>
+      <input
+        matInput
+        id="password"
+        [type]="toggleVisbility.type"
+        placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
+        formControlName="Password"
+        spacebar
+        required
+        onchange="changeData()"
+      />
+
+      <mat-error
+        id="introducePassword"
+        *ngIf="
+          profileFormDelete.controls.Password.invalid &&
+          profileFormDelete.controls.Password.errors.required
+        "
+        >{{ "LOGIN.INTRODUCE_PASSWORD" | translate }}</mat-error
+      >
+
+      <mat-error
+        id="minPassword"
+        *ngIf="
+          profileFormDelete.controls.Password.invalid &&
+          profileFormDelete.controls.Password.errors.minlength
+        "
+        >{{
+          "GENERIC.MIN_CHARACTERS"
+            | translate
+              : {
+                  minchar:
+                    loginForm.controls.Password.errors.minlength.requiredLength
+                }
+        }}</mat-error
+      >
+
+      <mat-error
+        id="maxPassword"
+        *ngIf="
+          profileFormDelete.controls.Password.invalid &&
+          profileFormDelete.controls.Password.errors.maxlength
+        "
+        >{{
+          "GENERIC.MAX_CHARACTERS"
+            | translate
+              : {
+                  maxchar:
+                    loginForm.controls.Password.errors.maxlength.requiredLength
+                }
+        }}</mat-error
+      >
+    </mat-form-field>
+    <div
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutAlign="space-start center"
+      fxLayoutGap="30px"
+      fxLayoutGap.xs="5px"
+      class="center-buttons"
+    >
+      <div ngClass="mt-3 mb-2 hide-button-on-mobile">
+        <button mat-button ngClass="button_cancel" (click)="cancelDelete()">
+          Cancelar
+        </button>
+      </div>
+      <div>
+        <button
+          mat-button
+          class="red"
+          (click)="deleteAccountService()"
+          [disabled]="!profileFormDelete.valid"
+          [ngClass]="{ 'red-disable': !profileFormDelete.valid }"
+        >
+          <span fxLayoutAlign="center space-between"> Eliminar mi cuenta </span>
+        </button>
+      </div>
+      <div ngClass="mt-3 mb-2 hide-button-on-desktop">
+        <button mat-button ngClass="button_cancel" (click)="cancelDelete()">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>

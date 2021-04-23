@@ -218,6 +218,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       cert: [null, Validators.required],
       ced1: [null, Validators.required],
       ced2: [null, Validators.required],
+      description: [null, Validators.required]
     });
   }
 
@@ -386,7 +387,8 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       bankaccountnumber: btoa(this.accountForm.controls.numberAccount.value),
       bankcertificate: this.fileBankCertificate,
       FileIdentificationCard1: this.fileCed1,
-      FileIdentificationCard2: this.fileCed2
+      FileIdentificationCard2: this.fileCed2,
+      description: this.accountForm.controls.description.value
     };
 
     this.subscription = this.user
@@ -674,74 +676,13 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  public deleteAccount() {
-    const title = "";
-    const template = this.templateDelete;
-    let isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-    let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    if (iOS || isSafari) {
-      window.document.body.scrollTop = 0;
-    } else {
-      window.document.documentElement.scrollTop = 0;
-    }
-    this.dialog.open(ModalGenericComponent, {
-      data: {
-        title,
-        template,
-      },
-    });
-  }
+
   public cancelDelete() {
 
     this.dialog.closeAll();
     this.profileFormDelete.controls.Password.setValue("");
   }
-  public deleteAccountService() {
-    let data = {
-      password: btoa(this.profileFormDelete.controls.Password.value),
-    };
-    this.user.deleteUser(data).subscribe(
-      (resp: any) => {
-        if (resp.state === "Success") {
-          Swal.fire({
-            text: "Tu cuenta se ha eliminado con éxito",
-            type: "success",
-            confirmButtonText: "Aceptar",
-            confirmButtonClass: "upload-success"
-          }).then(() => {
-            this.dialog.closeAll();
-            this.utils.logout();
-          });
-        } else {
-          this.openSnackBar(resp.userMessage, "Cerrar");
-          //this.dialog.closeAll();
-          //document.documentElement.scrollTop = 0;
-          //window.scroll(0, 0)
-          //window.document.documentElement.scrollTop = 0
-          //this.utils.logout();
-          //var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-          //var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-          //console.log(iOS);
-          //console.log(isSafari);
-          //if (iOS || isSafari) {
-          //  document.body.scrollTop = 0;
-          //} else {
-          //  document.documentElement.scrollTop = 0;
-          //}
 
-        }
-      },
-      (err) => {
-        //this.wrongPass = true;
-        this.openSnackBar(err.userMessage, "Cerrar");
-
-      }
-    )
-    //console.log(this.user.deleteUser());
-  }
-  //changeData() {
-  //  this.wrongPass = false;
-  //}
 }
 
 

@@ -20,11 +20,12 @@ import { config } from "process";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 
+
 describe("AuditComponent", () => {
   let component: AuditComponent;
   let fixture: ComponentFixture<AuditComponent>;
 
-  const mockLinksService = jasmine.createSpyObj("LinksService", ["getAuditoria"]);
+  const mockLinksService = jasmine.createSpyObj("LinksService", ["getAuditoria", "getAuditoriaDatosUser"]);
 
   const audit = {
     state: "Success",
@@ -71,6 +72,7 @@ describe("AuditComponent", () => {
 
   beforeEach(() => {
     mockLinksService.getAuditoria.and.returnValue(of(audit));
+    mockLinksService.getAuditoriaDatosUser.and.returnValue(of(audit));
     fixture = TestBed.createComponent(AuditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -96,7 +98,10 @@ describe("AuditComponent", () => {
     const btn = nativeElementbtn.querySelector(".btn");
     btn.dispatchEvent(new Event("click"));
     fixture.detectChanges();
+    component.dateForm.controls.typeRepor.setValue("1");
     component.exportAudit();
+
+
     expect(mockLinksService.getAuditoria).toHaveBeenCalled();
   });
 

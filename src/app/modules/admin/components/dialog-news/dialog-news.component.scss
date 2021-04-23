@@ -73,3 +73,10 @@
   position: relative;
   top: 4px;
 }
+.class-description {
+  height: auto;
+  max-height: 200px;
+  width: 350px;
+  overflow-y: auto;
+  margin-right: 5px;
+}

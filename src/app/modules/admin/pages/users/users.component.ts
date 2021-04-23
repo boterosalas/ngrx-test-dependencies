@@ -81,6 +81,10 @@ export class UsersComponent extends MatPaginatorIntl
   {
     titulo: "Comentarios & Sugerencias",
     value: 5
+  },
+  {
+    titulo: "Respuesta de cuenta eliminada",
+    value: 6
   }
   ]
   locale = {
@@ -584,7 +588,7 @@ export class UsersComponent extends MatPaginatorIntl
     this.subscription.unsubscribe();
   }
   onChangeSelected(event) {
-    if (event === "Datos de gamificación" || event === "Usuarios externos" || event === "Comentarios & Sugerencias") {
+    if (event === "Datos de gamificación" || event === "Usuarios externos") {
       this.dateNoVisible = true;
       //this.dateForm.get('dateRange').clearValidators();
       //this.dateForm.updateValueAndValidity();
@@ -615,10 +619,10 @@ export class UsersComponent extends MatPaginatorIntl
   }
   public getComments() {
     this.dateParamsReport = {
-      start: this.dateForm.controls.dateRange.value.startDate.format(),
-      end: this.dateForm.controls.dateRange.value.endDate.format()
+      start: this.dateForm.controls.dateRange.value.startDate.format("YYYY-MM-DD"),
+      end: this.dateForm.controls.dateRange.value.endDate.format("YYYY-MM-DD")
     };
-    this.subscription = this.file.getHistoricalBankInformation(this.dateParamsReport)
+    this.subscription = this.usersService.getReportCommets(this.dateParamsReport)
       .subscribe((respExcel: ResponseService) => {
         if (respExcel.state === "Success") {
           this.openSnackBar(respExcel.userMessage, "Cerrar");
@@ -629,6 +633,25 @@ export class UsersComponent extends MatPaginatorIntl
           }
         }
       });
+  }
+  public getDeleteComments() {
+    //getDeleteCommets
+    this.dateParamsReport = {
+      start: this.dateForm.controls.dateRange.value.startDate.format("YYYY-MM-DD"),
+      end: this.dateForm.controls.dateRange.value.endDate.format("YYYY-MM-DD")
+    };
+    this.subscription = this.usersService.getDeleteCommetsRest(this.dateParamsReport)
+      .subscribe((respExcel: ResponseService) => {
+        if (respExcel.state === "Success") {
+          this.openSnackBar(respExcel.userMessage, "Cerrar");
+          this.dateForm.reset();
+          if (this.dateForm.controls.dateRange.value.startDate === null) {
+            //this.disButon = true;
+            this.disableButon = true;
+          }
+        }
+      });
+
   }
   public getAnyReport() {
     if (this.dateForm.controls.tipoReport.value === "1") {
@@ -644,6 +667,8 @@ export class UsersComponent extends MatPaginatorIntl
       this.getGamification();
     } else if (this.dateForm.controls.tipoReport.value === "5") {
       this.getComments();
+    } else if (this.dateForm.controls.tipoReport.value === "6") {
+      this.getDeleteComments();
     }
 
   }
