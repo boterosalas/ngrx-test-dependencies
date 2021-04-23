@@ -628,11 +628,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
     this.user.saveFeedback(datos).subscribe((resp) => {
       this.sendData = true;
+      this.dateForm.reset();
     })
   }
   public cerrarForm() {
     this.formData = false;
     this.sendData = false;
+    this.dateForm.reset();
   }
   public openForm() {
     this.formData = true;

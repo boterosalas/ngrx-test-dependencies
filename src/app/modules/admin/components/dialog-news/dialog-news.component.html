@@ -46,12 +46,14 @@
       <span class="galano-bold gray w-label">REFERENCIA DE ORDEN/SERVICIO</span>
       <span class="normal-text">{{ data.element.code }} </span>
     </p>
-    <p fxLayout="column" class="margin-zero-bottom">
-      <span class="galano-bold gray">DESCRIPCIÓN DE LA NOVEDAD</span>
-      <span class="normal-text w-description">{{
-        data.element.description
-      }}</span>
-    </p>
+    <div fxLayout="column" class="margin-zero-bottom">
+      <span class="galano-bold gray mt-2">DESCRIPCIÓN DE LA NOVEDAD</span>
+      <div class="class-description">
+        <span class="normal-text w-description">{{
+          data.element.description
+        }}</span>
+      </div>
+    </div>
     <p fxLayout="column" class="margin-zero-bottom">
       <span class="galano-bold gray w-label">EVIDENCIA</span>
       <span (click)="viewerImage()" class="normal-link cursor-pointer">{{

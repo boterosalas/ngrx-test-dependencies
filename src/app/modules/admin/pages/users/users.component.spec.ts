@@ -47,7 +47,9 @@ describe("UsersComponent", () => {
     "getReportGamification",
     "statusUser",
     "comunitcations",
-    "verifiedUser"
+    "verifiedUser",
+    "getReportCommets",
+    "getDeleteCommetsRest"
   ]);
 
   const dataUser = {
@@ -192,6 +194,8 @@ describe("UsersComponent", () => {
     mockUserService.statusUser.and.returnValue(of(getUserExcel))
     mockUserService.comunitcations.and.returnValue(of(getUserExcel))
     mockUserService.verifiedUser.and.returnValue(of(getUserExcel))
+    mockUserService.getReportCommets.and.returnValue(of(getUserExcel))
+    mockUserService.getDeleteCommetsRest.and.returnValue(of(getUserExcel))
     //mockUserService.getExternalUser.and.returnValue(of(getUserExcel));verifiedUser
     fixture = TestBed.createComponent(UsersComponent);
     component = fixture.componentInstance;
@@ -322,6 +326,9 @@ describe("UsersComponent", () => {
     let end = moment("12-01-2020");
     component.dateForm.controls.dateRange.setValue({ startDate: end, endDate: start });
     component.getComments();
+
+    component.dateForm.controls.dateRange.setValue({ startDate: end, endDate: start });
+    component.getDeleteComments();
     expect(datos).toBeTruthy();
   });
 
