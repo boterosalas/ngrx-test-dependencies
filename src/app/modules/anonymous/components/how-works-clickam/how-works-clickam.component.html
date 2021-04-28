@@ -11,7 +11,7 @@
 >
   <div *ngFor="let item of works">
     <span fxLayout="column" class="card">
-      <img class="imagen-how-works" [src]="item.icon" alt="item.name" />
+      <img class="imagen-how-works" [src]="item.icon" [alt]="item.title" />
       <p class="purple-text text-center f-18">{{ item.title }}</p>
     </span>
   </div>
@@ -25,7 +25,7 @@
 >
   <div ngxSlickItem *ngFor="let item of works">
     <span fxLayout="column" class="card">
-      <img [src]="item.icon" alt="item.name" />
+      <img class="imagen-how-works-mobile" [src]="item.icon" [alt]="item.title" />
       <p class="purple-text text-center f-14">{{ item.title }}</p>
     </span>
   </div>
