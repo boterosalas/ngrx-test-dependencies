@@ -190,6 +190,9 @@ export class DialogUserComponent implements OnInit, OnDestroy {
       identification: this.dataAddImagen.controls.number.value,
     }
     this.user.updateInfoClicker(datos).subscribe((resp) => {
+      this.data.identification = this.dataAddImagen.controls.number.value;
+      this.data.cellphone = this.dataAddImagen.controls.cellphone.value;
+      this.data.email = this.dataAddImagen.controls.email.value;
       this.onNoClickEdit();
     })
   }

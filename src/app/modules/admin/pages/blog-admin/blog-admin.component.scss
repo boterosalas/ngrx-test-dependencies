@@ -1,3 +1,5 @@
+@import "variables";
+
 .line-medium {
   width: 80%;
   height: 1px;
@@ -25,7 +27,12 @@
   width: 440px;
 }
 .button-save {
-  background-color: #37236a;
+  background-color: $primary-color;
   box-shadow: 0px 3px 9px #3a226a80;
   color: #ffffff;
+}
+
+.style-icon {
+  font-size: 24px;
+  color: $purple2;
 }
