@@ -1,3 +1,5 @@
+@import "variables";
+
 .w-icon {
   width: 30px;
 }
@@ -34,5 +36,5 @@
 }
 .style-icon {
   font-size: 22px;
-  color: #37236a;
+  color: $purple2;
 }

@@ -45,6 +45,7 @@ export class UserService {
   apiBanks = "userprofile/getBanks";
   apiUploadFiles = "userprofile/upload";
   apiDownloadFile = "userprofile/downloadBase64";
+  apiDownload = "userprofile/download";
   apiGetuserdata = "userprofile/getuserdata";
   apiUpdateUserEmail = "userprofile/updateUserEmail";
   apiRegisterUserTerms = "userprofile/registeruserterms";
@@ -68,6 +69,8 @@ export class UserService {
   apiReportNovetly = "novelty/getnoveltiesbyuser";
   apiUpdateInfoClicker = "userprofile/updateinfoclicker";
   apiSaveFeedBack = "userprofile/savefeedback";
+  apiGetStatusVerification = "userprofile/getstatusverification";
+  apiUpdateResponseAccountBank = "userprofile/updateresponseaccountbank";
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
