@@ -135,6 +135,8 @@ describe('DialogUserComponent', () => {
   it('changeTabs', () => {
     component.changeTabs(2);
     component.saveInfoPersonal();
+    component.saveRejectionMessage();
+    component.enableDisabledEditMessage();
     component.onNoClickEdit();
     expect(component.selectedTab).toBe(2)
     expect(component.pad(2)).toBe("02")

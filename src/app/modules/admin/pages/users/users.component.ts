@@ -279,6 +279,7 @@ export class UsersComponent extends MatPaginatorIntl
     const AntdateCed1 = user.mindateidentificationcard1;
     const AntdateCed2 = user.mindateidentificationcard2;
     const AntdateCertBank = user.mindatebankcertificate;
+    const responseAccountBank = user.responseaccountbank;
 
     if (state === "Inactivo") {
       state = false;
@@ -292,11 +293,7 @@ export class UsersComponent extends MatPaginatorIntl
     } else {
       receiveCommunications = false;
     }
-    if (verified === "No") {
-      verified = false;
-    } else {
-      verified = true;
-    }
+
     if (isEmployeeGrupoExito === "INTERNO") {
       isEmployeeGrupoExito = true;
     } else {
@@ -328,7 +325,8 @@ export class UsersComponent extends MatPaginatorIntl
         dateCertBank,
         AntdateCed1,
         AntdateCed2,
-        AntdateCertBank
+        AntdateCertBank,
+        responseAccountBank
       }
     });
 
@@ -355,14 +353,8 @@ export class UsersComponent extends MatPaginatorIntl
     );
 
     this.subscription = dialogRef.componentInstance.verified.subscribe(
-      event => {
-        if (event.target.checked === false) {
-          this.changeVerified(userId, event.target.checked);
-        } else {
-          if (event.target.checked === true) {
-            this.changeVerified(userId, event.target.checked);
-          }
-        }
+      value => {
+        this.changeVerified(userId, value);
       }
     );
 
@@ -465,15 +457,8 @@ export class UsersComponent extends MatPaginatorIntl
   public changeVerified(userId, value) {
     this.subscription = this.usersService
       .verifiedUser(userId, value)
-      .subscribe(() => {
-        if (value !== false) {
-          this.openSnackBar("Se ha verificado el usuario", "Cerrar");
-        } else {
-          this.openSnackBar(
-            "Se ha cambiado el usuario a no verificado",
-            "Cerrar"
-          );
-        }
+      .subscribe((data: ResponseService) => {
+        this.openSnackBar(data.userMessage, "Cerrar");
       });
   }
 

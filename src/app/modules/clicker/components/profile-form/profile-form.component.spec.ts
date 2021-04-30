@@ -244,6 +244,13 @@ const ErrorUptade = {
     expect( mockAuthService.changePassword).toHaveBeenCalled();
   });
   
+  it('getStatusVerification', () => {
+    let service = fixture.debugElement.injector.get(UserService);
+    spyOn(service, 'getStatusVerification').and.returnValue(of(resp));
+    component.getStatusVerification("Tu cuenta entrará en estado de verificación pronto");
+    expect(service.getBankAccountNumber).toHaveBeenCalled();
+  });
+
   
 
   it('editName', () => {

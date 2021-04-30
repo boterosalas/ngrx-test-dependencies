@@ -233,5 +233,41 @@ a {
 
 .style-icon {
   font-size: 22px;
-  color: #8d7eb7;
+  color: $purple2;
+}
+
+.style-icon-enable {
+  color: $purple2;
+}
+
+.style-icon-disabled {
+  color: #D2D0D4;
+  pointer-events: none;
+}
+
+.edit-message {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0;
+
+  .style-icon {
+    margin-left: 8px;
+  }
+}
+
+.select-option-status.mat-selected:not(.mat-option-disabled) {
+  background-color: #8D7EB7;
+  color: white;
+}
+
+.text-area-heigth {
+  height: 140px;
+}
+
+.rejection-message {
+  color: $primary-color;
+  font-family: "galano-medium", sans-serif;
+  font-size: 14px;
+  margin-top: 8px;
 }

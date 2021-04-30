@@ -1,5 +1,28 @@
 @import "variables";
 @import "animations";
+@import "mixins";
+
+.account-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.user-info {
+  width: 100%;
+}
+
+.bank-info {
+  width: 40%;
+  min-width: 440px;
+  @include from($large) {
+    width: 100%;
+    max-width: 510px;
+    min-width: initial;
+  }
+}
 
 .border-rad {
   border-radius: 10px;
@@ -32,8 +55,11 @@ label {
 }
 
 .lineh {
-  line-height: 2;
+  line-height: 1.2;
   padding: 10px 0px;
+  @include from($small) {
+    padding: 0;
+  }
 }
 
 @media screen and (max-width: 450px) {
@@ -60,8 +86,119 @@ input[type="file"] {
 
 .header {
   background: #f3f1f6;
-  color: #37236a;
+  color: $primary-color;
   text-transform: uppercase;
+
+  h3 {
+    font-size: 16px;
+    @include from($small) {
+      font-size: 13px;
+    }
+  }
+}
+
+.account-info {
+  padding: 0;
+
+  .content-state {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 15px;
+  }
+
+  h3 {
+    display: inline-block;
+    line-height: 1.2;
+    @include from(375px) {
+      max-width: 122px;
+    }
+  }
+}
+
+.info-status {
+  width: 100%;
+  line-height: 1.2;
+  text-transform: initial;
+  padding: 15px;
+  @include from($large) {
+    padding: 15px 20px;
+  }
+  
+  h4 {
+    margin: 0 0 5px;
+    font-size: 15px;
+    @include from($small) {
+      font-size: 14px;
+    }
+  }
+  p {
+    margin: 0;
+    color: $primary-color;
+    font-size: 15px;
+    font-family: "galano", sans-serif;
+    @include from($small) {
+      font-size: 14px;
+    }
+  }
+}
+
+.verification-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.2;
+  text-transform: initial;
+  background-color: $medium-grey;
+  color: white;
+  border-radius: 10px;
+  padding: 3px 8px 4px 5px;
+  min-width: 100px;
+  margin-left: 10px;
+  font-size: 12px;
+
+  img {
+    margin-right: 4px;
+    width: 17px;
+  }
+}
+
+.in-progress .verification-status {
+  background-color: $medium-yellow;
+}
+
+.verified .verification-status {
+  background-color: $green;
+}
+
+.rejected .verification-status {
+  background-color: $red;
+}
+
+.rejected ~ .info-status {
+  background-color: #FFEEEB;
+
+  h4, p {
+    color: $red;
+  }
+}
+
+.registered-account {
+  padding: 12px 5px 12px 2em;
+  label {
+    @include from($small) {
+      line-height: 1.2;
+    }
+  }
+}
+
+.bank-account {
+  color: $primary-color;
+  font-family: "galano-medium", sans-serif;
+  span:first-child {
+    color: $footer-bg;
+    font-family: "galano", sans-serif;
+  }
 }
 
 .address {
@@ -89,9 +226,11 @@ input[type="file"] {
   color: #ff5555;
   width: 100%;
   margin-right: 0px !important;
+  line-height: 1.2;
 }
 .card-delete {
   background-color: #ffeeeb !important;
+  width: 60%;
 }
 @media screen and (max-width: 450px) {
   .title-delete {
@@ -102,6 +241,7 @@ input[type="file"] {
   display: flex;
   width: 100%;
   justify-content: space-around;
+  align-items: center;
 }
 .red-disable {
   background-color: #ff8f84 !important;
@@ -124,10 +264,13 @@ input[type="file"] {
   }
 }
 .container-profile {
-  width: 80% !important;
-}
-.container-account {
-  width: 70% !important;
+  width: 55%;
+  min-width: 515px;
+  @include from($large) {
+    width: 100%;
+    max-width: 510px;
+    min-width: initial;
+  }
 }
 .text-area-heigth {
   //width: 80%;
@@ -140,9 +283,6 @@ input[type="file"] {
   color: #37236a;
 }
 @media screen and (max-width: 450px) {
-  .container-profile {
-    width: 100% !important;
-  }
   .container-account {
     width: 100% !important;
   }

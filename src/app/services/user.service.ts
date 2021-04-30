@@ -429,11 +429,11 @@ export class UserService {
       );
   }
 
-  public verifiedUser(id: any, value: boolean) {
+  public verifiedUser(id: any, value: number) {
     return this.http
       .post(
         `${this.url}${this.apiVerified}`,
-        { userid: id, value },
+        { userid: id, verified: value },
         this.httpOptions
       )
       .pipe(
@@ -638,6 +638,39 @@ export class UserService {
     return this.http
       .get(
         `${this.urlReports}${this.apiDeleteComments}?&start=${params.start}&end=${params.end}`,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+  }
+  public getStatusVerification() {
+    return this.http
+      .get(
+        `${this.url}${this.apiGetStatusVerification}`,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+  }
+  public postUpdateResponseAccountBank(data: any) {
+    return this.http
+      .post(
+        `${this.url}${this.apiUpdateResponseAccountBank}`,
+        data,
         this.httpOptions
       )
       .pipe(

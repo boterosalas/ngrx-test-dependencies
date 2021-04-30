@@ -228,20 +228,31 @@
           </span>
           <div>
             <p class="galano-bold gray">VERIFICACIÓN</p>
-            <mat-slide-toggle
-              [(ngModel)]="data.verified"
-              (change)="changeVerified()"
-              color="orange-toggle"
-              labelPosition="before"
-              id="verified-toggle"
-            >
-              <span class="third-text" *ngIf="data.verified === true">
-                Aprobado
-              </span>
-              <span class="third-text" *ngIf="data.verified === false">
-                Pendiente
-              </span>
-            </mat-slide-toggle>
+            <form [formGroup]="dateSelectedState">
+              <mat-form-field class="selected-state-account">
+                <mat-select
+                  formControlName="state"
+                >
+                  <mat-option
+                    (click)="changeVerified()"
+                    *ngFor="let accountStatus of accountStatements"
+                    value="{{ accountStatus.id }}"
+                    class="select-option-status"
+                  >
+                    <span>{{ accountStatus.value }}</span>
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </form>
+
+            <p class="galano-bold gray edit-message">
+              MENSAJE DE RECHAZO
+              <i 
+                class="tio-edit style-icon cursor-pointer {{ enableRejectionMessage ? 'style-icon-enable' : 'style-icon-disabled' }}"
+                (click)="editRejectionMessage()"
+              ></i>
+            </p>
+            <p class="rejection-message">{{ this.enableRejectionMessage && this.data.responseAccountBank ? this.data.responseAccountBank : '-' }}</p>
           </div>
         </div>
       </div>
@@ -541,6 +552,50 @@
         id="download-users"
         class="ml-2"
         [disabled]="!dataAddImagen.valid"
+      >
+        Guardar Cambios
+      </button>
+    </div>
+  </div>
+</ng-template>
+<ng-template #templateRejectionMessage>
+  <div>
+    <form [formGroup]="dataRejectionMessage">
+      <mat-form-field style="width: 370px">
+        <textarea
+          matInput
+          placeholder="Mensaje de rechazo"
+          formControlName="message"
+          type="text"
+          required
+          class="text-area-heigth"
+          style="color: #37236a"
+          value="{{ this.data.responseAccountBank ? this.data.responseAccountBank : '' }}"
+        ></textarea>
+        <mat-error
+          id="requiredMessage"
+          *ngIf="
+            dataRejectionMessage.controls.message.invalid &&
+            dataRejectionMessage.controls.message.errors.required
+          "
+          >{{
+            "GENERIC.REQUIRED" | translate: { formValue: "Mensaje de rechazo" }
+          }}</mat-error
+        >
+      </mat-form-field>
+    </form>
+
+    <div class="mt-3 mb-2" fxLayout="row" fxLayoutAlign="end end">
+      <button mat-button ngClass="button_cancel" (click)="onNoClickEdit()">
+        Cancelar
+      </button>
+      <button
+        mat-raised-button
+        color="orange"
+        (click)="saveRejectionMessage()"
+        id="saveMessage"
+        class="ml-2"
+        [disabled]="!dataRejectionMessage.valid"
       >
         Guardar Cambios
       </button>

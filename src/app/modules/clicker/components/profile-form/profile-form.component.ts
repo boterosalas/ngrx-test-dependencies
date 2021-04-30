@@ -106,15 +106,24 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   msg: string;
   classMsg: string;
   banks = [];
+  idVerified: number;
   typeAccount = [
     { id: 1, description: "Ahorros" },
     { id: 2, description: "Corriente" },
   ];
+  typesStatusAccount = [
+    { code: "NOTVERIFIED", status: "No verificada", title: "Verificación de cuenta", description: "Tu cuenta entrará en estado de verificación pronto, una vez sea verificada, se te depositarán las comisiones en ella.", icon: "/assets/img/icon-info-white.svg" },
+    { code: "INPROGRESS", status: "En verificación", title: "", description: "", icon: "/assets/img/icon-review.svg", className: "in-progress" },
+    { code: "VERIFIED", status: "Verificado", title: "", description: "", icon: "/assets/img/checked.svg", className: "verified" },
+    { code: "REJECTED", status: "Cuenta rechazada", title: "Motivo de rechazo", description: "", icon: "/assets/img/icon-alert-triangle.svg", className: "rejected" }
+  ]
+  accountStatus: any;
 
   showBankInfoUser: boolean;
   showPassword: boolean = true;
 
   ngOnInit() {
+    this.accountStatus = this.typesStatusAccount[0];
     this.subscription = this.user.userInfo$.subscribe((val) => {
       if (!!val) {
         this.userInfo = val;
@@ -131,6 +140,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
         this.typeBankAccount = val.typeBankAccount;
         this.userId = val.userId;
         this.isEmployee = val.isEmployeeGrupoExito;
+        this.idVerified = val.verified;
       }
 
       this.formProfile();
@@ -164,7 +174,28 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.subscription = this.user.getuserdata().subscribe((user) => {
       this.managedPayments = user.managedPayments;
       this.isEmployeeUser = user.isEmployeeGrupoExito;
+      this.getStatusVerification(user.responseAccountBank);
     });
+  }
+
+  public getStatusVerification(description) {
+    this.subscription = this.user.getStatusVerification()
+    .subscribe(
+      (resp: ResponseService) => {
+        if (resp.state === "Success") {
+          const accountStatus = resp.objectResponse.find((status) => status.id === this.idVerified)
+          this.accountStatus = this.typesStatusAccount.find((type) => type.code === accountStatus.code);
+          if (description && accountStatus.code !== "NOTVERIFIED") {
+            this.accountStatus.description = description;
+          }
+        } else {
+          this.openSnackBar(resp.userMessage, "Cerrar");
+        }
+      },
+      (err) => {
+        this.openSnackBar(err.userMessage, "Cerrar");
+      }
+    );
   }
 
   public formProfile() {
