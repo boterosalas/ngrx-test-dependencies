@@ -83,7 +83,7 @@ export class UsersComponent extends MatPaginatorIntl
     value: 5
   },
   {
-    titulo: "Respuesta de cuenta eliminada",
+    titulo: "Respuestas de cuentas eliminadas",
     value: 6
   }
   ]

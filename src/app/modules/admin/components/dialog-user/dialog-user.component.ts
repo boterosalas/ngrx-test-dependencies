@@ -238,10 +238,7 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     const edit = 0;
     const template = this.templateRejectionMessageCarousel;
 
-    this.dataAddImagen.reset();
-    this.dataAddImagen.controls.number.setValue(this.data.identification)
-    this.dataAddImagen.controls.cellphone.setValue(this.data.cellphone)
-    this.dataAddImagen.controls.email.setValue(this.data.email)
+    this.dataRejectionMessage.reset();
     this.dialogRef2 = this.dialog.open(ModalGenericComponent, {
       width: "450px",
       data: {
