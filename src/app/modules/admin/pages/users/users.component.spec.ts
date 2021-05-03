@@ -76,7 +76,11 @@ describe("UsersComponent", () => {
         typeBankAccount: null,
         bankAccountNumber: null,
         receiveCommunications: false,
-        address: null
+        address: null,
+        extensionIdentificationCard1: ".jpg",
+        extensionIdentificationCard2: ".jpg",
+        extensionBankCertificate: ".jpg",
+        responseAccountBank: "Cuenta rechazada"
       }
     ]
   };

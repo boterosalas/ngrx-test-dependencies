@@ -28,7 +28,6 @@ export class DeleteformComponent implements OnInit {
   account: number;
   activeText: boolean = true;
   profileFormDelete: FormGroup;
-  disableButton: string = "1";
   causeSurvey: string = "";
   disableButtonOr: boolean = true;
 
@@ -103,18 +102,12 @@ export class DeleteformComponent implements OnInit {
     });
   }
   public checkSurvey() {
-    for (let index = 0; index < this.descriptionVal.length; index++) {
-      if (this.descriptionVal[index].value === true) {
-        this.disableButton = "0";
-        this.disableButtonOr = false;
-      }
-    }
+    this.disableButtonOr = !this.descriptionVal.some(val => val.value);
+
     if (this.descriptionVal[this.descriptionVal.length - 1].value === true) {
-      this.disableButton = "1";
       this.disableButtonOr = true;
     }
-    if (this.descriptionVal[this.descriptionVal.length - 1].value === true && this.causeSurvey != "") {
-      this.disableButton = "0";
+    if (this.descriptionVal[this.descriptionVal.length - 1].value === true && this.causeSurvey && this.causeSurvey.length >= 10) {
       this.disableButtonOr = false;
     }
   }

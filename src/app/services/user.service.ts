@@ -279,6 +279,24 @@ export class UserService {
     );
   }
 
+  public downloadFiles(data) {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + this.authorization,
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+        "Content-Disposition": "attachment"
+      }),
+      responseType: 'blob' as 'json'
+    };
+
+    return this.http.post(
+      `${this.url}${this.apiDownload}`,
+      data,
+      httpOptions
+    );
+  }
+
   public getDepartments() {
     return this.http.get(`${this.url}${this.apiDepartment}`, this.httpOptions);
   }

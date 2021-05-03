@@ -708,7 +708,7 @@ export class ContentService {
         "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
         "Content-Disposition": "attachment"
       }),
-      responseType: 'blob' as 'json'
+      responseType: 'blob' as 'text'
     };
 
     return this.http

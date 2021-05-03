@@ -23,7 +23,7 @@ export class ActivateAccountFormComponent implements OnInit, OnDestroy {
     private utils: UtilsService
   ) {}
   
-  text:any;
+  text:any = "";
   emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
   activateForm: FormGroup;
   private subscription: Subscription = new Subscription();

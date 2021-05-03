@@ -341,7 +341,8 @@
     "ORIGIN": "ORIGEN",
     "VERIFIED": "VERIFICADO",
     "STATUS": "ESTADO",
-    "COMUNICATION": "COMUNICADO"
+    "COMUNICATION": "COMUNICADO",
+    "DOWNLOAD_SELECT": "Descargar seleccionados"
   },
   "AUDIT": {
     "AUDIT": "Auditoria"

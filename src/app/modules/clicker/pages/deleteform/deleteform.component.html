@@ -42,11 +42,12 @@
       [(ngModel)]="causeSurvey"
       placeholder="Cuéntanos qué otras razones tienes para eliminar tu cuenta."
       (ngModelChange)="checkSurvey()"
+      minlength="10"
     ></textarea>
     <div fxLayout="row" fxLayoutAlign="end end">
       <button
         mat-button
-        [ngClass]="disableButton === '1' ? button_delete : button_display"
+        [ngClass]="disableButtonOr ? 'button_delete' : 'button_display'"
         (click)="deleteAccount()"
         [disabled]="disableButtonOr"
       >
