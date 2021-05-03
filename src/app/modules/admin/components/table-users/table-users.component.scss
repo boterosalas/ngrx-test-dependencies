@@ -35,3 +35,19 @@ table {
   font-size: 22px;
   color: #f21905;
 }
+
+.not-verified {
+  color: $gray;
+}
+
+.in-progress {
+  color: $third-color;
+}
+
+.verified {
+  color: $green;
+}
+
+.rejected {
+  color: $red;
+}

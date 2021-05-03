@@ -270,15 +270,18 @@ export class UsersComponent extends MatPaginatorIntl
     let receiveCommunications = user.receiveCommunications;
     let isEmployeeGrupoExito = user.isEmployeeGrupoExito;
     let verified = user.verified;
-    const fileIdentificationCard1 = user.fileIdentificationCard1;
-    const fileIdentificationCard2 = user.fileIdentificationCard2;
-    const fileBankCertificate = user.fileBankCertificate;
+    const fileIdentificationCard1 = user.maxthumbnaildateidentificationcard1;
+    const fileIdentificationCard2 = user.maxthumbnaildateidentificationcard2;
+    const fileBankCertificate = user.MaxThumbnailDateBankCertificate;
     const dateCed1 = user.maxdateidentificationcard1;
     const dateCed2 = user.maxdateidentificationcard2;
     const dateCertBank = user.maxdatebankcertificate;
     const AntdateCed1 = user.mindateidentificationcard1;
     const AntdateCed2 = user.mindateidentificationcard2;
     const AntdateCertBank = user.mindatebankcertificate;
+    const extensionIdentificationCard1 = user.maxextensiondateidentificationcard1;
+    const extensionIdentificationCard2 = user.maxextensiondateidentificationcard2;
+    const extensionBankCertificate = user.maxextensiondatebankcertificate;
     const responseAccountBank = user.responseaccountbank;
 
     if (state === "Inactivo") {
@@ -326,6 +329,9 @@ export class UsersComponent extends MatPaginatorIntl
         AntdateCed1,
         AntdateCed2,
         AntdateCertBank,
+        extensionIdentificationCard1,
+        extensionIdentificationCard2,
+        extensionBankCertificate,
         responseAccountBank
       }
     });
@@ -358,39 +364,36 @@ export class UsersComponent extends MatPaginatorIntl
       }
     );
 
-    this.subscription = dialogRef.componentInstance.IdentificationCard1.subscribe(
-      () => {
-        this.usersService
-          .downloadFile(identification, "IdentificationCard1")
-          .subscribe((respid1: ResponseService) => {
-            this.download(respid1);
-          });
-      }
-    );
-
-    this.subscription = dialogRef.componentInstance.IdentificationCard2.subscribe(
-      () => {
-        this.usersService
-          .downloadFile(identification, "IdentificationCard2")
-          .subscribe((respid2: ResponseService) => {
-            this.download(respid2);
-          });
-      }
-    );
-
-    this.subscription = dialogRef.componentInstance.bankCertificate.subscribe(
-      () => {
-        this.usersService
-          .downloadFile(identification, "BankCertificate")
-          .subscribe((respBank: ResponseService) => {
-            this.download(respBank);
-          });
+    this.subscription = dialogRef.componentInstance.downloadFiles.subscribe(
+      data => {
+        this.downloadFiles(data);
       }
     );
 
     this.subscription = dialogRef.beforeClosed().subscribe(() => {
       this.searchUser(this.paginate);
     });
+  }
+
+  private downloadFiles(data) {
+    //679
+    this.usersService
+      .downloadFiles(data)
+      .subscribe((respid) => {
+        this.downloadBlob(respid, "application/zip");
+      });
+  }
+
+  private downloadBlob(data, type) {
+    let blob = new Blob([data], { type: type });
+    let url = window.URL.createObjectURL(blob);
+    const downloadLink = document.createElement("a");
+
+    if (type.includes("zip")) {
+      downloadLink.href = url;
+      downloadLink.download = "archivo.zip";
+      downloadLink.click();
+    }
   }
 
   public changeComunications(userId, value) {
@@ -409,37 +412,6 @@ export class UsersComponent extends MatPaginatorIntl
           );
         }
       });
-  }
-
-  /**
-   * Metodo para descargar archivos del usuario
-   * @param fileDownload
-   */
-
-  private download(fileDownload) {
-    if (fileDownload.state !== "Error") {
-      let base64 = fileDownload.objectResponse;
-      let splitbase64 = base64.split(",");
-      let file = splitbase64[1];
-
-      if (file.startsWith("/9j/")) {
-        this.ext = ".jpg";
-        this.contentType = "image/jpeg";
-      } else {
-        this.ext = ".pdf";
-        this.contentType = "application/pdf";
-      }
-
-      const linkSource = `data:${this.contentType};base64,${file}`;
-      const downloadLink = document.createElement("a");
-      const fileName = `archivo${this.ext}`;
-
-      downloadLink.href = linkSource;
-      downloadLink.download = fileName;
-      downloadLink.click();
-    } else {
-      this.openSnackBar(fileDownload.userMessage, "Cerrar");
-    }
   }
 
   public changeStateUser(userId, value) {

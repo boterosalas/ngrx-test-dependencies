@@ -111,22 +111,8 @@ describe('DialogUserComponent', () => {
     expect(component.verified.emit).toHaveBeenCalled();
   });
 
-  it('change IdentificationCard1Download', () => {
-    spyOn(component.IdentificationCard1, 'emit');
-    component.IdentificationCard1Download();
-    expect(component.IdentificationCard1.emit).toHaveBeenCalled();
-  });
-
-  it('change IdentificationCard12ownload', () => {
-    spyOn(component.IdentificationCard2, 'emit');
-    component.IdentificationCard2Download();
-    expect(component.IdentificationCard2.emit).toHaveBeenCalled();
-  });
-
-  it('change bankCardDownload', () => {
-    spyOn(component.bankCertificate, 'emit');
-    component.bankCardDownload();
-    expect(component.bankCertificate.emit).toHaveBeenCalled();
+  it('downloadSelectedFiles', () => {
+    component.downloadSelectedFiles();
     let spy = spyOn(component.dialogRef, 'close').and.callThrough();
     component.onNoClick();
     expect(spy).toHaveBeenCalled();

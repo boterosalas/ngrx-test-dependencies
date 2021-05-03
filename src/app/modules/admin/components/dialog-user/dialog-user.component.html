@@ -116,19 +116,33 @@
         <div class="add-information">
           <h3 class="secundary-text">Archivos Adjuntos</h3>
           <p fxLayout="row">
+            <span class="galano-bold gray s-label"></span>
             <span class="galano-bold gray w-label">ARCHIVO</span>
+            <span class="galano-bold gray s-label">TIPO</span>
             <span class="galano-bold gray wx-label">PRIMERA CARGA</span>
             <span class="galano-bold gray wx-label">ÚLTIMA CARGA</span>
           </p>
           <p fxLayout="row">
-            <span class="w-label"
+            <span class="s-label">
+              <mat-checkbox
+                class="mr-3 mb-2"
+                (change)="changeValue($event, 'IdentificationCard1')"
+              >
+              </mat-checkbox>
+            </span>
+            <span class="w-label preview-container"
               ><a
                 class="text-link text-underline cursor-pointer"
-                (click)="IdentificationCard1Download()"
+                (click)="showVisibilityPreview($event)"
               >
-                Cédula 1</a
-              ></span
-            >
+                Cédula 1</a>
+              <div class="preview-image">
+                <img [src]="base64IdentificationCard1" alt="Preview Cédula 1">
+              </div>
+            </span>
+            <span class="s-label normal-text">{{
+              data.extensionIdentificationCard1
+            }}</span>
             <span class="wx-label normal-text">{{
               data.AntdateCed1 | date: "yyyy/MM/dd hh:mm:ss"
             }}</span>
@@ -137,16 +151,28 @@
             }}</span>
           </p>
           <p fxLayout="row">
-            <span class="w-label"
+            <span class="s-label">
+              <mat-checkbox
+                class="mr-3 mb-2"
+                (change)="changeValue($event, 'IdentificationCard2')"
+              >
+              </mat-checkbox>
+            </span>
+            <span class="w-label preview-container"
               ><a
                 class="text-link text-underline cursor-pointer"
-                (click)="IdentificationCard2Download()"
+                (click)="showVisibilityPreview($event)"
                 target="_blank"
                 id="ced2"
               >
-                Cédula 2</a
-              ></span
-            >
+                Cédula 2</a>
+              <div class="preview-image">
+                <img [src]="base64IdentificationCard2" alt="Preview Cédula 2">
+              </div>
+            </span>
+            <span class="s-label normal-text">{{
+              data.extensionIdentificationCard2
+            }}</span>
             <span class="wx-label normal-text">{{
               data.AntdateCed2 | date: "yyyy/MM/dd hh:mm:ss"
             }}</span>
@@ -155,16 +181,28 @@
             }}</span>
           </p>
           <p fxLayout="row">
-            <span class="w-label"
+            <span class="s-label">
+              <mat-checkbox
+                class="mr-3 mb-2"
+                (change)="changeValue($event, 'BankCertificate')"
+              >
+              </mat-checkbox>
+            </span>
+            <span class="w-label preview-container"
               ><a
                 class="text-link text-underline cursor-pointer"
-                (click)="bankCardDownload()"
+                (click)="showVisibilityPreview($event)"
                 target="_blank"
                 id="certbank"
               >
-                Cert.bancaria</a
-              ></span
-            >
+                Cert.bancaria</a>
+              <div class="preview-image">
+                <img [src]="base64BankCard" alt="Preview Cert.bancaria">
+              </div>
+            </span>
+            <span class="s-label normal-text">{{
+              data.extensionBankCertificate
+            }}</span>
             <span class="wx-label normal-text">{{
               data.AntdateCertBank | date: "yyyy/MM/dd hh:mm:ss"
             }}</span>
@@ -172,6 +210,15 @@
               data.dateCertBank | date: "yyyy/MM/dd hh:mm:ss"
             }}</span>
           </p>
+          <button 
+            (click)="downloadSelectedFiles()"
+            class="download-button"
+            mat-raised-button
+            color="orange"
+          >
+            {{ "USERS.DOWNLOAD_SELECT" | translate }} 
+            <i class="tio-download_from_cloud style-icon-download"></i>
+        </button>
         </div>
       </div>
       <div fxLayout="column" fxFlex="25" fxLayoutAlign="start start">

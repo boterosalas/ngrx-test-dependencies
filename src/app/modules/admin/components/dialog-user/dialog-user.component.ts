@@ -49,9 +49,7 @@ export class DialogUserComponent implements OnInit, OnDestroy {
   @Output() state = new EventEmitter();
   @Output() comunications = new EventEmitter();
   @Output() verified = new EventEmitter();
-  @Output() IdentificationCard1 = new EventEmitter();
-  @Output() IdentificationCard2 = new EventEmitter();
-  @Output() bankCertificate = new EventEmitter();
+  @Output() downloadFiles = new EventEmitter();
   isLoggedIn: any;
   private subscription: Subscription = new Subscription();
   idAdmin: string;
@@ -73,6 +71,10 @@ export class DialogUserComponent implements OnInit, OnDestroy {
   accountStatements: any;
   enableRejectionMessage: boolean = false;
   rejectionMessage: string;
+  selectedFiles = [];
+  base64IdentificationCard1: string = "";
+  base64IdentificationCard2: string = "";
+  base64BankCard: string = "";
 
   changeStatus() {
     this.state.emit(event);
@@ -86,17 +88,21 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     this.enableDisabledEditMessage();
     this.verified.emit(this.dateSelectedState.controls.state.value);
   }
-
-  IdentificationCard1Download() {
-    this.IdentificationCard1.emit(event);
+  
+  downloadSelectedFiles() {
+    if (this.selectedFiles.length > 0) {
+      const data = {
+        userId: this.data.userId,
+        typeDocument: this.selectedFiles
+      }
+      this.downloadFiles.emit(data);
+    } else {
+      this.openSnackBar("No ha seleccionado ningún archivo.", "Cerrar");
+    }
   }
 
-  IdentificationCard2Download() {
-    this.IdentificationCard2.emit(event);
-  }
-
-  bankCardDownload() {
-    this.bankCertificate.emit(event);
+  changeValue(event, item) {
+    this.addOrRemoveItem(event.checked, item);
   }
 
   onNoClick(): void {
@@ -126,9 +132,12 @@ export class DialogUserComponent implements OnInit, OnDestroy {
       state: [null, Validators.required],
     });
     this.getStatusVerification();
+    this.preloadImagesPreview();
+    document.addEventListener("click", this.hiddenVisibilityPreview, false);
   }
 
   ngOnDestroy(): void {
+    document.removeEventListener("click", this.hiddenVisibilityPreview, false);
     this.subscription.unsubscribe();
   }
 
@@ -273,5 +282,64 @@ export class DialogUserComponent implements OnInit, OnDestroy {
       this.data.responseAccountBank = this.dataRejectionMessage.controls.message.value;
       this.onNoClickEdit();
     })
+  }
+
+  private addOrRemoveItem(value, item) {
+    if (value && !this.selectedFiles.includes(item)) {
+      this.selectedFiles.push(item);
+    } else if (!value) {
+      this.selectedFiles = this.selectedFiles.filter(val => val !== item);
+    }
+  }
+
+  private preloadImagesPreview() {
+    const formats = [
+      { extension: ".jpg", contentType: "image/jpeg" },
+      { extension: ".jpeg", contentType: "image/jpeg" },
+      { extension: ".png", contentType: "image/png" },
+      { extension: ".pdf", contentType: "application/pdf" }
+    ];
+
+    const contentTypeIdentCard1 = formats.filter(format => format.extension === this.data.extensionIdentificationCard1); 
+    const contentTypeIdentCard2 = formats.filter(format => format.extension === this.data.extensionIdentificationCard2); 
+    const contentTypeBankCard = formats.filter(format => format.extension === this.data.extensionBankCertificate);
+
+    if (this.data.fileIdentificationCard1) {
+      this.base64IdentificationCard1 = `data:${contentTypeIdentCard1.length > 0 
+        ? contentTypeIdentCard1[0].contentType 
+        : "image/jpeg"};base64,${this.data.fileIdentificationCard1}`;
+    }
+
+    if (this.data.fileIdentificationCard2) {
+      this.base64IdentificationCard2 = `data:${contentTypeIdentCard2.length > 0 
+        ? contentTypeIdentCard2[0].contentType 
+        : "image/jpeg"};base64,${this.data.fileIdentificationCard2}`;
+    }
+
+    if (this.data.fileBankCertificate) {
+      this.base64BankCard = `data:${contentTypeBankCard.length > 0 
+        ? contentTypeBankCard[0].contentType 
+        : "image/jpeg"};base64,${this.data.fileBankCertificate}`;
+    }
+  }
+
+  private hiddenVisibilityPreview(event: any) {
+    const previews = document.querySelectorAll(".preview-image.visibility");
+
+    previews.forEach(preview => {
+      const link = preview ? preview.parentElement.querySelector(":scope > a") : preview;
+
+      if (preview && !preview.contains(event.target) && !link.contains(event.target)) {
+        preview.classList.remove("visibility");
+      }
+    });
+  }
+
+  showVisibilityPreview(event) {
+    const preview = event.target.parentElement.querySelector(":scope > .preview-image");
+
+    if (preview && !preview.classList.contains("visibility")) {
+      preview.classList.add("visibility");
+    }
   }
 }
