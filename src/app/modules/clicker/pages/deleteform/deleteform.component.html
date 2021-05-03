@@ -56,7 +56,6 @@
       <button
         mat-raised-button
         color="orange"
-        (click)="saveImagenOfertas()"
         id="download-users"
         class="ml-2"
         [routerLink]="['/mi-perfil']"
@@ -109,13 +108,12 @@
         >{{
           "GENERIC.MIN_CHARACTERS"
             | translate
-              : {
-                  minchar:
-                    loginForm.controls.Password.errors.minlength.requiredLength
-                }
         }}</mat-error
       >
-
+      <!-- : {
+        minchar:
+          loginForm.controls.Password.errors.minlength.requiredLength
+      } -->
       <mat-error
         id="maxPassword"
         *ngIf="
@@ -125,13 +123,15 @@
         >{{
           "GENERIC.MAX_CHARACTERS"
             | translate
-              : {
-                  maxchar:
-                    loginForm.controls.Password.errors.maxlength.requiredLength
-                }
         }}</mat-error
       >
     </mat-form-field>
+
+    <!-- : {
+      maxchar:
+        loginForm.controls.Password.errors.maxlength.requiredLength
+    } -->
+
     <div
       fxLayout="row"
       fxLayout.xs="column"
