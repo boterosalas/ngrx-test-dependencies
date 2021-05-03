@@ -2224,3 +2224,17 @@ h3#bussiness2 {
     color: #ffffff !important;
   }
 }
+
+.selected-state-account .mat-form-field-wrapper {
+  padding-bottom: 8px;
+
+  .mat-select-value-text {
+    font-family:  "galano-medium", sans-serif;
+    color: $primary-color;
+    font-size: 15px;
+  }
+
+  .mat-form-field-infix {
+    border-top: 0;
+  }
+}

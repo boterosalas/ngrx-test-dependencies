@@ -8,10 +8,11 @@ import {
   ViewChild,
   TemplateRef
 } from "@angular/core";
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { MatDialog, MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { Subscription } from "rxjs";
 import { UserService } from "src/app/services/user.service";
 import { AuthService } from "src/app/services/auth.service";
+import { ResponseService } from "src/app/interfaces/response";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import * as moment from "moment";
 import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
@@ -30,10 +31,13 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     private auth: AuthService,
     private dialog: MatDialog,
     private fb: FormBuilder,
+    private _snackBar: MatSnackBar,
   ) {
   }
   dateFormHoja: FormGroup;
   dataAddImagen: FormGroup;
+  dataRejectionMessage: FormGroup;
+  dateSelectedState: FormGroup;
   nextPayment: any;
   afterPayment: any;
   displayedColumns: string[] = ['negocio', 'linksgenerator', 'linksclicker', 'commision', 'sells'];
@@ -41,6 +45,7 @@ export class DialogUserComponent implements OnInit, OnDestroy {
   dateLastPayment: any;
   placeholder: string;
   @ViewChild("templateInfoPersonal", { static: false }) templateAddImagenCarousel: TemplateRef<any>;
+  @ViewChild("templateRejectionMessage", { static: false }) templateRejectionMessageCarousel: TemplateRef<any>;
   @Output() state = new EventEmitter();
   @Output() comunications = new EventEmitter();
   @Output() verified = new EventEmitter();
@@ -65,6 +70,10 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     monthNames: moment.monthsShort(),
     firstDay: 1 // first day is monday
   };
+  accountStatements: any;
+  enableRejectionMessage: boolean = false;
+  rejectionMessage: string;
+
   changeStatus() {
     this.state.emit(event);
   }
@@ -74,7 +83,8 @@ export class DialogUserComponent implements OnInit, OnDestroy {
   }
 
   changeVerified() {
-    this.verified.emit(event);
+    this.enableDisabledEditMessage();
+    this.verified.emit(this.dateSelectedState.controls.state.value);
   }
 
   IdentificationCard1Download() {
@@ -101,6 +111,7 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     }
     return number;
   }
+
   ngOnInit() {
     this.isLoggedIn = this.auth.isLoggedIn();
     this.dataAddImagen = this.fb.group({
@@ -108,12 +119,51 @@ export class DialogUserComponent implements OnInit, OnDestroy {
       email: [null, Validators.required],
       cellphone: [null, Validators.required],
     });
-
+    this.dataRejectionMessage = this.fb.group({
+      message: [null, Validators.required],
+    });
+    this.dateSelectedState = this.fb.group({
+      state: [null, Validators.required],
+    });
+    this.getStatusVerification();
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
+  private openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 3000,
+    });
+  }
+
+  getStatusVerification() {
+    this.subscription = this.user.getStatusVerification()
+    .subscribe(
+      (resp: ResponseService) => {
+        if (resp.state === "Success") {
+          this.accountStatements = resp.objectResponse;
+          const objectState = this.accountStatements.find((state) => state.value === this.data.verified);
+          if (objectState) {
+            this.dateSelectedState.controls.state.setValue(objectState.id.toString());
+            this.enableDisabledEditMessage();
+          }
+        } else {
+          this.openSnackBar(resp.userMessage, "Cerrar");
+        }
+      },
+      (err) => {
+        this.openSnackBar(err.userMessage, "Cerrar");
+      }
+    );
+  }
+
+  enableDisabledEditMessage() {
+    let idRejected = this.accountStatements.find((state) => state.code === "REJECTED").id;
+    this.enableRejectionMessage = this.dateSelectedState.controls.state.value === idRejected.toString() ? true : false;
+  }
+
   changeTabs(tabSelected: number) {
     //this.dateFormHoja.controls.dateRange.setValue(null);
     this.selectedTab = tabSelected;
@@ -182,6 +232,26 @@ export class DialogUserComponent implements OnInit, OnDestroy {
       },
     });
   }
+  editRejectionMessage() {
+    const title = "Editar mensaje de rechazo";
+    const idBussiness = 2;
+    const edit = 0;
+    const template = this.templateRejectionMessageCarousel;
+
+    this.dataAddImagen.reset();
+    this.dataAddImagen.controls.number.setValue(this.data.identification)
+    this.dataAddImagen.controls.cellphone.setValue(this.data.cellphone)
+    this.dataAddImagen.controls.email.setValue(this.data.email)
+    this.dialogRef2 = this.dialog.open(ModalGenericComponent, {
+      width: "450px",
+      data: {
+        title,
+        idBussiness,
+        template,
+        edit
+      },
+    });
+  }
   public saveInfoPersonal() {
     let datos = {
       userId: this.data.userId,
@@ -193,6 +263,17 @@ export class DialogUserComponent implements OnInit, OnDestroy {
       this.data.identification = this.dataAddImagen.controls.number.value;
       this.data.cellphone = this.dataAddImagen.controls.cellphone.value;
       this.data.email = this.dataAddImagen.controls.email.value;
+      this.onNoClickEdit();
+    })
+  }
+
+  public saveRejectionMessage() {
+    let datos = {
+      userId: this.data.userId,
+      message: this.dataRejectionMessage.controls.message.value
+    }
+    this.user.postUpdateResponseAccountBank(datos).subscribe((resp) => {
+      this.data.responseAccountBank = this.dataRejectionMessage.controls.message.value;
       this.onNoClickEdit();
     })
   }
