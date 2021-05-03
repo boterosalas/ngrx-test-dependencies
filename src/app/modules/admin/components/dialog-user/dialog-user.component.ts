@@ -131,7 +131,8 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     this.dateSelectedState = this.fb.group({
       state: [null, Validators.required],
     });
-    this.getStatusVerification();
+
+    this.getStatusVerificationUser();
     this.preloadImagesPreview();
     document.addEventListener("click", this.hiddenVisibilityPreview, false);
   }
@@ -147,10 +148,11 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     });
   }
 
-  getStatusVerification() {
+  public getStatusVerificationUser() {
     this.subscription = this.user.getStatusVerification()
     .subscribe(
       (resp: ResponseService) => {
+        console.log(resp)
         if (resp.state === "Success") {
           this.accountStatements = resp.objectResponse;
           const objectState = this.accountStatements.find((state) => state.value === this.data.verified);
@@ -279,6 +281,7 @@ export class DialogUserComponent implements OnInit, OnDestroy {
       message: this.dataRejectionMessage.controls.message.value
     }
     this.user.postUpdateResponseAccountBank(datos).subscribe((resp) => {
+      console.log(resp)
       this.data.responseAccountBank = this.dataRejectionMessage.controls.message.value;
       this.onNoClickEdit();
     })

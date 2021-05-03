@@ -25,7 +25,7 @@ export class ForgotpasswordformComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
   forgotPaswordForm: FormGroup;
-  text:any;
+  text:any = "";
 
   swalOptSuccess: Object = {
       title: "Se ha enviado un email",

@@ -18,7 +18,7 @@ describe('DialogUserComponent', () => {
   let component: DialogUserComponent;
   let fixture: ComponentFixture<DialogUserComponent>;
   const mockUserService = jasmine.createSpyObj("UserService", [
-    "getHojaVida", "updateInfoClicker"
+    "getHojaVida", "updateInfoClicker", "getStatusVerification", "postUpdateResponseAccountBank"
   ]);
   const dialogMock = {
     close: () => { }
@@ -43,6 +43,21 @@ describe('DialogUserComponent', () => {
       }
     ]
   };
+  const getStatusVerification = {
+    state: "Success",
+    userMessage: null,
+    objectResponse: [
+      {id: 4252, code: "NOTVERIFIED", value: "No verificada"},
+      {id: 4253, code: "INPROGRESS", value: "En proceso de verificación"},
+      {id: 4254, code: "VERIFIED", value: "Cuenta Verificada"},
+      {id: 4255, code: "REJECTED", value: "Cuenta rechazada"}
+    ]
+  };
+  const postUpdateResponse = {
+    state: "Success", 
+    userMessage: "Se ha guardado satisfactoriamente", 
+    objectResponse: null
+  }
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [DialogUserComponent],
@@ -80,6 +95,8 @@ describe('DialogUserComponent', () => {
       .compileComponents();
     mockUserService.getHojaVida.and.returnValue(of(getUserExcel));
     mockUserService.updateInfoClicker.and.returnValue(of(getUserExcel));
+    mockUserService.getStatusVerification.and.returnValue(of(getStatusVerification));
+    mockUserService.postUpdateResponseAccountBank.and.returnValue(of(postUpdateResponse));
   }));
 
   beforeEach(() => {
@@ -92,6 +109,11 @@ describe('DialogUserComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // it('getStatusVerificationUser', () => {
+  //   component.getStatusVerificationUser();
+  //   expect(mockUserService.getStatusVerification).toHaveBeenCalled();
+  // });
 
   it('change status', () => {
     spyOn(component.state, 'emit');
@@ -126,5 +148,5 @@ describe('DialogUserComponent', () => {
     component.onNoClickEdit();
     expect(component.selectedTab).toBe(2)
     expect(component.pad(2)).toBe("02")
-  })
+  });
 });
