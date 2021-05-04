@@ -1,1 +1,11 @@
 @import 'variables';
+
+#account h1 {
+  text-align: center;
+  font-family: $font-galano-bold;
+  margin-bottom: 15px;
+}
+
+#account.update-info-bank h1 {
+    text-align: left;
+}

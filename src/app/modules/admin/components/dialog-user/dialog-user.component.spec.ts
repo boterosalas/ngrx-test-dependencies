@@ -110,11 +110,6 @@ describe('DialogUserComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('getStatusVerificationUser', () => {
-  //   component.getStatusVerificationUser();
-  //   expect(mockUserService.getStatusVerification).toHaveBeenCalled();
-  // });
-
   it('change status', () => {
     spyOn(component.state, 'emit');
     component.changeStatus();
@@ -145,8 +140,11 @@ describe('DialogUserComponent', () => {
     component.saveInfoPersonal();
     component.saveRejectionMessage();
     component.enableDisabledEditMessage();
+    let spy = spyOn(component.dialogRef, 'close').and.callThrough();
+    component.onNoClick();
     component.onNoClickEdit();
     expect(component.selectedTab).toBe(2)
     expect(component.pad(2)).toBe("02")
+    expect(spy).toHaveBeenCalled()
   });
 });

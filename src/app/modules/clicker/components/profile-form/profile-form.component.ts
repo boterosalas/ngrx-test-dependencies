@@ -94,6 +94,9 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   showErrorCert: boolean = false;
   showErrorCed1: boolean = false;
   showErrorCed2: boolean = false;
+  showErrorFormatCert: boolean = false;
+  showErrorFormatCed1: boolean = false;
+  showErrorFormatCed2: boolean = false;
   fileBankCertificate: any;
   fileCed1: any;
   fileCed2: any;
@@ -416,10 +419,16 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       bank: this.accountForm.controls.bank.value,
       typebankaccount: this.accountForm.controls.typeAccount.value,
       bankaccountnumber: btoa(this.accountForm.controls.numberAccount.value),
-      bankcertificate: this.fileBankCertificate,
-      FileIdentificationCard1: this.fileCed1,
-      FileIdentificationCard2: this.fileCed2,
-      description: this.accountForm.controls.description.value
+      reason: this.accountForm.controls.description.value
+    };
+
+    let updateForm = {
+      cellphone: this.phone,
+      firstNames: this.name,
+      lastNames: this.lastName,
+      bank: this.accountForm.controls.bank.value,
+      bankAccountNumber: btoa(this.accountForm.controls.numberAccount.value),
+      typeBankAccount: this.accountForm.controls.typeAccount.value
     };
 
     this.subscription = this.user
@@ -436,11 +445,26 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
           this.openSnackBar(err.userMessage, "Cerrar");
         }
       );
+    
+    this.subscription = this.user
+      .updateUser(updateForm)
+      .subscribe(
+        (resp: any) => {
+          if (resp.state === "Success") {
+            // this.dialog.closeAll();
+            // this.user.getProfile();
+            // this.openSnackBar(resp.userMessage, "Cerrar");
+          }
+        },
+        (err) => {
+          this.openSnackBar(err.userMessage, "Cerrar");
+        }
+      );
   }
 
-  private openSnackBar(message: string, action: string) {
+  private openSnackBar(message: string, action: string, duration: number = 3000) {
     this._snackBar.open(message, action, {
-      duration: 3000,
+      duration,
     });
   }
 
@@ -477,6 +501,11 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
             );
             this.showBankInfoUser = true;
             this.showPassword = false;
+
+            const account = document.getElementById("account");
+            if (account) {
+              account.classList.add("update-info-bank");
+            }
           } else {
             this.openSnackBar(resp.userMessage, "Cerrar");
           }
@@ -619,76 +648,66 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
    */
 
   public onFileChangeFiles(event, param: string) {
-    let nameFile = event.target.files[0].name;
-    let reader = new FileReader();
     if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      let fileBlob = new Blob([file]);
-      let file2 = new File([fileBlob], nameFile);
-      reader.readAsDataURL(file2);
-      reader.onload = () => {
-        this.getExtension(nameFile);
-        if (this.validFormat === true) {
-          this.fileBankCertificate = reader.result;
-          this.nameFileCert = nameFile;
-          this.showErrorCert = false;
-          this.activebutton = true;
-        } else {
-          this.showErrorCert = true;
-          this.nameFileCert = nameFile;
-          this.activebutton = false;
+      const nameFile = event.target.files[0].name;
+      this.getExtension(nameFile);
+
+      if (this.validFormat) {
+        const formData = new FormData();
+    
+        formData.append("file", event.target.files[0]);
+        formData.append("typeDocument", param);
+        formData.append("identification", this.id);
+        formData.append("userId", this.userId);
+
+        this.subscription = this.user
+          .uploadFiles(formData)
+          .subscribe((response: ResponseService) => {
+            console.log(response);
+            if (response.state === "Success") {
+              this.activebutton = true;
+            } else {
+              this.openSnackBar(response.userMessage, "Cerrar");
+            }
+
+            switch (param) {
+              case "BankCertificate":
+                this.nameFileCert = nameFile;
+                this.showErrorCert = response.state === "Success" ? false : true;
+                break;
+              case "IdentificationCard1":
+                this.nameFileCed1 = nameFile;
+                this.showErrorCed1 = response.state === "Success" ? false : true;
+                break;
+              case "IdentificationCard2":
+                this.nameFileCed2 = nameFile;
+                this.showErrorCed2 = response.state === "Success" ? false : true;
+                break;
+              default:
+                break;
+            }
+          });
+      } else {
+        switch (param) {
+          case "BankCertificate":
+            this.nameFileCert = nameFile;
+            this.showErrorCert = this.showErrorFormatCert = true;
+            break;
+          case "IdentificationCard1":
+            this.nameFileCed1 = nameFile;
+            this.showErrorCed1 = this.showErrorFormatCed1 = true;
+            break;
+          case "IdentificationCard2":
+            this.nameFileCed2 = nameFile;
+            this.showErrorCed2 = this.showErrorFormatCed2 = true;
+            break;
+          default:
+            break;
         }
-      };
+      }
     }
   }
 
-  public onFileChangeFilesCed1(event, param: string) {
-    //console.log("Ejecuta 2")
-    let nameFile = event.target.files[0].name;
-    let reader = new FileReader();
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      let fileBlob = new Blob([file]);
-      let file2 = new File([fileBlob], nameFile);
-      reader.readAsDataURL(file2);
-      reader.onload = () => {
-        this.getExtension(nameFile);
-        if (this.validFormat === true) {
-          this.fileCed1 = reader.result;
-          this.nameFileCed1 = nameFile;
-          this.showErrorCed1 = false;
-          this.activebutton = true;
-        } else {
-          this.showErrorCed1 = true;
-          this.nameFileCed1 = nameFile;
-          this.activebutton = false;
-        }
-      };
-    }
-  }
-  public onFileChangeFilesCed2(event, param: string) {
-    let nameFile = event.target.files[0].name;
-    let reader = new FileReader();
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      let fileBlob = new Blob([file]);
-      let file2 = new File([fileBlob], nameFile);
-      reader.readAsDataURL(file2);
-      reader.onload = () => {
-        this.getExtension(nameFile);
-        if (this.validFormat === true) {
-          this.fileCed2 = reader.result;
-          this.nameFileCed2 = nameFile;
-          this.showErrorCed2 = false;
-          this.activebutton = true;
-        } else {
-          this.showErrorCed2 = true;
-          this.nameFileCed2 = nameFile;
-          this.activebutton = false;
-        }
-      };
-    }
-  }
   /**
  * Metodo para validar que la extension sea valida
  * @param nameFile
@@ -707,13 +726,9 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-
-  public cancelDelete() {
-
+  public cancel() {
     this.dialog.closeAll();
     this.profileFormDelete.controls.Password.setValue("");
   }
 
 }
-
-

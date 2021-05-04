@@ -35,6 +35,9 @@ export class PaymentInfoComponent implements OnInit {
   showErrorCed1: boolean = false;
   showErrorCed2: boolean = false;
   showErrorCert: boolean = false;
+  showErrorFormatCert: boolean = false;
+  showErrorFormatCed1: boolean = false;
+  showErrorFormatCed2: boolean = false;
   fileIdentificationCard1: any;
   fileIdentificationCard2: any;
   fileBankCertificate: any;
@@ -62,11 +65,15 @@ export class PaymentInfoComponent implements OnInit {
   lastName: string;
   email: string;
   phone: string;
+  userId: string;
+  identification: string;
 
   ngOnInit() {
 
     this.subscription = this.registerUser.userInfo$.subscribe(val => {
       if (!!val) {
+        this.userId = val.userId;
+        this.identification = val.identification;
         this.name = val.firstNames;
         this.lastName = val.lastNames;
         this.phone = val.cellphone;
@@ -150,46 +157,77 @@ export class PaymentInfoComponent implements OnInit {
    */
 
   public onFileChangeFiles(event, param: string) {
-    let nameFile = event.target.files[0].name;
-    let reader = new FileReader();
     if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      let fileBlob = new Blob([file]);
-      let file2 = new File([fileBlob], nameFile);
-      reader.readAsDataURL(file2);
-      reader.onload = () => {
-        this.getExtension(nameFile);
-        if (this.validFormat === true) {
-          if (param === "ced1") {
-            this.fileIdentificationCard1 = reader.result;
-            this.nameFileCed1 = nameFile;
-            this.showErrorCed1 = false;
-          } else {
-            if (param === "ced2") {
-              this.fileIdentificationCard2 = reader.result;
-              this.nameFileCed2 = nameFile;
-              this.showErrorCed2 = false;
+      let error = {'incorrect': true};
+
+      const nameFile = event.target.files[0].name;
+      this.getExtension(nameFile);
+
+      if (this.validFormat) {
+        const formData = new FormData();
+    
+        formData.append("file", event.target.files[0]);
+        formData.append("typeDocument", param);
+        formData.append("identification", this.identification);
+        formData.append("userId", this.userId);
+
+        this.subscription = this.registerUser
+          .uploadFiles(formData)
+          .subscribe((response: ResponseService) => {
+            if (response.state === "Success") {
+              error = null;
             } else {
-              this.fileBankCertificate = reader.result;
-              this.nameFileCert = nameFile;
-              this.showErrorCert = false;
+              Swal.fire({
+                title: "Error al subir archivo",
+                text: response.userMessage,
+                type: "error",
+                confirmButtonText: "Aceptar",
+                confirmButtonClass: "accept-register-alert-error"
+              }).then(() => {
+              });
             }
-          }
-        } else {
-          if (param === "ced1") {
-            this.showErrorCed1 = true;
+
+            switch (param) {
+              case "BankCertificate":
+                this.nameFileCert = nameFile;
+                this.showErrorCert = response.state === "Success" ? false : true;
+                this.externalForm.controls.cert.setErrors(error);
+                break;
+              case "IdentificationCard1":
+                this.nameFileCed1 = nameFile;
+                this.showErrorCed1 = response.state === "Success" ? false : true;
+                this.externalForm.controls.ced1.setErrors(error);
+                break;
+              case "IdentificationCard2":
+                this.nameFileCed2 = nameFile;
+                this.showErrorCed2 = response.state === "Success" ? false : true;
+                this.externalForm.controls.ced2.setErrors(error);
+                break;
+              default:
+                break;
+            }
+          });
+      } else {
+        switch (param) {
+          case "BankCertificate":
+            this.nameFileCert = nameFile;
+            this.showErrorCert = this.showErrorFormatCert = true;
+            this.externalForm.controls.cert.setErrors({'incorrect': true});
+            break;
+          case "IdentificationCard1":
             this.nameFileCed1 = nameFile;
-          } else {
-            if (param === "ced2") {
-              this.showErrorCed2 = true;
-              this.nameFileCed2 = nameFile;
-            } else {
-              this.showErrorCert = true;
-              this.nameFileCert = nameFile;
-            }
-          }
+            this.showErrorCed1 = this.showErrorFormatCed1 = true;
+            this.externalForm.controls.ced1.setErrors({'incorrect': true});
+            break;
+          case "IdentificationCard2":
+            this.nameFileCed2 = nameFile;
+            this.showErrorCed2 = this.showErrorFormatCed2 = true;
+            this.externalForm.controls.ced1.setErrors({'incorrect': true});
+            break;
+          default:
+            break;
         }
-      };
+      }
     }
   }
 
@@ -206,9 +244,6 @@ export class PaymentInfoComponent implements OnInit {
       department: this.departmentCode,
       municipality: this.cityCode,
       bank: this.externalForm.controls.bank.value,
-      fileIdentificationCard1: this.fileIdentificationCard1,
-      fileIdentificationCard2: this.fileIdentificationCard2,
-      fileBankCertificate: this.fileBankCertificate,
       bankAccountNumber: btoa(this.externalForm.controls.numberAccount.value),
       typeBankAccount: this.externalForm.controls.typeAccount.value,
       address: this.externalForm.controls.address.value,

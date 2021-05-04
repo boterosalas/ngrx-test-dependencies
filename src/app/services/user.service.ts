@@ -245,8 +245,15 @@ export class UserService {
   }
 
   public uploadFiles(params: any) {
+    let httpOptionsSet = {
+      headers: new HttpHeaders({
+        Authorization: "Bearer " + this.authorization,
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
+    };
+
     return this.http
-      .post(`${this.url}${this.apiUploadFiles}`, params, this.httpOptions)
+      .post(`${this.url}${this.apiUploadFiles}`, params, httpOptionsSet)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(

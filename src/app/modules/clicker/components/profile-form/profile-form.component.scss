@@ -287,13 +287,68 @@ input[type="file"] {
     width: 100% !important;
   }
 }
-//.modal-heigth {
-//  height: 78vh;
-//}
 
 .style-icon {
   font-size: 21px;
   position: relative;
   bottom: 4px;
   color: #8d7eb7;
+}
+
+.info-confirm {
+  p {
+    margin: 5px auto 20px;
+  }
+
+  .input-password {
+    margin: 0 auto 20px;
+    display: block;
+    width: 60%;
+
+    @include from($s-medium) {
+      width: 100%;
+      margin: 0 auto 15px;
+    }
+  }
+}
+
+.buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+
+  @include from($small) {
+    flex-direction: column;
+  }
+}
+
+.buttons-container.flex-start {
+  justify-content: flex-start;
+
+  @include from($small) {
+    justify-content: center;
+  }
+}
+
+.button {
+  padding: 4px 25px;
+}
+
+.button_cancel {
+  margin-right: 15px;
+
+  @include from($small) {
+    margin-right: 0;
+    margin-top: 10px;
+  }
+}
+
+.reason-change {
+  margin-bottom: 15px;
+}
+
+.mxw-30 {
+  max-width: 30px;
 }

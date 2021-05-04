@@ -420,14 +420,14 @@
     </div>
   </div>
   
-  <mat-error *ngIf="showErrorCed1" class="small pb-2">
+  <mat-error *ngIf="showErrorFormatCed1" class="small pb-2">
       {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
   </mat-error>
 
   <br>
 
   <input
-    (change)="onFileChangeFiles($event, 'ced1')"
+    (change)="onFileChangeFiles($event, 'IdentificationCard1')"
     id="ced1"
     type="file"
     formControlName="ced1"
@@ -466,14 +466,14 @@
       </label>
     </div>
   </div>
-  <mat-error *ngIf="showErrorCed2" class="small pb-2">
+  <mat-error *ngIf="showErrorFormatCed2" class="small pb-2">
       {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
   </mat-error>
 
   <br>
 
   <input
-    (change)="onFileChangeFiles($event, 'ced2')"
+    (change)="onFileChangeFiles($event, 'IdentificationCard2')"
     id="ced2"
     type="file"
     formControlName="ced2"
@@ -511,12 +511,12 @@
       </label>
     </div>
   </div>
-  <mat-error *ngIf="showErrorCert" class="small pb-2 d-block">
+  <mat-error *ngIf="showErrorFormatCert" class="small pb-2 d-block">
       {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
   </mat-error>
 
   <input
-    (change)="onFileChangeFiles($event, 'cert')"
+    (change)="onFileChangeFiles($event, 'BankCertificate')"
     id="cert"
     type="file"
     formControlName="cert"
