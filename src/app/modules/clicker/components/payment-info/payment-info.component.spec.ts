@@ -17,6 +17,8 @@ import { PaymentInfoComponent } from './payment-info.component';
 class MockUserService extends UserService {
 
   userInfo$ = new BehaviorSubject<any>({
+    userId: '721',
+    identification: '1002546856',
     firstNames: 'David',
     lastNames: 'Betancur',
     cellphone: '3000000000'
@@ -32,10 +34,9 @@ describe("('PaymentInfoComponent', ", () => {
     "getBanks"
   ]);
 
-  // const mockUserService = jasmine.createSpyObj("UserService", [
-  //   "idType",
-  //   "registerUser",
-  // ]);
+  const mockUserService = jasmine.createSpyObj("UserService", [
+    "uploadFiles"
+  ]);
 
   const idType = [
     {
@@ -199,6 +200,12 @@ describe("('PaymentInfoComponent', ", () => {
     userMessage: "se ha actualizado el usuario",
     objectResponse: []
   };
+
+  const respUploadFiles = {
+    state: "Success",
+    userMessage: "se ha guardado el archivo",
+    objectResponse: null
+  };
   
 
   beforeEach(async(() => {
@@ -234,6 +241,7 @@ describe("('PaymentInfoComponent', ", () => {
 
     // mockUserService.idType.and.returnValue(of(idType));
     // mockUserService.registerUser.and.returnValue(of(register));
+    mockUserService.uploadFiles.and.returnValue(of(respUploadFiles))
     mockMasterDataService.getBanks.and.returnValue(of(dataBanks));
     mockMasterDataService.getDepartments.and.returnValue(of(dataDepartments));
   }));
@@ -266,22 +274,25 @@ describe("('PaymentInfoComponent', ", () => {
   it("on file change trip valid ced 1", () => {
     const mockFile = new File([""], "name.jpg", { type: "text/html" });
     const mockEvt = { target: { files: [mockFile] } };
-    component.onFileChangeFiles(mockEvt, "ced1");
+    component.onFileChangeFiles(mockEvt, "IdentificationCard1");
     expect(component.showErrorCed1).toBeFalsy();
+    expect(component.showErrorFormatCed1).toBeFalsy();
   });
 
   it("on file change trip valid ced 2", () => {
     const mockFile = new File([""], "name.jpg", { type: "text/html" });
     const mockEvt = { target: { files: [mockFile] } };
-    component.onFileChangeFiles(mockEvt, "ced2");
+    component.onFileChangeFiles(mockEvt, "IdentificationCard2");
     expect(component.showErrorCed2).toBeFalsy();
+    expect(component.showErrorFormatCed2).toBeFalsy();
   });
 
-  it("on file change trip valid ced 3", () => {
+  it("on file change trip valid cert", () => {
     const mockFile = new File([""], "name.jpg", { type: "text/html" });
     const mockEvt = { target: { files: [mockFile] } };
-    component.onFileChangeFiles(mockEvt, "cert");
+    component.onFileChangeFiles(mockEvt, "BankCertificate");
     expect(component.showErrorCert).toBeFalsy();
+    expect(component.showErrorFormatCert).toBeFalsy();
   });
 
   describe("register clicker", () => {

@@ -152,7 +152,6 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     this.subscription = this.user.getStatusVerification()
     .subscribe(
       (resp: ResponseService) => {
-        console.log(resp)
         if (resp.state === "Success") {
           this.accountStatements = resp.objectResponse;
           const objectState = this.accountStatements.find((state) => state.value === this.data.verified);
@@ -267,11 +266,15 @@ export class DialogUserComponent implements OnInit, OnDestroy {
       cellPhone: this.dataAddImagen.controls.cellphone.value,
       identification: this.dataAddImagen.controls.number.value,
     }
-    this.user.updateInfoClicker(datos).subscribe((resp) => {
-      this.data.identification = this.dataAddImagen.controls.number.value;
-      this.data.cellphone = this.dataAddImagen.controls.cellphone.value;
-      this.data.email = this.dataAddImagen.controls.email.value;
-      this.onNoClickEdit();
+    this.user.updateInfoClicker(datos).subscribe((resp: ResponseService) => {
+      if (resp.state === "Success") {
+        this.data.identification = this.dataAddImagen.controls.number.value;
+        this.data.cellphone = this.dataAddImagen.controls.cellphone.value;
+        this.data.email = this.dataAddImagen.controls.email.value;
+        this.onNoClickEdit();
+      } else {
+        this.openSnackBar(resp.userMessage, "Cerrar");
+      }
     })
   }
 
@@ -281,7 +284,6 @@ export class DialogUserComponent implements OnInit, OnDestroy {
       message: this.dataRejectionMessage.controls.message.value
     }
     this.user.postUpdateResponseAccountBank(datos).subscribe((resp) => {
-      console.log(resp)
       this.data.responseAccountBank = this.dataRejectionMessage.controls.message.value;
       this.onNoClickEdit();
     })
@@ -319,7 +321,7 @@ export class DialogUserComponent implements OnInit, OnDestroy {
         : "image/jpeg"};base64,${this.data.fileIdentificationCard2}`;
     }
 
-    if (this.data.fileBankCertificate) {
+    if (this.data.fileBankCertificate && contentTypeBankCard[0].extension !== ".pdf") {
       this.base64BankCard = `data:${contentTypeBankCard.length > 0 
         ? contentTypeBankCard[0].contentType 
         : "image/jpeg"};base64,${this.data.fileBankCertificate}`;

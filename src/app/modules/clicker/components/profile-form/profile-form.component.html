@@ -843,7 +843,7 @@
 <!-- template password-->
 
 <ng-template #templateDialogAccount>
-  <div *ngIf="showPassword">
+  <div class="info-confirm" *ngIf="showPassword">
     <p style="text-align: center">
       Recuerda que al realizar un cambio en tus datos bancarios debemos volver a
       verificar la información de tu cuenta y esto retrasaría tus pagos, te
@@ -852,7 +852,7 @@
       el cambio de cuenta.
     </p>
     <form class="login-container" [formGroup]="loginForm">
-      <mat-form-field class="w-100">
+      <mat-form-field class="input-password">
         <mat-pass-toggle-visibility
           #toggleVisbilitypass
           matSuffix
@@ -863,10 +863,11 @@
           [type]="toggleVisbilitypass.type"
           placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
           formControlName="Password"
+          autocomplete="current-password"
           spacebar
           required
         />
-        <span matPrefix><mat-icon color="gray">lock</mat-icon></span>
+        <!-- <span matPrefix><mat-icon color="gray">lock</mat-icon></span> -->
         <mat-error
           id="introducePassword"
           *ngIf="
@@ -911,16 +912,19 @@
         >
       </mat-form-field>
 
-      <div class="text-center">
+      <div class="buttons-container text-center">
         <button
-          class="button button-100"
+          class="button"
           mat-raised-button
           id="login"
           color="orange"
           (click)="showAccount()"
           [disabled]="!loginForm.valid"
         >
-          <span>{{ "GENERIC.ACCEPT" | translate }}</span>
+          <span>{{ "GENERIC.CONTINUE" | translate }}</span>
+        </button>
+        <button mat-button ngClass="button_cancel" (click)="cancel()">
+          Cancelar
         </button>
       </div>
     </form>
@@ -1065,20 +1069,20 @@
           <label for="cert" id="upload" class="cursor-pointer">
             <span *ngIf="!showErrorCert">
               <img
-                class="mt-1"
+                class="mt-1 mxw-30"
                 *ngIf="nameFileCert === ''"
                 src="/assets/img/image-file-upload.svg"
                 alt="upload"
               />
               <img
-                class="mt-1"
+                class="mt-1 mxw-30"
                 *ngIf="nameFileCert !== ''"
                 src="/assets/img/image-file-upload-ok.svg"
                 alt="upload"
               />
             </span>
             <img
-              class="mt-1 w-icon"
+              class="mt-1 w-icon mxw-30"
               *ngIf="showErrorCert"
               src="/assets/img/icono-error-carga.svg"
               alt="upload"
@@ -1086,12 +1090,12 @@
           </label>
         </div>
       </div>
-      <mat-error *ngIf="showErrorCert" class="small pb-2 d-block">
+      <mat-error *ngIf="showErrorFormatCert" class="small pb-2 d-block">
         {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
       </mat-error>
 
       <input
-        (change)="onFileChangeFiles($event, 'cert')"
+        (change)="onFileChangeFiles($event, 'BankCertificate')"
         id="cert"
         type="file"
         formControlName="cert"
@@ -1116,20 +1120,20 @@
           <label for="ced1" id="upload" class="cursor-pointer">
             <span *ngIf="!showErrorCed1">
               <img
-                class="mt-1"
+                class="mt-1 mxw-30"
                 *ngIf="nameFileCed1 === ''"
                 src="/assets/img/image-file-upload.svg"
                 alt="upload"
               />
               <img
-                class="mt-1"
+                class="mt-1 mxw-30"
                 *ngIf="nameFileCed1 !== ''"
                 src="/assets/img/image-file-upload-ok.svg"
                 alt="upload"
               />
             </span>
             <img
-              class="mt-1 w-icon"
+              class="mt-1 w-icon mxw-30"
               *ngIf="showErrorCed1"
               src="/assets/img/icono-error-carga.svg"
               alt="upload"
@@ -1137,12 +1141,12 @@
           </label>
         </div>
       </div>
-      <mat-error *ngIf="showErrorCed1" class="small pb-2 d-block">
+      <mat-error *ngIf="showErrorFormatCed1" class="small pb-2 d-block">
         {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
       </mat-error>
 
       <input
-        (change)="onFileChangeFilesCed1($event, 'ced1')"
+        (change)="onFileChangeFiles($event, 'IdentificationCard1')"
         id="ced1"
         type="file"
         formControlName="ced1"
@@ -1167,20 +1171,20 @@
           <label for="ced2" id="upload" class="cursor-pointer">
             <span *ngIf="!showErrorCed2">
               <img
-                class="mt-1"
+                class="mt-1 mxw-30"
                 *ngIf="nameFileCed2 === ''"
                 src="/assets/img/image-file-upload.svg"
                 alt="upload"
               />
               <img
-                class="mt-1"
+                class="mt-1 mxw-30"
                 *ngIf="nameFileCed2 !== ''"
                 src="/assets/img/image-file-upload-ok.svg"
                 alt="upload"
               />
             </span>
             <img
-              class="mt-1 w-icon"
+              class="mt-1 w-icon mxw-30"
               *ngIf="showErrorCed2"
               src="/assets/img/icono-error-carga.svg"
               alt="upload"
@@ -1188,37 +1192,43 @@
           </label>
         </div>
       </div>
-      <mat-error *ngIf="showErrorCed2" class="small pb-2 d-block">
+      <mat-error *ngIf="showErrorFormatCed2" class="small pb-2 d-block">
         {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
       </mat-error>
 
       <input
-        (change)="onFileChangeFilesCed2($event, 'ced2')"
+        (change)="onFileChangeFiles($event, 'IdentificationCard2')"
         id="ced2"
         type="file"
         formControlName="ced2"
       />
-      <div fxLayout="column">
+      <div class="reason-change" fxLayout="column">
         <label class="label-up-text" for="picker">RAZÓN DE CAMBIO </label>
         <textarea
           matInput
           class="text-area-heigth"
           formControlName="description"
+          maxlength="320"
           style="height: 95px"
           placeholder="Cuéntanos por qué razón vas a cambiar tu cuenta bancaria."
         >
         </textarea>
       </div>
-      <button
-        mat-raised-button
-        id="nextClicker"
-        class="center button button-height button-100"
-        color="orange"
-        (click)="updateAccount()"
-        [disabled]="!accountForm.valid || activebutton === false"
-      >
-        Actualizar
-      </button>
+      <div class="buttons-container flex-start text-center">
+        <button
+          mat-raised-button
+          id="nextClicker"
+          class="center button button-height"
+          color="orange"
+          (click)="updateAccount()"
+          [disabled]="!accountForm.valid || activebutton === false"
+        >
+          Actualizar
+        </button>
+        <button mat-button ngClass="button_cancel" (click)="cancel()">
+          Cancelar
+        </button>
+      </div>
     </form>
   </div>
 </ng-template>

@@ -136,7 +136,7 @@
                 (click)="showVisibilityPreview($event)"
               >
                 Cédula 1</a>
-              <div class="preview-image">
+              <div *ngIf="base64IdentificationCard1" class="preview-image">
                 <img [src]="base64IdentificationCard1" alt="Preview Cédula 1">
               </div>
             </span>
@@ -166,7 +166,7 @@
                 id="ced2"
               >
                 Cédula 2</a>
-              <div class="preview-image">
+              <div *ngIf="base64IdentificationCard2" class="preview-image">
                 <img [src]="base64IdentificationCard2" alt="Preview Cédula 2">
               </div>
             </span>
@@ -196,7 +196,7 @@
                 id="certbank"
               >
                 Cert.bancaria</a>
-              <div class="preview-image">
+              <div *ngIf="base64BankCard" class="preview-image">
                 <img [src]="base64BankCard" alt="Preview Cert.bancaria">
               </div>
             </span>
@@ -530,7 +530,6 @@
           formControlName="number"
           type="text"
           required
-          class="text-area-heigth"
           style="color: #37236a"
         />
         <mat-error
@@ -551,7 +550,6 @@
           formControlName="email"
           type="text"
           required
-          class="text-area-heigth"
           style="color: #37236a"
         />
         <mat-error
@@ -572,7 +570,6 @@
           formControlName="cellphone"
           type="text"
           required
-          class="text-area-heigth"
           style="color: #37236a"
         />
         <mat-error

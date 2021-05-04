@@ -30,7 +30,6 @@ export class DialogImagePlayerComponent implements OnInit, OnDestroy {
   public downloadFile() {
     let datos = [this.data.datosDownload]
     this.content.downloadF(datos).subscribe((resp) => {
-      console.log(resp)
       this.download(resp, "image/jpg")
     });
   }

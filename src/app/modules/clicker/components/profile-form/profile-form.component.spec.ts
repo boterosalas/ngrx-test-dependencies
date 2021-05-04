@@ -26,7 +26,10 @@ class MockUserService extends UserService {
   private subscription: Subscription = new Subscription();
 
   userInfo$ = new BehaviorSubject<any>({
-    firstNames: 'David'
+    firstNames: 'David',
+    identification: '1002546856',
+    lastNames: 'Betancur',
+    cellphone: '3000000000'
   });
 
 }
@@ -37,7 +40,9 @@ describe('ProfileFormComponent', () => {
 
   const mockDialog = jasmine.createSpyObj("MatDialog", ["open"]);
 
-  const mockUserService = jasmine.createSpyObj("UserService", ["getuserdata", "getStatusVerification"]);
+  const mockUserService = jasmine.createSpyObj("UserService", [
+    "getuserdata", "getStatusVerification", "changeBankInformation", "uploadFiles"
+  ]);
 
   const mockMasterDataService = jasmine.createSpyObj("MasterDataService", [
     "getDepartments",
@@ -145,6 +150,18 @@ const getStatusVerification = {
   ]
 };
 
+const changeBankInformation = {
+  state: "Success",
+  userMessage: "Los datos fueron guardados.",
+  objectResponse: null
+};
+
+const respUploadFiles = {
+  state: "Success",
+  userMessage: "se ha guardado el archivo",
+  objectResponse: null
+};
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ProfileFormComponent, DialogEditComponent, TruncatePipe ],
@@ -189,6 +206,8 @@ const getStatusVerification = {
     mockMasterDataService.getBanks.and.returnValue(of(banks));
     mockAuthService.changePassword.and.returnValue(of(resp));
     mockUserService.getStatusVerification.and.returnValue(of(getStatusVerification));
+    mockUserService.changeBankInformation.and.returnValue(of(changeBankInformation));
+    mockUserService.uploadFiles.and.returnValue(of(respUploadFiles));
   }));
 
   beforeEach(() => {
@@ -224,9 +243,11 @@ const getStatusVerification = {
 
   it('update account', () => {
     let service = fixture.debugElement.injector.get(UserService);
-    spyOn(service, 'changeBankInformation').and.returnValue(of(resp));
+    spyOn(service, 'changeBankInformation').and.returnValue(of(changeBankInformation));
+    spyOn(service, 'updateUser').and.returnValue(of(resp));
     component.updateAccount();
     expect(service.changeBankInformation).toHaveBeenCalled();
+    expect(service.updateUser).toHaveBeenCalled();
   });
   
   it('change address', () => {
@@ -256,10 +277,12 @@ const getStatusVerification = {
     expect( mockAuthService.changePassword).toHaveBeenCalled();
   });
   
-  // it('getStatusVerification', () => {
-  //   component.getStatusVerification("Tu cuenta entrará en estado de verificación pronto");
-  //   expect(mockUserService.getBankAccountNumber).toHaveBeenCalled();
-  // });
+  it('getStatusVerification', () => {
+    let service = fixture.debugElement.injector.get(UserService);
+    spyOn(service, 'getStatusVerification').and.returnValue(of(getStatusVerification));
+    component.getStatusVerification("Tu cuenta entrará en estado de verificación pronto");
+    expect(service.getStatusVerification).toHaveBeenCalled();
+  });
 
   it('editName', () => {
     component.editName();
@@ -302,6 +325,42 @@ const getStatusVerification = {
     });
     component.selectDepartment(department);
     expect(component.addressForm.valid).toBeTruthy();
+  });
+
+  it('on file change trip valid ced 1', () => {
+    const mockFile = new File([""], "name.jpg", { type: "text/html" });
+    const mockEvt = { target: { files: [mockFile] } };
+
+    let service = fixture.debugElement.injector.get(UserService);
+    spyOn(service, 'uploadFiles').and.returnValue(of(respUploadFiles));
+    component.onFileChangeFiles(mockEvt, "IdentificationCard1");
+    expect(service.uploadFiles).toHaveBeenCalled();
+    expect(component.showErrorCed1).toBeFalsy();
+    expect(component.showErrorFormatCed1).toBeFalsy();
+  });
+
+  it('on file change trip valid ced 2', () => {
+    const mockFile = new File([""], "name.jpg", { type: "text/html" });
+    const mockEvt = { target: { files: [mockFile] } };
+
+    let service = fixture.debugElement.injector.get(UserService);
+    spyOn(service, 'uploadFiles').and.returnValue(of(respUploadFiles));
+    component.onFileChangeFiles(mockEvt, "IdentificationCard2");
+    expect(service.uploadFiles).toHaveBeenCalled();
+    expect(component.showErrorCed2).toBeFalsy();
+    expect(component.showErrorFormatCed2).toBeFalsy();
+  });
+
+  it('on file change trip valid cert', () => {
+    const mockFile = new File([""], "name.jpg", { type: "text/html" });
+    const mockEvt = { target: { files: [mockFile] } };
+
+    let service = fixture.debugElement.injector.get(UserService);
+    spyOn(service, 'uploadFiles').and.returnValue(of(respUploadFiles));
+    component.onFileChangeFiles(mockEvt, "BankCertificate");
+    expect(service.uploadFiles).toHaveBeenCalled();
+    expect(component.showErrorCert).toBeFalsy();
+    expect(component.showErrorFormatCert).toBeFalsy();
   });
 
 });
