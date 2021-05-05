@@ -153,8 +153,10 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     .subscribe(
       (resp: ResponseService) => {
         if (resp.state === "Success") {
-          this.accountStatements = resp.objectResponse;
-          const objectState = this.accountStatements.find((state) => state.value === this.data.verified);
+          this.accountStatements = resp.objectResponse.map(state => {
+            return {...state, value: this.capitalizeFirstLetter(state.value)}
+          });
+          const objectState = this.accountStatements.find(state => state.value === this.capitalizeFirstLetter(this.data.verified));
           if (objectState) {
             this.dateSelectedState.controls.state.setValue(objectState.id.toString());
             this.enableDisabledEditMessage();
@@ -167,6 +169,10 @@ export class DialogUserComponent implements OnInit, OnDestroy {
         this.openSnackBar(err.userMessage, "Cerrar");
       }
     );
+  }
+
+  private capitalizeFirstLetter(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   }
 
   enableDisabledEditMessage() {
