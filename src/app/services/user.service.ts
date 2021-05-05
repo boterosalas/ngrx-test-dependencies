@@ -291,10 +291,9 @@ export class UserService {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + this.authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-        "Content-Disposition": "attachment"
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION
       }),
-      responseType: 'blob' as 'json'
+      responseType: 'blob' as 'text'
     };
 
     return this.http.post(

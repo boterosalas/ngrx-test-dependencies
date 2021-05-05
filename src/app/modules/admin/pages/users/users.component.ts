@@ -379,7 +379,7 @@ export class UsersComponent extends MatPaginatorIntl
     //679
     this.usersService
       .downloadFiles(data)
-      .subscribe((respid) => {
+      .subscribe((respid: any) => {
         this.downloadBlob(respid, "application/zip");
       });
   }
@@ -389,11 +389,9 @@ export class UsersComponent extends MatPaginatorIntl
     let url = window.URL.createObjectURL(blob);
     const downloadLink = document.createElement("a");
 
-    if (type.includes("zip")) {
-      downloadLink.href = url;
-      downloadLink.download = "archivo.zip";
-      downloadLink.click();
-    }
+    downloadLink.href = url;
+    downloadLink.download = "archivo.zip";
+    downloadLink.click();
   }
 
   public changeComunications(userId, value) {
