@@ -49,7 +49,7 @@ describe('DialogUserComponent', () => {
     objectResponse: [
       {id: 4252, code: "NOTVERIFIED", value: "No verificada"},
       {id: 4253, code: "INPROGRESS", value: "En proceso de verificación"},
-      {id: 4254, code: "VERIFIED", value: "Cuenta Verificada"},
+      {id: 4254, code: "VERIFIED", value: "Cuenta verificada"},
       {id: 4255, code: "REJECTED", value: "Cuenta rechazada"}
     ]
   };
