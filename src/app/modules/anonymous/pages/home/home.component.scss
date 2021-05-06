@@ -1,5 +1,6 @@
 @import "animations";
 @import "variables";
+@import "mixins";
 @import "general";
 
 .login {
@@ -148,4 +149,9 @@
 .arrow-down {
   position: relative;
   top: 6px;
+}
+
+.stories-section {
+  margin: 15px auto 20px;
+  padding: 0;
 }

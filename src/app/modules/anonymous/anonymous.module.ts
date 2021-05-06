@@ -3,6 +3,8 @@ import { RouterModule, Routes } from "@angular/router";
 import { HomeComponent } from "./pages/home/home.component";
 import { LoginformComponent } from "./components/loginform/loginform.component";
 import { AppMaterialModule } from "../shared/app-material/app-material.module";
+import { SliderStoriesComponent } from "./components/slider-stories/slider-stories.component";
+import { ButtonStoryComponent } from "./components/button-story/button-story.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TranslateModule } from "@ngx-translate/core";
 import { CommonModule } from "@angular/common";
@@ -429,7 +431,9 @@ const routes: Routes = [
     ReportIconsClickamComponent,
     ReportStatusComponent,
     BlogsComponent,
-    BlogContentComponent
+    BlogContentComponent,
+    SliderStoriesComponent,
+    ButtonStoryComponent
   ],
   imports: [
     FormsModule,
@@ -447,7 +451,6 @@ const routes: Routes = [
     MatPasswordStrengthModule,
     RecaptchaV3Module,
     AngularEditorModule
-
   ],
   exports: [
     RouterModule,
@@ -458,7 +461,7 @@ const routes: Routes = [
     ActivateAccountFormComponent,
     MenuComponent,
     CardComponent,
-    BussinessCardComponent,
+    BussinessCardComponent
   ],
   providers: [
     {

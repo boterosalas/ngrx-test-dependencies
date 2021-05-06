@@ -1,4 +1,11 @@
 <!-- <app-logo></app-logo> -->
+<div 
+  *ngIf="auth.isLoggedIn()"
+  class="stories-section"
+  >
+  <app-slider-stories></app-slider-stories>
+</div>
+
 <app-slider
   Class="gtmHomeClicBanner"
   [showArrows]="true"
