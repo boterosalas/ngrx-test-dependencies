@@ -1,0 +1,33 @@
+@import 'variables';
+@import 'general';
+@import "mixins";
+
+.story-button {
+    width: 80px;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+
+    h4 {
+        margin: 8px 0;
+    }
+}
+
+.image-container {
+    display: block;
+    width: 70px;
+    height: 70px;
+    padding: 3px;
+    border-radius: 50px;
+    background: transparent linear-gradient(180deg, #8C80B4 0%, #352767 100%) 0% 0% no-repeat padding-box;
+    margin: 0 auto;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 50px;
+        border: 2px solid white;
+    }
+}

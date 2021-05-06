@@ -1,0 +1,23 @@
+@import 'variables';
+@import 'general';
+@import "mixins";
+
+.stories-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0;
+    margin: 0 auto;
+    overflow-x: auto;
+    max-width: min-content;
+    scrollbar-width: none;
+}
+
+.stories-container::-webkit-scrollbar {
+    height: 0;
+}
+
+.story-container {
+    list-style: none;
+    margin-right: 5px;
+}
