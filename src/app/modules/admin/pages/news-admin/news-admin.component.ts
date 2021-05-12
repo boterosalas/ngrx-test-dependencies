@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { ResponseService } from 'src/app/interfaces/response';
 import { UserService } from 'src/app/services/user.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { LinksService } from 'src/app/services/links.service';
 //import { ModalGeneicComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { DialogNewsComponent } from '../../components/dialog-news/dialog-news.component';
 moment.locale("es");
@@ -26,6 +27,7 @@ export class NewsAdminComponent implements OnInit {
     pageSize: number;
     from: any;
     to: any;
+    items = [];
     private subscription: Subscription = new Subscription();
     constructor(
         private paginator: MatPaginatorIntl,
@@ -33,7 +35,8 @@ export class NewsAdminComponent implements OnInit {
         private fb: FormBuilder,
         private usersService: UserService,
         private _snackBar: MatSnackBar,
-        public utils: UtilsService
+        public utils: UtilsService,
+        private kpi: LinksService
     ) {
 
         this.paginator.itemsPerPageLabel = "Ítems por página";
@@ -72,19 +75,35 @@ export class NewsAdminComponent implements OnInit {
     dataSource: any;
     displayedColumns: string[] = ['idclicker', 'subscription', 'users', 'identification', 'cellphone', 'email', 'status'];
     ngOnInit() {
-
         this.searchUser("");
         this.dateForm = this.fb.group({
-            dateRange: [null],
+            dateRange: {
+                startDate: moment(new Date(2021,2,10), "DD/MM/YYYY"),
+                endDate: moment(new Date(), "DD/MM/YYYY"),
+            }
         });
         this.searchForm = this.fb.group({
             search: [null],
         });
         this.checkRole();
+        this.getKPI();
     }
     checkRole() {
         this.utils.checkPermision();
     }
+
+    public getKPI() {
+        let dateParams = {
+            start: this.dateForm.controls.dateRange.value.startDate.format("YYYY-MM-DD"),
+            end: this.dateForm.controls.dateRange.value.endDate.format("YYYY-MM-DD")
+        };
+
+        this.subscription = this.kpi.getkpiNovelties(dateParams).subscribe(resp => {
+            this.items = resp;
+            console.log(this.items)
+        })
+    }
+
     public searchUser(
         term,
         from = 1,
@@ -120,8 +139,8 @@ export class NewsAdminComponent implements OnInit {
     }
     public getReportExcel() {
         let dateParams = {
-            start: this.dateForm.controls.dateRange.value.startDate.format("YYYY-MM-DD"),
-            end: this.dateForm.controls.dateRange.value.endDate.format("YYYY-MM-DD")
+            start: this.dateForm.controls.dateRange.value.startDate.format(),
+            end: this.dateForm.controls.dateRange.value.endDate.format()
         };
         this.usersService.getExportNewsExcel(dateParams).subscribe((responseExcel: ResponseService) => {
             if (responseExcel.state === "Success") {

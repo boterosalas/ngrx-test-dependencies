@@ -16,6 +16,7 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { config } from 'process';
 import * as moment from 'moment';
 import { UserService } from 'src/app/services/user.service';
+import { LinksService } from 'src/app/services/links.service';
 import { of } from 'rxjs';
 moment.locale('es');
 describe('NewsAdminComponent', () => {
@@ -25,11 +26,30 @@ describe('NewsAdminComponent', () => {
   const mockUserService = jasmine.createSpyObj("UserService", [
     "getExportNewsExcel", "getAllNews"
   ]);
+  const mockLinksService = jasmine.createSpyObj("LinksService", [
+    "getkpiNovelties"
+  ]);
   const getUserExcel = {
     state: "Success",
     userMessage: 'se ha enviado un correo a test@h.com',
     objectResponse: [
     ]
+  };
+  const getkpiNovelties = {
+    state: "Success",
+    userMessage: null,
+    objectResponse: [{
+      business: null,
+      commission: 0,
+      icon: "https://webclickamqa.blob.core.windows.net/img-ofertas/dashboard/icon-registros.svg",
+      id: 0,
+      linksClicked: 0,
+      linksGenerated: 0,
+      number: 0,
+      subtitle: "Registros",
+      title: "Usuarios Registrados",
+      total: 0
+    }]
   };
   const repsDatos = {
     total: 70,
@@ -133,6 +153,7 @@ describe('NewsAdminComponent', () => {
         },
         { provide: MatDialog, useValue: mockDialog },
         { provide: UserService, useValue: mockUserService },
+        { provide: LinksService, useValue: mockLinksService },
       ]
     })
       .compileComponents();
@@ -142,6 +163,7 @@ describe('NewsAdminComponent', () => {
   beforeEach(() => {
     mockUserService.getAllNews.and.returnValue(of(repsDatos))
     mockUserService.getExportNewsExcel.and.returnValue(of(getUserExcel))
+    mockLinksService.getkpiNovelties.and.returnValue(of(getkpiNovelties))
     fixture = TestBed.createComponent(NewsAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -152,6 +174,8 @@ describe('NewsAdminComponent', () => {
     let start = moment();
     let end = moment("12-01-2020");
     component.dateForm.controls.dateRange.setValue({ startDate: start, endDate: end });
+    expect(mockLinksService.getkpiNovelties).toHaveBeenCalled();
+    component.getKPI();
     component.getReportExcel();
     expect(mockUserService.getExportNewsExcel).toHaveBeenCalled();
     component.pagination({ previousPageIndex: 1, pageIndex: 0, pageSize: 20, length: 5 });

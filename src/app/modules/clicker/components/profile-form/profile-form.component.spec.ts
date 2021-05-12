@@ -285,6 +285,10 @@ const respUploadFiles = {
   });
 
   it('editName', () => {
+    let service = fixture.debugElement.injector.get(UserService);
+    spyOn(service, 'getStatusVerification').and.returnValue(of(getStatusVerification));
+    component.getStatusVerification("Tu cuenta entrará en estado de verificación pronto");
+    expect(service.getStatusVerification).toHaveBeenCalled();
     component.editName();
     expect(mockDialog.open).toBeTruthy();
   });

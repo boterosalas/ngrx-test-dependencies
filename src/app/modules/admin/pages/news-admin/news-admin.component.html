@@ -21,6 +21,7 @@
               [maxDate]="maxDate"
               ngxDaterangepickerMd
               class="form-control border-input mat-elevation-z1 p-2 border-radius"
+              (change)="getKPI()"
             />
             <button
               mat-raised-button
@@ -32,6 +33,7 @@
               Exportar <i class="tio-download_from_cloud style-icon"></i>
             </button>
           </div>
+          <p class="validity-time">*Histórico vigente desde Marzo 10 del 2021</p>
         </div>
       </form>
     </div>
@@ -45,6 +47,13 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="mt-4 mb-4">
+    <app-card-dashboard
+      *ngIf="items"
+      class="card-start"
+      [items]="items"
+    ></app-card-dashboard>
   </div>
   <div class="mat-elevation-z0 mt-4 mb-4">
     <table
