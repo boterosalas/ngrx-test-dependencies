@@ -27,7 +27,42 @@ export class NewsAdminComponent implements OnInit {
     pageSize: number;
     from: any;
     to: any;
-    items = [];
+    items = [{
+        code: "totalnovelties",
+        title: "Total de novedades",
+        icon: "tio-message_failed",
+        number: 0
+    },
+    {
+        code: "totalpending",
+        title: "Pendientes",
+        icon: "tio-info",
+        number: 0
+    },
+    {
+        code: "totalinprogress",
+        title: "En revisión",
+        icon: "tio-time",
+        number: 0
+    },
+    {
+        code: "totalsolved",
+        title: "Solucionados",
+        icon: "tio-checkmark_circle",
+        number: 0
+    },
+    {
+        code: "totalusers",
+        title: "Usuarios únicos",
+        icon: "tio-account_circle",
+        number: 0
+    },
+    {
+        code: "effectiveness",
+        title: "Tasa de efectividad",
+        icon: "tio-chart_bar_4",
+        number: 0
+    }];
     private subscription: Subscription = new Subscription();
     constructor(
         private paginator: MatPaginatorIntl,
@@ -99,7 +134,13 @@ export class NewsAdminComponent implements OnInit {
         };
 
         this.subscription = this.kpi.getkpiNovelties(dateParams).subscribe(resp => {
-            this.items = resp;
+            this.items = this.items.map(item => {
+                return {
+                    ...item,
+                    number: item.code === "effectiveness" ? (resp[item.code] * 100) : resp[item.code]
+                }
+            })
+            console.log(resp)
             console.log(this.items)
         })
     }
