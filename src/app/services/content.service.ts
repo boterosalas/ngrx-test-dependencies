@@ -981,7 +981,7 @@ export class ContentService {
 
   public deleteStories(data: any) {
     return this.http
-      .delete(`${this.urlComission + this.apiDeleteStories}?id=${data.id}&marketplace=${data.marketplace}`, this.httpOptions)
+      .post(`${this.url + this.apiDeleteStories}`, data, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(

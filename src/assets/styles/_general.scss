@@ -2301,3 +2301,26 @@ h3#bussiness2 {
 .cdk-global-scrollblock body::-webkit-scrollbar {
   width: 0;
 }
+
+.check-transparent {
+  .mat-ripple-element {
+    opacity: 0.1;
+    background-color: black;
+  }
+
+  .mat-checkbox-frame {
+    border-color: white;
+    z-index: $z-floor;
+  }
+}
+
+.check-transparent .mat-checkbox-background, 
+.check-transparent.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: transparent !important;
+}
+
+.check-transparent.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element,
+.check-transparent .mat-ripple-element {
+  opacity: 0.1;
+  background-color: black;
+}

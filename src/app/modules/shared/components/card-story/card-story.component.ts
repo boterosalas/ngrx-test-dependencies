@@ -12,6 +12,7 @@ export class CardStoryComponent implements OnInit {
   @Input() pause: boolean
   @Input() showShared: boolean = true
   @Input() showCheck: boolean = false
+  @Input() check: boolean = false
   @Input() showProgress: boolean = true
   @Input() showInfo: boolean = true
   @Output() nextStory = new EventEmitter();
@@ -20,19 +21,18 @@ export class CardStoryComponent implements OnInit {
   cardStory: any
   currentProgress: any
   currentTime = 0
-  check: boolean
 
   constructor() {}
 
   ngOnInit() {}
 
   ngOnChanges() {
-    this.progress()
+    if (this.showProgress) this.progress()
   }
 
   ngAfterViewInit() {
     this.cardStory = document.getElementById(this.id)
-    this.progress()
+    if (this.showProgress) this.progress()
   }
 
   private progress() {

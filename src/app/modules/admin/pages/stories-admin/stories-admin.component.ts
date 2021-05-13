@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { MatDialog, MatSnackBar, MatDialogRef } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from 'rxjs';
@@ -25,8 +25,9 @@ export class StoriesAdminComponent implements OnInit {
     title: string;
     active: boolean;
     image: string;
-    fileToUpload: File = null;
-    nameFile: string;
+    nameFile: string = '';
+    file: any;
+    showErrorImg: boolean = false;
     dataReal = [];
     validFormat: boolean;
     deleteStory = [];
@@ -40,7 +41,7 @@ export class StoriesAdminComponent implements OnInit {
         private content: ContentService,
         private route: ActivatedRoute,
         private _snackBar: MatSnackBar,
-        public dialogRef: MatDialogRef<any>
+        private fb: FormBuilder,
     ) {
         this.subscription = this.route.params.subscribe((route) => {
             if (
@@ -62,6 +63,12 @@ export class StoriesAdminComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.dataAddStory = this.fb.group({
+            nameContent: [null, Validators.required],
+            link: [null, Validators.required],
+            commission: [null, Validators.required],
+            image: [null, Validators.required]
+          });
         this.getStories();
     }
     public getStories() {
@@ -69,7 +76,8 @@ export class StoriesAdminComponent implements OnInit {
             if (resp.state === "Success") {
                 console.log(resp.objectResponse);
                 if (resp.objectResponse) {
-                    this.stories = this.dataReal = []
+                    this.stories = []
+                    this.dataReal = []
                     resp.objectResponse.forEach((story) => {
                         this.stories.push({
                             id: story.id,
@@ -126,8 +134,8 @@ export class StoriesAdminComponent implements OnInit {
         });
     }
     public addOrRemoveDeleted(check, index) {
-        this.dataReal[index].dateR === check
-        this.active = this.dataReal.some(data => data.dateR === true)
+        this.dataReal[index].dataR = check
+        this.active = this.dataReal.some(data => data.dataR === true)
     }
 
     public getExtension(nameFile: string, getSize: number) {
@@ -137,12 +145,12 @@ export class StoriesAdminComponent implements OnInit {
         if (getExt === "jpg" || getExt === "jpeg" || getExt === "mp4") {
             this.validFormat = true;
         } else {
-            Swal.fire({
-                text: "El formato a cargar no es permitido, recuerda que deben ser videos en formato .mp4 o imágenes en .jpg",
-                type: "error",
-                confirmButtonText: "Aceptar",
-                confirmButtonClass: 'accept-login-alert-error'
-            });
+            // Swal.fire({
+            //     text: "El formato a cargar no es permitido, recuerda que deben ser videos en formato .mp4 o imágenes en .jpg",
+            //     type: "error",
+            //     confirmButtonText: "Aceptar",
+            //     confirmButtonClass: 'accept-login-alert-error'
+            // });
         }
         if (getSize / 1000 > 7000 && (getExt === "jpg" || getExt === "jpeg")) {
             this.validFormat = false;
@@ -155,7 +163,7 @@ export class StoriesAdminComponent implements OnInit {
         } else if (getSize / 1000 > 75000 && (getExt === "mp4")) {
             this.validFormat = false;
             Swal.fire({
-                text: "No pudimos cargar el contenido, ten en cuenta que cada video no puede superar el tamaño de 70mb.",
+                text: "No pudimos cargar el contenido, ten en cuenta que cada video no puede superar el tamaño de 72mb.",
                 type: "error",
                 confirmButtonText: "Aceptar",
                 confirmButtonClass: 'accept-login-alert-error'
@@ -167,53 +175,39 @@ export class StoriesAdminComponent implements OnInit {
             duration: 5000
         });
     }
+    
     // handleFileInput(event) {
     //     let fileList: FileList = event.target.files;
-    //     let formData: FormData = new FormData();
-    //     for (let index = 0; index < fileList.length; index++) {
-    //         this.fileToUpload = fileList[index];
-    //         formData.append('files', this.fileToUpload, this.fileToUpload.name.replace(' ', '_'));
-    //     }
-
-    //     //formData.append('file', this.fileToUpload, this.fileToUpload.name.replace(' ', '_'));
-    //     formData.append('idBusiness', this.id);
-    //     //formData.append('url', this.fileToUpload.name.replace(" ", "_"));
-    //     this.getExtension(this.fileToUpload.name, this.fileToUpload.size);
+    //     this.getExtension(fileList[0].name, fileList[0].size);
     //     if (this.validFormat === true) {
-    //         this.content.setContentImgVi(formData).subscribe((resp: any) => {
-
-    //             if (resp.state === "Success") {
-    //                 this.openSnackBar(resp.userMessage, "Cerrar")
-    //                 this.myInputVariable.nativeElement.value = '';
-    //             }
-    //             //this.getStories()
-    //         })
+    //         console.log("Valid file")
     //     }
 
     // }
 
-    // public onFileChangeFilesCont(event) {
-    //     let nameFile = event.target.files[0].name;
-    //     let reader = new FileReader();
-    //     let sizeFile = event.target.files[0].size;
-    //     if (event.target.files && event.target.files.length) {
-    //         const [file] = event.target.files;
-    //         let fileBlob = new Blob([file]);
-    //         let file2 = new File([fileBlob], nameFile);
-    //         reader.readAsDataURL(file2);
-    //         reader.onload = () => {
-    //             this.getExtension(nameFile, sizeFile);
-    //             if (this.validFormat === true) {
-    //                 this.fileCont = reader.result;
-    //                 this.fileCont = this.fileCont.split(",")[1]
-    //                 this.nameFileCont = nameFile;
-    //                 this.saveStory();
-    //             } else {
-    //                 console.log("Error en la carga")
-    //             }
-    //         };
-    //     }
-    // }
+    public onFileChangeFiles(event) {
+        let nameFile = event.target.files[0].name;
+        let reader = new FileReader();
+        let sizeFile = event.target.files[0].size;
+        if (event.target.files && event.target.files.length) {
+            const [file] = event.target.files;
+            let fileBlob = new Blob([file]);
+            let file2 = new File([fileBlob], nameFile);
+            reader.readAsDataURL(file2);
+            reader.onload = () => {
+                this.getExtension(nameFile, sizeFile);
+                if (this.validFormat === true) {
+                    this.file = reader.result;
+                    this.file = this.file.split(",")[1]
+                    this.nameFile = nameFile;
+                    this.showErrorImg = false
+                } else {
+                    console.log("Error en la carga")
+                    this.showErrorImg = true
+                }
+            };
+        }
+    }
 
     public createStory() {
         const title = "Nueva historia";
@@ -221,8 +215,7 @@ export class StoriesAdminComponent implements OnInit {
         const edit = 0;
         const template = this.templateAddStory;
 
-        this.dataAddStory.reset();
-        this.dialogRef = this.dialog.open(ModalGenericComponent, {
+        this.dialog.open(ModalGenericComponent, {
             width: "450px",
             data: {
                 title,
@@ -234,16 +227,20 @@ export class StoriesAdminComponent implements OnInit {
     }
 
     public saveStory() {
+        console.log("saveStory")
         let datos = [{
             idBusiness: this.id,
-            infoAditional: this.dataAddStory.controls.commission,
-            description: this.dataAddStory.controls.nameContent,
-            link: this.dataAddStory.controls.link,
-            active: 1
+            infoAditional: this.dataAddStory.controls.commission.value,
+            description: this.dataAddStory.controls.nameContent.value,
+            link: this.dataAddStory.controls.link.value,
+            active: 1,
+            image: this.file,
+            imageURL: this.nameFile
         }]
         this.content.saveStories(datos).subscribe((resp: ResponseService) => {
             console.log(resp);
             if (resp.state === "Success") {
+                this.openSnackBar(resp.userMessage, "Cerrar");
                 this.getStories()
                 this.onNoClickAddStory()
             } else {
@@ -275,6 +272,8 @@ export class StoriesAdminComponent implements OnInit {
     }
 
     onNoClickAddStory(): void {
-        this.dialogRef.close();
+        this.dataAddStory.reset()
+        this.showErrorImg = false
+        this.dialog.closeAll()
     }
 }

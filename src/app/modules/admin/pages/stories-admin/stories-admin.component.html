@@ -61,7 +61,7 @@
       </button>
     </div>
     <span fxLayout="row">
-      <button class="button-selected-upload cursor-pointer">
+      <button class="button-selected-upload cursor-pointer" (click)="createStory()">
         <i
           class="tio-upload_on_cloud style-icon icon-update icon-download-file"
         ></i>
@@ -79,6 +79,7 @@
         [index]="i"
         [showShared]="false"
         [showCheck]="true"
+        [check]="dataReal[i].dataR"
         [showProgress]="false"
         [showInfo]="false"
         (checkStory)="addOrRemoveDeleted($event, i)"
@@ -185,8 +186,8 @@
           }}</span>
         </div>
         <div >
-          <label for="image" id="upload" class="cursor-pointer">
-            <span  *ngIf="!showErrorCert">
+          <label for="image-story" id="upload" class="cursor-pointer">
+            <span  *ngIf="!showErrorImg">
             <img
               class="mt-1"
               *ngIf="nameFile === ''"
@@ -202,20 +203,20 @@
           </span>
             <img
             class="mt-1 w-icon"
-            *ngIf="showErrorCert"
+            *ngIf="showErrorImg"
             src="/assets/img/icono-error-carga.svg"
             alt="upload"
           />
           </label>
         </div>
       </div>
-      <mat-error *ngIf="showErrorCert" class="text-small small pb-2 d-block">
-        Formato inválido solo se pueden subir archivos con la extensión SVG, JPG y menores de 100KB
+      <mat-error *ngIf="showErrorImg" class="text-small small pb-2 d-block">
+        Formato inválido, solo se pueden subir archivos con la extensión JPG max 7MB y MP4 max 72MB
       </mat-error>
     
       <input
         (change)="onFileChangeFiles($event)"
-        id="image"
+        id="image-story"
         type="file"
         formControlName="image"
       />
@@ -228,10 +229,9 @@
       <button
         mat-raised-button
         color="orange"
-        (click)="saveInfoPersonal()"
-        id="download-users"
+        (click)="saveStory()"
         class="ml-2"
-        [disabled]="!dataAddStory.valid"
+        [disabled]="!dataAddStory.valid || !validFormat"
       >
         Guardar Cambios
       </button>
