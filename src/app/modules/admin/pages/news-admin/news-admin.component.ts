@@ -140,8 +140,6 @@ export class NewsAdminComponent implements OnInit {
                     number: item.code === "effectiveness" ? (resp[item.code] * 100) : resp[item.code]
                 }
             })
-            console.log(resp)
-            console.log(this.items)
         })
     }
 

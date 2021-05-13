@@ -38,18 +38,15 @@ describe('NewsAdminComponent', () => {
   const getkpiNovelties = {
     state: "Success",
     userMessage: null,
-    objectResponse: [{
-      business: null,
-      commission: 0,
-      icon: "https://webclickamqa.blob.core.windows.net/img-ofertas/dashboard/icon-registros.svg",
+    objectResponse: {
+      effectiveness: 0.13,
       id: 0,
-      linksClicked: 0,
-      linksGenerated: 0,
-      number: 0,
-      subtitle: "Registros",
-      title: "Usuarios Registrados",
-      total: 0
-    }]
+      totalinprogress: 4,
+      totalnovelties: 56,
+      totalpending: 45,
+      totalsolved: 7,
+      totalusers: 4
+    }
   };
   const repsDatos = {
     total: 70,

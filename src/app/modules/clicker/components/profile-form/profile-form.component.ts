@@ -316,8 +316,8 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       data: {
         title,
         template,
-        id,
-      },
+        id
+      }
     });
   }
 
