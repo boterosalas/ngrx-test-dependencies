@@ -1,0 +1,24 @@
+<div [id]="id" class="card-story">
+  <div *ngIf="showProgress" class="story-progress">
+    <span class="final-progress"></span>
+    <span class="current-progress"></span>
+  </div>
+  <div class="story-info">
+    <div class="client-info {{!showInfo ? 'visibility-hidden' : ''}}">
+      <img class="img-client" [src]="story.image" alt="{{story.name}}">
+      <h4>{{ story.name }} {{ pause ? 'pausa' : 'reproduccion' }}</h4>
+      
+    </div>
+    <div class="action-container">
+      <button *ngIf="showShared" class="btn-shared"><img src="/assets/img/shared.svg" alt="shared"></button>
+      <mat-checkbox
+        *ngIf="showCheck"
+        [(ngModel)]="check"
+        (change)="checkDeleteStory()"
+        class="check-margin check-transparent"
+        >
+        </mat-checkbox>
+    </div>
+  </div>
+  <img class="img-story" [src]="story.image" alt="story {{story.name}}">
+</div>

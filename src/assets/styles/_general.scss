@@ -1,4 +1,6 @@
 @import "buttons";
+@import "variables";
+@import "mixins";
 
 html,
 body {
@@ -2237,4 +2239,88 @@ h3#bussiness2 {
   .mat-form-field-infix {
     border-top: 0;
   }
+}
+
+.cdk-overlay-pane.dialog-stories {
+  margin: 0 !important;
+
+  .modal-stories, .slick-slider, .slick-list, .slick-track {
+    height: 100%;
+  }
+
+  .slick-list {
+    @include from(550px) {
+      padding: 0;
+    }
+  }
+
+  .mat-dialog-container {
+    padding: 0;
+  }
+
+  @include fromMin(550px) {
+    .slick-slide:not(.slick-center) {
+      .card-story {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+      .story-progress {
+        display: none;
+      }
+  
+      .story-info {
+        justify-content: center;
+      }
+  
+      .client-info {
+          flex-direction: column;
+  
+          h4 {
+              font-size: 42px;
+              text-transform: uppercase;
+              margin: 10px 0 0px 0px;
+          }
+      }
+  
+      .img-client {
+          width: 130px;
+          height: 130px;
+          border-radius: 80px;
+          border: 6px solid #352767;
+      }
+  
+      .action-container {
+          display: none;
+      }
+    }
+  }
+}
+
+.cdk-global-scrollblock body::-webkit-scrollbar {
+  width: 0;
+}
+
+.check-transparent {
+  .mat-ripple-element {
+    opacity: 0.1;
+    background-color: black;
+  }
+
+  .mat-checkbox-frame {
+    border-color: white;
+    z-index: $z-floor;
+  }
+}
+
+.check-transparent .mat-checkbox-background, 
+.check-transparent.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: transparent !important;
+}
+
+.check-transparent.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element,
+.check-transparent .mat-ripple-element {
+  opacity: 0.1;
+  background-color: black;
 }

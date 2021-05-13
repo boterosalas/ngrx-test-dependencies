@@ -1,0 +1,176 @@
+@import "variables";
+@import "general";
+.image-bussiness {
+  width: 132px;
+  height: 58px;
+}
+.button-selected {
+  background-color: #ffffff;
+  color: #3d136e;
+  height: 35px;
+  border: 1px solid #3d136e;
+  img {
+    position: relative;
+    bottom: 3px;
+  }
+}
+.button-selected-red {
+  background-color: #ffffff;
+  color: #ff5658;
+  height: 35px;
+  border: 1px solid #ff5658;
+  img {
+    position: relative;
+    bottom: 3px;
+  }
+}
+.button-selected-red-disabled {
+  background-color: #ffffff !important;
+  color: #d2d0d4 !important;
+  height: 35px;
+  border: 1px solid #d2d0d4 !important;
+  img {
+    position: relative;
+    bottom: 3px;
+    filter: opacity(0.5) grayscale(1);
+  }
+}
+.button-selected-normal {
+  height: 35px;
+  img {
+    position: relative;
+    bottom: 3px;
+  }
+}
+.separator-img {
+  width: 100%;
+  height: 1px;
+  position: relative;
+  top: 20px;
+  left: 5px;
+}
+.image-size {
+  border-radius: 10px;
+  height: 148px;
+  width: 148px;
+  object-fit: cover;
+  margin-top: 10px;
+}
+.image-vysor {
+  position: relative;
+  bottom: 0px;
+  visibility: hidden;
+  color: #ffffff;
+}
+.image-hover {
+  position: relative;
+  height: 148px;
+  margin-bottom: 10px;
+}
+.image-hover:hover {
+  .image-size {
+    filter: blur(3px);
+    cursor: pointer;
+  }
+  .image-vysor {
+    visibility: visible;
+  }
+  .image-background {
+    background: #00000080;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+}
+.check-margin {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.image-background {
+  position: relative;
+  bottom: 150px;
+  height: 147px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.w-image {
+  width: 100%;
+}
+.image-viewer-x {
+  width: 80%;
+  position: absolute;
+  height: 100%;
+  left: 0;
+}
+.image-viewer-y {
+  width: 100%;
+  position: absolute;
+  height: 80%;
+  bottom: 0;
+}
+
+input[type="file"] {
+  display: none;
+}
+.icon-download-file {
+  position: relative;
+  top: 6px;
+}
+.button-selected-upload {
+  background-color: #37236a;
+  padding-left: 16px;
+  padding-right: 16px;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 1px -2px rgb(61 47 86 / 18%),
+    0 2px 2px 0 rgb(61 47 86 / 18%), 0 1px 5px 0 rgb(61 47 86 / 18%);
+}
+
+.center-template {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.delete-title {
+  color: #f21905;
+}
+.w-container {
+  width: 80%;
+  text-align: center;
+}
+.icon-update {
+  position: relative;
+  bottom: 3px;
+}
+.manager-check {
+  position: absolute;
+  top: 8px;
+  right: 0px;
+  z-index: 100;
+}
+.style-icon {
+  font-size: 20px;
+}
+
+.business-stories {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 30px auto 50px;
+  z-index: $z-floor;
+}
+
+.card {
+  margin-right: 30px;
+  margin-bottom: 20px;
+  z-index: $z-floor;
+  height: 400px;
+  width: 240px;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
