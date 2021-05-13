@@ -2,6 +2,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatTable } from '@angular/material';
+import * as moment from "moment";
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { ContentService } from 'src/app/services/content.service';
 import Swal from 'sweetalert2';
@@ -45,8 +46,10 @@ export class CarrouselAdminComponent implements OnInit {
       visible: [false],
       image: [null],
       image2: [null],
-
-
+      publicationDate: [null],
+      postTime: [null],
+      finishDate: [null],
+      endingTime: [null]
     });
     this.dataAddImagenOfertas = this.fb.group({
       nameContent: [null, Validators.required],
@@ -72,6 +75,9 @@ export class CarrouselAdminComponent implements OnInit {
   business: any;
   dataSourceOfer = [];
   activeButtonOfer: boolean;
+  maxDate = new Date();
+  minHours: any;
+  minHoursFinish: any;
 
   dataSource = [];
 
@@ -111,6 +117,22 @@ export class CarrouselAdminComponent implements OnInit {
 
     })
 
+  }
+
+  hourChange(horu, type) {
+    let data = new Date();
+    let dataH = moment(data).format("YYYY-MM-DD");
+    let dataOp = moment(horu.value).format("YYYY-MM-DD");
+    switch (type) {
+      case "publicationDate":
+        this.minHours = dataH === dataOp ? moment(data).format("hh:mm A") : "12:00 AM";
+        break;
+      case "finishDate":
+        this.minHoursFinish = dataH === dataOp ? moment(data).format("hh:mm A") : "12:00 AM";
+        break;
+      default:
+        break;
+    }
   }
 
   dropTable(event: CdkDragDrop<PeriodicElement[]>) {
@@ -397,6 +419,7 @@ export class CarrouselAdminComponent implements OnInit {
     })
   }
   saveImagenCarousel() {
+    console.log(this.dataAddImagen.controls)
     let visible = 0;
     if (this.dataAddImagen.controls.visible.value) {
       visible = 1;
@@ -429,6 +452,7 @@ export class CarrouselAdminComponent implements OnInit {
         imageWeb: this.fileImgCat,
         imageMobile: this.fileImgCat2,
         type: "CARROUSEL",
+        ///
       }]
     } else {
       if (this.fileImgCat != "" && this.fileImgCat2 != "") {
@@ -681,6 +705,18 @@ export class CarrouselAdminComponent implements OnInit {
     this.dataAddImagen.reset();
     this.dialog.closeAll();
   }
+
+  // checkAllDates() {
+  //   if (this.dataAddImagen.controls.visible.value === true) {
+  //     this.disabledButtonPu = false;
+  //   } else {
+  //     this.disabledButtonPu = true;
+  //   }
+
+  //   if (this.nameFileCert === "") {
+  //     this.disabledButtonPu = true;
+  //   }
+  // }
 
 }
 

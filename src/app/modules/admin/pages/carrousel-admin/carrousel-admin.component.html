@@ -1,5 +1,5 @@
 <app-banner
-  title="Carrusel & Ofertas"
+  title="Sliders & Ofertas"
   img="/assets/img/banners/banner-dashboard-pc.jpg"
   imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
 ></app-banner>
@@ -721,14 +721,139 @@
           style="display: none"
           formControlName="image2"
         />
-        <div fxLayout="row" fxLayoutAlign="end end">
-          Activa
-          <mat-slide-toggle
-            style="margin-left: 5px; position: relative; top: 2px"
-            color="orange2-toggle"
-            formControlName="visible"
-          ></mat-slide-toggle>
-        </div>
+        <div class="publication">
+          <h3 class="secundary-text">PUBLICACIÓN</h3>
+          <div fxLayout="row" fxLayoutAlign="start start">
+            Visible
+            <mat-slide-toggle
+              style="margin-left: 5px; position: relative; top: 2px"
+              color="orange2-toggle"
+              formControlName="visible"
+            ></mat-slide-toggle>
+          </div>
+          <div class="publication-date-range">
+            <div class="publication-date">
+              <label class="label-up-text mt-2" for="picker">
+                FECHA DE PUBLICACIÓN
+              </label>
+              <div fxLayout="row" class="mt-2">
+                <mat-datepicker
+                  class="icon-date"
+                  touchUi
+                  #picker
+                ></mat-datepicker>
+                <mat-datepicker-toggle
+                  class="icon-date"
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <input
+                  matInput
+                  (click)="picker.open()"
+                  [matDatepicker]="picker"
+                  [min]="maxDate"
+                  readonly
+                  [ngModelOptions]="{ standalone: true }"
+                  formControlName="publicationDate"
+                  class="border-input mat-elevation-z1 p-2 border-radius"
+                  [disabled]="visible"
+                  (dateChange)="hourChange($event, 'publicationDate')"
+                />
+              </div>
+            </div>
+            <div class="post-time">
+              <label class="label-up-text mt-2" for="post-time">
+                HORA DE PUBLICACIÓN
+              </label>
+              <div>
+                <mat-icon *ngIf="!visible" class="clock-time">alarm</mat-icon>
+                <mat-icon *ngIf="visible" class="clock-time-opaco"
+                  >alarm</mat-icon
+                >
+                <input
+                  [ngModelOptions]="{ standalone: true }"
+                  [ngxTimepicker]="min"
+                  [disabled]="visible"
+                  formControlName="postTime"
+                  matInput
+                  aria-label="HH/MM/SS"
+                  [ngxTimepicker]="defaultValue"
+                  readonly
+                  [min]="minHours"
+                  [for]="post-time"
+                  class="form-control mat-elevation-z1 p-2 border-radius"
+                />
+                <ngx-material-timepicker #min></ngx-material-timepicker>
+              </div>
+            </div>
+          </div>
+          <span class="s-label">
+            <mat-checkbox
+              class="mr-3 mb-2"
+              (change)="changeValue($event, 'IdentificationCard1')"
+              [for]="undefined-time"
+            >
+            </mat-checkbox>
+            <label class="label-up-text mt-2" for="undefined-time">
+              Tiempo indefinido
+            </label> 
+          </span>
+          <div class="finish-date-range">
+            <div class="finish-date">
+              <label class="label-up-text mt-2" for="pickerF">
+                FECHA DE FINALIZACIÓN
+              </label>
+              <div fxLayout="row" class="mt-2">
+                <mat-datepicker
+                  class="icon-date"
+                  touchUi
+                  #pickerF
+                ></mat-datepicker>
+                <mat-datepicker-toggle
+                  class="icon-date"
+                  matSuffix
+                  [for]="pickerF"
+                ></mat-datepicker-toggle>
+                <input
+                  matInput
+                  (click)="pickerF.open()"
+                  [matDatepicker]="pickerF"
+                  [min]="maxDate"
+                  formControlName="finishDate"
+                  readonly
+                  [ngModelOptions]="{ standalone: true }"
+                  class="border-input mat-elevation-z1 p-2 border-radius"
+                  [disabled]="visible"
+                  (dateChange)="hourChange($event, 'finishDate')"
+                />
+              </div>
+            </div>
+            <div class="ending-time">
+              <label class="label-up-text mt-2" for="ending-time">
+                HORA DE PUBLICACIÓN
+              </label>
+              <div>
+                <mat-icon *ngIf="!visible" class="clock-time">alarm</mat-icon>
+                <mat-icon *ngIf="visible" class="clock-time-opaco"
+                  >alarm</mat-icon
+                >
+                <input
+                  [ngModelOptions]="{ standalone: true }"
+                  [ngxTimepicker]="min"
+                  [disabled]="visible"
+                  formControlName="endingTime"
+                  matInput
+                  aria-label="default time"
+                  [ngxTimepicker]="defaultValue"
+                  readonly
+                  [min]="minHours"
+                  [for]="ending-time"
+                  class="form-control mat-elevation-z1 p-2 border-radius"
+                />
+                <ngx-material-timepicker #min></ngx-material-timepicker>
+              </div>
+            </div>
+          </div>
       </form>
     </div>
 
