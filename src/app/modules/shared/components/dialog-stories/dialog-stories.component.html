@@ -1,4 +1,4 @@
-<div class="modal-stories">
+<div *ngIf="data.showCarousel" class="modal-stories">
   <button id="closeDialogStories" matRipple (click)="onNoClick()"><mat-icon class="close cursor-pointer">close</mat-icon></button>
   <ngx-slick-carousel
     [config]="slideConfig"
@@ -17,6 +17,9 @@
       [index]="i"
       (nextStory)="nextOrClose($event)"
     ></app-card-story>
+    <div ngxSlickItem style="display: none;"></div>
+    <div ngxSlickItem style="display: none;"></div>
+    <div ngxSlickItem style="display: none;"></div>
   </ngx-slick-carousel>
   <div
     class="arrows"
@@ -28,5 +31,19 @@
     <button id="arrow-next" color="orange" class="slick-arrow arrow-right">
       <img *ngIf="showArrowRight === true" src="/assets/img/slick-arrow-right.svg" alt="arrow right" />
     </button>
+  </div>
+</div>
+<div *ngIf="!data.showCarousel" class="modal-stories">
+  <button id="closeDialogStories" matRipple (click)="onNoClick()"><mat-icon class="close cursor-pointer">close</mat-icon></button>
+  <div *ngIf="data.stories[data.id]" class="single-item">
+    <app-card-story 
+      class="card only"
+      [story]="data.stories[data.id]"
+      [pause]="data.stories[data.id].pause"
+      [id]="'story-modal-' + data.id"
+      [index]="data.id"
+      [showProgress]="true"
+      [showShared]="false"
+    ></app-card-story>
   </div>
 </div>

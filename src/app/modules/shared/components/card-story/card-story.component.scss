@@ -11,7 +11,7 @@
     overflow: hidden;
     position: relative;
     box-sizing: border-box;
-    padding: 10px 20px;
+    padding: 20px 20px;
 
     @include from(2540px) {
         max-width: 640px;
@@ -61,6 +61,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    z-index: $z-floor;
 
     h4 {
         font-family: $font-family-sans-serif;
@@ -70,9 +71,17 @@
         color: white;
         letter-spacing: 1px;
     }
+
+    span {
+        color: white;
+        margin-left: 5px;
+        font-size: 12px;
+        font-family: "galano-medium", sans-serif; 
+    }
 }
 
 .action-container {
+    z-index: $z-floor;
     @include from(550px) {
         margin-right: 30px;
     }
@@ -82,24 +91,43 @@
     background: transparent;
     border: none;
     cursor: pointer;
+
+    img {
+        background: #00000094;
+        border-radius: 50px;
+        width: 25px;
+        height: 25px;
+    }
 }
 
 .img-client {
     width: 50px;
     height: 50px;
     border-radius: 80px;
+    object-fit: cover;
+    background-color: white;
 }
 
-.img-story {
+.container-absolute {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: $z-back;
+    background-color: grey;
+    width: 100%;
+    height: 100%;
+}
+
+.img-story {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
-    z-index: $z-back;
-    background-color: grey;
+}
+
+.video-story {
+    width: 100%;
+    height: 100%;
 }
 
 .story-progress {
@@ -135,4 +163,31 @@
 
 .visibility-hidden {
     visibility: hidden;
+}
+
+.card-open {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+
+    i {
+        display: none;
+    }
+}
+
+.card-open:hover {
+    background-color: black;
+    opacity: 0.5;
+
+    i {
+        display: block;
+        font-size: 40px;
+        color: white;
+    }
 }

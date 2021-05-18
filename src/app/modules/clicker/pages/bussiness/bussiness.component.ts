@@ -222,11 +222,11 @@ export class BussinessComponent implements OnInit, OnDestroy {
   }
 
   formatContent(content: string) {
-    if (content.length > 250) {
+    if (content && content.length > 250) {
       return `${content.substr(0, 250)}...`;
     } else {
       this.invisible = true;
-      return `${content.substr(0, 250)}`;
+      return content ? `${content.substr(0, 250)}` : '';
     }
 
   }
@@ -407,7 +407,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
    */
 
   public dataSliderCategory(sliderInfo) {
-
+    console.log(sliderInfo)
     let token = localStorage.getItem("ACCESS_TOKEN");
     if (token !== null && sliderInfo.business !== "clickam") {
       this.tokenInfo = this.token.userInfo();

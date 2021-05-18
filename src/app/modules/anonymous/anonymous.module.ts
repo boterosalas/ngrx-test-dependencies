@@ -461,7 +461,8 @@ const routes: Routes = [
     ActivateAccountFormComponent,
     MenuComponent,
     CardComponent,
-    BussinessCardComponent
+    BussinessCardComponent,
+    SliderStoriesComponent
   ],
   providers: [
     {

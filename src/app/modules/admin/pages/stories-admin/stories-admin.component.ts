@@ -5,9 +5,11 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from 'rxjs';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { ContentService } from 'src/app/services/content.service';
+import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 import { DialogVideoPlayerComponent } from '../../components/dialog-video-player/dialog-video-player.component';
 import { ResponseService } from "src/app/interfaces/response";
+import { DialogStoriesComponent } from '../../../shared/components/dialog-stories/dialog-stories.component'
 
 @Component({
     selector: 'app-stories-admin',
@@ -35,6 +37,8 @@ export class StoriesAdminComponent implements OnInit {
     private subscription: Subscription = new Subscription();
 
     stories = []
+    bussiness: any
+    //userId: string
 
     constructor(
         private dialog: MatDialog,
@@ -42,6 +46,7 @@ export class StoriesAdminComponent implements OnInit {
         private route: ActivatedRoute,
         private _snackBar: MatSnackBar,
         private fb: FormBuilder,
+        private user: UserService
     ) {
         this.subscription = this.route.params.subscribe((route) => {
             if (
@@ -69,36 +74,64 @@ export class StoriesAdminComponent implements OnInit {
             commission: [null, Validators.required],
             image: [null, Validators.required]
           });
-        this.getStories();
+        this.getBusiness();
+    }
+    public getBusiness() {
+        this.subscription = this.content.getBusiness().subscribe((bussiness) => {
+            this.bussiness = bussiness;
+            this.getStories();
+        });
     }
     public getStories() {
         this.subscription = this.content.getStories(true).subscribe((resp: ResponseService) => {
             if (resp.state === "Success") {
-                console.log(resp.objectResponse);
                 if (resp.objectResponse) {
                     this.stories = []
                     this.dataReal = []
-                    resp.objectResponse.forEach((story) => {
-                        this.stories.push({
-                            id: story.id,
-                            idbusiness: story.idbusiness,
-                            name: story.description,
-                            infoAditional: story.infoaditional,
-                            image: story.imageurl,
-                            link: story.link,
-                            state: story.new,
-                            pause: true
-                        })
+                    resp.objectResponse.forEach(story => {
+                        if (story.idbusiness === Number.parseInt(this.id)) {
+                            let bussiness = this.bussiness.filter(b => b.id === story.idbusiness)[0]
 
-                        this.dataReal.push({
-                            id: story.id,
-                            dataR: false
-                        })
+                            this.stories.push({
+                                id: story.id,
+                                idbusiness: story.idbusiness,
+                                name: story.description,
+                                businessName: bussiness ? bussiness.description : "",
+                                infoAditional: story.infoaditional,
+                                image: story.imageurl,
+                                businessImage: bussiness ? bussiness.imageurl : '',
+                                businessCode: bussiness ? bussiness.code : '',
+                                link: story.link,
+                                date: new Date(story.date),
+                                stateView: !story.new,
+                                pause: true
+                            })
+    
+                            this.dataReal.push({
+                                id: story.id,
+                                dataR: false
+                            })
+                        }
                     });
                 }
             } else {
                 this.openSnackBar(resp.userMessage, "Cerrar");
             }
+        });
+    }
+    public openDialogStories(index: number = 0) {
+        this.dialog.open(DialogStoriesComponent, {
+            data: {
+                stories: this.stories,
+                id: index.toString(),
+                showArrows: false,
+                showCarousel: false
+            },
+            panelClass: 'dialog-stories',
+            hasBackdrop: false,
+            width: '100vw',
+            maxWidth: '100vw',
+            height: '100vh'
         });
     }
     public selectAll() {
@@ -144,13 +177,6 @@ export class StoriesAdminComponent implements OnInit {
         this.validFormat = false;
         if (getExt === "jpg" || getExt === "jpeg" || getExt === "mp4") {
             this.validFormat = true;
-        } else {
-            // Swal.fire({
-            //     text: "El formato a cargar no es permitido, recuerda que deben ser videos en formato .mp4 o imágenes en .jpg",
-            //     type: "error",
-            //     confirmButtonText: "Aceptar",
-            //     confirmButtonClass: 'accept-login-alert-error'
-            // });
         }
         if (getSize / 1000 > 7000 && (getExt === "jpg" || getExt === "jpeg")) {
             this.validFormat = false;
@@ -175,15 +201,6 @@ export class StoriesAdminComponent implements OnInit {
             duration: 5000
         });
     }
-    
-    // handleFileInput(event) {
-    //     let fileList: FileList = event.target.files;
-    //     this.getExtension(fileList[0].name, fileList[0].size);
-    //     if (this.validFormat === true) {
-    //         console.log("Valid file")
-    //     }
-
-    // }
 
     public onFileChangeFiles(event) {
         let nameFile = event.target.files[0].name;
@@ -227,7 +244,6 @@ export class StoriesAdminComponent implements OnInit {
     }
 
     public saveStory() {
-        console.log("saveStory")
         let datos = [{
             idBusiness: this.id,
             infoAditional: this.dataAddStory.controls.commission.value,
@@ -238,7 +254,6 @@ export class StoriesAdminComponent implements OnInit {
             imageURL: this.nameFile
         }]
         this.content.saveStories(datos).subscribe((resp: ResponseService) => {
-            console.log(resp);
             if (resp.state === "Success") {
                 this.openSnackBar(resp.userMessage, "Cerrar");
                 this.getStories()

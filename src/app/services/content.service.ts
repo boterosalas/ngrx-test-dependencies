@@ -949,6 +949,9 @@ export class ContentService {
             tap((errorStatus) => { })
           )
         ),
+        map((result: ResponseService) => {
+          return result;
+        }),
       );
   }
 
@@ -963,10 +966,13 @@ export class ContentService {
             tap((errorStatus) => { })
           )
         ),
+        map((result: ResponseService) => {
+          return result;
+        }),
       );
   }
 
-  public getStories(data: boolean) {
+  public getStories(data: any) {
     return this.http
       .get(`${this.url + this.apiGetStories}?visible=${data}`, this.httpOptions)
       .pipe(
@@ -976,7 +982,10 @@ export class ContentService {
             take(3),
             tap((errorStatus) => { })
           )
-        ));
+        ),
+        map((result: ResponseService) => {
+          return result;
+        }));
   }
 
   public deleteStories(data: any) {
@@ -989,7 +998,10 @@ export class ContentService {
             take(3),
             tap((errorStatus) => { })
           )
-        )
+        ),
+        map((result: ResponseService) => {
+          return result;
+        })
       );
   }
 

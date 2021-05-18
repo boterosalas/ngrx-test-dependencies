@@ -75,14 +75,19 @@
         *ngFor="let story of stories; let i = index" 
         [story]="story"
         [pause]="story.pause"
+        [play]="false"
         [id]="'story-' + i"
         [index]="i"
         [showShared]="false"
         [showCheck]="true"
         [check]="dataReal[i].dataR"
         [showProgress]="false"
-        [showInfo]="false"
+        [showInfo]="true"
+        [showImageClient]="false"
+        [showTitleClient]="false"
+        [cardOpen]="true"
         (checkStory)="addOrRemoveDeleted($event, i)"
+        (openStoryCard)="openDialogStories($event)"
       ></app-card-story>
   </div>
 </div>
@@ -179,10 +184,10 @@
       </mat-form-field>
       <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
         <div fxLayout="column" fxLayoutAlign="center" class="space">
-          <strong class="title-gray uppercase">Adjuntar imagen en formato vertical (1080x1920px, formato .jpg, .mp4, max 7MB, 72MB)</strong>
+          <strong class="text-upload-file uppercase">Adjuntar imagen en formato vertical (1080x1920px, formato .jpg, .mp4, max 7MB, 72MB)</strong>
           <span class="title-secondary" *ngIf="nameFile === ''">No hay archivo seleccionado</span>
           <span class="file-input" *ngIf="nameFile !== ''">{{
-            nameFile | truncate: '20'
+            nameFile
           }}</span>
         </div>
         <div >

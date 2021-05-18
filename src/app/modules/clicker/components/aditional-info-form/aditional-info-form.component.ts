@@ -170,7 +170,7 @@ export class AditionalInfoFormComponent implements OnInit, OnDestroy {
         (resp: any) => {
           if (resp.state === "Success") {
             this.openSnackBar(resp.userMessage, "Cerrar");
-            this.user.getProfile();
+            this.subscription = this.user.getProfile();
           }
         },
         err => {

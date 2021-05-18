@@ -174,3 +174,16 @@ input[type="file"] {
 .uppercase {
   text-transform: uppercase;
 }
+
+.text-upload-file {
+  font-size: 12px;
+  font-family: $font-galano-bold;
+  color: $gray4;
+  margin-bottom: 5px;
+}
+
+.title-secondary {
+  font-family: $font-family-sans-serif;
+  font-size: 12px;
+  color: $gray4;
+}

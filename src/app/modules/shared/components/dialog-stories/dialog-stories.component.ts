@@ -1,9 +1,12 @@
-import { Component, OnInit, Inject, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import {
   MatDialogRef,
   MAT_DIALOG_DATA
 } from "@angular/material";
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
+import { ContentService } from 'src/app/services/content.service';
+import { Subscription } from "rxjs";
+import { ResponseService } from "src/app/interfaces/response";
 
 @Component({
   selector: 'app-dialog-stories',
@@ -11,17 +14,20 @@ import { SlickCarouselComponent } from 'ngx-slick-carousel';
   styleUrls: ['./dialog-stories.component.scss']
 })
 export class DialogStoriesComponent implements OnInit {
-  @Input() showArrows: boolean = true;
+  //@Input() showArrows: boolean = true;
   @ViewChild('slickModalStories', { static: false }) slickModal: SlickCarouselComponent;
 
   slideConfig: {}
   showArrowLeft: boolean = true;
   showArrowRight: boolean = true;
   startTime: any;
+  showArrows: boolean;
+  nextEnabled: boolean = true;
 
   constructor(
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private content: ContentService
   ) { 
     this.slideConfig = {
       slidesToShow: this.data.stories.length <= 1 ? 1 : 3,
@@ -44,18 +50,33 @@ export class DialogStoriesComponent implements OnInit {
         }
       ]
     }
+    this.showArrowRight = this.showArrowLeft = this.data.stories.length <= 1 ? false : true
+    this.showArrows = this.data.showArrows
   }
 
-  ngOnInit() {
+  private subscription: Subscription = new Subscription();
+
+  ngOnInit() {}
+
+  ngAfterViewInit() {
+    if (!this.data.showCarousel) this.addEventPauseAndPlay()
   }
 
   onNoClick(): void {
-    this.slickModal.unslick()
+    if (this.data.showCarousel) {
+      const current = this.getCurrentSlick()
+      this.pause(Number.parseInt(current.getAttribute("data-slick-index")))
+      
+      this.slickModal.unslick()
+    } else {
+      this.pause(this.data.id)
+    }
+
     this.dialogRef.close()
   }
 
   slickInit(e) {
-    this.initSlickGoTo().then(slickModal => slickModal.slickGoTo(this.data.id))
+    setTimeout(() => this.initSlickGoTo().then(slickModal => slickModal.slickGoTo(this.data.id)), 0)
     this.addEventPauseAndPlay()
   }
 
@@ -68,11 +89,15 @@ export class DialogStoriesComponent implements OnInit {
   }
 
   beforeChange(e) {
-    this.pause(e.currentSlide)
+    if (this.data.userId) this.saveVisitStories(e.nextSlide)
+    this.nextEnabled = e.nextSlide >= (this.data.stories.length - 1) ? false : true
+
+    if (this.nextEnabled) this.pause(e.currentSlide)
+
     this.showArrowLeft = e.nextSlide === 0 ? false : true
 
     const slickTrack = document.querySelector(".modal-stories .slick-list .slick-track")
-    const slicks = slickTrack.querySelectorAll(".slick-slide")
+    const slicks = slickTrack.querySelectorAll(".card.slick-slide")
 
     if (slicks) {
       slicks.forEach(element => {
@@ -92,8 +117,23 @@ export class DialogStoriesComponent implements OnInit {
     }
   }
 
+  public saveVisitStories(index) {
+    if (this.data.stories[index].stateView) {
+      const data = {
+        idStory: this.data.stories[index].id,
+        userId: this.data.userId
+      }
+
+      this.subscription = this.content.saveVisitStories(data).subscribe((resp: ResponseService) => {
+        if (resp.state === "Success") {
+          this.data.stories[index].state = false
+        }
+      })
+    }
+  }
+
   next() {
-    this.slickModal.slickNext();
+    if (this.nextEnabled) this.slickModal.slickNext();
   }
 
   prev() {
@@ -101,18 +141,18 @@ export class DialogStoriesComponent implements OnInit {
   }
 
   private pause(index) {
-    this.data.stories[index].pause = true
+    if (this.data.stories[index]) this.data.stories[index].pause = true
   }
 
   private reproduce(index) {
-    this.data.stories[index].pause = false
+    if (this.data.stories[index]) this.data.stories[index].pause = false
   }
 
   private reproduceOrNext(index, timeElapsed) {
-    if (timeElapsed > 250) { // Tiempo transcurrido en ms
+    if (!this.nextEnabled || timeElapsed > 250) { // Tiempo transcurrido en ms
       this.reproduce(index)
     } else {
-      this.pause(index)
+      //this.pause(index)
       this.next()
     }
   }
@@ -123,21 +163,33 @@ export class DialogStoriesComponent implements OnInit {
 
   private addEventPauseAndPlay() {
     if (window.screen.width >= 550) {
-      for (let index = 0; index < this.data.stories.length; index++) {
-        const card = document.getElementById(index.toString());
+      if (this.data.showCarousel) {
+        for (let index = 0; index < this.data.stories.length; index++) {
+          const card = document.getElementById("story-" + index.toString())
+          if (card) {
+            card.onpointerdown = e => {
+              const current = this.getCurrentSlick()
+              if (Number.parseInt(current.getAttribute("data-slick-index")) === index) this.pause(index)
+              e.preventDefault()
+            }
         
+            card.onpointerup = e => {
+              const current = this.getCurrentSlick()
+              if (Number.parseInt(current.getAttribute("data-slick-index")) === index) this.reproduce(index)
+              e.preventDefault()
+            }
+          }
+        }
+      } else {
+        const card = document.getElementById("story-modal-" + this.data.id.toString())
         if (card) {
           card.onpointerdown = e => {
-            const current = this.getCurrentSlick()
-            if (Number.parseInt(current.getAttribute("data-slick-index")) === index) this.pause(index)
-            
+            this.pause(this.data.id)
             e.preventDefault()
           }
       
           card.onpointerup = e => {
-            const current = this.getCurrentSlick()
-            if (Number.parseInt(current.getAttribute("data-slick-index")) === index) this.reproduce(index)
-
+            this.reproduce(this.data.id)
             e.preventDefault()
           }
         }
@@ -146,33 +198,39 @@ export class DialogStoriesComponent implements OnInit {
 
     const arrowPrev = document.getElementById("arrow-prev")
 
-    arrowPrev.onpointerup = e => {
-      const current = this.getCurrentSlick()
-
-      this.pause(Number.parseInt(current.getAttribute("data-slick-index")))
-      this.prev()
-      e.preventDefault()
+    if (arrowPrev) {
+      arrowPrev.onpointerup = e => {
+        const current = this.getCurrentSlick()
+  
+        this.pause(Number.parseInt(current.getAttribute("data-slick-index")))
+        this.prev()
+        e.preventDefault()
+      }
     }
-
+   
     const arrowNext = document.getElementById("arrow-next")
-    let startTime, endTime;
 
-    arrowNext.onpointerdown = e => {
-      startTime = new Date();
-      const current = this.getCurrentSlick()
+    if (arrowNext) {
+      let startTime, endTime;
 
-      this.pause(Number.parseInt(current.getAttribute("data-slick-index")))
-      e.preventDefault()
+      arrowNext.onpointerdown = e => {
+        startTime = new Date();
+        const current = this.getCurrentSlick()
+
+        this.pause(Number.parseInt(current.getAttribute("data-slick-index")))
+        e.preventDefault()
+      }
+
+      arrowNext.onpointerup = e => {
+        endTime = new Date();
+        let timeDiff = endTime - startTime
+        const current = this.getCurrentSlick()
+
+        this.reproduceOrNext(Number.parseInt(current.getAttribute("data-slick-index")), timeDiff)
+        e.preventDefault()
+      }
     }
-
-    arrowNext.onpointerup = e => {
-      endTime = new Date();
-      let timeDiff = endTime - startTime
-      const current = this.getCurrentSlick()
-
-      this.reproduceOrNext(Number.parseInt(current.getAttribute("data-slick-index")), timeDiff)
-      e.preventDefault()
-    }
+    
   }
 
   public nextOrClose(index) {
