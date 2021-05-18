@@ -14,7 +14,6 @@ import { ResponseService } from "src/app/interfaces/response";
   styleUrls: ['./dialog-stories.component.scss']
 })
 export class DialogStoriesComponent implements OnInit {
-  //@Input() showArrows: boolean = true;
   @ViewChild('slickModalStories', { static: false }) slickModal: SlickCarouselComponent;
 
   slideConfig: {}
@@ -66,8 +65,6 @@ export class DialogStoriesComponent implements OnInit {
     if (this.data.showCarousel) {
       const current = this.getCurrentSlick()
       this.pause(Number.parseInt(current.getAttribute("data-slick-index")))
-      
-      //this.slickModal.unslick()
     } else {
       this.pause(this.data.id)
     }
@@ -152,7 +149,6 @@ export class DialogStoriesComponent implements OnInit {
     if (!this.nextEnabled || timeElapsed > 250) { // Tiempo transcurrido en ms
       this.reproduce(index)
     } else {
-      //this.pause(index)
       this.next()
     }
   }

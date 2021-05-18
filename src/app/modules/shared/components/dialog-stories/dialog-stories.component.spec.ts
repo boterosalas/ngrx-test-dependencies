@@ -126,15 +126,15 @@ describe('DialogStoriesComponent', () => {
       expect(component).toBeTruthy();
     });
 
-    it('next'), () => {
+    it('next', () => {
       component.next();
       expect(component.next).toBeTruthy();
-    }
+    })
 
-    it('prev'), () => {
+    it('prev', () => {
       component.prev();
       expect(component.prev).toBeTruthy();
-    }
+    })
 
     it("save visit stories", () => {
       component.data.stories[0].stateView = true
@@ -147,6 +147,19 @@ describe('DialogStoriesComponent', () => {
       button.dispatchEvent(new Event("pointerdown"));
       expect(component.pause).toBeTruthy();
       button.dispatchEvent(new Event("onpointerup"));
+      expect(component.reproduce).toBeTruthy();
+    });
+
+    it("events clicks arrows", () => {
+      const arrowNext = document.getElementById("arrow-next");
+      arrowNext.dispatchEvent(new Event("pointerdown"));
+      expect(component.pause).toBeTruthy();
+
+      arrowNext.dispatchEvent(new Event("onpointerup"));
+      expect(component.reproduce).toBeTruthy();
+
+      const arrowPrev = document.getElementById("arrow-prev");
+      arrowPrev.dispatchEvent(new Event("onpointerup"));
       expect(component.reproduce).toBeTruthy();
     });
 
