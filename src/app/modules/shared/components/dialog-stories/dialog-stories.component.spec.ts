@@ -20,14 +20,28 @@ describe('DialogStoriesComponent', () => {
       close: () => { }
      };
 
-    const saveVisitStories = {
+    let saveVisitStories = {
         state: "Success",
         userMessage: "guardado",
         objectResponse: null
     };
   
-    const data = {
+    let data = {
         stories: [{
+          id: 0,
+          idbusiness: 2,
+          name: "descripcion",
+          businessName: "Exito",
+          infoAditional: "50%",
+          image: "http/archivo.jpg",
+          businessImage: "http/archivo.jpg",
+          businessCode: "exito",
+          link: "https://www.exito.com/story",
+          date: new Date(2021,4,12),
+          stateView: true,
+          pause: false
+        },
+        {
           id: 1,
           idbusiness: 2,
           name: "descripcion",
@@ -38,21 +52,50 @@ describe('DialogStoriesComponent', () => {
           businessCode: "exito",
           link: "https://www.exito.com/story",
           date: new Date(2021,4,12),
-          state: true,
+          stateView: true,
           pause: true
         }],
         id: 1,
-        showArrows: false,
+        showArrows: true,
         userId: "20",
-        showCarousel: false
+        showCarousel: true
     }
+
+    let stories = [{
+      id: 0,
+      idbusiness: 2,
+      name: "descripcion",
+      businessName: "Exito",
+      infoAditional: "50%",
+      image: "http/archivo.jpg",
+      businessImage: "http/archivo.jpg",
+      businessCode: "exito",
+      link: "https://www.exito.com/story",
+      date: new Date(2021,4,12),
+      stateView: true,
+      pause: true
+    },
+    {
+      id: 1,
+      idbusiness: 2,
+      name: "descripcion",
+      businessName: "Exito",
+      infoAditional: "50%",
+      image: "http/archivo.jpg",
+      businessImage: "http/archivo.jpg",
+      businessCode: "exito",
+      link: "https://www.exito.com/story",
+      date: new Date(2021,4,12),
+      stateView: true,
+      pause: false
+    }]
   
     beforeEach(async(() => {
       TestBed.configureTestingModule({
         declarations: [ DialogStoriesComponent ],
         imports: [
             AppMaterialModule,
-            SlickCarouselModule
+            SlickCarouselModule,
         ],
         providers: [
           { provide: MatDialogRef, useValue: dialogMock },
@@ -70,24 +113,51 @@ describe('DialogStoriesComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(DialogStoriesComponent);
         component = fixture.componentInstance;
-        //component.data = data
+        component.showArrowLeft = true
+        component.showArrowRight = true
+        component.nextEnabled = true
+        component.data = data
+        component.data.userId = "20"
+        component.data.stories = stories
         fixture.detectChanges();
     });
   
     it('should create', () => {
       expect(component).toBeTruthy();
-      // let spy = spyOn(component.dialogRef, 'close').and.callThrough();
-      // component.onNoClick();
-      // expect(spy).toHaveBeenCalled();
+    });
+
+    it('next'), () => {
+      component.next();
+      expect(component.next).toBeTruthy();
+    }
+
+    it('prev'), () => {
+      component.prev();
+      expect(component.prev).toBeTruthy();
+    }
+
+    it("save visit stories", () => {
+      component.data.stories[0].stateView = true
+      component.saveVisitStories(0);
+      expect(mockContentService.saveVisitStories).toHaveBeenCalled();
     });
   
-    // it("save visit stories", () => {
-    //   component.saveVisitStories(0);
-    //   expect(mockContentService.saveLink).toHaveBeenCalled();
-    // });
+    it("events clicks", () => {
+      const button = document.getElementById("story-0");
+      button.dispatchEvent(new Event("pointerdown"));
+      expect(component.pause).toBeTruthy();
+      button.dispatchEvent(new Event("onpointerup"));
+      expect(component.reproduce).toBeTruthy();
+    });
 
     // it("next or close", () => {
     //     component.nextOrClose(0);
     //     expect(component.next()).toHaveBeenCalled();
     // });
+
+    it('close', () => {
+      let spy = spyOn(component.dialogRef, 'close').and.callThrough();
+      component.onNoClick();
+      expect(spy).toHaveBeenCalled();
+    })
   });

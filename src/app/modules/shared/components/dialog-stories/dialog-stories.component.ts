@@ -67,7 +67,7 @@ export class DialogStoriesComponent implements OnInit {
       const current = this.getCurrentSlick()
       this.pause(Number.parseInt(current.getAttribute("data-slick-index")))
       
-      this.slickModal.unslick()
+      //this.slickModal.unslick()
     } else {
       this.pause(this.data.id)
     }
@@ -132,19 +132,19 @@ export class DialogStoriesComponent implements OnInit {
     }
   }
 
-  next() {
+  public next() {
     if (this.nextEnabled) this.slickModal.slickNext();
   }
 
-  prev() {
+  public prev() {
     this.slickModal.slickPrev();
   }
 
-  private pause(index) {
+  public pause(index) {
     if (this.data.stories[index]) this.data.stories[index].pause = true
   }
 
-  private reproduce(index) {
+  public reproduce(index) {
     if (this.data.stories[index]) this.data.stories[index].pause = false
   }
 

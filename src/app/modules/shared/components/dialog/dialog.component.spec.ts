@@ -6,6 +6,7 @@ import { AppMaterialModule } from '../../app-material/app-material.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TranslateModule } from '@ngx-translate/core';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 describe('DialogComponent', () => {
   let component: DialogComponent;
@@ -22,6 +23,7 @@ describe('DialogComponent', () => {
        ],
        imports: [
         AppMaterialModule,
+        SlickCarouselModule,
         TranslateModule.forRoot()
        ],
        providers: [
