@@ -32,7 +32,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { BannerComponent } from './components/banner/banner.component';
 import { TrimPipe } from 'src/app/pipes/trim.pipe';
-
+import { SlickCarouselModule } from "ngx-slick-carousel";
+import { CardStoryComponent } from './components/card-story/card-story.component'
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { TrimPipe } from 'src/app/pipes/trim.pipe';
     BackNavigationComponent,
     ModalGenericComponent,
     BannerComponent,
-    DialogStoriesComponent
+    DialogStoriesComponent,
+    CardStoryComponent
   ],
   imports: [
     CommonModule,
@@ -74,7 +76,8 @@ import { TrimPipe } from 'src/app/pipes/trim.pipe';
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule,
+    SlickCarouselModule
   ],
   exports: [
     SearchComponent,
@@ -98,10 +101,12 @@ import { TrimPipe } from 'src/app/pipes/trim.pipe';
     ProductBussinessComponent,
     BackNavigationComponent,
     BannerComponent,
-    DialogStoriesComponent
+    DialogStoriesComponent,
+    CardStoryComponent
   ],
   entryComponents: [
-    ModalGenericComponent
+    ModalGenericComponent,
+    DialogStoriesComponent
   ]
 })
 export class SharedModule { }

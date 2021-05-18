@@ -1,4 +1,4 @@
-<ul class="stories-container">
+<ul *ngIf="stories.length > 0" class="stories-container">
   <li class="story-container" *ngFor="let story of stories; let i = index">
     <app-button-story 
       [story]="story" 

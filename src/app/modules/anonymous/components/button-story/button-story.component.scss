@@ -29,5 +29,10 @@
         object-position: center;
         border-radius: 50px;
         border: 2px solid white;
+        background-color: white;
     }
+}
+
+.story-button.viewed .image-container {
+    background: #D2D0D4;
 }

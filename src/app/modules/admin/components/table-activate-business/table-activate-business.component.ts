@@ -123,6 +123,16 @@ export class TableActivateBusinessComponent implements OnInit {
       },
     ]);
   }
+  adminStories(contenido: any) {
+    this.router.navigate([
+      "/stories-admin",
+      {
+        id: contenido.id,
+        titulo: contenido.description,
+        imagen: contenido.imageurl
+      },
+    ]);
+  }
   comisionTable(item: any) {
     this.router.navigate([
       "/comision-admin",
