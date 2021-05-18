@@ -14,15 +14,6 @@ import Swal from 'sweetalert2';
 import { ContentService } from 'src/app/services/content.service';
 import { UserService } from "src/app/services/user.service";
 import { of, BehaviorSubject } from 'rxjs';
-class MockUserService extends UserService {
-
-    userInfo$ = new BehaviorSubject<any>({
-        userId: '220',
-        identification: '1223345',
-        verified: true
-      });
-  
-  }
 
 describe('StoriesAdminComponent', () => {
     let component: StoriesAdminComponent;
@@ -103,8 +94,7 @@ describe('StoriesAdminComponent', () => {
             ],
             providers: [
                 { provide: MatDialog, useValue: mockDialog },
-                { provide: ContentService, useValue: mockContentService },
-                { provide: UserService, useClass: MockUserService },
+                { provide: ContentService, useValue: mockContentService }
             ]
         })
             .compileComponents();

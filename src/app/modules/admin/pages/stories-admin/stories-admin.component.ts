@@ -32,13 +32,13 @@ export class StoriesAdminComponent implements OnInit {
     showErrorImg: boolean = false;
     dataReal = [];
     validFormat: boolean;
+    extension: string;
     deleteStory = [];
     selectAllStories: string = "Seleccionar todos";
     private subscription: Subscription = new Subscription();
 
     stories = []
     bussiness: any
-    //userId: string
 
     constructor(
         private dialog: MatDialog,
@@ -177,6 +177,7 @@ export class StoriesAdminComponent implements OnInit {
         this.validFormat = false;
         if (getExt === "jpg" || getExt === "jpeg" || getExt === "mp4") {
             this.validFormat = true;
+            this.extension = getExt
         }
         if (getSize / 1000 > 7000 && (getExt === "jpg" || getExt === "jpeg")) {
             this.validFormat = false;
@@ -251,7 +252,8 @@ export class StoriesAdminComponent implements OnInit {
             link: this.dataAddStory.controls.link.value,
             active: 1,
             image: this.file,
-            imageURL: this.nameFile
+            imageURL: this.nameFile,
+            extension: this.extension
         }]
         this.content.saveStories(datos).subscribe((resp: ResponseService) => {
             if (resp.state === "Success") {
