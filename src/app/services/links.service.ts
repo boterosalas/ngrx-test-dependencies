@@ -63,6 +63,7 @@ export class LinksService {
   apiGetReport = "reports/clickerperformancereport";
   apiGetReportMonth = "reports/getcommissionpaymentreport"
   apiAudit = "reports/getaudit";
+  apikpiNovelties = "new/getkpinovelties";
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
 
@@ -657,6 +658,35 @@ export class LinksService {
         ),
         map((user: any) => {
           return user.objectResponse;
+        })
+      );
+  }
+
+  public getkpiNovelties(date: any) {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const authorization = token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + authorization,
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
+    };
+    let datesGet0 = date.start.split("T")
+    let datesGet1 = date.end.split("T")
+    return this.http
+      .get(`${this.urlReports}${this.apikpiNovelties}?start=${datesGet0[0]}&end=${datesGet1[0]}`, httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((resp: ResponseService) => {
+          return resp.objectResponse;
         })
       );
   }

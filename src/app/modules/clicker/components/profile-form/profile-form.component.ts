@@ -187,9 +187,11 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       (resp: ResponseService) => {
         if (resp.state === "Success") {
           const accountStatus = resp.objectResponse.find((status) => status.id === this.idVerified)
-          this.accountStatus = this.typesStatusAccount.find((type) => type.code === accountStatus.code);
-          if (description && accountStatus.code !== "NOTVERIFIED") {
-            this.accountStatus.description = description;
+          if (accountStatus) {
+            this.accountStatus = this.typesStatusAccount.find((type) => type.code === accountStatus.code);
+            if (description && accountStatus.code !== "NOTVERIFIED") {
+              this.accountStatus.description = description;
+            }
           }
         } else {
           this.openSnackBar(resp.userMessage, "Cerrar");
@@ -316,8 +318,8 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       data: {
         title,
         template,
-        id,
-      },
+        id
+      }
     });
   }
 
@@ -404,7 +406,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       (user: any) => {
         if (user.state === "Success") {
           this.dialog.closeAll();
-          this.user.getProfile();
+          this.subscription = this.user.getProfile();
           this.openSnackBar(user.userMessage, "Cerrar");
         }
       },
@@ -437,7 +439,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
         (account: any) => {
           if (account.state === "Success") {
             this.dialog.closeAll();
-            this.user.getProfile();
+            this.subscription = this.user.getProfile();
             this.openSnackBar(account.userMessage, "Cerrar");
           }
         },
@@ -477,7 +479,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       (password: any) => {
         if (password.state === "Success") {
           this.dialog.closeAll();
-          this.user.getProfile();
+          this.subscription = this.user.getProfile();
           this.profileFormPass.reset();
           this.openSnackBar(password.userMessage, "Cerrar");
         } else {
@@ -598,7 +600,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       (address: any) => {
         if (address.state === "Success") {
           this.openSnackBar(address.userMessage, "Cerrar");
-          this.user.getProfile();
+          this.subscription = this.user.getProfile();
           this.dialog.closeAll();
         }
       },

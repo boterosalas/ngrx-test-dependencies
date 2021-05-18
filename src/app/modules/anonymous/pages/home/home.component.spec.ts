@@ -18,6 +18,7 @@ import { SlickCarouselModule } from "ngx-slick-carousel";
 import Swal from "sweetalert2";
 import { LogoComponent } from "src/app/modules/shared/components/logo/logo.component";
 import { SliderComponent } from "../../components/slider/slider.component";
+//import { SliderStoriesComponent } from "src/app/modules/";
 import { AnonymousModule } from "../../anonymous.module";
 import { ContentService } from "src/app/services/content.service";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
@@ -46,6 +47,7 @@ describe("HomeComponent", () => {
   const mockUserService = jasmine.createSpyObj("UserService", [
     "activateProfile",
     "getuserdata",
+    "getProfile",
     "saveUserAcceptTermsReferrals",
     "saveFeedback"
   ]);
@@ -70,6 +72,7 @@ describe("HomeComponent", () => {
     "getPopupus",
     "getCategoriesBusinessHome",
     "registerBusinessClicker",
+    "getStories"
   ]);
 
   const mockLinksService = jasmine.createSpyObj("LinksService", ["getAmount"]);
@@ -183,6 +186,25 @@ describe("HomeComponent", () => {
       orderby: 5,
     },
   ];
+
+  let getStories = {
+    state: "Success",
+    userMessage: null,
+    objectResponse: [{
+      id: 0,
+      idbusiness: 25,
+      name: "Exito",
+      businessName: "Exito",
+      infoAditional: "30%",
+      image: "https://www.exito.com/story.jpg",
+      businessImage: "https://www.exito.com/businessimagestory.jpg",
+      businessCode: "exito",
+      link: "https://www.exito.com/story",
+      date: new Date(2021,4,12),
+      stateView: false,
+      pause: true
+    }]
+  };
 
   let news = {
     mobile: [
@@ -516,6 +538,7 @@ describe("HomeComponent", () => {
     mockUserService.saveFeedback.and.returnValue(of(data));
     mockUserService.getuserdata.and.returnValue(of(dataUserC));
     mockUserService.saveUserAcceptTermsReferrals.and.returnValue(of(dataTerms));
+    mockUserService.getProfile.and.returnValue();
     mockUtilsService.showRegisterForm.and.returnValue({});
     mockContentService.getNews.and.returnValue(of(news));
     mockContentService.getOffers.and.returnValue(of(offers));
@@ -524,6 +547,7 @@ describe("HomeComponent", () => {
     mockContentService.getBusinessClicker.and.returnValue(of(business));
     mockContentService.getPopupus.and.returnValue(of(popups));
     mockContentService.getCategoriesBusinessHome.and.returnValue(of(business));
+    mockContentService.getStories.and.returnValue(of(getStories));
   }));
 
   beforeEach(() => {

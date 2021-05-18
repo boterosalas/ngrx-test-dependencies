@@ -123,6 +123,13 @@ describe('ProfileFormComponent', () => {
     ]
   };
 
+  let city = {
+    Id: 3,
+    code: "03",
+    description: "Medellín",
+    idDeparment: 2
+  };
+
 let banks = [
   {Id: 1, code: "01", description: "BANCO AGRARIO"}
 ]
@@ -310,10 +317,10 @@ const respUploadFiles = {
   });
 
   it("select city", () => {
-    component.cityCode = "01";
-    component.selectCity("Medellín");
+    //component.cityCode = "03";
+    component.selectCity(city);
     fixture.detectChanges();
-    expect(component.cityCode).toBeUndefined();
+    expect(component.cityCode).toBeDefined();
   });
 
   it("select selectDepartment", () => {

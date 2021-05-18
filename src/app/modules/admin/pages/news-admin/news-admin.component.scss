@@ -105,3 +105,70 @@
   position: relative;
   bottom: 4px;
 }
+
+.validity-time {
+  margin-left: 25px;
+  color: $primary-color;
+  font-family: $font-family-sans-serif;
+  font-size: 12px;
+}
+
+.card-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.card-news {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 150px;
+  margin-right: 20px;
+  background-color: white;
+  padding: 24px 20px;
+  border-radius: 10px;
+  box-shadow: 0px 16px 16px #9aaacf1a;
+
+  i {
+    margin-bottom: 15px;
+    font-size: 38px;
+  }
+
+  h3 {
+    margin: 0 0 5px;
+    font-size: 13px;
+    font-family: $font-family-sans-serif;
+  }
+
+  p {
+    font-size: 30px;
+    margin: 0;
+    color: $primary-color;
+    font-family: $font-galano-bold;
+  }
+
+  .tio-message_failed {
+    color: #9489F4;
+  }
+
+  .tio-info {
+    color: #F48989;
+  }
+
+  .tio-time {
+    color: #F4CE89;
+  }
+
+  .tio-checkmark_circle {
+    color: #85CF3B;
+  }
+
+  .tio-account_circle {
+    color: #BA8AF4;
+  }
+
+  .tio-chart_bar_4 {
+    color: #89CAF4;
+  }
+}

@@ -21,6 +21,7 @@
               [maxDate]="maxDate"
               ngxDaterangepickerMd
               class="form-control border-input mat-elevation-z1 p-2 border-radius"
+              (change)="getKPI()"
             />
             <button
               mat-raised-button
@@ -32,6 +33,7 @@
               Exportar <i class="tio-download_from_cloud style-icon"></i>
             </button>
           </div>
+          <p class="validity-time">*Histórico vigente desde Marzo 10 del 2021</p>
         </div>
       </form>
     </div>
@@ -43,6 +45,18 @@
             (search)="searchUser($event)"
           ></app-search-users>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-container mt-4 mb-4">
+    <div 
+      class="card-news"
+      *ngFor="let item of items"
+    >
+      <i class="{{item.icon}}"></i>
+      <div>
+        <h3>{{item.title}}</h3>
+        <p>{{item.number}}{{item.code === 'effectiveness' ? '%' : ''}}</p>
       </div>
     </div>
   </div>
@@ -95,7 +109,7 @@
           mat-header-cell
           *matHeaderCellDef
           style="width: 15%"
-          mat-sort-header="username"
+          mat-sort-header="name"
         >
           NOMBRE DE USUARIO
         </th>
@@ -161,7 +175,7 @@
           mat-header-cell
           *matHeaderCellDef
           style="width: 10%"
-          mat-sort-header="statusnovelty"
+          mat-sort-header="status"
         >
           {{ "USERS.STATUS" | translate }}
         </th>

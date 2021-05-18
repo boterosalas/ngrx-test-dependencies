@@ -76,6 +76,10 @@ export class ContentService {
   apiDeleteOfer = "offer/deleteoffers";
   apiSaveOfer = "offer/saveoffers";
   apiSaveOferActive = "offer/saveactiveoffers";
+  apiGetStories = "story/getstories";
+  apiSaveStories = "story/savestories";
+  apiDeleteStories = "story/deletestories";
+  apiSaveVisitStory = "story/savevisitstory"
   sendSearch = {};
 
   public getNews() {
@@ -916,6 +920,7 @@ export class ContentService {
         })
       );
   }
+
   public saveOfertBusiness(data: any) {
     return this.http
       .post(`${this.url + this.apiSaveOfer}`, data, this.httpOptions)
@@ -932,4 +937,72 @@ export class ContentService {
         })
       );
   }
+
+  public saveStories(data: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveStories}`, data, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((result: ResponseService) => {
+          return result;
+        }),
+      );
+  }
+
+  public saveVisitStories(data: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveVisitStory}`, data, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((result: ResponseService) => {
+          return result;
+        }),
+      );
+  }
+
+  public getStories(data: any) {
+    return this.http
+      .get(`${this.url + this.apiGetStories}?visible=${data}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((result: ResponseService) => {
+          return result;
+        }));
+  }
+
+  public deleteStories(data: any) {
+    return this.http
+      .post(`${this.url + this.apiDeleteStories}`, data, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((result: ResponseService) => {
+          return result;
+        })
+      );
+  }
+
 }

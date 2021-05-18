@@ -20,6 +20,7 @@ import { UnderConstructionComponent } from './components/under-construction/unde
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 import { AppStoreComponent } from './components/app-store/app-store.component';
 import { LogoComponent } from './components/logo/logo.component';
+import { DialogStoriesComponent } from './components/dialog-stories/dialog-stories.component';
 import { ProductComponent } from './components/product/product.component';
 import { ProductBussinessComponent } from './components/product-bussiness/product-bussiness.component';
 import { BackNavigationComponent } from './components/back-navigation/back-navigation.component';
@@ -31,7 +32,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { BannerComponent } from './components/banner/banner.component';
 import { TrimPipe } from 'src/app/pipes/trim.pipe';
-
+import { SlickCarouselModule } from "ngx-slick-carousel";
+import { CardStoryComponent } from './components/card-story/card-story.component'
 
 
 @NgModule({
@@ -55,6 +57,8 @@ import { TrimPipe } from 'src/app/pipes/trim.pipe';
     BackNavigationComponent,
     ModalGenericComponent,
     BannerComponent,
+    DialogStoriesComponent,
+    CardStoryComponent
   ],
   imports: [
     CommonModule,
@@ -72,7 +76,8 @@ import { TrimPipe } from 'src/app/pipes/trim.pipe';
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule,
+    SlickCarouselModule
   ],
   exports: [
     SearchComponent,
@@ -96,10 +101,12 @@ import { TrimPipe } from 'src/app/pipes/trim.pipe';
     ProductBussinessComponent,
     BackNavigationComponent,
     BannerComponent,
-
+    DialogStoriesComponent,
+    CardStoryComponent
   ],
   entryComponents: [
-    ModalGenericComponent
+    ModalGenericComponent,
+    DialogStoriesComponent
   ]
 })
 export class SharedModule { }

@@ -40,6 +40,7 @@ import { DialogCategoryComponent } from './components/dialog-category/dialog-cat
 import { NewsAdminComponent } from './pages/news-admin/news-admin.component'
 import { DialogNewsComponent } from './components/dialog-news/dialog-news.component'
 import { ContentLibraryComponent } from './pages/content-library/content-library.component'
+import { StoriesAdminComponent } from './pages/stories-admin/stories-admin.component'
 import { DialogVideoPlayerComponent } from './components/dialog-video-player/dialog-video-player.component';
 import { DialogCommissionComponent } from './pages/dialog-commission/dialog-commission.component';
 import { LegalesComponent } from './pages/legales/legales.component'
@@ -172,6 +173,15 @@ const routes: Routes = [
     },
   },
   {
+    path: "stories-admin",
+    component: StoriesAdminComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
+    },
+  },
+  {
     path: "comision-admin",
     component: DialogCommissionComponent,
     canActivate: [RoleGuard],
@@ -254,6 +264,7 @@ const routes: Routes = [
     NewsAdminComponent,
     DialogNewsComponent,
     ContentLibraryComponent,
+    StoriesAdminComponent,
     DialogVideoPlayerComponent,
     DialogCommissionComponent,
     LegalesComponent,
