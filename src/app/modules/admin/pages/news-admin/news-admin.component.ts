@@ -27,6 +27,8 @@ export class NewsAdminComponent implements OnInit {
     pageSize: number;
     from: any;
     to: any;
+    name: any;
+    direction: any;
     items = [{
         code: "totalnovelties",
         title: "Total de novedades",
@@ -193,14 +195,14 @@ export class NewsAdminComponent implements OnInit {
         paginate.length = this.totalItems;
         this.from = paginate.pageSize * paginate.pageIndex + 1;
         this.to = paginate.pageSize * (paginate.pageIndex + 1);
-        this.searchUser(this.paginate, this.from, this.to);
+        this.searchUser(this.paginate, this.from, this.to, this.name, this.direction);
     }
     sort(event) {
-        let name = event.active.toUpperCase();
-        let direction = event.direction.toUpperCase();
-        if (direction === "") {
-            name = "";
+        this.name = event.active.toUpperCase();
+        this.direction = event.direction.toUpperCase();
+        if (this.direction === "") {
+            this.name = "";
         }
-        this.searchUser(this.paginate, this.from, this.to, name, direction);
+        this.searchUser(this.paginate, this.from, this.to, this.name, this.direction);
     }
 }
