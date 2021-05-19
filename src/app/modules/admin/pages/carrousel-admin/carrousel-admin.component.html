@@ -723,12 +723,13 @@
         />
         <div class="publication">
           <h3 class="secundary-text">PUBLICACIÓN</h3>
-          <div fxLayout="row" fxLayoutAlign="start start">
+          <div class="slide-visible">
             Visible
             <mat-slide-toggle
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="visible"
               style="margin-left: 5px; position: relative; top: 2px"
               color="orange2-toggle"
-              formControlName="visible"
             ></mat-slide-toggle>
           </div>
           <div class="publication-date-range">
@@ -736,7 +737,7 @@
               <label class="label-up-text mt-2" for="picker">
                 FECHA DE PUBLICACIÓN
               </label>
-              <div fxLayout="row" class="mt-2">
+              <div class="mt-2 content-input">
                 <mat-datepicker
                   class="icon-date"
                   touchUi
@@ -753,35 +754,34 @@
                   [matDatepicker]="picker"
                   [min]="maxDate"
                   readonly
-                  [ngModelOptions]="{ standalone: true }"
-                  formControlName="publicationDate"
-                  class="border-input mat-elevation-z1 p-2 border-radius"
-                  [disabled]="visible"
                   (dateChange)="hourChange($event, 'publicationDate')"
+                  [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="datePublication"
+                  [disabled]="visible"
+                  class="border-input mat-elevation-z1 border-radius"
+                  placeholder="DD/MM/AAAA"
                 />
               </div>
             </div>
             <div class="post-time">
-              <label class="label-up-text mt-2" for="post-time">
+              <label class="label-up-text mt-2">
                 HORA DE PUBLICACIÓN
               </label>
-              <div>
-                <mat-icon *ngIf="!visible" class="clock-time">alarm</mat-icon>
-                <mat-icon *ngIf="visible" class="clock-time-opaco"
-                  >alarm</mat-icon
+              <div class="mt-2 content-input">
+                <mat-icon *ngIf="!visible" class="tio-watch_later"></mat-icon>
+                <mat-icon *ngIf="visible" class="tio-watch_later opaque"
+                  ></mat-icon
                 >
                 <input
                   [ngModelOptions]="{ standalone: true }"
-                  [ngxTimepicker]="min"
                   [disabled]="visible"
-                  formControlName="postTime"
+                  [(ngModel)]="hourDate"
+                  [ngxTimepicker]="min"
                   matInput
-                  aria-label="HH/MM/SS"
-                  [ngxTimepicker]="defaultValue"
+                  placeholder="HH/MM"
                   readonly
                   [min]="minHours"
-                  [for]="post-time"
-                  class="form-control mat-elevation-z1 p-2 border-radius"
+                  class="border-input mat-elevation-z1 border-radius"
                 />
                 <ngx-material-timepicker #min></ngx-material-timepicker>
               </div>
@@ -789,12 +789,14 @@
           </div>
           <span class="s-label">
             <mat-checkbox
-              class="mr-3 mb-2"
-              (change)="changeValue($event, 'IdentificationCard1')"
-              [for]="undefined-time"
+              id="undefined-time"
+              class="mr-1 mb-2"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="undefinedDate"
             >
+            <!-- IdentificationCard1 -->
             </mat-checkbox>
-            <label class="label-up-text mt-2" for="undefined-time">
+            <label class="undefined-time" for="undefined-time">
               Tiempo indefinido
             </label> 
           </span>
@@ -803,7 +805,7 @@
               <label class="label-up-text mt-2" for="pickerF">
                 FECHA DE FINALIZACIÓN
               </label>
-              <div fxLayout="row" class="mt-2">
+              <div class="mt-2 content-input">
                 <mat-datepicker
                   class="icon-date"
                   touchUi
@@ -819,41 +821,39 @@
                   (click)="pickerF.open()"
                   [matDatepicker]="pickerF"
                   [min]="maxDate"
-                  formControlName="finishDate"
                   readonly
-                  [ngModelOptions]="{ standalone: true }"
-                  class="border-input mat-elevation-z1 p-2 border-radius"
-                  [disabled]="visible"
+                  class="border-input mat-elevation-z1 border-radius"
+                  [disabled]="undefinedDate || visible"
                   (dateChange)="hourChange($event, 'finishDate')"
+                  [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="dateFinishPublication"
+                  placeholder="DD/MM/AAAA"
                 />
               </div>
             </div>
             <div class="ending-time">
-              <label class="label-up-text mt-2" for="ending-time">
-                HORA DE PUBLICACIÓN
+              <label class="label-up-text mt-2">
+                HORA DE FINALIZACIÓN
               </label>
-              <div>
-                <mat-icon *ngIf="!visible" class="clock-time">alarm</mat-icon>
-                <mat-icon *ngIf="visible" class="clock-time-opaco"
-                  >alarm</mat-icon
-                >
+              <div class="mt-2 content-input">
+                <mat-icon *ngIf="!undefinedDate && !visible" class="tio-watch_later"></mat-icon>
+                <mat-icon *ngIf="undefinedDate || visible" class="tio-watch_later opaque"></mat-icon>
                 <input
                   [ngModelOptions]="{ standalone: true }"
-                  [ngxTimepicker]="min"
-                  [disabled]="visible"
-                  formControlName="endingTime"
+                  [disabled]="undefinedDate || visible"
+                  [(ngModel)]="hourDateFinish"
+                  [ngxTimepicker]="min2"
                   matInput
-                  aria-label="default time"
-                  [ngxTimepicker]="defaultValue"
+                  placeholder="HH/MM"
                   readonly
                   [min]="minHours"
-                  [for]="ending-time"
-                  class="form-control mat-elevation-z1 p-2 border-radius"
+                  class="border-input mat-elevation-z1 border-radius"
                 />
-                <ngx-material-timepicker #min></ngx-material-timepicker>
+                <ngx-material-timepicker #min2></ngx-material-timepicker>
               </div>
             </div>
           </div>
+        </div>
       </form>
     </div>
 
@@ -867,7 +867,7 @@
         (click)="saveImagenCarousel()"
         id="download-users"
         class="ml-2"
-        [disabled]="!dataAddImagen.valid || !activebutton"
+        [disabled]="!dataAddImagen.valid || !activebutton || (!visible && !datePublication) || (!visible && !undefinedDate && !dateFinishPublication)"
       >
         Guardar Cambios
       </button>

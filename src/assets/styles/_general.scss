@@ -2328,3 +2328,7 @@ h3#bussiness2 {
   opacity: 0.1;
   background-color: black;
 }
+
+.timepicker-backdrop-overlay, .timepicker-overlay {
+  z-index: 1010 !important;
+}

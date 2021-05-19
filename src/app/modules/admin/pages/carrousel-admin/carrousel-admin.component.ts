@@ -43,13 +43,8 @@ export class CarrouselAdminComponent implements OnInit {
       link: [null, Validators.required],
       business: [null, Validators.required],
       comision: [null, Validators.required],
-      visible: [false],
       image: [null],
-      image2: [null],
-      publicationDate: [null],
-      postTime: [null],
-      finishDate: [null],
-      endingTime: [null]
+      image2: [null]
     });
     this.dataAddImagenOfertas = this.fb.group({
       nameContent: [null, Validators.required],
@@ -78,6 +73,16 @@ export class CarrouselAdminComponent implements OnInit {
   maxDate = new Date();
   minHours: any;
   minHoursFinish: any;
+  disabledButtonEr: boolean = true;
+  disabledButtonPu: boolean = true;
+  contadorDates: number = 0;
+  dateForm: FormGroup;
+  datePublication: any = "";
+  hourDate: any = "";
+  dateFinishPublication: any = "";
+  hourDateFinish: any = "";
+  visible: boolean = false;
+  undefinedDate: boolean = false;
 
   dataSource = [];
 
@@ -88,7 +93,7 @@ export class CarrouselAdminComponent implements OnInit {
   }
   public getOffers() {
     this.content.getOffersbyType({ id: "CARROUSEL", admin: true }).subscribe((resp) => {
-      //console.log(resp)
+      console.log(resp)
       this.dataSource = resp;
       for (let index = 0; index < this.dataSource.length; index++) {
         this.dataSource[index].selected = false;
@@ -271,8 +276,22 @@ export class CarrouselAdminComponent implements OnInit {
     this.fileImgCat = "";
     this.fileImgCat2 = "";
     this.dataAddImagen.controls.nameContent.setValue(element.description)
-    this.dataAddImagen.controls.visible.setValue(element.active)
     this.dataAddImagen.controls.link.setValue(element.link);
+
+    let hour
+    if (element.datestart) {
+      this.datePublication = moment(element.datestart).format();
+      hour = element.datestart.split("T");
+      this.hourDate = this.timeFormat(hour[1]);
+    }
+
+    if (element.dateend) {
+      this.dateFinishPublication = moment(element.dateend).format();
+      hour = element.dateend.split("T");
+      this.hourDateFinish = this.timeFormat(hour[1]);
+    }
+    
+    this.visible = element.active
 
     this.dataAddImagen.controls.business.setValue(element.idbusiness)
     if (element.idbusiness === null) {
@@ -419,21 +438,18 @@ export class CarrouselAdminComponent implements OnInit {
     })
   }
   saveImagenCarousel() {
-    console.log(this.dataAddImagen.controls)
     let visible = 0;
-    if (this.dataAddImagen.controls.visible.value) {
+    if (this.visible) {
       visible = 1;
     } else {
       visible = 0;
     }
     let bussiness = this.dataAddImagen.controls.business.value;
-    let datos;
     let buss = ""
     for (let index = 0; index < this.selectedBuss.length; index++) {
       if (this.selectedBuss[index].id.toString() === bussiness.toString()) {
         buss = this.selectedBuss[index].code
       }
-
     }
     let idBuss;
     if (this.dataAddImagen.controls.business.value === 0) {
@@ -441,73 +457,58 @@ export class CarrouselAdminComponent implements OnInit {
     } else {
       idBuss = this.dataAddImagen.controls.business.value;
     }
+
+    let datePublication = moment(this.datePublication).format("YYYY-MM-DD");
+    let dateFinishPublication = moment(this.dateFinishPublication).format("YYYY-MM-DD");
+    let hour = this.hourDate ? this.militaryHrFormat(this.hourDate) : "";
+    let hourEnd = this.hourDateFinish ? this.militaryHrFormat(this.hourDateFinish) : "";
+
+    const datestart = !this.visible ? `${datePublication} ${hour}:00` : ""
+    const dateend = !this.visible && !this.undefinedDate ? `${dateFinishPublication} ${hourEnd}:00` : ""
+
+    let datos: any = [{
+      description: this.dataAddImagen.controls.nameContent.value,
+      link: this.dataAddImagen.controls.link.value,
+      idBusiness: idBuss,
+      Business: buss,
+      infoAditional: this.dataAddImagen.controls.comision.value,
+      active: visible,
+      type: "CARROUSEL",
+      datestart,
+      dateend
+    }]
+
     if (this.idCarousel === 0) {
       datos = [{
-        description: this.dataAddImagen.controls.nameContent.value,
-        link: this.dataAddImagen.controls.link.value,
-        idBusiness: idBuss,
-        Business: buss,
-        infoAditional: this.dataAddImagen.controls.comision.value,
-        active: visible,
+        ...datos[0],
         imageWeb: this.fileImgCat,
-        imageMobile: this.fileImgCat2,
-        type: "CARROUSEL",
-        ///
+        imageMobile: this.fileImgCat2
       }]
     } else {
       if (this.fileImgCat != "" && this.fileImgCat2 != "") {
         datos = [{
+          ...datos[0],
           id: this.idCarousel,
-          description: this.dataAddImagen.controls.nameContent.value,
-          link: this.dataAddImagen.controls.link.value,
-          idBusiness: idBuss,
-          Business: buss,
-          infoAditional: this.dataAddImagen.controls.comision.value,
-          active: visible,
           imageWeb: this.fileImgCat,
-          imageMobile: this.fileImgCat2,
-          type: "CARROUSEL",
+          imageMobile: this.fileImgCat2
         }]
       } else if (this.fileImgCat2 != "") {
         datos = [{
+          ...datos[0],
           id: this.idCarousel,
-          description: this.dataAddImagen.controls.nameContent.value,
-          link: this.dataAddImagen.controls.link.value,
-          idBusiness: idBuss,
-          Business: buss,
-          infoAditional: this.dataAddImagen.controls.comision.value,
-          active: visible,
-
-          imageMobile: this.fileImgCat2,
-          //CARROUSEL
-          type: "CARROUSEL",
+          imageMobile: this.fileImgCat2
         }]
       } else if (this.fileImgCat != "") {
         datos = [{
+          ...datos[0],
           id: this.idCarousel,
-          description: this.dataAddImagen.controls.nameContent.value,
-          link: this.dataAddImagen.controls.link.value,
-          idBusiness: idBuss,
-          Business: buss,
-          infoAditional: this.dataAddImagen.controls.comision.value,
-          active: visible,
           imageWeb: this.fileImgCat,
           imageMobile: this.fileImgCat2,
-          //CARROUSEL
-          type: "CARROUSEL",
         }]
       } else {
         datos = [{
-          id: this.idCarousel,
-          description: this.dataAddImagen.controls.nameContent.value,
-          link: this.dataAddImagen.controls.link.value,
-          idBusiness: idBuss,
-          Business: buss,
-          infoAditional: this.dataAddImagen.controls.comision.value,
-          active: visible,
-
-          //CARROUSEL
-          type: "CARROUSEL",
+          ...datos[0],
+          id: this.idCarousel
         }]
       }
     }
@@ -703,8 +704,76 @@ export class CarrouselAdminComponent implements OnInit {
   onNoClick() {
     this.dataAddImagenOfertas.reset();
     this.dataAddImagen.reset();
+    this.datePublication = null
+    this.hourDate = null
+    this.dateFinishPublication = null
+    this.hourDateFinish = null
     this.dialog.closeAll();
   }
+
+  public timeFormat(time) {
+    let hour = time.split(':')[0];
+    let minute = time.split(':')[1];
+
+    if (hour >= 12) {
+      if (hour == 12) {
+        let h = hour
+        let m = minute + ' PM'
+        return h + ":" + m
+      } else {
+        let h = hour - 12
+        let m = minute + ' PM'
+        return h + ":" + m
+      }
+
+    } else {
+      let h = parseInt(hour)
+      return h + ':' + minute + ' AM'
+    }
+  }
+
+  public militaryHrFormat(time) {
+    let format = time.toString().split(" ")[1]
+    let hour = time.toString().split(" ")[0].split(":")[0]
+    if (hour == 12) {
+      let hour = time.toString().split(" ")[0]
+      return hour
+    } else {
+      if (format === 'PM') {
+        let hour = time.toString().split(" ")[0]
+        let h = parseInt(hour.split(":")[0]) + 12
+        let m = hour.split(":")[1]
+        return h + ":" + m
+      } else {
+        if (hour < 10) {
+          let hour = 0 + time.toString().split(" ")[0]
+          return hour
+        }
+        else {
+          let hour = time.toString().split(" ")[0]
+          return hour
+        }
+      }
+    }
+  }
+
+  // checkInput(elemento) {
+  //   this.disabledButtonEr = false;
+  //   if (elemento === 'Cambio') {
+  //     this.contadorDates += 1
+  //   }
+  //   if (this.dateForm.controls.contenido.value != "") {
+  //     if (this.contadorDates > 1) {
+  //       this.disabledButtonPu = false;
+  //     } else {
+  //       this.disabledButtonPu = true;
+  //     }
+  //   }
+  //   if (this.nameFileCert === "") {
+  //     this.disabledButtonPu = true;
+  //     this.disabledButtonEr = true;
+  //   }
+  // }
 
   // checkAllDates() {
   //   if (this.dataAddImagen.controls.visible.value === true) {
