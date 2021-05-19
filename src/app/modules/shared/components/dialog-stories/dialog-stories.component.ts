@@ -29,7 +29,7 @@ export class DialogStoriesComponent implements OnInit {
     private content: ContentService
   ) { 
     this.slideConfig = {
-      slidesToShow: this.data.stories.length <= 1 ? 1 : 3,
+      slidesToShow: this.data.bubbles.length <= 1 ? 1 : 3,
       slidesToScroll: 1,
       centerMode: true,
       centerPadding: "40px",
@@ -49,7 +49,7 @@ export class DialogStoriesComponent implements OnInit {
         }
       ]
     }
-    this.showArrowRight = this.showArrowLeft = this.data.stories.length <= 1 ? false : true
+    this.showArrowRight = this.showArrowLeft = this.data.bubbles.length <= 1 ? false : true
     this.showArrows = this.data.showArrows
   }
 
@@ -86,8 +86,8 @@ export class DialogStoriesComponent implements OnInit {
   }
 
   beforeChange(e) {
-    if (this.data.userId) this.saveVisitStories(e.nextSlide)
-    this.nextEnabled = e.nextSlide >= (this.data.stories.length - 1) ? false : true
+    //if (this.data.userId) this.saveVisitStories(e.nextSlide)
+    this.nextEnabled = e.nextSlide >= (this.data.bubbles.length - 1) ? false : true
 
     if (this.nextEnabled) this.pause(e.currentSlide)
 
@@ -114,20 +114,20 @@ export class DialogStoriesComponent implements OnInit {
     }
   }
 
-  public saveVisitStories(index) {
-    if (this.data.stories[index].stateView) {
-      const data = {
-        idStory: this.data.stories[index].id,
-        userId: this.data.userId
-      }
+  // public saveVisitStories(index) {
+  //   if (this.data.bubbles[index].stateView) {
+  //     const data = {
+  //       idStory: this.data.bubbles[index].id,
+  //       userId: this.data.userId
+  //     }
 
-      this.subscription = this.content.saveVisitStories(data).subscribe((resp: ResponseService) => {
-        if (resp.state === "Success") {
-          this.data.stories[index].state = false
-        }
-      })
-    }
-  }
+  //     this.subscription = this.content.saveVisitStories(data).subscribe((resp: ResponseService) => {
+  //       if (resp.state === "Success") {
+  //         this.data.bubbles[index].state = false
+  //       }
+  //     })
+  //   }
+  // }
 
   public next() {
     if (this.nextEnabled) this.slickModal.slickNext();
@@ -138,11 +138,11 @@ export class DialogStoriesComponent implements OnInit {
   }
 
   public pause(index) {
-    if (this.data.stories[index]) this.data.stories[index].pause = true
+    if (this.data.bubbles[index]) this.data.bubbles[index].pause = true
   }
 
   public reproduce(index) {
-    if (this.data.stories[index]) this.data.stories[index].pause = false
+    if (this.data.bubbles[index]) this.data.bubbles[index].pause = false
   }
 
   private reproduceOrNext(index, timeElapsed) {
@@ -160,19 +160,19 @@ export class DialogStoriesComponent implements OnInit {
   private addEventPauseAndPlay() {
     if (window.screen.width >= 550) {
       if (this.data.showCarousel) {
-        for (let index = 0; index < this.data.stories.length; index++) {
+        for (let index = 0; index < this.data.bubbles.length; index++) {
           const card = document.getElementById("story-" + index.toString())
           if (card) {
             card.onpointerdown = e => {
               const current = this.getCurrentSlick()
               if (Number.parseInt(current.getAttribute("data-slick-index")) === index) this.pause(index)
-              //e.preventDefault()
+              e.preventDefault()
             }
         
             card.onpointerup = e => {
               const current = this.getCurrentSlick()
               if (Number.parseInt(current.getAttribute("data-slick-index")) === index) this.reproduce(index)
-              //e.preventDefault()
+              e.preventDefault()
             }
           }
         }
@@ -181,12 +181,12 @@ export class DialogStoriesComponent implements OnInit {
         if (card) {
           card.onpointerdown = e => {
             this.pause(this.data.id)
-            //e.preventDefault()
+            e.preventDefault()
           }
       
           card.onpointerup = e => {
             this.reproduce(this.data.id)
-            //e.preventDefault()
+            e.preventDefault()
           }
         }
       }
@@ -200,7 +200,7 @@ export class DialogStoriesComponent implements OnInit {
   
         this.pause(Number.parseInt(current.getAttribute("data-slick-index")))
         this.prev()
-        //e.preventDefault()
+        e.preventDefault()
       }
     }
    
@@ -214,7 +214,7 @@ export class DialogStoriesComponent implements OnInit {
         const current = this.getCurrentSlick()
 
         this.pause(Number.parseInt(current.getAttribute("data-slick-index")))
-        //e.preventDefault()
+        e.preventDefault()
       }
 
       arrowNext.onpointerup = e => {
@@ -223,7 +223,7 @@ export class DialogStoriesComponent implements OnInit {
         const current = this.getCurrentSlick()
 
         this.reproduceOrNext(Number.parseInt(current.getAttribute("data-slick-index")), timeDiff)
-        //e.preventDefault()
+        e.preventDefault()
       }
     }
     
@@ -231,7 +231,7 @@ export class DialogStoriesComponent implements OnInit {
 
   public nextOrClose(index) {
     this.pause(index)
-    if (index === (this.data.stories.length - 1)) {
+    if (index === (this.data.bubbles.length - 1)) {
       this.onNoClick()
     } else {
       this.next()

@@ -1,47 +1,49 @@
-<div [id]="id" class="card-story">
-  <div *ngIf="showProgress" class="story-progress">
-    <span class="final-progress"></span>
-    <span class="current-progress"></span>
-  </div>
-  <div class="story-info">
-    <div class="client-info {{!showInfo ? 'visibility-hidden' : ''}}">
-      <img *ngIf="showImageClient" class="img-client" [src]="story.businessImage" alt="{{story.name}}">
-      <h4 *ngIf="showTitleClient">{{ story.businessName }}</h4>
-      <span>{{timeStory}}</span>
+<div class="business-stories">
+  <div [id]="id" class="card-story">
+    <div *ngIf="showProgress" class="story-progress">
+      <span class="final-progress"></span>
+      <span class="current-progress"></span>
     </div>
-    <div class="action-container">
-      <button 
-        id="shared-{{index}}"
-        *ngIf="showShared" 
-        class="btn-shared"
-        (click)="dataSliderCategory()"
-      >
-        <img src="/assets/img/shared.svg" alt="shared">
-      </button>
-      <mat-checkbox
-        *ngIf="showCheck"
-        [(ngModel)]="check"
-        (change)="checkDeleteStory()"
-        class="check-margin check-transparent"
+    <div class="story-info">
+      <div class="client-info {{!showInfo ? 'visibility-hidden' : ''}}">
+        <img *ngIf="showImageClient" class="img-client" [src]="story.businessImage" alt="{{story.name}}">
+        <h4 *ngIf="showTitleClient">{{ story.businessName }}</h4>
+        <span>{{timeStory}}</span>
+      </div>
+      <div class="action-container">
+        <button 
+          id="shared-{{index}}"
+          *ngIf="showShared" 
+          class="btn-shared"
+          (click)="dataSliderCategory()"
         >
-        </mat-checkbox>
+          <img src="/assets/img/shared.svg" alt="shared">
+        </button>
+        <mat-checkbox
+          *ngIf="showCheck"
+          [(ngModel)]="check"
+          (change)="checkDeleteStory()"
+          class="check-margin check-transparent"
+          >
+          </mat-checkbox>
+      </div>
+      <div *ngIf="cardOpen" class="card-open" (click)="viewStory()">
+        <i class="tio-play_circle"></i>
+      </div>
     </div>
-    <div *ngIf="cardOpen" class="card-open" (click)="viewStory()">
-      <i class="tio-play_circle"></i>
+    <div class="container-absolute">
+      <img *ngIf="isImage"
+        class="img-story"
+        [src]="story.image" 
+        alt="story {{story.name}}"
+      >
+      <video 
+        *ngIf="!isImage"
+        id="video-{{id}}"
+        [src]="story.image"
+        class="video-story"
+      ></video>
     </div>
-  </div>
-  <div class="container-absolute">
-    <img *ngIf="isImage"
-      class="img-story"
-      [src]="story.image" 
-      alt="story {{story.name}}"
-    >
-    <video 
-      *ngIf="!isImage"
-      id="video-{{id}}"
-      [src]="story.image"
-      class="video-story"
-    ></video>
   </div>
 </div>
 

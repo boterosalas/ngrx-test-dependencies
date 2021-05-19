@@ -10,9 +10,9 @@
     <app-card-story 
       class="card"
       ngxSlickItem 
-      *ngFor="let story of data.stories; let i = index" 
-      [story]="story"
-      [pause]="story.pause"
+      *ngFor="let business of data.bubbles; let i = index" 
+      [story]="data.stories"
+      [pause]="business.pause"
       [id]="'story-' + i"
       [index]="i"
       (nextStory)="nextOrClose($event)"
