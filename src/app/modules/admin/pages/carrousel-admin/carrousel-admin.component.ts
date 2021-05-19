@@ -23,7 +23,7 @@ export interface PeriodicElement2 {
 })
 export class CarrouselAdminComponent implements OnInit {
   displayedColumns: string[] = ['drag', 'imagenWeb', 'imagenMobile', 'nameContent', 'link', 'bussiness', 'comision', 'active', 'actions'];
-  displayedColumns2: string[] = ['drag', 'image', 'nameContent', 'link', 'bussiness', 'comision', 'actions'];
+  displayedColumns2: string[] = ['drag', 'image', 'nameContent', 'link', 'bussiness', 'comision', 'active', 'actions'];
   dataAddImagen: FormGroup;
   dataAddImagenOfertas: FormGroup;
   selectAllVideosImg: string = "Seleccionar todos";
@@ -33,27 +33,6 @@ export class CarrouselAdminComponent implements OnInit {
   idCarousel: number = 0;
   idOfertas: number = 0;
   selected: any;
-  constructor(
-    private dialog: MatDialog,
-    private content: ContentService,
-    private fb: FormBuilder,
-  ) {
-    this.dataAddImagen = this.fb.group({
-      nameContent: [null, Validators.required],
-      link: [null, Validators.required],
-      business: [null, Validators.required],
-      comision: [null, Validators.required],
-      image: [null],
-      image2: [null]
-    });
-    this.dataAddImagenOfertas = this.fb.group({
-      nameContent: [null, Validators.required],
-      link: [null, Validators.required],
-      business: [null, Validators.required],
-      comision: [null, Validators.required],
-      image: [null],
-    });
-  }
   @ViewChild('table', { static: false }) table: MatTable<PeriodicElement>;
   @ViewChild('table2', { static: false }) table2: MatTable<PeriodicElement2>;
   @ViewChild("templateAddImagenCarousel", { static: false }) templateAddImagenCarousel: TemplateRef<any>;
@@ -86,25 +65,51 @@ export class CarrouselAdminComponent implements OnInit {
 
   dataSource = [];
 
-  ngOnInit() {
+  constructor(
+    private dialog: MatDialog,
+    private content: ContentService,
+    private fb: FormBuilder,
+  ) {
+    this.dataAddImagen = this.fb.group({
+      nameContent: [null, Validators.required],
+      link: [null, Validators.required],
+      business: [null, Validators.required],
+      comision: [null, Validators.required],
+      image: [null],
+      image2: [null]
+    });
+    this.dataAddImagenOfertas = this.fb.group({
+      nameContent: [null, Validators.required],
+      link: [null, Validators.required],
+      business: [null, Validators.required],
+      comision: [null, Validators.required],
+      image: [null],
+    });
+  }
 
+  ngOnInit() {
     this.getOffers();
     this.getAllBusiness();
   }
   public getOffers() {
     this.content.getOffersbyType({ id: "CARROUSEL", admin: true }).subscribe((resp) => {
-      console.log(resp)
+      const startTime: any = new Date()
+      
       this.dataSource = resp;
       for (let index = 0; index < this.dataSource.length; index++) {
+        let date: any = new Date(this.dataSource[index].datestart)
         this.dataSource[index].selected = false;
+        this.dataSource[index].programmed = date - startTime > 0 ? true : false
       }
-
     })
     this.content.getOffersbyType({ id: "OFERTA", admin: true }).subscribe((resp) => {
-
+      const startTime: any = new Date()
+      console.log(resp)
       this.dataSourceOfer = resp;
       for (let index = 0; index < this.dataSourceOfer.length; index++) {
+        let date: any = new Date(this.dataSourceOfer[index].datestart)
         this.dataSourceOfer[index].selected = false;
+        this.dataSourceOfer[index].programmed = date - startTime > 0 ? true : false
       }
     })
   }
@@ -124,7 +129,7 @@ export class CarrouselAdminComponent implements OnInit {
 
   }
 
-  hourChange(horu, type) {
+  public hourChange(horu, type) {
     let data = new Date();
     let dataH = moment(data).format("YYYY-MM-DD");
     let dataOp = moment(horu.value).format("YYYY-MM-DD");
@@ -140,7 +145,7 @@ export class CarrouselAdminComponent implements OnInit {
     }
   }
 
-  dropTable(event: CdkDragDrop<PeriodicElement[]>) {
+  public dropTable(event: CdkDragDrop<PeriodicElement[]>) {
     const prevIndex = this.dataSource.findIndex((d) => d === event.item.data);
     moveItemInArray(this.dataSource, prevIndex, event.currentIndex);
     this.table.renderRows();
@@ -153,9 +158,8 @@ export class CarrouselAdminComponent implements OnInit {
       })
     }
     this.saveOrder(datosSourceSend)
-    //this.saveOrder(datosSourceSend)
   }
-  dropTable2(event: CdkDragDrop<PeriodicElement[]>) {
+  public dropTable2(event: CdkDragDrop<PeriodicElement[]>) {
     const prevIndex = this.dataSourceOfer.findIndex((d) => d === event.item.data);
     moveItemInArray(this.dataSourceOfer, prevIndex, event.currentIndex);
     this.table2.renderRows();
@@ -169,7 +173,7 @@ export class CarrouselAdminComponent implements OnInit {
     }
     this.saveOrder(datosSourceSend)
   }
-  saveOrder(datos: any) {
+  public saveOrder(datos: any) {
     this.content.saveOrderOfertBusiness(datos).subscribe(resp => {
       //console.log(resp)
     })
@@ -250,7 +254,7 @@ export class CarrouselAdminComponent implements OnInit {
       };
     }
   }
-  checkButton() {
+  public checkButton() {
     if (this.nameFileCert != "" && this.nameFileCert2 != "") {
       this.activebutton = true;
       this.activeButtonOfer = true;
@@ -259,7 +263,7 @@ export class CarrouselAdminComponent implements OnInit {
       this.activeButtonOfer = false;
     }
   }
-  editCarouselModal(element) {
+  public editCarouselModal(element) {
     const title = "Editar Imagen";
     const idBussiness = 1;
     const edit = 0;
@@ -289,6 +293,8 @@ export class CarrouselAdminComponent implements OnInit {
       this.dateFinishPublication = moment(element.dateend).format();
       hour = element.dateend.split("T");
       this.hourDateFinish = this.timeFormat(hour[1]);
+    } else {
+      this.undefinedDate = true
     }
     
     this.visible = element.active
@@ -312,13 +318,13 @@ export class CarrouselAdminComponent implements OnInit {
 
   }
 
-  activate(element) {
+  public activate(element) {
     let datos = [{ id: element.id, active: element.active }]
     this.content.saveActiveBanner(datos).subscribe((resp) => {
 
     })
   }
-  editOfertasModal(element) {
+  public editOfertasModal(element) {
     const title = "Editar Imagen";
     const idBussiness = 1;
     const edit = 0;
@@ -344,9 +350,24 @@ export class CarrouselAdminComponent implements OnInit {
     }
     this.dataAddImagenOfertas.controls.comision.setValue(element.infoaditional)
     this.idOfertas = element.id;
-    //this.idSaveTip = element.id;
-    //this.dataEditTip.controls.title.setValue(element.title);
-    //this.dataEditTip.controls.description.setValue(element.description);
+    
+    let hour
+    if (element.datestart) {
+      this.datePublication = moment(element.datestart).format();
+      hour = element.datestart.split("T");
+      this.hourDate = this.timeFormat(hour[1]);
+    }
+
+    if (element.dateend) {
+      this.dateFinishPublication = moment(element.dateend).format();
+      hour = element.dateend.split("T");
+      this.hourDateFinish = this.timeFormat(hour[1]);
+    } else {
+      this.undefinedDate = true
+    }
+
+    this.visible = element.active
+
     let dialogRef1 = this.dialog.open(ModalGenericComponent, {
       width: "450px",
       data: {
@@ -359,7 +380,7 @@ export class CarrouselAdminComponent implements OnInit {
 
 
   }
-  saveCarouselModal() {
+  public saveCarouselModal() {
     const title = "Nueva Imagen";
     const idBussiness = 1;
     const edit = 0;
@@ -381,7 +402,7 @@ export class CarrouselAdminComponent implements OnInit {
     });
 
   }
-  saveOfertasModal() {
+  public saveOfertasModal() {
     const title = "Nueva Imagen";
     const idBussiness = 1;
     const edit = 0;
@@ -403,7 +424,7 @@ export class CarrouselAdminComponent implements OnInit {
     });
 
   }
-  deleteComisionCarousel(element) {
+  public deleteComisionCarousel(element) {
     Swal.fire({
       html: "<h3 class='delete-title-comision'>Eliminar Imagen</h3> <p class='w-container'>¿Estás seguro de eliminar la imagen seleccionada?</p>",
       confirmButtonText: "Eliminar imagen",
@@ -420,7 +441,7 @@ export class CarrouselAdminComponent implements OnInit {
       }
     })
   }
-  deleteComisionOferta(element) {
+  public deleteComisionOferta(element) {
     Swal.fire({
       html: "<h3 class='delete-title-comision'>Eliminar Imagen</h3> <p class='w-container'>¿Estás seguro de eliminar la imagen seleccionada?</p>",
       confirmButtonText: "Eliminar imagen",
@@ -437,7 +458,7 @@ export class CarrouselAdminComponent implements OnInit {
       }
     })
   }
-  saveImagenCarousel() {
+  public saveImagenCarousel() {
     let visible = 0;
     if (this.visible) {
       visible = 1;
@@ -519,9 +540,14 @@ export class CarrouselAdminComponent implements OnInit {
       this.getOffers();
     })
   }
-  saveImagenOfertas() {
+  public saveImagenOfertas() {
+    let visible = 0;
+    if (this.visible) {
+      visible = 1;
+    } else {
+      visible = 0;
+    }
     let bussiness = this.dataAddImagenOfertas.controls.business.value;
-    let datos;
     let buss = ""
     for (let index = 0; index < this.selectedBuss.length; index++) {
       if (this.selectedBuss[index].id.toString() === bussiness.toString()) {
@@ -534,43 +560,45 @@ export class CarrouselAdminComponent implements OnInit {
     } else {
       idBuss = this.dataAddImagenOfertas.controls.business.value;
     }
+
+    let datePublication = moment(this.datePublication).format("YYYY-MM-DD");
+    let dateFinishPublication = moment(this.dateFinishPublication).format("YYYY-MM-DD");
+    let hour = this.hourDate ? this.militaryHrFormat(this.hourDate) : "";
+    let hourEnd = this.hourDateFinish ? this.militaryHrFormat(this.hourDateFinish) : "";
+
+    const datestart = !this.visible ? `${datePublication} ${hour}:00` : ""
+    const dateend = !this.visible && !this.undefinedDate ? `${dateFinishPublication} ${hourEnd}:00` : ""
+
+    let datos: any = [{
+      description: this.dataAddImagenOfertas.controls.nameContent.value,
+      link: this.dataAddImagenOfertas.controls.link.value,
+      idBusiness: idBuss,
+      Business: buss,
+      infoAditional: this.dataAddImagenOfertas.controls.comision.value,
+      active: visible,
+      type: "OFERTA",
+      datestart,
+      dateend
+    }]
+
     if (this.idOfertas === 0) {
       datos = [{
-        description: this.dataAddImagenOfertas.controls.nameContent.value,
-        link: this.dataAddImagenOfertas.controls.link.value,
-        idBusiness: idBuss,
-        Business: buss,
-        infoAditional: this.dataAddImagenOfertas.controls.comision.value,
-        active: 1,
-        type: "OFERTA",
+        ...datos[0],
         imageWeb: this.fileImgCat,
         imageMobile: this.fileImgCat
       }]
     } else {
       if (this.fileImgCat != "") {
         datos = [{
+          ...datos[0],
           id: this.idOfertas,
-          description: this.dataAddImagenOfertas.controls.nameContent.value,
-          link: this.dataAddImagenOfertas.controls.link.value,
-          idBusiness: idBuss,
-          Business: buss,
-          infoAditional: this.dataAddImagenOfertas.controls.comision.value,
-          active: 1,
-          type: "OFERTA",
           imageWeb: this.fileImgCat,
           imageMobile: this.fileImgCat
         }]
       } else {
         datos = [{
-          id: this.idOfertas,
-          description: this.dataAddImagenOfertas.controls.nameContent.value,
-          link: this.dataAddImagenOfertas.controls.link.value,
-          idBusiness: idBuss,
-          Business: buss,
-          infoAditional: this.dataAddImagenOfertas.controls.comision.value,
-          active: 1,
-          type: "OFERTA",
-
+          ...datos[0],
+          id: this.idOfertas
         }]
       }
 
@@ -629,7 +657,7 @@ export class CarrouselAdminComponent implements OnInit {
       this.active2 = false;
     }
   }
-  selectAllOfertas() {
+  public selectAllOfertas() {
     if (this.selectAllVideosImgOfer === "Seleccionar todos") {
       for (let i = 0; i < this.dataSourceOfer.length; i++) {
         this.dataSourceOfer[i].selected = true;
@@ -649,7 +677,7 @@ export class CarrouselAdminComponent implements OnInit {
       }
     }
   }
-  deleteEveryOfertas() {
+  public deleteEveryOfertas() {
     Swal.fire({
       html: "<h3 class='delete-title-comision'>Eliminar Imagenes</h3> <p class='w-container'>¿Estás seguro de eliminar las imagenes seleccionadas?</p>",
       confirmButtonText: "Eliminar imagen",
@@ -675,7 +703,7 @@ export class CarrouselAdminComponent implements OnInit {
       }
     })
   }
-  deleteEvery() {
+  public deleteEvery() {
     Swal.fire({
       html: "<h3 class='delete-title-comision'>Eliminar Imagenes</h3> <p class='w-container'>¿Estás seguro de eliminar las imagenes seleccionadas?</p>",
       confirmButtonText: "Eliminar imagen",
@@ -701,13 +729,14 @@ export class CarrouselAdminComponent implements OnInit {
       }
     })
   }
-  onNoClick() {
+  public onNoClick() {
     this.dataAddImagenOfertas.reset();
     this.dataAddImagen.reset();
     this.datePublication = null
     this.hourDate = null
     this.dateFinishPublication = null
     this.hourDateFinish = null
+    this.undefinedDate = false
     this.dialog.closeAll();
   }
 
@@ -718,17 +747,17 @@ export class CarrouselAdminComponent implements OnInit {
     if (hour >= 12) {
       if (hour == 12) {
         let h = hour
-        let m = minute + ' PM'
+        let m = minute + ' P.M.'
         return h + ":" + m
       } else {
         let h = hour - 12
-        let m = minute + ' PM'
+        let m = minute + ' P.M.'
         return h + ":" + m
       }
 
     } else {
       let h = parseInt(hour)
-      return h + ':' + minute + ' AM'
+      return h + ':' + minute + ' A.M.'
     }
   }
 
@@ -757,35 +786,11 @@ export class CarrouselAdminComponent implements OnInit {
     }
   }
 
-  // checkInput(elemento) {
-  //   this.disabledButtonEr = false;
-  //   if (elemento === 'Cambio') {
-  //     this.contadorDates += 1
-  //   }
-  //   if (this.dateForm.controls.contenido.value != "") {
-  //     if (this.contadorDates > 1) {
-  //       this.disabledButtonPu = false;
-  //     } else {
-  //       this.disabledButtonPu = true;
-  //     }
-  //   }
-  //   if (this.nameFileCert === "") {
-  //     this.disabledButtonPu = true;
-  //     this.disabledButtonEr = true;
-  //   }
-  // }
-
-  // checkAllDates() {
-  //   if (this.dataAddImagen.controls.visible.value === true) {
-  //     this.disabledButtonPu = false;
-  //   } else {
-  //     this.disabledButtonPu = true;
-  //   }
-
-  //   if (this.nameFileCert === "") {
-  //     this.disabledButtonPu = true;
-  //   }
-  // }
-
+  public formatDate(date) {
+    const fDate = moment(date).format("DD/MM/YY");
+    const hour = date.split("T");
+    const formatHour = this.timeFormat(hour[1]);
+    return `${fDate} ${formatHour}`
+  }
 }
 

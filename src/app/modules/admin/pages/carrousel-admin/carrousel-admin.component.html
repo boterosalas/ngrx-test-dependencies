@@ -216,10 +216,15 @@
             <td mat-cell *matCellDef="let element; let i = index">
               <div fxLayout="row" fxLayoutGap="10px">
                 <mat-slide-toggle
+                  *ngIf="!element.programmed"
                   [(ngModel)]="element.active"
                   (change)="activate(element)"
                   color="orange2-toggle"
                 ></mat-slide-toggle>
+                <div *ngIf="element.programmed" class="programmed">
+                  <h4>Programada</h4>
+                  <p>{{formatDate(element.datestart)}}</p>
+                </div>
               </div>
             </td>
           </ng-container>
@@ -454,7 +459,30 @@
               </div>
             </td>
           </ng-container>
-
+          <ng-container matColumnDef="active">
+            <th
+              mat-header-cell
+              class="tr"
+              *matHeaderCellDef
+              style="width: 7%; font-weight: bold"
+            >
+              ACTIVO / INACTIVO
+            </th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <div fxLayout="row" fxLayoutGap="10px">
+                <mat-slide-toggle
+                  *ngIf="!element.programmed"
+                  [(ngModel)]="element.active"
+                  (change)="activate(element)"
+                  color="orange2-toggle"
+                ></mat-slide-toggle>
+                <div *ngIf="element.programmed" class="programmed">
+                  <h4>Programada</h4>
+                  <p>{{formatDate(element.datestart)}}</p>
+                </div>
+              </div>
+            </td>
+          </ng-container>
           <ng-container matColumnDef="actions">
             <th
               mat-header-cell
@@ -1171,7 +1199,7 @@
         (click)="saveImagenOfertas()"
         id="download-users"
         class="ml-2"
-        [disabled]="!dataAddImagenOfertas.valid || !activeButtonOfer"
+        [disabled]="!dataAddImagenOfertas.valid || !activeButtonOfer || (!visible && !datePublication) || (!visible && !undefinedDate && !dateFinishPublication)"
       >
         Guardar Cambios
       </button>
