@@ -123,7 +123,7 @@ export class DialogStoriesComponent implements OnInit {
 
   //     this.subscription = this.content.saveVisitStories(data).subscribe((resp: ResponseService) => {
   //       if (resp.state === "Success") {
-  //         this.data.storiesBusiness[index].state = false
+  //         this.data.storiesBusiness[index].stateView = false
   //       }
   //     })
   //   }
