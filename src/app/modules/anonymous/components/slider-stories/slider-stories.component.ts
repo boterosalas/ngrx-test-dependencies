@@ -43,23 +43,25 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
     this.content.getStories(false).subscribe((data: ResponseService) => {
       if (data.state === "Success") {
         if (data.objectResponse) {
-          data.objectResponse.forEach(story => {
-            let bussiness = this.bussiness.filter(b => b.id === story.idbusiness)[0]
+          data.objectResponse.forEach(storyS => {
+            let bussinessStory = this.bussiness.filter(b => b.id === storyS.idbusiness)[0]
 
-            this.stories.push({
-              id: story.id,
-              idbusiness: story.idbusiness,
-              name: story.description,
-              businessName: bussiness ? bussiness.description : '',
-              infoAditional: story.infoaditional,
-              image: story.imageurl,
-              businessImage: bussiness ? bussiness.imageurl : '',
-              businessCode: bussiness ? bussiness.code : '',
-              link: story.link,
-              date: new Date(story.date),
-              stateView: !story.new,
-              pause: true
-            })
+            let objectStory = {
+              idbusiness: storyS.idbusiness,
+              id: storyS.id,
+              businessName: bussinessStory ? bussinessStory.description : '',
+              name: storyS.description,
+              image: storyS.imageurl,
+              infoAditional: storyS.infoaditional,
+              businessCode: bussinessStory ? bussinessStory.code : '',
+              businessImage: bussinessStory ? bussinessStory.imageurl : '',
+              date: new Date(storyS.date),
+              link: storyS.link,
+              pause: true,
+              stateView: !storyS.new,
+            }
+
+            this.stories.push(objectStory)
           });
         }
       }

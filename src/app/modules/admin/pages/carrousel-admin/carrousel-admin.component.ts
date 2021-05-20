@@ -106,7 +106,6 @@ export class CarrouselAdminComponent implements OnInit {
     })
     this.content.getOffersbyType({ id: "OFERTA", admin: true }).subscribe((resp) => {
       const startTime: any = new Date()
-      console.log(resp)
       this.dataSourceOfer = resp;
       for (let index = 0; index < this.dataSourceOfer.length; index++) {
         let date: any = new Date(this.dataSourceOfer[index].datestart)
@@ -181,33 +180,35 @@ export class CarrouselAdminComponent implements OnInit {
     })
   }
   private getExtension(nameFile: string, getSize: number) {
-    let splitExt = nameFile.split(".");
-    let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
+    let splitExtFile = nameFile.split(".");
+    let getExtFile = splitExtFile[splitExtFile.length - 1].toLocaleLowerCase();
     this.validFormat = false;
-    if (getExt === "jpg") {
+    if ("jpg" === getExtFile) {
       this.validFormat = true;
     }
-    if (getSize / 1000 > 300) {
+    if (300 < (getSize / 1000)) {
       this.validFormat = false;
     }
   }
   public onFileChangeFiles(event, param: string) {
-    let nameFile = event.target.files[0].name;
-    let reader = new FileReader();
-    let sizeFile = event.target.files[0].size;
-    let fileList: FileList = event.target.files;
+    const target = event.target
+    const files = target.files[0]
+    let nameFileCarrousel = files.name;
+    let readerCarrousel = new FileReader();
+    let sizeFileCarrousel = files.size;
+    let fileList: FileList = target.files;
     this.getExtension(fileList[0].name, fileList[0].size);
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      let fileBlob = new Blob([file]);
-      let file2 = new File([fileBlob], nameFile);
-      reader.readAsDataURL(file2);
-      reader.onload = () => {
-        this.getExtension(nameFile, sizeFile);
+    if (target.files && target.files.length) {
+      const [Tfiles] = target.files;
+      let fileBlobCarrousel = new Blob([Tfiles]);
+      let newFile = new File([fileBlobCarrousel], nameFileCarrousel);
+      readerCarrousel.readAsDataURL(newFile);
+      readerCarrousel.onload = () => {
+        this.getExtension(nameFileCarrousel, sizeFileCarrousel);
         if (this.validFormat === true) {
-          this.fileImgCat = reader.result;
+          this.fileImgCat = readerCarrousel.result;
           this.fileImgCat = this.fileImgCat.split(",")[1]
-          this.nameFileCert = nameFile;
+          this.nameFileCert = nameFileCarrousel;
           this.showErrorCert = false;
           this.activeButtonOfer = true;
           if (this.nameFileCert2 != "") {
@@ -218,7 +219,7 @@ export class CarrouselAdminComponent implements OnInit {
 
         } else {
           this.showErrorCert = true;
-          this.nameFileCert = nameFile;
+          this.nameFileCert = nameFileCarrousel;
           this.activebutton = false;
           this.activeButtonOfer = false;
         }
@@ -226,22 +227,23 @@ export class CarrouselAdminComponent implements OnInit {
     }
   }
   public onFileChangeFilesSecond(event, param: string) {
-    let nameFile = event.target.files[0].name;
-    let reader = new FileReader();
-    let sizeFile = event.target.files[0].size;
-    let fileList: FileList = event.target.files;
-    this.getExtension(fileList[0].name, fileList[0].size);
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      let fileBlob = new Blob([file]);
-      let file2 = new File([fileBlob], nameFile);
-      reader.readAsDataURL(file2);
-      reader.onload = () => {
-        this.getExtension(nameFile, sizeFile);
+    const target = event.target
+    const files2 = target.files[0]
+    let nameFileCarrousel2 = files2.name;
+    let newReader = new FileReader();
+    let sizeFile = target.files[0].size;
+    let fileList: FileList = target.files;
+    this.getExtension(fileList[0].name, sizeFile);
+    if (target.files && target.files.length) {
+      const [Tfiles2] = target.files;
+      let fileBlob = new Blob([Tfiles2]);
+      let newFile2 = new File([fileBlob], nameFileCarrousel2);
+      newReader.readAsDataURL(newFile2);
+      newReader.onload = () => {
         if (this.validFormat === true) {
-          this.fileImgCat2 = reader.result;
+          this.fileImgCat2 = newReader.result;
           this.fileImgCat2 = this.fileImgCat2.split(",")[1]
-          this.nameFileCert2 = nameFile;
+          this.nameFileCert2 = nameFileCarrousel2;
           this.showErrorCert2 = false;
           if (this.nameFileCert != "") {
             this.activebutton = true;
@@ -250,7 +252,7 @@ export class CarrouselAdminComponent implements OnInit {
           }
         } else {
           this.showErrorCert2 = true;
-          this.nameFileCert2 = nameFile;
+          this.nameFileCert2 = nameFileCarrousel2;
           this.activebutton = false;
         }
       };
@@ -284,22 +286,7 @@ export class CarrouselAdminComponent implements OnInit {
     this.dataAddImagen.controls.nameContent.setValue(element.description)
     this.dataAddImagen.controls.link.setValue(element.link);
 
-    let hour
-    if (element.datestart) {
-      this.datePublication = moment(element.datestart).format();
-      hour = element.datestart.split("T");
-      this.hourDate = this.timeFormat(hour[1]);
-    }
-
-    if (element.dateend) {
-      this.dateFinishPublication = moment(element.dateend).format();
-      hour = element.dateend.split("T");
-      this.hourDateFinish = this.timeFormat(hour[1]);
-    } else {
-      this.undefinedDate = true
-    }
-    
-    this.visible = element.active
+    this.formateDateHour(element)
 
     this.dataAddImagen.controls.business.setValue(element.idbusiness)
     if (element.idbusiness === null) {
@@ -318,6 +305,25 @@ export class CarrouselAdminComponent implements OnInit {
       },
     });
 
+  }
+
+  private formateDateHour(element) {
+    let hour
+    if (element.datestart) {
+      this.datePublication = moment(element.datestart).format();
+      hour = element.datestart.split("T");
+      this.hourDate = this.timeFormat(hour[1]);
+    }
+
+    if (element.dateend) {
+      this.dateFinishPublication = moment(element.dateend).format();
+      hour = element.dateend.split("T");
+      this.hourDateFinish = this.timeFormat(hour[1]);
+    } else {
+      this.undefinedDate = true
+    }
+    
+    this.visible = element.active
   }
 
   public activate(element) {
@@ -353,22 +359,7 @@ export class CarrouselAdminComponent implements OnInit {
     this.dataAddImagenOfertas.controls.comision.setValue(element.infoaditional)
     this.idOfertas = element.id;
     
-    let hour
-    if (element.datestart) {
-      this.datePublication = moment(element.datestart).format();
-      hour = element.datestart.split("T");
-      this.hourDate = this.timeFormat(hour[1]);
-    }
-
-    if (element.dateend) {
-      this.dateFinishPublication = moment(element.dateend).format();
-      hour = element.dateend.split("T");
-      this.hourDateFinish = this.timeFormat(hour[1]);
-    } else {
-      this.undefinedDate = true
-    }
-
-    this.visible = element.active
+    this.formateDateHour(element)
 
     let dialogRef1 = this.dialog.open(ModalGenericComponent, {
       width: "450px",
@@ -379,8 +370,6 @@ export class CarrouselAdminComponent implements OnInit {
         edit
       },
     });
-
-
   }
   public saveCarouselModal() {
     const title = "Nueva Imagen";
