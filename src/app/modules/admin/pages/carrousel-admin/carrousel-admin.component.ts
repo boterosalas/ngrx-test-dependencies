@@ -307,7 +307,7 @@ export class CarrouselAdminComponent implements OnInit {
 
   }
 
-  private formateDateHour(element) {
+  public formateDateHour(element) {
     let hour
     if (element.datestart) {
       this.datePublication = moment(element.datestart).format();
@@ -738,17 +738,17 @@ export class CarrouselAdminComponent implements OnInit {
     if (hour >= 12) {
       if (hour == 12) {
         let h = hour
-        let m = minute + ' P.M.'
+        let m = minute + ' PM'
         return h + ":" + m
       } else {
         let h = hour - 12
-        let m = minute + ' P.M.'
+        let m = minute + ' PM'
         return h + ":" + m
       }
 
     } else {
       let h = parseInt(hour)
-      return h + ':' + minute + ' A.M.'
+      return h + ':' + minute + ' AM'
     }
   }
 

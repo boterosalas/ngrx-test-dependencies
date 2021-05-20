@@ -160,7 +160,7 @@ describe('CarrouselAdminComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy()
-    expect(component.timeFormat("22:20:00")).toEqual("10:20 P.M.")
+    expect(component.timeFormat("22:20:00")).toEqual("10:20 PM")
     //component.ngOnInit()
     // component.getAllBusiness()
     // fixture.whenStable().then(() => {
