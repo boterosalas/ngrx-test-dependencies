@@ -749,139 +749,7 @@
           style="display: none"
           formControlName="image2"
         />
-        <div class="publication">
-          <h3 class="secundary-text">PUBLICACIÓN</h3>
-          <div class="slide-visible">
-            Visible
-            <mat-slide-toggle
-              [ngModelOptions]="{ standalone: true }"
-              [(ngModel)]="visible"
-              style="margin-left: 5px; position: relative; top: 2px"
-              color="orange2-toggle"
-            ></mat-slide-toggle>
-          </div>
-          <div class="publication-date-range">
-            <div class="publication-date">
-              <label class="label-up-text mt-2" for="picker">
-                FECHA DE PUBLICACIÓN
-              </label>
-              <div class="mt-2 content-input">
-                <mat-datepicker
-                  class="icon-date"
-                  touchUi
-                  #picker
-                ></mat-datepicker>
-                <mat-datepicker-toggle
-                  class="icon-date"
-                  matSuffix
-                  [for]="picker"
-                ></mat-datepicker-toggle>
-                <input
-                  matInput
-                  (click)="picker.open()"
-                  [matDatepicker]="picker"
-                  [min]="maxDate"
-                  readonly
-                  (dateChange)="hourChange($event, 'publicationDate')"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="datePublication"
-                  [disabled]="visible"
-                  class="border-input mat-elevation-z1 border-radius"
-                  placeholder="DD/MM/AAAA"
-                />
-              </div>
-            </div>
-            <div class="post-time">
-              <label class="label-up-text mt-2">
-                HORA DE PUBLICACIÓN
-              </label>
-              <div class="mt-2 content-input">
-                <mat-icon *ngIf="!visible" class="tio-watch_later"></mat-icon>
-                <mat-icon *ngIf="visible" class="tio-watch_later opaque"
-                  ></mat-icon
-                >
-                <input
-                  [ngModelOptions]="{ standalone: true }"
-                  [disabled]="visible"
-                  [(ngModel)]="hourDate"
-                  [ngxTimepicker]="min"
-                  matInput
-                  placeholder="HH/MM"
-                  readonly
-                  [min]="minHours"
-                  class="border-input mat-elevation-z1 border-radius"
-                />
-                <ngx-material-timepicker #min></ngx-material-timepicker>
-              </div>
-            </div>
-          </div>
-          <span class="s-label">
-            <mat-checkbox
-              id="undefined-time"
-              class="mr-1 mb-2"
-              [ngModelOptions]="{ standalone: true }"
-              [(ngModel)]="undefinedDate"
-            >
-            <!-- IdentificationCard1 -->
-            </mat-checkbox>
-            <label class="undefined-time" for="undefined-time">
-              Tiempo indefinido
-            </label> 
-          </span>
-          <div class="finish-date-range">
-            <div class="finish-date">
-              <label class="label-up-text mt-2" for="pickerF">
-                FECHA DE FINALIZACIÓN
-              </label>
-              <div class="mt-2 content-input">
-                <mat-datepicker
-                  class="icon-date"
-                  touchUi
-                  #pickerF
-                ></mat-datepicker>
-                <mat-datepicker-toggle
-                  class="icon-date"
-                  matSuffix
-                  [for]="pickerF"
-                ></mat-datepicker-toggle>
-                <input
-                  matInput
-                  (click)="pickerF.open()"
-                  [matDatepicker]="pickerF"
-                  [min]="maxDate"
-                  readonly
-                  class="border-input mat-elevation-z1 border-radius"
-                  [disabled]="undefinedDate || visible"
-                  (dateChange)="hourChange($event, 'finishDate')"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="dateFinishPublication"
-                  placeholder="DD/MM/AAAA"
-                />
-              </div>
-            </div>
-            <div class="ending-time">
-              <label class="label-up-text mt-2">
-                HORA DE FINALIZACIÓN
-              </label>
-              <div class="mt-2 content-input">
-                <mat-icon *ngIf="!undefinedDate && !visible" class="tio-watch_later"></mat-icon>
-                <mat-icon *ngIf="undefinedDate || visible" class="tio-watch_later opaque"></mat-icon>
-                <input
-                  [ngModelOptions]="{ standalone: true }"
-                  [disabled]="undefinedDate || visible"
-                  [(ngModel)]="hourDateFinish"
-                  [ngxTimepicker]="min2"
-                  matInput
-                  placeholder="HH/MM"
-                  readonly
-                  [min]="minHours"
-                  class="border-input mat-elevation-z1 border-radius"
-                />
-                <ngx-material-timepicker #min2></ngx-material-timepicker>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ng-container *ngTemplateOutlet="templatePublication"> </ng-container>
       </form>
     </div>
 
@@ -1053,139 +921,7 @@
           style="display: none"
           formControlName="image"
         />
-        <div class="publication">
-          <h3 class="secundary-text">PUBLICACIÓN</h3>
-          <div class="slide-visible">
-            Visible
-            <mat-slide-toggle
-              [ngModelOptions]="{ standalone: true }"
-              [(ngModel)]="visible"
-              style="margin-left: 5px; position: relative; top: 2px"
-              color="orange2-toggle"
-            ></mat-slide-toggle>
-          </div>
-          <div class="publication-date-range">
-            <div class="publication-date">
-              <label class="label-up-text mt-2" for="picker">
-                FECHA DE PUBLICACIÓN
-              </label>
-              <div class="mt-2 content-input">
-                <mat-datepicker
-                  class="icon-date"
-                  touchUi
-                  #picker
-                ></mat-datepicker>
-                <mat-datepicker-toggle
-                  class="icon-date"
-                  matSuffix
-                  [for]="picker"
-                ></mat-datepicker-toggle>
-                <input
-                  matInput
-                  (click)="picker.open()"
-                  [matDatepicker]="picker"
-                  [min]="maxDate"
-                  readonly
-                  (dateChange)="hourChange($event, 'publicationDate')"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="datePublication"
-                  [disabled]="visible"
-                  class="border-input mat-elevation-z1 border-radius"
-                  placeholder="DD/MM/AAAA"
-                />
-              </div>
-            </div>
-            <div class="post-time">
-              <label class="label-up-text mt-2">
-                HORA DE PUBLICACIÓN
-              </label>
-              <div class="mt-2 content-input">
-                <mat-icon *ngIf="!visible" class="tio-watch_later"></mat-icon>
-                <mat-icon *ngIf="visible" class="tio-watch_later opaque"
-                  ></mat-icon
-                >
-                <input
-                  [ngModelOptions]="{ standalone: true }"
-                  [disabled]="visible"
-                  [(ngModel)]="hourDate"
-                  [ngxTimepicker]="min"
-                  matInput
-                  placeholder="HH/MM"
-                  readonly
-                  [min]="minHours"
-                  class="border-input mat-elevation-z1 border-radius"
-                />
-                <ngx-material-timepicker #min></ngx-material-timepicker>
-              </div>
-            </div>
-          </div>
-          <span class="s-label">
-            <mat-checkbox
-              id="undefined-time"
-              class="mr-1 mb-2"
-              [ngModelOptions]="{ standalone: true }"
-              [(ngModel)]="undefinedDate"
-            >
-            <!-- IdentificationCard1 -->
-            </mat-checkbox>
-            <label class="undefined-time" for="undefined-time">
-              Tiempo indefinido
-            </label> 
-          </span>
-          <div class="finish-date-range">
-            <div class="finish-date">
-              <label class="label-up-text mt-2" for="pickerF">
-                FECHA DE FINALIZACIÓN
-              </label>
-              <div class="mt-2 content-input">
-                <mat-datepicker
-                  class="icon-date"
-                  touchUi
-                  #pickerF
-                ></mat-datepicker>
-                <mat-datepicker-toggle
-                  class="icon-date"
-                  matSuffix
-                  [for]="pickerF"
-                ></mat-datepicker-toggle>
-                <input
-                  matInput
-                  (click)="pickerF.open()"
-                  [matDatepicker]="pickerF"
-                  [min]="maxDate"
-                  readonly
-                  class="border-input mat-elevation-z1 border-radius"
-                  [disabled]="undefinedDate || visible"
-                  (dateChange)="hourChange($event, 'finishDate')"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="dateFinishPublication"
-                  placeholder="DD/MM/AAAA"
-                />
-              </div>
-            </div>
-            <div class="ending-time">
-              <label class="label-up-text mt-2">
-                HORA DE FINALIZACIÓN
-              </label>
-              <div class="mt-2 content-input">
-                <mat-icon *ngIf="!undefinedDate && !visible" class="tio-watch_later"></mat-icon>
-                <mat-icon *ngIf="undefinedDate || visible" class="tio-watch_later opaque"></mat-icon>
-                <input
-                  [ngModelOptions]="{ standalone: true }"
-                  [disabled]="undefinedDate || visible"
-                  [(ngModel)]="hourDateFinish"
-                  [ngxTimepicker]="min2"
-                  matInput
-                  placeholder="HH/MM"
-                  readonly
-                  [min]="minHours"
-                  class="border-input mat-elevation-z1 border-radius"
-                />
-                <ngx-material-timepicker #min2></ngx-material-timepicker>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ng-container *ngTemplateOutlet="templatePublication"> </ng-container>
       </form>
     </div>
 
@@ -1203,6 +939,142 @@
       >
         Guardar Cambios
       </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #templatePublication>
+  <div class="publication">
+    <h3 class="secundary-text">PUBLICACIÓN</h3>
+    <div class="slide-visible">
+      Visible
+      <mat-slide-toggle
+        [ngModelOptions]="{ standalone: true }"
+        [(ngModel)]="visible"
+        style="margin-left: 5px; position: relative; top: 2px"
+        color="orange2-toggle"
+      ></mat-slide-toggle>
+    </div>
+    <div class="publication-date-range">
+      <div class="publication-date">
+        <label class="label-up-text mt-2" for="picker">
+          FECHA DE PUBLICACIÓN
+        </label>
+        <div class="mt-2 content-input">
+          <mat-datepicker
+            class="icon-date"
+            touchUi
+            #picker
+          ></mat-datepicker>
+          <mat-datepicker-toggle
+            class="icon-date"
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <input
+            matInput
+            (click)="picker.open()"
+            [matDatepicker]="picker"
+            [min]="maxDate"
+            readonly
+            (dateChange)="hourChange($event, 'publicationDate')"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="datePublication"
+            [disabled]="visible"
+            class="border-input mat-elevation-z1 border-radius"
+            placeholder="DD/MM/AAAA"
+          />
+        </div>
+      </div>
+      <div class="post-time">
+        <label class="label-up-text mt-2">
+          HORA DE PUBLICACIÓN
+        </label>
+        <div class="mt-2 content-input">
+          <mat-icon *ngIf="!visible" class="tio-watch_later"></mat-icon>
+          <mat-icon *ngIf="visible" class="tio-watch_later opaque"
+            ></mat-icon
+          >
+          <input
+            [ngModelOptions]="{ standalone: true }"
+            [disabled]="visible"
+            [(ngModel)]="hourDate"
+            [ngxTimepicker]="min"
+            matInput
+            placeholder="HH/MM"
+            readonly
+            [min]="minHours"
+            class="border-input mat-elevation-z1 border-radius"
+          />
+          <ngx-material-timepicker #min></ngx-material-timepicker>
+        </div>
+      </div>
+    </div>
+    <span class="s-label">
+      <mat-checkbox
+        id="undefined-time"
+        class="mr-1 mb-2"
+        [ngModelOptions]="{ standalone: true }"
+        [(ngModel)]="undefinedDate"
+      >
+      <!-- IdentificationCard1 -->
+      </mat-checkbox>
+      <label class="undefined-time" for="undefined-time">
+        Tiempo indefinido
+      </label> 
+    </span>
+    <div class="finish-date-range">
+      <div class="finish-date">
+        <label class="label-up-text mt-2" for="pickerF">
+          FECHA DE FINALIZACIÓN
+        </label>
+        <div class="mt-2 content-input">
+          <mat-datepicker
+            class="icon-date"
+            touchUi
+            #pickerF
+          ></mat-datepicker>
+          <mat-datepicker-toggle
+            class="icon-date"
+            matSuffix
+            [for]="pickerF"
+          ></mat-datepicker-toggle>
+          <input
+            matInput
+            (click)="pickerF.open()"
+            [matDatepicker]="pickerF"
+            [min]="maxDate"
+            readonly
+            class="border-input mat-elevation-z1 border-radius"
+            [disabled]="undefinedDate || visible"
+            (dateChange)="hourChange($event, 'finishDate')"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="dateFinishPublication"
+            placeholder="DD/MM/AAAA"
+          />
+        </div>
+      </div>
+      <div class="ending-time">
+        <label class="label-up-text mt-2">
+          HORA DE FINALIZACIÓN
+        </label>
+        <div class="mt-2 content-input">
+          <mat-icon *ngIf="!undefinedDate && !visible" class="tio-watch_later"></mat-icon>
+          <mat-icon *ngIf="undefinedDate || visible" class="tio-watch_later opaque"></mat-icon>
+          <input
+            [ngModelOptions]="{ standalone: true }"
+            [disabled]="undefinedDate || visible"
+            [(ngModel)]="hourDateFinish"
+            [ngxTimepicker]="min2"
+            matInput
+            placeholder="HH/MM"
+            readonly
+            [min]="minHours"
+            class="border-input mat-elevation-z1 border-radius"
+          />
+          <ngx-material-timepicker #min2></ngx-material-timepicker>
+        </div>
+      </div>
     </div>
   </div>
 </ng-template>

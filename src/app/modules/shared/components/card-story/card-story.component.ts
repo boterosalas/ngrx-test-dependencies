@@ -8,6 +8,7 @@ import { LinksService } from "src/app/services/links.service";
 import { Subscription } from "rxjs";
 import { NgNavigatorShareService } from "ng-navigator-share";
 import { ResponseService } from "src/app/interfaces/response";
+import { Story } from "src/app/interfaces/story";
 
 @Component({
   selector: 'app-card-story',
@@ -15,20 +16,7 @@ import { ResponseService } from "src/app/interfaces/response";
   styleUrls: ['./card-story.component.scss']
 })
 export class CardStoryComponent implements OnInit {
-  @Input() story: {
-    id: number,
-    idbusiness: number,
-    name: string,
-    businessName: string,
-    infoAditional: string,
-    image: string,
-    businessImage: string,
-    businessCode: string,
-    link: string,
-    date: Date,
-    stateView: boolean,
-    pause: boolean
-  }
+  @Input() story: Story
   @Input() id: string = "0"
   @Input() index: number = 0
   @Input() pause: boolean = true
