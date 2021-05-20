@@ -37,6 +37,8 @@ export class CarrouselAdminComponent implements OnInit {
   @ViewChild('table2', { static: false }) table2: MatTable<PeriodicElement2>;
   @ViewChild("templateAddImagenCarousel", { static: false }) templateAddImagenCarousel: TemplateRef<any>;
   @ViewChild("templateAddImagenOfertas", { static: false }) templateAddImagenOfertas: TemplateRef<any>;
+  @ViewChild("templatePublication", { static: false }) templatePublication: TemplateRef<any>;
+  
   fileImgCat: any = "";
   nameFileCert: string = '';
   showErrorCert: boolean;
