@@ -171,7 +171,7 @@ export class StoriesAdminComponent implements OnInit {
         this.active = this.dataReal.some(data => data.dataR === true)
     }
 
-    public getExtension(nameFile: string, getSize: number) {
+    public getExtensionFile(nameFile: string, getSize: number) {
         let splitExt = nameFile.split(".");
         let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
         this.validFormat = false;
@@ -204,20 +204,21 @@ export class StoriesAdminComponent implements OnInit {
     }
 
     public onFileChangeFiles(event) {
-        let nameFile = event.target.files[0].name;
-        let reader = new FileReader();
-        let sizeFile = event.target.files[0].size;
-        if (event.target.files && event.target.files.length) {
-            const [file] = event.target.files;
-            let fileBlob = new Blob([file]);
-            let file2 = new File([fileBlob], nameFile);
-            reader.readAsDataURL(file2);
-            reader.onload = () => {
-                this.getExtension(nameFile, sizeFile);
-                if (this.validFormat === true) {
-                    this.file = reader.result;
+        const files = event.target.files
+        let nameFileStory = files[0].name;
+        let readerStory = new FileReader();
+        let sizeFile = files[0].size;
+        if (files && files.length) {
+            const [fileStory] = files;
+            let fileBlob = new Blob([fileStory]);
+            let file = new File([fileBlob], nameFileStory);
+            readerStory.readAsDataURL(file);
+            readerStory.onload = () => {
+                this.getExtensionFile(nameFileStory, sizeFile);
+                if (this.validFormat) {
+                    this.file = readerStory.result;
                     this.file = this.file.split(",")[1]
-                    this.nameFile = nameFile;
+                    this.nameFile = nameFileStory;
                     this.showErrorImg = false
                 } else {
                     console.log("Error en la carga")

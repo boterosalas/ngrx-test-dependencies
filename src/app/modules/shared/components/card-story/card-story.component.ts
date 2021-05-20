@@ -8,6 +8,7 @@ import { LinksService } from "src/app/services/links.service";
 import { Subscription } from "rxjs";
 import { NgNavigatorShareService } from "ng-navigator-share";
 import { ResponseService } from "src/app/interfaces/response";
+import { Story } from "src/app/interfaces/story";
 
 @Component({
   selector: 'app-card-story',
