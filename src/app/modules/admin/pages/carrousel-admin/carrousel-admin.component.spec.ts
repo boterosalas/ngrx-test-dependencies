@@ -73,7 +73,7 @@ describe('CarrouselAdminComponent', () => {
     {
       active: true,
       business: "exito",
-      date: "2021-04-20T00:00:00",
+      date: "2021-04-20T13:20:00",
       dateend: null,
       datestart: null,
       description: "Freidora De Aire Bioceramic Oster ",
@@ -159,24 +159,111 @@ describe('CarrouselAdminComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component).toBeTruthy()
+    expect(component.timeFormat("22:20:00")).toEqual("10:20 P.M.")
     //component.ngOnInit()
     // component.getAllBusiness()
-    fixture.whenStable().then(() => {
-      tick();
-      expect(mockContentService.getOffersbyType).toHaveBeenCalled();
-    });
-    
+    // fixture.whenStable().then(() => {
+    //   tick();
+      
+    // });
+    //expect(mockContentService.getOffersbyType).toHaveBeenCalled();
+  });
+
+  it('edit Carousel Modal', () => {
+    //component.editOfertasModal({ id: 1, nameContent: "HE", link: "link", bussiness: "buss", comision: "Hasta 4%" });
+    component.editCarouselModal(datos[0])
+    expect(component.visible).not.toBeTruthy()
   });
 
   it('file change', () => {
     const mockFile = new File([""], "name.jpg", { type: "text/html" });
     const mockEvt = { target: { files: [mockFile] } };
     component.onFileChangeFiles(mockEvt, 'cedula1');
+    expect(component.activebutton).not.toBeTruthy()
     component.onFileChangeFilesSecond(mockEvt, 'cedula1');
-    component.saveCarouselModal();
-    component.saveOfertasModal();
+    expect(component.activebutton).not.toBeTruthy()
+  });
+
+  it('save Imagen Carousel', () => {
+    component.visible = true
+    component.undefinedDate = false
+    component.dataAddImagen.controls.business.setValue(1)
+    component.dataAddImagen.controls.nameContent.setValue("name")
+    component.dataAddImagen.controls.link.setValue("https://www.exito.com/freidora-de-aire-bioceramic-384560")
+    component.dataAddImagen.controls.comision.setValue("20%")
+    component.datePublication = "2021-05-19"
+    component.dateFinishPublication = "2021-05-19"
+    component.hourDate = "02:05:00"
+    component.hourDateFinish = "02:15:00"
+    fixture.detectChanges()
+    component.saveImagenCarousel();
+    expect(mockContentService.saveOfertBusiness).toHaveBeenCalled();
+  })
+
+  it("on No Click edit Carousel Modal", () => {
+    component.onNoClick();
+    expect(component.datePublication).not.toBeTruthy()
+    expect(component.hourDate).not.toBeTruthy()
+    expect(component.dateFinishPublication).not.toBeTruthy()
+    expect(component.hourDateFinish).not.toBeTruthy()
+    expect(component.undefinedDate).not.toBeTruthy()
+  })
+
+  it('edit Ofertas Modal', () => {
+    component.editOfertasModal(datos[2])
+    expect(component.visible).toBeTruthy()
+  });
+
+  it('file change Ofertas', () => {
+    const mockFile = new File([""], "name.jpg", { type: "text/html" });
+    const mockEvt = { target: { files: [mockFile] } };
+    component.onFileChangeFiles(mockEvt, 'cedula1');
     expect(component.onFileChangeFiles).not.toBeNull();
+    expect(component.activebutton).not.toBeTruthy()
+  });
+
+  it("save Imagen Ofertas", () => {
+    component.visible = true
+    component.dataAddImagenOfertas.controls.business.setValue(1)
+    component.dataAddImagenOfertas.controls.nameContent.setValue("name")
+    component.dataAddImagenOfertas.controls.link.setValue("https://www.exito.com/freidora-de-aire-bioceramic-384560")
+    component.dataAddImagenOfertas.controls.comision.setValue("20%")
+    component.datePublication = "2021-05-19"
+    component.dateFinishPublication = "2021-05-19"
+    component.hourDate = "02:05:00"
+    component.hourDateFinish = "02:15:00"
+    fixture.detectChanges()
+    component.saveImagenOfertas();
+    expect(mockContentService.saveOfertBusiness).toHaveBeenCalled();
+  })
+
+  it("on No Click edit Carousel Ofertas", () => {
+    component.onNoClick();
+    expect(component.datePublication).not.toBeTruthy()
+    expect(component.hourDate).not.toBeTruthy()
+    expect(component.dateFinishPublication).not.toBeTruthy()
+    expect(component.hourDateFinish).not.toBeTruthy()
+    expect(component.undefinedDate).not.toBeTruthy()
+  })
+
+  it('save carousel modal', () => {
+    component.saveCarouselModal();
+    expect(component.nameFileCert).not.toBeTruthy()
+    expect(component.nameFileCert2).not.toBeTruthy()
+    expect(component.showErrorCert).not.toBeTruthy()
+    expect(component.activebutton).not.toBeTruthy()
+  })
+
+  it('save Ofertas modal', () => {
+    component.saveOfertasModal();
+    expect(component.nameFileCert).not.toBeTruthy()
+    expect(component.nameFileCert2).not.toBeTruthy()
+    expect(component.showErrorCert).not.toBeTruthy()
+    expect(component.activeButtonOfer).not.toBeTruthy()
+  })
+
+  it("Additional features", () => {
     spyOn(Swal, "fire").and.returnValue(
       Promise.resolve<any>({
         text: "Extensión erronea",
@@ -185,20 +272,20 @@ describe('CarrouselAdminComponent', () => {
         confirmButtonClass: "accept-activation-alert-error",
       })
     );
+
     component.selectAll();
     component.selectAllOfertas();
-    //component.saveImagenOfertas();
+    
     component.saveOrder([{ id: 1, orderBy: 1 }, { id: 2, orderBy: 2 }]);
-    //component.saveImagenCarousel();
+    
     component.deleteComisionCarousel({ id: 1 });
     component.deleteComisionOferta({ id: 1 });
     component.checkButton();
-    //component.editOfertasModal({ id: 1, nameContent: "HE", link: "link", bussiness: "buss", comision: "Hasta 4%" });
-    //component.editCarouselModal({ id: 1, nameContent: "HE", link: "link", bussiness: "buss", comision: "Hasta 4%" });
+    
     component.deleteEveryOfertas();
     component.onNoClick();
     component.deleteEvery();
     let datos = true;
     expect(datos).toBeTruthy();
-  });
+  })
 });
