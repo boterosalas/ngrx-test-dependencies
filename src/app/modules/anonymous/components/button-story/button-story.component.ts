@@ -10,7 +10,8 @@ export class ButtonStoryComponent implements OnInit {
     idbusiness: number,
     businessName: string,
     businessImage: string,
-    stateView: boolean
+    stateView: boolean,
+    pause: boolean
   }
   @Input() index: number
   @Output() openStory = new EventEmitter();

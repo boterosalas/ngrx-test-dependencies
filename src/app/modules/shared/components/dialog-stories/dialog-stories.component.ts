@@ -29,7 +29,7 @@ export class DialogStoriesComponent implements OnInit {
     private content: ContentService
   ) { 
     this.slideConfig = {
-      slidesToShow: this.data.bubbles.length <= 1 ? 1 : 3,
+      slidesToShow: this.data.storiesBusiness.length <= 1 ? 1 : 3,
       slidesToScroll: 1,
       centerMode: true,
       centerPadding: "40px",
@@ -49,7 +49,7 @@ export class DialogStoriesComponent implements OnInit {
         }
       ]
     }
-    this.showArrowRight = this.showArrowLeft = this.data.bubbles.length <= 1 ? false : true
+    this.showArrowRight = this.showArrowLeft = this.data.storiesBusiness.length <= 1 ? false : true
     this.showArrows = this.data.showArrows
   }
 
@@ -87,7 +87,7 @@ export class DialogStoriesComponent implements OnInit {
 
   beforeChange(e) {
     //if (this.data.userId) this.saveVisitStories(e.nextSlide)
-    this.nextEnabled = e.nextSlide >= (this.data.bubbles.length - 1) ? false : true
+    this.nextEnabled = e.nextSlide >= (this.data.storiesBusiness.length - 1) ? false : true
 
     if (this.nextEnabled) this.pause(e.currentSlide)
 
@@ -115,19 +115,23 @@ export class DialogStoriesComponent implements OnInit {
   }
 
   // public saveVisitStories(index) {
-  //   if (this.data.bubbles[index].stateView) {
+  //   if (this.data.storiesBusiness[index].stateView) {
   //     const data = {
-  //       idStory: this.data.bubbles[index].id,
+  //       idStory: this.data.storiesBusiness[index].id,
   //       userId: this.data.userId
   //     }
 
   //     this.subscription = this.content.saveVisitStories(data).subscribe((resp: ResponseService) => {
   //       if (resp.state === "Success") {
-  //         this.data.bubbles[index].state = false
+  //         this.data.storiesBusiness[index].state = false
   //       }
   //     })
   //   }
   // }
+
+  public filterStoriesBusiness(idBusiness) {
+    return this.data.stories.filter(story => story.idbusiness === idBusiness)
+  }
 
   public next() {
     if (this.nextEnabled) this.slickModal.slickNext();
@@ -138,11 +142,11 @@ export class DialogStoriesComponent implements OnInit {
   }
 
   public pause(index) {
-    if (this.data.bubbles[index]) this.data.bubbles[index].pause = true
+    if (this.data.storiesBusiness[index]) this.data.storiesBusiness[index].pause = true
   }
 
   public reproduce(index) {
-    if (this.data.bubbles[index]) this.data.bubbles[index].pause = false
+    if (this.data.storiesBusiness[index]) this.data.storiesBusiness[index].pause = false
   }
 
   private reproduceOrNext(index, timeElapsed) {
@@ -160,7 +164,7 @@ export class DialogStoriesComponent implements OnInit {
   private addEventPauseAndPlay() {
     if (window.screen.width >= 550) {
       if (this.data.showCarousel) {
-        for (let index = 0; index < this.data.bubbles.length; index++) {
+        for (let index = 0; index < this.data.storiesBusiness.length; index++) {
           const card = document.getElementById("story-" + index.toString())
           if (card) {
             card.onpointerdown = e => {
@@ -231,7 +235,7 @@ export class DialogStoriesComponent implements OnInit {
 
   public nextOrClose(index) {
     this.pause(index)
-    if (index === (this.data.bubbles.length - 1)) {
+    if (index === (this.data.storiesBusiness.length - 1)) {
       this.onNoClick()
     } else {
       this.next()

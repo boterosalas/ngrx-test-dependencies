@@ -10,11 +10,13 @@
     <app-card-story 
       class="card"
       ngxSlickItem 
-      *ngFor="let business of data.bubbles; let i = index" 
-      [story]="data.stories"
+      *ngFor="let business of data.storiesBusiness; let i = index" 
+      [stories]="filterStoriesBusiness(business.idbusiness)"
+      [storyBusiness]="business"
       [pause]="business.pause"
       [id]="'story-' + i"
       [index]="i"
+      [unifiedStories]="true"
       (nextStory)="nextOrClose($event)"
     ></app-card-story>
     <div ngxSlickItem style="display: none;"></div>

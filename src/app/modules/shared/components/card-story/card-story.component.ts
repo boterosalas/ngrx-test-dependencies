@@ -15,20 +15,22 @@ import { ResponseService } from "src/app/interfaces/response";
   styleUrls: ['./card-story.component.scss']
 })
 export class CardStoryComponent implements OnInit {
-  @Input() story: {
-    id: number,
-    idbusiness: number,
-    name: string,
-    businessName: string,
-    infoAditional: string,
-    image: string,
-    businessImage: string,
-    businessCode: string,
-    link: string,
-    date: Date,
-    stateView: boolean,
-    pause: boolean
-  }
+  // @Input() story: {
+  //   id: number,
+  //   idbusiness: number,
+  //   name: string,
+  //   businessName: string,
+  //   infoAditional: string,
+  //   image: string,
+  //   businessImage: string,
+  //   businessCode: string,
+  //   link: string,
+  //   date: Date,
+  //   stateView: boolean,
+  //   pause: boolean
+  // }
+  @Input() stories: any
+  @Input() storyBusiness: any
   @Input() id: string = "0"
   @Input() index: number = 0
   @Input() pause: boolean = true
@@ -41,10 +43,12 @@ export class CardStoryComponent implements OnInit {
   @Input() cardOpen: boolean = false
   @Input() showImageClient: boolean = true
   @Input() showTitleClient: boolean = true
+  @Input() unifiedStories: boolean = false
   @Output() nextStory = new EventEmitter();
   @Output() checkStory = new EventEmitter();
   @Output() openStoryCard = new EventEmitter();
 
+  progressStory: any
   cardStory: any
   video: any
   currentProgress: any
@@ -113,15 +117,25 @@ export class CardStoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    let current:any = new Date()
-    let date:any = this.story.date
-    let result = current - date
-    this.timeStory = this.timeConversion(result)
+    if (this.showProgress) {
+      this.progressStory = this.stories.map(story => {
+        return {
+          id: story.id
+        }
+      })
+    }
 
     const extensionsImg = ["jpg", "jpeg", "png"]
-    this.isImage = (extensionsImg.includes(this.getExtension(this.story.image)))
 
-    this.title = this.story.businessCode;
+    this.stories = this.stories.map(story => {
+      let isImage = (extensionsImg.includes(this.getExtension(story.image)))
+      return {
+        ...story,
+        isImage
+      }
+    })
+
+    this.title = this.stories.businessCode;
     if (this.title === "movil-exito" ||
       this.title === "haceb" ||
       this.title === "puntos-colombia" ||
@@ -142,6 +156,14 @@ export class CardStoryComponent implements OnInit {
 
   ngAfterViewInit() {
     this.cardStory = document.getElementById(this.id)
+
+    const stoyInit = this.stories.filter(story => story.stateView)
+    if (stoyInit && stoyInit.length > 0) {
+      this.selectStory(stoyInit[0].id)
+    } else {
+      this.selectStory(this.stories[0].id)
+    }
+
     if (this.play) {
       this.video = document.getElementById(`video-${this.id}`)
       if (this.video) {
@@ -152,6 +174,26 @@ export class CardStoryComponent implements OnInit {
         }, true)
       } else {
         this.progress()
+      }
+    }
+  }
+
+  public selectStory(storyId) {
+    const file = document.getElementById(`file-${this.id}-${storyId}`)
+    if (file && !file.classList.contains("visible")) {
+      const visible = document.querySelector(".container-file.visible")
+      if (visible) {
+        visible.classList.remove("visible")
+      }
+      file.classList.add("visible")
+
+      const storyS = this.stories.filter(story => story.id === storyId)
+
+      if (storyS && storyS.length > 0) {
+        let current:any = new Date()
+        let date:any = storyS[0].date
+        let result = current - date
+        this.timeStory = this.timeConversion(result)
       }
     }
   }

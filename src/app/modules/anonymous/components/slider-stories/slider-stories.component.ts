@@ -14,7 +14,7 @@ import decode from "jwt-decode";
 })
 export class SliderStoriesComponent implements OnInit, OnDestroy {
   stories = []
-  bubbles = []
+  storiesBusiness = []
   bussiness: any
   userId: string
 
@@ -64,17 +64,18 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
           });
 
           this.stories.forEach(story => {
-            if (!this.bubbles.some(x => x.idbusiness === story.idbusiness)) {
-              this.bubbles.push({
+            if (!this.storiesBusiness.some(x => x.idbusiness === story.idbusiness)) {
+              this.storiesBusiness.push({
                 idbusiness: story.idbusiness,
                 businessImage: story.businessImage,
                 businessName: story.businessName,
-                stateView: story.stateView
+                stateView: story.stateView,
+                pause: true
               })
             }
           })
 
-          console.log("getStories",this.bubbles, this.stories)
+          console.log("getStories",this.storiesBusiness, this.stories)
         }
       }
     })
@@ -84,7 +85,7 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
     this.dialog.open(DialogStoriesComponent, {
       data: {
         stories: this.stories,
-        bubbles: this.bubbles,
+        storiesBusiness: this.storiesBusiness,
         id: index.toString(),
         showArrows: true,
         userId: this.userId,
