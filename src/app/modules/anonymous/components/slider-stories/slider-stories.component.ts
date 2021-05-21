@@ -76,7 +76,7 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
                 idbusiness: storyS.idbusiness,
                 businessImage: bussinessStory ? bussinessStory.imageurl : '',
                 businessName: bussinessStory ? bussinessStory.description : '',
-                stateView: data.objectResponse.some(x => !x.new),
+                stateView: data.objectResponse.filter(x => x.idbusiness === storyS.idbusiness).some(x => !x.new),
                 pause: true
               })
             }
