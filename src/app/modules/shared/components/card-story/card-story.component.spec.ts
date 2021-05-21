@@ -13,9 +13,9 @@ import { of } from "rxjs/internal/observable/of";
 import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CommentStmt } from "@angular/compiler";
-import { UserService } from "src/app/services/user.service";
 import { LinksService } from "src/app/services/links.service";
 import { TokenService } from "src/app/services/token.service";
+import { ContentService } from 'src/app/services/content.service';
 import { Router } from "@angular/router";
 
 describe('CardStoryComponent', () => {
@@ -32,7 +32,11 @@ describe('CardStoryComponent', () => {
 
     const mockLinksService = jasmine.createSpyObj("LinksService", [
         "saveLink"
-      ]);
+    ]);
+
+    const mockContentService = jasmine.createSpyObj("ContentService", [
+      "saveVisitStories"
+    ]);
 
     const mockTokenService = jasmine.createSpyObj("TokenService", ["userInfo"]);
 
@@ -53,7 +57,7 @@ describe('CardStoryComponent', () => {
         aud: "Estudiantes",
       };
 
-      let story = {
+      let story = [{
         id: 0,
         idbusiness: 25,
         name: "Exito",
@@ -66,11 +70,17 @@ describe('CardStoryComponent', () => {
         date: new Date(2021,4,12),
         stateView: false,
         pause: true
-      };
+      }];
     
     const dialogMock = {
       close: () => { }
      };
+
+    let saveVisitStories = {
+      state: "Success",
+      userMessage: "guardado",
+      objectResponse: null
+    };
 
     const saveLink = {
         state: "Success",
@@ -105,6 +115,7 @@ describe('CardStoryComponent', () => {
             { provide: LinksService, useValue: mockLinksService },
             { provide: TokenService, useValue: mockTokenService },
             { provide: MatDialogRef, useValue: mockDialogRef },
+            { provide: ContentService, useValue: mockContentService },
             { provide: MAT_BOTTOM_SHEET_DATA, useValue: mockDialog }
          ],
       })
@@ -116,20 +127,38 @@ describe('CardStoryComponent', () => {
       .compileComponents();
       mockLinksService.saveLink.and.returnValue(of(saveLink));
       mockTokenService.userInfo.and.returnValue(userInfo);
+      mockContentService.saveVisitStories.and.returnValue(of(saveVisitStories));
     }));
   
     beforeEach(() => {
         localStorage.setItem('ACCESS_TOKEN', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU');
         fixture = TestBed.createComponent(CardStoryComponent);
         component = fixture.componentInstance;
-        component.story = story
+        component.stories = story
         component.cardOpen = true
         component.reference = false;
+        component.currentSlick = 0
+        component.userId = 20
+        component.id = "story-0"
         fixture.detectChanges();
     });
   
     it('should create', () => {
       expect(component).toBeTruthy();
+    });
+
+    it("events clicks", () => {
+      const button = document.getElementById("story-0");
+      button.dispatchEvent(new Event("pointerdown"));
+      expect(component.pause).not.toBeTruthy();
+      button.dispatchEvent(new Event("onpointerup"));
+      expect(component.pause).not.toBeTruthy();
+    });
+
+    it("save visit stories", () => {
+      component.stories[0].stateView = true
+      component.saveVisitStories(0);
+      expect(mockContentService.saveVisitStories).toHaveBeenCalled();
     });
   
     it("save link", () => {
@@ -178,14 +207,6 @@ describe('CardStoryComponent', () => {
         component.share();
         expect(component.urlshorten).not.toBeUndefined();
       });
-
-      // it("copyInputMessage", () => {
-      //   const button = document.querySelector("#btnCopy");
-      //   button.dispatchEvent(new Event("click"));
-      //   const nativeElementInput = fixture.nativeElement;
-      //   const input = nativeElementInput.querySelector("input");
-      //   expect(input).not.toBeUndefined();
-      // });
 
       it("share mobile", () => {
         component.share();

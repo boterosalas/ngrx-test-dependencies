@@ -14,6 +14,7 @@ import decode from "jwt-decode";
 })
 export class SliderStoriesComponent implements OnInit, OnDestroy {
   stories = []
+  storiesBusiness = []
   bussiness: any
   userId: string
 
@@ -32,6 +33,9 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
     this.getBusiness()
   }
 
+  ngOnChanges() {
+  }
+
   public getBusiness() {
     this.content.getBusiness().subscribe((bussiness) => {
       this.bussiness = bussiness
@@ -46,6 +50,9 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
           data.objectResponse.forEach(storyS => {
             let bussinessStory = this.bussiness.filter(b => b.id === storyS.idbusiness)[0]
 
+            const extensionsImg = ["jpg", "jpeg", "png"]
+            let isImage = (extensionsImg.includes(this.getExtension(storyS.imageurl)))
+
             let objectStory = {
               idbusiness: storyS.idbusiness,
               id: storyS.id,
@@ -59,19 +66,42 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
               link: storyS.link,
               pause: true,
               stateView: !storyS.new,
+              isImage
             }
 
             this.stories.push(objectStory)
+
+            if (!this.storiesBusiness.some(x => x.idbusiness === storyS.idbusiness)) {
+              this.storiesBusiness.push({
+                idbusiness: storyS.idbusiness,
+                businessImage: bussinessStory ? bussinessStory.imageurl : '',
+                businessName: bussinessStory ? bussinessStory.description : '',
+                stateView: data.objectResponse.some(x => !x.new),
+                pause: true
+              })
+            }
           });
+
+          this.storiesBusiness.sort((a, b) => b.stateView - a.stateView)
         }
       }
     })
+  }
+
+  private getExtension(nameFile: string) {
+    if (nameFile) {
+      let splitExt = nameFile.split(".");
+      return splitExt[splitExt.length - 1].toLocaleLowerCase();
+    }
+
+    return null
   }
 
   public openDialogStories(index: number = 0) {
     this.dialog.open(DialogStoriesComponent, {
       data: {
         stories: this.stories,
+        storiesBusiness: this.storiesBusiness,
         id: index.toString(),
         showArrows: true,
         userId: this.userId,

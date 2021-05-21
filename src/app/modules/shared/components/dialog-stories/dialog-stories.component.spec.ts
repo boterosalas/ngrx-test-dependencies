@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogStoriesComponent } from './dialog-stories.component';
 import { AppMaterialModule } from '../../app-material/app-material.module';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { ContentService } from 'src/app/services/content.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { of } from "rxjs/internal/observable/of";
 import { SlickCarouselModule } from 'ngx-slick-carousel';
@@ -13,18 +12,9 @@ describe('DialogStoriesComponent', () => {
 
     const mockDialog = jasmine.createSpyObj("MatDialog", ["open"]);
 
-    const mockContentService = jasmine.createSpyObj("ContentService", [
-        "saveVisitStories"
-      ]);
     const dialogMock = {
       close: () => { }
      };
-
-    let saveVisitStories = {
-        state: "Success",
-        userMessage: "guardado",
-        objectResponse: null
-    };
   
     let data = {
         stories: [{
@@ -99,15 +89,13 @@ describe('DialogStoriesComponent', () => {
         ],
         providers: [
           { provide: MatDialogRef, useValue: dialogMock },
-            { provide: MAT_DIALOG_DATA, useValue: data },
-          { provide: ContentService, useValue: mockContentService }
+            { provide: MAT_DIALOG_DATA, useValue: data }
          ],
          schemas: [
             NO_ERRORS_SCHEMA
           ]
       })
       .compileComponents();
-      mockContentService.saveVisitStories.and.returnValue(of(saveVisitStories));
     }));
   
     beforeEach(() => {
@@ -136,20 +124,6 @@ describe('DialogStoriesComponent', () => {
       expect(component.prev).toBeTruthy();
     })
 
-    it("save visit stories", () => {
-      component.data.stories[0].stateView = true
-      component.saveVisitStories(0);
-      expect(mockContentService.saveVisitStories).toHaveBeenCalled();
-    });
-  
-    it("events clicks", () => {
-      const button = document.getElementById("story-0");
-      button.dispatchEvent(new Event("pointerdown"));
-      expect(component.pause).toBeTruthy();
-      button.dispatchEvent(new Event("onpointerup"));
-      expect(component.reproduce).toBeTruthy();
-    });
-
     it("events clicks arrows", () => {
       const arrowNext = document.getElementById("arrow-next");
       arrowNext.dispatchEvent(new Event("pointerdown"));
@@ -162,11 +136,6 @@ describe('DialogStoriesComponent', () => {
       arrowPrev.dispatchEvent(new Event("onpointerup"));
       expect(component.reproduce).toBeTruthy();
     });
-
-    // it("next or close", () => {
-    //     component.nextOrClose(0);
-    //     expect(component.next()).toHaveBeenCalled();
-    // });
 
     it('close', () => {
       let spy = spyOn(component.dialogRef, 'close').and.callThrough();

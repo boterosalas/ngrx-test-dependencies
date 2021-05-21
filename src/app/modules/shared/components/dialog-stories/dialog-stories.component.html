@@ -10,12 +10,16 @@
     <app-card-story 
       class="card"
       ngxSlickItem 
-      *ngFor="let story of data.stories; let i = index" 
-      [story]="story"
-      [pause]="story.pause"
+      *ngFor="let business of data.storiesBusiness; let i = index" 
+      [stories]="filterStoriesBusiness(business.idbusiness)"
+      [pause]="business.pause"
       [id]="'story-' + i"
       [index]="i"
+      [currentSlick]="data.id"
+      [showCarousel]="data.showCarousel"
+      [userId]="data.userId"
       (nextStory)="nextOrClose($event)"
+      (prevStory)="prev()"
     ></app-card-story>
     <div ngxSlickItem style="display: none;"></div>
     <div ngxSlickItem style="display: none;"></div>
@@ -38,12 +42,14 @@
   <div *ngIf="data.stories[data.id]" class="single-item">
     <app-card-story 
       class="card only"
-      [story]="data.stories[data.id]"
+      [stories]="[data.stories[data.id]]"
       [pause]="data.stories[data.id].pause"
       [id]="'story-modal-' + data.id"
       [index]="data.id"
+      [currentSlick]="data.id"
       [showProgress]="true"
       [showShared]="false"
+      [showCarousel]="false"
     ></app-card-story>
   </div>
 </div>

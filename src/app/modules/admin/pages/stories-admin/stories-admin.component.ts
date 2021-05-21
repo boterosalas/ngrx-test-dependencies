@@ -92,6 +92,9 @@ export class StoriesAdminComponent implements OnInit {
                         if (story.idbusiness === Number.parseInt(this.id)) {
                             let bussiness = this.bussiness.filter(b => b.id === story.idbusiness)[0]
 
+                            const extensionsImg = ["jpeg", "jpg", "png"]
+                            let isImage = (extensionsImg.includes(this.getExtensionFileName(story.imageurl)))
+
                             this.stories.push({
                                 id: story.id,
                                 idbusiness: story.idbusiness,
@@ -99,6 +102,7 @@ export class StoriesAdminComponent implements OnInit {
                                 businessName: bussiness ? bussiness.description : "",
                                 infoAditional: story.infoaditional,
                                 image: story.imageurl,
+                                isImage,
                                 businessImage: bussiness ? bussiness.imageurl : '',
                                 businessCode: bussiness ? bussiness.code : '',
                                 link: story.link,
@@ -133,6 +137,14 @@ export class StoriesAdminComponent implements OnInit {
             maxWidth: '100vw',
             height: '100vh'
         });
+    }
+    private getExtensionFileName(nameFileS: string) {
+        if (nameFileS) {
+          let splitExtS = nameFileS.split(".");
+          return splitExtS[splitExtS.length - 1].toLocaleLowerCase();
+        }
+    
+        return null
     }
     public selectAll() {
         if (this.selectAllStories === "Seleccionar todos") {
