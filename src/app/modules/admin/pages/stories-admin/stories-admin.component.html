@@ -73,7 +73,7 @@
     <app-card-story 
         class="card"
         *ngFor="let story of stories; let i = index" 
-        [story]="story"
+        [stories]="[story]"
         [pause]="story.pause"
         [play]="false"
         [id]="'story-' + i"
