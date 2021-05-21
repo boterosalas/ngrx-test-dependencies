@@ -102,6 +102,7 @@ export class CarrouselAdminComponent implements OnInit {
         let date: any = new Date(this.dataSource[index].datestart)
         this.dataSource[index].selected = false;
         this.dataSource[index].programmed = date - startTime > 0 ? true : false
+        this.dataSource[index].undefinedDate = !this.dataSource[index].dateend ? true : false
       }
     })
     this.content.getOffersbyType({ id: "OFERTA", admin: true }).subscribe((resp) => {
@@ -111,6 +112,7 @@ export class CarrouselAdminComponent implements OnInit {
         let date: any = new Date(this.dataSourceOfer[index].datestart)
         this.dataSourceOfer[index].selected = false;
         this.dataSourceOfer[index].programmed = date - startTime > 0 ? true : false
+        this.dataSourceOfer[index].undefinedDate = !this.dataSourceOfer[index].dateend ? true : false
       }
     })
   }
