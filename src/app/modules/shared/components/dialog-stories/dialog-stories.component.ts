@@ -4,9 +4,7 @@ import {
   MAT_DIALOG_DATA
 } from "@angular/material";
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
-import { ContentService } from 'src/app/services/content.service';
 import { Subscription } from "rxjs";
-import { ResponseService } from "src/app/interfaces/response";
 
 @Component({
   selector: 'app-dialog-stories',
@@ -22,14 +20,16 @@ export class DialogStoriesComponent implements OnInit {
   startTime: any;
   showArrows: boolean;
   nextEnabled: boolean = true;
+  stories:string
 
   constructor(
     public dialogRef: MatDialogRef<any>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private content: ContentService
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { 
+    this.stories = this.data.storiesBusiness ? "storiesBusiness" : "stories"
+
     this.slideConfig = {
-      slidesToShow: this.data.storiesBusiness.length <= 1 ? 1 : 3,
+      slidesToShow: this.data[this.stories].length <= 1 ? 1 : 3,
       slidesToScroll: 1,
       centerMode: true,
       centerPadding: "40px",
@@ -49,17 +49,13 @@ export class DialogStoriesComponent implements OnInit {
         }
       ]
     }
-    this.showArrowRight = this.showArrowLeft = this.data.storiesBusiness.length <= 1 ? false : true
+    this.showArrowRight = this.showArrowLeft = this.data[this.stories].length <= 1 ? false : true
     this.showArrows = this.data.showArrows
   }
 
   private subscription: Subscription = new Subscription();
 
   ngOnInit() {}
-
-  ngAfterViewInit() {
-    if (!this.data.showCarousel) this.addEventPauseAndPlay()
-  }
 
   onNoClick(): void {
     if (this.data.showCarousel) {
@@ -74,7 +70,6 @@ export class DialogStoriesComponent implements OnInit {
 
   slickInit(e) {
     setTimeout(() => this.initSlickGoTo().then(slickModal => slickModal.slickGoTo(this.data.id)), 0)
-    this.addEventPauseAndPlay()
   }
 
   async initSlickGoTo() {
@@ -86,12 +81,10 @@ export class DialogStoriesComponent implements OnInit {
   }
 
   beforeChange(e) {
-    //if (this.data.userId) this.saveVisitStories(e.nextSlide)
-    this.nextEnabled = e.nextSlide >= (this.data.storiesBusiness.length - 1) ? false : true
+    this.data.id = e.nextSlide
+    this.nextEnabled = e.nextSlide >= (this.data[this.stories].length - 1) ? false : true
 
     if (this.nextEnabled) this.pause(e.currentSlide)
-
-    this.showArrowLeft = e.nextSlide === 0 ? false : true
 
     const slickTrack = document.querySelector(".modal-stories .slick-list .slick-track")
     const slicks = slickTrack.querySelectorAll(".card.slick-slide")
@@ -114,21 +107,6 @@ export class DialogStoriesComponent implements OnInit {
     }
   }
 
-  // public saveVisitStories(index) {
-  //   if (this.data.storiesBusiness[index].stateView) {
-  //     const data = {
-  //       idStory: this.data.storiesBusiness[index].id,
-  //       userId: this.data.userId
-  //     }
-
-  //     this.subscription = this.content.saveVisitStories(data).subscribe((resp: ResponseService) => {
-  //       if (resp.state === "Success") {
-  //         this.data.storiesBusiness[index].stateView = false
-  //       }
-  //     })
-  //   }
-  // }
-
   public filterStoriesBusiness(idBusiness) {
     return this.data.stories.filter(story => story.idbusiness === idBusiness)
   }
@@ -142,100 +120,19 @@ export class DialogStoriesComponent implements OnInit {
   }
 
   public pause(index) {
-    if (this.data.storiesBusiness[index]) this.data.storiesBusiness[index].pause = true
+    if (this.data[this.stories][index]) this.data[this.stories][index].pause = true
   }
 
   public reproduce(index) {
-    if (this.data.storiesBusiness[index]) this.data.storiesBusiness[index].pause = false
-  }
-
-  private reproduceOrNext(index, timeElapsed) {
-    if (!this.nextEnabled || timeElapsed > 250) { // Tiempo transcurrido en ms
-      this.reproduce(index)
-    } else {
-      this.next()
-    }
+    this.data[this.stories][index].pause = false
   }
 
   private getCurrentSlick() {
     return document.querySelector(".modal-stories .slick-slide.slick-center")
   }
 
-  private addEventPauseAndPlay() {
-    if (window.screen.width >= 550) {
-      if (this.data.showCarousel) {
-        for (let index = 0; index < this.data.storiesBusiness.length; index++) {
-          const card = document.getElementById("story-" + index.toString())
-          if (card) {
-            card.onpointerdown = e => {
-              const current = this.getCurrentSlick()
-              if (Number.parseInt(current.getAttribute("data-slick-index")) === index) this.pause(index)
-              e.preventDefault()
-            }
-        
-            card.onpointerup = e => {
-              const current = this.getCurrentSlick()
-              if (Number.parseInt(current.getAttribute("data-slick-index")) === index) this.reproduce(index)
-              e.preventDefault()
-            }
-          }
-        }
-      } else {
-        const card = document.getElementById("story-modal-" + this.data.id.toString())
-        if (card) {
-          card.onpointerdown = e => {
-            this.pause(this.data.id)
-            e.preventDefault()
-          }
-      
-          card.onpointerup = e => {
-            this.reproduce(this.data.id)
-            e.preventDefault()
-          }
-        }
-      }
-    }
-
-    const arrowPrev = document.getElementById("arrow-prev")
-
-    if (arrowPrev) {
-      arrowPrev.onpointerup = e => {
-        const current = this.getCurrentSlick()
-  
-        this.pause(Number.parseInt(current.getAttribute("data-slick-index")))
-        this.prev()
-        e.preventDefault()
-      }
-    }
-   
-    const arrowNext = document.getElementById("arrow-next")
-
-    if (arrowNext) {
-      let startTime, endTime;
-
-      arrowNext.onpointerdown = e => {
-        startTime = new Date();
-        const current = this.getCurrentSlick()
-
-        this.pause(Number.parseInt(current.getAttribute("data-slick-index")))
-        e.preventDefault()
-      }
-
-      arrowNext.onpointerup = e => {
-        endTime = new Date();
-        let timeDiff = endTime - startTime
-        const current = this.getCurrentSlick()
-
-        this.reproduceOrNext(Number.parseInt(current.getAttribute("data-slick-index")), timeDiff)
-        e.preventDefault()
-      }
-    }
-    
-  }
-
   public nextOrClose(index) {
-    this.pause(index)
-    if (index === (this.data.storiesBusiness.length - 1)) {
+    if (index === (this.data[this.stories].length - 1)) {
       this.onNoClick()
     } else {
       this.next()

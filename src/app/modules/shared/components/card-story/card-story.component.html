@@ -1,4 +1,3 @@
-<!-- <div *ngIf="unifiedStories" class="business-stories"></div> -->
 <div [id]="id" class="card-story">
   <div 
     *ngIf="showProgress"
@@ -6,7 +5,7 @@
   >
     <div 
       *ngFor="let progress of progressStory"
-      [id]="progress.id"
+      id="progress-{{progress.id}}"
       class="story-progress"
     >
       <span class="final-progress"></span>
@@ -15,9 +14,9 @@
   </div>
   <div class="story-info">
     <div class="client-info {{!showInfo ? 'visibility-hidden' : ''}}">
-      <img *ngIf="showImageClient" class="img-client" [src]="storyBusiness.businessImage" alt="{{storyBusiness.businessName}}">
-      <h4 *ngIf="showTitleClient">{{ storyBusiness.businessName }}</h4>
-      <span>{{timeStory}}</span>
+      <img *ngIf="showImageClient" class="img-client" [src]="stories[0].businessImage" alt="{{stories[0].businessName}}">
+      <h4 *ngIf="showTitleClient">{{ stories[0].businessName }}</h4>
+      <span *ngIf="stories && stories.length > 0">{{timeStory}}</span>
     </div>
     <div class="action-container">
       <button 
@@ -61,52 +60,6 @@
     </div>
   </div>
 </div>
-<!-- <div *ngIf="!unifiedStories" [id]="id" class="card-story">
-  <div *ngIf="showProgress" class="story-progress">
-    <span class="final-progress"></span>
-    <span class="current-progress"></span>
-  </div>
-  <div class="story-info">
-    <div class="client-info {{!showInfo ? 'visibility-hidden' : ''}}">
-      <img *ngIf="showImageClient" class="img-client" [src]="stories[0].businessImage" alt="{{stories[0].name}}">
-      <h4 *ngIf="showTitleClient">{{ stories[0].businessName }}</h4>
-      <span>{{timeStory}}</span>
-    </div>
-    <div class="action-container">
-      <button 
-        id="shared-{{index}}"
-        *ngIf="showShared" 
-        class="btn-shared"
-        (click)="dataSliderCategory()"
-      >
-        <img src="/assets/img/shared.svg" alt="shared">
-      </button>
-      <mat-checkbox
-        *ngIf="showCheck"
-        [(ngModel)]="check"
-        (change)="checkDeleteStory()"
-        class="check-margin check-transparent"
-        >
-        </mat-checkbox>
-    </div>
-    <div *ngIf="cardOpen" class="card-open" (click)="viewStory()">
-      <i class="tio-play_circle"></i>
-    </div>
-  </div>
-  <div class="container-absolute">
-    <img *ngIf="isImage"
-      class="img-story"
-      [src]="stories[0].image" 
-      alt="story {{stories[0].name}}"
-    >
-    <video 
-      *ngIf="!isImage"
-      id="video-{{id}}"
-      [src]="stories[0].image"
-      class="video-story"
-    ></video>
-  </div>
-</div> -->
 
 <!-- template share -->
 

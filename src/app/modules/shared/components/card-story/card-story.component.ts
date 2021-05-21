@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter, ViewChild, TemplateRef } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { MatBottomSheet, MatSnackBar } from "@angular/material";
@@ -8,32 +8,19 @@ import { LinksService } from "src/app/services/links.service";
 import { Subscription } from "rxjs";
 import { NgNavigatorShareService } from "ng-navigator-share";
 import { ResponseService } from "src/app/interfaces/response";
-import { Story } from "src/app/interfaces/story";
+import { ContentService } from 'src/app/services/content.service';
 
 @Component({
   selector: 'app-card-story',
   templateUrl: './card-story.component.html',
   styleUrls: ['./card-story.component.scss']
 })
-export class CardStoryComponent implements OnInit {
-  // @Input() story: {
-  //   id: number,
-  //   idbusiness: number,
-  //   name: string,
-  //   businessName: string,
-  //   infoAditional: string,
-  //   image: string,
-  //   businessImage: string,
-  //   businessCode: string,
-  //   link: string,
-  //   date: Date,
-  //   stateView: boolean,
-  //   pause: boolean
-  // }
+export class CardStoryComponent implements OnInit, OnChanges {
   @Input() stories: any
-  @Input() storyBusiness: any
   @Input() id: string = "0"
   @Input() index: number = 0
+  @Input() currentSlick: number
+  @Input() userId: number
   @Input() pause: boolean = true
   @Input() play: boolean = true
   @Input() showShared: boolean = true
@@ -44,8 +31,9 @@ export class CardStoryComponent implements OnInit {
   @Input() cardOpen: boolean = false
   @Input() showImageClient: boolean = true
   @Input() showTitleClient: boolean = true
-  @Input() unifiedStories: boolean = false
+  @Input() showCarousel: boolean = true
   @Output() nextStory = new EventEmitter();
+  @Output() prevStory = new EventEmitter();
   @Output() checkStory = new EventEmitter();
   @Output() openStoryCard = new EventEmitter();
 
@@ -84,6 +72,8 @@ export class CardStoryComponent implements OnInit {
   isImage: boolean
   maxTime: number = 5
   interval: any
+  indexCStory: number = 0
+  startTime: any
 
   @ViewChild("templateCategories", { static: false })
   templateCategories: TemplateRef<any>;
@@ -98,6 +88,7 @@ export class CardStoryComponent implements OnInit {
     private dialog: MatBottomSheet,
     private links: LinksService,
     private _snackBar: MatSnackBar,
+    private content: ContentService,
     ngNavigatorShareService: NgNavigatorShareService,
   ) {
     this.ngNavigatorShareService = ngNavigatorShareService;
@@ -126,17 +117,12 @@ export class CardStoryComponent implements OnInit {
       })
     }
 
-    const extensionsImg = ["jpg", "jpeg", "png"]
+    const index = this.stories.findIndex(story => story.stateView)
+    this.indexCStory = index >= 0 ? index : 0
 
-    this.stories = this.stories.map(story => {
-      let isImage = (extensionsImg.includes(this.getExtension(story.image)))
-      return {
-        ...story,
-        isImage
-      }
-    })
+    this.changeTimeStory()
 
-    this.title = this.stories.businessCode;
+    this.title = this.stories[this.indexCStory].businessCode;
     if (this.title === "movil-exito" ||
       this.title === "haceb" ||
       this.title === "puntos-colombia" ||
@@ -149,29 +135,25 @@ export class CardStoryComponent implements OnInit {
   }
 
   ngOnChanges() {
+    this.addEventPauseAndPlayArrows()
     if (this.play) {
       this.progress()
-      //this.vidPause()
     }
   }
 
   ngAfterViewInit() {
     this.cardStory = document.getElementById(this.id)
 
-    const stoyInit = this.stories.filter(story => story.stateView)
-    if (stoyInit && stoyInit.length > 0) {
-      this.selectStory(stoyInit[0].id)
-    } else {
-      this.selectStory(this.stories[0].id)
-    }
+    this.addEventPauseAndPlayCard()
+
+    this.selectStory(this.stories[this.indexCStory].id)
 
     if (this.play) {
-      this.video = document.getElementById(`video-${this.id}`)
+      this.video = document.getElementById(`video-${this.id}-${this.stories[this.indexCStory].id}`)
       if (this.video) {
         this.video.addEventListener("loadeddata", () => {
           this.maxTime = this.video.duration
           this.progress()
-          //this.vidPause()
         }, true)
       } else {
         this.progress()
@@ -179,33 +161,56 @@ export class CardStoryComponent implements OnInit {
     }
   }
 
-  public selectStory(storyId) {
-    const file = document.getElementById(`file-${this.id}-${storyId}`)
-    if (file && !file.classList.contains("visible")) {
-      const visible = document.querySelector(".container-file.visible")
-      if (visible) {
-        visible.classList.remove("visible")
+  public saveVisitStories(index) {
+    if (this.stories[index].stateView) {
+      const data = {
+        idStory: this.stories[index].id,
+        userId: this.userId
       }
-      file.classList.add("visible")
 
-      const storyS = this.stories.filter(story => story.id === storyId)
+      this.subscription = this.content.saveVisitStories(data).subscribe((resp: ResponseService) => {
+        if (resp.state === "Success") {
+          this.stories[index].stateView = false
 
-      if (storyS && storyS.length > 0) {
-        let current:any = new Date()
-        let date:any = storyS[0].date
-        let result = current - date
-        this.timeStory = this.timeConversion(result)
-      }
+          if (!this.stories.some(x => x.stateView)) {
+            const buttonBusiness = document.getElementById(`button-business-${this.index}`)
+            if (buttonBusiness && buttonBusiness.classList.contains("new")) {
+              buttonBusiness.classList.remove("new")
+              buttonBusiness.classList.add("viewed")
+            }
+          }
+        }
+      })
     }
   }
 
-  private getExtension(nameFile: string) {
-    if (nameFile) {
-      let splitExt = nameFile.split(".");
-      return splitExt[splitExt.length - 1].toLocaleLowerCase();
-    }
+  public selectStory(storyId) {
+    const contentFile = document.getElementById(`file-${this.id}-${storyId}`)
+    if (contentFile && !contentFile.classList.contains("visible")) {
+      const visible = document.querySelector(`#${this.id} .visible`)
+      if (visible) {
+        visible.classList.remove("visible")
+      }
+      contentFile.classList.add("visible")
 
-    return null
+      this.indexCStory = this.stories.findIndex(story => story.id === storyId)
+
+      this.saveVisitStories(this.indexCStory)
+
+      this.changeTimeStory()
+      if (this.currentSlick === this.index) this.pause = false
+    }
+  }
+
+  public changeTimeStory() {
+    const storyS = this.stories[this.indexCStory]
+
+    if (storyS) {
+      let current:any = new Date()
+      let date:any = storyS.date
+      let result = current - date
+      this.timeStory = this.timeConversion(result)
+    }
   }
 
   private timeConversion(millisec: number) {
@@ -242,23 +247,38 @@ export class CardStoryComponent implements OnInit {
       } else {
         totalTime = (this.maxTime * 1000)
       }
-      
-      this.currentProgress = this.cardStory.querySelector(".story-progress .current-progress")
+
+      let idCurrent = this.stories[this.indexCStory].id
+      this.currentProgress = this.cardStory.querySelector(`#progress-${idCurrent} .current-progress`)
+      for (let index = 0; index < this.progressStory.length; index++) {
+        let idProgress = this.progressStory[index].id
+        if (index < this.indexCStory) {
+          let previousProgress = this.cardStory.querySelector(`#progress-${idProgress} .current-progress`)
+          if (previousProgress.style.width !== "100%") {
+            previousProgress.style.width = "100%"
+          }
+        } else if (index > this.indexCStory) {
+          let nextProgress = this.cardStory.querySelector(`#progress-${idProgress} .current-progress`)
+          if (nextProgress.style.width !== "0") {
+            nextProgress.style.width = "0"
+          }
+        }
+      }
 
       if (this.currentProgress.style.width === "100%") {
         this.currentProgress.style.width = "0"
         this.currentTime = 0
         this.vidRestart()
       }
-
       if (!this.interval) {
         this.interval = setInterval(() => {
           let percent = Math.round((this.currentTime / totalTime)*100)
           this.currentProgress.style.width = `${percent}%`
           if (percent === 100 || this.pause || this.sharedOpen) {
             if (percent === 100) {
+              this.currentTime = 0
               this.pause = true
-              this.nextStory.emit(this.index)
+              this.nextSliderOrStory()
             }
             this.vidPause(true)
             percent = 0
@@ -274,7 +294,6 @@ export class CardStoryComponent implements OnInit {
   }
 
   private vidPause(pause) {
-    //this.video = document.getElementById(`video-${this.id}`)
     if (this.video && !this.isImage) {
       if (pause && !this.video.paused) {
         this.video.pause()
@@ -295,6 +314,90 @@ export class CardStoryComponent implements OnInit {
     this.checkStory.emit(this.check)
   }
 
+
+  private addEventPauseAndPlayCard() {
+    if (window.screen.width >= 550) {
+      if (!this.cardOpen) {
+        if (!this.showCarousel) {
+          const close = document.getElementById("closeDialogStories")
+          close.onclick = () => {
+            this.pause = true
+          }
+        }
+
+        const card = document.getElementById(this.id)
+        card.onpointerdown = e => {
+          this.pause = true
+          e.preventDefault()
+        }
+    
+        card.onpointerup = e => {
+          this.pause = false
+          if (!this.showCarousel) {
+            this.progress()
+          }
+          e.preventDefault()
+        }
+      }
+    }
+
+    this.addEventPauseAndPlayArrows()
+  }
+
+  private addEventPauseAndPlayArrows() {
+    if (this.currentSlick === this.index) {
+      const arrowPrev = document.getElementById("arrow-prev")
+      if (arrowPrev) {
+        arrowPrev.onpointerup = e => {
+          this.pause = true
+          if (this.indexCStory <= 0) {
+            this.prevStory.emit()
+          } else {
+            this.selectStory(this.stories[this.indexCStory - 1].id)
+          }
+          e.preventDefault()
+        }
+      }
+    
+      const arrowNext = document.getElementById("arrow-next")
+
+      if (arrowNext) {
+        let endTime;
+
+        arrowNext.onpointerdown = e => {
+          this.startTime = new Date();
+          this.pause = true
+          e.preventDefault()
+        }
+
+        arrowNext.onpointerup = e => {
+          endTime = new Date();
+          let timeDiff = endTime - this.startTime
+          this.reproduceOrNext(timeDiff)
+          e.preventDefault()
+        }
+      }
+    }
+  }
+
+  private reproduceOrNext(timeElapsed) {
+    if (timeElapsed > 250) { // Tiempo transcurrido en ms
+      this.pause = false
+    } else {
+      this.pause = true
+      this.nextSliderOrStory()
+    }
+  }
+
+  private nextSliderOrStory() {
+    this.currentTime = 0
+    if (this.indexCStory >= (this.stories.length - 1)) {
+      this.nextStory.emit(this.index)
+    } else {
+      this.selectStory(this.stories[this.indexCStory + 1].id)
+    }
+  }
+
   /**
    * Metodo para abrir la modal con el producto seleccionado
    *
@@ -309,7 +412,7 @@ export class CardStoryComponent implements OnInit {
       this.idClicker = this.tokenInfo.idclicker;
       // this.idClicker = this.tokenInfo.idclicker.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-      const dataCategoryUrl = this.story.link;
+      const dataCategoryUrl = this.stories[this.indexCStory].link;
       this.showForm = false;
       this.urlshorten = "";
       this.reference = false;
@@ -322,43 +425,42 @@ export class CardStoryComponent implements OnInit {
       this.idCustomerForm.reset();
       this.formShareLink();
       const home = true;
-      this.business = this.story.idbusiness.toString();
-      this.plu = this.story.name;
-      const infoaditional = this.story.infoAditional;
-      const img = this.story.businessImage;
+      this.business = this.stories[this.indexCStory].idbusiness.toString();
+      this.plu = this.stories[this.indexCStory].name;
+      const infoaditional = this.stories[this.indexCStory].infoAditional;
+      const img = this.stories[this.indexCStory].businessImage;
       const showCloseIcon = true;
       const showClose = false;
       const buttonClose = "Cerrar";
       const showshowTitle = false;
-      const title = this.story.name;
+      const title = this.stories[this.indexCStory].name;
       const showProduct = true;
-      //const id = sliderInfo.productId;
-      // this.classButton = (sliderInfo.description).replace(" ", "");
-      this.classButtonWhatsapp = `gtmClicLightboxIconoWhatsApp${this.title}${this.story.name}`
+      
+      this.classButtonWhatsapp = `gtmClicLightboxIconoWhatsApp${this.title}${this.stories[this.indexCStory].name}`
         .replace(/\s/g, "")
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
-      this.classButtonTwitter = `gtmClicLightboxIconoTwitter${this.title}${this.story.name}`
+      this.classButtonTwitter = `gtmClicLightboxIconoTwitter${this.title}${this.stories[this.indexCStory].name}`
         .replace(/\s/g, "")
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
-      this.classButtonFacebook = `gtmClicLightboxIconoFacebook${this.title}${this.story.name}`
+      this.classButtonFacebook = `gtmClicLightboxIconoFacebook${this.title}${this.stories[this.indexCStory].name}`
         .replace(/\s/g, "")
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
-      this.classButtonShare = `gtmClicLightboxCompartir${this.title}${this.story.name}`
+      this.classButtonShare = `gtmClicLightboxCompartir${this.title}${this.stories[this.indexCStory].name}`
         .replace(/\s/g, "")
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
-      this.classButtonBuy = `gtmClicLightboxComprar${this.title}${this.story.name}`
+      this.classButtonBuy = `gtmClicLightboxComprar${this.title}${this.stories[this.indexCStory].name}`
         .replace(/\s/g, "")
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
-      this.classButtonRefer = `gtmClicLightboxReferir${this.title}${this.story.name}`
+      this.classButtonRefer = `gtmClicLightboxReferir${this.title}${this.stories[this.indexCStory].name}`
         .replace(/\s/g, "")
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
-      this.classButtonCopy = `gtmClicLightboxCopiarLink${this.title}${this.story.name}`
+      this.classButtonCopy = `gtmClicLightboxCopiarLink${this.title}${this.stories[this.indexCStory].name}`
         .replace(/\s/g, "")
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
@@ -389,7 +491,7 @@ export class CardStoryComponent implements OnInit {
         this.progress()
       });
     } else {
-      this.router.navigate(["/" + this.story.link]);
+      this.router.navigate(["/" + this.stories[this.indexCStory].link]);
     }
   }
 

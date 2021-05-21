@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Story } from "src/app/interfaces/story";
 
 @Component({
   selector: 'app-button-story',

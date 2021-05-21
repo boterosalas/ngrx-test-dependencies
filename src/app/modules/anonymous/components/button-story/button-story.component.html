@@ -1,5 +1,6 @@
 <button 
   *ngIf="story"
+  id="button-business-{{index}}"
   class="story-button {{ story.stateView ? 'new' : 'viewed' }}"
   (click)="viewStory()"
 >

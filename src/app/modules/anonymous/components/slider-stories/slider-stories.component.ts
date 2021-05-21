@@ -33,6 +33,9 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
     this.getBusiness()
   }
 
+  ngOnChanges() {
+  }
+
   public getBusiness() {
     this.content.getBusiness().subscribe((bussiness) => {
       this.bussiness = bussiness
@@ -47,6 +50,9 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
           data.objectResponse.forEach(storyS => {
             let bussinessStory = this.bussiness.filter(b => b.id === storyS.idbusiness)[0]
 
+            const extensionsImg = ["jpg", "jpeg", "png"]
+            let isImage = (extensionsImg.includes(this.getExtension(storyS.imageurl)))
+
             let objectStory = {
               idbusiness: storyS.idbusiness,
               id: storyS.id,
@@ -60,27 +66,35 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
               link: storyS.link,
               pause: true,
               stateView: !storyS.new,
+              isImage
             }
 
             this.stories.push(objectStory)
-          });
 
-          this.stories.forEach(story => {
-            if (!this.storiesBusiness.some(x => x.idbusiness === story.idbusiness)) {
+            if (!this.storiesBusiness.some(x => x.idbusiness === storyS.idbusiness)) {
               this.storiesBusiness.push({
-                idbusiness: story.idbusiness,
-                businessImage: story.businessImage,
-                businessName: story.businessName,
-                stateView: story.stateView,
+                idbusiness: storyS.idbusiness,
+                businessImage: bussinessStory ? bussinessStory.imageurl : '',
+                businessName: bussinessStory ? bussinessStory.description : '',
+                stateView: data.objectResponse.some(x => !x.new),
                 pause: true
               })
             }
-          })
+          });
 
-          console.log("getStories",this.storiesBusiness, this.stories)
+          this.storiesBusiness.sort((a, b) => b.stateView - a.stateView)
         }
       }
     })
+  }
+
+  private getExtension(nameFile: string) {
+    if (nameFile) {
+      let splitExt = nameFile.split(".");
+      return splitExt[splitExt.length - 1].toLocaleLowerCase();
+    }
+
+    return null
   }
 
   public openDialogStories(index: number = 0) {
