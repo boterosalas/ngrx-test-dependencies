@@ -123,13 +123,7 @@ export class CardStoryComponent implements OnInit, OnChanges {
     this.changeTimeStory()
 
     this.title = this.stories[this.indexCStory].businessCode;
-    if (this.title === "movil-exito" ||
-      this.title === "haceb" ||
-      this.title === "puntos-colombia" ||
-      this.title === "seguros" ||
-      this.title === "viajes" ||
-      this.title === "wesura"
-    ) {
+    if (this.title !== "exito" && this.title !== "carulla") {
       this.showReferenceButton = false;
     }
   }
@@ -355,7 +349,7 @@ export class CardStoryComponent implements OnInit, OnChanges {
         arrowPrev.onpointerup = e => {
           this.pause = true
           if (this.indexCStory <= 0) {
-            this.saveVisitStories(this.indexCStory - 1)
+            this.saveVisitStories(this.indexCStory)
             this.prevStory.emit()
           } else {
             this.selectStory(this.stories[this.indexCStory - 1].id)
