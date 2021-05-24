@@ -49,7 +49,7 @@ export class DialogStoriesComponent implements OnInit {
         }
       ]
     }
-    this.showArrowRight = this.showArrowLeft = this.data[this.stories].length <= 1 ? false : true
+    this.showArrowRight = this.showArrowLeft = this.data["stories"].length <= 1 ? false : true
     this.showArrows = this.data.showArrows
   }
 
