@@ -30,6 +30,7 @@ footer {
 
   .linksInformation2 {
     display: flex;
+    flex-wrap: wrap;
     text-align: left;
 
     section {
@@ -111,7 +112,7 @@ footer {
   }
 
   details summary:after {
-    content: "+";
+    content: ">";
     color: #fff;
     position: absolute;
     font-size: 1.75rem;
@@ -121,10 +122,12 @@ footer {
     font-weight: 200;
     transform-origin: center;
     transition: 200ms linear;
+    transform: rotate(90deg);
+
   }
 
   details[open] summary:after {
-    transform: rotate(45deg);
+    transform: rotate(270deg);
     font-size: 2rem;
   }
 
