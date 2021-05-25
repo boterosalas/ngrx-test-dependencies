@@ -17,7 +17,7 @@
     </div>
   </div>
   <div fxHide fxShow.gt-sm class="linksInformation">
-    <section *ngFor="let section of sectionLinks">
+    <section *ngFor="let section of sectionsLinks">
       <h3>{{ section.description }}</h3>
       <ul>
         <li *ngFor="let item of section.links">
@@ -28,7 +28,7 @@
   </div>
 
   <div fxShow fxHide.gt-sm class="linksInformation2">
-    <section *ngFor="let section of sectionLinks">
+    <section *ngFor="let section of sectionsLinks">
       <details>
         <summary>{{ section.description }}</summary>
         <ul>
