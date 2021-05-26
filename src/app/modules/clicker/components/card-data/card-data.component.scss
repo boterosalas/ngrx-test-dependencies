@@ -15,7 +15,6 @@
   width: 25px;
 }
 
-
 .color-card {
   background: transparent linear-gradient(90deg, #ffae5e 0%, #ffc183 100%) 0% 0%
     no-repeat padding-box;
@@ -36,18 +35,22 @@
   width: 335px;
 }
 
+.color-card-3 {
+  background: transparent linear-gradient(90deg, #F25C5C 0%, #F48B8B 100%) 0% 0%
+    no-repeat padding-box;
+  border-radius: 10px !important;
+  height: 142px;
+  padding-top: 20px;
+  padding-left: 24px;
+  width: 335px;
+}
+
 @media screen and (max-width: 425px) {
-  .color-card {
+  .color-card, .color-card-1, .color-card-3 {
     width: 100%;
     padding-top: 20px !important;
     padding-left: 24px !important;
   }
-  .color-card-1 {
-    width: 100%;
-    padding-top: 20px !important;
-    padding-left: 24px !important;
-  }
-  
 }
 .button-card {
   background: #ffffff40 0% 0% no-repeat padding-box;

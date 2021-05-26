@@ -52,6 +52,7 @@ export class LinksService {
   apiHistory = "commissions/getPaymentHistoryClicker";
   apiLinkHistory = "linkhistory/getlinkhistory";
   apiupdatePaymentDate = "commissions/updatePaymentDate";
+  apiUpdateStatusCommissionFile = "commissions/updatestatuscommissionfile";
   apiGetReferrals = "referrals/getreferrals";
   apiGetAmounts = "amount/getamounts";
   apiSaveAmountCommission = "amount/saveamountcommission";
@@ -373,7 +374,7 @@ export class LinksService {
   public getLinkHistory(params) {
     return this.http
       .get(
-        `${this.urlComission}${this.apiLinkHistory}?from=${params.from}&to=${params.to}&orderBy=${params.orderBy}`,
+        `${this.urlReports}${this.apiLinkHistory}?from=${params.from}&to=${params.to}&orderBy=${params.orderBy}`,
         this.httpOptions
       )
       .pipe(
@@ -687,6 +688,34 @@ export class LinksService {
         ),
         map((resp: ResponseService) => {
           return resp.objectResponse;
+        })
+      );
+  }
+
+  public updateStatusCommissionFile(formdata) {
+    let httpOptionsForm = {
+      headers: new HttpHeaders({
+        Authorization: "Bearer " + this.authorization,
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
+    };
+
+    return this.http
+      .post(
+        `${environment.URL_COMISSION}${this.apiUpdateStatusCommissionFile}`,
+        formdata,
+        httpOptionsForm
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((resp: ResponseService) => {
+          return resp;
         })
       );
   }

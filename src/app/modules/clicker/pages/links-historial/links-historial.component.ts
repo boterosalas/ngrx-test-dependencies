@@ -96,7 +96,7 @@ export class LinksHistorialComponent implements OnInit {
   public getLinksHistory(from = 1, to = this.pageTo, orderBy = "DATEDESC") {
     const params = { from, to, orderBy };
     this.subscription = this.links.getLinkHistory(params).subscribe((resp) => {
-      this.dataSource = new MatTableDataSource<any>(resp.listLinkHistory);
+      this.dataSource = new MatTableDataSource<any>(resp.linkHistory);
       this.totalItems = resp.total;
     });
   }

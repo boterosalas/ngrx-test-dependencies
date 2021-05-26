@@ -22,7 +22,7 @@ describe('LinksHistorialComponent', () => {
     userMessage: "",
     objectResponse: {
       total: 82,
-      listLinkHistory: [{
+      linkHistory: [{
         commission: 0,
         date: "2020-05-08T16:25:56.977",
         link: "https://webclickamdev.z13.web.core.windows.net/#/url/pe6etseatL",
