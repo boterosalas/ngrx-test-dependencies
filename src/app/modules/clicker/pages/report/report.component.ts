@@ -26,18 +26,22 @@ export class ReportComponent implements OnInit, OnDestroy {
   totalLinks: number;
   totalProducts: number;
   account: string;
+  rejected: string;
   isLoggedIn: any;
   identification: string;
   private subscription: Subscription = new Subscription();
   items = [];
   dataBreak1: any;
   dataBreak2: any;
+  dataBreak3: any;
   dataAcumulated: any;
   totalAcumulated: string;
   @ViewChild("templateBreak", { static: false })
   templateBreak: TemplateRef<any>;
   @ViewChild("templateBreak2", { static: false })
   templateBreak2: TemplateRef<any>;
+  @ViewChild("templateBreak3", { static: false })
+  templateBreak3: TemplateRef<any>;
   @ViewChild("templateAcumulated", { static: false })
   templateAcumulated: TemplateRef<any>;
 
@@ -97,9 +101,11 @@ export class ReportComponent implements OnInit, OnDestroy {
       this.totalAcumulated = resp.objectResponse.generalResume.totalCommissions;
       this.available = resp.objectResponse.money.accumulated;
       this.account = resp.objectResponse.money.cutOffValue;
+      this.rejected = resp.objectResponse.money.rejected || "0";
       this.conversionRate = resp.objectResponse.generalResume.conversionRate;
       this.dataBreak1 = new MatTableDataSource<any>(resp.objectResponse.money.detailCutOff);
       this.dataBreak2 = new MatTableDataSource<any>(resp.objectResponse.money.detailAccumulated);
+      this.dataBreak2 = new MatTableDataSource<any>(resp.objectResponse.money.detailRejected);
       this.totalLinks = resp.objectResponse.generalResume.totalLinks;
       this.totalProducts = resp.objectResponse.generalResume.totalProducts;
     })
@@ -137,10 +143,36 @@ export class ReportComponent implements OnInit, OnDestroy {
 
   }
 
-  public break1() {
-    const template = this.templateBreak;
-    const title = "Detalle comisiones de este mes";
-    const id = "break1-modal"
+  public break(key: string) {
+    let template
+    let title
+    let id
+
+    switch (key) {
+      case "commissions":
+        template = this.templateBreak;
+        title = "Detalle comisiones de este mes";
+        id = "break1-modal"
+        break;
+
+      case "balance":
+        template = this.templateBreak2;
+        title = "Detalle saldo pendiente por pagar";
+        id = "break2-modal"
+        break;
+
+      case "rejected-commissions":
+        template = this.templateBreak3;
+        title = "Detalle comisiones rechazadas";
+        id = "break3-modal"
+        break;
+    
+      default:
+        template = this.templateAcumulated;
+        title = "Detalle saldo acumulado";
+        id = "acumulated-modal"
+        break;
+    }
 
     this.dialog.open(ModalGenericComponent, {
       data: {
@@ -150,35 +182,6 @@ export class ReportComponent implements OnInit, OnDestroy {
       },
     });
   }
-
-  public break2() {
-    const template = this.templateBreak2;
-    const title = "Detalle saldo pendiente por pagar";
-    const id = "break2-modal"
-
-    this.dialog.open(ModalGenericComponent, {
-      data: {
-        title,
-        id,
-        template,
-      },
-    });
-  }
-
-  public acumulated() {
-    const template = this.templateAcumulated;
-    const title = "Detalle saldo acumulado";
-    const id = "acumulated-modal"
-
-    this.dialog.open(ModalGenericComponent, {
-      data: {
-        title,
-        id,
-        template,
-      },
-    });
-  }
-
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

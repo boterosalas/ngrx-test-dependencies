@@ -38,6 +38,7 @@ import { TableActivateBusinessComponent } from './components/table-activate-busi
 import { BussinessAdminComponent } from './pages/bussiness-admin/bussiness-admin.component';
 import { DialogCategoryComponent } from './components/dialog-category/dialog-category.component';
 import { NewsAdminComponent } from './pages/news-admin/news-admin.component'
+import { CommissionsComponent } from './pages/commissions/commissions.component'
 import { DialogNewsComponent } from './components/dialog-news/dialog-news.component'
 import { ContentLibraryComponent } from './pages/content-library/content-library.component'
 import { StoriesAdminComponent } from './pages/stories-admin/stories-admin.component'
@@ -121,6 +122,15 @@ const routes: Routes = [
   {
     path: "novedades",
     component: NewsAdminComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
+    },
+  },
+  {
+    path: "comisiones",
+    component: CommissionsComponent,
     canActivate: [RoleGuard],
     data: {
       role: "ADMIN",
@@ -262,6 +272,7 @@ const routes: Routes = [
     BussinessAdminComponent,
     DialogCategoryComponent,
     NewsAdminComponent,
+    CommissionsComponent,
     DialogNewsComponent,
     ContentLibraryComponent,
     StoriesAdminComponent,

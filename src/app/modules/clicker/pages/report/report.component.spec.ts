@@ -141,18 +141,23 @@ describe("ReportComponent", () => {
     expect(mockLinksService.getDetailPaymentClicker).toHaveBeenCalled();
   });
 
-  it('break 1', () => {
-    component.break1();
+  it('break commissions', () => {
+    component.break("commissions");
     expect(mockDialog.open).toBeTruthy();
   });
 
-  it('break 2', () => {
-    component.break2();
+  it('break balance', () => {
+    component.break("balance");
     expect(mockDialog.open).toBeTruthy();
   });
 
-  it('accumulated', () => {
-    component.acumulated();
+  it('break rejected-commissions', () => {
+    component.break("rejected-commissions");
+    expect(mockDialog.open).toBeTruthy();
+  });
+
+  it('break accumulated', () => {
+    component.break("");
     expect(mockDialog.open).toBeTruthy();
   });
 
