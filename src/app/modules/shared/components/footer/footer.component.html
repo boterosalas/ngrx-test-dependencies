@@ -1,4 +1,57 @@
-<footer class="text-center border-gray pt-3">
+<footer class="text-center border-gray">
+  <div class="logo">
+    <div>
+      <img src="assets/img/logo-clickam-by-exito.svg" alt="logo-clickam" />
+      <p>{{ "FOOTER.SLOGAN" | translate }}</p>
+      <div fxHide fxShow.gt-sm>
+        <app-app-store></app-app-store>
+      </div>
+    </div>
+    <div fxHide fxShow.gt-sm>
+      <div class="social">
+        <app-sociallinks></app-sociallinks>
+      </div>
+      <div class="copyRight">
+        <span>{{ "GENERIC.COPYRIGHT" | translate }} &copy;</span>
+      </div>
+    </div>
+  </div>
+  <div fxHide fxShow.gt-sm class="linksInformation">
+    <section *ngFor="let section of sectionsLinks">
+      <h3>{{ section.description }}</h3>
+      <ul>
+        <li *ngFor="let item of section.links">
+          <a href="{{ item.link }}" target="_blank">{{ item.description }}</a>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <div fxShow fxHide.gt-sm class="linksInformation2">
+    <section *ngFor="let section of sectionsLinks">
+      <details>
+        <summary>{{ section.description }}</summary>
+        <ul>
+          <li *ngFor="let item of section.links">
+            <a href="{{ item.link }}" target="_blank">{{ item.description }}</a>
+          </li>
+        </ul>
+      </details>
+    </section>
+  </div>
+
+  <div fxShow fxHide.gt-sm fxLayout="column" fxLayoutAlign="stretch center">
+    <app-app-store></app-app-store>
+    <div class="social">
+      <app-sociallinks></app-sociallinks>
+    </div>
+    <div class="copyRight">
+      <span>{{ "GENERIC.COPYRIGHT" | translate }} &copy;</span>
+    </div>
+  </div>
+</footer>
+
+<!-- <footer class="text-center border-gray pt-3">
   <div fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-around center" ngClass.gt-xs="pt-4">
     <div fxLayout.gt-xs="row">
       <h3 class="pr-3"> {{ 'FOOTER.AVAILABLE_IN' | translate }}</h3>
@@ -24,4 +77,4 @@
   <span class="copy pt-3 pb-3">{{ 'GENERIC.COPYRIGHT' | translate }} &copy;</span>
 </div>
 
-</footer>
+</footer> -->
