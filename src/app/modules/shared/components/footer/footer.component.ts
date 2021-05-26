@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
-// import { Router } from "@angular/router";
-// import { UtilsService } from "src/app/services/utils.service";
+import { Router } from "@angular/router";
+import { UtilsService } from "src/app/services/utils.service";
 import { ContentService } from "src/app/services/content.service";
 import { Subscription } from "rxjs";
 
@@ -17,8 +17,8 @@ export class FooterComponent implements OnInit {
 
   constructor(
     public auth: AuthService,
-    // private router: Router,
-    // private utils: UtilsService,
+    private router: Router,
+    private utils: UtilsService,
     private content: ContentService
   ) {}
 
@@ -100,8 +100,8 @@ export class FooterComponent implements OnInit {
     // this.getSections();
   }
 
-  // goTerms() {
-  //   this.router.navigate(["/terminos-y-condiciones"]);
-  //   this.utils.hideloginForm();
-  // }
+  goTerms() {
+    this.router.navigate(["/terminos-y-condiciones"]);
+    this.utils.hideloginForm();
+  }
 }
