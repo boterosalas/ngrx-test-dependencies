@@ -32,9 +32,15 @@ footer {
     display: flex;
     flex-wrap: wrap;
     text-align: left;
+    margin-bottom: 2rem;
 
     section {
       width: 100%;
+      border-bottom: 1px solid #8d7eb7;
+    }
+
+    ul {
+      margin-bottom: 2rem;
     }
   }
 
@@ -63,7 +69,6 @@ footer {
 
   section {
     text-align: left;
-    margin-bottom: 1rem;
   }
 
   li {
@@ -103,7 +108,6 @@ footer {
   details summary {
     width: 100%;
     padding: 0.5rem 0;
-    border-bottom: 1px solid #8d7eb7;
     position: relative;
     cursor: pointer;
     font-size: 1.25rem;
@@ -112,7 +116,8 @@ footer {
   }
 
   details summary:after {
-    content: ">";
+    content: "\e9b0";
+    font-family: "The-Icon-of", sans-serif;
     color: #fff;
     position: absolute;
     font-size: 1.75rem;
@@ -122,13 +127,11 @@ footer {
     font-weight: 200;
     transform-origin: center;
     transition: 200ms linear;
-    transform: rotate(90deg);
-
   }
 
   details[open] summary:after {
-    transform: rotate(270deg);
-    font-size: 2rem;
+    content: "\e9b3";
+    font-family: "The-Icon-of", sans-serif;
   }
 
   details summary {
