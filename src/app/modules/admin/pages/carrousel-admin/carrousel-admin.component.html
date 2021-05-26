@@ -216,7 +216,7 @@
             <td mat-cell *matCellDef="let element; let i = index">
               <div fxLayout="row" fxLayoutGap="10px">
                 <mat-slide-toggle
-                  *ngIf="!element.programmed"
+                  *ngIf="!element.programmed && !element.undefinedDate"
                   [(ngModel)]="element.active"
                   (change)="activate(element)"
                   color="orange2-toggle"
@@ -224,6 +224,9 @@
                 <div *ngIf="element.programmed" class="programmed">
                   <h4>Programada</h4>
                   <p>{{formatDate(element.datestart)}}</p>
+                </div>
+                <div *ngIf="!element.programmed && element.undefinedDate" class="programmed">
+                  <h4>Tiempo indefinido</h4>
                 </div>
               </div>
             </td>
@@ -471,7 +474,7 @@
             <td mat-cell *matCellDef="let element; let i = index">
               <div fxLayout="row" fxLayoutGap="10px">
                 <mat-slide-toggle
-                  *ngIf="!element.programmed"
+                  *ngIf="!element.programmed && !element.undefinedDate"
                   [(ngModel)]="element.active"
                   (change)="activate(element)"
                   color="orange2-toggle"
@@ -479,6 +482,9 @@
                 <div *ngIf="element.programmed" class="programmed">
                   <h4>Programada</h4>
                   <p>{{formatDate(element.datestart)}}</p>
+                </div>
+                <div *ngIf="!element.programmed && element.undefinedDate" class="programmed">
+                  <h4>Tiempo indefinido</h4>
                 </div>
               </div>
             </td>

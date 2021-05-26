@@ -123,19 +123,16 @@ export class CardStoryComponent implements OnInit, OnChanges {
     this.changeTimeStory()
 
     this.title = this.stories[this.indexCStory].businessCode;
-    if (this.title === "movil-exito" ||
-      this.title === "haceb" ||
-      this.title === "puntos-colombia" ||
-      this.title === "seguros" ||
-      this.title === "viajes" ||
-      this.title === "wesura"
-    ) {
+    if (this.title !== "exito" && this.title !== "carulla") {
       this.showReferenceButton = false;
     }
   }
 
   ngOnChanges() {
     this.addEventPauseAndPlayArrows()
+    if (this.currentSlick === this.index && this.stories[this.indexCStory].stateView) {
+      this.saveVisitStories(this.indexCStory)
+    }
     if (this.play) {
       this.progress()
     }
@@ -162,7 +159,8 @@ export class CardStoryComponent implements OnInit, OnChanges {
   }
 
   public saveVisitStories(index) {
-    if (this.stories[index].stateView) {
+    if (this.stories[index].stateView && this.userId > 0) {
+      this.stories[index].stateView = false
       const data = {
         idStory: this.stories[index].id,
         userId: this.userId
@@ -170,7 +168,7 @@ export class CardStoryComponent implements OnInit, OnChanges {
 
       this.subscription = this.content.saveVisitStories(data).subscribe((resp: ResponseService) => {
         if (resp.state === "Success") {
-          this.stories[index].stateView = false
+          //this.stories[index].stateView = false
 
           if (!this.stories.some(x => x.stateView)) {
             const buttonBusiness = document.getElementById(`button-business-${this.index}`)
@@ -195,7 +193,7 @@ export class CardStoryComponent implements OnInit, OnChanges {
 
       this.indexCStory = this.stories.findIndex(story => story.id === storyId)
 
-      this.saveVisitStories(this.indexCStory)
+      if (this.currentSlick === this.index) this.saveVisitStories(this.indexCStory)
 
       this.changeTimeStory()
       if (this.currentSlick === this.index) this.pause = false
@@ -351,6 +349,7 @@ export class CardStoryComponent implements OnInit, OnChanges {
         arrowPrev.onpointerup = e => {
           this.pause = true
           if (this.indexCStory <= 0) {
+            this.saveVisitStories(this.indexCStory)
             this.prevStory.emit()
           } else {
             this.selectStory(this.stories[this.indexCStory - 1].id)
