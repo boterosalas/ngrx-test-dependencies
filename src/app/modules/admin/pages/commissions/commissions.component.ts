@@ -151,11 +151,7 @@ export class CommissionsComponent implements OnInit {
 
             if (type === "rejected") {
                 this.subscription = this.link.updateStatusCommissionFile(formDataCommission).subscribe((resp: ResponseService) => {
-                    if (resp.state === "Success") {
-                        this.openSnackBar(resp.userMessage, "Cerrar");
-                    } else {
-                        this.openSnackBar(resp.userMessage, "Cerrar");
-                    }
+                    this.openSnackBar(resp.userMessage, "Cerrar");
                 })
             } else if (type === "eliminated") {
                 console.log("eliminated")
