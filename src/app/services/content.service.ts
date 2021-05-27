@@ -533,13 +533,13 @@ export class ContentService {
     );
   }
 
-  public getOffers() {
-    return this.http.get(`${this.url + this.apiOffers}`, this.httpOptions).pipe(
-      map((user: ResponseService) => {
-        return user.objectResponse;
-      })
-    );
-  }
+  // public getOffers() {
+  //   return this.http.get(`${this.url + this.apiOffers}`, this.httpOptions).pipe(
+  //     map((user: ResponseService) => {
+  //       return user.objectResponse;
+  //     })
+  //   );
+  // }
   public getOffersbyType(type) {
     return this.http.get(`${this.url + this.apiOffers}?type=${type.id}&visible=${type.admin}`, this.httpOptions).pipe(
       map((user: ResponseService) => {
