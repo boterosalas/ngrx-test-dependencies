@@ -23,14 +23,14 @@ footer {
 
   .linksInformation {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     column-gap: 4rem;
     text-align: left;
   }
 
   .linksInformation2 {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     text-align: left;
     margin-bottom: 2rem;
 
