@@ -65,7 +65,6 @@ describe("HomeComponent", () => {
   ]);
   const mockContentService = jasmine.createSpyObj("ContentService", [
     "getNews",
-    "getOffers",
     "getOffersbyType",
     "getBusiness",
     "getBusinessClicker",
@@ -541,7 +540,6 @@ describe("HomeComponent", () => {
     mockUserService.getProfile.and.returnValue();
     mockUtilsService.showRegisterForm.and.returnValue({});
     mockContentService.getNews.and.returnValue(of(news));
-    mockContentService.getOffers.and.returnValue(of(offers));
     mockContentService.getOffersbyType.and.returnValue(of(offers));
     mockContentService.getBusiness.and.returnValue(of(business));
     mockContentService.getBusinessClicker.and.returnValue(of(business));

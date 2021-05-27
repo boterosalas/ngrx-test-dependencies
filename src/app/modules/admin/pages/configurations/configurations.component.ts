@@ -39,25 +39,23 @@ export class ConfigurationsComponent implements OnInit {
   templateAddAdmin: TemplateRef<any>;
 
   ngOnInit() {
+    const validatorsPassword = [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.maxLength(20),
+    ] 
+
     this.adminFormDelete = this.fb.group({
       Password: [
         "",
-        [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(20),
-        ],
+        validatorsPassword,
       ],
     });
 
     this.dataAddAdmin = this.fb.group({
       name: [null, Validators.required],
       email: [null, Validators.required],
-      password: ["", [
-        Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(20),
-      ]],
+      password: ["", validatorsPassword],
     });
 
     let token = localStorage.getItem("ACCESS_TOKEN")
@@ -65,17 +63,20 @@ export class ConfigurationsComponent implements OnInit {
     this.userId = tokenDecode.userid
     this.role = tokenDecode.role
 
-    this.auth.getPermisionByUser(102).subscribe((resp) => {
+    this.getPermisionByUserService()
+    this.getPermisionService()    
+  }
+
+  public getPermisionByUserService() {
+    this.auth.getPermisionByUser(this.userId).subscribe((resp) => {
       this.permisionColumns = resp
       resp.forEach(element => {
         this.displayedColumns.push(element.menu.split(' ')[0])
       });
     })
-
-    this.getPermisionService()    
   }
 
-  private getPermisionService() {
+  public getPermisionService() {
     this.user.getPermision().subscribe((resp) => {
       if (resp.state === "Success") {
         this.servicios = resp.objectResponse;
@@ -103,11 +104,7 @@ export class ConfigurationsComponent implements OnInit {
     this.servicios[index].permissions.find(permission => permission.menuid === idmenu).value = event.checked
     this.cambio()
   }
-  changeIsSuperAdmin(element) {
-    element.rolcode = element.issuperadmin ? "SUPERADMIN" : "ADMIN"
-    this.cambio()
-  }
-  getPermissionValue(element, idmenu) {
+  public getPermissionValue(element, idmenu) {
     return element.issuperadmin || element.permissions.find(permission => permission.menuid === idmenu).value
   }
 
