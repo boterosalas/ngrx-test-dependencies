@@ -27,7 +27,7 @@ describe('CommissionsComponent', () => {
     "getExportNewsExcel", "getAllNews"
   ]);
   const mockLinksService = jasmine.createSpyObj("LinksService", [
-    "updateStatusCommissionFile"
+    "updateStatusCommissionFile", "getReportRejected"
   ]);
   const updateStatusCommissionFile = {
     state: "Success",
@@ -85,6 +85,7 @@ describe('CommissionsComponent', () => {
     //mockUserService.getAllNews.and.returnValue(of(repsDatos))
     //mockUserService.getExportNewsExcel.and.returnValue(of(updateStatusCommissionFile))
     mockLinksService.updateStatusCommissionFile.and.returnValue(of(updateStatusCommissionFile))
+    mockLinksService.getReportRejected.and.returnValue(of(updateStatusCommissionFile))
     fixture = TestBed.createComponent(CommissionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -105,5 +106,12 @@ describe('CommissionsComponent', () => {
     //component.pagination({ previousPageIndex: 1, pageIndex: 0, pageSize: 20, length: 5 });
     //expect(mockUserService.getAllNews).toHaveBeenCalled();
   });
+
+  describe('export report', () => {
+    it('get Report Rejected', () => {
+      component.getReportRejected()
+      expect(mockLinksService.getReportRejected).toHaveBeenCalled();
+    });
+  })
 
 });
