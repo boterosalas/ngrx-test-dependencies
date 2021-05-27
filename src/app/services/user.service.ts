@@ -55,6 +55,7 @@ export class UserService {
   apiUpdateEmployees = "userprofile/updateemployees";
   apiGetExternalUsers = "userprofile/getexternalusers";
   apiDeleteUser = "userprofile/deleteaccount"
+  apiDeleteUserAdmin = "userprofile/deleteuseradmin"
   apiReporUserGamification = "reports/getreportgamification";
   apiReportCambios = "reports/getreportfeedback"; //Falta el endpoint bien
   apiDeleteComments = "reports/getreportfeedbackdeletetion"
@@ -71,6 +72,9 @@ export class UserService {
   apiSaveFeedBack = "userprofile/savefeedback";
   apiGetStatusVerification = "userprofile/getstatusverification";
   apiUpdateResponseAccountBank = "userprofile/updateresponseaccountbank";
+  apiSavePermision = "userprofile/savepermissions";
+  apiGetPermision = "userprofile/getpermissions";
+  apiCreateUserAdmin = "userprofile/createuseradmin"
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
@@ -694,6 +698,74 @@ export class UserService {
     return this.http
       .post(
         `${this.url}${this.apiUpdateResponseAccountBank}`,
+        data,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+  }
+  public getPermision() {
+    return this.http
+      .get(`${this.url + this.apiGetPermision}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((resp: ResponseService) => {
+          return resp;
+        })
+      );
+  }
+  public savePermision(data: any) {
+    return this.http
+      .post(`${this.url + this.apiSavePermision}`, data, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((resp: ResponseService) => {
+          return resp;
+        })
+      );
+  }
+
+  public deleteUserAdmin(data: any) {
+    return this.http
+      .post(
+        `${this.url}${this.apiDeleteUserAdmin}`,
+        data,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+  }
+
+  public addUserAdmin(data: any) {
+    return this.http
+      .post(
+        `${this.url}${this.apiCreateUserAdmin}`,
         data,
         this.httpOptions
       )

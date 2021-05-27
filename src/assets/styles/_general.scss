@@ -74,6 +74,16 @@ table tr:nth-child(even) {
   background-color: #f3f1f6 !important;
 }
 
+table.users-table.setting tr {
+  &:nth-child(even) {
+    background-color: white !important;
+  }
+
+  td:nth-child(even) {
+    background-color: #F7F8F8;
+  }
+}
+
 thead,
 th.mat-header-cell {
   color: $primary-color !important;
@@ -1241,10 +1251,21 @@ th.mat-header-cell {
   th.mat-header-cell {
     padding: 10px 5px;
   }
+
+  &.setting {
+    td.mat-cell,
+    td.mat-footer-cell,
+    th.mat-header-cell {
+      padding: 10px 15px;
+    }
+  }
+
   color: #707070;
   p {
     color: #707070;
   }
+
+  
 }
 
 // .mat-raised-button:not([class*="mat-elevation-z"]) {
@@ -2337,6 +2358,18 @@ h3#bussiness2 {
 .check-transparent .mat-ripple-element {
   opacity: 0.1;
   background-color: black;
+}
+
+.check-dull-purple.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: #B4A6DB !important;
+}
+
+.check-dull-purple.mat-checkbox-disabled {
+  opacity: 0.6;
+}
+
+.check-dull-purple .mat-checkbox-background {
+  background-color: #D2D0D4 !important;
 }
 
 .timepicker-backdrop-overlay, .timepicker-overlay {

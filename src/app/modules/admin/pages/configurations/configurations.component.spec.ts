@@ -13,6 +13,7 @@ import { of } from 'rxjs';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from "src/app/services/user.service";
 
 import { ConfigurationsComponent } from './configurations.component';
 
@@ -20,31 +21,52 @@ describe('ConfigurationsComponent', () => {
   let component: ConfigurationsComponent;
   let fixture: ComponentFixture<ConfigurationsComponent>;
   const mockAuthService = jasmine.createSpyObj("AuthService", [
-    "getUsersAdmin", "getPermisionByUser", "savePermision"
+    "getPermisionByUser"
   ]);
-  let response = {
-    Status: "Success",
+  const mockUserService = jasmine.createSpyObj("UserService", [
+    "getPermision", "savePermision", "deleteUserAdmin", "addUserAdmin"
+  ]);
+  let responseUser = [{
+    userid: 1,
+    idmenu: 1,
+    menu: "Any",
+    permission: false
+  }]
+
+  let respPermision = {
+    state: "Success",
+    userMessage: "Success",
     objectResponse: [{
-      menu: "Any",
-      permission: "false"
+      userid: 1,
+      rolid: 3,
+      rolcode: "ADMIN",
+      issuperadmin: false,
+      fullname: "Alejandro Pc",
+      permissions: [{
+        menuid: 1,
+        value: false
+      }]
     }]
   }
-  let responseUser = [{
-    menu: "Any",
-    permission: "false"
-  }]
-  let respuestaArray = [{
-    userId: 1,
-    firstNames: "Any",
-    lastNames: "asss",
 
-  },
-  {
-    userId: 2,
-    firstNames: "Any",
-    lastNames: "asss",
+  let respSavePermision = {
+    state: "Success",
+    userMessage: "Permiso guardado",
+    objectResponse: null
+  }
 
-  }]
+  let respDeleteAdmin = {
+    state: "Success",
+    userMessage: "Admin eliminado",
+    objectResponse: null
+  }
+
+  let respAddAdmin = {
+    state: "Success",
+    userMessage: "Admin agregado",
+    objectResponse: null
+  }
+  
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ConfigurationsComponent],
@@ -72,14 +94,18 @@ describe('ConfigurationsComponent', () => {
         }),
 
       ],
-      providers: [{ provide: AuthService, useValue: mockAuthService },],
+      providers: [{ provide: AuthService, useValue: mockAuthService },
+        { provide: UserService, useValue: mockUserService }],
       schemas: [NO_ERRORS_SCHEMA],
 
     })
       .compileComponents();
-    mockAuthService.getUsersAdmin.and.returnValue(of(respuestaArray));
+    //mockAuthService.getUsersAdmin.and.returnValue(of(respuestaArray));
     mockAuthService.getPermisionByUser.and.returnValue(of(responseUser));
-    mockAuthService.savePermision.and.returnValue(of(response));
+    mockUserService.getPermision.and.returnValue(of(respPermision));
+    mockUserService.savePermision.and.returnValue(of(respSavePermision));
+    mockUserService.deleteUserAdmin.and.returnValue(of(respDeleteAdmin));
+    mockUserService.addUserAdmin.and.returnValue(of(respAddAdmin));
   }));
 
   beforeEach(() => {
@@ -91,10 +117,19 @@ describe('ConfigurationsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('changes ', () => {
-    component.saveeraser();
-    component.onChangeSelected({ userId: 1 });
-    let datos = true;
-    expect(datos).toBeTruthy()
+  it('change permission', () => {
+    component.servicios = respPermision.objectResponse
+    const event = { checked: true }
+    component.changePermission(event, 0, 1);
+    expect(component.disableBoton).not.toBeTruthy()
   })
+  it('saveeraser', () => {
+    component.saveeraser();
+    expect(mockUserService.savePermision).toHaveBeenCalled();
+  })
+  // it('change permission', () => {
+  //   const event = { checked: true }
+  //   component.changePermission(event, 0, 1);
+  //   expect(component.disableBoton).not.toBeTruthy()
+  // })
 });
