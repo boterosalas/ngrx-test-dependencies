@@ -1,0 +1,22 @@
+.navigation-footer {
+  border-radius: 5px;
+  margin-top: 2rem;
+
+  &__header {
+    display: grid;
+    grid-template-columns: 10% 30% 40% 20%;
+    align-items: center;
+    background-color: #f3f1f6;
+    color: #37236a;
+    font-weight: bold;
+    padding: 1rem;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: 1rem;
+    padding: 1rem;
+  }
+}

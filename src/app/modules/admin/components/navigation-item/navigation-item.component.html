@@ -1,1 +1,30 @@
-<p>navigation-item works!</p>
+<div class="navigation-item">
+  <span class="navigation-item__drag">
+    <mat-icon matSuffix class="mr-1 blue cursor-pointer" cdkDragHandle
+      >drag_indicator</mat-icon
+    >
+  </span>
+  <span class="navigation-item__description">Blog</span>
+  <span class="navigation-item__link">
+    <a
+      href="www.google.com"
+      class="text-link text-underline cursor-pointer"
+      target="_blank"
+    >
+      www.Blog.com</a
+    >
+  </span>
+  <div class="navigation-item__actions">
+    <i
+      class="tio-edit style-icon cursor-pointer"
+      (click)="editCarouselModal(element)"
+    ></i>
+
+    <img
+      class="cursor-pointer"
+      (click)="deleteComisionCarousel(element)"
+      src="/assets/img/dashboard/icon-remove-comision.svg"
+      alt=""
+    />
+  </div>
+</div>
