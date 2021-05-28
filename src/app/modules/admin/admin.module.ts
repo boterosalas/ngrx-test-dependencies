@@ -52,6 +52,7 @@ import { InformationBussinessComponent } from './pages/information-bussiness/inf
 import { ManageComisionBussinessComponent } from './pages/manage-comision-bussiness/manage-comision-bussiness.component';
 import { CarrouselAdminComponent } from './pages/carrousel-admin/carrousel-admin.component';
 import { NavigationComponent } from './pages/navigation/navigation.component';
+import { MatPasswordStrengthModule } from "@angular-material-extensions/password-strength";
 
 const routes: Routes = [
   {
@@ -307,6 +308,7 @@ const routes: Routes = [
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    MatPasswordStrengthModule,
     NgxDaterangepickerMd.forRoot(),
     NgCircleProgressModule.forRoot({
       // set defaults here

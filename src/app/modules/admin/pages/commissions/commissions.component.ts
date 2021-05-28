@@ -169,4 +169,18 @@ export class CommissionsComponent implements OnInit {
         }
         return false
     }
+
+    public getReportRejected() {
+        let date = {
+        //   start: this.form.controls.selected.value.startDate.format(),
+        //   end: this.form.controls.selected.value.endDate.format()
+            start: moment(new Date(2020,2,10), "DD/MM/YYYY").format(),
+            end: moment(new Date(), "DD/MM/YYYY").format()
+        }
+    
+        this.subscription = this.link.getReportRejected(date).subscribe((resp: ResponseService) => {
+            console.log("getReportRejected",resp)
+            this.openSnackBar(resp.userMessage, "Cerrar");
+        })
+    }
 }
