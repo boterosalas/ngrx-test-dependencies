@@ -53,6 +53,7 @@ export class LinksService {
   apiLinkHistory = "linkhistory/getlinkhistory";
   apiupdatePaymentDate = "commissions/updatePaymentDate";
   apiUpdateStatusCommissionFile = "commissions/updatestatuscommissionfile";
+  apiDeleteCommissionFile = "commissions/deletecommissionfile";
   apiGetReferrals = "referrals/getreferrals";
   apiGetAmounts = "amount/getamounts";
   apiSaveAmountCommission = "amount/saveamountcommission";
@@ -704,6 +705,34 @@ export class LinksService {
     return this.http
       .post(
         `${environment.URL_COMISSION}${this.apiUpdateStatusCommissionFile}`,
+        formdata,
+        httpOptionsForm
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((resp: ResponseService) => {
+          return resp;
+        })
+      );
+  }
+
+  public deleteCommissionFile(formdata) {
+    let httpOptionsForm = {
+      headers: new HttpHeaders({
+        Authorization: "Bearer " + this.authorization,
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
+    };
+
+    return this.http
+      .post(
+        `${environment.URL_COMISSION}${this.apiDeleteCommissionFile}`,
         formdata,
         httpOptionsForm
       )

@@ -84,6 +84,17 @@ table.users-table.setting tr {
   }
 }
 
+table.commissions-table th.mat-header-cell .mat-sort-header-button {
+  text-transform: uppercase;
+}
+
+.paging-table-transparent .mat-paginator-icon {
+  background-color: white;
+  border-radius: 50px;
+  fill: #8D7EB7;
+  box-shadow: 0px 1px 2px #c0c0c080;
+}
+
 thead,
 th.mat-header-cell {
   color: $primary-color !important;
@@ -1982,8 +1993,7 @@ app-menu-help-center {
   }
 }
 
-.searchUser,
-.search {
+.searchUser, .searchCommission, .search {
   .mat-form-field-appearance-outline .mat-form-field-outline {
     background: #fff !important;
   }

@@ -50,5 +50,61 @@ input[type="file"] {
 }
 
 .download-files {
-  margin-top: 20px;
+  margin-left: 15px;
+
+  .button-selected-label {
+    padding: 2px 16px 10px 16px;
+  }
+}
+
+.dateRange-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.paging-table-transparent .mat-paginator {
+  background-color: transparent;
+  border: none;
+}
+
+.container-search {
+  width: 300px;
+  margin-right: 30px !important;
+}
+
+.container-forms {
+  justify-content: space-between;
+}
+
+.label-up-text {
+  color: #a7a3b1;
+  font-family: $font-galano-bold !important;
+  margin-bottom: 6px;
+  margin-left: 25px;
+  font-size: 11px;
+}
+
+.icon-date {
+  position: relative;
+  top: 4px;
+  left: 30px;
+  font-size: 22px;
+  color: #8d7eb7;
+}
+
+.border-input {
+  border: none;
+  outline: none;
+  height: 32px;
+}
+
+.border-radius {
+  border-radius: 5px;
+}
+
+.form-control {
+  padding-left: 35px !important;
+  font-family: $font-galano !important;
 }
