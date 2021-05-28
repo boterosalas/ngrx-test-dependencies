@@ -82,18 +82,9 @@
             <ng-container matColumnDef="show">
               <th mat-header-cell class="tr" *matHeaderCellDef></th>
               <td mat-cell *matCellDef="let element; let i = index">
-                <div
-                  fxLayout="row"
-                  fxLayoutGap="10px"
-                  fxLayoutAlign.gt-xs="end center"
-                  fxLayoutAlign.xs="center center"
-                >
-                  <mat-slide-toggle
-                    [(ngModel)]="element.active"
-                    color="orange2-toggle"
-                    (change)="activate(element)"
-                  ></mat-slide-toggle>
-                </div>
+                <button mat-button>
+                  <mat-icon>chevron_right</mat-icon>
+                </button>
               </td>
             </ng-container>
 
@@ -187,18 +178,9 @@
             <ng-container matColumnDef="show">
               <th mat-header-cell class="tr" *matHeaderCellDef></th>
               <td mat-cell *matCellDef="let element; let i = index">
-                <div
-                  fxLayout="row"
-                  fxLayoutGap="10px"
-                  fxLayoutAlign.gt-xs="end center"
-                  fxLayoutAlign.xs="center center"
-                >
-                  <mat-slide-toggle
-                    [(ngModel)]="element.active"
-                    color="orange2-toggle"
-                    (change)="activate(element)"
-                  ></mat-slide-toggle>
-                </div>
+                <button mat-button>
+                  <mat-icon>chevron_right</mat-icon>
+                </button>
               </td>
             </ng-container>
 
