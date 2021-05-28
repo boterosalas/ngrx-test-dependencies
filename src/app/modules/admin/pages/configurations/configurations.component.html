@@ -179,7 +179,7 @@
           style="color: #37236a"
         />
         <mat-error
-          id="requiredName"
+          id="introduceEmail"
           *ngIf="
             dataAddAdmin.controls.email.invalid &&
             dataAddAdmin.controls.email.errors.required
@@ -187,6 +187,14 @@
           >{{
             "GENERIC.REQUIRED" | translate: { formValue: "Correo electrónico" }
           }}</mat-error
+        >
+        <mat-error
+          id="invalidEmail"
+          *ngIf="
+            dataAddAdmin.controls.email.invalid &&
+            dataAddAdmin.controls.email.errors.pattern
+          "
+          >{{ "LOGIN.INVALID_EMAIL" | translate }}</mat-error
         >
       </mat-form-field>
       <mat-form-field style="width: 370px">
@@ -200,13 +208,43 @@
           style="color: #37236a"
         />
         <mat-error
-          id="requiredName"
+          id="invalidPassword"
           *ngIf="
             dataAddAdmin.controls.password.invalid &&
             dataAddAdmin.controls.password.errors.required
           "
           >{{
             "GENERIC.REQUIRED" | translate: { formValue: "Contraseña temporal" }
+          }}</mat-error
+        >
+        <mat-error
+          id="minPassword"
+          *ngIf="
+            dataAddAdmin.controls.password.invalid &&
+            dataAddAdmin.controls.password.errors.minlength
+          "
+          >{{
+            "GENERIC.MIN_CHARACTERS"
+              | translate
+                : {
+                    minchar:
+                      dataAddAdmin.controls.password.errors.minlength.requiredLength
+                  }
+          }}</mat-error
+        >
+        <mat-error
+          id="maxPassword"
+          *ngIf="
+            dataAddAdmin.controls.password.invalid &&
+            dataAddAdmin.controls.password.errors.maxlength
+          "
+          >{{
+            "GENERIC.MAX_CHARACTERS"
+              | translate
+                : {
+                    maxchar:
+                      dataAddAdmin.controls.password.errors.maxlength.requiredLength
+                  }
           }}</mat-error
         >
       </mat-form-field>

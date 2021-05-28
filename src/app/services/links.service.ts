@@ -65,6 +65,7 @@ export class LinksService {
   apiGetReportMonth = "reports/getcommissionpaymentreport"
   apiAudit = "reports/getaudit";
   apikpiNovelties = "new/getkpinovelties";
+  apiReportRejected = "reports/getreportrejected"
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
 
@@ -718,5 +719,20 @@ export class LinksService {
           return resp;
         })
       );
+  }
+
+  public getReportRejected(date: any) {
+    return this.http.get(`${this.ulrReport}${this.apiReportRejected}?start=${date.start}&end=${date.end}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => { })
+        )
+      ),
+      map((resp: ResponseService) => {
+        return resp;
+      })
+    );
   }
 }

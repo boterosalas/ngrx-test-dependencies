@@ -21,6 +21,7 @@ export class ConfigurationsComponent implements OnInit {
     private _snackBar: MatSnackBar
   ) { }
   displayedColumns: string[] = ['name', 'superadmin'];
+  emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
   selecteds: any;
   superAdmin: boolean = false;
   servicios = [];
@@ -54,7 +55,11 @@ export class ConfigurationsComponent implements OnInit {
 
     this.dataAddAdmin = this.fb.group({
       name: [null, Validators.required],
-      email: [null, Validators.required],
+      email: [null, [
+        Validators.required,
+        Validators.pattern(this.emailPattern),
+        Validators.maxLength(64)
+      ]],
       password: ["", validatorsPassword],
     });
 
