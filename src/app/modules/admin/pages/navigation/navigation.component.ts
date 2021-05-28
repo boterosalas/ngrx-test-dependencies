@@ -24,7 +24,7 @@ export interface FooterElement {
   styleUrls: ["./navigation.component.scss"],
 })
 export class NavigationComponent implements OnInit {
-  displayedColumns: string[] = ["drag", "description", "config", "show"];
+  displayedColumns: string[] = ["description", "link", "actions"];
 
   constructor(private file: LinksService, private content: ContentService) {}
 

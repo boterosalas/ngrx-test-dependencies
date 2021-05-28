@@ -53,6 +53,9 @@ import { ManageComisionBussinessComponent } from './pages/manage-comision-bussin
 import { CarrouselAdminComponent } from './pages/carrousel-admin/carrousel-admin.component';
 import { NavigationComponent } from './pages/navigation/navigation.component';
 import { MatPasswordStrengthModule } from "@angular-material-extensions/password-strength";
+import { NavigationFooterComponent } from './components/navigation-footer/navigation-footer.component';
+import { NavigationGroupComponent } from './components/navigation-group/navigation-group.component';
+import { NavigationItemComponent } from './components/navigation-item/navigation-item.component';
 
 const routes: Routes = [
   {
@@ -294,7 +297,10 @@ const routes: Routes = [
     InformationBussinessComponent,
     ManageComisionBussinessComponent,
     CarrouselAdminComponent,
-    NavigationComponent
+    NavigationComponent,
+    NavigationFooterComponent,
+    NavigationGroupComponent,
+    NavigationItemComponent
   ],
   imports: [
     AngularEditorModule,
