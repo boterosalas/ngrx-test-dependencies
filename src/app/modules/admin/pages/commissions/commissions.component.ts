@@ -21,10 +21,12 @@ export class CommissionsComponent implements OnInit {
     maxDate = moment(new Date());
     dateFormCommission: FormGroup;
     searchForm: FormGroup;
-    pageTo: number = 50;
+    pageTo: number = 20;
     paginate: string;
     pageIndex: number = 0;
     totalItems: number;
+    textConfirm: string;
+    typeConfirm: string;
     commissions: Array<any>;
     currentCommission: any;
     pageSize: number;
@@ -36,13 +38,15 @@ export class CommissionsComponent implements OnInit {
 
     @ViewChild("templateAdditionalInfo", { static: false })
     templateAdditionalInfo: TemplateRef<any>;
+
+    @ViewChild("templateConfirm", { static: false })
+    templateConfirm: TemplateRef<any>;
     
     private subscription: Subscription = new Subscription();
     constructor(
         private paginator: MatPaginatorIntl,
         private dialog: MatDialog,
         private fb: FormBuilder,
-        private usersService: UserService,
         private _snackBar: MatSnackBar,
         public utils: UtilsService,
         private link: LinksService,
@@ -89,8 +93,8 @@ export class CommissionsComponent implements OnInit {
         this.searchCommission("");
         this.dateFormCommission = this.fb.group({
             dateRange: {
-                startDate: "",
-                endDate: "",
+                startDate: moment(new Date(2020,1,1), "DD/MM/YYYY"),
+                endDate: moment(new Date(), "DD/MM/YYYY"),
             }
         });
         this.searchForm = this.fb.group({
@@ -109,34 +113,70 @@ export class CommissionsComponent implements OnInit {
         orderOrigin = "",
         orderBy = ""
     ) {
-        console.log("searchCommission", term)
-
         if (term !== this.paginate) {
             this.paginate = term;
             this.pageIndex = 0;
         }
-        const params = { term, from, to, orderOrigin, orderBy };
-        // this.subscription = this.contentService.getCommissionsSearch(params).subscribe((resp: any) => {
-        //     console.log("getCommissionsSearch", resp)
-        //     this.commissions = resp.novelties;
-        //     this.totalItems = resp.total;
-        //     this.dataSource = new MatTableDataSource<any>(this.commissions);
-        // });
+
+        let start = this.dateFormCommission ? this.dateFormCommission.controls.dateRange.value.startDate.format("YYYY-MM-DD") : moment(new Date(2020, 0, 1)).format("YYYY-MM-DD")
+        let end = this.dateFormCommission ? this.dateFormCommission.controls.dateRange.value.endDate.format("YYYY-MM-DD") : moment().format("YYYY-MM-DD")
+
+        const params = { start, end, term, from, to, orderOrigin, orderBy };
+        this.subscription = this.contentService.getCommissionsSearch(params).subscribe((resp: any) => {
+            this.commissions = resp.objectResponse.commissions;
+            this.totalItems = resp.objectResponse.total;
+            this.dataSource = new MatTableDataSource<any>(this.commissions);
+        });
     }
     public openCommission(commission) {
-        this.currentCommission = commission
+        this.currentCommission = commission.id
+
+        this.setValueAdditionalInfo(commission)
+
         const id = "modal-commission";
         const title = "";
         const template = this.templateAdditionalInfo;
 
         this.dialog.open(ModalGenericComponent, {
             data: {
-            title,
-            template,
-            id
+                title,
+                template,
+                id
             },
         });
     }
+
+    public openConfirm(type) {
+        this.typeConfirm = type
+        this.textConfirm = type === "rejected-commission" ? "¿Está seguro que desea rechazar la comisión seleccionada?" : "¿Está seguro que desea eliminar la comisión seleccionada?"
+
+        const id = type;
+        const title = type === "rejected-commission" ? "Rechazar comisión" : "Eliminar comisión";
+        const template = this.templateConfirm;
+
+        this.dialog.open(ModalGenericComponent, {
+            data: {
+                template,
+                title,
+                id
+            },
+        });
+    }
+
+    private setValueAdditionalInfo(commission) {
+        const keysCommission = Object.keys(commission)
+
+        for (let index = 0; index < keysCommission.length; index++) {
+            const key = keysCommission[index]
+            for (let index2 = 0; index2 < this.dataAdditionalInfoValue.length; index2++) {
+                if (this.dataAdditionalInfoValue[index2].info.some(x => x.code === key)) {
+                    this.dataAdditionalInfoValue[index2].info.find(x => x.code === key).value = commission[key]
+                    break
+                }
+            }
+        }
+    }
+
     public pagination(paginate: any) {
         this.pageIndex = paginate.pageIndex;
         paginate.length = this.totalItems;
@@ -199,7 +239,7 @@ export class CommissionsComponent implements OnInit {
             confirmButtonText: "Aceptar",
             confirmButtonClass: `upload-${type}`
         }).then(() => {
-            console.log("openSwal", typeUpload)
+            this.searchCommission(this.paginate, this.from, this.to, this.name, this.direction);
         });
     }
 
@@ -223,7 +263,35 @@ export class CommissionsComponent implements OnInit {
         })
     }
 
+    public updateCommission() {
+        let data = {
+            id: this.currentCommission,
+            statusCommission: "Rechazado"
+        }
+
+        this.subscription = this.link.updateCommission(data).subscribe((resp: ResponseService) => {
+            this.openSnackBar(resp.userMessage, "Cerrar");
+            this.dialog.closeAll()
+            this.searchCommission(this.paginate, this.from, this.to, this.name, this.direction);
+        })
+    }
+
+    public deleteCommission() {
+        let data = {
+            id: this.currentCommission
+        }
+
+        this.subscription = this.link.deleteCommission(data).subscribe((resp: ResponseService) => {
+            this.openSnackBar(resp.userMessage, "Cerrar");
+            this.dialog.closeAll()
+            this.searchCommission(this.paginate, this.from, this.to, this.name, this.direction);
+        })
+    }
+
     onNoClick(): void {
-        this.dialog.closeAll();
+        const close:any = document.querySelector(`#${this.typeConfirm} #closeDialog`)
+        if (close) {
+            close.click()
+        }
     }
 }

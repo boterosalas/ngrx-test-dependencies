@@ -80,18 +80,30 @@ export class UtilsService {
     const token = localStorage.getItem("ACCESS_TOKEN");
     // decode the token to get its payload
     const tokenPayload = decode(token);
-    this.auth.getPermisionByUser(tokenPayload.userid).subscribe((resp) => {
+    this.auth.getPermisionByUser(tokenPayload.userid).subscribe((respByUser) => {
       let ubication = location.href;
       let route = ubication.split("/");
       let routeslite = '/' + route[route.length - 1];
-      for (let index = 0; index < resp.length; index++) {
-        if (resp[index].route === routeslite) {
-          if (resp[index].permission === true) {
-            //return true;
-          } else if (resp[index].permission === false) {
-            this.router.navigate(["configuracion"]);
+
+      const infoRoute = respByUser.find(x => x.route === routeslite)
+
+      if (infoRoute) {
+        this.user.getPermision().subscribe((respPermision) => {
+          if (respPermision.state === "Success") {
+            const permisions = respPermision.objectResponse;
+  
+            if(permisions) {
+              const permissionUser = permisions.find(x => x.userid === tokenPayload.userid)
+              if (permissionUser && permissionUser.permissions) {
+                const permissionRoute = permissionUser.permissions.find(x => x.menuid === infoRoute.idmenu)
+
+                if (!permissionRoute || !permissionRoute.value) {
+                  this.router.navigate(["configuracion"])
+                }
+              }
+            }
           }
-        }
+        })
       }
     })
   }

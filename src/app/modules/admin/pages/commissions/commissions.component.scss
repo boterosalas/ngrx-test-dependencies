@@ -108,3 +108,95 @@ input[type="file"] {
   padding-left: 35px !important;
   font-family: $font-galano !important;
 }
+
+.border-bottom-gray {
+  border-bottom: 1px solid #352767;
+}
+
+.title-name {
+  font-family: $font-galano-bold;
+  font-size: 20px;
+  color: $primary-color;
+
+  strong {
+    color: #878195;
+  }
+}
+
+.dataColumn {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin-right: 20px;
+
+  h3 {
+    margin: 16px 0 5px;
+    font-size: 16px;
+  }
+}
+
+.dataInfo {
+  box-sizing: border-box;
+  margin: 8px 0 0;
+
+  span {
+    display: block;
+    font-family: $font-galano-bold;
+    color: $gray4;
+    font-size: 12px;
+
+    &:first-of-type {
+      text-transform: uppercase;
+    }
+  }
+
+  .normal-text {
+    color: $primary-color;
+    font-size: 14px;
+    font-family: $font-family-sans-serif;
+  }
+}
+
+.pb-25 {
+  padding-bottom: 25px;
+}
+
+.rejected-button {
+  background-color: $third-color;
+  padding: 5px 26px;
+  color: white;
+}
+
+.eliminated-button {
+  background-color: $secondary-color;
+  padding: 5px 26px;
+  color: white;
+}
+
+.users-table.commissions-table {
+  .link-style {
+    color: $purple2;
+    text-decoration: underline;
+  }
+
+  th.mat-header-cell, td.mat-cell {
+    padding: 5px 8px;
+  }
+
+  td.mat-cell {
+    font-size: 12px;
+  }
+}
+
+.buttons-container {
+  margin-top: 30px;
+  margin-bottom: 1rem;
+
+  .cancel-button {
+    background-color: transparent;
+    border: none;
+    margin-right: 20px;
+  }
+}

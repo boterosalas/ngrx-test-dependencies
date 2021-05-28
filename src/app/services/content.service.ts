@@ -1008,7 +1008,7 @@ export class ContentService {
 
   public getCommissionsSearch(term?: any) {
     return this.http
-      .get(`${this.urlComission + this.apiCommissions}?searchText=${term.term}&from=${term.from}&to=${term.to}&orderBy=${term.orderOrigin}&ordination=${term.orderBy}`, this.httpOptions)
+      .get(`${this.urlComission + this.apiCommissions}?start=${term.start}&end=${term.end}&searchText=${term.term}&from=${term.from}&to=${term.to}&orderBy=${term.orderOrigin}&ordination=${term.orderBy}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
