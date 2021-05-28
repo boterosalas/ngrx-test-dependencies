@@ -79,9 +79,18 @@ export class ContentService {
   apiGetStories = "story/getstories";
   apiSaveStories = "story/savestories";
   apiDeleteStories = "story/deletestories";
-  apiSaveVisitStory = "story/savevisitstory"
+  apiSaveVisitStory = "story/savevisitstory";
+  apiFooter = "footer/getfooter";
   apiCommissions = "commissions/getcommissions"
   sendSearch = {};
+
+  public getFooter() {
+    return this.http.get(`${this.url + this.apiFooter}`, this.httpOptions).pipe(
+      map((user: ResponseService) => {
+        return user.objectResponse;
+      })
+    );
+  }
 
   public getNews() {
     return this.http.get(`${this.url + this.apiNews}`, this.httpOptions).pipe(
