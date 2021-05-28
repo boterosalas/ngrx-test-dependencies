@@ -75,6 +75,7 @@ export class UserService {
   apiSavePermision = "userprofile/savepermissions";
   apiGetPermision = "userprofile/getpermissions";
   apiCreateUserAdmin = "userprofile/createuseradmin"
+  apiUserInfoAditional = "userprofile/getuserinfoaditional"
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
@@ -767,6 +768,23 @@ export class UserService {
       .post(
         `${this.url}${this.apiCreateUserAdmin}`,
         data,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+  }
+
+  public getUserInfoAditional(userId) {
+    return this.http
+      .get(
+        `${this.url}${this.apiUserInfoAditional}?userid=${userId}`,
         this.httpOptions
       )
       .pipe(

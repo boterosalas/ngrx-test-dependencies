@@ -179,7 +179,6 @@ export class CommissionsComponent implements OnInit {
         }
     
         this.subscription = this.link.getReportRejected(date).subscribe((resp: ResponseService) => {
-            console.log("getReportRejected",resp)
             this.openSnackBar(resp.userMessage, "Cerrar");
         })
     }
