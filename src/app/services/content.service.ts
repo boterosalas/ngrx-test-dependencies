@@ -81,6 +81,7 @@ export class ContentService {
   apiDeleteStories = "story/deletestories";
   apiSaveVisitStory = "story/savevisitstory";
   apiFooter = "footer/getfooter";
+  apiCommissions = "commissions/getcommissions"
   sendSearch = {};
 
   public getFooter() {
@@ -1012,6 +1013,22 @@ export class ContentService {
           return result;
         })
       );
+  }
+
+  public getCommissionsSearch(term?: any) {
+    return this.http
+      .get(`${this.urlComission + this.apiCommissions}?start=${term.start}&end=${term.end}&searchText=${term.term}&from=${term.from}&to=${term.to}&orderBy=${term.orderOrigin}&ordination=${term.orderBy}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((result: ResponseService) => {
+          return result;
+        }));
   }
 
 }

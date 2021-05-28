@@ -4,22 +4,33 @@
   imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
 ></app-banner>
 <div class="container m-t4 fade-in">
-  <!-- <div class="mt-4 container-forms" fxLayout="row">
-    <div class="ml-4 downloadUsers user-transactions">
-      <form class="form-relative" [formGroup]="dateForm">
+  <div class="mt-4 container-forms" fxLayout="row">
+    <div class="downloadUsers user-transactions">
+      <form class="form-relative" [formGroup]="dateFormCommission">
         <div fxLayout="column">
           <label class="label-up-text" for="picker">RANGO DE FECHAS</label>
-          <div fxLayout="row">
-            <i class="tio-date_range icon-date"></i>
-            <input
-              formControlName="dateRange"
-              [locale]="locale"
-              placeholder="Seleccione fechas"
-              type="text"
-              [maxDate]="maxDate"
-              ngxDaterangepickerMd
-              class="form-control border-input mat-elevation-z1 p-2 border-radius"
-            />
+          <div class="dateRange-container">
+            <div>
+              <i class="tio-date_range icon-date"></i>
+              <input
+                formControlName="dateRange"
+                [locale]="locale"
+                placeholder="Seleccione fechas"
+                type="text"
+                [maxDate]="maxDate"
+                (change)="searchCommission(paginate, from, to, name, direction);"
+                ngxDaterangepickerMd
+                class="form-control border-input mat-elevation-z1 p-2 border-radius"
+              />
+            </div>
+            <div class="download-files">
+              <button (click)="getReportRejected()" class="button-selected-label cursor-pointer">
+                Exportar
+                <i
+                  class="tio-download_from_cloud style-icon icon-update icon-download-file"
+                ></i>
+              </button>
+            </div>
           </div>
         </div>
       </form>
@@ -39,90 +50,89 @@
     <table
       mat-table
       [dataSource]="dataSource"
-      class="users-table"
+      class="users-table commissions-table"
       matSort
       (matSortChange)="sortCommission($event)"
     >
-      <ng-container matColumnDef="idclicker">
+      <ng-container matColumnDef="identification">
         <th
           mat-header-cell
           class="pl-3"
           *matHeaderCellDef
-          style="width: 9%"
-          mat-sort-header="consecutive"
+          style="width: 10%"
+          mat-sort-header="IDENTIFICATION"
         >
         Cédula
         </th>
         <td mat-cell *matCellDef="let element" class="pl-3">
           <p
-            class="m-0 gray-light text-link cursor-pointer"
-            (click)="openDialog(element)"
+            class="m-0 gray-light"
           >
-            {{ element.consecutive }}
+            {{ element.identification }}
           </p>
         </td>
       </ng-container>
-      <ng-container matColumnDef="subscription">
+      <ng-container matColumnDef="nameuser">
         <th
           class="left-text"
           mat-header-cell
           *matHeaderCellDef
-          style="width: 12%; text-align: left"
-          mat-sort-header="date"
+          style="width: 15%; text-align: left"
+          mat-sort-header="NAME"
         >
           nombre usuario
         </th>
         <td mat-cell *matCellDef="let element" class="text-font">
-          {{ element.date | date: "dd/MM/yyyy" }}
+          {{ element.firstnames }} {{ element.lastnames }}
         </td>
       </ng-container>
-      <ng-container matColumnDef="users">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          style="width: 15%"
-          mat-sort-header="name"
-        >
-          id usuario
-        </th>
-        <td mat-cell *matCellDef="let element: let i=index">
-          <p class="m-0 gray-light text-font">{{ element.name }}</p>
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="identification">
+      <ng-container matColumnDef="idusers">
         <th
           mat-header-cell
           *matHeaderCellDef
           style="width: 10%"
-          mat-sort-header="identification"
+          mat-sort-header="USERID"
+        >
+          id usuario
+        </th>
+        <td mat-cell *matCellDef="let element: let i=index">
+          <p class="m-0 gray-light text-font">{{ element.userid }}</p>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="commissiondate">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          style="width: 12%"
+          mat-sort-header="DATE"
         >
           fecha comisión
         </th>
         <td mat-cell *matCellDef="let element: let i=index">
           <p class="m-0 gray-light text-font-cc">
-            {{ element.identification }}
+            {{ element.commissiongenerationdate | date: "dd/MM/yyyy" }}
           </p>
         </td>
       </ng-container>
-      <ng-container matColumnDef="cellphone">
+      <ng-container matColumnDef="idcommission">
         <th
           mat-header-cell
           *matHeaderCellDef
           style="width: 10%"
-          mat-sort-header="cellphone"
+          mat-sort-header="IDCOMISION"
         >
           id comisión
         </th>
         <td mat-cell *matCellDef="let element" class="text-font">
-          {{ element.cellphone }}
+          <p (click)="openCommission(element)" class="link-style cursor-pointer">{{ element.id }}</p>
         </td>
       </ng-container>
-      <ng-container matColumnDef="email">
+      <ng-container matColumnDef="business">
         <th
           mat-header-cell
           *matHeaderCellDef
-          style="width: 15%"
-          mat-sort-header="email"
+          style="width: 10%"
+          mat-sort-header="BUSINESS"
         >
           negocio
         </th>
@@ -132,16 +142,16 @@
             fxLayout="row"
             fxLayoutAlign="space-between space-between"
           >
-            {{ element.email }}
+            {{ element.business }}
           </span>
         </td>
       </ng-container>
-      <ng-container matColumnDef="status">
+      <ng-container matColumnDef="product">
         <th
           mat-header-cell
           *matHeaderCellDef
-          style="width: 10%"
-          mat-sort-header="status"
+          style="width: 15%"
+          mat-sort-header="PRODUCT"
         >
           producto
         </th>
@@ -151,16 +161,16 @@
             fxLayout="row"
             fxLayoutAlign="space-between space-between"
           >
-            {{ element.email }}
+            {{ element.productname }}
           </span>
         </td>
       </ng-container>
-      <ng-container matColumnDef="status">
+      <ng-container matColumnDef="ordernumber">
         <th
           mat-header-cell
           *matHeaderCellDef
-          style="width: 10%"
-          mat-sort-header="status"
+          style="width: 12%"
+          mat-sort-header="ORDERID"
         >
           No. orden
         </th>
@@ -170,7 +180,7 @@
             fxLayout="row"
             fxLayoutAlign="space-between space-between"
           >
-            {{ element.email }}
+            {{ element.orderid }}
           </span>
         </td>
       </ng-container>
@@ -182,16 +192,16 @@
         *matRowDef="let row; columns: displayedColumns; let i = index"
       ></tr>
     </table>
-    <div class="mt-3">
+    <div class="paging-table-transparent mt-3">
       <mat-paginator
         [length]="totalItems"
         [pageSize]="pageSize"
-        [pageSizeOptions]="[50]"
+        [pageSizeOptions]="[20]"
         [pageIndex]="pageIndex"
         (page)="pagination($event)"
       ></mat-paginator>
     </div>
-  </div> -->
+  </div>
   <div class="import-files">
     <h3>Importar archivo de comisiones</h3>
     <div class="upload-files">
@@ -226,13 +236,89 @@
         />
       </span>
     </div>
-    <div class="download-files">
-      <button (click)="getReportRejected()" class="button-selected-label cursor-pointer">
-        Exportar
-        <i
-          class="tio-download_from_cloud style-icon icon-update icon-download-file"
-        ></i>
-      </button>
-    </div>
   </div>
 </div>
+
+<ng-template #templateAdditionalInfo>
+  <div
+    fxLayout="column"
+    fxLayoutAlign="center"
+    class="border-bottom-gray border-blue"
+  >
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <h3 class="mb-3 title-name">
+        <strong> No. de comisión: </strong> {{ currentCommission || '-' }}
+      </h3>
+    </div>
+  </div>
+  <div fxLayout="row" class="border-bottom-gray pb-25">
+    <div 
+      *ngFor="let data of dataAdditionalInfoValue; let i = index"
+      class="dataColumn"
+    >
+      <h3>{{data.column}}</h3>
+      <p 
+        *ngFor="let info of data.info; let e = index"
+        class="dataInfo margin-zero-bottom"
+      >
+        <span class="galano-bold gray w-label">{{info.name}}</span>
+        <span class="normal-text">{{
+          info.value || '-'
+        }}</span>
+      </p>
+    </div>
+  </div>
+  <div class="mt-3 mb-3" fxLayout="row" fxLayoutAlign="end">
+    <button
+      mat-raised-button
+      color="orange"
+      (click)="openConfirm('rejected-commission')"
+      id="rejected-button"
+      class="ml-2 rejected-button"
+    >
+      Rechazar comisión
+    </button>
+    <button
+      mat-raised-button
+      color="orange"
+      (click)="openConfirm('eliminated-commission')"
+      id="eliminated-button"
+      class="ml-2 eliminated-button"
+    >
+      Eliminar comisión
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #templateConfirm>
+  <p>{{ textConfirm }}</p>
+  <div class="buttons-container" fxLayout="row" fxLayoutAlign="center">
+    <button
+      color="orange"
+      (click)="onNoClick()"
+      class="ml-2 cancel-button cursor-pointer"
+    >
+      Cancelar
+    </button>
+    <button
+      *ngIf="typeConfirm === 'rejected-commission'"
+      mat-raised-button
+      color="orange"
+      (click)="updateCommission()"
+      id="rejected-button"
+      class="ml-2 rejected-button"
+    >
+      Rechazar comisión
+    </button>
+    <button
+      *ngIf="typeConfirm === 'eliminated-commission'"
+      mat-raised-button
+      color="orange"
+      (click)="deleteCommission()"
+      id="eliminated-button"
+      class="ml-2 eliminated-button"
+    >
+      Eliminar comisión
+    </button>
+  </div>
+</ng-template>

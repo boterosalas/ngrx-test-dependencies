@@ -53,6 +53,9 @@ export class LinksService {
   apiLinkHistory = "linkhistory/getlinkhistory";
   apiupdatePaymentDate = "commissions/updatePaymentDate";
   apiUpdateStatusCommissionFile = "commissions/updatestatuscommissionfile";
+  apiUpdateStatusCommission = "commissions/updatestatuscommission";
+  apiDeleteCommissionFile = "commissions/deletecommissionfile";
+  apiDeleteCommission = "commissions/deletecommission";
   apiGetReferrals = "referrals/getreferrals";
   apiGetAmounts = "amount/getamounts";
   apiSaveAmountCommission = "amount/saveamountcommission";
@@ -721,6 +724,34 @@ export class LinksService {
       );
   }
 
+  public deleteCommissionFile(formdata) {
+    let httpOptionsForm = {
+      headers: new HttpHeaders({
+        Authorization: "Bearer " + this.authorization,
+        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      }),
+    };
+
+    return this.http
+      .post(
+        `${environment.URL_COMISSION}${this.apiDeleteCommissionFile}`,
+        formdata,
+        httpOptionsForm
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((resp: ResponseService) => {
+          return resp;
+        })
+      );
+  }
+
   public getReportRejected(date: any) {
     return this.http.get(`${this.ulrReport}${this.apiReportRejected}?start=${date.start}&end=${date.end}`, this.httpOptions).pipe(
       retryWhen((errors) =>
@@ -734,5 +765,47 @@ export class LinksService {
         return resp;
       })
     );
+  }
+
+  public updateCommission(data) {
+    return this.http
+      .post(
+        `${environment.URL_COMISSION}${this.apiUpdateStatusCommission}`,
+        data,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((resp: ResponseService) => {
+          return resp;
+        })
+      );
+  }
+
+  public deleteCommission(data) {
+    return this.http
+      .post(
+        `${environment.URL_COMISSION}${this.apiDeleteCommission}`,
+        data,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((resp: ResponseService) => {
+          return resp;
+        })
+      );
   }
 }

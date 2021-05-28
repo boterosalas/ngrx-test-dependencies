@@ -56,7 +56,6 @@ export class DeleteformComponent implements OnInit {
   ngOnInit() {
     this.subscription = this.user.userInfo$.subscribe((val) => {
       if (!!val) {
-        console.log(val)
         this.name = val.firstNames;
       }
     });
