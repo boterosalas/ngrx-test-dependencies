@@ -2,14 +2,41 @@
 @import "general";
 
 .table-container {
-  overflow-x: auto;
+  overflow: auto;
   margin: 40px 0 30px;
+  max-height: 65vh;
+  min-height: 420px;
+  position: relative;
+  width: 100%;
 
   .highlighted-column {
     background-color: #FFDEB8;
     color: #D8821D !important;
   }
 }
+
+table.setting th:first-of-type,
+table.setting tr td:first-of-type {
+  position: sticky;
+  left: 0;
+  z-index: 6;
+}
+
+table.setting tr td:first-of-type {
+  background-color: white;
+}
+
+table.setting th {
+  position: sticky;
+  top: 0;
+  z-index: 6;
+  background-color: #f3f1f6;
+
+  &:first-of-type {
+    z-index: 10;
+  }
+}
+
 .user-container {
   p {
     margin: 0;
