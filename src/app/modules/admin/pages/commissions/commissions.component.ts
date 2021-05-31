@@ -9,7 +9,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { LinksService } from 'src/app/services/links.service';
 import { ContentService } from 'src/app/services/content.service';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
-import { dataAdditionalInfo } from '../../../../services/content/content-aditional-info-commissions'
+import { dataAdditionalInfo } from '../../../../content/content-aditional-info-commissions'
 import Swal from "sweetalert2";
 moment.locale("es");
 @Component({
