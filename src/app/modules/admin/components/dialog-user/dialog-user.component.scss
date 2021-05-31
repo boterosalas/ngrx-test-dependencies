@@ -291,13 +291,14 @@ a {
     justify-content: center;
     padding: 8px;
     border-radius: 10px;
-    width: 300px;
-    max-height: 200px;
+    max-width: 350px;
+    max-height: 350px;
     box-shadow: 0px 16px 16px #0000001a;
     background-color: white;
 
     img {
-      width: 100%;
+      max-width: 300px;
+      max-height: 300px;
       object-fit: contain;
       object-position: center;
     }
