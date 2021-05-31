@@ -49,7 +49,8 @@ describe("UsersComponent", () => {
     "comunitcations",
     "verifiedUser",
     "getReportCommets",
-    "getDeleteCommetsRest"
+    "getDeleteCommetsRest",
+    "getUserInfoAditional"
   ]);
 
   const dataUser = {
@@ -90,6 +91,18 @@ describe("UsersComponent", () => {
     userMessage: 'se ha enviado un correo a test@h.com',
     objectResponse: [
     ]
+  };
+
+  const getUserInfoAditional = {
+    state: "Success",
+    userMessage: null,
+    objectResponse: [{
+      id: 1,
+      userid: 109,
+      bankcertificate: "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACgcHiMeGSgjISMtKygw",
+      identificationcard1: "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACgcHiMeGSgjISMtKygw",
+      identificationcard2: "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACgcHiMeGSgjISMtKygw"
+    }]
   };
 
   const dataUsers = [
@@ -200,6 +213,7 @@ describe("UsersComponent", () => {
     mockUserService.verifiedUser.and.returnValue(of(getUserExcel))
     mockUserService.getReportCommets.and.returnValue(of(getUserExcel))
     mockUserService.getDeleteCommetsRest.and.returnValue(of(getUserExcel))
+    mockUserService.getUserInfoAditional.and.returnValue(of(getUserInfoAditional))
     //mockUserService.getExternalUser.and.returnValue(of(getUserExcel));verifiedUser
     fixture = TestBed.createComponent(UsersComponent);
     component = fixture.componentInstance;
@@ -235,6 +249,7 @@ describe("UsersComponent", () => {
   it("modal data", () => {
     component.userData(dataUsers);
     expect(dataUsers).not.toBeUndefined();
+    expect(mockUserService.getUserInfoAditional).toHaveBeenCalled();
   });
 
   it('pagination', () => {
