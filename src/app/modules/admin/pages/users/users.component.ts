@@ -255,6 +255,18 @@ export class UsersComponent extends MatPaginatorIntl
   }
 
   public userData(user) {
+    let fileIdentificationCard1 = user.maxthumbnaildateidentificationcard1;
+    let fileIdentificationCard2 = user.maxthumbnaildateidentificationcard2;
+    let fileBankCertificate = user.MaxThumbnailDateBankCertificate;
+
+    this.subscription = this.usersService.getUserInfoAditional(user.userId).subscribe((resp: ResponseService) => {
+      if (resp.state === "Success") {
+        fileIdentificationCard1 = resp.objectResponse.identificationcard1;
+        fileIdentificationCard2 = resp.objectResponse.identificationcard2;
+        fileBankCertificate = resp.objectResponse.bankcertificate;
+      }
+    })
+
     const userId = user.userId;
     const identification = user.identification;
     const name = user.firstNames;
@@ -270,9 +282,9 @@ export class UsersComponent extends MatPaginatorIntl
     let receiveCommunications = user.receiveCommunications;
     let isEmployeeGrupoExito = user.isEmployeeGrupoExito;
     let verified = user.verified;
-    const fileIdentificationCard1 = user.maxthumbnaildateidentificationcard1;
-    const fileIdentificationCard2 = user.maxthumbnaildateidentificationcard2;
-    const fileBankCertificate = user.MaxThumbnailDateBankCertificate;
+    // const fileIdentificationCard1 = user.maxthumbnaildateidentificationcard1;
+    // const fileIdentificationCard2 = user.maxthumbnaildateidentificationcard2;
+    // const fileBankCertificate = user.MaxThumbnailDateBankCertificate;
     const dateCed1 = user.maxdateidentificationcard1;
     const dateCed2 = user.maxdateidentificationcard2;
     const dateCertBank = user.maxdatebankcertificate;
