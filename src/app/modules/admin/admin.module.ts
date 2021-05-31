@@ -56,6 +56,7 @@ import { MatPasswordStrengthModule } from "@angular-material-extensions/password
 import { NavigationFooterComponent } from './components/navigation-footer/navigation-footer.component';
 import { NavigationGroupComponent } from './components/navigation-group/navigation-group.component';
 import { NavigationItemComponent } from './components/navigation-item/navigation-item.component';
+import { DialogNavigationGroupComponent } from './components/dialog-navigation-group/dialog-navigation-group.component';
 
 const routes: Routes = [
   {
@@ -300,7 +301,8 @@ const routes: Routes = [
     NavigationComponent,
     NavigationFooterComponent,
     NavigationGroupComponent,
-    NavigationItemComponent
+    NavigationItemComponent,
+    DialogNavigationGroupComponent
   ],
   imports: [
     AngularEditorModule,
@@ -345,7 +347,7 @@ const routes: Routes = [
     })
   ],
   exports: [SideMenuComponent],
-  entryComponents: [DialogUserComponent, DialogCategoryComponent, DialogNewsComponent, DialogVideoPlayerComponent],
+  entryComponents: [DialogUserComponent, DialogCategoryComponent, DialogNewsComponent, DialogVideoPlayerComponent, DialogNavigationGroupComponent],
   providers: [{ provide: MatPaginatorIntl, useClass: UsersComponent }]
 })
 export class AdminModule { }

@@ -6,7 +6,26 @@
     <P>ACCIONES</P>
   </header>
   <div class="navigation-footer__content">
-    <app-navigation-group *ngFor="let section of sectionsLinks" [section]="section">
+    <app-navigation-group
+      *ngFor="let section of sectionsLinks"
+      [section]="section"
+    >
     </app-navigation-group>
+
+    <div
+      fxLayout="row"
+      fxLayoutAlign.gt-xs="end center"
+      fxLayoutAlign.xs="center center"
+      class="container button-padding mb-4"
+    >
+      <button
+        mat-raised-button
+        color="orange"
+        (click)="addSection()"
+        class="ml-2"
+      >
+        Nuevo grupo
+      </button>
+    </div>
   </div>
 </div>
