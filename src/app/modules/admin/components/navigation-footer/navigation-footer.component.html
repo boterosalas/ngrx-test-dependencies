@@ -6,12 +6,7 @@
     <P>ACCIONES</P>
   </header>
   <div class="navigation-footer__content">
-    <app-navigation-group></app-navigation-group>
-
-    <app-navigation-group></app-navigation-group>
-
-    <app-navigation-group></app-navigation-group>
-
-
+    <app-navigation-group *ngFor="let section of sectionsLinks" [section]="section">
+    </app-navigation-group>
   </div>
 </div>

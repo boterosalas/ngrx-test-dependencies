@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-navigation-group',
@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationGroupComponent implements OnInit {
 
+  @Input() section: any;
+
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }
