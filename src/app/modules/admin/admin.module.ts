@@ -57,6 +57,7 @@ import { NavigationFooterComponent } from './components/navigation-footer/naviga
 import { NavigationGroupComponent } from './components/navigation-group/navigation-group.component';
 import { NavigationItemComponent } from './components/navigation-item/navigation-item.component';
 import { DialogNavigationGroupComponent } from './components/dialog-navigation-group/dialog-navigation-group.component';
+import { DialogNavigationItemComponent } from './components/dialog-navigation-item/dialog-navigation-item.component';
 
 const routes: Routes = [
   {
@@ -302,7 +303,8 @@ const routes: Routes = [
     NavigationFooterComponent,
     NavigationGroupComponent,
     NavigationItemComponent,
-    DialogNavigationGroupComponent
+    DialogNavigationGroupComponent,
+    DialogNavigationItemComponent
   ],
   imports: [
     AngularEditorModule,
@@ -347,7 +349,7 @@ const routes: Routes = [
     })
   ],
   exports: [SideMenuComponent],
-  entryComponents: [DialogUserComponent, DialogCategoryComponent, DialogNewsComponent, DialogVideoPlayerComponent, DialogNavigationGroupComponent],
+  entryComponents: [DialogUserComponent, DialogCategoryComponent, DialogNewsComponent, DialogVideoPlayerComponent, DialogNavigationGroupComponent, DialogNavigationItemComponent],
   providers: [{ provide: MatPaginatorIntl, useClass: UsersComponent }]
 })
 export class AdminModule { }

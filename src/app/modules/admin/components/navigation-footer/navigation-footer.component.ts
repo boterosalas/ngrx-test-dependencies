@@ -39,5 +39,5 @@ export class NavigationFooterComponent implements OnInit {
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
       // this.getContentBussiness();
     });
-  }
+  }  
 }

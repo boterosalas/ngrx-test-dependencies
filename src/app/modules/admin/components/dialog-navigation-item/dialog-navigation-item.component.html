@@ -1,4 +1,4 @@
-<div class="dialog-navigation-group">
+<div class="dialog-navigation-item">
   <h3 title-name>{{ data.title }}</h3>
 
   <div mat-dialog-content>
@@ -10,6 +10,16 @@
           type="text"
           placeholder="NOMBRE"
           formControlName="description"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          id="link"
+          type="text"
+          placeholder="ENLACE"
+          formControlName="link"
         />
       </mat-form-field>
       <div class="dialog-navigation-group__buttons">

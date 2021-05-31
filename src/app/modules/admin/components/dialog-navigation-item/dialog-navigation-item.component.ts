@@ -6,11 +6,11 @@ import { ResponseService } from "src/app/interfaces/response";
 import { ContentService } from "src/app/services/content.service";
 
 @Component({
-  selector: "app-dialog-navigation-group",
-  templateUrl: "./dialog-navigation-group.component.html",
-  styleUrls: ["./dialog-navigation-group.component.scss"],
+  selector: "app-dialog-navigation-item",
+  templateUrl: "./dialog-navigation-item.component.html",
+  styleUrls: ["./dialog-navigation-item.component.scss"],
 })
-export class DialogNavigationGroupComponent implements OnInit {
+export class DialogNavigationItemComponent implements OnInit {
   private subscription: Subscription = new Subscription();
 
   dateForm: FormGroup;
@@ -23,17 +23,26 @@ export class DialogNavigationGroupComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loadSection();
+    this.loadItem();
   }
 
-  public loadSection() {
+  public loadItem() {
     if (this.data.edit === 1) {
       this.dateForm = this.fb.group({
+        id: [this.data.id, Validators.required],
+        idseccion: [this.data.idseccion, Validators.required],
+        link: [this.data.link, Validators.required],
         description: [this.data.description, Validators.required],
+        orderby: [this.data.orderby, Validators.required],
+        date: [this.data.date, Validators.required],
       });
     } else {
       this.dateForm = this.fb.group({
+        idseccion: [null, Validators.required],
+        link: [null, Validators.required],
         description: [null, Validators.required],
+        orderby: [null, Validators.required],
+        date: [null, Validators.required],
       });
     }
   }
@@ -42,26 +51,7 @@ export class DialogNavigationGroupComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public saveSection() {
-    let section;
-    if (this.data.edit === 0) {
-      section = {
-        description: this.dateForm.controls.description.value,
-      };
-    } else {
-      section = {
-        id: this.data.id,
-        description: this.dateForm.controls.description.value,
-      };
-    }
-    this.content
-      .saveFooterSection(section)
-      .subscribe((resp: ResponseService) => {
-        if (resp.state === "Success") {
-          this.dialogRef.close();
-        } else {
-          console.log("Upss Hubo un problema vuelve a intentarlo");
-        }
-      });
+  public saveItem() {
+    console.log("saveItem");
   }
 }

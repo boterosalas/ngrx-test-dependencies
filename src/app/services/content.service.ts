@@ -82,11 +82,29 @@ export class ContentService {
   apiSaveVisitStory = "story/savevisitstory";
   apiFooter = "footer/getfooter";
   apiSaveFooterSection = "footer/savefooterseccion";
+  apiDeleteFooterSection = "footer/deletefooterseccions";
   sendSearch = {};
+
+  public deleteFooterSection(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiDeleteFooterSection}`, datos , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
 
   public saveFooterSection(datos: any) {
     return this.http
-      .post(`${this.url + this.apiSaveFooterSection}`, datos, this.httpOptions)
+      .post(`${this.url + this.apiSaveFooterSection}`, datos , this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
