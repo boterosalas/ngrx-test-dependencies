@@ -1,3 +1,5 @@
+@import "variables";
+
 .navigation-footer {
   border-radius: 5px;
   margin-top: 2rem;
@@ -19,4 +21,37 @@
     row-gap: 1rem;
     padding: 1rem;
   }
+}
+
+.delete-container {
+  max-width: 400px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.title_delete {
+  color: #f21905;
+}
+
+.text-container {
+  padding: 0 1rem;
+}
+
+.button_cancel {
+  color: #37236a;
+  font-weight: bold;
+  background-color: transparent;
+}
+
+.style-icon {
+  font-size: 22px;
+  color: $purple2;
+}
+
+.style-icon-delete {
+  font-size: 22px;
+  color: #fd5555;
 }

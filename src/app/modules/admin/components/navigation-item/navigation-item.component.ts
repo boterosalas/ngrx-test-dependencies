@@ -31,19 +31,20 @@ export class NavigationItemComponent implements OnInit {
   ngOnInit() {}
 
   public editNavigationItem() {
-    const id = this.link.id;
-    const title = "Editar acceso";
-    const buttonName = "Guardar";
-    const edit = 1;
-    const description = this.link.description;
+    const data = {
+      title: "Editar acceso",
+      buttonName: "Guardar",
+      edit: 1,
+      id: this.link.id,
+      idseccion: this.link.idseccion,
+      link: this.link.link,
+      description: this.link.description,
+      orderby: this.link.orderby,
+      date: this.link.date,
+    };
+
     const dialogRef1 = this.dialog.open(DialogNavigationItemComponent, {
-      data: {
-        id,
-        title,
-        buttonName,
-        edit,
-        description,
-      },
+      data: data,
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
       // this.getContentBussiness();
