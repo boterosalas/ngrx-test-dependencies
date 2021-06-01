@@ -255,18 +255,6 @@ export class UsersComponent extends MatPaginatorIntl
   }
 
   public userData(user) {
-    let fileIdentificationCard1 = user.maxthumbnaildateidentificationcard1;
-    let fileIdentificationCard2 = user.maxthumbnaildateidentificationcard2;
-    let fileBankCertificate = user.MaxThumbnailDateBankCertificate;
-
-    this.subscription = this.usersService.getUserInfoAditional(user.userId).subscribe((resp: ResponseService) => {
-      if (resp.state === "Success") {
-        fileIdentificationCard1 = resp.objectResponse.identificationcard1;
-        fileIdentificationCard2 = resp.objectResponse.identificationcard2;
-        fileBankCertificate = resp.objectResponse.bankcertificate;
-      }
-    })
-
     const userId = user.userId;
     const identification = user.identification;
     const name = user.firstNames;
@@ -282,9 +270,6 @@ export class UsersComponent extends MatPaginatorIntl
     let receiveCommunications = user.receiveCommunications;
     let isEmployeeGrupoExito = user.isEmployeeGrupoExito;
     let verified = user.verified;
-    // const fileIdentificationCard1 = user.maxthumbnaildateidentificationcard1;
-    // const fileIdentificationCard2 = user.maxthumbnaildateidentificationcard2;
-    // const fileBankCertificate = user.MaxThumbnailDateBankCertificate;
     const dateCed1 = user.maxdateidentificationcard1;
     const dateCed2 = user.maxdateidentificationcard2;
     const dateCertBank = user.maxdatebankcertificate;
@@ -314,77 +299,85 @@ export class UsersComponent extends MatPaginatorIntl
     } else {
       isEmployeeGrupoExito = false;
     }
-    const dialogRef = this.dialog.open(DialogUserComponent, {
 
-      data: {
-        userId,
-        identification,
-        name,
-        lastNames,
-        cellphone,
-        email,
-        address,
-        bank,
-        typeBankAccount,
-        bankAccountNumber,
-        account,
-        state,
-        receiveCommunications,
-        isEmployeeGrupoExito,
-        verified,
-        fileIdentificationCard1,
-        fileIdentificationCard2,
-        fileBankCertificate,
-        dateCed1,
-        dateCed2,
-        dateCertBank,
-        AntdateCed1,
-        AntdateCed2,
-        AntdateCertBank,
-        extensionIdentificationCard1,
-        extensionIdentificationCard2,
-        extensionBankCertificate,
-        responseAccountBank
-      }
-    });
+    this.subscription = this.usersService.getUserInfoAditional(user.userId).subscribe((resp: ResponseService) => {
+      if (resp.state === "Success") {
+        const fileIdentificationCard1 = resp.objectResponse.identificationcard1;
+        const fileIdentificationCard2 = resp.objectResponse.identificationcard2;
+        const fileBankCertificate = resp.objectResponse.bankcertificate;
 
-    this.subscription = dialogRef.componentInstance.state.subscribe(event => {
-      if (event.target.checked === false) {
-        this.changeStateUser(userId, event.target.checked);
-      } else {
-        if (event.target.checked === true) {
-          this.changeStateUser(userId, event.target.checked);
-        }
-      }
-    });
-
-    this.subscription = dialogRef.componentInstance.comunications.subscribe(
-      event => {
-        if (event.target.checked === false) {
-          this.changeComunications(userId, event.target.checked);
-        } else {
-          if (event.target.checked === true) {
-            this.changeComunications(userId, event.target.checked);
+        const dialogRef = this.dialog.open(DialogUserComponent, {
+          data: {
+            userId,
+            identification,
+            name,
+            lastNames,
+            cellphone,
+            email,
+            address,
+            bank,
+            typeBankAccount,
+            bankAccountNumber,
+            account,
+            state,
+            receiveCommunications,
+            isEmployeeGrupoExito,
+            verified,
+            fileIdentificationCard1,
+            fileIdentificationCard2,
+            fileBankCertificate,
+            dateCed1,
+            dateCed2,
+            dateCertBank,
+            AntdateCed1,
+            AntdateCed2,
+            AntdateCertBank,
+            extensionIdentificationCard1,
+            extensionIdentificationCard2,
+            extensionBankCertificate,
+            responseAccountBank
           }
-        }
+        });
+    
+        this.subscription = dialogRef.componentInstance.state.subscribe(event => {
+          if (event.target.checked === false) {
+            this.changeStateUser(userId, event.target.checked);
+          } else {
+            if (event.target.checked === true) {
+              this.changeStateUser(userId, event.target.checked);
+            }
+          }
+        });
+    
+        this.subscription = dialogRef.componentInstance.comunications.subscribe(
+          event => {
+            if (event.target.checked === false) {
+              this.changeComunications(userId, event.target.checked);
+            } else {
+              if (event.target.checked === true) {
+                this.changeComunications(userId, event.target.checked);
+              }
+            }
+          }
+        );
+    
+        this.subscription = dialogRef.componentInstance.verified.subscribe(
+          value => {
+            this.changeVerified(userId, value);
+          }
+        );
+    
+        this.subscription = dialogRef.componentInstance.downloadFiles.subscribe(
+          data => {
+            this.downloadFiles(data);
+          }
+        );
+    
+        this.subscription = dialogRef.beforeClosed().subscribe(() => {
+          this.searchUser(this.paginate);
+        });
       }
-    );
-
-    this.subscription = dialogRef.componentInstance.verified.subscribe(
-      value => {
-        this.changeVerified(userId, value);
-      }
-    );
-
-    this.subscription = dialogRef.componentInstance.downloadFiles.subscribe(
-      data => {
-        this.downloadFiles(data);
-      }
-    );
-
-    this.subscription = dialogRef.beforeClosed().subscribe(() => {
-      this.searchUser(this.paginate);
-    });
+    })
   }
 
   private downloadFiles(data) {
