@@ -4,6 +4,8 @@ import {
   OnInit,
   TemplateRef,
   ViewChild,
+  EventEmitter,
+  Output,
 } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material";
 import { Subscription } from "rxjs";
@@ -19,6 +21,9 @@ import { DialogNavigationItemComponent } from "../dialog-navigation-item/dialog-
 })
 export class NavigationItemComponent implements OnInit {
   @Input() link: any;
+  @Output() editItem = new EventEmitter<any>();
+  @Output() deleteItem = new EventEmitter<any>();
+  
   dialogRef: MatDialogRef<any>;
 
   private subscription: Subscription = new Subscription();
@@ -31,24 +36,7 @@ export class NavigationItemComponent implements OnInit {
   ngOnInit() {}
 
   public editNavigationItem() {
-    const data = {
-      title: "Editar acceso",
-      buttonName: "Guardar",
-      edit: 1,
-      id: this.link.id,
-      idseccion: this.link.idseccion,
-      link: this.link.link,
-      description: this.link.description,
-      orderby: this.link.orderby,
-      date: this.link.date,
-    };
-
-    const dialogRef1 = this.dialog.open(DialogNavigationItemComponent, {
-      data: data,
-    });
-    this.subscription = dialogRef1.beforeClosed().subscribe(() => {
-      // this.getContentBussiness();
-    });
+    this.editItem.emit(this.link);
   }
 
   public openDeleteNavigationSection() {

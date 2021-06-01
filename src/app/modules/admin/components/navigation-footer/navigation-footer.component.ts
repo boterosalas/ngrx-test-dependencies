@@ -5,6 +5,7 @@ import { ContentService } from "src/app/services/content.service";
 import { DialogNavigationGroupComponent } from "../dialog-navigation-group/dialog-navigation-group.component";
 import { ResponseService } from "src/app/interfaces/response";
 import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
+import { DialogNavigationItemComponent } from "../dialog-navigation-item/dialog-navigation-item.component";
 
 @Component({
   selector: "app-navigation-footer",
@@ -18,6 +19,7 @@ export class NavigationFooterComponent implements OnInit {
   templateDelete: TemplateRef<any>;
   dialogRef: MatDialogRef<any>;
   currentSection: any;
+  currentLink: any;
 
   constructor(private content: ContentService, private dialog: MatDialog) {}
 
@@ -91,5 +93,27 @@ export class NavigationFooterComponent implements OnInit {
           console.log("Upss Hubo un problema vuelve a intentarlo");
         }
       });
+  }
+
+  public editNavigationItem(item: any) {
+    console.log("editNavigationItem");
+    const data = {
+      title: "Editar acceso",
+      buttonName: "Guardar",
+      edit: 1,
+      id: item.id,
+      idseccion: item.idseccion,
+      link: item.link,
+      description: item.description,
+      orderby: item.orderby,
+      date: item.date,
+    };
+
+    const dialogRef1 = this.dialog.open(DialogNavigationItemComponent, {
+      data: data,
+    });
+    this.subscription = dialogRef1.beforeClosed().subscribe(() => {
+      this.getSections();
+    });
   }
 }

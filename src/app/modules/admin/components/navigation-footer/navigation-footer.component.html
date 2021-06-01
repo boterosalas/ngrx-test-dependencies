@@ -7,10 +7,12 @@
   </header>
   <div class="navigation-footer__content">
     <app-navigation-group
-      (editGroup)="(editNavigationGroup($event))"
-      (deleteGroup)="(deleteNavigationGroup($event))"
-      [section]="section"
       *ngFor="let section of sectionsLinks"
+      [section]="section"
+      (editGroup)="editNavigationGroup($event)"
+      (deleteGroup)="deleteNavigationGroup($event)"
+      (editItem)="editNavigationItem($event)"
+      (deleteItem)="deleteNavigationItem($event)"
     >
     </app-navigation-group>
 
@@ -52,7 +54,11 @@
         </button>
       </div>
       <div>
-        <button mat-button class="red" (click)="deleteNavigationSectionService()">
+        <button
+          mat-button
+          class="red"
+          (click)="deleteNavigationSectionService()"
+        >
           <span fxLayoutAlign="center space-between"> Eliminar grupo </span>
         </button>
       </div>

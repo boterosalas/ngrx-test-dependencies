@@ -32,13 +32,13 @@ export class DialogNavigationItemComponent implements OnInit {
         id: [this.data.id, Validators.required],
         idseccion: [this.data.idseccion, Validators.required],
         link: [this.data.link, Validators.required],
-        description: [this.data.description, Validators.required],        
+        description: [this.data.description, Validators.required],
       });
     } else {
       this.dateForm = this.fb.group({
         idseccion: [this.data.idseccion, Validators.required],
         link: [null, Validators.required],
-        description: [null, Validators.required],        
+        description: [null, Validators.required],
       });
     }
   }
@@ -48,6 +48,27 @@ export class DialogNavigationItemComponent implements OnInit {
   }
 
   public saveItem() {
-    console.log("saveItem");
+    let item;
+    if (this.data.edit === 0) {
+      item = {
+        idseccion: this.data.idseccion,
+        link: this.dateForm.controls.link.value,
+        description: this.dateForm.controls.description.value,
+      };
+    } else {
+      item = {
+        id: this.data.id,
+        idseccion: this.data.idseccion,
+        link: this.dateForm.controls.link.value,
+        description: this.dateForm.controls.description.value,
+      };
+    }
+    this.content.saveFooterLink(item).subscribe((resp: ResponseService) => {
+      if (resp.state === "Success") {
+        this.dialogRef.close();
+      } else {
+        console.log("Upss Hubo un problema vuelve a intentarlo");
+      }
+    });
   }
 }

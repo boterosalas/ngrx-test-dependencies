@@ -1,7 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { MatDialog } from "@angular/material";
-import { Subscription } from "rxjs";
-import { ContentService } from "src/app/services/content.service";
 @Component({
   selector: "app-navigation-group",
   templateUrl: "./navigation-group.component.html",
@@ -11,6 +8,8 @@ export class NavigationGroupComponent implements OnInit {
   @Input() section: any;
   @Output() editGroup = new EventEmitter<any>();
   @Output() deleteGroup = new EventEmitter<any>();
+  @Output() editItem = new EventEmitter<any>();
+  @Output() deleteItem = new EventEmitter<any>();
 
   constructor() {}
 
@@ -22,5 +21,14 @@ export class NavigationGroupComponent implements OnInit {
 
   openDeleteNavigationSection() {
     this.deleteGroup.emit(this.section);
+  }
+
+  editNavigationItem(link: any) {
+    console.log(`link in navigation group`, link)
+    this.editItem.emit(link);
+  }
+
+  openDeleteNavigationItem(link: any) {
+    this.deleteItem.emit(link);
   }
 }

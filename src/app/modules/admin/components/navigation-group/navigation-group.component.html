@@ -30,6 +30,8 @@
     <app-navigation-item
       *ngFor="let link of section.links"
       [link]="link"
+      (editItem)="(editNavigationItem($event))"
+      (deleteItem)="(deleteNavigationItem($event))"
     ></app-navigation-item>
   </div>
 </div>
