@@ -3,7 +3,6 @@ import { CommonModule } from "@angular/common";
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 import { Routes, RouterModule } from "@angular/router";
 import { RoleGuard } from "src/app/role.guard";
-import { AuthGuard } from "src/app/auth.guard";
 import { SideMenuComponent } from "./components/side-menu/side-menu.component";
 import { SharedModule } from "../shared/shared.module";
 import { ReportsComponent } from "./pages/reports/reports.component";
@@ -20,11 +19,9 @@ import { DialogUserComponent } from "./components/dialog-user/dialog-user.compon
 import { MatPaginatorIntl } from "@angular/material";
 import { KeySpaceDirectiveAdmin } from "src/directives/space.admin.directive";
 import { DragDropModule } from '@angular/cdk/drag-drop';
-// Import ng-circle-progress
 import { NgCircleProgressModule } from "ng-circle-progress";
 
 // date range
-
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { AuditComponent } from './pages/audit/audit.component';
 import { BusinessComponent } from './pages/business/business.component';
@@ -54,7 +51,14 @@ import { ConfigurationsComponent } from './pages/configurations/configurations.c
 import { InformationBussinessComponent } from './pages/information-bussiness/information-bussiness.component';
 import { ManageComisionBussinessComponent } from './pages/manage-comision-bussiness/manage-comision-bussiness.component';
 import { CarrouselAdminComponent } from './pages/carrousel-admin/carrousel-admin.component';
+import { NavigationComponent } from './pages/navigation/navigation.component';
 import { MatPasswordStrengthModule } from "@angular-material-extensions/password-strength";
+import { NavigationFooterComponent } from './components/navigation-footer/navigation-footer.component';
+import { NavigationGroupComponent } from './components/navigation-group/navigation-group.component';
+import { NavigationItemComponent } from './components/navigation-item/navigation-item.component';
+import { DialogNavigationGroupComponent } from './components/dialog-navigation-group/dialog-navigation-group.component';
+import { DialogNavigationItemComponent } from './components/dialog-navigation-item/dialog-navigation-item.component';
+
 const routes: Routes = [
   {
     path: "",
@@ -245,6 +249,15 @@ const routes: Routes = [
       role: "ADMIN",
       superRole: "SUPERADMIN"
     },
+  },
+  {
+    path: "navegacion",
+    component: NavigationComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
+    },
   }
 ];
 
@@ -285,7 +298,13 @@ const routes: Routes = [
     ConfigurationsComponent,
     InformationBussinessComponent,
     ManageComisionBussinessComponent,
-    CarrouselAdminComponent
+    CarrouselAdminComponent,
+    NavigationComponent,
+    NavigationFooterComponent,
+    NavigationGroupComponent,
+    NavigationItemComponent,
+    DialogNavigationGroupComponent,
+    DialogNavigationItemComponent
   ],
   imports: [
     AngularEditorModule,
@@ -330,7 +349,7 @@ const routes: Routes = [
     })
   ],
   exports: [SideMenuComponent],
-  entryComponents: [DialogUserComponent, DialogCategoryComponent, DialogNewsComponent, DialogVideoPlayerComponent],
+  entryComponents: [DialogUserComponent, DialogCategoryComponent, DialogNewsComponent, DialogVideoPlayerComponent, DialogNavigationGroupComponent, DialogNavigationItemComponent],
   providers: [{ provide: MatPaginatorIntl, useClass: UsersComponent }]
 })
 export class AdminModule { }

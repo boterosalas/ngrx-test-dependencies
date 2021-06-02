@@ -82,7 +82,116 @@ export class ContentService {
   apiSaveVisitStory = "story/savevisitstory";
   apiFooter = "footer/getfooter";
   apiCommissions = "commissions/getcommissions"
+  apiSaveFooterSection = "footer/savefooterseccion";
+  apiDeleteFooterSection = "footer/deletefooterseccions";
+  apiSaveFooterLink = "footer/savefooterlink";
+  apiDeleteFooterLink = "footer/deletefooterlinks";
+  apiSaveOrderFooterSections = "footer/saveorderfooterseccions";
+  apiSaveOrderFooterLinks = "footer/saveorderfooterlinks";
+
   sendSearch = {};
+
+  public saveOrderFooterLinks(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveOrderFooterLinks}`, datos , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
+
+  public saveOrderFooterSections(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveOrderFooterSections}`, datos , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
+
+  public deleteFooterLink(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiDeleteFooterLink}`, datos , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
+
+  public saveFooterLink(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveFooterLink}`, datos , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
+
+  public deleteFooterSection(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiDeleteFooterSection}`, datos , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
+
+  public saveFooterSection(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveFooterSection}`, datos , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
 
   public getFooter() {
     return this.http.get(`${this.url + this.apiFooter}`, this.httpOptions).pipe(
