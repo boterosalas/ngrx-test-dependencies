@@ -61,6 +61,8 @@ export class DialogNavigationItemComponent implements OnInit {
         idseccion: this.data.idseccion,
         link: this.dateForm.controls.link.value,
         description: this.dateForm.controls.description.value,
+        orderby: this.data.orderby,
+
       };
     }
     this.content.saveFooterLink(item).subscribe((resp: ResponseService) => {

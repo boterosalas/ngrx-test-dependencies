@@ -26,12 +26,17 @@
       />
     </div>
   </div>
-  <div class="navigation-group__content">
+  <div
+    class="navigation-group__content"
+    cdkDropList
+    (cdkDropListDropped)="dropItems($event)"
+  >
     <app-navigation-item
       *ngFor="let link of section.links"
       [link]="link"
       (editItem)="editNavigationItem($event)"
       (deleteItem)="deleteNavigationItem($event)"
+      cdkDrag
     ></app-navigation-item>
   </div>
 </div>

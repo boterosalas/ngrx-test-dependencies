@@ -30,7 +30,12 @@ export class NavigationFooterComponent implements OnInit {
     this.getSections();
   }
 
-  drop(event: CdkDragDrop<any>) {
+  saveOrderItems(data: any) {
+    console.log(`data`, data);
+    this.content.saveOrderFooterLinks(data).subscribe(() => {});
+  }
+
+  dropSection(event: CdkDragDrop<any>) {
     moveItemInArray(
       this.sectionsLinks,
       event.previousIndex,
@@ -44,11 +49,11 @@ export class NavigationFooterComponent implements OnInit {
         orderBy: i + 1,
       });
     }
-    this.saveOrder(dataSourceSend);
+    this.saveOrderSections(dataSourceSend);
   }
 
-  saveOrder(datos: any) {
-    this.content.saveOrderFooterSections(datos).subscribe(() => {});
+  saveOrderSections(data: any) {
+    this.content.saveOrderFooterSections(data).subscribe(() => {});
   }
 
   getSections() {
@@ -135,7 +140,6 @@ export class NavigationFooterComponent implements OnInit {
   }
 
   editNavigationItem(item: any) {
-    console.log("editNavigationItem");
     const data = {
       title: "Editar acceso",
       buttonName: "Guardar",

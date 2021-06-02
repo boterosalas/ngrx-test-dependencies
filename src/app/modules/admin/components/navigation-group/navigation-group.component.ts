@@ -1,4 +1,7 @@
+import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { ContentService } from "src/app/services/content.service";
+
 @Component({
   selector: "app-navigation-group",
   templateUrl: "./navigation-group.component.html",
@@ -11,8 +14,9 @@ export class NavigationGroupComponent implements OnInit {
   @Output() addItem = new EventEmitter<any>();
   @Output() editItem = new EventEmitter<any>();
   @Output() deleteItem = new EventEmitter<any>();
+  @Output() saveOrderItems = new EventEmitter<object>();
 
-  constructor() {}
+  constructor(private content: ContentService) {}
 
   ngOnInit() {}
 
@@ -34,5 +38,23 @@ export class NavigationGroupComponent implements OnInit {
 
   deleteNavigationItem(link: any) {
     this.deleteItem.emit(link);
+  }
+
+  dropItems(event: CdkDragDrop<any>) {
+    moveItemInArray(
+      this.section.links,
+      event.previousIndex,
+      event.currentIndex
+    );
+    let dataSourceSend = [];
+    for (let i = 0; i < this.section.links.length; i++) {
+      this.section.links[i].orderby = i + 1;
+      dataSourceSend.push({
+        id: this.section.links[i].id,
+        orderBy: i + 1,
+      });
+    }
+
+    this.saveOrderItems.emit(dataSourceSend);
   }
 }
