@@ -164,6 +164,19 @@
       background-size: 100%;
     }
   }
+  .Navegación {
+    &::before {
+      content: "\ecd1";
+      font-family: "The-Icon-of", sans-serif;
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+      background-size: 100%;
+    }
+  }
   .Historial.de.Links {
     &::before {
       font-family: "The-Icon-of", sans-serif;

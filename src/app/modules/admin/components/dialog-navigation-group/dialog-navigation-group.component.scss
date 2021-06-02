@@ -1,0 +1,10 @@
+.dialog-navigation-group {
+  background-color: #fff;
+  color: #37236a;
+
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 1rem;
+  }
+}

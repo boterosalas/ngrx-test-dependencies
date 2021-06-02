@@ -1,0 +1,30 @@
+<div class="navigation-item">
+  <span class="navigation-item__drag">
+    <mat-icon matSuffix class="mr-1 blue cursor-pointer" cdkDragHandle
+      >drag_indicator</mat-icon
+    >
+  </span>
+  <span class="navigation-item__description">{{ link.description }}</span>
+  <span class="navigation-item__link">
+    <a
+      href="{{ link.link }}"
+      class="text-link text-underline cursor-pointer"
+      target="_blank"
+    >
+      {{ link.link }}</a
+    >
+  </span>
+  <div class="navigation-item__actions">
+    <i
+      class="tio-edit style-icon cursor-pointer"
+      (click)="editNavigationItem()"
+    ></i>
+
+    <img
+      class="cursor-pointer"
+      (click)="openDeleteNavigationItem()"
+      src="/assets/img/dashboard/icon-remove-comision.svg"
+      alt=""
+    />
+  </div>
+</div>

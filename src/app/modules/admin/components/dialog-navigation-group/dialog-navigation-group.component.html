@@ -1,0 +1,30 @@
+<div class="dialog-navigation-group">
+  <h3 title-name>{{ data.title }}</h3>
+
+  <div mat-dialog-content>
+    <form [formGroup]="dateForm">
+      <mat-form-field>
+        <input
+          matInput
+          id="description"
+          type="text"
+          placeholder="NOMBRE"
+          formControlName="description"
+        />
+      </mat-form-field>
+      <div class="dialog-navigation-group__buttons">
+        <button mat-button ngClass="button_cancel" (click)="onNoClick()">
+          Cancelar
+        </button>
+        <button
+          mat-raised-button
+          color="orange"
+          (click)="saveSection()"
+          [disabled]="!dateForm.valid"
+        >
+          {{ data.buttonName }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

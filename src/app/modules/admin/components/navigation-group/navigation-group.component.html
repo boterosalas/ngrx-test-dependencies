@@ -1,0 +1,42 @@
+<div class="navigation-group">
+  <div class="navigation-group__header">
+    <span class="navigation-group__drag">
+      <mat-icon matSuffix class="mr-1 blue cursor-pointer" cdkDragHandle
+        >drag_indicator</mat-icon
+      >
+    </span>
+
+    <span class="navigation-group__description">{{ section.description }}</span>
+    <div class="navigation-group__actions">
+      <i
+        class="tio-add style-icon cursor-pointer"
+        (click)="addNavigationItem()"
+      ></i>
+
+      <i
+        class="tio-edit style-icon cursor-pointer"
+        (click)="editNavigationGroup()"
+      ></i>
+
+      <img
+        class="cursor-pointer"
+        (click)="openDeleteNavigationSection()"
+        src="/assets/img/dashboard/icon-remove-comision.svg"
+        alt=""
+      />
+    </div>
+  </div>
+  <div
+    class="navigation-group__content"
+    cdkDropList
+    (cdkDropListDropped)="dropItems($event)"
+  >
+    <app-navigation-item
+      *ngFor="let link of section.links"
+      [link]="link"
+      (editItem)="editNavigationItem($event)"
+      (deleteItem)="deleteNavigationItem($event)"
+      cdkDrag
+    ></app-navigation-item>
+  </div>
+</div>
