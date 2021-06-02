@@ -17,6 +17,13 @@
   &__content {
     display: flex;
     flex-direction: column;
+    row-gap: 1rem;
+    padding: 1rem;
+  }
+
+  &__list-sections {
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
     row-gap: 1rem;
     padding: 1rem;

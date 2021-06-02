@@ -6,17 +6,19 @@
     <P>ACCIONES</P>
   </header>
   <div class="navigation-footer__content">
-    <app-navigation-group
-      *ngFor="let section of sectionsLinks"
-      [section]="section"
-      (editGroup)="editNavigationGroup($event)"
-      (deleteGroup)="deleteNavigationGroup($event)"
-      (addItem)="addNavigationItem($event)"
-      (editItem)="editNavigationItem($event)"
-      (deleteItem)="deleteNavigationItem($event)"
-    >
-    </app-navigation-group>
-
+    <div class="navigation-footer__list-sections" cdkDropList (cdkDropListDropped)="drop($event)">      
+      <app-navigation-group
+        *ngFor="let section of sectionsLinks"
+        [section]="section"
+        (editGroup)="editNavigationGroup($event)"
+        (deleteGroup)="deleteNavigationGroup($event)"
+        (addItem)="addNavigationItem($event)"
+        (editItem)="editNavigationItem($event)"
+        (deleteItem)="deleteNavigationItem($event)"
+        cdkDrag
+      >
+      </app-navigation-group>
+    </div>
     <div
       fxLayout="row"
       fxLayoutAlign.gt-xs="end center"

@@ -6,7 +6,7 @@ import { DialogNavigationGroupComponent } from "../dialog-navigation-group/dialo
 import { ResponseService } from "src/app/interfaces/response";
 import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
 import { DialogNavigationItemComponent } from "../dialog-navigation-item/dialog-navigation-item.component";
-
+import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 @Component({
   selector: "app-navigation-footer",
   templateUrl: "./navigation-footer.component.html",
@@ -28,6 +28,27 @@ export class NavigationFooterComponent implements OnInit {
 
   ngOnInit() {
     this.getSections();
+  }
+
+  drop(event: CdkDragDrop<any>) {
+    moveItemInArray(
+      this.sectionsLinks,
+      event.previousIndex,
+      event.currentIndex
+    );
+    let dataSourceSend = [];
+    for (let i = 0; i < this.sectionsLinks.length; i++) {
+      this.sectionsLinks[i].orderby = i + 1;
+      dataSourceSend.push({
+        id: this.sectionsLinks[i].id,
+        orderBy: i + 1,
+      });
+    }
+    this.saveOrder(dataSourceSend);
+  }
+
+  saveOrder(datos: any) {
+    this.content.saveOrderFooterSections(datos).subscribe(() => {});
   }
 
   getSections() {
@@ -57,6 +78,7 @@ export class NavigationFooterComponent implements OnInit {
         edit: 1,
         id: section.id,
         description: section.description,
+        orderby: section.orderby,
       },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {

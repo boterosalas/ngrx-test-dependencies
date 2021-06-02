@@ -85,8 +85,26 @@ export class ContentService {
   apiDeleteFooterSection = "footer/deletefooterseccions";
   apiSaveFooterLink = "footer/savefooterlink";
   apiDeleteFooterLink = "footer/deletefooterlinks";
+  apiSaveOrderFooterSections = "footer/saveorderfooterseccions";
 
   sendSearch = {};
+
+  public saveOrderFooterSections(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveOrderFooterSections}`, datos , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
 
   public deleteFooterLink(datos: any) {
     return this.http

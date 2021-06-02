@@ -52,6 +52,7 @@ export class DialogNavigationGroupComponent implements OnInit {
       section = {
         id: this.data.id,
         description: this.dateForm.controls.description.value,
+        orderby: this.data.orderby,
       };
     }
     this.content
