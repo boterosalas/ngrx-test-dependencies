@@ -9,9 +9,16 @@
     grid-template-columns: 10% 30% 40% 20%;
     align-items: center;
     background-color: #f3f1f6;
-    color: #37236a;
-    font-weight: bold;
-    padding: 1rem;
+    font-family: $font-galano-bold;
+    // font-weight: $font-weight-bold
+
+    p {
+      color: $primary-color;
+    }
+  }
+
+  &__actions {
+    text-align: center;
   }
 
   &__content {
@@ -19,6 +26,7 @@
     flex-direction: column;
     row-gap: 1rem;
     padding: 1rem;
+    background-color: $white;
   }
 
   &__list-sections {
@@ -26,7 +34,6 @@
     flex-direction: column;
     justify-content: space-between;
     row-gap: 1rem;
-    padding: 1rem;
   }
 }
 
@@ -40,7 +47,7 @@
 }
 
 .title_delete {
-  color: #f21905;
+  color: $secondary-color;
 }
 
 .text-container {
@@ -48,8 +55,8 @@
 }
 
 .button_cancel {
-  color: #37236a;
-  font-weight: bold;
+  color: $primary-color;
+  font-weight: $font-weight-bold;
   background-color: transparent;
 }
 

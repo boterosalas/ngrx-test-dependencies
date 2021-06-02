@@ -9,6 +9,7 @@
     <span class="navigation-group__description">{{ section.description }}</span>
     <div class="navigation-group__actions">
       <i
+        *ngIf="isValidAddItems"
         class="tio-add style-icon cursor-pointer"
         (click)="addNavigationItem()"
       ></i>

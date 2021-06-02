@@ -16,9 +16,13 @@ export class NavigationGroupComponent implements OnInit {
   @Output() deleteItem = new EventEmitter<any>();
   @Output() saveOrderItems = new EventEmitter<object>();
 
+  isValidAddItems: boolean = true;
+
   constructor(private content: ContentService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.isValidAddItems = this.section.links.length < 10;
+  }
 
   editNavigationGroup() {
     this.editGroup.emit(this.section);
