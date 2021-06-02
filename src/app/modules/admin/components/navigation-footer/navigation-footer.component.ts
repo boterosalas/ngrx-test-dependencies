@@ -16,7 +16,10 @@ export class NavigationFooterComponent implements OnInit {
   sectionsLinks: any;
   private subscription: Subscription = new Subscription();
   @ViewChild("templateDeleteNavigationGroup", { static: false })
-  templateDelete: TemplateRef<any>;
+  templateDeleteNavigationGroup: TemplateRef<any>;
+  @ViewChild("templateDeleteNavigationItem", { static: false })
+  templateDeleteNavigationItem: TemplateRef<any>;
+
   dialogRef: MatDialogRef<any>;
   currentSection: any;
   currentLink: any;
@@ -65,7 +68,7 @@ export class NavigationFooterComponent implements OnInit {
     this.currentSection = section;
 
     const title = "";
-    const template = this.templateDelete;
+    const template = this.templateDeleteNavigationGroup;
     this.dialogRef = this.dialog.open(ModalGenericComponent, {
       data: {
         title,
@@ -95,7 +98,21 @@ export class NavigationFooterComponent implements OnInit {
       });
   }
 
-  public editNavigationItem(item: any) {
+  addNavigationItem(section: any) {
+    const dialogRef1 = this.dialog.open(DialogNavigationItemComponent, {
+      data: {
+        title: "Agregar acceso",
+        buttonName: "Agregar",
+        edit: 0,
+        idseccion: section.id,
+      },
+    });
+    this.subscription = dialogRef1.beforeClosed().subscribe(() => {
+      this.getSections();
+    });
+  }
+
+  editNavigationItem(item: any) {
     console.log("editNavigationItem");
     const data = {
       title: "Editar acceso",
@@ -114,6 +131,35 @@ export class NavigationFooterComponent implements OnInit {
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
       this.getSections();
+    });
+  }
+
+  deleteNavigationItem(item: any) {
+    this.currentLink = item;
+
+    const title = "";
+    const template = this.templateDeleteNavigationItem;
+    this.dialogRef = this.dialog.open(ModalGenericComponent, {
+      width: "450px",
+      data: {
+        title,
+        template,
+      },
+    });
+
+    this.subscription = this.dialogRef.beforeClosed().subscribe(() => {
+      this.getSections();
+    });
+  }
+
+  deleteNavigationItemService() {
+    let datos = [this.currentLink.id];
+    this.content.deleteFooterLink(datos).subscribe((resp: ResponseService) => {
+      if (resp.state === "Success") {
+        this.dialog.closeAll();
+      } else {
+        console.log("Upss Hubo un problema vuelve a intentarlo");
+      }
     });
   }
 }

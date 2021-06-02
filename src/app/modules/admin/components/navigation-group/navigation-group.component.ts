@@ -8,6 +8,7 @@ export class NavigationGroupComponent implements OnInit {
   @Input() section: any;
   @Output() editGroup = new EventEmitter<any>();
   @Output() deleteGroup = new EventEmitter<any>();
+  @Output() addItem = new EventEmitter<any>();
   @Output() editItem = new EventEmitter<any>();
   @Output() deleteItem = new EventEmitter<any>();
 
@@ -23,12 +24,15 @@ export class NavigationGroupComponent implements OnInit {
     this.deleteGroup.emit(this.section);
   }
 
+  addNavigationItem() {
+    this.addItem.emit(this.section);
+  }
+
   editNavigationItem(link: any) {
-    console.log(`link in navigation group`, link)
     this.editItem.emit(link);
   }
 
-  openDeleteNavigationItem(link: any) {
+  deleteNavigationItem(link: any) {
     this.deleteItem.emit(link);
   }
 }

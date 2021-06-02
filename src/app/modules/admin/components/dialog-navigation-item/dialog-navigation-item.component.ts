@@ -26,7 +26,7 @@ export class DialogNavigationItemComponent implements OnInit {
     this.loadItem();
   }
 
-  public loadItem() {
+  loadItem() {
     if (this.data.edit === 1) {
       this.dateForm = this.fb.group({
         id: [this.data.id, Validators.required],
@@ -47,7 +47,7 @@ export class DialogNavigationItemComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public saveItem() {
+  saveItem() {
     let item;
     if (this.data.edit === 0) {
       item = {

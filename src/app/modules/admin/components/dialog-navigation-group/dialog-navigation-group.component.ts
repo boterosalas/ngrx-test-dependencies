@@ -26,7 +26,7 @@ export class DialogNavigationGroupComponent implements OnInit {
     this.loadSection();
   }
 
-  public loadSection() {
+  loadSection() {
     if (this.data.edit === 1) {
       this.dateForm = this.fb.group({
         description: [this.data.description, Validators.required],
@@ -42,7 +42,7 @@ export class DialogNavigationGroupComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public saveSection() {
+  saveSection() {
     let section;
     if (this.data.edit === 0) {
       section = {
