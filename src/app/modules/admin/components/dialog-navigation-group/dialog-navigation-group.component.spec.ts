@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterTestingModule } from "@angular/router/testing";
+import { of } from "rxjs/internal/observable/of";
 import { JwtModule } from "@auth0/angular-jwt";
 import { TranslateModule } from "@ngx-translate/core";
 import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
@@ -20,6 +21,11 @@ describe("DialogNavigationGroupComponent", () => {
   ]);
   const dialogMock = {
     close: () => { }
+  };
+  const resp = {
+    state: "Success",
+    userMessage: "Se ha creado el grupo",
+    objectResponse: []
   };
 
   beforeEach(async(() => {
@@ -51,6 +57,8 @@ describe("DialogNavigationGroupComponent", () => {
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
+    mockContentService.saveFooterSection.and.returnValue(of(resp));
+
   }));
 
   beforeEach(() => {
@@ -62,4 +70,11 @@ describe("DialogNavigationGroupComponent", () => {
   it("should create", () => {
     expect(component).toBeTruthy();
   });
+
+  it("add navigation section", () => {
+    component.data = { edit: 0, orderby: 1 };
+    component.dateForm.controls.description.setValue("Nuevo grupo");
+    component.saveSection();
+    expect(mockContentService.saveFooterSection).toHaveBeenCalled();
+  })
 });
