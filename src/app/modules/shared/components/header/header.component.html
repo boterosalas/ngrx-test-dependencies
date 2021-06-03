@@ -1,93 +1,109 @@
 <header
-  class="shadow sticky"
-  fxLayout="column"
-  fxLayoutAlign="center start"
-  fxLayout.gt-xs="row"
-  fxLayoutAlign.gt-xs="start center"
+  fxLayout="row"
+  fxLayoutAlign="space-between stretch"
+  fxLayoutAlign.gt-xs="space-between center"
 >
-  <div ngClass.gt-xs="container" fxLayout="row">
-    <div
-      fxLayout="row"
-      fxLayoutAlign.gt-xs="start center"
-      fxFlex.gt-xs="20"
+  <div fxLayout="row" fxLayoutGap="1rem">
+    <span
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      (click)="open()"
+      class="burger-menu cursor-pointer"
+      fxHide.gt-xs="true"
+    >
+      <i class="tio-menu_hamburger"></i>
+      <span>Menú</span>
+    </span>
+
+    <img
+      [routerLink]="['inicio']"
+      class="cursor-pointer gtmHomeClicLogoClickam"
+      src="assets/img/clickam-horizontal.svg"
+      alt="logo-clickam"
       fxHide.xs="true"
+    />
+
+    <img
+      [routerLink]="['inicio']"
+      class="cursor-pointer"
+      src="assets/img/logo-icon.svg"
+      alt="logo-clickam"
+      fxHide.gt-xs="true"
+    />
+  </div>
+
+  <div
+    fxHide.gt-xs="true"
+    fxLayoutAlign="center center"
+    *ngIf="!auth.isLoggedIn()"
+  >
+    <a
+      class="gtmHomeClicIniciarSesionClickam login-text"
+      mat-button
+      (click)="showLogin()"
+      id="header-login"
     >
-      <img
-        [routerLink]="['inicio']"
-        class="cursor-pointer gtmHomeClicLogoClickam"
-        src="assets/img/clickam-horizontal.svg"
-        alt="logo-clickam"
-      />
-    </div>
-    <div
-      fxLayout="row"
-      fxLayoutAlign="start center"
-      fxFlex.gt-xs="80"
-      fxLayoutAlign.gt-xs="end center"
+      {{ "LOGIN.LOGIN" | translate }}
+    </a>
+
+    <span class="spanLink-active">
+      <a
+        class="gtmHomeClicRegistrarseClickam login-text"
+        (click)="openRegister()"
+        id="header-register"
+        >{{ "GENERIC.REGISTER2" | translate }}</a
+      >
+    </span>
+  </div>
+
+  <div
+    fxHide.xs="true"
+    fxLayoutAlign="center center"
+    *ngIf="!auth.isLoggedIn()"
+  >
+    <a
+      class="gtmHomeClicIniciarSesionClickam login-text"
+      mat-button
+      (click)="showLogin()"
+      id="header-login"
     >
-      <span fxLayout="column" fxLayoutAlign="end center" (click)="open()">
-        <img class="cursor-pointer" src="assets/img/menu.svg" alt="menu" />
-      </span>
-      <span fxLayout.gt-xs="row">
-        <span fxLayoutAlign.gt-xs="center center" *ngIf="!auth.isLoggedIn()">
-          <a
-            class="gtmHomeClicIniciarSesionClickam login-text"
-            mat-button
-            (click)="showLogin()"
-            id="header-login"
-          >
-            <span
-              class="gtmHomeClicIniciarSesionClickam"
-              fxLayout="row"
-              fxLayoutAlign="space-between center"
-            >
-              <img
-                class="pr-2 gtmHomeClicIniciarSesionClickam"
-                src="assets/img/usuario-black.svg"
-                alt="user"
-              />
-              <span class="gtmHomeClicIniciarSesionClickam">
-                {{ "LOGIN.LOGIN" | translate }}</span
-              ></span
-            >
-          </a>
-          <a
-            fxHide.xs="true"
-            class="gtmHomeClicRegistrarseClickam login-text"
-            mat-button
-            (click)="openRegister()"
-            id="header-register"
-            ><span class="gtmHomeClicRegistrarseClickam">{{
-              "GENERIC.REGISTER2" | translate
-            }}</span></a
-          >
-        </span>
-        <span
-          *ngIf="auth.isLoggedIn()"
-          fxLayout="row"
-          fxLayoutAlign="center center"
-          fxLayoutGap="10px"
-        >
-          <img
-            src="assets/img/usuario-black.svg"
-            alt="userLogged"
-            class="pl-2"
-          />
-          <h3 class="elipsis">Hola, {{ name }}</h3>
-          <a
-            [routerLink]="['/referidos']"
-            *ngIf="auth.isLoggedIn() && (auth.getRole$ | async) === 'CLICKER'"
-            mat-raised-button
-            color="orange"
-            class="button10k gtmHomeClicMenuRefiereYGana"
-            id="win-10k"
-            ><span class="gtmHomeClicMenuRefiereYGana"
-              >{{ "GENERIC.WIN10K" | translate }}
-              {{ amount | currency: "":"symbol":"1.0-0" }}</span
-            ></a
-          >
-        </span>
-      </span>
-    </div>
+      <span
+        class="gtmHomeClicIniciarSesionClickam"
+        fxLayoutAlign="space-between center"
+      >
+        <span class="gtmHomeClicIniciarSesionClickam">
+          {{ "LOGIN.LOGIN" | translate }}</span
+        ></span
+      >
+    </a>
+    <a
+      class="gtmHomeClicRegistrarseClickam login-text"
+      mat-button
+      (click)="openRegister()"
+      id="header-register"
+      ><span class="gtmHomeClicRegistrarseClickam">{{
+        "GENERIC.REGISTER2" | translate
+      }}</span></a
+    >
+  </div>
+  <div
+    *ngIf="auth.isLoggedIn()"
+    fxLayoutAlign="center center"
+    fxLayoutGap="10px"
+  >
+    <img src="assets/img/usuario-black.svg" alt="userLogged" class="pl-2" />
+    <h3 class="elipsis">Hola, {{ name }}</h3>
+    <a
+      [routerLink]="['/referidos']"
+      *ngIf="auth.isLoggedIn() && (auth.getRole$ | async) === 'CLICKER'"
+      mat-raised-button
+      color="orange"
+      class="button10k gtmHomeClicMenuRefiereYGana"
+      id="win-10k"
+      ><span class="gtmHomeClicMenuRefiereYGana"
+        >{{ "GENERIC.WIN10K" | translate }}
+        {{ amount | currency: "":"symbol":"1.0-0" }}</span
+      ></a
+    >
   </div>
 </header>
