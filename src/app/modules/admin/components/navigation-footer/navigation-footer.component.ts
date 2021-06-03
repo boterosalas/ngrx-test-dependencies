@@ -13,7 +13,7 @@ import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
   styleUrls: ["./navigation-footer.component.scss"],
 })
 export class NavigationFooterComponent implements OnInit {
-  sectionsLinks: any;
+  sectionsLinks: any = [];
   private subscription: Subscription = new Subscription();
   @ViewChild("templateDeleteNavigationGroup", { static: false })
   templateDeleteNavigationGroup: TemplateRef<any>;
