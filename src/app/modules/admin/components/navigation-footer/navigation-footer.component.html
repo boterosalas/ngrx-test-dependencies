@@ -3,7 +3,7 @@
     <p></p>
     <p>NOMBRE</p>
     <p>ENLACE</p>
-    <P>ACCIONES</P>
+    <p class="navigation-footer__actions">ACCIONES</p>
   </header>
   <div class="navigation-footer__content">
     <div
@@ -33,8 +33,9 @@
       <button
         mat-raised-button
         color="orange"
-        (click)="addSection()"
         class="ml-2"
+        [disabled]="isInvalidAddSection"
+        (click)="addSection()"
       >
         Nuevo grupo
       </button>
