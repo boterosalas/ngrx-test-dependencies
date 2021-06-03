@@ -4,6 +4,7 @@
   background-color: #f3f1f6;
   border: 1px solid #8c80b4;
   border-radius: 5px;
+  cursor: pointer;
 
   &__header {
     display: grid;
@@ -11,7 +12,7 @@
     align-items: center;
     padding: 0.5rem;
     color: $primary-color;
-    font-weight: bold;
+    font-weight: $font-weight-bold;
     border-bottom: 1px solid #8c80b4;
   }
 
@@ -26,6 +27,10 @@
     column-gap: 1rem;
     font-size: 22px;
     color: $purple2;
+  }
+
+  &__addIcon {
+    opacity: 50%;
   }
 
   &__content {
