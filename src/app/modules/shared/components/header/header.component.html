@@ -3,33 +3,52 @@
   fxLayoutAlign="space-between stretch"
   fxLayoutAlign.gt-xs="space-between center"
 >
+
+<!-- Mobile - no log in -->
+<!-- Desktop - no log in -->
+
+<!-- Mobile - log in -->
+<!-- Desktop - log in -->
   <div fxLayout="row" fxLayoutGap="1rem">
-    <span
-      fxLayout="column"
-      fxLayoutAlign="center center"
-      (click)="open()"
-      class="burger-menu cursor-pointer"
-      fxHide.gt-xs="true"
-    >
-      <i class="tio-menu_hamburger"></i>
-      <span>Menú</span>
-    </span>
+    <!-- Mobile -->
+    <div fxLayout="row" fxLayoutGap="1rem" fxHide.gt-sm="true">
+      <span
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        (click)="open()"
+        class="burger-menu cursor-pointer"
+      >
+        <i class="tio-menu_hamburger"></i>
+        <span>Menú</span>
+      </span>
 
-    <img
-      [routerLink]="['inicio']"
-      class="cursor-pointer gtmHomeClicLogoClickam"
-      src="assets/img/clickam-horizontal.svg"
-      alt="logo-clickam"
-      fxHide.xs="true"
-    />
+      <img
+        [routerLink]="['inicio']"
+        class="cursor-pointer"
+        src="assets/img/logo-icon.svg"
+        alt="logo-clickam"
+      />
+    </div>
 
-    <img
-      [routerLink]="['inicio']"
-      class="cursor-pointer"
-      src="assets/img/logo-icon.svg"
-      alt="logo-clickam"
-      fxHide.gt-xs="true"
-    />
+    <!-- Desktop -->
+    <div fxLayout="row" fxLayoutGap="1rem" fxHide fxShow.gt-sm="true">
+      <img
+        [routerLink]="['inicio']"
+        class="cursor-pointer gtmHomeClicLogoClickam"
+        src="assets/img/clickam-horizontal.svg"
+        alt="logo-clickam"
+        fxHide.xs="true"
+      />
+
+      <mat-divider [vertical]="true"></mat-divider>
+
+      <div class="links">
+        <a href="https://www.clickam.com.co/#/click-academy">Click Academy</a>
+        <a href="https://www.clickam.com.co/#/blog">Blog</a>
+        <a href="https://www.clickam.com.co/#/centro-de-ayuda">Centro de Ayuda</a>
+        <a href="https://www.clickam.com.co/#/tabla-comisiones">Tabla de Comisiones</a>
+      </div>
+    </div>
   </div>
 
   <div
@@ -60,30 +79,20 @@
     fxHide.xs="true"
     fxLayoutAlign="center center"
     *ngIf="!auth.isLoggedIn()"
+    class="loginButtons"
   >
     <a
-      class="gtmHomeClicIniciarSesionClickam login-text"
+      class="login-text"
       mat-button
       (click)="showLogin()"
-      id="header-login"
     >
-      <span
-        class="gtmHomeClicIniciarSesionClickam"
-        fxLayoutAlign="space-between center"
-      >
-        <span class="gtmHomeClicIniciarSesionClickam">
-          {{ "LOGIN.LOGIN" | translate }}</span
-        ></span
-      >
+      {{ "LOGIN.LOGIN" | translate }}
     </a>
     <a
-      class="gtmHomeClicRegistrarseClickam login-text"
+      class="btnRegister login-text"
       mat-button
       (click)="openRegister()"
-      id="header-register"
-      ><span class="gtmHomeClicRegistrarseClickam">{{
-        "GENERIC.REGISTER2" | translate
-      }}</span></a
+      >{{ "GENERIC.REGISTER2" | translate }}</a
     >
   </div>
   <div
