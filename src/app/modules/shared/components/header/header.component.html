@@ -1,17 +1,13 @@
-<header
-  fxLayout="row"
-  fxLayoutAlign="space-between stretch"
-  fxLayoutAlign.gt-xs="space-between center"
->
-
-<!-- Mobile - no log in -->
-<!-- Desktop - no log in -->
-
-<!-- Mobile - log in -->
-<!-- Desktop - log in -->
-  <div fxLayout="row" fxLayoutGap="1rem">
-    <!-- Mobile -->
-    <div fxLayout="row" fxLayoutGap="1rem" fxHide.gt-sm="true">
+<header>
+  <!-- Mobile - not login -->
+  <div
+    fxHide.gt-sm="true"
+    *ngIf="!auth.isLoggedIn()"
+    fxLayoutAlign="space-between stretch"
+    fxLayoutGap="1rem"
+    class="divContainer"
+  >
+    <div fxLayout="row" fxLayoutGap="1rem">
       <span
         fxLayout="column"
         fxLayoutAlign="center center"
@@ -30,7 +26,193 @@
       />
     </div>
 
-    <!-- Desktop -->
+    <div fxLayoutAlign="center center">
+      <a class="login-text" mat-button (click)="showLogin()">
+        {{ "LOGIN.LOGIN" | translate }}
+      </a>
+
+      <span class="spanLink-active">
+        <a class="login-text" (click)="openRegister()">{{
+          "GENERIC.REGISTER2" | translate
+        }}</a>
+      </span>
+    </div>
+  </div>
+
+  <!-- Desktop - not login -->
+  <div
+    fxHide
+    fxShow.gt-sm="true"
+    *ngIf="!auth.isLoggedIn()"
+    fxLayoutAlign="space-between center"
+    fxLayoutGap="1rem"
+    class="divContainer"
+  >
+    <div fxLayout="row" fxLayoutGap="1rem">
+      <img
+        [routerLink]="['inicio']"
+        class="cursor-pointer"
+        src="assets/img/clickam-horizontal.svg"
+        alt="logo-clickam"
+      />
+
+      <mat-divider [vertical]="true"></mat-divider>
+
+      <nav>
+        <ul
+          fxLayoutAlign="space-between center"
+          fxLayoutGap="1rem"
+          class="links"
+        >
+          <li>
+            <a href="https://www.clickam.com.co/#/click-academy"
+              >Click Academy</a
+            >
+          </li>
+          <li>
+            <a href="https://www.clickam.com.co/#/blog">Blog</a>
+          </li>
+          <li>
+            <a href="https://www.clickam.com.co/#/centro-de-ayuda"
+              >Centro de Ayuda</a
+            >
+          </li>
+          <li>
+            <a href="https://www.clickam.com.co/#/tabla-comisiones"
+              >Tabla de Comisiones</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div fxLayoutAlign="center center" class="loginButtons">
+      <a class="login-text" mat-button (click)="showLogin()">
+        {{ "LOGIN.LOGIN" | translate }}
+      </a>
+      <a class="btnRegister login-text" mat-button (click)="openRegister()">{{
+        "GENERIC.REGISTER2" | translate
+      }}</a>
+    </div>
+  </div>
+
+
+  <!-- Mobile - login -->
+  <div
+    fxHide.gt-sm="true"
+    *ngIf="auth.isLoggedIn()"
+    fxLayoutAlign="space-between stretch"
+    fxLayoutGap="1rem"
+    class="divContainer"
+  >
+    <div fxLayout="row" fxLayoutGap="1rem">
+      <span
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        (click)="open()"
+        class="burger-menu cursor-pointer"
+      >
+        <i class="tio-menu_hamburger"></i>
+        <span>Menú login</span>
+      </span>
+
+      <img
+        [routerLink]="['inicio']"
+        class="cursor-pointer"
+        src="assets/img/logo-icon.svg"
+        alt="logo-clickam"
+      />
+    </div>
+
+    <div fxLayoutAlign="center center">
+      <a class="login-text" mat-button (click)="showLogin()">
+        {{ "LOGIN.LOGIN" | translate }}
+      </a>
+
+      <span class="spanLink-active">
+        <a class="login-text" (click)="openRegister()">{{
+          "GENERIC.REGISTER2" | translate
+        }}</a>
+      </span>
+    </div>
+  </div>
+
+  <!-- Desktop - login -->
+  <div
+    fxHide
+    fxShow.gt-sm="true"
+    *ngIf="auth.isLoggedIn()"
+    fxLayoutAlign="space-between center"
+    fxLayoutGap="1rem"
+    class="divContainer"
+  >
+    <div fxLayout="row" fxLayoutGap="1rem">
+      <img
+        [routerLink]="['inicio']"
+        class="cursor-pointer"
+        src="assets/img/clickam-horizontal.svg"
+        alt="logo-clickam"
+      />
+
+      <mat-divider [vertical]="true"></mat-divider>
+
+      <nav>
+        <ul
+          fxLayoutAlign="space-between center"
+          fxLayoutGap="1rem"
+          class="links"
+        >
+          <li>
+            <a href="https://www.clickam.com.co/#/click-academy"
+              >Click Academy</a
+            >
+          </li>
+          <li>
+            <a href="https://www.clickam.com.co/#/blog">Blog</a>
+          </li>
+          <li>
+            <a href="https://www.clickam.com.co/#/centro-de-ayuda"
+              >Centro de Ayuda</a
+            >
+          </li>
+          <li>
+            <a href="https://www.clickam.com.co/#/tabla-comisiones"
+              >Tabla de Comisiones</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div fxLayoutAlign="center center" class="loginButtons">
+      <a class="login-text" mat-button (click)="showLogin()">
+        ya estoy logueado
+      </a>
+      <a class="btnRegister login-text" mat-button (click)="openRegister()">{{
+        "GENERIC.REGISTER2" | translate
+      }}</a>
+    </div>
+  </div>
+
+  <!-- <div fxLayout="row" fxLayoutGap="1rem">
+    <div fxLayout="row" fxLayoutGap="1rem" fxHide.gt-sm="true">
+      <span
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        (click)="open()"
+        class="burger-menu cursor-pointer"
+      >
+        <i class="tio-menu_hamburger"></i>
+        <span>Menú</span>
+      </span>
+
+      <img
+        [routerLink]="['inicio']"
+        class="cursor-pointer"
+        src="assets/img/logo-icon.svg"
+        alt="logo-clickam"
+      />
+    </div>
     <div fxLayout="row" fxLayoutGap="1rem" fxHide fxShow.gt-sm="true">
       <img
         [routerLink]="['inicio']"
@@ -45,8 +227,12 @@
       <div class="links">
         <a href="https://www.clickam.com.co/#/click-academy">Click Academy</a>
         <a href="https://www.clickam.com.co/#/blog">Blog</a>
-        <a href="https://www.clickam.com.co/#/centro-de-ayuda">Centro de Ayuda</a>
-        <a href="https://www.clickam.com.co/#/tabla-comisiones">Tabla de Comisiones</a>
+        <a href="https://www.clickam.com.co/#/centro-de-ayuda"
+          >Centro de Ayuda</a
+        >
+        <a href="https://www.clickam.com.co/#/tabla-comisiones"
+          >Tabla de Comisiones</a
+        >
       </div>
     </div>
   </div>
@@ -81,19 +267,12 @@
     *ngIf="!auth.isLoggedIn()"
     class="loginButtons"
   >
-    <a
-      class="login-text"
-      mat-button
-      (click)="showLogin()"
-    >
+    <a class="login-text" mat-button (click)="showLogin()">
       {{ "LOGIN.LOGIN" | translate }}
     </a>
-    <a
-      class="btnRegister login-text"
-      mat-button
-      (click)="openRegister()"
-      >{{ "GENERIC.REGISTER2" | translate }}</a
-    >
+    <a class="btnRegister login-text" mat-button (click)="openRegister()">{{
+      "GENERIC.REGISTER2" | translate
+    }}</a>
   </div>
   <div
     *ngIf="auth.isLoggedIn()"
@@ -114,5 +293,5 @@
         {{ amount | currency: "":"symbol":"1.0-0" }}</span
       ></a
     >
-  </div>
+  </div> -->
 </header>

@@ -20,14 +20,15 @@
 header {
   min-height: 58px;
   padding-left: 15px;
-  .nav {
-    color: $color-p !important;
-    min-height: 50px;
-  }
+
   .login-text {
     color: $color-headings;
     font-family: $font-galano-bold !important;
   }
+}
+
+.divContainer {
+  height: 58px;
 }
 
 .sticky {
@@ -118,10 +119,9 @@ header {
 }
 
 .links {
-  display: flex;
-  align-items: center;
-  column-gap: 1rem;
-
+  list-style-type: none;
+  padding-left: 0;
+  
   a {
     font-weight: $font-weight-bold;
     text-decoration: none;
