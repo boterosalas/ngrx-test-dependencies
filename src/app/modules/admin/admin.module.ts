@@ -9,6 +9,7 @@ import { SharedModule } from "../shared/shared.module";
 import { ReportsComponent } from "./pages/reports/reports.component";
 import { TranslateModule } from "@ngx-translate/core";
 import { CardComponent } from "./components/card/card.component";
+import { PopupCardComponent } from "./components/popup-card/popup-card.component";
 import { AppMaterialModule } from "../shared/app-material/app-material.module";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -255,6 +256,7 @@ const routes: Routes = [
     SideMenuComponent,
     ReportsComponent,
     CardComponent,
+    PopupCardComponent,
     LoadFormFileComponent,
     UsersComponent,
     TableUsersComponent,

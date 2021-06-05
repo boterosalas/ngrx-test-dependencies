@@ -7,7 +7,7 @@ import {
   OnDestroy,
 } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
-import { Router, NavigationStart } from "@angular/router";
+import { Router, NavigationStart, NavigationEnd } from "@angular/router";
 import {
   trigger,
   state,
@@ -17,19 +17,20 @@ import {
   animate,
 } from "@angular/animations";
 import { UtilsService } from "./services/utils.service";
-import { Subscription, Observable } from "rxjs";
+import { Subscription } from "rxjs";
 import { AuthService } from "./services/auth.service";
 import { BnNgIdleService } from "bn-ng-idle";
 import Swal from "sweetalert2";
-import { Breakpoints, BreakpointObserver } from "@angular/cdk/layout";
-import { map, shareReplay } from "rxjs/operators";
+import { BreakpointObserver } from "@angular/cdk/layout";
 import { UserService } from "./services/user.service";
+import { ContentService } from './services/content.service';
 import { TokenService } from "./services/token.service";
-import { Meta } from "@angular/platform-browser";
 import { SwUpdate } from "@angular/service-worker";
 declare var dataLayer: any;
-import { MessagingService } from "./shared/messaging.service";
+import { PopupComponent } from "./modules/shared/components/popup/popup.component";
 import { Location } from "@angular/common";
+import { MatDialog } from '@angular/material';
+import decode from "jwt-decode";
 
 @Component({
   selector: "app-root",
@@ -112,6 +113,7 @@ export class AppComponent implements OnInit, OnDestroy {
   role: string;
   classPage: string;
   location: Location;
+  timeout: any
 
   constructor(
     private translate: TranslateService,
@@ -121,8 +123,10 @@ export class AppComponent implements OnInit, OnDestroy {
     private bnIdle: BnNgIdleService,
     private breakpointObserver: BreakpointObserver,
     private user: UserService,
+    private content: ContentService,
     private token: TokenService,
     private swUpdate: SwUpdate,
+    private dialog: MatDialog,
     location: Location
   ) {
     translate.setDefaultLang("es");
@@ -134,6 +138,11 @@ export class AppComponent implements OnInit, OnDestroy {
           event: "pageview",
           virtualPageURL: url.url,
         });
+      } else if (url instanceof NavigationEnd) {
+        clearTimeout(this.timeout)
+        this.timeout = setTimeout(() => {
+          this.getPopUps();
+        }, 500)
       }
     });
 
@@ -163,8 +172,6 @@ export class AppComponent implements OnInit, OnDestroy {
         });
       });
     }
-
-    // this.email = this.userInfo.userName;
 
     this.showAnimation1 = true;
     this.innerWidth = window.innerWidth;
@@ -217,6 +224,48 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.windowWidth();
     this.getUserData();
+  }
+
+  public getPopUps() {
+    if (this.auth.isLoggedIn()) {
+      this.content.getPopup().subscribe((resp) => {
+        let locationHref = location.href;
+        let routeSplit = locationHref.split("/");
+        let currentRoute = '/' + routeSplit[routeSplit.length - 1];
+  
+        const popUp = resp.find(x => !x.new && x.seccion === currentRoute)
+  
+        if (popUp) {
+          const infoPopUp = {
+            imageUrlWeb: popUp.imageurlweb,
+            imageUrlMobile: popUp.imageurlmobile,
+            textbutton: popUp.textbutton,
+            colorbutton: popUp.colorbutton,
+            BLink: popUp.link
+          }
+          
+          this.openPopUp(infoPopUp)
+          this.saveVisitOffer(popUp.id)
+        }
+      })
+    }
+  }
+
+  public openPopUp(infoPopUp) {
+    this.dialog.open(PopupComponent, {
+      data: {
+        ...infoPopUp
+      },
+      panelClass: "dynamic-popup"
+    });
+  }
+
+  public saveVisitOffer(idoffer) {
+    let token = localStorage.getItem("ACCESS_TOKEN")
+    let tokenDecode = decode(token)
+    const userId = tokenDecode.userid
+
+    this.content.saveVisitOffer({ idoffer, userId }).subscribe((resp) => {})
   }
 
   public hideLogin() {

@@ -31,6 +31,8 @@ export class ContentService {
   apiAssured = "product/getProductsSegurosExito";
   apiTrips = "product/getProductsViajesExito";
   apiOffers = "offer/getOffers";
+  apiPopup = "offer/getpopup";
+  apiSaveVisitOffer = "offer/savevisitoffer";
   apiCategories = "offer/getCategories";
   apiProducts = "product";
   apiGetBusiness = "business/getBusiness";
@@ -1029,6 +1031,39 @@ export class ContentService {
         map((result: ResponseService) => {
           return result;
         }));
+  }
+
+  public getPopup() {
+    return this.http
+      .get(`${this.url + this.apiPopup}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((result: ResponseService) => {
+          return result.objectResponse;
+        }));
+  }
+
+  public saveVisitOffer(data: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveVisitOffer}`, data, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((result: ResponseService) => {
+          return result;
+        })
+      );
   }
 
 }

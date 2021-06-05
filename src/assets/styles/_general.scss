@@ -2349,6 +2349,15 @@ h3#bussiness2 {
   }
 }
 
+.cdk-overlay-pane.dynamic-popup {
+  max-height: 80vh;
+
+  .mat-dialog-container {
+    padding: 0;
+    border-radius: 10px;
+  }
+}
+
 .cdk-global-scrollblock body::-webkit-scrollbar {
   width: 0;
 }
@@ -2425,4 +2434,8 @@ h3#bussiness2 {
   h1 {
     color: $secondary-color;
   }
+}
+
+.selected-color .mat-select-arrow {
+  height: 16px !important;
 }

@@ -6,6 +6,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { LoaderComponent } from "./components/loader/loader.component";
+import { PopupComponent } from "./components/popup/popup.component";
 import { DialogComponent } from "./components/dialog/dialog.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -41,6 +42,7 @@ import { CardStoryComponent } from './components/card-story/card-story.component
     SearchComponent,
     NotFoundComponent,
     LoaderComponent,
+    PopupComponent,
     DialogComponent,
     FooterComponent,
     HeaderComponent,
@@ -106,6 +108,7 @@ import { CardStoryComponent } from './components/card-story/card-story.component
   ],
   entryComponents: [
     ModalGenericComponent,
+    PopupComponent,
     DialogStoriesComponent
   ]
 })

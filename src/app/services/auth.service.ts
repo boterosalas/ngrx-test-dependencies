@@ -195,9 +195,9 @@ export class AuthService implements OnDestroy {
         })
       );
   }
-  public getPermisionByUser(id) {
+  public getPermisionByUser(rol) {
     return this.http
-      .get(`${this.url + this.apiGetPermisionAdmin}?userid=${id}`, this.httpOptions)
+      .get(`${this.url + this.apiGetPermisionAdmin}?rol=${rol}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
