@@ -13,6 +13,10 @@
         class="tio-add style-icon cursor-pointer"
         (click)="addNavigationItem()"
       ></i>
+      <i
+        *ngIf="!isValidAddItems"
+        class="tio-add style-icon navigation-group__addIcon"
+      ></i>
 
       <i
         class="tio-edit style-icon cursor-pointer"

@@ -58,6 +58,10 @@
   align-items: center;
 }
 
+.publication-date-range {
+  margin-bottom: 14px;
+}
+
 .publication-date,
 .finish-date {
   margin-right: 30px;
@@ -136,4 +140,25 @@
     font-family: $font-family-sans-serif;
     padding-right: 10px;
   }
+}
+
+.popup-category {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  .line {
+    display: inline-block;
+    width: 100%;
+    border-bottom: 1px solid #d5d5d5;
+    margin-left: 10px;
+  }
+}
+
+.circle {
+  height: 11px;
+  width: 11px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-right: 10px;
 }

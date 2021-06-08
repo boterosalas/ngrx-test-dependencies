@@ -58,9 +58,9 @@ export class NavigationFooterComponent implements OnInit {
   }
 
   getSections() {
-    this.subscription = this.content.getFooter().subscribe((resp) => {
+    this.subscription = this.content.getFooter('ADMIN').subscribe((resp) => {
       this.sectionsLinks = resp;
-      this.isInvalidAddSection = resp.length > 4;
+      this.isInvalidAddSection = resp.length >= 4;
     });
   }
 
@@ -129,7 +129,7 @@ export class NavigationFooterComponent implements OnInit {
 
   addNavigationItem(section: any) {
     const dialogRef1 = this.dialog.open(DialogNavigationItemComponent, {
-      width: '450px',
+      width: "450px",
       data: {
         title: "Agregar acceso",
         buttonName: "Agregar",
@@ -156,7 +156,7 @@ export class NavigationFooterComponent implements OnInit {
     };
 
     const dialogRef1 = this.dialog.open(DialogNavigationItemComponent, {
-      width: '450px',
+      width: "450px",
       data: data,
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {

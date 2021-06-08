@@ -5,6 +5,7 @@ import { MatDialog, MatTable } from '@angular/material';
 import * as moment from "moment";
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { ContentService } from 'src/app/services/content.service';
+import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 export interface PeriodicElement {
   drag: any;
@@ -26,23 +27,28 @@ export class CarrouselAdminComponent implements OnInit {
   displayedColumns2: string[] = ['drag', 'image', 'nameContent', 'link', 'bussiness', 'comision', 'active', 'actions'];
   dataAddImagen: FormGroup;
   dataAddImagenOfertas: FormGroup;
+  dataAddImagenPopup: FormGroup;
   selectAllVideosImg: string = "Seleccionar todos";
   selectAllVideosImgOfer: string = "Seleccionar todos";
   active: boolean;
   active2: boolean;
   idCarousel: number = 0;
   idOfertas: number = 0;
+  idPopup: number = 0;
   selected: any;
   @ViewChild('table', { static: false }) table: MatTable<PeriodicElement>;
   @ViewChild('table2', { static: false }) table2: MatTable<PeriodicElement2>;
   @ViewChild("templateAddImagenCarousel", { static: false }) templateAddImagenCarousel: TemplateRef<any>;
   @ViewChild("templateAddImagenOfertas", { static: false }) templateAddImagenOfertas: TemplateRef<any>;
+  @ViewChild("templateAddImagenPopup", { static: false }) templateAddImagenPopup: TemplateRef<any>;
   @ViewChild("templatePublication", { static: false }) templatePublication: TemplateRef<any>;
-  
+
   fileImgCat: any = "";
   nameFileCert: string = '';
   showErrorCert: boolean;
   selectedBuss = []
+  selectedSection = []
+  selectedColors = [{name: "Rojo", color: "#FF3F4C"}, {name: "Amarillo", color: "#FFAF51"}, {name: "Morado", color: "#37236A"}, {name: "Lila", color: "#8D7EB7"}]
   fileImgCat2: any = "";
   nameFileCert2: string = '';
   showErrorCert2: boolean;
@@ -64,12 +70,20 @@ export class CarrouselAdminComponent implements OnInit {
   hourDateFinish: any = "";
   visible: boolean = false;
   undefinedDate: boolean = false;
+  showUndefinedDate: boolean = true;
 
   dataSource = [];
+  dataSourcePopup = [];
+
+  dataPopupActive = []
+  dataPopupProgrammed = []
+  dataPopupRoughCopy = []
+  dataPopupExpire = []
 
   constructor(
     private dialog: MatDialog,
     private content: ContentService,
+    private auth: AuthService,
     private fb: FormBuilder,
   ) {
     this.dataAddImagen = this.fb.group({
@@ -85,13 +99,23 @@ export class CarrouselAdminComponent implements OnInit {
       link: [null, Validators.required],
       business: [null, Validators.required],
       comision: [null, Validators.required],
+      image: [null]
+    });
+    this.dataAddImagenPopup = this.fb.group({
+      nameContent: [null, Validators.required],
+      link: [null],
+      seccion: [null, Validators.required],
       image: [null],
+      image2: [null],
+      textbutton: [null, Validators.required],
+      colorbutton: [null, Validators.required]
     });
   }
 
   ngOnInit() {
     this.getOffers();
     this.getAllBusiness();
+    this.getSectionsClicker()
   }
   public getOffers() {
     this.content.getOffersbyType({ id: "CARROUSEL", admin: true }).subscribe((resp) => {
@@ -115,6 +139,31 @@ export class CarrouselAdminComponent implements OnInit {
         this.dataSourceOfer[index].undefinedDate = !this.dataSourceOfer[index].dateend ? true : false
       }
     })
+    this.content.getOffersbyType({ id: "POPUP", admin: true }).subscribe((resp) => {
+      this.dataPopupActive = []
+      this.dataPopupProgrammed = []
+      this.dataPopupRoughCopy = []
+      this.dataPopupExpire = []
+
+      const startTime: any = new Date()
+      this.dataSourcePopup = resp;
+      for (let index = 0; index < this.dataSourcePopup.length; index++) {
+        let date: any = new Date(this.dataSourcePopup[index].datestart)
+        this.dataSourcePopup[index].selected = false;
+        this.dataSourcePopup[index].programmed = date - startTime > 0 ? true : false
+        this.dataSourcePopup[index].undefinedDate = !this.dataSourcePopup[index].dateend ? true : false
+
+        if (this.dataSourcePopup[index].active) {
+          this.dataPopupActive.push(this.dataSourcePopup[index])
+        } else if (this.dataSourcePopup[index].programmed) {
+          this.dataPopupProgrammed.push(this.dataSourcePopup[index])
+        } else if (!this.dataSourcePopup[index].datestart || !this.dataSourcePopup[index].dateend) {
+          this.dataPopupRoughCopy.push(this.dataSourcePopup[index])
+        } else {
+          this.dataPopupExpire.push(this.dataSourcePopup[index])
+        }
+      }
+    })
   }
   public getAllBusiness() {
     this.content.getAllBusiness().subscribe(resp => {
@@ -129,7 +178,12 @@ export class CarrouselAdminComponent implements OnInit {
       })
 
     })
+  }
 
+  public getSectionsClicker() {
+    this.auth.getPermisionByUser("CLICKER").subscribe((resp) => {
+      this.selectedSection = resp
+    })
   }
 
   public hourChange(horu, type) {
@@ -142,8 +196,6 @@ export class CarrouselAdminComponent implements OnInit {
         break;
       case "finishDate":
         this.minHoursFinish = dataH === dataOp ? moment(data).format("hh:mm A") : "12:00 AM";
-        break;
-      default:
         break;
     }
   }
@@ -270,6 +322,7 @@ export class CarrouselAdminComponent implements OnInit {
     }
   }
   public editCarouselModal(element) {
+    this.showUndefinedDate = true
     const title = "Editar Imagen";
     const idBussiness = 1;
     const edit = 0;
@@ -309,6 +362,44 @@ export class CarrouselAdminComponent implements OnInit {
 
   }
 
+  public editPopupModal(elementP) {
+    this.showUndefinedDate = false
+    const titleP = "Popup";
+    const idBussinessP = 2;
+    const editP = 0;
+    const templateP = this.templateAddImagenPopup;
+    this.dataAddImagenPopup.reset();
+    this.showErrorCert = false;
+    if (elementP.imageurlweb != "") {
+      let datos = elementP.imageurlweb.split("/")
+      this.nameFileCert = datos[datos.length - 1]
+      let datos2 = elementP.imageurlmobile.split("/")
+      this.nameFileCert2 = datos2[datos2.length - 1]
+      this.checkButton();
+    }
+    this.fileImgCat = "";
+    this.fileImgCat2 = "";
+    this.dataAddImagenPopup.controls.nameContent.setValue(elementP.description)
+    this.dataAddImagenPopup.controls.link.setValue(elementP.link);
+    this.dataAddImagenPopup.controls.seccion.setValue(elementP.seccion)
+    this.dataAddImagenPopup.controls.textbutton.setValue(elementP.textbutton);
+    this.dataAddImagenPopup.controls.colorbutton.setValue(elementP.colorbutton);
+
+    this.formateDateHour(elementP)
+    this.undefinedDate = false
+    
+    this.idPopup = elementP.id;
+    let dialogRef3 = this.dialog.open(ModalGenericComponent, {
+      width: "450px",
+      data: {
+        title: titleP,
+        idBussiness: idBussinessP,
+        template: templateP,
+        edit: editP
+      },
+    });
+  }
+
   public formateDateHour(element) {
     let hour
     if (element.datestart) {
@@ -335,6 +426,7 @@ export class CarrouselAdminComponent implements OnInit {
     })
   }
   public editOfertasModal(element) {
+    this.showUndefinedDate = true
     const title = "Editar Imagen";
     const idBussiness = 1;
     const edit = 0;
@@ -378,6 +470,7 @@ export class CarrouselAdminComponent implements OnInit {
     const idBussiness = 1;
     const edit = 0;
     const template = this.templateAddImagenCarousel;
+    this.showUndefinedDate = true
     this.idCarousel = 0;
     this.dataAddImagen.reset();
     this.nameFileCert2 = "";
@@ -396,6 +489,7 @@ export class CarrouselAdminComponent implements OnInit {
 
   }
   public saveOfertasModal() {
+    this.showUndefinedDate = true
     const title = "Nueva Imagen";
     const idBussiness = 1;
     const edit = 0;
@@ -417,27 +511,51 @@ export class CarrouselAdminComponent implements OnInit {
     });
 
   }
-  public deleteComisionCarousel(element) {
-    Swal.fire({
-      html: "<h3 class='delete-title-comision'>Eliminar Imagen</h3> <p class='w-container'>¿Estás seguro de eliminar la imagen seleccionada?</p>",
-      confirmButtonText: "Eliminar imagen",
-      cancelButtonText: "Cancelar",
-      showCancelButton: true,
-      confirmButtonClass: "updateokdelete order-last",
-      cancelButtonClass: "updatecancel",
-      allowOutsideClick: false
-    }).then((resp: any) => {
-      if (resp.dismiss !== 'cancel') {
-        this.content.deleteOfer([element.id]).subscribe((resp) => {
-          this.getOffers();
-        })
-      }
-    })
+
+  public savePopupModal() {
+    this.showUndefinedDate = false
+    this.undefinedDate = false
+    const titlePopup = "Popup";
+    const idBussiness = 2;
+    const editPopup = 0;
+    const templatePopup = this.templateAddImagenPopup;
+    this.dataAddImagenPopup.reset();
+    this.idPopup = 0;
+    this.showErrorCert = false;
+    this.activeButtonOfer = false;
+    this.nameFileCert = "";
+    this.nameFileCert2 = "";
+    let dialogRef1 = this.dialog.open(ModalGenericComponent, {
+      width: "450px",
+      data: {
+        title: titlePopup,
+        template: templatePopup,
+        idBussiness,
+        edit: editPopup
+      },
+    });
   }
-  public deleteComisionOferta(element) {
+
+  public deleteOfer(element, type) {
+    let title = ""
+    let message = ""
+    let confirmButtonText = ""
+    switch (type) {
+      case "popup":
+        title = "Eliminar popup"
+        message = "¿Está seguro que desea eliminar el popup seleccionado?"
+        confirmButtonText = "Eliminar popup"
+        break;
+      default:
+        title = "Eliminar imagen"
+        message = "¿Estás seguro de eliminar la imagen seleccionada?"
+        confirmButtonText = "Eliminar imagen"
+        break;
+    }
+
     Swal.fire({
-      html: "<h3 class='delete-title-comision'>Eliminar Imagen</h3> <p class='w-container'>¿Estás seguro de eliminar la imagen seleccionada?</p>",
-      confirmButtonText: "Eliminar imagen",
+      html: `<h3 class='delete-title-comision'>${title}</h3> <p class='w-container'>${message}</p>`,
+      confirmButtonText: confirmButtonText,
       cancelButtonText: "Cancelar",
       showCancelButton: true,
       confirmButtonClass: "updateokdelete order-last",
@@ -599,6 +717,66 @@ export class CarrouselAdminComponent implements OnInit {
 
     this.content.saveOfertBusiness(datos).subscribe((resp) => {
       this.dataAddImagenOfertas.reset()
+      this.dialog.closeAll()
+      this.getOffers();
+    })
+
+  }
+  public saveImagenPopup() {
+    let visible;
+    if (this.dateFinishPublication && this.visible) {
+      visible = 1;
+    } else {
+      visible = 0;
+    }
+
+    let datePublication = this.datePublication ? moment(this.datePublication).format("YYYY-MM-DD") : "";
+    let dateFinishPublication = this.dateFinishPublication ? moment(this.dateFinishPublication).format("YYYY-MM-DD") : "";
+    let hour = this.hourDate ? this.militaryHrFormat(this.hourDate) : "";
+    let hourEnd = this.hourDateFinish ? this.militaryHrFormat(this.hourDateFinish) : "";
+
+    const datestart = !this.visible && datePublication ? `${datePublication} ${hour}:00` : ""
+    const dateend = (!this.visible && !this.undefinedDate) || (!this.showUndefinedDate && dateFinishPublication) ? `${dateFinishPublication} ${hourEnd}:00` : ""
+
+    let datos: any = [{
+      link: this.dataAddImagenPopup.controls.link.value || "",
+      active: visible,
+      description: this.dataAddImagenPopup.controls.nameContent.value,
+      dateend,
+      datestart,
+      type: "POPUP",
+      textButton: this.dataAddImagenPopup.controls.textbutton.value,
+      colorButton: this.dataAddImagenPopup.controls.colorbutton.value,
+      seccion: this.dataAddImagenPopup.controls.seccion.value,
+      Business: "exito",
+      idBusiness: 1,
+      infoAditional: "",
+    }]
+
+    if (this.idPopup === 0) {
+      datos = [{
+        ...datos[0],
+        imageWeb: this.fileImgCat,
+        imageMobile: this.fileImgCat
+      }]
+    } else {
+      if (this.fileImgCat != "") {
+        datos = [{
+          ...datos[0],
+          id: this.idPopup,
+          imageWeb: this.fileImgCat,
+          imageMobile: this.fileImgCat
+        }]
+      } else {
+        datos = [{
+          ...datos[0],
+          id: this.idPopup
+        }]
+      }
+    }
+
+    this.content.saveOfertBusiness(datos).subscribe((resp) => {
+      this.dataAddImagenPopup.reset()
       this.dialog.closeAll()
       this.getOffers();
     })
@@ -784,6 +962,11 @@ export class CarrouselAdminComponent implements OnInit {
     const hour = date.split("T");
     const formatHour = this.timeFormat(hour[1]);
     return `${fDate} ${formatHour}`
+  }
+
+  public getSectionName(url) {
+    const section = this.selectedSection.find(x => x.route === url)
+    return section ? section.menu : ""
   }
 }
 
