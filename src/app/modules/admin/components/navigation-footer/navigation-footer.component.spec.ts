@@ -13,7 +13,7 @@ import { ContentService } from "src/app/services/content.service";
 import { NavigationFooterComponent } from "./navigation-footer.component";
 import { of } from "rxjs";
 
-fdescribe("NavigationFooterComponent", () => {
+describe("NavigationFooterComponent", () => {
   let component: NavigationFooterComponent;
   let fixture: ComponentFixture<NavigationFooterComponent>;
 
