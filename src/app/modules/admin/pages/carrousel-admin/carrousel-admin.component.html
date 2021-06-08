@@ -1,5 +1,5 @@
 <app-banner
-  title="Sliders & Ofertas"
+  title="Herramientas"
   img="/assets/img/banners/banner-dashboard-pc.jpg"
   imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
 ></app-banner>
@@ -254,7 +254,7 @@
 
                 <img
                   class="cursor-pointer"
-                  (click)="deleteComisionCarousel(element)"
+                  (click)="deleteOfer(element, '')"
                   src="/assets/img/dashboard/icon-remove-comision.svg"
                   alt=""
                 />
@@ -511,7 +511,7 @@
                 ></i>
                 <img
                   class="cursor-pointer"
-                  (click)="deleteComisionOferta(element)"
+                  (click)="deleteOfer(element, '')"
                   src="/assets/img/dashboard/icon-remove-comision.svg"
                   alt=""
                 />
@@ -536,6 +536,97 @@
             class="ml-2"
           >
             Agregar imagen
+          </button>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span>Popups</span>
+      </ng-template>
+      <div class="mt-3">
+        
+        <h3 class="popup-category">Activos <span class="line"></span></h3>
+        <app-popup-card 
+          *ngFor="let element of dataPopupActive; let i = index"
+          [idPopup]="element.id"
+          [title]="element.description"
+          [imgDesktop]="element.imageurlweb"
+          [imgMobile]="element.imageurlmobile"
+          [link]="element.link"
+          [dateStart]="element.datestart"
+          [dateEnd]="element.dateend"
+          [textButton]="element.textbutton"
+          [section]="getSectionName(element.seccion)"
+          [showHidden]="element.active"
+          (edit)="editPopupModal(element)"
+          (delete)="deleteOfer($event, 'popup')"
+          (setShowHidden)="activate($event)">
+        </app-popup-card>
+
+        <h3 class="popup-category">Programados <span class="line"></span></h3>
+        <app-popup-card 
+          *ngFor="let element of dataPopupProgrammed; let i = index"
+          [idPopup]="element.id"
+          [title]="element.description"
+          [imgDesktop]="element.imageurlweb"
+          [imgMobile]="element.imageurlmobile"
+          [link]="element.link"
+          [dateStart]="element.datestart"
+          [dateEnd]="element.dateend"
+          [textButton]="element.textbutton"
+          [section]="getSectionName(element.seccion)"
+          [showHidden]="element.active"
+          (edit)="editPopupModal(element)"
+          (delete)="deleteOfer($event, 'popup')"
+          (setShowHidden)="activate($event)">
+        </app-popup-card>
+
+        <h3 class="popup-category">Borradores <span class="line"></span></h3>
+        <app-popup-card 
+          *ngFor="let element of dataPopupRoughCopy; let i = index"
+          [idPopup]="element.id"
+          [title]="element.description"
+          [imgDesktop]="element.imageurlweb"
+          [imgMobile]="element.imageurlmobile"
+          [link]="element.link"
+          [dateStart]="element.datestart"
+          [dateEnd]="element.dateend"
+          [textButton]="element.textbutton"
+          [section]="getSectionName(element.seccion)"
+          [showHidden]="element.active"
+          (edit)="editPopupModal(element)"
+          (delete)="deleteOfer($event, 'popup')"
+          (setShowHidden)="activate($event)">
+        </app-popup-card>
+
+        <h3 class="popup-category">Vencidos <span class="line"></span></h3>
+        <app-popup-card 
+          *ngFor="let element of dataPopupExpire; let i = index"
+          [idPopup]="element.id"
+          [title]="element.description"
+          [imgDesktop]="element.imageurlweb"
+          [imgMobile]="element.imageurlmobile"
+          [link]="element.link"
+          [dateStart]="element.datestart"
+          [dateEnd]="element.dateend"
+          [textButton]="element.textbutton"
+          [section]="getSectionName(element.seccion)"
+          [showHidden]="element.active"
+          (edit)="editPopupModal(element)"
+          (delete)="deleteOfer($event, 'popup')"
+          (setShowHidden)="activate($event)">
+        </app-popup-card>
+
+        <div class="mt-3 mb-3" fxLayout="row" fxLayoutAlign="end end">
+          <button
+            mat-raised-button
+            color="orange"
+            (click)="savePopupModal()"
+            id="download-users"
+            class="ml-2"
+          >
+            Agregar Popup
           </button>
         </div>
       </div>
@@ -949,6 +1040,262 @@
   </div>
 </ng-template>
 
+<ng-template #templateAddImagenPopup>
+  <div ngClass="delete-container">
+    <div>
+      <form [formGroup]="dataAddImagenPopup">
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="Nombre"
+            formControlName="nameContent"
+            type="text"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+          <mat-error
+            id="requiredName"
+            *ngIf="
+              dataAddImagenPopup.controls.nameContent.invalid &&
+              dataAddImagenPopup.controls.nameContent.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED"
+                | translate: { formValue: "Nombre" }
+            }}</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field style="width: 370px">
+          <input
+            matInput
+            placeholder="Link"
+            type="text"
+            formControlName="link"
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+        </mat-form-field>
+        <mat-form-field style="width: 370px">
+          <mat-label>UBICACIÓN</mat-label>
+          <select formControlName="seccion" matNativeControl required>
+            <option
+              *ngFor="let selected of selectedSection"
+              value="{{ selected.route }}"
+            >
+              <span style="color: #37236a">{{ selected.menu }}</span>
+            </option>
+          </select>
+          <mat-error
+            id="requiredName"
+            *ngIf="
+              dataAddImagenPopup.controls.seccion.invalid &&
+              dataAddImagenPopup.controls.seccion.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED" | translate: { formValue: "Ubicación" }
+            }}</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field style="width: 225px; margin-right: 15px;">
+          <input
+            matInput
+            placeholder="Texto del botón"
+            type="text"
+            formControlName="textbutton"
+            required
+            class="text-area-heigth"
+            style="color: #37236a"
+          />
+          <mat-error
+            id="requiredTextButton"
+            *ngIf="
+              dataAddImagenPopup.controls.textbutton.invalid &&
+              dataAddImagenPopup.controls.textbutton.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED" | translate: { formValue: "Comisión" }
+            }}</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field style="width: 130px">
+          <mat-placeholder class="selected-placeholder"
+            >COLOR DE BOTÓN</mat-placeholder
+          >
+          <mat-select
+            id="tipoReport"
+            formControlName="colorbutton"
+            class="selected-color"
+            required
+          >
+            <mat-option
+              *ngFor="let selected of selectedColors"
+              value="{{ selected.color }}"
+            >
+              <span [style.backgroundColor]="selected.color" class="circle"></span>
+              <span style="color: #726D7E">{{ selected.name }}</span>
+            </mat-option>
+          </mat-select>
+          <mat-error
+            id="requiredColor"
+            *ngIf="
+              dataAddImagenPopup.controls.colorbutton.invalid &&
+              dataAddImagenPopup.controls.colorbutton.errors.required
+            "
+            >{{
+              "GENERIC.REQUIRED" | translate: { formValue: "" }
+            }}</mat-error
+          >
+        </mat-form-field>
+
+        <div
+          fxLayout="row"
+          fxLayoutAlign="space-start center"
+          fxLayoutGap="50px"
+          fxLayoutGap.xs="5px"
+          class="pb-3"
+        >
+          <div fxLayout="column" fxLayoutAlign="center" class="space">
+            <strong class="title-gray" style="color: #a7a3b1; font-size: 11px"
+              >ADJUNTAR IMAGEN WEB (680x360px, formato .jpg, max 250kb)</strong
+            >
+            <span
+              class="title-secondary"
+              *ngIf="nameFileCert === ''"
+              style="font-size: 11px"
+              >No hay archivo seleccionado</span
+            >
+            <span
+              class="file-input"
+              *ngIf="nameFileCert !== ''"
+              style="color: #37236a; font-size: 11px"
+              >{{ nameFileCert | truncate: "20" }}</span
+            >
+          </div>
+          <div>
+            <label for="image" id="upload" class="cursor-pointer">
+              <span *ngIf="!showErrorCert">
+                <img
+                  class="mt-1"
+                  *ngIf="nameFileCert === ''"
+                  src="/assets/img/image-file-upload.svg"
+                  alt="upload"
+                />
+                <img
+                  class="mt-1"
+                  *ngIf="nameFileCert !== ''"
+                  src="/assets/img/image-file-upload-ok.svg"
+                  alt="upload"
+                />
+              </span>
+              <img
+                class="mt-1 w-icon"
+                *ngIf="showErrorCert"
+                src="/assets/img/icono-error-carga.svg"
+                alt="upload"
+              />
+            </label>
+          </div>
+        </div>
+        <mat-error *ngIf="showErrorCert" class="text-small small pb-2 d-block">
+          Formato inválido, sólo se pueden subir archivos con la extensión JPG y
+          menores de 250kb
+        </mat-error>
+        <input
+          (change)="onFileChangeFiles($event, 'image')"
+          id="image"
+          type="file"
+          style="display: none"
+          formControlName="image"
+        />
+
+        <div
+          fxLayout="row"
+          fxLayoutAlign="space-start center"
+          fxLayoutGap="50px"
+          fxLayoutGap.xs="5px"
+          class="pb-3"
+        >
+          <div fxLayout="column" fxLayoutAlign="center" class="space">
+            <strong class="title-gray" style="color: #a7a3b1; font-size: 11px"
+              >ADJUNTAR IMAGEN MOBILE (300x420px, formato .jpg, max 150kb)</strong
+            >
+            <span
+              class="title-secondary"
+              *ngIf="nameFileCert2 === ''"
+              style="font-size: 11px"
+              >No hay archivo seleccionado</span
+            >
+            <span
+              class="file-input"
+              *ngIf="nameFileCert2 !== ''"
+              style="color: #37236a; font-size: 11px"
+              >{{ nameFileCert2 | truncate: "20" }}</span
+            >
+          </div>
+          <div>
+            <label for="image2" id="upload" class="cursor-pointer">
+              <span *ngIf="!showErrorCert">
+                <img
+                  class="mt-1"
+                  *ngIf="nameFileCert2 === ''"
+                  src="/assets/img/image-file-upload.svg"
+                  alt="upload"
+                />
+                <img
+                  class="mt-1"
+                  *ngIf="nameFileCert2 !== ''"
+                  src="/assets/img/image-file-upload-ok.svg"
+                  alt="upload"
+                />
+              </span>
+              <img
+                class="mt-1 w-icon"
+                *ngIf="showErrorCert"
+                src="/assets/img/icono-error-carga.svg"
+                alt="upload"
+              />
+            </label>
+          </div>
+        </div>
+        <mat-error *ngIf="showErrorCert" class="text-small small pb-2 d-block">
+          Formato inválido, sólo se pueden subir archivos con la extensión JPG y
+          menores de 150kb
+        </mat-error>
+        <input
+          (change)="onFileChangeFilesSecond($event, 'image2')"
+          id="image2"
+          type="file"
+          style="display: none"
+          formControlName="image2"
+        />
+        <ng-container *ngTemplateOutlet="templatePublication"> </ng-container>
+      </form>
+    </div>
+
+    <div class="mt-3 mb-2" fxLayout="row" fxLayoutAlign="end end">
+      <button mat-button ngClass="button_cancel" (click)="onNoClick()">
+        Cancelar
+      </button>
+      <button
+        mat-raised-button
+        color="orange"
+        (click)="saveImagenPopup()"
+        id="download-users"
+        class="ml-2"
+        [disabled]="!dataAddImagenPopup.valid || !activeButtonOfer || (visible && !dateFinishPublication)"
+      >
+        {{ visible 
+          ? 'Publicar' 
+          : (datePublication && dateFinishPublication
+            ? 'Programar' 
+            : 'Guardar como borrador') 
+        }}
+      </button>
+    </div>
+  </div>
+</ng-template>
+
 <ng-template #templatePublication>
   <div class="publication">
     <h3 class="secundary-text">PUBLICACIÓN</h3>
@@ -1016,14 +1363,13 @@
         </div>
       </div>
     </div>
-    <span class="s-label">
+    <span *ngIf="showUndefinedDate" class="s-label">
       <mat-checkbox
         id="undefined-time"
         class="mr-1 mb-2"
         [ngModelOptions]="{ standalone: true }"
         [(ngModel)]="undefinedDate"
       >
-      <!-- IdentificationCard1 -->
       </mat-checkbox>
       <label class="undefined-time" for="undefined-time">
         Tiempo indefinido
@@ -1052,7 +1398,7 @@
             [min]="maxDate"
             readonly
             class="border-input mat-elevation-z1 border-radius"
-            [disabled]="undefinedDate || visible"
+            [disabled]="showUndefinedDate && (undefinedDate || visible)"
             (dateChange)="hourChange($event, 'finishDate')"
             [ngModelOptions]="{ standalone: true }"
             [(ngModel)]="dateFinishPublication"
@@ -1065,11 +1411,11 @@
           HORA DE FINALIZACIÓN
         </label>
         <div class="mt-2 content-input">
-          <mat-icon *ngIf="!undefinedDate && !visible" class="tio-watch_later"></mat-icon>
-          <mat-icon *ngIf="undefinedDate || visible" class="tio-watch_later opaque"></mat-icon>
+          <mat-icon *ngIf="!showUndefinedDate || (!undefinedDate && !visible)" class="tio-watch_later"></mat-icon>
+          <mat-icon *ngIf="showUndefinedDate && (undefinedDate || visible)" class="tio-watch_later opaque"></mat-icon>
           <input
             [ngModelOptions]="{ standalone: true }"
-            [disabled]="undefinedDate || visible"
+            [disabled]="showUndefinedDate && (undefinedDate || visible)"
             [(ngModel)]="hourDateFinish"
             [ngxTimepicker]="min2"
             matInput

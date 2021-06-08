@@ -80,7 +80,7 @@ export class UtilsService {
     const token = localStorage.getItem("ACCESS_TOKEN");
     // decode the token to get its payload
     const tokenPayload = decode(token);
-    this.auth.getPermisionByUser(tokenPayload.userid).subscribe((respByUser) => {
+    this.auth.getPermisionByUser("ADMIN").subscribe((respByUser) => {
       let ubication = location.href;
       let route = ubication.split("/");
       let routeslite = '/' + route[route.length - 1];

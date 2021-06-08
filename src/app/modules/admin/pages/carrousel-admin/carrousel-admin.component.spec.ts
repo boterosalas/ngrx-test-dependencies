@@ -11,6 +11,7 @@ import { of } from 'rxjs';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { ContentService } from 'src/app/services/content.service';
+import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 import { JwtModule } from "@auth0/angular-jwt";
 
@@ -30,12 +31,15 @@ describe('CarrouselAdminComponent', () => {
     "deleteOfer",
     "saveOfertBusiness"
   ]);
+  const mockAuthService = jasmine.createSpyObj("AuthService", [
+    "getPermisionByUser"
+  ]);
   const datos = [{ 
       active: false,
       business: "exito",
       date: "2021-04-20T00:00:00",
       dateend: "2021-05-19T02:15:00",
-      datestart: "2021-05-19T02:05:00",
+      datestart: "2999-05-19T02:05:00",
       description: "Oferta",
       id: 4,
       idbusiness: 1,
@@ -48,14 +52,18 @@ describe('CarrouselAdminComponent', () => {
       orderby: 1,
       programmed: false,
       selected: false,
-      type: "CARROUSEL" 
+      type: "POPUP",
+      seccion: "/mi-perfil",
+      textbutton: "Continuar",
+      new: true,
+      colorbutton: "#8D7EB7"
     },
     { 
-      active: true,
+      active: false,
       business: "exito",
       date: "2021-04-20T00:00:00",
       dateend: null,
-      datestart: "2021-05-19T16:50:00",
+      datestart: null,
       description: "Jueves Online",
       id: 14,
       idbusiness: 1,
@@ -68,7 +76,11 @@ describe('CarrouselAdminComponent', () => {
       orderby: 0,
       programmed: false,
       selected: false,
-      type: "CARROUSEL" 
+      type: "CARROUSEL",
+      seccion: null,
+      textbutton: null,
+      new: false,
+      colorbutton: null
     },
     {
       active: true,
@@ -88,13 +100,44 @@ describe('CarrouselAdminComponent', () => {
       orderby: 2,
       programmed: false,
       selected: false,
-      type: "OFERTA"
+      type: "OFERTA",
+      seccion: null,
+      textbutton: null,
+      new: false,
+      colorbutton: null
+    },
+    {
+      active: false,
+      business: "exito",
+      date: "2021-04-20T13:20:00",
+      dateend: "2021-05-19T02:15:00",
+      datestart: "2021-05-19T02:15:00",
+      description: "Freidora De Aire Bioceramic Oster ",
+      id: 35,
+      idbusiness: 1,
+      imagemobile: null,
+      imageurlmobile: "https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-mobile/1.jpg",
+      imageurlweb: "https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-web/1.jpg",
+      imageweb: null,
+      infoaditional: "Hasta 3%",
+      link: "https://www.exito.com/freidora-de-aire-bioceramic-384560/p?utm_source=clickam&utm_medium=referral&utm_campaign={1}",
+      orderby: 2,
+      programmed: false,
+      selected: false,
+      type: "POPUP",
+      seccion: null,
+      textbutton: null,
+      new: false,
+      colorbutton: null
     }]
   const audit = {
     state: "Success",
     userMessage: "se ha enviado un correo",
     objectResponse: []
   };
+  const getPermisionByUser = [
+    {idmenu: 1, menu: "Inicio", route: "/inicio"}
+  ]
   const busss = [{
     code: "clickam",
     description: "Clickam",
@@ -141,6 +184,7 @@ describe('CarrouselAdminComponent', () => {
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: dialogMock },
         { provide: ContentService, useValue: mockContentService },
+        { provide: AuthService, useValue: mockAuthService },
         { provide: MatDialog, useValue: mockDialog },
       ]
     }).compileComponents();
@@ -149,7 +193,7 @@ describe('CarrouselAdminComponent', () => {
     mockContentService.getAllBusiness.and.returnValue(of(busss));
     mockContentService.deleteOfer.and.returnValue(of(audit));
     mockContentService.saveOfertBusiness.and.returnValue(of(audit));
-
+    mockAuthService.getPermisionByUser.and.returnValue(of(getPermisionByUser));
   }));
 
   beforeEach(() => {
@@ -161,19 +205,21 @@ describe('CarrouselAdminComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy()
     expect(component.timeFormat("22:20:00")).toEqual("10:20 PM")
-    //component.ngOnInit()
-    // component.getAllBusiness()
-    // fixture.whenStable().then(() => {
-    //   tick();
-      
-    // });
-    //expect(mockContentService.getOffersbyType).toHaveBeenCalled();
+    component.getAllBusiness()
+    expect(mockContentService.getAllBusiness).toHaveBeenCalled();
+    expect(mockContentService.getOffersbyType).toHaveBeenCalled();
   });
 
+  describe("getSectionsClicker", () => {
+    it('called', () => {
+      component.getSectionsClicker()
+      expect(mockAuthService.getPermisionByUser).toHaveBeenCalled();
+    });
+  })
+
   it('edit Carousel Modal', () => {
-    //component.editOfertasModal({ id: 1, nameContent: "HE", link: "link", bussiness: "buss", comision: "Hasta 4%" });
     component.editCarouselModal(datos[0])
-    expect(component.visible).not.toBeTruthy()
+    expect(component.showUndefinedDate).toBeTruthy()
   });
 
   it('file change', () => {
@@ -249,6 +295,16 @@ describe('CarrouselAdminComponent', () => {
 
   it('save carousel modal', () => {
     component.saveCarouselModal();
+    expect(component.showUndefinedDate).toBeTruthy()
+    expect(component.nameFileCert).not.toBeTruthy()
+    expect(component.nameFileCert2).not.toBeTruthy()
+    expect(component.showErrorCert).not.toBeTruthy()
+    expect(component.activebutton).not.toBeTruthy()
+  })
+
+  it('save Popup Modal', () => {
+    component.savePopupModal();
+    expect(component.showUndefinedDate).not.toBeTruthy()
     expect(component.nameFileCert).not.toBeTruthy()
     expect(component.nameFileCert2).not.toBeTruthy()
     expect(component.showErrorCert).not.toBeTruthy()
@@ -257,6 +313,7 @@ describe('CarrouselAdminComponent', () => {
 
   it('save Ofertas modal', () => {
     component.saveOfertasModal();
+    expect(component.showUndefinedDate).toBeTruthy()
     expect(component.nameFileCert).not.toBeTruthy()
     expect(component.nameFileCert2).not.toBeTruthy()
     expect(component.showErrorCert).not.toBeTruthy()
@@ -278,8 +335,8 @@ describe('CarrouselAdminComponent', () => {
     
     component.saveOrder([{ id: 1, orderBy: 1 }, { id: 2, orderBy: 2 }]);
     
-    component.deleteComisionCarousel({ id: 1 });
-    component.deleteComisionOferta({ id: 1 });
+    component.deleteOfer({ id: 1 }, '');
+    component.deleteOfer({ id: 1 }, 'popup');
     component.checkButton();
     
     component.deleteEveryOfertas();
@@ -287,5 +344,9 @@ describe('CarrouselAdminComponent', () => {
     component.deleteEvery();
     let datos = true;
     expect(datos).toBeTruthy();
+  })
+
+  it("get Section Name", () => {
+    expect(component.getSectionName("/inicio")).toBe("Inicio");
   })
 });
