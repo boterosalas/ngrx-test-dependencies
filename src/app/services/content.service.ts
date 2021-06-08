@@ -193,8 +193,8 @@ export class ContentService {
       );
   }
 
-  public getFooter() {
-    return this.http.get(`${this.url + this.apiFooter}`, this.httpOptions).pipe(
+  public getFooter(rol = 'CLICKER') {
+    return this.http.get(`${this.url + this.apiFooter}?rol=${rol}`, this.httpOptions).pipe(
       map((user: ResponseService) => {
         return user.objectResponse;
       })

@@ -1,18 +1,9 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  ViewChild,
-  TemplateRef,
-} from "@angular/core";
 import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
-import { MatDialog, MatTable } from "@angular/material";
-import { LinksService } from "src/app/services/links.service";
-
+import { Component, Input, OnInit, ViewChild } from "@angular/core";
+import { MatTable } from "@angular/material";
 import { Subscription } from "rxjs";
 import { ContentService } from "src/app/services/content.service";
+import { LinksService } from "src/app/services/links.service";
 
 export interface FooterElement {
   drag: any;
@@ -58,7 +49,7 @@ export class NavigationComponent implements OnInit {
   }
 
   public getAllFooterSections() {
-    this.subscription = this.content.getFooter().subscribe((resp) => {
+    this.subscription = this.content.getFooter("ADMIN").subscribe((resp) => {
       this.dataSource = resp;
     });
   }

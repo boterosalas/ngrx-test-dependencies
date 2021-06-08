@@ -24,7 +24,7 @@ export class FooterComponent implements OnInit {
 
   public getSections() {
     this.subscription = this.content
-      .getFooter()
+      .getFooter('CLICKER')
       .subscribe((resp) => {
         this.sectionsLinks = resp;
       });

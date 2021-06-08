@@ -58,7 +58,7 @@ export class NavigationFooterComponent implements OnInit {
   }
 
   getSections() {
-    this.subscription = this.content.getFooter().subscribe((resp) => {
+    this.subscription = this.content.getFooter('ADMIN').subscribe((resp) => {
       this.sectionsLinks = resp;
       this.isInvalidAddSection = resp.length >= 4;
     });
