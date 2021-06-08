@@ -13,7 +13,7 @@ import { ContentService } from "src/app/services/content.service";
 import { NavigationFooterComponent } from "./navigation-footer.component";
 import { of } from "rxjs";
 
-describe("NavigationFooterComponent", () => {
+fdescribe("NavigationFooterComponent", () => {
   let component: NavigationFooterComponent;
   let fixture: ComponentFixture<NavigationFooterComponent>;
 
@@ -202,15 +202,15 @@ describe("NavigationFooterComponent", () => {
     expect(mockContentService.saveOrderFooterSections).toHaveBeenCalled();
   });
 
-  // it("deleteNavigationSectionService", () => {
-  //   component.currentSection = [1];
-  //   component.deleteNavigationSectionService();
-  //   expect(mockContentService.deleteFooterSection).toHaveBeenCalled();
-  // });
+  it("deleteNavigationSectionService", () => {
+    component.currentSection = [1];
+    component.deleteNavigationSectionService();
+    expect(mockContentService.deleteFooterSection).toHaveBeenCalled();
+  });
 
-  // it("deleteNavigationItemService", () => {
-  //   component.currentLink = [1];
-  //   component.deleteNavigationItemService();
-  //   expect(mockContentService.deleteFooterLink).toHaveBeenCalled();
-  // });
+  it("deleteNavigationItemService", () => {
+    component.currentLink = [1];
+    component.deleteNavigationItemService();
+    expect(mockContentService.deleteFooterLink).toHaveBeenCalled();
+  });
 });
