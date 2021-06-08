@@ -102,4 +102,10 @@ describe("NavigationGroupComponent", () => {
   it("should create", () => {
     expect(component).toBeTruthy();
   });
+
+  it("edit Navigation Group", () => {
+    component.editNavigationGroup();
+    expect(component).toBeTruthy();
+  })
+
 });

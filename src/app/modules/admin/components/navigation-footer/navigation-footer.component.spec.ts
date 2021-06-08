@@ -1,4 +1,5 @@
 import { HttpClientTestingModule } from "@angular/common/http/testing";
+import "zone.js/dist/zone-testing";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -18,6 +19,10 @@ describe("NavigationFooterComponent", () => {
 
   const mockContentService = jasmine.createSpyObj("ContentService", [
     "getFooter",
+    "saveOrderFooterLinks",
+    "saveOrderFooterSections",
+    "deleteFooterSection",
+    "deleteFooterLink",
   ]);
   let response = {
     Status: "Success",
@@ -171,15 +176,41 @@ describe("NavigationFooterComponent", () => {
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
     mockContentService.getFooter.and.returnValue(of(sectionsLinks));
+    mockContentService.saveOrderFooterLinks.and.returnValue(of(response));
+    mockContentService.saveOrderFooterSections.and.returnValue(of(response));
+    mockContentService.deleteFooterSection.and.returnValue(of(response));
+    mockContentService.deleteFooterLink.and.returnValue(of(response));
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NavigationFooterComponent);
-    component = fixture.componentInstance;   
+    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it("should create", () => {
     expect(component).toBeTruthy();
   });
+
+  it("saveOrderItems", () => {
+    component.saveOrderItems([{ id: 1, orderBy: 1 }]);
+    expect(mockContentService.saveOrderFooterLinks).toHaveBeenCalled();
+  });
+
+  it("saveOrderSections", () => {
+    component.saveOrderSections([{ id: 1, orderBy: 1 }]);
+    expect(mockContentService.saveOrderFooterSections).toHaveBeenCalled();
+  });
+
+  // it("deleteNavigationSectionService", () => {
+  //   component.currentSection = [1];
+  //   component.deleteNavigationSectionService();
+  //   expect(mockContentService.deleteFooterSection).toHaveBeenCalled();
+  // });
+
+  // it("deleteNavigationItemService", () => {
+  //   component.currentLink = [1];
+  //   component.deleteNavigationItemService();
+  //   expect(mockContentService.deleteFooterLink).toHaveBeenCalled();
+  // });
 });

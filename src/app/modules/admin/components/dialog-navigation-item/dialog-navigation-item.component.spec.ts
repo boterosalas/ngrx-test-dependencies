@@ -10,6 +10,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
 import { ContentService } from "src/app/services/content.service";
 import { DialogNavigationItemComponent } from './dialog-navigation-item.component';
+import { of } from "rxjs/internal/observable/of";
 
 describe('DialogNavigationItemComponent', () => {
   let component: DialogNavigationItemComponent;
@@ -21,7 +22,11 @@ describe('DialogNavigationItemComponent', () => {
   const dialogMock = {
     close: () => { }
   };
-
+  const resp = {
+    state: "Success",
+    userMessage: "Se ha creado el enlace",
+    objectResponse: []
+  };
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ DialogNavigationItemComponent ],
@@ -52,6 +57,8 @@ describe('DialogNavigationItemComponent', () => {
       schemas: [NO_ERRORS_SCHEMA],
     })
     .compileComponents();
+    mockContentService.saveFooterLink.and.returnValue(of(resp));
+
   }));
 
   beforeEach(() => {
@@ -63,4 +70,11 @@ describe('DialogNavigationItemComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it("add navigation item", () => {
+    component.data = { edit: 0, orderby: 1 };
+    component.dateForm.controls.description.setValue("Nuevo enlace");
+    component.saveItem();
+    expect(mockContentService.saveFooterLink).toHaveBeenCalled();
+  })
 });
