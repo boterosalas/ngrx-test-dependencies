@@ -11,7 +11,7 @@ import { AppMaterialModule } from "src/app/modules/shared/app-material/app-mater
 import { ContentService } from "src/app/services/content.service";
 import { NavigationGroupComponent } from "./navigation-group.component";
 
-fdescribe("NavigationGroupComponent", () => {
+describe("NavigationGroupComponent", () => {
   let component: NavigationGroupComponent;
   let fixture: ComponentFixture<NavigationGroupComponent>;
 

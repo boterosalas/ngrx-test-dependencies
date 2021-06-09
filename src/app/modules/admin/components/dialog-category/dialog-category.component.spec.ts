@@ -132,4 +132,9 @@ describe("DialogCategoryComponent", () => {
     expect(mockContentService.addCategory).toHaveBeenCalled();
   });
 
+  it("ngOnDestroy", () => {
+    component.ngOnDestroy;
+    expect(component).toBeTruthy();
+  });
+
 })

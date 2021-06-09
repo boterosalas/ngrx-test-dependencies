@@ -76,4 +76,18 @@ describe("DialogNavigationGroupComponent", () => {
     component.saveSection();
     expect(mockContentService.saveFooterSection).toHaveBeenCalled();
   });
+
+  it("onNoClick", () => {
+    component.onNoClick;
+    expect(component).toBeTruthy();
+  });
+
+  it("loadSection", () => {
+    component.loadSection;
+    expect(component).toBeTruthy();
+  });
+
+  it("form controls", () => {
+    expect(Object.keys(component.dateForm.controls)).toEqual(["description"]);
+  });
 });

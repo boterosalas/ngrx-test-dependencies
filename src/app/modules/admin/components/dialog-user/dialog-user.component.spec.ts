@@ -147,4 +147,25 @@ describe('DialogUserComponent', () => {
     expect(component.pad(2)).toBe("02")
     expect(spy).toHaveBeenCalled()
   });
+
+  it("onNoClick", () => {
+    component.onNoClick;
+    expect(component).toBeTruthy();
+  });
+
+  it("onNoClickEdit", () => {
+    component.onNoClickEdit;
+    expect(component).toBeTruthy();
+  });
+
+  it("ngOnDestroy", () => {
+    component.ngOnDestroy;
+    expect(component).toBeTruthy();
+  });
+
+  it("changeValue", () => {
+    component.changeValue;
+    expect(component).toBeTruthy();
+  });
+
 });

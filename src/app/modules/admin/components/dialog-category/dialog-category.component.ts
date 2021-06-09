@@ -163,8 +163,6 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
     this.content.addCategory(addCategory).subscribe((resp: ResponseService) => {
       if (resp.state === "Success") {
         this.dialogRef.close();
-      } else {
-        console.log("Upss Hubo un problema vuelve a intentarlo")
       }
     });
   }
