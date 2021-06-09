@@ -207,6 +207,7 @@ describe("NavigationFooterComponent", () => {
     expect(mockContentService.saveOrderFooterSections).toHaveBeenCalled();
   });
 
+  
   it("getSections", () => {
     component.getSections();
     expect(mockContentService.getFooter).toHaveBeenCalled();
