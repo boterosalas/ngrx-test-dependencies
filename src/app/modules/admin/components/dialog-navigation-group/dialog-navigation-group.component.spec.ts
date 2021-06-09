@@ -17,15 +17,15 @@ describe("DialogNavigationGroupComponent", () => {
   let fixture: ComponentFixture<DialogNavigationGroupComponent>;
 
   const mockContentService = jasmine.createSpyObj("ContentService", [
-    "saveFooterSection"
+    "saveFooterSection",
   ]);
   const dialogMock = {
-    close: () => { }
+    close: () => {},
   };
   const resp = {
     state: "Success",
     userMessage: "Se ha creado el grupo",
-    objectResponse: []
+    objectResponse: [],
   };
 
   beforeEach(async(() => {
@@ -58,7 +58,6 @@ describe("DialogNavigationGroupComponent", () => {
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
     mockContentService.saveFooterSection.and.returnValue(of(resp));
-
   }));
 
   beforeEach(() => {
@@ -76,5 +75,5 @@ describe("DialogNavigationGroupComponent", () => {
     component.dateForm.controls.description.setValue("Nuevo grupo");
     component.saveSection();
     expect(mockContentService.saveFooterSection).toHaveBeenCalled();
-  })
+  });
 });

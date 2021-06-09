@@ -135,7 +135,6 @@ describe("ReportComponent", () => {
     expect(mockLinksService.getPayment).toHaveBeenCalled();
   });
 
-
   it("get detail payment", () => {
     component.userData(user);
     expect(mockLinksService.getDetailPaymentClicker).toHaveBeenCalled();
@@ -160,6 +159,5 @@ describe("ReportComponent", () => {
     component.break("");
     expect(mockDialog.open).toBeTruthy();
   });
-
 
 });

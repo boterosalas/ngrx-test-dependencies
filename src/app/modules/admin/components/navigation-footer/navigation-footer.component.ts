@@ -3,9 +3,9 @@ import { MatDialog, MatDialogRef } from "@angular/material";
 import { Subscription } from "rxjs";
 import { ContentService } from "src/app/services/content.service";
 import { DialogNavigationGroupComponent } from "../dialog-navigation-group/dialog-navigation-group.component";
+import { DialogNavigationItemComponent } from "../dialog-navigation-item/dialog-navigation-item.component";
 import { ResponseService } from "src/app/interfaces/response";
 import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
-import { DialogNavigationItemComponent } from "../dialog-navigation-item/dialog-navigation-item.component";
 import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 @Component({
   selector: "app-navigation-footer",
@@ -32,7 +32,6 @@ export class NavigationFooterComponent implements OnInit {
   }
 
   saveOrderItems(data: any) {
-    console.log(`data`, data);
     this.content.saveOrderFooterLinks(data).subscribe(() => {});
   }
 
