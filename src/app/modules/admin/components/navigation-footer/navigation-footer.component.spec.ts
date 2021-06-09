@@ -2,7 +2,13 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import {
+  MatDialog,
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from "@angular/material";
+import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterTestingModule } from "@angular/router/testing";
 import { JwtModule } from "@auth0/angular-jwt";
@@ -11,13 +17,40 @@ import { of } from "rxjs";
 import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
 import { ContentService } from "src/app/services/content.service";
 import "zone.js/dist/zone-testing";
+import { DialogNavigationGroupComponent } from "../dialog-navigation-group/dialog-navigation-group.component";
 import { NavigationFooterComponent } from "./navigation-footer.component";
 
+export class MdDialogMock {
+  open() {
+    return {
+      afterClosed: () => of(true),
+    };
+  }
+}
+
 describe("NavigationFooterComponent", () => {
+  let dialogSpy: jasmine.Spy;
+  let dialogRefSpyObj = jasmine.createSpyObj({
+    afterClosed: of({}),
+    close: null,
+  });
+  dialogRefSpyObj.componentInstance = { body: "" }; // attach componentInstance to the spy object...
+
   let component: NavigationFooterComponent;
   let fixture: ComponentFixture<NavigationFooterComponent>;
 
-  const mockDialog = jasmine.createSpyObj("MatDialog", ["open"]);
+  const mockDialog = jasmine.createSpyObj("MatDialog", [
+    "open",
+    "beforeClosed",
+  ]);
+
+  const mockDialogRef = jasmine.createSpyObj("MatDialogRef", [
+    "close",
+    "afterClosed",
+    "componentInstance",
+    "event ",
+    "beforeClosed",
+  ]);
 
   const mockContentService = jasmine.createSpyObj("ContentService", [
     "getFooter",
@@ -30,9 +63,10 @@ describe("NavigationFooterComponent", () => {
   let response = {
     Status: "Success",
   };
-  
+
   const dialogMock = {
     close: () => {},
+    beforeClosed: () => {},
   };
 
   const sectionsLinks = [
@@ -160,6 +194,7 @@ describe("NavigationFooterComponent", () => {
         RouterTestingModule.withRoutes([]),
         ReactiveFormsModule,
         FormsModule,
+        MatDialogModule,
         NoopAnimationsModule,
         JwtModule.forRoot({
           config: {
@@ -174,8 +209,8 @@ describe("NavigationFooterComponent", () => {
       ],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
-        { provide: MatDialogRef, useValue: dialogMock },
         { provide: ContentService, useValue: mockContentService },
+        { provide: MatDialogRef, useValue: dialogMock },
         { provide: MatDialog, useValue: mockDialog },
       ],
       schemas: [NO_ERRORS_SCHEMA],
@@ -185,6 +220,7 @@ describe("NavigationFooterComponent", () => {
     mockContentService.saveOrderFooterSections.and.returnValue(of(response));
     mockContentService.deleteFooterSection.and.returnValue(of(response));
     mockContentService.deleteFooterLink.and.returnValue(of(response));
+    mockDialog.beforeClosed.and.returnValue(of(response));
   }));
 
   beforeEach(() => {
@@ -197,6 +233,18 @@ describe("NavigationFooterComponent", () => {
     expect(component).toBeTruthy();
   });
 
+  it("deleteNavigationSectionService", () => {
+    component.currentSection = { id: 1, description: "test" };
+    component.deleteNavigationSectionService();
+    expect(mockContentService.deleteFooterSection).toHaveBeenCalled();
+  });
+
+  it("deleteNavigationItemService", () => {
+    component.currentLink = { id: 1, description: "test" };
+    component.deleteNavigationItemService();
+    expect(mockContentService.deleteFooterLink).toHaveBeenCalled();
+  });
+
   it("saveOrderItems", () => {
     component.saveOrderItems([{ id: 1, orderBy: 1 }]);
     expect(mockContentService.saveOrderFooterLinks).toHaveBeenCalled();
@@ -207,9 +255,23 @@ describe("NavigationFooterComponent", () => {
     expect(mockContentService.saveOrderFooterSections).toHaveBeenCalled();
   });
 
-  
   it("getSections", () => {
     component.getSections();
     expect(mockContentService.getFooter).toHaveBeenCalled();
   });
+
+  it("currentLink", () => {
+    expect(component.currentLink).toEqual({});
+  });
+
+  it("isInvalidAddSection", () => {
+    expect(component.isInvalidAddSection).toBeFalsy;
+  });
+
+  // it("deleteNavigationGroup", () => {
+  //   // spyOn(component.dialogRef, 'open')
+  //   // dialogSpy = spyOn(TestBed.get(MatDialog), 'open').and.returnValue(dialogRefSpyObj);
+  //   component.deleteNavigationGroup({ id: 1, description: "test", orderby: 1 });
+  //   expect(component.deleteNavigationGroup).toHaveBeenCalled();
+  // });
 });

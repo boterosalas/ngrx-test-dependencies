@@ -22,7 +22,7 @@ export class NavigationFooterComponent implements OnInit {
 
   dialogRef: MatDialogRef<any>;
   currentSection: any;
-  currentLink: any;
+  currentLink: any = {};
   isInvalidAddSection: boolean = false;
 
   constructor(private content: ContentService, private dialog: MatDialog) {}
@@ -66,9 +66,7 @@ export class NavigationFooterComponent implements OnInit {
   addSection() {
     const dialogRef1 = this.dialog.open(DialogNavigationGroupComponent, {
       data: {
-        title: "Nuevo grupo",
-        buttonName: "Agregar",
-        edit: 0,
+        title: "Nuevo grupo", buttonName: "Agregar", edit: 0,
       },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
@@ -79,13 +77,7 @@ export class NavigationFooterComponent implements OnInit {
   editNavigationGroup(section: any) {
     const dialogRef1 = this.dialog.open(DialogNavigationGroupComponent, {
       data: {
-        title: "Editar grupo",
-        buttonName: "Guardar",
-        edit: 1,
-        id: section.id,
-        description: section.description,
-        orderby: section.orderby,
-      },
+        title: "Editar grupo", buttonName: "Guardar", edit: 1, id: section.id, description: section.description, orderby: section.orderby, },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
       this.getSections();
@@ -130,10 +122,7 @@ export class NavigationFooterComponent implements OnInit {
     const dialogRef1 = this.dialog.open(DialogNavigationItemComponent, {
       width: "450px",
       data: {
-        title: "Agregar acceso",
-        buttonName: "Agregar",
-        edit: 0,
-        idseccion: section.id,
+        title: "Agregar acceso",buttonName: "Agregar",edit: 0,idseccion: section.id,
       },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
@@ -143,20 +132,12 @@ export class NavigationFooterComponent implements OnInit {
 
   editNavigationItem(item: any) {
     const data = {
-      title: "Editar acceso",
-      buttonName: "Guardar",
-      edit: 1,
-      id: item.id,
-      idseccion: item.idseccion,
-      link: item.link,
-      description: item.description,
-      orderby: item.orderby,
-      date: item.date,
+      title: "Editar acceso",buttonName: "Guardar",edit: 1,id: item.id,idseccion: item.idseccion,
+      link: item.link,description: item.description,orderby: item.orderby,date: item.date,
     };
 
     const dialogRef1 = this.dialog.open(DialogNavigationItemComponent, {
-      width: "450px",
-      data: data,
+      width: "450px", data: data,
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
       this.getSections();
