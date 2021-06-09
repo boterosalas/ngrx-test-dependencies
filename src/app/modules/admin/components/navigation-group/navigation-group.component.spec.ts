@@ -11,7 +11,7 @@ import { AppMaterialModule } from "src/app/modules/shared/app-material/app-mater
 import { ContentService } from "src/app/services/content.service";
 import { NavigationGroupComponent } from "./navigation-group.component";
 
-describe("NavigationGroupComponent", () => {
+fdescribe("NavigationGroupComponent", () => {
   let component: NavigationGroupComponent;
   let fixture: ComponentFixture<NavigationGroupComponent>;
 
@@ -106,6 +106,30 @@ describe("NavigationGroupComponent", () => {
   it("edit Navigation Group", () => {
     component.editNavigationGroup();
     expect(component).toBeTruthy();
-  })
+  });
 
+  it("addNavigationItem", () => {
+    component.addNavigationItem();
+    expect(component).toBeTruthy();
+  });
+
+  it("openDeleteNavigationSection", () => {
+    component.openDeleteNavigationSection();
+    expect(component).toBeTruthy();
+  });
+
+  it("editNavigationGroup", () => {
+    component.editNavigationGroup();
+    expect(component).toBeTruthy();
+  });
+
+  it("editNavigationItem", () => {
+    component.editNavigationItem({ id: 1, description: "test" });
+    expect(component).toBeTruthy();
+  });
+
+  it("deleteNavigationItem", () => {
+    component.deleteNavigationItem({ id: 1, description: "test" });
+    expect(component).toBeTruthy();
+  });
 });
