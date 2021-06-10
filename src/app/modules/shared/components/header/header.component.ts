@@ -39,6 +39,10 @@ export class HeaderComponent implements OnInit {
     this.sidenav.emit();
   }
 
+  public logout() {
+    this.utils.logout();
+  }
+
   @HostListener("over")
   showLogin() {
     this.utils.showloginForm();
