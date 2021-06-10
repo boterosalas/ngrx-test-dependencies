@@ -9,27 +9,27 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { TranslateModule } from "@ngx-translate/core";
 import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
 import { ContentService } from "src/app/services/content.service";
-import { DialogNavigationItemComponent } from './dialog-navigation-item.component';
+import { DialogNavigationItemComponent } from "./dialog-navigation-item.component";
 import { of } from "rxjs/internal/observable/of";
 
-describe('DialogNavigationItemComponent', () => {
+describe("DialogNavigationItemComponent", () => {
   let component: DialogNavigationItemComponent;
   let fixture: ComponentFixture<DialogNavigationItemComponent>;
 
   const mockContentService = jasmine.createSpyObj("ContentService", [
-    "saveFooterLink"
+    "saveFooterLink",
   ]);
   const dialogMock = {
-    close: () => { }
+    close: () => {},
   };
   const resp = {
     state: "Success",
     userMessage: "Se ha creado el enlace",
-    objectResponse: []
+    objectResponse: [],
   };
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DialogNavigationItemComponent ],
+      declarations: [DialogNavigationItemComponent],
       imports: [
         TranslateModule.forRoot(),
         AppMaterialModule,
@@ -55,10 +55,8 @@ describe('DialogNavigationItemComponent', () => {
         { provide: ContentService, useValue: mockContentService },
       ],
       schemas: [NO_ERRORS_SCHEMA],
-    })
-    .compileComponents();
+    }).compileComponents();
     mockContentService.saveFooterLink.and.returnValue(of(resp));
-
   }));
 
   beforeEach(() => {
@@ -67,7 +65,7 @@ describe('DialogNavigationItemComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 
@@ -76,5 +74,19 @@ describe('DialogNavigationItemComponent', () => {
     component.dateForm.controls.description.setValue("Nuevo enlace");
     component.saveItem();
     expect(mockContentService.saveFooterLink).toHaveBeenCalled();
-  })
+  });
+
+  it("onNoClick", () => {
+    component.onNoClick;
+    expect(component).toBeTruthy();
+  });
+
+  it("loadSection", () => {
+    component.loadItem;
+    expect(component).toBeTruthy();
+  });
+
+  it("form controls", () => {
+    expect(Object.keys(component.dateForm.controls)).toEqual(["idseccion","link","description"]);
+  });
 });

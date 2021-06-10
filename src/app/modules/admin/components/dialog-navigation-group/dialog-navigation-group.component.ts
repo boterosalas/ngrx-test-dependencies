@@ -38,7 +38,7 @@ export class DialogNavigationGroupComponent implements OnInit {
     }
   }
 
-  onNoClick(): void {
+  onNoClick() {
     this.dialogRef.close();
   }
 
@@ -60,8 +60,6 @@ export class DialogNavigationGroupComponent implements OnInit {
       .subscribe((resp: ResponseService) => {
         if (resp.state === "Success") {
           this.dialogRef.close();
-        } else {
-          console.log("Upss Hubo un problema vuelve a intentarlo");
         }
       });
   }
