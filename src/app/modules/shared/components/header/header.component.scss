@@ -19,7 +19,7 @@
 
 header {
   min-height: 58px;
-  padding-left: 15px;
+  margin-left: 15px;
 
   .login-text {
     color: $color-headings;
@@ -118,6 +118,27 @@ header {
   }
 }
 
+.divIcons {
+  margin-right: 1rem;
+}
+
+.iconContainer {
+  background-color: #9AAACF29;
+  border-radius: 50%;
+  height: 35px;
+  width: 36px;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.icon {
+  font-size: 22px;
+  font-weight: $font-weight-bold;
+  color: $purple2;  
+}
+
 .links {
   list-style-type: none;
   padding-left: 0;
@@ -137,6 +158,22 @@ header {
 
 .loginButtons {
   margin-right: 15px;
+}
+
+.logo {
+  padding: 1rem 0;
+}
+
+.divContainerLoggedIn {
+  padding: 0 4%;
+}
+
+.menuProfile {
+  border-radius: 10px;
+
+  button {
+    color: $color-p;
+  }
 }
 
 @media screen and (min-width: 600px) {
