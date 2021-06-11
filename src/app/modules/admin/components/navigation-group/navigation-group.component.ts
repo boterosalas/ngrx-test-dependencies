@@ -17,11 +17,13 @@ export class NavigationGroupComponent implements OnInit {
   @Output() saveOrderItems = new EventEmitter<object>();
 
   isValidAddItems: boolean = true;
+  isValidDeleteGroup: boolean = true;
 
   constructor(private content: ContentService) {}
 
   ngOnInit() {
     this.isValidAddItems = this.section.links.length < 10;
+    this.isValidDeleteGroup = this.section.links.length == 0;
   }
 
   editNavigationGroup() {
