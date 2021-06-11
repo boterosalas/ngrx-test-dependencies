@@ -123,7 +123,14 @@
     </div>
 
     <div fxLayoutAlign="center center" fxLayoutGap="1rem" class="divIcons">
-      <span fxLayoutAlign="center center" class="iconContainer">
+      <span
+        *ngIf="
+          (auth.getRole$ | async) !== 'ADMIN' &&
+          (auth.getRole$ | async) !== 'SUPERADMIN'
+        "
+        fxLayoutAlign="center center"
+        class="iconContainer"
+      >
         <a href="https://www.clickam.com.co/#/click-academy"
           ><i class="tio-education icon cursor-pointer"></i
         ></a>
@@ -137,7 +144,16 @@
       </span>
       <mat-menu #menu="matMenu" xPosition="before">
         <div class="menuProfile">
-          <button [routerLink]="['/mi-perfil']" mat-menu-item>Mi perfil</button>
+          <button
+            *ngIf="
+              (auth.getRole$ | async) !== 'ADMIN' &&
+              (auth.getRole$ | async) !== 'SUPERADMIN'
+            "
+            [routerLink]="['/mi-perfil']"
+            mat-menu-item
+          >
+            Mi perfil
+          </button>
           <button (click)="logout()" mat-menu-item>Cerrar sesión</button>
         </div>
       </mat-menu>
