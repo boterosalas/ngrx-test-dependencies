@@ -24,10 +24,11 @@
       ></i>
 
       <img
+        *ngIf="isValidDeleteGroup"
         class="cursor-pointer"
         (click)="openDeleteNavigationSection()"
         src="/assets/img/dashboard/icon-remove-comision.svg"
-        alt=""
+        alt="icono borrar"
       />
     </div>
   </div>
