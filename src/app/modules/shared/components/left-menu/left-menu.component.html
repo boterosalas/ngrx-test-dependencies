@@ -1,7 +1,9 @@
-<div class="sidenav_container"  [@onSideNavChange]="sideNavState ? 'open' : 'close'">
-    <div fxLayout="column" fxLayoutGap="10px" style="height: 100%;">
-  
-      <div class="user_menu">
+<div
+  class="sidenav_container"
+  [@onSideNavChange]="sideNavState ? 'open' : 'close'"
+>
+  <div fxLayout="column" fxLayoutGap="10px" style="height: 100%">
+    <!-- <div class="user_menu">
         <mat-nav-list>
           <a mat-list-item>
             <img class="jim" src="https://a57.foxnews.com/media2.foxnews.com/BrightCove/694940094001/2018/06/21/931/524/694940094001_5800293009001_5800284148001-vs.jpg?ve=1&tl=1" alt="">
@@ -9,23 +11,50 @@
           </a>
         </mat-nav-list>
         <mat-divider></mat-divider>
-      </div>
-  
-      <div>
-        <mat-nav-list>
-          <a mat-list-item *ngFor="let page of pages">
-            <mat-icon style="padding-right:5px;">{{page?.icon}}</mat-icon>
-            <span [@animateText]="linkText ? 'show' : 'hide'">{{ page?.name }} </span>
-          </a>
-        </mat-nav-list>
-      </div>
-    </div>
-  
-    <span class="spacer"></span>
-    <div fxLayout="row" fxLayoutAlign="end center" style="padding: 0px 10px;">
-      <button mat-icon-button (click)="onSinenavToggle()">
-        <mat-icon *ngIf="sideNavState">arrow_left</mat-icon>
-        <mat-icon *ngIf="!sideNavState">arrow_right</mat-icon>
-      </button>
+      </div> -->
+
+    <div>
+      <mat-nav-list>
+        <a
+          [@animateText]="linkText ? 'hide' : 'show'"
+          mat-list-item
+          *ngFor="let page of pages"
+        >
+          <mat-icon
+            style="padding-right: 5px; margin-right: 8px; color: #37236a"
+            >{{ page?.icon }}</mat-icon
+          >        
+        </a>
+
+        <section
+          [@animateText]="linkText ? 'show' : 'hide'"
+          mat-list-item
+          *ngFor="let page of pages"
+        >
+          <details>
+            <summary>
+              <mat-icon
+                style="padding-right: 5px; margin-right: 8px; color: #37236a"
+                >{{ page?.icon }}</mat-icon
+              >
+              <span class="page_name">{{ page?.name }} </span>
+            </summary>
+            <ul>
+              <li *ngFor="let item of page.childrens">
+                <a href="{{ item.link }}">{{ item.name }}</a>
+              </li>
+            </ul>
+          </details>
+        </section>
+      </mat-nav-list>
     </div>
   </div>
+
+  <span class="spacer"></span>
+  <div fxLayout="row" fxLayoutAlign="end center" style="padding: 0px 10px">
+    <button mat-icon-button (click)="onSinenavToggle()">
+      <mat-icon *ngIf="sideNavState">arrow_left</mat-icon>
+      <mat-icon *ngIf="!sideNavState">arrow_right</mat-icon>
+    </button>
+  </div>
+</div>
