@@ -10,7 +10,7 @@ interface Page {
   link: string;
   name: string;
   icon: string;
-  childrens: children[];
+  children: children[];
 }
 
 @Component({
@@ -28,25 +28,37 @@ export class LeftMenuComponent implements OnInit {
       name: "Torre de control",
       link: "www.google.com",
       icon: "home",
-      childrens: [],
+      children: [],
     },
     {
       name: "Mercadeo",
       link: "www.google.com",
       icon: "leaderboard",
-      childrens: [{ name: "Herramientas", link: "http://google.com" }],
+      children: [
+        { name: "Herramientas", link: "http://google.com" },
+        { name: "Blog", link: "http://google.com" },
+        { name: "Notificaciones", link: "http://google.com" },
+      ],
     },
     {
       name: "Operación",
       link: "www.google.com",
       icon: "paid",
-      childrens: [{ name: "Herramientas2", link: "http://google.com" }],
+      children: [
+        { name: "Herramientas", link: "http://google.com" },
+        { name: "Blog", link: "http://google.com" },
+        { name: "Notificaciones", link: "http://google.com" },
+      ],
     },
     {
       name: "Configuración",
       link: "www.google.com",
       icon: "settings",
-      childrens: [{ name: "Herramientas3", link: "http://google.com" }],
+      children: [
+        { name: "Herramientas", link: "http://google.com" },
+        { name: "Blog", link: "http://google.com" },
+        { name: "Notificaciones", link: "http://google.com" },
+      ],
     },
   ];
 

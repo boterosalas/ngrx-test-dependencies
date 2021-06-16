@@ -17,6 +17,10 @@
   color: $primary-color;
 }
 
+.link {
+  font-family: $font-family-base;
+}
+
 li {
   list-style-type: none;
   margin-bottom: 1rem;
@@ -29,6 +33,7 @@ summary {
 
 details {
   width: 100%;
+  padding-left: 16px;
 }
 
 details[open] summary ~ * {
@@ -54,7 +59,7 @@ details summary {
   position: relative;
   cursor: pointer;
   font-size: 1.25rem;
-  font-weight: 700;
+  // font-weight: 700;
   list-style: none;
 }
 
