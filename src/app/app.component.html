@@ -3,7 +3,7 @@
 
   <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #leftSidenav mode="side" opened class="left_menu">
-      <app-left-menu></app-left-menu>
+      <app-left-menu [name]="firstName"></app-left-menu>
     </mat-sidenav>
     <mat-sidenav-content
       [@onMainContentChange]="onSideNavChange ? 'open' : 'close'"

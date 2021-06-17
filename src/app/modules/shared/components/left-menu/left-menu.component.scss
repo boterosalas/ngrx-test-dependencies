@@ -1,8 +1,8 @@
 @import "variables";
 
 .sidenav_container {
-  min-width: 60px;
-  height: calc(100vh - 200px);
+  min-width: 93px;
+  height: calc(100vh - 231px);
 }
 
 .jim {
@@ -19,6 +19,26 @@
 
 .link {
   font-family: $font-family-base;
+}
+
+.subItem {
+  font-family: $font-family-base;
+  padding: 5px;
+  display: block;
+}
+
+.user {
+  padding-left: 16px;
+}
+
+.active {
+  background: $purple2 !important;
+  border-radius: 10px;
+  color: $white;
+
+  span {
+    color: $white;
+  }
 }
 
 li {

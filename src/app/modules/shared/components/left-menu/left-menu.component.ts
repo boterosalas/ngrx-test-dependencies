@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { animateText, onSideNavChange } from "src/app/animations/animations";
 import { SidenavService } from "src/app/services/sidenav.service";
 
@@ -22,6 +22,9 @@ interface Page {
 export class LeftMenuComponent implements OnInit {
   public sideNavState: boolean = false;
   public linkText: boolean = false;
+  public itemSelected: string = '';
+
+  @Input() name: string;
 
   public pages: Page[] = [
     {
@@ -73,5 +76,9 @@ export class LeftMenuComponent implements OnInit {
       this.linkText = this.sideNavState;
     }, 200);
     this._sidenavService.sideNavState$.next(this.sideNavState);
+  }
+
+  setItemSelected(page) {
+    this.itemSelected = page.name;
   }
 }
