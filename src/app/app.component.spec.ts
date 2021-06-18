@@ -33,7 +33,7 @@ describe("AppComponent", () => {
   const mockDialog = jasmine.createSpyObj("MatDialog", ["open", "closeAll"]);
 
   const mockContentService = jasmine.createSpyObj("ContentService", ["getPopup", "saveVisitOffer"]);
-  const mockSidenavServicee = jasmine.createSpyObj("SidenavService", ["sideNavState"]);
+  const mockSidenavService = jasmine.createSpyObj("SidenavService", ["sideNavState"]);
 
   const responseGetPopup = [{
     id: 14,
@@ -103,13 +103,13 @@ const infoPopUp = {
         TranslateService, BnNgIdleService, SwUpdate, 
         { provide: MatDialog, useValue: mockDialog },
         { provide: ContentService, useValue: mockContentService },
-        { provide: SidenavService, useValue: mockContentService },
+        { provide: SidenavService, useValue: mockSidenavService },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
     mockContentService.getPopup.and.returnValue(of(responseGetPopup));
     mockContentService.saveVisitOffer.and.returnValue(of(responseGetPopup));
-    mockSidenavServicee.sideNavState.and.returnValue(of(true));
+    mockSidenavService.sideNavState.and.returnValue(of(true));
     
     // translate = TestBed.get(TranslateService);
     // http = TestBed.get(HttpTestingController);

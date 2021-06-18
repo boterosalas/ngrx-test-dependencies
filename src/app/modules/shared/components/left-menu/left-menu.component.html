@@ -78,7 +78,7 @@
               <ul>
                 <li *ngFor="let item of page.menus">
                   <a
-                    routerLink="/usuarios"
+                    routerLink="{{ item.route }}"
                     (click)="setItemSelected(item.name)"
                     class="subItem"
                     [ngClass]="{ active: item.name === itemSelected }"
