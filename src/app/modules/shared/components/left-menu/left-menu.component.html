@@ -15,47 +15,65 @@
 
     <div>
       <mat-nav-list>
-        <a
+        <div
           [@animateText]="linkText ? 'hide' : 'show'"
           mat-list-item
-          *ngFor="let page of pages"
-          [ngClass]="{ active: page.name === itemSelected }"
+          class="link"
+          *ngFor="let page of currentPages"
+          [ngClass]="{ active: page.id === itemSelected }"
         >
-          <mat-icon style="padding-right: 5px; margin-right: 8px">{{
-            page?.icon
-          }}</mat-icon>
-        </a>
+          <i ngClass="tio-message_failed" style="font-size: 35px"></i>
+        </div>
 
         <div [@animateText]="linkText ? 'show' : 'hide'" mat-list-item>
-          <h3 class="border-bottom-primary-init user">Hola, {{ name }}</h3>
-          <section mat-list-item *ngFor="let page of pages">
+          <h3 class="border-bottom-primary-init user" *ngIf="auth.isLoggedIn()">
+            Hola, {{ name }}
+          </h3>
+          <section
+            mat-list-item
+            *ngFor="let page of currentPages"
+            class="menu-item"
+          >
             <a
               mat-list-item
-              *ngIf="page.children.length <= 0"
-              class="link"
+              *ngIf="page.description === 'Sin Grupo'"
+              class="link cursor-pointer"
               routerLink="/usuarios"
-              (click)="setItemSelected(page)"
-              [ngClass]="{ active: page.name ===  itemSelected  }"
+              (click)="setItemSelected(page.id)"
+              [ngClass]="{ active: page.id === itemSelected }"
             >
-              <mat-icon style="padding-right: 5px; margin-right: 8px">{{
-                page?.icon
-              }}</mat-icon>
-              <span class="page_name">{{ page?.name }} </span>
+              <!-- <mat-icon                
+                style="padding-right: 5px; margin-right: 8px"
+                >{{ page?.icon }}</mat-icon
+              > -->
+              <span
+                ngClass="gtmHomeClicMenuLightbox{{
+                  page?.menus[0].name
+                }} f-16 {{ page?.menus[0].name }}"
+                class="page_name_2"
+                >{{ page?.menus[0].name }}
+              </span>
             </a>
-            <details *ngIf="page.children.length > 0">
+            <details *ngIf="page.description !== 'Sin Grupo'">
               <summary>
-                <mat-icon style="padding-right: 5px; margin-right: 8px">{{
+                <!-- <mat-icon style="padding-right: 5px; margin-right: 8px">{{
                   page?.icon
-                }}</mat-icon>
-                <span class="page_name">{{ page?.name }} </span>
+                }}</mat-icon> -->
+                <span
+                  ngClass="cursor-pointer gtmHomeClicMenuLightbox{{
+                    page?.description
+                  }} f-16 {{ page?.description }}"
+                  class="page_name"
+                  >{{ page?.description }}
+                </span>
               </summary>
               <ul>
-                <li *ngFor="let item of page.children">
+                <li *ngFor="let item of page.menus">
                   <a
                     routerLink="/usuarios"
-                    (click)="setItemSelected(item)"
+                    (click)="setItemSelected(item.name)"
                     class="subItem"
-                    [ngClass]="{ active: item.name ===  itemSelected }"
+                    [ngClass]="{ active: item.name === itemSelected }"
                     >{{ item.name }}</a
                   >
                 </li>

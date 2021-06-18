@@ -1,4 +1,6 @@
 @import "variables";
+@import "general";
+@import "animations";
 
 .sidenav_container {
   min-width: 93px;
@@ -13,12 +15,18 @@
 }
 
 .page_name {
+  padding-left: 30px;
   font-size: 16px;
   color: $primary-color;
 }
 
+.page_name_2 {
+  padding-left: 16px;
+}
+
 .link {
   font-family: $font-family-base;
+  color: $primary-color;
 }
 
 .subItem {
@@ -28,6 +36,11 @@
 }
 
 .user {
+  padding-left: 16px;
+}
+
+.menu-item {
+  min-height: 50px;
   padding-left: 16px;
 }
 
@@ -49,11 +62,12 @@ li {
 
 summary {
   display: flex;
+  color: $primary-color;
 }
 
 details {
   width: 100%;
-  padding-left: 16px;
+  // padding-left: 16px;
 }
 
 details[open] summary ~ * {
@@ -102,13 +116,278 @@ details[open] summary:after {
   font-family: "The-Icon-of", sans-serif;
 }
 
-// details summary {
-//   outline: 0;
-//   color: #fff;
-// }
+.Mi.perfil,
+  .Usuarios {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\ece7";
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
 
-// details p {
-//   font-size: 0.95rem;
-//   margin: 0 0 1rem;
-//   padding-top: 1rem;
-// }
+  .Operación {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\ebf3";
+      font-size: 19px;
+
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+  .Mercadeo {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\ec5b";
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+
+  .Negocios {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\eaf1";
+      font-size: 19px;
+
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+      background-size: 100%;
+    }
+  }
+  .Sliders {
+    &::before {
+      content: "\e915";
+
+      font-family: "The-Icon-of", sans-serif;
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+      background-size: 100%;
+    }
+  }
+  .Novedades {
+    &::before {
+      content: "\e981";
+      font-family: "The-Icon-of", sans-serif;
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+      background-size: 100%;
+    }
+  }
+  .Blog {
+    &::before {
+      content: "\eae1";
+      font-family: "The-Icon-of", sans-serif;
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+      background-size: 100%;
+    }
+  }
+  .Legales {
+    &::before {
+      content: "\ea61";
+      font-family: "The-Icon-of", sans-serif;
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+      background-size: 100%;
+    }
+  }
+  .Comisiones:not(.de) {
+    &::before {
+      content: "\ebf3";
+      font-family: "The-Icon-of", sans-serif;
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+      background-size: 100%;
+    }
+  }
+  .Configuración {
+    &::before {
+      content: "\ecdb";
+      font-family: "The-Icon-of", sans-serif;
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+      background-size: 100%;
+    }
+  }
+  .Navegación {
+    &::before {
+      content: "\ecd1";
+      font-family: "The-Icon-of", sans-serif;
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+      background-size: 100%;
+    }
+  }
+  .Historial.de.Links {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\ec6f";
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+
+  .Torre.de.Control {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\ecc3";
+      width: 20px;
+      height: 20px;
+      font-size: 19px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+
+  .Click.Academy {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\eac8";
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+
+  .Centro.de.Ayuda {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\e934";
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+  .Auditoría {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\e934";
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+  .Reportes {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\ec5b";
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+
+  .whatsapp {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\ec4a";
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+
+  .Generador.de.Links {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\ec6f";
+      font-size: 19px;
+
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+
+  .Referidos {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\ecee";
+      font-size: 19px;
+
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+
+  .logout {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      color: red;
+      content: "\ecdf";
+      font-size: 22px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 3px;
+    }
+  }

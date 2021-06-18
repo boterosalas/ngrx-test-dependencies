@@ -1,16 +1,18 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { animateText, onSideNavChange } from "src/app/animations/animations";
 import { SidenavService } from "src/app/services/sidenav.service";
+import { AuthService } from "src/app/services/auth.service";
+import { Subscription } from "rxjs";
 
 interface children {
   name: string;
-  link: string;
+  route: string;
+  orderby: number;
 }
 interface Page {
-  link: string;
-  name: string;
-  icon: string;
-  children: children[];
+  id: number;
+  description: string;
+  menus: children[];
 }
 
 @Component({
@@ -22,52 +24,183 @@ interface Page {
 export class LeftMenuComponent implements OnInit {
   public sideNavState: boolean = false;
   public linkText: boolean = false;
-  public itemSelected: string = '';
+  public itemSelected: string = "";
+  public currentPages: Page[] = [];
 
   @Input() name: string;
 
-  public pages: Page[] = [
+  public pagesNoLogin: Page[] = [
     {
-      name: "Torre de control",
-      link: "www.google.com",
-      icon: "home",
-      children: [],
-    },
-    {
-      name: "Mercadeo",
-      link: "www.google.com",
-      icon: "leaderboard",
-      children: [
-        { name: "Herramientas", link: "http://google.com" },
-        { name: "Blog", link: "http://google.com" },
-        { name: "Notificaciones", link: "http://google.com" },
+      id: 1,
+      description: "Sin Grupo",
+      menus: [
+        {
+          name: "Click Academy",
+          route: "https://www.clickam.com.co/#/click-academy",
+          orderby: 1,
+        },
       ],
     },
+
     {
-      name: "Operación",
-      link: "www.google.com",
-      icon: "paid",
-      children: [
-        { name: "Herramientas", link: "http://google.com" },
-        { name: "Blog", link: "http://google.com" },
-        { name: "Notificaciones", link: "http://google.com" },
+      id: 1,
+      description: "Sin Grupo",
+      menus: [
+        {
+          name: "Blog",
+          route: "https://www.clickam.com.co/#/blog",
+          orderby: 2,
+        },
       ],
     },
+
     {
-      name: "Configuración",
-      link: "www.google.com",
-      icon: "settings",
-      children: [
-        { name: "Herramientas", link: "http://google.com" },
-        { name: "Blog", link: "http://google.com" },
-        { name: "Notificaciones", link: "http://google.com" },
+      id: 1,
+      description: "Sin Grupo",
+      menus: [
+        {
+          name: "Centro de Ayuda",
+          route: "https://www.clickam.com.co/#/centro-de-ayuda",
+          orderby: 3,
+        },
+      ],
+    },
+
+    {
+      id: 1,
+      description: "Sin Grupo",
+      menus: [
+        {
+          name: "Tabla de Comisiones",
+          route: "https://www.clickam.com.co/#/tabla-comisiones",
+          orderby: 4,
+        },
       ],
     },
   ];
 
-  constructor(private _sidenavService: SidenavService) {}
+  public pages: Page[] = [
+    {
+      id: 1,
+      description: "Sin Grupo",
+      menus: [
+        {
+          name: "Torre de Control",
+          route: "/dashboard",
+          orderby: 0,
+        },
+      ],
+    },
+    {
+      id: 2,
+      description: "Mercadeo",
+      menus: [
+        {
+          name: "Negocios",
+          route: "/negocios-admin",
+          orderby: 0,
+        },
+        {
+          name: "Blog",
+          route: "/blog-admin",
+          orderby: 0,
+        },
+        {
+          name: "Generador de Links",
+          route: "/generador-links",
+          orderby: 0,
+        },
+        {
+          name: "Herramientas",
+          route: "/carrousel-admin",
+          orderby: 0,
+        },
+      ],
+    },
+    {
+      id: 3,
+      description: "Operación",
+      menus: [
+        {
+          name: "Reportes",
+          route: "/reportes-admin",
+          orderby: 0,
+        },
+        {
+          name: "Usuarios",
+          route: "/usuarios",
+          orderby: 0,
+        },
+        {
+          name: "Referidos",
+          route: "/referidos-admin",
+          orderby: 0,
+        },
+        {
+          name: "Novedades",
+          route: "/novedades",
+          orderby: 0,
+        },
+        {
+          name: "Comisiones",
+          route: "/comisiones",
+          orderby: 0,
+        },
+      ],
+    },
+    {
+      id: 4,
+      description: "Configuración",
+      menus: [
+        {
+          name: "Auditoría",
+          route: "/auditoria",
+          orderby: 0,
+        },
+        {
+          name: "Legales",
+          route: "/legales",
+          orderby: 0,
+        },
+        {
+          name: "Permisos",
+          route: "/configuracion",
+          orderby: 0,
+        },
+        {
+          name: "Navegación",
+          route: "/navegacion",
+          orderby: 0,
+        },
+      ],
+    },
+  ];
 
-  ngOnInit() {}
+  options = [];
+
+  private subscription: Subscription = new Subscription();
+
+  constructor(
+    private _sidenavService: SidenavService,
+    public auth: AuthService
+  ) {}
+
+  ngOnInit() {
+    if (this.auth.isLoggedIn()) {
+      this.currentPages = this.pages;
+    } else {
+      this.currentPages = this.pagesNoLogin;
+    }
+
+    this.getMenu();
+  }
+
+  public getMenu() {
+    this.subscription = this.auth.getMenu$.subscribe((val) => {
+      this.options = val;
+      console.log(`val`, val);
+    });
+  }
 
   onSinenavToggle() {
     this.sideNavState = !this.sideNavState;
@@ -79,6 +212,6 @@ export class LeftMenuComponent implements OnInit {
   }
 
   setItemSelected(page) {
-    this.itemSelected = page.name;
+    this.itemSelected = page;
   }
 }
