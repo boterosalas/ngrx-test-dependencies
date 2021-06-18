@@ -96,10 +96,9 @@ export class AppComponent implements OnInit, OnDestroy {
     private _sidenavService: SidenavService,
   ) {
 
-    this._sidenavService.sideNavState$.subscribe( res => {
-      console.log(res)
-      this.onSideNavChange = res;
-    })
+    // this._sidenavService.sideNavState$.subscribe( res => {
+    //   this.onSideNavChange = res;
+    // })
     
     translate.setDefaultLang("es");
     translate.use("es");
