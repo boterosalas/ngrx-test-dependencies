@@ -24,7 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // const TRANSLATIONS_ES = require('../assets/i18n/es.json');
 
-fdescribe("AppComponent", () => {
+describe("AppComponent", () => {
   // let translate: TranslateService;
   // let http: HttpTestingController;
   let component: AppComponent;
