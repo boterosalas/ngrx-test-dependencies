@@ -29,6 +29,11 @@
   color: $primary-color;
 }
 
+.linkDiv {
+  padding-left: 16px;
+  margin-bottom: 1rem;
+}
+
 .subItem {
   font-family: $font-family-base;
   padding: 5px;
@@ -143,6 +148,14 @@ details[open] summary:after {
       left: 1%;
     }
   }
+
+  .Operación_mini:before {
+    font-family: "The-Icon-of", sans-serif;
+    content: "\ebf3";
+    font-size: 35px;
+    font-style: normal;
+  }
+
   .Mercadeo {
     &::before {
       font-family: "The-Icon-of", sans-serif;
@@ -154,6 +167,13 @@ details[open] summary:after {
       top: 24%;
       left: 1%;
     }
+  }
+
+  .Mercadeo_mini:before {
+    font-family: "The-Icon-of", sans-serif;
+    content: "\ec5b";
+    font-size: 35px;
+    font-style: normal;
   }
 
   .Negocios {
@@ -249,6 +269,14 @@ details[open] summary:after {
       background-size: 100%;
     }
   }
+
+  .Configuración_mini:before {
+    font-family: "The-Icon-of", sans-serif;
+    content: "\ecdb";
+    font-size: 35px;
+    font-style: normal;
+  }
+
   .Navegación {
     &::before {
       content: "\ecd1";
@@ -286,6 +314,13 @@ details[open] summary:after {
       top: 24%;
       left: 1%;
     }
+  }
+
+  .Torre.de.Control_mini:before {
+    font-family: "The-Icon-of", sans-serif;
+    content: "\ecc3";
+    font-size: 35px;
+    font-style: normal;
   }
 
   .Click.Academy {

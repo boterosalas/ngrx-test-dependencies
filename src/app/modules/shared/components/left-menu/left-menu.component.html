@@ -15,15 +15,23 @@
 
     <div>
       <mat-nav-list>
-        <div
+        <a
           [@animateText]="linkText ? 'hide' : 'show'"
           mat-list-item
-          class="link"
+          class="link linkDiv"
           *ngFor="let page of currentPages"
           [ngClass]="{ active: page.id === itemSelected }"
+          routerLink="{{ page?.menus[0].route }}"
+          (click)="setItemSelected(page.id)"
         >
-          <i ngClass="tio-message_failed" style="font-size: 35px"></i>
-        </div>
+          <i
+            ngClass="{{
+              page?.description === 'Sin Grupo'
+                ? page?.menus[0].name + '_mini'
+                : page?.description + '_mini'
+            }}"
+          ></i>
+        </a>
 
         <div [@animateText]="linkText ? 'show' : 'hide'" mat-list-item>
           <h3 class="border-bottom-primary-init user" *ngIf="auth.isLoggedIn()">
@@ -38,7 +46,7 @@
               mat-list-item
               *ngIf="page.description === 'Sin Grupo'"
               class="link cursor-pointer"
-              routerLink="/usuarios"
+              routerLink="{{ page.route }}"
               (click)="setItemSelected(page.id)"
               [ngClass]="{ active: page.id === itemSelected }"
             >
