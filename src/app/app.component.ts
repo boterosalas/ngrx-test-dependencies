@@ -31,51 +31,13 @@ import { PopupComponent } from "./modules/shared/components/popup/popup.componen
 import { Location } from "@angular/common";
 import { MatDialog } from '@angular/material';
 import decode from "jwt-decode";
-
+import { SidenavService } from './services/sidenav.service';
+import { onMainContentChange } from './animations/animations';
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
-  animations: [
-    trigger("openClose", [
-      state("in", style({ height: "*", opacity: 0 })),
-      transition(":leave", [
-        style({ height: "*", opacity: 1 }),
-
-        group([
-          animate(300, style({ height: 0 })),
-          animate(
-            "600ms ease-in-out",
-            style({ transform: "translateY(-1000px)" })
-          ),
-        ]),
-      ]),
-    ]),
-    trigger("slideInOut", [
-      state("in", style({ height: "*", opacity: 1 })),
-      transition(":leave", [
-        style({ height: "*", opacity: 1 }),
-
-        group([
-          animate(300),
-          animate(
-            "600ms ease-in-out",
-            style({ transform: "translateX(1000px)" })
-          ),
-        ]),
-      ]),
-    ]),
-    trigger("simpleFadeAnimation", [
-      // the "in" style determines the "resting" state of the element when it is visible.
-      state("in", style({ opacity: 1 })),
-
-      // fade in when created. this could also be written as transition('void => *')
-      transition(":enter", [style({ opacity: 0 }), animate(600)]),
-
-      // fade out when destroyed. this could also be written as transition('void => *')
-      transition(":leave", animate(600, style({ opacity: 0 }))),
-    ]),
-  ],
+  animations: [ onMainContentChange ]
 })
 export class AppComponent implements OnInit, OnDestroy {
   // isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Web)
@@ -83,6 +45,9 @@ export class AppComponent implements OnInit, OnDestroy {
   //   map(result => result.matches),
   //   shareReplay()
   // );
+
+  name = 'Angular';
+  public onSideNavChange: boolean;
 
   @ViewChild(
     "templateCardLogin, TemplateCardRegister, TemplateCardForgot, templateCardActivate",
@@ -127,8 +92,14 @@ export class AppComponent implements OnInit, OnDestroy {
     private token: TokenService,
     private swUpdate: SwUpdate,
     private dialog: MatDialog,
-    location: Location
+    location: Location,
+    private sidenavService: SidenavService,
   ) {
+
+    // this.sidenavService.sideNavState$.subscribe( res => {
+    //   this.onSideNavChange = res;
+    // });
+    
     translate.setDefaultLang("es");
     translate.use("es");
 

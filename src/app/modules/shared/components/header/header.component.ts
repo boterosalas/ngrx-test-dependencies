@@ -9,6 +9,7 @@ import {
 } from "@angular/core";
 import { UtilsService } from "src/app/services/utils.service";
 import { AuthService } from "src/app/services/auth.service";
+import { MatSidenav } from '@angular/material';
 @Component({
   selector: "app-header",
   templateUrl: "./header.component.html",
@@ -19,7 +20,7 @@ export class HeaderComponent implements OnInit {
   @Input() internal: boolean;
   @Input() name: string;
   @Output() sidenav = new EventEmitter();
-  
+  @Input() sidenav2: MatSidenav;
   isLoggedIn: any;
   firstNames: string;
   lastNames: string;

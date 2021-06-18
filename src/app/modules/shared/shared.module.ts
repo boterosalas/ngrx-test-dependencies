@@ -34,7 +34,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { BannerComponent } from './components/banner/banner.component';
 import { TrimPipe } from 'src/app/pipes/trim.pipe';
 import { SlickCarouselModule } from "ngx-slick-carousel";
-import { CardStoryComponent } from './components/card-story/card-story.component'
+import { CardStoryComponent } from './components/card-story/card-story.component';
+import { LeftMenuComponent } from './components/left-menu/left-menu.component'
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { CardStoryComponent } from './components/card-story/card-story.component
     ModalGenericComponent,
     BannerComponent,
     DialogStoriesComponent,
-    CardStoryComponent
+    CardStoryComponent,
+    LeftMenuComponent
   ],
   imports: [
     CommonModule,
@@ -104,7 +106,8 @@ import { CardStoryComponent } from './components/card-story/card-story.component
     BackNavigationComponent,
     BannerComponent,
     DialogStoriesComponent,
-    CardStoryComponent
+    CardStoryComponent,
+    LeftMenuComponent
   ],
   entryComponents: [
     ModalGenericComponent,

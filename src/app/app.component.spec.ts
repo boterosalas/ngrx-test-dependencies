@@ -19,6 +19,8 @@ import { ContentService } from './services/content.service';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { Router } from "@angular/router";
 import { of } from 'rxjs';
+import { SidenavService } from "./services/sidenav.service";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // const TRANSLATIONS_ES = require('../assets/i18n/es.json');
 
@@ -31,6 +33,7 @@ describe("AppComponent", () => {
   const mockDialog = jasmine.createSpyObj("MatDialog", ["open", "closeAll"]);
 
   const mockContentService = jasmine.createSpyObj("ContentService", ["getPopup", "saveVisitOffer"]);
+  const mockSidenavService = jasmine.createSpyObj("SidenavService", ["sideNavState"]);
 
   const responseGetPopup = [{
     id: 14,
@@ -73,6 +76,7 @@ const infoPopUp = {
         AngularFireDatabaseModule,
         AngularFireAuthModule,
         AngularFireMessagingModule,
+        BrowserAnimationsModule,
         ServiceWorkerModule.register('', {enabled: false}),
         AngularFireModule.initializeApp({
           apiKey: "AIzaSyBLEXtXZGfMEm6dLHtngNa_HWgEjjrk-14",
@@ -98,12 +102,15 @@ const infoPopUp = {
       providers: [
         TranslateService, BnNgIdleService, SwUpdate, 
         { provide: MatDialog, useValue: mockDialog },
-        { provide: ContentService, useValue: mockContentService }
+        { provide: ContentService, useValue: mockContentService },
+        { provide: SidenavService, useValue: mockSidenavService },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
     mockContentService.getPopup.and.returnValue(of(responseGetPopup));
     mockContentService.saveVisitOffer.and.returnValue(of(responseGetPopup));
+    mockSidenavService.sideNavState.and.returnValue(of(true));
+    
     // translate = TestBed.get(TranslateService);
     // http = TestBed.get(HttpTestingController);
   }));

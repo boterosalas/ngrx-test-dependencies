@@ -1,0 +1,428 @@
+@import "variables";
+@import "general";
+@import "animations";
+
+.sidenav_container {
+  min-width: 93px;
+  height: calc(100vh - 231px);
+}
+
+.jim {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.page_name {
+  padding-left: 30px;
+  font-size: 16px;
+  color: $primary-color;
+}
+
+.page_name_2 {
+  padding-left: 16px;
+}
+
+.link {
+  font-family: $font-family-base;
+  color: $primary-color;
+}
+
+.linkDiv {
+  padding-left: 16px;
+  margin-bottom: 1rem;
+}
+
+.subItem {
+  font-family: $font-family-base;
+  padding: 5px;
+  display: block;
+}
+
+.user {
+  padding-left: 16px;
+}
+
+.menu-item {
+  min-height: 50px;
+  padding-left: 16px;
+}
+
+.active {
+  background: $purple2 !important;
+  border-radius: 10px;
+  color: $white;
+
+  span {
+    color: $white;
+  }
+}
+
+li {
+  list-style-type: none;
+  margin-bottom: 1rem;
+  color: #474352;
+}
+
+summary {
+  display: flex;
+  color: $primary-color;
+}
+
+details {
+  width: 100%;
+  // padding-left: 16px;
+}
+
+details[open] summary ~ * {
+  animation: open 0.3s ease-in-out;
+}
+
+@keyframes open {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary {
+  width: 100%;
+  padding: 0.5rem 0;
+  position: relative;
+  cursor: pointer;
+  font-size: 1.25rem;
+  // font-weight: 700;
+  list-style: none;
+}
+
+details summary:after {
+  content: "\e9b0";
+  font-family: "The-Icon-of", sans-serif;
+  color: $primary-color;
+  position: absolute;
+  font-size: 1.75rem;
+  line-height: 0;
+  margin-top: 0.75rem;
+  right: 0;
+  font-weight: 200;
+  transform-origin: center;
+  transition: 200ms linear;
+}
+
+details[open] summary:after {
+  content: "\e9b3";
+  font-family: "The-Icon-of", sans-serif;
+}
+
+.Mi.perfil,
+  .Usuarios {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\ece7";
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+
+  .Operación {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\ebf3";
+      font-size: 19px;
+
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+
+  .Operación_mini:before {
+    font-family: "The-Icon-of", sans-serif;
+    content: "\ebf3";
+    font-size: 35px;
+    font-style: normal;
+  }
+
+  .Mercadeo {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\ec5b";
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+
+  .Mercadeo_mini:before {
+    font-family: "The-Icon-of", sans-serif;
+    content: "\ec5b";
+    font-size: 35px;
+    font-style: normal;
+  }
+
+  .Negocios {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\eaf1";
+      font-size: 19px;
+
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+      background-size: 100%;
+    }
+  }
+  .Sliders {
+    &::before {
+      content: "\e915";
+
+      font-family: "The-Icon-of", sans-serif;
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+      background-size: 100%;
+    }
+  }
+  .Novedades {
+    &::before {
+      content: "\e981";
+      font-family: "The-Icon-of", sans-serif;
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+      background-size: 100%;
+    }
+  }
+  .Blog {
+    &::before {
+      content: "\eae1";
+      font-family: "The-Icon-of", sans-serif;
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+      background-size: 100%;
+    }
+  }
+  .Legales {
+    &::before {
+      content: "\ea61";
+      font-family: "The-Icon-of", sans-serif;
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+      background-size: 100%;
+    }
+  }
+  .Comisiones:not(.de) {
+    &::before {
+      content: "\ebf3";
+      font-family: "The-Icon-of", sans-serif;
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+      background-size: 100%;
+    }
+  }
+  .Configuración {
+    &::before {
+      content: "\ecdb";
+      font-family: "The-Icon-of", sans-serif;
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+      background-size: 100%;
+    }
+  }
+
+  .Configuración_mini:before {
+    font-family: "The-Icon-of", sans-serif;
+    content: "\ecdb";
+    font-size: 35px;
+    font-style: normal;
+  }
+
+  .Navegación {
+    &::before {
+      content: "\ecd1";
+      font-family: "The-Icon-of", sans-serif;
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+      background-size: 100%;
+    }
+  }
+  .Historial.de.Links {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\ec6f";
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+
+  .Torre.de.Control {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\ecc3";
+      width: 20px;
+      height: 20px;
+      font-size: 19px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+
+  .Torre.de.Control_mini:before {
+    font-family: "The-Icon-of", sans-serif;
+    content: "\ecc3";
+    font-size: 35px;
+    font-style: normal;
+  }
+
+  .Click.Academy {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\eac8";
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+
+  .Centro.de.Ayuda {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\e934";
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+  .Auditoría {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\e934";
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+  .Reportes {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\ec5b";
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+
+  .whatsapp {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\ec4a";
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+
+  .Generador.de.Links {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\ec6f";
+      font-size: 19px;
+
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+
+  .Referidos {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\ecee";
+      font-size: 19px;
+
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+
+  .logout {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      color: red;
+      content: "\ecdf";
+      font-size: 22px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 3px;
+    }
+  }
