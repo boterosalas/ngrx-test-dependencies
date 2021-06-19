@@ -75,6 +75,7 @@ export class DialogUserComponent implements OnInit, OnDestroy {
   base64IdentificationCard1: string = "";
   base64IdentificationCard2: string = "";
   base64BankCard: string = "";
+  base64RUT: string = "";
 
   changeStatus() {
     this.state.emit(event);
@@ -311,9 +312,12 @@ export class DialogUserComponent implements OnInit, OnDestroy {
       { extension: ".pdf", contentType: "application/pdf" }
     ];
 
+    console.log(`this.data`, this.data)
+
     const contentTypeIdentCard1 = formats.filter(format => format.extension === this.data.extensionIdentificationCard1); 
     const contentTypeIdentCard2 = formats.filter(format => format.extension === this.data.extensionIdentificationCard2); 
     const contentTypeBankCard = formats.filter(format => format.extension === this.data.extensionBankCertificate);
+    const contentTypeRUT = formats.filter(format => format.extension === this.data.extensionRUT);
 
     if (this.data.fileIdentificationCard1) {
       this.base64IdentificationCard1 = `data:${contentTypeIdentCard1.length > 0 
@@ -331,6 +335,12 @@ export class DialogUserComponent implements OnInit, OnDestroy {
       this.base64BankCard = `data:${contentTypeBankCard.length > 0 
         ? contentTypeBankCard[0].contentType 
         : "image/jpeg"};base64,${this.data.fileBankCertificate}`;
+    }
+
+    if (this.data.fileRUT) {
+      this.base64RUT = `data:${contentTypeRUT.length > 0 
+        ? contentTypeRUT[0].contentType 
+        : "image/jpeg"};base64,${this.data.fileRUT}`;
     }
   }
 

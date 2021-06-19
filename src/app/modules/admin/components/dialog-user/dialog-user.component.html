@@ -135,9 +135,10 @@
                 class="text-link text-underline cursor-pointer"
                 (click)="showVisibilityPreview($event)"
               >
-                Cédula 1</a>
+                Cédula 1</a
+              >
               <div *ngIf="base64IdentificationCard1" class="preview-image">
-                <img [src]="base64IdentificationCard1" alt="Preview Cédula 1">
+                <img [src]="base64IdentificationCard1" alt="Preview Cédula 1" />
               </div>
             </span>
             <span class="s-label normal-text">{{
@@ -165,9 +166,10 @@
                 target="_blank"
                 id="ced2"
               >
-                Cédula 2</a>
+                Cédula 2</a
+              >
               <div *ngIf="base64IdentificationCard2" class="preview-image">
-                <img [src]="base64IdentificationCard2" alt="Preview Cédula 2">
+                <img [src]="base64IdentificationCard2" alt="Preview Cédula 2" />
               </div>
             </span>
             <span class="s-label normal-text">{{
@@ -195,9 +197,10 @@
                 target="_blank"
                 id="certbank"
               >
-                Cert.bancaria</a>
+                Cert.bancaria</a
+              >
               <div *ngIf="base64BankCard" class="preview-image">
-                <img [src]="base64BankCard" alt="Preview Cert.bancaria">
+                <img [src]="base64BankCard" alt="Preview Cert.bancaria" />
               </div>
             </span>
             <span class="s-label normal-text">{{
@@ -210,15 +213,44 @@
               data.dateCertBank | date: "yyyy/MM/dd hh:mm:ss"
             }}</span>
           </p>
-          <button 
+          <p fxLayout="row">
+            <span class="s-label">
+              <mat-checkbox
+                class="mr-3 mb-2"
+                (change)="changeValue($event, 'RUT')"
+              >
+              </mat-checkbox>
+            </span>
+            <span class="w-label preview-container"
+              ><a
+                class="text-link text-underline cursor-pointer"
+                (click)="showVisibilityPreview($event)"
+                target="_blank"
+                id="RUT"
+              >
+                RUT</a
+              >
+              <div *ngIf="base64RUT" class="preview-image">
+                <img [src]="base64RUT" alt="Preview RUT" />
+              </div>
+            </span>
+            <span class="s-label normal-text">{{ data.extensionRUT }}</span>
+            <span class="wx-label normal-text">{{
+              data.AntdateRUT | date: "yyyy/MM/dd hh:mm:ss"
+            }}</span>
+            <span class="wx-label normal-text">{{
+              data.dateRUT | date: "yyyy/MM/dd hh:mm:ss"
+            }}</span>
+          </p>
+          <button
             (click)="downloadSelectedFiles()"
             class="download-button"
             mat-raised-button
             color="orange"
           >
-            {{ "USERS.DOWNLOAD_SELECT" | translate }} 
+            {{ "USERS.DOWNLOAD_SELECT" | translate }}
             <i class="tio-download_from_cloud style-icon-download"></i>
-        </button>
+          </button>
         </div>
       </div>
       <div fxLayout="column" fxFlex="25" fxLayoutAlign="start start">
@@ -277,9 +309,7 @@
             <p class="galano-bold gray">VERIFICACIÓN</p>
             <form [formGroup]="dateSelectedState">
               <mat-form-field class="selected-state-account">
-                <mat-select
-                  formControlName="state"
-                >
+                <mat-select formControlName="state">
                   <mat-option
                     (click)="changeVerified()"
                     *ngFor="let accountStatus of accountStatements"
@@ -294,12 +324,22 @@
 
             <p class="galano-bold gray edit-message">
               MENSAJE DE RECHAZO
-              <i 
-                class="tio-edit style-icon cursor-pointer {{ enableRejectionMessage ? 'style-icon-enable' : 'style-icon-disabled' }}"
+              <i
+                class="tio-edit style-icon cursor-pointer {{
+                  enableRejectionMessage
+                    ? 'style-icon-enable'
+                    : 'style-icon-disabled'
+                }}"
                 (click)="editRejectionMessage()"
               ></i>
             </p>
-            <p class="rejection-message">{{ this.enableRejectionMessage && this.data.responseAccountBank ? this.data.responseAccountBank : '-' }}</p>
+            <p class="rejection-message">
+              {{
+                this.enableRejectionMessage && this.data.responseAccountBank
+                  ? this.data.responseAccountBank
+                  : "-"
+              }}
+            </p>
           </div>
         </div>
       </div>
@@ -614,7 +654,9 @@
           required
           class="text-area-heigth"
           style="color: #37236a"
-          value="{{ this.data.responseAccountBank ? this.data.responseAccountBank : '' }}"
+          value="{{
+            this.data.responseAccountBank ? this.data.responseAccountBank : ''
+          }}"
         ></textarea>
         <mat-error
           id="requiredMessage"
