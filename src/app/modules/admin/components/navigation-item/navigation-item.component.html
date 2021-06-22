@@ -4,7 +4,9 @@
       >drag_indicator</mat-icon
     >
   </span>
-  <span class="navigation-item__description">{{ link.description }}</span>
+  <span ngClass="navigation-item__description {{ link.icon }}">{{
+    link.description
+  }}</span>
   <span class="navigation-item__link">
     <a
       href="{{ link.link }}"
