@@ -2,6 +2,8 @@
 @import "general";
 @import "animations";
 
+$size-icon: 20px;
+
 .sidenav_container {
   min-width: 93px;
   height: calc(100vh - 231px);
@@ -32,6 +34,8 @@
 .linkDiv {
   padding-left: 16px;
   margin-bottom: 1rem;
+  width: auto;
+  height: 28px !important;
 }
 
 .subItem {
@@ -49,14 +53,25 @@
   padding-left: 16px;
 }
 
+.subItem {
+  &.active {
+    height: 20px !important;
+  }
+}
+
 .active {
   background: $purple2 !important;
   border-radius: 10px;
   color: $white;
+  height: 37px !important;
 
   span {
     color: $white;
   }
+}
+
+.leftul{
+  padding-left: 2rem;
 }
 
 li {
@@ -131,7 +146,7 @@ details[open] summary:after {
       height: 20px;
       position: absolute;
       top: 24%;
-      left: 1%;
+      left: 3%;
     }
   }
 
@@ -145,14 +160,14 @@ details[open] summary:after {
       height: 20px;
       position: absolute;
       top: 24%;
-      left: 1%;
+      left: 3%;
     }
   }
 
   .Operación_mini:before {
     font-family: "The-Icon-of", sans-serif;
     content: "\ebf3";
-    font-size: 35px;
+    font-size: $size-icon;
     font-style: normal;
   }
 
@@ -165,14 +180,14 @@ details[open] summary:after {
       height: 20px;
       position: absolute;
       top: 24%;
-      left: 1%;
+      left: 3%;
     }
   }
 
   .Mercadeo_mini:before {
     font-family: "The-Icon-of", sans-serif;
     content: "\ec5b";
-    font-size: 35px;
+    font-size: $size-icon;
     font-style: normal;
   }
 
@@ -186,7 +201,7 @@ details[open] summary:after {
       height: 20px;
       position: absolute;
       top: 24%;
-      left: 1%;
+      left: 3%;
       background-size: 100%;
     }
   }
@@ -200,7 +215,7 @@ details[open] summary:after {
       height: 20px;
       position: absolute;
       top: 24%;
-      left: 1%;
+      left: 3%;
       background-size: 100%;
     }
   }
@@ -213,7 +228,7 @@ details[open] summary:after {
       height: 20px;
       position: absolute;
       top: 24%;
-      left: 1%;
+      left: 3%;
       background-size: 100%;
     }
   }
@@ -226,7 +241,7 @@ details[open] summary:after {
       height: 20px;
       position: absolute;
       top: 24%;
-      left: 1%;
+      left: 3%;
       background-size: 100%;
     }
   }
@@ -239,7 +254,7 @@ details[open] summary:after {
       height: 20px;
       position: absolute;
       top: 24%;
-      left: 1%;
+      left: 3%;
       background-size: 100%;
     }
   }
@@ -252,7 +267,7 @@ details[open] summary:after {
       height: 20px;
       position: absolute;
       top: 24%;
-      left: 1%;
+      left: 3%;
       background-size: 100%;
     }
   }
@@ -265,7 +280,7 @@ details[open] summary:after {
       height: 20px;
       position: absolute;
       top: 24%;
-      left: 1%;
+      left: 3%;
       background-size: 100%;
     }
   }
@@ -273,7 +288,7 @@ details[open] summary:after {
   .Configuración_mini:before {
     font-family: "The-Icon-of", sans-serif;
     content: "\ecdb";
-    font-size: 35px;
+    font-size: $size-icon;
     font-style: normal;
   }
 
@@ -286,7 +301,7 @@ details[open] summary:after {
       height: 20px;
       position: absolute;
       top: 24%;
-      left: 1%;
+      left: 3%;
       background-size: 100%;
     }
   }
@@ -299,7 +314,7 @@ details[open] summary:after {
       height: 20px;
       position: absolute;
       top: 24%;
-      left: 1%;
+      left: 3%;
     }
   }
 
@@ -312,14 +327,14 @@ details[open] summary:after {
       font-size: 19px;
       position: absolute;
       top: 24%;
-      left: 1%;
+      left: 3%;
     }
   }
 
   .Torre.de.Control_mini:before {
     font-family: "The-Icon-of", sans-serif;
     content: "\ecc3";
-    font-size: 35px;
+    font-size: $size-icon;
     font-style: normal;
   }
 
@@ -332,7 +347,7 @@ details[open] summary:after {
       height: 20px;
       position: absolute;
       top: 24%;
-      left: 1%;
+      left: 3%;
     }
   }
 
@@ -345,7 +360,7 @@ details[open] summary:after {
       height: 20px;
       position: absolute;
       top: 24%;
-      left: 1%;
+      left: 3%;
     }
   }
   .Auditoría {
@@ -357,7 +372,7 @@ details[open] summary:after {
       height: 20px;
       position: absolute;
       top: 24%;
-      left: 1%;
+      left: 3%;
     }
   }
   .Reportes {
@@ -369,7 +384,7 @@ details[open] summary:after {
       height: 20px;
       position: absolute;
       top: 24%;
-      left: 1%;
+      left: 3%;
     }
   }
 
@@ -382,7 +397,7 @@ details[open] summary:after {
       height: 20px;
       position: absolute;
       top: 24%;
-      left: 1%;
+      left: 3%;
     }
   }
 
@@ -396,7 +411,7 @@ details[open] summary:after {
       height: 20px;
       position: absolute;
       top: 24%;
-      left: 1%;
+      left: 3%;
     }
   }
 
@@ -410,7 +425,7 @@ details[open] summary:after {
       height: 20px;
       position: absolute;
       top: 24%;
-      left: 1%;
+      left: 3%;
     }
   }
 
