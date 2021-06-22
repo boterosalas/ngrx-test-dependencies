@@ -255,6 +255,7 @@ export class UsersComponent extends MatPaginatorIntl
   }
 
   public userData(user) {
+    console.log(`user`, user)
     const userId = user.userId;
     const identification = user.identification;
     const name = user.firstNames;
@@ -273,12 +274,15 @@ export class UsersComponent extends MatPaginatorIntl
     const dateCed1 = user.maxdateidentificationcard1;
     const dateCed2 = user.maxdateidentificationcard2;
     const dateCertBank = user.maxdatebankcertificate;
+    const dateRUT = user.maxdaterut;
     const AntdateCed1 = user.mindateidentificationcard1;
     const AntdateCed2 = user.mindateidentificationcard2;
     const AntdateCertBank = user.mindatebankcertificate;
+    const AntdateRUT = user.mindaterut;
     const extensionIdentificationCard1 = user.maxextensiondateidentificationcard1;
     const extensionIdentificationCard2 = user.maxextensiondateidentificationcard2;
     const extensionBankCertificate = user.maxextensiondatebankcertificate;
+    const extensionRUT = user.maxextensiondaterut;
     const responseAccountBank = user.responseaccountbank;
 
     if (state === "Inactivo") {
@@ -305,6 +309,7 @@ export class UsersComponent extends MatPaginatorIntl
         const fileIdentificationCard1 = resp.objectResponse.identificationcard1;
         const fileIdentificationCard2 = resp.objectResponse.identificationcard2;
         const fileBankCertificate = resp.objectResponse.bankcertificate;
+        const fileRUT = resp.objectResponse.rut;
 
         const dialogRef = this.dialog.open(DialogUserComponent, {
           data: {
@@ -326,15 +331,19 @@ export class UsersComponent extends MatPaginatorIntl
             fileIdentificationCard1,
             fileIdentificationCard2,
             fileBankCertificate,
+            fileRUT,
             dateCed1,
             dateCed2,
             dateCertBank,
+            dateRUT,
             AntdateCed1,
             AntdateCed2,
             AntdateCertBank,
+            AntdateRUT,
             extensionIdentificationCard1,
             extensionIdentificationCard2,
             extensionBankCertificate,
+            extensionRUT,
             responseAccountBank
           }
         });

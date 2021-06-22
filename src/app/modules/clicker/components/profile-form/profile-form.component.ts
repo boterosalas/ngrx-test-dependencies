@@ -87,13 +87,16 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   cityValue: string;
   departments = [];
   cities: [];
+  nameFileRut = "";
   nameFileCert = "";
   nameFileCed1 = "";
   nameFileCed2 = "";
   validFormat: boolean;
+  showErrorRut: boolean = false;
   showErrorCert: boolean = false;
   showErrorCed1: boolean = false;
   showErrorCed2: boolean = false;
+  showErrorFormatRut: boolean = false;
   showErrorFormatCert: boolean = false;
   showErrorFormatCed1: boolean = false;
   showErrorFormatCed2: boolean = false;
@@ -673,6 +676,10 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
             }
 
             switch (param) {
+              case "Rut":
+                this.nameFileRut = nameFile;
+                this.showErrorRut = response.state === "Success" ? false : true;
+                break;
               case "BankCertificate":
                 this.nameFileCert = nameFile;
                 this.showErrorCert = response.state === "Success" ? false : true;
@@ -691,6 +698,10 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
           });
       } else {
         switch (param) {
+          case "Rut":
+            this.nameFileRut = nameFile;
+            this.showErrorRut = this.showErrorFormatRut = true;
+            break;
           case "BankCertificate":
             this.nameFileCert = nameFile;
             this.showErrorCert = this.showErrorFormatCert = true;
