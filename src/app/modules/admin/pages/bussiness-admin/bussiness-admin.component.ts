@@ -86,13 +86,7 @@ export class BussinessAdminComponent implements OnInit {
     this.saveOrder(datosSourceSend)
   }
   public saveOrder(datos: any) {
-    this.content.orderCategory(datos).subscribe((resp: ResponseService) => {
-      if (resp.state === "Success") {
-        console.log("Categoria Ordenada")
-      } else {
-        console.log("Upss Hubo un problema vuelve a intentarlo")
-      }
-    });
+    this.content.orderCategory(datos).subscribe((resp: ResponseService) => {});
   }
   public cancelDelete() {
     this.dialog.closeAll();
