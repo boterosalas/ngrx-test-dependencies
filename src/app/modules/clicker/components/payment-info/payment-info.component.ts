@@ -44,7 +44,7 @@ export class PaymentInfoComponent implements OnInit {
   fileIdentificationCard1: any;
   fileIdentificationCard2: any;
   fileBankCertificate: any;
-  fileBankRUT: any;
+  fileRUT: any;
   EXCEL_TYPE =
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
   departments = [];
@@ -172,7 +172,7 @@ export class PaymentInfoComponent implements OnInit {
         const formData = new FormData();
     
         formData.append("file", event.target.files[0]);
-        formData.append("typeDocument", param);
+        formData.append("typeDocument", param );
         formData.append("identification", this.identification);
         formData.append("userId", this.userId);
 
@@ -193,7 +193,7 @@ export class PaymentInfoComponent implements OnInit {
             }
 
             switch (param) {
-              case "RUT":
+              case "Rut":
                 this.nameFileRUT = nameFile;
                 this.showErrorRUT = response.state === "Success" ? false : true;
                 this.externalForm.controls.RUT.setErrors(error);
@@ -219,7 +219,7 @@ export class PaymentInfoComponent implements OnInit {
           });
       } else {
         switch (param) {
-          case "RUT":
+          case "Rut":
             this.nameFileRUT = nameFile;
             this.showErrorRUT = this.showErrorFormatRUT = true;
             this.externalForm.controls.RUT.setErrors({'incorrect': true});

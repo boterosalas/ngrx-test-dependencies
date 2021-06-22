@@ -82,6 +82,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     file.fileIdentificationCard2 = null;
     file.nameFileCert = "";
     file.fileBankCertificate = null;
+    file.RUT = null;
   }
 
   /**
@@ -97,7 +98,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
       identification: this.id,
       identificationCard1: files.fileIdentificationCard1,
       identificationCard2: files.fileIdentificationCard2,
-      bankCertificate: files.fileBankCertificate
+      bankCertificate: files.fileBankCertificate,
+      RUT: files.RUT,
     }
 
     
