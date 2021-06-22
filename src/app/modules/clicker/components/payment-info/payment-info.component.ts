@@ -137,7 +137,8 @@ export class PaymentInfoComponent implements OnInit {
       ],
       ced1: [null, Validators.required],
       ced2: [null, Validators.required],
-      cert: [null, Validators.required]
+      cert: [null, Validators.required],
+      rut: [null, Validators.required],
     });
   }
 
@@ -196,7 +197,7 @@ export class PaymentInfoComponent implements OnInit {
               case "Rut":
                 this.nameFileRUT = nameFile;
                 this.showErrorRUT = response.state === "Success" ? false : true;
-                this.externalForm.controls.RUT.setErrors(error);
+                this.externalForm.controls.rut.setErrors(error);
                 break;
               case "BankCertificate":
                 this.nameFileCert = nameFile;
@@ -222,7 +223,7 @@ export class PaymentInfoComponent implements OnInit {
           case "Rut":
             this.nameFileRUT = nameFile;
             this.showErrorRUT = this.showErrorFormatRUT = true;
-            this.externalForm.controls.RUT.setErrors({'incorrect': true});
+            this.externalForm.controls.rut.setErrors({'incorrect': true});
             break;
           case "BankCertificate":
             this.nameFileCert = nameFile;
@@ -289,7 +290,7 @@ export class PaymentInfoComponent implements OnInit {
             this.externalForm.controls.ced1.setValue(null);
             this.externalForm.controls.ced2.setValue(null);
             this.externalForm.controls.cert.setValue(null);
-            this.externalForm.controls.RUT.setValue(null);
+            this.externalForm.controls.rut.setValue(null);
             window.location.reload();
           });
         } else {
@@ -311,7 +312,7 @@ export class PaymentInfoComponent implements OnInit {
             this.externalForm.controls.ced1.setValue(null);
             this.externalForm.controls.ced2.setValue(null);
             this.externalForm.controls.cert.setValue(null);
-            this.externalForm.controls.RUT.setValue(null);
+            this.externalForm.controls.rut.setValue(null);
           });
         }
       },
