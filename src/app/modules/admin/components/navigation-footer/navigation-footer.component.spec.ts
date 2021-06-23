@@ -20,12 +20,17 @@ import "zone.js/dist/zone-testing";
 import { DialogNavigationGroupComponent } from "../dialog-navigation-group/dialog-navigation-group.component";
 import { NavigationFooterComponent } from "./navigation-footer.component";
 
-export class MdDialogMock {
+export class MatDialogMock {
   open() {
-    return {
-      afterClosed: () => of(true),
-    };
-  }
+   return {
+      beforeClosed   : () => of(true),
+   };
+ }
+ closeAll() {
+  return {
+    closeAll : () => of(true),
+ };
+ }
 }
 
 describe("NavigationFooterComponent", () => {
@@ -43,6 +48,8 @@ describe("NavigationFooterComponent", () => {
     "open",
     "beforeClosed",
   ]);
+
+  const matDialog = new MatDialogMock();
 
   const mockDialogRef = jasmine.createSpyObj("MatDialogRef", [
     "close",
@@ -208,10 +215,10 @@ describe("NavigationFooterComponent", () => {
         }),
       ],
       providers: [
-        { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: ContentService, useValue: mockContentService },
-        { provide: MatDialogRef, useValue: dialogMock },
-        { provide: MatDialog, useValue: mockDialog },
+        { provide: MatDialog, useValue: matDialog },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: mockDialogRef },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
@@ -261,17 +268,38 @@ describe("NavigationFooterComponent", () => {
   });
 
   it("currentLink", () => {
-    expect(component.currentLink).toEqual({});
+    expect(component.currentLink).toEqual({})});
+
+  it('add section', () => {
+    component.addSection();
+    expect(mockContentService.getFooter).toHaveBeenCalled();
   });
 
-  it("isInvalidAddSection", () => {
-    expect(component.isInvalidAddSection).toBeFalsy;
+  it('edit navigation', () => {
+    component.editNavigationGroup({});
+    expect(mockContentService.getFooter).toHaveBeenCalled();
   });
 
-  // it("deleteNavigationGroup", () => {
-  //   // spyOn(component.dialogRef, 'open')
-  //   // dialogSpy = spyOn(TestBed.get(MatDialog), 'open').and.returnValue(dialogRefSpyObj);
-  //   component.deleteNavigationGroup({ id: 1, description: "test", orderby: 1 });
-  //   expect(component.deleteNavigationGroup).toHaveBeenCalled();
-  // });
+  it('delete navigation', () => {
+    component.deleteNavigationGroup({});
+    expect(mockContentService.getFooter).toHaveBeenCalled();
+  });
+
+  it('add navigation item', () => {
+    component.addNavigationItem({});
+    expect(mockContentService.getFooter).toHaveBeenCalled();
+  });
+
+  it('edit navigation item', () => {
+    component.editNavigationItem({});
+    expect(mockContentService.getFooter).toHaveBeenCalled();
+  });
+
+  it('delete navigation item', () => {
+    component.deleteNavigationItem({});
+    expect(mockContentService.getFooter).toHaveBeenCalled();
+  });
+  
+
+
 });
