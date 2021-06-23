@@ -112,8 +112,6 @@ export class NavigationFooterComponent implements OnInit {
       .subscribe((resp: ResponseService) => {
         if (resp.state === "Success") {
           this.dialog.closeAll();
-        } else {
-          console.log("Upss Hubo un problema vuelve a intentarlo");
         }
       });
   }
