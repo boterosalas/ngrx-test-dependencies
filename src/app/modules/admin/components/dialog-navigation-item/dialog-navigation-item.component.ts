@@ -33,12 +33,14 @@ export class DialogNavigationItemComponent implements OnInit {
         idseccion: [this.data.idseccion, Validators.required],
         link: [this.data.link, Validators.required],
         description: [this.data.description, Validators.required],
+        icon: [this.data.icon],
       });
     } else {
       this.dateForm = this.fb.group({
         idseccion: [this.data.idseccion, Validators.required],
         link: [null, Validators.required],
         description: [null, Validators.required],
+        icon: [null],
       });
     }
   }

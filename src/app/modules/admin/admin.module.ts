@@ -60,6 +60,7 @@ import { NavigationItemComponent } from './components/navigation-item/navigation
 import { DialogNavigationGroupComponent } from './components/dialog-navigation-group/dialog-navigation-group.component';
 import { DialogNavigationItemComponent } from './components/dialog-navigation-item/dialog-navigation-item.component';
 import { NavigationMenuComponent } from './components/navigation-menu/navigation-menu.component';
+import { NavigationMenuClickerComponent } from './components/navigation-menu-clicker/navigation-menu-clicker.component';
 
 const routes: Routes = [
   {
@@ -308,7 +309,8 @@ const routes: Routes = [
     NavigationItemComponent,
     DialogNavigationGroupComponent,
     DialogNavigationItemComponent,
-    NavigationMenuComponent
+    NavigationMenuComponent,
+    NavigationMenuClickerComponent
   ],
   imports: [
     AngularEditorModule,

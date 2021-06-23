@@ -40,6 +40,7 @@ export class AuthService implements OnDestroy {
   apiLogin = "Authentication/login";
   apiGetmenus = "Authentication/getMenus";
   apiGetmenusClicker = "Authentication/getMenusByRol";
+  apiGetmenusFromAdmin = "Authentication/getMenusByRol?visible=true";
   apiForgotPassword = "Authentication/recoveryPassword";
   apiRecoverPassword = "Authentication/resetpassword";
   apiChangePassword = "Authentication/changePassword";
@@ -124,6 +125,23 @@ export class AuthService implements OnDestroy {
   public getMenuClicker() {
     return this.http
       .get(`${this.url + this.apiGetmenusClicker}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((resp: any) => {
+          return resp.objectResponse;
+        })
+      );
+  }
+
+  public getMenusFromAdmin() {
+    return this.http
+      .get(`${this.url + this.apiGetmenusFromAdmin}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(

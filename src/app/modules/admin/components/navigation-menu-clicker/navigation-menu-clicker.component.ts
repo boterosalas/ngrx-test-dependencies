@@ -10,11 +10,11 @@ import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 import { AuthService } from "src/app/services/auth.service";
 
 @Component({
-  selector: "app-navigation-menu",
-  templateUrl: "./navigation-menu.component.html",
-  styleUrls: ["./navigation-menu.component.scss"],
+  selector: 'app-navigation-menu-clicker',
+  templateUrl: './navigation-menu-clicker.component.html',
+  styleUrls: ['./navigation-menu-clicker.component.scss']
 })
-export class NavigationMenuComponent implements OnInit {
+export class NavigationMenuClickerComponent implements OnInit {
   sectionsLinks: any = [];
   private subscription: Subscription = new Subscription();
   @ViewChild("templateDeleteNavigationGroup", { static: false })
@@ -60,35 +60,15 @@ export class NavigationMenuComponent implements OnInit {
 
   getSections() {
     this.subscription = this.auth.getMenusFromAdmin().subscribe((resp) => {
-      // console.log(`resp`, resp)
+      console.log(`resp`, resp)
+      this.sectionsLinks = resp;
     });
-
-    this.sectionsLinks = [
-      {
-        date: "2021-06-04T16:50:49.623",
-        description: "Inicio",
-        id: 1,
-        link: "www.clickam.com",
-        icon: "tio-home",
-        orderby: 1,
-      },
-      {
-        date: "2021-06-04T16:50:49.623",
-        description: "Click Academy",
-        id: 2,
-        link: "www.google.com",
-        icon: "tio-education",
-        orderby: 2,
-      },
-    ];
   }
 
   addSection() {
     const dialogRef1 = this.dialog.open(DialogNavigationGroupComponent, {
       data: {
-        title: "Nuevo grupo",
-        buttonName: "Agregar",
-        edit: 0,
+        title: "Nuevo grupo", buttonName: "Agregar", edit: 0,
       },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
@@ -99,13 +79,7 @@ export class NavigationMenuComponent implements OnInit {
   editNavigationGroup(section: any) {
     const dialogRef1 = this.dialog.open(DialogNavigationGroupComponent, {
       data: {
-        title: "Editar grupo",
-        buttonName: "Guardar",
-        edit: 1,
-        id: section.id,
-        description: section.description,
-        orderby: section.orderby,
-      },
+        title: "Editar grupo", buttonName: "Guardar", edit: 1, id: section.id, description: section.description, orderby: section.orderby, },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
       this.getSections();
@@ -150,10 +124,7 @@ export class NavigationMenuComponent implements OnInit {
     const dialogRef1 = this.dialog.open(DialogNavigationItemComponent, {
       width: "450px",
       data: {
-        title: "Agregar acceso",
-        buttonName: "Agregar",
-        edit: 0,
-        idseccion: section.id,
+        title: "Agregar acceso",buttonName: "Agregar",edit: 0,idseccion: section.id,
       },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
@@ -163,20 +134,12 @@ export class NavigationMenuComponent implements OnInit {
 
   editNavigationItem(item: any) {
     const data = {
-      title: "Editar acceso",
-      buttonName: "Guardar",
-      edit: 1,
-      id: item.id,
-      idseccion: item.idseccion,
-      link: item.link,
-      description: item.description,
-      orderby: item.orderby,
-      date: item.date,
+      title: "Editar acceso",buttonName: "Guardar",edit: 1,id: item.id,idseccion: item.idseccion,
+      link: item.link || item.route, description: item.description || item.name ,orderby: item.orderby,date: item.date,
     };
 
     const dialogRef1 = this.dialog.open(DialogNavigationItemComponent, {
-      width: "450px",
-      data: data,
+      width: "450px", data: data,
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
       this.getSections();
@@ -212,3 +175,4 @@ export class NavigationMenuComponent implements OnInit {
     });
   }
 }
+
