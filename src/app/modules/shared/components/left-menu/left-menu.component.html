@@ -90,14 +90,20 @@
           </section>
         </div>
       </mat-nav-list>
+
+      <span class="spacer"></span>
+      <div class="contarr">
+        <div fxLayout="row" fxLayoutAlign="end center" class="arrcont">
+          <button mat-icon-button (click)="onSinenavToggle()">
+            <mat-icon *ngIf="sideNavState" class="rotate arrow">double_arrow</mat-icon>
+            <mat-icon *ngIf="!sideNavState" class="arrow pl">double_arrow</mat-icon>
+          </button>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <span class="spacer"></span>
-  <div fxLayout="row" fxLayoutAlign="end center" style="padding: 0px 10px">
-    <button mat-icon-button (click)="onSinenavToggle()">
-      <mat-icon *ngIf="sideNavState">arrow_left</mat-icon>
-      <mat-icon *ngIf="!sideNavState">arrow_right</mat-icon>
-    </button>
-  </div>
+ 
+
 </div>

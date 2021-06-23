@@ -441,3 +441,29 @@ details[open] summary:after {
       top: 3px;
     }
   }
+
+  .rotate{
+    transform: rotate(-180deg);
+  }
+
+  // .contarr{
+  //   position: absolute;
+  //   bottom: 65px;
+  //   left: 0;
+  //   right: 0;
+  //   width: 100%;
+  // }
+
+  
+  
+  .arrcont{
+  
+    .arrow{
+      color: $primary-color;
+    }
+
+    .pl{
+      padding-left: 5px;
+    }
+
+  }

@@ -25,9 +25,9 @@ export class LeftMenuComponent implements OnInit {
   public sideNavState: boolean = false;
   public linkText: boolean = false;
   public itemSelected: string = "";
-  public currentPages: Page[] = [];
-
   @Input() name: string;
+
+  public currentPages: Page[] = [];
 
   public pagesNoLogin: Page[] = [
     {
@@ -182,7 +182,7 @@ export class LeftMenuComponent implements OnInit {
 
   constructor(
     private _sidenavService: SidenavService,
-    public auth: AuthService
+    public auth: AuthService,
   ) {}
 
   ngOnInit() {
