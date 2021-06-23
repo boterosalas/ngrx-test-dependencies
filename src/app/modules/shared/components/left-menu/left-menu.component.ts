@@ -25,9 +25,9 @@ export class LeftMenuComponent implements OnInit {
   public sideNavState: boolean = false;
   public linkText: boolean = false;
   public itemSelected: string = "";
-  public currentPages: Page[] = [];
-
   @Input() name: string;
+
+  public currentPages: Page[] = [];
 
   public pagesNoLogin: Page[] = [
     {
@@ -187,8 +187,6 @@ export class LeftMenuComponent implements OnInit {
     },
   ];
 
-  options = [];
-
   private subscription: Subscription = new Subscription();
 
   constructor(
@@ -197,19 +195,13 @@ export class LeftMenuComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.auth.isLoggedIn()) {
-      this.currentPages = this.pages;
-    } else {
-      this.currentPages = this.pagesNoLogin;
-    }
-
     this.getMenu();
   }
 
-  public getMenu() {
+  getMenu() {
     this.subscription = this.auth.getMenu$.subscribe((val) => {
-      this.options = val;
-      console.log(`val`, val);
+      console.log(`menu`, val);
+      this.currentPages = val;
     });
   }
 
