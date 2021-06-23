@@ -61,4 +61,15 @@ describe('LeftMenuComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('getMenu', () => {
+    component.getMenu;
+    expect(component).toBeTruthy();
+  });
+
+  it('onSinenavToggle', () => {
+    component.onSinenavToggle;
+    expect(component).toBeTruthy();
+  });
+  
 });
