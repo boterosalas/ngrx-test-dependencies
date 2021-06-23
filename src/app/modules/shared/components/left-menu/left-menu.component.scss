@@ -232,6 +232,7 @@ details[open] summary:after {
       background-size: 100%;
     }
   }
+  
   .Blog {
     &::before {
       content: "\eae1";
@@ -245,6 +246,14 @@ details[open] summary:after {
       background-size: 100%;
     }
   }
+
+  .Blog_mini:before {
+    font-family: "The-Icon-of", sans-serif;
+    content: "\eae1";
+    font-size: $size-icon;
+    font-style: normal;
+  }
+
   .Legales {
     &::before {
       content: "\ea61";
@@ -318,7 +327,7 @@ details[open] summary:after {
     }
   }
 
-  .Torre.de.Control {
+  .Inicio, .Torre.de.Control {
     &::before {
       font-family: "The-Icon-of", sans-serif;
       content: "\ecc3";
@@ -331,7 +340,7 @@ details[open] summary:after {
     }
   }
 
-  .Torre.de.Control_mini:before {
+  .Inicio_mini:before, .Torre.de.Control_mini:before {
     font-family: "The-Icon-of", sans-serif;
     content: "\ecc3";
     font-size: $size-icon;
@@ -351,6 +360,13 @@ details[open] summary:after {
     }
   }
 
+  .Click.Academy_mini:before {
+    font-family: "The-Icon-of", sans-serif;
+    content: "\eac8";
+    font-size: $size-icon;
+    font-style: normal;
+  }
+
   .Centro.de.Ayuda {
     &::before {
       font-family: "The-Icon-of", sans-serif;
@@ -363,6 +379,34 @@ details[open] summary:after {
       left: 3%;
     }
   }
+
+  .Centro.de.Ayuda_mini:before {
+    font-family: "The-Icon-of", sans-serif;
+    content: "\e934";
+    font-size: $size-icon;
+    font-style: normal;
+  }
+
+  .Tabla.de.Comisiones{
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\ebf3";
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 3%;
+    }
+  }
+
+  .Tabla.de.Comisiones_mini:before {
+    font-family: "The-Icon-of", sans-serif;
+    content: "\ebf3";
+    font-size: $size-icon;
+    font-style: normal;
+  }
+
   .Auditoría {
     &::before {
       font-family: "The-Icon-of", sans-serif;

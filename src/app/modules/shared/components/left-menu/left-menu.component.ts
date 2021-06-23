@@ -176,29 +176,21 @@ export class LeftMenuComponent implements OnInit {
     },
   ];
 
-  options = [];
-
   private subscription: Subscription = new Subscription();
 
   constructor(
     private _sidenavService: SidenavService,
-    public auth: AuthService,
+    public auth: AuthService
   ) {}
 
   ngOnInit() {
-    if (this.auth.isLoggedIn()) {
-      this.currentPages = this.pages;
-    } else {
-      this.currentPages = this.pagesNoLogin;
-    }
-
     this.getMenu();
   }
 
-  public getMenu() {
+  getMenu() {
     this.subscription = this.auth.getMenu$.subscribe((val) => {
-      this.options = val;
-      console.log(`val`, val);
+      console.log(`menu`, val);
+      this.currentPages = val;
     });
   }
 
