@@ -32,15 +32,19 @@ export class PaymentInfoComponent implements OnInit {
   nameFileCed1: string = '';
   nameFileCed2: string = '';
   nameFileCert: string = '';
+  nameFileRUT: string = '';
   showErrorCed1: boolean = false;
   showErrorCed2: boolean = false;
   showErrorCert: boolean = false;
-  showErrorFormatCert: boolean = false;
+  showErrorRUT: boolean = false;
   showErrorFormatCed1: boolean = false;
   showErrorFormatCed2: boolean = false;
+  showErrorFormatCert: boolean = false;
+  showErrorFormatRUT: boolean = false;
   fileIdentificationCard1: any;
   fileIdentificationCard2: any;
   fileBankCertificate: any;
+  fileRUT: any;
   EXCEL_TYPE =
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
   departments = [];
@@ -84,6 +88,7 @@ export class PaymentInfoComponent implements OnInit {
     this.nameFileCed1 = "";
     this.nameFileCed2 = "";
     this.nameFileCert = "";
+    this.nameFileRUT = "";
     this.externalClickerForm();
     this.getDepartments();
     this.getBanks();
@@ -132,7 +137,8 @@ export class PaymentInfoComponent implements OnInit {
       ],
       ced1: [null, Validators.required],
       ced2: [null, Validators.required],
-      cert: [null, Validators.required]
+      cert: [null, Validators.required],
+      rut: [null, Validators.required],
     });
   }
 
@@ -167,7 +173,7 @@ export class PaymentInfoComponent implements OnInit {
         const formData = new FormData();
     
         formData.append("file", event.target.files[0]);
-        formData.append("typeDocument", param);
+        formData.append("typeDocument", param );
         formData.append("identification", this.identification);
         formData.append("userId", this.userId);
 
@@ -188,6 +194,11 @@ export class PaymentInfoComponent implements OnInit {
             }
 
             switch (param) {
+              case "Rut":
+                this.nameFileRUT = nameFile;
+                this.showErrorRUT = response.state === "Success" ? false : true;
+                this.externalForm.controls.rut.setErrors(error);
+                break;
               case "BankCertificate":
                 this.nameFileCert = nameFile;
                 this.showErrorCert = response.state === "Success" ? false : true;
@@ -209,6 +220,11 @@ export class PaymentInfoComponent implements OnInit {
           });
       } else {
         switch (param) {
+          case "Rut":
+            this.nameFileRUT = nameFile;
+            this.showErrorRUT = this.showErrorFormatRUT = true;
+            this.externalForm.controls.rut.setErrors({'incorrect': true});
+            break;
           case "BankCertificate":
             this.nameFileCert = nameFile;
             this.showErrorCert = this.showErrorFormatCert = true;
@@ -266,12 +282,15 @@ export class PaymentInfoComponent implements OnInit {
             this.nameFileCed1 = "";
             this.nameFileCed2 = "";
             this.nameFileCert = "";
+            this.nameFileRUT = "";
             this.showErrorCed1 = false;
             this.showErrorCed2 = false;
             this.showErrorCert = false;
+            this.showErrorRUT = false;
             this.externalForm.controls.ced1.setValue(null);
             this.externalForm.controls.ced2.setValue(null);
             this.externalForm.controls.cert.setValue(null);
+            this.externalForm.controls.rut.setValue(null);
             window.location.reload();
           });
         } else {
@@ -285,12 +304,15 @@ export class PaymentInfoComponent implements OnInit {
             this.nameFileCed1 = "";
             this.nameFileCed2 = "";
             this.nameFileCert = "";
+            this.nameFileRUT = "";
             this.showErrorCed1 = false;
             this.showErrorCed2 = false;
             this.showErrorCert = false;
+            this.showErrorRUT = false;
             this.externalForm.controls.ced1.setValue(null);
             this.externalForm.controls.ced2.setValue(null);
             this.externalForm.controls.cert.setValue(null);
+            this.externalForm.controls.rut.setValue(null);
           });
         }
       },

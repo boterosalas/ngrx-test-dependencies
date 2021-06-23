@@ -2,9 +2,7 @@
   <p>{{ "PROFILE.BASIC" | translate }}</p>
 
   <div class="account-container">
-    <div 
-      class="p-0 mb-2 container-profile"
-    >
+    <div class="p-0 mb-2 container-profile">
       <mat-card
         class="p-0 mb-2 user-info"
         ngClass.xs="mt-3 w-100"
@@ -209,24 +207,26 @@
         </span>
       </mat-card>
     </div>
-    <div
-      *ngIf="managedPayments === true"
-      class="bank-info"
-    >
+    <div *ngIf="managedPayments === true" class="bank-info">
       <mat-card class="p-0 mb-3">
         <div class="item header account-info">
-          <div class="content-state {{ accountStatus.className ? accountStatus.className : '' }}">
+          <div
+            class="content-state {{
+              accountStatus.className ? accountStatus.className : ''
+            }}"
+          >
             <h3 class="m-0">{{ "PROFILE.ACOUNT_INFO" | translate }}</h3>
-            <span 
-              *ngIf="accountStatus.status" 
-              class="verification-status"
-            >
-              <img *ngIf="accountStatus.icon" [src]="accountStatus.icon" [alt]="accountStatus.status" />
+            <span *ngIf="accountStatus.status" class="verification-status">
+              <img
+                *ngIf="accountStatus.icon"
+                [src]="accountStatus.icon"
+                [alt]="accountStatus.status"
+              />
               {{ accountStatus.status }}
             </span>
           </div>
-          <div 
-            *ngIf="accountStatus.title && accountStatus.description" 
+          <div
+            *ngIf="accountStatus.title && accountStatus.description"
             class="info-status"
           >
             <h4>{{ accountStatus.title }}</h4>
@@ -488,7 +488,12 @@
     <button
       mat-raised-button
       id="editProfile"
-      class="center button button-100 mt-4 gtmPerfilClicCuentaClickamGuardarCelular"
+      class="
+        center
+        button button-100
+        mt-4
+        gtmPerfilClicCuentaClickamGuardarCelular
+      "
       color="orange"
       (click)="editUser()"
       [disabled]="!profileFormCell.valid"
@@ -597,7 +602,12 @@
     <button
       mat-raised-button
       id="editAddress"
-      class="center button button-100 mt-4 gtmPerfilClicCuentaClickamGuardarDireccion"
+      class="
+        center
+        button button-100
+        mt-4
+        gtmPerfilClicCuentaClickamGuardarDireccion
+      "
       color="orange"
       (click)="changeAddress()"
       [disabled]="!addressForm.valid"
@@ -828,7 +838,12 @@
     <button
       mat-raised-button
       id="editProfile"
-      class="center button button-100 mt-4 gtmPerfilClicCuentaClickamGuardarContrasena"
+      class="
+        center
+        button button-100
+        mt-4
+        gtmPerfilClicCuentaClickamGuardarContrasena
+      "
       color="orange"
       (click)="changePasswordUser()"
       [disabled]="!profileFormPass.valid"
@@ -848,8 +863,8 @@
       Recuerda que al realizar un cambio en tus datos bancarios debemos volver a
       verificar la información de tu cuenta y esto retrasaría tus pagos, te
       recomendamos realizarlo únicamente si quieres que tus comisiones sean
-      pagadas en otra cuenta; si eres empleado de Grupo Exito <strong>no debes</strong> realizar
-      el cambio de cuenta.
+      pagadas en otra cuenta; si eres empleado de Grupo Exito
+      <strong>no debes</strong> realizar el cambio de cuenta.
     </p>
     <form class="login-container" [formGroup]="loginForm">
       <mat-form-field class="input-password">
@@ -1046,6 +1061,58 @@
           }}</mat-error
         >
       </mat-form-field>
+
+      <!-- rut -->
+
+      <div
+        fxLayout="row"
+        fxLayoutAlign="space-start center"
+        fxLayoutGap="50px"
+        fxLayoutGap.xs="5px"
+        class="pb-3"
+      >
+        <div fxLayout="column" fxLayoutAlign="center" class="space">
+          <strong class="gray">{{ "REGISTER.ACCOUNT_RUT" | translate }}</strong>
+          <span *ngIf="nameFileRut === ''">No hay archivo seleccionado</span>
+          <span class="file-input" *ngIf="nameFileRut !== ''">{{
+            nameFileRut | truncate: "20"
+          }}</span>
+        </div>
+        <div class="space">
+          <label for="cert" id="upload" class="cursor-pointer">
+            <span *ngIf="!showErrorRut">
+              <img
+                class="mt-1 mxw-30"
+                *ngIf="nameFileRut === ''"
+                src="/assets/img/image-file-upload.svg"
+                alt="upload"
+              />
+              <img
+                class="mt-1 mxw-30"
+                *ngIf="nameFileRut !== ''"
+                src="/assets/img/image-file-upload-ok.svg"
+                alt="upload"
+              />
+            </span>
+            <img
+              class="mt-1 w-icon mxw-30"
+              *ngIf="showErrorRut"
+              src="/assets/img/icono-error-carga.svg"
+              alt="upload"
+            />
+          </label>
+        </div>
+      </div>
+      <mat-error *ngIf="showErrorFormatRut" class="small pb-2 d-block">
+        {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
+      </mat-error>
+
+      <input
+        (change)="onFileChangeFiles($event, 'rut')"
+        id="rut"
+        type="file"
+        formControlName="rut"
+      />
 
       <!-- certificado -->
 

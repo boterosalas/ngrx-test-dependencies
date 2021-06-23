@@ -93,12 +93,12 @@ export class AppComponent implements OnInit, OnDestroy {
     private swUpdate: SwUpdate,
     private dialog: MatDialog,
     location: Location,
-    private _sidenavService: SidenavService,
+    private sidenavService: SidenavService,
   ) {
 
-    // this._sidenavService.sideNavState$.subscribe( res => {
+    // this.sidenavService.sideNavState$.subscribe( res => {
     //   this.onSideNavChange = res;
-    // })
+    // });
     
     translate.setDefaultLang("es");
     translate.use("es");

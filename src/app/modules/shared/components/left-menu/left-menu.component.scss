@@ -196,6 +196,26 @@ details[open] summary:after {
       font-family: "The-Icon-of", sans-serif;
       content: "\eaf1";
       font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 24%;
+      left: 1%;
+    }
+  }
+
+  .Negocios_mini:before {
+    font-family: "The-Icon-of", sans-serif;
+    content: "\eaf1";
+    font-size: 35px;
+    font-style: normal;
+  }
+
+  .Negocios {
+    &::before {
+      font-family: "The-Icon-of", sans-serif;
+      content: "\eaf1";
+      font-size: 19px;
 
       width: 20px;
       height: 20px;

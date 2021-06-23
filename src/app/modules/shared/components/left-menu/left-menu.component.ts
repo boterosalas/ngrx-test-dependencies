@@ -92,6 +92,17 @@ export class LeftMenuComponent implements OnInit {
       ],
     },
     {
+      id: 5,
+      description: "Sin Grupo",
+      menus: [
+        {
+          name: "Negocios",
+          route: "/dashboard",
+          orderby: 0,
+        },
+      ],
+    },
+    {
       id: 2,
       description: "Mercadeo",
       menus: [

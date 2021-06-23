@@ -76,6 +76,8 @@ describe("('PaymentInfoComponent', ", () => {
         "iVBORw0KGgoAAAANSUhEUgAAACAAAAAqCAIAAABdg87FAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVFhH7c0xDQAgAAQx/Jt+JHRiILka6NljBVRABVRABVRABVRABVRABVRABfR7sF3ODrEiRHEThAAAAABJRU5ErkJggg==",
       fileBankCertificate:
         "iVBORw0KGgoAAAANSUhEUgAAACAAAAAqCAIAAABdg87FAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVFhH7c0xDQAgAAQx/Jt+JHRiILka6NljBVRABVRABVRABVRABVRABVRABfR7sF3ODrEiRHEThAAAAABJRU5ErkJggg==",
+      fileRUT:
+        "iVBORw0KGgoAAAANSUhEUgAAACAAAAAqCAIAAABdg87FAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVFhH7c0xDQAgAAQx/Jt+JHRiILka6NljBVRABVRABVRABVRABVRABVRABfR7sF3ODrEiRHEThAAAAABJRU5ErkJggg==",
       bank: "Bancolombia",
       typeBankAccount: "Ahorros",
       bankAccountNumber: "MTIzNDU2Nzg5",
@@ -325,6 +327,7 @@ describe("('PaymentInfoComponent', ", () => {
       ced1: [null],
       ced2: [null],
       cert: [null],
+      RUT: [null],
     });
     component.selectDepartment(department);
     expect(department).not.toBeUndefined();
@@ -342,6 +345,7 @@ describe("('PaymentInfoComponent', ", () => {
       ced1: [null],
       ced2: [null],
       cert: [null],
+      RUT: [null],
     });
 
     
@@ -351,6 +355,7 @@ describe("('PaymentInfoComponent', ", () => {
     component.fileIdentificationCard1 = 'image1';
     component.fileIdentificationCard2 = 'image2';
     component.fileBankCertificate = 'cert';
+    component.fileRUT = 'RUT';
     component.externalForm.controls.numberAccount.setValue('123456');
     component.externalForm.controls.typeAccount.setValue('Ahorros');
     component.externalForm.controls.address.setValue('calle falsa 123');
