@@ -23,6 +23,7 @@ export class DialogNavigationItemComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(`this.data`, this.data)
     this.loadItem();
   }
 
