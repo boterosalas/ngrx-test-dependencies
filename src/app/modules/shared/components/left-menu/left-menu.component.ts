@@ -29,7 +29,7 @@ export class LeftMenuComponent implements OnInit {
   public description:string;
 
   public currentPages = [
-    {description: '', menus: [{
+    {description: '', id: '', menus: [{
       Id: '', active: true, icon: "", idgrupo: null , menusystem: true, name: '' ,orderby: 1 ,route: ''
     }]}
   ];
@@ -54,8 +54,8 @@ export class LeftMenuComponent implements OnInit {
       this.currentPages = [];
       if(val !== null ){
         val.forEach(element => {
-          let {description, menus} = element;
-          this.currentPages.push({description,menus});
+          let {description, menus, id} = element;
+          this.currentPages.push({description,menus, id});
         });
       }
       console.log(this.currentPages);
