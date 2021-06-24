@@ -64,7 +64,7 @@ export class NavigationMenuClickerComponent implements OnInit {
 
   getSections() {
     this.subscription = this.auth.getMenusFromAdmin().subscribe((resp) => {
-      console.log(`resp`, resp);
+      
       this.sectionsLinks = resp;
     });
   }

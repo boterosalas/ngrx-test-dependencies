@@ -34,7 +34,7 @@ export class NavigationMenuComponent implements OnInit {
   }
 
   saveOrderItems(data: any) {
-    this.content.saveOrderFooterLinks(data).subscribe(() => {});
+    this.auth.saveOrderMenus(data).subscribe(() => {});
   }
 
   dropSection(event: CdkDragDrop<any>) {
@@ -47,11 +47,11 @@ export class NavigationMenuComponent implements OnInit {
     for (let i = 0; i < this.sectionsLinks.length; i++) {
       this.sectionsLinks[i].orderby = i + 1;
       dataSourceSend.push({
-        id: this.sectionsLinks[i].id,
+        id: this.sectionsLinks[i].Id,
         orderBy: i + 1,
       });
     }
-    this.saveOrderSections(dataSourceSend);
+    this.saveOrderItems(dataSourceSend);
   }
 
   saveOrderSections(data: any) {
@@ -59,28 +59,11 @@ export class NavigationMenuComponent implements OnInit {
   }
 
   getSections() {
-    this.subscription = this.auth.getMenusFromAdmin().subscribe((resp) => {
-      // console.log(`resp`, resp)
-    });
+    this.subscription = this.auth.getmenusNoLogin().subscribe((resp) => {
+      console.log(`resp`, resp[0].menus);
+      this.sectionsLinks = resp[0].menus;
 
-    this.sectionsLinks = [
-      {
-        date: "2021-06-04T16:50:49.623",
-        description: "Inicio",
-        id: 1,
-        link: "www.clickam.com",
-        icon: "tio-home",
-        orderby: 1,
-      },
-      {
-        date: "2021-06-04T16:50:49.623",
-        description: "Click Academy",
-        id: 2,
-        link: "www.google.com",
-        icon: "tio-education",
-        orderby: 2,
-      },
-    ];
+    });
   }
 
   addSection() {
@@ -154,6 +137,8 @@ export class NavigationMenuComponent implements OnInit {
         buttonName: "Agregar",
         edit: 0,
         idseccion: section.id,
+        rol: "ANONYMOUS",
+        isMenu: true
       },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
@@ -166,12 +151,13 @@ export class NavigationMenuComponent implements OnInit {
       title: "Editar acceso",
       buttonName: "Guardar",
       edit: 1,
-      id: item.id,
-      idseccion: item.idseccion,
-      link: item.link,
-      description: item.description,
+      id: item.Id,
+      idseccion: item.idgrupo,
+      link: item.route,
+      description: item.name,
       orderby: item.orderby,
-      date: item.date,
+      icon: item.icon,
+      isMenu: true
     };
 
     const dialogRef1 = this.dialog.open(DialogNavigationItemComponent, {
@@ -202,8 +188,8 @@ export class NavigationMenuComponent implements OnInit {
   }
 
   deleteNavigationItemService() {
-    let datos = [this.currentLink.id];
-    this.content.deleteFooterLink(datos).subscribe((resp: ResponseService) => {
+    let idMenu = [this.currentLink.Id];
+    this.auth.deleteMenu(idMenu).subscribe((resp: ResponseService) => {
       if (resp.state === "Success") {
         this.dialog.closeAll();
       } else {

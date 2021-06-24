@@ -61,16 +61,16 @@ export class DialogNavigationItemComponent implements OnInit {
   }
 
   saveItem() {
-    console.log('this.data.edit', this.data.edit)
+    console.log('this.data', this.data)
     
     let item;
-    if (this.data.icon !== undefined) {
+    if (this.data.isMenu) {
       if (this.data.edit === 0) {
         item = {
           id: 0,
           route: this.dateForm.controls.link.value,
           name: this.dateForm.controls.description.value,
-          icon: this.dateForm.controls.icon.value,
+          icon: this.iconSelected,
           idgrupo: null,
         };
       } else {
@@ -83,6 +83,8 @@ export class DialogNavigationItemComponent implements OnInit {
           orderby: this.data.orderby,
         };
       }
+
+      item.rol = this.data.rol;
 
       this.auth.saveMenu(item).subscribe((resp: ResponseService) => {
         if (resp.state === "Success") {
