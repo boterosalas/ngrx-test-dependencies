@@ -50,13 +50,11 @@ export class LeftMenuComponent implements OnInit {
   }
 
   getMenu() {
-    this.currentPages = [];
     this.subscription = this.auth.getMenu$.subscribe((val) => {
+      this.currentPages = [];
       if(val !== null ){
         val.forEach(element => {
           let {description, menus} = element;
-          // this.currentPages = menus;
-          // this.description = description;
           this.currentPages.push({description,menus});
         });
       }
