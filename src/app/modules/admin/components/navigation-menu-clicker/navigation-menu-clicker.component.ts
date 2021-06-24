@@ -149,12 +149,13 @@ export class NavigationMenuClickerComponent implements OnInit {
   }
 
   editNavigationItem(item: any) {
+    console.log(`item`, item)
     const data = {
       title: "Editar acceso",
       buttonName: "Guardar",
       edit: 1,
-      id: item.id,
-      idseccion: item.idseccion,
+      id: item.id || item.Id,
+      idseccion: item.idseccion || item.idgrupo,
       link: item.link || item.route,
       description: item.description || item.name,
       orderby: item.orderby,
@@ -190,8 +191,8 @@ export class NavigationMenuClickerComponent implements OnInit {
   }
 
   deleteNavigationItemService() {
-    let datos = [this.currentLink.id];
-    this.content.deleteFooterLink(datos).subscribe((resp: ResponseService) => {
+    let idMenu = [this.currentLink.Id];
+    this.auth.deleteMenu(idMenu).subscribe((resp: ResponseService) => {
       if (resp.state === "Success") {
         this.dialog.closeAll();
       } else {

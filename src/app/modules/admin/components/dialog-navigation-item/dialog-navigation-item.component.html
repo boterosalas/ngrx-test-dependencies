@@ -25,13 +25,24 @@
       </mat-form-field>
 
       <mat-form-field *ngIf="data.icon !== undefined || data.isNewMenu">
-        <input
+        <!-- <input
           matInput
           id="icon"
           type="text"
           placeholder="Icono"
           formControlName="icon"
-        />
+        /> -->
+        <mat-label>Icono</mat-label>
+        <mat-select [(value)]="iconSelected">
+          <mat-option
+            *ngFor="let icon of iconList"
+            [value]="icon.name"
+            class="menu-option"
+            ngClass="{{ icon.name }}"
+          >
+            {{ icon.name }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
 
       <div class="dialog-navigation-item__buttons">
