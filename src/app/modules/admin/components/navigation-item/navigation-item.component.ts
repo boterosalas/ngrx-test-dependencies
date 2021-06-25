@@ -10,16 +10,22 @@ export class NavigationItemComponent implements OnInit {
   @Input() link: any;
   @Output() editItem = new EventEmitter<any>();
   @Output() deleteItem = new EventEmitter<any>();
+  @Output() changeStateItem = new EventEmitter<any>();
 
   constructor() {}
 
   ngOnInit() {}
 
-  public editNavigationItem() {
+  editNavigationItem() {
     this.editItem.emit(this.link);
   }
 
   openDeleteNavigationItem() {
     this.deleteItem.emit(this.link);
+  }
+
+  changeState() {
+    this.changeStateItem.emit(this.link);
+
   }
 }
