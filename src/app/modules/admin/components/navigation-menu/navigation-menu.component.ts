@@ -1,13 +1,12 @@
+import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material";
 import { Subscription } from "rxjs";
-import { ContentService } from "src/app/services/content.service";
-import { DialogNavigationGroupComponent } from "../dialog-navigation-group/dialog-navigation-group.component";
-import { DialogNavigationItemComponent } from "../dialog-navigation-item/dialog-navigation-item.component";
 import { ResponseService } from "src/app/interfaces/response";
 import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
-import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 import { AuthService } from "src/app/services/auth.service";
+import { ContentService } from "src/app/services/content.service";
+import { DialogNavigationItemComponent } from "../dialog-navigation-item/dialog-navigation-item.component";
 
 @Component({
   selector: "app-navigation-menu",
@@ -27,7 +26,10 @@ export class NavigationMenuComponent implements OnInit {
   currentLink: any = {};
   isInvalidAddSection: boolean = false;
 
-  constructor(private content: ContentService, private dialog: MatDialog, public auth: AuthService) {}
+  constructor(
+    private dialog: MatDialog,
+    public auth: AuthService
+  ) {}
 
   ngOnInit() {
     this.getSections();
@@ -52,13 +54,11 @@ export class NavigationMenuComponent implements OnInit {
       });
     }
     this.saveOrderItems(dataSourceSend);
-  }  
+  }
 
   getSections() {
     this.subscription = this.auth.getmenusNoLogin().subscribe((resp) => {
-      console.log(`resp`, resp[0].menus);
       this.sectionsLinks = resp[0].menus;
-
     });
   }
 
@@ -75,7 +75,7 @@ export class NavigationMenuComponent implements OnInit {
         edit: 0,
         idseccion: section.id,
         rol: "ANONYMOUS",
-        isMenu: true
+        isMenu: true,
       },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
@@ -94,7 +94,7 @@ export class NavigationMenuComponent implements OnInit {
       description: item.name,
       orderby: item.orderby,
       icon: item.icon,
-      isMenu: true
+      isMenu: true,
     };
 
     const dialogRef1 = this.dialog.open(DialogNavigationItemComponent, {
@@ -125,13 +125,17 @@ export class NavigationMenuComponent implements OnInit {
   }
 
   deleteNavigationItemService() {
-    let idMenu = [this.currentLink.Id];
-    this.auth.deleteMenu(idMenu).subscribe((resp: ResponseService) => {
-      if (resp.state === "Success") {
-        this.dialog.closeAll();
-      } else {
-        console.log("Upss Hubo un problema vuelve a intentarlo");
-      }
-    });
+    this.auth
+      .deleteMenu(this.currentLink.Id)
+      .subscribe((resp: ResponseService) => {
+        if (resp.state === "Success") {
+          this.dialog.closeAll();
+        }
+      });
+  }
+
+  changeStateOfItem(item: any) {
+    item.active = item.active ? false : true;
+    this.auth.saveMenu(item).subscribe((resp: ResponseService) => {});
   }
 }

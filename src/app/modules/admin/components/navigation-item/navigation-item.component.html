@@ -22,7 +22,18 @@
       (click)="editNavigationItem()"
     ></i>
 
+    <i
+      *ngIf="link.menusystem === true"
+      class="style-icon cursor-pointer"
+      [ngClass]="{
+        'tio-visible': link.active === true,
+        'tio-hidden': link.active === false
+      }"
+      (click)="changeState()"
+    ></i>
+
     <img
+      *ngIf="link.menusystem === false"
       class="cursor-pointer"
       (click)="openDeleteNavigationItem()"
       src="/assets/img/dashboard/icon-remove-comision.svg"
