@@ -52,11 +52,7 @@ export class NavigationMenuComponent implements OnInit {
       });
     }
     this.saveOrderItems(dataSourceSend);
-  }
-
-  saveOrderSections(data: any) {
-    this.content.saveOrderFooterSections(data).subscribe(() => {});
-  }
+  }  
 
   getSections() {
     this.subscription = this.auth.getmenusNoLogin().subscribe((resp) => {
@@ -66,67 +62,8 @@ export class NavigationMenuComponent implements OnInit {
     });
   }
 
-  addSection() {
-    const dialogRef1 = this.dialog.open(DialogNavigationGroupComponent, {
-      data: {
-        title: "Nuevo grupo",
-        buttonName: "Agregar",
-        edit: 0,
-      },
-    });
-    this.subscription = dialogRef1.beforeClosed().subscribe(() => {
-      this.getSections();
-    });
-  }
-
-  editNavigationGroup(section: any) {
-    const dialogRef1 = this.dialog.open(DialogNavigationGroupComponent, {
-      data: {
-        title: "Editar grupo",
-        buttonName: "Guardar",
-        edit: 1,
-        id: section.id,
-        description: section.description,
-        orderby: section.orderby,
-      },
-    });
-    this.subscription = dialogRef1.beforeClosed().subscribe(() => {
-      this.getSections();
-    });
-  }
-
-  deleteNavigationGroup(section: any) {
-    this.currentSection = section;
-
-    const title = "";
-    const template = this.templateDeleteNavigationGroup;
-    this.dialogRef = this.dialog.open(ModalGenericComponent, {
-      data: {
-        title,
-        template,
-      },
-    });
-
-    this.subscription = this.dialogRef.beforeClosed().subscribe(() => {
-      this.getSections();
-    });
-  }
-
   cancelDelete() {
     this.dialog.closeAll();
-  }
-
-  deleteNavigationSectionService() {
-    let datos = [this.currentSection.id];
-    this.content
-      .deleteFooterSection(datos)
-      .subscribe((resp: ResponseService) => {
-        if (resp.state === "Success") {
-          this.dialog.closeAll();
-        } else {
-          console.log("Upss Hubo un problema vuelve a intentarlo");
-        }
-      });
   }
 
   addNavigationItem(section: any) {
