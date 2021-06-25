@@ -17,13 +17,88 @@
 
   <span
     *ngFor="let item of options; let i = index"
-    routerLink="{{ item.route }}"
-    routerLinkActive="active"
-    (click)="hide()"
     class="menu-mobile"
-    matRipple
   >
-    <span *ngIf="showIcon">
+
+  <span *ngIf="item.description === 'Sin Grupo'">
+        <span
+        *ngFor="let item of item.menus; let i = index"
+        routerLinkActive="active"
+        routerLink="{{ item.route }}"
+        (click)="hide()"
+        class="menu-mobile"
+        matRipple
+      >
+      <span *ngIf="showIcon">
+        <img src="assets/img/dashboard/icon-{{ i }}.svg" alt="icon" />
+      </span>
+      <a
+        mat-list-item
+        ngClass="cursor-pointer gtmHomeClicMenuLightbox{{ item.name }} f-16 {{
+          item.name
+        }}"
+        id="{{ section }}{{ i }}"
+      >
+        <span ngClass="gtmHomeClicMenuLightbox{{ item.name }}">{{
+          item.name
+        }}</span></a
+      >
+    </span>
+    </span>
+
+    <span *ngIf="item.description !== 'Sin Grupo'">
+
+      <mat-accordion>
+        <mat-expansion-panel class="no-bg">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <span  ngClass="{{ item.description }} f-16">
+                {{ item.description }}
+              </span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-list role="list">
+            <mat-list-item *ngFor="let item of item.menus">
+              <span
+                routerLinkActive="active"
+                routerLink="{{ item.route }}"
+                (click)="hide()"
+                class="menu-mobile"
+                ngClass="gtmHomeClicMenuLightbox{{ item.name }} "
+                matRipple
+                  >{{ item.name }}</span
+              >
+            </mat-list-item>
+          </mat-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </span>
+<!-- 
+      <summary>
+        <span
+          ngClass="cursor-pointer gtmHomeClicMenuLightbox{{
+            item.description
+          }} f-16 {{ item.description }}"
+          class="page_name"
+          >{{ item.description }}
+        </span>
+      </summary>
+      <ul class="leftul">
+        <li *ngFor="let item of item.menus">
+          <a
+            routerLink="{{ item.route }}"
+            (click)="setItemSelected(item.name)"
+            class="subItem"
+            [ngClass]="{ active: item.name === itemSelected }"
+            >{{ item.name }}</a
+          >
+        </li>
+      </ul>
+    </span> -->
+
+  </span>
+
+    <!-- <span *ngIf="showIcon">
       <img src="assets/img/dashboard/icon-{{ i }}.svg" alt="icon" />
     </span>
     <a
@@ -37,7 +112,8 @@
         item.name
       }}</span></a
     >
-  </span>
+  </span> -->
+
   <span class="menu-mobile">
     <a
       *ngIf="

@@ -18,9 +18,36 @@ export class DialogNavigationItemComponent implements OnInit {
   iconSelected: string;
 
   iconList = [
-    { name: "tio-bookmarks" },
-    { name: "tio-archive" },
+    { name: "tio-link" },
+    { name: "tio-home" },
+    { name: "tio-info" },
+    { name: "tio-education" },
+    { name: "tio-play_circle" },
+    { name: "tio-pin" },
+    { name: "tio-edit" },
+    { name: "tio-help" },
     { name: "tio-calendar_month" },
+    { name: "tio-dollar" },
+    { name: "tio-verified" },
+    { name: "tio-notice" },
+    { name: "tio-share_vs" },
+    { name: "tio-account_circle" },
+    { name: "tio-bookmark" },
+    { name: "tio-chart_bar_3" },
+    { name: "tio-heart" },
+    { name: "tio-shopping_basket" },
+    { name: "tio-award" },
+    { name: "tio-star" },
+    { name: "tio-menu_vs" },
+    { name: "tio-notifications" },
+    { name: "tio-settings" },
+    { name: "tio-send" },
+    { name: "tio-document_text" },
+    { name: "tio-image" },
+    { name: "tio-document_text" },
+    { name: "tio-image" },
+    { name: "tio-carousel_horizontal" },
+    { name: "tio-diamond" },
   ];
 
   constructor(

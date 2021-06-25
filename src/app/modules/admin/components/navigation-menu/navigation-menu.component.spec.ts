@@ -19,6 +19,7 @@ import { ContentService } from "src/app/services/content.service";
 import "zone.js/dist/zone-testing";
 import { DialogNavigationGroupComponent } from "../dialog-navigation-group/dialog-navigation-group.component";
 import { NavigationMenuComponent } from './navigation-menu.component';
+import { AuthService } from "src/app/services/auth.service";
 
 export class MdDialogMock {
   open() {
@@ -52,12 +53,12 @@ describe('NavigationMenuComponent', () => {
     "beforeClosed",
   ]);
 
-  const mockContentService = jasmine.createSpyObj("ContentService", [
-    "getFooter",
-    "saveOrderFooterLinks",
-    "saveOrderFooterSections",
-    "deleteFooterSection",
-    "deleteFooterLink",
+  const mockAuthService = jasmine.createSpyObj("AuthService", [
+    "getmenusNoLogin",
+    "saveMenu",
+    "deleteMenu",
+    "saveOrderMenus",
+    "getMenuClicker",
   ]);
 
   let response = {
@@ -209,17 +210,17 @@ describe('NavigationMenuComponent', () => {
       ],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
-        { provide: ContentService, useValue: mockContentService },
+        { provide: AuthService, useValue: mockAuthService },
         { provide: MatDialogRef, useValue: dialogMock },
         { provide: MatDialog, useValue: mockDialog },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
-    mockContentService.getFooter.and.returnValue(of(sectionsLinks));
-    mockContentService.saveOrderFooterLinks.and.returnValue(of(response));
-    mockContentService.saveOrderFooterSections.and.returnValue(of(response));
-    mockContentService.deleteFooterSection.and.returnValue(of(response));
-    mockContentService.deleteFooterLink.and.returnValue(of(response));
+    mockAuthService.getmenusNoLogin.and.returnValue(of(sectionsLinks));
+    mockAuthService.saveMenu.and.returnValue(of(response));
+    mockAuthService.deleteMenu.and.returnValue(of(response));
+    mockAuthService.saveOrderMenus.and.returnValue(of(response));
+    mockAuthService.getMenuClicker.and.returnValue(of(response));
     mockDialog.beforeClosed.and.returnValue(of(response));
   }));
 
@@ -233,34 +234,31 @@ describe('NavigationMenuComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it("deleteNavigationSectionService", () => {
-    component.currentSection = { id: 1, description: "test" };
-    component.deleteNavigationSectionService();
-    expect(mockContentService.deleteFooterSection).toHaveBeenCalled();
-  });
+  // it("deleteNavigationSectionService", () => {
+  //   component.currentSection = { id: 1, description: "test" };
+  //   component.deleteNavigationSectionService();
+  //   expect(mockContentService.deleteFooterSection).toHaveBeenCalled();
+  // });
 
   it("deleteNavigationItemService", () => {
     component.currentLink = { id: 1, description: "test" };
     component.deleteNavigationItemService();
-    expect(component).toBeTruthy();
-
+    expect(mockAuthService.deleteMenu).toHaveBeenCalled();
   });
 
   it("saveOrderItems", () => {
     component.saveOrderItems([{ id: 1, orderBy: 1 }]);
-    expect(component).toBeTruthy();
-
+    expect(mockAuthService.saveOrderMenus).toHaveBeenCalled();
   });
 
-  it("saveOrderSections", () => {
-    component.saveOrderSections([{ id: 1, orderBy: 1 }]);
-    expect(mockContentService.saveOrderFooterSections).toHaveBeenCalled();
-  });
+  // it("saveOrderSections", () => {
+  //   component.saveOrderSections([{ id: 1, orderBy: 1 }]);
+  //   expect(mockContentService.saveOrderFooterSections).toHaveBeenCalled();
+  // });
 
   it("getSections", () => {
     component.getSections();
-    expect(component).toBeTruthy();
-
+    expect(mockAuthService.getmenusNoLogin).toHaveBeenCalled();
   });
 
   it("currentLink", () => {
