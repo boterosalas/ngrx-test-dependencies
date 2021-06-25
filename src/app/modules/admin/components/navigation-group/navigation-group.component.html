@@ -38,7 +38,7 @@
     (cdkDropListDropped)="dropItems($event)"
   >
     <app-navigation-item
-      *ngFor="let link of section.links"
+      *ngFor="let link of section.links || section.menus"
       [link]="link"
       (editItem)="editNavigationItem($event)"
       (deleteItem)="deleteNavigationItem($event)"

@@ -1,0 +1,77 @@
+@import "variables";
+
+.navigation {
+  border-radius: 5px;
+  margin-top: 2rem;
+
+  &__header {
+    display: grid;
+    grid-template-columns: 10% 30% 40% 20%;
+    align-items: center;
+    background-color: #f3f1f6;
+    font-family: $font-galano-bold;
+    // font-weight: $font-weight-bold
+
+    p {
+      color: $primary-color;
+    }
+  }
+
+  &__actions {
+    text-align: center;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    padding: 1rem;
+    background-color: $white;
+  }
+
+  &__list-sections {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: 1rem;
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+  }
+}
+
+.delete-container {
+  max-width: 400px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.title_delete {
+  color: $secondary-color;
+}
+
+.text-container {
+  padding: 0 1rem;
+}
+
+.button_cancel {
+  color: $primary-color;
+  font-weight: $font-weight-bold;
+  background-color: transparent;
+}
+
+.style-icon {
+  font-size: 22px;
+  color: $purple2;
+}
+
+.style-icon-delete {
+  font-size: 22px;
+  color: #fd5555;
+}

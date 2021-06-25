@@ -15,29 +15,45 @@ import { AdminModule } from '../../admin.module';
 import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
 import { DialogCategoryComponent } from "../../components/dialog-category/dialog-category.component";
 import { MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
+
+export class MatDialogMock {
+  open() {
+   return {
+      beforeClosed   : () => of(true),
+   };
+ }
+ closeAll() {
+  return {
+    closeAll : () => of(true),
+ };
+ }
+}
+
 
 describe("ControllerAdminComponent", () => {
   let component: BussinessAdminComponent;
   let fixture: ComponentFixture<BussinessAdminComponent>;
-  const dialogMock = {
-    close: () => { },
-    beforeClosed: () => { }
-  };
+
+
   const audit = {
     state: "Success",
     userMessage: "se ha enviado un correo",
     objectResponse: []
   };
+
   const error = {
     state: "Error",
     userMessage: "se ha enviado un correo",
     objectResponse: []
   };
+
   const mockDialog = jasmine.createSpyObj("MatDialog", [
     "open",
     "closeAll"
   ]);
-  //const mockDialogR = jasmine.createSpy(component.dialogRef,['beforeClosed'])
+  
+
   const mockDialogRef = jasmine.createSpyObj("MatDialogRef", [
     "close",
     "afterClosed",
@@ -45,6 +61,7 @@ describe("ControllerAdminComponent", () => {
     "event ",
     "beforeClosed"
   ]);
+
   const mockContentService = jasmine.createSpyObj("ContentService", [
     "getBusinessContent",
     "biggySearchExito",
@@ -68,6 +85,8 @@ describe("ControllerAdminComponent", () => {
       infoaditional: "",
     },
   ];
+
+  const matDialog = new MatDialogMock();
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -93,17 +112,17 @@ describe("ControllerAdminComponent", () => {
         }),
       ],
       providers: [
-        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialog, useValue: matDialog },
         { provide: ContentService, useValue: mockContentService },
-        { provide: MatDialogRef, useValue: dialogMock },
-        { provide: MatDialog, useValue: mockDialog },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: mockDialogRef },
       ]
     }).overrideModule(BrowserDynamicTestingModule, {
       set: {
-        entryComponents: [DialogCategoryComponent]
+        entryComponents: [DialogCategoryComponent, ModalGenericComponent]
       }
-    })
-      .compileComponents();
+    }).compileComponents();
+    
     mockContentService.getBusinessContent.and.returnValue(of(bussiness));
     mockContentService.getAllBusinessContent.and.returnValue(of(bussiness));
     mockContentService.orderCategory.and.returnValue(of(audit));
@@ -120,6 +139,7 @@ describe("ControllerAdminComponent", () => {
     expect(component).toBeTruthy();
     expect(mockContentService.getAllBusinessContent).toHaveBeenCalled();
   });
+
   it('save Order', () => {
     mockContentService.orderCategory.and.returnValue(of(audit));
     component.saveOrder([{ id: 1, orderby: 2 }, { id: 2, orderby: 1 }]);
@@ -128,6 +148,7 @@ describe("ControllerAdminComponent", () => {
     component.saveOrder([{ id: 1, orderby: 2 }, { id: 2, orderby: 1 }]);
     expect(mockContentService.orderCategory).toHaveBeenCalled();
   });
+
   it('delete a category', () => {
     mockContentService.deleteCategory.and.returnValue(of(audit));
     component.datosEliminar = { id: 1 };
@@ -138,32 +159,24 @@ describe("ControllerAdminComponent", () => {
     component.deleteCategoryService();
     expect(mockContentService.deleteCategory).toHaveBeenCalled();
   });
-  it('cancel delete', () => {
 
-    component.cancelDelete();
-    expect(mockDialog.closeAll).toHaveBeenCalled();
+  // it('cancel delete', () => {
+  //   component.cancelDelete();
+  // });
 
-    //spyOn(component.dialogRef, 'beforeClosed').and.returnValue(of(audit));
-    //component.deleteCategory({ id: 1 });
-    //expect(bussiness).not.toBeUndefined();
-
-    //  expect(mockDialogRef.beforeClosed).toHaveBeenCalled();
+  it('delete category', () => {
+    component.deleteCategory({title:'eliminar categorira', template: ''});
+    expect(mockContentService.getAllBusinessContent).toHaveBeenCalled();
   });
-  //it('delete Category', () => {
-  //jasmine.createSpy(component.dialogRef,['beforeClosed']).and.callThrough();
-  //  spyOn(component.dialogRef, 'beforeClosed');
-  //  component.deleteCategory({ id: 1 });
-  //  expect(mockDialogRef.beforeClosed).toHaveBeenCalled();
-  //});
-  //it('add Category', () => {
-  //  component.id = "1";
-  //  component.agregarCategory();
-  //  expect(bussiness).not.toBeUndefined();
-  //});
-  //it('edit Category', () => {
 
-  //  component.id = "1";
-  //  component.editCategory({ id: 1, description: "Salud", imageurl: "URL", link: "ULR", commission: "2" });
-  //  expect(bussiness).not.toBeUndefined();
-  //});
+  it('add category', () => {
+    component.agregarCategory();
+    expect(mockContentService.getAllBusinessContent).toHaveBeenCalled();
+  });
+
+  it('edit category', () => {
+    component.editCategory('Exito');
+    expect(mockContentService.getAllBusinessContent).toHaveBeenCalled();
+  });
+
 });
