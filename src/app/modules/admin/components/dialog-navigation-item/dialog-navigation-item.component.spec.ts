@@ -87,6 +87,6 @@ describe("DialogNavigationItemComponent", () => {
   });
 
   it("form controls", () => {
-    expect(Object.keys(component.dateForm.controls)).toEqual(["idseccion","link","description"]);
+    expect(Object.keys(component.dateForm.controls)).toEqual(["idseccion","link","description","icon"]);
   });
 });
