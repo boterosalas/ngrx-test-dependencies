@@ -82,7 +82,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     file.fileIdentificationCard2 = null;
     file.nameFileCert = "";
     file.fileBankCertificate = null;
-    file.RUT = null;
+    file.nameFileRut = "";
+    file.fileRut = null;
   }
 
   /**
@@ -91,7 +92,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
    */
   
   public sendFiles(files) {
-
+    
     let sendvalues = {
       userid: this.userId,
       value: true,
@@ -99,7 +100,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       identificationCard1: files.fileIdentificationCard1,
       identificationCard2: files.fileIdentificationCard2,
       bankCertificate: files.fileBankCertificate,
-      RUT: files.RUT,
+      RUT: files.fileRut,
     }
 
     

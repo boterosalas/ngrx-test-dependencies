@@ -255,7 +255,6 @@ export class UsersComponent extends MatPaginatorIntl
   }
 
   public userData(user) {
-    console.log(`user`, user)
     const userId = user.userId;
     const identification = user.identification;
     const name = user.firstNames;

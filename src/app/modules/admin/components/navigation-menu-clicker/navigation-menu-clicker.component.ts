@@ -149,7 +149,6 @@ export class NavigationMenuClickerComponent implements OnInit {
   }
 
   editNavigationItem(item: any) {
-    console.log(`item`, item)
     const data = {
       title: "Editar acceso",
       buttonName: "Guardar",

@@ -311,9 +311,7 @@ export class DialogUserComponent implements OnInit, OnDestroy {
       { extension: ".png", contentType: "image/png" },
       { extension: ".pdf", contentType: "application/pdf" }
     ];
-
-    console.log(`this.data`, this.data)
-
+    
     const contentTypeIdentCard1 = formats.filter(format => format.extension === this.data.extensionIdentificationCard1); 
     const contentTypeIdentCard2 = formats.filter(format => format.extension === this.data.extensionIdentificationCard2); 
     const contentTypeBankCard = formats.filter(format => format.extension === this.data.extensionBankCertificate);
