@@ -199,8 +199,7 @@ export class LeftMenuComponent implements OnInit {
   }
 
   getMenu() {
-    this.subscription = this.auth.getMenu$.subscribe((val) => {
-      console.log(`menu`, val);
+    this.subscription = this.auth.getMenu$.subscribe((val) => {      
       this.currentPages = val;
     });
   }

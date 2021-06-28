@@ -63,8 +63,8 @@ export class NavigationMenuClickerComponent implements OnInit {
   }
 
   getSections() {
-    this.subscription = this.auth.getMenusFromAdmin().subscribe((resp) => {
-      
+    this.subscription = this.auth.getMenuClicker().subscribe((resp) => {
+      console.log(`menu clicker`, resp)
       this.sectionsLinks = resp;
     });
   }
@@ -140,7 +140,9 @@ export class NavigationMenuClickerComponent implements OnInit {
         buttonName: "Agregar",
         edit: 0,
         idseccion: section === 'NuevoMenu' ? 0 : section.id,
-        isNewMenu: section === 'NuevoMenu'
+        isMenu: true,
+        rol: "CLICKER",
+
       },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
@@ -161,6 +163,7 @@ export class NavigationMenuClickerComponent implements OnInit {
       orderby: item.orderby,
       date: item.date,
       icon: item.icon,
+      isMenu: true,
     };
 
     const dialogRef1 = this.dialog.open(DialogNavigationItemComponent, {

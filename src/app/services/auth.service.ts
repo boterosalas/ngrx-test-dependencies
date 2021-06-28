@@ -39,7 +39,7 @@ export class AuthService implements OnDestroy {
   url = environment.URL_SECURITY;
   apiLogin = "Authentication/login";
   apiGetmenus = "Authentication/getMenus";
-  apiGetmenusClicker = "Authentication/getMenusByRol";
+  apiGetmenusClicker = "Authentication/getMenusByRol?visible=true";
   apiGetmenusFromAdmin = "Authentication/getMenus?visible=false";
   apiGetmenusNoLogin = "Authentication/getMenus?visible=true";
   apiSaveMenu = "Authentication/savemenu";
