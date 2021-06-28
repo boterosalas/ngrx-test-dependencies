@@ -73,6 +73,7 @@ describe("UsersComponent", () => {
         fileIdentificationCard1: null,
         fileIdentificationCard2: null,
         fileBankCertificate: null,
+        fileRut: null,
         bank: null,
         typeBankAccount: null,
         bankAccountNumber: null,
@@ -81,6 +82,7 @@ describe("UsersComponent", () => {
         extensionIdentificationCard1: ".jpg",
         extensionIdentificationCard2: ".jpg",
         extensionBankCertificate: ".jpg",
+        extensionRut: ".jpg",
         responseAccountBank: "Cuenta rechazada"
       }
     ]
@@ -99,6 +101,7 @@ describe("UsersComponent", () => {
     objectResponse: [{
       id: 1,
       userid: 109,
+      rut: "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACgcHiMeGSgjISMtKygw",
       bankcertificate: "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACgcHiMeGSgjISMtKygw",
       identificationcard1: "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACgcHiMeGSgjISMtKygw",
       identificationcard2: "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACgcHiMeGSgjISMtKygw"
@@ -122,6 +125,7 @@ describe("UsersComponent", () => {
       fileIdentificationCard1: null,
       fileIdentificationCard2: null,
       fileBankCertificate: null,
+      fileRut: null,
       bank: null,
       typeBankAccount: null,
       bankAccountNumber: null,

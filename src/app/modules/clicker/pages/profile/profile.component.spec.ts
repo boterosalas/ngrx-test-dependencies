@@ -43,7 +43,8 @@ describe('ProfileComponent', () => {
     identification: '123456789',
     identificationCard1: '84994889',
     identificationCard2: '84994889',
-    bankCertificate: '84994889'
+    bankCertificate: '84994889',
+    rut: '84994889',
   }
 
   beforeEach(async(() => {
@@ -89,7 +90,7 @@ describe('ProfileComponent', () => {
     expect(component).toBeTruthy();
     component.userId = '260';
     component.id = '131516'
-    component.sendFiles({ fileIdentificationCard1: 'data:application/octet-stream;base64, 84dq8d9qdqd', fileIdentificationCard2: 'data:application/octet-stream;base64, dqdqdqsqsq', fileBankCertificate: 'data:application/octet-stream;base64, ddp0d9aida0d' });
+    component.sendFiles({ fileIdentificationCard1: 'data:application/octet-stream;base64, 84dq8d9qdqd', fileIdentificationCard2: 'data:application/octet-stream;base64, dqdqdqsqsq', fileBankCertificate: 'data:application/octet-stream;base64, ddp0d9aida0d', fileRut: 'data:application/octet-stream;base64, ddp0d9aida0d' });
     expect(component.userId).not.toBeUndefined();
     component.reset({});
     let file = '';
