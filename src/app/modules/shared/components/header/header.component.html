@@ -64,22 +64,9 @@
           fxLayoutGap="1rem"
           class="links"
         >
-          <li>
-            <a href="https://www.clickam.com.co/#/click-academy"
-              >Click Academy</a
-            >
-          </li>
-          <li>
-            <a href="https://www.clickam.com.co/#/blog">Blog</a>
-          </li>
-          <li>
-            <a href="https://www.clickam.com.co/#/centro-de-ayuda"
-              >Centro de Ayuda</a
-            >
-          </li>
-          <li>
-            <a href="https://www.clickam.com.co/#/tabla-comisiones"
-              >Tabla de Comisiones</a
+          <li *ngFor="let item of menuItems">
+            <a href="{{item.route}}"
+              >{{item.name}}</a
             >
           </li>
         </ul>
