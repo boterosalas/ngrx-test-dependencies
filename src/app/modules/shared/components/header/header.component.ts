@@ -21,6 +21,9 @@ export class HeaderComponent implements OnInit {
   @Input() internal: boolean;
   @Input() name: string;
   @Output() sidenav = new EventEmitter();
+  menuItems: any = [];
+
+  private subscription: Subscription = new Subscription();
   
   isLoggedIn: any;
   firstNames: string;
@@ -33,6 +36,15 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.getAmount();
+    this.getMenu();
+
+  }
+
+  public getMenu() {
+    this.subscription = this.auth.getmenusNoLoginUserView().subscribe((resp) => {
+      console.log(`resp`, resp)
+      this.menuItems = resp[0].menus;
+    });
   }
 
   public open() {
