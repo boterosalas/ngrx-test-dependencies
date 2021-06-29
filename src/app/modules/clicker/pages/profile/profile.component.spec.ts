@@ -44,7 +44,7 @@ describe('ProfileComponent', () => {
     identificationCard1: '84994889',
     identificationCard2: '84994889',
     bankCertificate: '84994889',
-    rut: '84994889',
+    // rut: '84994889',
   }
 
   beforeEach(async(() => {

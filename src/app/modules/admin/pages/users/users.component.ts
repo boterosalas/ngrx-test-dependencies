@@ -308,7 +308,7 @@ export class UsersComponent extends MatPaginatorIntl
         const fileIdentificationCard1 = resp.objectResponse.identificationcard1;
         const fileIdentificationCard2 = resp.objectResponse.identificationcard2;
         const fileBankCertificate = resp.objectResponse.bankcertificate;
-        const fileRUT = resp.objectResponse.rut;
+        // const fileRUT = resp.objectResponse.rut;
 
         const dialogRef = this.dialog.open(DialogUserComponent, {
           data: {
