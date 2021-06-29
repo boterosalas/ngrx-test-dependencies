@@ -100,6 +100,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   showErrorFormatCert: boolean = false;
   showErrorFormatCed1: boolean = false;
   showErrorFormatCed2: boolean = false;
+  fileRut: any;
   fileBankCertificate: any;
   fileCed1: any;
   fileCed2: any;
@@ -653,13 +654,13 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
    */
 
   public onFileChangeFiles(event, param: string) {
+    
     if (event.target.files && event.target.files.length) {
       const nameFile = event.target.files[0].name;
       this.getExtension(nameFile);
 
       if (this.validFormat) {
         const formData = new FormData();
-    
         formData.append("file", event.target.files[0]);
         formData.append("typeDocument", param);
         formData.append("identification", this.id);

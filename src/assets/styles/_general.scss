@@ -181,6 +181,9 @@ body {
   &-100 {
     width: 99.9%;
   }
+  &-95 {
+    width: 95%;
+  }
   &-50 {
     width: 50%;
   }
@@ -2471,4 +2474,53 @@ h3#bussiness2 {
   .mat-list-item-content{
     padding: 0 5px !important;
   }
+}
+
+.no-bg{
+  background: none;
+  box-shadow: none;
+
+  .mat-expansion-panel-header{
+    box-shadow: none;
+  }
+
+   .mat-expansion-panel-content {
+    background: none;
+  }
+
+   .mat-expansion-panel-header-title{
+    color: $primary-color;
+    font-family: $font-galano-bold;
+    margin-left: 14px
+  }
+
+   .mat-expansion-panel-body{
+    padding: 0 !important;
+  }
+
+   .mat-list-item-content{
+    padding: 0 7px;
+  }
+
+   .mat-list-item{
+    height: 38px;
+    &:hover, &:focus{
+      background: none;
+    }
+  }
+
+    .mat-list-base{
+    padding-top: 0;
+  }
+
+  span.menu-mobile {
+    color: $primary-color;
+    &.active{
+      color: #ffffff;
+      background-color: $primary-color;
+      border-radius: 15px;
+      padding: 5px 10px;
+    }
+  }
+
 }

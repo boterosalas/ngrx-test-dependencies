@@ -42,6 +42,7 @@ export class AuthService implements OnDestroy {
   apiGetmenusClicker = "Authentication/getMenusByRol?visible=true";
   apiGetmenusFromAdmin = "Authentication/getMenus?visible=false";
   apiGetmenusNoLogin = "Authentication/getMenus?visible=true";
+  apiGetmenusNoLoginViewUser = "Authentication/getMenus?visible=false";
   apiSaveMenu = "Authentication/savemenu";
   apiSaveMenuGroup = "Authentication/savegroup";
   apiDeleteMenu = "Authentication/deletemenu";
@@ -165,6 +166,23 @@ export class AuthService implements OnDestroy {
   public getmenusNoLogin() {
     return this.http
       .get(`${this.url + this.apiGetmenusNoLogin}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((resp: any) => {
+          return resp.objectResponse;
+        })
+      );
+  }
+
+  public getmenusNoLoginUserView() {
+    return this.http
+      .get(`${this.url + this.apiGetmenusNoLoginViewUser}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(

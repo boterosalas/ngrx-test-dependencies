@@ -38,6 +38,7 @@ export class MenuOptionsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getMenu()
   }
+  
 
   /**
    * Metodo para obtener los menus
@@ -46,7 +47,6 @@ export class MenuOptionsComponent implements OnInit, OnDestroy {
   public getMenu() {
     this.subscription = this.auth.getMenu$.subscribe(val => {
       this.options = val;
-
     })
   }
 

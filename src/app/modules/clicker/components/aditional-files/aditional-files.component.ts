@@ -18,12 +18,15 @@ export class AditionalFilesComponent implements OnInit, OnDestroy {
     nameFileCed1: '',
     nameFileCed2: '',
     nameFileCert: '',
+    nameRut: '',
     showErrorCed1: false,
     showErrorCed2: false,
     showErrorCert: false,
+    showErrorRut: false,
     fileIdentificationCard1: null,
     fileIdentificationCard2: null,
     fileBankCertificate: null,
+    fileRut: null,
     isEmployee:false,
   }
   @Output() uploadFile = new EventEmitter;
@@ -75,6 +78,10 @@ export class AditionalFilesComponent implements OnInit, OnDestroy {
             if(param === 'cedula2') {
               this.files.fileIdentificationCard2 = reader.result;
               this.files.nameFileCed2 = name;
+              this.files.showErrorCed2 = false;
+            }else if(param === 'rut') {
+              this.files.fileRut = reader.result;
+              this.files.nameRut = name;
               this.files.showErrorCed2 = false;
             }
             else {
@@ -128,12 +135,15 @@ export class AditionalFilesComponent implements OnInit, OnDestroy {
         nameFileCed1: '',
         nameFileCed2: '',
         nameFileCert: '',
+        nameRut: '',
         showErrorCed1: false,
         showErrorCed2: false,
         showErrorCert: false,
+        showErrorRut: false,
         fileIdentificationCard1: null,
         fileIdentificationCard2: null,
         fileBankCertificate: null,
+        fileRut: null,
         isEmployee:false,
       }
       );

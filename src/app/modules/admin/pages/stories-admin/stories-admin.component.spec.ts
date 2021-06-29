@@ -8,7 +8,7 @@ import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder } from "@angul
 import { RouterTestingModule } from "@angular/router/testing";
 import { JwtModule } from "@auth0/angular-jwt";
 import { SharedModule } from 'src/app/modules/shared/shared.module';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import Swal from 'sweetalert2';
 import { ContentService } from 'src/app/services/content.service';
@@ -22,7 +22,7 @@ describe('StoriesAdminComponent', () => {
     const mockDialog = jasmine.createSpyObj("MatDialog", ["open", "closeAll"]);
 
     const mockContentService = jasmine.createSpyObj("ContentService", [
-        "getBusiness", "getStories", "deleteContent"
+        "getBusiness", "getStories", "deleteContent",'saveStories'
     ]);
 
     const audit = {
@@ -31,6 +31,13 @@ describe('StoriesAdminComponent', () => {
         objectResponse: [{
         }]
     };
+
+    const dialogMock = {
+        close: () => {},
+        beforeClosed: () => {},
+      };
+
+
 
     let getStories = {
         state: "Success",
@@ -49,6 +56,11 @@ describe('StoriesAdminComponent', () => {
           stateView: false,
           pause: true
         }]
+      };
+
+    let saveStories = {
+        state: "Success",
+        userMessage: 'correcto',
       };
 
       let bussiness = [
@@ -93,6 +105,8 @@ describe('StoriesAdminComponent', () => {
                 NO_ERRORS_SCHEMA
             ],
             providers: [
+                { provide: MAT_DIALOG_DATA, useValue: {} },
+                { provide: MatDialogRef, useValue: dialogMock },
                 { provide: MatDialog, useValue: mockDialog },
                 { provide: ContentService, useValue: mockContentService }
             ]
@@ -100,6 +114,7 @@ describe('StoriesAdminComponent', () => {
             .compileComponents();
         mockContentService.deleteContent.and.returnValue(of(audit));
         mockContentService.getStories.and.returnValue(of(getStories));
+        mockContentService.saveStories.and.returnValue(of(saveStories));
         mockContentService.getBusiness.and.returnValue(of(bussiness));
     }));
 
@@ -134,6 +149,14 @@ describe('StoriesAdminComponent', () => {
         let datos = true;
         expect(datos).toBeTruthy();
     });
+
+    it('open stories', () => {
+        component.openDialogStories();
+        component.createStory();
+        component.saveStory();
+        expect(mockDialog.open).toBeTruthy();
+    });
+    
 
 
 

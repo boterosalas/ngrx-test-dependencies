@@ -11,7 +11,7 @@
       <span
         fxLayout="column"
         fxLayoutAlign="center center"
-        (click)="sidenav2.toggle();"
+        (click)="open()"
         class="burger-menu cursor-pointer"
       >
         <img src="assets/img/menu2.svg" alt="menu" />
@@ -64,22 +64,9 @@
           fxLayoutGap="1rem"
           class="links"
         >
-          <li>
-            <a href="https://www.clickam.com.co/#/click-academy"
-              >Click Academy</a
-            >
-          </li>
-          <li>
-            <a href="https://www.clickam.com.co/#/blog">Blog</a>
-          </li>
-          <li>
-            <a href="https://www.clickam.com.co/#/centro-de-ayuda"
-              >Centro de Ayuda</a
-            >
-          </li>
-          <li>
-            <a href="https://www.clickam.com.co/#/tabla-comisiones"
-              >Tabla de Comisiones</a
+          <li *ngFor="let item of menuItems">
+            <a href="{{item.route}}"
+              >{{item.name}}</a
             >
           </li>
         </ul>
@@ -103,11 +90,11 @@
     fxLayoutGap="1rem"
     class="divContainer divContainerLoggedIn"
   >
-    <div fxLayout="row" fxLayoutGap="3rem">
+    <div fxLayout="row" fxLayoutGap="1rem">
       <span
         fxLayout="column"
         fxLayoutAlign="center center"
-        (click)="sidenav.toggle();"
+        (click)="open()"
         class="burger-menu cursor-pointer"
       >
         <img src="assets/img/menu2.svg" alt="menu" />
@@ -123,14 +110,7 @@
     </div>
 
     <div fxLayoutAlign="center center" fxLayoutGap="1rem" class="divIcons">
-      <span
-        *ngIf="
-          (auth.getRole$ | async) !== 'ADMIN' &&
-          (auth.getRole$ | async) !== 'SUPERADMIN'
-        "
-        fxLayoutAlign="center center"
-        class="iconContainer"
-      >
+      <span fxLayoutAlign="center center" class="iconContainer">
         <a href="https://www.clickam.com.co/#/click-academy"
           ><i class="tio-education icon cursor-pointer"></i
         ></a>
@@ -144,16 +124,7 @@
       </span>
       <mat-menu #menu="matMenu" xPosition="before">
         <div class="menuProfile">
-          <button
-            *ngIf="
-              (auth.getRole$ | async) !== 'ADMIN' &&
-              (auth.getRole$ | async) !== 'SUPERADMIN'
-            "
-            [routerLink]="['/mi-perfil']"
-            mat-menu-item
-          >
-            Mi perfil
-          </button>
+          <button [routerLink]="['/mi-perfil']" mat-menu-item>Mi perfil</button>
           <button (click)="logout()" mat-menu-item>Cerrar sesión</button>
         </div>
       </mat-menu>

@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from 'src/app/services/user.service';
 import { of } from 'rxjs';
+
 describe('DialogNewsComponent', () => {
   let component: DialogNewsComponent;
   let fixture: ComponentFixture<DialogNewsComponent>;
@@ -26,7 +27,8 @@ describe('DialogNewsComponent', () => {
   const dataResp = {
     state: "Success"
   }
-  const data = { element: { id: 1, documenturl: "http/archivo.jpg", statusnovelty: "Pendiente" } }
+  const data = { element: { id: 1, documenturl: "http/archivo.jpg", statusnovelty: "Pendiente" }}
+
   const mockDialog = jasmine.createSpyObj("MatDialog", ["open", "closeAll"]);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -70,6 +72,7 @@ describe('DialogNewsComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
   it('should create', () => {
     component.data = { element: { id: 1, documenturl: "http/archivo.jpg" } }
     expect(component).toBeTruthy();
@@ -80,5 +83,12 @@ describe('DialogNewsComponent', () => {
     expect(mockUserService.setStatus).toHaveBeenCalled();
     component.onChangeSelected("Pendiente")
   })
+
+  it('image not data', () => {
+    component.image = '';
+    component.viewerImage();
+    expect(mockDialog.open).toBeTruthy();
+  });
+  
 
 });

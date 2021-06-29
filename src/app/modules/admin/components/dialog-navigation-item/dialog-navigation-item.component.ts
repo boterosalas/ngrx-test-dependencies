@@ -98,7 +98,7 @@ export class DialogNavigationItemComponent implements OnInit {
           name: this.dateForm.controls.description.value,
           icon: this.iconSelected,
           idgrupo: null,
-          active: true,
+          active: true
         };
       } else {
         item = {
