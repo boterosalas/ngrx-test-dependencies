@@ -214,9 +214,9 @@ export class NavigationMenuClickerComponent implements OnInit {
       },
     });
 
-    this.subscription = this.dialogRef.beforeClosed().subscribe(() => {
-      this.getSections();
-    });
+    // this.subscription = this.dialogRef.beforeClosed().subscribe(() => {
+    //   this.getSections();
+    // });
   }
 
   deleteNavigationItemService() {

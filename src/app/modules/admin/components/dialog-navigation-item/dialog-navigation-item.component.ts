@@ -108,6 +108,7 @@ export class DialogNavigationItemComponent implements OnInit {
           icon: this.iconSelected,
           idgrupo: this.data.idseccion,
           orderby: this.data.orderby,
+          active: this.data.active
         };
       }
 
