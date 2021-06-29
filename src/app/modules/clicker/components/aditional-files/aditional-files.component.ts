@@ -79,11 +79,12 @@ export class AditionalFilesComponent implements OnInit, OnDestroy {
               this.files.fileIdentificationCard2 = reader.result;
               this.files.nameFileCed2 = name;
               this.files.showErrorCed2 = false;
-            }else if(param === 'rut') {
-              this.files.fileRut = reader.result;
-              this.files.nameRut = name;
-              this.files.showErrorCed2 = false;
             }
+            // else if(param === 'rut') {
+            //   this.files.fileRut = reader.result;
+            //   this.files.nameRut = name;
+            //   this.files.showErrorCed2 = false;
+            // }
             else {
               this.files.fileBankCertificate = reader.result;
               this.files.nameFileCert = name;

@@ -327,7 +327,7 @@ describe("('PaymentInfoComponent', ", () => {
       ced1: [null],
       ced2: [null],
       cert: [null],
-      RUT: [null],
+      // RUT: [null],
     });
     component.selectDepartment(department);
     expect(department).not.toBeUndefined();
@@ -345,7 +345,7 @@ describe("('PaymentInfoComponent', ", () => {
       ced1: [null],
       ced2: [null],
       cert: [null],
-      RUT: [null],
+      // RUT: [null],
     });
 
     
@@ -355,7 +355,7 @@ describe("('PaymentInfoComponent', ", () => {
     component.fileIdentificationCard1 = 'image1';
     component.fileIdentificationCard2 = 'image2';
     component.fileBankCertificate = 'cert';
-    component.fileRUT = 'RUT';
+    // component.fileRUT = 'RUT';
     component.externalForm.controls.numberAccount.setValue('123456');
     component.externalForm.controls.typeAccount.setValue('Ahorros');
     component.externalForm.controls.address.setValue('calle falsa 123');
