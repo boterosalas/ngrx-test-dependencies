@@ -87,8 +87,7 @@ export class DialogNavigationItemComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  saveItem() {
-    console.log('this.data', this.data)
+  saveItem() { 
     
     let item;
     if (this.data.isMenu) {
@@ -99,6 +98,7 @@ export class DialogNavigationItemComponent implements OnInit {
           name: this.dateForm.controls.description.value,
           icon: this.iconSelected,
           idgrupo: null,
+          active: true,
         };
       } else {
         item = {
