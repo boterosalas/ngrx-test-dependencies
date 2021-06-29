@@ -38,7 +38,7 @@ export class NavigationMenuClickerComponent implements OnInit {
   }
 
   saveOrderItems(data: any) {
-    this.content.saveOrderFooterLinks(data).subscribe(() => {});
+    this.auth.saveOrderMenus(data).subscribe(() => {});
   }
 
   dropSection(event: CdkDragDrop<any>) {
@@ -202,5 +202,10 @@ export class NavigationMenuClickerComponent implements OnInit {
         console.log("Upss Hubo un problema vuelve a intentarlo");
       }
     });
+  }
+
+  changeStateOfItem(item: any) {
+    item.active = item.active ? false : true;
+    this.auth.saveMenu(item).subscribe((resp: ResponseService) => {});
   }
 }

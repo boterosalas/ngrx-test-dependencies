@@ -44,8 +44,7 @@ export class AuthService implements OnDestroy {
   apiGetmenusNoLogin = "Authentication/getMenus?visible=true";
   apiSaveMenu = "Authentication/savemenu";
   apiDeleteMenu = "Authentication/deletemenu";
-  apiSaveOrderMenus = "Authentication/saveordermenus";
-  
+  apiSaveOrderMenus = "Authentication/saveordermenus";  
   apiForgotPassword = "Authentication/recoveryPassword";
   apiRecoverPassword = "Authentication/resetpassword";
   apiChangePassword = "Authentication/changePassword";
