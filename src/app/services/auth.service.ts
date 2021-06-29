@@ -46,6 +46,7 @@ export class AuthService implements OnDestroy {
   apiSaveMenu = "Authentication/savemenu";
   apiSaveMenuGroup = "Authentication/savegroup";
   apiDeleteMenu = "Authentication/deletemenu";
+  apiDeleteMenuGroup = "Authentication/deletegroup";
   apiSaveOrderMenus = "Authentication/saveordermenus";  
   apiSaveOrderGrupoMenus = "Authentication/saveordergrupomenus";  
   apiForgotPassword = "Authentication/recoveryPassword";
@@ -236,6 +237,23 @@ export class AuthService implements OnDestroy {
   public deleteMenu(id: any) {
     return this.http
       .delete(`${this.url + this.apiDeleteMenu}?id=${id}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
+
+  public deleteGroup(id: any) {
+    return this.http
+      .delete(`${this.url + this.apiDeleteMenuGroup}?id=${id}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(

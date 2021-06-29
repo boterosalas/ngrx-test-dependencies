@@ -148,8 +148,8 @@ export class NavigationMenuClickerComponent implements OnInit {
 
   deleteNavigationSectionService() {
     let datos = [this.currentSection.id];
-    this.content
-      .deleteFooterSection(datos)
+    this.auth
+      .deleteGroup(datos)
       .subscribe((resp: ResponseService) => {
         if (resp.state === "Success") {
           this.dialog.closeAll();
@@ -166,7 +166,7 @@ export class NavigationMenuClickerComponent implements OnInit {
         title: "Agregar acceso",
         buttonName: "Agregar",
         edit: 0,
-        idseccion: section === 'NuevoMenu' ? 0 : section.id,
+        idseccion: section === 'NuevoMenu' ? null : section.id,
         isMenu: true,
         rol: "CLICKER",
 

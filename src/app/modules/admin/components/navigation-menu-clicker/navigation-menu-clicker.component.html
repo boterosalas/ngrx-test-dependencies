@@ -11,16 +11,14 @@
       cdkDropList
       (cdkDropListDropped)="dropItem($event)"
     >
-          <app-navigation-item
-            *ngFor="let item of links"
-            [link]="item"
-            (editItem)="editNavigationItem($event)"
-            (deleteItem)="deleteNavigationItem($event)"
-            (changeStateItem)="changeStateOfItem($event)"
-            cdkDrag
-          ></app-navigation-item>
-        
-      
+      <app-navigation-item
+        *ngFor="let item of links"
+        [link]="item"
+        (editItem)="editNavigationItem($event)"
+        (deleteItem)="deleteNavigationItem($event)"
+        (changeStateItem)="changeStateOfItem($event)"
+        cdkDrag
+      ></app-navigation-item>
     </div>
 
     <div
