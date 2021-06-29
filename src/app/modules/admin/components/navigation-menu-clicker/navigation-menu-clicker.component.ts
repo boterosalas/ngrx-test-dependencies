@@ -16,6 +16,7 @@ import { AuthService } from "src/app/services/auth.service";
 })
 export class NavigationMenuClickerComponent implements OnInit {
   sectionsLinks: any = [];
+  links: any = [];
   private subscription: Subscription = new Subscription();
   @ViewChild("templateDeleteNavigationGroup", { static: false })
   templateDeleteNavigationGroup: TemplateRef<any>;
@@ -38,7 +39,24 @@ export class NavigationMenuClickerComponent implements OnInit {
   }
 
   saveOrderItems(data: any) {
-    this.content.saveOrderFooterLinks(data).subscribe(() => {});
+    this.auth.saveOrderMenus(data).subscribe(() => {});
+  }
+
+  dropItem(event: CdkDragDrop<any>) {
+    moveItemInArray(
+      this.links,
+      event.previousIndex,
+      event.currentIndex
+    );
+    let dataSourceSend = [];
+    for (let i = 0; i < this.links.length; i++) {
+      this.links[i].orderby = i + 1;
+      dataSourceSend.push({
+        id: this.links[i].Id,
+        orderBy: i + 1,
+      });
+    }
+    this.saveOrderItems(dataSourceSend);
   }
 
   dropSection(event: CdkDragDrop<any>) {
@@ -59,13 +77,21 @@ export class NavigationMenuClickerComponent implements OnInit {
   }
 
   saveOrderSections(data: any) {
-    this.content.saveOrderFooterSections(data).subscribe(() => {});
+    console.log(`data`, data)
+    this.auth.saveOrderGrupoMenus(data).subscribe(() => {});
   }
 
   getSections() {
-    this.subscription = this.auth.getMenusFromAdmin().subscribe((resp) => {
-      
-      this.sectionsLinks = resp;
+    this.subscription = this.auth.getMenuClicker().subscribe((resp) => {
+      console.log(`menu clicker`, resp)
+      resp.map((item) => {
+        if (item.description === 'Sin Grupo') {
+          console.log(`item.menus`, item.menus)
+          this.links = item.menus;
+        }else{
+          this.sectionsLinks.push(item);
+        }
+      })
     });
   }
 
@@ -75,6 +101,7 @@ export class NavigationMenuClickerComponent implements OnInit {
         title: "Nuevo grupo",
         buttonName: "Agregar",
         edit: 0,
+        isMenu: true,
       },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
@@ -121,8 +148,8 @@ export class NavigationMenuClickerComponent implements OnInit {
 
   deleteNavigationSectionService() {
     let datos = [this.currentSection.id];
-    this.content
-      .deleteFooterSection(datos)
+    this.auth
+      .deleteGroup(datos)
       .subscribe((resp: ResponseService) => {
         if (resp.state === "Success") {
           this.dialog.closeAll();
@@ -139,8 +166,10 @@ export class NavigationMenuClickerComponent implements OnInit {
         title: "Agregar acceso",
         buttonName: "Agregar",
         edit: 0,
-        idseccion: section === 'NuevoMenu' ? 0 : section.id,
-        isNewMenu: section === 'NuevoMenu'
+        idseccion: section === 'NuevoMenu' ? null : section.id,
+        isMenu: true,
+        rol: "CLICKER",
+
       },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
@@ -160,6 +189,7 @@ export class NavigationMenuClickerComponent implements OnInit {
       orderby: item.orderby,
       date: item.date,
       icon: item.icon,
+      isMenu: true,
     };
 
     const dialogRef1 = this.dialog.open(DialogNavigationItemComponent, {
@@ -198,5 +228,10 @@ export class NavigationMenuClickerComponent implements OnInit {
         console.log("Upss Hubo un problema vuelve a intentarlo");
       }
     });
+  }
+
+  changeStateOfItem(item: any) {
+    item.active = item.active ? false : true;
+    this.auth.saveMenu(item).subscribe((resp: ResponseService) => {});
   }
 }

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { Subscription } from "rxjs";
 import { ResponseService } from "src/app/interfaces/response";
+import { AuthService } from "src/app/services/auth.service";
 import { ContentService } from "src/app/services/content.service";
 
 @Component({
@@ -19,7 +20,8 @@ export class DialogNavigationGroupComponent implements OnInit {
     private content: ContentService,
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public auth: AuthService
   ) {}
 
   ngOnInit() {
@@ -43,24 +45,47 @@ export class DialogNavigationGroupComponent implements OnInit {
   }
 
   saveSection() {
+    console.log("this.data", this.data);
+
     let section;
-    if (this.data.edit === 0) {
-      section = {
-        description: this.dateForm.controls.description.value,
-      };
+    if (this.data.isMenu) {
+      if (this.data.edit === 0) {
+        section = {
+          description: this.dateForm.controls.description.value,
+        };
+      } else {
+        section = {
+          id: this.data.id,
+          description: this.dateForm.controls.description.value,
+          orderby: this.data.orderby,
+        };
+      }
+      this.auth
+        .saveMenuGroup(section)
+        .subscribe((resp: ResponseService) => {
+          if (resp.state === "Success") {
+            this.dialogRef.close();
+          }
+        });
     } else {
-      section = {
-        id: this.data.id,
-        description: this.dateForm.controls.description.value,
-        orderby: this.data.orderby,
-      };
+      if (this.data.edit === 0) {
+        section = {
+          description: this.dateForm.controls.description.value,
+        };
+      } else {
+        section = {
+          id: this.data.id,
+          description: this.dateForm.controls.description.value,
+          orderby: this.data.orderby,
+        };
+      }
+      this.content
+        .saveFooterSection(section)
+        .subscribe((resp: ResponseService) => {
+          if (resp.state === "Success") {
+            this.dialogRef.close();
+          }
+        });
     }
-    this.content
-      .saveFooterSection(section)
-      .subscribe((resp: ResponseService) => {
-        if (resp.state === "Success") {
-          this.dialogRef.close();
-        }
-      });
   }
 }
