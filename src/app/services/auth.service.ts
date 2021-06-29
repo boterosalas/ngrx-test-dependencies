@@ -39,14 +39,16 @@ export class AuthService implements OnDestroy {
   url = environment.URL_SECURITY;
   apiLogin = "Authentication/login";
   apiGetmenus = "Authentication/getMenus";
-  apiGetmenusClicker = "Authentication/getMenusByRol";
+  apiGetmenusClicker = "Authentication/getMenusByRol?visible=true";
   apiGetmenusFromAdmin = "Authentication/getMenus?visible=false";
   apiGetmenusNoLogin = "Authentication/getMenus?visible=true";
   apiGetmenusNoLoginViewUser = "Authentication/getMenus?visible=false";
   apiSaveMenu = "Authentication/savemenu";
+  apiSaveMenuGroup = "Authentication/savegroup";
   apiDeleteMenu = "Authentication/deletemenu";
-  apiSaveOrderMenus = "Authentication/saveordermenus";
-  
+  apiDeleteMenuGroup = "Authentication/deletegroup";
+  apiSaveOrderMenus = "Authentication/saveordermenus";  
+  apiSaveOrderGrupoMenus = "Authentication/saveordergrupomenus";  
   apiForgotPassword = "Authentication/recoveryPassword";
   apiRecoverPassword = "Authentication/resetpassword";
   apiChangePassword = "Authentication/changePassword";
@@ -213,9 +215,45 @@ export class AuthService implements OnDestroy {
       );
   }
 
+  public saveMenuGroup(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveMenuGroup}`, datos , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((resp: ResponseService) => {
+          return resp;
+        })
+      );
+  }
+
+  
+
   public deleteMenu(id: any) {
     return this.http
       .delete(`${this.url + this.apiDeleteMenu}?id=${id}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
+
+  public deleteGroup(id: any) {
+    return this.http
+      .delete(`${this.url + this.apiDeleteMenuGroup}?id=${id}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
@@ -246,6 +284,25 @@ export class AuthService implements OnDestroy {
         })
       );
   }
+
+  public saveOrderGrupoMenus(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveOrderGrupoMenus}`, datos , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
+
+  
   
 
   public changePassword(data: any) {

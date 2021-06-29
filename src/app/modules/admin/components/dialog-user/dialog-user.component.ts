@@ -335,11 +335,11 @@ export class DialogUserComponent implements OnInit, OnDestroy {
         : "image/jpeg"};base64,${this.data.fileBankCertificate}`;
     }
 
-    if (this.data.fileRUT) {
-      this.base64RUT = `data:${contentTypeRUT.length > 0 
-        ? contentTypeRUT[0].contentType 
-        : "image/jpeg"};base64,${this.data.fileRUT}`;
-    }
+    // if (this.data.fileRUT) {
+    //   this.base64RUT = `data:${contentTypeRUT.length > 0 
+    //     ? contentTypeRUT[0].contentType 
+    //     : "image/jpeg"};base64,${this.data.fileRUT}`;
+    // }
   }
 
   private hiddenVisibilityPreview(event: any) {

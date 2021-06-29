@@ -82,8 +82,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     file.fileIdentificationCard2 = null;
     file.nameFileCert = "";
     file.fileBankCertificate = null;
-    file.nameFileRut = "";
-    file.fileRut = null;
+    // file.nameFileRut = "";
+    // file.fileRut = null;
   }
 
   /**
@@ -100,10 +100,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
       identificationCard1: files.fileIdentificationCard1,
       identificationCard2: files.fileIdentificationCard2,
       bankCertificate: files.fileBankCertificate,
-      RUT: files.fileRut,
-    }
-
-    
+      // RUT: files.fileRut,
+    } 
 
     this.subscription = this.user.uploadFiles(sendvalues).subscribe((res:ResponseService) => {
       if(res.state !== 'Error') {

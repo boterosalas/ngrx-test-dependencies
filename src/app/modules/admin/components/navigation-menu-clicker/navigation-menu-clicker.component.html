@@ -9,35 +9,35 @@
     <div
       class="navigation__list-sections"
       cdkDropList
+      (cdkDropListDropped)="dropItem($event)"
+    >
+      <app-navigation-item
+        *ngFor="let item of links"
+        [link]="item"
+        (editItem)="editNavigationItem($event)"
+        (deleteItem)="deleteNavigationItem($event)"
+        (changeStateItem)="changeStateOfItem($event)"
+        cdkDrag
+      ></app-navigation-item>
+    </div>
+
+    <div
+      class="navigation__list-sections"
+      cdkDropList
       (cdkDropListDropped)="dropSection($event)"
     >
-      <div *ngFor="let section of sectionsLinks">
-        <div
-          *ngIf="section.description === 'Sin Grupo'"
-          class="navigation__links"
-        >
-          <app-navigation-item
-            *ngFor="let link of section.menus"
-            [link]="link"
-            (editItem)="editNavigationItem($event)"
-            (deleteItem)="deleteNavigationItem($event)"
-            cdkDrag
-          ></app-navigation-item>
-        </div>
-
-        <app-navigation-group
-          *ngIf="section.description !== 'Sin Grupo'"
-          [section]="section"
-          (editGroup)="editNavigationGroup($event)"
-          (deleteGroup)="deleteNavigationGroup($event)"
-          (addItem)="addNavigationItem($event)"
-          (editItem)="editNavigationItem($event)"
-          (deleteItem)="deleteNavigationItem($event)"
-          (saveOrderItems)="saveOrderItems($event)"
-          cdkDrag
-        >
-        </app-navigation-group>
-      </div>
+      <app-navigation-group
+        *ngFor="let section of sectionsLinks"
+        [section]="section"
+        (editGroup)="editNavigationGroup($event)"
+        (deleteGroup)="deleteNavigationGroup($event)"
+        (addItem)="addNavigationItem($event)"
+        (editItem)="editNavigationItem($event)"
+        (deleteItem)="deleteNavigationItem($event)"
+        (saveOrderItems)="saveOrderItems($event)"
+        cdkDrag
+      >
+      </app-navigation-group>
     </div>
     <div
       fxLayout="row"

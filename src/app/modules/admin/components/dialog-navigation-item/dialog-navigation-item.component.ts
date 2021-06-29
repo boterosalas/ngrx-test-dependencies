@@ -87,8 +87,7 @@ export class DialogNavigationItemComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  saveItem() {
-    console.log('this.data', this.data)
+  saveItem() { 
     
     let item;
     if (this.data.isMenu) {
@@ -98,7 +97,7 @@ export class DialogNavigationItemComponent implements OnInit {
           route: this.dateForm.controls.link.value,
           name: this.dateForm.controls.description.value,
           icon: this.iconSelected,
-          idgrupo: null,
+          idgrupo: this.data.idseccion,
           active: true
         };
       } else {
@@ -107,8 +106,9 @@ export class DialogNavigationItemComponent implements OnInit {
           route: this.dateForm.controls.link.value,
           name: this.dateForm.controls.description.value,
           icon: this.iconSelected,
-          idgrupo: this.data.idgrupo,
+          idgrupo: this.data.idseccion,
           orderby: this.data.orderby,
+          active: this.data.active
         };
       }
 
