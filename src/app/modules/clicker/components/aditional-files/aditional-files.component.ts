@@ -26,7 +26,7 @@ export class AditionalFilesComponent implements OnInit, OnDestroy {
     fileIdentificationCard1: null,
     fileIdentificationCard2: null,
     fileBankCertificate: null,
-    fileRut: null,
+    // fileRut: null,
     isEmployee:false,
   }
   @Output() uploadFile = new EventEmitter;
@@ -144,7 +144,7 @@ export class AditionalFilesComponent implements OnInit, OnDestroy {
         fileIdentificationCard1: null,
         fileIdentificationCard2: null,
         fileBankCertificate: null,
-        fileRut: null,
+        // fileRut: null,
         isEmployee:false,
       }
       );

@@ -87,12 +87,12 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   cityValue: string;
   departments = [];
   cities: [];
-  nameFileRut = "";
+  // nameFileRut = "";
   nameFileCert = "";
   nameFileCed1 = "";
   nameFileCed2 = "";
   validFormat: boolean;
-  showErrorRut: boolean = false;
+  // showErrorRut: boolean = false;
   showErrorCert: boolean = false;
   showErrorCed1: boolean = false;
   showErrorCed2: boolean = false;
@@ -100,7 +100,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   showErrorFormatCert: boolean = false;
   showErrorFormatCed1: boolean = false;
   showErrorFormatCed2: boolean = false;
-  fileRut: any;
+  // fileRut: any;
   fileBankCertificate: any;
   fileCed1: any;
   fileCed2: any;

@@ -330,7 +330,7 @@ export class UsersComponent extends MatPaginatorIntl
             fileIdentificationCard1,
             fileIdentificationCard2,
             fileBankCertificate,
-            fileRUT,
+            // fileRUT,
             dateCed1,
             dateCed2,
             dateCertBank,

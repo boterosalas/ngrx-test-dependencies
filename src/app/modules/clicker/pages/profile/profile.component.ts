@@ -82,8 +82,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     file.fileIdentificationCard2 = null;
     file.nameFileCert = "";
     file.fileBankCertificate = null;
-    file.nameFileRut = "";
-    file.fileRut = null;
+    // file.nameFileRut = "";
+    // file.fileRut = null;
   }
 
   /**
