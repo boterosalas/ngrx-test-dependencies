@@ -42,7 +42,6 @@ export class HeaderComponent implements OnInit {
 
   public getMenu() {
     this.subscription = this.auth.getmenusNoLoginUserView().subscribe((resp) => {
-      console.log(`resp`, resp)
       this.menuItems = resp[0].menus;
     });
   }
