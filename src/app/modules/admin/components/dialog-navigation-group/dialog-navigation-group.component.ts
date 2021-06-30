@@ -45,7 +45,6 @@ export class DialogNavigationGroupComponent implements OnInit {
   }
 
   saveSection() {
-    console.log("this.data", this.data);
 
     let section;
     if (this.data.isMenu) {

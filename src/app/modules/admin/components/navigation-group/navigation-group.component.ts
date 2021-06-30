@@ -15,6 +15,7 @@ export class NavigationGroupComponent implements OnInit {
   @Output() editItem = new EventEmitter<any>();
   @Output() deleteItem = new EventEmitter<any>();
   @Output() saveOrderItems = new EventEmitter<object>();
+  @Output() changeState = new EventEmitter<object>();
 
   isValidAddItems: boolean = true;
   isValidDeleteGroup: boolean = true;
@@ -22,8 +23,12 @@ export class NavigationGroupComponent implements OnInit {
   constructor(private content: ContentService) {}
 
   ngOnInit() {
-    this.isValidAddItems = this.section.links.length < 10;
-    this.isValidDeleteGroup = this.section.links.length == 0;
+    if (this.section.links !== undefined) {
+      this.isValidAddItems = this.section.links.length < 10;
+      this.isValidDeleteGroup = this.section.links.length == 0;
+    }else{
+      this.isValidDeleteGroup = this.section.menus.length == 0;
+    }
   }
 
   editNavigationGroup() {
@@ -47,20 +52,20 @@ export class NavigationGroupComponent implements OnInit {
   }
 
   dropItems(event: CdkDragDrop<any>) {
-    moveItemInArray(
-      this.section.links,
-      event.previousIndex,
-      event.currentIndex
-    );
+    const items = this.section.links || this.section.menus;
+    moveItemInArray(items, event.previousIndex, event.currentIndex);
     let dataSourceSend = [];
-    for (let i = 0; i < this.section.links.length; i++) {
-      this.section.links[i].orderby = i + 1;
+    for (let i = 0; i < items.length; i++) {
+      items[i].orderby = i + 1;
       dataSourceSend.push({
-        id: this.section.links[i].id,
+        id: items[i].id,
         orderBy: i + 1,
       });
     }
-
     this.saveOrderItems.emit(dataSourceSend);
+  }
+
+  changeStateOfItem(link: any) {
+    this.changeState.emit(link);
   }
 }

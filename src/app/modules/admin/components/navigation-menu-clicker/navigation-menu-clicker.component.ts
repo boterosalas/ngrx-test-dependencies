@@ -77,16 +77,13 @@ export class NavigationMenuClickerComponent implements OnInit {
   }
 
   saveOrderSections(data: any) {
-    console.log(`data`, data)
     this.auth.saveOrderGrupoMenus(data).subscribe(() => {});
   }
 
   getSections() {
-    this.subscription = this.auth.getMenuClicker().subscribe((resp) => {
-      console.log(`menu clicker`, resp)
+    this.subscription = this.auth.getMenuClicker(true).subscribe((resp) => {
       resp.map((item) => {
         if (item.description === 'Sin Grupo') {
-          console.log(`item.menus`, item.menus)
           this.links = item.menus;
         }else{
           this.sectionsLinks.push(item);
@@ -105,6 +102,8 @@ export class NavigationMenuClickerComponent implements OnInit {
       },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
+      this.sectionsLinks = []
+      this.links = []
       this.getSections();
     });
   }
@@ -118,9 +117,12 @@ export class NavigationMenuClickerComponent implements OnInit {
         id: section.id,
         description: section.description,
         orderby: section.orderby,
+        isMenu: true,
       },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
+      this.sectionsLinks = []
+      this.links = []
       this.getSections();
     });
   }
@@ -138,6 +140,8 @@ export class NavigationMenuClickerComponent implements OnInit {
     });
 
     this.subscription = this.dialogRef.beforeClosed().subscribe(() => {
+      this.sectionsLinks = []
+      this.links = []
       this.getSections();
     });
   }
@@ -173,6 +177,8 @@ export class NavigationMenuClickerComponent implements OnInit {
       },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
+      this.sectionsLinks = []
+      this.links = []
       this.getSections();
     });
   }
@@ -197,6 +203,8 @@ export class NavigationMenuClickerComponent implements OnInit {
       data: data,
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
+      this.sectionsLinks = []
+      this.links = []
       this.getSections();
     });
   }
@@ -214,9 +222,11 @@ export class NavigationMenuClickerComponent implements OnInit {
       },
     });
 
-    // this.subscription = this.dialogRef.beforeClosed().subscribe(() => {
-    //   this.getSections();
-    // });
+    this.subscription = this.dialogRef.beforeClosed().subscribe(() => {
+      this.sectionsLinks = []
+      this.links = []
+      this.getSections();
+    });
   }
 
   deleteNavigationItemService() {
