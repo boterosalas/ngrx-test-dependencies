@@ -77,16 +77,13 @@ export class NavigationMenuClickerComponent implements OnInit {
   }
 
   saveOrderSections(data: any) {
-    console.log(`data`, data)
     this.auth.saveOrderGrupoMenus(data).subscribe(() => {});
   }
 
   getSections() {
-    this.subscription = this.auth.getMenuClicker().subscribe((resp) => {
-      console.log(`menu clicker`, resp)
+    this.subscription = this.auth.getMenuClicker(true).subscribe((resp) => {
       resp.map((item) => {
         if (item.description === 'Sin Grupo') {
-          console.log(`item.menus`, item.menus)
           this.links = item.menus;
         }else{
           this.sectionsLinks.push(item);
