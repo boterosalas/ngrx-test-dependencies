@@ -81,7 +81,7 @@ export class NavigationMenuClickerComponent implements OnInit {
   }
 
   getSections() {
-    this.subscription = this.auth.getMenuClicker().subscribe((resp) => {
+    this.subscription = this.auth.getMenuClicker(true).subscribe((resp) => {
       resp.map((item) => {
         if (item.description === 'Sin Grupo') {
           this.links = item.menus;

@@ -39,7 +39,7 @@ export class AuthService implements OnDestroy {
   url = environment.URL_SECURITY;
   apiLogin = "Authentication/login";
   apiGetmenus = "Authentication/getMenus";
-  apiGetmenusClicker = "Authentication/getMenusByRol?visible=true";
+  apiGetmenusClicker = "Authentication/getMenusByRol";
   apiGetmenusFromAdmin = "Authentication/getMenus?visible=false";
   apiGetmenusNoLogin = "Authentication/getMenus?visible=true";
   apiGetmenusNoLoginViewUser = "Authentication/getMenus?visible=false";
@@ -130,9 +130,9 @@ export class AuthService implements OnDestroy {
       );
   }
 
-  public getMenuClicker() {
+  public getMenuClicker(visible:Boolean = false) {
     return this.http
-      .get(`${this.url + this.apiGetmenusClicker}`, this.httpOptions)
+      .get(`${this.url + this.apiGetmenusClicker}?visible=${visible}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
