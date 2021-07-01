@@ -39,6 +39,7 @@ export class LinksService {
   apiAuditUserInfo = "admin/getreportupdateinfoclicker";
   apiGetReportReferral = "Reports/getreportreferral";
   apigetReportClickam = "Reports/getReportClickam";
+  apigetReportTerms= "reports/getterms";
   apiUsers = "Reports/getUsers";
   insurance = "Insurance/ProcessFiles";
   apiSaveLink = "Link/SaveLink";
@@ -500,6 +501,24 @@ export class LinksService {
         )
       );
   }
+
+  public getReportTerms() {
+    return this.http
+      .get(
+        `${this.urlComission}${this.apigetReportTerms}`,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+  }
+
   public getReportUser() {
     return this.http
       .get(
