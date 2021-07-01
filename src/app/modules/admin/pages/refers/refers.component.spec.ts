@@ -128,22 +128,6 @@ describe('RefersComponent', () => {
 
   it("export Report", () => {
     mockLinksService.getReportReferral.and.returnValue(of(report));
-    //component.dateRange = {
-    //email: "david@test.com",
-    //start: "Sat 20Dec 2007 202019 2000:00:00 20GMT-0500",
-    //end: "Sat 20Dec 2007 202019 2000:00:00 20GMT-0500"
-    //};
-    //component.dateForm.controls.dateRange.setValue({startDate: null});
-    //const nativeElement = fixture.nativeElement;
-    //const input = nativeElement.querySelector("#date");
-    //input.dispatchEvent(new Event("click"));
-    //const nativeElementDate = fixture.nativeElement;
-    //const dateStart = nativeElementDate.querySelector(".today");
-    //dateStart.dispatchEvent(new Event("click"));
-    //const nativeElementbtn = fixture.nativeElement;
-    //const btn = nativeElementbtn.querySelector(".btn");
-    //btn.dispatchEvent(new Event("click"));
-    //fixture.detectChanges();
     component.exportRefers();
     expect(mockLinksService.getReportReferral).toHaveBeenCalled();
     component.changeState();
@@ -151,26 +135,5 @@ describe('RefersComponent', () => {
 
   });
 
-  //it("export Report Error", () => {
-  //  mockLinksService.getReportReferral.and.returnValue(of(reportError));
-  //component.dateRange = {
-  //  email: "david@test.com",
-  //  start: "Sat 20Dec 2007 202019 2000:00:00 20GMT-0500",
-  //  end: "Sat 20Dec 2007 202019 2000:00:00 20GMT-0500"
-  //};
-  // component.dateForm.controls.dateRange.setValue({startDate: null});
-  //const nativeElement = fixture.nativeElement;
-  //const input = nativeElement.querySelector("#date");
-  //input.dispatchEvent(new Event("click"));
-  //const nativeElementDate = fixture.nativeElement;
-  //const dateStart = nativeElementDate.querySelector(".today");
-  //dateStart.dispatchEvent(new Event("click"));
-  //const nativeElementbtn = fixture.nativeElement;
-  //const btn = nativeElementbtn.querySelector(".btn");
-  //btn.dispatchEvent(new Event("click"));
-  //fixture.detectChanges();
-  //    component.exportRefers();
-  //  expect(mockLinksService.getReportReferral).toHaveBeenCalled();
-  //});
 
 });

@@ -1,7 +1,6 @@
-import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material";
 import { Subscription } from "rxjs";
-import { ContentService } from "src/app/services/content.service";
 import { DialogNavigationGroupComponent } from "../dialog-navigation-group/dialog-navigation-group.component";
 import { DialogNavigationItemComponent } from "../dialog-navigation-item/dialog-navigation-item.component";
 import { ResponseService } from "src/app/interfaces/response";
@@ -14,7 +13,7 @@ import { AuthService } from "src/app/services/auth.service";
   templateUrl: "./navigation-menu-clicker.component.html",
   styleUrls: ["./navigation-menu-clicker.component.scss"],
 })
-export class NavigationMenuClickerComponent implements OnInit {
+export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
   sectionsLinks: any = [];
   links: any = [];
   private subscription: Subscription = new Subscription();
@@ -29,7 +28,6 @@ export class NavigationMenuClickerComponent implements OnInit {
   isInvalidAddSection: boolean = false;
 
   constructor(
-    private content: ContentService,
     private dialog: MatDialog,
     public auth: AuthService
   ) {}
@@ -39,10 +37,11 @@ export class NavigationMenuClickerComponent implements OnInit {
   }
 
   saveOrderItems(data: any) {
-    this.auth.saveOrderMenus(data).subscribe(() => {});
+    this.subscription = this.auth.saveOrderMenus(data).subscribe();
   }
 
   dropItem(event: CdkDragDrop<any>) {
+    console.log(event);
     moveItemInArray(
       this.links,
       event.previousIndex,
@@ -77,7 +76,7 @@ export class NavigationMenuClickerComponent implements OnInit {
   }
 
   saveOrderSections(data: any) {
-    this.auth.saveOrderGrupoMenus(data).subscribe(() => {});
+    this.subscription = this.auth.saveOrderGrupoMenus(data).subscribe();
   }
 
   getSections() {
@@ -242,6 +241,11 @@ export class NavigationMenuClickerComponent implements OnInit {
 
   changeStateOfItem(item: any) {
     item.active = item.active ? false : true;
-    this.auth.saveMenu(item).subscribe((resp: ResponseService) => {});
+    this.subscription = this.auth.saveMenu(item).subscribe();
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }
