@@ -1,7 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NavigationMenuClickerComponent } from './navigation-menu-clicker.component';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { NavigationMenuClickerComponent } from "./navigation-menu-clicker.component";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {
   MatDialog,
@@ -9,26 +8,31 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from "@angular/material";
-import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterTestingModule } from "@angular/router/testing";
 import { JwtModule } from "@auth0/angular-jwt";
 import { TranslateModule } from "@ngx-translate/core";
 import { of } from "rxjs";
 import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
-import { ContentService } from "src/app/services/content.service";
 import "zone.js/dist/zone-testing";
-import { DialogNavigationGroupComponent } from "../dialog-navigation-group/dialog-navigation-group.component";
+import { AdminModule } from "../../admin.module";
+import { AuthService } from "src/app/services/auth.service";
+import { CdkDragDrop } from "@angular/cdk/drag-drop";
 
-export class MdDialogMock {
+export class MatDialogMock {
   open() {
     return {
-      afterClosed: () => of(true),
+      beforeClosed: () => of(true),
+    };
+  }
+  closeAll() {
+    return {
+      closeAll: () => of(true),
     };
   }
 }
 
-describe('NavigationMenuClickerComponent', () => {
+describe("NavigationMenuClickerComponent", () => {
   let component: NavigationMenuClickerComponent;
   let fixture: ComponentFixture<NavigationMenuClickerComponent>;
 
@@ -52,14 +56,6 @@ describe('NavigationMenuClickerComponent', () => {
     "beforeClosed",
   ]);
 
-  const mockContentService = jasmine.createSpyObj("ContentService", [
-    "getFooter",
-    "saveOrderFooterLinks",
-    "saveOrderFooterSections",
-    "deleteFooterSection",
-    "deleteFooterLink",
-  ]);
-
   let response = {
     Status: "Success",
   };
@@ -69,116 +65,171 @@ describe('NavigationMenuClickerComponent', () => {
     beforeClosed: () => {},
   };
 
+  const matDialog = new MatDialogMock();
+
+  const mockAuthService = jasmine.createSpyObj("AuthService", [
+    "saveOrderMenus",
+    "saveOrderGrupoMenus",
+    "getMenuClicker",
+    "deleteGroup",
+    "deleteMenu",
+    "saveMenu",
+  ]);
+
   const sectionsLinks = [
     {
-      id: 1,
+      id: 0,
+      description: "Sin Grupo",
+      icon: "",
+      orderby: null,
+      menus: [
+        {
+          Id: 1,
+          name: "Inicio",
+          route: "/inicio",
+          orderby: 1,
+          idgrupo: null,
+          icon: "tio-link",
+          rol: null,
+          active: true,
+          menusystem: true,
+        },
+        {
+          Id: 2,
+          name: "Mi perfil",
+          route: "/mi-perfil",
+          orderby: 2,
+          idgrupo: null,
+          icon: "tio-link",
+          rol: null,
+          active: true,
+          menusystem: true,
+        },
+        {
+          Id: 13,
+          name: "Tabla de Comisiones ",
+          route: "/tabla-comisiones",
+          orderby: 3,
+          idgrupo: null,
+          icon: "tio-link",
+          rol: null,
+          active: true,
+          menusystem: true,
+        },
+        {
+          Id: 66,
+          name: "Negocios",
+          route: "/negocios",
+          orderby: 3,
+          idgrupo: null,
+          icon: "tio-link",
+          rol: null,
+          active: true,
+          menusystem: false,
+        },
+        {
+          Id: 7,
+          name: "Centro de Ayuda",
+          route: "/centro-de-ayuda",
+          orderby: 5,
+          idgrupo: null,
+          icon: "tio-fingerprint",
+          rol: null,
+          active: false,
+          menusystem: true,
+        },
+      ],
+    },
+    {
+      id: 24,
       description: "Clickam",
-      orderby: 1,
-      date: "2021-05-25T08:48:42.533",
-      links: [
+      icon: "tio-dollar",
+      orderby: null,
+      menus: [
         {
-          id: 4,
-          idseccion: 1,
-          link: "https://www.google.com.co",
-          description: "¿Tienes un sitio web? Regístralo Aqui!",
-          orderby: 1,
-          date: "2021-05-25T09:16:06.897",
-        },
-        {
-          id: 3,
-          idseccion: 1,
-          link: "https://www.google.com.co",
-          description: "Tabla de comisiones",
+          Id: 4,
+          name: "Blog",
+          route: "/blog",
           orderby: 2,
-          date: "2021-05-25T09:15:51.24",
+          idgrupo: 24,
+          icon: "tio-link",
+          rol: null,
+          active: true,
+          menusystem: true,
         },
         {
-          id: 2,
-          idseccion: 1,
-          link: "https://www.google.com.co",
-          description: "Click Academy",
-          orderby: 3,
-          date: "2021-05-25T09:15:14.56",
-        },
-        {
-          id: 1,
-          idseccion: 1,
-          link: "https://www.google.com.co",
-          description: "Blog",
-          orderby: 4,
-          date: "2021-05-25T09:16:35.603",
+          Id: 3,
+          name: "Click Academy",
+          route: "/click-academy",
+          orderby: 6,
+          idgrupo: 24,
+          icon: "tio-link",
+          rol: null,
+          active: false,
+          menusystem: true,
         },
       ],
     },
     {
-      id: 2,
-      description: "Soporte",
-      orderby: 2,
-      date: "2021-05-25T08:49:35.617",
-      links: [
+      id: 23,
+      description: "Herramientas",
+      icon: null,
+      orderby: null,
+      menus: [
         {
-          id: 7,
-          idseccion: 2,
-          link: "https://www.google.com.co",
-          description: "Centro de Ayuda",
-          orderby: 1,
-          date: "2021-05-27T00:00:00",
+          Id: 52,
+          name: "Refiere y gana",
+          route: "/referidos",
+          orderby: null,
+          idgrupo: 23,
+          icon: "tio-link",
+          rol: null,
+          active: false,
+          menusystem: false,
         },
         {
-          id: 8,
-          idseccion: 2,
-          link: "https://www.google.com.co",
-          description: "Whatsapp",
-          orderby: 2,
-          date: "2021-05-27T00:00:00",
+          Id: 79,
+          name: "Navegación",
+          route: "/navegacion",
+          orderby: null,
+          idgrupo: 23,
+          icon: "tio-link",
+          rol: null,
+          active: false,
+          menusystem: false,
         },
         {
-          id: 9,
-          idseccion: 2,
-          link: "https://www.google.com.co",
-          description: "Correo",
-          orderby: 3,
-          date: "2021-05-27T00:00:00",
-        },
-      ],
-    },
-    {
-      id: 3,
-      description: "Legales",
-      orderby: 3,
-      date: "2021-05-25T08:49:41.757",
-      links: [
-        {
-          id: 10,
-          idseccion: 3,
-          link: "https://www.google.com.co",
-          description: "Términos y condiciones",
-          orderby: 1,
-          date: "2021-05-27T00:00:00",
+          Id: 5,
+          name: "Biblioteca de Contenido",
+          route: "/biblioteca",
+          orderby: 5,
+          idgrupo: 23,
+          icon: "tio-link",
+          rol: null,
+          active: false,
+          menusystem: true,
         },
         {
-          id: 11,
-          idseccion: 3,
-          link: "https://www.google.com.co",
-          description: "Términos legales del usuario",
-          orderby: 2,
-          date: "2021-05-27T00:00:00",
+          Id: 8,
+          name: "Reportes",
+          route: "/reportes",
+          orderby: 7,
+          idgrupo: 23,
+          icon: "tio-link",
+          rol: null,
+          active: true,
+          menusystem: true,
         },
         {
-          id: 12,
-          idseccion: 3,
-          link: "https://www.google.com.co",
-          description: "Protección de datos",
-          orderby: 3,
-          date: "2021-05-27T00:00:00",
-        },
-        {
-          id: 13,
-          idseccion: 3,
-          link: "https://www.google.com.co",
-          description: "Programa de referidos",
-          orderby: 4,
-          date: "2021-05-27T00:00:00",
+          Id: 12,
+          name: "Historial de Links",
+          route: "/historial-links",
+          orderby: 8,
+          idgrupo: 23,
+          icon: "tio-link",
+          rol: null,
+          active: false,
+          menusystem: true,
         },
       ],
     },
@@ -186,7 +237,7 @@ describe('NavigationMenuClickerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NavigationMenuClickerComponent],
+      declarations: [],
       imports: [
         TranslateModule.forRoot(),
         AppMaterialModule,
@@ -196,6 +247,7 @@ describe('NavigationMenuClickerComponent', () => {
         FormsModule,
         MatDialogModule,
         NoopAnimationsModule,
+        AdminModule,
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
@@ -208,19 +260,13 @@ describe('NavigationMenuClickerComponent', () => {
         }),
       ],
       providers: [
+        { provide: MatDialog, useValue: matDialog },
         { provide: MAT_DIALOG_DATA, useValue: {} },
-        { provide: ContentService, useValue: mockContentService },
-        { provide: MatDialogRef, useValue: dialogMock },
-        { provide: MatDialog, useValue: mockDialog },
+        { provide: MatDialogRef, useValue: mockDialogRef },
+        { provide: AuthService, useValue: mockAuthService },
       ],
-      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
-    mockContentService.getFooter.and.returnValue(of(sectionsLinks));
-    mockContentService.saveOrderFooterLinks.and.returnValue(of(response));
-    mockContentService.saveOrderFooterSections.and.returnValue(of(response));
-    mockContentService.deleteFooterSection.and.returnValue(of(response));
-    mockContentService.deleteFooterLink.and.returnValue(of(response));
-    mockDialog.beforeClosed.and.returnValue(of(response));
+    mockAuthService.getMenuClicker.and.returnValue(of(sectionsLinks));
   }));
 
   beforeEach(() => {
@@ -233,47 +279,46 @@ describe('NavigationMenuClickerComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it("deleteNavigationSectionService", () => {
-  //   component.currentSection = { id: 1, description: "test" };
-  //   component.deleteNavigationSectionService();
-  //   expect(mockContentService.deleteFooterSection).toHaveBeenCalled();
-  // });
-
-  it("deleteNavigationItemService", () => {
-    component.currentLink = { id: 1, description: "test" };
-    component.deleteNavigationItemService();
-    expect(component).toBeTruthy();
+  it("save order items", () => {
+    let data = [
+      { id: 1, orderBy: 1 },
+      { id: 2, orderBy: 2 },
+      { id: 13, orderBy: 3 },
+    ];
+    mockAuthService.saveOrderMenus.and.returnValue(of(response));
+    component.saveOrderItems(data);
+    expect(mockAuthService.saveOrderMenus).toHaveBeenCalled();
   });
 
-  // it("saveOrderItems", () => {
-  //   component.saveOrderItems([{ id: 1, orderBy: 1 }]);
-  //   expect(mockContentService.saveOrderFooterLinks).toHaveBeenCalled();
-  // });
-
-  // it("saveOrderSections", () => {
-  //   component.saveOrderSections([{ id: 1, orderBy: 1 }]);
-  //   expect(mockContentService.saveOrderFooterSections).toHaveBeenCalled();
-  // });
-
-  it("getSections", () => {
-    component.getSections();
-    expect(component).toBeTruthy();
-
+  it("save order sections", () => {
+    let data = [
+      { id: 1, orderBy: 1 },
+      { id: 2, orderBy: 2 },
+      { id: 13, orderBy: 3 },
+    ];
+    mockAuthService.saveOrderGrupoMenus.and.returnValue(of(response));
+    component.saveOrderSections(data);
+    expect(mockAuthService.saveOrderGrupoMenus).toHaveBeenCalled();
   });
 
-  it("currentLink", () => {
-    expect(component.currentLink).toEqual({});
+  it("add section", () => {
+    component.addSection();
+    expect(mockAuthService.getMenuClicker).toHaveBeenCalled();
   });
 
-  it("isInvalidAddSection", () => {
-    expect(component.isInvalidAddSection).toBeFalsy;
+  it("edit Navigation Group", () => {
+    component.editNavigationGroup({});
+    expect(mockAuthService.getMenuClicker).toHaveBeenCalled();
   });
 
-  // it("deleteNavigationGroup", () => {
-  //   // spyOn(component.dialogRef, 'open')
-  //   // dialogSpy = spyOn(TestBed.get(MatDialog), 'open').and.returnValue(dialogRefSpyObj);
-  //   component.deleteNavigationGroup({ id: 1, description: "test", orderby: 1 });
-  //   expect(component.deleteNavigationGroup).toHaveBeenCalled();
-  // });
+  it("add Navigation Item", () => {
+    component.addNavigationItem({});
+    expect(mockAuthService.getMenuClicker).toHaveBeenCalled();
+  });
+
+  it("edit Navigation Item", () => {
+    component.editNavigationItem({});
+    expect(mockAuthService.getMenuClicker).toHaveBeenCalled();
+  });
+
 });
-

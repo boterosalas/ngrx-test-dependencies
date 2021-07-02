@@ -6,7 +6,12 @@
       >
     </span>
 
-    <span class="navigation-group__description">{{ section.description }}</span>
+    <span class="navigation-group__description"> 
+      <span fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+        <i *ngIf="section.icon" ngClass="{{section.icon}} icmen"></i>
+        {{ section.description }} 
+      </span>
+    </span>
     <div class="navigation-group__actions">
       <i
         *ngIf="isValidAddItems"

@@ -2,7 +2,6 @@
 @import "general";
 
 .menu-mobile {
-
   &.active {
     a {
       color: #ffffff;
@@ -20,126 +19,6 @@
     padding-bottom: 34px;
   }
 
-  .Mi.perfil,
-  .Usuarios {
-    &::before {
-      font-family: "The-Icon-of", sans-serif;
-      content: "\ece7";
-      font-size: 19px;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 3%;
-    }
-  }
-
-  .Tabla.de.Comisiones {
-    &::before {
-      font-family: "The-Icon-of", sans-serif;
-      content: "\ebf3";
-      font-size: 19px;
-
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 3%;
-    }
-  }
-  .Biblioteca {
-    &::before {
-      font-family: "The-Icon-of", sans-serif;
-      content: "\ec6b";
-      font-size: 19px;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 3%;
-    }
-  }
-
-  .Negocios {
-    &::before {
-      font-family: "The-Icon-of", sans-serif;
-      content: "\eaf1";
-      font-size: 19px;
-
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 3%;
-      background-size: 100%;
-    }
-  }
-  .Sliders {
-    &::before {
-      content: "\e915";
-
-      font-family: "The-Icon-of", sans-serif;
-      font-size: 19px;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 3%;
-      background-size: 100%;
-    }
-  }
-  .Novedades {
-    &::before {
-      content: "\e981";
-      font-family: "The-Icon-of", sans-serif;
-      font-size: 19px;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 3%;
-      background-size: 100%;
-    }
-  }
-  .Blog {
-    &::before {
-      content: "\eae1";
-      font-family: "The-Icon-of", sans-serif;
-      font-size: 19px;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 3%;
-      background-size: 100%;
-    }
-  }
-  .Legales {
-    &::before {
-      content: "\ea61";
-      font-family: "The-Icon-of", sans-serif;
-      font-size: 19px;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 3%;
-      background-size: 100%;
-    }
-  }
-  .Comisiones:not(.de) {
-    &::before {
-      content: "\ebf3";
-      font-family: "The-Icon-of", sans-serif;
-      font-size: 19px;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 3%;
-      background-size: 100%;
-    }
-  }
   .Configuración {
     &::before {
       content: "\ecdb";
@@ -151,136 +30,6 @@
       top: 24%;
       left: 3%;
       background-size: 100%;
-    }
-  }
-  .Navegación {
-    &::before {
-      content: "\ecd1";
-      font-family: "The-Icon-of", sans-serif;
-      font-size: 19px;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 3%;
-      background-size: 100%;
-    }
-  }
-  .Historial.de.Links {
-    &::before {
-      font-family: "The-Icon-of", sans-serif;
-      content: "\ec6f";
-      font-size: 19px;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 3%;
-    }
-  }
-
-  .Inicio,
-  .DashBoard {
-    &::before {
-      font-family: "The-Icon-of", sans-serif;
-      content: "\ecc3";
-      width: 20px;
-      height: 20px;
-      font-size: 19px;
-      position: absolute;
-      top: 24%;
-      left: 3%;
-    }
-  }
-
-  .Click.Academy {
-    &::before {
-      font-family: "The-Icon-of", sans-serif;
-      content: "\eac8";
-      font-size: 19px;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 3%;
-    }
-  }
-
-  .Centro.de.Ayuda {
-    &::before {
-      font-family: "The-Icon-of", sans-serif;
-      content: "\e934";
-      font-size: 19px;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 3%;
-    }
-  }
-  .Auditoría {
-    &::before {
-      font-family: "The-Icon-of", sans-serif;
-      content: "\e934";
-      font-size: 19px;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 3%;
-    }
-  }
-  .Reportes {
-    &::before {
-      font-family: "The-Icon-of", sans-serif;
-      content: "\ec5b";
-      font-size: 19px;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 3%;
-    }
-  }
-
-  .whatsapp {
-    &::before {
-      font-family: "The-Icon-of", sans-serif;
-      content: "\ec4a";
-      font-size: 19px;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 3%;
-    }
-  }
-
-  .Generador.de.Links {
-    &::before {
-      font-family: "The-Icon-of", sans-serif;
-      content: "\ec6f";
-      font-size: 19px;
-
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 3%;
-    }
-  }
-
-  .Referidos {
-    &::before {
-      font-family: "The-Icon-of", sans-serif;
-      content: "\ecee";
-      font-size: 19px;
-
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 3%;
     }
   }
 
@@ -296,21 +45,8 @@
       top: 3px;
     }
   }
-
-  .Herramientas {
-    &::before {
-      font-family: "The-Icon-of", sans-serif;
-      content: "\ec6f";
-      font-size: 19px;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 24%;
-      left: 4%;
-    }
-  }
   
-  .Clickam, .Operación {
+  .Operación {
     &::before {
       font-family: "The-Icon-of", sans-serif;
       content: "\ebf3";
@@ -347,6 +83,10 @@
       top: 24%;
       left: 4%;
     }
+  }
+
+  .mat-expansion-panel-header-title{
+    margin-left: 0 ;
   }
 
 }
@@ -401,3 +141,11 @@
   border-top: 1px solid #ececec;
 }
 
+.icmen{
+  margin-right: 5px;
+}
+
+.icsub{
+  font-size: 20px;
+  margin-right: 5px;
+}

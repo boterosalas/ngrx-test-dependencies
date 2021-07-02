@@ -20,7 +20,9 @@
     class="menu-mobile"
   >
 
-  <span *ngIf="item.description === 'Sin Grupo'">
+  <span *ngIf="item.description === 'Sin Grupo'" [ngClass]="{'adminMenu': (auth.getRole$ | async) === 'ADMIN' ||
+  (auth.getRole$ | async) === 'SUPERADMIN' &&
+  auth.isLoggedIn()}">
         <span
         *ngFor="let item of item.menus; let i = index"
         routerLinkActive="active"
@@ -39,7 +41,9 @@
         }}"
         id="{{ section }}{{ i }}"
       >
-        <span ngClass="gtmHomeClicMenuLightbox{{ item.name }}">{{
+        <span fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="gtmHomeClicMenuLightbox{{ item.name }}">
+          <i *ngIf="item.icon" ngClass="{{item.icon}} icmen"></i>
+          {{
           item.name
         }}</span></a
       >
@@ -50,15 +54,18 @@
 
       <mat-accordion>
         <mat-expansion-panel class="no-bg">
-          <mat-expansion-panel-header>
+          <mat-expansion-panel-header [ngClass]="{'adminMenu': (auth.getRole$ | async) === 'ADMIN' ||
+          (auth.getRole$ | async) === 'SUPERADMIN' &&
+          auth.isLoggedIn()}">
             <mat-panel-title>
-              <span  ngClass="{{ item.description }} f-16">
+              <span fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="{{ item.description }} f-16">
+                <i *ngIf="item.icon" ngClass="{{item.icon}} icsub"></i>
                 {{ item.description }}
               </span>
             </mat-panel-title>
           </mat-expansion-panel-header>
           <mat-list role="list">
-            <mat-list-item *ngFor="let item of item.menus">
+            <mat-list-item *ngFor="let item of item.menus" class="pl-4">
               <span
                 routerLinkActive="active"
                 routerLink="{{ item.route }}"
@@ -73,46 +80,9 @@
         </mat-expansion-panel>
       </mat-accordion>
     </span>
-<!-- 
-      <summary>
-        <span
-          ngClass="cursor-pointer gtmHomeClicMenuLightbox{{
-            item.description
-          }} f-16 {{ item.description }}"
-          class="page_name"
-          >{{ item.description }}
-        </span>
-      </summary>
-      <ul class="leftul">
-        <li *ngFor="let item of item.menus">
-          <a
-            routerLink="{{ item.route }}"
-            (click)="setItemSelected(item.name)"
-            class="subItem"
-            [ngClass]="{ active: item.name === itemSelected }"
-            >{{ item.name }}</a
-          >
-        </li>
-      </ul>
-    </span> -->
 
   </span>
 
-    <!-- <span *ngIf="showIcon">
-      <img src="assets/img/dashboard/icon-{{ i }}.svg" alt="icon" />
-    </span>
-    <a
-      mat-list-item
-      ngClass="cursor-pointer gtmHomeClicMenuLightbox{{ item.name }} f-16 {{
-        item.name
-      }}"
-      id="{{ section }}{{ i }}"
-    >
-      <span ngClass="gtmHomeClicMenuLightbox{{ item.name }}">{{
-        item.name
-      }}</span></a
-    >
-  </span> -->
 
   <span class="menu-mobile">
     <a
@@ -125,7 +95,10 @@
       href="https://api.whatsapp.com/send?phone=573052559105&text=Hola,%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20Clickam."
       target="_blank"
       class="cursor-pointer f-16 whatsapp gtmHomeClicMenuLightboxWhatsApp"
-      ><span class="gtmHomeClicMenuLightboxWhatsApp">WhatsApp</span></a
+      ><span class="gtmHomeClicMenuLightboxWhatsApp">
+        <i class="tio-whatsapp"></i>
+        WhatsApp
+      </span></a
     >
   </span>
 
@@ -142,15 +115,3 @@
     </mat-card>
   </span>
 </div>
-
-<!-- <span *ngIf="auth.isLoggedIn()" class="menu-mobile endSession">
-  <a
-    mat-list-item
-    (click)="logout(); hide()"
-    class="cursor-pointer f-16 logout gtmHomeClicMenuLightboxCerrarSesion"
-  >
-    <span class="gtmHomeClicMenuLightboxCerrarSesion">{{
-      "HEADER.LOGOUT" | translate
-    }}</span>
-  </a>
-</span> -->
