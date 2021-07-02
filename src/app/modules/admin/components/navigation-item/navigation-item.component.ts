@@ -26,6 +26,5 @@ export class NavigationItemComponent implements OnInit {
 
   changeState() {
     this.changeStateItem.emit(this.link);
-
   }
 }

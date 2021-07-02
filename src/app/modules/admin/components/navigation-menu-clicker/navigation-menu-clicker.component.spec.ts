@@ -243,7 +243,6 @@ describe('NavigationMenuClickerComponent', () => {
     component.currentLink = { id: 1, description: "test" };
     component.deleteNavigationItemService();
     expect(component).toBeTruthy();
-
   });
 
   // it("saveOrderItems", () => {

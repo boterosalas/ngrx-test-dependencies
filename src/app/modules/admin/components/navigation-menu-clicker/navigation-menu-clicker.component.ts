@@ -102,6 +102,8 @@ export class NavigationMenuClickerComponent implements OnInit {
       },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
+      this.sectionsLinks = []
+      this.links = []
       this.getSections();
     });
   }
@@ -115,9 +117,12 @@ export class NavigationMenuClickerComponent implements OnInit {
         id: section.id,
         description: section.description,
         orderby: section.orderby,
+        isMenu: true,
       },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
+      this.sectionsLinks = []
+      this.links = []
       this.getSections();
     });
   }
@@ -135,6 +140,8 @@ export class NavigationMenuClickerComponent implements OnInit {
     });
 
     this.subscription = this.dialogRef.beforeClosed().subscribe(() => {
+      this.sectionsLinks = []
+      this.links = []
       this.getSections();
     });
   }
@@ -170,6 +177,8 @@ export class NavigationMenuClickerComponent implements OnInit {
       },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
+      this.sectionsLinks = []
+      this.links = []
       this.getSections();
     });
   }
@@ -194,6 +203,8 @@ export class NavigationMenuClickerComponent implements OnInit {
       data: data,
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
+      this.sectionsLinks = []
+      this.links = []
       this.getSections();
     });
   }
@@ -211,9 +222,11 @@ export class NavigationMenuClickerComponent implements OnInit {
       },
     });
 
-    // this.subscription = this.dialogRef.beforeClosed().subscribe(() => {
-    //   this.getSections();
-    // });
+    this.subscription = this.dialogRef.beforeClosed().subscribe(() => {
+      this.sectionsLinks = []
+      this.links = []
+      this.getSections();
+    });
   }
 
   deleteNavigationItemService() {
