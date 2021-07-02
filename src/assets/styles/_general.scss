@@ -948,7 +948,6 @@ table {
   }
 
   .mat-list-item-content {
-    margin: 0 16px;
     span {
       position: relative;
       top: 2px;
@@ -2523,4 +2522,14 @@ h3#bussiness2 {
     }
   }
 
+}
+
+
+.adminMenu{
+  .mat-list-item-content{
+    padding: 0 37px !important;
+  }
+  .mat-content{
+    padding: 0 14px !important;
+  }
 }

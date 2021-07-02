@@ -5,6 +5,7 @@ import { Subscription } from "rxjs";
 import { ResponseService } from "src/app/interfaces/response";
 import { AuthService } from "src/app/services/auth.service";
 import { ContentService } from "src/app/services/content.service";
+import { ListIcons } from "src/app/services/icons";
 
 @Component({
   selector: "app-dialog-navigation-item",
@@ -17,46 +18,18 @@ export class DialogNavigationItemComponent implements OnInit {
   dateForm: FormGroup;
   iconSelected: string;
 
-  iconList = [
-    { name: "tio-link" },
-    { name: "tio-home" },
-    { name: "tio-info" },
-    { name: "tio-education" },
-    { name: "tio-play_circle" },
-    { name: "tio-pin" },
-    { name: "tio-edit" },
-    { name: "tio-help" },
-    { name: "tio-calendar_month" },
-    { name: "tio-dollar" },
-    { name: "tio-verified" },
-    { name: "tio-notice" },
-    { name: "tio-share_vs" },
-    { name: "tio-account_circle" },
-    { name: "tio-bookmark" },
-    { name: "tio-chart_bar_3" },
-    { name: "tio-heart" },
-    { name: "tio-shopping_basket" },
-    { name: "tio-award" },
-    { name: "tio-star" },
-    { name: "tio-menu_vs" },
-    { name: "tio-notifications" },
-    { name: "tio-settings" },
-    { name: "tio-send" },
-    { name: "tio-document_text" },
-    { name: "tio-image" },
-    { name: "tio-document_text" },
-    { name: "tio-image" },
-    { name: "tio-carousel_horizontal" },
-    { name: "tio-diamond" },
-  ];
+  iconList = [];
 
   constructor(
     private content: ContentService,
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
-    public auth: AuthService
-  ) {}
+    public auth: AuthService,
+    private icons: ListIcons
+    ) {
+      this.iconList = icons.iconList;
+    }
 
   ngOnInit() {
     this.loadItem();

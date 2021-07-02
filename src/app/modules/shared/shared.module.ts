@@ -35,7 +35,6 @@ import { BannerComponent } from './components/banner/banner.component';
 import { TrimPipe } from 'src/app/pipes/trim.pipe';
 import { SlickCarouselModule } from "ngx-slick-carousel";
 import { CardStoryComponent } from './components/card-story/card-story.component';
-import { LeftMenuComponent } from './components/left-menu/left-menu.component'
 
 
 @NgModule({
@@ -61,8 +60,7 @@ import { LeftMenuComponent } from './components/left-menu/left-menu.component'
     ModalGenericComponent,
     BannerComponent,
     DialogStoriesComponent,
-    CardStoryComponent,
-    LeftMenuComponent
+    CardStoryComponent
   ],
   imports: [
     CommonModule,
@@ -106,8 +104,7 @@ import { LeftMenuComponent } from './components/left-menu/left-menu.component'
     BackNavigationComponent,
     BannerComponent,
     DialogStoriesComponent,
-    CardStoryComponent,
-    LeftMenuComponent
+    CardStoryComponent
   ],
   entryComponents: [
     ModalGenericComponent,

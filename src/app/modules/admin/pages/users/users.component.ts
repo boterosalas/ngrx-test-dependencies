@@ -85,6 +85,10 @@ export class UsersComponent extends MatPaginatorIntl
   {
     titulo: "Respuestas de cuentas eliminadas",
     value: 6
+  },
+  {
+    titulo: "Referidos",
+    value: 7
   }
   ]
   locale = {
@@ -114,10 +118,7 @@ export class UsersComponent extends MatPaginatorIntl
     /**
      * Traduccion del paginador
      */
-    //this.disButon$ = Observable.create(observer => {
-    //  observer.next(true);
-    //  observer.complete();
-    //});
+
     this.itemsPerPageLabel = "Items por página";
     this.nextPageLabel = "Página siguiente";
     this.previousPageLabel = "Página anterior";
@@ -145,7 +146,6 @@ export class UsersComponent extends MatPaginatorIntl
     this.searchUser("");
     this.formEmail();
     this.dateNoVisible = true;
-    //this.disButon = true;
     this.disableButon = true;
     this.aux = 0;
     this.dateForm = this.fb.group({
@@ -330,7 +330,6 @@ export class UsersComponent extends MatPaginatorIntl
             fileIdentificationCard1,
             fileIdentificationCard2,
             fileBankCertificate,
-            // fileRUT,
             dateCed1,
             dateCed2,
             dateCertBank,
@@ -389,7 +388,6 @@ export class UsersComponent extends MatPaginatorIntl
   }
 
   private downloadFiles(data) {
-    //679
     this.usersService
       .downloadFiles(data)
       .subscribe((respid: any) => {
@@ -478,7 +476,6 @@ export class UsersComponent extends MatPaginatorIntl
           this.openSnackBar(responseExcel.userMessage, "Cerrar");
           this.dateForm.reset();
           if (this.dateForm.controls.dateRange.value.startDate === null) {
-            //this.disButon = true;
             this.disableButon = true;
           }
         }
@@ -495,7 +492,6 @@ export class UsersComponent extends MatPaginatorIntl
           this.openSnackBar(respExcel.userMessage, "Cerrar");
           this.dateForm.reset();
           if (this.dateForm.controls.dateRange.value.startDate === null) {
-            //this.disButon = true;
             this.disableButon = true;
           }
         }
@@ -509,17 +505,6 @@ export class UsersComponent extends MatPaginatorIntl
     else {
       this.disableButon = false
     }
-    //console.log("Entra")
-
-
-    //this.disButon = false;
-    //  console.log("Entra por aqui");
-
-    //this.disButon$ = Observable.create(observer => {
-    //  observer.next(false);
-    //  observer.complete();
-    //});
-
   }
 
   sort(event) {
@@ -538,14 +523,9 @@ export class UsersComponent extends MatPaginatorIntl
   }
 
   public exportusers() {
-    //this.dateParamsReport = {
-    //  start: this.dateForm.controls.dateRange.value.startDate.format(),
-    //  end: this.dateForm.controls.dateRange.value.endDate.format()
-    //};
     this.subscription = this.usersService.getExternalUsers().subscribe((respExport: ResponseService) => {
       this.dateForm.reset();
       if (this.dateForm.controls.dateRange.value.startDate === null) {
-        //this.disButon = true;
         this.disableButon = true;
       }
       this.openSnackBar(respExport.userMessage, 'Cerrar');
@@ -558,20 +538,12 @@ export class UsersComponent extends MatPaginatorIntl
   onChangeSelected(event) {
     if (event === "Datos de gamificación" || event === "Usuarios externos") {
       this.dateNoVisible = true;
-      //this.dateForm.get('dateRange').clearValidators();
-      //this.dateForm.updateValueAndValidity();
       this.disableButon = false
-
-      //this.dateRango = null;
       this.dateForm.get('dateRange').setValue(null)
     } else {
       this.dateNoVisible = false;
-      //this.dateForm.get('dateRange').setValidators([Validators.required]);
-      //this.dateForm.updateValueAndValidity();
       this.aux = 1
       this.disableButon = true
-
-      //this.dateRango = null;
       this.dateForm.get('dateRange').setValue(null)
     }
 
@@ -596,14 +568,13 @@ export class UsersComponent extends MatPaginatorIntl
           this.openSnackBar(respExcel.userMessage, "Cerrar");
           this.dateForm.reset();
           if (this.dateForm.controls.dateRange.value.startDate === null) {
-            //this.disButon = true;
             this.disableButon = true;
           }
         }
       });
   }
+
   public getDeleteComments() {
-    //getDeleteCommets
     this.dateParamsReport = {
       start: this.dateForm.controls.dateRange.value.startDate.format("YYYY-MM-DD"),
       end: this.dateForm.controls.dateRange.value.endDate.format("YYYY-MM-DD")
@@ -614,30 +585,44 @@ export class UsersComponent extends MatPaginatorIntl
           this.openSnackBar(respExcel.userMessage, "Cerrar");
           this.dateForm.reset();
           if (this.dateForm.controls.dateRange.value.startDate === null) {
-            //this.disButon = true;
             this.disableButon = true;
           }
         }
       });
-
   }
+
+  public getRefers() {
+    this.dateParamsReport = {
+      start: this.dateForm.controls.dateRange.value.startDate.format("YYYY-MM-DD"),
+      end: this.dateForm.controls.dateRange.value.endDate.format("YYYY-MM-DD")
+    };
+    this.subscription = this.usersService.getReportReferral(this.dateParamsReport)
+      .subscribe((respReferral: ResponseService) => {
+        if (respReferral.state === "Success") {
+          this.openSnackBar(respReferral.userMessage, "Cerrar");
+          this.dateForm.reset();
+          if (this.dateForm.controls.dateRange.value.startDate === null) {
+            this.disableButon = true;
+          }
+        }
+      });
+  }
+
   public getAnyReport() {
     if (this.dateForm.controls.tipoReport.value === "1") {
       this.getUserExcel();
-      //this.disableButon = false;
     } else if (this.dateForm.controls.tipoReport.value === "2") {
       this.exportusers();
-      //this.disableButon = false;
     } else if (this.dateForm.controls.tipoReport.value === "3") {
       this.getReportChangeExcel();
-      //this.disableButon = false;
     } else if (this.dateForm.controls.tipoReport.value === "4") {
       this.getGamification();
     } else if (this.dateForm.controls.tipoReport.value === "5") {
       this.getComments();
     } else if (this.dateForm.controls.tipoReport.value === "6") {
       this.getDeleteComments();
+    } else if (this.dateForm.controls.tipoReport.value === "7") {
+      this.getRefers();
     }
-
   }
 }
