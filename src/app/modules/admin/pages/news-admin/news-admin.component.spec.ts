@@ -179,4 +179,8 @@ describe('NewsAdminComponent', () => {
     expect(mockUserService.getAllNews).toHaveBeenCalled();
   });
 
+  afterAll(() => {
+    TestBed.resetTestingModule();
+  });
+
 });

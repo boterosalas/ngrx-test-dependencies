@@ -11,6 +11,7 @@
     <form [formGroup]="dateForm" class="downloadUsers">
       <mat-form-field class="ml-2">
         <mat-select
+          (selectionChange)="change()"
           placeholder="Tipo de Reporte"
           formControlName="typeRepor"
           class="selected-report"
@@ -23,9 +24,9 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+      <span *ngIf="showDate">
       <i class="tio-date_range icon-date"></i>
       <input
-        (change)="change()"
         formControlName="dateRange"
         [locale]="locale"
         placeholder="Seleccione fechas"
@@ -34,6 +35,7 @@
         ngxDaterangepickerMd
         class="form-control border-input mat-elevation-z1 p-2 border-radius"
       />
+    </span>
       <button
         mat-raised-button
         color="orange"
