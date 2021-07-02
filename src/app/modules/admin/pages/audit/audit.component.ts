@@ -29,8 +29,9 @@ export class AuditComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   maxDate = moment(new Date());
   dateParams: any;
-  disButon: boolean;
+  disButon: boolean = false;
   email: string;
+  showDate = true;
 
   locale = {
     locale: 'es',
@@ -48,12 +49,17 @@ export class AuditComponent implements OnInit, OnDestroy {
 
   selecteds = [{
     titulo: "General",
-    value: 1
+    value: "1"
   },
   {
     titulo: "Datos de usuario",
-    value: 2
-  }]
+    value: "2"
+  },
+  {
+    titulo: "Legales",
+    value: "3"
+  }
+]
   ngOnInit() {
 
     this.dateForm = this.fb.group(
@@ -85,7 +91,10 @@ export class AuditComponent implements OnInit, OnDestroy {
           }
         }
       });
-    } else {
+    } 
+
+    if (this.dateForm.controls.typeRepor.value === "2") {
+    
       this.dateParams = {
         start: this.dateForm.controls.dateRange.value.startDate.format("YYYY-MM-DD"),
         end: this.dateForm.controls.dateRange.value.endDate.format("YYYY-MM-DD")
@@ -101,9 +110,29 @@ export class AuditComponent implements OnInit, OnDestroy {
       });
     }
 
+    if (this.dateForm.controls.typeRepor.value === "3") {
+      this.subscription = this.file.getReportTerms().subscribe((resp: ResponseService) => {
+        if (resp.state === 'Success') {
+          this.openSnackBar(resp.userMessage, 'Cerrar');
+        }
+      });
+    }
+
   }
 
   change() {
+    if(this.dateForm.controls.typeRepor.value === "3") {
+      this.dateForm.get('dateRange').setValue(null)
+      this.disButon = false;
+      this.showDate = false;
+    } else {
+      this.disButon = false;
+      this.showDate = true;
+      this.dateForm.setValidators(Validators.required);
+    }
+  }
+
+  enabled(){
     this.disButon = false;
   }
 
