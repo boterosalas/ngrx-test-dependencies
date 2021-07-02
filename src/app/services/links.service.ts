@@ -505,7 +505,7 @@ export class LinksService {
   public getReportTerms() {
     return this.http
       .get(
-        `${this.urlComission}${this.apigetReportTerms}`,
+        `${this.ulrReport}${this.apigetReportTerms}`,
         this.httpOptions
       )
       .pipe(
