@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -26,19 +27,23 @@ describe('LegalesComponent', () => {
     Status: "Success",
     objectResponse: [{
       sectionValue: "Contenido",
-      sectionTitle: "Title"
+      sectionTitle: "Title",
+      date:'01/12/2020'
     },
     {
       sectionValue: "Contenido",
-      sectionTitle: "Title"
+      sectionTitle: "Title",
+      date:'01/12/2020'
     },
     {
       sectionValue: "Contenido",
-      sectionTitle: "Title"
+      sectionTitle: "Title",
+      date:'01/12/2020'
     },
     {
       sectionValue: "Contenido",
-      sectionTitle: "Title"
+      sectionTitle: "Title",
+      date:'01/12/2020'
     }]
   }
   const mockMasterService = jasmine.createSpyObj("MasterDataService", [
@@ -57,6 +62,8 @@ describe('LegalesComponent', () => {
         NgxDaterangepickerMd,
         SharedModule,
         NgxMaterialTimepickerModule,
+        ReactiveFormsModule,
+        FormsModule,
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
@@ -70,7 +77,6 @@ describe('LegalesComponent', () => {
 
       ],
 
-      schemas: [NO_ERRORS_SCHEMA],
       providers: [{ provide: MasterDataService, useValue: mockMasterService },]
     })
       .compileComponents();
@@ -87,6 +93,7 @@ describe('LegalesComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
   it('component', () => {
     component.saveLegal("1");
     component.saveLegal("2");

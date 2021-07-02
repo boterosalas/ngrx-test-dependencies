@@ -97,14 +97,16 @@ export class LegalesComponent implements OnInit {
       this.dateProteccion = resp.objectResponse[1].date;
       this.dateTransparencia = resp.objectResponse[2].date;
       this.datePrograma = resp.objectResponse[3].date;
-      this.termsForm.controls.title.setValue(this.textoTerminos);
-      this.termsForm.controls.termsEditor.setValue(this.htmlContentTerminos);
-      this.protectionForm.controls.title.setValue(this.textoProteccion);
-      this.protectionForm.controls.termsEditor.setValue(this.htmlContentProteccion);
-      this.transparencyForm.controls.title.setValue(this.textoTransparencia);
-      this.transparencyForm.controls.termsEditor.setValue(this.htmlContentTransparencia);
-      this.refersForm.controls.title.setValue(this.textoPrograma);
-      this.refersForm.controls.termsEditor.setValue(this.htmlContentPrograma);
+      setTimeout(() => {        
+        this.termsForm.controls.title.setValue(this.textoTerminos);
+        this.termsForm.controls.termsEditor.setValue(this.htmlContentTerminos);
+        this.protectionForm.controls.title.setValue(this.textoProteccion);
+        this.protectionForm.controls.termsEditor.setValue(this.htmlContentProteccion);
+        this.transparencyForm.controls.title.setValue(this.textoTransparencia);
+        this.transparencyForm.controls.termsEditor.setValue(this.htmlContentTransparencia);
+        this.refersForm.controls.title.setValue(this.textoPrograma);
+        this.refersForm.controls.termsEditor.setValue(this.htmlContentPrograma);
+      }, 500);
     })
   }
 
