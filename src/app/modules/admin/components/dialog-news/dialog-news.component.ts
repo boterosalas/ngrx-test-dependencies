@@ -8,7 +8,7 @@ import {
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { UserService } from "src/app/services/user.service";
 import { AuthService } from "src/app/services/auth.service";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
 
 @Component({
@@ -45,6 +45,7 @@ export class DialogNewsComponent implements OnInit {
     ngOnInit() {
         this.dateForm = this.fb.group({
             status: [this.data.element.statusnovelty],
+            responsenovelty: ['', Validators.maxLength(500)]
         });
         if (this.data.element.documenturl === "") {
             this.image = ""
@@ -98,7 +99,8 @@ export class DialogNewsComponent implements OnInit {
     public saveChanges() {
         let datos = {
             id: this.data.element.id,
-            status: this.dateForm.controls.status.value
+            status: this.dateForm.controls.status.value,
+            responsenovelty: this.dateForm.controls.responsenovelty.value
         }
         this.user.setStatus(datos).subscribe((resp: any) => {
             if (resp.state === "Success") {

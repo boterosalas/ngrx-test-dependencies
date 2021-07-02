@@ -1,8 +1,9 @@
 
 mat-card {
-    min-height: 162px;
-    max-height: 162px;
-    min-width: 200px;
     margin-bottom: 12px;
-    padding: 0px 8px;
+    padding: 5px 8px;
+    p{
+        color: #726D7E;
+        font-size: 17px;
+    }
 }
