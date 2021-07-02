@@ -262,20 +262,8 @@ describe("UsersComponent", () => {
   });
 
   it('getUsersExcel', () => {
-    //const nativeElement = fixture.nativeElement;
-    //const input = nativeElement.querySelector('input');
-    //input.dispatchEvent(new Event('click'));
-    //const nativeElementDate = fixture.nativeElement;
-    //const dateStart = nativeElementDate.querySelector('.today');
-    //dateStart.dispatchEvent(new Event('click'));
-    //const nativeElementbtn = fixture.nativeElement;
-    //const btn = nativeElementbtn.querySelector('.btn');
-    //btn.dispatchEvent(new Event('click'));
-    //fixture.detectChanges();
     let start = moment();
     let end = moment("12-01-2020");
-    //let start = new Date(2020, 11, 25);
-    //let end = new Date(2021, 1, 25);
     component.dateForm.controls.dateRange.setValue({ startDate: start, endDate: end });
     component.getUserExcel();
     let datos = true;
@@ -296,14 +284,17 @@ describe("UsersComponent", () => {
     component.updateEmail();
     expect(mockUserService.updateUserEmail).toHaveBeenCalled();
   });
+  
   it("general change", () => {
     component.onChangeSelected("Datos de gamificación");
     expect(component.disableButon).toBeFalsy();
   })
+
   it("other change", () => {
     component.onChangeSelected("Reporte Gamificación");
     expect(component.disableButon).toBeTruthy();
   })
+
   it('get first report', () => {
     component.dateForm.controls.tipoReport.setValue("General");
     let start = moment();
@@ -313,6 +304,7 @@ describe("UsersComponent", () => {
     let datos = true;
     expect(datos).toBeTruthy();
   })
+
   it('get second report', () => {
     let start = moment();
     let end = moment("12-01-2020");
@@ -323,6 +315,7 @@ describe("UsersComponent", () => {
     let datos = true;
     expect(datos).toBeTruthy()
   })
+
   it('get third report', () => {
     let start = moment();
     let end = moment("12-01-2020");
@@ -332,6 +325,7 @@ describe("UsersComponent", () => {
     let datos = true;
     expect(datos).toBeTruthy()
   });
+
   it('get fifth report', () => {
     let start = moment();
     let end = moment("12-01-2020");
@@ -341,6 +335,7 @@ describe("UsersComponent", () => {
     let datos = true;
     expect(datos).toBeTruthy()
   })
+
   it('get fourth report', () => {
     component.dateForm.controls.tipoReport.setValue("Gamificación");
     component.getAnyReport();

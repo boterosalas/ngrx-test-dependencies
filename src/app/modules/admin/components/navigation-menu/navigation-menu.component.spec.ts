@@ -8,23 +8,26 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from "@angular/material";
-import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterTestingModule } from "@angular/router/testing";
 import { JwtModule } from "@auth0/angular-jwt";
 import { TranslateModule } from "@ngx-translate/core";
 import { of } from "rxjs";
 import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
-import { ContentService } from "src/app/services/content.service";
 import "zone.js/dist/zone-testing";
-import { DialogNavigationGroupComponent } from "../dialog-navigation-group/dialog-navigation-group.component";
 import { NavigationMenuComponent } from './navigation-menu.component';
 import { AuthService } from "src/app/services/auth.service";
+import { AdminModule } from '../../admin.module';
 
-export class MdDialogMock {
+export class MatDialogMock {
   open() {
     return {
-      afterClosed: () => of(true),
+      beforeClosed: () => of(true),
+    };
+  }
+  closeAll() {
+    return {
+      closeAll: () => of(true),
     };
   }
 }
@@ -185,9 +188,11 @@ describe('NavigationMenuComponent', () => {
     },
   ];
 
+  const matDialog = new MatDialogMock();
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NavigationMenuComponent],
+      declarations: [],
       imports: [
         TranslateModule.forRoot(),
         AppMaterialModule,
@@ -197,6 +202,7 @@ describe('NavigationMenuComponent', () => {
         FormsModule,
         MatDialogModule,
         NoopAnimationsModule,
+        AdminModule,
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
@@ -209,12 +215,11 @@ describe('NavigationMenuComponent', () => {
         }),
       ],
       providers: [
-        { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: AuthService, useValue: mockAuthService },
-        { provide: MatDialogRef, useValue: dialogMock },
-        { provide: MatDialog, useValue: mockDialog },
+        { provide: MatDialog, useValue: matDialog },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: mockDialogRef },
       ],
-      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
     mockAuthService.getmenusNoLogin.and.returnValue(of(sectionsLinks));
     mockAuthService.saveMenu.and.returnValue(of(response));
@@ -234,12 +239,6 @@ describe('NavigationMenuComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it("deleteNavigationSectionService", () => {
-  //   component.currentSection = { id: 1, description: "test" };
-  //   component.deleteNavigationSectionService();
-  //   expect(mockContentService.deleteFooterSection).toHaveBeenCalled();
-  // });
-
   it("deleteNavigationItemService", () => {
     component.currentLink = { id: 1, description: "test" };
     component.deleteNavigationItemService();
@@ -251,30 +250,21 @@ describe('NavigationMenuComponent', () => {
     expect(mockAuthService.saveOrderMenus).toHaveBeenCalled();
   });
 
-  // it("saveOrderSections", () => {
-  //   component.saveOrderSections([{ id: 1, orderBy: 1 }]);
-  //   expect(mockContentService.saveOrderFooterSections).toHaveBeenCalled();
-  // });
-
   it("getSections", () => {
     component.getSections();
     expect(mockAuthService.getmenusNoLogin).toHaveBeenCalled();
   });
 
-  it("currentLink", () => {
-    expect(component.currentLink).toEqual({});
+  it("add Navigation Item", () => {
+    component.addNavigationItem({});
+    expect(mockAuthService.getmenusNoLogin).toHaveBeenCalled();
   });
 
-  it("isInvalidAddSection", () => {
-    expect(component.isInvalidAddSection).toBeFalsy;
+  it("edit Navigation Item", () => {
+    component.editNavigationItem({});
+    expect(mockAuthService.getmenusNoLogin).toHaveBeenCalled();
   });
 
-  // it("deleteNavigationGroup", () => {
-  //   // spyOn(component.dialogRef, 'open')
-  //   // dialogSpy = spyOn(TestBed.get(MatDialog), 'open').and.returnValue(dialogRefSpyObj);
-  //   component.deleteNavigationGroup({ id: 1, description: "test", orderby: 1 });
-  //   expect(component.deleteNavigationGroup).toHaveBeenCalled();
-  // });
 });
 
 

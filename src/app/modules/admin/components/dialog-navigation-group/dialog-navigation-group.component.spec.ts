@@ -11,6 +11,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
 import { ContentService } from "src/app/services/content.service";
 import { DialogNavigationGroupComponent } from "./dialog-navigation-group.component";
+import { ListIcons } from "src/app/services/icons";
 
 describe("DialogNavigationGroupComponent", () => {
   let component: DialogNavigationGroupComponent;
@@ -51,6 +52,7 @@ describe("DialogNavigationGroupComponent", () => {
         }),
       ],
       providers: [
+        ListIcons,
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: dialogMock },
         { provide: ContentService, useValue: mockContentService },
@@ -87,7 +89,4 @@ describe("DialogNavigationGroupComponent", () => {
     expect(component).toBeTruthy();
   });
 
-  it("form controls", () => {
-    expect(Object.keys(component.dateForm.controls)).toEqual(["description"]);
-  });
 });

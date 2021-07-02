@@ -57,8 +57,9 @@ export class UserService {
   apiDeleteUser = "userprofile/deleteaccount"
   apiDeleteUserAdmin = "userprofile/deleteuseradmin"
   apiReporUserGamification = "reports/getreportgamification";
+  apiReporReferral = "reports/getreportreferral";
   apiReportCambios = "reports/getreportfeedback"; //Falta el endpoint bien
-  apiDeleteComments = "reports/getreportfeedbackdeletetion"
+  apiDeleteComments = "reports/getreportfeedbackdeletetion";
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
   apiSaveNews = "new/savenew";
@@ -662,6 +663,7 @@ export class UserService {
         )
       );
   }
+  
   public getDeleteCommetsRest(params: any) {
     //Cambio la urlReports
     return this.http
@@ -679,6 +681,24 @@ export class UserService {
         )
       );
   }
+
+  public getReportReferral(params: any) {
+    return this.http
+      .get(
+        `${this.urlReports}${this.apiReporReferral}?&start=${params.start}&end=${params.end}`,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        )
+      );
+  }
+
   public getStatusVerification() {
     return this.http
       .get(

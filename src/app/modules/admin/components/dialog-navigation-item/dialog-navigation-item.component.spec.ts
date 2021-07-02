@@ -11,6 +11,7 @@ import { AppMaterialModule } from "src/app/modules/shared/app-material/app-mater
 import { ContentService } from "src/app/services/content.service";
 import { DialogNavigationItemComponent } from "./dialog-navigation-item.component";
 import { of } from "rxjs/internal/observable/of";
+import { ListIcons } from "src/app/services/icons";
 
 describe("DialogNavigationItemComponent", () => {
   let component: DialogNavigationItemComponent;
@@ -50,6 +51,7 @@ describe("DialogNavigationItemComponent", () => {
         }),
       ],
       providers: [
+        ListIcons,
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: dialogMock },
         { provide: ContentService, useValue: mockContentService },
@@ -86,7 +88,5 @@ describe("DialogNavigationItemComponent", () => {
     expect(component).toBeTruthy();
   });
 
-  it("form controls", () => {
-    expect(Object.keys(component.dateForm.controls)).toEqual(["idseccion","link","description","icon"]);
-  });
+
 });

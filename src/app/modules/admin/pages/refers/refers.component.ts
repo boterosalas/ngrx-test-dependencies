@@ -36,10 +36,9 @@ export class RefersComponent implements OnInit, OnDestroy {
     firstDay: 1 // first day is monday
   }
 
-  dateRange: any;
+
   private subscription: Subscription = new Subscription();
-  maxDate = moment(new Date());
-  dateForm: FormGroup;
+  
   comissionForm: FormGroup;
   referedForm: FormGroup;
   email: string;
@@ -49,21 +48,14 @@ export class RefersComponent implements OnInit, OnDestroy {
   numberPattern = "^(0|[0-9][0-9]*)$";
 
   ngOnInit() {
-    this.exportForm();
     this.comissionClickerForm();
     this.referedClickerForm();
     this.getAmountClicker();
     this.checkRole();
   }
+
   checkRole() {
     this.utils.checkPermision();
-  }
-  public exportForm() {
-    this.dateForm = this.fb.group(
-      {
-        dateRange: [null, Validators.required]
-      }
-    );
   }
 
   public comissionClickerForm() {
@@ -90,26 +82,6 @@ export class RefersComponent implements OnInit, OnDestroy {
 
   public changeState() {
     this.disButon = false;
-  }
-
-
-  // Metodo para exportar los usuarios referidos
-
-  public exportRefers() {
-    //this.dateRange = {
-    //  start: this.dateForm.controls.dateRange.value.startDate.format(),
-    //  end: this.dateForm.controls.dateRange.value.endDate.format()
-    //}
-
-    this.subscription = this.file.getReportReferral().subscribe((resp: ResponseService) => {
-      if (resp.state === 'Success') {
-        this.openSnackBar(resp.userMessage, 'Cerrar');
-        this.dateForm.reset();
-        if (this.dateForm.controls.dateRange.value.startDate === null) {
-          this.disButon = true;
-        }
-      }
-    });
   }
 
   public getAmountClicker() {
