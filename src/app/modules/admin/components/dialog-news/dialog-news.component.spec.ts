@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from 'src/app/services/user.service';
 import { of } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('DialogNewsComponent', () => {
   let component: DialogNewsComponent;
@@ -40,8 +41,8 @@ describe('DialogNewsComponent', () => {
         FormsModule,
         NoopAnimationsModule,
         BrowserAnimationsModule,
-
         RouterTestingModule.withRoutes([]),
+        TranslateModule.forRoot({}),
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {

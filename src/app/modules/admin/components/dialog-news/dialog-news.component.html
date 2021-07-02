@@ -119,7 +119,8 @@
   </div>
 </div>
 <div class="mt-3" fxLayout="row" fxLayoutAlign="end">
-  <form [formGroup]="dateForm">
+
+  <form [formGroup]="dateForm" fxLayout="column" class="w-100">
     <mat-form-field class="selected-report">
       <mat-placeholder class="label-up-text-selected"
         >NUEVO ESTADO</mat-placeholder
@@ -138,17 +139,39 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Respuesta</mat-label>
+      <textarea formControlName="responsenovelty" matInput placeholder="Respuesta(opcional)"></textarea>
+    </mat-form-field>
+    <mat-error
+    id="maxName"
+    *ngIf="
+    dateForm.controls.responsenovelty.invalid &&
+    dateForm.controls.responsenovelty.errors.maxlength
+    "
+    >{{
+      "GENERIC.MAX_CHARACTERS"
+        | translate
+          : {
+              maxchar:
+              dateForm.controls.responsenovelty.errors.maxlength.requiredLength
+            }
+    }}</mat-error>
+  </form>
+  
+  <span fxLayout="row" fxLayoutAlign="end end">
     <button
       mat-raised-button
       color="orange"
-      [disabled]="active"
+      [disabled]="active || !dateForm.valid"
       (click)="saveChanges()"
       id="download-users"
       class="ml-2 send-button"
     >
       Guardar
     </button>
-  </form>
+  </span>
 </div>
 
 <ng-template #templateImage>
