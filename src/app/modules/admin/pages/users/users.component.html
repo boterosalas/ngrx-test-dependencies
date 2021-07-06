@@ -5,6 +5,34 @@
 ></app-banner>
 
 <div class="container m-t4 fade-in">
+
+  <div class="mt-2">
+
+    <button
+    mat-raised-button
+    color="orange"
+    (click)="openModalFilters()"
+    id="download-users"
+  >
+    Ordenar y filtrar
+    <i class="tio-filter style-icon"></i>
+  </button>
+
+    <button
+    mat-raised-button
+    color="orange"
+    (click)="exportUsersFilter()"
+    id="download-users"
+    class="ml-2"
+    [disabled]="disableButon"
+  >
+    Exportar
+    <i class="tio-download_from_cloud style-icon"></i>
+  </button>
+
+  </div>
+
+
   <p class="title-blue">REPORTE DE USUARIOS</p>
   <div class="mt-4 container-forms" fxLayout="row">
     <div class="ml-4 downloadUsers user-transactions">
@@ -77,6 +105,17 @@
     ></mat-paginator>
   </div>
 </div>
+
+
+
+<!-- template filter-->
+
+
+<ng-template #templateDialogFilter>
+  <app-dialog-filter-users></app-dialog-filter-users>
+</ng-template>
+
+
 
 <!-- template Email-->
 

@@ -1,0 +1,54 @@
+@import "variables";
+@import "mixins";
+@import "general";
+@import "animations";
+
+.border-input {
+  border: none;
+  outline: none;
+  height: 32px;
+}
+
+.border-radius {
+  border-radius: 5px;
+}
+
+.icon-download {
+  position: relative;
+  left: 5px;
+  bottom: 2px;
+}
+
+.icon-date {
+  position: relative;
+  top: 4px;
+  left: 30px;
+  font-size: 22px;
+  color: #8d7eb7;
+}
+
+.form-control {
+  padding-left: 35px !important;
+  font-family: $font-galano !important;
+}
+
+.filterUsers{
+  label{
+    font-size: 16px;
+    color: $primary-color;
+  }
+  .mat-radio-button{
+    padding-right: 20px;
+    padding-bottom: 10px;
+  }
+
+  .separate{
+    border-bottom: 1px solid #ebebeb;
+    width: 100%;
+    padding: 10px 0;
+  }
+  .purple{
+    color: $primary-color;
+    font-weight: bold;
+  }
+}

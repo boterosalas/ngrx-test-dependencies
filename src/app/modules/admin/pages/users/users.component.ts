@@ -24,6 +24,7 @@ moment.locale("es");
 import Swal from "sweetalert2";
 import { observable, Observable } from "rxjs";
 import { UtilsService } from "src/app/services/utils.service";
+import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
 
 @Component({
   selector: "app-users",
@@ -59,6 +60,8 @@ export class UsersComponent extends MatPaginatorIntl
   disableButon: boolean;
   @ViewChild("templateDialogEmail", { static: false })
   templateEmail: TemplateRef<any>;
+  @ViewChild("templateDialogFilter", { static: false })
+  templateFilter: TemplateRef<any>;
   emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
   userId: string;
   userMail: string;
@@ -206,6 +209,19 @@ export class UsersComponent extends MatPaginatorIntl
     this.emailForm.controls.email.setValue(email);
     this.userMail = email;
     this.userId = userId;
+  }
+  
+  public openModalFilters() {
+    const template = this.templateFilter;
+    const title = "Filtrar Usuarios";
+
+    this.dialog.open(ModalGenericComponent, {
+      data: {
+        title,
+        template
+      }
+    });
+
   }
 
   public changeEmail() {

@@ -1,0 +1,150 @@
+<form [formGroup]="filterUsers" class="filterUsers">
+    
+    <div fxLayout="row" fxLayoutAlign="start center" class="pt-1 pb-1">
+
+        <span fxFlex="20%">
+            <label>Fecha</label>
+        </span>
+
+        <span class="separate">
+            <i class="tio-date_range icon-date"></i>
+            <input
+            formControlName="dateRange"
+            [locale]="locale"
+            placeholder="Seleccione fechas"
+            type="text"
+            [maxDate]="maxDate"
+            ngxDaterangepickerMd
+            class="form-control border-input mat-elevation-z1 p-2 border-radius"
+            />
+        </span>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center" class="pt-1 pb-1">
+
+        <span fxFlex="20%">
+            <label>Estados</label>
+        </span>
+
+        <mat-radio-group
+        aria-labelledby="status"
+        class="status separate"
+        formControlName="status"
+        >
+            <mat-radio-button class="radio-button" *ngFor="let item of status" [value]="item.value">
+                {{item.value}}
+            </mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center" class="pt-1 pb-1">
+
+        <span fxFlex="20%"> 
+           <label>Comunicación</label> 
+        </span>
+
+        <mat-radio-group
+        aria-labelledby="comunication"
+        class="comunication separate"
+        formControlName="comunication"
+        >
+            <mat-radio-button class="radio-button" *ngFor="let item of comunication" [value]="item.value">
+                {{item.value}}
+            </mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center" class="pt-1 pb-1">
+
+        <span fxFlex="20%">
+            <label>Negocios</label> 
+         </span>
+        
+            <mat-form-field class="selected-bussiness separate">
+                <mat-placeholder class="selected-bussiness"
+                  >NEGOCIO</mat-placeholder
+                >
+                <mat-select
+                  id="bussiness"
+                  formControlName="bussiness"
+                  class="selected-bussiness"
+                >
+                  <mat-option
+                    (click)="onChangeSelected(item.description)"
+                    *ngFor="let item of bussiness"
+                    value="{{ item.description }}"
+                  >
+                    <span>{{ item.description }}</span>
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center" class="pt-1 pb-1">
+        <span fxFlex="20%">
+            <label>Comisiones</label> 
+         </span>
+
+         <mat-radio-group
+         aria-labelledby="commissions"
+         class="commissions separate"
+         formControlName="commissions"
+         >
+             <mat-radio-button  class="radio-button" *ngFor="let item of commissions" [value]="item.value">
+                 {{item.value}}
+             </mat-radio-button>
+     
+         </mat-radio-group>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center" class="pt-1 pb-1">
+        <span fxFlex="20%">
+            <label>Cuenta bancaria</label> 
+         </span>
+         <mat-radio-group
+         aria-labelledby="accountBank"
+         class="accountBank separate"
+         formControlName="accountBank"
+         >
+             <mat-radio-button class="radio-button" *ngFor="let item of accountBank" [value]="item.value">
+                 {{item.value}}
+             </mat-radio-button>
+         </mat-radio-group>
+    </div>
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center" class="pt-2 pb-2">
+        <span fxFlex="20%">
+            <label>Documentos</label> 
+         </span>
+         <mat-radio-group
+         aria-labelledby="documents"
+         class="documents separate"
+         formControlName="documents"
+         >
+             <mat-radio-button class="radio-button" *ngFor="let item of documents" [value]="item.value">
+                 {{item.value}}
+             </mat-radio-button>
+         </mat-radio-group>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="end center">
+        <button
+        mat-button
+        (click)="clearFilters()"
+        id="clear-users"
+        class="purple"
+        >
+        Limpiar Filtros
+        </button>
+
+        <button
+        mat-raised-button
+        color="orange"
+        (click)="aplyFilters()"
+        id="filter-users"
+        class="ml-2"
+        [disabled]="!filterForm.valid"
+        >
+        Aplicar
+        </button>
+    </div>
+  </form>
