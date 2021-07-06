@@ -12,7 +12,15 @@
           formControlName="description"
           maxlength="100"
         />
+        <mat-error
+          id="requiredDescription"
+          *ngIf="dateForm.controls.description.invalid &&
+            dateForm.controls.description.errors.required">{{
+            "GENERIC.REQUIRED" | translate: { formValue: "Nombre" }
+          }}</mat-error
+        >
       </mat-form-field>
+
 
       <mat-form-field>
         <input
@@ -22,16 +30,19 @@
           placeholder="Enlace"
           formControlName="link"
         />
+        <mat-error
+          id="requiredLink"
+          *ngIf="
+            dateForm.controls.link.invalid &&
+            dateForm.controls.link.errors.required
+          "
+          >{{
+            "GENERIC.REQUIRED" | translate: { formValue: "Enlace" }
+          }}</mat-error>
       </mat-form-field>
 
+
       <mat-form-field *ngIf="data.icon !== undefined || data.isMenu">
-        <!-- <input
-          matInput
-          id="icon"
-          type="text"
-          placeholder="Icono"
-          formControlName="icon"
-        /> -->
         <mat-label>Icono</mat-label>
         <mat-select [(value)]="iconSelected">
           <mat-option

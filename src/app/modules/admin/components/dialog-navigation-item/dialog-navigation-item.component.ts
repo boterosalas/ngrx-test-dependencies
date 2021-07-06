@@ -42,15 +42,15 @@ export class DialogNavigationItemComponent implements OnInit {
       this.dateForm = this.fb.group({
         id: [this.data.id],
         idseccion: [this.data.idseccion || this.data.idgrupo],
-        link: [this.data.link || this.data.route],
-        description: [this.data.description || this.data.name],
+        link: [this.data.link || this.data.route, Validators.required],
+        description: [this.data.description || this.data.name, Validators.required],
         icon: [this.data.icon],        
       });
     } else {
       this.dateForm = this.fb.group({
         idseccion: [this.data.idseccion || this.data.idgrupo],
-        link: [null],
-        description: [null],
+        link: [null, Validators.required],
+        description: [null, Validators.required],
         icon: [null],
       });
     }
