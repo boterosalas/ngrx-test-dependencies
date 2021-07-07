@@ -627,11 +627,11 @@ export class LinksService {
       );
   }
 
-  public searchUsers(term?: any) {
+  public searchUsers(data: any) {
     //Falta cambio en urlReports
     return this.http
-      .get(
-        `${this.urlReports}${this.apiUsers}?searchText=${term.term}&from=${term.from}&to=${term.to}&orderBy=${term.orderOrigin}&ordination=${term.orderBy}`,
+      .post(
+        `${this.urlReports}${this.apiUsers}`, data,
         this.httpOptions
       )
       .pipe(
