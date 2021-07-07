@@ -60,6 +60,7 @@
             <label>Negocios</label> 
          </span>
         
+         <span fxLayout="column" class="w-100">
             <mat-form-field class="selected-bussiness separate">
                 <mat-placeholder class="selected-bussiness"
                   >NEGOCIO</mat-placeholder
@@ -78,6 +79,17 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
+
+              <mat-form-field class="bussiness-chip-list" appearance="fill" *ngIf="chipsBussiness.length">
+                <mat-chip-list #chipList aria-label="bussiness selection">
+                  <mat-chip *ngFor="let bussiness of chipsBussiness" [selectable]="selectable"
+                           [removable]="removable" (removed)="remove(bussiness)">
+                    {{bussiness}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+              </mat-form-field>
+            </span>
     </div>
 
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center" class="pt-1 pb-1">
