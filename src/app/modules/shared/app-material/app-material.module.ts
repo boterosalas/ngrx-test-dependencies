@@ -1,6 +1,6 @@
 
 import { NgModule } from '@angular/core';
-import { MatInputModule, MatButtonModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatCardModule, MatCheckboxModule, MatIconModule, MatPaginatorModule, MatDialogModule, MatSnackBarModule, MatTabsModule, MatBottomSheetModule, MatTableModule, MatExpansionModule, MatSlideToggleModule, MatTooltipModule, MatSortModule, MatAutocompleteModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE, MatToolbarModule, MatSidenavModule, MatProgressSpinnerModule, MatProgressBarModule } from '@angular/material';
+import { MatInputModule, MatButtonModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatCardModule, MatCheckboxModule, MatIconModule, MatPaginatorModule, MatDialogModule, MatSnackBarModule, MatTabsModule, MatBottomSheetModule, MatTableModule, MatExpansionModule, MatSlideToggleModule, MatTooltipModule, MatSortModule, MatAutocompleteModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE, MatToolbarModule, MatSidenavModule, MatProgressSpinnerModule, MatProgressBarModule, MatRadioModule, MatChipsModule } from '@angular/material';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -33,7 +33,9 @@ import { CommonModule } from '@angular/common';
     MatSidenavModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatRadioModule,
+    MatChipsModule
   ],
   exports: [
     MatFormFieldModule,
@@ -62,7 +64,9 @@ import { CommonModule } from '@angular/common';
     MatSidenavModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatRadioModule,
+    MatChipsModule
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'es-ES' }]
 })

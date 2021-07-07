@@ -2537,3 +2537,24 @@ h3#bussiness2 {
     padding: 0 14px !important;
   }
 }
+
+.mat-radio-outer-circle {
+  .mat-radio-checked & {
+        border-color: #B4A6DB !important;
+      }
+  }
+  
+  .mat-radio-inner-circle {
+      background-color: #B4A6DB !important;
+  }
+  
+  .mat-radio-ripple .mat-ripple-element {
+      background-color: rgba(#B4A6DB, 0.26) !important;
+  }
+
+  .mat-chip{
+      background: #FFAE5E;
+      color: #AD5E00;
+      border-style: dashed;
+      border-width: 1px;
+  }
