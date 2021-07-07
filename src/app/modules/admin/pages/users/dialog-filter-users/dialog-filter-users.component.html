@@ -32,7 +32,7 @@
         formControlName="status"
         >
             <mat-radio-button class="radio-button" *ngFor="let item of status" [value]="item.value">
-                {{item.value}}
+                {{item.name}}
             </mat-radio-button>
         </mat-radio-group>
     </div>
@@ -49,7 +49,7 @@
         formControlName="comunication"
         >
             <mat-radio-button class="radio-button" *ngFor="let item of comunication" [value]="item.value">
-                {{item.value}}
+                {{item.name}}
             </mat-radio-button>
         </mat-radio-group>
     </div>
@@ -71,9 +71,9 @@
                   class="selected-bussiness"
                 >
                   <mat-option
-                    (click)="onChangeSelected(item.description)"
+                    (click)="onChangeSelected(item)"
                     *ngFor="let item of bussiness"
-                    value="{{ item.description }}"
+                    value="{{ item.id }}"
                   >
                     <span>{{ item.description }}</span>
                   </mat-option>
@@ -81,10 +81,10 @@
               </mat-form-field>
 
               <mat-form-field class="bussiness-chip-list" appearance="fill" *ngIf="chipsBussiness.length">
-                <mat-chip-list #chipList aria-label="bussiness selection">
-                  <mat-chip *ngFor="let bussiness of chipsBussiness" [selectable]="selectable"
+                <mat-chip-list #chipList aria-label="bussiness selection" formControlName="chipBussiness">
+                  <mat-chip  [value]="bussiness.id" *ngFor="let bussiness of chipsBussiness" [selectable]="selectable"
                            [removable]="removable" (removed)="remove(bussiness)">
-                    {{bussiness}}
+                            {{bussiness.description}}
                     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                   </mat-chip>
                 </mat-chip-list>
@@ -103,7 +103,7 @@
          formControlName="commissions"
          >
              <mat-radio-button  class="radio-button" *ngFor="let item of commissions" [value]="item.value">
-                 {{item.value}}
+                 {{item.name}}
              </mat-radio-button>
      
          </mat-radio-group>
@@ -119,7 +119,7 @@
          formControlName="accountBank"
          >
              <mat-radio-button class="radio-button" *ngFor="let item of accountBank" [value]="item.value">
-                 {{item.value}}
+                 {{item.name}}
              </mat-radio-button>
          </mat-radio-group>
     </div>
@@ -133,7 +133,7 @@
          formControlName="documents"
          >
              <mat-radio-button class="radio-button" *ngFor="let item of documents" [value]="item.value">
-                 {{item.value}}
+                 {{item.name}}
              </mat-radio-button>
          </mat-radio-group>
     </div>
@@ -151,10 +151,9 @@
         <button
         mat-raised-button
         color="orange"
-        (click)="aplyFilters()"
+        (click)="aplyFilters(); closeModal()"
         id="filter-users"
         class="ml-2"
-        [disabled]="!filterForm.valid"
         >
         Aplicar
         </button>

@@ -112,7 +112,7 @@
 
 
 <ng-template #templateDialogFilter>
-  <app-dialog-filter-users></app-dialog-filter-users>
+  <app-dialog-filter-users (objectSend)="infoFilter($event)" (close)="onNoClick()"></app-dialog-filter-users>
 </ng-template>
 
 

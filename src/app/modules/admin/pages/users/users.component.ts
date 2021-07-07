@@ -10,7 +10,8 @@ import {
   MatPaginator,
   MatDialog,
   MatSnackBar,
-  MatPaginatorIntl
+  MatPaginatorIntl,
+  MatDialogRef
 } from "@angular/material";
 import { DialogUserComponent } from "../../components/dialog-user/dialog-user.component";
 import { Subscription } from "rxjs/internal/Subscription";
@@ -62,6 +63,7 @@ export class UsersComponent extends MatPaginatorIntl
   templateEmail: TemplateRef<any>;
   @ViewChild("templateDialogFilter", { static: false })
   templateFilter: TemplateRef<any>;
+  dialogRef: MatDialogRef<any>;
   emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
   userId: string;
   userMail: string;
@@ -215,13 +217,17 @@ export class UsersComponent extends MatPaginatorIntl
     const template = this.templateFilter;
     const title = "Filtrar Usuarios";
 
-    this.dialog.open(ModalGenericComponent, {
+    this.dialogRef = this.dialog.open(ModalGenericComponent, {
       data: {
         title,
         template
       }
     });
 
+  }
+
+  public onNoClick(): void {
+    this.dialogRef.close();
   }
 
   public changeEmail() {
@@ -641,4 +647,9 @@ export class UsersComponent extends MatPaginatorIntl
       this.getRefers();
     }
   }
+
+  public infoFilter(data) {
+    console.log(data);
+  }
+
 }

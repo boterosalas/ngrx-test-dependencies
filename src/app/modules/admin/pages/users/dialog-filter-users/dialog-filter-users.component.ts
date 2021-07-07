@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnDestroy, OnInit } from "@angular/core";
+import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import * as moment from "moment";
@@ -11,7 +11,10 @@ import { ContentService } from "src/app/services/content.service";
   styleUrls: ["./dialog-filter-users.component.scss"],
 })
 export class DialogFilterUsersComponent implements OnInit, OnDestroy {
-  constructor(private fb: FormBuilder, private content: ContentService) {}
+  constructor(
+    private fb: FormBuilder,
+    private content: ContentService,
+     ) {}
 
   ngOnInit() {
     this.filterForm();
@@ -40,35 +43,38 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
 
   bussiness = [];
   chipsBussiness = [];
+  chipsBussinessId = [];
 
   selectable = true;
   removable = true;
   addOnBlur = true;
+  @Output() objectSend = new EventEmitter();
+  @Output() close = new EventEmitter();
 
   status = [
-    { value: "Registrados" },
-    { value: "Activos nuevos" },
-    { value: "Usuario de baja" },
-    { value: "Activos" },
-    { value: "Inactivos 1" },
-    { value: "Inactivos 2" },
-    { value: "Inactivos 3" },
+    { name: "Registrados", value: "REGISTRADOS" },
+    { name: "Activos nuevos", value: "NUEVOS" },
+    { name: "Usuario de baja", value: "BAJA" },
+    { name: "Activos", value: "ACTIVOS" },
+    { name: "Inactivos 1", value: "INACTIVOS1" },
+    { name: "Inactivos 2", value: "INACTIVOS2" },
+    { name: "Inactivos 3", value: "INACTIVOS3" },
   ];
 
   comunication = [
-    { value: "Recibe comunicación" },
-    { value: "No recibe comunicación (Lista negra)" },
+    { name: "Recibe comunicación", value: true },
+    { name: "No recibe comunicación (Lista negra)", value: false },
   ];
 
   commissions = [
-    { value: "Menos de $10.000" },
-    { value: "Mas de $10.000" },
-    { value: "Comisiones del periodo" },
+    { name: "Menos de $10.000" , value:'MENOR' },
+    { name: "Mas de $10.000", value:'MAYOR' },
+    { name: "Comisiones del periodo", value:'PERIODO' },
   ];
 
-  accountBank = [{ value: "Verificada" }, { value: "No verificada" }];
+  accountBank = [{ name: "Verificada", value: true }, { name: "No verificada", value:false }];
 
-  documents = [{ value: "Con documentos" }, { value: "Sin documentos" }];
+  documents = [{ name: "Con documentos", value: true }, { name: "Sin documentos", value:false }];
 
   public getAllBusiness() {
     this.subscription = this.content.getAllBusiness().subscribe((resp) => {
@@ -82,13 +88,14 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
 
   public filterForm() {
     this.filterUsers = this.fb.group({
-      dateRange: ["", Validators.required],
-      status: ["", Validators.required],
-      comunication: ["", Validators.required],
-      commissions: ["", Validators.required],
-      accountBank: ["", Validators.required],
-      bussiness: ["", Validators.required],
-      documents: ["", Validators.required],
+      dateRange: [""],
+      status: [null],
+      comunication: [null],
+      commissions: [null],
+      accountBank: [null],
+      bussiness: [""],
+      chipBussiness: [""],
+      documents: [null],
     });
   }
 
@@ -111,10 +118,32 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
   public clearFilters(){
     this.filterUsers.reset();
     this.chipsBussiness = [];
+    this.chipsBussinessId = [];
   }
 
   public aplyFilters(){
-    console.log(this.filterUsers.value);
+    
+    this.chipsBussinessId = [];
+    this.chipsBussiness.forEach(element => {
+      this.chipsBussinessId.push(element.id);
+    });
+
+    let data = {
+      dateStart: this.filterUsers.controls.dateRange.value.startDate !=='' ? this.filterUsers.controls.dateRange.value.startDate.format("YYYY-MM-DD") : '',
+      dateEnd:  this.filterUsers.controls.dateRange.value.endDate !=='' ? this.filterUsers.controls.dateRange.value.endDate.format("YYYY-MM-DD") : '',
+      state: this.filterUsers.controls.status.value,
+      comunications: this.filterUsers.controls.comunication.value,
+      commissions: this.filterUsers.controls.commissions.value,
+      business: this.chipsBussinessId,
+      stateVerification: this.filterUsers.controls.accountBank.value,
+      documents: this.filterUsers.controls.documents.value,
+    }
+
+    this.objectSend.emit(data);
+  }
+
+  public closeModal() {
+    this.close.emit()
   }
 
 }
