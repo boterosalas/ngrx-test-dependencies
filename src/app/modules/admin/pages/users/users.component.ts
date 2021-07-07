@@ -19,11 +19,11 @@ import { UserService } from "src/app/services/user.service";
 import { ResponseService } from "src/app/interfaces/response";
 import { LinksService } from "src/app/services/links.service";
 import * as moment from "moment";
-import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { DialogEditComponent } from "src/app/modules/clicker/components/dialog-edit/dialog-edit.component";
 moment.locale("es");
 import Swal from "sweetalert2";
-import { observable, Observable } from "rxjs";
+import { Observable } from "rxjs";
 import { UtilsService } from "src/app/services/utils.service";
 import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
 
@@ -68,6 +68,22 @@ export class UsersComponent extends MatPaginatorIntl
   userId: string;
   userMail: string;
   dateNoVisible: boolean;
+  filterData = [{
+      searchText: "",
+      from: null,
+      to: null,
+      dateStart: null,
+      dateEnd:null,
+      state: null,
+      comunications: null,
+      commissions: null,
+      business: [],
+      stateVerification: null,
+      documents: null,
+      export: false,
+      orderBy:  "",
+      ordination: ""
+  }]
   selecteds = [{
     titulo: "General",
     value: 1
@@ -165,6 +181,7 @@ export class UsersComponent extends MatPaginatorIntl
   checkRole() {
     this.utils.checkPermision();
   }
+
   /**
    * Metodo para buscar usuarios
    * @param term
@@ -174,24 +191,56 @@ export class UsersComponent extends MatPaginatorIntl
    * @param orderBy
    */
 
-  public searchUser(
-    term,
-    from = 1,
-    to = this.pageTo,
-    orderOrigin = "",
-    orderBy = ""
-  ) {
+  // public searchUser(
+  //   term,
+  //   from = 1,
+  //   to = this.pageTo,
+  //   orderOrigin = "",
+  //   orderBy = ""
+  // ) {
+  //   if (term !== this.paginate) {
+  //     this.paginate = term;
+  //     this.pageIndex = 0;
+  //   }
+  //   const params = { term, from, to, orderOrigin, orderBy };
+  //   this.subscription = this.file.searchUsers(params).subscribe((user: any) => {
+  //     this.users = user.users;
+  //     this.totalItems = user.total;
+  //     this.dataSource = new MatTableDataSource<any>(this.users);
+  //   });
+  // }
+
+
+  public searchUser(term, from = 1, to = this.pageTo, orderOrigin = "",   orderBy = ""){
+    this.filterData = [{
+      searchText: term,
+      from: from,
+      to: to,
+      dateStart: null,
+      dateEnd:null,
+      state: null,
+      comunications: null,
+      commissions: null,
+      business: [],
+      stateVerification: null,
+      documents: null,
+      export: false,
+      orderBy:  orderBy,
+      ordination: orderOrigin
+    }]
+
     if (term !== this.paginate) {
       this.paginate = term;
       this.pageIndex = 0;
     }
-    const params = { term, from, to, orderOrigin, orderBy };
-    this.subscription = this.file.searchUsers(params).subscribe((user: any) => {
-      this.users = user.users;
-      this.totalItems = user.total;
-      this.dataSource = new MatTableDataSource<any>(this.users);
-    });
+
+      this.subscription = this.file.searchUsers(this.filterData).subscribe((user: any) => {
+          this.users = user.users;
+          this.totalItems = user.total;
+          this.dataSource = new MatTableDataSource<any>(this.users);
+        });
   }
+
 
   public userEmail(user) {
     const userId = user.userId;
@@ -503,6 +552,7 @@ export class UsersComponent extends MatPaginatorIntl
         }
       });
   }
+
   public getReportChangeExcel() {
     this.dateParamsReport = {
       start: this.dateForm.controls.dateRange.value.startDate.format(),
@@ -649,7 +699,29 @@ export class UsersComponent extends MatPaginatorIntl
   }
 
   public infoFilter(data) {
-    console.log(data);
+    this.filterData = [{
+      searchText: this.paginate,
+      from: this.from,
+      to: this.to,
+      dateStart: data.dateStart,
+      dateEnd:data.dateEnd,
+      state: data.state,
+      comunications: data.comunications,
+      commissions: data.commissions,
+      business: data.business,
+      stateVerification: data.stateVerification,
+      documents: data.documents,
+      export: false,
+      orderBy:  "",
+      ordination: ""
+    }]
+
+    this.subscription = this.file.searchUsers(this.filterData).subscribe((user: any) => {
+      this.users = user.users;
+      this.totalItems = user.total;
+      this.dataSource = new MatTableDataSource<any>(this.users);
+    });
+
   }
 
 }
