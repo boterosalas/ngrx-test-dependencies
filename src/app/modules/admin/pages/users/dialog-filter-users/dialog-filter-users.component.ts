@@ -107,4 +107,14 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
       this.chipsBussiness.splice(index, 1);
     }
   }
+
+  public clearFilters(){
+    this.filterUsers.reset();
+    this.chipsBussiness = [];
+  }
+
+  public aplyFilters(){
+    console.log(this.filterUsers.value);
+  }
+
 }
