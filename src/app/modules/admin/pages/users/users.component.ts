@@ -68,6 +68,7 @@ export class UsersComponent extends MatPaginatorIntl
   userId: string;
   userMail: string;
   dateNoVisible: boolean;
+  export = false;
   filterData = [{
       searchText: "",
       from: null,
@@ -375,6 +376,7 @@ export class UsersComponent extends MatPaginatorIntl
     }
 
     this.subscription = this.usersService.getUserInfoAditional(user.userId).subscribe((resp: ResponseService) => {
+      console.log(resp);
       if (resp.state === "Success") {
         const fileIdentificationCard1 = resp.objectResponse.identificationcard1;
         const fileIdentificationCard2 = resp.objectResponse.identificationcard2;
@@ -698,6 +700,11 @@ export class UsersComponent extends MatPaginatorIntl
     }
   }
 
+  public exportUsersFilter(){
+    this.filterData[0].export = true;
+    this.subscription = this.file.searchUsers(this.filterData).subscribe();
+  }
+
   public infoFilter(data) {
     this.filterData = [{
       searchText: this.paginate,
@@ -711,7 +718,7 @@ export class UsersComponent extends MatPaginatorIntl
       business: data.business,
       stateVerification: data.stateVerification,
       documents: data.documents,
-      export: false,
+      export: this.export,
       orderBy:  "",
       ordination: ""
     }]
