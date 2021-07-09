@@ -52,7 +52,7 @@
 
     <span *ngIf="item.description !== 'Sin Grupo'">
 
-      <mat-accordion>
+      <mat-accordion *ngIf="item.menus !== null">
         <mat-expansion-panel class="no-bg">
           <mat-expansion-panel-header [ngClass]="{'adminMenu': (auth.getRole$ | async) === 'ADMIN' ||
           (auth.getRole$ | async) === 'SUPERADMIN' &&
