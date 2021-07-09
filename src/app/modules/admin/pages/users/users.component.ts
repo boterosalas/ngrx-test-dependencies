@@ -51,7 +51,7 @@ export class UsersComponent extends MatPaginatorIntl
   aux: number;
   maxDate = moment(new Date());
   orderOrigin: string;
-  orderBy: string;
+  orderby: string;
   from: any;
   to: any;
   dateParams: any;
@@ -70,19 +70,19 @@ export class UsersComponent extends MatPaginatorIntl
   dateNoVisible: boolean;
   export = false;
   filterData = [{
-      searchText: "",
+      searchtext: "",
       from: null,
       to: null,
-      dateStart: null,
-      dateEnd:null,
+      datestart: null,
+      dateend:null,
       state: null,
       comunications: null,
       commissions: null,
       business: [],
-      stateVerification: null,
+      stateverification: null,
       documents: null,
       export: false,
-      orderBy:  "",
+      orderby:  "",
       ordination: ""
   }]
   selecteds = [{
@@ -189,46 +189,14 @@ export class UsersComponent extends MatPaginatorIntl
    * @param from
    * @param to
    * @param orderOrigin
-   * @param orderBy
+   * @param orderby
    */
 
-  // public searchUser(
-  //   term,
-  //   from = 1,
-  //   to = this.pageTo,
-  //   orderOrigin = "",
-  //   orderBy = ""
-  // ) {
-  //   if (term !== this.paginate) {
-  //     this.paginate = term;
-  //     this.pageIndex = 0;
-  //   }
-  //   const params = { term, from, to, orderOrigin, orderBy };
-  //   this.subscription = this.file.searchUsers(params).subscribe((user: any) => {
-  //     this.users = user.users;
-  //     this.totalItems = user.total;
-  //     this.dataSource = new MatTableDataSource<any>(this.users);
-  //   });
-  // }
+  public searchUser(term, from = 1, to = this.pageTo, orderOrigin = "",   orderby = ""){
 
-
-  public searchUser(term, from = 1, to = this.pageTo, orderOrigin = "",   orderBy = ""){
-    this.filterData = [{
-      searchText: term,
-      from: from,
-      to: to,
-      dateStart: null,
-      dateEnd:null,
-      state: null,
-      comunications: null,
-      commissions: null,
-      business: [],
-      stateVerification: null,
-      documents: null,
-      export: false,
-      orderBy:  orderBy,
-      ordination: orderOrigin
-    }]
+    this.filterData[0].searchtext = term;
+    this.filterData[0].to = to;
+    this.filterData[0].from = from;
 
     if (term !== this.paginate) {
       this.paginate = term;
@@ -633,8 +601,8 @@ export class UsersComponent extends MatPaginatorIntl
   }
   public getComments() {
     this.dateParamsReport = {
-      start: this.dateForm.controls.dateRange.value.startDate.format("YYYY-MM-DD"),
-      end: this.dateForm.controls.dateRange.value.endDate.format("YYYY-MM-DD")
+      start: this.dateForm.controls.dateRange.value.startDate.format('Yyyy-MM-dd HH:mm:ss'),
+      end: this.dateForm.controls.dateRange.value.endDate.format('Yyyy-MM-dd HH:mm:ss')
     };
     this.subscription = this.usersService.getReportCommets(this.dateParamsReport)
       .subscribe((respExcel: ResponseService) => {
@@ -707,20 +675,20 @@ export class UsersComponent extends MatPaginatorIntl
 
   public infoFilter(data) {
     this.filterData = [{
-      searchText: this.paginate,
-      from: this.from,
-      to: this.to,
-      dateStart: data.dateStart,
-      dateEnd:data.dateEnd,
+      searchtext: this.paginate,
+      from: 1,
+      to: 50,
+      datestart: data.dateStart,
+      dateend:data.dateEnd,
       state: data.state,
       comunications: data.comunications,
       commissions: data.commissions,
       business: data.business,
-      stateVerification: data.stateVerification,
+      stateverification: data.stateverification,
       documents: data.documents,
       export: this.export,
-      orderBy:  "",
-      ordination: ""
+      orderby:  "IDENTIFICATION",
+      ordination: "ASC"
     }]
 
     this.subscription = this.file.searchUsers(this.filterData).subscribe((user: any) => {
