@@ -19,6 +19,19 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.filterForm();
     this.getAllBusiness();
+
+    let filterData = localStorage.getItem('formFilter');
+
+    if(filterData !== null) {
+      let obFr = JSON.parse(filterData);
+      this.filterUsers.controls.comunication.setValue(obFr.comunication);
+      this.filterUsers.controls.status.setValue(obFr.status);
+      this.filterUsers.controls.commissions.setValue(obFr.commissions);
+      this.filterUsers.controls.accountBank.setValue(obFr.accountBank);
+      this.filterUsers.controls.documents.setValue(obFr.documents);
+    }
+
+
   }
 
   private subscription: Subscription = new Subscription();
@@ -143,10 +156,13 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
     }
 
     this.objectSend.emit(data);
+
+    localStorage.setItem('formFilter', JSON.stringify(this.filterUsers.value));
+
   }
 
   public closeModal() {
-    this.close.emit()
+    this.close.emit();
   }
 
 }
