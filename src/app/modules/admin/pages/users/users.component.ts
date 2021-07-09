@@ -310,19 +310,6 @@ export class UsersComponent extends MatPaginatorIntl
     let receiveCommunications = user.receiveCommunications;
     let isEmployeeGrupoExito = user.isEmployeeGrupoExito;
     let verified = user.verified;
-    const dateCed1 = user.maxdateidentificationcard1;
-    const dateCed2 = user.maxdateidentificationcard2;
-    const dateCertBank = user.maxdatebankcertificate;
-    const dateRUT = user.maxdaterut;
-    const AntdateCed1 = user.mindateidentificationcard1;
-    const AntdateCed2 = user.mindateidentificationcard2;
-    const AntdateCertBank = user.mindatebankcertificate;
-    const AntdateRUT = user.mindaterut;
-    const extensionIdentificationCard1 = user.maxextensiondateidentificationcard1;
-    const extensionIdentificationCard2 = user.maxextensiondateidentificationcard2;
-    const extensionBankCertificate = user.maxextensiondatebankcertificate;
-    const extensionRUT = user.maxextensiondaterut;
-    const responseAccountBank = user.responseaccountbank;
 
     if (state === "Inactivo") {
       state = false;
@@ -344,11 +331,23 @@ export class UsersComponent extends MatPaginatorIntl
     }
 
     this.subscription = this.usersService.getUserInfoAditional(user.userId).subscribe((resp: ResponseService) => {
-      console.log(resp);
       if (resp.state === "Success") {
         const fileIdentificationCard1 = resp.objectResponse.identificationcard1;
         const fileIdentificationCard2 = resp.objectResponse.identificationcard2;
         const fileBankCertificate = resp.objectResponse.bankcertificate;
+        const dateCed1 = resp.objectResponse.maxdateidentificationcard1;
+        const dateCed2 = resp.objectResponse.maxdateidentificationcard2;
+        const dateCertBank = resp.objectResponse.maxdatebankcertificate;
+        const dateRUT = resp.objectResponse.maxdaterut;
+        const AntdateCed1 = resp.objectResponse.mindateidentificationcard1;
+        const AntdateCed2 = resp.objectResponse.mindateidentificationcard2;
+        const AntdateCertBank = resp.objectResponse.mindatebankcertificate;
+        const AntdateRUT = resp.objectResponse.mindaterut;
+        const extensionIdentificationCard1 = resp.objectResponse.maxextensiondateidentificationcard1;
+        const extensionIdentificationCard2 = resp.objectResponse.maxextensiondateidentificationcard2;
+        const extensionBankCertificate = resp.objectResponse.maxextensiondatebankcertificate;
+        const extensionRUT = resp.objectResponse.maxextensiondaterut;
+        const responseAccountBank = resp.objectResponse.responseaccountbank;
         // const fileRUT = resp.objectResponse.rut;
 
         const dialogRef = this.dialog.open(DialogUserComponent, {
@@ -670,7 +669,9 @@ export class UsersComponent extends MatPaginatorIntl
 
   public exportUsersFilter(){
     this.filterData[0].export = true;
-    this.subscription = this.file.searchUsers(this.filterData).subscribe();
+    this.subscription = this.file.searchUsers(this.filterData).subscribe(() => {
+      this.openSnackBar('Revisa tu correo', 'Cerrar');
+    });
   }
 
   public infoFilter(data) {
