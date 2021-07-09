@@ -128,9 +128,12 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
       this.chipsBussinessId.push(element.id);
     });
 
+    let validDateStart = (this.filterUsers.controls.dateRange.value.startDate === undefined || this.filterUsers.controls.dateRange.value.startDate === null || this.filterUsers.controls.dateRange.value.startDate === '');
+    let validDateEnd = (this.filterUsers.controls.dateRange.value.endDate === undefined || this.filterUsers.controls.dateRange.value.endDate === null || this.filterUsers.controls.dateRange.value.endDate === '');
+
     let data = {
-      dateStart: this.filterUsers.controls.dateRange.value.startDate !=='' ? this.filterUsers.controls.dateRange.value.startDate.format("YYYY-MM-DD") : '',
-      dateEnd:  this.filterUsers.controls.dateRange.value.endDate !=='' ? this.filterUsers.controls.dateRange.value.endDate.format("YYYY-MM-DD") : '',
+      dateStart: validDateStart ? '' : this.filterUsers.controls.dateRange.value.startDate.format("YYYY-MM-DD"),
+      dateEnd:  validDateEnd ? '' : this.filterUsers.controls.dateRange.value.endDate.format("YYYY-MM-DD"),
       state: this.filterUsers.controls.status.value,
       comunications: this.filterUsers.controls.comunication.value,
       commissions: this.filterUsers.controls.commissions.value,
