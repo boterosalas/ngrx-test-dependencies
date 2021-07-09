@@ -5,7 +5,59 @@
 ></app-banner>
 
 <div class="container m-t4 fade-in">
-  <p class="title-blue">REPORTE DE USUARIOS</p>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+  <div>
+    <button
+    mat-raised-button
+    color="orange"
+    (click)="openModalFilters()"
+    id="download-users"
+  >
+    Ordenar y filtrar
+    <i class="tio-filter style-icon"></i>
+  </button>
+
+    <button
+    mat-raised-button
+    color="orange"
+    (click)="exportUsersFilter()"
+    id="download-users"
+    class="ml-2"
+  >
+    Exportar
+    <i class="tio-download_from_cloud style-icon"></i>
+  </button>
+  </div>
+
+  <div class="container-search mt-2">
+    <app-search-users
+      class="searchUser"
+      (search)="searchUser($event)"
+    ></app-search-users>
+  </div>
+
+</div>
+
+  
+
+  <div id="users-table">
+    <app-table-users
+      (dataUser)="userData($event)"
+      (dataEmail)="userEmail($event)"
+      [dataSource]="dataSource"
+      (sortDataUser)="sort($event)"
+    ></app-table-users>
+    <mat-paginator
+      [length]="totalItems"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[50]"
+      [pageIndex]="pageIndex"
+      (page)="pagination($event)"
+    ></mat-paginator>
+  </div>
+
+  <p class="title-blue mt-4 border-bottom-gray pb-3">DESCARGAR REPORTE DE USUARIOS</p>
   <div class="mt-4 container-forms" fxLayout="row">
     <div class="ml-4 downloadUsers user-transactions">
       <form [formGroup]="dateForm">
@@ -52,31 +104,19 @@
         </button>
       </form>
     </div>
-
-    <div class="container-search">
-      <app-search-users
-        class="searchUser"
-        (search)="searchUser($event)"
-      ></app-search-users>
-    </div>
-  </div>
-
-  <div id="users-table">
-    <app-table-users
-      (dataUser)="userData($event)"
-      (dataEmail)="userEmail($event)"
-      [dataSource]="dataSource"
-      (sortDataUser)="sort($event)"
-    ></app-table-users>
-    <mat-paginator
-      [length]="totalItems"
-      [pageSize]="pageSize"
-      [pageSizeOptions]="[50]"
-      [pageIndex]="pageIndex"
-      (page)="pagination($event)"
-    ></mat-paginator>
   </div>
 </div>
+
+
+
+<!-- template filter-->
+
+
+<ng-template #templateDialogFilter>
+  <app-dialog-filter-users (objectSend)="infoFilter($event)" (close)="onNoClick()"></app-dialog-filter-users>
+</ng-template>
+
+
 
 <!-- template Email-->
 

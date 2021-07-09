@@ -10,7 +10,8 @@ import {
   MatPaginator,
   MatDialog,
   MatSnackBar,
-  MatPaginatorIntl
+  MatPaginatorIntl,
+  MatDialogRef
 } from "@angular/material";
 import { DialogUserComponent } from "../../components/dialog-user/dialog-user.component";
 import { Subscription } from "rxjs/internal/Subscription";
@@ -18,12 +19,13 @@ import { UserService } from "src/app/services/user.service";
 import { ResponseService } from "src/app/interfaces/response";
 import { LinksService } from "src/app/services/links.service";
 import * as moment from "moment";
-import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { DialogEditComponent } from "src/app/modules/clicker/components/dialog-edit/dialog-edit.component";
 moment.locale("es");
 import Swal from "sweetalert2";
-import { observable, Observable } from "rxjs";
+import { Observable } from "rxjs";
 import { UtilsService } from "src/app/services/utils.service";
+import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
 
 @Component({
   selector: "app-users",
@@ -49,7 +51,7 @@ export class UsersComponent extends MatPaginatorIntl
   aux: number;
   maxDate = moment(new Date());
   orderOrigin: string;
-  orderBy: string;
+  orderby: string;
   from: any;
   to: any;
   dateParams: any;
@@ -59,10 +61,30 @@ export class UsersComponent extends MatPaginatorIntl
   disableButon: boolean;
   @ViewChild("templateDialogEmail", { static: false })
   templateEmail: TemplateRef<any>;
+  @ViewChild("templateDialogFilter", { static: false })
+  templateFilter: TemplateRef<any>;
+  dialogRef: MatDialogRef<any>;
   emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
   userId: string;
   userMail: string;
   dateNoVisible: boolean;
+  export = false;
+  filterData = [{
+      searchtext: "",
+      from: null,
+      to: null,
+      datestart: null,
+      dateend:null,
+      state: null,
+      comunications: null,
+      commissions: null,
+      business: [],
+      stateverification: null,
+      documents: null,
+      export: false,
+      orderby:  "",
+      ordination: ""
+  }]
   selecteds = [{
     titulo: "General",
     value: 1
@@ -160,33 +182,34 @@ export class UsersComponent extends MatPaginatorIntl
   checkRole() {
     this.utils.checkPermision();
   }
+
   /**
    * Metodo para buscar usuarios
    * @param term
    * @param from
    * @param to
    * @param orderOrigin
-   * @param orderBy
+   * @param orderby
    */
 
-  public searchUser(
-    term,
-    from = 1,
-    to = this.pageTo,
-    orderOrigin = "",
-    orderBy = ""
-  ) {
+  public searchUser(term, from = 1, to = this.pageTo, orderOrigin = "",   orderby = ""){
+
+    this.filterData[0].searchtext = term;
+    this.filterData[0].to = to;
+    this.filterData[0].from = from;
+
     if (term !== this.paginate) {
       this.paginate = term;
       this.pageIndex = 0;
     }
-    const params = { term, from, to, orderOrigin, orderBy };
-    this.subscription = this.file.searchUsers(params).subscribe((user: any) => {
-      this.users = user.users;
-      this.totalItems = user.total;
-      this.dataSource = new MatTableDataSource<any>(this.users);
-    });
+
+      this.subscription = this.file.searchUsers(this.filterData).subscribe((user: any) => {
+          this.users = user.users;
+          this.totalItems = user.total;
+          this.dataSource = new MatTableDataSource<any>(this.users);
+        });
   }
+
 
   public userEmail(user) {
     const userId = user.userId;
@@ -206,6 +229,23 @@ export class UsersComponent extends MatPaginatorIntl
     this.emailForm.controls.email.setValue(email);
     this.userMail = email;
     this.userId = userId;
+  }
+  
+  public openModalFilters() {
+    const template = this.templateFilter;
+    const title = "Filtrar Usuarios";
+
+    this.dialogRef = this.dialog.open(ModalGenericComponent, {
+      data: {
+        title,
+        template
+      }
+    });
+
+  }
+
+  public onNoClick(): void {
+    this.dialogRef.close();
   }
 
   public changeEmail() {
@@ -270,19 +310,6 @@ export class UsersComponent extends MatPaginatorIntl
     let receiveCommunications = user.receiveCommunications;
     let isEmployeeGrupoExito = user.isEmployeeGrupoExito;
     let verified = user.verified;
-    const dateCed1 = user.maxdateidentificationcard1;
-    const dateCed2 = user.maxdateidentificationcard2;
-    const dateCertBank = user.maxdatebankcertificate;
-    const dateRUT = user.maxdaterut;
-    const AntdateCed1 = user.mindateidentificationcard1;
-    const AntdateCed2 = user.mindateidentificationcard2;
-    const AntdateCertBank = user.mindatebankcertificate;
-    const AntdateRUT = user.mindaterut;
-    const extensionIdentificationCard1 = user.maxextensiondateidentificationcard1;
-    const extensionIdentificationCard2 = user.maxextensiondateidentificationcard2;
-    const extensionBankCertificate = user.maxextensiondatebankcertificate;
-    const extensionRUT = user.maxextensiondaterut;
-    const responseAccountBank = user.responseaccountbank;
 
     if (state === "Inactivo") {
       state = false;
@@ -308,6 +335,19 @@ export class UsersComponent extends MatPaginatorIntl
         const fileIdentificationCard1 = resp.objectResponse.identificationcard1;
         const fileIdentificationCard2 = resp.objectResponse.identificationcard2;
         const fileBankCertificate = resp.objectResponse.bankcertificate;
+        const dateCed1 = resp.objectResponse.maxdateidentificationcard1;
+        const dateCed2 = resp.objectResponse.maxdateidentificationcard2;
+        const dateCertBank = resp.objectResponse.maxdatebankcertificate;
+        const dateRUT = resp.objectResponse.maxdaterut;
+        const AntdateCed1 = resp.objectResponse.mindateidentificationcard1;
+        const AntdateCed2 = resp.objectResponse.mindateidentificationcard2;
+        const AntdateCertBank = resp.objectResponse.mindatebankcertificate;
+        const AntdateRUT = resp.objectResponse.mindaterut;
+        const extensionIdentificationCard1 = resp.objectResponse.maxextensiondateidentificationcard1;
+        const extensionIdentificationCard2 = resp.objectResponse.maxextensiondateidentificationcard2;
+        const extensionBankCertificate = resp.objectResponse.maxextensiondatebankcertificate;
+        const extensionRUT = resp.objectResponse.maxextensiondaterut;
+        const responseAccountBank = resp.objectResponse.responseaccountbank;
         // const fileRUT = resp.objectResponse.rut;
 
         const dialogRef = this.dialog.open(DialogUserComponent, {
@@ -481,6 +521,7 @@ export class UsersComponent extends MatPaginatorIntl
         }
       });
   }
+
   public getReportChangeExcel() {
     this.dateParamsReport = {
       start: this.dateForm.controls.dateRange.value.startDate.format(),
@@ -559,8 +600,8 @@ export class UsersComponent extends MatPaginatorIntl
   }
   public getComments() {
     this.dateParamsReport = {
-      start: this.dateForm.controls.dateRange.value.startDate.format("YYYY-MM-DD"),
-      end: this.dateForm.controls.dateRange.value.endDate.format("YYYY-MM-DD")
+      start: this.dateForm.controls.dateRange.value.startDate.format('Yyyy-MM-dd HH:mm:ss'),
+      end: this.dateForm.controls.dateRange.value.endDate.format('Yyyy-MM-dd HH:mm:ss')
     };
     this.subscription = this.usersService.getReportCommets(this.dateParamsReport)
       .subscribe((respExcel: ResponseService) => {
@@ -625,4 +666,38 @@ export class UsersComponent extends MatPaginatorIntl
       this.getRefers();
     }
   }
+
+  public exportUsersFilter(){
+    this.filterData[0].export = true;
+    this.subscription = this.file.searchUsers(this.filterData).subscribe(() => {
+      this.openSnackBar('Revisa tu correo', 'Cerrar');
+    });
+  }
+
+  public infoFilter(data) {
+    this.filterData = [{
+      searchtext: this.paginate,
+      from: 1,
+      to: 50,
+      datestart: data.dateStart,
+      dateend:data.dateEnd,
+      state: data.state,
+      comunications: data.comunications,
+      commissions: data.commissions,
+      business: data.business,
+      stateverification: data.stateverification,
+      documents: data.documents,
+      export: this.export,
+      orderby:  "IDENTIFICATION",
+      ordination: "ASC"
+    }]
+
+    this.subscription = this.file.searchUsers(this.filterData).subscribe((user: any) => {
+      this.users = user.users;
+      this.totalItems = user.total;
+      this.dataSource = new MatTableDataSource<any>(this.users);
+    });
+
+  }
+
 }
