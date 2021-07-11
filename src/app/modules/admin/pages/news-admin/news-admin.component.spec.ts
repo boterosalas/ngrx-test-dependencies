@@ -170,7 +170,7 @@ describe('NewsAdminComponent', () => {
     expect(component).toBeTruthy();
     let start = moment();
     let end = moment("12-01-2020");
-    component.dateForm.controls.dateRange.setValue({ startDate: start, endDate: end });
+    // component.dateForm.controls.dateRange.setValue({ startDate: start, endDate: end });
     expect(mockLinksService.getkpiNovelties).toHaveBeenCalled();
     component.getKPI();
     component.getReportExcel();

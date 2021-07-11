@@ -686,7 +686,7 @@ export class LinksService {
       );
   }
 
-  public getkpiNovelties(date: any) {
+  public getkpiNovelties(data: any) {
     const token = localStorage.getItem("ACCESS_TOKEN");
     const authorization = token;
 
@@ -697,10 +697,9 @@ export class LinksService {
         "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
       }),
     };
-    let datesGet0 = date.start.split("T")
-    let datesGet1 = date.end.split("T")
+
     return this.http
-      .get(`${this.urlReports}${this.apikpiNovelties}?start=${datesGet0[0]}&end=${datesGet1[0]}`, httpOptions)
+      .post(`${this.urlReports}${this.apikpiNovelties}`, data, httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(

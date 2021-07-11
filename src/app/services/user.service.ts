@@ -544,10 +544,10 @@ export class UserService {
       );
     //`${this.url}${this.apiDeleteUser}`
   }
-  public getAllNews(term?: any) {
+  public getAllNews(data: any) {
     return this.http
-      .get(
-        `${this.urlReports}${this.apiGetNews}?searchText=${term.term}&from=${term.from}&to=${term.to}&orderBy=${term.orderOrigin}&ordination=${term.orderBy}`,
+      .post(
+        `${this.urlReports}${this.apiGetNews}`, data ,
         this.httpOptions
       )
       .pipe(
@@ -558,7 +558,7 @@ export class UserService {
   }
   public getExportNewsExcel(data: any) {
     return this.http
-      .get(`${this.urlReports}${this.apiGetExcelNews}?&start=${data.start}&end=${data.end}`, this.httpOptions)
+      .post(`${this.urlReports}${this.apiGetExcelNews}`, data ,this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(

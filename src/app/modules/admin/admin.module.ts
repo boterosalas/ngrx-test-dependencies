@@ -62,6 +62,7 @@ import { DialogNavigationItemComponent } from './components/dialog-navigation-it
 import { NavigationMenuComponent } from './components/navigation-menu/navigation-menu.component';
 import { NavigationMenuClickerComponent } from './components/navigation-menu-clicker/navigation-menu-clicker.component';
 import { DialogFilterUsersComponent } from './pages/users/dialog-filter-users/dialog-filter-users.component';
+import { DialogFilterNoveltiesComponent } from './pages/news-admin/dialog-filter-novelties/dialog-filter-novelties.component';
 
 const routes: Routes = [
   {
@@ -312,7 +313,8 @@ const routes: Routes = [
     DialogNavigationItemComponent,
     NavigationMenuComponent,
     NavigationMenuClickerComponent,
-    DialogFilterUsersComponent
+    DialogFilterUsersComponent,
+    DialogFilterNoveltiesComponent
   ],
   imports: [
     AngularEditorModule,
