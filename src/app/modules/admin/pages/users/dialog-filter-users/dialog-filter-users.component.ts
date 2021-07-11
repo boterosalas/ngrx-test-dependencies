@@ -20,15 +20,21 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
     this.filterForm();
     this.getAllBusiness();
 
-    let filterData = localStorage.getItem('formFilter');
+    console.log(this.filterUsers);
 
-    if(filterData !== null) {
+    let filterData = localStorage.getItem('formFilter');
+    let bussinesss = localStorage.getItem('bussiness');
+
+
+    if(filterData !== null && bussinesss!== null) {
       let obFr = JSON.parse(filterData);
+      let obbus = JSON.parse(bussinesss);
       this.filterUsers.controls.comunication.setValue(obFr.comunication);
       this.filterUsers.controls.status.setValue(obFr.status);
       this.filterUsers.controls.commissions.setValue(obFr.commissions);
       this.filterUsers.controls.accountBank.setValue(obFr.accountBank);
       this.filterUsers.controls.documents.setValue(obFr.documents);
+      this.chipsBussiness = obbus;
     }
 
 
@@ -115,9 +121,11 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
   public onChangeSelected(val) {
     if(this.chipsBussiness.length === 0) {
       this.chipsBussiness.push(val);
+      localStorage.setItem('bussiness', JSON.stringify(val));
     } else {
       if (this.chipsBussiness.includes(val) === false) this.chipsBussiness.push(val);
     }
+    localStorage.setItem('bussiness', JSON.stringify(this.chipsBussiness));
   }
 
   remove(bussiness: any): void {
@@ -132,6 +140,8 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
     this.filterUsers.reset();
     this.chipsBussiness = [];
     this.chipsBussinessId = [];
+    localStorage.removeItem('bussiness');
+    localStorage.removeItem('formFilter');
   }
 
   public aplyFilters(){
