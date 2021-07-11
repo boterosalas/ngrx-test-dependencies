@@ -20,8 +20,6 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
     this.filterForm();
     this.getAllBusiness();
 
-    console.log(this.filterUsers);
-
     let filterData = localStorage.getItem('formFilter');
     let bussinesss = localStorage.getItem('bussiness');
 
