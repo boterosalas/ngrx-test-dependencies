@@ -19,6 +19,7 @@ import { UserService } from 'src/app/services/user.service';
 import { LinksService } from 'src/app/services/links.service';
 import { of } from 'rxjs';
 moment.locale('es');
+
 describe('NewsAdminComponent', () => {
   let component: NewsAdminComponent;
   let fixture: ComponentFixture<NewsAdminComponent>;
@@ -170,7 +171,7 @@ describe('NewsAdminComponent', () => {
     expect(component).toBeTruthy();
     let start = moment();
     let end = moment("12-01-2020");
-    component.dateForm.controls.dateRange.setValue({ startDate: start, endDate: end });
+    // component.dateForm.controls.dateRange.setValue({ startDate: start, endDate: end });
     expect(mockLinksService.getkpiNovelties).toHaveBeenCalled();
     component.getKPI();
     component.getReportExcel();

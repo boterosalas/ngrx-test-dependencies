@@ -1,0 +1,101 @@
+<form [formGroup]="filterNovelties" class="filterNovelties">
+    
+    <div fxLayout="row" fxLayoutAlign="start center" class="pt-1 pb-1">
+
+        <span fxFlex="20%">
+            <label>Fecha</label>
+        </span>
+
+        <span class="separate">
+            <i class="tio-date_range icon-date"></i>
+            <input
+            formControlName="dateRange"
+            [locale]="locale"
+            placeholder="Seleccione fechas"
+            type="text"
+            [maxDate]="maxDate"
+            ngxDaterangepickerMd
+            class="form-control border-input mat-elevation-z1 p-2 border-radius"
+            />
+            <p class="validity-time">*Histórico vigente desde Marzo 10 del 2021</p>
+        </span>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center" class="pt-1 pb-1">
+
+        <span fxFlex="20%">
+            <label>Estados</label>
+        </span>
+
+        <mat-radio-group
+        aria-labelledby="status"
+        class="status separate"
+        formControlName="status"
+        >
+            <mat-radio-button class="radio-button" *ngFor="let item of status" [value]="item.value">
+                {{item.name}}
+            </mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center" class="pt-1 pb-1">
+
+        <span fxFlex="20%">
+            <label>Negocios</label> 
+         </span>
+        
+         <span fxLayout="column" class="w-100">
+            <mat-form-field class="selected-bussiness separate">
+                <mat-placeholder class="selected-bussiness"
+                  >NEGOCIO</mat-placeholder
+                >
+                <mat-select
+                  id="bussiness"
+                  formControlName="bussiness"
+                  class="selected-bussiness"
+                >
+                  <mat-option
+                    (click)="onChangeSelected(item)"
+                    *ngFor="let item of bussiness"
+                    value="{{ item.id }}"
+                  >
+                    <span>{{ item.description }}</span>
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field class="bussiness-chip-list" appearance="fill" *ngIf="chipsBussiness.length">
+                <mat-chip-list #chipList aria-label="bussiness selection" formControlName="chipBussiness">
+                  <mat-chip  [value]="bussiness.id" *ngFor="let bussiness of chipsBussiness" [selectable]="selectable"
+                           [removable]="removable" (removed)="remove(bussiness)">
+                            {{bussiness.description}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+              </mat-form-field>
+            </span>
+    </div>
+
+
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="end center">
+        <button
+        mat-button
+        (click)="clearFilters()"
+        id="clear-Novelties"
+        class="purple"
+        >
+        Limpiar Filtros
+        </button>
+
+        <button
+        mat-raised-button
+        color="orange"
+        (click)="aplyFilters(); closeModal()"
+        id="filter-Novelties"
+        class="ml-2"
+        >
+        Aplicar
+        </button>
+    </div>
+  </form>

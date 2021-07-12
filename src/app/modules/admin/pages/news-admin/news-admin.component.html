@@ -7,7 +7,7 @@
   <p class="title-blue">REPORTE DE NOVEDADES</p>
   <div class="mt-4 container-forms" fxLayout="row">
     <div class="ml-4 downloadUsers user-transactions">
-      <form class="form-relative" [formGroup]="dateForm">
+      <!-- <form class="form-relative" [formGroup]="dateForm">
         <div fxLayout="column">
           <label class="label-up-text" for="picker"> RANGO DE FECHAS</label>
           <div fxLayout="row">
@@ -33,20 +33,43 @@
               Exportar <i class="tio-download_from_cloud style-icon"></i>
             </button>
           </div>
-          <p class="validity-time">*Histórico vigente desde Marzo 10 del 2021</p>
+          
         </div>
-      </form>
+      </form> -->
     </div>
-    <div class="container-search">
-      <div fxLayout="row" fxLayoutAlign="end end">
-        <div fxLayout="column" fxFlex="100">
-          <app-search-users
-            class="searchUser"
-            (search)="searchUser($event)"
-          ></app-search-users>
-        </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="w-100">
+      <div>
+        <button
+        mat-raised-button
+        color="orange"
+        (click)="openModalFilters()"
+        id="download-users"
+      >
+        Ordenar y filtrar
+        <i class="tio-filter style-icon"></i>
+      </button>
+    
+        <button
+        mat-raised-button
+        color="orange"
+        (click)="getReportExcel()"
+        id="download-users"
+        class="ml-2"
+      >
+        Exportar
+        <i class="tio-download_from_cloud style-icon"></i>
+      </button>
       </div>
+    
+      <div class="container-search mt-2">
+        <app-search-users
+          class="searchUser"
+          (search)="searchUser($event)"
+        ></app-search-users>
+      </div>
+    
     </div>
+    
   </div>
   <div class="card-container mt-4 mb-4">
     <div 
@@ -225,3 +248,10 @@
     </div>
   </div>
 </div>
+
+
+<!-- template filter-->
+
+<ng-template #templateDialogFilter>
+  <app-dialog-filter-novelties (objectSend)="infoFilter($event)" (close)="onNoClick()"></app-dialog-filter-novelties>
+</ng-template>
