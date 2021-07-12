@@ -686,7 +686,7 @@ export class UsersComponent extends MatPaginatorIntl
       comunications: data.comunications,
       commissions: data.commissions,
       business: data.business,
-      stateverification: data.stateverification,
+      stateverification: data.stateVerification,
       documents: data.documents,
       export: this.export,
       orderby:  "IDENTIFICATION",

@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
 import * as moment from "moment";
 import { Subscription } from "rxjs";
 import { ContentService } from "src/app/services/content.service";
@@ -111,7 +110,7 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
 
   public filterForm() {
     this.filterUsers = this.fb.group({
-      dateRange: [""],
+      dateRange: [null],
       status: [null],
       comunication: [null],
       commissions: [null],
@@ -159,8 +158,8 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
     let validDateEnd = (this.filterUsers.controls.dateRange.value.endDate === undefined || this.filterUsers.controls.dateRange.value.endDate === null || this.filterUsers.controls.dateRange.value.endDate === '');
 
     let data = {
-      dateStart: validDateStart ? '' : this.filterUsers.controls.dateRange.value.startDate,
-      dateEnd:  validDateEnd ? '' : this.filterUsers.controls.dateRange.value.endDate,
+      dateStart: validDateStart ? null : this.filterUsers.controls.dateRange.value.startDate,
+      dateEnd:  validDateEnd ? null : this.filterUsers.controls.dateRange.value.endDate,
       state: this.filterUsers.controls.status.value,
       comunications: this.filterUsers.controls.comunication.value,
       commissions: this.filterUsers.controls.commissions.value,
