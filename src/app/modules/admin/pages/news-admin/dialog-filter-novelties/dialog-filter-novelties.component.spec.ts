@@ -3,6 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxDaterangepickerMd, LOCALE_CONFIG, LocaleService } from 'ngx-daterangepicker-material';
 import { config } from 'process';
+import { of } from 'rxjs';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { ContentService } from 'src/app/services/content.service';
 
@@ -90,6 +91,7 @@ describe('DialogFilterNoveltiesComponent', () => {
       ],
     })
     .compileComponents();
+    mockContentService.getAllBusiness.and.returnValue(of(allBusiness));
   }));
 
   beforeEach(() => {
