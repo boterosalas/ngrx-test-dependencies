@@ -675,6 +675,7 @@ export class UsersComponent extends MatPaginatorIntl
   }
 
   public infoFilter(data) {
+
     this.filterData = [{
       searchtext: this.paginate,
       from: 1,
@@ -691,6 +692,8 @@ export class UsersComponent extends MatPaginatorIntl
       orderby:  "IDENTIFICATION",
       ordination: "ASC"
     }]
+
+    this.pageIndex = 0;
 
     this.subscription = this.file.searchUsers(this.filterData).subscribe((user: any) => {
       this.users = user.users;

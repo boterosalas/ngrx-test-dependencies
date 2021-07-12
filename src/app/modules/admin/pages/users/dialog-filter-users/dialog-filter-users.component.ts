@@ -21,6 +21,8 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
     this.getAllBusiness();
 
     let filterData = localStorage.getItem('formFilter');
+    let bussinesss = localStorage.getItem('bussiness');
+
 
     if(filterData !== null) {
       let obFr = JSON.parse(filterData);
@@ -29,6 +31,14 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
       this.filterUsers.controls.commissions.setValue(obFr.commissions);
       this.filterUsers.controls.accountBank.setValue(obFr.accountBank);
       this.filterUsers.controls.documents.setValue(obFr.documents);
+      let startDate = obFr.dateRange.startDate === null ?  '' : obFr.dateRange.startDate;
+      let endDate = obFr.dateRange.endDate === null ? '' : obFr.dateRange.endDate ;
+      this.filterUsers.controls.dateRange.setValue({ startDate: startDate, endDate: endDate });
+    }
+
+    if(bussinesss!== null) {
+      let obbus = JSON.parse(bussinesss);
+      this.chipsBussiness = obbus;
     }
 
 
@@ -115,9 +125,11 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
   public onChangeSelected(val) {
     if(this.chipsBussiness.length === 0) {
       this.chipsBussiness.push(val);
+      localStorage.setItem('bussiness', JSON.stringify(val));
     } else {
       if (this.chipsBussiness.includes(val) === false) this.chipsBussiness.push(val);
     }
+    localStorage.setItem('bussiness', JSON.stringify(this.chipsBussiness));
   }
 
   remove(bussiness: any): void {
@@ -132,6 +144,8 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
     this.filterUsers.reset();
     this.chipsBussiness = [];
     this.chipsBussinessId = [];
+    localStorage.removeItem('bussiness');
+    localStorage.removeItem('formFilter');
   }
 
   public aplyFilters(){
@@ -145,8 +159,8 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
     let validDateEnd = (this.filterUsers.controls.dateRange.value.endDate === undefined || this.filterUsers.controls.dateRange.value.endDate === null || this.filterUsers.controls.dateRange.value.endDate === '');
 
     let data = {
-      dateStart: validDateStart ? '' : this.filterUsers.controls.dateRange.value.startDate.format("YYYY-MM-DD"),
-      dateEnd:  validDateEnd ? '' : this.filterUsers.controls.dateRange.value.endDate.format("YYYY-MM-DD"),
+      dateStart: validDateStart ? '' : this.filterUsers.controls.dateRange.value.startDate,
+      dateEnd:  validDateEnd ? '' : this.filterUsers.controls.dateRange.value.endDate,
       state: this.filterUsers.controls.status.value,
       comunications: this.filterUsers.controls.comunication.value,
       commissions: this.filterUsers.controls.commissions.value,
