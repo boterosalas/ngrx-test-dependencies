@@ -670,7 +670,7 @@ export class UsersComponent extends MatPaginatorIntl
   public exportUsersFilter(){
     this.filterData[0].export = true;
     this.subscription = this.file.searchUsers(this.filterData).subscribe(() => {
-      this.openSnackBar('Revisa tu correo', 'Cerrar');
+      this.openSnackBar('Al terminar de procesar el archivo se enviará un correo', 'Cerrar');
     });
   }
 

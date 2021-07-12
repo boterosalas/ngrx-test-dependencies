@@ -24,10 +24,16 @@ export class DialogFilterNoveltiesComponent implements OnInit {
     let bussinesss = localStorage.getItem('bussiness');
 
 
-    if(filterData !== null && bussinesss!== null) {
+    if(filterData !== null) {
       let obFr = JSON.parse(filterData);
-      let obbus = JSON.parse(bussinesss);
       this.filterNovelties.controls.status.setValue(obFr.status);
+      let startDate = obFr.dateRange.startDate === null ?  '' : obFr.dateRange.startDate;
+      let endDate = obFr.dateRange.endDate === null ? '' : obFr.dateRange.endDate ;
+      this.filterNovelties.controls.dateRange.setValue({ startDate: startDate, endDate: endDate });
+    }
+
+    if(bussinesss!== null) {
+      let obbus = JSON.parse(bussinesss);
       this.chipsBussiness = obbus;
     }
 
@@ -65,10 +71,10 @@ export class DialogFilterNoveltiesComponent implements OnInit {
   @Output() close = new EventEmitter();
 
   status = [
-    { name: "Pendiente", value: "PENDIENTE" },
-    { name: "En revisión", value: "REVISION" },
-    { name: "Solucionado", value: "SOLUCIONADO" },
-    { name: "Rechazado", value: "RECHAZADO" },
+    { name: "Pendiente", value: "Pendiente" },
+    { name: "En revisión", value: "En revisión" },
+    { name: "Solucionado", value: "Solucionado" },
+    { name: "Rechazado", value: "Rechazado" },
   ];
 
 
@@ -128,8 +134,8 @@ export class DialogFilterNoveltiesComponent implements OnInit {
     let validDateEnd = (this.filterNovelties.controls.dateRange.value.endDate === undefined || this.filterNovelties.controls.dateRange.value.endDate === null || this.filterNovelties.controls.dateRange.value.endDate === '');
 
     let data = {
-      dateStart: validDateStart ? '' : this.filterNovelties.controls.dateRange.value.startDate.format("YYYY-MM-DD"),
-      dateEnd:  validDateEnd ? '' : this.filterNovelties.controls.dateRange.value.endDate.format("YYYY-MM-DD"),
+      dateStart: validDateStart ? '' : this.filterNovelties.controls.dateRange.value.startDate,
+      dateEnd:  validDateEnd ? '' : this.filterNovelties.controls.dateRange.value.endDate,
       state: this.filterNovelties.controls.status.value,
       business: this.chipsBussinessId,
     }

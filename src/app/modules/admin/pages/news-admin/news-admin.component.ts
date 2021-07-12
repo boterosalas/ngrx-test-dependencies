@@ -38,20 +38,20 @@ export class NewsAdminComponent implements OnInit {
   @ViewChild("templateDialogFilter", { static: false })
   templateFilter: TemplateRef<any>;
   export = false;
-  filterData = [
+  filterData = 
     {
-      searchtext: "",
+      searchText: "",
       from: null,
       to: null,
-      datestart: null,
-      dateend: null,
+      start: null,
+      end: null,
       state: null,
       business: [],
       export: false,
-      orderby: "",
+      orderBy: "",
       ordination: "",
-    },
-  ];
+    }
+  
 
   items = [
     {
@@ -184,9 +184,9 @@ export class NewsAdminComponent implements OnInit {
     orderBy = ""
   ) {
 
-    this.filterData[0].searchtext = term;
-    this.filterData[0].to = to;
-    this.filterData[0].from = from;
+    this.filterData.searchText = term;
+    this.filterData.to = to;
+    this.filterData.from = from;
 
     if (term !== this.paginate) {
       this.paginate = term;
@@ -218,6 +218,7 @@ export class NewsAdminComponent implements OnInit {
   }
 
   public getReportExcel() {
+    this.filterData.export = true;
     this.usersService
       .getExportNewsExcel(this.filterData)
       .subscribe((responseExcel: ResponseService) => {
@@ -275,20 +276,22 @@ export class NewsAdminComponent implements OnInit {
   }
 
   public infoFilter(data) {
-    this.filterData = [
+    this.filterData = 
       {
-        searchtext: this.paginate,
+        searchText: this.paginate,
         from: 1,
         to: 50,
-        datestart: data.dateStart,
-        dateend: data.dateEnd,
+        start: data.dateStart,
+        end: data.dateEnd,
         state: data.state,
         business: data.business,
         export: this.export,
-        orderby: "IDENTIFICATION",
+        orderBy: "IDENTIFICATION",
         ordination: "ASC",
-      },
-    ];
+      }
+    
+
+    this.pageIndex = 0;
 
     this.subscription = this.usersService
       .getAllNews(this.filterData)
@@ -297,13 +300,6 @@ export class NewsAdminComponent implements OnInit {
         this.totalItems = user.total;
         this.dataSource = new MatTableDataSource<any>(this.newsUser);
       });
-  }
-
-  public exportUsersFilter(){
-    this.filterData[0].export = true;
-    this.subscription = this.usersService.getAllNews(this.filterData).subscribe(() => {
-      this.openSnackBar('Revisa tu correo', 'Cerrar');
-    });
   }
 
 }
