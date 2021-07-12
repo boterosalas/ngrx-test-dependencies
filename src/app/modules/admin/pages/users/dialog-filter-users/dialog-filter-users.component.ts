@@ -24,14 +24,20 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
     let bussinesss = localStorage.getItem('bussiness');
 
 
-    if(filterData !== null && bussinesss!== null) {
+    if(filterData !== null) {
       let obFr = JSON.parse(filterData);
-      let obbus = JSON.parse(bussinesss);
       this.filterUsers.controls.comunication.setValue(obFr.comunication);
       this.filterUsers.controls.status.setValue(obFr.status);
       this.filterUsers.controls.commissions.setValue(obFr.commissions);
       this.filterUsers.controls.accountBank.setValue(obFr.accountBank);
       this.filterUsers.controls.documents.setValue(obFr.documents);
+      let startDate = obFr.dateRange.startDate === null ?  '' : obFr.dateRange.startDate;
+      let endDate = obFr.dateRange.endDate === null ? '' : obFr.dateRange.endDate ;
+      this.filterUsers.controls.dateRange.setValue({ startDate: startDate, endDate: endDate });
+    }
+
+    if(bussinesss!== null) {
+      let obbus = JSON.parse(bussinesss);
       this.chipsBussiness = obbus;
     }
 
@@ -153,8 +159,8 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
     let validDateEnd = (this.filterUsers.controls.dateRange.value.endDate === undefined || this.filterUsers.controls.dateRange.value.endDate === null || this.filterUsers.controls.dateRange.value.endDate === '');
 
     let data = {
-      dateStart: validDateStart ? '' : this.filterUsers.controls.dateRange.value.startDate.format("YYYY-MM-DD"),
-      dateEnd:  validDateEnd ? '' : this.filterUsers.controls.dateRange.value.endDate.format("YYYY-MM-DD"),
+      dateStart: validDateStart ? '' : this.filterUsers.controls.dateRange.value.startDate,
+      dateEnd:  validDateEnd ? '' : this.filterUsers.controls.dateRange.value.endDate,
       state: this.filterUsers.controls.status.value,
       comunications: this.filterUsers.controls.comunication.value,
       commissions: this.filterUsers.controls.commissions.value,
