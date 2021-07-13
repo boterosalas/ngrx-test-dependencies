@@ -7,35 +7,6 @@
   <p class="title-blue">REPORTE DE NOVEDADES</p>
   <div class="mt-4 container-forms" fxLayout="row">
     <div class="ml-4 downloadUsers user-transactions">
-      <!-- <form class="form-relative" [formGroup]="dateForm">
-        <div fxLayout="column">
-          <label class="label-up-text" for="picker"> RANGO DE FECHAS</label>
-          <div fxLayout="row">
-            <i class="tio-date_range icon-date"></i>
-
-            <input
-              formControlName="dateRange"
-              [locale]="locale"
-              placeholder="Seleccione fechas"
-              type="text"
-              [maxDate]="maxDate"
-              ngxDaterangepickerMd
-              class="form-control border-input mat-elevation-z1 p-2 border-radius"
-              (change)="getKPI()"
-            />
-            <button
-              mat-raised-button
-              color="orange"
-              (click)="getReportExcel()"
-              id="download-users"
-              class="ml-2"
-            >
-              Exportar <i class="tio-download_from_cloud style-icon"></i>
-            </button>
-          </div>
-          
-        </div>
-      </form> -->
     </div>
     <div fxLayout="row" fxLayoutAlign="space-between center" class="w-100">
       <div>
@@ -79,7 +50,7 @@
       <i class="{{item.icon}}"></i>
       <div>
         <h3>{{item.title}}</h3>
-        <p>{{item.number}}{{item.code === 'effectiveness' ? '%' : ''}}</p>
+        <p>{{item.number | number : '1.0'}}{{item.code === 'effectiveness' ? '%' : ''}}</p>
       </div>
     </div>
   </div>

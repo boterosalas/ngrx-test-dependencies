@@ -214,6 +214,7 @@ export class NewsAdminComponent implements OnInit {
     });
     this.dialog.afterAllClosed.subscribe(() => {
       this.searchUser(this.paginate, this.from, this.to);
+      this.getKPI();
     });
   }
 
@@ -300,6 +301,10 @@ export class NewsAdminComponent implements OnInit {
         this.totalItems = user.total;
         this.dataSource = new MatTableDataSource<any>(this.newsUser);
       });
+
+      this.getKPI();
+
+      
   }
 
 }
