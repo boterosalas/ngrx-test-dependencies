@@ -336,10 +336,8 @@ export class CarrouselAdminComponent implements OnInit {
       this.nameFileCert2 = datos2[datos2.length - 1]
       this.checkButton();
     }
-
     this.fileImgCat = "";
     this.fileImgCat2 = "";
-
     this.dataAddImagen.controls.nameContent.setValue(element.description)
     this.dataAddImagen.controls.link.setValue(element.link);
 
@@ -352,7 +350,7 @@ export class CarrouselAdminComponent implements OnInit {
     this.dataAddImagen.controls.comision.setValue(element.infoaditional)
     this.selected = element.business;
     this.idCarousel = element.id;
-    let dialogRef1 = this.dialog.open(ModalGenericComponent, {
+    this.dialog.open(ModalGenericComponent, {
       width: "450px",
       data: {
         title,
@@ -391,7 +389,7 @@ export class CarrouselAdminComponent implements OnInit {
     this.undefinedDate = false
     
     this.idPopup = elementP.id;
-    let dialogRef3 = this.dialog.open(ModalGenericComponent, {
+    this.dialog.open(ModalGenericComponent, {
       width: "450px",
       data: {
         title: titleP,
@@ -442,10 +440,8 @@ export class CarrouselAdminComponent implements OnInit {
       this.nameFileCert2 = datos2[datos2.length - 1]
       this.checkButton();
     }
-
     this.fileImgCat = "";
     this.fileImgCat2 = "";
-    //this.nameFileCert2 = ""
     this.dataAddImagenOfertas.reset();
     this.dataAddImagenOfertas.controls.nameContent.setValue(element.description)
     this.dataAddImagenOfertas.controls.link.setValue(element.link)
@@ -458,7 +454,7 @@ export class CarrouselAdminComponent implements OnInit {
     
     this.formateDateHour(element)
 
-    let dialogRef1 = this.dialog.open(ModalGenericComponent, {
+    this.dialog.open(ModalGenericComponent, {
       width: "450px",
       data: {
         title,
@@ -480,7 +476,7 @@ export class CarrouselAdminComponent implements OnInit {
     this.nameFileCert = "";
     this.showErrorCert = false;
     this.activebutton = false;
-    let dialogRef1 = this.dialog.open(ModalGenericComponent, {
+    this.dialog.open(ModalGenericComponent, {
       width: "450px",
       data: {
         title,
@@ -503,7 +499,7 @@ export class CarrouselAdminComponent implements OnInit {
     this.nameFileCert2 = "";
     this.nameFileCert = "";
     this.activeButtonOfer = false;
-    let dialogRef1 = this.dialog.open(ModalGenericComponent, {
+    this.dialog.open(ModalGenericComponent, {
       width: "450px",
       data: {
         title,
@@ -528,7 +524,7 @@ export class CarrouselAdminComponent implements OnInit {
     this.activeButtonOfer = false;
     this.nameFileCert = "";
     this.nameFileCert2 = "";
-    let dialogRef1 = this.dialog.open(ModalGenericComponent, {
+    this.dialog.open(ModalGenericComponent, {
       width: "450px",
       data: {
         title: titlePopup,
