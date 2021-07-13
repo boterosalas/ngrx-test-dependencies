@@ -336,8 +336,10 @@ export class CarrouselAdminComponent implements OnInit {
       this.nameFileCert2 = datos2[datos2.length - 1]
       this.checkButton();
     }
+
     this.fileImgCat = "";
     this.fileImgCat2 = "";
+
     this.dataAddImagen.controls.nameContent.setValue(element.description)
     this.dataAddImagen.controls.link.setValue(element.link);
 
@@ -425,6 +427,7 @@ export class CarrouselAdminComponent implements OnInit {
 
     })
   }
+
   public editOfertasModal(element) {
     this.showUndefinedDate = true
     const title = "Editar Imagen";
@@ -569,6 +572,7 @@ export class CarrouselAdminComponent implements OnInit {
       }
     })
   }
+
   public saveImagenCarousel() {
     let visible = 0;
     if (this.visible) {
@@ -651,6 +655,7 @@ export class CarrouselAdminComponent implements OnInit {
       this.getOffers();
     })
   }
+
   public saveImagenOfertas() {
     let visible = 0;
     if (this.visible) {
@@ -696,7 +701,7 @@ export class CarrouselAdminComponent implements OnInit {
       datos = [{
         ...datos[0],
         imageWeb: this.fileImgCat,
-        imageMobile: this.fileImgCat
+        imageMobile: this.fileImgCat2
       }]
     } else {
       if (this.fileImgCat != "") {
@@ -704,7 +709,7 @@ export class CarrouselAdminComponent implements OnInit {
           ...datos[0],
           id: this.idOfertas,
           imageWeb: this.fileImgCat,
-          imageMobile: this.fileImgCat
+          imageMobile: this.fileImgCat2
         }]
       } else {
         datos = [{
@@ -757,7 +762,7 @@ export class CarrouselAdminComponent implements OnInit {
       datos = [{
         ...datos[0],
         imageWeb: this.fileImgCat,
-        imageMobile: this.fileImgCat
+        imageMobile: this.fileImgCat2
       }]
     } else {
       if (this.fileImgCat != "") {
@@ -765,12 +770,14 @@ export class CarrouselAdminComponent implements OnInit {
           ...datos[0],
           id: this.idPopup,
           imageWeb: this.fileImgCat,
-          imageMobile: this.fileImgCat
+          imageMobile: this.fileImgCat2
         }]
       } else {
         datos = [{
           ...datos[0],
-          id: this.idPopup
+          id: this.idPopup,
+          imageWeb: this.fileImgCat,
+          imageMobile: this.fileImgCat2
         }]
       }
     }
