@@ -761,21 +761,12 @@ export class CarrouselAdminComponent implements OnInit {
         imageMobile: this.fileImgCat2
       }]
     } else {
-      if (this.fileImgCat != "") {
         datos = [{
           ...datos[0],
           id: this.idPopup,
           imageWeb: this.fileImgCat,
           imageMobile: this.fileImgCat2
         }]
-      } else {
-        datos = [{
-          ...datos[0],
-          id: this.idPopup,
-          imageWeb: this.fileImgCat,
-          imageMobile: this.fileImgCat2
-        }]
-      }
     }
 
     this.content.saveOfertBusiness(datos).subscribe((resp) => {
