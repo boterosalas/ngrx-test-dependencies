@@ -134,6 +134,10 @@ describe("LoginformComponent", () => {
     expect(mockAuthService.login).toHaveBeenCalled();
   });
 
+  afterAll(() => {
+    TestBed.resetTestingModule();
+  });
+
   //it("Login invalid", () => {
 
   //});
@@ -171,6 +175,11 @@ describe("LoginformComponent", () => {
       component.login();
       expect(mockAuthService.login).toHaveBeenCalled();
     });
+
+    afterAll(() => {
+      TestBed.resetTestingModule();
+    });
+
   });
 
   // describe("Admin login", () => {

@@ -1,7 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { group } from 'console';
+import { Subscription } from 'rxjs';
+import { ContentService } from 'src/app/services/content.service';
+import { ResponseService } from 'src/app/interfaces/response';
+import Swal from 'sweetalert2';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-new-business-form',
@@ -20,14 +24,18 @@ import { group } from 'console';
     ])
   ]
 })
-export class NewBusinessFormComponent implements OnInit {
+export class NewBusinessFormComponent implements OnInit, OnDestroy {
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private content: ContentService,
+    private dialog: MatDialog,
+    public dialogRef: MatDialogRef<any>,
   ) { }
 
   @Input() categories: Array<any> = [];
   @Output() registerBusinessEmit = new EventEmitter;
+  private subscription: Subscription = new Subscription();
 
   registerForm: FormGroup;
   emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
@@ -41,6 +49,7 @@ export class NewBusinessFormComponent implements OnInit {
 
   ngOnInit() {
     this.registerBusiness();
+    this.getCategoriesBusiness();
   }
 
   public registerBusiness() {
@@ -120,7 +129,69 @@ export class NewBusinessFormComponent implements OnInit {
   }
 
   register(data) {
-    this.registerBusinessEmit.emit(data);
+    let formInfo = data.value;
+    let infoBusiness = {
+      description: formInfo.name,
+      website: formInfo.domain,
+      contactname: formInfo.contact,
+      contactphone: formInfo.phone,
+      contactemail: formInfo.email,
+      category: formInfo.category,
+      acceptTerms: formInfo.acceptTerms,
+      acceptHabeasData: true,
+    };
+    this.subscription = this.content
+      .registerBusinessClicker(infoBusiness)
+      .subscribe(
+        (resp: ResponseService) => {
+          if (resp.state === "Success") {
+            this.dialog.closeAll();
+            Swal.fire({
+              title: "Registro exitoso",
+              text: resp.userMessage,
+              type: "success",
+              confirmButtonText: "Aceptar",
+              confirmButtonClass: "accept-register-alert-success",
+            });
+          } else {
+            this.dialog.closeAll();
+            Swal.fire({
+              title: "Registro erróneo",
+              text: resp.userMessage,
+              type: "error",
+              confirmButtonText: "Aceptar",
+              confirmButtonClass: "accept-register-alert-error",
+            });
+          }
+        },
+        (error) => {
+          this.dialog.closeAll();
+          Swal.fire({
+            title: error.statusText,
+            text: error.error,
+            type: "error",
+            confirmButtonText: "Aceptar",
+            confirmButtonClass: "accept-register-alert-invalid",
+          });
+        }
+      );
   }
+
+  public getCategoriesBusiness() {
+    this.subscription = this.content
+      .getCategoriesBusinessHome()
+      .subscribe((categories) => (this.categories = categories));
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.subscription.unsubscribe();
+  }
+
 
 }

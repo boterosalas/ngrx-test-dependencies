@@ -601,7 +601,6 @@ describe("HomeComponent", () => {
 
   it("open register bussiness", () => {
     component.openRegisterBusiness();
-    expect(mockContentService.getCategoriesBusinessHome).toHaveBeenCalled();
   });
 
   it("send Referals Term", () => {

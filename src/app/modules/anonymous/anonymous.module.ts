@@ -464,6 +464,7 @@ const routes: Routes = [
     BussinessCardComponent,
     SliderStoriesComponent
   ],
+  entryComponents: [NewBusinessFormComponent],
   providers: [
     {
       provide: RECAPTCHA_SETTINGS,
