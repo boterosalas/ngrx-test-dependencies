@@ -156,6 +156,8 @@ export class NewsAdminComponent implements OnInit {
     });
     this.checkRole();
     this.getKPI();
+    localStorage.removeItem('bussinessNovelties');
+    localStorage.removeItem('formFilterNovelties');
   }
 
   checkRole() {
