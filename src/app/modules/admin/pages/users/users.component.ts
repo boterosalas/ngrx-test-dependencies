@@ -178,6 +178,8 @@ export class UsersComponent extends MatPaginatorIntl
       dateRange: [null, Validators.required]
     });
     this.checkRole();
+    localStorage.removeItem('bussiness');
+    localStorage.removeItem('formFilter');
   }
   checkRole() {
     this.utils.checkPermision();

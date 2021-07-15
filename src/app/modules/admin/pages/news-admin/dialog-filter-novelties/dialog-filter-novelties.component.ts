@@ -20,8 +20,8 @@ export class DialogFilterNoveltiesComponent implements OnInit {
     this.filterForm();
     this.getAllBusiness();
 
-    let filterData = localStorage.getItem('formFilter');
-    let bussinesss = localStorage.getItem('bussiness');
+    let filterData = localStorage.getItem('formFilterNovelties');
+    let bussinesss = localStorage.getItem('bussinessNovelties');
 
 
     if(filterData !== null) {
@@ -100,11 +100,11 @@ export class DialogFilterNoveltiesComponent implements OnInit {
   public onChangeSelected(val) {
     if(this.chipsBussiness.length === 0) {
       this.chipsBussiness.push(val);
-      localStorage.setItem('bussiness', JSON.stringify(val));
+      localStorage.setItem('bussinessNovelties', JSON.stringify(val));
     } else {
       if (this.chipsBussiness.includes(val) === false) this.chipsBussiness.push(val);
     }
-    localStorage.setItem('bussiness', JSON.stringify(this.chipsBussiness));
+    localStorage.setItem('bussinessNovelties', JSON.stringify(this.chipsBussiness));
   }
 
   remove(bussiness: any): void {
@@ -119,8 +119,8 @@ export class DialogFilterNoveltiesComponent implements OnInit {
     this.filterNovelties.reset();
     this.chipsBussiness = [];
     this.chipsBussinessId = [];
-    localStorage.removeItem('bussiness');
-    localStorage.removeItem('formFilter');
+    localStorage.removeItem('bussinessNovelties');
+    localStorage.removeItem('formFilterNovelties');
   }
 
   public aplyFilters(){
@@ -142,7 +142,7 @@ export class DialogFilterNoveltiesComponent implements OnInit {
 
     this.objectSend.emit(data);
 
-    localStorage.setItem('formFilter', JSON.stringify(this.filterNovelties.value));
+    localStorage.setItem('formFilterNovelties', JSON.stringify(this.filterNovelties.value));
 
   }
 

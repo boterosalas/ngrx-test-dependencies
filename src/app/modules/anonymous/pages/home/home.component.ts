@@ -185,7 +185,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getBussiness();
     this.getBussinessClicker();
     this.getOffers();
-    this.slider();
     this.getUserDataUser();
     this.getAmount();
     this.amount = localStorage.getItem('Amount');
@@ -208,7 +207,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   public getUserDataUser() {
     this.subscription = this.auth.getRole$.subscribe((role) => {
       this.role = role;
-      // let promoOpen = localStorage.getItem("ModalPromo");
       if (role === "CLICKER" || role === "ADMIN" || role === "SUPERADMIN") {
         this.subscription = this.user.getuserdata().subscribe((user) => {
           this.isEmployee = user.isEmployeeGrupoExito;
@@ -232,15 +230,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       }, 3000);
 
       if (role === "CLICKER") {
-        //setTimeout(() => {
-        //  if (this.newTerms === false) {
-        //    this.termsAndConditions();
-        //  }
-        //}, 3000);
-
-        // if (promoOpen !== "1") {
-        //   this.getModalPromo();
-        // }
 
         let token = localStorage.getItem("ACCESS_TOKEN");
         let tokenDecode = decode(token);
@@ -337,18 +326,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       .getBusiness()
       .pipe(distinctUntilChanged())
       .subscribe((bussiness) => {
-        //bussiness.sort(function (a, b) {
-        //  if (a.orderby > b.orderby) {
-        //    return 1;
-        //  }
-        //  if (a.orderby < b.orderby) {
-        //    return -1;
-        //  }
-        //  return 0;
-        //});
         this.bussiness = bussiness;
-
-        //console.log(this.bussiness)
       });
   }
 
@@ -365,24 +343,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  public slider() {
-    this.subscription = this.content
-      .getNews()
-      .pipe(distinctUntilChanged())
-      .subscribe((slide: any) => {
-        this.sliderWeb = slide.web;
-        this.sliderMobile = slide.mobile;
-      });
-  }
 
   public getOffers() {
-    //this.subscription = this.content
-    //.getOffers()
-    //.pipe(distinctUntilChanged())
-    //.subscribe((offer) => {
-    //this.offersMobile = offer.mobile;
-    //this.offersWeb = offer.web;
-    //});
+
     this.subscription = this.content.getOffersbyType({ id: "OFERTA", admin: false }).subscribe((resp) => {
 
       this.offersWeb = resp;
@@ -390,7 +353,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscription = this.content.getOffersbyType({ id: "CARROUSEL", admin: false }).subscribe((resp) => {
 
       this.sliderWeb = resp;
-      //this.sliderMobile = slide.mobile;
+
     })
   }
 
@@ -519,38 +482,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  // public getModalPromo() {
-  //   this.content.getPopupus().subscribe((resp) => {
-  //     if (resp.length > 0) {
-  //       localStorage.setItem("ModalPromo", "1");
-  //       this.modalHref = resp[0].link;
-  //       this.modalSrcWeb = resp[0].imageUrlWeb;
-  //       this.modalSrcMobile = resp[0].imageUrlMobile;
-  //       this.modalAltWeb = resp[0].imageAltMobile;
-  //       this.modalAltMobile = resp[0].imageAltMobile;
-
-  //       const template = this.templatePromo;
-  //       const title = "";
-  //       const id = "promo-modal";
-
-  //       this.dialog.open(ModalGenericComponent, {
-  //         panelClass: "promo-home",
-  //         data: {
-  //           title,
-  //           id,
-  //           template,
-  //         },
-  //       });
-
-  //       this.dialog.afterAllClosed.subscribe(() => {
-  //         localStorage.setItem("ModalPromo", "1");
-  //         this.showModalPayment();
-  //       });
-  //     } else {
-  //       this.showModalPayment();
-  //     }
-  //   });
-  // }
 
   public termsAndConditions() {
     const template = this.templateTerms;
