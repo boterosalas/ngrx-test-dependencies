@@ -1,7 +1,10 @@
-
-<img class="gtmHomeClicLogoClickam" src="assets/img/clickam-horizontal.svg" alt="clickam">
-
-<h3 class="border-bottom-orange-init f-22">{{ 'NEWBUSINESS.REGISTER' | translate }}</h3>
+<div id="business-modal" class="modal-width">
+  <div class="top-generic" fxLayoutAlign="space-between">
+    <h1 class="title-width  f-18 galano-bold" mat-dialog-title><h3 class="border-bottom-orange-init f-22">{{ 'NEWBUSINESS.REGISTER' | translate }}</h3></h1>
+    <a id="closeDialog" matRipple (click)="onNoClick()"><mat-icon class="close cursor-pointer">close</mat-icon></a>
+</div>
+  <div mat-dialog-content>
+    <img class="gtmHomeClicLogoClickam" src="assets/img/clickam-horizontal.svg" alt="clickam">
 <form
   class="register-container"
   [formGroup]="registerForm"
@@ -299,4 +302,8 @@
       </button>
     </div>
 </div>
+
+  </div>
+</div>
+
 

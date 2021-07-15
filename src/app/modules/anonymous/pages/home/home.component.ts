@@ -33,6 +33,7 @@ import { MessagingService } from "src/app/shared/messaging.service";
 import { Meta } from '@angular/platform-browser';
 import { MasterDataService } from "src/app/services/master-data.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { NewBusinessFormComponent } from "../../components/new-business-form/new-business-form.component";
 
 @Component({
   selector: "app-login",
@@ -383,73 +384,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public openRegisterBusiness() {
-    this.getCategoriesBusiness();
-    const template = this.templateBusiness;
-    const title = "";
-    const id = "business-modal";
-
-    this.dialog.open(ModalGenericComponent, {
-      data: {
-        title,
-        id,
-        template,
-      },
-    });
-  }
-
-  public getCategoriesBusiness() {
-    this.subscription = this.content
-      .getCategoriesBusinessHome()
-      .subscribe((categories) => (this.categories = categories));
-  }
-
-  public sendDataBusiness(data) {
-    let formInfo = data.value;
-    let infoBusiness = {
-      description: formInfo.name,
-      website: formInfo.domain,
-      contactname: formInfo.contact,
-      contactphone: formInfo.phone,
-      contactemail: formInfo.email,
-      category: formInfo.category,
-      acceptTerms: formInfo.acceptTerms,
-      acceptHabeasData: true,
-    };
-    this.subscription = this.content
-      .registerBusinessClicker(infoBusiness)
-      .subscribe(
-        (resp: ResponseService) => {
-          if (resp.state === "Success") {
-            this.dialog.closeAll();
-            Swal.fire({
-              title: "Registro exitoso",
-              text: resp.userMessage,
-              type: "success",
-              confirmButtonText: "Aceptar",
-              confirmButtonClass: "accept-register-alert-success",
-            });
-          } else {
-            this.dialog.closeAll();
-            Swal.fire({
-              title: "Registro erróneo",
-              text: resp.userMessage,
-              type: "error",
-              confirmButtonText: "Aceptar",
-              confirmButtonClass: "accept-register-alert-error",
-            });
-          }
-        },
-        (error) => {
-          this.dialog.closeAll();
-          Swal.fire({
-            title: error.statusText,
-            text: error.error,
-            type: "error",
-            confirmButtonText: "Aceptar",
-            confirmButtonClass: "accept-register-alert-invalid",
-          });
-        }
-      );
+    this.dialog.open(NewBusinessFormComponent)
   }
 
   private showModalPayment() {
