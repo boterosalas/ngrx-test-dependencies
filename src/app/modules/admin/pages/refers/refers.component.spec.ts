@@ -125,4 +125,8 @@ describe('RefersComponent', () => {
     expect(mockLinksService.saveAmountReferred).toHaveBeenCalled();
   });
 
+  afterAll(() => {
+    TestBed.resetTestingModule();
+  });
+
 });
