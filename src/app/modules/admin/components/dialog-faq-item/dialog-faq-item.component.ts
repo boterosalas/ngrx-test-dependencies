@@ -65,20 +65,20 @@ export class DialogFaqItemComponent implements OnInit {
   }
 
   loadItem() {
-
+    console.log(this.data);
     if (this.data.edit === 1) {
       this.faqItemForm = this.fb.group({
         id: [this.data.id],
-        idseccion: [this.data.idseccion || this.data.idgrupo],
+        idseccion: [this.data.idfaqsection || this.data.idgrupo],
         description: [this.data.description || this.data.name, Validators.required],
-        termsEditor: ['', Validators.required]
-        
+        termsEditor: [this.data.sectionvalue, Validators.required]
       });
     } else {
       this.faqItemForm = this.fb.group({
-        idseccion: [this.data.idseccion || this.data.idgrupo],
+        id: [this.data.id],
+        idseccion: [this.data.idfaqsection || this.data.idgrupo],
         description: [null, Validators.required],
-        termsEditor: ['', Validators.required]
+        termsEditor: [this.data.sectionvalue, Validators.required]
       });
     }
   }
@@ -88,22 +88,15 @@ export class DialogFaqItemComponent implements OnInit {
   }
 
   saveFaqItem() {
-    if (this.data.edit === 0) {
-      this.item = {
-        id: 0,
-        sectionTitle: this.faqItemForm.controls.description.value,
-        sectionValue: this.faqItemForm.controls.termsEditor.value,
-        idFaqSection: this.data.idseccion,
-      };
-    } else {
+   
       this.item = {
         id: this.data.id,
         sectionTitle: this.faqItemForm.controls.description.value,
         sectionValue: this.faqItemForm.controls.termsEditor.value,
-        idFaqSection: this.data.idseccion,
+        idFaqSection: this.data.idfaqsection,
         orderby: this.data.orderby,
       };
-    } 
+    
 
     this.content
     .saveFaqItem(this.item)

@@ -61,7 +61,6 @@ export class HelpCenterGroupComponent implements OnInit {
 
   getFaqs() {
     this.subscription = this.content.getFaqs().subscribe((resp) => {
-      console.log(resp);
       this.sectionsFaqs = resp;
     });
   }
@@ -123,12 +122,11 @@ export class HelpCenterGroupComponent implements OnInit {
       });
   }
 
-  
 
   addNavigationItem(section: any) {
     const dialogRef1 = this.dialog.open(DialogFaqItemComponent, {
       data: {
-        title: "Agregar pregunta frecuente",buttonName: "Agregar",edit: 0,idseccion: section.id,
+        title: "Agregar pregunta frecuente",buttonName: "Agregar",edit: 0, idfaqsection: section.id,
       },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
@@ -136,21 +134,23 @@ export class HelpCenterGroupComponent implements OnInit {
     });
   }
 
-  /*
+  
 
   editNavigationItem(item: any) {
     const data = {
-      title: "Editar acceso",buttonName: "Guardar",edit: 1,id: item.id,idseccion: item.idseccion,
-      link: item.link,description: item.description,orderby: item.orderby,date: item.date,
+      title: "Editar pregunta frecuente", buttonName: "Guardar",edit: 1, id: item.id, idfaqsection: item.idfaqsection,
+      description: item.sectiontitle, sectionvalue: item.sectionvalue, orderby: item.orderby,
     };
 
-    const dialogRef1 = this.dialog.open(DialogNavigationItemComponent, {
-      width: "450px", data: data,
+    const dialogRef1 = this.dialog.open(DialogFaqItemComponent, {
+       data: data,
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
-      this.getSections();
+      this.getFaqs();
     });
   }
+
+  
 
   deleteNavigationItem(item: any) {
     this.currentLink = item;
@@ -166,20 +166,18 @@ export class HelpCenterGroupComponent implements OnInit {
     });
 
     this.subscription = this.dialogRef.beforeClosed().subscribe(() => {
-      this.getSections();
+      this.getFaqs();
     });
   }
 
   deleteNavigationItemService() {
     let datos = [this.currentLink.id];
-    this.content.deleteFooterLink(datos).subscribe((resp: ResponseService) => {
+    this.content.deleteFaqItems(datos).subscribe((resp: ResponseService) => {
       if (resp.state === "Success") {
         this.dialog.closeAll();
-      } else {
-        console.log("Upss Hubo un problema vuelve a intentarlo");
       }
     });
   }
-  */
+  
 
 }
