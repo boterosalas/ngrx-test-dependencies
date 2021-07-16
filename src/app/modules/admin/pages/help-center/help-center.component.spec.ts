@@ -1,4 +1,6 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { AdminModule } from '../../admin.module';
 
 import { HelpCenterComponent } from './help-center.component';
 
@@ -8,7 +10,11 @@ describe('HelpCenterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HelpCenterComponent ]
+      declarations: [],
+      imports: [
+        AdminModule,
+        HttpClientTestingModule
+      ]
     })
     .compileComponents();
   }));
