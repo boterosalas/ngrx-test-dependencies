@@ -23,7 +23,7 @@ export class FaqGroupComponent implements OnInit {
   constructor(private content: ContentService) {}
 
   ngOnInit() {
-      this.isValidDeleteGroup = this.section.items.length === 0;
+      // this.isValidDeleteGroup = this.section.items.length === 0;
   }
 
   editNavigationGroup() {

@@ -220,6 +220,57 @@ export class ContentService {
     );
   }
 
+  public saveFaqgroups(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveFaqSeccion}`, datos , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
+
+  public saveFaqItem(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveFaqItem}`, datos , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
+
+  public deleteFaqgroups(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiDeleteFaqSeccions}`, datos , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
+
   public getNews() {
     return this.http.get(`${this.url + this.apiNews}`, this.httpOptions).pipe(
       map((user: ResponseService) => {

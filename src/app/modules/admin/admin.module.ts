@@ -67,6 +67,8 @@ import { HelpCenterComponent } from './pages/help-center/help-center.component';
 import { HelpCenterGroupComponent } from './components/help-center-group/help-center-group.component';
 import { FaqGroupComponent } from './components/faq-group/faq-group.component';
 import { FaqItemComponent } from './components/faq-item/faq-item.component';
+import { DialogFaqGroupComponent } from './components/dialog-faq-group/dialog-faq-group.component';
+import { DialogFaqItemComponent } from './components/dialog-faq-item/dialog-faq-item.component';
 
 const routes: Routes = [
   {
@@ -331,7 +333,9 @@ const routes: Routes = [
     HelpCenterComponent,
     HelpCenterGroupComponent,
     FaqGroupComponent,
-    FaqItemComponent
+    FaqItemComponent,
+    DialogFaqGroupComponent,
+    DialogFaqItemComponent
   ],
   imports: [
     AngularEditorModule,
@@ -376,7 +380,7 @@ const routes: Routes = [
     })
   ],
   exports: [SideMenuComponent],
-  entryComponents: [DialogUserComponent, DialogCategoryComponent, DialogNewsComponent, DialogVideoPlayerComponent, DialogNavigationGroupComponent, DialogNavigationItemComponent],
+  entryComponents: [DialogUserComponent, DialogCategoryComponent, DialogNewsComponent, DialogVideoPlayerComponent, DialogNavigationGroupComponent, DialogNavigationItemComponent, DialogFaqGroupComponent, DialogFaqItemComponent],
   providers: [{ provide: MatPaginatorIntl, useClass: UsersComponent }]
 })
 export class AdminModule { }

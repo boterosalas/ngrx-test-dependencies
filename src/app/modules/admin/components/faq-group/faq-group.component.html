@@ -14,15 +14,9 @@
       </span>
       <div class="faq-group__actions">
         <i
-          *ngIf="isValidAddItems"
           class="tio-add style-icon cursor-pointer"
           (click)="addNavigationItem()"
         ></i>
-        <i
-          *ngIf="!isValidAddItems"
-          class="tio-add style-icon faq__addIcon"
-        ></i>
-  
         <i
           class="tio-edit style-icon cursor-pointer"
           (click)="editNavigationGroup()"
