@@ -15,17 +15,17 @@
       <div class="faq-group__actions">
         <i
           class="tio-add style-icon cursor-pointer"
-          (click)="addNavigationItem()"
+          (click)="addFaqItem()"
         ></i>
         <i
           class="tio-edit style-icon cursor-pointer"
-          (click)="editNavigationGroup()"
+          (click)="editFaqGroup()"
         ></i>
   
         <img
           *ngIf="section.items === null"
           class="cursor-pointer"
-          (click)="openDeleteNavigationSection()"
+          (click)="openDeleteFaqSection()"
           src="/assets/img/dashboard/icon-remove-comision.svg"
           alt="icono borrar"
         />
@@ -39,8 +39,8 @@
       <app-faq-item
         *ngFor="let faq of section.items"
         [faq]="faq"
-        (editItem)="editNavigationItem($event)"
-        (deleteItem)="deleteNavigationItem($event)"
+        (editItem)="editFaqItem($event)"
+        (deleteItem)="deleteFaqItem($event)"
         (previewItems)="previewItem($event)"
         (changeStateItem)="changeStateOfItem($event)"
   

@@ -21,11 +21,11 @@ export class FaqItemComponent implements OnInit {
     this.previewItems.emit(this.faq);
   }
 
-  editNavigationItem() {
+  editFaqItem() {
     this.editItem.emit(this.faq);
   }
 
-  openDeleteNavigationItem() {
+  openDeleteFaqItem() {
     this.deleteItem.emit(this.faq);
   }
 

@@ -27,23 +27,23 @@ export class FaqGroupComponent implements OnInit {
       // this.isValidDeleteGroup = this.section.items.length === 0;
   }
 
-  editNavigationGroup() {
+  editFaqGroup() {
     this.editGroup.emit(this.section);
   }
 
-  openDeleteNavigationSection() {
+  openDeleteFaqSection() {
     this.deleteGroup.emit(this.section);
   }
 
-  addNavigationItem() {
+  addFaqItem() {
     this.addItem.emit(this.section);
   }
 
-  editNavigationItem(faq: any) {
+  editFaqItem(faq: any) {
     this.editItem.emit(faq);
   }
 
-  deleteNavigationItem(faq: any) {
+  deleteFaqItem(faq: any) {
     this.deleteItem.emit(faq);
   }
 
