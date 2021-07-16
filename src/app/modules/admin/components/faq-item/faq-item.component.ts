@@ -11,10 +11,15 @@ export class FaqItemComponent implements OnInit {
   @Output() editItem = new EventEmitter<any>();
   @Output() deleteItem = new EventEmitter<any>();
   @Output() changeStateItem = new EventEmitter<any>();
+  @Output() previewItems = new EventEmitter<any>();
 
   constructor() {}
 
   ngOnInit() {}
+
+  previewItem() {
+    this.previewItems.emit(this.faq);
+  }
 
   editNavigationItem() {
     this.editItem.emit(this.faq);

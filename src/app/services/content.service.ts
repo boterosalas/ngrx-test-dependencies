@@ -287,6 +287,40 @@ export class ContentService {
         })
       );
   }
+
+  public saveOrderFaq(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveOrderFaqSeccions}`, datos , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
+
+  public saveOrderFaqsItem(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveOrderFaqItems}`, datos , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
   
 
   public getNews() {

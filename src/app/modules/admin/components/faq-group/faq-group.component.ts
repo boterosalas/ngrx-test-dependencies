@@ -17,6 +17,7 @@ export class FaqGroupComponent implements OnInit {
   @Output() deleteItem = new EventEmitter<any>();
   @Output() saveOrderItems = new EventEmitter<object>();
   @Output() changeState = new EventEmitter<object>();
+  @Output() previewItems = new EventEmitter<object>();
 
   isValidDeleteGroup: boolean = true;
 
@@ -44,6 +45,10 @@ export class FaqGroupComponent implements OnInit {
 
   deleteNavigationItem(faq: any) {
     this.deleteItem.emit(faq);
+  }
+
+  previewItem(faq: any) {
+    this.previewItems.emit(faq);
   }
 
   dropItems(event: CdkDragDrop<any>) {

@@ -20,6 +20,7 @@
           (editItem)="editNavigationItem($event)"
           (deleteItem)="deleteNavigationItem($event)"
           (saveOrderItems)="saveOrderItems($event)"
+          (previewItems)="previewFaq($event)"
           cdkDrag
         >
         </app-faq-group>
@@ -104,3 +105,6 @@
     </div>
   </ng-template>
   
+  <ng-template #templatePreviewFaq>
+    <div [innerHtml]="infoItemFaq"></div>
+  </ng-template>

@@ -65,7 +65,6 @@ export class DialogFaqItemComponent implements OnInit {
   }
 
   loadItem() {
-    console.log(this.data);
     if (this.data.edit === 1) {
       this.faqItemForm = this.fb.group({
         id: [this.data.id],

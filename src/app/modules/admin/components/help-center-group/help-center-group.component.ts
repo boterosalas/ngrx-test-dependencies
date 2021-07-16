@@ -7,8 +7,6 @@ import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-g
 import { ContentService } from 'src/app/services/content.service';
 import { DialogFaqGroupComponent } from '../dialog-faq-group/dialog-faq-group.component';
 import { DialogFaqItemComponent } from '../dialog-faq-item/dialog-faq-item.component';
-import { DialogNavigationGroupComponent } from '../dialog-navigation-group/dialog-navigation-group.component';
-import { DialogNavigationItemComponent } from '../dialog-navigation-item/dialog-navigation-item.component';
 
 @Component({
   selector: 'app-help-center-group',
@@ -23,10 +21,13 @@ export class HelpCenterGroupComponent implements OnInit {
   templateDeleteNavigationGroup: TemplateRef<any>;
   @ViewChild("templateDeleteNavigationItem", { static: false })
   templateDeleteNavigationItem: TemplateRef<any>;
+  @ViewChild("templatePreviewFaq", { static: false })
+  templatePreviewFaq: TemplateRef<any>;
 
   dialogRef: MatDialogRef<any>;
   currentSection: any;
   currentLink: any = {};
+  infoItemFaq:any;
 
   constructor(private content: ContentService, private dialog: MatDialog) {}
 
@@ -35,7 +36,7 @@ export class HelpCenterGroupComponent implements OnInit {
   }
 
   saveOrderItems(data: any) {
-    this.content.saveOrderFooterLinks(data).subscribe(() => {});
+    this.content.saveOrderFaqsItem(data).subscribe(() => {});
   }
 
   dropSection(event: CdkDragDrop<any>) {
@@ -56,7 +57,7 @@ export class HelpCenterGroupComponent implements OnInit {
   }
 
   private saveOrderSections(data: any) {
-    this.content.saveOrderFooterSections(data).subscribe(() => {});
+    this.content.saveOrderFaq(data).subscribe(() => {});
   }
 
   getFaqs() {
@@ -103,6 +104,20 @@ export class HelpCenterGroupComponent implements OnInit {
     this.subscription = this.dialogRef.beforeClosed().subscribe(() => {
       this.getFaqs();
     });
+  }
+
+  previewFaq(faq: any) {
+    const title = faq.sectiontitle;
+    this.infoItemFaq = faq.sectionvalue;
+    const template = this.templatePreviewFaq;
+    this.dialogRef = this.dialog.open(ModalGenericComponent, {
+      width: '600px',
+      data: {
+        title,
+        template,
+      },
+    });
+
   }
 
   cancelDelete() {
