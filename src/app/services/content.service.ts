@@ -90,6 +90,15 @@ export class ContentService {
   apiDeleteFooterLink = "footer/deletefooterlinks";
   apiSaveOrderFooterSections = "footer/saveorderfooterseccions";
   apiSaveOrderFooterLinks = "footer/saveorderfooterlinks";
+  apiDeleteFaqItems= "faq/deletefaqitems";
+  apiSaveFaqSeccion = "faq/savefaqseccion";
+  apiDeleteFaqSeccions = "faq/deletefaqseccions";
+  apiSaveFaqItem = "faq/savefaqitem";
+  apiSaveOrderFaqItems = "faq/saveorderfaqitems";
+  apiSaveOrderFaqSeccions= "faq/saveorderfaqseccions";
+  apiGetFaq= "faq/getfaq";
+
+
 
   sendSearch = {};
 
@@ -197,6 +206,14 @@ export class ContentService {
 
   public getFooter(rol = 'CLICKER') {
     return this.http.get(`${this.url + this.apiFooter}?rol=${rol}`, this.httpOptions).pipe(
+      map((user: ResponseService) => {
+        return user.objectResponse;
+      })
+    );
+  }
+
+  public getFaqs() {
+    return this.http.get(`${this.url + this.apiGetFaq}`, this.httpOptions).pipe(
       map((user: ResponseService) => {
         return user.objectResponse;
       })

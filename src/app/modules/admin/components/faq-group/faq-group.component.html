@@ -1,0 +1,56 @@
+<div class="faq-group">
+    <div class="faq-group__header">
+      <span class="faq-group__drag">
+        <mat-icon matSuffix class="mr-1 blue cursor-pointer" cdkDragHandle
+          >drag_indicator</mat-icon
+        >
+      </span>
+  
+      <span class="faq-group__description"> 
+        <span fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+          <i *ngIf="section.icon" ngClass="{{section.icon}} icmen"></i>
+          {{ section.sectiontitle }} 
+        </span>
+      </span>
+      <div class="faq-group__actions">
+        <i
+          *ngIf="isValidAddItems"
+          class="tio-add style-icon cursor-pointer"
+          (click)="addNavigationItem()"
+        ></i>
+        <i
+          *ngIf="!isValidAddItems"
+          class="tio-add style-icon faq__addIcon"
+        ></i>
+  
+        <i
+          class="tio-edit style-icon cursor-pointer"
+          (click)="editNavigationGroup()"
+        ></i>
+  
+        <img
+          *ngIf="isValidDeleteGroup"
+          class="cursor-pointer"
+          (click)="openDeleteNavigationSection()"
+          src="/assets/img/dashboard/icon-remove-comision.svg"
+          alt="icono borrar"
+        />
+      </div>
+    </div>
+    <div
+      class="faq__content"
+      cdkDropList
+      (cdkDropListDropped)="dropItems($event)"
+    >
+      <app-faq-item
+        *ngFor="let faq of section.items"
+        [faq]="faq"
+        (editItem)="editNavigationItem($event)"
+        (deleteItem)="deleteNavigationItem($event)"
+        (changeStateItem)="changeStateOfItem($event)"
+  
+        cdkDrag
+      ></app-faq-item>
+    </div>
+  </div>
+  
