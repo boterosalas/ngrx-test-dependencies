@@ -23,7 +23,7 @@
         ></i>
   
         <img
-          *ngIf="isValidDeleteGroup"
+          *ngIf="section.items === null"
           class="cursor-pointer"
           (click)="openDeleteNavigationSection()"
           src="/assets/img/dashboard/icon-remove-comision.svg"
