@@ -14,11 +14,11 @@
         <app-faq-group
           *ngFor="let section of sectionsFaqs"
           [section]="section"
-          (editGroup)="editNavigationGroup($event)"
-          (deleteGroup)="deleteNavigationGroup($event)"
-          (addItem)="addNavigationItem($event)"
-          (editItem)="editNavigationItem($event)"
-          (deleteItem)="deleteNavigationItem($event)"
+          (editGroup)="editFaqGroup($event)"
+          (deleteGroup)="deleteFaqGroup($event)"
+          (addItem)="addFaqItem($event)"
+          (editItem)="editFaqItem($event)"
+          (deleteItem)="deleteFaqItem($event)"
           (saveOrderItems)="saveOrderItems($event)"
           (previewItems)="previewFaq($event)"
           cdkDrag
@@ -45,7 +45,7 @@
     </div>
   </div>
   
-  <ng-template #templateDeleteNavigationGroup>
+  <ng-template #templateDeleteFaqGroup>
     <div ngClass="delete-container">
       <h3 ngClass="title_delete">Eliminar grupo</h3>
       <p ngClass="text-container">
@@ -68,7 +68,7 @@
           <button
             mat-button
             class="red"
-            (click)="deleteNavigationSectionService()"
+            (click)="deleteFaqSectionService()"
           >
             <span fxLayoutAlign="center space-between"> Eliminar grupo </span>
           </button>
@@ -77,7 +77,7 @@
     </div>
   </ng-template>
   
-  <ng-template #templateDeleteNavigationItem>
+  <ng-template #templateDeleteFaqItem>
     <div ngClass="delete-container">
       <h3 ngClass="title_delete">Eliminar pregunta frecuente</h3>
       <p ngClass="text-container">
@@ -97,7 +97,7 @@
           </button>
         </div>
         <div>
-          <button mat-button class="red" (click)="deleteNavigationItemService()">
+          <button mat-button class="red" (click)="deleteFaqItemService()">
             <span fxLayoutAlign="center space-between"> Eliminar pregunta </span>
           </button>
         </div>

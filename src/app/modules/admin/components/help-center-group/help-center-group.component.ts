@@ -17,10 +17,10 @@ export class HelpCenterGroupComponent implements OnInit {
 
   sectionsFaqs: any = [];
   private subscription: Subscription = new Subscription();
-  @ViewChild("templateDeleteNavigationGroup", { static: false })
-  templateDeleteNavigationGroup: TemplateRef<any>;
-  @ViewChild("templateDeleteNavigationItem", { static: false })
-  templateDeleteNavigationItem: TemplateRef<any>;
+  @ViewChild("templateDeleteFaqGroup", { static: false })
+  templateDeleteFaqGroup: TemplateRef<any>;
+  @ViewChild("templateDeleteFaqItem", { static: false })
+  templateDeleteFaqItem: TemplateRef<any>;
   @ViewChild("templatePreviewFaq", { static: false })
   templatePreviewFaq: TemplateRef<any>;
 
@@ -79,7 +79,7 @@ export class HelpCenterGroupComponent implements OnInit {
 
   
 
-  editNavigationGroup(section: any) {
+  editFaqGroup(section: any) {
     const dialogRef1 = this.dialog.open(DialogFaqGroupComponent, {
       data: {
         title: "Editar grupo", buttonName: "Guardar", edit: 1, id: section.id, sectiontitle: section.sectiontitle, orderby: section.orderby, },
@@ -89,11 +89,11 @@ export class HelpCenterGroupComponent implements OnInit {
     });
   }
 
-  deleteNavigationGroup(section: any) {
+  deleteFaqGroup(section: any) {
     this.currentSection = section;
 
     const title = "";
-    const template = this.templateDeleteNavigationGroup;
+    const template = this.templateDeleteFaqGroup;
     this.dialogRef = this.dialog.open(ModalGenericComponent, {
       data: {
         title,
@@ -126,7 +126,7 @@ export class HelpCenterGroupComponent implements OnInit {
 
   
 
-  deleteNavigationSectionService() {
+  deleteFaqSectionService() {
     let datos = [this.currentSection.id];
     this.content
       .deleteFaqgroups(datos)
@@ -138,7 +138,7 @@ export class HelpCenterGroupComponent implements OnInit {
   }
 
 
-  addNavigationItem(section: any) {
+  addFaqItem(section: any) {
     const dialogRef1 = this.dialog.open(DialogFaqItemComponent, {
       data: {
         title: "Agregar pregunta frecuente",buttonName: "Agregar",edit: 0, idfaqsection: section.id,
@@ -151,7 +151,7 @@ export class HelpCenterGroupComponent implements OnInit {
 
   
 
-  editNavigationItem(item: any) {
+  editFaqItem(item: any) {
     const data = {
       title: "Editar pregunta frecuente", buttonName: "Guardar",edit: 1, id: item.id, idfaqsection: item.idfaqsection,
       description: item.sectiontitle, sectionvalue: item.sectionvalue, orderby: item.orderby,
@@ -167,11 +167,11 @@ export class HelpCenterGroupComponent implements OnInit {
 
   
 
-  deleteNavigationItem(item: any) {
+  deleteFaqItem(item: any) {
     this.currentLink = item;
 
     const title = "";
-    const template = this.templateDeleteNavigationItem;
+    const template = this.templateDeleteFaqItem;
     this.dialogRef = this.dialog.open(ModalGenericComponent, {
       width: "450px",
       data: {
@@ -185,7 +185,7 @@ export class HelpCenterGroupComponent implements OnInit {
     });
   }
 
-  deleteNavigationItemService() {
+  deleteFaqItemService() {
     let datos = [this.currentLink.id];
     this.content.deleteFaqItems(datos).subscribe((resp: ResponseService) => {
       if (resp.state === "Success") {
