@@ -1,4 +1,9 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateModule } from '@ngx-translate/core';
+import { AdminModule } from '../../admin.module';
 
 import { FaqGroupComponent } from './faq-group.component';
 
@@ -8,7 +13,17 @@ describe('FaqGroupComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FaqGroupComponent ]
+      declarations: [],
+      imports: [
+        AdminModule,
+        HttpClientTestingModule,
+        TranslateModule.forRoot({}),
+        BrowserAnimationsModule
+      ],
+      providers:[],
+      schemas: [
+        NO_ERRORS_SCHEMA
+      ]
     })
     .compileComponents();
   }));
@@ -16,6 +31,19 @@ describe('FaqGroupComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FaqGroupComponent);
     component = fixture.componentInstance;
+    component.section = {
+        items: [
+          {
+              "id": 5,
+              "idfaqsection": 2,
+              "sectiontitle": "¿Cómo me puedo registrar?",
+              "sectionvalue": "Para registrarte, debes descargar la aplicación Clickam en tu celular o ir a la página www.clickam.com.co, clickear en “Iniciar sesión”, y seleccionar registrarse, completa el formulario, recuerda que tu contraseña debe contener por lo menos 6 caracteres, con mínimo una letra mayúscula, letra minúscula y un número; por ejemplo: Clickam1.Te llegará un correo para activarte, debes tener en cuenta que este correo puede estar en “No deseados” o “spam” por ser un nuevo remitente.Cuando te registras y activas tu cuenta, te conviertes en Clicker.",
+              "orderby": 0,
+              "date": "2021-07-16T08:27:27.293"
+          }
+      ]
+    }
+
     fixture.detectChanges();
   });
 

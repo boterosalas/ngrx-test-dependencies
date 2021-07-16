@@ -1,6 +1,5 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ContentService } from 'src/app/services/content.service';
 
 @Component({
   selector: 'app-faq-group',
@@ -21,10 +20,10 @@ export class FaqGroupComponent implements OnInit {
 
   isValidDeleteGroup: boolean = true;
 
-  constructor(private content: ContentService) {}
+  constructor() {}
 
   ngOnInit() {
-      // this.isValidDeleteGroup = this.section.items.length === 0;
+      // 
   }
 
   editFaqGroup() {
