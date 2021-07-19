@@ -35,9 +35,7 @@ export class HelpCenterGroupComponent implements OnInit {
     this.getFaqs();
   }
 
-  saveOrderItems(data: any) {
-    this.content.saveOrderFaqsItem(data).subscribe(() => {});
-  }
+
 
   dropSection(event: CdkDragDrop<any>) {
     moveItemInArray(
@@ -60,10 +58,8 @@ export class HelpCenterGroupComponent implements OnInit {
     this.content.saveOrderFaq(data).subscribe(() => {});
   }
 
-  getFaqs() {
-    this.subscription = this.content.getFaqs().subscribe((resp) => {
-      this.sectionsFaqs = resp;
-    });
+  saveOrderItems(data: any) {
+    this.content.saveOrderFaqsItem(data).subscribe(() => {});
   }
 
   addSection() {
@@ -77,17 +73,13 @@ export class HelpCenterGroupComponent implements OnInit {
     });
   }
 
-  
-
-  editFaqGroup(section: any) {
-    const dialogRef1 = this.dialog.open(DialogFaqGroupComponent, {
-      data: {
-        title: "Editar grupo", buttonName: "Guardar", edit: 1, id: section.id, sectiontitle: section.sectiontitle, orderby: section.orderby, },
-    });
-    this.subscription = dialogRef1.beforeClosed().subscribe(() => {
-      this.getFaqs();
+  getFaqs() {
+    this.subscription = this.content.getFaqs().subscribe((resp) => {
+      this.sectionsFaqs = resp;
     });
   }
+
+  
 
   deleteFaqGroup(section: any) {
     this.currentSection = section;
@@ -106,6 +98,16 @@ export class HelpCenterGroupComponent implements OnInit {
     });
   }
 
+  editFaqGroup(section: any) {
+    const dialogRef1 = this.dialog.open(DialogFaqGroupComponent, {
+      data: {
+        title: "Editar grupo", buttonName: "Guardar", edit: 1, id: section.id, sectiontitle: section.sectiontitle, orderby: section.orderby, },
+    });
+    this.subscription = dialogRef1.beforeClosed().subscribe(() => {
+      this.getFaqs();
+    });
+  }
+
   previewFaq(faq: any) {
     const title = faq.sectiontitle;
     this.infoItemFaq = faq.sectionvalue;
@@ -119,11 +121,6 @@ export class HelpCenterGroupComponent implements OnInit {
     });
 
   }
-
-  cancelDelete() {
-    this.dialog.closeAll();
-  }
-
   
 
   deleteFaqSectionService() {
@@ -137,16 +134,8 @@ export class HelpCenterGroupComponent implements OnInit {
       });
   }
 
-
-  addFaqItem(section: any) {
-    const dialogRef1 = this.dialog.open(DialogFaqItemComponent, {
-      data: {
-        title: "Agregar pregunta frecuente",buttonName: "Agregar",edit: 0, idfaqsection: section.id,
-      },
-    });
-    this.subscription = dialogRef1.beforeClosed().subscribe(() => {
-      this.getFaqs();
-    });
+  cancelDelete() {
+    this.dialog.closeAll();
   }
 
   
@@ -165,7 +154,17 @@ export class HelpCenterGroupComponent implements OnInit {
     });
   }
 
-  
+  addFaqItem(section: any) {
+    const dialogRef1 = this.dialog.open(DialogFaqItemComponent, {
+      data: {
+        title: "Agregar pregunta frecuente",buttonName: "Agregar",edit: 0, idfaqsection: section.id,
+      },
+    });
+    this.subscription = dialogRef1.beforeClosed().subscribe(() => {
+      this.getFaqs();
+    });
+  }
+
 
   deleteFaqItem(item: any) {
     this.currentLink = item;
