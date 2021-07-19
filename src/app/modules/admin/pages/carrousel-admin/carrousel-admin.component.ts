@@ -736,8 +736,8 @@ export class CarrouselAdminComponent implements OnInit {
     let hour = this.hourDate ? this.militaryHrFormat(this.hourDate) : "";
     let hourEnd = this.hourDateFinish ? this.militaryHrFormat(this.hourDateFinish) : "";
 
-    const datestart = !this.visible && datePublication ? `${datePublication} ${hour}:00` : ""
-    const dateend = (!this.visible && !this.undefinedDate) || (!this.showUndefinedDate && dateFinishPublication) ? `${dateFinishPublication} ${hourEnd}:00` : ""
+    const datestart = !this.visible && datePublication ? `${datePublication} ${hour}` : ""
+    const dateend = (!this.visible && !this.undefinedDate) && (!this.showUndefinedDate && dateFinishPublication) ? `${dateFinishPublication} ${hourEnd}` : ""
 
     let datos: any = [{
       link: this.dataAddImagenPopup.controls.link.value || "",
