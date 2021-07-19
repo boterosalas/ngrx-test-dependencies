@@ -90,6 +90,15 @@ export class ContentService {
   apiDeleteFooterLink = "footer/deletefooterlinks";
   apiSaveOrderFooterSections = "footer/saveorderfooterseccions";
   apiSaveOrderFooterLinks = "footer/saveorderfooterlinks";
+  apiDeleteFaqItems= "faq/deletefaqitems";
+  apiSaveFaqSeccion = "faq/savefaqseccion";
+  apiDeleteFaqSeccions = "faq/deletefaqseccions";
+  apiSaveFaqItem = "faq/savefaqitem";
+  apiSaveOrderFaqItems = "faq/saveorderfaqitems";
+  apiSaveOrderFaqSeccions= "faq/saveorderfaqseccions";
+  apiGetFaq= "faq/getfaq";
+
+
 
   sendSearch = {};
 
@@ -202,6 +211,117 @@ export class ContentService {
       })
     );
   }
+
+  public getFaqs() {
+    return this.http.get(`${this.url + this.apiGetFaq}`, this.httpOptions).pipe(
+      map((user: ResponseService) => {
+        return user.objectResponse;
+      })
+    );
+  }
+
+  public saveFaqgroups(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveFaqSeccion}`, datos , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
+
+  public saveFaqItem(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveFaqItem}`, datos , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
+
+  public deleteFaqgroups(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiDeleteFaqSeccions}`, datos , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
+
+  public deleteFaqItems(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiDeleteFaqItems}`, datos , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
+
+  public saveOrderFaq(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveOrderFaqSeccions}`, datos , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
+
+  public saveOrderFaqsItem(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveOrderFaqItems}`, datos , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((bussiness: ResponseService) => {
+          return bussiness;
+        })
+      );
+  }
+  
 
   public getNews() {
     return this.http.get(`${this.url + this.apiNews}`, this.httpOptions).pipe(

@@ -1,0 +1,29 @@
+<div class="faq-item">
+    <span class="faq-item__drag">
+      <mat-icon matSuffix class="mr-1 blue cursor-pointer" cdkDragHandle
+        >drag_indicator</mat-icon
+      >
+    </span>
+    <span ngClass="faq-item__description">{{
+      faq.sectiontitle
+    }}</span>
+    <div class="faq-item__actions">
+      <i
+        class="tio-search style-icon cursor-pointer"
+        (click)="previewItem()"
+      ></i>
+
+      <i
+        class="tio-edit style-icon cursor-pointer"
+        (click)="editFaqItem()"
+      ></i>
+  
+      <img
+        class="cursor-pointer"
+        (click)="openDeleteFaqItem()"
+        src="/assets/img/dashboard/icon-remove-comision.svg"
+        alt=""
+      />
+    </div>
+  </div>
+  

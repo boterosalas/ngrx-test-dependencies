@@ -63,6 +63,12 @@ import { NavigationMenuComponent } from './components/navigation-menu/navigation
 import { NavigationMenuClickerComponent } from './components/navigation-menu-clicker/navigation-menu-clicker.component';
 import { DialogFilterUsersComponent } from './pages/users/dialog-filter-users/dialog-filter-users.component';
 import { DialogFilterNoveltiesComponent } from './pages/news-admin/dialog-filter-novelties/dialog-filter-novelties.component';
+import { HelpCenterComponent } from './pages/help-center/help-center.component';
+import { HelpCenterGroupComponent } from './components/help-center-group/help-center-group.component';
+import { FaqGroupComponent } from './components/faq-group/faq-group.component';
+import { FaqItemComponent } from './components/faq-item/faq-item.component';
+import { DialogFaqGroupComponent } from './components/dialog-faq-group/dialog-faq-group.component';
+import { DialogFaqItemComponent } from './components/dialog-faq-item/dialog-faq-item.component';
 
 const routes: Routes = [
   {
@@ -263,6 +269,15 @@ const routes: Routes = [
       role: "ADMIN",
       superRole: "SUPERADMIN"
     },
+  },
+  {
+    path: "centro-de-ayuda-admin",
+    component: HelpCenterComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
+    },
   }
 ];
 
@@ -314,7 +329,13 @@ const routes: Routes = [
     NavigationMenuComponent,
     NavigationMenuClickerComponent,
     DialogFilterUsersComponent,
-    DialogFilterNoveltiesComponent
+    DialogFilterNoveltiesComponent,
+    HelpCenterComponent,
+    HelpCenterGroupComponent,
+    FaqGroupComponent,
+    FaqItemComponent,
+    DialogFaqGroupComponent,
+    DialogFaqItemComponent
   ],
   imports: [
     AngularEditorModule,
@@ -359,7 +380,7 @@ const routes: Routes = [
     })
   ],
   exports: [SideMenuComponent],
-  entryComponents: [DialogUserComponent, DialogCategoryComponent, DialogNewsComponent, DialogVideoPlayerComponent, DialogNavigationGroupComponent, DialogNavigationItemComponent],
+  entryComponents: [DialogUserComponent, DialogCategoryComponent, DialogNewsComponent, DialogVideoPlayerComponent, DialogNavigationGroupComponent, DialogNavigationItemComponent, DialogFaqGroupComponent, DialogFaqItemComponent],
   providers: [{ provide: MatPaginatorIntl, useClass: UsersComponent }]
 })
 export class AdminModule { }
