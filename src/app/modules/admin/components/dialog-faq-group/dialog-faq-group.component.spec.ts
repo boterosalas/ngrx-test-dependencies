@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { AdminModule } from '../../admin.module';
 
 import { DialogFaqGroupComponent } from './dialog-faq-group.component';
@@ -18,14 +19,14 @@ describe('DialogFaqGroupComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [],
+      declarations: [DialogFaqGroupComponent],
       imports: [
         ReactiveFormsModule,
         FormsModule,
-        AdminModule,
         HttpClientTestingModule,
         TranslateModule.forRoot({}),
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        AppMaterialModule
       ],
       providers:[
         { provide: MatDialogRef, useValue: dialogMock },

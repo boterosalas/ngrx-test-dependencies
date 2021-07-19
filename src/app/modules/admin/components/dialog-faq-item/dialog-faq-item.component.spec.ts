@@ -3,7 +3,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 import { TranslateModule } from '@ngx-translate/core';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { AdminModule } from '../../admin.module';
 
 import { DialogFaqItemComponent } from './dialog-faq-item.component';
@@ -18,14 +20,15 @@ describe('DialogFaqItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [],
+      declarations: [DialogFaqItemComponent],
       imports: [
         ReactiveFormsModule,
         FormsModule,
-        AdminModule,
         HttpClientTestingModule,
         TranslateModule.forRoot({}),
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        AppMaterialModule,
+        AngularEditorModule
       ],
       providers:[
         { provide: MatDialogRef, useValue: dialogMock },

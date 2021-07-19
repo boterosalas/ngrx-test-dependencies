@@ -13,9 +13,8 @@ describe('FaqGroupComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [],
+      declarations: [FaqGroupComponent],
       imports: [
-        AdminModule,
         HttpClientTestingModule,
         TranslateModule.forRoot({}),
         BrowserAnimationsModule
