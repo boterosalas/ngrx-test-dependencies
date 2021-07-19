@@ -3,7 +3,6 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
-import { AdminModule } from '../../admin.module';
 
 import { FaqGroupComponent } from './faq-group.component';
 
@@ -49,4 +48,29 @@ describe('FaqGroupComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('editFaqGroup', () => {
+    spyOn(component.editGroup, 'emit');
+    component.editFaqGroup();
+    expect(component.editGroup.emit).toHaveBeenCalled();
+  });
+
+  it('openDeleteFaqSection', () => {
+    spyOn(component.deleteGroup, 'emit');
+    component.openDeleteFaqSection();
+    expect(component.deleteGroup.emit).toHaveBeenCalled();
+  });
+
+  it('deleteFaqItem', () => {
+    spyOn(component.deleteItem, 'emit');
+    component.deleteFaqItem({});
+    expect(component.deleteItem.emit).toHaveBeenCalled();
+  });
+
+  it('previewItem', () => {
+    spyOn(component.previewItems, 'emit');
+    component.previewItem({});
+    expect(component.previewItems.emit).toHaveBeenCalled();
+  });
+
 });
