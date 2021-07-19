@@ -5,7 +5,6 @@ import { Subscription } from "rxjs";
 import { ResponseService } from "src/app/interfaces/response";
 import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
 import { AuthService } from "src/app/services/auth.service";
-import { ContentService } from "src/app/services/content.service";
 import { DialogNavigationItemComponent } from "../dialog-navigation-item/dialog-navigation-item.component";
 
 @Component({
@@ -14,17 +13,16 @@ import { DialogNavigationItemComponent } from "../dialog-navigation-item/dialog-
   styleUrls: ["./navigation-menu.component.scss"],
 })
 export class NavigationMenuComponent implements OnInit {
-  sectionsLinks: any = [];
-  private subscription: Subscription = new Subscription();
-  @ViewChild("templateDeleteNavigationGroup", { static: false })
-  templateDeleteNavigationGroup: TemplateRef<any>;
-  @ViewChild("templateDeleteNavigationItem", { static: false })
-  templateDeleteNavigationItem: TemplateRef<any>;
-
   dialogRef: MatDialogRef<any>;
   currentSection: any;
+  @ViewChild("templateDeleteNavigationItem", { static: false })
+  templateDeleteNavigationItem: TemplateRef<any>;
   currentLink: any = {};
   isInvalidAddSection: boolean = false;
+  sectionsLinks: any = [];
+  @ViewChild("templateDeleteNavigationGroup", { static: false })
+  templateDeleteNavigationGroup: TemplateRef<any>;
+  private subscription: Subscription = new Subscription();
 
   constructor(
     private dialog: MatDialog,
@@ -62,26 +60,15 @@ export class NavigationMenuComponent implements OnInit {
     });
   }
 
+  changeStateOfItem(item: any) {
+    item.active = item.active ? false : true;
+    this.auth.saveMenu(item).subscribe(() => {});
+  }
+
   cancelDelete() {
     this.dialog.closeAll();
   }
 
-  addNavigationItem(section: any) {
-    const dialogRef1 = this.dialog.open(DialogNavigationItemComponent, {
-      width: "450px",
-      data: {
-        title: "Agregar acceso",
-        buttonName: "Agregar",
-        edit: 0,
-        idseccion: section.id,
-        rol: "ANONYMOUS",
-        isMenu: true,
-      },
-    });
-    this.subscription = dialogRef1.beforeClosed().subscribe(() => {
-      this.getSections();
-    });
-  }
 
   editNavigationItem(item: any) {
     const data = {
@@ -106,6 +93,34 @@ export class NavigationMenuComponent implements OnInit {
     });
   }
 
+  addNavigationItem(section: any) {
+    const dialogRef1 = this.dialog.open(DialogNavigationItemComponent, {
+      width: "450px",
+      data: {
+        title: "Agregar acceso",
+        buttonName: "Agregar",
+        edit: 0,
+        idseccion: section.id,
+        rol: "ANONYMOUS",
+        isMenu: true,
+      },
+    });
+    this.subscription = dialogRef1.beforeClosed().subscribe(() => {
+      this.getSections();
+    });
+  }
+
+
+  deleteNavigationItemService() {
+    this.auth
+      .deleteMenu(this.currentLink.Id)
+      .subscribe((resp: ResponseService) => {
+        if (resp.state === "Success") {
+          this.dialog.closeAll();
+        }
+      });
+  }
+
   deleteNavigationItem(item: any) {
     this.currentLink = item;
 
@@ -124,18 +139,5 @@ export class NavigationMenuComponent implements OnInit {
     });
   }
 
-  deleteNavigationItemService() {
-    this.auth
-      .deleteMenu(this.currentLink.Id)
-      .subscribe((resp: ResponseService) => {
-        if (resp.state === "Success") {
-          this.dialog.closeAll();
-        }
-      });
-  }
-
-  changeStateOfItem(item: any) {
-    item.active = item.active ? false : true;
-    this.auth.saveMenu(item).subscribe((resp: ResponseService) => {});
-  }
+ 
 }
