@@ -40,12 +40,6 @@ export class DialogFilterNoveltiesComponent implements OnInit {
 
   }
 
-  private subscription: Subscription = new Subscription();
-  maxDate = moment(new Date());
-  dateParams: any;
-  showDate = true;
-  filterNovelties: FormGroup;
-
   locale = {
     locale: "es",
     direction: "ltr", // could be rtl
@@ -60,6 +54,19 @@ export class DialogFilterNoveltiesComponent implements OnInit {
     firstDay: 1, // first day is monday
   };
 
+  private subscription: Subscription = new Subscription();
+  maxDate = moment(new Date());
+  dateParams: any;
+  showDate = true;
+  filterNovelties: FormGroup;
+
+  status = [
+    { name: "Pendiente", value: "Pendiente" },
+    { name: "En revisión", value: "En revisión" },
+    { name: "Solucionado", value: "Solucionado" },
+    { name: "Rechazado", value: "Rechazado" },
+  ];
+
   bussiness = [];
   chipsBussiness = [];
   chipsBussinessId = [];
@@ -70,12 +77,7 @@ export class DialogFilterNoveltiesComponent implements OnInit {
   @Output() objectSend = new EventEmitter();
   @Output() close = new EventEmitter();
 
-  status = [
-    { name: "Pendiente", value: "Pendiente" },
-    { name: "En revisión", value: "En revisión" },
-    { name: "Solucionado", value: "Solucionado" },
-    { name: "Rechazado", value: "Rechazado" },
-  ];
+
 
 
   public getAllBusiness() {
@@ -88,6 +90,14 @@ export class DialogFilterNoveltiesComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
+  public clearFilters(){
+    this.filterNovelties.reset();
+    this.chipsBussiness = [];
+    this.chipsBussinessId = [];
+    localStorage.removeItem('bussinessNovelties');
+    localStorage.removeItem('formFilterNovelties');
+  }
+
   public filterForm() {
     this.filterNovelties = this.fb.group({
       dateRange: [""],
@@ -95,16 +105,6 @@ export class DialogFilterNoveltiesComponent implements OnInit {
       bussiness: [""],
       chipBussiness: [""],
     });
-  }
-
-  public onChangeSelected(val) {
-    if(this.chipsBussiness.length === 0) {
-      this.chipsBussiness.push(val);
-      localStorage.setItem('bussinessNovelties', JSON.stringify(val));
-    } else {
-      if (this.chipsBussiness.includes(val) === false) this.chipsBussiness.push(val);
-    }
-    localStorage.setItem('bussinessNovelties', JSON.stringify(this.chipsBussiness));
   }
 
   remove(bussiness: any): void {
@@ -115,13 +115,7 @@ export class DialogFilterNoveltiesComponent implements OnInit {
     }
   }
 
-  public clearFilters(){
-    this.filterNovelties.reset();
-    this.chipsBussiness = [];
-    this.chipsBussinessId = [];
-    localStorage.removeItem('bussinessNovelties');
-    localStorage.removeItem('formFilterNovelties');
-  }
+
 
   public aplyFilters(){
     
@@ -149,4 +143,15 @@ export class DialogFilterNoveltiesComponent implements OnInit {
   public closeModal() {
     this.close.emit();
   }
+
+  public onChangeSelected(val) {
+    if(this.chipsBussiness.length === 0) {
+      this.chipsBussiness.push(val);
+      localStorage.setItem('bussinessNovelties', JSON.stringify(val));
+    } else {
+      if (this.chipsBussiness.includes(val) === false) this.chipsBussiness.push(val);
+    }
+    localStorage.setItem('bussinessNovelties', JSON.stringify(this.chipsBussiness));
+  }
+
 }
