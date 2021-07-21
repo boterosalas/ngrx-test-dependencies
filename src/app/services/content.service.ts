@@ -97,7 +97,7 @@ export class ContentService {
   apiSaveOrderFaqItems = "faq/saveorderfaqitems";
   apiSaveOrderFaqSeccions= "faq/saveorderfaqseccions";
   apiGetFaq= "faq/getfaq";
-
+  apiGetNotificationAdmin ="notification/getnotifications";
 
 
   sendSearch = {};
@@ -1294,5 +1294,22 @@ export class ContentService {
         })
       );
   }
+
+  public getNotificationAdmin(data: any) {
+    return this.http
+      .get(`${this.url + this.apiGetNotificationAdmin}?visible=${data}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((result: ResponseService) => {
+          return result;
+        }));
+  }
+
 
 }

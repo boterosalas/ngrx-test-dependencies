@@ -1,0 +1,28 @@
+<app-banner
+  title="Notificaciones"
+  img="/assets/img/banners/banner-dashboard-pc.jpg"
+  imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
+></app-banner>
+
+<div class="container m-t4 fade-in">
+
+    <h3 class="notification-category">Programados <span class="line"></span></h3>
+
+    <app-card-notification [notification]="item" [title]="item.title" [message]="item.content" [date]="item.date" [edit]="true" *ngFor="let item of scheduled" ></app-card-notification>
+
+    <span fxLayout="row" fxLayoutAlign="end center">
+        <button
+        mat-raised-button
+        color="orange"
+        class="ml-2"
+        [routerLink]="[ '/notificacion']"
+      >
+      Crear notificación
+      </button>
+    </span>
+
+    <h3 class="notification-category">Notificaciones publicadas <span class="line"></span></h3>
+
+    <app-card-notification  [title]="item.title" [message]="item.content" [date]="item.date" [edit]="false" *ngFor="let item of published"></app-card-notification>
+ 
+</div>
