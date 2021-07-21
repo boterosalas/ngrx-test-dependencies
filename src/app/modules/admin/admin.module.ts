@@ -72,6 +72,7 @@ import { DialogFaqItemComponent } from './components/dialog-faq-item/dialog-faq-
 import { NotificationsComponent } from './pages/notifications/notifications.component';
 import { CardNotificationComponent } from './components/card-notification/card-notification.component';
 import { NotificationDetailComponent } from './pages/notification-detail/notification-detail.component';
+import { DialogDeleteNotificationComponent } from './components/dialog-delete-notification/dialog-delete-notification.component';
 
 const routes: Routes = [
   {
@@ -368,7 +369,8 @@ const routes: Routes = [
     DialogFaqItemComponent,
     NotificationsComponent,
     CardNotificationComponent,
-    NotificationDetailComponent
+    NotificationDetailComponent,
+    DialogDeleteNotificationComponent,
   ],
   imports: [
     AngularEditorModule,
@@ -413,7 +415,7 @@ const routes: Routes = [
     })
   ],
   exports: [SideMenuComponent],
-  entryComponents: [DialogUserComponent, DialogCategoryComponent, DialogNewsComponent, DialogVideoPlayerComponent, DialogNavigationGroupComponent, DialogNavigationItemComponent, DialogFaqGroupComponent, DialogFaqItemComponent],
+  entryComponents: [DialogUserComponent, DialogCategoryComponent, DialogNewsComponent, DialogVideoPlayerComponent, DialogNavigationGroupComponent, DialogNavigationItemComponent, DialogFaqGroupComponent, DialogFaqItemComponent, DialogDeleteNotificationComponent],
   providers: [{ provide: MatPaginatorIntl, useClass: UsersComponent }]
 })
 export class AdminModule { }
