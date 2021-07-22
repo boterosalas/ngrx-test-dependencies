@@ -5,5 +5,145 @@
 ></app-banner>
 
 <div class="container m-t4 fade-in">
+
+    <h3 title-name>Crear notificación</h3>
+
  
+
+    <form [formGroup]="notificationForm">
+        <div fxLayout="row" fxLayoutGap="20px">
+        <mat-card>  
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                id="title"
+                type="text"
+                placeholder="Titulo"
+                formControlName="title"
+                maxlength="100"
+                
+              />
+              <mat-error
+                id="requiredtitle"
+                *ngIf="notificationForm.controls.title.invalid &&
+                  notificationForm.controls.title.errors.required">{{
+                  "GENERIC.REQUIRED" | translate: { formValue: "Titulo" }
+                }}</mat-error
+              >
+            </mat-form-field>
+    
+            <h3>CONTENIDO</h3>
+            <angular-editor
+              [config]="configurarEditor"
+              formControlName="termsEditor"
+            ></angular-editor>
+        </mat-card>
+
+        <div fxLayout="column" class="w-100">
+
+            <mat-card fxLayout="column" class="mb-3">
+                <h3 class="border-bottom-gray pb-1 pt-1" title-name>ENVÍAR A</h3>
+
+                <mat-form-field class="selected-filter">
+                    <mat-select
+                      placeholder="GRUPO DE USUARIOS"
+                      id="filterUsers"
+                      formControlName="filterUsers"
+                      class="selected-filter"
+                      (selectionChange)="showOption($event)"
+                    >
+                      <mat-option *ngFor="let selected of filters" value="{{ selected.value }}">
+                        <span>{{ selected.name }}</span>
+                      </mat-option>
+                    </mat-select>
+
+                    <mat-error
+                    id="requiredfilterUsers"
+                    *ngIf="notificationForm.controls.filterUsers.invalid &&
+                    notificationForm.controls.filterUsers.errors.required">{{
+                    "GENERIC.REQUIRED" | translate: { formValue: "Grupo de usuarios" }
+                    }}</mat-error
+                >
+
+                  </mat-form-field>
+
+                  <span *ngIf="showUploadFile">
+                      <label class="label" >adjuntar lista de usuarios (formato .xlsx)</label>
+                      <br/>
+                      <app-load-form-file 
+                        [fileForm]="fileFormNotification"
+                        [nameFile]="nameFileNotification"
+                        label="Notification"
+                        (uploadFile)="onFileChangeNotification($event)"
+                    ></app-load-form-file>
+                    <mat-error *ngIf="showErrorExtNotification" class="small">
+                        {{ "GENERIC.INVALID_FORMAT_FILE" | translate }}
+                    </mat-error>
+                  </span>
+
+            </mat-card>
+    
+            <mat-card fxLayout="column" fxLayoutGap="5px">
+                <h4 class="border-bottom-gray pb-1 pt-1">PUBLICACIÓN</h4>
+
+                <div fxLayout="row" class="mt-2" >
+                  <div fxFlex="48%">
+                    <label class="label mt-2" for="picker">
+                      FECHA DE PUBLICACIÓN 
+                    </label>
+                    <mat-form-field>
+                        <input
+                        matInput
+                        [matDatepicker]="picker"
+                        readonly
+                      />
+                      <mat-datepicker-toggle
+                        class="icon-date"
+                        matPrefix 
+                        [for]="picker"
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker
+                        class="icon-date"
+                        touchUi
+                        #picker
+                      ></mat-datepicker>
+                    </mat-form-field>
+                    </div>
+                    
+                    <div fxFlex="48%">
+                    <label class="label mt-2" for="picker">
+                      HORA DE PUBLICACIÓN 
+                    </label>
+                    
+                      <input
+                        [ngxTimepicker]="min"
+                        matInput
+                        aria-label="default time"
+                        [ngxTimepicker]="defaultValue"
+                        [min]="minHours"
+                        readonly
+                      />
+                      <ngx-material-timepicker #min></ngx-material-timepicker>
+                    </div>
+
+                </div>
+    
+                <!-- <div class="mt-2" fxLayout="row" fxLayoutAlign="space-between">
+                  <button
+                    mat-raised-button
+                    class="button-save-programmer"
+                    (click)="saveeraser()"
+                    [disabled]="!formDataContent.valid || disabledButtonPublication"
+                  >
+                    {{ visible ? "Publicar cambios" : "Programar" }}
+                  </button>
+                </div> -->
+
+              </mat-card>
+
+        </div>
+        
+    </div>
+        
+      </form>
 </div>
