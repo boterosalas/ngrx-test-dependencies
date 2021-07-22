@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { Router } from '@angular/router';
 import { DialogDeleteNotificationComponent } from '../dialog-delete-notification/dialog-delete-notification.component';
 import { DialogFaqGroupComponent } from '../dialog-faq-group/dialog-faq-group.component';
 
@@ -17,7 +18,7 @@ export class CardNotificationComponent implements OnInit {
   @Input() edit:boolean;
   
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private router:Router) { }
 
   ngOnInit() {
   }
@@ -31,13 +32,11 @@ export class CardNotificationComponent implements OnInit {
         idnotification
       },
     });
-    // this.subscription = dialogRef1.beforeClosed().subscribe(() => {
-    //   this.getFaqs();
-    // });
   }
 
-  editNotification(notification:string){
-    console.log(notification)
+  editNotification(notification:any){
+    const idnotification = notification.idnotification;
+    this.router.navigate(['/notificacion', idnotification])
   }
   
 }

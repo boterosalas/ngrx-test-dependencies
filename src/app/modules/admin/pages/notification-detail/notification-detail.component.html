@@ -81,6 +81,20 @@
                     </mat-error>
                   </span>
 
+                  <span *ngIf="showDate" class="position-relative">
+                    <i class="tio-date_range icon-date pos"></i>
+                    <input
+                      formControlName="dateRange"
+                      [locale]="locale"
+                      placeholder="Seleccione fechas"
+                      type="text"
+                      [maxDate]="maxDate"
+                      ngxDaterangepickerMd
+                      opens="left"
+                      class="form-control border-input mat-elevation-z1 p-2 border-radius"
+                    />
+                  </span>
+
             </mat-card>
     
             <mat-card fxLayout="column">

@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { faTshirt } from "@fortawesome/free-solid-svg-icons";
 import { AngularEditorConfig } from "@kolkov/angular-editor";
 import * as moment from "moment";
 import { Subscription } from "rxjs";
+import { ResponseService } from "src/app/interfaces/response";
 import { ContentService } from "src/app/services/content.service";
 import { UtilsService } from "src/app/services/utils.service";
 moment.locale("es");
@@ -33,6 +35,24 @@ export class NotificationDetailComponent implements OnInit {
   publicationDate:any;
   file:string;
   uploadFile = false;
+  idNotification:any;
+
+  maxDate = moment(new Date());
+  showDate = false;
+
+  locale = {
+    locale: 'es',
+    direction: 'ltr', // could be rtl
+    weekLabel: 'W',
+    separator: ' a ', // default is ' - '
+    cancelLabel: 'Cancelar', // detault is 'Cancel'
+    applyLabel: 'Aplicar', // detault is 'Apply'
+    clearLabel: 'Limpiar', // detault is 'Clear'
+    customRangeLabel: 'Custom range',
+    daysOfWeek: moment.weekdaysMin(),
+    monthNames: moment.monthsShort(),
+    firstDay: 1 // first day is monday
+  }
 
   EXCEL_TYPE =
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
@@ -90,8 +110,13 @@ export class NotificationDetailComponent implements OnInit {
     private _content: ContentService,
     private fb: FormBuilder,
     private utils: UtilsService,
-    private router:Router
-  ) {}
+    private router:Router,
+    private route: ActivatedRoute
+  ) {
+    route.params.subscribe(data => {
+      this.idNotification= data.id;
+    })
+  }
 
   ngOnInit() {
     this.nameFileNotification = "";
@@ -99,6 +124,19 @@ export class NotificationDetailComponent implements OnInit {
 
     this.fileFormNotification = this.fb.group({
       file: [null],
+    });
+
+    if(this.idNotification !== undefined){
+      this.getNotification();
+    }
+
+  }
+  
+  public getNotification() {
+    this._content.getNotificationDetailAdmin(this.idNotification).subscribe((notification:ResponseService) =>{
+      console.log(notification);
+      this.notificationForm.controls.title.setValue(notification.objectResponse.title);
+      this.notificationForm.controls.termsEditor.setValue(notification.objectResponse.content);
     });
   }
 
@@ -144,6 +182,7 @@ export class NotificationDetailComponent implements OnInit {
       filterUsers: ["", Validators.required],
       date: [null],
       hour: [null],
+      dateRange:[null]
     });
   }
 
@@ -151,13 +190,20 @@ export class NotificationDetailComponent implements OnInit {
     if (e.value === "PERSONALIZADO") {
       this.showUploadFile = true;
       this.uploadFile = true;
+      this.showDate = false;
     } else {
       this.showUploadFile = false;
       this.fileFormNotification.reset();
       this.showErrorExtNotification = false;
       this.nameFileNotification = "";
       this.uploadFile = false;
+      this.showDate = true;
     }
+
+    if (e.value === "TODOS") {
+      this.showDate = false;
+    }
+
   }
 
   saveNotification() {
@@ -193,8 +239,9 @@ export class NotificationDetailComponent implements OnInit {
       title: this.notificationForm.controls.title.value,
       content: this.notificationForm.controls.termsEditor.value,
       publish: this.publish,
-      datestart: this.publicationDate,
-      dateend: null,
+      datepublish: this.publicationDate,
+      datestart: this.notificationForm.controls.dateRange.value !== null ? this.notificationForm.controls.dateRange.value.startDate : null,
+      dateend:  this.notificationForm.controls.dateRange.value !== null ? this.notificationForm.controls.dateRange.value.endDate : null,
       filter: this.notificationForm.controls.filterUsers.value,
       file: this.file,
     };

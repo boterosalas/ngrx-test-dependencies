@@ -100,6 +100,7 @@ export class ContentService {
   apiGetNotificationAdmin ="notification/getnotifications";
   apiDeleteNotificationAdmin ="notification/deletenotification";
   apiSaveNotificationAdmin ="notification/savenotification";
+  apiGetNotificationDetailAdmin ="notification/getnotification";
 
 
   sendSearch = {};
@@ -1345,6 +1346,22 @@ export class ContentService {
           return notification;
         })
       );
+  }
+
+  public getNotificationDetailAdmin(id: any) {
+    return this.http
+      .get(`${this.url + this.apiGetNotificationDetailAdmin}?id=${id}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((result: ResponseService) => {
+          return result;
+        }));
   }
 
 
