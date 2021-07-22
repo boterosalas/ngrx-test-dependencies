@@ -6,9 +6,20 @@
 
 <div class="container m-t4 fade-in">
 
-    <h3 title-name>Crear notificación</h3>
+  <span fxLayout="row" fxLayoutAlign="space-between center">
+    <h3 title-name>{{title}} notificación</h3>
 
- 
+    <button mat-button [routerLink]="['/notificaciones-admin']">
+      <span
+        class="galano-bold f-16"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+      >
+        <mat-icon>keyboard_arrow_left</mat-icon>
+        Volver
+      </span>
+    </button>
+  </span>
 
     <form [formGroup]="notificationForm">
         <div fxLayout="row" fxLayoutGap="20px">
@@ -79,6 +90,13 @@
                     <mat-error *ngIf="showErrorExtNotification" class="small">
                         {{ "GENERIC.INVALID_FORMAT_FILE" | translate }}
                     </mat-error>
+                    <hr *ngIf="urlDownload !== null">
+                      <span class="f-11" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="urlDownload !== null">
+                      Descargar archivo cargado previamente 
+                      <a class="icon-down" [href]="urlDownload" target="_blank">
+                        <i class="tio-download_from_cloud"></i>
+                      </a>
+                    </span>
                   </span>
 
                   <span *ngIf="showDate" class="position-relative">
@@ -154,10 +172,9 @@
                     color="orange"
                     class="button-save-notification"
                     (click)="saveNotification()"
-                    [disabled]="!notificationForm.valid || uploadFile"
+                    [disabled]="(!notificationForm.valid || uploadFile) && edit"
                   >
-                    <!-- {{ visible ? "Publicar cambios" : "Programar" }} -->
-                    Publicar
+                    {{titleBoton}}
                   </button>
                 </div>
 

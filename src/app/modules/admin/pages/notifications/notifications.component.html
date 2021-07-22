@@ -23,6 +23,6 @@
 
     <h3 class="notification-category">Notificaciones publicadas <span class="line"></span></h3>
 
-    <app-card-notification  [title]="item.title" [message]="item.content" [date]="item.date" [edit]="false" *ngFor="let item of published"></app-card-notification>
+    <app-card-notification [notification]="item"  [title]="item.title" [message]="item.content" [date]="item.date" [edit]="false" *ngFor="let item of published"></app-card-notification>
  
 </div>

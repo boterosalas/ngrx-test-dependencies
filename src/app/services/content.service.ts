@@ -1335,13 +1335,6 @@ export class ContentService {
     return this.http
       .post(`${this.url + this.apiSaveNotificationAdmin}`, datos , this.httpOptions)
       .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => { })
-          )
-        ),
         map((notification: ResponseService) => {
           return notification;
         })

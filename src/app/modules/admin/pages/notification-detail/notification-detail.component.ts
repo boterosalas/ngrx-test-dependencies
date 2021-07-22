@@ -36,6 +36,7 @@ export class NotificationDetailComponent implements OnInit {
   file:string;
   uploadFile = false;
   idNotification:any;
+  urlDownload:any = null;
 
   maxDate = moment(new Date());
   showDate = false;
@@ -106,6 +107,9 @@ export class NotificationDetailComponent implements OnInit {
     { name: "Personalizado (Archivo .xlsx)", value: "PERSONALIZADO" },
   ];
 
+  title = 'crear';
+  titleBoton="Publicar"
+
   constructor(
     private _content: ContentService,
     private fb: FormBuilder,
@@ -128,16 +132,49 @@ export class NotificationDetailComponent implements OnInit {
 
     if(this.idNotification !== undefined){
       this.getNotification();
+      this.title = "editar";
+      this.titleBoton ="Editar";
     }
 
   }
   
   public getNotification() {
     this._content.getNotificationDetailAdmin(this.idNotification).subscribe((notification:ResponseService) =>{
-      console.log(notification);
       this.notificationForm.controls.title.setValue(notification.objectResponse.title);
       this.notificationForm.controls.termsEditor.setValue(notification.objectResponse.content);
+      this.notificationForm.controls.filterUsers.setValue(notification.objectResponse.filter);
+      let filterName = notification.objectResponse.filter;
+      this.getName(filterName);
+      this.notificationForm.controls.dateRange.setValue({startDate: notification.objectResponse.datestart, endDate: notification.objectResponse.datestart});
+      let splitDatepublish = notification.objectResponse.datepublish.split('T');
+      let date = splitDatepublish[0];
+      let hour = splitDatepublish[1];
+      let transformStandart = this.utils.toStandardTime(hour);
+      this.notificationForm.controls.date.setValue(date);
+      this.notificationForm.controls.hour.setValue(transformStandart);
+      this.urlDownload = notification.objectResponse.url;
     });
+  }
+
+  private getName(value) {
+    if (value === "PERSONALIZADO") {
+      this.showUploadFile = true;
+      this.uploadFile = true;
+      this.showDate = false;
+      this.notificationForm.controls.dateRange.setValue(null);
+    } else {
+      this.showUploadFile = false;
+      this.fileFormNotification.reset();
+      this.showErrorExtNotification = false;
+      this.nameFileNotification = "";
+      this.uploadFile = false;
+      this.showDate = true;
+    }
+
+    if (value=== "TODOS") {
+      this.showDate = false;
+      this.notificationForm.controls.dateRange.setValue(null);
+    }
   }
 
   public onFileChangeNotification(event) {
@@ -191,6 +228,7 @@ export class NotificationDetailComponent implements OnInit {
       this.showUploadFile = true;
       this.uploadFile = true;
       this.showDate = false;
+      this.notificationForm.controls.dateRange.setValue(null);
     } else {
       this.showUploadFile = false;
       this.fileFormNotification.reset();
@@ -199,9 +237,10 @@ export class NotificationDetailComponent implements OnInit {
       this.uploadFile = false;
       this.showDate = true;
     }
-
+    
     if (e.value === "TODOS") {
       this.showDate = false;
+      this.notificationForm.controls.dateRange.setValue(null);
     }
 
   }
@@ -235,7 +274,7 @@ export class NotificationDetailComponent implements OnInit {
     }
 
     let data = {
-      id: 0,
+      id: this.idNotification === undefined ? 0 : this.idNotification,
       title: this.notificationForm.controls.title.value,
       content: this.notificationForm.controls.termsEditor.value,
       publish: this.publish,

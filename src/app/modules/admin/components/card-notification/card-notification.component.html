@@ -23,6 +23,13 @@
             />
           </div>
 
+        <div class="card-group__actions" *ngIf="!edit">
+            <i
+              class="tio-download_from_cloud style-icon cursor-pointer"
+              (click)="downloadFile(notification)"
+            ></i>
+          </div>
+
     </mat-card-header>
 </mat-card>
 

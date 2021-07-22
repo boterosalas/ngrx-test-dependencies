@@ -15,6 +15,7 @@ export class CardNotificationComponent implements OnInit {
   @Input() message:string;
   @Input() date:string;
   @Input() notification:string;
+  @Input() url:string;
   @Input() edit:boolean;
   
 
@@ -37,6 +38,11 @@ export class CardNotificationComponent implements OnInit {
   editNotification(notification:any){
     const idnotification = notification.idnotification;
     this.router.navigate(['/notificacion', idnotification])
+  }
+
+  downloadFile(notification:any){
+    let url = notification.url;
+    window.open(url,'_blank');
   }
   
 }

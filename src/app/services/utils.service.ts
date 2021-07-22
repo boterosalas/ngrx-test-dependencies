@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { UserService } from './user.service';
 import decode from "jwt-decode";
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -133,5 +134,10 @@ export class UtilsService {
       }
     }
   }
+
+ toStandardTime(militaryTime) {
+    militaryTime = militaryTime.split(':');
+    return (militaryTime[0].charAt(0) == 1 && militaryTime[0].charAt(1) > 2) ? (militaryTime[0] - 12) + ':' + militaryTime[1]  + ' PM' : militaryTime.join(':') + ' AM'
+}
 
 }
