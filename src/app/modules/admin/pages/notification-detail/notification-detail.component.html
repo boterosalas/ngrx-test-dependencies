@@ -83,15 +83,15 @@
 
             </mat-card>
     
-            <mat-card fxLayout="column" fxLayoutGap="5px">
+            <mat-card fxLayout="column">
                 <h4 class="border-bottom-gray pb-1 pt-1">PUBLICACIÓN</h4>
 
-                <div fxLayout="row" class="mt-2" >
-                  <div fxFlex="48%">
-                    <label class="label mt-2" for="picker">
+                <div fxLayout="row" class="mt-2" fxLayoutGap="10px">
+                  <div>
+                    <label class="label mt-2 mb-1">
                       FECHA DE PUBLICACIÓN 
                     </label>
-                    <mat-form-field>
+                   <span class="mat-elevation-z1 border-radius" fxLayout="row-reverse">
                         <input
                         matInput
                         [matDatepicker]="picker"
@@ -99,22 +99,24 @@
                       />
                       <mat-datepicker-toggle
                         class="icon-date"
-                        matPrefix 
+                        matSuffix
                         [for]="picker"
                       ></mat-datepicker-toggle>
+                      
                       <mat-datepicker
                         class="icon-date"
                         touchUi
                         #picker
                       ></mat-datepicker>
-                    </mat-form-field>
+                    </span>
                     </div>
                     
-                    <div fxFlex="48%">
-                    <label class="label mt-2" for="picker">
+                    <div>
+                    <label class="label mt-2 mb-1">
                       HORA DE PUBLICACIÓN 
                     </label>
                     
+                    <span class="mat-elevation-z1 p-2 border-radius" fxLayout="row-reverse">
                       <input
                         [ngxTimepicker]="min"
                         matInput
@@ -123,21 +125,24 @@
                         [min]="minHours"
                         readonly
                       />
+                    <mat-icon  matPrefix class="clock-time">alarm</mat-icon>
                       <ngx-material-timepicker #min></ngx-material-timepicker>
+                    </span>
                     </div>
 
                 </div>
     
-                <!-- <div class="mt-2" fxLayout="row" fxLayoutAlign="space-between">
+                <div class="mt-3" fxLayout="row" fxLayoutAlign="end space-between">
                   <button
                     mat-raised-button
-                    class="button-save-programmer"
-                    (click)="saveeraser()"
-                    [disabled]="!formDataContent.valid || disabledButtonPublication"
+                    class="button-save-notification"
+                    (click)="saveNotification()"
+                    [disabled]="!notificationForm.valid "
                   >
-                    {{ visible ? "Publicar cambios" : "Programar" }}
+                    <!-- {{ visible ? "Publicar cambios" : "Programar" }} -->
+                    Publicar
                   </button>
-                </div> -->
+                </div>
 
               </mat-card>
 
