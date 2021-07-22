@@ -277,6 +277,7 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
       this.minHours = "12:00 AM";
     }
   }
+  
   public HoraMilitar(time) {
     let format = time.toString().split(" ")[1]
     let hour = time.toString().split(" ")[0].split(":")[0]

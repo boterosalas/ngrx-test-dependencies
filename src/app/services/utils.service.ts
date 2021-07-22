@@ -76,6 +76,7 @@ export class UtilsService {
     this.user.userInfo$.next(null);
     await this.router.navigate(['/inicio']);
   }
+
   public checkPermision() {
     const token = localStorage.getItem("ACCESS_TOKEN");
     // decode the token to get its payload
@@ -107,4 +108,30 @@ export class UtilsService {
       }
     })
   }
+
+  public HoraMilitar(time) {
+    let format = time.toString().split(" ")[1]
+    let hour = time.toString().split(" ")[0].split(":")[0]
+    if (hour == 12) {
+      let hour = time.toString().split(" ")[0]
+      return hour
+    } else {
+      if (format === 'PM') {
+        let hour = time.toString().split(" ")[0]
+        let h = parseInt(hour.split(":")[0]) + 12
+        let m = hour.split(":")[1]
+        return h + ":" + m
+      } else {
+        if (hour < 10) {
+          let hour = 0 + time.toString().split(" ")[0]
+          return hour
+        }
+        else {
+          let hour = time.toString().split(" ")[0]
+          return hour
+        }
+      }
+    }
+  }
+
 }

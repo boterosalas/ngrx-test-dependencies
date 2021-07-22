@@ -99,6 +99,7 @@ export class ContentService {
   apiGetFaq= "faq/getfaq";
   apiGetNotificationAdmin ="notification/getnotifications";
   apiDeleteNotificationAdmin ="notification/deletenotification";
+  apiSaveNotificationAdmin ="notification/savenotification";
 
 
   sendSearch = {};
@@ -1326,6 +1327,24 @@ export class ContentService {
         map((result: ResponseService) => {
           return result;
         }));
+  }
+
+
+  public saveNotificationAdmin(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveNotificationAdmin}`, datos , this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((notification: ResponseService) => {
+          return notification;
+        })
+      );
   }
 
 

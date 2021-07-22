@@ -95,6 +95,7 @@
                         <input
                         matInput
                         [matDatepicker]="picker"
+                        formControlName="date"
                         readonly
                       />
                       <mat-datepicker-toggle
@@ -123,6 +124,7 @@
                         aria-label="default time"
                         [ngxTimepicker]="defaultValue"
                         [min]="minHours"
+                        formControlName="hour"
                         readonly
                       />
                     <mat-icon  matPrefix class="clock-time">alarm</mat-icon>
@@ -135,9 +137,10 @@
                 <div class="mt-3" fxLayout="row" fxLayoutAlign="end space-between">
                   <button
                     mat-raised-button
+                    color="orange"
                     class="button-save-notification"
                     (click)="saveNotification()"
-                    [disabled]="!notificationForm.valid "
+                    [disabled]="!notificationForm.valid || uploadFile"
                   >
                     <!-- {{ visible ? "Publicar cambios" : "Programar" }} -->
                     Publicar
