@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { DialogDeleteNotificationComponent } from '../dialog-delete-notification/dialog-delete-notification.component';
-import { DialogFaqGroupComponent } from '../dialog-faq-group/dialog-faq-group.component';
 
 @Component({
   selector: 'app-card-notification',
