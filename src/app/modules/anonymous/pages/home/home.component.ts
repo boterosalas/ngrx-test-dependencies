@@ -164,9 +164,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     let formData: FormData = new FormData();
     formData.append('idClicker', idClicker);
     formData.append('type', 'Visit');
-    this.content.setClick(formData).subscribe((resp) => {
-      console.log("Responde")
-    })
+    this.content.setClick(formData).subscribe()
   }
   ngOnInit() {
     this.metaTagService.addTags([

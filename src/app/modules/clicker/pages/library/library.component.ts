@@ -137,13 +137,9 @@ export class LibraryComponent implements OnInit {
     }
     public stepPaso(data) {
         for (let index = 0; index < data.length; index++) {
-            //console.log(this.id);
-            //console.log(data[index].id.toString());
             if (data[index].id.toString() === this.id) {
-                //console.log(index);
                 this.step = index
                 if (this.isNormal === false) {
-                    //console.log(data[index]);
                     this.setStepMovil(data[index], data[index])
                 }
             }

@@ -280,9 +280,7 @@ export class ContentLibraryComponent implements OnInit {
             url: this.nameFileCont,
             content: this.fileCont
         }
-        this.content.setContentImgVi(datos).subscribe(() => {
-            //console.log(datos);
-        })
+        this.content.setContentImgVi(datos).subscribe()
     }
 
     public deleteVideos() {
