@@ -1,5 +1,4 @@
 import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
@@ -11,12 +10,7 @@ import { AppMaterialModule } from "src/app/modules/shared/app-material/app-mater
 import { ContentService } from "src/app/services/content.service";
 import { NavigationComponent } from "./navigation.component";
 import { of } from "rxjs";
-import { LinksService } from "src/app/services/links.service";
-import { CDK_DRAG_CONFIG, DragDropModule } from "@angular/cdk/drag-drop";
-import { BannerComponent } from "src/app/modules/shared/components/banner/banner.component";
-import { NavigationFooterComponent } from "../../components/navigation-footer/navigation-footer.component";
-import { NavigationMenuClickerComponent } from "../../components/navigation-menu-clicker/navigation-menu-clicker.component";
-import { NavigationMenuComponent } from "../../components/navigation-menu/navigation-menu.component";
+import { DragDropModule } from "@angular/cdk/drag-drop";
 import { AdminModule } from "../../admin.module";
 
 export interface FooterElement {
