@@ -11,6 +11,8 @@ import { UtilsService } from "src/app/services/utils.service";
 import { AuthService } from "src/app/services/auth.service";
 import { LinksService } from 'src/app/services/links.service';
 import { Subscription } from 'rxjs';
+import { ContentService } from "src/app/services/content.service";
+import { ResponseService } from "src/app/interfaces/response";
 @Component({
   selector: "app-header",
   templateUrl: "./header.component.html",
@@ -30,14 +32,19 @@ export class HeaderComponent implements OnInit {
   lastNames: string;
   amount: any;
 
+  notifications = [];
+  total:any;
+
   constructor(
     private utils: UtilsService,
-    public auth: AuthService  ) {}
+    public auth: AuthService,
+    private _content:ContentService
+    ) {}
 
   ngOnInit() {
     this.getAmount();
     this.getMenu();
-
+    this.getNotications();
   }
 
   public getMenu() {
@@ -80,6 +87,13 @@ export class HeaderComponent implements OnInit {
       clearInterval(interval);
     }
     
+  }
+
+  public getNotications(){
+    this._content.getNotificationAdmin(false).subscribe((notification:ResponseService) => {
+      this.notifications = notification.objectResponse.published;
+      this.total = notification.objectResponse.total;
+    });
   }
 
 
