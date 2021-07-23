@@ -87,9 +87,7 @@ export class TableActivateBusinessComponent implements OnInit {
   }
 
   saveOrder(datos: any) {
-    this.file.putOrder(datos).subscribe(resp => {
-      //console.log(resp)
-    })
+    this.file.putOrder(datos).subscribe()
   }
 
   editCategory(element: any) {

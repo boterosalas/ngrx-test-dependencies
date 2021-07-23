@@ -1,0 +1,35 @@
+@import "variables";
+
+.delete-container {
+    max-width: 400px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .title_delete {
+    color: $secondary-color;
+  }
+  
+  .text-container {
+    padding: 0 1rem;
+  }
+  
+  .button_cancel {
+    color: $primary-color;
+    font-weight: $font-weight-bold;
+    background-color: transparent;
+  }
+  
+  .style-icon {
+    font-size: 22px;
+    color: $purple2;
+  }
+  
+  .style-icon-delete {
+    font-size: 22px;
+    color: #fd5555;
+  }
+  

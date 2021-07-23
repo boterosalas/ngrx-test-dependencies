@@ -41,7 +41,6 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
   }
 
   dropItem(event: CdkDragDrop<any>) {
-    console.log(event);
     moveItemInArray(
       this.links,
       event.previousIndex,

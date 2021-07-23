@@ -1,0 +1,35 @@
+<mat-card class="mb-3">
+    <mat-card-header fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-card-title>{{title}}</mat-card-title>
+        <mat-card-subtitle>
+            <span>
+                {{message}}
+            </span>
+            <span>
+                {{date | date: "dd/MM/yyyy"}}
+            </span>
+        </mat-card-subtitle>
+
+        <div class="card-group__actions" *ngIf="edit">
+            <i
+              class="tio-edit style-icon cursor-pointer"
+              (click)="editNotification(notification)"
+            ></i>
+            <img
+              class="cursor-pointer"
+              src="/assets/img/dashboard/icon-remove-comision.svg"
+              alt="icono borrar"
+              (click)="deleteNotification(notification)"
+            />
+          </div>
+
+        <div class="card-group__actions" *ngIf="!edit">
+            <i
+              class="tio-download_from_cloud style-icon cursor-pointer"
+              (click)="downloadFile(notification)"
+            ></i>
+          </div>
+
+    </mat-card-header>
+</mat-card>
+

@@ -69,6 +69,10 @@ import { FaqGroupComponent } from './components/faq-group/faq-group.component';
 import { FaqItemComponent } from './components/faq-item/faq-item.component';
 import { DialogFaqGroupComponent } from './components/dialog-faq-group/dialog-faq-group.component';
 import { DialogFaqItemComponent } from './components/dialog-faq-item/dialog-faq-item.component';
+import { NotificationsComponent } from './pages/notifications/notifications.component';
+import { CardNotificationComponent } from './components/card-notification/card-notification.component';
+import { NotificationDetailComponent } from './pages/notification-detail/notification-detail.component';
+import { DialogDeleteNotificationComponent } from './components/dialog-delete-notification/dialog-delete-notification.component';
 
 const routes: Routes = [
   {
@@ -278,6 +282,33 @@ const routes: Routes = [
       role: "ADMIN",
       superRole: "SUPERADMIN"
     },
+  },
+  {
+    path: "notificaciones-admin",
+    component: NotificationsComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
+    },
+  },
+  {
+    path: "notificacion/:id",
+    component: NotificationDetailComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
+    },
+  },
+  {
+    path: "notificacion",
+    component: NotificationDetailComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: "ADMIN",
+      superRole: "SUPERADMIN"
+    },
   }
 ];
 
@@ -335,7 +366,11 @@ const routes: Routes = [
     FaqGroupComponent,
     FaqItemComponent,
     DialogFaqGroupComponent,
-    DialogFaqItemComponent
+    DialogFaqItemComponent,
+    NotificationsComponent,
+    CardNotificationComponent,
+    NotificationDetailComponent,
+    DialogDeleteNotificationComponent,
   ],
   imports: [
     AngularEditorModule,
@@ -380,7 +415,7 @@ const routes: Routes = [
     })
   ],
   exports: [SideMenuComponent],
-  entryComponents: [DialogUserComponent, DialogCategoryComponent, DialogNewsComponent, DialogVideoPlayerComponent, DialogNavigationGroupComponent, DialogNavigationItemComponent, DialogFaqGroupComponent, DialogFaqItemComponent],
+  entryComponents: [DialogUserComponent, DialogCategoryComponent, DialogNewsComponent, DialogVideoPlayerComponent, DialogNavigationGroupComponent, DialogNavigationItemComponent, DialogFaqGroupComponent, DialogFaqItemComponent, DialogDeleteNotificationComponent],
   providers: [{ provide: MatPaginatorIntl, useClass: UsersComponent }]
 })
 export class AdminModule { }

@@ -229,9 +229,7 @@ export class CarrouselAdminComponent implements OnInit {
     this.saveOrder(datosSourceSend)
   }
   public saveOrder(datos: any) {
-    this.content.saveOrderOfertBusiness(datos).subscribe(resp => {
-      //console.log(resp)
-    })
+    this.content.saveOrderOfertBusiness(datos).subscribe()
   }
   private getExtension(nameFile: string, getSize: number) {
     let splitExtFile = nameFile.split(".");

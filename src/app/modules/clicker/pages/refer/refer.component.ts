@@ -110,9 +110,7 @@ export class ReferComponent implements OnInit, OnDestroy {
     let formData: FormData = new FormData();
     formData.append('idClicker', idClicker);
     formData.append('type', 'Generate');
-    this.content.setClick(formData).subscribe((resp) => {
-      console.log("Responde")
-    })
+    this.content.setClick(formData).subscribe()
   }
   /* To copy Text from Textbox */
   public copyInputMessage(inputElement: any) {

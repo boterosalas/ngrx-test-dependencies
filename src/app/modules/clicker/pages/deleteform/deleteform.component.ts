@@ -152,7 +152,7 @@ export class DeleteformComponent implements OnInit {
 
       }
     )
-    //console.log(this.user.deleteUser());
+    
   }
   private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {

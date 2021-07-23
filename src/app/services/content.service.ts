@@ -97,7 +97,10 @@ export class ContentService {
   apiSaveOrderFaqItems = "faq/saveorderfaqitems";
   apiSaveOrderFaqSeccions= "faq/saveorderfaqseccions";
   apiGetFaq= "faq/getfaq";
-
+  apiGetNotificationAdmin ="notification/getnotifications";
+  apiDeleteNotificationAdmin ="notification/deletenotification";
+  apiSaveNotificationAdmin ="notification/savenotification";
+  apiGetNotificationDetailAdmin ="notification/getnotification";
 
 
   sendSearch = {};
@@ -1294,5 +1297,65 @@ export class ContentService {
         })
       );
   }
+
+  public getNotificationAdmin(data: any) {
+    return this.http
+      .get(`${this.url + this.apiGetNotificationAdmin}?visible=${data}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((result: ResponseService) => {
+          return result;
+        }));
+  }
+
+  public deleteNotificationAdmin(id: any) {
+    return this.http
+      .delete(`${this.url + this.apiDeleteNotificationAdmin}?id=${id}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((result: ResponseService) => {
+          return result;
+        }));
+  }
+
+
+  public saveNotificationAdmin(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiSaveNotificationAdmin}`, datos , this.httpOptions)
+      .pipe(
+        map((notification: ResponseService) => {
+          return notification;
+        })
+      );
+  }
+
+  public getNotificationDetailAdmin(id: any) {
+    return this.http
+      .get(`${this.url + this.apiGetNotificationDetailAdmin}?id=${id}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((result: ResponseService) => {
+          return result;
+        }));
+  }
+
 
 }

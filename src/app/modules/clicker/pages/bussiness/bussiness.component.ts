@@ -407,7 +407,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
    */
 
   public dataSliderCategory(sliderInfo) {
-    console.log(sliderInfo)
     let token = localStorage.getItem("ACCESS_TOKEN");
     if (token !== null && sliderInfo.business !== "clickam") {
       this.tokenInfo = this.token.userInfo();
