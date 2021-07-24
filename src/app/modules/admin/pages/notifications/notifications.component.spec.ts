@@ -87,4 +87,5 @@ describe("NotificationsComponent", () => {
     expect(component).toBeTruthy();
     expect(mockContentService.getNotificationAdmin).toHaveBeenCalled();
   });
+  
 });
