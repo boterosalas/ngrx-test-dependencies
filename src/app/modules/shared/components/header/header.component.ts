@@ -5,18 +5,18 @@ import {
   Input,
   OnDestroy,
   Output,
-  EventEmitter
+  EventEmitter,
 } from "@angular/core";
 import { UtilsService } from "src/app/services/utils.service";
 import { AuthService } from "src/app/services/auth.service";
-import { LinksService } from 'src/app/services/links.service';
-import { Subscription } from 'rxjs';
+import { LinksService } from "src/app/services/links.service";
+import { Subscription } from "rxjs";
 import { ContentService } from "src/app/services/content.service";
 import { ResponseService } from "src/app/interfaces/response";
 @Component({
   selector: "app-header",
   templateUrl: "./header.component.html",
-  styleUrls: ["./header.component.scss"]
+  styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
   @Input() isHome: boolean;
@@ -24,22 +24,23 @@ export class HeaderComponent implements OnInit {
   @Input() name: string;
   @Output() sidenav = new EventEmitter();
   menuItems: any = [];
+  role: string;
 
   private subscription: Subscription = new Subscription();
-  
+
   isLoggedIn: any;
   firstNames: string;
   lastNames: string;
   amount: any;
 
   notifications = [];
-  total:any;
+  total: any;
 
   constructor(
     private utils: UtilsService,
     public auth: AuthService,
-    private _content:ContentService
-    ) {}
+    private _content: ContentService
+  ) {}
 
   ngOnInit() {
     this.getAmount();
@@ -48,9 +49,11 @@ export class HeaderComponent implements OnInit {
   }
 
   public getMenu() {
-    this.subscription = this.auth.getmenusNoLoginUserView().subscribe((resp) => {
-      this.menuItems = resp[0].menus;
-    });
+    this.subscription = this.auth
+      .getmenusNoLoginUserView()
+      .subscribe((resp) => {
+        this.menuItems = resp[0].menus;
+      });
   }
 
   public open() {
@@ -79,22 +82,27 @@ export class HeaderComponent implements OnInit {
   public getAmount() {
     let count = 0;
     let interval = setInterval(() => {
-      this.amount =  localStorage.getItem('Amount');
-      count ++;
+      this.amount = localStorage.getItem("Amount");
+      count++;
     }, 500);
 
-    if(count === 3) {
+    if (count === 3) {
       clearInterval(interval);
     }
-    
   }
 
-  public getNotications(){
-    this._content.getNotificationAdmin(false).subscribe((notification:ResponseService) => {
-      this.notifications = notification.objectResponse.published;
-      this.total = notification.objectResponse.total;
+  public getNotications() {
+    this.auth.getRole$.subscribe((role) => {
+      this.role = role;
+      if (role === "CLICKER") {
+        this._content
+          .getNotificationAdmin(false)
+          .subscribe((notification: ResponseService) => {
+            this.notifications = notification.objectResponse.published;
+            this.total = notification.objectResponse.total;
+          });
+      }
     });
   }
-
-
+  
 }

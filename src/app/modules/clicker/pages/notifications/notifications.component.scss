@@ -1,4 +1,5 @@
 @import "variables";
+@import "general";
 
 .select-all {
   color: $primary-color;
@@ -53,6 +54,8 @@
 
 .mat-card{
     min-height: 500px;
+    max-height: 500px;
+    overflow-y: auto;
 }
 
 .center{
@@ -74,3 +77,12 @@
       text-align: center;
     }
   }
+
+  .mat-list-item{
+      &:hover{
+          background: #F3F1F6;
+          border-radius: 10px;
+          cursor: pointer;
+      }
+  }
+

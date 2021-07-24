@@ -23,12 +23,11 @@
                     
                     <div fxLayout="row" fxLayoutGap="20px">
                     
-                        <input type="checkbox" [value]="notification.id" (change)="onCheckChange($event)" formControlName="checks">
-
-                    <div fxLayout="column" (click)="showNotification(notification)">
-                      <span class="title-inner">{{notification.title}}</span>
-                      <span class="date">{{notification.date | date: "dd/MM/yyyy" }}</span>
-                    </div>
+                        <mat-checkbox class="check" type="checkbox" [value]="notification.id" (change)="onCheckChange($event)" formControlName="checks"></mat-checkbox>
+                            <div fxLayout="column" (click)="showNotification(notification)">
+                                <span class="title-inner">{{notification.title}}</span>
+                                <span class="date">{{notification.date | date: "dd/MM/yyyy" }}</span>
+                            </div>
                   </div>
       
                   <div *ngIf="!notification.viewed">

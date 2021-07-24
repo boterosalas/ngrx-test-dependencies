@@ -72,11 +72,10 @@ export class NotificationsComponent implements OnInit {
   }
 
   onCheckChange(event) {
-    if (event.target.checked) {
-      this.formArray.push(event.target.value);
+    if (event.checked) {
+      this.formArray.push(event.source.value);
     } else {
-      const index = this.formArray.indexOf(event.target.value);
-
+      const index = this.formArray.indexOf(event.source.value);
       if (index >= 0) {
         this.formArray.splice(index, 1);
       }
@@ -100,9 +99,20 @@ export class NotificationsComponent implements OnInit {
       .subscribe((notification) => {
         this.getNoticationsLoad();
         this.openSnackBar(notification.userMessage , "Cerrar");
-        this.titleMail = "";
-        this.date = "";
-        this.content = "";
+        this.checkboxGroup.controls.checks.setValue(false);
+        setTimeout(() => {
+          if(this.notifications.length){
+            this.titleMail = this.notifications[0].title;
+            this.date = this.notifications[0].date;
+            this.content = this.notifications[0].content;
+            this.dataToSend[0].id = this.notifications[0].id;
+            this.viewNotification(this.dataToSend);
+          } else{
+            this.titleMail = "";
+            this.date = "";
+            this.content = "";
+          }
+        }, 1000);
       });
   }
 
