@@ -820,6 +820,7 @@ export class CarrouselAdminComponent implements OnInit {
       this.active2 = false;
     }
   }
+  
   public selectAllOfertas() {
     if (this.selectAllVideosImgOfer === "Seleccionar todos") {
       for (let i = 0; i < this.dataSourceOfer.length; i++) {

@@ -2,10 +2,8 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 import { of } from "rxjs";
-import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
-import { BannerComponent } from "src/app/modules/shared/components/banner/banner.component";
 import { ContentService } from "src/app/services/content.service";
-import { CardNotificationComponent } from "../../components/card-notification/card-notification.component";
+import { ClickerModule } from "../../clicker.module";
 
 import { NotificationsComponent } from "./notifications.component";
 
@@ -15,7 +13,15 @@ describe("NotificationsComponent", () => {
 
   const mockContentService = jasmine.createSpyObj("ContentService", [
     "getNotificationAdmin",
+    "viewNotification",
+    "deleteNotificationUser"
   ]);
+
+  let response = {
+    state: "Success",
+    userMessage: "Se han guardado los cambios satisfactoriamente",
+    objectResponse: null,
+  };
 
   let respGetNotification = {
     state: "Success",
@@ -62,16 +68,8 @@ describe("NotificationsComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        NotificationsComponent,
-        BannerComponent,
-        CardNotificationComponent,
-      ],
-      imports: [
-        AppMaterialModule,
-        RouterTestingModule,
-        HttpClientTestingModule,
-      ],
+      declarations: [],
+      imports: [ClickerModule, RouterTestingModule, HttpClientTestingModule],
       providers: [{ provide: ContentService, useValue: mockContentService }],
     }).compileComponents();
   }));
@@ -80,6 +78,8 @@ describe("NotificationsComponent", () => {
     fixture = TestBed.createComponent(NotificationsComponent);
     component = fixture.componentInstance;
     mockContentService.getNotificationAdmin.and.returnValue(of(respGetNotification));
+    mockContentService.viewNotification.and.returnValue(of(response));
+    mockContentService.deleteNotificationUser.and.returnValue(of(response));
     fixture.detectChanges();
   });
 
@@ -87,5 +87,32 @@ describe("NotificationsComponent", () => {
     expect(component).toBeTruthy();
     expect(mockContentService.getNotificationAdmin).toHaveBeenCalled();
   });
+
+  it('viewed all', () => {
+    component.viewedAll();
+    expect(mockContentService.viewNotification).toHaveBeenCalled();
+  });
+
+  it('show notification', () => {
+    let data = {
+      title: 'test',
+      date: '21/21/21',
+      content: 'prueba',
+      id: '1'
+    }
+    component.showNotification(data);
+    expect(mockContentService.viewNotification).toHaveBeenCalled();
+  });
+
+  it('delete notification', () => {
+    component.deleteNotication();
+    expect( mockContentService.deleteNotificationUser).toHaveBeenCalled();
+  });
   
+  
+  
+
+  afterAll(() => {
+    TestBed.resetTestingModule();
+  });
 });

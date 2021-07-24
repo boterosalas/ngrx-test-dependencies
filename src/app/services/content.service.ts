@@ -101,6 +101,8 @@ export class ContentService {
   apiDeleteNotificationAdmin ="notification/deletenotification";
   apiSaveNotificationAdmin ="notification/savenotification";
   apiGetNotificationDetailAdmin ="notification/getnotification";
+  apiViewNotification = "notification/savevisitnotification";
+  apiDeleteNotificationUser ="notification/deletenotificationuser";
 
 
   sendSearch = {};
@@ -1355,6 +1357,26 @@ export class ContentService {
         map((result: ResponseService) => {
           return result;
         }));
+  }
+
+  public viewNotification(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiViewNotification}`, datos , this.httpOptions)
+      .pipe(
+        map((notification: ResponseService) => {
+          return notification;
+        })
+      );
+  }
+
+  public deleteNotificationUser(datos: any) {
+    return this.http
+      .post(`${this.url + this.apiDeleteNotificationUser}`, datos , this.httpOptions)
+      .pipe(
+        map((notification: ResponseService) => {
+          return notification;
+        })
+      );
   }
 
 

@@ -174,6 +174,32 @@ header {
   button {
     color: $color-p;
   }
+
+  .title-notification{
+    color: $primary-color;
+    text-transform: uppercase;
+    padding: 10px;
+    font-size: 12px;
+    font-family: $font-galano-bold;
+  }
+
+  .title-inner{
+    font-size: 12px;
+    color: #534F5C;
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: $font-galano-bold;
+    max-width: 160px;
+  }
+
+  .date{
+    font-size: 10px;
+    color: #A7A3B1;
+    display: block;
+  }
+
 }
 
 @media screen and (min-width: 600px) {
@@ -220,5 +246,40 @@ header {
 
   .button10k[_ngcontent-kvs-c12] {
     font-size: 11px;
+  }
+}
+
+
+.icon-props{
+  color: #8D7EB7;
+  font-size: 20px;
+}
+
+.icr{
+  color:#FD5555;
+  font-size: 12px;
+}
+
+.separate{
+  padding: 2px 0;
+  border-top: 1px solid #F3F1F6;
+  display: block;
+}
+
+.open-notifications{
+    font-size: 12px;
+    min-width: 280px;
+    text-align: center;
+    color: #8D7EB7 !important;
+}
+
+.not-notifications{
+  color: #A7A3B1;
+  i{
+    font-size: 2rem;
+  }
+  p{
+    font-size: 18px;
+    text-align: center;
   }
 }

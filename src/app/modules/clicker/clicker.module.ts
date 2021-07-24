@@ -46,6 +46,8 @@ import { MissionLevelComponent } from './components/mission-level/mission-level.
 import { LibraryComponent } from './pages/library/library.component';
 import { DialogImagePlayerComponent } from './components/dialog-visualization-image/dialog-image-player.component';
 import { DeleteformComponent } from './pages/deleteform/deleteform.component';
+import { NotificationsComponent } from './pages/notifications/notifications.component';
+import { DetailComponent } from './pages/notifications/detail/detail.component';
 const routes: Routes = [
 
   {
@@ -102,6 +104,16 @@ const routes: Routes = [
     path: "biblioteca",
     component: LibraryComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: "notificaciones",
+    component: NotificationsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "notificacion-mobile/:idnotification/:id",
+    component: DetailComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
@@ -138,7 +150,9 @@ const routes: Routes = [
     MissionLevelComponent,
     LibraryComponent,
     DialogImagePlayerComponent,
-    DeleteformComponent
+    DeleteformComponent,
+    NotificationsComponent,
+    DetailComponent
   ],
   imports: [
     CommonModule,
