@@ -115,7 +115,7 @@
       class="iconContainer"
       [matMenuTriggerFor]="notificationsmenu"
     >
-    <span *ngIf="total > 0" [matBadge]="total" matBadgeOverlap="false" matBadgeColor="warn" matBadgeSize="small"><i class="tio-notifications icon cursor-pointer"></i></span>
+    <span [matBadge]="total" matBadgeOverlap="false" matBadgeColor="warn" matBadgeSize="small"><i class="tio-notifications icon cursor-pointer"></i></span>
     
     </span>
     <mat-menu #notificationsmenu="matMenu" xPosition="before">
