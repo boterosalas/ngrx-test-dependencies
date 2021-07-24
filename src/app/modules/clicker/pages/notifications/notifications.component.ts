@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, HostListener, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { MatSnackBar } from "@angular/material";
+import { Router } from "@angular/router";
 import { ResponseService } from "src/app/interfaces/response";
 import { ContentService } from "src/app/services/content.service";
 
@@ -17,12 +18,14 @@ export class NotificationsComponent implements OnInit {
   content: any;
   dateSend = new Date();
   dataToSend = [{ id: [""], viewed: true, dateviewed: this.dateSend }];
-  titleSelect = "Seleccionar"
+  titleSelect = "Seleccionar";
+  innerWidth: number;
 
   constructor(
     private _content: ContentService,
     private fb: FormBuilder,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private router:Router
   ) {}
 
   ngOnInit() {
@@ -63,6 +66,9 @@ export class NotificationsComponent implements OnInit {
     this.content = data.content;
     this.dataToSend[0].id = data.id;
     this.viewNotification(this.dataToSend);
+    if (this.innerWidth < 600 || window.innerWidth < 600) {
+      this.router.navigate(['/notificacion-mobile', data.idnotification, data.id  ]);
+    }
   }
 
   public formNotifications() {
@@ -141,5 +147,12 @@ export class NotificationsComponent implements OnInit {
     }
 
   }
+
+  
+  @HostListener("window:resize", ["$event"])
+  onResize(event) {
+    this.innerWidth = event.target.innerWidth;
+  }
+
 
 }

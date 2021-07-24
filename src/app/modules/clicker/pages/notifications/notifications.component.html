@@ -1,8 +1,8 @@
 <app-banner color="purple" title="Notificaciones" img="/assets/img/banners/banner-reportes-pc.jpg" imgMobile="/assets/img/banners/banner-reportes-mobile.jpg"></app-banner>
 
-<div class="container mt-4 fade-in" fxLayout="row" fxLayoutGap="30px">
+<div class="container mt-4 fade-in" fxLayout.gt-xs="row"  fxLayout.xs="column" fxLayoutGap="30px">
     
-    <mat-card fxFlex="30%">
+    <mat-card fxFlex.xs="100%" fxFlex.gt-xs="30%">
         
         <div class="actions" fxLayout="row" fxLayoutAlign="space-between center">
             <span class="select-all">
@@ -44,7 +44,8 @@
 
     </mat-card>
     
-    <mat-card fxFlex="70%">
+    <mat-card fxFlex.xs="100%" fxFlex.gt-xs="70%" fxHide.xs="true">
+
         <h3>{{titleMail}}</h3>
         <span class="date">{{date | date: "dd/MM/yyyy" }}</span>
         <div [innerHtml]="content"></div>
@@ -55,6 +56,6 @@
               <p>¡Pronto recibirás grandes noticias!</p>
             </span>
           </div>
-
     </mat-card>
+
 </div>
