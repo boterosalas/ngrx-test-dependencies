@@ -17,6 +17,7 @@ export class NotificationsComponent implements OnInit {
   content: any;
   dateSend = new Date();
   dataToSend = [{ id: [""], viewed: true, dateviewed: this.dateSend }];
+  titleSelect = "Seleccionar"
 
   constructor(
     private _content: ContentService,
@@ -66,7 +67,7 @@ export class NotificationsComponent implements OnInit {
 
   public formNotifications() {
     this.checkboxGroup = this.fb.group({
-      checks: [null],
+      checks: [false],
     });
   }
 
@@ -79,6 +80,11 @@ export class NotificationsComponent implements OnInit {
       if (index >= 0) {
         this.formArray.splice(index, 1);
       }
+    }
+    if(this.formArray.length > 0) {
+      this.titleSelect = 'Deseleccionar';
+    } else {
+      this.titleSelect = 'Seleccionar';
     }
   }
 
@@ -109,6 +115,21 @@ export class NotificationsComponent implements OnInit {
     this._snackBar.open(message, action, {
       duration: 3000,
     });
+  }
+
+  public selectAll() {
+    if(this.checkboxGroup.controls.checks.value === false) {
+      this.titleSelect = 'Deseleccionar';
+      this.checkboxGroup.controls.checks.setValue(true);
+      this.notifications.forEach(element => {
+        this.formArray.push(element.id.toString());
+      });
+    } else{
+      this.titleSelect = 'Seleccionar';
+      this.checkboxGroup.controls.checks.setValue(false);
+      this.formArray = []     
+    }
+
   }
 
 }

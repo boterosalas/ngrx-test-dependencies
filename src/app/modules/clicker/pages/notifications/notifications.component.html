@@ -5,10 +5,12 @@
     <mat-card fxFlex="30%">
         
         <div class="actions" fxLayout="row" fxLayoutAlign="space-between center">
-            <span class="select-all">Seleccionar todos <i class="tio-all_done"></i> </span>
+            <span class="select-all">
+               <button class="p-0 min" mat-button [disabled]="notifications.length === 0" (click)="selectAll()" > {{titleSelect}} todos <i class="tio-all_done"></i> </button>
+            </span>
             <span fxLayoutGap="10px">
-                <button class="p-0 min" mat-button [disabled]="formArray.length === 0" (click)="viewedAll()" ><i  class="tio-draft icon soft"></i></button>
-                <button class="p-0 min"  mat-button [disabled]="formArray.length === 0" (click)="deleteNotication()"> <i class="tio-delete icon reds"></i></button>
+                <button class="p-0 min" mat-button [disabled]="notifications.length === 0" (click)="viewedAll()" ><i  class="tio-draft icon soft"></i></button>
+                <button class="p-0 min"  mat-button [disabled]="notifications.length === 0" (click)="deleteNotication()"> <i class="tio-delete icon reds"></i></button>
                 
             </span>
         </div>

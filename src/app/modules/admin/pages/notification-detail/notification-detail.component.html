@@ -172,7 +172,7 @@
                     color="orange"
                     class="button-save-notification"
                     (click)="saveNotification()"
-                    [disabled]="(!notificationForm.valid || uploadFile) && edit"
+                    [disabled]="!notificationForm.valid || uploadFile"
                   >
                     {{titleBoton}}
                   </button>
