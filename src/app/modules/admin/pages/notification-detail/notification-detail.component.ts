@@ -147,7 +147,7 @@ export class NotificationDetailComponent implements OnInit {
       this.getName(filterName);
       this.notificationForm.controls.dateRange.setValue({startDate: notification.objectResponse.datestart, endDate: notification.objectResponse.datestart});
       let splitDatepublish = notification.objectResponse.datepublish.split('T');
-      let date = splitDatepublish[0];
+      let date = moment(splitDatepublish[0]).toDate();
       let hour = splitDatepublish[1];
       let transformStandart = this.utils.toStandardTime(hour);
       this.notificationForm.controls.date.setValue(date);
@@ -256,6 +256,8 @@ export class NotificationDetailComponent implements OnInit {
       this.hour = this.utils.HoraMilitar(
         this.notificationForm.controls.hour.value
       );
+    } else{
+     this.hour = "00:00:00";
     }
 
     if(this.date !== null) {

@@ -35,7 +35,7 @@ export class DetailComponent implements OnInit {
     this._content.getNotificationDetailAdmin(this.idnotification).subscribe((notification:ResponseService) =>{
      this.title= notification.objectResponse.title;
      this.content = notification.objectResponse.content;
-     this.date = notification.objectResponse.date;
+     this.date = notification.objectResponse.datepublish;
     });
   }
 
