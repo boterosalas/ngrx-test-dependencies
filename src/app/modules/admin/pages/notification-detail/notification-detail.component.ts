@@ -107,7 +107,7 @@ export class NotificationDetailComponent implements OnInit {
     { name: "Personalizado (Archivo .xlsx)", value: "PERSONALIZADO" },
   ];
 
-  title = 'crear';
+  title = 'Crear';
   titleBoton="Publicar"
 
   constructor(

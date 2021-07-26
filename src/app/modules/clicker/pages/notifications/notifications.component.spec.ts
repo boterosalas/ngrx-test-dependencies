@@ -88,11 +88,6 @@ describe("NotificationsComponent", () => {
     expect(mockContentService.getNotificationAdmin).toHaveBeenCalled();
   });
 
-  it('viewed all', () => {
-    component.viewedAll();
-    expect(mockContentService.viewNotification).toHaveBeenCalled();
-  });
-
   it('show notification', () => {
     let data = {
       title: 'test',
