@@ -65,9 +65,7 @@
           class="links"
         >
           <li *ngFor="let item of menuItems">
-            <a href="{{item.route}}"
-              >{{item.name}}</a
-            >
+            <a [routerLink]="item.route">{{item.name}}</a>
           </li>
         </ul>
       </nav>
