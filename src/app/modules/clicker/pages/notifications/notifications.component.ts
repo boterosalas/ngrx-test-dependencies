@@ -44,7 +44,7 @@ export class NotificationsComponent implements OnInit {
         this.notifications = notification.objectResponse.published;
         if(this.notifications.length){
           this.titleMail = this.notifications[0].title;
-          this.date = this.notifications[0].date;
+          this.date = this.notifications[0].datepublish;
           this.content = this.notifications[0].content;
           this.dataToSend[0].id = this.notifications[0].id;
           this.viewNotification(this.dataToSend);
@@ -109,7 +109,7 @@ export class NotificationsComponent implements OnInit {
         setTimeout(() => {
           if(this.notifications.length){
             this.titleMail = this.notifications[0].title;
-            this.date = this.notifications[0].date;
+            this.date = this.notifications[0].datepublish;
             this.content = this.notifications[0].content;
             this.dataToSend[0].id = this.notifications[0].id;
             this.viewNotification(this.dataToSend);
