@@ -19,3 +19,15 @@ color: $primary-color;
       color: $purple2;
     }
 }
+
+.truncate{
+  max-width: 480px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
+.mat-card-subtitle{
+  display: inline-flex;
+}

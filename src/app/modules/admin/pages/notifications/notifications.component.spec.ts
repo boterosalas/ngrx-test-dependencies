@@ -4,6 +4,7 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { of } from "rxjs";
 import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
 import { BannerComponent } from "src/app/modules/shared/components/banner/banner.component";
+import { RemoveTagsPipe } from "src/app/pipes/remove-tags.pipe";
 import { ContentService } from "src/app/services/content.service";
 import { CardNotificationComponent } from "../../components/card-notification/card-notification.component";
 
@@ -66,6 +67,7 @@ describe("NotificationsComponent", () => {
         NotificationsComponent,
         BannerComponent,
         CardNotificationComponent,
+        RemoveTagsPipe
       ],
       imports: [
         AppMaterialModule,

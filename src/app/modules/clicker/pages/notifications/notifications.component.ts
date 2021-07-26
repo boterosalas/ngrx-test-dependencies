@@ -87,9 +87,9 @@ export class NotificationsComponent implements OnInit {
       }
     }
     if(this.formArray.length > 0) {
-      this.titleSelect = 'Deseleccionar';
-    } else {
       this.titleSelect = 'Seleccionar';
+    } else {
+      this.titleSelect = 'Deseleccionar';
     }
   }
 
@@ -123,8 +123,10 @@ export class NotificationsComponent implements OnInit {
   }
 
   public viewedAll(){
-    this.dataToSend[0].id = this.formArray;
-    this.viewNotification(this.dataToSend);
+    this.formArray.forEach(element => {
+      this.dataToSend[0].id = element;
+      this.viewNotification(this.dataToSend);
+    });
   }
 
   private openSnackBar(message: string, action: string) {
@@ -138,7 +140,7 @@ export class NotificationsComponent implements OnInit {
       this.titleSelect = 'Deseleccionar';
       this.checkboxGroup.controls.checks.setValue(true);
       this.notifications.forEach(element => {
-        this.formArray.push(element.id.toString());
+        this.formArray.push(element.id);
       });
     } else{
       this.titleSelect = 'Seleccionar';
