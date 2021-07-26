@@ -11,7 +11,7 @@ import { DialogDeleteNotificationComponent } from '../dialog-delete-notification
 export class CardNotificationComponent implements OnInit {
 
   @Input() title:string;
-  @Input() message:string;
+  @Input() user:string;
   @Input() date:string;
   @Input() notification:string;
   @Input() url:string;
