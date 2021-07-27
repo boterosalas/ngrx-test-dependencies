@@ -13,7 +13,7 @@ export class CardNotificationComponent implements OnInit {
   @Input() title:string;
   @Input() user:string;
   @Input() date:string;
-  @Input() notification:string;
+  @Input() notification:any;
   @Input() url:string;
   @Input() edit:boolean;
   
