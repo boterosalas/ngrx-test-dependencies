@@ -208,6 +208,7 @@ export class NewsAdminComponent implements OnInit {
     const title = "";
     const template = "";
     this.dialog.open(DialogNewsComponent, {
+      height: '500px',
       data: {
         title,
         template,
