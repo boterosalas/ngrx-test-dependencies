@@ -257,14 +257,15 @@ export class NotificationDetailComponent implements OnInit {
         this.notificationForm.controls.hour.value
       );
     } else{
-     this.hour = "00:00:00";
-    }
+      this.hour = "00:00:00";
+     }
 
     if(this.date !== null) {
       this.publicationDate = `${this.date} ${this.hour}`;
       this.publish = false;
     } else{
-      this.publicationDate = null
+      let DateToday = moment().format('YYYY-MM-DD hh:mm:ss');
+      this.publicationDate = DateToday;
       this.publish = true;
     }
 
