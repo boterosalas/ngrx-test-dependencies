@@ -14,6 +14,9 @@ export class TableUsersComponent implements OnInit {
   @Output() dataUser = new EventEmitter;
   @Output() dataEmail = new EventEmitter;
   @Output() sortDataUser = new EventEmitter;
+  @Input() size;
+  @Input() p;
+  @Input() totalItems;
   
   infoUpdate = {};
 

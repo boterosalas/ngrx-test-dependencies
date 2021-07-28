@@ -73,6 +73,7 @@ import { NotificationsComponent } from './pages/notifications/notifications.comp
 import { CardNotificationComponent } from './components/card-notification/card-notification.component';
 import { NotificationDetailComponent } from './pages/notification-detail/notification-detail.component';
 import { DialogDeleteNotificationComponent } from './components/dialog-delete-notification/dialog-delete-notification.component';
+import { NgxPaginationModule } from "ngx-pagination";
 
 const routes: Routes = [
   {
@@ -385,6 +386,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MatPasswordStrengthModule,
+    NgxPaginationModule,
     NgxDaterangepickerMd.forRoot(),
     NgCircleProgressModule.forRoot({
       // set defaults here

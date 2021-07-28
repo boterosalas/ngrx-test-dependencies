@@ -45,16 +45,14 @@
     <app-table-users
       (dataUser)="userData($event)"
       (dataEmail)="userEmail($event)"
-      [dataSource]="dataSource"
+      [(dataSource)]="dataSource"
       (sortDataUser)="sort($event)"
+      [size]="pageSize"
+      [p]="pageIndex"
+      [totalItems]="totalItems"
     ></app-table-users>
-    <mat-paginator
-      [length]="totalItems"
-      [pageSize]="pageSize"
-      [pageSizeOptions]="[50]"
-      [pageIndex]="pageIndex"
-      (page)="pagination($event)"
-    ></mat-paginator>
+
+    <pagination-controls (pageChange)="p = $event;pagination(p)"></pagination-controls>
   </div>
 
   <p class="title-blue mt-4 border-bottom-gray pb-3">DESCARGAR REPORTE DE USUARIOS</p>

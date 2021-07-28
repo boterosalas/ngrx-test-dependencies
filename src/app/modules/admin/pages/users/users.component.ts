@@ -37,7 +37,7 @@ export class UsersComponent extends MatPaginatorIntl
   users: Array<any>;
   dataSource: any;
   pageIndex: number = 0;
-  pageSize: number;
+  pageSize: number = 50;
   pageTo: number = 50;
   totalItems: number;
   paginate: string;
@@ -181,9 +181,19 @@ export class UsersComponent extends MatPaginatorIntl
     localStorage.removeItem('bussiness');
     localStorage.removeItem('formFilter');
   }
+
   checkRole() {
     this.utils.checkPermision();
   }
+
+  pagination(paginate: any) {
+    this.pageIndex = paginate;
+    this.from = (this.pageSize * this.pageIndex + 1) - 50;
+    this.to = (this.pageSize * (this.pageIndex + 1)) - 50;
+    this.searchUser(this.paginate, this.from, this.to);
+    
+  }
+
 
   /**
    * Metodo para buscar usuarios
@@ -195,7 +205,6 @@ export class UsersComponent extends MatPaginatorIntl
    */
 
   public searchUser(term, from = 1, to = this.pageTo, orderOrigin = "",   orderby = ""){
-
     this.filterData[0].searchtext = term;
     this.filterData[0].to = to;
     this.filterData[0].from = from;
@@ -208,7 +217,13 @@ export class UsersComponent extends MatPaginatorIntl
       this.subscription = this.file.searchUsers(this.filterData).subscribe((user: any) => {
           this.users = user.users;
           this.totalItems = user.total;
-          this.dataSource = new MatTableDataSource<any>(this.users);
+          if(this.pageIndex ===  0){
+            this.dataSource = this.users.slice(this.pageIndex, this.pageSize);
+          } else {
+            this.dataSource = this.users.slice(this.pageIndex  * this.pageSize - this.pageSize, this.pageIndex  * this.pageSize);
+            this.users =  user.users;
+            this.dataSource = this.users;
+          }
         });
   }
 
@@ -497,13 +512,6 @@ export class UsersComponent extends MatPaginatorIntl
     });
   }
 
-  public pagination(paginate: any) {
-    this.pageIndex = paginate.pageIndex;
-    paginate.length = this.totalItems;
-    this.from = paginate.pageSize * paginate.pageIndex + 1;
-    this.to = paginate.pageSize * (paginate.pageIndex + 1);
-    this.searchUser(this.paginate, this.from, this.to);
-  }
 
   public getUserExcel() {
     this.dateParams = {

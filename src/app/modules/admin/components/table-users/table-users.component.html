@@ -1,10 +1,11 @@
 <div class="mat-elevation-z0 mt-4 mb-4">
   <table
     mat-table
-    [dataSource]="dataSource"
+    [dataSource]="dataSource | paginate: {itemsPerPage: size, currentPage: p, totalItems: totalItems}"
     class="users-table"
     matSort
     (matSortChange)="sortData($event)"
+    
   >
     <!-- Identificaton Column -->
     <ng-container matColumnDef="identification">
@@ -198,4 +199,5 @@
       *matRowDef="let row; columns: displayedColumns; let i = index"
     ></tr>
   </table>
+
 </div>
