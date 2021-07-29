@@ -205,9 +205,12 @@ export class UsersComponent extends MatPaginatorIntl
    */
 
   public searchUser(term, from = 1, to = this.pageTo, orderOrigin = "",   orderby = ""){
+    
     this.filterData[0].searchtext = term;
     this.filterData[0].to = to;
     this.filterData[0].from = from;
+    this.filterData[0].orderby = orderOrigin;
+    this.filterData[0].ordination = orderby;
 
     if (term !== this.paginate) {
       this.paginate = term;

@@ -74,6 +74,7 @@ import { CardNotificationComponent } from './components/card-notification/card-n
 import { NotificationDetailComponent } from './pages/notification-detail/notification-detail.component';
 import { DialogDeleteNotificationComponent } from './components/dialog-delete-notification/dialog-delete-notification.component';
 import { NgxPaginationModule } from "ngx-pagination";
+import { TableNoveltiesComponent } from './components/table-novelties/table-novelties.component';
 
 const routes: Routes = [
   {
@@ -372,6 +373,7 @@ const routes: Routes = [
     CardNotificationComponent,
     NotificationDetailComponent,
     DialogDeleteNotificationComponent,
+    TableNoveltiesComponent,
   ],
   imports: [
     AngularEditorModule,
