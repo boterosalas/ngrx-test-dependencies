@@ -17,7 +17,7 @@ export class ReportComponent implements OnInit, OnDestroy {
   paymentUser: Array<any>;
   dataSource: any;
   pageIndex: number = 0;
-  pageSize: number;
+  pageSize: number  = 20;
   pageTo: number = 20;
   totalItems: number;
   paginate: string;
@@ -30,6 +30,8 @@ export class ReportComponent implements OnInit, OnDestroy {
   isLoggedIn: any;
   identification: string;
   private subscription: Subscription = new Subscription();
+  from: any;
+  to: any;
   items = [];
   dataBreak1: any;
   dataBreak2: any;
@@ -74,16 +76,15 @@ export class ReportComponent implements OnInit, OnDestroy {
     const params = { from, to };
     this.subscription = this.payment.getPayment(params).subscribe((payment) => {
       this.totalItems = payment.total;
-      this.dataSource = new MatTableDataSource<any>(payment.users);
+      this.dataSource = payment.users;
     });
   }
 
   public pagination(paginate: any) {
-    this.pageIndex = paginate.pageIndex;
-    paginate.length = this.totalItems;
-    const from = paginate.pageSize * paginate.pageIndex + 1;
-    const to = paginate.pageSize * (paginate.pageIndex + 1);
-    this.getPayments(from, to)
+    this.pageIndex = paginate;
+    this.from = (this.pageSize * this.pageIndex + 1) - 20;
+    this.to = (this.pageSize * (this.pageIndex + 1)) - 20;
+    this.getPayments(this.from, this.to)
   }
 
   /**
@@ -92,11 +93,6 @@ export class ReportComponent implements OnInit, OnDestroy {
 
   private getInfomonth() {
 
-    //this.subscription = this.payment.getReports().subscribe((resume: any) => {
-    //this.dataBreak1 = new MatTableDataSource<any>(resume.money.detail1);
-    //this.dataBreak2 = new MatTableDataSource<any>(resume.money.detail2);
-    //this.dataAcumulated = new MatTableDataSource<any>(resume.money.detailAccumulated);
-    //});
     this.payment.getReportUser().subscribe((resp: any) => {
       this.totalAcumulated = resp.objectResponse.generalResume.totalCommissions;
       this.available = resp.objectResponse.money.accumulated;

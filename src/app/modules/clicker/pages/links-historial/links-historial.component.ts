@@ -86,18 +86,17 @@ export class LinksHistorialComponent implements OnInit {
   }
 
   public pagination(paginate: any) {
-    this.pageIndex = paginate.pageIndex;
-    paginate.length = this.totalItems;
-    this.from = paginate.pageSize * paginate.pageIndex + 1;
-    this.to = paginate.pageSize * (paginate.pageIndex + 1);
+    this.pageIndex = paginate;
+    this.from = (this.pageSize * this.pageIndex + 1) - 20;
+    this.to = (this.pageSize * (this.pageIndex + 1)) - 20;
     this.getLinksHistory(this.from, this.to);
   }
 
   public getLinksHistory(from = 1, to = this.pageTo, orderBy = "DATEDESC") {
     const params = { from, to, orderBy };
     this.subscription = this.links.getLinkHistory(params).subscribe((resp) => {
-      this.dataSource = new MatTableDataSource<any>(resp.linkHistory);
       this.totalItems = resp.total;
+      this.dataSource =  resp.linkHistory;
     });
   }
 

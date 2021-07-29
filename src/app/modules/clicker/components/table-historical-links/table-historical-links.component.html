@@ -1,5 +1,5 @@
 <div class="mat-elevation-z0 mt-4 mb-4 overflow-auto">
-    <table mat-table [dataSource]="dataSource" class="users-table">
+    <table mat-table [dataSource]="dataSource | paginate: {itemsPerPage: size, currentPage: p, totalItems: totalItems}" class="users-table">
   
       <!-- Product Name Column -->
       <ng-container matColumnDef="productname">
@@ -43,7 +43,7 @@
             mat-raised-button
             ngClass="gtmHistorialTablaLink{{element.productname | trim}}"
             color="orange"
-            (click)="infoProduct((dataSource.data)[i])"
+            (click)="infoProduct((dataSource)[i])"
           >
             <span ngClass="gtmHistorialTablaLink{{element.productname | trim}}">{{ 'PRODUCTS.GET_LINK'  | translate }}</span>
             

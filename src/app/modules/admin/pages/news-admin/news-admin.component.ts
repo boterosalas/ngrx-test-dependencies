@@ -198,7 +198,6 @@ export class NewsAdminComponent implements OnInit {
           this.dataSource = this.newsUser.slice(this.pageIndex, this.pageSize);
         } else {
           this.dataSource = this.newsUser.slice(this.pageIndex  * this.pageSize - this.pageSize, this.pageIndex  * this.pageSize);
-          // this.newsUser =   user.novelties;
           this.dataSource = user.novelties;
         }
       });

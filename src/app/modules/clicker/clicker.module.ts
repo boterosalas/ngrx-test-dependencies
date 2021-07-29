@@ -48,6 +48,7 @@ import { DialogImagePlayerComponent } from './components/dialog-visualization-im
 import { DeleteformComponent } from './pages/deleteform/deleteform.component';
 import { NotificationsComponent } from './pages/notifications/notifications.component';
 import { DetailComponent } from './pages/notifications/detail/detail.component';
+import { NgxPaginationModule } from "ngx-pagination";
 const routes: Routes = [
 
   {
@@ -167,7 +168,8 @@ const routes: Routes = [
     DragScrollModule,
     MatPasswordStrengthModule,
     RouterModule.forChild(routes),
-    AnonymousModule
+    AnonymousModule,
+    NgxPaginationModule
   ],
   entryComponents: [DialogComponent, DialogEditComponent, DialogHistoryComponent, DialogImagePlayerComponent]
 })
