@@ -873,7 +873,7 @@ export class LinksService {
           )
         ),
         map((resp: ResponseService) => {
-          return resp.objectResponse;
+          return resp;
         })
       );
   }
