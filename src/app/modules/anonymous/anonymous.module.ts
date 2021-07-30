@@ -90,6 +90,7 @@ import { BlogsComponent } from './pages/blogs/blogs.component';
 import { BlogContentComponent } from './pages/blog-content/blog-content.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NewBlogComponent } from './components/new-blogs/new-blog.component';
+import { CardOrderNumberComponent } from './components/card-order-number/card-order-number.component';
 const routes: Routes = [
   {
     path: "",
@@ -433,7 +434,8 @@ const routes: Routes = [
     BlogsComponent,
     BlogContentComponent,
     SliderStoriesComponent,
-    ButtonStoryComponent
+    ButtonStoryComponent,
+    CardOrderNumberComponent
   ],
   imports: [
     FormsModule,

@@ -17,7 +17,7 @@ import { Observable, of, throwError, concat } from "rxjs";
   providedIn: "root",
 })
 export class LinksService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   url = environment.URL_REFERAL;
   ulrReport = environment.URL_REPORTS;
@@ -34,12 +34,12 @@ export class LinksService {
   apikpiTotal = "Reports/getkpitotaldata";
   apiUsersExcel = "Reports/getUsersExcel";
   //https://apitestexito.azure-api.net/Dllo-clickam-md-apireport/api/admin/gethistoricalbankinformation
-  apiUsersHistoricalBankInformation = "admin/gethistoricalbankinformation"
+  apiUsersHistoricalBankInformation = "admin/gethistoricalbankinformation";
   apiAuditExcel = "Reports/getAudit";
   apiAuditUserInfo = "admin/getreportupdateinfoclicker";
   apiGetReportReferral = "Reports/getreportreferral";
   apigetReportClickam = "Reports/getReportClickam";
-  apigetReportTerms= "reports/getterms";
+  apigetReportTerms = "reports/getterms";
   apiUsers = "Reports/getUsers";
   insurance = "Insurance/ProcessFiles";
   apiSaveLink = "Link/SaveLink";
@@ -62,14 +62,15 @@ export class LinksService {
   apiSaveAmountCommission = "amount/saveamountcommission";
   apiSaveAmountReferred = "amount/saveamountreferred";
   apiGetmedals = "medal/getmedals";
-  apiPicking = "picking/importfilepickingcommissions"
+  apiPicking = "picking/importfilepickingcommissions";
   apiOrder = "business/orderbusiness";
   apiSellers = "seller/getsellers";
   apiGetReport = "reports/clickerperformancereport";
-  apiGetReportMonth = "reports/getcommissionpaymentreport"
+  apiGetReportMonth = "reports/getcommissionpaymentreport";
   apiAudit = "reports/getaudit";
   apikpiNovelties = "new/getkpinovelties";
-  apiReportRejected = "reports/getreportrejected"
+  apiReportRejected = "reports/getreportrejected";
+  apiGetOrderNumber = "orders/getorder";
   token = localStorage.getItem("ACCESS_TOKEN");
   authorization = this.token;
 
@@ -89,7 +90,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -112,7 +113,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -126,7 +127,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -134,13 +135,17 @@ export class LinksService {
 
   public saveAmountCommission(amount: any) {
     return this.http
-      .post(`${this.urlComission + this.apiSaveAmountCommission}`, amount, this.httpOptions)
+      .post(
+        `${this.urlComission + this.apiSaveAmountCommission}`,
+        amount,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -148,13 +153,17 @@ export class LinksService {
 
   public saveAmountReferred(amount: any) {
     return this.http
-      .post(`${this.urlComission + this.apiSaveAmountReferred}`, amount, this.httpOptions)
+      .post(
+        `${this.urlComission + this.apiSaveAmountReferred}`,
+        amount,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -168,7 +177,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -176,48 +185,54 @@ export class LinksService {
 
   public getReports() {
     let apiReport = `${this.reports}`;
-    return this.http.get(`${this.urlComission}${apiReport}`, this.httpOptions).pipe(
-      retryWhen((errors) =>
-        errors.pipe(
-          delay(1000),
-          take(3),
-          tap((errorStatus) => { })
-        )
-      ),
-      map((resp: ResponseService) => {
-        return resp.objectResponse;
-      })
-    );
+    return this.http
+      .get(`${this.urlComission}${apiReport}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        ),
+        map((resp: ResponseService) => {
+          return resp.objectResponse;
+        })
+      );
   }
 
   public getMedals() {
-    return this.http.get(`${this.urlComission}${this.apiGetmedals}`, this.httpOptions).pipe(
-      retryWhen((errors) =>
-        errors.pipe(
-          delay(1000),
-          take(3),
-          tap((errorStatus) => { })
-        )
-      ),
-      map((resp: ResponseService) => {
-        return resp.objectResponse;
-      })
-    );
+    return this.http
+      .get(`${this.urlComission}${this.apiGetmedals}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        ),
+        map((resp: ResponseService) => {
+          return resp.objectResponse;
+        })
+      );
   }
 
   public getAmount() {
-    return this.http.get(`${this.urlComission}${this.apiGetAmounts}`, this.httpOptions).pipe(
-      retryWhen((errors) =>
-        errors.pipe(
-          delay(1000),
-          take(3),
-          tap((errorStatus) => { })
-        )
-      ),
-      map((resp: ResponseService) => {
-        return resp.objectResponse;
-      })
-    );
+    return this.http
+      .get(`${this.urlComission}${this.apiGetAmounts}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        ),
+        map((resp: ResponseService) => {
+          return resp.objectResponse;
+        })
+      );
   }
 
   public getReferrals(params) {
@@ -231,7 +246,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: ResponseService) => {
@@ -241,11 +256,13 @@ export class LinksService {
   }
 
   public getUrl(code: string) {
-    return this.http.get(`${this.url}${this.apiGetUrl}?code=${code}`, this.httpOptions).pipe(
-      map((resp: ResponseService) => {
-        return resp.objectResponse;
-      }));
-
+    return this.http
+      .get(`${this.url}${this.apiGetUrl}?code=${code}`, this.httpOptions)
+      .pipe(
+        map((resp: ResponseService) => {
+          return resp.objectResponse;
+        })
+      );
   }
 
   public getKPI(date: any) {
@@ -260,13 +277,16 @@ export class LinksService {
       }),
     };
     return this.http
-      .get(`${this.urlComission}${this.apiKPI}?start=${date.start}&end=${date.end}`, httpOptions)
+      .get(
+        `${this.urlComission}${this.apiKPI}?start=${date.start}&end=${date.end}`,
+        httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: ResponseService) => {
@@ -292,7 +312,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: ResponseService) => {
@@ -311,16 +331,19 @@ export class LinksService {
         "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
       }),
     };
-    let datesGet0 = date.start.split("T")
-    let datesGet1 = date.end.split("T")
+    let datesGet0 = date.start.split("T");
+    let datesGet1 = date.end.split("T");
     return this.http
-      .get(`${this.urlReports}${this.apikpibussiness}?start=${datesGet0[0]}&end=${datesGet1[0]}`, httpOptions)
+      .get(
+        `${this.urlReports}${this.apikpibussiness}?start=${datesGet0[0]}&end=${datesGet1[0]}`,
+        httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: ResponseService) => {
@@ -339,16 +362,19 @@ export class LinksService {
         "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
       }),
     };
-    let datesGet0 = date.start.split("T")
-    let datesGet1 = date.end.split("T")
+    let datesGet0 = date.start.split("T");
+    let datesGet1 = date.end.split("T");
     return this.http
-      .get(`${this.urlReports}${this.apikpiTotal}?start=${datesGet0[0]}&end=${datesGet1[0]}`, httpOptions)
+      .get(
+        `${this.urlReports}${this.apikpiTotal}?start=${datesGet0[0]}&end=${datesGet1[0]}`,
+        httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: ResponseService) => {
@@ -367,7 +393,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: ResponseService) => {
@@ -387,7 +413,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: ResponseService) => {
@@ -404,7 +430,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: ResponseService) => {
@@ -424,7 +450,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: ResponseService) => {
@@ -445,7 +471,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -462,7 +488,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -479,7 +505,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -487,16 +513,13 @@ export class LinksService {
 
   public getReportReferral() {
     return this.http
-      .get(
-        `${this.urlComission}${this.apiGetReportReferral}`,
-        this.httpOptions
-      )
+      .get(`${this.urlComission}${this.apiGetReportReferral}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -504,16 +527,13 @@ export class LinksService {
 
   public getReportTerms() {
     return this.http
-      .get(
-        `${this.ulrReport}${this.apigetReportTerms}`,
-        this.httpOptions
-      )
+      .get(`${this.ulrReport}${this.apigetReportTerms}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -521,16 +541,13 @@ export class LinksService {
 
   public getReportUser() {
     return this.http
-      .get(
-        `${this.ulrReport}${this.apiGetReport}`,
-        this.httpOptions
-      )
+      .get(`${this.ulrReport}${this.apiGetReport}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -546,7 +563,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -562,7 +579,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -578,7 +595,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -600,7 +617,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -621,7 +638,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -630,16 +647,13 @@ export class LinksService {
   public searchUsers(data: any) {
     //Falta cambio en urlReports
     return this.http
-      .post(
-        `${this.urlReports}${this.apiUsers}`, data,
-        this.httpOptions
-      )
+      .post(`${this.urlReports}${this.apiUsers}`, data, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((user: any) => {
@@ -659,7 +673,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -668,16 +682,13 @@ export class LinksService {
   public getSellers() {
     //apiSellers
     return this.http
-      .get(
-        `${this.urlComission}${this.apiSellers}`,
-        this.httpOptions
-      )
+      .get(`${this.urlComission}${this.apiSellers}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((user: any) => {
@@ -705,7 +716,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: ResponseService) => {
@@ -733,7 +744,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: ResponseService) => {
@@ -761,7 +772,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: ResponseService) => {
@@ -771,18 +782,23 @@ export class LinksService {
   }
 
   public getReportRejected(date: any) {
-    return this.http.get(`${this.ulrReport}${this.apiReportRejected}?start=${date.start}&end=${date.end}`, this.httpOptions).pipe(
-      retryWhen((errors) =>
-        errors.pipe(
-          delay(1000),
-          take(3),
-          tap((errorStatus) => { })
-        )
-      ),
-      map((resp: ResponseService) => {
-        return resp;
-      })
-    );
+    return this.http
+      .get(
+        `${this.ulrReport}${this.apiReportRejected}?start=${date.start}&end=${date.end}`,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        ),
+        map((resp: ResponseService) => {
+          return resp;
+        })
+      );
   }
 
   public updateCommission(data) {
@@ -797,7 +813,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: ResponseService) => {
@@ -818,7 +834,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: ResponseService) => {
@@ -826,4 +842,25 @@ export class LinksService {
         })
       );
   }
+
+  public getOrderNumber(params) {
+    return this.http
+      .get(
+        `${this.urlComission}${this.apiGetOrderNumber}?orderid=${params.reference}&business=${params.bussiness}`,
+        this.httpOptions
+      )
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((resp: ResponseService) => {
+          return resp.objectResponse;
+        })
+      );
+  }
+
 }
