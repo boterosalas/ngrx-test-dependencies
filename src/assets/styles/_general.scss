@@ -184,11 +184,23 @@ body {
   &-95 {
     width: 95%;
   }
+  &-80 {
+    width: 80%;
+  }
   &-50 {
     width: 50%;
   }
-  &-80 {
-    width: 80%;
+  &-40 {
+    width: 40%;
+  }
+  &-30 {
+    width: 30%;
+  }
+  &-20 {
+    width: 20%;
+  }
+  &-10 {
+    width: 10%;
   }
 }
 
@@ -503,6 +515,8 @@ button {
   }
 }
 
+
+
 .swal2-styled.swal2-confirm {
   background-color: transparent !important;
   color: $primary-color !important;
@@ -510,6 +524,14 @@ button {
   &:focus {
     box-shadow: none !important;
   }
+
+  &.purple-button{
+    background: $primary-color !important;;
+    color: #fff !important;;
+    border-radius: 10px !important;;
+    box-shadow: 0px 3px 9px #3A226A80 !important;;
+  }
+  
 }
 
 .mat-ink-bar {
@@ -2619,3 +2641,4 @@ h3#bussiness2 {
   
   }
   
+

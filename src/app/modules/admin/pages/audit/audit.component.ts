@@ -58,6 +58,10 @@ export class AuditComponent implements OnInit, OnDestroy {
   {
     titulo: "Legales",
     value: "3"
+  },
+  {
+    titulo: "Administración de comisiones",
+    value: "4"
   }
 ]
   ngOnInit() {
@@ -118,11 +122,19 @@ export class AuditComponent implements OnInit, OnDestroy {
       });
     }
 
+    if (this.dateForm.controls.typeRepor.value === "4") {
+      this.subscription = this.file.getReportCommissions().subscribe((resp: ResponseService) => {
+        if (resp.state === 'Success') {
+          this.openSnackBar(resp.userMessage, 'Cerrar');
+        }
+      });
+    }
+
   }
 
   change() {
-    if(this.dateForm.controls.typeRepor.value === "3") {
-      this.dateForm.get('dateRange').setValue(null)
+    if(this.dateForm.controls.typeRepor.value === "3" || this.dateForm.controls.typeRepor.value === "4") {
+      this.dateForm.controls.dateRange.setValue(null);
       this.disButon = false;
       this.showDate = false;
     } else {
