@@ -40,6 +40,7 @@ export class LinksService {
   apiGetReportReferral = "Reports/getreportreferral";
   apigetReportClickam = "Reports/getReportClickam";
   apigetReportTerms = "reports/getterms";
+  apigetReportCommissions = "reports/getadmincommissions";
   apiUsers = "Reports/getUsers";
   insurance = "Insurance/ProcessFiles";
   apiSaveLink = "Link/SaveLink";
@@ -528,6 +529,20 @@ export class LinksService {
   public getReportTerms() {
     return this.http
       .get(`${this.ulrReport}${this.apigetReportTerms}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        )
+      );
+  }
+
+  public getReportCommissions() {
+    return this.http
+      .get(`${this.ulrReport}${this.apigetReportCommissions}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
