@@ -34,10 +34,9 @@ import { ModalGenericComponent } from "src/app/modules/shared/components/modal-g
 })
 export class UsersComponent extends MatPaginatorIntl
   implements OnInit, OnDestroy {
-  users: Array<any>;
   dataSource: any;
   pageIndex: number = 0;
-  pageSize: number;
+  pageSize: number = 50;
   pageTo: number = 50;
   totalItems: number;
   paginate: string;
@@ -181,9 +180,19 @@ export class UsersComponent extends MatPaginatorIntl
     localStorage.removeItem('bussiness');
     localStorage.removeItem('formFilter');
   }
+
   checkRole() {
     this.utils.checkPermision();
   }
+
+  pagination(paginate: any) {
+    this.pageIndex = paginate;
+    this.from = (this.pageSize * this.pageIndex + 1) - 50;
+    this.to = (this.pageSize * (this.pageIndex + 1)) - 50;
+    this.searchUser(this.paginate, this.from, this.to);
+    
+  }
+
 
   /**
    * Metodo para buscar usuarios
@@ -195,10 +204,12 @@ export class UsersComponent extends MatPaginatorIntl
    */
 
   public searchUser(term, from = 1, to = this.pageTo, orderOrigin = "",   orderby = ""){
-
+    
     this.filterData[0].searchtext = term;
     this.filterData[0].to = to;
     this.filterData[0].from = from;
+    this.filterData[0].orderby = orderOrigin;
+    this.filterData[0].ordination = orderby;
 
     if (term !== this.paginate) {
       this.paginate = term;
@@ -206,9 +217,8 @@ export class UsersComponent extends MatPaginatorIntl
     }
 
       this.subscription = this.file.searchUsers(this.filterData).subscribe((user: any) => {
-          this.users = user.users;
           this.totalItems = user.total;
-          this.dataSource = new MatTableDataSource<any>(this.users);
+          this.dataSource = user.users;
         });
   }
 
@@ -497,13 +507,6 @@ export class UsersComponent extends MatPaginatorIntl
     });
   }
 
-  public pagination(paginate: any) {
-    this.pageIndex = paginate.pageIndex;
-    paginate.length = this.totalItems;
-    this.from = paginate.pageSize * paginate.pageIndex + 1;
-    this.to = paginate.pageSize * (paginate.pageIndex + 1);
-    this.searchUser(this.paginate, this.from, this.to);
-  }
 
   public getUserExcel() {
     this.dateParams = {
@@ -698,9 +701,8 @@ export class UsersComponent extends MatPaginatorIntl
     this.pageIndex = 0;
 
     this.subscription = this.file.searchUsers(this.filterData).subscribe((user: any) => {
-      this.users = user.users;
       this.totalItems = user.total;
-      this.dataSource = new MatTableDataSource<any>(this.users);
+      this.dataSource = user.users
     });
 
   }

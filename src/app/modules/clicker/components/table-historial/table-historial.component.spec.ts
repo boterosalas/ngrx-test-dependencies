@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TableHistorialComponent } from './table-historial.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 describe('TableHistorialComponent', () => {
   let component: TableHistorialComponent;
@@ -13,7 +14,8 @@ describe('TableHistorialComponent', () => {
       declarations: [ TableHistorialComponent ],
       imports: [
         TranslateModule.forRoot({}),
-        AppMaterialModule
+        AppMaterialModule,
+        NgxPaginationModule
       ]
     })
     .compileComponents();

@@ -10,6 +10,9 @@ export class TableHistoricalLinksComponent implements OnInit {
   @Input()dataSource;
   @Output() dataUser = new EventEmitter;
   @Output() product = new EventEmitter;
+  @Input() size;
+  @Input() p;
+  @Input() totalItems;
 
   displayedColumns: string[] = ['productname','date', 'comission', 'total','visits', 'button'];
 

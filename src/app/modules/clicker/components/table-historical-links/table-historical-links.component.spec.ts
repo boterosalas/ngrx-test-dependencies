@@ -4,6 +4,7 @@ import { TableHistoricalLinksComponent } from './table-historical-links.componen
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 describe('TableHistoricalLinksComponent', () => {
   let component: TableHistoricalLinksComponent;
@@ -15,7 +16,8 @@ describe('TableHistoricalLinksComponent', () => {
       imports: [
         AppMaterialModule, 
         TranslateModule.forRoot(),
-        SharedModule
+        SharedModule,
+        NgxPaginationModule
       ]
     })
     .compileComponents();

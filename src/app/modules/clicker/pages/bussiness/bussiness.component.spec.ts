@@ -396,6 +396,10 @@ describe("BussinessComponent", () => {
     expect(mockContentService.biggySearchExito).toHaveBeenCalled();
   });
 
+  afterAll(() => {
+    TestBed.resetTestingModule();
+  });
+
   it("search products carulla", () => {
     const products = {
       total: 1000,
@@ -504,7 +508,7 @@ describe("BussinessComponent", () => {
         },
       ],
     };
-    component.sellerId = "10";
+    component.sellerId = "2";
     mockContentService.biggySearchCarulla.and.returnValue(of(products));
     component.searchBiggyCarulla("112401");
     expect(mockContentService.biggySearchCarulla).toHaveBeenCalled();

@@ -14,6 +14,7 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { DialogHistoryComponent } from '../../components/dialog-history/dialog-history.component';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { MatDialog, MatDialogRef } from '@angular/material';
+import { NgxPaginationModule } from "ngx-pagination";
 
 describe("ReportComponent", () => {
   let component: ReportComponent;
@@ -83,6 +84,7 @@ describe("ReportComponent", () => {
         TranslateModule.forRoot({}),
         HttpClientTestingModule,
         BrowserAnimationsModule,
+        NgxPaginationModule,
         RouterTestingModule.withRoutes([]),
         JwtModule.forRoot({
           config: {

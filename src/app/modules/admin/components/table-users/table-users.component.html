@@ -1,10 +1,11 @@
 <div class="mat-elevation-z0 mt-4 mb-4">
   <table
     mat-table
-    [dataSource]="dataSource"
+    [dataSource]="dataSource | paginate: {itemsPerPage: size, currentPage: p, totalItems: totalItems}"
     class="users-table"
     matSort
     (matSortChange)="sortData($event)"
+    
   >
     <!-- Identificaton Column -->
     <ng-container matColumnDef="identification">
@@ -15,7 +16,7 @@
         class="cursor-pointer"
         mat-cell
         *matCellDef="let element: let i=index"
-        (click)="userInfo(dataSource.data[i])"
+        (click)="userInfo(dataSource[i])"
       >
         <p class="m-0 galano-bold text-font">
           {{ element.firstNames }} {{ element.lastNames }}
@@ -55,7 +56,7 @@
         class="cursor-pointer"
         mat-cell
         *matCellDef="let element: let i = index"
-        (click)="userEmail(dataSource.data[i])"
+        (click)="userEmail(dataSource[i])"
       >
         <span
           class="text-font"
@@ -198,4 +199,5 @@
       *matRowDef="let row; columns: displayedColumns; let i = index"
     ></tr>
   </table>
+
 </div>

@@ -28,8 +28,7 @@ export class NewsAdminComponent implements OnInit {
   paginate: string;
   pageIndex: number = 0;
   totalItems: number;
-  newsUser: Array<any>;
-  pageSize: number;
+  pageSize: number = 50;
   from: any;
   to: any;
   name: any;
@@ -139,15 +138,7 @@ export class NewsAdminComponent implements OnInit {
   }
 
   dataSource: any;
-  displayedColumns: string[] = [
-    "idclicker",
-    "subscription",
-    "users",
-    "identification",
-    "cellphone",
-    "email",
-    "status",
-  ];
+ 
 
   ngOnInit() {
     this.searchUser("");
@@ -189,6 +180,8 @@ export class NewsAdminComponent implements OnInit {
     this.filterData.searchText = term;
     this.filterData.to = to;
     this.filterData.from = from;
+    this.filterData.orderBy = orderOrigin;
+    this.filterData.ordination = orderBy;
 
     if (term !== this.paginate) {
       this.paginate = term;
@@ -198,9 +191,8 @@ export class NewsAdminComponent implements OnInit {
     this.subscription = this.usersService
       .getAllNews(this.filterData)
       .subscribe((user: any) => {
-        this.newsUser = user.novelties;
         this.totalItems = user.total;
-        this.dataSource = new MatTableDataSource<any>(this.newsUser);
+        this.dataSource = user.novelties;
       });
   }
 
@@ -232,11 +224,10 @@ export class NewsAdminComponent implements OnInit {
       });
   }
 
-  public pagination(paginate: any) {
-    this.pageIndex = paginate.pageIndex;
-    paginate.length = this.totalItems;
-    this.from = paginate.pageSize * paginate.pageIndex + 1;
-    this.to = paginate.pageSize * (paginate.pageIndex + 1);
+  pagination(paginate: any) {
+    this.pageIndex = paginate;
+    this.from = (this.pageSize * this.pageIndex + 1) - 50;
+    this.to = (this.pageSize * (this.pageIndex + 1)) - 50;
     this.searchUser(
       this.paginate,
       this.from,
@@ -244,7 +235,9 @@ export class NewsAdminComponent implements OnInit {
       this.name,
       this.direction
     );
+    
   }
+
 
   sort(event) {
     this.name = event.active.toUpperCase();
@@ -300,9 +293,8 @@ export class NewsAdminComponent implements OnInit {
     this.subscription = this.usersService
       .getAllNews(this.filterData)
       .subscribe((user: any) => {
-        this.newsUser = user.novelties;
         this.totalItems = user.total;
-        this.dataSource = new MatTableDataSource<any>(this.newsUser);
+        this.dataSource = user.novelties;
       });
 
       this.getKPI();

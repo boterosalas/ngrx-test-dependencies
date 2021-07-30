@@ -42,19 +42,44 @@
   
 
   <div id="users-table">
+    
     <app-table-users
       (dataUser)="userData($event)"
       (dataEmail)="userEmail($event)"
-      [dataSource]="dataSource"
+      [(dataSource)]="dataSource"
       (sortDataUser)="sort($event)"
+      [size]="pageSize"
+      [p]="pageIndex"
+      [totalItems]="totalItems"
     ></app-table-users>
-    <mat-paginator
-      [length]="totalItems"
-      [pageSize]="pageSize"
-      [pageSizeOptions]="[50]"
-      [pageIndex]="pageIndex"
-      (page)="pagination($event)"
-    ></mat-paginator>
+
+    <pagination-template #p="paginationApi"
+                     (pageChange)="pagination($event)"
+                     >
+        <div fxLayout="row" fxLayoutGap="12px" class="paginator" fxLayoutAlign="end center">
+          <span class="items">Items por página {{pageSize}}</span>
+          <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
+              <a  (click)="p.previous()"> <i class="tio-back_ui"></i> </a>
+          </div>
+
+          <div class="bubble" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
+            <div *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
+                <a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+                    <span class="cursor-pointer">{{ page.label }}</span>
+                </a>
+                <div *ngIf="p.getCurrent() === page.value">
+                    <span class="cursor-pointer">{{ page.label }}</span>
+                </div>
+            </div>
+        </div>
+  
+          <div class="pagination-next" [class.disabled]="p.isLastPage()">
+              <a (click)="p.next()"> <i class="tio-next_ui"></i> </a>
+          </div>
+        </div>
+    
+</pagination-template>
+
   </div>
 
   <p class="title-blue mt-4 border-bottom-gray pb-3">DESCARGAR REPORTE DE USUARIOS</p>

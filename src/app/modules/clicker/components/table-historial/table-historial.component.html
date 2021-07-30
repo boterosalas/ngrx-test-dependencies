@@ -1,5 +1,5 @@
 <h3 class="f-20 " id="historial">Historial de pagos</h3>
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+<table mat-table [dataSource]="dataSource | paginate: {itemsPerPage: size, currentPage: p, totalItems: totalItems}" class="mat-elevation-z2">
         <!-- date Column -->
         <ng-container matColumnDef="date">
           <th class="left-table-date" mat-header-cell *matHeaderCellDef> FECHA <img class="pl-2 icon-alert" src="assets/img/icon-info-silver.svg" alt="alert" matTooltip="En esta fecha Clickam realizó el pago a tu banco, ten en cuenta que puede demorarse hasta 48 horas en verse reflejado en tus movimientos bancarios." matTooltipClass="purple-tip"></th>
@@ -19,5 +19,5 @@
         </ng-container>
     
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr class="cursor-pointer" mat-row *matRowDef="let row; columns: displayedColumns;let i= index;" (click)="userInfo((dataSource.data)[i])"></tr>
+        <tr class="cursor-pointer" mat-row *matRowDef="let row; columns: displayedColumns;let i= index;" (click)="userInfo((dataSource)[i])"></tr>
       </table>
