@@ -198,208 +198,6 @@ describe("BussinessComponent", () => {
     expect(mockContentService.getBusinessContent).toHaveBeenCalled();
   });
 
-  it("go back", inject([Router], (router: Router) => {
-    spyOn(router, "navigate").and.stub();
-    component.goback();
-    expect(router.navigate).toHaveBeenCalledWith(["./"]);
-  }));
-
-  it("save link", () => {
-    component.urlshorten = "https://tyny.url/xaxa";
-    component.identification = "123456789";
-    component.plu = "123456";
-    component.business = "exito";
-    component.date = "2019/09/09";
-    component.saveLink();
-    expect(mockLinksService.saveLink).toHaveBeenCalled();
-  });
-
-  it("save reference", () => {
-    component.urlshorten = "https://tyny.url/xaxa";
-    component.identification = "123456789";
-    component.plu = "123456";
-    component.business = "exito";
-    component.date = "2019/09/09";
-    component.saveLinkReference();
-    expect(mockLinksService.saveLink).toHaveBeenCalled();
-  });
-
-  it("showReference", () => {
-    component.reference = false;
-    component.showReference();
-    expect(component.reference).toBeTruthy();
-  });
-
-  it("data category", () => {
-    component.urlshorten = "http://tynyurl.com/xsxsx";
-    component.dataSliderCategory(categorys);
-    expect(mockDialog.open).toBeTruthy();
-  });
-
-  it("next step", () => {
-    component.urlshorten = "http://tynyurl.com/xsxsx";
-    component.showForm = true;
-    component.showFormCustomer = false;
-    component.nextStep();
-    expect(component.showForm).toBeFalsy();
-    expect(component.showFormCustomer).toBeTruthy();
-  });
-
-  it("back step", () => {
-    component.urlshorten = "http://tynyurl.com/xsxsx";
-    component.showForm = true;
-    component.reference = false;
-    component.backStep();
-    expect(component.showForm).toBeFalsy();
-    expect(component.reference).toBeTruthy();
-  });
-
-  it("share mobile", () => {
-    component.share();
-    expect(component.urlshorten).not.toBeUndefined();
-  });
-
-  // it('buy', () => {
-  //   component.buy();
-  // });
-
-  it("get date", () => {
-    let date = new Date();
-    component.getDate();
-    expect(date).toBeDefined();
-  });
-
-  it("copyInputMessage", () => {
-    // const buttonModal = document.querySelector(".gtmInicioClicL");
-    // buttonModal.dispatchEvent(new Event("click"));
-    const button = document.querySelector("#btnCopy");
-    button.dispatchEvent(new Event("click"));
-    const nativeElementInput = fixture.nativeElement;
-    const input = nativeElementInput.querySelector("input");
-    expect(input).not.toBeUndefined();
-  });
-
-  it("accept Modal", () => {
-    component.acceptTerms = true;
-    component.termsForm.controls.acceptTerms.setValue(true);
-    component.acceptModal();
-    let datos = true;
-    expect(datos).toBeTruthy();
-    component.acceptTerms = false;
-    component.termsForm.controls.acceptTerms.setValue(true);
-    component.acceptTermsCheck();
-    expect(component.acceptTerms).toBeTruthy();
-  });
-
-  it("accept terms check false", () => {
-    component.acceptTerms = true;
-    component.termsForm.controls.acceptTerms.setValue(null);
-    component.acceptTermsCheck();
-    expect(component.acceptTerms).toBeFalsy();
-    mockUserService.registeruserterms.and.returnValue(of(registerFail));
-    component.registerUser();
-    expect(mockUserService.registeruserterms).toHaveBeenCalled();
-  });
-
-  // it("Terms and condition modal", () => {
-  //   component.termsAndConditions();
-  // });
-
-  it("register user ok", () => {
-    mockUserService.registeruserterms.and.returnValue(of(registerOk));
-    component.registerUser();
-    expect(mockUserService.registeruserterms).toHaveBeenCalled();
-    const product = {
-      business: "exito",
-      image: {
-        value:
-          "https://exitocol.vteximg.com.br/arquivos/ids/97470…CHA-404-L-HIMA-1628964_a.jpg?v=637110938781170000",
-      },
-      oldprice: 1717900,
-      plu: "157741",
-      price: 1546110,
-      seller: "1",
-      title: "NEVERA SIN ESCARCHA 404 L HIMA Haceb",
-      url: "https://www.exito.com/nevera-sin-escarcha-404-l-hima-157741/p",
-    };
-
-    component.id = "1";
-    component.dataProduct(product);
-    expect(product).toBeDefined();
-  });
-
-  it("modal product carulla", () => {
-    const product = {
-      business: "carulla",
-      image: {
-        value:
-          "https://carulla.vteximg.com.br/arquivos/ids/821167…Pague-5-Lleve-6-720042_a.png?v=637185259801000000",
-      },
-      oldprice: 7750,
-      plu: "131805",
-      price: 7300,
-      seller: "1",
-      title: "Agua Cristal Pague 5 lleve 6 Pet x 600 ml",
-      url: "/agua-600ml-pague-5-lleve-6-131805/p",
-    };
-
-    component.id = "2";
-    component.dataProduct(product);
-    expect(product).toBeDefined();
-  });
-
-  it("search products exito", () => {
-    const products = {
-      total: 1000,
-      products: [
-        {
-          business: "exito",
-          image: {
-            value:
-              "https://carulla.vteximg.com.br/arquivos/ids/821167…Pague-5-Lleve-6-720042_a.png?v=637185259801000000",
-          },
-          oldprice: 7750,
-          plu: "131805",
-          price: 7300,
-          seller: "1",
-          title: "Agua Cristal Pague 5 lleve 6 Pet x 600 ml",
-          url: "/agua-600ml-pague-5-lleve-6-131805/p",
-          skus: [
-            {
-              sellers: [{ name: "carulla", id: "1" }],
-            },
-          ],
-        },
-        {
-          business: "exito",
-          image: {
-            value:
-              "https://exito.vteximg.com.br/arquivos/ids/821167…Pague-5-Lleve-6-720042_a.png?v=637185259801000000",
-          },
-          oldprice: 0,
-          plu: "131805",
-          price: 0,
-          seller: "10",
-          title: "Agua Cristal Pague 5 lleve 6 Pet x 600 ml",
-          url: "/agua-600ml-pague-5-lleve-6-131805/p",
-          skus: [
-            {
-              sellers: [{ name: "desconocido", id: "10" }],
-            },
-          ],
-        },
-      ],
-    };
-    component.sellerId = "10";
-    mockContentService.biggySearchExito.and.returnValue(of(products));
-    component.searchBiggyExito("Agua");
-    expect(mockContentService.biggySearchExito).toHaveBeenCalled();
-  });
-
-  afterAll(() => {
-    TestBed.resetTestingModule();
-  });
-
   it("search products carulla", () => {
     const products = {
       total: 1000,
@@ -512,6 +310,201 @@ describe("BussinessComponent", () => {
     mockContentService.biggySearchCarulla.and.returnValue(of(products));
     component.searchBiggyCarulla("112401");
     expect(mockContentService.biggySearchCarulla).toHaveBeenCalled();
+  });
+
+  it("go back", inject([Router], (router: Router) => {
+    spyOn(router, "navigate").and.stub();
+    component.goback();
+    expect(router.navigate).toHaveBeenCalledWith(["./"]);
+  }));
+
+  it("save link", () => {
+    component.urlshorten = "https://tyny.url/xaxa";
+    component.identification = "123456789";
+    component.plu = "123456";
+    component.business = "exito";
+    component.date = "2019/09/09";
+    component.saveLink();
+    expect(mockLinksService.saveLink).toHaveBeenCalled();
+  });
+
+  it("save reference", () => {
+    component.urlshorten = "https://tyny.url/xaxa";
+    component.identification = "123456789";
+    component.plu = "123456";
+    component.business = "exito";
+    component.date = "2019/09/09";
+    component.saveLinkReference();
+    expect(mockLinksService.saveLink).toHaveBeenCalled();
+  });
+
+  it("showReference", () => {
+    component.reference = false;
+    component.showReference();
+    expect(component.reference).toBeTruthy();
+  });
+
+  it("data category", () => {
+    component.urlshorten = "http://tynyurl.com/xsxsx";
+    component.dataSliderCategory(categorys);
+    expect(mockDialog.open).toBeTruthy();
+  });
+
+  it("next step", () => {
+    component.urlshorten = "http://tynyurl.com/xsxsx";
+    component.showForm = true;
+    component.showFormCustomer = false;
+    component.nextStep();
+    expect(component.showForm).toBeFalsy();
+    expect(component.showFormCustomer).toBeTruthy();
+  });
+
+  it("back step", () => {
+    component.urlshorten = "http://tynyurl.com/xsxsx";
+    component.showForm = true;
+    component.reference = false;
+    component.backStep();
+    expect(component.showForm).toBeFalsy();
+    expect(component.reference).toBeTruthy();
+  });
+
+  it("share mobile", () => {
+    component.share();
+    expect(component.urlshorten).not.toBeUndefined();
+  });
+
+  // it('buy', () => {
+  //   component.buy();
+  // });
+
+  it("get date", () => {
+    let date = new Date();
+    component.getDate();
+    expect(date).toBeDefined();
+  });
+
+  it("copyInputMessage", () => {
+    // const buttonModal = document.querySelector(".gtmInicioClicL");
+    // buttonModal.dispatchEvent(new Event("click"));
+    const button = document.querySelector("#btnCopy");
+    button.dispatchEvent(new Event("click"));
+    const nativeElementInput = fixture.nativeElement;
+    const input = nativeElementInput.querySelector("input");
+    expect(input).not.toBeUndefined();
+  });
+
+  it("accept Modal", () => {
+    component.acceptTerms = true;
+    component.termsForm.controls.acceptTerms.setValue(true);
+    component.acceptModal();
+    let datos = true;
+    expect(datos).toBeTruthy();
+    component.acceptTerms = false;
+    component.termsForm.controls.acceptTerms.setValue(true);
+    component.acceptTermsCheck();
+    expect(component.acceptTerms).toBeTruthy();
+  });
+
+  it("accept terms check false", () => {
+    component.acceptTerms = true;
+    component.termsForm.controls.acceptTerms.setValue(null);
+    component.acceptTermsCheck();
+    expect(component.acceptTerms).toBeFalsy();
+    mockUserService.registeruserterms.and.returnValue(of(registerFail));
+    component.registerUser();
+    expect(mockUserService.registeruserterms).toHaveBeenCalled();
+  });
+
+
+  it("register user ok", () => {
+    mockUserService.registeruserterms.and.returnValue(of(registerOk));
+    component.registerUser();
+    expect(mockUserService.registeruserterms).toHaveBeenCalled();
+    const product = {
+      business: "exito",
+      image: {
+        value:
+          "https://exitocol.vteximg.com.br/arquivos/ids/97470…CHA-404-L-HIMA-1628964_a.jpg?v=637110938781170000",
+      },
+      oldprice: 1717900,
+      plu: "157741",
+      price: 1546110,
+      seller: "1",
+      title: "NEVERA SIN ESCARCHA 404 L HIMA Haceb",
+      url: "https://www.exito.com/nevera-sin-escarcha-404-l-hima-157741/p",
+    };
+
+    component.id = "1";
+    component.dataProduct(product);
+    expect(product).toBeDefined();
+  });
+
+  it("modal product carulla", () => {
+    const product = {
+      business: "carulla",
+      image: {
+        value:
+          "https://carulla.vteximg.com.br/arquivos/ids/821167…Pague-5-Lleve-6-720042_a.png?v=637185259801000000",
+      },
+      oldprice: 7750,
+      plu: "131805",
+      price: 7300,
+      seller: "1",
+      title: "Agua Cristal Pague 5 lleve 6 Pet x 600 ml",
+      url: "/agua-600ml-pague-5-lleve-6-131805/p",
+    };
+
+    component.id = "2";
+    component.dataProduct(product);
+    expect(product).toBeDefined();
+  });
+
+  it("search products exito", () => {
+    const products = {
+      total: 1000,
+      products: [
+        {
+          business: "exito",
+          image: {
+            value:
+              "https://carulla.vteximg.com.br/arquivos/ids/821167…Pague-5-Lleve-6-720042_a.png?v=637185259801000000",
+          },
+          oldprice: 7750,
+          plu: "131805",
+          price: 7300,
+          seller: "1",
+          title: "Agua Cristal Pague 5 lleve 6 Pet x 600 ml",
+          url: "/agua-600ml-pague-5-lleve-6-131805/p",
+          skus: [
+            {
+              sellers: [{ name: "carulla", id: "1" }],
+            },
+          ],
+        },
+        {
+          business: "exito",
+          image: {
+            value:
+              "https://exito.vteximg.com.br/arquivos/ids/821167…Pague-5-Lleve-6-720042_a.png?v=637185259801000000",
+          },
+          oldprice: 0,
+          plu: "131805",
+          price: 0,
+          seller: "10",
+          title: "Agua Cristal Pague 5 lleve 6 Pet x 600 ml",
+          url: "/agua-600ml-pague-5-lleve-6-131805/p",
+          skus: [
+            {
+              sellers: [{ name: "desconocido", id: "10" }],
+            },
+          ],
+        },
+      ],
+    };
+    component.sellerId = "10";
+    mockContentService.biggySearchExito.and.returnValue(of(products));
+    component.searchBiggyExito("Agua");
+    expect(mockContentService.biggySearchExito).toHaveBeenCalled();
   });
 
 });
