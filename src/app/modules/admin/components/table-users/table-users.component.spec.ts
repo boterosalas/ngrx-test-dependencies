@@ -4,6 +4,7 @@ import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-mater
 import { TranslateModule } from '@ngx-translate/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 describe('TableUsersComponent', () => {
   let component: TableUsersComponent;
@@ -15,7 +16,8 @@ describe('TableUsersComponent', () => {
       imports: [
         AppMaterialModule,
         TranslateModule.forRoot({}),
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        NgxPaginationModule
       ],
       schemas: [
         NO_ERRORS_SCHEMA

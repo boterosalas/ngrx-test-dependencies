@@ -7,7 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateModule } from '@ngx-translate/core';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from 'src/app/services/user.service';
 import { of } from 'rxjs/internal/observable/of';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
@@ -56,6 +56,7 @@ describe('ProfileComponent', () => {
         TranslateModule.forRoot({}),
         RouterTestingModule.withRoutes([]),
         BrowserAnimationsModule,
+        NoopAnimationsModule,
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
@@ -99,6 +100,10 @@ describe('ProfileComponent', () => {
     spyOn(service, 'getuserdata').and.returnValue(of(dataUserC));
     component.getUserData();
     expect(service.getuserdata).toHaveBeenCalled();
+  });
+
+  afterAll(() => {
+    TestBed.resetTestingModule();
   });
 
 });

@@ -18,6 +18,7 @@ import * as moment from 'moment';
 import { UserService } from 'src/app/services/user.service';
 import { LinksService } from 'src/app/services/links.service';
 import { of } from 'rxjs';
+import { NgxPaginationModule } from 'ngx-pagination';
 moment.locale('es');
 
 describe('NewsAdminComponent', () => {
@@ -127,6 +128,7 @@ describe('NewsAdminComponent', () => {
         BrowserAnimationsModule,
         SharedModule,
         NgxDaterangepickerMd,
+        NgxPaginationModule,
         RouterTestingModule.withRoutes([]),
         JwtModule.forRoot({
           config: {

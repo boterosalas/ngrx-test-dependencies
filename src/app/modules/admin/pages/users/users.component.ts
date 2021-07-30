@@ -34,7 +34,6 @@ import { ModalGenericComponent } from "src/app/modules/shared/components/modal-g
 })
 export class UsersComponent extends MatPaginatorIntl
   implements OnInit, OnDestroy {
-  users: Array<any>;
   dataSource: any;
   pageIndex: number = 0;
   pageSize: number = 50;
@@ -218,15 +217,8 @@ export class UsersComponent extends MatPaginatorIntl
     }
 
       this.subscription = this.file.searchUsers(this.filterData).subscribe((user: any) => {
-          this.users = user.users;
           this.totalItems = user.total;
-          if(this.pageIndex ===  0){
-            this.dataSource = this.users.slice(this.pageIndex, this.pageSize);
-          } else {
-            this.dataSource = this.users.slice(this.pageIndex  * this.pageSize - this.pageSize, this.pageIndex  * this.pageSize);
-            this.users =  user.users;
-            this.dataSource = this.users;
-          }
+          this.dataSource = user.users;
         });
   }
 
@@ -709,9 +701,8 @@ export class UsersComponent extends MatPaginatorIntl
     this.pageIndex = 0;
 
     this.subscription = this.file.searchUsers(this.filterData).subscribe((user: any) => {
-      this.users = user.users;
       this.totalItems = user.total;
-      this.dataSource = new MatTableDataSource<any>(this.users);
+      this.dataSource = user.users
     });
 
   }

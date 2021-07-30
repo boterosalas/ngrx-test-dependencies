@@ -28,7 +28,6 @@ export class NewsAdminComponent implements OnInit {
   paginate: string;
   pageIndex: number = 0;
   totalItems: number;
-  newsUser: Array<any>;
   pageSize: number = 50;
   from: any;
   to: any;
@@ -192,14 +191,8 @@ export class NewsAdminComponent implements OnInit {
     this.subscription = this.usersService
       .getAllNews(this.filterData)
       .subscribe((user: any) => {
-        this.newsUser = user.novelties;
         this.totalItems = user.total;
-        if(this.pageIndex ===  0){
-          this.dataSource = this.newsUser.slice(this.pageIndex, this.pageSize);
-        } else {
-          this.dataSource = this.newsUser.slice(this.pageIndex  * this.pageSize - this.pageSize, this.pageIndex  * this.pageSize);
-          this.dataSource = user.novelties;
-        }
+        this.dataSource = user.novelties;
       });
   }
 
@@ -300,7 +293,6 @@ export class NewsAdminComponent implements OnInit {
     this.subscription = this.usersService
       .getAllNews(this.filterData)
       .subscribe((user: any) => {
-        this.newsUser = user.novelties;
         this.totalItems = user.total;
         this.dataSource = user.novelties;
       });
