@@ -76,6 +76,7 @@ import { DialogDeleteNotificationComponent } from './components/dialog-delete-no
 import { NgxPaginationModule } from "ngx-pagination";
 import { TableNoveltiesComponent } from './components/table-novelties/table-novelties.component';
 import { StoriesComponent } from './pages/stories/stories.component';
+import { CardAdminStoryComponent } from './components/card-admin-story/card-admin-story.component';
 
 const routes: Routes = [
   {
@@ -376,6 +377,7 @@ const routes: Routes = [
     DialogDeleteNotificationComponent,
     TableNoveltiesComponent,
     StoriesComponent,
+    CardAdminStoryComponent,
   ],
   imports: [
     AngularEditorModule,
