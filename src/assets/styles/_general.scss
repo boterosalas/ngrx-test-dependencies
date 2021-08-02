@@ -379,6 +379,11 @@ body {
   color: $white;
 }
 
+.mat-red {
+  background: $secondary-color;
+  color: $white;
+}
+
 .gray {
   color: $color-p;
 }
@@ -2641,4 +2646,10 @@ h3#bussiness2 {
   
   }
   
+  .delete-all, .select-all{
+    .mat-button-wrapper{
+        display: flex;
+        align-items: center;
+    }
+}
 
