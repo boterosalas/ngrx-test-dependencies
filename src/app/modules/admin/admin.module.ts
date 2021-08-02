@@ -77,6 +77,7 @@ import { NgxPaginationModule } from "ngx-pagination";
 import { TableNoveltiesComponent } from './components/table-novelties/table-novelties.component';
 import { StoriesComponent } from './pages/stories/stories.component';
 import { CardAdminStoryComponent } from './components/card-admin-story/card-admin-story.component';
+import { DialogStoryComponent } from './components/dialog-story/dialog-story.component';
 
 const routes: Routes = [
   {
@@ -378,6 +379,7 @@ const routes: Routes = [
     TableNoveltiesComponent,
     StoriesComponent,
     CardAdminStoryComponent,
+    DialogStoryComponent,
   ],
   imports: [
     AngularEditorModule,
