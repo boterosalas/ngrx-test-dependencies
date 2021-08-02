@@ -51,7 +51,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { ConfigurationsComponent } from './pages/configurations/configurations.component';
 import { InformationBussinessComponent } from './pages/information-bussiness/information-bussiness.component';
 import { ManageComisionBussinessComponent } from './pages/manage-comision-bussiness/manage-comision-bussiness.component';
-import { CarrouselAdminComponent } from './pages/carrousel-admin/carrousel-admin.component';
+import { ToolsAdminComponent } from './pages/tools-admin/tools-admin.component';
 import { NavigationComponent } from './pages/navigation/navigation.component';
 import { MatPasswordStrengthModule } from "@angular-material-extensions/password-strength";
 import { NavigationFooterComponent } from './components/navigation-footer/navigation-footer.component';
@@ -179,7 +179,7 @@ const routes: Routes = [
   },
   {
     path: "carrousel-admin",
-    component: CarrouselAdminComponent,
+    component: ToolsAdminComponent,
     canActivate: [RoleGuard],
     data: {
       role: "ADMIN",
@@ -352,7 +352,7 @@ const routes: Routes = [
     ConfigurationsComponent,
     InformationBussinessComponent,
     ManageComisionBussinessComponent,
-    CarrouselAdminComponent,
+    ToolsAdminComponent,
     NavigationComponent,
     NavigationFooterComponent,
     NavigationGroupComponent,

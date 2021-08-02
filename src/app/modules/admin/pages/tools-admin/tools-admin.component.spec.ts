@@ -14,12 +14,13 @@ import { ContentService } from 'src/app/services/content.service';
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 import { JwtModule } from "@auth0/angular-jwt";
+import { ToolsAdminComponent } from './tools-admin.component';
 
-import { CarrouselAdminComponent } from './carrousel-admin.component';
+
 
 describe('CarrouselAdminComponent', () => {
-  let component: CarrouselAdminComponent;
-  let fixture: ComponentFixture<CarrouselAdminComponent>;
+  let component: ToolsAdminComponent;
+  let fixture: ComponentFixture<ToolsAdminComponent>;
   const dialogMock = {
     close: () => { },
     beforeClosed: () => { }
@@ -156,7 +157,7 @@ describe('CarrouselAdminComponent', () => {
   ]);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CarrouselAdminComponent],
+      declarations: [ToolsAdminComponent],
       imports: [
         AppMaterialModule,
         TranslateModule.forRoot(),
@@ -197,7 +198,7 @@ describe('CarrouselAdminComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CarrouselAdminComponent);
+    fixture = TestBed.createComponent(ToolsAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

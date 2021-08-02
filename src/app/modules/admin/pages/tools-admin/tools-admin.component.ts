@@ -18,11 +18,11 @@ export interface PeriodicElement2 {
   activated: any;
 }
 @Component({
-  selector: 'app-carrousel-admin',
-  templateUrl: './carrousel-admin.component.html',
-  styleUrls: ['./carrousel-admin.component.scss']
+  selector: 'app-tools-admin',
+  templateUrl: './tools-admin.component.html',
+  styleUrls: ['./tools-admin.component.scss']
 })
-export class CarrouselAdminComponent implements OnInit {
+export class ToolsAdminComponent implements OnInit {
   displayedColumns: string[] = ['drag', 'imagenWeb', 'imagenMobile', 'nameContent', 'link', 'bussiness', 'comision', 'active', 'actions'];
   displayedColumns2: string[] = ['drag', 'image', 'nameContent', 'link', 'bussiness', 'comision', 'active', 'actions'];
   dataAddImagen: FormGroup;
