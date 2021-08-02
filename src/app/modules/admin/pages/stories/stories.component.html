@@ -1,0 +1,41 @@
+<div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+    <mat-form-field class="selected-business separate">
+        <mat-placeholder class="selected-business"
+          >NEGOCIO</mat-placeholder
+        >
+        <mat-select
+          id="business"
+          class="selected-business"
+        >
+          <mat-option
+            (click)="onChangeSelected(item)"
+            *ngFor="let item of business"
+            value="{{ item.id }}"
+          >
+            <span>{{ item.description }}</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <span class="select-all">
+        <button mat-button color="orange" (click)="selectAll()" > Seleccionar todos <i class="tio-all_done pl-2"></i> </button>
+     </span>
+
+      <span class="delete-all">
+        <button mat-button color="red" (click)="deletetAll()" > Borrar <i class="tio-delete pl-2"></i> </button>
+     </span>
+
+     <div class="w-100" fxLayout="row" fxLayoutAlign="end center">
+         <span class="new-story">
+            <button mat-button color="orange" (click)="newStory()" > Nueva story <i class="tio-upload_on_cloud pl-2"></i> </button>
+         </span>
+     </div>
+
+</div>
+
+<div>
+    <h3 class="popup-category">Activos <span class="line"></span></h3>
+    <h3 class="popup-category">Programados <span class="line"></span></h3>
+    <h3 class="popup-category">Borradores <span class="line"></span></h3>
+    <h3 class="popup-category">Vencidos <span class="line"></span></h3>
+</div>
