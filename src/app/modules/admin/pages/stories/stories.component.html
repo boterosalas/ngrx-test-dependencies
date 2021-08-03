@@ -35,12 +35,15 @@
 
 <div>
     <h3 class="popup-category">Activos <span class="line"></span></h3>
-    <!-- <app-card-admin-story></app-card-admin-story> -->
-    <app-dialog-story></app-dialog-story>
+    <app-card-admin-story [data]="item" *ngFor="let item of active"></app-card-admin-story>
+    <!-- <app-dialog-story></app-dialog-story> -->
 
     <h3 class="popup-category">Programados <span class="line"></span></h3>
+    <app-card-admin-story [data]="item" *ngFor="let item of scheduled"></app-card-admin-story>
 
     <h3 class="popup-category">Borradores <span class="line"></span></h3>
+    <app-card-admin-story [data]="item" *ngFor="let item of drafts"></app-card-admin-story>
 
     <h3 class="popup-category">Vencidos <span class="line"></span></h3>
+    <app-card-admin-story [data]="item" *ngFor="let item of defeated"></app-card-admin-story>
 </div>
