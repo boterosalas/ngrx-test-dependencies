@@ -16,14 +16,22 @@
           >
         </span>
 
-        <span *ngIf="nameFile !== ''"> </span>
+        <span *ngIf="nameFile !== '' && file!== undefined" class="over">
+        <img class="preview-img" [src]="'data:image/jpg;base64,' + file" [alt]="nameFile" />
+        <div class="overlay">
+            <i class="tio-edit style-icon"></i> 
+            <p class="m-0">Editar</p>
+          </div>
       </span>
-    </label>
+      </span>
+    
 
     <mat-error *ngIf="showErrorImg" class="text-small small pb-2 d-block">
       Formato inválido, solo se pueden subir archivos con la extensión JPG max
       7MB y MP4 max 72MB
     </mat-error>
+    
+    </label>
 
     <input
       (change)="onFileChangeFiles($event)"
@@ -61,16 +69,7 @@
           formControlName="link"
           type="text"
         />
-        <mat-error
-          id="requiredName"
-          *ngIf="
-            storieForm.controls.link.invalid &&
-            storieForm.controls.link.errors.required
-          "
-          >{{
-            "GENERIC.REQUIRED" | translate: { formValue: "Link" }
-          }}</mat-error
-        >
+
       </mat-form-field>
       <mat-form-field >
         <input
@@ -79,23 +78,14 @@
           formControlName="commission"
           type="text"
         />
-        <mat-error
-          id="requiredName"
-          *ngIf="
-            storieForm.controls.commission.invalid &&
-            storieForm.controls.commission.errors.required
-          "
-          >{{
-            "GENERIC.REQUIRED" | translate: { formValue: "Comisión" }
-          }}</mat-error
-        >
+
       </mat-form-field>
 
-      <mat-slide-toggle formControlName="eraser">Borrador</mat-slide-toggle>
+      <mat-slide-toggle (toggleChange)="date()" formControlName="eraser">Borrador</mat-slide-toggle>
 
-      <h4 class="border-bottom-gray pb-1 pt-1">PUBLICACIÓN</h4>
+      <h4 *ngIf="showDate"  class="border-bottom-gray pb-1 pt-1">PUBLICACIÓN</h4>
 
-      <div fxLayout="row" class="mt-2" fxLayoutGap="10px">
+      <div *ngIf="showDate" fxLayout="row" class="mt-2" fxLayoutGap="10px">
         <div>
           <label class="label mt-2 mb-1">
             FECHA DE PUBLICACIÓN 
@@ -105,6 +95,7 @@
               matInput
               [matDatepicker]="picker"
               formControlName="date"
+              [min]="minDate"
               readonly
             />
             <mat-datepicker-toggle
@@ -145,7 +136,7 @@
 
         <div fxLayout="row" fxLayoutAlign="end center" class="mt-2">
             <button mat-button ngClass="button_cancel" (click)="onNoClick()"> Cancelar </button>
-            <button mat-raised-button color="orange" (click)="agregarCategory()" id="download-users" class="ml-2" [disabled]="!storieForm.valid"> Guardar</button>    
+            <button mat-raised-button color="orange" (click)="saveStory()" id="download-users" class="ml-2" [disabled]="!storieForm.valid"> Guardar</button>    
         </div>
 
   </div>
