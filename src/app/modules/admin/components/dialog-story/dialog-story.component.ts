@@ -84,7 +84,7 @@ export class DialogStoryComponent implements OnInit {
         nameContent: [description, Validators.required],
         link: [link],
         commission: [infoaditional],
-        image: [this.imageEdit, Validators.required],
+        image: ['', Validators.required],
         date: [this.dateEdit],
         hour: [this.hourEdit],
         eraser: [this.eraserEdit],
