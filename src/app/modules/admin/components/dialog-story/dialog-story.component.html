@@ -7,6 +7,7 @@
 >
   <div fxLayout="column" fxFlex="30%" class="upload" fxLayoutAlign="center center">
     <label for="image-story" id="upload" class="cursor-pointer">
+    <span  *ngIf="imageEdit === ''">
       <span *ngIf="!showErrorImg">
         <span *ngIf="nameFile === ''">
             <i fxLayout="column"  class="tio-upload_on_cloud style-icon mb-2"></i>
@@ -30,7 +31,16 @@
       Formato inválido, solo se pueden subir archivos con la extensión JPG max
       7MB y MP4 max 72MB
     </mat-error>
-    
+    </span>
+
+    <span *ngIf="imageEdit !== ''" class="over">
+        <img class="preview-img" [src]="imageEdit" />
+        <div class="overlay">
+            <i class="tio-edit style-icon"></i> 
+            <p class="m-0">Editar</p>
+          </div>
+    </span>
+
     </label>
 
     <input

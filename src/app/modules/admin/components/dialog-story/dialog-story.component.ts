@@ -35,21 +35,62 @@ export class DialogStoryComponent implements OnInit {
   titleButton = "Publicar";
   active = true;
   disableHour = true;
+  editMode = false;
+  dateEdit:any;
+  hourEdit:any;
+  eraserEdit:Boolean;
+  imageEdit = "";
+  saveStoryData:any;
 
   ngOnInit() {
     this.formStory();
   }
 
   public formStory() {
-    this.storieForm = this.fb.group({
-      nameContent: [null, Validators.required],
-      link: [null],
-      commission: [null],
-      image: [null, Validators.required],
-      date: [null],
-      hour: [null],
-      eraser: [false],
-    });
+    let {date, description, extension, imageurl, infoaditional, link, active} = this.data;
+
+    if(description === undefined) {
+      this.storieForm = this.fb.group({
+        nameContent: [null, Validators.required],
+        link: [null],
+        commission: [null],
+        image: [null, Validators.required],
+        date: [null],
+        hour: [null],
+        eraser: [false],
+      });
+    } else{
+      this.editMode = true;
+      if(imageurl !== '') {
+        this.imageEdit = imageurl;
+      }
+
+      if(date !== null) {
+        let splitDatepublish = date.split('T');
+        this.dateEdit = moment(splitDatepublish[0]).toDate();
+        let hour = splitDatepublish[1];
+        this.hourEdit = this.utils.toStandardTime(hour);
+        this.active = active;
+        this.titleButton = "Programar";
+      }
+
+      if(date === null && active === false){
+        this.eraserEdit = true;
+        this.titleButton = "Guardar como borrador";
+        this.showDate = false;
+      }
+
+      this.storieForm = this.fb.group({
+        nameContent: [description, Validators.required],
+        link: [link],
+        commission: [infoaditional],
+        image: [this.imageEdit, Validators.required],
+        date: [this.dateEdit],
+        hour: [this.hourEdit],
+        eraser: [this.eraserEdit],
+      });
+
+    }
   }
 
   public getExtensionFile(nameFile: string, getSize: number) {
@@ -80,6 +121,7 @@ export class DialogStoryComponent implements OnInit {
   }
 
   public onFileChangeFiles(event) {
+    this.imageEdit = "";
     const files = event.target.files;
     let nameFileStory = files[0].name;
     let readerStory = new FileReader();
@@ -154,20 +196,36 @@ export class DialogStoryComponent implements OnInit {
       this.publicationDate = null;
     }
 
-    let saveStoryData = [
-      {
-        description: nameContent,
-        link: link,
-        idBusiness: this.data,
-        infoAditional: commission,
-        active: this.active,
-        extension: this.extension,
-        datepublish: this.publicationDate,
-        image: this.file,
-      },
-    ];
+    if(this.editMode === false) {
+      this.saveStoryData = [
+        {
+          description: nameContent,
+          link: link,
+          idBusiness: this.data ,
+          infoAditional: commission,
+          active: this.active,
+          extension: this.extension,
+          datepublish: this.publicationDate,
+          image: this.file,
+        },
+      ];
+    } else {
+      this.saveStoryData = [
+        {
+          description: nameContent,
+          link: link,
+          idBusiness: this.data.idBusiness,
+          infoAditional: commission,
+          active: this.active,
+          extension: this.extension,
+          datepublish: this.publicationDate,
+          image: this.file,
+        },
+      ];
+    }
+
     this._content
-      .saveStories(saveStoryData)
+      .saveStories(this.saveStoryData)
       .subscribe(() => this.dialogRef.close());
   }
 }

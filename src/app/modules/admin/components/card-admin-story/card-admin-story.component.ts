@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import Swal from 'sweetalert2';
+import { DialogStoryComponent } from '../dialog-story/dialog-story.component';
 
 @Component({
   selector: 'app-card-admin-story',
@@ -8,7 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class CardAdminStoryComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   @Input() data:string;
 
@@ -17,6 +19,10 @@ export class CardAdminStoryComponent implements OnInit {
 
   public editStory(data){
     console.log(data);
+    this.dialog.open(DialogStoryComponent, {
+      width: '800px',
+      data: data
+    });
   }
 
   deleteStory(id){
@@ -39,3 +45,5 @@ export class CardAdminStoryComponent implements OnInit {
 
 
 }
+
+

@@ -29,7 +29,7 @@ export class StoriesComponent implements OnInit, OnDestroy {
       infoaditional: "Hasta 2%",
       active: true,
       orderby: null,
-      date: "2021-05-21T14:49:53.31",
+      date: null,
       new: false,
       extension: 'jpg'
 
@@ -44,7 +44,7 @@ export class StoriesComponent implements OnInit, OnDestroy {
       link: "https://www.loteriadebogota.com/ganaste/?utm_source=clickam&utm_medium=referral&utm_campaign={1}",
       idbusiness: 22,
       infoaditional: "Hasta 3%",
-      active: true,
+      active: false,
       orderby: null,
       date: "2021-05-21T14:49:53.31",
       new: false,
@@ -60,9 +60,9 @@ export class StoriesComponent implements OnInit, OnDestroy {
       link: "https://www.loteriadebogota.com/ganaste/?utm_source=clickam&utm_medium=referral&utm_campaign={1}",
       idbusiness: 22,
       infoaditional: "Hasta 2%",
-      active: true,
+      active: false,
       orderby: null,
-      date: "2021-05-21T14:49:53.31",
+      date: null,
       new: false,
       extension: 'jpg'
     },
