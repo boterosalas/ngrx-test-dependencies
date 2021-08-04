@@ -425,7 +425,7 @@ const routes: Routes = [
     })
   ],
   exports: [SideMenuComponent],
-  entryComponents: [DialogUserComponent, DialogCategoryComponent, DialogNewsComponent, DialogVideoPlayerComponent, DialogNavigationGroupComponent, DialogNavigationItemComponent, DialogFaqGroupComponent, DialogFaqItemComponent, DialogDeleteNotificationComponent],
+  entryComponents: [DialogUserComponent, DialogCategoryComponent, DialogNewsComponent, DialogVideoPlayerComponent, DialogNavigationGroupComponent, DialogNavigationItemComponent, DialogFaqGroupComponent, DialogFaqItemComponent, DialogDeleteNotificationComponent, DialogStoryComponent],
   providers: [{ provide: MatPaginatorIntl, useClass: UsersComponent }]
 })
 export class AdminModule { }

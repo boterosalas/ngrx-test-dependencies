@@ -1,6 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import * as moment from "moment";
+import { ContentService } from "src/app/services/content.service";
 import { UtilsService } from "src/app/services/utils.service";
 import Swal from "sweetalert2";
 
@@ -10,7 +12,14 @@ import Swal from "sweetalert2";
   styleUrls: ["./dialog-story.component.scss"],
 })
 export class DialogStoryComponent implements OnInit {
-  constructor(private fb: FormBuilder, private utils: UtilsService) {}
+  constructor(
+    private fb: FormBuilder,
+    private utils: UtilsService,
+    private dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<any>,
+    private _content: ContentService
+  ) {}
 
   storieForm: FormGroup;
   image: string;
@@ -23,6 +32,9 @@ export class DialogStoryComponent implements OnInit {
   minDate = new Date();
   showDate = true;
   publicationDate: any;
+  titleButton = "Publicar";
+  active = true;
+  disableHour = true;
 
   ngOnInit() {
     this.formStory();
@@ -93,36 +105,69 @@ export class DialogStoryComponent implements OnInit {
 
   public date() {
     this.storieForm.controls.eraser.valueChanges.subscribe((val) => {
-      if (val) {
+      if (val === true) {
         this.showDate = false;
+        this.active = false;
+        this.titleButton = "Guardar como borrador";
         this.storieForm.controls.date.setValue(null);
         this.storieForm.controls.hour.setValue(null);
       } else {
         this.showDate = true;
+        this.titleButton = "Publicar";
       }
     });
   }
 
-  public saveStory() {
-    let { commission, date, eraser, hour, link, nameContent } =
-      this.storieForm.value;
-
-    if (date !== null) {
-      hour = this.utils.HoraMilitar(hour);
-      date = moment(date).format("YYYY-MM-DD");
-      this.publicationDate = `${date} ${hour}`;
+  public changeDate() {
+    if (this.storieForm.controls.date.value !== null) {
+      this.titleButton = "Programar";
+      this.active = false;
+      this.disableHour = false;
     } else {
+      this.active = true;
+      this.titleButton = "Publicar";
+      this.disableHour = true;
+    }
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  public saveStory() {
+    let { commission, date, hour, link, nameContent } = this.storieForm.value;
+
+    
+    if(date !== null) {
+      date = moment(date).format("YYYY-MM-DD");
+    }
+
+    if(hour!== null) {
+      hour = this.utils.HoraMilitar(hour);
+    } else{
+      hour = "00:00:00";
+    }
+
+    if(date !== null) {
+      this.publicationDate = `${date} ${hour}`;
+    } else{
       this.publicationDate = null;
     }
 
-    let saveStoryData = {
-      image: this.file,
-      content: nameContent,
-      commission: commission,
-      visible: eraser,
-      link: link,
-      publicationDate: this.publicationDate,
-    };
-    console.log(saveStoryData);
+    let saveStoryData = [
+      {
+        description: nameContent,
+        link: link,
+        idBusiness: this.data,
+        infoAditional: commission,
+        active: this.active,
+        extension: this.extension,
+        datepublish: this.publicationDate,
+        image: this.file,
+      },
+    ];
+    this._content
+      .saveStories(saveStoryData)
+      .subscribe(() => this.dialogRef.close());
   }
 }

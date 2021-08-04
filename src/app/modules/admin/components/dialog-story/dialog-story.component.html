@@ -5,7 +5,7 @@
   fxLayoutAlign="space-between start"
   fxLayoutGap="30px"
 >
-  <div fxLayout="column" fxFlex="25%" class="upload" fxLayoutAlign="center center">
+  <div fxLayout="column" fxFlex="30%" class="upload" fxLayoutAlign="center center">
     <label for="image-story" id="upload" class="cursor-pointer">
       <span *ngIf="!showErrorImg">
         <span *ngIf="nameFile === ''">
@@ -96,15 +96,16 @@
               [matDatepicker]="picker"
               formControlName="date"
               [min]="minDate"
+              (dateChange)="changeDate()"
               readonly
-            />
-            <mat-datepicker-toggle
+              />
+              <mat-datepicker-toggle
               class="icon-date"
               matSuffix
               [for]="picker"
-            ></mat-datepicker-toggle>
-            
-            <mat-datepicker
+              ></mat-datepicker-toggle>
+              
+              <mat-datepicker
               class="icon-date"
               touchUi
               #picker
@@ -121,10 +122,11 @@
             <input
               [ngxTimepicker]="min"
               matInput
-              aria-label="default time"
+              aria-label="disabled time picker"
               [ngxTimepicker]="defaultValue"
               [min]="minHours"
               formControlName="hour"
+              [disabled]="disableHour"
               readonly
             />
           <mat-icon  matPrefix class="clock-time">alarm</mat-icon>
@@ -136,7 +138,7 @@
 
         <div fxLayout="row" fxLayoutAlign="end center" class="mt-2">
             <button mat-button ngClass="button_cancel" (click)="onNoClick()"> Cancelar </button>
-            <button mat-raised-button color="orange" (click)="saveStory()" id="download-users" class="ml-2" [disabled]="!storieForm.valid"> Guardar</button>    
+            <button mat-raised-button color="orange" (click)="saveStory()" id="download-users" class="ml-2" [disabled]="!storieForm.valid"> {{titleButton}} </button>    
         </div>
 
   </div>

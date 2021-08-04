@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
+import { MatDialog } from "@angular/material";
 import { Subscription } from "rxjs";
 import { ContentService } from "src/app/services/content.service";
+import { DialogFaqGroupComponent } from "../../components/dialog-faq-group/dialog-faq-group.component";
+import { DialogStoryComponent } from "../../components/dialog-story/dialog-story.component";
 
 @Component({
   selector: "app-stories",
@@ -8,10 +11,13 @@ import { ContentService } from "src/app/services/content.service";
   styleUrls: ["./stories.component.scss"],
 })
 export class StoriesComponent implements OnInit, OnDestroy {
-  constructor(private content: ContentService) {}
+  constructor(private content: ContentService, private dialog: MatDialog) {}
 
   private subscription: Subscription = new Subscription();
   business = [];
+  newStoryActiveButton = true;
+  idBussiness:number;
+
   active = [
     {
       description: "Gane y Viaje",
@@ -89,7 +95,19 @@ export class StoriesComponent implements OnInit, OnDestroy {
   }
 
   public onChangeSelected(business) {
-    console.log(business);
+    if(business !== ''){
+      this.newStoryActiveButton = false;
+      this.idBussiness = business.id;
+    } else{
+      this.newStoryActiveButton = true;
+    }
+  }
+
+  public newStory() {
+    this.dialog.open(DialogStoryComponent, {
+      width: '800px',
+      data: this.idBussiness
+    });
   }
 
   ngOnDestroy(): void {

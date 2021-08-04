@@ -18,16 +18,16 @@
       </mat-form-field>
 
       <span class="select-all">
-        <button mat-button color="orange" (click)="selectAll()" > Seleccionar todos <i class="tio-all_done pl-2"></i> </button>
+        <button mat-raised-button color="orange" (click)="selectAll()"  [disabled]="newStoryActiveButton" > Seleccionar todos <i class="tio-all_done pl-2"></i> </button>
      </span>
 
       <span class="delete-all">
-        <button mat-button color="red" (click)="deletetAll()" > Borrar <i class="tio-delete pl-2"></i> </button>
+        <button mat-raised-button color="red" (click)="deletetAll()"> Borrar <i class="tio-delete pl-2"></i> </button>
      </span>
 
      <div class="w-100" fxLayout="row" fxLayoutAlign="end center">
          <span class="new-story">
-            <button mat-button color="orange" (click)="newStory()" > Nueva story <i class="tio-upload_on_cloud pl-2"></i> </button>
+            <button  mat-raised-button color="orange" (click)="newStory()" [disabled]="newStoryActiveButton" > Nueva story <i class="tio-upload_on_cloud pl-2"></i> </button>
          </span>
      </div>
 
