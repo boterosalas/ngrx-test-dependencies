@@ -47,7 +47,7 @@ export class DialogStoryComponent implements OnInit {
   }
 
   public formStory() {
-    let {date, description, extension, imageurl, infoaditional, link, active} = this.data;
+    let {date, datepublish, description, imageurl, infoaditional, link, active} = this.data;
 
     if(description === undefined) {
       this.storieForm = this.fb.group({
@@ -65,8 +65,8 @@ export class DialogStoryComponent implements OnInit {
         this.imageEdit = imageurl;
       }
 
-      if(date !== null) {
-        let splitDatepublish = date.split('T');
+      if(datepublish !== null) {
+        let splitDatepublish = datepublish.split('T');
         this.dateEdit = moment(splitDatepublish[0]).toDate();
         let hour = splitDatepublish[1];
         this.hourEdit = this.utils.toStandardTime(hour);
@@ -74,7 +74,7 @@ export class DialogStoryComponent implements OnInit {
         this.titleButton = "Programar";
       }
 
-      if(date === null && active === false){
+      if(datepublish === null && active === false){
         this.eraserEdit = true;
         this.titleButton = "Guardar como borrador";
         this.showDate = false;
@@ -84,7 +84,7 @@ export class DialogStoryComponent implements OnInit {
         nameContent: [description, Validators.required],
         link: [link],
         commission: [infoaditional],
-        image: ['', Validators.required],
+        image: [''],
         date: [this.dateEdit],
         hour: [this.hourEdit],
         eraser: [this.eraserEdit],
@@ -214,7 +214,8 @@ export class DialogStoryComponent implements OnInit {
         {
           description: nameContent,
           link: link,
-          idBusiness: this.data.idBusiness,
+          idBusiness: this.data.idbusiness,
+          id: this.data.id,
           infoAditional: commission,
           active: this.active,
           extension: this.extension,

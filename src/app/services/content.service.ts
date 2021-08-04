@@ -1234,6 +1234,22 @@ export class ContentService {
         }));
   }
 
+  public getStoriesadmin(data: any, idBussiness:any) {
+    return this.http
+      .get(`${this.url + this.apiGetStories}?idbusiness=${idBussiness}&visible=${data}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((result: ResponseService) => {
+          return result;
+        }));
+  }
+
   public deleteStories(data: any) {
     return this.http
       .post(`${this.url + this.apiDeleteStories}`, data, this.httpOptions)

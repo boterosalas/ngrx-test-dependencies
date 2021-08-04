@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material";
 import { Subscription } from "rxjs";
+import { ResponseService } from "src/app/interfaces/response";
 import { ContentService } from "src/app/services/content.service";
 import { DialogFaqGroupComponent } from "../../components/dialog-faq-group/dialog-faq-group.component";
 import { DialogStoryComponent } from "../../components/dialog-story/dialog-story.component";
@@ -18,71 +19,10 @@ export class StoriesComponent implements OnInit, OnDestroy {
   newStoryActiveButton = true;
   idBussiness:number;
 
-  active = [
-    {
-      description: "Gane y Viaje",
-      id: 58,
-      imageurl:
-        "https://webclickamqa.blob.core.windows.net/img-ofertas/stories/20210521144953.jpg",
-      link: "https://www.loteriadebogota.com/ganaste/?utm_source=clickam&utm_medium=referral&utm_campaign={1}",
-      idbusiness: 22,
-      infoaditional: "Hasta 2%",
-      active: true,
-      orderby: null,
-      date: null,
-      new: false,
-      extension: 'jpg'
-
-    }
-  ];
-  scheduled = [
-    {
-      description: "Gane y Refiere",
-      id: 60,
-      imageurl:
-        "https://webclickamqa.blob.core.windows.net/img-ofertas/stories/20210521144953.jpg",
-      link: "https://www.loteriadebogota.com/ganaste/?utm_source=clickam&utm_medium=referral&utm_campaign={1}",
-      idbusiness: 22,
-      infoaditional: "Hasta 3%",
-      active: false,
-      orderby: null,
-      date: "2021-05-21T14:49:53.31",
-      new: false,
-      extension: 'jpg'
-    },
-  ];
-  drafts = [
-    {
-      description: "Gane y Viaje",
-      id: 58,
-      imageurl:
-        "https://webclickamqa.blob.core.windows.net/img-ofertas/stories/20210521144953.jpg",
-      link: "https://www.loteriadebogota.com/ganaste/?utm_source=clickam&utm_medium=referral&utm_campaign={1}",
-      idbusiness: 22,
-      infoaditional: "Hasta 2%",
-      active: false,
-      orderby: null,
-      date: null,
-      new: false,
-      extension: 'jpg'
-    },
-  ];
-  defeated = [
-    {
-      description: "Gane y Viaje",
-      id: 58,
-      imageurl:
-        "https://webclickamqa.blob.core.windows.net/img-ofertas/stories/20210521144953.jpg",
-      link: "https://www.loteriadebogota.com/ganaste/?utm_source=clickam&utm_medium=referral&utm_campaign={1}",
-      idbusiness: 22,
-      infoaditional: "Hasta 2%",
-      active: true,
-      orderby: null,
-      date: "2021-05-21T14:49:53.31",
-      new: false,
-      extension: 'jpg'
-    },
-  ];
+  active = [];
+  scheduled = [];
+  drafts = [];
+  defeated = [];
 
   ngOnInit() {
     this.getAllBusiness();
@@ -101,13 +41,35 @@ export class StoriesComponent implements OnInit, OnDestroy {
     } else{
       this.newStoryActiveButton = true;
     }
+
+    this.content.getStoriesadmin(true, this.idBussiness).subscribe((resp: ResponseService) => {
+      this.active = resp.objectResponse.active;
+      this.scheduled = resp.objectResponse.scheduled;
+      this.drafts = resp.objectResponse.drafts;
+      this.defeated = resp.objectResponse.defeated;
+    });
+
   }
 
   public newStory() {
-    this.dialog.open(DialogStoryComponent, {
+    const newStory = this.dialog.open(DialogStoryComponent, {
       width: '800px',
       data: this.idBussiness
     });
+
+    newStory.beforeClosed().subscribe(() => {
+      this.content.getStoriesadmin(true, this.idBussiness).subscribe((resp: ResponseService) => {
+        this.active = resp.objectResponse.active;
+        this.scheduled = resp.objectResponse.scheduled;
+        this.drafts = resp.objectResponse.drafts;
+        this.defeated = resp.objectResponse.defeated;
+      });
+    });
+
+  }
+
+  selectAll(){
+    console.log('select');
   }
 
   ngOnDestroy(): void {
