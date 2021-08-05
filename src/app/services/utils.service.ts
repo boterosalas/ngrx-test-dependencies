@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { AuthService } from "./auth.service";
 import { UserService } from "./user.service";
 import decode from "jwt-decode";
-import * as moment from "moment";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -12,8 +12,11 @@ export class UtilsService {
   constructor(
     private router: Router,
     private auth: AuthService,
-    private user: UserService
-  ) {}
+    private user: UserService,
+  ) {
+    this.titleSelect = new BehaviorSubject<string>('Seleccionar');
+    this.checkedAll = new BehaviorSubject<Boolean>(false);
+  }
 
   isOpen = false;
   isOpenMenu = false;
@@ -22,6 +25,9 @@ export class UtilsService {
   showActivateForm = false;
   medals: any;
   pathBlog: any;
+  formArray = [];
+  titleSelect : BehaviorSubject<string>;
+  checkedAll : BehaviorSubject<Boolean>;
 
   @Output() change: EventEmitter<boolean> = new EventEmitter();
   @Output() changeMenu: EventEmitter<boolean> = new EventEmitter();
