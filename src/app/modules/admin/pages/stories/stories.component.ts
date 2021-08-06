@@ -16,7 +16,7 @@ export class StoriesComponent implements OnInit, OnDestroy {
   constructor(
     private content: ContentService,
     private dialog: MatDialog,
-    private utils: UtilsService
+    private utils: UtilsService,
   ) {}
 
   private subscription: Subscription = new Subscription();

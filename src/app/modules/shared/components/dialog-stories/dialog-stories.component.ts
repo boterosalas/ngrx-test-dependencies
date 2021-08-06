@@ -56,7 +56,6 @@ export class DialogStoriesComponent implements OnInit {
   private subscription: Subscription = new Subscription();
 
   ngOnInit() {
-    console.log(this.data);
   }
 
   onNoClick(): void {

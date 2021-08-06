@@ -129,7 +129,7 @@ export class StoriesAdminComponent implements OnInit {
                 stories: this.stories,
                 id: index.toString(),
                 showArrows: false,
-                showCarousel: false
+                showCarousel: true
             },
             panelClass: 'dialog-stories',
             hasBackdrop: false,

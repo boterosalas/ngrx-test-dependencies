@@ -1,4 +1,4 @@
-<mat-card class="mb-3" *ngFor="let data of data">
+<mat-card class="mb-3" *ngFor="let data of data; let i = index">
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center">
         <div fxLayout="column">
             <mat-checkbox class="check" type="checkbox"  [checked]="utils.checkedAll.value" [value]="data.id" (change)="onCheckChange($event)"></mat-checkbox>
@@ -32,7 +32,7 @@
             <div fxLayout="row" fxLayoutGap="10px">
                 <i
                     class="tio-search style-icon cursor-pointer"
-                    (click)="previewItem(data)"
+                    (click)="previewItem(i); getBusiness()"
                 ></i>
                 <i
                   class="tio-edit style-icon cursor-pointer"
