@@ -36,7 +36,6 @@ import { TrimPipe } from 'src/app/pipes/trim.pipe';
 import { SlickCarouselModule } from "ngx-slick-carousel";
 import { CardStoryComponent } from './components/card-story/card-story.component';
 import { RemoveTagsPipe } from "src/app/pipes/remove-tags.pipe";
-import { SafePipe } from "src/app/pipes/safe.pipe";
 
 
 @NgModule({
@@ -55,7 +54,6 @@ import { SafePipe } from "src/app/pipes/safe.pipe";
     TruncatePipe,
     TrimPipe,
     RemoveTagsPipe,
-    SafePipe,
     AppStoreComponent,
     LogoComponent,
     ProductComponent,
@@ -102,7 +100,6 @@ import { SafePipe } from "src/app/pipes/safe.pipe";
     UnderConstructionComponent,
     TruncatePipe,
     TrimPipe,
-    SafePipe,
     RemoveTagsPipe,
     LogoComponent,
     ProductComponent,

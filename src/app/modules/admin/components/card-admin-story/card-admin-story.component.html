@@ -4,7 +4,7 @@
             <mat-checkbox class="check" type="checkbox"  [checked]="utils.checkedAll.value" [value]="data.id" (change)="onCheckChange($event)"></mat-checkbox>
         </div>
         <div fxLayout="column" class="preview" *ngIf="data.extension === 'jpg'">
-            <img class="img-preview" [src]="data.imageurl | safe: 'url'" [alt]="title">
+            <img class="img-preview" [src]="data.imageurl" [alt]="title">
         </div>
         <div fxLayout="column" class="w-100">
             <div fxLayout="column">
