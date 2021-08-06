@@ -90,9 +90,9 @@ export class StoriesComponent implements OnInit, OnDestroy {
   }
 
   selectAll() {
-    this.utils.checkedAll.subscribe((checked) => {
-      if (checked === false) {
-        this.utils.checkedAll = new BehaviorSubject<Boolean>(true);
+    
+      if (this.utils.checkedAll.getValue() === false) {
+        this.utils.checkedAll.next(true);
         this.utils.titleSelect.next("Deseleccionar");
 
         this.active.forEach((element) => {
@@ -111,11 +111,11 @@ export class StoriesComponent implements OnInit, OnDestroy {
           this.utils.formArray.push(element.id);
         });
       } else {
-        this.utils.checkedAll = new BehaviorSubject<Boolean>(false);
+        this.utils.checkedAll.next(false);
         this.utils.titleSelect.next("Seleccionar");
         this.utils.formArray = [];
       }
-    });
+    
   }
 
   deletetAll() {

@@ -177,7 +177,7 @@ export class DialogStoryComponent implements OnInit {
   }
 
   public saveStory() {
-    let { commission, date, hour, link, nameContent } = this.storieForm.value;
+    let { commission, date, hour, link, nameContent, active } = this.storieForm.value;
 
     
     if(date !== null) {
@@ -195,6 +195,10 @@ export class DialogStoryComponent implements OnInit {
     } else{
       this.publicationDate = null;
     }
+    
+    if(date === null && this.storieForm.controls.eraser.value === true) {
+      this.active = false;
+    }
 
     if(this.editMode === false) {
       this.saveStoryData = [
@@ -210,6 +214,7 @@ export class DialogStoryComponent implements OnInit {
         },
       ];
     } else {
+
       this.saveStoryData = [
         {
           description: nameContent,
@@ -223,6 +228,7 @@ export class DialogStoryComponent implements OnInit {
           image: this.file,
         },
       ];
+      
     }
 
     this._content
