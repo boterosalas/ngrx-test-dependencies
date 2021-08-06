@@ -35,15 +35,15 @@ describe("StoriesComponent", () => {
   const mockContentService = jasmine.createSpyObj("ContentService", [
     "getAllBusiness",
     "getStoriesadmin",
-    "deleteStories"
+    "deleteStories",
   ]);
-  
+
   const resp = {
     state: "Success",
     userMessage: "",
-    objectResponse: []
+    objectResponse: [],
   };
-  
+
   let allBusiness = [
     {
       id: 1,
@@ -96,39 +96,64 @@ describe("StoriesComponent", () => {
       active: true,
     },
   ];
-  
-  const stories = [
-    {
-      description: "e1",
-      id: 43,
-      imageurl:
-        "https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210806082635.jpg",
-      link: null,
-      idbusiness: 1,
-      infoaditional: null,
-      active: true,
-      orderby: null,
-      date: "2021-08-06T08:26:35.433",
-      new: false,
-      datepublish: null,
-      extension: "jpg",
+
+  const stories = {
+    state: "Success",
+    userMessage: null,
+    objectResponse: {
+      active: [
+        {
+          description: "e1",
+          id: 43,
+          imageurl:
+            "https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210806082635.jpg",
+          link: null,
+          idbusiness: 1,
+          infoaditional: null,
+          active: true,
+          orderby: null,
+          date: "2021-08-06T08:26:35.433",
+          new: false,
+          datepublish: null,
+          extension: "jpg",
+        },
+        {
+          description: "e2",
+          id: 44,
+          imageurl:
+            "https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210806082650.jpg",
+          link: null,
+          idbusiness: 1,
+          infoaditional: null,
+          active: true,
+          orderby: null,
+          date: "2021-08-06T08:26:50.667",
+          new: false,
+          datepublish: null,
+          extension: "jpg",
+        },
+      ],
+      scheduled: [],
+      drafts: [
+        {
+          description: "e3112",
+          id: 39,
+          imageurl:
+            "https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210805175214.jpg",
+          link: null,
+          idbusiness: 1,
+          infoaditional: null,
+          active: false,
+          orderby: null,
+          date: "2021-08-05T17:52:14.473",
+          new: false,
+          datepublish: null,
+          extension: "jpg",
+        },
+      ],
+      defeated: [],
     },
-    {
-      description: "e2",
-      id: 44,
-      imageurl:
-        "https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210806082650.jpg",
-      link: null,
-      idbusiness: 1,
-      infoaditional: null,
-      active: true,
-      orderby: null,
-      date: "2021-08-06T08:26:50.667",
-      new: false,
-      datepublish: null,
-      extension: "jpg",
-    },
-  ];
+  };
 
   const dialogMock = {
     close: () => {},
@@ -163,15 +188,17 @@ describe("StoriesComponent", () => {
       providers: [
         { provide: MatDialog, useValue: matDialog },
         { provide: MatDialogRef, useValue: dialogMock },
-        { provide: MAT_DIALOG_DATA, useValue: {active: [allBusiness[0]]} },
-        { provide: ContentService, useValue: mockContentService }
+        { provide: MAT_DIALOG_DATA, useValue: { active: {} } },
+        { provide: ContentService, useValue: mockContentService },
       ],
       schemas: [NO_ERRORS_SCHEMA],
-    }).overrideModule(BrowserDynamicTestingModule, {
-      set: {
-        entryComponents: [DialogStoryComponent]
-      }
-    }).compileComponents();
+    })
+      .overrideModule(BrowserDynamicTestingModule, {
+        set: {
+          entryComponents: [DialogStoryComponent],
+        },
+      })
+      .compileComponents();
     mockContentService.getAllBusiness.and.returnValue(of(allBusiness));
     mockContentService.getStoriesadmin.and.returnValue(of(stories));
     mockContentService.deleteStories.and.returnValue(of(resp));
@@ -188,8 +215,8 @@ describe("StoriesComponent", () => {
     expect(mockContentService.getAllBusiness).toHaveBeenCalled();
   });
 
-  it('change bussines', () => {
-    let business =  {
+  it("change bussines", () => {
+    let business = {
       id: 1,
       code: "exito",
       imageurl:
@@ -198,28 +225,23 @@ describe("StoriesComponent", () => {
       description: "Almacenes Éxito",
       orderby: 1,
       active: false,
-    }
+    };
     component.onChangeSelected(business);
     expect(mockContentService.getStoriesadmin).toHaveBeenCalled();
   });
-  
-  it('delete all stories', () => {
+
+  it("delete all stories", () => {
     component.deletetAll();
     expect(mockContentService.deleteStories).toHaveBeenCalled();
   });
-  
-  it('select all', () => {
+
+  it("select all", () => {
     component.selectAll();
     expect(component.active).not.toBeUndefined();
   });
 
- it('new story', () => {
-   component.newStory();
-   expect(mockContentService.getStoriesadmin).toHaveBeenCalled();
- });
- 
-  
-  
-  
-
+  it("new story", () => {
+    component.newStory();
+    expect(mockContentService.getStoriesadmin).toHaveBeenCalled();
+  });
 });
