@@ -23,7 +23,6 @@ export class CardAdminStoryComponent implements OnInit {
 
   @Input() data: any;
   stories = [];
-  storiesBusiness = [];
   bussiness: any;
 
   ngOnInit() {
@@ -115,8 +114,7 @@ export class CardAdminStoryComponent implements OnInit {
     });
   }
 
-  public getStories() {
-    console.log(this.data);
+  private getStories() {
     this.data.forEach((storyS) => {
       let bussinessStory = this.bussiness.filter(
         (b) => b.id === storyS.idbusiness
@@ -147,52 +145,6 @@ export class CardAdminStoryComponent implements OnInit {
 
   }
   
-
-  /* public getStories() {
-    this._content.getStories(false).subscribe((data: ResponseService) => {
-      if (data.state === "Success") {
-        if (data.objectResponse) {
-          data.objectResponse.forEach(storyS => {
-            let bussinessStory = this.bussiness.filter(b => b.id === storyS.idbusiness)[0]
-
-            const extensionsImg = ["jpg", "jpeg", "png"]
-            let isImage = (extensionsImg.includes(this.getExtension(storyS.imageurl)))
-
-            let objectStory = {
-              idbusiness: storyS.idbusiness,
-              id: storyS.id,
-              businessName: bussinessStory ? bussinessStory.description : '',
-              name: storyS.description,
-              image: storyS.imageurl,
-              infoAditional: storyS.infoaditional,
-              businessCode: bussinessStory ? bussinessStory.code : '',
-              businessImage: bussinessStory ? bussinessStory.imageurl : '',
-              date: new Date(storyS.date),
-              link: storyS.link,
-              pause: true,
-              stateView: !storyS.new,
-              isImage
-            }
-
-            this.stories.push(objectStory)
-
-            if (!this.storiesBusiness.some(x => x.idbusiness === storyS.idbusiness)) {
-              this.storiesBusiness.push({
-                idbusiness: storyS.idbusiness,
-                businessImage: bussinessStory ? bussinessStory.imageurl : '',
-                businessName: bussinessStory ? bussinessStory.description : '',
-                stateView: data.objectResponse.filter(x => x.idbusiness === storyS.idbusiness).some(x => !x.new),
-                pause: true
-              })
-            }
-          });
-
-          this.storiesBusiness.sort((a, b) => b.stateView - a.stateView)
-        }
-      }
-    })
-  }*/
-
   private getExtension(nameFile: string) {
     if (nameFile) {
       let splitExt = nameFile.split(".");

@@ -93,7 +93,7 @@ export class DialogStoryComponent implements OnInit {
     }
   }
 
-  public getExtensionFile(nameFile: string, getSize: number) {
+  private getExtensionFile(nameFile: string, getSize: number) {
     let splitExt = nameFile.split(".");
     let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
     this.validFormat = false;
