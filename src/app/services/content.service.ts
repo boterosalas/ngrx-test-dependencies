@@ -581,9 +581,9 @@ export class ContentService {
       );
   }
 
-  public getAllBusiness() {
+  public getAllBusiness(clickam:Boolean = false) {
     return this.http
-      .get(`${this.url + this.apiGetAllBusiness}`, this.httpOptions)
+      .get(`${this.url + this.apiGetAllBusiness}?clickam=${clickam}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
@@ -1221,6 +1221,22 @@ export class ContentService {
   public getStories(data: any) {
     return this.http
       .get(`${this.url + this.apiGetStories}?visible=${data}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => { })
+          )
+        ),
+        map((result: ResponseService) => {
+          return result;
+        }));
+  }
+
+  public getStoriesadmin(data: any, idBussiness:any) {
+    return this.http
+      .get(`${this.url + this.apiGetStories}?idbusiness=${idBussiness}&visible=${data}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(

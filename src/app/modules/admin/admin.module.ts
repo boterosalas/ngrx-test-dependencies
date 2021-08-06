@@ -51,7 +51,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { ConfigurationsComponent } from './pages/configurations/configurations.component';
 import { InformationBussinessComponent } from './pages/information-bussiness/information-bussiness.component';
 import { ManageComisionBussinessComponent } from './pages/manage-comision-bussiness/manage-comision-bussiness.component';
-import { CarrouselAdminComponent } from './pages/carrousel-admin/carrousel-admin.component';
+import { ToolsAdminComponent } from './pages/tools-admin/tools-admin.component';
 import { NavigationComponent } from './pages/navigation/navigation.component';
 import { MatPasswordStrengthModule } from "@angular-material-extensions/password-strength";
 import { NavigationFooterComponent } from './components/navigation-footer/navigation-footer.component';
@@ -75,6 +75,9 @@ import { NotificationDetailComponent } from './pages/notification-detail/notific
 import { DialogDeleteNotificationComponent } from './components/dialog-delete-notification/dialog-delete-notification.component';
 import { NgxPaginationModule } from "ngx-pagination";
 import { TableNoveltiesComponent } from './components/table-novelties/table-novelties.component';
+import { StoriesComponent } from './pages/stories/stories.component';
+import { CardAdminStoryComponent } from './components/card-admin-story/card-admin-story.component';
+import { DialogStoryComponent } from './components/dialog-story/dialog-story.component';
 
 const routes: Routes = [
   {
@@ -179,7 +182,7 @@ const routes: Routes = [
   },
   {
     path: "carrousel-admin",
-    component: CarrouselAdminComponent,
+    component: ToolsAdminComponent,
     canActivate: [RoleGuard],
     data: {
       role: "ADMIN",
@@ -352,7 +355,7 @@ const routes: Routes = [
     ConfigurationsComponent,
     InformationBussinessComponent,
     ManageComisionBussinessComponent,
-    CarrouselAdminComponent,
+    ToolsAdminComponent,
     NavigationComponent,
     NavigationFooterComponent,
     NavigationGroupComponent,
@@ -374,6 +377,9 @@ const routes: Routes = [
     NotificationDetailComponent,
     DialogDeleteNotificationComponent,
     TableNoveltiesComponent,
+    StoriesComponent,
+    CardAdminStoryComponent,
+    DialogStoryComponent,
   ],
   imports: [
     AngularEditorModule,
@@ -419,7 +425,7 @@ const routes: Routes = [
     })
   ],
   exports: [SideMenuComponent],
-  entryComponents: [DialogUserComponent, DialogCategoryComponent, DialogNewsComponent, DialogVideoPlayerComponent, DialogNavigationGroupComponent, DialogNavigationItemComponent, DialogFaqGroupComponent, DialogFaqItemComponent, DialogDeleteNotificationComponent],
+  entryComponents: [DialogUserComponent, DialogCategoryComponent, DialogNewsComponent, DialogVideoPlayerComponent, DialogNavigationGroupComponent, DialogNavigationItemComponent, DialogFaqGroupComponent, DialogFaqItemComponent, DialogDeleteNotificationComponent, DialogStoryComponent],
   providers: [{ provide: MatPaginatorIntl, useClass: UsersComponent }]
 })
 export class AdminModule { }

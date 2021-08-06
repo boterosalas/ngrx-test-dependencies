@@ -379,6 +379,11 @@ body {
   color: $white;
 }
 
+.mat-red {
+  background: $secondary-color;
+  color: $white;
+}
+
 .gray {
   color: $color-p;
 }
@@ -1538,6 +1543,9 @@ button.swal2-confirm.updateok.order-last.swal2-styled {
 button.swal2-confirm.updateokdelete.order-last.swal2-styled {
   background-color: #f21905 !important;
   color: #fff !important;
+  border-radius: 10px;
+  box-shadow: 0px 3px 9px #F2190580;
+  font-size: 14px;
 }
 .delete-title-comision {
   color: #f21905;
@@ -1546,7 +1554,8 @@ button.swal2-confirm.updateokdelete.order-last.swal2-styled {
 button.swal2-cancel.updatecancel.swal2-styled {
   background: none;
   background-image: none !important;
-  color: #aaa;
+  color:$primary-color;
+  font-size: 14px;
 }
 
 @media screen and (min-width: 768px) {
@@ -2641,4 +2650,15 @@ h3#bussiness2 {
   
   }
   
+  .delete-all, .select-all{
+    .mat-button-wrapper{
+        display: flex;
+        align-items: center;
+    }
+}
+
+.w-container{
+  font-size: 15px;
+  font-family: $font-galano;
+}
 

@@ -1,0 +1,32 @@
+@import "variables";
+
+.preview{
+    border-radius: 10px;
+    width: 100px;
+    height: auto;
+    overflow:hidden;
+    .img-preview{
+        object-fit: contain;
+    }
+}
+
+.style-icon {
+    font-size: 22px;
+    color: $purple2;
+  }
+
+  .purple-link{
+      color: $purple2;
+  }
+
+  .title-storie{
+      text-transform: uppercase;
+      color: $gray4;
+      font-size: 11px;
+      font-family: $font-galano-bold;
+  }
+
+  .value{
+      color: $primary-color;
+  }
+

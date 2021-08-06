@@ -1,0 +1,48 @@
+<div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+    <mat-form-field class="selected-business separate">
+        <mat-placeholder class="selected-business"
+          >NEGOCIO</mat-placeholder
+        >
+        <mat-select
+          id="business"
+          class="selected-business"
+        >
+          <mat-option
+            (click)="onChangeSelected(item)"
+            *ngFor="let item of business"
+            value="{{ item.id }}"
+          >
+            <span>{{ item.description }}</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <span class="select-all">
+        <button mat-raised-button color="orange" (click)="selectAll()"  [disabled]="activeSelectAll" > {{titleSelect}} todos <i class="tio-all_done pl-2"></i> </button>
+     </span>
+
+      <span class="delete-all">
+        <button mat-raised-button color="red" (click)="deletetAll()" [disabled]="titleSelect === 'Seleccionar'" > Borrar <i class="tio-delete pl-2"></i> </button>
+     </span>
+
+     <div class="w-100" fxLayout="row" fxLayoutAlign="end center">
+         <span class="new-story">
+            <button  mat-raised-button color="orange" (click)="newStory()" [disabled]="newStoryActiveButton" > Nueva story <i class="tio-upload_on_cloud pl-2 mn"></i> </button>
+         </span>
+     </div>
+
+</div>
+
+<div>
+    <h3 class="popup-category">Activos <span class="line"></span></h3>
+    <app-card-admin-story [data]="active"></app-card-admin-story>
+
+    <h3 class="popup-category">Programados <span class="line"></span></h3>
+    <app-card-admin-story [data]="scheduled"></app-card-admin-story>
+
+    <h3 class="popup-category">Borradores <span class="line"></span></h3>
+    <app-card-admin-story [data]="drafts"></app-card-admin-story>
+
+    <h3 class="popup-category">Vencidos <span class="line"></span></h3>
+    <app-card-admin-story [data]="defeated"></app-card-admin-story>
+</div>
