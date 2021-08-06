@@ -18,7 +18,7 @@ export class CardAdminStoryComponent implements OnInit {
     private dialog: MatDialog,
     private _content: ContentService,
     private st: StoriesComponent,
-    private utils: UtilsService
+    public utils: UtilsService
   ) {}
 
   @Input() data: any;
