@@ -581,9 +581,9 @@ export class ContentService {
       );
   }
 
-  public getAllBusiness() {
+  public getAllBusiness(clickam:Boolean = false) {
     return this.http
-      .get(`${this.url + this.apiGetAllBusiness}`, this.httpOptions)
+      .get(`${this.url + this.apiGetAllBusiness}?clickam=${clickam}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(

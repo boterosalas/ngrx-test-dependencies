@@ -41,7 +41,7 @@ export class StoriesComponent implements OnInit, OnDestroy {
   }
 
   public getAllBusiness() {
-    this.subscription = this.content.getAllBusiness().subscribe((resp) => {
+    this.subscription = this.content.getAllBusiness(true).subscribe((resp) => {
       this.business = resp;
     });
   }
