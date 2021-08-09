@@ -1,12 +1,12 @@
 @import "variables";
 
 .preview{
-    border-radius: 10px;
     width: 100px;
-    height: auto;
-    overflow:hidden;
+    height: 60px;
     .img-preview{
-        object-fit: contain;
+        object-fit: cover;
+        overflow: hidden;
+        border-radius: 10px;
     }
 }
 
