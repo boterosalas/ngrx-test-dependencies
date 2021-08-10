@@ -55,7 +55,8 @@ export class DialogStoriesComponent implements OnInit {
 
   private subscription: Subscription = new Subscription();
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   onNoClick(): void {
     if (this.data.showCarousel) {

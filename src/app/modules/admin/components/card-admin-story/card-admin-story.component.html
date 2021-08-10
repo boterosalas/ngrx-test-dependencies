@@ -1,0 +1,51 @@
+<mat-card class="mb-3" *ngFor="let data of data; let i = index">
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center">
+        <div fxLayout="column">
+            <mat-checkbox class="check" type="checkbox"  [checked]="utils.checkedAll.value" [value]="data.id" (change)="onCheckChange($event)"></mat-checkbox>
+        </div>
+        <div fxLayout="column" class="preview" *ngIf="data.extension === 'jpg'">
+            <img class="img-preview" [src]="data.imageurl">
+        </div>
+        <div fxLayout="column" class="w-100">
+            <div fxLayout="column">
+                <h3 class="m-0">{{data.description}}</h3>
+                <a *ngIf="data.link || data.link !== '' || data.link!== undefined || data.link !== null" class="mb-2 purple-link" [href]="data.link" target="_blank">{{data.link}}</a>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <div fxLayout="column">
+                        <span class="title-storie">Tipo</span>
+                        <span class="value" *ngIf="data.extension === 'mp4'">Video</span>
+                        <span class="value" *ngIf="data.extension === 'jpg'">Imagen</span>
+                    </div>
+                    <div fxLayout="column">
+                        <span class="title-storie">Comisión</span>
+                        <span class="value">{{data.infoaditional}}</span>
+                    </div>
+                    <div fxLayout="column">
+                        <span class="title-storie">FECHA INICIO</span>
+                        <span class="value">{{data.datepublish | date: "dd/MM/yyyy hh:mm:ss"}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-group__actions" fxLayout="column">
+            <div fxLayout="row" fxLayoutGap="10px">
+                <i
+                    class="tio-search style-icon cursor-pointer"
+                    (click)="previewItem(i); getBusiness()"
+                ></i>
+                <i
+                  class="tio-edit style-icon cursor-pointer"
+                  (click)="editStory(data)"
+                ></i>
+                <img
+                  class="cursor-pointer"
+                  src="/assets/img/dashboard/icon-remove-comision.svg"
+                  alt="icono borrar"
+                  (click)="deleteStory(data)"
+                />
+            </div>
+          </div>
+
+    </div>
+</mat-card>
