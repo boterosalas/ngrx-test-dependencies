@@ -419,25 +419,10 @@
     <div class="space">
       <label for="ced1" id="upload" class="cursor-pointer">
         <span *ngIf="!showErrorCed1">
-          <img
-            class="mt-1"
-            *ngIf="nameFileCed1 === ''"
-            src="/assets/img/image-file-upload.svg"
-            alt="upload"
-          />
-          <img
-            class="mt-1"
-            *ngIf="nameFileCed1 !== ''"
-            src="/assets/img/image-file-upload-ok.svg"
-            alt="upload"
-          />
+          <i class="tio-upload_on_cloud mt-1 f-25 purple2-text"  *ngIf="nameFileCed1 === ''"></i>
+          <i class="tio-cloud_on mt-1 f-25 purple2-text"  *ngIf="nameFileCed1 !== ''"></i>
         </span>
-        <img
-          class="mt-1 w-icon"
-          *ngIf="showErrorCed1"
-          src="/assets/img/icono-error-carga.svg"
-          alt="upload"
-        />
+        <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorCed1"></i>
       </label>
     </div>
   </div>
@@ -466,25 +451,10 @@
     <div class="space">
       <label for="ced2" id="upload" class="cursor-pointer">
         <span *ngIf="!showErrorCed2">
-          <img
-            class="mt-1"
-            *ngIf="nameFileCed2 === ''"
-            src="/assets/img/image-file-upload.svg"
-            alt="upload"
-          />
-          <img
-            class="mt-1"
-            *ngIf="nameFileCed2 !== ''"
-            src="/assets/img/image-file-upload-ok.svg"
-            alt="upload"
-          />
+          <i class="tio-upload_on_cloud mt-1 f-25 purple2-text"  *ngIf="nameFileCed2 === ''"></i>
+          <i class="tio-cloud_on mt-1 f-25 purple2-text"  *ngIf="nameFileCed2 !== ''"></i>
         </span>
-        <img
-          class="mt-1 w-icon"
-          *ngIf="showErrorCed2"
-          src="/assets/img/icono-error-carga.svg"
-          alt="upload"
-        />
+        <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorCed2"></i>
       </label>
     </div>
   </div>
@@ -516,25 +486,10 @@
     <div class="space">
       <label for="cert" id="upload" class="cursor-pointer">
         <span *ngIf="!showErrorCert">
-          <img
-            class="mt-1"
-            *ngIf="nameFileCert === ''"
-            src="/assets/img/image-file-upload.svg"
-            alt="upload"
-          />
-          <img
-            class="mt-1"
-            *ngIf="nameFileCert !== ''"
-            src="/assets/img/image-file-upload-ok.svg"
-            alt="upload"
-          />
+          <i class="tio-upload_on_cloud mt-1 f-25 purple2-text"  *ngIf="nameFileCert === ''"></i>
+          <i class="tio-cloud_on mt-1 f-25 purple2-text"  *ngIf="nameFileCert !== ''"></i>
         </span>
-        <img
-          class="mt-1 w-icon"
-          *ngIf="showErrorCert"
-          src="/assets/img/icono-error-carga.svg"
-          alt="upload"
-        />
+        <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorCert"></i>
       </label>
     </div>
   </div>
@@ -549,7 +504,7 @@
     formControlName="cert"
   />
 
-  <!-- <div
+ <div
     fxLayout="row"
     fxLayoutAlign="space-start center"
     fxLayoutGap="50px"
@@ -565,25 +520,10 @@
     <div class="space">
       <label for="rut" id="upload" class="cursor-pointer">
         <span *ngIf="!showErrorRUT">
-          <img
-            class="mt-1"
-            *ngIf="nameFileRUT === ''"
-            src="/assets/img/image-file-upload.svg"
-            alt="upload"
-          />
-          <img
-            class="mt-1"
-            *ngIf="nameFileRUT !== ''"
-            src="/assets/img/image-file-upload-ok.svg"
-            alt="upload"
-          />
+          <i class="tio-upload_on_cloud mt-1 f-25 purple2-text"  *ngIf="nameFileRUT === ''"></i>
+          <i class="tio-cloud_on mt-1 f-25 purple2-text"  *ngIf="nameFileRUT !== ''"></i>
         </span>
-        <img
-          class="mt-1 w-icon"
-          *ngIf="showErrorRUT"
-          src="/assets/img/icono-error-carga.svg"
-          alt="upload"
-        />
+        <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorRUT"></i>
       </label>
     </div>
   </div>
@@ -596,7 +536,7 @@
     id="rut"
     type="file"
     formControlName="rut"
-  /> -->
+  /> 
 
   <button
     mat-raised-button

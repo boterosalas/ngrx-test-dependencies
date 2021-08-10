@@ -360,7 +360,7 @@ export class UsersComponent extends MatPaginatorIntl
         const extensionBankCertificate = resp.objectResponse.maxextensiondatebankcertificate;
         const extensionRUT = resp.objectResponse.maxextensiondaterut;
         const responseAccountBank = resp.objectResponse.responseaccountbank;
-        // const fileRUT = resp.objectResponse.rut;
+        const fileRUT = resp.objectResponse.rut;
 
         const dialogRef = this.dialog.open(DialogUserComponent, {
           data: {
@@ -382,6 +382,7 @@ export class UsersComponent extends MatPaginatorIntl
             fileIdentificationCard1,
             fileIdentificationCard2,
             fileBankCertificate,
+            fileRUT,
             dateCed1,
             dateCed2,
             dateCertBank,

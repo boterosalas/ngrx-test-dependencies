@@ -1064,7 +1064,7 @@
 
       <!-- rut -->
 
-      <!-- <div
+      <div
         fxLayout="row"
         fxLayoutAlign="space-start center"
         fxLayoutGap="50px"
@@ -1080,26 +1080,11 @@
         </div>
         <div class="space">
           <label for="rut" id="upload" class="cursor-pointer">
-            <span *ngIf="!showErrorRut">
-              <img
-                class="mt-1 mxw-30"
-                *ngIf="nameFileRut === ''"
-                src="/assets/img/image-file-upload.svg"
-                alt="upload"
-              />
-              <img
-                class="mt-1 mxw-30"
-                *ngIf="nameFileRut !== ''"
-                src="/assets/img/image-file-upload-ok.svg"
-                alt="upload"
-              />
+            <span *ngIf="!showErrorRUT">
+              <i class="tio-upload_on_cloud mt-1 f-25 purple2-text" *ngIf="nameFileRut === ''"></i>
+              <i class="tio-cloud_on mt-1 f-25 purple2-text"  *ngIf="nameFileRut !== ''"></i>
             </span>
-            <img
-              class="mt-1 w-icon mxw-30"
-              *ngIf="showErrorRut"
-              src="/assets/img/icono-error-carga.svg"
-              alt="upload"
-            />
+            <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorRUT"></i>
           </label>
         </div>
       </div>
@@ -1112,7 +1097,7 @@
         id="rut"
         type="file"
         formControlName="rut"
-      /> -->
+      />
 
       <!-- certificado -->
 
@@ -1135,25 +1120,10 @@
         <div class="space">
           <label for="cert" id="upload" class="cursor-pointer">
             <span *ngIf="!showErrorCert">
-              <img
-                class="mt-1 mxw-30"
-                *ngIf="nameFileCert === ''"
-                src="/assets/img/image-file-upload.svg"
-                alt="upload"
-              />
-              <img
-                class="mt-1 mxw-30"
-                *ngIf="nameFileCert !== ''"
-                src="/assets/img/image-file-upload-ok.svg"
-                alt="upload"
-              />
+              <i class="tio-upload_on_cloud mt-1 f-25 purple2-text"  *ngIf="nameFileCert === ''"></i>
+              <i class="tio-cloud_on mt-1 f-25 purple2-text"  *ngIf="nameFileCert !== ''"></i>
             </span>
-            <img
-              class="mt-1 w-icon mxw-30"
-              *ngIf="showErrorCert"
-              src="/assets/img/icono-error-carga.svg"
-              alt="upload"
-            />
+            <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorCert"></i>
           </label>
         </div>
       </div>
@@ -1186,25 +1156,10 @@
         <div class="space">
           <label for="ced1" id="upload" class="cursor-pointer">
             <span *ngIf="!showErrorCed1">
-              <img
-                class="mt-1 mxw-30"
-                *ngIf="nameFileCed1 === ''"
-                src="/assets/img/image-file-upload.svg"
-                alt="upload"
-              />
-              <img
-                class="mt-1 mxw-30"
-                *ngIf="nameFileCed1 !== ''"
-                src="/assets/img/image-file-upload-ok.svg"
-                alt="upload"
-              />
+              <i class="tio-upload_on_cloud mt-1 f-25 purple2-text"  *ngIf="nameFileCed1 === ''"></i>
+              <i class="tio-cloud_on mt-1 f-25 purple2-text"  *ngIf="nameFileCed1 !== ''"></i>
             </span>
-            <img
-              class="mt-1 w-icon mxw-30"
-              *ngIf="showErrorCed1"
-              src="/assets/img/icono-error-carga.svg"
-              alt="upload"
-            />
+            <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorCed1"></i>
           </label>
         </div>
       </div>
@@ -1237,25 +1192,10 @@
         <div class="space">
           <label for="ced2" id="upload" class="cursor-pointer">
             <span *ngIf="!showErrorCed2">
-              <img
-                class="mt-1 mxw-30"
-                *ngIf="nameFileCed2 === ''"
-                src="/assets/img/image-file-upload.svg"
-                alt="upload"
-              />
-              <img
-                class="mt-1 mxw-30"
-                *ngIf="nameFileCed2 !== ''"
-                src="/assets/img/image-file-upload-ok.svg"
-                alt="upload"
-              />
+              <i class="tio-upload_on_cloud mt-1 f-25 purple2-text"  *ngIf="nameFileCed2 === ''"></i>
+              <i class="tio-cloud_on mt-1 f-25 purple2-text"  *ngIf="nameFileCed2 !== ''"></i>
             </span>
-            <img
-              class="mt-1 w-icon mxw-30"
-              *ngIf="showErrorCed2"
-              src="/assets/img/icono-error-carga.svg"
-              alt="upload"
-            />
+            <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorCed2"></i>
           </label>
         </div>
       </div>
