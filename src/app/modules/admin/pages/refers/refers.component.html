@@ -9,58 +9,28 @@
   <div fxLayout="row" fxLayoutGap="30px">
     <div class="border-radius mat-card mt-3 p-3">
       <h3 class="border-bottom-orange-init">
-        {{ "REFER.CLICKER_COMISSION_TITLE" | translate }}
+        {{ 'REFER.CLICKER_COMISSION_TITLE' | translate }}
       </h3>
-      <p>{{ "REFER.CLICKER_COMISSION_TEXT" | translate }}</p>
+      <p>{{ 'REFER.CLICKER_COMISSION_TEXT' | translate }}</p>
       <form [formGroup]="comissionForm">
         <mat-form-field>
-          <input
-            matInput
-            id="amount"
-            type="text"
-            placeholder="Valor de la comisión"
-            formControlName="amount"
-            spacebar
-            required
-          />
+          <input matInput id="amount" type="text" placeholder="Valor de la comisión" formControlName="amount" spacebar required />
 
-          <mat-error
-            id="reuiredamount"
-            *ngIf="
-              comissionForm.controls.amount.invalid &&
-              comissionForm.controls.amount.errors.required
-            "
-            >{{
-              "GENERIC.REQUIRED"
-                | translate: { formValue: "Valor de la comisión" }
-            }}</mat-error
-          >
+          <mat-error id="reuiredamount" *ngIf="comissionForm.controls.amount.invalid && comissionForm.controls.amount.errors.required">{{
+            'GENERIC.REQUIRED' | translate: { formValue: 'Valor de la comisión' }
+          }}</mat-error>
 
-          <mat-error
-            id="maxamount"
-            *ngIf="
-              comissionForm.controls.amount.invalid &&
-              comissionForm.controls.amount.errors.maxlength
-            "
-            >{{
-              "GENERIC.MAX_CHARACTERS"
-                | translate
-                  : {
-                      maxchar:
-                        comissionForm.controls.amount.errors.maxlength
-                          .requiredLength
-                    }
-            }}</mat-error
-          >
+          <mat-error id="maxamount" *ngIf="comissionForm.controls.amount.invalid && comissionForm.controls.amount.errors.maxlength">{{
+            'GENERIC.MAX_CHARACTERS'
+              | translate
+                : {
+                    maxchar: comissionForm.controls.amount.errors.maxlength.requiredLength
+                  }
+          }}</mat-error>
 
-          <mat-error
-            id="numberamount"
-            *ngIf="
-              comissionForm.controls.amount.invalid &&
-              comissionForm.controls.amount.errors.pattern
-            "
-            >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
-          >
+          <mat-error id="numberamount" *ngIf="comissionForm.controls.amount.invalid && comissionForm.controls.amount.errors.pattern">{{
+            'GENERIC.ONLY_NUMBERS' | translate
+          }}</mat-error>
         </mat-form-field>
         <button
           mat-raised-button
@@ -77,66 +47,30 @@
 
     <div class="border-radius mat-card mt-3 p-3">
       <h3 class="border-bottom-orange-init">
-        {{ "REFER.CLICKER_REFERED_TITLE" | translate }}
+        {{ 'REFER.CLICKER_REFERED_TITLE' | translate }}
       </h3>
-      <p>{{ "REFER.CLICKER_REFERED_TEXT" | translate }}</p>
+      <p>{{ 'REFER.CLICKER_REFERED_TEXT' | translate }}</p>
       <form [formGroup]="referedForm">
         <mat-form-field>
-          <input
-            matInput
-            id="refered"
-            type="text"
-            placeholder="Valor calificado"
-            formControlName="refered"
-            spacebar
-            required
-          />
+          <input matInput id="refered" type="text" placeholder="Valor calificado" formControlName="refered" spacebar required />
 
-          <mat-error
-            id="reuiredrefered"
-            *ngIf="
-              referedForm.controls.refered.invalid &&
-              referedForm.controls.refered.errors.required
-            "
-            >{{
-              "GENERIC.REQUIRED" | translate: { formValue: "Valor calificado" }
-            }}</mat-error
-          >
+          <mat-error id="reuiredrefered" *ngIf="referedForm.controls.refered.invalid && referedForm.controls.refered.errors.required">{{
+            'GENERIC.REQUIRED' | translate: { formValue: 'Valor calificado' }
+          }}</mat-error>
 
-          <mat-error
-            id="maxrefered"
-            *ngIf="
-              referedForm.controls.refered.invalid &&
-              referedForm.controls.refered.errors.maxlength
-            "
-            >{{
-              "GENERIC.MAX_CHARACTERS"
-                | translate
-                  : {
-                      maxchar:
-                        referedForm.controls.refered.errors.maxlength
-                          .requiredLength
-                    }
-            }}</mat-error
-          >
+          <mat-error id="maxrefered" *ngIf="referedForm.controls.refered.invalid && referedForm.controls.refered.errors.maxlength">{{
+            'GENERIC.MAX_CHARACTERS'
+              | translate
+                : {
+                    maxchar: referedForm.controls.refered.errors.maxlength.requiredLength
+                  }
+          }}</mat-error>
 
-          <mat-error
-            id="numberrefered"
-            *ngIf="
-              referedForm.controls.refered.invalid &&
-              referedForm.controls.refered.errors.pattern
-            "
-            >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
-          >
+          <mat-error id="numberrefered" *ngIf="referedForm.controls.refered.invalid && referedForm.controls.refered.errors.pattern">{{
+            'GENERIC.ONLY_NUMBERS' | translate
+          }}</mat-error>
         </mat-form-field>
-        <button
-          mat-raised-button
-          color="orange"
-          (click)="saveRefered()"
-          id="send-refered"
-          class="ml-2"
-          [disabled]="!referedForm.valid"
-        >
+        <button mat-raised-button color="orange" (click)="saveRefered()" id="send-refered" class="ml-2" [disabled]="!referedForm.valid">
           Guardar
         </button>
       </form>

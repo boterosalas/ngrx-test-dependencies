@@ -1,46 +1,26 @@
 <div class="dialog-faq-item">
-    <h3 title-name>{{ data.title }}</h3>
-  
-    <div mat-dialog-content>
-      <form [formGroup]="faqItemForm">
-        <mat-form-field>
-          <input
-            matInput
-            id="description"
-            type="text"
-            placeholder="Titulo"
-            formControlName="description"
-            maxlength="100"
-          />
-          <mat-error
-            id="requiredDescription"
-            *ngIf="faqItemForm.controls.description.invalid &&
-              faqItemForm.controls.description.errors.required">{{
-              "GENERIC.REQUIRED" | translate: { formValue: "Titulo" }
-            }}</mat-error
-          >
-        </mat-form-field>
+  <h3 title-name>{{ data.title }}</h3>
 
-        <h3>RESPUESTA</h3>
-        <angular-editor
-          [config]="configurarEditor"
-          formControlName="termsEditor"
-        ></angular-editor>
-  
-        <div class="dialog-faq-item__buttons mt-2">
-          <button mat-button ngClass="button_cancel" (click)="onNoClick()">
-            Cancelar
-          </button>
-          <button
-            mat-raised-button
-            color="orange"
-            (click)="saveFaqItem()"
-            [disabled]="!faqItemForm.valid"
-          >
-            {{ data.buttonName }}
-          </button>
-        </div>
-      </form>
-    </div>
+  <div mat-dialog-content>
+    <form [formGroup]="faqItemForm">
+      <mat-form-field>
+        <input matInput id="description" type="text" placeholder="Titulo" formControlName="description" maxlength="100" />
+        <mat-error
+          id="requiredDescription"
+          *ngIf="faqItemForm.controls.description.invalid && faqItemForm.controls.description.errors.required"
+          >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Titulo' } }}</mat-error
+        >
+      </mat-form-field>
+
+      <h3>RESPUESTA</h3>
+      <angular-editor [config]="configurarEditor" formControlName="termsEditor"></angular-editor>
+
+      <div class="dialog-faq-item__buttons mt-2">
+        <button mat-button ngClass="button_cancel" (click)="onNoClick()">Cancelar</button>
+        <button mat-raised-button color="orange" (click)="saveFaqItem()" [disabled]="!faqItemForm.valid">
+          {{ data.buttonName }}
+        </button>
+      </div>
+    </form>
   </div>
-  
+</div>

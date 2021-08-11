@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BackNavigationComponent } from './back-navigation.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppMaterialModule } from '../../app-material/app-material.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('BackNavigationComponent', () => {
   let component: BackNavigationComponent;
@@ -10,13 +11,9 @@ describe('BackNavigationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BackNavigationComponent ],
-      imports: [
-        FlexLayoutModule,
-        AppMaterialModule
-      ]
-    })
-    .compileComponents();
+      declarations: [BackNavigationComponent],
+      imports: [FlexLayoutModule, AppMaterialModule, TranslateModule.forRoot({})],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -34,6 +31,5 @@ describe('BackNavigationComponent', () => {
     component.closeComponent();
     expect(component.close.emit).toHaveBeenCalled();
   });
-  
 
 });

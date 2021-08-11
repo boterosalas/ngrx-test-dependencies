@@ -1,19 +1,17 @@
-
-
 .popup-category {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  
-    .line {
-      display: inline-block;
-      width: 100%;
-      border-bottom: 1px solid #d5d5d5;
-      margin-left: 10px;
-    }
-  }
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 
-  .mn{
-    position: relative;
-    top: -3px;
+  .line {
+    display: inline-block;
+    width: 100%;
+    border-bottom: 1px solid #d5d5d5;
+    margin-left: 10px;
   }
+}
+
+.mn {
+  position: relative;
+  top: -3px;
+}

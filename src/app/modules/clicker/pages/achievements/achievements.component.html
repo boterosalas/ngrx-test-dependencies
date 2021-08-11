@@ -1,6 +1,11 @@
-<app-banner color="purple" title="{{'MEDALS.MEDALS' | translate}}" img="/assets/img/banners/banner-gamification-pc.jpg" imgMobile="/assets/img/banners/banner-gamification-mobile.jpg"></app-banner>
+<app-banner
+  color="purple"
+  title="{{ 'MEDALS.MEDALS' | translate }}"
+  img="/assets/img/banners/banner-gamification-pc.jpg"
+  imgMobile="/assets/img/banners/banner-gamification-mobile.jpg"
+></app-banner>
 
 <div class="container" ngClass.gt-xs="minh">
-  <p>{{'MEDALS.INTRO' | translate}}</p>
+  <p>{{ 'MEDALS.INTRO' | translate }}</p>
   <app-card-medal [medals]="medals" (medal)="goToMedal($event)"></app-card-medal>
 </div>

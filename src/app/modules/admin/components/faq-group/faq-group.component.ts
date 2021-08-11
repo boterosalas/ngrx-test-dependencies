@@ -4,10 +4,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'app-faq-group',
   templateUrl: './faq-group.component.html',
-  styleUrls: ['./faq-group.component.scss']
+  styleUrls: ['./faq-group.component.scss'],
 })
 export class FaqGroupComponent implements OnInit {
-
   @Input() section: any;
   @Output() editGroup = new EventEmitter<any>();
   @Output() deleteGroup = new EventEmitter<any>();
@@ -18,12 +17,12 @@ export class FaqGroupComponent implements OnInit {
   @Output() changeState = new EventEmitter<object>();
   @Output() previewItems = new EventEmitter<object>();
 
-  isValidDeleteGroup: boolean = true;
+  isValidDeleteGroup = true;
 
   constructor() {}
 
   ngOnInit() {
-      // 
+    //
   }
 
   editFaqGroup() {
@@ -53,7 +52,7 @@ export class FaqGroupComponent implements OnInit {
   dropItems(event: CdkDragDrop<any>) {
     const items = this.section.items;
     moveItemInArray(items, event.previousIndex, event.currentIndex);
-    let dataSourceSend = [];
+    const dataSourceSend = [];
     for (let i = 0; i < items.length; i++) {
       items[i].orderby = i + 1;
       dataSourceSend.push({
@@ -67,5 +66,4 @@ export class FaqGroupComponent implements OnInit {
   changeStateOfItem(faq: any) {
     this.changeState.emit(faq);
   }
-
 }

@@ -1,37 +1,54 @@
-<h3 class=" border-left-red f-20" id="historial">{{ "DETAILCOMISSION.DETAILS" | translate }}</h3>
+<h3 class="border-left-red f-20" id="historial">
+  {{ 'DETAILCOMISSION.DETAILS' | translate }}
+</h3>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z2 mb-2">
-      
-        <!-- date Column -->
-        <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef> {{ 'DETAILCOMISSION.DATE' | translate }} </th>
-          <td mat-cell *matCellDef="let element"> {{element.commissionGenerationDate | date: 'dd/MM/yyyy' }} </td>
-        </ng-container>
-    
-        <!-- product Column -->
-        <ng-container matColumnDef="product">
-          <th mat-header-cell *matHeaderCellDef> {{ 'DETAILCOMISSION.PRODUCT' | translate }} </th>
-          <td mat-cell *matCellDef="let element"> {{element.productName}}</td>
-        </ng-container>
-    
-        <!-- state Column -->
-        <ng-container matColumnDef="state">
-          <th mat-header-cell *matHeaderCellDef> {{ 'DETAILCOMISSION.STATE' | translate }} </th>
-          <td mat-cell *matCellDef="let element"> {{element.statusCommission}} </td>
-        </ng-container>
+  <!-- date Column -->
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef>
+      {{ 'DETAILCOMISSION.DATE' | translate }}
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.commissionGenerationDate | date: 'dd/MM/yyyy' }}
+    </td>
+  </ng-container>
 
-        <!-- quantity Column -->
-        <ng-container matColumnDef="quantity">
-          <th mat-header-cell class="text-center" *matHeaderCellDef> {{ 'DETAILCOMISSION.QUANTITY' | translate }} </th>
-          <td mat-cell class="text-center" *matCellDef="let element"> {{element.quantity}} </td>
-        </ng-container>
+  <!-- product Column -->
+  <ng-container matColumnDef="product">
+    <th mat-header-cell *matHeaderCellDef>
+      {{ 'DETAILCOMISSION.PRODUCT' | translate }}
+    </th>
+    <td mat-cell *matCellDef="let element">{{ element.productName }}</td>
+  </ng-container>
 
-        <!-- commission Column -->
-        <ng-container matColumnDef="commission">
-          <th mat-header-cell *matHeaderCellDef> {{ 'DETAILCOMISSION.COMMISION' | translate }} </th>
-          <td mat-cell *matCellDef="let element"> {{element.commissionValue | currency: "":"symbol":"1.0-0"}} </td>
-        </ng-container>
-    
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;let i= index;"></tr>
-      </table>
+  <!-- state Column -->
+  <ng-container matColumnDef="state">
+    <th mat-header-cell *matHeaderCellDef>
+      {{ 'DETAILCOMISSION.STATE' | translate }}
+    </th>
+    <td mat-cell *matCellDef="let element">{{ element.statusCommission }}</td>
+  </ng-container>
+
+  <!-- quantity Column -->
+  <ng-container matColumnDef="quantity">
+    <th mat-header-cell class="text-center" *matHeaderCellDef>
+      {{ 'DETAILCOMISSION.QUANTITY' | translate }}
+    </th>
+    <td mat-cell class="text-center" *matCellDef="let element">
+      {{ element.quantity }}
+    </td>
+  </ng-container>
+
+  <!-- commission Column -->
+  <ng-container matColumnDef="commission">
+    <th mat-header-cell *matHeaderCellDef>
+      {{ 'DETAILCOMISSION.COMMISION' | translate }}
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.commissionValue | currency: '':'symbol':'1.0-0' }}
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
+</table>

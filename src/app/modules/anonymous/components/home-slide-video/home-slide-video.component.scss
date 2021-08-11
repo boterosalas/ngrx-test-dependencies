@@ -1,24 +1,24 @@
 .slides {
-    position: relative;
-    padding-bottom: 48.5%;
-    height: 0;
-    top: 0;
+  position: relative;
+  padding-bottom: 48.5%;
+  height: 0;
+  top: 0;
 }
 
 .slides iframe {
-    box-sizing: border-box;
-    background: url('/assets/img/home/tablet.png') center center no-repeat;
-    background-size: contain;
-    padding: 2.9% 17.5% 4.8%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  box-sizing: border-box;
+  background: url('/assets/img/home/tablet.png') center center no-repeat;
+  background-size: contain;
+  padding: 2.9% 17.5% 4.8%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.position-relative{
-    position: relative;
+.position-relative {
+  position: relative;
 }
 
 .rotate {
@@ -26,8 +26,8 @@
 }
 
 .position-absolute {
-    position: absolute;
-    top: 50%;
-    z-index: 9;
-    width: 100%;
-  }
+  position: absolute;
+  top: 50%;
+  z-index: 9;
+  width: 100%;
+}

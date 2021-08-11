@@ -1,21 +1,30 @@
 <div class="position-relative">
-    <ngx-slick-carousel  #slickModal="slick-carousel" [config]="slideConfig" class="mt-4">
-        <div ngxSlickItem *ngFor="let item of slider" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap.gt-xs="40px">
-            <span fxLayout="column" fxFlex="30">
-                <h3 ngClass.gt-xs="f-20" ngClass.xs="f-16" class="mt-1 mb-1">{{item.title}}</h3>
-                <p>{{item.text}}</p>
-            </span>
-            <span fxLayout="column">
-                <img class="responsive-img" [src]="item.image" alt="item.title">
-            </span>
-        </div>
-    </ngx-slick-carousel>
-            <div fxHide.xs="true" class="position-absolute arrows-video" fxLayout="row" fxLayoutAlign="space-between">
-                <button mat-mini-fab color="white" class="ml-4" (click)="prev()">
-                <img  src="/assets/img/arrow-video.svg" alt="prev" />
-                </button>
-                <button mat-mini-fab color="white" class="mr-4" (click)="next()">
-                <img class="rotate" src="/assets/img/arrow-video.svg" alt="next" />
-                </button>
-            </div>
+  <ngx-slick-carousel #slickModal="slick-carousel" [config]="slideConfig" class="mt-4">
+    <div
+      ngxSlickItem
+      *ngFor="let item of slider"
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap.gt-xs="40px"
+    >
+      <span fxLayout="column" fxFlex="30">
+        <h3 ngClass.gt-xs="f-20" ngClass.xs="f-16" class="mt-1 mb-1">
+          {{ item.title }}
+        </h3>
+        <p>{{ item.text }}</p>
+      </span>
+      <span fxLayout="column">
+        <img class="responsive-img" [src]="item.image" alt="item.title" />
+      </span>
+    </div>
+  </ngx-slick-carousel>
+  <div fxHide.xs="true" class="position-absolute arrows-video" fxLayout="row" fxLayoutAlign="space-between">
+    <button mat-mini-fab color="white" class="ml-4" (click)="prev()">
+      <img src="/assets/img/arrow-video.svg" alt="prev" />
+    </button>
+    <button mat-mini-fab color="white" class="mr-4" (click)="next()">
+      <img class="rotate" src="/assets/img/arrow-video.svg" alt="next" />
+    </button>
+  </div>
 </div>

@@ -16,33 +16,33 @@ describe('TermsAndConditionsComponent', () => {
   let component: TermsAndConditionsComponent;
   let fixture: ComponentFixture<TermsAndConditionsComponent>;
 
-  const mockLinksService = jasmine.createSpyObj("LinksService", ["getAmount"]);
+  const mockLinksService = jasmine.createSpyObj('LinksService', ['getAmount']);
   let responseTerms = {
-    Status: "Success",
-    objectResponse: [{
-      sectionValue: "Contenido",
-      sectionTitle: "Title"
-    },
-    {
-      sectionValue: "Contenido",
-      sectionTitle: "Title"
-    },
-    {
-      sectionValue: "Contenido",
-      sectionTitle: "Title"
-    },
-    {
-      sectionValue: "Contenido",
-      sectionTitle: "Title"
-    }]
-  }
+    Status: 'Success',
+    objectResponse: [
+      {
+        sectionValue: 'Contenido',
+        sectionTitle: 'Title',
+      },
+      {
+        sectionValue: 'Contenido',
+        sectionTitle: 'Title',
+      },
+      {
+        sectionValue: 'Contenido',
+        sectionTitle: 'Title',
+      },
+      {
+        sectionValue: 'Contenido',
+        sectionTitle: 'Title',
+      },
+    ],
+  };
   let amount = {
     amountsCommission: 10000,
-    amountsReferred: 500000
-  }
-  const mockMasterService = jasmine.createSpyObj("MasterDataService", [
-    "getTerms", "setTerms"
-  ]);
+    amountsReferred: 500000,
+  };
+  const mockMasterService = jasmine.createSpyObj('MasterDataService', ['getTerms', 'setTerms']);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [TermsAndConditionsComponent],
@@ -52,14 +52,13 @@ describe('TermsAndConditionsComponent', () => {
         BrowserAnimationsModule,
         SharedModule,
         RouterTestingModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
       ],
       providers: [
         { provide: LinksService, useValue: mockLinksService },
-        { provide: MasterDataService, useValue: mockMasterService }
-      ]
-    })
-      .compileComponents();
+        { provide: MasterDataService, useValue: mockMasterService },
+      ],
+    }).compileComponents();
     mockMasterService.getTerms.and.returnValue(of(responseTerms));
     mockLinksService.getAmount.and.returnValue(of(amount));
   }));
@@ -83,6 +82,4 @@ describe('TermsAndConditionsComponent', () => {
   //     expect(tab).toHaveClass('gtmTerminosCondicionesClicTerminosLegales');
   //   })
   // });
-
-
 });

@@ -12,30 +12,24 @@ import { UserService } from 'src/app/services/user.service';
 import { of } from 'rxjs/internal/observable/of';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
-
 class MockUserService extends UserService {
-
   userInfo$ = new BehaviorSubject<any>({
     userId: '220',
     identification: '1223345',
-    verified: true
+    verified: true,
   });
-
 }
 
 let dataUserC = {
   managedPayments: true,
-  isEmployeeUser: true
-}
-
+  isEmployeeUser: true,
+};
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
   let fixture: ComponentFixture<ProfileComponent>;
 
-  const mockUserService = jasmine.createSpyObj("UserService", [
-    "uploadFiles",
-  ]);
+  const mockUserService = jasmine.createSpyObj('UserService', ['uploadFiles']);
 
   let sendvalues = {
     userid: '260',
@@ -45,7 +39,7 @@ describe('ProfileComponent', () => {
     identificationCard2: '84994889',
     bankCertificate: '84994889',
     // rut: '84994889',
-  }
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -64,23 +58,23 @@ describe('ProfileComponent', () => {
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
-            blacklistedRoutes: []
-          }
-        })
+            blacklistedRoutes: [],
+          },
+        }),
       ],
       providers: [
         // { provide: UserService, useValue: mockUserService },
         { provide: UserService, useClass: MockUserService },
       ],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ]
-    })
-      .compileComponents();
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
-    localStorage.setItem('ACCESS_TOKEN', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU');
+    localStorage.setItem(
+      'ACCESS_TOKEN',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU'
+    );
     fixture = TestBed.createComponent(ProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -90,8 +84,12 @@ describe('ProfileComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
     component.userId = '260';
-    component.id = '131516'
-    component.sendFiles({ fileIdentificationCard1: 'data:application/octet-stream;base64, 84dq8d9qdqd', fileIdentificationCard2: 'data:application/octet-stream;base64, dqdqdqsqsq', fileBankCertificate: 'data:application/octet-stream;base64, ddp0d9aida0d' });
+    component.id = '131516';
+    component.sendFiles({
+      fileIdentificationCard1: 'data:application/octet-stream;base64, 84dq8d9qdqd',
+      fileIdentificationCard2: 'data:application/octet-stream;base64, dqdqdqsqsq',
+      fileBankCertificate: 'data:application/octet-stream;base64, ddp0d9aida0d',
+    });
     expect(component.userId).not.toBeUndefined();
     component.reset({});
     let file = '';
@@ -105,5 +103,4 @@ describe('ProfileComponent', () => {
   afterAll(() => {
     TestBed.resetTestingModule();
   });
-
 });

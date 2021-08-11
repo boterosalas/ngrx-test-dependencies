@@ -1,19 +1,19 @@
-import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
-import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { RouterTestingModule } from "@angular/router/testing";
-import { JwtModule } from "@auth0/angular-jwt";
-import { TranslateModule } from "@ngx-translate/core";
-import { of } from "rxjs";
-import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
-import { ContentService } from "src/app/services/content.service";
-import { DialogStoryComponent } from "../../components/dialog-story/dialog-story.component";
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { JwtModule } from '@auth0/angular-jwt';
+import { TranslateModule } from '@ngx-translate/core';
+import { of } from 'rxjs';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { ContentService } from 'src/app/services/content.service';
+import { DialogStoryComponent } from '../../components/dialog-story/dialog-story.component';
 
-import { StoriesComponent } from "./stories.component";
+import { StoriesComponent } from './stories.component';
 
 export class MatDialogMock {
   open() {
@@ -28,127 +28,115 @@ export class MatDialogMock {
   }
 }
 
-describe("StoriesComponent", () => {
+describe('StoriesComponent', () => {
   let component: StoriesComponent;
   let fixture: ComponentFixture<StoriesComponent>;
 
-  const mockContentService = jasmine.createSpyObj("ContentService", [
-    "getAllBusiness",
-    "getStoriesadmin",
-    "deleteStories",
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getAllBusiness', 'getStoriesadmin', 'deleteStories']);
 
   const resp = {
-    state: "Success",
-    userMessage: "",
+    state: 'Success',
+    userMessage: '',
     objectResponse: [],
   };
 
   let allBusiness = [
     {
       id: 1,
-      code: "exito",
-      imageurl:
-        "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg",
-      infoaditional: "Hasta 9.6% de ganancia",
-      description: "Almacenes Éxito",
+      code: 'exito',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg',
+      infoaditional: 'Hasta 9.6% de ganancia',
+      description: 'Almacenes Éxito',
       orderby: 1,
       active: false,
     },
     {
       id: 14,
-      code: "movil-exito",
-      imageurl:
-        "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-movil-exito.svg",
-      infoaditional: "Ahora 10% de comisión",
-      description: "Móvil Éxito",
+      code: 'movil-exito',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-movil-exito.svg',
+      infoaditional: 'Ahora 10% de comisión',
+      description: 'Móvil Éxito',
       orderby: 5,
       active: true,
     },
     {
       id: 3,
-      code: "seguros",
-      imageurl:
-        "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.svg",
-      infoaditional: "Hasta $32.000 de ganancia",
-      description: "Seguros Éxito",
+      code: 'seguros',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.svg',
+      infoaditional: 'Hasta $32.000 de ganancia',
+      description: 'Seguros Éxito',
       orderby: 3,
       active: true,
     },
     {
       id: 4,
-      code: "viajes",
-      imageurl:
-        "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-viajes.svg",
-      infoaditional: "Hasta $40.000 de ganancia",
-      description: "Viajes Éxito",
+      code: 'viajes',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-viajes.svg',
+      infoaditional: 'Hasta $40.000 de ganancia',
+      description: 'Viajes Éxito',
       orderby: 4,
       active: true,
     },
     {
       id: 5,
-      code: "wesura",
-      imageurl:
-        "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-wesura.svg",
-      infoaditional: "Hasta 12.000 de ganancia",
-      description: "Wesura",
+      code: 'wesura',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-wesura.svg',
+      infoaditional: 'Hasta 12.000 de ganancia',
+      description: 'Wesura',
       orderby: 6,
       active: true,
     },
   ];
 
   const stories = {
-    state: "Success",
+    state: 'Success',
     userMessage: null,
     objectResponse: {
       active: [
         {
-          description: "e1",
+          description: 'e1',
           id: 43,
-          imageurl:
-            "https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210806082635.jpg",
+          imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210806082635.jpg',
           link: null,
           idbusiness: 1,
           infoaditional: null,
           active: true,
           orderby: null,
-          date: "2021-08-06T08:26:35.433",
+          date: '2021-08-06T08:26:35.433',
           new: false,
           datepublish: null,
-          extension: "jpg",
+          extension: 'jpg',
         },
         {
-          description: "e2",
+          description: 'e2',
           id: 44,
-          imageurl:
-            "https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210806082650.jpg",
+          imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210806082650.jpg',
           link: null,
           idbusiness: 1,
           infoaditional: null,
           active: true,
           orderby: null,
-          date: "2021-08-06T08:26:50.667",
+          date: '2021-08-06T08:26:50.667',
           new: false,
           datepublish: null,
-          extension: "jpg",
+          extension: 'jpg',
         },
       ],
       scheduled: [],
       drafts: [
         {
-          description: "e3112",
+          description: 'e3112',
           id: 39,
-          imageurl:
-            "https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210805175214.jpg",
+          imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210805175214.jpg',
           link: null,
           idbusiness: 1,
           infoaditional: null,
           active: false,
           orderby: null,
-          date: "2021-08-05T17:52:14.473",
+          date: '2021-08-05T17:52:14.473',
           new: false,
           datepublish: null,
-          extension: "jpg",
+          extension: 'jpg',
         },
       ],
       defeated: [],
@@ -161,7 +149,7 @@ describe("StoriesComponent", () => {
 
   const matDialog = new MatDialogMock();
 
-  const mockDialog = jasmine.createSpyObj("MatDialog", ["open", "closeAll"]);
+  const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -177,7 +165,7 @@ describe("StoriesComponent", () => {
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
-              return localStorage.getItem("ACCESS_TOKEN");
+              return localStorage.getItem('ACCESS_TOKEN');
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
@@ -210,19 +198,18 @@ describe("StoriesComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
     expect(mockContentService.getAllBusiness).toHaveBeenCalled();
   });
 
-  it("change bussines", () => {
+  it('change bussines', () => {
     let business = {
       id: 1,
-      code: "exito",
-      imageurl:
-        "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg",
-      infoaditional: "Hasta 9.6% de ganancia",
-      description: "Almacenes Éxito",
+      code: 'exito',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg',
+      infoaditional: 'Hasta 9.6% de ganancia',
+      description: 'Almacenes Éxito',
       orderby: 1,
       active: false,
     };
@@ -230,17 +217,17 @@ describe("StoriesComponent", () => {
     expect(mockContentService.getStoriesadmin).toHaveBeenCalled();
   });
 
-  it("delete all stories", () => {
+  it('delete all stories', () => {
     component.deletetAll();
     expect(mockContentService.deleteStories).toHaveBeenCalled();
   });
 
-  it("select all", () => {
+  it('select all', () => {
     component.selectAll();
     expect(component.active).not.toBeUndefined();
   });
 
-  it("new story", () => {
+  it('new story', () => {
     component.newStory();
     expect(mockContentService.getStoriesadmin).toHaveBeenCalled();
   });

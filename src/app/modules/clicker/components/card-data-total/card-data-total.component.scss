@@ -1,6 +1,5 @@
-@import "variables";
-@import "general";
-
+@import 'variables';
+@import 'general';
 
 .card-basic {
   border-radius: 5px;
@@ -16,8 +15,7 @@
 }
 
 .color-card-2 {
-  background: transparent linear-gradient(90deg, #735cf2 0%, #968bf4 100%) 0% 0%
-    no-repeat padding-box;
+  background: transparent linear-gradient(90deg, #735cf2 0%, #968bf4 100%) 0% 0% no-repeat padding-box;
   border-radius: 10px !important;
   height: 142px;
   padding-top: 20px !important;
@@ -45,7 +43,7 @@
   width: 100px;
   position: absolute;
   right: 20px;
-  
+
   z-index: 0;
 }
 
@@ -61,19 +59,17 @@
   align-items: center;
   text-align: center;
   height: 50px;
- 
 }
 
-.marco-p-text{
+.marco-p-text {
   margin-top: 0px;
   margin-bottom: 0px;
   color: #ffffff;
   font-family: $font-galano-bold;
 }
-.marco-span-text{
+.marco-span-text {
   margin-top: 0px;
-    margin-bottom: 0px;
-    color: #ffffff;
-    font-size: 11px;
-  
+  margin-bottom: 0px;
+  color: #ffffff;
+  font-size: 11px;
 }

@@ -1,13 +1,13 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 
 // i18n
-import { HttpClientModule, HttpClient } from "@angular/common/http";
-import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
-import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // modules
 import { AnonymousModule } from './modules/anonymous/anonymous.module';
@@ -36,12 +36,9 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AsyncPipe } from '../../node_modules/@angular/common';
-import { SidenavService } from "./services/sidenav.service";
-//import { CKEditorModule } from 'ckeditor4-angular';
-//import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-//import { CKEditorModule } from 'ng2-ckeditor';
+import { SidenavService } from './services/sidenav.service';
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 export function jwtTokenGetter() {
@@ -51,7 +48,6 @@ export function jwtTokenGetter() {
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    //CKEditorModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -69,34 +65,37 @@ export function jwtTokenGetter() {
       config: {
         tokenGetter: jwtTokenGetter,
         whitelistedDomains: [],
-        blacklistedRoutes: []
-      }
+        blacklistedRoutes: [],
+      },
     }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: createTranslateLoader,
-        deps: [HttpClient]
+        deps: [HttpClient],
       },
     }),
     BrowserAnimationsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptorService,
-      multi: true
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true
+      multi: true,
     },
     BnNgIdleService,
     MessagingService,
-    AsyncPipe, SidenavService
+    AsyncPipe,
+    SidenavService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

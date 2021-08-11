@@ -1,24 +1,16 @@
-import {
-  Component,
-  OnInit,
-  HostListener,
-  Input,
-  OnDestroy,
-  Output,
-  EventEmitter,
-} from "@angular/core";
-import { UtilsService } from "src/app/services/utils.service";
-import { AuthService } from "src/app/services/auth.service";
-import { LinksService } from "src/app/services/links.service";
-import { Subscription } from "rxjs";
-import { ContentService } from "src/app/services/content.service";
-import { ResponseService } from "src/app/interfaces/response";
+import { Component, OnInit, HostListener, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { UtilsService } from 'src/app/services/utils.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { LinksService } from 'src/app/services/links.service';
+import { Subscription } from 'rxjs';
+import { ContentService } from 'src/app/services/content.service';
+import { ResponseService } from 'src/app/interfaces/response';
 @Component({
-  selector: "app-header",
-  templateUrl: "./header.component.html",
-  styleUrls: ["./header.component.scss"],
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   @Input() isHome: boolean;
   @Input() internal: boolean;
   @Input() name: string;
@@ -36,11 +28,7 @@ export class HeaderComponent implements OnInit {
   notifications = [];
   total: any;
 
-  constructor(
-    private utils: UtilsService,
-    public auth: AuthService,
-    private _content: ContentService
-  ) {}
+  constructor(private utils: UtilsService, public auth: AuthService, private _content: ContentService) {}
 
   ngOnInit() {
     this.getAmount();
@@ -49,11 +37,9 @@ export class HeaderComponent implements OnInit {
   }
 
   public getMenu() {
-    this.subscription = this.auth
-      .getmenusNoLoginUserView()
-      .subscribe((resp) => {
-        this.menuItems = resp[0].menus;
-      });
+    this.subscription = this.auth.getmenusNoLoginUserView().subscribe((resp) => {
+      this.menuItems = resp[0].menus;
+    });
   }
 
   public open() {
@@ -64,25 +50,25 @@ export class HeaderComponent implements OnInit {
     this.utils.logout();
   }
 
-  @HostListener("over")
+  @HostListener('over')
   showLogin() {
     this.utils.showloginForm();
   }
 
-  @HostListener("over")
+  @HostListener('over')
   showMenu() {
     this.utils.showMenu();
   }
 
-  @HostListener("over")
+  @HostListener('over')
   openRegister() {
     this.utils.showRegisterForm();
   }
 
   public getAmount() {
     let count = 0;
-    let interval = setInterval(() => {
-      this.amount = localStorage.getItem("Amount");
+    const interval = setInterval(() => {
+      this.amount = localStorage.getItem('Amount');
       count++;
     }, 500);
 
@@ -94,15 +80,17 @@ export class HeaderComponent implements OnInit {
   public getNotications() {
     this.auth.getRole$.subscribe((role) => {
       this.role = role;
-      if (role === "CLICKER") {
-        this._content
-          .getNotificationAdmin(false)
-          .subscribe((notification: ResponseService) => {
-            this.notifications = notification.objectResponse.published;
-            this.total = notification.objectResponse.total;
-          });
+      if (role === 'CLICKER') {
+        this._content.getNotificationAdmin(false).subscribe((notification: ResponseService) => {
+          this.notifications = notification.objectResponse.published;
+          this.total = notification.objectResponse.total;
+        });
       }
     });
   }
-  
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }

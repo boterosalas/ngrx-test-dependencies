@@ -1,38 +1,47 @@
-
 <mat-card class="mat-elevation-z0 card-product card-other fade-in p-1" *ngIf="exito">
   <mat-card-content fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap="10px" fxLayoutAlign.xs="space-around">
-    <span fxLayout="column" fxFlex="100"  fxFlex.xs="30" fxFLex.gt-xs="100" fxLayoutAlign="center">
-      <div class="{{container}}">
-      <img
-        class="img-responsive ch-100"
-        mat-card-image
-        src="{{ image }}"
-        alt="{{ alt }}"
-      />
+    <span fxLayout="column" fxFlex="100" fxFlex.xs="30" fxFLex.gt-xs="100" fxLayoutAlign="center">
+      <div class="{{ container }}">
+        <img class="img-responsive ch-100" mat-card-image src="{{ image }}" alt="{{ alt }}" />
       </div>
     </span>
-    <span fxLayout="column" fxFlex="100"  fxFLex.gt-xs="100" fxLayoutAlign="center center" fxLayoutAlign.xs="center start" fxLayoutAlign.gt-xs="inherit inherit">
+    <span
+      fxLayout="column"
+      fxFlex="100"
+      fxFLex.gt-xs="100"
+      fxLayoutAlign="center center"
+      fxLayoutAlign.xs="center start"
+      fxLayoutAlign.gt-xs="inherit inherit"
+    >
       <span fxLayout="row" fxLayout.xs="column" fxLayout.gt-xs="column">
-        <span fxLayout="column" ngClass.gt-xs="container"  ngClass.gt-xs="container-card-info"  fxLayoutAlign="end start">
-          <h3 class="gray" ngClass.gt-xs="f-18" id="{{ id }}" matTooltip={{productName}}>{{ productName | truncate: '30' }}</h3>
+        <span fxLayout="column" ngClass.gt-xs="container" ngClass.gt-xs="container-card-info" fxLayoutAlign="end start">
+          <h3 class="gray" ngClass.gt-xs="f-18" id="{{ id }}" matTooltip="{{ productName }}">
+            {{ productName | truncate: '30' }}
+          </h3>
           <div class="w-100">
             <span class="f-13" ngClass.gt-xs="f-18" *ngIf="price !== 0"></span>
 
-            <span *ngIf="price !== 0" fxLayout="row" fxLayout.gt-xs="column" fxLayoutAlign="start space-between" fxLayoutGap="10px" fxLayoutGap.xs="20px">
+            <span
+              *ngIf="price !== 0"
+              fxLayout="row"
+              fxLayout.gt-xs="column"
+              fxLayoutAlign="start space-between"
+              fxLayoutGap="10px"
+              fxLayoutGap.xs="20px"
+            >
               <span>
-               
-                  <span *ngIf="discount !== price" class="d-block discount text-line small">
-                    {{ discount | currency : '' : 'symbol' : '1.0-0' }}
-                  </span>
-                  <span>
-                      <span ngClass.xs="f-13" ngClass.gt-xs="f-18" class="d-block discount">
-                        {{ price | currency : '' : 'symbol' : '1.0-0' }}
-                      </span>
-                      <span ngClass.xs="f-13" ngClass.gt-xs="f-18" class="plu"> PLU:{{ plu }} </span>
-                  </span>
+                <span *ngIf="discount !== price" class="d-block discount text-line small">
+                  {{ discount | currency: '':'symbol':'1.0-0' }}
                 </span>
+                <span>
+                  <span ngClass.xs="f-13" ngClass.gt-xs="f-18" class="d-block discount">
+                    {{ price | currency: '':'symbol':'1.0-0' }}
+                  </span>
+                  <span ngClass.xs="f-13" ngClass.gt-xs="f-18" class="plu"> PLU:{{ plu }} </span>
+                </span>
+              </span>
 
-                <button
+              <button
                 id="{{ btnid }}"
                 mat-raised-button
                 color="orange"
@@ -40,33 +49,28 @@
                 class="mb-1 button-100"
                 (click)="product()"
                 [disabled]="price === 0"
-              > <span id="{{ btnid }}">{{ textbutton }}</span>
+              >
+                <span id="{{ btnid }}">{{ textbutton }}</span>
               </button>
+            </span>
 
-              </span>
+            <span *ngIf="price === 0" fxLayout.gt-xs="column" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+              <span class="badge-product"> Producto no disponible </span>
+              <span class="min-18"> </span>
 
-              <span *ngIf="price === 0" fxLayout.gt-xs="column" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
-                <span class="badge-product">
-                  Producto no disponible
-                </span>
-                <span class="min-18">
-                </span>
-
-                <button
-                  id="{{ btnid }}"
-                  mat-raised-button
-                  color="orange"
-                  ngClass.xs="widb"
-                  class="mb-1 button-100"
-                  (click)="product()"
-                  [disabled]="price === 0"
-                > <span>{{ textbutton }}</span>
-                </button>
-
-
-              </span>
-
-            </div>
+              <button
+                id="{{ btnid }}"
+                mat-raised-button
+                color="orange"
+                ngClass.xs="widb"
+                class="mb-1 button-100"
+                (click)="product()"
+                [disabled]="price === 0"
+              >
+                <span>{{ textbutton }}</span>
+              </button>
+            </span>
+          </div>
         </span>
       </span>
     </span>
@@ -75,20 +79,24 @@
 
 <mat-card class="mat-elevation-z0 card-product card-other fade-in p-1" *ngIf="other">
   <mat-card-content fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap="10px" fxLayoutAlign.xs="space-around">
-    <span fxLayout="column" fxFlex="100"  fxFlex.xs="30" fxFLex.gt-xs="100" fxLayoutAlign="center">
-      <div class="{{container}}">
-      <img
-        class="img-responsive ch-100"
-        mat-card-image
-        src="{{ image }}"
-        alt="{{ alt }}"
-      />
+    <span fxLayout="column" fxFlex="100" fxFlex.xs="30" fxFLex.gt-xs="100" fxLayoutAlign="center">
+      <div class="{{ container }}">
+        <img class="img-responsive ch-100" mat-card-image src="{{ image }}" alt="{{ alt }}" />
       </div>
     </span>
-    <span fxLayout="column" fxFlex="100"  fxFlex.xs="70" fxFLex.gt-xs="100" fxLayoutAlign="center center" fxLayoutAlign.gt-xs="inherit inherit">
+    <span
+      fxLayout="column"
+      fxFlex="100"
+      fxFlex.xs="70"
+      fxFLex.gt-xs="100"
+      fxLayoutAlign="center center"
+      fxLayoutAlign.gt-xs="inherit inherit"
+    >
       <span fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap.xs="20px">
-        <span fxLayout="column" ngClass.gt-xs="container"  ngClass.xs="container-info"  fxLayoutAlign="start start">
-          <h3 class="m-0 gray" ngClass.gt-xs="f-18" id="{{ id }}" matTooltip={{productName}}>{{ productName | truncate: '30' }}</h3>
+        <span fxLayout="column" ngClass.gt-xs="container" ngClass.xs="container-info" fxLayoutAlign="start start">
+          <h3 class="m-0 gray" ngClass.gt-xs="f-18" id="{{ id }}" matTooltip="{{ productName }}">
+            {{ productName | truncate: '30' }}
+          </h3>
           <p>
             <span class="f-13" ngClass.gt-xs="f-18">Comisión:</span>
             <span class="d-block orange-text f-13" ngClass.gt-xs="f-18">
@@ -97,15 +105,8 @@
           </p>
         </span>
         <span fxLayout="column" fxLayoutAlign="flex-end flex-end" ngClass.gt-xs="button-wrap pb-3">
-          <button
-            id="{{ btnid }}"
-            mat-raised-button
-            color="orange"
-            [(ngClass)]="Class"
-            (click)="product()"
-          >
-          <span [(ngClass)]="Class">{{ textbutton }}</span>
-            
+          <button id="{{ btnid }}" mat-raised-button color="orange" [(ngClass)]="Class" (click)="product()">
+            <span [(ngClass)]="Class">{{ textbutton }}</span>
           </button>
         </span>
       </span>
@@ -114,11 +115,10 @@
 </mat-card>
 
 <mat-card class="mat-elevation-z0 p-0 fade-in" *ngIf="category">
-    <mat-card-content fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap="10px" fxLayoutAlign.xs="center center" class="category border-rad">
-      <span fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
-        <img (click)="product()" [src]="photo" class="img-responsive mb-3 cursor-pointer {{Class}}{{ productName }}">
-        <!-- <h3></h3> -->
-      </span>
-    </mat-card-content>
-  </mat-card>
-
+  <mat-card-content fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap="10px" fxLayoutAlign.xs="center center" class="category border-rad">
+    <span fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
+      <img (click)="product()" [src]="photo" class="img-responsive mb-3 cursor-pointer {{ Class }}{{ productName }}" />
+      <!-- <h3></h3> -->
+    </span>
+  </mat-card-content>
+</mat-card>

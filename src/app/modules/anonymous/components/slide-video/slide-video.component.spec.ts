@@ -30,16 +30,15 @@ describe('SlideVideoComponent', () => {
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
-              return localStorage.getItem("ACCESS_TOKEN");
+              return localStorage.getItem('ACCESS_TOKEN');
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
-            blacklistedRoutes: []
-          }
-        })
+            blacklistedRoutes: [],
+          },
+        }),
       ],
-    })
-      .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -56,8 +55,8 @@ describe('SlideVideoComponent', () => {
     let data = {
       video: 'RWQQ-OVkVpI',
       title: 'video modal',
-      id: 'modal'
-    }
+      id: 'modal',
+    };
 
     component.openVideo(data);
     expect(data).toBeDefined();
@@ -66,8 +65,4 @@ describe('SlideVideoComponent', () => {
     component.prev();
     expect(component.prev).toBeTruthy();
   });
-
-
-
-
 });

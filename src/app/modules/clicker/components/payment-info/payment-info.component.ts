@@ -1,21 +1,21 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { UserService } from "src/app/services/user.service";
-import { Router } from "@angular/router";
-import { LoaderService } from "src/app/services/loader.service";
-import { UtilsService } from "src/app/services/utils.service";
-import { MasterDataService } from "src/app/services/master-data.service";
-import { Subscription, Observable } from "rxjs";
-import { map, startWith } from "rxjs/operators";
-import { ResponseService } from "src/app/interfaces/response";
-import Swal from "sweetalert2";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
+import { LoaderService } from 'src/app/services/loader.service';
+import { UtilsService } from 'src/app/services/utils.service';
+import { MasterDataService } from 'src/app/services/master-data.service';
+import { Subscription, Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { ResponseService } from 'src/app/interfaces/response';
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: "app-payment-info",
-  templateUrl: "./payment-info.component.html",
-  styleUrls: ["./payment-info.component.scss"]
+  selector: 'app-payment-info',
+  templateUrl: './payment-info.component.html',
+  styleUrls: ['./payment-info.component.scss'],
 })
-export class PaymentInfoComponent implements OnInit {
+export class PaymentInfoComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private registerUser: UserService,
@@ -29,36 +29,35 @@ export class PaymentInfoComponent implements OnInit {
 
   externalForm: FormGroup;
   validFormat: boolean;
-  nameFileCed1: string = '';
-  nameFileCed2: string = '';
-  nameFileCert: string = '';
-  // nameFileRUT: string = '';
-  showErrorCed1: boolean = false;
-  showErrorCed2: boolean = false;
-  showErrorCert: boolean = false;
-  // showErrorRUT: boolean = false;
-  showErrorFormatCed1: boolean = false;
-  showErrorFormatCed2: boolean = false;
-  showErrorFormatCert: boolean = false;
-  // showErrorFormatRUT: boolean = false;
+  nameFileCed1 = '';
+  nameFileCed2 = '';
+  nameFileCert = '';
+  nameFileRUT = '';
+  showErrorCed1 = false;
+  showErrorCed2 = false;
+  showErrorCert = false;
+  showErrorRUT = false;
+  showErrorFormatCed1 = false;
+  showErrorFormatCed2 = false;
+  showErrorFormatCert = false;
+  showErrorFormatRUT = false;
   fileIdentificationCard1: any;
   fileIdentificationCard2: any;
   fileBankCertificate: any;
   // fileRUT: any;
-  EXCEL_TYPE =
-    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+  EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
   departments = [];
   banks = [];
   typeAccount = [
-    { id: 1, description: "Ahorros" },
-    { id: 2, description: "Corriente" }
+    { id: 1, description: 'Ahorros' },
+    { id: 2, description: 'Corriente' },
   ];
 
   cities: [];
-  numberPattern = "^(0|[0-9][0-9]*)$";
+  numberPattern = '^(0|[0-9][0-9]*)$';
   // passwordPattern =
-  //   "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[!#/_@#$%^&+-.*)(´}{><:;¡!})])";
-  passwordPattern = "(?=.*[a-zA-Z])(?=.*[0-9])";
+  //   '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[!#/_@#$%^&+-.*)(´}{><:;¡!})])';
+  passwordPattern = '(?=.*[a-zA-Z])(?=.*[0-9])';
   filteredDepartments: Observable<any>;
   filteredCities: Observable<any>;
   disabledCity: boolean;
@@ -73,8 +72,7 @@ export class PaymentInfoComponent implements OnInit {
   identification: string;
 
   ngOnInit() {
-
-    this.subscription = this.registerUser.userInfo$.subscribe(val => {
+    this.subscription = this.registerUser.userInfo$.subscribe((val) => {
       if (!!val) {
         this.userId = val.userId;
         this.identification = val.identification;
@@ -85,10 +83,10 @@ export class PaymentInfoComponent implements OnInit {
     });
 
     this.disabledCity = true;
-    this.nameFileCed1 = "";
-    this.nameFileCed2 = "";
-    this.nameFileCert = "";
-    // this.nameFileRUT = "";
+    this.nameFileCed1 = '';
+    this.nameFileCed2 = '';
+    this.nameFileCert = '';
+    this.nameFileRUT = '';
     this.externalClickerForm();
     this.getDepartments();
     this.getBanks();
@@ -96,8 +94,7 @@ export class PaymentInfoComponent implements OnInit {
   }
 
   /**
-   * Metodo para el autocompletar los departamentos
-   * @param departments
+   * @param departments Metodo para el autocompletar los departamentos
    *
    */
 
@@ -107,18 +104,11 @@ export class PaymentInfoComponent implements OnInit {
 
   public filter() {
     this.filteredDepartments = this.externalForm.controls.department.valueChanges.pipe(
-      map(department =>
-        typeof department === "string" ? department : department.description
-      ),
-      map(department =>
-        department
-          ? this._filterDepartments(department)
-          : this.departments.slice()
-      )
+      map((department) => (typeof department === 'string' ? department : department.description)),
+      map((department) => (department ? this._filterDepartments(department) : this.departments.slice()))
     );
   }
 
-  
   private externalClickerForm() {
     this.externalForm = this.fb.group({
       department: [null, Validators.required],
@@ -128,117 +118,109 @@ export class PaymentInfoComponent implements OnInit {
       typeAccount: [null, Validators.required],
       numberAccount: [
         null,
-        [
-          Validators.required,
-          Validators.pattern(this.numberPattern),
-          Validators.minLength(5),
-          Validators.maxLength(20)
-        ]
+        [Validators.required, Validators.pattern(this.numberPattern), Validators.minLength(5), Validators.maxLength(20)],
       ],
       ced1: [null, Validators.required],
       ced2: [null, Validators.required],
       cert: [null, Validators.required],
-      // rut: [null, Validators.required],
+      rut: [null, Validators.required],
     });
   }
 
   /**
    * Metodo para validar que la extension sea valida
-   * @param nameFile
+   * @param nameFile nombre del archivo
    */
 
   private getExtension(nameFile: string) {
-    let splitExt = nameFile.split(".");
-    let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
+    const splitExt = nameFile.split('.');
+    const getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
     this.validFormat = false;
-    if (getExt === "jpg" || getExt === "jpeg" || getExt === "pdf") {
+    if (getExt === 'jpg' || getExt === 'jpeg' || getExt === 'pdf') {
       this.validFormat = true;
     }
   }
 
   /**
    * Metodo para leer y subir un archivo al  servidor
-   * @param event
-   * @param param
+   * @param event evento
+   * @param param parametro
    */
 
   public onFileChangeFiles(event, param: string) {
     if (event.target.files && event.target.files.length) {
-      let error = {'incorrect': true};
+      let error = { incorrect: true };
 
       const nameFile = event.target.files[0].name;
       this.getExtension(nameFile);
 
       if (this.validFormat) {
         const formData = new FormData();
-    
-        formData.append("file", event.target.files[0]);
-        formData.append("typeDocument", param );
-        formData.append("identification", this.identification);
-        formData.append("userId", this.userId);
 
-        this.subscription = this.registerUser
-          .uploadFiles(formData)
-          .subscribe((response: ResponseService) => {
-            if (response.state === "Success") {
-              error = null;
-            } else {
-              Swal.fire({
-                title: "Error al subir archivo",
-                text: response.userMessage,
-                type: "error",
-                confirmButtonText: "Aceptar",
-                confirmButtonClass: "accept-register-alert-error"
-              }).then(() => {
-              });
-            }
+        formData.append('file', event.target.files[0]);
+        formData.append('typeDocument', param);
+        formData.append('identification', this.identification);
+        formData.append('userId', this.userId);
 
-            switch (param) {
-              // case "Rut":
-              //   this.nameFileRUT = nameFile;
-              //   this.showErrorRUT = response.state === "Success" ? false : true;
-              //   this.externalForm.controls.rut.setErrors(error);
-              //   break;
-              case "BankCertificate":
-                this.nameFileCert = nameFile;
-                this.showErrorCert = response.state === "Success" ? false : true;
-                this.externalForm.controls.cert.setErrors(error);
-                break;
-              case "IdentificationCard1":
-                this.nameFileCed1 = nameFile;
-                this.showErrorCed1 = response.state === "Success" ? false : true;
-                this.externalForm.controls.ced1.setErrors(error);
-                break;
-              case "IdentificationCard2":
-                this.nameFileCed2 = nameFile;
-                this.showErrorCed2 = response.state === "Success" ? false : true;
-                this.externalForm.controls.ced2.setErrors(error);
-                break;
-              default:
-                break;
-            }
-          });
+        this.subscription = this.registerUser.uploadFiles(formData).subscribe((response: ResponseService) => {
+          if (response.state === 'Success') {
+            error = null;
+          } else {
+            Swal.fire({
+              title: 'Error al subir archivo',
+              text: response.userMessage,
+              type: 'error',
+              confirmButtonText: 'Aceptar',
+              confirmButtonClass: 'accept-register-alert-error',
+            }).then(() => {});
+          }
+
+          switch (param) {
+            case 'Rut':
+              this.nameFileRUT = nameFile;
+              this.showErrorRUT = response.state === 'Success' ? false : true;
+              this.externalForm.controls.rut.setErrors(error);
+              break;
+            case 'BankCertificate':
+              this.nameFileCert = nameFile;
+              this.showErrorCert = response.state === 'Success' ? false : true;
+              this.externalForm.controls.cert.setErrors(error);
+              break;
+            case 'IdentificationCard1':
+              this.nameFileCed1 = nameFile;
+              this.showErrorCed1 = response.state === 'Success' ? false : true;
+              this.externalForm.controls.ced1.setErrors(error);
+              break;
+            case 'IdentificationCard2':
+              this.nameFileCed2 = nameFile;
+              this.showErrorCed2 = response.state === 'Success' ? false : true;
+              this.externalForm.controls.ced2.setErrors(error);
+              break;
+            default:
+              break;
+          }
+        });
       } else {
         switch (param) {
-          // case "Rut":
-          //   this.nameFileRUT = nameFile;
-          //   this.showErrorRUT = this.showErrorFormatRUT = true;
-          //   this.externalForm.controls.rut.setErrors({'incorrect': true});
-          //   break;
-          case "BankCertificate":
+          case 'Rut':
+            this.nameFileRUT = nameFile;
+            this.showErrorRUT = this.showErrorFormatRUT = true;
+            this.externalForm.controls.rut.setErrors({ incorrect: true });
+            break;
+          case 'BankCertificate':
             this.nameFileCert = nameFile;
             this.showErrorCert = this.showErrorFormatCert = true;
-            this.externalForm.controls.cert.setErrors({'incorrect': true});
+            this.externalForm.controls.cert.setErrors({ incorrect: true });
             break;
-          case "IdentificationCard1":
+          case 'IdentificationCard1':
             this.nameFileCed1 = nameFile;
             this.showErrorCed1 = this.showErrorFormatCed1 = true;
-            this.externalForm.controls.ced1.setErrors({'incorrect': true});
+            this.externalForm.controls.ced1.setErrors({ incorrect: true });
             break;
-          case "IdentificationCard2":
+          case 'IdentificationCard2':
             this.nameFileCed2 = nameFile;
             this.showErrorCed2 = this.showErrorFormatCed2 = true;
-            this.externalForm.controls.ced1.setErrors({'incorrect': true});
+            this.externalForm.controls.ced1.setErrors({ incorrect: true });
             break;
           default:
             break;
@@ -253,7 +235,7 @@ export class PaymentInfoComponent implements OnInit {
    */
 
   public sendPayment() {
-    let registerForm = {
+    const registerForm = {
       cellphone: this.phone,
       firstNames: this.name,
       lastNames: this.lastName,
@@ -268,87 +250,86 @@ export class PaymentInfoComponent implements OnInit {
     this.subscription = this.registerUser.updateUser(registerForm).subscribe(
       (resp: ResponseService) => {
         this.loading.hide();
-        if (resp.state === "Success") {
+        if (resp.state === 'Success') {
           Swal.fire({
-            title: "Información guardada",
-            type:"success",
+            title: 'Información guardada',
+            type: 'success',
             html: `
               Se ha guardado tu información correctamente
               `,
-            confirmButtonText: "Aceptar",
-            confirmButtonClass:
-              "accept-register-alert-success"
+            confirmButtonText: 'Aceptar',
+            confirmButtonClass: 'accept-register-alert-success',
           }).then(() => {
-            this.nameFileCed1 = "";
-            this.nameFileCed2 = "";
-            this.nameFileCert = "";
-            // this.nameFileRUT = "";
+            this.nameFileCed1 = '';
+            this.nameFileCed2 = '';
+            this.nameFileCert = '';
+            this.nameFileRUT = '';
             this.showErrorCed1 = false;
             this.showErrorCed2 = false;
             this.showErrorCert = false;
-            // this.showErrorRUT = false;
+            this.showErrorRUT = false;
             this.externalForm.controls.ced1.setValue(null);
             this.externalForm.controls.ced2.setValue(null);
             this.externalForm.controls.cert.setValue(null);
-            // this.externalForm.controls.rut.setValue(null);
+            this.externalForm.controls.rut.setValue(null);
             window.location.reload();
           });
         } else {
           Swal.fire({
-            title: "Registro inválido",
+            title: 'Registro inválido',
             text: resp.userMessage,
-            type: "error",
-            confirmButtonText: "Aceptar",
-            confirmButtonClass: "accept-register-alert-error"
+            type: 'error',
+            confirmButtonText: 'Aceptar',
+            confirmButtonClass: 'accept-register-alert-error',
           }).then(() => {
-            this.nameFileCed1 = "";
-            this.nameFileCed2 = "";
-            this.nameFileCert = "";
-            // this.nameFileRUT = "";
+            this.nameFileCed1 = '';
+            this.nameFileCed2 = '';
+            this.nameFileCert = '';
+            this.nameFileRUT = '';
             this.showErrorCed1 = false;
             this.showErrorCed2 = false;
             this.showErrorCert = false;
-            // this.showErrorRUT = false;
+            this.showErrorRUT = false;
             this.externalForm.controls.ced1.setValue(null);
             this.externalForm.controls.ced2.setValue(null);
             this.externalForm.controls.cert.setValue(null);
-            // this.externalForm.controls.rut.setValue(null);
+            this.externalForm.controls.rut.setValue(null);
           });
         }
       },
-      error => {
+      (error) => {
         this.loading.hide();
         Swal.fire({
           title: error.statusText,
           text: error.error.userMessage,
-          type: "error",
-          confirmButtonText: "Aceptar",
-          confirmButtonClass: "accept-register-alert-invalid"
-        })
+          type: 'error',
+          confirmButtonText: 'Aceptar',
+          confirmButtonClass: 'accept-register-alert-invalid',
+        });
       }
     );
   }
 
   /**
    * Metodo para seleccionar el departamento
-   * @param department
+   * @param department departamento
    *
    */
 
   public selectDepartment(department) {
     this.departmentCode = department.code;
     this.cities = department.municipalities;
-    this.externalForm.controls.city.setValue("");
-    let valueDepartment = this.externalForm.controls.department.valueChanges;
+    this.externalForm.controls.city.setValue('');
+    const valueDepartment = this.externalForm.controls.department.valueChanges;
     this.filterCities();
 
-    this.subscription = valueDepartment.subscribe(resp => {
-      if (resp !== "") {
+    this.subscription = valueDepartment.subscribe((resp) => {
+      if (resp !== '') {
         this.getDepartments();
         // this.externalForm.controls.city.enable();
       } else {
         // this.externalForm.controls.city.disable();
-        this.externalForm.controls.city.setValue("");
+        this.externalForm.controls.city.setValue('');
       }
     });
   }
@@ -357,10 +338,9 @@ export class PaymentInfoComponent implements OnInit {
 
   public checkDepartment() {
     if (
-      this.externalForm.controls.department.value.code !==
-        this.departmentCode ||
+      this.externalForm.controls.department.value.code !== this.departmentCode ||
       this.externalForm.controls.department.value.code === undefined ||
-        this.departmentCode === undefined
+      this.departmentCode === undefined
     ) {
       this.externalForm.controls.department.setErrors({ incorrect: true });
     }
@@ -384,11 +364,9 @@ export class PaymentInfoComponent implements OnInit {
    */
 
   public getDepartments() {
-    this.subscription = this.personalInfo
-      .getDepartments()
-      .subscribe((res: ResponseService) => {
-        this.departments = res.objectResponse;
-      });
+    this.subscription = this.personalInfo.getDepartments().subscribe((res: ResponseService) => {
+      this.departments = res.objectResponse;
+    });
   }
 
   /**
@@ -396,35 +374,27 @@ export class PaymentInfoComponent implements OnInit {
    */
 
   public getBanks() {
-    this.subscription = this.personalInfo
-      .getBanks()
-      .subscribe((res: ResponseService) => {
-        this.banks = res.objectResponse;
-      });
+    this.subscription = this.personalInfo.getBanks().subscribe((res: ResponseService) => {
+      this.banks = res.objectResponse;
+    });
   }
 
   public filterCities() {
     this.filteredCities = this.externalForm.controls.city.valueChanges.pipe(
-      startWith(""),
-      map(city => (city ? this._filterCities(city) : this.cities.slice()))
+      startWith(''),
+      map((city) => (city ? this._filterCities(city) : this.cities.slice()))
     );
   }
 
   private _filterDepartments(value: any) {
     const filterValue = value.toLowerCase();
-    return this.departments.filter(
-      department =>
-        department.description.toLowerCase().indexOf(filterValue) === 0
-    );
+    return this.departments.filter((department) => department.description.toLowerCase().indexOf(filterValue) === 0);
   }
 
   private _filterCities(value: string) {
     const filterValue = value.toLowerCase();
-    return this.cities.filter(
-      (city: any) => city.description.toLowerCase().indexOf(filterValue) === 0
-    );
-  }  
-
+    return this.cities.filter((city: any) => city.description.toLowerCase().indexOf(filterValue) === 0);
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

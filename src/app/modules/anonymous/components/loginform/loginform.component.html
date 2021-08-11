@@ -1,32 +1,21 @@
-<app-top title="Login y registro" (close)="hideLogin()"></app-top> 
+<app-top title="Login y registro" (close)="hideLogin()"></app-top>
 
 <h3 class="text-center title-login">{{ 'LOGIN.LOGIN' | translate }}</h3>
 
 <form class="login-container" [formGroup]="loginForm">
   <mat-form-field>
-    <input
-      matInput
-      id="email"
-      type="email"
-      placeholder="{{ 'GENERIC.EMAIL' | translate }}"
-      formControlName="Username"
-      spacebar
-      required
-    />
+    <input matInput id="email" type="email" placeholder="{{ 'GENERIC.EMAIL' | translate }}" formControlName="Username" spacebar required />
     <span matPrefix><mat-icon color="gray">person</mat-icon></span>
     <mat-error id="introduceEmail" *ngIf="loginForm.controls.Username.invalid && loginForm.controls.Username.errors.required">{{
-      "LOGIN.INTRODUCE_EMAIL" | translate
+      'LOGIN.INTRODUCE_EMAIL' | translate
     }}</mat-error>
     <mat-error id="invalidEmail" *ngIf="loginForm.controls.Username.invalid && loginForm.controls.Username.errors.pattern">{{
-      "LOGIN.INVALID_EMAIL" | translate
+      'LOGIN.INVALID_EMAIL' | translate
     }}</mat-error>
   </mat-form-field>
 
   <mat-form-field>
-      <mat-pass-toggle-visibility
-      #toggleVisbility
-      matSuffix
-    ></mat-pass-toggle-visibility>
+    <mat-pass-toggle-visibility #toggleVisbility matSuffix></mat-pass-toggle-visibility>
     <input
       matInput
       id="password"
@@ -38,54 +27,62 @@
     />
     <span matPrefix><mat-icon color="gray">lock</mat-icon></span>
     <mat-error id="introducePassword" *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Password.errors.required">{{
-      "LOGIN.INTRODUCE_PASSWORD" | translate
+      'LOGIN.INTRODUCE_PASSWORD' | translate
     }}</mat-error>
 
     <mat-error id="minPassword" *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Password.errors.minlength">{{
-      "GENERIC.MIN_CHARACTERS" | translate: {minchar:loginForm.controls.Password.errors.minlength.requiredLength}
+      'GENERIC.MIN_CHARACTERS'
+        | translate
+          : {
+              minchar: loginForm.controls.Password.errors.minlength.requiredLength
+            }
     }}</mat-error>
 
     <mat-error id="maxPassword" *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Password.errors.maxlength">{{
-      "GENERIC.MAX_CHARACTERS" | translate: {maxchar:loginForm.controls.Password.errors.maxlength.requiredLength}
+      'GENERIC.MAX_CHARACTERS'
+        | translate
+          : {
+              maxchar: loginForm.controls.Password.errors.maxlength.requiredLength
+            }
     }}</mat-error>
-
   </mat-form-field>
-<div class="text-center">
+  <div class="text-center">
     <button
-    class="button button-100 button-height gtmIniciarSesionClicLightboxIniciar"
-    mat-raised-button
-    id="login"
-    color="orange"
-    (click)="login()"
-    [disabled]="!loginForm.valid"
-  >
-   <span class="gtmIniciarSesionClicLightboxIniciar">{{ "LOGIN.LOGIN" | translate }}</span> 
-  </button>
-  
-</div>
- 
+      class="button button-100 button-height gtmIniciarSesionClicLightboxIniciar"
+      mat-raised-button
+      id="login"
+      color="orange"
+      (click)="login()"
+      [disabled]="!loginForm.valid"
+    >
+      <span class="gtmIniciarSesionClicLightboxIniciar">{{ 'LOGIN.LOGIN' | translate }}</span>
+    </button>
+  </div>
 </form>
 
 <p
-      id="forgotPass"
-      class="cursor-pointer f-13 text-decoration text-center gtmIniciarSesionClicLightboxOlvidasteTuContrasena"
-      (click)="showForgot()"
-    >
-      {{ "LOGIN.FORGOT_PASSWORD" | translate }}
-    </p>
+  id="forgotPass"
+  class="cursor-pointer f-13 text-decoration text-center gtmIniciarSesionClicLightboxOlvidasteTuContrasena"
+  (click)="showForgot()"
+>
+  {{ 'LOGIN.FORGOT_PASSWORD' | translate }}
+</p>
 
-    <p id="activateAccount"
-      class="cursor-pointer f-13 text-decoration text-center gtmIniciarSesionClicLightboxOlvidasteTuContrasena"
-      (click)="showActivate()"
-    >
-    {{ "LOGIN.ACTIVATE" | translate }}
-  </p>
+<p
+  id="activateAccount"
+  class="cursor-pointer f-13 text-decoration text-center gtmIniciarSesionClicLightboxOlvidasteTuContrasena"
+  (click)="showActivate()"
+>
+  {{ 'LOGIN.ACTIVATE' | translate }}
+</p>
 
-     <button 
-        mat-raised-button
-        color="orange"
-        ngClass="orange-border button button-100 button-height mt-3 gtmIniciarSesionClicLightboxRegistrarse"
-        (click)="showRegister()"
-      > <span class="gtmIniciarSesionClicLightboxRegistrarteAqui">{{ "GENERIC.REGISTER2" | translate }}</span></button>
+<button
+  mat-raised-button
+  color="orange"
+  ngClass="orange-border button button-100 button-height mt-3 gtmIniciarSesionClicLightboxRegistrarse"
+  (click)="showRegister()"
+>
+  <span class="gtmIniciarSesionClicLightboxRegistrarteAqui">{{ 'GENERIC.REGISTER2' | translate }}</span>
+</button>
 
-<app-footer fxHide.gt-xs="true"></app-footer> 
+<app-footer fxHide.gt-xs="true"></app-footer>

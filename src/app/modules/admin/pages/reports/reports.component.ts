@@ -1,31 +1,24 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  TemplateRef,
-  ChangeDetectorRef,
-  OnDestroy
-} from "@angular/core";
-import { LinksService } from "src/app/services/links.service";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { AuthService } from "src/app/services/auth.service";
-import { UserService } from "src/app/services/user.service";
-import Swal from "sweetalert2";
-import { ResponseService } from "src/app/interfaces/response";
-import { LoaderService } from "src/app/services/loader.service";
-import { Subscription } from "rxjs";
-import { ValidateDate } from "src/app/validators/validate-date.validators";
+import { Component, OnInit, ViewChild, TemplateRef, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { LinksService } from 'src/app/services/links.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
+import { ResponseService } from 'src/app/interfaces/response';
+import { LoaderService } from 'src/app/services/loader.service';
+import { Subscription } from 'rxjs';
+import { ValidateDate } from 'src/app/validators/validate-date.validators';
 import * as moment from 'moment';
 import { MatSnackBar } from '@angular/material';
-import { UtilsService } from "src/app/services/utils.service";
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
-  selector: "app-reports",
-  templateUrl: "./reports.component.html",
-  styleUrls: ["./reports.component.scss"]
+  selector: 'app-reports',
+  templateUrl: './reports.component.html',
+  styleUrls: ['./reports.component.scss'],
 })
 export class ReportsComponent implements OnInit, OnDestroy {
-  @ViewChild("templateCardReport, templateCardCross", { static: false })
+  @ViewChild('templateCardReport, templateCardCross', { static: false })
   template: TemplateRef<any>;
 
   fileUrl: string;
@@ -44,8 +37,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
   isLoggedIn: any;
   userName: string;
   tmpPath: string;
-  EXCEL_TYPE =
-    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+  EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
   private subscription: Subscription = new Subscription();
   maxDate = moment(new Date());
   maxDate2 = new Date();
@@ -65,10 +57,8 @@ export class ReportsComponent implements OnInit, OnDestroy {
     customRangeLabel: 'Custom range',
     daysOfWeek: moment.weekdaysMin(),
     monthNames: moment.monthsShort(),
-    firstDay: 1 // first day is monday
-  }
-
-
+    firstDay: 1, // first day is monday
+  };
 
   constructor(
     private file: LinksService,
@@ -80,40 +70,37 @@ export class ReportsComponent implements OnInit, OnDestroy {
     private _snackBar: MatSnackBar,
     private usersService: UserService,
     public utils: UtilsService
-  ) { }
+  ) {}
 
   ngOnInit() {
-    //this.getFileReport();
 
-    this.nameFile = "";
-    this.nameFilePayment = "";
-    this.nameFilePicking = "";
+    this.nameFile = '';
+    this.nameFilePayment = '';
+    this.nameFilePicking = '';
 
-    this.dateFormSell = this.fb.group(
-      {
-        dateRange: [null, Validators.required]
-      }
-    );
+    this.dateFormSell = this.fb.group({
+      dateRange: [null, Validators.required],
+    });
 
     this.fileForm = this.fb.group({
-      file: [null]
+      file: [null],
     });
 
     this.fileFormPayment = this.fb.group({
-      file: [null]
+      file: [null],
     });
 
     this.fileFormPicking = this.fb.group({
-      file: [null]
+      file: [null],
     });
 
     this.dateForm = this.fb.group(
       {
-        dateStart: ["", Validators.required],
-        dateEnd: ["", Validators.required]
+        dateStart: ['', Validators.required],
+        dateEnd: ['', Validators.required],
       },
       {
-        validator: [ValidateDate.CompareDates]
+        validator: [ValidateDate.CompareDates],
       }
     );
     this.checkRole();
@@ -122,7 +109,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
     this.utils.checkPermision();
   }
   public getFileReport() {
-    this.subscription = this.file.getFileReport().subscribe(file => {
+    this.subscription = this.file.getFileReport().subscribe((file) => {
       if (file.state === 'Success') {
         this.openSnackBar(file.userMessage, 'Cerrar');
         this.dateFormSell.reset();
@@ -139,19 +126,19 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
   public onFileChangeTrip(event) {
     this.nameFile = event.target.files[0].name;
-    let reader = new FileReader();
+    const reader = new FileReader();
 
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      let fileBlob = new Blob([file], { type: this.EXCEL_TYPE });
-      let file2 = new File([fileBlob], this.nameFile, {
-        type: this.EXCEL_TYPE
+      const fileBlob = new Blob([file], { type: this.EXCEL_TYPE });
+      const file2 = new File([fileBlob], this.nameFile, {
+        type: this.EXCEL_TYPE,
       });
       reader.readAsDataURL(file2);
 
       reader.onload = () => {
         this.fileForm.controls.file.patchValue({
-          file: reader.result
+          file: reader.result,
         });
         this.getExtension(this.nameFile);
         if (this.validFormat === true) {
@@ -166,15 +153,17 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
   public onFileChangePayment(event) {
     this.nameFilePayment = event.target.files[0].name;
-    let reader = new FileReader();
+    const reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      let fileBlob = new Blob([file], { type: this.EXCEL_TYPE })
-      let file2 = new File(([fileBlob]), this.nameFilePayment, { type: this.EXCEL_TYPE });
+      const fileBlob = new Blob([file], { type: this.EXCEL_TYPE });
+      const file2 = new File([fileBlob], this.nameFilePayment, {
+        type: this.EXCEL_TYPE,
+      });
       reader.readAsDataURL(file2);
       reader.onload = () => {
         this.fileFormPayment.controls.file.patchValue({
-          file: reader.result
+          file: reader.result,
         });
         this.getExtension(this.nameFilePayment);
         if (this.validFormat === true) {
@@ -189,15 +178,17 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
   public onFileChangePicking(event) {
     this.nameFilePicking = event.target.files[0].name;
-    let reader = new FileReader();
+    const reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      let fileBlob = new Blob([file], { type: this.EXCEL_TYPE })
-      let filePicking = new File(([fileBlob]), this.nameFilePicking, { type: this.EXCEL_TYPE });
+      const fileBlob = new Blob([file], { type: this.EXCEL_TYPE });
+      const filePicking = new File([fileBlob], this.nameFilePicking, {
+        type: this.EXCEL_TYPE,
+      });
       reader.readAsDataURL(filePicking);
       reader.onload = () => {
         this.fileFormPicking.controls.file.patchValue({
-          file: reader.result
+          file: reader.result,
         });
         this.getExtension(this.nameFilePicking);
         if (this.validFormat === true) {
@@ -211,175 +202,175 @@ export class ReportsComponent implements OnInit, OnDestroy {
   }
 
   private getExtension(nameFile: string) {
-    let splitExt = nameFile.split(".");
-    let getExt = splitExt[1];
+    const splitExt = nameFile.split('.');
+    const getExt = splitExt[1];
     this.validFormat = false;
-    if (getExt === "xlsx" || getExt === "xls") {
+    if (getExt === 'xlsx' || getExt === 'xls') {
       this.validFormat = true;
     }
   }
 
   private sendFileTrip() {
-    let fileSplit = this.fileForm.controls.file.value.file.split(",");
-    let file = fileSplit[1];
-    let data = {
+    const fileSplit = this.fileForm.controls.file.value.file.split(',');
+    const file = fileSplit[1];
+    const data = {
       fileBase64: file,
-      email: this.userName
+      email: this.userName,
     };
     this.loading.show();
     this.subscription = this.file.sendfile(data).subscribe(
       (res: ResponseService) => {
         this.loading.hide();
-        if (res.state !== "Error") {
+        if (res.state !== 'Error') {
           Swal.fire({
-            title: "Carga exitosa",
+            title: 'Carga exitosa',
             text: res.userMessage,
-            type: "success",
-            confirmButtonText: "Aceptar",
-            confirmButtonClass: "upload-success"
+            type: 'success',
+            confirmButtonText: 'Aceptar',
+            confirmButtonClass: 'upload-success',
           }).then(() => {
-            this.nameFile = "";
+            this.nameFile = '';
           });
         } else {
           Swal.fire({
-            title: "Error en la Carga",
+            title: 'Error en la Carga',
             text: res.userMessage,
-            type: "error",
-            confirmButtonText: "Aceptar",
-            confirmButtonClass: "upload-error"
+            type: 'error',
+            confirmButtonText: 'Aceptar',
+            confirmButtonClass: 'upload-error',
           }).then(() => {
-            this.nameFile = "";
+            this.nameFile = '';
           });
         }
       },
-      error => {
+      (error) => {
         this.loading.hide();
         Swal.fire({
           title: error.statusText,
           text: error.error.userMessage,
-          type: "error",
-          confirmButtonText: "Aceptar",
-          confirmButtonClass: "upload-invalid"
+          type: 'error',
+          confirmButtonText: 'Aceptar',
+          confirmButtonClass: 'upload-invalid',
         }).then(() => {
-          this.nameFile = "";
+          this.nameFile = '';
         });
       }
     );
   }
 
   private sendFilePayment() {
-    let fileSplit = this.fileFormPayment.controls.file.value.file.split(',');
-    let file = fileSplit[1];
-    let data = {
+    const fileSplit = this.fileFormPayment.controls.file.value.file.split(',');
+    const file = fileSplit[1];
+    const data = {
       fileBase64: file,
-      business: "seguros",
-      email: this.userName
+      business: 'seguros',
+      email: this.userName,
     };
 
     this.subscription = this.file.updatePaymentDate(data).subscribe(
       (res: ResponseService) => {
         if (res.state !== 'Error') {
           Swal.fire({
-            title: "Carga exitosa",
+            title: 'Carga exitosa',
             text: res.userMessage,
-            type: "success",
-            confirmButtonText: "Aceptar",
-            confirmButtonClass: "upload-success"
+            type: 'success',
+            confirmButtonText: 'Aceptar',
+            confirmButtonClass: 'upload-success',
           }).then(() => {
-            this.nameFilePayment = "";
+            this.nameFilePayment = '';
           });
         } else {
           Swal.fire({
             title: 'Error en la Carga',
             text: res.userMessage,
-            type: "error",
-            confirmButtonText: "Aceptar",
-            confirmButtonClass: "upload-error"
+            type: 'error',
+            confirmButtonText: 'Aceptar',
+            confirmButtonClass: 'upload-error',
           }).then(() => {
-            this.nameFilePayment = "";
+            this.nameFilePayment = '';
           });
         }
       },
-      error => {
+      (error) => {
         this.loading.hide();
         Swal.fire({
           title: error.statusText,
           text: error.error.userMessage,
-          type: "error",
-          confirmButtonText: "Aceptar",
-          confirmButtonClass: "upload-invalid"
+          type: 'error',
+          confirmButtonText: 'Aceptar',
+          confirmButtonClass: 'upload-invalid',
         }).then(() => {
-          this.nameFilePayment = "";
+          this.nameFilePayment = '';
         });
       }
     );
   }
 
   private sendFilePicking() {
-    let fileSplit = this.fileFormPicking.controls.file.value.file.split(',');
-    let file = fileSplit[1];
-    let data = {
+    const fileSplit = this.fileFormPicking.controls.file.value.file.split(',');
+    const file = fileSplit[1];
+    const data = {
       file: file,
     };
     this.loading.show();
     this.subscription = this.file.sendPickingfile(data).subscribe(
       (picking: ResponseService) => {
         this.loading.hide();
-        if (picking.state !== "Error") {
+        if (picking.state !== 'Error') {
           Swal.fire({
-            title: "Carga exitosa",
+            title: 'Carga exitosa',
             text: picking.userMessage,
-            type: "success",
-            confirmButtonText: "Aceptar",
-            confirmButtonClass: "upload-success"
+            type: 'success',
+            confirmButtonText: 'Aceptar',
+            confirmButtonClass: 'upload-success',
           }).then(() => {
-            this.nameFilePicking = "";
+            this.nameFilePicking = '';
           });
         } else {
           Swal.fire({
-            title: "Error en la Carga",
+            title: 'Error en la Carga',
             text: picking.userMessage,
-            type: "error",
-            confirmButtonText: "Aceptar",
-            confirmButtonClass: "upload-error"
+            type: 'error',
+            confirmButtonText: 'Aceptar',
+            confirmButtonClass: 'upload-error',
           }).then(() => {
-            this.nameFilePicking = "";
+            this.nameFilePicking = '';
           });
         }
       },
-      errorPicking => {
+      (errorPicking) => {
         this.loading.hide();
         Swal.fire({
           title: errorPicking.statusText,
           text: errorPicking.error.userMessage,
-          type: "error",
-          confirmButtonText: "Aceptar",
-          confirmButtonClass: "upload-invalid"
+          type: 'error',
+          confirmButtonText: 'Aceptar',
+          confirmButtonClass: 'upload-invalid',
         }).then(() => {
-          this.nameFilePicking = "";
+          this.nameFilePicking = '';
         });
       }
     );
   }
 
   public downloadReferal() {
-    let dates = {
+    const dates = {
       dateStart: this.dateForm.controls.dateStart.value,
-      dateEnd: this.dateForm.controls.dateEnd.value
+      dateEnd: this.dateForm.controls.dateEnd.value,
     };
     this.subscription = this.file.downloadReferrals(dates).subscribe((resp: ResponseService) => {
-      let file = resp.objectResponse;
-      let contentType = "application/vnd.ms-excel";
+      const file = resp.objectResponse;
+      const contentType = 'application/vnd.ms-excel';
       const linkSource = `data:${contentType};base64,${file}`;
-      const downloadLink = document.createElement("a");
+      const downloadLink = document.createElement('a');
       const fileName = `reporte.xlsx`;
 
       downloadLink.href = linkSource;
       downloadLink.download = fileName;
       downloadLink.click();
       this.dateForm.reset();
-      this.dateForm.controls.dateStart.setValue("");
-      this.dateForm.controls.dateEnd.setValue("");
+      this.dateForm.controls.dateStart.setValue('');
+      this.dateForm.controls.dateEnd.setValue('');
       setTimeout(() => {
         this.dateForm.controls.dateEnd.setErrors(null);
         this.dateForm.controls.dateStart.setErrors(null);
@@ -388,22 +379,22 @@ export class ReportsComponent implements OnInit, OnDestroy {
   }
 
   /**
- * Abre el mensaje de confirmacion de copiado del link
- * @param message
- * @param action
- */
+   * Abre el mensaje de confirmacion de copiado del link
+   * @param message mensaje
+   * @param action accion
+   */
 
   private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      duration: 5000
+      duration: 5000,
     });
   }
 
   public getReportClickam() {
     this.dateParams = {
       start: this.dateFormSell.controls.dateRange.value.startDate.format(),
-      end: this.dateFormSell.controls.dateRange.value.endDate.format()
-    }
+      end: this.dateFormSell.controls.dateRange.value.endDate.format(),
+    };
 
     this.subscription = this.file.getReportClickam(this.dateParams).subscribe((resp: ResponseService) => {
       if (resp.state === 'Success') {

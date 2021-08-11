@@ -9,12 +9,11 @@ import { ContentService } from 'src/app/services/content.service';
 @Component({
   selector: 'app-dialog-faq-item',
   templateUrl: './dialog-faq-item.component.html',
-  styleUrls: ['./dialog-faq-item.component.scss']
+  styleUrls: ['./dialog-faq-item.component.scss'],
 })
 export class DialogFaqItemComponent implements OnInit, OnDestroy {
-
   private subscription: Subscription = new Subscription();
-  item:any;
+  item: any;
 
   faqItemForm: FormGroup;
   configurarEditor: AngularEditorConfig = {
@@ -29,15 +28,26 @@ export class DialogFaqItemComponent implements OnInit, OnDestroy {
     showToolbar: true,
     placeholder: 'Escriba su articulo...',
     toolbarHiddenButtons: [
-      ['heading', 'insertImage', 'insertVideo',
+      [
+        'heading',
+        'insertImage',
+        'insertVideo',
         'customClasses',
-        'removeFormat', 'fontName', 'backgroundColor',
-        'insertHorizontalRule', 'toggleEditorMode', 'undo',
-        'redo', 'strikeThrough', 'subscript',
-        'superscript', 'justifyLeft',
+        'removeFormat',
+        'fontName',
+        'backgroundColor',
+        'insertHorizontalRule',
+        'toggleEditorMode',
+        'undo',
+        'redo',
+        'strikeThrough',
+        'subscript',
+        'superscript',
+        'justifyLeft',
         'justifyCenter',
         'justifyRight',
-        'justifyFull']
+        'justifyFull',
+      ],
     ],
     defaultParagraphSeparator: 'p',
     defaultFontName: '',
@@ -45,17 +55,14 @@ export class DialogFaqItemComponent implements OnInit, OnDestroy {
     enableToolbar: true,
     sanitize: true,
     toolbarPosition: 'top',
-
   };
 
   constructor(
     private content: ContentService,
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: FormBuilder,
-    ) {
-      
-    }
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
     this.loadItem();
@@ -67,14 +74,14 @@ export class DialogFaqItemComponent implements OnInit, OnDestroy {
         id: [this.data.id],
         idseccion: [this.data.idfaqsection || this.data.idgrupo],
         description: [this.data.description || this.data.name, Validators.required],
-        termsEditor: [this.data.sectionvalue, Validators.required]
+        termsEditor: [this.data.sectionvalue, Validators.required],
       });
     } else {
       this.faqItemForm = this.fb.group({
         id: [this.data.id],
         idseccion: [this.data.idfaqsection || this.data.idgrupo],
         description: [null, Validators.required],
-        termsEditor: [this.data.sectionvalue, Validators.required]
+        termsEditor: [this.data.sectionvalue, Validators.required],
       });
     }
   }
@@ -84,30 +91,22 @@ export class DialogFaqItemComponent implements OnInit, OnDestroy {
   }
 
   saveFaqItem() {
-   
-      this.item = {
-        id: this.data.id,
-        sectionTitle: this.faqItemForm.controls.description.value,
-        sectionValue: this.faqItemForm.controls.termsEditor.value,
-        idFaqSection: this.data.idfaqsection,
-        orderby: this.data.orderby,
-      };
-    
+    this.item = {
+      id: this.data.id,
+      sectionTitle: this.faqItemForm.controls.description.value,
+      sectionValue: this.faqItemForm.controls.termsEditor.value,
+      idFaqSection: this.data.idfaqsection,
+      orderby: this.data.orderby,
+    };
 
-    this.subscription = this.content
-    .saveFaqItem(this.item)
-    .subscribe((resp: ResponseService) => {
-      if (resp.state === "Success") {
+    this.subscription = this.content.saveFaqItem(this.item).subscribe((resp: ResponseService) => {
+      if (resp.state === 'Success') {
         this.dialogRef.close();
       }
     });
-
   }
 
   ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
     this.subscription.unsubscribe();
   }
-
 }

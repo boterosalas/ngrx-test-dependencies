@@ -2,86 +2,86 @@
 @import 'general';
 
 .register-container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .register-container > * {
-    width: 100%;
-  }
-  
-  .mat-orange{
-    background: $primary-color;
-    color: $white;
-  }
+  display: flex;
+  flex-direction: column;
+}
 
-  .terms{
-    max-height: 172px;
-    overflow: auto;
-    margin-bottom: 18px;
-    border: 2px solid #b0b0b0;
-    padding: 0 10px;
-    border-radius: 5px;
-  }
+.register-container > * {
+  width: 100%;
+}
 
-  .center{
-    margin: 0 auto;
-    display: block;
-    width: 100%;
-  }
+.mat-orange {
+  background: $primary-color;
+  color: $white;
+}
 
-  .additional-info{
-    color: #000;
-    font-size: 16px;
-    border-bottom: 2px solid;
-  }
+.terms {
+  max-height: 172px;
+  overflow: auto;
+  margin-bottom: 18px;
+  border: 2px solid #b0b0b0;
+  padding: 0 10px;
+  border-radius: 5px;
+}
 
-  .black{
-    color: #000;
-  }
+.center {
+  margin: 0 auto;
+  display: block;
+  width: 100%;
+}
 
-input[type="file"] {
-    display: none;
+.additional-info {
+  color: #000;
+  font-size: 16px;
+  border-bottom: 2px solid;
+}
+
+.black {
+  color: #000;
+}
+
+input[type='file'] {
+  display: none;
 }
 
 .custom-file-upload {
-    border: 1px solid #707070;
-    display: inline-block;
-    border-radius:5px;
-    padding: 6px 12px;
-    cursor: pointer;
-    background: #707070;
-    color: #ffffff;
+  border: 1px solid #707070;
+  display: inline-block;
+  border-radius: 5px;
+  padding: 6px 12px;
+  cursor: pointer;
+  background: #707070;
+  color: #ffffff;
 }
 
 .small {
   font-size: 11px;
 }
 
-.w-icon{
+.w-icon {
   width: 27.75px;
   height: 27.75px;
 }
 
-.weak{
-  color:#f44336;
+.weak {
+  color: #f44336;
   font-size: 11px;
 }
 
-.normal{
-  color:$primary-color;
+.normal {
+  color: $primary-color;
   font-size: 11px;
 }
 
-.acceptable{
-  color:#6BC541;
+.acceptable {
+  color: #6bc541;
   font-size: 11px;
 }
 
-.accept-terms{
+.accept-terms {
   font-size: 12px;
-    color:$gray2;
-    text-decoration: underline;
+  color: $gray2;
+  text-decoration: underline;
 }
 
 @media screen and (min-width: 600px) {

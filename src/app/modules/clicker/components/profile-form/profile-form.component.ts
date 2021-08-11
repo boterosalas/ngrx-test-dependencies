@@ -1,30 +1,22 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ViewChild,
-  TemplateRef,
-} from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Subscription, Observable } from "rxjs";
-import { map, startWith } from "rxjs/operators";
-import { UserService } from "src/app/services/user.service";
-import { AuthService } from "src/app/services/auth.service";
-import { LoaderService } from "src/app/services/loader.service";
-import { MatDialog, MatSnackBar } from "@angular/material";
-import { DialogEditComponent } from "../dialog-edit/dialog-edit.component";
-import { ConfirmPasswordValidator } from "src/app/validators/confirm-password.validator";
-import { MasterDataService } from "src/app/services/master-data.service";
-import { ResponseService } from "src/app/interfaces/response";
-import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
-import { UtilsService } from "src/app/services/utils.service";
-import Swal from "sweetalert2";
+import { Subscription, Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { LoaderService } from 'src/app/services/loader.service';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { DialogEditComponent } from '../dialog-edit/dialog-edit.component';
+import { ConfirmPasswordValidator } from 'src/app/validators/confirm-password.validator';
+import { MasterDataService } from 'src/app/services/master-data.service';
+import { ResponseService } from 'src/app/interfaces/response';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
-  selector: "app-profile-form",
-  templateUrl: "./profile-form.component.html",
-  styleUrls: ["./profile-form.component.scss"],
+  selector: 'app-profile-form',
+  templateUrl: './profile-form.component.html',
+  styleUrls: ['./profile-form.component.scss'],
 })
 export class ProfileFormComponent implements OnInit, OnDestroy {
   constructor(
@@ -33,24 +25,22 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     private auth: AuthService,
     private loader: LoaderService,
     private dialog: MatDialog,
-    private _snackBar: MatSnackBar,
+    private snackBar: MatSnackBar,
     private utils: UtilsService,
     private personalInfo: MasterDataService
-  ) { }
+  ) {}
 
-  @ViewChild("templateDialog", { static: false }) template: TemplateRef<any>;
-  @ViewChild("templateDialogCell", { static: false }) templateCell: TemplateRef<
-    any
-  >;
-  @ViewChild("templateDialogPass", { static: false }) templatePass: TemplateRef<
-    any
-  >;
-  @ViewChild("templateDialogAccount", { static: false })
+  @ViewChild('templateDialog', { static: false }) template: TemplateRef<any>;
+  @ViewChild('templateDialogCell', { static: false })
+  templateCell: TemplateRef<any>;
+  @ViewChild('templateDialogPass', { static: false })
+  templatePass: TemplateRef<any>;
+  @ViewChild('templateDialogAccount', { static: false })
   templateAccount: TemplateRef<any>;
-  @ViewChild("templateDialogAddress", { static: false })
+  @ViewChild('templateDialogAddress', { static: false })
   templateAddress: TemplateRef<any>;
 
-  @ViewChild("templateDeleteAccount", { static: false })
+  @ViewChild('templateDeleteAccount', { static: false })
   templateDelete: TemplateRef<any>;
 
   private subscription: Subscription = new Subscription();
@@ -87,47 +77,73 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   cityValue: string;
   departments = [];
   cities: [];
-  // nameFileRut = "";
-  nameFileCert = "";
-  nameFileCed1 = "";
-  nameFileCed2 = "";
+  nameFileRut = '';
+  nameFileCert = '';
+  nameFileCed1 = '';
+  nameFileCed2 = '';
   validFormat: boolean;
-  // showErrorRut: boolean = false;
-  showErrorCert: boolean = false;
-  showErrorCed1: boolean = false;
-  showErrorCed2: boolean = false;
-  showErrorFormatRut: boolean = false;
-  showErrorFormatCert: boolean = false;
-  showErrorFormatCed1: boolean = false;
-  showErrorFormatCed2: boolean = false;
-  // fileRut: any;
+  showErrorRut = false;
+  showErrorCert = false;
+  showErrorCed1 = false;
+  showErrorCed2 = false;
+  showErrorFormatRut = false;
+  showErrorFormatCert = false;
+  showErrorFormatCed1 = false;
+  showErrorFormatCed2 = false;
+  fileRut: any;
   fileBankCertificate: any;
   fileCed1: any;
   fileCed2: any;
-  activebutton: boolean = false;
-  wrongPass: boolean = false;
-  numberPattern = "^(0|[0-9][0-9]*)$";
-  namePattern =
-    "[a-zA-Z0-9 àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]+";
-  passwordPattern = "(?=.*[a-zA-Z])(?=.*[0-9])";
+  activebutton = false;
+  wrongPass = false;
+  numberPattern = '^(0|[0-9][0-9]*)$';
+  namePattern = '[a-zA-Z0-9 àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]+';
+  passwordPattern = '(?=.*[a-zA-Z])(?=.*[0-9])';
   msg: string;
   classMsg: string;
   banks = [];
   idVerified: number;
   typeAccount = [
-    { id: 1, description: "Ahorros" },
-    { id: 2, description: "Corriente" },
+    { id: 1, description: 'Ahorros' },
+    { id: 2, description: 'Corriente' },
   ];
   typesStatusAccount = [
-    { code: "NOTVERIFIED", status: "No verificada", title: "Verificación de cuenta", description: "Tu cuenta entrará en estado de verificación pronto, una vez sea verificada, se te depositarán las comisiones en ella.", icon: "/assets/img/icon-info-white.svg" },
-    { code: "INPROGRESS", status: "En verificación", title: "", description: "", icon: "/assets/img/icon-review.svg", className: "in-progress" },
-    { code: "VERIFIED", status: "Verificado", title: "", description: "", icon: "/assets/img/checked.svg", className: "verified" },
-    { code: "REJECTED", status: "Cuenta rechazada", title: "Motivo de rechazo", description: "", icon: "/assets/img/icon-alert-triangle.svg", className: "rejected" }
-  ]
+    {
+      code: 'NOTVERIFIED',
+      status: 'No verificada',
+      title: 'Verificación de cuenta',
+      description: 'Tu cuenta entrará en estado de verificación pronto, una vez sea verificada, se te depositarán las comisiones en ella.',
+      icon: '/assets/img/icon-info-white.svg',
+    },
+    {
+      code: 'INPROGRESS',
+      status: 'En verificación',
+      title: '',
+      description: '',
+      icon: '/assets/img/icon-review.svg',
+      className: 'in-progress',
+    },
+    {
+      code: 'VERIFIED',
+      status: 'Verificado',
+      title: '',
+      description: '',
+      icon: '/assets/img/checked.svg',
+      className: 'verified',
+    },
+    {
+      code: 'REJECTED',
+      status: 'Cuenta rechazada',
+      title: 'Motivo de rechazo',
+      description: '',
+      icon: '/assets/img/icon-alert-triangle.svg',
+      className: 'rejected',
+    },
+  ];
   accountStatus: any;
 
   showBankInfoUser: boolean;
-  showPassword: boolean = true;
+  showPassword = true;
 
   ngOnInit() {
     this.accountStatus = this.typesStatusAccount[0];
@@ -166,14 +182,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
 
   public formProfileDelete() {
     this.profileFormDelete = this.fb.group({
-      Password: [
-        "",
-        [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(20),
-        ],
-      ],
+      Password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
     });
   }
 
@@ -186,45 +195,30 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   }
 
   public getStatusVerification(description) {
-    this.subscription = this.user.getStatusVerification()
-    .subscribe(
+    this.subscription = this.user.getStatusVerification().subscribe(
       (resp: ResponseService) => {
-        if (resp.state === "Success") {
-          const accountStatus = resp.objectResponse.find((status) => status.id === this.idVerified)
+        if (resp.state === 'Success') {
+          const accountStatus = resp.objectResponse.find((status) => status.id === this.idVerified);
           if (accountStatus) {
             this.accountStatus = this.typesStatusAccount.find((type) => type.code === accountStatus.code);
-            if (description && accountStatus.code !== "NOTVERIFIED") {
+            if (description && accountStatus.code !== 'NOTVERIFIED') {
               this.accountStatus.description = description;
             }
           }
         } else {
-          this.openSnackBar(resp.userMessage, "Cerrar");
+          this.openSnackBar(resp.userMessage, 'Cerrar');
         }
       },
       (err) => {
-        this.openSnackBar(err.userMessage, "Cerrar");
+        this.openSnackBar(err.userMessage, 'Cerrar');
       }
     );
   }
 
   public formProfile() {
     this.profileForm = this.fb.group({
-      name: [
-        this.name,
-        [
-          Validators.required,
-          Validators.maxLength(50),
-          Validators.pattern(this.namePattern),
-        ],
-      ],
-      lastName: [
-        this.lastName,
-        [
-          Validators.required,
-          Validators.maxLength(50),
-          Validators.pattern(this.namePattern),
-        ],
-      ],
+      name: [this.name, [Validators.required, Validators.maxLength(50), Validators.pattern(this.namePattern)]],
+      lastName: [this.lastName, [Validators.required, Validators.maxLength(50), Validators.pattern(this.namePattern)]],
     });
   }
 
@@ -232,12 +226,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.profileFormCell = this.fb.group({
       phone: [
         this.phone,
-        [
-          Validators.required,
-          Validators.maxLength(10),
-          Validators.minLength(10),
-          Validators.pattern(this.numberPattern),
-        ],
+        [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern(this.numberPattern)],
       ],
     });
   }
@@ -246,19 +235,12 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.accountForm = this.fb.group({
       bank: [this.bank, Validators.required],
       typeAccount: [this.typeBankAccount, Validators.required],
-      numberAccount: [
-        "",
-        [
-          Validators.required,
-          Validators.pattern(this.numberPattern),
-          Validators.minLength(5),
-          Validators.maxLength(20),
-        ],
-      ],
-      cert: [null, Validators.required],
-      ced1: [null, Validators.required],
-      ced2: [null, Validators.required],
-      description: [null, Validators.required]
+      numberAccount: ['', [Validators.required, Validators.pattern(this.numberPattern), Validators.minLength(5), Validators.maxLength(20)]],
+      cert: [null],
+      ced1: [null],
+      ced2: [null],
+      rut: [null],
+      description: [null, Validators.required],
     });
   }
 
@@ -272,40 +254,16 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
 
   public accountBankForm() {
     this.loginForm = this.fb.group({
-      Password: [
-        "",
-        [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(20),
-        ],
-      ],
+      Password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
     });
   }
 
   public formProfilePass() {
     this.profileFormPass = this.fb.group(
       {
-        actualPassword: [
-          "",
-          [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(20),
-          ],
-        ],
-        password: [
-          "",
-          [
-            Validators.minLength(6),
-            Validators.maxLength(20),
-            Validators.pattern(new RegExp(this.passwordPattern)),
-          ],
-        ],
-        confirmPassword: [
-          "",
-          [Validators.minLength(6), Validators.maxLength(20)],
-        ],
+        actualPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
+        password: ['', [Validators.minLength(6), Validators.maxLength(20), Validators.pattern(new RegExp(this.passwordPattern))]],
+        confirmPassword: ['', [Validators.minLength(6), Validators.maxLength(20)]],
       },
       {
         validator: [ConfirmPasswordValidator.MatchPassword],
@@ -314,22 +272,22 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   }
 
   public editName() {
-    const title = "Editar Nombres y apellidos";
-    const id = "names";
+    const title = 'Editar Nombres y apellidos';
+    const id = 'names';
     const template = this.template;
 
     this.dialog.open(DialogEditComponent, {
       data: {
         title,
         template,
-        id
-      }
+        id,
+      },
     });
   }
 
   public editAddres() {
-    const title = "Editar dirección";
-    const id = "address";
+    const title = 'Editar dirección';
+    const id = 'address';
     const template = this.templateAddress;
 
     this.dialog.open(DialogEditComponent, {
@@ -346,16 +304,16 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.showBankInfoUser = false;
     this.showPassword = true;
     this.loginForm.reset();
-    const title = "Actualizar información bancaria";
-    const id = "account";
+    const title = 'Actualizar información bancaria';
+    const id = 'account';
     const template = this.templateAccount;
     if (this.bank === null) {
       this.accountForm.reset();
     }
 
-    this.nameFileCert = "";
-    this.nameFileCed1 = "";
-    this.nameFileCed2 = "";
+    this.nameFileCert = '';
+    this.nameFileCed1 = '';
+    this.nameFileCed2 = '';
     this.dialog.open(DialogEditComponent, {
       maxWidth: '450px',
       panelClass: 'editaccount',
@@ -373,8 +331,8 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   }
 
   public editCell() {
-    const title = "Editar Celular";
-    const id = "cellphone";
+    const title = 'Editar Celular';
+    const id = 'cellphone';
     const template = this.templateCell;
 
     this.dialog.open(DialogEditComponent, {
@@ -388,8 +346,8 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
 
   public changePassword() {
     this.profileFormPass.reset();
-    const title = "Cambiar contraseña";
-    const id = "password";
+    const title = 'Cambiar contraseña';
+    const id = 'password';
     const template = this.templatePass;
 
     this.dialog.open(DialogEditComponent, {
@@ -408,118 +366,104 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.userInfo.bankAccountNumber = null;
     this.subscription = this.user.updateUser(this.userInfo).subscribe(
       (user: any) => {
-        if (user.state === "Success") {
+        if (user.state === 'Success') {
           this.dialog.closeAll();
           this.subscription = this.user.getProfile();
-          this.openSnackBar(user.userMessage, "Cerrar");
+          this.openSnackBar(user.userMessage, 'Cerrar');
         }
       },
       (err) => {
-        this.openSnackBar(err.userMessage, "Cerrar");
+        this.openSnackBar(err.userMessage, 'Cerrar');
       }
     );
   }
 
   public updateAccount() {
-    let data = {
+    const data = {
       bank: this.accountForm.controls.bank.value,
       typebankaccount: this.accountForm.controls.typeAccount.value,
       bankaccountnumber: btoa(this.accountForm.controls.numberAccount.value),
-      reason: this.accountForm.controls.description.value
+      reason: this.accountForm.controls.description.value,
     };
 
-    let updateForm = {
+    const updateForm = {
       cellphone: this.phone,
       firstNames: this.name,
       lastNames: this.lastName,
       bank: this.accountForm.controls.bank.value,
       bankAccountNumber: btoa(this.accountForm.controls.numberAccount.value),
-      typeBankAccount: this.accountForm.controls.typeAccount.value
+      typeBankAccount: this.accountForm.controls.typeAccount.value,
     };
 
-    this.subscription = this.user
-      .changeBankInformation(this.userId, data)
-      .subscribe(
-        (account: any) => {
-          if (account.state === "Success") {
-            this.dialog.closeAll();
-            this.subscription = this.user.getProfile();
-            this.openSnackBar(account.userMessage, "Cerrar");
-          }
-        },
-        (err) => {
-          this.openSnackBar(err.userMessage, "Cerrar");
+    this.subscription = this.user.changeBankInformation(this.userId, data).subscribe(
+      (account: any) => {
+        if (account.state === 'Success') {
+          this.dialog.closeAll();
+          this.subscription = this.user.getProfile();
+          this.openSnackBar(account.userMessage, 'Cerrar');
         }
-      );
-    
-    this.subscription = this.user
-      .updateUser(updateForm)
-      .subscribe(
-        (resp: any) => {
-          if (resp.state === "Success") {
-            // this.dialog.closeAll();
-            // this.user.getProfile();
-            // this.openSnackBar(resp.userMessage, "Cerrar");
-          }
-        },
-        (err) => {
-          this.openSnackBar(err.userMessage, "Cerrar");
-        }
-      );
+      },
+      (err) => {
+        this.openSnackBar(err.userMessage, 'Cerrar');
+      }
+    );
+
+    this.subscription = this.user.updateUser(updateForm).subscribe(
+      () => {},
+      (err) => {
+        this.openSnackBar(err.userMessage, 'Cerrar');
+      }
+    );
   }
 
   private openSnackBar(message: string, action: string, duration: number = 3000) {
-    this._snackBar.open(message, action, {
+    this.snackBar.open(message, action, {
       duration,
     });
   }
 
   public changePasswordUser() {
-    let data = {
+    const data = {
       password: btoa(this.profileFormPass.controls.actualPassword.value),
       newPassword: btoa(this.profileFormPass.controls.password.value),
     };
     this.subscription = this.auth.changePassword(data).subscribe(
       (password: any) => {
-        if (password.state === "Success") {
+        if (password.state === 'Success') {
           this.dialog.closeAll();
           this.subscription = this.user.getProfile();
           this.profileFormPass.reset();
-          this.openSnackBar(password.userMessage, "Cerrar");
+          this.openSnackBar(password.userMessage, 'Cerrar');
         } else {
-          this.openSnackBar(password.userMessage, "Cerrar");
+          this.openSnackBar(password.userMessage, 'Cerrar');
         }
       },
       (err) => {
-        this.openSnackBar(err.userMessage, "Cerrar");
+        this.openSnackBar(err.userMessage, 'Cerrar');
       }
     );
   }
 
   public showAccount() {
-    this.user
-      .getBankAccountNumber(btoa(this.loginForm.controls.Password.value))
-      .subscribe(
-        (resp: ResponseService) => {
-          if (resp.state === "Success") {
-            this.accountForm.controls.numberAccount.setValue(
-              resp.objectResponse
-            );
-            this.showBankInfoUser = true;
-            this.showPassword = false;
+    this.user.getBankAccountNumber(btoa(this.loginForm.controls.Password.value)).subscribe(
+      (resp: ResponseService) => {
+        if (resp.state === 'Success') {
+          this.accountForm.controls.numberAccount.setValue(resp.objectResponse);
+          this.showBankInfoUser = true;
+          this.showPassword = false;
 
-            const account = document.getElementById("account");
-            if (account) {
-              account.classList.add("update-info-bank");
-            }
-          } else {
-            this.openSnackBar(resp.userMessage, "Cerrar");
+          const account = document.getElementById('account');
+          if (account) {
+            account.classList.add('update-info-bank');
           }
-        },
-        (err) => {
-          this.openSnackBar(err.userMessage, "Cerrar");
+        } else {
+          this.openSnackBar(resp.userMessage, 'Cerrar');
         }
-      );
+      },
+      (err) => {
+        this.openSnackBar(err.userMessage, 'Cerrar');
+      }
+    );
   }
 
   /**
@@ -527,16 +471,14 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
    */
 
   public getBanks() {
-    this.subscription = this.personalInfo
-      .getBanks()
-      .subscribe((res: ResponseService) => {
-        this.banks = res.objectResponse;
-      });
+    this.subscription = this.personalInfo.getBanks().subscribe((res: ResponseService) => {
+      this.banks = res.objectResponse;
+    });
   }
 
   /**
    * Metodo para autocompletar los departamentos
-   * @param departments
+   * @param departments departamentos
    */
 
   public displayDepartment(departments?: any): string | undefined {
@@ -545,52 +487,41 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
 
   public filter() {
     this.filteredDepartments = this.addressForm.controls.department.valueChanges.pipe(
-      map((department) =>
-        typeof department === "string" ? department : department.description
-      ),
-      map((department) =>
-        department
-          ? this._filterDepartments(department)
-          : this.departments.slice()
-      )
+      map((department) => (typeof department === 'string' ? department : department.description)),
+      map((department) => (department ? this._filterDepartments(department) : this.departments.slice()))
     );
   }
 
   public filterCities() {
     this.filteredCities = this.addressForm.controls.city.valueChanges.pipe(
-      startWith(""),
+      startWith(''),
       map((city) => (city ? this._filterCities(city) : this.cities.slice()))
     );
   }
 
   private _filterDepartments(value: any) {
     const filterValue = value.toLowerCase();
-    return this.departments.filter(
-      (department) =>
-        department.description.toLowerCase().indexOf(filterValue) === 0
-    );
+    return this.departments.filter((department) => department.description.toLowerCase().indexOf(filterValue) === 0);
   }
 
   private _filterCities(value: string) {
     const filterValue = value.toLowerCase();
-    return this.cities.filter(
-      (city: any) => city.description.toLowerCase().indexOf(filterValue) === 0
-    );
+    return this.cities.filter((city: any) => city.description.toLowerCase().indexOf(filterValue) === 0);
   }
 
   public selectDepartment(department) {
     this.departmentDecription = department.description;
     this.departmentCode = department.code;
     this.cities = department.municipalities;
-    this.addressForm.controls.city.setValue("");
-    let valueDepartment = this.addressForm.controls.department.valueChanges;
+    this.addressForm.controls.city.setValue('');
+    const valueDepartment = this.addressForm.controls.department.valueChanges;
     this.filterCities();
 
     valueDepartment.subscribe((resp) => {
-      if (resp !== "") {
+      if (resp !== '') {
         this.getDepartments();
       } else {
-        this.addressForm.controls.city.setValue("");
+        this.addressForm.controls.city.setValue('');
       }
     });
   }
@@ -602,22 +533,21 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.userInfo.bankAccountNumber = null;
     this.subscription = this.user.updateUser(this.userInfo).subscribe(
       (address: any) => {
-        if (address.state === "Success") {
-          this.openSnackBar(address.userMessage, "Cerrar");
+        if (address.state === 'Success') {
+          this.openSnackBar(address.userMessage, 'Cerrar');
           this.subscription = this.user.getProfile();
           this.dialog.closeAll();
         }
       },
       (err) => {
-        this.openSnackBar(err.userMessage, "Cerrar");
+        this.openSnackBar(err.userMessage, 'Cerrar');
       }
     );
   }
 
   public checkDepartment() {
     if (
-      this.addressForm.controls.department.value !==
-      this.departmentDecription ||
+      this.addressForm.controls.department.value !== this.departmentDecription ||
       this.addressForm.controls.department.value === undefined
     ) {
       this.addressForm.controls.department.setErrors({ incorrect: true });
@@ -640,78 +570,72 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
    */
 
   public getDepartments() {
-    this.subscription = this.personalInfo
-      .getDepartments()
-      .subscribe((res: ResponseService) => {
-        this.departments = res.objectResponse;
-      });
+    this.subscription = this.personalInfo.getDepartments().subscribe((res: ResponseService) => {
+      this.departments = res.objectResponse;
+    });
   }
 
   /**
    * Metodo para leer y subir un archivo al  servidor
-   * @param event
-   * @param param
+   * @param event evento
+   * @param param parametro
    */
 
   public onFileChangeFiles(event, param: string) {
-    
     if (event.target.files && event.target.files.length) {
       const nameFile = event.target.files[0].name;
       this.getExtension(nameFile);
 
       if (this.validFormat) {
         const formData = new FormData();
-        formData.append("file", event.target.files[0]);
-        formData.append("typeDocument", param);
-        formData.append("identification", this.id);
-        formData.append("userId", this.userId);
+        formData.append('file', event.target.files[0]);
+        formData.append('typeDocument', param);
+        formData.append('identification', this.id);
+        formData.append('userId', this.userId);
 
-        this.subscription = this.user
-          .uploadFiles(formData)
-          .subscribe((response: ResponseService) => {
-            console.log(response);
-            if (response.state === "Success") {
-              this.activebutton = true;
-            } else {
-              this.openSnackBar(response.userMessage, "Cerrar");
-            }
+        this.subscription = this.user.uploadFiles(formData).subscribe((response: ResponseService) => {
+          if (response.state === 'Success') {
+            this.activebutton = true;
+          } else {
+            this.openSnackBar(response.userMessage, 'Cerrar');
+          }
 
-            switch (param) {
-              // case "Rut":
-              //   this.nameFileRut = nameFile;
-              //   this.showErrorRut = response.state === "Success" ? false : true;
-              //   break;
-              case "BankCertificate":
-                this.nameFileCert = nameFile;
-                this.showErrorCert = response.state === "Success" ? false : true;
-                break;
-              case "IdentificationCard1":
-                this.nameFileCed1 = nameFile;
-                this.showErrorCed1 = response.state === "Success" ? false : true;
-                break;
-              case "IdentificationCard2":
-                this.nameFileCed2 = nameFile;
-                this.showErrorCed2 = response.state === "Success" ? false : true;
-                break;
-              default:
-                break;
-            }
-          });
+          switch (param) {
+            case 'Rut':
+              this.nameFileRut = nameFile;
+              this.showErrorRut = response.state === 'Success' ? false : true;
+              break;
+            case 'BankCertificate':
+              this.nameFileCert = nameFile;
+              this.showErrorCert = response.state === 'Success' ? false : true;
+              break;
+            case 'IdentificationCard1':
+              this.nameFileCed1 = nameFile;
+              this.showErrorCed1 = response.state === 'Success' ? false : true;
+              break;
+            case 'IdentificationCard2':
+              this.nameFileCed2 = nameFile;
+              this.showErrorCed2 = response.state === 'Success' ? false : true;
+              break;
+            default:
+              break;
+          }
+        });
       } else {
         switch (param) {
-          // case "Rut":
-          //   this.nameFileRut = nameFile;
-          //   this.showErrorRut = this.showErrorFormatRut = true;
-          //   break;
-          case "BankCertificate":
+          case 'Rut':
+            this.nameFileRut = nameFile;
+            this.showErrorRut = this.showErrorFormatRut = true;
+            break;
+          case 'BankCertificate':
             this.nameFileCert = nameFile;
             this.showErrorCert = this.showErrorFormatCert = true;
             break;
-          case "IdentificationCard1":
+          case 'IdentificationCard1':
             this.nameFileCed1 = nameFile;
             this.showErrorCed1 = this.showErrorFormatCed1 = true;
             break;
-          case "IdentificationCard2":
+          case 'IdentificationCard2':
             this.nameFileCed2 = nameFile;
             this.showErrorCed2 = this.showErrorFormatCed2 = true;
             break;
@@ -723,15 +647,15 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   }
 
   /**
- * Metodo para validar que la extension sea valida
- * @param nameFile
- */
+   * Metodo para validar que la extension sea valida
+   * @param nameFile nombre del archivo
+   */
 
   private getExtension(nameFile: string) {
-    let splitExt = nameFile.split(".");
-    let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
+    const splitExt = nameFile.split('.');
+    const getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
     this.validFormat = false;
-    if (getExt === "jpg" || getExt === "jpeg" || getExt === "pdf") {
+    if (getExt === 'jpg' || getExt === 'jpeg' || getExt === 'pdf') {
       this.validFormat = true;
     }
   }
@@ -742,7 +666,6 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
 
   public cancel() {
     this.dialog.closeAll();
-    this.profileFormDelete.controls.Password.setValue("");
+    this.profileFormDelete.controls.Password.setValue('');
   }
-
 }

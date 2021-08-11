@@ -10,14 +10,7 @@
       fxLayoutAlign.xs="start start"
     >
       <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">SELECCIONA EL NEGOCIO</label>
-      <span
-        class="info"
-        ngClass.xs="w-100"
-        fxLayout="column"
-        fxLayout.xs="row"
-        fxFLex="70"
-        fxFLex.xs="0"
-      >
+      <span class="info" ngClass.xs="w-100" fxLayout="column" fxLayout.xs="row" fxFLex="70" fxFLex.xs="0">
         <mat-form-field>
           <mat-label>Seleccionar</mat-label>
           <mat-select formControlName="bussiness">
@@ -39,34 +32,13 @@
       fxLayoutAlign.xs="start start"
     >
       <label fxLayout="column" fxFLex="50" fxFLex.xs="0" fxLayout.xs="row">COPIA EL LINK AQUÍ</label>
-      <span
-        class="info"
-        ngClass.xs="w-100"
-        fxLayout="column"
-        fxLayout.xs="row"
-        fxFLex="70"
-        fxFLex.xs="0"
-      >
-
-      <mat-form-field>
-        <input
-          matInput
-          id="link"
-          type="text"
-          placeholder="Link"
-          formControlName="link"
-          required
-        />
-        <mat-error
-          id="requiredLink"
-          *ngIf="
-            generatorForm.controls.link.invalid &&
-            generatorForm.controls.link.errors.required
-          "
-          >{{ "GENERIC.REQUIRED" | translate: { formValue: "Link" } }}</mat-error
-        >    
-      </mat-form-field>
-       
+      <span class="info" ngClass.xs="w-100" fxLayout="column" fxLayout.xs="row" fxFLex="70" fxFLex.xs="0">
+        <mat-form-field>
+          <input matInput id="link" type="text" placeholder="Link" formControlName="link" required />
+          <mat-error id="requiredLink" *ngIf="generatorForm.controls.link.invalid && generatorForm.controls.link.errors.required">{{
+            'GENERIC.REQUIRED' | translate: { formValue: 'Link' }
+          }}</mat-error>
+        </mat-form-field>
       </span>
     </span>
 
@@ -86,40 +58,25 @@
 <p>Copia y pega este link dónde lo necesites</p>
 
 <form [formGroup]="formLink" class="mb-3 forml">
-    <div fxLayout="column">
-      <div fxLayout="column" fxFlex="100" fxFlex.xs="100">
-        <mat-form-field appearance="dashed" class="dashed mt-2">
-          <input
-            id="url"
-            matInput
-            formcontrolName="link"
-            [value]="url"
-            #linkInput
-            readonly
-          />
-        </mat-form-field>
-      </div>
-      <div
-        fxLayout="row"
-        fxLayoutAlign="start space-between"
-        fxLayoutGap="10px"
-        class="mt-2 share-desktop"
-      >
-        <button
-          mat-button
-          id="btnCopy"
-          color="orange"
-          [disabled]="enableButton === false"
-          class="button-height"
-          (click)="copyInputMessage(linkInput)"
-        >
-          <span
-            fxLayoutAlign="center space-between"
-          >
-            {{ "GENERIC.COPY_LINK" | translate }}
-          </span>
-        </button>
-
-      </div>
+  <div fxLayout="column">
+    <div fxLayout="column" fxFlex="100" fxFlex.xs="100">
+      <mat-form-field appearance="dashed" class="dashed mt-2">
+        <input id="url" matInput formcontrolName="link" [value]="url" #linkInput readonly />
+      </mat-form-field>
     </div>
-  </form>
+    <div fxLayout="row" fxLayoutAlign="start space-between" fxLayoutGap="10px" class="mt-2 share-desktop">
+      <button
+        mat-button
+        id="btnCopy"
+        color="orange"
+        [disabled]="enableButton === false"
+        class="button-height"
+        (click)="copyInputMessage(linkInput)"
+      >
+        <span fxLayoutAlign="center space-between">
+          {{ 'GENERIC.COPY_LINK' | translate }}
+        </span>
+      </button>
+    </div>
+  </div>
+</form>

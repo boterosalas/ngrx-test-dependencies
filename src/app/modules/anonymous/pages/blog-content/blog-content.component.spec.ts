@@ -13,32 +13,29 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { ContentService } from 'src/app/services/content.service';
 
 import { BlogContentComponent } from './blog-content.component';
-import * as moment from "moment";
+import * as moment from 'moment';
 import { MatDialog } from '@angular/material';
 describe('BlogContentComponent', () => {
   let component: BlogContentComponent;
   let fixture: ComponentFixture<BlogContentComponent>;
   let response = {
-    Status: "Success",
+    Status: 'Success',
     objectResponse: {
-      title: "Any",
-      content: "Anyd",
-      author: "Any3",
-      tags: "Anss",
-      visible: "true",
+      title: 'Any',
+      content: 'Anyd',
+      author: 'Any3',
+      tags: 'Anss',
+      visible: 'true',
 
-      date: moment("12-01-2020"),
-      imageurl: ""
-    }
-  }
+      date: moment('12-01-2020'),
+      imageurl: '',
+    },
+  };
   let responseMessage = {
-    Status: "Success",
-
-  }
-  const mockContentService = jasmine.createSpyObj("ContentService", [
-    "getIndividualBlog", "sendMessage"
-  ]);
-  const mockDialog = jasmine.createSpyObj("MatDialog", ["open", "closeAll", "afterAllClosed"]);
+    Status: 'Success',
+  };
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getIndividualBlog', 'sendMessage']);
+  const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll', 'afterAllClosed']);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [BlogContentComponent],
@@ -58,17 +55,17 @@ describe('BlogContentComponent', () => {
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
-            blacklistedRoutes: []
-          }
+            blacklistedRoutes: [],
+          },
         }),
-
       ],
 
       schemas: [NO_ERRORS_SCHEMA],
-      providers: [{ provide: ContentService, useValue: mockContentService },
-      { provide: MatDialog, useValue: mockDialog },]
-    })
-      .compileComponents();
+      providers: [
+        { provide: ContentService, useValue: mockContentService },
+        { provide: MatDialog, useValue: mockDialog },
+      ],
+    }).compileComponents();
     mockContentService.getIndividualBlog.and.returnValue(of(response));
     mockContentService.sendMessage.and.returnValue(of(responseMessage));
   }));
@@ -82,10 +79,10 @@ describe('BlogContentComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it("copyInputMessage", () => {
+  it('copyInputMessage', () => {
     let datos = true;
     component.sendMessage();
-    component.sendEmail()
+    component.sendEmail();
     //component.copyLink("linkInput");
     expect(datos).toBeTruthy();
   });

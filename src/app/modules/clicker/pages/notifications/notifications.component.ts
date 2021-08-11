@@ -1,14 +1,14 @@
-import { Component, HostListener, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
-import { MatSnackBar } from "@angular/material";
-import { Router } from "@angular/router";
-import { ResponseService } from "src/app/interfaces/response";
-import { ContentService } from "src/app/services/content.service";
+import { Component, HostListener, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
+import { ResponseService } from 'src/app/interfaces/response';
+import { ContentService } from 'src/app/services/content.service';
 
 @Component({
-  selector: "app-notifications",
-  templateUrl: "./notifications.component.html",
-  styleUrls: ["./notifications.component.scss"],
+  selector: 'app-notifications',
+  templateUrl: './notifications.component.html',
+  styleUrls: ['./notifications.component.scss'],
 })
 export class NotificationsComponent implements OnInit {
   notifications = [];
@@ -17,47 +17,37 @@ export class NotificationsComponent implements OnInit {
   date: any;
   content: any;
   dateSend = new Date();
-  dataToSend = [{ id: [""], viewed: true, dateviewed: this.dateSend }];
-  titleSelect = "Seleccionar";
+  dataToSend = [{ id: [''], viewed: true, dateviewed: this.dateSend }];
+  titleSelect = 'Seleccionar';
   innerWidth: number;
+  formArray = [];
+  checkboxGroup: FormGroup;
 
-  constructor(
-    private _content: ContentService,
-    private fb: FormBuilder,
-    private _snackBar: MatSnackBar,
-    private router:Router
-  ) {}
+
+  constructor(private _content: ContentService, private fb: FormBuilder, private _snackBar: MatSnackBar, private router: Router) {}
 
   ngOnInit() {
     this.getNotications();
     this.formNotifications();
   }
 
-  formArray = [];
-
-  checkboxGroup: FormGroup;
-
   public getNotications() {
-    this._content
-      .getNotificationAdmin(false)
-      .subscribe((notification: ResponseService) => {
-        this.notifications = notification.objectResponse.published;
-        if(this.notifications.length){
-          this.titleMail = this.notifications[0].title;
-          this.date = this.notifications[0].datepublish;
-          this.content = this.notifications[0].content;
-          this.dataToSend[0].id = this.notifications[0].id;
-          this.viewNotification(this.dataToSend);
-        }
-      });
+    this._content.getNotificationAdmin(false).subscribe((notification: ResponseService) => {
+      this.notifications = notification.objectResponse.published;
+      if (this.notifications.length) {
+        this.titleMail = this.notifications[0].title;
+        this.date = this.notifications[0].datepublish;
+        this.content = this.notifications[0].content;
+        this.dataToSend[0].id = this.notifications[0].id;
+        this.viewNotification(this.dataToSend);
+      }
+    });
   }
 
   public getNoticationsLoad() {
-    this._content
-      .getNotificationAdmin(false)
-      .subscribe((notification: ResponseService) => {
-        this.notifications = notification.objectResponse.published;
-      });
+    this._content.getNotificationAdmin(false).subscribe((notification: ResponseService) => {
+      this.notifications = notification.objectResponse.published;
+    });
   }
 
   public showNotification(data: any) {
@@ -67,7 +57,7 @@ export class NotificationsComponent implements OnInit {
     this.dataToSend[0].id = data.id;
     this.viewNotification(this.dataToSend);
     if (this.innerWidth < 600 || window.innerWidth < 600) {
-      this.router.navigate(['/notificacion-mobile', data.idnotification, data.id  ]);
+      this.router.navigate(['/notificacion-mobile', data.idnotification, data.id]);
     }
   }
 
@@ -86,7 +76,7 @@ export class NotificationsComponent implements OnInit {
         this.formArray.splice(index, 1);
       }
     }
-    if(this.formArray.length > 0) {
+    if (this.formArray.length > 0) {
       this.titleSelect = 'Seleccionar';
     } else {
       this.titleSelect = 'Deseleccionar';
@@ -100,30 +90,28 @@ export class NotificationsComponent implements OnInit {
   }
 
   public deleteNotication() {
-    this._content
-      .deleteNotificationUser(this.formArray)
-      .subscribe((notification) => {
-        this.getNoticationsLoad();
-        this.openSnackBar(notification.userMessage , "Cerrar");
-        this.checkboxGroup.controls.checks.setValue(false);
-        setTimeout(() => {
-          if(this.notifications.length){
-            this.titleMail = this.notifications[0].title;
-            this.date = this.notifications[0].datepublish;
-            this.content = this.notifications[0].content;
-            this.dataToSend[0].id = this.notifications[0].id;
-            this.viewNotification(this.dataToSend);
-          } else{
-            this.titleMail = "";
-            this.date = "";
-            this.content = "";
-          }
-        }, 1000);
-      });
+    this._content.deleteNotificationUser(this.formArray).subscribe((notification) => {
+      this.getNoticationsLoad();
+      this.openSnackBar(notification.userMessage, 'Cerrar');
+      this.checkboxGroup.controls.checks.setValue(false);
+      setTimeout(() => {
+        if (this.notifications.length) {
+          this.titleMail = this.notifications[0].title;
+          this.date = this.notifications[0].datepublish;
+          this.content = this.notifications[0].content;
+          this.dataToSend[0].id = this.notifications[0].id;
+          this.viewNotification(this.dataToSend);
+        } else {
+          this.titleMail = '';
+          this.date = '';
+          this.content = '';
+        }
+      }, 1000);
+    });
   }
 
-  public viewedAll(){
-    this.formArray.forEach(element => {
+  public viewedAll() {
+    this.formArray.forEach((element) => {
       this.dataToSend[0].id = element;
       this.viewNotification(this.dataToSend);
     });
@@ -136,25 +124,21 @@ export class NotificationsComponent implements OnInit {
   }
 
   public selectAll() {
-    if(this.checkboxGroup.controls.checks.value === false) {
+    if (this.checkboxGroup.controls.checks.value === false) {
       this.titleSelect = 'Deseleccionar';
       this.checkboxGroup.controls.checks.setValue(true);
-      this.notifications.forEach(element => {
+      this.notifications.forEach((element) => {
         this.formArray.push(element.id);
       });
-    } else{
+    } else {
       this.titleSelect = 'Seleccionar';
       this.checkboxGroup.controls.checks.setValue(false);
-      this.formArray = []     
+      this.formArray = [];
     }
-
   }
 
-  
-  @HostListener("window:resize", ["$event"])
+  @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.innerWidth = event.target.innerWidth;
   }
-
-
 }

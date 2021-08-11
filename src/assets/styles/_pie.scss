@@ -59,7 +59,7 @@ $no-medal: #bdc3c7;
 .charts-container {
   &:after {
     clear: both;
-    content: "";
+    content: '';
     display: table;
   }
 }
@@ -138,8 +138,8 @@ $no-medal: #bdc3c7;
     }
   }
 
-  .label.label-bg-0{
-    background:$no-medal !important;
+  .label.label-bg-0 {
+    background: $no-medal !important;
   }
 
   @for $var from 0 to 34 {

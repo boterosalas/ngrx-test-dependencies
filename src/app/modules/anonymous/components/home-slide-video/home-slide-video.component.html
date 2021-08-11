@@ -1,24 +1,21 @@
 <div class="position-relative">
-    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+  <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
     <span ngxSlickItem *ngFor="let slide of sliderVideo; let i = index">
-        <div class="text-center pt-3">
-            <h3 class="white" ngClass.gt-xs="f-23" ngClass.xs="f-18">{{slide.title}}</h3>
-            <p ngClass.gt-xs="white f-18" ngClass.xs="white">{{slide.description}}</p>
-        </div>
-    <div class="slides">
-      <iframe
-        width="560"
-        height="315"
-        [src]="slide.video"
-        frameborder="0"
-        allowfullscreen
-      ></iframe>
-    </div>
-    </span>
-    </ngx-slick-carousel>
-    <div fxHide.xs="true" class="position-absolute arrows-video" fxLayout="row" fxLayoutAlign="space-between">
-          <img  class="rotate cursor-pointer" src="/assets/img/home/next.svg" alt="prev" (click)="prev()" />
-          <img  class="cursor-pointer" src="/assets/img/home/next.svg" alt="next" (click)="next()"/>
-        
+      <div class="text-center pt-3">
+        <h3 class="white" ngClass.gt-xs="f-23" ngClass.xs="f-18">
+          {{ slide.title }}
+        </h3>
+        <p ngClass.gt-xs="white f-18" ngClass.xs="white">
+          {{ slide.description }}
+        </p>
       </div>
+      <div class="slides">
+        <iframe width="560" height="315" [src]="slide.video" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </span>
+  </ngx-slick-carousel>
+  <div fxHide.xs="true" class="position-absolute arrows-video" fxLayout="row" fxLayoutAlign="space-between">
+    <img class="rotate cursor-pointer" src="/assets/img/home/next.svg" alt="prev" (click)="prev()" />
+    <img class="cursor-pointer" src="/assets/img/home/next.svg" alt="next" (click)="next()" />
+  </div>
 </div>

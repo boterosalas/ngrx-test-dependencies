@@ -9,12 +9,9 @@ describe('SliderDeliverComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SliderDeliverComponent ],
-      imports:[
-        SlickCarouselModule
-      ]
-    })
-    .compileComponents();
+      declarations: [SliderDeliverComponent],
+      imports: [SlickCarouselModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

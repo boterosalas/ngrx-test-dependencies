@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-    URL_SECURITY: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apisecurity/api/',
+  URL_SECURITY: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apisecurity/api/',
   URL_PROFILE: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apiprofile/api/',
   // URL_PROFILE: 'http://10.125.65.230/profile/api/',
   URL_VALIDATE_EMPLOYEE: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apiprofile/',
@@ -32,16 +32,15 @@ export const environment = {
   // PDF: 'https://webclickamdev.blob.core.windows.net/clickacademy/pdf/',
   // SUBSCRIPTION: 'f5edbcd2315e479aad33d80c58052fcc',
 
-
   firebaseConfig: {
-    apiKey: "AIzaSyDi89VEe3hUKkOxIoGyd4RUz_lv_9oazrc",
-    authDomain: "app-clickam-dev-278016.firebaseapp.com",
-    databaseURL: "https://app-clickam-dev-278016.firebaseio.com",
-    projectId: "app-clickam-dev-278016",
-    storageBucket: "app-clickam-dev-278016.appspot.com",
-    messagingSenderId: "158450297764",
-    appId: "1:158450297764:web:0ab01b0d9b7f175aa26f31"
-  }
+    apiKey: 'AIzaSyDi89VEe3hUKkOxIoGyd4RUz_lv_9oazrc',
+    authDomain: 'app-clickam-dev-278016.firebaseapp.com',
+    databaseURL: 'https://app-clickam-dev-278016.firebaseio.com',
+    projectId: 'app-clickam-dev-278016',
+    storageBucket: 'app-clickam-dev-278016.appspot.com',
+    messagingSenderId: '158450297764',
+    appId: '1:158450297764:web:0ab01b0d9b7f175aa26f31',
+  },
 };
 
 /*

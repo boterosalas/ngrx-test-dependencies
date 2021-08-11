@@ -10,15 +10,10 @@ describe('PopupCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PopupCardComponent ],
-      imports: [
-        AppMaterialModule
-      ],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ]
-    })
-    .compileComponents();
+      declarations: [PopupCardComponent],
+      imports: [AppMaterialModule],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -34,30 +29,33 @@ describe('PopupCardComponent', () => {
   it('formatDate', () => {
     //component.formatDate("2021-06-04T21:44:47.48")
     fixture.detectChanges();
-    expect(component.formatDate("2021-06-04T21:44:47.48")).toBe("2021/06/04");
+    expect(component.formatDate('2021-06-04T21:44:47.48')).toBe('2021/06/04');
   });
 
   it('openEdit', () => {
     spyOn(component.edit, 'emit');
-    component.openEdit()
+    component.openEdit();
     fixture.detectChanges();
     expect(component.edit.emit).toHaveBeenCalledWith();
   });
 
   it('deletePopup', () => {
     spyOn(component.delete, 'emit');
-    component.idPopup = "1"
-    component.deletePopup()
+    component.idPopup = '1';
+    component.deletePopup();
     fixture.detectChanges();
-    expect(component.delete.emit).toHaveBeenCalledWith({id: "1"});
+    expect(component.delete.emit).toHaveBeenCalledWith({ id: '1' });
   });
 
   it('showHiddenPopup', () => {
     spyOn(component.setShowHidden, 'emit');
-    component.idPopup = "1"
-    component.showHidden = true
-    component.showHiddenPopup()
+    component.idPopup = '1';
+    component.showHidden = true;
+    component.showHiddenPopup();
     fixture.detectChanges();
-    expect(component.setShowHidden.emit).toHaveBeenCalledWith({id: "1", active: true});
+    expect(component.setShowHidden.emit).toHaveBeenCalledWith({
+      id: '1',
+      active: true,
+    });
   });
 });

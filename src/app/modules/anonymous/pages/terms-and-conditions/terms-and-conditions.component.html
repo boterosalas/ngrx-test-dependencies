@@ -1,41 +1,43 @@
-<app-banner color="purple" title="{{'TERMS.CONDITION_TAB' | translate}}" img="/assets/img/banners/banner-T_Y-pc.jpg" imgMobile="/assets/img/banners/banner-T_Y-mobile.jpg"></app-banner>
+<app-banner
+  color="purple"
+  title="{{ 'TERMS.CONDITION_TAB' | translate }}"
+  img="/assets/img/banners/banner-T_Y-pc.jpg"
+  imgMobile="/assets/img/banners/banner-T_Y-mobile.jpg"
+></app-banner>
 <!-- <app-logo></app-logo> -->
 
 <div class="terms container mb-3">
   <mat-tab-group>
-
-  <mat-tab>
+    <mat-tab>
       <ng-template mat-tab-label>
-           <span class="gtmTerminosCondicionesClicTerminosLegales">{{ 'TERMS.CONDITION_TAB' | translate }}</span>
+        <span class="gtmTerminosCondicionesClicTerminosLegales">{{ 'TERMS.CONDITION_TAB' | translate }}</span>
       </ng-template>
-      <h2 class='border-bottom-orange-init'>{{textTerminos}}</h2>
-      <div [innerHtml]="contentTerminos"></div>  
-  </mat-tab>
+      <h2 class="border-bottom-orange-init">{{ textTerminos }}</h2>
+      <div [innerHtml]="contentTerminos"></div>
+    </mat-tab>
 
-  <mat-tab>
+    <mat-tab>
       <ng-template mat-tab-label>
-           <span class="gtmTerminosCondicionesClicEmprendedor">{{ 'TERMS.LEGAL_TAB' | translate }}</span>
+        <span class="gtmTerminosCondicionesClicEmprendedor">{{ 'TERMS.LEGAL_TAB' | translate }}</span>
       </ng-template>
-      <h2 class='border-bottom-orange-init'>{{textProteccion}}</h2>
-      <div [innerHtml]="contentProteccion"></div> 
-  </mat-tab>
+      <h2 class="border-bottom-orange-init">{{ textProteccion }}</h2>
+      <div [innerHtml]="contentProteccion"></div>
+    </mat-tab>
 
-  <mat-tab>
+    <mat-tab>
       <ng-template mat-tab-label>
-           <span class="gtmTerminosCondicionesClicProteccionDatos">{{ 'TERMS.PROTECTION_TAB' | translate }}</span>
+        <span class="gtmTerminosCondicionesClicProteccionDatos">{{ 'TERMS.PROTECTION_TAB' | translate }}</span>
       </ng-template>
-      <h2 class='border-bottom-orange-init'>{{textTransparencia}}</h2>
-      <div [innerHtml]="contentTransparencia"></div> 
-  </mat-tab>
+      <h2 class="border-bottom-orange-init">{{ textTransparencia }}</h2>
+      <div [innerHtml]="contentTransparencia"></div>
+    </mat-tab>
 
-  <mat-tab>
+    <mat-tab>
       <ng-template mat-tab-label>
-           <span class="gtmTerminosCondicionesClicProgramaReferidos">{{ 'TERMS.REFER_TAB' | translate }}</span>
+        <span class="gtmTerminosCondicionesClicProgramaReferidos">{{ 'TERMS.REFER_TAB' | translate }}</span>
       </ng-template>
-      <h2 class='border-bottom-orange-init'>{{textPrograma}}</h2>
-      <div [innerHtml]="contentPrograma"></div> 
-  </mat-tab>
-
+      <h2 class="border-bottom-orange-init">{{ textPrograma }}</h2>
+      <div [innerHtml]="contentPrograma"></div>
+    </mat-tab>
   </mat-tab-group>
-
 </div>

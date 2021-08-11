@@ -17,23 +17,23 @@ import { UtilsService } from 'src/app/services/utils.service';
 describe('ActivateAccountFormComponent', () => {
   let component: ActivateAccountFormComponent;
   let fixture: ComponentFixture<ActivateAccountFormComponent>;
-  const mockAuthService = jasmine.createSpyObj("AuthService", ["sendActivation"]);
-  const mockUtilsService = jasmine.createSpyObj("UtilsService", ["showloginForm"]);
+  const mockAuthService = jasmine.createSpyObj('AuthService', ['sendActivation']);
+  const mockUtilsService = jasmine.createSpyObj('UtilsService', ['showloginForm']);
   const Success = {
-    state: "Success",
-    userMessage: null
-  }
+    state: 'Success',
+    userMessage: null,
+  };
   const ErrorService = {
-    state: "Error",
-    userMessage: null
-  }
+    state: 'Error',
+    userMessage: null,
+  };
 
   const InvalidRquest = {
-    state: "Error",
+    state: 'Error',
     error: {
-      userMessage: 'Internal server error'
-    }
-  }
+      userMessage: 'Internal server error',
+    },
+  };
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ActivateAccountFormComponent],
@@ -49,23 +49,20 @@ describe('ActivateAccountFormComponent', () => {
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
-              return localStorage.getItem("ACCESS_TOKEN");
+              return localStorage.getItem('ACCESS_TOKEN');
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
-            blacklistedRoutes: []
-          }
-        })
+            blacklistedRoutes: [],
+          },
+        }),
       ],
       providers: [
         { provide: AuthService, useValue: mockAuthService },
         { provide: UtilsService, useValue: mockUtilsService },
       ],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ]
-    })
-      .compileComponents();
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
     mockAuthService.sendActivation.and.returnValue(of(Success));
   }));
 
@@ -83,14 +80,16 @@ describe('ActivateAccountFormComponent', () => {
     expect(mockUtilsService.showloginForm).toHaveBeenCalled();
   });
   it('should activated account', () => {
-    spyOn(Swal, "fire").and.returnValue(Promise.resolve<any>({
-      title: "Se ha enviado un email",
-      text: "Su cuenta ha sido activada",
-      confirmButtonText: "Aceptar",
-      confirmButtonClass: 'accept-forgot-alert-success',
-      type: "success"
-    }))
-    component.activateForm.controls.email.setValue("david.betancourt@pragma.com.co");
+    spyOn(Swal, 'fire').and.returnValue(
+      Promise.resolve<any>({
+        title: 'Se ha enviado un email',
+        text: 'Su cuenta ha sido activada',
+        confirmButtonText: 'Aceptar',
+        confirmButtonClass: 'accept-forgot-alert-success',
+        type: 'success',
+      })
+    );
+    component.activateForm.controls.email.setValue('david.betancourt@pragma.com.co');
     component.activateAccount();
 
     expect(mockAuthService.sendActivation).toHaveBeenCalled();
@@ -100,37 +99,37 @@ describe('ActivateAccountFormComponent', () => {
       mockAuthService.sendActivation.and.returnValue(of(ErrorService));
     });
     it('should show error in account', () => {
-      spyOn(Swal, "fire").and.returnValue(Promise.resolve<any>({
-        title: "Ups algo salió mal",
-        text: "Codigo invalido",
-        confirmButtonText: "Aceptar",
-        confirmButtonClass: 'accept-forgot-alert-error',
-        type: "error"
-      }))
+      spyOn(Swal, 'fire').and.returnValue(
+        Promise.resolve<any>({
+          title: 'Ups algo salió mal',
+          text: 'Codigo invalido',
+          confirmButtonText: 'Aceptar',
+          confirmButtonClass: 'accept-forgot-alert-error',
+          type: 'error',
+        })
+      );
       component.activateAccount();
       expect(mockAuthService.sendActivation).toHaveBeenCalled();
-    })
+    });
   });
   describe('invalid request activated', () => {
-
     beforeEach(function () {
       mockAuthService.sendActivation.and.returnValue(throwError(InvalidRquest));
     });
 
     it('actived account invalid request', () => {
-      spyOn(Swal, "fire").and.returnValue(Promise.resolve<any>({
-        title: "Ups algo salió mal",
-        text: "Error en el sistema intenta mas tarde",
-        confirmButtonText: "Aceptar",
-        confirmButtonClass: 'accept-forgot-alert-error',
-        type: "error"
-      }))
+      spyOn(Swal, 'fire').and.returnValue(
+        Promise.resolve<any>({
+          title: 'Ups algo salió mal',
+          text: 'Error en el sistema intenta mas tarde',
+          confirmButtonText: 'Aceptar',
+          confirmButtonClass: 'accept-forgot-alert-error',
+          type: 'error',
+        })
+      );
       component.activateAccount();
       component.activateForm.controls.email.setValue(1);
       expect(mockAuthService.sendActivation).toHaveBeenCalled();
     });
-
   });
 });
-
-

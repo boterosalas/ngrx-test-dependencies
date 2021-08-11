@@ -9,22 +9,18 @@ describe('ModalGenericComponent', () => {
   let fixture: ComponentFixture<ModalGenericComponent>;
 
   const dialogMock = {
-    close: () => { }
-   };
-
+    close: () => {},
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalGenericComponent ],
-      imports: [
-        AppMaterialModule
-      ],
+      declarations: [ModalGenericComponent],
+      imports: [AppMaterialModule],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
-        {provide: MatDialogRef, useValue: dialogMock},
-       ],
-    })
-    .compileComponents();
+        { provide: MatDialogRef, useValue: dialogMock },
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -37,11 +33,9 @@ describe('ModalGenericComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  
   it('close modal', () => {
     let spy = spyOn(component.dialogRef, 'close').and.callThrough();
     component.onNoClick();
-    expect(spy).toHaveBeenCalled(); 
+    expect(spy).toHaveBeenCalled();
   });
-
 });

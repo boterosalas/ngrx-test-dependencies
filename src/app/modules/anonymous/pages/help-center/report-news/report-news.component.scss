@@ -1,6 +1,6 @@
-@import "variables";
-@import "general";
-@import "animations";
+@import 'variables';
+@import 'general';
+@import 'animations';
 
 .card-report-dark {
   background-color: #f1f3f6;
@@ -80,7 +80,7 @@ textarea::placeholder {
   font-family: $font-galano !important;
 }
 
-input[type="file"] {
+input[type='file'] {
   display: none;
 }
 .file-width-space {
@@ -95,7 +95,7 @@ input[type="file"] {
 .title-gray {
   color: #a7a3b1;
   font-size: 11px;
-  font-family: "galano-bold", sans-serif;
+  font-family: 'galano-bold', sans-serif;
 }
 .title-secondary {
   color: #a7a3b1;
@@ -151,10 +151,10 @@ input[type="file"] {
   }
 }
 .card-report-dark-1 {
-  background-color:$card-bg;
+  background-color: $card-bg;
   padding: 18px;
   border-radius: 10px;
 }
-.status-news{
+.status-news {
   color: #8d7eb7;
 }

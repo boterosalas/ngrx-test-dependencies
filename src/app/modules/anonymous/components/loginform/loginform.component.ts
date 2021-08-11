@@ -1,24 +1,20 @@
-import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
-import {
-  FormGroup,
-  Validators,
-  FormBuilder
-} from "@angular/forms";
-import { Router } from "@angular/router";
-import { AuthService } from "src/app/services/auth.service";
-import Swal from "sweetalert2";
-import { ResponseService } from "src/app/interfaces/response";
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
+import { ResponseService } from 'src/app/interfaces/response';
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import decode from 'jwt-decode';
 import { LinksService } from 'src/app/services/links.service';
-declare var dataLayer: any
+declare var dataLayer: any;
 
 @Component({
-  selector: "app-loginform",
-  templateUrl: "./loginform.component.html",
-  styleUrls: ["./loginform.component.scss"]
+  selector: 'app-loginform',
+  templateUrl: './loginform.component.html',
+  styleUrls: ['./loginform.component.scss'],
 })
 export class LoginformComponent implements OnInit, OnDestroy {
   constructor(
@@ -28,28 +24,18 @@ export class LoginformComponent implements OnInit, OnDestroy {
     private loading: LoaderService,
     private utils: UtilsService,
     private link: LinksService
-  ) { }
+  ) {}
 
   private subscription: Subscription = new Subscription();
 
   loginForm: FormGroup;
   isSubmitted = false;
-  emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
+  emailPattern = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      Username: [
-        "",
-        [
-          Validators.required,
-          Validators.pattern(this.emailPattern),
-          Validators.maxLength(64)
-        ]
-      ],
-      Password: [
-        "",
-        [Validators.required, Validators.minLength(6), Validators.maxLength(20)]
-      ]
+      Username: ['', [Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
+      Password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
     });
   }
 
@@ -64,9 +50,9 @@ export class LoginformComponent implements OnInit, OnDestroy {
       return;
     }
 
-    let loginData = {
+    const loginData = {
       Password: btoa(this.loginForm.value.Password),
-      Username: this.loginForm.value.Username
+      Username: this.loginForm.value.Username,
     };
 
     this.loading.show();
@@ -74,12 +60,12 @@ export class LoginformComponent implements OnInit, OnDestroy {
     this.subscription = this.authService.login(loginData).subscribe(
       (resp: ResponseService) => {
         this.loading.hide();
-        if (resp.state === "Success") {
+        if (resp.state === 'Success') {
           setTimeout(() => {
             this.getAmount();
           }, 500);
-          localStorage.setItem("ACCESS_TOKEN", resp.objectResponse.token);
-          localStorage.setItem("REFRESH_TOKEN", resp.objectResponse.refreshToken);
+          localStorage.setItem('ACCESS_TOKEN', resp.objectResponse.token);
+          localStorage.setItem('REFRESH_TOKEN', resp.objectResponse.refreshToken);
           this.utils.hideloginForm();
           this.routeBased();
 
@@ -87,35 +73,33 @@ export class LoginformComponent implements OnInit, OnDestroy {
             event: 'pushEventGA',
             categoria: 'IniciarSesion',
             accion: 'ClicLightboxIniciar',
-            etiqueta: 'IniciarSesionExitoso'
+            etiqueta: 'IniciarSesionExitoso',
           });
 
           dataLayer.push({
             event: 'pushEventGA',
             categoria: 'Inicio',
             accion: 'ClicLateral',
-            etiqueta: this.loginForm.value.Username
+            etiqueta: this.loginForm.value.Username,
           });
-
-
         } else {
           Swal.fire({
-            title: "Login inválido",
+            title: 'Login inválido',
             text: resp.userMessage,
-            type: "error",
-            confirmButtonText: "Aceptar",
-            confirmButtonClass: 'accept-login-alert-error'
+            type: 'error',
+            confirmButtonText: 'Aceptar',
+            confirmButtonClass: 'accept-login-alert-error',
           });
         }
       },
-      error => {
+      (error) => {
         this.loading.hide();
         Swal.fire({
           title: error.statusText,
           text: error.error.userMessage,
-          type: "error",
-          confirmButtonText: "Aceptar",
-          confirmButtonClass: 'accept-forgot-alert-invalid'
+          type: 'error',
+          confirmButtonText: 'Aceptar',
+          confirmButtonClass: 'accept-forgot-alert-invalid',
         });
       }
     );
@@ -141,31 +125,29 @@ export class LoginformComponent implements OnInit, OnDestroy {
     this.utils.showActivate();
   }
 
-
   /** Al momento de hacer login determina la ruta por el perfil de usuario */
 
   private routeBased() {
-    let token = localStorage.getItem("ACCESS_TOKEN");
-    let tokenDecode = decode(token);
-    if (tokenDecode.role === "CLICKER") {
+    const token = localStorage.getItem('ACCESS_TOKEN');
+    const tokenDecode = decode(token);
+    if (tokenDecode.role === 'CLICKER') {
       this.router.navigate(['/inicio']);
       this.authService.isLogged$.next(true);
     } else {
       this.router.navigate(['/dashboard']);
       this.authService.isLogged$.next(true);
-      this.authService.getRole$.next("ADMIN")
+      this.authService.getRole$.next('ADMIN');
     }
   }
 
   public getAmount() {
     this.subscription = this.link.getAmount().subscribe((amount) => {
-      localStorage.setItem("Amount", amount.amountsCommission);
-      localStorage.setItem("AmonuntReferred", amount.amountsReferred);
+      localStorage.setItem('Amount', amount.amountsCommission);
+      localStorage.setItem('AmonuntReferred', amount.amountsReferred);
     });
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
 }

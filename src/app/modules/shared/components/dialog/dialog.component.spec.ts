@@ -13,28 +13,19 @@ describe('DialogComponent', () => {
   let fixture: ComponentFixture<DialogComponent>;
 
   const dialogMock = {
-    dismiss: () => { }
-   };
+    dismiss: () => {},
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ 
-        DialogComponent
-       ],
-       imports: [
-        AppMaterialModule,
-        SlickCarouselModule,
-        TranslateModule.forRoot()
-       ],
-       providers: [
+      declarations: [DialogComponent],
+      imports: [AppMaterialModule, SlickCarouselModule, TranslateModule.forRoot()],
+      providers: [
         { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} },
-        {provide: MatBottomSheetRef, useValue: dialogMock},
-       ],
-       schemas: [
-         NO_ERRORS_SCHEMA
-       ]
-    })
-    .compileComponents();
+        { provide: MatBottomSheetRef, useValue: dialogMock },
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -50,8 +41,6 @@ describe('DialogComponent', () => {
   it('close dialog', () => {
     let spy = spyOn(component.dialogRef, 'dismiss').and.callThrough();
     component.onNoClick();
-    expect(spy).toHaveBeenCalled();    
+    expect(spy).toHaveBeenCalled();
   });
-  
-
 });

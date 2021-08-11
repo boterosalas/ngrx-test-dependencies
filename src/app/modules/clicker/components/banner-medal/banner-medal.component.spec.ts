@@ -10,13 +10,9 @@ describe('BannerMedalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BannerMedalComponent ],
-      imports: [
-        RouterTestingModule.withRoutes([]),
-        AppMaterialModule
-      ]
-    })
-    .compileComponents();
+      declarations: [BannerMedalComponent],
+      imports: [RouterTestingModule.withRoutes([]), AppMaterialModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -6,13 +6,12 @@ import { TokenService } from 'src/app/services/token.service';
 @Component({
   selector: 'app-refer-share',
   templateUrl: './refer-share.component.html',
-  styleUrls: ['./refer-share.component.scss']
+  styleUrls: ['./refer-share.component.scss'],
 })
 export class ReferShareComponent implements OnInit {
-
   @Output() urlClicker = new EventEmitter();
   @Output() shareMobile = new EventEmitter();
-  @ViewChild("linkInput", { static: false }) copy: ElementRef<any>;
+  @ViewChild('linkInput', { static: false }) copy: ElementRef<any>;
   @Input() urlValue: string;
 
   url: string;
@@ -21,11 +20,7 @@ export class ReferShareComponent implements OnInit {
   tokenInfo: any;
   idClicker: string;
 
-  constructor(
-    private fb: FormBuilder,
-    private token: TokenService,
-    private content: ContentService
-  ) { }
+  constructor(private fb: FormBuilder, private token: TokenService, private content: ContentService) {}
 
   ngOnInit() {
     this.generateUrl();
@@ -35,11 +30,11 @@ export class ReferShareComponent implements OnInit {
   public generateUrl() {
     this.tokenInfo = this.token.userInfo();
     this.idClicker = this.tokenInfo.idclicker;
-    let domain = document.location.origin;
+    const domain = document.location.origin;
     this.urlWhatsapp = encodeURI(`${domain}/#/inicio?code=${this.idClicker.replace(' ', '%20')}`);
     this.url = encodeURI(`${domain}/#/inicio?code=${this.idClicker}`);
     this.formLink = this.fb.group({
-      link: [this.url]
+      link: [this.url],
     });
   }
 
@@ -53,10 +48,9 @@ export class ReferShareComponent implements OnInit {
     this.shareMobile.emit(this.url);
   }
   public generateLink() {
-    let formData: FormData = new FormData();
+    const formData: FormData = new FormData();
     formData.append('idClicker', this.idClicker);
     formData.append('type', 'Generate');
-    this.content.setClick(formData).subscribe()
+    this.content.setClick(formData).subscribe();
   }
-
 }

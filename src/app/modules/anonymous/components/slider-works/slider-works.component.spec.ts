@@ -10,13 +10,9 @@ describe('SliderWorksComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SliderWorksComponent ],
-      imports: [
-        SlickCarouselModule,
-        TranslateModule.forRoot()
-      ]
-    })
-    .compileComponents();
+      declarations: [SliderWorksComponent],
+      imports: [SlickCarouselModule, TranslateModule.forRoot()],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -38,5 +34,4 @@ describe('SliderWorksComponent', () => {
     component.prev();
     expect(component.prev).toBeTruthy();
   });
-
 });

@@ -11,47 +11,50 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-deleteform',
   templateUrl: './deleteform.component.html',
-  styleUrls: ['./deleteform.component.scss']
+  styleUrls: ['./deleteform.component.scss'],
 })
 export class DeleteformComponent implements OnInit {
-
   constructor(
     private payment: LinksService,
     private user: UserService,
     private fb: FormBuilder,
     private dialog: MatDialog,
     private _snackBar: MatSnackBar,
-    private utils: UtilsService,
-  ) { }
+    private utils: UtilsService
+  ) {}
   private subscription: Subscription = new Subscription();
   available: number;
   account: number;
-  activeText: boolean = true;
+  activeText  = true;
   profileFormDelete: FormGroup;
-  causeSurvey: string = "";
-  disableButtonOr: boolean = true;
+  causeSurvey  = '';
+  disableButtonOr  = true;
 
-  @ViewChild("templateDeleteAccount", { static: false })
+  @ViewChild('templateDeleteAccount', { static: false })
   templateDelete: TemplateRef<any>;
 
-  descriptionVal = [{
-
-    title: "La plataforma no es clara",
-    value: false
-  }, {
-    title: "Tuve inconvenientes con mis comisiones",
-    value: false
-  }, {
-    title: "La plataforma no es lo que esperaba",
-    value: false
-  }, {
-    title: "La plataforma envía muchas notificaciones y mensajes",
-    value: false
-
-  }, {
-    title: "Otro. ¿Cuál?",
-    value: false
-  }]
+  descriptionVal = [
+    {
+      title: 'La plataforma no es clara',
+      value: false,
+    },
+    {
+      title: 'Tuve inconvenientes con mis comisiones',
+      value: false,
+    },
+    {
+      title: 'La plataforma no es lo que esperaba',
+      value: false,
+    },
+    {
+      title: 'La plataforma envía muchas notificaciones y mensajes',
+      value: false,
+    },
+    {
+      title: 'Otro. ¿Cuál?',
+      value: false,
+    },
+  ];
   name: string;
   ngOnInit() {
     this.subscription = this.user.userInfo$.subscribe((val) => {
@@ -61,33 +64,26 @@ export class DeleteformComponent implements OnInit {
     });
     this.getInfomonth();
     this.profileFormDelete = this.fb.group({
-      Password: [
-        "",
-        [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(20),
-        ],
-      ],
+      Password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
     });
   }
   public getInfomonth() {
     this.payment.getReportUser().subscribe((resp: any) => {
       this.available = resp.objectResponse.money.accumulated;
       this.account = resp.objectResponse.money.cutOffValue;
-    })
+    });
   }
   public changeValue(dato) {
-    if (dato === "Otro. ¿Cuál?") {
+    if (dato === 'Otro. ¿Cuál?') {
       this.activeText = !this.activeText;
     }
     this.checkSurvey();
   }
   public deleteAccount() {
-    const title = "";
+    const title = '';
     const template = this.templateDelete;
-    let isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-    let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (iOS || isSafari) {
       window.document.body.scrollTop = 0;
     } else {
@@ -101,7 +97,7 @@ export class DeleteformComponent implements OnInit {
     });
   }
   public checkSurvey() {
-    this.disableButtonOr = !this.descriptionVal.some(val => val.value);
+    this.disableButtonOr = !this.descriptionVal.some((val) => val.value);
 
     if (this.descriptionVal[this.descriptionVal.length - 1].value === true) {
       this.disableButtonOr = true;
@@ -111,48 +107,45 @@ export class DeleteformComponent implements OnInit {
     }
   }
   public deleteAccountService() {
-    let reason = []
+    const reason = [];
     for (let index = 0; index < this.descriptionVal.length - 1; index++) {
       if (this.descriptionVal[index].value === true) {
         reason.push({
           description: this.descriptionVal[index].title,
           detail: this.descriptionVal[index].title,
-        })
+        });
       }
     }
-    if (this.descriptionVal[this.descriptionVal.length - 1].value === true && this.causeSurvey != "") {
+    if (this.descriptionVal[this.descriptionVal.length - 1].value === true && this.causeSurvey !== '') {
       reason.push({
         description: this.descriptionVal[this.descriptionVal.length - 1].title,
         detail: this.causeSurvey,
-      })
+      });
     }
-    let data = {
+    const data = {
       password: btoa(this.profileFormDelete.controls.Password.value),
-      reasons: reason
+      reasons: reason,
     };
     this.user.deleteUser(data).subscribe(
       (resp: any) => {
-        if (resp.state === "Success") {
+        if (resp.state === 'Success') {
           Swal.fire({
-            text: "Tu cuenta se ha eliminado con éxito",
-            type: "success",
-            confirmButtonText: "Aceptar",
-            confirmButtonClass: "upload-success"
+            text: 'Tu cuenta se ha eliminado con éxito',
+            type: 'success',
+            confirmButtonText: 'Aceptar',
+            confirmButtonClass: 'upload-success',
           }).then(() => {
             this.dialog.closeAll();
             this.utils.logout();
           });
         } else {
-          this.openSnackBar(resp.userMessage, "Cerrar");
+          this.openSnackBar(resp.userMessage, 'Cerrar');
         }
       },
       (err) => {
-        //this.wrongPass = true;
-        this.openSnackBar(err.userMessage, "Cerrar");
-
+        this.openSnackBar(err.userMessage, 'Cerrar');
       }
-    )
-    
+    );
   }
   private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
@@ -162,5 +155,4 @@ export class DeleteformComponent implements OnInit {
   public cancelDelete() {
     this.dialog.closeAll();
   }
-
 }

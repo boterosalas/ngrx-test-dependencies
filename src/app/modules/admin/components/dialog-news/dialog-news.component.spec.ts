@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogNewsComponent } from './dialog-news.component';
 
-
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
@@ -20,17 +19,21 @@ describe('DialogNewsComponent', () => {
   let component: DialogNewsComponent;
   let fixture: ComponentFixture<DialogNewsComponent>;
   const dialogMock = {
-    close: () => { }
+    close: () => {},
   };
-  const mockUserService = jasmine.createSpyObj("UserService", [
-    "setStatus"
-  ]);
+  const mockUserService = jasmine.createSpyObj('UserService', ['setStatus']);
   const dataResp = {
-    state: "Success"
-  }
-  const data = { element: { id: 1, documenturl: "http/archivo.jpg", statusnovelty: "Pendiente" }}
+    state: 'Success',
+  };
+  const data = {
+    element: {
+      id: 1,
+      documenturl: 'http/archivo.jpg',
+      statusnovelty: 'Pendiente',
+    },
+  };
 
-  const mockDialog = jasmine.createSpyObj("MatDialog", ["open", "closeAll"]);
+  const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll']);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [DialogNewsComponent],
@@ -50,9 +53,9 @@ describe('DialogNewsComponent', () => {
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
-            blacklistedRoutes: []
-          }
-        })
+            blacklistedRoutes: [],
+          },
+        }),
       ],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: data },
@@ -60,11 +63,8 @@ describe('DialogNewsComponent', () => {
         { provide: MatDialog, useValue: mockDialog },
         { provide: UserService, useValue: mockUserService },
       ],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ]
-    })
-      .compileComponents();
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
     mockUserService.setStatus.and.returnValue(of(dataResp));
   }));
 
@@ -75,21 +75,19 @@ describe('DialogNewsComponent', () => {
   });
 
   it('should create', () => {
-    component.data = { element: { id: 1, documenturl: "http/archivo.jpg" } }
+    component.data = { element: { id: 1, documenturl: 'http/archivo.jpg' } };
     expect(component).toBeTruthy();
     let spy = spyOn(component.dialogRef, 'close').and.callThrough();
     component.onNoClick();
     expect(spy).toHaveBeenCalled();
     component.saveChanges();
     expect(mockUserService.setStatus).toHaveBeenCalled();
-    component.onChangeSelected("Pendiente")
-  })
+    component.onChangeSelected('Pendiente');
+  });
 
   it('image not data', () => {
     component.image = '';
     component.viewerImage();
     expect(mockDialog.open).toBeTruthy();
   });
-  
-
 });

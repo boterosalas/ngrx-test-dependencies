@@ -12,17 +12,10 @@ describe('SearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchComponent ],
-      imports:[
-        ReactiveFormsModule,
-        FormsModule,
-        AppMaterialModule,
-        BrowserAnimationsModule,
-        TranslateModule.forRoot({})
-      ],
-      providers: []
-    })
-    .compileComponents();
+      declarations: [SearchComponent],
+      imports: [ReactiveFormsModule, FormsModule, AppMaterialModule, BrowserAnimationsModule, TranslateModule.forRoot({})],
+      providers: [],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -41,9 +34,7 @@ describe('SearchComponent', () => {
     const button = nativeElement.querySelector('button');
     button.dispatchEvent(new Event('click'));
     fixture.detectChanges();
-    component.searchProduct();    
+    component.searchProduct();
     expect(component.search.emit).toHaveBeenCalled();
   });
-  
-
 });

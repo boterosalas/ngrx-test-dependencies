@@ -1,15 +1,19 @@
-<app-banner title="{{'BANNERS.HELP_CENTER' | translate}}" img="/assets/img/banners/centro-ayuda-pc.jpg" imgMobile="/assets/img/banners/centro-ayuda-mobile.jpg"></app-banner>
+<app-banner
+  title="{{ 'BANNERS.HELP_CENTER' | translate }}"
+  img="/assets/img/banners/centro-ayuda-pc.jpg"
+  imgMobile="/assets/img/banners/centro-ayuda-mobile.jpg"
+></app-banner>
 <div class="container">
-    <div fxLayout.gt-xs="row" fxLayoutGap.gt-xs="30px" ngClass.gt-xs="mt-3">
-        <div fxLayout.gt-xs="column" fxFlex.gt-xs="25">
-            <app-menu-help-center></app-menu-help-center>
-        </div>
-        <div fxLayout.gt-xs="column" fxShow.xs="false" class="w-100 mt-help">
-            <div fxLayout="row wrap">
-                <span *ngFor="let item of offers; let i = index" fxLayout="column" fxFlex="100">
-                    <app-card-help-center [name]="item.name" [route]="item.route" [icon]="item.icon"></app-card-help-center>
-                </span>
-            </div>
-        </div>
+  <div fxLayout.gt-xs="row" fxLayoutGap.gt-xs="30px" ngClass.gt-xs="mt-3">
+    <div fxLayout.gt-xs="column" fxFlex.gt-xs="25">
+      <app-menu-help-center></app-menu-help-center>
     </div>
+    <div fxLayout.gt-xs="column" fxShow.xs="false" class="w-100 mt-help">
+      <div fxLayout="row wrap">
+        <span *ngFor="let item of offers; let i = index" fxLayout="column" fxFlex="100">
+          <app-card-help-center [name]="item.name" [route]="item.route" [icon]="item.icon"></app-card-help-center>
+        </span>
+      </div>
+    </div>
+  </div>
 </div>

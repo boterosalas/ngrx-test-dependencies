@@ -2,35 +2,36 @@
 @import 'general';
 
 .number {
-    font-size: 1.5rem;
-    color:$primary-color;
-    padding-bottom: 5px;
+  font-size: 1.5rem;
+  color: $primary-color;
+  padding-bottom: 5px;
 }
 
-.subtitle{
-    // text-transform: uppercase;
-    color: $color-p;
+.subtitle {
+  // text-transform: uppercase;
+  color: $color-p;
 }
 
-.icon-resume{
-    width: 30px;
+.icon-resume {
+  width: 30px;
 }
 
-.card{
-    // border: 1px solid #00000029;
-    border-radius: 5px;
-    padding: 10px;
-    background: #fff;
-    box-shadow: 0px 0px 4px 0px #00000029;
+.card {
+  // border: 1px solid #00000029;
+  border-radius: 5px;
+  padding: 10px;
+  background: #fff;
+  box-shadow: 0px 0px 4px 0px #00000029;
 }
 
 .card-height {
-    min-height: 142px;
+  min-height: 142px;
 }
 
 .sell {
-    background: $primary-color;
-    .number, .subtitle{
-        color: #ffffff;
-    }
+  background: $primary-color;
+  .number,
+  .subtitle {
+    color: #ffffff;
+  }
 }

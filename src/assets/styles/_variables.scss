@@ -5,43 +5,43 @@
 
 // Color system
 
-$primary-color: #37236A;
-$purple2: #8D7EB7;
-$secondary-color: #F21905;
-$third-color: #FFAF51;
-$footer-bg: #2B2A27;
+$primary-color: #37236a;
+$purple2: #8d7eb7;
+$secondary-color: #f21905;
+$third-color: #ffaf51;
+$footer-bg: #2b2a27;
 $black: #000000;
 $white: #ffffff;
 
 $footer-social-links: #ffffff;
-$social-share: #ECECEC;
-$color-p: #726D7E;
+$social-share: #ececec;
+$color-p: #726d7e;
 $color-border: #e0e0e0;
-$color-headings:$primary-color;
-$blue: #00A9B3;
+$color-headings: $primary-color;
+$blue: #00a9b3;
 $gray: #707070;
-$gray2: #B5B8BC;
-$gray3: #F1F3F6;
-$gray4: #A7A3B1;
-$blue: #00A9B3;
-$th: #3B3B3B;
-$bg-gray:#F7F7F7;
-$bronze: #EFB648;
-$silver: #B8B6BE;
-$gold:  #FFCE00;
+$gray2: #b5b8bc;
+$gray3: #f1f3f6;
+$gray4: #a7a3b1;
+$blue: #00a9b3;
+$th: #3b3b3b;
+$bg-gray: #f7f7f7;
+$bronze: #efb648;
+$silver: #b8b6be;
+$gold: #ffce00;
 $no-medal: #bdc3c7;
 
-$innato:#78C6CC;
-$reclutador:#5F74DA;
-$comprador: #8979F2;
-$completo: #FD6868;
-$checkBox: #B4A6DB;
+$innato: #78c6cc;
+$reclutador: #5f74da;
+$comprador: #8979f2;
+$completo: #fd6868;
+$checkBox: #b4a6db;
 
-$medium-grey: #B7B5BC;
-$medium-yellow: #FFC27B;
-$green: #6AC259;
-$red: #FD5555;
-$card-bg:#F3F1F6;
+$medium-grey: #b7b5bc;
+$medium-yellow: #ffc27b;
+$green: #6ac259;
+$red: #fd5555;
+$card-bg: #f3f1f6;
 
 // h2{
 //     color: #2B2A27;
@@ -53,37 +53,36 @@ $card-bg:#F3F1F6;
 // Font, line-height, and color for body text, headings, and more.
 
 // stylelint-disable value-keyword-case
-$font-family-sans-serif:      "galano-medium", sans-serif !default;
-$font-family-base:            $font-family-sans-serif !default;
-$font-galano-bold:            "galano-bold", sans-serif !default;
-$font-galano:            "galano", sans-serif !default;
+$font-family-sans-serif: 'galano-medium', sans-serif !default;
+$font-family-base: $font-family-sans-serif !default;
+$font-galano-bold: 'galano-bold', sans-serif !default;
+$font-galano: 'galano', sans-serif !default;
 
 // stylelint-enable value-keyword-case
 
-$font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
-$font-size-lg:                $font-size-base * 1.25 !default;
-$font-size-sm:                $font-size-base * .875 !default;
+$font-size-base: 1rem !default; // Assumes the browser default, typically `16px`
+$font-size-lg: $font-size-base * 1.25 !default;
+$font-size-sm: $font-size-base * 0.875 !default;
 
-$font-weight-lighter:         lighter !default;
-$font-weight-light:           300 !default;
-$font-weight-normal:          400 !default;
-$font-weight-bold:            700 !default;
-$font-weight-bolder:          bolder !default;
+$font-weight-lighter: lighter !default;
+$font-weight-light: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-bold: 700 !default;
+$font-weight-bolder: bolder !default;
 
-$font-weight-base:            $font-weight-normal !default;
-$line-height-base:            1.5 !default;
+$font-weight-base: $font-weight-normal !default;
+$line-height-base: 1.5 !default;
 
-$h1-font-size:                $font-size-base * 2.5 !default;
-$h2-font-size:                $font-size-base * 1.8 !default;
-$h3-font-size:                $font-size-base * 1.75 !default;
-$h4-font-size:                $font-size-base * 1.5 !default;
-$h5-font-size:                $font-size-base * 1.25 !default;
-$h6-font-size:                $font-size-base !default;
+$h1-font-size: $font-size-base * 2.5 !default;
+$h2-font-size: $font-size-base * 1.8 !default;
+$h3-font-size: $font-size-base * 1.75 !default;
+$h4-font-size: $font-size-base * 1.5 !default;
+$h5-font-size: $font-size-base * 1.25 !default;
+$h6-font-size: $font-size-base !default;
 
 // Buttons + Forms
 //
 // Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
-
 
 // Buttons
 //
@@ -93,7 +92,7 @@ $h6-font-size:                $font-size-base !default;
 $small: 440px; /*-------- Mobile devices*/
 $s-medium: 570px; /*-------- Tablet devices*/
 $medium: 768px;
-$large: 960px; 
+$large: 960px;
 $x-large: 1060px; /*-------- Desktop devices*/
 $xx-large: 1250px;
 $xxx-large: 1440px;

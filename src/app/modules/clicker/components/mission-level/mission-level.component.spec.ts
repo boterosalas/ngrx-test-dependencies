@@ -9,12 +9,9 @@ describe('MissionLevelComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MissionLevelComponent ],
-      imports: [
-        AppMaterialModule
-      ]
-    })
-    .compileComponents();
+      declarations: [MissionLevelComponent],
+      imports: [AppMaterialModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

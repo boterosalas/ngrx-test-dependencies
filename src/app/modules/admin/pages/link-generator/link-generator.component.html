@@ -1,9 +1,14 @@
 <app-banner
-  title="{{ 'DASHBOARD.LINK_GENERATOR' | translate}}"
+  title="{{ 'DASHBOARD.LINK_GENERATOR' | translate }}"
   img="/assets/img/banners/banner-dashboard-pc.jpg"
   imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
 ></app-banner>
 
 <div class="container minaud mt-3">
-    <app-link-generator-form [enableButton]="enableButton" [bussiness]="bussiness" [url]="url" (generate)="generateLink($event)"></app-link-generator-form>
+  <app-link-generator-form
+    [enableButton]="enableButton"
+    [bussiness]="bussiness"
+    [url]="url"
+    (generate)="generateLink($event)"
+  ></app-link-generator-form>
 </div>

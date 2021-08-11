@@ -12,16 +12,9 @@ describe('ReferEmailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReferEmailComponent ],
-      imports: [
-        TranslateModule.forRoot(),
-        AppMaterialModule,
-        ReactiveFormsModule,
-        FormsModule,
-        BrowserAnimationsModule
-      ]
-    })
-    .compileComponents();
+      declarations: [ReferEmailComponent],
+      imports: [TranslateModule.forRoot(), AppMaterialModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -38,6 +31,4 @@ describe('ReferEmailComponent', () => {
     component.sendEmail();
     expect(component.referForm.errors).toBeFalsy();
   });
-  
-  
 });

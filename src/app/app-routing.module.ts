@@ -3,20 +3,23 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 import { RoleGuard } from './role.guard';
 
-
 const routes: Routes = [
   {
-    path: '', loadChildren: () => import('./modules/anonymous/anonymous.module').then(m => m.AnonymousModule),
+    path: '',
+    loadChildren: () => import('./modules/anonymous/anonymous.module').then((m) => m.AnonymousModule),
   },
   {
-    path: 'clicker', loadChildren: () => import('./modules/clicker/clicker.module').then(m => m.ClickerModule), canActivate: [AuthGuard, RoleGuard],
+    path: 'clicker',
+    loadChildren: () => import('./modules/clicker/clicker.module').then((m) => m.ClickerModule),
+    canActivate: [AuthGuard, RoleGuard],
     data: {
-      role: "CLICKER"
-    }
+      role: 'CLICKER',
+    },
   },
   {
-    path: 'dashboard', loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule)
-  }
+    path: 'dashboard',
+    loadChildren: () => import('./modules/admin/admin.module').then((m) => m.AdminModule),
+  },
 ];
 
 @NgModule({
@@ -25,9 +28,9 @@ const routes: Routes = [
       enableTracing: false, // <-- debugging purposes only
       preloadingStrategy: PreloadAllModules,
       useHash: true,
-      scrollPositionRestoration: 'top'
-    })
+      scrollPositionRestoration: 'top',
+    }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

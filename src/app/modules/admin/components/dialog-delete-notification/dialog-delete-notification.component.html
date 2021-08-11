@@ -1,25 +1,21 @@
 <div ngClass="delete-container">
-    <h3 ngClass="title_delete">Eliminar notificación</h3>
-    <p ngClass="text-container">
-        ¿Está seguro que desea eliminar la notificación seleccionada?
-    </p>
-    <div
-      fxLayout="row"
-      fxLayout.xs="column"
-      fxLayoutAlign="space-start center"
-      fxLayoutGap="30px"
-      fxLayoutGap.xs="5px"
-      class="center-buttons"
-    >
-      <div ngClass="mt-3 mb-2 hide-button-on-mobile">
-        <button mat-button ngClass="button_cancel" (click)="cancelDelete()">
-          Cancelar
-        </button>
-      </div>
-      <div>
-        <button mat-button class="red" (click)="deleteNotification()">
-          <span fxLayoutAlign="center space-between"> Eliminar notificación </span>
-        </button>
-      </div>
+  <h3 ngClass="title_delete">Eliminar notificación</h3>
+  <p ngClass="text-container">¿Está seguro que desea eliminar la notificación seleccionada?</p>
+  <div
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-start center"
+    fxLayoutGap="30px"
+    fxLayoutGap.xs="5px"
+    class="center-buttons"
+  >
+    <div ngClass="mt-3 mb-2 hide-button-on-mobile">
+      <button mat-button ngClass="button_cancel" (click)="cancelDelete()">Cancelar</button>
+    </div>
+    <div>
+      <button mat-button class="red" (click)="deleteNotification()">
+        <span fxLayoutAlign="center space-between"> Eliminar notificación </span>
+      </button>
     </div>
   </div>
+</div>

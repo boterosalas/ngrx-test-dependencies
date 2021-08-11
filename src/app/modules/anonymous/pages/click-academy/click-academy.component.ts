@@ -7,17 +7,12 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-click-academy',
   templateUrl: './click-academy.component.html',
-  styleUrls: ['./click-academy.component.scss']
+  styleUrls: ['./click-academy.component.scss'],
 })
 export class ClickAcademyComponent implements OnInit {
+  pdf: string;
 
-  pdf:string;
-
-  constructor(
-    private user: UserService,
-    private router: Router,
-    private auth: AuthService
-  ) { }
+  constructor(private user: UserService, private router: Router, private auth: AuthService) {}
 
   ngOnInit() {
     this.pdf = environment.PDF;
@@ -29,7 +24,5 @@ export class ClickAcademyComponent implements OnInit {
     setTimeout(() => {
       this.router.navigate(['./inicio']);
     }, 500);
-    
   }
-
 }

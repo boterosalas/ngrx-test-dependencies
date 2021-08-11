@@ -1,8 +1,5 @@
 <!-- <app-logo></app-logo> -->
-<div 
-  *ngIf="auth.isLoggedIn()"
-  class="stories-section"
-  >
+<div *ngIf="auth.isLoggedIn()" class="stories-section">
   <app-slider-stories></app-slider-stories>
 </div>
 
@@ -15,36 +12,18 @@
   [sliderWeb]="sliderWeb"
 ></app-slider>
 
-<div
-  class="medals container pt-3"
-  fxHide.gt-xs="true"
-  *ngIf="auth.isLoggedIn()"
-  fxLayout="row"
-  fxLayoutAlign="center center"
->
+<div class="medals container pt-3" fxHide.gt-xs="true" *ngIf="auth.isLoggedIn()" fxLayout="row" fxLayoutAlign="center center">
   <mat-card fxLayout="row" fxLayoutAlign="center center">
-    <div
-      fxLayout="column"
-      fxLayoutAlign="center space-between"
-      fxLayoutGap="5px"
-    >
+    <div fxLayout="column" fxLayoutAlign="center space-between" fxLayoutGap="5px">
       <span fxLayout="column">
-        <img
-          class="icon-medal"
-          src="/assets/img/gamification/medalla.svg"
-          alt="icon"
-        />
+        <img class="icon-medal" src="/assets/img/gamification/medalla.svg" alt="icon" />
       </span>
       <span fxLayout="column" class="f-18 galano-bold white">
-        {{ "MEDALS.MEDALS" | translate }}
+        {{ 'MEDALS.MEDALS' | translate }}
       </span>
       <span fxLayout="column">
-        <button
-          mat-raised-button
-          class="purple-text"
-          [routerLink]="['/logros']"
-        >
-          {{ "MEDALS.MEDALS_SEE" | translate }}
+        <button mat-raised-button class="purple-text" [routerLink]="['/logros']">
+          {{ 'MEDALS.MEDALS_SEE' | translate }}
         </button>
       </span>
     </div>
@@ -65,23 +44,14 @@
 
 <div class="container">
   <span fxLayout="row" fxLayoutAlign="space-between center">
-    <h3
-      ngClass.gt-xs="mb-0"
-      class="border-bottom-orange-init title-h3"
-      id="bussinessHook"
-    >
-      {{ "HOME.BUSSINESS" | translate }}
+    <h3 ngClass.gt-xs="mb-0" class="border-bottom-orange-init title-h3" id="bussinessHook">
+      {{ 'HOME.BUSSINESS' | translate }}
     </h3>
-    <p
-      *ngIf="auth.isLoggedIn()"
-      ngClass.gt-xs="mb-0 f-20"
-      class="cursor-pointer text-underline purple-text"
-      [routerLink]="['/negocios']"
-    >
-      {{ "HOME.ALL_BUSSINESS" | translate }}
+    <p *ngIf="auth.isLoggedIn()" ngClass.gt-xs="mb-0 f-20" class="cursor-pointer text-underline purple-text" [routerLink]="['/negocios']">
+      {{ 'HOME.ALL_BUSSINESS' | translate }}
     </p>
   </span>
-  <p class="f-20" fxHide.xs>{{ "HOME.BUSSINESS_TEXT" | translate }}</p>
+  <p class="f-20" fxHide.xs>{{ 'HOME.BUSSINESS_TEXT' | translate }}</p>
   <div
     fxLayout="row wrap"
     fxLayout.gt-xs="row wrap"
@@ -90,9 +60,7 @@
     fxLayoutAlign="center center"
     fxLayoutGap="10px grid"
   >
-    <ng-container
-      *ngFor="let bussines of bussiness | slice: 0:6; let i = index"
-    >
+    <ng-container *ngFor="let bussines of bussiness | slice: 0:6; let i = index">
       <app-bussiness-card
         *ngIf="bussines.code !== 'envios-clickam'"
         (bussiness)="bussinessNavigation(bussines)"
@@ -104,11 +72,7 @@
     </ng-container>
     <ng-container *ngFor="let bussines of bussinessClicker; let i = index">
       <app-bussiness-card
-        *ngIf="
-          isEmployee === true &&
-          bussines.code === 'envios-clickam' &&
-          auth.isLoggedIn()
-        "
+        *ngIf="isEmployee === true && bussines.code === 'envios-clickam' && auth.isLoggedIn()"
         (bussiness)="bussinessNavigation(bussines)"
         [img]="bussines.imageurl"
         [title]="bussines.description"
@@ -116,74 +80,34 @@
       ></app-bussiness-card>
     </ng-container>
   </div>
-  <div
-    *ngIf="auth.isLoggedIn()"
-    fxLayout="row"
-    class="card-library"
-    fxShow.gt-xs="true"
-    fxShow.xs="false"
-  >
-    <div
-      class="position-relative banner-mobile heigth-image"
-      fxShow.gt-xs="true"
-      fxShow.xs="false"
-    >
+  <div *ngIf="auth.isLoggedIn()" fxLayout="row" class="card-library" fxShow.gt-xs="true" fxShow.xs="false">
+    <div class="position-relative banner-mobile heigth-image" fxShow.gt-xs="true" fxShow.xs="false">
       <div class="position-absolute" fxLayout="column">
         <h3>Descarga las mejores ofertas para compartir.</h3>
-        <button
-          mat-raised-button
-          class="button-oferts"
-          color="orange"
-          [routerLink]="['/biblioteca']"
-          id="download-users"
-        >
+        <button mat-raised-button class="button-oferts" color="orange" [routerLink]="['/biblioteca']" id="download-users">
           Ver Ofertas
         </button>
       </div>
-      <img
-        class="responsive-img"
-        src="/assets/img/banners/oferts.png"
-        alt="ofertas"
-      />
+      <img class="responsive-img" src="/assets/img/banners/oferts.png" alt="ofertas" />
     </div>
   </div>
-  <div
-    *ngIf="auth.isLoggedIn()"
-    fxLayout="row"
-    class="card-library"
-    fxShow.gt-xs="false"
-    fxShow.xs="true"
-  >
-    <div
-      class="position-relative banner-mobile heigth-image"
-      fxShow.gt-xs="false"
-      fxShow.xs="true"
-    >
+  <div *ngIf="auth.isLoggedIn()" fxLayout="row" class="card-library" fxShow.gt-xs="false" fxShow.xs="true">
+    <div class="position-relative banner-mobile heigth-image" fxShow.gt-xs="false" fxShow.xs="true">
       <div class="position-absolute" fxLayout="column">
         <h3>Descarga aquí las mejores ofertas del día</h3>
-        <button
-          mat-raised-button
-          class="button-oferts"
-          color="orange"
-          [routerLink]="['/biblioteca']"
-          id="download-users"
-        >
+        <button mat-raised-button class="button-oferts" color="orange" [routerLink]="['/biblioteca']" id="download-users">
           Ver Ofertas
         </button>
       </div>
-      <img
-        class="responsive-img"
-        src="/assets/img/banners/oferts_mobile.png"
-        alt="ofertas"
-      />
+      <img class="responsive-img" src="/assets/img/banners/oferts_mobile.png" alt="ofertas" />
     </div>
   </div>
 
   <span class="border-gray d-block"></span>
   <h3 class="border-bottom-orange-init title-h3">
-    {{ "HOME.OFFERS" | translate }}
+    {{ 'HOME.OFFERS' | translate }}
   </h3>
-  <p class="f-20" fxHide.xs>{{ "HOME.OFFERS_TEXT" | translate }}</p>
+  <p class="f-20" fxHide.xs>{{ 'HOME.OFFERS_TEXT' | translate }}</p>
 </div>
 
 <app-slider
@@ -212,41 +136,24 @@
 <div class="container">
   <app-new-business (openModal)="openRegisterBusiness()"></app-new-business>
 </div>
-<div
-  *ngIf="auth.isLoggedIn()"
-  class="forms-help"
-  fxLayout="row"
-  fxLayoutAlign="center"
->
+<div *ngIf="auth.isLoggedIn()" class="forms-help" fxLayout="row" fxLayoutAlign="center">
   <div fxLayout="column" fxLayoutAlign="center">
     <div fxLayout="row" fxLayoutAlign="center">
       <div class="mt-4">
         <img src="/assets/img/compartir_testimonial.svg" alt="" />
       </div>
       <div class="mt-4">
-        <h4 class="text-cuentanos mt-0 mb-0 ml-3">
-          ¿Crees que en Clickam podemos mejorar algo?
-        </h4>
+        <h4 class="text-cuentanos mt-0 mb-0 ml-3">¿Crees que en Clickam podemos mejorar algo?</h4>
         <p class="expresion-cuentanos mt-0 mb-0 ml-3">¡Cuéntanos!</p>
       </div>
     </div>
-    <div
-      *ngIf="!formData && !sendData"
-      class="mt-2 mb-4"
-      fxLayout="row"
-      fxLayoutAlign="center"
-    >
+    <div *ngIf="!formData && !sendData" class="mt-2 mb-4" fxLayout="row" fxLayoutAlign="center">
       <button class="cursor-pointer open-form" (click)="openForm()">
         Abrir formulario
         <mat-icon class="arrow-down">keyboard_arrow_down</mat-icon>
       </button>
     </div>
-    <div
-      *ngIf="formData && !sendData"
-      class="mt-2 mb-4 pl-2 pr-2"
-      fxLayout="column"
-      fxLayoutAlign="center"
-    >
+    <div *ngIf="formData && !sendData" class="mt-2 mb-4 pl-2 pr-2" fxLayout="column" fxLayoutAlign="center">
       <form [formGroup]="dateForm">
         <label class="label-up-text" for="picker">Mensaje </label>
         <div class="mt-1">
@@ -263,14 +170,7 @@
       </form>
       <div>
         <div class="mt-3 mb-2" fxLayout="row" fxLayoutAlign="end end">
-          <button
-            mat-button
-            ngClass="button_cancel"
-            style="color: #ffffff"
-            (click)="cerrarForm()"
-          >
-            Cancelar
-          </button>
+          <button mat-button ngClass="button_cancel" style="color: #ffffff" (click)="cerrarForm()">Cancelar</button>
           <button
             mat-raised-button
             class="button-oferts ml-2"
@@ -284,48 +184,23 @@
         </div>
       </div>
     </div>
-    <div
-      *ngIf="formData && sendData"
-      class="mt-2 mb-4"
-      fxLayout="column"
-      fxLayoutAlign="center center"
-      style="text-align: center"
-    >
-      <i
-        class="tio-checkmark_circle"
-        style="font-size: 38px; color: #ffffff"
-      ></i>
-      <p class="expresion-cuentanos mt-0 mb-0 ml-3">
-        ¡Tu comentario ha sido enviado!
-      </p>
-      <button
-        class="cursor-pointer open-form mt-2"
-        style="width: 125px"
-        (click)="cerrarForm()"
-      >
-        Cerrar
-      </button>
+    <div *ngIf="formData && sendData" class="mt-2 mb-4" fxLayout="column" fxLayoutAlign="center center" style="text-align: center">
+      <i class="tio-checkmark_circle" style="font-size: 38px; color: #ffffff"></i>
+      <p class="expresion-cuentanos mt-0 mb-0 ml-3">¡Tu comentario ha sido enviado!</p>
+      <button class="cursor-pointer open-form mt-2" style="width: 125px" (click)="cerrarForm()">Cerrar</button>
     </div>
   </div>
 
   <ng-template #templatePromo>
     <div fxShow.gt-xs="true" fxShow.xs="false">
       <a [href]="modalHref" [target]="modalTarget">
-        <img
-          [src]="modalSrcWeb"
-          class="img-responsive w-100 cursor-pointer"
-          [alt]="modalAltWeb"
-        />
+        <img [src]="modalSrcWeb" class="img-responsive w-100 cursor-pointer" [alt]="modalAltWeb" />
       </a>
     </div>
 
     <div fxShow.gt-xs="false" fxShow.xs="true">
       <a [href]="modalHref" [target]="modalTarget">
-        <img
-          [src]="modalSrcMobile"
-          class="img-responsive w-100 cursor-pointer"
-          [alt]="modalAltMobile"
-        />
+        <img [src]="modalSrcMobile" class="img-responsive w-100 cursor-pointer" [alt]="modalAltMobile" />
       </a>
     </div>
   </ng-template>
@@ -334,9 +209,7 @@
     <div class="terms text-center" *ngIf="stepTerms">
       <img class="icon" src="/assets/img/icon.svg" alt="icon" />
       <div innerHtml="{{ 'GENERIC.NEW_TERMS' | translate }}"></div>
-      <button mat-raised-button color="orange" (click)="showTerms()">
-        Conócelos aquí
-      </button>
+      <button mat-raised-button color="orange" (click)="showTerms()">Conócelos aquí</button>
     </div>
 
     <div class="terms" *ngIf="newTermsHTML">
@@ -350,11 +223,10 @@
       <div [innerHtml]="contentPrograma"></div>
       <div class="mb-3">
         <span>
-          <mat-checkbox id="chkaccept" (change)="acceptTermsCheck($event)">
-          </mat-checkbox>
+          <mat-checkbox id="chkaccept" (change)="acceptTermsCheck($event)"> </mat-checkbox>
         </span>
         <span class="accept-terms ml-2">
-          {{ "REGISTER.ACCEPT" | translate }}
+          {{ 'REGISTER.ACCEPT' | translate }}
         </span>
       </div>
 
@@ -369,7 +241,7 @@
           [disabled]="!activateButton"
           (click)="sendReferalsTerm()"
         >
-          {{ "GENERIC.ACCEPT" | translate }}
+          {{ 'GENERIC.ACCEPT' | translate }}
         </button>
 
         <button
@@ -379,7 +251,7 @@
           ngClass.xs="pl-2 pr-2"
           mat-raised-button
         >
-          {{ "GENERIC.CANCEL" | translate }}
+          {{ 'GENERIC.CANCEL' | translate }}
         </button>
       </span>
     </div>

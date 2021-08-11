@@ -4,20 +4,14 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 @Component({
   selector: 'app-dialog-edit',
   templateUrl: './dialog-edit.component.html',
-  styleUrls: ['./dialog-edit.component.scss']
+  styleUrls: ['./dialog-edit.component.scss'],
 })
 export class DialogEditComponent implements OnInit {
+  constructor(public dialogRef: MatDialogRef<any>, @Inject(MAT_DIALOG_DATA) public data: any) {}
 
-  constructor(
-    public dialogRef: MatDialogRef<any>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-  ) { }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }

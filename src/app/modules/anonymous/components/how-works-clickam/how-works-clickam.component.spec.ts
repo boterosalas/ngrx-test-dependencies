@@ -10,13 +10,9 @@ describe('HowWorksClickamComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HowWorksClickamComponent ],
-      imports: [
-        TranslateModule.forRoot(),
-        SlickCarouselModule
-      ]
-    })
-    .compileComponents();
+      declarations: [HowWorksClickamComponent],
+      imports: [TranslateModule.forRoot(), SlickCarouselModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -32,5 +28,4 @@ describe('HowWorksClickamComponent', () => {
   afterAll(() => {
     TestBed.resetTestingModule();
   });
-
 });

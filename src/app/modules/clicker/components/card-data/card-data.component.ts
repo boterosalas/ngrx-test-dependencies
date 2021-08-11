@@ -3,11 +3,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-card-data',
   templateUrl: './card-data.component.html',
-  styleUrls: ['./card-data.component.scss']
+  styleUrls: ['./card-data.component.scss'],
 })
 export class CardDataComponent implements OnInit {
-
-  constructor() { }
+  constructor() {}
 
   @Input() number: string;
   @Input() text: string;
@@ -19,17 +18,12 @@ export class CardDataComponent implements OnInit {
   @Input() totalLinks: number;
   @Input() totalProducts: number;
 
-
   @Input() total: boolean;
-  @Output() openDetail = new EventEmitter;
+  @Output() openDetail = new EventEmitter();
 
-  ngOnInit() {
-
-  }
-
+  ngOnInit() {}
 
   public detail() {
     this.openDetail.emit();
   }
-
 }

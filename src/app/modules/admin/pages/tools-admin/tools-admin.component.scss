@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .w-icon {
   width: 30px;
@@ -73,7 +73,8 @@
   color: $gray4;
 }
 
-.icon-date, .tio-watch_later {
+.icon-date,
+.tio-watch_later {
   color: $purple2;
 }
 
@@ -108,7 +109,7 @@
   }
 
   .border-input:disabled {
-    color: rgba(0,0,0,.38);
+    color: rgba(0, 0, 0, 0.38);
   }
 }
 

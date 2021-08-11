@@ -11,14 +11,9 @@ describe('TableHistorialComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TableHistorialComponent ],
-      imports: [
-        TranslateModule.forRoot({}),
-        AppMaterialModule,
-        NgxPaginationModule
-      ]
-    })
-    .compileComponents();
+      declarations: [TableHistorialComponent],
+      imports: [TranslateModule.forRoot({}), AppMaterialModule, NgxPaginationModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -36,6 +31,4 @@ describe('TableHistorialComponent', () => {
     component.userInfo([]);
     expect(component.dataUser.emit).toHaveBeenCalled();
   });
-  
-
 });

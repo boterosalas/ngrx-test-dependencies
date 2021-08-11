@@ -1,6 +1,6 @@
-@import "variables";
-@import "general";
-@import "animations";
+@import 'variables';
+@import 'general';
+@import 'animations';
 
 .border-input {
   border: none;
@@ -65,7 +65,7 @@
 }
 .mat-select-arrow {
   border: none !important;
-  background: url("/assets/img/icon-arrow-down.svg") no-repeat !important;
+  background: url('/assets/img/icon-arrow-down.svg') no-repeat !important;
   width: 26px !important;
   height: 26px !important;
   background-size: 25px;
@@ -89,4 +89,3 @@
   position: relative;
   bottom: 4px;
 }
-

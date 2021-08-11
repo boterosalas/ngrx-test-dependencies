@@ -1,49 +1,45 @@
-import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { RouterTestingModule } from "@angular/router/testing";
-import { of } from "rxjs";
-import { ContentService } from "src/app/services/content.service";
-import { ClickerModule } from "../../clicker.module";
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs';
+import { ContentService } from 'src/app/services/content.service';
+import { ClickerModule } from '../../clicker.module';
 
-import { NotificationsComponent } from "./notifications.component";
+import { NotificationsComponent } from './notifications.component';
 
-describe("NotificationsComponent", () => {
+describe('NotificationsComponent', () => {
   let component: NotificationsComponent;
   let fixture: ComponentFixture<NotificationsComponent>;
 
-  const mockContentService = jasmine.createSpyObj("ContentService", [
-    "getNotificationAdmin",
-    "viewNotification",
-    "deleteNotificationUser"
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getNotificationAdmin', 'viewNotification', 'deleteNotificationUser']);
 
   let response = {
-    state: "Success",
-    userMessage: "Se han guardado los cambios satisfactoriamente",
+    state: 'Success',
+    userMessage: 'Se han guardado los cambios satisfactoriamente',
     objectResponse: null,
   };
 
   let respGetNotification = {
-    state: "Success",
+    state: 'Success',
     userMessage: null,
     objectResponse: {
       scheduled: [
         {
           id: 1,
-          datepublish: "2021-07-23T16:00:00",
+          datepublish: '2021-07-23T16:00:00',
           datestart: null,
           dateend: null,
-          filter: "PERSONALIZADO",
+          filter: 'PERSONALIZADO',
           idnotification: 1,
-          content: "ppppp",
-          date: "2021-07-22T16:45:02",
+          content: 'ppppp',
+          date: '2021-07-22T16:45:02',
           publish: false,
-          title: "programada editada 2",
+          title: 'programada editada 2',
           userid: 0,
           viewed: false,
           dateviewed: null,
-          url: "https://webclickamdev.blob.core.windows.net/files-excel/filter-notifications/20210722164501_ImportarNotificaciones.xlsx",
+          url: 'https://webclickamdev.blob.core.windows.net/files-excel/filter-notifications/20210722164501_ImportarNotificaciones.xlsx',
         },
       ],
       published: [
@@ -52,16 +48,16 @@ describe("NotificationsComponent", () => {
           datepublish: null,
           datestart: null,
           dateend: null,
-          filter: "PERSONALIZADO",
+          filter: 'PERSONALIZADO',
           idnotification: 5,
-          content: "file",
-          date: "2021-07-22T17:01:14",
+          content: 'file',
+          date: '2021-07-22T17:01:14',
           publish: true,
-          title: "file",
+          title: 'file',
           userid: 0,
           viewed: false,
           dateviewed: null,
-          url: "https://webclickamdev.blob.core.windows.net/files-excel/filter-notifications/20210722170113_ImportarNotificaciones.xlsx",
+          url: 'https://webclickamdev.blob.core.windows.net/files-excel/filter-notifications/20210722170113_ImportarNotificaciones.xlsx',
         },
       ],
     },
@@ -84,7 +80,7 @@ describe("NotificationsComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
     expect(mockContentService.getNotificationAdmin).toHaveBeenCalled();
   });
@@ -94,19 +90,18 @@ describe("NotificationsComponent", () => {
       title: 'test',
       date: '21/21/21',
       content: 'prueba',
-      id: '1'
-    }
+      id: '1',
+    };
     component.showNotification(data);
     expect(mockContentService.viewNotification).toHaveBeenCalled();
   });
 
   it('delete notification', () => {
     component.deleteNotication();
-    expect( mockContentService.deleteNotificationUser).toHaveBeenCalled();
+    expect(mockContentService.deleteNotificationUser).toHaveBeenCalled();
   });
-  
+
   afterAll(() => {
     TestBed.resetTestingModule();
   });
-
 });

@@ -3,17 +3,12 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-resume',
   templateUrl: './resume.component.html',
-  styleUrls: ['./resume.component.scss']
+  styleUrls: ['./resume.component.scss'],
 })
 export class ResumeComponent implements OnInit {
+  @Input() resume: object;
 
-  @Input() resume:object;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-  
-
+  ngOnInit() {}
 }

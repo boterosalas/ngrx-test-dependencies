@@ -1,24 +1,24 @@
 @import 'variables';
 
-.op{
-    opacity: 0.8;
+.op {
+  opacity: 0.8;
 }
 
-.active-topic{
-    color: $primary-color;
-    font-family: $font-galano-bold;
-    &::before{
-        content: "";
-        background: $secondary-color;
-        width: 3px;
-        height: 25px;
-        position: absolute;
-        left: 0;
-        top: 5px;
-        border-radius: 1px;
-    }
+.active-topic {
+  color: $primary-color;
+  font-family: $font-galano-bold;
+  &::before {
+    content: '';
+    background: $secondary-color;
+    width: 3px;
+    height: 25px;
+    position: absolute;
+    left: 0;
+    top: 5px;
+    border-radius: 1px;
+  }
 }
 
 .head {
-    height: 35px !important;
+  height: 35px !important;
 }

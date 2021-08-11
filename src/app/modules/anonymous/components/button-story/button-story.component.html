@@ -1,9 +1,4 @@
-<button 
-  *ngIf="story"
-  id="button-business-{{index}}"
-  class="story-button {{ story.stateView ? 'new' : 'viewed' }}"
-  (click)="viewStory()"
->
-  <span class="image-container"><img [src]="story.businessImage" [alt]="story.businessName"></span>
+<button *ngIf="story" id="button-business-{{ index }}" class="story-button {{ story.stateView ? 'new' : 'viewed' }}" (click)="viewStory()">
+  <span class="image-container"><img [src]="story.businessImage" [alt]="story.businessName" /></span>
   <h4>{{ story.businessName }}</h4>
 </button>

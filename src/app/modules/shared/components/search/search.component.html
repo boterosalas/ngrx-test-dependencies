@@ -1,8 +1,4 @@
-<form
-  [formGroup]="searchForm"
-  fxLayoutAlign="start"
-  class="search card-search mb-3 mt-2"
->
+<form [formGroup]="searchForm" fxLayoutAlign="start" class="search card-search mb-3 mt-2">
   <mat-form-field appearance="outline" class="w-100">
     <span fxLayoutAlign="center space-between">
       <input
@@ -19,49 +15,26 @@
         id="BtnSearch"
         class="lupa"
       >
-        <mat-icon matSuffix class="mr-1 orange-text cursor-pointer"
-          >search</mat-icon
-        >
+        <mat-icon matSuffix class="mr-1 orange-text cursor-pointer">search</mat-icon>
       </button>
     </span>
-    <mat-error
-      id="searchErrorMin"
-      *ngIf="
-        searchForm.controls.search.invalid &&
-        searchForm.controls.search.errors.minlength
-      "
-      >{{
-        "GENERIC.MIN_CHARACTERS"
-          | translate
-            : {
-                minchar:
-                  searchForm.controls.search.errors.minlength.requiredLength
-              }
-      }}</mat-error
-    >
-    <mat-error
-      id="searchErrorMax"
-      *ngIf="
-        searchForm.controls.search.invalid &&
-        searchForm.controls.search.errors.maxlength
-      "
-      >{{
-        "GENERIC.MAX_CHARACTERS"
-          | translate
-            : {
-                maxchar:
-                  searchForm.controls.search.errors.maxlength.requiredLength
-              }
-      }}</mat-error
-    >
-    <mat-error
-      id="searchErrorPattern"
-      *ngIf="
-        searchForm.controls.search.invalid &&
-        searchForm.controls.search.errors.pattern
-      "
-      >{{ "GENERIC.WHITE_SPACES" | translate }}</mat-error
-    >
+    <mat-error id="searchErrorMin" *ngIf="searchForm.controls.search.invalid && searchForm.controls.search.errors.minlength">{{
+      'GENERIC.MIN_CHARACTERS'
+        | translate
+          : {
+              minchar: searchForm.controls.search.errors.minlength.requiredLength
+            }
+    }}</mat-error>
+    <mat-error id="searchErrorMax" *ngIf="searchForm.controls.search.invalid && searchForm.controls.search.errors.maxlength">{{
+      'GENERIC.MAX_CHARACTERS'
+        | translate
+          : {
+              maxchar: searchForm.controls.search.errors.maxlength.requiredLength
+            }
+    }}</mat-error>
+    <mat-error id="searchErrorPattern" *ngIf="searchForm.controls.search.invalid && searchForm.controls.search.errors.pattern">{{
+      'GENERIC.WHITE_SPACES' | translate
+    }}</mat-error>
   </mat-form-field>
   <!-- <button mat-raised-button color="orange" class="ml-3" id="BtnSearch"
         [disabled]="!searchForm.valid || searchForm.value.search===''" (click)="searchProduct()">{{ "GENERIC.SEARCH" | translate }}</button> -->

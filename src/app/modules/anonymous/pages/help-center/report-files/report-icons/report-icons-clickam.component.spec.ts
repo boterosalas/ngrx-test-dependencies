@@ -21,10 +21,9 @@ describe('ReportIconsClickamComponent', () => {
         AppMaterialModule,
         AnonymousModule,
         BrowserAnimationsModule,
-        RouterTestingModule
-      ]
-    })
-      .compileComponents();
+        RouterTestingModule,
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

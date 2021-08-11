@@ -2,28 +2,23 @@
   <span
     routerLink="logros"
     (click)="hide()"
-    *ngIf="
-      (auth.getRole$ | async) !== 'ADMIN' &&
-      (auth.getRole$ | async) !== 'SUPERADMIN' &&
-      auth.isLoggedIn()
-    "
+    *ngIf="(auth.getRole$ | async) !== 'ADMIN' && (auth.getRole$ | async) !== 'SUPERADMIN' && auth.isLoggedIn()"
     class="goals gtmHomeClicMenuLightboxtusmedallas"
   >
     <span matPrefix class="pr-2 gtmHomeClicMenuLightboxtusmedallas"
       ><img src="assets/img/gamification/icon-prize-btn-menu.svg" alt="prize"
     /></span>
-    {{ "MEDALS.MEDALS" | translate }}
+    {{ 'MEDALS.MEDALS' | translate }}
   </span>
 
-  <span
-    *ngFor="let item of options; let i = index"
-    class="menu-mobile"
-  >
-
-  <span *ngIf="item.description === 'Sin Grupo'" [ngClass]="{'adminMenu': (auth.getRole$ | async) === 'ADMIN' ||
-  (auth.getRole$ | async) === 'SUPERADMIN' &&
-  auth.isLoggedIn()}">
-        <span
+  <span *ngFor="let item of options; let i = index" class="menu-mobile">
+    <span
+      *ngIf="item.description === 'Sin Grupo'"
+      [ngClass]="{
+        adminMenu: (auth.getRole$ | async) === 'ADMIN' || ((auth.getRole$ | async) === 'SUPERADMIN' && auth.isLoggedIn())
+      }"
+    >
+      <span
         *ngFor="let item of item.menus; let i = index"
         routerLinkActive="active"
         routerLink="{{ item.route }}"
@@ -31,35 +26,29 @@
         class="menu-mobile"
         matRipple
       >
-      <span *ngIf="showIcon">
-        <img src="assets/img/dashboard/icon-{{ i }}.svg" alt="icon" />
+        <span *ngIf="showIcon">
+          <img src="assets/img/dashboard/icon-{{ i }}.svg" alt="icon" />
+        </span>
+        <a mat-list-item ngClass="cursor-pointer gtmHomeClicMenuLightbox{{ item.name }} f-16 {{ item.name }}" id="{{ section }}{{ i }}">
+          <span fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="gtmHomeClicMenuLightbox{{ item.name }}">
+            <i *ngIf="item.icon" ngClass="{{ item.icon }} icmen"></i>
+            {{ item.name }}</span
+          ></a
+        >
       </span>
-      <a
-        mat-list-item
-        ngClass="cursor-pointer gtmHomeClicMenuLightbox{{ item.name }} f-16 {{
-          item.name
-        }}"
-        id="{{ section }}{{ i }}"
-      >
-        <span fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="gtmHomeClicMenuLightbox{{ item.name }}">
-          <i *ngIf="item.icon" ngClass="{{item.icon}} icmen"></i>
-          {{
-          item.name
-        }}</span></a
-      >
-    </span>
     </span>
 
     <span *ngIf="item.description !== 'Sin Grupo'">
-
       <mat-accordion *ngIf="item.menus !== null">
         <mat-expansion-panel class="no-bg">
-          <mat-expansion-panel-header [ngClass]="{'adminMenu': (auth.getRole$ | async) === 'ADMIN' ||
-          (auth.getRole$ | async) === 'SUPERADMIN' &&
-          auth.isLoggedIn()}">
+          <mat-expansion-panel-header
+            [ngClass]="{
+              adminMenu: (auth.getRole$ | async) === 'ADMIN' || ((auth.getRole$ | async) === 'SUPERADMIN' && auth.isLoggedIn())
+            }"
+          >
             <mat-panel-title>
               <span fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="{{ item.description }} f-16">
-                <i *ngIf="item.icon" ngClass="{{item.icon}} icsub"></i>
+                <i *ngIf="item.icon" ngClass="{{ item.icon }} icsub"></i>
                 {{ item.description }}
               </span>
             </mat-panel-title>
@@ -73,23 +62,18 @@
                 class="menu-mobile"
                 ngClass="gtmHomeClicMenuLightbox{{ item.name }} "
                 matRipple
-                  >{{ item.name }}</span
+                >{{ item.name }}</span
               >
             </mat-list-item>
           </mat-list>
         </mat-expansion-panel>
       </mat-accordion>
     </span>
-
   </span>
-
 
   <span class="menu-mobile">
     <a
-      *ngIf="
-        (auth.getRole$ | async) !== 'ADMIN' &&
-        (auth.getRole$ | async) !== 'SUPERADMIN'
-      "
+      *ngIf="(auth.getRole$ | async) !== 'ADMIN' && (auth.getRole$ | async) !== 'SUPERADMIN'"
       mat-list-item
       rel="noopener noreferrer"
       href="https://api.whatsapp.com/send?phone=573052559105&text=Hola,%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20Clickam."
@@ -102,16 +86,11 @@
     >
   </span>
 
-  <span
-    *ngIf="
-      (auth.getRole$ | async) !== 'ADMIN' &&
-      (auth.getRole$ | async) !== 'SUPERADMIN'
-    "
-  >
+  <span *ngIf="(auth.getRole$ | async) !== 'ADMIN' && (auth.getRole$ | async) !== 'SUPERADMIN'">
     <mat-card class="mt-2">
-      <h3 class="f-16 mb-2 hc">{{ "GENERIC.SUPPORT" | translate }}</h3>
-      <p class="f-12 m-0">{{ "GENERIC.TEXT_SUPPORT" | translate }}</p>
-      <p class="f-12 m-0 black">{{ "GENERIC.EMAIL_SUPPORT" | translate }}</p>
+      <h3 class="f-16 mb-2 hc">{{ 'GENERIC.SUPPORT' | translate }}</h3>
+      <p class="f-12 m-0">{{ 'GENERIC.TEXT_SUPPORT' | translate }}</p>
+      <p class="f-12 m-0 black">{{ 'GENERIC.EMAIL_SUPPORT' | translate }}</p>
     </mat-card>
   </span>
 </div>

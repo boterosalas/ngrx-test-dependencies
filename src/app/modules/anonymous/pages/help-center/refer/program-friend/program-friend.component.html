@@ -1,23 +1,38 @@
-<app-banner title="{{'BANNERS.HELP_CENTER' | translate}}" img="/assets/img/banners/centro-ayuda-pc.jpg" imgMobile="/assets/img/banners/centro-ayuda-mobile.jpg"></app-banner>
+<app-banner
+  title="{{ 'BANNERS.HELP_CENTER' | translate }}"
+  img="/assets/img/banners/centro-ayuda-pc.jpg"
+  imgMobile="/assets/img/banners/centro-ayuda-mobile.jpg"
+></app-banner>
 <div class="container">
-    <div fxLayout.gt-xs="row" fxLayoutGap.gt-xs="30px" ngClass.gt-xs="mt-3">
-        <span fxHide.gt-xs="true">
-            <button mat-button [routerLink]="[ '/centro-de-ayuda/refiere-a-un-amigo']">
-                <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
-                    <mat-icon>keyboard_arrow_left</mat-icon>
-                    {{ "BUTTONS.BACK" | translate}}
-                </span>
-            </button>
+  <div fxLayout.gt-xs="row" fxLayoutGap.gt-xs="30px" ngClass.gt-xs="mt-3">
+    <span fxHide.gt-xs="true">
+      <button mat-button [routerLink]="['/centro-de-ayuda/refiere-a-un-amigo']">
+        <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon>keyboard_arrow_left</mat-icon>
+          {{ "BUTTONS.BACK" | translate}}
         </span>
-        <div fxLayout.gt-xs="column" fxFlex.gt-xs="25" fxShow.gt-xs="true" fxShow.xs="false">
-            <app-menu-help-center></app-menu-help-center>
-        </div>
-        <div fxLayout.gt-xs="column">
-            <span fxLayout="row">
-                <img src="/assets/img/ayuda/refiere-un-amigo/refiere-tu-amigo.svg" alt="{{'HELP_CENTER.REFER.PROGRAM_TITLE' | translate}}">
-                <h3 class="f-20">{{'HELP_CENTER.REFER.PROGRAM_TITLE' | translate}}</h3>
-            </span>
-            <div innerHtml="{{'HELP_CENTER.REFER.PROGRAM_TEXT' | translate: { sale: amountReferred | currency : '' : 'symbol' : '1.0-0', amount: amount | currency : '' : 'symbol' : '1.0-0' } }}"></div>
-        </div>
+      </button>
+    </span>
+    <div fxLayout.gt-xs="column" fxFlex.gt-xs="25" fxShow.gt-xs="true" fxShow.xs="false">
+      <app-menu-help-center></app-menu-help-center>
     </div>
+    <div fxLayout.gt-xs="column">
+      <span fxLayout="row">
+        <img src="/assets/img/ayuda/refiere-un-amigo/refiere-tu-amigo.svg" alt="{{ 'HELP_CENTER.REFER.PROGRAM_TITLE' | translate }}" />
+        <h3 class="f-20">
+          {{ 'HELP_CENTER.REFER.PROGRAM_TITLE' | translate }}
+        </h3>
+      </span>
+      <div
+        innerHtml="{{
+          'HELP_CENTER.REFER.PROGRAM_TEXT'
+            | translate
+              : {
+                  sale: amountReferred | currency: '':'symbol':'1.0-0',
+                  amount: amount | currency: '':'symbol':'1.0-0'
+                }
+        }}"
+      ></div>
+    </div>
+  </div>
 </div>

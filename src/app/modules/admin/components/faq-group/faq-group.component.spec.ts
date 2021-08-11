@@ -13,34 +13,28 @@ describe('FaqGroupComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [FaqGroupComponent],
-      imports: [
-        HttpClientTestingModule,
-        TranslateModule.forRoot({}),
-        BrowserAnimationsModule
-      ],
-      providers:[],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ]
-    })
-    .compileComponents();
+      imports: [HttpClientTestingModule, TranslateModule.forRoot({}), BrowserAnimationsModule],
+      providers: [],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FaqGroupComponent);
     component = fixture.componentInstance;
     component.section = {
-        items: [
-          {
-              "id": 5,
-              "idfaqsection": 2,
-              "sectiontitle": "¿Cómo me puedo registrar?",
-              "sectionvalue": "Para registrarte, debes descargar la aplicación Clickam en tu celular o ir a la página www.clickam.com.co, clickear en “Iniciar sesión”, y seleccionar registrarse, completa el formulario, recuerda que tu contraseña debe contener por lo menos 6 caracteres, con mínimo una letra mayúscula, letra minúscula y un número; por ejemplo: Clickam1.Te llegará un correo para activarte, debes tener en cuenta que este correo puede estar en “No deseados” o “spam” por ser un nuevo remitente.Cuando te registras y activas tu cuenta, te conviertes en Clicker.",
-              "orderby": 0,
-              "date": "2021-07-16T08:27:27.293"
-          }
-      ]
-    }
+      items: [
+        {
+          id: 5,
+          idfaqsection: 2,
+          sectiontitle: '¿Cómo me puedo registrar?',
+          sectionvalue:
+            'Para registrarte, debes descargar la aplicación Clickam en tu celular o ir a la página www.clickam.com.co, clickear en “Iniciar sesión”, y seleccionar registrarse, completa el formulario, recuerda que tu contraseña debe contener por lo menos 6 caracteres, con mínimo una letra mayúscula, letra minúscula y un número; por ejemplo: Clickam1.Te llegará un correo para activarte, debes tener en cuenta que este correo puede estar en “No deseados” o “spam” por ser un nuevo remitente.Cuando te registras y activas tu cuenta, te conviertes en Clicker.',
+          orderby: 0,
+          date: '2021-07-16T08:27:27.293',
+        },
+      ],
+    };
 
     fixture.detectChanges();
   });
@@ -72,5 +66,4 @@ describe('FaqGroupComponent', () => {
     component.previewItem({});
     expect(component.previewItems.emit).toHaveBeenCalled();
   });
-
 });

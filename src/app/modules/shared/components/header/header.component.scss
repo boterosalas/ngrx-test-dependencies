@@ -1,5 +1,5 @@
-@import "variables";
-@import "general";
+@import 'variables';
+@import 'general';
 
 .position-absolute {
   position: absolute;
@@ -63,7 +63,7 @@ header {
   line-height: 0;
   &::before {
     border: 1px solid $primary-color;
-    content: "";
+    content: '';
     padding: 2px;
     width: 36px;
     height: 36px;
@@ -123,7 +123,7 @@ header {
 }
 
 .iconContainer {
-  background-color: #9AAACF29;
+  background-color: #9aaacf29;
   border-radius: 50%;
   height: 35px;
   width: 36px;
@@ -136,13 +136,13 @@ header {
 .icon {
   font-size: 22px;
   font-weight: $font-weight-bold;
-  color: $purple2;  
+  color: $purple2;
 }
 
 .links {
   list-style-type: none;
   padding-left: 0;
-  
+
   a {
     font-weight: $font-weight-bold;
     text-decoration: none;
@@ -153,7 +153,7 @@ header {
 .btnRegister {
   background-color: $purple2;
   box-shadow: 0px 3px 9px #3a226a80;
-    color: white !important;
+  color: white !important;
 }
 
 .loginButtons {
@@ -175,7 +175,7 @@ header {
     color: $color-p;
   }
 
-  .title-notification{
+  .title-notification {
     color: $primary-color;
     text-transform: uppercase;
     padding: 10px;
@@ -183,9 +183,9 @@ header {
     font-family: $font-galano-bold;
   }
 
-  .title-inner{
+  .title-inner {
     font-size: 12px;
-    color: #534F5C;
+    color: #534f5c;
     display: block;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -194,12 +194,11 @@ header {
     max-width: 160px;
   }
 
-  .date{
+  .date {
     font-size: 10px;
-    color: #A7A3B1;
+    color: #a7a3b1;
     display: block;
   }
-
 }
 
 @media screen and (min-width: 600px) {
@@ -249,36 +248,35 @@ header {
   }
 }
 
-
-.icon-props{
-  color: #8D7EB7;
+.icon-props {
+  color: #8d7eb7;
   font-size: 20px;
 }
 
-.icr{
-  color:#FD5555;
+.icr {
+  color: #fd5555;
   font-size: 12px;
 }
 
-.separate{
+.separate {
   padding: 2px 0;
-  border-top: 1px solid #F3F1F6;
+  border-top: 1px solid #f3f1f6;
   display: block;
 }
 
-.open-notifications{
-    font-size: 12px;
-    min-width: 280px;
-    text-align: center;
-    color: #8D7EB7 !important;
+.open-notifications {
+  font-size: 12px;
+  min-width: 280px;
+  text-align: center;
+  color: #8d7eb7 !important;
 }
 
-.not-notifications{
-  color: #A7A3B1;
-  i{
+.not-notifications {
+  color: #a7a3b1;
+  i {
     font-size: 2rem;
   }
-  p{
+  p {
     font-size: 18px;
     text-align: center;
   }

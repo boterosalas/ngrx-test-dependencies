@@ -19,36 +19,42 @@ describe('RefersComponent', () => {
   let component: RefersComponent;
   let fixture: ComponentFixture<RefersComponent>;
 
-  const mockLinksService = jasmine.createSpyObj("LinksService", ["getReportReferral", "getAmount", "saveAmountCommission", "saveAmountReferred", "getReportReferral"]);
+  const mockLinksService = jasmine.createSpyObj('LinksService', [
+    'getReportReferral',
+    'getAmount',
+    'saveAmountCommission',
+    'saveAmountReferred',
+    'getReportReferral',
+  ]);
 
   const report = {
-    state: "Success",
-    userMessage: "se ha enviado un correo",
-    objectResponse: []
+    state: 'Success',
+    userMessage: 'se ha enviado un correo',
+    objectResponse: [],
   };
 
   const reportError = {
-    state: "Error",
-    userMessage: "No se ha enviado un correo",
-    objectResponse: []
+    state: 'Error',
+    userMessage: 'No se ha enviado un correo',
+    objectResponse: [],
   };
 
   const saveCommision = {
-    state: "Success",
-    userMessage: "se ha guardado",
-    objectResponse: []
+    state: 'Success',
+    userMessage: 'se ha guardado',
+    objectResponse: [],
   };
 
   const saveCommisionError = {
-    state: "Error",
-    userMessage: "Ha ocurrido un error",
-    objectResponse: []
+    state: 'Error',
+    userMessage: 'Ha ocurrido un error',
+    objectResponse: [],
   };
 
   let amount = {
     amountsCommission: 10000,
-    amountsReferred: 500000
-  }
+    amountsReferred: 500000,
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -66,27 +72,25 @@ describe('RefersComponent', () => {
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
-              return localStorage.getItem("ACCESS_TOKEN");
+              return localStorage.getItem('ACCESS_TOKEN');
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
-            blacklistedRoutes: []
-          }
-        })],
+            blacklistedRoutes: [],
+          },
+        }),
+      ],
       providers: [
         { provide: LinksService, useValue: mockLinksService },
         { provide: LOCALE_CONFIG, useValue: config },
         {
           provide: LocaleService,
           useClass: LocaleService,
-          deps: [LOCALE_CONFIG]
-        }
+          deps: [LOCALE_CONFIG],
+        },
       ],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ]
-    })
-      .compileComponents();
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
     mockLinksService.getAmount.and.returnValue(of(amount));
   }));
 
@@ -128,5 +132,4 @@ describe('RefersComponent', () => {
   afterAll(() => {
     TestBed.resetTestingModule();
   });
-
 });

@@ -12,15 +12,9 @@ describe('TableHistoricalLinksComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TableHistoricalLinksComponent ],
-      imports: [
-        AppMaterialModule, 
-        TranslateModule.forRoot(),
-        SharedModule,
-        NgxPaginationModule
-      ]
-    })
-    .compileComponents();
+      declarations: [TableHistoricalLinksComponent],
+      imports: [AppMaterialModule, TranslateModule.forRoot(), SharedModule, NgxPaginationModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

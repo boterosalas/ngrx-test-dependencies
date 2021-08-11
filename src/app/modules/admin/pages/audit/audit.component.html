@@ -10,32 +10,24 @@
   <div fxLayout="row" class="pl-3">
     <form [formGroup]="dateForm" class="downloadUsers">
       <mat-form-field class="ml-2">
-        <mat-select
-          (selectionChange)="change()"
-          placeholder="Tipo de Reporte"
-          formControlName="typeRepor"
-          class="selected-report"
-        >
-          <mat-option
-            *ngFor="let selected of selecteds"
-            value="{{ selected.value }}"
-          >
+        <mat-select (selectionChange)="change()" placeholder="Tipo de Reporte" formControlName="typeRepor" class="selected-report">
+          <mat-option *ngFor="let selected of selecteds" value="{{ selected.value }}">
             <span>{{ selected.titulo }}</span>
           </mat-option>
         </mat-select>
       </mat-form-field>
       <span *ngIf="showDate">
-      <i class="tio-date_range icon-date"></i>
-      <input
-        formControlName="dateRange"
-        [locale]="locale"
-        placeholder="Seleccione fechas"
-        type="text"
-        [maxDate]="maxDate"
-        ngxDaterangepickerMd
-        class="form-control border-input mat-elevation-z1 p-2 border-radius"
-      />
-    </span>
+        <i class="tio-date_range icon-date"></i>
+        <input
+          formControlName="dateRange"
+          [locale]="locale"
+          placeholder="Seleccione fechas"
+          type="text"
+          [maxDate]="maxDate"
+          ngxDaterangepickerMd
+          class="form-control border-input mat-elevation-z1 p-2 border-radius"
+        />
+      </span>
       <button
         mat-raised-button
         color="orange"

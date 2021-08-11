@@ -6,11 +6,7 @@
     <p class="navigation__actions">ACCIONES</p>
   </header>
   <div class="navigation__content">
-    <div
-      class="navigation__list-sections"
-      cdkDropList
-      (cdkDropListDropped)="dropItem($event)"
-    >
+    <div class="navigation__list-sections" cdkDropList (cdkDropListDropped)="dropItem($event)">
       <app-navigation-item
         *ngFor="let item of links"
         [link]="item"
@@ -21,11 +17,7 @@
       ></app-navigation-item>
     </div>
 
-    <div
-      class="navigation__list-sections"
-      cdkDropList
-      (cdkDropListDropped)="dropSection($event)"
-    >
+    <div class="navigation__list-sections" cdkDropList (cdkDropListDropped)="dropSection($event)">
       <app-navigation-group
         *ngFor="let section of sectionsLinks"
         [section]="section"
@@ -40,30 +32,10 @@
       >
       </app-navigation-group>
     </div>
-    <div
-      fxLayout="row"
-      fxLayoutAlign.gt-xs="end center"
-      fxLayoutAlign.xs="center center"
-      class="container button-padding mb-4"
-    >
-      <button
-        mat-raised-button
-        color="orange"
-        class="ml-2"
-        (click)="addNavigationItem('NuevoMenu')"
-      >
-        Nuevo acceso
-      </button>
+    <div fxLayout="row" fxLayoutAlign.gt-xs="end center" fxLayoutAlign.xs="center center" class="container button-padding mb-4">
+      <button mat-raised-button color="orange" class="ml-2" (click)="addNavigationItem('NuevoMenu')">Nuevo acceso</button>
 
-      <button
-        mat-raised-button
-        color="orange"
-        class="ml-2"
-        [disabled]="isInvalidAddSection"
-        (click)="addSection()"
-      >
-        Nuevo grupo
-      </button>
+      <button mat-raised-button color="orange" class="ml-2" [disabled]="isInvalidAddSection" (click)="addSection()">Nuevo grupo</button>
     </div>
   </div>
 </div>
@@ -71,9 +43,7 @@
 <ng-template #templateDeleteNavigationGroup>
   <div ngClass="delete-container">
     <h3 ngClass="title_delete">Eliminar grupo</h3>
-    <p ngClass="text-container">
-      ¿Está seguro que desea eliminar el grupo seleccionado?
-    </p>
+    <p ngClass="text-container">¿Está seguro que desea eliminar el grupo seleccionado?</p>
     <div
       fxLayout="row"
       fxLayout.xs="column"
@@ -83,16 +53,10 @@
       class="center-buttons"
     >
       <div ngClass="mt-3 mb-2 hide-button-on-mobile">
-        <button mat-button ngClass="button_cancel" (click)="cancelDelete()">
-          Cancelar
-        </button>
+        <button mat-button ngClass="button_cancel" (click)="cancelDelete()">Cancelar</button>
       </div>
       <div>
-        <button
-          mat-button
-          class="red"
-          (click)="deleteNavigationSectionService()"
-        >
+        <button mat-button class="red" (click)="deleteNavigationSectionService()">
           <span fxLayoutAlign="center space-between"> Eliminar grupo </span>
         </button>
       </div>
@@ -103,9 +67,7 @@
 <ng-template #templateDeleteNavigationItem>
   <div ngClass="delete-container">
     <h3 ngClass="title_delete">Eliminar acceso</h3>
-    <p ngClass="text-container">
-      ¿Está seguro que desea eliminar el acceso seleccionado?
-    </p>
+    <p ngClass="text-container">¿Está seguro que desea eliminar el acceso seleccionado?</p>
     <div
       fxLayout="row"
       fxLayout.xs="column"
@@ -115,9 +77,7 @@
       class="center-buttons"
     >
       <div ngClass="mt-3 mb-2 hide-button-on-mobile">
-        <button mat-button ngClass="button_cancel" (click)="cancelDelete()">
-          Cancelar
-        </button>
+        <button mat-button ngClass="button_cancel" (click)="cancelDelete()">Cancelar</button>
       </div>
       <div>
         <button mat-button class="red" (click)="deleteNavigationItemService()">

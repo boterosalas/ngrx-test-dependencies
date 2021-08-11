@@ -1,35 +1,19 @@
 <!-- Sliders Web -->
 
 <div fxShow.xs="false" class="no-focus">
-      <ngx-slick-carousel
-        class="carousel"
-        #slickModal="slick-carousel"
-        [config]="slideConfig"
-      >
-        <div
-          ngxSlickItem
-          *ngFor="let slide of sliderWeb; let i = index"
-          class="slide text-center"
-        >
-        <img [src]="slide" class="rounded" alt="deliver">
-        </div>
-      </ngx-slick-carousel>
-  </div>
-  
-  <!-- Sliders Mobile -->
-  
-  <div fxShow.gt-xs="false" class="no-focus">
-    <ngx-slick-carousel
-      class="carousel"
-      #slickModal="slick-carousel"
-      [config]="slideConfig"
-    >
-      <div
-        ngxSlickItem
-        *ngFor="let slide of sliderMobile; let i = index"
-        class="slide text-center pl-3"
-      >
-      <img [src]="slide" class="rounded" alt="deliver">
-      </div>
-    </ngx-slick-carousel>
-  </div>
+  <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+    <div ngxSlickItem *ngFor="let slide of sliderWeb; let i = index" class="slide text-center">
+      <img [src]="slide" class="rounded" alt="deliver" />
+    </div>
+  </ngx-slick-carousel>
+</div>
+
+<!-- Sliders Mobile -->
+
+<div fxShow.gt-xs="false" class="no-focus">
+  <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+    <div ngxSlickItem *ngFor="let slide of sliderMobile; let i = index" class="slide text-center pl-3">
+      <img [src]="slide" class="rounded" alt="deliver" />
+    </div>
+  </ngx-slick-carousel>
+</div>

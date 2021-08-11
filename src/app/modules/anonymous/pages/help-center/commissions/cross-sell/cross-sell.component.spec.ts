@@ -14,17 +14,16 @@ describe('CrossSellComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [  ],
-      imports:[
+      declarations: [],
+      imports: [
         TranslateModule.forRoot({}),
         SharedModule,
         AppMaterialModule,
         AnonymousModule,
         BrowserAnimationsModule,
-        RouterTestingModule
-      ]
-    })
-    .compileComponents();
+        RouterTestingModule,
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

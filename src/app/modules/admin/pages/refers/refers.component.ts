@@ -10,17 +10,10 @@ import { UtilsService } from 'src/app/services/utils.service';
 @Component({
   selector: 'app-refers',
   templateUrl: './refers.component.html',
-  styleUrls: ['./refers.component.scss']
+  styleUrls: ['./refers.component.scss'],
 })
 export class RefersComponent implements OnInit, OnDestroy {
-
-  constructor(
-    private fb: FormBuilder,
-    private file: LinksService,
-    private _snackBar: MatSnackBar,
-    public utils: UtilsService
-
-  ) { }
+  constructor(private fb: FormBuilder, private file: LinksService, private _snackBar: MatSnackBar, public utils: UtilsService) {}
 
   locale = {
     locale: 'es',
@@ -33,19 +26,18 @@ export class RefersComponent implements OnInit, OnDestroy {
     customRangeLabel: 'Custom range',
     daysOfWeek: moment.weekdaysMin(),
     monthNames: moment.monthsShort(),
-    firstDay: 1 // first day is monday
-  }
-
+    firstDay: 1, // first day is monday
+  };
 
   private subscription: Subscription = new Subscription();
-  
+
   comissionForm: FormGroup;
   referedForm: FormGroup;
   email: string;
   disButon: boolean;
   amount: number;
   amountMin: number;
-  numberPattern = "^(0|[0-9][0-9]*)$";
+  numberPattern = '^(0|[0-9][0-9]*)$';
 
   ngOnInit() {
     this.comissionClickerForm();
@@ -59,25 +51,15 @@ export class RefersComponent implements OnInit, OnDestroy {
   }
 
   public comissionClickerForm() {
-    this.comissionForm = this.fb.group(
-      {
-        amount: [this.amount, [
-          Validators.required,
-          Validators.pattern(this.numberPattern)
-        ]]
-      }
-    );
+    this.comissionForm = this.fb.group({
+      amount: [this.amount, [Validators.required, Validators.pattern(this.numberPattern)]],
+    });
   }
 
   public referedClickerForm() {
-    this.referedForm = this.fb.group(
-      {
-        refered: [this.amountMin, [
-          Validators.required,
-          Validators.pattern(this.numberPattern)
-        ]]
-      }
-    );
+    this.referedForm = this.fb.group({
+      refered: [this.amountMin, [Validators.required, Validators.pattern(this.numberPattern)]],
+    });
   }
 
   public changeState() {
@@ -85,30 +67,30 @@ export class RefersComponent implements OnInit, OnDestroy {
   }
 
   public getAmountClicker() {
-    this.subscription = this.file.getAmount().subscribe(amount => {
+    this.subscription = this.file.getAmount().subscribe((amount) => {
       this.amount = amount.amountsCommission;
       this.amountMin = amount.amountsReferred;
       this.comissionForm.controls.amount.setValue(this.amount);
       this.referedForm.controls.refered.setValue(this.amountMin);
-    })
+    });
   }
 
   /**
- * Abre el mensaje de confirmacion
- * @param message
- * @param action
- */
+   * Abre el mensaje de confirmacion
+   * @param message mensaje
+   * @param action accion
+   */
 
   private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      duration: 5000
+      duration: 5000,
     });
   }
 
   public saveCommission() {
-    let commission = {
-      amount: this.comissionForm.controls.amount.value
-    }
+    const commission = {
+      amount: this.comissionForm.controls.amount.value,
+    };
     this.subscription = this.file.saveAmountCommission(commission).subscribe((save: ResponseService) => {
       if (save.state === 'Success') {
         this.openSnackBar(save.userMessage, 'Cerrar');
@@ -116,13 +98,13 @@ export class RefersComponent implements OnInit, OnDestroy {
       } else {
         this.openSnackBar(save.userMessage, 'Cerrar');
       }
-    })
+    });
   }
 
   public saveRefered() {
-    let commission = {
-      amount: this.referedForm.controls.refered.value
-    }
+    const commission = {
+      amount: this.referedForm.controls.refered.value,
+    };
     this.subscription = this.file.saveAmountReferred(commission).subscribe((resp: ResponseService) => {
       if (resp.state === 'Success') {
         this.openSnackBar(resp.userMessage, 'Cerrar');
@@ -130,11 +112,10 @@ export class RefersComponent implements OnInit, OnDestroy {
       } else {
         this.openSnackBar(resp.userMessage, 'Cerrar');
       }
-    })
+    });
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 }

@@ -1,31 +1,23 @@
-<div
-  fxLayout="row"
-  fxLayoutAlign="start start"
-  @simpleFadeAnimation
->
-  <mat-card  fxLayout="column" fxFlex="100" class="mt-2 mb-2" fxLayoutAlign="center center">
+<div fxLayout="row" fxLayoutAlign="start start" @simpleFadeAnimation>
+  <mat-card fxLayout="column" fxFlex="100" class="mt-2 mb-2" fxLayoutAlign="center center">
     <mat-card-content class="w-100">
-      
-        <div>
-          <img
-            mat-card-image
-            class="radius"
-            src="{{ image }}"
-            alt="{{ alt }}"
-          />
-        </div>
-      
+      <div>
+        <img mat-card-image class="radius" src="{{ image }}" alt="{{ alt }}" />
+      </div>
 
-      <h3 class="gray regular truncate" id="{{ id }}" matTooltip={{productName}}>{{ productName }}</h3>
-    
-      <button *ngIf="auth.isLoggedIn() && (auth.getRole$ | async ) === 'CLICKER'"
+      <h3 class="gray regular truncate" id="{{ id }}" matTooltip="{{ productName }}">
+        {{ productName }}
+      </h3>
+
+      <button
+        *ngIf="auth.isLoggedIn() && (auth.getRole$ | async) === 'CLICKER'"
         id="{{ btnid }}"
         mat-raised-button
         color="orange"
-        ngClass="{{classButton}}"
+        ngClass="{{ classButton }}"
         (click)="product()"
       >
-        <span  ngClass="{{classButton}}">{{ textbutton }}</span>
+        <span ngClass="{{ classButton }}">{{ textbutton }}</span>
       </button>
     </mat-card-content>
   </mat-card>

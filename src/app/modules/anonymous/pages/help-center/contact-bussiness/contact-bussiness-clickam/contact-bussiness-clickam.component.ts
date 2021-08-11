@@ -3,22 +3,18 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-contact-bussiness-clickam',
   templateUrl: './contact-bussiness-clickam.component.html',
-  styleUrls: ['./contact-bussiness-clickam.component.scss']
+  styleUrls: ['./contact-bussiness-clickam.component.scss'],
 })
 export class ContactBussinessClickamComponent implements OnInit {
-
   contacts = [
     {
-      name: "Contactos de los negocios",
-      route:
-        "/centro-de-ayuda/contacta-los-negocios/contactos-negocios",
-        icon: "/assets/img/ayuda/contactanos/contacta-negocios.svg"
-    }
+      name: 'Contactos de los negocios',
+      route: '/centro-de-ayuda/contacta-los-negocios/contactos-negocios',
+      icon: '/assets/img/ayuda/contactanos/contacta-negocios.svg',
+    },
   ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

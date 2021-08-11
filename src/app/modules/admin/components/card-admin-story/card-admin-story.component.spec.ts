@@ -30,7 +30,6 @@ export class MatDialogMock {
   }
 }
 
-
 describe('CardAdminStoryComponent', () => {
   let component: CardAdminStoryComponent;
   let fixture: ComponentFixture<CardAdminStoryComponent>;
@@ -41,91 +40,81 @@ describe('CardAdminStoryComponent', () => {
 
   const matDialog = new MatDialogMock();
 
-  const mockContentService = jasmine.createSpyObj("ContentService", [
-    "deleteStories",
-    "getBusiness"
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['deleteStories', 'getBusiness']);
 
   let allBusiness = [
     {
       id: 1,
-      code: "exito",
-      imageurl:
-        "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg",
-      infoaditional: "Hasta 9.6% de ganancia",
-      description: "Almacenes Éxito",
+      code: 'exito',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg',
+      infoaditional: 'Hasta 9.6% de ganancia',
+      description: 'Almacenes Éxito',
       orderby: 1,
       active: false,
     },
     {
       id: 14,
-      code: "movil-exito",
-      imageurl:
-        "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-movil-exito.svg",
-      infoaditional: "Ahora 10% de comisión",
-      description: "Móvil Éxito",
+      code: 'movil-exito',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-movil-exito.svg',
+      infoaditional: 'Ahora 10% de comisión',
+      description: 'Móvil Éxito',
       orderby: 5,
       active: true,
     },
     {
       id: 3,
-      code: "seguros",
-      imageurl:
-        "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.svg",
-      infoaditional: "Hasta $32.000 de ganancia",
-      description: "Seguros Éxito",
+      code: 'seguros',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.svg',
+      infoaditional: 'Hasta $32.000 de ganancia',
+      description: 'Seguros Éxito',
       orderby: 3,
       active: true,
     },
     {
       id: 4,
-      code: "viajes",
-      imageurl:
-        "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-viajes.svg",
-      infoaditional: "Hasta $40.000 de ganancia",
-      description: "Viajes Éxito",
+      code: 'viajes',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-viajes.svg',
+      infoaditional: 'Hasta $40.000 de ganancia',
+      description: 'Viajes Éxito',
       orderby: 4,
       active: true,
     },
     {
       id: 5,
-      code: "wesura",
-      imageurl:
-        "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-wesura.svg",
-      infoaditional: "Hasta 12.000 de ganancia",
-      description: "Wesura",
+      code: 'wesura',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-wesura.svg',
+      infoaditional: 'Hasta 12.000 de ganancia',
+      description: 'Wesura',
       orderby: 6,
       active: true,
     },
   ];
 
   const resp = {
-    state: "Success",
-    userMessage: "",
+    state: 'Success',
+    userMessage: '',
     objectResponse: [],
   };
 
   const data = {
-    description: "e1",
+    description: 'e1',
     id: 43,
-    imageurl:
-      "https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210806082635.jpg",
+    imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210806082635.jpg',
     link: null,
     idbusiness: 1,
     infoaditional: null,
     active: true,
     orderby: null,
-    date: "2021-08-06T08:26:35.433",
+    date: '2021-08-06T08:26:35.433',
     new: false,
     datepublish: null,
-    extension: "jpg",
+    extension: 'jpg',
   };
-
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CardAdminStoryComponent, DialogStoryComponent ],
-      imports:[
+      declarations: [CardAdminStoryComponent, DialogStoryComponent],
+      imports: [
         AppMaterialModule,
         HttpClientTestingModule,
         BrowserAnimationsModule,
@@ -137,7 +126,7 @@ describe('CardAdminStoryComponent', () => {
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
-              return localStorage.getItem("ACCESS_TOKEN");
+              return localStorage.getItem('ACCESS_TOKEN');
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
@@ -145,18 +134,20 @@ describe('CardAdminStoryComponent', () => {
           },
         }),
       ],
-      providers:[
+      providers: [
         StoriesComponent,
         { provide: ContentService, useValue: mockContentService },
         { provide: MatDialog, useValue: matDialog },
         { provide: MatDialogRef, useValue: dialogMock },
         { provide: MAT_DIALOG_DATA, useValue: {} },
-      ]
-    }).overrideModule(BrowserDynamicTestingModule, {
-      set: {
-        entryComponents: [DialogStoryComponent]
-      }
-    }).compileComponents();
+      ],
+    })
+      .overrideModule(BrowserDynamicTestingModule, {
+        set: {
+          entryComponents: [DialogStoryComponent],
+        },
+      })
+      .compileComponents();
     mockContentService.deleteStories.and.returnValue(of(resp));
     mockContentService.getBusiness.and.returnValue(of(allBusiness));
   }));
@@ -182,37 +173,35 @@ describe('CardAdminStoryComponent', () => {
   });
 
   it('delete story', () => {
-    spyOn(Swal,"fire").and.returnValue(Promise.resolve<any>({
-      html: "<h3 class='delete-title-comision'>Eliminar contenido</h3> <p class='w-container'>¿Estás seguro de eliminar el contenido seleccionado?</p>",
-      confirmButtonText: "Eliminar contenido",
-      cancelButtonText: "Cancelar",
-      showCancelButton: true,
-      confirmButtonClass: "updateokdelete order-last",
-      cancelButtonClass: "updatecancel",
-      allowOutsideClick: false,
-      type: "success",
-    }));
+    spyOn(Swal, 'fire').and.returnValue(
+      Promise.resolve<any>({
+        html: "<h3 class='delete-title-comision'>Eliminar contenido</h3> <p class='w-container'>¿Estás seguro de eliminar el contenido seleccionado?</p>",
+        confirmButtonText: 'Eliminar contenido',
+        cancelButtonText: 'Cancelar',
+        showCancelButton: true,
+        confirmButtonClass: 'updateokdelete order-last',
+        cancelButtonClass: 'updatecancel',
+        allowOutsideClick: false,
+        type: 'success',
+      })
+    );
     component.deleteStory(data);
     expect(data).not.toBeUndefined();
   });
 
-  
   it('get business', () => {
     component.getBusiness();
     expect(mockContentService.getBusiness).toHaveBeenCalled();
   });
-  
+
   it('check change', () => {
     let event = {
       checked: false,
       source: {
-        value: 1
-      }
+        value: 1,
+      },
     };
     fixture.detectChanges();
     component.onCheckChange(event);
   });
-  
-  
-
 });

@@ -1,6 +1,6 @@
-@import "variables";
-@import "general";
-@import "animations";
+@import 'variables';
+@import 'general';
+@import 'animations';
 
 .border-input {
   border: none;
@@ -148,26 +148,26 @@
   }
 
   .tio-message_failed {
-    color: #9489F4;
+    color: #9489f4;
   }
 
   .tio-info {
-    color: #F48989;
+    color: #f48989;
   }
 
   .tio-time {
-    color: #F4CE89;
+    color: #f4ce89;
   }
 
   .tio-checkmark_circle {
-    color: #85CF3B;
+    color: #85cf3b;
   }
 
   .tio-account_circle {
-    color: #BA8AF4;
+    color: #ba8af4;
   }
 
   .tio-chart_bar_4 {
-    color: #89CAF4;
+    color: #89caf4;
   }
 }

@@ -1,6 +1,6 @@
-@import "animations";
-@import "variables";
-@import "general";
+@import 'animations';
+@import 'variables';
+@import 'general';
 
 .login {
   box-shadow: none !important;
@@ -75,11 +75,11 @@
 }
 
 .main_content {
-  width: 100%; 
-  height: 100vh; 
+  width: 100%;
+  height: 100vh;
   background: #efefef;
 }
 
-.left_menu {  
+.left_menu {
   background-color: $gray3;
 }

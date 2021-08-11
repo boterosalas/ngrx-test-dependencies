@@ -11,18 +11,10 @@ describe('CardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ 
-        CardComponent
-       ],
-       imports: [
-         AppMaterialModule,
-         BrowserAnimationsModule,
-       ],
-       schemas: [
-         NO_ERRORS_SCHEMA
-       ]
-    })
-    .compileComponents();
+      declarations: [CardComponent],
+      imports: [AppMaterialModule, BrowserAnimationsModule],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -40,5 +32,4 @@ describe('CardComponent', () => {
     component.showRegister();
     expect(component.actionButton.emit).toHaveBeenCalled();
   });
-
 });

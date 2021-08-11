@@ -8,42 +8,43 @@ import { ContentService } from 'src/app/services/content.service';
 @Component({
   selector: 'app-dialog-category',
   templateUrl: './dialog-category.component.html',
-  styleUrls: ['./dialog-category.component.scss']
+  styleUrls: ['./dialog-category.component.scss'],
 })
 export class DialogCategoryComponent implements OnInit, OnDestroy {
   constructor(
     private content: ContentService,
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: FormBuilder,
-  ) { }
-  @Output() getContentBussiness = new EventEmitter;
+    private fb: FormBuilder
+  ) {}
+  @Output() getContentBussiness = new EventEmitter();
   datos = true;
   dateForm: FormGroup;
   validFormat: boolean;
   fileImgCat: any;
-  nameFileCert: string = '';
+  nameFileCert = '';
   showErrorCert: boolean;
   activebutton: boolean;
-  statusAc: boolean = true;
-  storageNameFile: string = '';
+  statusAc = true;
+  storageNameFile = '';
   private subscription: Subscription = new Subscription();
-  selecteds = [{
-    titulo: "Porcentaje (%)",
-    value: "PORCENTAJE"
-  }, {
-    titulo: "Fijo ($)",
-    value: "FIJO"
-  }
-  ]
+  selecteds = [
+    {
+      titulo: 'Porcentaje (%)',
+      value: 'PORCENTAJE',
+    },
+    {
+      titulo: 'Fijo ($)',
+      value: 'FIJO',
+    },
+  ];
   ngOnInit() {
     this.loadFormCategory();
   }
   public loadFormCategory() {
-
     if (this.data.edit === 1) {
-      let dataImage = this.data.image;
-      let datosImg = dataImage.split("/")
+      const dataImage = this.data.image;
+      const datosImg = dataImage.split('/');
       this.nameFileCert = datosImg[datosImg.length - 1];
       this.storageNameFile = this.nameFileCert;
       this.statusAc = this.data.active;
@@ -54,13 +55,11 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
         commision: [this.data.comision, Validators.required],
         link: [this.data.link, Validators.required],
         image: [null],
-        commisionBussiness: [this.data.comisionBussines, Validators.required]
+        commisionBussiness: [this.data.comisionBussines, Validators.required],
       });
 
       this.activebutton = true;
-
     } else {
-
       this.dateForm = this.fb.group({
         category: [null, Validators.required],
         description: [null, Validators.required],
@@ -68,7 +67,7 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
         commision: [null, Validators.required],
         link: [null, Validators.required],
         image: [null, Validators.required],
-        commisionBussiness: [null, Validators.required]
+        commisionBussiness: [null, Validators.required],
       });
     }
   }
@@ -77,10 +76,10 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
     this.dialogRef.close();
   }
   private getExtension(nameFile: string, getSize: number) {
-    let splitExt = nameFile.split(".");
-    let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
+    const splitExt = nameFile.split('.');
+    const getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
     this.validFormat = false;
-    if (getExt === "svg" || getExt === "jpg") {
+    if (getExt === 'svg' || getExt === 'jpg') {
       this.validFormat = true;
     }
     if (getSize / 1000 > 100) {
@@ -88,19 +87,19 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
     }
   }
   public onFileChangeFiles(event, param: string) {
-    let nameFile = event.target.files[0].name;
-    let reader = new FileReader();
-    let sizeFile = event.target.files[0].size;
+    const nameFile = event.target.files[0].name;
+    const reader = new FileReader();
+    const sizeFile = event.target.files[0].size;
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      let fileBlob = new Blob([file]);
-      let file2 = new File([fileBlob], nameFile);
+      const fileBlob = new Blob([file]);
+      const file2 = new File([fileBlob], nameFile);
       reader.readAsDataURL(file2);
       reader.onload = () => {
         this.getExtension(nameFile, sizeFile);
         if (this.validFormat === true) {
           this.fileImgCat = reader.result;
-          this.fileImgCat = this.fileImgCat.split(",")[1]
+          this.fileImgCat = this.fileImgCat.split(',')[1];
           this.nameFileCert = nameFile;
           this.showErrorCert = false;
           this.activebutton = true;
@@ -125,9 +124,8 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
         image: this.fileImgCat,
         active: this.statusAc,
         commissionBusiness: this.dateForm.controls.commisionBussiness.value,
-        idBusiness: this.data.idBussiness
-      }
-
+        idBusiness: this.data.idBussiness,
+      };
     } else {
       if (this.fileImgCat) {
         addCategory = {
@@ -141,10 +139,9 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
           imageURL: this.nameFileCert,
           active: this.statusAc,
           commissionBusiness: this.dateForm.controls.commisionBussiness.value,
-          idBusiness: this.data.idBussiness
-        }
+          idBusiness: this.data.idBussiness,
+        };
       } else {
-
         addCategory = {
           id: this.data.id,
           description: this.dateForm.controls.category.value,
@@ -156,12 +153,12 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
           imageURL: '',
           active: this.statusAc,
           commissionBusiness: this.dateForm.controls.commisionBussiness.value,
-          idBusiness: this.data.idBussiness
-        }
+          idBusiness: this.data.idBussiness,
+        };
       }
     }
     this.content.addCategory(addCategory).subscribe((resp: ResponseService) => {
-      if (resp.state === "Success") {
+      if (resp.state === 'Success') {
         this.dialogRef.close();
       }
     });

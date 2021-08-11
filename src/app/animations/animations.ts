@@ -1,50 +1,53 @@
 import { trigger, state, style, transition, animate, animateChild, query } from '@angular/animations';
 
-
 export const onSideNavChange = trigger('onSideNavChange', [
-  state('close',
+  state(
+    'close',
     style({
       'min-width': '30px',
-      'width': '30px'
+      width: '30px',
     })
   ),
-  state('open',
+  state(
+    'open',
     style({
       'min-width': '200px',
-      'width': '200px'
+      width: '200px',
     })
   ),
   transition('close => open', animate('250ms ease-in')),
   transition('open => close', animate('250ms ease-in')),
 ]);
-
 
 export const onMainContentChange = trigger('onMainContentChange', [
-  state('close',
+  state(
+    'close',
     style({
-      'margin-left': '95px'
+      'margin-left': '95px',
     })
   ),
-  state('open',
+  state(
+    'open',
     style({
-      'margin-left': '231px'
+      'margin-left': '231px',
     })
   ),
   transition('close => open', animate('250ms ease-in')),
   transition('open => close', animate('250ms ease-in')),
 ]);
 
-
 export const animateText = trigger('animateText', [
-  state('hide',
+  state(
+    'hide',
     style({
-      'display': 'none',
+      display: 'none',
       opacity: 0,
     })
   ),
-  state('show',
+  state(
+    'show',
     style({
-      'display': 'block',
+      display: 'block',
       opacity: 1,
     })
   ),

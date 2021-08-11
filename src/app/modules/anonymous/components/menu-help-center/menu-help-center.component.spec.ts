@@ -21,11 +21,9 @@ describe('MenuHelpCenterComponent', () => {
         AppMaterialModule,
         AnonymousModule,
         BrowserAnimationsModule,
-        RouterTestingModule
-      ]
-
-    })
-      .compileComponents();
+        RouterTestingModule,
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -37,5 +35,4 @@ describe('MenuHelpCenterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
 });

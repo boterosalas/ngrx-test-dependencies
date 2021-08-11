@@ -1,23 +1,23 @@
 @import 'variables';
 @import 'general';
-@import "mixins";
+@import 'mixins';
 
 .stories-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 0;
-    margin: 15px auto 20px;
-    overflow-x: auto;
-    max-width: min-content;
-    scrollbar-width: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0;
+  margin: 15px auto 20px;
+  overflow-x: auto;
+  max-width: min-content;
+  scrollbar-width: none;
 }
 
 .stories-container::-webkit-scrollbar {
-    height: 0;
+  height: 0;
 }
 
 .story-container {
-    list-style: none;
-    margin-right: 5px;
+  list-style: none;
+  margin-right: 5px;
 }

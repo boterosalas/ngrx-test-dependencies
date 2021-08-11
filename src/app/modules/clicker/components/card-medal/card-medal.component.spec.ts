@@ -11,13 +11,9 @@ describe('CardMedalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CardMedalComponent ],
-      imports: [
-        AppMaterialModule,
-        FlexLayoutModule
-      ]
-    })
-    .compileComponents();
+      declarations: [CardMedalComponent],
+      imports: [AppMaterialModule, FlexLayoutModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,14 +1,8 @@
 <h3 class="text-center" ngClass.gt-xs="f-23" ngClass.xs="f-18">
-  {{ "HOME.HOW_WORKS" | translate }}
+  {{ 'HOME.HOW_WORKS' | translate }}
 </h3>
 
-<div
-  fxHide.xs="true"
-  class="works-desk"
-  fxLayout="row"
-  fxLayoutAlign="space-between center"
-  fxLayoutGap="10px"
->
+<div fxHide.xs="true" class="works-desk" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
   <div *ngFor="let item of works">
     <span fxLayout="column" class="card">
       <img class="imagen-how-works" [src]="item.icon" [alt]="item.title" />
@@ -17,12 +11,7 @@
   </div>
 </div>
 
-<ngx-slick-carousel
-  fxHide.gt-xs="true"
-  class="carousel"
-  #slickModal="slick-carousel"
-  [config]="slideConfig"
->
+<ngx-slick-carousel fxHide.gt-xs="true" class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
   <div ngxSlickItem *ngFor="let item of works">
     <span fxLayout="column" class="card">
       <img class="imagen-how-works-mobile" [src]="item.icon" [alt]="item.title" />

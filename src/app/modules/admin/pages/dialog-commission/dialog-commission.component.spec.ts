@@ -19,24 +19,22 @@ import Swal from 'sweetalert2';
 describe('DialogCommissionComponent', () => {
   let component: DialogCommissionComponent;
   let fixture: ComponentFixture<DialogCommissionComponent>;
-  const mockContentService = jasmine.createSpyObj("ContentService", [
-    "getCommissionsData", "saveComision"
-  ]);
-  const mockDialog = jasmine.createSpyObj("MatDialog", [
-    "open",
-    "closeAll"
-  ]);
-  let response = [{
-    orderby: 0,
-    tab: 1,
-    description: "XXXX",
-    commission: "2%"
-  }, {
-    orderby: 1,
-    tab: 1,
-    description: "XXXX",
-    commission: "2%"
-  }]
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getCommissionsData', 'saveComision']);
+  const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll']);
+  let response = [
+    {
+      orderby: 0,
+      tab: 1,
+      description: 'XXXX',
+      commission: '2%',
+    },
+    {
+      orderby: 1,
+      tab: 1,
+      description: 'XXXX',
+      commission: '2%',
+    },
+  ];
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [DialogCommissionComponent],
@@ -61,26 +59,21 @@ describe('DialogCommissionComponent', () => {
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
-            blacklistedRoutes: []
-          }
-        })
+            blacklistedRoutes: [],
+          },
+        }),
       ],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ],
+      schemas: [NO_ERRORS_SCHEMA],
       providers: [
         { provide: ContentService, useValue: mockContentService },
         { provide: MatDialog, useValue: mockDialog },
-      ]
-
-    })
-      .compileComponents();
+      ],
+    }).compileComponents();
     mockContentService.getCommissionsData.and.returnValue(of(response));
     mockContentService.saveComision.and.returnValue(of(response));
   }));
 
   beforeEach(() => {
-
     fixture = TestBed.createComponent(DialogCommissionComponent);
     component = fixture.componentInstance;
     component.componentLector = false;
@@ -89,30 +82,30 @@ describe('DialogCommissionComponent', () => {
   it('should create', () => {
     component.dataSource = response;
     expect(component).toBeTruthy();
-  })
+  });
   it('updateDelete', () => {
     component.updateComision();
     let datos = true;
     component.saveComision();
     component.dataSource = response;
-    component.elemento = { description: "", commission: "" }
-    component.validation("hola");
-    component.elemento = { description: "ddddd", commission: "2%" }
-    component.validation("hola");
+    component.elemento = { description: '', commission: '' };
+    component.validation('hola');
+    component.elemento = { description: 'ddddd', commission: '2%' };
+    component.validation('hola');
     expect(datos).toBeTruthy();
-  })
+  });
   it('testing commission', () => {
-    spyOn(Swal, "fire").and.returnValue(
+    spyOn(Swal, 'fire').and.returnValue(
       Promise.resolve<any>({
-        text: "Extensión erronea",
-        type: "error",
-        confirmButtonText: "Aceptar",
-        confirmButtonClass: "accept-activation-alert-error",
+        text: 'Extensión erronea',
+        type: 'error',
+        confirmButtonText: 'Aceptar',
+        confirmButtonClass: 'accept-activation-alert-error',
       })
     );
     component.deleteComision({ id: 2 }, 2);
     component.newComision();
     let datos = true;
     expect(datos).toBeTruthy();
-  })
+  });
 });

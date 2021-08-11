@@ -1,25 +1,14 @@
 <div fxLayout="row" fxLayoutAlign="end end" class="border-bottom-gray">
-    <div fxLayout="column" fxFlex="100">
-        <form [formGroup]="searchForm" class="pt-1">
-          <mat-form-field appearance="outline" class="w-100 mw">
-            <span fxLayoutAlign="center space-between">
-              <input
-                matInput
-                type="text"
-                id="BarSearch"
-                placeholder="{{ 'GENERIC.SEARCH' | translate }}"
-                formControlName="search"
-              />
-              <button
-                mat-button
-                (click)="searchProduct()"
-                id="BtnSearch"
-                class="lupa"
-              >
-                <mat-icon matSuffix class="mr-1 blue cursor-pointer">search</mat-icon>
-              </button>
-            </span>
-          </mat-form-field>
-        </form>
-    </div>
+  <div fxLayout="column" fxFlex="100">
+    <form [formGroup]="searchForm" class="pt-1">
+      <mat-form-field appearance="outline" class="w-100 mw">
+        <span fxLayoutAlign="center space-between">
+          <input matInput type="text" id="BarSearch" placeholder="{{ 'GENERIC.SEARCH' | translate }}" formControlName="search" />
+          <button mat-button (click)="searchProduct()" id="BtnSearch" class="lupa">
+            <mat-icon matSuffix class="mr-1 blue cursor-pointer">search</mat-icon>
+          </button>
+        </span>
+      </mat-form-field>
+    </form>
+  </div>
 </div>

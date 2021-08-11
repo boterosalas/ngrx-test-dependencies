@@ -6,42 +6,37 @@ import { DialogDeleteNotificationComponent } from '../dialog-delete-notification
 @Component({
   selector: 'app-card-notification',
   templateUrl: './card-notification.component.html',
-  styleUrls: ['./card-notification.component.scss']
+  styleUrls: ['./card-notification.component.scss'],
 })
 export class CardNotificationComponent implements OnInit {
+  @Input() title: string;
+  @Input() user: string;
+  @Input() date: string;
+  @Input() notification: any;
+  @Input() url: string;
+  @Input() edit: boolean;
 
-  @Input() title:string;
-  @Input() user:string;
-  @Input() date:string;
-  @Input() notification:any;
-  @Input() url:string;
-  @Input() edit:boolean;
-  
+  constructor(private dialog: MatDialog, private router: Router) {}
 
-  constructor(private dialog: MatDialog, private router:Router) { }
+  ngOnInit() {}
 
-  ngOnInit() {
-  }
-
-  deleteNotification(notification:any){
-    
+  deleteNotification(notification: any) {
     const idnotification = notification.idnotification;
-    
+
     this.dialog.open(DialogDeleteNotificationComponent, {
       data: {
-        idnotification
+        idnotification,
       },
     });
   }
 
-  editNotification(notification:any){
+  editNotification(notification: any) {
     const idnotification = notification.idnotification;
-    this.router.navigate(['/notificacion', idnotification])
+    this.router.navigate(['/notificacion', idnotification]);
   }
 
-  downloadFile(notification:any){
-    let url = notification.url;
-    window.open(url,'_blank');
+  downloadFile(notification: any) {
+    const url = notification.url;
+    window.open(url, '_blank');
   }
-  
 }

@@ -13,18 +13,10 @@ describe('ProductComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [],
-      imports: [
-        SharedModule,
-        AppMaterialModule,
-        FormsModule,
-        ReactiveFormsModule
-      ],
+      imports: [SharedModule, AppMaterialModule, FormsModule, ReactiveFormsModule],
       providers: [],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ]
-    })
-      .compileComponents();
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -39,6 +31,4 @@ describe('ProductComponent', () => {
     component.product();
     expect(component.infoProduct.emit).toHaveBeenCalled();
   });
-
-
 });

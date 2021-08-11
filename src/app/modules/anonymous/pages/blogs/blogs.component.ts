@@ -9,12 +9,12 @@ import { UtilsService } from 'src/app/services/utils.service';
 @Component({
   selector: 'app-blogs',
   templateUrl: './blogs.component.html',
-  styleUrls: ['./blogs.component.scss']
+  styleUrls: ['./blogs.component.scss'],
 })
 export class BlogsComponent implements OnInit {
-  pageTo: number = 9;
+  pageTo = 9;
   paginate: string;
-  pageIndex: number = 0;
+  pageIndex = 0;
   totalItems: number;
   newsUser: Array<any>;
   pageSize: number;
@@ -27,55 +27,47 @@ export class BlogsComponent implements OnInit {
     private content: ContentService,
     private util: UtilsService,
     private paginator: MatPaginatorIntl,
-    private metaTagService: Meta,
+    private metaTagService: Meta
   ) {
     this.metaTagService.addTags([
       {
-        name: "keywords",
-        content:
-          "blog, clickam, marketing de afiliados",
+        name: 'keywords',
+        content: 'blog, clickam, marketing de afiliados',
       },
       {
-        name: "description",
+        name: 'description',
         content:
-          "Clickam es una plataforma marketplace de marketing de afiliados, donde ganarás dinero por referir y comprar. Aumenta el tráfico de tu negocio con afiliados. Una idea Grupo Éxito.  Exito - Carulla - Haceb - SURA - Puntos Colombia - Viajes Éxito - Nequi.",
+          'Clickam es una plataforma marketplace de marketing de afiliados, donde ganarás dinero por referir y comprar. Aumenta el tráfico de tu negocio con afiliados. Una idea Grupo Éxito.  Exito - Carulla - Haceb - SURA - Puntos Colombia - Viajes Éxito - Nequi.',
       },
     ]);
     this.paginator.getRangeLabel = function (page, pageSize, length) {
       if (length === 0 || pageSize === 0) {
-        return "0 de " + length;
+        return '0 de ' + length;
       }
       length = Math.max(length, 0);
       const startIndex = page * pageSize;
-      const endIndex =
-        startIndex < length
-          ? Math.min(startIndex + pageSize, length)
-          : startIndex + pageSize;
-      return startIndex + 1 + " - " + endIndex + " de " + length;
+      const endIndex = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize;
+      return startIndex + 1 + ' - ' + endIndex + ' de ' + length;
     };
   }
 
-  selecteds = [{
-    titulo: "Más relevante",
-    value: "RELEVANT"
-  },
-  {
-    titulo: "Más reciente",
-    value: "RECENT"
-  }]
+  selecteds = [
+    {
+      titulo: 'Más relevante',
+      value: 'RELEVANT',
+    },
+    {
+      titulo: 'Más reciente',
+      value: 'RECENT',
+    },
+  ];
   blogMain: any;
   blogsData = [];
   ngOnInit() {
-    this.orderBy = "RELEVANT";
+    this.orderBy = 'RELEVANT';
     this.getBlogs();
-
   }
-  public searchUser(
-    from = 1,
-    to = this.pageTo,
-    orderBy = this.orderBy
-  ) {
-
+  public searchUser(from = 1, to = this.pageTo, orderBy = this.orderBy) {
     const params = { from, to, orderBy };
     this.subscription = this.content.getBlogs(params).subscribe((user: any) => {
       this.blogsData = user.objectResponse.blogs;
@@ -91,26 +83,24 @@ export class BlogsComponent implements OnInit {
     this.searchUser(this.from, this.to);
   }
   getBlogs() {
-    let data = {
+    const data = {
       from: 1,
       to: this.pageTo,
-      orderBy: "RELEVANT"
-    }
+      orderBy: 'RELEVANT',
+    };
     this.content.getBlogs(data).subscribe((resp) => {
-
       this.blogsData = resp.objectResponse.blogs;
       this.blogMain = resp.objectResponse.blogs[0];
       this.totalItems = resp.objectResponse.total;
-    })
+    });
   }
   redirectionPath(elemtn) {
-    let url = 'blog/' + elemtn;
-    this.router.navigate([url])
+    const url = 'blog/' + elemtn;
+    this.router.navigate([url]);
     this.util.pathBlog = elemtn;
-
   }
   orderByFun(element) {
     this.orderBy = element.value;
-    this.searchUser()
+    this.searchUser();
   }
 }

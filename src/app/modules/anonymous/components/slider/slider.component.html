@@ -2,17 +2,8 @@
 
 <div fxShow.xs="false" class="no-focus">
   <div class="position-relative">
-    <ngx-slick-carousel
-      class="carousel"
-      #slickModal="slick-carousel"
-      [config]="slideConfig"
-      *ngIf="isSlider === true"
-    >
-      <div
-        ngxSlickItem
-        *ngFor="let slide of sliderWeb; let i = index"
-        class="slide text-center"
-      >
+    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" *ngIf="isSlider === true">
+      <div ngxSlickItem *ngFor="let slide of sliderWeb; let i = index" class="slide text-center">
         <span (click)="openShare()">
           <app-product
             id="slide{{ i }}"
@@ -26,12 +17,7 @@
         </span>
       </div>
     </ngx-slick-carousel>
-    <div
-      class="position-absolute"
-      fxLayout="row"
-      fxLayoutAlign="space-between"
-      *ngIf="showArrows === true"
-    >
+    <div class="position-absolute" fxLayout="row" fxLayoutAlign="space-between" *ngIf="showArrows === true">
       <button mat-mini-fab color="orange" class="ml-4 op" (click)="prev()">
         <img class="rotate" src="/assets/img/arrow-right.svg" alt="upload" />
       </button>
@@ -42,17 +28,8 @@
   </div>
 </div>
 
-<div
-  *ngIf="isSlider === false"
-  fxLayout="row wrap"
-  class="container"
-  fxLayoutAlign="space-evenly"
->
-  <div
-    fxLayout="column"
-    *ngFor="let slide of sliderMobile; let i = index"
-    class="slide text-center"
-  >
+<div *ngIf="isSlider === false" fxLayout="row wrap" class="container" fxLayoutAlign="space-evenly">
+  <div fxLayout="column" *ngFor="let slide of sliderMobile; let i = index" class="slide text-center">
     <span (click)="openShare()">
       <app-product
         id="slide{{ i }}"
@@ -71,17 +48,8 @@
 <!-- Sliders Mobile -->
 
 <div fxShow.gt-xs="false" class="no-focus">
-  <ngx-slick-carousel
-    *ngIf="isSlider === true"
-    class="carousel"
-    #slickModal="slick-carousel"
-    [config]="slideConfig"
-  >
-    <div
-      ngxSlickItem
-      *ngFor="let slide of sliderWeb; let i = index"
-      class="slide text-center"
-    >
+  <ngx-slick-carousel *ngIf="isSlider === true" class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+    <div ngxSlickItem *ngFor="let slide of sliderWeb; let i = index" class="slide text-center">
       <span (click)="openShare()">
         <app-product
           id="slide{{ i }}"
@@ -105,22 +73,10 @@
       <div fxLayout="column">
         <div fxLayout="column" fxFlex="100" fxFlex.xs="100">
           <mat-form-field appearance="dashed" class="dashed mt-2">
-            <input
-              id="url"
-              matInput
-              formcontrolName="link"
-              [value]="urlshorten"
-              #linkInput
-              readonly
-            />
+            <input id="url" matInput formcontrolName="link" [value]="urlshorten" #linkInput readonly />
           </mat-form-field>
         </div>
-        <div
-          fxLayout="row"
-          fxLayoutAlign="center space-between"
-          fxLayoutGap="10px"
-          class="mt-2 share-desktop"
-        >
+        <div fxLayout="row" fxLayoutAlign="center space-between" fxLayoutGap="10px" class="mt-2 share-desktop">
           <button
             mat-button
             id="btnCopy"
@@ -129,70 +85,38 @@
             ngClass="{{ classButtonCopy }}"
             (click)="copyInputMessage(linkInput)"
           >
-            <span
-              fxLayoutAlign="center space-between"
-              ngClass="{{ classButtonCopy }}"
-            >
-              {{ "GENERIC.COPY_LINK" | translate }}
+            <span fxLayoutAlign="center space-between" ngClass="{{ classButtonCopy }}">
+              {{ 'GENERIC.COPY_LINK' | translate }}
             </span>
           </button>
 
           <button
-            *ngIf="
-              buttonReferir.business === 'exito' ||
-              buttonReferir.business === 'carulla'
-            "
+            *ngIf="buttonReferir.business === 'exito' || buttonReferir.business === 'carulla'"
             mat-button
             id="refer"
             color="orange"
             ngClass="{{ classButtonRefer }}"
             (click)="showReference()"
           >
-            <span
-              ngClass="{{ classButtonRefer }}"
-              fxLayoutAlign="center space-between"
-            >
-              Referir
-            </span>
+            <span ngClass="{{ classButtonRefer }}" fxLayoutAlign="center space-between"> Referir </span>
           </button>
 
-          <button
-            mat-button
-            id="buy"
-            color="orange"
-            ngClass="orange-border {{ classButtonBuy }}"
-            (click)="buy()"
-          >
-            <span
-              ngClass="{{ classButtonBuy }}"
-              fxLayoutAlign="center space-between"
-            >
-              Comprar
-            </span>
+          <button mat-button id="buy" color="orange" ngClass="orange-border {{ classButtonBuy }}" (click)="buy()">
+            <span ngClass="{{ classButtonBuy }}" fxLayoutAlign="center space-between"> Comprar </span>
           </button>
         </div>
       </div>
     </form>
 
     <h3 class="border-bottom-orange-init share-desktop">
-      {{ "GENERIC.SHARE" | translate }}
+      {{ 'GENERIC.SHARE' | translate }}
     </h3>
 
     <div class="share-desktop" id="share">
-      <button
-        theme="circles-dark"
-        shareButton="facebook"
-        [url]="urlshorten"
-        ngClass="sharebutton {{ classButtonFacebook }} mr-2"
-      >
+      <button theme="circles-dark" shareButton="facebook" [url]="urlshorten" ngClass="sharebutton {{ classButtonFacebook }} mr-2">
         <i ngClass="fab fa-facebook-f {{ classButtonFacebook }}"></i>
       </button>
-      <button
-        theme="circles-dark"
-        shareButton="twitter"
-        [url]="urlshorten"
-        ngClass="sharebutton {{ classButtonTwitter }} mr-2"
-      >
+      <button theme="circles-dark" shareButton="twitter" [url]="urlshorten" ngClass="sharebutton {{ classButtonTwitter }} mr-2">
         <i ngClass="fab fa-twitter {{ classButtonTwitter }}"></i>
       </button>
       <a
@@ -206,23 +130,9 @@
     </div>
 
     <div class="share-mobile">
-      <button
-        mat-button
-        ngClass="gtmrs  mb-2 mt-2 {{ classButtonShare }}"
-        (click)="share()"
-        fxLayout="row"
-        fxLayoutAlign="start start"
-      >
-        <span
-          ngClass="gtmrs f-15 {{ classButtonShare }}"
-          fxLayout="row"
-          fxLayoutAlign="center center"
-        >
-          <img
-            ngClass="icon-compartir pr-2 {{ classButtonShare }}"
-            src="/assets/img/Compartir.svg"
-            alt="user"
-          />
+      <button mat-button ngClass="gtmrs  mb-2 mt-2 {{ classButtonShare }}" (click)="share()" fxLayout="row" fxLayoutAlign="start start">
+        <span ngClass="gtmrs f-15 {{ classButtonShare }}" fxLayout="row" fxLayoutAlign="center center">
+          <img ngClass="icon-compartir pr-2 {{ classButtonShare }}" src="/assets/img/Compartir.svg" alt="user" />
           Compartir</span
         >
       </button>
@@ -233,110 +143,53 @@
         (click)="showReference()"
         fxLayout="row"
         fxLayoutAlign="start start"
-        *ngIf="
-          buttonReferir.business === 'exito' ||
-          buttonReferir.business === 'carulla'
-        "
+        *ngIf="buttonReferir.business === 'exito' || buttonReferir.business === 'carulla'"
       >
-        <span
-          ngClass="gtmrs f-15 {{ classButtonRefer }}"
-          fxLayout="row"
-          fxLayoutAlign="center center"
-        >
-          <img
-            ngClass="icon-compartir pr-2 {{ classButtonRefer }}"
-            src="/assets/img/Referir.svg"
-            alt="user"
-          />
+        <span ngClass="gtmrs f-15 {{ classButtonRefer }}" fxLayout="row" fxLayoutAlign="center center">
+          <img ngClass="icon-compartir pr-2 {{ classButtonRefer }}" src="/assets/img/Referir.svg" alt="user" />
           Referir
         </span>
       </button>
 
-      <button
-        mat-button
-        ngClass="gtmrs  mb-2 mt-2 {{ classButtonBuy }}"
-        (click)="buy()"
-        fxLayout="row"
-        fxLayoutAlign="start start"
-      >
-        <span
-          ngClass="gtmrs f-15 {{ classButtonBuy }}"
-          fxLayout="row"
-          fxLayoutAlign="center center"
-        >
-          <img
-            ngClass="icon-compartir pr-2 {{ classButtonBuy }}"
-            src="/assets/img/Comprar.svg"
-            alt="user"
-          />
+      <button mat-button ngClass="gtmrs  mb-2 mt-2 {{ classButtonBuy }}" (click)="buy()" fxLayout="row" fxLayoutAlign="start start">
+        <span ngClass="gtmrs f-15 {{ classButtonBuy }}" fxLayout="row" fxLayoutAlign="center center">
+          <img ngClass="icon-compartir pr-2 {{ classButtonBuy }}" src="/assets/img/Comprar.svg" alt="user" />
           Comprar
         </span>
       </button>
     </div>
   </div>
   <br />
-  <form
-    class="forgotpassword-container"
-    [formGroup]="idCustomerForm"
-    fxLayout="column"
-    *ngIf="reference"
-  >
-    <span
-      (click)="backStep()"
-      class="cursor-pointer gray"
-      fxLayout="row"
-      fxLayoutAlign="start start"
-      fxFlex="12"
-    >
+  <form class="forgotpassword-container" [formGroup]="idCustomerForm" fxLayout="column" *ngIf="reference">
+    <span (click)="backStep()" class="cursor-pointer gray" fxLayout="row" fxLayoutAlign="start start" fxFlex="12">
       <mat-icon>keyboard_arrow_left</mat-icon>
       <span class="text-back">{{ "BUTTONS.BACK" | translate}}</span>
     </span>
-    <p>{{ "GENERIC.REFERENCE_IDENTIFICATION" | translate }}</p>
+    <p>{{ 'GENERIC.REFERENCE_IDENTIFICATION' | translate }}</p>
     <mat-form-field appearance="outline" class="mt-2">
-      <input
-        matInput
-        class="p-2"
-        id="idcustomer"
-        type="text"
-        placeholder="N° de Documento"
-        formControlName="identification"
-        required
-      />
+      <input matInput class="p-2" id="idcustomer" type="text" placeholder="N° de Documento" formControlName="identification" required />
       <mat-error
         id="reuiredId"
-        *ngIf="
-          idCustomerForm.controls.identification.invalid &&
-          idCustomerForm.controls.identification.errors.required
-        "
-        >{{
-          "GENERIC.REQUIRED" | translate: { formValue: "Número de documento" }
-        }}</mat-error
+        *ngIf="idCustomerForm.controls.identification.invalid && idCustomerForm.controls.identification.errors.required"
+        >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Número de documento' } }}</mat-error
       >
 
       <mat-error
         id="maxId"
-        *ngIf="
-          idCustomerForm.controls.identification.invalid &&
-          idCustomerForm.controls.identification.errors.maxlength
-        "
+        *ngIf="idCustomerForm.controls.identification.invalid && idCustomerForm.controls.identification.errors.maxlength"
         >{{
-          "GENERIC.MAX_CHARACTERS"
+          'GENERIC.MAX_CHARACTERS'
             | translate
               : {
-                  maxchar:
-                    idCustomerForm.controls.identification.errors.maxlength
-                      .requiredLength
+                  maxchar: idCustomerForm.controls.identification.errors.maxlength.requiredLength
                 }
         }}</mat-error
       >
 
       <mat-error
         id="numberId"
-        *ngIf="
-          idCustomerForm.controls.identification.invalid &&
-          idCustomerForm.controls.identification.errors.pattern
-        "
-        >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+        *ngIf="idCustomerForm.controls.identification.invalid && idCustomerForm.controls.identification.errors.pattern"
+        >{{ 'GENERIC.ONLY_NUMBERS' | translate }}</mat-error
       >
     </mat-form-field>
 
@@ -349,9 +202,7 @@
         (click)="saveLinkReference()"
         [disabled]="!idCustomerForm.valid"
       >
-        <span class="gtmCrearCedulaSiguiente">{{
-          "GENERIC.ACCEPT" | translate
-        }}</span>
+        <span class="gtmCrearCedulaSiguiente">{{ 'GENERIC.ACCEPT' | translate }}</span>
       </button>
     </div>
   </form>
@@ -360,58 +211,32 @@
 <ng-template #templateDialogAssured>
   <div id="share">
     <div *ngIf="showFormCustomer">
-      <p class="text-id">{{ "GENERIC.CUSTOMER_ID" | translate }}</p>
-      <form
-        class="forgotpassword-container"
-        [formGroup]="idCustomerForm"
-        fxLayout="column"
-      >
+      <p class="text-id">{{ 'GENERIC.CUSTOMER_ID' | translate }}</p>
+      <form class="forgotpassword-container" [formGroup]="idCustomerForm" fxLayout="column">
         <mat-form-field appearance="outline" class="mt-2">
-          <input
-            matInput
-            class="p-2"
-            id="idcustomer"
-            type="text"
-            placeholder="N° de Documento"
-            formControlName="identification"
-            required
-          />
+          <input matInput class="p-2" id="idcustomer" type="text" placeholder="N° de Documento" formControlName="identification" required />
           <mat-error
             id="reuiredId"
-            *ngIf="
-              idCustomerForm.controls.identification.invalid &&
-              idCustomerForm.controls.identification.errors.required
-            "
-            >{{
-              "GENERIC.REQUIRED"
-                | translate: { formValue: "Número de documento" }
-            }}</mat-error
+            *ngIf="idCustomerForm.controls.identification.invalid && idCustomerForm.controls.identification.errors.required"
+            >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Número de documento' } }}</mat-error
           >
 
           <mat-error
             id="maxId"
-            *ngIf="
-              idCustomerForm.controls.identification.invalid &&
-              idCustomerForm.controls.identification.errors.maxlength
-            "
+            *ngIf="idCustomerForm.controls.identification.invalid && idCustomerForm.controls.identification.errors.maxlength"
             >{{
-              "GENERIC.MAX_CHARACTERS"
+              'GENERIC.MAX_CHARACTERS'
                 | translate
                   : {
-                      maxchar:
-                        idCustomerForm.controls.identification.errors.maxlength
-                          .requiredLength
+                      maxchar: idCustomerForm.controls.identification.errors.maxlength.requiredLength
                     }
             }}</mat-error
           >
 
           <mat-error
             id="numberId"
-            *ngIf="
-              idCustomerForm.controls.identification.invalid &&
-              idCustomerForm.controls.identification.errors.pattern
-            "
-            >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+            *ngIf="idCustomerForm.controls.identification.invalid && idCustomerForm.controls.identification.errors.pattern"
+            >{{ 'GENERIC.ONLY_NUMBERS' | translate }}</mat-error
           >
         </mat-form-field>
 
@@ -424,12 +249,8 @@
             (click)="nextStep()"
             [disabled]="!idCustomerForm.valid"
           >
-            <span
-              fxLayout="row"
-              fxLayoutAlign="space-between center"
-              class="pr-3 gtmCrearCedulaSiguiente"
-            >
-              {{ "GENERIC.NEXT" | translate }}
+            <span fxLayout="row" fxLayoutAlign="space-between center" class="pr-3 gtmCrearCedulaSiguiente">
+              {{ 'GENERIC.NEXT' | translate }}
               <mat-icon>arrow_forward</mat-icon>
             </span>
           </button>
@@ -442,22 +263,10 @@
         <div fxLayout="column" fxLayoutGap="0">
           <div fxLayout="column" fxFlex="100" fxFlex.xs="100">
             <mat-form-field appearance="dashed" class="dashed mt-2">
-              <input
-                id="url"
-                matInput
-                formcontrolName="link"
-                [value]="urlshorten"
-                #linkInput
-                readonly
-              />
+              <input id="url" matInput formcontrolName="link" [value]="urlshorten" #linkInput readonly />
             </mat-form-field>
           </div>
-          <div
-            fxLayout="row"
-            fxLayoutAlign="center space-between"
-            fxLayoutGap="10px"
-            class="mt-2 share-desktop"
-          >
+          <div fxLayout="row" fxLayoutAlign="center space-between" fxLayoutGap="10px" class="mt-2 share-desktop">
             <button
               mat-button
               id="btnCopy"
@@ -466,51 +275,27 @@
               ngClass="{{ classButtonCopy }}"
               (click)="copyInputMessage(linkInput)"
             >
-              <span
-                fxLayoutAlign="center space-between"
-                ngClass="{{ classButtonCopy }}"
-              >
-                {{ "GENERIC.COPY_LINK" | translate }}
+              <span fxLayoutAlign="center space-between" ngClass="{{ classButtonCopy }}">
+                {{ 'GENERIC.COPY_LINK' | translate }}
               </span>
             </button>
 
-            <button
-              mat-button
-              id="buy"
-              color="orange"
-              ngClass="orange-border {{ classButtonBuy }}"
-              (click)="buy()"
-            >
-              <span
-                ngClass="{{ classButtonBuy }}"
-                fxLayoutAlign="center space-between"
-              >
-                Comprar
-              </span>
+            <button mat-button id="buy" color="orange" ngClass="orange-border {{ classButtonBuy }}" (click)="buy()">
+              <span ngClass="{{ classButtonBuy }}" fxLayoutAlign="center space-between"> Comprar </span>
             </button>
           </div>
         </div>
       </form>
 
       <h3 class="border-bottom-orange-init share-desktop">
-        {{ "GENERIC.SHARE" | translate }}
+        {{ 'GENERIC.SHARE' | translate }}
       </h3>
 
       <div class="share-desktop" id="share">
-        <button
-          theme="circles-dark"
-          shareButton="facebook"
-          [url]="urlshorten"
-          ngClass="sharebutton {{ classButtonFacebook }} mr-2"
-        >
+        <button theme="circles-dark" shareButton="facebook" [url]="urlshorten" ngClass="sharebutton {{ classButtonFacebook }} mr-2">
           <i ngClass="fab fa-facebook-f {{ classButtonFacebook }}"></i>
         </button>
-        <button
-          theme="circles-dark"
-          shareButton="twitter"
-          [url]="urlshorten"
-          ngClass="sharebutton {{ classButtonTwitter }} mr-2"
-        >
+        <button theme="circles-dark" shareButton="twitter" [url]="urlshorten" ngClass="sharebutton {{ classButtonTwitter }} mr-2">
           <i ngClass="fab fa-twitter {{ classButtonTwitter }}"></i>
         </button>
         <a
@@ -524,69 +309,30 @@
       </div>
 
       <div class="share-mobile">
-        <button
-          mat-button
-          ngClass="gtmrs  mb-2 mt-2 {{ classButtonShare }}"
-          (click)="share()"
-          fxLayout="row"
-          fxLayoutAlign="start start"
-        >
-          <span
-            ngClass="gtmrs f-15 {{ classButtonShare }}"
-            fxLayout="row"
-            fxLayoutAlign="center center"
-          >
-            <img
-              ngClass="icon-compartir pr-2 {{ classButtonShare }}"
-              src="/assets/img/Compartir.svg"
-              alt="user"
-            />
+        <button mat-button ngClass="gtmrs  mb-2 mt-2 {{ classButtonShare }}" (click)="share()" fxLayout="row" fxLayoutAlign="start start">
+          <span ngClass="gtmrs f-15 {{ classButtonShare }}" fxLayout="row" fxLayoutAlign="center center">
+            <img ngClass="icon-compartir pr-2 {{ classButtonShare }}" src="/assets/img/Compartir.svg" alt="user" />
             Compartir</span
           >
         </button>
 
         <button
           mat-button
-          *ngIf="
-            buttonReferir.business === 'exito' ||
-            buttonReferir.business === 'carulla'
-          "
+          *ngIf="buttonReferir.business === 'exito' || buttonReferir.business === 'carulla'"
           ngClass="gtmrs  mb-2 mt-2 {{ classButtonRefer }}"
           (click)="showReference()"
           fxLayout="row"
           fxLayoutAlign="start start"
         >
-          <span
-            ngClass="gtmrs f-15 {{ classButtonRefer }}"
-            fxLayout="row"
-            fxLayoutAlign="center center"
-          >
-            <img
-              ngClass="icon-compartir pr-2 {{ classButtonRefer }}"
-              src="/assets/img/Referir.svg"
-              alt="user"
-            />
+          <span ngClass="gtmrs f-15 {{ classButtonRefer }}" fxLayout="row" fxLayoutAlign="center center">
+            <img ngClass="icon-compartir pr-2 {{ classButtonRefer }}" src="/assets/img/Referir.svg" alt="user" />
             Referir
           </span>
         </button>
 
-        <button
-          mat-button
-          ngClass="gtmrs  mb-2 mt-2 {{ classButtonBuy }}"
-          (click)="buy()"
-          fxLayout="row"
-          fxLayoutAlign="start start"
-        >
-          <span
-            ngClass="gtmrs f-15 {{ classButtonBuy }}"
-            fxLayout="row"
-            fxLayoutAlign="center center"
-          >
-            <img
-              ngClass="icon-compartir pr-2 {{ classButtonBuy }}"
-              src="/assets/img/Comprar.svg"
-              alt="user"
-            />
+        <button mat-button ngClass="gtmrs  mb-2 mt-2 {{ classButtonBuy }}" (click)="buy()" fxLayout="row" fxLayoutAlign="start start">
+          <span ngClass="gtmrs f-15 {{ classButtonBuy }}" fxLayout="row" fxLayoutAlign="center center">
+            <img ngClass="icon-compartir pr-2 {{ classButtonBuy }}" src="/assets/img/Comprar.svg" alt="user" />
             Comprar
           </span>
         </button>

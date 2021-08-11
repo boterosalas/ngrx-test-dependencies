@@ -33,9 +33,7 @@
     <mat-tab-group>
       <mat-tab>
         <ng-template mat-tab-label>
-          <span class="gtmTerminosCondicionesClicTerminosLegales"
-            >Sobre el negocio</span
-          >
+          <span class="gtmTerminosCondicionesClicTerminosLegales">Sobre el negocio</span>
         </ng-template>
         <div class="mt-3">
           <mat-card style="width: 800px">
@@ -51,70 +49,30 @@
                   class="text-area-heigth"
                   style="height: 160px; color: #37236a"
                 ></textarea>
-                <mat-error
-                  id="requiredName"
-                  *ngIf="
-                    aboutBuss.controls.aboutBuss.invalid &&
-                    aboutBuss.controls.aboutBuss.errors.required
-                  "
-                  >{{
-                    "GENERIC.REQUIRED"
-                      | translate: { formValue: "Sobre el negocio" }
-                  }}</mat-error
-                >
-                <mat-error
-                  id="maxName"
-                  *ngIf="
-                    aboutBuss.controls.aboutBuss.invalid &&
-                    aboutBuss.controls.aboutBuss.errors.maxlength
-                  "
-                  >{{
-                    "GENERIC.MAX_CHARACTERS"
-                      | translate
-                        : {
-                            maxchar:
-                              aboutBuss.controls.aboutBuss.errors.maxlength
-                                .requiredLength
-                          }
-                  }}</mat-error
-                >
-                <mat-error
-                  id="invalidName"
-                  *ngIf="
-                    aboutBuss.controls.aboutBuss.invalid &&
-                    aboutBuss.controls.aboutBuss.errors.pattern
-                  "
-                  >{{
-                    "GENERIC.INVALID_FORMAT"
-                      | translate: { val: "Sobre el negocio" }
-                  }}</mat-error
-                >
-                <mat-error
-                  id="minPhone"
-                  *ngIf="
-                    aboutBuss.controls.aboutBuss.invalid &&
-                    aboutBuss.controls.aboutBuss.errors.minlength
-                  "
-                  >{{
-                    "GENERIC.MIN_CHARACTERS"
-                      | translate
-                        : {
-                            minchar:
-                              aboutBuss.controls.aboutBuss.errors.minlength
-                                .requiredLength
-                          }
-                  }}</mat-error
-                >
+                <mat-error id="requiredName" *ngIf="aboutBuss.controls.aboutBuss.invalid && aboutBuss.controls.aboutBuss.errors.required">{{
+                  'GENERIC.REQUIRED' | translate: { formValue: 'Sobre el negocio' }
+                }}</mat-error>
+                <mat-error id="maxName" *ngIf="aboutBuss.controls.aboutBuss.invalid && aboutBuss.controls.aboutBuss.errors.maxlength">{{
+                  'GENERIC.MAX_CHARACTERS'
+                    | translate
+                      : {
+                          maxchar: aboutBuss.controls.aboutBuss.errors.maxlength.requiredLength
+                        }
+                }}</mat-error>
+                <mat-error id="invalidName" *ngIf="aboutBuss.controls.aboutBuss.invalid && aboutBuss.controls.aboutBuss.errors.pattern">{{
+                  'GENERIC.INVALID_FORMAT' | translate: { val: 'Sobre el negocio' }
+                }}</mat-error>
+                <mat-error id="minPhone" *ngIf="aboutBuss.controls.aboutBuss.invalid && aboutBuss.controls.aboutBuss.errors.minlength">{{
+                  'GENERIC.MIN_CHARACTERS'
+                    | translate
+                      : {
+                          minchar: aboutBuss.controls.aboutBuss.errors.minlength.requiredLength
+                        }
+                }}</mat-error>
               </mat-form-field>
             </form>
             <div fxLayout="row" fxLayoutAlign="end end">
-              <button
-                mat-button
-                ngClass="button_cancel"
-                [routerLink]="['/negocios-admin']"
-              >
-                Descartar Cambios
-              </button>
+              <button mat-button ngClass="button_cancel" [routerLink]="['/negocios-admin']">Descartar Cambios</button>
               <button
                 mat-raised-button
                 color="orange"
@@ -131,9 +89,7 @@
       </mat-tab>
       <mat-tab>
         <ng-template mat-tab-label>
-          <span class="gtmTerminosCondicionesClicTerminosLegales"
-            >Términos & Condiciones</span
-          >
+          <span class="gtmTerminosCondicionesClicTerminosLegales">Términos & Condiciones</span>
         </ng-template>
         <div class="mt-3">
           <mat-card style="width: 800px">
@@ -149,16 +105,9 @@
                   formControlName="general"
                   style="height: 160px; color: #37236a"
                 ></textarea>
-                <mat-error
-                  id="requiredName"
-                  *ngIf="
-                    termsData.controls.general.invalid &&
-                    termsData.controls.general.errors.required
-                  "
-                  >{{
-                    "GENERIC.REQUIRED" | translate: { formValue: "Excepciones" }
-                  }}</mat-error
-                >
+                <mat-error id="requiredName" *ngIf="termsData.controls.general.invalid && termsData.controls.general.errors.required">{{
+                  'GENERIC.REQUIRED' | translate: { formValue: 'Excepciones' }
+                }}</mat-error>
               </mat-form-field>
               <mat-form-field style="width: 755px">
                 <textarea
@@ -172,14 +121,8 @@
                 ></textarea>
                 <mat-error
                   id="requiredName"
-                  *ngIf="
-                    termsData.controls.exceptions.invalid &&
-                    termsData.controls.exceptions.errors.required
-                  "
-                  >{{
-                    "GENERIC.REQUIRED"
-                      | translate: { formValue: "Casos especiales" }
-                  }}</mat-error
+                  *ngIf="termsData.controls.exceptions.invalid && termsData.controls.exceptions.errors.required"
+                  >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Casos especiales' } }}</mat-error
                 >
               </mat-form-field>
               <mat-form-field style="width: 755px">
@@ -194,25 +137,13 @@
                 ></textarea>
                 <mat-error
                   id="requiredName"
-                  *ngIf="
-                    termsData.controls.caseSpecial.invalid &&
-                    termsData.controls.caseSpecial.errors.required
-                  "
-                  >{{
-                    "GENERIC.REQUIRED"
-                      | translate: { formValue: "Tiempos de verificación" }
-                  }}</mat-error
+                  *ngIf="termsData.controls.caseSpecial.invalid && termsData.controls.caseSpecial.errors.required"
+                  >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Tiempos de verificación' } }}</mat-error
                 >
               </mat-form-field>
             </form>
             <div fxLayout="row" fxLayoutAlign="end end">
-              <button
-                mat-button
-                ngClass="button_cancel"
-                [routerLink]="['/negocios-admin']"
-              >
-                Descartar Cambios
-              </button>
+              <button mat-button ngClass="button_cancel" [routerLink]="['/negocios-admin']">Descartar Cambios</button>
               <button
                 mat-raised-button
                 color="orange"
@@ -229,9 +160,7 @@
       </mat-tab>
       <mat-tab>
         <ng-template mat-tab-label>
-          <span class="gtmTerminosCondicionesClicTerminosLegales"
-            >Tips de venta</span
-          >
+          <span class="gtmTerminosCondicionesClicTerminosLegales">Tips de venta</span>
         </ng-template>
         <div class="mt-3">
           <h3>TIPS DE VENTA</h3>
@@ -247,36 +176,15 @@
             <ng-container matColumnDef="drag">
               <th mat-header-cell *matHeaderCellDef></th>
               <td mat-cell *matCellDef="let element; let i = index">
-                <div
-                  fxLayout="row"
-                  fxLayoutGap="10px"
-                  fxLayoutAlign.gt-xs="end center"
-                  fxLayoutAlign.xs="center center"
-                >
-                  <mat-icon
-                    matSuffix
-                    class="mr-1 blue cursor-pointer"
-                    cdkDragHandle
-                    >drag_indicator</mat-icon
-                  >
+                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign.gt-xs="end center" fxLayoutAlign.xs="center center">
+                  <mat-icon matSuffix class="mr-1 blue cursor-pointer" cdkDragHandle>drag_indicator</mat-icon>
                 </div>
               </td>
             </ng-container>
             <ng-container matColumnDef="title">
-              <th
-                mat-header-cell
-                *matHeaderCellDef
-                style="width: 20%; font-weight: bold"
-              >
-                TÍTULO
-              </th>
+              <th mat-header-cell *matHeaderCellDef style="width: 20%; font-weight: bold">TÍTULO</th>
               <td mat-cell *matCellDef="let element">
-                <div
-                  fxLayout="row"
-                  fxLayoutGap="10px"
-                  fxLayoutAlign.gt-xs="start center"
-                  fxLayoutAlign.xs="center center"
-                >
+                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign.gt-xs="start center" fxLayoutAlign.xs="center center">
                   <span fxLayout="column" class="f-14 mr-2" fxHide.xs="true">
                     {{ element.title }}
                   </span>
@@ -285,14 +193,7 @@
             </ng-container>
 
             <ng-container matColumnDef="description">
-              <th
-                mat-header-cell
-                class="tr"
-                *matHeaderCellDef
-                style="width: 70%; font-weight: bold"
-              >
-                DESCRIPCIÓN
-              </th>
+              <th mat-header-cell class="tr" *matHeaderCellDef style="width: 70%; font-weight: bold">DESCRIPCIÓN</th>
               <td mat-cell *matCellDef="let element; let i = index">
                 <div fxLayout="row" fxLayoutGap="10px">
                   <span fxLayout="column" class="f-14" fxHide.xs="true">
@@ -302,54 +203,21 @@
               </td>
             </ng-container>
             <ng-container matColumnDef="edition">
-              <th
-                mat-header-cell
-                *matHeaderCellDef
-                class="center-text"
-                style="font-weight: bold"
-              >
-                ACCIONES
-              </th>
+              <th mat-header-cell *matHeaderCellDef class="center-text" style="font-weight: bold">ACCIONES</th>
               <td mat-cell *matCellDef="let element; let i = index">
-                <div
-                  fxLayout="row"
-                  fxLayoutGap="10px"
-                  fxLayoutAlign.gt-xs="center"
-                  fxLayoutAlign.xs="center center"
-                >
-                  <i
-                    class="tio-edit style-icon cursor-pointer"
-                    (click)="editTipModal(element)"
-                  ></i>
+                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign.gt-xs="center" fxLayoutAlign.xs="center center">
+                  <i class="tio-edit style-icon cursor-pointer" (click)="editTipModal(element)"></i>
 
-                  <img
-                    class="cursor-pointer"
-                    (click)="deleteTip(element)"
-                    src="/assets/img/dashboard/icon-remove-comision.svg"
-                    alt=""
-                  />
+                  <img class="cursor-pointer" (click)="deleteTip(element)" src="/assets/img/dashboard/icon-remove-comision.svg" alt="" />
                 </div>
               </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr
-              mat-row
-              *matRowDef="let row; columns: displayedColumns; let i = index"
-              cdkDrag
-              [cdkDragData]="row"
-            ></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" cdkDrag [cdkDragData]="row"></tr>
           </table>
           <div class="mt-3 mb-3" fxLayout="row" fxLayoutAlign="end end">
-            <button
-              mat-raised-button
-              color="orange"
-              (click)="addTip()"
-              id="download-users"
-              class="ml-2"
-            >
-              Agregar Tip
-            </button>
+            <button mat-raised-button color="orange" (click)="addTip()" id="download-users" class="ml-2">Agregar Tip</button>
           </div>
         </div>
       </mat-tab>
@@ -370,16 +238,9 @@
             class="text-area-heigth"
             style="color: #37236a"
           />
-          <mat-error
-            id="requiredName"
-            *ngIf="
-              dataTip.controls.title.invalid &&
-              dataTip.controls.title.errors.required
-            "
-            >{{
-              "GENERIC.REQUIRED" | translate: { formValue: "Título" }
-            }}</mat-error
-          >
+          <mat-error id="requiredName" *ngIf="dataTip.controls.title.invalid && dataTip.controls.title.errors.required">{{
+            'GENERIC.REQUIRED' | translate: { formValue: 'Título' }
+          }}</mat-error>
         </mat-form-field>
         <mat-form-field style="width: 370px">
           <textarea
@@ -391,32 +252,16 @@
             class="text-area-heigth"
             style="height: 145px; color: #37236a"
           ></textarea>
-          <mat-error
-            id="requiredName"
-            *ngIf="
-              dataTip.controls.description.invalid &&
-              dataTip.controls.description.errors.required
-            "
-            >{{
-              "GENERIC.REQUIRED" | translate: { formValue: "Descripción" }
-            }}</mat-error
-          >
+          <mat-error id="requiredName" *ngIf="dataTip.controls.description.invalid && dataTip.controls.description.errors.required">{{
+            'GENERIC.REQUIRED' | translate: { formValue: 'Descripción' }
+          }}</mat-error>
         </mat-form-field>
       </form>
     </div>
 
     <div fxLayout="row" fxLayoutAlign="end end">
-      <button mat-button ngClass="button_cancel" (click)="onNoClick()">
-        Cancelar
-      </button>
-      <button
-        mat-raised-button
-        color="orange"
-        (click)="saveTip()"
-        id="download-users"
-        class="ml-2"
-        [disabled]="!dataTip.valid"
-      >
+      <button mat-button ngClass="button_cancel" (click)="onNoClick()">Cancelar</button>
+      <button mat-raised-button color="orange" (click)="saveTip()" id="download-users" class="ml-2" [disabled]="!dataTip.valid">
         Guardar
       </button>
     </div>
@@ -437,16 +282,9 @@
             class="text-area-heigth"
             style="color: #37236a"
           />
-          <mat-error
-            id="requiredName"
-            *ngIf="
-              dataEditTip.controls.title.invalid &&
-              dataEditTip.controls.title.errors.required
-            "
-            >{{
-              "GENERIC.REQUIRED" | translate: { formValue: "Descripción" }
-            }}</mat-error
-          >
+          <mat-error id="requiredName" *ngIf="dataEditTip.controls.title.invalid && dataEditTip.controls.title.errors.required">{{
+            'GENERIC.REQUIRED' | translate: { formValue: 'Descripción' }
+          }}</mat-error>
         </mat-form-field>
         <mat-form-field style="width: 370px">
           <textarea
@@ -460,30 +298,16 @@
           ></textarea>
           <mat-error
             id="requiredName"
-            *ngIf="
-              dataEditTip.controls.description.invalid &&
-              dataEditTip.controls.description.errors.required
-            "
-            >{{
-              "GENERIC.REQUIRED" | translate: { formValue: "Descripción" }
-            }}</mat-error
+            *ngIf="dataEditTip.controls.description.invalid && dataEditTip.controls.description.errors.required"
+            >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Descripción' } }}</mat-error
           >
         </mat-form-field>
       </form>
     </div>
 
     <div fxLayout="row" fxLayoutAlign="end end">
-      <button mat-button ngClass="button_cancel" (click)="onNoClick()">
-        Cancelar
-      </button>
-      <button
-        mat-raised-button
-        color="orange"
-        (click)="editTip()"
-        id="download-users"
-        class="ml-2"
-        [disabled]="!dataEditTip.valid"
-      >
+      <button mat-button ngClass="button_cancel" (click)="onNoClick()">Cancelar</button>
+      <button mat-raised-button color="orange" (click)="editTip()" id="download-users" class="ml-2" [disabled]="!dataEditTip.valid">
         Guardar
       </button>
     </div>

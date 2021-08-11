@@ -16,54 +16,51 @@ describe('MenuOptionsComponent', () => {
   let component: MenuOptionsComponent;
   let fixture: ComponentFixture<MenuOptionsComponent>;
 
-  const mockUtilsService = jasmine.createSpyObj("UtilsService", ["showRegisterForm", "hideMenu"]);
+  const mockUtilsService = jasmine.createSpyObj('UtilsService', ['showRegisterForm', 'hideMenu']);
 
   let menuAnymous = {
-    "state": "Success",
-    "userMessage": null,
-    "objectResponse": [
-        {
-            "name": "Click Academy",
-            "route": "click-academy"
-        },
-        {
-            "name": "Ofertas",
-            "route": "ofertas"
-        },
-        {
-            "name": "Inicio",
-            "route": "/"
-        }
-    ]
-  }
+    state: 'Success',
+    userMessage: null,
+    objectResponse: [
+      {
+        name: 'Click Academy',
+        route: 'click-academy',
+      },
+      {
+        name: 'Ofertas',
+        route: 'ofertas',
+      },
+      {
+        name: 'Inicio',
+        route: '/',
+      },
+    ],
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MenuOptionsComponent ],
+      declarations: [MenuOptionsComponent],
       imports: [
         RouterTestingModule.withRoutes([]),
         TranslateModule.forRoot(),
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
-              return localStorage.getItem("ACCESS_TOKEN");
+              return localStorage.getItem('ACCESS_TOKEN');
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
-            blacklistedRoutes: []
-          }
+            blacklistedRoutes: [],
+          },
         }),
-        HttpClientTestingModule
+        HttpClientTestingModule,
       ],
       providers: [
         // { provide: AuthService, useValue: mockAuthService },
-        { provide: UtilsService, useValue: mockUtilsService }
+        { provide: UtilsService, useValue: mockUtilsService },
       ],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ]
-    })
-    .compileComponents();
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
     // mockAuthService.getMenu$.and.returnValue(of(true));
   }));
 
@@ -87,11 +84,10 @@ describe('MenuOptionsComponent', () => {
     component.hide();
     expect(component.hideSidenav.emit).toHaveBeenCalled();
   });
-  
+
   it('go to terms', inject([Router], (router: Router) => {
     spyOn(router, 'navigate').and.stub();
     component.goTerms();
     expect(router.navigate).toHaveBeenCalledWith(['/terminos-y-condiciones']);
   }));
-
 });

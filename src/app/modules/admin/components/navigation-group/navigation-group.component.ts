@@ -1,11 +1,11 @@
-import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { ContentService } from "src/app/services/content.service";
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ContentService } from 'src/app/services/content.service';
 
 @Component({
-  selector: "app-navigation-group",
-  templateUrl: "./navigation-group.component.html",
-  styleUrls: ["./navigation-group.component.scss"],
+  selector: 'app-navigation-group',
+  templateUrl: './navigation-group.component.html',
+  styleUrls: ['./navigation-group.component.scss'],
 })
 export class NavigationGroupComponent implements OnInit {
   @Input() section: any;
@@ -17,17 +17,17 @@ export class NavigationGroupComponent implements OnInit {
   @Output() saveOrderItems = new EventEmitter<object>();
   @Output() changeState = new EventEmitter<object>();
 
-  isValidAddItems: boolean = true;
-  isValidDeleteGroup: boolean = true;
+  isValidAddItems = true;
+  isValidDeleteGroup = true;
 
   constructor(private content: ContentService) {}
 
   ngOnInit() {
     if (this.section.links !== undefined) {
       this.isValidAddItems = this.section.links.length < 10;
-      this.isValidDeleteGroup = this.section.links.length == 0;
-    }else{
-      this.isValidDeleteGroup = this.section.menus.length == 0;
+      this.isValidDeleteGroup = this.section.links.length === 0;
+    } else {
+      this.isValidDeleteGroup = this.section.menus.length === 0;
     }
   }
 
@@ -54,7 +54,7 @@ export class NavigationGroupComponent implements OnInit {
   dropItems(event: CdkDragDrop<any>) {
     const items = this.section.links || this.section.menus;
     moveItemInArray(items, event.previousIndex, event.currentIndex);
-    let dataSourceSend = [];
+    const dataSourceSend = [];
     for (let i = 0; i < items.length; i++) {
       items[i].orderby = i + 1;
       dataSourceSend.push({

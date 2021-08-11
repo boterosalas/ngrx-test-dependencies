@@ -15,7 +15,7 @@ describe('DialogFaqItemComponent', () => {
   let fixture: ComponentFixture<DialogFaqItemComponent>;
 
   const dialogMock = {
-    close: () => { }
+    close: () => {},
   };
 
   beforeEach(async(() => {
@@ -28,16 +28,14 @@ describe('DialogFaqItemComponent', () => {
         TranslateModule.forRoot({}),
         BrowserAnimationsModule,
         AppMaterialModule,
-        AngularEditorModule
+        AngularEditorModule,
       ],
-      providers:[
+      providers: [
         { provide: MatDialogRef, useValue: dialogMock },
         { provide: MAT_DIALOG_DATA, useValue: {} },
-      ]
-    })
-    .compileComponents();
+      ],
+    }).compileComponents();
   }));
-
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DialogFaqItemComponent);

@@ -1,15 +1,15 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
-import * as moment from "moment";
-import { ContentService } from "src/app/services/content.service";
-import { UtilsService } from "src/app/services/utils.service";
-import Swal from "sweetalert2";
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import * as moment from 'moment';
+import { ContentService } from 'src/app/services/content.service';
+import { UtilsService } from 'src/app/services/utils.service';
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: "app-dialog-story",
-  templateUrl: "./dialog-story.component.html",
-  styleUrls: ["./dialog-story.component.scss"],
+  selector: 'app-dialog-story',
+  templateUrl: './dialog-story.component.html',
+  styleUrls: ['./dialog-story.component.scss'],
 })
 export class DialogStoryComponent implements OnInit {
   constructor(
@@ -23,33 +23,33 @@ export class DialogStoryComponent implements OnInit {
 
   storieForm: FormGroup;
   image: string;
-  nameFile: string = "";
+  nameFile = '';
   file: any;
-  showErrorImg: boolean = false;
+  showErrorImg = false;
   dataReal = [];
   validFormat: boolean;
   extension: string;
   minDate = new Date();
   showDate = true;
   publicationDate: any;
-  titleButton = "Publicar";
+  titleButton = 'Publicar';
   active = true;
   disableHour = true;
   editMode = false;
-  dateEdit:any;
-  hourEdit:any;
-  eraserEdit:Boolean;
-  imageEdit = "";
-  saveStoryData:any;
+  dateEdit: any;
+  hourEdit: any;
+  eraserEdit: boolean;
+  imageEdit = '';
+  saveStoryData: any;
 
   ngOnInit() {
     this.formStory();
   }
 
   public formStory() {
-    let {date, datepublish, description, imageurl, infoaditional, link, active} = this.data;
+    const { date, datepublish, description, imageurl, infoaditional, link, active } = this.data;
 
-    if(description === undefined) {
+    if (description === undefined) {
       this.storieForm = this.fb.group({
         nameContent: [null, Validators.required],
         link: [null],
@@ -59,24 +59,24 @@ export class DialogStoryComponent implements OnInit {
         hour: [null],
         eraser: [false],
       });
-    } else{
+    } else {
       this.editMode = true;
-      if(imageurl !== '') {
+      if (imageurl !== '') {
         this.imageEdit = imageurl;
       }
 
-      if(datepublish !== null) {
-        let splitDatepublish = datepublish.split('T');
+      if (datepublish !== null) {
+        const splitDatepublish = datepublish.split('T');
         this.dateEdit = moment(splitDatepublish[0]).toDate();
-        let hour = splitDatepublish[1];
+        const hour = splitDatepublish[1];
         this.hourEdit = this.utils.toStandardTime(hour);
         this.active = active;
-        this.titleButton = "Programar";
+        this.titleButton = 'Programar';
       }
 
-      if(datepublish === null && active === false){
+      if (datepublish === null && active === false) {
         this.eraserEdit = true;
-        this.titleButton = "Guardar como borrador";
+        this.titleButton = 'Guardar como borrador';
         this.showDate = false;
       }
 
@@ -89,53 +89,52 @@ export class DialogStoryComponent implements OnInit {
         hour: [this.hourEdit],
         eraser: [this.eraserEdit],
       });
-
     }
   }
 
   private getExtensionFile(nameFile: string, getSize: number) {
-    let splitExt = nameFile.split(".");
-    let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
+    const splitExt = nameFile.split('.');
+    const getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
     this.validFormat = false;
-    if (getExt === "jpg" || getExt === "jpeg" || getExt === "mp4") {
+    if (getExt === 'jpg' || getExt === 'jpeg' || getExt === 'mp4') {
       this.validFormat = true;
       this.extension = getExt;
     }
-    if (getSize / 1000 > 7000 && (getExt === "jpg" || getExt === "jpeg")) {
+    if (getSize / 1000 > 7000 && (getExt === 'jpg' || getExt === 'jpeg')) {
       this.validFormat = false;
       Swal.fire({
-        text: "No pudimos cargar el contenido, ten en cuenta que cada imagen no puede superar el tamaño de 7mb.",
-        type: "error",
-        confirmButtonText: "Aceptar",
-        confirmButtonClass: "accept-login-alert-error",
+        text: 'No pudimos cargar el contenido, ten en cuenta que cada imagen no puede superar el tamaño de 7mb.',
+        type: 'error',
+        confirmButtonText: 'Aceptar',
+        confirmButtonClass: 'accept-login-alert-error',
       });
-    } else if (getSize / 1000 > 75000 && getExt === "mp4") {
+    } else if (getSize / 1000 > 75000 && getExt === 'mp4') {
       this.validFormat = false;
       Swal.fire({
-        text: "No pudimos cargar el contenido, ten en cuenta que cada video no puede superar el tamaño de 72mb.",
-        type: "error",
-        confirmButtonText: "Aceptar",
-        confirmButtonClass: "accept-login-alert-error",
+        text: 'No pudimos cargar el contenido, ten en cuenta que cada video no puede superar el tamaño de 72mb.',
+        type: 'error',
+        confirmButtonText: 'Aceptar',
+        confirmButtonClass: 'accept-login-alert-error',
       });
     }
   }
 
   public onFileChangeFiles(event) {
-    this.imageEdit = "";
+    this.imageEdit = '';
     const files = event.target.files;
-    let nameFileStory = files[0].name;
-    let readerStory = new FileReader();
-    let sizeFile = files[0].size;
+    const nameFileStory = files[0].name;
+    const readerStory = new FileReader();
+    const sizeFile = files[0].size;
     if (files && files.length) {
       const [fileStory] = files;
-      let fileBlob = new Blob([fileStory]);
-      let file = new File([fileBlob], nameFileStory);
+      const fileBlob = new Blob([fileStory]);
+      const file = new File([fileBlob], nameFileStory);
       readerStory.readAsDataURL(file);
       readerStory.onload = () => {
         this.getExtensionFile(nameFileStory, sizeFile);
         if (this.validFormat) {
           this.file = readerStory.result;
-          this.file = this.file.split(",")[1];
+          this.file = this.file.split(',')[1];
           this.nameFile = nameFileStory;
           this.showErrorImg = false;
         } else {
@@ -150,24 +149,24 @@ export class DialogStoryComponent implements OnInit {
       if (val === true) {
         this.showDate = false;
         this.active = false;
-        this.titleButton = "Guardar como borrador";
+        this.titleButton = 'Guardar como borrador';
         this.storieForm.controls.date.setValue(null);
         this.storieForm.controls.hour.setValue(null);
       } else {
         this.showDate = true;
-        this.titleButton = "Publicar";
+        this.titleButton = 'Publicar';
       }
     });
   }
 
   public changeDate() {
     if (this.storieForm.controls.date.value !== null) {
-      this.titleButton = "Programar";
+      this.titleButton = 'Programar';
       this.active = false;
       this.disableHour = false;
     } else {
       this.active = true;
-      this.titleButton = "Publicar";
+      this.titleButton = 'Publicar';
       this.disableHour = true;
     }
   }
@@ -177,35 +176,35 @@ export class DialogStoryComponent implements OnInit {
   }
 
   public saveStory() {
-    let { commission, date, hour, link, nameContent, active } = this.storieForm.value;
+    const { commission, link, nameContent } = this.storieForm.value;
+    let { date, hour } = this.storieForm.value;
 
-    
-    if(date !== null) {
-      date = moment(date).format("YYYY-MM-DD");
+    if (date !== null) {
+      date = moment(date).format('YYYY-MM-DD');
     }
 
-    if(hour!== null) {
+    if (hour !== null) {
       hour = this.utils.HoraMilitar(hour);
-    } else{
-      hour = "00:00:00";
+    } else {
+      hour = '00:00:00';
     }
 
-    if(date !== null) {
+    if (date !== null) {
       this.publicationDate = `${date} ${hour}`;
-    } else{
+    } else {
       this.publicationDate = null;
     }
-    
-    if(date === null && this.storieForm.controls.eraser.value === true) {
+
+    if (date === null && this.storieForm.controls.eraser.value === true) {
       this.active = false;
     }
 
-    if(this.editMode === false) {
+    if (this.editMode === false) {
       this.saveStoryData = [
         {
           description: nameContent,
           link: link,
-          idBusiness: this.data ,
+          idBusiness: this.data,
           infoAditional: commission,
           active: this.active,
           extension: this.extension,
@@ -214,7 +213,6 @@ export class DialogStoryComponent implements OnInit {
         },
       ];
     } else {
-
       this.saveStoryData = [
         {
           description: nameContent,
@@ -228,11 +226,8 @@ export class DialogStoryComponent implements OnInit {
           image: this.file,
         },
       ];
-      
     }
 
-    this._content
-      .saveStories(this.saveStoryData)
-      .subscribe(() => this.dialogRef.close());
+    this._content.saveStories(this.saveStoryData).subscribe(() => this.dialogRef.close());
   }
 }

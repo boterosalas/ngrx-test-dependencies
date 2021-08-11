@@ -1,7 +1,6 @@
 import { ImageSearch } from './image-search';
 
 export interface Items {
-    images: Array<ImageSearch>
-    sellers: Array<any>
+  images: Array<ImageSearch>;
+  sellers: Array<any>;
 }
-

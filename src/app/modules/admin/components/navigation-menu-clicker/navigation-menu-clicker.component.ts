@@ -1,36 +1,33 @@
-import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from "@angular/core";
-import { MatDialog, MatDialogRef } from "@angular/material";
-import { Subscription } from "rxjs";
-import { DialogNavigationGroupComponent } from "../dialog-navigation-group/dialog-navigation-group.component";
-import { DialogNavigationItemComponent } from "../dialog-navigation-item/dialog-navigation-item.component";
-import { ResponseService } from "src/app/interfaces/response";
-import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
-import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
-import { AuthService } from "src/app/services/auth.service";
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { Subscription } from 'rxjs';
+import { DialogNavigationGroupComponent } from '../dialog-navigation-group/dialog-navigation-group.component';
+import { DialogNavigationItemComponent } from '../dialog-navigation-item/dialog-navigation-item.component';
+import { ResponseService } from 'src/app/interfaces/response';
+import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: "app-navigation-menu-clicker",
-  templateUrl: "./navigation-menu-clicker.component.html",
-  styleUrls: ["./navigation-menu-clicker.component.scss"],
+  selector: 'app-navigation-menu-clicker',
+  templateUrl: './navigation-menu-clicker.component.html',
+  styleUrls: ['./navigation-menu-clicker.component.scss'],
 })
 export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
   sectionsLinks: any = [];
   links: any = [];
   private subscription: Subscription = new Subscription();
-  @ViewChild("templateDeleteNavigationGroup", { static: false })
+  @ViewChild('templateDeleteNavigationGroup', { static: false })
   templateDeleteNavigationGroup: TemplateRef<any>;
-  @ViewChild("templateDeleteNavigationItem", { static: false })
+  @ViewChild('templateDeleteNavigationItem', { static: false })
   templateDeleteNavigationItem: TemplateRef<any>;
 
   dialogRef: MatDialogRef<any>;
   currentSection: any;
   currentLink: any = {};
-  isInvalidAddSection: boolean = false;
+  isInvalidAddSection = false;
 
-  constructor(
-    private dialog: MatDialog,
-    public auth: AuthService
-  ) {}
+  constructor(private dialog: MatDialog, public auth: AuthService) {}
 
   ngOnInit() {
     this.getSections();
@@ -41,12 +38,8 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
   }
 
   dropItem(event: CdkDragDrop<any>) {
-    moveItemInArray(
-      this.links,
-      event.previousIndex,
-      event.currentIndex
-    );
-    let dataSourceSend = [];
+    moveItemInArray(this.links, event.previousIndex, event.currentIndex);
+    const dataSourceSend = [];
     for (let i = 0; i < this.links.length; i++) {
       this.links[i].orderby = i + 1;
       dataSourceSend.push({
@@ -58,12 +51,8 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
   }
 
   dropSection(event: CdkDragDrop<any>) {
-    moveItemInArray(
-      this.sectionsLinks,
-      event.previousIndex,
-      event.currentIndex
-    );
-    let dataSourceSend = [];
+    moveItemInArray(this.sectionsLinks, event.previousIndex, event.currentIndex);
+    const dataSourceSend = [];
     for (let i = 0; i < this.sectionsLinks.length; i++) {
       this.sectionsLinks[i].orderby = i + 1;
       dataSourceSend.push({
@@ -83,25 +72,25 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
       resp.map((item) => {
         if (item.description === 'Sin Grupo') {
           this.links = item.menus;
-        }else{
+        } else {
           this.sectionsLinks.push(item);
         }
-      })
+      });
     });
   }
 
   addSection() {
     const dialogRef1 = this.dialog.open(DialogNavigationGroupComponent, {
       data: {
-        title: "Nuevo grupo",
-        buttonName: "Agregar",
+        title: 'Nuevo grupo',
+        buttonName: 'Agregar',
         edit: 0,
         isMenu: true,
       },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
-      this.sectionsLinks = []
-      this.links = []
+      this.sectionsLinks = [];
+      this.links = [];
       this.getSections();
     });
   }
@@ -109,8 +98,8 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
   editNavigationGroup(section: any) {
     const dialogRef1 = this.dialog.open(DialogNavigationGroupComponent, {
       data: {
-        title: "Editar grupo",
-        buttonName: "Guardar",
+        title: 'Editar grupo',
+        buttonName: 'Guardar',
         edit: 1,
         id: section.id,
         description: section.description,
@@ -119,8 +108,8 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
       },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
-      this.sectionsLinks = []
-      this.links = []
+      this.sectionsLinks = [];
+      this.links = [];
       this.getSections();
     });
   }
@@ -128,7 +117,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
   deleteNavigationGroup(section: any) {
     this.currentSection = section;
 
-    const title = "";
+    const title = '';
     const template = this.templateDeleteNavigationGroup;
     this.dialogRef = this.dialog.open(ModalGenericComponent, {
       data: {
@@ -138,8 +127,8 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
     });
 
     this.subscription = this.dialogRef.beforeClosed().subscribe(() => {
-      this.sectionsLinks = []
-      this.links = []
+      this.sectionsLinks = [];
+      this.links = [];
       this.getSections();
     });
   }
@@ -149,42 +138,39 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
   }
 
   deleteNavigationSectionService() {
-    let datos = [this.currentSection.id];
-    this.auth
-      .deleteGroup(datos)
-      .subscribe((resp: ResponseService) => {
-        if (resp.state === "Success") {
-          this.dialog.closeAll();
-        } else {
-          console.log("Upss Hubo un problema vuelve a intentarlo");
-        }
-      });
+    const datos = [this.currentSection.id];
+    this.auth.deleteGroup(datos).subscribe((resp: ResponseService) => {
+      if (resp.state === 'Success') {
+        this.dialog.closeAll();
+      } else {
+        console.log('Upss Hubo un problema vuelve a intentarlo');
+      }
+    });
   }
 
   addNavigationItem(section: any) {
     const dialogRef1 = this.dialog.open(DialogNavigationItemComponent, {
-      width: "450px",
+      width: '450px',
       data: {
-        title: "Agregar acceso",
-        buttonName: "Agregar",
+        title: 'Agregar acceso',
+        buttonName: 'Agregar',
         edit: 0,
         idseccion: section === 'NuevoMenu' ? null : section.id,
         isMenu: true,
-        rol: "CLICKER",
-
+        rol: 'CLICKER',
       },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
-      this.sectionsLinks = []
-      this.links = []
+      this.sectionsLinks = [];
+      this.links = [];
       this.getSections();
     });
   }
 
   editNavigationItem(item: any) {
     const data = {
-      title: "Editar acceso",
-      buttonName: "Guardar",
+      title: 'Editar acceso',
+      buttonName: 'Guardar',
       edit: 1,
       id: item.id || item.Id,
       idseccion: item.idseccion || item.idgrupo,
@@ -197,12 +183,12 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
     };
 
     const dialogRef1 = this.dialog.open(DialogNavigationItemComponent, {
-      width: "450px",
+      width: '450px',
       data: data,
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
-      this.sectionsLinks = []
-      this.links = []
+      this.sectionsLinks = [];
+      this.links = [];
       this.getSections();
     });
   }
@@ -210,10 +196,10 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
   deleteNavigationItem(item: any) {
     this.currentLink = item;
 
-    const title = "";
+    const title = '';
     const template = this.templateDeleteNavigationItem;
     this.dialogRef = this.dialog.open(ModalGenericComponent, {
-      width: "450px",
+      width: '450px',
       data: {
         title,
         template,
@@ -221,19 +207,19 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
     });
 
     this.subscription = this.dialogRef.beforeClosed().subscribe(() => {
-      this.sectionsLinks = []
-      this.links = []
+      this.sectionsLinks = [];
+      this.links = [];
       this.getSections();
     });
   }
 
   deleteNavigationItemService() {
-    let idMenu = [this.currentLink.Id];
+    const idMenu = [this.currentLink.Id];
     this.auth.deleteMenu(idMenu).subscribe((resp: ResponseService) => {
-      if (resp.state === "Success") {
+      if (resp.state === 'Success') {
         this.dialog.closeAll();
       } else {
-        console.log("Upss Hubo un problema vuelve a intentarlo");
+        console.log('Upss Hubo un problema vuelve a intentarlo');
       }
     });
   }
@@ -246,5 +232,4 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
 }

@@ -1,27 +1,24 @@
-import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { TranslateModule } from "@ngx-translate/core";
-import { of } from "rxjs";
-import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
-import { LinksService } from "src/app/services/links.service";
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateModule } from '@ngx-translate/core';
+import { of } from 'rxjs';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { LinksService } from 'src/app/services/links.service';
 
-import { CardOrderNumberComponent } from "./card-order-number.component";
+import { CardOrderNumberComponent } from './card-order-number.component';
 
-describe("CardOrderNumberComponent", () => {
+describe('CardOrderNumberComponent', () => {
   let component: CardOrderNumberComponent;
   let fixture: ComponentFixture<CardOrderNumberComponent>;
 
-  let mockLinksService = jasmine.createSpyObj("LinksService", [
-    "getOrderNumber",
-  ]);
+  let mockLinksService = jasmine.createSpyObj('LinksService', ['getOrderNumber']);
 
   let orderNumber = {
-    state: "Success",
-    userMessage: "El número de la orden no existe",
-    objectResponse:
-      "Este número de orden esta erróneo o no existe un registro en las bases del aliado con este número.",
+    state: 'Success',
+    userMessage: 'El número de la orden no existe',
+    objectResponse: 'Este número de orden esta erróneo o no existe un registro en las bases del aliado con este número.',
   };
 
   beforeEach(async(() => {
@@ -45,7 +42,7 @@ describe("CardOrderNumberComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
@@ -54,6 +51,4 @@ describe("CardOrderNumberComponent", () => {
     component.consultOrder();
     expect(mockLinksService.getOrderNumber).toHaveBeenCalled();
   });
-  
-
 });

@@ -1,4 +1,3 @@
 export interface Forgotpassword {
-    Username: string;
+  Username: string;
 }
-

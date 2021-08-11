@@ -1,276 +1,276 @@
 @import 'variables';
 @import 'general';
-@import "mixins";
+@import 'mixins';
 
 .modal-stories {
-    padding: 15px 0;
-    overflow: hidden;
-    position: relative;
-    background-color: #0c0914d4;
+  padding: 15px 0;
+  overflow: hidden;
+  position: relative;
+  background-color: #0c0914d4;
 
+  @include from(550px) {
+    padding: 0;
+  }
+
+  .slick-slider {
+    z-index: $z-floor;
+  }
+
+  .arrows {
+    z-index: $z-floor;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 34%;
+    height: 0;
+    @include from(2000px) {
+      padding: 0 32%;
+    }
+    @include from($xxx-large) {
+      padding: 0 30%;
+    }
+    @include from($medium) {
+      padding: 0 15%;
+    }
+    @include from(600px) {
+      padding: 0 10%;
+    }
     @include from(550px) {
-        padding: 0;
+      padding: 0;
+      height: 80%;
+      z-index: $z-medium;
+    }
+  }
+
+  .slick-arrow {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    @include from(550px) {
+      height: 100%;
     }
 
-    .slick-slider {
-        z-index: $z-floor;
-    }
-
-    .arrows {
-        z-index: $z-floor;
-        position: absolute;
-        top: 50%;
-        left: 0;
-        transform: translate(0, -50%);
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 34%;
+    img {
+      border-radius: 50px;
+      width: 40px;
+      height: 40px;
+      @include from(2000px) {
+        width: 30px;
+        height: 30px;
+      }
+      @include from($xxx-large) {
+        width: 25px;
+        height: 25px;
+      }
+      @include from(550px) {
+        width: 0;
         height: 0;
-        @include from(2000px) {
-            padding: 0 32%;
-        }
-        @include from($xxx-large) {
-            padding: 0 30%;
-        }
-        @include from($medium) {
-            padding: 0 15%;
-        }
-        @include from(600px) {
-            padding: 0 10%;
-        }
-        @include from(550px) {
-            padding: 0;
-            height: 80%;
-            z-index: $z-medium;
-        }
+      }
     }
+  }
 
-    .slick-arrow {
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        @include from(550px) {
-            height: 100%;
-        }
-
-        img {
-            border-radius: 50px;
-            width: 40px;
-            height: 40px;
-            @include from(2000px) {
-                width: 30px;
-                height: 30px;
-            }
-            @include from($xxx-large) {
-                width: 25px;
-                height: 25px;
-            }
-            @include from(550px) {
-                width: 0;
-                height: 0;
-            }
-        }
+  .arrow-left {
+    @include from(550px) {
+      width: 20%;
     }
+  }
 
-    .arrow-left {
-        @include from(550px) {
-            width: 20%;
-        }
+  .arrow-right {
+    @include from(550px) {
+      width: 80%;
     }
-
-    .arrow-right {
-        @include from(550px) {
-            width: 80%;
-        }
-    }
+  }
 }
 
 #closeDialogStories {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    z-index: $z-medium;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: $z-medium;
 
-    @include from(550px) {
-        top: 38px;
-        right: 0;
-    }
+  @include from(550px) {
+    top: 38px;
+    right: 0;
+  }
 
-    @include from(550px) {
-        .close {
-            background: #585656c7;
-            border-radius: 50px;
-        }
+  @include from(550px) {
+    .close {
+      background: #585656c7;
+      border-radius: 50px;
     }
+  }
 }
 
 .story-button {
-    width: 80px;
-    border: none;
-    background-color: transparent;
-    padding: 0;
+  width: 80px;
+  border: none;
+  background-color: transparent;
+  padding: 0;
 
-    h4 {
-        margin: 8px 0;
-    }
+  h4 {
+    margin: 8px 0;
+  }
 }
 
 .image-container {
-    display: block;
-    width: 70px;
-    height: 70px;
-    padding: 3px;
-    border-radius: 50px;
-    background: transparent linear-gradient(180deg, #8C80B4 0%, #352767 100%) 0% 0% no-repeat padding-box;
-    margin: 0 auto;
+  display: block;
+  width: 70px;
+  height: 70px;
+  padding: 3px;
+  border-radius: 50px;
+  background: transparent linear-gradient(180deg, #8c80b4 0%, #352767 100%) 0% 0% no-repeat padding-box;
+  margin: 0 auto;
 
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-        border-radius: 50px;
-        border: 2px solid white;
-    }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50px;
+    border: 2px solid white;
+  }
 }
 
 .slick-slide {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .slick-slide.slick-center {
-    transform: initial;
-    @include from(550px) {
-        min-width: 100vw;
-    }
+  transform: initial;
+  @include from(550px) {
+    min-width: 100vw;
+  }
 }
 
 .slick-slide:not(.slick-center) {
-    transform: translate(-94%) scale(0.4);
-    @include from(2540px) {
-        transform: translate(-88%) scale(0.4);
-    }
-    @include from(2300px) {
-        transform: translate(-84%) scale(0.4);
-    }
-    @include from(2000px) {
-        transform: translate(-80%) scale(0.4);
-    }
-    @include from($high-quality) {
-        transform: translate(-70%) scale(0.4);
-    }
-    @include from($xx-large) {
-        transform: translate(-46%) scale(0.4);
-    }
-    @include from($medium) {
-        transform: translate(0) scale(0.4);
-    }
-    @include from(550px) {
-        transform: initial;
-    }
+  transform: translate(-94%) scale(0.4);
+  @include from(2540px) {
+    transform: translate(-88%) scale(0.4);
+  }
+  @include from(2300px) {
+    transform: translate(-84%) scale(0.4);
+  }
+  @include from(2000px) {
+    transform: translate(-80%) scale(0.4);
+  }
+  @include from($high-quality) {
+    transform: translate(-70%) scale(0.4);
+  }
+  @include from($xx-large) {
+    transform: translate(-46%) scale(0.4);
+  }
+  @include from($medium) {
+    transform: translate(0) scale(0.4);
+  }
+  @include from(550px) {
+    transform: initial;
+  }
 }
 
 .slick-slide.slick-center + .slick-slide {
-    transform: translate(-300px) scale(0.4);
-    @include from(2540px) {
-        transform: translate(-220px) scale(0.4);
-    }
-    @include from(2300px) {
-        transform: translate(-160px) scale(0.4);
-    }
-    @include from(2000px) {
-        transform: translate(-140px) scale(0.4);
-    }
-    @include from($high-quality) {
-        transform: translate(-80px) scale(0.4);
-    }
-    @include from($xxx-large) {
-        transform: translate(-60px) scale(0.4);
-    }
-    @include from($xx-large) {
-        transform: translate(0) scale(0.4);
-    }
-    @include from($medium) {
-        transform: translate(140px) scale(0.4);
-    }
-    @include from(550px) {
-        transform: initial;
-    }
+  transform: translate(-300px) scale(0.4);
+  @include from(2540px) {
+    transform: translate(-220px) scale(0.4);
+  }
+  @include from(2300px) {
+    transform: translate(-160px) scale(0.4);
+  }
+  @include from(2000px) {
+    transform: translate(-140px) scale(0.4);
+  }
+  @include from($high-quality) {
+    transform: translate(-80px) scale(0.4);
+  }
+  @include from($xxx-large) {
+    transform: translate(-60px) scale(0.4);
+  }
+  @include from($xx-large) {
+    transform: translate(0) scale(0.4);
+  }
+  @include from($medium) {
+    transform: translate(140px) scale(0.4);
+  }
+  @include from(550px) {
+    transform: initial;
+  }
 }
 
 .slick-slide.prev-slick {
-    transform: translate(94%) scale(0.4);
-    @include from(2540px) {
-        transform: translate(88%) scale(0.4);
-    }
-    @include from(2300px) {
-        transform: translate(84%) scale(0.4);
-    }
-    @include from(2000px) {
-        transform: translate(80%) scale(0.4);
-    }
-    @include from($high-quality) {
-        transform: translate(70%) scale(0.4);
-    }
-    @include from($xx-large) {
-        transform: translate(46%) scale(0.4);
-    }
-    @include from($medium) {
-        transform: translate(0) scale(0.4);
-    }
-    @include from(550px) {
-        transform: initial;
-    }
+  transform: translate(94%) scale(0.4);
+  @include from(2540px) {
+    transform: translate(88%) scale(0.4);
+  }
+  @include from(2300px) {
+    transform: translate(84%) scale(0.4);
+  }
+  @include from(2000px) {
+    transform: translate(80%) scale(0.4);
+  }
+  @include from($high-quality) {
+    transform: translate(70%) scale(0.4);
+  }
+  @include from($xx-large) {
+    transform: translate(46%) scale(0.4);
+  }
+  @include from($medium) {
+    transform: translate(0) scale(0.4);
+  }
+  @include from(550px) {
+    transform: initial;
+  }
 }
 
 .slick-slide.prev-slick.next-prev-slick {
-    transform: translate(300px) scale(0.4);
-    @include from(2540px) {
-        transform: translate(220px) scale(0.4);
-    }
-    @include from(2300px) {
-        transform: translate(160px) scale(0.4);
-    }
-    @include from(2000px) {
-        transform: translate(140px) scale(0.4);
-    }
-    @include from($high-quality) {
-        transform: translate(80px) scale(0.4);
-    }
-    @include from($xxx-large) {
-        transform: translate(60px) scale(0.4);
-    }
-    @include from($xx-large) {
-        transform: translate(0) scale(0.4);
-    }
-    @include from($medium) {
-        transform: translate(-140px) scale(0.4);
-    }
-    @include from(550px) {
-        transform: initial;
-    }
+  transform: translate(300px) scale(0.4);
+  @include from(2540px) {
+    transform: translate(220px) scale(0.4);
+  }
+  @include from(2300px) {
+    transform: translate(160px) scale(0.4);
+  }
+  @include from(2000px) {
+    transform: translate(140px) scale(0.4);
+  }
+  @include from($high-quality) {
+    transform: translate(80px) scale(0.4);
+  }
+  @include from($xxx-large) {
+    transform: translate(60px) scale(0.4);
+  }
+  @include from($xx-large) {
+    transform: translate(0) scale(0.4);
+  }
+  @include from($medium) {
+    transform: translate(-140px) scale(0.4);
+  }
+  @include from(550px) {
+    transform: initial;
+  }
 }
 
 .single-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .card.only {
-    z-index: $z-floor;
-    width: 50%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  z-index: $z-floor;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

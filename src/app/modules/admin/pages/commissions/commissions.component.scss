@@ -1,8 +1,8 @@
-@import "variables";
-@import "general";
-@import "animations";
+@import 'variables';
+@import 'general';
+@import 'animations';
 
-input[type="file"] {
+input[type='file'] {
   display: none;
 }
 
@@ -12,8 +12,7 @@ input[type="file"] {
   box-sizing: border-box;
   color: white;
   border-radius: 10px;
-  box-shadow: 0 3px 1px -2px rgb(61 47 86 / 18%),
-    0 2px 2px 0 rgb(61 47 86 / 18%), 0 1px 5px 0 rgb(61 47 86 / 18%);
+  box-shadow: 0 3px 1px -2px rgb(61 47 86 / 18%), 0 2px 2px 0 rgb(61 47 86 / 18%), 0 1px 5px 0 rgb(61 47 86 / 18%);
 }
 
 .style-icon {
@@ -181,7 +180,8 @@ input[type="file"] {
     text-decoration: underline;
   }
 
-  th.mat-header-cell, td.mat-cell {
+  th.mat-header-cell,
+  td.mat-cell {
     padding: 5px 8px;
   }
 

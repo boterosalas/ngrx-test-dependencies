@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LinksService } from 'src/app/services/links.service';
 import { MasterDataService } from 'src/app/services/master-data.service';
@@ -6,14 +6,10 @@ import { MasterDataService } from 'src/app/services/master-data.service';
 @Component({
   selector: 'app-terms-and-conditions',
   templateUrl: './terms-and-conditions.component.html',
-  styleUrls: ['./terms-and-conditions.component.scss']
+  styleUrls: ['./terms-and-conditions.component.scss'],
 })
-export class TermsAndConditionsComponent implements OnInit {
-
-  constructor(
-    private personalInfo: MasterDataService,
-    private link: LinksService
-  ) { }
+export class TermsAndConditionsComponent implements OnInit, OnDestroy {
+  constructor(private personalInfo: MasterDataService, private link: LinksService) {}
   contentTerminos: any;
   contentProteccion: any;
   contentTransparencia: any;
@@ -27,7 +23,6 @@ export class TermsAndConditionsComponent implements OnInit {
   private subscription: Subscription = new Subscription();
 
   ngOnInit() {
-
     this.amount = localStorage.getItem('Amount');
     this.amountReferred = localStorage.getItem('AmonuntReferred');
     this.getTerms();
@@ -37,30 +32,34 @@ export class TermsAndConditionsComponent implements OnInit {
 
   public getAmount() {
     this.subscription = this.link.getAmount().subscribe((amount) => {
-      localStorage.setItem("Amount", amount.amountsCommission);
-      localStorage.setItem("AmonuntReferred", amount.amountsReferred);
+      localStorage.setItem('Amount', amount.amountsCommission);
+      localStorage.setItem('AmonuntReferred', amount.amountsReferred);
     });
   }
 
   public addTagsclass() {
     setTimeout(() => {
-      document.querySelector('.mat-tab-label[aria-posinset="1"]').classList.add("gtmTerminosCondicionesClicTerminosLegales");
-      document.querySelector('.mat-tab-label[aria-posinset="2"]').classList.add("gtmTerminosCondicionesClicEmprendedor");
-      document.querySelector('.mat-tab-label[aria-posinset="3"]').classList.add("gtmTerminosCondicionesClicProteccionDatos");
-      document.querySelector('.mat-tab-label[aria-posinset="4"]').classList.add("gtmTerminosCondicionesClicProgramaReferidos");
+      document.querySelector('.mat-tab-label[aria-posinset="1"]').classList.add('gtmTerminosCondicionesClicTerminosLegales');
+      document.querySelector('.mat-tab-label[aria-posinset="2"]').classList.add('gtmTerminosCondicionesClicEmprendedor');
+      document.querySelector('.mat-tab-label[aria-posinset="3"]').classList.add('gtmTerminosCondicionesClicProteccionDatos');
+      document.querySelector('.mat-tab-label[aria-posinset="4"]').classList.add('gtmTerminosCondicionesClicProgramaReferidos');
     }, 1000);
-
   }
   getTerms() {
-    this.personalInfo.getTerms().subscribe((resp: any) => {
-      this.contentTerminos = resp.objectResponse[0].sectionvalue
-      this.contentProteccion = resp.objectResponse[1].sectionvalue
-      this.contentTransparencia = resp.objectResponse[2].sectionvalue
-      this.contentPrograma = resp.objectResponse[3].sectionvalue
-      this.textTerminos = resp.objectResponse[0].sectiontitle
-      this.textProteccion = resp.objectResponse[1].sectiontitle
-      this.textTransparencia = resp.objectResponse[2].sectiontitle
-      this.textPrograma = resp.objectResponse[3].sectiontitle
-    })
+    this.subscription = this.personalInfo.getTerms().subscribe((resp: any) => {
+      this.contentTerminos = resp.objectResponse[0].sectionvalue;
+      this.contentProteccion = resp.objectResponse[1].sectionvalue;
+      this.contentTransparencia = resp.objectResponse[2].sectionvalue;
+      this.contentPrograma = resp.objectResponse[3].sectionvalue;
+      this.textTerminos = resp.objectResponse[0].sectiontitle;
+      this.textProteccion = resp.objectResponse[1].sectiontitle;
+      this.textTransparencia = resp.objectResponse[2].sectiontitle;
+      this.textPrograma = resp.objectResponse[3].sectiontitle;
+    });
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }

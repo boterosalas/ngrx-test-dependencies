@@ -10,13 +10,10 @@ describe('ButtonStoryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ButtonStoryComponent ],
-      imports:[
-        AppMaterialModule
-      ],
+      declarations: [ButtonStoryComponent],
+      imports: [AppMaterialModule],
       schemas: [NO_ERRORS_SCHEMA],
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -31,9 +28,7 @@ describe('ButtonStoryComponent', () => {
 
   it('view story', () => {
     spyOn(component.openStory, 'emit');
-     component.viewStory();
-     expect(component.openStory.emit).toHaveBeenCalled();
+    component.viewStory();
+    expect(component.openStory.emit).toHaveBeenCalled();
   });
-  
-
 });

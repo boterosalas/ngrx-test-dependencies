@@ -4,68 +4,33 @@
   <div mat-dialog-content>
     <form [formGroup]="dateForm">
       <mat-form-field>
-        <input
-          matInput
-          id="description"
-          type="text"
-          placeholder="Nombre"
-          formControlName="description"
-          maxlength="100"
-        />
+        <input matInput id="description" type="text" placeholder="Nombre" formControlName="description" maxlength="100" />
         <mat-error
           id="requiredDescription"
-          *ngIf="dateForm.controls.description.invalid &&
-            dateForm.controls.description.errors.required">{{
-            "GENERIC.REQUIRED" | translate: { formValue: "Nombre" }
-          }}</mat-error
+          *ngIf="dateForm.controls.description.invalid && dateForm.controls.description.errors.required"
+          >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Nombre' } }}</mat-error
         >
       </mat-form-field>
 
-
       <mat-form-field>
-        <input
-          matInput
-          id="link"
-          type="text"
-          placeholder="Enlace"
-          formControlName="link"
-        />
-        <mat-error
-          id="requiredLink"
-          *ngIf="
-            dateForm.controls.link.invalid &&
-            dateForm.controls.link.errors.required
-          "
-          >{{
-            "GENERIC.REQUIRED" | translate: { formValue: "Enlace" }
-          }}</mat-error>
+        <input matInput id="link" type="text" placeholder="Enlace" formControlName="link" />
+        <mat-error id="requiredLink" *ngIf="dateForm.controls.link.invalid && dateForm.controls.link.errors.required">{{
+          'GENERIC.REQUIRED' | translate: { formValue: 'Enlace' }
+        }}</mat-error>
       </mat-form-field>
-
 
       <mat-form-field *ngIf="data.icon !== undefined || data.isMenu">
         <mat-label>Icono</mat-label>
         <mat-select [(value)]="iconSelected">
-          <mat-option
-            *ngFor="let icon of iconList"
-            [value]="icon.name"
-            class="menu-option"
-            ngClass="{{ icon.name }}"
-          >
+          <mat-option *ngFor="let icon of iconList" [value]="icon.name" class="menu-option" ngClass="{{ icon.name }}">
             {{ icon.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
       <div class="dialog-navigation-item__buttons">
-        <button mat-button ngClass="button_cancel" (click)="onNoClick()">
-          Cancelar
-        </button>
-        <button
-          mat-raised-button
-          color="orange"
-          (click)="saveItem()"
-          [disabled]="!dateForm.valid"
-        >
+        <button mat-button ngClass="button_cancel" (click)="onNoClick()">Cancelar</button>
+        <button mat-raised-button color="orange" (click)="saveItem()" [disabled]="!dateForm.valid">
           {{ data.buttonName }}
         </button>
       </div>

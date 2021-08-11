@@ -9,12 +9,9 @@ describe('BussinessCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BussinessCardComponent ],
-      imports:[
-        AppMaterialModule
-      ]
-    })
-    .compileComponents();
+      declarations: [BussinessCardComponent],
+      imports: [AppMaterialModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -29,9 +26,7 @@ describe('BussinessCardComponent', () => {
 
   it('navigate bussiness', () => {
     spyOn(component.bussiness, 'emit');
-     component.navigateBussiness();
-     expect(component.bussiness.emit).toHaveBeenCalled();
+    component.navigateBussiness();
+    expect(component.bussiness.emit).toHaveBeenCalled();
   });
-  
-
 });

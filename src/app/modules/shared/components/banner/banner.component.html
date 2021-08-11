@@ -1,13 +1,17 @@
 <div class="position-relative banner" fxShow.gt-xs="true" fxShow.xs="false">
-    <img class="responsive-img whigh" [src]="img" [alt]="title">
-    <div class="container">
-        <h3 class="{{color}} position-absolute text-banner f-23 border-bottom-orange-init">{{title}}</h3>
-    </div>
+  <img class="responsive-img whigh" [src]="img" [alt]="title" />
+  <div class="container">
+    <h3 class="{{ color }} position-absolute text-banner f-23 border-bottom-orange-init">
+      {{ title }}
+    </h3>
+  </div>
 </div>
 
 <div class="position-relative banner-mobile" fxShow.gt-xs="false" fxShow.xs="true">
-    <img class="responsive-img" [src]="imgMobile" [alt]="title">
-    <div class="container">
-        <h3 class="{{color}} position-absolute text-banner-mobile f-20 border-bottom-orange-init">{{title}}</h3>
-    </div>
+  <img class="responsive-img" [src]="imgMobile" [alt]="title" />
+  <div class="container">
+    <h3 class="{{ color }} position-absolute text-banner-mobile f-20 border-bottom-orange-init">
+      {{ title }}
+    </h3>
+  </div>
 </div>

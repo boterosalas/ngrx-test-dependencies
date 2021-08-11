@@ -4,18 +4,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-refer-email',
   templateUrl: './refer-email.component.html',
-  styleUrls: ['./refer-email.component.scss']
+  styleUrls: ['./refer-email.component.scss'],
 })
 export class ReferEmailComponent implements OnInit {
-
   @Output() email = new EventEmitter();
 
-  emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
+  emailPattern = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
   referForm: FormGroup;
 
-  constructor(
-    private fb: FormBuilder
-  ) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.formRefer();
@@ -23,14 +20,7 @@ export class ReferEmailComponent implements OnInit {
 
   public formRefer() {
     this.referForm = this.fb.group({
-      email: [
-        "",
-        [
-          Validators.required,
-          Validators.pattern(this.emailPattern),
-          Validators.maxLength(64)
-        ]
-      ]
+      email: ['', [Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
     });
   }
 
@@ -38,8 +28,7 @@ export class ReferEmailComponent implements OnInit {
     this.email.emit(this.referForm.controls.email.value.toLowerCase());
     setTimeout(() => {
       this.referForm.reset();
-      this.referForm.controls.email.setErrors({'required': false});
+      this.referForm.controls.email.setErrors({ required: false });
     }, 500);
   }
-
 }

@@ -3,13 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-not-commission',
   templateUrl: './not-commission.component.html',
-  styleUrls: ['./not-commission.component.scss']
+  styleUrls: ['./not-commission.component.scss'],
 })
 export class NotCommissionComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

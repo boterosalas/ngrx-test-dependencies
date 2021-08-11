@@ -7,15 +7,15 @@
   <div class="table-container">
     <table mat-table [dataSource]="servicios" class="users-table setting">
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef style="min-width: 230px; font-weight: bold; ">Nombre</th>
-        <td mat-cell *matCellDef="let element: let i=index" >
+        <th mat-header-cell *matHeaderCellDef style="min-width: 230px; font-weight: bold">Nombre</th>
+        <td mat-cell *matCellDef="let element: let i=index">
           <div class="flex-r-sb">
             <div class="user-container">
-              <p>{{element.fullname}}</p>
+              <p>{{ element.fullname }}</p>
               <p *ngIf="element.issuperadmin" class="super-admin">SUPER ADMIN</p>
             </div>
             <img
-              class="cursor-pointer {{element.userid == userId || role !== 'SUPERADMIN' ? 'icon-disabled' : ''}}"
+              class="cursor-pointer {{ element.userid == userId || role !== 'SUPERADMIN' ? 'icon-disabled' : '' }}"
               (click)="openConfirmPassword(element.userid)"
               src="/assets/img/dashboard/icon-remove-comision.svg"
               alt="delete"
@@ -24,24 +24,25 @@
         </td>
       </ng-container>
       <ng-container matColumnDef="superadmin">
-        <th mat-header-cell *matHeaderCellDef class="highlighted-column" style="min-width: 110px; font-weight: bold; text-align: center;">Super Admin</th>
-        <td mat-cell *matCellDef="let element: let i=index"> 
+        <th mat-header-cell *matHeaderCellDef class="highlighted-column" style="min-width: 110px; font-weight: bold; text-align: center">
+          Super Admin
+        </th>
+        <td mat-cell *matCellDef="let element: let i=index">
           <div class="flex-center">
-              <mat-slide-toggle 
-                [disabled]="element.userid == userId || role !== 'SUPERADMIN'"
-                [(ngModel)]="element.issuperadmin"
-                (change)="cambio()"
-                color="orange2-toggle" 
-              ></mat-slide-toggle>
+            <mat-slide-toggle
+              [disabled]="element.userid == userId || role !== 'SUPERADMIN'"
+              [(ngModel)]="element.issuperadmin"
+              (change)="cambio()"
+              color="orange2-toggle"
+            ></mat-slide-toggle>
           </div>
         </td>
       </ng-container>
-      <ng-container 
-        *ngFor="let column of permisionColumns"
-        matColumnDef="{{column.menu.split(' ')[0]}}"
-      >
-        <th mat-header-cell *matHeaderCellDef style="min-width: 110px; font-weight: bold; text-align: center;">{{column.menu}}</th>
-        <td mat-cell *matCellDef="let element: let i=index"> 
+      <ng-container *ngFor="let column of permisionColumns" matColumnDef="{{ column.menu.split(' ')[0] }}">
+        <th mat-header-cell *matHeaderCellDef style="min-width: 110px; font-weight: bold; text-align: center">
+          {{ column.menu }}
+        </th>
+        <td mat-cell *matCellDef="let element: let i=index">
           <div class="flex-center">
             <mat-checkbox
               (change)="changePermission($event, i, column.idmenu)"
@@ -54,26 +55,21 @@
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;let i= index" ></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
     </table>
   </div>
   <div class="buttons-container">
     <button mat-raised-button class="button-save" (click)="addNewAdmin()">Agregar administrador</button>
-    <button mat-raised-button class="button-save" (click)="saveeraser()" [disabled]="disableBoton" >Guardar cambios</button>
+    <button mat-raised-button class="button-save" (click)="saveeraser()" [disabled]="disableBoton">Guardar cambios</button>
   </div>
 </div>
 
 <ng-template #templateDeleteAdmin>
   <div [formGroup]="adminFormDelete" ngClass="delete-container">
     <h3 ngClass="title_delete">Eliminar administrador</h3>
-    <p ngClass="text-container">
-      ¿Está seguro que desea eliminar el administrador seleccionado?
-    </p>
+    <p ngClass="text-container">¿Está seguro que desea eliminar el administrador seleccionado?</p>
     <mat-form-field ngClass="mb-2">
-      <mat-pass-toggle-visibility
-        #toggleVisbility
-        matSuffix
-      ></mat-pass-toggle-visibility>
+      <mat-pass-toggle-visibility #toggleVisbility matSuffix></mat-pass-toggle-visibility>
       <input
         matInput
         id="password"
@@ -87,35 +83,16 @@
 
       <mat-error
         id="introducePassword"
-        *ngIf="
-          adminFormDelete.controls.Password.invalid &&
-          adminFormDelete.controls.Password.errors.required
-        "
-        >{{ "LOGIN.INTRODUCE_PASSWORD" | translate }}</mat-error
+        *ngIf="adminFormDelete.controls.Password.invalid && adminFormDelete.controls.Password.errors.required"
+        >{{ 'LOGIN.INTRODUCE_PASSWORD' | translate }}</mat-error
       >
 
-      <mat-error
-        id="minPassword"
-        *ngIf="
-          adminFormDelete.controls.Password.invalid &&
-          adminFormDelete.controls.Password.errors.minlength
-        "
-        >{{
-          "GENERIC.MIN_CHARACTERS"
-            | translate
-        }}</mat-error
-      >
-      <mat-error
-        id="maxPassword"
-        *ngIf="
-          adminFormDelete.controls.Password.invalid &&
-          adminFormDelete.controls.Password.errors.maxlength
-        "
-        >{{
-          "GENERIC.MAX_CHARACTERS"
-            | translate
-        }}</mat-error
-      >
+      <mat-error id="minPassword" *ngIf="adminFormDelete.controls.Password.invalid && adminFormDelete.controls.Password.errors.minlength">{{
+        'GENERIC.MIN_CHARACTERS' | translate
+      }}</mat-error>
+      <mat-error id="maxPassword" *ngIf="adminFormDelete.controls.Password.invalid && adminFormDelete.controls.Password.errors.maxlength">{{
+        'GENERIC.MAX_CHARACTERS' | translate
+      }}</mat-error>
     </mat-form-field>
     <div
       fxLayout="row"
@@ -126,9 +103,7 @@
       class="center-buttons"
     >
       <div>
-        <button mat-button ngClass="button_cancel" (click)="cancel()">
-          Cancelar
-        </button>
+        <button mat-button ngClass="button_cancel" (click)="cancel()">Cancelar</button>
       </div>
       <div>
         <button
@@ -149,24 +124,10 @@
   <div>
     <form [formGroup]="dataAddAdmin">
       <mat-form-field style="width: 370px">
-        <input
-          matInput
-          placeholder="NOMBRE"
-          formControlName="name"
-          type="text"
-          required
-          style="color: #37236a"
-        />
-        <mat-error
-          id="requiredName"
-          *ngIf="
-            dataAddAdmin.controls.name.invalid &&
-            dataAddAdmin.controls.name.errors.required
-          "
-          >{{
-            "GENERIC.REQUIRED" | translate: { formValue: "Nombre" }
-          }}</mat-error
-        >
+        <input matInput placeholder="NOMBRE" formControlName="name" type="text" required style="color: #37236a" />
+        <mat-error id="requiredName" *ngIf="dataAddAdmin.controls.name.invalid && dataAddAdmin.controls.name.errors.required">{{
+          'GENERIC.REQUIRED' | translate: { formValue: 'Nombre' }
+        }}</mat-error>
       </mat-form-field>
       <mat-form-field style="width: 370px">
         <input
@@ -178,24 +139,12 @@
           required
           style="color: #37236a"
         />
-        <mat-error
-          id="introduceEmail"
-          *ngIf="
-            dataAddAdmin.controls.email.invalid &&
-            dataAddAdmin.controls.email.errors.required
-          "
-          >{{
-            "GENERIC.REQUIRED" | translate: { formValue: "Correo electrónico" }
-          }}</mat-error
-        >
-        <mat-error
-          id="invalidEmail"
-          *ngIf="
-            dataAddAdmin.controls.email.invalid &&
-            dataAddAdmin.controls.email.errors.pattern
-          "
-          >{{ "LOGIN.INVALID_EMAIL" | translate }}</mat-error
-        >
+        <mat-error id="introduceEmail" *ngIf="dataAddAdmin.controls.email.invalid && dataAddAdmin.controls.email.errors.required">{{
+          'GENERIC.REQUIRED' | translate: { formValue: 'Correo electrónico' }
+        }}</mat-error>
+        <mat-error id="invalidEmail" *ngIf="dataAddAdmin.controls.email.invalid && dataAddAdmin.controls.email.errors.pattern">{{
+          'LOGIN.INVALID_EMAIL' | translate
+        }}</mat-error>
       </mat-form-field>
       <mat-form-field style="width: 370px">
         <input
@@ -207,53 +156,28 @@
           required
           style="color: #37236a"
         />
-        <mat-error
-          id="invalidPassword"
-          *ngIf="
-            dataAddAdmin.controls.password.invalid &&
-            dataAddAdmin.controls.password.errors.required
-          "
-          >{{
-            "GENERIC.REQUIRED" | translate: { formValue: "Contraseña temporal" }
-          }}</mat-error
-        >
-        <mat-error
-          id="minPassword"
-          *ngIf="
-            dataAddAdmin.controls.password.invalid &&
-            dataAddAdmin.controls.password.errors.minlength
-          "
-          >{{
-            "GENERIC.MIN_CHARACTERS"
-              | translate
-                : {
-                    minchar:
-                      dataAddAdmin.controls.password.errors.minlength.requiredLength
-                  }
-          }}</mat-error
-        >
-        <mat-error
-          id="maxPassword"
-          *ngIf="
-            dataAddAdmin.controls.password.invalid &&
-            dataAddAdmin.controls.password.errors.maxlength
-          "
-          >{{
-            "GENERIC.MAX_CHARACTERS"
-              | translate
-                : {
-                    maxchar:
-                      dataAddAdmin.controls.password.errors.maxlength.requiredLength
-                  }
-          }}</mat-error
-        >
+        <mat-error id="invalidPassword" *ngIf="dataAddAdmin.controls.password.invalid && dataAddAdmin.controls.password.errors.required">{{
+          'GENERIC.REQUIRED' | translate: { formValue: 'Contraseña temporal' }
+        }}</mat-error>
+        <mat-error id="minPassword" *ngIf="dataAddAdmin.controls.password.invalid && dataAddAdmin.controls.password.errors.minlength">{{
+          'GENERIC.MIN_CHARACTERS'
+            | translate
+              : {
+                  minchar: dataAddAdmin.controls.password.errors.minlength.requiredLength
+                }
+        }}</mat-error>
+        <mat-error id="maxPassword" *ngIf="dataAddAdmin.controls.password.invalid && dataAddAdmin.controls.password.errors.maxlength">{{
+          'GENERIC.MAX_CHARACTERS'
+            | translate
+              : {
+                  maxchar: dataAddAdmin.controls.password.errors.maxlength.requiredLength
+                }
+        }}</mat-error>
       </mat-form-field>
     </form>
 
     <div class="mt-3 mb-2" fxLayout="row" fxLayoutAlign="end end">
-      <button mat-button ngClass="button_cancel" (click)="cancel()">
-        Cancelar
-      </button>
+      <button mat-button ngClass="button_cancel" (click)="cancel()">Cancelar</button>
       <button
         mat-raised-button
         color="orange"

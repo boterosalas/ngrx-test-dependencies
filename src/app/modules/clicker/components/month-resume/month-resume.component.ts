@@ -1,22 +1,17 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { LinksService } from "src/app/services/links.service";
-import { UserService } from "src/app/services/user.service";
-import { AuthService } from "src/app/services/auth.service";
-import { Subscription } from "rxjs";
-import { TokenService } from "src/app/services/token.service";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { LinksService } from 'src/app/services/links.service';
+import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Subscription } from 'rxjs';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
-  selector: "app-month-resume",
-  templateUrl: "./month-resume.component.html",
-  styleUrls: ["./month-resume.component.scss"]
+  selector: 'app-month-resume',
+  templateUrl: './month-resume.component.html',
+  styleUrls: ['./month-resume.component.scss'],
 })
 export class MonthResumeComponent implements OnInit, OnDestroy {
-  constructor(
-    private link: LinksService,
-    private user: UserService,
-    private auth: AuthService,
-    private token: TokenService
-  ) {}
+  constructor(private link: LinksService, private user: UserService, private auth: AuthService, private token: TokenService) {}
 
   linksCreated: string;
   identification: string;
@@ -24,27 +19,27 @@ export class MonthResumeComponent implements OnInit, OnDestroy {
   isLoggedIn: any;
   private subscription: Subscription = new Subscription();
 
-  title = "Performance del Clicker";
-  type = "ComboChart";
+  title = 'Performance del Clicker';
+  type = 'ComboChart';
   data = [];
-  columnNames = ["Mes", "Links Creados", "Comisión"];
+  columnNames = ['Mes', 'Links Creados', 'Comisión'];
 
   options = {
-    colors: ["#FF6F11", "#B5B8BC"],
+    colors: ['#FF6F11', '#B5B8BC'],
     hAxis: {
-      title: "Últimos 30 días"
+      title: 'Últimos 30 días',
     },
     vAxes: {
-      0: { title: "Links Creados" },
-      1: { title: "Comisión" }
+      0: { title: 'Links Creados' },
+      1: { title: 'Comisión' },
     },
-    seriesType: "bars",
+    seriesType: 'bars',
     series: {
-      0: { type: "line", targetAxisIndex: 0 },
-      1: { type: "bar", targetAxisIndex: 1 }
+      0: { type: 'line', targetAxisIndex: 0 },
+      1: { type: 'bar', targetAxisIndex: 1 },
     },
     is3D: true,
-    legend: { position: "top", alignment: "center" }
+    legend: { position: 'top', alignment: 'center' },
   };
 
   width = 350;

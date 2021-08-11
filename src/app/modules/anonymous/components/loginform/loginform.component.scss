@@ -10,29 +10,29 @@
   width: 100%;
 }
 
-.cursor{
-  &-pointer{
+.cursor {
+  &-pointer {
     cursor: pointer;
   }
 }
 
-.text-decoration{
-    text-decoration: underline;
+.text-decoration {
+  text-decoration: underline;
 }
 
-.mat-orange{
+.mat-orange {
   background: $primary-color;
   color: $white;
 }
 
-.mat-gray{
+.mat-gray {
   color: #86888a;
 }
 
-input{
+input {
   color: #000;
 }
 
-.title-login{
+.title-login {
   font-size: 22px;
 }

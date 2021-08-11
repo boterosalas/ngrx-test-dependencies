@@ -1,50 +1,34 @@
-<app-top title="Correo de Activación" (close)="hideActivate()"></app-top> 
+<app-top title="Correo de Activación" (close)="hideActivate()"></app-top>
 
-<p class="text-center">{{ "ACTIVATE.TEXT" | translate }}</p>
+<p class="text-center">{{ 'ACTIVATE.TEXT' | translate }}</p>
 
 <form class="forgotpassword-container" [formGroup]="activateForm">
-        <mat-form-field>
-          <input
-            matInput
-            id="email"
-            type="email"
-            placeholder="{{ 'GENERIC.EMAIL' | translate }}"
-            formControlName="email"
-            spacebar
-            required
-          />
-          <mat-error
-            id="introduceEmail"
-            *ngIf="
-              activateForm.controls.email.invalid &&
-              activateForm.controls.email.errors.required
-            "
-            >{{ "LOGIN.INTRODUCE_EMAIL" | translate }}</mat-error
-          >
-          <mat-error
-            id="invalidEmail"
-            *ngIf="
-              activateForm.controls.email.invalid &&
-              activateForm.controls.email.errors.pattern
-            "
-            >{{ "LOGIN.INVALID_EMAIL" | translate }}</mat-error
-          >
-      
-          <mat-error id="maxemail" *ngIf="activateForm.controls.email.invalid && activateForm.controls.email.errors.maxlength">{{
-              "GENERIC.MAX_CHARACTERS" | translate: {maxchar:activateForm.controls.email.errors.maxlength.requiredLength}
-            }}</mat-error>
-      
-        </mat-form-field>
-    
-        <button
-          mat-raised-button
-          class="button button-height button-100"
-          id="recoverPassword"
-          color="orange"
-          (click)="activateAccount()"
-          [disabled]="!activateForm.valid"
-        >
-          <span>{{ "GENERIC.SEND" | translate }}</span>
-        </button>
-      </form>
-      
+  <mat-form-field>
+    <input matInput id="email" type="email" placeholder="{{ 'GENERIC.EMAIL' | translate }}" formControlName="email" spacebar required />
+    <mat-error id="introduceEmail" *ngIf="activateForm.controls.email.invalid && activateForm.controls.email.errors.required">{{
+      'LOGIN.INTRODUCE_EMAIL' | translate
+    }}</mat-error>
+    <mat-error id="invalidEmail" *ngIf="activateForm.controls.email.invalid && activateForm.controls.email.errors.pattern">{{
+      'LOGIN.INVALID_EMAIL' | translate
+    }}</mat-error>
+
+    <mat-error id="maxemail" *ngIf="activateForm.controls.email.invalid && activateForm.controls.email.errors.maxlength">{{
+      'GENERIC.MAX_CHARACTERS'
+        | translate
+          : {
+              maxchar: activateForm.controls.email.errors.maxlength.requiredLength
+            }
+    }}</mat-error>
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    class="button button-height button-100"
+    id="recoverPassword"
+    color="orange"
+    (click)="activateAccount()"
+    [disabled]="!activateForm.valid"
+  >
+    <span>{{ 'GENERIC.SEND' | translate }}</span>
+  </button>
+</form>

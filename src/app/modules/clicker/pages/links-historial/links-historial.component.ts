@@ -1,33 +1,21 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ViewChild,
-  TemplateRef,
-} from "@angular/core";
-import {
-  MatTableDataSource,
-  MatPaginator,
-  MatDialog,
-  MatSnackBar,
-  MatBottomSheet,
-} from "@angular/material";
-import { LinksService } from "src/app/services/links.service";
-import { Subscription } from "rxjs";
-import { FormGroup, FormBuilder } from "@angular/forms";
-import { NgNavigatorShareService } from "ng-navigator-share";
-import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog.component";
+import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
+import { MatTableDataSource, MatPaginator, MatDialog, MatSnackBar, MatBottomSheet } from '@angular/material';
+import { LinksService } from 'src/app/services/links.service';
+import { Subscription } from 'rxjs';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { NgNavigatorShareService } from 'ng-navigator-share';
+import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
 
 @Component({
-  selector: "app-links-historial",
-  templateUrl: "./links-historial.component.html",
-  styleUrls: ["./links-historial.component.scss"],
+  selector: 'app-links-historial',
+  templateUrl: './links-historial.component.html',
+  styleUrls: ['./links-historial.component.scss'],
 })
 export class LinksHistorialComponent implements OnInit {
   dataSource: any;
-  pageIndex: number = 0;
-  pageSize: number = 20;
-  pageTo: number = 20;
+  pageIndex = 0;
+  pageSize = 20;
+  pageTo = 20;
   totalItems: number;
   paginate: string;
   private subscription: Subscription = new Subscription();
@@ -37,9 +25,9 @@ export class LinksHistorialComponent implements OnInit {
   orderOptions: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   orderValue: any;
-  @ViewChild("templateCategories", { static: false })
+  @ViewChild('templateCategories', { static: false })
   templateCategories: TemplateRef<any>;
-  urlshorten: string = "";
+  urlshorten = '';
   url: string;
   classButtonCopy: string;
   classButtonRefer: string;
@@ -76,10 +64,10 @@ export class LinksHistorialComponent implements OnInit {
 
   ngOnInit() {
     this.orderOptions = [
-      { value: "DATEDESC", description: "Más recientes" },
-      { value: "DATEASC", description: "Menos recientes" },
-      { value: "EFFECTIVEDESC", description: "Más efectivo" },
-      { value: "EFFECTIVEASC", description: "Menos efectivo" },
+      { value: 'DATEDESC', description: 'Más recientes' },
+      { value: 'DATEASC', description: 'Menos recientes' },
+      { value: 'EFFECTIVEDESC', description: 'Más efectivo' },
+      { value: 'EFFECTIVEASC', description: 'Menos efectivo' },
     ];
 
     this.getLinksHistory();
@@ -87,16 +75,16 @@ export class LinksHistorialComponent implements OnInit {
 
   public pagination(paginate: any) {
     this.pageIndex = paginate;
-    this.from = (this.pageSize * this.pageIndex + 1) - 20;
-    this.to = (this.pageSize * (this.pageIndex + 1)) - 20;
+    this.from = this.pageSize * this.pageIndex + 1 - 20;
+    this.to = this.pageSize * (this.pageIndex + 1) - 20;
     this.getLinksHistory(this.from, this.to);
   }
 
-  public getLinksHistory(from = 1, to = this.pageTo, orderBy = "DATEDESC") {
+  public getLinksHistory(from = 1, to = this.pageTo, orderBy = 'DATEDESC') {
     const params = { from, to, orderBy };
     this.subscription = this.links.getLinkHistory(params).subscribe((resp) => {
       this.totalItems = resp.total;
-      this.dataSource =  resp.linkHistory;
+      this.dataSource = resp.linkHistory;
     });
   }
 
@@ -108,8 +96,8 @@ export class LinksHistorialComponent implements OnInit {
 
   /**
    * Abre el mensaje de confirmacion de copiado del link
-   * @param message
-   * @param action
+   * @param message mensaje
+   * @param action accion
    */
 
   private openSnackBar(message: string, action: string) {
@@ -121,16 +109,16 @@ export class LinksHistorialComponent implements OnInit {
   /* To copy Text from Textbox */
   public copyInputMessage(inputElement: any) {
     inputElement.select();
-    document.execCommand("copy");
+    document.execCommand('copy');
     inputElement.setSelectionRange(0, 0);
-    this.openSnackBar("Se ha copiado el link al portapapeles", "Cerrar");
+    this.openSnackBar('Se ha copiado el link al portapapeles', 'Cerrar');
   }
 
   share() {
     this.ngNavigatorShareService
       .share({
-        title: "",
-        text: "",
+        title: '',
+        text: '',
         url: this.urlshorten,
       })
       .then((response) => {
@@ -142,26 +130,25 @@ export class LinksHistorialComponent implements OnInit {
   }
 
   buy() {
-    let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (iOS) {
       window.location.assign(this.urlshorten);
     } else {
-      window.open(this.urlshorten, "_blank");
+      window.open(this.urlshorten, '_blank');
     }
   }
 
   public dataHistory(product) {
-
     this.enableCopy = false;
     const dataCategoryUrl = product.link;
     this.showForm = false;
-    this.urlshorten = "";
+    this.urlshorten = '';
     this.reference = false;
     this.showFormCustomer = true;
     this.url = `${dataCategoryUrl}${this.idClicker}`;
     this.subscription = this.user;
-    let splice = product.link.split("//");
-    this.urlshorten = "https://" + splice[1];
+    const splice = product.link.split('//');
+    this.urlshorten = 'https://' + splice[1];
     this.formShareLink();
     const home = true;
     this.business = product.idbusiness;
@@ -170,44 +157,44 @@ export class LinksHistorialComponent implements OnInit {
     const img = product.imageurl;
     const showCloseIcon = true;
     const showClose = false;
-    const buttonClose = "Cerrar";
+    const buttonClose = 'Cerrar';
     const showshowTitle = false;
     const title = product.productname;
     const showProduct = true;
     const id = product.productId;
     const history = true;
     this.classButtonWhatsapp = `gtmClicLightboxIconoWhatsApp${title}`
-      .replace(/\s/g, "")
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "");
+      .replace(/\s/g, '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
     this.classButtonTwitter = `gtmClicLightboxIconoTwitter${title}`
-      .replace(/\s/g, "")
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "");
+      .replace(/\s/g, '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
     this.classButtonFacebook = `gtmClicLightboxIconoFacebook${title}`
-      .replace(/\s/g, "")
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "");
+      .replace(/\s/g, '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
     this.classButtonShare = `gtmClicLightboxCompartir${title}`
-      .replace(/\s/g, "")
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "");
+      .replace(/\s/g, '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
     this.classButtonBuy = `gtmClicLightboxComprar${title}`
-      .replace(/\s/g, "")
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "");
+      .replace(/\s/g, '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
     this.classButtonRefer = `gtmClicLightboxReferir${title}`
-      .replace(/\s/g, "")
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "");
+      .replace(/\s/g, '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
     this.classButtonCopy = `gtmClicLightboxCopiarLink${title}`
-      .replace(/\s/g, "")
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "");
+      .replace(/\s/g, '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
 
     const template = this.templateCategories;
 
-    let dialogref = this.dialog.open(DialogComponent, {
+    const dialogref = this.dialog.open(DialogComponent, {
       data: {
         template,
         infoaditional,

@@ -3,10 +3,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+  styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
-
   @Output() infoProduct = new EventEmitter();
 
   @Input() productName: string;
@@ -30,14 +29,11 @@ export class ProductComponent implements OnInit {
   @Input() photo: string;
   @Input() Class: string;
 
-  constructor() { }
+  constructor() {}
 
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   public product() {
     this.infoProduct.emit();
   }
-
 }

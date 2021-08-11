@@ -19,11 +19,9 @@ describe('AddEditBlogAdminComponent', () => {
   let component: AddEditBlogAdminComponent;
   let fixture: ComponentFixture<AddEditBlogAdminComponent>;
   let response = {
-    Status: "Success"
-  }
-  const mockContentService = jasmine.createSpyObj("ContentService", [
-    "saveBlog"
-  ]);
+    Status: 'Success',
+  };
+  const mockContentService = jasmine.createSpyObj('ContentService', ['saveBlog']);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AddEditBlogAdminComponent],
@@ -44,16 +42,14 @@ describe('AddEditBlogAdminComponent', () => {
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
-            blacklistedRoutes: []
-          }
+            blacklistedRoutes: [],
+          },
         }),
-
       ],
 
       schemas: [NO_ERRORS_SCHEMA],
-      providers: [{ provide: ContentService, useValue: mockContentService },]
-    })
-      .compileComponents();
+      providers: [{ provide: ContentService, useValue: mockContentService }],
+    }).compileComponents();
     mockContentService.saveBlog.and.returnValue(of(response));
   }));
 
@@ -67,21 +63,21 @@ describe('AddEditBlogAdminComponent', () => {
     expect(component).toBeTruthy();
   });
   it('changes image', () => {
-    spyOn(Swal, "fire").and.returnValue(
+    spyOn(Swal, 'fire').and.returnValue(
       Promise.resolve<any>({
-        text: "Extensión erronea",
-        type: "error",
-        confirmButtonText: "Aceptar",
-        confirmButtonClass: "accept-activation-alert-error",
+        text: 'Extensión erronea',
+        type: 'error',
+        confirmButtonText: 'Aceptar',
+        confirmButtonClass: 'accept-activation-alert-error',
       })
     );
-    const mockFile = new File([""], "name.jpg", { type: "text/html" });
+    const mockFile = new File([''], 'name.jpg', { type: 'text/html' });
     const mockEvt = { target: { files: [mockFile] } };
     component.readURL(mockEvt);
-    let datos = true
+    let datos = true;
     component.saveeraser();
-    component.checkInput("texto");
+    component.checkInput('texto');
     component.delete();
     expect(datos).toBeTruthy();
-  })
+  });
 });

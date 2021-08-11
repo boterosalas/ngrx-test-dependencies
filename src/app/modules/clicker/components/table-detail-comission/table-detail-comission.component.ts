@@ -3,23 +3,19 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-table-detail-comission',
   templateUrl: './table-detail-comission.component.html',
-  styleUrls: ['./table-detail-comission.component.scss']
+  styleUrls: ['./table-detail-comission.component.scss'],
 })
 export class TableDetailComissionComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
+  @Input() dataSource;
+  @Output() dataUser = new EventEmitter();
 
-  @Input()dataSource;
-  @Output() dataUser = new EventEmitter;
-  
+  displayedColumns: string[] = ['date', 'product', 'state', 'quantity', 'commission'];
 
-  displayedColumns: string[] = ['date', 'product', 'state','quantity', 'commission'];
+  ngOnInit() {}
 
-  ngOnInit() {
-  }
-
-  userInfo(dataSource){
+  userInfo(dataSource) {
     this.dataUser.emit(dataSource);
   }
-
 }

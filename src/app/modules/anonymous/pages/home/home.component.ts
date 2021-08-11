@@ -1,68 +1,46 @@
-import {
-  Component,
-  OnInit,
-  HostBinding,
-  HostListener,
-  OnDestroy,
-  ViewChild,
-  TemplateRef,
-  ElementRef,
-} from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import Swal from "sweetalert2";
-import { Subscription } from "rxjs";
-import { UserService } from "src/app/services/user.service";
-import { UtilsService } from "src/app/services/utils.service";
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-  group,
-} from "@angular/animations";
-import { AuthService } from "src/app/services/auth.service";
-import decode from "jwt-decode";
-import { ContentService } from "src/app/services/content.service";
-import { distinctUntilChanged } from "rxjs/operators";
-import { MatDialog, MatCheckboxChange, MatSnackBar } from "@angular/material";
-import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
-import { ResponseService } from "src/app/interfaces/response";
-import { LinksService } from "src/app/services/links.service";
-import { MessagingService } from "src/app/shared/messaging.service";
+import { Component, OnInit, HostBinding, HostListener, OnDestroy, ViewChild, TemplateRef, ElementRef } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
+import { Subscription } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
+import { UtilsService } from 'src/app/services/utils.service';
+import { trigger, state, style, transition, animate, group } from '@angular/animations';
+import { AuthService } from 'src/app/services/auth.service';
+import decode from 'jwt-decode';
+import { ContentService } from 'src/app/services/content.service';
+import { distinctUntilChanged } from 'rxjs/operators';
+import { MatDialog, MatCheckboxChange, MatSnackBar } from '@angular/material';
+import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import { ResponseService } from 'src/app/interfaces/response';
+import { LinksService } from 'src/app/services/links.service';
+import { MessagingService } from 'src/app/shared/messaging.service';
 import { Meta } from '@angular/platform-browser';
-import { MasterDataService } from "src/app/services/master-data.service";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { NewBusinessFormComponent } from "../../components/new-business-form/new-business-form.component";
+import { MasterDataService } from 'src/app/services/master-data.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NewBusinessFormComponent } from '../../components/new-business-form/new-business-form.component';
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.scss"],
+  selector: 'app-login',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
   animations: [
-    trigger("openClose", [
-      state("in", style({ height: "*", opacity: 0 })),
-      transition(":leave", [
-        style({ height: "*", opacity: 1 }),
+    trigger('openClose', [
+      state('in', style({ height: '*', opacity: 0 })),
+      transition(':leave', [
+        style({ height: '*', opacity: 1 }),
 
-        group([
-          animate(300, style({ height: 0 })),
-          animate(
-            "600ms ease-in-out",
-            style({ transform: "translateY(-1000px)" })
-          ),
-        ]),
+        group([animate(300, style({ height: 0 })), animate('600ms ease-in-out', style({ transform: 'translateY(-1000px)' }))]),
       ]),
     ]),
-    trigger("simpleFadeAnimation", [
+    trigger('simpleFadeAnimation', [
       // the "in" style determines the "resting" state of the element when it is visible.
-      state("in", style({ opacity: 1 })),
+      state('in', style({ opacity: 1 })),
 
       // fade in when created. this could also be written as transition('void => *')
-      transition(":enter", [style({ opacity: 0 }), animate(600)]),
+      transition(':enter', [style({ opacity: 0 }), animate(600)]),
 
       // fade out when destroyed. this could also be written as transition('void => *')
-      transition(":leave", animate(600, style({ opacity: 0 }))),
+      transition(':leave', animate(600, style({ opacity: 0 }))),
     ]),
   ],
 })
@@ -81,9 +59,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   offersMobile: any;
   offersWeb: any;
   isEmployee: any;
-  @ViewChild("templateBusiness", { static: false })
+  @ViewChild('templateBusiness', { static: false })
   templateBusiness: TemplateRef<any>;
-  @ViewChild("templatePromo", { static: false })
+  @ViewChild('templatePromo', { static: false })
   templatePromo: TemplateRef<any>;
   categories = [];
   managedPayments: boolean;
@@ -94,20 +72,20 @@ export class HomeComponent implements OnInit, OnDestroy {
   modalAltMobile: string;
   modalAltWeb: string;
   modalHrefMobile: string;
-  modalTarget: string = "_self";
+  modalTarget = '_self';
   modalSrcWeb: string;
   modalSrcMobile: string;
   newTerms: boolean;
   acceptTerms: boolean = null;
-  @ViewChild("templateTerms", { static: false })
+  @ViewChild('templateTerms', { static: false })
   templateTerms: TemplateRef<any>;
-  newTermsHTML: boolean = false;
-  stepTerms: boolean = true;
-  activateButton: boolean = false;
+  newTermsHTML = false;
+  stepTerms = true;
+  activateButton  = false;
   amount: any;
   amountReferred: any;
   paymentPending: number;
-  //terms
+
   contentTerminos: any;
   contentProteccion: any;
   contentTransparencia: any;
@@ -116,8 +94,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   textProteccion: any;
   textTransparencia: any;
   textPrograma: any;
-  formData: boolean = false;
-  sendData: boolean = false;
+  formData = false;
+  sendData = false;
   dateForm: FormGroup;
   constructor(
     public router: Router,
@@ -133,16 +111,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     private _snackBar: MatSnackBar,
     private metaTagService: Meta,
     private fb: FormBuilder,
-    private personalInfo: MasterDataService,
+    private personalInfo: MasterDataService
   ) {
     /**
      *  Verifica que en la ruta de inicio exista el parametro de email y activa el usuario
-     * @param email
+     * @param email email
      */
     this.dateForm = this.fb.group({
-
       description: [null, Validators.required],
-
     });
     this.subscription = this.route.queryParams.subscribe((params) => {
       if (params.email) {
@@ -150,33 +126,32 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.activateUser();
       } else {
         if (params.code) {
-          localStorage.setItem("idClicker", params.code);
+          localStorage.setItem('idClicker', params.code);
           this.openRegister();
           this.generateLink(params.code);
         } else {
-          router.navigate(["/"]);
+          router.navigate(['/']);
         }
       }
     });
   }
   public generateLink(dataEmail: any) {
-    let idClicker = dataEmail;
-    let formData: FormData = new FormData();
+    const idClicker = dataEmail;
+    const formData: FormData = new FormData();
     formData.append('idClicker', idClicker);
     formData.append('type', 'Visit');
-    this.content.setClick(formData).subscribe()
+    this.content.setClick(formData).subscribe();
   }
   ngOnInit() {
     this.metaTagService.addTags([
       {
-        name: "keywords",
-        content:
-          "clickam, exito.com, carulla.com, seguros, referidos, viajes, cashback ",
+        name: 'keywords',
+        content: 'clickam, exito.com, carulla.com, seguros, referidos, viajes, cashback ',
       },
       {
-        name: "description",
+        name: 'description',
         content:
-          "Clickam es una plataforma marketplace de marketing de afiliados, donde ganarás dinero por referir y comprar. Aumenta el tráfico de tu negocio con afiliados. Una idea Grupo Éxito.  Exito - Carulla - Haceb - SURA - Puntos Colombia - Viajes Éxito - Nequi.",
+          'Clickam es una plataforma marketplace de marketing de afiliados, donde ganarás dinero por referir y comprar. Aumenta el tráfico de tu negocio con afiliados. Una idea Grupo Éxito.  Exito - Carulla - Haceb - SURA - Puntos Colombia - Viajes Éxito - Nequi.',
       },
     ]);
 
@@ -193,81 +168,77 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   getTerms() {
     this.personalInfo.getTerms().subscribe((resp: any) => {
-      this.contentTerminos = resp.objectResponse[0].sectionvalue
-      this.contentProteccion = resp.objectResponse[1].sectionvalue
-      this.contentTransparencia = resp.objectResponse[2].sectionvalue
-      this.contentPrograma = resp.objectResponse[3].sectionvalue
-      this.textTerminos = resp.objectResponse[0].sectiontitle
-      this.textProteccion = resp.objectResponse[1].sectiontitle
-      this.textTransparencia = resp.objectResponse[2].sectiontitle
-      this.textPrograma = resp.objectResponse[3].sectiontitle
-    })
+      this.contentTerminos = resp.objectResponse[0].sectionvalue;
+      this.contentProteccion = resp.objectResponse[1].sectionvalue;
+      this.contentTransparencia = resp.objectResponse[2].sectionvalue;
+      this.contentPrograma = resp.objectResponse[3].sectionvalue;
+      this.textTerminos = resp.objectResponse[0].sectiontitle;
+      this.textProteccion = resp.objectResponse[1].sectiontitle;
+      this.textTransparencia = resp.objectResponse[2].sectiontitle;
+      this.textPrograma = resp.objectResponse[3].sectiontitle;
+    });
   }
   public getUserDataUser() {
     this.subscription = this.auth.getRole$.subscribe((role) => {
       this.role = role;
-      if (role === "CLICKER" || role === "ADMIN" || role === "SUPERADMIN") {
+      if (role === 'CLICKER' || role === 'ADMIN' || role === 'SUPERADMIN') {
         this.subscription = this.user.getuserdata().subscribe((user) => {
           this.isEmployee = user.isEmployeeGrupoExito;
           this.managedPayments = user.managedPayments;
           this.newTerms = user.acceptTermsReferrals;
           this.getInfomonth();
-          if (role === "CLICKER") {
+          if (role === 'CLICKER') {
             if (this.newTerms === false) {
               this.termsAndConditions();
             }
           }
-
         });
       }
-      let interval = setInterval(() => {
+      const interval = setInterval(() => {
         this.showModalPayment();
         if (this.paymentPending > 10000) {
           clearInterval(interval);
         }
-
       }, 3000);
 
-      if (role === "CLICKER") {
-
-        let token = localStorage.getItem("ACCESS_TOKEN");
-        let tokenDecode = decode(token);
+      if (role === 'CLICKER') {
+        const token = localStorage.getItem('ACCESS_TOKEN');
+        const tokenDecode = decode(token);
         this.userId = tokenDecode.userid;
         this.messagingService.requestPermission(this.userId);
         this.messagingService.receiveMessage();
         this.message = this.messagingService.currentMessage;
-
       }
     });
   }
 
   /**
    * Metodo para activar el usuario
-   * @param email
+   * @param email email
    */
 
   public activateUser() {
     this.subscription = this.user.activateProfile(this.email).subscribe(
       (user: any) => {
-        if (user.state === "Success") {
+        if (user.state === 'Success') {
           Swal.fire({
-            title: "Activación exitosa",
+            title: 'Activación exitosa',
             text: user.userMessage,
-            type: "success",
-            confirmButtonText: "Aceptar",
-            confirmButtonClass: "accept-activation-alert-success",
+            type: 'success',
+            confirmButtonText: 'Aceptar',
+            confirmButtonClass: 'accept-activation-alert-success',
           }).then(() => {
-            this.router.navigate(["/inicio"]);
+            this.router.navigate(['/inicio']);
           });
         } else {
           Swal.fire({
-            title: "Activación errónea",
+            title: 'Activación errónea',
             text: user.userMessage,
-            type: "error",
-            confirmButtonText: "Aceptar",
-            confirmButtonClass: "accept-activation-alert-error",
+            type: 'error',
+            confirmButtonText: 'Aceptar',
+            confirmButtonClass: 'accept-activation-alert-error',
           }).then(() => {
-            this.router.navigate(["/inicio"]);
+            this.router.navigate(['/inicio']);
           });
         }
       },
@@ -275,11 +246,11 @@ export class HomeComponent implements OnInit, OnDestroy {
         Swal.fire({
           title: error.statusText,
           text: error.error,
-          type: "error",
-          confirmButtonText: "Aceptar",
-          confirmButtonClass: "accept-activation-alert-invalid",
+          type: 'error',
+          confirmButtonText: 'Aceptar',
+          confirmButtonClass: 'accept-activation-alert-invalid',
         }).then(() => {
-          this.router.navigate(["/inicio"]);
+          this.router.navigate(['/inicio']);
         });
       }
     );
@@ -287,8 +258,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public getAmount() {
     this.subscription = this.link.getAmount().subscribe((amount) => {
-      localStorage.setItem("Amount", amount.amountsCommission);
-      localStorage.setItem("AmonuntReferred", amount.amountsReferred);
+      localStorage.setItem('Amount', amount.amountsCommission);
+      localStorage.setItem('AmonuntReferred', amount.amountsReferred);
     });
   }
 
@@ -296,26 +267,26 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  @HostListener("over")
+  @HostListener('over')
   openRegister() {
     this.utils.showRegisterForm();
   }
 
-  @HostListener("over")
+  @HostListener('over')
   sliderOffers() {
-    let token = localStorage.getItem("ACCESS_TOKEN");
+    const token = localStorage.getItem('ACCESS_TOKEN');
     if (token === null) {
       this.utils.showloginForm();
     }
   }
 
   private routeBased() {
-    let token = localStorage.getItem("ACCESS_TOKEN");
+    const token = localStorage.getItem('ACCESS_TOKEN');
     if (token !== null) {
-      let tokenDecode = decode(token);
-      if (tokenDecode.role === "ADMIN" || tokenDecode.role === "SUPERADMIN") {
-        this.router.navigate(["/dashboard"]);
-        this.auth.getRole$.next("ADMIN");
+      const tokenDecode = decode(token);
+      if (tokenDecode.role === 'ADMIN' || tokenDecode.role === 'SUPERADMIN') {
+        this.router.navigate(['/dashboard']);
+        this.auth.getRole$.next('ADMIN');
       }
     }
   }
@@ -331,46 +302,39 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public getBussinessClicker() {
     this.subscription = this.auth.isLogged$.subscribe((val) => {
-      let token = localStorage.getItem("ACCESS_TOKEN");
+      const token = localStorage.getItem('ACCESS_TOKEN');
       if (!!val || token !== null) {
-        this.subscription = this.content
-          .getBusinessClicker()
-          .subscribe((bussiness) => {
-            this.bussinessClicker = bussiness;
-          });
+        this.subscription = this.content.getBusinessClicker().subscribe((bussiness) => {
+          this.bussinessClicker = bussiness;
+        });
       }
     });
   }
 
-
   public getOffers() {
-
-    this.subscription = this.content.getOffersbyType({ id: "OFERTA", admin: false }).subscribe((resp) => {
-
+    this.subscription = this.content.getOffersbyType({ id: 'OFERTA', admin: false }).subscribe((resp) => {
       this.offersWeb = resp;
-    })
-    this.subscription = this.content.getOffersbyType({ id: "CARROUSEL", admin: false }).subscribe((resp) => {
-
+    });
+    this.subscription = this.content.getOffersbyType({ id: 'CARROUSEL', admin: false }).subscribe((resp) => {
       this.sliderWeb = resp;
-
-    })
+    });
   }
 
   public bussinessNavigation(bussiness) {
-    let token = localStorage.getItem("ACCESS_TOKEN");
+    const token = localStorage.getItem('ACCESS_TOKEN');
     if (token === null) {
       this.utils.showloginForm();
     }
 
-    let params = {
+    const params = {
       id: bussiness.id,
       code: bussiness.code,
       infoAditional: bussiness.infoaditional,
       imageurl: bussiness.imageurl,
-      description: bussiness.description
+      description: bussiness.description,
     };
     this.router.navigate([
-      "/bussiness",
+      '/bussiness',
       {
         id: params.id,
         code: params.code,
@@ -382,52 +346,50 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public openRegisterBusiness() {
-    this.dialog.open(NewBusinessFormComponent)
+    this.dialog.open(NewBusinessFormComponent);
   }
 
   private showModalPayment() {
     if (
-      this.role === "CLICKER" &&
+      this.role === 'CLICKER' &&
       this.managedPayments === false &&
       this.isEmployee === false &&
       this.newTerms === true &&
       this.paymentPending >= 10000
     ) {
       Swal.fire({
-        title: "¡Registra tus datos bancarios!",
-        text:
-          `Recuerda que para recibir el pago de tus comisiones , debes registrar tus datos bancarios. (Tienes comisiones pendientes por $${this.paymentPending})`,
-        type: "info",
+        title: '¡Registra tus datos bancarios!',
+        text: `Recuerda que para recibir el pago de tus comisiones , debes registrar tus datos bancarios. (Tienes comisiones pendientes por $${this.paymentPending})`,
+        type: 'info',
         showCancelButton: true,
         showCloseButton: true,
         allowEscapeKey: false,
         allowOutsideClick: false,
-        confirmButtonText: "Ingresar datos",
-        cancelButtonText: "Ahora no",
-        confirmButtonClass: "payment-success",
-        cancelButtonClass: "payment-cancel",
-        customClass: "paymentData",
+        confirmButtonText: 'Ingresar datos',
+        cancelButtonText: 'Ahora no',
+        confirmButtonClass: 'payment-success',
+        cancelButtonClass: 'payment-cancel',
+        customClass: 'paymentData',
       }).then((resp) => {
         if (resp.value === true) {
-          this.router.navigate(["/mi-perfil", "pagos"]);
+          this.router.navigate(['/mi-perfil', 'pagos']);
         }
       });
     }
   }
 
-
   public termsAndConditions() {
     const template = this.templateTerms;
-    const title = "";
-    const id = "newTerms";
+    const title = '';
+    const id = 'newTerms';
 
     this.dialog2.open(ModalGenericComponent, {
       disableClose: true,
       data: {
         title,
         id,
-        template
-      }
+        template,
+      },
     });
   }
 
@@ -453,14 +415,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   /**
-* Abre el mensaje de confirmacion
-* @param message
-* @param action
-*/
+   * Abre el mensaje de confirmacion
+   * @param message mensaje
+   * @param action accion
+   */
 
   private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      duration: 5000
+      duration: 5000,
     });
   }
 
@@ -473,7 +435,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.newTerms = true;
       this.showModalPayment();
       this.openSnackBar(resp.userMessage, 'Cerrar');
-    })
+    });
   }
 
   /**
@@ -487,13 +449,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public saveProposal() {
-    let datos = {
-      message: this.dateForm.controls.description.value
-    }
+    const datos = {
+      message: this.dateForm.controls.description.value,
+    };
     this.user.saveFeedback(datos).subscribe((resp) => {
       this.sendData = true;
       this.dateForm.reset();
-    })
+    });
   }
   public cerrarForm() {
     this.formData = false;

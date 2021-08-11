@@ -1,83 +1,113 @@
-<app-banner title="{{'CLICKACADEMY.CLICKACADEMY' | translate}}" img="/assets/img/banners/banner-academy-pc.jpg" imgMobile="/assets/img/banners/banner-academy-mobile.jpg"></app-banner>
+<app-banner
+  title="{{ 'CLICKACADEMY.CLICKACADEMY' | translate }}"
+  img="/assets/img/banners/banner-academy-pc.jpg"
+  imgMobile="/assets/img/banners/banner-academy-mobile.jpg"
+></app-banner>
 <!-- <app-logo></app-logo> -->
 
 <div class="click-academy container">
-    <!-- <h1 class="border-bottom-orange-init">{{'CLICKACADEMY.CLICKACADEMY' | translate}}</h1> -->
-    <!-- <p>{{'CLICKACADEMY.CLICKACADEMY_TEXT' | translate}}</p> -->
+  <!-- <h1 class="border-bottom-orange-init">{{'CLICKACADEMY.CLICKACADEMY' | translate}}</h1> -->
+  <!-- <p>{{'CLICKACADEMY.CLICKACADEMY_TEXT' | translate}}</p> -->
 
-    <app-slide-video></app-slide-video>     
+  <app-slide-video></app-slide-video>
 
-    <div class="tools">
-        <h2 class="border-bottom-orange-init">{{'CLICKACADEMY.TOOLS' | translate}}</h2>
-        <p>{{'CLICKACADEMY.TOOLS_DESCRIPTION' | translate}}</p>
-        
+  <div class="tools">
+    <h2 class="border-bottom-orange-init">
+      {{ 'CLICKACADEMY.TOOLS' | translate }}
+    </h2>
+    <p>{{ 'CLICKACADEMY.TOOLS_DESCRIPTION' | translate }}</p>
 
-        <div fxLayout.gt-xs="row" fxLayoutGap.gt-xs="20px" fxLayoutAlign.gt-xs="center start" fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="start">
-            
-            <span fxLayout="column" fxFlex.gt-xs="18" fxFlex="100" class="gtmClicAcademyComoFuncionaComoRegis">
-                <a class="no-decoration gtmClicAcademyComoFuncionaComoRegis" href="{{pdf}}pdf1-procesoregistro.pdf" target="_blank">
-                    <span class="p-0 position-relative gtmClicAcademyComoFuncionaComoRegis" fxLayout="row" fxLayout.gt-xs="column">
-                        <span fxFlex.xs="100" class="gtmClicAcademyComoFuncionaComoRegis">
-                            <img class="responsive-img gtmClicAcademyComoFuncionaComoRegis" fxHide.xs="true" src="/assets/img/pdf-1.png">
-                            <img fxHide.gt-xs="true" class="responsive-img w-100 gtmClicAcademyComoFuncionaComoRegis" src="/assets/img/pdf-1-mobile.png">
-                            <img class="position-absolute t-0 r-0 gtmClicAcademyComoFuncionaComoRegis" src="/assets/img/descargar.svg">
-                        </span>
-                    </span>
-                </a>
+    <div
+      fxLayout.gt-xs="row"
+      fxLayoutGap.gt-xs="20px"
+      fxLayoutAlign.gt-xs="center start"
+      fxLayout="column"
+      fxLayoutGap="20px"
+      fxLayoutAlign="start"
+    >
+      <span fxLayout="column" fxFlex.gt-xs="18" fxFlex="100" class="gtmClicAcademyComoFuncionaComoRegis">
+        <a class="no-decoration gtmClicAcademyComoFuncionaComoRegis" href="{{ pdf }}pdf1-procesoregistro.pdf" target="_blank">
+          <span class="p-0 position-relative gtmClicAcademyComoFuncionaComoRegis" fxLayout="row" fxLayout.gt-xs="column">
+            <span fxFlex.xs="100" class="gtmClicAcademyComoFuncionaComoRegis">
+              <img class="responsive-img gtmClicAcademyComoFuncionaComoRegis" fxHide.xs="true" src="/assets/img/pdf-1.png" />
+              <img
+                fxHide.gt-xs="true"
+                class="responsive-img w-100 gtmClicAcademyComoFuncionaComoRegis"
+                src="/assets/img/pdf-1-mobile.png"
+              />
+              <img class="position-absolute t-0 r-0 gtmClicAcademyComoFuncionaComoRegis" src="/assets/img/descargar.svg" />
             </span>
+          </span>
+        </a>
+      </span>
 
-            <span fxLayout="column" fxFlex.gt-xs="18" fxFlex="100" class="gtmClicAcademyComoFuncionaComoCertifi">
-                <a class="no-decoration gtmClicAcademyComoFuncionaComoCertifi" href="{{pdf}}pdf2-cuentabancaria.pdf" target="_blank">
-                    <span class="p-0 position-relative gtmClicAcademyComoFuncionaComoCertifi" fxLayout="row" fxLayout.gt-xs="column">
-                        <span fxFlex.xs="100" class="gtmClicAcademyComoFuncionaComoCertifi">
-                            <img class="responsive-img gtmClicAcademyComoFuncionaComoCertifi" fxHide.xs="true" src="/assets/img/pdf-2.png">
-                            <img fxHide.gt-xs="true" class="responsive-img w-100 gtmClicAcademyComoFuncionaComoCertifi" src="/assets/img/pdf-2-mobile.png">
-                            <img class="position-absolute t-0 r-0 gtmClicAcademyComoFuncionaComoCertifi" src="/assets/img/descargar.svg">
-                        </span>
-                    </span>
-                </a>
+      <span fxLayout="column" fxFlex.gt-xs="18" fxFlex="100" class="gtmClicAcademyComoFuncionaComoCertifi">
+        <a class="no-decoration gtmClicAcademyComoFuncionaComoCertifi" href="{{ pdf }}pdf2-cuentabancaria.pdf" target="_blank">
+          <span class="p-0 position-relative gtmClicAcademyComoFuncionaComoCertifi" fxLayout="row" fxLayout.gt-xs="column">
+            <span fxFlex.xs="100" class="gtmClicAcademyComoFuncionaComoCertifi">
+              <img class="responsive-img gtmClicAcademyComoFuncionaComoCertifi" fxHide.xs="true" src="/assets/img/pdf-2.png" />
+              <img
+                fxHide.gt-xs="true"
+                class="responsive-img w-100 gtmClicAcademyComoFuncionaComoCertifi"
+                src="/assets/img/pdf-2-mobile.png"
+              />
+              <img class="position-absolute t-0 r-0 gtmClicAcademyComoFuncionaComoCertifi" src="/assets/img/descargar.svg" />
             </span>
+          </span>
+        </a>
+      </span>
 
-            <span fxLayout="column" fxFlex="18" class="mb-2" class="gtmClicAcademyComoFuncionaComoComprarSeguro">
-                <a class="no-decoration gtmClicAcademyComoFuncionaComoComprarSeguro" href="{{pdf}}pdf3-comprasonlineseguros.pdf" target="_blank">
-                    <span class="p-0 position-relative gtmClicAcademyComoFuncionaComoComprarSeguro" fxLayout="row" fxLayout.gt-xs="column">
-                        <span fxFlex.xs="100" class="gtmClicAcademyComoFuncionaComoComprarSeguro">
-                            <img class="responsive-img gtmClicAcademyComoFuncionaComoComprarSeguro" fxHide.xs="true" src="/assets/img/pdf-5.png">
-                            <img fxHide.gt-xs="true" class="responsive-img w-100 gtmClicAcademyComoFuncionaComoComprarSeguro" src="/assets/img/pdf-5-mobile.png">
-                            <img class="position-absolute t-0 r-0 gtmClicAcademyComoFuncionaComoComprarSeguro" src="/assets/img/descargar.svg">
-                        </span>
-                    </span>
-                </a>
+      <span fxLayout="column" fxFlex="18" class="mb-2" class="gtmClicAcademyComoFuncionaComoComprarSeguro">
+        <a class="no-decoration gtmClicAcademyComoFuncionaComoComprarSeguro" href="{{ pdf }}pdf3-comprasonlineseguros.pdf" target="_blank">
+          <span class="p-0 position-relative gtmClicAcademyComoFuncionaComoComprarSeguro" fxLayout="row" fxLayout.gt-xs="column">
+            <span fxFlex.xs="100" class="gtmClicAcademyComoFuncionaComoComprarSeguro">
+              <img class="responsive-img gtmClicAcademyComoFuncionaComoComprarSeguro" fxHide.xs="true" src="/assets/img/pdf-5.png" />
+              <img
+                fxHide.gt-xs="true"
+                class="responsive-img w-100 gtmClicAcademyComoFuncionaComoComprarSeguro"
+                src="/assets/img/pdf-5-mobile.png"
+              />
+              <img class="position-absolute t-0 r-0 gtmClicAcademyComoFuncionaComoComprarSeguro" src="/assets/img/descargar.svg" />
             </span>
+          </span>
+        </a>
+      </span>
 
-            <span fxLayout="column" fxFlex.gt-xs="18" fxFlex="100" class="gtmClicAcademyComoFuncionaComoComprarExito">
-                <a class="no-decoration gtmClicAcademyComoFuncionaComoComprarExito" href="{{pdf}}pdf3-comprasonlineexito.com.pdf" target="_blank">
-                    <span class="p-0 position-relative gtmClicAcademyComoFuncionaComoComprarExito" fxLayout="row" fxLayout.gt-xs="column">
-                        <span fxFlex.xs="100" class="gtmClicAcademyComoFuncionaComoComprarExito">
-                            <img class="responsive-img gtmClicAcademyComoFuncionaComoComprarExito" fxHide.xs="true" src="/assets/img/pdf-3.png">
-                            <img fxHide.gt-xs="true" class="responsive-img w-100 gtmClicAcademyComoFuncionaComoComprarExito" src="/assets/img/pdf-3-mobile.png">
-                            <img class="position-absolute t-0 r-0 gtmClicAcademyComoFuncionaComoComprarExito" src="/assets/img/descargar.svg">
-                        </span>
-                    </span>
-                </a>
+      <span fxLayout="column" fxFlex.gt-xs="18" fxFlex="100" class="gtmClicAcademyComoFuncionaComoComprarExito">
+        <a class="no-decoration gtmClicAcademyComoFuncionaComoComprarExito" href="{{ pdf }}pdf3-comprasonlineexito.com.pdf" target="_blank">
+          <span class="p-0 position-relative gtmClicAcademyComoFuncionaComoComprarExito" fxLayout="row" fxLayout.gt-xs="column">
+            <span fxFlex.xs="100" class="gtmClicAcademyComoFuncionaComoComprarExito">
+              <img class="responsive-img gtmClicAcademyComoFuncionaComoComprarExito" fxHide.xs="true" src="/assets/img/pdf-3.png" />
+              <img
+                fxHide.gt-xs="true"
+                class="responsive-img w-100 gtmClicAcademyComoFuncionaComoComprarExito"
+                src="/assets/img/pdf-3-mobile.png"
+              />
+              <img class="position-absolute t-0 r-0 gtmClicAcademyComoFuncionaComoComprarExito" src="/assets/img/descargar.svg" />
             </span>
+          </span>
+        </a>
+      </span>
 
-            <span fxLayout="column" fxFlex="18" class="mb-2 gtmClicAcademyComoFuncionaComoValorLinks">
-                <a class="no-decoration gtmClicAcademyComoFuncionaComoValorLinks" href="{{pdf}}pdf4-atencionlinks.pdf" target="_blank">
-                    <span class="p-0 position-relative gtmClicAcademyComoFuncionaComoValorLinks" fxLayout="row" fxLayout.gt-xs="column">
-                        <span fxFlex.xs="100" class="gtmClicAcademyComoFuncionaComoValorLinks">
-                            <img class="responsive-img gtmClicAcademyComoFuncionaComoValorLinks" fxHide.xs="true" src="/assets/img/pdf-4.png">
-                            <img fxHide.gt-xs="true" class="responsive-img w-100 gtmClicAcademyComoFuncionaComoValorLinks" src="/assets/img/pdf-4-mobile.png">
-                            <img class="position-absolute t-0 r-0 gtmClicAcademyComoFuncionaComoValorLinks" src="/assets/img/descargar.svg">
-                        </span>
-                    </span>
-                </a>
+      <span fxLayout="column" fxFlex="18" class="mb-2 gtmClicAcademyComoFuncionaComoValorLinks">
+        <a class="no-decoration gtmClicAcademyComoFuncionaComoValorLinks" href="{{ pdf }}pdf4-atencionlinks.pdf" target="_blank">
+          <span class="p-0 position-relative gtmClicAcademyComoFuncionaComoValorLinks" fxLayout="row" fxLayout.gt-xs="column">
+            <span fxFlex.xs="100" class="gtmClicAcademyComoFuncionaComoValorLinks">
+              <img class="responsive-img gtmClicAcademyComoFuncionaComoValorLinks" fxHide.xs="true" src="/assets/img/pdf-4.png" />
+              <img
+                fxHide.gt-xs="true"
+                class="responsive-img w-100 gtmClicAcademyComoFuncionaComoValorLinks"
+                src="/assets/img/pdf-4-mobile.png"
+              />
+              <img class="position-absolute t-0 r-0 gtmClicAcademyComoFuncionaComoValorLinks" src="/assets/img/descargar.svg" />
             </span>
-            
-        </div>
+          </span>
+        </a>
+      </span>
     </div>
+  </div>
 
-    <!-- <div class="onBoardings" *ngIf="(auth.getRole$ | async ) === 'CLICKER'">
+  <!-- <div class="onBoardings" *ngIf="(auth.getRole$ | async ) === 'CLICKER'">
         <h2 class="border-bottom-orange-init">{{'CLICKACADEMY.TUTORIAL' | translate}}</h2>
         <p>{{'CLICKACADEMY.TUTORIAL_INTRO' | translate}}</p>
 
@@ -100,5 +130,4 @@
         </div>
         
     </div> -->
-    
 </div>

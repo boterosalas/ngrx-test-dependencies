@@ -19,12 +19,10 @@ describe('BlogAdminComponent', () => {
   let component: BlogAdminComponent;
   let fixture: ComponentFixture<BlogAdminComponent>;
   let response = {
-    Status: "Success",
-    objectResponse: { blogs: [{ id: 1 }, { id: 2 }] }
-  }
-  const mockContentService = jasmine.createSpyObj("ContentService", [
-    "getBlogsAdmin", "activeBlog", "deleteBlog"
-  ]);
+    Status: 'Success',
+    objectResponse: { blogs: [{ id: 1 }, { id: 2 }] },
+  };
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getBlogsAdmin', 'activeBlog', 'deleteBlog']);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [BlogAdminComponent],
@@ -44,17 +42,14 @@ describe('BlogAdminComponent', () => {
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
-            blacklistedRoutes: []
-          }
+            blacklistedRoutes: [],
+          },
         }),
-
       ],
 
-
       schemas: [NO_ERRORS_SCHEMA],
-      providers: [{ provide: ContentService, useValue: mockContentService },]
-    })
-      .compileComponents();
+      providers: [{ provide: ContentService, useValue: mockContentService }],
+    }).compileComponents();
     mockContentService.getBlogsAdmin.and.returnValue(of(response));
     mockContentService.deleteBlog.and.returnValue(of(response));
     mockContentService.activeBlog.and.returnValue(of(response));
@@ -70,12 +65,12 @@ describe('BlogAdminComponent', () => {
     expect(component).toBeTruthy();
   });
   it('delete blog', () => {
-    spyOn(Swal, "fire").and.returnValue(
+    spyOn(Swal, 'fire').and.returnValue(
       Promise.resolve<any>({
-        text: "Extensión erronea",
-        type: "error",
-        confirmButtonText: "Aceptar",
-        confirmButtonClass: "accept-activation-alert-error",
+        text: 'Extensión erronea',
+        type: 'error',
+        confirmButtonText: 'Aceptar',
+        confirmButtonClass: 'accept-activation-alert-error',
       })
     );
     component.deleteArticle({ id: 2 });
@@ -83,5 +78,5 @@ describe('BlogAdminComponent', () => {
     component.editArticle({ id: 2 });
     let datos = true;
     expect(datos).toBeTruthy();
-  })
+  });
 });

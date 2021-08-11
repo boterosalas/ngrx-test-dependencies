@@ -1,58 +1,38 @@
 <mat-card class="card-dark orderNumber mt-3">
-    <h3>Consultar número de orden</h3>
-    <p>Antes de crear una novedad sobre alguna orden de Éxito o Carulla, consulta el estado aquí:</p>
+  <h3>Consultar número de orden</h3>
+  <p>Antes de crear una novedad sobre alguna orden de Éxito o Carulla, consulta el estado aquí:</p>
 
-    <form [formGroup]="orderNumberForm" class="orderNumber" fxLayout.gt-xs="row" fxLayout="column"  fxLayoutGap="10px"  fxLayoutAlign="space-between center">
+  <form
+    [formGroup]="orderNumberForm"
+    class="orderNumber"
+    fxLayout.gt-xs="row"
+    fxLayout="column"
+    fxLayoutGap="10px"
+    fxLayoutAlign="space-between center"
+  >
     <mat-form-field ngClass.gt-xs="w-40" ngClass.xs="w-100">
-        <mat-placeholder class="selected-bussiness"
-          >NEGOCIO</mat-placeholder
-        >
-        <mat-select
-          id="bussiness"
-          formControlName="bussiness"
-          class="selected-bussiness"
-        >
-          <mat-option
-            *ngFor="let item of bussiness"
-            value="{{ item.id }}"
-          >
-            <span>{{ item.name }}</span>
-          </mat-option>
-        </mat-select>
-        <mat-error
+      <mat-placeholder class="selected-bussiness">NEGOCIO</mat-placeholder>
+      <mat-select id="bussiness" formControlName="bussiness" class="selected-bussiness">
+        <mat-option *ngFor="let item of bussiness" value="{{ item.id }}">
+          <span>{{ item.name }}</span>
+        </mat-option>
+      </mat-select>
+      <mat-error
         id="requiredreference"
-        *ngIf="orderNumberForm.controls.bussiness.invalid &&
-          orderNumberForm.controls.bussiness.errors.required">{{
-          "GENERIC.REQUIRED" | translate: { formValue: "Negocio" }
-        }}</mat-error
+        *ngIf="orderNumberForm.controls.bussiness.invalid && orderNumberForm.controls.bussiness.errors.required"
+        >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Negocio' } }}</mat-error
       >
-      </mat-form-field>
+    </mat-form-field>
 
-      <mat-form-field ngClass.gt-xs="w-40" ngClass.xs="w-100">
-        <input
-          matInput
-          id="reference"
-          type="text"
-          placeholder="Referencia"
-          formControlName="reference"
-        />
-        <mat-error
+    <mat-form-field ngClass.gt-xs="w-40" ngClass.xs="w-100">
+      <input matInput id="reference" type="text" placeholder="Referencia" formControlName="reference" />
+      <mat-error
         id="requiredreference"
-        *ngIf="orderNumberForm.controls.reference.invalid &&
-          orderNumberForm.controls.reference.errors.required">{{
-          "GENERIC.REQUIRED" | translate: { formValue: "Referencia" }
-        }}</mat-error
+        *ngIf="orderNumberForm.controls.reference.invalid && orderNumberForm.controls.reference.errors.required"
+        >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Referencia' } }}</mat-error
       >
-      </mat-form-field>
+    </mat-form-field>
 
-      <button
-      mat-raised-button
-      color="orange"
-      (click)="consultOrder()"
-      [disabled]="!orderNumberForm.valid"
-    >
-      Consultar
-    </button>
-
-    </form>
+    <button mat-raised-button color="orange" (click)="consultOrder()" [disabled]="!orderNumberForm.valid">Consultar</button>
+  </form>
 </mat-card>
