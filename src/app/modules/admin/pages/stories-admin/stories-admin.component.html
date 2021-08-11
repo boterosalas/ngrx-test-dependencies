@@ -21,7 +21,7 @@
           fxLayoutAlign="start center"
         >
           <mat-icon>keyboard_arrow_left</mat-icon>
-          Volver
+          {{ "BUTTONS.BACK" | translate}}
         </span>
       </button>
     </span>
@@ -70,9 +70,9 @@
     </span>
   </div>
   <div class="business-stories">
-    <app-card-story 
+    <app-card-story
         class="card"
-        *ngFor="let story of stories; let i = index" 
+        *ngFor="let story of stories; let i = index"
         [stories]="[story]"
         [pause]="story.pause"
         [play]="false"
@@ -218,7 +218,7 @@
       <mat-error *ngIf="showErrorImg" class="text-small small pb-2 d-block">
         Formato inválido, solo se pueden subir archivos con la extensión JPG max 7MB y MP4 max 72MB
       </mat-error>
-    
+
       <input
         (change)="onFileChangeFiles($event)"
         id="image-story"

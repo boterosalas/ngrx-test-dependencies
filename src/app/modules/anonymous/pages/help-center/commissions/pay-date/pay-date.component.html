@@ -5,7 +5,7 @@
             <button mat-button [routerLink]="[ '/centro-de-ayuda/comisiones' ]">
                 <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
                     <mat-icon>keyboard_arrow_left</mat-icon>
-                    Volver
+                    {{ "BUTTONS.BACK" | translate}}
                 </span>
             </button>
         </span>
@@ -58,7 +58,7 @@
                         <td>Del 1° al 30 de abril</td>
                         <td>Semana del 15 al 20 de mayo</td>
                     </tr>
-                    
+
                     <tr *ngIf="month<=5" [class]="(month===5)?'par-row-opaco':'par-row'">
                         <td>Del 1° al 31 de mayo</td>
                         <td>Semana del 15 al 20 de junio</td>
@@ -115,7 +115,7 @@
                         <td>Del 1° al 30 de noviembre</td>
                         <td>Semana del 15 al 20 de diciembre</td>
                     </tr>
-                    
+
                     <tr *ngIf="month<=12" [class]="(month===12)?'impar-row-opaco':'impar-row'">
                         <td>Del 1° al 31 de diciembre</td>
                         <td>Semana del 15 al 20 de enero</td>

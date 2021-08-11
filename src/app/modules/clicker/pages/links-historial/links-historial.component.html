@@ -5,7 +5,7 @@
     <!-- <h1 class="border-bottom-orange-init">{{ 'HISTORICAL.HISTORY_LINKS' | translate }}</h1> -->
 
     <div class="order border-bottom-gray" fxLayout="row" fxLayoutAlign="flex-start center">
-        
+
         <label class="mr-4 f-17 gray">Ordenar por: </label>
         <mat-form-field>
           <mat-select value="DATEDESC">
@@ -14,11 +14,11 @@
                 >
           </mat-select>
         </mat-form-field>
-      
+
       </div>
 
     <app-table-historical-links
-    [dataSource]="dataSource" 
+    [dataSource]="dataSource"
     (product)="dataHistory($event)"
     [size]="pageSize"
     [p]="pageIndex"
@@ -142,8 +142,8 @@
       >
         <i ngClass="fab fa-twitter {{classButtonTwitter}}"></i>
       </button>
-      <a 
-      href="https://web.whatsapp.com/send?text={{urlshorten}}" 
+      <a
+      href="https://web.whatsapp.com/send?text={{urlshorten}}"
       target="_blank"
       data-action="share/whatsapp/share"
       ngClass="sharebutton p-3 {{classButtonWhatsapp}}"
@@ -169,7 +169,7 @@
           Compartir</span
         >
       </button>
-<!-- 
+<!--
       <button
         mat-button
         ngClass="gtmrs  mb-2 mt-2 {{classButtonRefer}}"
@@ -220,7 +220,7 @@
       fxFlex="12"
     >
       <mat-icon>keyboard_arrow_left</mat-icon>
-      <span class="text-back">Volver</span>
+      <span class="text-back">{{ "BUTTONS.BACK" | translate}}</span>
     </span>
     <p>{{ "GENERIC.REFERENCE_IDENTIFICATION" | translate }}</p>
     <mat-form-field appearance="outline" class="mt-2">

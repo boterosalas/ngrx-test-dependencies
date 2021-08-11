@@ -9,21 +9,21 @@
   <span fxLayout="row" fxLayoutAlign="space-between center">
     <h3 title-name>{{title}} notificación</h3>
 
-    <button mat-button [routerLink]="['/notificaciones-admin']">
+    <button mat-raised-button  class="back-button" [routerLink]="['/notificaciones-admin']">
       <span
         class="galano-bold f-16"
         fxLayout="row"
         fxLayoutAlign="start center"
       >
         <mat-icon>keyboard_arrow_left</mat-icon>
-        Volver
+        {{ "BUTTONS.BACK" | translate}}
       </span>
     </button>
   </span>
 
     <form [formGroup]="notificationForm">
         <div fxLayout="row" fxLayoutGap="20px">
-        <mat-card>  
+        <mat-card>
             <mat-form-field class="w-100">
               <input
                 matInput
@@ -32,7 +32,7 @@
                 placeholder="Titulo"
                 formControlName="title"
                 maxlength="100"
-                
+
               />
               <mat-error
                 id="requiredtitle"
@@ -42,7 +42,7 @@
                 }}</mat-error
               >
             </mat-form-field>
-    
+
             <h3>CONTENIDO</h3>
             <angular-editor
               [config]="configurarEditor"
@@ -81,7 +81,7 @@
                   <span *ngIf="showUploadFile">
                       <label class="label" >adjuntar lista de usuarios (formato .xlsx)</label>
                       <br/>
-                      <app-load-form-file 
+                      <app-load-form-file
                         [fileForm]="fileFormNotification"
                         [nameFile]="nameFileNotification"
                         label="Notification"
@@ -92,7 +92,7 @@
                     </mat-error>
                     <hr *ngIf="urlDownload !== null">
                       <span class="f-11" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="urlDownload !== null">
-                      Descargar archivo cargado previamente 
+                      Descargar archivo cargado previamente
                       <a class="icon-down" [href]="urlDownload" target="_blank">
                         <i class="tio-download_from_cloud"></i>
                       </a>
@@ -114,14 +114,14 @@
                   </span>
 
             </mat-card>
-    
+
             <mat-card fxLayout="column">
                 <h4 class="border-bottom-gray pb-1 pt-1">PUBLICACIÓN</h4>
 
                 <div fxLayout="row" class="mt-2" fxLayoutGap="10px">
                   <div>
                     <label class="label mt-2 mb-1">
-                      FECHA DE PUBLICACIÓN 
+                      FECHA DE PUBLICACIÓN
                     </label>
                    <span class="mat-elevation-z1 border-radius" fxLayout="row-reverse">
                         <input
@@ -135,7 +135,7 @@
                         matSuffix
                         [for]="picker"
                       ></mat-datepicker-toggle>
-                      
+
                       <mat-datepicker
                         class="icon-date"
                         touchUi
@@ -143,12 +143,12 @@
                       ></mat-datepicker>
                     </span>
                     </div>
-                    
+
                     <div>
                     <label class="label mt-2 mb-1">
-                      HORA DE PUBLICACIÓN 
+                      HORA DE PUBLICACIÓN
                     </label>
-                    
+
                     <span class="mat-elevation-z1 p-2 border-radius" fxLayout="row-reverse">
                       <input
                         [ngxTimepicker]="min"
@@ -165,7 +165,7 @@
                     </div>
 
                 </div>
-    
+
                 <div class="mt-3" fxLayout="row" fxLayoutAlign="end space-between">
                   <button
                     mat-raised-button
@@ -181,8 +181,8 @@
               </mat-card>
 
         </div>
-        
+
     </div>
-        
+
       </form>
 </div>

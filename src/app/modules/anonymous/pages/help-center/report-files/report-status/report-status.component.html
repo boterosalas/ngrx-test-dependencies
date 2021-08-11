@@ -5,7 +5,7 @@
             <button mat-button [routerLink]="[ '/centro-de-ayuda/reportar' ]">
                 <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
                     <mat-icon>keyboard_arrow_left</mat-icon>
-                    Volver
+                    {{ "BUTTONS.BACK" | translate}}
                 </span>
             </button>
         </span>
@@ -14,14 +14,14 @@
         </div>
         <div  fxLayout.gt-xs="column" class="mt-3">
             <div fxLayout="row" fxLayoutGap="10px">
-              
+
                 <mat-card>
                     <div fxLayout="row" fxLayoutGap="10px" class="report-news">
                         <img src="/assets/img/ayuda/reportar-novedad/icon-reportar-novedad.svg" alt="">
                         <h3>Estado de novedades</h3>
                     </div>
                     <div class="card-report-dark mt-3">
-                        <p class="margin-zero-top">El tiempo de respuesta para cada novedad puede tomar hasta 15 días hábiles después de reportada la novedad o desde que se notifique un rechazo por parte del banco al realizar el pago.</p>    
+                        <p class="margin-zero-top">El tiempo de respuesta para cada novedad puede tomar hasta 15 días hábiles después de reportada la novedad o desde que se notifique un rechazo por parte del banco al realizar el pago.</p>
                     </div>
                     <h3 *ngIf="!dataSourceNews" class="bold-report">No tienes novedades reportadas.</h3>
                     <div class="panel-spacing mt-3">
@@ -55,10 +55,10 @@
                             </span>
                               </div>
                               <div fxLayour="column">
-                                <p [class]="(selectedInic===i)?'data-detail-color':'data-details'">Detalles</p> 
-                              </div>  
+                                <p [class]="(selectedInic===i)?'data-detail-color':'data-details'">Detalles</p>
+                              </div>
                             </mat-panel-title>
-                            
+
                           </mat-expansion-panel-header>
                           <div class="mb-2" fxLayout="row">
                           <div fxLayout="column" class="mr-4 margin-mobile" fxShow.gt-xs="false" fxShow.xs="true">
@@ -82,7 +82,7 @@
                         <span class="norma-data" *ngIf="item.statusnovelty === 'En revisión'">
                           <img class="status-img" src="/assets/img/dashboard/icon-revision.svg" alt="pendind"> En revisión
                       </span>
-                          
+
                         </div>
                           <div fxLayout="column">
                             <p class="mt-0 mb-0 radications-p">DESCRIPCIÓN DE LA NOVEDAD</p>
@@ -93,7 +93,7 @@
                             <p class="mb-0 radications-r">respuesta a novedad</p>
                             <span class="text-description">{{item.responsenovelty}}</span>
                           </div>
-                          
+
                         </mat-expansion-panel>
                       </mat-accordion>
                     </div>

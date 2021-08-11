@@ -269,8 +269,8 @@
     "INFO_ADDITIONAL": "Los siguientes documentos son necesarios para poder verificar tu cuenta y que empieces a recibir tus comisiones.",
     "TEXT_PASS": "Ingresa tu contraseña para poder realizar estos cambios",
     "ACCOUNT_INFO": "Actualiza tu información bancaria para tenerla en cuenta en tu próximo pago",
-    "DELETE":"Eliminar mi cuenta",
-    "INFO_ADDITIONAL_DELETE":"Esta Acción es Definitiva: Si eliminas tu cuenta de Clickam, no podrás recuperar tu contraseña ni la información que se encuentra en la plataforma. Todos tus datos personales se eliminara definitivamente."
+    "DELETE": "Eliminar mi cuenta",
+    "INFO_ADDITIONAL_DELETE": "Esta Acción es Definitiva: Si eliminas tu cuenta de Clickam, no podrás recuperar tu contraseña ni la información que se encuentra en la plataforma. Todos tus datos personales se eliminara definitivamente."
   },
   "ADDITIONAL": {
     "COMUNICATIONS": "Recibir comunicaciones",
@@ -366,9 +366,9 @@
     "TOTAL": "VENTA ACUMULADA",
     "NEW_BUSINESS": "NEGOCIOS",
     "BUSINESS": "Negocios",
-    "CONTROL_TOWER":"Torre de control",
+    "CONTROL_TOWER": "Torre de control",
     "RESUME": "Resumen",
-    "RANGE":"SELECCIONA EL RANGO DE FECHA A CONSULTAR",
+    "RANGE": "SELECCIONA EL RANGO DE FECHA A CONSULTAR",
     "LINK_GENERATOR": "Generador de links"
   },
   "NEWBUSINESS": {
@@ -503,8 +503,11 @@
     "HELP_CENTER": "Centro de ayuda"
   },
   "MEDALS": {
-    "MEDALS":"Tus medallas",
-    "MEDALS_SEE":"Ver tus medallas",
-    "INTRO":"En esta sección encontrarás tus medallas, acumula puntos y sube de nivel."
+    "MEDALS": "Tus medallas",
+    "MEDALS_SEE": "Ver tus medallas",
+    "INTRO": "En esta sección encontrarás tus medallas, acumula puntos y sube de nivel."
+  },
+  "BUTTONS": {
+    "BACK": "Volver"
   }
 }
