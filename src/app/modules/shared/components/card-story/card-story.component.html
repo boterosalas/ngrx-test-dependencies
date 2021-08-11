@@ -1,9 +1,9 @@
 <div [id]="id" class="card-story">
-  <div 
+  <div
     *ngIf="showProgress"
     class="progress-container"
   >
-    <div 
+    <div
       *ngFor="let progress of progressStory"
       id="progress-{{progress.id}}"
       class="story-progress"
@@ -19,9 +19,9 @@
       <span *ngIf="stories && stories.length > 0">{{timeStory}}</span>
     </div>
     <div class="action-container">
-      <button 
+      <button
         id="shared-{{index}}"
-        *ngIf="showShared" 
+        *ngIf="showShared"
         class="btn-shared"
         (click)="dataSliderCategory()"
       >
@@ -40,18 +40,18 @@
     </div>
   </div>
   <div class="container-absolute">
-    <div 
+    <div
       *ngFor="let story of stories; let i = index"
       id="file-{{id}}-{{story.id}}"
       class="container-file"
     >
-      <img 
+      <img
         *ngIf="story.isImage"
         class="img-story"
-        [src]="story.image" 
+        [src]="story.image"
         alt="story {{story.name}}"
       >
-      <video 
+      <video
         *ngIf="!story.isImage"
         id="video-{{id}}-{{story.id}}"
         [src]="story.image"
@@ -245,7 +245,7 @@
       fxFlex="12"
     >
       <mat-icon>keyboard_arrow_left</mat-icon>
-      <span class="text-back">Volver</span>
+      <span class="text-back">{{ "BUTTONS.BACK" | translate}}</span>
     </span>
     <p>{{ "GENERIC.REFERENCE_IDENTIFICATION" | translate }}</p>
     <mat-form-field appearance="outline" class="mt-2">

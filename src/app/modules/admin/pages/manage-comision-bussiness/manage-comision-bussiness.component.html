@@ -4,7 +4,7 @@
   imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
 ></app-banner>
 <div class="container mt-3">
-  <div fxLayout="row" fxLayoutAlign="space-between">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
     <div fxLayout="row">
       <img class="image-bussiness" [src]="image" alt="" />
       <span>
@@ -13,14 +13,18 @@
     </div>
     <span fxLayout="row">
       <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
-      <button mat-button [routerLink]="['/negocios-admin']">
+      <button
+        mat-raised-button
+        class="back-button"
+        [routerLink]="['/negocios-admin']"
+      >
         <span
           class="galano-bold f-16"
           fxLayout="row"
           fxLayoutAlign="start center"
         >
           <mat-icon>keyboard_arrow_left</mat-icon>
-          Volver
+          {{ "BUTTONS.BACK" | translate }}
         </span>
       </button>
     </span>
@@ -69,7 +73,7 @@
         >
           CÓDIGO DE CATEGORÍA
         </th>
-        <td mat-cell *matCellDef="let element: let i=index">
+        <td mat-cell *matCellDef="let element; let i = index">
           <p class="m-0 text-font">{{ element.code }}</p>
         </td>
       </ng-container>
@@ -82,7 +86,7 @@
         >
           NOMBRE DE CATEGORÍA
         </th>
-        <td mat-cell *matCellDef="let element: let i=index">
+        <td mat-cell *matCellDef="let element; let i = index">
           <p class="m-0 text-font">{{ element.description }}</p>
         </td>
       </ng-container>
@@ -95,7 +99,7 @@
         >
           COMISIÓN DE CLICKER
         </th>
-        <td mat-cell *matCellDef="let element: let i=index">
+        <td mat-cell *matCellDef="let element; let i = index">
           <p class="m-0 text-font">{{ element.commissionclicker }} %</p>
         </td>
       </ng-container>
@@ -108,7 +112,7 @@
         >
           COMISIÓN DE NEGOCIO
         </th>
-        <td mat-cell *matCellDef="let element: let i=index">
+        <td mat-cell *matCellDef="let element; let i = index">
           <p class="m-0 text-font">{{ element.commissionbusiness }} %</p>
         </td>
       </ng-container>
@@ -121,7 +125,7 @@
         >
           COMISIÓN TOTAL
         </th>
-        <td mat-cell *matCellDef="let element: let i=index">
+        <td mat-cell *matCellDef="let element; let i = index">
           <p class="m-0 text-font">{{ element.commissiontotal }} %</p>
         </td>
       </ng-container>
@@ -134,7 +138,7 @@
         >
           ACCIONES
         </th>
-        <td mat-cell *matCellDef="let element: let i=index">
+        <td mat-cell *matCellDef="let element; let i = index">
           <i
             class="tio-edit style-icon cursor-pointer mr-2"
             (click)="editCategoryCom(element)"
