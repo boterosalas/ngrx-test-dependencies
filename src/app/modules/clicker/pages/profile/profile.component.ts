@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   @ViewChild('tabGroup', { static: true }) tabGroup: MatTabGroup;
   managedPayments: boolean;
   isEmployee: boolean;
-  profile: boolean = false;
+  profile = false;
 
   constructor(private user: UserService, public auth: AuthService, private route: ActivatedRoute) {}
 
@@ -46,7 +46,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     this.route.params.subscribe((param) => {
       if (param.pagos === 'pagos') {
-        let interval = setInterval(() => {
+        const interval = setInterval(() => {
           this.tabGroup.selectedIndex = 3;
           if (document.querySelector('.mat-tab-label[aria-posinset="3"]')) {
             clearInterval(interval);
@@ -81,11 +81,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   /**
    * Metodo para enviar los archivos bancarios y de identificacion del usuario
-   * @param files
+   * @param files archivos
    */
 
   public sendFiles(files) {
-    let sendvalues = {
+    const sendvalues = {
       userid: this.userId,
       value: true,
       identification: this.id,

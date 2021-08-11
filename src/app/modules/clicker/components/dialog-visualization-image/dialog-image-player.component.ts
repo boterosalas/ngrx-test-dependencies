@@ -21,8 +21,8 @@ export class DialogImagePlayerComponent implements OnInit {
   }
 
   public download(data, type) {
-    let blob = new Blob([data], { type: type });
-    let url = window.URL.createObjectURL(blob);
+    const blob = new Blob([data], { type: type });
+    const url = window.URL.createObjectURL(blob);
     const downloadLink = document.createElement('a');
     if (type.includes('zip')) {
       downloadLink.href = url;
@@ -40,7 +40,7 @@ export class DialogImagePlayerComponent implements OnInit {
   }
 
   public downloadFile() {
-    let datos = [this.data.datosDownload];
+    const datos = [this.data.datosDownload];
     this.content.downloadF(datos).subscribe((resp) => {
       this.download(resp, 'image/jpg');
     });

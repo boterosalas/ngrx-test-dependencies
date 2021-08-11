@@ -120,7 +120,7 @@ export class AuthService implements OnDestroy {
     );
   }
 
-  public getMenuClicker(visible: Boolean = false) {
+  public getMenuClicker(visible: boolean = false) {
     return this.http.get(`${this.url + this.apiGetmenusClicker}?visible=${visible}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(

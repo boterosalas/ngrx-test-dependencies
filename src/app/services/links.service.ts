@@ -16,16 +16,16 @@ export class LinksService {
   urlComission = environment.URL_COMISSION;
   urlReports = environment.URL_REPORTS;
   urlApiContent = environment.URL_CONTENT;
-  // comission = 'commissions';
+
   reports = 'Reports/ClickerPerformanceReport';
   apiKPI = 'Reports/getKPI';
   apikpiresume = 'Reports/getkpiresume';
-  //https://apitestexito.azure-api.net/Dllo-clickam-md-apireport/api/Reports/getkpibusiness
+
   apikpibussiness = 'Reports/getkpibusiness';
-  //https://apitestexito.azure-api.net/Dllo-clickam-md-apireport/api/Reports/getkpitotaldata
+
   apikpiTotal = 'Reports/getkpitotaldata';
   apiUsersExcel = 'Reports/getUsersExcel';
-  //https://apitestexito.azure-api.net/Dllo-clickam-md-apireport/api/admin/gethistoricalbankinformation
+
   apiUsersHistoricalBankInformation = 'admin/gethistoricalbankinformation';
   apiAuditExcel = 'Reports/getAudit';
   apiAuditUserInfo = 'admin/getreportupdateinfoclicker';
@@ -88,7 +88,7 @@ export class LinksService {
   }
 
   public sendPickingfile(formdata) {
-    let data = new FormData();
+    const data = new FormData();
     data.append('FileBase64', formdata.fileBase64);
     // data.append("Business", formdata.business);
     // data.append("email", formdata.email);
@@ -153,7 +153,7 @@ export class LinksService {
   }
 
   public getReports() {
-    let apiReport = `${this.reports}`;
+    const apiReport = `${this.reports}`;
     return this.http.get(`${this.urlComission}${apiReport}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
@@ -227,7 +227,7 @@ export class LinksService {
     const token = localStorage.getItem('ACCESS_TOKEN');
     const authorization = token;
 
-    let httpOptions = {
+    const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + authorization,
@@ -251,7 +251,7 @@ export class LinksService {
     const token = localStorage.getItem('ACCESS_TOKEN');
     const authorization = token;
 
-    let httpOptions = {
+    const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + authorization,
@@ -275,15 +275,15 @@ export class LinksService {
     const token = localStorage.getItem('ACCESS_TOKEN');
     const authorization = token;
 
-    let httpOptions = {
+    const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + authorization,
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
       }),
     };
-    let datesGet0 = date.start.split('T');
-    let datesGet1 = date.end.split('T');
+    const datesGet0 = date.start.split('T');
+    const datesGet1 = date.end.split('T');
     return this.http.get(`${this.urlReports}${this.apikpibussiness}?start=${datesGet0[0]}&end=${datesGet1[0]}`, httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
@@ -301,15 +301,15 @@ export class LinksService {
     const token = localStorage.getItem('ACCESS_TOKEN');
     const authorization = token;
 
-    let httpOptions = {
+    const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + authorization,
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
       }),
     };
-    let datesGet0 = date.start.split('T');
-    let datesGet1 = date.end.split('T');
+    const datesGet0 = date.start.split('T');
+    const datesGet1 = date.end.split('T');
     return this.http.get(`${this.urlReports}${this.apikpiTotal}?start=${datesGet0[0]}&end=${datesGet1[0]}`, httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
@@ -386,7 +386,6 @@ export class LinksService {
   }
 
   public getUsersExcel(params: any) {
-    //Falta cambio en urlReports
     return this.http.get(`${this.urlReports}${this.apiUsersExcel}?&start=${params.start}&end=${params.end}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
@@ -398,7 +397,6 @@ export class LinksService {
     );
   }
   public getHistoricalBankInformation(params: any) {
-    //Cambio la urlReports
     return this.http
       .get(`${this.urlReports}${this.apiUsersHistoricalBankInformation}?&start=${params.start}&end=${params.end}`, this.httpOptions)
       .pipe(
@@ -505,7 +503,7 @@ export class LinksService {
     );
   }
   public sendfile(formdata) {
-    let data = new FormData();
+    const data = new FormData();
     data.append('FileBase64', formdata.fileBase64);
     // data.append("Business", formdata.business);
     data.append('email', formdata.email);
@@ -522,7 +520,7 @@ export class LinksService {
   }
 
   public updatePaymentDate(formdata) {
-    let data = new FormData();
+    const data = new FormData();
     data.append('FileBase64', formdata.fileBase64);
     data.append('email', formdata.email);
     return this.http.post(`${environment.URL_COMISSION}${this.apiupdatePaymentDate}`, formdata, this.httpOptions).pipe(
@@ -537,7 +535,6 @@ export class LinksService {
   }
 
   public searchUsers(data: any) {
-    //Falta cambio en urlReports
     return this.http.post(`${this.urlReports}${this.apiUsers}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
@@ -564,7 +561,6 @@ export class LinksService {
   }
 
   public getSellers() {
-    //apiSellers
     return this.http.get(`${this.urlComission}${this.apiSellers}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
@@ -583,7 +579,7 @@ export class LinksService {
     const token = localStorage.getItem('ACCESS_TOKEN');
     const authorization = token;
 
-    let httpOptions = {
+    const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + authorization,
@@ -606,7 +602,7 @@ export class LinksService {
   }
 
   public updateStatusCommissionFile(formdata) {
-    let httpOptionsForm = {
+    const httpOptionsForm = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.authorization,
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
@@ -628,7 +624,7 @@ export class LinksService {
   }
 
   public deleteCommissionFile(formdata) {
-    let httpOptionsForm = {
+    const httpOptionsForm = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.authorization,
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,

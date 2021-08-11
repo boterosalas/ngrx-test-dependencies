@@ -30,7 +30,7 @@ export class CardOrderNumberComponent implements OnInit {
   }
 
   public consultOrder() {
-    let params = this.orderNumberForm.value;
+    const params = this.orderNumberForm.value;
     this._link.getOrderNumber(params).subscribe((order) => {
       Swal.fire({
         html: `<h3>${order.userMessage}</h3> <p class='w-container purple-text'>${order.objectResponse}</p>`,

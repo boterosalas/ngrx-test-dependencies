@@ -68,12 +68,12 @@ export class SlideVideoComponent implements OnInit {
 
   constructor(private dialog: MatDialog, private sanitizer: DomSanitizer, private route: ActivatedRoute) {
     this.route.queryParams.subscribe((param) => {
-      let idVideoRoute = param.video;
+      const idVideoRoute = param.video;
       this.sliderVideo.forEach((element) => {
-        let videoIdArray = element.id;
+        const videoIdArray = element.id;
         if (idVideoRoute === videoIdArray) {
           setTimeout(() => {
-            let selectVideo = document.querySelector(`#${idVideoRoute}`);
+            const selectVideo = document.querySelector(`#${idVideoRoute}`);
             selectVideo.dispatchEvent(new Event('click'));
           }, 500);
         }

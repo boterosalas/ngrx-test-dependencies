@@ -11,9 +11,7 @@ export class SliderWorksComponent implements OnInit {
 
   @ViewChild('slickModal', { static: false })
   slickModal: SlickCarouselComponent;
-
-  ngOnInit() {}
-
+  
   slider = [
     {
       title: 'Refiere y compra en clickam en tus tiendas favoritas',
@@ -42,6 +40,9 @@ export class SliderWorksComponent implements OnInit {
     infinite: false,
     arrows: true,
   };
+
+  ngOnInit() {}
+
 
   public next() {
     this.slickModal.slickNext();

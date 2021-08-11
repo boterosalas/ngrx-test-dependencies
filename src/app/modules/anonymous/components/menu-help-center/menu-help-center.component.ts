@@ -7,13 +7,13 @@ import { Location } from '@angular/common';
   styleUrls: ['./menu-help-center.component.scss'],
 })
 export class MenuHelpCenterComponent implements OnInit {
-  step: number = 0;
+  step = 0;
   token = localStorage.getItem('ACCESS_TOKEN');
   authorization = this.token;
   reportVisible: boolean;
   constructor(location: Location) {
-    let urlLocation = location.prepareExternalUrl(location.path());
-    let SplitLocation = urlLocation.split('/');
+    const urlLocation = location.prepareExternalUrl(location.path());
+    const SplitLocation = urlLocation.split('/');
     switch (SplitLocation[2]) {
       case 'sobre-clickam':
         this.step = 0;

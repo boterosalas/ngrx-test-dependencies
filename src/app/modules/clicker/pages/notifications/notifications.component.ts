@@ -20,6 +20,9 @@ export class NotificationsComponent implements OnInit {
   dataToSend = [{ id: [''], viewed: true, dateviewed: this.dateSend }];
   titleSelect = 'Seleccionar';
   innerWidth: number;
+  formArray = [];
+  checkboxGroup: FormGroup;
+
 
   constructor(private _content: ContentService, private fb: FormBuilder, private _snackBar: MatSnackBar, private router: Router) {}
 
@@ -27,10 +30,6 @@ export class NotificationsComponent implements OnInit {
     this.getNotications();
     this.formNotifications();
   }
-
-  formArray = [];
-
-  checkboxGroup: FormGroup;
 
   public getNotications() {
     this._content.getNotificationAdmin(false).subscribe((notification: ResponseService) => {

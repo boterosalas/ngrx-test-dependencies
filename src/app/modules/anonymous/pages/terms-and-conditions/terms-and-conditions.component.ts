@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LinksService } from 'src/app/services/links.service';
 import { MasterDataService } from 'src/app/services/master-data.service';
@@ -8,7 +8,7 @@ import { MasterDataService } from 'src/app/services/master-data.service';
   templateUrl: './terms-and-conditions.component.html',
   styleUrls: ['./terms-and-conditions.component.scss'],
 })
-export class TermsAndConditionsComponent implements OnInit {
+export class TermsAndConditionsComponent implements OnInit, OnDestroy {
   constructor(private personalInfo: MasterDataService, private link: LinksService) {}
   contentTerminos: any;
   contentProteccion: any;
@@ -46,7 +46,7 @@ export class TermsAndConditionsComponent implements OnInit {
     }, 1000);
   }
   getTerms() {
-    this.personalInfo.getTerms().subscribe((resp: any) => {
+    this.subscription = this.personalInfo.getTerms().subscribe((resp: any) => {
       this.contentTerminos = resp.objectResponse[0].sectionvalue;
       this.contentProteccion = resp.objectResponse[1].sectionvalue;
       this.contentTransparencia = resp.objectResponse[2].sectionvalue;
@@ -57,4 +57,9 @@ export class TermsAndConditionsComponent implements OnInit {
       this.textPrograma = resp.objectResponse[3].sectiontitle;
     });
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }

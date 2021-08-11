@@ -24,7 +24,7 @@ export class MenuOptionsComponent implements OnInit, OnDestroy {
   @Input() layoutmd = 'column';
   @Input() showIcon = false;
   @Input() icon: string;
-  @Input() section: string = 'menuTop';
+  @Input() section = 'menuTop';
   @Output() hideSidenav = new EventEmitter();
 
   isOpenMenu: boolean;

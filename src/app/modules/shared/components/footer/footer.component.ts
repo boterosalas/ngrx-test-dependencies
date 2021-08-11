@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent implements OnInit, OnDestroy {
   panelOpenState = false;
   sectionsLinks: any;
   private subscription: Subscription = new Subscription();
@@ -31,4 +31,9 @@ export class FooterComponent implements OnInit {
     this.router.navigate(['/terminos-y-condiciones']);
     this.utils.hideloginForm();
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }

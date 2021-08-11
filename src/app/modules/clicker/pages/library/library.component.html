@@ -7,7 +7,7 @@
 
 <div class="container">
   <div fxLayout.gt-xs="row" fxLayoutGap.gt-xs="30px" ngClass.gt-xs="mt-3">
-    <span class="mt-2 mb-2" fxLayout="row" fxShow.gt-xs="false" *ngIf="!visible_step_mobile">
+    <span class="mt-2 mb-2" fxLayout="row" fxShow.gt-xs="false" *ngIf="!visibleStepMobile">
       <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
       <button mat-button [routerLink]="['/negocios']" class="pl-0">
         <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
@@ -35,7 +35,7 @@
         </mat-expansion-panel>
       </mat-accordion>
     </div>
-    <div fxLayout.gt-xs="column" fxFlex.gt-xs="25" fxShow.gt-xs="false" *ngIf="!visible_step_mobile">
+    <div fxLayout.gt-xs="column" fxFlex.gt-xs="25" fxShow.gt-xs="false" *ngIf="!visibleStepMobile">
       <mat-accordion class="width-total">
         <mat-expansion-panel [expanded]="true" class="help-center">
           <mat-expansion-panel-header class="head head-library">
@@ -124,7 +124,7 @@
         </ng-container>
       </div>
     </div>
-    <div fxLayout.gt-xs="column" fxShow.gt-xs="false" *ngIf="visible_step_mobile">
+    <div fxLayout.gt-xs="column" fxShow.gt-xs="false" *ngIf="visibleStepMobile">
       <span class="mt-2 mb-2" fxLayout="row">
         <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
         <button mat-button (click)="returnAcordeon()" class="pl-0">
@@ -135,9 +135,9 @@
         </button>
       </span>
       <span class="mt-2 mb-2" fxLayout="row">
-        <img class="image-bussiness" [src]="step_mobile.imageurl" alt="" />
+        <img class="image-bussiness" [src]="stepMobile.imageurl" alt="" />
         <span>
-          <h3>{{ step_mobile.description }}</h3></span
+          <h3>{{ stepMobile.description }}</h3></span
         >
       </span>
       <div fxLayout="row" fxLayoutAlign="space-between">

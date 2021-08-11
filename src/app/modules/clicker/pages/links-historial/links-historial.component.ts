@@ -13,9 +13,9 @@ import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog
 })
 export class LinksHistorialComponent implements OnInit {
   dataSource: any;
-  pageIndex: number = 0;
-  pageSize: number = 20;
-  pageTo: number = 20;
+  pageIndex = 0;
+  pageSize = 20;
+  pageTo = 20;
   totalItems: number;
   paginate: string;
   private subscription: Subscription = new Subscription();
@@ -27,7 +27,7 @@ export class LinksHistorialComponent implements OnInit {
   orderValue: any;
   @ViewChild('templateCategories', { static: false })
   templateCategories: TemplateRef<any>;
-  urlshorten: string = '';
+  urlshorten = '';
   url: string;
   classButtonCopy: string;
   classButtonRefer: string;
@@ -96,8 +96,8 @@ export class LinksHistorialComponent implements OnInit {
 
   /**
    * Abre el mensaje de confirmacion de copiado del link
-   * @param message
-   * @param action
+   * @param message mensaje
+   * @param action accion
    */
 
   private openSnackBar(message: string, action: string) {
@@ -130,7 +130,7 @@ export class LinksHistorialComponent implements OnInit {
   }
 
   buy() {
-    let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (iOS) {
       window.location.assign(this.urlshorten);
     } else {
@@ -147,7 +147,7 @@ export class LinksHistorialComponent implements OnInit {
     this.showFormCustomer = true;
     this.url = `${dataCategoryUrl}${this.idClicker}`;
     this.subscription = this.user;
-    let splice = product.link.split('//');
+    const splice = product.link.split('//');
     this.urlshorten = 'https://' + splice[1];
     this.formShareLink();
     const home = true;
@@ -194,7 +194,7 @@ export class LinksHistorialComponent implements OnInit {
 
     const template = this.templateCategories;
 
-    let dialogref = this.dialog.open(DialogComponent, {
+    const dialogref = this.dialog.open(DialogComponent, {
       data: {
         template,
         infoaditional,

@@ -6,9 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./how-works-clickam.component.scss'],
 })
 export class HowWorksClickamComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
 
   works = [
     {
@@ -44,4 +41,9 @@ export class HowWorksClickamComponent implements OnInit {
     infinite: true,
     arrows: false,
   };
+
+  constructor() {}
+
+  ngOnInit() {}
 }
+

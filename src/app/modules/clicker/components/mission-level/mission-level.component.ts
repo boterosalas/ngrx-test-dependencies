@@ -8,8 +8,9 @@ import { Component, OnInit, Input } from '@angular/core';
 export class MissionLevelComponent implements OnInit {
   constructor() {}
 
-  ngOnInit() {}
-
   @Input() titleMission: string;
   @Input() missionDescription: string;
+
+  ngOnInit() {}
+
 }

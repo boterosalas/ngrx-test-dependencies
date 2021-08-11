@@ -27,7 +27,7 @@ export class ForgotpasswordformComponent implements OnInit, OnDestroy {
   forgotPaswordForm: FormGroup;
   text: any = '';
 
-  swalOptSuccess: Object = {
+  swalOptSuccess: object = {
     title: 'Se ha enviado un email',
     text: this.text,
     confirmButtonText: 'Aceptar',
@@ -35,7 +35,7 @@ export class ForgotpasswordformComponent implements OnInit, OnDestroy {
     type: 'success',
   };
 
-  swalOptError: Object = {
+  swalOptError: object = {
     title: 'Ups algo salió mal',
     text: this.text,
     confirmButtonText: 'Aceptar',
@@ -43,7 +43,7 @@ export class ForgotpasswordformComponent implements OnInit, OnDestroy {
     type: 'error',
   };
 
-  swalOptInvalid: Object = {
+  swalOptInvalid: object = {
     title: this.text,
     confirmButtonText: 'Aceptar',
     confirmButtonClass: 'accept-forgot-alert-invalid',
@@ -63,7 +63,7 @@ export class ForgotpasswordformComponent implements OnInit, OnDestroy {
 
   public forgotPassword() {
     this.loading.show();
-    let userName = this.forgotPaswordForm.controls.Username.value;
+    const userName = this.forgotPaswordForm.controls.Username.value;
     this.subscription = this.forgot.forgotPassword(userName).subscribe(
       (resp: ResponseService) => {
         this.loading.hide();

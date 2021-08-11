@@ -18,7 +18,7 @@ import { SlickCarouselComponent } from 'ngx-slick-carousel';
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss'],
 })
-export class SliderComponent implements OnInit {
+export class SliderComponent implements OnInit, OnDestroy {
   constructor(
     private sp: ContentService,
     private dialog: MatBottomSheet,
@@ -36,8 +36,8 @@ export class SliderComponent implements OnInit {
   }
 
   private ngNavigatorShareService: NgNavigatorShareService;
-  @Input() sliderWeb: Object;
-  @Input() sliderMobile: Object;
+  @Input() sliderWeb: object;
+  @Input() sliderMobile: object;
   @Input() isSlider: boolean;
   @Input() showArrows: boolean;
   @Output() action = new EventEmitter();
@@ -51,10 +51,10 @@ export class SliderComponent implements OnInit {
   templateCategories: TemplateRef<any>;
   @ViewChild('templateDialogAssured', { static: false })
   templateAssured: TemplateRef<any>;
-  urlshorten: string = '';
+  urlshorten = '';
   url: string;
   identification: string;
-  enableCopy: boolean = true;
+  enableCopy = true;
   formLink: FormGroup;
   plu: string;
   business: string;
@@ -75,17 +75,6 @@ export class SliderComponent implements OnInit {
   tokenInfo: any;
   idClicker: string;
   buttonReferir: any;
-  ngOnInit() {
-    this.getDate();
-
-    if (localStorage.getItem('ACCESS_TOKEN') !== null) {
-      this.identification = this.token.userInfo().identification;
-    }
-
-    this.idCustomerForm = this.fb.group({
-      identification: ['', [Validators.required, Validators.pattern(this.numberPattern), Validators.maxLength(10)]],
-    });
-  }
 
   slideConfig = {
     slidesToShow: 1,
@@ -98,6 +87,18 @@ export class SliderComponent implements OnInit {
     arrows: true,
   };
 
+  ngOnInit() {
+    this.getDate();
+
+    if (localStorage.getItem('ACCESS_TOKEN') !== null) {
+      this.identification = this.token.userInfo().identification;
+    }
+
+    this.idCustomerForm = this.fb.group({
+      identification: ['', [Validators.required, Validators.pattern(this.numberPattern), Validators.maxLength(10)]],
+    });
+  }
+
   public nextStep() {
     this.showForm = !this.showForm;
     this.showFormCustomer = !this.showFormCustomer;
@@ -105,7 +106,7 @@ export class SliderComponent implements OnInit {
   }
 
   buy() {
-    let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (iOS) {
       window.location.assign(this.urlshorten);
     } else {
@@ -161,8 +162,8 @@ export class SliderComponent implements OnInit {
 
   /**
    * Abre el mensaje de confirmacion de copiado del link
-   * @param message
-   * @param action
+   * @param message mensaje
+   * @param action accion
    */
 
   private openSnackBar(message: string, action: string) {
@@ -176,9 +177,9 @@ export class SliderComponent implements OnInit {
    */
 
   public getDate() {
-    let today = new Date();
-    let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    let time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const today = new Date();
+    const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     this.date = date + ' ' + time;
   }
 
@@ -187,7 +188,7 @@ export class SliderComponent implements OnInit {
    */
 
   public saveLink(param?: string) {
-    let data = {
+    const data = {
       link: this.url,
       identification: this.identification,
       plu: this.plu,
@@ -196,7 +197,7 @@ export class SliderComponent implements OnInit {
       identificationcustomer: this.idCustomerForm.controls.identification.value,
     };
     this.subscription = this.links.saveLink(data).subscribe((resp: ResponseService) => {
-      let splice = resp.objectResponse.link.split('//');
+      const splice = resp.objectResponse.link.split('//');
       this.urlshorten = 'https://' + splice[1];
       this.enableCopy = false;
 
@@ -215,7 +216,7 @@ export class SliderComponent implements OnInit {
    */
 
   public saveLinkReference() {
-    let data = {
+    const data = {
       link: this.url,
       identification: this.identification,
       plu: this.plu,
@@ -240,7 +241,7 @@ export class SliderComponent implements OnInit {
    */
 
   public dataCategory(category) {
-    let token = localStorage.getItem('ACCESS_TOKEN');
+    const token = localStorage.getItem('ACCESS_TOKEN');
     if (token !== null && category.business !== 'clickam') {
       this.tokenInfo = this.token.userInfo();
       this.idClicker = this.tokenInfo.idclicker;
@@ -301,7 +302,7 @@ export class SliderComponent implements OnInit {
 
       const template = this.templateCategories;
 
-      let dialogref = this.dialog.open(DialogComponent, {
+      const dialogref = this.dialog.open(DialogComponent, {
         data: {
           title,
           template,

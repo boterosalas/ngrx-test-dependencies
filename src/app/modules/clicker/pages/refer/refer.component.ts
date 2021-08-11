@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatPaginator, MatTableDataSource } from '@angular/material';
 import { NgNavigatorShareService } from 'ng-navigator-share';
@@ -15,18 +15,18 @@ import { TokenService } from 'src/app/services/token.service';
   templateUrl: './refer.component.html',
   styleUrls: ['./refer.component.scss'],
 })
-export class ReferComponent implements OnInit, OnDestroy {
+export class ReferComponent implements OnInit, OnDestroy, AfterViewInit {
   private ngNavigatorShareService: NgNavigatorShareService;
   private subscription: Subscription = new Subscription();
 
   @ViewChild('share', { static: false }) public refer: Refer;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  public urlClicker: Object;
+  public urlClicker: any;
   dataSource: any;
-  pageIndex: number = 0;
-  pageSize: number = 20;
-  pageTo: number = 20;
+  pageIndex = 0;
+  pageSize = 20;
+  pageTo = 20;
   totalItems: number;
   paginate: string;
   orderBy: string;
@@ -61,7 +61,7 @@ export class ReferComponent implements OnInit, OnDestroy {
   }
 
   public sendEmail(email) {
-    let dataEmail = {
+    const dataEmail = {
       email,
       link: this.urlClicker,
     };
@@ -100,9 +100,9 @@ export class ReferComponent implements OnInit, OnDestroy {
     );
   }
   public generateLink(dataEmail: any) {
-    let tokenInfo = this.token.userInfo();
-    let idClicker = tokenInfo.idclicker;
-    let formData: FormData = new FormData();
+    const tokenInfo = this.token.userInfo();
+    const idClicker = tokenInfo.idclicker;
+    const formData: FormData = new FormData();
     formData.append('idClicker', idClicker);
     formData.append('type', 'Generate');
     this.content.setClick(formData).subscribe();
@@ -117,8 +117,8 @@ export class ReferComponent implements OnInit, OnDestroy {
 
   /**
    * Abre el mensaje de confirmacion de copiado del link
-   * @param message
-   * @param action
+   * @param message mensaje
+   * @param action accion
    */
 
   private openSnackBar(message: string, action: string) {
@@ -143,7 +143,7 @@ export class ReferComponent implements OnInit, OnDestroy {
   }
 
   public getReferrals(from = 1, to = this.pageTo) {
-    let params = { from, to };
+    const params = { from, to };
     this.subscription = this.link.getReferrals(params).subscribe((resp) => {
       this.dataSource = new MatTableDataSource<any>(resp.referrals);
       this.totalItems = resp.total;
@@ -159,8 +159,6 @@ export class ReferComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
     this.subscription.unsubscribe();
   }
 }

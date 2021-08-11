@@ -36,9 +36,9 @@ export class NewBusinessFormComponent implements OnInit, OnDestroy {
   namePattern = '[a-zA-Z0-9 àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]+';
   numberPattern = '^(0|[0-9][0-9]*)$';
   domainPattern = '[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:.[a-zA-Z]{2,})+';
-  showBusinessForm: boolean = true;
-  showTermsBusiness: boolean = false;
-  acceptTerms: boolean = null;
+  showBusinessForm = true;
+  showTermsBusiness = false;
+  acceptTerms = null;
 
   ngOnInit() {
     this.registerBusiness();
@@ -83,8 +83,8 @@ export class NewBusinessFormComponent implements OnInit, OnDestroy {
   }
 
   register(data) {
-    let formInfo = data.value;
-    let infoBusiness = {
+    const formInfo = data.value;
+    const infoBusiness = {
       description: formInfo.name,
       website: formInfo.domain,
       contactname: formInfo.contact,
@@ -138,8 +138,6 @@ export class NewBusinessFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
     this.subscription.unsubscribe();
   }
 }

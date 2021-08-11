@@ -527,7 +527,7 @@ export class ContentService {
     );
   }
 
-  public getAllBusiness(clickam: Boolean = false) {
+  public getAllBusiness(clickam: boolean = false) {
     return this.http.get(`${this.url + this.apiGetAllBusiness}?clickam=${clickam}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
@@ -751,7 +751,7 @@ export class ContentService {
         )
       )
     );
-    //return `Eliminando Categoria`
+
   }
   public addCategory(datos: any) {
     return this.http.post(`${this.url + this.apiAddCategory}`, datos, this.httpOptions).pipe(
@@ -810,7 +810,7 @@ export class ContentService {
     );
   }
   public setContentImgVi(data) {
-    let httpOptionsSet = {
+    const httpOptionsSet = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.authorization,
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
@@ -818,7 +818,7 @@ export class ContentService {
     };
     return this.http.post(`${this.url + this.apiUploadContent}`, data, httpOptionsSet);
   }
-  //apiDeleteContent
+
   public deleteContent(data: any) {
     return this.http.post(`${this.url + this.apiDeleteContent}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
@@ -834,7 +834,7 @@ export class ContentService {
     );
   }
   public downloadF(data: any) {
-    let httpOptionsDow = {
+    const httpOptionsDow = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + this.authorization,
@@ -847,7 +847,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiDownloadContent}`, data, httpOptionsDow);
   }
   public setClick(datos: any) {
-    let httpOptionsSet = {
+    const httpOptionsSet = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.authorization,
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
@@ -881,7 +881,7 @@ export class ContentService {
     );
   }
   public getBlogsAdmin(data) {
-    let httpCache = {
+    const httpCache = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + this.authorization,
@@ -944,7 +944,7 @@ export class ContentService {
     );
   }
   public saveBlog(data: any) {
-    let httpOptionsSet = {
+    const httpOptionsSet = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.authorization,
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
@@ -953,7 +953,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiSaveBlog}`, data, httpOptionsSet);
   }
   public activeBlog(data: any) {
-    let httpOptionsSet = {
+    const httpOptionsSet = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.authorization,
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
@@ -976,7 +976,7 @@ export class ContentService {
     );
   }
   public sendMessage(data: any) {
-    let httpOptionsSet = {
+    const httpOptionsSet = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.authorization,
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,

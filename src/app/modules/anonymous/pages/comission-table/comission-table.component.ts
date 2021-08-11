@@ -23,7 +23,7 @@ export class ComissionTableComponent implements OnInit {
   }
 
   public addTagsTableComission() {
-    let interval = setInterval(() => {
+    const interval = setInterval(() => {
       document.querySelector('.mat-tab-label[aria-posinset="1"]').classList.add('gtmTablaComiClicMenuMovilExito');
       document.querySelector('.mat-tab-label[aria-posinset="1"] .mat-tab-label-content').classList.add('gtmTablaComiClicMenuMovilExito');
 

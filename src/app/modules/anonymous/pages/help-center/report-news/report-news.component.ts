@@ -14,16 +14,15 @@ moment.locale('es');
 export class ReportNewsComponent implements OnInit {
   dateForm: FormGroup;
   maxDate = new Date();
-  nameFileCert: string = '';
+  nameFileCert = '';
   showErrorCert: boolean;
   validFormat: boolean;
   fileImgCat: any;
   activebutton: boolean;
   referencia: string;
-  visibleLeft: boolean = false;
-  placeholder: string = 'REFERENCIA';
+  visibleLeft = false;
+  placeholder = 'REFERENCIA';
   constructor(private fb: FormBuilder, private content: ContentService, private users: UserService) {
-    //this.maxDate = new Date(currentYear + 1, 11, 31);
   }
   dataSource: any;
   ngOnInit() {
@@ -59,9 +58,8 @@ export class ReportNewsComponent implements OnInit {
   }
 
   private getExtension(nameFile: string, getSize: number) {
-    //let nameF = nameFile.replace(' ', '%20')
-    let splitExt = nameFile.split('.');
-    let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
+    const splitExt = nameFile.split('.');
+    const getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
     this.validFormat = true;
     if (getExt === 'jpg' || getExt === 'png' || getExt === 'pdf' || getExt === 'msg') {
       this.validFormat = false;
@@ -71,13 +69,13 @@ export class ReportNewsComponent implements OnInit {
     }
   }
   public onFileChangeFiles(event, param: string) {
-    let nameFile = event.target.files[0].name;
-    let reader = new FileReader();
-    let sizeFile = event.target.files[0].size;
+    const nameFile = event.target.files[0].name;
+    const reader = new FileReader();
+    const sizeFile = event.target.files[0].size;
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      let fileBlob = new Blob([file]);
-      let file2 = new File([fileBlob], nameFile);
+      const fileBlob = new Blob([file]);
+      const file2 = new File([fileBlob], nameFile);
       reader.readAsDataURL(file2);
       reader.onload = () => {
         this.getExtension(nameFile, sizeFile);

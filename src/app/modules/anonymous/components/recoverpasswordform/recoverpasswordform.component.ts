@@ -60,7 +60,7 @@ export class RecoverpasswordformComponent implements OnInit, OnDestroy {
 
   public recoverPassword() {
     this.loading.show();
-    let dataUser = {
+    const dataUser = {
       code: this.code,
       email: this.email,
       newPassword: btoa(this.recoverPasswordForm.controls.password.value),

@@ -72,20 +72,20 @@ export class HomeComponent implements OnInit, OnDestroy {
   modalAltMobile: string;
   modalAltWeb: string;
   modalHrefMobile: string;
-  modalTarget: string = '_self';
+  modalTarget = '_self';
   modalSrcWeb: string;
   modalSrcMobile: string;
   newTerms: boolean;
   acceptTerms: boolean = null;
   @ViewChild('templateTerms', { static: false })
   templateTerms: TemplateRef<any>;
-  newTermsHTML: boolean = false;
-  stepTerms: boolean = true;
-  activateButton: boolean = false;
+  newTermsHTML = false;
+  stepTerms = true;
+  activateButton  = false;
   amount: any;
   amountReferred: any;
   paymentPending: number;
-  //terms
+
   contentTerminos: any;
   contentProteccion: any;
   contentTransparencia: any;
@@ -94,8 +94,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   textProteccion: any;
   textTransparencia: any;
   textPrograma: any;
-  formData: boolean = false;
-  sendData: boolean = false;
+  formData = false;
+  sendData = false;
   dateForm: FormGroup;
   constructor(
     public router: Router,
@@ -115,7 +115,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) {
     /**
      *  Verifica que en la ruta de inicio exista el parametro de email y activa el usuario
-     * @param email
+     * @param email email
      */
     this.dateForm = this.fb.group({
       description: [null, Validators.required],
@@ -136,8 +136,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
   public generateLink(dataEmail: any) {
-    let idClicker = dataEmail;
-    let formData: FormData = new FormData();
+    const idClicker = dataEmail;
+    const formData: FormData = new FormData();
     formData.append('idClicker', idClicker);
     formData.append('type', 'Visit');
     this.content.setClick(formData).subscribe();
@@ -194,7 +194,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           }
         });
       }
-      let interval = setInterval(() => {
+      const interval = setInterval(() => {
         this.showModalPayment();
         if (this.paymentPending > 10000) {
           clearInterval(interval);
@@ -202,8 +202,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       }, 3000);
 
       if (role === 'CLICKER') {
-        let token = localStorage.getItem('ACCESS_TOKEN');
-        let tokenDecode = decode(token);
+        const token = localStorage.getItem('ACCESS_TOKEN');
+        const tokenDecode = decode(token);
         this.userId = tokenDecode.userid;
         this.messagingService.requestPermission(this.userId);
         this.messagingService.receiveMessage();
@@ -214,7 +214,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   /**
    * Metodo para activar el usuario
-   * @param email
+   * @param email email
    */
 
   public activateUser() {
@@ -274,16 +274,16 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   @HostListener('over')
   sliderOffers() {
-    let token = localStorage.getItem('ACCESS_TOKEN');
+    const token = localStorage.getItem('ACCESS_TOKEN');
     if (token === null) {
       this.utils.showloginForm();
     }
   }
 
   private routeBased() {
-    let token = localStorage.getItem('ACCESS_TOKEN');
+    const token = localStorage.getItem('ACCESS_TOKEN');
     if (token !== null) {
-      let tokenDecode = decode(token);
+      const tokenDecode = decode(token);
       if (tokenDecode.role === 'ADMIN' || tokenDecode.role === 'SUPERADMIN') {
         this.router.navigate(['/dashboard']);
         this.auth.getRole$.next('ADMIN');
@@ -302,7 +302,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public getBussinessClicker() {
     this.subscription = this.auth.isLogged$.subscribe((val) => {
-      let token = localStorage.getItem('ACCESS_TOKEN');
+      const token = localStorage.getItem('ACCESS_TOKEN');
       if (!!val || token !== null) {
         this.subscription = this.content.getBusinessClicker().subscribe((bussiness) => {
           this.bussinessClicker = bussiness;
@@ -321,12 +321,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public bussinessNavigation(bussiness) {
-    let token = localStorage.getItem('ACCESS_TOKEN');
+    const token = localStorage.getItem('ACCESS_TOKEN');
     if (token === null) {
       this.utils.showloginForm();
     }
 
-    let params = {
+    const params = {
       id: bussiness.id,
       code: bussiness.code,
       infoAditional: bussiness.infoaditional,
@@ -416,8 +416,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   /**
    * Abre el mensaje de confirmacion
-   * @param message
-   * @param action
+   * @param message mensaje
+   * @param action accion
    */
 
   private openSnackBar(message: string, action: string) {
@@ -449,7 +449,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public saveProposal() {
-    let datos = {
+    const datos = {
       message: this.dateForm.controls.description.value,
     };
     this.user.saveFeedback(datos).subscribe((resp) => {

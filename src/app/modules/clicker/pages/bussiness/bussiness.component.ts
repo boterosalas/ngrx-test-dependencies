@@ -27,7 +27,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   id: string;
   title: string;
   percent: string;
-  percentBussiness: string = 'Hasta 9.6%';
+  percentBussiness = 'Hasta 9.6%';
   bussiness = [];
   sellersExito: Array<any>;
   sellersMarketPlace: Array<any>;
@@ -48,7 +48,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   business: string;
   plu: string;
   formLink: FormGroup;
-  enableCopy: boolean = true;
+  enableCopy = true;
   identification: string;
   imgBanner: string;
   imgBannerMobile: string;
@@ -60,7 +60,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   templateAssured: TemplateRef<any>;
   @ViewChild('templateEC', { static: false }) templateEC: TemplateRef<any>;
 
-  urlshorten: string = '';
+  urlshorten = '';
   url: string;
   classButtonCopy: string;
   classButtonRefer: string;
@@ -70,18 +70,18 @@ export class BussinessComponent implements OnInit, OnDestroy {
   classButtonWhatsapp: string;
   classButtonShare: string;
   acceptTerms: boolean = null;
-  terms: boolean = false;
+  terms = false;
   tokenInfo: any;
   idClicker: string;
-  showDeliver: boolean = false;
+  showDeliver = false;
   acceptTermsDeliver: boolean;
-  urlPlaystore: string = 'https://play.google.com/store/apps/details?id=com.sewayplus';
-  urlAppstore: string = 'https://apps.apple.com/co/app/seway/id1414489414';
+  urlPlaystore = 'https://play.google.com/store/apps/details?id=com.sewayplus';
+  urlAppstore = 'https://apps.apple.com/co/app/seway/id1414489414';
 
   paginate: string;
-  pageIndex: number = 0;
-  pageTo: number = 50;
-  pageSize: number = 52;
+  pageIndex = 0;
+  pageTo = 50;
+  pageSize = 52;
   productsList: Array<any>;
   productsListBiggy: Array<any>;
   productsListTransform: Array<any>;
@@ -92,11 +92,11 @@ export class BussinessComponent implements OnInit, OnDestroy {
   orderOptions: any;
   orderValue: string;
   sellerId: string;
-  mostrarProductos: number = 3;
+  mostrarProductos = 3;
   sellerName: string;
-  showReferenceButton: boolean = true;
+  showReferenceButton = true;
   allBussiness: string;
-  visibleTerms: boolean = false;
+  visibleTerms = false;
   commision: any;
   description: string;
   infoBussiness: string;
@@ -104,7 +104,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   exceptionsInfo: string;
   caseSpecial: string;
   tips = [];
-  invisible: boolean = false;
+  invisible = false;
   nonEditedContent: string;
   isContentToggled: boolean;
   constructor(
@@ -173,7 +173,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.getContentBussiness();
     this.getUserData();
     this.links.getSellers().subscribe((resp: any) => {
-      //this.sellers = [...resp.sellersExito, ...resp.sellersMarketPlace]
       this.sellersExito = resp.sellersExito;
       this.sellersMarketPlace = resp.sellersMarketPlace;
     });
@@ -210,11 +209,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.isContentToggled = !this.isContentToggled;
     this.infoBussiness = this.isContentToggled ? this.nonEditedContent : this.formatContent(this.infoBussiness);
   }
-  // public order(option:string) {
-  //   this.pageIndex = 0;
-  //   this.searchProductPaginate(this.paginate, option, 1 , this.pageTo);
-  //   this.orderValue = option;
-  // }
+
   public vermas() {
     if (this.visibleTerms === true) {
       this.visibleTerms = false;
@@ -245,7 +240,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
    */
 
   public saveLink(param?: string) {
-    let dataSaveLink = {
+    const dataSaveLink = {
       link: this.url,
       identification: this.identification,
       plu: this.plu,
@@ -272,7 +267,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
    */
 
   public saveLinkReference() {
-    let dataSaveLinkReference = {
+    const dataSaveLinkReference = {
       link: this.url,
       identification: this.identification,
       plu: this.plu,
@@ -301,16 +296,16 @@ export class BussinessComponent implements OnInit, OnDestroy {
    */
 
   public getDate() {
-    let today = new Date();
-    let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    let time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const today = new Date();
+    const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     this.date = date + ' ' + time;
   }
 
   /**
    * Abre el mensaje de confirmacion de copiado del link
-   * @param message
-   * @param action
+   * @param message mensaje
+   * @param action accion
    */
 
   private openSnackBar(message: string, action: string) {
@@ -348,7 +343,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   }
 
   buy() {
-    let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (iOS) {
       window.location.assign(this.urlshorten);
     } else {
@@ -373,7 +368,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
    */
 
   public dataSliderCategory(sliderInfo) {
-    let token = localStorage.getItem('ACCESS_TOKEN');
+    const token = localStorage.getItem('ACCESS_TOKEN');
     if (token !== null && sliderInfo.business !== 'clickam') {
       this.tokenInfo = this.token.userInfo();
       this.idClicker = this.tokenInfo.idclicker;
@@ -432,15 +427,10 @@ export class BussinessComponent implements OnInit, OnDestroy {
         .replace(/\s/g, '')
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '');
-      // if(sliderInfo.idbusiness !== 3 && sliderInfo.idbusiness !== 5) {
-      //   this.template = this.templateCategories;
-      // } else {
-      //   this.template = this.templateAssured;
-      // }
 
       const template = this.templateCategories;
 
-      let dialogref = this.dialog.open(DialogComponent, {
+      const dialogref = this.dialog.open(DialogComponent, {
         data: {
           template,
           infoaditional,
@@ -512,8 +502,8 @@ export class BussinessComponent implements OnInit, OnDestroy {
   }
 
   public goSeway() {
-    let isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-    let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (iOS || isSafari) {
       window.location.assign(this.urlAppstore);
     } else {
@@ -523,7 +513,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   /**
    * Metodo para abrir la modal con el producto seleccionado del exito
-   * @param product
+   * @param product producto
    */
 
   public dataProduct(product) {
@@ -531,7 +521,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.idClicker = this.tokenInfo.idclicker;
     this.reference = false;
     this.urlshorten = '';
-    let productUrl = product.url;
+    const productUrl = product.url;
     if (this.id === '1') {
       this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign={1}`;
     }
@@ -563,7 +553,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     const exito = true;
     this.business = this.id;
 
-    let dialogref = this.dialog.open(DialogComponent, {
+    const dialogref = this.dialog.open(DialogComponent, {
       data: {
         title,
         template,
@@ -620,12 +610,8 @@ export class BussinessComponent implements OnInit, OnDestroy {
         this.productsListTransform = [...this.productsListBiggy];
         this.productsListTransform.forEach((searchExito) => {
           if (!!searchExito.skus[0] && !!searchExito.skus[0].sellers[0]) {
-            let sellerSkus = searchExito.skus[0].sellers;
-            //let filterSkus = sellerSkus
-            //let filterSkus = sellerSkus.filter(
-            //  (idSeller) => idSeller.id === "1" || idSeller.id === "10078"
-            //);
-            let filterSkus = sellerSkus.filter(
+            const sellerSkus = searchExito.skus[0].sellers;
+            const filterSkus = sellerSkus.filter(
               (idSeller) => this.sellersExito.includes(idSeller.id) || this.sellersMarketPlace.includes(idSeller.id)
             );
             if (!!filterSkus[0]) {
@@ -637,7 +623,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
             }
           }
 
-          let object = {
+          const object = {
             title: searchExito.name,
             plu: searchExito.id,
             url: searchExito.url,
@@ -700,8 +686,8 @@ export class BussinessComponent implements OnInit, OnDestroy {
         this.productsListTransform = [...this.productsListBiggy];
         this.productsListTransform.forEach((searchCarulla) => {
           if (!!searchCarulla.skus[0] && !!searchCarulla.skus[0].sellers[0]) {
-            let sellerSkus = searchCarulla.skus[0].sellers;
-            let filterSkus = sellerSkus.filter((idSeller) => idSeller.id === '1' || idSeller.id === '10078');
+            const sellerSkus = searchCarulla.skus[0].sellers;
+            const filterSkus = sellerSkus.filter((idSeller) => idSeller.id === '1' || idSeller.id === '10078');
             if (!!filterSkus[0]) {
               this.sellerId = filterSkus[0].id;
               this.sellerName = filterSkus[0].name;
@@ -711,7 +697,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
             }
           }
 
-          let object = {
+          const object = {
             title: searchCarulla.name,
             plu: searchCarulla.id,
             url: searchCarulla.url,

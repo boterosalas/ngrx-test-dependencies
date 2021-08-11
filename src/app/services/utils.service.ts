@@ -11,7 +11,7 @@ import { BehaviorSubject } from 'rxjs';
 export class UtilsService {
   constructor(private router: Router, private auth: AuthService, private user: UserService) {
     this.titleSelect = new BehaviorSubject<string>('Seleccionar');
-    this.checkedAll = new BehaviorSubject<Boolean>(false);
+    this.checkedAll = new BehaviorSubject<boolean>(false);
   }
 
   isOpen = false;
@@ -23,7 +23,7 @@ export class UtilsService {
   pathBlog: any;
   formArray = [];
   titleSelect: BehaviorSubject<string>;
-  checkedAll: BehaviorSubject<Boolean>;
+  checkedAll: BehaviorSubject<boolean>;
 
   @Output() change: EventEmitter<boolean> = new EventEmitter();
   @Output() changeMenu: EventEmitter<boolean> = new EventEmitter();
@@ -84,9 +84,9 @@ export class UtilsService {
     // decode the token to get its payload
     const tokenPayload = decode(token);
     this.auth.getPermisionByUser('ADMIN').subscribe((respByUser) => {
-      let ubication = location.href;
-      let route = ubication.split('/');
-      let routeslite = '/' + route[route.length - 1];
+      const ubication = location.href;
+      const route = ubication.split('/');
+      const routeslite = '/' + route[route.length - 1];
 
       const infoRoute = respByUser.find((x) => x.route === routeslite);
 
@@ -112,23 +112,23 @@ export class UtilsService {
   }
 
   public HoraMilitar(time) {
-    let format = time.toString().split(' ')[1];
-    let hour = time.toString().split(' ')[0].split(':')[0];
-    if (hour == 12) {
-      let hour = time.toString().split(' ')[0];
+    const format = time.toString().split(' ')[1];
+    const hour = time.toString().split(' ')[0].split(':')[0];
+    if (hour === 12) {
+      const hour = time.toString().split(' ')[0];
       return hour;
     } else {
       if (format === 'PM') {
-        let hour = time.toString().split(' ')[0];
-        let h = parseInt(hour.split(':')[0]) + 12;
-        let m = hour.split(':')[1];
+        const hour = time.toString().split(' ')[0];
+        const h = parseInt(hour.split(':')[0]) + 12;
+        const m = hour.split(':')[1];
         return h + ':' + m;
       } else {
         if (hour < 10) {
-          let hour = 0 + time.toString().split(' ')[0];
+          const hour = 0 + time.toString().split(' ')[0];
           return hour;
         } else {
-          let hour = time.toString().split(' ')[0];
+          const hour = time.toString().split(' ')[0];
           return hour;
         }
       }
@@ -137,7 +137,7 @@ export class UtilsService {
 
   toStandardTime(militaryTime) {
     militaryTime = militaryTime.split(':');
-    return militaryTime[0].charAt(0) == 1 && militaryTime[0].charAt(1) > 2
+    return militaryTime[0].charAt(0) === 1 && militaryTime[0].charAt(1) > 2
       ? militaryTime[0] - 12 + ':' + militaryTime[1] + ' PM'
       : militaryTime[0] + ':' + militaryTime[1] + ' AM';
   }

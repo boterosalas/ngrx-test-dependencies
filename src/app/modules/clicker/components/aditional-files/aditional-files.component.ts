@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { Subscription } from 'rxjs';
 
@@ -25,7 +25,7 @@ export class AditionalFilesComponent implements OnInit, OnDestroy {
     fileIdentificationCard1: null,
     fileIdentificationCard2: null,
     fileBankCertificate: null,
-    // fileRut: null,
+    fileRut: null,
     isEmployee: false,
   };
   @Output() uploadFile = new EventEmitter();
@@ -53,17 +53,17 @@ export class AditionalFilesComponent implements OnInit, OnDestroy {
 
   /**
    * Metodo para leer y subir archivos
-   * @param event
-   * @param param
+   * @param event evento
+   * @param param parametro
    */
 
   public onFileChangeFiles(event, param: string) {
-    let reader = new FileReader();
-    let name = event.target.files[0].name;
+    const reader = new FileReader();
+    const name = event.target.files[0].name;
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      let fileBlob = new Blob([file]);
-      let file2 = new File([fileBlob], name);
+      const fileBlob = new Blob([file]);
+      const file2 = new File([fileBlob], name);
       reader.readAsDataURL(file2);
       reader.onload = () => {
         this.getExtension(name);
@@ -77,19 +77,19 @@ export class AditionalFilesComponent implements OnInit, OnDestroy {
               this.files.fileIdentificationCard2 = reader.result;
               this.files.nameFileCed2 = name;
               this.files.showErrorCed2 = false;
-            }
-            // else if(param === 'rut') {
-            //   this.files.fileRut = reader.result;
-            //   this.files.nameRut = name;
-            //   this.files.showErrorCed2 = false;
-            // }
-            else {
+            } else {
+              if(param === 'rut') {
+              this.files.fileRut = reader.result;
+              this.files.nameRut = name;
+              this.files.showErrorCed2 = false;
+            } else {
               this.files.fileBankCertificate = reader.result;
               this.files.nameFileCert = name;
               this.files.showErrorCert = false;
             }
           }
-        } else {
+        }
+      } else {
           if (param === 'cedula1') {
             this.files.showErrorCed1 = true;
             this.files.nameFileCed1 = name;
@@ -109,12 +109,12 @@ export class AditionalFilesComponent implements OnInit, OnDestroy {
 
   /**
    * Metodo para validar que extension sea valida
-   * @param name
+   * @param name nombre
    */
 
   private getExtension(name: string) {
-    let splitExt = name.split('.');
-    let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
+    const splitExt = name.split('.');
+    const getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
     this.files.validFormat = false;
     if (getExt === 'jpg' || getExt === 'pdf' || getExt === 'jpeg') {
       this.files.validFormat = true;
@@ -140,7 +140,7 @@ export class AditionalFilesComponent implements OnInit, OnDestroy {
         fileIdentificationCard1: null,
         fileIdentificationCard2: null,
         fileBankCertificate: null,
-        // fileRut: null,
+        fileRut: null,
         isEmployee: false,
       })
     );

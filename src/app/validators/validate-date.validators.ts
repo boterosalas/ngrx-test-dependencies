@@ -1,11 +1,11 @@
 import { AbstractControl } from '@angular/forms';
 export class ValidateDate {
   static CompareDates(control: AbstractControl) {
-    let startDate = control.get('dateStart').value;
-    let endDate = control.get('dateEnd').value;
+    const startDate = control.get('dateStart').value;
+    const endDate = control.get('dateEnd').value;
 
-    let start = new Date(startDate);
-    let end = new Date(endDate);
+    const start = new Date(startDate);
+    const end = new Date(endDate);
 
     if (start > end) {
       control.get('dateEnd').setErrors({ dateEnd: true });

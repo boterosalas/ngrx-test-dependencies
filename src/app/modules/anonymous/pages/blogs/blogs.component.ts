@@ -12,9 +12,9 @@ import { UtilsService } from 'src/app/services/utils.service';
   styleUrls: ['./blogs.component.scss'],
 })
 export class BlogsComponent implements OnInit {
-  pageTo: number = 9;
+  pageTo = 9;
   paginate: string;
-  pageIndex: number = 0;
+  pageIndex = 0;
   totalItems: number;
   newsUser: Array<any>;
   pageSize: number;
@@ -83,7 +83,7 @@ export class BlogsComponent implements OnInit {
     this.searchUser(this.from, this.to);
   }
   getBlogs() {
-    let data = {
+    const data = {
       from: 1,
       to: this.pageTo,
       orderBy: 'RELEVANT',
@@ -95,7 +95,7 @@ export class BlogsComponent implements OnInit {
     });
   }
   redirectionPath(elemtn) {
-    let url = 'blog/' + elemtn;
+    const url = 'blog/' + elemtn;
     this.router.navigate([url]);
     this.util.pathBlog = elemtn;
   }

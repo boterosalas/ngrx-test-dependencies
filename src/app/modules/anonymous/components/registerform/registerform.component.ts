@@ -50,7 +50,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   classMsg: string;
   amount: any;
   amountReferred: any;
-  //terms
+
   contentTerminos: any;
   contentProteccion: any;
   contentTransparencia: any;
@@ -120,7 +120,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   public register() {
     this.loading.show();
 
-    let registerForm = {
+    const registerForm = {
       Email: this.registerForm.controls.email.value.toLowerCase(),
       FirstNames: this.registerForm.controls.name.value,
       LastNames: this.registerForm.controls.lastName.value,
@@ -216,7 +216,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
 
   /**
    * Metodo para validar la fuerza de la contraseña
-   * @param event
+   * @param event evento
    */
 
   onStrengthChanged(event) {

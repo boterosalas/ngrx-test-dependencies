@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter, ViewChild, TemplateRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { MatBottomSheet, MatSnackBar } from '@angular/material';
@@ -15,23 +15,23 @@ import { ContentService } from 'src/app/services/content.service';
   templateUrl: './card-story.component.html',
   styleUrls: ['./card-story.component.scss'],
 })
-export class CardStoryComponent implements OnInit, OnChanges {
+export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() stories: any;
-  @Input() id: string = '0';
-  @Input() index: number = 0;
+  @Input() id = '0';
+  @Input() index = 0;
   @Input() currentSlick: number;
   @Input() userId: number;
-  @Input() pause: boolean = true;
-  @Input() play: boolean = true;
-  @Input() showShared: boolean = true;
-  @Input() showCheck: boolean = false;
-  @Input() check: boolean = false;
-  @Input() showProgress: boolean = true;
-  @Input() showInfo: boolean = true;
-  @Input() cardOpen: boolean = false;
-  @Input() showImageClient: boolean = true;
-  @Input() showTitleClient: boolean = true;
-  @Input() showCarousel: boolean = true;
+  @Input() pause = true;
+  @Input() play = true;
+  @Input() showShared = true;
+  @Input() showCheck = false;
+  @Input() check = false;
+  @Input() showProgress = true;
+  @Input() showInfo = true;
+  @Input() cardOpen = false;
+  @Input() showImageClient = true;
+  @Input() showTitleClient = true;
+  @Input() showCarousel = true;
   @Output() nextStory = new EventEmitter();
   @Output() prevStory = new EventEmitter();
   @Output() checkStory = new EventEmitter();
@@ -42,7 +42,7 @@ export class CardStoryComponent implements OnInit, OnChanges {
   video: any;
   currentProgress: any;
   currentTime = 0;
-  sharedOpen: boolean = false;
+  sharedOpen = false;
   timeStory: string;
 
   tokenInfo: any;
@@ -50,7 +50,7 @@ export class CardStoryComponent implements OnInit, OnChanges {
   showFormCustomer = true;
   reference: boolean;
   showForm = false;
-  urlshorten: string = '';
+  urlshorten = '';
   url: string;
   idCustomerForm: FormGroup;
   formLink: FormGroup;
@@ -63,16 +63,16 @@ export class CardStoryComponent implements OnInit, OnChanges {
   classButtonTwitter: string;
   classButtonWhatsapp: string;
   classButtonShare: string;
-  enableCopy: boolean = true;
+  enableCopy = true;
   identification: string;
   date: any;
   title: string;
-  showReferenceButton: boolean = true;
+  showReferenceButton  = true;
   numberPattern = '^(0|[0-9][0-9]*)$';
   isImage: boolean;
-  maxTime: number = 5;
+  maxTime = 5;
   interval: any;
-  indexCStory: number = 0;
+  indexCStory = 0;
   startTime: any;
 
   @ViewChild('templateCategories', { static: false })
@@ -165,7 +165,6 @@ export class CardStoryComponent implements OnInit, OnChanges {
 
       this.subscription = this.content.saveVisitStories(data).subscribe((resp: ResponseService) => {
         if (resp.state === 'Success') {
-          //this.stories[index].stateView = false
 
           if (!this.stories.some((x) => x.stateView)) {
             const buttonBusiness = document.getElementById(`button-business-${this.index}`);
@@ -201,21 +200,21 @@ export class CardStoryComponent implements OnInit, OnChanges {
     const storyS = this.stories[this.indexCStory];
 
     if (storyS) {
-      let current: any = new Date();
-      let date: any = storyS.date;
-      let result = current - date;
+      const current: any = new Date();
+      const date: any = storyS.date;
+      const result = current - date;
       this.timeStory = this.timeConversion(result);
     }
   }
 
   private timeConversion(millisec: number) {
-    let seconds: any = (millisec / 1000).toFixed(1);
+    const seconds: any = (millisec / 1000).toFixed(1);
 
-    let minutes: any = (millisec / (1000 * 60)).toFixed(1);
+    const minutes: any = (millisec / (1000 * 60)).toFixed(1);
 
-    let hours: any = (millisec / (1000 * 60 * 60)).toFixed(1);
+    const hours: any = (millisec / (1000 * 60 * 60)).toFixed(1);
 
-    let days: any = (millisec / (1000 * 60 * 60 * 24)).toFixed(1);
+    const days: any = (millisec / (1000 * 60 * 60 * 24)).toFixed(1);
 
     if (seconds < 60) {
       return Math.round(seconds) + 's';
@@ -243,17 +242,17 @@ export class CardStoryComponent implements OnInit, OnChanges {
         totalTime = this.maxTime * 1000;
       }
 
-      let idCurrent = this.stories[this.indexCStory].id;
+      const idCurrent = this.stories[this.indexCStory].id;
       this.currentProgress = this.cardStory.querySelector(`#progress-${idCurrent} .current-progress`);
       for (let index = 0; index < this.progressStory.length; index++) {
-        let idProgress = this.progressStory[index].id;
+        const idProgress = this.progressStory[index].id;
         if (index < this.indexCStory) {
-          let previousProgress = this.cardStory.querySelector(`#progress-${idProgress} .current-progress`);
+          const previousProgress = this.cardStory.querySelector(`#progress-${idProgress} .current-progress`);
           if (previousProgress.style.width !== '100%') {
             previousProgress.style.width = '100%';
           }
         } else if (index > this.indexCStory) {
-          let nextProgress = this.cardStory.querySelector(`#progress-${idProgress} .current-progress`);
+          const nextProgress = this.cardStory.querySelector(`#progress-${idProgress} .current-progress`);
           if (nextProgress.style.width !== '0') {
             nextProgress.style.width = '0';
           }
@@ -367,7 +366,7 @@ export class CardStoryComponent implements OnInit, OnChanges {
 
         arrowNext.onpointerup = (e) => {
           endTime = new Date();
-          let timeDiff = endTime - this.startTime;
+          const timeDiff = endTime - this.startTime;
           this.reproduceOrNext(timeDiff);
           e.preventDefault();
         };
@@ -402,7 +401,7 @@ export class CardStoryComponent implements OnInit, OnChanges {
   public dataSliderCategory() {
     this.pause = true;
     this.sharedOpen = true;
-    let token = localStorage.getItem('ACCESS_TOKEN');
+    const token = localStorage.getItem('ACCESS_TOKEN');
     if (token !== null) {
       this.tokenInfo = this.token.userInfo();
       this.idClicker = this.tokenInfo.idclicker;
@@ -463,7 +462,7 @@ export class CardStoryComponent implements OnInit, OnChanges {
 
       const template = this.templateCategories;
 
-      let dialogref = this.dialog.open(DialogComponent, {
+      const dialogref = this.dialog.open(DialogComponent, {
         data: {
           template,
           infoaditional,
@@ -473,7 +472,6 @@ export class CardStoryComponent implements OnInit, OnChanges {
           showProduct,
           buttonClose,
           showshowTitle,
-          //id,
           title,
           home,
         },
@@ -496,7 +494,7 @@ export class CardStoryComponent implements OnInit, OnChanges {
    */
 
   public saveLink(param?: string) {
-    let dataSaveLink = {
+    const dataSaveLink = {
       link: this.url,
       identification: this.identification,
       plu: this.plu,
@@ -523,7 +521,7 @@ export class CardStoryComponent implements OnInit, OnChanges {
    */
 
   public saveLinkReference() {
-    let dataSaveLinkReference = {
+    const dataSaveLinkReference = {
       link: this.url,
       identification: this.identification,
       plu: this.plu,
@@ -567,7 +565,7 @@ export class CardStoryComponent implements OnInit, OnChanges {
   }
 
   buy() {
-    let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (iOS) {
       window.location.assign(this.urlshorten);
     } else {

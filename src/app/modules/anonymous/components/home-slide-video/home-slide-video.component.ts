@@ -11,10 +11,6 @@ export class HomeSlideVideoComponent implements OnInit {
   @ViewChild('slickModal', { static: false })
   slickModal: SlickCarouselComponent;
 
-  constructor(private sanitizer: DomSanitizer) {}
-
-  ngOnInit() {}
-
   slideConfig = {
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -56,6 +52,11 @@ export class HomeSlideVideoComponent implements OnInit {
       video: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/qd1eb38ypjk?rel=0&amp'),
     },
   ];
+
+  constructor(private sanitizer: DomSanitizer) {}
+
+  ngOnInit() {}
+
 
   public next() {
     this.slickModal.slickNext();

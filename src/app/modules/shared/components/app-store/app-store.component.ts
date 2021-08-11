@@ -8,14 +8,15 @@ import { Component, OnInit } from '@angular/core';
 export class AppStoreComponent implements OnInit {
   constructor() {}
 
+  showLogo = true;
+  
   ngOnInit() {
     this.detectIos();
   }
 
-  showLogo: boolean = true;
 
   public detectIos() {
-    let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (iOS) {
       this.showLogo = false;
     }

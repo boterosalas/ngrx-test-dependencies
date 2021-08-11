@@ -50,7 +50,7 @@ export class LoginformComponent implements OnInit, OnDestroy {
       return;
     }
 
-    let loginData = {
+    const loginData = {
       Password: btoa(this.loginForm.value.Password),
       Username: this.loginForm.value.Username,
     };
@@ -128,8 +128,8 @@ export class LoginformComponent implements OnInit, OnDestroy {
   /** Al momento de hacer login determina la ruta por el perfil de usuario */
 
   private routeBased() {
-    let token = localStorage.getItem('ACCESS_TOKEN');
-    let tokenDecode = decode(token);
+    const token = localStorage.getItem('ACCESS_TOKEN');
+    const tokenDecode = decode(token);
     if (tokenDecode.role === 'CLICKER') {
       this.router.navigate(['/inicio']);
       this.authService.isLogged$.next(true);

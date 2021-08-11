@@ -23,13 +23,11 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
 
   ngOnInit() {
-    let token = localStorage.getItem('ACCESS_TOKEN');
-    let tokenDecode = decode(token);
+    const token = localStorage.getItem('ACCESS_TOKEN');
+    const tokenDecode = decode(token);
     this.userId = tokenDecode.userid;
     this.getBusiness();
   }
-
-  ngOnChanges() {}
 
   public getBusiness() {
     this.content.getBusiness().subscribe((bussiness) => {
@@ -43,12 +41,12 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
       if (data.state === 'Success') {
         if (data.objectResponse) {
           data.objectResponse.forEach((storyS) => {
-            let bussinessStory = this.bussiness.filter((b) => b.id === storyS.idbusiness)[0];
+            const bussinessStory = this.bussiness.filter((b) => b.id === storyS.idbusiness)[0];
 
             const extensionsImg = ['jpg', 'jpeg', 'png'];
-            let isImage = extensionsImg.includes(this.getExtension(storyS.imageurl));
+            const isImage = extensionsImg.includes(this.getExtension(storyS.imageurl));
 
-            let objectStory = {
+            const objectStory = {
               idbusiness: storyS.idbusiness,
               id: storyS.id,
               businessName: bussinessStory ? bussinessStory.description : '',
@@ -85,7 +83,7 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
 
   private getExtension(nameFile: string) {
     if (nameFile) {
-      let splitExt = nameFile.split('.');
+      const splitExt = nameFile.split('.');
       return splitExt[splitExt.length - 1].toLocaleLowerCase();
     }
 

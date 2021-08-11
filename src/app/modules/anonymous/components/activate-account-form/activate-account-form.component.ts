@@ -27,14 +27,14 @@ export class ActivateAccountFormComponent implements OnInit, OnDestroy {
   activateForm: FormGroup;
   private subscription: Subscription = new Subscription();
 
-  swalOptInvalid: Object = {
+  swalOptInvalid: object = {
     title: this.text,
     confirmButtonText: 'Aceptar',
     confirmButtonClass: 'accept-forgot-alert-invalid',
     type: 'error',
   };
 
-  swalOptError: Object = {
+  swalOptError: object = {
     title: 'Ups algo salió mal',
     text: this.text,
     confirmButtonText: 'Aceptar',
@@ -42,7 +42,7 @@ export class ActivateAccountFormComponent implements OnInit, OnDestroy {
     type: 'error',
   };
 
-  swalOptSuccess: Object = {
+  swalOptSuccess: object = {
     title: 'Se ha enviado un email',
     text: this.text,
     confirmButtonText: 'Aceptar',
@@ -67,7 +67,7 @@ export class ActivateAccountFormComponent implements OnInit, OnDestroy {
    */
 
   public activateAccount() {
-    let email = this.activateForm.controls.email.value;
+    const email = this.activateForm.controls.email.value;
     this.subscription = this.forgot.sendActivation(email).subscribe(
       (resp: ResponseService) => {
         if (resp.state === 'Success') {

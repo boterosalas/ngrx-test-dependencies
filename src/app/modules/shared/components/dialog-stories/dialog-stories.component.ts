@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
 import { Subscription } from 'rxjs';
@@ -13,11 +13,11 @@ export class DialogStoriesComponent implements OnInit {
   slickModal: SlickCarouselComponent;
 
   slideConfig: {};
-  showArrowLeft: boolean = true;
-  showArrowRight: boolean = true;
+  showArrowLeft = true;
+  showArrowRight = true;
   startTime: any;
   showArrows: boolean;
-  nextEnabled: boolean = true;
+  nextEnabled = true;
   stories: string;
 
   constructor(public dialogRef: MatDialogRef<any>, @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -47,8 +47,6 @@ export class DialogStoriesComponent implements OnInit {
     this.showArrowRight = this.showArrowLeft = this.data['stories'].length <= 1 ? false : true;
     this.showArrows = this.data.showArrows;
   }
-
-  private subscription: Subscription = new Subscription();
 
   ngOnInit() {}
 
@@ -86,7 +84,7 @@ export class DialogStoriesComponent implements OnInit {
 
     if (slicks) {
       slicks.forEach((element) => {
-        let dataSlickIndex: number = Number.parseInt(element.getAttribute('data-slick-index'));
+        const dataSlickIndex: number = Number.parseInt(element.getAttribute('data-slick-index'));
         if (element.classList.contains('next-prev-slick')) element.classList.remove('next-prev-slick');
 
         if (dataSlickIndex < e.nextSlide && !element.classList.contains('prev-slick')) {

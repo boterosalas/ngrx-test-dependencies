@@ -15,9 +15,9 @@ import { DialogHistoryComponent } from '../../components/dialog-history/dialog-h
 export class ReportComponent implements OnInit, OnDestroy {
   paymentUser: Array<any>;
   dataSource: any;
-  pageIndex: number = 0;
-  pageSize: number = 20;
-  pageTo: number = 20;
+  pageIndex = 0;
+  pageSize = 20;
+  pageTo = 20;
   totalItems: number;
   paginate: string;
   available: string;
@@ -61,8 +61,8 @@ export class ReportComponent implements OnInit, OnDestroy {
 
   /**
    * Metodo para listar los pagos
-   * @param from
-   * @param to
+   * @param from desde
+   * @param to hasta
    */
 
   public getPayments(from = 1, to = this.pageTo) {
@@ -101,7 +101,7 @@ export class ReportComponent implements OnInit, OnDestroy {
 
   /**
    * Metodo para listar la info bancaria del usuario
-   * @param user
+   * @param user usuario
    */
 
   public userData(user) {

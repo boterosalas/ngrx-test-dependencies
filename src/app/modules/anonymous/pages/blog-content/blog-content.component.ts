@@ -34,14 +34,10 @@ export class BlogContentComponent implements OnInit {
   stringContent =
     "<p>Para registrarte, debes descargar la aplicaci&oacute;n Clickam en tu celular o ir a la p&aacute;gina&nbsp;<a href='http://www.clickam.com.co/' target='_blank'>www.clickam.com.co</a>,&nbsp;clickear&nbsp;en &ldquo;Iniciar sesi&oacute;n&rdquo;, y seleccionar registrarse, completa el formulario, recuerda que tu contrase&ntilde;a debe contener por lo menos 6 caracteres, con m&iacute;nimo una letra may&uacute;scula, letra min&uacute;scula y un n&uacute;mero; por ejemplo:&nbsp;Clickam1.</p><p>Te llegar&aacute; un correo para activarte, debes tener en cuenta que este correo puede estar en &ldquo;No deseados&rdquo; o &ldquo;spam&rdquo; por ser un nuevo remitente.</p><p>Cuando te registras y activas tu cuenta, te conviertes en&nbsp;Clicker.</p>";
   ngOnInit() {
-    let idBlog = this.route.snapshot.paramMap.get('blog');
-    //this.pathUrl = this.utils.pathBlog;
-    //if (this.pathUrl === undefined) {
-    //  this.router.navigate(["/blog"]);
-    //}
+    const idBlog = this.route.snapshot.paramMap.get('blog');
 
     this.searchBlog(idBlog);
-    let domain = document.location;
+    const domain = document.location;
     this.url = encodeURI(`${domain}`);
     this.valueLink = encodeURI(`${domain}`);
     this.dateForm = this.fb.group({
@@ -73,7 +69,7 @@ export class BlogContentComponent implements OnInit {
           {
             name: 'og:title',
             content: resp.objectResponse.title,
-          }, //og:title
+          },
           {
             name: 'og:type',
             content: 'image/jpg',
@@ -94,9 +90,7 @@ export class BlogContentComponent implements OnInit {
       }
     });
   }
-  //<meta property="og:type" content="image/svg" />
-  //<meta property="og:title" content="Clickam" />
-  //<meta property="og:image" content="assets/img/clickam-horizontal.svg" />
+
   public copyLink(inputElement: any) {
     inputElement.select();
     document.execCommand('copy');
@@ -121,10 +115,10 @@ export class BlogContentComponent implements OnInit {
     });
   }
   sendMessage() {
-    let formData = new FormData();
+    const formData = new FormData();
     formData.append('address', this.dateForm.controls.nameBussiness.value);
     formData.append('subject', 'Artículo compartido');
-    let mensaje = this.dateForm.controls.namePerson.value + ' cree que te puede interesar el siguiente post: ' + this.url;
+    const mensaje = this.dateForm.controls.namePerson.value + ' cree que te puede interesar el siguiente post: ' + this.url;
     formData.append('message', mensaje);
     this.content.sendMessage(formData).subscribe((resp) => {
       this.openSnackBar('Se ha compartido el link', 'Cerrar');

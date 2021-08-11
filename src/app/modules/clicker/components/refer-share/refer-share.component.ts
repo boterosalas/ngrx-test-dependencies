@@ -30,7 +30,7 @@ export class ReferShareComponent implements OnInit {
   public generateUrl() {
     this.tokenInfo = this.token.userInfo();
     this.idClicker = this.tokenInfo.idclicker;
-    let domain = document.location.origin;
+    const domain = document.location.origin;
     this.urlWhatsapp = encodeURI(`${domain}/#/inicio?code=${this.idClicker.replace(' ', '%20')}`);
     this.url = encodeURI(`${domain}/#/inicio?code=${this.idClicker}`);
     this.formLink = this.fb.group({
@@ -48,7 +48,7 @@ export class ReferShareComponent implements OnInit {
     this.shareMobile.emit(this.url);
   }
   public generateLink() {
-    let formData: FormData = new FormData();
+    const formData: FormData = new FormData();
     formData.append('idClicker', this.idClicker);
     formData.append('type', 'Generate');
     this.content.setClick(formData).subscribe();

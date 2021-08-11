@@ -10,13 +10,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient, private auth: AuthService) {
-    // this.auth.isLogged$.pipe(distinctUntilChanged()).subscribe(val => {
-    //   if(!!val || this.auth.isLoggedIn()) {
-    //     this.getProfile();
-    //   }
-    // })
-  }
+  constructor(private http: HttpClient, private auth: AuthService) {}
   urlReports = environment.URL_REPORTS;
   url = environment.URL_PROFILE;
   urlEmployee = environment.URL_VALIDATE_EMPLOYEE;
@@ -50,7 +44,7 @@ export class UserService {
   apiDeleteUserAdmin = 'userprofile/deleteuseradmin';
   apiReporUserGamification = 'reports/getreportgamification';
   apiReporReferral = 'reports/getreportreferral';
-  apiReportCambios = 'reports/getreportfeedback'; //Falta el endpoint bien
+  apiReportCambios = 'reports/getreportfeedback';
   apiDeleteComments = 'reports/getreportfeedbackdeletetion';
   token = localStorage.getItem('ACCESS_TOKEN');
   authorization = this.token;
@@ -209,7 +203,7 @@ export class UserService {
   }
 
   public uploadFiles(params: any) {
-    let httpOptionsSet = {
+    const httpOptionsSet = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.authorization,
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
@@ -232,7 +226,7 @@ export class UserService {
   }
 
   public downloadFile(identification: string, typeDocument: string) {
-    let httpOptions = {
+    const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'APPLICATION/octet-stream',
         Authorization: 'Bearer ' + this.authorization,
@@ -246,7 +240,7 @@ export class UserService {
   }
 
   public downloadFiles(data) {
-    let httpOptions = {
+    const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + this.authorization,
@@ -384,7 +378,7 @@ export class UserService {
         )
       )
     );
-    //`${this.url}${this.apiDeleteUser}`
+
   }
   public getReportGamification() {
     return this.http.get(`${this.urlReports}${this.apiReporUserGamification}`, this.httpOptions).pipe(
@@ -407,7 +401,6 @@ export class UserService {
         )
       )
     );
-    //`${this.url}${this.apiDeleteUser}`
   }
   public uploadFileNews(data: any) {
     return this.http.post(`${this.url}${this.apiUploadNews}`, data, this.httpOptions).pipe(
@@ -419,7 +412,6 @@ export class UserService {
         )
       )
     );
-    //`${this.url}${this.apiDeleteUser}`
   }
   public getAllNews(data: any) {
     return this.http.post(`${this.urlReports}${this.apiGetNews}`, data, this.httpOptions).pipe(
@@ -499,7 +491,6 @@ export class UserService {
     );
   }
   public getReportCommets(params: any) {
-    //Cambio la urlReports
     return this.http.get(`${this.urlReports}${this.apiReportCambios}?&start=${params.start}&end=${params.end}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
@@ -512,7 +503,6 @@ export class UserService {
   }
 
   public getDeleteCommetsRest(params: any) {
-    //Cambio la urlReports
     return this.http.get(`${this.urlReports}${this.apiDeleteComments}?&start=${params.start}&end=${params.end}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(

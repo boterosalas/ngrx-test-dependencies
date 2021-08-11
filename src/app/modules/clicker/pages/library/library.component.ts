@@ -14,23 +14,23 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class LibraryComponent implements OnInit {
   private subscription: Subscription = new Subscription();
-  step: number = 0;
-  step_mobile: any;
-  visible_step_mobile: boolean = false;
+  step = 0;
+  stepMobile: any;
+  visibleStepMobile = false;
   dataReal = [];
-  imagenDispo: boolean = true;
+  imagenDispo  = true;
   ext: string;
   contentType: string;
-  videosDispo: boolean = true;
+  videosDispo = true;
   dataRealVideo = [];
   url: string;
   isNormal: boolean;
-  active: boolean = true;
+  active = true;
   idDownload: string;
-  selectAllVideosImg: string = 'Seleccionar todos';
+  selectAllVideosImg = 'Seleccionar todos';
   bussiness: Array<any> = [];
   deleteVideoImg = [];
-  iosDevices: boolean = false;
+  iosDevices = false;
   id: number;
 
   @ViewChild('templateImage', { static: false })
@@ -48,7 +48,7 @@ export class LibraryComponent implements OnInit {
   }
 
   ngOnInit() {
-    let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (iOS) {
       this.iosDevices = true;
     } else {
@@ -133,8 +133,8 @@ export class LibraryComponent implements OnInit {
     }
   }
   public setStepMovil(index: any, item: any) {
-    this.step_mobile = index;
-    this.visible_step_mobile = true;
+    this.stepMobile = index;
+    this.visibleStepMobile = true;
     this.dataReal = [];
     this.dataRealVideo = [];
     this.dataSource(item);
@@ -144,9 +144,9 @@ export class LibraryComponent implements OnInit {
     const template = '';
     const id = 'video-modal';
     this.url = element.url;
-    let urlVideo = element.url;
+    const urlVideo = element.url;
     this.idDownload = element.id;
-    let datosDownload = element.id;
+    const datosDownload = element.id;
     this.dialog.open(DialogImagePlayerComponent, {
       panelClass: 'image-clickacademy',
       maxWidth: '600px',
@@ -161,11 +161,11 @@ export class LibraryComponent implements OnInit {
     });
   }
   public returnAcordeon() {
-    this.visible_step_mobile = false;
-    this.step_mobile = '';
+    this.visibleStepMobile = false;
+    this.stepMobile = '';
   }
   public loadDelete() {
-    let index = [];
+    const index = [];
     for (let i = 0; i < this.dataReal.length; i++) {
       if (this.dataReal[i].dataR === true) {
         index.push(i);
@@ -216,20 +216,12 @@ export class LibraryComponent implements OnInit {
     }
   }
   checkDevices(respuesta, type) {
-    //if (this.iosDevices) {
-    //    this.downloadiOS(respuesta, type)
-    //} else {
     this.download(respuesta, type);
-    //}
   }
-  ///window.location.assign(this.urlshorten)
-
-  //} else {
-  //    window.open(this.urlshorten, '_blank');
 
   public download(data, type) {
-    let blob = new Blob([data], { type: type });
-    let url = window.URL.createObjectURL(blob);
+    const blob = new Blob([data], { type: type });
+    const url = window.URL.createObjectURL(blob);
     const downloadLink = document.createElement('a');
     if (type.includes('zip')) {
       downloadLink.href = url;
@@ -247,13 +239,13 @@ export class LibraryComponent implements OnInit {
   }
 
   public downloadFile() {
-    let datos = [this.idDownload];
+    const datos = [this.idDownload];
     this.content.downloadF(datos).subscribe((resp) => {
       this.download(resp, 'image/jpg');
     });
   }
   public downloadVideo(element: any) {
-    let datos = [element.id];
+    const datos = [element.id];
     this.content.downloadF(datos).subscribe((resp) => {
       this.download(resp, 'video/mp4');
     });

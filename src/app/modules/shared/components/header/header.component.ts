@@ -10,7 +10,7 @@ import { ResponseService } from 'src/app/interfaces/response';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   @Input() isHome: boolean;
   @Input() internal: boolean;
   @Input() name: string;
@@ -67,7 +67,7 @@ export class HeaderComponent implements OnInit {
 
   public getAmount() {
     let count = 0;
-    let interval = setInterval(() => {
+    const interval = setInterval(() => {
       this.amount = localStorage.getItem('Amount');
       count++;
     }, 500);
@@ -88,4 +88,9 @@ export class HeaderComponent implements OnInit {
       }
     });
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }
