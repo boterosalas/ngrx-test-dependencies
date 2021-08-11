@@ -74,9 +74,9 @@ describe('LibraryComponent', () => {
     component.setStep(2, { id: 1 });
     expect(component.step).toBe(2);
     component.returnAcordeon();
-    expect(component.visible_step_mobile).toBeFalsy();
+    expect(component.visibleStepMobile).toBeFalsy();
     component.setStepMovil('Datos', { id: 1 });
-    expect(component.visible_step_mobile).toBeTruthy();
+    expect(component.visibleStepMobile).toBeTruthy();
     component.viewerPhoto({ id: 1, url: 'http:example.jpg' });
     expect(mockDialog.open).toHaveBeenCalled();
   });
@@ -90,7 +90,6 @@ describe('LibraryComponent', () => {
       { id: 2, dataR: false },
     ];
     component.selectAll();
-    //component.downloadFiles();
     expect(component.active).toBeFalsy();
     component.selectAllVideosImg = 'Deseleccionar todo';
     component.dataReal = [
