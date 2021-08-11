@@ -5,11 +5,9 @@ export class ConfirmEmailValidator {
     let confirmEmail = control.get('confirmEmail').value;
     if (email != confirmEmail) {
       control.get('confirmEmail').setErrors({ ConfirmEmail: true });
-    } 
-    else if(email === confirmEmail || confirmEmail === email) {
+    } else if (email === confirmEmail || confirmEmail === email) {
       control.get('confirmEmail').setErrors(null);
       return null;
     }
-
   }
 }

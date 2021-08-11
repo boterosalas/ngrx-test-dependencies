@@ -20,19 +20,21 @@ describe('EditBlogAdminComponent', () => {
   let component: EditBlogAdminComponent;
   let fixture: ComponentFixture<EditBlogAdminComponent>;
   let response = {
-    Status: "Success",
+    Status: 'Success',
     objectResponse: {
-      title: "Any",
-      content: "Anyd",
-      author: "Any3",
-      tags: "Anss",
-      visible: "true",
-      date: "2020/20/02",
-      imageurl: ""
-    }
-  }
-  const mockContentService = jasmine.createSpyObj("ContentService", [
-    "saveBlog", "deleteBlog", "getIndividualBlogId"
+      title: 'Any',
+      content: 'Anyd',
+      author: 'Any3',
+      tags: 'Anss',
+      visible: 'true',
+      date: '2020/20/02',
+      imageurl: '',
+    },
+  };
+  const mockContentService = jasmine.createSpyObj('ContentService', [
+    'saveBlog',
+    'deleteBlog',
+    'getIndividualBlogId',
   ]);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -54,16 +56,14 @@ describe('EditBlogAdminComponent', () => {
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
-            blacklistedRoutes: []
-          }
+            blacklistedRoutes: [],
+          },
         }),
-
       ],
 
       schemas: [NO_ERRORS_SCHEMA],
-      providers: [{ provide: ContentService, useValue: mockContentService },]
-    })
-      .compileComponents();
+      providers: [{ provide: ContentService, useValue: mockContentService }],
+    }).compileComponents();
     mockContentService.saveBlog.and.returnValue(of(response));
     mockContentService.deleteBlog.and.returnValue(of(response));
     mockContentService.getIndividualBlogId.and.returnValue(of(response));
@@ -79,22 +79,22 @@ describe('EditBlogAdminComponent', () => {
     expect(component).toBeTruthy();
   });
   it('changes image', () => {
-    spyOn(Swal, "fire").and.returnValue(
+    spyOn(Swal, 'fire').and.returnValue(
       Promise.resolve<any>({
-        text: "Extensión erronea",
-        type: "error",
-        confirmButtonText: "Aceptar",
-        confirmButtonClass: "accept-activation-alert-error",
+        text: 'Extensión erronea',
+        type: 'error',
+        confirmButtonText: 'Aceptar',
+        confirmButtonClass: 'accept-activation-alert-error',
       })
     );
-    const mockFile = new File([""], "name.jpg", { type: "text/html" });
+    const mockFile = new File([''], 'name.jpg', { type: 'text/html' });
     const mockEvt = { target: { files: [mockFile] } };
     component.readURL(mockEvt);
-    let datos = true
+    let datos = true;
     component.saveeraser();
     component.comprobarText('texto');
     component.activate();
     component.deleteArticle();
     expect(datos).toBeTruthy();
-  })
+  });
 });

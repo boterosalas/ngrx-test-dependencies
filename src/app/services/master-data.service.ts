@@ -2,30 +2,29 @@ import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { map, retry, delay, retryWhen, tap, take } from "rxjs/operators";
-import { ResponseService } from "../interfaces/response";
-import { Observable } from "rxjs";
+import { map, retry, delay, retryWhen, tap, take } from 'rxjs/operators';
+import { ResponseService } from '../interfaces/response';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MasterDataService {
-
-  constructor(private http: HttpClient, private auth: AuthService) { }
-  token = localStorage.getItem("ACCESS_TOKEN");
+  constructor(private http: HttpClient, private auth: AuthService) {}
+  token = localStorage.getItem('ACCESS_TOKEN');
   authorization = this.token;
   httpOptions = {
     headers: new HttpHeaders({
-      "Content-Type": "application/json",
-      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
-    })
+      'Content-Type': 'application/json',
+      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+    }),
   };
   httpOptionsSet = {
     headers: new HttpHeaders({
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + this.authorization,
-      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION
-    })
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + this.authorization,
+      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+    }),
   };
   url = environment.URL_MASTER;
   apiDepartment = 'data/getDeparments';
@@ -33,14 +32,14 @@ export class MasterDataService {
   apiTerms = 'data/getterms';
   apiSetTerms = 'data/saveterm';
   public getDepartments() {
-    return this.http.get((`${this.url}${this.apiDepartment}`), this.httpOptions);
+    return this.http.get(`${this.url}${this.apiDepartment}`, this.httpOptions);
   }
 
   public getBanks() {
-    return this.http.get((`${this.url}${this.apiBanks}`), this.httpOptions);
+    return this.http.get(`${this.url}${this.apiBanks}`, this.httpOptions);
   }
   public getTerms() {
-    return this.http.get((`${this.url}${this.apiTerms}`), this.httpOptions);
+    return this.http.get(`${this.url}${this.apiTerms}`, this.httpOptions);
   }
   public setTerms(data: any) {
     return this.http
@@ -50,7 +49,7 @@ export class MasterDataService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {

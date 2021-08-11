@@ -25,9 +25,28 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons/faEnvelope';
 
 const icons = [
-  faFacebookF, faTwitter, faLinkedinIn, faGooglePlusG, faPinterestP, faRedditAlien, faTumblr,
-  faWhatsapp, faVk, faFacebookMessenger, faTelegramPlane, faMix, faXing, faCommentAlt, faLine,
-  faEnvelope, faCheck, faPrint, faExclamation, faLink, faEllipsisH, faMinus
+  faFacebookF,
+  faTwitter,
+  faLinkedinIn,
+  faGooglePlusG,
+  faPinterestP,
+  faRedditAlien,
+  faTumblr,
+  faWhatsapp,
+  faVk,
+  faFacebookMessenger,
+  faTelegramPlane,
+  faMix,
+  faXing,
+  faCommentAlt,
+  faLine,
+  faEnvelope,
+  faCheck,
+  faPrint,
+  faExclamation,
+  faLink,
+  faEllipsisH,
+  faMinus,
 ];
 
 library.add(...icons);

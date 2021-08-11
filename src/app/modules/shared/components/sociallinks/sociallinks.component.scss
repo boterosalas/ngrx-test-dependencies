@@ -1,14 +1,13 @@
-@import "variables.scss";
+@import 'variables.scss';
 
-.social-links{
-    i{
-        font-size: 1.1rem;
-        color: #ffffff;
-        padding: 0 1.3rem;
-    }
-
+.social-links {
+  i {
+    font-size: 1.1rem;
+    color: #ffffff;
+    padding: 0 1.3rem;
+  }
 }
 
-.border-top{
-    border-top: 1px solid $color-p;
+.border-top {
+  border-top: 1px solid $color-p;
 }

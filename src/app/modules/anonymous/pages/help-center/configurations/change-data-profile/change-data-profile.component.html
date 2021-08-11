@@ -1,24 +1,46 @@
-<app-banner title="{{'BANNERS.HELP_CENTER' | translate}}" img="/assets/img/banners/centro-ayuda-pc.jpg" imgMobile="/assets/img/banners/centro-ayuda-mobile.jpg"></app-banner>
+<app-banner
+  title="{{ 'BANNERS.HELP_CENTER' | translate }}"
+  img="/assets/img/banners/centro-ayuda-pc.jpg"
+  imgMobile="/assets/img/banners/centro-ayuda-mobile.jpg"
+></app-banner>
 <div class="container">
-    <div fxLayout.gt-xs="row" fxLayoutGap.gt-xs="30px" ngClass.gt-xs="mt-3">
-        <span fxHide.gt-xs="true">
-            <button mat-button [routerLink]="[ '/centro-de-ayuda/configuraciones-de-cuenta' ]">
-                <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
-                    <mat-icon>keyboard_arrow_left</mat-icon>
-                    Volver
-                </span>
-            </button>
+  <div fxLayout.gt-xs="row" fxLayoutGap.gt-xs="30px" ngClass.gt-xs="mt-3">
+    <span fxHide.gt-xs="true">
+      <button
+        mat-button
+        [routerLink]="['/centro-de-ayuda/configuraciones-de-cuenta']"
+      >
+        <span
+          class="galano-bold f-16"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+        >
+          <mat-icon>keyboard_arrow_left</mat-icon>
+          Volver
         </span>
-        <div fxLayout.gt-xs="column" fxFlex.gt-xs="25" fxShow.gt-xs="true" fxShow.xs="false">
-            <app-menu-help-center></app-menu-help-center>
-        </div>
-        <div fxLayout.gt-xs="column">
-            <span fxLayout="row">
-                <img src="/assets/img/ayuda/configuracion-cuenta/datos-personales.svg" alt="{{'HELP_CENTER.CONFIGURATIONS.DATA_TITLE' | translate}}">
-                <h3 class="f-20">{{'HELP_CENTER.CONFIGURATIONS.DATA_TITLE' | translate}}</h3>
-            </span>
-            <div innerHtml="{{'HELP_CENTER.CONFIGURATIONS.DATA_TEXT' | translate}}"></div>
-        </div>
+      </button>
+    </span>
+    <div
+      fxLayout.gt-xs="column"
+      fxFlex.gt-xs="25"
+      fxShow.gt-xs="true"
+      fxShow.xs="false"
+    >
+      <app-menu-help-center></app-menu-help-center>
     </div>
+    <div fxLayout.gt-xs="column">
+      <span fxLayout="row">
+        <img
+          src="/assets/img/ayuda/configuracion-cuenta/datos-personales.svg"
+          alt="{{ 'HELP_CENTER.CONFIGURATIONS.DATA_TITLE' | translate }}"
+        />
+        <h3 class="f-20">
+          {{ 'HELP_CENTER.CONFIGURATIONS.DATA_TITLE' | translate }}
+        </h3>
+      </span>
+      <div
+        innerHtml="{{ 'HELP_CENTER.CONFIGURATIONS.DATA_TEXT' | translate }}"
+      ></div>
+    </div>
+  </div>
 </div>
-

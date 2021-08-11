@@ -1,6 +1,6 @@
-import { Injectable, OnInit } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { environment } from "src/environments/environment";
+import { Injectable, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 import {
   map,
   tap,
@@ -9,13 +9,13 @@ import {
   delay,
   retryWhen,
   take,
-} from "rxjs/operators";
-import { ResponseService } from "../interfaces/response";
-import { BehaviorSubject, Observable } from "rxjs";
-import { AuthService } from "./auth.service";
+} from 'rxjs/operators';
+import { ResponseService } from '../interfaces/response';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class UserService {
   constructor(private http: HttpClient, private auth: AuthService) {
@@ -28,60 +28,60 @@ export class UserService {
   urlReports = environment.URL_REPORTS;
   url = environment.URL_PROFILE;
   urlEmployee = environment.URL_VALIDATE_EMPLOYEE;
-  apiProfile = "userprofile/GetUserProfile";
-  apiActivateProfile = "userprofile/activateUser";
-  apiShorUrl = "userprofile/getShortURL";
-  apiCreateUser = "userprofile/create";
-  apiIdType = "userprofile/getIdTypes";
-  apigetBankAccountNumber = "userprofile/getBankAccountNumber";
-  apichangeBankInformation = "userprofile/changeBankInformation";
-  apiDisableUser = "userprofile/disableUser";
-  apiUpdateUser = "userprofile/updateUser";
-  apiUsers = "userprofile/getUsers";
-  apiGetBasicData = "userprofile/getBasicData";
-  apiComunications = "userprofile/setReceiveCommunications";
-  apiVerified = "userprofile/verifyUser";
-  apiDepartment = "userprofile/getDeparments";
-  apiBanks = "userprofile/getBanks";
-  apiUploadFiles = "userprofile/upload";
-  apiDownloadFile = "userprofile/downloadBase64";
-  apiDownload = "userprofile/download";
-  apiGetuserdata = "userprofile/getuserdata";
-  apiUpdateUserEmail = "userprofile/updateUserEmail";
-  apiRegisterUserTerms = "userprofile/registeruserterms";
-  apiSaveUserOnboardingViewed = "userprofile/saveuseronboardingviewed";
-  apiSaveUserAccepttermsReferrals = "userprofile/saveuseraccepttermsreferrals";
-  apiSaveUserDevice = "notification/saveuserdevice";
-  apiUpdateEmployees = "userprofile/updateemployees";
-  apiGetExternalUsers = "userprofile/getexternalusers";
-  apiDeleteUser = "userprofile/deleteaccount"
-  apiDeleteUserAdmin = "userprofile/deleteuseradmin"
-  apiReporUserGamification = "reports/getreportgamification";
-  apiReporReferral = "reports/getreportreferral";
-  apiReportCambios = "reports/getreportfeedback"; //Falta el endpoint bien
-  apiDeleteComments = "reports/getreportfeedbackdeletetion";
-  token = localStorage.getItem("ACCESS_TOKEN");
+  apiProfile = 'userprofile/GetUserProfile';
+  apiActivateProfile = 'userprofile/activateUser';
+  apiShorUrl = 'userprofile/getShortURL';
+  apiCreateUser = 'userprofile/create';
+  apiIdType = 'userprofile/getIdTypes';
+  apigetBankAccountNumber = 'userprofile/getBankAccountNumber';
+  apichangeBankInformation = 'userprofile/changeBankInformation';
+  apiDisableUser = 'userprofile/disableUser';
+  apiUpdateUser = 'userprofile/updateUser';
+  apiUsers = 'userprofile/getUsers';
+  apiGetBasicData = 'userprofile/getBasicData';
+  apiComunications = 'userprofile/setReceiveCommunications';
+  apiVerified = 'userprofile/verifyUser';
+  apiDepartment = 'userprofile/getDeparments';
+  apiBanks = 'userprofile/getBanks';
+  apiUploadFiles = 'userprofile/upload';
+  apiDownloadFile = 'userprofile/downloadBase64';
+  apiDownload = 'userprofile/download';
+  apiGetuserdata = 'userprofile/getuserdata';
+  apiUpdateUserEmail = 'userprofile/updateUserEmail';
+  apiRegisterUserTerms = 'userprofile/registeruserterms';
+  apiSaveUserOnboardingViewed = 'userprofile/saveuseronboardingviewed';
+  apiSaveUserAccepttermsReferrals = 'userprofile/saveuseraccepttermsreferrals';
+  apiSaveUserDevice = 'notification/saveuserdevice';
+  apiUpdateEmployees = 'userprofile/updateemployees';
+  apiGetExternalUsers = 'userprofile/getexternalusers';
+  apiDeleteUser = 'userprofile/deleteaccount';
+  apiDeleteUserAdmin = 'userprofile/deleteuseradmin';
+  apiReporUserGamification = 'reports/getreportgamification';
+  apiReporReferral = 'reports/getreportreferral';
+  apiReportCambios = 'reports/getreportfeedback'; //Falta el endpoint bien
+  apiDeleteComments = 'reports/getreportfeedbackdeletetion';
+  token = localStorage.getItem('ACCESS_TOKEN');
   authorization = this.token;
-  apiSaveNews = "new/savenew";
-  apiUploadNews = "new/uploadnew";
-  apiGetNews = "new/getnews";
-  apiGetExcelNews = "new/getnewsexcel";
-  apiSetStatusNew = "new/changestatusnew";
-  apiReportLife = "report/getcommissionsbyuser";
-  apiReportNovetly = "novelty/getnoveltiesbyuser";
-  apiUpdateInfoClicker = "userprofile/updateinfoclicker";
-  apiSaveFeedBack = "userprofile/savefeedback";
-  apiGetStatusVerification = "userprofile/getstatusverification";
-  apiUpdateResponseAccountBank = "userprofile/updateresponseaccountbank";
-  apiSavePermision = "userprofile/savepermissions";
-  apiGetPermision = "userprofile/getpermissions";
-  apiCreateUserAdmin = "userprofile/createuseradmin"
-  apiUserInfoAditional = "userprofile/getuserinfoaditional"
+  apiSaveNews = 'new/savenew';
+  apiUploadNews = 'new/uploadnew';
+  apiGetNews = 'new/getnews';
+  apiGetExcelNews = 'new/getnewsexcel';
+  apiSetStatusNew = 'new/changestatusnew';
+  apiReportLife = 'report/getcommissionsbyuser';
+  apiReportNovetly = 'novelty/getnoveltiesbyuser';
+  apiUpdateInfoClicker = 'userprofile/updateinfoclicker';
+  apiSaveFeedBack = 'userprofile/savefeedback';
+  apiGetStatusVerification = 'userprofile/getstatusverification';
+  apiUpdateResponseAccountBank = 'userprofile/updateresponseaccountbank';
+  apiSavePermision = 'userprofile/savepermissions';
+  apiGetPermision = 'userprofile/getpermissions';
+  apiCreateUserAdmin = 'userprofile/createuseradmin';
+  apiUserInfoAditional = 'userprofile/getuserinfoaditional';
   httpOptions = {
     headers: new HttpHeaders({
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + this.authorization,
-      "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + this.authorization,
+      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
     }),
   };
 
@@ -96,7 +96,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       )
@@ -106,7 +106,7 @@ export class UserService {
   }
 
   public activateProfile(email: string) {
-    const token = localStorage.getItem("ACCESS_TOKEN");
+    const token = localStorage.getItem('ACCESS_TOKEN');
     const authorization = token;
 
     return this.http
@@ -120,7 +120,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -155,7 +155,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((user: any) => {
@@ -172,7 +172,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -190,7 +190,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -204,7 +204,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -218,7 +218,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -236,7 +236,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -253,8 +253,8 @@ export class UserService {
   public uploadFiles(params: any) {
     let httpOptionsSet = {
       headers: new HttpHeaders({
-        Authorization: "Bearer " + this.authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+        Authorization: 'Bearer ' + this.authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
       }),
     };
 
@@ -265,7 +265,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -278,12 +278,12 @@ export class UserService {
   public downloadFile(identification: string, typeDocument: string) {
     let httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "APPLICATION/octet-stream",
-        Authorization: "Bearer " + this.authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-        responseType: "blob",
-        Accept: "application/pdf",
-        observe: "response",
+        'Content-Type': 'APPLICATION/octet-stream',
+        Authorization: 'Bearer ' + this.authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        responseType: 'blob',
+        Accept: 'application/pdf',
+        observe: 'response',
       }),
     };
     return this.http.get(
@@ -295,18 +295,14 @@ export class UserService {
   public downloadFiles(data) {
     let httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + this.authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + this.authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
       }),
-      responseType: 'blob' as 'text'
+      responseType: 'blob' as 'text',
     };
 
-    return this.http.post(
-      `${this.url}${this.apiDownload}`,
-      data,
-      httpOptions
-    );
+    return this.http.post(`${this.url}${this.apiDownload}`, data, httpOptions);
   }
 
   public getDepartments() {
@@ -349,7 +345,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -367,7 +363,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -385,7 +381,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -403,7 +399,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -417,7 +413,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -435,7 +431,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -453,7 +449,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -471,7 +467,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -479,17 +475,13 @@ export class UserService {
 
   public deleteUser(data: any) {
     return this.http
-      .post(
-        `${this.url}${this.apiDeleteUser}`,
-        data,
-        this.httpOptions
-      )
+      .post(`${this.url}${this.apiDeleteUser}`, data, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -497,22 +489,8 @@ export class UserService {
   }
   public getReportGamification() {
     return this.http
-      .get(`${this.urlReports}${this.apiReporUserGamification}`, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => { })
-          )
-        )
-      );
-  }
-  public saveNews(data: any) {
-    return this.http
-      .post(
-        `${this.url}${this.apiSaveNews}`,
-        data,
+      .get(
+        `${this.urlReports}${this.apiReporUserGamification}`,
         this.httpOptions
       )
       .pipe(
@@ -520,7 +498,20 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
+          )
+        )
+      );
+  }
+  public saveNews(data: any) {
+    return this.http
+      .post(`${this.url}${this.apiSaveNews}`, data, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
           )
         )
       );
@@ -528,17 +519,13 @@ export class UserService {
   }
   public uploadFileNews(data: any) {
     return this.http
-      .post(
-        `${this.url}${this.apiUploadNews}`,
-        data,
-        this.httpOptions
-      )
+      .post(`${this.url}${this.apiUploadNews}`, data, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -546,10 +533,7 @@ export class UserService {
   }
   public getAllNews(data: any) {
     return this.http
-      .post(
-        `${this.urlReports}${this.apiGetNews}`, data ,
-        this.httpOptions
-      )
+      .post(`${this.urlReports}${this.apiGetNews}`, data, this.httpOptions)
       .pipe(
         map((user: any) => {
           return user.objectResponse;
@@ -558,90 +542,84 @@ export class UserService {
   }
   public getExportNewsExcel(data: any) {
     return this.http
-      .post(`${this.urlReports}${this.apiGetExcelNews}`, data ,this.httpOptions)
+      .post(`${this.urlReports}${this.apiGetExcelNews}`, data, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
   }
   public setStatus(data: any) {
     return this.http
-      .post(
-        `${this.url}${this.apiSetStatusNew}`,
-        data,
-        this.httpOptions
-      )
+      .post(`${this.url}${this.apiSetStatusNew}`, data, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
   }
   public getHojaVida(data: any) {
     return this.http
-      .get(`${this.urlReports}${this.apiReportLife}?&userid=${data.userId}&start=${data.start}&end=${data.end}`, this.httpOptions)
+      .get(
+        `${this.urlReports}${this.apiReportLife}?&userid=${data.userId}&start=${data.start}&end=${data.end}`,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
   }
   public getNovetlyUser() {
     return this.http
-      .get(`${this.urlReports}${this.apiReportNovetly}?from=1&to=50&orderBy=CONSECUTIVE&ordination=DESC`, this.httpOptions)
+      .get(
+        `${this.urlReports}${this.apiReportNovetly}?from=1&to=50&orderBy=CONSECUTIVE&ordination=DESC`,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
   }
   public updateInfoClicker(data: any) {
     return this.http
-      .post(
-        `${this.url}${this.apiUpdateInfoClicker}`,
-        data,
-        this.httpOptions
-      )
+      .post(`${this.url}${this.apiUpdateInfoClicker}`, data, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
   }
   public saveFeedback(data: any) {
     return this.http
-      .post(
-        `${this.url}${this.apiSaveFeedBack}`,
-        data,
-        this.httpOptions
-      )
+      .post(`${this.url}${this.apiSaveFeedBack}`, data, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -658,12 +636,12 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
   }
-  
+
   public getDeleteCommetsRest(params: any) {
     //Cambio la urlReports
     return this.http
@@ -676,7 +654,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -693,7 +671,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -701,16 +679,13 @@ export class UserService {
 
   public getStatusVerification() {
     return this.http
-      .get(
-        `${this.url}${this.apiGetStatusVerification}`,
-        this.httpOptions
-      )
+      .get(`${this.url}${this.apiGetStatusVerification}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -727,7 +702,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -740,7 +715,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: ResponseService) => {
@@ -756,7 +731,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: ResponseService) => {
@@ -767,17 +742,13 @@ export class UserService {
 
   public deleteUserAdmin(data: any) {
     return this.http
-      .post(
-        `${this.url}${this.apiDeleteUserAdmin}`,
-        data,
-        this.httpOptions
-      )
+      .post(`${this.url}${this.apiDeleteUserAdmin}`, data, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -785,17 +756,13 @@ export class UserService {
 
   public addUserAdmin(data: any) {
     return this.http
-      .post(
-        `${this.url}${this.apiCreateUserAdmin}`,
-        data,
-        this.httpOptions
-      )
+      .post(`${this.url}${this.apiCreateUserAdmin}`, data, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -812,7 +779,7 @@ export class UserService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );

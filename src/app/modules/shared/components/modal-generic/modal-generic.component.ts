@@ -4,23 +4,21 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 @Component({
   selector: 'app-modal-generic',
   templateUrl: './modal-generic.component.html',
-  styleUrls: ['./modal-generic.component.scss']
+  styleUrls: ['./modal-generic.component.scss'],
 })
 export class ModalGenericComponent implements OnInit {
-
   constructor(
     public dialogRef: MatDialogRef<any>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-  ) { }
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
   ngOnInit() {
     setTimeout(() => {
-      document.querySelector('.mat-dialog-content').scroll(0,0);
-    },400);
+      document.querySelector('.mat-dialog-content').scroll(0, 0);
+    }, 400);
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }

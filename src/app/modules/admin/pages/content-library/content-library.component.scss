@@ -1,5 +1,5 @@
-@import "variables";
-@import "general";
+@import 'variables';
+@import 'general';
 .image-bussiness {
   width: 132px;
   height: 58px;
@@ -120,7 +120,7 @@
   bottom: 0;
 }
 
-input[type="file"] {
+input[type='file'] {
   display: none;
 }
 .icon-download-file {

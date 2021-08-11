@@ -1,16 +1,16 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
-import { Subscription } from "rxjs";
-import { ResponseService } from "src/app/interfaces/response";
-import { AuthService } from "src/app/services/auth.service";
-import { ContentService } from "src/app/services/content.service";
-import { ListIcons } from "src/app/services/icons";
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Subscription } from 'rxjs';
+import { ResponseService } from 'src/app/interfaces/response';
+import { AuthService } from 'src/app/services/auth.service';
+import { ContentService } from 'src/app/services/content.service';
+import { ListIcons } from 'src/app/services/icons';
 
 @Component({
-  selector: "app-dialog-navigation-group",
-  templateUrl: "./dialog-navigation-group.component.html",
-  styleUrls: ["./dialog-navigation-group.component.scss"],
+  selector: 'app-dialog-navigation-group',
+  templateUrl: './dialog-navigation-group.component.html',
+  styleUrls: ['./dialog-navigation-group.component.scss'],
 })
 export class DialogNavigationGroupComponent implements OnInit {
   private subscription: Subscription = new Subscription();
@@ -54,7 +54,6 @@ export class DialogNavigationGroupComponent implements OnInit {
   }
 
   saveSection() {
-
     let section;
     if (this.data.isMenu) {
       if (this.data.edit === 0) {
@@ -70,13 +69,11 @@ export class DialogNavigationGroupComponent implements OnInit {
           orderby: this.data.orderby,
         };
       }
-      this.auth
-        .saveMenuGroup(section)
-        .subscribe((resp: ResponseService) => {
-          if (resp.state === "Success") {
-            this.dialogRef.close();
-          }
-        });
+      this.auth.saveMenuGroup(section).subscribe((resp: ResponseService) => {
+        if (resp.state === 'Success') {
+          this.dialogRef.close();
+        }
+      });
     } else {
       if (this.data.edit === 0) {
         section = {
@@ -92,7 +89,7 @@ export class DialogNavigationGroupComponent implements OnInit {
       this.content
         .saveFooterSection(section)
         .subscribe((resp: ResponseService) => {
-          if (resp.state === "Success") {
+          if (resp.state === 'Success') {
             this.dialogRef.close();
           }
         });

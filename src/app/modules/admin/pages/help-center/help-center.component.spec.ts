@@ -12,14 +12,9 @@ describe('HelpCenterComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [HelpCenterComponent],
-      imports: [
-        HttpClientTestingModule
-      ],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ]
-    })
-    .compileComponents();
+      imports: [HttpClientTestingModule],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

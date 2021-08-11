@@ -1,14 +1,14 @@
-import { Component, OnInit } from "@angular/core";
-import { AuthService } from "src/app/services/auth.service";
-import { Router } from "@angular/router";
-import { UtilsService } from "src/app/services/utils.service";
-import { ContentService } from "src/app/services/content.service";
-import { Subscription } from "rxjs";
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
+import { UtilsService } from 'src/app/services/utils.service';
+import { ContentService } from 'src/app/services/content.service';
+import { Subscription } from 'rxjs';
 
 @Component({
-  selector: "app-footer",
-  templateUrl: "./footer.component.html",
-  styleUrls: ["./footer.component.scss"],
+  selector: 'app-footer',
+  templateUrl: './footer.component.html',
+  styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
   panelOpenState = false;
@@ -23,11 +23,9 @@ export class FooterComponent implements OnInit {
   ) {}
 
   public getSections() {
-    this.subscription = this.content
-      .getFooter('CLICKER')
-      .subscribe((resp) => {
-        this.sectionsLinks = resp;
-      });
+    this.subscription = this.content.getFooter('CLICKER').subscribe((resp) => {
+      this.sectionsLinks = resp;
+    });
   }
 
   ngOnInit() {
@@ -35,7 +33,7 @@ export class FooterComponent implements OnInit {
   }
 
   goTerms() {
-    this.router.navigate(["/terminos-y-condiciones"]);
+    this.router.navigate(['/terminos-y-condiciones']);
     this.utils.hideloginForm();
   }
 }

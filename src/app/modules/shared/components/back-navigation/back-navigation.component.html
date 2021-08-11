@@ -1,4 +1,9 @@
-<div fxShow.gt-xs="false" fxLayout="row" class="bar sticky" fxLayoutAlign="start end">
+<div
+  fxShow.gt-xs="false"
+  fxLayout="row"
+  class="bar sticky"
+  fxLayoutAlign="start end"
+>
   <span fxLayout="column" fxLayoutAlign="start start" fxFlex="12">
     <mat-icon class="cursor-pointer" (click)="closeComponent()"
       >keyboard_arrow_left</mat-icon
@@ -13,11 +18,17 @@
   </span>
 </div>
 
-<div fxHide.xs="true" fxLayout="row" fxLayoutAlign="space-between center" class="container pt-1 pb-1 border-bottom-gray">
+<div
+  fxHide.xs="true"
+  fxLayout="row"
+  fxLayoutAlign="space-between center"
+  class="container pt-1 pb-1 border-bottom-gray"
+>
   <span fxLayout="column" fxLayoutAlign="center center">
-  <button (click)="closeComponent()" mat-button><mat-icon class="cursor-pointer"
-    >keyboard_arrow_left</mat-icon
-  > <span class="f-20 gray">Volver</span></button>  
+    <button (click)="closeComponent()" mat-button>
+      <mat-icon class="cursor-pointer">keyboard_arrow_left</mat-icon>
+      <span class="f-20 gray">Volver</span>
+    </button>
   </span>
   <span fxLayout="column">
     <!-- <img class="company-logo" src="{{imageurl}}" alt="{{title}}"> -->

@@ -1,5 +1,5 @@
-@import "variables";
-@import "general";
+@import 'variables';
+@import 'general';
 
 .select-all {
   color: $primary-color;
@@ -48,44 +48,42 @@
   font-size: 12px;
 }
 
-.min{
-    min-width: auto !important;
+.min {
+  min-width: auto !important;
 }
 
 @media screen and (min-width: 600px) {
-    .mat-card{
-        min-height: 500px;
-        max-height: 500px;
-        overflow-y: auto;
-    }
+  .mat-card {
+    min-height: 500px;
+    max-height: 500px;
+    overflow-y: auto;
+  }
 }
 
-
-.center{
-    align-items: center;
-    height: 100vh;
-    justify-content: center;
+.center {
+  align-items: center;
+  height: 100vh;
+  justify-content: center;
 }
 
-.not-notifications{
-    align-items: center;
-    height: 100vh;
-    justify-content: center;
-    color: #8d7eb7;
-    i{
-      font-size: 2rem;
-    }
-    p{
-      font-size: 18px;
-      text-align: center;
-    }
+.not-notifications {
+  align-items: center;
+  height: 100vh;
+  justify-content: center;
+  color: #8d7eb7;
+  i {
+    font-size: 2rem;
   }
-
-  .mat-list-item{
-      &:hover{
-          background: #F3F1F6;
-          border-radius: 10px;
-          cursor: pointer;
-      }
+  p {
+    font-size: 18px;
+    text-align: center;
   }
+}
 
+.mat-list-item {
+  &:hover {
+    background: #f3f1f6;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+}

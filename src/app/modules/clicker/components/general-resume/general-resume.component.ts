@@ -9,16 +9,15 @@ import { TokenService } from 'src/app/services/token.service';
 @Component({
   selector: 'app-general-resume',
   templateUrl: './general-resume.component.html',
-  styleUrls: ['./general-resume.component.scss']
+  styleUrls: ['./general-resume.component.scss'],
 })
 export class GeneralResumeComponent implements OnInit, OnDestroy {
-
   constructor(
     private link: LinksService,
     private user: UserService,
     private auth: AuthService,
     private token: TokenService
-  ) { }
+  ) {}
 
   linksGenerated: string;
   identification: string;
@@ -29,7 +28,6 @@ export class GeneralResumeComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
 
   ngOnInit() {
-
     this.isLoggedIn = this.auth.isLoggedIn();
 
     /**
@@ -37,11 +35,9 @@ export class GeneralResumeComponent implements OnInit, OnDestroy {
      */
 
     if (this.isLoggedIn) {
-        this.identification = this.token.userInfo().identification;
-        this.getInfomonth();
+      this.identification = this.token.userInfo().identification;
+      this.getInfomonth();
     }
-    
-    
   }
 
   /**
@@ -49,7 +45,7 @@ export class GeneralResumeComponent implements OnInit, OnDestroy {
    */
 
   private getInfomonth() {
-   this.subscription = this.link.getReports().subscribe((resume: any) => {
+    this.subscription = this.link.getReports().subscribe((resume: any) => {
       this.linksGenerated = resume.generalResume.totalLinks;
       this.totalComissions = resume.generalResume.totalCommissions;
       this.totalProducts = resume.generalResume.totalProducts;
@@ -60,5 +56,4 @@ export class GeneralResumeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
 }

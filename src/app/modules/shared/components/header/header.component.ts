@@ -6,17 +6,17 @@ import {
   OnDestroy,
   Output,
   EventEmitter,
-} from "@angular/core";
-import { UtilsService } from "src/app/services/utils.service";
-import { AuthService } from "src/app/services/auth.service";
-import { LinksService } from "src/app/services/links.service";
-import { Subscription } from "rxjs";
-import { ContentService } from "src/app/services/content.service";
-import { ResponseService } from "src/app/interfaces/response";
+} from '@angular/core';
+import { UtilsService } from 'src/app/services/utils.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { LinksService } from 'src/app/services/links.service';
+import { Subscription } from 'rxjs';
+import { ContentService } from 'src/app/services/content.service';
+import { ResponseService } from 'src/app/interfaces/response';
 @Component({
-  selector: "app-header",
-  templateUrl: "./header.component.html",
-  styleUrls: ["./header.component.scss"],
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
   @Input() isHome: boolean;
@@ -64,17 +64,17 @@ export class HeaderComponent implements OnInit {
     this.utils.logout();
   }
 
-  @HostListener("over")
+  @HostListener('over')
   showLogin() {
     this.utils.showloginForm();
   }
 
-  @HostListener("over")
+  @HostListener('over')
   showMenu() {
     this.utils.showMenu();
   }
 
-  @HostListener("over")
+  @HostListener('over')
   openRegister() {
     this.utils.showRegisterForm();
   }
@@ -82,7 +82,7 @@ export class HeaderComponent implements OnInit {
   public getAmount() {
     let count = 0;
     let interval = setInterval(() => {
-      this.amount = localStorage.getItem("Amount");
+      this.amount = localStorage.getItem('Amount');
       count++;
     }, 500);
 
@@ -94,7 +94,7 @@ export class HeaderComponent implements OnInit {
   public getNotications() {
     this.auth.getRole$.subscribe((role) => {
       this.role = role;
-      if (role === "CLICKER") {
+      if (role === 'CLICKER') {
         this._content
           .getNotificationAdmin(false)
           .subscribe((notification: ResponseService) => {
@@ -104,5 +104,4 @@ export class HeaderComponent implements OnInit {
       }
     });
   }
-  
 }

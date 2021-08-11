@@ -44,7 +44,7 @@
             id="{{ idne }}"
             matTooltip="{{ nombreProducto }}"
           >
-            {{ nombreProducto | truncate: "50" }}
+            {{ nombreProducto | truncate: '50' }}
           </h3>
           <div class="w-100">
             <span class="f-13" ngClass.gt-xs="f-18" *ngIf="precio !== 0"></span>
@@ -62,7 +62,7 @@
                   *ngIf="descuento !== precio"
                   class="d-block discount text-line small"
                 >
-                  {{ descuento | currency: "":"symbol":"1.0-0" }}
+                  {{ descuento | currency: '':'symbol':'1.0-0' }}
                 </span>
                 <span>
                   <span
@@ -70,7 +70,7 @@
                     ngClass.gt-xs="f-18"
                     class="d-block discount"
                   >
-                    {{ precio | currency: "":"symbol":"1.0-0" }}
+                    {{ precio | currency: '':'symbol':'1.0-0' }}
                   </span>
                   <span ngClass.xs="f-13" ngClass.gt-xs="f-18" class="plu">
                     PLU:{{ pluexito }}
@@ -172,7 +172,7 @@
             id="{{ idne }}"
             matTooltip="{{ nombreProducto }}"
           >
-            {{ nombreProducto | truncate: "30" }}
+            {{ nombreProducto | truncate: '30' }}
           </h3>
           <p>
             <span class="f-13" ngClass.gt-xs="f-18">Comisión:</span>

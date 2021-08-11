@@ -17,14 +17,11 @@ describe('ProductComponent', () => {
         SharedModule,
         AppMaterialModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
       ],
       providers: [],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ]
-    })
-      .compileComponents();
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -39,6 +36,4 @@ describe('ProductComponent', () => {
     component.product();
     expect(component.infoProduct.emit).toHaveBeenCalled();
   });
-
-
 });

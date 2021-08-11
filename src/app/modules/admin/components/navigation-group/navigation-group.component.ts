@@ -1,11 +1,11 @@
-import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { ContentService } from "src/app/services/content.service";
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ContentService } from 'src/app/services/content.service';
 
 @Component({
-  selector: "app-navigation-group",
-  templateUrl: "./navigation-group.component.html",
-  styleUrls: ["./navigation-group.component.scss"],
+  selector: 'app-navigation-group',
+  templateUrl: './navigation-group.component.html',
+  styleUrls: ['./navigation-group.component.scss'],
 })
 export class NavigationGroupComponent implements OnInit {
   @Input() section: any;
@@ -26,7 +26,7 @@ export class NavigationGroupComponent implements OnInit {
     if (this.section.links !== undefined) {
       this.isValidAddItems = this.section.links.length < 10;
       this.isValidDeleteGroup = this.section.links.length == 0;
-    }else{
+    } else {
       this.isValidDeleteGroup = this.section.menus.length == 0;
     }
   }

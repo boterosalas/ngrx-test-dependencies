@@ -9,41 +9,47 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { LinksService } from 'src/app/services/links.service';
 import { of } from 'rxjs/internal/observable/of';
 
-localStorage.setItem('ACCESS_TOKEN', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU');
+localStorage.setItem(
+  'ACCESS_TOKEN',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU'
+);
 
 describe('MonthResumeComponent', () => {
   let component: MonthResumeComponent;
   let fixture: ComponentFixture<MonthResumeComponent>;
 
-  let mockLinksService = jasmine.createSpyObj("LinksService", ["getReports"]);
+  let mockLinksService = jasmine.createSpyObj('LinksService', ['getReports']);
 
   let resume = {
     monthResume: {
       totalCommissions: 14806530,
       totalLink: 189,
       daysResume: [
-        ["10/12/2019", 0, 490320],
-        ["10/23/2019", 13, 12265210],
-        ["10/25/2019", 11, 1299000],
-        ["10/28/2019", 26, 288000],
-        ["10/29/2019", 1, 176000],
-        ["10/30/2019", 3, 240000],
-        ["11/06/2019", 0, 48000]
-      ]
+        ['10/12/2019', 0, 490320],
+        ['10/23/2019', 13, 12265210],
+        ['10/25/2019', 11, 1299000],
+        ['10/28/2019', 26, 288000],
+        ['10/29/2019', 1, 176000],
+        ['10/30/2019', 3, 240000],
+        ['11/06/2019', 0, 48000],
+      ],
     },
     generalResume: {
       totalCommissions: 14806530,
       totalLinks: 197,
       totalProducts: 56,
-      conversionRate: 0.09137055837563451
-    }
+      conversionRate: 0.09137055837563451,
+    },
   };
 
-  localStorage.setItem('ACCESS_TOKEN', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU');
+  localStorage.setItem(
+    'ACCESS_TOKEN',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU'
+  );
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MonthResumeComponent ],
+      declarations: [MonthResumeComponent],
       imports: [
         TranslateModule.forRoot({}),
         GoogleChartsModule,
@@ -56,13 +62,12 @@ describe('MonthResumeComponent', () => {
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
-            blacklistedRoutes: []
-          }
-        })
+            blacklistedRoutes: [],
+          },
+        }),
       ],
-      providers: [{ provide: LinksService, useValue: mockLinksService }]
-    })
-    .compileComponents();
+      providers: [{ provide: LinksService, useValue: mockLinksService }],
+    }).compileComponents();
     mockLinksService.getReports.and.returnValue(of(resume));
   }));
 

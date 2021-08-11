@@ -61,34 +61,37 @@
       </button>
     </div>
     <span fxLayout="row">
-      <button class="button-selected-upload cursor-pointer" (click)="createStory()">
+      <button
+        class="button-selected-upload cursor-pointer"
+        (click)="createStory()"
+      >
         <i
           class="tio-upload_on_cloud style-icon icon-update icon-download-file"
         ></i>
-        Cargar nueva historia</button
-      >
+        Cargar nueva historia
+      </button>
     </span>
   </div>
   <div class="business-stories">
-    <app-card-story 
-        class="card"
-        *ngFor="let story of stories; let i = index" 
-        [stories]="[story]"
-        [pause]="story.pause"
-        [play]="false"
-        [id]="'story-' + i"
-        [index]="i"
-        [showShared]="false"
-        [showCheck]="true"
-        [check]="dataReal[i].dataR"
-        [showProgress]="false"
-        [showInfo]="true"
-        [showImageClient]="false"
-        [showTitleClient]="false"
-        [cardOpen]="true"
-        (checkStory)="addOrRemoveDeleted($event, i)"
-        (openStoryCard)="openDialogStories($event)"
-      ></app-card-story>
+    <app-card-story
+      class="card"
+      *ngFor="let story of stories; let i = index"
+      [stories]="[story]"
+      [pause]="story.pause"
+      [play]="false"
+      [id]="'story-' + i"
+      [index]="i"
+      [showShared]="false"
+      [showCheck]="true"
+      [check]="dataReal[i].dataR"
+      [showProgress]="false"
+      [showInfo]="true"
+      [showImageClient]="false"
+      [showTitleClient]="false"
+      [cardOpen]="true"
+      (checkStory)="addOrRemoveDeleted($event, i)"
+      (openStoryCard)="openDialogStories($event)"
+    ></app-card-story>
   </div>
 </div>
 
@@ -138,7 +141,7 @@
             dataAddStory.controls.nameContent.errors.required
           "
           >{{
-            "GENERIC.REQUIRED" | translate: { formValue: "Nombre de contenido" }
+            'GENERIC.REQUIRED' | translate: { formValue: 'Nombre de contenido' }
           }}</mat-error
         >
       </mat-form-field>
@@ -158,7 +161,7 @@
             dataAddStory.controls.link.errors.required
           "
           >{{
-            "GENERIC.REQUIRED" | translate: { formValue: "Link" }
+            'GENERIC.REQUIRED' | translate: { formValue: 'Link' }
           }}</mat-error
         >
       </mat-form-field>
@@ -178,47 +181,57 @@
             dataAddStory.controls.commission.errors.required
           "
           >{{
-            "GENERIC.REQUIRED" | translate: { formValue: "Comisión" }
+            'GENERIC.REQUIRED' | translate: { formValue: 'Comisión' }
           }}</mat-error
         >
       </mat-form-field>
-      <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
+      <div
+        fxLayout="row"
+        fxLayoutAlign="space-start center"
+        fxLayoutGap="50px"
+        fxLayoutGap.xs="5px"
+        class="pb-3"
+      >
         <div fxLayout="column" fxLayoutAlign="center" class="space">
-          <strong class="text-upload-file uppercase">Adjuntar imagen en formato vertical (1080x1920px, formato .jpg, .mp4, max 7MB, 72MB)</strong>
-          <span class="title-secondary" *ngIf="nameFile === ''">No hay archivo seleccionado</span>
-          <span class="file-input" *ngIf="nameFile !== ''">{{
-            nameFile
-          }}</span>
+          <strong class="text-upload-file uppercase"
+            >Adjuntar imagen en formato vertical (1080x1920px, formato .jpg,
+            .mp4, max 7MB, 72MB)</strong
+          >
+          <span class="title-secondary" *ngIf="nameFile === ''"
+            >No hay archivo seleccionado</span
+          >
+          <span class="file-input" *ngIf="nameFile !== ''">{{ nameFile }}</span>
         </div>
-        <div >
+        <div>
           <label for="image-story" id="upload" class="cursor-pointer">
-            <span  *ngIf="!showErrorImg">
+            <span *ngIf="!showErrorImg">
+              <img
+                class="mt-1"
+                *ngIf="nameFile === ''"
+                src="/assets/img/image-file-upload.svg"
+                alt="upload"
+              />
+              <img
+                class="mt-1"
+                *ngIf="nameFile !== ''"
+                src="/assets/img/image-file-upload-ok.svg"
+                alt="upload"
+              />
+            </span>
             <img
-              class="mt-1"
-              *ngIf="nameFile === ''"
-              src="/assets/img/image-file-upload.svg"
+              class="mt-1 w-icon"
+              *ngIf="showErrorImg"
+              src="/assets/img/icono-error-carga.svg"
               alt="upload"
             />
-            <img
-              class="mt-1"
-              *ngIf="nameFile !== ''"
-              src="/assets/img/image-file-upload-ok.svg"
-              alt="upload"
-            />
-          </span>
-            <img
-            class="mt-1 w-icon"
-            *ngIf="showErrorImg"
-            src="/assets/img/icono-error-carga.svg"
-            alt="upload"
-          />
           </label>
         </div>
       </div>
       <mat-error *ngIf="showErrorImg" class="text-small small pb-2 d-block">
-        Formato inválido, solo se pueden subir archivos con la extensión JPG max 7MB y MP4 max 72MB
+        Formato inválido, solo se pueden subir archivos con la extensión JPG max
+        7MB y MP4 max 72MB
       </mat-error>
-    
+
       <input
         (change)="onFileChangeFiles($event)"
         id="image-story"

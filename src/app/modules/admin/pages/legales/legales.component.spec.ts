@@ -20,34 +20,36 @@ describe('LegalesComponent', () => {
   let component: LegalesComponent;
   let fixture: ComponentFixture<LegalesComponent>;
   let response = {
-    Status: "Success",
-
-  }
+    Status: 'Success',
+  };
   let responseTerms = {
-    Status: "Success",
-    objectResponse: [{
-      sectionValue: "Contenido",
-      sectionTitle: "Title",
-      date:'01/12/2020'
-    },
-    {
-      sectionValue: "Contenido",
-      sectionTitle: "Title",
-      date:'01/12/2020'
-    },
-    {
-      sectionValue: "Contenido",
-      sectionTitle: "Title",
-      date:'01/12/2020'
-    },
-    {
-      sectionValue: "Contenido",
-      sectionTitle: "Title",
-      date:'01/12/2020'
-    }]
-  }
-  const mockMasterService = jasmine.createSpyObj("MasterDataService", [
-    "getTerms", "setTerms"
+    Status: 'Success',
+    objectResponse: [
+      {
+        sectionValue: 'Contenido',
+        sectionTitle: 'Title',
+        date: '01/12/2020',
+      },
+      {
+        sectionValue: 'Contenido',
+        sectionTitle: 'Title',
+        date: '01/12/2020',
+      },
+      {
+        sectionValue: 'Contenido',
+        sectionTitle: 'Title',
+        date: '01/12/2020',
+      },
+      {
+        sectionValue: 'Contenido',
+        sectionTitle: 'Title',
+        date: '01/12/2020',
+      },
+    ],
+  };
+  const mockMasterService = jasmine.createSpyObj('MasterDataService', [
+    'getTerms',
+    'setTerms',
   ]);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -71,15 +73,13 @@ describe('LegalesComponent', () => {
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
-            blacklistedRoutes: []
-          }
+            blacklistedRoutes: [],
+          },
         }),
-
       ],
 
-      providers: [{ provide: MasterDataService, useValue: mockMasterService },]
-    })
-      .compileComponents();
+      providers: [{ provide: MasterDataService, useValue: mockMasterService }],
+    }).compileComponents();
     mockMasterService.getTerms.and.returnValue(of(responseTerms));
     mockMasterService.setTerms.and.returnValue(of(response));
   }));
@@ -95,13 +95,11 @@ describe('LegalesComponent', () => {
   });
 
   it('component', () => {
-    component.saveLegal("1");
-    component.saveLegal("2");
-    component.saveLegal("3");
-    component.saveLegal("4");
+    component.saveLegal('1');
+    component.saveLegal('2');
+    component.saveLegal('3');
+    component.saveLegal('4');
     let datos = true;
     expect(datos).toBeTruthy();
-  })
-
+  });
 });
-

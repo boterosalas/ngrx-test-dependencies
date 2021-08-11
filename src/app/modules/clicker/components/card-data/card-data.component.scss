@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 //@import "general";
 
 .card {
@@ -16,7 +16,7 @@
 }
 
 .color-card {
-  background: transparent linear-gradient(90deg, #61B751 0%, #79CE68 100%) 0% 0%
+  background: transparent linear-gradient(90deg, #61b751 0%, #79ce68 100%) 0% 0%
     no-repeat padding-box;
   border-radius: 10px !important;
   height: 142px;
@@ -36,7 +36,7 @@
 }
 
 .color-card-3 {
-  background: transparent linear-gradient(90deg, #F25C5C 0%, #F48B8B 100%) 0% 0%
+  background: transparent linear-gradient(90deg, #f25c5c 0%, #f48b8b 100%) 0% 0%
     no-repeat padding-box;
   border-radius: 10px !important;
   height: 142px;
@@ -46,7 +46,9 @@
 }
 
 @media screen and (max-width: 425px) {
-  .color-card, .color-card-1, .color-card-3 {
+  .color-card,
+  .color-card-1,
+  .color-card-3 {
     width: 100%;
     padding-top: 20px !important;
     padding-left: 24px !important;
@@ -64,7 +66,7 @@
   position: relative;
   bottom: 0px;
 }
-.button-card-ios{
+.button-card-ios {
   background: #ffffff40 0% 0% no-repeat padding-box;
   color: #ffffff;
   width: 110px;
@@ -73,7 +75,6 @@
   padding-top: 10px;
   padding-bottom: 10px;
   border-radius: 10px;
-  
 }
 
 .text-white {
@@ -91,7 +92,7 @@
   width: 100px;
   position: absolute;
   right: 20px;
-  
+
   z-index: 0;
 }
 

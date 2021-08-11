@@ -10,13 +10,9 @@ describe('TableReferComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TableReferComponent ],
-      imports: [
-        TranslateModule.forRoot(),
-        AppMaterialModule,
-      ]
-    })
-    .compileComponents();
+      declarations: [TableReferComponent],
+      imports: [TranslateModule.forRoot(), AppMaterialModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

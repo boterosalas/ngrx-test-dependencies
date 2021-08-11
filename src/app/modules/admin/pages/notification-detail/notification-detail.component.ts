@@ -1,19 +1,19 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { faTshirt } from "@fortawesome/free-solid-svg-icons";
-import { AngularEditorConfig } from "@kolkov/angular-editor";
-import * as moment from "moment";
-import { Subscription } from "rxjs";
-import { ResponseService } from "src/app/interfaces/response";
-import { ContentService } from "src/app/services/content.service";
-import { UtilsService } from "src/app/services/utils.service";
-moment.locale("es");
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { faTshirt } from '@fortawesome/free-solid-svg-icons';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+import * as moment from 'moment';
+import { Subscription } from 'rxjs';
+import { ResponseService } from 'src/app/interfaces/response';
+import { ContentService } from 'src/app/services/content.service';
+import { UtilsService } from 'src/app/services/utils.service';
+moment.locale('es');
 
 @Component({
-  selector: "app-notification-detail",
-  templateUrl: "./notification-detail.component.html",
-  styleUrls: ["./notification-detail.component.scss"],
+  selector: 'app-notification-detail',
+  templateUrl: './notification-detail.component.html',
+  styleUrls: ['./notification-detail.component.scss'],
 })
 export class NotificationDetailComponent implements OnInit {
   private subscription: Subscription = new Subscription();
@@ -25,18 +25,18 @@ export class NotificationDetailComponent implements OnInit {
   validFormat: boolean;
   showUploadFile = false;
 
-  datePublication: any = "";
-  hourDate: any = "";
+  datePublication: any = '';
+  hourDate: any = '';
   minDate = new Date();
   minHours: any;
-  publish:boolean;
+  publish: boolean;
   date = null;
   hour = null;
-  publicationDate:any;
-  file:string;
+  publicationDate: any;
+  file: string;
   uploadFile = false;
-  idNotification:any;
-  urlDownload:any = null;
+  idNotification: any;
+  urlDownload: any = null;
 
   maxDate = moment(new Date());
   showDate = false;
@@ -52,112 +52,123 @@ export class NotificationDetailComponent implements OnInit {
     customRangeLabel: 'Custom range',
     daysOfWeek: moment.weekdaysMin(),
     monthNames: moment.monthsShort(),
-    firstDay: 1 // first day is monday
-  }
+    firstDay: 1, // first day is monday
+  };
 
   EXCEL_TYPE =
-    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
 
   notificationForm: FormGroup;
   configurarEditor: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
-    height: "300px",
-    minHeight: "0",
-    maxHeight: "auto",
-    width: "720px",
-    minWidth: "0",
-    translate: "yes",
+    height: '300px',
+    minHeight: '0',
+    maxHeight: 'auto',
+    width: '720px',
+    minWidth: '0',
+    translate: 'yes',
     showToolbar: true,
-    placeholder: "Escriba su articulo...",
+    placeholder: 'Escriba su articulo...',
     toolbarHiddenButtons: [
       [
-        "heading",
-        "insertImage",
-        "insertVideo",
-        "customClasses",
-        "removeFormat",
-        "fontName",
-        "backgroundColor",
-        "insertHorizontalRule",
-        "toggleEditorMode",
-        "undo",
-        "redo",
-        "strikeThrough",
-        "subscript",
-        "superscript",
-        "justifyLeft",
-        "justifyCenter",
-        "justifyRight",
-        "justifyFull",
+        'heading',
+        'insertImage',
+        'insertVideo',
+        'customClasses',
+        'removeFormat',
+        'fontName',
+        'backgroundColor',
+        'insertHorizontalRule',
+        'toggleEditorMode',
+        'undo',
+        'redo',
+        'strikeThrough',
+        'subscript',
+        'superscript',
+        'justifyLeft',
+        'justifyCenter',
+        'justifyRight',
+        'justifyFull',
       ],
     ],
-    defaultParagraphSeparator: "p",
-    defaultFontName: "",
-    defaultFontSize: "",
+    defaultParagraphSeparator: 'p',
+    defaultFontName: '',
+    defaultFontSize: '',
     enableToolbar: true,
     sanitize: true,
-    toolbarPosition: "top",
+    toolbarPosition: 'top',
   };
 
   filters = [
-    { name: "Total usuarios", value: "TODOS" },
-    { name: "Usuarios registrados", value: "REGISTRADOS" },
-    { name: "Usuarios activos", value: "ACTIVOS" },
-    { name: "Personalizado (Archivo .xlsx)", value: "PERSONALIZADO" },
+    { name: 'Total usuarios', value: 'TODOS' },
+    { name: 'Usuarios registrados', value: 'REGISTRADOS' },
+    { name: 'Usuarios activos', value: 'ACTIVOS' },
+    { name: 'Personalizado (Archivo .xlsx)', value: 'PERSONALIZADO' },
   ];
 
   title = 'Crear';
-  titleBoton="Publicar"
+  titleBoton = 'Publicar';
 
   constructor(
     private _content: ContentService,
     private fb: FormBuilder,
     private utils: UtilsService,
-    private router:Router,
+    private router: Router,
     private route: ActivatedRoute
   ) {
-    route.params.subscribe(data => {
-      this.idNotification= data.id;
-    })
+    route.params.subscribe((data) => {
+      this.idNotification = data.id;
+    });
   }
 
   ngOnInit() {
-    this.nameFileNotification = "";
+    this.nameFileNotification = '';
     this.formNotification();
 
     this.fileFormNotification = this.fb.group({
       file: [null],
     });
 
-    if(this.idNotification !== undefined){
+    if (this.idNotification !== undefined) {
       this.getNotification();
-      this.title = "editar";
-      this.titleBoton ="Editar";
+      this.title = 'editar';
+      this.titleBoton = 'Editar';
     }
-
   }
-  
+
   public getNotification() {
-    this._content.getNotificationDetailAdmin(this.idNotification).subscribe((notification:ResponseService) =>{
-      this.notificationForm.controls.title.setValue(notification.objectResponse.title);
-      this.notificationForm.controls.termsEditor.setValue(notification.objectResponse.content);
-      this.notificationForm.controls.filterUsers.setValue(notification.objectResponse.filter);
-      let filterName = notification.objectResponse.filter;
-      this.getName(filterName);
-      this.notificationForm.controls.dateRange.setValue({startDate: notification.objectResponse.datestart, endDate: notification.objectResponse.datestart});
-      let splitDatepublish = notification.objectResponse.datepublish.split('T');
-      let date = moment(splitDatepublish[0]).toDate();
-      let hour = splitDatepublish[1];
-      let transformStandart = this.utils.toStandardTime(hour);
-      this.notificationForm.controls.date.setValue(date);
-      this.notificationForm.controls.hour.setValue(transformStandart);
-      this.urlDownload = notification.objectResponse.url;
-    });
+    this._content
+      .getNotificationDetailAdmin(this.idNotification)
+      .subscribe((notification: ResponseService) => {
+        this.notificationForm.controls.title.setValue(
+          notification.objectResponse.title
+        );
+        this.notificationForm.controls.termsEditor.setValue(
+          notification.objectResponse.content
+        );
+        this.notificationForm.controls.filterUsers.setValue(
+          notification.objectResponse.filter
+        );
+        let filterName = notification.objectResponse.filter;
+        this.getName(filterName);
+        this.notificationForm.controls.dateRange.setValue({
+          startDate: notification.objectResponse.datestart,
+          endDate: notification.objectResponse.datestart,
+        });
+        let splitDatepublish =
+          notification.objectResponse.datepublish.split('T');
+        let date = moment(splitDatepublish[0]).toDate();
+        let hour = splitDatepublish[1];
+        let transformStandart = this.utils.toStandardTime(hour);
+        this.notificationForm.controls.date.setValue(date);
+        this.notificationForm.controls.hour.setValue(transformStandart);
+        this.urlDownload = notification.objectResponse.url;
+      });
   }
 
   private getName(value) {
-    if (value === "PERSONALIZADO") {
+    if (value === 'PERSONALIZADO') {
       this.showUploadFile = true;
       this.uploadFile = true;
       this.showDate = false;
@@ -166,12 +177,12 @@ export class NotificationDetailComponent implements OnInit {
       this.showUploadFile = false;
       this.fileFormNotification.reset();
       this.showErrorExtNotification = false;
-      this.nameFileNotification = "";
+      this.nameFileNotification = '';
       this.uploadFile = false;
       this.showDate = true;
     }
 
-    if (value=== "TODOS") {
+    if (value === 'TODOS') {
       this.showDate = false;
       this.notificationForm.controls.dateRange.setValue(null);
     }
@@ -204,27 +215,27 @@ export class NotificationDetailComponent implements OnInit {
   }
 
   private getExtension(nameFile: string) {
-    let splitExt = nameFile.split(".");
+    let splitExt = nameFile.split('.');
     let getExt = splitExt[1];
     this.validFormat = false;
-    if (getExt === "xlsx" || getExt === "xls") {
+    if (getExt === 'xlsx' || getExt === 'xls') {
       this.validFormat = true;
     }
   }
 
   public formNotification() {
     this.notificationForm = this.fb.group({
-      title: ["", Validators.required],
-      termsEditor: ["", Validators.required],
-      filterUsers: ["", Validators.required],
+      title: ['', Validators.required],
+      termsEditor: ['', Validators.required],
+      filterUsers: ['', Validators.required],
       date: [null],
       hour: [null],
-      dateRange:[null]
+      dateRange: [null],
     });
   }
 
   showOption(e) {
-    if (e.value === "PERSONALIZADO") {
+    if (e.value === 'PERSONALIZADO') {
       this.showUploadFile = true;
       this.uploadFile = true;
       this.showDate = false;
@@ -233,37 +244,35 @@ export class NotificationDetailComponent implements OnInit {
       this.showUploadFile = false;
       this.fileFormNotification.reset();
       this.showErrorExtNotification = false;
-      this.nameFileNotification = "";
+      this.nameFileNotification = '';
       this.uploadFile = false;
       this.showDate = true;
     }
-    
-    if (e.value === "TODOS") {
+
+    if (e.value === 'TODOS') {
       this.showDate = false;
       this.notificationForm.controls.dateRange.setValue(null);
     }
-
   }
 
   saveNotification() {
-
-    if(this.notificationForm.controls.date.value !== null) {
+    if (this.notificationForm.controls.date.value !== null) {
       this.date = moment(this.notificationForm.controls.date.value).format(
-        "YYYY-MM-DD"
+        'YYYY-MM-DD'
       );
     }
-    if(this.notificationForm.controls.hour.value !== null) {
+    if (this.notificationForm.controls.hour.value !== null) {
       this.hour = this.utils.HoraMilitar(
         this.notificationForm.controls.hour.value
       );
-    } else{
-      this.hour = "00:00:00";
-     }
+    } else {
+      this.hour = '00:00:00';
+    }
 
-    if(this.date !== null) {
+    if (this.date !== null) {
       this.publicationDate = `${this.date} ${this.hour}`;
       this.publish = false;
-    } else{
+    } else {
       let DateToday = moment().format('YYYY-MM-DD hh:mm:ss');
       this.publicationDate = DateToday;
       this.publish = true;
@@ -271,8 +280,10 @@ export class NotificationDetailComponent implements OnInit {
 
     let fileValue = this.fileFormNotification.controls.file.value;
 
-    if(fileValue !== null) {
-      let split = fileValue.file.split('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,');
+    if (fileValue !== null) {
+      let split = fileValue.file.split(
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,'
+      );
       this.file = split[1];
     }
 
@@ -282,15 +293,20 @@ export class NotificationDetailComponent implements OnInit {
       content: this.notificationForm.controls.termsEditor.value,
       publish: this.publish,
       datepublish: this.publicationDate,
-      datestart: this.notificationForm.controls.dateRange.value !== null ? this.notificationForm.controls.dateRange.value.startDate : null,
-      dateend:  this.notificationForm.controls.dateRange.value !== null ? this.notificationForm.controls.dateRange.value.endDate : null,
+      datestart:
+        this.notificationForm.controls.dateRange.value !== null
+          ? this.notificationForm.controls.dateRange.value.startDate
+          : null,
+      dateend:
+        this.notificationForm.controls.dateRange.value !== null
+          ? this.notificationForm.controls.dateRange.value.endDate
+          : null,
       filter: this.notificationForm.controls.filterUsers.value,
       file: this.file,
     };
 
-    this._content.saveNotificationAdmin(data).subscribe(()=> {
-      this.router.navigate(['/notificaciones-admin'])
-    })
-
+    this._content.saveNotificationAdmin(data).subscribe(() => {
+      this.router.navigate(['/notificaciones-admin']);
+    });
   }
 }

@@ -1,31 +1,44 @@
-<app-banner title="{{'HEADER.PROFILE' | translate}}" img="/assets/img/banners/banner-perfil-pc.jpg" imgMobile="/assets/img/banners/banner-perfil-mobile.jpg"></app-banner>
+<app-banner
+  title="{{ 'HEADER.PROFILE' | translate }}"
+  img="/assets/img/banners/banner-perfil-pc.jpg"
+  imgMobile="/assets/img/banners/banner-perfil-mobile.jpg"
+></app-banner>
 <!-- <app-logo></app-logo> -->
 
-<div class="container mb-4" [ngClass]="{'d-none': profile === false, 'd-block':profile === true }">
+<div
+  class="container mb-4"
+  [ngClass]="{ 'd-none': profile === false, 'd-block': profile === true }"
+>
   <!-- <h2 class="border-bottom-orange-init">{{ "PROFILE.PROFILE" | translate }}</h2> -->
 
   <mat-tab-group #tabGroup>
-
     <mat-tab>
       <ng-template mat-tab-label>
-           <span class="gtmPerfilClicCuentaClickam">Cuenta</span>
+        <span class="gtmPerfilClicCuentaClickam">Cuenta</span>
       </ng-template>
       <app-profile-form></app-profile-form>
-  </mat-tab>
+    </mat-tab>
 
-    <mat-tab *ngIf="(auth.getRole$ | async ) !== 'ADMIN'">
+    <mat-tab *ngIf="(auth.getRole$ | async) !== 'ADMIN'">
       <ng-template mat-tab-label>
-           <span class="gtmPerfilClicInfoirmacionAdicionalClickam">Información adicional</span>
+        <span class="gtmPerfilClicInfoirmacionAdicionalClickam"
+          >Información adicional</span
+        >
       </ng-template>
       <app-aditional-info-form></app-aditional-info-form>
-  </mat-tab>
+    </mat-tab>
 
-  <mat-tab *ngIf="(auth.getRole$ | async ) !== 'ADMIN' && managedPayments === false && isEmployee === false">
-    <ng-template mat-tab-label>
-         <span class="gtmPerfilClicGestionarPagosClickam">Gestionar pagos</span>
-    </ng-template>
-    <app-payment-info></app-payment-info>
-</mat-tab>
-
-</mat-tab-group>
+    <mat-tab
+      *ngIf="
+        (auth.getRole$ | async) !== 'ADMIN' &&
+        managedPayments === false &&
+        isEmployee === false
+      "
+    >
+      <ng-template mat-tab-label>
+        <span class="gtmPerfilClicGestionarPagosClickam">Gestionar pagos</span>
+      </ng-template>
+      <app-payment-info></app-payment-info>
+    </mat-tab>
+  </mat-tab-group>
 </div>

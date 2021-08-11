@@ -4,7 +4,7 @@
       <mat-card-header>
         <mat-card-title
           ><h3 class="mt-2 mb-2 f-18">
-            {{ "REGISTER.INFO_HOME" | translate }}
+            {{ 'REGISTER.INFO_HOME' | translate }}
           </h3></mat-card-title
         >
       </mat-card-header>
@@ -23,7 +23,7 @@
             fxFLex="50"
             fxFLex.xs="0"
             fxLayout.xs="row"
-            >{{ "REGISTER.DEPARTMENT" | translate }}</label
+            >{{ 'REGISTER.DEPARTMENT' | translate }}</label
           >
           <span
             class="info"
@@ -65,7 +65,7 @@
                   externalForm.controls.department.errors.required
                 "
                 >{{
-                  "GENERIC.REQUIRED" | translate: { formValue: "Departamento" }
+                  'GENERIC.REQUIRED' | translate: { formValue: 'Departamento' }
                 }}</mat-error
               >
               <mat-error
@@ -74,7 +74,7 @@
                   externalForm.controls.department.invalid &&
                   externalForm.controls.department.errors.incorrect
                 "
-                >{{ "REGISTER.ERROR_DEPARTMENT" | translate }}</mat-error
+                >{{ 'REGISTER.ERROR_DEPARTMENT' | translate }}</mat-error
               >
             </mat-form-field>
           </span>
@@ -94,7 +94,7 @@
             fxFLex="50"
             fxFLex.xs="0"
             fxLayout.xs="row"
-            >{{ "REGISTER.CITY" | translate }}</label
+            >{{ 'REGISTER.CITY' | translate }}</label
           >
           <span
             class="info"
@@ -129,7 +129,7 @@
                   externalForm.controls.city.invalid &&
                   externalForm.controls.city.errors.incorrectCity
                 "
-                >{{ "REGISTER.ERROR_CITY" | translate }}</mat-error
+                >{{ 'REGISTER.ERROR_CITY' | translate }}</mat-error
               >
 
               <mat-error
@@ -139,7 +139,7 @@
                   externalForm.controls.city.errors.required
                 "
                 >{{
-                  "GENERIC.REQUIRED" | translate: { formValue: "Ciudad" }
+                  'GENERIC.REQUIRED' | translate: { formValue: 'Ciudad' }
                 }}</mat-error
               >
             </mat-form-field>
@@ -160,7 +160,7 @@
             fxFLex="50"
             fxFLex.xs="0"
             fxLayout.xs="row"
-            >{{ "REGISTER.ADDRESS" | translate }}</label
+            >{{ 'REGISTER.ADDRESS' | translate }}</label
           >
           <span
             class="info"
@@ -186,7 +186,7 @@
                   externalForm.controls.address.errors.required
                 "
                 >{{
-                  "GENERIC.REQUIRED" | translate: { formValue: "Ciudad" }
+                  'GENERIC.REQUIRED' | translate: { formValue: 'Ciudad' }
                 }}</mat-error
               >
             </mat-form-field>
@@ -199,7 +199,7 @@
       <mat-card-header>
         <mat-card-title
           ><h3 class="mt-2 mb-2 f-18">
-            {{ "REGISTER.ACOUNT_INFO" | translate }}
+            {{ 'REGISTER.ACOUNT_INFO' | translate }}
           </h3></mat-card-title
         >
       </mat-card-header>
@@ -218,7 +218,7 @@
             fxFLex="50"
             fxFLex.xs="0"
             fxLayout.xs="row"
-            >{{ "REGISTER.BANK" | translate }}</label
+            >{{ 'REGISTER.BANK' | translate }}</label
           >
           <span
             class="info"
@@ -250,7 +250,7 @@
                   externalForm.controls.bank.errors.required
                 "
                 >{{
-                  "GENERIC.REQUIRED" | translate: { formValue: "Banco" }
+                  'GENERIC.REQUIRED' | translate: { formValue: 'Banco' }
                 }}</mat-error
               >
             </mat-form-field>
@@ -271,7 +271,7 @@
             fxFLex="50"
             fxFLex.xs="0"
             fxLayout.xs="row"
-            >{{ "REGISTER.TYPE_ACCOUNT" | translate }}</label
+            >{{ 'REGISTER.TYPE_ACCOUNT' | translate }}</label
           >
           <span
             class="info"
@@ -301,8 +301,8 @@
                   externalForm.controls.typeAccount.errors.required
                 "
                 >{{
-                  "GENERIC.REQUIRED"
-                    | translate: { formValue: "Tipo de cuenta" }
+                  'GENERIC.REQUIRED'
+                    | translate: { formValue: 'Tipo de cuenta' }
                 }}</mat-error
               >
             </mat-form-field>
@@ -323,7 +323,7 @@
             fxFLex="50"
             fxFLex.xs="0"
             fxLayout.xs="row"
-            >{{ "REGISTER.NUMBER_ACCOUNT" | translate }}</label
+            >{{ 'REGISTER.NUMBER_ACCOUNT' | translate }}</label
           >
           <span
             class="info"
@@ -349,8 +349,8 @@
                   externalForm.controls.numberAccount.errors.required
                 "
                 >{{
-                  "GENERIC.REQUIRED"
-                    | translate: { formValue: "Número de cuenta" }
+                  'GENERIC.REQUIRED'
+                    | translate: { formValue: 'Número de cuenta' }
                 }}</mat-error
               >
 
@@ -360,7 +360,7 @@
                   externalForm.controls.numberAccount.invalid &&
                   externalForm.controls.numberAccount.errors.pattern
                 "
-                >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+                >{{ 'GENERIC.ONLY_NUMBERS' | translate }}</mat-error
               >
 
               <mat-error
@@ -370,7 +370,7 @@
                   externalForm.controls.numberAccount.errors.minlength
                 "
                 >{{
-                  "GENERIC.MIN_CHARACTERS"
+                  'GENERIC.MIN_CHARACTERS'
                     | translate
                       : {
                           minchar:
@@ -387,7 +387,7 @@
                   externalForm.controls.numberAccount.errors.maxlength
                 "
                 >{{
-                  "GENERIC.MAX_CHARACTERS"
+                  'GENERIC.MAX_CHARACTERS'
                     | translate
                       : {
                           maxchar:
@@ -402,33 +402,42 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <h3 class="f-18">{{ "REGISTER.ADITIONAL_FILE" | translate }}</h3>
+  <h3 class="f-18">{{ 'REGISTER.ADITIONAL_FILE' | translate }}</h3>
 
-  <p>{{ "REGISTER.INFO_ADDITIONAL" | translate }}</p>
+  <p>{{ 'REGISTER.INFO_ADDITIONAL' | translate }}</p>
   <p class="purple-text">
-    <strong>{{ "REGISTER.INFO_ADDITIONAL_2" | translate }}</strong>
+    <strong>{{ 'REGISTER.INFO_ADDITIONAL_2' | translate }}</strong>
   </p>
   <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px">
     <div fxLayout="column" fxLayoutAlign="center" class="space">
-      <strong class="gray">{{ "REGISTER.CED1" | translate }}</strong>
+      <strong class="gray">{{ 'REGISTER.CED1' | translate }}</strong>
       <span *ngIf="nameFileCed1 === ''">No hay archivo seleccionado</span>
       <span class="file-input" *ngIf="nameFileCed1 !== ''">{{
-        nameFileCed1 | truncate: "20"
+        nameFileCed1 | truncate: '20'
       }}</span>
     </div>
     <div class="space">
       <label for="ced1" id="upload" class="cursor-pointer">
         <span *ngIf="!showErrorCed1">
-          <i class="tio-upload_on_cloud mt-1 f-25 purple2-text"  *ngIf="nameFileCed1 === ''"></i>
-          <i class="tio-cloud_on mt-1 f-25 purple2-text"  *ngIf="nameFileCed1 !== ''"></i>
+          <i
+            class="tio-upload_on_cloud mt-1 f-25 purple2-text"
+            *ngIf="nameFileCed1 === ''"
+          ></i>
+          <i
+            class="tio-cloud_on mt-1 f-25 purple2-text"
+            *ngIf="nameFileCed1 !== ''"
+          ></i>
         </span>
-        <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorCed1"></i>
+        <i
+          class="tio-cloud_disabled mt-1 f-25 purple2-text"
+          *ngIf="showErrorCed1"
+        ></i>
       </label>
     </div>
   </div>
 
   <mat-error *ngIf="showErrorFormatCed1" class="small pb-2">
-    {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
+    {{ 'GENERIC.INVALID_FORMAT_FILE_REGISTER' | translate }}
   </mat-error>
 
   <br />
@@ -442,24 +451,33 @@
 
   <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px">
     <div fxLayout="column" fxLayoutAlign="center" class="space">
-      <strong class="gray">{{ "REGISTER.CED2" | translate }}</strong>
+      <strong class="gray">{{ 'REGISTER.CED2' | translate }}</strong>
       <span *ngIf="nameFileCed2 === ''">No hay archivo seleccionado</span>
       <span class="file-input" *ngIf="nameFileCed2 !== ''">{{
-        nameFileCed2 | truncate: "20"
+        nameFileCed2 | truncate: '20'
       }}</span>
     </div>
     <div class="space">
       <label for="ced2" id="upload" class="cursor-pointer">
         <span *ngIf="!showErrorCed2">
-          <i class="tio-upload_on_cloud mt-1 f-25 purple2-text"  *ngIf="nameFileCed2 === ''"></i>
-          <i class="tio-cloud_on mt-1 f-25 purple2-text"  *ngIf="nameFileCed2 !== ''"></i>
+          <i
+            class="tio-upload_on_cloud mt-1 f-25 purple2-text"
+            *ngIf="nameFileCed2 === ''"
+          ></i>
+          <i
+            class="tio-cloud_on mt-1 f-25 purple2-text"
+            *ngIf="nameFileCed2 !== ''"
+          ></i>
         </span>
-        <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorCed2"></i>
+        <i
+          class="tio-cloud_disabled mt-1 f-25 purple2-text"
+          *ngIf="showErrorCed2"
+        ></i>
       </label>
     </div>
   </div>
   <mat-error *ngIf="showErrorFormatCed2" class="small pb-2">
-    {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
+    {{ 'GENERIC.INVALID_FORMAT_FILE_REGISTER' | translate }}
   </mat-error>
 
   <br />
@@ -477,24 +495,33 @@
     class="pb-3"
   >
     <div fxLayout="column" fxLayoutAlign="center" class="space">
-      <strong class="gray">{{ "REGISTER.ACCOUNT_CERT" | translate }}</strong>
+      <strong class="gray">{{ 'REGISTER.ACCOUNT_CERT' | translate }}</strong>
       <span *ngIf="nameFileCert === ''">No hay archivo seleccionado</span>
       <span class="file-input" *ngIf="nameFileCert !== ''">{{
-        nameFileCert | truncate: "20"
+        nameFileCert | truncate: '20'
       }}</span>
     </div>
     <div class="space">
       <label for="cert" id="upload" class="cursor-pointer">
         <span *ngIf="!showErrorCert">
-          <i class="tio-upload_on_cloud mt-1 f-25 purple2-text"  *ngIf="nameFileCert === ''"></i>
-          <i class="tio-cloud_on mt-1 f-25 purple2-text"  *ngIf="nameFileCert !== ''"></i>
+          <i
+            class="tio-upload_on_cloud mt-1 f-25 purple2-text"
+            *ngIf="nameFileCert === ''"
+          ></i>
+          <i
+            class="tio-cloud_on mt-1 f-25 purple2-text"
+            *ngIf="nameFileCert !== ''"
+          ></i>
         </span>
-        <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorCert"></i>
+        <i
+          class="tio-cloud_disabled mt-1 f-25 purple2-text"
+          *ngIf="showErrorCert"
+        ></i>
       </label>
     </div>
   </div>
   <mat-error *ngIf="showErrorFormatCert" class="small pb-2 d-block">
-    {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
+    {{ 'GENERIC.INVALID_FORMAT_FILE_REGISTER' | translate }}
   </mat-error>
 
   <input
@@ -504,31 +531,40 @@
     formControlName="cert"
   />
 
- <div
+  <div
     fxLayout="row"
     fxLayoutAlign="space-start center"
     fxLayoutGap="50px"
     class="pb-3"
   >
     <div fxLayout="column" fxLayoutAlign="center" class="space">
-      <strong class="gray">{{ "REGISTER.RUT" | translate }}</strong>
+      <strong class="gray">{{ 'REGISTER.RUT' | translate }}</strong>
       <span *ngIf="nameFileRUT === ''">No hay archivo seleccionado</span>
       <span class="file-input" *ngIf="nameFileRUT !== ''">{{
-        nameFileRUT | truncate: "20"
+        nameFileRUT | truncate: '20'
       }}</span>
     </div>
     <div class="space">
       <label for="rut" id="upload" class="cursor-pointer">
         <span *ngIf="!showErrorRUT">
-          <i class="tio-upload_on_cloud mt-1 f-25 purple2-text"  *ngIf="nameFileRUT === ''"></i>
-          <i class="tio-cloud_on mt-1 f-25 purple2-text"  *ngIf="nameFileRUT !== ''"></i>
+          <i
+            class="tio-upload_on_cloud mt-1 f-25 purple2-text"
+            *ngIf="nameFileRUT === ''"
+          ></i>
+          <i
+            class="tio-cloud_on mt-1 f-25 purple2-text"
+            *ngIf="nameFileRUT !== ''"
+          ></i>
         </span>
-        <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorRUT"></i>
+        <i
+          class="tio-cloud_disabled mt-1 f-25 purple2-text"
+          *ngIf="showErrorRUT"
+        ></i>
       </label>
     </div>
   </div>
   <mat-error *ngIf="showErrorFormatRUT" class="small pb-2 d-block">
-    {{ "GENERIC.INVALID_FORMAT_FILE_REGISTER" | translate }}
+    {{ 'GENERIC.INVALID_FORMAT_FILE_REGISTER' | translate }}
   </mat-error>
 
   <input
@@ -536,7 +572,7 @@
     id="rut"
     type="file"
     formControlName="rut"
-  /> 
+  />
 
   <button
     mat-raised-button
@@ -550,7 +586,7 @@
     [disabled]="!externalForm.valid"
   >
     <span class="gtmPerfilClicGestionarPagosClickam">{{
-      "GENERIC.CONTINUE" | translate
+      'GENERIC.CONTINUE' | translate
     }}</span>
   </button>
 </form>

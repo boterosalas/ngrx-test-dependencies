@@ -15,16 +15,15 @@ describe('PayMethodsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [],
-      imports:[
+      imports: [
         TranslateModule.forRoot({}),
         SharedModule,
         AppMaterialModule,
         AnonymousModule,
         BrowserAnimationsModule,
-        RouterTestingModule
-      ]
-    })
-    .compileComponents();
+        RouterTestingModule,
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

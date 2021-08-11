@@ -1,26 +1,26 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { DashboardComponent } from "./pages/dashboard/dashboard.component";
-import { Routes, RouterModule } from "@angular/router";
-import { RoleGuard } from "src/app/role.guard";
-import { SideMenuComponent } from "./components/side-menu/side-menu.component";
-import { SharedModule } from "../shared/shared.module";
-import { ReportsComponent } from "./pages/reports/reports.component";
-import { TranslateModule } from "@ngx-translate/core";
-import { CardComponent } from "./components/card/card.component";
-import { PopupCardComponent } from "./components/popup-card/popup-card.component";
-import { AppMaterialModule } from "../shared/app-material/app-material.module";
-import { FlexLayoutModule } from "@angular/flex-layout";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { LoadFormFileComponent } from "./components/load-form-file/load-form-file.component";
-import { UsersComponent } from "./pages/users/users.component";
-import { TableUsersComponent } from "./components/table-users/table-users.component";
-import { SearchUsersComponent } from "./components/search-users/search-users.component";
-import { DialogUserComponent } from "./components/dialog-user/dialog-user.component";
-import { MatPaginatorIntl } from "@angular/material";
-import { KeySpaceDirectiveAdmin } from "src/directives/space.admin.directive";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { Routes, RouterModule } from '@angular/router';
+import { RoleGuard } from 'src/app/role.guard';
+import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import { SharedModule } from '../shared/shared.module';
+import { ReportsComponent } from './pages/reports/reports.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { CardComponent } from './components/card/card.component';
+import { PopupCardComponent } from './components/popup-card/popup-card.component';
+import { AppMaterialModule } from '../shared/app-material/app-material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoadFormFileComponent } from './components/load-form-file/load-form-file.component';
+import { UsersComponent } from './pages/users/users.component';
+import { TableUsersComponent } from './components/table-users/table-users.component';
+import { SearchUsersComponent } from './components/search-users/search-users.component';
+import { DialogUserComponent } from './components/dialog-user/dialog-user.component';
+import { MatPaginatorIntl } from '@angular/material';
+import { KeySpaceDirectiveAdmin } from 'src/directives/space.admin.directive';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { NgCircleProgressModule } from "ng-circle-progress";
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 // date range
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
@@ -35,14 +35,14 @@ import { LinkGeneratorFormComponent } from './components/link-generator-form/lin
 import { TableActivateBusinessComponent } from './components/table-activate-business/table-activate-business.component';
 import { BussinessAdminComponent } from './pages/bussiness-admin/bussiness-admin.component';
 import { DialogCategoryComponent } from './components/dialog-category/dialog-category.component';
-import { NewsAdminComponent } from './pages/news-admin/news-admin.component'
-import { CommissionsComponent } from './pages/commissions/commissions.component'
-import { DialogNewsComponent } from './components/dialog-news/dialog-news.component'
-import { ContentLibraryComponent } from './pages/content-library/content-library.component'
-import { StoriesAdminComponent } from './pages/stories-admin/stories-admin.component'
+import { NewsAdminComponent } from './pages/news-admin/news-admin.component';
+import { CommissionsComponent } from './pages/commissions/commissions.component';
+import { DialogNewsComponent } from './components/dialog-news/dialog-news.component';
+import { ContentLibraryComponent } from './pages/content-library/content-library.component';
+import { StoriesAdminComponent } from './pages/stories-admin/stories-admin.component';
 import { DialogVideoPlayerComponent } from './components/dialog-video-player/dialog-video-player.component';
 import { DialogCommissionComponent } from './pages/dialog-commission/dialog-commission.component';
-import { LegalesComponent } from './pages/legales/legales.component'
+import { LegalesComponent } from './pages/legales/legales.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { BlogAdminComponent } from './pages/blog-admin/blog-admin.component';
 import { AddEditBlogAdminComponent } from './pages/add-edit-blog-admin/add-edit-blog-admin.component';
@@ -53,7 +53,7 @@ import { InformationBussinessComponent } from './pages/information-bussiness/inf
 import { ManageComisionBussinessComponent } from './pages/manage-comision-bussiness/manage-comision-bussiness.component';
 import { ToolsAdminComponent } from './pages/tools-admin/tools-admin.component';
 import { NavigationComponent } from './pages/navigation/navigation.component';
-import { MatPasswordStrengthModule } from "@angular-material-extensions/password-strength";
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { NavigationFooterComponent } from './components/navigation-footer/navigation-footer.component';
 import { NavigationGroupComponent } from './components/navigation-group/navigation-group.component';
 import { NavigationItemComponent } from './components/navigation-item/navigation-item.component';
@@ -73,7 +73,7 @@ import { NotificationsComponent } from './pages/notifications/notifications.comp
 import { CardNotificationComponent } from './components/card-notification/card-notification.component';
 import { NotificationDetailComponent } from './pages/notification-detail/notification-detail.component';
 import { DialogDeleteNotificationComponent } from './components/dialog-delete-notification/dialog-delete-notification.component';
-import { NgxPaginationModule } from "ngx-pagination";
+import { NgxPaginationModule } from 'ngx-pagination';
 import { TableNoveltiesComponent } from './components/table-novelties/table-novelties.component';
 import { StoriesComponent } from './pages/stories/stories.component';
 import { CardAdminStoryComponent } from './components/card-admin-story/card-admin-story.component';
@@ -81,240 +81,239 @@ import { DialogStoryComponent } from './components/dialog-story/dialog-story.com
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: DashboardComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
-    }
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
+    },
   },
   {
-    path: "reportes-admin",
+    path: 'reportes-admin',
     component: ReportsComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
-    }
-
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
+    },
   },
   {
-    path: "usuarios",
+    path: 'usuarios',
     component: UsersComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
-    }
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
+    },
   },
   {
-    path: "auditoria",
+    path: 'auditoria',
     component: AuditComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
   },
   {
-    path: "negocios-admin",
+    path: 'negocios-admin',
     component: BusinessComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
   },
   {
-    path: "referidos-admin",
+    path: 'referidos-admin',
     component: RefersComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
   },
   {
-    path: "generador-links",
+    path: 'generador-links',
     component: LinkGeneratorComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
   },
   {
-    path: "novedades",
+    path: 'novedades',
     component: NewsAdminComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
   },
   {
-    path: "comisiones",
+    path: 'comisiones',
     component: CommissionsComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
   },
   {
-    path: "bussiness-admin",
+    path: 'bussiness-admin',
     component: BussinessAdminComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
   },
   {
-    path: "manage-comision-admin",
+    path: 'manage-comision-admin',
     component: ManageComisionBussinessComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
   },
   {
-    path: "carrousel-admin",
+    path: 'carrousel-admin',
     component: ToolsAdminComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
   },
   {
-    path: "information-bussiness-admin",
+    path: 'information-bussiness-admin',
     component: InformationBussinessComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
   },
   {
-    path: "content-admin",
+    path: 'content-admin',
     component: ContentLibraryComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
   },
   {
-    path: "stories-admin",
+    path: 'stories-admin',
     component: StoriesAdminComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
   },
   {
-    path: "comision-admin",
+    path: 'comision-admin',
     component: DialogCommissionComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
   },
   {
-    path: "legales",
+    path: 'legales',
     component: LegalesComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
   },
   {
-    path: "blog-admin",
+    path: 'blog-admin',
     component: BlogAdminComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
   },
   {
-    path: "add-edit-blog-admin",
+    path: 'add-edit-blog-admin',
     component: AddEditBlogAdminComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
   },
   {
-    path: "edit-blog-admin",
+    path: 'edit-blog-admin',
     component: EditBlogAdminComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
   },
   {
-    path: "configuracion",
+    path: 'configuracion',
     component: ConfigurationsComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
   },
   {
-    path: "navegacion",
+    path: 'navegacion',
     component: NavigationComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
   },
   {
-    path: "centro-de-ayuda-admin",
+    path: 'centro-de-ayuda-admin',
     component: HelpCenterComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
   },
   {
-    path: "notificaciones-admin",
+    path: 'notificaciones-admin',
     component: NotificationsComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
   },
   {
-    path: "notificacion/:id",
+    path: 'notificacion/:id',
     component: NotificationDetailComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
   },
   {
-    path: "notificacion",
+    path: 'notificacion',
     component: NotificationDetailComponent,
     canActivate: [RoleGuard],
     data: {
-      role: "ADMIN",
-      superRole: "SUPERADMIN"
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
     },
-  }
+  },
 ];
 
 @NgModule({
@@ -400,19 +399,19 @@ const routes: Routes = [
       // set defaults here
       radius: 60,
       space: -10,
-      unitsFontSize: "14",
-      unitsFontWeight: "500",
+      unitsFontSize: '14',
+      unitsFontWeight: '500',
       outerStrokeGradient: true,
       outerStrokeWidth: 10,
-      outerStrokeColor: "#ff6f11",
-      outerStrokeGradientStopColor: "#ff6f11",
-      innerStrokeColor: "#e7e8ea",
+      outerStrokeColor: '#ff6f11',
+      outerStrokeGradientStopColor: '#ff6f11',
+      innerStrokeColor: '#e7e8ea',
       innerStrokeWidth: 10,
-      titleFontWeight: "500",
-      titleColor: "#86888a",
-      unitsColor: "#86888a",
-      subtitleFontSize: "16",
-      subtitleFontWeight: "700",
+      titleFontWeight: '500',
+      titleColor: '#86888a',
+      unitsColor: '#86888a',
+      subtitleFontSize: '16',
+      subtitleFontWeight: '700',
       animateTitle: false,
       animationDuration: 1000,
       showTitle: true,
@@ -421,11 +420,22 @@ const routes: Routes = [
       showBackground: false,
       clockwise: false,
       startFromZero: false,
-      responsive: true
-    })
+      responsive: true,
+    }),
   ],
   exports: [SideMenuComponent],
-  entryComponents: [DialogUserComponent, DialogCategoryComponent, DialogNewsComponent, DialogVideoPlayerComponent, DialogNavigationGroupComponent, DialogNavigationItemComponent, DialogFaqGroupComponent, DialogFaqItemComponent, DialogDeleteNotificationComponent, DialogStoryComponent],
-  providers: [{ provide: MatPaginatorIntl, useClass: UsersComponent }]
+  entryComponents: [
+    DialogUserComponent,
+    DialogCategoryComponent,
+    DialogNewsComponent,
+    DialogVideoPlayerComponent,
+    DialogNavigationGroupComponent,
+    DialogNavigationItemComponent,
+    DialogFaqGroupComponent,
+    DialogFaqItemComponent,
+    DialogDeleteNotificationComponent,
+    DialogStoryComponent,
+  ],
+  providers: [{ provide: MatPaginatorIntl, useClass: UsersComponent }],
 })
-export class AdminModule { }
+export class AdminModule {}

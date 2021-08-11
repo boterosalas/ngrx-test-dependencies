@@ -15,10 +15,9 @@ describe('NewBlogComponent', () => {
       imports: [
         TranslateModule.forRoot(),
         RouterTestingModule.withRoutes([]),
-        AppMaterialModule
-      ]
-    })
-      .compileComponents();
+        AppMaterialModule,
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

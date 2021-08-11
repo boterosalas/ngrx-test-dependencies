@@ -1,32 +1,31 @@
 @import 'variables';
 
-
 table {
-    width: 100%;
+  width: 100%;
+  text-align: center;
+  th {
     text-align: center;
-    th{
-      text-align: center;
-      width: 33.3%;
-      font-family: $font-galano-bold;
-      color: $gray2;
-      padding-right: 30px;
-    }
-    td{
-      padding-right: 15px;
-    }
+    width: 33.3%;
+    font-family: $font-galano-bold;
+    color: $gray2;
+    padding-right: 30px;
   }
+  td {
+    padding-right: 15px;
+  }
+}
 
-  .overflow-auto{
-    overflow: auto;
-  }
+.overflow-auto {
+  overflow: auto;
+}
 
-  @media screen and (min-width: 600px) {
-    table{
-      width: 50%;
-      margin: 5px auto 18px;
+@media screen and (min-width: 600px) {
+  table {
+    width: 50%;
+    margin: 5px auto 18px;
+    text-align: center;
+    th {
       text-align: center;
-      th{
-        text-align: center;
-      }
     }
   }
+}

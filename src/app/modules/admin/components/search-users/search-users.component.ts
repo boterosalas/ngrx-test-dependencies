@@ -4,26 +4,21 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-search-users',
   templateUrl: './search-users.component.html',
-  styleUrls: ['./search-users.component.scss']
+  styleUrls: ['./search-users.component.scss'],
 })
 export class SearchUsersComponent implements OnInit {
-
-  constructor(
-    private fb: FormBuilder
-  ) { }
+  constructor(private fb: FormBuilder) {}
   @Output() search = new EventEmitter();
   searchForm: FormGroup;
-  
 
   ngOnInit() {
     this.searchForm = this.fb.group({
-      search: ['']
-    })
+      search: [''],
+    });
   }
 
   searchProduct() {
-    let searchTerm =this.searchForm.controls.search.value;
+    let searchTerm = this.searchForm.controls.search.value;
     this.search.emit(searchTerm);
   }
-
 }

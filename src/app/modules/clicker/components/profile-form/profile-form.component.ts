@@ -480,7 +480,8 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
         }
       );
 
-    this.subscription = this.user.updateUser(updateForm).subscribe(() => {},
+    this.subscription = this.user.updateUser(updateForm).subscribe(
+      () => {},
       (err) => {
         this.openSnackBar(err.userMessage, 'Cerrar');
       }

@@ -1,6 +1,6 @@
-@import "buttons";
-@import "variables";
-@import "mixins";
+@import 'buttons';
+@import 'variables';
+@import 'mixins';
 
 * {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -80,7 +80,7 @@ table.users-table.setting tr {
   }
 
   td:nth-child(even) {
-    background-color: #F7F8F8;
+    background-color: #f7f8f8;
   }
 }
 
@@ -97,7 +97,7 @@ table.commissions-table {
 .paging-table-transparent .mat-paginator-icon {
   background-color: white;
   border-radius: 50px;
-  fill: #8D7EB7;
+  fill: #8d7eb7;
   box-shadow: 0px 1px 2px #c0c0c080;
 }
 
@@ -137,7 +137,7 @@ body {
   }
 
   ul li::before {
-    content: "\2022";
+    content: '\2022';
     color: $primary-color;
     font-weight: bold;
     display: inline-block;
@@ -230,7 +230,7 @@ body {
 
 .border-bottom-orange {
   &::after {
-    content: "";
+    content: '';
     background: $secondary-color;
     height: 4px;
     width: 25px;
@@ -243,7 +243,7 @@ body {
 
   &-init {
     &::after {
-      content: "";
+      content: '';
       background: $secondary-color;
       height: 4px;
       width: 25px;
@@ -257,7 +257,7 @@ body {
 
 .border-bottom-orange-2 {
   &::after {
-    content: "";
+    content: '';
     background: $secondary-color;
     height: 4px;
     width: 25px;
@@ -270,7 +270,7 @@ body {
 
   &-init {
     &::after {
-      content: "";
+      content: '';
       background: $secondary-color;
       height: 4px;
       width: 25px;
@@ -285,7 +285,7 @@ body {
 
 .border-bottom-blue {
   &::after {
-    content: "";
+    content: '';
     background: $primary-color;
     height: 4px;
     width: 25px;
@@ -298,7 +298,7 @@ body {
 
   &-init {
     &::after {
-      content: "";
+      content: '';
       background: $blue;
       height: 4px;
       width: 25px;
@@ -312,7 +312,7 @@ body {
 
 .border-bottom-primary {
   &::after {
-    content: "";
+    content: '';
     background: $primary-color;
     height: 4px;
     width: 25px;
@@ -325,7 +325,7 @@ body {
 
   &-init {
     &::after {
-      content: "";
+      content: '';
       background: $purple2;
       height: 4px;
       width: 25px;
@@ -362,7 +362,7 @@ body {
   color: $primary-color;
 }
 
-.check{
+.check {
   color: $checkBox;
 }
 
@@ -524,8 +524,6 @@ button {
   }
 }
 
-
-
 .swal2-styled.swal2-confirm {
   background-color: transparent !important;
   color: $primary-color !important;
@@ -534,13 +532,12 @@ button {
     box-shadow: none !important;
   }
 
-  &.purple-button{
-    background: $primary-color !important;;
-    color: #fff !important;;
-    border-radius: 10px !important;;
-    box-shadow: 0px 3px 9px #3A226A80 !important;;
+  &.purple-button {
+    background: $primary-color !important;
+    color: #fff !important;
+    border-radius: 10px !important;
+    box-shadow: 0px 3px 9px #3a226a80 !important;
   }
-  
 }
 
 .mat-ink-bar {
@@ -575,13 +572,13 @@ button {
 }
 
 .border-left-orange::before {
-  content: "";
+  content: '';
   border-left: 3px solid $primary-color;
   border-radius: 4px;
   margin-right: 15px;
 }
 .border-left-red::before {
-  content: "";
+  content: '';
   border-left: 3px solid $secondary-color;
   border-radius: 4px;
   margin-right: 15px;
@@ -787,9 +784,9 @@ table {
     padding-bottom: 0;
     overflow: hidden;
     min-height: 600px;
-    background: url("/assets/img/gamification/bg-home-gamification.svg")
+    background: url('/assets/img/gamification/bg-home-gamification.svg')
         no-repeat,
-      url("/assets/img/gamification/bg-form.svg") no-repeat;
+      url('/assets/img/gamification/bg-form.svg') no-repeat;
     background-position: bottom right;
     background-size: 35%, contain;
     .mat-card {
@@ -835,9 +832,9 @@ table {
     min-height: 130px;
   }
 
-  .img-container-viajes img[alt^="Seguro"],
-  .img-container-viajes img[alt^="Wesura"],
-  .img-container-viajes img[alt^="SOAT"] {
+  .img-container-viajes img[alt^='Seguro'],
+  .img-container-viajes img[alt^='Wesura'],
+  .img-container-viajes img[alt^='SOAT'] {
     height: 135px !important;
   }
 
@@ -967,8 +964,8 @@ table {
     &.active {
       // margin-left: 10px;
       &::before {
-        background: url("/assets/img/arrow-footer.svg") no-repeat;
-        content: "";
+        background: url('/assets/img/arrow-footer.svg') no-repeat;
+        content: '';
         display: block;
         width: 12px;
         height: 18px;
@@ -1146,7 +1143,7 @@ table {
 }
 
 .footer-links a::after {
-  content: "";
+  content: '';
   background: $primary-color;
   height: 4px;
   width: 25px;
@@ -1175,7 +1172,7 @@ table {
       background: #ff6f111a;
       font-family: $font-galano-bold;
       &::before {
-        content: "";
+        content: '';
         width: 3px;
         height: 28px;
         border-radius: 4px;
@@ -1257,7 +1254,7 @@ th.mat-header-cell {
 
 .mat-select-arrow {
   border: none !important;
-  background: url("/assets/img/arrow-down.svg") no-repeat;
+  background: url('/assets/img/arrow-down.svg') no-repeat;
   width: 26px !important;
   height: 26px !important;
   background-size: 25px;
@@ -1345,8 +1342,6 @@ th.mat-header-cell {
   p {
     color: #707070;
   }
-
-  
 }
 
 // .mat-raised-button:not([class*="mat-elevation-z"]) {
@@ -1354,12 +1349,12 @@ th.mat-header-cell {
 //     0 2px 2px 0 rgba(255, 111, 17, 0.18), 0 1px 5px 0 rgba(255, 111, 17, 0.18);
 // }
 
-.mat-raised-button:not([class*="mat-elevation-z"]) {
+.mat-raised-button:not([class*='mat-elevation-z']) {
   box-shadow: 0 3px 1px -2px rgba(61, 47, 86, 0.18),
     0 2px 2px 0 rgba(61, 47, 86, 0.18), 0 1px 5px 0 rgba(61, 47, 86, 0.18);
 }
 
-.mat-raised-button[disabled]:not([class*="mat-elevation-z"]) {
+.mat-raised-button[disabled]:not([class*='mat-elevation-z']) {
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(0, 0, 0, 0.14),
     0 0 0 0 rgba(0, 0, 0, 0.12) !important;
   color: #fff;
@@ -1389,7 +1384,7 @@ th.mat-header-cell {
   height: 100% !important;
 }
 
-[container="img-container-viajes"] mat-card {
+[container='img-container-viajes'] mat-card {
   padding: 0 !important;
 }
 
@@ -1466,7 +1461,7 @@ span.orange-border {
     padding: 0 !important;
   }
 
-  .mat-expansion-panel-header:not([aria-disabled="true"]) {
+  .mat-expansion-panel-header:not([aria-disabled='true']) {
     border-bottom: 1px solid #ececec;
   }
 }
@@ -1548,7 +1543,7 @@ button.swal2-confirm.updateokdelete.order-last.swal2-styled {
   background-color: #f21905 !important;
   color: #fff !important;
   border-radius: 10px;
-  box-shadow: 0px 3px 9px #F2190580;
+  box-shadow: 0px 3px 9px #f2190580;
   font-size: 14px;
 }
 .delete-title-comision {
@@ -1558,7 +1553,7 @@ button.swal2-confirm.updateokdelete.order-last.swal2-styled {
 button.swal2-cancel.updatecancel.swal2-styled {
   background: none;
   background-image: none !important;
-  color:$primary-color;
+  color: $primary-color;
   font-size: 14px;
 }
 
@@ -1677,7 +1672,7 @@ app-product.no-slider img {
   min-width: 125px;
 }
 
-.mt-help{
+.mt-help {
   margin-top: 43px;
 }
 
@@ -2026,7 +2021,7 @@ app-menu-help-center {
   }
   &-5 {
     .mat-card {
-      background: transparent linear-gradient(90deg, #FF8646 0%, #F7BC80 100%)
+      background: transparent linear-gradient(90deg, #ff8646 0%, #f7bc80 100%)
         0% 0% no-repeat padding-box;
     }
   }
@@ -2071,7 +2066,9 @@ app-menu-help-center {
   }
 }
 
-.searchUser, .searchCommission, .search {
+.searchUser,
+.searchCommission,
+.search {
   .mat-form-field-appearance-outline .mat-form-field-outline {
     background: #fff !important;
   }
@@ -2249,8 +2246,8 @@ app-menu-help-center {
 .levcard {
   @media screen and (min-width: 600px) {
     &::after {
-      content: "";
-      background-image: url("/assets/img/gamification/img-prize.svg");
+      content: '';
+      background-image: url('/assets/img/gamification/img-prize.svg');
       background-repeat: no-repeat;
       background-position: right center;
       background-size: 100%;
@@ -2350,7 +2347,7 @@ h3#bussiness2 {
   padding-bottom: 8px;
 
   .mat-select-value-text {
-    font-family:  "galano-medium", sans-serif;
+    font-family: 'galano-medium', sans-serif;
     color: $primary-color;
     font-size: 15px;
   }
@@ -2363,7 +2360,10 @@ h3#bussiness2 {
 .cdk-overlay-pane.dialog-stories {
   margin: 0 !important;
 
-  .modal-stories, .slick-slider, .slick-list, .slick-track {
+  .modal-stories,
+  .slick-slider,
+  .slick-list,
+  .slick-track {
     height: 100%;
   }
 
@@ -2380,42 +2380,42 @@ h3#bussiness2 {
   @include fromMin(550px) {
     .slick-slide:not(.slick-center) {
       .card-story {
-          display: flex;
-          align-items: center;
-          justify-content: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .story-progress {
         display: none;
       }
-  
+
       .story-info {
         justify-content: center;
       }
-  
-      .client-info {
-          flex-direction: column;
-  
-          h4 {
-              font-size: 28px;
-              text-transform: uppercase;
-              margin: 10px 0 0px 0px;
-          }
 
-          span {
-            font-size: 25px;
-          }
+      .client-info {
+        flex-direction: column;
+
+        h4 {
+          font-size: 28px;
+          text-transform: uppercase;
+          margin: 10px 0 0px 0px;
+        }
+
+        span {
+          font-size: 25px;
+        }
       }
-  
+
       .img-client {
-          width: 130px;
-          height: 130px;
-          border-radius: 80px;
-          border: 6px solid #352767;
+        width: 130px;
+        height: 130px;
+        border-radius: 80px;
+        border: 6px solid #352767;
       }
-  
+
       .action-container {
-          display: none;
+        display: none;
       }
     }
   }
@@ -2446,19 +2446,20 @@ h3#bussiness2 {
   }
 }
 
-.check-transparent .mat-checkbox-background, 
+.check-transparent .mat-checkbox-background,
 .check-transparent.mat-checkbox-checked.mat-accent .mat-checkbox-background {
   background-color: transparent !important;
 }
 
-.check-transparent.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element,
+.check-transparent.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent
+  .mat-ripple-element,
 .check-transparent .mat-ripple-element {
   opacity: 0.1;
   background-color: black;
 }
 
 .check-dull-purple.mat-checkbox-checked.mat-accent .mat-checkbox-background {
-  background-color: #B4A6DB !important;
+  background-color: #b4a6db !important;
 }
 
 .check-dull-purple.mat-checkbox-disabled {
@@ -2466,20 +2467,24 @@ h3#bussiness2 {
 }
 
 .check-dull-purple .mat-checkbox-background {
-  background-color: #D2D0D4 !important;
+  background-color: #d2d0d4 !important;
 }
 
-.timepicker-backdrop-overlay, .timepicker-overlay {
+.timepicker-backdrop-overlay,
+.timepicker-overlay {
   z-index: 1010 !important;
 }
 
-#break1-modal, #break2-modal, #break3-modal {
+#break1-modal,
+#break2-modal,
+#break3-modal {
   .mat-dialog-title {
     margin: 0 0 5px;
   }
 }
 
-#rejected-commission, #eliminated-commission {
+#rejected-commission,
+#eliminated-commission {
   .top-generic {
     position: relative;
     justify-content: center !important;
@@ -2513,156 +2518,155 @@ h3#bussiness2 {
 }
 
 .linkDiv {
-  .mat-list-item-content{
+  .mat-list-item-content {
     padding: 0 5px !important;
   }
 }
 
-.no-bg{
+.no-bg {
   background: none;
   box-shadow: none;
 
-  .mat-expansion-panel-header{
+  .mat-expansion-panel-header {
     box-shadow: none;
   }
 
-   .mat-expansion-panel-content {
+  .mat-expansion-panel-content {
     background: none;
   }
 
-   .mat-expansion-panel-header-title{
+  .mat-expansion-panel-header-title {
     color: $primary-color;
     font-family: $font-galano-bold;
-    margin-left: 14px
+    margin-left: 14px;
   }
 
-   .mat-expansion-panel-body{
+  .mat-expansion-panel-body {
     padding: 0 !important;
   }
 
-   .mat-list-item-content{
+  .mat-list-item-content {
     padding: 0 7px;
   }
 
-   .mat-list-item{
+  .mat-list-item {
     height: 38px;
-    &:hover, &:focus{
+    &:hover,
+    &:focus {
       background: none;
     }
   }
 
-    .mat-list-base{
+  .mat-list-base {
     padding-top: 0;
   }
 
   span.menu-mobile {
     color: $primary-color;
-    &.active{
+    &.active {
       color: #ffffff;
       background-color: $primary-color;
       border-radius: 15px;
       padding: 5px 10px;
     }
   }
-
 }
 
-
-.adminMenu{
-  .mat-list-item-content{
+.adminMenu {
+  .mat-list-item-content {
     padding: 0 37px !important;
   }
-  .mat-content{
+  .mat-content {
     padding: 0 14px !important;
   }
 }
 
 .mat-radio-outer-circle {
   .mat-radio-checked & {
-        border-color: #B4A6DB !important;
-      }
+    border-color: #b4a6db !important;
   }
-  
-  .mat-radio-inner-circle {
-      background-color: #B4A6DB !important;
-  }
-  
-  .mat-radio-ripple .mat-ripple-element {
-      background-color: rgba(#B4A6DB, 0.26) !important;
-  }
-
-  .mat-chip{
-      background: #FFAE5E;
-      color: #AD5E00;
-      border-style: dashed;
-      border-width: 1px;
-  }
-
-  .paginator {
-    margin-bottom: 20px;
-    .pagination {
-      &-previous, &-next {
-        background: #fff;
-        border-radius: 50%;
-        padding: 15px;
-        color: $primary-color;
-        cursor: pointer;
-        height: 25px;
-        width: 25px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 2px;
-        &.disabled{
-          pointer-events: none;
-          color: $purple2;
-          cursor: default;
-        }
-        i{
-          font-size: 16px;
-        }
-      }
-    }
-  
-    .bubble{
-      background: #ffffff;
-      padding: 5px 20px;
-      border-radius: 55px;
-      height: 28px;
-      margin-top: 3px;
-      font-size: 18px;
-    }
-  
-    .current{
-      background: $primary-color;
-      color: #ffffff;
-      border-radius: 50%;
-      width: 30px;
-      display: flex;
-      justify-content: center;
-      height: 30px;
-      align-items: center
-    }
-  
-    a{
-      color: $primary-color;
-    }
-  
-    .items{
-      color: $primary-color;
-    }
-  
-  }
-  
-  .delete-all, .select-all{
-    .mat-button-wrapper{
-        display: flex;
-        align-items: center;
-    }
 }
 
-.w-container{
+.mat-radio-inner-circle {
+  background-color: #b4a6db !important;
+}
+
+.mat-radio-ripple .mat-ripple-element {
+  background-color: rgba(#b4a6db, 0.26) !important;
+}
+
+.mat-chip {
+  background: #ffae5e;
+  color: #ad5e00;
+  border-style: dashed;
+  border-width: 1px;
+}
+
+.paginator {
+  margin-bottom: 20px;
+  .pagination {
+    &-previous,
+    &-next {
+      background: #fff;
+      border-radius: 50%;
+      padding: 15px;
+      color: $primary-color;
+      cursor: pointer;
+      height: 25px;
+      width: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+      &.disabled {
+        pointer-events: none;
+        color: $purple2;
+        cursor: default;
+      }
+      i {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .bubble {
+    background: #ffffff;
+    padding: 5px 20px;
+    border-radius: 55px;
+    height: 28px;
+    margin-top: 3px;
+    font-size: 18px;
+  }
+
+  .current {
+    background: $primary-color;
+    color: #ffffff;
+    border-radius: 50%;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    height: 30px;
+    align-items: center;
+  }
+
+  a {
+    color: $primary-color;
+  }
+
+  .items {
+    color: $primary-color;
+  }
+}
+
+.delete-all,
+.select-all {
+  .mat-button-wrapper {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.w-container {
   font-size: 15px;
   font-family: $font-galano;
 }
-

@@ -1,26 +1,26 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { Routes, RouterModule } from "@angular/router";
-import { AppMaterialModule } from "../shared/app-material/app-material.module";
-import { SharedModule } from "../shared/shared.module";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { TranslateModule } from "@ngx-translate/core";
-import { DialogComponent } from "../shared/components/dialog/dialog.component";
-import { SlickCarouselModule } from "ngx-slick-carousel";
-import { FlexLayoutModule } from "@angular/flex-layout";
-import { MonthResumeComponent } from "./components/month-resume/month-resume.component";
-import { GeneralResumeComponent } from "./components/general-resume/general-resume.component";
-import { ReportComponent } from "./pages/report/report.component";
-import { AuthGuard } from "src/app/auth.guard";
-import { MatPaginatorIntl } from "@angular/material";
-import { ProfileComponent } from "./pages/profile/profile.component";
-import { ProfileFormComponent } from "./components/profile-form/profile-form.component";
-import { TableHistorialComponent } from "./components/table-historial/table-historial.component";
-import { AditionalFilesComponent } from "./components/aditional-files/aditional-files.component";
-import { DragScrollModule } from "ngx-drag-scroll";
-import { AditionalInfoFormComponent } from "./components/aditional-info-form/aditional-info-form.component";
-import { DialogEditComponent } from "./components/dialog-edit/dialog-edit.component";
-import { MatPasswordStrengthModule } from "@angular-material-extensions/password-strength";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Routes, RouterModule } from '@angular/router';
+import { AppMaterialModule } from '../shared/app-material/app-material.module';
+import { SharedModule } from '../shared/shared.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { DialogComponent } from '../shared/components/dialog/dialog.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MonthResumeComponent } from './components/month-resume/month-resume.component';
+import { GeneralResumeComponent } from './components/general-resume/general-resume.component';
+import { ReportComponent } from './pages/report/report.component';
+import { AuthGuard } from 'src/app/auth.guard';
+import { MatPaginatorIntl } from '@angular/material';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { ProfileFormComponent } from './components/profile-form/profile-form.component';
+import { TableHistorialComponent } from './components/table-historial/table-historial.component';
+import { AditionalFilesComponent } from './components/aditional-files/aditional-files.component';
+import { DragScrollModule } from 'ngx-drag-scroll';
+import { AditionalInfoFormComponent } from './components/aditional-info-form/aditional-info-form.component';
+import { DialogEditComponent } from './components/dialog-edit/dialog-edit.component';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { CardDataComponent } from './components/card-data/card-data.component';
 import { CardDataTotalComponent } from './components/card-data-total/card-data-total.component';
 import { DialogHistoryComponent } from './components/dialog-history/dialog-history.component';
@@ -48,74 +48,73 @@ import { DialogImagePlayerComponent } from './components/dialog-visualization-im
 import { DeleteformComponent } from './pages/deleteform/deleteform.component';
 import { NotificationsComponent } from './pages/notifications/notifications.component';
 import { DetailComponent } from './pages/notifications/detail/detail.component';
-import { NgxPaginationModule } from "ngx-pagination";
+import { NgxPaginationModule } from 'ngx-pagination';
 const routes: Routes = [
-
   {
-    path: "mi-perfil/:pagos",
+    path: 'mi-perfil/:pagos',
     component: ProfileComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: "eliminar-cuenta",
+    path: 'eliminar-cuenta',
     component: DeleteformComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: "mi-perfil",
+    path: 'mi-perfil',
     component: ProfileComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: "reportes",
+    path: 'reportes',
     component: ReportComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: "bussiness",
+    path: 'bussiness',
     component: BussinessComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: "historial-links",
+    path: 'historial-links',
     component: LinksHistorialComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: "referidos",
+    path: 'referidos',
     component: ReferComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: "negocios",
+    path: 'negocios',
     component: AllBussinessComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: "logros",
+    path: 'logros',
     component: AchievementsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: "medalla/:id",
+    path: 'medalla/:id',
     component: MedalComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: "biblioteca",
+    path: 'biblioteca',
     component: LibraryComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: "notificaciones",
+    path: 'notificaciones',
     component: NotificationsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: "notificacion-mobile/:idnotification/:id",
+    path: 'notificacion-mobile/:idnotification/:id',
     component: DetailComponent,
-    canActivate: [AuthGuard]
-  }
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
@@ -153,7 +152,7 @@ const routes: Routes = [
     DialogImagePlayerComponent,
     DeleteformComponent,
     NotificationsComponent,
-    DetailComponent
+    DetailComponent,
   ],
   imports: [
     CommonModule,
@@ -169,8 +168,13 @@ const routes: Routes = [
     MatPasswordStrengthModule,
     RouterModule.forChild(routes),
     AnonymousModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
-  entryComponents: [DialogComponent, DialogEditComponent, DialogHistoryComponent, DialogImagePlayerComponent]
+  entryComponents: [
+    DialogComponent,
+    DialogEditComponent,
+    DialogHistoryComponent,
+    DialogImagePlayerComponent,
+  ],
 })
-export class ClickerModule { }
+export class ClickerModule {}

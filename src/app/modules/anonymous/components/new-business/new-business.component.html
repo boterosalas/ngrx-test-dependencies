@@ -1,10 +1,42 @@
-<div class="newbusiness pb-4" fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap.gt-xs="50px" fxLayoutAlign="center center" fxLayoutAlign.xs="none">
-    <div class="newbusiness__text" fxLayout.gt-xs="column" fxFlex="30">
-        <h3 class="border-bottom-orange-init f-23">{{ "NEWBUSINESS.TITLE" | translate }}</h3>
-        <p class="f-15">{{ "NEWBUSINESS.TEXT" | translate }}</p>
-    </div>
-    <div class="newbusiness__img gtmHomeClicRgistroNuevosNegociosIrAlRegistro" fxLayout.gt-xs="column" fxFlex="50">
-        <img fxShow.xs="false" (click)="registerBusiness()" class="responsive-img radius pt-2 mt-5 cursor-pointer gtmHomeClicRgistroNuevosNegociosIrAlRegistro" src="assets/img/img-nuevos-negocios-dk.svg" alt="nuevosnegociosdesktop">
-        <img fxShow.gt-xs="false" (click)="registerBusiness()" class="responsive-img radius gtmHomeClicRgistroNuevosNegociosIrAlRegistro" src="assets/img/img-nuevos-negocios-mb.svg" alt="nuevosnegociosmobile">
-    </div>
+<div
+  class="newbusiness pb-4"
+  fxLayout="column"
+  fxLayout.gt-xs="row"
+  fxLayoutGap.gt-xs="50px"
+  fxLayoutAlign="center center"
+  fxLayoutAlign.xs="none"
+>
+  <div class="newbusiness__text" fxLayout.gt-xs="column" fxFlex="30">
+    <h3 class="border-bottom-orange-init f-23">
+      {{ 'NEWBUSINESS.TITLE' | translate }}
+    </h3>
+    <p class="f-15">{{ 'NEWBUSINESS.TEXT' | translate }}</p>
+  </div>
+  <div
+    class="newbusiness__img gtmHomeClicRgistroNuevosNegociosIrAlRegistro"
+    fxLayout.gt-xs="column"
+    fxFlex="50"
+  >
+    <img
+      fxShow.xs="false"
+      (click)="registerBusiness()"
+      class="
+        responsive-img
+        radius
+        pt-2
+        mt-5
+        cursor-pointer
+        gtmHomeClicRgistroNuevosNegociosIrAlRegistro
+      "
+      src="assets/img/img-nuevos-negocios-dk.svg"
+      alt="nuevosnegociosdesktop"
+    />
+    <img
+      fxShow.gt-xs="false"
+      (click)="registerBusiness()"
+      class="responsive-img radius gtmHomeClicRgistroNuevosNegociosIrAlRegistro"
+      src="assets/img/img-nuevos-negocios-mb.svg"
+      alt="nuevosnegociosmobile"
+    />
+  </div>
 </div>

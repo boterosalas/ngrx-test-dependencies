@@ -10,13 +10,9 @@ describe('BackNavigationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BackNavigationComponent ],
-      imports: [
-        FlexLayoutModule,
-        AppMaterialModule
-      ]
-    })
-    .compileComponents();
+      declarations: [BackNavigationComponent],
+      imports: [FlexLayoutModule, AppMaterialModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -34,6 +30,4 @@ describe('BackNavigationComponent', () => {
     component.closeComponent();
     expect(component.close.emit).toHaveBeenCalled();
   });
-  
-
 });

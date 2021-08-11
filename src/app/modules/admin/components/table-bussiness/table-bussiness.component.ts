@@ -3,18 +3,20 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-table-bussiness',
   templateUrl: './table-bussiness.component.html',
-  styleUrls: ['./table-bussiness.component.scss']
+  styleUrls: ['./table-bussiness.component.scss'],
 })
 export class TableBussinessComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  @Input() dataSource;  
+  @Input() dataSource;
 
   displayedColumns: string[] = ['bussiness'];
-  displayedColumns2: string[] = ['linksGenerated', 'linksClicked', 'commission','total'];
+  displayedColumns2: string[] = [
+    'linksGenerated',
+    'linksClicked',
+    'commission',
+    'total',
+  ];
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

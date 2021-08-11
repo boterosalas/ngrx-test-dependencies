@@ -1,33 +1,97 @@
 <!-- <app-logo></app-logo> -->
-<app-banner color="purple" title="{{'HOME.BUSSINESS' | translate}}" img="/assets/img/banners/banner-negocios-pc.jpg" imgMobile="/assets/img/banners/banner-negocios-mobile.jpg"></app-banner>
+<app-banner
+  color="purple"
+  title="{{ 'HOME.BUSSINESS' | translate }}"
+  img="/assets/img/banners/banner-negocios-pc.jpg"
+  imgMobile="/assets/img/banners/banner-negocios-mobile.jpg"
+></app-banner>
 <div class="container">
-    <span fxLayout="row" fxLayoutAlign="end center">
-        <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
-        <p ngClass.gt-xs="f-20" class="cursor-pointer text-underline purple-text" [routerLink]="[ '/inicio']" >{{ 'HOME.HOME' | translate }}</p>
-      </span>
-      <div fxLayout="row" class="card-library"  fxShow.gt-xs="true" fxShow.xs="false">
-        
-        <div class="position-relative banner-mobile heigth-image " fxShow.gt-xs="true" fxShow.xs="false">
-          <div class="position-absolute" fxLayout="column">
-            <h3>Descarga las mejores ofertas para compartir.</h3>
-            <button mat-raised-button class="button-oferts" color="orange" [routerLink]="[ '/biblioteca']" id="download-users"  >Ver Ofertas</button>    
-          </div>  
-          <img class="responsive-img" src="/assets/img/banners/oferts.png" alt="ofertas">
-        </div>
+  <span fxLayout="row" fxLayoutAlign="end center">
+    <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
+    <p
+      ngClass.gt-xs="f-20"
+      class="cursor-pointer text-underline purple-text"
+      [routerLink]="['/inicio']"
+    >
+      {{ 'HOME.HOME' | translate }}
+    </p>
+  </span>
+  <div
+    fxLayout="row"
+    class="card-library"
+    fxShow.gt-xs="true"
+    fxShow.xs="false"
+  >
+    <div
+      class="position-relative banner-mobile heigth-image"
+      fxShow.gt-xs="true"
+      fxShow.xs="false"
+    >
+      <div class="position-absolute" fxLayout="column">
+        <h3>Descarga las mejores ofertas para compartir.</h3>
+        <button
+          mat-raised-button
+          class="button-oferts"
+          color="orange"
+          [routerLink]="['/biblioteca']"
+          id="download-users"
+        >
+          Ver Ofertas
+        </button>
       </div>
-      <div fxLayout="row" class="card-library"  fxShow.gt-xs="false" fxShow.xs="true">
-        <div class="position-relative banner-mobile heigth-image " fxShow.gt-xs="false" fxShow.xs="true">
-          <div class="position-absolute" fxLayout="column">
-            <h3>Descarga aquí las mejores ofertas del día</h3>
-            <button mat-raised-button class="button-oferts" color="orange" [routerLink]="[ '/biblioteca']" id="download-users"  >Ver Ofertas</button>    
-          </div>
-          <img class="responsive-img" src="/assets/img/banners/oferts_mobile.png" alt="ofertas">
-        </div>
+      <img
+        class="responsive-img"
+        src="/assets/img/banners/oferts.png"
+        alt="ofertas"
+      />
+    </div>
+  </div>
+  <div
+    fxLayout="row"
+    class="card-library"
+    fxShow.gt-xs="false"
+    fxShow.xs="true"
+  >
+    <div
+      class="position-relative banner-mobile heigth-image"
+      fxShow.gt-xs="false"
+      fxShow.xs="true"
+    >
+      <div class="position-absolute" fxLayout="column">
+        <h3>Descarga aquí las mejores ofertas del día</h3>
+        <button
+          mat-raised-button
+          class="button-oferts"
+          color="orange"
+          [routerLink]="['/biblioteca']"
+          id="download-users"
+        >
+          Ver Ofertas
+        </button>
       </div>
-      <div fxLayout="row wrap" fxLayout.gt-xs="row wrap" ngClass.gt-xs="pb-3" fxLayoutAlign="center center" fxLayoutGap="10px grid">
-        <ng-container *ngFor="let bussines of bussiness; let i = index">
-          <app-bussiness-card *ngIf="bussines.code !== 'envios-clickam'" (bussiness)="bussinessNavigation(bussines)" [img]="bussines.imageurl" [code]="bussines.code" [title]="bussines.description" [percent]="bussines.infoaditional" ></app-bussiness-card>
-        </ng-container>
-      </div>    
-
+      <img
+        class="responsive-img"
+        src="/assets/img/banners/oferts_mobile.png"
+        alt="ofertas"
+      />
+    </div>
+  </div>
+  <div
+    fxLayout="row wrap"
+    fxLayout.gt-xs="row wrap"
+    ngClass.gt-xs="pb-3"
+    fxLayoutAlign="center center"
+    fxLayoutGap="10px grid"
+  >
+    <ng-container *ngFor="let bussines of bussiness; let i = index">
+      <app-bussiness-card
+        *ngIf="bussines.code !== 'envios-clickam'"
+        (bussiness)="bussinessNavigation(bussines)"
+        [img]="bussines.imageurl"
+        [code]="bussines.code"
+        [title]="bussines.description"
+        [percent]="bussines.infoaditional"
+      ></app-bussiness-card>
+    </ng-container>
+  </div>
 </div>

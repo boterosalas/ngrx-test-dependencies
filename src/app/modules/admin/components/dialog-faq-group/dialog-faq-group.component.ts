@@ -1,14 +1,14 @@
-import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
-import { Subscription } from "rxjs";
-import { ResponseService } from "src/app/interfaces/response";
-import { ContentService } from "src/app/services/content.service";
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Subscription } from 'rxjs';
+import { ResponseService } from 'src/app/interfaces/response';
+import { ContentService } from 'src/app/services/content.service';
 
 @Component({
-  selector: "app-dialog-faq-group",
-  templateUrl: "./dialog-faq-group.component.html",
-  styleUrls: ["./dialog-faq-group.component.scss"],
+  selector: 'app-dialog-faq-group',
+  templateUrl: './dialog-faq-group.component.html',
+  styleUrls: ['./dialog-faq-group.component.scss'],
 })
 export class DialogFaqGroupComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
@@ -59,7 +59,7 @@ export class DialogFaqGroupComponent implements OnInit, OnDestroy {
     this.subscription = this.content
       .saveFaqgroups(this.section)
       .subscribe((resp: ResponseService) => {
-        if (resp.state === "Success") {
+        if (resp.state === 'Success') {
           this.dialogRef.close();
         }
       });
@@ -70,5 +70,4 @@ export class DialogFaqGroupComponent implements OnInit, OnDestroy {
     //Add 'implements OnDestroy' to the class.
     this.subscription.unsubscribe();
   }
-
 }

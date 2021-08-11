@@ -1,30 +1,29 @@
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import {
-  Component,
-  OnInit,
-  ViewChild,
-  OnDestroy,
-} from "@angular/core";
-import { Router } from "@angular/router";
-import { MatSnackBar, MatPaginator, MatTableDataSource } from "@angular/material";
-import { NgNavigatorShareService } from "ng-navigator-share";
-import { LinksService } from "src/app/services/links.service";
-import { Subscription } from "rxjs";
-import Swal from "sweetalert2";
-import { ResponseService } from "src/app/interfaces/response";
+  MatSnackBar,
+  MatPaginator,
+  MatTableDataSource,
+} from '@angular/material';
+import { NgNavigatorShareService } from 'ng-navigator-share';
+import { LinksService } from 'src/app/services/links.service';
+import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
+import { ResponseService } from 'src/app/interfaces/response';
 import { Refer } from 'src/app/interfaces/refer';
-import { ContentService } from "src/app/services/content.service";
-import { TokenService } from "src/app/services/token.service";
+import { ContentService } from 'src/app/services/content.service';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
-  selector: "app-refer",
-  templateUrl: "./refer.component.html",
-  styleUrls: ["./refer.component.scss"],
+  selector: 'app-refer',
+  templateUrl: './refer.component.html',
+  styleUrls: ['./refer.component.scss'],
 })
 export class ReferComponent implements OnInit, OnDestroy {
   private ngNavigatorShareService: NgNavigatorShareService;
   private subscription: Subscription = new Subscription();
 
-  @ViewChild("share", { static: false }) public refer: Refer;
+  @ViewChild('share', { static: false }) public refer: Refer;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   public urlClicker: Object;
@@ -62,7 +61,7 @@ export class ReferComponent implements OnInit, OnDestroy {
   }
 
   public goback() {
-    this.router.navigate(["./"]);
+    this.router.navigate(['./']);
   }
 
   public sendEmail(email) {
@@ -70,26 +69,26 @@ export class ReferComponent implements OnInit, OnDestroy {
       email,
       link: this.urlClicker,
     };
-    this.generateLink(dataEmail)
+    this.generateLink(dataEmail);
     this.subscription = this.link.saveLinkRefer(dataEmail).subscribe(
       (resp: ResponseService) => {
-        if (resp.state === "Success") {
+        if (resp.state === 'Success') {
           Swal.fire({
-            title: "Invitación enviada",
+            title: 'Invitación enviada',
             text: resp.userMessage,
-            type: "success",
-            confirmButtonText: "Aceptar",
-            confirmButtonClass: "accept-refer-alert-success",
+            type: 'success',
+            confirmButtonText: 'Aceptar',
+            confirmButtonClass: 'accept-refer-alert-success',
           }).then(() => {
             this.getReferrals();
-          })
+          });
         } else {
           Swal.fire({
-            title: "Ups algo salió mal",
+            title: 'Ups algo salió mal',
             text: resp.userMessage,
-            type: "error",
-            confirmButtonText: "Aceptar",
-            confirmButtonClass: "accept-refer-alert-error",
+            type: 'error',
+            confirmButtonText: 'Aceptar',
+            confirmButtonClass: 'accept-refer-alert-error',
           });
         }
       },
@@ -97,9 +96,9 @@ export class ReferComponent implements OnInit, OnDestroy {
         Swal.fire({
           title: error.statusText,
           // text: error.error.userMessage,
-          type: "error",
-          confirmButtonText: "Aceptar",
-          confirmButtonClass: "accept-refer-alert-invalid",
+          type: 'error',
+          confirmButtonText: 'Aceptar',
+          confirmButtonClass: 'accept-refer-alert-invalid',
         });
       }
     );
@@ -110,14 +109,14 @@ export class ReferComponent implements OnInit, OnDestroy {
     let formData: FormData = new FormData();
     formData.append('idClicker', idClicker);
     formData.append('type', 'Generate');
-    this.content.setClick(formData).subscribe()
+    this.content.setClick(formData).subscribe();
   }
   /* To copy Text from Textbox */
   public copyInputMessage(inputElement: any) {
     inputElement.select();
-    document.execCommand("copy");
+    document.execCommand('copy');
     inputElement.setSelectionRange(0, 0);
-    this.openSnackBar("Se ha copiado el link al portapapeles", "Cerrar");
+    this.openSnackBar('Se ha copiado el link al portapapeles', 'Cerrar');
   }
 
   /**
@@ -135,8 +134,8 @@ export class ReferComponent implements OnInit, OnDestroy {
   public shareEvent(url: string) {
     this.ngNavigatorShareService
       .share({
-        title: "",
-        text: "",
+        title: '',
+        text: '',
         url: url,
       })
       .then((response) => {
@@ -149,7 +148,7 @@ export class ReferComponent implements OnInit, OnDestroy {
 
   public getReferrals(from = 1, to = this.pageTo) {
     let params = { from, to };
-    this.subscription = this.link.getReferrals(params).subscribe(resp => {
+    this.subscription = this.link.getReferrals(params).subscribe((resp) => {
       this.dataSource = new MatTableDataSource<any>(resp.referrals);
       this.totalItems = resp.total;
     });

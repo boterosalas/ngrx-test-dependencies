@@ -1,6 +1,6 @@
-@import "variables";
+@import 'variables';
 
-input[type="file"] {
+input[type='file'] {
   display: none;
 }
 
@@ -53,35 +53,35 @@ input[type="file"] {
   font-size: 25px;
 }
 
-.over{
-    position: relative;
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 600px;
+.over {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
 }
 
 .overlay {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 600px;
-    width: 600px;
-    opacity: 0;
-    transition: .9s ease;
-    background-color: #000000;
-    overflow: hidden ;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ffffff;
-    flex-direction: column;
-  }
-  
-  /* Cuando pasemos sobre el avatar se genera el efecto */
-  .over:hover .overlay {
-    opacity: 0.5;
-  }
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 600px;
+  width: 600px;
+  opacity: 0;
+  transition: 0.9s ease;
+  background-color: #000000;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  flex-direction: column;
+}
+
+/* Cuando pasemos sobre el avatar se genera el efecto */
+.over:hover .overlay {
+  opacity: 0.5;
+}

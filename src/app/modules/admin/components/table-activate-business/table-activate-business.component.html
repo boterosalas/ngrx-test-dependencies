@@ -26,7 +26,7 @@
       </ng-container>
       <ng-container matColumnDef="bussiness">
         <th mat-header-cell *matHeaderCellDef>
-          {{ "DASHBOARD.NEW_BUSINESS" | translate }}
+          {{ 'DASHBOARD.NEW_BUSINESS' | translate }}
         </th>
         <td mat-cell *matCellDef="let element">
           <div
@@ -154,7 +154,7 @@
           dateForm.controls.nameBussiness.errors.required
         "
         >{{
-          "GENERIC.REQUIRED" | translate: { formValue: "Nombre del negocio" }
+          'GENERIC.REQUIRED' | translate: { formValue: 'Nombre del negocio' }
         }}</mat-error
       >
 
@@ -165,7 +165,7 @@
           dateForm.controls.nameBussiness.errors.maxlength
         "
         >{{
-          "GENERIC.MAX_CHARACTERS"
+          'GENERIC.MAX_CHARACTERS'
             | translate
               : {
                   maxchar:
@@ -182,7 +182,7 @@
           dateForm.controls.nameBussiness.errors.pattern
         "
         >{{
-          "GENERIC.INVALID_FORMAT" | translate: { val: "Nombre del negocio" }
+          'GENERIC.INVALID_FORMAT' | translate: { val: 'Nombre del negocio' }
         }}</mat-error
       >
     </mat-form-field>
@@ -203,8 +203,8 @@
           dateForm.controls.detailBussiness.errors.required
         "
         >{{
-          "GENERIC.REQUIRED"
-            | translate: { formValue: "Detalle de la comisión" }
+          'GENERIC.REQUIRED'
+            | translate: { formValue: 'Detalle de la comisión' }
         }}</mat-error
       >
 
@@ -215,7 +215,7 @@
           dateForm.controls.detailBussiness.errors.maxlength
         "
         >{{
-          "GENERIC.MAX_CHARACTERS"
+          'GENERIC.MAX_CHARACTERS'
             | translate
               : {
                   maxchar:
@@ -232,8 +232,8 @@
           dateForm.controls.detailBussiness.errors.pattern
         "
         >{{
-          "GENERIC.INVALID_FORMAT"
-            | translate: { val: "Detalle de la comisión" }
+          'GENERIC.INVALID_FORMAT'
+            | translate: { val: 'Detalle de la comisión' }
         }}</mat-error
       >
     </mat-form-field>
@@ -254,8 +254,8 @@
           dateForm.controls.nameTableCommision.errors.required
         "
         >{{
-          "GENERIC.REQUIRED"
-            | translate: { formValue: "Nombre en tabla de comisiones" }
+          'GENERIC.REQUIRED'
+            | translate: { formValue: 'Nombre en tabla de comisiones' }
         }}</mat-error
       >
 
@@ -266,7 +266,7 @@
           dateForm.controls.nameTableCommision.errors.maxlength
         "
         >{{
-          "GENERIC.MAX_CHARACTERS"
+          'GENERIC.MAX_CHARACTERS'
             | translate
               : {
                   maxchar:
@@ -283,8 +283,8 @@
           dateForm.controls.nameTableCommision.errors.pattern
         "
         >{{
-          "GENERIC.INVALID_FORMAT"
-            | translate: { val: "nombre en tabla de comisiones" }
+          'GENERIC.INVALID_FORMAT'
+            | translate: { val: 'nombre en tabla de comisiones' }
         }}</mat-error
       >
     </mat-form-field>
@@ -305,8 +305,8 @@
           dateForm.controls.placeholderBussiness.errors.required
         "
         >{{
-          "GENERIC.REQUIRED"
-            | translate: { formValue: "Place holder (referencia de compra)" }
+          'GENERIC.REQUIRED'
+            | translate: { formValue: 'Place holder (referencia de compra)' }
         }}</mat-error
       >
 
@@ -317,7 +317,7 @@
           dateForm.controls.placeholderBussiness.errors.maxlength
         "
         >{{
-          "GENERIC.MAX_CHARACTERS"
+          'GENERIC.MAX_CHARACTERS'
             | translate
               : {
                   maxchar:
@@ -334,8 +334,8 @@
           dateForm.controls.placeholderBussiness.errors.pattern
         "
         >{{
-          "GENERIC.INVALID_FORMAT"
-            | translate: { val: "Place holder (referencia de compra)" }
+          'GENERIC.INVALID_FORMAT'
+            | translate: { val: 'Place holder (referencia de compra)' }
         }}</mat-error
       >
     </mat-form-field>
@@ -354,7 +354,7 @@
           dateForm.controls.codeReference.invalid &&
           dateForm.controls.codeReference.errors.required
         "
-        >{{ "GENERIC.REQUIRED" | translate: { formValue: "URL" } }}</mat-error
+        >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'URL' } }}</mat-error
       >
 
       <mat-error
@@ -364,7 +364,7 @@
           dateForm.controls.codeReference.errors.maxlength
         "
         >{{
-          "GENERIC.MAX_CHARACTERS"
+          'GENERIC.MAX_CHARACTERS'
             | translate
               : {
                   maxchar:
@@ -380,7 +380,7 @@
           dateForm.controls.codeReference.invalid &&
           dateForm.controls.codeReference.errors.pattern
         "
-        >{{ "GENERIC.INVALID_FORMAT" | translate: { val: "URL" } }}</mat-error
+        >{{ 'GENERIC.INVALID_FORMAT' | translate: { val: 'URL' } }}</mat-error
       >
     </mat-form-field>
 
@@ -399,7 +399,7 @@
           >No hay archivo seleccionado</span
         >
         <span class="file-input" *ngIf="nameFileCert !== ''">{{
-          nameFileCert | truncate: "20"
+          nameFileCert | truncate: '20'
         }}</span>
       </div>
       <div>
@@ -454,7 +454,7 @@
           >No hay archivo seleccionado</span
         >
         <span class="file-input" *ngIf="nameFileCert2 !== ''">{{
-          nameFileCert2 | truncate: "20"
+          nameFileCert2 | truncate: '20'
         }}</span>
       </div>
       <div>

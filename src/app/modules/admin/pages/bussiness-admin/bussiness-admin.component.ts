@@ -6,7 +6,7 @@ import { distinctUntilChanged } from 'rxjs/operators';
 import { ContentService } from 'src/app/services/content.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
-import { DialogCategoryComponent } from '../../components/dialog-category/dialog-category.component'
+import { DialogCategoryComponent } from '../../components/dialog-category/dialog-category.component';
 import { ResponseService } from 'src/app/interfaces/response';
 //import { Router } from '@angular/router';
 export interface PeriodicElement {
@@ -17,38 +17,46 @@ export interface PeriodicElement {
 @Component({
   selector: 'app-bussiness-admin',
   templateUrl: './bussiness-admin.component.html',
-  styleUrls: ['./bussiness-admin.component.scss']
+  styleUrls: ['./bussiness-admin.component.scss'],
 })
 export class BussinessAdminComponent implements OnInit {
   id: string;
   title: string;
   image: string;
   datosEliminar: any;
-  dialogRef: MatDialogRef<any>
+  dialogRef: MatDialogRef<any>;
   bussinessCategory = [];
   showDeliver: boolean = false;
   private subscription: Subscription = new Subscription();
   @ViewChild('table', { static: false }) table: MatTable<PeriodicElement>;
-  @ViewChild("templateDeleteCategory", { static: false })
+  @ViewChild('templateDeleteCategory', { static: false })
   templateDelete: TemplateRef<any>;
-  displayedColumns: string[] = ['drag', 'image', 'name', 'comission', 'typeCommision', 'commisionClicker', 'commisionBussiness', 'state', 'actions'];
+  displayedColumns: string[] = [
+    'drag',
+    'image',
+    'name',
+    'comission',
+    'typeCommision',
+    'commisionClicker',
+    'commisionBussiness',
+    'state',
+    'actions',
+  ];
   constructor(
     private content: ContentService,
     private route: ActivatedRoute,
-    private dialog: MatDialog,
+    private dialog: MatDialog
   ) {
-
     this.subscription = this.route.params.subscribe((route) => {
       if (
         route.id === undefined &&
         route.titulo === undefined &&
         route.imagen === undefined
-
       ) {
-        this.id = "1";
-        this.title = "exito";
+        this.id = '1';
+        this.title = 'exito';
         this.image =
-          "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg";
+          'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg';
       } else {
         this.id = route.id;
         this.title = route.titulo;
@@ -72,18 +80,20 @@ export class BussinessAdminComponent implements OnInit {
     //getAllBusinessContent
   }
   dropTable(event: CdkDragDrop<PeriodicElement[]>) {
-    const prevIndex = this.bussinessCategory.findIndex((d) => d === event.item.data);
+    const prevIndex = this.bussinessCategory.findIndex(
+      (d) => d === event.item.data
+    );
     moveItemInArray(this.bussinessCategory, prevIndex, event.currentIndex);
     this.table.renderRows();
-    let datosSourceSend = []
+    let datosSourceSend = [];
     for (let i = 0; i < this.bussinessCategory.length; i++) {
-      this.bussinessCategory[i].orderby = i + 1
+      this.bussinessCategory[i].orderby = i + 1;
       datosSourceSend.push({
         id: this.bussinessCategory[i].id,
-        orderby: i + 1
-      })
+        orderby: i + 1,
+      });
     }
-    this.saveOrder(datosSourceSend)
+    this.saveOrder(datosSourceSend);
   }
   public saveOrder(datos: any) {
     this.content.orderCategory(datos).subscribe((resp: ResponseService) => {});
@@ -92,7 +102,7 @@ export class BussinessAdminComponent implements OnInit {
     this.dialog.closeAll();
   }
   public deleteCategory(data: any) {
-    const title = "";
+    const title = '';
     const template = this.templateDelete;
     //let dialogRef: MatDialogRef<any>
     this.dialogRef = this.dialog.open(ModalGenericComponent, {
@@ -107,18 +117,18 @@ export class BussinessAdminComponent implements OnInit {
     });
   }
   public agregarCategory() {
-    const title = "Nueva Categoría";
-    const buttonName = "Agregar";
+    const title = 'Nueva Categoría';
+    const buttonName = 'Agregar';
     const idBussiness = this.id;
     const edit = 0;
     //let dialogRef1: MatDialogRef<MatDialog>;
     let dialogRef1 = this.dialog.open(DialogCategoryComponent, {
-      width: "450px",
+      width: '450px',
       data: {
         title,
         idBussiness,
         buttonName,
-        edit
+        edit,
       },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
@@ -126,8 +136,8 @@ export class BussinessAdminComponent implements OnInit {
     });
   }
   public editCategory(category: any) {
-    const title = "Editar Categoría";
-    const buttonName = "Guardar";
+    const title = 'Editar Categoría';
+    const buttonName = 'Guardar';
     const id = category.id;
     const name = category.description;
     const description = category.infoaditional;
@@ -140,7 +150,7 @@ export class BussinessAdminComponent implements OnInit {
     const typeComision = category.typecommission;
     const active = category.active;
     const dialogRef1 = this.dialog.open(DialogCategoryComponent, {
-      width: "450px",
+      width: '450px',
       data: {
         id,
         title,
@@ -154,7 +164,7 @@ export class BussinessAdminComponent implements OnInit {
         idBussiness,
         comisionBussines,
         typeComision,
-        active
+        active,
       },
     });
     this.subscription = dialogRef1.beforeClosed().subscribe(() => {
@@ -162,12 +172,12 @@ export class BussinessAdminComponent implements OnInit {
     });
   }
   public deleteCategoryService() {
-    let datos = { id: this.datosEliminar.id }
+    let datos = { id: this.datosEliminar.id };
     this.content.deleteCategory(datos).subscribe((resp: ResponseService) => {
-      if (resp.state === "Success") {
+      if (resp.state === 'Success') {
         this.dialog.closeAll();
       } else {
-        console.log("Upss Hubo un problema vuelve a intentarlo")
+        console.log('Upss Hubo un problema vuelve a intentarlo');
       }
     });
   }

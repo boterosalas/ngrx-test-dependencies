@@ -1,3 +1,3 @@
 export interface Refer {
-    urlValue: string
+  urlValue: string;
 }

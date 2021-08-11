@@ -8,9 +8,8 @@ describe('AppStoreComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AppStoreComponent ]
-    })
-    .compileComponents();
+      declarations: [AppStoreComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

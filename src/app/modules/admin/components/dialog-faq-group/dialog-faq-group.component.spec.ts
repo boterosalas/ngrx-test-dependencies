@@ -14,7 +14,7 @@ describe('DialogFaqGroupComponent', () => {
   let fixture: ComponentFixture<DialogFaqGroupComponent>;
 
   const dialogMock = {
-    close: () => { }
+    close: () => {},
   };
 
   beforeEach(async(() => {
@@ -26,14 +26,13 @@ describe('DialogFaqGroupComponent', () => {
         HttpClientTestingModule,
         TranslateModule.forRoot({}),
         BrowserAnimationsModule,
-        AppMaterialModule
+        AppMaterialModule,
       ],
-      providers:[
+      providers: [
         { provide: MatDialogRef, useValue: dialogMock },
         { provide: MAT_DIALOG_DATA, useValue: {} },
-      ]
-    })
-    .compileComponents();
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

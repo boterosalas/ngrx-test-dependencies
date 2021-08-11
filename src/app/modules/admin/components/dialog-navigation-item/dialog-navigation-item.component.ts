@@ -1,16 +1,16 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
-import { Subscription } from "rxjs";
-import { ResponseService } from "src/app/interfaces/response";
-import { AuthService } from "src/app/services/auth.service";
-import { ContentService } from "src/app/services/content.service";
-import { ListIcons } from "src/app/services/icons";
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Subscription } from 'rxjs';
+import { ResponseService } from 'src/app/interfaces/response';
+import { AuthService } from 'src/app/services/auth.service';
+import { ContentService } from 'src/app/services/content.service';
+import { ListIcons } from 'src/app/services/icons';
 
 @Component({
-  selector: "app-dialog-navigation-item",
-  templateUrl: "./dialog-navigation-item.component.html",
-  styleUrls: ["./dialog-navigation-item.component.scss"],
+  selector: 'app-dialog-navigation-item',
+  templateUrl: './dialog-navigation-item.component.html',
+  styleUrls: ['./dialog-navigation-item.component.scss'],
 })
 export class DialogNavigationItemComponent implements OnInit {
   private subscription: Subscription = new Subscription();
@@ -27,24 +27,27 @@ export class DialogNavigationItemComponent implements OnInit {
     private fb: FormBuilder,
     public auth: AuthService,
     private icons: ListIcons
-    ) {
-      this.iconList = icons.iconList;
-    }
+  ) {
+    this.iconList = icons.iconList;
+  }
 
   ngOnInit() {
     this.loadItem();
   }
 
   loadItem() {
-    this.iconSelected = this.data.icon
+    this.iconSelected = this.data.icon;
 
     if (this.data.edit === 1) {
       this.dateForm = this.fb.group({
         id: [this.data.id],
         idseccion: [this.data.idseccion || this.data.idgrupo],
         link: [this.data.link || this.data.route, Validators.required],
-        description: [this.data.description || this.data.name, Validators.required],
-        icon: [this.data.icon],        
+        description: [
+          this.data.description || this.data.name,
+          Validators.required,
+        ],
+        icon: [this.data.icon],
       });
     } else {
       this.dateForm = this.fb.group({
@@ -60,8 +63,7 @@ export class DialogNavigationItemComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  saveItem() { 
-    
+  saveItem() {
     let item;
     if (this.data.isMenu) {
       if (this.data.edit === 0) {
@@ -71,7 +73,7 @@ export class DialogNavigationItemComponent implements OnInit {
           name: this.dateForm.controls.description.value,
           icon: this.iconSelected,
           idgrupo: this.data.idseccion,
-          active: true
+          active: true,
         };
       } else {
         item = {
@@ -81,14 +83,14 @@ export class DialogNavigationItemComponent implements OnInit {
           icon: this.iconSelected,
           idgrupo: this.data.idseccion,
           orderby: this.data.orderby,
-          active: this.data.active
+          active: this.data.active,
         };
       }
 
       item.rol = this.data.rol;
 
       this.auth.saveMenu(item).subscribe((resp: ResponseService) => {
-        if (resp.state === "Success") {
+        if (resp.state === 'Success') {
           this.dialogRef.close();
         }
       });
@@ -97,20 +99,20 @@ export class DialogNavigationItemComponent implements OnInit {
         item = {
           idseccion: this.data.idseccion,
           link: this.dateForm.controls.link.value,
-          description: this.dateForm.controls.description.value,          
+          description: this.dateForm.controls.description.value,
         };
       } else {
         item = {
           id: this.data.id,
           idseccion: this.data.idseccion,
           link: this.dateForm.controls.link.value,
-          description: this.dateForm.controls.description.value,          
+          description: this.dateForm.controls.description.value,
           orderby: this.data.orderby,
         };
       }
 
       this.content.saveFooterLink(item).subscribe((resp: ResponseService) => {
-        if (resp.state === "Success") {
+        if (resp.state === 'Success') {
           this.dialogRef.close();
         }
       });

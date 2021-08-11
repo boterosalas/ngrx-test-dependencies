@@ -3,10 +3,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'app-faq-item',
   templateUrl: './faq-item.component.html',
-  styleUrls: ['./faq-item.component.scss']
+  styleUrls: ['./faq-item.component.scss'],
 })
 export class FaqItemComponent implements OnInit {
-
   @Input() faq: any;
   @Output() editItem = new EventEmitter<any>();
   @Output() deleteItem = new EventEmitter<any>();
@@ -32,5 +31,4 @@ export class FaqItemComponent implements OnInit {
   changeState() {
     this.changeStateItem.emit(this.faq);
   }
-
 }

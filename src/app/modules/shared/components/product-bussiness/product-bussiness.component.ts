@@ -1,18 +1,11 @@
-import {
-  Component, OnInit,
-  Input, Output, EventEmitter
-} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-product-bussiness',
   templateUrl: './product-bussiness.component.html',
-  styleUrls: ['./product-bussiness.component.scss']
+  styleUrls: ['./product-bussiness.component.scss'],
 })
 export class ProductBussinessComponent implements OnInit {
-
-
-
-
   @Input() altimagen: string;
   @Input() textoboton: string;
   @Input() idne: string;
@@ -32,14 +25,11 @@ export class ProductBussinessComponent implements OnInit {
   @Input() imagen: string;
   @Input() pluexito: string;
   @Output() infoProduct = new EventEmitter();
-  constructor() { }
+  constructor() {}
 
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   public product() {
     this.infoProduct.emit();
   }
-
 }

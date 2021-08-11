@@ -10,13 +10,9 @@ describe('CardDashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CardDashboardComponent ],
-      imports: [
-        AppMaterialModule,
-        TranslateModule.forRoot()
-      ]
-    })
-    .compileComponents();
+      declarations: [CardDashboardComponent],
+      imports: [AppMaterialModule, TranslateModule.forRoot()],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

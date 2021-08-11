@@ -48,7 +48,7 @@
       </div>
       <div>
         <span class="mt-4 text-date-content">{{
-          datas.date | date: "yyyy/MM/dd"
+          datas.date | date: 'yyyy/MM/dd'
         }}</span>
         <h3 class="mt-0 text-author-content">{{ datas.author }}</h3>
         <div class="style-blogs" [innerHtml]="datas.content"></div>
@@ -103,13 +103,13 @@
           dateForm.controls.nameBussiness.invalid &&
           dateForm.controls.nameBussiness.errors.required
         "
-        >{{ "GENERIC.REQUIRED" | translate: { formValue: "Email" } }}</mat-error
+        >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Email' } }}</mat-error
       >
       <mat-error
         id="invalidEmail"
         *ngIf="dateForm.controls.nameBussiness.invalid"
         >{{
-          "LOGIN.INVALID_EMAIL" | translate: { formValue: "Email" }
+          'LOGIN.INVALID_EMAIL' | translate: { formValue: 'Email' }
         }}</mat-error
       >
     </mat-form-field>
@@ -129,7 +129,7 @@
           dateForm.controls.namePerson.errors.required
         "
         >{{
-          "GENERIC.REQUIRED" | translate: { formValue: "Nombre" }
+          'GENERIC.REQUIRED' | translate: { formValue: 'Nombre' }
         }}</mat-error
       >
 
@@ -140,7 +140,7 @@
           dateForm.controls.namePerson.errors.maxlength
         "
         >{{
-          "GENERIC.MAX_CHARACTERS"
+          'GENERIC.MAX_CHARACTERS'
             | translate
               : {
                   maxchar:
@@ -155,7 +155,7 @@
           dateForm.controls.namePerson.errors.minlength
         "
         >{{
-          "GENERIC.MIN_CHARACTERS"
+          'GENERIC.MIN_CHARACTERS'
             | translate
               : {
                   minchar:
@@ -169,7 +169,7 @@
           dateForm.controls.namePerson.invalid &&
           dateForm.controls.namePerson.errors.pattern
         "
-        >{{ "GENERIC.INVALID_FORMAT" | translate: { val: "Email" } }}</mat-error
+        >{{ 'GENERIC.INVALID_FORMAT' | translate: { val: 'Email' } }}</mat-error
       >
     </mat-form-field>
   </form>

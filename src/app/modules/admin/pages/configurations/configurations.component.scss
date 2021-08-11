@@ -1,5 +1,5 @@
-@import "variables";
-@import "general";
+@import 'variables';
+@import 'general';
 
 .table-container {
   overflow: auto;
@@ -10,8 +10,8 @@
   width: 100%;
 
   .highlighted-column {
-    background-color: #FFDEB8;
-    color: #D8821D !important;
+    background-color: #ffdeb8;
+    color: #d8821d !important;
   }
 }
 
@@ -45,7 +45,7 @@ table.setting th {
   }
 
   .super-admin {
-    color: #FFBC6D;
+    color: #ffbc6d;
     font-size: 10px;
     font-family: $font-galano-bold;
   }

@@ -1,23 +1,23 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { NavigationMenuClickerComponent } from "./navigation-menu-clicker.component";
-import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NavigationMenuClickerComponent } from './navigation-menu-clicker.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatDialog,
   MatDialogModule,
   MatDialogRef,
   MAT_DIALOG_DATA,
-} from "@angular/material";
-import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { RouterTestingModule } from "@angular/router/testing";
-import { JwtModule } from "@auth0/angular-jwt";
-import { TranslateModule } from "@ngx-translate/core";
-import { of } from "rxjs";
-import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
-import "zone.js/dist/zone-testing";
-import { AdminModule } from "../../admin.module";
-import { AuthService } from "src/app/services/auth.service";
-import { CdkDragDrop } from "@angular/cdk/drag-drop";
+} from '@angular/material';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { JwtModule } from '@auth0/angular-jwt';
+import { TranslateModule } from '@ngx-translate/core';
+import { of } from 'rxjs';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import 'zone.js/dist/zone-testing';
+import { AdminModule } from '../../admin.module';
+import { AuthService } from 'src/app/services/auth.service';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 export class MatDialogMock {
   open() {
@@ -32,7 +32,7 @@ export class MatDialogMock {
   }
 }
 
-describe("NavigationMenuClickerComponent", () => {
+describe('NavigationMenuClickerComponent', () => {
   let component: NavigationMenuClickerComponent;
   let fixture: ComponentFixture<NavigationMenuClickerComponent>;
 
@@ -41,23 +41,23 @@ describe("NavigationMenuClickerComponent", () => {
     afterClosed: of({}),
     close: null,
   });
-  dialogRefSpyObj.componentInstance = { body: "" }; // attach componentInstance to the spy object...
+  dialogRefSpyObj.componentInstance = { body: '' }; // attach componentInstance to the spy object...
 
-  const mockDialog = jasmine.createSpyObj("MatDialog", [
-    "open",
-    "beforeClosed",
+  const mockDialog = jasmine.createSpyObj('MatDialog', [
+    'open',
+    'beforeClosed',
   ]);
 
-  const mockDialogRef = jasmine.createSpyObj("MatDialogRef", [
-    "close",
-    "afterClosed",
-    "componentInstance",
-    "event ",
-    "beforeClosed",
+  const mockDialogRef = jasmine.createSpyObj('MatDialogRef', [
+    'close',
+    'afterClosed',
+    'componentInstance',
+    'event ',
+    'beforeClosed',
   ]);
 
   let response = {
-    Status: "Success",
+    Status: 'Success',
   };
 
   const dialogMock = {
@@ -67,73 +67,73 @@ describe("NavigationMenuClickerComponent", () => {
 
   const matDialog = new MatDialogMock();
 
-  const mockAuthService = jasmine.createSpyObj("AuthService", [
-    "saveOrderMenus",
-    "saveOrderGrupoMenus",
-    "getMenuClicker",
-    "deleteGroup",
-    "deleteMenu",
-    "saveMenu",
+  const mockAuthService = jasmine.createSpyObj('AuthService', [
+    'saveOrderMenus',
+    'saveOrderGrupoMenus',
+    'getMenuClicker',
+    'deleteGroup',
+    'deleteMenu',
+    'saveMenu',
   ]);
 
   const sectionsLinks = [
     {
       id: 0,
-      description: "Sin Grupo",
-      icon: "",
+      description: 'Sin Grupo',
+      icon: '',
       orderby: null,
       menus: [
         {
           Id: 1,
-          name: "Inicio",
-          route: "/inicio",
+          name: 'Inicio',
+          route: '/inicio',
           orderby: 1,
           idgrupo: null,
-          icon: "tio-link",
+          icon: 'tio-link',
           rol: null,
           active: true,
           menusystem: true,
         },
         {
           Id: 2,
-          name: "Mi perfil",
-          route: "/mi-perfil",
+          name: 'Mi perfil',
+          route: '/mi-perfil',
           orderby: 2,
           idgrupo: null,
-          icon: "tio-link",
+          icon: 'tio-link',
           rol: null,
           active: true,
           menusystem: true,
         },
         {
           Id: 13,
-          name: "Tabla de Comisiones ",
-          route: "/tabla-comisiones",
+          name: 'Tabla de Comisiones ',
+          route: '/tabla-comisiones',
           orderby: 3,
           idgrupo: null,
-          icon: "tio-link",
+          icon: 'tio-link',
           rol: null,
           active: true,
           menusystem: true,
         },
         {
           Id: 66,
-          name: "Negocios",
-          route: "/negocios",
+          name: 'Negocios',
+          route: '/negocios',
           orderby: 3,
           idgrupo: null,
-          icon: "tio-link",
+          icon: 'tio-link',
           rol: null,
           active: true,
           menusystem: false,
         },
         {
           Id: 7,
-          name: "Centro de Ayuda",
-          route: "/centro-de-ayuda",
+          name: 'Centro de Ayuda',
+          route: '/centro-de-ayuda',
           orderby: 5,
           idgrupo: null,
-          icon: "tio-fingerprint",
+          icon: 'tio-fingerprint',
           rol: null,
           active: false,
           menusystem: true,
@@ -142,28 +142,28 @@ describe("NavigationMenuClickerComponent", () => {
     },
     {
       id: 24,
-      description: "Clickam",
-      icon: "tio-dollar",
+      description: 'Clickam',
+      icon: 'tio-dollar',
       orderby: null,
       menus: [
         {
           Id: 4,
-          name: "Blog",
-          route: "/blog",
+          name: 'Blog',
+          route: '/blog',
           orderby: 2,
           idgrupo: 24,
-          icon: "tio-link",
+          icon: 'tio-link',
           rol: null,
           active: true,
           menusystem: true,
         },
         {
           Id: 3,
-          name: "Click Academy",
-          route: "/click-academy",
+          name: 'Click Academy',
+          route: '/click-academy',
           orderby: 6,
           idgrupo: 24,
-          icon: "tio-link",
+          icon: 'tio-link',
           rol: null,
           active: false,
           menusystem: true,
@@ -172,61 +172,61 @@ describe("NavigationMenuClickerComponent", () => {
     },
     {
       id: 23,
-      description: "Herramientas",
+      description: 'Herramientas',
       icon: null,
       orderby: null,
       menus: [
         {
           Id: 52,
-          name: "Refiere y gana",
-          route: "/referidos",
+          name: 'Refiere y gana',
+          route: '/referidos',
           orderby: null,
           idgrupo: 23,
-          icon: "tio-link",
+          icon: 'tio-link',
           rol: null,
           active: false,
           menusystem: false,
         },
         {
           Id: 79,
-          name: "Navegación",
-          route: "/navegacion",
+          name: 'Navegación',
+          route: '/navegacion',
           orderby: null,
           idgrupo: 23,
-          icon: "tio-link",
+          icon: 'tio-link',
           rol: null,
           active: false,
           menusystem: false,
         },
         {
           Id: 5,
-          name: "Biblioteca de Contenido",
-          route: "/biblioteca",
+          name: 'Biblioteca de Contenido',
+          route: '/biblioteca',
           orderby: 5,
           idgrupo: 23,
-          icon: "tio-link",
+          icon: 'tio-link',
           rol: null,
           active: false,
           menusystem: true,
         },
         {
           Id: 8,
-          name: "Reportes",
-          route: "/reportes",
+          name: 'Reportes',
+          route: '/reportes',
           orderby: 7,
           idgrupo: 23,
-          icon: "tio-link",
+          icon: 'tio-link',
           rol: null,
           active: true,
           menusystem: true,
         },
         {
           Id: 12,
-          name: "Historial de Links",
-          route: "/historial-links",
+          name: 'Historial de Links',
+          route: '/historial-links',
           orderby: 8,
           idgrupo: 23,
-          icon: "tio-link",
+          icon: 'tio-link',
           rol: null,
           active: false,
           menusystem: true,
@@ -251,7 +251,7 @@ describe("NavigationMenuClickerComponent", () => {
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
-              return localStorage.getItem("ACCESS_TOKEN");
+              return localStorage.getItem('ACCESS_TOKEN');
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
@@ -275,11 +275,11 @@ describe("NavigationMenuClickerComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it("save order items", () => {
+  it('save order items', () => {
     let data = [
       { id: 1, orderBy: 1 },
       { id: 2, orderBy: 2 },
@@ -290,7 +290,7 @@ describe("NavigationMenuClickerComponent", () => {
     expect(mockAuthService.saveOrderMenus).toHaveBeenCalled();
   });
 
-  it("save order sections", () => {
+  it('save order sections', () => {
     let data = [
       { id: 1, orderBy: 1 },
       { id: 2, orderBy: 2 },
@@ -301,24 +301,23 @@ describe("NavigationMenuClickerComponent", () => {
     expect(mockAuthService.saveOrderGrupoMenus).toHaveBeenCalled();
   });
 
-  it("add section", () => {
+  it('add section', () => {
     component.addSection();
     expect(mockAuthService.getMenuClicker).toHaveBeenCalled();
   });
 
-  it("edit Navigation Group", () => {
+  it('edit Navigation Group', () => {
     component.editNavigationGroup({});
     expect(mockAuthService.getMenuClicker).toHaveBeenCalled();
   });
 
-  it("add Navigation Item", () => {
+  it('add Navigation Item', () => {
     component.addNavigationItem({});
     expect(mockAuthService.getMenuClicker).toHaveBeenCalled();
   });
 
-  it("edit Navigation Item", () => {
+  it('edit Navigation Item', () => {
     component.editNavigationItem({});
     expect(mockAuthService.getMenuClicker).toHaveBeenCalled();
   });
-
 });

@@ -4,10 +4,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'app-faq-group',
   templateUrl: './faq-group.component.html',
-  styleUrls: ['./faq-group.component.scss']
+  styleUrls: ['./faq-group.component.scss'],
 })
 export class FaqGroupComponent implements OnInit {
-
   @Input() section: any;
   @Output() editGroup = new EventEmitter<any>();
   @Output() deleteGroup = new EventEmitter<any>();
@@ -23,7 +22,7 @@ export class FaqGroupComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-      // 
+    //
   }
 
   editFaqGroup() {
@@ -67,5 +66,4 @@ export class FaqGroupComponent implements OnInit {
   changeStateOfItem(faq: any) {
     this.changeState.emit(faq);
   }
-
 }

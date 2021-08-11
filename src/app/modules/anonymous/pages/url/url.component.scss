@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .loader-overlay {
   position: fixed;
@@ -6,7 +6,7 @@
   z-index: 500000;
   height: 100%;
   top: 0;
-  background: rgba(0,0,0,.8);
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .full-container {
@@ -21,8 +21,8 @@
   bottom: 0;
 }
 
-.white{
-    color: #fff;
+.white {
+  color: #fff;
 }
 
 .loader,

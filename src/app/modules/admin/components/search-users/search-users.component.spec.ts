@@ -13,19 +13,16 @@ describe('SearchUsersComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchUsersComponent ],
+      declarations: [SearchUsersComponent],
       imports: [
         ReactiveFormsModule,
         FormsModule,
         AppMaterialModule,
         TranslateModule.forRoot({}),
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
       ],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ]
-    })
-    .compileComponents();
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -39,8 +36,6 @@ describe('SearchUsersComponent', () => {
   });
 
   it('search product', () => {
-    
-    
     spyOn(component.search, 'emit');
     component.searchForm.controls.search.setValue('hello');
     // trigger the click
@@ -48,9 +43,7 @@ describe('SearchUsersComponent', () => {
     const button = nativeElement.querySelector('button');
     button.dispatchEvent(new Event('click'));
     fixture.detectChanges();
- 
+
     expect(component.search.emit).toHaveBeenCalledWith('hello');
   });
-  
-
 });

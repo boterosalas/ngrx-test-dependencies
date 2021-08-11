@@ -2,18 +2,15 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { UtilsService } from 'src/app/services/utils.service';
 import { AuthService } from 'src/app/services/auth.service';
 
-
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss']
+  styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
+  constructor(private utils: UtilsService, public auth: AuthService) {}
 
-  constructor(private utils: UtilsService, public auth: AuthService) { }
-  
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   /**
    * Los host listener se encargan de mostrar los formularios de iniciar sesion, registro, menu

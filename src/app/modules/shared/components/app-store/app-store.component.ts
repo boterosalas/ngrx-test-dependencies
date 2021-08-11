@@ -3,11 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-app-store',
   templateUrl: './app-store.component.html',
-  styleUrls: ['./app-store.component.scss']
+  styleUrls: ['./app-store.component.scss'],
 })
 export class AppStoreComponent implements OnInit {
-
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.detectIos();
@@ -21,5 +20,4 @@ export class AppStoreComponent implements OnInit {
       this.showLogo = false;
     }
   }
-
 }

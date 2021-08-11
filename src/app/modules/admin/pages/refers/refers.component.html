@@ -9,9 +9,9 @@
   <div fxLayout="row" fxLayoutGap="30px">
     <div class="border-radius mat-card mt-3 p-3">
       <h3 class="border-bottom-orange-init">
-        {{ "REFER.CLICKER_COMISSION_TITLE" | translate }}
+        {{ 'REFER.CLICKER_COMISSION_TITLE' | translate }}
       </h3>
-      <p>{{ "REFER.CLICKER_COMISSION_TEXT" | translate }}</p>
+      <p>{{ 'REFER.CLICKER_COMISSION_TEXT' | translate }}</p>
       <form [formGroup]="comissionForm">
         <mat-form-field>
           <input
@@ -31,8 +31,8 @@
               comissionForm.controls.amount.errors.required
             "
             >{{
-              "GENERIC.REQUIRED"
-                | translate: { formValue: "Valor de la comisión" }
+              'GENERIC.REQUIRED'
+                | translate: { formValue: 'Valor de la comisión' }
             }}</mat-error
           >
 
@@ -43,7 +43,7 @@
               comissionForm.controls.amount.errors.maxlength
             "
             >{{
-              "GENERIC.MAX_CHARACTERS"
+              'GENERIC.MAX_CHARACTERS'
                 | translate
                   : {
                       maxchar:
@@ -59,7 +59,7 @@
               comissionForm.controls.amount.invalid &&
               comissionForm.controls.amount.errors.pattern
             "
-            >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+            >{{ 'GENERIC.ONLY_NUMBERS' | translate }}</mat-error
           >
         </mat-form-field>
         <button
@@ -77,9 +77,9 @@
 
     <div class="border-radius mat-card mt-3 p-3">
       <h3 class="border-bottom-orange-init">
-        {{ "REFER.CLICKER_REFERED_TITLE" | translate }}
+        {{ 'REFER.CLICKER_REFERED_TITLE' | translate }}
       </h3>
-      <p>{{ "REFER.CLICKER_REFERED_TEXT" | translate }}</p>
+      <p>{{ 'REFER.CLICKER_REFERED_TEXT' | translate }}</p>
       <form [formGroup]="referedForm">
         <mat-form-field>
           <input
@@ -99,7 +99,7 @@
               referedForm.controls.refered.errors.required
             "
             >{{
-              "GENERIC.REQUIRED" | translate: { formValue: "Valor calificado" }
+              'GENERIC.REQUIRED' | translate: { formValue: 'Valor calificado' }
             }}</mat-error
           >
 
@@ -110,7 +110,7 @@
               referedForm.controls.refered.errors.maxlength
             "
             >{{
-              "GENERIC.MAX_CHARACTERS"
+              'GENERIC.MAX_CHARACTERS'
                 | translate
                   : {
                       maxchar:
@@ -126,7 +126,7 @@
               referedForm.controls.refered.invalid &&
               referedForm.controls.refered.errors.pattern
             "
-            >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+            >{{ 'GENERIC.ONLY_NUMBERS' | translate }}</mat-error
           >
         </mat-form-field>
         <button

@@ -6,14 +6,14 @@ import {
   EventEmitter,
   ViewChild,
   TemplateRef,
-} from "@angular/core";
-import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
-import { MatDialog, MatTable } from "@angular/material";
-import { LinksService } from "src/app/services/links.service";
-import { ActivatedRoute, Router } from "@angular/router";
-import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
-import { ContentService } from "src/app/services/content.service";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+} from '@angular/core';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { MatDialog, MatTable } from '@angular/material';
+import { LinksService } from 'src/app/services/links.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import { ContentService } from 'src/app/services/content.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export interface PeriodicElement {
   drag: any;
@@ -22,9 +22,9 @@ export interface PeriodicElement {
 }
 
 @Component({
-  selector: "app-table-activate-business",
-  templateUrl: "./table-activate-business.component.html",
-  styleUrls: ["./table-activate-business.component.scss"],
+  selector: 'app-table-activate-business',
+  templateUrl: './table-activate-business.component.html',
+  styleUrls: ['./table-activate-business.component.scss'],
 })
 export class TableActivateBusinessComponent implements OnInit {
   dateForm: FormGroup;
@@ -39,27 +39,27 @@ export class TableActivateBusinessComponent implements OnInit {
   @Input() dataSource;
   @Output() activateBusiness = new EventEmitter();
   @Output() updateBusiness = new EventEmitter();
-  @ViewChild("table", { static: false }) table: MatTable<PeriodicElement>;
+  @ViewChild('table', { static: false }) table: MatTable<PeriodicElement>;
 
-  @ViewChild("templateBussiness", { static: false })
+  @ViewChild('templateBussiness', { static: false })
   templateBussiness: TemplateRef<any>;
   idBussinessSelected: number;
-  displayedColumns: string[] = ["drag", "bussiness", "activate", "category"];
+  displayedColumns: string[] = ['drag', 'bussiness', 'activate', 'category'];
   displayedColumnsComision: string[] = [
-    "drag",
-    "bussiness",
-    "comision",
-    "button",
+    'drag',
+    'bussiness',
+    'comision',
+    'button',
   ];
   arrayComision: any[];
   disabledButton: boolean = true;
   formData: FormData = new FormData();
   selectedItem: any;
-  fileImgCat: any = "";
-  nameFileCert: string = "";
+  fileImgCat: any = '';
+  nameFileCert: string = '';
   showErrorCert: boolean;
-  fileImgCat2: any = "";
-  nameFileCert2: string = "";
+  fileImgCat2: any = '';
+  nameFileCert2: string = '';
   showErrorCert2: boolean;
   activebutton: boolean;
   validFormat: boolean;
@@ -102,7 +102,7 @@ export class TableActivateBusinessComponent implements OnInit {
 
   editCategory(element: any) {
     this.router.navigate([
-      "/bussiness-admin",
+      '/bussiness-admin',
       {
         id: element.id,
         titulo: element.description,
@@ -113,7 +113,7 @@ export class TableActivateBusinessComponent implements OnInit {
 
   contentBussiness(contenido: any) {
     this.router.navigate([
-      "/content-admin",
+      '/content-admin',
       {
         id: contenido.id,
         titulo: contenido.description,
@@ -121,10 +121,10 @@ export class TableActivateBusinessComponent implements OnInit {
       },
     ]);
   }
-  
+
   adminComisionBussiness(contenido: any) {
     this.router.navigate([
-      "/manage-comision-admin",
+      '/manage-comision-admin',
       {
         id: contenido.id,
         titulo: contenido.description,
@@ -135,7 +135,7 @@ export class TableActivateBusinessComponent implements OnInit {
 
   comisionTable(item: any) {
     this.router.navigate([
-      "/comision-admin",
+      '/comision-admin',
       {
         id: item.id,
         titulo: item.description,
@@ -145,7 +145,7 @@ export class TableActivateBusinessComponent implements OnInit {
   }
   informationBussiness(item: any) {
     this.router.navigate([
-      "/information-bussiness-admin",
+      '/information-bussiness-admin',
       {
         id: item.id,
         titulo: item.description,
@@ -154,10 +154,10 @@ export class TableActivateBusinessComponent implements OnInit {
     ]);
   }
   private getExtension(nameFile: string, getSize: number) {
-    let splitExt = nameFile.split(".");
+    let splitExt = nameFile.split('.');
     let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
     this.validFormat = false;
-    if (getExt === "svg") {
+    if (getExt === 'svg') {
       this.validFormat = true;
     }
     if (getSize / 1000 > 300) {
@@ -183,10 +183,10 @@ export class TableActivateBusinessComponent implements OnInit {
         this.getExtension(nameFile, sizeFile);
         if (this.validFormat === true) {
           this.fileImgCat = reader.result;
-          this.fileImgCat = this.fileImgCat.split(",")[1];
+          this.fileImgCat = this.fileImgCat.split(',')[1];
           this.nameFileCert = nameFile;
           this.showErrorCert = false;
-          if (this.nameFileCert2 != "") {
+          if (this.nameFileCert2 != '') {
             this.activebutton = true;
           } else {
             this.activebutton = false;
@@ -214,10 +214,10 @@ export class TableActivateBusinessComponent implements OnInit {
         this.getExtension(nameFile, sizeFile);
         if (this.validFormat === true) {
           this.fileImgCat2 = reader.result;
-          this.fileImgCat2 = this.fileImgCat2.split(",")[1];
+          this.fileImgCat2 = this.fileImgCat2.split(',')[1];
           this.nameFileCert2 = nameFile;
           this.showErrorCert2 = false;
-          if (this.nameFileCert != "") {
+          if (this.nameFileCert != '') {
             this.activebutton = true;
           } else {
             this.activebutton = false;
@@ -251,13 +251,13 @@ export class TableActivateBusinessComponent implements OnInit {
       this.selectedItem.excelcommission
     );
     this.dateForm.controls.visible.setValue(this.selectedItem.active);
-    let datos = this.selectedItem.imageurl.split("/");
+    let datos = this.selectedItem.imageurl.split('/');
     this.nameFileCert = datos[datos.length - 1];
     this.nameFileCert2 = this.selectedItem.icondashboard;
     this.activebutton = true;
-    const title = "Editar Negocio";
+    const title = 'Editar Negocio';
     const template = this.templateBussiness;
-    const id = "video-modal";
+    const id = 'video-modal';
     this.dialog.open(ModalGenericComponent, {
       data: {
         id,
@@ -274,10 +274,10 @@ export class TableActivateBusinessComponent implements OnInit {
     this.dateForm.controls.codeReference.setValue(null);
     this.dateForm.controls.visible.setValue(false);
     this.dateForm.controls.generateExcel.setValue(false);
-    this.nameFileCert = "";
-    const title = "Agregar Negocio";
+    this.nameFileCert = '';
+    const title = 'Agregar Negocio';
     const template = this.templateBussiness;
-    const id = "video-modal";
+    const id = 'video-modal';
     this.dialog.open(ModalGenericComponent, {
       data: {
         id,
@@ -299,7 +299,7 @@ export class TableActivateBusinessComponent implements OnInit {
     //this.formData.append('codeReference', this.dateForm.controls.codeReference.value);
     let datos;
     if (this.selectedItem) {
-      if (this.fileImgCat != "" && this.fileImgCat2 != "") {
+      if (this.fileImgCat != '' && this.fileImgCat2 != '') {
         datos = {
           id: this.selectedItem.id,
           description: this.dateForm.controls.nameBussiness.value,
@@ -312,7 +312,7 @@ export class TableActivateBusinessComponent implements OnInit {
           image: this.fileImgCat,
           icondashboardimage: this.fileImgCat2,
         };
-      } else if (this.fileImgCat != "" && this.fileImgCat2 === "") {
+      } else if (this.fileImgCat != '' && this.fileImgCat2 === '') {
         datos = {
           id: this.selectedItem.id,
           description: this.dateForm.controls.nameBussiness.value,
@@ -324,7 +324,7 @@ export class TableActivateBusinessComponent implements OnInit {
           excelCommission: this.dateForm.controls.generateExcel.value,
           image: this.fileImgCat,
         };
-      } else if (this.fileImgCat === "" && this.fileImgCat2 != "") {
+      } else if (this.fileImgCat === '' && this.fileImgCat2 != '') {
         datos = {
           id: this.selectedItem.id,
           description: this.dateForm.controls.nameBussiness.value,
@@ -364,12 +364,12 @@ export class TableActivateBusinessComponent implements OnInit {
 
     this.content.saveBussiness(datos).subscribe((resp) => {
       this.dateForm.reset();
-      this.selectedItem = "";
+      this.selectedItem = '';
       this.dialog.closeAll();
-      this.fileImgCat = "";
-      this.fileImgCat2 = "";
-      this.nameFileCert2 = "";
-      this.nameFileCert = "";
+      this.fileImgCat = '';
+      this.fileImgCat2 = '';
+      this.nameFileCert2 = '';
+      this.nameFileCert = '';
       this.updateBusiness.emit();
     });
   }

@@ -1,6 +1,6 @@
-@import "variables";
-@import "general";
-@import "animations";
+@import 'variables';
+@import 'general';
+@import 'animations';
 
 .card-report-dark {
   background-color: #f1f3f6;
@@ -27,7 +27,7 @@
 .radications-r {
   margin-top: 10px;
   font-size: 11px;
-  color: #8D7EB7;
+  color: #8d7eb7;
   font-family: $font-galano-bold;
   text-transform: uppercase;
 }
@@ -39,7 +39,7 @@
 .norma-data {
   color: #37236a;
   font-size: 16px;
-  img{
+  img {
     position: relative;
     top: 4px;
   }
@@ -57,18 +57,18 @@
   .margin-mobile {
     margin-right: 20px !important;
   }
-  .padding-mobile{
+  .padding-mobile {
     padding-top: 7px;
   }
 }
 .data-detail-color {
   color: #37236a;
 }
-.bold-report{
+.bold-report {
   font-size: $font-galano-bold;
   font-size: 18px;
-  color: #726D7E !important;
+  color: #726d7e !important;
 }
-.size-status{
+.size-status {
   width: 122px;
 }

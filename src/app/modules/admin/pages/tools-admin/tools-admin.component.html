@@ -223,9 +223,12 @@
                 ></mat-slide-toggle>
                 <div *ngIf="element.programmed" class="programmed">
                   <h4>Programada</h4>
-                  <p>{{formatDate(element.datestart)}}</p>
+                  <p>{{ formatDate(element.datestart) }}</p>
                 </div>
-                <div *ngIf="!element.programmed && element.undefinedDate" class="programmed">
+                <div
+                  *ngIf="!element.programmed && element.undefinedDate"
+                  class="programmed"
+                >
                   <h4>Tiempo indefinido</h4>
                 </div>
               </div>
@@ -481,9 +484,12 @@
                 ></mat-slide-toggle>
                 <div *ngIf="element.programmed" class="programmed">
                   <h4>Programada</h4>
-                  <p>{{formatDate(element.datestart)}}</p>
+                  <p>{{ formatDate(element.datestart) }}</p>
                 </div>
-                <div *ngIf="!element.programmed && element.undefinedDate" class="programmed">
+                <div
+                  *ngIf="!element.programmed && element.undefinedDate"
+                  class="programmed"
+                >
                   <h4>Tiempo indefinido</h4>
                 </div>
               </div>
@@ -545,9 +551,8 @@
         <span>Popups</span>
       </ng-template>
       <div class="mt-3">
-        
         <h3 class="popup-category">Activos <span class="line"></span></h3>
-        <app-popup-card 
+        <app-popup-card
           *ngFor="let element of dataPopupActive; let i = index"
           [idPopup]="element.id"
           [title]="element.description"
@@ -561,11 +566,12 @@
           [showHidden]="element.active"
           (edit)="editPopupModal(element)"
           (delete)="deleteOfer($event, 'popup')"
-          (setShowHidden)="activate($event)">
+          (setShowHidden)="activate($event)"
+        >
         </app-popup-card>
 
         <h3 class="popup-category">Programados <span class="line"></span></h3>
-        <app-popup-card 
+        <app-popup-card
           *ngFor="let element of dataPopupProgrammed; let i = index"
           [idPopup]="element.id"
           [title]="element.description"
@@ -579,11 +585,12 @@
           [showHidden]="element.active"
           (edit)="editPopupModal(element)"
           (delete)="deleteOfer($event, 'popup')"
-          (setShowHidden)="activate($event)">
+          (setShowHidden)="activate($event)"
+        >
         </app-popup-card>
 
         <h3 class="popup-category">Borradores <span class="line"></span></h3>
-        <app-popup-card 
+        <app-popup-card
           *ngFor="let element of dataPopupRoughCopy; let i = index"
           [idPopup]="element.id"
           [title]="element.description"
@@ -597,11 +604,12 @@
           [showHidden]="element.active"
           (edit)="editPopupModal(element)"
           (delete)="deleteOfer($event, 'popup')"
-          (setShowHidden)="activate($event)">
+          (setShowHidden)="activate($event)"
+        >
         </app-popup-card>
 
         <h3 class="popup-category">Vencidos <span class="line"></span></h3>
-        <app-popup-card 
+        <app-popup-card
           *ngFor="let element of dataPopupExpire; let i = index"
           [idPopup]="element.id"
           [title]="element.description"
@@ -615,7 +623,8 @@
           [showHidden]="element.active"
           (edit)="editPopupModal(element)"
           (delete)="deleteOfer($event, 'popup')"
-          (setShowHidden)="activate($event)">
+          (setShowHidden)="activate($event)"
+        >
         </app-popup-card>
 
         <div class="mt-3 mb-3" fxLayout="row" fxLayoutAlign="end end">
@@ -663,8 +672,8 @@
               dataAddImagen.controls.nameContent.errors.required
             "
             >{{
-              "GENERIC.REQUIRED"
-                | translate: { formValue: "Nombre de contenido" }
+              'GENERIC.REQUIRED'
+                | translate: { formValue: 'Nombre de contenido' }
             }}</mat-error
           >
         </mat-form-field>
@@ -685,7 +694,7 @@
               dataAddImagen.controls.link.errors.required
             "
             >{{
-              "GENERIC.REQUIRED" | translate: { formValue: "Link" }
+              'GENERIC.REQUIRED' | translate: { formValue: 'Link' }
             }}</mat-error
           >
         </mat-form-field>
@@ -706,7 +715,7 @@
               dataAddImagen.controls.business.errors.required
             "
             >{{
-              "GENERIC.REQUIRED" | translate: { formValue: "Negocio" }
+              'GENERIC.REQUIRED' | translate: { formValue: 'Negocio' }
             }}</mat-error
           >
         </mat-form-field>
@@ -728,7 +737,7 @@
               dataAddImagen.controls.comision.errors.required
             "
             >{{
-              "GENERIC.REQUIRED" | translate: { formValue: "Comisión" }
+              'GENERIC.REQUIRED' | translate: { formValue: 'Comisión' }
             }}</mat-error
           >
         </mat-form-field>
@@ -754,7 +763,7 @@
               class="file-input"
               *ngIf="nameFileCert !== ''"
               style="color: #37236a; font-size: 11px"
-              >{{ nameFileCert | truncate: "20" }}</span
+              >{{ nameFileCert | truncate: '20' }}</span
             >
           </div>
           <div>
@@ -815,7 +824,7 @@
               class="file-input"
               *ngIf="nameFileCert2 !== ''"
               style="color: #37236a; font-size: 11px"
-              >{{ nameFileCert2 | truncate: "20" }}</span
+              >{{ nameFileCert2 | truncate: '20' }}</span
             >
           </div>
           <div>
@@ -868,7 +877,12 @@
         (click)="saveImagenCarousel()"
         id="download-users"
         class="ml-2"
-        [disabled]="!dataAddImagen.valid || !activebutton || (!visible && !datePublication) || (!visible && !undefinedDate && !dateFinishPublication)"
+        [disabled]="
+          !dataAddImagen.valid ||
+          !activebutton ||
+          (!visible && !datePublication) ||
+          (!visible && !undefinedDate && !dateFinishPublication)
+        "
       >
         Guardar Cambios
       </button>
@@ -897,8 +911,8 @@
               dataAddImagenOfertas.controls.nameContent.errors.required
             "
             >{{
-              "GENERIC.REQUIRED"
-                | translate: { formValue: "Nombre de contenido" }
+              'GENERIC.REQUIRED'
+                | translate: { formValue: 'Nombre de contenido' }
             }}</mat-error
           >
         </mat-form-field>
@@ -919,7 +933,7 @@
               dataAddImagenOfertas.controls.link.errors.required
             "
             >{{
-              "GENERIC.REQUIRED" | translate: { formValue: "Link" }
+              'GENERIC.REQUIRED' | translate: { formValue: 'Link' }
             }}</mat-error
           >
         </mat-form-field>
@@ -940,7 +954,7 @@
               dataAddImagenOfertas.controls.business.errors.required
             "
             >{{
-              "GENERIC.REQUIRED" | translate: { formValue: "Negocio" }
+              'GENERIC.REQUIRED' | translate: { formValue: 'Negocio' }
             }}</mat-error
           >
         </mat-form-field>
@@ -961,7 +975,7 @@
               dataAddImagenOfertas.controls.comision.errors.required
             "
             >{{
-              "GENERIC.REQUIRED" | translate: { formValue: "Comisión" }
+              'GENERIC.REQUIRED' | translate: { formValue: 'Comisión' }
             }}</mat-error
           >
         </mat-form-field>
@@ -987,7 +1001,7 @@
               class="file-input"
               *ngIf="nameFileCert !== ''"
               style="color: #37236a; font-size: 11px"
-              >{{ nameFileCert | truncate: "20" }}</span
+              >{{ nameFileCert | truncate: '20' }}</span
             >
           </div>
           <div>
@@ -1040,7 +1054,12 @@
         (click)="saveImagenOfertas()"
         id="download-users"
         class="ml-2"
-        [disabled]="!dataAddImagenOfertas.valid || !activeButtonOfer || (!visible && !datePublication) || (!visible && !undefinedDate && !dateFinishPublication)"
+        [disabled]="
+          !dataAddImagenOfertas.valid ||
+          !activeButtonOfer ||
+          (!visible && !datePublication) ||
+          (!visible && !undefinedDate && !dateFinishPublication)
+        "
       >
         Guardar Cambios
       </button>
@@ -1069,8 +1088,7 @@
               dataAddImagenPopup.controls.nameContent.errors.required
             "
             >{{
-              "GENERIC.REQUIRED"
-                | translate: { formValue: "Nombre" }
+              'GENERIC.REQUIRED' | translate: { formValue: 'Nombre' }
             }}</mat-error
           >
         </mat-form-field>
@@ -1101,11 +1119,11 @@
               dataAddImagenPopup.controls.seccion.errors.required
             "
             >{{
-              "GENERIC.REQUIRED" | translate: { formValue: "Ubicación" }
+              'GENERIC.REQUIRED' | translate: { formValue: 'Ubicación' }
             }}</mat-error
           >
         </mat-form-field>
-        <mat-form-field style="width: 225px; margin-right: 15px;">
+        <mat-form-field style="width: 225px; margin-right: 15px">
           <input
             matInput
             placeholder="Texto del botón"
@@ -1122,7 +1140,7 @@
               dataAddImagenPopup.controls.textbutton.errors.required
             "
             >{{
-              "GENERIC.REQUIRED" | translate: { formValue: "Comisión" }
+              'GENERIC.REQUIRED' | translate: { formValue: 'Comisión' }
             }}</mat-error
           >
         </mat-form-field>
@@ -1140,8 +1158,11 @@
               *ngFor="let selected of selectedColors"
               value="{{ selected.color }}"
             >
-              <span [style.backgroundColor]="selected.color" class="circle"></span>
-              <span style="color: #726D7E">{{ selected.name }}</span>
+              <span
+                [style.backgroundColor]="selected.color"
+                class="circle"
+              ></span>
+              <span style="color: #726d7e">{{ selected.name }}</span>
             </mat-option>
           </mat-select>
           <mat-error
@@ -1150,9 +1171,7 @@
               dataAddImagenPopup.controls.colorbutton.invalid &&
               dataAddImagenPopup.controls.colorbutton.errors.required
             "
-            >{{
-              "GENERIC.REQUIRED" | translate: { formValue: "" }
-            }}</mat-error
+            >{{ 'GENERIC.REQUIRED' | translate: { formValue: '' } }}</mat-error
           >
         </mat-form-field>
 
@@ -1177,7 +1196,7 @@
               class="file-input"
               *ngIf="nameFileCert !== ''"
               style="color: #37236a; font-size: 11px"
-              >{{ nameFileCert | truncate: "20" }}</span
+              >{{ nameFileCert | truncate: '20' }}</span
             >
           </div>
           <div>
@@ -1226,7 +1245,8 @@
         >
           <div fxLayout="column" fxLayoutAlign="center" class="space">
             <strong class="title-gray" style="color: #a7a3b1; font-size: 11px"
-              >ADJUNTAR IMAGEN MOBILE (300x420px, formato .jpg, max 150kb)</strong
+              >ADJUNTAR IMAGEN MOBILE (300x420px, formato .jpg, max
+              150kb)</strong
             >
             <span
               class="title-secondary"
@@ -1238,7 +1258,7 @@
               class="file-input"
               *ngIf="nameFileCert2 !== ''"
               style="color: #37236a; font-size: 11px"
-              >{{ nameFileCert2 | truncate: "20" }}</span
+              >{{ nameFileCert2 | truncate: '20' }}</span
             >
           </div>
           <div>
@@ -1291,13 +1311,18 @@
         (click)="saveImagenPopup()"
         id="download-users"
         class="ml-2"
-        [disabled]="!dataAddImagenPopup.valid || !activeButtonOfer || (visible && !dateFinishPublication)"
+        [disabled]="
+          !dataAddImagenPopup.valid ||
+          !activeButtonOfer ||
+          (visible && !dateFinishPublication)
+        "
       >
-        {{ visible 
-          ? 'Publicar' 
-          : (datePublication && dateFinishPublication
-            ? 'Programar' 
-            : 'Guardar como borrador') 
+        {{
+          visible
+            ? 'Publicar'
+            : datePublication && dateFinishPublication
+            ? 'Programar'
+            : 'Guardar como borrador'
         }}
       </button>
     </div>
@@ -1322,11 +1347,7 @@
           FECHA DE PUBLICACIÓN
         </label>
         <div class="mt-2 content-input">
-          <mat-datepicker
-            class="icon-date"
-            touchUi
-            #picker
-          ></mat-datepicker>
+          <mat-datepicker class="icon-date" touchUi #picker></mat-datepicker>
           <mat-datepicker-toggle
             class="icon-date"
             matSuffix
@@ -1348,14 +1369,10 @@
         </div>
       </div>
       <div class="post-time">
-        <label class="label-up-text mt-2">
-          HORA DE PUBLICACIÓN
-        </label>
+        <label class="label-up-text mt-2"> HORA DE PUBLICACIÓN </label>
         <div class="mt-2 content-input">
           <mat-icon *ngIf="!visible" class="tio-watch_later"></mat-icon>
-          <mat-icon *ngIf="visible" class="tio-watch_later opaque"
-            ></mat-icon
-          >
+          <mat-icon *ngIf="visible" class="tio-watch_later opaque"></mat-icon>
           <input
             [ngModelOptions]="{ standalone: true }"
             [disabled]="visible"
@@ -1381,7 +1398,7 @@
       </mat-checkbox>
       <label class="undefined-time" for="undefined-time">
         Tiempo indefinido
-      </label> 
+      </label>
     </span>
     <div class="finish-date-range">
       <div class="finish-date">
@@ -1389,11 +1406,7 @@
           FECHA DE FINALIZACIÓN
         </label>
         <div class="mt-2 content-input">
-          <mat-datepicker
-            class="icon-date"
-            touchUi
-            #pickerF
-          ></mat-datepicker>
+          <mat-datepicker class="icon-date" touchUi #pickerF></mat-datepicker>
           <mat-datepicker-toggle
             class="icon-date"
             matSuffix
@@ -1415,12 +1428,16 @@
         </div>
       </div>
       <div class="ending-time">
-        <label class="label-up-text mt-2">
-          HORA DE FINALIZACIÓN
-        </label>
+        <label class="label-up-text mt-2"> HORA DE FINALIZACIÓN </label>
         <div class="mt-2 content-input">
-          <mat-icon *ngIf="!showUndefinedDate || (!undefinedDate && !visible)" class="tio-watch_later"></mat-icon>
-          <mat-icon *ngIf="showUndefinedDate && (undefinedDate || visible)" class="tio-watch_later opaque"></mat-icon>
+          <mat-icon
+            *ngIf="!showUndefinedDate || (!undefinedDate && !visible)"
+            class="tio-watch_later"
+          ></mat-icon>
+          <mat-icon
+            *ngIf="showUndefinedDate && (undefinedDate || visible)"
+            class="tio-watch_later opaque"
+          ></mat-icon>
           <input
             [ngModelOptions]="{ standalone: true }"
             [disabled]="showUndefinedDate && (undefinedDate || visible)"

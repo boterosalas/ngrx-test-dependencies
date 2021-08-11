@@ -17,13 +17,10 @@ describe('DeleteformComponent', () => {
   let component: DeleteformComponent;
   let fixture: ComponentFixture<DeleteformComponent>;
   const dialogMock = {
-    close: () => { },
-    beforeClosed: () => { }
+    close: () => {},
+    beforeClosed: () => {},
   };
-  const mockDialog = jasmine.createSpyObj("MatDialog", [
-    "open",
-    "closeAll"
-  ]);
+  const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll']);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [DeleteformComponent, TruncatePipe],
@@ -44,20 +41,17 @@ describe('DeleteformComponent', () => {
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
-            blacklistedRoutes: []
-          }
-        })
+            blacklistedRoutes: [],
+          },
+        }),
       ],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: dialogMock },
         { provide: MatDialog, useValue: mockDialog },
       ],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ],
-    })
-      .compileComponents();
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -71,6 +65,6 @@ describe('DeleteformComponent', () => {
     component.cancelDelete();
     component.checkSurvey();
     component.deleteAccount();
-    component.changeValue("Dato");
+    component.changeValue('Dato');
   });
 });

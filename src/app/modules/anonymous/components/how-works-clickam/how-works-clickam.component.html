@@ -1,5 +1,5 @@
 <h3 class="text-center" ngClass.gt-xs="f-23" ngClass.xs="f-18">
-  {{ "HOME.HOW_WORKS" | translate }}
+  {{ 'HOME.HOW_WORKS' | translate }}
 </h3>
 
 <div
@@ -25,7 +25,11 @@
 >
   <div ngxSlickItem *ngFor="let item of works">
     <span fxLayout="column" class="card">
-      <img class="imagen-how-works-mobile" [src]="item.icon" [alt]="item.title" />
+      <img
+        class="imagen-how-works-mobile"
+        [src]="item.icon"
+        [alt]="item.title"
+      />
       <p class="purple-text text-center f-14">{{ item.title }}</p>
     </span>
   </div>

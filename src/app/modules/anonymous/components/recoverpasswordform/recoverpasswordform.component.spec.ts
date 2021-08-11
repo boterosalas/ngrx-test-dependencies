@@ -19,33 +19,31 @@ describe('RecoverpasswordformComponent', () => {
   let component: RecoverpasswordformComponent;
   let fixture: ComponentFixture<RecoverpasswordformComponent>;
 
-  const mockAuthService= jasmine.createSpyObj("AuthService", [
-  "recoverPassword"
+  const mockAuthService = jasmine.createSpyObj('AuthService', [
+    'recoverPassword',
   ]);
 
   const Success = {
-    state: "Success",
-    userMessage: null
-  }
+    state: 'Success',
+    userMessage: null,
+  };
 
   const ErrorService = {
-    state: "Error",
-    userMessage: null
-  }
+    state: 'Error',
+    userMessage: null,
+  };
 
   const InvalidRquest = {
-    state: "Error",
-    error:{
-      userMessage: 'Internal server error'
-    }
-  }
-
+    state: 'Error',
+    error: {
+      userMessage: 'Internal server error',
+    },
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ 
-       ],
-       imports: [
+      declarations: [],
+      imports: [
         ReactiveFormsModule,
         AnonymousModule,
         FormsModule,
@@ -58,15 +56,12 @@ describe('RecoverpasswordformComponent', () => {
         MatPasswordStrengthModule,
         SharedModule,
         RouterTestingModule.withRoutes([
-          { path: 'inicio', component: HomeComponent},
-          { path: 'clicker', component: HomeComponent},
+          { path: 'inicio', component: HomeComponent },
+          { path: 'clicker', component: HomeComponent },
         ]),
-       ],
-       providers: [
-         {provide: AuthService, useValue: mockAuthService}
-       ]
-    })
-    .compileComponents();
+      ],
+      providers: [{ provide: AuthService, useValue: mockAuthService }],
+    }).compileComponents();
     mockAuthService.recoverPassword.and.returnValue(of(Success));
   }));
 
@@ -81,53 +76,49 @@ describe('RecoverpasswordformComponent', () => {
   });
 
   it('recover password', () => {
-    spyOn(Swal,"fire").and.returnValue(Promise.resolve<any>({
-      title: "Se ha enviado un email",
-      text: 'texto enviado',
-      confirmButtonText: "Aceptar",
-      confirmButtonClass: 'accept-forgot-alert-success',
-      type: "success"
-    }));
-    component.code= "123456";
+    spyOn(Swal, 'fire').and.returnValue(
+      Promise.resolve<any>({
+        title: 'Se ha enviado un email',
+        text: 'texto enviado',
+        confirmButtonText: 'Aceptar',
+        confirmButtonClass: 'accept-forgot-alert-success',
+        type: 'success',
+      })
+    );
+    component.code = '123456';
     component.recoverPasswordForm.controls.password.setValue('123456');
     component.recoverPasswordForm.controls.confirmPassword.setValue('123456');
     component.recoverPassword();
     expect(mockAuthService.recoverPassword).toHaveBeenCalled();
   });
 
-
   describe('Inavlid recover password', () => {
-
-
-    beforeEach(function() {
+    beforeEach(function () {
       mockAuthService.recoverPassword.and.returnValue(of(ErrorService));
     });
 
     it('recover password', () => {
-      component.code= "123456";
+      component.code = '123456';
       component.recoverPasswordForm.controls.password.setValue('1234567');
       component.recoverPasswordForm.controls.confirmPassword.setValue('123456');
       component.recoverPassword();
       expect(mockAuthService.recoverPassword).toHaveBeenCalled();
     });
-
   });
 
   describe('Inavlid request', () => {
-
-    beforeEach(function() {
-      mockAuthService.recoverPassword.and.returnValue(throwError(InvalidRquest));
+    beforeEach(function () {
+      mockAuthService.recoverPassword.and.returnValue(
+        throwError(InvalidRquest)
+      );
     });
 
     it('recover password invalid request', () => {
-      component.code= "123456";
+      component.code = '123456';
       component.recoverPasswordForm.controls.password.setValue('1234567');
       component.recoverPasswordForm.controls.confirmPassword.setValue('123456');
       component.recoverPassword();
       expect(mockAuthService.recoverPassword).toHaveBeenCalled();
     });
-
   });
-  
-  
 });

@@ -1,4 +1,9 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import {
+  async,
+  ComponentFixture,
+  TestBed,
+  inject,
+} from '@angular/core/testing';
 
 import { FooterComponent } from './footer.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -11,14 +16,11 @@ import { Router } from '@angular/router';
 describe('FooterComponent', () => {
   let component: FooterComponent;
   let fixture: ComponentFixture<FooterComponent>;
-  
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ 
-        FooterComponent,
-       ],
-       imports: [
+      declarations: [FooterComponent],
+      imports: [
         HttpClientTestingModule,
         RouterTestingModule,
         TranslateModule.forRoot(),
@@ -29,20 +31,19 @@ describe('FooterComponent', () => {
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
-            blacklistedRoutes: []
-          }
-        })
-       ],
-       schemas: [
-         NO_ERRORS_SCHEMA
-       ]
-
-    })
-    .compileComponents();
+            blacklistedRoutes: [],
+          },
+        }),
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
-    localStorage.setItem('ACCESS_TOKEN', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU');
+    localStorage.setItem(
+      'ACCESS_TOKEN',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU'
+    );
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -57,6 +58,4 @@ describe('FooterComponent', () => {
     component.goTerms();
     expect(router.navigate).toHaveBeenCalledWith(['/terminos-y-condiciones']);
   }));
-  
-
 });

@@ -1,6 +1,6 @@
 <app-top title="Registro" (close)="hideRegister()"></app-top>
 
-<h3 class="text-center f-22">{{ "REGISTER.REGISTER_ACCOUNT" | translate }}</h3>
+<h3 class="text-center f-22">{{ 'REGISTER.REGISTER_ACCOUNT' | translate }}</h3>
 
 <form
   class="register-container"
@@ -22,7 +22,7 @@
         registerForm.controls.name.invalid &&
         registerForm.controls.name.errors.required
       "
-      >{{ "GENERIC.REQUIRED" | translate: { formValue: "Nombre" } }}</mat-error
+      >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Nombre' } }}</mat-error
     >
 
     <mat-error
@@ -32,7 +32,7 @@
         registerForm.controls.name.errors.maxlength
       "
       >{{
-        "GENERIC.MAX_CHARACTERS"
+        'GENERIC.MAX_CHARACTERS'
           | translate
             : {
                 maxchar:
@@ -47,7 +47,7 @@
         registerForm.controls.name.invalid &&
         registerForm.controls.name.errors.pattern
       "
-      >{{ "GENERIC.INVALID_FORMAT" | translate: { val: "Nombre" } }}</mat-error
+      >{{ 'GENERIC.INVALID_FORMAT' | translate: { val: 'Nombre' } }}</mat-error
     >
   </mat-form-field>
 
@@ -67,7 +67,7 @@
         registerForm.controls.lastName.errors.required
       "
       >{{
-        "GENERIC.REQUIRED" | translate: { formValue: "Apellidos" }
+        'GENERIC.REQUIRED' | translate: { formValue: 'Apellidos' }
       }}</mat-error
     >
 
@@ -78,7 +78,7 @@
         registerForm.controls.lastName.errors.maxlength
       "
       >{{
-        "GENERIC.MAX_CHARACTERS"
+        'GENERIC.MAX_CHARACTERS'
           | translate
             : {
                 maxchar:
@@ -94,7 +94,7 @@
         registerForm.controls.lastName.errors.pattern
       "
       >{{
-        "GENERIC.INVALID_FORMAT" | translate: { val: "Apellidos" }
+        'GENERIC.INVALID_FORMAT' | translate: { val: 'Apellidos' }
       }}</mat-error
     >
   </mat-form-field>
@@ -106,7 +106,7 @@
       formControlName="idType"
       required
     >
-      <mat-option>{{ "REGISTER.ID_TYPE" | translate }}</mat-option>
+      <mat-option>{{ 'REGISTER.ID_TYPE' | translate }}</mat-option>
       <mat-option *ngFor="let typeId of idUserType" value="{{ typeId.id }}">{{
         typeId.value
       }}</mat-option>
@@ -114,7 +114,7 @@
     <mat-error
       id="requiredTypeId"
       *ngIf="registerForm.controls.idType.invalid"
-      >{{ "GENERIC.REQUIRED" | translate: { formValue: "" } }}</mat-error
+      >{{ 'GENERIC.REQUIRED' | translate: { formValue: '' } }}</mat-error
     >
   </mat-form-field>
 
@@ -136,7 +136,7 @@
         registerForm.controls.id.errors.required
       "
       >{{
-        "GENERIC.REQUIRED" | translate: { formValue: "Número de documento" }
+        'GENERIC.REQUIRED' | translate: { formValue: 'Número de documento' }
       }}</mat-error
     >
 
@@ -147,7 +147,7 @@
         registerForm.controls.id.errors.maxlength
       "
       >{{
-        "GENERIC.MAX_CHARACTERS"
+        'GENERIC.MAX_CHARACTERS'
           | translate
             : {
                 maxchar:
@@ -162,7 +162,7 @@
         registerForm.controls.id.invalid &&
         registerForm.controls.id.errors.pattern
       "
-      >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+      >{{ 'GENERIC.ONLY_NUMBERS' | translate }}</mat-error
     >
   </mat-form-field>
 
@@ -182,7 +182,7 @@
         registerForm.controls.phone.invalid &&
         registerForm.controls.phone.errors.required
       "
-      >{{ "GENERIC.REQUIRED" | translate: { formValue: "Celular" } }}</mat-error
+      >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Celular' } }}</mat-error
     >
 
     <mat-error
@@ -192,7 +192,7 @@
         registerForm.controls.phone.errors.minlength
       "
       >{{
-        "GENERIC.MIN_CHARACTERS"
+        'GENERIC.MIN_CHARACTERS'
           | translate
             : {
                 minchar:
@@ -208,7 +208,7 @@
         registerForm.controls.phone.errors.maxlength
       "
       >{{
-        "GENERIC.MAX_CHARACTERS"
+        'GENERIC.MAX_CHARACTERS'
           | translate
             : {
                 maxchar:
@@ -223,7 +223,7 @@
         registerForm.controls.phone.invalid &&
         registerForm.controls.phone.errors.pattern
       "
-      >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+      >{{ 'GENERIC.ONLY_NUMBERS' | translate }}</mat-error
     >
   </mat-form-field>
 
@@ -238,7 +238,7 @@
       required
     />
     <mat-error id="invalidEmail" *ngIf="registerForm.controls.email.invalid">{{
-      "LOGIN.INVALID_EMAIL" | translate: { formValue: "Email" }
+      'LOGIN.INVALID_EMAIL' | translate: { formValue: 'Email' }
     }}</mat-error>
   </mat-form-field>
 
@@ -257,12 +257,12 @@
     <mat-error
       id="patternEmail"
       *ngIf="registerForm.controls.confirmEmail.invalid"
-      >{{ "GENERIC.CONFIRM_EMAIL_PATTERN" | translate }}</mat-error
+      >{{ 'GENERIC.CONFIRM_EMAIL_PATTERN' | translate }}</mat-error
     >
   </mat-form-field>
 
   <mat-form-field style="width: 100%">
-    <mat-label>{{ "GENERIC.PASSWORD" | translate }}</mat-label>
+    <mat-label>{{ 'GENERIC.PASSWORD' | translate }}</mat-label>
     <mat-pass-toggle-visibility
       #toggleVisbility
       matSuffix
@@ -285,7 +285,7 @@
         registerForm.controls.password.errors.required
       "
       >{{
-        "GENERIC.REQUIRED" | translate: { formValue: "Contraseña" }
+        'GENERIC.REQUIRED' | translate: { formValue: 'Contraseña' }
       }}</mat-error
     >
 
@@ -296,7 +296,7 @@
         registerForm.controls.password.errors.minlength
       "
       >{{
-        "GENERIC.MIN_CHARACTERS"
+        'GENERIC.MIN_CHARACTERS'
           | translate
             : {
                 minchar:
@@ -312,7 +312,7 @@
         registerForm.controls.password.errors.maxlength
       "
       >{{
-        "GENERIC.MAX_CHARACTERS"
+        'GENERIC.MAX_CHARACTERS'
           | translate
             : {
                 maxchar:
@@ -327,7 +327,7 @@
         registerForm.controls.password.invalid &&
         registerForm.controls.password.errors.pattern
       "
-      >{{ "GENERIC.PASSWORD_PATTERN" | translate }}</mat-error
+      >{{ 'GENERIC.PASSWORD_PATTERN' | translate }}</mat-error
     >
   </mat-form-field>
   <div>
@@ -360,7 +360,7 @@
         registerForm.get('confirmPassword').errors &&
         registerForm.get('confirmPassword').errors.ConfirmPassword
       "
-      >{{ "REGISTER.PASSWORD_NOT_MATCH" | translate }}</mat-error
+      >{{ 'REGISTER.PASSWORD_NOT_MATCH' | translate }}</mat-error
     >
 
     <mat-error
@@ -370,7 +370,7 @@
         registerForm.controls.confirmPassword.errors.required
       "
       >{{
-        "GENERIC.REQUIRED" | translate: { formValue: "Contraseña" }
+        'GENERIC.REQUIRED' | translate: { formValue: 'Contraseña' }
       }}</mat-error
     >
 
@@ -381,7 +381,7 @@
         registerForm.controls.confirmPassword.errors.minlength
       "
       >{{
-        "GENERIC.MIN_CHARACTERS"
+        'GENERIC.MIN_CHARACTERS'
           | translate
             : {
                 minchar:
@@ -398,7 +398,7 @@
         registerForm.controls.confirmPassword.errors.maxlength
       "
       >{{
-        "GENERIC.MAX_CHARACTERS"
+        'GENERIC.MAX_CHARACTERS'
           | translate
             : {
                 maxchar:
@@ -420,23 +420,33 @@
       </mat-checkbox>
     </span>
     <span
-      class="accept-terms ml-2 cursor-pointer gtmResgistraTuCuentaClicAceptarTerminosPoliticas"
+      class="
+        accept-terms
+        ml-2
+        cursor-pointer
+        gtmResgistraTuCuentaClicAceptarTerminosPoliticas
+      "
       (click)="termsAndConditions()"
     >
-      {{ "REGISTER.ACCEPT" | translate }}
+      {{ 'REGISTER.ACCEPT' | translate }}
     </span>
   </div>
 
   <button
     mat-raised-button
     id="register"
-    class="mt-2 center button button-height button-100 gtmRegistraTuCuentaClicContinuarDatosPrincipales"
+    class="
+      mt-2
+      center
+      button button-height button-100
+      gtmRegistraTuCuentaClicContinuarDatosPrincipales
+    "
     color="orange"
     (click)="register()"
     [disabled]="!registerForm.valid"
   >
     <span class="gtmRegistraTuCuentaClicContinuarDatosPrincipales">{{
-      "GENERIC.CONTINUE" | translate
+      'GENERIC.CONTINUE' | translate
     }}</span>
   </button>
 </form>
@@ -457,6 +467,6 @@
     color="orange"
     (click)="acceptModal()"
   >
-    {{ "GENERIC.ACCEPT" | translate }}
+    {{ 'GENERIC.ACCEPT' | translate }}
   </button>
 </ng-template>

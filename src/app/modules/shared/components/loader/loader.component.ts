@@ -6,22 +6,22 @@ import { LoaderState } from 'src/app/interfaces/loader-state';
 @Component({
   selector: 'app-loader',
   templateUrl: './loader.component.html',
-  styleUrls: ['./loader.component.scss']
+  styleUrls: ['./loader.component.scss'],
 })
 export class LoaderComponent implements OnInit, OnDestroy {
   show = false;
   private subscription: Subscription;
-  constructor(private loaderService: LoaderService) { }
+  constructor(private loaderService: LoaderService) {}
   ngOnInit() {
-
     /**
      * metodo para mostrar el loader del sitio
      */
 
-    this.subscription = this.loaderService.loaderState
-    .subscribe((state: LoaderState) => {
-      this.show = state.show;
-    });
+    this.subscription = this.loaderService.loaderState.subscribe(
+      (state: LoaderState) => {
+        this.show = state.show;
+      }
+    );
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

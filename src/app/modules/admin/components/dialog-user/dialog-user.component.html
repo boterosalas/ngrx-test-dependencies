@@ -109,7 +109,7 @@
           <p fxLayout="row">
             <span class="galano-bold gray w-label">FECHA DE CARGA</span>
             <span class="normal-text" *ngIf="data.typeBankAccount === '1'">
-              {{ data.AntdateCertBank | date: "yyyy-MM-dd" }}</span
+              {{ data.AntdateCertBank | date: 'yyyy-MM-dd' }}</span
             >
           </p>
         </div>
@@ -145,10 +145,10 @@
               data.extensionIdentificationCard1
             }}</span>
             <span class="wx-label normal-text">{{
-              data.AntdateCed1 | date: "yyyy/MM/dd hh:mm:ss"
+              data.AntdateCed1 | date: 'yyyy/MM/dd hh:mm:ss'
             }}</span>
             <span class="wx-label normal-text">{{
-              data.dateCed1 | date: "yyyy/MM/dd hh:mm:ss"
+              data.dateCed1 | date: 'yyyy/MM/dd hh:mm:ss'
             }}</span>
           </p>
           <p fxLayout="row">
@@ -176,10 +176,10 @@
               data.extensionIdentificationCard2
             }}</span>
             <span class="wx-label normal-text">{{
-              data.AntdateCed2 | date: "yyyy/MM/dd hh:mm:ss"
+              data.AntdateCed2 | date: 'yyyy/MM/dd hh:mm:ss'
             }}</span>
             <span class="wx-label normal-text">{{
-              data.dateCed2 | date: "yyyy/MM/dd hh:mm:ss"
+              data.dateCed2 | date: 'yyyy/MM/dd hh:mm:ss'
             }}</span>
           </p>
           <p fxLayout="row">
@@ -207,10 +207,10 @@
               data.extensionBankCertificate
             }}</span>
             <span class="wx-label normal-text">{{
-              data.AntdateCertBank | date: "yyyy/MM/dd hh:mm:ss"
+              data.AntdateCertBank | date: 'yyyy/MM/dd hh:mm:ss'
             }}</span>
             <span class="wx-label normal-text">{{
-              data.dateCertBank | date: "yyyy/MM/dd hh:mm:ss"
+              data.dateCertBank | date: 'yyyy/MM/dd hh:mm:ss'
             }}</span>
           </p>
           <p fxLayout="row">
@@ -236,10 +236,10 @@
             </span>
             <span class="s-label normal-text">{{ data.extensionRUT }}</span>
             <span class="wx-label normal-text">{{
-              data.AntdateRUT | date: "yyyy/MM/dd hh:mm:ss"
+              data.AntdateRUT | date: 'yyyy/MM/dd hh:mm:ss'
             }}</span>
             <span class="wx-label normal-text">{{
-              data.dateRUT | date: "yyyy/MM/dd hh:mm:ss"
+              data.dateRUT | date: 'yyyy/MM/dd hh:mm:ss'
             }}</span>
           </p>
           <button
@@ -248,7 +248,7 @@
             mat-raised-button
             color="orange"
           >
-            {{ "USERS.DOWNLOAD_SELECT" | translate }}
+            {{ 'USERS.DOWNLOAD_SELECT' | translate }}
             <i class="tio-download_from_cloud style-icon-download"></i>
           </button>
         </div>
@@ -337,7 +337,7 @@
               {{
                 this.enableRejectionMessage && this.data.responseAccountBank
                   ? this.data.responseAccountBank
-                  : "-"
+                  : '-'
               }}
             </p>
           </div>
@@ -501,7 +501,7 @@
                     : 'm-0 text-font'
                 "
               >
-                {{ element.comisiones | currency: "":"symbol":"1.0-0" }}
+                {{ element.comisiones | currency: '':'symbol':'1.0-0' }}
               </p>
             </div>
           </td>
@@ -531,7 +531,7 @@
                     : 'm-0 text-font'
                 "
               >
-                {{ element.ventas | currency: "":"symbol":"1.0-0" }}
+                {{ element.ventas | currency: '':'symbol':'1.0-0' }}
               </p>
             </div>
           </td>
@@ -549,13 +549,13 @@
     <div class="card-blue mt-2" fxLayout="row">
       <div class="span-corte" fxLayout="row">
         <b class="mr-2"
-          >ÚLTIMO PAGO ({{ dateLastPayment | date: "yyyy-MM-dd" }})</b
+          >ÚLTIMO PAGO ({{ dateLastPayment | date: 'yyyy-MM-dd' }})</b
         >
-        <p>{{ afterPayment | currency: "":"symbol":"1.0-0" }}</p>
+        <p>{{ afterPayment | currency: '':'symbol':'1.0-0' }}</p>
       </div>
       <div class="span-corte ml-4 mr-3" fxLayout="row">
         <b class="mr-2">PAGO PRÓXIMO CORTE</b>
-        <p>{{ nextPayment | currency: "":"symbol":"1.0-0" }}</p>
+        <p>{{ nextPayment | currency: '':'symbol':'1.0-0' }}</p>
       </div>
     </div>
   </div>
@@ -579,7 +579,7 @@
             dataAddImagen.controls.number.errors.required
           "
           >{{
-            "GENERIC.REQUIRED" | translate: { formValue: "Número de documento" }
+            'GENERIC.REQUIRED' | translate: { formValue: 'Número de documento' }
           }}</mat-error
         >
       </mat-form-field>
@@ -599,7 +599,7 @@
             dataAddImagen.controls.email.errors.required
           "
           >{{
-            "GENERIC.REQUIRED" | translate: { formValue: "Correo electrónico" }
+            'GENERIC.REQUIRED' | translate: { formValue: 'Correo electrónico' }
           }}</mat-error
         >
       </mat-form-field>
@@ -619,7 +619,7 @@
             dataAddImagen.controls.cellphone.errors.required
           "
           >{{
-            "GENERIC.REQUIRED" | translate: { formValue: "Número de celular" }
+            'GENERIC.REQUIRED' | translate: { formValue: 'Número de celular' }
           }}</mat-error
         >
       </mat-form-field>
@@ -665,7 +665,7 @@
             dataRejectionMessage.controls.message.errors.required
           "
           >{{
-            "GENERIC.REQUIRED" | translate: { formValue: "Mensaje de rechazo" }
+            'GENERIC.REQUIRED' | translate: { formValue: 'Mensaje de rechazo' }
           }}</mat-error
         >
       </mat-form-field>

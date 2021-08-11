@@ -5,24 +5,38 @@
 ></app-banner>
 
 <div class="container m-t4 fade-in">
+  <h3 class="notification-category">Programados <span class="line"></span></h3>
 
-    <h3 class="notification-category">Programados <span class="line"></span></h3>
+  <app-card-notification
+    [notification]="item"
+    [title]="item.title"
+    [user]="item.adminuser"
+    [date]="item.datepublish"
+    [edit]="true"
+    *ngFor="let item of scheduled"
+  ></app-card-notification>
 
-    <app-card-notification [notification]="item" [title]="item.title" [user]="item.adminuser" [date]="item.datepublish" [edit]="true" *ngFor="let item of scheduled" ></app-card-notification>
-
-    <span fxLayout="row" fxLayoutAlign="end center">
-        <button
-        mat-raised-button
-        color="orange"
-        class="ml-2"
-        [routerLink]="[ '/notificacion']"
-      >
+  <span fxLayout="row" fxLayoutAlign="end center">
+    <button
+      mat-raised-button
+      color="orange"
+      class="ml-2"
+      [routerLink]="['/notificacion']"
+    >
       Crear notificación
-      </button>
-    </span>
+    </button>
+  </span>
 
-    <h3 class="notification-category">Notificaciones publicadas <span class="line"></span></h3>
+  <h3 class="notification-category">
+    Notificaciones publicadas <span class="line"></span>
+  </h3>
 
-    <app-card-notification [notification]="item"  [title]="item.title" [user]="item.adminuser" [date]="item.datepublish" [edit]="false" *ngFor="let item of published"></app-card-notification>
- 
+  <app-card-notification
+    [notification]="item"
+    [title]="item.title"
+    [user]="item.adminuser"
+    [date]="item.datepublish"
+    [edit]="false"
+    *ngFor="let item of published"
+  ></app-card-notification>
 </div>

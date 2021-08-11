@@ -1,8 +1,5 @@
 <!-- <app-logo></app-logo> -->
-<div 
-  *ngIf="auth.isLoggedIn()"
-  class="stories-section"
-  >
+<div *ngIf="auth.isLoggedIn()" class="stories-section">
   <app-slider-stories></app-slider-stories>
 </div>
 
@@ -36,7 +33,7 @@
         />
       </span>
       <span fxLayout="column" class="f-18 galano-bold white">
-        {{ "MEDALS.MEDALS" | translate }}
+        {{ 'MEDALS.MEDALS' | translate }}
       </span>
       <span fxLayout="column">
         <button
@@ -44,7 +41,7 @@
           class="purple-text"
           [routerLink]="['/logros']"
         >
-          {{ "MEDALS.MEDALS_SEE" | translate }}
+          {{ 'MEDALS.MEDALS_SEE' | translate }}
         </button>
       </span>
     </div>
@@ -70,7 +67,7 @@
       class="border-bottom-orange-init title-h3"
       id="bussinessHook"
     >
-      {{ "HOME.BUSSINESS" | translate }}
+      {{ 'HOME.BUSSINESS' | translate }}
     </h3>
     <p
       *ngIf="auth.isLoggedIn()"
@@ -78,10 +75,10 @@
       class="cursor-pointer text-underline purple-text"
       [routerLink]="['/negocios']"
     >
-      {{ "HOME.ALL_BUSSINESS" | translate }}
+      {{ 'HOME.ALL_BUSSINESS' | translate }}
     </p>
   </span>
-  <p class="f-20" fxHide.xs>{{ "HOME.BUSSINESS_TEXT" | translate }}</p>
+  <p class="f-20" fxHide.xs>{{ 'HOME.BUSSINESS_TEXT' | translate }}</p>
   <div
     fxLayout="row wrap"
     fxLayout.gt-xs="row wrap"
@@ -181,9 +178,9 @@
 
   <span class="border-gray d-block"></span>
   <h3 class="border-bottom-orange-init title-h3">
-    {{ "HOME.OFFERS" | translate }}
+    {{ 'HOME.OFFERS' | translate }}
   </h3>
-  <p class="f-20" fxHide.xs>{{ "HOME.OFFERS_TEXT" | translate }}</p>
+  <p class="f-20" fxHide.xs>{{ 'HOME.OFFERS_TEXT' | translate }}</p>
 </div>
 
 <app-slider
@@ -354,7 +351,7 @@
           </mat-checkbox>
         </span>
         <span class="accept-terms ml-2">
-          {{ "REGISTER.ACCEPT" | translate }}
+          {{ 'REGISTER.ACCEPT' | translate }}
         </span>
       </div>
 
@@ -369,7 +366,7 @@
           [disabled]="!activateButton"
           (click)="sendReferalsTerm()"
         >
-          {{ "GENERIC.ACCEPT" | translate }}
+          {{ 'GENERIC.ACCEPT' | translate }}
         </button>
 
         <button
@@ -379,7 +376,7 @@
           ngClass.xs="pl-2 pr-2"
           mat-raised-button
         >
-          {{ "GENERIC.CANCEL" | translate }}
+          {{ 'GENERIC.CANCEL' | translate }}
         </button>
       </span>
     </div>

@@ -11,31 +11,31 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { ContentService } from 'src/app/services/content.service';
 
 import { BlogsComponent } from './blogs.component';
-import * as moment from "moment";
+import * as moment from 'moment';
 describe('BlogsComponent', () => {
   let component: BlogsComponent;
   let fixture: ComponentFixture<BlogsComponent>;
-  const mockContentService = jasmine.createSpyObj("ContentService", [
-    "getBlogs"
+  const mockContentService = jasmine.createSpyObj('ContentService', [
+    'getBlogs',
   ]);
   let response = {
-    Status: "Success",
+    Status: 'Success',
     objectResponse: {
-      blogs: [{
-        title: "Any",
-        content: "Anyd",
-        author: "Any3",
-        tags: "Anss",
-        visible: "true",
+      blogs: [
+        {
+          title: 'Any',
+          content: 'Anyd',
+          author: 'Any3',
+          tags: 'Anss',
+          visible: 'true',
 
-        date: moment("12-01-2020"),
-        imageurl: ""
-      }
+          date: moment('12-01-2020'),
+          imageurl: '',
+        },
       ],
-      total: 1
-
-    }
-  }
+      total: 1,
+    },
+  };
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [BlogsComponent],
@@ -54,16 +54,14 @@ describe('BlogsComponent', () => {
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
-            blacklistedRoutes: []
-          }
+            blacklistedRoutes: [],
+          },
         }),
-
       ],
 
       schemas: [NO_ERRORS_SCHEMA],
-      providers: [{ provide: ContentService, useValue: mockContentService },]
-    })
-      .compileComponents();
+      providers: [{ provide: ContentService, useValue: mockContentService }],
+    }).compileComponents();
     mockContentService.getBlogs.and.returnValue(of(response));
   }));
 
@@ -77,9 +75,8 @@ describe('BlogsComponent', () => {
     expect(component).toBeTruthy();
   });
   it('order by', () => {
-    component.orderByFun({ value: "RECENT" });
+    component.orderByFun({ value: 'RECENT' });
     let datos = true;
     expect(datos).toBeTruthy();
-
-  })
+  });
 });

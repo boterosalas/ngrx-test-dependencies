@@ -9,22 +9,18 @@ describe('DialogEditComponent', () => {
   let fixture: ComponentFixture<DialogEditComponent>;
 
   const dialogMock = {
-    close: () => { }
-   };
-
+    close: () => {},
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DialogEditComponent ],
-      imports: [
-        AppMaterialModule
-      ],
+      declarations: [DialogEditComponent],
+      imports: [AppMaterialModule],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
-        {provide: MatDialogRef, useValue: dialogMock},
-       ],
-    })
-    .compileComponents();
+        { provide: MatDialogRef, useValue: dialogMock },
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -40,7 +36,6 @@ describe('DialogEditComponent', () => {
   it('close modal', () => {
     let spy = spyOn(component.dialogRef, 'close').and.callThrough();
     component.onNoClick();
-    expect(spy).toHaveBeenCalled(); 
+    expect(spy).toHaveBeenCalled();
   });
-
 });

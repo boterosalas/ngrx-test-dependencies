@@ -1,22 +1,22 @@
-import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
-import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { RouterTestingModule } from "@angular/router/testing";
-import { JwtModule } from "@auth0/angular-jwt";
-import { TranslateModule } from "@ngx-translate/core";
-import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
-import { ContentService } from "src/app/services/content.service";
-import { NavigationItemComponent } from "./navigation-item.component";
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { JwtModule } from '@auth0/angular-jwt';
+import { TranslateModule } from '@ngx-translate/core';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { ContentService } from 'src/app/services/content.service';
+import { NavigationItemComponent } from './navigation-item.component';
 
-describe("NavigationItemComponent", () => {
+describe('NavigationItemComponent', () => {
   let component: NavigationItemComponent;
   let fixture: ComponentFixture<NavigationItemComponent>;
 
-  const mockContentService = jasmine.createSpyObj("ContentService", [
-    "saveFooterSection",
+  const mockContentService = jasmine.createSpyObj('ContentService', [
+    'saveFooterSection',
   ]);
   const dialogMock = {
     close: () => {},
@@ -36,7 +36,7 @@ describe("NavigationItemComponent", () => {
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
-              return localStorage.getItem("ACCESS_TOKEN");
+              return localStorage.getItem('ACCESS_TOKEN');
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
@@ -59,15 +59,15 @@ describe("NavigationItemComponent", () => {
     component.link = {
       id: 4,
       idseccion: 1,
-      link: "https://www.google.com.co",
-      description: "¿Tienes un sitio web? Regístralo Aqui!",
+      link: 'https://www.google.com.co',
+      description: '¿Tienes un sitio web? Regístralo Aqui!',
       orderby: 1,
-      date: "2021-05-25T09:16:06.897",
+      date: '2021-05-25T09:16:06.897',
     };
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

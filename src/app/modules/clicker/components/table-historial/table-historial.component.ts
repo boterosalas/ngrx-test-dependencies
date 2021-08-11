@@ -3,27 +3,22 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-table-historial',
   templateUrl: './table-historial.component.html',
-  styleUrls: ['./table-historial.component.scss']
+  styleUrls: ['./table-historial.component.scss'],
 })
 export class TableHistorialComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-
-  @Input()dataSource;
-  @Output() dataUser = new EventEmitter;
+  @Input() dataSource;
+  @Output() dataUser = new EventEmitter();
   @Input() size;
   @Input() p;
   @Input() totalItems;
-  
 
   displayedColumns: string[] = ['date', 'amount', 'bank'];
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  userInfo(dataSource){
+  userInfo(dataSource) {
     this.dataUser.emit(dataSource);
   }
-
 }

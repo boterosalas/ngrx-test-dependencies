@@ -9,12 +9,9 @@ describe('HomeSlideVideoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeSlideVideoComponent ],
-      imports: [
-        SlickCarouselModule
-      ]
-    })
-    .compileComponents();
+      declarations: [HomeSlideVideoComponent],
+      imports: [SlickCarouselModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

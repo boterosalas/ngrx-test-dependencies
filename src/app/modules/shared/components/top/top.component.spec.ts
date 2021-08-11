@@ -10,15 +10,10 @@ describe('TopComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TopComponent ],
-      imports: [
-        AppMaterialModule
-      ],
-      schemas:  [
-        NO_ERRORS_SCHEMA
-      ]
-    })
-    .compileComponents();
+      declarations: [TopComponent],
+      imports: [AppMaterialModule],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -32,9 +27,8 @@ describe('TopComponent', () => {
   });
 
   it('close component', () => {
-    spyOn(component.close,'emit');
+    spyOn(component.close, 'emit');
     component.closeComponent();
     expect(component.close.emit).toHaveBeenCalled();
   });
-  
 });

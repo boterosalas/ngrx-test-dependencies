@@ -21,7 +21,6 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 
-
 class MockUserService extends UserService {
   private subscription: Subscription = new Subscription();
 
@@ -29,149 +28,149 @@ class MockUserService extends UserService {
     firstNames: 'David',
     identification: '1002546856',
     lastNames: 'Betancur',
-    cellphone: '3000000000'
+    cellphone: '3000000000',
   });
-
 }
 
 describe('ProfileFormComponent', () => {
   let component: ProfileFormComponent;
   let fixture: ComponentFixture<ProfileFormComponent>;
 
-  const mockDialog = jasmine.createSpyObj("MatDialog", ["open"]);
+  const mockDialog = jasmine.createSpyObj('MatDialog', ['open']);
 
-  const mockUserService = jasmine.createSpyObj("UserService", [
-    "getuserdata", "getStatusVerification", "changeBankInformation", "uploadFiles"
+  const mockUserService = jasmine.createSpyObj('UserService', [
+    'getuserdata',
+    'getStatusVerification',
+    'changeBankInformation',
+    'uploadFiles',
   ]);
 
-  const mockMasterDataService = jasmine.createSpyObj("MasterDataService", [
-    "getDepartments",
-    "getBanks"
+  const mockMasterDataService = jasmine.createSpyObj('MasterDataService', [
+    'getDepartments',
+    'getBanks',
   ]);
 
-  const mockAuthService= jasmine.createSpyObj("AuthService", [
-    "changePassword"
-    ]);
+  const mockAuthService = jasmine.createSpyObj('AuthService', [
+    'changePassword',
+  ]);
 
   let dataUserC = {
-    managedPayments : true,
-    isEmployeeUser: true
-  }
+    managedPayments: true,
+    isEmployeeUser: true,
+  };
 
   let dataDepartments = {
-    state: "Success",
-    userMessage: "",
+    state: 'Success',
+    userMessage: '',
     objectResponse: [
       {
         Id: 1,
-        code: "01",
-        description: "Bolivar",
+        code: '01',
+        description: 'Bolivar',
         municipalities: [
           {
             Id: 1,
-            code: "01",
-            description: "Turbaco",
-            idDeparment: 1
+            code: '01',
+            description: 'Turbaco',
+            idDeparment: 1,
           },
           {
             Id: 2,
-            code: "02",
-            description: "Cartagena",
-            idDeparment: 1
-          }
-        ]
+            code: '02',
+            description: 'Cartagena',
+            idDeparment: 1,
+          },
+        ],
       },
       {
         Id: 2,
-        code: "02",
-        description: "Antioquia",
+        code: '02',
+        description: 'Antioquia',
         municipalities: [
           {
             Id: 3,
-            code: "03",
-            description: "Medellín",
-            idDeparment: 2
+            code: '03',
+            description: 'Medellín',
+            idDeparment: 2,
           },
           {
             Id: 4,
-            code: "04",
-            description: "Bello",
-            idDeparment: 2
-          }
-        ]
-      }
-    ]
+            code: '04',
+            description: 'Bello',
+            idDeparment: 2,
+          },
+        ],
+      },
+    ],
   };
 
   let department = {
     Id: 1,
-    code: "01",
-    description: "Bolivar",
+    code: '01',
+    description: 'Bolivar',
     municipalities: [
       {
         Id: 1,
-        code: "01",
-        description: "Turbaco",
-        idDeparment: 1
+        code: '01',
+        description: 'Turbaco',
+        idDeparment: 1,
       },
       {
         Id: 2,
-        code: "02",
-        description: "Cartagena",
-        idDeparment: 1
-      }
-    ]
+        code: '02',
+        description: 'Cartagena',
+        idDeparment: 1,
+      },
+    ],
   };
 
   let city = {
     Id: 3,
-    code: "03",
-    description: "Medellín",
-    idDeparment: 2
+    code: '03',
+    description: 'Medellín',
+    idDeparment: 2,
   };
 
-let banks = [
-  {Id: 1, code: "01", description: "BANCO AGRARIO"}
-]
+  let banks = [{ Id: 1, code: '01', description: 'BANCO AGRARIO' }];
 
-const resp = {
-  state: "Success",
-  userMessage: "se ha actualizado el usuario",
-  objectResponse: []
-};
+  const resp = {
+    state: 'Success',
+    userMessage: 'se ha actualizado el usuario',
+    objectResponse: [],
+  };
 
-const ErrorUptade = {
-  state: "Success",
-  userMessage: "No se ha actualizado el usuario",
-  objectResponse: []
-};
+  const ErrorUptade = {
+    state: 'Success',
+    userMessage: 'No se ha actualizado el usuario',
+    objectResponse: [],
+  };
 
-const getStatusVerification = {
-  state: "Success",
-  userMessage: null,
-  objectResponse: [
-    {id: 4252, code: "NOTVERIFIED", value: "No verificada"},
-    {id: 4253, code: "INPROGRESS", value: "En proceso de verificación"},
-    {id: 4254, code: "VERIFIED", value: "Cuenta Verificada"},
-    {id: 4255, code: "REJECTED", value: "Cuenta rechazada"}
-  ]
-};
+  const getStatusVerification = {
+    state: 'Success',
+    userMessage: null,
+    objectResponse: [
+      { id: 4252, code: 'NOTVERIFIED', value: 'No verificada' },
+      { id: 4253, code: 'INPROGRESS', value: 'En proceso de verificación' },
+      { id: 4254, code: 'VERIFIED', value: 'Cuenta Verificada' },
+      { id: 4255, code: 'REJECTED', value: 'Cuenta rechazada' },
+    ],
+  };
 
-const changeBankInformation = {
-  state: "Success",
-  userMessage: "Los datos fueron guardados.",
-  objectResponse: null
-};
+  const changeBankInformation = {
+    state: 'Success',
+    userMessage: 'Los datos fueron guardados.',
+    objectResponse: null,
+  };
 
-const respUploadFiles = {
-  state: "Success",
-  userMessage: "se ha guardado el archivo",
-  objectResponse: null
-};
+  const respUploadFiles = {
+    state: 'Success',
+    userMessage: 'se ha guardado el archivo',
+    objectResponse: null,
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileFormComponent, DialogEditComponent, TruncatePipe ],
+      declarations: [ProfileFormComponent, DialogEditComponent, TruncatePipe],
       imports: [
         TranslateModule.forRoot({}),
         ReactiveFormsModule,
@@ -189,46 +188,54 @@ const respUploadFiles = {
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
-            blacklistedRoutes: []
-          }
-        })
+            blacklistedRoutes: [],
+          },
+        }),
       ],
       providers: [
         { provide: MatDialogRef, useValue: mockDialog },
         { provide: MasterDataService, useValue: mockMasterDataService },
         { provide: UserService, useClass: MockUserService },
-        {provide: AuthService, useValue: mockAuthService}
+        { provide: AuthService, useValue: mockAuthService },
       ],
       schemas: [
         // NO_ERRORS_SCHEMA
       ],
-    }).overrideModule(BrowserDynamicTestingModule, {
-      set: {
-        entryComponents: [DialogEditComponent]
-      }
     })
-    .compileComponents();
+      .overrideModule(BrowserDynamicTestingModule, {
+        set: {
+          entryComponents: [DialogEditComponent],
+        },
+      })
+      .compileComponents();
     mockMasterDataService.getDepartments.and.returnValue(of(dataDepartments));
     mockUserService.getuserdata.and.returnValue(of(dataUserC));
     mockMasterDataService.getBanks.and.returnValue(of(banks));
     mockAuthService.changePassword.and.returnValue(of(resp));
-    mockUserService.getStatusVerification.and.returnValue(of(getStatusVerification));
-    mockUserService.changeBankInformation.and.returnValue(of(changeBankInformation));
+    mockUserService.getStatusVerification.and.returnValue(
+      of(getStatusVerification)
+    );
+    mockUserService.changeBankInformation.and.returnValue(
+      of(changeBankInformation)
+    );
     mockUserService.uploadFiles.and.returnValue(of(respUploadFiles));
   }));
 
   beforeEach(() => {
-    localStorage.setItem('ACCESS_TOKEN', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU');
+    localStorage.setItem(
+      'ACCESS_TOKEN',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU'
+    );
     fixture = TestBed.createComponent(ProfileFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     component.name = 'David';
     component.lastName = 'Betancur';
-    component.email = 'test@test.com'
+    component.email = 'test@test.com';
     component.phone = '3005490912';
     component.id = '12345';
     component.address = 'calle falsa 123';
-    component.department  = 'Antioquia';
+    component.department = 'Antioquia';
     component.municipality = 'Bello';
     component.bank = 'Bancolombia';
     component.bankAccountNumber = '12345678';
@@ -250,20 +257,21 @@ const respUploadFiles = {
 
   it('update account', () => {
     let service = fixture.debugElement.injector.get(UserService);
-    spyOn(service, 'changeBankInformation').and.returnValue(of(changeBankInformation));
+    spyOn(service, 'changeBankInformation').and.returnValue(
+      of(changeBankInformation)
+    );
     spyOn(service, 'updateUser').and.returnValue(of(resp));
     component.updateAccount();
     expect(service.changeBankInformation).toHaveBeenCalled();
     expect(service.updateUser).toHaveBeenCalled();
   });
-  
+
   it('change address', () => {
     let service = fixture.debugElement.injector.get(UserService);
     spyOn(service, 'updateUser').and.returnValue(of(resp));
     component.changeAddress();
     expect(service.updateUser).toHaveBeenCalled();
   });
-  
 
   it('update User', () => {
     let service = fixture.debugElement.injector.get(UserService);
@@ -278,16 +286,20 @@ const respUploadFiles = {
     component.showAccount();
     expect(service.getBankAccountNumber).toHaveBeenCalled();
   });
-  
+
   it('changePasswordUser', () => {
     component.changePasswordUser();
-    expect( mockAuthService.changePassword).toHaveBeenCalled();
+    expect(mockAuthService.changePassword).toHaveBeenCalled();
   });
-  
+
   it('getStatusVerification', () => {
     let service = fixture.debugElement.injector.get(UserService);
-    spyOn(service, 'getStatusVerification').and.returnValue(of(getStatusVerification));
-    component.getStatusVerification("Tu cuenta entrará en estado de verificación pronto");
+    spyOn(service, 'getStatusVerification').and.returnValue(
+      of(getStatusVerification)
+    );
+    component.getStatusVerification(
+      'Tu cuenta entrará en estado de verificación pronto'
+    );
     expect(service.getStatusVerification).toHaveBeenCalled();
   });
 
@@ -316,58 +328,57 @@ const respUploadFiles = {
     expect(mockDialog.open).toBeTruthy();
   });
 
-  it("select city", () => {
+  it('select city', () => {
     //component.cityCode = "03";
     component.selectCity(city);
     fixture.detectChanges();
     expect(component.cityCode).toBeDefined();
   });
 
-  it("select selectDepartment", () => {
+  it('select selectDepartment', () => {
     let fb = new FormBuilder();
     component.addressForm = fb.group({
-      department: ["Antioquia"],
-      city: ["Medellin"],
-      address: ["calle 123"]
+      department: ['Antioquia'],
+      city: ['Medellin'],
+      address: ['calle 123'],
     });
     component.selectDepartment(department);
     expect(component.addressForm.valid).toBeTruthy();
   });
 
   it('on file change trip valid ced 1', () => {
-    const mockFile = new File([""], "name.jpg", { type: "text/html" });
+    const mockFile = new File([''], 'name.jpg', { type: 'text/html' });
     const mockEvt = { target: { files: [mockFile] } };
 
     let service = fixture.debugElement.injector.get(UserService);
     spyOn(service, 'uploadFiles').and.returnValue(of(respUploadFiles));
-    component.onFileChangeFiles(mockEvt, "IdentificationCard1");
+    component.onFileChangeFiles(mockEvt, 'IdentificationCard1');
     expect(service.uploadFiles).toHaveBeenCalled();
     expect(component.showErrorCed1).toBeFalsy();
     expect(component.showErrorFormatCed1).toBeFalsy();
   });
 
   it('on file change trip valid ced 2', () => {
-    const mockFile = new File([""], "name.jpg", { type: "text/html" });
+    const mockFile = new File([''], 'name.jpg', { type: 'text/html' });
     const mockEvt = { target: { files: [mockFile] } };
 
     let service = fixture.debugElement.injector.get(UserService);
     spyOn(service, 'uploadFiles').and.returnValue(of(respUploadFiles));
-    component.onFileChangeFiles(mockEvt, "IdentificationCard2");
+    component.onFileChangeFiles(mockEvt, 'IdentificationCard2');
     expect(service.uploadFiles).toHaveBeenCalled();
     expect(component.showErrorCed2).toBeFalsy();
     expect(component.showErrorFormatCed2).toBeFalsy();
   });
 
   it('on file change trip valid cert', () => {
-    const mockFile = new File([""], "name.jpg", { type: "text/html" });
+    const mockFile = new File([''], 'name.jpg', { type: 'text/html' });
     const mockEvt = { target: { files: [mockFile] } };
 
     let service = fixture.debugElement.injector.get(UserService);
     spyOn(service, 'uploadFiles').and.returnValue(of(respUploadFiles));
-    component.onFileChangeFiles(mockEvt, "BankCertificate");
+    component.onFileChangeFiles(mockEvt, 'BankCertificate');
     expect(service.uploadFiles).toHaveBeenCalled();
     expect(component.showErrorCert).toBeFalsy();
     expect(component.showErrorFormatCert).toBeFalsy();
   });
-
 });

@@ -10,11 +10,15 @@ import { UtilsService } from 'src/app/services/utils.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-
-  constructor(private kpi: LinksService, private formBuilder: FormBuilder, public auth: AuthService, public utils: UtilsService) { }
+  constructor(
+    private kpi: LinksService,
+    private formBuilder: FormBuilder,
+    public auth: AuthService,
+    public utils: UtilsService
+  ) {}
 
   totalUsers: string;
   totalActiveUsers: string;
@@ -39,7 +43,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   resume = [];
   items = [];
 
-
   maxDate = moment(new Date());
   inlineDateTime;
 
@@ -54,7 +57,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     customRangeLabel: 'Custom range',
     daysOfWeek: moment.weekdaysMin(),
     monthNames: moment.monthsShort(),
-    firstDay: 1 // first day is monday
+    firstDay: 1, // first day is monday
   };
 
   ranges = {
@@ -64,14 +67,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
     'Los últimos 15 días': [moment().subtract(14, 'days'), moment()],
     'Los últimos 30 días': [moment().subtract(29, 'days'), moment()],
     'Este Mes': [moment().startOf('month'), moment().endOf('month')],
-    'El mes pasado': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-    'Últimos 3 meses': [moment().subtract(3, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+    'El mes pasado': [
+      moment().subtract(1, 'month').startOf('month'),
+      moment().subtract(1, 'month').endOf('month'),
+    ],
+    'Últimos 3 meses': [
+      moment().subtract(3, 'month').startOf('month'),
+      moment().subtract(1, 'month').endOf('month'),
+    ],
   };
 
   form = this.formBuilder.group({
     selected: {
-      startDate: moment(new Date(), "DD/MM/YYYY"),
-      endDate: moment(new Date(), "DD/MM/YYYY"),
+      startDate: moment(new Date(), 'DD/MM/YYYY'),
+      endDate: moment(new Date(), 'DD/MM/YYYY'),
     },
     alwaysShowCalendars: true,
     keepCalendarOpeningWithRange: true,
@@ -90,49 +99,51 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public getKPI() {
     let date = {
       start: this.form.controls.selected.value.startDate.format(),
-      end: this.form.controls.selected.value.endDate.format()
-    }
+      end: this.form.controls.selected.value.endDate.format(),
+    };
 
     //this.subscription = this.kpi.getKPI(date).subscribe(resp => {
     //  this.resume = resp.resume;
     //  this.items = resp.kpi;
     //  this.dataSource = new MatTableDataSource<any>(resp.listbusiness);
     //})
-    this.subscription = this.kpi.getResume().subscribe(resp => {
+    this.subscription = this.kpi.getResume().subscribe((resp) => {
       this.resume = resp;
-    })
-    this.subscription = this.kpi.getTotalKPI(date).subscribe(resp => {
+    });
+    this.subscription = this.kpi.getTotalKPI(date).subscribe((resp) => {
       this.items = resp;
-    })
-    this.subscription = this.kpi.getBussinessKPI(date).subscribe(resp => {
+    });
+    this.subscription = this.kpi.getBussinessKPI(date).subscribe((resp) => {
       this.dataSource = new MatTableDataSource<any>(resp);
-    })
-
+    });
   }
 
   public change() {
     this.dateParams = {
       start: this.form.controls.selected.value.startDate.format(),
-      end: this.form.controls.selected.value.endDate.format()
-    }
+      end: this.form.controls.selected.value.endDate.format(),
+    };
     //this.subscription = this.kpi.getKPI(this.dateParams).subscribe(dashboard => {
     //  this.resume = dashboard.resume;
     //  this.items = dashboard.kpi;
     //  this.dataSource = new MatTableDataSource<any>(dashboard.listbusiness);
     //})
-    this.subscription = this.kpi.getResume().subscribe(resp => {
+    this.subscription = this.kpi.getResume().subscribe((resp) => {
       this.resume = resp;
-    })
-    this.subscription = this.kpi.getTotalKPI(this.dateParams).subscribe(resp => {
-      this.items = resp;
-    })
-    this.subscription = this.kpi.getBussinessKPI(this.dateParams).subscribe(resp => {
-      this.dataSource = new MatTableDataSource<any>(resp);
-    })
+    });
+    this.subscription = this.kpi
+      .getTotalKPI(this.dateParams)
+      .subscribe((resp) => {
+        this.items = resp;
+      });
+    this.subscription = this.kpi
+      .getBussinessKPI(this.dateParams)
+      .subscribe((resp) => {
+        this.dataSource = new MatTableDataSource<any>(resp);
+      });
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
 }

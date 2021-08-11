@@ -5,48 +5,47 @@ import {
   ViewChild,
   TemplateRef,
   OnDestroy,
-} from "@angular/core";
-import { RouterLink, ActivatedRoute, Router } from "@angular/router";
-import { ContentService } from "src/app/services/content.service";
-import { UtilsService } from "src/app/services/utils.service";
-import { distinctUntilChanged, filter, map } from "rxjs/operators";
-import { FormGroup, Validators, FormBuilder } from "@angular/forms";
-import { Subscription } from "rxjs";
-import { DialogComponent } from "src/app/modules/shared/components/dialog/dialog.component";
-import { ResponseService } from "src/app/interfaces/response";
-import { MatBottomSheet, MatSnackBar, MatDialog } from "@angular/material";
-import { UserService } from "src/app/services/user.service";
-import { AuthService } from "src/app/services/auth.service";
-import { LinksService } from "src/app/services/links.service";
-import { TokenService } from "src/app/services/token.service";
-import { NgNavigatorShareService } from "ng-navigator-share";
-import { ModalGenericComponent } from "src/app/modules/shared/components/modal-generic/modal-generic.component";
-import { environment } from "src/environments/environment";
-
+} from '@angular/core';
+import { RouterLink, ActivatedRoute, Router } from '@angular/router';
+import { ContentService } from 'src/app/services/content.service';
+import { UtilsService } from 'src/app/services/utils.service';
+import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
+import { ResponseService } from 'src/app/interfaces/response';
+import { MatBottomSheet, MatSnackBar, MatDialog } from '@angular/material';
+import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { LinksService } from 'src/app/services/links.service';
+import { TokenService } from 'src/app/services/token.service';
+import { NgNavigatorShareService } from 'ng-navigator-share';
+import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import { environment } from 'src/environments/environment';
 
 declare var dataLayer: any;
 
 @Component({
-  selector: "app-bussiness",
-  templateUrl: "./bussiness.component.html",
-  styleUrls: ["./bussiness.component.scss"],
+  selector: 'app-bussiness',
+  templateUrl: './bussiness.component.html',
+  styleUrls: ['./bussiness.component.scss'],
 })
 export class BussinessComponent implements OnInit, OnDestroy {
   id: string;
   title: string;
   percent: string;
-  percentBussiness: string = "Hasta 9.6%";
+  percentBussiness: string = 'Hasta 9.6%';
   bussiness = [];
-  sellersExito: Array<any>
-  sellersMarketPlace: Array<any>
-  @ViewChild("templateTerms", { static: false })
+  sellersExito: Array<any>;
+  sellersMarketPlace: Array<any>;
+  @ViewChild('templateTerms', { static: false })
   templateTerms: TemplateRef<any>;
 
   private subscription: Subscription = new Subscription();
   private ngNavigatorShareService: NgNavigatorShareService;
   image: string;
   template: any;
-  numberPattern = "^(0|[0-9][0-9]*)$";
+  numberPattern = '^(0|[0-9][0-9]*)$';
   showFormCustomer = true;
   reference: boolean;
   showForm = false;
@@ -62,13 +61,13 @@ export class BussinessComponent implements OnInit, OnDestroy {
   imgBannerMobile: string;
   colorText: string;
 
-  @ViewChild("templateCategories", { static: false })
+  @ViewChild('templateCategories', { static: false })
   templateCategories: TemplateRef<any>;
-  @ViewChild("templateDialogAssured", { static: false })
+  @ViewChild('templateDialogAssured', { static: false })
   templateAssured: TemplateRef<any>;
-  @ViewChild("templateEC", { static: false }) templateEC: TemplateRef<any>;
+  @ViewChild('templateEC', { static: false }) templateEC: TemplateRef<any>;
 
-  urlshorten: string = "";
+  urlshorten: string = '';
   url: string;
   classButtonCopy: string;
   classButtonRefer: string;
@@ -84,8 +83,8 @@ export class BussinessComponent implements OnInit, OnDestroy {
   showDeliver: boolean = false;
   acceptTermsDeliver: boolean;
   urlPlaystore: string =
-    "https://play.google.com/store/apps/details?id=com.sewayplus";
-  urlAppstore: string = "https://apps.apple.com/co/app/seway/id1414489414";
+    'https://play.google.com/store/apps/details?id=com.sewayplus';
+  urlAppstore: string = 'https://apps.apple.com/co/app/seway/id1414489414';
 
   paginate: string;
   pageIndex: number = 0;
@@ -141,12 +140,12 @@ export class BussinessComponent implements OnInit, OnDestroy {
         route.imageurl === undefined &&
         route.infoAditional === undefined
       ) {
-        this.id = "1";
-        this.title = "exito";
+        this.id = '1';
+        this.title = 'exito';
         this.image =
-          "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg";
-        this.percent = "Hasta 9.6% de ganancia";
-        this.description = "Almacenes Éxito";
+          'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg';
+        this.percent = 'Hasta 9.6% de ganancia';
+        this.description = 'Almacenes Éxito';
       } else {
         this.id = route.id;
         this.title = route.code;
@@ -167,19 +166,19 @@ export class BussinessComponent implements OnInit, OnDestroy {
             this.exceptionsInfo = resp.terms[1].description;
             this.caseSpecial = resp.terms[2].description;
           }
-        })
-
+        });
       }
     });
   }
 
   ngOnInit() {
-    if (this.title === "movil-exito" ||
-      this.title === "haceb" ||
-      this.title === "puntos-colombia" ||
-      this.title === "seguros" ||
-      this.title === "viajes" ||
-      this.title === "wesura"
+    if (
+      this.title === 'movil-exito' ||
+      this.title === 'haceb' ||
+      this.title === 'puntos-colombia' ||
+      this.title === 'seguros' ||
+      this.title === 'viajes' ||
+      this.title === 'wesura'
     ) {
       this.showReferenceButton = false;
     }
@@ -191,14 +190,14 @@ export class BussinessComponent implements OnInit, OnDestroy {
       //this.sellers = [...resp.sellersExito, ...resp.sellersMarketPlace]
       this.sellersExito = resp.sellersExito;
       this.sellersMarketPlace = resp.sellersMarketPlace;
-    })
-    if (localStorage.getItem("ACCESS_TOKEN") !== null) {
+    });
+    if (localStorage.getItem('ACCESS_TOKEN') !== null) {
       this.identification = this.token.userInfo().identification;
     }
 
     this.idCustomerForm = this.fb.group({
       identification: [
-        "",
+        '',
         [
           Validators.required,
           Validators.pattern(this.numberPattern),
@@ -212,13 +211,12 @@ export class BussinessComponent implements OnInit, OnDestroy {
     });
 
     this.orderOptions = [
-      { value: "OrderByTopSaleDESC", description: "Más Vendidos" },
-      { value: "OrderByReleaseDateDESC", description: "Más recientes" },
-      { value: "OrderByPriceDESC", description: "Mayor precio primero" },
-      { value: "OrderByNameASC", description: "Productos de la A-Z" },
-      { value: "OrderByNameDESC", description: "Productos de la Z-A" },
+      { value: 'OrderByTopSaleDESC', description: 'Más Vendidos' },
+      { value: 'OrderByReleaseDateDESC', description: 'Más recientes' },
+      { value: 'OrderByPriceDESC', description: 'Mayor precio primero' },
+      { value: 'OrderByNameASC', description: 'Productos de la A-Z' },
+      { value: 'OrderByNameDESC', description: 'Productos de la Z-A' },
     ];
-
   }
 
   formatContent(content: string) {
@@ -228,11 +226,12 @@ export class BussinessComponent implements OnInit, OnDestroy {
       this.invisible = true;
       return content ? `${content.substr(0, 250)}` : '';
     }
-
   }
   toggleContent() {
     this.isContentToggled = !this.isContentToggled;
-    this.infoBussiness = this.isContentToggled ? this.nonEditedContent : this.formatContent(this.infoBussiness);
+    this.infoBussiness = this.isContentToggled
+      ? this.nonEditedContent
+      : this.formatContent(this.infoBussiness);
   }
   // public order(option:string) {
   //   this.pageIndex = 0;
@@ -257,10 +256,10 @@ export class BussinessComponent implements OnInit, OnDestroy {
   }
 
   public goback() {
-    if (this.allBussiness === "true") {
-      this.router.navigate(["/negocios"]);
+    if (this.allBussiness === 'true') {
+      this.router.navigate(['/negocios']);
     } else {
-      this.router.navigate(["./"]);
+      this.router.navigate(['./']);
     }
   }
 
@@ -283,9 +282,9 @@ export class BussinessComponent implements OnInit, OnDestroy {
       .subscribe((resp: ResponseService) => {
         this.urlshorten = resp.objectResponse.link;
         this.enableCopy = false;
-        if (param === "assured") {
-          if (resp.state === "Error") {
-            this.openSnackBar(resp.userMessage, "cerrar");
+        if (param === 'assured') {
+          if (resp.state === 'Error') {
+            this.openSnackBar(resp.userMessage, 'cerrar');
             this.showForm = false;
             this.showFormCustomer = true;
           }
@@ -294,8 +293,8 @@ export class BussinessComponent implements OnInit, OnDestroy {
   }
 
   /**
-  * Metodo para dalvar los links reference
-  */
+   * Metodo para dalvar los links reference
+   */
 
   public saveLinkReference() {
     let dataSaveLinkReference = {
@@ -309,10 +308,10 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.subscription = this.links
       .saveLink(dataSaveLinkReference)
       .subscribe((resp: ResponseService) => {
-        if (resp.state === "Error") {
-          this.openSnackBar(resp.userMessage, "cerrar");
+        if (resp.state === 'Error') {
+          this.openSnackBar(resp.userMessage, 'cerrar');
         } else {
-          this.openSnackBar(resp.userMessage, "cerrar");
+          this.openSnackBar(resp.userMessage, 'cerrar');
           this.dialog.dismiss();
         }
       });
@@ -332,13 +331,13 @@ export class BussinessComponent implements OnInit, OnDestroy {
     let today = new Date();
     let date =
       today.getFullYear() +
-      "-" +
+      '-' +
       (today.getMonth() + 1) +
-      "-" +
+      '-' +
       today.getDate();
     let time =
-      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    this.date = date + " " + time;
+      today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    this.date = date + ' ' + time;
   }
 
   /**
@@ -356,9 +355,9 @@ export class BussinessComponent implements OnInit, OnDestroy {
   /* To copy Text from Textbox */
   public copyInputMessage(inputElement: any) {
     inputElement.select();
-    document.execCommand("copy");
+    document.execCommand('copy');
     inputElement.setSelectionRange(0, 0);
-    this.openSnackBar("Se ha copiado el link al portapapeles", "Cerrar");
+    this.openSnackBar('Se ha copiado el link al portapapeles', 'Cerrar');
   }
 
   public showReference() {
@@ -369,8 +368,8 @@ export class BussinessComponent implements OnInit, OnDestroy {
   share() {
     this.ngNavigatorShareService
       .share({
-        title: "",
-        text: "",
+        title: '',
+        text: '',
         url: this.urlshorten,
       })
       .then((response) => {
@@ -386,14 +385,14 @@ export class BussinessComponent implements OnInit, OnDestroy {
     if (iOS) {
       window.location.assign(this.urlshorten);
     } else {
-      window.open(this.urlshorten, "_blank");
+      window.open(this.urlshorten, '_blank');
     }
   }
 
   public nextStep() {
     this.showForm = !this.showForm;
     this.showFormCustomer = !this.showFormCustomer;
-    this.saveLink("assured");
+    this.saveLink('assured');
   }
 
   public backStep() {
@@ -407,22 +406,22 @@ export class BussinessComponent implements OnInit, OnDestroy {
    */
 
   public dataSliderCategory(sliderInfo) {
-    let token = localStorage.getItem("ACCESS_TOKEN");
-    if (token !== null && sliderInfo.business !== "clickam") {
+    let token = localStorage.getItem('ACCESS_TOKEN');
+    if (token !== null && sliderInfo.business !== 'clickam') {
       this.tokenInfo = this.token.userInfo();
       this.idClicker = this.tokenInfo.idclicker;
       // this.idClicker = this.tokenInfo.idclicker.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
       const dataCategoryUrl = sliderInfo.link;
       this.showForm = false;
-      this.urlshorten = "";
+      this.urlshorten = '';
       this.reference = false;
       this.showFormCustomer = true;
       this.url = `${dataCategoryUrl}`;
       setTimeout(() => {
         this.saveLink();
       }, 500);
-      this.idCustomerForm.controls.identification.setValue("");
+      this.idCustomerForm.controls.identification.setValue('');
       this.idCustomerForm.reset();
       this.formShareLink();
       const home = true;
@@ -432,40 +431,47 @@ export class BussinessComponent implements OnInit, OnDestroy {
       const img = sliderInfo.imageurl;
       const showCloseIcon = true;
       const showClose = false;
-      const buttonClose = "Cerrar";
+      const buttonClose = 'Cerrar';
       const showshowTitle = false;
       const title = sliderInfo.description;
       const showProduct = true;
       const id = sliderInfo.productId;
       // this.classButton = (sliderInfo.description).replace(" ", "");
-      this.classButtonWhatsapp = `gtmClicLightboxIconoWhatsApp${this.title}${sliderInfo.description}`
-        .replace(/\s/g, "")
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
-      this.classButtonTwitter = `gtmClicLightboxIconoTwitter${this.title}${sliderInfo.description}`
-        .replace(/\s/g, "")
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
-      this.classButtonFacebook = `gtmClicLightboxIconoFacebook${this.title}${sliderInfo.description}`
-        .replace(/\s/g, "")
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
-      this.classButtonShare = `gtmClicLightboxCompartir${this.title}${sliderInfo.description}`
-        .replace(/\s/g, "")
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
-      this.classButtonBuy = `gtmClicLightboxComprar${this.title}${sliderInfo.description}`
-        .replace(/\s/g, "")
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
-      this.classButtonRefer = `gtmClicLightboxReferir${this.title}${sliderInfo.description}`
-        .replace(/\s/g, "")
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
-      this.classButtonCopy = `gtmClicLightboxCopiarLink${this.title}${sliderInfo.description}`
-        .replace(/\s/g, "")
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
+      this.classButtonWhatsapp =
+        `gtmClicLightboxIconoWhatsApp${this.title}${sliderInfo.description}`
+          .replace(/\s/g, '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '');
+      this.classButtonTwitter =
+        `gtmClicLightboxIconoTwitter${this.title}${sliderInfo.description}`
+          .replace(/\s/g, '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '');
+      this.classButtonFacebook =
+        `gtmClicLightboxIconoFacebook${this.title}${sliderInfo.description}`
+          .replace(/\s/g, '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '');
+      this.classButtonShare =
+        `gtmClicLightboxCompartir${this.title}${sliderInfo.description}`
+          .replace(/\s/g, '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '');
+      this.classButtonBuy =
+        `gtmClicLightboxComprar${this.title}${sliderInfo.description}`
+          .replace(/\s/g, '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '');
+      this.classButtonRefer =
+        `gtmClicLightboxReferir${this.title}${sliderInfo.description}`
+          .replace(/\s/g, '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '');
+      this.classButtonCopy =
+        `gtmClicLightboxCopiarLink${this.title}${sliderInfo.description}`
+          .replace(/\s/g, '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '');
       // if(sliderInfo.idbusiness !== 3 && sliderInfo.idbusiness !== 5) {
       //   this.template = this.templateCategories;
       // } else {
@@ -494,7 +500,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
         this.enableCopy = true;
       });
     } else {
-      this.router.navigate(["/" + sliderInfo.link]);
+      this.router.navigate(['/' + sliderInfo.link]);
     }
   }
 
@@ -517,7 +523,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   public termsAndConditions() {
     const template = this.templateTerms;
-    const title = "";
+    const title = '';
 
     this.dialogModal.open(ModalGenericComponent, {
       data: {
@@ -529,7 +535,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   public registerUser() {
     this.user.registeruserterms(this.id).subscribe((resp: any) => {
-      if (resp.state === "Success") {
+      if (resp.state === 'Success') {
         this.acceptTermsDeliver = true;
       }
     });
@@ -537,7 +543,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   public getUserData() {
     this.subscription = this.auth.getRole$.subscribe((role) => {
-      if (role === "CLICKER" || role === "ADMIN" || role === "SUPERADMIN") {
+      if (role === 'CLICKER' || role === 'ADMIN' || role === 'SUPERADMIN') {
         this.subscription = this.user.getuserdata().subscribe((user) => {
           this.acceptTermsDeliver = user.acceptTerms;
         });
@@ -551,7 +557,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     if (iOS || isSafari) {
       window.location.assign(this.urlAppstore);
     } else {
-      window.open(this.urlPlaystore, "_blank");
+      window.open(this.urlPlaystore, '_blank');
     }
   }
 
@@ -564,15 +570,15 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.tokenInfo = this.token.userInfo();
     this.idClicker = this.tokenInfo.idclicker;
     this.reference = false;
-    this.urlshorten = "";
+    this.urlshorten = '';
     let productUrl = product.url;
-    if (this.id === "1") {
+    if (this.id === '1') {
       this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign={1}`;
     }
-    if (this.id === "2") {
+    if (this.id === '2') {
       this.url = `https://www.carulla.com${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign={1}`;
     }
-    this.idCustomerForm.controls.identification.setValue("");
+    this.idCustomerForm.controls.identification.setValue('');
     this.idCustomerForm.reset();
     setTimeout(() => {
       this.saveLink();
@@ -588,7 +594,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     const showCloseIcon = true;
     const showProduct = true;
     const showshowTitle = false;
-    const buttonClose = "Cerrar";
+    const buttonClose = 'Cerrar';
     const showPlu = true;
     const plu = product.plu;
     this.plu = product.plu;
@@ -629,7 +635,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   public searchBiggyExito(
     term: any,
-    order: string = "",
+    order: string = '',
     page = 1,
     count = 100 // Cantidad máxima que permite el servicio
   ) {
@@ -642,9 +648,9 @@ export class BussinessComponent implements OnInit, OnDestroy {
     }
 
     dataLayer.push({
-      event: "pushEventGA",
-      categoria: "NegocioExito",
-      accion: "ClicBuscar",
+      event: 'pushEventGA',
+      categoria: 'NegocioExito',
+      accion: 'ClicBuscar',
       etiqueta: term,
     });
     const params = { term, order, page, count };
@@ -660,14 +666,16 @@ export class BussinessComponent implements OnInit, OnDestroy {
             //  (idSeller) => idSeller.id === "1" || idSeller.id === "10078"
             //);
             let filterSkus = sellerSkus.filter(
-              (idSeller) => this.sellersExito.includes(idSeller.id) || this.sellersMarketPlace.includes(idSeller.id)
+              (idSeller) =>
+                this.sellersExito.includes(idSeller.id) ||
+                this.sellersMarketPlace.includes(idSeller.id)
             );
             if (!!filterSkus[0]) {
               this.sellerId = filterSkus[0].id;
               this.sellerName = filterSkus[0].name;
             } else {
-              this.sellerId = "";
-              this.sellerName = "";
+              this.sellerId = '';
+              this.sellerName = '';
             }
           }
 
@@ -683,8 +691,8 @@ export class BussinessComponent implements OnInit, OnDestroy {
           };
 
           if (
-            (this.sellersExito.includes(object.seller) || this.sellersMarketPlace.includes(object.seller)
-            ) &&
+            (this.sellersExito.includes(object.seller) ||
+              this.sellersMarketPlace.includes(object.seller)) &&
             object.oldprice !== 0
           ) {
             this.productsListExito.push(object);
@@ -712,7 +720,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   public searchBiggyCarulla(
     term: any,
-    order: string = "",
+    order: string = '',
     page = 1,
     count = 100 // Cantidad máxima que permite el servicio
   ) {
@@ -725,9 +733,9 @@ export class BussinessComponent implements OnInit, OnDestroy {
     }
 
     dataLayer.push({
-      event: "pushEventGA",
-      categoria: "NegocioCarulla",
-      accion: "ClicBuscar",
+      event: 'pushEventGA',
+      categoria: 'NegocioCarulla',
+      accion: 'ClicBuscar',
       etiqueta: term,
     });
 
@@ -740,14 +748,14 @@ export class BussinessComponent implements OnInit, OnDestroy {
           if (!!searchCarulla.skus[0] && !!searchCarulla.skus[0].sellers[0]) {
             let sellerSkus = searchCarulla.skus[0].sellers;
             let filterSkus = sellerSkus.filter(
-              (idSeller) => idSeller.id === "1" || idSeller.id === "10078"
+              (idSeller) => idSeller.id === '1' || idSeller.id === '10078'
             );
             if (!!filterSkus[0]) {
               this.sellerId = filterSkus[0].id;
               this.sellerName = filterSkus[0].name;
             } else {
-              this.sellerId = "";
-              this.sellerName = "";
+              this.sellerId = '';
+              this.sellerName = '';
             }
           }
 
@@ -763,7 +771,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
           };
 
           if (
-            (object.seller === "1" || object.seller === "10078") &&
+            (object.seller === '1' || object.seller === '10078') &&
             object.oldprice !== 0
           ) {
             this.productsListExito.push(object);
@@ -790,9 +798,9 @@ export class BussinessComponent implements OnInit, OnDestroy {
   }
   libraryRoute() {
     this.router.navigate([
-      "/biblioteca",
+      '/biblioteca',
       {
-        id: this.id
+        id: this.id,
       },
     ]);
   }

@@ -1,17 +1,17 @@
-import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
-import { Router } from "@angular/router";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ResponseService } from "src/app/interfaces/response";
-import Swal from "sweetalert2";
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ResponseService } from 'src/app/interfaces/response';
+import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: "app-forgotpasswordform",
-  templateUrl: "./forgotpasswordform.component.html",
-  styleUrls: ["./forgotpasswordform.component.scss"]
+  selector: 'app-forgotpasswordform',
+  templateUrl: './forgotpasswordform.component.html',
+  styleUrls: ['./forgotpasswordform.component.scss'],
 })
 export class ForgotpasswordformComponent implements OnInit, OnDestroy {
   constructor(
@@ -21,45 +21,45 @@ export class ForgotpasswordformComponent implements OnInit, OnDestroy {
     private loading: LoaderService,
     private utils: UtilsService
   ) {}
-  
+
   private subscription: Subscription = new Subscription();
-  emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
+  emailPattern = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
   forgotPaswordForm: FormGroup;
-  text:any = "";
+  text: any = '';
 
   swalOptSuccess: Object = {
-      title: "Se ha enviado un email",
-      text: this.text,
-      confirmButtonText: "Aceptar",
-      confirmButtonClass: 'accept-forgot-alert-success',
-      type: "success"
-  }
+    title: 'Se ha enviado un email',
+    text: this.text,
+    confirmButtonText: 'Aceptar',
+    confirmButtonClass: 'accept-forgot-alert-success',
+    type: 'success',
+  };
 
   swalOptError: Object = {
-    title: "Ups algo salió mal",
+    title: 'Ups algo salió mal',
     text: this.text,
-    confirmButtonText: "Aceptar",
+    confirmButtonText: 'Aceptar',
     confirmButtonClass: 'accept-forgot-alert-error',
-    type: "error"
-  }
+    type: 'error',
+  };
 
   swalOptInvalid: Object = {
     title: this.text,
-    confirmButtonText: "Aceptar",
+    confirmButtonText: 'Aceptar',
     confirmButtonClass: 'accept-forgot-alert-invalid',
-    type: "error"
-  }
+    type: 'error',
+  };
 
   ngOnInit() {
     this.forgotPaswordForm = this.fb.group({
       Username: [
-        "",
+        '',
         [
           Validators.required,
           Validators.pattern(this.emailPattern),
-          Validators.maxLength(64)
-        ]
-      ]
+          Validators.maxLength(64),
+        ],
+      ],
     });
   }
 
@@ -74,21 +74,30 @@ export class ForgotpasswordformComponent implements OnInit, OnDestroy {
     this.subscription = this.forgot.forgotPassword(userName).subscribe(
       (resp: ResponseService) => {
         this.loading.hide();
-        if (resp.state !== "Success") {
+        if (resp.state !== 'Success') {
           Swal.fire(
-            this.swalOptError = {...this.swalOptError, text: resp.userMessage}
+            (this.swalOptError = {
+              ...this.swalOptError,
+              text: resp.userMessage,
+            })
           );
         } else {
-          this.swalOptSuccess = {...this.swalOptSuccess, text: resp.userMessage};
-          Swal.fire(this.swalOptSuccess).then(()=> {
+          this.swalOptSuccess = {
+            ...this.swalOptSuccess,
+            text: resp.userMessage,
+          };
+          Swal.fire(this.swalOptSuccess).then(() => {
             this.utils.hideloginForm();
           });
         }
       },
-      error => {
+      (error) => {
         this.loading.hide();
         Swal.fire(
-          this.swalOptInvalid = {...this.swalOptInvalid, text: error.statusText}
+          (this.swalOptInvalid = {
+            ...this.swalOptInvalid,
+            text: error.statusText,
+          })
         );
       }
     );
@@ -102,5 +111,4 @@ export class ForgotpasswordformComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
 }

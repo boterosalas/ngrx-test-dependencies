@@ -1,30 +1,37 @@
 <div class="position-relative banner">
-    <div class="container position-relative">
-        <a class="back" [routerLink]="[ '/logros' ]"> <mat-icon class="white">arrow_back</mat-icon> </a>
+  <div class="container position-relative">
+    <a class="back" [routerLink]="['/logros']">
+      <mat-icon class="white">arrow_back</mat-icon>
+    </a>
+  </div>
+  <img class="responsive-img" [src]="img" [alt]="title" />
+  <div class="container set-size charts-container position-relative">
+    <div
+      fxLayout="column"
+      ngClass="pie-wrapper {{ classLevel }} progress-{{ percent }}"
+      fxLayoutAlign="center center"
+    >
+      <div fxLayout="column">
+        <div ngClass="label bglabel label-bg-{{ percent }}">
+          <span>
+            <img [src]="icon" [alt]="title" />
+          </span>
+          <span class="percent"> {{ percent }}% </span>
+        </div>
+      </div>
+      <div class="pie">
+        <div class="left-side half-circle"></div>
+        <div class="right-side half-circle"></div>
+      </div>
+      <div class="shadow"></div>
     </div>
-    <img class="responsive-img" [src]="img" [alt]="title">
-    <div class="container set-size charts-container position-relative">
-        <div fxLayout="column" ngClass="pie-wrapper {{classLevel}} progress-{{percent}}" fxLayoutAlign="center center">
-            <div fxLayout="column">
-                <div ngClass="label bglabel label-bg-{{percent}}">
-                    <span>
-                        <img [src]="icon" [alt]="title">
-                    </span>
-                    <span class="percent">
-                        {{percent}}%
-                    </span>
-                </div>
-            </div>
-            <div class="pie">
-              <div class="left-side half-circle"></div>
-              <div class="right-side half-circle"></div>
-            </div>
-            <div class="shadow"></div>
-          </div>
-          <div fxLayout="column" fxLayoutAlign="center center" class="block-text">
-              <p class="f-16">{{level}}</p>
-              <p ngClass.gt-xs="f-25" ngClass.xs="f-15">{{title}}</p>
-              <p class="f-16 g-light" *ngIf="nextLevel !== 'Último Nivel'">Siguiente nivel: <span ngClass="color-{{nextLevel}}">{{nextLevel}}</span></p>
-          </div>
+    <div fxLayout="column" fxLayoutAlign="center center" class="block-text">
+      <p class="f-16">{{ level }}</p>
+      <p ngClass.gt-xs="f-25" ngClass.xs="f-15">{{ title }}</p>
+      <p class="f-16 g-light" *ngIf="nextLevel !== 'Último Nivel'">
+        Siguiente nivel:
+        <span ngClass="color-{{ nextLevel }}">{{ nextLevel }}</span>
+      </p>
     </div>
+  </div>
 </div>

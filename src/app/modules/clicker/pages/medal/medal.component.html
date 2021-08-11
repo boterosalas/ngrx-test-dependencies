@@ -1,11 +1,22 @@
-<app-banner-medal [img]="medal.banner" [classLevel]="medal.classLevel" [percent]="medal.percent" [icon]="medal.icon" [level]="medal.level" [title]="medal.title" [nextLevel]="medal.nextLevel"></app-banner-medal>
+<app-banner-medal
+  [img]="medal.banner"
+  [classLevel]="medal.classLevel"
+  [percent]="medal.percent"
+  [icon]="medal.icon"
+  [level]="medal.level"
+  [title]="medal.title"
+  [nextLevel]="medal.nextLevel"
+></app-banner-medal>
 
-<div ngClass="container {{medal.class}}">
-    <app-card-mission [items]="medal.detail"></app-card-mission>
+<div ngClass="container {{ medal.class }}">
+  <app-card-mission [items]="medal.detail"></app-card-mission>
 </div>
 
-<div class="section pt-3 pb-3 mt-4 bg-white {{medal.class}}">
-    <div class="container">
-        <app-mission-level [titleMission]="medal.titleMission" [missionDescription]="medal.missionDescription"></app-mission-level>
-    </div>
+<div class="section pt-3 pb-3 mt-4 bg-white {{ medal.class }}">
+  <div class="container">
+    <app-mission-level
+      [titleMission]="medal.titleMission"
+      [missionDescription]="medal.missionDescription"
+    ></app-mission-level>
+  </div>
 </div>

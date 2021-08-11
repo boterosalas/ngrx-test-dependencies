@@ -1,11 +1,8 @@
 <div [id]="id" class="card-story">
-  <div 
-    *ngIf="showProgress"
-    class="progress-container"
-  >
-    <div 
+  <div *ngIf="showProgress" class="progress-container">
+    <div
       *ngFor="let progress of progressStory"
-      id="progress-{{progress.id}}"
+      id="progress-{{ progress.id }}"
       class="story-progress"
     >
       <span class="final-progress"></span>
@@ -13,19 +10,24 @@
     </div>
   </div>
   <div class="story-info">
-    <div class="client-info {{!showInfo ? 'visibility-hidden' : ''}}">
-      <img *ngIf="showImageClient" class="img-client" [src]="stories[0].businessImage" alt="{{stories[0].businessName}}">
+    <div class="client-info {{ !showInfo ? 'visibility-hidden' : '' }}">
+      <img
+        *ngIf="showImageClient"
+        class="img-client"
+        [src]="stories[0].businessImage"
+        alt="{{ stories[0].businessName }}"
+      />
       <h4 *ngIf="showTitleClient">{{ stories[0].businessName }}</h4>
-      <span *ngIf="stories && stories.length > 0">{{timeStory}}</span>
+      <span *ngIf="stories && stories.length > 0">{{ timeStory }}</span>
     </div>
     <div class="action-container">
-      <button 
-        id="shared-{{index}}"
-        *ngIf="showShared" 
+      <button
+        id="shared-{{ index }}"
+        *ngIf="showShared"
         class="btn-shared"
         (click)="dataSliderCategory()"
       >
-        <img src="/assets/img/shared.svg" alt="shared">
+        <img src="/assets/img/shared.svg" alt="shared" />
       </button>
       <mat-checkbox
         *ngIf="showCheck"
@@ -40,20 +42,20 @@
     </div>
   </div>
   <div class="container-absolute">
-    <div 
+    <div
       *ngFor="let story of stories; let i = index"
-      id="file-{{id}}-{{story.id}}"
+      id="file-{{ id }}-{{ story.id }}"
       class="container-file"
     >
-      <img 
+      <img
         *ngIf="story.isImage"
         class="img-story"
-        [src]="story.image" 
-        alt="story {{story.name}}"
-      >
-      <video 
+        [src]="story.image"
+        alt="story {{ story.name }}"
+      />
+      <video
         *ngIf="!story.isImage"
-        id="video-{{id}}-{{story.id}}"
+        id="video-{{ id }}-{{ story.id }}"
         [src]="story.image"
         class="video-story"
       ></video>
@@ -97,7 +99,7 @@
               fxLayoutAlign="center space-between"
               ngClass="{{ classButtonCopy }}"
             >
-              {{ "GENERIC.COPY_LINK" | translate }}
+              {{ 'GENERIC.COPY_LINK' | translate }}
             </span>
           </button>
 
@@ -136,7 +138,7 @@
     </form>
 
     <h3 class="border-bottom-orange-init share-desktop">
-      {{ "GENERIC.SHARE" | translate }}
+      {{ 'GENERIC.SHARE' | translate }}
     </h3>
 
     <div class="share-desktop" id="share">
@@ -247,7 +249,7 @@
       <mat-icon>keyboard_arrow_left</mat-icon>
       <span class="text-back">Volver</span>
     </span>
-    <p>{{ "GENERIC.REFERENCE_IDENTIFICATION" | translate }}</p>
+    <p>{{ 'GENERIC.REFERENCE_IDENTIFICATION' | translate }}</p>
     <mat-form-field appearance="outline" class="mt-2">
       <input
         matInput
@@ -265,7 +267,7 @@
           idCustomerForm.controls.identification.errors.required
         "
         >{{
-          "GENERIC.REQUIRED" | translate: { formValue: "Número de documento" }
+          'GENERIC.REQUIRED' | translate: { formValue: 'Número de documento' }
         }}</mat-error
       >
 
@@ -276,7 +278,7 @@
           idCustomerForm.controls.identification.errors.maxlength
         "
         >{{
-          "GENERIC.MAX_CHARACTERS"
+          'GENERIC.MAX_CHARACTERS'
             | translate
               : {
                   maxchar:
@@ -292,7 +294,7 @@
           idCustomerForm.controls.identification.invalid &&
           idCustomerForm.controls.identification.errors.pattern
         "
-        >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+        >{{ 'GENERIC.ONLY_NUMBERS' | translate }}</mat-error
       >
     </mat-form-field>
 
@@ -306,7 +308,7 @@
         [disabled]="!idCustomerForm.valid"
       >
         <span class="gtmCrearCedulaSiguiente">{{
-          "GENERIC.ACCEPT" | translate
+          'GENERIC.ACCEPT' | translate
         }}</span>
       </button>
     </div>

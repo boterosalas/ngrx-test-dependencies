@@ -8,7 +8,7 @@ import { distinctUntilChanged } from 'rxjs/operators';
 @Component({
   selector: 'app-all-bussiness',
   templateUrl: './all-bussiness.component.html',
-  styleUrls: ['./all-bussiness.component.scss']
+  styleUrls: ['./all-bussiness.component.scss'],
 })
 export class AllBussinessComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
@@ -21,18 +21,16 @@ export class AllBussinessComponent implements OnInit, OnDestroy {
   constructor(
     public router: Router,
     public auth: AuthService,
-    private content: ContentService) {
-  }
+    private content: ContentService
+  ) {}
 
   ngOnInit() {
     this.getBussiness();
   }
 
-
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 
   public getBussiness() {
     this.subscription = this.content
@@ -54,16 +52,15 @@ export class AllBussinessComponent implements OnInit, OnDestroy {
   }
 
   public bussinessNavigation(bussiness) {
-
     let params = {
       id: bussiness.id,
       code: bussiness.code,
       infoAditional: bussiness.infoaditional,
       imageurl: bussiness.imageurl,
-      description: bussiness.description
+      description: bussiness.description,
     };
     this.router.navigate([
-      "/bussiness",
+      '/bussiness',
       {
         id: params.id,
         code: params.code,
@@ -74,6 +71,4 @@ export class AllBussinessComponent implements OnInit, OnDestroy {
       },
     ]);
   }
-
-
 }

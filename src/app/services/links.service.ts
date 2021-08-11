@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import { environment } from "src/environments/environment";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   map,
   retry,
@@ -9,12 +9,12 @@ import {
   concatMap,
   take,
   tap,
-} from "rxjs/operators";
-import { ResponseService } from "../interfaces/response";
-import { Observable, of, throwError, concat } from "rxjs";
+} from 'rxjs/operators';
+import { ResponseService } from '../interfaces/response';
+import { Observable, of, throwError, concat } from 'rxjs';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class LinksService {
   constructor(private http: HttpClient) {}
@@ -25,61 +25,61 @@ export class LinksService {
   urlReports = environment.URL_REPORTS;
   urlApiContent = environment.URL_CONTENT;
   // comission = 'commissions';
-  reports = "Reports/ClickerPerformanceReport";
-  apiKPI = "Reports/getKPI";
-  apikpiresume = "Reports/getkpiresume";
+  reports = 'Reports/ClickerPerformanceReport';
+  apiKPI = 'Reports/getKPI';
+  apikpiresume = 'Reports/getkpiresume';
   //https://apitestexito.azure-api.net/Dllo-clickam-md-apireport/api/Reports/getkpibusiness
-  apikpibussiness = "Reports/getkpibusiness";
+  apikpibussiness = 'Reports/getkpibusiness';
   //https://apitestexito.azure-api.net/Dllo-clickam-md-apireport/api/Reports/getkpitotaldata
-  apikpiTotal = "Reports/getkpitotaldata";
-  apiUsersExcel = "Reports/getUsersExcel";
+  apikpiTotal = 'Reports/getkpitotaldata';
+  apiUsersExcel = 'Reports/getUsersExcel';
   //https://apitestexito.azure-api.net/Dllo-clickam-md-apireport/api/admin/gethistoricalbankinformation
-  apiUsersHistoricalBankInformation = "admin/gethistoricalbankinformation";
-  apiAuditExcel = "Reports/getAudit";
-  apiAuditUserInfo = "admin/getreportupdateinfoclicker";
-  apiGetReportReferral = "Reports/getreportreferral";
-  apigetReportClickam = "Reports/getReportClickam";
-  apigetReportTerms = "reports/getterms";
-  apigetReportCommissions = "reports/getadmincommissions";
-  apiUsers = "Reports/getUsers";
-  insurance = "Insurance/ProcessFiles";
-  apiSaveLink = "Link/SaveLink";
-  apiSaveLinkRefered = "link/savelinkreferred";
-  apiPostReferrrals = "Link/downloadReferrals";
-  apiGetTotalLinks = "Link/GetTotalLinksGenerated";
-  apiGetUrl = "link/geturl";
-  apiFile = "commissions/getUrlFileCommissions";
-  apigetDetailPaymentClicker = "commissions/getDetailPaymentClicker";
-  apigenerateCommissions = "commissions/generateCommissionsFile";
-  apiHistory = "commissions/getPaymentHistoryClicker";
-  apiLinkHistory = "linkhistory/getlinkhistory";
-  apiupdatePaymentDate = "commissions/updatePaymentDate";
-  apiUpdateStatusCommissionFile = "commissions/updatestatuscommissionfile";
-  apiUpdateStatusCommission = "commissions/updatestatuscommission";
-  apiDeleteCommissionFile = "commissions/deletecommissionfile";
-  apiDeleteCommission = "commissions/deletecommission";
-  apiGetReferrals = "referrals/getreferrals";
-  apiGetAmounts = "amount/getamounts";
-  apiSaveAmountCommission = "amount/saveamountcommission";
-  apiSaveAmountReferred = "amount/saveamountreferred";
-  apiGetmedals = "medal/getmedals";
-  apiPicking = "picking/importfilepickingcommissions";
-  apiOrder = "business/orderbusiness";
-  apiSellers = "seller/getsellers";
-  apiGetReport = "reports/clickerperformancereport";
-  apiGetReportMonth = "reports/getcommissionpaymentreport";
-  apiAudit = "reports/getaudit";
-  apikpiNovelties = "new/getkpinovelties";
-  apiReportRejected = "reports/getreportrejected";
-  apiGetOrderNumber = "orders/getorder";
-  token = localStorage.getItem("ACCESS_TOKEN");
+  apiUsersHistoricalBankInformation = 'admin/gethistoricalbankinformation';
+  apiAuditExcel = 'Reports/getAudit';
+  apiAuditUserInfo = 'admin/getreportupdateinfoclicker';
+  apiGetReportReferral = 'Reports/getreportreferral';
+  apigetReportClickam = 'Reports/getReportClickam';
+  apigetReportTerms = 'reports/getterms';
+  apigetReportCommissions = 'reports/getadmincommissions';
+  apiUsers = 'Reports/getUsers';
+  insurance = 'Insurance/ProcessFiles';
+  apiSaveLink = 'Link/SaveLink';
+  apiSaveLinkRefered = 'link/savelinkreferred';
+  apiPostReferrrals = 'Link/downloadReferrals';
+  apiGetTotalLinks = 'Link/GetTotalLinksGenerated';
+  apiGetUrl = 'link/geturl';
+  apiFile = 'commissions/getUrlFileCommissions';
+  apigetDetailPaymentClicker = 'commissions/getDetailPaymentClicker';
+  apigenerateCommissions = 'commissions/generateCommissionsFile';
+  apiHistory = 'commissions/getPaymentHistoryClicker';
+  apiLinkHistory = 'linkhistory/getlinkhistory';
+  apiupdatePaymentDate = 'commissions/updatePaymentDate';
+  apiUpdateStatusCommissionFile = 'commissions/updatestatuscommissionfile';
+  apiUpdateStatusCommission = 'commissions/updatestatuscommission';
+  apiDeleteCommissionFile = 'commissions/deletecommissionfile';
+  apiDeleteCommission = 'commissions/deletecommission';
+  apiGetReferrals = 'referrals/getreferrals';
+  apiGetAmounts = 'amount/getamounts';
+  apiSaveAmountCommission = 'amount/saveamountcommission';
+  apiSaveAmountReferred = 'amount/saveamountreferred';
+  apiGetmedals = 'medal/getmedals';
+  apiPicking = 'picking/importfilepickingcommissions';
+  apiOrder = 'business/orderbusiness';
+  apiSellers = 'seller/getsellers';
+  apiGetReport = 'reports/clickerperformancereport';
+  apiGetReportMonth = 'reports/getcommissionpaymentreport';
+  apiAudit = 'reports/getaudit';
+  apikpiNovelties = 'new/getkpinovelties';
+  apiReportRejected = 'reports/getreportrejected';
+  apiGetOrderNumber = 'orders/getorder';
+  token = localStorage.getItem('ACCESS_TOKEN');
   authorization = this.token;
 
   httpOptions = {
     headers: new HttpHeaders({
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + this.authorization,
-      "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + this.authorization,
+      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
     }),
   };
 
@@ -99,7 +99,7 @@ export class LinksService {
 
   public sendPickingfile(formdata) {
     let data = new FormData();
-    data.append("FileBase64", formdata.fileBase64);
+    data.append('FileBase64', formdata.fileBase64);
     // data.append("Business", formdata.business);
     // data.append("email", formdata.email);
 
@@ -267,14 +267,14 @@ export class LinksService {
   }
 
   public getKPI(date: any) {
-    const token = localStorage.getItem("ACCESS_TOKEN");
+    const token = localStorage.getItem('ACCESS_TOKEN');
     const authorization = token;
 
     let httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
       }),
     };
     return this.http
@@ -296,14 +296,14 @@ export class LinksService {
       );
   }
   public getResume() {
-    const token = localStorage.getItem("ACCESS_TOKEN");
+    const token = localStorage.getItem('ACCESS_TOKEN');
     const authorization = token;
 
     let httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
       }),
     };
     return this.http
@@ -322,18 +322,18 @@ export class LinksService {
       );
   }
   public getBussinessKPI(date: any) {
-    const token = localStorage.getItem("ACCESS_TOKEN");
+    const token = localStorage.getItem('ACCESS_TOKEN');
     const authorization = token;
 
     let httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
       }),
     };
-    let datesGet0 = date.start.split("T");
-    let datesGet1 = date.end.split("T");
+    let datesGet0 = date.start.split('T');
+    let datesGet1 = date.end.split('T');
     return this.http
       .get(
         `${this.urlReports}${this.apikpibussiness}?start=${datesGet0[0]}&end=${datesGet1[0]}`,
@@ -353,18 +353,18 @@ export class LinksService {
       );
   }
   public getTotalKPI(date: any) {
-    const token = localStorage.getItem("ACCESS_TOKEN");
+    const token = localStorage.getItem('ACCESS_TOKEN');
     const authorization = token;
 
     let httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
       }),
     };
-    let datesGet0 = date.start.split("T");
-    let datesGet1 = date.end.split("T");
+    let datesGet0 = date.start.split('T');
+    let datesGet1 = date.end.split('T');
     return this.http
       .get(
         `${this.urlReports}${this.apikpiTotal}?start=${datesGet0[0]}&end=${datesGet1[0]}`,
@@ -617,9 +617,9 @@ export class LinksService {
   }
   public sendfile(formdata) {
     let data = new FormData();
-    data.append("FileBase64", formdata.fileBase64);
+    data.append('FileBase64', formdata.fileBase64);
     // data.append("Business", formdata.business);
-    data.append("email", formdata.email);
+    data.append('email', formdata.email);
 
     return this.http
       .post(
@@ -640,8 +640,8 @@ export class LinksService {
 
   public updatePaymentDate(formdata) {
     let data = new FormData();
-    data.append("FileBase64", formdata.fileBase64);
-    data.append("email", formdata.email);
+    data.append('FileBase64', formdata.fileBase64);
+    data.append('email', formdata.email);
     return this.http
       .post(
         `${environment.URL_COMISSION}${this.apiupdatePaymentDate}`,
@@ -713,14 +713,14 @@ export class LinksService {
   }
 
   public getkpiNovelties(data: any) {
-    const token = localStorage.getItem("ACCESS_TOKEN");
+    const token = localStorage.getItem('ACCESS_TOKEN');
     const authorization = token;
 
     let httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
       }),
     };
 
@@ -743,8 +743,8 @@ export class LinksService {
   public updateStatusCommissionFile(formdata) {
     let httpOptionsForm = {
       headers: new HttpHeaders({
-        Authorization: "Bearer " + this.authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+        Authorization: 'Bearer ' + this.authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
       }),
     };
 
@@ -771,8 +771,8 @@ export class LinksService {
   public deleteCommissionFile(formdata) {
     let httpOptionsForm = {
       headers: new HttpHeaders({
-        Authorization: "Bearer " + this.authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+        Authorization: 'Bearer ' + this.authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
       }),
     };
 
@@ -869,7 +869,7 @@ export class LinksService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: ResponseService) => {
@@ -877,5 +877,4 @@ export class LinksService {
         })
       );
   }
-
 }

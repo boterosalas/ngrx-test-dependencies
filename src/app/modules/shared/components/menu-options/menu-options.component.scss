@@ -1,5 +1,5 @@
-@import "variables";
-@import "general";
+@import 'variables';
+@import 'general';
 
 .menu-mobile {
   &.active {
@@ -21,8 +21,8 @@
 
   .Configuración {
     &::before {
-      content: "\ecdb";
-      font-family: "The-Icon-of", sans-serif;
+      content: '\ecdb';
+      font-family: 'The-Icon-of', sans-serif;
       font-size: 19px;
       width: 20px;
       height: 20px;
@@ -35,9 +35,9 @@
 
   .logout {
     &::before {
-      font-family: "The-Icon-of", sans-serif;
+      font-family: 'The-Icon-of', sans-serif;
       color: red;
-      content: "\ecdf";
+      content: '\ecdf';
       font-size: 22px;
       width: 20px;
       height: 20px;
@@ -45,11 +45,11 @@
       top: 3px;
     }
   }
-  
+
   .Operación {
     &::before {
-      font-family: "The-Icon-of", sans-serif;
-      content: "\ebf3";
+      font-family: 'The-Icon-of', sans-serif;
+      content: '\ebf3';
       font-size: 19px;
       width: 20px;
       height: 20px;
@@ -61,8 +61,8 @@
 
   .Mercadeo {
     &::before {
-      font-family: "The-Icon-of", sans-serif;
-      content: "\ec5b";
+      font-family: 'The-Icon-of', sans-serif;
+      content: '\ec5b';
       font-size: 19px;
       width: 20px;
       height: 20px;
@@ -74,8 +74,8 @@
 
   .Torre {
     &::before {
-      font-family: "The-Icon-of", sans-serif;
-      content: "\ecc3";
+      font-family: 'The-Icon-of', sans-serif;
+      content: '\ecc3';
       font-size: 19px;
       width: 20px;
       height: 20px;
@@ -85,10 +85,9 @@
     }
   }
 
-  .mat-expansion-panel-header-title{
-    margin-left: 0 ;
+  .mat-expansion-panel-header-title {
+    margin-left: 0;
   }
-
 }
 
 .terms {
@@ -141,11 +140,11 @@
   border-top: 1px solid #ececec;
 }
 
-.icmen{
+.icmen {
   margin-right: 5px;
 }
 
-.icsub{
+.icsub {
   font-size: 20px;
   margin-right: 5px;
 }

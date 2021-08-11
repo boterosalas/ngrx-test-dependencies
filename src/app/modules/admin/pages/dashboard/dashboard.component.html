@@ -12,7 +12,7 @@
     <div fxLayout="column" fxFlex="70">
       <div fxLayout.gt-xs="row" fxLayout.xs="column">
         <span fxLayout="column">
-          <p>{{ "DASHBOARD.RANGE" | translate }}</p>
+          <p>{{ 'DASHBOARD.RANGE' | translate }}</p>
         </span>
         <span fxLayout="column">
           <form [formGroup]="form" ngClass.xs="fp">
@@ -27,7 +27,13 @@
               [alwaysShowCalendars]="form.get('alwaysShowCalendars').value"
               [showRangeLabelOnInput]="form.get('showRangeLabelOnInput').value"
               ngxDaterangepickerMd
-              class="form-control border-input mat-elevation-z1 p-2 border-radius"
+              class="
+                form-control
+                border-input
+                mat-elevation-z1
+                p-2
+                border-radius
+              "
               (change)="change()"
             />
           </form>

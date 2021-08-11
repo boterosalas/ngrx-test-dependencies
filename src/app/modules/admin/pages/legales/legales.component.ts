@@ -7,10 +7,9 @@ import { UtilsService } from 'src/app/services/utils.service';
 @Component({
   selector: 'app-legales',
   templateUrl: './legales.component.html',
-  styleUrls: ['./legales.component.scss']
+  styleUrls: ['./legales.component.scss'],
 })
 export class LegalesComponent implements OnInit {
-
   constructor(
     private personalInfo: MasterDataService,
     private _snackBar: MatSnackBar,
@@ -30,15 +29,26 @@ export class LegalesComponent implements OnInit {
     showToolbar: true,
     placeholder: 'Escriba su articulo...',
     toolbarHiddenButtons: [
-      ['heading', 'insertImage', 'insertVideo',
+      [
+        'heading',
+        'insertImage',
+        'insertVideo',
         'customClasses',
-        'removeFormat', 'fontName', 'backgroundColor',
-        'insertHorizontalRule', 'toggleEditorMode', 'undo',
-        'redo', 'strikeThrough', 'subscript',
-        'superscript', 'justifyLeft',
+        'removeFormat',
+        'fontName',
+        'backgroundColor',
+        'insertHorizontalRule',
+        'toggleEditorMode',
+        'undo',
+        'redo',
+        'strikeThrough',
+        'subscript',
+        'superscript',
+        'justifyLeft',
         'justifyCenter',
         'justifyRight',
-        'justifyFull']
+        'justifyFull',
+      ],
     ],
     defaultParagraphSeparator: 'p',
     defaultFontName: '',
@@ -46,16 +56,15 @@ export class LegalesComponent implements OnInit {
     enableToolbar: true,
     sanitize: true,
     toolbarPosition: 'top',
-
   };
   htmlContentTerminos: string;
-  dateTerms:string;
+  dateTerms: string;
   htmlContentProteccion: string;
-  dateProteccion:string;
+  dateProteccion: string;
   htmlContentTransparencia: string;
-  dateTransparencia:string;
+  dateTransparencia: string;
   htmlContentPrograma: string;
-  datePrograma:string;
+  datePrograma: string;
   textoTerminos: string;
   textoProteccion: string;
   textoTransparencia: string;
@@ -63,7 +72,7 @@ export class LegalesComponent implements OnInit {
   datos: any;
   changeTerms = true;
   changeProtection = true;
-  changeTransparency= true;
+  changeTransparency = true;
   changeRefer = true;
   termsForm: FormGroup;
   protectionForm: FormGroup;
@@ -97,95 +106,99 @@ export class LegalesComponent implements OnInit {
       this.dateProteccion = resp.objectResponse[1].date;
       this.dateTransparencia = resp.objectResponse[2].date;
       this.datePrograma = resp.objectResponse[3].date;
-      setTimeout(() => {        
+      setTimeout(() => {
         this.termsForm.controls.title.setValue(this.textoTerminos);
         this.termsForm.controls.termsEditor.setValue(this.htmlContentTerminos);
         this.protectionForm.controls.title.setValue(this.textoProteccion);
-        this.protectionForm.controls.termsEditor.setValue(this.htmlContentProteccion);
+        this.protectionForm.controls.termsEditor.setValue(
+          this.htmlContentProteccion
+        );
         this.transparencyForm.controls.title.setValue(this.textoTransparencia);
-        this.transparencyForm.controls.termsEditor.setValue(this.htmlContentTransparencia);
+        this.transparencyForm.controls.termsEditor.setValue(
+          this.htmlContentTransparencia
+        );
         this.refersForm.controls.title.setValue(this.textoPrograma);
         this.refersForm.controls.termsEditor.setValue(this.htmlContentPrograma);
       }, 500);
-    })
+    });
   }
 
   public createFormTerms() {
     this.termsForm = this.fb.group({
       title: ['', Validators.required],
-      termsEditor: ['', Validators.required]
-    })
+      termsEditor: ['', Validators.required],
+    });
   }
 
   public createFormProtection() {
     this.protectionForm = this.fb.group({
       title: ['', Validators.required],
-      termsEditor: ['', Validators.required]
-    })
+      termsEditor: ['', Validators.required],
+    });
   }
 
   public createFormTransparency() {
     this.transparencyForm = this.fb.group({
       title: ['', Validators.required],
-      termsEditor: ['', Validators.required]
-    })
+      termsEditor: ['', Validators.required],
+    });
   }
 
   public createFormRefers() {
     this.refersForm = this.fb.group({
       title: ['', Validators.required],
-      termsEditor: ['', Validators.required]
-    })
+      termsEditor: ['', Validators.required],
+    });
   }
 
   private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      duration: 5000
+      duration: 5000,
     });
   }
 
   saveLegalEndpoint() {
     this.personalInfo.setTerms(this.datos).subscribe((resp) => {
-      if (resp.state === "Success") {
+      if (resp.state === 'Success') {
         this.openSnackBar(resp.userMessage, 'Cerrar');
       }
-    })
+    });
   }
 
   detectChanges() {
-   let valueEditor = this.termsForm.controls.termsEditor.value;
-   if(this.htmlContentTerminos === valueEditor) {
-     this.changeTerms = true;
-   } else {
-     this.changeTerms = false;
-   }
+    let valueEditor = this.termsForm.controls.termsEditor.value;
+    if (this.htmlContentTerminos === valueEditor) {
+      this.changeTerms = true;
+    } else {
+      this.changeTerms = false;
+    }
   }
 
   detectChangesProtection() {
-   let valueEditor = this.protectionForm.controls.termsEditor.value;
-   if(this.htmlContentProteccion === valueEditor) {
-     this.changeProtection = true;
-   } else {
-     this.changeProtection = false;
-   }
+    let valueEditor = this.protectionForm.controls.termsEditor.value;
+    if (this.htmlContentProteccion === valueEditor) {
+      this.changeProtection = true;
+    } else {
+      this.changeProtection = false;
+    }
   }
 
   detectChangesTransparency() {
-   let valueEditor = this.transparencyForm.controls.termsEditor.value;
-   if(this.htmlContentTransparencia === valueEditor) {
-     this.changeTransparency = true;
-   } else {
-     this.changeTransparency = false;
-   }
+    let valueEditor = this.transparencyForm.controls.termsEditor.value;
+    if (this.htmlContentTransparencia === valueEditor) {
+      this.changeTransparency = true;
+    } else {
+      this.changeTransparency = false;
+    }
   }
 
   detectChangesRefer() {
-   let valueEditor = this.refersForm.controls.termsEditor.value;
-   if(this.htmlContentPrograma === valueEditor) {
-     this.changeRefer = true;
-   } else {
-     this.changeRefer = false;
-   }
+    let valueEditor = this.refersForm.controls.termsEditor.value;
+    if (this.htmlContentPrograma === valueEditor) {
+      this.changeRefer = true;
+    } else {
+      this.changeRefer = false;
+    }
   }
 
   saveStatus(id, keyUp, texto, htmlContenido) {
@@ -193,40 +206,36 @@ export class LegalesComponent implements OnInit {
       id: id,
       sectionKey: keyUp,
       sectionTitle: texto,
-      sectionValue: htmlContenido
-    }
+      sectionValue: htmlContenido,
+    };
     this.saveLegalEndpoint();
   }
 
   saveLegal(elemento) {
-
-    if (elemento === "1") {
+    if (elemento === '1') {
       let titleTerminos = this.termsForm.controls.title.value;
       let contentTerminos = this.termsForm.controls.termsEditor.value;
-      this.saveStatus(1, "TerminosCondiciones", titleTerminos, contentTerminos)
-
-    }
-
-    else if (elemento === "2") {
+      this.saveStatus(1, 'TerminosCondiciones', titleTerminos, contentTerminos);
+    } else if (elemento === '2') {
       let titleProtection = this.protectionForm.controls.title.value;
       let contentProtection = this.protectionForm.controls.termsEditor.value;
-      this.saveStatus(2, "ProteccionDatos", titleProtection, contentProtection)
-    }
-
-    else if (elemento === "3") {
+      this.saveStatus(2, 'ProteccionDatos', titleProtection, contentProtection);
+    } else if (elemento === '3') {
       let titleTransparency = this.transparencyForm.controls.title.value;
-      let contentTransparency = this.transparencyForm.controls.termsEditor.value;
-      this.saveStatus(3, "Transparencia", titleTransparency, contentTransparency)
-    }
-
-    else if (elemento === "4") {
+      let contentTransparency =
+        this.transparencyForm.controls.termsEditor.value;
+      this.saveStatus(
+        3,
+        'Transparencia',
+        titleTransparency,
+        contentTransparency
+      );
+    } else if (elemento === '4') {
       let titleRefer = this.refersForm.controls.title.value;
       let contentRefer = this.refersForm.controls.termsEditor.value;
-      this.saveStatus(4, "ProgramaReferidos", titleRefer, contentRefer)
-
+      this.saveStatus(4, 'ProgramaReferidos', titleRefer, contentRefer);
     } else {
-      console.warn("Ocurrio algo extraño")
+      console.warn('Ocurrio algo extraño');
     }
-
   }
 }

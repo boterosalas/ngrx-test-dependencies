@@ -1,18 +1,18 @@
-import { Injectable, OnDestroy } from "@angular/core";
-import { environment } from "src/environments/environment";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Router } from "@angular/router";
-import { map, retry, delay, retryWhen, tap, take } from "rxjs/operators";
-import { BehaviorSubject, Subscription } from "rxjs";
-import { JwtHelperService } from "@auth0/angular-jwt";
-import decode from "jwt-decode";
-import { Forgotpassword } from "../interfaces/forgotpassword";
-import { Recoverpassword } from "../interfaces/recoverpassword";
-import { UserService } from "./user.service";
-import { ResponseService } from "../interfaces/response";
+import { Injectable, OnDestroy } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { map, retry, delay, retryWhen, tap, take } from 'rxjs/operators';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import decode from 'jwt-decode';
+import { Forgotpassword } from '../interfaces/forgotpassword';
+import { Recoverpassword } from '../interfaces/recoverpassword';
+import { UserService } from './user.service';
+import { ResponseService } from '../interfaces/response';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AuthService implements OnDestroy {
   constructor(
@@ -37,37 +37,37 @@ export class AuthService implements OnDestroy {
   }
 
   url = environment.URL_SECURITY;
-  apiLogin = "Authentication/login";
-  apiGetmenus = "Authentication/getMenus";
-  apiGetmenusClicker = "Authentication/getMenusByRol";
-  apiGetmenusFromAdmin = "Authentication/getMenus?visible=false";
-  apiGetmenusNoLogin = "Authentication/getMenus?visible=true";
-  apiGetmenusNoLoginViewUser = "Authentication/getMenus?visible=false";
-  apiSaveMenu = "Authentication/savemenu";
-  apiSaveMenuGroup = "Authentication/savegroup";
-  apiDeleteMenu = "Authentication/deletemenu";
-  apiDeleteMenuGroup = "Authentication/deletegroup";
-  apiSaveOrderMenus = "Authentication/saveordermenus";  
-  apiSaveOrderGrupoMenus = "Authentication/saveordergrupomenus";  
-  apiForgotPassword = "Authentication/recoveryPassword";
-  apiRecoverPassword = "Authentication/resetpassword";
-  apiChangePassword = "Authentication/changePassword";
-  apisendactivation = "activation/sendactivation";
-  apiGetsAdmins = "permissions/getusersadmin";
-  apiGetPermisionAdmin = "permissions/getpermissionsbyuser";
-  apiSavePermision = "permissions/savepermissions";
-  apiRefresh = "token/refresh";
+  apiLogin = 'Authentication/login';
+  apiGetmenus = 'Authentication/getMenus';
+  apiGetmenusClicker = 'Authentication/getMenusByRol';
+  apiGetmenusFromAdmin = 'Authentication/getMenus?visible=false';
+  apiGetmenusNoLogin = 'Authentication/getMenus?visible=true';
+  apiGetmenusNoLoginViewUser = 'Authentication/getMenus?visible=false';
+  apiSaveMenu = 'Authentication/savemenu';
+  apiSaveMenuGroup = 'Authentication/savegroup';
+  apiDeleteMenu = 'Authentication/deletemenu';
+  apiDeleteMenuGroup = 'Authentication/deletegroup';
+  apiSaveOrderMenus = 'Authentication/saveordermenus';
+  apiSaveOrderGrupoMenus = 'Authentication/saveordergrupomenus';
+  apiForgotPassword = 'Authentication/recoveryPassword';
+  apiRecoverPassword = 'Authentication/resetpassword';
+  apiChangePassword = 'Authentication/changePassword';
+  apisendactivation = 'activation/sendactivation';
+  apiGetsAdmins = 'permissions/getusersadmin';
+  apiGetPermisionAdmin = 'permissions/getpermissionsbyuser';
+  apiSavePermision = 'permissions/savepermissions';
+  apiRefresh = 'token/refresh';
 
-  role = "";
+  role = '';
 
-  token = localStorage.getItem("ACCESS_TOKEN");
+  token = localStorage.getItem('ACCESS_TOKEN');
   authorization = this.token;
 
   httpOptions = {
     headers: new HttpHeaders({
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + this.authorization,
-      "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + this.authorization,
+      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
     }),
   };
 
@@ -85,7 +85,7 @@ export class AuthService implements OnDestroy {
   }
 
   public isLoggedIn() {
-    return localStorage.getItem("ACCESS_TOKEN") !== null;
+    return localStorage.getItem('ACCESS_TOKEN') !== null;
     // if (token == null) {
     //   return false;
     // } else {
@@ -96,14 +96,14 @@ export class AuthService implements OnDestroy {
   public logout() {
     localStorage.clear();
     setTimeout(() => {
-      this.router.navigate(["/"]);
+      this.router.navigate(['/']);
     }, 500);
     this.getRole$.next(null);
     this.isLogged$.next(false);
   }
 
   public getRole() {
-    const token = localStorage.getItem("ACCESS_TOKEN");
+    const token = localStorage.getItem('ACCESS_TOKEN');
     if (token !== null) {
       const tokenPayload = decode(token);
       this.role = tokenPayload.role;
@@ -121,7 +121,7 @@ export class AuthService implements OnDestroy {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: any) => {
@@ -130,15 +130,18 @@ export class AuthService implements OnDestroy {
       );
   }
 
-  public getMenuClicker(visible:Boolean = false) {
+  public getMenuClicker(visible: Boolean = false) {
     return this.http
-      .get(`${this.url + this.apiGetmenusClicker}?visible=${visible}`, this.httpOptions)
+      .get(
+        `${this.url + this.apiGetmenusClicker}?visible=${visible}`,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: any) => {
@@ -155,7 +158,7 @@ export class AuthService implements OnDestroy {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: any) => {
@@ -172,7 +175,7 @@ export class AuthService implements OnDestroy {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: any) => {
@@ -189,7 +192,7 @@ export class AuthService implements OnDestroy {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: any) => {
@@ -200,13 +203,13 @@ export class AuthService implements OnDestroy {
 
   public saveMenu(datos: any) {
     return this.http
-      .post(`${this.url + this.apiSaveMenu}`, datos , this.httpOptions)
+      .post(`${this.url + this.apiSaveMenu}`, datos, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: ResponseService) => {
@@ -217,13 +220,13 @@ export class AuthService implements OnDestroy {
 
   public saveMenuGroup(datos: any) {
     return this.http
-      .post(`${this.url + this.apiSaveMenuGroup}`, datos , this.httpOptions)
+      .post(`${this.url + this.apiSaveMenuGroup}`, datos, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: ResponseService) => {
@@ -231,8 +234,6 @@ export class AuthService implements OnDestroy {
         })
       );
   }
-
-  
 
   public deleteMenu(id: any) {
     return this.http
@@ -242,7 +243,7 @@ export class AuthService implements OnDestroy {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {
@@ -253,13 +254,16 @@ export class AuthService implements OnDestroy {
 
   public deleteGroup(id: any) {
     return this.http
-      .delete(`${this.url + this.apiDeleteMenuGroup}?id=${id}`, this.httpOptions)
+      .delete(
+        `${this.url + this.apiDeleteMenuGroup}?id=${id}`,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {
@@ -270,13 +274,13 @@ export class AuthService implements OnDestroy {
 
   public saveOrderMenus(datos: any) {
     return this.http
-      .post(`${this.url + this.apiSaveOrderMenus}`, datos , this.httpOptions)
+      .post(`${this.url + this.apiSaveOrderMenus}`, datos, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {
@@ -287,13 +291,17 @@ export class AuthService implements OnDestroy {
 
   public saveOrderGrupoMenus(datos: any) {
     return this.http
-      .post(`${this.url + this.apiSaveOrderGrupoMenus}`, datos , this.httpOptions)
+      .post(
+        `${this.url + this.apiSaveOrderGrupoMenus}`,
+        datos,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {
@@ -301,9 +309,6 @@ export class AuthService implements OnDestroy {
         })
       );
   }
-
-  
-  
 
   public changePassword(data: any) {
     return this.http.post(
@@ -330,8 +335,8 @@ export class AuthService implements OnDestroy {
   }
 
   public refreshToken() {
-    const accesstoken = localStorage.getItem("ACCESS_TOKEN");
-    const refreshtoken = localStorage.getItem("REFRESH_TOKEN");
+    const accesstoken = localStorage.getItem('ACCESS_TOKEN');
+    const refreshtoken = localStorage.getItem('REFRESH_TOKEN');
     return this.http.post(
       `${this.url + this.apiRefresh}`,
       { AccessToken: accesstoken, refreshtoken },
@@ -354,7 +359,7 @@ export class AuthService implements OnDestroy {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: any) => {
@@ -364,13 +369,16 @@ export class AuthService implements OnDestroy {
   }
   public getPermisionByUser(rol) {
     return this.http
-      .get(`${this.url + this.apiGetPermisionAdmin}?rol=${rol}`, this.httpOptions)
+      .get(
+        `${this.url + this.apiGetPermisionAdmin}?rol=${rol}`,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((resp: any) => {
@@ -379,7 +387,6 @@ export class AuthService implements OnDestroy {
       );
   }
   public savePermision(data: any) {
-
     return this.http
       .post(`${this.url + this.apiSavePermision}`, data, this.httpOptions)
       .pipe(
@@ -387,7 +394,7 @@ export class AuthService implements OnDestroy {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {

@@ -1,14 +1,14 @@
-import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
-import { RouterTestingModule } from "@angular/router/testing";
-import { of } from "rxjs";
-import { AppMaterialModule } from "src/app/modules/shared/app-material/app-material.module";
-import { ContentService } from "src/app/services/content.service";
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { ContentService } from 'src/app/services/content.service';
 
-import { DialogDeleteNotificationComponent } from "./dialog-delete-notification.component";
+import { DialogDeleteNotificationComponent } from './dialog-delete-notification.component';
 
-describe("DialogDeleteNotificationComponent", () => {
+describe('DialogDeleteNotificationComponent', () => {
   let component: DialogDeleteNotificationComponent;
   let fixture: ComponentFixture<DialogDeleteNotificationComponent>;
 
@@ -17,13 +17,13 @@ describe("DialogDeleteNotificationComponent", () => {
   };
 
   let respDelete = {
-    state: "Success",
-    userMessage: "Se ha eliminado satisfactoriamente",
+    state: 'Success',
+    userMessage: 'Se ha eliminado satisfactoriamente',
     objectResponse: null,
   };
 
-  const mockContentService = jasmine.createSpyObj("ContentService", [
-    "deleteNotificationAdmin",
+  const mockContentService = jasmine.createSpyObj('ContentService', [
+    'deleteNotificationAdmin',
   ]);
 
   beforeEach(async(() => {
@@ -48,16 +48,16 @@ describe("DialogDeleteNotificationComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it("close dialog", () => {
+  it('close dialog', () => {
     component.cancelDelete();
     expect(component).toBeTruthy();
   });
 
-  it("Delete notification", () => {
+  it('Delete notification', () => {
     mockContentService.deleteNotificationAdmin.and.returnValue(of(respDelete));
     component.deleteNotification();
     expect(mockContentService.deleteNotificationAdmin).toHaveBeenCalled();

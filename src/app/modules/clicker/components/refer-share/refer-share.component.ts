@@ -1,4 +1,12 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  ViewChild,
+  ElementRef,
+  Input,
+} from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ContentService } from 'src/app/services/content.service';
 import { TokenService } from 'src/app/services/token.service';
@@ -6,13 +14,12 @@ import { TokenService } from 'src/app/services/token.service';
 @Component({
   selector: 'app-refer-share',
   templateUrl: './refer-share.component.html',
-  styleUrls: ['./refer-share.component.scss']
+  styleUrls: ['./refer-share.component.scss'],
 })
 export class ReferShareComponent implements OnInit {
-
   @Output() urlClicker = new EventEmitter();
   @Output() shareMobile = new EventEmitter();
-  @ViewChild("linkInput", { static: false }) copy: ElementRef<any>;
+  @ViewChild('linkInput', { static: false }) copy: ElementRef<any>;
   @Input() urlValue: string;
 
   url: string;
@@ -25,7 +32,7 @@ export class ReferShareComponent implements OnInit {
     private fb: FormBuilder,
     private token: TokenService,
     private content: ContentService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.generateUrl();
@@ -36,10 +43,12 @@ export class ReferShareComponent implements OnInit {
     this.tokenInfo = this.token.userInfo();
     this.idClicker = this.tokenInfo.idclicker;
     let domain = document.location.origin;
-    this.urlWhatsapp = encodeURI(`${domain}/#/inicio?code=${this.idClicker.replace(' ', '%20')}`);
+    this.urlWhatsapp = encodeURI(
+      `${domain}/#/inicio?code=${this.idClicker.replace(' ', '%20')}`
+    );
     this.url = encodeURI(`${domain}/#/inicio?code=${this.idClicker}`);
     this.formLink = this.fb.group({
-      link: [this.url]
+      link: [this.url],
     });
   }
 
@@ -56,7 +65,6 @@ export class ReferShareComponent implements OnInit {
     let formData: FormData = new FormData();
     formData.append('idClicker', this.idClicker);
     formData.append('type', 'Generate');
-    this.content.setClick(formData).subscribe()
+    this.content.setClick(formData).subscribe();
   }
-
 }

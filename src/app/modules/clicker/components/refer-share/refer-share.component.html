@@ -1,84 +1,110 @@
-<h2 class="border-bottom-orange-init" fxShow.gt-xs="true" fxHide.xs="true">{{ 'REFER.SHARE_FRIENDS' | translate }}</h2>
-<p>{{'REFER.SHARE' | translate}}</p>
+<h2 class="border-bottom-orange-init" fxShow.gt-xs="true" fxHide.xs="true">
+  {{ 'REFER.SHARE_FRIENDS' | translate }}
+</h2>
+<p>{{ 'REFER.SHARE' | translate }}</p>
 
-  <div class="share-desktop w-100" id="share" fxLayout="row" fxLayoutAlign="space-around" fxLayoutGap="20px">
-
-
-    <span class="share-refer gtmRfiereYGanaClicReferirwhatsapp" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
-      <a 
+<div
+  class="share-desktop w-100"
+  id="share"
+  fxLayout="row"
+  fxLayoutAlign="space-around"
+  fxLayoutGap="20px"
+>
+  <span
+    class="share-refer gtmRfiereYGanaClicReferirwhatsapp"
+    fxLayout="column"
+    fxFlex="33"
+    fxLayoutAlign="center center"
+  >
+    <a
       (click)="generateLink()"
-      href="https://web.whatsapp.com/send?text={{urlWhatsapp}}" 
+      href="https://web.whatsapp.com/send?text={{ urlWhatsapp }}"
       target="_blank"
       data-action="share/whatsapp/share"
       ngClass="sharebutton p-3 gtmRfiereYGanaClicReferirwhatsapp"
-      >
-        <i ngClass="fab fa-whatsapp gtmRfiereYGanaClicReferirwhatsapp"></i>
+    >
+      <i ngClass="fab fa-whatsapp gtmRfiereYGanaClicReferirwhatsapp"></i>
     </a>
-    <p class="galano-bold f-20 gtmRfiereYGanaClicReferirwhatsapp"> {{ "REFER.WHATSAPP" | translate }}</p>
-    </span>
-    
-    <span class="share-refer gtmRfiereYGanaClicReferirFacebook" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
-      <button
-        theme="circles-dark"
-        shareButton="facebook"
-        [url]="url"
-        ngClass="sharebutton  mr-2 gtmRfiereYGanaClicReferirFacebook"
-        (click)="generateLink()"
-      >
-        <i ngClass="fab fa-facebook-f gtmRfiereYGanaClicReferirFacebook"></i>
-      </button> 
-      <p class="galano-bold f-20 gtmRfiereYGanaClicReferirFacebook"> {{ "REFER.FACEBOOK" | translate }}</p>
-    </span>
+    <p class="galano-bold f-20 gtmRfiereYGanaClicReferirwhatsapp">
+      {{ 'REFER.WHATSAPP' | translate }}
+    </p>
+  </span>
 
-    <span class="share-refer gtmRfiereYGanaClicReferirTwitter" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
-      <button
-        theme="circles-dark"
-        shareButton="twitter"
-        [url]="url"
-        (click)="generateLink()"
-        ngClass="sharebutton  mr-2 gtmRfiereYGanaClicReferirTwitter"
-      >
-        <i ngClass="fab fa-twitter gtmRfiereYGanaClicReferirTwitter"></i>
-      </button>
-      <p class="galano-bold f-20 gtmRfiereYGanaClicReferirTwitter"> {{ "REFER.TWITTER" | translate }}</p>
-    </span>
-  
-
-  </div>
-
-  <div class="share-mobile">
+  <span
+    class="share-refer gtmRfiereYGanaClicReferirFacebook"
+    fxLayout="column"
+    fxFlex="33"
+    fxLayoutAlign="center center"
+  >
     <button
+      theme="circles-dark"
+      shareButton="facebook"
+      [url]="url"
+      ngClass="sharebutton  mr-2 gtmRfiereYGanaClicReferirFacebook"
+      (click)="generateLink()"
+    >
+      <i ngClass="fab fa-facebook-f gtmRfiereYGanaClicReferirFacebook"></i>
+    </button>
+    <p class="galano-bold f-20 gtmRfiereYGanaClicReferirFacebook">
+      {{ 'REFER.FACEBOOK' | translate }}
+    </p>
+  </span>
+
+  <span
+    class="share-refer gtmRfiereYGanaClicReferirTwitter"
+    fxLayout="column"
+    fxFlex="33"
+    fxLayoutAlign="center center"
+  >
+    <button
+      theme="circles-dark"
+      shareButton="twitter"
+      [url]="url"
+      (click)="generateLink()"
+      ngClass="sharebutton  mr-2 gtmRfiereYGanaClicReferirTwitter"
+    >
+      <i ngClass="fab fa-twitter gtmRfiereYGanaClicReferirTwitter"></i>
+    </button>
+    <p class="galano-bold f-20 gtmRfiereYGanaClicReferirTwitter">
+      {{ 'REFER.TWITTER' | translate }}
+    </p>
+  </span>
+</div>
+
+<div class="share-mobile">
+  <button
     class="button button-100 button-height f-16"
     mat-raised-button
     id="ShareInvite"
     color="orange"
     (click)="share()"
   >
-  <span fxLayout="row" fxLayoutAlign="space-between">
-    {{ "REFER.SEND_INVITATION" | translate }}
-    <img src="/assets/img/share/compartir-button.svg" alt="share-button">
-  </span>
-    </button>
+    <span fxLayout="row" fxLayoutAlign="space-between">
+      {{ 'REFER.SEND_INVITATION' | translate }}
+      <img src="/assets/img/share/compartir-button.svg" alt="share-button" />
+    </span>
+  </button>
+</div>
 
-  </div>
-
-  <div class="bg-gray mt-3">
-    <h3 class="border-bottom-orange-init">{{ "REFER.SHARE_INVITATION" | translate }}</h3>
-    <form [formGroup]="formLink">
-      <div fxLayout.gt-xs="row" fxLayout="column" fxLayoutGap="15px">
-        <div fxLayout="column" fxFlex="80" fxFlex.xs="100">
-          <mat-form-field appearance="dashed" class="dashed-2 f-11">
-            <input
-              id="url"
-              matInput
-              formcontrolName="link"
-              [value]="url"
-              #linkInput
-              readonly
-            />
-          </mat-form-field>
-        </div>
-        <div fxLayout="column" fxFlex="20" fxFlex.xs="100">
+<div class="bg-gray mt-3">
+  <h3 class="border-bottom-orange-init">
+    {{ 'REFER.SHARE_INVITATION' | translate }}
+  </h3>
+  <form [formGroup]="formLink">
+    <div fxLayout.gt-xs="row" fxLayout="column" fxLayoutGap="15px">
+      <div fxLayout="column" fxFlex="80" fxFlex.xs="100">
+        <mat-form-field appearance="dashed" class="dashed-2 f-11">
+          <input
+            id="url"
+            matInput
+            formcontrolName="link"
+            [value]="url"
+            #linkInput
+            readonly
+          />
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxFlex="20" fxFlex.xs="100">
         <button
           mat-button
           id="btnCopy"
@@ -87,11 +113,11 @@
           color="orange"
           (click)="copyUrl()"
         >
-        <span class="gtmRfiereYGanaClicReferirCopiarLink">
-          {{ "REFER.COPY" | translate }}
-        </span>
+          <span class="gtmRfiereYGanaClicReferirCopiarLink">
+            {{ 'REFER.COPY' | translate }}
+          </span>
         </button>
       </div>
-      </div>
+    </div>
   </form>
-  </div>
+</div>

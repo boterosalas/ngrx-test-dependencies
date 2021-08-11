@@ -5,9 +5,9 @@ import {
   TemplateRef,
   HostListener,
   OnDestroy,
-} from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
-import { Router, NavigationStart, NavigationEnd } from "@angular/router";
+} from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import {
   trigger,
   state,
@@ -15,29 +15,29 @@ import {
   transition,
   group,
   animate,
-} from "@angular/animations";
-import { UtilsService } from "./services/utils.service";
-import { Subscription } from "rxjs";
-import { AuthService } from "./services/auth.service";
-import { BnNgIdleService } from "bn-ng-idle";
-import Swal from "sweetalert2";
-import { BreakpointObserver } from "@angular/cdk/layout";
-import { UserService } from "./services/user.service";
+} from '@angular/animations';
+import { UtilsService } from './services/utils.service';
+import { Subscription } from 'rxjs';
+import { AuthService } from './services/auth.service';
+import { BnNgIdleService } from 'bn-ng-idle';
+import Swal from 'sweetalert2';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { UserService } from './services/user.service';
 import { ContentService } from './services/content.service';
-import { TokenService } from "./services/token.service";
-import { SwUpdate } from "@angular/service-worker";
+import { TokenService } from './services/token.service';
+import { SwUpdate } from '@angular/service-worker';
 declare var dataLayer: any;
-import { PopupComponent } from "./modules/shared/components/popup/popup.component";
-import { Location } from "@angular/common";
+import { PopupComponent } from './modules/shared/components/popup/popup.component';
+import { Location } from '@angular/common';
 import { MatDialog } from '@angular/material';
-import decode from "jwt-decode";
+import decode from 'jwt-decode';
 import { SidenavService } from './services/sidenav.service';
 import { onMainContentChange } from './animations/animations';
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
-  animations: [ onMainContentChange ]
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  animations: [onMainContentChange],
 })
 export class AppComponent implements OnInit, OnDestroy {
   // isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Web)
@@ -50,7 +50,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public onSideNavChange: boolean;
 
   @ViewChild(
-    "templateCardLogin, TemplateCardRegister, TemplateCardForgot, templateCardActivate",
+    'templateCardLogin, TemplateCardRegister, TemplateCardForgot, templateCardActivate',
     {
       static: false,
     }
@@ -78,7 +78,7 @@ export class AppComponent implements OnInit, OnDestroy {
   role: string;
   classPage: string;
   location: Location;
-  timeout: any
+  timeout: any;
 
   constructor(
     private translate: TranslateService,
@@ -93,27 +93,26 @@ export class AppComponent implements OnInit, OnDestroy {
     private swUpdate: SwUpdate,
     private dialog: MatDialog,
     location: Location,
-    private sidenavService: SidenavService,
+    private sidenavService: SidenavService
   ) {
-
     // this.sidenavService.sideNavState$.subscribe( res => {
     //   this.onSideNavChange = res;
     // });
-    
-    translate.setDefaultLang("es");
-    translate.use("es");
+
+    translate.setDefaultLang('es');
+    translate.use('es');
 
     this.subscription = router.events.subscribe((url: any) => {
       if (url instanceof NavigationStart) {
         dataLayer.push({
-          event: "pageview",
+          event: 'pageview',
           virtualPageURL: url.url,
         });
       } else if (url instanceof NavigationEnd) {
-        clearTimeout(this.timeout)
+        clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.getPopUps();
-        }, 500)
+        }, 500);
       }
     });
 
@@ -121,7 +120,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.subscription = this.router.events.subscribe(() => {
       let urlLocation = location.prepareExternalUrl(location.path());
-      let SplitLocation = urlLocation.split("/");
+      let SplitLocation = urlLocation.split('/');
       this.classPage = SplitLocation[1];
     });
   }
@@ -130,14 +129,14 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe(() => {
         Swal.fire({
-          title: "¡Nueva versión disponible!",
-          text: "Haz clic en el botón aceptar.",
-          type: "info",
+          title: '¡Nueva versión disponible!',
+          text: 'Haz clic en el botón aceptar.',
+          type: 'info',
           allowEscapeKey: false,
           allowOutsideClick: false,
-          confirmButtonText: "Aceptar",
-          confirmButtonClass: "update-success",
-          customClass: "paymentData",
+          confirmButtonText: 'Aceptar',
+          confirmButtonClass: 'update-success',
+          customClass: 'paymentData',
         }).then(() => {
           window.location.reload();
         });
@@ -201,42 +200,42 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.auth.isLoggedIn()) {
       this.content.getPopup().subscribe((resp) => {
         let locationHref = location.href;
-        let routeSplit = locationHref.split("/");
+        let routeSplit = locationHref.split('/');
         let currentRoute = '/' + routeSplit[routeSplit.length - 1];
-  
-        const popUp = resp.find(x => !x.new && x.seccion === currentRoute)
-  
+
+        const popUp = resp.find((x) => !x.new && x.seccion === currentRoute);
+
         if (popUp) {
           const infoPopUp = {
             imageUrlWeb: popUp.imageurlweb,
             imageUrlMobile: popUp.imageurlmobile,
             textbutton: popUp.textbutton,
             colorbutton: popUp.colorbutton,
-            BLink: popUp.link
-          }
-          
-          this.openPopUp(infoPopUp)
-          this.saveVisitOffer(popUp.id)
+            BLink: popUp.link,
+          };
+
+          this.openPopUp(infoPopUp);
+          this.saveVisitOffer(popUp.id);
         }
-      })
+      });
     }
   }
 
   public openPopUp(infoPopUp) {
     this.dialog.open(PopupComponent, {
       data: {
-        ...infoPopUp
+        ...infoPopUp,
       },
-      panelClass: "dynamic-popup"
+      panelClass: 'dynamic-popup',
     });
   }
 
   public saveVisitOffer(idoffer) {
-    let token = localStorage.getItem("ACCESS_TOKEN")
-    let tokenDecode = decode(token)
-    const userId = tokenDecode.userid
+    let token = localStorage.getItem('ACCESS_TOKEN');
+    let tokenDecode = decode(token);
+    const userId = tokenDecode.userid;
 
-    this.content.saveVisitOffer({ idoffer, userId }).subscribe((resp) => {})
+    this.content.saveVisitOffer({ idoffer, userId }).subscribe((resp) => {});
   }
 
   public hideLogin() {
@@ -278,7 +277,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public getUserData() {
     this.subscription = this.auth.getRole$.subscribe((role) => {
       this.role = role;
-      if (role === "CLICKER" || role === "ADMIN" || role === "SUPERADMIN") {
+      if (role === 'CLICKER' || role === 'ADMIN' || role === 'SUPERADMIN') {
         this.email = this.token.userInfo().userName;
         this.subscription = this.user.getuserdata().subscribe((user) => {
           this.firstName = user.firstNames;
@@ -294,12 +293,12 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  @HostListener("over")
+  @HostListener('over')
   hideMenu() {
     this.utils.hideMenu();
   }
 
-  @HostListener("window:resize", ["$event"])
+  @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.innerWidth = event.target.innerWidth;
     this.windowWidth();

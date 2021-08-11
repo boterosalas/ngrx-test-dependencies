@@ -12,13 +12,8 @@ describe('DetailComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [],
-      imports:[
-        ClickerModule,
-        RouterTestingModule,
-        HttpClientTestingModule
-      ]
-    })
-    .compileComponents();
+      imports: [ClickerModule, RouterTestingModule, HttpClientTestingModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

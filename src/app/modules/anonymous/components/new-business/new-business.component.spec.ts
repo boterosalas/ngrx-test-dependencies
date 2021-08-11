@@ -10,13 +10,9 @@ describe('NewBusinessComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NewBusinessComponent ],
-      imports: [
-        TranslateModule.forRoot(),
-        AppMaterialModule
-      ]
-    })
-    .compileComponents();
+      declarations: [NewBusinessComponent],
+      imports: [TranslateModule.forRoot(), AppMaterialModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

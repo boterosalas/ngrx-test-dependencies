@@ -13,18 +13,15 @@ describe('TableNoveltiesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TableNoveltiesComponent ],
+      declarations: [TableNoveltiesComponent],
       imports: [
         AppMaterialModule,
         TranslateModule.forRoot({}),
         BrowserAnimationsModule,
-        NgxPaginationModule
+        NgxPaginationModule,
       ],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ]
-    })
-    .compileComponents();
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

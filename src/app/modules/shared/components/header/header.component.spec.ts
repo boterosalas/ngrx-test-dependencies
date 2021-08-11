@@ -11,59 +11,63 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 import { JwtModule } from '@auth0/angular-jwt';
 
-localStorage.setItem('ACCESS_TOKEN', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU');
+localStorage.setItem(
+  'ACCESS_TOKEN',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU'
+);
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
 
-  const mockUtilsService = jasmine.createSpyObj("UtilsService", ["showRegisterForm", "showloginForm", "showMenu"]);
-  const mockAuthService = jasmine.createSpyObj("AuthService", ["logout", "userInfo$"]);
+  const mockUtilsService = jasmine.createSpyObj('UtilsService', [
+    'showRegisterForm',
+    'showloginForm',
+    'showMenu',
+  ]);
+  const mockAuthService = jasmine.createSpyObj('AuthService', [
+    'logout',
+    'userInfo$',
+  ]);
 
   let dataUser = {
-    "Email":"daniel.salamanca@pragma.com.co",
-    "FirstNames":"Daniel",
-    "LastNames":"Salamanca",
-    "Identification": "1053796817",
-    "Cellphone": 3008526341,
-    "Password":"123456",
-    "IdType":1
-}
+    Email: 'daniel.salamanca@pragma.com.co',
+    FirstNames: 'Daniel',
+    LastNames: 'Salamanca',
+    Identification: '1053796817',
+    Cellphone: 3008526341,
+    Password: '123456',
+    IdType: 1,
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ 
-        HeaderComponent,
-        HomeComponent
-       ],
-       imports: [
-         AppMaterialModule,
-         HttpClientTestingModule,
-          RouterTestingModule.withRoutes([
-            { path: 'inicio', component: HomeComponent},
-         ]),
-         TranslateModule.forRoot({}),
-         MatMenuModule,
-         JwtModule.forRoot({
+      declarations: [HeaderComponent, HomeComponent],
+      imports: [
+        AppMaterialModule,
+        HttpClientTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent },
+        ]),
+        TranslateModule.forRoot({}),
+        MatMenuModule,
+        JwtModule.forRoot({
           config: {
             tokenGetter: () => {
               return localStorage.getItem('ACCESS_TOKEN');
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
-            blacklistedRoutes: []
-          }
-        })
-       ],
-       providers: [
+            blacklistedRoutes: [],
+          },
+        }),
+      ],
+      providers: [
         { provide: UtilsService, useValue: mockUtilsService },
         // { provide: AuthService, useValue: mockAuthService },
-       ],
-       schemas: [
-         NO_ERRORS_SCHEMA
-       ]
-    })
-    .compileComponents();
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -76,16 +80,14 @@ describe('HeaderComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  })
+  });
 
   // it('logout', () => {
   //   component.logout();
   //   expect(mockAuthService.logout).toHaveBeenCalled();
   // });
-  
 
   describe('show Login', () => {
-
     beforeEach(() => {
       fixture = TestBed.createComponent(HeaderComponent);
       component = fixture.componentInstance;
@@ -103,12 +105,13 @@ describe('HeaderComponent', () => {
       component.open();
       expect(component.sidenav.emit).toHaveBeenCalled();
     });
-    
-
   });
 
   describe('show menu', () => {
-    localStorage.setItem('ACCESS_TOKEN', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU');
+    localStorage.setItem(
+      'ACCESS_TOKEN',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU'
+    );
     beforeEach(() => {
       fixture = TestBed.createComponent(HeaderComponent);
       component = fixture.componentInstance;
@@ -116,16 +119,13 @@ describe('HeaderComponent', () => {
       mockUtilsService.showMenu.and.returnValue({});
     });
 
-  
     it('show menu', () => {
       component.showMenu();
       expect(mockUtilsService.showMenu).toHaveBeenCalled();
     });
-  
   });
 
   describe('open register', () => {
-
     beforeEach(() => {
       fixture = TestBed.createComponent(HeaderComponent);
       component = fixture.componentInstance;
@@ -137,8 +137,5 @@ describe('HeaderComponent', () => {
       component.openRegister();
       expect(mockUtilsService.showRegisterForm).toHaveBeenCalled();
     });
-
   });
-  
-
 });

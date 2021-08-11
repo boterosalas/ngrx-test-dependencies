@@ -1,6 +1,5 @@
-@import "variables";
-@import "general";
-
+@import 'variables';
+@import 'general';
 
 .card-basic {
   border-radius: 5px;
@@ -45,7 +44,7 @@
   width: 100px;
   position: absolute;
   right: 20px;
-  
+
   z-index: 0;
 }
 
@@ -61,19 +60,17 @@
   align-items: center;
   text-align: center;
   height: 50px;
- 
 }
 
-.marco-p-text{
+.marco-p-text {
   margin-top: 0px;
   margin-bottom: 0px;
   color: #ffffff;
   font-family: $font-galano-bold;
 }
-.marco-span-text{
+.marco-span-text {
   margin-top: 0px;
-    margin-bottom: 0px;
-    color: #ffffff;
-    font-size: 11px;
-  
+  margin-bottom: 0px;
+  color: #ffffff;
+  font-size: 11px;
 }

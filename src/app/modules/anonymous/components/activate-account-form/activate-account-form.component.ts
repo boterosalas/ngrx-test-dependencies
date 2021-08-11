@@ -11,10 +11,9 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-activate-account-form',
   templateUrl: './activate-account-form.component.html',
-  styleUrls: ['./activate-account-form.component.scss']
+  styleUrls: ['./activate-account-form.component.scss'],
 })
 export class ActivateAccountFormComponent implements OnInit, OnDestroy {
-
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -22,47 +21,45 @@ export class ActivateAccountFormComponent implements OnInit, OnDestroy {
     private loading: LoaderService,
     private utils: UtilsService
   ) {}
-  
-  text:any = "";
-  emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
+
+  text: any = '';
+  emailPattern = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
   activateForm: FormGroup;
   private subscription: Subscription = new Subscription();
 
   swalOptInvalid: Object = {
     title: this.text,
-    confirmButtonText: "Aceptar",
+    confirmButtonText: 'Aceptar',
     confirmButtonClass: 'accept-forgot-alert-invalid',
-    type: "error"
-  }
+    type: 'error',
+  };
 
   swalOptError: Object = {
-    title: "Ups algo salió mal",
+    title: 'Ups algo salió mal',
     text: this.text,
-    confirmButtonText: "Aceptar",
+    confirmButtonText: 'Aceptar',
     confirmButtonClass: 'accept-forgot-alert-error',
-    type: "error"
-  }
+    type: 'error',
+  };
 
   swalOptSuccess: Object = {
-    title: "Se ha enviado un email",
+    title: 'Se ha enviado un email',
     text: this.text,
-    confirmButtonText: "Aceptar",
+    confirmButtonText: 'Aceptar',
     confirmButtonClass: 'accept-forgot-alert-success',
-    type: "success"
-}
-
- 
+    type: 'success',
+  };
 
   ngOnInit() {
     this.activateForm = this.fb.group({
       email: [
-        "",
+        '',
         [
           Validators.required,
           Validators.pattern(this.emailPattern),
-          Validators.maxLength(64)
-        ]
-      ]
+          Validators.maxLength(64),
+        ],
+      ],
     });
   }
 
@@ -80,31 +77,36 @@ export class ActivateAccountFormComponent implements OnInit, OnDestroy {
     let email = this.activateForm.controls.email.value;
     this.subscription = this.forgot.sendActivation(email).subscribe(
       (resp: ResponseService) => {
-        if (resp.state === "Success") {
-          this.swalOptSuccess = {...this.swalOptSuccess, text: resp.userMessage};
-          Swal.fire(this.swalOptSuccess).then(()=> {
+        if (resp.state === 'Success') {
+          this.swalOptSuccess = {
+            ...this.swalOptSuccess,
+            text: resp.userMessage,
+          };
+          Swal.fire(this.swalOptSuccess).then(() => {
             this.utils.hideloginForm();
           });
         } else {
           Swal.fire(
-            this.swalOptError = {...this.swalOptError, text: resp.userMessage}
+            (this.swalOptError = {
+              ...this.swalOptError,
+              text: resp.userMessage,
+            })
           );
         }
       },
-      error => {
+      (error) => {
         this.loading.hide();
         Swal.fire(
-          this.swalOptInvalid = {...this.swalOptInvalid, text: error.statusText}
+          (this.swalOptInvalid = {
+            ...this.swalOptInvalid,
+            text: error.statusText,
+          })
         );
       }
     );
   }
 
- 
-
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
-
 }

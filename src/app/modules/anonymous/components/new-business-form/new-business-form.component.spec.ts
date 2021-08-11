@@ -4,7 +4,12 @@ import { NewBusinessFormComponent } from './new-business-form.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { RecaptchaModule, RecaptchaFormsModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
+import {
+  RecaptchaModule,
+  RecaptchaFormsModule,
+  RECAPTCHA_SETTINGS,
+  RecaptchaSettings,
+} from 'ng-recaptcha';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContentService } from 'src/app/services/content.service';
 import { of } from 'rxjs';
@@ -14,75 +19,72 @@ describe('NewBusinessFormComponent', () => {
   let component: NewBusinessFormComponent;
   let fixture: ComponentFixture<NewBusinessFormComponent>;
 
-  const mockContentService = jasmine.createSpyObj("ContentService", [
-    "getCategoriesBusinessHome",
-    "registerBusinessClicker",
+  const mockContentService = jasmine.createSpyObj('ContentService', [
+    'getCategoriesBusinessHome',
+    'registerBusinessClicker',
   ]);
 
   let business = [
     {
       id: 1,
-      code: "exito",
+      code: 'exito',
       imageurl:
-        "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.png",
-      infoaditional: "Hasta 9.6% de ganancia",
-      description: "Almacenes Éxito",
+        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.png',
+      infoaditional: 'Hasta 9.6% de ganancia',
+      description: 'Almacenes Éxito',
       orderby: 1,
     },
     {
       id: 2,
-      code: "carulla",
+      code: 'carulla',
       imageurl:
-        "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-carulla.png",
-      infoaditional: "Hasta 9.6% de ganancia",
-      description: "Almacenes Carulla",
+        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-carulla.png',
+      infoaditional: 'Hasta 9.6% de ganancia',
+      description: 'Almacenes Carulla',
       orderby: 2,
     },
     {
       id: 3,
-      code: "seguros",
+      code: 'seguros',
       imageurl:
-        "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.png",
-      infoaditional: "Hasta $32.000 de ganancia",
-      description: "Seguros Éxito",
+        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.png',
+      infoaditional: 'Hasta $32.000 de ganancia',
+      description: 'Seguros Éxito',
       orderby: 3,
     },
     {
       id: 4,
-      code: "viajes",
+      code: 'viajes',
       imageurl:
-        "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-viajes.png",
-      infoaditional: "Hasta $40.000 de ganancia",
-      description: "Viajes Éxito",
+        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-viajes.png',
+      infoaditional: 'Hasta $40.000 de ganancia',
+      description: 'Viajes Éxito',
       orderby: 4,
     },
     {
       id: 5,
-      code: "wesura",
+      code: 'wesura',
       imageurl:
-        "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-wesura.png",
-      infoaditional: "Hasta 12.000 de ganancia",
-      description: "Tu seguro",
+        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-wesura.png',
+      infoaditional: 'Hasta 12.000 de ganancia',
+      description: 'Tu seguro',
       orderby: 5,
     },
   ];
 
   const dialogMock = {
-    close: () => { }
+    close: () => {},
   };
 
   let dataBussiness = {
-    state: "Success",
-    userMessage: "El negocio ha sido guardado satisfactoriamente",
+    state: 'Success',
+    userMessage: 'El negocio ha sido guardado satisfactoriamente',
     objectResponse: true,
   };
 
-  
-
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NewBusinessFormComponent ],
+      declarations: [NewBusinessFormComponent],
       imports: [
         TranslateModule.forRoot(),
         AppMaterialModule,
@@ -90,18 +92,22 @@ describe('NewBusinessFormComponent', () => {
         FormsModule,
         RecaptchaModule,
         RecaptchaFormsModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
       ],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: dialogMock },
-        {provide: RECAPTCHA_SETTINGS, useValue: { siteKey: 'yoursitekey' } as RecaptchaSettings},
+        {
+          provide: RECAPTCHA_SETTINGS,
+          useValue: { siteKey: 'yoursitekey' } as RecaptchaSettings,
+        },
         { provide: ContentService, useValue: mockContentService },
-      ]
-    })
-    .compileComponents();
+      ],
+    }).compileComponents();
     mockContentService.getCategoriesBusinessHome.and.returnValue(of(business));
-    mockContentService.registerBusinessClicker.and.returnValue(of(dataBussiness));
+    mockContentService.registerBusinessClicker.and.returnValue(
+      of(dataBussiness)
+    );
   }));
 
   beforeEach(() => {
@@ -114,7 +120,6 @@ describe('NewBusinessFormComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  
   it('Terms and conditions', () => {
     component.showBusinessForm = false;
     component.showTermsBusiness = true;
@@ -140,13 +145,13 @@ describe('NewBusinessFormComponent', () => {
     expect(component.showBusinessForm).toBeTruthy();
     expect(component.showTermsBusiness).toBeFalsy();
   });
-  
+
   it('accept terms true', () => {
     component.acceptTerms = false;
     component.acceptTermsCheck();
     expect(component.acceptTerms).toBeTruthy();
   });
-  
+
   it('accept terms true', () => {
     component.acceptTerms = true;
     component.registerForm.controls.acceptTerms.setValue(null);
@@ -169,6 +174,4 @@ describe('NewBusinessFormComponent', () => {
   //   component.register(data);
   //   expect(mockContentService.registerBusinessClicker).toHaveBeenCalled();
   // });
-  
-
 });

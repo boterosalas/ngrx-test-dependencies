@@ -11,14 +11,9 @@ describe('ResumeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResumeComponent ],
-      imports: [
-        AppMaterialModule,
-        MatListModule,
-        TranslateModule.forRoot()
-      ]
-    })
-    .compileComponents();
+      declarations: [ResumeComponent],
+      imports: [AppMaterialModule, MatListModule, TranslateModule.forRoot()],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

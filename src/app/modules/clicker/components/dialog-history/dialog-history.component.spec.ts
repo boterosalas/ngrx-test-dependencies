@@ -9,21 +9,18 @@ describe('DialogHistoryComponent', () => {
   let fixture: ComponentFixture<DialogHistoryComponent>;
 
   const dialogMock = {
-    close: () => { }
-   };
+    close: () => {},
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DialogHistoryComponent ],
-      imports: [
-        AppMaterialModule
-      ],
+      declarations: [DialogHistoryComponent],
+      imports: [AppMaterialModule],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
-        {provide: MatDialogRef, useValue: dialogMock},
-      ]
-    })
-    .compileComponents();
+        { provide: MatDialogRef, useValue: dialogMock },
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -39,7 +36,6 @@ describe('DialogHistoryComponent', () => {
   it('close modal', () => {
     let spy = spyOn(component.dialogRef, 'close').and.callThrough();
     component.onNoClick();
-    expect(spy).toHaveBeenCalled(); 
+    expect(spy).toHaveBeenCalled();
   });
-
 });

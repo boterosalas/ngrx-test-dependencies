@@ -1,7 +1,7 @@
-@import "animations";
-@import "variables";
-@import "mixins";
-@import "general";
+@import 'animations';
+@import 'variables';
+@import 'mixins';
+@import 'general';
 
 .login {
   box-shadow: none !important;
@@ -47,7 +47,7 @@
 }
 
 .bg-slide {
-  background: url("/assets/img/home/bg-videos.jpg") no-repeat;
+  background: url('/assets/img/home/bg-videos.jpg') no-repeat;
   background-size: cover;
 }
 

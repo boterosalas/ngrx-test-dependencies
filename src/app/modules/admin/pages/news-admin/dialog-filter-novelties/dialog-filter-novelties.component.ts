@@ -7,14 +7,10 @@ import { ContentService } from 'src/app/services/content.service';
 @Component({
   selector: 'app-dialog-filter-novelties',
   templateUrl: './dialog-filter-novelties.component.html',
-  styleUrls: ['./dialog-filter-novelties.component.scss']
+  styleUrls: ['./dialog-filter-novelties.component.scss'],
 })
 export class DialogFilterNoveltiesComponent implements OnInit {
-
-  constructor(
-    private fb: FormBuilder,
-    private content: ContentService,
-     ) {}
+  constructor(private fb: FormBuilder, private content: ContentService) {}
 
   ngOnInit() {
     this.filterForm();
@@ -23,32 +19,34 @@ export class DialogFilterNoveltiesComponent implements OnInit {
     let filterData = localStorage.getItem('formFilterNovelties');
     let bussinesss = localStorage.getItem('bussinessNovelties');
 
-
-    if(filterData !== null) {
+    if (filterData !== null) {
       let obFr = JSON.parse(filterData);
       this.filterNovelties.controls.status.setValue(obFr.status);
-      let startDate = obFr.dateRange.startDate === null ?  '' : obFr.dateRange.startDate;
-      let endDate = obFr.dateRange.endDate === null ? '' : obFr.dateRange.endDate ;
-      this.filterNovelties.controls.dateRange.setValue({ startDate: startDate, endDate: endDate });
+      let startDate =
+        obFr.dateRange.startDate === null ? '' : obFr.dateRange.startDate;
+      let endDate =
+        obFr.dateRange.endDate === null ? '' : obFr.dateRange.endDate;
+      this.filterNovelties.controls.dateRange.setValue({
+        startDate: startDate,
+        endDate: endDate,
+      });
     }
 
-    if(bussinesss!== null) {
+    if (bussinesss !== null) {
       let obbus = JSON.parse(bussinesss);
       this.chipsBussiness = obbus;
     }
-
-
   }
 
   locale = {
-    locale: "es",
-    direction: "ltr", // could be rtl
-    weekLabel: "W",
-    separator: " a ", // default is ' - '
-    cancelLabel: "Cancelar", // detault is 'Cancel'
-    applyLabel: "Aplicar", // detault is 'Apply'
-    clearLabel: "Limpiar", // detault is 'Clear'
-    customRangeLabel: "Custom range",
+    locale: 'es',
+    direction: 'ltr', // could be rtl
+    weekLabel: 'W',
+    separator: ' a ', // default is ' - '
+    cancelLabel: 'Cancelar', // detault is 'Cancel'
+    applyLabel: 'Aplicar', // detault is 'Apply'
+    clearLabel: 'Limpiar', // detault is 'Clear'
+    customRangeLabel: 'Custom range',
     daysOfWeek: moment.weekdaysMin(),
     monthNames: moment.monthsShort(),
     firstDay: 1, // first day is monday
@@ -61,10 +59,10 @@ export class DialogFilterNoveltiesComponent implements OnInit {
   filterNovelties: FormGroup;
 
   status = [
-    { name: "Pendiente", value: "Pendiente" },
-    { name: "En revisión", value: "En revisión" },
-    { name: "Solucionado", value: "Solucionado" },
-    { name: "Rechazado", value: "Rechazado" },
+    { name: 'Pendiente', value: 'Pendiente' },
+    { name: 'En revisión', value: 'En revisión' },
+    { name: 'Solucionado', value: 'Solucionado' },
+    { name: 'Rechazado', value: 'Rechazado' },
   ];
 
   bussiness = [];
@@ -77,9 +75,6 @@ export class DialogFilterNoveltiesComponent implements OnInit {
   @Output() objectSend = new EventEmitter();
   @Output() close = new EventEmitter();
 
-
-
-
   public getAllBusiness() {
     this.subscription = this.content.getAllBusiness().subscribe((resp) => {
       this.bussiness = resp;
@@ -90,7 +85,7 @@ export class DialogFilterNoveltiesComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
-  public clearFilters(){
+  public clearFilters() {
     this.filterNovelties.reset();
     this.chipsBussiness = [];
     this.chipsBussinessId = [];
@@ -100,10 +95,10 @@ export class DialogFilterNoveltiesComponent implements OnInit {
 
   public filterForm() {
     this.filterNovelties = this.fb.group({
-      dateRange: [""],
+      dateRange: [''],
       status: [null],
-      bussiness: [""],
-      chipBussiness: [""],
+      bussiness: [''],
+      chipBussiness: [''],
     });
   }
 
@@ -115,29 +110,38 @@ export class DialogFilterNoveltiesComponent implements OnInit {
     }
   }
 
-
-
-  public aplyFilters(){
-    
+  public aplyFilters() {
     this.chipsBussinessId = [];
-    this.chipsBussiness.forEach(element => {
+    this.chipsBussiness.forEach((element) => {
       this.chipsBussinessId.push(element.id);
     });
 
-    let validDateStart = (this.filterNovelties.controls.dateRange.value.startDate === undefined || this.filterNovelties.controls.dateRange.value.startDate === null || this.filterNovelties.controls.dateRange.value.startDate === '');
-    let validDateEnd = (this.filterNovelties.controls.dateRange.value.endDate === undefined || this.filterNovelties.controls.dateRange.value.endDate === null || this.filterNovelties.controls.dateRange.value.endDate === '');
+    let validDateStart =
+      this.filterNovelties.controls.dateRange.value.startDate === undefined ||
+      this.filterNovelties.controls.dateRange.value.startDate === null ||
+      this.filterNovelties.controls.dateRange.value.startDate === '';
+    let validDateEnd =
+      this.filterNovelties.controls.dateRange.value.endDate === undefined ||
+      this.filterNovelties.controls.dateRange.value.endDate === null ||
+      this.filterNovelties.controls.dateRange.value.endDate === '';
 
     let data = {
-      dateStart: validDateStart ? '' : this.filterNovelties.controls.dateRange.value.startDate,
-      dateEnd:  validDateEnd ? '' : this.filterNovelties.controls.dateRange.value.endDate,
+      dateStart: validDateStart
+        ? ''
+        : this.filterNovelties.controls.dateRange.value.startDate,
+      dateEnd: validDateEnd
+        ? ''
+        : this.filterNovelties.controls.dateRange.value.endDate,
       state: this.filterNovelties.controls.status.value,
       business: this.chipsBussinessId,
-    }
+    };
 
     this.objectSend.emit(data);
 
-    localStorage.setItem('formFilterNovelties', JSON.stringify(this.filterNovelties.value));
-
+    localStorage.setItem(
+      'formFilterNovelties',
+      JSON.stringify(this.filterNovelties.value)
+    );
   }
 
   public closeModal() {
@@ -145,13 +149,16 @@ export class DialogFilterNoveltiesComponent implements OnInit {
   }
 
   public onChangeSelected(val) {
-    if(this.chipsBussiness.length === 0) {
+    if (this.chipsBussiness.length === 0) {
       this.chipsBussiness.push(val);
       localStorage.setItem('bussinessNovelties', JSON.stringify(val));
     } else {
-      if (this.chipsBussiness.includes(val) === false) this.chipsBussiness.push(val);
+      if (this.chipsBussiness.includes(val) === false)
+        this.chipsBussiness.push(val);
     }
-    localStorage.setItem('bussinessNovelties', JSON.stringify(this.chipsBussiness));
+    localStorage.setItem(
+      'bussinessNovelties',
+      JSON.stringify(this.chipsBussiness)
+    );
   }
-
 }

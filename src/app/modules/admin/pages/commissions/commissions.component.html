@@ -18,16 +18,29 @@
                 placeholder="Seleccione fechas"
                 type="text"
                 [maxDate]="maxDate"
-                (change)="searchCommission(paginate, from, to, name, direction);"
+                (change)="searchCommission(paginate, from, to, name, direction)"
                 ngxDaterangepickerMd
-                class="form-control border-input mat-elevation-z1 p-2 border-radius"
+                class="
+                  form-control
+                  border-input
+                  mat-elevation-z1
+                  p-2
+                  border-radius
+                "
               />
             </div>
             <div class="download-files">
-              <button (click)="getReportRejected()" class="button-selected-label cursor-pointer">
+              <button
+                (click)="getReportRejected()"
+                class="button-selected-label cursor-pointer"
+              >
                 Exportar
                 <i
-                  class="tio-download_from_cloud style-icon icon-update icon-download-file"
+                  class="
+                    tio-download_from_cloud
+                    style-icon
+                    icon-update icon-download-file
+                  "
                 ></i>
               </button>
             </div>
@@ -62,12 +75,10 @@
           style="width: 10%"
           mat-sort-header="IDENTIFICATION"
         >
-        Cédula
+          Cédula
         </th>
         <td mat-cell *matCellDef="let element" class="pl-3">
-          <p
-            class="m-0 gray-light"
-          >
+          <p class="m-0 gray-light">
             {{ element.identification }}
           </p>
         </td>
@@ -110,7 +121,7 @@
         </th>
         <td mat-cell *matCellDef="let element: let i=index">
           <p class="m-0 gray-light text-font-cc">
-            {{ element.commissiongenerationdate | date: "dd/MM/yyyy" }}
+            {{ element.commissiongenerationdate | date: 'dd/MM/yyyy' }}
           </p>
         </td>
       </ng-container>
@@ -124,7 +135,12 @@
           id comisión
         </th>
         <td mat-cell *matCellDef="let element" class="text-font">
-          <p (click)="openCommission(element)" class="link-style cursor-pointer">{{ element.id }}</p>
+          <p
+            (click)="openCommission(element)"
+            class="link-style cursor-pointer"
+          >
+            {{ element.id }}
+          </p>
         </td>
       </ng-container>
       <ng-container matColumnDef="business">
@@ -209,7 +225,11 @@
         <label for="rejected" class="button-selected-label cursor-pointer">
           Comisiones rechazadas
           <i
-            class="tio-upload_on_cloud style-icon icon-update icon-download-file"
+            class="
+              tio-upload_on_cloud
+              style-icon
+              icon-update icon-download-file
+            "
           ></i>
         </label>
         <input
@@ -224,7 +244,11 @@
         <label for="eliminated" class="button-selected-label cursor-pointer">
           Comisiones eliminadas
           <i
-            class="tio-upload_on_cloud style-icon icon-update icon-download-file"
+            class="
+              tio-upload_on_cloud
+              style-icon
+              icon-update icon-download-file
+            "
           ></i>
         </label>
         <input
@@ -252,19 +276,17 @@
     </div>
   </div>
   <div fxLayout="row" class="border-bottom-gray pb-25">
-    <div 
+    <div
       *ngFor="let data of dataAdditionalInfoValue; let i = index"
       class="dataColumn"
     >
-      <h3>{{data.column}}</h3>
-      <p 
+      <h3>{{ data.column }}</h3>
+      <p
         *ngFor="let info of data.info; let e = index"
         class="dataInfo margin-zero-bottom"
       >
-        <span class="galano-bold gray w-label">{{info.name}}</span>
-        <span class="normal-text">{{
-          info.value || '-'
-        }}</span>
+        <span class="galano-bold gray w-label">{{ info.name }}</span>
+        <span class="normal-text">{{ info.value || '-' }}</span>
       </p>
     </div>
   </div>

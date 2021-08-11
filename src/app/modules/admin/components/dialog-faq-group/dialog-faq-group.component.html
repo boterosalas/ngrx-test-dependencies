@@ -1,41 +1,42 @@
 <div class="dialog-faq-group">
-    <h3 title-name>{{ data.title }}</h3>
-  
-    <div mat-dialog-content>
-      <form [formGroup]="faqForm">
-        <mat-form-field>
-          <input
-            matInput
-            id="description"
-            type="text"
-            placeholder="Nombre"
-            formControlName="description"
-            maxlength="100"
-          />
-          <mat-error
+  <h3 title-name>{{ data.title }}</h3>
+
+  <div mat-dialog-content>
+    <form [formGroup]="faqForm">
+      <mat-form-field>
+        <input
+          matInput
+          id="description"
+          type="text"
+          placeholder="Nombre"
+          formControlName="description"
+          maxlength="100"
+        />
+        <mat-error
           id="requiredDescription"
-          *ngIf="faqForm.controls.description.invalid &&
-            faqForm.controls.description.errors.required">{{
-            "GENERIC.REQUIRED" | translate: { formValue: "Nombre" }
+          *ngIf="
+            faqForm.controls.description.invalid &&
+            faqForm.controls.description.errors.required
+          "
+          >{{
+            'GENERIC.REQUIRED' | translate: { formValue: 'Nombre' }
           }}</mat-error
         >
-        </mat-form-field>
-  
-  
-        <div class="dialog-faq-group__buttons">
-          <button mat-button ngClass="button_cancel" (click)="onNoClick()">
-            Cancelar
-          </button>
-          <button
-            mat-raised-button
-            color="orange"
-            (click)="saveFaqGroup()"
-            [disabled]="!faqForm.valid"
-          >
-            {{ data.buttonName }}
-          </button>
-        </div>
-      </form>
-    </div>
+      </mat-form-field>
+
+      <div class="dialog-faq-group__buttons">
+        <button mat-button ngClass="button_cancel" (click)="onNoClick()">
+          Cancelar
+        </button>
+        <button
+          mat-raised-button
+          color="orange"
+          (click)="saveFaqGroup()"
+          [disabled]="!faqForm.valid"
+        >
+          {{ data.buttonName }}
+        </button>
+      </div>
+    </form>
   </div>
-  
+</div>

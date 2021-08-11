@@ -19,7 +19,7 @@
       <div fxLayout="column">
         <p class="mt-0 mb-0">TU SALDO</p>
         <span class="mt-0 saldo-pendiente">{{
-          available + account | currency: "":"symbol":"1.0-0"
+          available + account | currency: '':'symbol':'1.0-0'
         }}</span>
       </div>
     </div>
@@ -96,7 +96,7 @@
           profileFormDelete.controls.Password.invalid &&
           profileFormDelete.controls.Password.errors.required
         "
-        >{{ "LOGIN.INTRODUCE_PASSWORD" | translate }}</mat-error
+        >{{ 'LOGIN.INTRODUCE_PASSWORD' | translate }}</mat-error
       >
 
       <mat-error
@@ -105,10 +105,7 @@
           profileFormDelete.controls.Password.invalid &&
           profileFormDelete.controls.Password.errors.minlength
         "
-        >{{
-          "GENERIC.MIN_CHARACTERS"
-            | translate
-        }}</mat-error
+        >{{ 'GENERIC.MIN_CHARACTERS' | translate }}</mat-error
       >
       <!-- : {
         minchar:
@@ -120,10 +117,7 @@
           profileFormDelete.controls.Password.invalid &&
           profileFormDelete.controls.Password.errors.maxlength
         "
-        >{{
-          "GENERIC.MAX_CHARACTERS"
-            | translate
-        }}</mat-error
+        >{{ 'GENERIC.MAX_CHARACTERS' | translate }}</mat-error
       >
     </mat-form-field>
 

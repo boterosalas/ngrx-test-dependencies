@@ -1,43 +1,54 @@
 <div class="bg-gray mt-3">
-  <h3 class="border-bottom-orange-init m-0">{{ 'REFER.INVITE_FRIENDS' | translate }}</h3>
+  <h3 class="border-bottom-orange-init m-0">
+    {{ 'REFER.INVITE_FRIENDS' | translate }}
+  </h3>
 
   <form class="email-container w-100" [formGroup]="referForm">
     <div fxLayout.gt-xs="row" fxLayout="column" fxLayoutGap="15px">
       <div fxLayout="column" fxFlex="80" fxFlex.xs="100">
-      <mat-form-field class="w-100">
-        <input
-          matInput
-          id="email"
-          type="email"
-          placeholder="{{ 'REFER.EMAIL_CONTACT' | translate }}"
-          formControlName="email"
-          spacebar
-          required
-        />
-        <mat-error id="introduceEmail" *ngIf="referForm.controls.email.invalid && referForm.controls.email.errors.required">{{
-          "LOGIN.INTRODUCE_EMAIL" | translate
-        }}</mat-error>
-        <mat-error id="invalidEmail" *ngIf="referForm.controls.email.invalid && referForm.controls.email.errors.pattern">{{
-          "LOGIN.INVALID_EMAIL" | translate
-        }}</mat-error>
-      </mat-form-field>
+        <mat-form-field class="w-100">
+          <input
+            matInput
+            id="email"
+            type="email"
+            placeholder="{{ 'REFER.EMAIL_CONTACT' | translate }}"
+            formControlName="email"
+            spacebar
+            required
+          />
+          <mat-error
+            id="introduceEmail"
+            *ngIf="
+              referForm.controls.email.invalid &&
+              referForm.controls.email.errors.required
+            "
+            >{{ 'LOGIN.INTRODUCE_EMAIL' | translate }}</mat-error
+          >
+          <mat-error
+            id="invalidEmail"
+            *ngIf="
+              referForm.controls.email.invalid &&
+              referForm.controls.email.errors.pattern
+            "
+            >{{ 'LOGIN.INVALID_EMAIL' | translate }}</mat-error
+          >
+        </mat-form-field>
       </div>
-    <div fxLayout="column" fxFlex="20" fxFlex.xs="100" class="text-center">
+      <div fxLayout="column" fxFlex="20" fxFlex.xs="100" class="text-center">
         <button
-        class="button button-100 gtmRfiereYGanaClicReferirenviarInvitacion"
-        ngClass.xs="button-height"
-        mat-raised-button
-        id="sendEmail"
-        color="orange"
-        (click)="sendEmail()"
-        [disabled]="!referForm.valid"
-      >
-       <span class="gtmRfiereYGanaClicReferirenviarInvitacion">{{ "REFER.SEND_INVITATION" | translate }}</span> 
-      </button>
-      
+          class="button button-100 gtmRfiereYGanaClicReferirenviarInvitacion"
+          ngClass.xs="button-height"
+          mat-raised-button
+          id="sendEmail"
+          color="orange"
+          (click)="sendEmail()"
+          [disabled]="!referForm.valid"
+        >
+          <span class="gtmRfiereYGanaClicReferirenviarInvitacion">{{
+            'REFER.SEND_INVITATION' | translate
+          }}</span>
+        </button>
+      </div>
     </div>
-    </div>
-    </form>
-  
+  </form>
 </div>
-

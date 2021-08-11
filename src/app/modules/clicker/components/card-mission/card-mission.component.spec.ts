@@ -9,12 +9,9 @@ describe('CardMissionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CardMissionComponent ],
-      imports: [
-        AppMaterialModule
-      ]
-    })
-    .compileComponents();
+      declarations: [CardMissionComponent],
+      imports: [AppMaterialModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

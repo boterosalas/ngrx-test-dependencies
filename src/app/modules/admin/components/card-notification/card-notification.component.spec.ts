@@ -15,10 +15,10 @@ import { CardNotificationComponent } from './card-notification.component';
 
 export class MatDialogMock {
   open() {
-   return {
-     afterClosed: () => of(true)
-   };
- }
+    return {
+      afterClosed: () => of(true),
+    };
+  }
 }
 
 xdescribe('CardNotificationComponent', () => {
@@ -26,47 +26,50 @@ xdescribe('CardNotificationComponent', () => {
   let fixture: ComponentFixture<CardNotificationComponent>;
 
   let router = {
-    navigate: jasmine.createSpy('navigate')
-  }
-
+    navigate: jasmine.createSpy('navigate'),
+  };
 
   let data = {
-    url:'https://www.google.com'
+    url: 'https://www.google.com',
   };
 
   const matDialog = new MatDialogMock();
 
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CardNotificationComponent, DialogDeleteNotificationComponent, RemoveTagsPipe  ],
-      imports:[
+      declarations: [
+        CardNotificationComponent,
+        DialogDeleteNotificationComponent,
+        RemoveTagsPipe,
+      ],
+      imports: [
         RouterTestingModule,
         AppMaterialModule,
         BrowserAnimationsModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
       ],
-      providers:[
-        { 
-          provide: Router, useValue: router,
-         },
-         { provide: MatDialogRef, useValue: data },
-         { provide: MAT_DIALOG_DATA, useValue: data },
-         { provide: MatDialogRef, useValue: matDialog  },
+      providers: [
+        {
+          provide: Router,
+          useValue: router,
+        },
+        { provide: MatDialogRef, useValue: data },
+        { provide: MAT_DIALOG_DATA, useValue: data },
+        { provide: MatDialogRef, useValue: matDialog },
       ],
-      schemas:[
-        NO_ERRORS_SCHEMA
-      ]
-    }).overrideModule(BrowserDynamicTestingModule, {
-      set: {
-        entryComponents: [DialogDeleteNotificationComponent]
-      }
-    }).compileComponents();
+      schemas: [NO_ERRORS_SCHEMA],
+    })
+      .overrideModule(BrowserDynamicTestingModule, {
+        set: {
+          entryComponents: [DialogDeleteNotificationComponent],
+        },
+      })
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CardNotificationComponent);
-    component.url=""
+    component.url = '';
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -77,7 +80,7 @@ xdescribe('CardNotificationComponent', () => {
 
   it('Delete notification', () => {
     let notification = {
-      idnotification:'1'
+      idnotification: '1',
     };
     component.deleteNotification(notification);
     expect(notification.idnotification).not.toBeUndefined();
@@ -85,25 +88,23 @@ xdescribe('CardNotificationComponent', () => {
 
   it('edit notification', () => {
     let notification = {
-      idnotification:'1'
+      idnotification: '1',
     };
     component.editNotification(notification);
-    expect(router.navigate).toHaveBeenCalledWith(['/notificacion', notification.idnotification]);
+    expect(router.navigate).toHaveBeenCalledWith([
+      '/notificacion',
+      notification.idnotification,
+    ]);
   });
 
   it('Download file', () => {
     let notification = {
-      url:'https://www.google.com'
+      url: 'https://www.google.com',
     };
     component.downloadFile(notification);
     expect(window.open).toBeDefined();
   });
-  
-  
-  
-
 });
 function of(arg0: boolean) {
   throw new Error('Function not implemented.');
 }
-

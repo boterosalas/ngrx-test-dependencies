@@ -9,12 +9,9 @@ describe('LogoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LogoComponent ],
-      imports: [
-        RouterTestingModule
-      ]
-    })
-    .compileComponents();
+      declarations: [LogoComponent],
+      imports: [RouterTestingModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

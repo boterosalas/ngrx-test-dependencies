@@ -1,26 +1,25 @@
 @import 'variables';
 
-.mat-card-title{
-color: $primary-color;
+.mat-card-title {
+  color: $primary-color;
 }
 
-.mat-card-subtitle{
-    margin-bottom: 0;
+.mat-card-subtitle {
+  margin-bottom: 0;
 }
 
 .card-group {
-
-    &__actions {
-      display: flex;
-      justify-content: flex-end;
-      align-items: stretch;
-      column-gap: 1rem;
-      font-size: 22px;
-      color: $purple2;
-    }
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: stretch;
+    column-gap: 1rem;
+    font-size: 22px;
+    color: $purple2;
+  }
 }
 
-.truncate{
+.truncate {
   max-width: 480px;
   overflow: hidden;
   white-space: nowrap;
@@ -28,11 +27,11 @@ color: $primary-color;
   display: inline-block;
 }
 
-.mat-card-subtitle{
+.mat-card-subtitle {
   display: inline-flex;
   gap: 10px;
 }
 
-.user{
-  color: #B4A6DB;
+.user {
+  color: #b4a6db;
 }

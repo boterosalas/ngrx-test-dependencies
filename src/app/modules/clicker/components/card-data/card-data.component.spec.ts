@@ -10,13 +10,9 @@ describe('CardDataComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CardDataComponent ],
-      imports: [
-        TranslateModule.forRoot(),
-        AppMaterialModule
-      ]
-    })
-    .compileComponents();
+      declarations: [CardDataComponent],
+      imports: [TranslateModule.forRoot(), AppMaterialModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

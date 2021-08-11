@@ -16,17 +16,19 @@ describe('ClickAcademyComponent', () => {
   let component: ClickAcademyComponent;
   let fixture: ComponentFixture<ClickAcademyComponent>;
 
-  const mockUserService = jasmine.createSpyObj("UserService", ["saveOnboarding"]);
+  const mockUserService = jasmine.createSpyObj('UserService', [
+    'saveOnboarding',
+  ]);
 
   const saveOnboardingOk = {
-    state: "Success",
-    userMessage: "se ha guardado correctamente",
-    objectResponse: []
+    state: 'Success',
+    userMessage: 'se ha guardado correctamente',
+    objectResponse: [],
   };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ClickAcademyComponent ],
+      declarations: [ClickAcademyComponent],
       imports: [
         TranslateModule.forRoot({}),
         AppMaterialModule,
@@ -37,20 +39,17 @@ describe('ClickAcademyComponent', () => {
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
-              return localStorage.getItem("ACCESS_TOKEN");
+              return localStorage.getItem('ACCESS_TOKEN');
             },
             throwNoTokenError: true,
             whitelistedDomains: [],
-            blacklistedRoutes: []
-          }
-        })
+            blacklistedRoutes: [],
+          },
+        }),
       ],
-      providers: [
-        { provide: UserService, useValue: mockUserService },
-      ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
-    })
-    .compileComponents();
+      providers: [{ provide: UserService, useValue: mockUserService }],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -68,6 +67,4 @@ describe('ClickAcademyComponent', () => {
     component.resetOnboarding();
     expect(mockUserService.saveOnboarding).toHaveBeenCalled();
   });
-  
-
 });

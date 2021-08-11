@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, OnDestroy, TemplateRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  OnDestroy,
+  TemplateRef,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { LinksService } from 'src/app/services/links.service';
@@ -10,14 +16,13 @@ import { DialogHistoryComponent } from '../../components/dialog-history/dialog-h
 @Component({
   selector: 'app-report',
   templateUrl: './report.component.html',
-  styleUrls: ['./report.component.scss']
+  styleUrls: ['./report.component.scss'],
 })
 export class ReportComponent implements OnInit, OnDestroy {
-
   paymentUser: Array<any>;
   dataSource: any;
   pageIndex: number = 0;
-  pageSize: number  = 20;
+  pageSize: number = 20;
   pageTo: number = 20;
   totalItems: number;
   paginate: string;
@@ -38,22 +43,21 @@ export class ReportComponent implements OnInit, OnDestroy {
   dataBreak3: any;
   dataAcumulated: any;
   totalAcumulated: string;
-  @ViewChild("templateBreak", { static: false })
+  @ViewChild('templateBreak', { static: false })
   templateBreak: TemplateRef<any>;
-  @ViewChild("templateBreak2", { static: false })
+  @ViewChild('templateBreak2', { static: false })
   templateBreak2: TemplateRef<any>;
-  @ViewChild("templateBreak3", { static: false })
+  @ViewChild('templateBreak3', { static: false })
   templateBreak3: TemplateRef<any>;
-  @ViewChild("templateAcumulated", { static: false })
+  @ViewChild('templateAcumulated', { static: false })
   templateAcumulated: TemplateRef<any>;
 
   constructor(
     private payment: LinksService,
     private auth: AuthService,
     private token: TokenService,
-    private dialog: MatDialog,
-  ) {
-  }
+    private dialog: MatDialog
+  ) {}
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -68,8 +72,8 @@ export class ReportComponent implements OnInit, OnDestroy {
 
   /**
    * Metodo para listar los pagos
-   * @param from 
-   * @param to 
+   * @param from
+   * @param to
    */
 
   public getPayments(from = 1, to = this.pageTo) {
@@ -82,34 +86,39 @@ export class ReportComponent implements OnInit, OnDestroy {
 
   public pagination(paginate: any) {
     this.pageIndex = paginate;
-    this.from = (this.pageSize * this.pageIndex + 1) - 20;
-    this.to = (this.pageSize * (this.pageIndex + 1)) - 20;
-    this.getPayments(this.from, this.to)
+    this.from = this.pageSize * this.pageIndex + 1 - 20;
+    this.to = this.pageSize * (this.pageIndex + 1) - 20;
+    this.getPayments(this.from, this.to);
   }
 
   /**
-  * Metodo para obtener el resumen del mes generados
-  */
+   * Metodo para obtener el resumen del mes generados
+   */
 
   private getInfomonth() {
-
     this.payment.getReportUser().subscribe((resp: any) => {
       this.totalAcumulated = resp.objectResponse.generalResume.totalCommissions;
       this.available = resp.objectResponse.money.accumulated;
       this.account = resp.objectResponse.money.cutOffValue;
-      this.rejected = resp.objectResponse.money.rejected || "0";
+      this.rejected = resp.objectResponse.money.rejected || '0';
       this.conversionRate = resp.objectResponse.generalResume.conversionRate;
-      this.dataBreak1 = new MatTableDataSource<any>(resp.objectResponse.money.detailCutOff);
-      this.dataBreak2 = new MatTableDataSource<any>(resp.objectResponse.money.detailAccumulated);
-      this.dataBreak3 = new MatTableDataSource<any>(resp.objectResponse.money.detailRejected);
+      this.dataBreak1 = new MatTableDataSource<any>(
+        resp.objectResponse.money.detailCutOff
+      );
+      this.dataBreak2 = new MatTableDataSource<any>(
+        resp.objectResponse.money.detailAccumulated
+      );
+      this.dataBreak3 = new MatTableDataSource<any>(
+        resp.objectResponse.money.detailRejected
+      );
       this.totalLinks = resp.objectResponse.generalResume.totalLinks;
       this.totalProducts = resp.objectResponse.generalResume.totalProducts;
-    })
+    });
   }
 
   /**
    * Metodo para listar la info bancaria del usuario
-   * @param user 
+   * @param user
    */
 
   public userData(user) {
@@ -120,53 +129,53 @@ export class ReportComponent implements OnInit, OnDestroy {
     const detail = 'Detalle de ventas';
     let items;
 
-    this.subscription = this.payment.getDetailPaymentClicker(paymentDate).subscribe(resp => {
-      items = resp;
+    this.subscription = this.payment
+      .getDetailPaymentClicker(paymentDate)
+      .subscribe((resp) => {
+        items = resp;
 
-      this.dialog.open(DialogHistoryComponent, {
-        width: "649px",
-        data: {
-          items,
-          title,
-          detail,
-          paymentDate,
-          bank,
-          amount
-        }
+        this.dialog.open(DialogHistoryComponent, {
+          width: '649px',
+          data: {
+            items,
+            title,
+            detail,
+            paymentDate,
+            bank,
+            amount,
+          },
+        });
       });
-
-    });
-
   }
 
   public break(key: string) {
-    let template
-    let title
-    let id
+    let template;
+    let title;
+    let id;
 
     switch (key) {
-      case "commissions":
+      case 'commissions':
         template = this.templateBreak;
-        title = "Detalle comisiones de este mes";
-        id = "break1-modal"
+        title = 'Detalle comisiones de este mes';
+        id = 'break1-modal';
         break;
 
-      case "balance":
+      case 'balance':
         template = this.templateBreak2;
-        title = "Detalle saldo pendiente por pagar";
-        id = "break2-modal"
+        title = 'Detalle saldo pendiente por pagar';
+        id = 'break2-modal';
         break;
 
-      case "rejected-commissions":
+      case 'rejected-commissions':
         template = this.templateBreak3;
-        title = "Detalle comisiones rechazadas";
-        id = "break3-modal"
+        title = 'Detalle comisiones rechazadas';
+        id = 'break3-modal';
         break;
-    
+
       default:
         template = this.templateAcumulated;
-        title = "Detalle saldo acumulado";
-        id = "acumulated-modal"
+        title = 'Detalle saldo acumulado';
+        id = 'acumulated-modal';
         break;
     }
 
@@ -182,5 +191,4 @@ export class ReportComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
 }

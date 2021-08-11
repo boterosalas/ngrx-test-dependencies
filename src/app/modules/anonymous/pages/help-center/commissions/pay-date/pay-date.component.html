@@ -1,307 +1,473 @@
-<app-banner title="{{'BANNERS.HELP_CENTER' | translate}}" img="/assets/img/banners/centro-ayuda-pc.jpg" imgMobile="/assets/img/banners/centro-ayuda-mobile.jpg"></app-banner>
+<app-banner
+  title="{{ 'BANNERS.HELP_CENTER' | translate }}"
+  img="/assets/img/banners/centro-ayuda-pc.jpg"
+  imgMobile="/assets/img/banners/centro-ayuda-mobile.jpg"
+></app-banner>
 <div class="container">
-    <div fxLayout.gt-xs="row" fxLayoutGap.gt-xs="30px" ngClass.gt-xs="mt-3">
-        <span fxHide.gt-xs="true">
-            <button mat-button [routerLink]="[ '/centro-de-ayuda/comisiones' ]">
-                <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
-                    <mat-icon>keyboard_arrow_left</mat-icon>
-                    Volver
-                </span>
-            </button>
+  <div fxLayout.gt-xs="row" fxLayoutGap.gt-xs="30px" ngClass.gt-xs="mt-3">
+    <span fxHide.gt-xs="true">
+      <button mat-button [routerLink]="['/centro-de-ayuda/comisiones']">
+        <span
+          class="galano-bold f-16"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+        >
+          <mat-icon>keyboard_arrow_left</mat-icon>
+          Volver
         </span>
-        <div fxLayout.gt-xs="column" fxFlex.gt-xs="25" fxShow.gt-xs="true" fxShow.xs="false">
-            <app-menu-help-center></app-menu-help-center>
-        </div>
-        <div fxLayout.gt-xs="column">
-            <mat-card>
-            <span class="header-payment" fxLayout="row">
-                <img src="/assets/img/ayuda/comisiones/fechas-de-pago.svg" alt="{{'HELP_CENTER.COMMISSIONS.PAYMENT_TITLE' | translate}}">
-                <h3 class="f-20">{{'HELP_CENTER.COMMISSIONS.PAYMENT_TITLE' | translate}}</h3>
-            </span>
-            <h4>Las compras de tus referidos efectivas* que se generen por medio de tus links durante el mes, se pagarán al siguiente mes entre los días 15 y 20.</h4>
-            <p class="card-p"> *Las compras efectivas pueden completarse los días posteriores a la fecha en la que el cliente compra, ya que pasa por varios estados de validación antes de hacerse efectiva.</p>
-            <table  class='table-payment-dispar w-100' fxShow.gt-xs="true" fxShow.xs="false">
-                <tbody>
-                    <tr class="title-payment-table">
-                        <td class="border-left-top">FECHAS DE CORTE</td>
-                        <td class="border-right-top">DÍAS DE PAGO</td>
-                    </tr>
-                    <tr *ngIf="month<=1" [class]="(month===1)?'par-row-opaco':'par-row'">
-                        <td>Del 1° al 31 de enero</td>
-                        <td>Semana del 15 al 20 de febrero</td>
-                    </tr>
-                    <tr *ngIf="month>1" class="par-row-opaco-text">
-                        <td>Del 1° al 31 de enero</td>
-                        <td>Semana del 15 al 20 de febrero</td>
-                    </tr>
-                    <tr *ngIf="month<=2" [class]="(month===2)?'impar-row-opaco':'impar-row'">
-                        <td>Del 1° al 28 de febrero</td>
-                        <td>Semana del 15 al 20 de marzo</td>
-                    </tr>
-                    <tr *ngIf="month>2" class="impar-row-opaco-text">
-                        <td>Del 1° al 28 de febrero</td>
-                        <td>Semana del 15 al 20 de marzo</td>
-                    </tr>
-                    <tr *ngIf="month<=3" [class]="(month===3)?'par-row-opaco':'par-row'">
-                        <td>Del 1° al 31 de marzo</td>
-                        <td>Semana del 15 al 20 de abril</td>
-                    </tr>
-                    <tr *ngIf="month>3" class="par-row-opaco-text">
-                        <td>Del 1° al 31 de marzo</td>
-                        <td>Semana del 15 al 20 de abril</td>
-                    </tr>
-                    <tr *ngIf="month<=4" [class]="(month===4)?'impar-row-opaco':'impar-row'">
-                        <td>Del 1° al 30 de abril</td>
-                        <td>Semana del 15 al 20 de mayo</td>
-                    </tr>
-                    <tr *ngIf="month>4" class="impar-row-opaco-text">
-                        <td>Del 1° al 30 de abril</td>
-                        <td>Semana del 15 al 20 de mayo</td>
-                    </tr>
-                    
-                    <tr *ngIf="month<=5" [class]="(month===5)?'par-row-opaco':'par-row'">
-                        <td>Del 1° al 31 de mayo</td>
-                        <td>Semana del 15 al 20 de junio</td>
-                    </tr>
-                    <tr *ngIf="month>5" class="par-row-opaco-text">
-                        <td>Del 1° al 31 de mayo</td>
-                        <td>Semana del 15 al 20 de junio</td>
-                    </tr>
-                    <tr *ngIf="month<=6" [class]="(month===6)?'impar-row-opaco':'impar-row'">
-                        <td>Del 1° al 30 de junio</td>
-                        <td>Semana del 15 al 20 de julio</td>
-                    </tr >
-                    <tr *ngIf="month>6" class="impar-row-opaco-text">
-                        <td>Del 1° al 30 de junio</td>
-                        <td>Semana del 15 al 20 de julio</td>
-                    </tr>
-                    <tr *ngIf="month<=7" [class]="(month===7)?'par-row-opaco':'par-row'">
-                        <td>Del 1° al 31 de julio</td>
-                        <td>Semana del 15 al 20 de agosto</td>
-                    </tr>
-                    <tr *ngIf="month>7" class="par-row-opaco-text">
-                        <td>Del 1° al 31 de julio</td>
-                        <td>Semana del 15 al 20 de agosto</td>
-                    </tr>
-                    <tr *ngIf="month<=8" [class]="(month===8)?'impar-row-opaco':'impar-row'">
-                        <td>Del 1° al 31 de agosto</td>
-                        <td>Semana del 15 al 20 de septiembre</td>
-                    </tr>
-                    <tr *ngIf="month>8" class="impar-row-opaco-text">
-                        <td>Del 1° al 31 de agosto</td>
-                        <td>Semana del 15 al 20 de septiembre</td>
-                    </tr>
-                    <tr *ngIf="month<=9" [class]="(month===9)?'par-row-opaco':'par-row'">
-                        <td>Del 1° al 30 de septiembre</td>
-                        <td>Semana del 15 al 20 de octubre</td>
-                    </tr>
-                    <tr *ngIf="month>9" class="par-row-opaco-text">
-                        <td>Del 1° al 30 de septiembre</td>
-                        <td>Semana del 15 al 20 de octubre</td>
-                    </tr>
-                    <tr *ngIf="month<=10" [class]="(month===10)?'impar-row-opaco':'impar-row'">
-                        <td>Del 1° al 31 de octubre</td>
-                        <td>Semana del 15 al 20 de noviembre</td>
-                    </tr>
-                    <tr *ngIf="month>10" class="impar-row-opaco-text">
-                        <td>Del 1° al 31 de octubre</td>
-                        <td>Semana del 15 al 20 de noviembre</td>
-                    </tr>
-                    <tr *ngIf="month<=11" [class]="(month===11)?'par-row-opaco':'par-row'">
-                        <td>Del 1° al 30 de noviembre</td>
-                        <td>Semana del 15 al 20 de diciembre</td>
-                    </tr>
-                    <tr *ngIf="month>11" class="par-row-opaco-text">
-                        <td>Del 1° al 30 de noviembre</td>
-                        <td>Semana del 15 al 20 de diciembre</td>
-                    </tr>
-                    
-                    <tr *ngIf="month<=12" [class]="(month===12)?'impar-row-opaco':'impar-row'">
-                        <td>Del 1° al 31 de diciembre</td>
-                        <td>Semana del 15 al 20 de enero</td>
-                    </tr>
-                    <tr *ngIf="month>12" class="impar-row-opaco-text">
-                        <td>Del 1° al 31 de diciembre</td>
-                        <td>Semana del 15 al 20 de enero</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div fxShow.gt-xs="false" fxShow.xs="true">
-                <div class="header-payment-mobile">
-                    <h3 class="mt-0 mb-0">FECHAS DE PAGO</h3>
-                </div>
-                <div *ngIf="month<=1" [class]="(month===1)?'content-payment-mobile-opaco':'content-payment-mobile'"  >
-                    <p>Del 1° al 31 de enero</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de febrero</p>
-                    </div>
-                </div>
-                <div *ngIf="month>1" class="content-payment-mobile-opaco-text">
-                    <p>Del 1° al 31 de enero</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de febrero</p>
-                    </div>
-                </div>
-                <div *ngIf="month<=2" [class]="(month===2)?'content-payment-mobile-opaco':'content-payment-mobile-impar'"  >
-                    <p>Del 1° al 28 de febrero</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de marzo</p>
-                    </div>
-                </div>
-                <div *ngIf="month>2" class="content-payment-mobile-impar-opaco-text">
-                    <p>Del 1° al 28 de febrero</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de marzo</p>
-                    </div>
-                </div>
-                <div *ngIf="month<=3" [class]="(month===3)?'content-payment-mobile-opaco':'content-payment-mobile'"  >
-                    <p>Del 1° al 31 de marzo</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de abril</p>
-                    </div>
-                </div>
-                <div *ngIf="month>3" class="content-payment-mobile-opaco-text">
-                    <p>Del 1° al 31 de marzo</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de abril</p>
-                    </div>
-                </div>
-                <div *ngIf="month<=4" [class]="(month===4)?'content-payment-mobile-opaco':'content-payment-mobile-impar'"  >
-                    <p>Del 1° al 30 de abril</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de mayo</p>
-                    </div>
-                </div>
-                <div *ngIf="month>4" class="content-payment-mobile-impar-opaco-text">
-                    <p>Del 1° al 30 de abril</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de mayo</p>
-                    </div>
-                </div>
-                <div *ngIf="month<=5" [class]="(month===5)?'content-payment-mobile-opaco':'content-payment-mobile'"  >
-                    <p>Del 1° al 31 de mayo</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de junio</p>
-                    </div>
-                </div>
-                <div *ngIf="month>5" class="content-payment-mobile-opaco-text">
-                    <p>Del 1° al 31 de mayo</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de junio</p>
-                    </div>
-                </div>
-                <div *ngIf="month<=6" [class]="(month===6)?'content-payment-mobile-opaco':'content-payment-mobile-impar'"  >
-                    <p>Del 1° al 30 de junio</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de julio</p>
-                    </div>
-                </div>
-                <div *ngIf="month>6" class="content-payment-mobile-impar-opaco-text">
-                    <p>Del 1° al 30 de junio</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de julio</p>
-                    </div>
-                </div>
-                <div *ngIf="month<=7" [class]="(month===7)?'content-payment-mobile-opaco':'content-payment-mobile'"  >
-                    <p>Del 1° al 31 de julio</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de agosto</p>
-                    </div>
-                </div>
-                <div *ngIf="month>7" class="content-payment-mobile-opaco-text">
-                    <p>Del 1° al 31 de julio</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de agosto</p>
-                    </div>
-                </div>
-                <div *ngIf="month<=8" [class]="(month===8)?'content-payment-mobile-opaco':'content-payment-mobile-impar'"  >
-                    <p>Del 1° al 31 de agosto</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de septiembre</p>
-                    </div>
-                </div>
-                <div *ngIf="month>8" class="content-payment-mobile-impar-opaco-text">
-                    <p>Del 1° al 31 de agosto</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de septiembre</p>
-                    </div>
-                </div>
-                <div *ngIf="month<=9" [class]="(month===9)?'content-payment-mobile-opaco':'content-payment-mobile'"  >
-                    <p>Del 1° al 30 de septiembre</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de octubre</p>
-                    </div>
-                </div>
-                <div *ngIf="month>9" class="content-payment-mobile-opaco-text">
-                    <p>Del 1° al 30 de septiembre</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de octubre</p>
-                    </div>
-                </div>
-                <div *ngIf="month<=10" [class]="(month===10)?'content-payment-mobile-opaco':'content-payment-mobile-impar'"  >
-                    <p>Del 1° al 31 de octubre</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de noviembre</p>
-                    </div>
-                </div>
-                <div *ngIf="month>10" class="content-payment-mobile-impar-opaco-text">
-                    <p>Del 1° al 31 de octubre</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de noviembre</p>
-                    </div>
-                </div>
-                <div *ngIf="month<=11" [class]="(month===11)?'content-payment-mobile-opaco':'content-payment-mobile'"  >
-                    <p>Del 1° al 30 de noviembre</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de diciembre</p>
-                    </div>
-                </div>
-                <div *ngIf="month>11" class="content-payment-mobile-opaco-text">
-                    <p>Del 1° al 30 de noviembre</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de diciembre</p>
-                    </div>
-                </div>
-                <div *ngIf="month<=12" [class]="(month===12)?'content-payment-mobile-opaco':'content-payment-mobile-impar'"  >
-                    <p>Del 1° al 30 de diciembre</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de enero</p>
-                    </div>
-                </div>
-                <div *ngIf="month>12" class="content-payment-mobile-impar-opaco-text">
-                    <p>Del 1° al 30 de diciembre</p>
-                    <div>
-                        <h3 class="mb-0">DÍAS DE PAGO</h3>
-                        <p class="mt-0">Semana del 15 al 20 de enero</p>
-                    </div>
-                </div>
-            </div>
-        </mat-card>
-        </div>
+      </button>
+    </span>
+    <div
+      fxLayout.gt-xs="column"
+      fxFlex.gt-xs="25"
+      fxShow.gt-xs="true"
+      fxShow.xs="false"
+    >
+      <app-menu-help-center></app-menu-help-center>
     </div>
+    <div fxLayout.gt-xs="column">
+      <mat-card>
+        <span class="header-payment" fxLayout="row">
+          <img
+            src="/assets/img/ayuda/comisiones/fechas-de-pago.svg"
+            alt="{{ 'HELP_CENTER.COMMISSIONS.PAYMENT_TITLE' | translate }}"
+          />
+          <h3 class="f-20">
+            {{ 'HELP_CENTER.COMMISSIONS.PAYMENT_TITLE' | translate }}
+          </h3>
+        </span>
+        <h4>
+          Las compras de tus referidos efectivas* que se generen por medio de
+          tus links durante el mes, se pagarán al siguiente mes entre los días
+          15 y 20.
+        </h4>
+        <p class="card-p">
+           *Las compras efectivas pueden completarse los días posteriores a la
+          fecha en la que el cliente compra, ya que pasa por varios estados
+          de validación antes de hacerse efectiva.
+        </p>
+        <table
+          class="table-payment-dispar w-100"
+          fxShow.gt-xs="true"
+          fxShow.xs="false"
+        >
+          <tbody>
+            <tr class="title-payment-table">
+              <td class="border-left-top">FECHAS DE CORTE</td>
+              <td class="border-right-top">DÍAS DE PAGO</td>
+            </tr>
+            <tr
+              *ngIf="month <= 1"
+              [class]="month === 1 ? 'par-row-opaco' : 'par-row'"
+            >
+              <td>Del 1° al 31 de enero</td>
+              <td>Semana del 15 al 20 de febrero</td>
+            </tr>
+            <tr *ngIf="month > 1" class="par-row-opaco-text">
+              <td>Del 1° al 31 de enero</td>
+              <td>Semana del 15 al 20 de febrero</td>
+            </tr>
+            <tr
+              *ngIf="month <= 2"
+              [class]="month === 2 ? 'impar-row-opaco' : 'impar-row'"
+            >
+              <td>Del 1° al 28 de febrero</td>
+              <td>Semana del 15 al 20 de marzo</td>
+            </tr>
+            <tr *ngIf="month > 2" class="impar-row-opaco-text">
+              <td>Del 1° al 28 de febrero</td>
+              <td>Semana del 15 al 20 de marzo</td>
+            </tr>
+            <tr
+              *ngIf="month <= 3"
+              [class]="month === 3 ? 'par-row-opaco' : 'par-row'"
+            >
+              <td>Del 1° al 31 de marzo</td>
+              <td>Semana del 15 al 20 de abril</td>
+            </tr>
+            <tr *ngIf="month > 3" class="par-row-opaco-text">
+              <td>Del 1° al 31 de marzo</td>
+              <td>Semana del 15 al 20 de abril</td>
+            </tr>
+            <tr
+              *ngIf="month <= 4"
+              [class]="month === 4 ? 'impar-row-opaco' : 'impar-row'"
+            >
+              <td>Del 1° al 30 de abril</td>
+              <td>Semana del 15 al 20 de mayo</td>
+            </tr>
+            <tr *ngIf="month > 4" class="impar-row-opaco-text">
+              <td>Del 1° al 30 de abril</td>
+              <td>Semana del 15 al 20 de mayo</td>
+            </tr>
+
+            <tr
+              *ngIf="month <= 5"
+              [class]="month === 5 ? 'par-row-opaco' : 'par-row'"
+            >
+              <td>Del 1° al 31 de mayo</td>
+              <td>Semana del 15 al 20 de junio</td>
+            </tr>
+            <tr *ngIf="month > 5" class="par-row-opaco-text">
+              <td>Del 1° al 31 de mayo</td>
+              <td>Semana del 15 al 20 de junio</td>
+            </tr>
+            <tr
+              *ngIf="month <= 6"
+              [class]="month === 6 ? 'impar-row-opaco' : 'impar-row'"
+            >
+              <td>Del 1° al 30 de junio</td>
+              <td>Semana del 15 al 20 de julio</td>
+            </tr>
+            <tr *ngIf="month > 6" class="impar-row-opaco-text">
+              <td>Del 1° al 30 de junio</td>
+              <td>Semana del 15 al 20 de julio</td>
+            </tr>
+            <tr
+              *ngIf="month <= 7"
+              [class]="month === 7 ? 'par-row-opaco' : 'par-row'"
+            >
+              <td>Del 1° al 31 de julio</td>
+              <td>Semana del 15 al 20 de agosto</td>
+            </tr>
+            <tr *ngIf="month > 7" class="par-row-opaco-text">
+              <td>Del 1° al 31 de julio</td>
+              <td>Semana del 15 al 20 de agosto</td>
+            </tr>
+            <tr
+              *ngIf="month <= 8"
+              [class]="month === 8 ? 'impar-row-opaco' : 'impar-row'"
+            >
+              <td>Del 1° al 31 de agosto</td>
+              <td>Semana del 15 al 20 de septiembre</td>
+            </tr>
+            <tr *ngIf="month > 8" class="impar-row-opaco-text">
+              <td>Del 1° al 31 de agosto</td>
+              <td>Semana del 15 al 20 de septiembre</td>
+            </tr>
+            <tr
+              *ngIf="month <= 9"
+              [class]="month === 9 ? 'par-row-opaco' : 'par-row'"
+            >
+              <td>Del 1° al 30 de septiembre</td>
+              <td>Semana del 15 al 20 de octubre</td>
+            </tr>
+            <tr *ngIf="month > 9" class="par-row-opaco-text">
+              <td>Del 1° al 30 de septiembre</td>
+              <td>Semana del 15 al 20 de octubre</td>
+            </tr>
+            <tr
+              *ngIf="month <= 10"
+              [class]="month === 10 ? 'impar-row-opaco' : 'impar-row'"
+            >
+              <td>Del 1° al 31 de octubre</td>
+              <td>Semana del 15 al 20 de noviembre</td>
+            </tr>
+            <tr *ngIf="month > 10" class="impar-row-opaco-text">
+              <td>Del 1° al 31 de octubre</td>
+              <td>Semana del 15 al 20 de noviembre</td>
+            </tr>
+            <tr
+              *ngIf="month <= 11"
+              [class]="month === 11 ? 'par-row-opaco' : 'par-row'"
+            >
+              <td>Del 1° al 30 de noviembre</td>
+              <td>Semana del 15 al 20 de diciembre</td>
+            </tr>
+            <tr *ngIf="month > 11" class="par-row-opaco-text">
+              <td>Del 1° al 30 de noviembre</td>
+              <td>Semana del 15 al 20 de diciembre</td>
+            </tr>
+
+            <tr
+              *ngIf="month <= 12"
+              [class]="month === 12 ? 'impar-row-opaco' : 'impar-row'"
+            >
+              <td>Del 1° al 31 de diciembre</td>
+              <td>Semana del 15 al 20 de enero</td>
+            </tr>
+            <tr *ngIf="month > 12" class="impar-row-opaco-text">
+              <td>Del 1° al 31 de diciembre</td>
+              <td>Semana del 15 al 20 de enero</td>
+            </tr>
+          </tbody>
+        </table>
+        <div fxShow.gt-xs="false" fxShow.xs="true">
+          <div class="header-payment-mobile">
+            <h3 class="mt-0 mb-0">FECHAS DE PAGO</h3>
+          </div>
+          <div
+            *ngIf="month <= 1"
+            [class]="
+              month === 1
+                ? 'content-payment-mobile-opaco'
+                : 'content-payment-mobile'
+            "
+          >
+            <p>Del 1° al 31 de enero</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de febrero</p>
+            </div>
+          </div>
+          <div *ngIf="month > 1" class="content-payment-mobile-opaco-text">
+            <p>Del 1° al 31 de enero</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de febrero</p>
+            </div>
+          </div>
+          <div
+            *ngIf="month <= 2"
+            [class]="
+              month === 2
+                ? 'content-payment-mobile-opaco'
+                : 'content-payment-mobile-impar'
+            "
+          >
+            <p>Del 1° al 28 de febrero</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de marzo</p>
+            </div>
+          </div>
+          <div
+            *ngIf="month > 2"
+            class="content-payment-mobile-impar-opaco-text"
+          >
+            <p>Del 1° al 28 de febrero</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de marzo</p>
+            </div>
+          </div>
+          <div
+            *ngIf="month <= 3"
+            [class]="
+              month === 3
+                ? 'content-payment-mobile-opaco'
+                : 'content-payment-mobile'
+            "
+          >
+            <p>Del 1° al 31 de marzo</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de abril</p>
+            </div>
+          </div>
+          <div *ngIf="month > 3" class="content-payment-mobile-opaco-text">
+            <p>Del 1° al 31 de marzo</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de abril</p>
+            </div>
+          </div>
+          <div
+            *ngIf="month <= 4"
+            [class]="
+              month === 4
+                ? 'content-payment-mobile-opaco'
+                : 'content-payment-mobile-impar'
+            "
+          >
+            <p>Del 1° al 30 de abril</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de mayo</p>
+            </div>
+          </div>
+          <div
+            *ngIf="month > 4"
+            class="content-payment-mobile-impar-opaco-text"
+          >
+            <p>Del 1° al 30 de abril</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de mayo</p>
+            </div>
+          </div>
+          <div
+            *ngIf="month <= 5"
+            [class]="
+              month === 5
+                ? 'content-payment-mobile-opaco'
+                : 'content-payment-mobile'
+            "
+          >
+            <p>Del 1° al 31 de mayo</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de junio</p>
+            </div>
+          </div>
+          <div *ngIf="month > 5" class="content-payment-mobile-opaco-text">
+            <p>Del 1° al 31 de mayo</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de junio</p>
+            </div>
+          </div>
+          <div
+            *ngIf="month <= 6"
+            [class]="
+              month === 6
+                ? 'content-payment-mobile-opaco'
+                : 'content-payment-mobile-impar'
+            "
+          >
+            <p>Del 1° al 30 de junio</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de julio</p>
+            </div>
+          </div>
+          <div
+            *ngIf="month > 6"
+            class="content-payment-mobile-impar-opaco-text"
+          >
+            <p>Del 1° al 30 de junio</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de julio</p>
+            </div>
+          </div>
+          <div
+            *ngIf="month <= 7"
+            [class]="
+              month === 7
+                ? 'content-payment-mobile-opaco'
+                : 'content-payment-mobile'
+            "
+          >
+            <p>Del 1° al 31 de julio</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de agosto</p>
+            </div>
+          </div>
+          <div *ngIf="month > 7" class="content-payment-mobile-opaco-text">
+            <p>Del 1° al 31 de julio</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de agosto</p>
+            </div>
+          </div>
+          <div
+            *ngIf="month <= 8"
+            [class]="
+              month === 8
+                ? 'content-payment-mobile-opaco'
+                : 'content-payment-mobile-impar'
+            "
+          >
+            <p>Del 1° al 31 de agosto</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de septiembre</p>
+            </div>
+          </div>
+          <div
+            *ngIf="month > 8"
+            class="content-payment-mobile-impar-opaco-text"
+          >
+            <p>Del 1° al 31 de agosto</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de septiembre</p>
+            </div>
+          </div>
+          <div
+            *ngIf="month <= 9"
+            [class]="
+              month === 9
+                ? 'content-payment-mobile-opaco'
+                : 'content-payment-mobile'
+            "
+          >
+            <p>Del 1° al 30 de septiembre</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de octubre</p>
+            </div>
+          </div>
+          <div *ngIf="month > 9" class="content-payment-mobile-opaco-text">
+            <p>Del 1° al 30 de septiembre</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de octubre</p>
+            </div>
+          </div>
+          <div
+            *ngIf="month <= 10"
+            [class]="
+              month === 10
+                ? 'content-payment-mobile-opaco'
+                : 'content-payment-mobile-impar'
+            "
+          >
+            <p>Del 1° al 31 de octubre</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de noviembre</p>
+            </div>
+          </div>
+          <div
+            *ngIf="month > 10"
+            class="content-payment-mobile-impar-opaco-text"
+          >
+            <p>Del 1° al 31 de octubre</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de noviembre</p>
+            </div>
+          </div>
+          <div
+            *ngIf="month <= 11"
+            [class]="
+              month === 11
+                ? 'content-payment-mobile-opaco'
+                : 'content-payment-mobile'
+            "
+          >
+            <p>Del 1° al 30 de noviembre</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de diciembre</p>
+            </div>
+          </div>
+          <div *ngIf="month > 11" class="content-payment-mobile-opaco-text">
+            <p>Del 1° al 30 de noviembre</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de diciembre</p>
+            </div>
+          </div>
+          <div
+            *ngIf="month <= 12"
+            [class]="
+              month === 12
+                ? 'content-payment-mobile-opaco'
+                : 'content-payment-mobile-impar'
+            "
+          >
+            <p>Del 1° al 30 de diciembre</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de enero</p>
+            </div>
+          </div>
+          <div
+            *ngIf="month > 12"
+            class="content-payment-mobile-impar-opaco-text"
+          >
+            <p>Del 1° al 30 de diciembre</p>
+            <div>
+              <h3 class="mb-0">DÍAS DE PAGO</h3>
+              <p class="mt-0">Semana del 15 al 20 de enero</p>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
 </div>
-
-

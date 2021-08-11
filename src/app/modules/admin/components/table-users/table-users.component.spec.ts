@@ -12,18 +12,15 @@ describe('TableUsersComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TableUsersComponent ],
+      declarations: [TableUsersComponent],
       imports: [
         AppMaterialModule,
         TranslateModule.forRoot({}),
         BrowserAnimationsModule,
-        NgxPaginationModule
+        NgxPaginationModule,
       ],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ]
-    })
-    .compileComponents();
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -47,5 +44,4 @@ describe('TableUsersComponent', () => {
     component.sortData([]);
     expect(component.sortDataUser.emit).toHaveBeenCalled();
   });
-
 });

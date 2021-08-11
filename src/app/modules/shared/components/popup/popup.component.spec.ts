@@ -9,31 +9,29 @@ describe('PopupComponent', () => {
   let fixture: ComponentFixture<PopupComponent>;
 
   const dialogMock = {
-    close: () => { }
+    close: () => {},
   };
 
-  const data = { 
+  const data = {
     element: {
-      imageUrlWeb: "http/archivo.jpg", 
-      imageUrlMobile: "http/archivo.jpg", 
-      BLink: "http/archivo.jpg",
-      colorbutton: "#000",
-      textbutton: "Pendiente" 
-    } 
-  }
+      imageUrlWeb: 'http/archivo.jpg',
+      imageUrlMobile: 'http/archivo.jpg',
+      BLink: 'http/archivo.jpg',
+      colorbutton: '#000',
+      textbutton: 'Pendiente',
+    },
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PopupComponent ],
-      imports: [
-        AppMaterialModule
+      declarations: [PopupComponent],
+      imports: [AppMaterialModule],
+      providers: [
+        { provide: MAT_DIALOG_DATA, useValue: data },
+        { provide: MatDialogRef, useValue: dialogMock },
       ],
-      providers: [{ provide: MAT_DIALOG_DATA, useValue: data }, { provide: MatDialogRef, useValue: dialogMock }],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ]
-    })
-    .compileComponents();
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

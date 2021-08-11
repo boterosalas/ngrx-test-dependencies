@@ -1,6 +1,6 @@
-@import "variables";
-@import "general";
-@import "animations";
+@import 'variables';
+@import 'general';
+@import 'animations';
 
 .title {
   font-family: $font-galano;
@@ -58,12 +58,10 @@
   .badge-product {
     font-size: 60% !important;
   }
-
 }
 
 @media screen and (max-width: 600px) {
-  
-  .card-other{
+  .card-other {
     padding: 0 !important;
     border-radius: 10px !important;
   }
@@ -105,8 +103,8 @@
   background: red;
 }
 
-.cursor{
-  &-pointer{
+.cursor {
+  &-pointer {
     cursor: pointer;
   }
 }
@@ -120,7 +118,7 @@
 
 .imageContainer {
   width: 100%;
-  img{
+  img {
     max-width: 100%;
   }
 }
@@ -174,46 +172,45 @@ h3.size {
   }
 }
 
-.card-exito{
-  h3{
+.card-exito {
+  h3 {
     min-height: 38px;
   }
 }
 
-.exito-product{
+.exito-product {
   position: relative;
   margin-bottom: 1rem;
 }
 
-.img-exito{
+.img-exito {
   max-height: 17.56rem;
   display: block;
   position: relative;
 }
 
-.titles{
+.titles {
   min-height: 100px;
 }
 
-@media screen and (min-width: 767px) and (max-width:1024px) {
-  .card-exito{
-    h3{
+@media screen and (min-width: 767px) and (max-width: 1024px) {
+  .card-exito {
+    h3 {
       font-size: 15px;
     }
   }
-
 }
 
-.button-wrap{
+.button-wrap {
   width: 80%;
   margin: 0 auto;
 }
 
-.container-card-info{
+.container-card-info {
   min-height: 190px;
   padding: 0 20px;
 }
 
-.widb{
+.widb {
   width: 150px;
 }

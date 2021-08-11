@@ -1,14 +1,14 @@
 .position-absolute {
-    position: absolute;
-    top: 40%;
-    z-index: 9;
-    width: 100%;
-  }
-  
-  .position-relative{
-      position: relative;
-  }
-  
-  .rotate {
-    transform: rotate(180deg);
-  }
+  position: absolute;
+  top: 40%;
+  z-index: 9;
+  width: 100%;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}

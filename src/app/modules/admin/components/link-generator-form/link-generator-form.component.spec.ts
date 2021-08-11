@@ -12,16 +12,15 @@ describe('LinkGeneratorFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LinkGeneratorFormComponent ], 
+      declarations: [LinkGeneratorFormComponent],
       imports: [
         ReactiveFormsModule,
         FormsModule,
         TranslateModule.forRoot(),
         AppMaterialModule,
-        NoopAnimationsModule
-      ]
-    })
-    .compileComponents();
+        NoopAnimationsModule,
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -40,13 +39,11 @@ describe('LinkGeneratorFormComponent', () => {
     expect(component.generate.emit).toHaveBeenCalled();
   });
 
-  it("copyInputMessage", () => {
-    const button = document.querySelector("#btnCopy");
-    button.dispatchEvent(new Event("click"));
+  it('copyInputMessage', () => {
+    const button = document.querySelector('#btnCopy');
+    button.dispatchEvent(new Event('click'));
     const nativeElementInput = fixture.nativeElement;
-    const input = nativeElementInput.querySelector("input");
+    const input = nativeElementInput.querySelector('input');
     expect(input).not.toBeUndefined();
   });
-  
-
 });

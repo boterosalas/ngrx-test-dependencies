@@ -18,10 +18,9 @@ describe('FaqItemComponent', () => {
         HttpClientTestingModule,
         TranslateModule.forRoot({}),
         BrowserAnimationsModule,
-        AppMaterialModule
-      ]
-    })
-    .compileComponents();   
+        AppMaterialModule,
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -30,10 +29,10 @@ describe('FaqItemComponent', () => {
     component.faq = {
       id: 4,
       idseccion: 1,
-      link: "https://www.google.com.co",
-      sectiontitle: "¿Tienes un sitio web? Regístralo Aqui!",
+      link: 'https://www.google.com.co',
+      sectiontitle: '¿Tienes un sitio web? Regístralo Aqui!',
       orderby: 1,
-      date: "2021-05-25T09:16:06.897",
+      date: '2021-05-25T09:16:06.897',
     };
     fixture.detectChanges();
   });

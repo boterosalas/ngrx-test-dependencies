@@ -133,7 +133,7 @@
               fxLayoutAlign="center space-between"
               ngClass="{{ classButtonCopy }}"
             >
-              {{ "GENERIC.COPY_LINK" | translate }}
+              {{ 'GENERIC.COPY_LINK' | translate }}
             </span>
           </button>
 
@@ -175,7 +175,7 @@
     </form>
 
     <h3 class="border-bottom-orange-init share-desktop">
-      {{ "GENERIC.SHARE" | translate }}
+      {{ 'GENERIC.SHARE' | translate }}
     </h3>
 
     <div class="share-desktop" id="share">
@@ -291,7 +291,7 @@
       <mat-icon>keyboard_arrow_left</mat-icon>
       <span class="text-back">Volver</span>
     </span>
-    <p>{{ "GENERIC.REFERENCE_IDENTIFICATION" | translate }}</p>
+    <p>{{ 'GENERIC.REFERENCE_IDENTIFICATION' | translate }}</p>
     <mat-form-field appearance="outline" class="mt-2">
       <input
         matInput
@@ -309,7 +309,7 @@
           idCustomerForm.controls.identification.errors.required
         "
         >{{
-          "GENERIC.REQUIRED" | translate: { formValue: "Número de documento" }
+          'GENERIC.REQUIRED' | translate: { formValue: 'Número de documento' }
         }}</mat-error
       >
 
@@ -320,7 +320,7 @@
           idCustomerForm.controls.identification.errors.maxlength
         "
         >{{
-          "GENERIC.MAX_CHARACTERS"
+          'GENERIC.MAX_CHARACTERS'
             | translate
               : {
                   maxchar:
@@ -336,7 +336,7 @@
           idCustomerForm.controls.identification.invalid &&
           idCustomerForm.controls.identification.errors.pattern
         "
-        >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+        >{{ 'GENERIC.ONLY_NUMBERS' | translate }}</mat-error
       >
     </mat-form-field>
 
@@ -350,7 +350,7 @@
         [disabled]="!idCustomerForm.valid"
       >
         <span class="gtmCrearCedulaSiguiente">{{
-          "GENERIC.ACCEPT" | translate
+          'GENERIC.ACCEPT' | translate
         }}</span>
       </button>
     </div>
@@ -360,7 +360,7 @@
 <ng-template #templateDialogAssured>
   <div id="share">
     <div *ngIf="showFormCustomer">
-      <p class="text-id">{{ "GENERIC.CUSTOMER_ID" | translate }}</p>
+      <p class="text-id">{{ 'GENERIC.CUSTOMER_ID' | translate }}</p>
       <form
         class="forgotpassword-container"
         [formGroup]="idCustomerForm"
@@ -383,8 +383,8 @@
               idCustomerForm.controls.identification.errors.required
             "
             >{{
-              "GENERIC.REQUIRED"
-                | translate: { formValue: "Número de documento" }
+              'GENERIC.REQUIRED'
+                | translate: { formValue: 'Número de documento' }
             }}</mat-error
           >
 
@@ -395,7 +395,7 @@
               idCustomerForm.controls.identification.errors.maxlength
             "
             >{{
-              "GENERIC.MAX_CHARACTERS"
+              'GENERIC.MAX_CHARACTERS'
                 | translate
                   : {
                       maxchar:
@@ -411,7 +411,7 @@
               idCustomerForm.controls.identification.invalid &&
               idCustomerForm.controls.identification.errors.pattern
             "
-            >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
+            >{{ 'GENERIC.ONLY_NUMBERS' | translate }}</mat-error
           >
         </mat-form-field>
 
@@ -429,7 +429,7 @@
               fxLayoutAlign="space-between center"
               class="pr-3 gtmCrearCedulaSiguiente"
             >
-              {{ "GENERIC.NEXT" | translate }}
+              {{ 'GENERIC.NEXT' | translate }}
               <mat-icon>arrow_forward</mat-icon>
             </span>
           </button>
@@ -470,7 +470,7 @@
                 fxLayoutAlign="center space-between"
                 ngClass="{{ classButtonCopy }}"
               >
-                {{ "GENERIC.COPY_LINK" | translate }}
+                {{ 'GENERIC.COPY_LINK' | translate }}
               </span>
             </button>
 
@@ -493,7 +493,7 @@
       </form>
 
       <h3 class="border-bottom-orange-init share-desktop">
-        {{ "GENERIC.SHARE" | translate }}
+        {{ 'GENERIC.SHARE' | translate }}
       </h3>
 
       <div class="share-desktop" id="share">

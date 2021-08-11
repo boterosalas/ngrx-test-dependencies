@@ -11,17 +11,11 @@ describe('LoadFormFileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoadFormFileComponent ],
-      imports: [
-        ReactiveFormsModule,
-        FormsModule
-      ],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ],
-      providers: [ { provide: FormBuilder, useValue: formBuilder } ]
-    })
-    .compileComponents();
+      declarations: [LoadFormFileComponent],
+      imports: [ReactiveFormsModule, FormsModule],
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [{ provide: FormBuilder, useValue: formBuilder }],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -50,6 +44,4 @@ describe('LoadFormFileComponent', () => {
     fixture.detectChanges();
     expect(component.uploadFile.emit).toHaveBeenCalled();
   });
-  
-
 });

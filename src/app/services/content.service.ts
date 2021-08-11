@@ -1,121 +1,125 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { environment } from "src/environments/environment";
-import { map, retry, delay, retryWhen, tap, take } from "rxjs/operators";
-import { ResponseService } from "../interfaces/response";
-import { Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { map, retry, delay, retryWhen, tap, take } from 'rxjs/operators';
+import { ResponseService } from '../interfaces/response';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class ContentService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  token = localStorage.getItem("ACCESS_TOKEN");
+  token = localStorage.getItem('ACCESS_TOKEN');
   authorization = this.token;
 
   httpOptions = {
     headers: new HttpHeaders({
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + this.authorization,
-      "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + this.authorization,
+      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
     }),
   };
   urlRefer = environment.URL_REFERAL;
   url = environment.URL_CONTENT;
   urlComission = environment.URL_COMISSION;
-  urlbiggyExito = "https://search.biggylabs.com.br/search-api/v1/exitocol/api/";
-  urlbiggyCarulla = "https://search.biggylabs.com.br/search-api/v1/carulla/api/";
-  apibiggy = "search/trade-policy/1"
-  apiNews = "product/getNews";
-  apiAssured = "product/getProductsSegurosExito";
-  apiTrips = "product/getProductsViajesExito";
-  apiOffers = "offer/getOffers";
-  apiPopup = "offer/getpopup";
-  apiSaveVisitOffer = "offer/savevisitoffer";
-  apiCategories = "offer/getCategories";
-  apiProducts = "product";
-  apiGetBusiness = "business/getBusiness";
-  apiGetAllBusiness = "business/getallbusiness";
-  apiSaveActiveBusiness = "business/saveactivebusiness";
-  apiGetLinkBusiness = "business/generatelinkbusiness";
-  apiGetBusinessClicker = "business/getbusinessclicker";
-  apiGetBusinessContent = "business/getContent";
-  apiGetcategoriesbusiness = "business/getcategoriesbusiness";
-  apiRegisterbusiness = "business/registerbusiness";
-  apiGetbusinessexcel = "business/getbusinessexcel";
-  apiAddCategory = "business/savecategory";
-  apiDeleteCategory = "business/deletecategory";
-  apiGetCommissions = "business/getcommissions";
-  apiGetAllCategory = "business/getallcategories"
-  apiOrderCategory = "business/ordercategories";
-  apiComisionByBusiness = "business/getcommissionsbybusiness";
-  apiSaveTips = "business/savetipbusiness";
-  apiInfoBusiness = "business/saveinfobusiness";
-  apiDeleteTip = "business/deletetipbusiness";
-  apiSaveTerms = "business/savetermbusiness";
-  apiGetBussinessById = "business/getbusinessbyid";
-  apiSaveBusinessOrderTip = "business/saveordertipbusiness";
-  apiGetManageCommisionBus = "category/getcategoriesbyidbusiness";
-  apiManageComisionBusiness = "category/savecategory";
-  apiDeleteManageCom = "category/deletecategory";
-  apiGetpopups = "popups/getpopups";
-  apiUploadContent = "library/uploadcontentlibrary";
-  apiGetContentVideo = "library/getcontentlibrary";
-  apiDeleteContent = "library/deletecontentslibrary";
-  apiDownloadContent = "library/downloadzip";
-  apiSaveComision = "business/savecommissiontable";
-  apiDeleteComision = "business/deletecommissiontable";
-  apiSaverefer = "link/savelinkreferredvisit";
-  apiGetBlog = "blog/getblogs";
-  apiGetBlogIndividual = "blog/getblog";
-  apiDeleteBlog = "blog/deleteblog";
-  apiSaveBlog = "blog/saveblog";
-  apiActivateBlog = "blog/activeblog";
-  apiSaveBussiness = "business/savebusiness"
-  apiSendMessage = "blog/sendmail";
-  apiSaveOrderOfer = "offer/saveorderoffers";
-  apiDeleteOfer = "offer/deleteoffers";
-  apiSaveOfer = "offer/saveoffers";
-  apiSaveOferActive = "offer/saveactiveoffers";
-  apiGetStories = "story/getstories";
-  apiSaveStories = "story/savestories";
-  apiDeleteStories = "story/deletestories";
-  apiSaveVisitStory = "story/savevisitstory";
-  apiFooter = "footer/getfooter";
-  apiCommissions = "commissions/getcommissions"
-  apiSaveFooterSection = "footer/savefooterseccion";
-  apiDeleteFooterSection = "footer/deletefooterseccions";
-  apiSaveFooterLink = "footer/savefooterlink";
-  apiDeleteFooterLink = "footer/deletefooterlinks";
-  apiSaveOrderFooterSections = "footer/saveorderfooterseccions";
-  apiSaveOrderFooterLinks = "footer/saveorderfooterlinks";
-  apiDeleteFaqItems= "faq/deletefaqitems";
-  apiSaveFaqSeccion = "faq/savefaqseccion";
-  apiDeleteFaqSeccions = "faq/deletefaqseccions";
-  apiSaveFaqItem = "faq/savefaqitem";
-  apiSaveOrderFaqItems = "faq/saveorderfaqitems";
-  apiSaveOrderFaqSeccions= "faq/saveorderfaqseccions";
-  apiGetFaq= "faq/getfaq";
-  apiGetNotificationAdmin ="notification/getnotifications";
-  apiDeleteNotificationAdmin ="notification/deletenotification";
-  apiSaveNotificationAdmin ="notification/savenotification";
-  apiGetNotificationDetailAdmin ="notification/getnotification";
-  apiViewNotification = "notification/savevisitnotification";
-  apiDeleteNotificationUser ="notification/deletenotificationuser";
-
+  urlbiggyExito = 'https://search.biggylabs.com.br/search-api/v1/exitocol/api/';
+  urlbiggyCarulla =
+    'https://search.biggylabs.com.br/search-api/v1/carulla/api/';
+  apibiggy = 'search/trade-policy/1';
+  apiNews = 'product/getNews';
+  apiAssured = 'product/getProductsSegurosExito';
+  apiTrips = 'product/getProductsViajesExito';
+  apiOffers = 'offer/getOffers';
+  apiPopup = 'offer/getpopup';
+  apiSaveVisitOffer = 'offer/savevisitoffer';
+  apiCategories = 'offer/getCategories';
+  apiProducts = 'product';
+  apiGetBusiness = 'business/getBusiness';
+  apiGetAllBusiness = 'business/getallbusiness';
+  apiSaveActiveBusiness = 'business/saveactivebusiness';
+  apiGetLinkBusiness = 'business/generatelinkbusiness';
+  apiGetBusinessClicker = 'business/getbusinessclicker';
+  apiGetBusinessContent = 'business/getContent';
+  apiGetcategoriesbusiness = 'business/getcategoriesbusiness';
+  apiRegisterbusiness = 'business/registerbusiness';
+  apiGetbusinessexcel = 'business/getbusinessexcel';
+  apiAddCategory = 'business/savecategory';
+  apiDeleteCategory = 'business/deletecategory';
+  apiGetCommissions = 'business/getcommissions';
+  apiGetAllCategory = 'business/getallcategories';
+  apiOrderCategory = 'business/ordercategories';
+  apiComisionByBusiness = 'business/getcommissionsbybusiness';
+  apiSaveTips = 'business/savetipbusiness';
+  apiInfoBusiness = 'business/saveinfobusiness';
+  apiDeleteTip = 'business/deletetipbusiness';
+  apiSaveTerms = 'business/savetermbusiness';
+  apiGetBussinessById = 'business/getbusinessbyid';
+  apiSaveBusinessOrderTip = 'business/saveordertipbusiness';
+  apiGetManageCommisionBus = 'category/getcategoriesbyidbusiness';
+  apiManageComisionBusiness = 'category/savecategory';
+  apiDeleteManageCom = 'category/deletecategory';
+  apiGetpopups = 'popups/getpopups';
+  apiUploadContent = 'library/uploadcontentlibrary';
+  apiGetContentVideo = 'library/getcontentlibrary';
+  apiDeleteContent = 'library/deletecontentslibrary';
+  apiDownloadContent = 'library/downloadzip';
+  apiSaveComision = 'business/savecommissiontable';
+  apiDeleteComision = 'business/deletecommissiontable';
+  apiSaverefer = 'link/savelinkreferredvisit';
+  apiGetBlog = 'blog/getblogs';
+  apiGetBlogIndividual = 'blog/getblog';
+  apiDeleteBlog = 'blog/deleteblog';
+  apiSaveBlog = 'blog/saveblog';
+  apiActivateBlog = 'blog/activeblog';
+  apiSaveBussiness = 'business/savebusiness';
+  apiSendMessage = 'blog/sendmail';
+  apiSaveOrderOfer = 'offer/saveorderoffers';
+  apiDeleteOfer = 'offer/deleteoffers';
+  apiSaveOfer = 'offer/saveoffers';
+  apiSaveOferActive = 'offer/saveactiveoffers';
+  apiGetStories = 'story/getstories';
+  apiSaveStories = 'story/savestories';
+  apiDeleteStories = 'story/deletestories';
+  apiSaveVisitStory = 'story/savevisitstory';
+  apiFooter = 'footer/getfooter';
+  apiCommissions = 'commissions/getcommissions';
+  apiSaveFooterSection = 'footer/savefooterseccion';
+  apiDeleteFooterSection = 'footer/deletefooterseccions';
+  apiSaveFooterLink = 'footer/savefooterlink';
+  apiDeleteFooterLink = 'footer/deletefooterlinks';
+  apiSaveOrderFooterSections = 'footer/saveorderfooterseccions';
+  apiSaveOrderFooterLinks = 'footer/saveorderfooterlinks';
+  apiDeleteFaqItems = 'faq/deletefaqitems';
+  apiSaveFaqSeccion = 'faq/savefaqseccion';
+  apiDeleteFaqSeccions = 'faq/deletefaqseccions';
+  apiSaveFaqItem = 'faq/savefaqitem';
+  apiSaveOrderFaqItems = 'faq/saveorderfaqitems';
+  apiSaveOrderFaqSeccions = 'faq/saveorderfaqseccions';
+  apiGetFaq = 'faq/getfaq';
+  apiGetNotificationAdmin = 'notification/getnotifications';
+  apiDeleteNotificationAdmin = 'notification/deletenotification';
+  apiSaveNotificationAdmin = 'notification/savenotification';
+  apiGetNotificationDetailAdmin = 'notification/getnotification';
+  apiViewNotification = 'notification/savevisitnotification';
+  apiDeleteNotificationUser = 'notification/deletenotificationuser';
 
   sendSearch = {};
 
   public saveOrderFooterLinks(datos: any) {
     return this.http
-      .post(`${this.url + this.apiSaveOrderFooterLinks}`, datos , this.httpOptions)
+      .post(
+        `${this.url + this.apiSaveOrderFooterLinks}`,
+        datos,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {
@@ -126,13 +130,17 @@ export class ContentService {
 
   public saveOrderFooterSections(datos: any) {
     return this.http
-      .post(`${this.url + this.apiSaveOrderFooterSections}`, datos , this.httpOptions)
+      .post(
+        `${this.url + this.apiSaveOrderFooterSections}`,
+        datos,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {
@@ -143,13 +151,13 @@ export class ContentService {
 
   public deleteFooterLink(datos: any) {
     return this.http
-      .post(`${this.url + this.apiDeleteFooterLink}`, datos , this.httpOptions)
+      .post(`${this.url + this.apiDeleteFooterLink}`, datos, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {
@@ -160,13 +168,13 @@ export class ContentService {
 
   public saveFooterLink(datos: any) {
     return this.http
-      .post(`${this.url + this.apiSaveFooterLink}`, datos , this.httpOptions)
+      .post(`${this.url + this.apiSaveFooterLink}`, datos, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {
@@ -177,13 +185,17 @@ export class ContentService {
 
   public deleteFooterSection(datos: any) {
     return this.http
-      .post(`${this.url + this.apiDeleteFooterSection}`, datos , this.httpOptions)
+      .post(
+        `${this.url + this.apiDeleteFooterSection}`,
+        datos,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {
@@ -194,13 +206,13 @@ export class ContentService {
 
   public saveFooterSection(datos: any) {
     return this.http
-      .post(`${this.url + this.apiSaveFooterSection}`, datos , this.httpOptions)
+      .post(`${this.url + this.apiSaveFooterSection}`, datos, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {
@@ -210,11 +222,13 @@ export class ContentService {
   }
 
   public getFooter(rol = 'CLICKER') {
-    return this.http.get(`${this.url + this.apiFooter}?rol=${rol}`, this.httpOptions).pipe(
-      map((user: ResponseService) => {
-        return user.objectResponse;
-      })
-    );
+    return this.http
+      .get(`${this.url + this.apiFooter}?rol=${rol}`, this.httpOptions)
+      .pipe(
+        map((user: ResponseService) => {
+          return user.objectResponse;
+        })
+      );
   }
 
   public getFaqs() {
@@ -227,13 +241,13 @@ export class ContentService {
 
   public saveFaqgroups(datos: any) {
     return this.http
-      .post(`${this.url + this.apiSaveFaqSeccion}`, datos , this.httpOptions)
+      .post(`${this.url + this.apiSaveFaqSeccion}`, datos, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {
@@ -244,13 +258,13 @@ export class ContentService {
 
   public saveFaqItem(datos: any) {
     return this.http
-      .post(`${this.url + this.apiSaveFaqItem}`, datos , this.httpOptions)
+      .post(`${this.url + this.apiSaveFaqItem}`, datos, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {
@@ -261,13 +275,13 @@ export class ContentService {
 
   public deleteFaqgroups(datos: any) {
     return this.http
-      .post(`${this.url + this.apiDeleteFaqSeccions}`, datos , this.httpOptions)
+      .post(`${this.url + this.apiDeleteFaqSeccions}`, datos, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {
@@ -278,13 +292,13 @@ export class ContentService {
 
   public deleteFaqItems(datos: any) {
     return this.http
-      .post(`${this.url + this.apiDeleteFaqItems}`, datos , this.httpOptions)
+      .post(`${this.url + this.apiDeleteFaqItems}`, datos, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {
@@ -295,13 +309,17 @@ export class ContentService {
 
   public saveOrderFaq(datos: any) {
     return this.http
-      .post(`${this.url + this.apiSaveOrderFaqSeccions}`, datos , this.httpOptions)
+      .post(
+        `${this.url + this.apiSaveOrderFaqSeccions}`,
+        datos,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {
@@ -312,13 +330,13 @@ export class ContentService {
 
   public saveOrderFaqsItem(datos: any) {
     return this.http
-      .post(`${this.url + this.apiSaveOrderFaqItems}`, datos , this.httpOptions)
+      .post(`${this.url + this.apiSaveOrderFaqItems}`, datos, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {
@@ -326,7 +344,6 @@ export class ContentService {
         })
       );
   }
-  
 
   public getNews() {
     return this.http.get(`${this.url + this.apiNews}`, this.httpOptions).pipe(
@@ -356,7 +373,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((user: ResponseService) => {
@@ -366,13 +383,16 @@ export class ContentService {
   }
   public getBusinessById(data) {
     return this.http
-      .get(`${this.url + this.apiGetBussinessById}?id=${data}`, this.httpOptions)
+      .get(
+        `${this.url + this.apiGetBussinessById}?id=${data}`,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((user: ResponseService) => {
@@ -388,7 +408,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((user: ResponseService) => {
@@ -398,13 +418,16 @@ export class ContentService {
   }
   public getCommissionsData(data: any) {
     return this.http
-      .get(`${this.url + this.apiGetCommissions}?idbusiness=${data}`, this.httpOptions)
+      .get(
+        `${this.url + this.apiGetCommissions}?idbusiness=${data}`,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((user: ResponseService) => {
@@ -414,13 +437,16 @@ export class ContentService {
   }
   public getCommissionsByBussiness(data: any) {
     return this.http
-      .get(`${this.url + this.apiComisionByBusiness}?idbusiness=${data}`, this.httpOptions)
+      .get(
+        `${this.url + this.apiComisionByBusiness}?idbusiness=${data}`,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((user: ResponseService) => {
@@ -430,13 +456,18 @@ export class ContentService {
   }
   deleteComisionCategoryBusiness(data) {
     return this.http
-      .delete(`${this.urlComission + this.apiDeleteManageCom}?id=${data.id}&marketplace=${data.marketplace}`, this.httpOptions)
+      .delete(
+        `${this.urlComission + this.apiDeleteManageCom}?id=${
+          data.id
+        }&marketplace=${data.marketplace}`,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -444,13 +475,17 @@ export class ContentService {
 
   public saveComisionCategory(data: any) {
     return this.http
-      .post(`${this.urlComission + this.apiManageComisionBusiness}`, data, this.httpOptions)
+      .post(
+        `${this.urlComission + this.apiManageComisionBusiness}`,
+        data,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((user: ResponseService) => {
@@ -460,13 +495,17 @@ export class ContentService {
   }
   public saveOrderTipBusiness(data: any) {
     return this.http
-      .post(`${this.url + this.apiSaveBusinessOrderTip}`, data, this.httpOptions)
+      .post(
+        `${this.url + this.apiSaveBusinessOrderTip}`,
+        data,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((user: ResponseService) => {
@@ -482,7 +521,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((user: ResponseService) => {
@@ -498,7 +537,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((user: ResponseService) => {
@@ -514,7 +553,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((user: ResponseService) => {
@@ -530,7 +569,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((user: ResponseService) => {
@@ -546,7 +585,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -559,7 +598,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((user: ResponseService) => {
@@ -569,27 +608,33 @@ export class ContentService {
   }
   public deleteComision(data: any) {
     return this.http
-      .delete(`${this.url + this.apiDeleteComision}?id=${data}`, this.httpOptions)
+      .delete(
+        `${this.url + this.apiDeleteComision}?id=${data}`,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
   }
 
-  public getAllBusiness(clickam:Boolean = false) {
+  public getAllBusiness(clickam: Boolean = false) {
     return this.http
-      .get(`${this.url + this.apiGetAllBusiness}?clickam=${clickam}`, this.httpOptions)
+      .get(
+        `${this.url + this.apiGetAllBusiness}?clickam=${clickam}`,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((user: ResponseService) => {
@@ -600,13 +645,17 @@ export class ContentService {
 
   public saveActiveBusiness(bussiness: any) {
     return this.http
-      .post(`${this.url + this.apiSaveActiveBusiness}`, bussiness, this.httpOptions)
+      .post(
+        `${this.url + this.apiSaveActiveBusiness}`,
+        bussiness,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {
@@ -617,13 +666,17 @@ export class ContentService {
 
   public getLinkBusiness(bussiness) {
     return this.http
-      .post(`${this.url + this.apiGetLinkBusiness}`, bussiness, this.httpOptions)
+      .post(
+        `${this.url + this.apiGetLinkBusiness}`,
+        bussiness,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((user: ResponseService) => {
@@ -640,7 +693,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((user: ResponseService) => {
@@ -657,7 +710,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((user: ResponseService) => {
@@ -674,7 +727,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -699,7 +752,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((business: ResponseService) => {
@@ -716,7 +769,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((business: ResponseService) => {
@@ -726,18 +779,20 @@ export class ContentService {
   }
 
   public getAssured() {
-    return this.http.get(`${this.url + this.apiAssured}`, this.httpOptions).pipe(
-      retryWhen((errors) =>
-        errors.pipe(
-          delay(1000),
-          take(3),
-          tap((errorStatus) => { })
-        )
-      ),
-      map((user: ResponseService) => {
-        return user.objectResponse;
-      })
-    );
+    return this.http
+      .get(`${this.url + this.apiAssured}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        ),
+        map((user: ResponseService) => {
+          return user.objectResponse;
+        })
+      );
   }
 
   public getTrips() {
@@ -746,7 +801,7 @@ export class ContentService {
         errors.pipe(
           delay(1000),
           take(3),
-          tap((errorStatus) => { })
+          tap((errorStatus) => {})
         )
       ),
       map((user: ResponseService) => {
@@ -756,18 +811,20 @@ export class ContentService {
   }
 
   public getCategory() {
-    return this.http.get(`${this.url + this.apiCategories}`, this.httpOptions).pipe(
-      retryWhen((errors) =>
-        errors.pipe(
-          delay(1000),
-          take(3),
-          tap((errorStatus) => { })
-        )
-      ),
-      map((user: ResponseService) => {
-        return user.objectResponse;
-      })
-    );
+    return this.http
+      .get(`${this.url + this.apiCategories}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        ),
+        map((user: ResponseService) => {
+          return user.objectResponse;
+        })
+      );
   }
 
   // public getOffers() {
@@ -778,33 +835,38 @@ export class ContentService {
   //   );
   // }
   public getOffersbyType(type) {
-    return this.http.get(`${this.url + this.apiOffers}?type=${type.id}&visible=${type.admin}`, this.httpOptions).pipe(
-      map((user: ResponseService) => {
-        return user.objectResponse;
-      })
+    return this.http
+      .get(
+        `${this.url + this.apiOffers}?type=${type.id}&visible=${type.admin}`,
+        this.httpOptions
+      )
+      .pipe(
+        map((user: ResponseService) => {
+          return user.objectResponse;
+        })
+      );
+  }
+
+  public biggySearchExito(params: {
+    term: any;
+    page: number;
+    count: number;
+    order: string;
+  }) {
+    return this.http.get(
+      `${this.urlbiggyExito}${this.apibiggy}?query=${params.term}&page=${params.page}&count=${params.count}`
     );
   }
 
-  public biggySearchExito(
-    params: {
-      term: any;
-      page: number;
-      count: number;
-      order: string;
-    }
-  ) {
-    return this.http.get(`${this.urlbiggyExito}${this.apibiggy}?query=${params.term}&page=${params.page}&count=${params.count}`);
-  }
-
-  public biggySearchCarulla(
-    params: {
-      term: any;
-      page: number;
-      count: number;
-      order: string;
-    }
-  ) {
-    return this.http.get(`${this.urlbiggyCarulla}${this.apibiggy}?query=${params.term}&page=${params.page}&count=${params.count}`);
+  public biggySearchCarulla(params: {
+    term: any;
+    page: number;
+    count: number;
+    order: string;
+  }) {
+    return this.http.get(
+      `${this.urlbiggyCarulla}${this.apibiggy}?query=${params.term}&page=${params.page}&count=${params.count}`
+    );
   }
 
   public getProductsPagination(params: {
@@ -814,7 +876,7 @@ export class ContentService {
     order: string;
   }) {
     if (isNaN(params.term) === true) {
-      if (params.order !== "") {
+      if (params.order !== '') {
         this.sendSearch = {
           parameters: `?ft=${params.term}&_from=${params.from}&_to=${params.to}&fq=sellerIds:1&O=${params.order}`,
         };
@@ -832,7 +894,7 @@ export class ContentService {
       .pipe(
         delay(1000),
         take(3),
-        tap((errorStatus) => { }),
+        tap((errorStatus) => {}),
         map((user: any) => {
           return user.objectResponse;
         })
@@ -841,13 +903,16 @@ export class ContentService {
 
   public deleteCategory(datos: any) {
     return this.http
-      .delete(`${this.url + this.apiDeleteCategory}?id=${datos.id}`, this.httpOptions)
+      .delete(
+        `${this.url + this.apiDeleteCategory}?id=${datos.id}`,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -861,7 +926,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {
@@ -877,7 +942,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {
@@ -896,7 +961,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((business: ResponseService) => {
@@ -915,7 +980,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((business: ResponseService) => {
@@ -926,12 +991,15 @@ export class ContentService {
   public setContentImgVi(data) {
     let httpOptionsSet = {
       headers: new HttpHeaders({
-        Authorization: "Bearer " + this.authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+        Authorization: 'Bearer ' + this.authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
       }),
     };
-    return this.http
-      .post(`${this.url + this.apiUploadContent}`, data, httpOptionsSet);
+    return this.http.post(
+      `${this.url + this.apiUploadContent}`,
+      data,
+      httpOptionsSet
+    );
   }
   //apiDeleteContent
   public deleteContent(data: any) {
@@ -942,7 +1010,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {
@@ -953,23 +1021,25 @@ export class ContentService {
   public downloadF(data: any) {
     let httpOptionsDow = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + this.authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-        "Content-Disposition": "attachment"
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + this.authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        'Content-Disposition': 'attachment',
       }),
-      responseType: 'blob' as 'text'
+      responseType: 'blob' as 'text',
     };
 
-    return this.http
-      .post(`${this.url + this.apiDownloadContent}`, data, httpOptionsDow);
-
+    return this.http.post(
+      `${this.url + this.apiDownloadContent}`,
+      data,
+      httpOptionsDow
+    );
   }
   public setClick(datos: any) {
     let httpOptionsSet = {
       headers: new HttpHeaders({
-        Authorization: "Bearer " + this.authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+        Authorization: 'Bearer ' + this.authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
       }),
     };
     return this.http
@@ -979,7 +1049,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {
@@ -990,7 +1060,9 @@ export class ContentService {
   public getBlogs(data) {
     return this.http
       .get(
-        `${this.url + this.apiGetBlog}?from=${data.from}&to=${data.to}&orderBy=${data.orderBy}`,
+        `${this.url + this.apiGetBlog}?from=${data.from}&to=${
+          data.to
+        }&orderBy=${data.orderBy}`,
         this.httpOptions
       )
       .pipe(
@@ -998,7 +1070,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((business: ResponseService) => {
@@ -1009,17 +1081,20 @@ export class ContentService {
   public getBlogsAdmin(data) {
     let httpCache = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + this.authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
-        'Cache-Control': 'no-cache, no-store, must-revalidate, post-check=0, pre-check=0',
-        'Pragma': 'no-cache',
-        'Expires': '0'
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + this.authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        'Cache-Control':
+          'no-cache, no-store, must-revalidate, post-check=0, pre-check=0',
+        Pragma: 'no-cache',
+        Expires: '0',
       }),
-    }
+    };
     return this.http
       .get(
-        `${this.url + this.apiGetBlog}?from=${data.from}&to=${200}&orderBy=${data.orderBy}&visible=true`,
+        `${this.url + this.apiGetBlog}?from=${data.from}&to=${200}&orderBy=${
+          data.orderBy
+        }&visible=true`,
         httpCache
       )
       .pipe(
@@ -1027,7 +1102,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((business: ResponseService) => {
@@ -1046,7 +1121,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((business: ResponseService) => {
@@ -1065,7 +1140,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((business: ResponseService) => {
@@ -1081,7 +1156,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         )
       );
@@ -1089,25 +1164,30 @@ export class ContentService {
   public saveBlog(data: any) {
     let httpOptionsSet = {
       headers: new HttpHeaders({
-        Authorization: "Bearer " + this.authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+        Authorization: 'Bearer ' + this.authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
       }),
     };
-    return this.http
-      .post(`${this.url + this.apiSaveBlog}`, data, httpOptionsSet);
+    return this.http.post(
+      `${this.url + this.apiSaveBlog}`,
+      data,
+      httpOptionsSet
+    );
   }
   public activeBlog(data: any) {
     let httpOptionsSet = {
       headers: new HttpHeaders({
-        Authorization: "Bearer " + this.authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+        Authorization: 'Bearer ' + this.authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
       }),
     };
-    return this.http
-      .post(`${this.url + this.apiActivateBlog}`, data, httpOptionsSet);
+    return this.http.post(
+      `${this.url + this.apiActivateBlog}`,
+      data,
+      httpOptionsSet
+    );
   }
   public saveBussiness(data: any) {
-
     return this.http
       .post(`${this.url + this.apiSaveBussiness}`, data, this.httpOptions)
       .pipe(
@@ -1115,7 +1195,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((bussiness: ResponseService) => {
@@ -1126,15 +1206,17 @@ export class ContentService {
   public sendMessage(data: any) {
     let httpOptionsSet = {
       headers: new HttpHeaders({
-        Authorization: "Bearer " + this.authorization,
-        "Ocp-Apim-Subscription-Key": environment.SUBSCRIPTION,
+        Authorization: 'Bearer ' + this.authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
       }),
     };
-    return this.http
-      .post(`${this.url + this.apiSendMessage}`, data, httpOptionsSet);
+    return this.http.post(
+      `${this.url + this.apiSendMessage}`,
+      data,
+      httpOptionsSet
+    );
   }
   public deleteOfer(data) {
-
     return this.http
       .post(`${this.url + this.apiDeleteOfer}`, data, this.httpOptions)
       .pipe(
@@ -1142,7 +1224,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((user: ResponseService) => {
@@ -1158,7 +1240,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((user: ResponseService) => {
@@ -1175,7 +1257,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((user: ResponseService) => {
@@ -1192,12 +1274,12 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((result: ResponseService) => {
           return result;
-        }),
+        })
       );
   }
 
@@ -1209,12 +1291,12 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((result: ResponseService) => {
           return result;
-        }),
+        })
       );
   }
 
@@ -1226,28 +1308,35 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((result: ResponseService) => {
           return result;
-        }));
+        })
+      );
   }
 
-  public getStoriesadmin(data: any, idBussiness:any) {
+  public getStoriesadmin(data: any, idBussiness: any) {
     return this.http
-      .get(`${this.url + this.apiGetStories}?idbusiness=${idBussiness}&visible=${data}`, this.httpOptions)
+      .get(
+        `${
+          this.url + this.apiGetStories
+        }?idbusiness=${idBussiness}&visible=${data}`,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((result: ResponseService) => {
           return result;
-        }));
+        })
+      );
   }
 
   public deleteStories(data: any) {
@@ -1258,7 +1347,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((result: ResponseService) => {
@@ -1269,34 +1358,41 @@ export class ContentService {
 
   public getCommissionsSearch(term?: any) {
     return this.http
-      .get(`${this.urlComission + this.apiCommissions}?start=${term.start}&end=${term.end}&searchText=${term.term}&from=${term.from}&to=${term.to}&orderBy=${term.orderOrigin}&ordination=${term.orderBy}`, this.httpOptions)
+      .get(
+        `${this.urlComission + this.apiCommissions}?start=${term.start}&end=${
+          term.end
+        }&searchText=${term.term}&from=${term.from}&to=${term.to}&orderBy=${
+          term.orderOrigin
+        }&ordination=${term.orderBy}`,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((result: ResponseService) => {
           return result;
-        }));
+        })
+      );
   }
 
   public getPopup() {
-    return this.http
-      .get(`${this.url + this.apiPopup}`, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => { })
-          )
-        ),
-        map((result: ResponseService) => {
-          return result.objectResponse;
-        }));
+    return this.http.get(`${this.url + this.apiPopup}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((result: ResponseService) => {
+        return result.objectResponse;
+      })
+    );
   }
 
   public saveVisitOffer(data: any) {
@@ -1307,7 +1403,7 @@ export class ContentService {
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((result: ResponseService) => {
@@ -1318,40 +1414,51 @@ export class ContentService {
 
   public getNotificationAdmin(data: any) {
     return this.http
-      .get(`${this.url + this.apiGetNotificationAdmin}?visible=${data}`, this.httpOptions)
+      .get(
+        `${this.url + this.apiGetNotificationAdmin}?visible=${data}`,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((result: ResponseService) => {
           return result;
-        }));
+        })
+      );
   }
 
   public deleteNotificationAdmin(id: any) {
     return this.http
-      .delete(`${this.url + this.apiDeleteNotificationAdmin}?id=${id}`, this.httpOptions)
+      .delete(
+        `${this.url + this.apiDeleteNotificationAdmin}?id=${id}`,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((result: ResponseService) => {
           return result;
-        }));
+        })
+      );
   }
-
 
   public saveNotificationAdmin(datos: any) {
     return this.http
-      .post(`${this.url + this.apiSaveNotificationAdmin}`, datos , this.httpOptions)
+      .post(
+        `${this.url + this.apiSaveNotificationAdmin}`,
+        datos,
+        this.httpOptions
+      )
       .pipe(
         map((notification: ResponseService) => {
           return notification;
@@ -1361,23 +1468,27 @@ export class ContentService {
 
   public getNotificationDetailAdmin(id: any) {
     return this.http
-      .get(`${this.url + this.apiGetNotificationDetailAdmin}?id=${id}`, this.httpOptions)
+      .get(
+        `${this.url + this.apiGetNotificationDetailAdmin}?id=${id}`,
+        this.httpOptions
+      )
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
             delay(1000),
             take(3),
-            tap((errorStatus) => { })
+            tap((errorStatus) => {})
           )
         ),
         map((result: ResponseService) => {
           return result;
-        }));
+        })
+      );
   }
 
   public viewNotification(datos: any) {
     return this.http
-      .post(`${this.url + this.apiViewNotification}`, datos , this.httpOptions)
+      .post(`${this.url + this.apiViewNotification}`, datos, this.httpOptions)
       .pipe(
         map((notification: ResponseService) => {
           return notification;
@@ -1387,13 +1498,15 @@ export class ContentService {
 
   public deleteNotificationUser(datos: any) {
     return this.http
-      .post(`${this.url + this.apiDeleteNotificationUser}`, datos , this.httpOptions)
+      .post(
+        `${this.url + this.apiDeleteNotificationUser}`,
+        datos,
+        this.httpOptions
+      )
       .pipe(
         map((notification: ResponseService) => {
           return notification;
         })
       );
   }
-
-
 }

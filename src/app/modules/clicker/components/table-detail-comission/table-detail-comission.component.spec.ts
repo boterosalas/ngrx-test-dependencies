@@ -11,16 +11,10 @@ describe('TableDetailComissionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TableDetailComissionComponent ],
-      imports: [
-        TranslateModule.forRoot(),
-        AppMaterialModule
-      ],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ]
-    })
-    .compileComponents();
+      declarations: [TableDetailComissionComponent],
+      imports: [TranslateModule.forRoot(), AppMaterialModule],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

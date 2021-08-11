@@ -1,28 +1,47 @@
 <div class="position-relative">
-    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
-        <div ngxSlickItem *ngFor="let slide of sliderVideo; let i = index" class="slide mat-card m-2 p-0">
-            <div id="video{{i}}" class="cursor-pointer" (click)="openVideo(slide)">
-                <img class="responsive-img" [src]="slide.img" [alt]="slide.title">
-                <div class="pl-2 pr-2 content-h">
-                    <h3>{{slide.title}}</h3>
-                    <p>{{slide.description}}</p>
-                </div>
-            </div>
+  <ngx-slick-carousel
+    class="carousel"
+    #slickModal="slick-carousel"
+    [config]="slideConfig"
+  >
+    <div
+      ngxSlickItem
+      *ngFor="let slide of sliderVideo; let i = index"
+      class="slide mat-card m-2 p-0"
+    >
+      <div id="video{{ i }}" class="cursor-pointer" (click)="openVideo(slide)">
+        <img class="responsive-img" [src]="slide.img" [alt]="slide.title" />
+        <div class="pl-2 pr-2 content-h">
+          <h3>{{ slide.title }}</h3>
+          <p>{{ slide.description }}</p>
         </div>
-    </ngx-slick-carousel>
-    <div fxHide.xs="true" class="position-absolute arrows-video" fxLayout="row" fxLayoutAlign="space-between">
-        <button mat-mini-fab color="white" class="ml-4" (click)="prev()">
-          <img  src="/assets/img/arrow-video.svg" alt="prev" />
-        </button>
-        <button mat-mini-fab color="white" class="mr-4" (click)="next()">
-          <img class="rotate" src="/assets/img/arrow-video.svg" alt="next" />
-        </button>
       </div>
+    </div>
+  </ngx-slick-carousel>
+  <div
+    fxHide.xs="true"
+    class="position-absolute arrows-video"
+    fxLayout="row"
+    fxLayoutAlign="space-between"
+  >
+    <button mat-mini-fab color="white" class="ml-4" (click)="prev()">
+      <img src="/assets/img/arrow-video.svg" alt="prev" />
+    </button>
+    <button mat-mini-fab color="white" class="mr-4" (click)="next()">
+      <img class="rotate" src="/assets/img/arrow-video.svg" alt="next" />
+    </button>
+  </div>
 </div>
 
-
 <ng-template #templateVideo>
-    <div>
-        <iframe width="560" height="315" [src]="video" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
+  <div>
+    <iframe
+      width="560"
+      height="315"
+      [src]="video"
+      frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </div>
 </ng-template>
