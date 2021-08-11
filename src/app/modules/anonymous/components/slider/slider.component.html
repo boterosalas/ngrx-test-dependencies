@@ -163,7 +163,7 @@
   <form class="forgotpassword-container" [formGroup]="idCustomerForm" fxLayout="column" *ngIf="reference">
     <span (click)="backStep()" class="cursor-pointer gray" fxLayout="row" fxLayoutAlign="start start" fxFlex="12">
       <mat-icon>keyboard_arrow_left</mat-icon>
-      <span class="text-back">Volver</span>
+      <span class="text-back">{{ "BUTTONS.BACK" | translate}}</span>
     </span>
     <p>{{ 'GENERIC.REFERENCE_IDENTIFICATION' | translate }}</p>
     <mat-form-field appearance="outline" class="mt-2">

@@ -17,7 +17,7 @@
       <button mat-button [routerLink]="['/negocios-admin']">
         <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>keyboard_arrow_left</mat-icon>
-          Volver
+          {{ "BUTTONS.BACK" | translate}}
         </span>
       </button>
     </span>
@@ -48,24 +48,24 @@
   </div>
   <div class="business-stories">
     <app-card-story
-      class="card"
-      *ngFor="let story of stories; let i = index"
-      [stories]="[story]"
-      [pause]="story.pause"
-      [play]="false"
-      [id]="'story-' + i"
-      [index]="i"
-      [showShared]="false"
-      [showCheck]="true"
-      [check]="dataReal[i].dataR"
-      [showProgress]="false"
-      [showInfo]="true"
-      [showImageClient]="false"
-      [showTitleClient]="false"
-      [cardOpen]="true"
-      (checkStory)="addOrRemoveDeleted($event, i)"
-      (openStoryCard)="openDialogStories($event)"
-    ></app-card-story>
+        class="card"
+        *ngFor="let story of stories; let i = index"
+        [stories]="[story]"
+        [pause]="story.pause"
+        [play]="false"
+        [id]="'story-' + i"
+        [index]="i"
+        [showShared]="false"
+        [showCheck]="true"
+        [check]="dataReal[i].dataR"
+        [showProgress]="false"
+        [showInfo]="true"
+        [showImageClient]="false"
+        [showTitleClient]="false"
+        [cardOpen]="true"
+        (checkStory)="addOrRemoveDeleted($event, i)"
+        (openStoryCard)="openDialogStories($event)"
+      ></app-card-story>
   </div>
 </div>
 
@@ -137,7 +137,12 @@
         Formato inválido, solo se pueden subir archivos con la extensión JPG max 7MB y MP4 max 72MB
       </mat-error>
 
-      <input (change)="onFileChangeFiles($event)" id="image-story" type="file" formControlName="image" />
+      <input
+        (change)="onFileChangeFiles($event)"
+        id="image-story"
+        type="file"
+        formControlName="image"
+      />
     </form>
 
     <div class="mt-3 mb-2" fxLayout="row" fxLayoutAlign="end end">

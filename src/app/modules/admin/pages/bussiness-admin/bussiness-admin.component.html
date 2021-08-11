@@ -4,17 +4,24 @@
   imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
 ></app-banner>
 <div class="container mt-3">
-  <div fxLayout="row" fxLayoutAlign="space-between">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
     <div fxLayout="row">
       <img class="image-bussiness" [src]="image" alt="" />
       <span>
         <h3>{{ title }} / Categorías</h3></span
       >
     </div>
-    <span fxLayout="row">
-      <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
-      <p ngClass.gt-xs="f-20" class="cursor-pointer text-underline purple-text" [routerLink]="['/negocios-admin']">Regresar</p>
-    </span>
+
+    <button mat-raised-button  class="back-button" [routerLink]="['/negocios-admin']">
+      <span
+        class="galano-bold f-16"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+      >
+        <mat-icon>keyboard_arrow_left</mat-icon>
+        {{ "BUTTONS.BACK" | translate }}
+      </span>
+    </button>
   </div>
 
   <div fxLayout="row" fxLayoutGap="15px" class="mb-3 mt-3">

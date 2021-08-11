@@ -1,6 +1,13 @@
 <div [id]="id" class="card-story">
-  <div *ngIf="showProgress" class="progress-container">
-    <div *ngFor="let progress of progressStory" id="progress-{{ progress.id }}" class="story-progress">
+  <div
+    *ngIf="showProgress"
+    class="progress-container"
+  >
+    <div
+      *ngFor="let progress of progressStory"
+      id="progress-{{progress.id}}"
+      class="story-progress"
+    >
       <span class="final-progress"></span>
       <span class="current-progress"></span>
     </div>
@@ -12,8 +19,13 @@
       <span *ngIf="stories && stories.length > 0">{{ timeStory }}</span>
     </div>
     <div class="action-container">
-      <button id="shared-{{ index }}" *ngIf="showShared" class="btn-shared" (click)="dataSliderCategory()">
-        <img src="/assets/img/shared.svg" alt="shared" />
+      <button
+        id="shared-{{index}}"
+        *ngIf="showShared"
+        class="btn-shared"
+        (click)="dataSliderCategory()"
+      >
+        <img src="/assets/img/shared.svg" alt="shared">
       </button>
       <mat-checkbox *ngIf="showCheck" [(ngModel)]="check" (change)="checkDeleteStory()" class="check-margin check-transparent">
       </mat-checkbox>
@@ -23,9 +35,23 @@
     </div>
   </div>
   <div class="container-absolute">
-    <div *ngFor="let story of stories; let i = index" id="file-{{ id }}-{{ story.id }}" class="container-file">
-      <img *ngIf="story.isImage" class="img-story" [src]="story.image" alt="story {{ story.name }}" />
-      <video *ngIf="!story.isImage" id="video-{{ id }}-{{ story.id }}" [src]="story.image" class="video-story"></video>
+    <div
+      *ngFor="let story of stories; let i = index"
+      id="file-{{id}}-{{story.id}}"
+      class="container-file"
+    >
+      <img
+        *ngIf="story.isImage"
+        class="img-story"
+        [src]="story.image"
+        alt="story {{story.name}}"
+      >
+      <video
+        *ngIf="!story.isImage"
+        id="video-{{id}}-{{story.id}}"
+        [src]="story.image"
+        class="video-story"
+      ></video>
     </div>
   </div>
 </div>
@@ -128,7 +154,7 @@
   <form class="forgotpassword-container" [formGroup]="idCustomerForm" fxLayout="column" *ngIf="reference">
     <span (click)="backStep()" class="cursor-pointer gray" fxLayout="row" fxLayoutAlign="start start" fxFlex="12">
       <mat-icon>keyboard_arrow_left</mat-icon>
-      <span class="text-back">Volver</span>
+      <span class="text-back">{{ "BUTTONS.BACK" | translate}}</span>
     </span>
     <p>{{ 'GENERIC.REFERENCE_IDENTIFICATION' | translate }}</p>
     <mat-form-field appearance="outline" class="mt-2">

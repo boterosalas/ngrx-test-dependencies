@@ -506,5 +506,8 @@
     "MEDALS": "Tus medallas",
     "MEDALS_SEE": "Ver tus medallas",
     "INTRO": "En esta sección encontrarás tus medallas, acumula puntos y sube de nivel."
+  },
+  "BUTTONS": {
+    "BACK": "Volver"
   }
 }

@@ -4,7 +4,7 @@
   imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
 ></app-banner>
 <div class="container mt-3">
-  <div fxLayout="row" fxLayoutAlign="space-between">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
     <div fxLayout="row">
       <img class="image-bussiness" [src]="image" alt="" />
       <span>
@@ -13,10 +13,18 @@
     </div>
     <span fxLayout="row">
       <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
-      <button mat-button [routerLink]="['/negocios-admin']">
-        <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
+      <button
+        mat-raised-button
+        class="back-button"
+        [routerLink]="['/negocios-admin']"
+      >
+        <span
+          class="galano-bold f-16"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+        >
           <mat-icon>keyboard_arrow_left</mat-icon>
-          Volver
+          {{ "BUTTONS.BACK" | translate }}
         </span>
       </button>
     </span>

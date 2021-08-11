@@ -9,21 +9,11 @@
       <button mat-button [routerLink]="['/centro-de-ayuda']">
         <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>keyboard_arrow_left</mat-icon>
-          Volver
+          {{ "BUTTONS.BACK" | translate}}
         </span>
       </button>
     </span>
     <div fxLayout.gt-xs="column" fxFlex.gt-xs="25" fxShow.gt-xs="true" fxShow.xs="false">
       <app-menu-help-center></app-menu-help-center>
     </div>
-    <div fxLayout.gt-xs="column">
-      <span fxLayout="row">
-        <img src="/assets/img/ayuda/sobre-clickam/comisiones.svg" alt="{{ 'HELP_CENTER.ABOUT_CLICKAM.WIN_TITLE' | translate }}" />
-        <h3 class="f-20">
-          {{ 'HELP_CENTER.ABOUT_CLICKAM.WIN_TITLE' | translate }}
-        </h3>
-      </span>
-      <div innerHtml="{{ 'HELP_CENTER.ABOUT_CLICKAM.WIN_TEXT' | translate }}"></div>
-    </div>
-  </div>
 </div>
