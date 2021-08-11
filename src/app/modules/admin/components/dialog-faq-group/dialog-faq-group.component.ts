@@ -56,18 +56,14 @@ export class DialogFaqGroupComponent implements OnInit, OnDestroy {
       };
     }
 
-    this.subscription = this.content
-      .saveFaqgroups(this.section)
-      .subscribe((resp: ResponseService) => {
-        if (resp.state === 'Success') {
-          this.dialogRef.close();
-        }
-      });
+    this.subscription = this.content.saveFaqgroups(this.section).subscribe((resp: ResponseService) => {
+      if (resp.state === 'Success') {
+        this.dialogRef.close();
+      }
+    });
   }
 
   ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
     this.subscription.unsubscribe();
   }
 }

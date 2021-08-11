@@ -19,9 +19,7 @@ describe('RecoverpasswordformComponent', () => {
   let component: RecoverpasswordformComponent;
   let fixture: ComponentFixture<RecoverpasswordformComponent>;
 
-  const mockAuthService = jasmine.createSpyObj('AuthService', [
-    'recoverPassword',
-  ]);
+  const mockAuthService = jasmine.createSpyObj('AuthService', ['recoverPassword']);
 
   const Success = {
     state: 'Success',
@@ -108,9 +106,7 @@ describe('RecoverpasswordformComponent', () => {
 
   describe('Inavlid request', () => {
     beforeEach(function () {
-      mockAuthService.recoverPassword.and.returnValue(
-        throwError(InvalidRquest)
-      );
+      mockAuthService.recoverPassword.and.returnValue(throwError(InvalidRquest));
     });
 
     it('recover password invalid request', () => {

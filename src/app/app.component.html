@@ -1,18 +1,8 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav
-    #drawer
-    class="sidenav pt-3"
-    fixedInViewport
-    position="start"
-    [opened]="false"
-  >
-    <mat-icon (click)="drawer.toggle()" class="border-close cursor-pointer"
-      >close</mat-icon
-    >
+  <mat-sidenav #drawer class="sidenav pt-3" fixedInViewport position="start" [opened]="false">
+    <mat-icon (click)="drawer.toggle()" class="border-close cursor-pointer">close</mat-icon>
     <mat-toolbar class="p-0">
-      <span class="border-bottom-orange-init" *ngIf="!auth.isLoggedIn()">
-        Menú
-      </span>
+      <span class="border-bottom-orange-init" *ngIf="!auth.isLoggedIn()"> Menú </span>
       <span *ngIf="auth.isLoggedIn()">
         <h3 class="m-0 border-bottom-primary-init">Hola, {{ firstName }}</h3>
         <!-- <p class="m-0 f-14 border-bottom-orange-init lh-20 galano">
@@ -21,11 +11,7 @@
       </span>
     </mat-toolbar>
     <div
-      *ngIf="
-        managedPayments === false &&
-        isEmployee === false &&
-        (auth.getRole$ | async) === 'CLICKER'
-      "
+      *ngIf="managedPayments === false && isEmployee === false && (auth.getRole$ | async) === 'CLICKER'"
       class="paymentInfo text-white p-2 cursor-pointer"
       (click)="drawer.toggle()"
       fxLayout="row"
@@ -42,10 +28,7 @@
       </span>
     </div>
     <mat-nav-list class="w-95">
-      <app-menu-options
-        (hideSidenav)="drawer.toggle()"
-        class="mobile-menu"
-      ></app-menu-options>
+      <app-menu-options (hideSidenav)="drawer.toggle()" class="mobile-menu"></app-menu-options>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -115,19 +98,11 @@
     </div>
 
     <div *ngIf="showAnimation1">
-      <div
-        ngClass.lt-md="fullheight slide-in-right"
-        ngClass.gt-md="fullheight slide-in-right p-5"
-        *ngIf="isOpenMenu"
-      >
+      <div ngClass.lt-md="fullheight slide-in-right" ngClass.gt-md="fullheight slide-in-right p-5" *ngIf="isOpenMenu">
         <app-menu (close)="hideMenu()"></app-menu>
       </div>
 
-      <div
-        ngClass.lt-md="fullheight slide-in-right"
-        ngClass.gt-md="fullheight slide-in-right p-5"
-        *ngIf="isOpen"
-      >
+      <div ngClass.lt-md="fullheight slide-in-right" ngClass.gt-md="fullheight slide-in-right p-5" *ngIf="isOpen">
         <app-card
           Class="gtmIniciarSesiónClicLtrlRegistrarte"
           *ngIf="showLoginForm"

@@ -24,17 +24,11 @@ describe('CardStoryComponent', () => {
 
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open']);
 
-  const mockDialogRef = jasmine.createSpyObj('MatDialogRef', [
-    'close',
-    'afterClosed',
-    'componentInstance',
-  ]);
+  const mockDialogRef = jasmine.createSpyObj('MatDialogRef', ['close', 'afterClosed', 'componentInstance']);
 
   const mockLinksService = jasmine.createSpyObj('LinksService', ['saveLink']);
 
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'saveVisitStories',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['saveVisitStories']);
 
   const mockTokenService = jasmine.createSpyObj('TokenService', ['userInfo']);
 
@@ -48,8 +42,7 @@ describe('CardStoryComponent', () => {
     documentType: 'CC',
     userid: '77',
     idclicker: 'ñañito andres77',
-    'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress':
-      'davidbet2@hotmail.com',
+    'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress': 'davidbet2@hotmail.com',
     exp: 1593636234,
     iss: 'practincanetcore.com',
     aud: 'Estudiantes',

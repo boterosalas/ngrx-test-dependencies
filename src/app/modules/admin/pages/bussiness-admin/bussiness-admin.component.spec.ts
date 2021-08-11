@@ -14,12 +14,7 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { AdminModule } from '../../admin.module';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { DialogCategoryComponent } from '../../components/dialog-category/dialog-category.component';
-import {
-  MatDialog,
-  MatDialogModule,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material';
+import { MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 
 export class MatDialogMock {
@@ -53,13 +48,7 @@ describe('ControllerAdminComponent', () => {
 
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll']);
 
-  const mockDialogRef = jasmine.createSpyObj('MatDialogRef', [
-    'close',
-    'afterClosed',
-    'componentInstance',
-    'event ',
-    'beforeClosed',
-  ]);
+  const mockDialogRef = jasmine.createSpyObj('MatDialogRef', ['close', 'afterClosed', 'componentInstance', 'event ', 'beforeClosed']);
 
   const mockContentService = jasmine.createSpyObj('ContentService', [
     'getBusinessContent',
@@ -75,8 +64,7 @@ describe('ControllerAdminComponent', () => {
       id: 25,
       orderby: 26,
       link: 'https://www.exito.com/ferreteria?utm_source=clickam&utm_medium=referral&utm_campaign=',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-content/ferreteria-vehiculos.png',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-content/ferreteria-vehiculos.png',
       description: 'Ferreteria y vehiculos',
       commission: 0,
       idbusiness: 1,

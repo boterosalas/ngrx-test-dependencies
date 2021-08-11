@@ -1,10 +1,7 @@
 <h3 class="f-20" id="historial">Historial de pagos</h3>
 <table
   mat-table
-  [dataSource]="
-    dataSource
-      | paginate: { itemsPerPage: size, currentPage: p, totalItems: totalItems }
-  "
+  [dataSource]="dataSource | paginate: { itemsPerPage: size, currentPage: p, totalItems: totalItems }"
   class="mat-elevation-z2"
 >
   <!-- date Column -->
@@ -57,10 +54,5 @@
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr
-    class="cursor-pointer"
-    mat-row
-    *matRowDef="let row; columns: displayedColumns; let i = index"
-    (click)="userInfo(dataSource[i])"
-  ></tr>
+  <tr class="cursor-pointer" mat-row *matRowDef="let row; columns: displayedColumns; let i = index" (click)="userInfo(dataSource[i])"></tr>
 </table>

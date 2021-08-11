@@ -7,37 +7,23 @@
   <div fxLayout.gt-xs="row" fxLayoutGap.gt-xs="30px" ngClass.gt-xs="mt-3">
     <span fxHide.gt-xs="true">
       <button mat-button [routerLink]="['/centro-de-ayuda']">
-        <span
-          class="galano-bold f-16"
-          fxLayout="row"
-          fxLayoutAlign="start center"
-        >
+        <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>keyboard_arrow_left</mat-icon>
           Volver
         </span>
       </button>
     </span>
-    <div
-      fxLayout.gt-xs="column"
-      fxFlex.gt-xs="25"
-      fxShow.gt-xs="true"
-      fxShow.xs="false"
-    >
+    <div fxLayout.gt-xs="column" fxFlex.gt-xs="25" fxShow.gt-xs="true" fxShow.xs="false">
       <app-menu-help-center></app-menu-help-center>
     </div>
     <div fxLayout.gt-xs="column">
       <span fxLayout="row">
-        <img
-          src="/assets/img/ayuda/sobre-clickam/como-funciona.svg"
-          alt="{{ 'HELP_CENTER.ABOUT_CLICKAM.WORKS_TITLE' | translate }}"
-        />
+        <img src="/assets/img/ayuda/sobre-clickam/como-funciona.svg" alt="{{ 'HELP_CENTER.ABOUT_CLICKAM.WORKS_TITLE' | translate }}" />
         <h3 class="f-20">
           {{ 'HELP_CENTER.ABOUT_CLICKAM.WORKS_TITLE' | translate }}
         </h3>
       </span>
-      <div
-        innerHtml="{{ 'HELP_CENTER.ABOUT_CLICKAM.WORKS_TEXT' | translate }}"
-      ></div>
+      <div innerHtml="{{ 'HELP_CENTER.ABOUT_CLICKAM.WORKS_TEXT' | translate }}"></div>
     </div>
   </div>
 </div>

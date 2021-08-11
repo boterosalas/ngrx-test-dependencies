@@ -22,18 +22,12 @@ describe('DialogDeleteNotificationComponent', () => {
     objectResponse: null,
   };
 
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'deleteNotificationAdmin',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['deleteNotificationAdmin']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [DialogDeleteNotificationComponent],
-      imports: [
-        AppMaterialModule,
-        HttpClientTestingModule,
-        RouterTestingModule,
-      ],
+      imports: [AppMaterialModule, HttpClientTestingModule, RouterTestingModule],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: dialogMock },

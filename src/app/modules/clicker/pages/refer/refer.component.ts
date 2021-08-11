@@ -1,10 +1,6 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  MatSnackBar,
-  MatPaginator,
-  MatTableDataSource,
-} from '@angular/material';
+import { MatSnackBar, MatPaginator, MatTableDataSource } from '@angular/material';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import { LinksService } from 'src/app/services/links.service';
 import { Subscription } from 'rxjs';

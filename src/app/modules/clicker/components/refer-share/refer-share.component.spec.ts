@@ -25,8 +25,7 @@ describe('ReferShareComponent', () => {
     documentType: 'CC',
     userid: '77',
     idclicker: 'ñañito andres77',
-    'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress':
-      'davidbet2@hotmail.com',
+    'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress': 'davidbet2@hotmail.com',
     exp: 1593636234,
     iss: 'practincanetcore.com',
     aud: 'Estudiantes',

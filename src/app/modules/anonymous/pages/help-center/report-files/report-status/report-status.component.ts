@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  FormControl,
-} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import * as moment from 'moment';
 import { ContentService } from 'src/app/services/content.service';
 import { UserService } from 'src/app/services/user.service';
@@ -17,11 +12,7 @@ moment.locale('es');
   styleUrls: ['./report-status.component.scss'],
 })
 export class ReportStatusComponent implements OnInit {
-  constructor(
-    private fb: FormBuilder,
-    private content: ContentService,
-    private users: UserService
-  ) {}
+  constructor(private fb: FormBuilder, private content: ContentService, private users: UserService) {}
   //dataSourceNews: any
   selectedInic: any;
   dataSourceNews: any;

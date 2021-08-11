@@ -5,39 +5,19 @@
   imgMobile="/assets/img/banners/banner-reportes-mobile.jpg"
 ></app-banner>
 
-<div
-  class="container mt-4 fade-in"
-  fxLayout.gt-xs="row"
-  fxLayout.xs="column"
-  fxLayoutGap="30px"
->
+<div class="container mt-4 fade-in" fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutGap="30px">
   <mat-card fxFlex.xs="100%" fxFlex.gt-xs="30%" ngClass.xs="mb-4">
     <div class="actions" fxLayout="row" fxLayoutAlign="space-between center">
       <span class="select-all">
-        <button
-          class="p-0 min"
-          mat-button
-          [disabled]="notifications.length === 0"
-          (click)="selectAll()"
-        >
+        <button class="p-0 min" mat-button [disabled]="notifications.length === 0" (click)="selectAll()">
           {{ titleSelect }} todos <i class="tio-all_done"></i>
         </button>
       </span>
       <span fxLayoutGap="10px">
-        <button
-          class="p-0 min"
-          mat-button
-          [disabled]="notifications.length === 0"
-          (click)="viewedAll()"
-        >
+        <button class="p-0 min" mat-button [disabled]="notifications.length === 0" (click)="viewedAll()">
           <i class="tio-draft icon soft"></i>
         </button>
-        <button
-          class="p-0 min"
-          mat-button
-          [disabled]="notifications.length === 0"
-          (click)="deleteNotication()"
-        >
+        <button class="p-0 min" mat-button [disabled]="notifications.length === 0" (click)="deleteNotication()">
           <i class="tio-delete icon reds"></i>
         </button>
       </span>
@@ -47,11 +27,7 @@
       <form [formGroup]="checkboxGroup">
         <mat-list *ngIf="notifications.length">
           <mat-list-item *ngFor="let notification of notifications">
-            <div
-              class="w-100"
-              fxLayout="row"
-              fxLayoutAlign="space-between center"
-            >
+            <div class="w-100" fxLayout="row" fxLayoutAlign="space-between center">
               <div fxLayout="row" fxLayoutGap="20px">
                 <mat-checkbox
                   class="check"
@@ -62,9 +38,7 @@
                 ></mat-checkbox>
                 <div fxLayout="column" (click)="showNotification(notification)">
                   <span class="title-inner">{{ notification.title }}</span>
-                  <span class="date">{{
-                    notification.date | date: 'dd/MM/yyyy'
-                  }}</span>
+                  <span class="date">{{ notification.date | date: 'dd/MM/yyyy' }}</span>
                 </div>
               </div>
 
@@ -86,17 +60,8 @@
     <span class="date">{{ date | date: 'dd/MM/yyyy' }}</span>
     <div [innerHtml]="content"></div>
 
-    <div
-      class="mt-3"
-      *ngIf="!notifications.length"
-      fxLayout="row"
-      fxLayoutAlign="center center"
-    >
-      <span
-        class="not-notifications"
-        fxLayout="column"
-        fxLayoutAlign="center center"
-      >
+    <div class="mt-3" *ngIf="!notifications.length" fxLayout="row" fxLayoutAlign="center center">
+      <span class="not-notifications" fxLayout="column" fxLayoutAlign="center center">
         <i class="tio-notifications"></i>
         <p>¡Pronto recibirás grandes noticias!</p>
       </span>

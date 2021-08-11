@@ -26,7 +26,7 @@ export class AuditComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   maxDate = moment(new Date());
   dateParams: any;
-  disButon: boolean = false;
+  disButon = false;
   email: string;
   showDate = true;
 
@@ -77,73 +77,56 @@ export class AuditComponent implements OnInit, OnDestroy {
   public exportAudit() {
     if (this.dateForm.controls.typeRepor.value === '1') {
       this.dateParams = {
-        start:
-          this.dateForm.controls.dateRange.value.startDate.format('YYYY-MM-DD'),
-        end: this.dateForm.controls.dateRange.value.endDate.format(
-          'YYYY-MM-DD'
-        ),
+        start: this.dateForm.controls.dateRange.value.startDate.format('YYYY-MM-DD'),
+        end: this.dateForm.controls.dateRange.value.endDate.format('YYYY-MM-DD'),
       };
 
-      this.subscription = this.file
-        .getAuditoria(this.dateParams)
-        .subscribe((resp: ResponseService) => {
-          if (resp.state === 'Success') {
-            this.openSnackBar(resp.userMessage, 'Cerrar');
-            this.dateForm.reset();
-            if (this.dateForm.controls.dateRange.value.startDate === null) {
-              this.disButon = true;
-            }
+      this.subscription = this.file.getAuditoria(this.dateParams).subscribe((resp: ResponseService) => {
+        if (resp.state === 'Success') {
+          this.openSnackBar(resp.userMessage, 'Cerrar');
+          this.dateForm.reset();
+          if (this.dateForm.controls.dateRange.value.startDate === null) {
+            this.disButon = true;
           }
-        });
+        }
+      });
     }
 
     if (this.dateForm.controls.typeRepor.value === '2') {
       this.dateParams = {
-        start:
-          this.dateForm.controls.dateRange.value.startDate.format('YYYY-MM-DD'),
-        end: this.dateForm.controls.dateRange.value.endDate.format(
-          'YYYY-MM-DD'
-        ),
+        start: this.dateForm.controls.dateRange.value.startDate.format('YYYY-MM-DD'),
+        end: this.dateForm.controls.dateRange.value.endDate.format('YYYY-MM-DD'),
       };
-      this.subscription = this.file
-        .getAuditoriaDatosUser(this.dateParams)
-        .subscribe((resp: ResponseService) => {
-          if (resp.state === 'Success') {
-            this.openSnackBar(resp.userMessage, 'Cerrar');
-            this.dateForm.reset();
-            if (this.dateForm.controls.dateRange.value.startDate === null) {
-              this.disButon = true;
-            }
+      this.subscription = this.file.getAuditoriaDatosUser(this.dateParams).subscribe((resp: ResponseService) => {
+        if (resp.state === 'Success') {
+          this.openSnackBar(resp.userMessage, 'Cerrar');
+          this.dateForm.reset();
+          if (this.dateForm.controls.dateRange.value.startDate === null) {
+            this.disButon = true;
           }
-        });
+        }
+      });
     }
 
     if (this.dateForm.controls.typeRepor.value === '3') {
-      this.subscription = this.file
-        .getReportTerms()
-        .subscribe((resp: ResponseService) => {
-          if (resp.state === 'Success') {
-            this.openSnackBar(resp.userMessage, 'Cerrar');
-          }
-        });
+      this.subscription = this.file.getReportTerms().subscribe((resp: ResponseService) => {
+        if (resp.state === 'Success') {
+          this.openSnackBar(resp.userMessage, 'Cerrar');
+        }
+      });
     }
 
     if (this.dateForm.controls.typeRepor.value === '4') {
-      this.subscription = this.file
-        .getReportCommissions()
-        .subscribe((resp: ResponseService) => {
-          if (resp.state === 'Success') {
-            this.openSnackBar(resp.userMessage, 'Cerrar');
-          }
-        });
+      this.subscription = this.file.getReportCommissions().subscribe((resp: ResponseService) => {
+        if (resp.state === 'Success') {
+          this.openSnackBar(resp.userMessage, 'Cerrar');
+        }
+      });
     }
   }
 
   change() {
-    if (
-      this.dateForm.controls.typeRepor.value === '3' ||
-      this.dateForm.controls.typeRepor.value === '4'
-    ) {
+    if (this.dateForm.controls.typeRepor.value === '3' || this.dateForm.controls.typeRepor.value === '4') {
       this.dateForm.controls.dateRange.setValue(null);
       this.disButon = false;
       this.showDate = false;
@@ -160,8 +143,8 @@ export class AuditComponent implements OnInit, OnDestroy {
 
   /**
    * Abre el mensaje de confirmacion de copiado del link
-   * @param message
-   * @param action
+   * @param message mensaje 
+   * @param action accion
    */
 
   private openSnackBar(message: string, action: string) {

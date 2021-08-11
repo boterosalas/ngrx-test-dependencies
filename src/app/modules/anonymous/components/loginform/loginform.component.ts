@@ -34,22 +34,8 @@ export class LoginformComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      Username: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(this.emailPattern),
-          Validators.maxLength(64),
-        ],
-      ],
-      Password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(20),
-        ],
-      ],
+      Username: ['', [Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
+      Password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
     });
   }
 
@@ -79,10 +65,7 @@ export class LoginformComponent implements OnInit, OnDestroy {
             this.getAmount();
           }, 500);
           localStorage.setItem('ACCESS_TOKEN', resp.objectResponse.token);
-          localStorage.setItem(
-            'REFRESH_TOKEN',
-            resp.objectResponse.refreshToken
-          );
+          localStorage.setItem('REFRESH_TOKEN', resp.objectResponse.refreshToken);
           this.utils.hideloginForm();
           this.routeBased();
 

@@ -13,18 +13,14 @@ import { DialogStoryComponent } from '../../components/dialog-story/dialog-story
   styleUrls: ['./stories.component.scss'],
 })
 export class StoriesComponent implements OnInit, OnDestroy {
-  constructor(
-    private content: ContentService,
-    private dialog: MatDialog,
-    private utils: UtilsService
-  ) {}
+  constructor(private content: ContentService, private dialog: MatDialog, private utils: UtilsService) {}
 
   private subscription: Subscription = new Subscription();
   business = [];
   newStoryActiveButton = true;
   idBussiness: number;
   titleSelect: string;
-  checkedAll: Boolean;
+  checkedAll: boolean;
   activeSelectAll = true;
 
   active = [];
@@ -69,24 +65,17 @@ export class StoriesComponent implements OnInit, OnDestroy {
   }
 
   private getStories() {
-    this.content
-      .getStoriesadmin(true, this.idBussiness)
-      .subscribe((resp: ResponseService) => {
-        this.active = resp.objectResponse.active;
-        this.scheduled = resp.objectResponse.scheduled;
-        this.drafts = resp.objectResponse.drafts;
-        this.defeated = resp.objectResponse.defeated;
-        if (
-          this.active.length > 0 ||
-          this.scheduled.length > 0 ||
-          this.drafts.length > 0 ||
-          this.defeated.length > 0
-        ) {
-          this.activeSelectAll = false;
-        } else {
-          this.activeSelectAll = true;
-        }
-      });
+    this.content.getStoriesadmin(true, this.idBussiness).subscribe((resp: ResponseService) => {
+      this.active = resp.objectResponse.active;
+      this.scheduled = resp.objectResponse.scheduled;
+      this.drafts = resp.objectResponse.drafts;
+      this.defeated = resp.objectResponse.defeated;
+      if (this.active.length > 0 || this.scheduled.length > 0 || this.drafts.length > 0 || this.defeated.length > 0) {
+        this.activeSelectAll = false;
+      } else {
+        this.activeSelectAll = true;
+      }
+    });
   }
 
   selectAll() {

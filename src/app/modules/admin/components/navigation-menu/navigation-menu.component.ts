@@ -18,7 +18,7 @@ export class NavigationMenuComponent implements OnInit {
   @ViewChild('templateDeleteNavigationItem', { static: false })
   templateDeleteNavigationItem: TemplateRef<any>;
   currentLink: any = {};
-  isInvalidAddSection: boolean = false;
+  isInvalidAddSection = false;
   sectionsLinks: any = [];
   @ViewChild('templateDeleteNavigationGroup', { static: false })
   templateDeleteNavigationGroup: TemplateRef<any>;
@@ -35,12 +35,8 @@ export class NavigationMenuComponent implements OnInit {
   }
 
   dropSection(event: CdkDragDrop<any>) {
-    moveItemInArray(
-      this.sectionsLinks,
-      event.previousIndex,
-      event.currentIndex
-    );
-    let dataSourceSend = [];
+    moveItemInArray(this.sectionsLinks, event.previousIndex, event.currentIndex);
+    const dataSourceSend = [];
     for (let i = 0; i < this.sectionsLinks.length; i++) {
       this.sectionsLinks[i].orderby = i + 1;
       dataSourceSend.push({
@@ -107,13 +103,11 @@ export class NavigationMenuComponent implements OnInit {
   }
 
   deleteNavigationItemService() {
-    this.auth
-      .deleteMenu(this.currentLink.Id)
-      .subscribe((resp: ResponseService) => {
-        if (resp.state === 'Success') {
-          this.dialog.closeAll();
-        }
-      });
+    this.auth.deleteMenu(this.currentLink.Id).subscribe((resp: ResponseService) => {
+      if (resp.state === 'Success') {
+        this.dialog.closeAll();
+      }
+    });
   }
 
   deleteNavigationItem(item: any) {

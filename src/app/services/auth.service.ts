@@ -15,11 +15,7 @@ import { ResponseService } from '../interfaces/response';
   providedIn: 'root',
 })
 export class AuthService implements OnDestroy {
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    public jwtHelper: JwtHelperService
-  ) {
+  constructor(private http: HttpClient, private router: Router, public jwtHelper: JwtHelperService) {
     this.isLogged$.subscribe((val) => {
       this.getRole();
       if (!!val || this.isLoggedIn()) {
@@ -77,11 +73,7 @@ export class AuthService implements OnDestroy {
   subs = [];
 
   public login(userInfo: any) {
-    return this.http.post(
-      `${this.url + this.apiLogin}`,
-      userInfo,
-      this.httpOptions
-    );
+    return this.http.post(`${this.url + this.apiLogin}`, userInfo, this.httpOptions);
   }
 
   public isLoggedIn() {
@@ -114,296 +106,234 @@ export class AuthService implements OnDestroy {
   }
 
   public getMenu() {
-    return this.http
-      .get(`${this.url + this.apiGetmenus}`, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
-        ),
-        map((resp: any) => {
-          return resp.objectResponse;
-        })
-      );
+    return this.http.get(`${this.url + this.apiGetmenus}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: any) => {
+        return resp.objectResponse;
+      })
+    );
   }
 
   public getMenuClicker(visible: Boolean = false) {
-    return this.http
-      .get(
-        `${this.url + this.apiGetmenusClicker}?visible=${visible}`,
-        this.httpOptions
-      )
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
-        ),
-        map((resp: any) => {
-          return resp.objectResponse;
-        })
-      );
+    return this.http.get(`${this.url + this.apiGetmenusClicker}?visible=${visible}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: any) => {
+        return resp.objectResponse;
+      })
+    );
   }
 
   public getMenusFromAdmin() {
-    return this.http
-      .get(`${this.url + this.apiGetmenusFromAdmin}`, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
-        ),
-        map((resp: any) => {
-          return resp.objectResponse;
-        })
-      );
+    return this.http.get(`${this.url + this.apiGetmenusFromAdmin}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: any) => {
+        return resp.objectResponse;
+      })
+    );
   }
 
   public getmenusNoLogin() {
-    return this.http
-      .get(`${this.url + this.apiGetmenusNoLogin}`, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
-        ),
-        map((resp: any) => {
-          return resp.objectResponse;
-        })
-      );
+    return this.http.get(`${this.url + this.apiGetmenusNoLogin}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: any) => {
+        return resp.objectResponse;
+      })
+    );
   }
 
   public getmenusNoLoginUserView() {
-    return this.http
-      .get(`${this.url + this.apiGetmenusNoLoginViewUser}`, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
-        ),
-        map((resp: any) => {
-          return resp.objectResponse;
-        })
-      );
+    return this.http.get(`${this.url + this.apiGetmenusNoLoginViewUser}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: any) => {
+        return resp.objectResponse;
+      })
+    );
   }
 
   public saveMenu(datos: any) {
-    return this.http
-      .post(`${this.url + this.apiSaveMenu}`, datos, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
-        ),
-        map((resp: ResponseService) => {
-          return resp;
-        })
-      );
+    return this.http.post(`${this.url + this.apiSaveMenu}`, datos, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: ResponseService) => {
+        return resp;
+      })
+    );
   }
 
   public saveMenuGroup(datos: any) {
-    return this.http
-      .post(`${this.url + this.apiSaveMenuGroup}`, datos, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
-        ),
-        map((resp: ResponseService) => {
-          return resp;
-        })
-      );
+    return this.http.post(`${this.url + this.apiSaveMenuGroup}`, datos, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: ResponseService) => {
+        return resp;
+      })
+    );
   }
 
   public deleteMenu(id: any) {
-    return this.http
-      .delete(`${this.url + this.apiDeleteMenu}?id=${id}`, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
-        ),
-        map((bussiness: ResponseService) => {
-          return bussiness;
-        })
-      );
+    return this.http.delete(`${this.url + this.apiDeleteMenu}?id=${id}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((bussiness: ResponseService) => {
+        return bussiness;
+      })
+    );
   }
 
   public deleteGroup(id: any) {
-    return this.http
-      .delete(
-        `${this.url + this.apiDeleteMenuGroup}?id=${id}`,
-        this.httpOptions
-      )
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
-        ),
-        map((bussiness: ResponseService) => {
-          return bussiness;
-        })
-      );
+    return this.http.delete(`${this.url + this.apiDeleteMenuGroup}?id=${id}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((bussiness: ResponseService) => {
+        return bussiness;
+      })
+    );
   }
 
   public saveOrderMenus(datos: any) {
-    return this.http
-      .post(`${this.url + this.apiSaveOrderMenus}`, datos, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
-        ),
-        map((bussiness: ResponseService) => {
-          return bussiness;
-        })
-      );
+    return this.http.post(`${this.url + this.apiSaveOrderMenus}`, datos, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((bussiness: ResponseService) => {
+        return bussiness;
+      })
+    );
   }
 
   public saveOrderGrupoMenus(datos: any) {
-    return this.http
-      .post(
-        `${this.url + this.apiSaveOrderGrupoMenus}`,
-        datos,
-        this.httpOptions
-      )
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
-        ),
-        map((bussiness: ResponseService) => {
-          return bussiness;
-        })
-      );
+    return this.http.post(`${this.url + this.apiSaveOrderGrupoMenus}`, datos, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((bussiness: ResponseService) => {
+        return bussiness;
+      })
+    );
   }
 
   public changePassword(data: any) {
-    return this.http.post(
-      `${this.url}${this.apiChangePassword}`,
-      data,
-      this.httpOptions
-    );
+    return this.http.post(`${this.url}${this.apiChangePassword}`, data, this.httpOptions);
   }
 
   public forgotPassword(username: Forgotpassword) {
-    return this.http.post(
-      `${this.url + this.apiForgotPassword}`,
-      { email: username },
-      this.httpOptions
-    );
+    return this.http.post(`${this.url + this.apiForgotPassword}`, { email: username }, this.httpOptions);
   }
 
   public sendActivation(username: string) {
-    return this.http.post(
-      `${this.url + this.apisendactivation}`,
-      { email: username },
-      this.httpOptions
-    );
+    return this.http.post(`${this.url + this.apisendactivation}`, { email: username }, this.httpOptions);
   }
 
   public refreshToken() {
     const accesstoken = localStorage.getItem('ACCESS_TOKEN');
     const refreshtoken = localStorage.getItem('REFRESH_TOKEN');
-    return this.http.post(
-      `${this.url + this.apiRefresh}`,
-      { AccessToken: accesstoken, refreshtoken },
-      this.httpOptions
-    );
+    return this.http.post(`${this.url + this.apiRefresh}`, { AccessToken: accesstoken, refreshtoken }, this.httpOptions);
   }
 
   public recoverPassword(password: Recoverpassword) {
-    return this.http.post(
-      `${this.url + this.apiRecoverPassword}`,
-      password,
-      this.httpOptions
-    );
+    return this.http.post(`${this.url + this.apiRecoverPassword}`, password, this.httpOptions);
   }
   public getUsersAdmin() {
-    return this.http
-      .get(`${this.url + this.apiGetsAdmins}`, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
-        ),
-        map((resp: any) => {
-          return resp.objectResponse;
-        })
-      );
+    return this.http.get(`${this.url + this.apiGetsAdmins}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: any) => {
+        return resp.objectResponse;
+      })
+    );
   }
   public getPermisionByUser(rol) {
-    return this.http
-      .get(
-        `${this.url + this.apiGetPermisionAdmin}?rol=${rol}`,
-        this.httpOptions
-      )
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
-        ),
-        map((resp: any) => {
-          return resp.objectResponse;
-        })
-      );
+    return this.http.get(`${this.url + this.apiGetPermisionAdmin}?rol=${rol}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: any) => {
+        return resp.objectResponse;
+      })
+    );
   }
   public savePermision(data: any) {
-    return this.http
-      .post(`${this.url + this.apiSavePermision}`, data, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
-        ),
-        map((bussiness: ResponseService) => {
-          return bussiness;
-        })
-      );
+    return this.http.post(`${this.url + this.apiSavePermision}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((bussiness: ResponseService) => {
+        return bussiness;
+      })
+    );
   }
   ngOnDestroy(): void {
-    this.subs.length > 0 &&
-      this.subs.forEach((sub: Subscription) => sub.unsubscribe());
+    this.subs.length > 0 && this.subs.forEach((sub: Subscription) => sub.unsubscribe());
   }
 }

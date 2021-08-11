@@ -15,9 +15,7 @@ describe('NavigationGroupComponent', () => {
   let component: NavigationGroupComponent;
   let fixture: ComponentFixture<NavigationGroupComponent>;
 
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'saveFooterSection',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['saveFooterSection']);
   const dialogMock = {
     close: () => {},
   };

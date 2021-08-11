@@ -1,18 +1,5 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  OnDestroy,
-  TemplateRef,
-} from '@angular/core';
-import {
-  MatTableDataSource,
-  MatPaginator,
-  MatDialog,
-  MatSnackBar,
-  MatPaginatorIntl,
-  MatDialogRef,
-} from '@angular/material';
+import { Component, OnInit, ViewChild, OnDestroy, TemplateRef } from '@angular/core';
+import { MatTableDataSource, MatPaginator, MatDialog, MatSnackBar, MatPaginatorIntl, MatDialogRef } from '@angular/material';
 import { DialogUserComponent } from '../../components/dialog-user/dialog-user.component';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { UserService } from 'src/app/services/user.service';
@@ -32,14 +19,11 @@ import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-g
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
-export class UsersComponent
-  extends MatPaginatorIntl
-  implements OnInit, OnDestroy
-{
+export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestroy {
   dataSource: any;
-  pageIndex: number = 0;
-  pageSize: number = 50;
-  pageTo: number = 50;
+  pageIndex = 0;
+  pageSize = 50;
+  pageTo = 50;
   totalItems: number;
   paginate: string;
   dateForm: FormGroup;
@@ -159,10 +143,7 @@ export class UsersComponent
       length = Math.max(length, 0);
       const startIndex = page * pageSize;
       // If the start index exceeds the list length, do not try and fix the end index to the end.
-      const endIndex =
-        startIndex < length
-          ? Math.min(startIndex + pageSize, length)
-          : startIndex + pageSize;
+      const endIndex = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize;
       return startIndex + 1 + ' de ' + endIndex + ' ítems de ' + length;
     };
   }
@@ -200,20 +181,14 @@ export class UsersComponent
 
   /**
    * Metodo para buscar usuarios
-   * @param term
-   * @param from
-   * @param to
-   * @param orderOrigin
-   * @param orderby
+   * @param term termino
+   * @param from desde
+   * @param to hasta
+   * @param orderOrigin tipo de ordenamiento
+   * @param orderby ordenar ASC o DESC
    */
 
-  public searchUser(
-    term,
-    from = 1,
-    to = this.pageTo,
-    orderOrigin = '',
-    orderby = ''
-  ) {
+  public searchUser(term, from = 1, to = this.pageTo, orderOrigin = '', orderby = '') {
     this.filterData[0].searchtext = term;
     this.filterData[0].to = to;
     this.filterData[0].from = from;
@@ -225,12 +200,10 @@ export class UsersComponent
       this.pageIndex = 0;
     }
 
-    this.subscription = this.file
-      .searchUsers(this.filterData)
-      .subscribe((user: any) => {
-        this.totalItems = user.total;
-        this.dataSource = user.users;
-      });
+    this.subscription = this.file.searchUsers(this.filterData).subscribe((user: any) => {
+      this.totalItems = user.total;
+      this.dataSource = user.users;
+    });
   }
 
   public userEmail(user) {
@@ -289,7 +262,7 @@ export class UsersComponent
 
   public updateEmail() {
     const id = this.userId;
-    let email = this.emailForm.controls.email.value;
+    const email = this.emailForm.controls.email.value;
     this.subscription = this.usersService.updateUserEmail(id, email).subscribe(
       (respEmail: ResponseService) => {
         this.dialog.closeAll();
@@ -304,14 +277,7 @@ export class UsersComponent
 
   public formEmail() {
     this.emailForm = this.fb.group({
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(this.emailPattern),
-          Validators.maxLength(64),
-        ],
-      ],
+      email: ['', [Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
     });
   }
 
@@ -330,7 +296,7 @@ export class UsersComponent
     let state = user.state;
     let receiveCommunications = user.receiveCommunications;
     let isEmployeeGrupoExito = user.isEmployeeGrupoExito;
-    let verified = user.verified;
+    const verified = user.verified;
 
     if (state === 'Inactivo') {
       state = false;
@@ -351,109 +317,96 @@ export class UsersComponent
       isEmployeeGrupoExito = false;
     }
 
-    this.subscription = this.usersService
-      .getUserInfoAditional(user.userId)
-      .subscribe((resp: ResponseService) => {
-        if (resp.state === 'Success') {
-          const fileIdentificationCard1 =
-            resp.objectResponse.identificationcard1;
-          const fileIdentificationCard2 =
-            resp.objectResponse.identificationcard2;
-          const fileBankCertificate = resp.objectResponse.bankcertificate;
-          const dateCed1 = resp.objectResponse.maxdateidentificationcard1;
-          const dateCed2 = resp.objectResponse.maxdateidentificationcard2;
-          const dateCertBank = resp.objectResponse.maxdatebankcertificate;
-          const dateRUT = resp.objectResponse.maxdaterut;
-          const AntdateCed1 = resp.objectResponse.mindateidentificationcard1;
-          const AntdateCed2 = resp.objectResponse.mindateidentificationcard2;
-          const AntdateCertBank = resp.objectResponse.mindatebankcertificate;
-          const AntdateRUT = resp.objectResponse.mindaterut;
-          const extensionIdentificationCard1 =
-            resp.objectResponse.maxextensiondateidentificationcard1;
-          const extensionIdentificationCard2 =
-            resp.objectResponse.maxextensiondateidentificationcard2;
-          const extensionBankCertificate =
-            resp.objectResponse.maxextensiondatebankcertificate;
-          const extensionRUT = resp.objectResponse.maxextensiondaterut;
-          const responseAccountBank = resp.objectResponse.responseaccountbank;
-          const fileRUT = resp.objectResponse.rut;
+    this.subscription = this.usersService.getUserInfoAditional(user.userId).subscribe((resp: ResponseService) => {
+      if (resp.state === 'Success') {
+        const fileIdentificationCard1 = resp.objectResponse.identificationcard1;
+        const fileIdentificationCard2 = resp.objectResponse.identificationcard2;
+        const fileBankCertificate = resp.objectResponse.bankcertificate;
+        const dateCed1 = resp.objectResponse.maxdateidentificationcard1;
+        const dateCed2 = resp.objectResponse.maxdateidentificationcard2;
+        const dateCertBank = resp.objectResponse.maxdatebankcertificate;
+        const dateRUT = resp.objectResponse.maxdaterut;
+        const AntdateCed1 = resp.objectResponse.mindateidentificationcard1;
+        const AntdateCed2 = resp.objectResponse.mindateidentificationcard2;
+        const AntdateCertBank = resp.objectResponse.mindatebankcertificate;
+        const AntdateRUT = resp.objectResponse.mindaterut;
+        const extensionIdentificationCard1 = resp.objectResponse.maxextensiondateidentificationcard1;
+        const extensionIdentificationCard2 = resp.objectResponse.maxextensiondateidentificationcard2;
+        const extensionBankCertificate = resp.objectResponse.maxextensiondatebankcertificate;
+        const extensionRUT = resp.objectResponse.maxextensiondaterut;
+        const responseAccountBank = resp.objectResponse.responseaccountbank;
+        const fileRUT = resp.objectResponse.rut;
 
-          const dialogRef = this.dialog.open(DialogUserComponent, {
-            data: {
-              userId,
-              identification,
-              name,
-              lastNames,
-              cellphone,
-              email,
-              address,
-              bank,
-              typeBankAccount,
-              bankAccountNumber,
-              account,
-              state,
-              receiveCommunications,
-              isEmployeeGrupoExito,
-              verified,
-              fileIdentificationCard1,
-              fileIdentificationCard2,
-              fileBankCertificate,
-              fileRUT,
-              dateCed1,
-              dateCed2,
-              dateCertBank,
-              dateRUT,
-              AntdateCed1,
-              AntdateCed2,
-              AntdateCertBank,
-              AntdateRUT,
-              extensionIdentificationCard1,
-              extensionIdentificationCard2,
-              extensionBankCertificate,
-              extensionRUT,
-              responseAccountBank,
-            },
-          });
+        const dialogRef = this.dialog.open(DialogUserComponent, {
+          data: {
+            userId,
+            identification,
+            name,
+            lastNames,
+            cellphone,
+            email,
+            address,
+            bank,
+            typeBankAccount,
+            bankAccountNumber,
+            account,
+            state,
+            receiveCommunications,
+            isEmployeeGrupoExito,
+            verified,
+            fileIdentificationCard1,
+            fileIdentificationCard2,
+            fileBankCertificate,
+            fileRUT,
+            dateCed1,
+            dateCed2,
+            dateCertBank,
+            dateRUT,
+            AntdateCed1,
+            AntdateCed2,
+            AntdateCertBank,
+            AntdateRUT,
+            extensionIdentificationCard1,
+            extensionIdentificationCard2,
+            extensionBankCertificate,
+            extensionRUT,
+            responseAccountBank,
+          },
+        });
 
-          this.subscription = dialogRef.componentInstance.state.subscribe(
-            (event) => {
-              if (event.target.checked === false) {
-                this.changeStateUser(userId, event.target.checked);
-              } else {
-                if (event.target.checked === true) {
-                  this.changeStateUser(userId, event.target.checked);
-                }
-              }
+        this.subscription = dialogRef.componentInstance.state.subscribe((event) => {
+          if (event.target.checked === false) {
+            this.changeStateUser(userId, event.target.checked);
+          } else {
+            if (event.target.checked === true) {
+              this.changeStateUser(userId, event.target.checked);
             }
-          );
+          }
+        });
 
-          this.subscription =
-            dialogRef.componentInstance.comunications.subscribe((event) => {
-              if (event.target.checked === false) {
-                this.changeComunications(userId, event.target.checked);
-              } else {
-                if (event.target.checked === true) {
-                  this.changeComunications(userId, event.target.checked);
-                }
-              }
-            });
-
-          this.subscription = dialogRef.componentInstance.verified.subscribe(
-            (value) => {
-              this.changeVerified(userId, value);
+        this.subscription = dialogRef.componentInstance.comunications.subscribe((event) => {
+          if (event.target.checked === false) {
+            this.changeComunications(userId, event.target.checked);
+          } else {
+            if (event.target.checked === true) {
+              this.changeComunications(userId, event.target.checked);
             }
-          );
+          }
+        });
 
-          this.subscription =
-            dialogRef.componentInstance.downloadFiles.subscribe((data) => {
-              this.downloadFiles(data);
-            });
+        this.subscription = dialogRef.componentInstance.verified.subscribe((value) => {
+          this.changeVerified(userId, value);
+        });
 
-          this.subscription = dialogRef.beforeClosed().subscribe(() => {
-            this.searchUser(this.paginate);
-          });
-        }
-      });
+        this.subscription = dialogRef.componentInstance.downloadFiles.subscribe((data) => {
+          this.downloadFiles(data);
+        });
+
+        this.subscription = dialogRef.beforeClosed().subscribe(() => {
+          this.searchUser(this.paginate);
+        });
+      }
+    });
   }
 
   private downloadFiles(data) {
@@ -463,8 +416,8 @@ export class UsersComponent
   }
 
   private downloadBlob(data, type) {
-    let blob = new Blob([data], { type: type });
-    let url = window.URL.createObjectURL(blob);
+    const blob = new Blob([data], { type: type });
+    const url = window.URL.createObjectURL(blob);
     const downloadLink = document.createElement('a');
 
     downloadLink.href = url;
@@ -473,47 +426,35 @@ export class UsersComponent
   }
 
   public changeComunications(userId, value) {
-    this.subscription = this.usersService
-      .comunitcations(userId, value)
-      .subscribe((user: any) => {
-        if (value === true) {
-          this.openSnackBar(
-            'Se ha guardado el usuario para que reciba comunicaciones',
-            'Cerrar'
-          );
-        } else {
-          this.openSnackBar(
-            'Se ha guardado el usuario para que no reciba comunicaciones',
-            'Cerrar'
-          );
-        }
-      });
+    this.subscription = this.usersService.comunitcations(userId, value).subscribe((user: any) => {
+      if (value === true) {
+        this.openSnackBar('Se ha guardado el usuario para que reciba comunicaciones', 'Cerrar');
+      } else {
+        this.openSnackBar('Se ha guardado el usuario para que no reciba comunicaciones', 'Cerrar');
+      }
+    });
   }
 
   public changeStateUser(userId, value) {
-    this.subscription = this.usersService
-      .statusUser(userId, value)
-      .subscribe(() => {
-        if (value === false) {
-          this.openSnackBar('El usuario ha sido inactivado', 'Cerrar');
-        } else {
-          this.openSnackBar('El usuario ha sido activado', 'Cerrar');
-        }
-      });
+    this.subscription = this.usersService.statusUser(userId, value).subscribe(() => {
+      if (value === false) {
+        this.openSnackBar('El usuario ha sido inactivado', 'Cerrar');
+      } else {
+        this.openSnackBar('El usuario ha sido activado', 'Cerrar');
+      }
+    });
   }
 
   public changeVerified(userId, value) {
-    this.subscription = this.usersService
-      .verifiedUser(userId, value)
-      .subscribe((data: ResponseService) => {
-        this.openSnackBar(data.userMessage, 'Cerrar');
-      });
+    this.subscription = this.usersService.verifiedUser(userId, value).subscribe((data: ResponseService) => {
+      this.openSnackBar(data.userMessage, 'Cerrar');
+    });
   }
 
   /**
    * Abre el mensaje de confirmacion de copiado del link
-   * @param message
-   * @param action
+   * @param message mensaje
+   * @param action accion
    */
 
   private openSnackBar(message: string, action: string) {
@@ -528,17 +469,15 @@ export class UsersComponent
       end: this.dateForm.controls.dateRange.value.endDate.format(),
     };
 
-    this.subscription = this.file
-      .getUsersExcel(this.dateParams)
-      .subscribe((responseExcel: ResponseService) => {
-        if (responseExcel.state === 'Success') {
-          this.openSnackBar(responseExcel.userMessage, 'Cerrar');
-          this.dateForm.reset();
-          if (this.dateForm.controls.dateRange.value.startDate === null) {
-            this.disableButon = true;
-          }
+    this.subscription = this.file.getUsersExcel(this.dateParams).subscribe((responseExcel: ResponseService) => {
+      if (responseExcel.state === 'Success') {
+        this.openSnackBar(responseExcel.userMessage, 'Cerrar');
+        this.dateForm.reset();
+        if (this.dateForm.controls.dateRange.value.startDate === null) {
+          this.disableButon = true;
         }
-      });
+      }
+    });
   }
 
   public getReportChangeExcel() {
@@ -546,17 +485,15 @@ export class UsersComponent
       start: this.dateForm.controls.dateRange.value.startDate.format(),
       end: this.dateForm.controls.dateRange.value.endDate.format(),
     };
-    this.subscription = this.file
-      .getHistoricalBankInformation(this.dateParamsReport)
-      .subscribe((respExcel: ResponseService) => {
-        if (respExcel.state === 'Success') {
-          this.openSnackBar(respExcel.userMessage, 'Cerrar');
-          this.dateForm.reset();
-          if (this.dateForm.controls.dateRange.value.startDate === null) {
-            this.disableButon = true;
-          }
+    this.subscription = this.file.getHistoricalBankInformation(this.dateParamsReport).subscribe((respExcel: ResponseService) => {
+      if (respExcel.state === 'Success') {
+        this.openSnackBar(respExcel.userMessage, 'Cerrar');
+        this.dateForm.reset();
+        if (this.dateForm.controls.dateRange.value.startDate === null) {
+          this.disableButon = true;
         }
-      });
+      }
+    });
   }
 
   change() {
@@ -569,7 +506,7 @@ export class UsersComponent
 
   sort(event) {
     let name = event.active.toUpperCase();
-    let direction = event.direction.toUpperCase();
+    const direction = event.direction.toUpperCase();
     if (direction === '') {
       name = '';
     }
@@ -577,23 +514,19 @@ export class UsersComponent
   }
 
   public updateEmployee() {
-    this.subscription = this.usersService
-      .updateEmployees()
-      .subscribe((respUpdate: ResponseService) => {
-        this.openSnackBar(respUpdate.userMessage, 'Cerrar');
-      });
+    this.subscription = this.usersService.updateEmployees().subscribe((respUpdate: ResponseService) => {
+      this.openSnackBar(respUpdate.userMessage, 'Cerrar');
+    });
   }
 
   public exportusers() {
-    this.subscription = this.usersService
-      .getExternalUsers()
-      .subscribe((respExport: ResponseService) => {
-        this.dateForm.reset();
-        if (this.dateForm.controls.dateRange.value.startDate === null) {
-          this.disableButon = true;
-        }
-        this.openSnackBar(respExport.userMessage, 'Cerrar');
-      });
+    this.subscription = this.usersService.getExternalUsers().subscribe((respExport: ResponseService) => {
+      this.dateForm.reset();
+      if (this.dateForm.controls.dateRange.value.startDate === null) {
+        this.disableButon = true;
+      }
+      this.openSnackBar(respExport.userMessage, 'Cerrar');
+    });
   }
 
   ngOnDestroy(): void {
@@ -612,74 +545,60 @@ export class UsersComponent
     }
   }
   public getGamification() {
-    this.subscription = this.usersService
-      .getReportGamification()
-      .subscribe((respuExportGamification: ResponseService) => {
+    this.subscription = this.usersService.getReportGamification().subscribe((respuExportGamification: ResponseService) => {
+      this.dateForm.reset();
+      if (this.dateForm.controls.dateRange.value.startDate === null) {
+        this.disableButon = true;
+      }
+      this.openSnackBar(respuExportGamification.userMessage, 'Cerrar');
+    });
+  }
+  public getComments() {
+    this.dateParamsReport = {
+      start: this.dateForm.controls.dateRange.value.startDate.format('Yyyy-MM-dd HH:mm:ss'),
+      end: this.dateForm.controls.dateRange.value.endDate.format('Yyyy-MM-dd HH:mm:ss'),
+    };
+    this.subscription = this.usersService.getReportCommets(this.dateParamsReport).subscribe((respExcel: ResponseService) => {
+      if (respExcel.state === 'Success') {
+        this.openSnackBar(respExcel.userMessage, 'Cerrar');
         this.dateForm.reset();
         if (this.dateForm.controls.dateRange.value.startDate === null) {
           this.disableButon = true;
         }
-        this.openSnackBar(respuExportGamification.userMessage, 'Cerrar');
-      });
-  }
-  public getComments() {
-    this.dateParamsReport = {
-      start: this.dateForm.controls.dateRange.value.startDate.format(
-        'Yyyy-MM-dd HH:mm:ss'
-      ),
-      end: this.dateForm.controls.dateRange.value.endDate.format(
-        'Yyyy-MM-dd HH:mm:ss'
-      ),
-    };
-    this.subscription = this.usersService
-      .getReportCommets(this.dateParamsReport)
-      .subscribe((respExcel: ResponseService) => {
-        if (respExcel.state === 'Success') {
-          this.openSnackBar(respExcel.userMessage, 'Cerrar');
-          this.dateForm.reset();
-          if (this.dateForm.controls.dateRange.value.startDate === null) {
-            this.disableButon = true;
-          }
-        }
-      });
+      }
+    });
   }
 
   public getDeleteComments() {
     this.dateParamsReport = {
-      start:
-        this.dateForm.controls.dateRange.value.startDate.format('YYYY-MM-DD'),
+      start: this.dateForm.controls.dateRange.value.startDate.format('YYYY-MM-DD'),
       end: this.dateForm.controls.dateRange.value.endDate.format('YYYY-MM-DD'),
     };
-    this.subscription = this.usersService
-      .getDeleteCommetsRest(this.dateParamsReport)
-      .subscribe((respExcel: ResponseService) => {
-        if (respExcel.state === 'Success') {
-          this.openSnackBar(respExcel.userMessage, 'Cerrar');
-          this.dateForm.reset();
-          if (this.dateForm.controls.dateRange.value.startDate === null) {
-            this.disableButon = true;
-          }
+    this.subscription = this.usersService.getDeleteCommetsRest(this.dateParamsReport).subscribe((respExcel: ResponseService) => {
+      if (respExcel.state === 'Success') {
+        this.openSnackBar(respExcel.userMessage, 'Cerrar');
+        this.dateForm.reset();
+        if (this.dateForm.controls.dateRange.value.startDate === null) {
+          this.disableButon = true;
         }
-      });
+      }
+    });
   }
 
   public getRefers() {
     this.dateParamsReport = {
-      start:
-        this.dateForm.controls.dateRange.value.startDate.format('YYYY-MM-DD'),
+      start: this.dateForm.controls.dateRange.value.startDate.format('YYYY-MM-DD'),
       end: this.dateForm.controls.dateRange.value.endDate.format('YYYY-MM-DD'),
     };
-    this.subscription = this.usersService
-      .getReportReferral(this.dateParamsReport)
-      .subscribe((respReferral: ResponseService) => {
-        if (respReferral.state === 'Success') {
-          this.openSnackBar(respReferral.userMessage, 'Cerrar');
-          this.dateForm.reset();
-          if (this.dateForm.controls.dateRange.value.startDate === null) {
-            this.disableButon = true;
-          }
+    this.subscription = this.usersService.getReportReferral(this.dateParamsReport).subscribe((respReferral: ResponseService) => {
+      if (respReferral.state === 'Success') {
+        this.openSnackBar(respReferral.userMessage, 'Cerrar');
+        this.dateForm.reset();
+        if (this.dateForm.controls.dateRange.value.startDate === null) {
+          this.disableButon = true;
         }
-      });
+      }
+    });
   }
 
   public getAnyReport() {
@@ -703,10 +622,7 @@ export class UsersComponent
   public exportUsersFilter() {
     this.filterData[0].export = true;
     this.subscription = this.file.searchUsers(this.filterData).subscribe(() => {
-      this.openSnackBar(
-        'Al terminar de procesar el archivo se enviará un correo',
-        'Cerrar'
-      );
+      this.openSnackBar('Al terminar de procesar el archivo se enviará un correo', 'Cerrar');
     });
   }
 
@@ -732,11 +648,9 @@ export class UsersComponent
 
     this.pageIndex = 0;
 
-    this.subscription = this.file
-      .searchUsers(this.filterData)
-      .subscribe((user: any) => {
-        this.totalItems = user.total;
-        this.dataSource = user.users;
-      });
+    this.subscription = this.file.searchUsers(this.filterData).subscribe((user: any) => {
+      this.totalItems = user.total;
+      this.dataSource = user.users;
+    });
   }
 }

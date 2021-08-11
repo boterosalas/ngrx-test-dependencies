@@ -73,10 +73,7 @@ export class DialogFaqItemComponent implements OnInit, OnDestroy {
       this.faqItemForm = this.fb.group({
         id: [this.data.id],
         idseccion: [this.data.idfaqsection || this.data.idgrupo],
-        description: [
-          this.data.description || this.data.name,
-          Validators.required,
-        ],
+        description: [this.data.description || this.data.name, Validators.required],
         termsEditor: [this.data.sectionvalue, Validators.required],
       });
     } else {
@@ -102,18 +99,14 @@ export class DialogFaqItemComponent implements OnInit, OnDestroy {
       orderby: this.data.orderby,
     };
 
-    this.subscription = this.content
-      .saveFaqItem(this.item)
-      .subscribe((resp: ResponseService) => {
-        if (resp.state === 'Success') {
-          this.dialogRef.close();
-        }
-      });
+    this.subscription = this.content.saveFaqItem(this.item).subscribe((resp: ResponseService) => {
+      if (resp.state === 'Success') {
+        this.dialogRef.close();
+      }
+    });
   }
 
   ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
     this.subscription.unsubscribe();
   }
 }

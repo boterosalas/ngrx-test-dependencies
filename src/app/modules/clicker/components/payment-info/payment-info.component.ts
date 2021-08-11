@@ -45,8 +45,7 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
   fileIdentificationCard2: any;
   fileBankCertificate: any;
   // fileRUT: any;
-  EXCEL_TYPE =
-    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+  EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
   departments = [];
   banks = [];
   typeAccount = [
@@ -104,17 +103,10 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
   }
 
   public filter() {
-    this.filteredDepartments =
-      this.externalForm.controls.department.valueChanges.pipe(
-        map((department) =>
-          typeof department === 'string' ? department : department.description
-        ),
-        map((department) =>
-          department
-            ? this._filterDepartments(department)
-            : this.departments.slice()
-        )
-      );
+    this.filteredDepartments = this.externalForm.controls.department.valueChanges.pipe(
+      map((department) => (typeof department === 'string' ? department : department.description)),
+      map((department) => (department ? this._filterDepartments(department) : this.departments.slice()))
+    );
   }
 
   private externalClickerForm() {
@@ -126,12 +118,7 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
       typeAccount: [null, Validators.required],
       numberAccount: [
         null,
-        [
-          Validators.required,
-          Validators.pattern(this.numberPattern),
-          Validators.minLength(5),
-          Validators.maxLength(20),
-        ],
+        [Validators.required, Validators.pattern(this.numberPattern), Validators.minLength(5), Validators.maxLength(20)],
       ],
       ced1: [null, Validators.required],
       ced2: [null, Validators.required],
@@ -175,49 +162,44 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
         formData.append('identification', this.identification);
         formData.append('userId', this.userId);
 
-        this.subscription = this.registerUser
-          .uploadFiles(formData)
-          .subscribe((response: ResponseService) => {
-            if (response.state === 'Success') {
-              error = null;
-            } else {
-              Swal.fire({
-                title: 'Error al subir archivo',
-                text: response.userMessage,
-                type: 'error',
-                confirmButtonText: 'Aceptar',
-                confirmButtonClass: 'accept-register-alert-error',
-              }).then(() => {});
-            }
+        this.subscription = this.registerUser.uploadFiles(formData).subscribe((response: ResponseService) => {
+          if (response.state === 'Success') {
+            error = null;
+          } else {
+            Swal.fire({
+              title: 'Error al subir archivo',
+              text: response.userMessage,
+              type: 'error',
+              confirmButtonText: 'Aceptar',
+              confirmButtonClass: 'accept-register-alert-error',
+            }).then(() => {});
+          }
 
-            switch (param) {
-              case 'Rut':
-                this.nameFileRUT = nameFile;
-                this.showErrorRUT = response.state === 'Success' ? false : true;
-                this.externalForm.controls.rut.setErrors(error);
-                break;
-              case 'BankCertificate':
-                this.nameFileCert = nameFile;
-                this.showErrorCert =
-                  response.state === 'Success' ? false : true;
-                this.externalForm.controls.cert.setErrors(error);
-                break;
-              case 'IdentificationCard1':
-                this.nameFileCed1 = nameFile;
-                this.showErrorCed1 =
-                  response.state === 'Success' ? false : true;
-                this.externalForm.controls.ced1.setErrors(error);
-                break;
-              case 'IdentificationCard2':
-                this.nameFileCed2 = nameFile;
-                this.showErrorCed2 =
-                  response.state === 'Success' ? false : true;
-                this.externalForm.controls.ced2.setErrors(error);
-                break;
-              default:
-                break;
-            }
-          });
+          switch (param) {
+            case 'Rut':
+              this.nameFileRUT = nameFile;
+              this.showErrorRUT = response.state === 'Success' ? false : true;
+              this.externalForm.controls.rut.setErrors(error);
+              break;
+            case 'BankCertificate':
+              this.nameFileCert = nameFile;
+              this.showErrorCert = response.state === 'Success' ? false : true;
+              this.externalForm.controls.cert.setErrors(error);
+              break;
+            case 'IdentificationCard1':
+              this.nameFileCed1 = nameFile;
+              this.showErrorCed1 = response.state === 'Success' ? false : true;
+              this.externalForm.controls.ced1.setErrors(error);
+              break;
+            case 'IdentificationCard2':
+              this.nameFileCed2 = nameFile;
+              this.showErrorCed2 = response.state === 'Success' ? false : true;
+              this.externalForm.controls.ced2.setErrors(error);
+              break;
+            default:
+              break;
+          }
+        });
       } else {
         switch (param) {
           case 'Rut':
@@ -356,8 +338,7 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
 
   public checkDepartment() {
     if (
-      this.externalForm.controls.department.value.code !==
-        this.departmentCode ||
+      this.externalForm.controls.department.value.code !== this.departmentCode ||
       this.externalForm.controls.department.value.code === undefined ||
       this.departmentCode === undefined
     ) {
@@ -383,11 +364,9 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
    */
 
   public getDepartments() {
-    this.subscription = this.personalInfo
-      .getDepartments()
-      .subscribe((res: ResponseService) => {
-        this.departments = res.objectResponse;
-      });
+    this.subscription = this.personalInfo.getDepartments().subscribe((res: ResponseService) => {
+      this.departments = res.objectResponse;
+    });
   }
 
   /**
@@ -395,11 +374,9 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
    */
 
   public getBanks() {
-    this.subscription = this.personalInfo
-      .getBanks()
-      .subscribe((res: ResponseService) => {
-        this.banks = res.objectResponse;
-      });
+    this.subscription = this.personalInfo.getBanks().subscribe((res: ResponseService) => {
+      this.banks = res.objectResponse;
+    });
   }
 
   public filterCities() {
@@ -411,17 +388,12 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
 
   private _filterDepartments(value: any) {
     const filterValue = value.toLowerCase();
-    return this.departments.filter(
-      (department) =>
-        department.description.toLowerCase().indexOf(filterValue) === 0
-    );
+    return this.departments.filter((department) => department.description.toLowerCase().indexOf(filterValue) === 0);
   }
 
   private _filterCities(value: string) {
     const filterValue = value.toLowerCase();
-    return this.cities.filter(
-      (city: any) => city.description.toLowerCase().indexOf(filterValue) === 0
-    );
+    return this.cities.filter((city: any) => city.description.toLowerCase().indexOf(filterValue) === 0);
   }
 
   ngOnDestroy(): void {

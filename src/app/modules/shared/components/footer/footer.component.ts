@@ -15,12 +15,7 @@ export class FooterComponent implements OnInit {
   sectionsLinks: any;
   private subscription: Subscription = new Subscription();
 
-  constructor(
-    public auth: AuthService,
-    private router: Router,
-    private utils: UtilsService,
-    private content: ContentService
-  ) {}
+  constructor(public auth: AuthService, private router: Router, private utils: UtilsService, private content: ContentService) {}
 
   public getSections() {
     this.subscription = this.content.getFooter('CLICKER').subscribe((resp) => {

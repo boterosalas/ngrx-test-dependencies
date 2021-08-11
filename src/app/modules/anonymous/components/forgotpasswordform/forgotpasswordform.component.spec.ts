@@ -18,13 +18,9 @@ describe('ForgotpasswordformComponent', () => {
   let component: ForgotpasswordformComponent;
   let fixture: ComponentFixture<ForgotpasswordformComponent>;
 
-  const mockUtilsService = jasmine.createSpyObj('UtilsService', [
-    'showloginForm',
-  ]);
+  const mockUtilsService = jasmine.createSpyObj('UtilsService', ['showloginForm']);
 
-  const mockAuthService = jasmine.createSpyObj('AuthService', [
-    'forgotPassword',
-  ]);
+  const mockAuthService = jasmine.createSpyObj('AuthService', ['forgotPassword']);
 
   const Success = {
     state: 'Success',
@@ -86,9 +82,7 @@ describe('ForgotpasswordformComponent', () => {
       })
     );
     component.forgotPassword();
-    component.forgotPaswordForm.controls.Username.setValue(
-      'david.betancur@pragma.com.co'
-    );
+    component.forgotPaswordForm.controls.Username.setValue('david.betancur@pragma.com.co');
     expect(mockAuthService.forgotPassword).toHaveBeenCalled();
   });
 

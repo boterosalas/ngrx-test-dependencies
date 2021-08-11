@@ -15,11 +15,7 @@
     <span fxLayout="row">
       <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
       <button mat-button [routerLink]="['/negocios-admin']">
-        <span
-          class="galano-bold f-16"
-          fxLayout="row"
-          fxLayoutAlign="start center"
-        >
+        <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>keyboard_arrow_left</mat-icon>
           Volver
         </span>
@@ -29,42 +25,20 @@
 
   <div fxLayout="row" fxLayoutAlign="space-between">
     <div fxLayout="row">
-      <button
-        mat-raised-button
-        color="orange"
-        (click)="selectAll()"
-        class="button-selected mr-4"
-      >
-        <img
-          class="icon-download"
-          src="assets/img/dashboard/icon-check.svg"
-          alt="descarga"
-        />
+      <button mat-raised-button color="orange" (click)="selectAll()" class="button-selected mr-4">
+        <img class="icon-download" src="assets/img/dashboard/icon-check.svg" alt="descarga" />
         {{ selectAllVideosImg }}
       </button>
       <button
         mat-raised-button
         (click)="deleteEvery()"
-        [ngClass]="
-          active === true
-            ? 'button-selected-red'
-            : 'button-selected-red-disabled'
-        "
+        [ngClass]="active === true ? 'button-selected-red' : 'button-selected-red-disabled'"
         [disabled]="!active"
       >
-        <img
-          class="icon-download"
-          src="assets/img/dashboard/icon-trash-red.svg"
-          alt="descarga"
-        />
+        <img class="icon-download" src="assets/img/dashboard/icon-trash-red.svg" alt="descarga" />
         Borrar
       </button>
-      <button
-        mat-raised-button
-        color="orange"
-        (click)="getVideosImages()"
-        class="button-selected ml-4"
-      >
+      <button mat-raised-button color="orange" (click)="getVideosImages()" class="button-selected ml-4">
         <mat-icon class="cursor-pointer">update</mat-icon> Actualizar
       </button>
     </div>
@@ -72,18 +46,10 @@
       <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
 
       <label for="cont" class="button-selected-label cursor-pointer">
-        <i
-          class="tio-upload_on_cloud style-icon icon-update icon-download-file"
-        ></i>
+        <i class="tio-upload_on_cloud style-icon icon-update icon-download-file"></i>
         Cargar Contenido</label
       >
-      <input
-        #inputFile
-        (change)="handleFileInput($event)"
-        id="cont"
-        type="file"
-        multiple
-      />
+      <input #inputFile (change)="handleFileInput($event)" id="cont" type="file" multiple />
     </span>
   </div>
 
@@ -92,24 +58,14 @@
     <hr class="separator-img" />
   </div>
   <div fxLayout="row wrap" fxLayoutGap="10px">
-    <h3 style="color: #726d7e" *ngIf="!imagenDispo">
-      No hay imágenes disponibles para este negocio.
-    </h3>
+    <h3 style="color: #726d7e" *ngIf="!imagenDispo">No hay imágenes disponibles para este negocio.</h3>
     <ng-container class="mt-4" *ngFor="let product of dataReal; let i = index">
       <div class="image-hover">
         <img class="image-size" [src]="product.url" alt="" />
         <div class="manager-check custom-color-primary">
-          <mat-checkbox
-            [(ngModel)]="product.dataR"
-            (change)="loadDelete()"
-            class="check-margin"
-          >
-          </mat-checkbox>
+          <mat-checkbox [(ngModel)]="product.dataR" (change)="loadDelete()" class="check-margin"> </mat-checkbox>
         </div>
-        <div
-          class="cursor-pointer image-background"
-          (click)="viewerPhoto(product)"
-        >
+        <div class="cursor-pointer image-background" (click)="viewerPhoto(product)">
           <mat-icon class="cursor-pointer image-vysor">remove_red_eye</mat-icon>
         </div>
       </div>
@@ -120,32 +76,17 @@
     <hr class="separator-img" />
   </div>
   <div fxLayout="row wrap" fxLayoutGap="10px">
-    <h3 style="color: #726d7e" *ngIf="!videosDispo">
-      No hay videos disponibles para este negocio.
-    </h3>
-    <ng-container
-      class="mt-4"
-      *ngFor="let product of dataRealVideo; let i = index"
-    >
+    <h3 style="color: #726d7e" *ngIf="!videosDispo">No hay videos disponibles para este negocio.</h3>
+    <ng-container class="mt-4" *ngFor="let product of dataRealVideo; let i = index">
       <div class="image-hover">
         <video class="image-size" [src]="product.url"></video>
 
         <div class="image-background">
           <div class="image-viewer-x" (click)="viewerVideo(product)"></div>
           <div class="image-viewer-y" (click)="viewerVideo(product)"></div>
-          <img
-            class="cursor-pointer image-vysor"
-            (click)="viewerVideo(product)"
-            src="assets/img/dashboard/icon-view-img.svg"
-            alt=""
-          />
+          <img class="cursor-pointer image-vysor" (click)="viewerVideo(product)" src="assets/img/dashboard/icon-view-img.svg" alt="" />
           <div class="custom-color-primary">
-            <mat-checkbox
-              [(ngModel)]="product.dataR"
-              (change)="loadDelete()"
-              class="check-margin"
-            >
-            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="product.dataR" (change)="loadDelete()" class="check-margin"> </mat-checkbox>
           </div>
         </div>
       </div>
@@ -166,9 +107,7 @@
 <ng-template #templateDeleteContent>
   <div class="center-template">
     <h3 class="delete-title">Eliminar contenido</h3>
-    <p class="w-container">
-      ¿Está seguro que desea eliminar el contenido seleccionado?
-    </p>
+    <p class="w-container">¿Está seguro que desea eliminar el contenido seleccionado?</p>
     <div
       fxLayout="row"
       fxLayout.xs="column"
@@ -178,9 +117,7 @@
       class="center-buttons"
     >
       <div ngClass="mt-3 mb-2 hide-button-on-mobile">
-        <button mat-button ngClass="button_cancel" (click)="cancelDelete()">
-          Cancelar
-        </button>
+        <button mat-button ngClass="button_cancel" (click)="cancelDelete()">Cancelar</button>
       </div>
       <div>
         <button mat-button class="red" (click)="deleteVideos()">

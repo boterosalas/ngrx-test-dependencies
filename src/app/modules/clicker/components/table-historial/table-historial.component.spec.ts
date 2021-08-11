@@ -12,11 +12,7 @@ describe('TableHistorialComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [TableHistorialComponent],
-      imports: [
-        TranslateModule.forRoot({}),
-        AppMaterialModule,
-        NgxPaginationModule,
-      ],
+      imports: [TranslateModule.forRoot({}), AppMaterialModule, NgxPaginationModule],
     }).compileComponents();
   }));
 

@@ -14,11 +14,7 @@
     <span fxLayout="row">
       <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
       <button mat-button [routerLink]="['/negocios-admin']">
-        <span
-          class="galano-bold f-16"
-          fxLayout="row"
-          fxLayoutAlign="start center"
-        >
+        <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>keyboard_arrow_left</mat-icon>
           Volver
         </span>
@@ -29,19 +25,8 @@
     <div class="container-search">
       <div fxLayout="row">
         <div fxLayout="row">
-          <app-search-users
-            class="searchUser"
-            (search)="searchUser($event)"
-          ></app-search-users>
-          <div
-            style="
-              margin-top: 25px;
-              margin-left: 20px;
-              color: #37236a;
-              font-weight: bold;
-            "
-            fxLayout="row"
-          >
+          <app-search-users class="searchUser" (search)="searchUser($event)"></app-search-users>
+          <div style="margin-top: 25px; margin-left: 20px; color: #37236a; font-weight: bold" fxLayout="row">
             Mostrar Marketplace:
             <mat-slide-toggle
               (change)="changeStatus()"
@@ -53,46 +38,21 @@
         </div>
       </div>
     </div>
-    <table
-      mat-table
-      [dataSource]="dataSource"
-      class="users-table"
-      matSort
-      (matSortChange)="sort($event)"
-    >
+    <table mat-table [dataSource]="dataSource" class="users-table" matSort (matSortChange)="sort($event)">
       <ng-container matColumnDef="code">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          style="width: 20%; font-weight: bold"
-          mat-sort-header="code"
-        >
-          CÓDIGO DE CATEGORÍA
-        </th>
+        <th mat-header-cell *matHeaderCellDef style="width: 20%; font-weight: bold" mat-sort-header="code">CÓDIGO DE CATEGORÍA</th>
         <td mat-cell *matCellDef="let element: let i=index">
           <p class="m-0 text-font">{{ element.code }}</p>
         </td>
       </ng-container>
       <ng-container matColumnDef="nombreCat">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          style="width: 25%; font-weight: bold"
-          mat-sort-header="description"
-        >
-          NOMBRE DE CATEGORÍA
-        </th>
+        <th mat-header-cell *matHeaderCellDef style="width: 25%; font-weight: bold" mat-sort-header="description">NOMBRE DE CATEGORÍA</th>
         <td mat-cell *matCellDef="let element: let i=index">
           <p class="m-0 text-font">{{ element.description }}</p>
         </td>
       </ng-container>
       <ng-container matColumnDef="comisionClik">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          style="width: 20%; font-weight: bold; text-align: center"
-          mat-sort-header="commissionClicker"
-        >
+        <th mat-header-cell *matHeaderCellDef style="width: 20%; font-weight: bold; text-align: center" mat-sort-header="commissionClicker">
           COMISIÓN DE CLICKER
         </th>
         <td mat-cell *matCellDef="let element: let i=index">
@@ -113,12 +73,7 @@
         </td>
       </ng-container>
       <ng-container matColumnDef="comisionTotal">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          style="width: 20%; font-weight: bold; text-align: center"
-          mat-sort-header="commissionTotal"
-        >
+        <th mat-header-cell *matHeaderCellDef style="width: 20%; font-weight: bold; text-align: center" mat-sort-header="commissionTotal">
           COMISIÓN TOTAL
         </th>
         <td mat-cell *matCellDef="let element: let i=index">
@@ -126,31 +81,14 @@
         </td>
       </ng-container>
       <ng-container matColumnDef="actions">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          style="width: 5%; font-weight: bold"
-          mat-sort-header="actions"
-        >
-          ACCIONES
-        </th>
+        <th mat-header-cell *matHeaderCellDef style="width: 5%; font-weight: bold" mat-sort-header="actions">ACCIONES</th>
         <td mat-cell *matCellDef="let element: let i=index">
-          <i
-            class="tio-edit style-icon cursor-pointer mr-2"
-            (click)="editCategoryCom(element)"
-          ></i>
-          <i
-            class="tio-remove_from_trash style-icon-delete cursor-pointer"
-            (click)="deleteCategoryCom(element)"
-          ></i>
+          <i class="tio-edit style-icon cursor-pointer mr-2" (click)="editCategoryCom(element)"></i>
+          <i class="tio-remove_from_trash style-icon-delete cursor-pointer" (click)="deleteCategoryCom(element)"></i>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr
-        id="user-{{ i }}"
-        mat-row
-        *matRowDef="let row; columns: displayedColumns; let i = index"
-      ></tr>
+      <tr id="user-{{ i }}" mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
     </table>
     <div class="mt-3">
       <mat-paginator
@@ -162,15 +100,7 @@
       ></mat-paginator>
     </div>
     <div class="mt-2 mb-2" fxLayout="row" fxLayoutAlign="end end">
-      <button
-        mat-raised-button
-        color="orange"
-        (click)="addComisionCategory()"
-        id="download-users"
-        class="ml-2"
-      >
-        Agregar categoría
-      </button>
+      <button mat-raised-button color="orange" (click)="addComisionCategory()" id="download-users" class="ml-2">Agregar categoría</button>
     </div>
   </div>
 </div>
@@ -189,17 +119,9 @@
             class="text-area-heigth"
             style="color: #37236a"
           />
-          <mat-error
-            id="requiredName"
-            *ngIf="
-              dataTip.controls.codCategory.invalid &&
-              dataTip.controls.codCategory.errors.required
-            "
-            >{{
-              'GENERIC.REQUIRED'
-                | translate: { formValue: 'Código de categoría' }
-            }}</mat-error
-          >
+          <mat-error id="requiredName" *ngIf="dataTip.controls.codCategory.invalid && dataTip.controls.codCategory.errors.required">{{
+            'GENERIC.REQUIRED' | translate: { formValue: 'Código de categoría' }
+          }}</mat-error>
         </mat-form-field>
         <mat-form-field style="width: 370px">
           <input
@@ -211,17 +133,9 @@
             class="text-area-heigth"
             style="color: #37236a"
           />
-          <mat-error
-            id="requiredName"
-            *ngIf="
-              dataTip.controls.nameCategory.invalid &&
-              dataTip.controls.nameCategory.errors.required
-            "
-            >{{
-              'GENERIC.REQUIRED'
-                | translate: { formValue: 'Nombre de categoría' }
-            }}</mat-error
-          >
+          <mat-error id="requiredName" *ngIf="dataTip.controls.nameCategory.invalid && dataTip.controls.nameCategory.errors.required">{{
+            'GENERIC.REQUIRED' | translate: { formValue: 'Nombre de categoría' }
+          }}</mat-error>
         </mat-form-field>
         <mat-form-field style="width: 370px">
           <input
@@ -235,14 +149,8 @@
           />
           <mat-error
             id="requiredName"
-            *ngIf="
-              dataTip.controls.comisionClicker.invalid &&
-              dataTip.controls.comisionClicker.errors.required
-            "
-            >{{
-              'GENERIC.REQUIRED'
-                | translate: { formValue: 'Comisión de clicker' }
-            }}</mat-error
+            *ngIf="dataTip.controls.comisionClicker.invalid && dataTip.controls.comisionClicker.errors.required"
+            >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Comisión de clicker' } }}</mat-error
           >
         </mat-form-field>
         <mat-form-field style="width: 370px">
@@ -257,23 +165,15 @@
           />
           <mat-error
             id="requiredName"
-            *ngIf="
-              dataTip.controls.commisionBussiness.invalid &&
-              dataTip.controls.commisionBussiness.errors.required
-            "
-            >{{
-              'GENERIC.REQUIRED'
-                | translate: { formValue: 'Comisión de negocio' }
-            }}</mat-error
+            *ngIf="dataTip.controls.commisionBussiness.invalid && dataTip.controls.commisionBussiness.errors.required"
+            >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Comisión de negocio' } }}</mat-error
           >
         </mat-form-field>
       </form>
     </div>
 
     <div fxLayout="row" fxLayoutAlign="end end">
-      <button mat-button ngClass="button_cancel" (click)="onNoClick()">
-        Cancelar
-      </button>
+      <button mat-button ngClass="button_cancel" (click)="onNoClick()">Cancelar</button>
       <button
         mat-raised-button
         color="orange"
@@ -304,14 +204,8 @@
           />
           <mat-error
             id="requiredName"
-            *ngIf="
-              dataEditTip.controls.codEditCategory.invalid &&
-              dataEditTip.controls.codEditCategory.errors.required
-            "
-            >{{
-              'GENERIC.REQUIRED'
-                | translate: { formValue: 'Código de categoría' }
-            }}</mat-error
+            *ngIf="dataEditTip.controls.codEditCategory.invalid && dataEditTip.controls.codEditCategory.errors.required"
+            >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Código de categoría' } }}</mat-error
           >
         </mat-form-field>
         <mat-form-field style="width: 370px">
@@ -326,14 +220,8 @@
           />
           <mat-error
             id="requiredName"
-            *ngIf="
-              dataEditTip.controls.nameEditCategory.invalid &&
-              dataEditTip.controls.nameEditCategory.errors.required
-            "
-            >{{
-              'GENERIC.REQUIRED'
-                | translate: { formValue: 'Nombre de categoría' }
-            }}</mat-error
+            *ngIf="dataEditTip.controls.nameEditCategory.invalid && dataEditTip.controls.nameEditCategory.errors.required"
+            >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Nombre de categoría' } }}</mat-error
           >
         </mat-form-field>
         <mat-form-field style="width: 370px">
@@ -348,14 +236,8 @@
           />
           <mat-error
             id="requiredName"
-            *ngIf="
-              dataEditTip.controls.comisionEditClicker.invalid &&
-              dataEditTip.controls.comisionEditClicker.errors.required
-            "
-            >{{
-              'GENERIC.REQUIRED'
-                | translate: { formValue: 'Comisión de clicker' }
-            }}</mat-error
+            *ngIf="dataEditTip.controls.comisionEditClicker.invalid && dataEditTip.controls.comisionEditClicker.errors.required"
+            >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Comisión de clicker' } }}</mat-error
           >
         </mat-form-field>
         <mat-form-field style="width: 370px">
@@ -370,23 +252,15 @@
           />
           <mat-error
             id="requiredName"
-            *ngIf="
-              dataEditTip.controls.commisionEditBussiness.invalid &&
-              dataEditTip.controls.commisionEditBussiness.errors.required
-            "
-            >{{
-              'GENERIC.REQUIRED'
-                | translate: { formValue: 'Comisión de negocio' }
-            }}</mat-error
+            *ngIf="dataEditTip.controls.commisionEditBussiness.invalid && dataEditTip.controls.commisionEditBussiness.errors.required"
+            >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Comisión de negocio' } }}</mat-error
           >
         </mat-form-field>
       </form>
     </div>
 
     <div fxLayout="row" fxLayoutAlign="end end">
-      <button mat-button ngClass="button_cancel" (click)="onNoClick()">
-        Cancelar
-      </button>
+      <button mat-button ngClass="button_cancel" (click)="onNoClick()">Cancelar</button>
       <button
         mat-raised-button
         color="orange"

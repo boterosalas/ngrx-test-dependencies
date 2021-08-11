@@ -1,10 +1,4 @@
-import {
-  async,
-  ComponentFixture,
-  TestBed,
-  fakeAsync,
-  tick,
-} from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { TermsAndConditionsComponent } from './terms-and-conditions.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -48,10 +42,7 @@ describe('TermsAndConditionsComponent', () => {
     amountsCommission: 10000,
     amountsReferred: 500000,
   };
-  const mockMasterService = jasmine.createSpyObj('MasterDataService', [
-    'getTerms',
-    'setTerms',
-  ]);
+  const mockMasterService = jasmine.createSpyObj('MasterDataService', ['getTerms', 'setTerms']);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [TermsAndConditionsComponent],

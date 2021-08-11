@@ -52,14 +52,7 @@ export class ForgotpasswordformComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.forgotPaswordForm = this.fb.group({
-      Username: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(this.emailPattern),
-          Validators.maxLength(64),
-        ],
-      ],
+      Username: ['', [Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
     });
   }
 

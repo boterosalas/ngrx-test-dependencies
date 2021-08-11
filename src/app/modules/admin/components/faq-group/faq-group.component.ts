@@ -17,7 +17,7 @@ export class FaqGroupComponent implements OnInit {
   @Output() changeState = new EventEmitter<object>();
   @Output() previewItems = new EventEmitter<object>();
 
-  isValidDeleteGroup: boolean = true;
+  isValidDeleteGroup = true;
 
   constructor() {}
 
@@ -52,7 +52,7 @@ export class FaqGroupComponent implements OnInit {
   dropItems(event: CdkDragDrop<any>) {
     const items = this.section.items;
     moveItemInArray(items, event.previousIndex, event.currentIndex);
-    let dataSourceSend = [];
+    const dataSourceSend = [];
     for (let i = 0; i < items.length; i++) {
       items[i].orderby = i + 1;
       dataSourceSend.push({

@@ -21,9 +21,7 @@ describe('NotificationDetailComponent', () => {
   let component: NotificationDetailComponent;
   let fixture: ComponentFixture<NotificationDetailComponent>;
 
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'saveNotificationAdmin',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['saveNotificationAdmin']);
 
   let response = {
     state: 'Success',
@@ -33,11 +31,7 @@ describe('NotificationDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        NotificationDetailComponent,
-        BannerComponent,
-        LoadFormFileComponent,
-      ],
+      declarations: [NotificationDetailComponent, BannerComponent, LoadFormFileComponent],
       imports: [
         FormsModule,
         ReactiveFormsModule,

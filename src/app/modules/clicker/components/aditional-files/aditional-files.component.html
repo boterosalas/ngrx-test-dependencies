@@ -10,40 +10,16 @@
     <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px">
       <div fxLayout="column" fxLayoutAlign="center" class="space">
         <strong class="gray">{{ 'REGISTER.CED1' | translate }}</strong>
-        <span *ngIf="files.nameFileCed1 === ''"
-          >No hay archivo seleccionado</span
-        >
-        <span class="file-input" *ngIf="files.nameFileCed1 !== ''">{{
-          files.nameFileCed1 | truncate: '20'
-        }}</span>
+        <span *ngIf="files.nameFileCed1 === ''">No hay archivo seleccionado</span>
+        <span class="file-input" *ngIf="files.nameFileCed1 !== ''">{{ files.nameFileCed1 | truncate: '20' }}</span>
       </div>
-      <div
-        fxLayout="column"
-        fxLayoutAlign="center"
-        fxLayoutAlign.xs="flex-end flex-end"
-        class="space"
-      >
+      <div fxLayout="column" fxLayoutAlign="center" fxLayoutAlign.xs="flex-end flex-end" class="space">
         <label for="ced1" id="upload" class="cursor-pointer">
           <span *ngIf="!files.showErrorCed1">
-            <img
-              class="mt-1"
-              *ngIf="files.nameFileCed1 === ''"
-              src="/assets/img/image-file-upload.svg"
-              alt="upload"
-            />
-            <img
-              class="mt-1"
-              *ngIf="files.nameFileCed1 !== ''"
-              src="/assets/img/image-file-upload-ok.svg"
-              alt="upload"
-            />
+            <img class="mt-1" *ngIf="files.nameFileCed1 === ''" src="/assets/img/image-file-upload.svg" alt="upload" />
+            <img class="mt-1" *ngIf="files.nameFileCed1 !== ''" src="/assets/img/image-file-upload-ok.svg" alt="upload" />
           </span>
-          <img
-            class="mt-1 w-icon"
-            *ngIf="files.showErrorCed1"
-            src="/assets/img/icono-error-carga.svg"
-            alt="upload"
-          />
+          <img class="mt-1 w-icon" *ngIf="files.showErrorCed1" src="/assets/img/icono-error-carga.svg" alt="upload" />
         </label>
       </div>
     </div>
@@ -54,50 +30,21 @@
 
     <br />
 
-    <input
-      (change)="onFileChangeFiles($event, 'cedula1')"
-      id="ced1"
-      type="file"
-      formControlName="ced1"
-    />
+    <input (change)="onFileChangeFiles($event, 'cedula1')" id="ced1" type="file" formControlName="ced1" />
 
     <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px">
       <div fxLayout="column" fxLayoutAlign="center" class="space">
         <strong class="gray">{{ 'REGISTER.CED2' | translate }}</strong>
-        <span *ngIf="files.nameFileCed2 === ''"
-          >No hay archivo seleccionado</span
-        >
-        <span class="file-input" *ngIf="files.nameFileCed2 !== ''">{{
-          files.nameFileCed2 | truncate: '20'
-        }}</span>
+        <span *ngIf="files.nameFileCed2 === ''">No hay archivo seleccionado</span>
+        <span class="file-input" *ngIf="files.nameFileCed2 !== ''">{{ files.nameFileCed2 | truncate: '20' }}</span>
       </div>
-      <div
-        fxLayout="column"
-        fxLayoutAlign="center"
-        fxLayoutAlign.xs="flex-end flex-end"
-        class="space"
-      >
+      <div fxLayout="column" fxLayoutAlign="center" fxLayoutAlign.xs="flex-end flex-end" class="space">
         <label for="ced2" id="upload" class="cursor-pointer">
           <span *ngIf="!files.showErrorCed2">
-            <img
-              class="mt-1"
-              *ngIf="files.nameFileCed2 === ''"
-              src="/assets/img/image-file-upload.svg"
-              alt="upload"
-            />
-            <img
-              class="mt-1"
-              *ngIf="files.nameFileCed2 !== ''"
-              src="/assets/img/image-file-upload-ok.svg"
-              alt="upload"
-            />
+            <img class="mt-1" *ngIf="files.nameFileCed2 === ''" src="/assets/img/image-file-upload.svg" alt="upload" />
+            <img class="mt-1" *ngIf="files.nameFileCed2 !== ''" src="/assets/img/image-file-upload-ok.svg" alt="upload" />
           </span>
-          <img
-            class="mt-1 w-icon"
-            *ngIf="files.showErrorCed2"
-            src="/assets/img/icono-error-carga.svg"
-            alt="upload"
-          />
+          <img class="mt-1 w-icon" *ngIf="files.showErrorCed2" src="/assets/img/icono-error-carga.svg" alt="upload" />
         </label>
       </div>
     </div>
@@ -107,54 +54,20 @@
 
     <br />
 
-    <input
-      (change)="onFileChangeFiles($event, 'cedula2')"
-      id="ced2"
-      type="file"
-      formControlName="ced2"
-    />
-    <div
-      fxLayout="row"
-      fxLayoutAlign="space-start center"
-      fxLayoutGap="50px"
-      class="pb-3"
-    >
+    <input (change)="onFileChangeFiles($event, 'cedula2')" id="ced2" type="file" formControlName="ced2" />
+    <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" class="pb-3">
       <div fxLayout="column" fxLayoutAlign="center" class="space">
         <strong class="gray">{{ 'REGISTER.ACCOUNT_CERT' | translate }}</strong>
-        <span *ngIf="files.nameFileCert === ''"
-          >No hay archivo seleccionado</span
-        >
-        <span class="file-input" *ngIf="files.nameFileCert !== ''">{{
-          files.nameFileCert | truncate: '20'
-        }}</span>
+        <span *ngIf="files.nameFileCert === ''">No hay archivo seleccionado</span>
+        <span class="file-input" *ngIf="files.nameFileCert !== ''">{{ files.nameFileCert | truncate: '20' }}</span>
       </div>
-      <div
-        fxLayout="column"
-        fxLayoutAlign="center"
-        fxLayoutAlign.xs="flex-end flex-end"
-        class="space"
-      >
+      <div fxLayout="column" fxLayoutAlign="center" fxLayoutAlign.xs="flex-end flex-end" class="space">
         <label for="cert" id="upload" class="cursor-pointer">
           <span *ngIf="!files.showErrorCert">
-            <img
-              class="mt-1"
-              *ngIf="files.nameFileCert === ''"
-              src="/assets/img/image-file-upload.svg"
-              alt="upload"
-            />
-            <img
-              class="mt-1"
-              *ngIf="files.nameFileCert !== ''"
-              src="/assets/img/image-file-upload-ok.svg"
-              alt="upload"
-            />
+            <img class="mt-1" *ngIf="files.nameFileCert === ''" src="/assets/img/image-file-upload.svg" alt="upload" />
+            <img class="mt-1" *ngIf="files.nameFileCert !== ''" src="/assets/img/image-file-upload-ok.svg" alt="upload" />
           </span>
-          <img
-            class="mt-1 w-icon"
-            *ngIf="files.showErrorCert"
-            src="/assets/img/icono-error-carga.svg"
-            alt="upload"
-          />
+          <img class="mt-1 w-icon" *ngIf="files.showErrorCert" src="/assets/img/icono-error-carga.svg" alt="upload" />
         </label>
       </div>
     </div>
@@ -162,12 +75,7 @@
       {{ 'GENERIC.INVALID_FORMAT_FILE_REGISTER' | translate }}
     </mat-error>
 
-    <input
-      (change)="onFileChangeFiles($event, 'certificado')"
-      id="cert"
-      type="file"
-      formControlName="cert"
-    />
+    <input (change)="onFileChangeFiles($event, 'certificado')" id="cert" type="file" formControlName="cert" />
 
     <button
       mat-raised-button
@@ -179,9 +87,7 @@
         files.showErrorCed1 ||
         files.showErrorCed2 ||
         files.showErrorCert ||
-        (files.nameFileCed1 === '' &&
-          files.nameFileCed2 === '' &&
-          files.nameFileCert === '')
+        (files.nameFileCed1 === '' && files.nameFileCed2 === '' && files.nameFileCert === '')
       "
     >
       {{ 'GENERIC.SEND' | translate }}

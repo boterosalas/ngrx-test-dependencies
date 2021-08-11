@@ -47,10 +47,7 @@ describe('LegalesComponent', () => {
       },
     ],
   };
-  const mockMasterService = jasmine.createSpyObj('MasterDataService', [
-    'getTerms',
-    'setTerms',
-  ]);
+  const mockMasterService = jasmine.createSpyObj('MasterDataService', ['getTerms', 'setTerms']);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [LegalesComponent],

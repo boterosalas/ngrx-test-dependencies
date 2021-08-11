@@ -2,241 +2,104 @@
 
 <h3 class="text-center f-22">{{ 'REGISTER.REGISTER_ACCOUNT' | translate }}</h3>
 
-<form
-  class="register-container"
-  [formGroup]="registerForm"
-  *ngIf="showRegisterForm"
->
+<form class="register-container" [formGroup]="registerForm" *ngIf="showRegisterForm">
   <mat-form-field>
-    <input
-      matInput
-      id="name"
-      type="text"
-      placeholder="{{ 'GENERIC.NAME' | translate }}"
-      formControlName="name"
-      required
-    />
-    <mat-error
-      id="requiredName"
-      *ngIf="
-        registerForm.controls.name.invalid &&
-        registerForm.controls.name.errors.required
-      "
-      >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Nombre' } }}</mat-error
-    >
+    <input matInput id="name" type="text" placeholder="{{ 'GENERIC.NAME' | translate }}" formControlName="name" required />
+    <mat-error id="requiredName" *ngIf="registerForm.controls.name.invalid && registerForm.controls.name.errors.required">{{
+      'GENERIC.REQUIRED' | translate: { formValue: 'Nombre' }
+    }}</mat-error>
 
-    <mat-error
-      id="maxName"
-      *ngIf="
-        registerForm.controls.name.invalid &&
-        registerForm.controls.name.errors.maxlength
-      "
-      >{{
-        'GENERIC.MAX_CHARACTERS'
-          | translate
-            : {
-                maxchar:
-                  registerForm.controls.name.errors.maxlength.requiredLength
-              }
-      }}</mat-error
-    >
+    <mat-error id="maxName" *ngIf="registerForm.controls.name.invalid && registerForm.controls.name.errors.maxlength">{{
+      'GENERIC.MAX_CHARACTERS'
+        | translate
+          : {
+              maxchar: registerForm.controls.name.errors.maxlength.requiredLength
+            }
+    }}</mat-error>
 
-    <mat-error
-      id="invalidName"
-      *ngIf="
-        registerForm.controls.name.invalid &&
-        registerForm.controls.name.errors.pattern
-      "
-      >{{ 'GENERIC.INVALID_FORMAT' | translate: { val: 'Nombre' } }}</mat-error
-    >
+    <mat-error id="invalidName" *ngIf="registerForm.controls.name.invalid && registerForm.controls.name.errors.pattern">{{
+      'GENERIC.INVALID_FORMAT' | translate: { val: 'Nombre' }
+    }}</mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <input
-      matInput
-      id="lastname"
-      type="text"
-      placeholder="{{ 'GENERIC.LASTNAME' | translate }}"
-      formControlName="lastName"
-      required
-    />
-    <mat-error
-      id="requiredLastName"
-      *ngIf="
-        registerForm.controls.lastName.invalid &&
-        registerForm.controls.lastName.errors.required
-      "
-      >{{
-        'GENERIC.REQUIRED' | translate: { formValue: 'Apellidos' }
-      }}</mat-error
-    >
+    <input matInput id="lastname" type="text" placeholder="{{ 'GENERIC.LASTNAME' | translate }}" formControlName="lastName" required />
+    <mat-error id="requiredLastName" *ngIf="registerForm.controls.lastName.invalid && registerForm.controls.lastName.errors.required">{{
+      'GENERIC.REQUIRED' | translate: { formValue: 'Apellidos' }
+    }}</mat-error>
 
-    <mat-error
-      id="maxLastName"
-      *ngIf="
-        registerForm.controls.lastName.invalid &&
-        registerForm.controls.lastName.errors.maxlength
-      "
-      >{{
-        'GENERIC.MAX_CHARACTERS'
-          | translate
-            : {
-                maxchar:
-                  registerForm.controls.lastName.errors.maxlength.requiredLength
-              }
-      }}</mat-error
-    >
+    <mat-error id="maxLastName" *ngIf="registerForm.controls.lastName.invalid && registerForm.controls.lastName.errors.maxlength">{{
+      'GENERIC.MAX_CHARACTERS'
+        | translate
+          : {
+              maxchar: registerForm.controls.lastName.errors.maxlength.requiredLength
+            }
+    }}</mat-error>
 
-    <mat-error
-      id="invalidLastName"
-      *ngIf="
-        registerForm.controls.lastName.invalid &&
-        registerForm.controls.lastName.errors.pattern
-      "
-      >{{
-        'GENERIC.INVALID_FORMAT' | translate: { val: 'Apellidos' }
-      }}</mat-error
-    >
+    <mat-error id="invalidLastName" *ngIf="registerForm.controls.lastName.invalid && registerForm.controls.lastName.errors.pattern">{{
+      'GENERIC.INVALID_FORMAT' | translate: { val: 'Apellidos' }
+    }}</mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <mat-select
-      placeholder="{{ 'REGISTER.ID_TYPE' | translate }}"
-      id="idtype"
-      formControlName="idType"
-      required
-    >
+    <mat-select placeholder="{{ 'REGISTER.ID_TYPE' | translate }}" id="idtype" formControlName="idType" required>
       <mat-option>{{ 'REGISTER.ID_TYPE' | translate }}</mat-option>
-      <mat-option *ngFor="let typeId of idUserType" value="{{ typeId.id }}">{{
-        typeId.value
-      }}</mat-option>
+      <mat-option *ngFor="let typeId of idUserType" value="{{ typeId.id }}">{{ typeId.value }}</mat-option>
     </mat-select>
-    <mat-error
-      id="requiredTypeId"
-      *ngIf="registerForm.controls.idType.invalid"
-      >{{ 'GENERIC.REQUIRED' | translate: { formValue: '' } }}</mat-error
-    >
+    <mat-error id="requiredTypeId" *ngIf="registerForm.controls.idType.invalid">{{
+      'GENERIC.REQUIRED' | translate: { formValue: '' }
+    }}</mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <input
-      matInput
-      id="id"
-      type="text"
-      placeholder="{{ 'GENERIC.DOCUMENT_NUMBER' | translate }}"
-      formControlName="id"
-      spacebar
-      required
-    />
+    <input matInput id="id" type="text" placeholder="{{ 'GENERIC.DOCUMENT_NUMBER' | translate }}" formControlName="id" spacebar required />
 
-    <mat-error
-      id="reuiredId"
-      *ngIf="
-        registerForm.controls.id.invalid &&
-        registerForm.controls.id.errors.required
-      "
-      >{{
-        'GENERIC.REQUIRED' | translate: { formValue: 'Número de documento' }
-      }}</mat-error
-    >
+    <mat-error id="reuiredId" *ngIf="registerForm.controls.id.invalid && registerForm.controls.id.errors.required">{{
+      'GENERIC.REQUIRED' | translate: { formValue: 'Número de documento' }
+    }}</mat-error>
 
-    <mat-error
-      id="maxId"
-      *ngIf="
-        registerForm.controls.id.invalid &&
-        registerForm.controls.id.errors.maxlength
-      "
-      >{{
-        'GENERIC.MAX_CHARACTERS'
-          | translate
-            : {
-                maxchar:
-                  registerForm.controls.id.errors.maxlength.requiredLength
-              }
-      }}</mat-error
-    >
+    <mat-error id="maxId" *ngIf="registerForm.controls.id.invalid && registerForm.controls.id.errors.maxlength">{{
+      'GENERIC.MAX_CHARACTERS'
+        | translate
+          : {
+              maxchar: registerForm.controls.id.errors.maxlength.requiredLength
+            }
+    }}</mat-error>
 
-    <mat-error
-      id="numberId"
-      *ngIf="
-        registerForm.controls.id.invalid &&
-        registerForm.controls.id.errors.pattern
-      "
-      >{{ 'GENERIC.ONLY_NUMBERS' | translate }}</mat-error
-    >
+    <mat-error id="numberId" *ngIf="registerForm.controls.id.invalid && registerForm.controls.id.errors.pattern">{{
+      'GENERIC.ONLY_NUMBERS' | translate
+    }}</mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <input
-      matInput
-      id="phone"
-      type="text"
-      placeholder="{{ 'GENERIC.CELLPHONE' | translate }}"
-      formControlName="phone"
-      spacebar
-      required
-    />
-    <mat-error
-      id="requiredPhone"
-      *ngIf="
-        registerForm.controls.phone.invalid &&
-        registerForm.controls.phone.errors.required
-      "
-      >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Celular' } }}</mat-error
-    >
+    <input matInput id="phone" type="text" placeholder="{{ 'GENERIC.CELLPHONE' | translate }}" formControlName="phone" spacebar required />
+    <mat-error id="requiredPhone" *ngIf="registerForm.controls.phone.invalid && registerForm.controls.phone.errors.required">{{
+      'GENERIC.REQUIRED' | translate: { formValue: 'Celular' }
+    }}</mat-error>
 
-    <mat-error
-      id="minPhone"
-      *ngIf="
-        registerForm.controls.phone.invalid &&
-        registerForm.controls.phone.errors.minlength
-      "
-      >{{
-        'GENERIC.MIN_CHARACTERS'
-          | translate
-            : {
-                minchar:
-                  registerForm.controls.phone.errors.minlength.requiredLength
-              }
-      }}</mat-error
-    >
+    <mat-error id="minPhone" *ngIf="registerForm.controls.phone.invalid && registerForm.controls.phone.errors.minlength">{{
+      'GENERIC.MIN_CHARACTERS'
+        | translate
+          : {
+              minchar: registerForm.controls.phone.errors.minlength.requiredLength
+            }
+    }}</mat-error>
 
-    <mat-error
-      id="maxPhone"
-      *ngIf="
-        registerForm.controls.phone.invalid &&
-        registerForm.controls.phone.errors.maxlength
-      "
-      >{{
-        'GENERIC.MAX_CHARACTERS'
-          | translate
-            : {
-                maxchar:
-                  registerForm.controls.phone.errors.maxlength.requiredLength
-              }
-      }}</mat-error
-    >
+    <mat-error id="maxPhone" *ngIf="registerForm.controls.phone.invalid && registerForm.controls.phone.errors.maxlength">{{
+      'GENERIC.MAX_CHARACTERS'
+        | translate
+          : {
+              maxchar: registerForm.controls.phone.errors.maxlength.requiredLength
+            }
+    }}</mat-error>
 
-    <mat-error
-      id="numberPhone"
-      *ngIf="
-        registerForm.controls.phone.invalid &&
-        registerForm.controls.phone.errors.pattern
-      "
-      >{{ 'GENERIC.ONLY_NUMBERS' | translate }}</mat-error
-    >
+    <mat-error id="numberPhone" *ngIf="registerForm.controls.phone.invalid && registerForm.controls.phone.errors.pattern">{{
+      'GENERIC.ONLY_NUMBERS' | translate
+    }}</mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <input
-      matInput
-      id="email"
-      type="email"
-      placeholder="{{ 'GENERIC.EMAIL' | translate }}"
-      formControlName="email"
-      spacebar
-      required
-    />
+    <input matInput id="email" type="email" placeholder="{{ 'GENERIC.EMAIL' | translate }}" formControlName="email" spacebar required />
     <mat-error id="invalidEmail" *ngIf="registerForm.controls.email.invalid">{{
       'LOGIN.INVALID_EMAIL' | translate: { formValue: 'Email' }
     }}</mat-error>
@@ -254,19 +117,14 @@
       required
     />
 
-    <mat-error
-      id="patternEmail"
-      *ngIf="registerForm.controls.confirmEmail.invalid"
-      >{{ 'GENERIC.CONFIRM_EMAIL_PATTERN' | translate }}</mat-error
-    >
+    <mat-error id="patternEmail" *ngIf="registerForm.controls.confirmEmail.invalid">{{
+      'GENERIC.CONFIRM_EMAIL_PATTERN' | translate
+    }}</mat-error>
   </mat-form-field>
 
   <mat-form-field style="width: 100%">
     <mat-label>{{ 'GENERIC.PASSWORD' | translate }}</mat-label>
-    <mat-pass-toggle-visibility
-      #toggleVisbility
-      matSuffix
-    ></mat-pass-toggle-visibility>
+    <mat-pass-toggle-visibility #toggleVisbility matSuffix></mat-pass-toggle-visibility>
     <input
       matInput
       #passwordWithValidation
@@ -275,60 +133,30 @@
       formControlName="password"
       placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
     />
-    <mat-hint align="end" aria-live="polite">
-      {{ passwordWithValidation.value.length }} / 20
-    </mat-hint>
-    <mat-error
-      id="requiredPassword"
-      *ngIf="
-        registerForm.controls.password.invalid &&
-        registerForm.controls.password.errors.required
-      "
-      >{{
-        'GENERIC.REQUIRED' | translate: { formValue: 'Contraseña' }
-      }}</mat-error
-    >
+    <mat-hint align="end" aria-live="polite"> {{ passwordWithValidation.value.length }} / 20 </mat-hint>
+    <mat-error id="requiredPassword" *ngIf="registerForm.controls.password.invalid && registerForm.controls.password.errors.required">{{
+      'GENERIC.REQUIRED' | translate: { formValue: 'Contraseña' }
+    }}</mat-error>
 
-    <mat-error
-      id="minPassword"
-      *ngIf="
-        registerForm.controls.password.invalid &&
-        registerForm.controls.password.errors.minlength
-      "
-      >{{
-        'GENERIC.MIN_CHARACTERS'
-          | translate
-            : {
-                minchar:
-                  registerForm.controls.password.errors.minlength.requiredLength
-              }
-      }}</mat-error
-    >
+    <mat-error id="minPassword" *ngIf="registerForm.controls.password.invalid && registerForm.controls.password.errors.minlength">{{
+      'GENERIC.MIN_CHARACTERS'
+        | translate
+          : {
+              minchar: registerForm.controls.password.errors.minlength.requiredLength
+            }
+    }}</mat-error>
 
-    <mat-error
-      id="maxPassword"
-      *ngIf="
-        registerForm.controls.password.invalid &&
-        registerForm.controls.password.errors.maxlength
-      "
-      >{{
-        'GENERIC.MAX_CHARACTERS'
-          | translate
-            : {
-                maxchar:
-                  registerForm.controls.password.errors.maxlength.requiredLength
-              }
-      }}</mat-error
-    >
+    <mat-error id="maxPassword" *ngIf="registerForm.controls.password.invalid && registerForm.controls.password.errors.maxlength">{{
+      'GENERIC.MAX_CHARACTERS'
+        | translate
+          : {
+              maxchar: registerForm.controls.password.errors.maxlength.requiredLength
+            }
+    }}</mat-error>
 
-    <mat-error
-      id="patternPassword"
-      *ngIf="
-        registerForm.controls.password.invalid &&
-        registerForm.controls.password.errors.pattern
-      "
-      >{{ 'GENERIC.PASSWORD_PATTERN' | translate }}</mat-error
-    >
+    <mat-error id="patternPassword" *ngIf="registerForm.controls.password.invalid && registerForm.controls.password.errors.pattern">{{
+      'GENERIC.PASSWORD_PATTERN' | translate
+    }}</mat-error>
   </mat-form-field>
   <div>
     <mat-password-strength
@@ -341,10 +169,7 @@
   </div>
 
   <mat-form-field>
-    <mat-pass-toggle-visibility
-      #toggleVisbility2
-      matSuffix
-    ></mat-pass-toggle-visibility>
+    <mat-pass-toggle-visibility #toggleVisbility2 matSuffix></mat-pass-toggle-visibility>
     <input
       matInput
       id="confirmPassword"
@@ -356,54 +181,36 @@
     />
     <mat-error
       id="notmatchPassword"
-      *ngIf="
-        registerForm.get('confirmPassword').errors &&
-        registerForm.get('confirmPassword').errors.ConfirmPassword
-      "
+      *ngIf="registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').errors.ConfirmPassword"
       >{{ 'REGISTER.PASSWORD_NOT_MATCH' | translate }}</mat-error
     >
 
     <mat-error
       id="requiredConfirmPassword"
-      *ngIf="
-        registerForm.controls.confirmPassword.invalid &&
-        registerForm.controls.confirmPassword.errors.required
-      "
-      >{{
-        'GENERIC.REQUIRED' | translate: { formValue: 'Contraseña' }
-      }}</mat-error
+      *ngIf="registerForm.controls.confirmPassword.invalid && registerForm.controls.confirmPassword.errors.required"
+      >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Contraseña' } }}</mat-error
     >
 
     <mat-error
       id="minConfirmPassword"
-      *ngIf="
-        registerForm.controls.confirmPassword.invalid &&
-        registerForm.controls.confirmPassword.errors.minlength
-      "
+      *ngIf="registerForm.controls.confirmPassword.invalid && registerForm.controls.confirmPassword.errors.minlength"
       >{{
         'GENERIC.MIN_CHARACTERS'
           | translate
             : {
-                minchar:
-                  registerForm.controls.confirmPassword.errors.minlength
-                    .requiredLength
+                minchar: registerForm.controls.confirmPassword.errors.minlength.requiredLength
               }
       }}</mat-error
     >
 
     <mat-error
       id="maxConfirmPassword"
-      *ngIf="
-        registerForm.controls.confirmPassword.invalid &&
-        registerForm.controls.confirmPassword.errors.maxlength
-      "
+      *ngIf="registerForm.controls.confirmPassword.invalid && registerForm.controls.confirmPassword.errors.maxlength"
       >{{
         'GENERIC.MAX_CHARACTERS'
           | translate
             : {
-                maxchar:
-                  registerForm.controls.confirmPassword.errors.maxlength
-                    .requiredLength
+                maxchar: registerForm.controls.confirmPassword.errors.maxlength.requiredLength
               }
       }}</mat-error
     >
@@ -419,15 +226,7 @@
       >
       </mat-checkbox>
     </span>
-    <span
-      class="
-        accept-terms
-        ml-2
-        cursor-pointer
-        gtmResgistraTuCuentaClicAceptarTerminosPoliticas
-      "
-      (click)="termsAndConditions()"
-    >
+    <span class="accept-terms ml-2 cursor-pointer gtmResgistraTuCuentaClicAceptarTerminosPoliticas" (click)="termsAndConditions()">
       {{ 'REGISTER.ACCEPT' | translate }}
     </span>
   </div>
@@ -435,19 +234,12 @@
   <button
     mat-raised-button
     id="register"
-    class="
-      mt-2
-      center
-      button button-height button-100
-      gtmRegistraTuCuentaClicContinuarDatosPrincipales
-    "
+    class="mt-2 center button button-height button-100 gtmRegistraTuCuentaClicContinuarDatosPrincipales"
     color="orange"
     (click)="register()"
     [disabled]="!registerForm.valid"
   >
-    <span class="gtmRegistraTuCuentaClicContinuarDatosPrincipales">{{
-      'GENERIC.CONTINUE' | translate
-    }}</span>
+    <span class="gtmRegistraTuCuentaClicContinuarDatosPrincipales">{{ 'GENERIC.CONTINUE' | translate }}</span>
   </button>
 </form>
 

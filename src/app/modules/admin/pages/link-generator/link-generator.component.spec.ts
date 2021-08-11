@@ -5,10 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { BannerComponent } from 'src/app/modules/shared/components/banner/banner.component';
 import { AdminModule } from '../../admin.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import {
-  BrowserAnimationsModule,
-  NoopAnimationsModule,
-} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ContentService } from 'src/app/services/content.service';
 import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -20,10 +17,7 @@ describe('LinkGeneratorComponent', () => {
   let component: LinkGeneratorComponent;
   let fixture: ComponentFixture<LinkGeneratorComponent>;
 
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'getBusiness',
-    'getLinkBusiness',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getBusiness', 'getLinkBusiness']);
 
   let bussiness = [
     {
@@ -76,11 +70,7 @@ describe('LinkGeneratorComponent', () => {
   });
 
   it('generate link', () => {
-    mockContentService.getLinkBusiness.and.returnValue(
-      of(
-        'https://www.exito.com?utm_source=clickam&utm_medium=referral&utm_campaign='
-      )
-    );
+    mockContentService.getLinkBusiness.and.returnValue(of('https://www.exito.com?utm_source=clickam&utm_medium=referral&utm_campaign='));
     let generate = {
       id: '0',
       link: 'https://www.exito.com',

@@ -1,20 +1,10 @@
-<div
-  fxLayout="column"
-  fxLayoutAlign="center"
-  class="border-bottom-gray border-blue"
->
+<div fxLayout="column" fxLayoutAlign="center" class="border-bottom-gray border-blue">
   <div fxLayout="row" fxLayoutAlign="space-between center">
     <h3 class="mb-3 title-name">
-      <i
-        class="tio-message_failed icon-dashboard"
-        style="color: #37236a; font-size: 22px"
-      >
-      </i>
+      <i class="tio-message_failed icon-dashboard" style="color: #37236a; font-size: 22px"> </i>
       <strong> No. de caso </strong> {{ data.element.consecutive }}
     </h3>
-    <a id="closeDialog" matRipple (click)="onNoClick()"
-      ><mat-icon class="close">close</mat-icon></a
-    >
+    <a id="closeDialog" matRipple (click)="onNoClick()"><mat-icon class="close">close</mat-icon></a>
   </div>
 </div>
 <div fxLayout="row" class="border-bottom-gray pb-2">
@@ -22,21 +12,15 @@
     <h3>Información de novedad</h3>
     <p fxLayout="row" class="margin-zero-bottom">
       <span class="galano-bold gray w-label">FECHA DE LA SOLICITUD</span>
-      <span class="normal-text">{{
-        data.element.date | date: 'dd/MM/yyyy'
-      }}</span>
+      <span class="normal-text">{{ data.element.date | date: 'dd/MM/yyyy' }}</span>
     </p>
     <p fxLayout="row" class="margin-zero-bottom">
       <span class="galano-bold gray w-label">FECHA DE NOVEDAD</span>
-      <span class="normal-text">{{
-        data.element.datenovelty | date: 'dd/MM/yyyy'
-      }}</span>
+      <span class="normal-text">{{ data.element.datenovelty | date: 'dd/MM/yyyy' }}</span>
     </p>
     <p fxLayout="row" class="margin-zero-bottom">
       <span class="galano-bold gray w-label">FECHA DE SOLUCIÓN</span>
-      <span class="normal-text">{{
-        data.element.solutiondate | date: 'dd/MM/yyyy'
-      }}</span>
+      <span class="normal-text">{{ data.element.solutiondate | date: 'dd/MM/yyyy' }}</span>
     </p>
     <p fxLayout="row" class="margin-zero-bottom">
       <span class="galano-bold gray w-label">NEGOCIO</span>
@@ -49,48 +33,23 @@
     <div fxLayout="column" class="margin-zero-bottom">
       <span class="galano-bold gray mt-2">DESCRIPCIÓN DE LA NOVEDAD</span>
       <div class="class-description">
-        <span class="normal-text w-description">{{
-          data.element.description
-        }}</span>
+        <span class="normal-text w-description">{{ data.element.description }}</span>
       </div>
     </div>
     <p fxLayout="column" class="margin-zero-bottom">
       <span class="galano-bold gray w-label">EVIDENCIA</span>
-      <span (click)="viewerImage()" class="normal-link cursor-pointer">{{
-        image
-      }}</span>
+      <span (click)="viewerImage()" class="normal-link cursor-pointer">{{ image }}</span>
     </p>
     <p fxLayout="row" class="margin-zero-bottom">
       <span class="galano-bold gray">ESTADO</span>
-      <span
-        *ngIf="data.element.statusnovelty === 'Pendiente'"
-        class="span-relative-new ml-2 normal-text"
-        ><img
-          class="status-img"
-          src="/assets/img/dashboard/icon-info.svg"
-          alt="pendind"
-        />
-        Pendiente</span
+      <span *ngIf="data.element.statusnovelty === 'Pendiente'" class="span-relative-new ml-2 normal-text"
+        ><img class="status-img" src="/assets/img/dashboard/icon-info.svg" alt="pendind" /> Pendiente</span
       >
-      <span
-        *ngIf="data.element.statusnovelty === 'Solucionado'"
-        class="span-relative-new ml-2 normal-text"
-        ><img
-          class="status-img"
-          src="/assets/img/dashboard/icon-check-new.svg"
-          alt="pendind"
-        />
-        Solucionado</span
+      <span *ngIf="data.element.statusnovelty === 'Solucionado'" class="span-relative-new ml-2 normal-text"
+        ><img class="status-img" src="/assets/img/dashboard/icon-check-new.svg" alt="pendind" /> Solucionado</span
       >
-      <span
-        *ngIf="data.element.statusnovelty === 'En revisión'"
-        class="span-relative-new ml-2 normal-text"
-        ><img
-          class="status-img"
-          src="/assets/img/dashboard/icon-revision.svg"
-          alt="pendind"
-        />
-        En revisión</span
+      <span *ngIf="data.element.statusnovelty === 'En revisión'" class="span-relative-new ml-2 normal-text"
+        ><img class="status-img" src="/assets/img/dashboard/icon-revision.svg" alt="pendind" /> En revisión</span
       >
     </p>
   </div>
@@ -121,19 +80,9 @@
 <div class="mt-3" fxLayout="row" fxLayoutAlign="end">
   <form [formGroup]="dateForm" fxLayout="column" class="w-100">
     <mat-form-field class="selected-report">
-      <mat-placeholder class="label-up-text-selected"
-        >NUEVO ESTADO</mat-placeholder
-      >
-      <mat-select
-        id="tipoReport"
-        formControlName="status"
-        class="selected-report"
-      >
-        <mat-option
-          (click)="onChangeSelected(selected.titulo)"
-          *ngFor="let selected of selecteds"
-          value="{{ selected.titulo }}"
-        >
+      <mat-placeholder class="label-up-text-selected">NUEVO ESTADO</mat-placeholder>
+      <mat-select id="tipoReport" formControlName="status" class="selected-report">
+        <mat-option (click)="onChangeSelected(selected.titulo)" *ngFor="let selected of selecteds" value="{{ selected.titulo }}">
           <span>{{ selected.titulo }}</span>
         </mat-option>
       </mat-select>
@@ -141,28 +90,15 @@
 
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Respuesta</mat-label>
-      <textarea
-        formControlName="responsenovelty"
-        matInput
-        placeholder="Respuesta(opcional)"
-      ></textarea>
+      <textarea formControlName="responsenovelty" matInput placeholder="Respuesta(opcional)"></textarea>
     </mat-form-field>
-    <mat-error
-      id="maxName"
-      *ngIf="
-        dateForm.controls.responsenovelty.invalid &&
-        dateForm.controls.responsenovelty.errors.maxlength
-      "
-      >{{
-        'GENERIC.MAX_CHARACTERS'
-          | translate
-            : {
-                maxchar:
-                  dateForm.controls.responsenovelty.errors.maxlength
-                    .requiredLength
-              }
-      }}</mat-error
-    >
+    <mat-error id="maxName" *ngIf="dateForm.controls.responsenovelty.invalid && dateForm.controls.responsenovelty.errors.maxlength">{{
+      'GENERIC.MAX_CHARACTERS'
+        | translate
+          : {
+              maxchar: dateForm.controls.responsenovelty.errors.maxlength.requiredLength
+            }
+    }}</mat-error>
   </form>
 
   <span fxLayout="row" fxLayoutAlign="end end">

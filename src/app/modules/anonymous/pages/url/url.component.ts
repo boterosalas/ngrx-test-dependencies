@@ -13,12 +13,7 @@ export class UrlComponent implements OnInit {
   showMessage: boolean = false;
   show: boolean = true;
 
-  constructor(
-    private link: LinksService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private metaTagService: Meta
-  ) {
+  constructor(private link: LinksService, private route: ActivatedRoute, private router: Router, private metaTagService: Meta) {
     this.route.params.subscribe((param) => {
       this.code = param.shortCode;
     });
@@ -30,8 +25,7 @@ export class UrlComponent implements OnInit {
     this.metaTagService.addTags([
       {
         name: 'keywords',
-        content:
-          'clickam, exito.com, carulla.com, seguros, referidos, viajes, cashback ',
+        content: 'clickam, exito.com, carulla.com, seguros, referidos, viajes, cashback ',
       },
       {
         name: 'description',

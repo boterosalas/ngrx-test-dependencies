@@ -17,8 +17,8 @@ export class ManageComisionBussinessComponent implements OnInit {
   title: string;
   dataTip: FormGroup;
   dataEditTip: FormGroup;
-  pageIndex: number = 0;
-  pageTo: number = 20;
+  pageIndex = 0;
+  pageTo = 20;
   totalItems: number;
   newsUser: Array<any>;
   pageSize: number;
@@ -53,16 +53,9 @@ export class ManageComisionBussinessComponent implements OnInit {
       commissionTotal: '4.3%',
     },
   ];
-  displayedColumns: string[] = [
-    'code',
-    'nombreCat',
-    'comisionClik',
-    'comisionBus',
-    'comisionTotal',
-    'actions',
-  ];
+  displayedColumns: string[] = ['code', 'nombreCat', 'comisionClik', 'comisionBus', 'comisionTotal', 'actions'];
   image: string;
-  marketplace: boolean = false;
+  marketplace = false;
   idComision: string;
   private subscription: Subscription = new Subscription();
   constructor(
@@ -85,15 +78,10 @@ export class ManageComisionBussinessComponent implements OnInit {
       commisionEditBussiness: [null, Validators.required],
     });
     this.subscription = this.route.params.subscribe((route) => {
-      if (
-        route.id === undefined &&
-        route.titulo === undefined &&
-        route.imagen === undefined
-      ) {
+      if (route.id === undefined && route.titulo === undefined && route.imagen === undefined) {
         this.id = 1;
         this.title = 'exito';
-        this.image =
-          'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg';
+        this.image = 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg';
       } else {
         this.id = route.id;
         this.title = route.titulo;
@@ -106,7 +94,7 @@ export class ManageComisionBussinessComponent implements OnInit {
     this.searchUser('');
   }
   saveComisionCategory() {
-    let datos = {
+    const datos = {
       code: this.dataTip.controls.codCategory.value,
       description: this.dataTip.controls.nameCategory.value,
       commissionClicker: this.dataTip.controls.comisionClicker.value,
@@ -140,8 +128,7 @@ export class ManageComisionBussinessComponent implements OnInit {
             id: item.idcommission,
             marketplace: this.marketplace,
           })
-          .subscribe((resp) => {
-            //this.getBusinessData();
+          .subscribe(() => {
             this.searchUser(this.paginate, this.from, this.to);
           });
       }
@@ -157,14 +144,10 @@ export class ManageComisionBussinessComponent implements OnInit {
     const template = this.templateEditCategory;
     this.dataEditTip.controls.codEditCategory.setValue(element.code);
     this.dataEditTip.controls.nameEditCategory.setValue(element.description);
-    this.dataEditTip.controls.comisionEditClicker.setValue(
-      element.commissionclicker
-    );
-    this.dataEditTip.controls.commisionEditBussiness.setValue(
-      element.commissionbusiness
-    );
+    this.dataEditTip.controls.comisionEditClicker.setValue(element.commissionclicker);
+    this.dataEditTip.controls.commisionEditBussiness.setValue(element.commissionbusiness);
     this.idComision = element.idcommission;
-    let dialogRef1 = this.dialog.open(ModalGenericComponent, {
+    const dialogRef1 = this.dialog.open(ModalGenericComponent, {
       width: '450px',
       data: {
         title,
@@ -173,18 +156,15 @@ export class ManageComisionBussinessComponent implements OnInit {
         edit,
       },
     });
-    //this.subscription = dialogRef1.beforeClosed().subscribe(() => {
-    //this.getBusinessData();
-    //});
+
   }
   editSaveComisionCategory() {
-    let datos = {
+    const datos = {
       id: this.idComision,
       code: this.dataEditTip.controls.codEditCategory.value,
       description: this.dataEditTip.controls.nameEditCategory.value,
       commissionClicker: this.dataEditTip.controls.comisionEditClicker.value,
-      commissionBusiness:
-        this.dataEditTip.controls.commisionEditBussiness.value,
+      commissionBusiness: this.dataEditTip.controls.commisionEditBussiness.value,
       idBusiness: Number(this.id),
       marketplace: this.marketplace,
     };
@@ -203,7 +183,7 @@ export class ManageComisionBussinessComponent implements OnInit {
     const idBussiness = this.id;
     const edit = 0;
     const template = this.templateAddCategory;
-    let dialogRef1 = this.dialog.open(ModalGenericComponent, {
+    const dialogRef1 = this.dialog.open(ModalGenericComponent, {
       width: '450px',
       data: {
         title,
@@ -220,19 +200,13 @@ export class ManageComisionBussinessComponent implements OnInit {
     this.to = paginate.pageSize * (paginate.pageIndex + 1);
     this.searchUser(this.paginate, this.from, this.to);
   }
-  public searchUser(
-    term,
-    from = 1,
-    to = this.pageTo,
-    orderOrigin = '',
-    orderBy = ''
-  ) {
+  public searchUser(term, from = 1, to = this.pageTo, orderOrigin = '', orderBy = '') {
     if (term !== this.paginate) {
       this.paginate = term;
       this.pageIndex = 0;
     }
-    let idbussiness = this.id;
-    let marketplace = this.marketplace;
+    const idbussiness = this.id;
+    const marketplace = this.marketplace;
     const params = {
       term,
       from,
@@ -242,23 +216,18 @@ export class ManageComisionBussinessComponent implements OnInit {
       idbussiness,
       marketplace,
     };
-    //const params = { term: "playa", from: 1, to: 50, orderBy: "VERIFIED", idbussiness: idbussiness, marketplace: marketplace };
-    //idBusiness=1&marketplace=false&from=1&to=50&searchText=playa&orderBy=VERIFIED&ordination=ASC
-    this.subscription = this.content
-      .getComisionManage(params)
-      .subscribe((user: any) => {
-        //this.newsUser = user.objectResponse.novelties;
-        this.totalItems = user.total;
-        this.dataSource = user.categories;
-        //this.dataSource = new MatTableDataSource<any>(this.newsUser);
-      });
+
+    this.subscription = this.content.getComisionManage(params).subscribe((user: any) => {
+      this.totalItems = user.total;
+      this.dataSource = user.categories;
+    });
   }
   changeStatus() {
     this.searchUser(this.paginate, this.from, this.to);
   }
   sort(event) {
     let name = event.active.toUpperCase();
-    let direction = event.direction.toUpperCase();
+    const direction = event.direction.toUpperCase();
     if (direction === '') {
       name = '';
     }

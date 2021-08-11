@@ -45,10 +45,7 @@ export class BlogContentComponent implements OnInit {
     this.url = encodeURI(`${domain}`);
     this.valueLink = encodeURI(`${domain}`);
     this.dateForm = this.fb.group({
-      nameBussiness: [
-        null,
-        [Validators.required, Validators.pattern(this.emailPattern)],
-      ],
+      nameBussiness: [null, [Validators.required, Validators.pattern(this.emailPattern)]],
       namePerson: [null, [Validators.required, Validators.minLength(5)]],
     });
   }
@@ -127,10 +124,7 @@ export class BlogContentComponent implements OnInit {
     let formData = new FormData();
     formData.append('address', this.dateForm.controls.nameBussiness.value);
     formData.append('subject', 'Artículo compartido');
-    let mensaje =
-      this.dateForm.controls.namePerson.value +
-      ' cree que te puede interesar el siguiente post: ' +
-      this.url;
+    let mensaje = this.dateForm.controls.namePerson.value + ' cree que te puede interesar el siguiente post: ' + this.url;
     formData.append('message', mensaje);
     this.content.sendMessage(formData).subscribe((resp) => {
       this.openSnackBar('Se ha compartido el link', 'Cerrar');

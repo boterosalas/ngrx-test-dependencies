@@ -11,11 +11,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HeaderComponent } from './components/header/header.component';
-import {
-  MatListModule,
-  MatRippleModule,
-  MatMenuModule,
-} from '@angular/material';
+import { MatListModule, MatRippleModule, MatMenuModule } from '@angular/material';
 import { SociallinksComponent } from './components/sociallinks/sociallinks.component';
 import { TopComponent } from './components/top/top.component';
 import { GoogleChartsModule } from 'angular-google-charts';
@@ -112,10 +108,6 @@ import { RemoveTagsPipe } from 'src/app/pipes/remove-tags.pipe';
     DialogStoriesComponent,
     CardStoryComponent,
   ],
-  entryComponents: [
-    ModalGenericComponent,
-    PopupComponent,
-    DialogStoriesComponent,
-  ],
+  entryComponents: [ModalGenericComponent, PopupComponent, DialogStoriesComponent],
 })
 export class SharedModule {}

@@ -19,39 +19,25 @@ export interface PeriodicElementComision {
 })
 export class DialogCommissionComponent implements OnInit {
   dataSource: any;
-  disabledButton: boolean = true;
+  disabledButton = true;
   arrayComision: any;
   id: any;
   elemento: any;
   title: any;
-  displayedColumnsComision: string[] = [
-    'drag',
-    'bussiness',
-    'comision',
-    'button',
-  ];
+  displayedColumnsComision: string[] = ['drag', 'bussiness', 'comision', 'button'];
   image: any;
   @ViewChild('templateNewEdit', { static: false })
   templateDelete: TemplateRef<any>;
-  componentLector: boolean = true;
+  componentLector = true;
   @ViewChild('table2', { static: false })
   table2: MatTable<PeriodicElementComision>;
   private subscription: Subscription = new Subscription();
-  constructor(
-    private dialog: MatDialog,
-    private content: ContentService,
-    private route: ActivatedRoute
-  ) {
+  constructor(private dialog: MatDialog, private content: ContentService, private route: ActivatedRoute) {
     this.subscription = this.route.params.subscribe((route) => {
-      if (
-        route.id === undefined &&
-        route.titulo === undefined &&
-        route.imagen === undefined
-      ) {
+      if (route.id === undefined && route.titulo === undefined && route.imagen === undefined) {
         this.id = '1';
         this.title = 'exito';
-        this.image =
-          'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg';
+        this.image = 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg';
       } else {
         this.id = route.id;
         this.title = route.titulo;
@@ -72,7 +58,7 @@ export class DialogCommissionComponent implements OnInit {
     for (let i = 0; i < this.dataSource.length; i++) {
       this.dataSource[i].orderby = i + 1;
     }
-    //this.validation();
+
     this.saveComision();
   }
   validation(elemento: any) {
@@ -85,10 +71,9 @@ export class DialogCommissionComponent implements OnInit {
   updateComision() {
     this.content.getCommissionsData(this.id).subscribe((resp) => {
       this.arrayComision = resp;
-      let datosComision = Object.values(this.arrayComision);
+      const datosComision = Object.values(this.arrayComision);
       this.dataSource = datosComision[0];
       for (let index = 0; index < this.dataSource.length; index++) {
-        //delete this.dataSource[index].tab;
         this.dataSource[index].orderby = index;
       }
     });
@@ -111,8 +96,8 @@ export class DialogCommissionComponent implements OnInit {
         idBusiness: this.id,
       };
     }
-    let title = 'Nueva categoría';
-    let template = this.templateDelete;
+    const title = 'Nueva categoría';
+    const template = this.templateDelete;
     this.dialog.open(ModalGenericComponent, {
       data: {
         title,
@@ -138,8 +123,8 @@ export class DialogCommissionComponent implements OnInit {
   editCategory(element) {
     this.disabledButton = true;
     this.elemento = element;
-    let title = 'Editar categoría';
-    let template = this.templateDelete;
+    const title = 'Editar categoría';
+    const template = this.templateDelete;
     this.dialog.open(ModalGenericComponent, {
       data: {
         title,
@@ -165,13 +150,12 @@ export class DialogCommissionComponent implements OnInit {
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
         if (content.hasOwnProperty('id')) {
-          this.content.deleteComision(content.id).subscribe((resp) => {
+          this.content.deleteComision(content.id).subscribe(() => {
             this.updateComision();
             this.table2.renderRows();
           });
         } else {
           this.dataSource.splice(index, 1);
-          //this.validation()
           this.table2.renderRows();
         }
       }

@@ -1,13 +1,5 @@
 <div class="mat-elevation-z0 mt-4 mb-4 overflow-auto">
-  <table
-    mat-table
-    [dataSource]="
-      dataSource
-        | paginate
-          : { itemsPerPage: size, currentPage: p, totalItems: totalItems }
-    "
-    class="users-table"
-  >
+  <table mat-table [dataSource]="dataSource | paginate: { itemsPerPage: size, currentPage: p, totalItems: totalItems }" class="users-table">
     <!-- Product Name Column -->
     <ng-container matColumnDef="productname">
       <th mat-header-cell *matHeaderCellDef>
@@ -31,9 +23,7 @@
     <!-- Comissions Column -->
     <ng-container matColumnDef="comission">
       <th mat-header-cell *matHeaderCellDef class="text-center">
-        <span class="galano-bold">{{
-          'HISTORICAL.GENERATED_COMISSIONS' | translate
-        }}</span>
+        <span class="galano-bold">{{ 'HISTORICAL.GENERATED_COMISSIONS' | translate }}</span>
       </th>
       <td mat-cell class="text-center" *matCellDef="let element">
         {{ element.commission | currency: '':'symbol':'1.0-0' }}
@@ -43,9 +33,7 @@
     <!-- total Column -->
     <ng-container matColumnDef="total">
       <th mat-header-cell *matHeaderCellDef class="text-center">
-        <span class="galano-bold">{{
-          'HISTORICAL.TOTAL_SELL' | translate
-        }}</span>
+        <span class="galano-bold">{{ 'HISTORICAL.TOTAL_SELL' | translate }}</span>
       </th>
       <td mat-cell class="text-center" *matCellDef="let element">
         {{ element.products }}
@@ -72,18 +60,12 @@
           color="orange"
           (click)="infoProduct(dataSource[i])"
         >
-          <span
-            ngClass="gtmHistorialTablaLink{{ element.productname | trim }}"
-            >{{ 'PRODUCTS.GET_LINK' | translate }}</span
-          >
+          <span ngClass="gtmHistorialTablaLink{{ element.productname | trim }}">{{ 'PRODUCTS.GET_LINK' | translate }}</span>
         </button>
       </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr
-      mat-row
-      *matRowDef="let row; columns: displayedColumns; let i = index"
-    ></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
   </table>
 </div>

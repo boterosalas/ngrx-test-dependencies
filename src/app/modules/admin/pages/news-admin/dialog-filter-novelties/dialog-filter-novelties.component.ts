@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
@@ -9,35 +9,7 @@ import { ContentService } from 'src/app/services/content.service';
   templateUrl: './dialog-filter-novelties.component.html',
   styleUrls: ['./dialog-filter-novelties.component.scss'],
 })
-export class DialogFilterNoveltiesComponent implements OnInit {
-  constructor(private fb: FormBuilder, private content: ContentService) {}
-
-  ngOnInit() {
-    this.filterForm();
-    this.getAllBusiness();
-
-    let filterData = localStorage.getItem('formFilterNovelties');
-    let bussinesss = localStorage.getItem('bussinessNovelties');
-
-    if (filterData !== null) {
-      let obFr = JSON.parse(filterData);
-      this.filterNovelties.controls.status.setValue(obFr.status);
-      let startDate =
-        obFr.dateRange.startDate === null ? '' : obFr.dateRange.startDate;
-      let endDate =
-        obFr.dateRange.endDate === null ? '' : obFr.dateRange.endDate;
-      this.filterNovelties.controls.dateRange.setValue({
-        startDate: startDate,
-        endDate: endDate,
-      });
-    }
-
-    if (bussinesss !== null) {
-      let obbus = JSON.parse(bussinesss);
-      this.chipsBussiness = obbus;
-    }
-  }
-
+export class DialogFilterNoveltiesComponent implements OnInit, OnDestroy {
   locale = {
     locale: 'es',
     direction: 'ltr', // could be rtl
@@ -74,6 +46,32 @@ export class DialogFilterNoveltiesComponent implements OnInit {
   addOnBlur = true;
   @Output() objectSend = new EventEmitter();
   @Output() close = new EventEmitter();
+
+  constructor(private fb: FormBuilder, private content: ContentService) { }
+
+  ngOnInit() {
+    this.filterForm();
+    this.getAllBusiness();
+
+    const filterData = localStorage.getItem('formFilterNovelties');
+    const bussinesss = localStorage.getItem('bussinessNovelties');
+
+    if (filterData !== null) {
+      const obFr = JSON.parse(filterData);
+      this.filterNovelties.controls.status.setValue(obFr.status);
+      const startDate = obFr.dateRange.startDate === null ? '' : obFr.dateRange.startDate;
+      const endDate = obFr.dateRange.endDate === null ? '' : obFr.dateRange.endDate;
+      this.filterNovelties.controls.dateRange.setValue({
+        startDate: startDate,
+        endDate: endDate,
+      });
+    }
+
+    if (bussinesss !== null) {
+      const obbus = JSON.parse(bussinesss);
+      this.chipsBussiness = obbus;
+    }
+  }
 
   public getAllBusiness() {
     this.subscription = this.content.getAllBusiness().subscribe((resp) => {
@@ -116,32 +114,25 @@ export class DialogFilterNoveltiesComponent implements OnInit {
       this.chipsBussinessId.push(element.id);
     });
 
-    let validDateStart =
+    const validDateStart =
       this.filterNovelties.controls.dateRange.value.startDate === undefined ||
       this.filterNovelties.controls.dateRange.value.startDate === null ||
       this.filterNovelties.controls.dateRange.value.startDate === '';
-    let validDateEnd =
+    const validDateEnd =
       this.filterNovelties.controls.dateRange.value.endDate === undefined ||
       this.filterNovelties.controls.dateRange.value.endDate === null ||
       this.filterNovelties.controls.dateRange.value.endDate === '';
 
-    let data = {
-      dateStart: validDateStart
-        ? ''
-        : this.filterNovelties.controls.dateRange.value.startDate,
-      dateEnd: validDateEnd
-        ? ''
-        : this.filterNovelties.controls.dateRange.value.endDate,
+    const data = {
+      dateStart: validDateStart ? '' : this.filterNovelties.controls.dateRange.value.startDate,
+      dateEnd: validDateEnd ? '' : this.filterNovelties.controls.dateRange.value.endDate,
       state: this.filterNovelties.controls.status.value,
       business: this.chipsBussinessId,
     };
 
     this.objectSend.emit(data);
 
-    localStorage.setItem(
-      'formFilterNovelties',
-      JSON.stringify(this.filterNovelties.value)
-    );
+    localStorage.setItem('formFilterNovelties', JSON.stringify(this.filterNovelties.value));
   }
 
   public closeModal() {
@@ -153,12 +144,10 @@ export class DialogFilterNoveltiesComponent implements OnInit {
       this.chipsBussiness.push(val);
       localStorage.setItem('bussinessNovelties', JSON.stringify(val));
     } else {
-      if (this.chipsBussiness.includes(val) === false)
+      if (this.chipsBussiness.includes(val) === false) {
         this.chipsBussiness.push(val);
+      }
     }
-    localStorage.setItem(
-      'bussinessNovelties',
-      JSON.stringify(this.chipsBussiness)
-    );
+    localStorage.setItem('bussinessNovelties', JSON.stringify(this.chipsBussiness));
   }
 }

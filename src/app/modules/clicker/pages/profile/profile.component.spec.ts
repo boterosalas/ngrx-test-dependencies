@@ -7,10 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateModule } from '@ngx-translate/core';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import {
-  BrowserAnimationsModule,
-  NoopAnimationsModule,
-} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from 'src/app/services/user.service';
 import { of } from 'rxjs/internal/observable/of';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
@@ -89,10 +86,8 @@ describe('ProfileComponent', () => {
     component.userId = '260';
     component.id = '131516';
     component.sendFiles({
-      fileIdentificationCard1:
-        'data:application/octet-stream;base64, 84dq8d9qdqd',
-      fileIdentificationCard2:
-        'data:application/octet-stream;base64, dqdqdqsqsq',
+      fileIdentificationCard1: 'data:application/octet-stream;base64, 84dq8d9qdqd',
+      fileIdentificationCard2: 'data:application/octet-stream;base64, dqdqdqsqsq',
       fileBankCertificate: 'data:application/octet-stream;base64, ddp0d9aida0d',
     });
     expect(component.userId).not.toBeUndefined();

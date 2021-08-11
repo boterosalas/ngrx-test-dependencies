@@ -1,15 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import {
-  map,
-  tap,
-  distinctUntilChanged,
-  retry,
-  delay,
-  retryWhen,
-  take,
-} from 'rxjs/operators';
+import { map, tap, distinctUntilChanged, retry, delay, retryWhen, take } from 'rxjs/operators';
 import { ResponseService } from '../interfaces/response';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from './auth.service';
@@ -109,27 +101,19 @@ export class UserService {
     const token = localStorage.getItem('ACCESS_TOKEN');
     const authorization = token;
 
-    return this.http
-      .post(
-        `${this.url + this.apiActivateProfile}`,
-        { email: email },
-        this.httpOptions
-      )
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url + this.apiActivateProfile}`, { email: email }, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 
   getShortUrl(url: string) {
-    const apiShort = `${this.url}${this.apiShorUrl}?url=${encodeURIComponent(
-      url
-    )}`;
+    const apiShort = `${this.url}${this.apiShorUrl}?url=${encodeURIComponent(url)}`;
     return this.http.get(apiShort, this.httpOptions).pipe(
       map((url: any) => {
         return url.objectResponse;
@@ -138,116 +122,90 @@ export class UserService {
   }
 
   getBasicData() {
-    return this.http
-      .get(`${this.url}${this.apiGetBasicData}`, this.httpOptions)
-      .pipe(
-        map((user: any) => {
-          return user.objectResponse;
-        })
-      );
+    return this.http.get(`${this.url}${this.apiGetBasicData}`, this.httpOptions).pipe(
+      map((user: any) => {
+        return user.objectResponse;
+      })
+    );
   }
 
   getuserdata() {
-    return this.http
-      .get(`${this.url}${this.apiGetuserdata}`, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
-        ),
-        map((user: any) => {
-          return user.objectResponse;
-        })
-      );
+    return this.http.get(`${this.url}${this.apiGetuserdata}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((user: any) => {
+        return user.objectResponse;
+      })
+    );
   }
 
   public registerUser(userInfo: any) {
-    return this.http
-      .post(`${this.url}${this.apiCreateUser}`, userInfo, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url}${this.apiCreateUser}`, userInfo, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 
   public saveUserAcceptTermsReferrals() {
-    return this.http
-      .post(
-        `${this.url}${this.apiSaveUserAccepttermsReferrals}`,
-        {},
-        this.httpOptions
-      )
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url}${this.apiSaveUserAccepttermsReferrals}`, {}, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 
   public updateEmployees() {
-    return this.http
-      .post(`${this.url}${this.apiUpdateEmployees}`, {}, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url}${this.apiUpdateEmployees}`, {}, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 
   public getExternalUsers() {
-    return this.http
-      .get(`${this.url}${this.apiGetExternalUsers}`, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.get(`${this.url}${this.apiGetExternalUsers}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 
   public saveOnboarding(save: any) {
-    return this.http
-      .post(
-        `${this.url}${this.apiSaveUserOnboardingViewed}`,
-        { viewed: save },
-        this.httpOptions
-      )
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url}${this.apiSaveUserOnboardingViewed}`, { viewed: save }, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 
   public saveUserDevice(userid: string, token: string) {
-    return this.http.post(
-      `${this.url}${this.apiSaveUserDevice}`,
-      { userid: userid, device: token },
-      this.httpOptions
-    );
+    return this.http.post(`${this.url}${this.apiSaveUserDevice}`, { userid: userid, device: token }, this.httpOptions);
   }
 
   public uploadFiles(params: any) {
@@ -258,17 +216,15 @@ export class UserService {
       }),
     };
 
-    return this.http
-      .post(`${this.url}${this.apiUploadFiles}`, params, httpOptionsSet)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url}${this.apiUploadFiles}`, params, httpOptionsSet).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 
   public idType() {
@@ -286,10 +242,7 @@ export class UserService {
         observe: 'response',
       }),
     };
-    return this.http.get(
-      `${this.url}${this.apiDownloadFile}?identification=${identification}&typeDocument=${typeDocument}`,
-      httpOptions
-    );
+    return this.http.get(`${this.url}${this.apiDownloadFile}?identification=${identification}&typeDocument=${typeDocument}`, httpOptions);
   }
 
   public downloadFiles(data) {
@@ -314,264 +267,192 @@ export class UserService {
   }
 
   public validateEmployee(id: string, document: string) {
-    return this.http.get(
-      `${this.urlEmployee}validateEmployee?id=${id}&documentType=${document}`,
-      this.httpOptions
-    );
+    return this.http.get(`${this.urlEmployee}validateEmployee?id=${id}&documentType=${document}`, this.httpOptions);
   }
 
   public searchUsers(term?: any) {
-    return this.http
-      .get(
-        `${this.url}${this.apiUsers}?searchText=${term.term}&from=${term.from}&to=${term.to}`,
-        this.httpOptions
-      )
-      .pipe(
-        map((user: any) => {
-          return user.objectResponse;
-        })
-      );
+    return this.http.get(`${this.url}${this.apiUsers}?searchText=${term.term}&from=${term.from}&to=${term.to}`, this.httpOptions).pipe(
+      map((user: any) => {
+        return user.objectResponse;
+      })
+    );
   }
 
   public statusUser(id: any, value: boolean) {
-    return this.http
-      .post(
-        `${this.url}${this.apiDisableUser}`,
-        { userid: id, value },
-        this.httpOptions
-      )
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url}${this.apiDisableUser}`, { userid: id, value }, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 
   public updateUserEmail(userid: string, email: string) {
-    return this.http
-      .post(
-        `${this.url}${this.apiUpdateUserEmail}`,
-        { userid, email },
-        this.httpOptions
-      )
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url}${this.apiUpdateUserEmail}`, { userid, email }, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 
   public getBankAccountNumber(password: any) {
-    return this.http
-      .post(
-        `${this.url}${this.apigetBankAccountNumber}`,
-        { password },
-        this.httpOptions
-      )
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url}${this.apigetBankAccountNumber}`, { password }, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 
   public changeBankInformation(id: any, data: any) {
-    return this.http
-      .post(
-        `${this.url}${this.apichangeBankInformation}`,
-        data,
-        this.httpOptions
-      )
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url}${this.apichangeBankInformation}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 
   public updateUser(data: any) {
-    return this.http
-      .post(`${this.url}${this.apiUpdateUser}`, data, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url}${this.apiUpdateUser}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 
   public registeruserterms(id: any) {
-    return this.http
-      .post(
-        `${this.url}${this.apiRegisterUserTerms}`,
-        { idbusiness: id },
-        this.httpOptions
-      )
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url}${this.apiRegisterUserTerms}`, { idbusiness: id }, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 
   public comunitcations(id: any, value: boolean) {
-    return this.http
-      .post(
-        `${this.url}${this.apiComunications}`,
-        { userid: id, value },
-        this.httpOptions
-      )
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url}${this.apiComunications}`, { userid: id, value }, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 
   public verifiedUser(id: any, value: number) {
-    return this.http
-      .post(
-        `${this.url}${this.apiVerified}`,
-        { userid: id, verified: value },
-        this.httpOptions
-      )
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url}${this.apiVerified}`, { userid: id, verified: value }, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 
   public deleteUser(data: any) {
-    return this.http
-      .post(`${this.url}${this.apiDeleteUser}`, data, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url}${this.apiDeleteUser}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
     //`${this.url}${this.apiDeleteUser}`
   }
   public getReportGamification() {
-    return this.http
-      .get(
-        `${this.urlReports}${this.apiReporUserGamification}`,
-        this.httpOptions
-      )
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.get(`${this.urlReports}${this.apiReporUserGamification}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
   public saveNews(data: any) {
-    return this.http
-      .post(`${this.url}${this.apiSaveNews}`, data, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url}${this.apiSaveNews}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
     //`${this.url}${this.apiDeleteUser}`
   }
   public uploadFileNews(data: any) {
-    return this.http
-      .post(`${this.url}${this.apiUploadNews}`, data, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url}${this.apiUploadNews}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
     //`${this.url}${this.apiDeleteUser}`
   }
   public getAllNews(data: any) {
-    return this.http
-      .post(`${this.urlReports}${this.apiGetNews}`, data, this.httpOptions)
-      .pipe(
-        map((user: any) => {
-          return user.objectResponse;
-        })
-      );
+    return this.http.post(`${this.urlReports}${this.apiGetNews}`, data, this.httpOptions).pipe(
+      map((user: any) => {
+        return user.objectResponse;
+      })
+    );
   }
   public getExportNewsExcel(data: any) {
-    return this.http
-      .post(`${this.urlReports}${this.apiGetExcelNews}`, data, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.urlReports}${this.apiGetExcelNews}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
   public setStatus(data: any) {
-    return this.http
-      .post(`${this.url}${this.apiSetStatusNew}`, data, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url}${this.apiSetStatusNew}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
   public getHojaVida(data: any) {
     return this.http
-      .get(
-        `${this.urlReports}${this.apiReportLife}?&userid=${data.userId}&start=${data.start}&end=${data.end}`,
-        this.httpOptions
-      )
+      .get(`${this.urlReports}${this.apiReportLife}?&userid=${data.userId}&start=${data.start}&end=${data.end}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
@@ -584,10 +465,7 @@ export class UserService {
   }
   public getNovetlyUser() {
     return this.http
-      .get(
-        `${this.urlReports}${this.apiReportNovetly}?from=1&to=50&orderBy=CONSECUTIVE&ordination=DESC`,
-        this.httpOptions
-      )
+      .get(`${this.urlReports}${this.apiReportNovetly}?from=1&to=50&orderBy=CONSECUTIVE&ordination=DESC`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
@@ -599,189 +477,149 @@ export class UserService {
       );
   }
   public updateInfoClicker(data: any) {
-    return this.http
-      .post(`${this.url}${this.apiUpdateInfoClicker}`, data, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url}${this.apiUpdateInfoClicker}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
   public saveFeedback(data: any) {
-    return this.http
-      .post(`${this.url}${this.apiSaveFeedBack}`, data, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url}${this.apiSaveFeedBack}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
   public getReportCommets(params: any) {
     //Cambio la urlReports
-    return this.http
-      .get(
-        `${this.urlReports}${this.apiReportCambios}?&start=${params.start}&end=${params.end}`,
-        this.httpOptions
-      )
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.get(`${this.urlReports}${this.apiReportCambios}?&start=${params.start}&end=${params.end}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 
   public getDeleteCommetsRest(params: any) {
     //Cambio la urlReports
-    return this.http
-      .get(
-        `${this.urlReports}${this.apiDeleteComments}?&start=${params.start}&end=${params.end}`,
-        this.httpOptions
-      )
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.get(`${this.urlReports}${this.apiDeleteComments}?&start=${params.start}&end=${params.end}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 
   public getReportReferral(params: any) {
-    return this.http
-      .get(
-        `${this.urlReports}${this.apiReporReferral}?&start=${params.start}&end=${params.end}`,
-        this.httpOptions
-      )
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.get(`${this.urlReports}${this.apiReporReferral}?&start=${params.start}&end=${params.end}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 
   public getStatusVerification() {
-    return this.http
-      .get(`${this.url}${this.apiGetStatusVerification}`, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.get(`${this.url}${this.apiGetStatusVerification}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
   public postUpdateResponseAccountBank(data: any) {
-    return this.http
-      .post(
-        `${this.url}${this.apiUpdateResponseAccountBank}`,
-        data,
-        this.httpOptions
-      )
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url}${this.apiUpdateResponseAccountBank}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
   public getPermision() {
-    return this.http
-      .get(`${this.url + this.apiGetPermision}`, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
-        ),
-        map((resp: ResponseService) => {
-          return resp;
-        })
-      );
+    return this.http.get(`${this.url + this.apiGetPermision}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: ResponseService) => {
+        return resp;
+      })
+    );
   }
   public savePermision(data: any) {
-    return this.http
-      .post(`${this.url + this.apiSavePermision}`, data, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
-        ),
-        map((resp: ResponseService) => {
-          return resp;
-        })
-      );
+    return this.http.post(`${this.url + this.apiSavePermision}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: ResponseService) => {
+        return resp;
+      })
+    );
   }
 
   public deleteUserAdmin(data: any) {
-    return this.http
-      .post(`${this.url}${this.apiDeleteUserAdmin}`, data, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url}${this.apiDeleteUserAdmin}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 
   public addUserAdmin(data: any) {
-    return this.http
-      .post(`${this.url}${this.apiCreateUserAdmin}`, data, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.post(`${this.url}${this.apiCreateUserAdmin}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 
   public getUserInfoAditional(userId) {
-    return this.http
-      .get(
-        `${this.url}${this.apiUserInfoAditional}?userid=${userId}`,
-        this.httpOptions
-      )
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.get(`${this.url}${this.apiUserInfoAditional}?userid=${userId}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 }

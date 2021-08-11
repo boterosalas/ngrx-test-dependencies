@@ -5,24 +5,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import {
-  ReactiveFormsModule,
-  FormsModule,
-  FormGroup,
-  FormBuilder,
-} from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
-import {
-  NgxDaterangepickerMd,
-  LocaleService,
-  LOCALE_CONFIG,
-} from 'ngx-daterangepicker-material';
-import {
-  MatDatepickerModule,
-  MatDialog,
-  MatNativeDateModule,
-} from '@angular/material';
+import { NgxDaterangepickerMd, LocaleService, LOCALE_CONFIG } from 'ngx-daterangepicker-material';
+import { MatDatepickerModule, MatDialog, MatNativeDateModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AnonymousModule } from 'src/app/modules/anonymous/anonymous.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
@@ -37,18 +24,9 @@ moment.locale('es');
 describe('NewsAdminComponent', () => {
   let component: NewsAdminComponent;
   let fixture: ComponentFixture<NewsAdminComponent>;
-  const mockDialog = jasmine.createSpyObj('MatDialog', [
-    'open',
-    'closeAll',
-    'afterAllClosed',
-  ]);
-  const mockUserService = jasmine.createSpyObj('UserService', [
-    'getExportNewsExcel',
-    'getAllNews',
-  ]);
-  const mockLinksService = jasmine.createSpyObj('LinksService', [
-    'getkpiNovelties',
-  ]);
+  const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll', 'afterAllClosed']);
+  const mockUserService = jasmine.createSpyObj('UserService', ['getExportNewsExcel', 'getAllNews']);
+  const mockLinksService = jasmine.createSpyObj('LinksService', ['getkpiNovelties']);
   const getUserExcel = {
     state: 'Success',
     userMessage: 'se ha enviado un correo a test@h.com',
@@ -95,8 +73,7 @@ describe('NewsAdminComponent', () => {
         date: '2021-02-25',
         email: 'hamil@unicauca.edu.co',
         statusnovelty: 'Revision',
-        urlImage:
-          'https://d500.epimg.net/cincodias/imagenes/2018/11/13/lifestyle/1542113135_776401_1542116070_noticia_normal.jpg',
+        urlImage: 'https://d500.epimg.net/cincodias/imagenes/2018/11/13/lifestyle/1542113135_776401_1542116070_noticia_normal.jpg',
         datenovelty: '2020-02-04',
         businessdescription: 'Haceb',
         code: '12223444',
@@ -112,8 +89,7 @@ describe('NewsAdminComponent', () => {
         identification: '12121212',
         email: 'hamil@unicauca.edu.co',
         statusnovelty: 'Revision',
-        urlImage:
-          'https://d500.epimg.net/cincodias/imagenes/2018/11/13/lifestyle/1542113135_776401_1542116070_noticia_normal.jpg',
+        urlImage: 'https://d500.epimg.net/cincodias/imagenes/2018/11/13/lifestyle/1542113135_776401_1542116070_noticia_normal.jpg',
         datenovelty: '2020-02-04',
         businessdescription: 'Haceb',
         code: '12223444',
@@ -127,8 +103,7 @@ describe('NewsAdminComponent', () => {
         date: '2021-02-25',
         idclicker: 'santer457',
         identification: '12121212',
-        urlImage:
-          'https://d500.epimg.net/cincodias/imagenes/2018/11/13/lifestyle/1542113135_776401_1542116070_noticia_normal.jpg',
+        urlImage: 'https://d500.epimg.net/cincodias/imagenes/2018/11/13/lifestyle/1542113135_776401_1542116070_noticia_normal.jpg',
         email: 'hamil@unicauca.edu.co',
         statusnovelty: 'Solucionado',
         businessdescription: 'Haceb',

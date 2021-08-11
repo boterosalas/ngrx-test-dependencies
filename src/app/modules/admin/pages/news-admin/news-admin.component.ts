@@ -1,19 +1,12 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import {
-  MatDialog,
-  MatDialogRef,
-  MatPaginatorIntl,
-  MatSnackBar,
-  MatTableDataSource,
-} from '@angular/material';
+import { MatDialog, MatDialogRef, MatPaginatorIntl, MatSnackBar, MatTableDataSource } from '@angular/material';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { ResponseService } from 'src/app/interfaces/response';
 import { UserService } from 'src/app/services/user.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { LinksService } from 'src/app/services/links.service';
-//import { ModalGeneicComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { DialogNewsComponent } from '../../components/dialog-news/dialog-news.component';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 moment.locale('es');
@@ -24,11 +17,11 @@ moment.locale('es');
 })
 export class NewsAdminComponent implements OnInit {
   searchForm: FormGroup;
-  pageTo: number = 50;
+  pageTo = 50;
   paginate: string;
-  pageIndex: number = 0;
+  pageIndex = 0;
   totalItems: number;
-  pageSize: number = 50;
+  pageSize = 50;
   from: any;
   to: any;
   name: any;
@@ -37,6 +30,7 @@ export class NewsAdminComponent implements OnInit {
   @ViewChild('templateDialogFilter', { static: false })
   templateFilter: TemplateRef<any>;
   export = false;
+  dataSource: any;
   filterData = {
     searchText: '',
     from: null,
@@ -107,10 +101,7 @@ export class NewsAdminComponent implements OnInit {
       length = Math.max(length, 0);
       const startIndex = page * pageSize;
       // If the start index exceeds the list length, do not try and fix the end index to the end.
-      const endIndex =
-        startIndex < length
-          ? Math.min(startIndex + pageSize, length)
-          : startIndex + pageSize;
+      const endIndex = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize;
       return startIndex + 1 + ' de ' + endIndex + ' ítems de ' + length;
     };
   }
@@ -135,8 +126,6 @@ export class NewsAdminComponent implements OnInit {
     });
   }
 
-  dataSource: any;
-
   ngOnInit() {
     this.searchUser('');
     this.searchForm = this.fb.group({
@@ -153,28 +142,17 @@ export class NewsAdminComponent implements OnInit {
   }
 
   public getKPI() {
-    this.subscription = this.kpi
-      .getkpiNovelties(this.filterData)
-      .subscribe((resp) => {
-        this.items = this.items.map((item) => {
-          return {
-            ...item,
-            number:
-              item.code === 'effectiveness'
-                ? resp[item.code] * 100
-                : resp[item.code],
-          };
-        });
+    this.subscription = this.kpi.getkpiNovelties(this.filterData).subscribe((resp) => {
+      this.items = this.items.map((item) => {
+        return {
+          ...item,
+          number: item.code === 'effectiveness' ? resp[item.code] * 100 : resp[item.code],
+        };
       });
+    });
   }
 
-  public searchUser(
-    term,
-    from = 1,
-    to = this.pageTo,
-    orderOrigin = '',
-    orderBy = ''
-  ) {
+  public searchUser(term, from = 1, to = this.pageTo, orderOrigin = '', orderBy = '') {
     this.filterData.searchText = term;
     this.filterData.to = to;
     this.filterData.from = from;
@@ -186,12 +164,10 @@ export class NewsAdminComponent implements OnInit {
       this.pageIndex = 0;
     }
 
-    this.subscription = this.usersService
-      .getAllNews(this.filterData)
-      .subscribe((user: any) => {
-        this.totalItems = user.total;
-        this.dataSource = user.novelties;
-      });
+    this.subscription = this.usersService.getAllNews(this.filterData).subscribe((user: any) => {
+      this.totalItems = user.total;
+      this.dataSource = user.novelties;
+    });
   }
 
   public openDialog(element: any) {
@@ -213,26 +189,18 @@ export class NewsAdminComponent implements OnInit {
 
   public getReportExcel() {
     this.filterData.export = true;
-    this.usersService
-      .getExportNewsExcel(this.filterData)
-      .subscribe((responseExcel: ResponseService) => {
-        if (responseExcel.state === 'Success') {
-          this.openSnackBar(responseExcel.userMessage, 'Cerrar');
-        }
-      });
+    this.usersService.getExportNewsExcel(this.filterData).subscribe((responseExcel: ResponseService) => {
+      if (responseExcel.state === 'Success') {
+        this.openSnackBar(responseExcel.userMessage, 'Cerrar');
+      }
+    });
   }
 
   pagination(paginate: any) {
     this.pageIndex = paginate;
     this.from = this.pageSize * this.pageIndex + 1 - 50;
     this.to = this.pageSize * (this.pageIndex + 1) - 50;
-    this.searchUser(
-      this.paginate,
-      this.from,
-      this.to,
-      this.name,
-      this.direction
-    );
+    this.searchUser(this.paginate, this.from, this.to, this.name, this.direction);
   }
 
   sort(event) {
@@ -241,13 +209,7 @@ export class NewsAdminComponent implements OnInit {
     if (this.direction === '') {
       this.name = '';
     }
-    this.searchUser(
-      this.paginate,
-      this.from,
-      this.to,
-      this.name,
-      this.direction
-    );
+    this.searchUser(this.paginate, this.from, this.to, this.name, this.direction);
   }
 
   public openModalFilters() {
@@ -284,12 +246,10 @@ export class NewsAdminComponent implements OnInit {
 
     this.pageIndex = 0;
 
-    this.subscription = this.usersService
-      .getAllNews(this.filterData)
-      .subscribe((user: any) => {
-        this.totalItems = user.total;
-        this.dataSource = user.novelties;
-      });
+    this.subscription = this.usersService.getAllNews(this.filterData).subscribe((user: any) => {
+      this.totalItems = user.total;
+      this.dataSource = user.novelties;
+    });
 
     this.getKPI();
   }

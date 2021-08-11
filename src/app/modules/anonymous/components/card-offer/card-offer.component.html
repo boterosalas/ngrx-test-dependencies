@@ -1,20 +1,11 @@
 <div fxLayout="row" fxLayoutAlign="start start" @simpleFadeAnimation>
-  <mat-card
-    fxLayout="column"
-    fxFlex="100"
-    class="mt-2 mb-2"
-    fxLayoutAlign="center center"
-  >
+  <mat-card fxLayout="column" fxFlex="100" class="mt-2 mb-2" fxLayoutAlign="center center">
     <mat-card-content class="w-100">
       <div>
         <img mat-card-image class="radius" src="{{ image }}" alt="{{ alt }}" />
       </div>
 
-      <h3
-        class="gray regular truncate"
-        id="{{ id }}"
-        matTooltip="{{ productName }}"
-      >
+      <h3 class="gray regular truncate" id="{{ id }}" matTooltip="{{ productName }}">
         {{ productName }}
       </h3>
 

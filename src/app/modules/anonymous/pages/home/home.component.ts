@@ -1,26 +1,10 @@
-import {
-  Component,
-  OnInit,
-  HostBinding,
-  HostListener,
-  OnDestroy,
-  ViewChild,
-  TemplateRef,
-  ElementRef,
-} from '@angular/core';
+import { Component, OnInit, HostBinding, HostListener, OnDestroy, ViewChild, TemplateRef, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { UtilsService } from 'src/app/services/utils.service';
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-  group,
-} from '@angular/animations';
+import { trigger, state, style, transition, animate, group } from '@angular/animations';
 import { AuthService } from 'src/app/services/auth.service';
 import decode from 'jwt-decode';
 import { ContentService } from 'src/app/services/content.service';
@@ -45,13 +29,7 @@ import { NewBusinessFormComponent } from '../../components/new-business-form/new
       transition(':leave', [
         style({ height: '*', opacity: 1 }),
 
-        group([
-          animate(300, style({ height: 0 })),
-          animate(
-            '600ms ease-in-out',
-            style({ transform: 'translateY(-1000px)' })
-          ),
-        ]),
+        group([animate(300, style({ height: 0 })), animate('600ms ease-in-out', style({ transform: 'translateY(-1000px)' }))]),
       ]),
     ]),
     trigger('simpleFadeAnimation', [
@@ -168,8 +146,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.metaTagService.addTags([
       {
         name: 'keywords',
-        content:
-          'clickam, exito.com, carulla.com, seguros, referidos, viajes, cashback ',
+        content: 'clickam, exito.com, carulla.com, seguros, referidos, viajes, cashback ',
       },
       {
         name: 'description',
@@ -327,26 +304,20 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscription = this.auth.isLogged$.subscribe((val) => {
       let token = localStorage.getItem('ACCESS_TOKEN');
       if (!!val || token !== null) {
-        this.subscription = this.content
-          .getBusinessClicker()
-          .subscribe((bussiness) => {
-            this.bussinessClicker = bussiness;
-          });
+        this.subscription = this.content.getBusinessClicker().subscribe((bussiness) => {
+          this.bussinessClicker = bussiness;
+        });
       }
     });
   }
 
   public getOffers() {
-    this.subscription = this.content
-      .getOffersbyType({ id: 'OFERTA', admin: false })
-      .subscribe((resp) => {
-        this.offersWeb = resp;
-      });
-    this.subscription = this.content
-      .getOffersbyType({ id: 'CARROUSEL', admin: false })
-      .subscribe((resp) => {
-        this.sliderWeb = resp;
-      });
+    this.subscription = this.content.getOffersbyType({ id: 'OFERTA', admin: false }).subscribe((resp) => {
+      this.offersWeb = resp;
+    });
+    this.subscription = this.content.getOffersbyType({ id: 'CARROUSEL', admin: false }).subscribe((resp) => {
+      this.sliderWeb = resp;
+    });
   }
 
   public bussinessNavigation(bussiness) {
@@ -456,17 +427,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public sendReferalsTerm() {
-    this.user
-      .saveUserAcceptTermsReferrals()
-      .subscribe((resp: ResponseService) => {
-        this.stepTerms = true;
-        this.newTermsHTML = false;
-        this.activateButton = false;
-        this.dialog2.closeAll();
-        this.newTerms = true;
-        this.showModalPayment();
-        this.openSnackBar(resp.userMessage, 'Cerrar');
-      });
+    this.user.saveUserAcceptTermsReferrals().subscribe((resp: ResponseService) => {
+      this.stepTerms = true;
+      this.newTermsHTML = false;
+      this.activateButton = false;
+      this.dialog2.closeAll();
+      this.newTerms = true;
+      this.showModalPayment();
+      this.openSnackBar(resp.userMessage, 'Cerrar');
+    });
   }
 
   /**

@@ -11,11 +11,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { LinksService } from 'src/app/services/links.service';
 import { of } from 'rxjs/internal/observable/of';
 import * as moment from 'moment';
-import {
-  NgxDaterangepickerMd,
-  LOCALE_CONFIG,
-  LocaleService,
-} from 'ngx-daterangepicker-material';
+import { NgxDaterangepickerMd, LOCALE_CONFIG, LocaleService } from 'ngx-daterangepicker-material';
 import { config } from 'process';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
@@ -24,10 +20,7 @@ describe('AuditComponent', () => {
   let component: AuditComponent;
   let fixture: ComponentFixture<AuditComponent>;
 
-  const mockLinksService = jasmine.createSpyObj('LinksService', [
-    'getAuditoria',
-    'getAuditoriaDatosUser',
-  ]);
+  const mockLinksService = jasmine.createSpyObj('LinksService', ['getAuditoria', 'getAuditoriaDatosUser']);
 
   const audit = {
     state: 'Success',

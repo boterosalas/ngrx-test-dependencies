@@ -13,9 +13,7 @@ describe('ComissionTableComponent', () => {
   let component: ComissionTableComponent;
   let fixture: ComponentFixture<ComissionTableComponent>;
 
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'getCommissions',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getCommissions']);
 
   const table = {
     'exito.com': [
@@ -88,8 +86,7 @@ describe('ComissionTableComponent', () => {
         tab: 'exito.com',
         idbusiness: 1,
         commission: '1.6%',
-        description:
-          'Audio y video: Accesorios de TV y audio, DVD, teatro en casa, portables audio, teléfonos, equipos de sonido.',
+        description: 'Audio y video: Accesorios de TV y audio, DVD, teatro en casa, portables audio, teléfonos, equipos de sonido.',
         id: 10,
       },
       {
@@ -110,8 +107,7 @@ describe('ComissionTableComponent', () => {
         tab: 'exito.com',
         idbusiness: 1,
         commission: '0.8%',
-        description:
-          'Grandes electrodomésticos: Lavado y secado, refrigeración máquinas de coser y cocción.',
+        description: 'Grandes electrodomésticos: Lavado y secado, refrigeración máquinas de coser y cocción.',
         id: 13,
       },
       {
@@ -132,8 +128,7 @@ describe('ComissionTableComponent', () => {
         tab: 'exito.com',
         idbusiness: 1,
         commission: '0.6%',
-        description:
-          'Informática: Cámaras fotográficas y filmadoras, computadores, tablets, monitores, e impresión',
+        description: 'Informática: Cámaras fotográficas y filmadoras, computadores, tablets, monitores, e impresión',
         id: 16,
       },
     ],
@@ -207,8 +202,7 @@ describe('ComissionTableComponent', () => {
         tab: 'carulla.com',
         idbusiness: 2,
         commission: '1.6%',
-        description:
-          'Audio y video: Accesorios de TV y audio, DVD, teatro en casa, portables audio, teléfonos, equipos de sonido.',
+        description: 'Audio y video: Accesorios de TV y audio, DVD, teatro en casa, portables audio, teléfonos, equipos de sonido.',
         id: 26,
       },
       {
@@ -229,8 +223,7 @@ describe('ComissionTableComponent', () => {
         tab: 'carulla.com',
         idbusiness: 2,
         commission: '0.8%',
-        description:
-          'Grandes electrodomésticos: Lavado y secado, refrigeración máquinas de coser y cocción.',
+        description: 'Grandes electrodomésticos: Lavado y secado, refrigeración máquinas de coser y cocción.',
         id: 29,
       },
       {
@@ -251,8 +244,7 @@ describe('ComissionTableComponent', () => {
         tab: 'carulla.com',
         idbusiness: 2,
         commission: '0.6%',
-        description:
-          'Informática: Cámaras fotográficas y filmadoras, computadores, tablets, monitores, e impresión',
+        description: 'Informática: Cámaras fotográficas y filmadoras, computadores, tablets, monitores, e impresión',
         id: 32,
       },
     ],
@@ -380,13 +372,7 @@ describe('ComissionTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        TranslateModule.forRoot(),
-        AppMaterialModule,
-        BrowserAnimationsModule,
-        SharedModule,
-        RouterTestingModule,
-      ],
+      imports: [TranslateModule.forRoot(), AppMaterialModule, BrowserAnimationsModule, SharedModule, RouterTestingModule],
       declarations: [ComissionTableComponent],
       providers: [{ provide: ContentService, useValue: mockContentService }],
     }).compileComponents();

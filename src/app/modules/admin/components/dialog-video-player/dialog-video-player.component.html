@@ -1,19 +1,12 @@
 <div>
   <div fxLayout="column" fxLayoutAlign="center">
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <a class="close-button-relative" matRipple (click)="onNoClick()"
-        ><mat-icon class="close">close</mat-icon></a
-      >
+      <a class="close-button-relative" matRipple (click)="onNoClick()"><mat-icon class="close">close</mat-icon></a>
     </div>
   </div>
   <div mat-dialog-content class="dialog-height">
     <div>
-      <video
-        style="width: 100%"
-        class="w-image"
-        [src]="data.urlVideo"
-        controls
-      ></video>
+      <video style="width: 100%" class="w-image" [src]="data.urlVideo" controls></video>
     </div>
   </div>
 </div>

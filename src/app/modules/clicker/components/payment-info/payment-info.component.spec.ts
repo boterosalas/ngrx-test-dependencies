@@ -1,12 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
-import {
-  FormsModule,
-  ReactiveFormsModule,
-  FormGroup,
-  FormBuilder,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of, throwError, BehaviorSubject } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -32,10 +27,7 @@ class MockUserService extends UserService {
 describe("('PaymentInfoComponent', ", () => {
   let component: PaymentInfoComponent;
   let fixture: ComponentFixture<PaymentInfoComponent>;
-  const mockMasterDataService = jasmine.createSpyObj('MasterDataService', [
-    'getDepartments',
-    'getBanks',
-  ]);
+  const mockMasterDataService = jasmine.createSpyObj('MasterDataService', ['getDepartments', 'getBanks']);
 
   const mockUserService = jasmine.createSpyObj('UserService', ['uploadFiles']);
 

@@ -1,10 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  TemplateRef,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -33,14 +27,14 @@ export class StoriesAdminComponent implements OnInit {
   title: string;
   active: boolean;
   image: string;
-  nameFile: string = '';
+  nameFile = '';
   file: any;
-  showErrorImg: boolean = false;
+  showErrorImg = false;
   dataReal = [];
   validFormat: boolean;
   extension: string;
   deleteStory = [];
-  selectAllStories: string = 'Seleccionar todos';
+  selectAllStories = 'Seleccionar todos';
   private subscription: Subscription = new Subscription();
 
   stories = [];
@@ -55,15 +49,10 @@ export class StoriesAdminComponent implements OnInit {
     private user: UserService
   ) {
     this.subscription = this.route.params.subscribe((route) => {
-      if (
-        route.id === undefined &&
-        route.titulo === undefined &&
-        route.imagen === undefined
-      ) {
+      if (route.id === undefined && route.titulo === undefined && route.imagen === undefined) {
         this.id = '1';
         this.title = 'exito';
-        this.image =
-          'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg';
+        this.image = 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg';
       } else {
         this.id = route.id;
         this.title = route.titulo;
@@ -88,51 +77,45 @@ export class StoriesAdminComponent implements OnInit {
     });
   }
   public getStories() {
-    this.subscription = this.content
-      .getStories(true)
-      .subscribe((resp: ResponseService) => {
-        if (resp.state === 'Success') {
-          if (resp.objectResponse) {
-            this.stories = [];
-            this.dataReal = [];
-            resp.objectResponse.forEach((story) => {
-              if (story.idbusiness === Number.parseInt(this.id)) {
-                let bussiness = this.bussiness.filter(
-                  (b) => b.id === story.idbusiness
-                )[0];
+    this.subscription = this.content.getStories(true).subscribe((resp: ResponseService) => {
+      if (resp.state === 'Success') {
+        if (resp.objectResponse) {
+          this.stories = [];
+          this.dataReal = [];
+          resp.objectResponse.forEach((story) => {
+            if (story.idbusiness === Number.parseInt(this.id)) {
+              const bussiness = this.bussiness.filter((b) => b.id === story.idbusiness)[0];
 
-                const extensionsImg = ['jpeg', 'jpg', 'png'];
-                let isImage = extensionsImg.includes(
-                  this.getExtensionFileName(story.imageurl)
-                );
+              const extensionsImg = ['jpeg', 'jpg', 'png'];
+              const isImage = extensionsImg.includes(this.getExtensionFileName(story.imageurl));
 
-                this.stories.push({
-                  id: story.id,
-                  idbusiness: story.idbusiness,
-                  name: story.description,
-                  businessName: bussiness ? bussiness.description : '',
-                  infoAditional: story.infoaditional,
-                  image: story.imageurl,
-                  isImage,
-                  businessImage: bussiness ? bussiness.imageurl : '',
-                  businessCode: bussiness ? bussiness.code : '',
-                  link: story.link,
-                  date: new Date(story.date),
-                  stateView: !story.new,
-                  pause: true,
-                });
+              this.stories.push({
+                id: story.id,
+                idbusiness: story.idbusiness,
+                name: story.description,
+                businessName: bussiness ? bussiness.description : '',
+                infoAditional: story.infoaditional,
+                image: story.imageurl,
+                isImage,
+                businessImage: bussiness ? bussiness.imageurl : '',
+                businessCode: bussiness ? bussiness.code : '',
+                link: story.link,
+                date: new Date(story.date),
+                stateView: !story.new,
+                pause: true,
+              });
 
-                this.dataReal.push({
-                  id: story.id,
-                  dataR: false,
-                });
-              }
-            });
-          }
-        } else {
-          this.openSnackBar(resp.userMessage, 'Cerrar');
+              this.dataReal.push({
+                id: story.id,
+                dataR: false,
+              });
+            }
+          });
         }
-      });
+      } else {
+        this.openSnackBar(resp.userMessage, 'Cerrar');
+      }
+    });
   }
   public openDialogStories(index: number = 0) {
     this.dialog.open(DialogStoriesComponent, {
@@ -151,7 +134,7 @@ export class StoriesAdminComponent implements OnInit {
   }
   private getExtensionFileName(nameFileS: string) {
     if (nameFileS) {
-      let splitExtS = nameFileS.split('.');
+      const splitExtS = nameFileS.split('.');
       return splitExtS[splitExtS.length - 1].toLocaleLowerCase();
     }
 
@@ -177,9 +160,9 @@ export class StoriesAdminComponent implements OnInit {
     }
   }
   public deleteEvery() {
-    let id = '';
-    let title = '';
-    let template = this.templateDelete;
+    const id = '';
+    const title = '';
+    const template = this.templateDelete;
     this.dialog.open(ModalGenericComponent, {
       maxWidth: '600px',
       data: {
@@ -195,8 +178,8 @@ export class StoriesAdminComponent implements OnInit {
   }
 
   public getExtensionFile(nameFile: string, getSize: number) {
-    let splitExt = nameFile.split('.');
-    let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
+    const splitExt = nameFile.split('.');
+    const getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
     this.validFormat = false;
     if (getExt === 'jpg' || getExt === 'jpeg' || getExt === 'mp4') {
       this.validFormat = true;
@@ -228,13 +211,13 @@ export class StoriesAdminComponent implements OnInit {
 
   public onFileChangeFiles(event) {
     const files = event.target.files;
-    let nameFileStory = files[0].name;
-    let readerStory = new FileReader();
-    let sizeFile = files[0].size;
+    const nameFileStory = files[0].name;
+    const readerStory = new FileReader();
+    const sizeFile = files[0].size;
     if (files && files.length) {
       const [fileStory] = files;
-      let fileBlob = new Blob([fileStory]);
-      let file = new File([fileBlob], nameFileStory);
+      const fileBlob = new Blob([fileStory]);
+      const file = new File([fileBlob], nameFileStory);
       readerStory.readAsDataURL(file);
       readerStory.onload = () => {
         this.getExtensionFile(nameFileStory, sizeFile);
@@ -269,7 +252,7 @@ export class StoriesAdminComponent implements OnInit {
   }
 
   public saveStory() {
-    let datos = [
+    const datos = [
       {
         idBusiness: this.id,
         infoAditional: this.dataAddStory.controls.commission.value,
@@ -299,18 +282,16 @@ export class StoriesAdminComponent implements OnInit {
         this.deleteStory.push(this.dataReal[i].id);
       }
     }
-    this.content
-      .deleteStories(this.deleteStory)
-      .subscribe((resp: ResponseService) => {
-        if (resp.state === 'Success') {
-          this.getStories();
-          this.active = false;
-          this.dialog.closeAll();
-          this.selectAllStories = 'Seleccionar todos';
-        } else {
-          this.openSnackBar(resp.userMessage, 'Cerrar');
-        }
-      });
+    this.content.deleteStories(this.deleteStory).subscribe((resp: ResponseService) => {
+      if (resp.state === 'Success') {
+        this.getStories();
+        this.active = false;
+        this.dialog.closeAll();
+        this.selectAllStories = 'Seleccionar todos';
+      } else {
+        this.openSnackBar(resp.userMessage, 'Cerrar');
+      }
+    });
   }
   public cancelDelete() {
     this.dialog.closeAll();

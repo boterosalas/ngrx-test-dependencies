@@ -22,11 +22,7 @@ describe('BlogAdminComponent', () => {
     Status: 'Success',
     objectResponse: { blogs: [{ id: 1 }, { id: 2 }] },
   };
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'getBlogsAdmin',
-    'activeBlog',
-    'deleteBlog',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getBlogsAdmin', 'activeBlog', 'deleteBlog']);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [BlogAdminComponent],

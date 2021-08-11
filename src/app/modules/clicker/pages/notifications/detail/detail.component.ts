@@ -15,11 +15,7 @@ export class DetailComponent implements OnInit {
   date: any;
   content: any;
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private _content: ContentService
-  ) {
+  constructor(private router: Router, private route: ActivatedRoute, private _content: ContentService) {
     route.params.subscribe((data) => {
       this.idnotification = data.idnotification;
       this.id = [data.id];
@@ -31,18 +27,14 @@ export class DetailComponent implements OnInit {
   }
 
   public getNotification() {
-    this._content
-      .getNotificationDetailAdmin(this.idnotification)
-      .subscribe((notification: ResponseService) => {
-        this.title = notification.objectResponse.title;
-        this.content = notification.objectResponse.content;
-        this.date = notification.objectResponse.datepublish;
-      });
+    this._content.getNotificationDetailAdmin(this.idnotification).subscribe((notification: ResponseService) => {
+      this.title = notification.objectResponse.title;
+      this.content = notification.objectResponse.content;
+      this.date = notification.objectResponse.datepublish;
+    });
   }
 
   public deleteNotication() {
-    this._content
-      .deleteNotificationUser(this.id)
-      .subscribe(() => this.router.navigate(['/notificaciones']));
+    this._content.deleteNotificationUser(this.id).subscribe(() => this.router.navigate(['/notificaciones']));
   }
 }

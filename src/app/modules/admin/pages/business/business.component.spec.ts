@@ -16,18 +16,13 @@ describe('BusinessComponent', () => {
   let component: BusinessComponent;
   let fixture: ComponentFixture<BusinessComponent>;
 
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'businessExcel',
-    'saveActiveBusiness',
-    'getAllBusiness',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['businessExcel', 'saveActiveBusiness', 'getAllBusiness']);
 
   let allBusiness = [
     {
       id: 1,
       code: 'exito',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg',
       infoaditional: 'Hasta 9.6% de ganancia',
       description: 'Almacenes Éxito',
       orderby: 1,
@@ -36,8 +31,7 @@ describe('BusinessComponent', () => {
     {
       id: 14,
       code: 'movil-exito',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-movil-exito.svg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-movil-exito.svg',
       infoaditional: 'Ahora 10% de comisión',
       description: 'Móvil Éxito',
       orderby: 5,
@@ -46,8 +40,7 @@ describe('BusinessComponent', () => {
     {
       id: 3,
       code: 'seguros',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.svg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.svg',
       infoaditional: 'Hasta $32.000 de ganancia',
       description: 'Seguros Éxito',
       orderby: 3,
@@ -56,8 +49,7 @@ describe('BusinessComponent', () => {
     {
       id: 4,
       code: 'viajes',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-viajes.svg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-viajes.svg',
       infoaditional: 'Hasta $40.000 de ganancia',
       description: 'Viajes Éxito',
       orderby: 4,
@@ -66,8 +58,7 @@ describe('BusinessComponent', () => {
     {
       id: 5,
       code: 'wesura',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-wesura.svg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-wesura.svg',
       infoaditional: 'Hasta 12.000 de ganancia',
       description: 'Wesura',
       orderby: 6,

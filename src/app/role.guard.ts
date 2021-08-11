@@ -16,10 +16,7 @@ export class RoleGuard implements CanActivate {
       const token = localStorage.getItem('ACCESS_TOKEN');
       // decode the token to get its payload
       const tokenPayload = decode(token);
-      if (
-        tokenPayload.role !== expectedRole &&
-        tokenPayload.role !== superRole
-      ) {
+      if (tokenPayload.role !== expectedRole && tokenPayload.role !== superRole) {
         this.router.navigate(['inicio']);
         return false;
       }

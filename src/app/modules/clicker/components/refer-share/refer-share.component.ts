@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter,
-  ViewChild,
-  ElementRef,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, Input } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ContentService } from 'src/app/services/content.service';
 import { TokenService } from 'src/app/services/token.service';
@@ -28,11 +20,7 @@ export class ReferShareComponent implements OnInit {
   tokenInfo: any;
   idClicker: string;
 
-  constructor(
-    private fb: FormBuilder,
-    private token: TokenService,
-    private content: ContentService
-  ) {}
+  constructor(private fb: FormBuilder, private token: TokenService, private content: ContentService) {}
 
   ngOnInit() {
     this.generateUrl();
@@ -43,9 +31,7 @@ export class ReferShareComponent implements OnInit {
     this.tokenInfo = this.token.userInfo();
     this.idClicker = this.tokenInfo.idclicker;
     let domain = document.location.origin;
-    this.urlWhatsapp = encodeURI(
-      `${domain}/#/inicio?code=${this.idClicker.replace(' ', '%20')}`
-    );
+    this.urlWhatsapp = encodeURI(`${domain}/#/inicio?code=${this.idClicker.replace(' ', '%20')}`);
     this.url = encodeURI(`${domain}/#/inicio?code=${this.idClicker}`);
     this.formLink = this.fb.group({
       link: [this.url],

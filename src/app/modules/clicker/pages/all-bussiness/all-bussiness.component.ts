@@ -18,11 +18,7 @@ export class AllBussinessComponent implements OnInit, OnDestroy {
   userId: any;
   message: any;
 
-  constructor(
-    public router: Router,
-    public auth: AuthService,
-    private content: ContentService
-  ) {}
+  constructor(public router: Router, public auth: AuthService, private content: ContentService) {}
 
   ngOnInit() {
     this.getBussiness();

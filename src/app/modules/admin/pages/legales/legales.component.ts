@@ -110,13 +110,9 @@ export class LegalesComponent implements OnInit {
         this.termsForm.controls.title.setValue(this.textoTerminos);
         this.termsForm.controls.termsEditor.setValue(this.htmlContentTerminos);
         this.protectionForm.controls.title.setValue(this.textoProteccion);
-        this.protectionForm.controls.termsEditor.setValue(
-          this.htmlContentProteccion
-        );
+        this.protectionForm.controls.termsEditor.setValue(this.htmlContentProteccion);
         this.transparencyForm.controls.title.setValue(this.textoTransparencia);
-        this.transparencyForm.controls.termsEditor.setValue(
-          this.htmlContentTransparencia
-        );
+        this.transparencyForm.controls.termsEditor.setValue(this.htmlContentTransparencia);
         this.refersForm.controls.title.setValue(this.textoPrograma);
         this.refersForm.controls.termsEditor.setValue(this.htmlContentPrograma);
       }, 500);
@@ -166,7 +162,7 @@ export class LegalesComponent implements OnInit {
   }
 
   detectChanges() {
-    let valueEditor = this.termsForm.controls.termsEditor.value;
+    const valueEditor = this.termsForm.controls.termsEditor.value;
     if (this.htmlContentTerminos === valueEditor) {
       this.changeTerms = true;
     } else {
@@ -175,7 +171,7 @@ export class LegalesComponent implements OnInit {
   }
 
   detectChangesProtection() {
-    let valueEditor = this.protectionForm.controls.termsEditor.value;
+    const valueEditor = this.protectionForm.controls.termsEditor.value;
     if (this.htmlContentProteccion === valueEditor) {
       this.changeProtection = true;
     } else {
@@ -184,7 +180,7 @@ export class LegalesComponent implements OnInit {
   }
 
   detectChangesTransparency() {
-    let valueEditor = this.transparencyForm.controls.termsEditor.value;
+    const valueEditor = this.transparencyForm.controls.termsEditor.value;
     if (this.htmlContentTransparencia === valueEditor) {
       this.changeTransparency = true;
     } else {
@@ -193,7 +189,7 @@ export class LegalesComponent implements OnInit {
   }
 
   detectChangesRefer() {
-    let valueEditor = this.refersForm.controls.termsEditor.value;
+    const valueEditor = this.refersForm.controls.termsEditor.value;
     if (this.htmlContentPrograma === valueEditor) {
       this.changeRefer = true;
     } else {
@@ -213,26 +209,20 @@ export class LegalesComponent implements OnInit {
 
   saveLegal(elemento) {
     if (elemento === '1') {
-      let titleTerminos = this.termsForm.controls.title.value;
-      let contentTerminos = this.termsForm.controls.termsEditor.value;
+      const titleTerminos = this.termsForm.controls.title.value;
+      const contentTerminos = this.termsForm.controls.termsEditor.value;
       this.saveStatus(1, 'TerminosCondiciones', titleTerminos, contentTerminos);
     } else if (elemento === '2') {
-      let titleProtection = this.protectionForm.controls.title.value;
-      let contentProtection = this.protectionForm.controls.termsEditor.value;
+      const titleProtection = this.protectionForm.controls.title.value;
+      const contentProtection = this.protectionForm.controls.termsEditor.value;
       this.saveStatus(2, 'ProteccionDatos', titleProtection, contentProtection);
     } else if (elemento === '3') {
-      let titleTransparency = this.transparencyForm.controls.title.value;
-      let contentTransparency =
-        this.transparencyForm.controls.termsEditor.value;
-      this.saveStatus(
-        3,
-        'Transparencia',
-        titleTransparency,
-        contentTransparency
-      );
+      const titleTransparency = this.transparencyForm.controls.title.value;
+      const contentTransparency = this.transparencyForm.controls.termsEditor.value;
+      this.saveStatus(3, 'Transparencia', titleTransparency, contentTransparency);
     } else if (elemento === '4') {
-      let titleRefer = this.refersForm.controls.title.value;
-      let contentRefer = this.refersForm.controls.termsEditor.value;
+      const titleRefer = this.refersForm.controls.title.value;
+      const contentRefer = this.refersForm.controls.termsEditor.value;
       this.saveStatus(4, 'ProgramaReferidos', titleRefer, contentRefer);
     } else {
       console.warn('Ocurrio algo extraño');

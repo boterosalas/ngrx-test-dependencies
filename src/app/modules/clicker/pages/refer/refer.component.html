@@ -3,11 +3,7 @@
   img="/assets/img/banners/banner-refiere-pc.jpg"
   imgMobile="/assets/img/banners/banner-refiere-mobile.jpg"
 ></app-banner>
-<app-back-navigation
-  fxHide.gt-xs="true"
-  title="Referir"
-  (close)="goback()"
-></app-back-navigation>
+<app-back-navigation fxHide.gt-xs="true" title="Referir" (close)="goback()"></app-back-navigation>
 
 <div class="container mt-2 refer-tabs">
   <mat-tab-group>
@@ -17,11 +13,7 @@
         <span>{{ 'REFER.REFER' | translate }}</span>
       </ng-template>
       <div>
-        <app-refer-share
-          #share
-          (shareMobile)="shareEvent($event)"
-          (urlClicker)="copyInputMessage($event)"
-        ></app-refer-share>
+        <app-refer-share #share (shareMobile)="shareEvent($event)" (urlClicker)="copyInputMessage($event)"></app-refer-share>
         <app-refer-email (email)="sendEmail($event)"></app-refer-email>
       </div>
     </mat-tab>
@@ -32,12 +24,7 @@
         <span>{{ 'REFER.MY_REFERS' | translate }}</span>
       </ng-template>
       <app-table-refer [dataSource]="dataSource"></app-table-refer>
-      <mat-paginator
-        [length]="totalItems"
-        [pageSize]="pageSize"
-        [pageIndex]="pageIndex"
-        (page)="pagination($event)"
-      ></mat-paginator>
+      <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageIndex]="pageIndex" (page)="pagination($event)"></mat-paginator>
     </mat-tab>
   </mat-tab-group>
   <div
@@ -50,10 +37,5 @@
             }
     }}"
   ></div>
-  <div
-    innerHtml="{{
-      'REFER.TERMS'
-        | translate: { amount: amount | currency: '':'symbol':'1.0-0' }
-    }}"
-  ></div>
+  <div innerHtml="{{ 'REFER.TERMS' | translate: { amount: amount | currency: '':'symbol':'1.0-0' } }}"></div>
 </div>

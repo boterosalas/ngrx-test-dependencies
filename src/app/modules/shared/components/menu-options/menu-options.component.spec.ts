@@ -1,9 +1,4 @@
-import {
-  async,
-  ComponentFixture,
-  TestBed,
-  inject,
-} from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
 import { MenuOptionsComponent } from './menu-options.component';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -21,10 +16,7 @@ describe('MenuOptionsComponent', () => {
   let component: MenuOptionsComponent;
   let fixture: ComponentFixture<MenuOptionsComponent>;
 
-  const mockUtilsService = jasmine.createSpyObj('UtilsService', [
-    'showRegisterForm',
-    'hideMenu',
-  ]);
+  const mockUtilsService = jasmine.createSpyObj('UtilsService', ['showRegisterForm', 'hideMenu']);
 
   let menuAnymous = {
     state: 'Success',

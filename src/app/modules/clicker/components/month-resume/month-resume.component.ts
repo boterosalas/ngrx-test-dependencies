@@ -11,12 +11,7 @@ import { TokenService } from 'src/app/services/token.service';
   styleUrls: ['./month-resume.component.scss'],
 })
 export class MonthResumeComponent implements OnInit, OnDestroy {
-  constructor(
-    private link: LinksService,
-    private user: UserService,
-    private auth: AuthService,
-    private token: TokenService
-  ) {}
+  constructor(private link: LinksService, private user: UserService, private auth: AuthService, private token: TokenService) {}
 
   linksCreated: string;
   identification: string;

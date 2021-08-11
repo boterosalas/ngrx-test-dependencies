@@ -18,11 +18,7 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
   bussiness: any;
   userId: string;
 
-  constructor(
-    private user: UserService,
-    private dialog: MatDialog,
-    private content: ContentService
-  ) {}
+  constructor(private user: UserService, private dialog: MatDialog, private content: ContentService) {}
 
   private subscription: Subscription = new Subscription();
 
@@ -47,14 +43,10 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
       if (data.state === 'Success') {
         if (data.objectResponse) {
           data.objectResponse.forEach((storyS) => {
-            let bussinessStory = this.bussiness.filter(
-              (b) => b.id === storyS.idbusiness
-            )[0];
+            let bussinessStory = this.bussiness.filter((b) => b.id === storyS.idbusiness)[0];
 
             const extensionsImg = ['jpg', 'jpeg', 'png'];
-            let isImage = extensionsImg.includes(
-              this.getExtension(storyS.imageurl)
-            );
+            let isImage = extensionsImg.includes(this.getExtension(storyS.imageurl));
 
             let objectStory = {
               idbusiness: storyS.idbusiness,
@@ -74,18 +66,12 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
 
             this.stories.push(objectStory);
 
-            if (
-              !this.storiesBusiness.some(
-                (x) => x.idbusiness === storyS.idbusiness
-              )
-            ) {
+            if (!this.storiesBusiness.some((x) => x.idbusiness === storyS.idbusiness)) {
               this.storiesBusiness.push({
                 idbusiness: storyS.idbusiness,
                 businessImage: bussinessStory ? bussinessStory.imageurl : '',
                 businessName: bussinessStory ? bussinessStory.description : '',
-                stateView: data.objectResponse
-                  .filter((x) => x.idbusiness === storyS.idbusiness)
-                  .some((x) => !x.new),
+                stateView: data.objectResponse.filter((x) => x.idbusiness === storyS.idbusiness).some((x) => !x.new),
                 pause: true,
               });
             }

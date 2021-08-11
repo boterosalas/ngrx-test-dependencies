@@ -51,19 +51,9 @@ describe('HomeComponent', () => {
     'saveUserAcceptTermsReferrals',
     'saveFeedback',
   ]);
-  const mockAuthService = jasmine.createSpyObj('AuthService', [
-    'login',
-    'isLoggedIn',
-    'isLogged$',
-  ]);
-  const mockUtilsService = jasmine.createSpyObj('UtilsService', [
-    'showRegisterForm',
-    'showloginForm',
-  ]);
-  const mockMasterService = jasmine.createSpyObj('MasterDataService', [
-    'getTerms',
-    'setTerms',
-  ]);
+  const mockAuthService = jasmine.createSpyObj('AuthService', ['login', 'isLoggedIn', 'isLogged$']);
+  const mockUtilsService = jasmine.createSpyObj('UtilsService', ['showRegisterForm', 'showloginForm']);
+  const mockMasterService = jasmine.createSpyObj('MasterDataService', ['getTerms', 'setTerms']);
   const mockContentService = jasmine.createSpyObj('ContentService', [
     'getNews',
     'getOffersbyType',
@@ -90,8 +80,7 @@ describe('HomeComponent', () => {
     state: 'Success',
     userMessage: null,
     objectResponse: {
-      token:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc…VzIn0.Bcsm-qVHHtRcLlQae_5tVwGpgbPQJkCEQ97ZbwRxz_4',
+      token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc…VzIn0.Bcsm-qVHHtRcLlQae_5tVwGpgbPQJkCEQ97ZbwRxz_4',
     },
   };
 
@@ -129,10 +118,8 @@ describe('HomeComponent', () => {
   let popups = [
     {
       title: 'Popup número 1',
-      imageUrlWeb:
-        'https://dev-realidad-aumentada.pantheonsite.io/sites/default/files/2020-05/Slider-Inicio-13-Web-Bronzini_0.svg',
-      imageUrlMobile:
-        'https://dev-realidad-aumentada.pantheonsite.io/sites/default/files/2020-05/Slider-Inicio-10-Web-SOAT-Carro_2.svg',
+      imageUrlWeb: 'https://dev-realidad-aumentada.pantheonsite.io/sites/default/files/2020-05/Slider-Inicio-13-Web-Bronzini_0.svg',
+      imageUrlMobile: 'https://dev-realidad-aumentada.pantheonsite.io/sites/default/files/2020-05/Slider-Inicio-10-Web-SOAT-Carro_2.svg',
       imageAltWeb: 'Popup número 1',
       imageAltMobile: 'Popup número 1 mobile',
       link: 'http://example.com',
@@ -143,8 +130,7 @@ describe('HomeComponent', () => {
     {
       id: 1,
       code: 'exito',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.png',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.png',
       infoaditional: 'Hasta 9.6% de ganancia',
       description: 'Almacenes Éxito',
       orderby: 1,
@@ -152,8 +138,7 @@ describe('HomeComponent', () => {
     {
       id: 2,
       code: 'carulla',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-carulla.png',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-carulla.png',
       infoaditional: 'Hasta 9.6% de ganancia',
       description: 'Almacenes Carulla',
       orderby: 2,
@@ -161,8 +146,7 @@ describe('HomeComponent', () => {
     {
       id: 3,
       code: 'seguros',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.png',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.png',
       infoaditional: 'Hasta $32.000 de ganancia',
       description: 'Seguros Éxito',
       orderby: 3,
@@ -170,8 +154,7 @@ describe('HomeComponent', () => {
     {
       id: 4,
       code: 'viajes',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-viajes.png',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-viajes.png',
       infoaditional: 'Hasta $40.000 de ganancia',
       description: 'Viajes Éxito',
       orderby: 4,
@@ -179,8 +162,7 @@ describe('HomeComponent', () => {
     {
       id: 5,
       code: 'wesura',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-wesura.png',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-wesura.png',
       infoaditional: 'Hasta 12.000 de ganancia',
       description: 'Tu seguro',
       orderby: 5,
@@ -211,107 +193,91 @@ describe('HomeComponent', () => {
   let news = {
     mobile: [
       {
-        imageurl:
-          'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-1-Mobile-Bienvenida.jpg',
+        imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-1-Mobile-Bienvenida.jpg',
         description: 'Bienvenido a Clickam',
         link: 'https://www.exito.com/?utm_source=clickam&utm_medium=referral&utm_campaign=',
         business: 'exito',
       },
       {
-        imageurl:
-          'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-2-Mobile-Colchones-Paraiso.jpg',
+        imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-2-Mobile-Colchones-Paraiso.jpg',
         description: 'Colchones Paraiso',
         link: 'https://www.exito.com/search?_query=colchones%20paraiso&utm_source=clickam&utm_medium=referral&utm_campaign=',
         business: 'exito',
       },
       {
-        imageurl:
-          'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-3-Mobile-Arkitect.jpg',
+        imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-3-Mobile-Arkitect.jpg',
         description: 'Arkitect',
         link: 'https://www.exito.com/search?_query=arkitect&utm_source=clickam&utm_medium=referral&utm_campaign=',
         business: 'exito',
       },
       {
-        imageurl:
-          'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-4-Mobile-Imusa.jpg',
+        imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-4-Mobile-Imusa.jpg',
         description: 'IMUSA',
         link: 'https://www.exito.com/search/zimusa?_query=imusa&map=s,brand&utm_source=clickam&utm_medium=referral&utm_campaign=',
         business: 'exito',
       },
       {
-        imageurl:
-          'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-5-Mobile-Gef-PuntoBlanco.jpg',
+        imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-5-Mobile-Gef-PuntoBlanco.jpg',
         description: 'Gef y Punto Blanco',
         link: 'https://www.exito.com/2738?map=productClusterIds&order=OrderByBestDiscountDESC&utm_source=clickam&utm_medium=referral&utm_campaign=',
         business: 'exito',
       },
       {
-        imageurl:
-          'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-6-Mobile-exito-com.jpg',
+        imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-6-Mobile-exito-com.jpg',
         description: 'Ofertas de exito.com',
         link: 'https://www.exito.com/1259?map=productClusterIds&utm_source=clickam&utm_medium=referral&utm_campaign=',
         business: 'exito',
       },
       {
-        imageurl:
-          'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-7-Mobile-Nike-Fila-mas.jpg',
-        description:
-          'Nike, Fila, reebok, Under Armour, SKECHERS, BRONZINI ACTIVE',
+        imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-7-Mobile-Nike-Fila-mas.jpg',
+        description: 'Nike, Fila, reebok, Under Armour, SKECHERS, BRONZINI ACTIVE',
         link: 'https://www.exito.com/2244?map=productClusterIds&utm_source=clickam&utm_medium=referral&utm_campaign=',
         business: 'exito',
       },
       {
-        imageurl:
-          'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-8-Mobile-Finlandek.jpg',
+        imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-8-Mobile-Finlandek.jpg',
         description: 'Finlandek',
         link: 'https://www.exito.com/search/zfinlandek/zfinlandek-select?_query=finlandek&map=s,brand,brand&utm_source=clickam&utm_medium=referral&utm_campaign=',
         business: 'exito',
       },
       {
-        imageurl:
-          'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-9-Mobile-Levis.jpg',
+        imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-9-Mobile-Levis.jpg',
         description: 'Levis',
         link: 'https://www.exito.com/2245?map=productClusterIds&utm_source=clickam&utm_medium=referral&utm_campaign=',
         business: 'exito',
       },
       {
-        imageurl:
-          'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-10-Mobile-SOAT-Carro.jpg',
+        imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-10-Mobile-SOAT-Carro.jpg',
         description: 'SOAT Carro',
         link: 'https://www.segurosexito.com/soat/p?utm_source=clickam&utm_medium=referral&utm_campaign=',
         business: 'seguros',
       },
       {
-        imageurl:
-          'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-11-Mobile-Brahma-Aeroflex.jpg',
+        imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-11-Mobile-Brahma-Aeroflex.jpg',
         description: 'Brahma y Aeroflex',
         link: 'https://www.exito.com/931?map=productClusterIds&utm_source=clickam&utm_medium=referral&utm_campaign=',
         business: 'exito',
       },
       {
-        imageurl:
-          'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-12-Mobile-Lenovo.jpg',
+        imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-12-Mobile-Lenovo.jpg',
         description: 'Lenovo',
         link: 'https://www.exito.com/search/zlenovo?_query=lenovo&map=s,brand&utm_source=clickam&utm_medium=referral&utm_campaign=',
         business: 'exito',
       },
       {
-        imageurl:
-          'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-13-Mobile-Bronzini.jpg',
+        imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-13-Mobile-Bronzini.jpg',
         description: 'Bronzini',
         link: 'https://www.exito.com/search?_query=bronzini&utm_source=clickam&utm_medium=referral&utm_campaign=',
         business: 'exito',
       },
       {
-        imageurl:
-          'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-14-Mobile-Haceb.jpg',
+        imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-14-Mobile-Haceb.jpg',
         description: 'HACEB',
         link: 'https://www.exito.com/search/zhaceb?_query=HACEB&map=s,brand&utm_source=clickam&utm_medium=referral&utm_campaign=',
         business: 'exito',
       },
       {
-        imageurl:
-          'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-15-Mobile-Huawei.jpg',
+        imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-15-Mobile-Huawei.jpg',
         description: 'HUAWEI',
         link: 'https://www.exito.com/2118/huawei?bgy_leap=1&map=productClusterIds,b&pauta=t&utm_source=clickam&utm_medium=referral&utm_campaign=',
         business: 'exito',
@@ -322,107 +288,91 @@ describe('HomeComponent', () => {
 
   let offers = [
     {
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-1-Mobile-Bienvenida.jpg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-1-Mobile-Bienvenida.jpg',
       description: 'Bienvenido a Clickam',
       link: 'https://www.exito.com/?utm_source=clickam&utm_medium=referral&utm_campaign=',
       business: 'exito',
     },
     {
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-2-Mobile-Colchones-Paraiso.jpg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-2-Mobile-Colchones-Paraiso.jpg',
       description: 'Colchones Paraiso',
       link: 'https://www.exito.com/search?_query=colchones%20paraiso&utm_source=clickam&utm_medium=referral&utm_campaign=',
       business: 'exito',
     },
     {
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-3-Mobile-Arkitect.jpg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-3-Mobile-Arkitect.jpg',
       description: 'Arkitect',
       link: 'https://www.exito.com/search?_query=arkitect&utm_source=clickam&utm_medium=referral&utm_campaign=',
       business: 'exito',
     },
     {
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-4-Mobile-Imusa.jpg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-4-Mobile-Imusa.jpg',
       description: 'IMUSA',
       link: 'https://www.exito.com/search/zimusa?_query=imusa&map=s,brand&utm_source=clickam&utm_medium=referral&utm_campaign=',
       business: 'exito',
     },
     {
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-5-Mobile-Gef-PuntoBlanco.jpg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-5-Mobile-Gef-PuntoBlanco.jpg',
       description: 'Gef y Punto Blanco',
       link: 'https://www.exito.com/2738?map=productClusterIds&order=OrderByBestDiscountDESC&utm_source=clickam&utm_medium=referral&utm_campaign=',
       business: 'exito',
     },
     {
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-6-Mobile-exito-com.jpg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-6-Mobile-exito-com.jpg',
       description: 'Ofertas de exito.com',
       link: 'https://www.exito.com/1259?map=productClusterIds&utm_source=clickam&utm_medium=referral&utm_campaign=',
       business: 'exito',
     },
     {
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-7-Mobile-Nike-Fila-mas.jpg',
-      description:
-        'Nike, Fila, reebok, Under Armour, SKECHERS, BRONZINI ACTIVE',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-7-Mobile-Nike-Fila-mas.jpg',
+      description: 'Nike, Fila, reebok, Under Armour, SKECHERS, BRONZINI ACTIVE',
       link: 'https://www.exito.com/2244?map=productClusterIds&utm_source=clickam&utm_medium=referral&utm_campaign=',
       business: 'exito',
     },
     {
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-8-Mobile-Finlandek.jpg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-8-Mobile-Finlandek.jpg',
       description: 'Finlandek',
       link: 'https://www.exito.com/search/zfinlandek/zfinlandek-select?_query=finlandek&map=s,brand,brand&utm_source=clickam&utm_medium=referral&utm_campaign=',
       business: 'exito',
     },
     {
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-9-Mobile-Levis.jpg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-9-Mobile-Levis.jpg',
       description: 'Levis',
       link: 'https://www.exito.com/2245?map=productClusterIds&utm_source=clickam&utm_medium=referral&utm_campaign=',
       business: 'exito',
     },
     {
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-10-Mobile-SOAT-Carro.jpg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-10-Mobile-SOAT-Carro.jpg',
       description: 'SOAT Carro',
       link: 'https://www.segurosexito.com/soat/p?utm_source=clickam&utm_medium=referral&utm_campaign=',
       business: 'seguros',
     },
     {
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-11-Mobile-Brahma-Aeroflex.jpg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-11-Mobile-Brahma-Aeroflex.jpg',
       description: 'Brahma y Aeroflex',
       link: 'https://www.exito.com/931?map=productClusterIds&utm_source=clickam&utm_medium=referral&utm_campaign=',
       business: 'exito',
     },
     {
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-12-Mobile-Lenovo.jpg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-12-Mobile-Lenovo.jpg',
       description: 'Lenovo',
       link: 'https://www.exito.com/search/zlenovo?_query=lenovo&map=s,brand&utm_source=clickam&utm_medium=referral&utm_campaign=',
       business: 'exito',
     },
     {
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-13-Mobile-Bronzini.jpg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-13-Mobile-Bronzini.jpg',
       description: 'Bronzini',
       link: 'https://www.exito.com/search?_query=bronzini&utm_source=clickam&utm_medium=referral&utm_campaign=',
       business: 'exito',
     },
     {
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-14-Mobile-Haceb.jpg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-14-Mobile-Haceb.jpg',
       description: 'HACEB',
       link: 'https://www.exito.com/search/zhaceb?_query=HACEB&map=s,brand&utm_source=clickam&utm_medium=referral&utm_campaign=',
       business: 'exito',
     },
     {
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-15-Mobile-Huawei.jpg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/slider-mobile/Slider-Inicio-15-Mobile-Huawei.jpg',
       description: 'HUAWEI',
       link: 'https://www.exito.com/2118/huawei?bgy_leap=1&map=productClusterIds,b&pauta=t&utm_source=clickam&utm_medium=referral&utm_campaign=',
       business: 'exito',
@@ -653,9 +603,7 @@ describe('HomeComponent', () => {
       fixture = TestBed.createComponent(HomeComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
-      mockUserService.activateProfile.and.returnValue(
-        throwError(invalidRquest)
-      );
+      mockUserService.activateProfile.and.returnValue(throwError(invalidRquest));
       mockAuthService.isLoggedIn.and.returnValue(false);
     });
 

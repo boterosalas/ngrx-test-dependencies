@@ -34,8 +34,7 @@ export class CommissionClickamComponent implements OnInit {
     },
     {
       name: '¿Cuándo se considera una compra efectiva por el negocio?',
-      route:
-        '/centro-de-ayuda/comisiones/cuando-se-considera-una-compra-efectiva-por-el-negocio',
+      route: '/centro-de-ayuda/comisiones/cuando-se-considera-una-compra-efectiva-por-el-negocio',
       icon: '/assets/img/ayuda/comisiones/compra-efectiva.svg',
     },
   ];

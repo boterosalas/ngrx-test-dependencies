@@ -11,10 +11,7 @@
     </mat-card-subtitle>
 
     <div class="card-group__actions" *ngIf="edit">
-      <i
-        class="tio-edit style-icon cursor-pointer"
-        (click)="editNotification(notification)"
-      ></i>
+      <i class="tio-edit style-icon cursor-pointer" (click)="editNotification(notification)"></i>
       <img
         class="cursor-pointer"
         src="/assets/img/dashboard/icon-remove-comision.svg"
@@ -24,10 +21,7 @@
     </div>
 
     <div class="card-group__actions" *ngIf="notification.url !== null && !edit">
-      <i
-        class="tio-download_from_cloud style-icon cursor-pointer"
-        (click)="downloadFile(notification)"
-      ></i>
+      <i class="tio-download_from_cloud style-icon cursor-pointer" (click)="downloadFile(notification)"></i>
     </div>
   </mat-card-header>
 </mat-card>

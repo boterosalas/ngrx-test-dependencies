@@ -145,10 +145,7 @@ export class AditionalInfoFormComponent implements OnInit, OnDestroy {
     this.profesionalForm = this.fb.group({
       occupation: [this.occupationOb['id'], Validators.required],
       fixedIncome: [this.fixedIncomeOb['id'], Validators.required],
-      OtherIncome: [
-        this.otherIncomeInfo,
-        [Validators.maxLength(8), Validators.pattern(this.numberPattern)],
-      ],
+      OtherIncome: [this.otherIncomeInfo, [Validators.maxLength(8), Validators.pattern(this.numberPattern)]],
     });
   }
 
@@ -178,18 +175,15 @@ export class AditionalInfoFormComponent implements OnInit, OnDestroy {
 
   editInfo() {
     this.userInfo.birthDate = this.personalForm.controls.birthDate.value;
-    this.userInfo.maritalStatus =
-      this.personalForm.controls.maritalStatus.value;
+    this.userInfo.maritalStatus = this.personalForm.controls.maritalStatus.value;
     this.userInfo.gender = this.personalForm.controls.gender.value;
-    this.userInfo.educationLevel =
-      this.personalForm.controls.educationLevel.value;
+    this.userInfo.educationLevel = this.personalForm.controls.educationLevel.value;
     this.userInfo.occupation = this.profesionalForm.controls.occupation.value;
     this.userInfo.fixedIncome = this.profesionalForm.controls.fixedIncome.value;
     this.userInfo.OtherIncome = this.profesionalForm.controls.OtherIncome.value;
     this.userInfo.stratum = this.livingForm.controls.stratum.value;
     this.userInfo.typeHousing = this.livingForm.controls.typeHousing.value;
-    this.userInfo.numberPeopleLive =
-      this.livingForm.controls.numberPeopleLive.value;
+    this.userInfo.numberPeopleLive = this.livingForm.controls.numberPeopleLive.value;
     this.userInfo.dependents = this.livingForm.controls.dependant.value;
     this.userInfo.mobility = this.livingForm.controls.mobility.value;
     this.userInfo.receiveCommunications = this.receiveCommunications;

@@ -170,11 +170,6 @@ const routes: Routes = [
     AnonymousModule,
     NgxPaginationModule,
   ],
-  entryComponents: [
-    DialogComponent,
-    DialogEditComponent,
-    DialogHistoryComponent,
-    DialogImagePlayerComponent,
-  ],
+  entryComponents: [DialogComponent, DialogEditComponent, DialogHistoryComponent, DialogImagePlayerComponent],
 })
 export class ClickerModule {}

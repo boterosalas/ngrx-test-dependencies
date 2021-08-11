@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-  TemplateRef,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { DialogNavigationGroupComponent } from '../dialog-navigation-group/dialog-navigation-group.component';
@@ -31,7 +25,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
   dialogRef: MatDialogRef<any>;
   currentSection: any;
   currentLink: any = {};
-  isInvalidAddSection: boolean = false;
+  isInvalidAddSection = false;
 
   constructor(private dialog: MatDialog, public auth: AuthService) {}
 
@@ -45,7 +39,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
 
   dropItem(event: CdkDragDrop<any>) {
     moveItemInArray(this.links, event.previousIndex, event.currentIndex);
-    let dataSourceSend = [];
+    const dataSourceSend = [];
     for (let i = 0; i < this.links.length; i++) {
       this.links[i].orderby = i + 1;
       dataSourceSend.push({
@@ -57,12 +51,8 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
   }
 
   dropSection(event: CdkDragDrop<any>) {
-    moveItemInArray(
-      this.sectionsLinks,
-      event.previousIndex,
-      event.currentIndex
-    );
-    let dataSourceSend = [];
+    moveItemInArray(this.sectionsLinks, event.previousIndex, event.currentIndex);
+    const dataSourceSend = [];
     for (let i = 0; i < this.sectionsLinks.length; i++) {
       this.sectionsLinks[i].orderby = i + 1;
       dataSourceSend.push({
@@ -148,7 +138,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
   }
 
   deleteNavigationSectionService() {
-    let datos = [this.currentSection.id];
+    const datos = [this.currentSection.id];
     this.auth.deleteGroup(datos).subscribe((resp: ResponseService) => {
       if (resp.state === 'Success') {
         this.dialog.closeAll();
@@ -224,7 +214,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
   }
 
   deleteNavigationItemService() {
-    let idMenu = [this.currentLink.Id];
+    const idMenu = [this.currentLink.Id];
     this.auth.deleteMenu(idMenu).subscribe((resp: ResponseService) => {
       if (resp.state === 'Success') {
         this.dialog.closeAll();

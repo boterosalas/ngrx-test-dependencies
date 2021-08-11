@@ -45,8 +45,7 @@ describe('MedalComponent', () => {
       {
         icon: '/assets/img/gamification/icon-informacion-adicional.svg',
         title: 'Información Adicional',
-        description:
-          'Completa esta información para el funcionamiento de tu cuenta',
+        description: 'Completa esta información para el funcionamiento de tu cuenta',
         complete: false,
         progress: 4,
         totalProgress: 12,

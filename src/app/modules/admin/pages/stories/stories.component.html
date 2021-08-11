@@ -2,46 +2,27 @@
   <mat-form-field class="selected-business separate">
     <mat-placeholder class="selected-business">NEGOCIO</mat-placeholder>
     <mat-select id="business" class="selected-business">
-      <mat-option
-        (click)="onChangeSelected(item)"
-        *ngFor="let item of business"
-        value="{{ item.id }}"
-      >
+      <mat-option (click)="onChangeSelected(item)" *ngFor="let item of business" value="{{ item.id }}">
         <span>{{ item.description }}</span>
       </mat-option>
     </mat-select>
   </mat-form-field>
 
   <span class="select-all">
-    <button
-      mat-raised-button
-      color="orange"
-      (click)="selectAll()"
-      [disabled]="activeSelectAll"
-    >
+    <button mat-raised-button color="orange" (click)="selectAll()" [disabled]="activeSelectAll">
       {{ titleSelect }} todos <i class="tio-all_done pl-2"></i>
     </button>
   </span>
 
   <span class="delete-all">
-    <button
-      mat-raised-button
-      color="red"
-      (click)="deletetAll()"
-      [disabled]="titleSelect === 'Seleccionar'"
-    >
+    <button mat-raised-button color="red" (click)="deletetAll()" [disabled]="titleSelect === 'Seleccionar'">
       Borrar <i class="tio-delete pl-2"></i>
     </button>
   </span>
 
   <div class="w-100" fxLayout="row" fxLayoutAlign="end center">
     <span class="new-story">
-      <button
-        mat-raised-button
-        color="orange"
-        (click)="newStory()"
-        [disabled]="newStoryActiveButton"
-      >
+      <button mat-raised-button color="orange" (click)="newStory()" [disabled]="newStoryActiveButton">
         Nueva story <i class="tio-upload_on_cloud pl-2 mn"></i>
       </button>
     </span>

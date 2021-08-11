@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  OnDestroy,
-  TemplateRef,
-} from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, TemplateRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { LinksService } from 'src/app/services/links.service';
@@ -52,12 +46,7 @@ export class ReportComponent implements OnInit, OnDestroy {
   @ViewChild('templateAcumulated', { static: false })
   templateAcumulated: TemplateRef<any>;
 
-  constructor(
-    private payment: LinksService,
-    private auth: AuthService,
-    private token: TokenService,
-    private dialog: MatDialog
-  ) {}
+  constructor(private payment: LinksService, private auth: AuthService, private token: TokenService, private dialog: MatDialog) {}
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -102,15 +91,9 @@ export class ReportComponent implements OnInit, OnDestroy {
       this.account = resp.objectResponse.money.cutOffValue;
       this.rejected = resp.objectResponse.money.rejected || '0';
       this.conversionRate = resp.objectResponse.generalResume.conversionRate;
-      this.dataBreak1 = new MatTableDataSource<any>(
-        resp.objectResponse.money.detailCutOff
-      );
-      this.dataBreak2 = new MatTableDataSource<any>(
-        resp.objectResponse.money.detailAccumulated
-      );
-      this.dataBreak3 = new MatTableDataSource<any>(
-        resp.objectResponse.money.detailRejected
-      );
+      this.dataBreak1 = new MatTableDataSource<any>(resp.objectResponse.money.detailCutOff);
+      this.dataBreak2 = new MatTableDataSource<any>(resp.objectResponse.money.detailAccumulated);
+      this.dataBreak3 = new MatTableDataSource<any>(resp.objectResponse.money.detailRejected);
       this.totalLinks = resp.objectResponse.generalResume.totalLinks;
       this.totalProducts = resp.objectResponse.generalResume.totalProducts;
     });
@@ -129,23 +112,21 @@ export class ReportComponent implements OnInit, OnDestroy {
     const detail = 'Detalle de ventas';
     let items;
 
-    this.subscription = this.payment
-      .getDetailPaymentClicker(paymentDate)
-      .subscribe((resp) => {
-        items = resp;
+    this.subscription = this.payment.getDetailPaymentClicker(paymentDate).subscribe((resp) => {
+      items = resp;
 
-        this.dialog.open(DialogHistoryComponent, {
-          width: '649px',
-          data: {
-            items,
-            title,
-            detail,
-            paymentDate,
-            bank,
-            amount,
-          },
-        });
+      this.dialog.open(DialogHistoryComponent, {
+        width: '649px',
+        data: {
+          items,
+          title,
+          detail,
+          paymentDate,
+          bank,
+          amount,
+        },
       });
+    });
   }
 
   public break(key: string) {

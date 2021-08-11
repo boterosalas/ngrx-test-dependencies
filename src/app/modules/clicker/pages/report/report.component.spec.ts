@@ -29,12 +29,7 @@ describe('ReportComponent', () => {
   ]);
 
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open']);
-  const mockDialogRef = jasmine.createSpyObj('MatDialogRef', [
-    'close',
-    'afterClosed',
-    'componentInstance',
-    'event ',
-  ]);
+  const mockDialogRef = jasmine.createSpyObj('MatDialogRef', ['close', 'afterClosed', 'componentInstance', 'event ']);
 
   const data = { users: [], total: 0 };
 
@@ -96,11 +91,7 @@ describe('ReportComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        ReportComponent,
-        DialogHistoryComponent,
-        ModalGenericComponent,
-      ],
+      declarations: [ReportComponent, DialogHistoryComponent, ModalGenericComponent],
       imports: [
         AppMaterialModule,
         TranslateModule.forRoot({}),
@@ -135,9 +126,7 @@ describe('ReportComponent', () => {
     mockLinksService.getPayment.and.returnValue(of(data));
     mockLinksService.getReports.and.returnValue(of(infoMonth));
     mockLinksService.getReportUser.and.returnValue(of(infoMonthNew));
-    mockLinksService.getDetailPaymentClicker.and.returnValue(
-      of(getDetailPayment)
-    );
+    mockLinksService.getDetailPaymentClicker.and.returnValue(of(getDetailPayment));
   }));
 
   beforeEach(() => {

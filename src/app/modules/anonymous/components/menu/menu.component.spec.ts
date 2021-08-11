@@ -13,10 +13,7 @@ describe('MenuComponent', () => {
   let component: MenuComponent;
   let fixture: ComponentFixture<MenuComponent>;
 
-  const mockUtilsService = jasmine.createSpyObj('UtilsService', [
-    'showRegisterForm',
-    'hideMenu',
-  ]);
+  const mockUtilsService = jasmine.createSpyObj('UtilsService', ['showRegisterForm', 'hideMenu']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

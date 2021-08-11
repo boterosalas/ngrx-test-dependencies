@@ -7,19 +7,10 @@
 
 <div class="container">
   <div fxLayout.gt-xs="row" fxLayoutGap.gt-xs="30px" ngClass.gt-xs="mt-3">
-    <span
-      class="mt-2 mb-2"
-      fxLayout="row"
-      fxShow.gt-xs="false"
-      *ngIf="!visible_step_mobile"
-    >
+    <span class="mt-2 mb-2" fxLayout="row" fxShow.gt-xs="false" *ngIf="!visible_step_mobile">
       <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
       <button mat-button [routerLink]="['/negocios']" class="pl-0">
-        <span
-          class="galano-bold f-16"
-          fxLayout="row"
-          fxLayoutAlign="start center"
-        >
+        <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>keyboard_arrow_left</mat-icon>
           Volver a negocios
         </span>
@@ -29,11 +20,7 @@
       <mat-accordion>
         <mat-expansion-panel [expanded]="true" class="help-center">
           <mat-expansion-panel-header class="head head-library">
-            <span
-              class=""
-              [routerLink]="['/biblioteca']"
-              routerLinkActive="active-topic"
-              [routerLinkActiveOptions]="{ exact: true }"
+            <span class="" [routerLink]="['/biblioteca']" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }"
               >NEGOCIOS</span
             >
           </mat-expansion-panel-header>
@@ -48,12 +35,7 @@
         </mat-expansion-panel>
       </mat-accordion>
     </div>
-    <div
-      fxLayout.gt-xs="column"
-      fxFlex.gt-xs="25"
-      fxShow.gt-xs="false"
-      *ngIf="!visible_step_mobile"
-    >
+    <div fxLayout.gt-xs="column" fxFlex.gt-xs="25" fxShow.gt-xs="false" *ngIf="!visible_step_mobile">
       <mat-accordion class="width-total">
         <mat-expansion-panel [expanded]="true" class="help-center">
           <mat-expansion-panel-header class="head head-library">
@@ -66,9 +48,7 @@
             >
           </mat-expansion-panel-header>
           <mat-list *ngFor="let item of bussiness; let i = index">
-            <mat-list-item
-              (click)="setStepMovil(item, item)"
-              ngClass="cursor-pointer"
+            <mat-list-item (click)="setStepMovil(item, item)" ngClass="cursor-pointer"
               ><span class="sub-item"
                 ><img class="mini-img" [src]="item.imageurl" alt="logo" />
                 {{ item.description }}
@@ -82,42 +62,19 @@
     <div fxLayout.gt-xs="column" fxShow.xs="false" style="width: 100%">
       <div fxLayout="row" fxLayoutAlign="space-between">
         <div fxLayout="row">
-          <button
-            mat-raised-button
-            color="orange"
-            (click)="selectAll()"
-            class="button-selected"
-          >
-            <img
-              class="icon-download"
-              src="assets/img/dashboard/icon-check.svg"
-              alt="descarga"
-            />
+          <button mat-raised-button color="orange" (click)="selectAll()" class="button-selected">
+            <img class="icon-download" src="assets/img/dashboard/icon-check.svg" alt="descarga" />
             {{ selectAllVideosImg }}
           </button>
-          <button
-            mat-raised-button
-            color="orange"
-            [disabled]="active"
-            (click)="downloadFiles()"
-            class="ml-4 button-selected-normal"
-          >
-            <img
-              class="icon-download"
-              src="assets/img/dashboard/descarga.svg"
-              alt="descarga"
-            />
+          <button mat-raised-button color="orange" [disabled]="active" (click)="downloadFiles()" class="ml-4 button-selected-normal">
+            <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga" />
             Descargar
           </button>
         </div>
         <span class="mt-2 mb-2" fxLayout="row" fxShow.xs="false">
           <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
           <button mat-button [routerLink]="['/negocios']" class="pl-0">
-            <span
-              class="galano-bold f-16"
-              fxLayout="row"
-              fxLayoutAlign="start center"
-            >
+            <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
               <mat-icon>keyboard_arrow_left</mat-icon>
               Volver a negocios
             </span>
@@ -129,31 +86,16 @@
         <hr class="separator-img" />
       </div>
       <div fxLayout="row wrap" fxLayoutGap="5px">
-        <h3 style="color: #726d7e" *ngIf="!imagenDispo">
-          No hay imágenes disponibles para este negocio.
-        </h3>
-        <ng-container
-          class="mt-4"
-          *ngFor="let product of dataReal; let i = index"
-        >
+        <h3 style="color: #726d7e" *ngIf="!imagenDispo">No hay imágenes disponibles para este negocio.</h3>
+        <ng-container class="mt-4" *ngFor="let product of dataReal; let i = index">
           <div class="image-hover">
             <img class="image-size" [src]="product.url" alt="" />
             <div class="image-background">
               <div class="image-viewer-x" (click)="viewerPhoto(product)"></div>
               <div class="image-viewer-y" (click)="viewerPhoto(product)"></div>
-              <img
-                class="cursor-pointer image-vysor"
-                (click)="viewerPhoto(product)"
-                src="assets/img/dashboard/icon-view-img.svg"
-                alt=""
-              />
+              <img class="cursor-pointer image-vysor" (click)="viewerPhoto(product)" src="assets/img/dashboard/icon-view-img.svg" alt="" />
               <div class="custom-color-primary">
-                <mat-checkbox
-                  [(ngModel)]="product.dataR"
-                  class="check-margin"
-                  (change)="loadDelete()"
-                >
-                </mat-checkbox>
+                <mat-checkbox [(ngModel)]="product.dataR" class="check-margin" (change)="loadDelete()"> </mat-checkbox>
               </div>
             </div>
           </div>
@@ -164,58 +106,29 @@
         <hr class="separator-img" />
       </div>
       <div fxLayout="row wrap" fxLayoutGap="5px">
-        <h3 style="color: #726d7e" *ngIf="!videosDispo">
-          No hay videos disponibles para este negocio.
-        </h3>
-        <ng-container
-          class="mt-4"
-          *ngFor="let product of dataRealVideo; let i = index"
-        >
+        <h3 style="color: #726d7e" *ngIf="!videosDispo">No hay videos disponibles para este negocio.</h3>
+        <ng-container class="mt-4" *ngFor="let product of dataRealVideo; let i = index">
           <div class="image-hover">
             <video class="image-size" playsinline>
               <source [src]="product.url" type="video/mp4" />
             </video>
             <div class="image-background">
-              <div
-                class="image-viewer-x"
-                (click)="downloadVideo(product)"
-              ></div>
-              <div
-                class="image-viewer-y"
-                (click)="downloadVideo(product)"
-              ></div>
-              <img
-                class="cursor-pointer image-vysor"
-                (click)="downloadVideo(product)"
-                src="assets/img/dashboard/descarga.svg"
-                alt=""
-              />
+              <div class="image-viewer-x" (click)="downloadVideo(product)"></div>
+              <div class="image-viewer-y" (click)="downloadVideo(product)"></div>
+              <img class="cursor-pointer image-vysor" (click)="downloadVideo(product)" src="assets/img/dashboard/descarga.svg" alt="" />
               <div class="custom-color-primary">
-                <mat-checkbox
-                  [(ngModel)]="product.dataR"
-                  class="check-margin"
-                  (change)="loadDelete()"
-                >
-                </mat-checkbox>
+                <mat-checkbox [(ngModel)]="product.dataR" class="check-margin" (change)="loadDelete()"> </mat-checkbox>
               </div>
             </div>
           </div>
         </ng-container>
       </div>
     </div>
-    <div
-      fxLayout.gt-xs="column"
-      fxShow.gt-xs="false"
-      *ngIf="visible_step_mobile"
-    >
+    <div fxLayout.gt-xs="column" fxShow.gt-xs="false" *ngIf="visible_step_mobile">
       <span class="mt-2 mb-2" fxLayout="row">
         <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
         <button mat-button (click)="returnAcordeon()" class="pl-0">
-          <span
-            class="galano-bold f-16"
-            fxLayout="row"
-            fxLayoutAlign="start center"
-          >
+          <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
             <mat-icon>keyboard_arrow_left</mat-icon>
             Volver
           </span>
@@ -229,31 +142,12 @@
       </span>
       <div fxLayout="row" fxLayoutAlign="space-between">
         <div fxLayout="row">
-          <button
-            mat-raised-button
-            color="orange"
-            (click)="selectAll()"
-            class="button-selected"
-          >
-            <img
-              class="icon-download"
-              src="assets/img/dashboard/icon-check.svg"
-              alt="descarga"
-            />
+          <button mat-raised-button color="orange" (click)="selectAll()" class="button-selected">
+            <img class="icon-download" src="assets/img/dashboard/icon-check.svg" alt="descarga" />
             {{ selectAllVideosImg }}
           </button>
-          <button
-            mat-raised-button
-            [disabled]="active"
-            color="orange"
-            (click)="downloadFiles()"
-            class="ml-3 button-selected-normal"
-          >
-            <img
-              class="icon-download"
-              src="assets/img/dashboard/descarga.svg"
-              alt="descarga"
-            />
+          <button mat-raised-button [disabled]="active" color="orange" (click)="downloadFiles()" class="ml-3 button-selected-normal">
+            <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga" />
             Descargar
           </button>
         </div>
@@ -262,37 +156,17 @@
         <h3 class="size-text">Imágenes</h3>
         <hr class="separator-img" />
       </div>
-      <div
-        class="ml-2"
-        fxLayout="row wrap"
-        fxLayoutAlign="start center"
-        fxLayoutGap="13px"
-      >
-        <h3 style="color: #726d7e" *ngIf="!imagenDispo">
-          No hay imágenes disponibles para este negocio.
-        </h3>
-        <ng-container
-          class="mt-4"
-          *ngFor="let product of dataReal; let i = index"
-        >
+      <div class="ml-2" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="13px">
+        <h3 style="color: #726d7e" *ngIf="!imagenDispo">No hay imágenes disponibles para este negocio.</h3>
+        <ng-container class="mt-4" *ngFor="let product of dataReal; let i = index">
           <div class="image-hover">
             <img class="image-size" [src]="product.url" alt="" />
             <div class="image-background">
               <div class="image-viewer-x" (click)="viewerPhoto(product)"></div>
               <div class="image-viewer-y" (click)="viewerPhoto(product)"></div>
-              <img
-                class="cursor-pointer image-vysor"
-                (click)="viewerPhoto(product)"
-                src="assets/img/dashboard/icon-view-img.svg"
-                alt=""
-              />
+              <img class="cursor-pointer image-vysor" (click)="viewerPhoto(product)" src="assets/img/dashboard/icon-view-img.svg" alt="" />
               <div class="custom-color-primary">
-                <mat-checkbox
-                  [(ngModel)]="product.dataR"
-                  class="check-margin"
-                  (change)="loadDelete()"
-                >
-                </mat-checkbox>
+                <mat-checkbox [(ngModel)]="product.dataR" class="check-margin" (change)="loadDelete()"> </mat-checkbox>
               </div>
             </div>
           </div>
@@ -302,19 +176,9 @@
         <h3 class="size-text">Videos</h3>
         <hr class="separator-img" />
       </div>
-      <div
-        class="ml-2"
-        fxLayout="row wrap"
-        fxLayoutGap="10px"
-        fxLayoutAlign="start center"
-      >
-        <h3 style="color: #726d7e" *ngIf="!videosDispo">
-          No hay videos disponibles para este negocio.
-        </h3>
-        <ng-container
-          class="mt-4"
-          *ngFor="let product of dataRealVideo; let i = index"
-        >
+      <div class="ml-2" fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="start center">
+        <h3 style="color: #726d7e" *ngIf="!videosDispo">No hay videos disponibles para este negocio.</h3>
+        <ng-container class="mt-4" *ngFor="let product of dataRealVideo; let i = index">
           <div class="image-hover">
             <video *ngIf="iosDevices === false" class="image-size">
               <source [src]="product.url" type="video/mp4" />
@@ -327,27 +191,11 @@
               <source [src]="product.url" type="video/mp4" />
             </video>
             <div class="image-background">
-              <div
-                class="image-viewer-x"
-                (click)="downloadVideo(product)"
-              ></div>
-              <div
-                class="image-viewer-y"
-                (click)="downloadVideo(product)"
-              ></div>
-              <img
-                class="cursor-pointer image-vysor"
-                (click)="downloadVideo(product)"
-                src="assets/img/dashboard/descarga.svg"
-                alt=""
-              />
+              <div class="image-viewer-x" (click)="downloadVideo(product)"></div>
+              <div class="image-viewer-y" (click)="downloadVideo(product)"></div>
+              <img class="cursor-pointer image-vysor" (click)="downloadVideo(product)" src="assets/img/dashboard/descarga.svg" alt="" />
               <div class="custom-color-primary">
-                <mat-checkbox
-                  [(ngModel)]="product.dataR"
-                  class="check-margin"
-                  (change)="loadDelete()"
-                >
-                </mat-checkbox>
+                <mat-checkbox [(ngModel)]="product.dataR" class="check-margin" (change)="loadDelete()"> </mat-checkbox>
               </div>
             </div>
           </div>
@@ -361,11 +209,7 @@
   <div>
     <img class="w-image" [src]="url" alt="contenido-negocio" />
     <button class="download-file cursor-pointer" (click)="downloadFile()">
-      <img
-        class="icon-download"
-        src="assets/img/dashboard/descarga.svg"
-        alt="descarga"
-      />
+      <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga" />
       Descargar
     </button>
   </div>

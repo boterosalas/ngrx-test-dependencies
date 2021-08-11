@@ -41,12 +41,7 @@ export class InformationBussinessComponent implements OnInit {
   @ViewChild('table', { static: false }) table: MatTable<PeriodicElement>;
   dataSource = [];
   private subscription: Subscription = new Subscription();
-  constructor(
-    private content: ContentService,
-    private route: ActivatedRoute,
-    private dialog: MatDialog,
-    private fb: FormBuilder
-  ) {
+  constructor(private content: ContentService, private route: ActivatedRoute, private dialog: MatDialog, private fb: FormBuilder) {
     this.dataTip = this.fb.group({
       title: [null, Validators.required],
       description: [null, Validators.required],
@@ -57,29 +52,17 @@ export class InformationBussinessComponent implements OnInit {
       caseSpecial: [null, [Validators.required]],
     });
     this.aboutBuss = this.fb.group({
-      aboutBuss: [
-        null,
-        [
-          Validators.maxLength(1800),
-          Validators.required,
-          Validators.minLength(10),
-        ],
-      ],
+      aboutBuss: [null, [Validators.maxLength(1800), Validators.required, Validators.minLength(10)]],
     });
     this.dataEditTip = this.fb.group({
       title: [null, Validators.required],
       description: [null, Validators.required],
     });
     this.subscription = this.route.params.subscribe((route) => {
-      if (
-        route.id === undefined &&
-        route.titulo === undefined &&
-        route.imagen === undefined
-      ) {
+      if (route.id === undefined && route.titulo === undefined && route.imagen === undefined) {
         this.id = '1';
         this.title = 'exito';
-        this.image =
-          'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg';
+        this.image = 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg';
       } else {
         this.id = route.id;
         this.title = route.titulo;
@@ -93,16 +76,12 @@ export class InformationBussinessComponent implements OnInit {
   getBusinessData() {
     this.content.getBusinessById(this.id).subscribe((resp) => {
       this.aboutBuss.controls.aboutBuss.setValue(resp.about);
-      //this.aboutBusiness = resp.about;
       this.dataSource = resp.tips;
       if (resp.terms.length > 0) {
-        //this.generalInfo = resp.terms[0].description;
         this.termsData.controls.general.setValue(resp.terms[0].description);
         this.idInfo = resp.terms[0].id;
-        //this.exceptionsInfo = resp.terms[1].description;
         this.termsData.controls.exceptions.setValue(resp.terms[1].description);
         this.idExceptions = resp.terms[1].id;
-        //this.caseSpecial = resp.terms[2].description;
         this.termsData.controls.caseSpecial.setValue(resp.terms[2].description);
         this.idCaseSpecial = resp.terms[2].id;
       }
@@ -112,7 +91,7 @@ export class InformationBussinessComponent implements OnInit {
     const prevIndex = this.dataSource.findIndex((d) => d === event.item.data);
     moveItemInArray(this.dataSource, prevIndex, event.currentIndex);
     this.table.renderRows();
-    let datosSourceSend = [];
+    const datosSourceSend = [];
     for (let i = 0; i < this.dataSource.length; i++) {
       this.dataSource[i].orderby = i + 1;
       datosSourceSend.push({
@@ -126,18 +105,16 @@ export class InformationBussinessComponent implements OnInit {
     this.content.saveOrderTipBusiness(datos).subscribe((resp) => {});
   }
   addAboutBussiness() {
-    let datos = {
-      id: this.id, //idbusiness
+    const datos = {
+      id: this.id,
       about: this.aboutBuss.controls.aboutBuss.value,
     };
-    this.content.saveInfoBusiness(datos).subscribe((resp) => {
+    this.content.saveInfoBusiness(datos).subscribe(() => {
       Swal.fire({
         text: 'Los cambios se han guardado correctamente.',
         type: 'success',
         confirmButtonText: 'Aceptar',
         confirmButtonClass: 'upload-success',
-      }).then(() => {
-        //this.aboutBuss.reset();
       });
     });
   }
@@ -158,33 +135,31 @@ export class InformationBussinessComponent implements OnInit {
     }
   }
   addTermsConditions() {
-    let datos = {
+    const datos = {
       dmBusinessId: this.id,
       title: 'General',
       description: this.termsData.controls.general.value,
     };
-    let datosSend = this.comprobarText(this.idInfo, datos);
-    let datos2 = {
+    const datosSend = this.comprobarText(this.idInfo, datos);
+    const datos2 = {
       dmBusinessId: this.id,
       title: 'Excepciones',
       description: this.termsData.controls.exceptions.value,
     };
-    let datosSend2 = this.comprobarText(this.idExceptions, datos2);
-    let datos3 = {
+    const datosSend2 = this.comprobarText(this.idExceptions, datos2);
+    const datos3 = {
       dmBusinessId: this.id,
       title: 'Casos Especiales',
-      description: this.termsData.controls.caseSpecial.value, //caseSpecial
+      description: this.termsData.controls.caseSpecial.value,
     };
-    let datosSend3 = this.comprobarText(this.idCaseSpecial, datos3);
-    let array = [datosSend, datosSend2, datosSend3];
+    const datosSend3 = this.comprobarText(this.idCaseSpecial, datos3);
+    const array = [datosSend, datosSend2, datosSend3];
     this.content.saveTermsConditions(array).subscribe((resp) => {
       Swal.fire({
         text: 'Los cambios se han guardado correctamente.',
         type: 'success',
         confirmButtonText: 'Aceptar',
         confirmButtonClass: 'upload-success',
-      }).then(() => {
-        //this.termsData.reset();
       });
     });
   }
@@ -204,7 +179,7 @@ export class InformationBussinessComponent implements OnInit {
       const idBussiness = this.id;
       const edit = 0;
       const template = this.templateAddTip;
-      let dialogRef1 = this.dialog.open(ModalGenericComponent, {
+      const dialogRef1 = this.dialog.open(ModalGenericComponent, {
         width: '450px',
         data: {
           title,
@@ -216,7 +191,7 @@ export class InformationBussinessComponent implements OnInit {
     }
   }
   saveTip() {
-    let datos = {
+    const datos = {
       dmBusinessId: this.id,
       title: this.dataTip.controls.title.value,
       description: this.dataTip.controls.description.value,
@@ -235,7 +210,7 @@ export class InformationBussinessComponent implements OnInit {
     this.idSaveTip = element.id;
     this.dataEditTip.controls.title.setValue(element.title);
     this.dataEditTip.controls.description.setValue(element.description);
-    let dialogRef1 = this.dialog.open(ModalGenericComponent, {
+    const dialogRef1 = this.dialog.open(ModalGenericComponent, {
       width: '450px',
       data: {
         title,
@@ -246,7 +221,7 @@ export class InformationBussinessComponent implements OnInit {
     });
   }
   editTip() {
-    let datos = {
+    const datos = {
       id: this.idSaveTip,
       dmBusinessId: this.id,
       title: this.dataEditTip.controls.title.value,
@@ -269,7 +244,7 @@ export class InformationBussinessComponent implements OnInit {
       allowOutsideClick: false,
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
-        this.content.deleteTipBusiness(item.id).subscribe((resp) => {
+        this.content.deleteTipBusiness(item.id).subscribe(() => {
           this.getBusinessData();
         });
       }

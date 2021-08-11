@@ -1,32 +1,22 @@
 <div class="set-size charts-container" fxLayout="row wrap" fxLayoutGap="20px">
   <mat-card
     fxLayout="column"
-    ngClass="position-relative {{ item.class }} cursor-pointer gtmtusmeda{{
-      item.class
-    }}"
+    ngClass="position-relative {{ item.class }} cursor-pointer gtmtusmeda{{ item.class }}"
     *ngFor="let item of medals; let i = index"
     fxLayoutAlign="center center"
     (click)="infoMedal(item)"
   >
     <div
       fxLayout="column"
-      ngClass="pie-wrapper {{ item.classLevel }} progress-{{
-        item.percent
-      }} gtmtusmeda{{ item.class }}"
+      ngClass="pie-wrapper {{ item.classLevel }} progress-{{ item.percent }} gtmtusmeda{{ item.class }}"
       fxLayoutAlign="center center"
     >
       <div fxLayout="column" class="gtmtusmeda{{ item.class }}">
-        <div
-          ngClass="label bglabel label-bg-{{ item.percent }} gtmtusmeda{{
-            item.class
-          }}"
-        >
+        <div ngClass="label bglabel label-bg-{{ item.percent }} gtmtusmeda{{ item.class }}">
           <span class="gtmtusmeda{{ item.class }}">
             <img [src]="item.icon" [alt]="item.title" />
           </span>
-          <span class="percent gtmtusmeda{{ item.class }}">
-            {{ item.percent }}%
-          </span>
+          <span class="percent gtmtusmeda{{ item.class }}"> {{ item.percent }}% </span>
         </div>
       </div>
       <div class="pie gtmtusmeda{{ item.class }}">
@@ -35,30 +25,13 @@
       </div>
       <div class="shadow gtmtusmeda{{ item.class }}"></div>
     </div>
-    <div
-      fxLayout="column"
-      fxLayoutAlign="center center"
-      class="block-text gtmtusmeda{{ item.class }}"
-    >
+    <div fxLayout="column" fxLayoutAlign="center center" class="block-text gtmtusmeda{{ item.class }}">
       <p class="f-15 gtmtusmeda{{ item.class }}">{{ item.level }}</p>
-      <p
-        ngClass.gt-xs="f-18 gtmtusmeda{{ item.class }}"
-        ngClass.xs="f-15 gtmtusmeda{{ item.class }}"
-      >
+      <p ngClass.gt-xs="f-18 gtmtusmeda{{ item.class }}" ngClass.xs="f-15 gtmtusmeda{{ item.class }}">
         {{ item.title }}
       </p>
-      <p
-        *ngIf="item.nextLevel !== 'Último Nivel'"
-        class="f-12 gtmtusmeda{{ item.class }}"
-      >
-        Siguiente nivel: {{ item.nextLevel }}
-      </p>
-      <p
-        *ngIf="item.nextLevel === 'Último Nivel'"
-        class="f-12 gtmtusmeda{{ item.class }}"
-      >
-        Medalla completada
-      </p>
+      <p *ngIf="item.nextLevel !== 'Último Nivel'" class="f-12 gtmtusmeda{{ item.class }}">Siguiente nivel: {{ item.nextLevel }}</p>
+      <p *ngIf="item.nextLevel === 'Último Nivel'" class="f-12 gtmtusmeda{{ item.class }}">Medalla completada</p>
     </div>
   </mat-card>
 </div>

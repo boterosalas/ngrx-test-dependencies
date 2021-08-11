@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ViewChild,
-  TemplateRef,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Subscription, Observable } from 'rxjs';
@@ -103,8 +97,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   activebutton = false;
   wrongPass = false;
   numberPattern = '^(0|[0-9][0-9]*)$';
-  namePattern =
-    '[a-zA-Z0-9 àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]+';
+  namePattern = '[a-zA-Z0-9 àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]+';
   passwordPattern = '(?=.*[a-zA-Z])(?=.*[0-9])';
   msg: string;
   classMsg: string;
@@ -119,8 +112,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       code: 'NOTVERIFIED',
       status: 'No verificada',
       title: 'Verificación de cuenta',
-      description:
-        'Tu cuenta entrará en estado de verificación pronto, una vez sea verificada, se te depositarán las comisiones en ella.',
+      description: 'Tu cuenta entrará en estado de verificación pronto, una vez sea verificada, se te depositarán las comisiones en ella.',
       icon: '/assets/img/icon-info-white.svg',
     },
     {
@@ -190,14 +182,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
 
   public formProfileDelete() {
     this.profileFormDelete = this.fb.group({
-      Password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(20),
-        ],
-      ],
+      Password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
     });
   }
 
@@ -213,13 +198,9 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.subscription = this.user.getStatusVerification().subscribe(
       (resp: ResponseService) => {
         if (resp.state === 'Success') {
-          const accountStatus = resp.objectResponse.find(
-            (status) => status.id === this.idVerified
-          );
+          const accountStatus = resp.objectResponse.find((status) => status.id === this.idVerified);
           if (accountStatus) {
-            this.accountStatus = this.typesStatusAccount.find(
-              (type) => type.code === accountStatus.code
-            );
+            this.accountStatus = this.typesStatusAccount.find((type) => type.code === accountStatus.code);
             if (description && accountStatus.code !== 'NOTVERIFIED') {
               this.accountStatus.description = description;
             }
@@ -236,22 +217,8 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
 
   public formProfile() {
     this.profileForm = this.fb.group({
-      name: [
-        this.name,
-        [
-          Validators.required,
-          Validators.maxLength(50),
-          Validators.pattern(this.namePattern),
-        ],
-      ],
-      lastName: [
-        this.lastName,
-        [
-          Validators.required,
-          Validators.maxLength(50),
-          Validators.pattern(this.namePattern),
-        ],
-      ],
+      name: [this.name, [Validators.required, Validators.maxLength(50), Validators.pattern(this.namePattern)]],
+      lastName: [this.lastName, [Validators.required, Validators.maxLength(50), Validators.pattern(this.namePattern)]],
     });
   }
 
@@ -259,12 +226,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.profileFormCell = this.fb.group({
       phone: [
         this.phone,
-        [
-          Validators.required,
-          Validators.maxLength(10),
-          Validators.minLength(10),
-          Validators.pattern(this.numberPattern),
-        ],
+        [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern(this.numberPattern)],
       ],
     });
   }
@@ -273,15 +235,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.accountForm = this.fb.group({
       bank: [this.bank, Validators.required],
       typeAccount: [this.typeBankAccount, Validators.required],
-      numberAccount: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(this.numberPattern),
-          Validators.minLength(5),
-          Validators.maxLength(20),
-        ],
-      ],
+      numberAccount: ['', [Validators.required, Validators.pattern(this.numberPattern), Validators.minLength(5), Validators.maxLength(20)]],
       cert: [null],
       ced1: [null],
       ced2: [null],
@@ -300,40 +254,16 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
 
   public accountBankForm() {
     this.loginForm = this.fb.group({
-      Password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(20),
-        ],
-      ],
+      Password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
     });
   }
 
   public formProfilePass() {
     this.profileFormPass = this.fb.group(
       {
-        actualPassword: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(20),
-          ],
-        ],
-        password: [
-          '',
-          [
-            Validators.minLength(6),
-            Validators.maxLength(20),
-            Validators.pattern(new RegExp(this.passwordPattern)),
-          ],
-        ],
-        confirmPassword: [
-          '',
-          [Validators.minLength(6), Validators.maxLength(20)],
-        ],
+        actualPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
+        password: ['', [Validators.minLength(6), Validators.maxLength(20), Validators.pattern(new RegExp(this.passwordPattern))]],
+        confirmPassword: ['', [Validators.minLength(6), Validators.maxLength(20)]],
       },
       {
         validator: [ConfirmPasswordValidator.MatchPassword],
@@ -465,20 +395,18 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       typeBankAccount: this.accountForm.controls.typeAccount.value,
     };
 
-    this.subscription = this.user
-      .changeBankInformation(this.userId, data)
-      .subscribe(
-        (account: any) => {
-          if (account.state === 'Success') {
-            this.dialog.closeAll();
-            this.subscription = this.user.getProfile();
-            this.openSnackBar(account.userMessage, 'Cerrar');
-          }
-        },
-        (err) => {
-          this.openSnackBar(err.userMessage, 'Cerrar');
+    this.subscription = this.user.changeBankInformation(this.userId, data).subscribe(
+      (account: any) => {
+        if (account.state === 'Success') {
+          this.dialog.closeAll();
+          this.subscription = this.user.getProfile();
+          this.openSnackBar(account.userMessage, 'Cerrar');
         }
-      );
+      },
+      (err) => {
+        this.openSnackBar(err.userMessage, 'Cerrar');
+      }
+    );
 
     this.subscription = this.user.updateUser(updateForm).subscribe(
       () => {},
@@ -488,11 +416,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     );
   }
 
-  private openSnackBar(
-    message: string,
-    action: string,
-    duration: number = 3000
-  ) {
+  private openSnackBar(message: string, action: string, duration: number = 3000) {
     this.snackBar.open(message, action, {
       duration,
     });
@@ -521,29 +445,25 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   }
 
   public showAccount() {
-    this.user
-      .getBankAccountNumber(btoa(this.loginForm.controls.Password.value))
-      .subscribe(
-        (resp: ResponseService) => {
-          if (resp.state === 'Success') {
-            this.accountForm.controls.numberAccount.setValue(
-              resp.objectResponse
-            );
-            this.showBankInfoUser = true;
-            this.showPassword = false;
+    this.user.getBankAccountNumber(btoa(this.loginForm.controls.Password.value)).subscribe(
+      (resp: ResponseService) => {
+        if (resp.state === 'Success') {
+          this.accountForm.controls.numberAccount.setValue(resp.objectResponse);
+          this.showBankInfoUser = true;
+          this.showPassword = false;
 
-            const account = document.getElementById('account');
-            if (account) {
-              account.classList.add('update-info-bank');
-            }
-          } else {
-            this.openSnackBar(resp.userMessage, 'Cerrar');
+          const account = document.getElementById('account');
+          if (account) {
+            account.classList.add('update-info-bank');
           }
-        },
-        (err) => {
-          this.openSnackBar(err.userMessage, 'Cerrar');
+        } else {
+          this.openSnackBar(resp.userMessage, 'Cerrar');
         }
-      );
+      },
+      (err) => {
+        this.openSnackBar(err.userMessage, 'Cerrar');
+      }
+    );
   }
 
   /**
@@ -551,11 +471,9 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
    */
 
   public getBanks() {
-    this.subscription = this.personalInfo
-      .getBanks()
-      .subscribe((res: ResponseService) => {
-        this.banks = res.objectResponse;
-      });
+    this.subscription = this.personalInfo.getBanks().subscribe((res: ResponseService) => {
+      this.banks = res.objectResponse;
+    });
   }
 
   /**
@@ -568,17 +486,10 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   }
 
   public filter() {
-    this.filteredDepartments =
-      this.addressForm.controls.department.valueChanges.pipe(
-        map((department) =>
-          typeof department === 'string' ? department : department.description
-        ),
-        map((department) =>
-          department
-            ? this._filterDepartments(department)
-            : this.departments.slice()
-        )
-      );
+    this.filteredDepartments = this.addressForm.controls.department.valueChanges.pipe(
+      map((department) => (typeof department === 'string' ? department : department.description)),
+      map((department) => (department ? this._filterDepartments(department) : this.departments.slice()))
+    );
   }
 
   public filterCities() {
@@ -590,17 +501,12 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
 
   private _filterDepartments(value: any) {
     const filterValue = value.toLowerCase();
-    return this.departments.filter(
-      (department) =>
-        department.description.toLowerCase().indexOf(filterValue) === 0
-    );
+    return this.departments.filter((department) => department.description.toLowerCase().indexOf(filterValue) === 0);
   }
 
   private _filterCities(value: string) {
     const filterValue = value.toLowerCase();
-    return this.cities.filter(
-      (city: any) => city.description.toLowerCase().indexOf(filterValue) === 0
-    );
+    return this.cities.filter((city: any) => city.description.toLowerCase().indexOf(filterValue) === 0);
   }
 
   public selectDepartment(department) {
@@ -641,8 +547,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
 
   public checkDepartment() {
     if (
-      this.addressForm.controls.department.value !==
-        this.departmentDecription ||
+      this.addressForm.controls.department.value !== this.departmentDecription ||
       this.addressForm.controls.department.value === undefined
     ) {
       this.addressForm.controls.department.setErrors({ incorrect: true });
@@ -665,11 +570,9 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
    */
 
   public getDepartments() {
-    this.subscription = this.personalInfo
-      .getDepartments()
-      .subscribe((res: ResponseService) => {
-        this.departments = res.objectResponse;
-      });
+    this.subscription = this.personalInfo.getDepartments().subscribe((res: ResponseService) => {
+      this.departments = res.objectResponse;
+    });
   }
 
   /**
@@ -690,39 +593,34 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
         formData.append('identification', this.id);
         formData.append('userId', this.userId);
 
-        this.subscription = this.user
-          .uploadFiles(formData)
-          .subscribe((response: ResponseService) => {
-            if (response.state === 'Success') {
-              this.activebutton = true;
-            } else {
-              this.openSnackBar(response.userMessage, 'Cerrar');
-            }
+        this.subscription = this.user.uploadFiles(formData).subscribe((response: ResponseService) => {
+          if (response.state === 'Success') {
+            this.activebutton = true;
+          } else {
+            this.openSnackBar(response.userMessage, 'Cerrar');
+          }
 
-            switch (param) {
-              case 'Rut':
-                this.nameFileRut = nameFile;
-                this.showErrorRut = response.state === 'Success' ? false : true;
-                break;
-              case 'BankCertificate':
-                this.nameFileCert = nameFile;
-                this.showErrorCert =
-                  response.state === 'Success' ? false : true;
-                break;
-              case 'IdentificationCard1':
-                this.nameFileCed1 = nameFile;
-                this.showErrorCed1 =
-                  response.state === 'Success' ? false : true;
-                break;
-              case 'IdentificationCard2':
-                this.nameFileCed2 = nameFile;
-                this.showErrorCed2 =
-                  response.state === 'Success' ? false : true;
-                break;
-              default:
-                break;
-            }
-          });
+          switch (param) {
+            case 'Rut':
+              this.nameFileRut = nameFile;
+              this.showErrorRut = response.state === 'Success' ? false : true;
+              break;
+            case 'BankCertificate':
+              this.nameFileCert = nameFile;
+              this.showErrorCert = response.state === 'Success' ? false : true;
+              break;
+            case 'IdentificationCard1':
+              this.nameFileCed1 = nameFile;
+              this.showErrorCed1 = response.state === 'Success' ? false : true;
+              break;
+            case 'IdentificationCard2':
+              this.nameFileCed2 = nameFile;
+              this.showErrorCed2 = response.state === 'Success' ? false : true;
+              break;
+            default:
+              break;
+          }
+        });
       } else {
         switch (param) {
           case 'Rut':

@@ -12,11 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class ClickAcademyComponent implements OnInit {
   pdf: string;
 
-  constructor(
-    private user: UserService,
-    private router: Router,
-    private auth: AuthService
-  ) {}
+  constructor(private user: UserService, private router: Router, private auth: AuthService) {}
 
   ngOnInit() {
     this.pdf = environment.PDF;

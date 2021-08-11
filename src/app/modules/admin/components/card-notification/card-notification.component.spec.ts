@@ -37,17 +37,8 @@ xdescribe('CardNotificationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        CardNotificationComponent,
-        DialogDeleteNotificationComponent,
-        RemoveTagsPipe,
-      ],
-      imports: [
-        RouterTestingModule,
-        AppMaterialModule,
-        BrowserAnimationsModule,
-        HttpClientTestingModule,
-      ],
+      declarations: [CardNotificationComponent, DialogDeleteNotificationComponent, RemoveTagsPipe],
+      imports: [RouterTestingModule, AppMaterialModule, BrowserAnimationsModule, HttpClientTestingModule],
       providers: [
         {
           provide: Router,
@@ -91,10 +82,7 @@ xdescribe('CardNotificationComponent', () => {
       idnotification: '1',
     };
     component.editNotification(notification);
-    expect(router.navigate).toHaveBeenCalledWith([
-      '/notificacion',
-      notification.idnotification,
-    ]);
+    expect(router.navigate).toHaveBeenCalledWith(['/notificacion', notification.idnotification]);
   });
 
   it('Download file', () => {

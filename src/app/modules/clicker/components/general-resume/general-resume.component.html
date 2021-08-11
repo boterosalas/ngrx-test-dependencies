@@ -2,19 +2,12 @@
   {{ 'GENERAL_RESUME.TITLE' | translate }}
 </h2>
 
-<div
-  class="sell card mb-2"
-  fxLayout="row"
-  fxLayoutGap="10px"
-  fxLayoutAlign="center center"
->
+<div class="sell card mb-2" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
   <div fxLayout="column">
     <img src="assets/img/ico-comisiones.svg" alt="comisiones" />
   </div>
   <div fxLayout="column">
-    <span class="number">{{
-      totalComissions | currency: '':'symbol':'1.0-0'
-    }}</span>
+    <span class="number">{{ totalComissions | currency: '':'symbol':'1.0-0' }}</span>
     <span class="subtitle">{{ 'GENERAL_RESUME.COMISSIONS' | translate }}</span>
   </div>
 </div>
@@ -28,9 +21,7 @@
   <div fxLayout="column" fxFlex="33" class="card text-center">
     <!-- <img class="pb-3 icon-resume" src="assets/img/HomePage.svg" alt="page" /> -->
     <span class="number">{{ totalProducts }}</span>
-    <span class="subtitle">{{
-      'GENERAL_RESUME.PRODUCTS_SELLER' | translate
-    }}</span>
+    <span class="subtitle">{{ 'GENERAL_RESUME.PRODUCTS_SELLER' | translate }}</span>
   </div>
   <div fxLayout="column" fxFlex="33" class="card text-center">
     <!-- <img class="pb-4 icon-resume" src="assets/img/conversion.svg" alt="conversion" /> -->

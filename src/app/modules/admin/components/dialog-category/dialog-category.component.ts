@@ -1,11 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Inject,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Subscription } from 'rxjs';
@@ -29,11 +22,11 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
   dateForm: FormGroup;
   validFormat: boolean;
   fileImgCat: any;
-  nameFileCert: string = '';
+  nameFileCert = '';
   showErrorCert: boolean;
   activebutton: boolean;
-  statusAc: boolean = true;
-  storageNameFile: string = '';
+  statusAc = true;
+  storageNameFile = '';
   private subscription: Subscription = new Subscription();
   selecteds = [
     {
@@ -50,8 +43,8 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
   }
   public loadFormCategory() {
     if (this.data.edit === 1) {
-      let dataImage = this.data.image;
-      let datosImg = dataImage.split('/');
+      const dataImage = this.data.image;
+      const datosImg = dataImage.split('/');
       this.nameFileCert = datosImg[datosImg.length - 1];
       this.storageNameFile = this.nameFileCert;
       this.statusAc = this.data.active;
@@ -83,8 +76,8 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
     this.dialogRef.close();
   }
   private getExtension(nameFile: string, getSize: number) {
-    let splitExt = nameFile.split('.');
-    let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
+    const splitExt = nameFile.split('.');
+    const getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
     this.validFormat = false;
     if (getExt === 'svg' || getExt === 'jpg') {
       this.validFormat = true;
@@ -94,13 +87,13 @@ export class DialogCategoryComponent implements OnInit, OnDestroy {
     }
   }
   public onFileChangeFiles(event, param: string) {
-    let nameFile = event.target.files[0].name;
-    let reader = new FileReader();
-    let sizeFile = event.target.files[0].size;
+    const nameFile = event.target.files[0].name;
+    const reader = new FileReader();
+    const sizeFile = event.target.files[0].size;
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      let fileBlob = new Blob([file]);
-      let file2 = new File([fileBlob], nameFile);
+      const fileBlob = new Blob([file]);
+      const file2 = new File([fileBlob], nameFile);
       reader.readAsDataURL(file2);
       reader.onload = () => {
         this.getExtension(nameFile, sizeFile);

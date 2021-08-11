@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Inject,
-  ViewChild,
-  TemplateRef,
-} from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, TemplateRef } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -21,7 +15,7 @@ export class DialogNewsComponent implements OnInit {
   @ViewChild('templateImage', { static: false })
   templateVideo: TemplateRef<any>;
   image: string;
-  active: boolean = true;
+  active = true;
   selecteds = [
     {
       titulo: 'Pendiente',
@@ -49,7 +43,7 @@ export class DialogNewsComponent implements OnInit {
     if (this.data.element.documenturl === '') {
       this.image = '';
     } else {
-      let datos = this.data.element.documenturl.split('/');
+      const datos = this.data.element.documenturl.split('/');
       this.image = datos[datos.length - 1];
     }
   }
@@ -57,8 +51,8 @@ export class DialogNewsComponent implements OnInit {
     this.dialogRef.close();
   }
   public viewerImage() {
-    let splitExt = this.image.split('.');
-    let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
+    const splitExt = this.image.split('.');
+    const getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
     if (getExt === 'jpg' || getExt === 'png') {
       if (this.data.element.urlImage === '') {
         console.log('No hay imagenes');
@@ -87,7 +81,7 @@ export class DialogNewsComponent implements OnInit {
     if (this.data.element.urlImage === '') {
       console.log('No hay nada');
     } else {
-      let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
       if (iOS) {
         window.location.assign(this.data.element.documenturl);
       } else {
@@ -96,7 +90,7 @@ export class DialogNewsComponent implements OnInit {
     }
   }
   public saveChanges() {
-    let datos = {
+    const datos = {
       id: this.data.element.id,
       status: this.dateForm.controls.status.value,
       responsenovelty: this.dateForm.controls.responsenovelty.value,
@@ -108,7 +102,7 @@ export class DialogNewsComponent implements OnInit {
     });
   }
   public onChangeSelected(element: any) {
-    let data = element;
+    const data = element;
     if (data === this.data.element.statusnovelty) {
       this.active = true;
     } else {

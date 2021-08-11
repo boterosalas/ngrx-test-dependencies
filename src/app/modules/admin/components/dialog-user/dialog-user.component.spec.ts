@@ -3,12 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogUserComponent } from './dialog-user.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-  MatSlideToggleModule,
-  MatMenuModule,
-} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatSlideToggleModule, MatMenuModule } from '@angular/material';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -100,12 +95,8 @@ describe('DialogUserComponent', () => {
     }).compileComponents();
     mockUserService.getHojaVida.and.returnValue(of(getUserExcel));
     mockUserService.updateInfoClicker.and.returnValue(of(getUserExcel));
-    mockUserService.getStatusVerification.and.returnValue(
-      of(getStatusVerification)
-    );
-    mockUserService.postUpdateResponseAccountBank.and.returnValue(
-      of(postUpdateResponse)
-    );
+    mockUserService.getStatusVerification.and.returnValue(of(getStatusVerification));
+    mockUserService.postUpdateResponseAccountBank.and.returnValue(of(postUpdateResponse));
   }));
 
   beforeEach(() => {

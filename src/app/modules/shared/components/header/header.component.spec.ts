@@ -20,15 +20,8 @@ describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
 
-  const mockUtilsService = jasmine.createSpyObj('UtilsService', [
-    'showRegisterForm',
-    'showloginForm',
-    'showMenu',
-  ]);
-  const mockAuthService = jasmine.createSpyObj('AuthService', [
-    'logout',
-    'userInfo$',
-  ]);
+  const mockUtilsService = jasmine.createSpyObj('UtilsService', ['showRegisterForm', 'showloginForm', 'showMenu']);
+  const mockAuthService = jasmine.createSpyObj('AuthService', ['logout', 'userInfo$']);
 
   let dataUser = {
     Email: 'daniel.salamanca@pragma.com.co',
@@ -46,9 +39,7 @@ describe('HeaderComponent', () => {
       imports: [
         AppMaterialModule,
         HttpClientTestingModule,
-        RouterTestingModule.withRoutes([
-          { path: 'inicio', component: HomeComponent },
-        ]),
+        RouterTestingModule.withRoutes([{ path: 'inicio', component: HomeComponent }]),
         TranslateModule.forRoot({}),
         MatMenuModule,
         JwtModule.forRoot({

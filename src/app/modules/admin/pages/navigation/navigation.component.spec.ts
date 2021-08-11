@@ -22,9 +22,7 @@ describe('NavigationComponent', () => {
   let component: NavigationComponent;
   let fixture: ComponentFixture<NavigationComponent>;
 
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'getFooter',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getFooter']);
 
   let response = [
     {

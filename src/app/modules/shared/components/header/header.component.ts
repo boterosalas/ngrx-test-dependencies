@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  HostListener,
-  Input,
-  OnDestroy,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, HostListener, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { UtilsService } from 'src/app/services/utils.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LinksService } from 'src/app/services/links.service';
@@ -36,11 +28,7 @@ export class HeaderComponent implements OnInit {
   notifications = [];
   total: any;
 
-  constructor(
-    private utils: UtilsService,
-    public auth: AuthService,
-    private _content: ContentService
-  ) {}
+  constructor(private utils: UtilsService, public auth: AuthService, private _content: ContentService) {}
 
   ngOnInit() {
     this.getAmount();
@@ -49,11 +37,9 @@ export class HeaderComponent implements OnInit {
   }
 
   public getMenu() {
-    this.subscription = this.auth
-      .getmenusNoLoginUserView()
-      .subscribe((resp) => {
-        this.menuItems = resp[0].menus;
-      });
+    this.subscription = this.auth.getmenusNoLoginUserView().subscribe((resp) => {
+      this.menuItems = resp[0].menus;
+    });
   }
 
   public open() {
@@ -95,12 +81,10 @@ export class HeaderComponent implements OnInit {
     this.auth.getRole$.subscribe((role) => {
       this.role = role;
       if (role === 'CLICKER') {
-        this._content
-          .getNotificationAdmin(false)
-          .subscribe((notification: ResponseService) => {
-            this.notifications = notification.objectResponse.published;
-            this.total = notification.objectResponse.total;
-          });
+        this._content.getNotificationAdmin(false).subscribe((notification: ResponseService) => {
+          this.notifications = notification.objectResponse.published;
+          this.total = notification.objectResponse.total;
+        });
       }
     });
   }

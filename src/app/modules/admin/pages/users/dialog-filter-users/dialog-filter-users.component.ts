@@ -1,10 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
@@ -17,36 +11,6 @@ import { ContentService } from 'src/app/services/content.service';
 })
 export class DialogFilterUsersComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder, private content: ContentService) {}
-
-  ngOnInit() {
-    this.filterForm();
-    this.getAllBusiness();
-
-    let filterData = localStorage.getItem('formFilter');
-    let bussinesss = localStorage.getItem('bussiness');
-
-    if (filterData !== null) {
-      let obFr = JSON.parse(filterData);
-      this.filterUsers.controls.comunication.setValue(obFr.comunication);
-      this.filterUsers.controls.status.setValue(obFr.status);
-      this.filterUsers.controls.commissions.setValue(obFr.commissions);
-      this.filterUsers.controls.accountBank.setValue(obFr.accountBank);
-      this.filterUsers.controls.documents.setValue(obFr.documents);
-      let startDate =
-        obFr.dateRange.startDate === null ? '' : obFr.dateRange.startDate;
-      let endDate =
-        obFr.dateRange.endDate === null ? '' : obFr.dateRange.endDate;
-      this.filterUsers.controls.dateRange.setValue({
-        startDate: startDate,
-        endDate: endDate,
-      });
-    }
-
-    if (bussinesss !== null) {
-      let obbus = JSON.parse(bussinesss);
-      this.chipsBussiness = obbus;
-    }
-  }
 
   private subscription: Subscription = new Subscription();
   maxDate = moment(new Date());
@@ -109,6 +73,36 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
     { name: 'Sin documentos', value: false },
   ];
 
+  ngOnInit() {
+    this.filterForm();
+    this.getAllBusiness();
+
+    const filterData = localStorage.getItem('formFilter');
+    const bussinesss = localStorage.getItem('bussiness');
+
+    if (filterData !== null) {
+      const obFr = JSON.parse(filterData);
+      this.filterUsers.controls.comunication.setValue(obFr.comunication);
+      this.filterUsers.controls.status.setValue(obFr.status);
+      this.filterUsers.controls.commissions.setValue(obFr.commissions);
+      this.filterUsers.controls.accountBank.setValue(obFr.accountBank);
+      this.filterUsers.controls.documents.setValue(obFr.documents);
+      const startDate = obFr.dateRange.startDate === null ? '' : obFr.dateRange.startDate;
+      const endDate = obFr.dateRange.endDate === null ? '' : obFr.dateRange.endDate;
+      this.filterUsers.controls.dateRange.setValue({
+        startDate: startDate,
+        endDate: endDate,
+      });
+    }
+
+    if (bussinesss !== null) {
+      const obbus = JSON.parse(bussinesss);
+      this.chipsBussiness = obbus;
+    }
+  }
+
+
+
   public getAllBusiness() {
     this.subscription = this.content.getAllBusiness().subscribe((resp) => {
       this.bussiness = resp;
@@ -137,8 +131,9 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
       this.chipsBussiness.push(val);
       localStorage.setItem('bussiness', JSON.stringify(val));
     } else {
-      if (this.chipsBussiness.includes(val) === false)
+      if (this.chipsBussiness.includes(val) === false) {
         this.chipsBussiness.push(val);
+      }
     }
     localStorage.setItem('bussiness', JSON.stringify(this.chipsBussiness));
   }
@@ -165,22 +160,18 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
       this.chipsBussinessId.push(element.id);
     });
 
-    let validDateStart =
+    const validDateStart =
       this.filterUsers.controls.dateRange.value.startDate === undefined ||
       this.filterUsers.controls.dateRange.value.startDate === null ||
       this.filterUsers.controls.dateRange.value.startDate === '';
-    let validDateEnd =
+    const validDateEnd =
       this.filterUsers.controls.dateRange.value.endDate === undefined ||
       this.filterUsers.controls.dateRange.value.endDate === null ||
       this.filterUsers.controls.dateRange.value.endDate === '';
 
-    let data = {
-      dateStart: validDateStart
-        ? null
-        : this.filterUsers.controls.dateRange.value.startDate,
-      dateEnd: validDateEnd
-        ? null
-        : this.filterUsers.controls.dateRange.value.endDate,
+    const data = {
+      dateStart: validDateStart ? null : this.filterUsers.controls.dateRange.value.startDate,
+      dateEnd: validDateEnd ? null : this.filterUsers.controls.dateRange.value.endDate,
       state: this.filterUsers.controls.status.value,
       comunications: this.filterUsers.controls.comunication.value,
       commissions: this.filterUsers.controls.commissions.value,

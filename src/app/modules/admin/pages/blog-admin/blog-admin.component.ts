@@ -11,12 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./blog-admin.component.scss'],
 })
 export class BlogAdminComponent implements OnInit {
-  constructor(
-    private content: ContentService,
-    private _snackBar: MatSnackBar,
-    public router: Router,
-    private utils: UtilsService
-  ) {}
+  constructor(private content: ContentService, private _snackBar: MatSnackBar, public router: Router, private utils: UtilsService) {}
   blogPublicado = [];
 
   blogHidden = [];
@@ -29,14 +24,14 @@ export class BlogAdminComponent implements OnInit {
     this.utils.checkPermision();
   }
   getBlogs() {
-    let data = {
+    const data = {
       from: 1,
       orderBy: 'RELEVANT',
     };
     this.content.getBlogsAdmin(data).subscribe((resp) => {
-      let visibles = resp.objectResponse.blogs;
-      let visiblesBlog = [];
-      let invisiblesBlog = [];
+      const visibles = resp.objectResponse.blogs;
+      const visiblesBlog = [];
+      const invisiblesBlog = [];
       for (let index = 0; index < visibles.length; index++) {
         if (visibles[index].visible === true) {
           visiblesBlog.push(visibles[index]);
@@ -59,14 +54,14 @@ export class BlogAdminComponent implements OnInit {
       allowOutsideClick: false,
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
-        this.content.deleteBlog(item.id).subscribe((resp) => {
+        this.content.deleteBlog(item.id).subscribe(() => {
           this.getBlogs();
         });
       }
     });
   }
   activate(element) {
-    let formData: FormData = new FormData();
+    const formData: FormData = new FormData();
     formData.append('id', element.id);
     formData.append('value', '' + element.visible);
     this.content.activeBlog(formData).subscribe((resp) => {

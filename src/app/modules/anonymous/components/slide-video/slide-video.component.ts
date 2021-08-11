@@ -53,26 +53,20 @@ export class SlideVideoComponent implements OnInit {
     {
       id: 'video2',
       title: '¿Cómo ver el historial de links?',
-      description:
-        'Aprende cuales son los links que más ganancias te generan y que tu público más visita.',
+      description: 'Aprende cuales son los links que más ganancias te generan y que tu público más visita.',
       img: '/assets/img/video/historial.jpg',
       video: '8RMdatgfaoU?rel=0&amp;autoplay=1',
     },
     {
       id: 'video3',
       title: '¿Cómo ver los reportes de clickam?',
-      description:
-        'Aprende a leer los reportes, visualiza tu dinero y sigue ganando.',
+      description: 'Aprende a leer los reportes, visualiza tu dinero y sigue ganando.',
       img: '/assets/img/video/reportes.jpg',
       video: 'qd1eb38ypjk?rel=0&amp;autoplay=1',
     },
   ];
 
-  constructor(
-    private dialog: MatDialog,
-    private sanitizer: DomSanitizer,
-    private route: ActivatedRoute
-  ) {
+  constructor(private dialog: MatDialog, private sanitizer: DomSanitizer, private route: ActivatedRoute) {
     this.route.queryParams.subscribe((param) => {
       let idVideoRoute = param.video;
       this.sliderVideo.forEach((element) => {
@@ -101,9 +95,7 @@ export class SlideVideoComponent implements OnInit {
     const id = 'video-modal';
     const template = this.templateVideo;
     const title = '';
-    this.video = this.sanitizer.bypassSecurityTrustResourceUrl(
-      'https://www.youtube.com/embed/' + data.video
-    );
+    this.video = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + data.video);
 
     this.dialog.open(ModalGenericComponent, {
       panelClass: 'video-clickacademy',

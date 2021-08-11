@@ -13,7 +13,7 @@ export class LinkGeneratorFormComponent implements OnInit {
   generatorForm: FormGroup;
   formLink: FormGroup;
   @Input() bussiness = [];
-  @Input() url: string = '';
+  @Input() url = '';
   @Input() enableButton: boolean;
   @Output() generate = new EventEmitter();
 
@@ -36,7 +36,7 @@ export class LinkGeneratorFormComponent implements OnInit {
   }
 
   public generateLink() {
-    let generateValue = {
+    const generateValue = {
       Idbusiness: this.generatorForm.controls.bussiness.value,
       link: this.generatorForm.controls.link.value,
     };
@@ -53,8 +53,8 @@ export class LinkGeneratorFormComponent implements OnInit {
 
   /**
    * Abre el mensaje de confirmacion de copiado del link
-   * @param message
-   * @param action
+   * @param message mensaje
+   * @param action accion
    */
 
   private openSnackBar(message: string, action: string) {

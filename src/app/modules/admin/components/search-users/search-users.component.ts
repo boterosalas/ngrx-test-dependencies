@@ -18,7 +18,7 @@ export class SearchUsersComponent implements OnInit {
   }
 
   searchProduct() {
-    let searchTerm = this.searchForm.controls.search.value;
+    const searchTerm = this.searchForm.controls.search.value;
     this.search.emit(searchTerm);
   }
 }

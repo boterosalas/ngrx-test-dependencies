@@ -42,19 +42,17 @@ export class MasterDataService {
     return this.http.get(`${this.url}${this.apiTerms}`, this.httpOptions);
   }
   public setTerms(data: any) {
-    return this.http
-      .post(`${this.url + this.apiSetTerms}`, data, this.httpOptionsSet)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
-        ),
-        map((bussiness: ResponseService) => {
-          return bussiness;
-        })
-      );
+    return this.http.post(`${this.url + this.apiSetTerms}`, data, this.httpOptionsSet).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((bussiness: ResponseService) => {
+        return bussiness;
+      })
+    );
   }
 }

@@ -12,11 +12,7 @@ describe('NotificationsComponent', () => {
   let component: NotificationsComponent;
   let fixture: ComponentFixture<NotificationsComponent>;
 
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'getNotificationAdmin',
-    'viewNotification',
-    'deleteNotificationUser',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getNotificationAdmin', 'viewNotification', 'deleteNotificationUser']);
 
   let response = {
     state: 'Success',
@@ -70,12 +66,7 @@ describe('NotificationsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [],
-      imports: [
-        ClickerModule,
-        RouterTestingModule,
-        HttpClientTestingModule,
-        BrowserAnimationsModule,
-      ],
+      imports: [ClickerModule, RouterTestingModule, HttpClientTestingModule, BrowserAnimationsModule],
       providers: [{ provide: ContentService, useValue: mockContentService }],
     }).compileComponents();
   }));
@@ -83,9 +74,7 @@ describe('NotificationsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NotificationsComponent);
     component = fixture.componentInstance;
-    mockContentService.getNotificationAdmin.and.returnValue(
-      of(respGetNotification)
-    );
+    mockContentService.getNotificationAdmin.and.returnValue(of(respGetNotification));
     mockContentService.viewNotification.and.returnValue(of(response));
     mockContentService.deleteNotificationUser.and.returnValue(of(response));
     fixture.detectChanges();

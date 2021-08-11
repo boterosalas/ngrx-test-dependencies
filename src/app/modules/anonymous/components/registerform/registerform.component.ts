@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  HostListener,
-  ViewChild,
-  TemplateRef,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, ViewChild, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmPasswordValidator } from 'src/app/validators/confirm-password.validator';
 import Swal from 'sweetalert2';
@@ -50,8 +43,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   templateTerms: TemplateRef<any>;
 
   emailPattern = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
-  namePattern =
-    '[a-zA-Z0-9 àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]+';
+  namePattern = '[a-zA-Z0-9 àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]+';
   numberPattern = '^(0|[0-9][0-9]*)$';
   passwordPattern = '(?=.*[a-zA-Z])(?=.*[0-9])';
   msg: string;
@@ -73,73 +65,22 @@ export class RegisterformComponent implements OnInit, OnDestroy {
 
     this.registerForm = this.fb.group(
       {
-        name: [
-          '',
-          [
-            Validators.required,
-            Validators.maxLength(50),
-            Validators.pattern(this.namePattern),
-          ],
-        ],
-        lastName: [
-          '',
-          [
-            Validators.required,
-            Validators.maxLength(50),
-            Validators.pattern(this.namePattern),
-          ],
-        ],
+        name: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(this.namePattern)]],
+        lastName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(this.namePattern)]],
         idType: ['', Validators.required],
-        id: [
-          '',
-          [
-            Validators.required,
-            Validators.maxLength(11),
-            Validators.pattern(this.numberPattern),
-          ],
-        ],
-        phone: [
-          '',
-          [
-            Validators.required,
-            Validators.maxLength(10),
-            Validators.minLength(10),
-            Validators.pattern(this.numberPattern),
-          ],
-        ],
-        email: [
-          '',
-          [
-            Validators.required,
-            Validators.pattern(this.emailPattern),
-            Validators.maxLength(64),
-          ],
-        ],
+        id: ['', [Validators.required, Validators.maxLength(11), Validators.pattern(this.numberPattern)]],
+        phone: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern(this.numberPattern)]],
+        email: ['', [Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
         confirmEmail: ['', []],
         password: [
           '',
-          [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(20),
-            Validators.pattern(new RegExp(this.passwordPattern)),
-          ],
+          [Validators.required, Validators.minLength(6), Validators.maxLength(20), Validators.pattern(new RegExp(this.passwordPattern))],
         ],
-        confirmPassword: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(20),
-          ],
-        ],
+        confirmPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
         acceptTerms: [null, Validators.required],
       },
       {
-        validator: [
-          ConfirmPasswordValidator.MatchPassword,
-          ConfirmEmailValidator.MatchEmail,
-        ],
+        validator: [ConfirmPasswordValidator.MatchPassword, ConfirmEmailValidator.MatchEmail],
       }
     );
     this.showRegisterForm = true;
@@ -214,8 +155,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
             allowOutsideClick: false,
             allowEscapeKey: false,
             confirmButtonText: 'Volver al inicio',
-            confirmButtonClass:
-              'accept-register-alert-success gtmRegistroClicModalValidacion',
+            confirmButtonClass: 'accept-register-alert-success gtmRegistroClicModalValidacion',
           }).then(() => {
             this.utils.hideloginForm();
           });
@@ -269,11 +209,9 @@ export class RegisterformComponent implements OnInit, OnDestroy {
    */
 
   public getidType() {
-    this.subscription = this.registerUser
-      .idType()
-      .subscribe((res: ResponseService) => {
-        this.idUserType = res.objectResponse;
-      });
+    this.subscription = this.registerUser.idType().subscribe((res: ResponseService) => {
+      this.idUserType = res.objectResponse;
+    });
   }
 
   /**
@@ -282,12 +220,11 @@ export class RegisterformComponent implements OnInit, OnDestroy {
    */
 
   onStrengthChanged(event) {
-    this.subscription =
-      this.registerForm.controls.password.valueChanges.subscribe((resp) => {
-        if (resp === '') {
-          this.msg = '';
-        }
-      });
+    this.subscription = this.registerForm.controls.password.valueChanges.subscribe((resp) => {
+      if (resp === '') {
+        this.msg = '';
+      }
+    });
     if (event <= 20) {
       this.msg = 'Contraseña débil';
       this.classMsg = 'weak';

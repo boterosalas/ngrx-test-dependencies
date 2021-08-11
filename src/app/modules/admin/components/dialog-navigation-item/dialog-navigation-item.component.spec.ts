@@ -17,9 +17,7 @@ describe('DialogNavigationItemComponent', () => {
   let component: DialogNavigationItemComponent;
   let fixture: ComponentFixture<DialogNavigationItemComponent>;
 
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'saveFooterLink',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['saveFooterLink']);
   const dialogMock = {
     close: () => {},
   };

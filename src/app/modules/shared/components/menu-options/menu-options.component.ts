@@ -1,15 +1,4 @@
-import {
-  Component,
-  OnInit,
-  HostListener,
-  OnChanges,
-  DoCheck,
-  Input,
-  OnDestroy,
-  ViewChild,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, HostListener, OnChanges, DoCheck, Input, OnDestroy, ViewChild, Output, EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -23,12 +12,7 @@ import decode from 'jwt-decode';
   styleUrls: ['./menu-options.component.scss'],
 })
 export class MenuOptionsComponent implements OnInit, OnDestroy {
-  constructor(
-    public auth: AuthService,
-    private utils: UtilsService,
-    private loader: LoaderService,
-    private router: Router
-  ) {}
+  constructor(public auth: AuthService, private utils: UtilsService, private loader: LoaderService, private router: Router) {}
 
   options = [];
   token = localStorage.getItem('ACCESS_TOKEN');

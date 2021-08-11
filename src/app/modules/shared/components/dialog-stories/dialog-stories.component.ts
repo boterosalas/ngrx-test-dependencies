@@ -20,10 +20,7 @@ export class DialogStoriesComponent implements OnInit {
   nextEnabled: boolean = true;
   stories: string;
 
-  constructor(
-    public dialogRef: MatDialogRef<any>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
+  constructor(public dialogRef: MatDialogRef<any>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.stories = this.data.storiesBusiness ? 'storiesBusiness' : 'stories';
 
     this.slideConfig = {
@@ -47,8 +44,7 @@ export class DialogStoriesComponent implements OnInit {
         },
       ],
     };
-    this.showArrowRight = this.showArrowLeft =
-      this.data['stories'].length <= 1 ? false : true;
+    this.showArrowRight = this.showArrowLeft = this.data['stories'].length <= 1 ? false : true;
     this.showArrows = this.data.showArrows;
   }
 
@@ -68,13 +64,7 @@ export class DialogStoriesComponent implements OnInit {
   }
 
   slickInit(e) {
-    setTimeout(
-      () =>
-        this.initSlickGoTo().then((slickModal) =>
-          slickModal.slickGoTo(this.data.id)
-        ),
-      0
-    );
+    setTimeout(() => this.initSlickGoTo().then((slickModal) => slickModal.slickGoTo(this.data.id)), 0);
   }
 
   async initSlickGoTo() {
@@ -87,41 +77,25 @@ export class DialogStoriesComponent implements OnInit {
 
   beforeChange(e) {
     this.data.id = e.nextSlide;
-    this.nextEnabled =
-      e.nextSlide >= this.data[this.stories].length - 1 ? false : true;
+    this.nextEnabled = e.nextSlide >= this.data[this.stories].length - 1 ? false : true;
 
     if (this.nextEnabled) this.pause(e.currentSlide);
 
-    const slickTrack = document.querySelector(
-      '.modal-stories .slick-list .slick-track'
-    );
+    const slickTrack = document.querySelector('.modal-stories .slick-list .slick-track');
     const slicks = slickTrack.querySelectorAll('.card.slick-slide');
 
     if (slicks) {
       slicks.forEach((element) => {
-        let dataSlickIndex: number = Number.parseInt(
-          element.getAttribute('data-slick-index')
-        );
-        if (element.classList.contains('next-prev-slick'))
-          element.classList.remove('next-prev-slick');
+        let dataSlickIndex: number = Number.parseInt(element.getAttribute('data-slick-index'));
+        if (element.classList.contains('next-prev-slick')) element.classList.remove('next-prev-slick');
 
-        if (
-          dataSlickIndex < e.nextSlide &&
-          !element.classList.contains('prev-slick')
-        ) {
+        if (dataSlickIndex < e.nextSlide && !element.classList.contains('prev-slick')) {
           element.classList.add('prev-slick');
         }
 
-        if (
-          dataSlickIndex === e.nextSlide - 1 &&
-          !element.classList.contains('next-prev-slick')
-        )
-          element.classList.add('next-prev-slick');
+        if (dataSlickIndex === e.nextSlide - 1 && !element.classList.contains('next-prev-slick')) element.classList.add('next-prev-slick');
 
-        if (
-          dataSlickIndex >= e.nextSlide &&
-          element.classList.contains('prev-slick')
-        ) {
+        if (dataSlickIndex >= e.nextSlide && element.classList.contains('prev-slick')) {
           element.classList.remove('prev-slick');
         }
       });
@@ -141,8 +115,7 @@ export class DialogStoriesComponent implements OnInit {
   }
 
   public pause(index) {
-    if (this.data[this.stories][index])
-      this.data[this.stories][index].pause = true;
+    if (this.data[this.stories][index]) this.data[this.stories][index].pause = true;
   }
 
   public reproduce(index) {

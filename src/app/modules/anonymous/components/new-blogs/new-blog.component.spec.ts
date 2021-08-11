@@ -12,11 +12,7 @@ describe('NewBlogComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [NewBlogComponent],
-      imports: [
-        TranslateModule.forRoot(),
-        RouterTestingModule.withRoutes([]),
-        AppMaterialModule,
-      ],
+      imports: [TranslateModule.forRoot(), RouterTestingModule.withRoutes([]), AppMaterialModule],
     }).compileComponents();
   }));
 

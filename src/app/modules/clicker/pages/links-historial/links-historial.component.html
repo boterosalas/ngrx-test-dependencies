@@ -8,19 +8,11 @@
 <div class="container historical">
   <!-- <h1 class="border-bottom-orange-init">{{ 'HISTORICAL.HISTORY_LINKS' | translate }}</h1> -->
 
-  <div
-    class="order border-bottom-gray"
-    fxLayout="row"
-    fxLayoutAlign="flex-start center"
-  >
+  <div class="order border-bottom-gray" fxLayout="row" fxLayoutAlign="flex-start center">
     <label class="mr-4 f-17 gray">Ordenar por: </label>
     <mat-form-field>
       <mat-select value="DATEDESC">
-        <mat-option
-          *ngFor="let option of orderOptions"
-          [value]="option.value"
-          (click)="order(option.value)"
-        >
+        <mat-option *ngFor="let option of orderOptions" [value]="option.value" (click)="order(option.value)">
           <span>{{ option.description }}</span></mat-option
         >
       </mat-select>
@@ -36,31 +28,15 @@
   ></app-table-historical-links>
 
   <pagination-template #p="paginationApi" (pageChange)="pagination($event)">
-    <div
-      fxLayout="row"
-      fxLayoutGap="12px"
-      class="paginator"
-      fxLayoutAlign="end center"
-    >
+    <div fxLayout="row" fxLayoutGap="12px" class="paginator" fxLayoutAlign="end center">
       <span class="items">Items por página {{ pageSize }}</span>
       <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
         <a (click)="p.previous()"> <i class="tio-back_ui"></i> </a>
       </div>
 
-      <div
-        class="bubble"
-        fxLayout="row"
-        fxLayoutGap="20px"
-        fxLayoutAlign="space-between center"
-      >
-        <div
-          *ngFor="let page of p.pages"
-          [class.current]="p.getCurrent() === page.value"
-        >
-          <a
-            (click)="p.setCurrent(page.value)"
-            *ngIf="p.getCurrent() !== page.value"
-          >
+      <div class="bubble" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
+        <div *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
+          <a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
             <span class="cursor-pointer">{{ page.label }}</span>
           </a>
           <div *ngIf="p.getCurrent() === page.value">
@@ -84,22 +60,10 @@
       <div fxLayout="column">
         <div fxLayout="column" fxFlex="100" fxFlex.xs="100">
           <mat-form-field appearance="dashed" class="dashed mt-2">
-            <input
-              id="url"
-              matInput
-              formcontrolName="link"
-              [value]="urlshorten"
-              #linkInput
-              readonly
-            />
+            <input id="url" matInput formcontrolName="link" [value]="urlshorten" #linkInput readonly />
           </mat-form-field>
         </div>
-        <div
-          fxLayout="row"
-          fxLayoutAlign="center space-between"
-          fxLayoutGap="10px"
-          class="mt-2 share-desktop"
-        >
+        <div fxLayout="row" fxLayoutAlign="center space-between" fxLayoutGap="10px" class="mt-2 share-desktop">
           <button
             mat-button
             id="btnCopy"
@@ -108,10 +72,7 @@
             ngClass="{{ classButtonCopy }}"
             (click)="copyInputMessage(linkInput)"
           >
-            <span
-              fxLayoutAlign="center space-between"
-              ngClass="{{ classButtonCopy }}"
-            >
+            <span fxLayoutAlign="center space-between" ngClass="{{ classButtonCopy }}">
               {{ 'GENERIC.COPY_LINK' | translate }}
             </span>
           </button>
@@ -128,19 +89,8 @@
             </span>
           </button> -->
 
-          <button
-            mat-button
-            id="buy"
-            color="orange"
-            ngClass="orange-border {{ classButtonBuy }}"
-            (click)="buy()"
-          >
-            <span
-              ngClass="{{ classButtonBuy }}"
-              fxLayoutAlign="center space-between"
-            >
-              Comprar
-            </span>
+          <button mat-button id="buy" color="orange" ngClass="orange-border {{ classButtonBuy }}" (click)="buy()">
+            <span ngClass="{{ classButtonBuy }}" fxLayoutAlign="center space-between"> Comprar </span>
           </button>
         </div>
       </div>
@@ -151,20 +101,10 @@
     </h3>
 
     <div class="share-desktop" id="share">
-      <button
-        theme="circles-dark"
-        shareButton="facebook"
-        [url]="urlshorten"
-        ngClass="sharebutton {{ classButtonFacebook }} mr-2"
-      >
+      <button theme="circles-dark" shareButton="facebook" [url]="urlshorten" ngClass="sharebutton {{ classButtonFacebook }} mr-2">
         <i ngClass="fab fa-facebook-f {{ classButtonFacebook }}"></i>
       </button>
-      <button
-        theme="circles-dark"
-        shareButton="twitter"
-        [url]="urlshorten"
-        ngClass="sharebutton {{ classButtonTwitter }} mr-2"
-      >
+      <button theme="circles-dark" shareButton="twitter" [url]="urlshorten" ngClass="sharebutton {{ classButtonTwitter }} mr-2">
         <i ngClass="fab fa-twitter {{ classButtonTwitter }}"></i>
       </button>
       <a
@@ -178,23 +118,9 @@
     </div>
 
     <div class="share-mobile">
-      <button
-        mat-button
-        ngClass="gtmrs  mb-2 mt-2 {{ classButtonShare }}"
-        (click)="share()"
-        fxLayout="row"
-        fxLayoutAlign="start start"
-      >
-        <span
-          ngClass="gtmrs f-15 {{ classButtonShare }}"
-          fxLayout="row"
-          fxLayoutAlign="center center"
-        >
-          <img
-            ngClass="icon-compartir pr-2 {{ classButtonShare }}"
-            src="/assets/img/Compartir.svg"
-            alt="user"
-          />
+      <button mat-button ngClass="gtmrs  mb-2 mt-2 {{ classButtonShare }}" (click)="share()" fxLayout="row" fxLayoutAlign="start start">
+        <span ngClass="gtmrs f-15 {{ classButtonShare }}" fxLayout="row" fxLayoutAlign="center center">
+          <img ngClass="icon-compartir pr-2 {{ classButtonShare }}" src="/assets/img/Compartir.svg" alt="user" />
           Compartir</span
         >
       </button>
@@ -216,23 +142,9 @@
         </span>
       </button> -->
 
-      <button
-        mat-button
-        ngClass="gtmrs  mb-2 mt-2 {{ classButtonBuy }}"
-        (click)="buy()"
-        fxLayout="row"
-        fxLayoutAlign="start start"
-      >
-        <span
-          ngClass="gtmrs f-15 {{ classButtonBuy }}"
-          fxLayout="row"
-          fxLayoutAlign="center center"
-        >
-          <img
-            ngClass="icon-compartir pr-2 {{ classButtonBuy }}"
-            src="/assets/img/Comprar.svg"
-            alt="user"
-          />
+      <button mat-button ngClass="gtmrs  mb-2 mt-2 {{ classButtonBuy }}" (click)="buy()" fxLayout="row" fxLayoutAlign="start start">
+        <span ngClass="gtmrs f-15 {{ classButtonBuy }}" fxLayout="row" fxLayoutAlign="center center">
+          <img ngClass="icon-compartir pr-2 {{ classButtonBuy }}" src="/assets/img/Comprar.svg" alt="user" />
           Comprar
         </span>
       </button>

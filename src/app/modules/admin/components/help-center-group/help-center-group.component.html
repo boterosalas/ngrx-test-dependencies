@@ -6,11 +6,7 @@
     <p class="help-center__actions">ACCIONES</p>
   </header>
   <div class="help-center__content">
-    <div
-      class="help-center__list-sections"
-      cdkDropList
-      (cdkDropListDropped)="dropSection($event)"
-    >
+    <div class="help-center__list-sections" cdkDropList (cdkDropListDropped)="dropSection($event)">
       <app-faq-group
         *ngFor="let section of sectionsFaqs"
         [section]="section"
@@ -25,20 +21,8 @@
       >
       </app-faq-group>
     </div>
-    <div
-      fxLayout="row"
-      fxLayoutAlign.gt-xs="end center"
-      fxLayoutAlign.xs="center center"
-      class="container button-padding mb-4"
-    >
-      <button
-        mat-raised-button
-        color="orange"
-        class="ml-2"
-        (click)="addSection()"
-      >
-        Nuevo grupo
-      </button>
+    <div fxLayout="row" fxLayoutAlign.gt-xs="end center" fxLayoutAlign.xs="center center" class="container button-padding mb-4">
+      <button mat-raised-button color="orange" class="ml-2" (click)="addSection()">Nuevo grupo</button>
     </div>
   </div>
 </div>
@@ -46,9 +30,7 @@
 <ng-template #templateDeleteFaqGroup>
   <div ngClass="delete-container">
     <h3 ngClass="title_delete">Eliminar grupo</h3>
-    <p ngClass="text-container">
-      ¿Está seguro que desea eliminar el grupo seleccionado?
-    </p>
+    <p ngClass="text-container">¿Está seguro que desea eliminar el grupo seleccionado?</p>
     <div
       fxLayout="row"
       fxLayout.xs="column"
@@ -58,9 +40,7 @@
       class="center-buttons"
     >
       <div ngClass="mt-3 mb-2 hide-button-on-mobile">
-        <button mat-button ngClass="button_cancel" (click)="cancelDelete()">
-          Cancelar
-        </button>
+        <button mat-button ngClass="button_cancel" (click)="cancelDelete()">Cancelar</button>
       </div>
       <div>
         <button mat-button class="red" (click)="deleteFaqSectionService()">
@@ -74,9 +54,7 @@
 <ng-template #templateDeleteFaqItem>
   <div ngClass="delete-container">
     <h3 ngClass="title_delete">Eliminar pregunta frecuente</h3>
-    <p ngClass="text-container">
-      ¿Está seguro que desea eliminar la pregunta frecuente?
-    </p>
+    <p ngClass="text-container">¿Está seguro que desea eliminar la pregunta frecuente?</p>
     <div
       fxLayout="row"
       fxLayout.xs="column"
@@ -86,9 +64,7 @@
       class="center-buttons"
     >
       <div ngClass="mt-3 mb-2 hide-button-on-mobile">
-        <button mat-button ngClass="button_cancel" (click)="cancelDelete()">
-          Cancelar
-        </button>
+        <button mat-button ngClass="button_cancel" (click)="cancelDelete()">Cancelar</button>
       </div>
       <div>
         <button mat-button class="red" (click)="deleteFaqItemService()">

@@ -1,21 +1,7 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  TemplateRef,
-  HostListener,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, HostListener, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router, NavigationStart, NavigationEnd } from '@angular/router';
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  group,
-  animate,
-} from '@angular/animations';
+import { trigger, state, style, transition, group, animate } from '@angular/animations';
 import { UtilsService } from './services/utils.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from './services/auth.service';
@@ -49,12 +35,9 @@ export class AppComponent implements OnInit, OnDestroy {
   name = 'Angular';
   public onSideNavChange: boolean;
 
-  @ViewChild(
-    'templateCardLogin, TemplateCardRegister, TemplateCardForgot, templateCardActivate',
-    {
-      static: false,
-    }
-  )
+  @ViewChild('templateCardLogin, TemplateCardRegister, TemplateCardForgot, templateCardActivate', {
+    static: false,
+  })
   template: TemplateRef<any>;
   isHome: boolean;
   internal: boolean;
@@ -119,8 +102,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.isLoggedIn = this.auth.isLoggedIn();
 
     this.subscription = this.router.events.subscribe(() => {
-      let urlLocation = location.prepareExternalUrl(location.path());
-      let SplitLocation = urlLocation.split('/');
+      const urlLocation = location.prepareExternalUrl(location.path());
+      const SplitLocation = urlLocation.split('/');
       this.classPage = SplitLocation[1];
     });
   }
@@ -162,35 +145,29 @@ export class AppComponent implements OnInit, OnDestroy {
       this.isOpenMenu = isOpenMenu;
     });
 
-    this.subscription = this.utils.changeRegister.subscribe(
-      (isOpenRegister) => {
-        this.isOpen = isOpenRegister;
-        this.showRegisterForm = true;
-        this.showLoginForm = false;
-        this.showForgotForm = false;
-        this.showActivateForm = false;
-      }
-    );
+    this.subscription = this.utils.changeRegister.subscribe((isOpenRegister) => {
+      this.isOpen = isOpenRegister;
+      this.showRegisterForm = true;
+      this.showLoginForm = false;
+      this.showForgotForm = false;
+      this.showActivateForm = false;
+    });
 
-    this.subscription = this.utils.showForgotFormEmit.subscribe(
-      (isOpenForgot) => {
-        this.isOpen = isOpenForgot;
-        this.showRegisterForm = false;
-        this.showLoginForm = false;
-        this.showActivateForm = false;
-        this.showForgotForm = true;
-      }
-    );
+    this.subscription = this.utils.showForgotFormEmit.subscribe((isOpenForgot) => {
+      this.isOpen = isOpenForgot;
+      this.showRegisterForm = false;
+      this.showLoginForm = false;
+      this.showActivateForm = false;
+      this.showForgotForm = true;
+    });
 
-    this.subscription = this.utils.showActivateFormEmit.subscribe(
-      (isOpenActivate) => {
-        this.isOpen = isOpenActivate;
-        this.showActivateForm = true;
-        this.showRegisterForm = false;
-        this.showLoginForm = false;
-        this.showForgotForm = false;
-      }
-    );
+    this.subscription = this.utils.showActivateFormEmit.subscribe((isOpenActivate) => {
+      this.isOpen = isOpenActivate;
+      this.showActivateForm = true;
+      this.showRegisterForm = false;
+      this.showLoginForm = false;
+      this.showForgotForm = false;
+    });
 
     this.windowWidth();
     this.getUserData();
@@ -199,9 +176,9 @@ export class AppComponent implements OnInit, OnDestroy {
   public getPopUps() {
     if (this.auth.isLoggedIn()) {
       this.content.getPopup().subscribe((resp) => {
-        let locationHref = location.href;
-        let routeSplit = locationHref.split('/');
-        let currentRoute = '/' + routeSplit[routeSplit.length - 1];
+        const locationHref = location.href;
+        const routeSplit = locationHref.split('/');
+        const currentRoute = '/' + routeSplit[routeSplit.length - 1];
 
         const popUp = resp.find((x) => !x.new && x.seccion === currentRoute);
 
@@ -231,8 +208,8 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   public saveVisitOffer(idoffer) {
-    let token = localStorage.getItem('ACCESS_TOKEN');
-    let tokenDecode = decode(token);
+    const token = localStorage.getItem('ACCESS_TOKEN');
+    const tokenDecode = decode(token);
     const userId = tokenDecode.userid;
 
     this.content.saveVisitOffer({ idoffer, userId }).subscribe((resp) => {});

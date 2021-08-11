@@ -1,22 +1,7 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-  HttpErrorResponse,
-} from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import {
-  catchError,
-  distinctUntilChanged,
-  takeLast,
-  mergeAll,
-  switchMap,
-  mergeMap,
-  tap,
-  take,
-} from 'rxjs/operators';
+import { catchError, distinctUntilChanged, takeLast, mergeAll, switchMap, mergeMap, tap, take } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { Injector } from '@angular/core';
 import { ResponseService } from '../interfaces/response';
@@ -26,15 +11,8 @@ import { LoaderService } from '../services/loader.service';
 export class AuthInterceptor implements HttpInterceptor {
   countError: number = 0;
 
-  constructor(
-    public auth: AuthService,
-    private injector: Injector,
-    private loaderService: LoaderService
-  ) {}
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  constructor(public auth: AuthService, private injector: Injector, private loaderService: LoaderService) {}
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.auth = this.injector.get(AuthService);
     const token: string = localStorage.getItem('ACCESS_TOKEN');
 

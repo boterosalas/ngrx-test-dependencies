@@ -12,27 +12,23 @@ moment.locale('es');
   styleUrls: ['./add-edit-blog-admin.component.scss'],
 })
 export class AddEditBlogAdminComponent implements OnInit {
-  constructor(
-    public router: Router,
-    private content: ContentService,
-    private fb: FormBuilder
-  ) {}
+  constructor(public router: Router, private content: ContentService, private fb: FormBuilder) {}
   validFormat: boolean;
   fileImgCat: any;
   formData: FormData = new FormData();
-  nameFileCert: string = '';
+  nameFileCert = '';
   showErrorCert: boolean;
   activebutton: boolean;
   visualizationImag: any;
-  escritor: string = '';
-  etiquetas: string = '';
-  disabledButtonEr: boolean = true;
-  disabledButtonPu: boolean = true;
-  visible: boolean = false;
+  escritor = '';
+  etiquetas = '';
+  disabledButtonEr = true;
+  disabledButtonPu = true;
+  visible = false;
   datePublication: any = '';
   hourDate: any = '';
   dateForm: FormGroup;
-  contadorDates: number = 0;
+  contadorDates = 0;
   maxDate = new Date();
   minHours: any;
   configurationEditor: AngularEditorConfig = {
@@ -87,8 +83,8 @@ export class AddEditBlogAdminComponent implements OnInit {
   }
 
   private setExten(nameFile: string, getSize: number) {
-    let splitExt = nameFile.split('.');
-    let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
+    const splitExt = nameFile.split('.');
+    const getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
     this.validFormat = false;
     this.showErrorCert = true;
     if (getExt === 'jpg') {
@@ -103,15 +99,11 @@ export class AddEditBlogAdminComponent implements OnInit {
   readURL(event: any): void {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
-      let fileList: FileList = event.target.files;
+      const fileList: FileList = event.target.files;
       this.setExten(fileList[0].name, fileList[0].size);
       if (this.validFormat === true) {
-        this.formData.append(
-          'File',
-          fileList[0],
-          fileList[0].name.replace(' ', '_')
-        );
-        let nameFile = event.target.files[0].name;
+        this.formData.append('File', fileList[0], fileList[0].name.replace(' ', '_'));
+        const nameFile = event.target.files[0].name;
         this.nameFileCert = nameFile;
         const reader = new FileReader();
         reader.onload = (e) => (this.visualizationImag = reader.result);
@@ -121,16 +113,15 @@ export class AddEditBlogAdminComponent implements OnInit {
     }
   }
   saveeraser() {
-    let datePublication = moment(this.datePublication).format('YYYY-MM-DD');
+    const datePublication = moment(this.datePublication).format('YYYY-MM-DD');
     let hour;
 
-    if (this.hourDate != undefined) {
+    if (this.hourDate !== undefined) {
       hour = this.HrFormat(this.hourDate);
     } else {
       hour = '';
     }
 
-    //console.log(datePublication + ' ' + hour);
     this.formData.append('title', this.dateForm.controls.title.value);
     this.formData.append('content', this.dateForm.controls.contenido.value);
     this.formData.append('author', this.dateForm.controls.author.value);
@@ -139,33 +130,30 @@ export class AddEditBlogAdminComponent implements OnInit {
     if (this.visible === true) {
       this.formData.append('publicationDate', '');
     } else {
-      this.formData.append(
-        'publicationDate',
-        datePublication + ' ' + hour + ':00'
-      );
+      this.formData.append('publicationDate', datePublication + ' ' + hour + ':00');
     }
     this.content.saveBlog(this.formData).subscribe((resp) => {
       this.GoToBack();
     });
   }
   public HrFormat(time) {
-    let format = time.toString().split(' ')[1];
-    let hour = time.toString().split(' ')[0].split(':')[0];
-    if (hour == 12) {
-      let hour = time.toString().split(' ')[0];
+    const format = time.toString().split(' ')[1];
+    const hour = time.toString().split(' ')[0].split(':')[0];
+    if (hour === 12) {
+      const hour = time.toString().split(' ')[0];
       return hour;
     } else {
       if (format === 'PM') {
-        let hour = time.toString().split(' ')[0];
-        let h = parseInt(hour.split(':')[0]) + 12;
-        let m = hour.split(':')[1];
+        const hour = time.toString().split(' ')[0];
+        const h = parseInt(hour.split(':')[0]) + 12;
+        const m = hour.split(':')[1];
         return h + ':' + m;
       } else {
         if (hour < 10) {
-          let hour = 0 + time.toString().split(' ')[0];
+          const hour = 0 + time.toString().split(' ')[0];
           return hour;
         } else {
-          let hour = time.toString().split(' ')[0];
+          const hour = time.toString().split(' ')[0];
           return hour;
         }
       }
@@ -190,7 +178,7 @@ export class AddEditBlogAdminComponent implements OnInit {
     if (elemento === 'Cambio') {
       this.contadorDates += 1;
     }
-    if (this.dateForm.controls.contenido.value != '') {
+    if (this.dateForm.controls.contenido.value !== '') {
       if (this.contadorDates > 1) {
         this.disabledButtonPu = false;
       } else {
@@ -206,9 +194,9 @@ export class AddEditBlogAdminComponent implements OnInit {
     this.router.navigate(['/blog-admin']);
   }
   hourChange(horu) {
-    let data = new Date();
-    let dataH = moment(data).format('YYYY-MM-DD');
-    let dataOp = moment(horu.value).format('YYYY-MM-DD');
+    const data = new Date();
+    const dataH = moment(data).format('YYYY-MM-DD');
+    const dataOp = moment(horu.value).format('YYYY-MM-DD');
     if (dataH === dataOp) {
       this.hourDate = '';
       this.minHours = moment(data).format('hh:mm A');

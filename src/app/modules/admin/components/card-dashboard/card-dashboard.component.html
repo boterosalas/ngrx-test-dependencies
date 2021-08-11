@@ -1,8 +1,4 @@
-<div
-  *ngFor="let item of items; let i = index"
-  class="card-{{ i }} white"
-  ngClass.gt-xs="card-dash mr-2"
->
+<div *ngFor="let item of items; let i = index" class="card-{{ i }} white" ngClass.gt-xs="card-dash mr-2">
   <h3 class="f-18">{{ item.title }}</h3>
 
   <mat-card style="border-radius: 10px !important">

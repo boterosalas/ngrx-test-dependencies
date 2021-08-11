@@ -9,29 +9,21 @@
     <p class="texto-description">Hola {{ name }},</p>
     <p class="texto-description">Lamentamos que quieras eliminar tu cuenta.</p>
     <p class="texto-description">
-      Recuerda que en caso de tener un saldo pendiente por pagar, si eliminas tu
-      cuenta, éste no podrá ser consignado, ya que no tendremos tus datos
-      personales para gestionar esta acción. Te invitamos a que esperes mientras
-      tu pago es realizado, para luego eliminar tu cuenta.
+      Recuerda que en caso de tener un saldo pendiente por pagar, si eliminas tu cuenta, éste no podrá ser consignado, ya que no tendremos
+      tus datos personales para gestionar esta acción. Te invitamos a que esperes mientras tu pago es realizado, para luego eliminar tu
+      cuenta.
     </p>
     <div fxLayout="row" class="section-saldo">
       <img src="/assets/img/icon-comision.svg" alt="comision clickam" />
       <div fxLayout="column">
         <p class="mt-0 mb-0">TU SALDO</p>
-        <span class="mt-0 saldo-pendiente">{{
-          available + account | currency: '':'symbol':'1.0-0'
-        }}</span>
+        <span class="mt-0 saldo-pendiente">{{ available + account | currency: '':'symbol':'1.0-0' }}</span>
       </div>
     </div>
     <h4>¿Por qué quieres eliminar tu cuenta?</h4>
     <div fxLayout="row" *ngFor="let item of descriptionVal">
       <div class="mb-2">
-        <mat-checkbox
-          class="check-margin mr-3 mb-2"
-          [(ngModel)]="item.value"
-          (change)="changeValue(item.title)"
-        >
-        </mat-checkbox>
+        <mat-checkbox class="check-margin mr-3 mb-2" [(ngModel)]="item.value" (change)="changeValue(item.title)"> </mat-checkbox>
         {{ item.title }}
       </div>
     </div>
@@ -53,15 +45,7 @@
       >
         Eliminar
       </button>
-      <button
-        mat-raised-button
-        color="orange"
-        id="download-users"
-        class="ml-2"
-        [routerLink]="['/mi-perfil']"
-      >
-        Volver a mi perfil
-      </button>
+      <button mat-raised-button color="orange" id="download-users" class="ml-2" [routerLink]="['/mi-perfil']">Volver a mi perfil</button>
     </div>
   </mat-card>
 </div>
@@ -70,15 +54,11 @@
   <div [formGroup]="profileFormDelete" ngClass="delete-container">
     <h3 ngClass="title_delete">Eliminar Cuenta</h3>
     <p ngClass="text-container">
-      Esta acción es definitiva: Si eliminas tu cuenta de Clickam, no podrás
-      recuperar tu contraseña ni la información que se encuentra en la
-      plataforma. Todos tus datos personales se eliminarán definitivamente.
+      Esta acción es definitiva: Si eliminas tu cuenta de Clickam, no podrás recuperar tu contraseña ni la información que se encuentra en
+      la plataforma. Todos tus datos personales se eliminarán definitivamente.
     </p>
     <mat-form-field ngClass="mb-2">
-      <mat-pass-toggle-visibility
-        #toggleVisbility
-        matSuffix
-      ></mat-pass-toggle-visibility>
+      <mat-pass-toggle-visibility #toggleVisbility matSuffix></mat-pass-toggle-visibility>
       <input
         matInput
         id="password"
@@ -92,19 +72,13 @@
 
       <mat-error
         id="introducePassword"
-        *ngIf="
-          profileFormDelete.controls.Password.invalid &&
-          profileFormDelete.controls.Password.errors.required
-        "
+        *ngIf="profileFormDelete.controls.Password.invalid && profileFormDelete.controls.Password.errors.required"
         >{{ 'LOGIN.INTRODUCE_PASSWORD' | translate }}</mat-error
       >
 
       <mat-error
         id="minPassword"
-        *ngIf="
-          profileFormDelete.controls.Password.invalid &&
-          profileFormDelete.controls.Password.errors.minlength
-        "
+        *ngIf="profileFormDelete.controls.Password.invalid && profileFormDelete.controls.Password.errors.minlength"
         >{{ 'GENERIC.MIN_CHARACTERS' | translate }}</mat-error
       >
       <!-- : {
@@ -113,10 +87,7 @@
       } -->
       <mat-error
         id="maxPassword"
-        *ngIf="
-          profileFormDelete.controls.Password.invalid &&
-          profileFormDelete.controls.Password.errors.maxlength
-        "
+        *ngIf="profileFormDelete.controls.Password.invalid && profileFormDelete.controls.Password.errors.maxlength"
         >{{ 'GENERIC.MAX_CHARACTERS' | translate }}</mat-error
       >
     </mat-form-field>
@@ -135,9 +106,7 @@
       class="center-buttons"
     >
       <div ngClass="mt-3 mb-2 hide-button-on-mobile">
-        <button mat-button ngClass="button_cancel" (click)="cancelDelete()">
-          Cancelar
-        </button>
+        <button mat-button ngClass="button_cancel" (click)="cancelDelete()">Cancelar</button>
       </div>
       <div>
         <button
@@ -151,9 +120,7 @@
         </button>
       </div>
       <div ngClass="mt-3 mb-2 hide-button-on-desktop">
-        <button mat-button ngClass="button_cancel" (click)="cancelDelete()">
-          Cancelar
-        </button>
+        <button mat-button ngClass="button_cancel" (click)="cancelDelete()">Cancelar</button>
       </div>
     </div>
   </div>

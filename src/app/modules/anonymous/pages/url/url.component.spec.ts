@@ -13,11 +13,7 @@ describe('UrlComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [UrlComponent],
-      imports: [
-        RouterTestingModule,
-        AppMaterialModule,
-        HttpClientTestingModule,
-      ],
+      imports: [RouterTestingModule, AppMaterialModule, HttpClientTestingModule],
     }).compileComponents();
   }));
 

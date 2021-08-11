@@ -15,9 +15,7 @@ import * as moment from 'moment';
 describe('BlogsComponent', () => {
   let component: BlogsComponent;
   let fixture: ComponentFixture<BlogsComponent>;
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'getBlogs',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getBlogs']);
   let response = {
     Status: 'Success',
     objectResponse: {

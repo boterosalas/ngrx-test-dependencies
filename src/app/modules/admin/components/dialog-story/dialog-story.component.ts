@@ -23,9 +23,9 @@ export class DialogStoryComponent implements OnInit {
 
   storieForm: FormGroup;
   image: string;
-  nameFile: string = '';
+  nameFile = '';
   file: any;
-  showErrorImg: boolean = false;
+  showErrorImg = false;
   dataReal = [];
   validFormat: boolean;
   extension: string;
@@ -38,7 +38,7 @@ export class DialogStoryComponent implements OnInit {
   editMode = false;
   dateEdit: any;
   hourEdit: any;
-  eraserEdit: Boolean;
+  eraserEdit: boolean;
   imageEdit = '';
   saveStoryData: any;
 
@@ -47,15 +47,7 @@ export class DialogStoryComponent implements OnInit {
   }
 
   public formStory() {
-    let {
-      date,
-      datepublish,
-      description,
-      imageurl,
-      infoaditional,
-      link,
-      active,
-    } = this.data;
+    const { date, datepublish, description, imageurl, infoaditional, link, active } = this.data;
 
     if (description === undefined) {
       this.storieForm = this.fb.group({
@@ -74,9 +66,9 @@ export class DialogStoryComponent implements OnInit {
       }
 
       if (datepublish !== null) {
-        let splitDatepublish = datepublish.split('T');
+        const splitDatepublish = datepublish.split('T');
         this.dateEdit = moment(splitDatepublish[0]).toDate();
-        let hour = splitDatepublish[1];
+        const hour = splitDatepublish[1];
         this.hourEdit = this.utils.toStandardTime(hour);
         this.active = active;
         this.titleButton = 'Programar';
@@ -101,8 +93,8 @@ export class DialogStoryComponent implements OnInit {
   }
 
   private getExtensionFile(nameFile: string, getSize: number) {
-    let splitExt = nameFile.split('.');
-    let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
+    const splitExt = nameFile.split('.');
+    const getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
     this.validFormat = false;
     if (getExt === 'jpg' || getExt === 'jpeg' || getExt === 'mp4') {
       this.validFormat = true;
@@ -130,13 +122,13 @@ export class DialogStoryComponent implements OnInit {
   public onFileChangeFiles(event) {
     this.imageEdit = '';
     const files = event.target.files;
-    let nameFileStory = files[0].name;
-    let readerStory = new FileReader();
-    let sizeFile = files[0].size;
+    const nameFileStory = files[0].name;
+    const readerStory = new FileReader();
+    const sizeFile = files[0].size;
     if (files && files.length) {
       const [fileStory] = files;
-      let fileBlob = new Blob([fileStory]);
-      let file = new File([fileBlob], nameFileStory);
+      const fileBlob = new Blob([fileStory]);
+      const file = new File([fileBlob], nameFileStory);
       readerStory.readAsDataURL(file);
       readerStory.onload = () => {
         this.getExtensionFile(nameFileStory, sizeFile);
@@ -184,8 +176,8 @@ export class DialogStoryComponent implements OnInit {
   }
 
   public saveStory() {
-    let { commission, date, hour, link, nameContent, active } =
-      this.storieForm.value;
+    const { commission, link, nameContent } = this.storieForm.value;
+    let { date, hour } = this.storieForm.value;
 
     if (date !== null) {
       date = moment(date).format('YYYY-MM-DD');
@@ -236,8 +228,6 @@ export class DialogStoryComponent implements OnInit {
       ];
     }
 
-    this._content
-      .saveStories(this.saveStoryData)
-      .subscribe(() => this.dialogRef.close());
+    this._content.saveStories(this.saveStoryData).subscribe(() => this.dialogRef.close());
   }
 }

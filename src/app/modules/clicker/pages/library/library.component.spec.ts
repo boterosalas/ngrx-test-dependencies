@@ -4,12 +4,7 @@ import { LibraryComponent } from './library.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {
-  MatFormFieldModule,
-  MatDialogRef,
-  MAT_BOTTOM_SHEET_DATA,
-  MatDialog,
-} from '@angular/material';
+import { MatFormFieldModule, MatDialogRef, MAT_BOTTOM_SHEET_DATA, MatDialog } from '@angular/material';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ShareModule } from '@ngx-share/core';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -23,12 +18,7 @@ describe('LibraryComponent', () => {
   let component: LibraryComponent;
   let fixture: ComponentFixture<LibraryComponent>;
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll']);
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'getVideosImage',
-    'setContentImgVi',
-    'getBusiness',
-    'downloadF',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getVideosImage', 'setContentImgVi', 'getBusiness', 'downloadF']);
   const audit = {
     state: 'success',
     userMessage: 'se ha enviado un correo',

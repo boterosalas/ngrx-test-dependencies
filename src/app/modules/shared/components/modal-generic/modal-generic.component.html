@@ -3,18 +3,10 @@
     <h1 class="title-width f-18 galano-bold" mat-dialog-title>
       {{ data.title }}
     </h1>
-    <a id="closeDialog" matRipple (click)="onNoClick()"
-      ><mat-icon class="close cursor-pointer">close</mat-icon></a
-    >
+    <a id="closeDialog" matRipple (click)="onNoClick()"><mat-icon class="close cursor-pointer">close</mat-icon></a>
   </div>
   <div fxLayoutAlign="end">
-    <a
-      id="closeDialog"
-      matRipple
-      (click)="onNoClick()"
-      *ngIf="data.showCloseIcon"
-      ><mat-icon class="close">close</mat-icon></a
-    >
+    <a id="closeDialog" matRipple (click)="onNoClick()" *ngIf="data.showCloseIcon"><mat-icon class="close">close</mat-icon></a>
   </div>
   <div mat-dialog-content>
     <ng-container *ngTemplateOutlet="data.template"> </ng-container>

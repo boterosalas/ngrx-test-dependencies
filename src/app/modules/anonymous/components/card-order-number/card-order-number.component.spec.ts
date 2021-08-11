@@ -13,15 +13,12 @@ describe('CardOrderNumberComponent', () => {
   let component: CardOrderNumberComponent;
   let fixture: ComponentFixture<CardOrderNumberComponent>;
 
-  let mockLinksService = jasmine.createSpyObj('LinksService', [
-    'getOrderNumber',
-  ]);
+  let mockLinksService = jasmine.createSpyObj('LinksService', ['getOrderNumber']);
 
   let orderNumber = {
     state: 'Success',
     userMessage: 'El número de la orden no existe',
-    objectResponse:
-      'Este número de orden esta erróneo o no existe un registro en las bases del aliado con este número.',
+    objectResponse: 'Este número de orden esta erróneo o no existe un registro en las bases del aliado con este número.',
   };
 
   beforeEach(async(() => {

@@ -9,8 +9,7 @@ export class OffersClickamComponent implements OnInit {
   offers = [
     {
       name: '¿Dónde puedo encontrar las mejores ofertas?',
-      route:
-        '/centro-de-ayuda/ofertas/donde-puedo-encontrar-las-mejores-ofertas',
+      route: '/centro-de-ayuda/ofertas/donde-puedo-encontrar-las-mejores-ofertas',
       icon: '/assets/img/ayuda/ofertas/ofertas.svg',
     },
     {

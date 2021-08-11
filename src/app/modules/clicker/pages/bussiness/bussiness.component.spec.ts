@@ -1,19 +1,10 @@
-import {
-  async,
-  ComponentFixture,
-  TestBed,
-  inject,
-} from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
 import { BussinessComponent } from './bussiness.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {
-  MatFormFieldModule,
-  MatDialogRef,
-  MAT_BOTTOM_SHEET_DATA,
-} from '@angular/material';
+import { MatFormFieldModule, MatDialogRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
 import { ShareModule } from '@ngx-share/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -41,24 +32,13 @@ describe('BussinessComponent', () => {
     'getBusinessById',
   ]);
 
-  const mockLinksService = jasmine.createSpyObj('LinksService', [
-    'saveLink',
-    'getSellers',
-  ]);
+  const mockLinksService = jasmine.createSpyObj('LinksService', ['saveLink', 'getSellers']);
 
-  const mockUserService = jasmine.createSpyObj('UserService', [
-    'getShortUrl',
-    'getuserdata',
-    'registeruserterms',
-  ]);
+  const mockUserService = jasmine.createSpyObj('UserService', ['getShortUrl', 'getuserdata', 'registeruserterms']);
 
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open']);
 
-  const mockDialogRef = jasmine.createSpyObj('MatDialogRef', [
-    'close',
-    'afterClosed',
-    'componentInstance',
-  ]);
+  const mockDialogRef = jasmine.createSpyObj('MatDialogRef', ['close', 'afterClosed', 'componentInstance']);
 
   let dataUserC = {
     acceptTermsDeliver: true,
@@ -68,8 +48,7 @@ describe('BussinessComponent', () => {
     id: 25,
     orderby: 26,
     link: 'https://www.exito.com/ferreteria?utm_source=clickam&utm_medium=referral&utm_campaign=',
-    imageurl:
-      'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-content/ferreteria-vehiculos.png',
+    imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-content/ferreteria-vehiculos.png',
     description: 'Ferreteria y vehiculos',
     commission: 0,
     idbusiness: 1,
@@ -81,8 +60,7 @@ describe('BussinessComponent', () => {
       id: 25,
       orderby: 26,
       link: 'https://www.exito.com/ferreteria?utm_source=clickam&utm_medium=referral&utm_campaign=',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-content/ferreteria-vehiculos.png',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-content/ferreteria-vehiculos.png',
       description: 'Ferreteria y vehiculos',
       commission: 0,
       idbusiness: 1,
@@ -180,9 +158,7 @@ describe('BussinessComponent', () => {
     mockUserService.getuserdata.and.returnValue(of(dataUserC));
     mockContentService.getCommissionsByBussiness.and.returnValue(of(comison));
     mockContentService.getBusinessById.and.returnValue(of(info));
-    mockUserService.getShortUrl.and.returnValue(
-      of('http://tynyurl.com/12kusw')
-    );
+    mockUserService.getShortUrl.and.returnValue(of('http://tynyurl.com/12kusw'));
     //getSellers
     mockLinksService.saveLink.and.returnValue(of(resp));
     mockLinksService.getSellers.and.returnValue(of(respseller));
@@ -424,8 +400,7 @@ describe('BussinessComponent', () => {
     const product = {
       business: 'exito',
       image: {
-        value:
-          'https://exitocol.vteximg.com.br/arquivos/ids/97470…CHA-404-L-HIMA-1628964_a.jpg?v=637110938781170000',
+        value: 'https://exitocol.vteximg.com.br/arquivos/ids/97470…CHA-404-L-HIMA-1628964_a.jpg?v=637110938781170000',
       },
       oldprice: 1717900,
       plu: '157741',
@@ -444,8 +419,7 @@ describe('BussinessComponent', () => {
     const product = {
       business: 'carulla',
       image: {
-        value:
-          'https://carulla.vteximg.com.br/arquivos/ids/821167…Pague-5-Lleve-6-720042_a.png?v=637185259801000000',
+        value: 'https://carulla.vteximg.com.br/arquivos/ids/821167…Pague-5-Lleve-6-720042_a.png?v=637185259801000000',
       },
       oldprice: 7750,
       plu: '131805',
@@ -467,8 +441,7 @@ describe('BussinessComponent', () => {
         {
           business: 'exito',
           image: {
-            value:
-              'https://carulla.vteximg.com.br/arquivos/ids/821167…Pague-5-Lleve-6-720042_a.png?v=637185259801000000',
+            value: 'https://carulla.vteximg.com.br/arquivos/ids/821167…Pague-5-Lleve-6-720042_a.png?v=637185259801000000',
           },
           oldprice: 7750,
           plu: '131805',
@@ -485,8 +458,7 @@ describe('BussinessComponent', () => {
         {
           business: 'exito',
           image: {
-            value:
-              'https://exito.vteximg.com.br/arquivos/ids/821167…Pague-5-Lleve-6-720042_a.png?v=637185259801000000',
+            value: 'https://exito.vteximg.com.br/arquivos/ids/821167…Pague-5-Lleve-6-720042_a.png?v=637185259801000000',
           },
           oldprice: 0,
           plu: '131805',

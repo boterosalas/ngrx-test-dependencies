@@ -17,12 +17,8 @@ import { UtilsService } from 'src/app/services/utils.service';
 describe('ActivateAccountFormComponent', () => {
   let component: ActivateAccountFormComponent;
   let fixture: ComponentFixture<ActivateAccountFormComponent>;
-  const mockAuthService = jasmine.createSpyObj('AuthService', [
-    'sendActivation',
-  ]);
-  const mockUtilsService = jasmine.createSpyObj('UtilsService', [
-    'showloginForm',
-  ]);
+  const mockAuthService = jasmine.createSpyObj('AuthService', ['sendActivation']);
+  const mockUtilsService = jasmine.createSpyObj('UtilsService', ['showloginForm']);
   const Success = {
     state: 'Success',
     userMessage: null,
@@ -93,9 +89,7 @@ describe('ActivateAccountFormComponent', () => {
         type: 'success',
       })
     );
-    component.activateForm.controls.email.setValue(
-      'david.betancourt@pragma.com.co'
-    );
+    component.activateForm.controls.email.setValue('david.betancourt@pragma.com.co');
     component.activateAccount();
 
     expect(mockAuthService.sendActivation).toHaveBeenCalled();

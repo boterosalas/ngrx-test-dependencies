@@ -3,11 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogCommissionComponent } from './dialog-commission.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import {
-  MatDialog,
-  MatMenuModule,
-  MatSlideToggleModule,
-} from '@angular/material';
+import { MatDialog, MatMenuModule, MatSlideToggleModule } from '@angular/material';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -23,10 +19,7 @@ import Swal from 'sweetalert2';
 describe('DialogCommissionComponent', () => {
   let component: DialogCommissionComponent;
   let fixture: ComponentFixture<DialogCommissionComponent>;
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'getCommissionsData',
-    'saveComision',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getCommissionsData', 'saveComision']);
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll']);
   let response = [
     {

@@ -9,11 +9,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class UtilsService {
-  constructor(
-    private router: Router,
-    private auth: AuthService,
-    private user: UserService
-  ) {
+  constructor(private router: Router, private auth: AuthService, private user: UserService) {
     this.titleSelect = new BehaviorSubject<string>('Seleccionar');
     this.checkedAll = new BehaviorSubject<Boolean>(false);
   }
@@ -100,13 +96,9 @@ export class UtilsService {
             const permisions = respPermision.objectResponse;
 
             if (permisions) {
-              const permissionUser = permisions.find(
-                (x) => x.userid === tokenPayload.userid
-              );
+              const permissionUser = permisions.find((x) => x.userid === tokenPayload.userid);
               if (permissionUser && permissionUser.permissions) {
-                const permissionRoute = permissionUser.permissions.find(
-                  (x) => x.menuid === infoRoute.idmenu
-                );
+                const permissionRoute = permissionUser.permissions.find((x) => x.menuid === infoRoute.idmenu);
 
                 if (!permissionRoute || !permissionRoute.value) {
                   this.router.navigate(['configuracion']);

@@ -2,13 +2,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {
-  MatDialog,
-  MatDialogRef,
-  MatMenuModule,
-  MatSlideToggleModule,
-  MAT_DIALOG_DATA,
-} from '@angular/material';
+import { MatDialog, MatDialogRef, MatMenuModule, MatSlideToggleModule, MAT_DIALOG_DATA } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
@@ -44,13 +38,7 @@ const bussiness = {
   ],
 };
 //const mockDialogR = jasmine.createSpy(component.dialogRef,['beforeClosed'])
-const mockDialogRef = jasmine.createSpyObj('MatDialogRef', [
-  'close',
-  'afterClosed',
-  'componentInstance',
-  'event ',
-  'beforeClosed',
-]);
+const mockDialogRef = jasmine.createSpyObj('MatDialogRef', ['close', 'afterClosed', 'componentInstance', 'event ', 'beforeClosed']);
 const mockContentService = jasmine.createSpyObj('ContentService', [
   'getBusinessById',
   'saveOrderTipBusiness',

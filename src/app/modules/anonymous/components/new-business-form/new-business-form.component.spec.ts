@@ -4,12 +4,7 @@ import { NewBusinessFormComponent } from './new-business-form.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import {
-  RecaptchaModule,
-  RecaptchaFormsModule,
-  RECAPTCHA_SETTINGS,
-  RecaptchaSettings,
-} from 'ng-recaptcha';
+import { RecaptchaModule, RecaptchaFormsModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContentService } from 'src/app/services/content.service';
 import { of } from 'rxjs';
@@ -19,17 +14,13 @@ describe('NewBusinessFormComponent', () => {
   let component: NewBusinessFormComponent;
   let fixture: ComponentFixture<NewBusinessFormComponent>;
 
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'getCategoriesBusinessHome',
-    'registerBusinessClicker',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getCategoriesBusinessHome', 'registerBusinessClicker']);
 
   let business = [
     {
       id: 1,
       code: 'exito',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.png',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.png',
       infoaditional: 'Hasta 9.6% de ganancia',
       description: 'Almacenes Éxito',
       orderby: 1,
@@ -37,8 +28,7 @@ describe('NewBusinessFormComponent', () => {
     {
       id: 2,
       code: 'carulla',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-carulla.png',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-carulla.png',
       infoaditional: 'Hasta 9.6% de ganancia',
       description: 'Almacenes Carulla',
       orderby: 2,
@@ -46,8 +36,7 @@ describe('NewBusinessFormComponent', () => {
     {
       id: 3,
       code: 'seguros',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.png',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.png',
       infoaditional: 'Hasta $32.000 de ganancia',
       description: 'Seguros Éxito',
       orderby: 3,
@@ -55,8 +44,7 @@ describe('NewBusinessFormComponent', () => {
     {
       id: 4,
       code: 'viajes',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-viajes.png',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-viajes.png',
       infoaditional: 'Hasta $40.000 de ganancia',
       description: 'Viajes Éxito',
       orderby: 4,
@@ -64,8 +52,7 @@ describe('NewBusinessFormComponent', () => {
     {
       id: 5,
       code: 'wesura',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-wesura.png',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-wesura.png',
       infoaditional: 'Hasta 12.000 de ganancia',
       description: 'Tu seguro',
       orderby: 5,
@@ -105,9 +92,7 @@ describe('NewBusinessFormComponent', () => {
       ],
     }).compileComponents();
     mockContentService.getCategoriesBusinessHome.and.returnValue(of(business));
-    mockContentService.registerBusinessClicker.and.returnValue(
-      of(dataBussiness)
-    );
+    mockContentService.registerBusinessClicker.and.returnValue(of(dataBussiness));
   }));
 
   beforeEach(() => {

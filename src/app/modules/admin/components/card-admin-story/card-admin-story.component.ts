@@ -14,12 +14,7 @@ import { DialogStoryComponent } from '../dialog-story/dialog-story.component';
   styleUrls: ['./card-admin-story.component.scss'],
 })
 export class CardAdminStoryComponent implements OnInit {
-  constructor(
-    private dialog: MatDialog,
-    private _content: ContentService,
-    private st: StoriesComponent,
-    public utils: UtilsService
-  ) {}
+  constructor(private dialog: MatDialog, private _content: ContentService, private st: StoriesComponent, public utils: UtilsService) {}
 
   @Input() data: any;
   stories = [];
@@ -33,14 +28,12 @@ export class CardAdminStoryComponent implements OnInit {
       data: data,
     });
     editStory.beforeClosed().subscribe(() => {
-      this._content
-        .getStoriesadmin(true, data.idbusiness)
-        .subscribe((resp: ResponseService) => {
-          this.st.active = resp.objectResponse.active;
-          this.st.scheduled = resp.objectResponse.scheduled;
-          this.st.drafts = resp.objectResponse.drafts;
-          this.st.defeated = resp.objectResponse.defeated;
-        });
+      this._content.getStoriesadmin(true, data.idbusiness).subscribe((resp: ResponseService) => {
+        this.st.active = resp.objectResponse.active;
+        this.st.scheduled = resp.objectResponse.scheduled;
+        this.st.drafts = resp.objectResponse.drafts;
+        this.st.defeated = resp.objectResponse.defeated;
+      });
     });
   }
 
@@ -76,14 +69,12 @@ export class CardAdminStoryComponent implements OnInit {
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
         this._content.deleteStories([data.id]).subscribe(() => {
-          this._content
-            .getStoriesadmin(true, data.idbusiness)
-            .subscribe((resp: ResponseService) => {
-              this.st.active = resp.objectResponse.active;
-              this.st.scheduled = resp.objectResponse.scheduled;
-              this.st.drafts = resp.objectResponse.drafts;
-              this.st.defeated = resp.objectResponse.defeated;
-            });
+          this._content.getStoriesadmin(true, data.idbusiness).subscribe((resp: ResponseService) => {
+            this.st.active = resp.objectResponse.active;
+            this.st.scheduled = resp.objectResponse.scheduled;
+            this.st.drafts = resp.objectResponse.drafts;
+            this.st.defeated = resp.objectResponse.defeated;
+          });
         });
       }
     });
@@ -114,14 +105,12 @@ export class CardAdminStoryComponent implements OnInit {
 
   private getStories() {
     this.data.forEach((storyS) => {
-      let bussinessStory = this.bussiness.filter(
-        (b) => b.id === storyS.idbusiness
-      )[0];
+      const bussinessStory = this.bussiness.filter((b) => b.id === storyS.idbusiness)[0];
 
       const extensionsImg = ['jpg', 'jpeg', 'png'];
-      let isImage = extensionsImg.includes(this.getExtension(storyS.imageurl));
+      const isImage = extensionsImg.includes(this.getExtension(storyS.imageurl));
 
-      let objectStory = {
+      const objectStory = {
         idbusiness: storyS.idbusiness,
         id: storyS.id,
         businessName: bussinessStory ? bussinessStory.description : '',
@@ -143,7 +132,7 @@ export class CardAdminStoryComponent implements OnInit {
 
   private getExtension(nameFile: string) {
     if (nameFile) {
-      let splitExt = nameFile.split('.');
+      const splitExt = nameFile.split('.');
       return splitExt[splitExt.length - 1].toLocaleLowerCase();
     }
 

@@ -3,14 +3,8 @@
 </p>
 
 <mat-accordion>
-  <mat-expansion-panel
-    [expanded]="step === 0"
-    (opened)="setStep(0)"
-    class="help-center"
-  >
-    <mat-expansion-panel-header
-      class="head gtmCentroDeAyudaClicMenusobreclickam"
-    >
+  <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" class="help-center">
+    <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusobreclickam">
       <span
         class="gtmCentroDeAyudaClicMenusobreclickam"
         [routerLink]="['/centro-de-ayuda']"
@@ -27,21 +21,13 @@
         role="listitem"
         [routerLink]="item.route"
         routerLinkActive="active"
-        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{
-          item.name
-        }}</span></mat-list-item
+        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{ item.name }}</span></mat-list-item
       >
     </mat-list>
   </mat-expansion-panel>
 
-  <mat-expansion-panel
-    [expanded]="step === 1"
-    (opened)="setStep(1)"
-    class="help-center"
-  >
-    <mat-expansion-panel-header
-      class="head gtmCentroDeAyudaClicMenusobreclickamconfiguracionesdecuenta"
-    >
+  <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" class="help-center">
+    <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusobreclickamconfiguracionesdecuenta">
       <span
         class="gtmCentroDeAyudaClicMenusobreclickamconfiguracionesdecuenta"
         [routerLink]="['/centro-de-ayuda/configuraciones-de-cuenta']"
@@ -58,21 +44,13 @@
         role="listitem"
         [routerLink]="item.route"
         routerLinkActive="active"
-        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{
-          item.name
-        }}</span></mat-list-item
+        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{ item.name }}</span></mat-list-item
       >
     </mat-list>
   </mat-expansion-panel>
 
-  <mat-expansion-panel
-    [expanded]="step === 2"
-    (opened)="setStep(2)"
-    class="help-center"
-  >
-    <mat-expansion-panel-header
-      class="head gtmCentroDeAyudaClicMenuscomisiones"
-    >
+  <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" class="help-center">
+    <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenuscomisiones">
       <span
         class="gtmCentroDeAyudaClicMenuscomisiones"
         [routerLink]="['/centro-de-ayuda/comisiones']"
@@ -89,18 +67,12 @@
         role="listitem"
         [routerLink]="item.route"
         routerLinkActive="active"
-        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{
-          item.name
-        }}</span></mat-list-item
+        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{ item.name }}</span></mat-list-item
       >
     </mat-list>
   </mat-expansion-panel>
 
-  <mat-expansion-panel
-    [expanded]="step === 3"
-    (opened)="setStep(3)"
-    class="help-center"
-  >
+  <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" class="help-center">
     <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusreportes">
       <span
         class="gtmCentroDeAyudaClicMenusreportes"
@@ -118,21 +90,13 @@
         role="listitem"
         [routerLink]="item.route"
         routerLinkActive="active"
-        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{
-          item.name
-        }}</span></mat-list-item
+        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{ item.name }}</span></mat-list-item
       >
     </mat-list>
   </mat-expansion-panel>
 
-  <mat-expansion-panel
-    [expanded]="step === 4"
-    (opened)="setStep(4)"
-    class="help-center"
-  >
-    <mat-expansion-panel-header
-      class="head gtmCentroDeAyudaClicMenusrefiereaunamigo"
-    >
+  <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)" class="help-center">
+    <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusrefiereaunamigo">
       <span
         class="gtmCentroDeAyudaClicMenusrefiereaunamigo"
         [routerLink]="['/centro-de-ayuda/refiere-a-un-amigo']"
@@ -149,18 +113,12 @@
         role="listitem"
         [routerLink]="item.route"
         routerLinkActive="active"
-        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{
-          item.name
-        }}</span></mat-list-item
+        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{ item.name }}</span></mat-list-item
       >
     </mat-list>
   </mat-expansion-panel>
 
-  <mat-expansion-panel
-    [expanded]="step === 5"
-    (opened)="setStep(5)"
-    class="help-center"
-  >
+  <mat-expansion-panel [expanded]="step === 5" (opened)="setStep(5)" class="help-center">
     <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusofertas">
       <span
         class="gtmCentroDeAyudaClicMenusofertas"
@@ -178,21 +136,13 @@
         role="listitem"
         [routerLink]="item.route"
         routerLinkActive="active"
-        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{
-          item.name
-        }}</span></mat-list-item
+        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{ item.name }}</span></mat-list-item
       >
     </mat-list>
   </mat-expansion-panel>
 
-  <mat-expansion-panel
-    [expanded]="step === 6"
-    (opened)="setStep(6)"
-    class="help-center"
-  >
-    <mat-expansion-panel-header
-      class="head gtmCentroDeAyudaClicMenusotraspreguntasfrecuentes"
-    >
+  <mat-expansion-panel [expanded]="step === 6" (opened)="setStep(6)" class="help-center">
+    <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusotraspreguntasfrecuentes">
       <span
         class="gtmCentroDeAyudaClicMenusotraspreguntasfrecuentes"
         [routerLink]="['/centro-de-ayuda/otras-preguntas-frecuentes']"
@@ -209,21 +159,13 @@
         role="listitem"
         [routerLink]="item.route"
         routerLinkActive="active"
-        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{
-          item.name
-        }}</span></mat-list-item
+        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{ item.name }}</span></mat-list-item
       >
     </mat-list>
   </mat-expansion-panel>
 
-  <mat-expansion-panel
-    [expanded]="step === 7"
-    (opened)="setStep(7)"
-    class="help-center"
-  >
-    <mat-expansion-panel-header
-      class="head gtmCentroDeAyudaClicMenuscontactalosnegocios"
-    >
+  <mat-expansion-panel [expanded]="step === 7" (opened)="setStep(7)" class="help-center">
+    <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenuscontactalosnegocios">
       <span
         class="gtmCentroDeAyudaClicMenuscontactalosnegocios"
         [routerLink]="['/centro-de-ayuda/contacta-los-negocios']"
@@ -240,21 +182,13 @@
         role="listitem"
         [routerLink]="item.route"
         routerLinkActive="active"
-        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{
-          item.name
-        }}</span></mat-list-item
+        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{ item.name }}</span></mat-list-item
       >
     </mat-list>
   </mat-expansion-panel>
 
-  <mat-expansion-panel
-    [expanded]="step === 8"
-    (opened)="setStep(8)"
-    class="help-center"
-  >
-    <mat-expansion-panel-header
-      class="head gtmCentroDeAyudaClicMenuscontactanos"
-    >
+  <mat-expansion-panel [expanded]="step === 8" (opened)="setStep(8)" class="help-center">
+    <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenuscontactanos">
       <span
         class="gtmCentroDeAyudaClicMenuscontactanos"
         [routerLink]="['/centro-de-ayuda/contactanos']"
@@ -271,21 +205,12 @@
         role="listitem"
         [routerLink]="item.route"
         routerLinkActive="active"
-        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{
-          item.name
-        }}</span></mat-list-item
+        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{ item.name }}</span></mat-list-item
       >
     </mat-list>
   </mat-expansion-panel>
-  <mat-expansion-panel
-    *ngIf="reportVisible"
-    [expanded]="step === 9"
-    (opened)="setStep(9)"
-    class="help-center"
-  >
-    <mat-expansion-panel-header
-      class="head gtmCentroDeAyudaClicMenuscontactanos"
-    >
+  <mat-expansion-panel *ngIf="reportVisible" [expanded]="step === 9" (opened)="setStep(9)" class="help-center">
+    <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenuscontactanos">
       <span
         class="gtmCentroDeAyudaClicMenuscontactanos"
         [routerLink]="['/centro-de-ayuda/reportar']"
@@ -301,9 +226,7 @@
         role="listitem"
         [routerLink]="item.route"
         routerLinkActive="active"
-        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{
-          item.name
-        }}</span></mat-list-item
+        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{ item.name }}</span></mat-list-item
       >
     </mat-list>
   </mat-expansion-panel>

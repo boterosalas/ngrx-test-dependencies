@@ -20,14 +20,7 @@ export class ReferEmailComponent implements OnInit {
 
   public formRefer() {
     this.referForm = this.fb.group({
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(this.emailPattern),
-          Validators.maxLength(64),
-        ],
-      ],
+      email: ['', [Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
     });
   }
 

@@ -1,13 +1,4 @@
-import {
-  Component,
-  OnInit,
-  OnChanges,
-  Input,
-  Output,
-  EventEmitter,
-  ViewChild,
-  TemplateRef,
-} from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter, ViewChild, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { MatBottomSheet, MatSnackBar } from '@angular/material';
@@ -106,14 +97,7 @@ export class CardStoryComponent implements OnInit, OnChanges {
     }
 
     this.idCustomerForm = this.fb.group({
-      identification: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(this.numberPattern),
-          Validators.maxLength(10),
-        ],
-      ],
+      identification: ['', [Validators.required, Validators.pattern(this.numberPattern), Validators.maxLength(10)]],
     });
   }
 
@@ -139,10 +123,7 @@ export class CardStoryComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.addEventPauseAndPlayArrows();
-    if (
-      this.currentSlick === this.index &&
-      this.stories[this.indexCStory].stateView
-    ) {
+    if (this.currentSlick === this.index && this.stories[this.indexCStory].stateView) {
       this.saveVisitStories(this.indexCStory);
     }
     if (this.play) {
@@ -158,9 +139,7 @@ export class CardStoryComponent implements OnInit, OnChanges {
     this.selectStory(this.stories[this.indexCStory].id);
 
     if (this.play) {
-      this.video = document.getElementById(
-        `video-${this.id}-${this.stories[this.indexCStory].id}`
-      );
+      this.video = document.getElementById(`video-${this.id}-${this.stories[this.indexCStory].id}`);
       if (this.video) {
         this.video.addEventListener(
           'loadeddata',
@@ -184,23 +163,19 @@ export class CardStoryComponent implements OnInit, OnChanges {
         userId: this.userId,
       };
 
-      this.subscription = this.content
-        .saveVisitStories(data)
-        .subscribe((resp: ResponseService) => {
-          if (resp.state === 'Success') {
-            //this.stories[index].stateView = false
+      this.subscription = this.content.saveVisitStories(data).subscribe((resp: ResponseService) => {
+        if (resp.state === 'Success') {
+          //this.stories[index].stateView = false
 
-            if (!this.stories.some((x) => x.stateView)) {
-              const buttonBusiness = document.getElementById(
-                `button-business-${this.index}`
-              );
-              if (buttonBusiness && buttonBusiness.classList.contains('new')) {
-                buttonBusiness.classList.remove('new');
-                buttonBusiness.classList.add('viewed');
-              }
+          if (!this.stories.some((x) => x.stateView)) {
+            const buttonBusiness = document.getElementById(`button-business-${this.index}`);
+            if (buttonBusiness && buttonBusiness.classList.contains('new')) {
+              buttonBusiness.classList.remove('new');
+              buttonBusiness.classList.add('viewed');
             }
           }
-        });
+        }
+      });
     }
   }
 
@@ -213,12 +188,9 @@ export class CardStoryComponent implements OnInit, OnChanges {
       }
       contentFile.classList.add('visible');
 
-      this.indexCStory = this.stories.findIndex(
-        (story) => story.id === storyId
-      );
+      this.indexCStory = this.stories.findIndex((story) => story.id === storyId);
 
-      if (this.currentSlick === this.index)
-        this.saveVisitStories(this.indexCStory);
+      if (this.currentSlick === this.index) this.saveVisitStories(this.indexCStory);
 
       this.changeTimeStory();
       if (this.currentSlick === this.index) this.pause = false;
@@ -272,22 +244,16 @@ export class CardStoryComponent implements OnInit, OnChanges {
       }
 
       let idCurrent = this.stories[this.indexCStory].id;
-      this.currentProgress = this.cardStory.querySelector(
-        `#progress-${idCurrent} .current-progress`
-      );
+      this.currentProgress = this.cardStory.querySelector(`#progress-${idCurrent} .current-progress`);
       for (let index = 0; index < this.progressStory.length; index++) {
         let idProgress = this.progressStory[index].id;
         if (index < this.indexCStory) {
-          let previousProgress = this.cardStory.querySelector(
-            `#progress-${idProgress} .current-progress`
-          );
+          let previousProgress = this.cardStory.querySelector(`#progress-${idProgress} .current-progress`);
           if (previousProgress.style.width !== '100%') {
             previousProgress.style.width = '100%';
           }
         } else if (index > this.indexCStory) {
-          let nextProgress = this.cardStory.querySelector(
-            `#progress-${idProgress} .current-progress`
-          );
+          let nextProgress = this.cardStory.querySelector(`#progress-${idProgress} .current-progress`);
           if (nextProgress.style.width !== '0') {
             nextProgress.style.width = '0';
           }
@@ -466,45 +432,31 @@ export class CardStoryComponent implements OnInit, OnChanges {
       const title = this.stories[this.indexCStory].name;
       const showProduct = true;
 
-      this.classButtonWhatsapp = `gtmClicLightboxIconoWhatsApp${this.title}${
-        this.stories[this.indexCStory].name
-      }`
+      this.classButtonWhatsapp = `gtmClicLightboxIconoWhatsApp${this.title}${this.stories[this.indexCStory].name}`
         .replace(/\s/g, '')
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '');
-      this.classButtonTwitter = `gtmClicLightboxIconoTwitter${this.title}${
-        this.stories[this.indexCStory].name
-      }`
+      this.classButtonTwitter = `gtmClicLightboxIconoTwitter${this.title}${this.stories[this.indexCStory].name}`
         .replace(/\s/g, '')
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '');
-      this.classButtonFacebook = `gtmClicLightboxIconoFacebook${this.title}${
-        this.stories[this.indexCStory].name
-      }`
+      this.classButtonFacebook = `gtmClicLightboxIconoFacebook${this.title}${this.stories[this.indexCStory].name}`
         .replace(/\s/g, '')
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '');
-      this.classButtonShare = `gtmClicLightboxCompartir${this.title}${
-        this.stories[this.indexCStory].name
-      }`
+      this.classButtonShare = `gtmClicLightboxCompartir${this.title}${this.stories[this.indexCStory].name}`
         .replace(/\s/g, '')
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '');
-      this.classButtonBuy = `gtmClicLightboxComprar${this.title}${
-        this.stories[this.indexCStory].name
-      }`
+      this.classButtonBuy = `gtmClicLightboxComprar${this.title}${this.stories[this.indexCStory].name}`
         .replace(/\s/g, '')
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '');
-      this.classButtonRefer = `gtmClicLightboxReferir${this.title}${
-        this.stories[this.indexCStory].name
-      }`
+      this.classButtonRefer = `gtmClicLightboxReferir${this.title}${this.stories[this.indexCStory].name}`
         .replace(/\s/g, '')
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '');
-      this.classButtonCopy = `gtmClicLightboxCopiarLink${this.title}${
-        this.stories[this.indexCStory].name
-      }`
+      this.classButtonCopy = `gtmClicLightboxCopiarLink${this.title}${this.stories[this.indexCStory].name}`
         .replace(/\s/g, '')
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '');
@@ -553,19 +505,17 @@ export class CardStoryComponent implements OnInit, OnChanges {
       identificationcustomer: this.idCustomerForm.controls.identification.value,
     };
 
-    this.subscription = this.links
-      .saveLink(dataSaveLink)
-      .subscribe((resp: ResponseService) => {
-        this.urlshorten = resp.objectResponse.link;
-        this.enableCopy = false;
-        if (param === 'assured') {
-          if (resp.state === 'Error') {
-            this.openSnackBar(resp.userMessage, 'cerrar');
-            this.showForm = false;
-            this.showFormCustomer = true;
-          }
+    this.subscription = this.links.saveLink(dataSaveLink).subscribe((resp: ResponseService) => {
+      this.urlshorten = resp.objectResponse.link;
+      this.enableCopy = false;
+      if (param === 'assured') {
+        if (resp.state === 'Error') {
+          this.openSnackBar(resp.userMessage, 'cerrar');
+          this.showForm = false;
+          this.showFormCustomer = true;
         }
-      });
+      }
+    });
   }
 
   /**
@@ -581,16 +531,14 @@ export class CardStoryComponent implements OnInit, OnChanges {
       creationDate: this.date,
       identificationcustomer: this.idCustomerForm.controls.identification.value,
     };
-    this.subscription = this.links
-      .saveLink(dataSaveLinkReference)
-      .subscribe((resp: ResponseService) => {
-        if (resp.state === 'Error') {
-          this.openSnackBar(resp.userMessage, 'cerrar');
-        } else {
-          this.openSnackBar(resp.userMessage, 'cerrar');
-          this.dialog.dismiss();
-        }
-      });
+    this.subscription = this.links.saveLink(dataSaveLinkReference).subscribe((resp: ResponseService) => {
+      if (resp.state === 'Error') {
+        this.openSnackBar(resp.userMessage, 'cerrar');
+      } else {
+        this.openSnackBar(resp.userMessage, 'cerrar');
+        this.dialog.dismiss();
+      }
+    });
   }
 
   private formShareLink() {

@@ -1,9 +1,7 @@
 <div class="navigation-group">
   <div class="navigation-group__header">
     <span class="navigation-group__drag">
-      <mat-icon matSuffix class="mr-1 blue cursor-pointer" cdkDragHandle
-        >drag_indicator</mat-icon
-      >
+      <mat-icon matSuffix class="mr-1 blue cursor-pointer" cdkDragHandle>drag_indicator</mat-icon>
     </span>
 
     <span class="navigation-group__description">
@@ -13,20 +11,10 @@
       </span>
     </span>
     <div class="navigation-group__actions">
-      <i
-        *ngIf="isValidAddItems"
-        class="tio-add style-icon cursor-pointer"
-        (click)="addNavigationItem()"
-      ></i>
-      <i
-        *ngIf="!isValidAddItems"
-        class="tio-add style-icon navigation-group__addIcon"
-      ></i>
+      <i *ngIf="isValidAddItems" class="tio-add style-icon cursor-pointer" (click)="addNavigationItem()"></i>
+      <i *ngIf="!isValidAddItems" class="tio-add style-icon navigation-group__addIcon"></i>
 
-      <i
-        class="tio-edit style-icon cursor-pointer"
-        (click)="editNavigationGroup()"
-      ></i>
+      <i class="tio-edit style-icon cursor-pointer" (click)="editNavigationGroup()"></i>
 
       <img
         *ngIf="isValidDeleteGroup"
@@ -37,11 +25,7 @@
       />
     </div>
   </div>
-  <div
-    class="navigation-group__content"
-    cdkDropList
-    (cdkDropListDropped)="dropItems($event)"
-  >
+  <div class="navigation-group__content" cdkDropList (cdkDropListDropped)="dropItems($event)">
     <app-navigation-item
       *ngFor="let link of section.links || section.menus"
       [link]="link"

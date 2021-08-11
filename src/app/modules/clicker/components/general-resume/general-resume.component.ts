@@ -12,12 +12,7 @@ import { TokenService } from 'src/app/services/token.service';
   styleUrls: ['./general-resume.component.scss'],
 })
 export class GeneralResumeComponent implements OnInit, OnDestroy {
-  constructor(
-    private link: LinksService,
-    private user: UserService,
-    private auth: AuthService,
-    private token: TokenService
-  ) {}
+  constructor(private link: LinksService, private user: UserService, private auth: AuthService, private token: TokenService) {}
 
   linksGenerated: string;
   identification: string;

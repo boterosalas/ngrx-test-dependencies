@@ -9,8 +9,7 @@ export class ReferFriendComponent implements OnInit {
   refer = [
     {
       name: '¿Qué es el programa refiere a tu amigo?',
-      route:
-        '/centro-de-ayuda/refiere-a-un-amigo/que-es-el-programa-refiere-a-tu-amigo',
+      route: '/centro-de-ayuda/refiere-a-un-amigo/que-es-el-programa-refiere-a-tu-amigo',
       icon: '/assets/img/ayuda/refiere-un-amigo/refiere-tu-amigo.svg',
     },
     {

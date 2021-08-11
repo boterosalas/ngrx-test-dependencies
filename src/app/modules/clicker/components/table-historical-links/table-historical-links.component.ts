@@ -13,14 +13,7 @@ export class TableHistoricalLinksComponent implements OnInit {
   @Input() p;
   @Input() totalItems;
 
-  displayedColumns: string[] = [
-    'productname',
-    'date',
-    'comission',
-    'total',
-    'visits',
-    'button',
-  ];
+  displayedColumns: string[] = ['productname', 'date', 'comission', 'total', 'visits', 'button'];
 
   ngOnInit() {}
 

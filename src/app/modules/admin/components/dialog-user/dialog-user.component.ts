@@ -1,19 +1,5 @@
-import {
-  Component,
-  OnInit,
-  Inject,
-  Output,
-  EventEmitter,
-  OnDestroy,
-  ViewChild,
-  TemplateRef,
-} from '@angular/core';
-import {
-  MatDialog,
-  MatSnackBar,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material';
+import { Component, OnInit, Inject, Output, EventEmitter, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
+import { MatDialog, MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -44,14 +30,8 @@ export class DialogUserComponent implements OnInit, OnDestroy {
   dateSelectedState: FormGroup;
   nextPayment: any;
   afterPayment: any;
-  displayedColumns: string[] = [
-    'negocio',
-    'linksgenerator',
-    'linksclicker',
-    'commision',
-    'sells',
-  ];
-  selectedTab: number = 1;
+  displayedColumns: string[] = ['negocio', 'linksgenerator', 'linksclicker', 'commision', 'sells'];
+  selectedTab = 1;
   dateLastPayment: any;
   placeholder: string;
   @ViewChild('templateInfoPersonal', { static: false })
@@ -81,13 +61,13 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     firstDay: 1, // first day is monday
   };
   accountStatements: any;
-  enableRejectionMessage: boolean = false;
+  enableRejectionMessage = false;
   rejectionMessage: string;
   selectedFiles = [];
-  base64IdentificationCard1: string = '';
-  base64IdentificationCard2: string = '';
-  base64BankCard: string = '';
-  base64RUT: string = '';
+  base64IdentificationCard1 = '';
+  base64IdentificationCard2 = '';
+  base64BankCard = '';
+  base64RUT = '';
 
   changeStatus() {
     this.state.emit(event);
@@ -168,14 +148,9 @@ export class DialogUserComponent implements OnInit, OnDestroy {
           this.accountStatements = resp.objectResponse.map((state) => {
             return { ...state, value: this.capitalizeFirstLetter(state.value) };
           });
-          const objectState = this.accountStatements.find(
-            (state) =>
-              state.value === this.capitalizeFirstLetter(this.data.verified)
-          );
+          const objectState = this.accountStatements.find((state) => state.value === this.capitalizeFirstLetter(this.data.verified));
           if (objectState) {
-            this.dateSelectedState.controls.state.setValue(
-              objectState.id.toString()
-            );
+            this.dateSelectedState.controls.state.setValue(objectState.id.toString());
             this.enableDisabledEditMessage();
           }
         } else {
@@ -193,29 +168,18 @@ export class DialogUserComponent implements OnInit, OnDestroy {
   }
 
   enableDisabledEditMessage() {
-    let idRejected = this.accountStatements.find(
-      (state) => state.code === 'REJECTED'
-    ).id;
-    this.enableRejectionMessage =
-      this.dateSelectedState.controls.state.value === idRejected.toString()
-        ? true
-        : false;
+    const idRejected = this.accountStatements.find((state) => state.code === 'REJECTED').id;
+    this.enableRejectionMessage = this.dateSelectedState.controls.state.value === idRejected.toString() ? true : false;
   }
 
   changeTabs(tabSelected: number) {
-    //this.dateFormHoja.controls.dateRange.setValue(null);
     this.selectedTab = tabSelected;
     if (this.selectedTab === 2) {
-      let endDate = new Date();
-      let m = endDate.getMonth() + 1;
-      let datesEnd =
-        endDate.getFullYear() +
-        '-' +
-        this.pad(m) +
-        '-' +
-        this.pad(endDate.getDate());
-      let datesStart = endDate.getFullYear() + '-' + this.pad(m) + '-' + '01';
-      let datos = {
+      const endDate = new Date();
+      const m = endDate.getMonth() + 1;
+      const datesEnd = endDate.getFullYear() + '-' + this.pad(m) + '-' + this.pad(endDate.getDate());
+      const datesStart = endDate.getFullYear() + '-' + this.pad(m) + '-' + '01';
+      const datos = {
         start: datesStart,
         end: datesEnd,
         userId: this.data.userId,
@@ -240,14 +204,9 @@ export class DialogUserComponent implements OnInit, OnDestroy {
   }
   getDatas() {
     if (this.dateFormHoja.controls.dateRange.value != null) {
-      let data = {
-        start:
-          this.dateFormHoja.controls.dateRange.value.startDate.format(
-            'YYYY-MM-DD'
-          ),
-        end: this.dateFormHoja.controls.dateRange.value.endDate.format(
-          'YYYY-MM-DD'
-        ),
+      const data = {
+        start: this.dateFormHoja.controls.dateRange.value.startDate.format('YYYY-MM-DD'),
+        end: this.dateFormHoja.controls.dateRange.value.endDate.format('YYYY-MM-DD'),
         userId: this.data.userId,
       };
       this.getDatasHoja(data);
@@ -307,7 +266,7 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     });
   }
   public saveInfoPersonal() {
-    let datos = {
+    const datos = {
       userId: this.data.userId,
       email: this.dataAddImagen.controls.email.value,
       cellPhone: this.dataAddImagen.controls.cellphone.value,
@@ -326,13 +285,12 @@ export class DialogUserComponent implements OnInit, OnDestroy {
   }
 
   public saveRejectionMessage() {
-    let datos = {
+    const datos = {
       userId: this.data.userId,
       message: this.dataRejectionMessage.controls.message.value,
     };
     this.user.postUpdateResponseAccountBank(datos).subscribe((resp) => {
-      this.data.responseAccountBank =
-        this.dataRejectionMessage.controls.message.value;
+      this.data.responseAccountBank = this.dataRejectionMessage.controls.message.value;
       this.onNoClickEdit();
     });
   }
@@ -353,50 +311,31 @@ export class DialogUserComponent implements OnInit, OnDestroy {
       { extension: '.pdf', contentType: 'application/pdf' },
     ];
 
-    const contentTypeIdentCard1 = formats.filter(
-      (format) => format.extension === this.data.extensionIdentificationCard1
-    );
-    const contentTypeIdentCard2 = formats.filter(
-      (format) => format.extension === this.data.extensionIdentificationCard2
-    );
-    const contentTypeBankCard = formats.filter(
-      (format) => format.extension === this.data.extensionBankCertificate
-    );
-    const contentTypeRUT = formats.filter(
-      (format) => format.extension === this.data.extensionRUT
-    );
+    const contentTypeIdentCard1 = formats.filter((format) => format.extension === this.data.extensionIdentificationCard1);
+    const contentTypeIdentCard2 = formats.filter((format) => format.extension === this.data.extensionIdentificationCard2);
+    const contentTypeBankCard = formats.filter((format) => format.extension === this.data.extensionBankCertificate);
+    const contentTypeRUT = formats.filter((format) => format.extension === this.data.extensionRUT);
 
     if (this.data.fileIdentificationCard1) {
       this.base64IdentificationCard1 = `data:${
-        contentTypeIdentCard1.length > 0
-          ? contentTypeIdentCard1[0].contentType
-          : 'image/jpeg'
+        contentTypeIdentCard1.length > 0 ? contentTypeIdentCard1[0].contentType : 'image/jpeg'
       };base64,${this.data.fileIdentificationCard1}`;
     }
 
     if (this.data.fileIdentificationCard2) {
       this.base64IdentificationCard2 = `data:${
-        contentTypeIdentCard2.length > 0
-          ? contentTypeIdentCard2[0].contentType
-          : 'image/jpeg'
+        contentTypeIdentCard2.length > 0 ? contentTypeIdentCard2[0].contentType : 'image/jpeg'
       };base64,${this.data.fileIdentificationCard2}`;
     }
 
-    if (
-      this.data.fileBankCertificate &&
-      contentTypeBankCard[0].extension !== '.pdf'
-    ) {
-      this.base64BankCard = `data:${
-        contentTypeBankCard.length > 0
-          ? contentTypeBankCard[0].contentType
-          : 'image/jpeg'
-      };base64,${this.data.fileBankCertificate}`;
+    if (this.data.fileBankCertificate && contentTypeBankCard[0].extension !== '.pdf') {
+      this.base64BankCard = `data:${contentTypeBankCard.length > 0 ? contentTypeBankCard[0].contentType : 'image/jpeg'};base64,${
+        this.data.fileBankCertificate
+      }`;
     }
 
     if (this.data.fileRUT && contentTypeRUT[0].extension !== '.pdf') {
-      this.base64RUT = `data:${
-        contentTypeRUT.length > 0 ? contentTypeRUT[0].contentType : 'image/jpeg'
-      };base64,${this.data.fileRUT}`;
+      this.base64RUT = `data:${contentTypeRUT.length > 0 ? contentTypeRUT[0].contentType : 'image/jpeg'};base64,${this.data.fileRUT}`;
     }
   }
 
@@ -404,24 +343,16 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     const previews = document.querySelectorAll('.preview-image.visibility');
 
     previews.forEach((preview) => {
-      const link = preview
-        ? preview.parentElement.querySelector(':scope > a')
-        : preview;
+      const link = preview ? preview.parentElement.querySelector(':scope > a') : preview;
 
-      if (
-        preview &&
-        !preview.contains(event.target) &&
-        !link.contains(event.target)
-      ) {
+      if (preview && !preview.contains(event.target) && !link.contains(event.target)) {
         preview.classList.remove('visibility');
       }
     });
   }
 
   showVisibilityPreview(event) {
-    const preview = event.target.parentElement.querySelector(
-      ':scope > .preview-image'
-    );
+    const preview = event.target.parentElement.querySelector(':scope > .preview-image');
 
     if (preview && !preview.classList.contains('visibility')) {
       preview.classList.add('visibility');

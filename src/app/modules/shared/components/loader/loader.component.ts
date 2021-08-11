@@ -17,11 +17,9 @@ export class LoaderComponent implements OnInit, OnDestroy {
      * metodo para mostrar el loader del sitio
      */
 
-    this.subscription = this.loaderService.loaderState.subscribe(
-      (state: LoaderState) => {
-        this.show = state.show;
-      }
-    );
+    this.subscription = this.loaderService.loaderState.subscribe((state: LoaderState) => {
+      this.show = state.show;
+    });
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

@@ -8,7 +8,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { DialogCategoryComponent } from '../../components/dialog-category/dialog-category.component';
 import { ResponseService } from 'src/app/interfaces/response';
-//import { Router } from '@angular/router';
+
 export interface PeriodicElement {
   drag: any;
   bussiness: any;
@@ -26,7 +26,7 @@ export class BussinessAdminComponent implements OnInit {
   datosEliminar: any;
   dialogRef: MatDialogRef<any>;
   bussinessCategory = [];
-  showDeliver: boolean = false;
+  showDeliver = false;
   private subscription: Subscription = new Subscription();
   @ViewChild('table', { static: false }) table: MatTable<PeriodicElement>;
   @ViewChild('templateDeleteCategory', { static: false })
@@ -42,21 +42,12 @@ export class BussinessAdminComponent implements OnInit {
     'state',
     'actions',
   ];
-  constructor(
-    private content: ContentService,
-    private route: ActivatedRoute,
-    private dialog: MatDialog
-  ) {
+  constructor(private content: ContentService, private route: ActivatedRoute, private dialog: MatDialog) {
     this.subscription = this.route.params.subscribe((route) => {
-      if (
-        route.id === undefined &&
-        route.titulo === undefined &&
-        route.imagen === undefined
-      ) {
+      if (route.id === undefined && route.titulo === undefined && route.imagen === undefined) {
         this.id = '1';
         this.title = 'exito';
-        this.image =
-          'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg';
+        this.image = 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg';
       } else {
         this.id = route.id;
         this.title = route.titulo;
@@ -76,16 +67,13 @@ export class BussinessAdminComponent implements OnInit {
         this.showDeliver = true;
         this.bussinessCategory = bussiness;
       });
-
-    //getAllBusinessContent
   }
+
   dropTable(event: CdkDragDrop<PeriodicElement[]>) {
-    const prevIndex = this.bussinessCategory.findIndex(
-      (d) => d === event.item.data
-    );
+    const prevIndex = this.bussinessCategory.findIndex((d) => d === event.item.data);
     moveItemInArray(this.bussinessCategory, prevIndex, event.currentIndex);
     this.table.renderRows();
-    let datosSourceSend = [];
+    const datosSourceSend = [];
     for (let i = 0; i < this.bussinessCategory.length; i++) {
       this.bussinessCategory[i].orderby = i + 1;
       datosSourceSend.push({
@@ -104,7 +92,6 @@ export class BussinessAdminComponent implements OnInit {
   public deleteCategory(data: any) {
     const title = '';
     const template = this.templateDelete;
-    //let dialogRef: MatDialogRef<any>
     this.dialogRef = this.dialog.open(ModalGenericComponent, {
       data: {
         title,
@@ -121,8 +108,8 @@ export class BussinessAdminComponent implements OnInit {
     const buttonName = 'Agregar';
     const idBussiness = this.id;
     const edit = 0;
-    //let dialogRef1: MatDialogRef<MatDialog>;
-    let dialogRef1 = this.dialog.open(DialogCategoryComponent, {
+
+    const dialogRef1 = this.dialog.open(DialogCategoryComponent, {
       width: '450px',
       data: {
         title,
@@ -172,7 +159,7 @@ export class BussinessAdminComponent implements OnInit {
     });
   }
   public deleteCategoryService() {
-    let datos = { id: this.datosEliminar.id };
+    const datos = { id: this.datosEliminar.id };
     this.content.deleteCategory(datos).subscribe((resp: ResponseService) => {
       if (resp.state === 'Success') {
         this.dialog.closeAll();

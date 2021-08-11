@@ -34,21 +34,9 @@ export class RecoverpasswordformComponent implements OnInit, OnDestroy {
       {
         password: [
           '',
-          [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(20),
-            Validators.pattern(new RegExp(this.passwordPattern)),
-          ],
+          [Validators.required, Validators.minLength(6), Validators.maxLength(20), Validators.pattern(new RegExp(this.passwordPattern))],
         ],
-        confirmPassword: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(20),
-          ],
-        ],
+        confirmPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
       },
       { validator: ConfirmPasswordValidator.MatchPassword }
     );

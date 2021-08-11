@@ -52,14 +52,7 @@ export class ActivateAccountFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.activateForm = this.fb.group({
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(this.emailPattern),
-          Validators.maxLength(64),
-        ],
-      ],
+      email: ['', [Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
     });
   }
 

@@ -3,19 +3,8 @@
 </h2>
 <p>{{ 'REFER.SHARE' | translate }}</p>
 
-<div
-  class="share-desktop w-100"
-  id="share"
-  fxLayout="row"
-  fxLayoutAlign="space-around"
-  fxLayoutGap="20px"
->
-  <span
-    class="share-refer gtmRfiereYGanaClicReferirwhatsapp"
-    fxLayout="column"
-    fxFlex="33"
-    fxLayoutAlign="center center"
-  >
+<div class="share-desktop w-100" id="share" fxLayout="row" fxLayoutAlign="space-around" fxLayoutGap="20px">
+  <span class="share-refer gtmRfiereYGanaClicReferirwhatsapp" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
     <a
       (click)="generateLink()"
       href="https://web.whatsapp.com/send?text={{ urlWhatsapp }}"
@@ -30,12 +19,7 @@
     </p>
   </span>
 
-  <span
-    class="share-refer gtmRfiereYGanaClicReferirFacebook"
-    fxLayout="column"
-    fxFlex="33"
-    fxLayoutAlign="center center"
-  >
+  <span class="share-refer gtmRfiereYGanaClicReferirFacebook" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
     <button
       theme="circles-dark"
       shareButton="facebook"
@@ -50,12 +34,7 @@
     </p>
   </span>
 
-  <span
-    class="share-refer gtmRfiereYGanaClicReferirTwitter"
-    fxLayout="column"
-    fxFlex="33"
-    fxLayoutAlign="center center"
-  >
+  <span class="share-refer gtmRfiereYGanaClicReferirTwitter" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
     <button
       theme="circles-dark"
       shareButton="twitter"
@@ -72,13 +51,7 @@
 </div>
 
 <div class="share-mobile">
-  <button
-    class="button button-100 button-height f-16"
-    mat-raised-button
-    id="ShareInvite"
-    color="orange"
-    (click)="share()"
-  >
+  <button class="button button-100 button-height f-16" mat-raised-button id="ShareInvite" color="orange" (click)="share()">
     <span fxLayout="row" fxLayoutAlign="space-between">
       {{ 'REFER.SEND_INVITATION' | translate }}
       <img src="/assets/img/share/compartir-button.svg" alt="share-button" />
@@ -94,14 +67,7 @@
     <div fxLayout.gt-xs="row" fxLayout="column" fxLayoutGap="15px">
       <div fxLayout="column" fxFlex="80" fxFlex.xs="100">
         <mat-form-field appearance="dashed" class="dashed-2 f-11">
-          <input
-            id="url"
-            matInput
-            formcontrolName="link"
-            [value]="url"
-            #linkInput
-            readonly
-          />
+          <input id="url" matInput formcontrolName="link" [value]="url" #linkInput readonly />
         </mat-form-field>
       </div>
       <div fxLayout="column" fxFlex="20" fxFlex.xs="100">

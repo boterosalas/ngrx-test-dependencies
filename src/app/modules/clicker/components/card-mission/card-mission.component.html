@@ -2,11 +2,7 @@
 
 <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
   <mat-card *ngFor="let item of items">
-    <div
-      fxLayout="row"
-      fxLayoutAlign="space-between center "
-      fxLayoutGap="10px"
-    >
+    <div fxLayout="row" fxLayoutAlign="space-between center " fxLayoutGap="10px">
       <span fxLayout="column">
         <img [src]="item.icon" [alt]="item.title" />
       </span>
@@ -19,29 +15,16 @@
           <img src="/assets/img/gamification/Icon-check.svg" alt="check" />
         </span>
         <span *ngIf="item.complete === false">
-          <img
-            src="/assets/img/gamification/Icon-check-disabled.svg"
-            alt="check incomplete"
-          />
+          <img src="/assets/img/gamification/Icon-check-disabled.svg" alt="check incomplete" />
         </span>
       </div>
     </div>
 
-    <div
-      fxLayoutAlign="center center"
-      fxLayoutGap="10px"
-      class="pt-2"
-      *ngIf="item.progress !== null"
-    >
+    <div fxLayoutAlign="center center" fxLayoutGap="10px" class="pt-2" *ngIf="item.progress !== null">
       <span fxLayout="column" fxFlex="75">
-        <mat-progress-bar
-          mode="determinate"
-          [value]="(item.progress / item.totalProgress) * 100"
-        ></mat-progress-bar>
+        <mat-progress-bar mode="determinate" [value]="(item.progress / item.totalProgress) * 100"></mat-progress-bar>
       </span>
-      <span fxLayout="column" fxFlex="25">
-        {{ item.progress }} de {{ item.totalProgress }}
-      </span>
+      <span fxLayout="column" fxFlex="25"> {{ item.progress }} de {{ item.totalProgress }} </span>
     </div>
   </mat-card>
 </div>

@@ -16,22 +16,12 @@
             spacebar
             required
           />
-          <mat-error
-            id="introduceEmail"
-            *ngIf="
-              referForm.controls.email.invalid &&
-              referForm.controls.email.errors.required
-            "
-            >{{ 'LOGIN.INTRODUCE_EMAIL' | translate }}</mat-error
-          >
-          <mat-error
-            id="invalidEmail"
-            *ngIf="
-              referForm.controls.email.invalid &&
-              referForm.controls.email.errors.pattern
-            "
-            >{{ 'LOGIN.INVALID_EMAIL' | translate }}</mat-error
-          >
+          <mat-error id="introduceEmail" *ngIf="referForm.controls.email.invalid && referForm.controls.email.errors.required">{{
+            'LOGIN.INTRODUCE_EMAIL' | translate
+          }}</mat-error>
+          <mat-error id="invalidEmail" *ngIf="referForm.controls.email.invalid && referForm.controls.email.errors.pattern">{{
+            'LOGIN.INVALID_EMAIL' | translate
+          }}</mat-error>
         </mat-form-field>
       </div>
       <div fxLayout="column" fxFlex="20" fxFlex.xs="100" class="text-center">
@@ -44,9 +34,7 @@
           (click)="sendEmail()"
           [disabled]="!referForm.valid"
         >
-          <span class="gtmRfiereYGanaClicReferirenviarInvitacion">{{
-            'REFER.SEND_INVITATION' | translate
-          }}</span>
+          <span class="gtmRfiereYGanaClicReferirenviarInvitacion">{{ 'REFER.SEND_INVITATION' | translate }}</span>
         </button>
       </div>
     </div>

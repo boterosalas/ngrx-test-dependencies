@@ -1,18 +1,5 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter,
-  Input,
-  TemplateRef,
-} from '@angular/core';
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-} from '@angular/animations';
+import { Component, OnInit, Output, EventEmitter, Input, TemplateRef } from '@angular/core';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({

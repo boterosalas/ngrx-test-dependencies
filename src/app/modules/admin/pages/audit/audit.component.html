@@ -10,16 +10,8 @@
   <div fxLayout="row" class="pl-3">
     <form [formGroup]="dateForm" class="downloadUsers">
       <mat-form-field class="ml-2">
-        <mat-select
-          (selectionChange)="change()"
-          placeholder="Tipo de Reporte"
-          formControlName="typeRepor"
-          class="selected-report"
-        >
-          <mat-option
-            *ngFor="let selected of selecteds"
-            value="{{ selected.value }}"
-          >
+        <mat-select (selectionChange)="change()" placeholder="Tipo de Reporte" formControlName="typeRepor" class="selected-report">
+          <mat-option *ngFor="let selected of selecteds" value="{{ selected.value }}">
             <span>{{ selected.titulo }}</span>
           </mat-option>
         </mat-select>

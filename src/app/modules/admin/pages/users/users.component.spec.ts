@@ -27,19 +27,10 @@ describe('UsersComponent', () => {
   let component: UsersComponent;
   let fixture: ComponentFixture<UsersComponent>;
 
-  const mockLinksService = jasmine.createSpyObj('LinksService', [
-    'searchUsers',
-    'getUsersExcel',
-    'getHistoricalBankInformation',
-  ]);
+  const mockLinksService = jasmine.createSpyObj('LinksService', ['searchUsers', 'getUsersExcel', 'getHistoricalBankInformation']);
 
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open']);
-  const mockDialogRef = jasmine.createSpyObj('MatDialogRef', [
-    'close',
-    'afterClosed',
-    'componentInstance',
-    'event ',
-  ]);
+  const mockDialogRef = jasmine.createSpyObj('MatDialogRef', ['close', 'afterClosed', 'componentInstance', 'event ']);
 
   const mockUserService = jasmine.createSpyObj('UserService', [
     'updateUserEmail',
@@ -104,10 +95,8 @@ describe('UsersComponent', () => {
         userid: 109,
         // rut: "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACgcHiMeGSgjISMtKygw",
         bankcertificate: '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACgcHiMeGSgjISMtKygw',
-        identificationcard1:
-          '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACgcHiMeGSgjISMtKygw',
-        identificationcard2:
-          '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACgcHiMeGSgjISMtKygw',
+        identificationcard1: '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACgcHiMeGSgjISMtKygw',
+        identificationcard2: '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACgcHiMeGSgjISMtKygw',
       },
     ],
   };
@@ -214,9 +203,7 @@ describe('UsersComponent', () => {
     );
     mockLinksService.searchUsers.and.returnValue(of(dataUser));
     mockLinksService.getUsersExcel.and.returnValue(of(getUserExcel));
-    mockLinksService.getHistoricalBankInformation.and.returnValue(
-      of(getUserExcel)
-    );
+    mockLinksService.getHistoricalBankInformation.and.returnValue(of(getUserExcel));
     mockUserService.getExternalUsers.and.returnValue(of(getUserExcel));
     mockUserService.updateUserEmail.and.returnValue(of(resp));
     mockUserService.updateEmployees.and.returnValue(of(updtaeEmployee));
@@ -227,9 +214,7 @@ describe('UsersComponent', () => {
     mockUserService.verifiedUser.and.returnValue(of(getUserExcel));
     mockUserService.getReportCommets.and.returnValue(of(getUserExcel));
     mockUserService.getDeleteCommetsRest.and.returnValue(of(getUserExcel));
-    mockUserService.getUserInfoAditional.and.returnValue(
-      of(getUserInfoAditional)
-    );
+    mockUserService.getUserInfoAditional.and.returnValue(of(getUserInfoAditional));
     //mockUserService.getExternalUser.and.returnValue(of(getUserExcel));verifiedUser
     fixture = TestBed.createComponent(UsersComponent);
     component = fixture.componentInstance;
@@ -334,9 +319,7 @@ describe('UsersComponent', () => {
       startDate: end,
       endDate: start,
     });
-    component.dateForm.controls.tipoReport.setValue(
-      'Cambios de Datos bancarios'
-    );
+    component.dateForm.controls.tipoReport.setValue('Cambios de Datos bancarios');
     component.getAnyReport();
 
     let datos = true;
@@ -350,9 +333,7 @@ describe('UsersComponent', () => {
       startDate: end,
       endDate: start,
     });
-    component.dateForm.controls.tipoReport.setValue(
-      'Cambios de Datos bancarios'
-    );
+    component.dateForm.controls.tipoReport.setValue('Cambios de Datos bancarios');
     component.getAnyReport();
     let datos = true;
     expect(datos).toBeTruthy();

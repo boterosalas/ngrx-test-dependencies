@@ -16,41 +16,30 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
   validFormat: boolean;
   fileImgCat: any;
   formData: FormData = new FormData();
-  nameFileCert: string = '';
+  nameFileCert = '';
   showErrorCert: boolean;
   activebutton: boolean;
   visualizationImag: any;
-  titleArticle: string = '';
-  author: string = '';
-  etiquetas: string = '';
-  visible: boolean = false;
+  titleArticle = '';
+  author = '';
+  etiquetas = '';
+  visible = false;
   datePublication: any = '';
   hourDate: any = '';
   id: any = '';
   private subscription: Subscription = new Subscription();
   minDate = new Date();
   minHours: any;
-  constructor(
-    public router: Router,
-    private content: ContentService,
-    private route: ActivatedRoute,
-    private fb: FormBuilder
-  ) {
+  constructor(public router: Router, private content: ContentService, private route: ActivatedRoute, private fb: FormBuilder) {
     this.subscription = this.route.params.subscribe((route) => {
-      if (
-        route.id === undefined &&
-        route.titulo === undefined &&
-        route.imagen === undefined
-      ) {
+      if (route.id === undefined && route.titulo === undefined && route.imagen === undefined) {
         this.id = '1';
       } else {
         this.id = route.id;
       }
     });
   }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+
   formDataContent: FormGroup;
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -93,10 +82,11 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
     ],
   };
   htmlContent: string;
-  disabledButtonEraser: boolean = true;
+  disabledButtonEraser = true;
   datePublicationHolder: string;
-  disabledButtonPublication: boolean = true;
-  contadorDates: number = 0;
+  disabledButtonPublication  = true;
+  contadorDates = 0;
+
   ngOnInit() {
     this.formDataContent = this.fb.group({
       titulo: [null, Validators.maxLength(250)],
@@ -107,30 +97,20 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
     this.datePublication = '';
     this.hourDate = '';
     this.content.getIndividualBlogId(this.id).subscribe((resp) => {
-      //this.titleArticle = resp.objectResponse.title;
-      //this.htmlContent = resp.objectResponse.content;
-      //this.author = resp.objectResponse.author;
-      //this.etiquetas = resp.objectResponse.tags;
       this.visible = resp.objectResponse.visible;
-      //
-
       this.formDataContent.controls.titulo.setValue(resp.objectResponse.title);
       this.formDataContent.controls.autor.setValue(resp.objectResponse.author);
-      this.formDataContent.controls.etiquetas.setValue(
-        resp.objectResponse.tags
-      );
+      this.formDataContent.controls.etiquetas.setValue(resp.objectResponse.tags);
       this.formDataContent.controls.html.setValue(resp.objectResponse.content);
       if (resp.objectResponse.publicationdate != null) {
-        this.datePublication = moment(
-          resp.objectResponse.publicationdate
-        ).format();
-        let hour = resp.objectResponse.publicationdate.split('T');
+        this.datePublication = moment(resp.objectResponse.publicationdate).format();
+        const hour = resp.objectResponse.publicationdate.split('T');
         this.hourDate = this.timeFormat(hour[1]);
       }
 
-      if (resp.objectResponse.imageurl != '') {
+      if (resp.objectResponse.imageurl !== '') {
         this.visualizationImag = resp.objectResponse.imageurl;
-        let datos = resp.objectResponse.imageurl.split('/');
+        const datos = resp.objectResponse.imageurl.split('/');
         this.nameFileCert = datos[datos.length - 1];
       }
       this.disabledButtonPublication = true;
@@ -138,27 +118,27 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
     });
   }
   timeFormat(time) {
-    let hour = time.split(':')[0];
-    let minute = time.split(':')[1];
+    const hour = time.split(':')[0];
+    const minute = time.split(':')[1];
 
     if (hour >= 12) {
-      if (hour == 12) {
-        let h = hour;
-        let m = minute + ' PM';
+      if (hour === 12) {
+        const h = hour;
+        const m = minute + ' PM';
         return h + ':' + m;
       } else {
-        let h = hour - 12;
-        let m = minute + ' PM';
+        const h = hour - 12;
+        const m = minute + ' PM';
         return h + ':' + m;
       }
     } else {
-      let h = parseInt(hour);
+      const h = parseInt(hour);
       return h + ':' + minute + ' AM';
     }
   }
   private getExtension(nameFile: string, getSize: number) {
-    let splitExt = nameFile.split('.');
-    let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
+    const splitExt = nameFile.split('.');
+    const getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
     this.validFormat = false;
     this.showErrorCert = true;
     if (getExt === 'jpg') {
@@ -173,15 +153,11 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
   readURL(event: any): void {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
-      let fileList: FileList = event.target.files;
+      const fileList: FileList = event.target.files;
       this.getExtension(fileList[0].name, fileList[0].size);
       if (this.validFormat === true) {
-        this.formData.append(
-          'File',
-          fileList[0],
-          fileList[0].name.replace(' ', '_')
-        );
-        let nameFile = event.target.files[0].name;
+        this.formData.append('File', fileList[0], fileList[0].name.replace(' ', '_'));
+        const nameFile = event.target.files[0].name;
         this.nameFileCert = nameFile;
         const reader = new FileReader();
         reader.onload = (e) => (this.visualizationImag = reader.result);
@@ -191,9 +167,9 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
     }
   }
   saveeraser() {
-    let datePublication = moment(this.datePublication).format('YYYY-MM-DD');
+    const datePublication = moment(this.datePublication).format('YYYY-MM-DD');
     let hour;
-    if (this.hourDate != undefined) {
+    if (this.hourDate !== undefined) {
       hour = this.HoraMilitar(this.hourDate);
     } else {
       hour = '';
@@ -204,10 +180,7 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
     this.formData.append('author', this.formDataContent.controls.autor.value);
     this.formData.append('tags', this.formDataContent.controls.etiquetas.value);
     this.formData.append('visible', '' + this.visible);
-    this.formData.append(
-      'publicationDate',
-      datePublication + ' ' + hour + ':00'
-    );
+    this.formData.append('publicationDate', datePublication + ' ' + hour + ':00');
     this.content.saveBlog(this.formData).subscribe((resp) => {
       this.regresarBlogs();
     });
@@ -260,17 +233,17 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
       allowOutsideClick: false,
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
-        this.content.deleteBlog(this.id).subscribe((resp) => {
+        this.content.deleteBlog(this.id).subscribe(() => {
           this.regresarBlogs();
         });
       }
     });
   }
   activate() {
-    if (this.datePublication != '' || this.hourDate != '') {
+    if (this.datePublication !== '' || this.hourDate !== '') {
       this.disabledButtonEraser = false;
     }
-    if (this.datePublication != '' && this.hourDate != '') {
+    if (this.datePublication !== '' && this.hourDate !== '') {
       this.disabledButtonPublication = false;
     }
     if (this.nameFileCert === '') {
@@ -279,9 +252,9 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
     }
   }
   hourChange(horu) {
-    let data = new Date();
-    let dataH = moment(data).format('YYYY-MM-DD');
-    let dataOp = moment(horu.value).format('YYYY-MM-DD');
+    const data = new Date();
+    const dataH = moment(data).format('YYYY-MM-DD');
+    const dataOp = moment(horu.value).format('YYYY-MM-DD');
     if (dataH === dataOp) {
       this.hourDate = '';
       this.minHours = moment(data).format('hh:mm A');
@@ -292,26 +265,31 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
   }
 
   public HoraMilitar(time) {
-    let format = time.toString().split(' ')[1];
-    let hour = time.toString().split(' ')[0].split(':')[0];
-    if (hour == 12) {
-      let hour = time.toString().split(' ')[0];
+    const format = time.toString().split(' ')[1];
+    const hour = time.toString().split(' ')[0].split(':')[0];
+    if (hour === 12) {
+      const hour = time.toString().split(' ')[0];
       return hour;
     } else {
       if (format === 'PM') {
-        let hour = time.toString().split(' ')[0];
-        let h = parseInt(hour.split(':')[0]) + 12;
-        let m = hour.split(':')[1];
+        const hour = time.toString().split(' ')[0];
+        const h = parseInt(hour.split(':')[0]) + 12;
+        const m = hour.split(':')[1];
         return h + ':' + m;
       } else {
         if (hour < 10) {
-          let hour = 0 + time.toString().split(' ')[0];
+          const hour = 0 + time.toString().split(' ')[0];
           return hour;
         } else {
-          let hour = time.toString().split(' ')[0];
+          const hour = time.toString().split(' ')[0];
           return hour;
         }
       }
     }
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }

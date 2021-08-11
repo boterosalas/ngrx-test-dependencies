@@ -23,7 +23,7 @@ export class NavigationFooterComponent implements OnInit {
   dialogRef: MatDialogRef<any>;
   currentSection: any;
   currentLink: any = {};
-  isInvalidAddSection: boolean = false;
+  isInvalidAddSection = false;
 
   constructor(private content: ContentService, private dialog: MatDialog) {}
 
@@ -36,12 +36,8 @@ export class NavigationFooterComponent implements OnInit {
   }
 
   dropSection(event: CdkDragDrop<any>) {
-    moveItemInArray(
-      this.sectionsLinks,
-      event.previousIndex,
-      event.currentIndex
-    );
-    let dataSourceSend = [];
+    moveItemInArray(this.sectionsLinks, event.previousIndex, event.currentIndex);
+    const dataSourceSend = [];
     for (let i = 0; i < this.sectionsLinks.length; i++) {
       this.sectionsLinks[i].orderby = i + 1;
       dataSourceSend.push({
@@ -114,14 +110,12 @@ export class NavigationFooterComponent implements OnInit {
   }
 
   deleteNavigationSectionService() {
-    let datos = [this.currentSection.id];
-    this.content
-      .deleteFooterSection(datos)
-      .subscribe((resp: ResponseService) => {
-        if (resp.state === 'Success') {
-          this.dialog.closeAll();
-        }
-      });
+    const datos = [this.currentSection.id];
+    this.content.deleteFooterSection(datos).subscribe((resp: ResponseService) => {
+      if (resp.state === 'Success') {
+        this.dialog.closeAll();
+      }
+    });
   }
 
   addNavigationItem(section: any) {
@@ -180,7 +174,7 @@ export class NavigationFooterComponent implements OnInit {
   }
 
   deleteNavigationItemService() {
-    let datos = [this.currentLink.id];
+    const datos = [this.currentLink.id];
     this.content.deleteFooterLink(datos).subscribe((resp: ResponseService) => {
       if (resp.state === 'Success') {
         this.dialog.closeAll();

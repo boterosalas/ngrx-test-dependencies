@@ -23,10 +23,10 @@ export class ConfigurationsComponent implements OnInit {
   displayedColumns: string[] = ['name', 'superadmin'];
   emailPattern = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
   selecteds: any;
-  superAdmin: boolean = false;
+  superAdmin = false;
   servicios = [];
   permisionColumns: any;
-  disableBoton: boolean = true;
+  disableBoton = true;
   userId: string;
   deleteId: number;
   role: string;
@@ -40,11 +40,7 @@ export class ConfigurationsComponent implements OnInit {
   templateAddAdmin: TemplateRef<any>;
 
   ngOnInit() {
-    const validatorsPassword = [
-      Validators.required,
-      Validators.minLength(6),
-      Validators.maxLength(20),
-    ];
+    const validatorsPassword = [Validators.required, Validators.minLength(6), Validators.maxLength(20)];
 
     this.adminFormDelete = this.fb.group({
       Password: ['', validatorsPassword],
@@ -52,19 +48,12 @@ export class ConfigurationsComponent implements OnInit {
 
     this.dataAddAdmin = this.fb.group({
       name: [null, Validators.required],
-      email: [
-        null,
-        [
-          Validators.required,
-          Validators.pattern(this.emailPattern),
-          Validators.maxLength(64),
-        ],
-      ],
+      email: [null, [Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
       password: ['', validatorsPassword],
     });
 
-    let token = localStorage.getItem('ACCESS_TOKEN');
-    let tokenDecode = decode(token);
+    const token = localStorage.getItem('ACCESS_TOKEN');
+    const tokenDecode = decode(token);
     this.userId = tokenDecode.userid;
     this.role = tokenDecode.role;
 
@@ -106,17 +95,11 @@ export class ConfigurationsComponent implements OnInit {
     this.disableBoton = false;
   }
   changePermission(event, index, idmenu) {
-    this.servicios[index].permissions.find(
-      (permission) => permission.menuid === idmenu
-    ).value = event.checked;
+    this.servicios[index].permissions.find((permission) => permission.menuid === idmenu).value = event.checked;
     this.cambio();
   }
   public getPermissionValue(element, idmenu) {
-    return (
-      element.issuperadmin ||
-      element.permissions.find((permission) => permission.menuid === idmenu)
-        .value
-    );
+    return element.issuperadmin || element.permissions.find((permission) => permission.menuid === idmenu).value;
   }
 
   public openConfirmPassword(userId) {
@@ -135,7 +118,7 @@ export class ConfigurationsComponent implements OnInit {
   }
 
   public deleteAdminService() {
-    let data = {
+    const data = {
       password: btoa(this.adminFormDelete.controls.Password.value),
       userId: this.deleteId,
     };
@@ -169,8 +152,8 @@ export class ConfigurationsComponent implements OnInit {
 
   public addAdminService() {
     const splitName = this.dataAddAdmin.controls.name.value.split(' ');
-    let firstNames = '',
-      lastNames = '';
+    let firstNames = '';
+    let lastNames = '';
 
     if (splitName.length <= 1) {
       firstNames = this.dataAddAdmin.controls.name.value;
@@ -185,7 +168,7 @@ export class ConfigurationsComponent implements OnInit {
       lastNames = `${splitName[2]} ${splitName[3]}`;
     }
 
-    let data = {
+    const data = {
       password: btoa(this.dataAddAdmin.controls.password.value),
       email: this.dataAddAdmin.controls.email.value,
       firstNames,

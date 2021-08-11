@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  TemplateRef,
-  ChangeDetectorRef,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { LinksService } from 'src/app/services/links.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
@@ -44,8 +37,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
   isLoggedIn: any;
   userName: string;
   tmpPath: string;
-  EXCEL_TYPE =
-    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+  EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
   private subscription: Subscription = new Subscription();
   maxDate = moment(new Date());
   maxDate2 = new Date();
@@ -81,7 +73,6 @@ export class ReportsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    //this.getFileReport();
 
     this.nameFile = '';
     this.nameFilePayment = '';
@@ -135,12 +126,12 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
   public onFileChangeTrip(event) {
     this.nameFile = event.target.files[0].name;
-    let reader = new FileReader();
+    const reader = new FileReader();
 
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      let fileBlob = new Blob([file], { type: this.EXCEL_TYPE });
-      let file2 = new File([fileBlob], this.nameFile, {
+      const fileBlob = new Blob([file], { type: this.EXCEL_TYPE });
+      const file2 = new File([fileBlob], this.nameFile, {
         type: this.EXCEL_TYPE,
       });
       reader.readAsDataURL(file2);
@@ -162,11 +153,11 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
   public onFileChangePayment(event) {
     this.nameFilePayment = event.target.files[0].name;
-    let reader = new FileReader();
+    const reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      let fileBlob = new Blob([file], { type: this.EXCEL_TYPE });
-      let file2 = new File([fileBlob], this.nameFilePayment, {
+      const fileBlob = new Blob([file], { type: this.EXCEL_TYPE });
+      const file2 = new File([fileBlob], this.nameFilePayment, {
         type: this.EXCEL_TYPE,
       });
       reader.readAsDataURL(file2);
@@ -187,11 +178,11 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
   public onFileChangePicking(event) {
     this.nameFilePicking = event.target.files[0].name;
-    let reader = new FileReader();
+    const reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      let fileBlob = new Blob([file], { type: this.EXCEL_TYPE });
-      let filePicking = new File([fileBlob], this.nameFilePicking, {
+      const fileBlob = new Blob([file], { type: this.EXCEL_TYPE });
+      const filePicking = new File([fileBlob], this.nameFilePicking, {
         type: this.EXCEL_TYPE,
       });
       reader.readAsDataURL(filePicking);
@@ -211,8 +202,8 @@ export class ReportsComponent implements OnInit, OnDestroy {
   }
 
   private getExtension(nameFile: string) {
-    let splitExt = nameFile.split('.');
-    let getExt = splitExt[1];
+    const splitExt = nameFile.split('.');
+    const getExt = splitExt[1];
     this.validFormat = false;
     if (getExt === 'xlsx' || getExt === 'xls') {
       this.validFormat = true;
@@ -220,9 +211,9 @@ export class ReportsComponent implements OnInit, OnDestroy {
   }
 
   private sendFileTrip() {
-    let fileSplit = this.fileForm.controls.file.value.file.split(',');
-    let file = fileSplit[1];
-    let data = {
+    const fileSplit = this.fileForm.controls.file.value.file.split(',');
+    const file = fileSplit[1];
+    const data = {
       fileBase64: file,
       email: this.userName,
     };
@@ -268,9 +259,9 @@ export class ReportsComponent implements OnInit, OnDestroy {
   }
 
   private sendFilePayment() {
-    let fileSplit = this.fileFormPayment.controls.file.value.file.split(',');
-    let file = fileSplit[1];
-    let data = {
+    const fileSplit = this.fileFormPayment.controls.file.value.file.split(',');
+    const file = fileSplit[1];
+    const data = {
       fileBase64: file,
       business: 'seguros',
       email: this.userName,
@@ -316,9 +307,9 @@ export class ReportsComponent implements OnInit, OnDestroy {
   }
 
   private sendFilePicking() {
-    let fileSplit = this.fileFormPicking.controls.file.value.file.split(',');
-    let file = fileSplit[1];
-    let data = {
+    const fileSplit = this.fileFormPicking.controls.file.value.file.split(',');
+    const file = fileSplit[1];
+    const data = {
       file: file,
     };
     this.loading.show();
@@ -363,36 +354,34 @@ export class ReportsComponent implements OnInit, OnDestroy {
   }
 
   public downloadReferal() {
-    let dates = {
+    const dates = {
       dateStart: this.dateForm.controls.dateStart.value,
       dateEnd: this.dateForm.controls.dateEnd.value,
     };
-    this.subscription = this.file
-      .downloadReferrals(dates)
-      .subscribe((resp: ResponseService) => {
-        let file = resp.objectResponse;
-        let contentType = 'application/vnd.ms-excel';
-        const linkSource = `data:${contentType};base64,${file}`;
-        const downloadLink = document.createElement('a');
-        const fileName = `reporte.xlsx`;
+    this.subscription = this.file.downloadReferrals(dates).subscribe((resp: ResponseService) => {
+      const file = resp.objectResponse;
+      const contentType = 'application/vnd.ms-excel';
+      const linkSource = `data:${contentType};base64,${file}`;
+      const downloadLink = document.createElement('a');
+      const fileName = `reporte.xlsx`;
 
-        downloadLink.href = linkSource;
-        downloadLink.download = fileName;
-        downloadLink.click();
-        this.dateForm.reset();
-        this.dateForm.controls.dateStart.setValue('');
-        this.dateForm.controls.dateEnd.setValue('');
-        setTimeout(() => {
-          this.dateForm.controls.dateEnd.setErrors(null);
-          this.dateForm.controls.dateStart.setErrors(null);
-        });
+      downloadLink.href = linkSource;
+      downloadLink.download = fileName;
+      downloadLink.click();
+      this.dateForm.reset();
+      this.dateForm.controls.dateStart.setValue('');
+      this.dateForm.controls.dateEnd.setValue('');
+      setTimeout(() => {
+        this.dateForm.controls.dateEnd.setErrors(null);
+        this.dateForm.controls.dateStart.setErrors(null);
       });
+    });
   }
 
   /**
    * Abre el mensaje de confirmacion de copiado del link
-   * @param message
-   * @param action
+   * @param message mensaje
+   * @param action accion
    */
 
   private openSnackBar(message: string, action: string) {
@@ -407,17 +396,15 @@ export class ReportsComponent implements OnInit, OnDestroy {
       end: this.dateFormSell.controls.dateRange.value.endDate.format(),
     };
 
-    this.subscription = this.file
-      .getReportClickam(this.dateParams)
-      .subscribe((resp: ResponseService) => {
-        if (resp.state === 'Success') {
-          this.openSnackBar(resp.userMessage, 'Cerrar');
-          this.dateFormSell.reset();
-          if (this.dateFormSell.controls.dateRange.value.startDate === null) {
-            this.disButon = true;
-          }
+    this.subscription = this.file.getReportClickam(this.dateParams).subscribe((resp: ResponseService) => {
+      if (resp.state === 'Success') {
+        this.openSnackBar(resp.userMessage, 'Cerrar');
+        this.dateFormSell.reset();
+        if (this.dateFormSell.controls.dateRange.value.startDate === null) {
+          this.disButon = true;
         }
-      });
+      }
+    });
   }
 
   ngOnDestroy(): void {

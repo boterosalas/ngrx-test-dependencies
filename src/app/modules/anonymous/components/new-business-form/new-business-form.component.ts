@@ -1,19 +1,6 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-} from '@angular/animations';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Subscription } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
 import { ResponseService } from 'src/app/interfaces/response';
@@ -38,12 +25,7 @@ import { MatDialog, MatDialogRef } from '@angular/material';
   ],
 })
 export class NewBusinessFormComponent implements OnInit, OnDestroy {
-  constructor(
-    private fb: FormBuilder,
-    private content: ContentService,
-    private dialog: MatDialog,
-    public dialogRef: MatDialogRef<any>
-  ) {}
+  constructor(private fb: FormBuilder, private content: ContentService, private dialog: MatDialog, public dialogRef: MatDialogRef<any>) {}
 
   @Input() categories: Array<any> = [];
   @Output() registerBusinessEmit = new EventEmitter();
@@ -51,8 +33,7 @@ export class NewBusinessFormComponent implements OnInit, OnDestroy {
 
   registerForm: FormGroup;
   emailPattern = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
-  namePattern =
-    '[a-zA-Z0-9 àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]+';
+  namePattern = '[a-zA-Z0-9 àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]+';
   numberPattern = '^(0|[0-9][0-9]*)$';
   domainPattern = '[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:.[a-zA-Z]{2,})+';
   showBusinessForm: boolean = true;
@@ -66,47 +47,11 @@ export class NewBusinessFormComponent implements OnInit, OnDestroy {
 
   public registerBusiness() {
     this.registerForm = this.fb.group({
-      name: [
-        '',
-        [
-          Validators.required,
-          Validators.maxLength(50),
-          Validators.pattern(this.namePattern),
-        ],
-      ],
-      domain: [
-        '',
-        [
-          Validators.required,
-          Validators.maxLength(50),
-          Validators.pattern(this.domainPattern),
-        ],
-      ],
-      contact: [
-        '',
-        [
-          Validators.required,
-          Validators.maxLength(50),
-          Validators.pattern(this.namePattern),
-        ],
-      ],
-      phone: [
-        '',
-        [
-          Validators.required,
-          Validators.maxLength(10),
-          Validators.minLength(10),
-          Validators.pattern(this.numberPattern),
-        ],
-      ],
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(this.emailPattern),
-          Validators.maxLength(64),
-        ],
-      ],
+      name: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(this.namePattern)]],
+      domain: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(this.domainPattern)]],
+      contact: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(this.namePattern)]],
+      phone: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern(this.numberPattern)]],
+      email: ['', [Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
       category: [this.categories, Validators.required],
       recaptchaReactive: [null, Validators.required],
       acceptTerms: [null, Validators.required],
@@ -149,47 +94,43 @@ export class NewBusinessFormComponent implements OnInit, OnDestroy {
       acceptTerms: formInfo.acceptTerms,
       acceptHabeasData: true,
     };
-    this.subscription = this.content
-      .registerBusinessClicker(infoBusiness)
-      .subscribe(
-        (resp: ResponseService) => {
-          if (resp.state === 'Success') {
-            this.dialog.closeAll();
-            Swal.fire({
-              title: 'Registro exitoso',
-              text: resp.userMessage,
-              type: 'success',
-              confirmButtonText: 'Aceptar',
-              confirmButtonClass: 'accept-register-alert-success',
-            });
-          } else {
-            this.dialog.closeAll();
-            Swal.fire({
-              title: 'Registro erróneo',
-              text: resp.userMessage,
-              type: 'error',
-              confirmButtonText: 'Aceptar',
-              confirmButtonClass: 'accept-register-alert-error',
-            });
-          }
-        },
-        (error) => {
+    this.subscription = this.content.registerBusinessClicker(infoBusiness).subscribe(
+      (resp: ResponseService) => {
+        if (resp.state === 'Success') {
           this.dialog.closeAll();
           Swal.fire({
-            title: error.statusText,
-            text: error.error,
+            title: 'Registro exitoso',
+            text: resp.userMessage,
+            type: 'success',
+            confirmButtonText: 'Aceptar',
+            confirmButtonClass: 'accept-register-alert-success',
+          });
+        } else {
+          this.dialog.closeAll();
+          Swal.fire({
+            title: 'Registro erróneo',
+            text: resp.userMessage,
             type: 'error',
             confirmButtonText: 'Aceptar',
-            confirmButtonClass: 'accept-register-alert-invalid',
+            confirmButtonClass: 'accept-register-alert-error',
           });
         }
-      );
+      },
+      (error) => {
+        this.dialog.closeAll();
+        Swal.fire({
+          title: error.statusText,
+          text: error.error,
+          type: 'error',
+          confirmButtonText: 'Aceptar',
+          confirmButtonClass: 'accept-register-alert-invalid',
+        });
+      }
+    );
   }
 
   public getCategoriesBusiness() {
-    this.subscription = this.content
-      .getCategoriesBusinessHome()
-      .subscribe((categories) => (this.categories = categories));
+    this.subscription = this.content.getCategoriesBusinessHome().subscribe((categories) => (this.categories = categories));
   }
 
   onNoClick(): void {

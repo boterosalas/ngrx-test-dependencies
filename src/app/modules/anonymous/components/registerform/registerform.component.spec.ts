@@ -3,12 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RegisterformComponent } from './registerform.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
-import {
-  FormsModule,
-  ReactiveFormsModule,
-  FormGroup,
-  FormBuilder,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of, throwError } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -27,19 +22,11 @@ describe('RegisterformComponent', () => {
   let component: RegisterformComponent;
   let fixture: ComponentFixture<RegisterformComponent>;
 
-  const mockUserService = jasmine.createSpyObj('UserService', [
-    'idType',
-    'registerUser',
-  ]);
-  const mockMasterService = jasmine.createSpyObj('MasterDataService', [
-    'getTerms',
-    'setTerms',
-  ]);
+  const mockUserService = jasmine.createSpyObj('UserService', ['idType', 'registerUser']);
+  const mockMasterService = jasmine.createSpyObj('MasterDataService', ['getTerms', 'setTerms']);
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll']);
 
-  const mockUtilsService = jasmine.createSpyObj('UtilsService', [
-    'showloginForm',
-  ]);
+  const mockUtilsService = jasmine.createSpyObj('UtilsService', ['showloginForm']);
 
   const idType = [
     {
@@ -234,9 +221,7 @@ describe('RegisterformComponent', () => {
   });
 
   it('register form', () => {
-    component.registerForm.controls.email.setValue(
-      'david.betancur@pragma.com.co'
-    );
+    component.registerForm.controls.email.setValue('david.betancur@pragma.com.co');
     component.registerForm.controls.name.setValue('David');
     component.registerForm.controls.lastName.setValue('Betancur');
     component.registerForm.controls.id.setValue('1');

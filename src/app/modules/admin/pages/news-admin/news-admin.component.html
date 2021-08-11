@@ -9,33 +9,19 @@
     <div class="ml-4 downloadUsers user-transactions"></div>
     <div fxLayout="row" fxLayoutAlign="space-between center" class="w-100">
       <div>
-        <button
-          mat-raised-button
-          color="orange"
-          (click)="openModalFilters()"
-          id="download-users"
-        >
+        <button mat-raised-button color="orange" (click)="openModalFilters()" id="download-users">
           Ordenar y filtrar
           <i class="tio-filter style-icon"></i>
         </button>
 
-        <button
-          mat-raised-button
-          color="orange"
-          (click)="getReportExcel()"
-          id="download-users"
-          class="ml-2"
-        >
+        <button mat-raised-button color="orange" (click)="getReportExcel()" id="download-users" class="ml-2">
           Exportar
           <i class="tio-download_from_cloud style-icon"></i>
         </button>
       </div>
 
       <div class="container-search mt-2">
-        <app-search-users
-          class="searchUser"
-          (search)="searchUser($event)"
-        ></app-search-users>
+        <app-search-users class="searchUser" (search)="searchUser($event)"></app-search-users>
       </div>
     </div>
   </div>
@@ -44,10 +30,7 @@
       <i class="{{ item.icon }}"></i>
       <div>
         <h3>{{ item.title }}</h3>
-        <p>
-          {{ item.number | number: '1.0'
-          }}{{ item.code === 'effectiveness' ? '%' : '' }}
-        </p>
+        <p>{{ item.number | number: '1.0' }}{{ item.code === 'effectiveness' ? '%' : '' }}</p>
       </div>
     </div>
   </div>
@@ -63,31 +46,15 @@
 
   <div class="mt-3">
     <pagination-template #p="paginationApi" (pageChange)="pagination($event)">
-      <div
-        fxLayout="row"
-        fxLayoutGap="12px"
-        class="paginator"
-        fxLayoutAlign="end center"
-      >
+      <div fxLayout="row" fxLayoutGap="12px" class="paginator" fxLayoutAlign="end center">
         <span class="items">Items por página {{ pageSize }}</span>
         <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
           <a (click)="p.previous()"> <i class="tio-back_ui"></i> </a>
         </div>
 
-        <div
-          class="bubble"
-          fxLayout="row"
-          fxLayoutGap="20px"
-          fxLayoutAlign="space-between center"
-        >
-          <div
-            *ngFor="let page of p.pages"
-            [class.current]="p.getCurrent() === page.value"
-          >
-            <a
-              (click)="p.setCurrent(page.value)"
-              *ngIf="p.getCurrent() !== page.value"
-            >
+        <div class="bubble" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
+          <div *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
+            <a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
               <span class="cursor-pointer">{{ page.label }}</span>
             </a>
             <div *ngIf="p.getCurrent() === page.value">
@@ -107,8 +74,5 @@
 <!-- template filter-->
 
 <ng-template #templateDialogFilter>
-  <app-dialog-filter-novelties
-    (objectSend)="infoFilter($event)"
-    (close)="onNoClick()"
-  ></app-dialog-filter-novelties>
+  <app-dialog-filter-novelties (objectSend)="infoFilter($event)" (close)="onNoClick()"></app-dialog-filter-novelties>
 </ng-template>

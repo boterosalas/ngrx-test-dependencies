@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  HostListener,
-  ViewChild,
-  TemplateRef,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, TemplateRef, OnDestroy } from '@angular/core';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { ContentService } from 'src/app/services/content.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -82,8 +75,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   idClicker: string;
   showDeliver: boolean = false;
   acceptTermsDeliver: boolean;
-  urlPlaystore: string =
-    'https://play.google.com/store/apps/details?id=com.sewayplus';
+  urlPlaystore: string = 'https://play.google.com/store/apps/details?id=com.sewayplus';
   urlAppstore: string = 'https://apps.apple.com/co/app/seway/id1414489414';
 
   paginate: string;
@@ -134,16 +126,10 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.ngNavigatorShareService = ngNavigatorShareService;
 
     this.subscription = this.route.params.subscribe((route) => {
-      if (
-        route.id === undefined &&
-        route.code === undefined &&
-        route.imageurl === undefined &&
-        route.infoAditional === undefined
-      ) {
+      if (route.id === undefined && route.code === undefined && route.imageurl === undefined && route.infoAditional === undefined) {
         this.id = '1';
         this.title = 'exito';
-        this.image =
-          'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg';
+        this.image = 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg';
         this.percent = 'Hasta 9.6% de ganancia';
         this.description = 'Almacenes Éxito';
       } else {
@@ -196,14 +182,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     }
 
     this.idCustomerForm = this.fb.group({
-      identification: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(this.numberPattern),
-          Validators.maxLength(10),
-        ],
-      ],
+      identification: ['', [Validators.required, Validators.pattern(this.numberPattern), Validators.maxLength(10)]],
     });
 
     this.termsForm = this.fb.group({
@@ -229,9 +208,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   }
   toggleContent() {
     this.isContentToggled = !this.isContentToggled;
-    this.infoBussiness = this.isContentToggled
-      ? this.nonEditedContent
-      : this.formatContent(this.infoBussiness);
+    this.infoBussiness = this.isContentToggled ? this.nonEditedContent : this.formatContent(this.infoBussiness);
   }
   // public order(option:string) {
   //   this.pageIndex = 0;
@@ -277,19 +254,17 @@ export class BussinessComponent implements OnInit, OnDestroy {
       identificationcustomer: this.idCustomerForm.controls.identification.value,
     };
 
-    this.subscription = this.links
-      .saveLink(dataSaveLink)
-      .subscribe((resp: ResponseService) => {
-        this.urlshorten = resp.objectResponse.link;
-        this.enableCopy = false;
-        if (param === 'assured') {
-          if (resp.state === 'Error') {
-            this.openSnackBar(resp.userMessage, 'cerrar');
-            this.showForm = false;
-            this.showFormCustomer = true;
-          }
+    this.subscription = this.links.saveLink(dataSaveLink).subscribe((resp: ResponseService) => {
+      this.urlshorten = resp.objectResponse.link;
+      this.enableCopy = false;
+      if (param === 'assured') {
+        if (resp.state === 'Error') {
+          this.openSnackBar(resp.userMessage, 'cerrar');
+          this.showForm = false;
+          this.showFormCustomer = true;
         }
-      });
+      }
+    });
   }
 
   /**
@@ -305,16 +280,14 @@ export class BussinessComponent implements OnInit, OnDestroy {
       creationDate: this.date,
       identificationcustomer: this.idCustomerForm.controls.identification.value,
     };
-    this.subscription = this.links
-      .saveLink(dataSaveLinkReference)
-      .subscribe((resp: ResponseService) => {
-        if (resp.state === 'Error') {
-          this.openSnackBar(resp.userMessage, 'cerrar');
-        } else {
-          this.openSnackBar(resp.userMessage, 'cerrar');
-          this.dialog.dismiss();
-        }
-      });
+    this.subscription = this.links.saveLink(dataSaveLinkReference).subscribe((resp: ResponseService) => {
+      if (resp.state === 'Error') {
+        this.openSnackBar(resp.userMessage, 'cerrar');
+      } else {
+        this.openSnackBar(resp.userMessage, 'cerrar');
+        this.dialog.dismiss();
+      }
+    });
   }
 
   private formShareLink() {
@@ -329,14 +302,8 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   public getDate() {
     let today = new Date();
-    let date =
-      today.getFullYear() +
-      '-' +
-      (today.getMonth() + 1) +
-      '-' +
-      today.getDate();
-    let time =
-      today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    let time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     this.date = date + ' ' + time;
   }
 
@@ -437,41 +404,34 @@ export class BussinessComponent implements OnInit, OnDestroy {
       const showProduct = true;
       const id = sliderInfo.productId;
       // this.classButton = (sliderInfo.description).replace(" ", "");
-      this.classButtonWhatsapp =
-        `gtmClicLightboxIconoWhatsApp${this.title}${sliderInfo.description}`
-          .replace(/\s/g, '')
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '');
-      this.classButtonTwitter =
-        `gtmClicLightboxIconoTwitter${this.title}${sliderInfo.description}`
-          .replace(/\s/g, '')
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '');
-      this.classButtonFacebook =
-        `gtmClicLightboxIconoFacebook${this.title}${sliderInfo.description}`
-          .replace(/\s/g, '')
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '');
-      this.classButtonShare =
-        `gtmClicLightboxCompartir${this.title}${sliderInfo.description}`
-          .replace(/\s/g, '')
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '');
-      this.classButtonBuy =
-        `gtmClicLightboxComprar${this.title}${sliderInfo.description}`
-          .replace(/\s/g, '')
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '');
-      this.classButtonRefer =
-        `gtmClicLightboxReferir${this.title}${sliderInfo.description}`
-          .replace(/\s/g, '')
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '');
-      this.classButtonCopy =
-        `gtmClicLightboxCopiarLink${this.title}${sliderInfo.description}`
-          .replace(/\s/g, '')
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '');
+      this.classButtonWhatsapp = `gtmClicLightboxIconoWhatsApp${this.title}${sliderInfo.description}`
+        .replace(/\s/g, '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+      this.classButtonTwitter = `gtmClicLightboxIconoTwitter${this.title}${sliderInfo.description}`
+        .replace(/\s/g, '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+      this.classButtonFacebook = `gtmClicLightboxIconoFacebook${this.title}${sliderInfo.description}`
+        .replace(/\s/g, '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+      this.classButtonShare = `gtmClicLightboxCompartir${this.title}${sliderInfo.description}`
+        .replace(/\s/g, '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+      this.classButtonBuy = `gtmClicLightboxComprar${this.title}${sliderInfo.description}`
+        .replace(/\s/g, '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+      this.classButtonRefer = `gtmClicLightboxReferir${this.title}${sliderInfo.description}`
+        .replace(/\s/g, '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+      this.classButtonCopy = `gtmClicLightboxCopiarLink${this.title}${sliderInfo.description}`
+        .replace(/\s/g, '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
       // if(sliderInfo.idbusiness !== 3 && sliderInfo.idbusiness !== 5) {
       //   this.template = this.templateCategories;
       // } else {
@@ -666,9 +626,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
             //  (idSeller) => idSeller.id === "1" || idSeller.id === "10078"
             //);
             let filterSkus = sellerSkus.filter(
-              (idSeller) =>
-                this.sellersExito.includes(idSeller.id) ||
-                this.sellersMarketPlace.includes(idSeller.id)
+              (idSeller) => this.sellersExito.includes(idSeller.id) || this.sellersMarketPlace.includes(idSeller.id)
             );
             if (!!filterSkus[0]) {
               this.sellerId = filterSkus[0].id;
@@ -690,11 +648,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
             business: this.sellerName,
           };
 
-          if (
-            (this.sellersExito.includes(object.seller) ||
-              this.sellersMarketPlace.includes(object.seller)) &&
-            object.oldprice !== 0
-          ) {
+          if ((this.sellersExito.includes(object.seller) || this.sellersMarketPlace.includes(object.seller)) && object.oldprice !== 0) {
             this.productsListExito.push(object);
           }
 
@@ -747,9 +701,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
         this.productsListTransform.forEach((searchCarulla) => {
           if (!!searchCarulla.skus[0] && !!searchCarulla.skus[0].sellers[0]) {
             let sellerSkus = searchCarulla.skus[0].sellers;
-            let filterSkus = sellerSkus.filter(
-              (idSeller) => idSeller.id === '1' || idSeller.id === '10078'
-            );
+            let filterSkus = sellerSkus.filter((idSeller) => idSeller.id === '1' || idSeller.id === '10078');
             if (!!filterSkus[0]) {
               this.sellerId = filterSkus[0].id;
               this.sellerName = filterSkus[0].name;
@@ -770,10 +722,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
             business: this.sellerName,
           };
 
-          if (
-            (object.seller === '1' || object.seller === '10078') &&
-            object.oldprice !== 0
-          ) {
+          if ((object.seller === '1' || object.seller === '10078') && object.oldprice !== 0) {
             this.productsListExito.push(object);
           }
 

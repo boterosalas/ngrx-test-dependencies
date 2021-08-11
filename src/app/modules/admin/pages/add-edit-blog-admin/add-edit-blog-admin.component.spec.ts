@@ -21,9 +21,7 @@ describe('AddEditBlogAdminComponent', () => {
   let response = {
     Status: 'Success',
   };
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'saveBlog',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['saveBlog']);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AddEditBlogAdminComponent],

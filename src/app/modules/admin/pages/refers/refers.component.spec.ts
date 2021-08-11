@@ -6,11 +6,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  NgxDaterangepickerMd,
-  LOCALE_CONFIG,
-  LocaleService,
-} from 'ngx-daterangepicker-material';
+import { NgxDaterangepickerMd, LOCALE_CONFIG, LocaleService } from 'ngx-daterangepicker-material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { config } from 'process';
@@ -122,9 +118,7 @@ describe('RefersComponent', () => {
   });
 
   it('save comission Error', () => {
-    mockLinksService.saveAmountCommission.and.returnValue(
-      of(saveCommisionError)
-    );
+    mockLinksService.saveAmountCommission.and.returnValue(of(saveCommisionError));
     component.saveCommission();
     expect(mockLinksService.saveAmountCommission).toHaveBeenCalled();
   });

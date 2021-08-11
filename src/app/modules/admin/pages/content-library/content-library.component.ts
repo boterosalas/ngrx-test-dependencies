@@ -1,10 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  TemplateRef,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -18,7 +12,7 @@ import { DialogVideoPlayerComponent } from '../../components/dialog-video-player
   templateUrl: './content-library.component.html',
   styleUrls: ['./content-library.component.scss'],
 })
-export class ContentLibraryComponent implements OnInit {
+export class ContentLibraryComponent implements OnInit, OnDestroy {
   id: string;
   @ViewChild('templateImage', { static: false })
   templateVideo: TemplateRef<any>;
@@ -40,26 +34,16 @@ export class ContentLibraryComponent implements OnInit {
   deleteVideoImg = [];
   fileCont: any;
   selectAllVideosImg: string = 'Seleccionar todos';
-  videosDispo: boolean = true;
-  imagenDispo: boolean = true;
+  videosDispo = true;
+  imagenDispo = true;
   url: string;
   private subscription: Subscription = new Subscription();
-  constructor(
-    private dialog: MatDialog,
-    private content: ContentService,
-    private route: ActivatedRoute,
-    private _snackBar: MatSnackBar
-  ) {
+  constructor(private dialog: MatDialog, private content: ContentService, private route: ActivatedRoute, private _snackBar: MatSnackBar) {
     this.subscription = this.route.params.subscribe((route) => {
-      if (
-        route.id === undefined &&
-        route.titulo === undefined &&
-        route.imagen === undefined
-      ) {
+      if (route.id === undefined && route.titulo === undefined && route.imagen === undefined) {
         this.id = '1';
         this.title = 'exito';
-        this.image =
-          'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg';
+        this.image = 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg';
       } else {
         this.id = route.id;
         this.title = route.titulo;
@@ -74,7 +58,7 @@ export class ContentLibraryComponent implements OnInit {
   public getVideosImages() {
     this.dataRealVideo = [];
     this.dataReal = [];
-    this.content.getVideosImage(this.id).subscribe((resp: any) => {
+    this.subscription = this.content.getVideosImage(this.id).subscribe((resp: any) => {
       if (resp.state === 'Success') {
         resp.objectResponse.forEach((element) => {
           if (element.filename.includes('mp4')) {
@@ -140,9 +124,9 @@ export class ContentLibraryComponent implements OnInit {
     });
   }
   public deleteEvery() {
-    let id = '';
-    let title = '';
-    let template = this.templateDelete;
+    const id = '';
+    const title = '';
+    const template = this.templateDelete;
     this.dialog.open(ModalGenericComponent, {
       maxWidth: '600px',
       data: {
@@ -153,7 +137,7 @@ export class ContentLibraryComponent implements OnInit {
     });
   }
   public loadDelete() {
-    let index = [];
+    const index = [];
 
     this.dataReal.forEach((content, i) => {
       if (content.dataR === true) {
@@ -176,7 +160,7 @@ export class ContentLibraryComponent implements OnInit {
     const template = this.templateVideoP;
     const id = 'video-modal';
     this.url = element.url;
-    let urlVideo = element.url;
+    const urlVideo = element.url;
     this.dialog.open(DialogVideoPlayerComponent, {
       panelClass: 'image-clickacademy',
       maxWidth: '600px',
@@ -191,8 +175,8 @@ export class ContentLibraryComponent implements OnInit {
   }
 
   public getExtension(nameFile: string, getSize: number) {
-    let splitExt = nameFile.split('.');
-    let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
+    const splitExt = nameFile.split('.');
+    const getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
     this.validFormat = false;
     if (getExt === 'jpg' || getExt === 'jpeg' || getExt === 'mp4') {
       this.validFormat = true;
@@ -228,40 +212,34 @@ export class ContentLibraryComponent implements OnInit {
     });
   }
   handleFileInput(event) {
-    let fileList: FileList = event.target.files;
-    let formData: FormData = new FormData();
+    const fileList: FileList = event.target.files;
+    const formData: FormData = new FormData();
     for (let index = 0; index < fileList.length; index++) {
       this.fileToUpload = fileList[index];
-      formData.append(
-        'files',
-        this.fileToUpload,
-        this.fileToUpload.name.replace(' ', '_')
-      );
+      formData.append('files', this.fileToUpload, this.fileToUpload.name.replace(' ', '_'));
     }
 
-    //formData.append('file', this.fileToUpload, this.fileToUpload.name.replace(' ', '_'));
     formData.append('idBusiness', this.id);
-    //formData.append('url', this.fileToUpload.name.replace(" ", "_"));
     this.getExtension(this.fileToUpload.name, this.fileToUpload.size);
     if (this.validFormat === true) {
-      this.content.setContentImgVi(formData).subscribe((resp: any) => {
+      this.subscription = this.content.setContentImgVi(formData).subscribe((resp: any) => {
         if (resp.state === 'Success') {
           this.openSnackBar(resp.userMessage, 'Cerrar');
           this.myInputVariable.nativeElement.value = '';
         }
-        //this.getVideosImages()
+
       });
     }
   }
 
   public onFileChangeFilesCont(event, param: string) {
-    let nameFile = event.target.files[0].name;
-    let reader = new FileReader();
-    let sizeFile = event.target.files[0].size;
+    const nameFile = event.target.files[0].name;
+    const reader = new FileReader();
+    const sizeFile = event.target.files[0].size;
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      let fileBlob = new Blob([file]);
-      let file2 = new File([fileBlob], nameFile);
+      const fileBlob = new Blob([file]);
+      const file2 = new File([fileBlob], nameFile);
       reader.readAsDataURL(file2);
       reader.onload = () => {
         this.getExtension(nameFile, sizeFile);
@@ -277,12 +255,12 @@ export class ContentLibraryComponent implements OnInit {
     }
   }
   public saveFormat() {
-    let datos = {
+    const datos = {
       idBusiness: this.id,
       url: this.nameFileCont,
       content: this.fileCont,
     };
-    this.content.setContentImgVi(datos).subscribe();
+    this.subscription = this.content.setContentImgVi(datos).subscribe();
   }
 
   public deleteVideos() {
@@ -297,7 +275,7 @@ export class ContentLibraryComponent implements OnInit {
         this.deleteVideoImg.push(this.dataRealVideo[i].id);
       }
     }
-    this.content.deleteContent(this.deleteVideoImg).subscribe((resp) => {
+    this.subscription = this.content.deleteContent(this.deleteVideoImg).subscribe((resp) => {
       this.getVideosImages();
       this.active = false;
       this.dialog.closeAll();
@@ -307,4 +285,9 @@ export class ContentLibraryComponent implements OnInit {
   public cancelDelete() {
     this.dialog.closeAll();
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }

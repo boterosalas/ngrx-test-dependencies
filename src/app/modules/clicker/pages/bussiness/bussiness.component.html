@@ -8,11 +8,7 @@
 <div class="container">
   <span>
     <button mat-button (click)="goback()">
-      <span
-        class="galano-bold f-16"
-        fxLayout="row"
-        fxLayoutAlign="start center"
-      >
+      <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
         <mat-icon>keyboard_arrow_left</mat-icon>
         Volver
       </span>
@@ -24,11 +20,7 @@
   <div class="container-right mt-2">
     <mat-card>
       <div fxLayout="column" class="about-bussiness">
-        <span
-          class="border-inferior"
-          fxLayout="column"
-          fxLayoutAlign="center center"
-        >
+        <span class="border-inferior" fxLayout="column" fxLayoutAlign="center center">
           <img [src]="image" alt="logo afiliado" />
           <h3 class="red-text">{{ percent }}</h3>
         </span>
@@ -38,21 +30,12 @@
           <p class="break" fxShow.xs="false">{{ nonEditedContent }}</p>
           <p class="break" fxShow.gt-xs="false">{{ infoBussiness }}</p>
           <div fxShow.gt-xs="false" fxLayout="row" fxLayoutAlign="end end">
-            <a
-              *ngIf="!isContentToggled && invisible === false"
-              (click)="toggleContent()"
-              style="color: #8d7eb7"
-              i18n
+            <a *ngIf="!isContentToggled && invisible === false" (click)="toggleContent()" style="color: #8d7eb7" i18n
               >Ver más
               <mat-icon class="arrow-down">keyboard_arrow_down</mat-icon>
             </a>
-            <a
-              *ngIf="isContentToggled && invisible === false"
-              (click)="toggleContent()"
-              style="color: #8d7eb7"
-              i18n
-              >Ver menos
-              <mat-icon class="arrow-down">keyboard_arrow_up</mat-icon></a
+            <a *ngIf="isContentToggled && invisible === false" (click)="toggleContent()" style="color: #8d7eb7" i18n
+              >Ver menos <mat-icon class="arrow-down">keyboard_arrow_up</mat-icon></a
             >
           </div>
         </div>
@@ -81,58 +64,18 @@
     </mat-card>
   </div>
   <div class="container-left">
-    <div
-      fxLayout="row"
-      class="card-library mt-2"
-      fxShow.gt-xs="true"
-      fxShow.xs="false"
-    >
-      <img
-        class="imagen-absolute-oferts"
-        src="/assets/img/banners/oferts.png"
-        alt="ofertas"
-      />
-      <div
-        class="position-relative banner-mobile heigth-image"
-        fxShow.gt-xs="true"
-        fxShow.xs="false"
-      >
+    <div fxLayout="row" class="card-library mt-2" fxShow.gt-xs="true" fxShow.xs="false">
+      <img class="imagen-absolute-oferts" src="/assets/img/banners/oferts.png" alt="ofertas" />
+      <div class="position-relative banner-mobile heigth-image" fxShow.gt-xs="true" fxShow.xs="false">
         <h3>Descarga las mejores ofertas para compartir.</h3>
-        <button
-          mat-raised-button
-          class="button-oferts"
-          color="orange"
-          (click)="libraryRoute()"
-          id="download-users"
-        >
-          Ver Ofertas
-        </button>
+        <button mat-raised-button class="button-oferts" color="orange" (click)="libraryRoute()" id="download-users">Ver Ofertas</button>
       </div>
     </div>
-    <div
-      fxLayout="row"
-      class="card-library mt-2"
-      fxShow.gt-xs="false"
-      fxShow.xs="true"
-    >
-      <img
-        class="imagen-resposive-mobile"
-        src="/assets/img/banners/oferts_mobile.png"
-        alt="ofertas"
-      />
-      <div
-        class="position-relative heigth-image"
-        fxShow.gt-xs="false"
-        fxShow.xs="true"
-      >
+    <div fxLayout="row" class="card-library mt-2" fxShow.gt-xs="false" fxShow.xs="true">
+      <img class="imagen-resposive-mobile" src="/assets/img/banners/oferts_mobile.png" alt="ofertas" />
+      <div class="position-relative heigth-image" fxShow.gt-xs="false" fxShow.xs="true">
         <h3>Descarga aquí las mejores ofertas del día</h3>
-        <button
-          mat-raised-button
-          class="button-oferts mb-2"
-          color="orange"
-          (click)="libraryRoute()"
-          id="download-users"
-        >
+        <button mat-raised-button class="button-oferts mb-2" color="orange" (click)="libraryRoute()" id="download-users">
           Ver Ofertas
         </button>
       </div>
@@ -140,24 +83,12 @@
     <div class="mt-3 mb-3">
       <mat-card>
         <div class="mb-2">
-          <div
-            fxLayout="row"
-            fxLayoutAlign="space-between"
-            fxLayout.xs="column"
-          >
+          <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.xs="column">
             <h3 class="text-productos mt-0 mb-0">Términos & Condiciones</h3>
-            <span
-              class="text-terms-conditions cursor-pointer"
-              (click)="vermas()"
-              *ngIf="visibleTerms === false"
-            >
+            <span class="text-terms-conditions cursor-pointer" (click)="vermas()" *ngIf="visibleTerms === false">
               {{ visibleTerms ? 'Ver menos' : 'Ver más' }}
-              <mat-icon *ngIf="visibleTerms" class="arrow-down"
-                >keyboard_arrow_up</mat-icon
-              >
-              <mat-icon *ngIf="!visibleTerms" class="arrow-down"
-                >keyboard_arrow_down</mat-icon
-              >
+              <mat-icon *ngIf="visibleTerms" class="arrow-down">keyboard_arrow_up</mat-icon>
+              <mat-icon *ngIf="!visibleTerms" class="arrow-down">keyboard_arrow_down</mat-icon>
             </span>
           </div>
           <div class="border-up-gray" *ngIf="visibleTerms">
@@ -169,55 +100,26 @@
             <p class="break mt-0">{{ caseSpecial }}</p>
           </div>
           <div fxLayout="row" fxLayoutAlign="end end">
-            <span
-              class="text-terms-conditions cursor-pointer"
-              (click)="vermas()"
-              *ngIf="visibleTerms === true"
-            >
+            <span class="text-terms-conditions cursor-pointer" (click)="vermas()" *ngIf="visibleTerms === true">
               {{ visibleTerms ? 'Ver menos' : 'Ver más' }}
-              <mat-icon *ngIf="visibleTerms" class="arrow-down"
-                >keyboard_arrow_up</mat-icon
-              >
-              <mat-icon *ngIf="!visibleTerms" class="arrow-down"
-                >keyboard_arrow_down</mat-icon
-              >
+              <mat-icon *ngIf="visibleTerms" class="arrow-down">keyboard_arrow_up</mat-icon>
+              <mat-icon *ngIf="!visibleTerms" class="arrow-down">keyboard_arrow_down</mat-icon>
             </span>
           </div>
         </div>
       </mat-card>
     </div>
-    <app-search
-      *ngIf="id === '1'"
-      (search)="searchBiggyExito($event)"
-    ></app-search>
-    <app-search
-      *ngIf="id === '2'"
-      (search)="searchBiggyCarulla($event)"
-    ></app-search>
+    <app-search *ngIf="id === '1'" (search)="searchBiggyExito($event)"></app-search>
+    <app-search *ngIf="id === '2'" (search)="searchBiggyCarulla($event)"></app-search>
 
     <div *ngIf="showResults">
       <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.xs="column">
-        <h3 class="text-productos border-bottom-orange-init">
-          Resultados de búsqueda
-        </h3>
-        <button
-          mat-raised-button
-          color="orange"
-          (click)="deleteSearch()"
-          class="button-selected mr-4 mb-4"
-        >
-          Borrar resultados
-        </button>
+        <h3 class="text-productos border-bottom-orange-init">Resultados de búsqueda</h3>
+        <button mat-raised-button color="orange" (click)="deleteSearch()" class="button-selected mr-4 mb-4">Borrar resultados</button>
       </div>
 
       <div fxLayout="column" fxLayoutGap="10px">
-        <ng-container
-          class="mt-4"
-          *ngFor="
-            let product of productsListExito | slice: 0:mostrarProductos;
-            let i = index
-          "
-        >
+        <ng-container class="mt-4" *ngFor="let product of productsListExito | slice: 0:mostrarProductos; let i = index">
           <app-product-bussiness
             class="product-exito"
             fxLayout="column"
@@ -229,9 +131,7 @@
             [nombreProducto]="product.title"
             [descuento]="product.oldprice"
             [precio]="product.price"
-            [imagen]="
-              !!product.image.value ? product.image.value : '/assets/img/Na.svg'
-            "
+            [imagen]="!!product.image.value ? product.image.value : '/assets/img/Na.svg'"
             [altimagen]="product.name"
             [pluexito]="product.plu"
             textoboton="{{ 'PRODUCTS.GET_LINK' | translate }}"
@@ -281,9 +181,7 @@
             [imagen]="bussiness.imageurl"
             [altimagen]="bussiness.description"
             otro="true"
-            Class="mb-1 button-20 gtmNegocio{{ title }}{{
-              bussiness.description | trim
-            }}"
+            Class="mb-1 button-20 gtmNegocio{{ title }}{{ bussiness.description | trim }}"
             container="img-container-viajes"
             textoboton="{{ 'PRODUCTS.GET_LINK' | translate }}"
             (infoProduct)="dataSliderCategory(bussiness)"
@@ -291,85 +189,40 @@
         </div>
       </div>
     </div>
-    <div
-      *ngIf="bussiness.length === 0 && showDeliver === true && id !== '19'"
-      fxLayout="column"
-      fxLayoutAlign="center center"
-    >
+    <div *ngIf="bussiness.length === 0 && showDeliver === true && id !== '19'" fxLayout="column" fxLayoutAlign="center center">
       <mat-icon class="nothing-icon">push_pin</mat-icon>
       <p class="nothing-text">Aún no tenemos categorías para este negocio</p>
     </div>
     <div class="deliver mt-3" *ngIf="id === '19'">
-      <div
-        fxLayout.xs="column"
-        fxLayout="row"
-        fxLayoutGap.xs="0px"
-        fxLayoutGap="20px"
-        fxLayoutAlign="space-around"
-      >
+      <div fxLayout.xs="column" fxLayout="row" fxLayoutGap.xs="0px" fxLayoutGap="20px" fxLayoutAlign="space-around">
         <div fxShow.xs="true" fxHide.gt-xs="true">
-          <img
-            class="responsive-img"
-            src="/assets/img/deliver/mobile/banner_envios.png"
-            alt="banner"
-          />
+          <img class="responsive-img" src="/assets/img/deliver/mobile/banner_envios.png" alt="banner" />
         </div>
 
         <div fxHide.xs="true" fxFlex="39" class="mt-3 mb-3">
-          <img
-            class="responsive-img"
-            src="/assets/img/deliver/web/banner_envios.png"
-            alt="banner"
-          />
+          <img class="responsive-img" src="/assets/img/deliver/web/banner_envios.png" alt="banner" />
         </div>
 
-        <mat-card
-          class="mt-3 mb-3"
-          fxFlex="50"
-          *ngIf="acceptTermsDeliver === false"
-        >
-          <img
-            class="responsive-img"
-            src="/assets/img/terminos_y_condiciones.svg"
-            alt="icon-deliver"
-          />
+        <mat-card class="mt-3 mb-3" fxFlex="50" *ngIf="acceptTermsDeliver === false">
+          <img class="responsive-img" src="/assets/img/terminos_y_condiciones.svg" alt="icon-deliver" />
 
           <h3 class="f-22 border-bottom-orange-init">
             {{ 'BUSSINESS.TITLE' | translate }}
           </h3>
 
-          <form
-            [formGroup]="termsForm"
-            class="text-center mt-4 mb-4"
-            *ngIf="terms === false"
-          >
+          <form [formGroup]="termsForm" class="text-center mt-4 mb-4" *ngIf="terms === false">
             <div class="mb-3 mt-3">
               <span>
-                <mat-checkbox
-                  formControlName="acceptTerms"
-                  id="chkaccept"
-                  (change)="acceptTermsCheck()"
-                >
-                </mat-checkbox>
+                <mat-checkbox formControlName="acceptTerms" id="chkaccept" (change)="acceptTermsCheck()"> </mat-checkbox>
               </span>
-              <span
-                class="accept-terms ml-2 cursor-pointer"
-                (click)="termsAndConditions()"
-              >
+              <span class="accept-terms ml-2 cursor-pointer" (click)="termsAndConditions()">
                 {{ 'REGISTER.ACCEPT' | translate }}
               </span>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
-              <button
-                mat-button
-                id="register"
-                class="mt-2 button button-height pl-2 pr-2"
-                [routerLink]="['/inicio']"
-              >
-                <span class="orange-text">{{
-                  'BUSSINESS.DELIVER_BUTTON_CANCEL' | translate
-                }}</span>
+              <button mat-button id="register" class="mt-2 button button-height pl-2 pr-2" [routerLink]="['/inicio']">
+                <span class="orange-text">{{ 'BUSSINESS.DELIVER_BUTTON_CANCEL' | translate }}</span>
               </button>
 
               <button
@@ -394,20 +247,11 @@
           fxLayoutAlign="center center"
           fxLayout="column"
         >
-          <span
-            class="accept-terms text-center cursor-pointer"
-            (click)="termsAndConditions()"
-          >
+          <span class="accept-terms text-center cursor-pointer" (click)="termsAndConditions()">
             {{ 'BUSSINESS.ACCEPT' | translate }}
           </span>
 
-          <button
-            mat-raised-button
-            id="seway"
-            class="mt-2 button button-height pl-2 pr-2 button-100"
-            color="orange"
-            (click)="goSeway()"
-          >
+          <button mat-raised-button id="seway" class="mt-2 button button-height pl-2 pr-2 button-100" color="orange" (click)="goSeway()">
             IR A SEWAY
           </button>
         </mat-card>
@@ -421,127 +265,93 @@
         <mat-accordion class="mt-3 mb-3">
           <mat-expansion-panel class="mt-3 mb-3">
             <mat-expansion-panel-header>
-              <span class="f-16 gray galano-bold">{{
-                'BUSSINESS.DELIVER_WORKS_TITLE' | translate
-              }}</span>
+              <span class="f-16 gray galano-bold">{{ 'BUSSINESS.DELIVER_WORKS_TITLE' | translate }}</span>
             </mat-expansion-panel-header>
             <div innerHtml=" {{ 'BUSSINESS.DELIVER_WORKS' | translate }}"></div>
           </mat-expansion-panel>
 
           <mat-expansion-panel class="mt-3 mb-3">
             <mat-expansion-panel-header>
-              <span class="f-16 gray galano-bold">{{
-                'BUSSINESS.PARTICIPATE_CAN_TITLE' | translate
-              }}</span>
+              <span class="f-16 gray galano-bold">{{ 'BUSSINESS.PARTICIPATE_CAN_TITLE' | translate }}</span>
             </mat-expansion-panel-header>
-            <div
-              innerHtml="{{ 'BUSSINESS.PARTICIPATE_CAN_TEXT' | translate }}"
-            ></div>
+            <div innerHtml="{{ 'BUSSINESS.PARTICIPATE_CAN_TEXT' | translate }}"></div>
           </mat-expansion-panel>
 
           <mat-expansion-panel class="mt-3 mb-3">
             <mat-expansion-panel-header>
-              <span class="f-16 gray galano-bold">{{
-                'BUSSINESS.PARTICIPATE_TITLE' | translate
-              }}</span>
+              <span class="f-16 gray galano-bold">{{ 'BUSSINESS.PARTICIPATE_TITLE' | translate }}</span>
             </mat-expansion-panel-header>
-            <div
-              innerHtml="{{ 'BUSSINESS.PARTICIPATE_TEXT' | translate }}"
-            ></div>
+            <div innerHtml="{{ 'BUSSINESS.PARTICIPATE_TEXT' | translate }}"></div>
           </mat-expansion-panel>
 
           <mat-expansion-panel class="mt-3 mb-3">
             <mat-expansion-panel-header>
-              <span class="f-16 gray galano-bold">{{
-                'BUSSINESS.REQUIREMENT_TITLE' | translate
-              }}</span>
+              <span class="f-16 gray galano-bold">{{ 'BUSSINESS.REQUIREMENT_TITLE' | translate }}</span>
             </mat-expansion-panel-header>
-            <div
-              innerHtml="{{ 'BUSSINESS.REQUIREMENT_TEXT' | translate }}"
-            ></div>
+            <div innerHtml="{{ 'BUSSINESS.REQUIREMENT_TEXT' | translate }}"></div>
           </mat-expansion-panel>
 
           <mat-expansion-panel class="mt-3 mb-3">
             <mat-expansion-panel-header>
-              <span class="f-16 gray galano-bold">{{
-                'BUSSINESS.TRANSPORT_TITLE' | translate
-              }}</span>
+              <span class="f-16 gray galano-bold">{{ 'BUSSINESS.TRANSPORT_TITLE' | translate }}</span>
             </mat-expansion-panel-header>
             <div innerHtml="{{ 'BUSSINESS.TRANSPORT_TEXT' | translate }}"></div>
           </mat-expansion-panel>
 
           <mat-expansion-panel class="mt-3 mb-3">
             <mat-expansion-panel-header>
-              <span class="f-16 gray galano-bold">{{
-                'BUSSINESS.VEHICULE_TITLE' | translate
-              }}</span>
+              <span class="f-16 gray galano-bold">{{ 'BUSSINESS.VEHICULE_TITLE' | translate }}</span>
             </mat-expansion-panel-header>
             <div innerHtml="{{ 'BUSSINESS.VEHICULE_TEXT' | translate }}"></div>
           </mat-expansion-panel>
 
           <mat-expansion-panel class="mt-3 mb-3">
             <mat-expansion-panel-header>
-              <span class="f-16 gray galano-bold">{{
-                'BUSSINESS.HOUR_TITLE' | translate
-              }}</span>
+              <span class="f-16 gray galano-bold">{{ 'BUSSINESS.HOUR_TITLE' | translate }}</span>
             </mat-expansion-panel-header>
             <div innerHtml="{{ 'BUSSINESS.HOUR_TEXT' | translate }}"></div>
           </mat-expansion-panel>
 
           <mat-expansion-panel class="mt-3 mb-3">
             <mat-expansion-panel-header>
-              <span class="f-16 gray galano-bold">{{
-                'BUSSINESS.DELIVER_TITLE' | translate
-              }}</span>
+              <span class="f-16 gray galano-bold">{{ 'BUSSINESS.DELIVER_TITLE' | translate }}</span>
             </mat-expansion-panel-header>
             <div innerHtml="{{ 'BUSSINESS.DELIVER_TEXT' | translate }}"></div>
           </mat-expansion-panel>
 
           <mat-expansion-panel class="mt-3 mb-3">
             <mat-expansion-panel-header>
-              <span class="f-16 gray galano-bold">{{
-                'BUSSINESS.PRODUCT_TITLE' | translate
-              }}</span>
+              <span class="f-16 gray galano-bold">{{ 'BUSSINESS.PRODUCT_TITLE' | translate }}</span>
             </mat-expansion-panel-header>
             <div innerHtml="{{ 'BUSSINESS.PRODUCT_TEXT' | translate }}"></div>
           </mat-expansion-panel>
 
           <mat-expansion-panel class="mt-3 mb-3">
             <mat-expansion-panel-header>
-              <span class="f-16 gray galano-bold">{{
-                'BUSSINESS.PAYMENT_TITLE' | translate
-              }}</span>
+              <span class="f-16 gray galano-bold">{{ 'BUSSINESS.PAYMENT_TITLE' | translate }}</span>
             </mat-expansion-panel-header>
             <div innerHtml="{{ 'BUSSINESS.PAYMENT_TEXT' | translate }}"></div>
           </mat-expansion-panel>
 
           <mat-expansion-panel class="mt-3 mb-3">
             <mat-expansion-panel-header>
-              <span class="f-16 gray galano-bold">{{
-                'BUSSINESS.PAYMENTS_TITLE' | translate
-              }}</span>
+              <span class="f-16 gray galano-bold">{{ 'BUSSINESS.PAYMENTS_TITLE' | translate }}</span>
             </mat-expansion-panel-header>
             <div innerHtml="{{ 'BUSSINESS.PAYMENTS_TEXT' | translate }}"></div>
           </mat-expansion-panel>
 
           <mat-expansion-panel class="mt-3 mb-3">
             <mat-expansion-panel-header>
-              <span class="f-16 gray galano-bold">{{
-                'BUSSINESS.OTHER_TITLE' | translate
-              }}</span>
+              <span class="f-16 gray galano-bold">{{ 'BUSSINESS.OTHER_TITLE' | translate }}</span>
             </mat-expansion-panel-header>
             <div innerHtml="{{ 'BUSSINESS.OTHER_TEXT' | translate }}"></div>
           </mat-expansion-panel>
 
           <mat-expansion-panel class="mt-3 mb-3">
             <mat-expansion-panel-header>
-              <span class="f-16 gray galano-bold">{{
-                'BUSSINESS.RESPONSABILITY_TITLE' | translate
-              }}</span>
+              <span class="f-16 gray galano-bold">{{ 'BUSSINESS.RESPONSABILITY_TITLE' | translate }}</span>
             </mat-expansion-panel-header>
-            <div
-              innerHtml="{{ 'BUSSINESS.RESPONSABILITY_TEXT' | translate }}"
-            ></div>
+            <div innerHtml="{{ 'BUSSINESS.RESPONSABILITY_TEXT' | translate }}"></div>
           </mat-expansion-panel>
         </mat-accordion>
       </div>
@@ -579,22 +389,10 @@
       <div fxLayout="column">
         <div fxLayout="column" fxFlex="100" fxFlex.xs="100">
           <mat-form-field appearance="dashed" class="dashed mt-2">
-            <input
-              id="url"
-              matInput
-              formcontrolName="link"
-              [value]="urlshorten"
-              #linkInput
-              readonly
-            />
+            <input id="url" matInput formcontrolName="link" [value]="urlshorten" #linkInput readonly />
           </mat-form-field>
         </div>
-        <div
-          fxLayout="row"
-          fxLayoutAlign="center space-between"
-          fxLayoutGap="10px"
-          class="mt-2 share-desktop"
-        >
+        <div fxLayout="row" fxLayoutAlign="center space-between" fxLayoutGap="10px" class="mt-2 share-desktop">
           <button
             mat-button
             id="btnCopy"
@@ -603,10 +401,7 @@
             ngClass="{{ classButtonCopy }}"
             (click)="copyInputMessage(linkInput)"
           >
-            <span
-              fxLayoutAlign="center space-between"
-              ngClass="{{ classButtonCopy }}"
-            >
+            <span fxLayoutAlign="center space-between" ngClass="{{ classButtonCopy }}">
               {{ 'GENERIC.COPY_LINK' | translate }}
             </span>
           </button>
@@ -619,27 +414,11 @@
             ngClass="{{ classButtonRefer }}"
             (click)="showReference()"
           >
-            <span
-              ngClass="{{ classButtonRefer }}"
-              fxLayoutAlign="center space-between"
-            >
-              Referir
-            </span>
+            <span ngClass="{{ classButtonRefer }}" fxLayoutAlign="center space-between"> Referir </span>
           </button>
 
-          <button
-            mat-button
-            id="buy"
-            color="orange"
-            ngClass="orange-border {{ classButtonBuy }}"
-            (click)="buy()"
-          >
-            <span
-              ngClass="{{ classButtonBuy }}"
-              fxLayoutAlign="center space-between"
-            >
-              Comprar
-            </span>
+          <button mat-button id="buy" color="orange" ngClass="orange-border {{ classButtonBuy }}" (click)="buy()">
+            <span ngClass="{{ classButtonBuy }}" fxLayoutAlign="center space-between"> Comprar </span>
           </button>
         </div>
       </div>
@@ -650,20 +429,10 @@
     </h3>
 
     <div class="share-desktop" id="share">
-      <button
-        theme="circles-dark"
-        shareButton="facebook"
-        [url]="urlshorten"
-        ngClass="sharebutton {{ classButtonFacebook }} mr-2"
-      >
+      <button theme="circles-dark" shareButton="facebook" [url]="urlshorten" ngClass="sharebutton {{ classButtonFacebook }} mr-2">
         <i ngClass="fab fa-facebook-f {{ classButtonFacebook }}"></i>
       </button>
-      <button
-        theme="circles-dark"
-        shareButton="twitter"
-        [url]="urlshorten"
-        ngClass="sharebutton {{ classButtonTwitter }} mr-2"
-      >
+      <button theme="circles-dark" shareButton="twitter" [url]="urlshorten" ngClass="sharebutton {{ classButtonTwitter }} mr-2">
         <i ngClass="fab fa-twitter {{ classButtonTwitter }}"></i>
       </button>
       <a
@@ -677,23 +446,9 @@
     </div>
 
     <div class="share-mobile">
-      <button
-        mat-button
-        ngClass="gtmrs  mb-2 mt-2 {{ classButtonShare }}"
-        (click)="share()"
-        fxLayout="row"
-        fxLayoutAlign="start start"
-      >
-        <span
-          ngClass="gtmrs f-15 {{ classButtonShare }}"
-          fxLayout="row"
-          fxLayoutAlign="center center"
-        >
-          <img
-            ngClass="icon-compartir pr-2 {{ classButtonShare }}"
-            src="/assets/img/Compartir.svg"
-            alt="user"
-          />
+      <button mat-button ngClass="gtmrs  mb-2 mt-2 {{ classButtonShare }}" (click)="share()" fxLayout="row" fxLayoutAlign="start start">
+        <span ngClass="gtmrs f-15 {{ classButtonShare }}" fxLayout="row" fxLayoutAlign="center center">
+          <img ngClass="icon-compartir pr-2 {{ classButtonShare }}" src="/assets/img/Compartir.svg" alt="user" />
           Compartir</span
         >
       </button>
@@ -706,104 +461,50 @@
         fxLayout="row"
         fxLayoutAlign="start start"
       >
-        <span
-          ngClass="gtmrs f-15 {{ classButtonRefer }}"
-          fxLayout="row"
-          fxLayoutAlign="center center"
-        >
-          <img
-            ngClass="icon-compartir pr-2 {{ classButtonRefer }}"
-            src="/assets/img/Referir.svg"
-            alt="user"
-          />
+        <span ngClass="gtmrs f-15 {{ classButtonRefer }}" fxLayout="row" fxLayoutAlign="center center">
+          <img ngClass="icon-compartir pr-2 {{ classButtonRefer }}" src="/assets/img/Referir.svg" alt="user" />
           Referir
         </span>
       </button>
 
-      <button
-        mat-button
-        ngClass="gtmrs  mb-2 mt-2 {{ classButtonBuy }}"
-        (click)="buy()"
-        fxLayout="row"
-        fxLayoutAlign="start start"
-      >
-        <span
-          ngClass="gtmrs f-15 {{ classButtonBuy }}"
-          fxLayout="row"
-          fxLayoutAlign="center center"
-        >
-          <img
-            ngClass="icon-compartir pr-2 {{ classButtonBuy }}"
-            src="/assets/img/Comprar.svg"
-            alt="user"
-          />
+      <button mat-button ngClass="gtmrs  mb-2 mt-2 {{ classButtonBuy }}" (click)="buy()" fxLayout="row" fxLayoutAlign="start start">
+        <span ngClass="gtmrs f-15 {{ classButtonBuy }}" fxLayout="row" fxLayoutAlign="center center">
+          <img ngClass="icon-compartir pr-2 {{ classButtonBuy }}" src="/assets/img/Comprar.svg" alt="user" />
           Comprar
         </span>
       </button>
     </div>
   </div>
   <br />
-  <form
-    class="forgotpassword-container"
-    [formGroup]="idCustomerForm"
-    fxLayout="column"
-    *ngIf="reference"
-  >
-    <span
-      (click)="backStep()"
-      class="cursor-pointer gray"
-      fxLayout="row"
-      fxLayoutAlign="start start"
-      fxFlex="12"
-    >
+  <form class="forgotpassword-container" [formGroup]="idCustomerForm" fxLayout="column" *ngIf="reference">
+    <span (click)="backStep()" class="cursor-pointer gray" fxLayout="row" fxLayoutAlign="start start" fxFlex="12">
       <mat-icon>keyboard_arrow_left</mat-icon>
       <span class="text-back">Volver</span>
     </span>
     <p>{{ 'GENERIC.REFERENCE_IDENTIFICATION' | translate }}</p>
     <mat-form-field appearance="outline" class="mt-2">
-      <input
-        matInput
-        class="p-2"
-        id="idcustomer"
-        type="text"
-        placeholder="N° de Documento"
-        formControlName="identification"
-        required
-      />
+      <input matInput class="p-2" id="idcustomer" type="text" placeholder="N° de Documento" formControlName="identification" required />
       <mat-error
         id="reuiredId"
-        *ngIf="
-          idCustomerForm.controls.identification.invalid &&
-          idCustomerForm.controls.identification.errors.required
-        "
-        >{{
-          'GENERIC.REQUIRED' | translate: { formValue: 'Número de documento' }
-        }}</mat-error
+        *ngIf="idCustomerForm.controls.identification.invalid && idCustomerForm.controls.identification.errors.required"
+        >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Número de documento' } }}</mat-error
       >
 
       <mat-error
         id="maxId"
-        *ngIf="
-          idCustomerForm.controls.identification.invalid &&
-          idCustomerForm.controls.identification.errors.maxlength
-        "
+        *ngIf="idCustomerForm.controls.identification.invalid && idCustomerForm.controls.identification.errors.maxlength"
         >{{
           'GENERIC.MAX_CHARACTERS'
             | translate
               : {
-                  maxchar:
-                    idCustomerForm.controls.identification.errors.maxlength
-                      .requiredLength
+                  maxchar: idCustomerForm.controls.identification.errors.maxlength.requiredLength
                 }
         }}</mat-error
       >
 
       <mat-error
         id="numberId"
-        *ngIf="
-          idCustomerForm.controls.identification.invalid &&
-          idCustomerForm.controls.identification.errors.pattern
-        "
+        *ngIf="idCustomerForm.controls.identification.invalid && idCustomerForm.controls.identification.errors.pattern"
         >{{ 'GENERIC.ONLY_NUMBERS' | translate }}</mat-error
       >
     </mat-form-field>
@@ -817,9 +518,7 @@
         (click)="saveLinkReference()"
         [disabled]="!idCustomerForm.valid"
       >
-        <span class="gtmCrearCedulaSiguiente">{{
-          'GENERIC.ACCEPT' | translate
-        }}</span>
+        <span class="gtmCrearCedulaSiguiente">{{ 'GENERIC.ACCEPT' | translate }}</span>
       </button>
     </div>
   </form>
@@ -833,22 +532,10 @@
       <div fxLayout="column">
         <div fxLayout="column" fxFlex="100" fxFlex.xs="100">
           <mat-form-field appearance="dashed" class="dashed mt-2">
-            <input
-              id="url"
-              matInput
-              formcontrolName="link"
-              [value]="urlshorten"
-              #linkInput
-              readonly
-            />
+            <input id="url" matInput formcontrolName="link" [value]="urlshorten" #linkInput readonly />
           </mat-form-field>
         </div>
-        <div
-          fxLayout="row"
-          fxLayoutAlign="center space-between"
-          fxLayoutGap="10px"
-          class="mt-2 share-desktop"
-        >
+        <div fxLayout="row" fxLayoutAlign="center space-between" fxLayoutGap="10px" class="mt-2 share-desktop">
           <button
             mat-button
             id="btnCopy"
@@ -857,42 +544,17 @@
             ngClass="{{ classButtonCopy }}"
             (click)="copyInputMessage(linkInput)"
           >
-            <span
-              fxLayoutAlign="center space-between"
-              ngClass="{{ classButtonCopy }}"
-            >
+            <span fxLayoutAlign="center space-between" ngClass="{{ classButtonCopy }}">
               {{ 'GENERIC.COPY_LINK' | translate }}
             </span>
           </button>
 
-          <button
-            mat-button
-            id="refer"
-            color="orange"
-            ngClass="{{ classButtonRefer }}"
-            (click)="showReference()"
-          >
-            <span
-              ngClass="{{ classButtonRefer }}"
-              fxLayoutAlign="center space-between"
-            >
-              Referir
-            </span>
+          <button mat-button id="refer" color="orange" ngClass="{{ classButtonRefer }}" (click)="showReference()">
+            <span ngClass="{{ classButtonRefer }}" fxLayoutAlign="center space-between"> Referir </span>
           </button>
 
-          <button
-            mat-button
-            id="buy"
-            color="orange"
-            ngClass="orange-border {{ classButtonBuy }}"
-            (click)="buy()"
-          >
-            <span
-              ngClass="{{ classButtonBuy }}"
-              fxLayoutAlign="center space-between"
-            >
-              Comprar
-            </span>
+          <button mat-button id="buy" color="orange" ngClass="orange-border {{ classButtonBuy }}" (click)="buy()">
+            <span ngClass="{{ classButtonBuy }}" fxLayoutAlign="center space-between"> Comprar </span>
           </button>
         </div>
       </div>
@@ -903,20 +565,10 @@
     </h3>
 
     <div class="share-desktop" id="share">
-      <button
-        theme="circles-dark"
-        shareButton="facebook"
-        [url]="urlshorten"
-        ngClass="sharebutton {{ classButtonFacebook }} mr-2"
-      >
+      <button theme="circles-dark" shareButton="facebook" [url]="urlshorten" ngClass="sharebutton {{ classButtonFacebook }} mr-2">
         <i ngClass="fab fa-facebook-f {{ classButtonFacebook }}"></i>
       </button>
-      <button
-        theme="circles-dark"
-        shareButton="twitter"
-        [url]="urlshorten"
-        ngClass="sharebutton {{ classButtonTwitter }} mr-2"
-      >
+      <button theme="circles-dark" shareButton="twitter" [url]="urlshorten" ngClass="sharebutton {{ classButtonTwitter }} mr-2">
         <i ngClass="fab fa-twitter {{ classButtonTwitter }}"></i>
       </button>
       <a
@@ -930,23 +582,9 @@
     </div>
 
     <div class="share-mobile">
-      <button
-        mat-button
-        ngClass="gtmrs  mb-2 mt-2 {{ classButtonShare }}"
-        (click)="share()"
-        fxLayout="row"
-        fxLayoutAlign="start start"
-      >
-        <span
-          ngClass="gtmrs f-15 {{ classButtonShare }}"
-          fxLayout="row"
-          fxLayoutAlign="center center"
-        >
-          <img
-            ngClass="icon-compartir pr-2 {{ classButtonShare }}"
-            src="/assets/img/Compartir.svg"
-            alt="user"
-          />
+      <button mat-button ngClass="gtmrs  mb-2 mt-2 {{ classButtonShare }}" (click)="share()" fxLayout="row" fxLayoutAlign="start start">
+        <span ngClass="gtmrs f-15 {{ classButtonShare }}" fxLayout="row" fxLayoutAlign="center center">
+          <img ngClass="icon-compartir pr-2 {{ classButtonShare }}" src="/assets/img/Compartir.svg" alt="user" />
           Compartir</span
         >
       </button>
@@ -958,104 +596,50 @@
         fxLayout="row"
         fxLayoutAlign="start start"
       >
-        <span
-          ngClass="gtmrs f-15 {{ classButtonRefer }}"
-          fxLayout="row"
-          fxLayoutAlign="center center"
-        >
-          <img
-            ngClass="icon-compartir pr-2 {{ classButtonRefer }}"
-            src="/assets/img/Referir.svg"
-            alt="user"
-          />
+        <span ngClass="gtmrs f-15 {{ classButtonRefer }}" fxLayout="row" fxLayoutAlign="center center">
+          <img ngClass="icon-compartir pr-2 {{ classButtonRefer }}" src="/assets/img/Referir.svg" alt="user" />
           Referir
         </span>
       </button>
 
-      <button
-        mat-button
-        ngClass="gtmrs  mb-2 mt-2 {{ classButtonBuy }}"
-        (click)="buy()"
-        fxLayout="row"
-        fxLayoutAlign="start start"
-      >
-        <span
-          ngClass="gtmrs f-15 {{ classButtonBuy }}"
-          fxLayout="row"
-          fxLayoutAlign="center center"
-        >
-          <img
-            ngClass="icon-compartir pr-2 {{ classButtonBuy }}"
-            src="/assets/img/Comprar.svg"
-            alt="user"
-          />
+      <button mat-button ngClass="gtmrs  mb-2 mt-2 {{ classButtonBuy }}" (click)="buy()" fxLayout="row" fxLayoutAlign="start start">
+        <span ngClass="gtmrs f-15 {{ classButtonBuy }}" fxLayout="row" fxLayoutAlign="center center">
+          <img ngClass="icon-compartir pr-2 {{ classButtonBuy }}" src="/assets/img/Comprar.svg" alt="user" />
           Comprar
         </span>
       </button>
     </div>
   </div>
   <br />
-  <form
-    class="forgotpassword-container"
-    [formGroup]="idCustomerForm"
-    fxLayout="column"
-    *ngIf="reference"
-  >
-    <span
-      (click)="backStep()"
-      class="cursor-pointer gray"
-      fxLayout="row"
-      fxLayoutAlign="start start"
-      fxFlex="12"
-    >
+  <form class="forgotpassword-container" [formGroup]="idCustomerForm" fxLayout="column" *ngIf="reference">
+    <span (click)="backStep()" class="cursor-pointer gray" fxLayout="row" fxLayoutAlign="start start" fxFlex="12">
       <mat-icon>keyboard_arrow_left</mat-icon>
       <span class="text-back">Volver</span>
     </span>
     <p>{{ 'GENERIC.REFERENCE_IDENTIFICATION' | translate }}</p>
     <mat-form-field appearance="outline" class="mt-2">
-      <input
-        matInput
-        class="p-2"
-        id="idcustomer"
-        type="text"
-        placeholder="N° de Documento"
-        formControlName="identification"
-        required
-      />
+      <input matInput class="p-2" id="idcustomer" type="text" placeholder="N° de Documento" formControlName="identification" required />
       <mat-error
         id="reuiredId"
-        *ngIf="
-          idCustomerForm.controls.identification.invalid &&
-          idCustomerForm.controls.identification.errors.required
-        "
-        >{{
-          'GENERIC.REQUIRED' | translate: { formValue: 'Número de documento' }
-        }}</mat-error
+        *ngIf="idCustomerForm.controls.identification.invalid && idCustomerForm.controls.identification.errors.required"
+        >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Número de documento' } }}</mat-error
       >
 
       <mat-error
         id="maxId"
-        *ngIf="
-          idCustomerForm.controls.identification.invalid &&
-          idCustomerForm.controls.identification.errors.maxlength
-        "
+        *ngIf="idCustomerForm.controls.identification.invalid && idCustomerForm.controls.identification.errors.maxlength"
         >{{
           'GENERIC.MAX_CHARACTERS'
             | translate
               : {
-                  maxchar:
-                    idCustomerForm.controls.identification.errors.maxlength
-                      .requiredLength
+                  maxchar: idCustomerForm.controls.identification.errors.maxlength.requiredLength
                 }
         }}</mat-error
       >
 
       <mat-error
         id="numberId"
-        *ngIf="
-          idCustomerForm.controls.identification.invalid &&
-          idCustomerForm.controls.identification.errors.pattern
-        "
+        *ngIf="idCustomerForm.controls.identification.invalid && idCustomerForm.controls.identification.errors.pattern"
         >{{ 'GENERIC.ONLY_NUMBERS' | translate }}</mat-error
       >
     </mat-form-field>
@@ -1069,9 +653,7 @@
         (click)="saveLinkReference()"
         [disabled]="!idCustomerForm.valid"
       >
-        <span class="gtmCrearCedulaSiguiente">{{
-          'GENERIC.ACCEPT' | translate
-        }}</span>
+        <span class="gtmCrearCedulaSiguiente">{{ 'GENERIC.ACCEPT' | translate }}</span>
       </button>
     </div>
   </form>
@@ -1081,56 +663,30 @@
   <div id="share">
     <div *ngIf="showFormCustomer">
       <p class="text-id">{{ 'GENERIC.CUSTOMER_ID' | translate }}</p>
-      <form
-        class="forgotpassword-container"
-        [formGroup]="idCustomerForm"
-        fxLayout="column"
-      >
+      <form class="forgotpassword-container" [formGroup]="idCustomerForm" fxLayout="column">
         <mat-form-field appearance="outline" class="mt-2">
-          <input
-            matInput
-            class="p-2"
-            id="idcustomer"
-            type="text"
-            placeholder="N° de Documento"
-            formControlName="identification"
-            required
-          />
+          <input matInput class="p-2" id="idcustomer" type="text" placeholder="N° de Documento" formControlName="identification" required />
           <mat-error
             id="reuiredId"
-            *ngIf="
-              idCustomerForm.controls.identification.invalid &&
-              idCustomerForm.controls.identification.errors.required
-            "
-            >{{
-              'GENERIC.REQUIRED'
-                | translate: { formValue: 'Número de documento' }
-            }}</mat-error
+            *ngIf="idCustomerForm.controls.identification.invalid && idCustomerForm.controls.identification.errors.required"
+            >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Número de documento' } }}</mat-error
           >
 
           <mat-error
             id="maxId"
-            *ngIf="
-              idCustomerForm.controls.identification.invalid &&
-              idCustomerForm.controls.identification.errors.maxlength
-            "
+            *ngIf="idCustomerForm.controls.identification.invalid && idCustomerForm.controls.identification.errors.maxlength"
             >{{
               'GENERIC.MAX_CHARACTERS'
                 | translate
                   : {
-                      maxchar:
-                        idCustomerForm.controls.identification.errors.maxlength
-                          .requiredLength
+                      maxchar: idCustomerForm.controls.identification.errors.maxlength.requiredLength
                     }
             }}</mat-error
           >
 
           <mat-error
             id="numberId"
-            *ngIf="
-              idCustomerForm.controls.identification.invalid &&
-              idCustomerForm.controls.identification.errors.pattern
-            "
+            *ngIf="idCustomerForm.controls.identification.invalid && idCustomerForm.controls.identification.errors.pattern"
             >{{ 'GENERIC.ONLY_NUMBERS' | translate }}</mat-error
           >
         </mat-form-field>
@@ -1144,11 +700,7 @@
             (click)="nextStep()"
             [disabled]="!idCustomerForm.valid"
           >
-            <span
-              fxLayout="row"
-              fxLayoutAlign="space-between center"
-              class="pl-3 pr-3 gtmCrearCedulaSiguiente"
-            >
+            <span fxLayout="row" fxLayoutAlign="space-between center" class="pl-3 pr-3 gtmCrearCedulaSiguiente">
               {{ 'GENERIC.NEXT' | translate }}
               <mat-icon>arrow_forward</mat-icon>
             </span>
@@ -1162,22 +714,10 @@
         <div fxLayout="column" fxLayoutGap="0">
           <div fxLayout="column" fxFlex="100" fxFlex.xs="100">
             <mat-form-field appearance="dashed" class="dashed mt-2">
-              <input
-                id="url"
-                matInput
-                formcontrolName="link"
-                [value]="urlshorten"
-                #linkInput
-                readonly
-              />
+              <input id="url" matInput formcontrolName="link" [value]="urlshorten" #linkInput readonly />
             </mat-form-field>
           </div>
-          <div
-            fxLayout="row"
-            fxLayoutAlign="center space-between"
-            fxLayoutGap="10px"
-            class="mt-2 share-desktop"
-          >
+          <div fxLayout="row" fxLayoutAlign="center space-between" fxLayoutGap="10px" class="mt-2 share-desktop">
             <button
               mat-button
               id="btnCopy"
@@ -1186,27 +726,13 @@
               ngClass="{{ classButtonCopy }}"
               (click)="copyInputMessage(linkInput)"
             >
-              <span
-                fxLayoutAlign="center space-between"
-                ngClass="{{ classButtonCopy }}"
-              >
+              <span fxLayoutAlign="center space-between" ngClass="{{ classButtonCopy }}">
                 {{ 'GENERIC.COPY_LINK' | translate }}
               </span>
             </button>
 
-            <button
-              mat-button
-              id="buy"
-              color="orange"
-              ngClass="orange-border {{ classButtonBuy }}"
-              (click)="buy()"
-            >
-              <span
-                ngClass="{{ classButtonBuy }}"
-                fxLayoutAlign="center space-between"
-              >
-                Comprar
-              </span>
+            <button mat-button id="buy" color="orange" ngClass="orange-border {{ classButtonBuy }}" (click)="buy()">
+              <span ngClass="{{ classButtonBuy }}" fxLayoutAlign="center space-between"> Comprar </span>
             </button>
           </div>
         </div>
@@ -1217,20 +743,10 @@
       </h3>
 
       <div class="share-desktop" id="share">
-        <button
-          theme="circles-dark"
-          shareButton="facebook"
-          [url]="urlshorten"
-          ngClass="sharebutton {{ classButtonFacebook }} mr-2"
-        >
+        <button theme="circles-dark" shareButton="facebook" [url]="urlshorten" ngClass="sharebutton {{ classButtonFacebook }} mr-2">
           <i ngClass="fab fa-facebook-f {{ classButtonFacebook }}"></i>
         </button>
-        <button
-          theme="circles-dark"
-          shareButton="twitter"
-          [url]="urlshorten"
-          ngClass="sharebutton {{ classButtonTwitter }} mr-2"
-        >
+        <button theme="circles-dark" shareButton="twitter" [url]="urlshorten" ngClass="sharebutton {{ classButtonTwitter }} mr-2">
           <i ngClass="fab fa-twitter {{ classButtonTwitter }}"></i>
         </button>
         <a
@@ -1244,23 +760,9 @@
       </div>
 
       <div class="share-mobile">
-        <button
-          mat-button
-          ngClass="gtmrs  mb-2 mt-2 {{ classButtonShare }}"
-          (click)="share()"
-          fxLayout="row"
-          fxLayoutAlign="start start"
-        >
-          <span
-            ngClass="gtmrs f-15 {{ classButtonShare }}"
-            fxLayout="row"
-            fxLayoutAlign="center center"
-          >
-            <img
-              ngClass="icon-compartir pr-2 {{ classButtonShare }}"
-              src="/assets/img/Compartir.svg"
-              alt="user"
-            />
+        <button mat-button ngClass="gtmrs  mb-2 mt-2 {{ classButtonShare }}" (click)="share()" fxLayout="row" fxLayoutAlign="start start">
+          <span ngClass="gtmrs f-15 {{ classButtonShare }}" fxLayout="row" fxLayoutAlign="center center">
+            <img ngClass="icon-compartir pr-2 {{ classButtonShare }}" src="/assets/img/Compartir.svg" alt="user" />
             Compartir</span
           >
         </button>
@@ -1272,37 +774,15 @@
           fxLayout="row"
           fxLayoutAlign="start start"
         >
-          <span
-            ngClass="gtmrs f-15 {{ classButtonRefer }}"
-            fxLayout="row"
-            fxLayoutAlign="center center"
-          >
-            <img
-              ngClass="icon-compartir pr-2 {{ classButtonRefer }}"
-              src="/assets/img/Referir.svg"
-              alt="user"
-            />
+          <span ngClass="gtmrs f-15 {{ classButtonRefer }}" fxLayout="row" fxLayoutAlign="center center">
+            <img ngClass="icon-compartir pr-2 {{ classButtonRefer }}" src="/assets/img/Referir.svg" alt="user" />
             Referir
           </span>
         </button>
 
-        <button
-          mat-button
-          ngClass="gtmrs  mb-2 mt-2 {{ classButtonBuy }}"
-          (click)="buy()"
-          fxLayout="row"
-          fxLayoutAlign="start start"
-        >
-          <span
-            ngClass="gtmrs f-15 {{ classButtonBuy }}"
-            fxLayout="row"
-            fxLayoutAlign="center center"
-          >
-            <img
-              ngClass="icon-compartir pr-2 {{ classButtonBuy }}"
-              src="/assets/img/Comprar.svg"
-              alt="user"
-            />
+        <button mat-button ngClass="gtmrs  mb-2 mt-2 {{ classButtonBuy }}" (click)="buy()" fxLayout="row" fxLayoutAlign="start start">
+          <span ngClass="gtmrs f-15 {{ classButtonBuy }}" fxLayout="row" fxLayoutAlign="center center">
+            <img ngClass="icon-compartir pr-2 {{ classButtonBuy }}" src="/assets/img/Comprar.svg" alt="user" />
             Comprar
           </span>
         </button>
@@ -1314,10 +794,7 @@
 <!-- template terms and conditions -->
 
 <ng-template #templateTerms>
-  <div
-    class="fade-in"
-    innerHtml="{{ 'BUSSINESS.TERMS_LEGAL' | translate }}"
-  ></div>
+  <div class="fade-in" innerHtml="{{ 'BUSSINESS.TERMS_LEGAL' | translate }}"></div>
   <button
     *ngIf="acceptTermsDeliver === false"
     mat-raised-button

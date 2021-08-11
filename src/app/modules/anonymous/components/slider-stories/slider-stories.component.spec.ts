@@ -29,10 +29,7 @@ describe('SliderStoriesComponent', () => {
 
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll']);
 
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'getBusiness',
-    'getStories',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getBusiness', 'getStories']);
 
   // const mockUserService = jasmine.createSpyObj("UserService", [
   //   "getProfile"
@@ -64,8 +61,7 @@ describe('SliderStoriesComponent', () => {
       id: 25,
       orderby: 26,
       link: 'https://www.exito.com/ferreteria?utm_source=clickam&utm_medium=referral&utm_campaign=',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-content/ferreteria-vehiculos.png',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-content/ferreteria-vehiculos.png',
       description: 'Ferreteria y vehiculos',
       commission: 0,
       idbusiness: 1,
@@ -82,9 +78,7 @@ describe('SliderStoriesComponent', () => {
         AppMaterialModule,
         HttpClientTestingModule,
         BrowserAnimationsModule,
-        RouterTestingModule.withRoutes([
-          { path: 'inicio', component: HomeComponent },
-        ]),
+        RouterTestingModule.withRoutes([{ path: 'inicio', component: HomeComponent }]),
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {

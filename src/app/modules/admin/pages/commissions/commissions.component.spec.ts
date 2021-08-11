@@ -5,24 +5,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from '../../../../modules/shared/app-material/app-material.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import {
-  ReactiveFormsModule,
-  FormsModule,
-  FormGroup,
-  FormBuilder,
-} from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
-import {
-  NgxDaterangepickerMd,
-  LocaleService,
-  LOCALE_CONFIG,
-} from 'ngx-daterangepicker-material';
-import {
-  MatDatepickerModule,
-  MatDialog,
-  MatNativeDateModule,
-} from '@angular/material';
+import { NgxDaterangepickerMd, LocaleService, LOCALE_CONFIG } from 'ngx-daterangepicker-material';
+import { MatDatepickerModule, MatDialog, MatNativeDateModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AnonymousModule } from '../../../../modules/anonymous/anonymous.module';
 import { SharedModule } from '../../../../modules/shared/shared.module';
@@ -36,15 +23,8 @@ moment.locale('es');
 describe('CommissionsComponent', () => {
   let component: CommissionsComponent;
   let fixture: ComponentFixture<CommissionsComponent>;
-  const mockDialog = jasmine.createSpyObj('MatDialog', [
-    'open',
-    'closeAll',
-    'afterAllClosed',
-  ]);
-  const mockUserService = jasmine.createSpyObj('UserService', [
-    'getExportNewsExcel',
-    'getAllNews',
-  ]);
+  const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll', 'afterAllClosed']);
+  const mockUserService = jasmine.createSpyObj('UserService', ['getExportNewsExcel', 'getAllNews']);
   const mockLinksService = jasmine.createSpyObj('LinksService', [
     'updateStatusCommissionFile',
     'getReportRejected',
@@ -52,9 +32,7 @@ describe('CommissionsComponent', () => {
     'deleteCommission',
     'deleteCommissionFile',
   ]);
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'getCommissionsSearch',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getCommissionsSearch']);
 
   const getCommissionsSearch = {
     state: 'Success',
@@ -153,27 +131,15 @@ describe('CommissionsComponent', () => {
       ],
     }).compileComponents();
     mockDialog.closeAll.and.returnValue(of(updateStatusCommissionFile));
-    mockContentService.getCommissionsSearch.and.returnValue(
-      of(getCommissionsSearch)
-    );
+    mockContentService.getCommissionsSearch.and.returnValue(of(getCommissionsSearch));
   }));
 
   beforeEach(() => {
-    mockLinksService.updateStatusCommissionFile.and.returnValue(
-      of(updateStatusCommissionFile)
-    );
-    mockLinksService.getReportRejected.and.returnValue(
-      of(updateStatusCommissionFile)
-    );
-    mockLinksService.updateCommission.and.returnValue(
-      of(updateStatusCommissionFile)
-    );
-    mockLinksService.deleteCommission.and.returnValue(
-      of(updateStatusCommissionFile)
-    );
-    mockLinksService.deleteCommissionFile.and.returnValue(
-      of(updateStatusCommissionFile)
-    );
+    mockLinksService.updateStatusCommissionFile.and.returnValue(of(updateStatusCommissionFile));
+    mockLinksService.getReportRejected.and.returnValue(of(updateStatusCommissionFile));
+    mockLinksService.updateCommission.and.returnValue(of(updateStatusCommissionFile));
+    mockLinksService.deleteCommission.and.returnValue(of(updateStatusCommissionFile));
+    mockLinksService.deleteCommissionFile.and.returnValue(of(updateStatusCommissionFile));
     fixture = TestBed.createComponent(CommissionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -204,9 +170,7 @@ describe('CommissionsComponent', () => {
 
   describe('openCommission', () => {
     it('open', () => {
-      component.openCommission(
-        getCommissionsSearch.objectResponse.commissions[0]
-      );
+      component.openCommission(getCommissionsSearch.objectResponse.commissions[0]);
       expect(component.currentCommission).toBe(11955);
     });
 

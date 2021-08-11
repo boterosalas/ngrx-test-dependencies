@@ -64,14 +64,7 @@ export class DeleteformComponent implements OnInit {
     });
     this.getInfomonth();
     this.profileFormDelete = this.fb.group({
-      Password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(20),
-        ],
-      ],
+      Password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
     });
   }
   public getInfomonth() {
@@ -109,11 +102,7 @@ export class DeleteformComponent implements OnInit {
     if (this.descriptionVal[this.descriptionVal.length - 1].value === true) {
       this.disableButtonOr = true;
     }
-    if (
-      this.descriptionVal[this.descriptionVal.length - 1].value === true &&
-      this.causeSurvey &&
-      this.causeSurvey.length >= 10
-    ) {
+    if (this.descriptionVal[this.descriptionVal.length - 1].value === true && this.causeSurvey && this.causeSurvey.length >= 10) {
       this.disableButtonOr = false;
     }
   }
@@ -127,10 +116,7 @@ export class DeleteformComponent implements OnInit {
         });
       }
     }
-    if (
-      this.descriptionVal[this.descriptionVal.length - 1].value === true &&
-      this.causeSurvey != ''
-    ) {
+    if (this.descriptionVal[this.descriptionVal.length - 1].value === true && this.causeSurvey != '') {
       reason.push({
         description: this.descriptionVal[this.descriptionVal.length - 1].title,
         detail: this.causeSurvey,

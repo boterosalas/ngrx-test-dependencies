@@ -28,23 +28,16 @@ describe('AppComponent', () => {
 
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll']);
 
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'getPopup',
-    'saveVisitOffer',
-  ]);
-  const mockSidenavService = jasmine.createSpyObj('SidenavService', [
-    'sideNavState',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getPopup', 'saveVisitOffer']);
+  const mockSidenavService = jasmine.createSpyObj('SidenavService', ['sideNavState']);
 
   const responseGetPopup = [
     {
       id: 14,
       description: 'Popup',
       link: 'https://www.exito.com/inicio?utm_source=clickam&utm_medium=referral&utm_campaign={1}',
-      imageurlmobile:
-        'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-mobile/14.jpg',
-      imageurlweb:
-        'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-web/14.jpg',
+      imageurlmobile: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-mobile/14.jpg',
+      imageurlweb: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-web/14.jpg',
       business: 'exito',
       idbusiness: 1,
       infoaditional: '',

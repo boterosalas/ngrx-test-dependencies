@@ -6,15 +6,11 @@ import { RoleGuard } from './role.guard';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () =>
-      import('./modules/anonymous/anonymous.module').then(
-        (m) => m.AnonymousModule
-      ),
+    loadChildren: () => import('./modules/anonymous/anonymous.module').then((m) => m.AnonymousModule),
   },
   {
     path: 'clicker',
-    loadChildren: () =>
-      import('./modules/clicker/clicker.module').then((m) => m.ClickerModule),
+    loadChildren: () => import('./modules/clicker/clicker.module').then((m) => m.ClickerModule),
     canActivate: [AuthGuard, RoleGuard],
     data: {
       role: 'CLICKER',
@@ -22,8 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: () =>
-      import('./modules/admin/admin.module').then((m) => m.AdminModule),
+    loadChildren: () => import('./modules/admin/admin.module').then((m) => m.AdminModule),
   },
 ];
 

@@ -11,12 +11,7 @@ export class TableBussinessComponent implements OnInit {
   @Input() dataSource;
 
   displayedColumns: string[] = ['bussiness'];
-  displayedColumns2: string[] = [
-    'linksGenerated',
-    'linksClicked',
-    'commission',
-    'total',
-  ];
+  displayedColumns2: string[] = ['linksGenerated', 'linksClicked', 'commission', 'total'];
 
   ngOnInit() {}
 }

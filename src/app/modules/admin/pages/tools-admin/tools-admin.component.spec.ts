@@ -3,13 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed, tick } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {
-  MatDialog,
-  MatDialogRef,
-  MatMenuModule,
-  MatSlideToggleModule,
-  MAT_DIALOG_DATA,
-} from '@angular/material';
+import { MatDialog, MatDialogRef, MatMenuModule, MatSlideToggleModule, MAT_DIALOG_DATA } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
@@ -36,9 +30,7 @@ describe('CarrouselAdminComponent', () => {
     'deleteOfer',
     'saveOfertBusiness',
   ]);
-  const mockAuthService = jasmine.createSpyObj('AuthService', [
-    'getPermisionByUser',
-  ]);
+  const mockAuthService = jasmine.createSpyObj('AuthService', ['getPermisionByUser']);
   const datos = [
     {
       active: false,
@@ -50,10 +42,8 @@ describe('CarrouselAdminComponent', () => {
       id: 4,
       idbusiness: 1,
       imagemobile: null,
-      imageurlmobile:
-        'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-mobile/4.jpg',
-      imageurlweb:
-        'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-web/4.jpg',
+      imageurlmobile: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-mobile/4.jpg',
+      imageurlweb: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-web/4.jpg',
       imageweb: null,
       infoaditional: 'Hasta 10%',
       link: 'https://www.exito.com/jugueteria?utm_source=clickam&utm_medium=referral&utm_campaign={1}',
@@ -76,10 +66,8 @@ describe('CarrouselAdminComponent', () => {
       id: 14,
       idbusiness: 1,
       imagemobile: null,
-      imageurlmobile:
-        'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-mobile/14.jpg',
-      imageurlweb:
-        'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-web/14.jpg',
+      imageurlmobile: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-mobile/14.jpg',
+      imageurlweb: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-web/14.jpg',
       imageweb: null,
       infoaditional: 'Hasta 9.6%',
       link: 'https://www.exito.com/?utm_source=clickam&utm_medium=referral&utm_campaign={1}',
@@ -102,10 +90,8 @@ describe('CarrouselAdminComponent', () => {
       id: 1,
       idbusiness: 1,
       imagemobile: null,
-      imageurlmobile:
-        'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-mobile/1.jpg',
-      imageurlweb:
-        'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-web/1.jpg',
+      imageurlmobile: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-mobile/1.jpg',
+      imageurlweb: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-web/1.jpg',
       imageweb: null,
       infoaditional: 'Hasta 3%',
       link: 'https://www.exito.com/freidora-de-aire-bioceramic-384560/p?utm_source=clickam&utm_medium=referral&utm_campaign={1}',
@@ -128,10 +114,8 @@ describe('CarrouselAdminComponent', () => {
       id: 35,
       idbusiness: 1,
       imagemobile: null,
-      imageurlmobile:
-        'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-mobile/1.jpg',
-      imageurlweb:
-        'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-web/1.jpg',
+      imageurlmobile: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-mobile/1.jpg',
+      imageurlweb: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-web/1.jpg',
       imageweb: null,
       infoaditional: 'Hasta 3%',
       link: 'https://www.exito.com/freidora-de-aire-bioceramic-384560/p?utm_source=clickam&utm_medium=referral&utm_campaign={1}',
@@ -249,9 +233,7 @@ describe('CarrouselAdminComponent', () => {
     component.undefinedDate = false;
     component.dataAddImagen.controls.business.setValue(1);
     component.dataAddImagen.controls.nameContent.setValue('name');
-    component.dataAddImagen.controls.link.setValue(
-      'https://www.exito.com/freidora-de-aire-bioceramic-384560'
-    );
+    component.dataAddImagen.controls.link.setValue('https://www.exito.com/freidora-de-aire-bioceramic-384560');
     component.dataAddImagen.controls.comision.setValue('20%');
     component.datePublication = '2021-05-19';
     component.dateFinishPublication = '2021-05-19';
@@ -288,9 +270,7 @@ describe('CarrouselAdminComponent', () => {
     component.visible = true;
     component.dataAddImagenOfertas.controls.business.setValue(1);
     component.dataAddImagenOfertas.controls.nameContent.setValue('name');
-    component.dataAddImagenOfertas.controls.link.setValue(
-      'https://www.exito.com/freidora-de-aire-bioceramic-384560'
-    );
+    component.dataAddImagenOfertas.controls.link.setValue('https://www.exito.com/freidora-de-aire-bioceramic-384560');
     component.dataAddImagenOfertas.controls.comision.setValue('20%');
     component.datePublication = '2021-05-19';
     component.dateFinishPublication = '2021-05-19';

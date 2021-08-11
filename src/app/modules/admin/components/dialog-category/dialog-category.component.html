@@ -2,9 +2,7 @@
   <div fxLayout="column" fxLayoutAlign="center">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <h3 class="mb-3 title-name">{{ data.title }}</h3>
-      <a matRipple (click)="onNoClick()"
-        ><mat-icon class="close">close</mat-icon></a
-      >
+      <a matRipple (click)="onNoClick()"><mat-icon class="close">close</mat-icon></a>
     </div>
   </div>
   <div mat-dialog-content class="dialog-height">
@@ -12,166 +10,68 @@
       <div fxLayout="column" fxFlex="75">
         <form [formGroup]="dateForm" class="form-container">
           <mat-form-field>
-            <input
-              matInput
-              id="category"
-              type="text"
-              placeholder="Categoría"
-              formControlName="category"
-              required
-            />
+            <input matInput id="category" type="text" placeholder="Categoría" formControlName="category" required />
 
-            <mat-error
-              id="requiredName"
-              *ngIf="
-                dateForm.controls.category.invalid &&
-                dateForm.controls.category.errors.required
-              "
-              >{{
-                'GENERIC.REQUIRED' | translate: { formValue: 'Categoría' }
-              }}</mat-error
-            >
+            <mat-error id="requiredName" *ngIf="dateForm.controls.category.invalid && dateForm.controls.category.errors.required">{{
+              'GENERIC.REQUIRED' | translate: { formValue: 'Categoría' }
+            }}</mat-error>
 
-            <mat-error
-              id="maxName"
-              *ngIf="
-                dateForm.controls.category.invalid &&
-                dateForm.controls.category.errors.maxlength
-              "
-              >{{
-                'GENERIC.MAX_CHARACTERS'
-                  | translate
-                    : {
-                        maxchar:
-                          dateForm.controls.category.errors.maxlength
-                            .requiredLength
-                      }
-              }}</mat-error
-            >
+            <mat-error id="maxName" *ngIf="dateForm.controls.category.invalid && dateForm.controls.category.errors.maxlength">{{
+              'GENERIC.MAX_CHARACTERS'
+                | translate
+                  : {
+                      maxchar: dateForm.controls.category.errors.maxlength.requiredLength
+                    }
+            }}</mat-error>
 
-            <mat-error
-              id="invalidName"
-              *ngIf="
-                dateForm.controls.category.invalid &&
-                dateForm.controls.category.errors.pattern
-              "
-              >{{
-                'GENERIC.INVALID_FORMAT' | translate: { val: 'Categoría' }
-              }}</mat-error
-            >
+            <mat-error id="invalidName" *ngIf="dateForm.controls.category.invalid && dateForm.controls.category.errors.pattern">{{
+              'GENERIC.INVALID_FORMAT' | translate: { val: 'Categoría' }
+            }}</mat-error>
           </mat-form-field>
           <mat-form-field>
-            <input
-              matInput
-              id="description"
-              type="text"
-              placeholder="Descripción"
-              formControlName="description"
-              required
-            />
+            <input matInput id="description" type="text" placeholder="Descripción" formControlName="description" required />
 
-            <mat-error
-              id="requiredName"
-              *ngIf="
-                dateForm.controls.description.invalid &&
-                dateForm.controls.description.errors.required
-              "
-              >{{
-                'GENERIC.REQUIRED' | translate: { formValue: 'Descripción' }
-              }}</mat-error
-            >
+            <mat-error id="requiredName" *ngIf="dateForm.controls.description.invalid && dateForm.controls.description.errors.required">{{
+              'GENERIC.REQUIRED' | translate: { formValue: 'Descripción' }
+            }}</mat-error>
 
-            <mat-error
-              id="maxName"
-              *ngIf="
-                dateForm.controls.description.invalid &&
-                dateForm.controls.description.errors.maxlength
-              "
-              >{{
-                'GENERIC.MAX_CHARACTERS'
-                  | translate
-                    : {
-                        maxchar:
-                          dateForm.controls.description.errors.maxlength
-                            .requiredLength
-                      }
-              }}</mat-error
-            >
+            <mat-error id="maxName" *ngIf="dateForm.controls.description.invalid && dateForm.controls.description.errors.maxlength">{{
+              'GENERIC.MAX_CHARACTERS'
+                | translate
+                  : {
+                      maxchar: dateForm.controls.description.errors.maxlength.requiredLength
+                    }
+            }}</mat-error>
 
-            <mat-error
-              id="invalidName"
-              *ngIf="
-                dateForm.controls.description.invalid &&
-                dateForm.controls.description.errors.pattern
-              "
-              >{{
-                'GENERIC.INVALID_FORMAT' | translate: { val: 'Descripción' }
-              }}</mat-error
-            >
+            <mat-error id="invalidName" *ngIf="dateForm.controls.description.invalid && dateForm.controls.description.errors.pattern">{{
+              'GENERIC.INVALID_FORMAT' | translate: { val: 'Descripción' }
+            }}</mat-error>
           </mat-form-field>
           <mat-form-field class="selected-report">
-            <mat-select
-              placeholder="Tipo de Comisión"
-              id="tipoComision"
-              formControlName="tipoCommision"
-              class="selected-report"
-            >
-              <mat-option
-                *ngFor="let selected of selecteds"
-                value="{{ selected.value }}"
-              >
+            <mat-select placeholder="Tipo de Comisión" id="tipoComision" formControlName="tipoCommision" class="selected-report">
+              <mat-option *ngFor="let selected of selecteds" value="{{ selected.value }}">
                 <span>{{ selected.titulo }}</span>
               </mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field>
-            <input
-              matInput
-              id="comision"
-              type="text"
-              placeholder="Comisión Clicker"
-              formControlName="commision"
-              required
-            />
+            <input matInput id="comision" type="text" placeholder="Comisión Clicker" formControlName="commision" required />
 
-            <mat-error
-              id="requiredName"
-              *ngIf="
-                dateForm.controls.commision.invalid &&
-                dateForm.controls.commision.errors.required
-              "
-              >{{
-                'GENERIC.REQUIRED' | translate: { formValue: 'Comisión' }
-              }}</mat-error
-            >
+            <mat-error id="requiredName" *ngIf="dateForm.controls.commision.invalid && dateForm.controls.commision.errors.required">{{
+              'GENERIC.REQUIRED' | translate: { formValue: 'Comisión' }
+            }}</mat-error>
 
-            <mat-error
-              id="maxName"
-              *ngIf="
-                dateForm.controls.commision.invalid &&
-                dateForm.controls.commision.errors.maxlength
-              "
-              >{{
-                'GENERIC.MAX_CHARACTERS'
-                  | translate
-                    : {
-                        maxchar:
-                          dateForm.controls.commision.errors.maxlength
-                            .requiredLength
-                      }
-              }}</mat-error
-            >
+            <mat-error id="maxName" *ngIf="dateForm.controls.commision.invalid && dateForm.controls.commision.errors.maxlength">{{
+              'GENERIC.MAX_CHARACTERS'
+                | translate
+                  : {
+                      maxchar: dateForm.controls.commision.errors.maxlength.requiredLength
+                    }
+            }}</mat-error>
 
-            <mat-error
-              id="invalidName"
-              *ngIf="
-                dateForm.controls.commision.invalid &&
-                dateForm.controls.commision.errors.pattern
-              "
-              >{{
-                'GENERIC.INVALID_FORMAT' | translate: { val: 'Comisión' }
-              }}</mat-error
-            >
+            <mat-error id="invalidName" *ngIf="dateForm.controls.commision.invalid && dateForm.controls.commision.errors.pattern">{{
+              'GENERIC.INVALID_FORMAT' | translate: { val: 'Comisión' }
+            }}</mat-error>
           </mat-form-field>
           <mat-form-field>
             <input
@@ -185,149 +85,68 @@
 
             <mat-error
               id="requiredName"
-              *ngIf="
-                dateForm.controls.commisionBussiness.invalid &&
-                dateForm.controls.commisionBussiness.errors.required
-              "
-              >{{
-                'GENERIC.REQUIRED' | translate: { formValue: 'Comisión' }
-              }}</mat-error
+              *ngIf="dateForm.controls.commisionBussiness.invalid && dateForm.controls.commisionBussiness.errors.required"
+              >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Comisión' } }}</mat-error
             >
 
             <mat-error
               id="maxName"
-              *ngIf="
-                dateForm.controls.commisionBussiness.invalid &&
-                dateForm.controls.commisionBussiness.errors.maxlength
-              "
+              *ngIf="dateForm.controls.commisionBussiness.invalid && dateForm.controls.commisionBussiness.errors.maxlength"
               >{{
                 'GENERIC.MAX_CHARACTERS'
                   | translate
                     : {
-                        maxchar:
-                          dateForm.controls.commisionBussiness.errors.maxlength
-                            .requiredLength
+                        maxchar: dateForm.controls.commisionBussiness.errors.maxlength.requiredLength
                       }
               }}</mat-error
             >
 
             <mat-error
               id="invalidName"
-              *ngIf="
-                dateForm.controls.commisionBussiness.invalid &&
-                dateForm.controls.commisionBussiness.errors.pattern
-              "
-              >{{
-                'GENERIC.INVALID_FORMAT' | translate: { val: 'Comisión' }
-              }}</mat-error
+              *ngIf="dateForm.controls.commisionBussiness.invalid && dateForm.controls.commisionBussiness.errors.pattern"
+              >{{ 'GENERIC.INVALID_FORMAT' | translate: { val: 'Comisión' } }}</mat-error
             >
           </mat-form-field>
           <mat-form-field>
-            <input
-              matInput
-              id="link"
-              type="text"
-              placeholder="Link"
-              formControlName="link"
-              required
-            />
+            <input matInput id="link" type="text" placeholder="Link" formControlName="link" required />
 
-            <mat-error
-              id="requiredName"
-              *ngIf="
-                dateForm.controls.link.invalid &&
-                dateForm.controls.link.errors.required
-              "
-              >{{
-                'GENERIC.REQUIRED' | translate: { formValue: 'Link' }
-              }}</mat-error
-            >
+            <mat-error id="requiredName" *ngIf="dateForm.controls.link.invalid && dateForm.controls.link.errors.required">{{
+              'GENERIC.REQUIRED' | translate: { formValue: 'Link' }
+            }}</mat-error>
 
-            <mat-error
-              id="maxName"
-              *ngIf="
-                dateForm.controls.link.invalid &&
-                dateForm.controls.link.errors.maxlength
-              "
-              >{{
-                'GENERIC.MAX_CHARACTERS'
-                  | translate
-                    : {
-                        maxchar:
-                          dateForm.controls.link.errors.maxlength.requiredLength
-                      }
-              }}</mat-error
-            >
+            <mat-error id="maxName" *ngIf="dateForm.controls.link.invalid && dateForm.controls.link.errors.maxlength">{{
+              'GENERIC.MAX_CHARACTERS'
+                | translate
+                  : {
+                      maxchar: dateForm.controls.link.errors.maxlength.requiredLength
+                    }
+            }}</mat-error>
 
-            <mat-error
-              id="invalidName"
-              *ngIf="
-                dateForm.controls.link.invalid &&
-                dateForm.controls.link.errors.pattern
-              "
-              >{{
-                'GENERIC.INVALID_FORMAT' | translate: { val: 'Link' }
-              }}</mat-error
-            >
+            <mat-error id="invalidName" *ngIf="dateForm.controls.link.invalid && dateForm.controls.link.errors.pattern">{{
+              'GENERIC.INVALID_FORMAT' | translate: { val: 'Link' }
+            }}</mat-error>
           </mat-form-field>
-          <div
-            fxLayout="row"
-            fxLayoutAlign="space-start center"
-            fxLayoutGap="50px"
-            fxLayoutGap.xs="5px"
-            class="pb-3"
-          >
+          <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
             <div fxLayout="column" fxLayoutAlign="center" class="space">
-              <strong class="title-gray"
-                >ADJUNTAR IMAGEN (500X500PX, FORMATO .SVG .JPG, MAX
-                100KB)</strong
-              >
-              <span class="title-secondary" *ngIf="nameFileCert === ''"
-                >No hay archivo seleccionado</span
-              >
-              <span class="file-input" *ngIf="nameFileCert !== ''">{{
-                nameFileCert | truncate: '20'
-              }}</span>
+              <strong class="title-gray">ADJUNTAR IMAGEN (500X500PX, FORMATO .SVG .JPG, MAX 100KB)</strong>
+              <span class="title-secondary" *ngIf="nameFileCert === ''">No hay archivo seleccionado</span>
+              <span class="file-input" *ngIf="nameFileCert !== ''">{{ nameFileCert | truncate: '20' }}</span>
             </div>
             <div>
               <label for="image" id="upload" class="cursor-pointer">
                 <span *ngIf="!showErrorCert">
-                  <img
-                    class="mt-1"
-                    *ngIf="nameFileCert === ''"
-                    src="/assets/img/image-file-upload.svg"
-                    alt="upload"
-                  />
-                  <img
-                    class="mt-1"
-                    *ngIf="nameFileCert !== ''"
-                    src="/assets/img/image-file-upload-ok.svg"
-                    alt="upload"
-                  />
+                  <img class="mt-1" *ngIf="nameFileCert === ''" src="/assets/img/image-file-upload.svg" alt="upload" />
+                  <img class="mt-1" *ngIf="nameFileCert !== ''" src="/assets/img/image-file-upload-ok.svg" alt="upload" />
                 </span>
-                <img
-                  class="mt-1 w-icon"
-                  *ngIf="showErrorCert"
-                  src="/assets/img/icono-error-carga.svg"
-                  alt="upload"
-                />
+                <img class="mt-1 w-icon" *ngIf="showErrorCert" src="/assets/img/icono-error-carga.svg" alt="upload" />
               </label>
             </div>
           </div>
-          <mat-error
-            *ngIf="showErrorCert"
-            class="text-small small pb-2 d-block"
-          >
-            Formato inválido solo se pueden subir archivos con la extensión SVG,
-            JPG y menores de 100KB
+          <mat-error *ngIf="showErrorCert" class="text-small small pb-2 d-block">
+            Formato inválido solo se pueden subir archivos con la extensión SVG, JPG y menores de 100KB
           </mat-error>
 
-          <input
-            (change)="onFileChangeFiles($event, 'image')"
-            id="image"
-            type="file"
-            formControlName="image"
-          />
+          <input (change)="onFileChangeFiles($event, 'image')" id="image" type="file" formControlName="image" />
           <div class="end-label">
             <mat-slide-toggle
               [(ngModel)]="statusAc"
@@ -337,21 +156,13 @@
               id="verified-toggle"
             >
               <span class="third-text" *ngIf="statusAc === true"> Activo </span>
-              <span class="third-text" *ngIf="statusAc === false">
-                Inactivo
-              </span>
+              <span class="third-text" *ngIf="statusAc === false"> Inactivo </span>
             </mat-slide-toggle>
           </div>
 
           <div class="container button-padding mb-4 mt-4">
-            <div
-              fxLayout="row"
-              fxLayoutAlign.gt-xs="end center"
-              fxLayoutAlign.xs="center center"
-            >
-              <button mat-button ngClass="button_cancel" (click)="onNoClick()">
-                Cancelar
-              </button>
+            <div fxLayout="row" fxLayoutAlign.gt-xs="end center" fxLayoutAlign.xs="center center">
+              <button mat-button ngClass="button_cancel" (click)="onNoClick()">Cancelar</button>
               <button
                 mat-raised-button
                 color="orange"

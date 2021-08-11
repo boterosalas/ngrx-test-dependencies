@@ -1,10 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {
-  CheckboxControlValueAccessor,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { CheckboxControlValueAccessor, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -44,17 +40,13 @@ describe('CardAdminStoryComponent', () => {
 
   const matDialog = new MatDialogMock();
 
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'deleteStories',
-    'getBusiness',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['deleteStories', 'getBusiness']);
 
   let allBusiness = [
     {
       id: 1,
       code: 'exito',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg',
       infoaditional: 'Hasta 9.6% de ganancia',
       description: 'Almacenes Éxito',
       orderby: 1,
@@ -63,8 +55,7 @@ describe('CardAdminStoryComponent', () => {
     {
       id: 14,
       code: 'movil-exito',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-movil-exito.svg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-movil-exito.svg',
       infoaditional: 'Ahora 10% de comisión',
       description: 'Móvil Éxito',
       orderby: 5,
@@ -73,8 +64,7 @@ describe('CardAdminStoryComponent', () => {
     {
       id: 3,
       code: 'seguros',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.svg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.svg',
       infoaditional: 'Hasta $32.000 de ganancia',
       description: 'Seguros Éxito',
       orderby: 3,
@@ -83,8 +73,7 @@ describe('CardAdminStoryComponent', () => {
     {
       id: 4,
       code: 'viajes',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-viajes.svg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-viajes.svg',
       infoaditional: 'Hasta $40.000 de ganancia',
       description: 'Viajes Éxito',
       orderby: 4,
@@ -93,8 +82,7 @@ describe('CardAdminStoryComponent', () => {
     {
       id: 5,
       code: 'wesura',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-wesura.svg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-wesura.svg',
       infoaditional: 'Hasta 12.000 de ganancia',
       description: 'Wesura',
       orderby: 6,
@@ -111,8 +99,7 @@ describe('CardAdminStoryComponent', () => {
   const data = {
     description: 'e1',
     id: 43,
-    imageurl:
-      'https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210806082635.jpg',
+    imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210806082635.jpg',
     link: null,
     idbusiness: 1,
     infoaditional: null,

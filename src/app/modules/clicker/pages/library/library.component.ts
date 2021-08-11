@@ -35,11 +35,7 @@ export class LibraryComponent implements OnInit {
 
   @ViewChild('templateImage', { static: false })
   templateVideo: TemplateRef<any>;
-  constructor(
-    private route: ActivatedRoute,
-    private dialog: MatDialog,
-    private content: ContentService
-  ) {
+  constructor(private route: ActivatedRoute, private dialog: MatDialog, private content: ContentService) {
     this.subscription = this.route.params.subscribe((route) => {
       if (route.id === undefined) {
         this.isNormal = true;

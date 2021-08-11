@@ -45,14 +45,9 @@ describe('ProfileFormComponent', () => {
     'uploadFiles',
   ]);
 
-  const mockMasterDataService = jasmine.createSpyObj('MasterDataService', [
-    'getDepartments',
-    'getBanks',
-  ]);
+  const mockMasterDataService = jasmine.createSpyObj('MasterDataService', ['getDepartments', 'getBanks']);
 
-  const mockAuthService = jasmine.createSpyObj('AuthService', [
-    'changePassword',
-  ]);
+  const mockAuthService = jasmine.createSpyObj('AuthService', ['changePassword']);
 
   let dataUserC = {
     managedPayments: true,
@@ -212,12 +207,8 @@ describe('ProfileFormComponent', () => {
     mockUserService.getuserdata.and.returnValue(of(dataUserC));
     mockMasterDataService.getBanks.and.returnValue(of(banks));
     mockAuthService.changePassword.and.returnValue(of(resp));
-    mockUserService.getStatusVerification.and.returnValue(
-      of(getStatusVerification)
-    );
-    mockUserService.changeBankInformation.and.returnValue(
-      of(changeBankInformation)
-    );
+    mockUserService.getStatusVerification.and.returnValue(of(getStatusVerification));
+    mockUserService.changeBankInformation.and.returnValue(of(changeBankInformation));
     mockUserService.uploadFiles.and.returnValue(of(respUploadFiles));
   }));
 
@@ -257,9 +248,7 @@ describe('ProfileFormComponent', () => {
 
   it('update account', () => {
     let service = fixture.debugElement.injector.get(UserService);
-    spyOn(service, 'changeBankInformation').and.returnValue(
-      of(changeBankInformation)
-    );
+    spyOn(service, 'changeBankInformation').and.returnValue(of(changeBankInformation));
     spyOn(service, 'updateUser').and.returnValue(of(resp));
     component.updateAccount();
     expect(service.changeBankInformation).toHaveBeenCalled();
@@ -294,12 +283,8 @@ describe('ProfileFormComponent', () => {
 
   it('getStatusVerification', () => {
     let service = fixture.debugElement.injector.get(UserService);
-    spyOn(service, 'getStatusVerification').and.returnValue(
-      of(getStatusVerification)
-    );
-    component.getStatusVerification(
-      'Tu cuenta entrará en estado de verificación pronto'
-    );
+    spyOn(service, 'getStatusVerification').and.returnValue(of(getStatusVerification));
+    component.getStatusVerification('Tu cuenta entrará en estado de verificación pronto');
     expect(service.getStatusVerification).toHaveBeenCalled();
   });
 

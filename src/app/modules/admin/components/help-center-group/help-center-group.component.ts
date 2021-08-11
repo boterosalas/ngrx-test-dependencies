@@ -36,7 +36,7 @@ export class HelpCenterGroupComponent implements OnInit {
 
   dropSection(event: CdkDragDrop<any>) {
     moveItemInArray(this.sectionsFaqs, event.previousIndex, event.currentIndex);
-    let dataSourceSend = [];
+    const dataSourceSend = [];
     for (let i = 0; i < this.sectionsFaqs.length; i++) {
       this.sectionsFaqs[i].orderby = i + 1;
       dataSourceSend.push({
@@ -121,7 +121,7 @@ export class HelpCenterGroupComponent implements OnInit {
   }
 
   deleteFaqSectionService() {
-    let datos = [this.currentSection.id];
+    const datos = [this.currentSection.id];
     this.content.deleteFaqgroups(datos).subscribe((resp: ResponseService) => {
       if (resp.state === 'Success') {
         this.dialog.closeAll();
@@ -186,7 +186,7 @@ export class HelpCenterGroupComponent implements OnInit {
   }
 
   deleteFaqItemService() {
-    let datos = [this.currentLink.id];
+    const datos = [this.currentLink.id];
     this.content.deleteFaqItems(datos).subscribe((resp: ResponseService) => {
       if (resp.state === 'Success') {
         this.dialog.closeAll();

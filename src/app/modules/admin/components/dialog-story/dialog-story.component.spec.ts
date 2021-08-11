@@ -37,9 +37,7 @@ describe('DialogStoryComponent', () => {
 
   const matDialog = new MatDialogMock();
 
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'saveStories',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['saveStories']);
 
   const saveActive = {
     state: 'Success',
@@ -50,8 +48,7 @@ describe('DialogStoryComponent', () => {
   const data = {
     description: 'e1',
     id: 43,
-    imageurl:
-      'https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210806082635.jpg',
+    imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210806082635.jpg',
     link: null,
     idbusiness: 1,
     infoaditional: null,

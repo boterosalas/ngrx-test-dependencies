@@ -26,16 +26,12 @@ export class DialogDeleteNotificationComponent implements OnInit, OnDestroy {
   }
 
   deleteNotification() {
-    this.subscription = this._content
-      .deleteNotificationAdmin(this.data.idnotification)
-      .subscribe(() => {
-        this.dialog.closeAll();
-        this.router
-          .navigateByUrl('/dashboard', { skipLocationChange: true })
-          .then(() => {
-            this.router.navigate(['/notificaciones-admin']);
-          });
+    this.subscription = this._content.deleteNotificationAdmin(this.data.idnotification).subscribe(() => {
+      this.dialog.closeAll();
+      this.router.navigateByUrl('/dashboard', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/notificaciones-admin']);
       });
+    });
   }
 
   ngOnDestroy(): void {

@@ -17,19 +17,10 @@
   ></app-card-notification>
 
   <span fxLayout="row" fxLayoutAlign="end center">
-    <button
-      mat-raised-button
-      color="orange"
-      class="ml-2"
-      [routerLink]="['/notificacion']"
-    >
-      Crear notificación
-    </button>
+    <button mat-raised-button color="orange" class="ml-2" [routerLink]="['/notificacion']">Crear notificación</button>
   </span>
 
-  <h3 class="notification-category">
-    Notificaciones publicadas <span class="line"></span>
-  </h3>
+  <h3 class="notification-category">Notificaciones publicadas <span class="line"></span></h3>
 
   <app-card-notification
     [notification]="item"

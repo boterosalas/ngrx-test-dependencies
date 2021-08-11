@@ -13,13 +13,7 @@ describe('ReferEmailComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ReferEmailComponent],
-      imports: [
-        TranslateModule.forRoot(),
-        AppMaterialModule,
-        ReactiveFormsModule,
-        FormsModule,
-        BrowserAnimationsModule,
-      ],
+      imports: [TranslateModule.forRoot(), AppMaterialModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule],
     }).compileComponents();
   }));
 

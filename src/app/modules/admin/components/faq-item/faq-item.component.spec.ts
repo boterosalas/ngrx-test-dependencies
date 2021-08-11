@@ -14,12 +14,7 @@ describe('FaqItemComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [FaqItemComponent],
-      imports: [
-        HttpClientTestingModule,
-        TranslateModule.forRoot({}),
-        BrowserAnimationsModule,
-        AppMaterialModule,
-      ],
+      imports: [HttpClientTestingModule, TranslateModule.forRoot({}), BrowserAnimationsModule, AppMaterialModule],
     }).compileComponents();
   }));
 

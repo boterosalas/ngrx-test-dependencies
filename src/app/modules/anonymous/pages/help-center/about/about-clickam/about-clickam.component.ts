@@ -19,8 +19,7 @@ export class AboutClickamComponent implements OnInit {
     },
     {
       name: '¿Por cuáles medios puedo descargar la app?',
-      route:
-        '/centro-de-ayuda/sobre-clickam/por-cuales-medios-puedo-descargar-la-app',
+      route: '/centro-de-ayuda/sobre-clickam/por-cuales-medios-puedo-descargar-la-app',
       icon: '/assets/img/ayuda/sobre-clickam/descargar-app.svg',
     },
     {
@@ -35,8 +34,7 @@ export class AboutClickamComponent implements OnInit {
     },
     {
       name: '¿Cuáles son los beneficios de ser un Clicker?',
-      route:
-        '/centro-de-ayuda/sobre-clickam/cuales-son-los-beneficios-de-un-clicker',
+      route: '/centro-de-ayuda/sobre-clickam/cuales-son-los-beneficios-de-un-clicker',
       icon: '/assets/img/ayuda/sobre-clickam/beneficios.svg',
     },
     {

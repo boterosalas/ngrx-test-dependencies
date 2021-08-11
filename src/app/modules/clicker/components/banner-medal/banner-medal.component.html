@@ -6,11 +6,7 @@
   </div>
   <img class="responsive-img" [src]="img" [alt]="title" />
   <div class="container set-size charts-container position-relative">
-    <div
-      fxLayout="column"
-      ngClass="pie-wrapper {{ classLevel }} progress-{{ percent }}"
-      fxLayoutAlign="center center"
-    >
+    <div fxLayout="column" ngClass="pie-wrapper {{ classLevel }} progress-{{ percent }}" fxLayoutAlign="center center">
       <div fxLayout="column">
         <div ngClass="label bglabel label-bg-{{ percent }}">
           <span>

@@ -5,11 +5,7 @@
   imgMobile="/assets/img/banners/banner-reportes-mobile.jpg"
 ></app-banner>
 
-<span
-  fxLayout="row"
-  fxLayoutAlign="space-between center"
-  class="container mt-2"
->
+<span fxLayout="row" fxLayoutAlign="space-between center" class="container mt-2">
   <button mat-button [routerLink]="['/notificaciones']">
     <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
       <mat-icon>keyboard_arrow_left</mat-icon>
@@ -22,12 +18,7 @@
   </button>
 </span>
 
-<div
-  class="container mt-4 fade-in"
-  fxLayout.gt-xs="row"
-  fxLayout.xs="column"
-  fxLayoutGap="30px"
->
+<div class="container mt-4 fade-in" fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutGap="30px">
   <mat-card fxFlex="100%">
     <h3>{{ title }}</h3>
     <span class="date">{{ date | date: 'dd/MM/yyyy' }}</span>

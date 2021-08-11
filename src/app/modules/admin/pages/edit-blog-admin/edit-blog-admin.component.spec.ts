@@ -31,11 +31,7 @@ describe('EditBlogAdminComponent', () => {
       imageurl: '',
     },
   };
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'saveBlog',
-    'deleteBlog',
-    'getIndividualBlogId',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['saveBlog', 'deleteBlog', 'getIndividualBlogId']);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [EditBlogAdminComponent],

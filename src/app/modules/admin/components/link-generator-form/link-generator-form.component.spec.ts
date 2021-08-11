@@ -13,13 +13,7 @@ describe('LinkGeneratorFormComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [LinkGeneratorFormComponent],
-      imports: [
-        ReactiveFormsModule,
-        FormsModule,
-        TranslateModule.forRoot(),
-        AppMaterialModule,
-        NoopAnimationsModule,
-      ],
+      imports: [ReactiveFormsModule, FormsModule, TranslateModule.forRoot(), AppMaterialModule, NoopAnimationsModule],
     }).compileComponents();
   }));
 

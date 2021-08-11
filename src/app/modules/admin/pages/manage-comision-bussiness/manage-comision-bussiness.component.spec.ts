@@ -73,9 +73,7 @@ describe('ManageComisionBussinessComponent', () => {
     }).compileComponents();
     mockContentService.saveComisionCategory.and.returnValue(of(audit));
     mockContentService.getComisionManage.and.returnValue(of(audit));
-    mockContentService.deleteComisionCategoryBusiness.and.returnValue(
-      of(audit)
-    );
+    mockContentService.deleteComisionCategoryBusiness.and.returnValue(of(audit));
   }));
 
   beforeEach(() => {

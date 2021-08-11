@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  FormControl,
-} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import * as moment from 'moment';
 import { ContentService } from 'src/app/services/content.service';
 import { UserService } from 'src/app/services/user.service';
@@ -27,11 +22,7 @@ export class ReportNewsComponent implements OnInit {
   referencia: string;
   visibleLeft: boolean = false;
   placeholder: string = 'REFERENCIA';
-  constructor(
-    private fb: FormBuilder,
-    private content: ContentService,
-    private users: UserService
-  ) {
+  constructor(private fb: FormBuilder, private content: ContentService, private users: UserService) {
     //this.maxDate = new Date(currentYear + 1, 11, 31);
   }
   dataSource: any;
@@ -72,12 +63,7 @@ export class ReportNewsComponent implements OnInit {
     let splitExt = nameFile.split('.');
     let getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
     this.validFormat = true;
-    if (
-      getExt === 'jpg' ||
-      getExt === 'png' ||
-      getExt === 'pdf' ||
-      getExt === 'msg'
-    ) {
+    if (getExt === 'jpg' || getExt === 'png' || getExt === 'pdf' || getExt === 'msg') {
       this.validFormat = false;
     }
     if (getSize / 1000 > 10000) {
@@ -116,10 +102,7 @@ export class ReportNewsComponent implements OnInit {
   public sendMessage() {
     let codeBussiness = '';
     let data = {};
-    if (
-      this.dateForm.controls.bussiness.value === 0 ||
-      this.dateForm.controls.bussiness.value === '0'
-    ) {
+    if (this.dateForm.controls.bussiness.value === 0 || this.dateForm.controls.bussiness.value === '0') {
       data = {
         datenovelty: this.dateForm.controls.dateRange.value,
         code: this.dateForm.controls.reference.value,
@@ -142,10 +125,7 @@ export class ReportNewsComponent implements OnInit {
     this.users.saveNews(data).subscribe((resp: any) => {
       if (resp.state === 'Success') {
         Swal.fire({
-          html:
-            "Tu reporte ha sido enviado con éxito, el número de radicado es: <b class='bold-blue'>" +
-            resp.objectResponse +
-            '</b>',
+          html: "Tu reporte ha sido enviado con éxito, el número de radicado es: <b class='bold-blue'>" + resp.objectResponse + '</b>',
           type: 'success',
           confirmButtonText: 'Aceptar',
           confirmButtonClass: 'upload-success',

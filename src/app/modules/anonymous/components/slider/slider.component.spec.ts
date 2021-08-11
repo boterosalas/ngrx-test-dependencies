@@ -24,9 +24,7 @@ describe('SliderComponent', () => {
   let component: SliderComponent;
   let fixture: ComponentFixture<SliderComponent>;
 
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'getNews',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getNews']);
 
   // const mockUserService = jasmine.createSpyObj("UserService", ["getShortUrl"]);
 
@@ -34,11 +32,7 @@ describe('SliderComponent', () => {
 
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open']);
 
-  const mockDialogRef = jasmine.createSpyObj('MatDialogRef', [
-    'close',
-    'afterClosed',
-    'componentInstance',
-  ]);
+  const mockDialogRef = jasmine.createSpyObj('MatDialogRef', ['close', 'afterClosed', 'componentInstance']);
 
   const resp = {
     state: 'Success',
@@ -58,8 +52,7 @@ describe('SliderComponent', () => {
     {
       id: 1,
       code: 'exito',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.png',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.png',
       infoaditional: 'Hasta 9.6% de ganancia',
       description: 'Almacenes Éxito',
       orderby: 1,
@@ -67,8 +60,7 @@ describe('SliderComponent', () => {
     {
       id: 2,
       code: 'carulla',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-carulla.png',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-carulla.png',
       infoaditional: 'Hasta 9.6% de ganancia',
       description: 'Almacenes Carulla',
       orderby: 2,
@@ -76,8 +68,7 @@ describe('SliderComponent', () => {
     {
       id: 3,
       code: 'seguros',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.png',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.png',
       infoaditional: 'Hasta $32.000 de ganancia',
       description: 'Seguros Éxito',
       orderby: 3,
@@ -85,8 +76,7 @@ describe('SliderComponent', () => {
     {
       id: 4,
       code: 'viajes',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-viajes.png',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-viajes.png',
       infoaditional: 'Hasta $40.000 de ganancia',
       description: 'Viajes Éxito',
       orderby: 4,
@@ -94,8 +84,7 @@ describe('SliderComponent', () => {
     {
       id: 5,
       code: 'wesura',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-wesura.png',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-wesura.png',
       infoaditional: 'Hasta 12.000 de ganancia',
       description: 'Tu seguro',
       orderby: 5,
@@ -106,8 +95,7 @@ describe('SliderComponent', () => {
     id: 1,
     ordercategory: 1,
     link: 'https://www.exito.com/home-mercado?utm_source=clickam&utm_medium=referral&utm_campaign=hoteles&utm_term=',
-    imageurl:
-      'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-categories/mercado.png',
+    imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-categories/mercado.png',
     description: 'Mercado',
     oncreatedate: '2019-11-18T00:00:00',
     title: 'Mercado',

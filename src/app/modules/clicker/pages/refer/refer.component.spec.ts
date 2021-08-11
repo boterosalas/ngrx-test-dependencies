@@ -1,9 +1,4 @@
-import {
-  async,
-  ComponentFixture,
-  TestBed,
-  inject,
-} from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
 import { ReferComponent } from './refer.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -22,16 +17,12 @@ describe('ReferComponent', () => {
   let component: ReferComponent;
   let fixture: ComponentFixture<ReferComponent>;
 
-  let mockLinksService = jasmine.createSpyObj('LinksService', [
-    'saveLinkRefer',
-    'getReferrals',
-  ]);
+  let mockLinksService = jasmine.createSpyObj('LinksService', ['saveLinkRefer', 'getReferrals']);
 
   let sendError = {
     objectResponse: null,
     state: 'Error',
-    userMessage:
-      'La persona con el email davidbet2@hotmail.com ya es un clicker',
+    userMessage: 'La persona con el email davidbet2@hotmail.com ya es un clicker',
   };
 
   let sendOk = {

@@ -16,12 +16,7 @@
       <div fxLayout="column">
         <h3 class="m-0">{{ data.description }}</h3>
         <a
-          *ngIf="
-            data.link ||
-            data.link !== '' ||
-            data.link !== undefined ||
-            data.link !== null
-          "
+          *ngIf="data.link || data.link !== '' || data.link !== undefined || data.link !== null"
           class="mb-2 purple-link"
           [href]="data.link"
           target="_blank"
@@ -39,9 +34,7 @@
           </div>
           <div fxLayout="column">
             <span class="title-storie">FECHA INICIO</span>
-            <span class="value">{{
-              data.datepublish | date: 'dd/MM/yyyy hh:mm:ss'
-            }}</span>
+            <span class="value">{{ data.datepublish | date: 'dd/MM/yyyy hh:mm:ss' }}</span>
           </div>
         </div>
       </div>
@@ -49,20 +42,9 @@
 
     <div class="card-group__actions" fxLayout="column">
       <div fxLayout="row" fxLayoutGap="10px">
-        <i
-          class="tio-search style-icon cursor-pointer"
-          (click)="previewItem(i); getBusiness()"
-        ></i>
-        <i
-          class="tio-edit style-icon cursor-pointer"
-          (click)="editStory(data)"
-        ></i>
-        <img
-          class="cursor-pointer"
-          src="/assets/img/dashboard/icon-remove-comision.svg"
-          alt="icono borrar"
-          (click)="deleteStory(data)"
-        />
+        <i class="tio-search style-icon cursor-pointer" (click)="previewItem(i); getBusiness()"></i>
+        <i class="tio-edit style-icon cursor-pointer" (click)="editStory(data)"></i>
+        <img class="cursor-pointer" src="/assets/img/dashboard/icon-remove-comision.svg" alt="icono borrar" (click)="deleteStory(data)" />
       </div>
     </div>
   </div>

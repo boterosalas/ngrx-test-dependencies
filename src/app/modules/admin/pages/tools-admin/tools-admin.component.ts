@@ -23,37 +23,18 @@ export interface PeriodicElement2 {
   styleUrls: ['./tools-admin.component.scss'],
 })
 export class ToolsAdminComponent implements OnInit {
-  displayedColumns: string[] = [
-    'drag',
-    'imagenWeb',
-    'imagenMobile',
-    'nameContent',
-    'link',
-    'bussiness',
-    'comision',
-    'active',
-    'actions',
-  ];
-  displayedColumns2: string[] = [
-    'drag',
-    'image',
-    'nameContent',
-    'link',
-    'bussiness',
-    'comision',
-    'active',
-    'actions',
-  ];
+  displayedColumns: string[] = ['drag', 'imagenWeb', 'imagenMobile', 'nameContent', 'link', 'bussiness', 'comision', 'active', 'actions'];
+  displayedColumns2: string[] = ['drag', 'image', 'nameContent', 'link', 'bussiness', 'comision', 'active', 'actions'];
   dataAddImagen: FormGroup;
   dataAddImagenOfertas: FormGroup;
   dataAddImagenPopup: FormGroup;
-  selectAllVideosImg: string = 'Seleccionar todos';
-  selectAllVideosImgOfer: string = 'Seleccionar todos';
+  selectAllVideosImg = 'Seleccionar todos';
+  selectAllVideosImgOfer = 'Seleccionar todos';
   active: boolean;
   active2: boolean;
-  idCarousel: number = 0;
-  idOfertas: number = 0;
-  idPopup: number = 0;
+  idCarousel = 0;
+  idOfertas = 0;
+  idPopup = 0;
   selected: any;
   @ViewChild('table', { static: false }) table: MatTable<PeriodicElement>;
   @ViewChild('table2', { static: false }) table2: MatTable<PeriodicElement2>;
@@ -67,7 +48,7 @@ export class ToolsAdminComponent implements OnInit {
   templatePublication: TemplateRef<any>;
 
   fileImgCat: any = '';
-  nameFileCert: string = '';
+  nameFileCert = '';
   showErrorCert: boolean;
   selectedBuss = [];
   selectedSection = [];
@@ -78,7 +59,7 @@ export class ToolsAdminComponent implements OnInit {
     { name: 'Lila', color: '#8D7EB7' },
   ];
   fileImgCat2: any = '';
-  nameFileCert2: string = '';
+  nameFileCert2 = '';
   showErrorCert2: boolean;
   activebutton: boolean;
   validFormat: boolean;
@@ -88,17 +69,17 @@ export class ToolsAdminComponent implements OnInit {
   maxDate = new Date();
   minHours: any;
   minHoursFinish: any;
-  disabledButtonEr: boolean = true;
-  disabledButtonPu: boolean = true;
-  contadorDates: number = 0;
+  disabledButtonEr = true;
+  disabledButtonPu = true;
+  contadorDates = 0;
   dateForm: FormGroup;
   datePublication: any = '';
   hourDate: any = '';
   dateFinishPublication: any = '';
   hourDateFinish: any = '';
-  visible: boolean = false;
-  undefinedDate: boolean = false;
-  showUndefinedDate: boolean = true;
+  visible = false;
+  undefinedDate = false;
+  showUndefinedDate = true;
 
   dataSource = [];
   dataSourcePopup = [];
@@ -108,12 +89,7 @@ export class ToolsAdminComponent implements OnInit {
   dataPopupRoughCopy = [];
   dataPopupExpire = [];
 
-  constructor(
-    private dialog: MatDialog,
-    private content: ContentService,
-    private auth: AuthService,
-    private fb: FormBuilder
-  ) {
+  constructor(private dialog: MatDialog, private content: ContentService, private auth: AuthService, private fb: FormBuilder) {
     this.dataAddImagen = this.fb.group({
       nameContent: [null, Validators.required],
       link: [null, Validators.required],
@@ -146,73 +122,52 @@ export class ToolsAdminComponent implements OnInit {
     this.getSectionsClicker();
   }
   public getOffers() {
-    this.content
-      .getOffersbyType({ id: 'CARROUSEL', admin: true })
-      .subscribe((resp) => {
-        const startTime: any = new Date();
+    this.content.getOffersbyType({ id: 'CARROUSEL', admin: true }).subscribe((resp) => {
+      const startTime: any = new Date();
 
-        this.dataSource = resp;
-        for (let index = 0; index < this.dataSource.length; index++) {
-          let date: any = new Date(this.dataSource[index].datestart);
-          this.dataSource[index].selected = false;
-          this.dataSource[index].programmed =
-            date - startTime > 0 ? true : false;
-          this.dataSource[index].undefinedDate = !this.dataSource[index].dateend
-            ? true
-            : false;
-        }
-      });
-    this.content
-      .getOffersbyType({ id: 'OFERTA', admin: true })
-      .subscribe((resp) => {
-        const startTime: any = new Date();
-        this.dataSourceOfer = resp;
-        for (let index = 0; index < this.dataSourceOfer.length; index++) {
-          let date: any = new Date(this.dataSourceOfer[index].datestart);
-          this.dataSourceOfer[index].selected = false;
-          this.dataSourceOfer[index].programmed =
-            date - startTime > 0 ? true : false;
-          this.dataSourceOfer[index].undefinedDate = !this.dataSourceOfer[index]
-            .dateend
-            ? true
-            : false;
-        }
-      });
-    this.content
-      .getOffersbyType({ id: 'POPUP', admin: true })
-      .subscribe((resp) => {
-        this.dataPopupActive = [];
-        this.dataPopupProgrammed = [];
-        this.dataPopupRoughCopy = [];
-        this.dataPopupExpire = [];
+      this.dataSource = resp;
+      for (let index = 0; index < this.dataSource.length; index++) {
+        const date: any = new Date(this.dataSource[index].datestart);
+        this.dataSource[index].selected = false;
+        this.dataSource[index].programmed = date - startTime > 0 ? true : false;
+        this.dataSource[index].undefinedDate = !this.dataSource[index].dateend ? true : false;
+      }
+    });
+    this.content.getOffersbyType({ id: 'OFERTA', admin: true }).subscribe((resp) => {
+      const startTime: any = new Date();
+      this.dataSourceOfer = resp;
+      for (let index = 0; index < this.dataSourceOfer.length; index++) {
+        const date: any = new Date(this.dataSourceOfer[index].datestart);
+        this.dataSourceOfer[index].selected = false;
+        this.dataSourceOfer[index].programmed = date - startTime > 0 ? true : false;
+        this.dataSourceOfer[index].undefinedDate = !this.dataSourceOfer[index].dateend ? true : false;
+      }
+    });
+    this.content.getOffersbyType({ id: 'POPUP', admin: true }).subscribe((resp) => {
+      this.dataPopupActive = [];
+      this.dataPopupProgrammed = [];
+      this.dataPopupRoughCopy = [];
+      this.dataPopupExpire = [];
 
-        const startTime: any = new Date();
-        this.dataSourcePopup = resp;
-        for (let index = 0; index < this.dataSourcePopup.length; index++) {
-          let date: any = new Date(this.dataSourcePopup[index].datestart);
-          this.dataSourcePopup[index].selected = false;
-          this.dataSourcePopup[index].programmed =
-            date - startTime > 0 ? true : false;
-          this.dataSourcePopup[index].undefinedDate = !this.dataSourcePopup[
-            index
-          ].dateend
-            ? true
-            : false;
+      const startTime: any = new Date();
+      this.dataSourcePopup = resp;
+      for (let index = 0; index < this.dataSourcePopup.length; index++) {
+        const date: any = new Date(this.dataSourcePopup[index].datestart);
+        this.dataSourcePopup[index].selected = false;
+        this.dataSourcePopup[index].programmed = date - startTime > 0 ? true : false;
+        this.dataSourcePopup[index].undefinedDate = !this.dataSourcePopup[index].dateend ? true : false;
 
-          if (this.dataSourcePopup[index].active) {
-            this.dataPopupActive.push(this.dataSourcePopup[index]);
-          } else if (this.dataSourcePopup[index].programmed) {
-            this.dataPopupProgrammed.push(this.dataSourcePopup[index]);
-          } else if (
-            !this.dataSourcePopup[index].datestart ||
-            !this.dataSourcePopup[index].dateend
-          ) {
-            this.dataPopupRoughCopy.push(this.dataSourcePopup[index]);
-          } else {
-            this.dataPopupExpire.push(this.dataSourcePopup[index]);
-          }
+        if (this.dataSourcePopup[index].active) {
+          this.dataPopupActive.push(this.dataSourcePopup[index]);
+        } else if (this.dataSourcePopup[index].programmed) {
+          this.dataPopupProgrammed.push(this.dataSourcePopup[index]);
+        } else if (!this.dataSourcePopup[index].datestart || !this.dataSourcePopup[index].dateend) {
+          this.dataPopupRoughCopy.push(this.dataSourcePopup[index]);
+        } else {
+          this.dataPopupExpire.push(this.dataSourcePopup[index]);
         }
-      });
+      }
+    });
   }
   public getAllBusiness() {
     this.content.getAllBusiness().subscribe((resp) => {
@@ -235,17 +190,15 @@ export class ToolsAdminComponent implements OnInit {
   }
 
   public hourChange(horu, type) {
-    let data = new Date();
-    let dataH = moment(data).format('YYYY-MM-DD');
-    let dataOp = moment(horu.value).format('YYYY-MM-DD');
+    const data = new Date();
+    const dataH = moment(data).format('YYYY-MM-DD');
+    const dataOp = moment(horu.value).format('YYYY-MM-DD');
     switch (type) {
       case 'publicationDate':
-        this.minHours =
-          dataH === dataOp ? moment(data).format('hh:mm A') : '12:00 AM';
+        this.minHours = dataH === dataOp ? moment(data).format('hh:mm A') : '12:00 AM';
         break;
       case 'finishDate':
-        this.minHoursFinish =
-          dataH === dataOp ? moment(data).format('hh:mm A') : '12:00 AM';
+        this.minHoursFinish = dataH === dataOp ? moment(data).format('hh:mm A') : '12:00 AM';
         break;
     }
   }
@@ -254,7 +207,7 @@ export class ToolsAdminComponent implements OnInit {
     const prevIndex = this.dataSource.findIndex((d) => d === event.item.data);
     moveItemInArray(this.dataSource, prevIndex, event.currentIndex);
     this.table.renderRows();
-    let datosSourceSend = [];
+    const datosSourceSend = [];
     for (let i = 0; i < this.dataSource.length; i++) {
       this.dataSource[i].orderby = i + 1;
       datosSourceSend.push({
@@ -265,12 +218,10 @@ export class ToolsAdminComponent implements OnInit {
     this.saveOrder(datosSourceSend);
   }
   public dropTable2(event: CdkDragDrop<PeriodicElement[]>) {
-    const prevIndex = this.dataSourceOfer.findIndex(
-      (d) => d === event.item.data
-    );
+    const prevIndex = this.dataSourceOfer.findIndex((d) => d === event.item.data);
     moveItemInArray(this.dataSourceOfer, prevIndex, event.currentIndex);
     this.table2.renderRows();
-    let datosSourceSend = [];
+    const datosSourceSend = [];
     for (let i = 0; i < this.dataSourceOfer.length; i++) {
       this.dataSourceOfer[i].orderby = i + 1;
       datosSourceSend.push({
@@ -378,10 +329,10 @@ export class ToolsAdminComponent implements OnInit {
     const template = this.templateAddImagenCarousel;
     this.dataAddImagen.reset();
     this.showErrorCert = false;
-    if (element.imageurlweb != '') {
-      let datos = element.imageurlweb.split('/');
+    if (element.imageurlweb !== '') {
+      const datos = element.imageurlweb.split('/');
       this.nameFileCert = datos[datos.length - 1];
-      let datos2 = element.imageurlmobile.split('/');
+      const datos2 = element.imageurlmobile.split('/');
       this.nameFileCert2 = datos2[datos2.length - 1];
       this.checkButton();
     }
@@ -418,10 +369,10 @@ export class ToolsAdminComponent implements OnInit {
     const templateP = this.templateAddImagenPopup;
     this.dataAddImagenPopup.reset();
     this.showErrorCert = false;
-    if (elementP.imageurlweb != '') {
-      let datos = elementP.imageurlweb.split('/');
+    if (elementP.imageurlweb !== '') {
+      const datos = elementP.imageurlweb.split('/');
       this.nameFileCert = datos[datos.length - 1];
-      let datos2 = elementP.imageurlmobile.split('/');
+      const datos2 = elementP.imageurlmobile.split('/');
       this.nameFileCert2 = datos2[datos2.length - 1];
       this.checkButton();
     }
@@ -468,8 +419,8 @@ export class ToolsAdminComponent implements OnInit {
   }
 
   public activate(element) {
-    let datos = [{ id: element.id, active: element.active }];
-    this.content.saveActiveBanner(datos).subscribe((resp) => {});
+    const datos = [{ id: element.id, active: element.active }];
+    this.content.saveActiveBanner(datos).subscribe();
   }
 
   public editOfertasModal(element) {
@@ -479,19 +430,17 @@ export class ToolsAdminComponent implements OnInit {
     const edit = 0;
     const template = this.templateAddImagenOfertas;
     this.showErrorCert = false;
-    if (element.imageurlweb != '') {
-      let datos = element.imageurlweb.split('/');
+    if (element.imageurlweb !== '') {
+      const datos = element.imageurlweb.split('/');
       this.nameFileCert = datos[datos.length - 1];
-      let datos2 = element.imageurlmobile.split('/');
+      const datos2 = element.imageurlmobile.split('/');
       this.nameFileCert2 = datos2[datos2.length - 1];
       this.checkButton();
     }
     this.fileImgCat = '';
     this.fileImgCat2 = '';
     this.dataAddImagenOfertas.reset();
-    this.dataAddImagenOfertas.controls.nameContent.setValue(
-      element.description
-    );
+    this.dataAddImagenOfertas.controls.nameContent.setValue(element.description);
     this.dataAddImagenOfertas.controls.link.setValue(element.link);
     this.dataAddImagenOfertas.controls.business.setValue(element.idbusiness);
     if (element.idbusiness === null) {
@@ -608,7 +557,7 @@ export class ToolsAdminComponent implements OnInit {
       allowOutsideClick: false,
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
-        this.content.deleteOfer([element.id]).subscribe((resp) => {
+        this.content.deleteOfer([element.id]).subscribe(() => {
           this.getOffers();
         });
       }
@@ -622,7 +571,7 @@ export class ToolsAdminComponent implements OnInit {
     } else {
       visible = 0;
     }
-    let bussiness = this.dataAddImagen.controls.business.value;
+    const bussiness = this.dataAddImagen.controls.business.value;
     let buss = '';
     for (let index = 0; index < this.selectedBuss.length; index++) {
       if (this.selectedBuss[index].id.toString() === bussiness.toString()) {
@@ -636,20 +585,13 @@ export class ToolsAdminComponent implements OnInit {
       idBuss = this.dataAddImagen.controls.business.value;
     }
 
-    let datePublication = moment(this.datePublication).format('YYYY-MM-DD');
-    let dateFinishPublication = moment(this.dateFinishPublication).format(
-      'YYYY-MM-DD'
-    );
-    let hour = this.hourDate ? this.militaryHrFormat(this.hourDate) : '';
-    let hourEnd = this.hourDateFinish
-      ? this.militaryHrFormat(this.hourDateFinish)
-      : '';
+    const datePublication = moment(this.datePublication).format('YYYY-MM-DD');
+    const dateFinishPublication = moment(this.dateFinishPublication).format('YYYY-MM-DD');
+    const hour = this.hourDate ? this.militaryHrFormat(this.hourDate) : '';
+    const hourEnd = this.hourDateFinish ? this.militaryHrFormat(this.hourDateFinish) : '';
 
     const datestart = !this.visible ? `${datePublication} ${hour}:00` : '';
-    const dateend =
-      !this.visible && !this.undefinedDate
-        ? `${dateFinishPublication} ${hourEnd}:00`
-        : '';
+    const dateend = !this.visible && !this.undefinedDate ? `${dateFinishPublication} ${hourEnd}:00` : '';
 
     let datos: any = [
       {
@@ -674,7 +616,7 @@ export class ToolsAdminComponent implements OnInit {
         },
       ];
     } else {
-      if (this.fileImgCat != '' && this.fileImgCat2 != '') {
+      if (this.fileImgCat !== '' && this.fileImgCat2 !== '') {
         datos = [
           {
             ...datos[0],
@@ -683,7 +625,7 @@ export class ToolsAdminComponent implements OnInit {
             imageMobile: this.fileImgCat2,
           },
         ];
-      } else if (this.fileImgCat2 != '') {
+      } else if (this.fileImgCat2 !== '') {
         datos = [
           {
             ...datos[0],
@@ -691,7 +633,7 @@ export class ToolsAdminComponent implements OnInit {
             imageMobile: this.fileImgCat2,
           },
         ];
-      } else if (this.fileImgCat != '') {
+      } else if (this.fileImgCat !== '') {
         datos = [
           {
             ...datos[0],
@@ -710,7 +652,7 @@ export class ToolsAdminComponent implements OnInit {
       }
     }
 
-    this.content.saveOfertBusiness(datos).subscribe((resp) => {
+    this.content.saveOfertBusiness(datos).subscribe(() => {
       this.dataAddImagen.reset();
       this.dialog.closeAll();
       this.getOffers();
@@ -724,7 +666,7 @@ export class ToolsAdminComponent implements OnInit {
     } else {
       visible = 0;
     }
-    let bussiness = this.dataAddImagenOfertas.controls.business.value;
+    const bussiness = this.dataAddImagenOfertas.controls.business.value;
     let buss = '';
     for (let index = 0; index < this.selectedBuss.length; index++) {
       if (this.selectedBuss[index].id.toString() === bussiness.toString()) {
@@ -738,20 +680,13 @@ export class ToolsAdminComponent implements OnInit {
       idBuss = this.dataAddImagenOfertas.controls.business.value;
     }
 
-    let datePublication = moment(this.datePublication).format('YYYY-MM-DD');
-    let dateFinishPublication = moment(this.dateFinishPublication).format(
-      'YYYY-MM-DD'
-    );
-    let hour = this.hourDate ? this.militaryHrFormat(this.hourDate) : '';
-    let hourEnd = this.hourDateFinish
-      ? this.militaryHrFormat(this.hourDateFinish)
-      : '';
+    const datePublication = moment(this.datePublication).format('YYYY-MM-DD');
+    const dateFinishPublication = moment(this.dateFinishPublication).format('YYYY-MM-DD');
+    const hour = this.hourDate ? this.militaryHrFormat(this.hourDate) : '';
+    const hourEnd = this.hourDateFinish ? this.militaryHrFormat(this.hourDateFinish) : '';
 
     const datestart = !this.visible ? `${datePublication} ${hour}:00` : '';
-    const dateend =
-      !this.visible && !this.undefinedDate
-        ? `${dateFinishPublication} ${hourEnd}:00`
-        : '';
+    const dateend = !this.visible && !this.undefinedDate ? `${dateFinishPublication} ${hourEnd}:00` : '';
 
     let datos: any = [
       {
@@ -776,7 +711,7 @@ export class ToolsAdminComponent implements OnInit {
         },
       ];
     } else {
-      if (this.fileImgCat != '') {
+      if (this.fileImgCat !== '') {
         datos = [
           {
             ...datos[0],
@@ -795,7 +730,7 @@ export class ToolsAdminComponent implements OnInit {
       }
     }
 
-    this.content.saveOfertBusiness(datos).subscribe((resp) => {
+    this.content.saveOfertBusiness(datos).subscribe(() => {
       this.dataAddImagenOfertas.reset();
       this.dialog.closeAll();
       this.getOffers();
@@ -809,26 +744,14 @@ export class ToolsAdminComponent implements OnInit {
       visible = 0;
     }
 
-    let datePublication = this.datePublication
-      ? moment(this.datePublication).format('YYYY-MM-DD')
-      : '';
-    let dateFinishPublication = this.dateFinishPublication
-      ? moment(this.dateFinishPublication).format('YYYY-MM-DD')
-      : '';
-    let hour = this.hourDate ? this.militaryHrFormat(this.hourDate) : '';
-    let hourEnd = this.hourDateFinish
-      ? this.militaryHrFormat(this.hourDateFinish)
-      : '';
+    const datePublication = this.datePublication ? moment(this.datePublication).format('YYYY-MM-DD') : '';
+    const dateFinishPublication = this.dateFinishPublication ? moment(this.dateFinishPublication).format('YYYY-MM-DD') : '';
+    const hour = this.hourDate ? this.militaryHrFormat(this.hourDate) : '';
+    const hourEnd = this.hourDateFinish ? this.militaryHrFormat(this.hourDateFinish) : '';
 
-    const datestart =
-      !this.visible && datePublication ? `${datePublication} ${hour}` : '';
+    const datestart = !this.visible && datePublication ? `${datePublication} ${hour}` : '';
     const dateend =
-      !this.visible &&
-      !this.undefinedDate &&
-      !this.showUndefinedDate &&
-      dateFinishPublication
-        ? `${dateFinishPublication} ${hourEnd}`
-        : '';
+      !this.visible && !this.undefinedDate && !this.showUndefinedDate && dateFinishPublication ? `${dateFinishPublication} ${hourEnd}` : '';
 
     let datos: any = [
       {
@@ -866,7 +789,7 @@ export class ToolsAdminComponent implements OnInit {
       ];
     }
 
-    this.content.saveOfertBusiness(datos).subscribe((resp) => {
+    this.content.saveOfertBusiness(datos).subscribe(() => {
       this.dataAddImagenPopup.reset();
       this.dialog.closeAll();
       this.getOffers();
@@ -893,7 +816,7 @@ export class ToolsAdminComponent implements OnInit {
     }
   }
   public loadDelete() {
-    let index = [];
+    const index = [];
     this.dataSource.forEach((content, i) => {
       if (content.selected === true) {
         index.push(i);
@@ -906,7 +829,7 @@ export class ToolsAdminComponent implements OnInit {
     }
   }
   public loadDelete2() {
-    let index = [];
+    const index = [];
     this.dataSourceOfer.forEach((content, i) => {
       if (content.selected === true) {
         index.push(i);
@@ -950,14 +873,13 @@ export class ToolsAdminComponent implements OnInit {
       allowOutsideClick: false,
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
-        //this.content.deleteOfer([element.id]).subscribe((resp) => {
-        let datos = [];
+        const datos = [];
         for (let index = 0; index < this.dataSourceOfer.length; index++) {
           if (this.dataSourceOfer[index].selected === true) {
             datos.push(this.dataSourceOfer[index].id);
           }
         }
-        this.content.deleteOfer(datos).subscribe((resp) => {
+        this.content.deleteOfer(datos).subscribe(() => {
           this.getOffers();
           this.active2 = false;
         });
@@ -975,14 +897,13 @@ export class ToolsAdminComponent implements OnInit {
       allowOutsideClick: false,
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
-        //this.content.deleteOfer([element.id]).subscribe((resp) => {
-        let datos = [];
+        const datos = [];
         for (let index = 0; index < this.dataSource.length; index++) {
           if (this.dataSource[index].selected === true) {
             datos.push(this.dataSource[index].id);
           }
         }
-        this.content.deleteOfer(datos).subscribe((resp) => {
+        this.content.deleteOfer(datos).subscribe(() => {
           this.getOffers();
           this.active = false;
         });
@@ -1001,43 +922,43 @@ export class ToolsAdminComponent implements OnInit {
   }
 
   public timeFormat(time) {
-    let hour = time.split(':')[0];
-    let minute = time.split(':')[1];
+    const hour = time.split(':')[0];
+    const minute = time.split(':')[1];
 
     if (hour >= 12) {
-      if (hour == 12) {
-        let h = hour;
-        let m = minute + ' PM';
+      if (hour === 12) {
+        const h = hour;
+        const m = minute + ' PM';
         return h + ':' + m;
       } else {
-        let h = hour - 12;
-        let m = minute + ' PM';
+        const h = hour - 12;
+        const m = minute + ' PM';
         return h + ':' + m;
       }
     } else {
-      let h = parseInt(hour);
+      const h = parseInt(hour);
       return h + ':' + minute + ' AM';
     }
   }
 
   public militaryHrFormat(time) {
-    let format = time.toString().split(' ')[1];
-    let hour = time.toString().split(' ')[0].split(':')[0];
+    const format = time.toString().split(' ')[1];
+    const hour = time.toString().split(' ')[0].split(':')[0];
     if (hour == 12) {
-      let hour = time.toString().split(' ')[0];
+      const hour = time.toString().split(' ')[0];
       return hour;
     } else {
       if (format === 'PM') {
-        let hour = time.toString().split(' ')[0];
-        let h = parseInt(hour.split(':')[0]) + 12;
-        let m = hour.split(':')[1];
+        const hour = time.toString().split(' ')[0];
+        const h = parseInt(hour.split(':')[0]) + 12;
+        const m = hour.split(':')[1];
         return h + ':' + m;
       } else {
         if (hour < 10) {
-          let hour = 0 + time.toString().split(' ')[0];
+          const hour = 0 + time.toString().split(' ')[0];
           return hour;
         } else {
-          let hour = time.toString().split(' ')[0];
+          const hour = time.toString().split(' ')[0];
           return hour;
         }
       }

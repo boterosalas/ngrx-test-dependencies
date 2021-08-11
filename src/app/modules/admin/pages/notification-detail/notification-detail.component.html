@@ -9,11 +9,7 @@
     <h3 title-name>{{ title }} notificación</h3>
 
     <button mat-button [routerLink]="['/notificaciones-admin']">
-      <span
-        class="galano-bold f-16"
-        fxLayout="row"
-        fxLayoutAlign="start center"
-      >
+      <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
         <mat-icon>keyboard_arrow_left</mat-icon>
         Volver
       </span>
@@ -24,31 +20,16 @@
     <div fxLayout="row" fxLayoutGap="20px">
       <mat-card>
         <mat-form-field class="w-100">
-          <input
-            matInput
-            id="title"
-            type="text"
-            placeholder="Titulo"
-            formControlName="title"
-            maxlength="100"
-          />
+          <input matInput id="title" type="text" placeholder="Titulo" formControlName="title" maxlength="100" />
           <mat-error
             id="requiredtitle"
-            *ngIf="
-              notificationForm.controls.title.invalid &&
-              notificationForm.controls.title.errors.required
-            "
-            >{{
-              'GENERIC.REQUIRED' | translate: { formValue: 'Titulo' }
-            }}</mat-error
+            *ngIf="notificationForm.controls.title.invalid && notificationForm.controls.title.errors.required"
+            >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Titulo' } }}</mat-error
           >
         </mat-form-field>
 
         <h3>CONTENIDO</h3>
-        <angular-editor
-          [config]="configurarEditor"
-          formControlName="termsEditor"
-        ></angular-editor>
+        <angular-editor [config]="configurarEditor" formControlName="termsEditor"></angular-editor>
       </mat-card>
 
       <div fxLayout="column" class="w-100">
@@ -63,31 +44,20 @@
               class="selected-filter"
               (selectionChange)="showOption($event)"
             >
-              <mat-option
-                *ngFor="let selected of filters"
-                value="{{ selected.value }}"
-              >
+              <mat-option *ngFor="let selected of filters" value="{{ selected.value }}">
                 <span>{{ selected.name }}</span>
               </mat-option>
             </mat-select>
 
             <mat-error
               id="requiredfilterUsers"
-              *ngIf="
-                notificationForm.controls.filterUsers.invalid &&
-                notificationForm.controls.filterUsers.errors.required
-              "
-              >{{
-                'GENERIC.REQUIRED'
-                  | translate: { formValue: 'Grupo de usuarios' }
-              }}</mat-error
+              *ngIf="notificationForm.controls.filterUsers.invalid && notificationForm.controls.filterUsers.errors.required"
+              >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Grupo de usuarios' } }}</mat-error
             >
           </mat-form-field>
 
           <span *ngIf="showUploadFile">
-            <label class="label"
-              >adjuntar lista de usuarios (formato .xlsx)</label
-            >
+            <label class="label">adjuntar lista de usuarios (formato .xlsx)</label>
             <br />
             <app-load-form-file
               [fileForm]="fileFormNotification"
@@ -99,12 +69,7 @@
               {{ 'GENERIC.INVALID_FORMAT_FILE' | translate }}
             </mat-error>
             <hr *ngIf="urlDownload !== null" />
-            <span
-              class="f-11"
-              fxLayout="row"
-              fxLayoutAlign="space-between center"
-              *ngIf="urlDownload !== null"
-            >
+            <span class="f-11" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="urlDownload !== null">
               Descargar archivo cargado previamente
               <a class="icon-down" [href]="urlDownload" target="_blank">
                 <i class="tio-download_from_cloud"></i>
@@ -122,13 +87,7 @@
               [maxDate]="maxDate"
               ngxDaterangepickerMd
               opens="left"
-              class="
-                form-control
-                border-input
-                mat-elevation-z1
-                p-2
-                border-radius
-              "
+              class="form-control border-input mat-elevation-z1 p-2 border-radius"
             />
           </span>
         </mat-card>
@@ -139,37 +98,18 @@
           <div fxLayout="row" class="mt-2" fxLayoutGap="10px">
             <div>
               <label class="label mt-2 mb-1"> FECHA DE PUBLICACIÓN </label>
-              <span
-                class="mat-elevation-z1 border-radius"
-                fxLayout="row-reverse"
-              >
-                <input
-                  matInput
-                  [matDatepicker]="picker"
-                  formControlName="date"
-                  readonly
-                />
-                <mat-datepicker-toggle
-                  class="icon-date"
-                  matSuffix
-                  [for]="picker"
-                ></mat-datepicker-toggle>
+              <span class="mat-elevation-z1 border-radius" fxLayout="row-reverse">
+                <input matInput [matDatepicker]="picker" formControlName="date" readonly />
+                <mat-datepicker-toggle class="icon-date" matSuffix [for]="picker"></mat-datepicker-toggle>
 
-                <mat-datepicker
-                  class="icon-date"
-                  touchUi
-                  #picker
-                ></mat-datepicker>
+                <mat-datepicker class="icon-date" touchUi #picker></mat-datepicker>
               </span>
             </div>
 
             <div>
               <label class="label mt-2 mb-1"> HORA DE PUBLICACIÓN </label>
 
-              <span
-                class="mat-elevation-z1 p-2 border-radius"
-                fxLayout="row-reverse"
-              >
+              <span class="mat-elevation-z1 p-2 border-radius" fxLayout="row-reverse">
                 <input
                   [ngxTimepicker]="min"
                   matInput

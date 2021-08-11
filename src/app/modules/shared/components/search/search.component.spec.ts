@@ -13,13 +13,7 @@ describe('SearchComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [SearchComponent],
-      imports: [
-        ReactiveFormsModule,
-        FormsModule,
-        AppMaterialModule,
-        BrowserAnimationsModule,
-        TranslateModule.forRoot({}),
-      ],
+      imports: [ReactiveFormsModule, FormsModule, AppMaterialModule, BrowserAnimationsModule, TranslateModule.forRoot({})],
       providers: [],
     }).compileComponents();
   }));

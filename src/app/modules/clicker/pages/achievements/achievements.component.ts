@@ -13,11 +13,7 @@ export class AchievementsComponent implements OnInit, OnDestroy {
   medals = [];
   private subscription: Subscription = new Subscription();
 
-  constructor(
-    private router: Router,
-    private util: UtilsService,
-    private link: LinksService
-  ) {}
+  constructor(private router: Router, private util: UtilsService, private link: LinksService) {}
 
   ngOnInit() {
     this.getMedals();

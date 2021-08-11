@@ -30,9 +30,7 @@ describe('RecoverpasswordComponent', () => {
         AnonymousModule,
         SharedModule,
         HttpClientTestingModule,
-        RouterTestingModule.withRoutes([
-          { path: 'inicio', component: HomeComponent },
-        ]),
+        RouterTestingModule.withRoutes([{ path: 'inicio', component: HomeComponent }]),
         BrowserAnimationsModule,
         TranslateModule.forRoot({}),
         JwtModule.forRoot({

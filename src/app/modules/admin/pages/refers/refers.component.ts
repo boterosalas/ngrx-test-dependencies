@@ -13,12 +13,7 @@ import { UtilsService } from 'src/app/services/utils.service';
   styleUrls: ['./refers.component.scss'],
 })
 export class RefersComponent implements OnInit, OnDestroy {
-  constructor(
-    private fb: FormBuilder,
-    private file: LinksService,
-    private _snackBar: MatSnackBar,
-    public utils: UtilsService
-  ) {}
+  constructor(private fb: FormBuilder, private file: LinksService, private _snackBar: MatSnackBar, public utils: UtilsService) {}
 
   locale = {
     locale: 'es',
@@ -57,19 +52,13 @@ export class RefersComponent implements OnInit, OnDestroy {
 
   public comissionClickerForm() {
     this.comissionForm = this.fb.group({
-      amount: [
-        this.amount,
-        [Validators.required, Validators.pattern(this.numberPattern)],
-      ],
+      amount: [this.amount, [Validators.required, Validators.pattern(this.numberPattern)]],
     });
   }
 
   public referedClickerForm() {
     this.referedForm = this.fb.group({
-      refered: [
-        this.amountMin,
-        [Validators.required, Validators.pattern(this.numberPattern)],
-      ],
+      refered: [this.amountMin, [Validators.required, Validators.pattern(this.numberPattern)]],
     });
   }
 
@@ -88,8 +77,8 @@ export class RefersComponent implements OnInit, OnDestroy {
 
   /**
    * Abre el mensaje de confirmacion
-   * @param message
-   * @param action
+   * @param message mensaje
+   * @param action accion
    */
 
   private openSnackBar(message: string, action: string) {
@@ -99,35 +88,31 @@ export class RefersComponent implements OnInit, OnDestroy {
   }
 
   public saveCommission() {
-    let commission = {
+    const commission = {
       amount: this.comissionForm.controls.amount.value,
     };
-    this.subscription = this.file
-      .saveAmountCommission(commission)
-      .subscribe((save: ResponseService) => {
-        if (save.state === 'Success') {
-          this.openSnackBar(save.userMessage, 'Cerrar');
-          this.getAmountClicker();
-        } else {
-          this.openSnackBar(save.userMessage, 'Cerrar');
-        }
-      });
+    this.subscription = this.file.saveAmountCommission(commission).subscribe((save: ResponseService) => {
+      if (save.state === 'Success') {
+        this.openSnackBar(save.userMessage, 'Cerrar');
+        this.getAmountClicker();
+      } else {
+        this.openSnackBar(save.userMessage, 'Cerrar');
+      }
+    });
   }
 
   public saveRefered() {
-    let commission = {
+    const commission = {
       amount: this.referedForm.controls.refered.value,
     };
-    this.subscription = this.file
-      .saveAmountReferred(commission)
-      .subscribe((resp: ResponseService) => {
-        if (resp.state === 'Success') {
-          this.openSnackBar(resp.userMessage, 'Cerrar');
-          this.getAmountClicker();
-        } else {
-          this.openSnackBar(resp.userMessage, 'Cerrar');
-        }
-      });
+    this.subscription = this.file.saveAmountReferred(commission).subscribe((resp: ResponseService) => {
+      if (resp.state === 'Success') {
+        this.openSnackBar(resp.userMessage, 'Cerrar');
+        this.getAmountClicker();
+      } else {
+        this.openSnackBar(resp.userMessage, 'Cerrar');
+      }
+    });
   }
 
   ngOnDestroy() {

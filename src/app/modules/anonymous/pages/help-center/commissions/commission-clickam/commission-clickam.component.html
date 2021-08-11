@@ -10,16 +10,8 @@
     </div>
     <div fxLayout.gt-xs="column" fxShow.xs="false" class="w-100 mt-help">
       <div fxLayout="row wrap">
-        <span
-          *ngFor="let item of commission; let i = index"
-          fxLayout="column"
-          fxFlex="100"
-        >
-          <app-card-help-center
-            [name]="item.name"
-            [route]="item.route"
-            [icon]="item.icon"
-          ></app-card-help-center>
+        <span *ngFor="let item of commission; let i = index" fxLayout="column" fxFlex="100">
+          <app-card-help-center [name]="item.name" [route]="item.route" [icon]="item.icon"></app-card-help-center>
         </span>
       </div>
     </div>

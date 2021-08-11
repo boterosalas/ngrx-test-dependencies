@@ -1,9 +1,5 @@
 <div class="position-relative">
-  <ngx-slick-carousel
-    #slickModal="slick-carousel"
-    [config]="slideConfig"
-    class="mt-4"
-  >
+  <ngx-slick-carousel #slickModal="slick-carousel" [config]="slideConfig" class="mt-4">
     <div
       ngxSlickItem
       *ngFor="let item of slider"
@@ -23,12 +19,7 @@
       </span>
     </div>
   </ngx-slick-carousel>
-  <div
-    fxHide.xs="true"
-    class="position-absolute arrows-video"
-    fxLayout="row"
-    fxLayoutAlign="space-between"
-  >
+  <div fxHide.xs="true" class="position-absolute arrows-video" fxLayout="row" fxLayoutAlign="space-between">
     <button mat-mini-fab color="white" class="ml-4" (click)="prev()">
       <img src="/assets/img/arrow-video.svg" alt="prev" />
     </button>

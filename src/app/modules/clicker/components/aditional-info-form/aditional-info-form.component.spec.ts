@@ -36,16 +36,9 @@ describe('AditionalInfoFormComponent', () => {
   let component: AditionalInfoFormComponent;
   let fixture: ComponentFixture<AditionalInfoFormComponent>;
 
-  const mockUserService = jasmine.createSpyObj('UserService', [
-    'getBasicData',
-    'updateUser',
-    'userInfo',
-  ]);
+  const mockUserService = jasmine.createSpyObj('UserService', ['getBasicData', 'updateUser', 'userInfo']);
 
-  const mockMasterDataService = jasmine.createSpyObj('MasterDataService', [
-    'getDepartments',
-    'getBanks',
-  ]);
+  const mockMasterDataService = jasmine.createSpyObj('MasterDataService', ['getDepartments', 'getBanks']);
 
   let dataBanks = {
     state: 'Success',

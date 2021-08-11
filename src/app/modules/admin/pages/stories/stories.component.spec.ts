@@ -32,11 +32,7 @@ describe('StoriesComponent', () => {
   let component: StoriesComponent;
   let fixture: ComponentFixture<StoriesComponent>;
 
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'getAllBusiness',
-    'getStoriesadmin',
-    'deleteStories',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getAllBusiness', 'getStoriesadmin', 'deleteStories']);
 
   const resp = {
     state: 'Success',
@@ -48,8 +44,7 @@ describe('StoriesComponent', () => {
     {
       id: 1,
       code: 'exito',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg',
       infoaditional: 'Hasta 9.6% de ganancia',
       description: 'Almacenes Éxito',
       orderby: 1,
@@ -58,8 +53,7 @@ describe('StoriesComponent', () => {
     {
       id: 14,
       code: 'movil-exito',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-movil-exito.svg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-movil-exito.svg',
       infoaditional: 'Ahora 10% de comisión',
       description: 'Móvil Éxito',
       orderby: 5,
@@ -68,8 +62,7 @@ describe('StoriesComponent', () => {
     {
       id: 3,
       code: 'seguros',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.svg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.svg',
       infoaditional: 'Hasta $32.000 de ganancia',
       description: 'Seguros Éxito',
       orderby: 3,
@@ -78,8 +71,7 @@ describe('StoriesComponent', () => {
     {
       id: 4,
       code: 'viajes',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-viajes.svg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-viajes.svg',
       infoaditional: 'Hasta $40.000 de ganancia',
       description: 'Viajes Éxito',
       orderby: 4,
@@ -88,8 +80,7 @@ describe('StoriesComponent', () => {
     {
       id: 5,
       code: 'wesura',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-wesura.svg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-wesura.svg',
       infoaditional: 'Hasta 12.000 de ganancia',
       description: 'Wesura',
       orderby: 6,
@@ -105,8 +96,7 @@ describe('StoriesComponent', () => {
         {
           description: 'e1',
           id: 43,
-          imageurl:
-            'https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210806082635.jpg',
+          imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210806082635.jpg',
           link: null,
           idbusiness: 1,
           infoaditional: null,
@@ -120,8 +110,7 @@ describe('StoriesComponent', () => {
         {
           description: 'e2',
           id: 44,
-          imageurl:
-            'https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210806082650.jpg',
+          imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210806082650.jpg',
           link: null,
           idbusiness: 1,
           infoaditional: null,
@@ -138,8 +127,7 @@ describe('StoriesComponent', () => {
         {
           description: 'e3112',
           id: 39,
-          imageurl:
-            'https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210805175214.jpg',
+          imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210805175214.jpg',
           link: null,
           idbusiness: 1,
           infoaditional: null,
@@ -219,8 +207,7 @@ describe('StoriesComponent', () => {
     let business = {
       id: 1,
       code: 'exito',
-      imageurl:
-        'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg',
       infoaditional: 'Hasta 9.6% de ganancia',
       description: 'Almacenes Éxito',
       orderby: 1,

@@ -31,11 +31,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   isEmployee: boolean;
   profile: boolean = false;
 
-  constructor(
-    private user: UserService,
-    public auth: AuthService,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private user: UserService, public auth: AuthService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.user.getProfile();
@@ -60,20 +56,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
     });
 
     setTimeout(() => {
-      document
-        .querySelector('.mat-tab-label[aria-posinset="1"]')
-        .classList.add('gtmPerfilClicCuentaClickam');
+      document.querySelector('.mat-tab-label[aria-posinset="1"]').classList.add('gtmPerfilClicCuentaClickam');
 
       if (document.querySelector('.mat-tab-label[aria-posinset="2"]')) {
-        document
-          .querySelector('.mat-tab-label[aria-posinset="2"]')
-          .classList.add('gtmPerfilClicInfoirmacionAdicionalClickam');
+        document.querySelector('.mat-tab-label[aria-posinset="2"]').classList.add('gtmPerfilClicInfoirmacionAdicionalClickam');
       }
 
       if (document.querySelector('.mat-tab-label[aria-posinset="3"]')) {
-        document
-          .querySelector('.mat-tab-label[aria-posinset="3"]')
-          .classList.add('gtmPerfilClicGestionarPagosClickam');
+        document.querySelector('.mat-tab-label[aria-posinset="3"]').classList.add('gtmPerfilClicGestionarPagosClickam');
       }
     }, 1000);
   }
@@ -105,29 +95,27 @@ export class ProfileComponent implements OnInit, OnDestroy {
       // RUT: files.fileRut,
     };
 
-    this.subscription = this.user
-      .uploadFiles(sendvalues)
-      .subscribe((res: ResponseService) => {
-        if (res.state !== 'Error') {
-          Swal.fire({
-            title: 'Carga de archivos correcta',
-            text: res.userMessage,
-            type: 'success',
-            confirmButtonText: 'Aceptar',
-            confirmButtonClass: 'upload-success',
-          }).then(() => {
-            this.reset(files);
-          });
-        } else {
-          Swal.fire({
-            title: 'Error en la Carga de archivos',
-            text: res.userMessage,
-            type: 'error',
-            confirmButtonText: 'Aceptar',
-            confirmButtonClass: 'upload-error',
-          });
-        }
-      });
+    this.subscription = this.user.uploadFiles(sendvalues).subscribe((res: ResponseService) => {
+      if (res.state !== 'Error') {
+        Swal.fire({
+          title: 'Carga de archivos correcta',
+          text: res.userMessage,
+          type: 'success',
+          confirmButtonText: 'Aceptar',
+          confirmButtonClass: 'upload-success',
+        }).then(() => {
+          this.reset(files);
+        });
+      } else {
+        Swal.fire({
+          title: 'Error en la Carga de archivos',
+          text: res.userMessage,
+          type: 'error',
+          confirmButtonText: 'Aceptar',
+          confirmButtonClass: 'upload-error',
+        });
+      }
+    });
   }
 
   public getUserData() {

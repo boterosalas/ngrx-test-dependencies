@@ -1,9 +1,7 @@
 <div class="faq-group">
   <div class="faq-group__header">
     <span class="faq-group__drag">
-      <mat-icon matSuffix class="mr-1 blue cursor-pointer" cdkDragHandle
-        >drag_indicator</mat-icon
-      >
+      <mat-icon matSuffix class="mr-1 blue cursor-pointer" cdkDragHandle>drag_indicator</mat-icon>
     </span>
 
     <span class="faq-group__description">
@@ -13,10 +11,7 @@
     </span>
     <div class="faq-group__actions">
       <i class="tio-add style-icon cursor-pointer" (click)="addFaqItem()"></i>
-      <i
-        class="tio-edit style-icon cursor-pointer"
-        (click)="editFaqGroup()"
-      ></i>
+      <i class="tio-edit style-icon cursor-pointer" (click)="editFaqGroup()"></i>
 
       <img
         *ngIf="section.items === null"
@@ -27,11 +22,7 @@
       />
     </div>
   </div>
-  <div
-    class="faq__content"
-    cdkDropList
-    (cdkDropListDropped)="dropItems($event)"
-  >
+  <div class="faq__content" cdkDropList (cdkDropListDropped)="dropItems($event)">
     <app-faq-item
       *ngFor="let faq of section.items"
       [faq]="faq"

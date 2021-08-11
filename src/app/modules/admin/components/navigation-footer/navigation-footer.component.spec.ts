@@ -2,12 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {
-  MatDialog,
-  MatDialogModule,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material';
+import { MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -44,20 +39,11 @@ describe('NavigationFooterComponent', () => {
   let component: NavigationFooterComponent;
   let fixture: ComponentFixture<NavigationFooterComponent>;
 
-  const mockDialog = jasmine.createSpyObj('MatDialog', [
-    'open',
-    'beforeClosed',
-  ]);
+  const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'beforeClosed']);
 
   const matDialog = new MatDialogMock();
 
-  const mockDialogRef = jasmine.createSpyObj('MatDialogRef', [
-    'close',
-    'afterClosed',
-    'componentInstance',
-    'event ',
-    'beforeClosed',
-  ]);
+  const mockDialogRef = jasmine.createSpyObj('MatDialogRef', ['close', 'afterClosed', 'componentInstance', 'event ', 'beforeClosed']);
 
   const mockContentService = jasmine.createSpyObj('ContentService', [
     'getFooter',

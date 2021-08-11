@@ -784,9 +784,7 @@ table {
     padding-bottom: 0;
     overflow: hidden;
     min-height: 600px;
-    background: url('/assets/img/gamification/bg-home-gamification.svg')
-        no-repeat,
-      url('/assets/img/gamification/bg-form.svg') no-repeat;
+    background: url('/assets/img/gamification/bg-home-gamification.svg') no-repeat, url('/assets/img/gamification/bg-form.svg') no-repeat;
     background-position: bottom right;
     background-size: 35%, contain;
     .mat-card {
@@ -1350,13 +1348,11 @@ th.mat-header-cell {
 // }
 
 .mat-raised-button:not([class*='mat-elevation-z']) {
-  box-shadow: 0 3px 1px -2px rgba(61, 47, 86, 0.18),
-    0 2px 2px 0 rgba(61, 47, 86, 0.18), 0 1px 5px 0 rgba(61, 47, 86, 0.18);
+  box-shadow: 0 3px 1px -2px rgba(61, 47, 86, 0.18), 0 2px 2px 0 rgba(61, 47, 86, 0.18), 0 1px 5px 0 rgba(61, 47, 86, 0.18);
 }
 
 .mat-raised-button[disabled]:not([class*='mat-elevation-z']) {
-  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(0, 0, 0, 0.14),
-    0 0 0 0 rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12) !important;
   color: #fff;
   background: #b5b8bc;
 }
@@ -1394,9 +1390,7 @@ span.orange-border {
 
 .register-container input,
 .register-container .mat-select-value,
-.register-container
-  .mat-form-field-appearance-legacy
-  .mat-form-field-underline {
+.register-container .mat-form-field-appearance-legacy .mat-form-field-underline {
   color: #000 !important;
 }
 
@@ -1991,56 +1985,47 @@ app-menu-help-center {
 .card {
   &-0 {
     .mat-card {
-      background: transparent linear-gradient(90deg, #735cf2 0%, #968bf4 100%)
-        0% 0% no-repeat padding-box;
+      background: transparent linear-gradient(90deg, #735cf2 0%, #968bf4 100%) 0% 0% no-repeat padding-box;
     }
   }
   &-1 {
     .mat-card {
-      background: transparent linear-gradient(90deg, #5f71da 0%, #608ddd 100%)
-        0% 0% no-repeat padding-box;
+      background: transparent linear-gradient(90deg, #5f71da 0%, #608ddd 100%) 0% 0% no-repeat padding-box;
     }
   }
   &-2 {
     .mat-card {
-      background: transparent linear-gradient(90deg, #7b54c4 0%, #9a6eeb 100%)
-        0% 0% no-repeat padding-box;
+      background: transparent linear-gradient(90deg, #7b54c4 0%, #9a6eeb 100%) 0% 0% no-repeat padding-box;
     }
   }
   &-3 {
     .mat-card {
-      background: transparent linear-gradient(90deg, #92d4d4 0%, #70c2cb 100%)
-        0% 0% no-repeat padding-box;
+      background: transparent linear-gradient(90deg, #92d4d4 0%, #70c2cb 100%) 0% 0% no-repeat padding-box;
     }
   }
   &-4 {
     .mat-card {
-      background: transparent linear-gradient(90deg, #ffacf6 0%, #fd92f1 100%)
-        0% 0% no-repeat padding-box;
+      background: transparent linear-gradient(90deg, #ffacf6 0%, #fd92f1 100%) 0% 0% no-repeat padding-box;
     }
   }
   &-5 {
     .mat-card {
-      background: transparent linear-gradient(90deg, #ff8646 0%, #f7bc80 100%)
-        0% 0% no-repeat padding-box;
+      background: transparent linear-gradient(90deg, #ff8646 0%, #f7bc80 100%) 0% 0% no-repeat padding-box;
     }
   }
   &-6 {
     .mat-card {
-      background: transparent linear-gradient(90deg, #fcca90 0%, #ffb664 100%)
-        0% 0% no-repeat padding-box;
+      background: transparent linear-gradient(90deg, #fcca90 0%, #ffb664 100%) 0% 0% no-repeat padding-box;
     }
   }
   &-7 {
     .mat-card {
-      background: transparent linear-gradient(90deg, #a3bcf9 0%, #868ff8 100%)
-        0% 0% no-repeat padding-box;
+      background: transparent linear-gradient(90deg, #a3bcf9 0%, #868ff8 100%) 0% 0% no-repeat padding-box;
     }
   }
   &-8 {
     .mat-card {
-      background: transparent linear-gradient(90deg, #ff9696 0%, #ff7c7c 100%)
-        0% 0% no-repeat padding-box;
+      background: transparent linear-gradient(90deg, #ff9696 0%, #ff7c7c 100%) 0% 0% no-repeat padding-box;
     }
   }
 }
@@ -2127,23 +2112,19 @@ app-menu-help-center {
   }
 
   .perfil-completo {
-    background: transparent linear-gradient(180deg, #ff8686 0%, #fd5555 100%) 0%
-      0% no-repeat padding-box;
+    background: transparent linear-gradient(180deg, #ff8686 0%, #fd5555 100%) 0% 0% no-repeat padding-box;
   }
 
   .comprador-inteligente {
-    background: transparent linear-gradient(180deg, #958af3 0%, #735cf2 100%) 0%
-      0% no-repeat padding-box;
+    background: transparent linear-gradient(180deg, #958af3 0%, #735cf2 100%) 0% 0% no-repeat padding-box;
   }
 
   .vendedor-innato {
-    background: transparent linear-gradient(180deg, #91d3d3 0%, #70c2cb 100%) 0%
-      0% no-repeat padding-box;
+    background: transparent linear-gradient(180deg, #91d3d3 0%, #70c2cb 100%) 0% 0% no-repeat padding-box;
   }
 
   .reclutador-estrella {
-    background: transparent linear-gradient(180deg, #608ddd 0%, #5f72da 100%) 0%
-      0% no-repeat padding-box;
+    background: transparent linear-gradient(180deg, #608ddd 0%, #5f72da 100%) 0% 0% no-repeat padding-box;
   }
 }
 
@@ -2201,8 +2182,7 @@ app-menu-help-center {
   }
 
   .levcard {
-    background: transparent linear-gradient(180deg, #71c2cb 0%, #90d2d2 100%) 0%
-      0% no-repeat padding-box;
+    background: transparent linear-gradient(180deg, #71c2cb 0%, #90d2d2 100%) 0% 0% no-repeat padding-box;
     color: #ffffff;
   }
 }
@@ -2213,8 +2193,7 @@ app-menu-help-center {
   }
 
   .levcard {
-    background: transparent linear-gradient(180deg, #735cf2 0%, #9387f2 100%) 0%
-      0% no-repeat padding-box;
+    background: transparent linear-gradient(180deg, #735cf2 0%, #9387f2 100%) 0% 0% no-repeat padding-box;
     color: #ffffff;
   }
 }
@@ -2225,8 +2204,7 @@ app-menu-help-center {
   }
 
   .levcard {
-    background: transparent linear-gradient(180deg, #fd6a6a 0%, #ff7c7c 100%) 0%
-      0% no-repeat padding-box;
+    background: transparent linear-gradient(180deg, #fd6a6a 0%, #ff7c7c 100%) 0% 0% no-repeat padding-box;
     color: #ffffff;
   }
 }
@@ -2237,8 +2215,7 @@ app-menu-help-center {
   }
 
   .levcard {
-    background: transparent linear-gradient(180deg, #5f72da 0%, #5f8bdc 100%) 0%
-      0% no-repeat padding-box;
+    background: transparent linear-gradient(180deg, #5f72da 0%, #5f8bdc 100%) 0% 0% no-repeat padding-box;
     color: #ffffff;
   }
 }
@@ -2451,8 +2428,7 @@ h3#bussiness2 {
   background-color: transparent !important;
 }
 
-.check-transparent.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent
-  .mat-ripple-element,
+.check-transparent.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element,
 .check-transparent .mat-ripple-element {
   opacity: 0.1;
   background-color: black;

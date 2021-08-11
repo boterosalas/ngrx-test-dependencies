@@ -16,11 +16,7 @@ describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
 
-  let mockLinksService = jasmine.createSpyObj('LinksService', [
-    'getResume',
-    'getTotalKPI',
-    'getBussinessKPI',
-  ]);
+  let mockLinksService = jasmine.createSpyObj('LinksService', ['getResume', 'getTotalKPI', 'getBussinessKPI']);
 
   let kpi = {
     historicalCommissionValue: 1809775.3,

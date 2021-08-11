@@ -19,15 +19,8 @@ import { ConfigurationsComponent } from './configurations.component';
 describe('ConfigurationsComponent', () => {
   let component: ConfigurationsComponent;
   let fixture: ComponentFixture<ConfigurationsComponent>;
-  const mockAuthService = jasmine.createSpyObj('AuthService', [
-    'getPermisionByUser',
-  ]);
-  const mockUserService = jasmine.createSpyObj('UserService', [
-    'getPermision',
-    'savePermision',
-    'deleteUserAdmin',
-    'addUserAdmin',
-  ]);
+  const mockAuthService = jasmine.createSpyObj('AuthService', ['getPermisionByUser']);
+  const mockUserService = jasmine.createSpyObj('UserService', ['getPermision', 'savePermision', 'deleteUserAdmin', 'addUserAdmin']);
   let responseUser = [
     {
       userid: 1,

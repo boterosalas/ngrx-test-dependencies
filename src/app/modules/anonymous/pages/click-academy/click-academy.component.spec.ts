@@ -16,9 +16,7 @@ describe('ClickAcademyComponent', () => {
   let component: ClickAcademyComponent;
   let fixture: ComponentFixture<ClickAcademyComponent>;
 
-  const mockUserService = jasmine.createSpyObj('UserService', [
-    'saveOnboarding',
-  ]);
+  const mockUserService = jasmine.createSpyObj('UserService', ['saveOnboarding']);
 
   const saveOnboardingOk = {
     state: 'Success',

@@ -19,10 +19,7 @@ describe('DialogCategoryComponent', () => {
   let fixture: ComponentFixture<DialogImagePlayerComponent>;
   let component2: DialogImagePlayerComponent;
   let fixture2: ComponentFixture<DialogImagePlayerComponent>;
-  const mockContentService = jasmine.createSpyObj('ContentService', [
-    'addCategory',
-    'downloadF',
-  ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['addCategory', 'downloadF']);
   const dialogMock = {
     close: () => {},
   };

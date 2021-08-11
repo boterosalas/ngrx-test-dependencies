@@ -9,10 +9,7 @@ import { MasterDataService } from 'src/app/services/master-data.service';
   styleUrls: ['./terms-and-conditions.component.scss'],
 })
 export class TermsAndConditionsComponent implements OnInit {
-  constructor(
-    private personalInfo: MasterDataService,
-    private link: LinksService
-  ) {}
+  constructor(private personalInfo: MasterDataService, private link: LinksService) {}
   contentTerminos: any;
   contentProteccion: any;
   contentTransparencia: any;
@@ -42,18 +39,10 @@ export class TermsAndConditionsComponent implements OnInit {
 
   public addTagsclass() {
     setTimeout(() => {
-      document
-        .querySelector('.mat-tab-label[aria-posinset="1"]')
-        .classList.add('gtmTerminosCondicionesClicTerminosLegales');
-      document
-        .querySelector('.mat-tab-label[aria-posinset="2"]')
-        .classList.add('gtmTerminosCondicionesClicEmprendedor');
-      document
-        .querySelector('.mat-tab-label[aria-posinset="3"]')
-        .classList.add('gtmTerminosCondicionesClicProteccionDatos');
-      document
-        .querySelector('.mat-tab-label[aria-posinset="4"]')
-        .classList.add('gtmTerminosCondicionesClicProgramaReferidos');
+      document.querySelector('.mat-tab-label[aria-posinset="1"]').classList.add('gtmTerminosCondicionesClicTerminosLegales');
+      document.querySelector('.mat-tab-label[aria-posinset="2"]').classList.add('gtmTerminosCondicionesClicEmprendedor');
+      document.querySelector('.mat-tab-label[aria-posinset="3"]').classList.add('gtmTerminosCondicionesClicProteccionDatos');
+      document.querySelector('.mat-tab-label[aria-posinset="4"]').classList.add('gtmTerminosCondicionesClicProgramaReferidos');
     }, 1000);
   }
   getTerms() {

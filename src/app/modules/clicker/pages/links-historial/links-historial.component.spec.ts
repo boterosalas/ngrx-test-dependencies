@@ -15,9 +15,7 @@ describe('LinksHistorialComponent', () => {
   let component: LinksHistorialComponent;
   let fixture: ComponentFixture<LinksHistorialComponent>;
 
-  const mockLinksService = jasmine.createSpyObj('LinksService', [
-    'getLinkHistory',
-  ]);
+  const mockLinksService = jasmine.createSpyObj('LinksService', ['getLinkHistory']);
 
   let dataHistory = {
     state: 'Success',

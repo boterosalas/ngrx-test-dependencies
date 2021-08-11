@@ -24,12 +24,7 @@ describe('LoginformComponent', () => {
 
   const mockLinksService = jasmine.createSpyObj('LinksService', ['getAmount']);
 
-  const mockUtilsService = jasmine.createSpyObj('UtilsService', [
-    'hideloginForm',
-    'showRegisterForm',
-    'showForgot',
-    'showActivate',
-  ]);
+  const mockUtilsService = jasmine.createSpyObj('UtilsService', ['hideloginForm', 'showRegisterForm', 'showForgot', 'showActivate']);
 
   let amount = {
     amountsCommission: 10000,

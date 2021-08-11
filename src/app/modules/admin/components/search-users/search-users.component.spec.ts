@@ -14,13 +14,7 @@ describe('SearchUsersComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [SearchUsersComponent],
-      imports: [
-        ReactiveFormsModule,
-        FormsModule,
-        AppMaterialModule,
-        TranslateModule.forRoot({}),
-        BrowserAnimationsModule,
-      ],
+      imports: [ReactiveFormsModule, FormsModule, AppMaterialModule, TranslateModule.forRoot({}), BrowserAnimationsModule],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));

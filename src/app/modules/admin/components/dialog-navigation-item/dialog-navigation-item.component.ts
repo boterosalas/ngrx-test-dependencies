@@ -43,10 +43,7 @@ export class DialogNavigationItemComponent implements OnInit {
         id: [this.data.id],
         idseccion: [this.data.idseccion || this.data.idgrupo],
         link: [this.data.link || this.data.route, Validators.required],
-        description: [
-          this.data.description || this.data.name,
-          Validators.required,
-        ],
+        description: [this.data.description || this.data.name, Validators.required],
         icon: [this.data.icon],
       });
     } else {
