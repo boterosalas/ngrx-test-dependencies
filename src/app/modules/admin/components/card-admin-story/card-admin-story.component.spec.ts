@@ -42,7 +42,7 @@ describe('CardAdminStoryComponent', () => {
 
   const mockContentService = jasmine.createSpyObj('ContentService', ['deleteStories', 'getBusiness']);
 
-  let allBusiness = [
+  const allBusiness = [
     {
       id: 1,
       code: 'exito',
@@ -194,14 +194,4 @@ describe('CardAdminStoryComponent', () => {
     expect(mockContentService.getBusiness).toHaveBeenCalled();
   });
 
-  it('check change', () => {
-    let event = {
-      checked: false,
-      source: {
-        value: 1,
-      },
-    };
-    fixture.detectChanges();
-    component.onCheckChange(event);
-  });
 });

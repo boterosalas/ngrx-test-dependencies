@@ -1,14 +1,14 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { RemoveTagsPipe } from 'src/app/pipes/remove-tags.pipe';
-import { ContentService } from 'src/app/services/content.service';
 import { DialogDeleteNotificationComponent } from '../dialog-delete-notification/dialog-delete-notification.component';
 
 import { CardNotificationComponent } from './card-notification.component';
@@ -21,16 +21,30 @@ export class MatDialogMock {
   }
 }
 
-xdescribe('CardNotificationComponent', () => {
+describe('CardNotificationComponent', () => {
   let component: CardNotificationComponent;
   let fixture: ComponentFixture<CardNotificationComponent>;
 
-  let router = {
+  const router = {
     navigate: jasmine.createSpy('navigate'),
   };
 
-  let data = {
-    url: 'https://www.google.com',
+  const data = {
+    id: 7,
+    datepublish: '2021-07-27T09:55:00',
+    datestart: null,
+    dateend: null,
+    filter: 'PERSONALIZADO',
+    idnotification: 8,
+    content: 'Holaa prueba excel',
+    date: '2021-07-27T09:55:41',
+    publish: true,
+    title: '¡NO OLVIDES ACTUALIZAR TU INFORMACIÓN BANCARIA!',
+    userid: 0,
+    viewed: false,
+    dateviewed: null,
+    url: 'https://webclickamqa.blob.core.windows.net/files-excel/filter-notifications/20210727095539_ImportarNotificaciones.xlsx',
+    adminuser: 'Super  Admin'
   };
 
   const matDialog = new MatDialogMock();
@@ -44,11 +58,11 @@ xdescribe('CardNotificationComponent', () => {
           provide: Router,
           useValue: router,
         },
-        { provide: MatDialogRef, useValue: data },
+        { provide: MatDialogRef, useValue: MatDialogMock },
         { provide: MAT_DIALOG_DATA, useValue: data },
-        { provide: MatDialogRef, useValue: matDialog },
+        { provide: MatDialog, useValue: matDialog },
       ],
-      schemas: [NO_ERRORS_SCHEMA],
+      schemas: [],
     })
       .overrideModule(BrowserDynamicTestingModule, {
         set: {
@@ -60,8 +74,8 @@ xdescribe('CardNotificationComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CardNotificationComponent);
-    component.url = '';
     component = fixture.componentInstance;
+    component.notification = data;
     fixture.detectChanges();
   });
 
@@ -70,15 +84,12 @@ xdescribe('CardNotificationComponent', () => {
   });
 
   it('Delete notification', () => {
-    let notification = {
-      idnotification: '1',
-    };
-    component.deleteNotification(notification);
-    expect(notification.idnotification).not.toBeUndefined();
+    component.deleteNotification(data.idnotification);
+    expect(data.idnotification).not.toBeUndefined();
   });
 
   it('edit notification', () => {
-    let notification = {
+    const notification = {
       idnotification: '1',
     };
     component.editNotification(notification);
@@ -86,13 +97,8 @@ xdescribe('CardNotificationComponent', () => {
   });
 
   it('Download file', () => {
-    let notification = {
-      url: 'https://www.google.com',
-    };
-    component.downloadFile(notification);
+    component.downloadFile(data.url);
     expect(window.open).toBeDefined();
   });
 });
-function of(arg0: boolean) {
-  throw new Error('Function not implemented.');
-}
+

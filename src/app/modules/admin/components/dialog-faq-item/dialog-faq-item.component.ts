@@ -5,6 +5,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { Subscription } from 'rxjs';
 import { ResponseService } from 'src/app/interfaces/response';
 import { ContentService } from 'src/app/services/content.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-dialog-faq-item',
@@ -16,52 +17,14 @@ export class DialogFaqItemComponent implements OnInit, OnDestroy {
   item: any;
 
   faqItemForm: FormGroup;
-  configurarEditor: AngularEditorConfig = {
-    editable: true,
-    spellcheck: true,
-    height: '300px',
-    minHeight: '0',
-    maxHeight: 'auto',
-    width: '720px',
-    minWidth: '0',
-    translate: 'yes',
-    showToolbar: true,
-    placeholder: 'Escriba su articulo...',
-    toolbarHiddenButtons: [
-      [
-        'heading',
-        'insertImage',
-        'insertVideo',
-        'customClasses',
-        'removeFormat',
-        'fontName',
-        'backgroundColor',
-        'insertHorizontalRule',
-        'toggleEditorMode',
-        'undo',
-        'redo',
-        'strikeThrough',
-        'subscript',
-        'superscript',
-        'justifyLeft',
-        'justifyCenter',
-        'justifyRight',
-        'justifyFull',
-      ],
-    ],
-    defaultParagraphSeparator: 'p',
-    defaultFontName: '',
-    defaultFontSize: '',
-    enableToolbar: true,
-    sanitize: true,
-    toolbarPosition: 'top',
-  };
+  configurarEditor = this.utils.configurarEditor;
 
   constructor(
     private content: ContentService,
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private utils: UtilsService
   ) {}
 
   ngOnInit() {

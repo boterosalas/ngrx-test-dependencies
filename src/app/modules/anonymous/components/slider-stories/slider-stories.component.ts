@@ -36,6 +36,33 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
     });
   }
 
+  private getExtension(nameFile: string) {
+    if (nameFile) {
+      const splitExt = nameFile.split('.');
+      return splitExt[splitExt.length - 1].toLocaleLowerCase();
+    }
+
+    return null;
+  }
+
+  public openDialogStories(index: number = 0) {
+    this.dialog.open(DialogStoriesComponent, {
+      data: {
+        stories: this.stories,
+        storiesBusiness: this.storiesBusiness,
+        id: index.toString(),
+        showArrows: true,
+        userId: this.userId,
+        showCarousel: true,
+      },
+      panelClass: 'dialog-stories',
+      hasBackdrop: false,
+      width: '100vw',
+      maxWidth: '100vw',
+      height: '100vh',
+    });
+  }
+
   public getStories() {
     this.content.getStories(false).subscribe((data: ResponseService) => {
       if (data.state === 'Success') {
@@ -81,32 +108,6 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
     });
   }
 
-  private getExtension(nameFile: string) {
-    if (nameFile) {
-      const splitExt = nameFile.split('.');
-      return splitExt[splitExt.length - 1].toLocaleLowerCase();
-    }
-
-    return null;
-  }
-
-  public openDialogStories(index: number = 0) {
-    this.dialog.open(DialogStoriesComponent, {
-      data: {
-        stories: this.stories,
-        storiesBusiness: this.storiesBusiness,
-        id: index.toString(),
-        showArrows: true,
-        userId: this.userId,
-        showCarousel: true,
-      },
-      panelClass: 'dialog-stories',
-      hasBackdrop: false,
-      width: '100vw',
-      maxWidth: '100vw',
-      height: '100vh',
-    });
-  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

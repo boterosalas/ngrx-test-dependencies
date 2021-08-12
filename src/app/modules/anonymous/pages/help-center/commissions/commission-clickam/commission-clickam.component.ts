@@ -8,34 +8,34 @@ import { Component, OnInit } from '@angular/core';
 export class CommissionClickamComponent implements OnInit {
   commission = [
     {
-      name: '¿Qué es la ruta de compra Clickam?',
-      route: '/centro-de-ayuda/comisiones/que-es-la-ruta-de-compra-clickam',
-      icon: '/assets/img/ayuda/comisiones/ruta-de-compra.svg',
+      title: '¿Qué es la ruta de compra Clickam?',
+      internalRoute: '/centro-de-ayuda/comisiones/que-es-la-ruta-de-compra-clickam',
+      comissionIcon: '/assets/img/ayuda/comisiones/ruta-de-compra.svg',
     },
     {
-      name: '¿Cómo cruzan la venta?',
-      route: '/centro-de-ayuda/comisiones/como-cruzan-la-venta',
-      icon: '/assets/img/ayuda/comisiones/como-se-cruzan-ventas.svg',
+      title: '¿Cómo cruzan la venta?',
+      internalRoute: '/centro-de-ayuda/comisiones/como-cruzan-la-venta',
+      comissionIcon: '/assets/img/ayuda/comisiones/como-se-cruzan-ventas.svg',
     },
     {
-      name: '¿Cuáles son las fechas de pago?',
-      route: '/centro-de-ayuda/comisiones/cuales-son-las-fechas-de-pago',
-      icon: '/assets/img/ayuda/comisiones/fechas-de-pago.svg',
+      title: '¿Cuáles son las fechas de pago?',
+      internalRoute: '/centro-de-ayuda/comisiones/cuales-son-las-fechas-de-pago',
+      comissionIcon: '/assets/img/ayuda/comisiones/fechas-de-pago.svg',
     },
     {
-      name: '¿Por qué no me llegó la comisión?',
-      route: '/centro-de-ayuda/comisiones/porque-no-me-llego-la-comision',
-      icon: '/assets/img/ayuda/comisiones/comisiones-compras.svg',
+      title: '¿Por qué no me llegó la comisión?',
+      internalRoute: '/centro-de-ayuda/comisiones/porque-no-me-llego-la-comision',
+      comissionIcon: '/assets/img/ayuda/comisiones/comisiones-compras.svg',
     },
     {
-      name: '¿Cómo es el proceso de pago?',
-      route: '/centro-de-ayuda/comisiones/como-es-el-proceso-de-pago',
-      icon: '/assets/img/ayuda/comisiones/proceso-de-pago.svg',
+      title: '¿Cómo es el proceso de pago?',
+      internalRoute: '/centro-de-ayuda/comisiones/como-es-el-proceso-de-pago',
+      comissionIcon: '/assets/img/ayuda/comisiones/proceso-de-pago.svg',
     },
     {
-      name: '¿Cuándo se considera una compra efectiva por el negocio?',
-      route: '/centro-de-ayuda/comisiones/cuando-se-considera-una-compra-efectiva-por-el-negocio',
-      icon: '/assets/img/ayuda/comisiones/compra-efectiva.svg',
+      title: '¿Cuándo se considera una compra efectiva por el negocio?',
+      internalRoute: '/centro-de-ayuda/comisiones/cuando-se-considera-una-compra-efectiva-por-el-negocio',
+      comissionIcon: '/assets/img/ayuda/comisiones/compra-efectiva.svg',
     },
   ];
 
