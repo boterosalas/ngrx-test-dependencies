@@ -84,7 +84,7 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
   htmlContent: string;
   disabledButtonEraser = true;
   datePublicationHolder: string;
-  disabledButtonPublication  = true;
+  disabledButtonPublication = true;
   contadorDates = 0;
 
   ngOnInit() {
@@ -117,39 +117,7 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
       this.disabledButtonEraser = true;
     });
   }
-  timeFormat(time) {
-    const hour = time.split(':')[0];
-    const minute = time.split(':')[1];
 
-    if (hour >= 12) {
-      if (hour === 12) {
-        const h = hour;
-        const m = minute + ' PM';
-        return h + ':' + m;
-      } else {
-        const h = hour - 12;
-        const m = minute + ' PM';
-        return h + ':' + m;
-      }
-    } else {
-      const h = parseInt(hour);
-      return h + ':' + minute + ' AM';
-    }
-  }
-  private getExtension(nameFile: string, getSize: number) {
-    const splitExt = nameFile.split('.');
-    const getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
-    this.validFormat = false;
-    this.showErrorCert = true;
-    if (getExt === 'jpg') {
-      this.validFormat = true;
-      this.showErrorCert = false;
-    }
-    if (getSize / 1000 > 300) {
-      this.validFormat = false;
-      this.showErrorCert = true;
-    }
-  }
   readURL(event: any): void {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
@@ -166,6 +134,7 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
       }
     }
   }
+
   saveeraser() {
     const datePublication = moment(this.datePublication).format('YYYY-MM-DD');
     let hour;
@@ -239,28 +208,19 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
       }
     });
   }
-  activate() {
-    if (this.datePublication !== '' || this.hourDate !== '') {
-      this.disabledButtonEraser = false;
+
+  private getExtension(nameFile: string, getSize: number) {
+    const splitExt = nameFile.split('.');
+    const getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
+    this.validFormat = false;
+    this.showErrorCert = true;
+    if (getExt === 'jpg') {
+      this.validFormat = true;
+      this.showErrorCert = false;
     }
-    if (this.datePublication !== '' && this.hourDate !== '') {
-      this.disabledButtonPublication = false;
-    }
-    if (this.nameFileCert === '') {
-      this.disabledButtonPublication = true;
-      this.disabledButtonEraser = true;
-    }
-  }
-  hourChange(horu) {
-    const data = new Date();
-    const dataH = moment(data).format('YYYY-MM-DD');
-    const dataOp = moment(horu.value).format('YYYY-MM-DD');
-    if (dataH === dataOp) {
-      this.hourDate = '';
-      this.minHours = moment(data).format('hh:mm A');
-    } else {
-      this.hourDate = '';
-      this.minHours = '12:00 AM';
+    if (getSize / 1000 > 300) {
+      this.validFormat = false;
+      this.showErrorCert = true;
     }
   }
 
@@ -285,6 +245,53 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
           return hour;
         }
       }
+    }
+  }
+
+
+  activate() {
+    if (this.datePublication !== '' || this.hourDate !== '') {
+      this.disabledButtonEraser = false;
+    }
+    if (this.datePublication !== '' && this.hourDate !== '') {
+      this.disabledButtonPublication = false;
+    }
+    if (this.nameFileCert === '') {
+      this.disabledButtonPublication = true;
+      this.disabledButtonEraser = true;
+    }
+  }
+
+  hourChange(horu) {
+    const data = new Date();
+    const dataH = moment(data).format('YYYY-MM-DD');
+    const dataOp = moment(horu.value).format('YYYY-MM-DD');
+    if (dataH === dataOp) {
+      this.hourDate = '';
+      this.minHours = moment(data).format('hh:mm A');
+    } else {
+      this.hourDate = '';
+      this.minHours = '12:00 AM';
+    }
+  }
+
+  timeFormat(time) {
+    const hour = time.split(':')[0];
+    const minute = time.split(':')[1];
+
+    if (hour >= 12) {
+      if (hour === 12) {
+        const h = hour;
+        const m = minute + ' PM';
+        return h + ':' + m;
+      } else {
+        const h = hour - 12;
+        const m = minute + ' PM';
+        return h + ':' + m;
+      }
+    } else {
+      const h = parseInt(hour);
+      return h + ':' + minute + ' AM';
     }
   }
 
