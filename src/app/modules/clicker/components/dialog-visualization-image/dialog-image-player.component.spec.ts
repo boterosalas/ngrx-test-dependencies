@@ -13,26 +13,29 @@ import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ContentService } from 'src/app/services/content.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 describe('DialogCategoryComponent', () => {
   let component: DialogImagePlayerComponent;
   let fixture: ComponentFixture<DialogImagePlayerComponent>;
-  let component2: DialogImagePlayerComponent;
-  let fixture2: ComponentFixture<DialogImagePlayerComponent>;
+
   const mockContentService = jasmine.createSpyObj('ContentService', ['addCategory', 'downloadF']);
   const dialogMock = {
     close: () => {},
   };
+
   const resp = {
     state: 'Success',
     userMessage: 'se ha actualizado el email',
     objectResponse: [],
   };
+
   const audit = {
     state: 'success',
     userMessage: 'se ha enviado un correo',
     objectResponse: [{}],
   };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [DialogImagePlayerComponent, TruncatePipe],
@@ -56,6 +59,7 @@ describe('DialogCategoryComponent', () => {
         }),
       ],
       providers: [
+        UtilsService,
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: dialogMock },
         { provide: ContentService, useValue: mockContentService },
@@ -66,18 +70,24 @@ describe('DialogCategoryComponent', () => {
     mockContentService.downloadF.and.returnValue(of(audit));
   }));
   beforeEach(() => {
-    //spyOn(String.prototype, "split");
     fixture = TestBed.createComponent(DialogImagePlayerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
   it('should create', () => {
     expect(component).toBeTruthy();
-    component.download('string', 'video/mp4');
-    component.download('string', 'image/jpg');
-    component.download('string', 'application/zip');
-
-    let datos = true;
-    expect(datos).toBeTruthy();
   });
+
+  it('onNoClick', () => {
+    component.onNoClick();
+    expect(component).toBeTruthy();
+  });
+
+  it('download file', () => {
+    component.downloadFile();
+    expect(mockContentService.downloadF).toHaveBeenCalled();
+  });
+
+
 });

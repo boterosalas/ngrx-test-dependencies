@@ -4,6 +4,7 @@ import { AuthService } from './auth.service';
 import { UserService } from './user.service';
 import decode from 'jwt-decode';
 import { BehaviorSubject } from 'rxjs';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +31,47 @@ export class UtilsService {
   @Output() changeRegister: EventEmitter<boolean> = new EventEmitter();
   @Output() showForgotFormEmit: EventEmitter<boolean> = new EventEmitter();
   @Output() showActivateFormEmit: EventEmitter<boolean> = new EventEmitter();
+
+  configurarEditor: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '300px',
+    minHeight: '0',
+    maxHeight: 'auto',
+    width: '720px',
+    minWidth: '0',
+    translate: 'yes',
+    showToolbar: true,
+    placeholder: 'Escriba su articulo...',
+    toolbarHiddenButtons: [
+      [
+        'heading',
+        'insertImage',
+        'insertVideo',
+        'customClasses',
+        'removeFormat',
+        'fontName',
+        'backgroundColor',
+        'insertHorizontalRule',
+        'toggleEditorMode',
+        'undo',
+        'redo',
+        'strikeThrough',
+        'subscript',
+        'superscript',
+        'justifyLeft',
+        'justifyCenter',
+        'justifyRight',
+        'justifyFull',
+      ],
+    ],
+    defaultParagraphSeparator: 'p',
+    defaultFontName: '',
+    defaultFontSize: '',
+    enableToolbar: true,
+    sanitize: true,
+    toolbarPosition: 'top',
+  };
 
   showloginForm() {
     this.isOpen = true;
@@ -141,4 +183,24 @@ export class UtilsService {
       ? militaryTime[0] - 12 + ':' + militaryTime[1] + ' PM'
       : militaryTime[0] + ':' + militaryTime[1] + ' AM';
   }
+
+  public download(data, type) {
+    const blob = new Blob([data], { type: type });
+    const url = window.URL.createObjectURL(blob);
+    const downloadLink = document.createElement('a');
+    if (type.includes('zip')) {
+      downloadLink.href = url;
+      downloadLink.download = 'archivo.zip';
+      downloadLink.click();
+    } else if (type.includes('jpg')) {
+      downloadLink.href = url;
+      downloadLink.download = 'archivo.jpg';
+      downloadLink.click();
+    } else if (type.includes('mp4')) {
+      downloadLink.href = url;
+      downloadLink.download = 'archivo.mp4';
+      downloadLink.click();
+    }
+  }
+
 }
