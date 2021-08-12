@@ -197,6 +197,29 @@ export class BussinessComponent implements OnInit, OnDestroy {
     ];
   }
 
+  /**
+   * Metodo para dalvar los links reference
+   */
+
+     public saveLinkReference() {
+      const dataSaveLinkReference = {
+        link: this.url,
+        identification: this.identification,
+        plu: this.plu,
+        business: this.business,
+        creationDate: this.date,
+        identificationcustomer: this.idCustomerForm.controls.identification.value,
+      };
+      this.subscription = this.links.saveLink(dataSaveLinkReference).subscribe((resp: ResponseService) => {
+        if (resp.state === 'Error') {
+          this.openSnackBar(resp.userMessage, 'cerrar');
+        } else {
+          this.openSnackBar(resp.userMessage, 'cerrar');
+          this.dialog.dismiss();
+        }
+      });
+    }
+
   formatContent(content: string) {
     if (content && content.length > 250) {
       return `${content.substr(0, 250)}...`;
@@ -233,56 +256,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
     } else {
       this.router.navigate(['./']);
     }
-  }
-
-  /**
-   * Metodo para salvar los links generados
-   */
-
-  public saveLink(param?: string) {
-    const dataSaveLink = {
-      link: this.url,
-      identification: this.identification,
-      plu: this.plu,
-      business: this.business,
-      creationDate: this.date,
-      identificationcustomer: this.idCustomerForm.controls.identification.value,
-    };
-
-    this.subscription = this.links.saveLink(dataSaveLink).subscribe((resp: ResponseService) => {
-      this.urlshorten = resp.objectResponse.link;
-      this.enableCopy = false;
-      if (param === 'assured') {
-        if (resp.state === 'Error') {
-          this.openSnackBar(resp.userMessage, 'cerrar');
-          this.showForm = false;
-          this.showFormCustomer = true;
-        }
-      }
-    });
-  }
-
-  /**
-   * Metodo para dalvar los links reference
-   */
-
-  public saveLinkReference() {
-    const dataSaveLinkReference = {
-      link: this.url,
-      identification: this.identification,
-      plu: this.plu,
-      business: this.business,
-      creationDate: this.date,
-      identificationcustomer: this.idCustomerForm.controls.identification.value,
-    };
-    this.subscription = this.links.saveLink(dataSaveLinkReference).subscribe((resp: ResponseService) => {
-      if (resp.state === 'Error') {
-        this.openSnackBar(resp.userMessage, 'cerrar');
-      } else {
-        this.openSnackBar(resp.userMessage, 'cerrar');
-        this.dialog.dismiss();
-      }
-    });
   }
 
   private formShareLink() {
@@ -739,9 +712,38 @@ export class BussinessComponent implements OnInit, OnDestroy {
       },
     ]);
   }
+
   deleteSearch() {
     this.showResults = false;
   }
+
+/**
+ * Metodo para salvar los links generados
+ */
+
+  public saveLink(param?: string) {
+    const dataSaveLink = {
+      link: this.url,
+      identification: this.identification,
+      plu: this.plu,
+      business: this.business,
+      creationDate: this.date,
+      identificationcustomer: this.idCustomerForm.controls.identification.value,
+    };
+
+    this.subscription = this.links.saveLink(dataSaveLink).subscribe((resp: ResponseService) => {
+      this.urlshorten = resp.objectResponse.link;
+      this.enableCopy = false;
+      if (param === 'assured') {
+        if (resp.state === 'Error') {
+          this.openSnackBar(resp.userMessage, 'cerrar');
+          this.showForm = false;
+          this.showFormCustomer = true;
+        }
+      }
+    });
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
