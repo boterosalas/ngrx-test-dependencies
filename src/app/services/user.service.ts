@@ -46,6 +46,7 @@ export class UserService {
   apiReporReferral = 'reports/getreportreferral';
   apiReportCambios = 'reports/getreportfeedback';
   apiDeleteComments = 'reports/getreportfeedbackdeletetion';
+  apiReportStories = 'reports/getreportvisitstories';
   token = localStorage.getItem('ACCESS_TOKEN');
   authorization = this.token;
   apiSaveNews = 'new/savenew';
@@ -176,6 +177,18 @@ export class UserService {
 
   public getExternalUsers() {
     return this.http.get(`${this.url}${this.apiGetExternalUsers}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      )
+    );
+  }
+
+  public getReportStories() {
+    return this.http.get(`${this.urlReports}${this.apiReportStories}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(1000),

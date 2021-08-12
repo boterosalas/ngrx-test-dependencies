@@ -101,6 +101,10 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
       titulo: 'Referidos',
       value: 7,
     },
+    {
+      titulo: 'Visualización de las historias',
+      value: 8,
+    },
   ];
   locale = {
     locale: 'es',
@@ -519,6 +523,16 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
     });
   }
 
+  public getStoriesReport() {
+    this.subscription = this.usersService.getReportStories().subscribe((respStories: ResponseService) => {
+      this.dateForm.reset();
+      if (this.dateForm.controls.dateRange.value.startDate === null) {
+        this.disableButon = true;
+      }
+      this.openSnackBar(respStories.userMessage, 'Cerrar');
+    });
+  }
+
   public exportusers() {
     this.subscription = this.usersService.getExternalUsers().subscribe((respExport: ResponseService) => {
       this.dateForm.reset();
@@ -533,7 +547,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
     this.subscription.unsubscribe();
   }
   onChangeSelected(event) {
-    if (event === 'Datos de gamificación' || event === 'Usuarios externos') {
+    if (event === 'Datos de gamificación' || event === 'Usuarios externos' || event === 'Visualización de las historias') {
       this.dateNoVisible = true;
       this.disableButon = false;
       this.dateForm.get('dateRange').setValue(null);
@@ -616,6 +630,8 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
       this.getDeleteComments();
     } else if (this.dateForm.controls.tipoReport.value === '7') {
       this.getRefers();
+    } else if (this.dateForm.controls.tipoReport.value === '8') {
+      this.getStoriesReport();
     }
   }
 
