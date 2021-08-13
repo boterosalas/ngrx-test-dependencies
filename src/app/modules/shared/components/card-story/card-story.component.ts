@@ -67,13 +67,14 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
   identification: string;
   date: any;
   title: string;
-  showReferenceButton  = true;
+  showReferenceButton = true;
   numberPattern = '^(0|[0-9][0-9]*)$';
   isImage: boolean;
   maxTime = 5;
   interval: any;
   indexCStory = 0;
   startTime: any;
+  saveVideos = [];
 
   @ViewChild('templateCategories', { static: false })
   templateCategories: TemplateRef<any>;
@@ -104,6 +105,7 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
   ngOnInit() {
     if (this.showProgress) {
       this.progressStory = this.stories.map((story) => {
+        this.video = document.getElementById(`video-${story.id}`);
         return {
           id: story.id,
         };
@@ -139,7 +141,7 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
     this.selectStory(this.stories[this.indexCStory].id);
 
     if (this.play) {
-      this.video = document.getElementById(`video-${this.id}-${this.stories[this.indexCStory].id}`);
+
       if (this.video) {
         this.video.addEventListener(
           'loadeddata',
@@ -180,6 +182,7 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
 
   public selectStory(storyId) {
     const contentFile = document.getElementById(`file-${this.id}-${storyId}`);
+    this.video = document.getElementById(`video-${storyId}`);
     if (contentFile && !contentFile.classList.contains('visible')) {
       const visible = document.querySelector(`#${this.id} .visible`);
       if (visible) {
@@ -268,10 +271,13 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
         this.interval = setInterval(() => {
           let percent = Math.round((this.currentTime / totalTime) * 100);
           this.currentProgress.style.width = `${percent}%`;
+          if (percent === 100) {
+            this.vidPause(true);
+            this.pause = true;
+            this.currentTime = 0;
+          }
           if (percent === 100 || this.pause || this.sharedOpen) {
             if (percent === 100) {
-              this.currentTime = 0;
-              this.pause = true;
               this.nextSliderOrStory();
             }
             this.vidPause(true);
@@ -388,6 +394,7 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
     this.currentTime = 0;
     if (this.indexCStory >= this.stories.length - 1) {
       this.nextStory.emit(this.index);
+      this.video = document.getElementById(`video-${this.index}`);
     } else {
       this.selectStory(this.stories[this.indexCStory + 1].id);
     }
