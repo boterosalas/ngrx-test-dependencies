@@ -676,7 +676,6 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
 
   public previewDocument(typeDocument: string) {
     this.user.getDocuments(typeDocument).subscribe((dc: ResponseService) => {
-      console.log(dc);
       if (dc.objectResponse !== null) {
         if (dc.objectResponse.extension === '.jpg' || dc.objectResponse.extension === '.jpge' || dc.objectResponse.extension === '.png') {
           this.openpreviewImage(dc.objectResponse.base64);
