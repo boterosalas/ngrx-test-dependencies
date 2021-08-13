@@ -15,6 +15,7 @@ export class UserService {
   url = environment.URL_PROFILE;
   urlEmployee = environment.URL_VALIDATE_EMPLOYEE;
   apiProfile = 'userprofile/GetUserProfile';
+  apiGetDocuments = 'userprofile/downloadBase64';
   apiActivateProfile = 'userprofile/activateUser';
   apiShorUrl = 'userprofile/getShortURL';
   apiCreateUser = 'userprofile/create';
@@ -481,6 +482,21 @@ export class UserService {
         )
       );
   }
+
+  public getDocuments(document: string) {
+    return this.http
+      .get(`${this.url}${this.apiGetDocuments}?typeDocument=${document}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        )
+      );
+  }
+
   public updateInfoClicker(data: any) {
     return this.http.post(`${this.url}${this.apiUpdateInfoClicker}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
