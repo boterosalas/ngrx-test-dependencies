@@ -593,6 +593,7 @@
           <span *ngIf="nameFileRut === ''">No hay archivo seleccionado</span>
           <span class="file-input" *ngIf="nameFileRut !== ''">{{ nameFileRut | truncate: '20' }}</span>
         </div>
+        <i (click)="previewDocument('Rut')" class="tio-search cursor-pointer mt-1 mr-3 f-25 purple2-text"></i>
         <div class="space">
           <label for="rut" id="upload" class="cursor-pointer">
             <span *ngIf="!showErrorRUT">
@@ -617,6 +618,7 @@
           <span *ngIf="nameFileCert === ''">No hay archivo seleccionado</span>
           <span class="file-input" *ngIf="nameFileCert !== ''">{{ nameFileCert | truncate: '20' }}</span>
         </div>
+        <i (click)="previewDocument('BankCertificate')" class="tio-search cursor-pointer mt-1 mr-3 f-25 purple2-text"></i>
         <div class="space">
           <label for="cert" id="upload" class="cursor-pointer">
             <span *ngIf="!showErrorCert">
@@ -640,6 +642,7 @@
           <span *ngIf="nameFileCed1 === ''">No hay archivo seleccionado</span>
           <span class="file-input" *ngIf="nameFileCed1 !== ''">{{ nameFileCed1 | truncate: '20' }}</span>
         </div>
+        <i (click)="previewDocument('IdentificationCard1')" class="tio-search cursor-pointer mt-1 mr-3 f-25 purple2-text"></i>
         <div class="space">
           <label for="ced1" id="upload" class="cursor-pointer">
             <span *ngIf="!showErrorCed1">
@@ -663,6 +666,7 @@
           <span *ngIf="nameFileCed2 === ''">No hay archivo seleccionado</span>
           <span class="file-input" *ngIf="nameFileCed2 !== ''">{{ nameFileCed2 | truncate: '20' }}</span>
         </div>
+        <i (click)="previewDocument('IdentificationCard2')" class="tio-search cursor-pointer mt-1 mr-3 f-25 purple2-text"></i>
         <div class="space">
           <label for="ced2" id="upload" class="cursor-pointer">
             <span *ngIf="!showErrorCed2">

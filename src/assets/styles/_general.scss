@@ -779,6 +779,12 @@ table {
   min-width: 250px;
 }
 
+@media screen and (max-width: 600px) {
+  .space {
+    min-width: 0;
+  }
+}
+
 @media screen and (min-width: 600px) {
   .logros-page {
     padding-bottom: 0;
