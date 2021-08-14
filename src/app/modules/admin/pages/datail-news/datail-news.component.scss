@@ -1,0 +1,79 @@
+@import 'variables';
+@import 'general';
+@import 'animations';
+
+.row-1 {
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  .left {
+    .icon {
+      width: 32px;
+      height: 32px;
+      margin-right: 10px;
+    }
+    p {
+      color: $gray-5;
+      font-family: $font-galano-bold !important;
+      font-size: 24px;
+      margin: 0;
+      span {
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+.row-2 {
+  padding: 20px 0;
+  .step {
+    width: 20%;
+    padding: 8px 0px;
+    text-align: center;
+    clip-path: polygon(96% 0%, 100% 50%, 96% 100%, 0% 100%, 4% 50%, 0% 0%);
+    color: $white;
+    font-size: 14px;
+    background-color: $gray4;
+    display: flex;
+    justify-content: center;
+    .icon {
+      color: $white;
+      font-size: 16px;
+      margin-right: 12px;
+    }
+    &.-succes {
+      background-color: $green;
+    }
+    &.-current {
+      background-color: $third-color;
+    }
+  }
+}
+
+mat-card {
+  padding: 20px 16px;
+  box-shadow: 0px 16px 16px #9aaacf1a !important;
+  border-radius: 10px;
+  .card-title {
+    font-size: 16px;
+    color: $primary-color;
+    font-family: $font-galano-bold;
+  }
+
+  .info {
+    margin-top: 15px;
+    div {
+      margin-right: 25px;
+      span:nth-child(1) {
+        font-size: 12px;
+        font-family: $font-galano-bold;
+        color: $gray4;
+        font-weight: bold;
+      }
+    }
+
+    span:nth-child(2) {
+      font-size: 14px;
+      color: $primary-color;
+    }
+  }
+}

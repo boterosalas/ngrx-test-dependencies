@@ -78,6 +78,7 @@ import { TableNoveltiesComponent } from './components/table-novelties/table-nove
 import { StoriesComponent } from './pages/stories/stories.component';
 import { CardAdminStoryComponent } from './components/card-admin-story/card-admin-story.component';
 import { DialogStoryComponent } from './components/dialog-story/dialog-story.component';
+import { DatailNewsComponent } from './pages/datail-news/datail-news.component';
 
 const routes: Routes = [
   {
@@ -314,6 +315,15 @@ const routes: Routes = [
       superRole: 'SUPERADMIN',
     },
   },
+  {
+    path: 'novedad/:id',
+    component: DatailNewsComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
+    },
+  },
 ];
 
 @NgModule({
@@ -379,6 +389,7 @@ const routes: Routes = [
     StoriesComponent,
     CardAdminStoryComponent,
     DialogStoryComponent,
+    DatailNewsComponent
   ],
   imports: [
     AngularEditorModule,

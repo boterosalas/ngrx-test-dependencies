@@ -1,0 +1,69 @@
+<app-banner
+  title="Novedades"
+  img="/assets/img/banners/banner-dashboard-pc.jpg"
+  imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
+></app-banner>
+
+<div class="container m-t4 fade-in">
+  <div class="row-1" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="left" fxLayout="row">
+      <div class="icon">
+        <img src="/assets/img/message_failed.svg" alt="" />
+      </div>
+      <p>No. de caso <span class="number">215222</span></p>
+    </div>
+    <div class="right">
+      <button mat-raised-button class="back-button" [routerLink]="['/novedades']">
+        <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon>keyboard_arrow_left</mat-icon>
+          {{ 'BUTTONS.BACK' | translate }}
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <div class="row-2" fxLayout="row" fxLayoutAlign="flex-start center">
+    <div class="step" *ngFor="let item of states" [ngClass]="{ '-succes': item.state === 2, '-current': item.state === 1 }">
+      <div class="icon" *ngIf="item.state === 2">
+        <i class="tio-checkmark_circle"></i>
+      </div>
+      <div class="icon" *ngIf="item.state === 1">
+        <i class="tio-time"></i>
+      </div>
+      {{ item.label }}
+    </div>
+  </div>
+
+  <mat-card>
+    <mat-card-title class="card-title"> Información de Clicker </mat-card-title>
+    <div class="info" fxLayout="row" fxLayoutAlign="flex-start center">
+      <div fxLayout="column" fxLayoutAlign="flex-start">
+        <span>NOMBRE DEL CLICKER</span>
+        <span>Andres Acosta</span>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="flex-start">
+        <span>ID</span>
+        <span>andre4s</span>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="flex-start">
+        <span>CÉDULA</span>
+        <span>121212121212</span>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="flex-start">
+        <span>CELULAR</span>
+        <span>3103456576</span>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="flex-start">
+        <span>CORREO</span>
+        <span>andres@gmail.com</span>
+      </div>
+    </div>
+  </mat-card>
+
+  <div class="row-3"  fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="left"></div>
+    <div class="right">
+
+    </div>
+  </div>
+</div>
