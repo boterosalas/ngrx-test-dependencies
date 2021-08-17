@@ -13,6 +13,11 @@ import 'zone.js/dist/zone-testing';
 import { AdminModule } from '../../admin.module';
 import { AuthService } from 'src/app/services/auth.service';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { NavigationItemComponent } from '../navigation-item/navigation-item.component';
+import { NavigationGroupComponent } from '../navigation-group/navigation-group.component';
+import { DialogNavigationItemComponent } from '../dialog-navigation-item/dialog-navigation-item.component';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 
 export class MatDialogMock {
   open() {
@@ -32,7 +37,7 @@ describe('NavigationMenuClickerComponent', () => {
   let fixture: ComponentFixture<NavigationMenuClickerComponent>;
 
   let dialogSpy: jasmine.Spy;
-  let dialogRefSpyObj = jasmine.createSpyObj({
+  const dialogRefSpyObj = jasmine.createSpyObj({
     afterClosed: of({}),
     close: null,
   });
@@ -42,13 +47,10 @@ describe('NavigationMenuClickerComponent', () => {
 
   const mockDialogRef = jasmine.createSpyObj('MatDialogRef', ['close', 'afterClosed', 'componentInstance', 'event ', 'beforeClosed']);
 
-  let response = {
-    Status: 'Success',
-  };
-
-  const dialogMock = {
-    close: () => {},
-    beforeClosed: () => {},
+  const response = {
+    state: 'Success',
+    userMessage: 'Se ha guadado satisfactoriamente',
+    objectResponse: null
   };
 
   const matDialog = new MatDialogMock();
@@ -61,6 +63,11 @@ describe('NavigationMenuClickerComponent', () => {
     'deleteMenu',
     'saveMenu',
   ]);
+
+  const dropItem = {
+    currentIndex: 2,
+    previousIndex: 2,
+  };
 
   const sectionsLinks = [
     {
@@ -223,7 +230,12 @@ describe('NavigationMenuClickerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [],
+      declarations: [
+        NavigationMenuClickerComponent,
+        NavigationItemComponent,
+        NavigationGroupComponent,
+        DialogNavigationItemComponent,
+        ModalGenericComponent],
       imports: [
         TranslateModule.forRoot(),
         AppMaterialModule,
@@ -233,7 +245,6 @@ describe('NavigationMenuClickerComponent', () => {
         FormsModule,
         MatDialogModule,
         NoopAnimationsModule,
-        AdminModule,
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
@@ -251,8 +262,15 @@ describe('NavigationMenuClickerComponent', () => {
         { provide: MatDialogRef, useValue: mockDialogRef },
         { provide: AuthService, useValue: mockAuthService },
       ],
+    }).overrideModule(BrowserDynamicTestingModule, {
+      set: {
+        entryComponents: [DialogNavigationItemComponent, ModalGenericComponent],
+      },
     }).compileComponents();
     mockAuthService.getMenuClicker.and.returnValue(of(sectionsLinks));
+    mockAuthService.saveOrderMenus.and.returnValue(of(response));
+    mockAuthService.deleteGroup.and.returnValue(of(response));
+    mockAuthService.deleteMenu.and.returnValue(of(response));
   }));
 
   beforeEach(() => {
@@ -265,19 +283,14 @@ describe('NavigationMenuClickerComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('save order items', () => {
-    let data = [
-      { id: 1, orderBy: 1 },
-      { id: 2, orderBy: 2 },
-      { id: 13, orderBy: 3 },
-    ];
-    mockAuthService.saveOrderMenus.and.returnValue(of(response));
-    component.saveOrderItems(data);
+  it('drop item', () => {
+    component.dropItem(dropItem);
+    fixture.detectChanges();
     expect(mockAuthService.saveOrderMenus).toHaveBeenCalled();
   });
 
   it('save order sections', () => {
-    let data = [
+    const data = [
       { id: 1, orderBy: 1 },
       { id: 2, orderBy: 2 },
       { id: 13, orderBy: 3 },
@@ -303,7 +316,38 @@ describe('NavigationMenuClickerComponent', () => {
   });
 
   it('edit Navigation Item', () => {
-    component.editNavigationItem({});
+    const item = {
+      Id: 1,
+      name: 'Inicio',
+      route: '/inicio',
+      orderby: 1,
+      idgrupo: null,
+      icon: 'tio-link',
+      rol: null,
+      active: true,
+      menusystem: true,
+    };
+    component.editNavigationItem(item);
     expect(mockAuthService.getMenuClicker).toHaveBeenCalled();
   });
+
+  it('delete navigation', () => {
+    component.currentSection = 1;
+    component.deleteNavigationSectionService();
+    expect(mockAuthService.deleteGroup).toHaveBeenCalled();
+  });
+
+  it('delete navigation item', () => {
+    const item = {};
+    component.deleteNavigationItem(item);
+    expect(mockAuthService.getMenuClicker).toHaveBeenCalled();
+  });
+
+  it('delete navigation Item Service', () => {
+    component.currentSection = 1;
+    component.deleteNavigationItemService();
+    expect(mockAuthService.deleteMenu).toHaveBeenCalled();
+  });
+
 });
+
