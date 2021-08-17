@@ -5,16 +5,32 @@
 ></app-banner>
 
 <div class="container minaud">
-  <!-- <h1 class="border-bottom-orange-init">{{ 'DASHBOARD.NEW_BUSINESS' | translate}}</h1> -->
-  <p>Haz click en el botón para exportar los negocios</p>
-
-  <button mat-raised-button color="orange" (click)="exportBusiness()" id="download-users" class="ml-2">
-    Exportar <i class="tio-download_from_cloud style-icon"></i>
-  </button>
 
   <app-table-activate-business
     [dataSource]="dataSource"
     (updateBusiness)="getAllBusiness()"
     (activateBusiness)="activateBusiness($event)"
   ></app-table-activate-business>
+
+  <hr>
+
+  <span fxLayout="row" fxLayoutGap="20px" class="mt-4 mb-4">
+    <button mat-raised-button color="orange" (click)="exportBusiness()" id="download-users" class="ml-2">
+      Exportar <i class="tio-download_from_cloud style-icon"></i>
+    </button>
+  
+    <p>Haz click en el botón para exportar los negocios</p>
+  </span>
+  
+  <span fxLayout="row" fxLayoutGap="20px" class="mb-4">
+    
+    <label for="file-upload" mat-raised-button color="orange" id="download-users" class="custom-file-upload ml-2">
+      Importar vendedores <i class="tio-upload_on_cloud ml-2 f-18"></i>
+    </label>
+
+    <input id="file-upload" type="file" (change)="onFileChange($event)" />
+
+    <p>Descargar la lista de negocios que están interesados en ser parte de Clickam.</p>
+  </span>
+
 </div>
