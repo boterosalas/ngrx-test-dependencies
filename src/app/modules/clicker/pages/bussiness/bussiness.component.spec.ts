@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject, tick } from '@angular/core/testing';
 
 import { BussinessComponent } from './bussiness.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
@@ -174,6 +174,11 @@ describe('BussinessComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
     expect(mockContentService.getBusinessContent).toHaveBeenCalled();
+  });
+
+  it('Test', () => {
+    const data = true;
+    expect(data).toBeTruthy();
   });
 
   it('search products carulla', () => {

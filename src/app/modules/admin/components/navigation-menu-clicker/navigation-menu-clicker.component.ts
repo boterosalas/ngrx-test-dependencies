@@ -37,7 +37,8 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
     this.subscription = this.auth.saveOrderMenus(data).subscribe();
   }
 
-  dropItem(event: CdkDragDrop<any>) {
+  dropItem(event: any) {
+    console.log(event);
     moveItemInArray(this.links, event.previousIndex, event.currentIndex);
     const dataSourceSend = [];
     for (let i = 0; i < this.links.length; i++) {
