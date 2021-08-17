@@ -77,7 +77,7 @@ export class BusinessComponent implements OnInit, OnDestroy {
         this.content.importSellerFile(this.fileb64).subscribe(document => {
           event.target.value = null;
           if (document.state === 'Success') {
-            this.openSnackBar(document.userMessage, 'Cerrar');
+            this.openSnackBar('Los negocios fueron importados correctamente', 'Aceptar');
           } else {
             this.openSnackBar(document.userMessage, 'Cerrar');
           }
