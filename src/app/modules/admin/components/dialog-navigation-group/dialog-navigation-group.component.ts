@@ -86,8 +86,8 @@ export class DialogNavigationGroupComponent implements OnInit, OnDestroy {
           orderby: this.data.orderby,
         };
       }
-      this.subscription = this.content.saveFooterSection(section).subscribe((resp: ResponseService) => {
-        if (resp.state === 'Success') {
+      this.subscription = this.content.saveFooterSection(section).subscribe((saveFooter: ResponseService) => {
+        if (saveFooter.state === 'Success') {
           this.dialogRef.close();
         }
       });

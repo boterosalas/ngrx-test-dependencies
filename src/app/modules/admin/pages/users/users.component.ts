@@ -572,9 +572,9 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
       start: this.dateForm.controls.dateRange.value.startDate.format('Yyyy-MM-dd HH:mm:ss'),
       end: this.dateForm.controls.dateRange.value.endDate.format('Yyyy-MM-dd HH:mm:ss'),
     };
-    this.subscription = this.usersService.getReportCommets(this.dateParamsReport).subscribe((respExcel: ResponseService) => {
-      if (respExcel.state === 'Success') {
-        this.openSnackBar(respExcel.userMessage, 'Cerrar');
+    this.subscription = this.usersService.getReportCommets(this.dateParamsReport).subscribe((excel: ResponseService) => {
+      if (excel.state === 'Success') {
+        this.openSnackBar(excel.userMessage, 'Cerrar');
         this.dateForm.reset();
         if (this.dateForm.controls.dateRange.value.startDate === null) {
           this.disableButon = true;
@@ -588,9 +588,9 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
       start: this.dateForm.controls.dateRange.value.startDate.format('YYYY-MM-DD'),
       end: this.dateForm.controls.dateRange.value.endDate.format('YYYY-MM-DD'),
     };
-    this.subscription = this.usersService.getDeleteCommetsRest(this.dateParamsReport).subscribe((respExcel: ResponseService) => {
-      if (respExcel.state === 'Success') {
-        this.openSnackBar(respExcel.userMessage, 'Cerrar');
+    this.subscription = this.usersService.getDeleteCommetsRest(this.dateParamsReport).subscribe((remove: ResponseService) => {
+      if (remove.state === 'Success') {
+        this.openSnackBar(remove.userMessage, 'Cerrar');
         this.dateForm.reset();
         if (this.dateForm.controls.dateRange.value.startDate === null) {
           this.disableButon = true;

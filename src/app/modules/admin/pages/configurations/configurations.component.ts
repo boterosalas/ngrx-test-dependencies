@@ -175,12 +175,12 @@ export class ConfigurationsComponent implements OnInit {
       lastNames,
     };
     this.user.addUserAdmin(data).subscribe(
-      (resp: ResponseService) => {
-        if (resp.state === 'Success') {
+      (addUser: ResponseService) => {
+        if (addUser.state === 'Success') {
           this.getPermisionService();
           this.cancel();
         }
-        this.openSnackBar(resp.userMessage, 'Cerrar');
+        this.openSnackBar(addUser.userMessage, 'Cerrar');
       },
       (err) => {
         this.openSnackBar(err.userMessage, 'Cerrar');

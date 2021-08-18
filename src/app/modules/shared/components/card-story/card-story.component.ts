@@ -281,7 +281,6 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
               this.nextSliderOrStory();
             }
             this.vidPause(true);
-            percent = 0;
             clearInterval(this.interval);
             this.interval = null;
           } else {

@@ -81,9 +81,9 @@ export class AuditComponent implements OnInit, OnDestroy {
         end: this.dateForm.controls.dateRange.value.endDate.format('YYYY-MM-DD'),
       };
 
-      this.subscription = this.file.getAuditoria(this.dateParams).subscribe((resp: ResponseService) => {
-        if (resp.state === 'Success') {
-          this.openSnackBar(resp.userMessage, 'Cerrar');
+      this.subscription = this.file.getAuditoria(this.dateParams).subscribe((audit: ResponseService) => {
+        if (audit.state === 'Success') {
+          this.openSnackBar(audit.userMessage, 'Cerrar');
           this.dateForm.reset();
           if (this.dateForm.controls.dateRange.value.startDate === null) {
             this.disButon = true;
@@ -97,9 +97,9 @@ export class AuditComponent implements OnInit, OnDestroy {
         start: this.dateForm.controls.dateRange.value.startDate.format('YYYY-MM-DD'),
         end: this.dateForm.controls.dateRange.value.endDate.format('YYYY-MM-DD'),
       };
-      this.subscription = this.file.getAuditoriaDatosUser(this.dateParams).subscribe((resp: ResponseService) => {
-        if (resp.state === 'Success') {
-          this.openSnackBar(resp.userMessage, 'Cerrar');
+      this.subscription = this.file.getAuditoriaDatosUser(this.dateParams).subscribe((audit: ResponseService) => {
+        if (audit.state === 'Success') {
+          this.openSnackBar(audit.userMessage, 'Cerrar');
           this.dateForm.reset();
           if (this.dateForm.controls.dateRange.value.startDate === null) {
             this.disButon = true;
@@ -109,17 +109,17 @@ export class AuditComponent implements OnInit, OnDestroy {
     }
 
     if (this.dateForm.controls.typeRepor.value === '3') {
-      this.subscription = this.file.getReportTerms().subscribe((resp: ResponseService) => {
-        if (resp.state === 'Success') {
-          this.openSnackBar(resp.userMessage, 'Cerrar');
+      this.subscription = this.file.getReportTerms().subscribe((terms: ResponseService) => {
+        if (terms.state === 'Success') {
+          this.openSnackBar(terms.userMessage, 'Cerrar');
         }
       });
     }
 
     if (this.dateForm.controls.typeRepor.value === '4') {
-      this.subscription = this.file.getReportCommissions().subscribe((resp: ResponseService) => {
-        if (resp.state === 'Success') {
-          this.openSnackBar(resp.userMessage, 'Cerrar');
+      this.subscription = this.file.getReportCommissions().subscribe((comission: ResponseService) => {
+        if (comission.state === 'Success') {
+          this.openSnackBar(comission.userMessage, 'Cerrar');
         }
       });
     }
