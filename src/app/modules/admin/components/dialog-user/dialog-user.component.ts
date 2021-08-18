@@ -169,7 +169,11 @@ export class DialogUserComponent implements OnInit, OnDestroy {
 
   enableDisabledEditMessage() {
     const idRejected = this.accountStatements.find((state) => state.code === 'REJECTED').id;
-    this.enableRejectionMessage = this.dateSelectedState.controls.state.value === idRejected.toString() ? true : false;
+    if (this.dateSelectedState.controls.state.value === idRejected.toString()) {
+      this.enableRejectionMessage = true;
+    } else {
+      this.enableRejectionMessage = false;
+    }
   }
 
   changeTabs(tabSelected: number) {

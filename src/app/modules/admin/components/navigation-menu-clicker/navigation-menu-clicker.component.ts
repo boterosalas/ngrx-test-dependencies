@@ -226,7 +226,12 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
   }
 
   changeStateOfItem(item: any) {
-    item.active = item.active ? false : true;
+    if (item.active) {
+      item.active = false;
+    } else {
+      item.active = true;
+    }
+
     this.subscription = this.auth.saveMenu(item).subscribe();
   }
 

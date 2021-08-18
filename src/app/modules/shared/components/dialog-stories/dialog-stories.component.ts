@@ -44,7 +44,12 @@ export class DialogStoriesComponent implements OnInit {
         },
       ],
     };
-    this.showArrowRight = this.showArrowLeft = this.data['stories'].length <= 1 ? false : true;
+
+    if (this.data['stories'].length <= 1) {
+      this.showArrowRight = this.showArrowLeft = false;
+    } else {
+      this.showArrowRight = this.showArrowLeft = true;
+    }
     this.showArrows = this.data.showArrows;
   }
 
@@ -75,7 +80,12 @@ export class DialogStoriesComponent implements OnInit {
 
   beforeChange(e) {
     this.data.id = e.nextSlide;
-    this.nextEnabled = e.nextSlide >= this.data[this.stories].length - 1 ? false : true;
+
+    if (e.nextSlide >= this.data[this.stories].length - 1) {
+      this.nextEnabled = false;
+    } else {
+      this.nextEnabled = true;
+    }
 
     if (this.nextEnabled) this.pause(e.currentSlide);
 

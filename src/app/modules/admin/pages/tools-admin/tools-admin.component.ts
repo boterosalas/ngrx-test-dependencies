@@ -129,8 +129,16 @@ export class ToolsAdminComponent implements OnInit {
       for (let index = 0; index < this.dataSource.length; index++) {
         const date: any = new Date(this.dataSource[index].datestart);
         this.dataSource[index].selected = false;
-        this.dataSource[index].programmed = date - startTime > 0 ? true : false;
-        this.dataSource[index].undefinedDate = !this.dataSource[index].dateend ? true : false;
+        if (date - startTime > 0) {
+          this.dataSource[index].programmed = true;
+        } else {
+          this.dataSource[index].programmed = false;
+        }
+        if (!this.dataSource[index].dateend) {
+          this.dataSource[index].undefinedDate = true;
+        } else {
+          this.dataSource[index].undefinedDate = false;
+        }
       }
     });
     this.content.getOffersbyType({ id: 'OFERTA', admin: true }).subscribe((resp) => {
@@ -139,8 +147,18 @@ export class ToolsAdminComponent implements OnInit {
       for (let index = 0; index < this.dataSourceOfer.length; index++) {
         const date: any = new Date(this.dataSourceOfer[index].datestart);
         this.dataSourceOfer[index].selected = false;
-        this.dataSourceOfer[index].programmed = date - startTime > 0 ? true : false;
-        this.dataSourceOfer[index].undefinedDate = !this.dataSourceOfer[index].dateend ? true : false;
+        if (date - startTime > 0) {
+          this.dataSourceOfer[index].programmed = true;
+        } else {
+          this.dataSourceOfer[index].programmed = false;
+        }
+
+        if (!this.dataSourceOfer[index].dateend) {
+          this.dataSourceOfer[index].undefinedDate = true;
+        } else {
+          this.dataSourceOfer[index].undefinedDate = false;
+        }
+
       }
     });
     this.content.getOffersbyType({ id: 'POPUP', admin: true }).subscribe((resp) => {
@@ -154,8 +172,18 @@ export class ToolsAdminComponent implements OnInit {
       for (let index = 0; index < this.dataSourcePopup.length; index++) {
         const date: any = new Date(this.dataSourcePopup[index].datestart);
         this.dataSourcePopup[index].selected = false;
-        this.dataSourcePopup[index].programmed = date - startTime > 0 ? true : false;
-        this.dataSourcePopup[index].undefinedDate = !this.dataSourcePopup[index].dateend ? true : false;
+
+        if (date - startTime > 0) {
+          this.dataSourcePopup[index].programmed = true;
+        } else {
+          this.dataSourcePopup[index].programmed = false;
+        }
+
+        if (!this.dataSourcePopup[index].dateend) {
+          this.dataSourcePopup[index].undefinedDate = true;
+        } else {
+          this.dataSourcePopup[index].undefinedDate = false;
+        }
 
         if (this.dataSourcePopup[index].active) {
           this.dataPopupActive.push(this.dataSourcePopup[index]);
@@ -248,15 +276,15 @@ export class ToolsAdminComponent implements OnInit {
   public onFileChangeFiles(event, param: string) {
     const target = event.target;
     const files = target.files[0];
-    let nameFileCarrousel = files.name;
-    let readerCarrousel = new FileReader();
-    let sizeFileCarrousel = files.size;
-    let fileList: FileList = target.files;
+    const nameFileCarrousel = files.name;
+    const readerCarrousel = new FileReader();
+    const sizeFileCarrousel = files.size;
+    const fileList: FileList = target.files;
     this.getExtension(fileList[0].name, fileList[0].size);
     if (target.files && target.files.length) {
       const [Tfiles] = target.files;
-      let fileBlobCarrousel = new Blob([Tfiles]);
-      let newFile = new File([fileBlobCarrousel], nameFileCarrousel);
+      const fileBlobCarrousel = new Blob([Tfiles]);
+      const newFile = new File([fileBlobCarrousel], nameFileCarrousel);
       readerCarrousel.readAsDataURL(newFile);
       readerCarrousel.onload = () => {
         this.getExtension(nameFileCarrousel, sizeFileCarrousel);
@@ -266,7 +294,7 @@ export class ToolsAdminComponent implements OnInit {
           this.nameFileCert = nameFileCarrousel;
           this.showErrorCert = false;
           this.activeButtonOfer = true;
-          if (this.nameFileCert2 != '') {
+          if (this.nameFileCert2 !== '') {
             this.activebutton = true;
           } else {
             this.activebutton = false;
@@ -283,15 +311,15 @@ export class ToolsAdminComponent implements OnInit {
   public onFileChangeFilesSecond(event, param: string) {
     const target = event.target;
     const files2 = target.files[0];
-    let nameFileCarrousel2 = files2.name;
-    let newReader = new FileReader();
-    let sizeFile = target.files[0].size;
-    let fileList: FileList = target.files;
+    const nameFileCarrousel2 = files2.name;
+    const newReader = new FileReader();
+    const sizeFile = target.files[0].size;
+    const fileList: FileList = target.files;
     this.getExtension(fileList[0].name, sizeFile);
     if (target.files && target.files.length) {
       const [Tfiles2] = target.files;
-      let fileBlob = new Blob([Tfiles2]);
-      let newFile2 = new File([fileBlob], nameFileCarrousel2);
+      const fileBlob = new Blob([Tfiles2]);
+      const newFile2 = new File([fileBlob], nameFileCarrousel2);
       newReader.readAsDataURL(newFile2);
       newReader.onload = () => {
         if (this.validFormat === true) {
@@ -313,7 +341,7 @@ export class ToolsAdminComponent implements OnInit {
     }
   }
   public checkButton() {
-    if (this.nameFileCert != '' && this.nameFileCert2 != '') {
+    if (this.nameFileCert !== '' && this.nameFileCert2 !== '') {
       this.activebutton = true;
       this.activeButtonOfer = true;
     } else {
@@ -534,17 +562,15 @@ export class ToolsAdminComponent implements OnInit {
     let title = '';
     let message = '';
     let confirmButtonText = '';
-    switch (type) {
-      case 'popup':
-        title = 'Eliminar popup';
-        message = '¿Está seguro que desea eliminar el popup seleccionado?';
-        confirmButtonText = 'Eliminar popup';
-        break;
-      default:
-        title = 'Eliminar imagen';
-        message = '¿Estás seguro de eliminar la imagen seleccionada?';
-        confirmButtonText = 'Eliminar imagen';
-        break;
+
+    if (type === 'popup') {
+      title = 'Eliminar popup';
+      message = '¿Está seguro que desea eliminar el popup seleccionado?';
+      confirmButtonText = 'Eliminar popup';
+    } else {
+      title = 'Eliminar imagen';
+      message = '¿Estás seguro de eliminar la imagen seleccionada?';
+      confirmButtonText = 'Eliminar imagen';
     }
 
     Swal.fire({
