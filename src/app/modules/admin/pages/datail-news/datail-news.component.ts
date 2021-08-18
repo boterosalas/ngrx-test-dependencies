@@ -63,7 +63,7 @@ export class DatailNewsComponent implements OnInit {
 
   public initForm() {
     this.dateForm = this.fb.group({
-      status: [this.currentNovelty.statusnovelty],
+      status: [this.currentNovelty.statusnovelty ? this.currentNovelty.statusnovelty : ''],
       responsenovelty: ['', Validators.maxLength(500)],
     });
     if (this.currentNovelty.documenturl === '') {
