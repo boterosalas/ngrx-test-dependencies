@@ -29,8 +29,8 @@ export class CardAdminStoryComponent implements OnInit, OnDestroy {
       width: '800px',
       data: data,
     });
-    this.subscription = editStory.beforeClosed().subscribe(() => {
-      this.subscription = this._content.getStoriesadmin(true, data.idbusiness).subscribe((resp: ResponseService) => {
+    this.subscription = editStory.beforeClosed().subscribe((edit) => {
+      this._content.getStoriesadmin(true, data.idbusiness).subscribe((resp: ResponseService) => {
         this.st.active = resp.objectResponse.active;
         this.st.scheduled = resp.objectResponse.scheduled;
         this.st.drafts = resp.objectResponse.drafts;
@@ -70,12 +70,12 @@ export class CardAdminStoryComponent implements OnInit, OnDestroy {
       allowOutsideClick: false,
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
-        this.subscription = this._content.deleteStories([data.id]).subscribe(() => {
-          this.subscription = this._content.getStoriesadmin(true, data.idbusiness).subscribe((resp: ResponseService) => {
-            this.st.active = resp.objectResponse.active;
-            this.st.scheduled = resp.objectResponse.scheduled;
-            this.st.drafts = resp.objectResponse.drafts;
-            this.st.defeated = resp.objectResponse.defeated;
+        this.subscription = this._content.deleteStories([data.id]).subscribe((remove) => {
+           this._content.getStoriesadmin(true, data.idbusiness).subscribe((storie: ResponseService) => {
+            this.st.active = storie.objectResponse.active;
+            this.st.scheduled = storie.objectResponse.scheduled;
+            this.st.drafts = storie.objectResponse.drafts;
+            this.st.defeated = storie.objectResponse.defeated;
           });
         });
       }
