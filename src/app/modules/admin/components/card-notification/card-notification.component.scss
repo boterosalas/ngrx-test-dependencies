@@ -4,10 +4,6 @@
   color: $primary-color;
 }
 
-.mat-card-subtitle {
-  margin-bottom: 0;
-}
-
 .card-group {
   &__actions {
     display: flex;
@@ -30,6 +26,7 @@
 .mat-card-subtitle {
   display: inline-flex;
   gap: 10px;
+  margin-bottom: 0;
 }
 
 .user {
