@@ -109,7 +109,7 @@ export class InformationBussinessComponent implements OnInit {
       id: this.id,
       about: this.aboutBuss.controls.aboutBuss.value,
     };
-    this.content.saveInfoBusiness(datos).subscribe(() => {
+    this.content.saveInfoBusiness(datos).subscribe((infoBusiness) => {
       Swal.fire({
         text: 'Los cambios se han guardado correctamente.',
         type: 'success',
