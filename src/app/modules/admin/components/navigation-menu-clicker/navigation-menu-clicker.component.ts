@@ -80,7 +80,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
   }
 
   addSection() {
-    const dialogRef1 = this.dialog.open(DialogNavigationGroupComponent, {
+    const addsection = this.dialog.open(DialogNavigationGroupComponent, {
       data: {
         title: 'Nuevo grupo',
         buttonName: 'Agregar',
@@ -88,7 +88,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
         isMenu: true,
       },
     });
-    this.subscription = dialogRef1.beforeClosed().subscribe((addSection) => {
+    this.subscription = addsection.beforeClosed().subscribe((addSection) => {
       this.sectionsLinks = [];
       this.links = [];
       this.getSections();
@@ -96,7 +96,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
   }
 
   editNavigationGroup(section: any) {
-    const dialogRef1 = this.dialog.open(DialogNavigationGroupComponent, {
+    const editNavigation = this.dialog.open(DialogNavigationGroupComponent, {
       data: {
         title: 'Editar grupo',
         buttonName: 'Guardar',
@@ -107,7 +107,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
         isMenu: true,
       },
     });
-    this.subscription = dialogRef1.beforeClosed().subscribe((editNavigationGroup) => {
+    this.subscription = editNavigation.beforeClosed().subscribe((editNavigationGroup) => {
       this.sectionsLinks = [];
       this.links = [];
       this.getSections();
@@ -149,7 +149,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
   }
 
   addNavigationItem(section: any) {
-    const dialogRef1 = this.dialog.open(DialogNavigationItemComponent, {
+    const addNavigation = this.dialog.open(DialogNavigationItemComponent, {
       width: '450px',
       data: {
         title: 'Agregar acceso',
@@ -160,7 +160,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
         rol: 'CLICKER',
       },
     });
-    this.subscription = dialogRef1.beforeClosed().subscribe((addNavigationItem) => {
+    this.subscription = addNavigation.beforeClosed().subscribe((addNavigationItem) => {
       this.sectionsLinks = [];
       this.links = [];
       this.getSections();
@@ -182,11 +182,11 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
       isMenu: true,
     };
 
-    const dialogRef1 = this.dialog.open(DialogNavigationItemComponent, {
+    const editItem = this.dialog.open(DialogNavigationItemComponent, {
       width: '450px',
       data: data,
     });
-    this.subscription = dialogRef1.beforeClosed().subscribe((editNavigationItem) => {
+    this.subscription = editItem.beforeClosed().subscribe((editNavigationItem) => {
       this.sectionsLinks = [];
       this.links = [];
       this.getSections();

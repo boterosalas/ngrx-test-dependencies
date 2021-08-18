@@ -133,13 +133,14 @@ export class TableActivateBusinessComponent implements OnInit {
       },
     ]);
   }
-  informationBussiness(item: any) {
+
+  informationBussiness(itemAdmin: any) {
     this.router.navigate([
       '/information-bussiness-admin',
       {
-        id: item.id,
-        titulo: item.description,
-        imagen: item.imageurl,
+        id: itemAdmin.id,
+        titulo: itemAdmin.description,
+        imagen: itemAdmin.imageurl,
       },
     ]);
   }
