@@ -347,7 +347,7 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
       const arrowPrev = document.getElementById('arrow-prev');
       if (arrowPrev) {
         arrowPrev.onpointerup = (e) => {
-          this.pause = true;
+          this.vidPause(true);
           if (this.indexCStory <= 0) {
             this.saveVisitStories(this.indexCStory);
             this.prevStory.emit();
@@ -362,11 +362,14 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
 
       if (arrowNext) {
         let endTime;
-
         arrowNext.onpointerdown = (e) => {
           this.startTime = new Date();
           this.pause = true;
           e.preventDefault();
+          setTimeout(() => {
+            this.video.currentTime = 0;
+            this.currentTime = 0;
+          }, 400);
         };
 
         arrowNext.onpointerup = (e) => {

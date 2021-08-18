@@ -81,9 +81,9 @@ export class AuditComponent implements OnInit, OnDestroy {
         end: this.dateForm.controls.dateRange.value.endDate.format('YYYY-MM-DD'),
       };
 
-      this.subscription = this.file.getAuditoria(this.dateParams).subscribe((audit: ResponseService) => {
-        if (audit.state === 'Success') {
-          this.openSnackBar(audit.userMessage, 'Cerrar');
+      this.subscription = this.file.getAuditoria(this.dateParams).subscribe((getAudit: ResponseService) => {
+        if (getAudit.state === 'Success') {
+          this.openSnackBar(getAudit.userMessage, 'Cerrar');
           this.dateForm.reset();
           if (this.dateForm.controls.dateRange.value.startDate === null) {
             this.disButon = true;
