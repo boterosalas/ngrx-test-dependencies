@@ -37,7 +37,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
     this.subscription = this.auth.saveOrderMenus(data).subscribe();
   }
 
-  dropItem(event: CdkDragDrop<any>) {
+  dropItem(event: any) {
     moveItemInArray(this.links, event.previousIndex, event.currentIndex);
     const dataSourceSend = [];
     for (let i = 0; i < this.links.length; i++) {
@@ -88,7 +88,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
         isMenu: true,
       },
     });
-    this.subscription = dialogRef1.beforeClosed().subscribe(() => {
+    this.subscription = dialogRef1.beforeClosed().subscribe((addSection) => {
       this.sectionsLinks = [];
       this.links = [];
       this.getSections();
@@ -107,7 +107,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
         isMenu: true,
       },
     });
-    this.subscription = dialogRef1.beforeClosed().subscribe(() => {
+    this.subscription = dialogRef1.beforeClosed().subscribe((editNavigationGroup) => {
       this.sectionsLinks = [];
       this.links = [];
       this.getSections();
@@ -126,7 +126,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
       },
     });
 
-    this.subscription = this.dialogRef.beforeClosed().subscribe(() => {
+    this.subscription = this.dialogRef.beforeClosed().subscribe((deleteNavigationGroup) => {
       this.sectionsLinks = [];
       this.links = [];
       this.getSections();
@@ -139,8 +139,8 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
 
   deleteNavigationSectionService() {
     const datos = [this.currentSection.id];
-    this.auth.deleteGroup(datos).subscribe((resp: ResponseService) => {
-      if (resp.state === 'Success') {
+    this.auth.deleteGroup(datos).subscribe((deleteNavigtion: ResponseService) => {
+      if (deleteNavigtion.state === 'Success') {
         this.dialog.closeAll();
       } else {
         console.log('Upss Hubo un problema vuelve a intentarlo');
@@ -160,7 +160,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
         rol: 'CLICKER',
       },
     });
-    this.subscription = dialogRef1.beforeClosed().subscribe(() => {
+    this.subscription = dialogRef1.beforeClosed().subscribe((addNavigationItem) => {
       this.sectionsLinks = [];
       this.links = [];
       this.getSections();
@@ -186,7 +186,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
       width: '450px',
       data: data,
     });
-    this.subscription = dialogRef1.beforeClosed().subscribe(() => {
+    this.subscription = dialogRef1.beforeClosed().subscribe((editNavigationItem) => {
       this.sectionsLinks = [];
       this.links = [];
       this.getSections();
@@ -206,7 +206,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
       },
     });
 
-    this.subscription = this.dialogRef.beforeClosed().subscribe(() => {
+    this.subscription = this.dialogRef.beforeClosed().subscribe((deleteNavigationItem) => {
       this.sectionsLinks = [];
       this.links = [];
       this.getSections();
@@ -215,8 +215,8 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
 
   deleteNavigationItemService() {
     const idMenu = [this.currentLink.Id];
-    this.auth.deleteMenu(idMenu).subscribe((resp: ResponseService) => {
-      if (resp.state === 'Success') {
+    this.auth.deleteMenu(idMenu).subscribe((deleteNavigationItemService: ResponseService) => {
+      if (deleteNavigationItemService.state === 'Success') {
         this.dialog.closeAll();
       } else {
         console.log('Upss Hubo un problema vuelve a intentarlo');
@@ -225,7 +225,12 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
   }
 
   changeStateOfItem(item: any) {
-    item.active = item.active ? false : true;
+    if (item.active) {
+      item.active = false;
+    } else {
+      item.active = true;
+    }
+
     this.subscription = this.auth.saveMenu(item).subscribe();
   }
 

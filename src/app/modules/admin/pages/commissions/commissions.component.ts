@@ -211,9 +211,10 @@ export class CommissionsComponent implements OnInit {
       formDataCommission.append('formFile', file[0], file[0].name.replace(' ', '_'));
 
       if (typeUpload === 'rejected') {
-        this.subscription = this.link.updateStatusCommissionFile(formDataCommission).subscribe((resp: ResponseService) => {
-          let text, type;
-          if (resp.state === 'Success') {
+        this.subscription = this.link.updateStatusCommissionFile(formDataCommission).subscribe((status: ResponseService) => {
+          let text;
+          let type;
+          if (status.state === 'Success') {
             text = 'Se ha subido exitosamente el archivos de comisiones rechazadas.';
             type = 'success';
           } else {
@@ -224,9 +225,10 @@ export class CommissionsComponent implements OnInit {
           this.openSwal(text, type, 'rejected');
         });
       } else if (typeUpload === 'eliminated') {
-        this.subscription = this.link.deleteCommissionFile(formDataCommission).subscribe((resp: ResponseService) => {
-          let text, type;
-          if (resp.state === 'Success') {
+        this.subscription = this.link.deleteCommissionFile(formDataCommission).subscribe((remove: ResponseService) => {
+          let text;
+          let type;
+          if (remove.state === 'Success') {
             text = 'Se ha subido exitosamente el archivos de comisiones eliminadas.';
             type = 'success';
           } else {
@@ -279,8 +281,8 @@ export class CommissionsComponent implements OnInit {
       statusCommission: 'Rechazado',
     };
 
-    this.subscription = this.link.updateCommission(data).subscribe((resp: ResponseService) => {
-      this.openSnackBar(resp.userMessage, 'Cerrar');
+    this.subscription = this.link.updateCommission(data).subscribe((update: ResponseService) => {
+      this.openSnackBar(update.userMessage, 'Cerrar');
       this.dialog.closeAll();
       this.searchCommission(this.paginate, this.from, this.to, this.name, this.direction);
     });

@@ -101,6 +101,10 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
       titulo: 'Referidos',
       value: 7,
     },
+    {
+      titulo: 'Visualización de las historias',
+      value: 8,
+    },
   ];
   locale = {
     locale: 'es',
@@ -519,6 +523,16 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
     });
   }
 
+  public getStoriesReport() {
+    this.subscription = this.usersService.getReportStories().subscribe((respStories: ResponseService) => {
+      this.dateForm.reset();
+      if (this.dateForm.controls.dateRange.value.startDate === null) {
+        this.disableButon = true;
+      }
+      this.openSnackBar(respStories.userMessage, 'Cerrar');
+    });
+  }
+
   public exportusers() {
     this.subscription = this.usersService.getExternalUsers().subscribe((respExport: ResponseService) => {
       this.dateForm.reset();
@@ -533,7 +547,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
     this.subscription.unsubscribe();
   }
   onChangeSelected(event) {
-    if (event === 'Datos de gamificación' || event === 'Usuarios externos') {
+    if (event === 'Datos de gamificación' || event === 'Usuarios externos' || event === 'Visualización de las historias') {
       this.dateNoVisible = true;
       this.disableButon = false;
       this.dateForm.get('dateRange').setValue(null);
@@ -558,9 +572,9 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
       start: this.dateForm.controls.dateRange.value.startDate.format('Yyyy-MM-dd HH:mm:ss'),
       end: this.dateForm.controls.dateRange.value.endDate.format('Yyyy-MM-dd HH:mm:ss'),
     };
-    this.subscription = this.usersService.getReportCommets(this.dateParamsReport).subscribe((respExcel: ResponseService) => {
-      if (respExcel.state === 'Success') {
-        this.openSnackBar(respExcel.userMessage, 'Cerrar');
+    this.subscription = this.usersService.getReportCommets(this.dateParamsReport).subscribe((excel: ResponseService) => {
+      if (excel.state === 'Success') {
+        this.openSnackBar(excel.userMessage, 'Cerrar');
         this.dateForm.reset();
         if (this.dateForm.controls.dateRange.value.startDate === null) {
           this.disableButon = true;
@@ -574,9 +588,9 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
       start: this.dateForm.controls.dateRange.value.startDate.format('YYYY-MM-DD'),
       end: this.dateForm.controls.dateRange.value.endDate.format('YYYY-MM-DD'),
     };
-    this.subscription = this.usersService.getDeleteCommetsRest(this.dateParamsReport).subscribe((respExcel: ResponseService) => {
-      if (respExcel.state === 'Success') {
-        this.openSnackBar(respExcel.userMessage, 'Cerrar');
+    this.subscription = this.usersService.getDeleteCommetsRest(this.dateParamsReport).subscribe((remove: ResponseService) => {
+      if (remove.state === 'Success') {
+        this.openSnackBar(remove.userMessage, 'Cerrar');
         this.dateForm.reset();
         if (this.dateForm.controls.dateRange.value.startDate === null) {
           this.disableButon = true;
@@ -616,6 +630,8 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
       this.getDeleteComments();
     } else if (this.dateForm.controls.tipoReport.value === '7') {
       this.getRefers();
+    } else if (this.dateForm.controls.tipoReport.value === '8') {
+      this.getStoriesReport();
     }
   }
 

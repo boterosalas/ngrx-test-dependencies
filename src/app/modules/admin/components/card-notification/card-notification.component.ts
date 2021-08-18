@@ -36,7 +36,6 @@ export class CardNotificationComponent implements OnInit {
   }
 
   downloadFile(notification: any) {
-    console.log(notification);
     const url = notification.url;
     window.open(url, '_blank');
   }

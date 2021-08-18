@@ -2,6 +2,10 @@
 @import 'animations';
 @import 'mixins';
 
+.small{
+  font-size: 11px;
+}
+
 .account-container {
   display: flex;
   justify-content: space-between;
@@ -212,9 +216,6 @@ input[type='file'] {
 .title_delete {
   color: #f21905;
 }
-.button_cancel {
-  color: #3a226a;
-}
 
 .text-container {
   max-width: 365px;
@@ -339,7 +340,7 @@ input[type='file'] {
 
 .button_cancel {
   margin-right: 15px;
-
+  color: #3a226a;
   @include from($small) {
     margin-right: 0;
     margin-top: 10px;

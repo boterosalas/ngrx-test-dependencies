@@ -178,22 +178,38 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
           switch (param) {
             case 'Rut':
               this.nameFileRUT = nameFile;
-              this.showErrorRUT = response.state === 'Success' ? false : true;
+              if (response.state === 'Success') {
+                this.showErrorRUT = false;
+              } else {
+                this.showErrorRUT = true;
+              }
               this.externalForm.controls.rut.setErrors(error);
               break;
             case 'BankCertificate':
               this.nameFileCert = nameFile;
-              this.showErrorCert = response.state === 'Success' ? false : true;
+              if (response.state === 'Success') {
+                this.showErrorCert = false;
+              } else {
+                this.showErrorCert = true;
+              }
               this.externalForm.controls.cert.setErrors(error);
               break;
             case 'IdentificationCard1':
               this.nameFileCed1 = nameFile;
-              this.showErrorCed1 = response.state === 'Success' ? false : true;
+              if (response.state === 'Success') {
+                this.showErrorCed1 = false;
+              } else {
+                this.showErrorCed1 = true;
+              }
               this.externalForm.controls.ced1.setErrors(error);
               break;
             case 'IdentificationCard2':
               this.nameFileCed2 = nameFile;
-              this.showErrorCed2 = response.state === 'Success' ? false : true;
+              if (response.state === 'Success') {
+                this.showErrorCed2 = false;
+              } else {
+                this.showErrorCed2 = true;
+              }
               this.externalForm.controls.ced2.setErrors(error);
               break;
             default:

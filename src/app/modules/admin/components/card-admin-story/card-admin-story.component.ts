@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { Subscription } from 'rxjs';
 import { ResponseService } from 'src/app/interfaces/response';
 import { DialogStoriesComponent } from 'src/app/modules/shared/components/dialog-stories/dialog-stories.component';
 import { ContentService } from 'src/app/services/content.service';
@@ -13,12 +14,13 @@ import { DialogStoryComponent } from '../dialog-story/dialog-story.component';
   templateUrl: './card-admin-story.component.html',
   styleUrls: ['./card-admin-story.component.scss'],
 })
-export class CardAdminStoryComponent implements OnInit {
+export class CardAdminStoryComponent implements OnInit, OnDestroy {
   constructor(private dialog: MatDialog, private _content: ContentService, private st: StoriesComponent, public utils: UtilsService) {}
 
   @Input() data: any;
   stories = [];
   bussiness: any;
+  private subscription: Subscription = new Subscription();
 
   ngOnInit() {}
 
@@ -27,7 +29,7 @@ export class CardAdminStoryComponent implements OnInit {
       width: '800px',
       data: data,
     });
-    editStory.beforeClosed().subscribe(() => {
+    this.subscription = editStory.beforeClosed().subscribe((edit) => {
       this._content.getStoriesadmin(true, data.idbusiness).subscribe((resp: ResponseService) => {
         this.st.active = resp.objectResponse.active;
         this.st.scheduled = resp.objectResponse.scheduled;
@@ -52,7 +54,7 @@ export class CardAdminStoryComponent implements OnInit {
       height: '100vh',
     });
 
-    openPreview.beforeClosed().subscribe(() => {
+    this.subscription = openPreview.beforeClosed().subscribe(() => {
       this.stories = [];
     });
   }
@@ -68,12 +70,12 @@ export class CardAdminStoryComponent implements OnInit {
       allowOutsideClick: false,
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
-        this._content.deleteStories([data.id]).subscribe(() => {
-          this._content.getStoriesadmin(true, data.idbusiness).subscribe((resp: ResponseService) => {
-            this.st.active = resp.objectResponse.active;
-            this.st.scheduled = resp.objectResponse.scheduled;
-            this.st.drafts = resp.objectResponse.drafts;
-            this.st.defeated = resp.objectResponse.defeated;
+        this.subscription = this._content.deleteStories([data.id]).subscribe((remove) => {
+           this._content.getStoriesadmin(true, data.idbusiness).subscribe((storie: ResponseService) => {
+            this.st.active = storie.objectResponse.active;
+            this.st.scheduled = storie.objectResponse.scheduled;
+            this.st.drafts = storie.objectResponse.drafts;
+            this.st.defeated = storie.objectResponse.defeated;
           });
         });
       }
@@ -94,13 +96,6 @@ export class CardAdminStoryComponent implements OnInit {
     } else {
       this.utils.titleSelect.next('Seleccionar');
     }
-  }
-
-  public getBusiness() {
-    this._content.getBusiness().subscribe((bussiness) => {
-      this.bussiness = bussiness;
-      this.getStories();
-    });
   }
 
   private getStories() {
@@ -130,6 +125,13 @@ export class CardAdminStoryComponent implements OnInit {
     });
   }
 
+  public getBusiness() {
+    this.subscription = this._content.getBusiness().subscribe((bussiness) => {
+      this.bussiness = bussiness;
+      this.getStories();
+    });
+  }
+
   private getExtension(nameFile: string) {
     if (nameFile) {
       const splitExt = nameFile.split('.');
@@ -138,4 +140,9 @@ export class CardAdminStoryComponent implements OnInit {
 
     return null;
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }

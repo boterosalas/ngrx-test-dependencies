@@ -43,6 +43,7 @@ describe('UsersComponent', () => {
     'getReportCommets',
     'getDeleteCommetsRest',
     'getUserInfoAditional',
+    'getReportStories'
   ]);
 
   const dataUser = {
@@ -127,7 +128,7 @@ describe('UsersComponent', () => {
     },
   ];
 
-  let user = {
+  const user = {
     userId: '1',
     email: 'david.betancur@pragma.com.co',
     templateEmail: [],
@@ -205,6 +206,7 @@ describe('UsersComponent', () => {
     mockLinksService.getUsersExcel.and.returnValue(of(getUserExcel));
     mockLinksService.getHistoricalBankInformation.and.returnValue(of(getUserExcel));
     mockUserService.getExternalUsers.and.returnValue(of(getUserExcel));
+    mockUserService.getReportStories.and.returnValue(of(getUserExcel));
     mockUserService.updateUserEmail.and.returnValue(of(resp));
     mockUserService.updateEmployees.and.returnValue(of(updtaeEmployee));
     mockUserService.updateEmployees.and.returnValue(of(updtaeEmployeeError));
@@ -263,14 +265,14 @@ describe('UsersComponent', () => {
   });
 
   it('getUsersExcel', () => {
-    let start = moment();
-    let end = moment('12-01-2020');
+    const start = moment();
+    const end = moment('12-01-2020');
     component.dateForm.controls.dateRange.setValue({
       startDate: start,
       endDate: end,
     });
     component.getUserExcel();
-    let datos = true;
+    const datos = true;
     expect(datos).toBeTruthy;
   });
 
@@ -301,20 +303,20 @@ describe('UsersComponent', () => {
 
   it('get first report', () => {
     component.dateForm.controls.tipoReport.setValue('General');
-    let start = moment();
-    let end = moment('12-01-2020');
+    const start = moment();
+    const end = moment('12-01-2020');
     component.dateForm.controls.dateRange.setValue({
       startDate: end,
       endDate: start,
     });
     component.getAnyReport();
-    let datos = true;
+    const datos = true;
     expect(datos).toBeTruthy();
   });
 
   it('get second report', () => {
-    let start = moment();
-    let end = moment('12-01-2020');
+    const start = moment();
+    const end = moment('12-01-2020');
     component.dateForm.controls.dateRange.setValue({
       startDate: end,
       endDate: start,
@@ -322,42 +324,42 @@ describe('UsersComponent', () => {
     component.dateForm.controls.tipoReport.setValue('Cambios de Datos bancarios');
     component.getAnyReport();
 
-    let datos = true;
+    const datos = true;
     expect(datos).toBeTruthy();
   });
 
   it('get third report', () => {
-    let start = moment();
-    let end = moment('12-01-2020');
+    const start = moment();
+    const end = moment('12-01-2020');
     component.dateForm.controls.dateRange.setValue({
       startDate: end,
       endDate: start,
     });
     component.dateForm.controls.tipoReport.setValue('Cambios de Datos bancarios');
     component.getAnyReport();
-    let datos = true;
+    const datos = true;
     expect(datos).toBeTruthy();
   });
 
   it('get fifth report', () => {
-    let start = moment();
-    let end = moment('12-01-2020');
+    const start = moment();
+    const end = moment('12-01-2020');
     component.dateForm.controls.dateRange.setValue({
       startDate: end,
       endDate: start,
     });
     component.dateForm.controls.tipoReport.setValue('Usuarios Externos');
     component.getAnyReport();
-    let datos = true;
+    const datos = true;
     expect(datos).toBeTruthy();
   });
 
   it('get fourth report', () => {
     component.dateForm.controls.tipoReport.setValue('Gamificación');
     component.getAnyReport();
-    let datos = true;
-    let start = moment();
-    let end = moment('12-01-2020');
+    const datos = true;
+    const start = moment();
+    const end = moment('12-01-2020');
     component.dateForm.controls.dateRange.setValue({
       startDate: end,
       endDate: start,

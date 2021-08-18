@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatSnackBar, MatTableDataSource } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
 import { ResponseService } from 'src/app/interfaces/response';
@@ -16,6 +16,7 @@ export class BusinessComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   email: string;
   dataSource: any;
+  fileb64: any;
 
   ngOnInit() {
     this.getAllBusiness();
@@ -59,6 +60,30 @@ export class BusinessComponent implements OnInit, OnDestroy {
     this.subscription = this.content.getAllBusiness().subscribe((resp) => {
       this.dataSource = resp;
     });
+  }
+
+  public onFileChange(event: any) {
+    const nameFile = event.target.files[0].name;
+    const reader = new FileReader();
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      const fileBlob = new Blob([file]);
+      const file2 = new File([fileBlob], nameFile);
+      reader.readAsDataURL(file2);
+      reader.onload = () => {
+        this.fileb64 = reader.result;
+        const explit64 = this.fileb64.split('data:application/octet-stream;base64,');
+        this.fileb64 = explit64[1];
+        this.content.importSellerFile(this.fileb64).subscribe(document => {
+          event.target.value = null;
+          if (document.state === 'Success') {
+            this.openSnackBar('Los negocios fueron importados correctamente', 'Aceptar');
+          } else {
+            this.openSnackBar(document.userMessage, 'Cerrar');
+          }
+        });
+      };
+    }
   }
 
   ngOnDestroy() {

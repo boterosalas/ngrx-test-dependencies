@@ -6,11 +6,9 @@ import { ReactiveFormsModule, FormsModule, FormBuilder } from '@angular/forms';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { JwtModule } from '@auth0/angular-jwt';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
 import { DialogEditComponent } from '../dialog-edit/dialog-edit.component';
 import { MatDialogRef } from '@angular/material';
 import { MasterDataService } from 'src/app/services/master-data.service';
@@ -22,7 +20,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 
 class MockUserService extends UserService {
-  private subscription: Subscription = new Subscription();
 
   userInfo$ = new BehaviorSubject<any>({
     firstNames: 'David',
@@ -43,18 +40,19 @@ describe('ProfileFormComponent', () => {
     'getStatusVerification',
     'changeBankInformation',
     'uploadFiles',
+    'getDocuments'
   ]);
 
   const mockMasterDataService = jasmine.createSpyObj('MasterDataService', ['getDepartments', 'getBanks']);
 
   const mockAuthService = jasmine.createSpyObj('AuthService', ['changePassword']);
 
-  let dataUserC = {
+  const dataUserC = {
     managedPayments: true,
     isEmployeeUser: true,
   };
 
-  let dataDepartments = {
+  const dataDepartments = {
     state: 'Success',
     userMessage: '',
     objectResponse: [
@@ -99,7 +97,7 @@ describe('ProfileFormComponent', () => {
     ],
   };
 
-  let department = {
+  const department = {
     Id: 1,
     code: '01',
     description: 'Bolivar',
@@ -119,14 +117,14 @@ describe('ProfileFormComponent', () => {
     ],
   };
 
-  let city = {
+  const city = {
     Id: 3,
     code: '03',
     description: 'Medellín',
     idDeparment: 2,
   };
 
-  let banks = [{ Id: 1, code: '01', description: 'BANCO AGRARIO' }];
+  const banks = [{ Id: 1, code: '01', description: 'BANCO AGRARIO' }];
 
   const resp = {
     state: 'Success',
@@ -163,6 +161,32 @@ describe('ProfileFormComponent', () => {
     objectResponse: null,
   };
 
+  const previewImg = {
+    state: 'Success',
+    userMessage: null,
+    objectResponse: {
+      base64: '',
+      path: '20210810145930_1124587893_BankCertificate.jpg',
+      extension: '.jpg'
+    }
+  };
+
+  const previewpdf = {
+    state: 'Success',
+    userMessage: null,
+    objectResponse: {
+      base64: '',
+      path: '20210810145930_1124587893_BankCertificate.jpg',
+      extension: '.pdf'
+    }
+  };
+
+  const previewError = {
+    state: 'Error',
+    userMessage: 'No existe el documento',
+    objectResponse: null
+  };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ProfileFormComponent, DialogEditComponent, TruncatePipe],
@@ -192,9 +216,6 @@ describe('ProfileFormComponent', () => {
         { provide: MasterDataService, useValue: mockMasterDataService },
         { provide: UserService, useClass: MockUserService },
         { provide: AuthService, useValue: mockAuthService },
-      ],
-      schemas: [
-        // NO_ERRORS_SCHEMA
       ],
     })
       .overrideModule(BrowserDynamicTestingModule, {
@@ -240,14 +261,14 @@ describe('ProfileFormComponent', () => {
   });
 
   it('get user data', () => {
-    let service = fixture.debugElement.injector.get(UserService);
+    const service = fixture.debugElement.injector.get(UserService);
     spyOn(service, 'getuserdata').and.returnValue(of(dataUserC));
     component.getUserData();
     expect(service.getuserdata).toHaveBeenCalled();
   });
 
   it('update account', () => {
-    let service = fixture.debugElement.injector.get(UserService);
+    const service = fixture.debugElement.injector.get(UserService);
     spyOn(service, 'changeBankInformation').and.returnValue(of(changeBankInformation));
     spyOn(service, 'updateUser').and.returnValue(of(resp));
     component.updateAccount();
@@ -256,21 +277,21 @@ describe('ProfileFormComponent', () => {
   });
 
   it('change address', () => {
-    let service = fixture.debugElement.injector.get(UserService);
+    const service = fixture.debugElement.injector.get(UserService);
     spyOn(service, 'updateUser').and.returnValue(of(resp));
     component.changeAddress();
     expect(service.updateUser).toHaveBeenCalled();
   });
 
   it('update User', () => {
-    let service = fixture.debugElement.injector.get(UserService);
+    const service = fixture.debugElement.injector.get(UserService);
     spyOn(service, 'updateUser').and.returnValue(of(resp));
     component.editUser();
     expect(service.updateUser).toHaveBeenCalled();
   });
 
   it('showAccount', () => {
-    let service = fixture.debugElement.injector.get(UserService);
+    const service = fixture.debugElement.injector.get(UserService);
     spyOn(service, 'getBankAccountNumber').and.returnValue(of(resp));
     component.showAccount();
     expect(service.getBankAccountNumber).toHaveBeenCalled();
@@ -282,7 +303,7 @@ describe('ProfileFormComponent', () => {
   });
 
   it('getStatusVerification', () => {
-    let service = fixture.debugElement.injector.get(UserService);
+    const service = fixture.debugElement.injector.get(UserService);
     spyOn(service, 'getStatusVerification').and.returnValue(of(getStatusVerification));
     component.getStatusVerification('Tu cuenta entrará en estado de verificación pronto');
     expect(service.getStatusVerification).toHaveBeenCalled();
@@ -314,14 +335,14 @@ describe('ProfileFormComponent', () => {
   });
 
   it('select city', () => {
-    //component.cityCode = "03";
+    // component.cityCode = "03";
     component.selectCity(city);
     fixture.detectChanges();
     expect(component.cityCode).toBeDefined();
   });
 
   it('select selectDepartment', () => {
-    let fb = new FormBuilder();
+    const fb = new FormBuilder();
     component.addressForm = fb.group({
       department: ['Antioquia'],
       city: ['Medellin'],
@@ -335,7 +356,7 @@ describe('ProfileFormComponent', () => {
     const mockFile = new File([''], 'name.jpg', { type: 'text/html' });
     const mockEvt = { target: { files: [mockFile] } };
 
-    let service = fixture.debugElement.injector.get(UserService);
+    const service = fixture.debugElement.injector.get(UserService);
     spyOn(service, 'uploadFiles').and.returnValue(of(respUploadFiles));
     component.onFileChangeFiles(mockEvt, 'IdentificationCard1');
     expect(service.uploadFiles).toHaveBeenCalled();
@@ -347,7 +368,7 @@ describe('ProfileFormComponent', () => {
     const mockFile = new File([''], 'name.jpg', { type: 'text/html' });
     const mockEvt = { target: { files: [mockFile] } };
 
-    let service = fixture.debugElement.injector.get(UserService);
+    const service = fixture.debugElement.injector.get(UserService);
     spyOn(service, 'uploadFiles').and.returnValue(of(respUploadFiles));
     component.onFileChangeFiles(mockEvt, 'IdentificationCard2');
     expect(service.uploadFiles).toHaveBeenCalled();
@@ -359,11 +380,30 @@ describe('ProfileFormComponent', () => {
     const mockFile = new File([''], 'name.jpg', { type: 'text/html' });
     const mockEvt = { target: { files: [mockFile] } };
 
-    let service = fixture.debugElement.injector.get(UserService);
+    const service = fixture.debugElement.injector.get(UserService);
     spyOn(service, 'uploadFiles').and.returnValue(of(respUploadFiles));
     component.onFileChangeFiles(mockEvt, 'BankCertificate');
     expect(service.uploadFiles).toHaveBeenCalled();
     expect(component.showErrorCert).toBeFalsy();
     expect(component.showErrorFormatCert).toBeFalsy();
   });
+
+  it('preview img', () => {
+    mockUserService.getDocuments.and.returnValue(of(previewImg));
+    component.previewDocument('rut');
+    expect(mockDialog.open).toBeTruthy();
+  });
+
+  it('preview pdf', () => {
+    mockUserService.getDocuments.and.returnValue(of(previewpdf));
+    component.previewDocument('rut');
+    expect(mockDialog.open).toBeTruthy();
+  });
+
+  it('preview error', () => {
+    mockUserService.getDocuments.and.returnValue(of(previewError));
+    component.previewDocument('rut');
+    expect(mockDialog.open).toBeTruthy();
+  });
+
 });

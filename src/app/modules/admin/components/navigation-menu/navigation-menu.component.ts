@@ -54,7 +54,11 @@ export class NavigationMenuComponent implements OnInit {
   }
 
   changeStateOfItem(item: any) {
-    item.active = item.active ? false : true;
+    if (item.active) {
+      item.active = false;
+    } else {
+      item.active = true;
+    }
     this.auth.saveMenu(item).subscribe(() => {});
   }
 

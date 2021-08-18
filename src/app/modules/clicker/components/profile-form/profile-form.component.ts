@@ -28,7 +28,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private utils: UtilsService,
     private personalInfo: MasterDataService
-  ) {}
+  ) { }
 
   @ViewChild('templateDialog', { static: false }) template: TemplateRef<any>;
   @ViewChild('templateDialogCell', { static: false })
@@ -283,6 +283,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
         id,
       },
     });
+
   }
 
   public editAddres() {
@@ -314,7 +315,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.nameFileCert = '';
     this.nameFileCed1 = '';
     this.nameFileCed2 = '';
-    this.dialog.open(DialogEditComponent, {
+    const openEdit = this.dialog.open(DialogEditComponent, {
       maxWidth: '450px',
       panelClass: 'editaccount',
       data: {
@@ -323,6 +324,15 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
         id,
       },
     });
+
+    openEdit.beforeClosed().subscribe(() => {
+      this.getUserData();
+      this.nameFileCed1 = '';
+      this.nameFileCed2 = '';
+      this.nameFileCert = '';
+      this.nameFileRut = '';
+    });
+
     this.dialog.afterAllClosed.subscribe(() => {
       if (this.bank === null) {
         this.accountForm.reset();
@@ -409,7 +419,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     );
 
     this.subscription = this.user.updateUser(updateForm).subscribe(
-      () => {},
+      () => { },
       (err) => {
         this.openSnackBar(err.userMessage, 'Cerrar');
       }
@@ -603,19 +613,35 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
           switch (param) {
             case 'Rut':
               this.nameFileRut = nameFile;
-              this.showErrorRut = response.state === 'Success' ? false : true;
+              if (response.state === 'Success') {
+                this.showErrorRut = false;
+              } else {
+                this.showErrorRut = true;
+              }
               break;
             case 'BankCertificate':
               this.nameFileCert = nameFile;
-              this.showErrorCert = response.state === 'Success' ? false : true;
+              if (response.state === 'Success') {
+                this.showErrorCert = false;
+              } else {
+                this.showErrorCert = true;
+              }
               break;
             case 'IdentificationCard1':
               this.nameFileCed1 = nameFile;
-              this.showErrorCed1 = response.state === 'Success' ? false : true;
+              if (response.state === 'Success') {
+                this.showErrorCed1 = false;
+              } else {
+                this.showErrorCed1 = true;
+              }
               break;
             case 'IdentificationCard2':
               this.nameFileCed2 = nameFile;
-              this.showErrorCed2 = response.state === 'Success' ? false : true;
+              if (response.state === 'Success') {
+                this.showErrorCed2 = false;
+              } else {
+                this.showErrorCed2 = true;
+              }
               break;
             default:
               break;
@@ -625,19 +651,23 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
         switch (param) {
           case 'Rut':
             this.nameFileRut = nameFile;
-            this.showErrorRut = this.showErrorFormatRut = true;
+            this.showErrorRut = true;
+            this.showErrorFormatRut = true;
             break;
           case 'BankCertificate':
             this.nameFileCert = nameFile;
-            this.showErrorCert = this.showErrorFormatCert = true;
+            this.showErrorCert = true;
+            this.showErrorFormatCert = true;
             break;
           case 'IdentificationCard1':
             this.nameFileCed1 = nameFile;
-            this.showErrorCed1 = this.showErrorFormatCed1 = true;
+            this.showErrorCed1 = true;
+            this.showErrorFormatCed1 = true;
             break;
           case 'IdentificationCard2':
             this.nameFileCed2 = nameFile;
-            this.showErrorCed2 = this.showErrorFormatCed2 = true;
+            this.showErrorCed2 =  true;
+            this.showErrorFormatCed2 = true;
             break;
           default:
             break;
@@ -658,6 +688,36 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     if (getExt === 'jpg' || getExt === 'jpeg' || getExt === 'pdf') {
       this.validFormat = true;
     }
+  }
+
+  public previewDocument(typeDocument: string) {
+    this.user.getDocuments(typeDocument).subscribe((dc: ResponseService) => {
+      if (dc.objectResponse !== null) {
+        if (dc.objectResponse.extension === '.jpg' || dc.objectResponse.extension === '.jpge' || dc.objectResponse.extension === '.png') {
+          this.openpreviewImage(dc.objectResponse.base64);
+        } else {
+          this.openpreviewPdf(dc.objectResponse.base64);
+        }
+      } else {
+        this.openSnackBar(dc.userMessage, 'Cerrar');
+      }
+    });
+  }
+
+  private openpreviewImage(data) {
+    const image = new Image();
+    image.src = 'data:image/jpg;base64,' + data;
+
+    const w = window.open('');
+    w.document.write(image.outerHTML);
+  }
+
+  private openpreviewPdf(data) {
+    window.open('data:application/pdf,' + encodeURI(data));
+    const pdfWindow = window.open('');
+    pdfWindow.document.write("<iframe width='100%' height='100%' src='data:application/pdf;base64, " +
+      encodeURI(data) + "'></iframe>"
+    );
   }
 
   ngOnDestroy(): void {

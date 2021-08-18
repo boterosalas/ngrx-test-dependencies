@@ -16,9 +16,9 @@ describe('BusinessComponent', () => {
   let component: BusinessComponent;
   let fixture: ComponentFixture<BusinessComponent>;
 
-  const mockContentService = jasmine.createSpyObj('ContentService', ['businessExcel', 'saveActiveBusiness', 'getAllBusiness']);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['businessExcel', 'saveActiveBusiness', 'getAllBusiness', 'importSellerFile']);
 
-  let allBusiness = [
+  const allBusiness = [
     {
       id: 1,
       code: 'exito',
@@ -72,6 +72,20 @@ describe('BusinessComponent', () => {
     objectResponse: [],
   };
 
+  const errorFile = {
+    state: 'Error',
+    userMessage: 'Formato no permitido',
+    objectResponse: null
+  };
+
+  const successFile = {
+    state: 'Success',
+    userMessage: null,
+    objectResponse: [
+      10003,
+    ]
+  };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [],
@@ -112,7 +126,7 @@ describe('BusinessComponent', () => {
 
   it('activate business', () => {
     mockContentService.saveActiveBusiness.and.returnValue(of(saveActive));
-    let data = {
+    const data = {
       idbusiness: 1,
       value: true,
     };
@@ -121,7 +135,7 @@ describe('BusinessComponent', () => {
   });
 
   it('export bussiness Success', () => {
-    let data = {
+    const data = {
       state: 'Success',
       userMessage: 'Al terminar de procesar el archivo se enviará un correo',
     };
@@ -131,9 +145,26 @@ describe('BusinessComponent', () => {
   });
 
   it('export bussiness error', () => {
-    let data = { state: 'Error', userMessage: 'Ha ocurrido un error' };
+    const data = { state: 'Error', userMessage: 'Ha ocurrido un error' };
     mockContentService.businessExcel.and.returnValue(of(data));
     component.exportBusiness();
     expect(mockContentService.businessExcel).toHaveBeenCalled();
   });
+
+  it('on file change', () => {
+    mockContentService.importSellerFile.and.returnValue(of(successFile));
+    const mockFile = new File([''], 'name.xlsx', { type: 'text/html' });
+    const mockEvt = { target: { files: [mockFile] } };
+    component.onFileChange(mockEvt);
+    expect(component.onFileChange).not.toBeNull();
+  });
+
+  it('on file change error', () => {
+    mockContentService.importSellerFile.and.returnValue(of(errorFile));
+    const mockFile = new File([''], 'name.jpg', { type: 'text/html' });
+    const mockEvt = { target: { files: [mockFile] } };
+    component.onFileChange(mockEvt);
+    expect(component.onFileChange).not.toBeNull();
+  });
+
 });

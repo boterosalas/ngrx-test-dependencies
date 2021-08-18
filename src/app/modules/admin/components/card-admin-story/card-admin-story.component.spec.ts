@@ -40,7 +40,7 @@ describe('CardAdminStoryComponent', () => {
 
   const matDialog = new MatDialogMock();
 
-  const mockContentService = jasmine.createSpyObj('ContentService', ['deleteStories', 'getBusiness']);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['deleteStories', 'getBusiness','getStoriesadmin']);
 
   const allBusiness = [
     {
@@ -139,7 +139,7 @@ describe('CardAdminStoryComponent', () => {
         { provide: ContentService, useValue: mockContentService },
         { provide: MatDialog, useValue: matDialog },
         { provide: MatDialogRef, useValue: dialogMock },
-        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: data },
       ],
     })
       .overrideModule(BrowserDynamicTestingModule, {
@@ -149,6 +149,7 @@ describe('CardAdminStoryComponent', () => {
       })
       .compileComponents();
     mockContentService.deleteStories.and.returnValue(of(resp));
+    mockContentService.getStoriesadmin.and.returnValue(of(resp));
     mockContentService.getBusiness.and.returnValue(of(allBusiness));
   }));
 
@@ -192,6 +193,17 @@ describe('CardAdminStoryComponent', () => {
   it('get business', () => {
     component.getBusiness();
     expect(mockContentService.getBusiness).toHaveBeenCalled();
+  });
+
+  it('check change', () => {
+    const event = {
+      checked: false,
+      source: {
+        value: 1,
+      },
+    };
+    fixture.detectChanges();
+    component.onCheckChange(event);
   });
 
 });

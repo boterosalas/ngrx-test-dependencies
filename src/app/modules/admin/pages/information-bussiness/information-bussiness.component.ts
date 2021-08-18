@@ -154,7 +154,7 @@ export class InformationBussinessComponent implements OnInit {
     };
     const datosSend3 = this.comprobarText(this.idCaseSpecial, datos3);
     const array = [datosSend, datosSend2, datosSend3];
-    this.content.saveTermsConditions(array).subscribe((resp) => {
+    this.content.saveTermsConditions(array).subscribe((saveTerms) => {
       Swal.fire({
         text: 'Los cambios se han guardado correctamente.',
         type: 'success',
@@ -179,7 +179,7 @@ export class InformationBussinessComponent implements OnInit {
       const idBussiness = this.id;
       const edit = 0;
       const template = this.templateAddTip;
-      const dialogRef1 = this.dialog.open(ModalGenericComponent, {
+      this.dialog.open(ModalGenericComponent, {
         width: '450px',
         data: {
           title,
@@ -210,7 +210,7 @@ export class InformationBussinessComponent implements OnInit {
     this.idSaveTip = element.id;
     this.dataEditTip.controls.title.setValue(element.title);
     this.dataEditTip.controls.description.setValue(element.description);
-    const dialogRef1 = this.dialog.open(ModalGenericComponent, {
+    this.dialog.open(ModalGenericComponent, {
       width: '450px',
       data: {
         title,
