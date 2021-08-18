@@ -115,6 +115,8 @@ footer {
     font-size: 1.25rem;
     font-weight: 700;
     list-style: none;
+    outline: 0;
+    color: #fff;
   }
 
   details summary:after {
@@ -134,11 +136,6 @@ footer {
   details[open] summary:after {
     content: '\e9b3';
     font-family: 'The-Icon-of', sans-serif;
-  }
-
-  details summary {
-    outline: 0;
-    color: #fff;
   }
 
   details p {

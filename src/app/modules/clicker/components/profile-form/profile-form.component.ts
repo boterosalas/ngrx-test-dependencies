@@ -613,19 +613,35 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
           switch (param) {
             case 'Rut':
               this.nameFileRut = nameFile;
-              this.showErrorRut = response.state === 'Success' ? false : true;
+              if (response.state === 'Success') {
+                this.showErrorRut = false;
+              } else {
+                this.showErrorRut = true;
+              }
               break;
             case 'BankCertificate':
               this.nameFileCert = nameFile;
-              this.showErrorCert = response.state === 'Success' ? false : true;
+              if (response.state === 'Success') {
+                this.showErrorCert = false;
+              } else {
+                this.showErrorCert = true;
+              }
               break;
             case 'IdentificationCard1':
               this.nameFileCed1 = nameFile;
-              this.showErrorCed1 = response.state === 'Success' ? false : true;
+              if (response.state === 'Success') {
+                this.showErrorCed1 = false;
+              } else {
+                this.showErrorCed1 = true;
+              }
               break;
             case 'IdentificationCard2':
               this.nameFileCed2 = nameFile;
-              this.showErrorCed2 = response.state === 'Success' ? false : true;
+              if (response.state === 'Success') {
+                this.showErrorCed2 = false;
+              } else {
+                this.showErrorCed2 = true;
+              }
               break;
             default:
               break;
