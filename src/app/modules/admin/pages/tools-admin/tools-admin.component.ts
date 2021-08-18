@@ -651,23 +651,6 @@ export class ToolsAdminComponent implements OnInit {
             imageMobile: this.fileImgCat2,
           },
         ];
-      } else if (this.fileImgCat2 !== '') {
-        datos = [
-          {
-            ...datos[0],
-            id: this.idCarousel,
-            imageMobile: this.fileImgCat2,
-          },
-        ];
-      } else if (this.fileImgCat !== '') {
-        datos = [
-          {
-            ...datos[0],
-            id: this.idCarousel,
-            imageWeb: this.fileImgCat,
-            imageMobile: this.fileImgCat2,
-          },
-        ];
       } else {
         datos = [
           {
@@ -843,8 +826,8 @@ export class ToolsAdminComponent implements OnInit {
   }
   public loadDelete() {
     const index = [];
-    this.dataSource.forEach((content, i) => {
-      if (content.selected === true) {
+    this.dataSource.forEach((element, i) => {
+      if (element.selected === true) {
         index.push(i);
       }
     });

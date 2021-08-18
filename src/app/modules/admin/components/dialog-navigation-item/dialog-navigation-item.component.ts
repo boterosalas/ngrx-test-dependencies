@@ -108,8 +108,8 @@ export class DialogNavigationItemComponent implements OnInit {
         };
       }
 
-      this.content.saveFooterLink(item).subscribe((resp: ResponseService) => {
-        if (resp.state === 'Success') {
+      this.content.saveFooterLink(item).subscribe((saveFooterLink: ResponseService) => {
+        if (saveFooterLink.state === 'Success') {
           this.dialogRef.close();
         }
       });

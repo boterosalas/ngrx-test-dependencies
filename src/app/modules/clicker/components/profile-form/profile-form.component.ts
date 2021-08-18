@@ -276,7 +276,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     const id = 'names';
     const template = this.template;
 
-    const openEdit = this.dialog.open(DialogEditComponent, {
+    this.dialog.open(DialogEditComponent, {
       data: {
         title,
         template,

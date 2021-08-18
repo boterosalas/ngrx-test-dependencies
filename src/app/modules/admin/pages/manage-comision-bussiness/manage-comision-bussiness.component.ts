@@ -147,7 +147,7 @@ export class ManageComisionBussinessComponent implements OnInit {
     this.dataEditTip.controls.comisionEditClicker.setValue(element.commissionclicker);
     this.dataEditTip.controls.commisionEditBussiness.setValue(element.commissionbusiness);
     this.idComision = element.idcommission;
-    const dialogRef1 = this.dialog.open(ModalGenericComponent, {
+    this.dialog.open(ModalGenericComponent, {
       width: '450px',
       data: {
         title,
@@ -183,7 +183,7 @@ export class ManageComisionBussinessComponent implements OnInit {
     const idBussiness = this.id;
     const edit = 0;
     const template = this.templateAddCategory;
-    const dialogRef1 = this.dialog.open(ModalGenericComponent, {
+    this.dialog.open(ModalGenericComponent, {
       width: '450px',
       data: {
         title,

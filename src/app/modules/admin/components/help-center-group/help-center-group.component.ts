@@ -187,8 +187,8 @@ export class HelpCenterGroupComponent implements OnInit {
 
   deleteFaqItemService() {
     const datos = [this.currentLink.id];
-    this.content.deleteFaqItems(datos).subscribe((resp: ResponseService) => {
-      if (resp.state === 'Success') {
+    this.content.deleteFaqItems(datos).subscribe((deleteFaqItems: ResponseService) => {
+      if (deleteFaqItems.state === 'Success') {
         this.dialog.closeAll();
       }
     });

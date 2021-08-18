@@ -47,7 +47,7 @@ export class DialogStoryComponent implements OnInit {
   }
 
   public formStory() {
-    const { date, datepublish, description, imageurl, infoaditional, link, active } = this.data;
+    const { datepublish, description, imageurl, infoaditional, link, active } = this.data;
 
     if (description === undefined) {
       this.storieForm = this.fb.group({
