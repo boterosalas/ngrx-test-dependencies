@@ -1,3 +1,4 @@
+@import 'variables';
 .video-responsive {
   position: relative;
   padding-bottom: 56.25%; /* 16/9 ratio */
@@ -21,11 +22,15 @@
 }
 
 .t-0 {
-  top: 5px;
+  top: 10px;
+}
+.tio-download_from_cloud{
+  font-size: 32px;
+  color: $white;
 }
 
 .r-0 {
-  right: 5px;
+  right: 15px;
 }
 
 .position-absolute {

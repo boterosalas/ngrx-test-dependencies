@@ -36,7 +36,7 @@
   </div>
 
   <app-table-novelties
-    (dataNoveltie)="openDialog($event)"
+    (dataNoveltie)="goToNovelty($event)"
     [(dataSource)]="dataSource"
     (sortNoveltie)="sort($event)"
     [size]="pageSize"

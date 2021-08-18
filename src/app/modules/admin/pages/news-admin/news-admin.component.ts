@@ -9,6 +9,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { LinksService } from 'src/app/services/links.service';
 import { DialogNewsComponent } from '../../components/dialog-news/dialog-news.component';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import { Router } from '@angular/router';
 moment.locale('es');
 @Component({
   selector: 'app-news-admin',
@@ -91,7 +92,8 @@ export class NewsAdminComponent implements OnInit {
     private usersService: UserService,
     private _snackBar: MatSnackBar,
     public utils: UtilsService,
-    private kpi: LinksService
+    private kpi: LinksService,
+    private router: Router
   ) {
     this.paginator.itemsPerPageLabel = 'Ítems por página';
     this.paginator.getRangeLabel = function (page, pageSize, length) {
@@ -170,21 +172,26 @@ export class NewsAdminComponent implements OnInit {
     });
   }
 
-  public openDialog(element: any) {
-    const title = '';
-    const template = '';
-    this.dialog.open(DialogNewsComponent, {
-      height: '500px',
-      data: {
-        title,
-        template,
-        element,
-      },
-    });
-    this.dialog.afterAllClosed.subscribe(() => {
-      this.searchUser(this.paginate, this.from, this.to);
-      this.getKPI();
-    });
+
+
+  public goToNovelty(element: any) {
+    this.router.navigateByUrl(`novedad/${element.id}`);
+  /* const title = '';
+  const template = '';
+
+
+  this.dialog.open(DialogNewsComponent, {
+    height: '500px',
+    data: {
+      title,
+      template,
+      element,
+    },
+  });
+  this.dialog.afterAllClosed.subscribe(() => {
+    this.searchUser(this.paginate, this.from, this.to);
+    this.getKPI();
+  }); */
   }
 
   public getReportExcel() {
