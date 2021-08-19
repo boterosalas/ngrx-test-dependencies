@@ -192,10 +192,13 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
 
       this.indexCStory = this.stories.findIndex((story) => story.id === storyId);
 
-      if (this.currentSlick === this.index) this.saveVisitStories(this.indexCStory);
-
+      if (this.currentSlick === this.index) {
+        this.saveVisitStories(this.indexCStory);
+      }
       this.changeTimeStory();
-      if (this.currentSlick === this.index) this.pause = false;
+      if (this.currentSlick === this.index) {
+        this.pause = false;
+      }
     }
   }
 
@@ -231,7 +234,15 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   public viewStory() {
-    if (this.cardOpen) this.openStoryCard.emit(this.index);
+
+    if (this.cardOpen) {
+      this.openStoryCard.emit(this.index);
+    }
+
+    setTimeout(() => {
+      this.video.currentTime = 0;
+    }, 100);
+
   }
 
   private progress() {
@@ -269,7 +280,7 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
       }
       if (!this.interval) {
         this.interval = setInterval(() => {
-          let percent = Math.round((this.currentTime / totalTime) * 100);
+          const percent = Math.round((this.currentTime / totalTime) * 100);
           this.currentProgress.style.width = `${percent}%`;
           if (percent === 100) {
             this.vidPause(true);
@@ -285,6 +296,11 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
             this.interval = null;
           } else {
             this.vidPause(false);
+            if (this.video && !this.isImage) {
+              this.video.onended = () => {
+                  this.nextSliderOrStory();
+              };
+            }
             this.currentTime += 100; // milisegundos
           }
         }, 100);
@@ -297,7 +313,9 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
       if (pause && !this.video.paused) {
         this.video.pause();
       } else if (!pause && this.video.paused) {
-        if (this.video.currentTime === 0) this.currentTime = 0;
+        if (this.video.currentTime === 0) {
+          this.currentTime = 0;
+        }
         this.video.play();
       }
     }
@@ -367,9 +385,8 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
           this.pause = true;
           e.preventDefault();
           setTimeout(() => {
-            this.video.currentTime = 0;
             this.currentTime = 0;
-          }, 400);
+          }, 100);
         };
 
         arrowNext.onpointerup = (e) => {
@@ -414,8 +431,6 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
     if (token !== null) {
       this.tokenInfo = this.token.userInfo();
       this.idClicker = this.tokenInfo.idclicker;
-      // this.idClicker = this.tokenInfo.idclicker.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-
       const dataCategoryUrl = this.stories[this.indexCStory].link;
       this.showForm = false;
       this.urlshorten = '';

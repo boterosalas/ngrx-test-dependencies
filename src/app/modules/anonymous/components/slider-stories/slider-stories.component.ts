@@ -46,7 +46,8 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
   }
 
   public openDialogStories(index: number = 0) {
-    this.dialog.open(DialogStoriesComponent, {
+   let vidPause = false;
+   const stories = this.dialog.open(DialogStoriesComponent, {
       data: {
         stories: this.stories,
         storiesBusiness: this.storiesBusiness,
@@ -54,6 +55,7 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
         showArrows: true,
         userId: this.userId,
         showCarousel: true,
+        vidPause
       },
       panelClass: 'dialog-stories',
       hasBackdrop: false,
@@ -61,6 +63,11 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
       maxWidth: '100vw',
       height: '100vh',
     });
+
+   stories.beforeClosed().subscribe((storie) => {
+      vidPause = true;
+    });
+
   }
 
   public getStories() {
