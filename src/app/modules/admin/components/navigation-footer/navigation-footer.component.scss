@@ -1,9 +1,9 @@
 @import 'variables';
 
 .navigation-footer {
-  border-radius: 5px;
-  margin-top: 2rem;
-
+  margin: 2rem 0;
+  padding: 0;
+  overflow: hidden;
   &__header {
     display: grid;
     grid-template-columns: 10% 30% 40% 20%;
