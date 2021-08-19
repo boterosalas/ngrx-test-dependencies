@@ -1,0 +1,165 @@
+<app-banner
+  title="Novedades"
+  img="/assets/img/banners/banner-dashboard-pc.jpg"
+  imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
+></app-banner>
+
+<div class="container m-t4 fade-in" *ngIf="currentNovelty">
+  <div class="row-1" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="left" fxLayout="row">
+      <div class="icon">
+        <img src="/assets/img/message_failed.svg" alt="" />
+      </div>
+      <p>
+        No. de caso <span class="number">{{ currentNovelty.consecutive }}</span>
+      </p>
+    </div>
+    <div class="right">
+      <button mat-raised-button class="back-button" [routerLink]="['/novedades']">
+        <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon>keyboard_arrow_left</mat-icon>
+          {{ 'BUTTONS.BACK' | translate }}
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <div class="row-2" fxLayout="row" fxLayoutAlign="flex-start center">
+    <div class="step" *ngFor="let item of selecteds" [ngClass]="{ '-succes': item.state === 2, '-current': item.state === 1 }">
+      <div class="icon" *ngIf="item.state === 2">
+        <i class="tio-checkmark_circle"></i>
+      </div>
+      <div class="icon" *ngIf="item.state === 1">
+        <i class="tio-time"></i>
+      </div>
+      {{ item.titulo }}
+    </div>
+  </div>
+
+  <mat-card>
+    <mat-card-title class="card-title"> Información de Clicker </mat-card-title>
+    <div class="info" fxLayout="row" fxLayoutAlign="flex-start center">
+      <div fxLayout="column" fxLayoutAlign="flex-start">
+        <span>NOMBRE DEL CLICKER</span>
+        <span>{{currentNovelty.name}}</span>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="flex-start">
+        <span>ID</span>
+        <span>{{currentNovelty.idclicker}}</span>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="flex-start">
+        <span>CÉDULA</span>
+        <span>{{currentNovelty.identification}}</span>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="flex-start">
+        <span>CELULAR</span>
+        <span>{{currentNovelty.cellphone}}</span>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="flex-start">
+        <span>CORREO</span>
+        <span>{{currentNovelty.email}}</span>
+      </div>
+    </div>
+  </mat-card>
+
+  <div class="row-3" fxLayout="row" fxLayoutAlign="space-between stretch">
+    <div class="left"></div>
+    <div class="right">
+      <div fxLayout="column" fxLayoutAlign="center" class="border-bottom-gray">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <h3 class="mb-3 title-name">Información de la novedad</h3>
+        </div>
+      </div>
+      <div fxLayout="row" class="pb-2">
+        <div fxLayout="column" fxLayoutGap="20px">
+          <p fxLayout="row" class="margin-zero-bottom">
+            <span class="galano-bold gray w-label">FECHA DE LA SOLICITUD</span>
+            <span class="normal-text">{{ currentNovelty.date | date: 'dd/MM/yyyy' }}</span>
+          </p>
+          <p fxLayout="row" class="margin-zero-bottom">
+            <span class="galano-bold gray w-label">FECHA DE NOVEDAD</span>
+            <span class="normal-text">{{ currentNovelty.datenovelty | date: 'dd/MM/yyyy' }}</span>
+          </p>
+          <p fxLayout="row" class="margin-zero-bottom">
+            <span class="galano-bold gray w-label">FECHA DE SOLUCIÓN</span>
+            <span class="normal-text">{{ currentNovelty.solutiondate | date: 'dd/MM/yyyy' }}</span>
+          </p>
+          <p fxLayout="row" class="margin-zero-bottom">
+            <span class="galano-bold gray w-label">NEGOCIO</span>
+            <span class="normal-text">{{ currentNovelty.businessdescription }}</span>
+          </p>
+          <p fxLayout="row" class="margin-zero-bottom">
+            <span class="galano-bold gray w-label">REFERENCIA DE ORDEN/SERVICIO</span>
+            <span class="normal-text">{{ currentNovelty.code }} </span>
+          </p>
+          <div fxLayout="column" class="margin-zero-bottom">
+            <span class="galano-bold gray mt-2">DESCRIPCIÓN DE LA NOVEDAD</span>
+            <div class="class-description">
+              <span class="normal-text w-description">{{ currentNovelty.description }}</span>
+            </div>
+          </div>
+          <div fxLayout="row">
+            <p fxLayout="column" class="margin-zero-bottom margin-top-5px">
+              <span class="galano-bold gray w-label">EVIDENCIA</span>
+              <span (click)="viewerImage()" class="normal-link cursor-pointer">{{ image }}</span>
+            </p>
+            <p fxLayout="column" class="margin-zero-bottom margin-top-5px margin-left-10px">
+              <span class="galano-bold gray">ESTADO</span>
+              <span *ngIf="currentNovelty.statusnovelty === 'Pendiente'" class="span-relative-new normal-text"
+                ><img class="status-img" src="/assets/img/dashboard/icon-info.svg" alt="pendind" /> Pendiente</span
+              >
+              <span *ngIf="currentNovelty.statusnovelty === 'Solucionado'" class="span-relative-new normal-text"
+                ><img class="status-img" src="/assets/img/dashboard/icon-check-new.svg" alt="pendind" /> Solucionado</span
+              >
+              <span *ngIf="currentNovelty.statusnovelty === 'En revisión'" class="span-relative-new normal-text"
+                ><img class="status-img" src="/assets/img/dashboard/icon-revision.svg" alt="pendind" /> En revisión</span
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-3" fxLayout="row" fxLayoutAlign="end">
+        <form [formGroup]="dateForm" fxLayout="column" class="w-100">
+          <mat-form-field class="selected-report" class="w-50">
+            <mat-placeholder class="label-up-text-selected">NUEVO ESTADO</mat-placeholder>
+            <mat-select id="tipoReport" formControlName="status" class="selected-report">
+              <mat-option (click)="onChangeSelected(selected.titulo)" *ngFor="let selected of selecteds" value="{{ selected.titulo }}">
+                <span>{{ selected.titulo }}</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Respuesta</mat-label>
+            <textarea formControlName="responsenovelty" matInput placeholder="Respuesta(opcional)"></textarea>
+          </mat-form-field>
+          <mat-error id="maxName" *ngIf="dateForm.controls.responsenovelty.invalid && dateForm.controls.responsenovelty.errors.maxlength">{{
+            'GENERIC.MAX_CHARACTERS'
+              | translate
+                : {
+                    maxchar: dateForm.controls.responsenovelty.errors.maxlength.requiredLength
+                  }
+          }}</mat-error>
+        </form>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="end end">
+        <button
+          mat-raised-button
+          color="orange"
+          [disabled]="active || !dateForm.valid"
+          (click)="saveChanges()"
+          id="download-users"
+          class="ml-2 send-button"
+        >
+          Guardar
+        </button>
+      </div>
+      <ng-template #templateImage>
+        <div>
+          <img class="w-image" [src]="currentNovelty.documenturl" alt="" />
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

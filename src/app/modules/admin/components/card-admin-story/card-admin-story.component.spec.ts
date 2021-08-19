@@ -163,6 +163,17 @@ describe('CardAdminStoryComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('check change', () => {
+    const event = {
+      checked: false,
+      source: {
+        value: 1,
+      },
+    };
+    fixture.detectChanges();
+    component.onCheckChange(event);
+  });
+
   it('edit story', () => {
     component.editStory(data);
     expect(data).not.toBeUndefined();
@@ -195,15 +206,5 @@ describe('CardAdminStoryComponent', () => {
     expect(mockContentService.getBusiness).toHaveBeenCalled();
   });
 
-  it('check change', () => {
-    const event = {
-      checked: false,
-      source: {
-        value: 1,
-      },
-    };
-    fixture.detectChanges();
-    component.onCheckChange(event);
-  });
 
 });

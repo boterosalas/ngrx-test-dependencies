@@ -53,6 +53,7 @@ export class UserService {
   apiSaveNews = 'new/savenew';
   apiUploadNews = 'new/uploadnew';
   apiGetNews = 'new/getnews';
+  apiNoveltyById ="new/getnoveltybyid";
   apiGetExcelNews = 'new/getnewsexcel';
   apiSetStatusNew = 'new/changestatusnew';
   apiReportLife = 'report/getcommissionsbyuser';
@@ -434,6 +435,21 @@ export class UserService {
       })
     );
   }
+
+  public getNoveltyById(id) {
+    return this.http
+      .get(`${this.urlReports}${this.apiNoveltyById}?id=${id}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(1000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        )
+      );
+  }
+
   public getExportNewsExcel(data: any) {
     return this.http.post(`${this.urlReports}${this.apiGetExcelNews}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>

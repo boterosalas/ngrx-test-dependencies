@@ -50,6 +50,7 @@ export class DialogNewsComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
   public viewerImage() {
     const splitExt = this.image.split('.');
     const getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
