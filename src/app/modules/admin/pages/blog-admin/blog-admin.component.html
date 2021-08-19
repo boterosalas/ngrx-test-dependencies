@@ -10,7 +10,7 @@
   </div>
   <div *ngIf="blogPublicado.length > 0" class="container-blogs">
     <div *ngFor="let item of blogPublicado">
-      <mat-card class="card-padding">
+      <mat-card class="card-padding mat-card-box-shadow ">
         <div fxLayout="row" fxLayoutAlign="space-between">
           <div fxLayout="row">
             <img class="imagen-blog" [src]="item.imageurl" alt="" />
@@ -50,7 +50,7 @@
   </div>
   <div *ngIf="blogHidden.length > 0" class="container-blogs">
     <div *ngFor="let item of blogHidden">
-      <mat-card class="card-padding">
+      <mat-card class="card-padding mat-card-box-shadow ">
         <div fxLayout="row" fxLayoutAlign="space-between">
           <div fxLayout="row">
             <img class="imagen-blog" [src]="item.imageurl" alt="" />
