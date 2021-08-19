@@ -14,7 +14,7 @@ module.exports = function (config) {
       require('karma-parallel'),
     ],
     parallelOptions: {
-      executors: 1, // Defaults to cpu-count - 1
+      executors: 4, // Defaults to cpu-count - 1
       shardStrategy: 'round-robin'
     },
     client: {
@@ -34,10 +34,10 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-     browsers: ['Chrome'],
-     singleRun: false,
-    //browsers: ['ChromeHeadless'],
-    //singleRun: true,
+    //  browsers: ['Chrome'],
+    //  singleRun: false,
+    browsers: ['ChromeHeadless'],
+    singleRun: true,
     restartOnFileChange: true,
     captureTimeout: 210000,
     browserDisconnectTolerance: 3,
