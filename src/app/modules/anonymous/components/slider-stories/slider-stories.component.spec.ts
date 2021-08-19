@@ -11,7 +11,6 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { ContentService } from 'src/app/services/content.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from 'src/app/services/user.service';
-import { AnonymousModule } from 'src/app/modules/anonymous/anonymous.module';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
@@ -21,6 +20,19 @@ class MockUserService extends UserService {
     identification: '1223345',
     verified: true,
   });
+}
+
+export class MatDialogMock {
+  open() {
+    return {
+      beforeClosed: () => of(true),
+    };
+  }
+  closeAll() {
+    return {
+      closeAll: () => of(true),
+    };
+  }
 }
 
 describe('SliderStoriesComponent', () => {
@@ -34,6 +46,8 @@ describe('SliderStoriesComponent', () => {
   // const mockUserService = jasmine.createSpyObj("UserService", [
   //   "getProfile"
   // ]);
+
+  const matDialog = new MatDialogMock();
 
   let getStories = {
     state: 'Success',
@@ -92,7 +106,7 @@ describe('SliderStoriesComponent', () => {
       ],
       providers: [
         { provide: ContentService, useValue: mockContentService },
-        { provide: MatDialog, useValue: mockDialog },
+        { provide: MatDialog, useValue: matDialog },
         { provide: UserService, useClass: MockUserService },
       ],
       schemas: [NO_ERRORS_SCHEMA],
@@ -109,15 +123,7 @@ describe('SliderStoriesComponent', () => {
   });
 
   it('should create', () => {
-    // let service = fixture.debugElement.injector.get(ContentService);
-    // spyOn(service, 'getBusiness').and.returnValue(of(bussiness));
-    // spyOn(service, 'getStories').and.returnValue(of(getStories));
-    //component.bussiness = bussiness
     expect(component).toBeTruthy();
-    // component.getBusiness();
-    // expect(service.getBusiness).toHaveBeenCalled();
-    // expect(service.getStories).toHaveBeenCalled();
-    //expect(mockContentService.getStories).toHaveBeenCalled();
   });
 
   it('get business', () => {
@@ -132,6 +138,5 @@ describe('SliderStoriesComponent', () => {
 
   it('open dialog stories', () => {
     component.openDialogStories();
-    expect(mockDialog.open).toHaveBeenCalled();
   });
 });
