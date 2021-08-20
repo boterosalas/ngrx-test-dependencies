@@ -37,37 +37,6 @@ describe('NoveltyChatComponent', () => {
     responsenovelty: 'prueba con estado',
   };
 
-  const listNotes = [
-    {
-      type: 1,
-      state: 'Solucionado',
-      text: 'nota de novedad',
-      adminName: 'Eisner Puerta Carrillo',
-      date: '2021-08-13T01:47:29.277Z',
-    },
-    {
-      type: 0,
-      state: 'Solucionado',
-      text: 'Cambio de estado',
-      adminName: 'Eisner Puerta Carrillo',
-      date: '2021-08-13T01:47:42.827Z',
-    },
-    {
-      type: 0,
-      state: 'Solucionado',
-      text: 'Respuesta de la solución',
-      adminName: 'Eisner Puerta Carrillo',
-      date: '2021-08-13T01:49:41.380Z',
-    },
-    {
-      type: 0,
-      state: 'En revisión',
-      text: '',
-      adminName: 'Yeferson ',
-      date: '2021-08-18T16:38:27.130Z',
-    },
-  ];
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [NoveltyChatComponent],
