@@ -701,19 +701,35 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   public getNames() {
 
     this.user.getDocuments('Rut').subscribe((rut: ResponseService) => {
-      this.nameFileRut = rut.objectResponse.name;
+      if (rut.objectResponse !== null) {
+        this.nameFileRut = rut.objectResponse.name;
+      } else{
+        this.nameFileRut = '';
+      }
     });
 
     this.user.getDocuments('BankCertificate').subscribe((cert: ResponseService) => {
-      this.nameFileCert = cert.objectResponse.name;
+      if (cert.objectResponse !== null) {
+        this.nameFileCert = cert.objectResponse.name;
+      } else {
+        this.nameFileCert = '';
+      }
     });
 
     this.user.getDocuments('IdentificationCard1').subscribe((idfront: ResponseService) => {
-      this.nameFileCed1 = idfront.objectResponse.name;
+      if (idfront.objectResponse !== null) {
+        this.nameFileCed1 = idfront.objectResponse.name;
+      } else {
+        this.nameFileCed1 = '';
+      }
     });
 
     this.user.getDocuments('IdentificationCard2').subscribe((idback: ResponseService) => {
-      this.nameFileCed2 = idback.objectResponse.name;
+      if (idback.objectResponse !== null) {
+        this.nameFileCed2 = idback.objectResponse.name;
+      } else {
+        this.nameFileCed2 = '';
+      }
     });
 
   }
