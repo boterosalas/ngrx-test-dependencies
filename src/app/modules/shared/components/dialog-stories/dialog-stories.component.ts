@@ -9,8 +9,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./dialog-stories.component.scss'],
 })
 export class DialogStoriesComponent implements OnInit {
-  @ViewChild('slickModalStories', { static: false })
-  slickModal: SlickCarouselComponent;
+  @ViewChild('slickModalStories', { static: false }) slickModal: any;
 
   slideConfig: {};
   showArrowLeft = true;
@@ -64,6 +63,7 @@ export class DialogStoriesComponent implements OnInit {
     }
 
     this.dialogRef.close();
+
   }
 
   slickInit(e) {

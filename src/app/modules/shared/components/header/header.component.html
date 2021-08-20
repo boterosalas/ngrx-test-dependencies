@@ -73,7 +73,7 @@
                     <i class="tio-notice icon-props"></i>
                   </div>
 
-                  <div fxLayout="column">
+                  <div fxLayout="column" [routerLink]="['/notificaciones']" class="cursor-pointer">
                     <span class="title-inner">{{ notification.title }}</span>
                     <span class="date">{{ notification.date | date: 'dd/MM/yyyy' }}</span>
                   </div>
