@@ -53,7 +53,7 @@ export class UserService {
   apiSaveNews = 'new/savenew';
   apiUploadNews = 'new/uploadnew';
   apiGetNews = 'new/getnews';
-  apiNoveltyById ="new/getnoveltybyid";
+  apiNoveltyById = 'new/getnoveltybyid';
   apiGetExcelNews = 'new/getnewsexcel';
   apiSetStatusNew = 'new/changestatusnew';
   apiReportLife = 'report/getcommissionsbyuser';
@@ -66,6 +66,9 @@ export class UserService {
   apiGetPermision = 'userprofile/getpermissions';
   apiCreateUserAdmin = 'userprofile/createuseradmin';
   apiUserInfoAditional = 'userprofile/getuserinfoaditional';
+  apiSaveNewNovelty = 'new/savenewnovelty';
+  apiGetNewsNovelties = 'new/getnewsnovelty';
+
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -143,6 +146,30 @@ export class UserService {
 
   public registerUser(userInfo: any) {
     return this.http.post(`${this.url}${this.apiCreateUser}`, userInfo, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      )
+    );
+  }
+
+  public saveNewNovelty(newNovelty: any) {
+    return this.http.post(`${this.url}${this.apiSaveNewNovelty}`, newNovelty, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      )
+    );
+  }
+
+  getNewNovelties(id:string) {
+    return this.http.get(`${this.url}${this.apiGetNewsNovelties}?id=${id}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(1000),
@@ -393,7 +420,6 @@ export class UserService {
         )
       )
     );
-
   }
   public getReportGamification() {
     return this.http.get(`${this.urlReports}${this.apiReporUserGamification}`, this.httpOptions).pipe(
@@ -437,17 +463,15 @@ export class UserService {
   }
 
   public getNoveltyById(id) {
-    return this.http
-      .get(`${this.urlReports}${this.apiNoveltyById}?id=${id}`, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.get(`${this.urlReports}${this.apiNoveltyById}?id=${id}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 
   public getExportNewsExcel(data: any) {
@@ -500,17 +524,15 @@ export class UserService {
   }
 
   public getDocuments(document: string) {
-    return this.http
-      .get(`${this.url}${this.apiGetDocuments}?typeDocument=${document}`, this.httpOptions)
-      .pipe(
-        retryWhen((errors) =>
-          errors.pipe(
-            delay(1000),
-            take(3),
-            tap((errorStatus) => {})
-          )
+    return this.http.get(`${this.url}${this.apiGetDocuments}?typeDocument=${document}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
         )
-      );
+      )
+    );
   }
 
   public updateInfoClicker(data: any) {

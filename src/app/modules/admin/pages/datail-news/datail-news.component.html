@@ -41,35 +41,38 @@
     <div class="info" fxLayout="row" fxLayoutAlign="flex-start center">
       <div fxLayout="column" fxLayoutAlign="flex-start">
         <span>NOMBRE DEL CLICKER</span>
-        <span>{{currentNovelty.name}}</span>
+        <span>{{ currentNovelty.name }}</span>
       </div>
       <div fxLayout="column" fxLayoutAlign="flex-start">
         <span>ID</span>
-        <span>{{currentNovelty.idclicker}}</span>
+        <span>{{ currentNovelty.idclicker }}</span>
       </div>
       <div fxLayout="column" fxLayoutAlign="flex-start">
         <span>CÉDULA</span>
-        <span>{{currentNovelty.identification}}</span>
+        <span>{{ currentNovelty.identification }}</span>
       </div>
       <div fxLayout="column" fxLayoutAlign="flex-start">
         <span>CELULAR</span>
-        <span>{{currentNovelty.cellphone}}</span>
+        <span>{{ currentNovelty.cellphone }}</span>
       </div>
       <div fxLayout="column" fxLayoutAlign="flex-start">
         <span>CORREO</span>
-        <span>{{currentNovelty.email}}</span>
+        <span>{{ currentNovelty.email }}</span>
       </div>
     </div>
   </mat-card>
 
   <div class="row-3" fxLayout="row" fxLayoutAlign="space-between stretch">
-    <div class="left"></div>
+    <div class="left">
+      <app-novelty-chat [novelty]="currentNovelty" [listNotes]="listNovelties" (updateNovelty)="updateNovelty($event)"></app-novelty-chat>
+    </div>
     <div class="right">
       <div fxLayout="column" fxLayoutAlign="center" class="border-bottom-gray">
         <div fxLayout="row" fxLayoutAlign="space-between center">
-          <h3 class="mb-3 title-name">Información de la novedad</h3>
+          <h3 class="mb-2 mt-2 title-name">Información de la novedad</h3>
         </div>
       </div>
+
       <div fxLayout="row" class="pb-2">
         <div fxLayout="column" fxLayoutGap="20px">
           <p fxLayout="row" class="margin-zero-bottom">

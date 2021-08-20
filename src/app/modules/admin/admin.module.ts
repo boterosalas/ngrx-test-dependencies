@@ -79,6 +79,7 @@ import { StoriesComponent } from './pages/stories/stories.component';
 import { CardAdminStoryComponent } from './components/card-admin-story/card-admin-story.component';
 import { DialogStoryComponent } from './components/dialog-story/dialog-story.component';
 import { DatailNewsComponent } from './pages/datail-news/datail-news.component';
+import { NoveltyChatComponent } from './components/novelty-chat/novelty-chat.component';
 
 const routes: Routes = [
   {
@@ -331,6 +332,7 @@ const routes: Routes = [
     DashboardComponent,
     EditBlogAdminComponent,
     SideMenuComponent,
+    NoveltyChatComponent,
     ReportsComponent,
     CardComponent,
     PopupCardComponent,
