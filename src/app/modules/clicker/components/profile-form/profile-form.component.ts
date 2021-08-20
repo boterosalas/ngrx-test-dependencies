@@ -178,6 +178,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.accountBankForm();
     this.getBanks();
     this.getUserData();
+    this.getNames();
   }
 
   public formProfileDelete() {
@@ -312,9 +313,6 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       this.accountForm.reset();
     }
 
-    this.nameFileCert = '';
-    this.nameFileCed1 = '';
-    this.nameFileCed2 = '';
     const openEdit = this.dialog.open(DialogEditComponent, {
       maxWidth: '450px',
       panelClass: 'editaccount',
@@ -327,10 +325,6 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
 
     openEdit.beforeClosed().subscribe(() => {
       this.getUserData();
-      this.nameFileCed1 = '';
-      this.nameFileCed2 = '';
-      this.nameFileCert = '';
-      this.nameFileRut = '';
     });
 
     this.dialog.afterAllClosed.subscribe(() => {
@@ -704,6 +698,42 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     });
   }
 
+  public getNames() {
+
+    this.user.getDocuments('Rut').subscribe((rut: ResponseService) => {
+      if (rut.objectResponse !== null) {
+        this.nameFileRut = rut.objectResponse.name;
+      } else{
+        this.nameFileRut = '';
+      }
+    });
+
+    this.user.getDocuments('BankCertificate').subscribe((cert: ResponseService) => {
+      if (cert.objectResponse !== null) {
+        this.nameFileCert = cert.objectResponse.name;
+      } else {
+        this.nameFileCert = '';
+      }
+    });
+
+    this.user.getDocuments('IdentificationCard1').subscribe((idfront: ResponseService) => {
+      if (idfront.objectResponse !== null) {
+        this.nameFileCed1 = idfront.objectResponse.name;
+      } else {
+        this.nameFileCed1 = '';
+      }
+    });
+
+    this.user.getDocuments('IdentificationCard2').subscribe((idback: ResponseService) => {
+      if (idback.objectResponse !== null) {
+        this.nameFileCed2 = idback.objectResponse.name;
+      } else {
+        this.nameFileCed2 = '';
+      }
+    });
+
+  }
+
   private openpreviewImage(data) {
     const image = new Image();
     image.src = 'data:image/jpg;base64,' + data;
@@ -713,7 +743,6 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   }
 
   private openpreviewPdf(data) {
-    window.open('data:application/pdf,' + encodeURI(data));
     const pdfWindow = window.open('');
     pdfWindow.document.write("<iframe width='100%' height='100%' src='data:application/pdf;base64, " +
       encodeURI(data) + "'></iframe>"

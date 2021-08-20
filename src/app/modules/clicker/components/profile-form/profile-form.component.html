@@ -616,7 +616,7 @@
         <div fxLayout="column" fxLayoutAlign="center" class="space">
           <strong class="gray">{{ 'REGISTER.ACCOUNT_CERT' | translate }}</strong>
           <span *ngIf="nameFileCert === ''">No hay archivo seleccionado</span>
-          <span class="file-input" *ngIf="nameFileCert !== ''">{{ nameFileCert | truncate: '20' }}</span>
+          <span class="file-input" *ngIf="nameFileCert !== ''">{{ nameFileCert | truncate: '30' }}</span>
         </div>
         <i (click)="previewDocument('BankCertificate')" class="tio-search cursor-pointer mt-1 mr-3 f-25 purple2-text"></i>
         <div class="space">
