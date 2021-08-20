@@ -1,0 +1,75 @@
+@import 'variables';
+@import 'general';
+@import 'animations';
+
+.wrapper {
+  .header {
+    .title-name {
+      color: #37236a;
+      font-size: 20px;
+      line-height: 28px;
+      strong {
+        color: #878195;
+      }
+    }
+  }
+
+  .list-notes {
+    height: calc(540px - 216px);
+    overflow-y: auto;
+    .note {
+      border-radius: 10px;
+      padding: 10px 15px;
+      overflow: hidden;
+      margin: 10px 10px 10px 0;
+      .change-state {
+        text-transform: uppercase;
+
+        font-size: 11px;
+      }
+      .text {
+        font-size: 12px;
+        font-weight: normal;
+      }
+
+      .footer-note {
+        span {
+          font-size: 10px;
+          font-weight: lighter;
+        }
+      }
+      &.type-status {
+        background-color: #fff0de;
+        .change-state {
+          color: #9d5f17;
+        }
+        .text {
+          p {
+            color: #9d5f17;
+          }
+        }
+
+        .footer-note {
+          span {
+            color: #9d5f17;
+          }
+        }
+      }
+      &.type-note {
+        background-color: #f1f3f6;
+
+        .text {
+          p {
+            color: $primary-color;
+          }
+        }
+
+        .footer-note {
+          span {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+}

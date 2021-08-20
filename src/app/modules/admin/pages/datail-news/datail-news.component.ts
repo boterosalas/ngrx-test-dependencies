@@ -1,7 +1,8 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { UserService } from 'src/app/services/user.service';
@@ -11,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './datail-news.component.html',
   styleUrls: ['./datail-news.component.scss'],
 })
-export class DatailNewsComponent implements OnInit {
+export class DatailNewsComponent implements OnInit, OnDestroy {
   dateForm: FormGroup;
   @ViewChild('templateImage', { static: false })
   templateVideo: TemplateRef<any>;
@@ -32,8 +33,11 @@ export class DatailNewsComponent implements OnInit {
       state: 0,
     },
   ];
-  subcriptionParams: Subscription;
-  subcriptionNovelty: Subscription;
+  $subcriptionParams: Subscription;
+  $subcriptionNovelty: Subscription;
+  $subscriptionSaveNote: Subscription;
+  $subscriptionGetNovelties: Subscription;
+  listNovelties = [];
 
   constructor(
     private snackBar: MatSnackBar,
@@ -44,7 +48,7 @@ export class DatailNewsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.subcriptionParams = this.routeParams.params.subscribe((params) => {
+    this.$subcriptionParams = this.routeParams.params.subscribe((params) => {
       if (params && params['id']) {
         this.getNoveltyById(params.id);
       }
@@ -52,11 +56,12 @@ export class DatailNewsComponent implements OnInit {
   }
 
   public getNoveltyById(id: string) {
-    this.subcriptionNovelty = this.user.getNoveltyById(id).subscribe((novelty) => {
+    this.$subcriptionNovelty = this.user.getNoveltyById(id).subscribe((novelty) => {
       if (novelty['objectResponse']) {
         this.currentNovelty = novelty['objectResponse'];
         this.changeSelecteds(this.currentNovelty.statusnovelty);
         this.initForm();
+        this.getNovelties();
       }
     });
   }
@@ -122,6 +127,7 @@ export class DatailNewsComponent implements OnInit {
     this.user.setStatus(datos).subscribe((resp: any) => {
       if (resp.state === 'Success') {
         this.getNoveltyById(this.currentNovelty.id);
+        this.active = true;
         this.snackBar.open(resp.userMessage, 'Cerrar', {
           duration: 3000,
         });
@@ -162,5 +168,43 @@ export class DatailNewsComponent implements OnInit {
       default:
         break;
     }
+  }
+
+  public updateNovelty(data: any) {
+    this.$subscriptionSaveNote = this.user.saveNewNovelty(data).subscribe((resp: any) => {
+      if (resp.state === 'Success') {
+        this.getNoveltyById(this.currentNovelty.id);
+        this.snackBar.open(resp.userMessage, 'Cerrar', {
+          duration: 3000,
+        });
+      }
+    });
+  }
+
+  public getNovelties() {
+    this.$subscriptionGetNovelties = this.user.getNewNovelties(this.currentNovelty.id).subscribe((resp) => {
+      if (resp['objectResponse']) {
+        this.listNovelties = [...resp['objectResponse'].news, ...resp['objectResponse'].changesstatus]
+          .sort((a, b) => {
+            return moment(a.datemessage).valueOf() - moment(b.datemessage).valueOf();
+          })
+          .map((novelty) => {
+            return {
+              type: novelty.typenewnovelty ? 0 : 1,
+              state: novelty.statusnovelty,
+              text: novelty.message,
+              adminName: novelty.nameadmin,
+              date: moment(novelty.datemessage),
+            };
+          });
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.$subscriptionGetNovelties.unsubscribe();
+    this.$subcriptionParams.unsubscribe();
+    this.$subcriptionNovelty.unsubscribe();
+    this.$subscriptionSaveNote.unsubscribe();
   }
 }
