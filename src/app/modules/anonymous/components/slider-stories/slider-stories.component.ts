@@ -6,6 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Subscription } from 'rxjs';
 import { ResponseService } from 'src/app/interfaces/response';
 import decode from 'jwt-decode';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-slider-stories',
@@ -18,7 +19,12 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
   bussiness: any;
   userId: string;
 
-  constructor(private user: UserService, private dialog: MatDialog, private content: ContentService) {}
+  constructor(
+    private user: UserService,
+    private dialog: MatDialog,
+    private content: ContentService,
+    private router: Router
+  ) { }
 
   private subscription: Subscription = new Subscription();
 
@@ -30,7 +36,7 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
   }
 
   public getBusiness() {
-    this.content.getBusiness().subscribe((bussiness) => {
+    this.subscription = this.content.getBusiness().subscribe((bussiness) => {
       this.bussiness = bussiness;
       this.getStories();
     });
@@ -46,8 +52,9 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
   }
 
   public openDialogStories(index: number = 0) {
-   let vidPause = false;
-   const stories = this.dialog.open(DialogStoriesComponent, {
+    let vidPause = false;
+    const stories = this.dialog.open(DialogStoriesComponent, {
+      disableClose: true,
       data: {
         stories: this.stories,
         storiesBusiness: this.storiesBusiness,
@@ -64,14 +71,17 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
       height: '100vh',
     });
 
-   stories.beforeClosed().subscribe((storie) => {
+    this.subscription = stories.beforeClosed().subscribe((storie) => {
       vidPause = true;
+      this.router.navigateByUrl('/notificaciones', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/inicio']);
+      });
     });
 
   }
 
   public getStories() {
-    this.content.getStories(false).subscribe((data: ResponseService) => {
+    this.subscription = this.content.getStories(false).subscribe((data: ResponseService) => {
       if (data.state === 'Success') {
         if (data.objectResponse) {
           data.objectResponse.forEach((storyS) => {
