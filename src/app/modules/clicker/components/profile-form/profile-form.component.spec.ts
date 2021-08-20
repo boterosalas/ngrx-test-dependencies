@@ -231,6 +231,7 @@ describe('ProfileFormComponent', () => {
     mockUserService.getStatusVerification.and.returnValue(of(getStatusVerification));
     mockUserService.changeBankInformation.and.returnValue(of(changeBankInformation));
     mockUserService.uploadFiles.and.returnValue(of(respUploadFiles));
+    mockUserService.getDocuments.and.returnValue(of(previewImg));
   }));
 
   beforeEach(() => {
