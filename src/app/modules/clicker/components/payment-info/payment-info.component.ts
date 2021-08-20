@@ -172,7 +172,7 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
               type: 'error',
               confirmButtonText: 'Aceptar',
               confirmButtonClass: 'accept-register-alert-error',
-            }).then(() => {});
+            });
           }
 
           switch (param) {
