@@ -23,7 +23,7 @@ describe('DatailNewsComponent', () => {
   let component: DatailNewsComponent;
   let fixture: ComponentFixture<DatailNewsComponent>;
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll', 'afterAllClosed']);
-  const mockUserService = jasmine.createSpyObj('UserService', ['getNoveltyById', 'setStatus']);
+  const mockUserService = jasmine.createSpyObj('UserService', ['getNoveltyById', 'setStatus', 'saveNewNovelty', 'getNewNovelties']);
 
   const respDatos = {
     consecutive: '000001',
@@ -44,9 +44,41 @@ describe('DatailNewsComponent', () => {
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
   };
 
+  const listNotes = [
+    {
+      type: 1,
+      state: 'Solucionado',
+      text: 'nota de novedad',
+      adminName: 'Eisner Puerta Carrillo',
+      date: '2021-08-13T01:47:29.277Z',
+    },
+    {
+      type: 0,
+      state: 'Solucionado',
+      text: 'Cambio de estado',
+      adminName: 'Eisner Puerta Carrillo',
+      date: '2021-08-13T01:47:42.827Z',
+    },
+    {
+      type: 0,
+      state: 'Solucionado',
+      text: 'Respuesta de la solución',
+      adminName: 'Eisner Puerta Carrillo',
+      date: '2021-08-13T01:49:41.380Z',
+    },
+    {
+      type: 0,
+      state: 'En revisión',
+      text: '',
+      adminName: 'Yeferson ',
+      date: '2021-08-18T16:38:27.130Z',
+    },
+  ];
+
   const dataResp = {
     state: 'Success',
   };
+
   const data = {
     element: {
       id: 1,
@@ -87,6 +119,9 @@ describe('DatailNewsComponent', () => {
     }).compileComponents();
     mockUserService.getNoveltyById.and.returnValue(of(respDatos));
     mockUserService.setStatus.and.returnValue(of(dataResp));
+    mockUserService.getNewNovelties.and.returnValue(of(listNotes));
+    mockUserService.saveNewNovelty.and.returnValue(of(dataResp));
+
   }));
 
   beforeEach(() => {
@@ -114,5 +149,24 @@ describe('DatailNewsComponent', () => {
     component.image = '';
     component.viewerImage();
     expect(mockDialog.open).toBeTruthy();
+  });
+
+  it('get notes', () => {
+    component.listNovelties = listNotes;
+    component.currentNovelty = respDatos;
+    component.getNovelties();
+    expect(mockUserService.getNewNovelties).toHaveBeenCalled();
+    expect(component.listNovelties.length).toBeGreaterThan(1);
+  });
+
+  it('save new novelty', () => {
+    component.currentNovelty = respDatos;
+    component.updateNovelty({
+      idnovelty: respDatos.id,
+      description: 'nota de prueba',
+      statusnovelty: respDatos.statusnovelty,
+      typenewnovelty: false,
+    });
+    expect(mockUserService.setStatus).toHaveBeenCalled();
   });
 });

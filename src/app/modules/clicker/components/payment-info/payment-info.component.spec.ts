@@ -3,7 +3,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { of, throwError, BehaviorSubject } from 'rxjs';
+import { of, throwError, BehaviorSubject, Observable } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
@@ -14,7 +14,7 @@ import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { PaymentInfoComponent } from './payment-info.component';
 
-class MockUserService extends UserService {
+class MockUserService {
   userInfo$ = new BehaviorSubject<any>({
     userId: '721',
     identification: '1002546856',
@@ -22,94 +22,73 @@ class MockUserService extends UserService {
     lastNames: 'Betancur',
     cellphone: '3000000000',
   });
+
+  response = {
+    state: 'Success',
+    userMessage: 'actualizado',
+    objectResponse: null,
+  };
+
+  update = {
+    state: 'Success',
+    userMessage: 'actualizado',
+    objectResponse: null,
+  };
+
+  uploadFiles() {
+   const response = new Observable(res => {
+     res.next(this.response);
+   });
+   return response;
+  }
+
+  updateUser() {
+   const update = new Observable(res => {
+     res.next(this.update);
+   });
+   return update;
+  }
+
 }
 
-describe("('PaymentInfoComponent', ", () => {
+class MockUserServiceError {
+  userInfo$ = new BehaviorSubject<any>({});
+
+  response = {
+    state: 'Error',
+    userMessage: 'Error',
+    objectResponse: null,
+  };
+
+  update = {
+    state: 'Error',
+    userMessage: 'Error',
+    objectResponse: null,
+  };
+
+  uploadFiles() {
+   const response = new Observable(res => {
+     res.next(this.response);
+   });
+   return response;
+  }
+
+  updateUser() {
+   const update = new Observable(res => {
+     res.next(this.update);
+   });
+   return update;
+  }
+
+}
+
+describe('PaymentInfoComponent', () => {
   let component: PaymentInfoComponent;
   let fixture: ComponentFixture<PaymentInfoComponent>;
+
   const mockMasterDataService = jasmine.createSpyObj('MasterDataService', ['getDepartments', 'getBanks']);
 
-  const mockUserService = jasmine.createSpyObj('UserService', ['uploadFiles']);
-
-  const idType = [
-    {
-      id: 1,
-      value: 'Cédula de ciudadania',
-    },
-    {
-      id: 2,
-      value: 'Cédula de extranjería',
-    },
-    {
-      id: 3,
-      value: 'NIT',
-    },
-  ];
-
-  const register = {
-    state: 'Success',
-    objectResponse: {
-      userId: 0,
-      Email: 'eisner.puerta@pragma.com.co',
-      FirstNames: 'Eisner',
-      LastNames: 'Puerta Carrillo',
-      Identification: '1050955208',
-      Cellphone: '3105009039',
-      Password: 'RXBjMTUyNygpOw==',
-      IdType: 1,
-      department: 'Antioquia',
-      municipality: 'Medellin',
-      stateId: 1,
-      state: '',
-      isEmployeeGrupoExito: false,
-      verified: false,
-      fileIdentificationCard1:
-        'iVBORw0KGgoAAAANSUhEUgAAACAAAAAqCAIAAABdg87FAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVFhH7c0xDQAgAAQx/Jt+JHRiILka6NljBVRABVRABVRABVRABVRABVRABfR7sF3ODrEiRHEThAAAAABJRU5ErkJggg==',
-      fileIdentificationCard2:
-        'iVBORw0KGgoAAAANSUhEUgAAACAAAAAqCAIAAABdg87FAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVFhH7c0xDQAgAAQx/Jt+JHRiILka6NljBVRABVRABVRABVRABVRABVRABfR7sF3ODrEiRHEThAAAAABJRU5ErkJggg==',
-      fileBankCertificate:
-        'iVBORw0KGgoAAAANSUhEUgAAACAAAAAqCAIAAABdg87FAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVFhH7c0xDQAgAAQx/Jt+JHRiILka6NljBVRABVRABVRABVRABVRABVRABfR7sF3ODrEiRHEThAAAAABJRU5ErkJggg==',
-      // fileRUT:
-      //   "iVBORw0KGgoAAAANSUhEUgAAACAAAAAqCAIAAABdg87FAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVFhH7c0xDQAgAAQx/Jt+JHRiILka6NljBVRABVRABVRABVRABVRABVRABfR7sF3ODrEiRHEThAAAAABJRU5ErkJggg==",
-      bank: 'Bancolombia',
-      typeBankAccount: 'Ahorros',
-      bankAccountNumber: 'MTIzNDU2Nzg5',
-      receiveCommunications: true,
-      address: 'Calle 2 #55-56',
-    },
-    userMessage: null,
-  };
-
-  const registerInvalid = {
-    state: 'Error',
-    userMessage: null,
-  };
-
-  const InvalidRquest = {
-    state: 'Error',
-    error: {
-      userMessage: 'Internal server error',
-    },
-  };
-
-  let dataBanks = {
-    state: 'Success',
-    userMessage: '',
-    objectResponse: [
-      {
-        Id: 1,
-        code: 'BANCOLOMBIA',
-        description: ' Bancolombia',
-      },
-      {
-        Id: 2,
-        code: 'DAVIVIENDA',
-        description: ' Davivienda',
-      },
-    ],
-  };
-
-  let dataDepartments = {
+  const dataDepartments = {
     state: 'Success',
     userMessage: '',
     objectResponse: [
@@ -154,53 +133,54 @@ describe("('PaymentInfoComponent', ", () => {
     ],
   };
 
-  let department = {
-    Id: 1,
-    code: '01',
-    description: 'Bolivar',
-    municipalities: [
+  const dataBanks = {
+    state: 'Success',
+    userMessage: '',
+    objectResponse: [
       {
         Id: 1,
-        code: '01',
-        description: 'Turbaco',
-        idDeparment: 1,
+        code: 'BANCOLOMBIA',
+        description: ' Bancolombia',
       },
       {
         Id: 2,
-        code: '02',
-        description: 'Cartagena',
-        idDeparment: 1,
+        code: 'DAVIVIENDA',
+        description: ' Davivienda',
       },
     ],
   };
 
-  let mockRouter = {
-    navigate: jasmine.createSpy('navigate'),
-  };
 
-  let validateEmployeeSuccess = {
+  const register = {
     state: 'Success',
+    objectResponse: {
+      userId: 0,
+      Email: 'eisner.puerta@pragma.com.co',
+      FirstNames: 'Eisner',
+      LastNames: 'Puerta Carrillo',
+      Identification: '1050955208',
+      Cellphone: '3105009039',
+      Password: 'RXBjMTUyNygpOw==',
+      IdType: 1,
+      department: 'Antioquia',
+      municipality: 'Medellin',
+      stateId: 1,
+      state: '',
+      isEmployeeGrupoExito: false,
+      verified: false,
+      fileIdentificationCard1:'iVBORw0KGgoAAAANSUhEUgAAACAAAAAqCAIAAABdg87FAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVFhH7c0xDQAgAAQx/Jt+JHRiILka6NljBVRABVRABVRABVRABVRABVRABfR7sF3ODrEiRHEThAAAAABJRU5ErkJggg==',
+      fileIdentificationCard2:'iVBORw0KGgoAAAANSUhEUgAAACAAAAAqCAIAAABdg87FAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVFhH7c0xDQAgAAQx/Jt+JHRiILka6NljBVRABVRABVRABVRABVRABVRABfR7sF3ODrEiRHEThAAAAABJRU5ErkJggg==',
+      fileBankCertificate:'iVBORw0KGgoAAAANSUhEUgAAACAAAAAqCAIAAABdg87FAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVFhH7c0xDQAgAAQx/Jt+JHRiILka6NljBVRABVRABVRABVRABVRABVRABfR7sF3ODrEiRHEThAAAAABJRU5ErkJggg==',
+       fileRUT:"iVBORw0KGgoAAAANSUhEUgAAACAAAAAqCAIAAABdg87FAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVFhH7c0xDQAgAAQx/Jt+JHRiILka6NljBVRABVRABVRABVRABVRABVRABfR7sF3ODrEiRHEThAAAAABJRU5ErkJggg==",
+      bank: 'Bancolombia',
+      typeBankAccount: 'Ahorros',
+      bankAccountNumber: 'MTIzNDU2Nzg5',
+      receiveCommunications: true,
+      address: 'Calle 2 #55-56',
+    },
     userMessage: null,
-    objectResponse: true,
   };
 
-  let validateEmployeeFail = {
-    state: 'Success',
-    userMessage: null,
-    objectResponse: false,
-  };
-
-  const resp = {
-    state: 'Success',
-    userMessage: 'se ha actualizado el usuario',
-    objectResponse: [],
-  };
-
-  const respUploadFiles = {
-    state: 'Success',
-    userMessage: 'se ha guardado el archivo',
-    objectResponse: null,
-  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -227,149 +207,107 @@ describe("('PaymentInfoComponent', ", () => {
         }),
       ],
       providers: [
-        { provide: UserService, useClass: MockUserService },
-        { provide: Router, useValue: mockRouter },
         { provide: MasterDataService, useValue: mockMasterDataService },
+        { provide: UserService, useClass: MockUserService},
+        { provide: UserService, useClass: MockUserServiceError},
       ],
     }).compileComponents();
-
-    // mockUserService.idType.and.returnValue(of(idType));
-    // mockUserService.registerUser.and.returnValue(of(register));
-    mockUserService.uploadFiles.and.returnValue(of(respUploadFiles));
-    mockMasterDataService.getBanks.and.returnValue(of(dataBanks));
     mockMasterDataService.getDepartments.and.returnValue(of(dataDepartments));
+    mockMasterDataService.getBanks.and.returnValue(of(dataBanks));
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PaymentInfoComponent);
     component = fixture.componentInstance;
-    // mockUserService.validateEmployee.and.returnValue(
-    //   of(validateEmployeeSuccess)
-    // );
-    window['dataLayer'] = [];
+    component.filteredDepartments = new Observable<any>();
     fixture.detectChanges();
-  });
-
-  // it("should create", () => {
-  //   expect(component).toBeTruthy();
-  //   expect(mockUserService.idType).toHaveBeenCalled();
-  // });
-
-  it('send sendPayment', () => {
-    let service = fixture.debugElement.injector.get(UserService);
-    spyOn(service, 'updateUser').and.returnValue(of(resp));
-    component.sendPayment();
-    expect(service.updateUser).toHaveBeenCalled();
-  });
-
-  it('on file change trip valid ced 1', () => {
-    const mockFile = new File([''], 'name.jpg', { type: 'text/html' });
-    const mockEvt = { target: { files: [mockFile] } };
-    component.onFileChangeFiles(mockEvt, 'IdentificationCard1');
-    expect(component.showErrorCed1).toBeFalsy();
-    expect(component.showErrorFormatCed1).toBeFalsy();
-  });
-
-  it('on file change trip valid ced 2', () => {
-    const mockFile = new File([''], 'name.jpg', { type: 'text/html' });
-    const mockEvt = { target: { files: [mockFile] } };
-    component.onFileChangeFiles(mockEvt, 'IdentificationCard2');
-    expect(component.showErrorCed2).toBeFalsy();
-    expect(component.showErrorFormatCed2).toBeFalsy();
-  });
-
-  it('on file change trip valid cert', () => {
-    const mockFile = new File([''], 'name.jpg', { type: 'text/html' });
-    const mockEvt = { target: { files: [mockFile] } };
-    component.onFileChangeFiles(mockEvt, 'BankCertificate');
-    expect(component.showErrorCert).toBeFalsy();
-    expect(component.showErrorFormatCert).toBeFalsy();
-  });
-
-  describe('register clicker', () => {
-    beforeEach(() => {
-      fixture = TestBed.createComponent(PaymentInfoComponent);
-      component = fixture.componentInstance;
-      // mockUserService.validateEmployee.and.returnValue(
-      //   of(validateEmployeeFail)
-      // );
-      fixture.detectChanges();
-    });
-  });
-
-  it('select city', () => {
-    component.cityCode = '01';
-    component.selectCity('Medellín');
-    expect(component.selectCity).toBeTruthy();
-  });
-
-  it('select selectDepartment', () => {
-    let fb = new FormBuilder();
-    component.externalForm = fb.group({
-      department: ['Antioquia'],
-      city: ['Medellin'],
-      address: [''],
-      bank: [''],
-      typeAccount: [''],
-      numberAccount: [''],
-      ced1: [null],
-      ced2: [null],
-      cert: [null],
-      // RUT: [null],
-    });
-    component.selectDepartment(department);
-    expect(department).not.toBeUndefined();
-  });
-
-  it('register form', () => {
-    let fb = new FormBuilder();
-    component.externalForm = fb.group({
-      department: [''],
-      city: [''],
-      address: [''],
-      bank: [''],
-      typeAccount: [''],
-      numberAccount: [''],
-      ced1: [null],
-      ced2: [null],
-      cert: [null],
-      // RUT: [null],
-    });
-
-    component.departmentCode = '01';
-    component.cityCode = '01';
+    component.phone = '123456789';
+    component.name = 'David';
+    component.lastName = 'Tets';
+    component.departmentCode = '20';
+    component.cityCode = '1';
     component.externalForm.controls.bank.setValue('Bancolombia');
-    component.fileIdentificationCard1 = 'image1';
-    component.fileIdentificationCard2 = 'image2';
-    component.fileBankCertificate = 'cert';
-    // component.fileRUT = 'RUT';
-    component.externalForm.controls.numberAccount.setValue('123456');
-    component.externalForm.controls.typeAccount.setValue('Ahorros');
+    component.externalForm.controls.numberAccount.setValue('123456789');
+    component.externalForm.controls.typeAccount.setValue('ahorros');
     component.externalForm.controls.address.setValue('calle falsa 123');
-    expect(component.externalForm.valid).toBeTruthy();
+    component.externalForm.controls.department.setValue('Antioquia');
   });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('get departments', () => {
+    component.getDepartments();
+    expect(mockMasterDataService.getDepartments).toHaveBeenCalled();
+  });
+
+  it('get Banks', () => {
+    component.getBanks();
+    expect(mockMasterDataService.getBanks).toHaveBeenCalled();
+  });
+
+
+  it('displayDepartment', () => {
+    component.displayDepartment('Antioquia');
+    expect(component.displayDepartment).not.toBeUndefined();
+  });
+
+  it('select department', () => {
+    const department = {
+      code: 1,
+      municipalities: ['Medelin', 'Sabaneta']
+    };
+    component.selectDepartment(department);
+    expect(department.code).toBe(1);
+  });
+
 
   it('checkDepartment', () => {
-    component.externalForm.controls.department.setValue({ code: '05' });
     component.checkDepartment();
     expect(component.externalForm.controls.department.hasError).toBeTruthy();
   });
 
-  it('checkCity', () => {
-    component.checkCity();
-    expect(component.externalForm.controls.city.hasError).toBeTruthy();
+  it('select city', () => {
+    const city = {
+      code: 20,
+      description: 'Medellín'
+    };
+    component.selectCity(city);
+    expect(city.description).toBe('Medellín');
   });
 
-  describe('register invalid', () => {
-    beforeEach(() => {
-      window['dataLayer'] = [];
-      // mockUserService.registerUser.and.returnValue(of(registerInvalid));
-    });
+  it('onFileChangeFiles rut', () => {
+    const mockFile = new File([''], 'Rut.jpg', { type: 'text/html' });
+    const mockEvt = { target: { files: [mockFile] } };
+    component.onFileChangeFiles(mockEvt, 'Rut');
+    expect(component.onFileChangeFiles).not.toBeNull();
   });
 
-  describe('invalid request', () => {
-    beforeEach(function () {
-      // mockUserService.registerUser.and.returnValue(throwError(InvalidRquest));
-    });
+  it('onFileChangeFiles BankCertificate', () => {
+    const mockFile = new File([''], 'BankCertificate.jpg', { type: 'text/html' });
+    const mockEvt = { target: { files: [mockFile] } };
+    component.onFileChangeFiles(mockEvt, 'BankCertificate');
+    expect(component.onFileChangeFiles).not.toBeNull();
   });
+
+  it('onFileChangeFiles IdentificationCard1', () => {
+    const mockFile = new File([''], 'IdentificationCard1.jpg', { type: 'text/html' });
+    const mockEvt = { target: { files: [mockFile] } };
+    component.onFileChangeFiles(mockEvt, 'IdentificationCard1');
+    expect(component.onFileChangeFiles).not.toBeNull();
+  });
+
+  it('onFileChangeFiles IdentificationCard2', () => {
+    const mockFile = new File([''], 'IdentificationCard2.jpg', { type: 'text/html' });
+    const mockEvt = { target: { files: [mockFile] } };
+    component.onFileChangeFiles(mockEvt, 'IdentificationCard2');
+    expect(component.onFileChangeFiles).not.toBeNull();
+  });
+
+  it('send payment', () => {
+    component.sendPayment();
+    expect(component.phone).not.toBeUndefined();
+  });
+
 });
