@@ -89,9 +89,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
       },
     });
     this.subscription = addsection.beforeClosed().subscribe((addSection) => {
-      this.sectionsLinks = [];
-      this.links = [];
-      this.getSections();
+     this.resetNavigation();
     });
   }
 
