@@ -33,10 +33,10 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
       state: 0,
     },
   ];
-  $subcriptionParams: Subscription;
-  $subcriptionNovelty: Subscription;
-  $subscriptionSaveNote: Subscription;
-  $subscriptionGetNovelties: Subscription;
+  $subcriptionParams: Subscription = new Subscription();
+  $subcriptionNovelty: Subscription = new Subscription();
+  $subscriptionSaveNote: Subscription = new Subscription();
+  $subscriptionGetNovelties: Subscription = new Subscription();
   listNovelties = [];
 
   constructor(
