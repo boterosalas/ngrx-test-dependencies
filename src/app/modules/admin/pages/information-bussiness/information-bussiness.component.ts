@@ -110,12 +110,7 @@ export class InformationBussinessComponent implements OnInit {
       about: this.aboutBuss.controls.aboutBuss.value,
     };
     this.content.saveInfoBusiness(datos).subscribe((infoBusiness) => {
-      Swal.fire({
-        text: 'Los cambios se han guardado correctamente.',
-        type: 'success',
-        confirmButtonText: 'Aceptar',
-        confirmButtonClass: 'upload-success',
-      });
+      this.messageSwal();
     });
   }
   comprobarText(id, datos) {
@@ -155,12 +150,7 @@ export class InformationBussinessComponent implements OnInit {
     const datosSend3 = this.comprobarText(this.idCaseSpecial, datos3);
     const array = [datosSend, datosSend2, datosSend3];
     this.content.saveTermsConditions(array).subscribe((saveTerms) => {
-      Swal.fire({
-        text: 'Los cambios se han guardado correctamente.',
-        type: 'success',
-        confirmButtonText: 'Aceptar',
-        confirmButtonClass: 'upload-success',
-      });
+      this.messageSwal();
     });
   }
   onNoClick() {
@@ -250,4 +240,14 @@ export class InformationBussinessComponent implements OnInit {
       }
     });
   }
+
+  private messageSwal() {
+    Swal.fire({
+      text: 'Los cambios se han guardado correctamente.',
+      type: 'success',
+      confirmButtonText: 'Aceptar',
+      confirmButtonClass: 'upload-success',
+    });
+  }
+
 }

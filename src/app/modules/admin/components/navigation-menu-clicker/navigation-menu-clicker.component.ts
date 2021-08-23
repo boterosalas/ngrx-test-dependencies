@@ -89,9 +89,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
       },
     });
     this.subscription = addsection.beforeClosed().subscribe((addSection) => {
-      this.sectionsLinks = [];
-      this.links = [];
-      this.getSections();
+     this.resetNavigation();
     });
   }
 
@@ -108,9 +106,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
       },
     });
     this.subscription = editNavigation.beforeClosed().subscribe((editNavigationGroup) => {
-      this.sectionsLinks = [];
-      this.links = [];
-      this.getSections();
+      this.resetNavigation();
     });
   }
 
@@ -127,9 +123,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
     });
 
     this.subscription = this.dialogRef.beforeClosed().subscribe((deleteNavigationGroup) => {
-      this.sectionsLinks = [];
-      this.links = [];
-      this.getSections();
+      this.resetNavigation();
     });
   }
 
@@ -161,9 +155,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
       },
     });
     this.subscription = addNavigation.beforeClosed().subscribe((addNavigationItem) => {
-      this.sectionsLinks = [];
-      this.links = [];
-      this.getSections();
+      this.resetNavigation();
     });
   }
 
@@ -187,9 +179,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
       data: data,
     });
     this.subscription = editItem.beforeClosed().subscribe((editNavigationItem) => {
-      this.sectionsLinks = [];
-      this.links = [];
-      this.getSections();
+      this.resetNavigation();
     });
   }
 
@@ -207,10 +197,14 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
     });
 
     this.subscription = this.dialogRef.beforeClosed().subscribe((deleteNavigationItem) => {
-      this.sectionsLinks = [];
-      this.links = [];
-      this.getSections();
+     this.resetNavigation();
     });
+  }
+
+  private resetNavigation() {
+    this.sectionsLinks = [];
+    this.links = [];
+    this.getSections();
   }
 
   deleteNavigationItemService() {

@@ -585,56 +585,6 @@
         >
       </mat-form-field>
 
-      <!-- rut -->
-
-      <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
-        <div fxLayout="column" fxLayoutAlign="center" class="space">
-          <strong class="gray">{{ 'REGISTER.ACCOUNT_RUT' | translate }}</strong>
-          <span *ngIf="nameFileRut === ''">No hay archivo seleccionado</span>
-          <span class="file-input" *ngIf="nameFileRut !== ''">{{ nameFileRut | truncate: '20' }}</span>
-        </div>
-        <i (click)="previewDocument('Rut')" class="tio-search cursor-pointer mt-1 mr-3 f-25 purple2-text"></i>
-        <div class="space">
-          <label for="rut" id="upload" class="cursor-pointer">
-            <span *ngIf="!showErrorRUT">
-              <i class="tio-upload_on_cloud mt-1 f-25 purple2-text" *ngIf="nameFileRut === ''"></i>
-              <i class="tio-cloud_on mt-1 f-25 purple2-text" *ngIf="nameFileRut !== ''"></i>
-            </span>
-            <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorRUT"></i>
-          </label>
-        </div>
-      </div>
-      <mat-error *ngIf="showErrorFormatRut" class="small pb-2 d-block">
-        {{ 'GENERIC.INVALID_FORMAT_FILE_REGISTER' | translate }}
-      </mat-error>
-
-      <input (change)="onFileChangeFiles($event, 'Rut')" id="rut" type="file" formControlName="rut" />
-
-      <!-- certificado -->
-
-      <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
-        <div fxLayout="column" fxLayoutAlign="center" class="space">
-          <strong class="gray">{{ 'REGISTER.ACCOUNT_CERT' | translate }}</strong>
-          <span *ngIf="nameFileCert === ''">No hay archivo seleccionado</span>
-          <span class="file-input" *ngIf="nameFileCert !== ''">{{ nameFileCert | truncate: '30' }}</span>
-        </div>
-        <i (click)="previewDocument('BankCertificate')" class="tio-search cursor-pointer mt-1 mr-3 f-25 purple2-text"></i>
-        <div class="space">
-          <label for="cert" id="upload" class="cursor-pointer">
-            <span *ngIf="!showErrorCert">
-              <i class="tio-upload_on_cloud mt-1 f-25 purple2-text" *ngIf="nameFileCert === ''"></i>
-              <i class="tio-cloud_on mt-1 f-25 purple2-text" *ngIf="nameFileCert !== ''"></i>
-            </span>
-            <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorCert"></i>
-          </label>
-        </div>
-      </div>
-      <mat-error *ngIf="showErrorFormatCert" class="small pb-2 d-block">
-        {{ 'GENERIC.INVALID_FORMAT_FILE_REGISTER' | translate }}
-      </mat-error>
-
-      <input (change)="onFileChangeFiles($event, 'BankCertificate')" id="cert" type="file" formControlName="cert" />
-
       <!-- Cedula 1-->
       <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
         <div fxLayout="column" fxLayoutAlign="center" class="space">
@@ -682,6 +632,59 @@
       </mat-error>
 
       <input (change)="onFileChangeFiles($event, 'IdentificationCard2')" id="ced2" type="file" formControlName="ced2" />
+
+      <!-- certificado -->
+
+      <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
+        <div fxLayout="column" fxLayoutAlign="center" class="space">
+          <strong class="gray">{{ 'REGISTER.ACCOUNT_CERT' | translate }}</strong>
+          <span *ngIf="nameFileCert === ''">No hay archivo seleccionado</span>
+          <span class="file-input" *ngIf="nameFileCert !== ''">{{ nameFileCert | truncate: '30' }}</span>
+        </div>
+        <i (click)="previewDocument('BankCertificate')" class="tio-search cursor-pointer mt-1 mr-3 f-25 purple2-text"></i>
+        <div class="space">
+          <label for="cert" id="upload" class="cursor-pointer">
+            <span *ngIf="!showErrorCert">
+              <i class="tio-upload_on_cloud mt-1 f-25 purple2-text" *ngIf="nameFileCert === ''"></i>
+              <i class="tio-cloud_on mt-1 f-25 purple2-text" *ngIf="nameFileCert !== ''"></i>
+            </span>
+            <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorCert"></i>
+          </label>
+        </div>
+      </div>
+      <mat-error *ngIf="showErrorFormatCert" class="small pb-2 d-block">
+        {{ 'GENERIC.INVALID_FORMAT_FILE_REGISTER' | translate }}
+      </mat-error>
+
+      <input (change)="onFileChangeFiles($event, 'BankCertificate')" id="cert" type="file" formControlName="cert" />
+
+      <!-- rut -->
+
+      <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
+        <div fxLayout="column" fxLayoutAlign="center" class="space">
+          <strong class="gray">{{ 'REGISTER.ACCOUNT_RUT' | translate }}</strong>
+          <span *ngIf="nameFileRut === ''">No hay archivo seleccionado</span>
+          <span class="file-input" *ngIf="nameFileRut !== ''">{{ nameFileRut | truncate: '20' }}</span>
+        </div>
+        <i (click)="previewDocument('Rut')" class="tio-search cursor-pointer mt-1 mr-3 f-25 purple2-text"></i>
+        <div class="space">
+          <label for="rut" id="upload" class="cursor-pointer">
+            <span *ngIf="!showErrorRUT">
+              <i class="tio-upload_on_cloud mt-1 f-25 purple2-text" *ngIf="nameFileRut === ''"></i>
+              <i class="tio-cloud_on mt-1 f-25 purple2-text" *ngIf="nameFileRut !== ''"></i>
+            </span>
+            <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorRUT"></i>
+          </label>
+        </div>
+      </div>
+      <mat-error *ngIf="showErrorFormatRut" class="small pb-2 d-block">
+        {{ 'GENERIC.INVALID_FORMAT_FILE_REGISTER' | translate }}
+      </mat-error>
+
+      <input (change)="onFileChangeFiles($event, 'Rut')" id="rut" type="file" formControlName="rut" />
+     
+      <!-- motivo del cambio -->
+
       <div class="reason-change" fxLayout="column">
         <label class="label-up-text" for="picker">MOTIVO DEL CAMBIO</label>
         <textarea
@@ -694,6 +697,7 @@
         >
         </textarea>
       </div>
+
       <div class="buttons-container flex-start text-center">
         <button
           mat-raised-button
