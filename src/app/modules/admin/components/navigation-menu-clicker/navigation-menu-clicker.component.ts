@@ -200,7 +200,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
      this.resetNavigation();
     });
   }
-  
+
   private resetNavigation() {
     this.sectionsLinks = [];
     this.links = [];
