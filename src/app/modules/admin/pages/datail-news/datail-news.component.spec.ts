@@ -152,7 +152,7 @@ describe('DatailNewsComponent', () => {
   });
 
   it('get notes', () => {
-    component.listNovelties = listNotes;
+    component.listNovelties = listNotes;  
     component.currentNovelty = respDatos;
     component.getNovelties();
     expect(mockUserService.getNewNovelties).toHaveBeenCalled();
