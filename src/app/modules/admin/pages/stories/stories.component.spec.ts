@@ -32,7 +32,7 @@ describe('StoriesComponent', () => {
   let component: StoriesComponent;
   let fixture: ComponentFixture<StoriesComponent>;
 
-  const mockContentService = jasmine.createSpyObj('ContentService', ['getAllBusiness', 'getStoriesadmin', 'deleteStories']);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getBusiness', 'getStoriesadmin', 'deleteStories']);
 
   const resp = {
     state: 'Success',
@@ -40,7 +40,7 @@ describe('StoriesComponent', () => {
     objectResponse: [],
   };
 
-  let allBusiness = [
+  const allBusiness = [
     {
       id: 1,
       code: 'exito',
@@ -187,7 +187,7 @@ describe('StoriesComponent', () => {
         },
       })
       .compileComponents();
-    mockContentService.getAllBusiness.and.returnValue(of(allBusiness));
+    mockContentService.getBusiness.and.returnValue(of(allBusiness));
     mockContentService.getStoriesadmin.and.returnValue(of(stories));
     mockContentService.deleteStories.and.returnValue(of(resp));
   }));
@@ -200,11 +200,11 @@ describe('StoriesComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-    expect(mockContentService.getAllBusiness).toHaveBeenCalled();
+    expect(mockContentService.getBusiness).toHaveBeenCalled();
   });
 
   it('change bussines', () => {
-    let business = {
+    const business = {
       id: 1,
       code: 'exito',
       imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg',
