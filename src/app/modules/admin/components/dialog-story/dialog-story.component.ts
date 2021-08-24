@@ -19,7 +19,7 @@ export class DialogStoryComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<any>,
     private _content: ContentService
-  ) {}
+  ) { }
 
   storieForm: FormGroup;
   image: string;
@@ -228,6 +228,11 @@ export class DialogStoryComponent implements OnInit {
       ];
     }
 
-    this._content.saveStories(this.saveStoryData).subscribe(() => this.dialogRef.close());
+    this._content.saveStories(this.saveStoryData).subscribe(() => {
+      this.dialogRef.close();
+      this.utils.checkedAll.next(false);
+      this.utils.titleSelect.next('Seleccionar');
+      this.utils.formArray = [];
+    });
   }
 }
