@@ -208,7 +208,7 @@ export class DialogStoryComponent implements OnInit {
           infoAditional: commission,
           active: this.active,
           extension: this.extension,
-          datepublish: this.publicationDate,
+          datepublish: this.publicationDate !== null ? this.publicationDate : moment().format('YYYY-MM-DD hh:mm'),
           image: this.file,
         },
       ];
@@ -222,7 +222,7 @@ export class DialogStoryComponent implements OnInit {
           infoAditional: commission,
           active: this.active,
           extension: this.extension,
-          datepublish: this.publicationDate,
+          datepublish: this.publicationDate !== null ? this.publicationDate : moment().format('YYYY-MM-DD hh:mm'),
           image: this.file,
         },
       ];
