@@ -31,6 +31,7 @@
   font-family: $font-galano-bold;
   text-transform: uppercase;
 }
+
 .span-data {
   color: #37236a;
   font-family: $font-galano-bold;
@@ -71,4 +72,13 @@
 }
 .size-status {
   width: 122px;
+}
+
+.status-novelty {
+  p {
+    text-align: center;
+    font-size: $font-galano-bold;
+    font-size: 14px;
+    color: $font-gray;
+  }
 }
