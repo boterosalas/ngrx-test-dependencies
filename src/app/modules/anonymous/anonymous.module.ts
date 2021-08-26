@@ -91,6 +91,7 @@ import { BlogContentComponent } from './pages/blog-content/blog-content.componen
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NewBlogComponent } from './components/new-blogs/new-blog.component';
 import { CardOrderNumberComponent } from './components/card-order-number/card-order-number.component';
+import { DialogNoveltySatisfactionComponent } from './components/dialog-novelty-satisfaction/dialog-novelty-satisfaction.component';
 const routes: Routes = [
   {
     path: '',
@@ -437,6 +438,7 @@ const routes: Routes = [
     SliderStoriesComponent,
     ButtonStoryComponent,
     CardOrderNumberComponent,
+    DialogNoveltySatisfactionComponent,
   ],
   imports: [
     FormsModule,
@@ -466,8 +468,9 @@ const routes: Routes = [
     CardComponent,
     BussinessCardComponent,
     SliderStoriesComponent,
+    DialogNoveltySatisfactionComponent,
   ],
-  entryComponents: [NewBusinessFormComponent],
+  entryComponents: [NewBusinessFormComponent, DialogNoveltySatisfactionComponent],
   providers: [
     {
       provide: RECAPTCHA_SETTINGS,

@@ -108,16 +108,40 @@
                   <span class="text-description">{{ item.responsenovelty }}</span>
                 </div>
 
-                <div class="status-novelty" fxLayout="column"  *ngIf="item.statusnovelty === 'Solucionado'">
-                  <p>¿Cómo fue tu experiencia en la esta novedad?</p>
-                 <div class="emoji-status">
-                  <form>
-                    <input type="radio" name="smiley" value="sad" class="sad">
-                    <input type="radio" name="smiley" value="neutral" class="neutral">
-                    <input type="radio" name="smiley" value="happy" class="happy" >
-                    <input type="radio" name="smiley" value="happy" class="happy" >
-                  </form>
-                 </div>
+                <div class="status-novelty" fxLayout="column" *ngIf="item.statusnovelty === 'Solucionado'">
+                  <p>¿Cómo fue tu experiencia en esta novedad?</p>
+                  <div class="emoji-status">
+                    <form>
+                      <input
+                        type="radio"
+                        value="1"
+                        class="cry"
+                        (click)="opeModalStatus($event.target.value, item)"
+                        [checked]="item?.qualification?.status === 1"
+                      />
+                      <input
+                        type="radio"
+                        value="2"
+                        class="sad"
+                        (click)="opeModalStatus($event.target.value, item)"
+                        [checked]="item?.qualification?.status === 2"
+                      />
+                      <input
+                        type="radio"
+                        value="3"
+                        class="happy"
+                        (click)="opeModalStatus($event.target.value, item)"
+                        [checked]="item?.qualification?.status === 3"
+                      />
+                      <input
+                        type="radio"
+                        value="4"
+                        class="love"
+                        (click)="opeModalStatus($event.target.value, item)"
+                        [checked]="item?.qualification?.status === 4"
+                      />
+                    </form>
+                  </div>
                 </div>
               </mat-expansion-panel>
             </mat-accordion>
