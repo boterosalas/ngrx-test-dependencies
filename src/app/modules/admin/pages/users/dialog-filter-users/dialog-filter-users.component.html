@@ -24,7 +24,7 @@
     </span>
 
     <mat-radio-group aria-labelledby="status" class="status separate" formControlName="status">
-      <mat-radio-button class="radio-button" *ngFor="let item of status" [value]="item.value">
+      <mat-radio-button class="radio-button" (dblclick)="resetStatus()" *ngFor="let item of status" [value]="item.value">
         {{ item.name }}
       </mat-radio-button>
     </mat-radio-group>
@@ -36,7 +36,7 @@
     </span>
 
     <mat-radio-group aria-labelledby="comunication" class="comunication separate" formControlName="comunication">
-      <mat-radio-button class="radio-button" *ngFor="let item of comunication" [value]="item.value">
+      <mat-radio-button class="radio-button" (dblclick)="resetComunication()" *ngFor="let item of comunication" [value]="item.value">
         {{ item.name }}
       </mat-radio-button>
     </mat-radio-group>
@@ -80,7 +80,7 @@
     </span>
 
     <mat-radio-group aria-labelledby="commissions" class="commissions separate" formControlName="commissions">
-      <mat-radio-button class="radio-button" *ngFor="let item of commissions" [value]="item.value">
+      <mat-radio-button class="radio-button" (dblclick)="resetCommissions()" *ngFor="let item of commissions" [value]="item.value">
         {{ item.name }}
       </mat-radio-button>
     </mat-radio-group>
@@ -91,7 +91,7 @@
       <label>Cuenta bancaria</label>
     </span>
     <mat-radio-group aria-labelledby="accountBank" class="accountBank separate" formControlName="accountBank">
-      <mat-radio-button class="radio-button" *ngFor="let item of accountBank" [value]="item.value">
+      <mat-radio-button class="radio-button" (dblclick)="resetAccount()" *ngFor="let item of accountBank" [value]="item.value">
         {{ item.name }}
       </mat-radio-button>
     </mat-radio-group>
@@ -101,7 +101,7 @@
       <label>Documentos</label>
     </span>
     <mat-radio-group aria-labelledby="documents" class="documents separate" formControlName="documents">
-      <mat-radio-button class="radio-button" *ngFor="let item of documents" [value]="item.value">
+      <mat-radio-button class="radio-button" (dblclick)="resetDocuments()" *ngFor="let item of documents" [value]="item.value">
         {{ item.name }}
       </mat-radio-button>
     </mat-radio-group>
