@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatRadioChange } from '@angular/material';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
@@ -17,7 +18,6 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
   dateParams: any;
   showDate = true;
   filterUsers: FormGroup;
-
   locale = {
     locale: 'es',
     direction: 'ltr', // could be rtl
@@ -124,6 +124,26 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
       chipBussiness: [''],
       documents: [null],
     });
+  }
+
+  public resetStatus() {
+    this.filterUsers.controls.status.setValue(null);
+  }
+
+  public resetComunication() {
+    this.filterUsers.controls.comunication.setValue(null);
+  }
+
+  public resetCommissions() {
+    this.filterUsers.controls.commissions.setValue(null);
+  }
+
+  public resetAccount() {
+    this.filterUsers.controls.accountBank.setValue(null);
+  }
+
+  public resetDocuments() {
+    this.filterUsers.controls.documents.setValue(null);
   }
 
   public onChangeSelected(val) {
