@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
@@ -38,13 +38,15 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
   $subscriptionSaveNote: Subscription = new Subscription();
   $subscriptionGetNovelties: Subscription = new Subscription();
   listNovelties = [];
+  listNoveltiesByUser = [];
 
   constructor(
     private snackBar: MatSnackBar,
     private routeParams: ActivatedRoute,
     private fb: FormBuilder,
     private user: UserService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -62,8 +64,108 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
         this.changeSelecteds(this.currentNovelty.statusnovelty);
         this.initForm();
         this.getNovelties();
+        this.getAllNoveltiesByUser(this.currentNovelty.idclicker);
       }
     });
+  }
+
+  public getAllNoveltiesByUser(idclicker: any) {
+    this.listNoveltiesByUser = [
+      {
+        id: 1,
+        consecutive: '000003',
+        date: '2021-08-25T09:28:42.827',
+        solutiondate: '2021-08-25T09:31:29.213',
+        identification: '1059710255',
+        name: 'Yeferson Hoyos',
+        cellphone: '(310) 648 1561',
+        email: 'jeffersonhoyosb@gmail.com',
+        statusnovelty: 'Pendiente',
+        idclicker: 'yeferson250786',
+        businessdescription: 'Almacenes Éxito',
+        datenovelty: '2021-08-25T05:00:00',
+        code: '1515151',
+        description: 'Prueba Yeferson',
+        documenturl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/novelty/20210825092841_image.png',
+        responsenovelty: 'Solucionado prueba',
+      },
+      {
+        id: 3,
+        consecutive: '000003',
+        date: '2021-08-25T09:28:42.827',
+        solutiondate: '2021-08-25T09:31:29.213',
+        identification: '1059710255',
+        name: 'Yeferson Hoyos',
+        cellphone: '(310) 648 1561',
+        email: 'jeffersonhoyosb@gmail.com',
+        statusnovelty: 'Solucionado',
+        idclicker: 'yeferson250786',
+        businessdescription: 'Almacenes Éxito',
+        datenovelty: '2021-08-25T05:00:00',
+        code: '1515151',
+        description: 'Prueba Yeferson',
+        documenturl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/novelty/20210825092841_image.png',
+        responsenovelty: 'Solucionado prueba',
+      },
+      {
+        id: 3,
+        consecutive: '000003',
+        date: '2021-08-25T09:28:42.827',
+        solutiondate: '2021-08-25T09:31:29.213',
+        identification: '1059710255',
+        name: 'Yeferson Hoyos',
+        cellphone: '(310) 648 1561',
+        email: 'jeffersonhoyosb@gmail.com',
+        statusnovelty: 'Solucionado',
+        idclicker: 'yeferson250786',
+        businessdescription: 'Almacenes Éxito',
+        datenovelty: '2021-08-25T05:00:00',
+        code: '1515151',
+        description: 'Prueba Yeferson',
+        documenturl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/novelty/20210825092841_image.png',
+        responsenovelty: 'Solucionado prueba',
+      },
+      {
+        id: 3,
+        consecutive: '000003',
+        date: '2021-08-25T09:28:42.827',
+        solutiondate: '2021-08-25T09:31:29.213',
+        identification: '1059710255',
+        name: 'Yeferson Hoyos',
+        cellphone: '(310) 648 1561',
+        email: 'jeffersonhoyosb@gmail.com',
+        statusnovelty: 'Solucionado',
+        idclicker: 'yeferson250786',
+        businessdescription: 'Almacenes Éxito',
+        datenovelty: '2021-08-25T05:00:00',
+        code: '1515151',
+        description: 'Prueba Yeferson',
+        documenturl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/novelty/20210825092841_image.png',
+        responsenovelty: 'Solucionado prueba',
+      },
+      {
+        id: 3,
+        consecutive: '000003',
+        date: '2021-08-25T09:28:42.827',
+        solutiondate: '2021-08-25T09:31:29.213',
+        identification: '1059710255',
+        name: 'Yeferson Hoyos',
+        cellphone: '(310) 648 1561',
+        email: 'jeffersonhoyosb@gmail.com',
+        statusnovelty: 'Solucionado',
+        idclicker: 'yeferson250786',
+        businessdescription: 'Almacenes Éxito',
+        datenovelty: '2021-08-25T05:00:00',
+        code: '1515151',
+        description: 'Prueba Yeferson',
+        documenturl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/novelty/20210825092841_image.png',
+        responsenovelty: 'Solucionado prueba',
+      },
+    ];
+  }
+
+  public goToNovelty(id: string) {
+    this.router.navigateByUrl(`/novedad/${id}`);
   }
 
   public initForm() {

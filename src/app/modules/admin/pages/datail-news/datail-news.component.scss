@@ -75,11 +75,18 @@ mat-card {
       font-size: 14px;
       color: $primary-color;
     }
+
+    .label{
+      span{
+        text-transform: uppercase;
+        font-size: 11px;
+      }
+    }
   }
 }
 
-.row-3{
-  .left{
+.row-3 {
+  .left {
     width: 53%;
     padding: 20px 16px;
     box-shadow: 0px 16px 16px #9aaacf1a !important;
@@ -87,7 +94,7 @@ mat-card {
     background-color: $white;
     margin: 20px 0;
   }
-  .right{
+  .right {
     width: 45%;
     padding: 20px 16px;
     box-shadow: 0px 16px 16px #9aaacf1a !important;
@@ -169,10 +176,10 @@ mat-card {
       overflow-y: auto;
       margin-right: 5px;
     }
-    .margin-top-5px{
+    .margin-top-5px {
       margin-top: 5px;
     }
-    .margin-left-10px{
+    .margin-left-10px {
       margin-left: 10px;
     }
   }
