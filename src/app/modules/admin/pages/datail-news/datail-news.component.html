@@ -38,62 +38,26 @@
 
   <mat-card>
     <mat-card-title class="card-title"> Información de Clicker </mat-card-title>
-    <div class="info" fxLayout="row" fxLayoutAlign="space-between center ">
-      <div fxLayout="row" fxLayoutAlign="flex-start center">
-        <div fxLayout="column" fxLayoutAlign="flex-start">
-          <span>NOMBRE DEL CLICKER</span>
-          <span>{{ currentNovelty.name }}</span>
-        </div>
-        <div fxLayout="column" fxLayoutAlign="flex-start">
-          <span>ID</span>
-          <span>{{ currentNovelty.idclicker }}</span>
-        </div>
-        <div fxLayout="column" fxLayoutAlign="flex-start">
-          <span>CÉDULA</span>
-          <span>{{ currentNovelty.identification }}</span>
-        </div>
-        <div fxLayout="column" fxLayoutAlign="flex-start">
-          <span>CELULAR</span>
-          <span>{{ currentNovelty.cellphone }}</span>
-        </div>
-        <div fxLayout="column" fxLayoutAlign="flex-start">
-          <span>CORREO</span>
-          <span>{{ currentNovelty.email }}</span>
-        </div>
+    <div class="info" fxLayout="row" fxLayoutAlign="flex-start center">
+      <div fxLayout="column" fxLayoutAlign="flex-start">
+        <span>NOMBRE DEL CLICKER</span>
+        <span>{{ currentNovelty.name }}</span>
       </div>
-
-      <div fxLayout="column">
-        <div class="label">
-          <span>más novedades ({{ listNoveltiesByUser.length }})</span>
-        </div>
-        <mat-form-field class="selected-novelty">
-          <mat-select placeholder="Seleccionar" panelClass="mat-select-novelties">
-            <mat-option *ngFor="let novelty of listNoveltiesByUser" (click)="goToNovelty(novelty.id)">
-              <div class="card-option">
-                <div class="left">
-                  <span
-                    >No. <strong>{{ novelty.consecutive }}</strong></span
-                  >
-                  <span>({{ novelty.date | date: 'dd/MM/yyyy' }})</span>
-                </div>
-                <div class="right">
-                  <span *ngIf="novelty.statusnovelty === 'Solucionado'">
-                    <img class="status-img" src="/assets/img/dashboard/icon-check-new.svg" alt="ok" />
-                    Solucionado
-                  </span>
-                  <span *ngIf="novelty.statusnovelty === 'Pendiente'">
-                    <img class="status-img" src="/assets/img/dashboard/icon-info.svg" alt="pendind" />
-                    Pendiente
-                  </span>
-                  <span *ngIf="novelty.statusnovelty === 'En revisión'">
-                    <img class="status-img" src="/assets/img/dashboard/icon-revision.svg" alt="pendind" />
-                    En revisión
-                  </span>
-                </div>
-              </div>
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+      <div fxLayout="column" fxLayoutAlign="flex-start">
+        <span>ID</span>
+        <span>{{ currentNovelty.idclicker }}</span>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="flex-start">
+        <span>CÉDULA</span>
+        <span>{{ currentNovelty.identification }}</span>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="flex-start">
+        <span>CELULAR</span>
+        <span>{{ currentNovelty.cellphone }}</span>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="flex-start">
+        <span>CORREO</span>
+        <span>{{ currentNovelty.email }}</span>
       </div>
     </div>
   </mat-card>

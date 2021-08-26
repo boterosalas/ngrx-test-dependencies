@@ -69,49 +69,10 @@ body {
   border-radius: 10px !important;
 }
 
-.mat-table {
+.mat-table{
   box-shadow: 0px 16px 16px #9aaacf1a !important;
   border-radius: 10px !important;
   overflow: hidden !important;
-}
-
-.mat-select-novelties {
-  mat-option {
-    height: auto !important;
-    .card-option {
-      justify-content: space-between;
-      display: flex;
-      align-items: center;
-      width: 100%;
-      .left {
-        display: flex;
-        flex-direction: column;
-        span {
-          line-height: 16px;
-        }
-        span:first-child {
-          font-size: 13px;
-          color: $color-p;
-          strong {
-            color: $primary-color;
-          }
-        }
-        span:last-child {
-          font-size: 11px;
-          color: $color-p;
-        }
-      }
-      .right {
-        span {
-          display: flex;
-          align-items: center;
-          img {
-            margin-right: 5px;
-          }
-        }
-      }
-    }
-  }
 }
 
 .maincontent {
