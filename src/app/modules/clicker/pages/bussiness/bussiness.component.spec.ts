@@ -289,11 +289,11 @@ describe('BussinessComponent', () => {
     expect(mockContentService.getBusinessContent).toHaveBeenCalled();
   });
 
-  it('search products carulla', () => {
-    component.sellerId = '2';
-    component.searchBiggyCarulla('112401');
-    expect(mockContentService.biggySearchCarulla).toHaveBeenCalled();
-  });
+  // it('search products carulla', () => {
+  //   component.sellerId = '2';
+  //   component.searchBiggyCarulla('112401');
+  //   expect(mockContentService.biggySearchCarulla).toHaveBeenCalled();
+  // });
 
   it('go back', inject([Router], (router: Router) => {
     spyOn(router, 'navigate').and.stub();
