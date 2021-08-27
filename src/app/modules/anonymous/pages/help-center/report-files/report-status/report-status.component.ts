@@ -21,9 +21,7 @@ export class ReportStatusComponent implements OnInit {
 
   ngOnInit() {
     this.users.getNovetlyUser().subscribe((resp: any) => {
-      this.dataSourceNews = resp.objectResponse.novelties.map((r) => {
-        return { ...r, qualification: { status: Math.floor(Math.random() * (5 - 1) + 1), comment: `Prueba ${Math.random()}` } };
-      });
+      this.dataSourceNews = resp.objectResponse.novelties;
       console.log(this.dataSourceNews);
     });
   }
@@ -45,6 +43,7 @@ export class ReportStatusComponent implements OnInit {
       .afterClosed()
       .subscribe((resp) => {
         if (resp && resp !== qualification) {
+          this.users.saveQualificationNovelty(resp).subscribe(console.log);
           console.log('GUARDAR', resp);
         }
       });
