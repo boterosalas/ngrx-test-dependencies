@@ -12,6 +12,7 @@
         placeholder="Seleccione fechas"
         type="text"
         [maxDate]="maxDate"
+        [showDropdowns]="true"
         ngxDaterangepickerMd
         class="form-control border-input mat-elevation-z1 p-2 border-radius"
       />
@@ -25,7 +26,7 @@
     </span>
 
     <mat-radio-group aria-labelledby="status" class="status separate" formControlName="status">
-      <mat-radio-button class="radio-button" *ngFor="let item of status" [value]="item.value">
+      <mat-radio-button (dblclick)="resetStatusNovelties()" class="radio-button" *ngFor="let item of status" [value]="item.value">
         {{ item.name }}
       </mat-radio-button>
     </mat-radio-group>

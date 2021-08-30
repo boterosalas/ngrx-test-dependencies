@@ -688,9 +688,9 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.user.getDocuments(typeDocument).subscribe((dc: ResponseService) => {
       if (dc.objectResponse !== null) {
         if (dc.objectResponse.extension === '.jpg' || dc.objectResponse.extension === '.jpge' || dc.objectResponse.extension === '.png') {
-          this.openpreviewImage(dc.objectResponse.base64);
+          this.utils.openpreviewImage(dc.objectResponse.base64);
         } else {
-          this.openpreviewPdf(dc.objectResponse.base64);
+          this.utils.openpreviewPdf(dc.objectResponse.base64);
         }
       } else {
         this.openSnackBar(dc.userMessage, 'Cerrar');
@@ -734,20 +734,6 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
 
   }
 
-  private openpreviewImage(data) {
-    const image = new Image();
-    image.src = 'data:image/jpg;base64,' + data;
-
-    const w = window.open('');
-    w.document.write(image.outerHTML);
-  }
-
-  private openpreviewPdf(data) {
-    const pdfWindow = window.open('');
-    pdfWindow.document.write("<iframe width='100%' height='100%' src='data:application/pdf;base64, " +
-      encodeURI(data) + "'></iframe>"
-    );
-  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
