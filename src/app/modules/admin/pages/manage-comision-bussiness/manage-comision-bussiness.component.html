@@ -34,12 +34,19 @@
       <div fxLayout="row">
         <div fxLayout="row">
           <app-search-users class="searchUser" (search)="searchUser($event)"></app-search-users>
-          <div style="margin-top: 25px; margin-left: 20px; color: #37236a; font-weight: bold" fxLayout="row">
-            Mostrar Marketplace:
+          <div style="margin-top: 25px; margin-left: 20px; color: #37236a; font-weight: bold" fxLayout="row" fxLayoutGap="20px">
+            <span>Mostrar Marketplace:</span>
             <mat-slide-toggle
               (change)="changeStatus()"
               style="position: relative; bottom: 2px; margin-left: 5px"
               [(ngModel)]="marketplace"
+              color="orange2-toggle"
+            ></mat-slide-toggle>
+            <span>Mostrar categorías que no generan comisión:</span>
+            <mat-slide-toggle
+              (change)="changeStatus()"
+              style="position: relative; bottom: 2px; margin-left: 5px"
+              [(ngModel)]="notComission"
               color="orange2-toggle"
             ></mat-slide-toggle>
           </div>
