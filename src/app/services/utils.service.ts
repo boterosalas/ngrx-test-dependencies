@@ -121,6 +121,21 @@ export class UtilsService {
     await this.router.navigate(['/inicio']);
   }
 
+  public openpreviewImage(data) {
+    const image = new Image();
+    image.src = 'data:image/jpg;base64,' + data;
+
+    const w = window.open('');
+    w.document.write(image.outerHTML);
+  }
+
+  public openpreviewPdf(data) {
+    const pdfWindow = window.open('');
+    pdfWindow.document.write("<iframe width='100%' height='100%' src='data:application/pdf;base64, " +
+      encodeURI(data) + "'></iframe>"
+    );
+  }
+
   public checkPermision() {
     const token = localStorage.getItem('ACCESS_TOKEN');
     // decode the token to get its payload

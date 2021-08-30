@@ -78,6 +78,10 @@ export class DialogFilterNoveltiesComponent implements OnInit, OnDestroy {
       this.bussiness = resp;
     });
   }
+  
+  public resetStatusNovelties() {
+    this.filterNovelties.controls.status.setValue(null);
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

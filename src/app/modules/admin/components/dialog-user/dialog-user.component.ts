@@ -7,6 +7,7 @@ import { ResponseService } from 'src/app/interfaces/response';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import { UtilsService } from 'src/app/services/utils.service';
 moment.locale('es');
 @Component({
   selector: 'app-dialog-user',
@@ -22,8 +23,9 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     private auth: AuthService,
     private dialog: MatDialog,
     private fb: FormBuilder,
-    private _snackBar: MatSnackBar
-  ) {}
+    private _snackBar: MatSnackBar,
+    private utils: UtilsService
+  ) { }
   dateFormHoja: FormGroup;
   dataAddImagen: FormGroup;
   dataRejectionMessage: FormGroup;
@@ -64,10 +66,6 @@ export class DialogUserComponent implements OnInit, OnDestroy {
   enableRejectionMessage = false;
   rejectionMessage: string;
   selectedFiles = [];
-  base64IdentificationCard1 = '';
-  base64IdentificationCard2 = '';
-  base64BankCard = '';
-  base64RUT = '';
 
   changeStatus() {
     this.state.emit(event);
@@ -92,6 +90,10 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     } else {
       this.openSnackBar('No ha seleccionado ningún archivo.', 'Cerrar');
     }
+  }
+
+  private showFilemsg() {
+    this.openSnackBar('El archivo no existe.', 'Cerrar');
   }
 
   changeValue(event, item) {
@@ -126,12 +128,9 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     });
 
     this.getStatusVerificationUser();
-    this.preloadImagesPreview();
-    document.addEventListener('click', this.hiddenVisibilityPreview, false);
   }
 
   ngOnDestroy(): void {
-    document.removeEventListener('click', this.hiddenVisibilityPreview, false);
     this.subscription.unsubscribe();
   }
 
@@ -307,59 +306,55 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     }
   }
 
-  private preloadImagesPreview() {
-    const formats = [
-      { extension: '.jpg', contentType: 'image/jpeg' },
-      { extension: '.jpeg', contentType: 'image/jpeg' },
-      { extension: '.png', contentType: 'image/png' },
-      { extension: '.pdf', contentType: 'application/pdf' },
-    ];
 
-    const contentTypeIdentCard1 = formats.filter((format) => format.extension === this.data.extensionIdentificationCard1);
-    const contentTypeIdentCard2 = formats.filter((format) => format.extension === this.data.extensionIdentificationCard2);
-    const contentTypeBankCard = formats.filter((format) => format.extension === this.data.extensionBankCertificate);
-    const contentTypeRUT = formats.filter((format) => format.extension === this.data.extensionRUT);
-
-    if (this.data.fileIdentificationCard1) {
-      this.base64IdentificationCard1 = `data:${
-        contentTypeIdentCard1.length > 0 ? contentTypeIdentCard1[0].contentType : 'image/jpeg'
-      };base64,${this.data.fileIdentificationCard1}`;
+  public previewDocument(typeDocument: string) {
+    switch (typeDocument) {
+      case 'IdentificationCard1':
+        if (this.data.fileIdentificationCard1 !== '') {
+          if (this.data.extensionIdentificationCard1 === '.jpg') {
+            this.utils.openpreviewImage(this.data.fileIdentificationCard1);
+          } else {
+            this.utils.openpreviewPdf(this.data.fileIdentificationCard1);
+          }
+        } else {
+          this.showFilemsg();
+        }
+        break;
+      case 'IdentificationCard2':
+        if (this.data.fileIdentificationCard2 !== '') {
+          if (this.data.extensionIdentificationCard2 === '.jpg') {
+            this.utils.openpreviewImage(this.data.fileIdentificationCard2);
+          } else {
+            this.utils.openpreviewPdf(this.data.fileIdentificationCard2);
+          }
+        } else {
+          this.showFilemsg();
+        }
+        break;
+      case 'BankCertificate':
+        if (this.data.fileBankCertificate !== '') {
+          if (this.data.extensionBankCertificate === '.jpg') {
+            this.utils.openpreviewImage(this.data.fileBankCertificate);
+          } else {
+            this.utils.openpreviewPdf(this.data.fileBankCertificate);
+          }
+        } else {
+          this.showFilemsg();
+        }
+        break;
+      case 'Rut':
+        if (this.data.fileRUT !== '') {
+          if (this.data.extensionRUT === '.jpg') {
+            this.utils.openpreviewImage(this.data.fileRUT);
+          } else {
+            this.utils.openpreviewPdf(this.data.fileRUT);
+          }
+        } else {
+          this.showFilemsg();
+        }
+        break;
     }
 
-    if (this.data.fileIdentificationCard2) {
-      this.base64IdentificationCard2 = `data:${
-        contentTypeIdentCard2.length > 0 ? contentTypeIdentCard2[0].contentType : 'image/jpeg'
-      };base64,${this.data.fileIdentificationCard2}`;
-    }
-
-    if (this.data.fileBankCertificate && contentTypeBankCard[0].extension !== '.pdf') {
-      this.base64BankCard = `data:${contentTypeBankCard.length > 0 ? contentTypeBankCard[0].contentType : 'image/jpeg'};base64,${
-        this.data.fileBankCertificate
-      }`;
-    }
-
-    if (this.data.fileRUT && contentTypeRUT[0].extension !== '.pdf') {
-      this.base64RUT = `data:${contentTypeRUT.length > 0 ? contentTypeRUT[0].contentType : 'image/jpeg'};base64,${this.data.fileRUT}`;
-    }
   }
 
-  private hiddenVisibilityPreview(event: any) {
-    const previews = document.querySelectorAll('.preview-image.visibility');
-
-    previews.forEach((preview) => {
-      const link = preview ? preview.parentElement.querySelector(':scope > a') : preview;
-
-      if (preview && !preview.contains(event.target) && !link.contains(event.target)) {
-        preview.classList.remove('visibility');
-      }
-    });
-  }
-
-  showVisibilityPreview(event) {
-    const preview = event.target.parentElement.querySelector(':scope > .preview-image');
-
-    if (preview && !preview.classList.contains('visibility')) {
-      preview.classList.add('visibility');
-    }
-  }
 }
