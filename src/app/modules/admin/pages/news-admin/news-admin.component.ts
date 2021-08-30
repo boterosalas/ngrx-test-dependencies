@@ -81,7 +81,7 @@ export class NewsAdminComponent implements OnInit {
       title: 'Tasa de efectividad',
       icon: 'tio-chart_bar_4',
       number: 0,
-    },
+    }
   ];
 
   private subscription: Subscription = new Subscription();
