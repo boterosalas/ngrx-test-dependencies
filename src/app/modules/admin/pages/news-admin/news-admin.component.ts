@@ -53,6 +53,26 @@ export class NewsAdminComponent implements OnInit {
       number: 0,
     },
     {
+      code: 'totalusers',
+      title: 'Usuarios únicos',
+      icon: 'tio-account_circle',
+      number: 0,
+    },
+    {
+      code: 'effectiveness',
+      title: 'Tasa de efectividad',
+      icon: 'tio-chart_bar_4',
+      number: 0,
+    },
+
+    {
+      code: 'satisfaction',
+      title: 'Satisfacción',
+      icon: 'tio-heart',
+      values: [{ cry: 0 }, { happy: 0 }, { sad: 0 }, { love: 0 }],
+    },
+
+    {
       code: 'totalpending',
       title: 'Pendientes',
       icon: 'tio-info',
@@ -70,18 +90,6 @@ export class NewsAdminComponent implements OnInit {
       icon: 'tio-checkmark_circle',
       number: 0,
     },
-    {
-      code: 'totalusers',
-      title: 'Usuarios únicos',
-      icon: 'tio-account_circle',
-      number: 0,
-    },
-    {
-      code: 'effectiveness',
-      title: 'Tasa de efectividad',
-      icon: 'tio-chart_bar_4',
-      number: 0,
-    }
   ];
 
   private subscription: Subscription = new Subscription();
@@ -145,11 +153,19 @@ export class NewsAdminComponent implements OnInit {
 
   public getKPI() {
     this.subscription = this.kpi.getkpiNovelties(this.filterData).subscribe((resp) => {
+      console.log(resp);
+
       this.items = this.items.map((item) => {
-        return {
-          ...item,
-          number: item.code === 'effectiveness' ? resp[item.code] * 100 : resp[item.code],
-        };
+        if (item.code === 'satisfaction') {
+          return {
+            ...item,
+          };
+        } else {
+          return {
+            ...item,
+            number: item.code === 'effectiveness' ? resp[item.code] * 100 : resp[item.code],
+          };
+        }
       });
     });
   }
@@ -172,26 +188,8 @@ export class NewsAdminComponent implements OnInit {
     });
   }
 
-
-
   public goToNovelty(element: any) {
     this.router.navigateByUrl(`novedad/${element.id}`);
-  /* const title = '';
-  const template = '';
-
-
-  this.dialog.open(DialogNewsComponent, {
-    height: '500px',
-    data: {
-      title,
-      template,
-      element,
-    },
-  });
-  this.dialog.afterAllClosed.subscribe(() => {
-    this.searchUser(this.paginate, this.from, this.to);
-    this.getKPI();
-  }); */
   }
 
   public getReportExcel() {

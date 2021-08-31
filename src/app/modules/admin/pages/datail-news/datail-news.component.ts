@@ -201,6 +201,11 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     });
   }
 
+
+  viewComment() {
+    //this.dialog.open()
+  }
+
   ngOnDestroy() {
     this.$subscriptionGetNovelties.unsubscribe();
     this.$subcriptionParams.unsubscribe();
