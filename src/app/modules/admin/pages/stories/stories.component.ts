@@ -45,7 +45,7 @@ export class StoriesComponent implements OnInit, OnDestroy {
   public onChangeSelected(business) {
     if (business !== '') {
       this.newStoryActiveButton = false;
-      this.idBussiness = business.id;
+      this.idBussiness = business !== undefined ? business.id : 0;
       this.utils.checkedAll.next(false);
       this.utils.titleSelect.next('Seleccionar');
       this.utils.formArray = [];

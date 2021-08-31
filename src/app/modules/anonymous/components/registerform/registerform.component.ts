@@ -59,6 +59,9 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   textProteccion: any;
   textTransparencia: any;
   textPrograma: any;
+  showPerson = true;
+  showBusiness = false;
+
   ngOnInit() {
     this.amount = localStorage.getItem('Amount');
     this.amountReferred = localStorage.getItem('AmonuntReferred');
@@ -67,6 +70,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       {
         name: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(this.namePattern)]],
         lastName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(this.namePattern)]],
+        social: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(this.namePattern)]],
         idType: ['', Validators.required],
         id: ['', [Validators.required, Validators.maxLength(11), Validators.pattern(this.numberPattern)]],
         phone: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern(this.numberPattern)]],
@@ -124,6 +128,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       Email: this.registerForm.controls.email.value.toLowerCase(),
       FirstNames: this.registerForm.controls.name.value,
       LastNames: this.registerForm.controls.lastName.value,
+      social: this.registerForm.controls.social.value,
       Identification: this.registerForm.controls.id.value,
       Cellphone: this.registerForm.controls.phone.value,
       Password: btoa(this.registerForm.controls.password.value),
@@ -212,6 +217,23 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     this.subscription = this.registerUser.idType().subscribe((res: ResponseService) => {
       this.idUserType = res.objectResponse;
     });
+  }
+
+
+  public selectId(typeId:string) {
+    if(typeId === '3') {
+      this.showBusiness = true;
+      this.showPerson = false;
+      this.registerForm.controls.name.clearValidators();
+      this.registerForm.controls.lastName.clearValidators();
+      this.registerForm.controls.name.setValue(null);
+      this.registerForm.controls.lastName.setValue(null);
+    } else {
+      this.showBusiness = false;
+      this.showPerson = true;
+      this.registerForm.controls.social.clearValidators();
+      this.registerForm.controls.social.setValue(null);
+    }
   }
 
   /**
