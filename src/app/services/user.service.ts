@@ -68,6 +68,8 @@ export class UserService {
   apiUserInfoAditional = 'userprofile/getuserinfoaditional';
   apiSaveNewNovelty = 'new/savenewnovelty';
   apiGetNewsNovelties = 'new/getnewsnovelty';
+  apiGetNewsById = 'new/usernews';
+
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -464,6 +466,19 @@ export class UserService {
 
   public getNoveltyById(id) {
     return this.http.get(`${this.urlReports}${this.apiNoveltyById}?id=${id}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      )
+    );
+  }
+
+
+  public getNoveltiesById(id) {
+    return this.http.get(`${this.url}${this.apiGetNewsById}?userId=${id}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(1000),

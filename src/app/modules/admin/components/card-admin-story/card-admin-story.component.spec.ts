@@ -40,7 +40,7 @@ describe('CardAdminStoryComponent', () => {
 
   const matDialog = new MatDialogMock();
 
-  const mockContentService = jasmine.createSpyObj('ContentService', ['deleteStories', 'getBusiness','getStoriesadmin']);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['deleteStories', 'getBusiness', 'getStoriesadmin']);
 
   const allBusiness = [
     {
@@ -206,5 +206,7 @@ describe('CardAdminStoryComponent', () => {
     expect(mockContentService.getBusiness).toHaveBeenCalled();
   });
 
-
+  it('get extension', () => {
+    expect(component.getExtension('prueba')).toBeTruthy();
+  });
 });

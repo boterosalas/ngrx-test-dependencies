@@ -229,6 +229,7 @@ describe('NavigationMenuComponent', () => {
     component.currentLink = { id: 1, description: 'test' };
     component.deleteNavigationItemService();
     expect(mockAuthService.deleteMenu).toHaveBeenCalled();
+    expect(mockDialog.open).toBeTruthy();
   });
 
   it('saveOrderItems', () => {
@@ -249,5 +250,11 @@ describe('NavigationMenuComponent', () => {
   it('edit Navigation Item', () => {
     component.editNavigationItem({});
     expect(mockAuthService.getmenusNoLogin).toHaveBeenCalled();
+  });
+
+
+  it('edit change state item', () => {
+    component.changeStateOfItem({active:true});
+    expect(mockAuthService.saveMenu).toHaveBeenCalled();
   });
 });
