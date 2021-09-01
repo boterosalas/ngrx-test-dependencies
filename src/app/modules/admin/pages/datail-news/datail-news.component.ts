@@ -124,9 +124,7 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     }
   }
   public openPDForFile() {
-    if (this.currentNovelty.urlImage === '') {
-      console.log('No hay nada');
-    } else {
+    if (this.currentNovelty.urlImage !== '') {
       const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
       if (iOS) {
         window.location.assign(this.currentNovelty.documenturl);

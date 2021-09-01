@@ -32,6 +32,10 @@ describe('DatailNewsComponent', () => {
     'getNoveltiesById',
   ]);
 
+  let mockRouter = {
+    navigate: jasmine.createSpy('navigate'),
+  };
+
   const respDatos = {
     consecutive: '000001',
     name: 'Santiago Teran',
@@ -39,7 +43,7 @@ describe('DatailNewsComponent', () => {
     idclicker: 'santer457',
     identification: '12121212',
     email: 'hamil@unicauca.edu.co',
-    urlImage: '',
+    urlImage: 'http/archivo.jpg',
     id: '1',
     statusnovelty: 'Pendiente',
     datenovelty: '2020-02-04',
@@ -50,6 +54,8 @@ describe('DatailNewsComponent', () => {
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
   };
+
+  const respDatosError = { state: 'error' };
 
   const listNotes = [
     {
@@ -200,17 +206,13 @@ describe('DatailNewsComponent', () => {
     expect(mockUserService.getNoveltyById).toHaveBeenCalled();
     component.currentNovelty = respDatos;
     expect(component.currentNovelty).toEqual(respDatos);
-    component.changeSelecteds('Solucionado');
-    expect(component.selecteds[0].state).toEqual(2);
-    expect(component.selecteds[2].state).toEqual(2);
-    expect(component.selecteds[1].state).toEqual(2);
-  });
-
-  it('steps current state "Solucionado"', () => {
-    component.changeSelecteds('Solucionado');
-    expect(component.selecteds[0].state).toEqual(2);
-    expect(component.selecteds[2].state).toEqual(2);
-    expect(component.selecteds[1].state).toEqual(2);
+    expect(component.$subcriptionNovelty).toBeTruthy();
+    expect(component.$subcriptionParams).toBeTruthy();
+    expect(component.$subscriptionGetMoreNovelties).toBeTruthy();
+    expect(component.$subscriptionGetNovelties).toBeTruthy();
+    expect(component.$subscriptionSaveNote).toBeTruthy();
+    component.initForm();
+    expect(component.dateForm).toBeTruthy();
   });
 
   it('steps current state "En revisión"', () => {
@@ -219,7 +221,6 @@ describe('DatailNewsComponent', () => {
     expect(component.selecteds[1].state).toEqual(1);
     expect(component.selecteds[2].state).toEqual(0);
   });
-
 
   it('steps current state "Pendiente"', () => {
     component.changeSelecteds('Pendiente');
@@ -233,6 +234,7 @@ describe('DatailNewsComponent', () => {
     component.initForm();
     component.saveChanges();
     expect(mockUserService.setStatus).toHaveBeenCalled();
+    expect(component.active).toBeTruthy();
     component.onChangeSelected('Pendiente');
   });
 
@@ -259,6 +261,11 @@ describe('DatailNewsComponent', () => {
     expect(component.listMoreNovelties.length).toBeGreaterThan(1);
   });
 
+  it('open pdf', () => {
+    component.currentNovelty = respDatos;
+    component.openPDForFile();
+  });
+
   it('save new novelty', () => {
     component.currentNovelty = respDatos;
     component.listNovelties = listNotes;
@@ -269,5 +276,42 @@ describe('DatailNewsComponent', () => {
       typenewnovelty: false,
     });
     expect(mockUserService.setStatus).toHaveBeenCalled();
+  });
+
+  describe('Errors', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(DatailNewsComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+      mockUserService.getNoveltyById.and.returnValue(of(respDatosError));
+      mockUserService.setStatus.and.returnValue(of(respDatosError));
+    });
+    it('get novelty error', () => {
+      expect(component).toBeTruthy();
+      component.getNoveltyById(null);
+      expect(mockUserService.getNoveltyById).toHaveBeenCalled();
+    });
+
+
+    it('save new novelty error', () => {
+      component.currentNovelty = respDatos;
+      component.listNovelties = listNotes;
+      component.updateNovelty({
+        idnovelty: respDatos.id,
+        description: 'nota de prueba',
+        statusnovelty: respDatos.statusnovelty,
+        typenewnovelty: false,
+      });
+      expect(mockUserService.setStatus).toHaveBeenCalled();
+    });
+
+
+    it('save new changes error', () => {
+      component.currentNovelty = respDatos;
+      component.initForm();
+      expect(component.dateForm).toBeTruthy();
+      component.saveChanges();
+      expect(mockUserService.setStatus).toHaveBeenCalled();
+    });
   });
 });
