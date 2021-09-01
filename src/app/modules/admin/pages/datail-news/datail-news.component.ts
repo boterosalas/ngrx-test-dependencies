@@ -48,7 +48,7 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private user: UserService,
     private dialog: MatDialog,
-    private router:Router
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -63,7 +63,7 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     this.$subcriptionNovelty = this.user.getNoveltyById(id).subscribe((novelty) => {
       if (novelty['objectResponse']) {
         this.currentNovelty = novelty['objectResponse'];
-        this.getMoreNovelties(this.currentNovelty.idclicker);
+        this.getMoreNovelties(this.currentNovelty.userid);
         this.changeSelecteds(this.currentNovelty.statusnovelty);
         this.initForm();
         this.getNovelties();
@@ -72,15 +72,15 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
   }
 
   public getMoreNovelties(id): void {
-    this.user.getNoveltiesById(100777).subscribe((novelties) => {
-      if(novelties['objectResponse']) {
+    this.$subscriptionGetMoreNovelties = this.user.getNoveltiesById(id).subscribe((novelties) => {
+      if (novelties['objectResponse']) {
         this.listMoreNovelties = novelties['objectResponse'];
       }
     });
   }
 
-  goToNovelty(id):void {
-     this.router.navigateByUrl(`novedad/${id}`)
+  goToNovelty(id): void {
+    this.router.navigateByUrl(`novedad/${id}`);
   }
 
   public initForm() {
@@ -223,5 +223,6 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     this.$subcriptionParams.unsubscribe();
     this.$subcriptionNovelty.unsubscribe();
     this.$subscriptionSaveNote.unsubscribe();
+    this.$subscriptionGetMoreNovelties.unsubscribe();
   }
 }
