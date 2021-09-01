@@ -14,7 +14,8 @@
   </div>
   <div class="story-info">
     <div class="client-info {{ !showInfo ? 'visibility-hidden' : '' }}">
-      <img *ngIf="showImageClient" class="img-client" [src]="stories[0].businessImage" alt="{{ stories[0].businessName }}" />
+      <img *ngIf="showImageClient && stories[0].businessImage" class="img-client" [src]="stories[0].businessImage" alt="{{ stories[0].businessName }}" />
+      <img *ngIf="!stories[0].businessImage" class="img-client" src="/assets/icons/icon-72x72.png" alt="clickam" />
       <h4 *ngIf="showTitleClient">{{ stories[0].businessName }}</h4>
       <span *ngIf="stories && stories.length > 0">{{ timeStory }}</span>
     </div>

@@ -61,19 +61,35 @@ mat-card {
 
   .info {
     margin-top: 15px;
-    div {
-      margin-right: 25px;
-      span:nth-child(1) {
-        font-size: 12px;
-        font-family: $font-galano-bold;
-        color: $gray4;
-        font-weight: bold;
+    justify-content: space-between;
+    .left {
+      div {
+        margin-right: 25px;
+        span:nth-child(1) {
+          font-size: 12px;
+          font-family: $font-galano-bold;
+          color: $gray4;
+          font-weight: bold;
+        }
+      }
+
+      span:nth-child(2) {
+        font-size: 14px;
+        color: $primary-color;
       }
     }
 
-    span:nth-child(2) {
-      font-size: 14px;
-      color: $primary-color;
+    .right {
+      width: 20%;
+      label {
+        font-size: 12px;
+        font-family: 'galano-bold', sans-serif;
+        color: #a7a3b1;
+        font-weight: bold;
+      }
+      mat-form-field {
+        width: 100%;
+      }
     }
   }
 }

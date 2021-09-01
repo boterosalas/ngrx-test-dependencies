@@ -7,7 +7,6 @@ import { ResponseService } from 'src/app/interfaces/response';
 import { UserService } from 'src/app/services/user.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { LinksService } from 'src/app/services/links.service';
-import { DialogNewsComponent } from '../../components/dialog-news/dialog-news.component';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { Router } from '@angular/router';
 moment.locale('es');

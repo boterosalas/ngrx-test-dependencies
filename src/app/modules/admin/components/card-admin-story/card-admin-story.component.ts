@@ -132,7 +132,7 @@ export class CardAdminStoryComponent implements OnInit, OnDestroy {
     });
   }
 
-  private getExtension(nameFile: string) {
+  public getExtension(nameFile: string) {
     if (nameFile) {
       const splitExt = nameFile.split('.');
       return splitExt[splitExt.length - 1].toLocaleLowerCase();
