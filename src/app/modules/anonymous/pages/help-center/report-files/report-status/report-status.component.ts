@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
 import { DialogNoveltySatisfactionComponent } from 'src/app/modules/anonymous/components/dialog-novelty-satisfaction/dialog-novelty-satisfaction.component';
-import { ContentService } from 'src/app/services/content.service';
+
 import { UserService } from 'src/app/services/user.service';
-import Swal from 'sweetalert2';
 
 moment.locale('es');
 @Component({
@@ -14,15 +12,16 @@ moment.locale('es');
   styleUrls: ['./report-status.component.scss'],
 })
 export class ReportStatusComponent implements OnInit {
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private users: UserService) {}
-  //dataSourceNews: any
+  constructor(private dialog: MatDialog, private users: UserService) {}
   selectedInic: any;
   dataSourceNews: any;
 
   ngOnInit() {
+    this.getNovetlyUser();
+  }
+  getNovetlyUser() {
     this.users.getNovetlyUser().subscribe((resp: any) => {
       this.dataSourceNews = resp.objectResponse.novelties;
-      console.log(this.dataSourceNews);
     });
   }
 
@@ -30,22 +29,25 @@ export class ReportStatusComponent implements OnInit {
     this.selectedInic = elem;
   }
 
-  opeModalStatus(status: string, item: any) {
-    let qualification = {
-      status: Number(status),
-      comment: item.qualification ? item.qualification.comment : '',
-    };
-
+  opeModalStatus(qualification: string, item: any) {
     this.dialog
       .open(DialogNoveltySatisfactionComponent, {
-        data: { ...qualification },
+        data: { qualification: Number(qualification), comment: '' },
       })
       .afterClosed()
       .subscribe((resp) => {
-        if (resp && resp !== qualification) {
-          this.users.saveQualificationNovelty(resp).subscribe(console.log);
-          console.log('GUARDAR', resp);
+        if (resp.comment && resp.qualification) {
+          this.saveQualification(resp, item);
         }
       });
+  }
+
+  saveQualification(resp: any, item: any) {
+    const data = { ...resp, id: item.id };
+    this.users.saveQualificationNovelty(data).subscribe((resp: any) => {
+      if (resp.state === 'Success') {
+        this.getNovetlyUser();
+      }
+    });
   }
 }

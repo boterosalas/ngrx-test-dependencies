@@ -98,7 +98,6 @@
         margin: 0 15px;
         transition: all 0.2s ease;
         background-size: cover;
-        &:hover,
         &:checked {
           filter: grayscale(0);
         }

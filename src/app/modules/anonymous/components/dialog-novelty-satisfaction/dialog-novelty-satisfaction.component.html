@@ -4,23 +4,23 @@
   </div>
   <form [formGroup]="statusForm">
     <div class="emojis">
-      <input type="radio" value="1" class="cry" [checked]="data.status === 1" formControlName="status" />
-      <input type="radio" value="2" class="sad" [checked]="data.status === 2" formControlName="status" />
-      <input type="radio" value="3" class="happy" [checked]="data.status === 3" formControlName="status" />
-      <input type="radio" value="4" class="love" [checked]="data.status === 4" formControlName="status" />
+      <input type="radio" value="1" class="cry" [checked]="data.qualification === 1" formControlName="qualification" />
+      <input type="radio" value="2" class="sad" [checked]="data.qualification === 2" formControlName="qualification" />
+      <input type="radio" value="3" class="happy" [checked]="data.qualification === 3" formControlName="qualification" />
+      <input type="radio" value="4" class="love" [checked]="data.qualification === 4" formControlName="qualification" />
     </div>
 
     <div class="text">
-      <p *ngIf="data.status === 1">Muy triste</p>
-      <p *ngIf="data.status === 2">Inconforme</p>
-      <p *ngIf="data.status === 3">¡Conforme!</p>
-      <p *ngIf="data.status === 4">¡Feliz!</p>
+      <p *ngIf="data.qualification=== 1">Muy triste</p>
+      <p *ngIf="data.qualification=== 2">Inconforme</p>
+      <p *ngIf="data.qualification=== 3">¡Conforme!</p>
+      <p *ngIf="data.qualification=== 4">¡Feliz!</p>
     </div>
     <div class="label-input">
       <p>Déjanos tu comentario</p>
     </div>
     <mat-form-field appearance="fill">
-      <input matInput formControlName="comment" />
+      <input matInput formControlName="comment" type="text"  autocomplete="no"/>
     </mat-form-field>
   </form>
   <div class="action-buttons">

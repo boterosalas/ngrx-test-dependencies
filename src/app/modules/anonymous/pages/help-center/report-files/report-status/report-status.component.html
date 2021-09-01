@@ -115,30 +115,39 @@
                       <input
                         type="radio"
                         value="1"
+                        name="status"
+                        [disabled]="item?.qualification"
                         class="cry"
                         (click)="opeModalStatus($event.target.value, item)"
-                        [checked]="item?.qualification?.status === 1"
+                        [checked]="item?.qualification === 1"
                       />
                       <input
                         type="radio"
                         value="2"
+                        name="status"
+                        [disabled]="item?.qualification"
                         class="sad"
                         (click)="opeModalStatus($event.target.value, item)"
-                        [checked]="item?.qualification?.status === 2"
+                        [checked]="item?.qualification === 2"
+
                       />
                       <input
                         type="radio"
                         value="3"
+                        name="status"
+                        [disabled]="item?.qualification"
                         class="happy"
                         (click)="opeModalStatus($event.target.value, item)"
-                        [checked]="item?.qualification?.status === 3"
+                        [checked]="item?.qualification === 3"
                       />
                       <input
                         type="radio"
                         value="4"
+                        name="status"
+                        [disabled]="item?.qualification"
                         class="love"
                         (click)="opeModalStatus($event.target.value, item)"
-                        [checked]="item?.qualification?.status === 4"
+                        [checked]="item?.qualification === 4"
                       />
                     </form>
                   </div>

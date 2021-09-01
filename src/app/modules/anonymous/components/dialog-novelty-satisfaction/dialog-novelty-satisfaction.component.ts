@@ -21,13 +21,10 @@ export class DialogNoveltySatisfactionComponent implements OnInit, OnDestroy {
   $formSubscription: Subscription;
 
   ngOnInit() {
-    this.statusForm = this.fb.group({ status: [''], comment: [this.data.comment, [Validators.required]] });
+    this.statusForm = this.fb.group({ qualification: [''], comment: ['', [Validators.required]] });
     this.$formSubscription = this.statusForm.valueChanges.subscribe((resp) => {
-      this.data.status = resp.status === '' ? this.data.status : Number(resp.status);
-      if (resp.comment !== this.data.comment) {
-        this.activeButton = true;
-        this.data.comment = resp.comment;
-      }
+      this.data.qualification = Number(resp.qualification);
+      this.data.comment = resp.comment;
     });
   }
 
