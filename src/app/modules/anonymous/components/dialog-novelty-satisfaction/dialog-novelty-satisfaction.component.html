@@ -1,0 +1,42 @@
+<div class="wrapper fade-out" *ngIf="!showCopyThanks">
+  <div class="title">
+    <h3>¿Cómo fue tu experiencia en esta novedad?</h3>
+  </div>
+  <form [formGroup]="statusForm">
+    <div class="emojis">
+      <input type="radio" value="1" class="cry" [checked]="data.qualification === 1" formControlName="qualification" />
+      <input type="radio" value="2" class="sad" [checked]="data.qualification === 2" formControlName="qualification" />
+      <input type="radio" value="3" class="happy" [checked]="data.qualification === 3" formControlName="qualification" />
+      <input type="radio" value="4" class="love" [checked]="data.qualification === 4" formControlName="qualification" />
+    </div>
+
+    <div class="text">
+      <p *ngIf="data.qualification=== 1">Muy triste</p>
+      <p *ngIf="data.qualification=== 2">Inconforme</p>
+      <p *ngIf="data.qualification=== 3">¡Conforme!</p>
+      <p *ngIf="data.qualification=== 4">¡Feliz!</p>
+    </div>
+    <div class="label-input">
+      <p>Déjanos tu comentario</p>
+    </div>
+    <mat-form-field appearance="fill">
+      <input matInput formControlName="comment" type="text"  autocomplete="no"/>
+    </mat-form-field>
+  </form>
+  <div class="action-buttons">
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button mat-raised-button color="orange" (click)="sendQualification()" [disabled]="!statusForm.valid || !activeButton">Enviar</button>
+  </div>
+</div>
+
+<div class="wrapper-message fade-in" *ngIf="showCopyThanks">
+  <div class="icon">
+    <i class="tio-checkmark_circle_outlined"></i>
+  </div>
+  <div class="text">
+    <p>¡Muchas gracias por tu respuesta! En Clickam seguiremos trabajando para brindarte un excelente servicio</p>
+  </div>
+  <div class="button">
+    <button mat-button (click)="closeDialog()">Aceptar</button>
+  </div>
+</div>

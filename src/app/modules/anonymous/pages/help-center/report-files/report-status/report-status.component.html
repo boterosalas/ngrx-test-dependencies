@@ -9,7 +9,7 @@
       <button mat-button [routerLink]="['/centro-de-ayuda/reportar']">
         <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>keyboard_arrow_left</mat-icon>
-          {{ "BUTTONS.BACK" | translate}}
+          {{ 'BUTTONS.BACK' | translate }}
         </span>
       </button>
     </span>
@@ -18,7 +18,7 @@
     </div>
     <div fxLayout.gt-xs="column" class="mt-3">
       <div fxLayout="row" fxLayoutGap="10px">
-        <mat-card>
+        <mat-card class="mat-card-box-shadow">
           <div fxLayout="row" fxLayoutGap="10px" class="report-news">
             <img src="/assets/img/ayuda/reportar-novedad/icon-reportar-novedad.svg" alt="" />
             <h3>Estado de novedades</h3>
@@ -32,7 +32,12 @@
           <h3 *ngIf="!dataSourceNews" class="bold-report">No tienes novedades reportadas.</h3>
           <div class="panel-spacing mt-3">
             <mat-accordion>
-              <mat-expansion-panel *ngFor="let item of dataSourceNews; let i = index" (closed)="stepIni(-1)" (opened)="stepIni(i)">
+              <mat-expansion-panel
+                class="expansion-panel-box-shadow"
+                *ngFor="let item of dataSourceNews; let i = index"
+                (closed)="stepIni(-1)"
+                (opened)="stepIni(i)"
+              >
                 <mat-expansion-panel-header>
                   <mat-panel-title class="between-datas">
                     <div fxLayout="column" class="padding-mobile mr-4">
@@ -101,6 +106,51 @@
                 <div fxLayout="column">
                   <p class="mb-0 radications-r">respuesta a novedad</p>
                   <span class="text-description">{{ item.responsenovelty }}</span>
+                </div>
+
+                <div class="status-novelty" fxLayout="column" *ngIf="item.statusnovelty === 'Solucionado'">
+                  <p>¿Cómo fue tu experiencia en esta novedad?</p>
+                  <div class="emoji-status">
+                    <form>
+                      <input
+                        type="radio"
+                        value="1"
+                        name="status"
+                        [disabled]="item?.qualification"
+                        class="cry"
+                        (click)="opeModalStatus($event.target.value, item)"
+                        [checked]="item?.qualification === 1"
+                      />
+                      <input
+                        type="radio"
+                        value="2"
+                        name="status"
+                        [disabled]="item?.qualification"
+                        class="sad"
+                        (click)="opeModalStatus($event.target.value, item)"
+                        [checked]="item?.qualification === 2"
+
+                      />
+                      <input
+                        type="radio"
+                        value="3"
+                        name="status"
+                        [disabled]="item?.qualification"
+                        class="happy"
+                        (click)="opeModalStatus($event.target.value, item)"
+                        [checked]="item?.qualification === 3"
+                      />
+                      <input
+                        type="radio"
+                        value="4"
+                        name="status"
+                        [disabled]="item?.qualification"
+                        class="love"
+                        (click)="opeModalStatus($event.target.value, item)"
+                        [checked]="item?.qualification === 4"
+                      />
+                    </form>
+                  </div>
                 </div>
               </mat-expansion-panel>
             </mat-accordion>
