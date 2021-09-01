@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
@@ -37,14 +37,18 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
   $subcriptionNovelty: Subscription = new Subscription();
   $subscriptionSaveNote: Subscription = new Subscription();
   $subscriptionGetNovelties: Subscription = new Subscription();
+  $subscriptionGetMoreNovelties: Subscription = new Subscription();
+
   listNovelties = [];
+  listMoreNovelties = [];
 
   constructor(
     private snackBar: MatSnackBar,
     private routeParams: ActivatedRoute,
     private fb: FormBuilder,
     private user: UserService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -59,11 +63,24 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     this.$subcriptionNovelty = this.user.getNoveltyById(id).subscribe((novelty) => {
       if (novelty['objectResponse']) {
         this.currentNovelty = novelty['objectResponse'];
+        this.getMoreNovelties(this.currentNovelty.userid);
         this.changeSelecteds(this.currentNovelty.statusnovelty);
         this.initForm();
         this.getNovelties();
       }
     });
+  }
+
+  public getMoreNovelties(id): void {
+    this.$subscriptionGetMoreNovelties = this.user.getNoveltiesById(id).subscribe((novelties) => {
+      if (novelties['objectResponse']) {
+        this.listMoreNovelties = novelties['objectResponse'];
+      }
+    });
+  }
+
+  goToNovelty(id): void {
+    this.router.navigateByUrl(`novedad/${id}`);
   }
 
   public initForm() {
@@ -107,9 +124,7 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     }
   }
   public openPDForFile() {
-    if (this.currentNovelty.urlImage === '') {
-      console.log('No hay nada');
-    } else {
+    if (this.currentNovelty.urlImage !== '') {
       const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
       if (iOS) {
         window.location.assign(this.currentNovelty.documenturl);
@@ -206,5 +221,6 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     this.$subcriptionParams.unsubscribe();
     this.$subcriptionNovelty.unsubscribe();
     this.$subscriptionSaveNote.unsubscribe();
+    this.$subscriptionGetMoreNovelties.unsubscribe();
   }
 }

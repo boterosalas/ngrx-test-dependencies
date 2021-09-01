@@ -56,6 +56,7 @@ export class ManageComisionBussinessComponent implements OnInit {
   displayedColumns: string[] = ['code', 'nombreCat', 'comisionClik', 'comisionBus', 'comisionTotal', 'actions'];
   image: string;
   marketplace = false;
+  notComission = false;
   idComision: string;
   private subscription: Subscription = new Subscription();
   constructor(
@@ -207,6 +208,7 @@ export class ManageComisionBussinessComponent implements OnInit {
     }
     const idbussiness = this.id;
     const marketplace = this.marketplace;
+    const notComission = this.notComission;
     const params = {
       term,
       from,
@@ -215,6 +217,7 @@ export class ManageComisionBussinessComponent implements OnInit {
       orderBy,
       idbussiness,
       marketplace,
+      notComission
     };
 
     this.subscription = this.content.getComisionManage(params).subscribe((user: any) => {

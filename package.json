@@ -8,6 +8,7 @@
     "build-qa": "ng build --output-hashing=all --configuration=qa",
     "build-pr": "ng build --output-hashing=all --configuration=prod",
     "test": "ng test --code-coverage --source-map=false --karma-config=./karma.conf.js",
+    "testwatch": "ng test --code-coverage --source-map=false --karma-config=./karma.conf.js --watch",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
