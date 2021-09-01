@@ -93,7 +93,6 @@
         height: 25px;
         border: none;
         cursor: pointer;
-        transition: border 0.2s ease;
         filter: grayscale(100%);
         margin: 0 15px;
         transition: all 0.2s ease;
@@ -107,16 +106,16 @@
         }
 
         &.cry {
-          background: url('/assets/img/status/llorando.svg');
+          background-image: url('/assets/img/status/llorando.svg');
         }
         &.sad {
-          background: url('/assets/img/status/triste.svg');
+          background-image: url('/assets/img/status/triste.svg');
         }
         &.happy {
-          background: url('/assets/img/status/feliz.svg');
+          background-image: url('/assets/img/status/feliz.svg');
         }
         &.love {
-          background: url('/assets/img/status/enamorado.svg');
+          background-image: url('/assets/img/status/enamorado.svg');
         }
       }
     }
