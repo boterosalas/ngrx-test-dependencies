@@ -9,6 +9,7 @@
     "ACTUAL_PASSWORD": "Contraseña actual",
     "NAME": "Nombres",
     "LASTNAME": "Apellidos",
+    "SOCIAL": "Razón Social",
     "CELLPHONE": "Celular",
     "CELLPHONE_SHORT": "Número de celular",
     "ADDRESS": "Dirección",

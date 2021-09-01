@@ -313,7 +313,7 @@ export class ContentService {
   public getComisionManage(term?: any) {
     return this.http
       .get(
-        `${this.urlComission}${this.apiGetManageCommisionBus}?searchText=${term.term}&from=${term.from}&to=${term.to}&orderBy=${term.orderOrigin}&ordination=${term.orderBy}&idBusiness=${term.idbussiness}&marketplace=${term.marketplace}`,
+        `${this.urlComission}${this.apiGetManageCommisionBus}?searchText=${term.term}&from=${term.from}&to=${term.to}&orderBy=${term.orderOrigin}&ordination=${term.orderBy}&idBusiness=${term.idbussiness}&marketplace=${term.marketplace}&withoutCommission=${term.notComission}`,
         this.httpOptions
       )
       .pipe(

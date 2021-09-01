@@ -196,6 +196,17 @@ describe('RegisterformComponent', () => {
     expect(component.acceptTerms).toBeTruthy();
   });
 
+  it('select nit', () => {
+    component.selectId('3');
+    expect(component.showBusiness).toBeTruthy();
+  });
+
+  it('select document', () => {
+    component.selectId('2');
+    expect(component.showBusiness).toBeFalsy();
+  });
+  
+
   describe('register clicker', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(RegisterformComponent);
