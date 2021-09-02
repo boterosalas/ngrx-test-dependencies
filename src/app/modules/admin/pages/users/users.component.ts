@@ -338,7 +338,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
         const extensionIdentificationCard2 = resp.objectResponse.maxextensiondateidentificationcard2;
         const extensionBankCertificate = resp.objectResponse.maxextensiondatebankcertificate;
         const extensionRUT = resp.objectResponse.maxextensiondaterut;
-        const responseAccountBank = resp.objectResponse.responseaccountbank;
+        const responseAccountBank = user.responseaccountbank;
         const fileRUT = resp.objectResponse.rut;
 
         const dialogRef = this.dialog.open(DialogUserComponent, {
