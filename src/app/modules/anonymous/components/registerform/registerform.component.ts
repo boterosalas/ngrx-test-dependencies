@@ -44,6 +44,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
 
   emailPattern = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
   namePattern = '[a-zA-Z0-9 àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]+';
+  socialPattern = '[a-zA-Z0-9 .-_àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]+';
   numberPattern = '^(0|[0-9][0-9]*)$';
   passwordPattern = '(?=.*[a-zA-Z])(?=.*[0-9])';
   msg: string;
@@ -70,7 +71,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       {
         name: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(this.namePattern)]],
         lastName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(this.namePattern)]],
-        social: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(this.namePattern)]],
+        social: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(this.socialPattern)]],
         idType: ['', Validators.required],
         id: ['', [Validators.required, Validators.maxLength(11), Validators.pattern(this.numberPattern)]],
         phone: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern(this.numberPattern)]],
