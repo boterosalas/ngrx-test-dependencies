@@ -68,7 +68,8 @@ export class NewsAdminComponent implements OnInit {
       code: 'satisfaction',
       title: 'Satisfacción',
       icon: 'tio-heart',
-      values: [{ cry: 0 }, { happy: 0 }, { sad: 0 }, { love: 0 }],
+      values: { sad: 0, cry: 0, happy: 0, love: 0 },
+      number: 0,
     },
 
     {
@@ -152,12 +153,16 @@ export class NewsAdminComponent implements OnInit {
 
   public getKPI() {
     this.subscription = this.kpi.getkpiNovelties(this.filterData).subscribe((resp) => {
-      console.log(resp);
-
       this.items = this.items.map((item) => {
-        if (item.code === 'satisfaction') {
+        if (item.code === 'satisfaction' && resp.satisfaction) {
           return {
             ...item,
+            values: {
+              cry: resp.satisfaction[0] ? resp.satisfaction[0] : 0,
+              sad: resp.satisfaction[1] ? resp.satisfaction[1] : 0,
+              happy: resp.satisfaction[2] ? resp.satisfaction[2] : 0,
+              love: resp.satisfaction[3] ? resp.satisfaction[3] : 0,
+            },
           };
         } else {
           return {

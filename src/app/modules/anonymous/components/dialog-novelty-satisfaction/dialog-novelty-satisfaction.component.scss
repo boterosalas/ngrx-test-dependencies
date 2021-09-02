@@ -1,5 +1,6 @@
 @import 'variables';
 .wrapper {
+  position: relative;
   .title {
     width: 80%;
     margin: auto;
@@ -8,12 +9,21 @@
       font-size: 20px;
     }
   }
+  .position-relative-close {
+    position: absolute;
+    right: 0;
+    top: -26px;
+  }
   form {
     margin-top: 20px;
     .emojis {
       margin-top: 10px;
       text-align: center;
       input[type='radio'] {
+        @media only screen and (max-width: 600px) {
+          width: 25px;
+          height: 25px;
+        }
         appearance: none;
         width: 35px;
         height: 35px;
@@ -23,7 +33,6 @@
         margin: 0 15px;
         transition: all 0.2s ease;
         background-size: cover;
-        &:hover,
         &:checked {
           filter: grayscale(0);
         }
@@ -66,6 +75,16 @@
       width: 100%;
       margin-bottom: 10px;
     }
+
+    .comment {
+      border: 1px solid $primary-color;
+      border-radius: 10px;
+      padding: 15px;
+      p {
+        color: $primary-color;
+        font-size: 16px;
+      }
+    }
   }
   .action-buttons {
     button:first-child {
@@ -85,7 +104,7 @@
   .icon {
     i {
       font-size: 45px;
-      color: #B1DD98;
+      color: #b1dd98;
     }
   }
 

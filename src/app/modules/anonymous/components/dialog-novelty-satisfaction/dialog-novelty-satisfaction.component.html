@@ -1,4 +1,4 @@
-<div class="wrapper fade-out" *ngIf="!showCopyThanks">
+<div class="wrapper fade-out" *ngIf="!showCopyThanks && !data.notEdit">
   <div class="title">
     <h3>¿Cómo fue tu experiencia en esta novedad?</h3>
   </div>
@@ -11,16 +11,16 @@
     </div>
 
     <div class="text">
-      <p *ngIf="data.qualification=== 1">Muy triste</p>
-      <p *ngIf="data.qualification=== 2">Inconforme</p>
-      <p *ngIf="data.qualification=== 3">¡Conforme!</p>
-      <p *ngIf="data.qualification=== 4">¡Feliz!</p>
+      <p *ngIf="data.qualification === 1">Muy triste</p>
+      <p *ngIf="data.qualification === 2">Inconforme</p>
+      <p *ngIf="data.qualification === 3">¡Conforme!</p>
+      <p *ngIf="data.qualification === 4">¡Feliz!</p>
     </div>
     <div class="label-input">
       <p>Déjanos tu comentario</p>
     </div>
     <mat-form-field appearance="fill">
-      <input matInput formControlName="comment" type="text"  autocomplete="no"/>
+      <input matInput formControlName="comment" type="text" autocomplete="no" />
     </mat-form-field>
   </form>
   <div class="action-buttons">
@@ -29,7 +29,7 @@
   </div>
 </div>
 
-<div class="wrapper-message fade-in" *ngIf="showCopyThanks">
+<div class="wrapper-message fade-in" *ngIf="showCopyThanks && !data.notEdit">
   <div class="icon">
     <i class="tio-checkmark_circle_outlined"></i>
   </div>
@@ -39,4 +39,29 @@
   <div class="button">
     <button mat-button (click)="closeDialog()">Aceptar</button>
   </div>
+</div>
+
+<div class="wrapper fade-out" *ngIf="data.notEdit">
+  <a class="position-relative-close" id="closeDialog" matRipple (click)="onNoClick()"><mat-icon class="close">close</mat-icon></a>
+  <div class="title">
+    <h3>Satisfacción del usuario por la gestión de la novedad</h3>
+  </div>
+  <form>
+    <div class="emojis">
+      <input type="radio" value="1" class="cry" [disabled]="data.qualification !== 1" [checked]="data.qualification === 1" />
+      <input type="radio" value="2" class="sad" [disabled]="data.qualification !== 2" [checked]="data.qualification === 2" />
+      <input type="radio" value="3" class="happy" [disabled]="data.qualification !== 3" [checked]="data.qualification === 3" />
+      <input type="radio" value="4" class="love" [disabled]="data.qualification !== 4" [checked]="data.qualification === 4" />
+    </div>
+
+    <div class="text">
+      <p *ngIf="data.qualification === 1">Muy triste</p>
+      <p *ngIf="data.qualification === 2">Inconforme</p>
+      <p *ngIf="data.qualification === 3">¡Conforme!</p>
+      <p *ngIf="data.qualification === 4">¡Feliz!</p>
+    </div>
+    <div class="comment">
+      <p>{{ data.comment }}</p>
+    </div>
+  </form>
 </div>

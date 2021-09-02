@@ -133,10 +133,10 @@
               <span class="normal-text w-description">{{ currentNovelty.description }}</span>
             </div>
           </div>
-          <div fxLayout="row">
+          <div fxLayout="row" class="evidence-state-satisfaction">
             <p fxLayout="column" class="margin-zero-bottom margin-top-5px">
               <span class="galano-bold gray w-label">EVIDENCIA</span>
-              <span (click)="viewerImage()" class="normal-link cursor-pointer">{{ image }}</span>
+              <span (click)="viewerImage()" class="normal-link cursor-pointer">{{ image | truncate: '15' }}</span>
             </p>
             <p fxLayout="column" class="margin-zero-bottom margin-top-5px margin-left-10px">
               <span class="galano-bold gray">ESTADO</span>
@@ -153,8 +153,26 @@
 
             <p fxLayout="column" class="satisfaction margin-zero-bottom margin-top-5px margin-left-10px">
               <span class="galano-bold gray w-label">SATISFACCIÓN</span>
-              <span class="content">
+              <span class="content" *ngIf="currentNovelty.qualification === 3">
                 <img src="\assets\img\status\feliz.svg" alt="" />
+                <span>¡Conforme!</span>
+                <span (click)="viewComment()" class="normal-link cursor-pointer">(Ver comentario)</span>
+              </span>
+
+              <span class="content" *ngIf="currentNovelty.qualification === 1">
+                <img src="\assets\img\status\llorando.svg" alt="" />
+                <span>Muy triste</span>
+                <span (click)="viewComment()" class="normal-link cursor-pointer">(Ver comentario)</span>
+              </span>
+
+              <span class="content"  *ngIf="currentNovelty.qualification === 2">
+                <img src="\assets\img\status\triste.svg" alt="" />
+                <span>Inconforme</span>
+                <span (click)="viewComment()" class="normal-link cursor-pointer">(Ver comentario)</span>
+              </span>
+
+              <span class="content"  *ngIf="currentNovelty.qualification === 4">
+                <img src="\assets\img\status\enamorado.svg" alt="" />
                 <span>¡Feliz!</span>
                 <span (click)="viewComment()" class="normal-link cursor-pointer">(Ver comentario)</span>
               </span>
