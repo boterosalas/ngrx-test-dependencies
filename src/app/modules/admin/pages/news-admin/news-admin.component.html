@@ -25,8 +25,8 @@
       </div>
     </div>
   </div>
-  <div class="card-container mt-4 mb-4">
-    <div class="col-card" *ngFor="let item of items">
+  <div class="card-container-1 mt-4 mb-4">
+    <div class="col-card" *ngFor="let item of itemsRowOne">
       <div class="card-news" *ngIf="item.code !== 'satisfaction'">
         <i class="{{ item.icon }}"></i>
         <div>
@@ -58,6 +58,18 @@
               <span>{{ item.values.love * 100 | number: '1.0' }}%</span>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-container-2 mt-4 mb-4">
+    <div class="col-card" *ngFor="let item of itemsRowTwo">
+      <div class="card-news" [ngClass]="{ 'pending-document': item.title === 'Pendiente de documentación' }">
+        <i class="{{ item.icon }}"></i>
+        <div>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.number }}</p>
         </div>
       </div>
     </div>

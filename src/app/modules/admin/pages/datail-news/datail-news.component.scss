@@ -35,16 +35,25 @@
     background-color: $gray4;
     display: flex;
     justify-content: center;
+    align-items: center;
+    position: relative;
     .icon {
       color: $white;
       font-size: 16px;
-      margin-right: 12px;
+      position: absolute;
+      top: 25%;
+      left: 26px;
     }
     &.-succes {
       background-color: $green;
     }
     &.-current {
       background-color: $third-color;
+    }
+    &.-document {
+      text-align: left;
+      line-height: 14px;
+      padding: 2px 0 2px 52px;
     }
   }
 }
@@ -179,9 +188,9 @@ mat-card {
       top: 4px;
     }
 
-    .evidence-state-satisfaction{
+    .evidence-state-satisfaction {
       justify-content: space-between;
-      p:nth-child(1){
+      p:nth-child(1) {
         width: 25%;
       }
 
@@ -211,7 +220,5 @@ mat-card {
     .margin-left-10px {
       margin-left: 10px;
     }
-
-
   }
 }

@@ -54,18 +54,23 @@
                     </div>
                     <div fxLayout="column" class="mr-4 size-status" fxShow.gt-xs="true" fxShow.xs="false">
                       <p class="mt-0 mb-0 radications-p">ESTADO</p>
-                      <span class="norma-data" *ngIf="item.statusnovelty === 'Solucionado'">
-                        <img class="status-img" src="/assets/img/dashboard/icon-check-new.svg" alt="ok" />
-                        Solucionado
-                      </span>
-                      <span class="norma-data" *ngIf="item.statusnovelty === 'Pendiente'">
-                        <img class="status-img" src="/assets/img/dashboard/icon-info.svg" alt="pendind" />
-                        Pendiente
-                      </span>
-                      <span class="norma-data" *ngIf="item.statusnovelty === 'En revisión'">
-                        <img class="status-img" src="/assets/img/dashboard/icon-revision.svg" alt="pendind" />
-                        En revisión
-                      </span>
+                      <span *ngIf="item.statusnovelty === 'Pendiente'" class="norma-data"
+                      ><img class="status-img" src="/assets/img/dashboard/icon-info.svg" alt="pendind" /><span> Pendiente</span></span
+                    >
+                    <span *ngIf="item.statusnovelty === 'Pendiente de documentación'" class="norma-data"
+                      ><img class="status-img" src="/assets/img/dashboard/document_text.svg" alt="pendind" />
+                      <span>Pendiente de documentación</span></span
+                    >
+                    <span *ngIf="item.statusnovelty === 'Solucionado'" class="norma-data"
+                      ><img class="status-img" src="/assets/img/dashboard/icon-check-new.svg" alt="pendind" /> <span>Solucionado</span></span
+                    >
+                    <span *ngIf="item.statusnovelty === 'Solución parcial'" class="norma-data"
+                      ><img class="status-img" src="/assets/img/dashboard/icon-check-partial.svg" alt="pendind" />
+                      <span>Solución parcial</span></span
+                    >
+                    <span *ngIf="item.statusnovelty === 'En gestión'" class="norma-data"
+                      ><img class="status-img" src="/assets/img/dashboard/icon-revision.svg" alt="pendind" /> <span>En gestión</span></span
+                    >
                     </div>
                     <div fxLayour="column">
                       <p [class]="selectedInic === i ? 'data-detail-color' : 'data-details'">Detalles</p>
@@ -85,18 +90,24 @@
                 </div>
                 <div fxLayout="column" class="mr-4 mb-3" fxShow.gt-xs="false" fxShow.xs="true">
                   <p class="mt-0 mb-0 radications-p">ESTADO</p>
-                  <span class="norma-data" *ngIf="item.statusnovelty === 'Solucionado'">
-                    <img class="status-img" src="/assets/img/dashboard/icon-check-new.svg" alt="ok" />
-                    Solucionado
-                  </span>
-                  <span class="norma-data" *ngIf="item.statusnovelty === 'Pendiente'">
-                    <img class="status-img" src="/assets/img/dashboard/icon-info.svg" alt="pendind" />
-                    Pendiente
-                  </span>
-                  <span class="norma-data" *ngIf="item.statusnovelty === 'En revisión'">
-                    <img class="status-img" src="/assets/img/dashboard/icon-revision.svg" alt="pendind" />
-                    En revisión
-                  </span>
+
+                  <span *ngIf="item.statusnovelty === 'Pendiente'" class="norma-data"
+                    ><img class="status-img" src="/assets/img/dashboard/icon-info.svg" alt="pendind" /><span> Pendiente</span></span
+                  >
+                  <span *ngIf="item.statusnovelty === 'Pendiente de documentación'" class="norma-data"
+                    ><img class="status-img" src="/assets/img/dashboard/document_text.svg" alt="pendind" />
+                    <span>Pendiente de documentación</span></span
+                  >
+                  <span *ngIf="item.statusnovelty === 'Solucionado'" class="norma-data"
+                    ><img class="status-img" src="/assets/img/dashboard/icon-check-new.svg" alt="pendind" /> <span>Solucionado</span></span
+                  >
+                  <span *ngIf="item.statusnovelty === 'Solución parcial'" class="norma-data"
+                    ><img class="status-img" src="/assets/img/dashboard/icon-check-partial.svg" alt="pendind" />
+                    <span>Solución parcial</span></span
+                  >
+                  <span *ngIf="item.statusnovelty === 'En gestión'" class="norma-data"
+                    ><img class="status-img" src="/assets/img/dashboard/icon-revision.svg" alt="pendind" /> <span>En gestión</span></span
+                  >
                 </div>
                 <div fxLayout="column">
                   <p class="mt-0 mb-0 radications-p">DESCRIPCIÓN DE LA NOVEDAD</p>
@@ -129,7 +140,6 @@
                         class="sad"
                         (click)="opeModalStatus($event.target.value, item)"
                         [checked]="item?.qualification === 2"
-
                       />
                       <input
                         type="radio"

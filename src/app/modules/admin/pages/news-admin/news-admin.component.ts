@@ -44,7 +44,7 @@ export class NewsAdminComponent implements OnInit {
     ordination: '',
   };
 
-  items = [
+  itemsRowOne = [
     {
       code: 'totalnovelties',
       title: 'Total de novedades',
@@ -71,7 +71,9 @@ export class NewsAdminComponent implements OnInit {
       values: { sad: 0, cry: 0, happy: 0, love: 0 },
       number: 0,
     },
+  ];
 
+  itemsRowTwo = [
     {
       code: 'totalpending',
       title: 'Pendientes',
@@ -79,15 +81,28 @@ export class NewsAdminComponent implements OnInit {
       number: 0,
     },
     {
+      code: 'totalpendingdocument',
+      title: 'Pendiente de documentación',
+      icon: 'tio-document_text',
+      number: 0,
+    },
+
+    {
       code: 'totalinprogress',
       title: 'En revisión',
       icon: 'tio-time',
       number: 0,
     },
     {
+      code: 'totalsolvedpartial',
+      title: 'Solución parcial',
+      icon: 'tio-checkmark_circle',
+      number: 0,
+    },
+    {
       code: 'totalsolved',
       title: 'Solucionados',
-      icon: 'tio-checkmark_circle',
+      icon: 'tio-checkmark_circle success',
       number: 0,
     },
   ];
@@ -153,7 +168,7 @@ export class NewsAdminComponent implements OnInit {
 
   public getKPI() {
     this.subscription = this.kpi.getkpiNovelties(this.filterData).subscribe((resp) => {
-      this.items = this.items.map((item) => {
+      this.itemsRowOne = this.itemsRowOne.map((item) => {
         if (item.code === 'satisfaction' && resp.satisfaction) {
           return {
             ...item,
@@ -171,6 +186,15 @@ export class NewsAdminComponent implements OnInit {
           };
         }
       });
+
+      this.itemsRowTwo = this.itemsRowTwo.map((item) => {
+        return {
+          ...item,
+          number: resp[item.code],
+        };
+      });
+
+      console.log(resp);
     });
   }
 

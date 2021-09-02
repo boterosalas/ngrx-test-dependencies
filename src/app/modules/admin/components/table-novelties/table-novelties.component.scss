@@ -72,6 +72,11 @@
 .normal-text {
   color: #37236a;
   font-size: 14px;
+  display: flex;
+  align-items: center;
+  img{
+    margin-right: 4px;
+  }
   //line-height: 28px;
   //font-family: "galano-medium";
 }
@@ -90,7 +95,6 @@
 }
 .status-img {
   position: relative;
-  top: 4px;
 }
 .left-text {
   div {
