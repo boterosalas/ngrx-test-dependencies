@@ -38,26 +38,58 @@
 
   <mat-card>
     <mat-card-title class="card-title"> Información de Clicker </mat-card-title>
-    <div class="info" fxLayout="row" fxLayoutAlign="flex-start center">
-      <div fxLayout="column" fxLayoutAlign="flex-start">
-        <span>NOMBRE DEL CLICKER</span>
-        <span>{{ currentNovelty.name }}</span>
+    <div class="info" fxLayout="row" fxLayoutAlign="space-between center">
+      <div class="left" fxLayout="row">
+        <div fxLayout="column" fxLayoutAlign="flex-start">
+          <span>NOMBRE DEL CLICKER</span>
+          <span>{{ currentNovelty.name }}</span>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="flex-start">
+          <span>ID</span>
+          <span>{{ currentNovelty.idclicker }}</span>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="flex-start">
+          <span>CÉDULA</span>
+          <span>{{ currentNovelty.identification }}</span>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="flex-start">
+          <span>CELULAR</span>
+          <span>{{ currentNovelty.cellphone }}</span>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="flex-start">
+          <span>CORREO</span>
+          <span>{{ currentNovelty.email }}</span>
+        </div>
       </div>
-      <div fxLayout="column" fxLayoutAlign="flex-start">
-        <span>ID</span>
-        <span>{{ currentNovelty.idclicker }}</span>
-      </div>
-      <div fxLayout="column" fxLayoutAlign="flex-start">
-        <span>CÉDULA</span>
-        <span>{{ currentNovelty.identification }}</span>
-      </div>
-      <div fxLayout="column" fxLayoutAlign="flex-start">
-        <span>CELULAR</span>
-        <span>{{ currentNovelty.cellphone }}</span>
-      </div>
-      <div fxLayout="column" fxLayoutAlign="flex-start">
-        <span>CORREO</span>
-        <span>{{ currentNovelty.email }}</span>
+
+      <div class="right">
+        <label> MÁS NOVEDADES ({{ listMoreNovelties.length }})</label>
+        <mat-form-field appearance="fill">
+          <mat-label>Seleccionar</mat-label>
+          <mat-select>
+            <mat-option class="select-custom-novelties" (click)="goToNovelty(item.id)" *ngFor="let item of listMoreNovelties">
+              <div class="mat-option-novelty">
+                <div class="left">
+                  <span
+                    >No. <strong>{{ item.code }}</strong></span
+                  >
+                  <span>({{ item.dateNovelty | date: 'dd/MM/yyyy' }})</span>
+                </div>
+                <div class="right">
+                  <span *ngIf="item.status === 'Pendiente'" class="span-relative-new normal-text"
+                    ><img class="status-img" src="/assets/img/dashboard/icon-info.svg" alt="pendind" /> Pendiente</span
+                  >
+                  <span *ngIf="item.status === 'Solucionado'" class="span-relative-new normal-text"
+                    ><img class="status-img" src="/assets/img/dashboard/icon-check-new.svg" alt="pendind" /> Solucionado</span
+                  >
+                  <span *ngIf="item.status === 'En revisión'" class="span-relative-new normal-text"
+                    ><img class="status-img" src="/assets/img/dashboard/icon-revision.svg" alt="pendind" /> En revisión</span
+                  >
+                </div>
+              </div>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
     </div>
   </mat-card>
@@ -101,10 +133,10 @@
               <span class="normal-text w-description">{{ currentNovelty.description }}</span>
             </div>
           </div>
-          <div fxLayout="row">
+          <div fxLayout="row" class="evidence-state-satisfaction">
             <p fxLayout="column" class="margin-zero-bottom margin-top-5px">
               <span class="galano-bold gray w-label">EVIDENCIA</span>
-              <span (click)="viewerImage()" class="normal-link cursor-pointer">{{ image }}</span>
+              <span (click)="viewerImage()" class="normal-link cursor-pointer">{{ image | truncate: '15' }}</span>
             </p>
             <p fxLayout="column" class="margin-zero-bottom margin-top-5px margin-left-10px">
               <span class="galano-bold gray">ESTADO</span>
@@ -117,6 +149,33 @@
               <span *ngIf="currentNovelty.statusnovelty === 'En revisión'" class="span-relative-new normal-text"
                 ><img class="status-img" src="/assets/img/dashboard/icon-revision.svg" alt="pendind" /> En revisión</span
               >
+            </p>
+
+            <p fxLayout="column" class="satisfaction margin-zero-bottom margin-top-5px margin-left-10px">
+              <span class="galano-bold gray w-label">SATISFACCIÓN</span>
+              <span class="content" *ngIf="currentNovelty.qualification === 3">
+                <img src="\assets\img\status\feliz.svg" alt="" />
+                <span>¡Conforme!</span>
+                <span (click)="viewComment()" class="normal-link cursor-pointer">(Ver comentario)</span>
+              </span>
+
+              <span class="content" *ngIf="currentNovelty.qualification === 1">
+                <img src="\assets\img\status\llorando.svg" alt="" />
+                <span>Muy triste</span>
+                <span (click)="viewComment()" class="normal-link cursor-pointer">(Ver comentario)</span>
+              </span>
+
+              <span class="content"  *ngIf="currentNovelty.qualification === 2">
+                <img src="\assets\img\status\triste.svg" alt="" />
+                <span>Inconforme</span>
+                <span (click)="viewComment()" class="normal-link cursor-pointer">(Ver comentario)</span>
+              </span>
+
+              <span class="content"  *ngIf="currentNovelty.qualification === 4">
+                <img src="\assets\img\status\enamorado.svg" alt="" />
+                <span>¡Feliz!</span>
+                <span (click)="viewComment()" class="normal-link cursor-pointer">(Ver comentario)</span>
+              </span>
             </p>
           </div>
         </div>

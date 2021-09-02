@@ -31,6 +31,7 @@
   font-family: $font-galano-bold;
   text-transform: uppercase;
 }
+
 .span-data {
   color: #37236a;
   font-family: $font-galano-bold;
@@ -65,10 +66,58 @@
   color: #37236a;
 }
 .bold-report {
-  font-size: $font-galano-bold;
+  font-family: $font-galano-bold;
   font-size: 18px;
   color: #726d7e !important;
 }
 .size-status {
   width: 122px;
+}
+
+.status-novelty {
+  margin: 20px 0;
+  p {
+    text-align: center;
+    font-family: $font-galano-bold;
+    font-size: 14px;
+    color: $font-gray;
+  }
+  .emoji-status {
+    margin-top: 10px;
+    form {
+      display: flex;
+      justify-content: center;
+      input[type='radio'] {
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border: none;
+        cursor: pointer;
+        filter: grayscale(100%);
+        margin: 0 15px;
+        transition: all 0.2s ease;
+        background-size: cover;
+        &:checked {
+          filter: grayscale(0);
+        }
+
+        &:focus {
+          outline: 0;
+        }
+
+        &.cry {
+          background-image: url('/assets/img/status/llorando.svg');
+        }
+        &.sad {
+          background-image: url('/assets/img/status/triste.svg');
+        }
+        &.happy {
+          background-image: url('/assets/img/status/feliz.svg');
+        }
+        &.love {
+          background-image: url('/assets/img/status/enamorado.svg');
+        }
+      }
+    }
+  }
 }

@@ -68,6 +68,9 @@ export class UserService {
   apiUserInfoAditional = 'userprofile/getuserinfoaditional';
   apiSaveNewNovelty = 'new/savenewnovelty';
   apiGetNewsNovelties = 'new/getnewsnovelty';
+  apiSaveQualificationNovelty = '/new/noveltyqualification';
+  apiGetNewsById = 'new/usernews';
+
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -168,7 +171,7 @@ export class UserService {
     );
   }
 
-  getNewNovelties(id:string) {
+  getNewNovelties(id: string) {
     return this.http.get(`${this.url}${this.apiGetNewsNovelties}?id=${id}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
@@ -474,6 +477,19 @@ export class UserService {
     );
   }
 
+
+  public getNoveltiesById(id) {
+    return this.http.get(`${this.url}${this.apiGetNewsById}?userId=${id}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      )
+    );
+  }
+
   public getExportNewsExcel(data: any) {
     return this.http.post(`${this.urlReports}${this.apiGetExcelNews}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
@@ -521,6 +537,18 @@ export class UserService {
           )
         )
       );
+  }
+
+  public saveQualificationNovelty(data: any) {
+    return this.http.patch(`${this.url}${this.apiSaveQualificationNovelty}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      )
+    );
   }
 
   public getDocuments(document: string) {

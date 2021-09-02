@@ -37,7 +37,6 @@ import { BussinessAdminComponent } from './pages/bussiness-admin/bussiness-admin
 import { DialogCategoryComponent } from './components/dialog-category/dialog-category.component';
 import { NewsAdminComponent } from './pages/news-admin/news-admin.component';
 import { CommissionsComponent } from './pages/commissions/commissions.component';
-import { DialogNewsComponent } from './components/dialog-news/dialog-news.component';
 import { ContentLibraryComponent } from './pages/content-library/content-library.component';
 import { StoriesAdminComponent } from './pages/stories-admin/stories-admin.component';
 import { DialogVideoPlayerComponent } from './components/dialog-video-player/dialog-video-player.component';
@@ -355,7 +354,6 @@ const routes: Routes = [
     DialogCategoryComponent,
     NewsAdminComponent,
     CommissionsComponent,
-    DialogNewsComponent,
     ContentLibraryComponent,
     StoriesAdminComponent,
     DialogVideoPlayerComponent,
@@ -440,7 +438,6 @@ const routes: Routes = [
   entryComponents: [
     DialogUserComponent,
     DialogCategoryComponent,
-    DialogNewsComponent,
     DialogVideoPlayerComponent,
     DialogNavigationGroupComponent,
     DialogNavigationItemComponent,

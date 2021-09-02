@@ -18,12 +18,23 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { of } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 describe('DatailNewsComponent', () => {
   let component: DatailNewsComponent;
   let fixture: ComponentFixture<DatailNewsComponent>;
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll', 'afterAllClosed']);
-  const mockUserService = jasmine.createSpyObj('UserService', ['getNoveltyById', 'setStatus', 'saveNewNovelty', 'getNewNovelties']);
+  const mockUserService = jasmine.createSpyObj('UserService', [
+    'getNoveltyById',
+    'setStatus',
+    'saveNewNovelty',
+    'getNewNovelties',
+    'getNoveltiesById',
+  ]);
+
+  let mockRouter = {
+    navigate: jasmine.createSpy('navigate'),
+  };
 
   const respDatos = {
     consecutive: '000001',
@@ -32,7 +43,7 @@ describe('DatailNewsComponent', () => {
     idclicker: 'santer457',
     identification: '12121212',
     email: 'hamil@unicauca.edu.co',
-    urlImage: '',
+    urlImage: 'http/archivo.jpg',
     id: '1',
     statusnovelty: 'Pendiente',
     datenovelty: '2020-02-04',
@@ -43,6 +54,8 @@ describe('DatailNewsComponent', () => {
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
   };
+
+  const respDatosError = { state: 'error' };
 
   const listNotes = [
     {
@@ -75,6 +88,63 @@ describe('DatailNewsComponent', () => {
     },
   ];
 
+  const moreNovelites = [
+    {
+      consecutive: '000001',
+      name: 'Santiago Teran',
+      cellphone: '3224981267',
+      idclicker: 'santer457',
+      identification: '12121212',
+      email: 'hamil@unicauca.edu.co',
+      urlImage: '',
+      id: '1',
+      statusnovelty: 'Pendiente',
+      datenovelty: '2020-02-04',
+      businessdescription: 'Haceb',
+      date: '2021-02-25',
+      documenturl: 'http/archivo.jpg',
+      code: '12223444',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    },
+    {
+      consecutive: '000001',
+      name: 'Santiago Teran',
+      cellphone: '3224981267',
+      idclicker: 'santer457',
+      identification: '12121212',
+      email: 'hamil@unicauca.edu.co',
+      urlImage: '',
+      id: '1',
+      statusnovelty: 'Pendiente',
+      datenovelty: '2020-02-04',
+      businessdescription: 'Haceb',
+      date: '2021-02-25',
+      documenturl: 'http/archivo.jpg',
+      code: '12223444',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    },
+    {
+      consecutive: '000001',
+      name: 'Santiago Teran',
+      cellphone: '3224981267',
+      idclicker: 'santer457',
+      identification: '12121212',
+      email: 'hamil@unicauca.edu.co',
+      urlImage: '',
+      id: '1',
+      statusnovelty: 'Pendiente',
+      datenovelty: '2020-02-04',
+      businessdescription: 'Haceb',
+      date: '2021-02-25',
+      documenturl: 'http/archivo.jpg',
+      code: '12223444',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    },
+  ];
+
   const dataResp = {
     state: 'Success',
   };
@@ -99,7 +169,7 @@ describe('DatailNewsComponent', () => {
         FormsModule,
         BrowserAnimationsModule,
         SharedModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule,
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
@@ -121,7 +191,7 @@ describe('DatailNewsComponent', () => {
     mockUserService.setStatus.and.returnValue(of(dataResp));
     mockUserService.getNewNovelties.and.returnValue(of(listNotes));
     mockUserService.saveNewNovelty.and.returnValue(of(dataResp));
-
+    mockUserService.getNoveltiesById.and.returnValue(of(moreNovelites));
   }));
 
   beforeEach(() => {
@@ -134,6 +204,29 @@ describe('DatailNewsComponent', () => {
     expect(component).toBeTruthy();
     component.getNoveltyById('1');
     expect(mockUserService.getNoveltyById).toHaveBeenCalled();
+    component.currentNovelty = respDatos;
+    expect(component.currentNovelty).toEqual(respDatos);
+    expect(component.$subcriptionNovelty).toBeTruthy();
+    expect(component.$subcriptionParams).toBeTruthy();
+    expect(component.$subscriptionGetMoreNovelties).toBeTruthy();
+    expect(component.$subscriptionGetNovelties).toBeTruthy();
+    expect(component.$subscriptionSaveNote).toBeTruthy();
+    component.initForm();
+    expect(component.dateForm).toBeTruthy();
+  });
+
+  it('steps current state "En revisión"', () => {
+    component.changeSelecteds('En revisión');
+    expect(component.selecteds[0].state).toEqual(2);
+    expect(component.selecteds[1].state).toEqual(1);
+    expect(component.selecteds[2].state).toEqual(0);
+  });
+
+  it('steps current state "Pendiente"', () => {
+    component.changeSelecteds('Pendiente');
+    expect(component.selecteds[0].state).toEqual(1);
+    expect(component.selecteds[1].state).toEqual(0);
+    expect(component.selecteds[2].state).toEqual(0);
   });
 
   it('save changes', () => {
@@ -141,6 +234,7 @@ describe('DatailNewsComponent', () => {
     component.initForm();
     component.saveChanges();
     expect(mockUserService.setStatus).toHaveBeenCalled();
+    expect(component.active).toBeTruthy();
     component.onChangeSelected('Pendiente');
   });
 
@@ -151,16 +245,36 @@ describe('DatailNewsComponent', () => {
     expect(mockDialog.open).toBeTruthy();
   });
 
+  it('dialog view comment', () => {
+    component.currentNovelty = respDatos;
+    component.viewComment();
+    expect(mockDialog.open).toBeTruthy();
+  });
+
   it('get notes', () => {
-    component.listNovelties = listNotes;  
+    component.listNovelties = listNotes;
     component.currentNovelty = respDatos;
     component.getNovelties();
     expect(mockUserService.getNewNovelties).toHaveBeenCalled();
     expect(component.listNovelties.length).toBeGreaterThan(1);
   });
 
+  it('get all novelties by user', () => {
+    component.listMoreNovelties = listNotes;
+    component.currentNovelty = respDatos;
+    component.getMoreNovelties(component.currentNovelty.id);
+    expect(mockUserService.getNewNovelties).toHaveBeenCalled();
+    expect(component.listMoreNovelties.length).toBeGreaterThan(1);
+  });
+
+  it('open pdf', () => {
+    component.currentNovelty = respDatos;
+    component.openPDForFile();
+  });
+
   it('save new novelty', () => {
     component.currentNovelty = respDatos;
+    component.listNovelties = listNotes;
     component.updateNovelty({
       idnovelty: respDatos.id,
       description: 'nota de prueba',
@@ -168,5 +282,42 @@ describe('DatailNewsComponent', () => {
       typenewnovelty: false,
     });
     expect(mockUserService.setStatus).toHaveBeenCalled();
+  });
+
+  describe('Errors', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(DatailNewsComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+      mockUserService.getNoveltyById.and.returnValue(of(respDatosError));
+      mockUserService.setStatus.and.returnValue(of(respDatosError));
+    });
+    it('get novelty error', () => {
+      expect(component).toBeTruthy();
+      component.getNoveltyById(null);
+      expect(mockUserService.getNoveltyById).toHaveBeenCalled();
+    });
+
+
+    it('save new novelty error', () => {
+      component.currentNovelty = respDatos;
+      component.listNovelties = listNotes;
+      component.updateNovelty({
+        idnovelty: respDatos.id,
+        description: 'nota de prueba',
+        statusnovelty: respDatos.statusnovelty,
+        typenewnovelty: false,
+      });
+      expect(mockUserService.setStatus).toHaveBeenCalled();
+    });
+
+
+    it('save new changes error', () => {
+      component.currentNovelty = respDatos;
+      component.initForm();
+      expect(component.dateForm).toBeTruthy();
+      component.saveChanges();
+      expect(mockUserService.setStatus).toHaveBeenCalled();
+    });
   });
 });

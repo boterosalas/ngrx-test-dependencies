@@ -26,11 +26,39 @@
     </div>
   </div>
   <div class="card-container mt-4 mb-4">
-    <div class="card-news" *ngFor="let item of items">
-      <i class="{{ item.icon }}"></i>
-      <div>
-        <h3>{{ item.title }}</h3>
-        <p>{{ item.number | number: '1.0' }}{{ item.code === 'effectiveness' ? '%' : '' }}</p>
+    <div class="col-card" *ngFor="let item of items">
+      <div class="card-news" *ngIf="item.code !== 'satisfaction'">
+        <i class="{{ item.icon }}"></i>
+        <div>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.number | number: '1.0' }}{{ item.code === 'effectiveness' ? '%' : '' }}</p>
+        </div>
+      </div>
+      <div class="card-news card-satisfaction" *ngIf="item.code === 'satisfaction'">
+        <div class="left">
+          <i [class]="item.icon"></i>
+        </div>
+        <div class="right">
+          <h3>{{ item.title }}</h3>
+          <div class="items">
+            <div class="item">
+              <img src="/assets/img/status/llorando.svg" alt="" />
+              <span>{{ item.values.cry * 100 | number: '1.0' }}%</span>
+            </div>
+            <div class="item">
+              <img src="/assets/img/status/feliz.svg" alt="" />
+              <span>{{ item.values.happy * 100 | number: '1.0' }}%</span>
+            </div>
+            <div class="item">
+              <img src="/assets/img/status/triste.svg" alt="" />
+              <span>{{ item.values.sad * 100 | number: '1.0' }}%</span>
+            </div>
+            <div class="item">
+              <img src="/assets/img/status/enamorado.svg" alt="" />
+              <span>{{ item.values.love * 100 | number: '1.0' }}%</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

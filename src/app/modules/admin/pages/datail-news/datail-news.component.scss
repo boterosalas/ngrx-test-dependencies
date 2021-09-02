@@ -61,34 +61,50 @@ mat-card {
 
   .info {
     margin-top: 15px;
-    div {
-      margin-right: 25px;
-      span:nth-child(1) {
-        font-size: 12px;
-        font-family: $font-galano-bold;
-        color: $gray4;
-        font-weight: bold;
+    justify-content: space-between;
+    .left {
+      div {
+        margin-right: 25px;
+        span:nth-child(1) {
+          font-size: 12px;
+          font-family: $font-galano-bold;
+          color: $gray4;
+          font-weight: bold;
+        }
+      }
+
+      span:nth-child(2) {
+        font-size: 14px;
+        color: $primary-color;
       }
     }
 
-    span:nth-child(2) {
-      font-size: 14px;
-      color: $primary-color;
+    .right {
+      width: 20%;
+      label {
+        font-size: 12px;
+        font-family: 'galano-bold', sans-serif;
+        color: #a7a3b1;
+        font-weight: bold;
+      }
+      mat-form-field {
+        width: 100%;
+      }
     }
   }
 }
 
-.row-3{
-  .left{
-    width: 53%;
+.row-3 {
+  .left {
+    width: 49%;
     padding: 20px 16px;
     box-shadow: 0px 16px 16px #9aaacf1a !important;
     border-radius: 10px;
     background-color: $white;
     margin: 20px 0;
   }
-  .right{
-    width: 45%;
+  .right {
+    width: 49%;
     padding: 20px 16px;
     box-shadow: 0px 16px 16px #9aaacf1a !important;
     border-radius: 10px;
@@ -162,6 +178,26 @@ mat-card {
       position: relative;
       top: 4px;
     }
+
+    .evidence-state-satisfaction{
+      justify-content: space-between;
+      p:nth-child(1){
+        width: 25%;
+      }
+
+      .satisfaction {
+        .content {
+          display: flex;
+          align-items: center;
+          img {
+            width: 20px;
+          }
+          span:nth-child(2) {
+            margin: 0 4px;
+          }
+        }
+      }
+    }
     .class-description {
       height: auto;
       max-height: 200px;
@@ -169,11 +205,13 @@ mat-card {
       overflow-y: auto;
       margin-right: 5px;
     }
-    .margin-top-5px{
+    .margin-top-5px {
       margin-top: 5px;
     }
-    .margin-left-10px{
+    .margin-left-10px {
       margin-left: 10px;
     }
+
+
   }
 }
