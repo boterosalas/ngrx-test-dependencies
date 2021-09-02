@@ -193,8 +193,6 @@ export class NewsAdminComponent implements OnInit {
           number: resp[item.code],
         };
       });
-
-      console.log(resp);
     });
   }
 

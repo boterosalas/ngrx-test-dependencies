@@ -205,8 +205,4 @@ describe('CardAdminStoryComponent', () => {
     component.getBusiness();
     expect(mockContentService.getBusiness).toHaveBeenCalled();
   });
-
-  it('get extension', () => {
-    expect(component.getExtension('prueba')).toBeTruthy();
-  });
 });

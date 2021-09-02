@@ -84,6 +84,8 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     this.$subscriptionGetMoreNovelties = this.user.getNoveltiesById(id).subscribe((novelties) => {
       if (novelties['objectResponse']) {
         this.listMoreNovelties = novelties['objectResponse'];
+        console.log(novelties);
+
       }
     });
   }

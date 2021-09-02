@@ -201,24 +201,24 @@ export class BussinessComponent implements OnInit, OnDestroy {
    * Metodo para dalvar los links reference
    */
 
-     public saveLinkReference() {
-      const dataSaveLinkReference = {
-        link: this.url,
-        identification: this.identification,
-        plu: this.plu,
-        business: this.business,
-        creationDate: this.date,
-        identificationcustomer: this.idCustomerForm.controls.identification.value,
-      };
-      this.subscription = this.links.saveLink(dataSaveLinkReference).subscribe((resp: ResponseService) => {
-        if (resp.state === 'Error') {
-          this.openSnackBar(resp.userMessage, 'cerrar');
-        } else {
-          this.openSnackBar(resp.userMessage, 'cerrar');
-          this.dialog.dismiss();
-        }
-      });
-    }
+  public saveLinkReference() {
+    const dataSaveLinkReference = {
+      link: this.url,
+      identification: this.identification,
+      plu: this.plu,
+      business: this.business,
+      creationDate: this.date,
+      identificationcustomer: this.idCustomerForm.controls.identification.value,
+    };
+    this.subscription = this.links.saveLink(dataSaveLinkReference).subscribe((resp: ResponseService) => {
+      if (resp.state === 'Error') {
+        this.openSnackBar(resp.userMessage, 'cerrar');
+      } else {
+        this.openSnackBar(resp.userMessage, 'cerrar');
+        this.dialog.dismiss();
+      }
+    });
+  }
 
   formatContent(content: string) {
     if (content && content.length > 250) {
@@ -587,6 +587,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
             const filterSkus = sellerSkus.filter(
               (idSeller) => this.sellersExito.includes(idSeller.id) || this.sellersMarketPlace.includes(idSeller.id)
             );
+
             if (!!filterSkus[0]) {
               this.sellerId = filterSkus[0].id;
               this.sellerName = filterSkus[0].name;
@@ -717,9 +718,9 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.showResults = false;
   }
 
-/**
- * Metodo para salvar los links generados
- */
+  /**
+   * Metodo para salvar los links generados
+   */
 
   public saveLink(param?: string) {
     const dataSaveLink = {
