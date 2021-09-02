@@ -112,7 +112,27 @@ body {
     }
   }
 }
+mat-form-field.select-custom {
+  width: 100%;
+  height: 40px;
+  .mat-form-field-wrapper {
+    height: 100%;
+    padding: 0;
 
+    .mat-form-field-flex {
+      height: 100%;
+      background: transparent;
+    }
+    .mat-form-field-underline::before {
+      bottom: -21px;
+    }
+  }
+
+
+  .mat-form-field-ripple {
+    bottom: -21px;
+  }
+}
 .maincontent {
   background: $bg-gray;
 }

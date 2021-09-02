@@ -96,7 +96,7 @@ mat-card {
         color: #a7a3b1;
         font-weight: bold;
       }
-      mat-form-field::ng-deep {
+      mat-form-field {
         width: 100%;
         height: 40px;
         .mat-form-field-wrapper {
