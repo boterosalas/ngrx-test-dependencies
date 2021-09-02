@@ -52,6 +52,27 @@ export class NewsAdminComponent implements OnInit {
       number: 0,
     },
     {
+      code: 'totalusers',
+      title: 'Usuarios únicos',
+      icon: 'tio-account_circle',
+      number: 0,
+    },
+    {
+      code: 'effectiveness',
+      title: 'Tasa de efectividad',
+      icon: 'tio-chart_bar_4',
+      number: 0,
+    },
+
+    {
+      code: 'satisfaction',
+      title: 'Satisfacción',
+      icon: 'tio-heart',
+      values: { sad: 0, cry: 0, happy: 0, love: 0 },
+      number: 0,
+    },
+
+    {
       code: 'totalpending',
       title: 'Pendientes',
       icon: 'tio-info',
@@ -67,18 +88,6 @@ export class NewsAdminComponent implements OnInit {
       code: 'totalsolved',
       title: 'Solucionados',
       icon: 'tio-checkmark_circle',
-      number: 0,
-    },
-    {
-      code: 'totalusers',
-      title: 'Usuarios únicos',
-      icon: 'tio-account_circle',
-      number: 0,
-    },
-    {
-      code: 'effectiveness',
-      title: 'Tasa de efectividad',
-      icon: 'tio-chart_bar_4',
       number: 0,
     },
   ];
@@ -145,10 +154,22 @@ export class NewsAdminComponent implements OnInit {
   public getKPI() {
     this.subscription = this.kpi.getkpiNovelties(this.filterData).subscribe((resp) => {
       this.items = this.items.map((item) => {
-        return {
-          ...item,
-          number: item.code === 'effectiveness' ? resp[item.code] * 100 : resp[item.code],
-        };
+        if (item.code === 'satisfaction' && resp.satisfaction) {
+          return {
+            ...item,
+            values: {
+              cry: resp.satisfaction[0] ? resp.satisfaction[0] : 0,
+              sad: resp.satisfaction[1] ? resp.satisfaction[1] : 0,
+              happy: resp.satisfaction[2] ? resp.satisfaction[2] : 0,
+              love: resp.satisfaction[3] ? resp.satisfaction[3] : 0,
+            },
+          };
+        } else {
+          return {
+            ...item,
+            number: item.code === 'effectiveness' ? resp[item.code] * 100 : resp[item.code],
+          };
+        }
       });
     });
   }
@@ -170,8 +191,6 @@ export class NewsAdminComponent implements OnInit {
       this.dataSource = user.novelties;
     });
   }
-
-
 
   public goToNovelty(element: any) {
     this.router.navigateByUrl(`novedad/${element.id}`);

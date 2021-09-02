@@ -245,6 +245,12 @@ describe('DatailNewsComponent', () => {
     expect(mockDialog.open).toBeTruthy();
   });
 
+  it('dialog view comment', () => {
+    component.currentNovelty = respDatos;
+    component.viewComment();
+    expect(mockDialog.open).toBeTruthy();
+  });
+
   it('get notes', () => {
     component.listNovelties = listNotes;
     component.currentNovelty = respDatos;

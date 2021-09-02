@@ -4,6 +4,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
+import { DialogNoveltySatisfactionComponent } from 'src/app/modules/anonymous/components/dialog-novelty-satisfaction/dialog-novelty-satisfaction.component';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { UserService } from 'src/app/services/user.service';
 
@@ -213,6 +214,16 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
             };
           });
       }
+    });
+  }
+
+  viewComment() {
+    this.dialog.open(DialogNoveltySatisfactionComponent, {
+      data: {
+        notEdit: true,
+        comment: this.currentNovelty.comment,
+        qualification: this.currentNovelty.qualification,
+      },
     });
   }
 
