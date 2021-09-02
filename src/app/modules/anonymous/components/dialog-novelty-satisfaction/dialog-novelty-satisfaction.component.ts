@@ -23,7 +23,9 @@ export class DialogNoveltySatisfactionComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.statusForm = this.fb.group({ qualification: [''], comment: ['', [Validators.required]] });
     this.$formSubscription = this.statusForm.valueChanges.subscribe((resp) => {
-      this.data.qualification = Number(resp.qualification);
+      if (resp.qualification) {
+        this.data.qualification = Number(resp.qualification);
+      }
       this.data.comment = resp.comment;
     });
   }

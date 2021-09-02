@@ -215,11 +215,13 @@ describe('DatailNewsComponent', () => {
     expect(component.dateForm).toBeTruthy();
   });
 
-  it('steps current state "En revisión"', () => {
-    component.changeSelecteds('En revisión');
+  it('steps current state "En gestión"', () => {
+    component.changeSelecteds('En gestión');
     expect(component.selecteds[0].state).toEqual(2);
-    expect(component.selecteds[1].state).toEqual(1);
-    expect(component.selecteds[2].state).toEqual(0);
+    expect(component.selecteds[1].state).toEqual(2);
+    expect(component.selecteds[2].state).toEqual(1);
+    expect(component.selecteds[3].state).toEqual(0);
+    expect(component.selecteds[4].state).toEqual(0);
   });
 
   it('steps current state "Pendiente"', () => {
@@ -227,6 +229,37 @@ describe('DatailNewsComponent', () => {
     expect(component.selecteds[0].state).toEqual(1);
     expect(component.selecteds[1].state).toEqual(0);
     expect(component.selecteds[2].state).toEqual(0);
+    expect(component.selecteds[3].state).toEqual(0);
+    expect(component.selecteds[4].state).toEqual(0);
+  });
+
+  it('steps current state "Solucionado"', () => {
+    component.changeSelecteds('Solucionado');
+    expect(component.selecteds[0].state).toEqual(2);
+    expect(component.selecteds[1].state).toEqual(2);
+    expect(component.selecteds[2].state).toEqual(2);
+    expect(component.selecteds[3].state).toEqual(2);
+    expect(component.selecteds[4].state).toEqual(2);
+  });
+
+
+  it('steps current state "Pendiente de documentación"', () => {
+    component.changeSelecteds('Pendiente de documentación');
+    expect(component.selecteds[0].state).toEqual(2);
+    expect(component.selecteds[1].state).toEqual(1);
+    expect(component.selecteds[2].state).toEqual(0);
+    expect(component.selecteds[3].state).toEqual(0);
+    expect(component.selecteds[4].state).toEqual(0);
+  });
+
+
+  it('steps current state "Solución parcial"', () => {
+    component.changeSelecteds('Solución parcial');
+    expect(component.selecteds[0].state).toEqual(2);
+    expect(component.selecteds[1].state).toEqual(2);
+    expect(component.selecteds[2].state).toEqual(2);
+    expect(component.selecteds[3].state).toEqual(1);
+    expect(component.selecteds[4].state).toEqual(0);
   });
 
   it('save changes', () => {
@@ -298,7 +331,6 @@ describe('DatailNewsComponent', () => {
       expect(mockUserService.getNoveltyById).toHaveBeenCalled();
     });
 
-
     it('save new novelty error', () => {
       component.currentNovelty = respDatos;
       component.listNovelties = listNotes;
@@ -310,7 +342,6 @@ describe('DatailNewsComponent', () => {
       });
       expect(mockUserService.setStatus).toHaveBeenCalled();
     });
-
 
     it('save new changes error', () => {
       component.currentNovelty = respDatos;

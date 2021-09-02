@@ -22,8 +22,6 @@ export class ReportStatusComponent implements OnInit {
   getNovetlyUser() {
     this.users.getNovetlyUser().subscribe((resp: any) => {
       this.dataSourceNews = resp.objectResponse.novelties;
-      console.log(this.dataSourceNews);
-
     });
   }
 
