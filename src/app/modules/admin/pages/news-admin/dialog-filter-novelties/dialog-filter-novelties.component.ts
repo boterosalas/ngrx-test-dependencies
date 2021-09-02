@@ -32,9 +32,10 @@ export class DialogFilterNoveltiesComponent implements OnInit, OnDestroy {
 
   status = [
     { name: 'Pendiente', value: 'Pendiente' },
-    { name: 'En revisión', value: 'En revisión' },
+    { name: 'En gestión', value: 'En gestión' },
+    { name: 'Pendiente de documentación', value: 'Pendiente de documentación' },
+    { name: 'Solución parcial', value: 'Solución parcial' },
     { name: 'Solucionado', value: 'Solucionado' },
-    { name: 'Rechazado', value: 'Rechazado' },
   ];
 
   bussiness = [];
@@ -47,7 +48,7 @@ export class DialogFilterNoveltiesComponent implements OnInit, OnDestroy {
   @Output() objectSend = new EventEmitter();
   @Output() close = new EventEmitter();
 
-  constructor(private fb: FormBuilder, private content: ContentService) { }
+  constructor(private fb: FormBuilder, private content: ContentService) {}
 
   ngOnInit() {
     this.filterForm();
@@ -78,7 +79,7 @@ export class DialogFilterNoveltiesComponent implements OnInit, OnDestroy {
       this.bussiness = resp;
     });
   }
-  
+
   public resetStatusNovelties() {
     this.filterNovelties.controls.status.setValue(null);
   }

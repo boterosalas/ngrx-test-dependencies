@@ -26,7 +26,15 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
       state: 0,
     },
     {
-      titulo: 'En revisión',
+      titulo: 'Pendiente de documentación',
+      state: 0,
+    },
+    {
+      titulo: 'En gestión',
+      state: 0,
+    },
+    {
+      titulo: 'Solución parcial',
       state: 0,
     },
     {
@@ -76,6 +84,8 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     this.$subscriptionGetMoreNovelties = this.user.getNoveltiesById(id).subscribe((novelties) => {
       if (novelties['objectResponse']) {
         this.listMoreNovelties = novelties['objectResponse'];
+        console.log(novelties);
+
       }
     });
   }
@@ -167,18 +177,40 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
         this.selecteds[0].state = 2;
         this.selecteds[1].state = 2;
         this.selecteds[2].state = 2;
+        this.selecteds[3].state = 2;
+        this.selecteds[4].state = 2;
         break;
 
-      case 'En revisión':
+      case 'Pendiente de documentación':
         this.selecteds[0].state = 2;
         this.selecteds[1].state = 1;
         this.selecteds[2].state = 0;
+        this.selecteds[3].state = 0;
+        this.selecteds[4].state = 0;
+        break;
+
+      case 'En gestión':
+        this.selecteds[0].state = 2;
+        this.selecteds[1].state = 2;
+        this.selecteds[2].state = 1;
+        this.selecteds[3].state = 0;
+        this.selecteds[4].state = 0;
         break;
 
       case 'Pendiente':
         this.selecteds[0].state = 1;
         this.selecteds[1].state = 0;
         this.selecteds[2].state = 0;
+        this.selecteds[3].state = 0;
+        this.selecteds[4].state = 0;
+        break;
+
+      case 'Solución parcial':
+        this.selecteds[0].state = 2;
+        this.selecteds[1].state = 2;
+        this.selecteds[2].state = 2;
+        this.selecteds[3].state = 1;
+        this.selecteds[4].state = 0;
         break;
 
       default:

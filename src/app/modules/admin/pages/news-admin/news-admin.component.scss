@@ -111,25 +111,28 @@
   font-family: $font-family-sans-serif;
   font-size: 12px;
 }
-
-.card-container {
+.card-container-1 {
+  grid-template-columns: repeat(4, 1fr);
+  .card-news{
+    padding: 30px 20px;
+  }
+}
+.card-container-2 {
+  grid-template-columns: repeat(5, 1fr);
+  .card-news{
+    padding: 20px 20px;
+  }
+}
+.card-container-1,
+.card-container-2 {
   display: grid;
-  grid-template-columns: repeat(16, 1fr);
   grid-gap: 20px;
-  .col-card:nth-child(-1n + 4) {
-    grid-column: span 4;
-  }
-  .col-card:nth-child(1n + 5) {
-    grid-column: span 3;
-  }
-
   .card-news {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     background-color: white;
-    padding: 30px 20px;
     border-radius: 10px;
     box-shadow: 0px 16px 16px #9aaacf1a;
 
@@ -164,8 +167,16 @@
       color: #f4ce89;
     }
 
-    .tio-checkmark_circle {
+    .tio-document_text {
+      color: #f79e67;
+    }
+
+    .tio-checkmark_circle.success {
       color: #85cf3b;
+    }
+
+    .tio-checkmark_circle {
+      color: #b6c36f;
     }
 
     .tio-account_circle {
@@ -175,6 +186,10 @@
     .tio-chart_bar_4 {
       color: #89caf4;
     }
+  }
+
+  .pending-document{
+    padding: 13px 20px;
   }
 
   .card-satisfaction {

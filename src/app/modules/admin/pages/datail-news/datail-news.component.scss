@@ -35,16 +35,25 @@
     background-color: $gray4;
     display: flex;
     justify-content: center;
+    align-items: center;
+    position: relative;
     .icon {
       color: $white;
       font-size: 16px;
-      margin-right: 12px;
+      position: absolute;
+      top: 25%;
+      left: 26px;
     }
     &.-succes {
       background-color: $green;
     }
     &.-current {
       background-color: $third-color;
+    }
+    &.-document {
+      text-align: left;
+      line-height: 14px;
+      padding: 2px 0 2px 52px;
     }
   }
 }
@@ -87,8 +96,26 @@ mat-card {
         color: #a7a3b1;
         font-weight: bold;
       }
-      mat-form-field {
+      mat-form-field::ng-deep {
         width: 100%;
+        height: 40px;
+        .mat-form-field-wrapper {
+          height: 100%;
+          padding: 0;
+
+          .mat-form-field-flex {
+            height: 100%;
+            background: transparent;
+          }
+          .mat-form-field-underline::before {
+            bottom: -21px;
+          }
+        }
+
+
+        .mat-form-field-ripple {
+          bottom: -21px;
+        }
       }
     }
   }
@@ -138,6 +165,7 @@ mat-card {
       //line-height: 28px;
       //font-family: "galano-medium";
     }
+
     .margin-zero-bottom {
       margin-bottom: 0px !important;
     }
@@ -179,9 +207,9 @@ mat-card {
       top: 4px;
     }
 
-    .evidence-state-satisfaction{
+    .evidence-state-satisfaction {
       justify-content: space-between;
-      p:nth-child(1){
+      p:nth-child(1) {
         width: 25%;
       }
 
@@ -211,7 +239,5 @@ mat-card {
     .margin-left-10px {
       margin-left: 10px;
     }
-
-
   }
 }

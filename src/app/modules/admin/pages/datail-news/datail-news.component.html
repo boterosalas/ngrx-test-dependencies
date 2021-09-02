@@ -25,12 +25,23 @@
   </div>
 
   <div class="row-2" fxLayout="row" fxLayoutAlign="flex-start center">
-    <div class="step" *ngFor="let item of selecteds" [ngClass]="{ '-succes': item.state === 2, '-current': item.state === 1 }">
-      <div class="icon" *ngIf="item.state === 2">
+    <div
+      class="step"
+      *ngFor="let item of selecteds"
+      [ngClass]="{
+        '-succes': item.state === 2,
+        '-current': item.state === 1,
+        '-document': item.titulo === 'Pendiente de documentación'
+      }"
+    >
+      <div class="icon" *ngIf="item.state === 2 && item.titulo !== 'Pendiente de documentación'">
         <i class="tio-checkmark_circle"></i>
       </div>
       <div class="icon" *ngIf="item.state === 1">
         <i class="tio-time"></i>
+      </div>
+      <div class="icon" *ngIf="item.state === 2 && item.titulo === 'Pendiente de documentación'">
+        <i class="tio-document_text"></i>
       </div>
       {{ item.titulo }}
     </div>
@@ -64,7 +75,7 @@
 
       <div class="right">
         <label> MÁS NOVEDADES ({{ listMoreNovelties.length }})</label>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" class="select-custom">
           <mat-label>Seleccionar</mat-label>
           <mat-select>
             <mat-option class="select-custom-novelties" (click)="goToNovelty(item.id)" *ngFor="let item of listMoreNovelties">
@@ -79,11 +90,18 @@
                   <span *ngIf="item.status === 'Pendiente'" class="span-relative-new normal-text"
                     ><img class="status-img" src="/assets/img/dashboard/icon-info.svg" alt="pendind" /> Pendiente</span
                   >
+                  <span *ngIf="item.status === 'Pendiente de documentación'" class="span-relative-new normal-text"
+                    ><img class="status-img" src="/assets/img/dashboard/document_text.svg" alt="pendind" />
+                    {{ 'Pendiente de documentación' | truncate: '16' }}</span
+                  >
                   <span *ngIf="item.status === 'Solucionado'" class="span-relative-new normal-text"
                     ><img class="status-img" src="/assets/img/dashboard/icon-check-new.svg" alt="pendind" /> Solucionado</span
                   >
-                  <span *ngIf="item.status === 'En revisión'" class="span-relative-new normal-text"
-                    ><img class="status-img" src="/assets/img/dashboard/icon-revision.svg" alt="pendind" /> En revisión</span
+                  <span *ngIf="item.status === 'Solución parcial'" class="span-relative-new normal-text"
+                    ><img class="status-img" src="/assets/img/dashboard/icon-check-partial.svg" alt="pendind" /> Solución parcial</span
+                  >
+                  <span *ngIf="item.status === 'En gestión'" class="span-relative-new normal-text"
+                    ><img class="status-img" src="/assets/img/dashboard/icon-revision.svg" alt="pendind" /> En gestión</span
                   >
                 </div>
               </div>
@@ -140,15 +158,23 @@
             </p>
             <p fxLayout="column" class="margin-zero-bottom margin-top-5px margin-left-10px">
               <span class="galano-bold gray">ESTADO</span>
+
               <span *ngIf="currentNovelty.statusnovelty === 'Pendiente'" class="span-relative-new normal-text"
-                ><img class="status-img" src="/assets/img/dashboard/icon-info.svg" alt="pendind" /> Pendiente</span
-              >
-              <span *ngIf="currentNovelty.statusnovelty === 'Solucionado'" class="span-relative-new normal-text"
-                ><img class="status-img" src="/assets/img/dashboard/icon-check-new.svg" alt="pendind" /> Solucionado</span
-              >
-              <span *ngIf="currentNovelty.statusnovelty === 'En revisión'" class="span-relative-new normal-text"
-                ><img class="status-img" src="/assets/img/dashboard/icon-revision.svg" alt="pendind" /> En revisión</span
-              >
+              ><img class="status-img" src="/assets/img/dashboard/icon-info.svg" alt="pendind" /> Pendiente</span
+            >
+            <span *ngIf="currentNovelty.statusnovelty === 'Pendiente de documentación'" class="span-relative-new normal-text"
+              ><img class="status-img" src="/assets/img/dashboard/document_text.svg" alt="pendind" />
+              {{ 'Pendiente de documentación' | truncate: '10' }}</span
+            >
+            <span *ngIf="currentNovelty.statusnovelty === 'Solucionado'" class="span-relative-new normal-text"
+              ><img class="status-img" src="/assets/img/dashboard/icon-check-new.svg" alt="pendind" /> Solucionado</span
+            >
+            <span *ngIf="currentNovelty.statusnovelty === 'Solución parcial'" class="span-relative-new normal-text"
+              ><img class="status-img" src="/assets/img/dashboard/icon-check-partial.svg" alt="pendind" /> Solución parcial</span
+            >
+            <span *ngIf="currentNovelty.statusnovelty === 'En gestión'" class="span-relative-new normal-text"
+              ><img class="status-img" src="/assets/img/dashboard/icon-revision.svg" alt="pendind" /> En gestión</span
+            >
             </p>
 
             <p fxLayout="column" class="satisfaction margin-zero-bottom margin-top-5px margin-left-10px">
@@ -165,13 +191,13 @@
                 <span (click)="viewComment()" class="normal-link cursor-pointer">(Ver comentario)</span>
               </span>
 
-              <span class="content"  *ngIf="currentNovelty.qualification === 2">
+              <span class="content" *ngIf="currentNovelty.qualification === 2">
                 <img src="\assets\img\status\triste.svg" alt="" />
                 <span>Inconforme</span>
                 <span (click)="viewComment()" class="normal-link cursor-pointer">(Ver comentario)</span>
               </span>
 
-              <span class="content"  *ngIf="currentNovelty.qualification === 4">
+              <span class="content" *ngIf="currentNovelty.qualification === 4">
                 <img src="\assets\img\status\enamorado.svg" alt="" />
                 <span>¡Feliz!</span>
                 <span (click)="viewComment()" class="normal-link cursor-pointer">(Ver comentario)</span>
