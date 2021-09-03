@@ -60,7 +60,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   textProteccion: any;
   textTransparencia: any;
   textPrograma: any;
-  showPerson = true;
+  showPerson = false;
   showBusiness = false;
 
   ngOnInit() {
