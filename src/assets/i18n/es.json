@@ -13,7 +13,7 @@
     "CELLPHONE": "Celular",
     "CELLPHONE_SHORT": "Número de celular",
     "ADDRESS": "Dirección",
-    "DOCUMENT_NUMBER": "Número de documento",
+    "DOCUMENT_NUMBER": "Número de {{dc}}",
     "DOCUMENT": "Documento",
     "REQUIRED": "El campo {{formValue}} es requerido",
     "NEXT": "Siguiente",

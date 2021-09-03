@@ -62,6 +62,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   textPrograma: any;
   showPerson = false;
   showBusiness = false;
+  typedc = 'documento';
 
   ngOnInit() {
     this.amount = localStorage.getItem('Amount');
@@ -229,11 +230,13 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       this.registerForm.controls.lastName.clearValidators();
       this.registerForm.controls.name.setValue(null);
       this.registerForm.controls.lastName.setValue(null);
+      this.typedc = 'nit';
     } else {
       this.showBusiness = false;
       this.showPerson = true;
       this.registerForm.controls.social.clearValidators();
       this.registerForm.controls.social.setValue(null);
+      this.typedc = 'documento';
     }
   }
 
