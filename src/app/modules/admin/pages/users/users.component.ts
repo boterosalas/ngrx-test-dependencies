@@ -639,6 +639,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
   public exportUsersFilter() {
     this.filterData[0].export = true;
     this.subscription = this.file.searchUsers(this.filterData).subscribe(() => {
+      this.filterData[0].export = false;
       this.openSnackBar('Al terminar de procesar el archivo se enviará un correo', 'Cerrar');
     });
   }

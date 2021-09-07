@@ -79,7 +79,7 @@
   </span>
   
   <mat-form-field>
-    <input matInput id="id" type="text" placeholder="{{ 'GENERIC.DOCUMENT_NUMBER' | translate }}" formControlName="id" spacebar required />
+    <input matInput id="id" type="text" placeholder="{{ 'GENERIC.DOCUMENT_NUMBER' | translate : {dc: typedc } }}" formControlName="id" spacebar required />
     <mat-error id="reuiredId" *ngIf="registerForm.controls.id.invalid && registerForm.controls.id.errors.required">{{
       'GENERIC.REQUIRED' | translate: { formValue: 'Número de documento' }
     }}</mat-error>
