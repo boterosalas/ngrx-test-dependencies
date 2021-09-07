@@ -40,6 +40,7 @@
               (change)="changeStatus()"
               style="position: relative; bottom: 2px; margin-left: 5px"
               [(ngModel)]="marketplace"
+              [disabled]="notComission"
               color="orange2-toggle"
             ></mat-slide-toggle>
             <span>Mostrar categorías que no generan comisión:</span>
@@ -47,6 +48,7 @@
               (change)="changeStatus()"
               style="position: relative; bottom: 2px; margin-left: 5px"
               [(ngModel)]="notComission"
+              [disabled]="marketplace"
               color="orange2-toggle"
             ></mat-slide-toggle>
           </div>
