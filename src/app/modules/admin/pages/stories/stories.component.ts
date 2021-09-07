@@ -42,7 +42,7 @@ export class StoriesComponent implements OnInit, OnDestroy {
     });
   }
 
-  public onChangeSelected(business) {
+  public onChangeSelected(business?: any) {
     if (business !== '') {
       this.newStoryActiveButton = false;
       this.idBussiness = business !== undefined ? business.id : 0;
