@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild, OnDestroy, TemplateRef } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { LinksService } from 'src/app/services/links.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { DialogHistoryComponent } from '../../components/dialog-history/dialog-history.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-report',

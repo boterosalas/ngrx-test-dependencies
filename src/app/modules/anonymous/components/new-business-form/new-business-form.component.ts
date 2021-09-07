@@ -5,8 +5,7 @@ import { Subscription } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
 import { ResponseService } from 'src/app/interfaces/response';
 import Swal from 'sweetalert2';
-import { MatDialog, MatDialogRef } from '@angular/material';
-
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-new-business-form',
   templateUrl: './new-business-form.component.html',

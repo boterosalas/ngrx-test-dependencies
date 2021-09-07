@@ -9,7 +9,7 @@ import { LoaderService } from 'src/app/services/loader.service';
 import { Subscription } from 'rxjs';
 import { ValidateDate } from 'src/app/validators/validate-date.validators';
 import * as moment from 'moment';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -73,7 +73,6 @@ export class ReportsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-
     this.nameFile = '';
     this.nameFilePayment = '';
     this.nameFilePicking = '';

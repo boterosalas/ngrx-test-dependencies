@@ -10,7 +10,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { ConfirmEmailValidator } from 'src/app/validators/confirm-email.validator';
 import { UserService } from 'src/app/services/user.service';
 import { MasterDataService } from 'src/app/services/master-data.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { ContentService } from 'src/app/services/content.service';
 declare var dataLayer: any;
@@ -220,9 +220,8 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     });
   }
 
-
-  public selectId(typeId:string) {
-    if(typeId === '3') {
+  public selectId(typeId: string) {
+    if (typeId === '3') {
       this.showBusiness = true;
       this.showPerson = false;
       this.registerForm.controls.name.clearValidators();

@@ -12,7 +12,6 @@ import { MonthResumeComponent } from './components/month-resume/month-resume.com
 import { GeneralResumeComponent } from './components/general-resume/general-resume.component';
 import { ReportComponent } from './pages/report/report.component';
 import { AuthGuard } from 'src/app/auth.guard';
-import { MatPaginatorIntl } from '@angular/material';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ProfileFormComponent } from './components/profile-form/profile-form.component';
 import { TableHistorialComponent } from './components/table-historial/table-historial.component';

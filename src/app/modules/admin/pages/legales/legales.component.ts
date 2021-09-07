@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { MasterDataService } from 'src/app/services/master-data.service';
 import { UtilsService } from 'src/app/services/utils.service';

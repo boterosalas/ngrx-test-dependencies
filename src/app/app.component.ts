@@ -15,7 +15,7 @@ import { SwUpdate } from '@angular/service-worker';
 declare var dataLayer: any;
 import { PopupComponent } from './modules/shared/components/popup/popup.component';
 import { Location } from '@angular/common';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import decode from 'jwt-decode';
 import { SidenavService } from './services/sidenav.service';
 import { onMainContentChange } from './animations/animations';

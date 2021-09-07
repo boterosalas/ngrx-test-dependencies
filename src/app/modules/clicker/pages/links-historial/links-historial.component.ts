@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatDialog, MatSnackBar, MatBottomSheet } from '@angular/material';
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatBottomSheet } from "@angular/material/bottom-sheet";
 import { LinksService } from 'src/app/services/links.service';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';

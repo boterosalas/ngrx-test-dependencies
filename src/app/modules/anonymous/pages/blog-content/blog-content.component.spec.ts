@@ -14,7 +14,7 @@ import { ContentService } from 'src/app/services/content.service';
 
 import { BlogContentComponent } from './blog-content.component';
 import * as moment from 'moment';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 describe('BlogContentComponent', () => {
   let component: BlogContentComponent;
   let fixture: ComponentFixture<BlogContentComponent>;

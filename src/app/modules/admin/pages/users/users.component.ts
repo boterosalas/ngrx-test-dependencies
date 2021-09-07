@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, OnDestroy, TemplateRef } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatDialog, MatSnackBar, MatPaginatorIntl, MatDialogRef } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogUserComponent } from '../../components/dialog-user/dialog-user.component';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { UserService } from 'src/app/services/user.service';
 import { ResponseService } from 'src/app/interfaces/response';
 import { LinksService } from 'src/app/services/links.service';
@@ -10,7 +11,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DialogEditComponent } from 'src/app/modules/clicker/components/dialog-edit/dialog-edit.component';
 moment.locale('es');
 import Swal from 'sweetalert2';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { UtilsService } from 'src/app/services/utils.service';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 

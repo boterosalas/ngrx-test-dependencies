@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { DialogNavigationGroupComponent } from '../dialog-navigation-group/dialog-navigation-group.component';
 import { DialogNavigationItemComponent } from '../dialog-navigation-item/dialog-navigation-item.component';

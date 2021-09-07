@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { LinksService } from 'src/app/services/links.service';
@@ -25,10 +26,10 @@ export class DeleteformComponent implements OnInit {
   private subscription: Subscription = new Subscription();
   available: number;
   account: number;
-  activeText  = true;
+  activeText = true;
   profileFormDelete: FormGroup;
-  causeSurvey  = '';
-  disableButtonOr  = true;
+  causeSurvey = '';
+  disableButtonOr = true;
 
   @ViewChild('templateDeleteAccount', { static: false })
   templateDelete: TemplateRef<any>;

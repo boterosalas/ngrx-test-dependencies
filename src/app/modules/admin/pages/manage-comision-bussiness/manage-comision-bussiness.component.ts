@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatSnackBar, MatTableDataSource } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
@@ -157,7 +158,6 @@ export class ManageComisionBussinessComponent implements OnInit {
         edit,
       },
     });
-
   }
   editSaveComisionCategory() {
     const datos = {
@@ -217,7 +217,7 @@ export class ManageComisionBussinessComponent implements OnInit {
       orderBy,
       idbussiness,
       marketplace,
-      notComission
+      notComission,
     };
 
     this.subscription = this.content.getComisionManage(params).subscribe((user: any) => {

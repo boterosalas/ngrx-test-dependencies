@@ -1,7 +1,5 @@
 import { Component, OnInit, Inject, ViewChild, OnDestroy } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { SlickCarouselComponent } from 'ngx-slick-carousel';
-import { Subscription } from 'rxjs';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog-stories',
@@ -63,7 +61,6 @@ export class DialogStoriesComponent implements OnInit {
     }
 
     this.dialogRef.close();
-
   }
 
   slickInit(e) {

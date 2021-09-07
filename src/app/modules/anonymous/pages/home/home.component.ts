@@ -9,7 +9,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import decode from 'jwt-decode';
 import { ContentService } from 'src/app/services/content.service';
 import { distinctUntilChanged } from 'rxjs/operators';
-import { MatDialog, MatCheckboxChange, MatSnackBar } from '@angular/material';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { ResponseService } from 'src/app/interfaces/response';
 import { LinksService } from 'src/app/services/links.service';
@@ -18,6 +20,7 @@ import { Meta } from '@angular/platform-browser';
 import { MasterDataService } from 'src/app/services/master-data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NewBusinessFormComponent } from '../../components/new-business-form/new-business-form.component';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-login',
@@ -81,7 +84,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   templateTerms: TemplateRef<any>;
   newTermsHTML = false;
   stepTerms = true;
-  activateButton  = false;
+  activateButton = false;
   amount: any;
   amountReferred: any;
   paymentPending: number;

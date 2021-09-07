@@ -1,7 +1,8 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatTable } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
 import * as moment from 'moment';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { ContentService } from 'src/app/services/content.service';
@@ -158,7 +159,6 @@ export class ToolsAdminComponent implements OnInit {
         } else {
           this.dataSourceOfer[index].undefinedDate = false;
         }
-
       }
     });
     this.content.getOffersbyType({ id: 'POPUP', admin: true }).subscribe((resp) => {

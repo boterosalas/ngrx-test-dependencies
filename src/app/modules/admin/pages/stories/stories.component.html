@@ -2,7 +2,7 @@
   <mat-form-field class="selected-business separate">
     <mat-placeholder class="selected-business">NEGOCIO</mat-placeholder>
     <mat-select id="business" class="selected-business">
-      <mat-option (click)="onChangeSelected(item)" value="null">Clickam</mat-option>
+      <mat-option (click)="onChangeSelected('')" value="null">Clickam</mat-option>
       <mat-option (click)="onChangeSelected(item)" *ngFor="let item of business" value="{{ item.id }}">
         <span>{{ item.description }}</span>
       </mat-option>

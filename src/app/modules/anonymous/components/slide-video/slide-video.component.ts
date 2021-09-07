@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
-import { MatDialog } from '@angular/material';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-slide-video',
   templateUrl: './slide-video.component.html',

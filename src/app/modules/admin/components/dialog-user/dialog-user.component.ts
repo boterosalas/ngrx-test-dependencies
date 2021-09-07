@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject, Output, EventEmitter, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
-import { MatDialog, MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -25,7 +26,7 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private _snackBar: MatSnackBar,
     private utils: UtilsService
-  ) { }
+  ) {}
   dateFormHoja: FormGroup;
   dataAddImagen: FormGroup;
   dataRejectionMessage: FormGroup;
@@ -306,7 +307,6 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     }
   }
 
-
   public previewDocument(typeDocument: string) {
     switch (typeDocument) {
       case 'IdentificationCard1':
@@ -354,7 +354,5 @@ export class DialogUserComponent implements OnInit, OnDestroy {
         }
         break;
     }
-
   }
-
 }

@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ResponseService } from 'src/app/interfaces/response';
 import { ContentService } from 'src/app/services/content.service';
@@ -22,7 +22,6 @@ export class NotificationsComponent implements OnInit {
   innerWidth: number;
   formArray = [];
   checkboxGroup: FormGroup;
-
 
   constructor(private _content: ContentService, private fb: FormBuilder, private _snackBar: MatSnackBar, private router: Router) {}
 

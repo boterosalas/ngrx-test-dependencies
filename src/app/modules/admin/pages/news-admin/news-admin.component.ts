@@ -1,6 +1,8 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog, MatDialogRef, MatPaginatorIntl, MatSnackBar, MatTableDataSource } from '@angular/material';
+import { MatDialogRef, MatDialog } from "@angular/material/dialog";
+import { MatPaginatorIntl } from "@angular/material/paginator";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { ResponseService } from 'src/app/interfaces/response';

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, TemplateRef } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { MatDialog, MatTable } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
 import { LinksService } from 'src/app/services/links.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
@@ -269,7 +270,6 @@ export class TableActivateBusinessComponent implements OnInit {
     this.dialog.closeAll();
   }
   saveBussiness() {
-
     let datos;
     if (this.selectedItem) {
       if (this.fileImgCat !== '' && this.fileImgCat2 !== '') {
