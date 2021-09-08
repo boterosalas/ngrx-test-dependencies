@@ -9,7 +9,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ContentService } from 'src/app/services/content.service';
 import { of } from 'rxjs';
 
-fdescribe('ComissionTableComponent', () => {
+describe('ComissionTableComponent', () => {
   let component: ComissionTableComponent;
   let fixture: ComponentFixture<ComissionTableComponent>;
 
