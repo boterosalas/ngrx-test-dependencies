@@ -51,7 +51,6 @@
           <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign.gt-xs="center" fxLayoutAlign.xs="center center">
             <mat-menu #menu="matMenu" xPosition="before">
               <button mat-menu-item (click)="editCategory(element)">Categorías</button>
-              <button mat-menu-item (click)="contentBussiness(element)">Biblioteca de contenido</button>
               <button mat-menu-item (click)="comisionTable(element)">Información de comisiones</button>
               <button
                 *ngIf="element.code === 'exito' || element.code === 'carulla'"
