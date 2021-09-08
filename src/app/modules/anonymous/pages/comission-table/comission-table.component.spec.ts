@@ -9,7 +9,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ContentService } from 'src/app/services/content.service';
 import { of } from 'rxjs';
 
-describe('ComissionTableComponent', () => {
+fdescribe('ComissionTableComponent', () => {
   let component: ComissionTableComponent;
   let fixture: ComponentFixture<ComissionTableComponent>;
 
@@ -370,14 +370,16 @@ describe('ComissionTableComponent', () => {
     ],
   };
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), AppMaterialModule, BrowserAnimationsModule, SharedModule, RouterTestingModule],
-      declarations: [ComissionTableComponent],
-      providers: [{ provide: ContentService, useValue: mockContentService }],
-    }).compileComponents();
-    mockContentService.getCommissions.and.returnValue(of(table));
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [TranslateModule.forRoot(), AppMaterialModule, BrowserAnimationsModule, SharedModule, RouterTestingModule],
+        declarations: [ComissionTableComponent],
+        providers: [{ provide: ContentService, useValue: mockContentService }],
+      }).compileComponents();
+      mockContentService.getCommissions.and.returnValue(of(table));
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ComissionTableComponent);
@@ -390,7 +392,7 @@ describe('ComissionTableComponent', () => {
     expect(mockContentService.getCommissions).toHaveBeenCalled();
   });
 
-  // it("class tags", () => {
+  //it("class tags", () => {
   //   component.addTagsTableComission();
   //   fixture.whenStable().then(()=> {
   //     const nativeElementInput = fixture.nativeElement;
