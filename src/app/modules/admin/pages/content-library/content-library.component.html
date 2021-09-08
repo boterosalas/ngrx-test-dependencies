@@ -12,18 +12,22 @@
         </mat-select>
       </mat-form-field>
 
-      <button mat-raised-button color="orange" (click)="selectAll()" class="button-selected mr-4">
-        <img class="icon-download" src="assets/img/dashboard/icon-check.svg" alt="descarga" />
-        {{ selectAllVideosImg }}
+      <button mat-raised-button color="orange" (click)="selectAll()" class="mr-4">
+        <span fxLayoutAlign="start center">
+          {{ selectAllVideosImg }}
+          <i class="tio-all_done pl-2"></i>
+        </span>
       </button>
       <button
         mat-raised-button
+        color="red"
         (click)="deleteEvery()"
-        [ngClass]="active === true ? 'button-selected-red' : 'button-selected-red-disabled'"
         [disabled]="!active"
       >
-        <img class="icon-download" src="assets/img/dashboard/icon-trash-red.svg" alt="descarga" />
-        Borrar
+        <span fxLayoutAlign="start center">
+          Borrar
+          <i class="tio-delete pl-2"></i>
+        </span>
       </button>
     </div>
     <span fxLayout="row" fxLayoutAlign="start center">
