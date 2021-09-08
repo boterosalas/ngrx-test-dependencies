@@ -8,7 +8,6 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ContentService } from 'src/app/services/content.service';
 import { of } from 'rxjs';
-import { HomeComponent } from '../home/home.component';
 
 describe('ComissionTableComponent', () => {
   let component: ComissionTableComponent;
@@ -371,16 +370,14 @@ describe('ComissionTableComponent', () => {
     ],
   };
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [TranslateModule.forRoot(), AppMaterialModule, BrowserAnimationsModule, SharedModule],
-        declarations: [ComissionTableComponent],
-        providers: [{ provide: ContentService, useValue: mockContentService }],
-      }).compileComponents();
-      mockContentService.getCommissions.and.returnValue(of(table));
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TranslateModule.forRoot(), AppMaterialModule, BrowserAnimationsModule, SharedModule, RouterTestingModule],
+      declarations: [ComissionTableComponent],
+      providers: [{ provide: ContentService, useValue: mockContentService }],
+    }).compileComponents();
+    mockContentService.getCommissions.and.returnValue(of(table));
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ComissionTableComponent);
