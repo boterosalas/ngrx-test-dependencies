@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
 import { MenuOptionsComponent } from './menu-options.component';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -37,7 +37,7 @@ describe('MenuOptionsComponent', () => {
     ],
   };
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [MenuOptionsComponent],
       imports: [

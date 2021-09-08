@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TableUsersComponent } from './table-users.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { TranslateModule } from '@ngx-translate/core';
@@ -10,7 +10,7 @@ describe('TableUsersComponent', () => {
   let component: TableUsersComponent;
   let fixture: ComponentFixture<TableUsersComponent>;
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TableUsersComponent],
       imports: [AppMaterialModule, TranslateModule.forRoot({}), BrowserAnimationsModule, NgxPaginationModule],

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BussinessAdminComponent } from './bussiness-admin.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -14,7 +14,7 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { AdminModule } from '../../admin.module';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { DialogCategoryComponent } from '../../components/dialog-category/dialog-category.component';
-import { MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 
 export class MatDialogMock {
@@ -74,7 +74,7 @@ describe('ControllerAdminComponent', () => {
 
   const matDialog = new MatDialogMock();
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [

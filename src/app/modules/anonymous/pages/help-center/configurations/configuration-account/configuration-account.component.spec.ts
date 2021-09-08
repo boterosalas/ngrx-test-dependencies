@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ConfigurationAccountComponent } from './configuration-account.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -12,7 +12,7 @@ describe('ConfigurationAccountComponent', () => {
   let component: ConfigurationAccountComponent;
   let fixture: ComponentFixture<ConfigurationAccountComponent>;
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [

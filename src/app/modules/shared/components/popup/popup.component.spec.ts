@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { PopupComponent } from './popup.component';
 
@@ -22,7 +22,7 @@ describe('PopupComponent', () => {
     },
   };
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [PopupComponent],
       imports: [AppMaterialModule],

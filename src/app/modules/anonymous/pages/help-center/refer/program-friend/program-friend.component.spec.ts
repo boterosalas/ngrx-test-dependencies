@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProgramFriendComponent } from './program-friend.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -12,7 +12,7 @@ describe('ProgramFriendComponent', () => {
   let component: ProgramFriendComponent;
   let fixture: ComponentFixture<ProgramFriendComponent>;
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [

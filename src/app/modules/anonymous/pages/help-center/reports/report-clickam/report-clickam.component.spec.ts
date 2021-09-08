@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReportClickamComponent } from './report-clickam.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -12,7 +12,7 @@ describe('ReportClickamComponent', () => {
   let component: ReportClickamComponent;
   let fixture: ComponentFixture<ReportClickamComponent>;
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [

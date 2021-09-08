@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TableReferComponent } from './table-refer.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -8,7 +8,7 @@ describe('TableReferComponent', () => {
   let component: TableReferComponent;
   let fixture: ComponentFixture<TableReferComponent>;
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TableReferComponent],
       imports: [TranslateModule.forRoot(), AppMaterialModule],

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LOCALE_CONFIG, LocaleService, NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
@@ -62,7 +62,7 @@ describe('DialogFilterUsersComponent', () => {
     },
   ];
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [DialogFilterUsersComponent],
       imports: [FormsModule, ReactiveFormsModule, AppMaterialModule, NgxDaterangepickerMd, BrowserAnimationsModule],

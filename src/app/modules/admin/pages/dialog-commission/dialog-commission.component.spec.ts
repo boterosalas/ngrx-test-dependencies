@@ -1,9 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogCommissionComponent } from './dialog-commission.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MatDialog, MatMenuModule, MatSlideToggleModule } from '@angular/material';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -16,6 +15,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import Swal from 'sweetalert2';
+import { MatDialog } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 describe('DialogCommissionComponent', () => {
   let component: DialogCommissionComponent;
   let fixture: ComponentFixture<DialogCommissionComponent>;
@@ -35,7 +37,7 @@ describe('DialogCommissionComponent', () => {
       commission: '2%',
     },
   ];
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [DialogCommissionComponent],
       imports: [

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
@@ -13,6 +13,7 @@ import { MasterDataService } from 'src/app/services/master-data.service';
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { PaymentInfoComponent } from './payment-info.component';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 class MockUserService {
   userInfo$ = new BehaviorSubject<any>({
@@ -36,19 +37,18 @@ class MockUserService {
   };
 
   uploadFiles() {
-   const response = new Observable(res => {
-     res.next(this.response);
-   });
-   return response;
+    const response = new Observable((res) => {
+      res.next(this.response);
+    });
+    return response;
   }
 
   updateUser() {
-   const update = new Observable(res => {
-     res.next(this.update);
-   });
-   return update;
+    const update = new Observable((res) => {
+      res.next(this.update);
+    });
+    return update;
   }
-
 }
 
 class MockUserServiceError {
@@ -67,19 +67,18 @@ class MockUserServiceError {
   };
 
   uploadFiles() {
-   const response = new Observable(res => {
-     res.next(this.response);
-   });
-   return response;
+    const response = new Observable((res) => {
+      res.next(this.response);
+    });
+    return response;
   }
 
   updateUser() {
-   const update = new Observable(res => {
-     res.next(this.update);
-   });
-   return update;
+    const update = new Observable((res) => {
+      res.next(this.update);
+    });
+    return update;
   }
-
 }
 
 describe('PaymentInfoComponent', () => {
@@ -150,7 +149,6 @@ describe('PaymentInfoComponent', () => {
     ],
   };
 
-
   const register = {
     state: 'Success',
     objectResponse: {
@@ -168,10 +166,14 @@ describe('PaymentInfoComponent', () => {
       state: '',
       isEmployeeGrupoExito: false,
       verified: false,
-      fileIdentificationCard1:'iVBORw0KGgoAAAANSUhEUgAAACAAAAAqCAIAAABdg87FAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVFhH7c0xDQAgAAQx/Jt+JHRiILka6NljBVRABVRABVRABVRABVRABVRABfR7sF3ODrEiRHEThAAAAABJRU5ErkJggg==',
-      fileIdentificationCard2:'iVBORw0KGgoAAAANSUhEUgAAACAAAAAqCAIAAABdg87FAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVFhH7c0xDQAgAAQx/Jt+JHRiILka6NljBVRABVRABVRABVRABVRABVRABfR7sF3ODrEiRHEThAAAAABJRU5ErkJggg==',
-      fileBankCertificate:'iVBORw0KGgoAAAANSUhEUgAAACAAAAAqCAIAAABdg87FAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVFhH7c0xDQAgAAQx/Jt+JHRiILka6NljBVRABVRABVRABVRABVRABVRABfR7sF3ODrEiRHEThAAAAABJRU5ErkJggg==',
-       fileRUT:"iVBORw0KGgoAAAANSUhEUgAAACAAAAAqCAIAAABdg87FAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVFhH7c0xDQAgAAQx/Jt+JHRiILka6NljBVRABVRABVRABVRABVRABVRABfR7sF3ODrEiRHEThAAAAABJRU5ErkJggg==",
+      fileIdentificationCard1:
+        'iVBORw0KGgoAAAANSUhEUgAAACAAAAAqCAIAAABdg87FAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVFhH7c0xDQAgAAQx/Jt+JHRiILka6NljBVRABVRABVRABVRABVRABVRABfR7sF3ODrEiRHEThAAAAABJRU5ErkJggg==',
+      fileIdentificationCard2:
+        'iVBORw0KGgoAAAANSUhEUgAAACAAAAAqCAIAAABdg87FAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVFhH7c0xDQAgAAQx/Jt+JHRiILka6NljBVRABVRABVRABVRABVRABVRABfR7sF3ODrEiRHEThAAAAABJRU5ErkJggg==',
+      fileBankCertificate:
+        'iVBORw0KGgoAAAANSUhEUgAAACAAAAAqCAIAAABdg87FAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVFhH7c0xDQAgAAQx/Jt+JHRiILka6NljBVRABVRABVRABVRABVRABVRABfR7sF3ODrEiRHEThAAAAABJRU5ErkJggg==',
+      fileRUT:
+        'iVBORw0KGgoAAAANSUhEUgAAACAAAAAqCAIAAABdg87FAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVFhH7c0xDQAgAAQx/Jt+JHRiILka6NljBVRABVRABVRABVRABVRABVRABfR7sF3ODrEiRHEThAAAAABJRU5ErkJggg==',
       bank: 'Bancolombia',
       typeBankAccount: 'Ahorros',
       bankAccountNumber: 'MTIzNDU2Nzg5',
@@ -181,40 +183,41 @@ describe('PaymentInfoComponent', () => {
     userMessage: null,
   };
 
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [PaymentInfoComponent, TruncatePipe],
-      imports: [
-        TranslateModule,
-        AppMaterialModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientTestingModule,
-        BrowserAnimationsModule,
-        MatPasswordStrengthModule,
-        RouterTestingModule.withRoutes([]),
-        TranslateModule.forRoot({}),
-        JwtModule.forRoot({
-          config: {
-            tokenGetter: () => {
-              return localStorage.getItem('ACCESS_TOKEN');
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [PaymentInfoComponent, TruncatePipe],
+        imports: [
+          TranslateModule,
+          AppMaterialModule,
+          FormsModule,
+          ReactiveFormsModule,
+          HttpClientTestingModule,
+          BrowserAnimationsModule,
+          MatPasswordStrengthModule,
+          TranslateModule.forRoot({}),
+          RouterTestingModule.withRoutes([{ path: 'inicio', component: HomeComponent }]),
+          JwtModule.forRoot({
+            config: {
+              tokenGetter: () => {
+                return localStorage.getItem('ACCESS_TOKEN');
+              },
+              throwNoTokenError: true,
+              whitelistedDomains: [],
+              blacklistedRoutes: [],
             },
-            throwNoTokenError: true,
-            whitelistedDomains: [],
-            blacklistedRoutes: [],
-          },
-        }),
-      ],
-      providers: [
-        { provide: MasterDataService, useValue: mockMasterDataService },
-        { provide: UserService, useClass: MockUserService},
-        { provide: UserService, useClass: MockUserServiceError},
-      ],
-    }).compileComponents();
-    mockMasterDataService.getDepartments.and.returnValue(of(dataDepartments));
-    mockMasterDataService.getBanks.and.returnValue(of(dataBanks));
-  }));
+          }),
+        ],
+        providers: [
+          { provide: MasterDataService, useValue: mockMasterDataService },
+          { provide: UserService, useClass: MockUserService },
+          { provide: UserService, useClass: MockUserServiceError },
+        ],
+      }).compileComponents();
+      mockMasterDataService.getDepartments.and.returnValue(of(dataDepartments));
+      mockMasterDataService.getBanks.and.returnValue(of(dataBanks));
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PaymentInfoComponent);
@@ -247,7 +250,6 @@ describe('PaymentInfoComponent', () => {
     expect(mockMasterDataService.getBanks).toHaveBeenCalled();
   });
 
-
   it('displayDepartment', () => {
     component.displayDepartment('Antioquia');
     expect(component.displayDepartment).not.toBeUndefined();
@@ -256,12 +258,11 @@ describe('PaymentInfoComponent', () => {
   it('select department', () => {
     const department = {
       code: 1,
-      municipalities: ['Medelin', 'Sabaneta']
+      municipalities: ['Medelin', 'Sabaneta'],
     };
     component.selectDepartment(department);
     expect(department.code).toBe(1);
   });
-
 
   it('checkDepartment', () => {
     component.checkDepartment();
@@ -271,7 +272,7 @@ describe('PaymentInfoComponent', () => {
   it('select city', () => {
     const city = {
       code: 20,
-      description: 'Medellín'
+      description: 'Medellín',
     };
     component.selectCity(city);
     expect(city.description).toBe('Medellín');
@@ -309,5 +310,4 @@ describe('PaymentInfoComponent', () => {
     component.sendPayment();
     expect(component.phone).not.toBeUndefined();
   });
-
 });

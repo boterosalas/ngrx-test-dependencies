@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogStoriesComponent } from './dialog-stories.component';
 import { AppMaterialModule } from '../../app-material/app-material.module';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { of } from 'rxjs/internal/observable/of';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
@@ -84,7 +84,7 @@ describe('DialogStoriesComponent', () => {
     },
   ];
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [DialogStoriesComponent],
       imports: [AppMaterialModule, SlickCarouselModule],

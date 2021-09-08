@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CardOfferComponent } from './card-offer.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
@@ -13,7 +13,7 @@ describe('CardOfferComponent', () => {
   let component: CardOfferComponent;
   let fixture: ComponentFixture<CardOfferComponent>;
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [CardOfferComponent, TruncatePipe],
       imports: [

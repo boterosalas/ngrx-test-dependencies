@@ -1,6 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SliderStoriesComponent } from './slider-stories.component';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -13,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from 'src/app/services/user.service';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
+import { MatDialog } from '@angular/material/dialog';
 
 class MockUserService extends UserService {
   userInfo$ = new BehaviorSubject<any>({
@@ -83,38 +83,43 @@ describe('SliderStoriesComponent', () => {
     },
   ];
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [SliderStoriesComponent, HomeComponent],
-      imports: [
-        SharedModule,
-        TranslateModule.forRoot(),
-        AppMaterialModule,
-        HttpClientTestingModule,
-        BrowserAnimationsModule,
-        RouterTestingModule.withRoutes([{ path: 'inicio', component: HomeComponent }]),
-        JwtModule.forRoot({
-          config: {
-            tokenGetter: () => {
-              return localStorage.getItem('ACCESS_TOKEN');
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [SliderStoriesComponent, HomeComponent],
+        imports: [
+          SharedModule,
+          TranslateModule.forRoot(),
+          AppMaterialModule,
+          HttpClientTestingModule,
+          BrowserAnimationsModule,
+          RouterTestingModule.withRoutes([
+            { path: 'inicio', component: HomeComponent },
+            { path: 'notificaciones', component: HomeComponent },
+          ]),
+          JwtModule.forRoot({
+            config: {
+              tokenGetter: () => {
+                return localStorage.getItem('ACCESS_TOKEN');
+              },
+              throwNoTokenError: true,
+              whitelistedDomains: [],
+              blacklistedRoutes: [],
             },
-            throwNoTokenError: true,
-            whitelistedDomains: [],
-            blacklistedRoutes: [],
-          },
-        }),
-      ],
-      providers: [
-        { provide: ContentService, useValue: mockContentService },
-        { provide: MatDialog, useValue: matDialog },
-        { provide: UserService, useClass: MockUserService },
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
-    mockContentService.getBusiness.and.returnValue(of(bussiness));
-    mockContentService.getStories.and.returnValue(of(getStories));
-    // mockUserService.getProfile
-  }));
+          }),
+        ],
+        providers: [
+          { provide: ContentService, useValue: mockContentService },
+          { provide: MatDialog, useValue: matDialog },
+          { provide: UserService, useClass: MockUserService },
+        ],
+        schemas: [NO_ERRORS_SCHEMA],
+      }).compileComponents();
+      mockContentService.getBusiness.and.returnValue(of(bussiness));
+      mockContentService.getStories.and.returnValue(of(getStories));
+      // mockUserService.getProfile
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SliderStoriesComponent);

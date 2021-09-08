@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TableHistorialComponent } from './table-historial.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -9,7 +9,7 @@ describe('TableHistorialComponent', () => {
   let component: TableHistorialComponent;
   let fixture: ComponentFixture<TableHistorialComponent>;
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TableHistorialComponent],
       imports: [TranslateModule.forRoot({}), AppMaterialModule, NgxPaginationModule],

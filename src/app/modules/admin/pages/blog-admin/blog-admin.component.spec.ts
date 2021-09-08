@@ -1,6 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -12,6 +12,7 @@ import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-mater
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { ContentService } from 'src/app/services/content.service';
 import Swal from 'sweetalert2';
+import { EditBlogAdminComponent } from '../edit-blog-admin/edit-blog-admin.component';
 
 import { BlogAdminComponent } from './blog-admin.component';
 
@@ -23,37 +24,39 @@ describe('BlogAdminComponent', () => {
     objectResponse: { blogs: [{ id: 1 }, { id: 2 }] },
   };
   const mockContentService = jasmine.createSpyObj('ContentService', ['getBlogsAdmin', 'activeBlog', 'deleteBlog']);
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [BlogAdminComponent],
-      imports: [
-        AppMaterialModule,
-        TranslateModule.forRoot({}),
-        BrowserAnimationsModule,
-        HttpClientTestingModule,
-        RouterTestingModule.withRoutes([]),
-        NgxDaterangepickerMd,
-        SharedModule,
-        NgxMaterialTimepickerModule,
-        JwtModule.forRoot({
-          config: {
-            tokenGetter: () => {
-              return localStorage.getItem('ACCESS_TOKEN');
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [BlogAdminComponent],
+        imports: [
+          AppMaterialModule,
+          TranslateModule.forRoot({}),
+          BrowserAnimationsModule,
+          HttpClientTestingModule,
+          RouterTestingModule.withRoutes([{ path: 'edit-blog-admin', component: EditBlogAdminComponent }]),
+          NgxDaterangepickerMd,
+          SharedModule,
+          NgxMaterialTimepickerModule,
+          JwtModule.forRoot({
+            config: {
+              tokenGetter: () => {
+                return localStorage.getItem('ACCESS_TOKEN');
+              },
+              throwNoTokenError: true,
+              whitelistedDomains: [],
+              blacklistedRoutes: [],
             },
-            throwNoTokenError: true,
-            whitelistedDomains: [],
-            blacklistedRoutes: [],
-          },
-        }),
-      ],
+          }),
+        ],
 
-      schemas: [NO_ERRORS_SCHEMA],
-      providers: [{ provide: ContentService, useValue: mockContentService }],
-    }).compileComponents();
-    mockContentService.getBlogsAdmin.and.returnValue(of(response));
-    mockContentService.deleteBlog.and.returnValue(of(response));
-    mockContentService.activeBlog.and.returnValue(of(response));
-  }));
+        schemas: [NO_ERRORS_SCHEMA],
+        providers: [{ provide: ContentService, useValue: mockContentService }],
+      }).compileComponents();
+      mockContentService.getBlogsAdmin.and.returnValue(of(response));
+      mockContentService.deleteBlog.and.returnValue(of(response));
+      mockContentService.activeBlog.and.returnValue(of(response));
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BlogAdminComponent);

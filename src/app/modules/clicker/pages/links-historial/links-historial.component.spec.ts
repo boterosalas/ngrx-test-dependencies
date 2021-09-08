@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LinksHistorialComponent } from './links-historial.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
@@ -50,7 +50,7 @@ describe('LinksHistorialComponent', () => {
     length: 80,
   };
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [

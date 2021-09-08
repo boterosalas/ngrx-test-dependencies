@@ -1,5 +1,5 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -11,7 +11,7 @@ describe('TableNoveltiesComponent', () => {
   let component: TableNoveltiesComponent;
   let fixture: ComponentFixture<TableNoveltiesComponent>;
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TableNoveltiesComponent],
       imports: [AppMaterialModule, TranslateModule.forRoot({}), BrowserAnimationsModule, NgxPaginationModule],

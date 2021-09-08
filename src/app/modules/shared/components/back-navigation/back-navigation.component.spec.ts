@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BackNavigationComponent } from './back-navigation.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -9,7 +9,7 @@ describe('BackNavigationComponent', () => {
   let component: BackNavigationComponent;
   let fixture: ComponentFixture<BackNavigationComponent>;
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [BackNavigationComponent],
       imports: [FlexLayoutModule, AppMaterialModule, TranslateModule.forRoot({})],

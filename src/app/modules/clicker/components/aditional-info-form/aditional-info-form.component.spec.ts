@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AditionalInfoFormComponent } from './aditional-info-form.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -173,7 +173,7 @@ describe('AditionalInfoFormComponent', () => {
     objectResponse: [],
   };
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [AditionalInfoFormComponent],
       imports: [

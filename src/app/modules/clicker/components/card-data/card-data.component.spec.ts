@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CardDataComponent } from './card-data.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -8,7 +8,7 @@ describe('CardDataComponent', () => {
   let component: CardDataComponent;
   let fixture: ComponentFixture<CardDataComponent>;
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [CardDataComponent],
       imports: [TranslateModule.forRoot(), AppMaterialModule],

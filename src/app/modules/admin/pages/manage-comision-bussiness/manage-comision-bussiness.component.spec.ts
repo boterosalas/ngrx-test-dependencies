@@ -1,16 +1,12 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {
-  MatDatepickerModule,
-  MatDialog,
-  MatDialogRef,
-  MatMenuModule,
-  MatNativeDateModule,
-  MatSlideToggleModule,
-  MAT_DIALOG_DATA,
-} from '@angular/material';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
@@ -27,8 +23,8 @@ import { ManageComisionBussinessComponent } from './manage-comision-bussiness.co
 describe('ManageComisionBussinessComponent', () => {
   let component: ManageComisionBussinessComponent;
   const dialogMock = {
-    close: () => { },
-    beforeClosed: () => { },
+    close: () => {},
+    beforeClosed: () => {},
   };
   let fixture: ComponentFixture<ManageComisionBussinessComponent>;
   const mockContentService = jasmine.createSpyObj('ContentService', [
@@ -42,7 +38,7 @@ describe('ManageComisionBussinessComponent', () => {
     objectResponse: [],
   };
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll']);
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ManageComisionBussinessComponent, SearchUsersComponent],
       imports: [
@@ -123,7 +119,7 @@ describe('ManageComisionBussinessComponent', () => {
       description: '',
       commissionclicker: '',
       commissionbusiness: '',
-      idcommission: ''
+      idcommission: '',
     };
     component.editCategoryCom(element);
     expect(element.code).toBe('');
@@ -133,7 +129,4 @@ describe('ManageComisionBussinessComponent', () => {
     component.editSaveComisionCategory();
     expect(mockContentService.saveComisionCategory).toHaveBeenCalled();
   });
-
-
-
 });

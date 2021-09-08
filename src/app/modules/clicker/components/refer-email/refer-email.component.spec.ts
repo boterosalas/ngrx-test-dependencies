@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReferEmailComponent } from './refer-email.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -10,7 +10,7 @@ describe('ReferEmailComponent', () => {
   let component: ReferEmailComponent;
   let fixture: ComponentFixture<ReferEmailComponent>;
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ReferEmailComponent],
       imports: [TranslateModule.forRoot(), AppMaterialModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule],

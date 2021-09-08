@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginformComponent } from './loginform.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -69,7 +69,7 @@ describe('LoginformComponent', () => {
     navigate: jasmine.createSpy('navigate'),
   };
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [LoginformComponent],
       imports: [

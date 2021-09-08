@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegisterformComponent } from './registerform.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -125,7 +125,7 @@ describe('RegisterformComponent', () => {
       },
     ],
   };
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [RegisterformComponent],
       imports: [

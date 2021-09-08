@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LinkGeneratorFormComponent } from './link-generator-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -10,7 +10,7 @@ describe('LinkGeneratorFormComponent', () => {
   let component: LinkGeneratorFormComponent;
   let fixture: ComponentFixture<LinkGeneratorFormComponent>;
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [LinkGeneratorFormComponent],
       imports: [ReactiveFormsModule, FormsModule, TranslateModule.forRoot(), AppMaterialModule, NoopAnimationsModule],

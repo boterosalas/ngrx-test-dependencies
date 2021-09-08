@@ -1,9 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogUserComponent } from './dialog-user.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef, MatSlideToggleModule, MatMenuModule } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -13,6 +14,8 @@ import { of } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatMenuModule } from '@angular/material/menu';
 
 describe('DialogUserComponent', () => {
   let component: DialogUserComponent;
@@ -61,7 +64,7 @@ describe('DialogUserComponent', () => {
     userMessage: 'Se ha guardado satisfactoriamente',
     objectResponse: null,
   };
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [DialogUserComponent],
       imports: [

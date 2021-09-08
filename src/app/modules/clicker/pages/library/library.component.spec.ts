@@ -1,10 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LibraryComponent } from './library.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule, MatDialogRef, MAT_BOTTOM_SHEET_DATA, MatDialog } from '@angular/material';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ShareModule } from '@ngx-share/core';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -13,6 +12,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialog } from '@angular/material/dialog';
 
 describe('LibraryComponent', () => {
   let component: LibraryComponent;
@@ -24,7 +25,7 @@ describe('LibraryComponent', () => {
     userMessage: 'se ha enviado un correo',
     objectResponse: [{}],
   };
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [LibraryComponent],
       imports: [

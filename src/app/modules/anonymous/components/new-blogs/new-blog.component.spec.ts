@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewBlogComponent } from './new-blog.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -9,7 +9,7 @@ describe('NewBlogComponent', () => {
   let component: NewBlogComponent;
   let fixture: ComponentFixture<NewBlogComponent>;
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NewBlogComponent],
       imports: [TranslateModule.forRoot(), RouterTestingModule.withRoutes([]), AppMaterialModule],

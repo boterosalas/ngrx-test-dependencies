@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UsersComponent } from './users.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
@@ -159,7 +159,7 @@ describe('UsersComponent', () => {
     objectResponse: [],
   };
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [DialogEditComponent],
       imports: [

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ActivateAccountFormComponent } from './activate-account-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -18,7 +18,7 @@ describe('ActivateAccountFormComponent', () => {
   let component: ActivateAccountFormComponent;
   let fixture: ComponentFixture<ActivateAccountFormComponent>;
   const mockAuthService = jasmine.createSpyObj('AuthService', ['sendActivation']);
-  const mockUtilsService = jasmine.createSpyObj('UtilsService', ['showloginForm']);
+  const mockUtilsService = jasmine.createSpyObj('UtilsService', ['showloginForm', 'hideloginForm']);
   const Success = {
     state: 'Success',
     userMessage: null,
@@ -34,7 +34,7 @@ describe('ActivateAccountFormComponent', () => {
       userMessage: 'Internal server error',
     },
   };
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ActivateAccountFormComponent],
       imports: [

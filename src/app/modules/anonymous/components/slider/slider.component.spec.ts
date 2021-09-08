@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SliderComponent } from './slider.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
@@ -13,12 +13,13 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateModule } from '@ngx-translate/core';
 import { ShareModule } from '@ngx-share/core';
-import { MatDialogRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LinksService } from 'src/app/services/links.service';
+import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
+import { MatDialogRef } from '@angular/material/dialog';
 
 describe('SliderComponent', () => {
   let component: SliderComponent;
@@ -101,7 +102,7 @@ describe('SliderComponent', () => {
     title: 'Mercado',
   };
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SliderComponent],
       imports: [

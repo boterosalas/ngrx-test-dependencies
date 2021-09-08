@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MissionLevelComponent } from './mission-level.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
@@ -7,7 +7,7 @@ describe('MissionLevelComponent', () => {
   let component: MissionLevelComponent;
   let fixture: ComponentFixture<MissionLevelComponent>;
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [MissionLevelComponent],
       imports: [AppMaterialModule],
