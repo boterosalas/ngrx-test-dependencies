@@ -1,4 +1,4 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 
 import { ComissionTableComponent } from './comission-table.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -8,6 +8,7 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ContentService } from 'src/app/services/content.service';
 import { of } from 'rxjs';
+import { By } from 'protractor';
 
 describe('ComissionTableComponent', () => {
   let component: ComissionTableComponent;
@@ -391,13 +392,11 @@ describe('ComissionTableComponent', () => {
     expect(component).toBeTruthy();
     expect(mockContentService.getCommissions).toHaveBeenCalled();
   });
-
-  //it("class tags", () => {
-  //   component.addTagsTableComission();
-  //   fixture.whenStable().then(()=> {
-  //     const nativeElementInput = fixture.nativeElement;
-  //     const tab = nativeElementInput.querySelector("'.mat-tab-label[aria-posinset='1']'");
-  //     expect(tab).toHaveClass('gtmTablaComiClicMenuMovilExito');
-  //   })
-  // });
+/*
+  it('class tags', fakeAsync(() => {
+    fixture.detectChanges();
+    tick(2000);
+    fixture.detectChanges();
+    expect(document.querySelector('.mat-tab-label[aria-posinset="1"]')).toHaveClass('gtmTablaComiClicMenuMovilExito');
+  })); */
 });

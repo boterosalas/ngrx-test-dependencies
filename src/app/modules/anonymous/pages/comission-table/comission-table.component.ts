@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { interval, Subscription } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
 
 @Component({
@@ -10,7 +11,8 @@ export class ComissionTableComponent implements OnInit {
   constructor(private content: ContentService) {}
 
   tableComission = [];
-
+  interval = interval(1000);
+  intervalSubscription: Subscription;
   ngOnInit() {
     this.getComission();
     this.addTagsTableComission();
@@ -22,8 +24,8 @@ export class ComissionTableComponent implements OnInit {
     });
   }
 
-  public addTagsTableComission() {
-    const interval = setInterval(() => {
+  addTagsTableComission() {
+    this.intervalSubscription = this.interval.subscribe(() => {
       document.querySelector('.mat-tab-label[aria-posinset="1"]').classList.add('gtmTablaComiClicMenuMovilExito');
       document.querySelector('.mat-tab-label[aria-posinset="1"] .mat-tab-label-content').classList.add('gtmTablaComiClicMenuMovilExito');
 
@@ -41,10 +43,10 @@ export class ComissionTableComponent implements OnInit {
 
       document.querySelector('.mat-tab-label[aria-posinset="5"]').classList.add('gtmTablaComiClicMenuExito');
       document.querySelector('.mat-tab-label[aria-posinset="5"] .mat-tab-label-content').classList.add('gtmTablaComiClicMenuExito');
+    });
 
-      if (document.querySelector('.mat-tab-label[aria-posinset="1"]')) {
-        clearInterval(interval);
-      }
-    }, 1000);
+    if (document.querySelector('.mat-tab-label[aria-posinset="1"]')) {
+      this.intervalSubscription.unsubscribe();
+    }
   }
 }

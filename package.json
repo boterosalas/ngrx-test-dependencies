@@ -8,8 +8,8 @@
     "build-qa": "ng build --output-hashing=all --configuration=qa",
     "build-uat": "ng build --output-hashing=all --configuration=uat",
     "build-pr": "ng build --output-hashing=all --configuration=prod",
-    "test": "ng test --code-coverage --source-map=false --karma-config=./karma.conf.js",
-    "testwatch": "ng test --code-coverage --source-map=false --karma-config=./karma.conf.js --watch",
+    "test": "ng test --code-coverage=true --source-map=false --karma-config=./karma.conf.js",
+    "testwatch": "ng test --code-coverage=true --source-map=false --karma-config=./karma.conf.js --watch",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -52,6 +52,7 @@
     "highcharts": "^7.2.2",
     "jquery": "^3.4.1",
     "jwt-decode": "^2.2.0",
+    "karma-coverage": "^2.0.3",
     "moment": "^2.29.1",
     "ng-circle-progress": "^1.6.0",
     "ng-navigator-share": "^1.0.4",

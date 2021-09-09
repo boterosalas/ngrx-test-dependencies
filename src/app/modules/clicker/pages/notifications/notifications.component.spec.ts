@@ -63,13 +63,15 @@ describe('NotificationsComponent', () => {
     },
   };
 
-beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [],
-      imports: [ClickerModule, RouterTestingModule, HttpClientTestingModule, BrowserAnimationsModule],
-      providers: [{ provide: ContentService, useValue: mockContentService }],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [],
+        imports: [ClickerModule, RouterTestingModule, HttpClientTestingModule, BrowserAnimationsModule],
+        providers: [{ provide: ContentService, useValue: mockContentService }],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NotificationsComponent);
@@ -93,12 +95,32 @@ beforeEach(waitForAsync(() => {
       id: '1',
     };
     component.showNotification(data);
+    component.innerWidth = 500;
     expect(mockContentService.viewNotification).toHaveBeenCalled();
   });
 
   it('delete notification', () => {
     component.deleteNotication();
     expect(mockContentService.deleteNotificationUser).toHaveBeenCalled();
+  });
+
+  it('on checked true', () => {
+    component.onCheckChange({ checked: true, source: { value: 1 } });
+    expect(component.formArray.length).toBeGreaterThan(0);
+  });
+
+  it('view notification', () => {
+    component.viewNotification({ value: 'prueba' });
+    expect(mockContentService.viewNotification).toHaveBeenCalled();
+  });
+
+  it('viewedall', () => {
+    component.viewedAll();
+    component.formArray.push(1);
+    expect(component.formArray.length).toBeGreaterThan(0);
+    component.formArray.forEach((element) => {
+      expect(element).not.toBeUndefined();
+    });
   });
 
   afterAll(() => {

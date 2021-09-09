@@ -11,13 +11,15 @@ describe('TableNoveltiesComponent', () => {
   let component: TableNoveltiesComponent;
   let fixture: ComponentFixture<TableNoveltiesComponent>;
 
-beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [TableNoveltiesComponent],
-      imports: [AppMaterialModule, TranslateModule.forRoot({}), BrowserAnimationsModule, NgxPaginationModule],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TableNoveltiesComponent],
+        imports: [AppMaterialModule, TranslateModule.forRoot({}), BrowserAnimationsModule, NgxPaginationModule],
+        schemas: [NO_ERRORS_SCHEMA],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TableNoveltiesComponent);
@@ -27,5 +29,18 @@ beforeEach(waitForAsync(() => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    expect(component.displayedColumns).toBeTruthy();
+    component.totalItems = 1;
+    expect(component.totalItems).toBeTruthy();
+  });
+  it('emit dialog', () => {
+    spyOn(component.dataNoveltie, 'emit');
+    component.openDialog({});
+    expect(component.dataNoveltie.emit).toHaveBeenCalled();
+  });
+  it('sort emit', () => {
+    spyOn(component.sortNoveltie, 'emit');
+    component.sortData({ prueba: 0 });
+    expect(component.sortNoveltie.emit).toHaveBeenCalled();
   });
 });

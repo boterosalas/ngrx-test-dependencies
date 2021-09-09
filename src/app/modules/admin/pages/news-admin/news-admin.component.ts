@@ -1,8 +1,8 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialogRef, MatDialog } from "@angular/material/dialog";
-import { MatPaginatorIntl } from "@angular/material/paginator";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { ResponseService } from 'src/app/interfaces/response';
@@ -147,7 +147,7 @@ export class NewsAdminComponent implements OnInit {
     firstDay: 1, // first day is monday
   };
 
-  private openSnackBar(message: string, action: string) {
+  openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 5000,
     });

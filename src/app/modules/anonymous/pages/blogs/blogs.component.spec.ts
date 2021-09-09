@@ -34,34 +34,36 @@ describe('BlogsComponent', () => {
       total: 1,
     },
   };
-beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [BlogsComponent],
-      imports: [
-        AppMaterialModule,
-        TranslateModule.forRoot({}),
-        BrowserAnimationsModule,
-        HttpClientTestingModule,
-        RouterTestingModule.withRoutes([]),
-        SharedModule,
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [BlogsComponent],
+        imports: [
+          AppMaterialModule,
+          TranslateModule.forRoot({}),
+          BrowserAnimationsModule,
+          HttpClientTestingModule,
+          RouterTestingModule.withRoutes([]),
+          SharedModule,
 
-        JwtModule.forRoot({
-          config: {
-            tokenGetter: () => {
-              return localStorage.getItem('ACCESS_TOKEN');
+          JwtModule.forRoot({
+            config: {
+              tokenGetter: () => {
+                return localStorage.getItem('ACCESS_TOKEN');
+              },
+              throwNoTokenError: true,
+              whitelistedDomains: [],
+              blacklistedRoutes: [],
             },
-            throwNoTokenError: true,
-            whitelistedDomains: [],
-            blacklistedRoutes: [],
-          },
-        }),
-      ],
+          }),
+        ],
 
-      schemas: [NO_ERRORS_SCHEMA],
-      providers: [{ provide: ContentService, useValue: mockContentService }],
-    }).compileComponents();
-    mockContentService.getBlogs.and.returnValue(of(response));
-  }));
+        schemas: [NO_ERRORS_SCHEMA],
+        providers: [{ provide: ContentService, useValue: mockContentService }],
+      }).compileComponents();
+      mockContentService.getBlogs.and.returnValue(of(response));
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BlogsComponent);
@@ -71,6 +73,17 @@ beforeEach(waitForAsync(() => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    expect(component.orderBy).toEqual('RELEVANT');
+  });
+
+  it('get blogs', () => {
+    const data = {
+      from: 1,
+      to: 2,
+      orderBy: 'RELEVANT',
+    };
+    expect(mockContentService.getBlogs).toHaveBeenCalled();
+    expect(component.blogsData).toBeTruthy();
   });
   it('order by', () => {
     component.orderByFun({ value: 'RECENT' });

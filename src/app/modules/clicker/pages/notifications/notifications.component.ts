@@ -68,6 +68,7 @@ export class NotificationsComponent implements OnInit {
 
   onCheckChange(event) {
     if (event.checked) {
+
       this.formArray.push(event.source.value);
     } else {
       const index = this.formArray.indexOf(event.source.value);
@@ -82,7 +83,7 @@ export class NotificationsComponent implements OnInit {
     }
   }
 
-  private viewNotification(data) {
+  public viewNotification(data) {
     this._content.viewNotification(data).subscribe(() => {
       this.getNoticationsLoad();
     });
