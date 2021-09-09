@@ -19,55 +19,108 @@ import { of } from 'rxjs';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
+
 describe('ContentLibraryComponent', () => {
   let component: ContentLibraryComponent;
   let fixture: ComponentFixture<ContentLibraryComponent>;
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll']);
-  const mockContentService = jasmine.createSpyObj('ContentService', ['getVideosImage', 'setContentImgVi', 'deleteContent']);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getVideosImage', 'getBusiness', 'setContentImgVi', 'deleteContent']);
   const audit = {
     state: 'success',
     userMessage: 'se ha enviado un correo',
     objectResponse: [{}],
   };
-beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ContentLibraryComponent],
-      imports: [
-        TranslateModule.forRoot(),
-        AnonymousModule,
-        AppMaterialModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        HttpClientTestingModule,
-        ReactiveFormsModule,
-        FormsModule,
-        BrowserAnimationsModule,
-        SharedModule,
-        NgxDaterangepickerMd,
-        RouterTestingModule.withRoutes([]),
-        JwtModule.forRoot({
-          config: {
-            tokenGetter: () => {
-              return localStorage.getItem('ACCESS_TOKEN');
-            },
-            throwNoTokenError: true,
-            whitelistedDomains: [],
-            blacklistedRoutes: [],
-          },
-        }),
-      ],
 
-      schemas: [NO_ERRORS_SCHEMA],
-      providers: [
-        { provide: MatDialog, useValue: mockDialog },
-        { provide: ContentService, useValue: mockContentService },
-      ],
-    }).compileComponents();
-    mockContentService.getVideosImage.and.returnValue(of(audit));
-    mockContentService.setContentImgVi.and.returnValue(of(audit));
-    //deleteContent
-    mockContentService.deleteContent.and.returnValue(of(audit));
-  }));
+  const allBusiness = [
+    {
+      id: 1,
+      code: 'exito',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg',
+      infoaditional: 'Hasta 9.6% de ganancia',
+      description: 'Almacenes Éxito',
+      orderby: 1,
+      active: false,
+    },
+    {
+      id: 14,
+      code: 'movil-exito',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-movil-exito.svg',
+      infoaditional: 'Ahora 10% de comisión',
+      description: 'Móvil Éxito',
+      orderby: 5,
+      active: true,
+    },
+    {
+      id: 3,
+      code: 'seguros',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.svg',
+      infoaditional: 'Hasta $32.000 de ganancia',
+      description: 'Seguros Éxito',
+      orderby: 3,
+      active: true,
+    },
+    {
+      id: 4,
+      code: 'viajes',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-viajes.svg',
+      infoaditional: 'Hasta $40.000 de ganancia',
+      description: 'Viajes Éxito',
+      orderby: 4,
+      active: true,
+    },
+    {
+      id: 5,
+      code: 'wesura',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-wesura.svg',
+      infoaditional: 'Hasta 12.000 de ganancia',
+      description: 'Wesura',
+      orderby: 6,
+      active: true,
+    },
+  ];
+
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ContentLibraryComponent],
+        imports: [
+          TranslateModule.forRoot(),
+          AnonymousModule,
+          AppMaterialModule,
+          MatDatepickerModule,
+          MatNativeDateModule,
+          HttpClientTestingModule,
+          ReactiveFormsModule,
+          FormsModule,
+          BrowserAnimationsModule,
+          SharedModule,
+          NgxDaterangepickerMd,
+          RouterTestingModule.withRoutes([]),
+          JwtModule.forRoot({
+            config: {
+              tokenGetter: () => {
+                return localStorage.getItem('ACCESS_TOKEN');
+              },
+              throwNoTokenError: true,
+              whitelistedDomains: [],
+              blacklistedRoutes: [],
+            },
+          }),
+        ],
+
+        schemas: [NO_ERRORS_SCHEMA],
+        providers: [
+          { provide: MatDialog, useValue: mockDialog },
+          { provide: ContentService, useValue: mockContentService },
+        ],
+      }).compileComponents();
+      mockContentService.getBusiness.and.returnValue(of(allBusiness));
+      mockContentService.getVideosImage.and.returnValue(of(audit));
+      mockContentService.setContentImgVi.and.returnValue(of(audit));
+      //deleteContent
+      mockContentService.deleteContent.and.returnValue(of(audit));
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ContentLibraryComponent);
@@ -112,7 +165,7 @@ beforeEach(waitForAsync(() => {
   it('new file', () => {
     const mockFile = new File([''], 'name.jpg', { type: 'text/html' });
     const mockEvt = { target: { files: [mockFile] } };
-    component.onFileChangeFilesCont(mockEvt, 'ced');
+    component.onFileChangeFilesCont(mockEvt);
     expect(mockEvt).toBeDefined();
     component.dataReal = [
       { id: 1, dataR: true },

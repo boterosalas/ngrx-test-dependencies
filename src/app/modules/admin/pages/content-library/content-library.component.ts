@@ -34,32 +34,24 @@ export class ContentLibraryComponent implements OnInit, OnDestroy {
   nameFileCont: any;
   deleteVideoImg = [];
   fileCont: any;
-  selectAllVideosImg: string = 'Seleccionar todos';
+  selectAllVideosImg = 'Seleccionar todos';
   videosDispo = true;
   imagenDispo = true;
   url: string;
+  business = [];
   private subscription: Subscription = new Subscription();
-  constructor(private dialog: MatDialog, private content: ContentService, private route: ActivatedRoute, private _snackBar: MatSnackBar) {
-    this.subscription = this.route.params.subscribe((route) => {
-      if (route.id === undefined && route.titulo === undefined && route.imagen === undefined) {
-        this.id = '1';
-        this.title = 'exito';
-        this.image = 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg';
-      } else {
-        this.id = route.id;
-        this.title = route.titulo;
-        this.image = route.imagen;
-      }
-    });
-  }
+  constructor(private dialog: MatDialog, private content: ContentService, private _snackBar: MatSnackBar) {}
 
   ngOnInit() {
-    this.getVideosImages();
+    this.getAllBusiness();
   }
-  public getVideosImages() {
+
+
+  public getVideosImages(id: string) {
+    this.id = id;
     this.dataRealVideo = [];
     this.dataReal = [];
-    this.subscription = this.content.getVideosImage(this.id).subscribe((resp: any) => {
+    this.subscription = this.content.getVideosImage(id).subscribe((resp: any) => {
       if (resp.state === 'Success') {
         resp.objectResponse.forEach((element) => {
           if (element.filename.includes('mp4')) {
@@ -83,6 +75,7 @@ export class ContentLibraryComponent implements OnInit, OnDestroy {
       }
     });
   }
+
   public selectAll() {
     if (this.selectAllVideosImg === 'Seleccionar todos') {
       for (let i = 0; i < this.dataReal.length; i++) {
@@ -108,6 +101,7 @@ export class ContentLibraryComponent implements OnInit, OnDestroy {
       }
     }
   }
+
   public viewerPhoto(element: any) {
     const title = '';
     const template = this.templateVideo;
@@ -124,6 +118,7 @@ export class ContentLibraryComponent implements OnInit, OnDestroy {
       backdropClass: 'backdropBackground',
     });
   }
+
   public deleteEvery() {
     const id = '';
     const title = '';
@@ -137,6 +132,7 @@ export class ContentLibraryComponent implements OnInit, OnDestroy {
       },
     });
   }
+
   public loadDelete() {
     const index = [];
 
@@ -156,6 +152,7 @@ export class ContentLibraryComponent implements OnInit, OnDestroy {
       this.active = false;
     }
   }
+
   public viewerVideo(element: any) {
     const title = '';
     const template = this.templateVideoP;
@@ -207,11 +204,13 @@ export class ContentLibraryComponent implements OnInit, OnDestroy {
       });
     }
   }
+
   private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 5000,
     });
   }
+
   handleFileInput(event) {
     const fileList: FileList = event.target.files;
     const formData: FormData = new FormData();
@@ -227,13 +226,14 @@ export class ContentLibraryComponent implements OnInit, OnDestroy {
         if (resp.state === 'Success') {
           this.openSnackBar(resp.userMessage, 'Cerrar');
           this.myInputVariable.nativeElement.value = '';
+          this.getVideosImages(this.id);
         }
 
       });
     }
   }
 
-  public onFileChangeFilesCont(event, param: string) {
+  public onFileChangeFilesCont(event) {
     const nameFile = event.target.files[0].name;
     const reader = new FileReader();
     const sizeFile = event.target.files[0].size;
@@ -255,13 +255,16 @@ export class ContentLibraryComponent implements OnInit, OnDestroy {
       };
     }
   }
+
   public saveFormat() {
     const datos = {
       idBusiness: this.id,
       url: this.nameFileCont,
       content: this.fileCont,
     };
-    this.subscription = this.content.setContentImgVi(datos).subscribe();
+    this.subscription = this.content.setContentImgVi(datos).subscribe(save => {
+      this.getVideosImages(this.id);
+    });
   }
 
   public deleteVideos() {
@@ -277,14 +280,21 @@ export class ContentLibraryComponent implements OnInit, OnDestroy {
       }
     }
     this.subscription = this.content.deleteContent(this.deleteVideoImg).subscribe((resp) => {
-      this.getVideosImages();
+      this.getVideosImages(this.id);
       this.active = false;
       this.dialog.closeAll();
       this.selectAllVideosImg = 'Seleccionar todos';
     });
   }
+
   public cancelDelete() {
     this.dialog.closeAll();
+  }
+
+  public getAllBusiness() {
+    this.subscription = this.content.getBusiness().subscribe((resp) => {
+      this.business = resp;
+    });
   }
 
   ngOnDestroy(): void {

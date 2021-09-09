@@ -127,6 +127,11 @@ beforeEach(waitForAsync(() => {
     expect(mockContentService.getAllBusinessContent).toHaveBeenCalled();
   });
 
+  it('get content bussiness', () => {
+    component.getContentBussiness();
+    expect(mockContentService.getAllBusinessContent).toHaveBeenCalled();
+  });
+
   it('save Order', () => {
     mockContentService.orderCategory.and.returnValue(of(audit));
     component.saveOrder([

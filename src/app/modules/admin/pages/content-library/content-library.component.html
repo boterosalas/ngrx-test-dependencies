@@ -1,59 +1,41 @@
-<app-banner
-  title="Biblioteca de contenido"
-  img="/assets/img/banners/banner-dashboard-pc.jpg"
-  imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
-></app-banner>
 
-<div class="container mt-3">
-  <div class="mb-3" fxLayout="row" fxLayoutAlign="space-between center">
-    <div fxLayout="row">
-      <img class="image-bussiness" [src]="image" alt="" />
-      <span>
-        <h3>{{ title }} / Biblioteca de contenido</h3></span
-      >
-    </div>
-    <span fxLayout="row">
-      <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
-      <button mat-raised-button  class="back-button" [routerLink]="['/negocios-admin']">
-        <span
-          class="galano-bold f-16"
-          fxLayout="row"
-          fxLayoutAlign="start center"
-        >
-          <mat-icon>keyboard_arrow_left</mat-icon>
-          {{ "BUTTONS.BACK" | translate}}
-        </span>
-      </button>
-    </span>
-  </div>
-
+<div class="mb-3">
   <div fxLayout="row" fxLayoutAlign="space-between">
-    <div fxLayout="row">
-      <button mat-raised-button color="orange" (click)="selectAll()" class="button-selected mr-4">
-        <img class="icon-download" src="assets/img/dashboard/icon-check.svg" alt="descarga" />
-        {{ selectAllVideosImg }}
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center">
+
+      <mat-form-field class="selected-business separate">
+        <mat-placeholder class="selected-business">NEGOCIO</mat-placeholder>
+        <mat-select id="business" class="selected-business">
+          <mat-option (click)="getVideosImages(item.id)" *ngFor="let item of business" value="{{ item.id }}">
+            <span>{{ item.description }}</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button color="orange" (click)="selectAll()" class="mr-4">
+        <span fxLayoutAlign="start center">
+          {{ selectAllVideosImg }}
+          <i class="tio-all_done pl-2"></i>
+        </span>
       </button>
       <button
         mat-raised-button
+        color="red"
         (click)="deleteEvery()"
-        [ngClass]="active === true ? 'button-selected-red' : 'button-selected-red-disabled'"
         [disabled]="!active"
       >
-        <img class="icon-download" src="assets/img/dashboard/icon-trash-red.svg" alt="descarga" />
-        Borrar
-      </button>
-      <button mat-raised-button color="orange" (click)="getVideosImages()" class="button-selected ml-4">
-        <mat-icon class="cursor-pointer">update</mat-icon> Actualizar
+        <span fxLayoutAlign="start center">
+          Borrar
+          <i class="tio-delete pl-2"></i>
+        </span>
       </button>
     </div>
-    <span fxLayout="row">
-      <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
-
+    <span fxLayout="row" fxLayoutAlign="start center">
       <label for="cont" class="button-selected-label cursor-pointer">
-        <i class="tio-upload_on_cloud style-icon icon-update icon-download-file"></i>
-        Cargar Contenido</label
-      >
-      <input #inputFile (change)="handleFileInput($event)" id="cont" type="file" multiple />
+        Cargar Contenido
+        <i class="tio-upload_on_cloud style-icon icon-download-file"></i>
+      </label>
+        <input #inputFile (change)="handleFileInput($event)" id="cont" type="file" multiple />
     </span>
   </div>
 

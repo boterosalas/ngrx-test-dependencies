@@ -10,7 +10,7 @@ import { ContentService } from 'src/app/services/content.service';
   styleUrls: ['./dialog-filter-users.component.scss'],
 })
 export class DialogFilterUsersComponent implements OnInit, OnDestroy {
-  constructor(private fb: FormBuilder, private content: ContentService) {}
+  constructor(public fb: FormBuilder, private content: ContentService) {}
 
   private subscription: Subscription = new Subscription();
   maxDate = moment(new Date());
