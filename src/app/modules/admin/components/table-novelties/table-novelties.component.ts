@@ -15,7 +15,7 @@ export class TableNoveltiesComponent implements OnInit {
 
   infoUpdate = {};
 
-  displayedColumns: string[] = ['idclicker', 'subscription', 'users', 'identification', 'cellphone', 'email', 'days',  'status'];
+  displayedColumns: string[] = ['idclicker', 'subscription', 'users', 'identification', 'cellphone', 'email', 'responsetime',  'status'];
 
   ngOnInit() {}
 
