@@ -11,7 +11,7 @@
         <img src="/assets/img/message_failed.svg" alt="" />
       </div>
       <p>
-        No. de caso <span class="number">{{ currentNovelty.consecutive }}</span>
+        No. de caso <span class="number">{{ currentNovelty.consecutive }} </span> <span class="gray" *ngIf="currentNovelty.responsetime !== null" > (Solucionado en {{currentNovelty.responsetime}} días)</span>
       </p>
     </div>
     <div class="right">
