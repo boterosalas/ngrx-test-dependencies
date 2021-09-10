@@ -21,7 +21,7 @@ describe('NotificationDetailComponent', () => {
   let component: NotificationDetailComponent;
   let fixture: ComponentFixture<NotificationDetailComponent>;
 
-  const mockContentService = jasmine.createSpyObj('ContentService', ['saveNotificationAdmin']);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['saveNotificationAdmin', 'getNotificationDetailAdmin']);
 
   let response = {
     state: 'Success',
@@ -29,34 +29,42 @@ describe('NotificationDetailComponent', () => {
     objectResponse: null,
   };
 
-beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [NotificationDetailComponent, BannerComponent, LoadFormFileComponent],
-      imports: [
-        FormsModule,
-        ReactiveFormsModule,
-        RouterTestingModule,
-        HttpClientTestingModule,
-        TranslateModule.forRoot({}),
-        AppMaterialModule,
-        AngularEditorModule,
-        NgxDaterangepickerMd,
-        NgxMaterialTimepickerModule,
-        BrowserAnimationsModule,
-        JwtModule.forRoot({
-          config: {
-            tokenGetter: () => {
-              return localStorage.getItem('ACCESS_TOKEN');
+  let responseNotification = {
+    state: 'Success',
+    userMessage: 'Se han guardado los cambios satisfactoriamente',
+    objectResponse: { title: 'Prueba', content: 'Contenido de la prueba', filter: 'prueba' },
+  };
+
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [NotificationDetailComponent, BannerComponent, LoadFormFileComponent],
+        imports: [
+          FormsModule,
+          ReactiveFormsModule,
+          RouterTestingModule,
+          HttpClientTestingModule,
+          TranslateModule.forRoot({}),
+          AppMaterialModule,
+          AngularEditorModule,
+          NgxDaterangepickerMd,
+          NgxMaterialTimepickerModule,
+          BrowserAnimationsModule,
+          JwtModule.forRoot({
+            config: {
+              tokenGetter: () => {
+                return localStorage.getItem('ACCESS_TOKEN');
+              },
+              throwNoTokenError: true,
+              whitelistedDomains: [],
+              blacklistedRoutes: [],
             },
-            throwNoTokenError: true,
-            whitelistedDomains: [],
-            blacklistedRoutes: [],
-          },
-        }),
-      ],
-      providers: [{ provide: ContentService, useValue: mockContentService }],
-    }).compileComponents();
-  }));
+          }),
+        ],
+        providers: [{ provide: ContentService, useValue: mockContentService }],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NotificationDetailComponent);
@@ -66,6 +74,7 @@ beforeEach(waitForAsync(() => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    component.idNotification = 1;
   });
 
   it('on file change bad file', () => {
@@ -78,6 +87,8 @@ beforeEach(waitForAsync(() => {
   it('on file change file', () => {
     const mockFile = new File([''], 'name.xlsx', { type: 'text/html' });
     const mockEvt = { target: { files: [mockFile] } };
+    component.validFormat = true;
+    component.nameFileNotification = 'prueba.xls';
     component.onFileChangeNotification(mockEvt);
     expect(component.onFileChangeNotification).not.toBeNull();
   });
@@ -87,4 +98,15 @@ beforeEach(waitForAsync(() => {
     component.saveNotification();
     expect(mockContentService.saveNotificationAdmin).toHaveBeenCalled();
   });
+
+  it('get notification', () => {
+    mockContentService.getNotificationDetailAdmin.and.returnValue(of(responseNotification));
+    component.getNotification();
+    expect(mockContentService.getNotificationDetailAdmin).toHaveBeenCalled();
+  });
+
+ /*  it('get extension', () => {
+    component.getExtension('prueba.xls');
+    expect(component.validFormat).toBe(true);
+  }); */
 });
