@@ -34,5 +34,7 @@ beforeEach(waitForAsync(() => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    component.ngOnInit();
+    expect(component.questions.length).toBeGreaterThan(1);
   });
 });

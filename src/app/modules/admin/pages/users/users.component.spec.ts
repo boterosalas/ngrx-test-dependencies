@@ -20,6 +20,7 @@ import { DialogEditComponent } from 'src/app/modules/clicker/components/dialog-e
 import { UserService } from 'src/app/services/user.service';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 moment.locale('es');
 
@@ -28,7 +29,7 @@ describe('UsersComponent', () => {
   let fixture: ComponentFixture<UsersComponent>;
 
   const mockLinksService = jasmine.createSpyObj('LinksService', ['searchUsers', 'getUsersExcel', 'getHistoricalBankInformation']);
-
+  const mockSnackBar = jasmine.createSpyObj('MatSnackBar', ['open', 'closeAll', 'afterAllClosed']);
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open']);
   const mockDialogRef = jasmine.createSpyObj('MatDialogRef', ['close', 'afterClosed', 'componentInstance', 'event ']);
 
@@ -186,6 +187,7 @@ beforeEach(waitForAsync(() => {
       providers: [
         { provide: LinksService, useValue: mockLinksService },
         { provide: UserService, useValue: mockUserService },
+        { provide: MatSnackBar, useValue: mockSnackBar },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     })
@@ -226,6 +228,11 @@ beforeEach(waitForAsync(() => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('open snack bar', () => {
+    component.openSnackBar('prueba', 'actionPrueba');
+    expect(mockSnackBar.open).toHaveBeenCalled();
   });
 
   it('updateEmployee', () => {

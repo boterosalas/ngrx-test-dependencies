@@ -1,5 +1,4 @@
 import { waitForAsync, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
-
 import { ComissionTableComponent } from './comission-table.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
@@ -8,7 +7,6 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ContentService } from 'src/app/services/content.service';
 import { of } from 'rxjs';
-import { By } from 'protractor';
 
 describe('ComissionTableComponent', () => {
   let component: ComissionTableComponent;
@@ -390,13 +388,7 @@ describe('ComissionTableComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    component.ngOnInit();
     expect(mockContentService.getCommissions).toHaveBeenCalled();
   });
-/*
-  it('class tags', fakeAsync(() => {
-    fixture.detectChanges();
-    tick(2000);
-    fixture.detectChanges();
-    expect(document.querySelector('.mat-tab-label[aria-posinset="1"]')).toHaveClass('gtmTablaComiClicMenuMovilExito');
-  })); */
 });

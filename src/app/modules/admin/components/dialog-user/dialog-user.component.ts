@@ -135,7 +135,7 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  private openSnackBar(message: string, action: string) {
+  openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 3000,
     });

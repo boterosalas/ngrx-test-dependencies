@@ -462,7 +462,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
    * @param action accion
    */
 
-  private openSnackBar(message: string, action: string) {
+  openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 5000,
     });
