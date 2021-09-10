@@ -19,6 +19,7 @@ import { of } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 describe('DatailNewsComponent', () => {
   let component: DatailNewsComponent;
@@ -31,6 +32,7 @@ describe('DatailNewsComponent', () => {
     'getNewNovelties',
     'getNoveltiesById',
   ]);
+  const mockSnackBar = jasmine.createSpyObj('MatSnackBar', ['open', 'closeAll', 'afterAllClosed']);
 
   let mockRouter = {
     navigate: jasmine.createSpy('navigate'),
@@ -185,6 +187,7 @@ beforeEach(waitForAsync(() => {
       providers: [
         { provide: MatDialog, useValue: mockDialog },
         { provide: UserService, useValue: mockUserService },
+        { provide: MatSnackBar, useValue: mockSnackBar },
       ],
     }).compileComponents();
     mockUserService.getNoveltyById.and.returnValue(of(respDatos));
@@ -265,6 +268,7 @@ beforeEach(waitForAsync(() => {
     component.initForm();
     component.saveChanges();
     expect(mockUserService.setStatus).toHaveBeenCalled();
+    expect(mockSnackBar.open).toHaveBeenCalled();
     expect(component.active).toBeTruthy();
     component.onChangeSelected('Pendiente');
   });

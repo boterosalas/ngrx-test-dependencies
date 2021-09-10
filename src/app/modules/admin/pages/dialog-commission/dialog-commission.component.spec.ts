@@ -37,43 +37,45 @@ describe('DialogCommissionComponent', () => {
       commission: '2%',
     },
   ];
-beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [DialogCommissionComponent],
-      imports: [
-        AppMaterialModule,
-        HttpClientTestingModule,
-        ReactiveFormsModule,
-        FormsModule,
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [DialogCommissionComponent],
+        imports: [
+          AppMaterialModule,
+          HttpClientTestingModule,
+          ReactiveFormsModule,
+          FormsModule,
 
-        NoopAnimationsModule,
-        BrowserAnimationsModule,
-        TranslateModule.forRoot(),
-        RouterTestingModule.withRoutes([]),
-        MatMenuModule,
-        MatSlideToggleModule,
-        DragDropModule,
-        SharedModule,
-        JwtModule.forRoot({
-          config: {
-            tokenGetter: () => {
-              return localStorage.getItem('ACCESS_TOKEN');
+          NoopAnimationsModule,
+          BrowserAnimationsModule,
+          TranslateModule.forRoot(),
+          RouterTestingModule.withRoutes([]),
+          MatMenuModule,
+          MatSlideToggleModule,
+          DragDropModule,
+          SharedModule,
+          JwtModule.forRoot({
+            config: {
+              tokenGetter: () => {
+                return localStorage.getItem('ACCESS_TOKEN');
+              },
+              throwNoTokenError: true,
+              whitelistedDomains: [],
+              blacklistedRoutes: [],
             },
-            throwNoTokenError: true,
-            whitelistedDomains: [],
-            blacklistedRoutes: [],
-          },
-        }),
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
-      providers: [
-        { provide: ContentService, useValue: mockContentService },
-        { provide: MatDialog, useValue: mockDialog },
-      ],
-    }).compileComponents();
-    mockContentService.getCommissionsData.and.returnValue(of(response));
-    mockContentService.saveComision.and.returnValue(of(response));
-  }));
+          }),
+        ],
+        schemas: [NO_ERRORS_SCHEMA],
+        providers: [
+          { provide: ContentService, useValue: mockContentService },
+          { provide: MatDialog, useValue: mockDialog },
+        ],
+      }).compileComponents();
+      mockContentService.getCommissionsData.and.returnValue(of(response));
+      mockContentService.saveComision.and.returnValue(of(response));
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DialogCommissionComponent);
@@ -109,5 +111,11 @@ beforeEach(waitForAsync(() => {
     component.newComision();
     let datos = true;
     expect(datos).toBeTruthy();
+  });
+
+  it('save comition', () => {
+    component.saveComision();
+    expect(mockContentService.saveComision).toHaveBeenCalled();
+    expect(component.disabledButton).toBe(true);
   });
 });
