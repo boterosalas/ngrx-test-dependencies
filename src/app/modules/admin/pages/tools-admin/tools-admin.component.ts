@@ -7,6 +7,7 @@ import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-g
 import { ContentService } from 'src/app/services/content.service';
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
+import { DialogOnboardingComponent } from '../../components/dialog-onboarding/dialog-onboarding.component';
 export interface PeriodicElement {
   drag: any;
   bussiness: any;
@@ -88,6 +89,22 @@ export class ToolsAdminComponent implements OnInit {
   dataPopupProgrammed = [];
   dataPopupRoughCopy = [];
   dataPopupExpire = [];
+  onboarding = [
+    {
+      web: 'https://dummyimage.com/600x400/000/fff.jpg',
+      mobile: 'https://dummyimage.com/300x300/000/fff.jpg',
+      cta1: 'https://wwww.google.com',
+      cta2: 'https://wwww.google.com',
+      id: 1
+    },
+    {
+      web: 'https://dummyimage.com/600x400/000/fff.jpg',
+      mobile: 'https://dummyimage.com/300x300/000/fff.jpg',
+      cta1: 'https://wwww.google.com',
+      cta2: 'https://wwww.google.com',
+      id: 2
+    }
+  ];
 
   constructor(private dialog: MatDialog, private content: ContentService, private auth: AuthService, private fb: FormBuilder) {
     this.dataAddImagen = this.fb.group({
@@ -386,6 +403,12 @@ export class ToolsAdminComponent implements OnInit {
         template,
         edit,
       },
+    });
+  }
+
+  public openModalonBoarding() {
+    this.dialog.open(DialogOnboardingComponent, {
+      width: '450px',
     });
   }
 
@@ -895,6 +918,7 @@ export class ToolsAdminComponent implements OnInit {
       }
     });
   }
+
   public deleteEvery() {
     Swal.fire({
       html: "<h3 class='delete-title-comision'>Eliminar Imagenes</h3> <p class='w-container'>¿Estás seguro de eliminar las imagenes seleccionadas?</p>",
@@ -919,6 +943,27 @@ export class ToolsAdminComponent implements OnInit {
       }
     });
   }
+
+  public deleteBoard(id: any) {
+    Swal.fire({
+      html: "<h3 class='delete-title-comision'>Eliminar contenido</h3> <p class='w-container'>¿Está seguro que desea eliminar el contenido seleccionado?</p>",
+      confirmButtonText: 'Eliminar contenido',
+      cancelButtonText: 'Cancelar',
+      showCancelButton: true,
+      confirmButtonClass: 'updateokdelete order-last',
+      cancelButtonClass: 'updatecancel',
+      allowOutsideClick: false,
+    });
+  };
+
+  public editBoard(data: any) {
+    console.log(data);
+    this.dialog.open(DialogOnboardingComponent, {
+      width: '450px',
+      data
+    });
+  }
+
   public onNoClick() {
     this.dataAddImagenOfertas.reset();
     this.dataAddImagen.reset();
