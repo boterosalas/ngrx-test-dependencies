@@ -93,15 +93,19 @@ export class ToolsAdminComponent implements OnInit {
     {
       web: 'https://dummyimage.com/600x400/000/fff.jpg',
       mobile: 'https://dummyimage.com/300x300/000/fff.jpg',
-      cta1: 'https://wwww.google.com',
-      cta2: 'https://wwww.google.com',
+      linkcta1: 'https://wwww.google.com',
+      namecta1: 'Siguiente',
+      namecta2: 'Atras',
+      linkcta2: 'https://wwww.google.com',
       id: 1
     },
     {
       web: 'https://dummyimage.com/600x400/000/fff.jpg',
       mobile: 'https://dummyimage.com/300x300/000/fff.jpg',
-      cta1: 'https://wwww.google.com',
-      cta2: 'https://wwww.google.com',
+      linkcta1: 'https://wwww.google.com',
+      namecta1: 'Siguiente',
+      namecta2: 'Atras',
+      linkcta2: 'https://wwww.google.com',
       id: 2
     }
   ];
@@ -957,7 +961,6 @@ export class ToolsAdminComponent implements OnInit {
   };
 
   public editBoard(data: any) {
-    console.log(data);
     this.dialog.open(DialogOnboardingComponent, {
       width: '450px',
       data

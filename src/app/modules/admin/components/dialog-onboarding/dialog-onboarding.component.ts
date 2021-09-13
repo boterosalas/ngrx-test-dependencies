@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-dialog-onboarding',
@@ -22,8 +22,9 @@ export class DialogOnboardingComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+  ) {}
 
   ngOnInit() {
     this.formBoard();
@@ -31,12 +32,12 @@ export class DialogOnboardingComponent implements OnInit {
 
   public formBoard() {
     this.onBoard = this.fb.group({
-      image: [null, Validators.required],
-      image2: [null, Validators.required],
-      namecta1: [''],
-      linkcta1: [''],
-      namecta2: [''],
-      linkcta2: [''],
+      image: ['', Validators.required],
+      image2: ['', Validators.required],
+      namecta1: [this.data ? this.data.namecta1 : ''],
+      linkcta1: [this.data ? this.data.linkcta1 : ''],
+      namecta2: [this.data ? this.data.namecta2 : ''],
+      linkcta2: [this.data ? this.data.linkcta2 : ''],
     });
   }
 
