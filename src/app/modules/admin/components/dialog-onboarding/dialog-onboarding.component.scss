@@ -1,0 +1,23 @@
+@import 'variables';
+
+input[type='file'] {
+  display: none;
+}
+
+.w-icon {
+  width: 30px;
+}
+
+.small{
+    font-size: 11px;
+}
+
+.style-icon {
+    font-size: 22px;
+    color: $purple2;
+  }
+
+.title-gray{
+    text-transform: uppercase;
+    font-size: 12px;
+}
