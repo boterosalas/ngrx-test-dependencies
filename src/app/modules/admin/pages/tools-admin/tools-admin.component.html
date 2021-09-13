@@ -424,7 +424,12 @@
         <span>Onboarding</span>
       </ng-template>
       <div class="mt-3">
-        <app-table-onboarding [dataSource]="onboarding" (dataOnboardingDelete)="deleteBoard($event)" (dataOnboardingEdit)="editBoard($event)" (openBoard)="openModalonBoarding()"></app-table-onboarding>
+        <app-table-onboarding 
+        [dataSource]="onboarding"
+        (dataOnboardingDelete)="deleteBoard($event)"
+        (dataOnboardingEdit)="editBoard($event)"
+        (openBoard)="openModalonBoarding()"
+        ></app-table-onboarding>
       </div>
     </mat-tab>
 
