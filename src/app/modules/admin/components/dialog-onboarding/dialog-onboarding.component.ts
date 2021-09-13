@@ -18,6 +18,7 @@ export class DialogOnboardingComponent implements OnInit {
   activebutton: boolean;
   fileWeb: any;
   fileMobile: any;
+  activeButton: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -36,6 +37,38 @@ export class DialogOnboardingComponent implements OnInit {
       linkcta1: [''],
       namecta2: [''],
       linkcta2: [''],
+    });
+  }
+
+  public formBoardChange() {
+    this.onBoard.valueChanges.subscribe(value => {
+
+      if (value.namecta1 !== '' && value.linkcta1 === '' ) {
+        this.onBoard.controls.linkcta1.setErrors({require: true});
+      }
+
+      if (value.namecta1 === '' && value.linkcta1 !== '' ) {
+        this.onBoard.controls.namecta1.setErrors({require: true});
+      }
+
+      if (value.namecta2 !== '' && value.linkcta2 === '' ) {
+        this.onBoard.controls.linkcta2.setErrors({require: true});
+      }
+
+      if (value.namecta2 === '' && value.linkcta2 !== '' ) {
+        this.onBoard.controls.namecta2.setErrors({require: true});
+      }
+
+      if (value.namecta1 === '' && value.linkcta1 === '') {
+        this.onBoard.controls.namecta1.setErrors(null);
+        this.onBoard.controls.linkcta1.setErrors(null);
+      }
+
+      if (value.namecta2 === '' && value.linkcta2 === '') {
+        this.onBoard.controls.namecta2.setErrors(null);
+        this.onBoard.controls.linkcta2.setErrors(null);
+      }
+
     });
   }
 
