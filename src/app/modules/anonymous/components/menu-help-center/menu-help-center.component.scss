@@ -4,8 +4,28 @@
   opacity: 0.8;
 }
 
-.border-radius-10{
- border-radius: 10px;
+.border-radius-10 {
+  border-radius: 10px;
+}
+
+.show-tutorial {
+  margin-bottom: 15px;
+  background-color: #8d7eb7;
+  color: $white;
+  border-radius: 10px;
+  box-shadow: 0px 16px 20px #9aaacf1a;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  padding: 6px 10px;
+  position: relative;
+  mat-icon {
+    transform: rotateY(180deg);
+    position: absolute;
+    right: 10px;
+    top: 25%;
+  }
 }
 
 .active-topic {

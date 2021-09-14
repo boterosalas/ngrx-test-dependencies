@@ -15,10 +15,11 @@ import { SwUpdate } from '@angular/service-worker';
 declare var dataLayer: any;
 import { PopupComponent } from './modules/shared/components/popup/popup.component';
 import { Location } from '@angular/common';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import decode from 'jwt-decode';
 import { SidenavService } from './services/sidenav.service';
 import { onMainContentChange } from './animations/animations';
+import { OnboardingSwiperComponent } from './modules/shared/components/onboarding-swiper/onboarding-swiper.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -56,6 +57,7 @@ export class AppComponent implements OnInit, OnDestroy {
   lastName: string;
   email: string;
   userInfo: any;
+  onboardingViwed: boolean = false;
   managedPayments: boolean;
   isEmployee: boolean;
   role: string;
@@ -109,23 +111,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (this.swUpdate.isEnabled) {
-      this.swUpdate.available.subscribe(() => {
-        Swal.fire({
-          title: '¡Nueva versión disponible!',
-          text: 'Haz clic en el botón aceptar.',
-          type: 'info',
-          allowEscapeKey: false,
-          allowOutsideClick: false,
-          confirmButtonText: 'Aceptar',
-          confirmButtonClass: 'update-success',
-          customClass: 'paymentData',
-        }).then(() => {
-          window.location.reload();
-        });
-      });
-    }
-
     this.showAnimation1 = true;
     this.innerWidth = window.innerWidth;
     this.showLoginForm = true;
@@ -171,6 +156,48 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.windowWidth();
     this.getUserData();
+  }
+
+  /**
+   * Sigue la secuencia para abrir las modales
+   */
+  showModalsSecuence() {
+    if (!this.onboardingViwed) {
+      this.dialog
+        .open(OnboardingSwiperComponent, { panelClass: 'panel-class-onboarding' })
+        .afterClosed()
+        .subscribe(() => {
+          setTimeout(() => {
+            this.showUpdateModal();
+          }, 2000);
+        });
+    } else {
+      this.showUpdateModal();
+    }
+  }
+
+  /**
+   * Abre la modal si hay una nueva version de la app
+   */
+  public showUpdateModal() {
+    if (this.swUpdate.isEnabled) {
+      this.swUpdate.available.subscribe(() => {
+        Swal.fire({
+          title: '¡Nueva versión disponible!',
+          text: 'Haz clic en el botón aceptar.',
+          type: 'info',
+          allowEscapeKey: false,
+          allowOutsideClick: false,
+          confirmButtonText: 'Aceptar',
+          confirmButtonClass: 'update-success',
+          customClass: 'paymentData',
+        }).then(() => {
+          window.location.reload();
+        });
+      });
+    } else {
+      this.getPopUps();
+    }
   }
 
   public getPopUps() {
@@ -257,10 +284,12 @@ export class AppComponent implements OnInit, OnDestroy {
       if (role === 'CLICKER' || role === 'ADMIN' || role === 'SUPERADMIN') {
         this.email = this.token.userInfo().userName;
         this.subscription = this.user.getuserdata().subscribe((user) => {
+          this.onboardingViwed = user.onBoardingViewed;
           this.firstName = user.firstNames;
           this.lastName = user.lastNames;
           this.managedPayments = user.managedPayments;
           this.isEmployee = user.isEmployeeGrupoExito;
+          this.showModalsSecuence();
         });
       }
     });

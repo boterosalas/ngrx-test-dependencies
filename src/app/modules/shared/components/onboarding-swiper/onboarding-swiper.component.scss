@@ -1,0 +1,84 @@
+@import 'variables';
+@import 'general';
+
+:host {
+  display: block;
+  width: 100%;
+  .wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+
+    .close-dialog {
+      position: absolute;
+      right: -4px;
+      top: 0px;
+    }
+    .carousel {
+      width: 84%;
+      margin: 40px auto;
+      padding: 20px 0;
+      .item {
+        img {
+          width: 100%;
+        }
+        .actions {
+          padding: 25px 0 0;
+          display: flex;
+          justify-content: center;
+
+          button {
+            margin: 0 10px;
+            background-color: $purple2;
+            padding: 0 20px;
+            color: $white;
+          }
+        }
+      }
+    }
+    .arrows {
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      padding: 0 10px;
+      button {
+        width: 35px;
+        height: 35px;
+        background-color: #f3f1f6;
+        color: $primary-color;
+        border-radius: 100%;
+        mat-icon {
+          font-size: 20px;
+          line-height: 14px;
+          font-weight: bold;
+        }
+      }
+    }
+
+    @include from(400px) {
+      .close-dialog {
+        position: fixed;
+        right: 4px;
+        top: 6px;
+      }
+      .carousel {
+        .item {
+          .actions {
+            flex-direction: column;
+
+            button {
+              margin: 8px auto;
+            }
+          }
+        }
+      }
+      .arrows {
+        button {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+  }
+}
