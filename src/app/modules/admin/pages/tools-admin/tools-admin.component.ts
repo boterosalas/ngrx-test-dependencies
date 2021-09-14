@@ -284,8 +284,8 @@ export class ToolsAdminComponent implements OnInit {
     this.content.saveOrderOfertBusiness(datos).subscribe();
   }
   private getExtension(nameFile: string, getSize: number) {
-    let splitExtFile = nameFile.split('.');
-    let getExtFile = splitExtFile[splitExtFile.length - 1].toLocaleLowerCase();
+    const splitExtFile = nameFile.split('.');
+    const getExtFile = splitExtFile[splitExtFile.length - 1].toLocaleLowerCase();
     this.validFormat = false;
     if ('jpg' === getExtFile) {
       this.validFormat = true;
@@ -348,7 +348,7 @@ export class ToolsAdminComponent implements OnInit {
           this.fileImgCat2 = this.fileImgCat2.split(',')[1];
           this.nameFileCert2 = nameFileCarrousel2;
           this.showErrorCert2 = false;
-          if (this.nameFileCert != '') {
+          if (this.nameFileCert !== '') {
             this.activebutton = true;
           } else {
             this.activebutton = false;
