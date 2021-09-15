@@ -129,13 +129,13 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
   }
 
   public getBoardings() {
-   this.subscription = this.content.getBoarding().subscribe(board => {
+    this.subscription = this.content.getBoarding().subscribe(board => {
       this.onboarding = board;
     });
   }
 
   public getOffers() {
-  this.subscription =  this.content.getOffersbyType({ id: 'CARROUSEL', admin: true }).subscribe((resp) => {
+    this.subscription = this.content.getOffersbyType({ id: 'CARROUSEL', admin: true }).subscribe((resp) => {
       const startTime: any = new Date();
 
       this.dataSource = resp;
@@ -154,7 +154,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
         }
       }
     });
-  this.subscription = this.content.getOffersbyType({ id: 'OFERTA', admin: true }).subscribe((resp) => {
+    this.subscription = this.content.getOffersbyType({ id: 'OFERTA', admin: true }).subscribe((resp) => {
       const startTime: any = new Date();
       this.dataSourceOfer = resp;
       for (let index = 0; index < this.dataSourceOfer.length; index++) {
@@ -174,7 +174,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
 
       }
     });
-  this.subscription = this.content.getOffersbyType({ id: 'POPUP', admin: true }).subscribe((resp) => {
+    this.subscription = this.content.getOffersbyType({ id: 'POPUP', admin: true }).subscribe((resp) => {
       this.dataPopupActive = [];
       this.dataPopupProgrammed = [];
       this.dataPopupRoughCopy = [];
@@ -607,7 +607,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
       allowOutsideClick: false,
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
-        this.subscription =  this.content.deleteOfer([element.id]).subscribe(() => {
+        this.subscription = this.content.deleteOfer([element.id]).subscribe(() => {
           this.getOffers();
         });
       }
@@ -964,10 +964,14 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
   }
 
   public editBoard(data: any) {
-    this.dialog.open(DialogOnboardingComponent, {
+    const edit = this.dialog.open(DialogOnboardingComponent, {
       width: '450px',
       data
     });
+    edit.beforeClosed().subscribe(board => {
+      this.getBoardings();
+    });
+
   }
 
   public onNoClick() {

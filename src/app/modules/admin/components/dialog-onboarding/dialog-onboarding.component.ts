@@ -28,7 +28,20 @@ export class DialogOnboardingComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private content: ContentService
-  ) { }
+  ) {
+    console.log(data);
+
+    this.nameImageMobile = this.data ? 'Imagen-Mobile.jpg' : '';
+    this.nameImageWeb = this.data ? 'Imagen-Web.jpg' : '';
+
+    if (this.data) {
+      setTimeout(() => {
+        this.onBoard.controls.image.setErrors(null);
+        this.onBoard.controls.image2.setErrors(null);
+      }, 500);
+    }
+
+  }
 
   ngOnInit() {
     this.formBoard();
@@ -38,10 +51,10 @@ export class DialogOnboardingComponent implements OnInit, OnDestroy {
     this.onBoard = this.fb.group({
       image: ['', Validators.required],
       image2: ['', Validators.required],
-      namecta1: [this.data ? this.data.namecta1 : ''],
-      linkcta1: [this.data ? this.data.linkcta1 : ''],
-      namecta2: [this.data ? this.data.namecta2 : ''],
-      linkcta2: [this.data ? this.data.linkcta2 : ''],
+      namecta1: [this.data ? this.data.buttonname1 : ''],
+      linkcta1: [this.data ? this.data.linkname1 : ''],
+      namecta2: [this.data ? this.data.buttonname2 : ''],
+      linkcta2: [this.data ? this.data.linkname2 : ''],
     });
   }
 
@@ -137,8 +150,8 @@ export class DialogOnboardingComponent implements OnInit, OnDestroy {
     const dataLinkCta1 = this.onBoard.controls.linkcta1.value;
     const dataNameCta2 = this.onBoard.controls.namecta2.value;
     const dataLinkCta2 = this.onBoard.controls.linkcta2.value;
-    const imgWeb = this.splitb64(this.fileWeb);
-    const imgMobile = this.splitb64(this.fileMobile);
+    const imgWeb = this.fileWeb && this.splitb64(this.fileWeb);
+    const imgMobile = this.fileMobile && this.splitb64(this.fileMobile);
 
     const data = {
       id: this.data ? this.data.id : 0,
@@ -150,7 +163,9 @@ export class DialogOnboardingComponent implements OnInit, OnDestroy {
       linkName2: dataLinkCta2,
     };
 
-    this.subscription = this.content.saveBoardings(data).subscribe();
+    this.subscription = this.content.saveBoardings([data]).subscribe( saveboard => {
+      this.dialog.closeAll();
+    });
 
   }
 
