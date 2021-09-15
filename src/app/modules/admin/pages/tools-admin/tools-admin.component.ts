@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatTable } from '@angular/material';
 import * as moment from 'moment';
@@ -8,6 +8,7 @@ import { ContentService } from 'src/app/services/content.service';
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 import { DialogOnboardingComponent } from '../../components/dialog-onboarding/dialog-onboarding.component';
+import { Subscription } from 'rxjs';
 export interface PeriodicElement {
   drag: any;
   bussiness: any;
@@ -23,7 +24,7 @@ export interface PeriodicElement2 {
   templateUrl: './tools-admin.component.html',
   styleUrls: ['./tools-admin.component.scss'],
 })
-export class ToolsAdminComponent implements OnInit {
+export class ToolsAdminComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['drag', 'imagenWeb', 'imagenMobile', 'nameContent', 'link', 'bussiness', 'comision', 'active', 'actions'];
   displayedColumns2: string[] = ['drag', 'image', 'nameContent', 'link', 'bussiness', 'comision', 'active', 'actions'];
   dataAddImagen: FormGroup;
@@ -48,6 +49,7 @@ export class ToolsAdminComponent implements OnInit {
   @ViewChild('templatePublication', { static: false })
   templatePublication: TemplateRef<any>;
 
+  private subscription: Subscription = new Subscription();
   fileImgCat: any = '';
   nameFileCert = '';
   showErrorCert: boolean;
@@ -91,21 +93,21 @@ export class ToolsAdminComponent implements OnInit {
   dataPopupExpire = [];
   onboarding = [
     {
-      web: 'https://dummyimage.com/600x400/000/fff.jpg',
-      mobile: 'https://dummyimage.com/300x300/000/fff.jpg',
-      linkcta1: 'https://wwww.google.com',
-      namecta1: 'Siguiente',
-      namecta2: 'Atras',
-      linkcta2: 'https://wwww.google.com',
+      imageweb: 'https://dummyimage.com/600x400/000/fff.jpg',
+      imagemobile: 'https://dummyimage.com/300x300/000/fff.jpg',
+      linkname1: 'https://wwww.google.com',
+      buttonname1: 'Siguiente',
+      buttonname2: 'Atras',
+      linkname2: 'https://wwww.google.com',
       id: 1
     },
     {
-      web: 'https://dummyimage.com/600x400/000/fff.jpg',
-      mobile: 'https://dummyimage.com/300x300/000/fff.jpg',
-      linkcta1: 'https://wwww.google.com',
-      namecta1: 'Siguiente',
-      namecta2: 'Atras',
-      linkcta2: 'https://wwww.google.com',
+      imageweb: 'https://dummyimage.com/600x400/000/fff.jpg',
+      imagemobile: 'https://dummyimage.com/300x300/000/fff.jpg',
+      linkname1: 'https://wwww.google.com',
+      buttonname1: 'Siguiente',
+      buttonname2: 'Atras',
+      linkname2: 'https://wwww.google.com',
       id: 2
     }
   ];
@@ -141,9 +143,17 @@ export class ToolsAdminComponent implements OnInit {
     this.getOffers();
     this.getAllBusiness();
     this.getSectionsClicker();
+    this.getBoardings();
   }
+
+  public getBoardings() {
+   this.subscription = this.content.getBoarding().subscribe(board => {
+      this.onboarding = board;
+    });
+  }
+
   public getOffers() {
-    this.content.getOffersbyType({ id: 'CARROUSEL', admin: true }).subscribe((resp) => {
+  this.subscription =  this.content.getOffersbyType({ id: 'CARROUSEL', admin: true }).subscribe((resp) => {
       const startTime: any = new Date();
 
       this.dataSource = resp;
@@ -162,7 +172,7 @@ export class ToolsAdminComponent implements OnInit {
         }
       }
     });
-    this.content.getOffersbyType({ id: 'OFERTA', admin: true }).subscribe((resp) => {
+  this.subscription = this.content.getOffersbyType({ id: 'OFERTA', admin: true }).subscribe((resp) => {
       const startTime: any = new Date();
       this.dataSourceOfer = resp;
       for (let index = 0; index < this.dataSourceOfer.length; index++) {
@@ -182,7 +192,7 @@ export class ToolsAdminComponent implements OnInit {
 
       }
     });
-    this.content.getOffersbyType({ id: 'POPUP', admin: true }).subscribe((resp) => {
+  this.subscription = this.content.getOffersbyType({ id: 'POPUP', admin: true }).subscribe((resp) => {
       this.dataPopupActive = [];
       this.dataPopupProgrammed = [];
       this.dataPopupRoughCopy = [];
@@ -219,7 +229,7 @@ export class ToolsAdminComponent implements OnInit {
     });
   }
   public getAllBusiness() {
-    this.content.getAllBusiness().subscribe((resp) => {
+    this.subscription = this.content.getAllBusiness().subscribe((resp) => {
       this.selectedBuss = resp;
 
       this.selectedBuss.push({
@@ -233,7 +243,7 @@ export class ToolsAdminComponent implements OnInit {
   }
 
   public getSectionsClicker() {
-    this.auth.getPermisionByUser('CLICKER').subscribe((resp) => {
+    this.subscription = this.auth.getPermisionByUser('CLICKER').subscribe((resp) => {
       this.selectedSection = resp;
     });
   }
@@ -281,7 +291,7 @@ export class ToolsAdminComponent implements OnInit {
     this.saveOrder(datosSourceSend);
   }
   public saveOrder(datos: any) {
-    this.content.saveOrderOfertBusiness(datos).subscribe();
+    this.subscription = this.content.saveOrderOfertBusiness(datos).subscribe();
   }
   private getExtension(nameFile: string, getSize: number) {
     const splitExtFile = nameFile.split('.');
@@ -475,7 +485,7 @@ export class ToolsAdminComponent implements OnInit {
 
   public activate(element) {
     const datos = [{ id: element.id, active: element.active }];
-    this.content.saveActiveBanner(datos).subscribe();
+    this.subscription = this.content.saveActiveBanner(datos).subscribe();
   }
 
   public editOfertasModal(element) {
@@ -610,7 +620,7 @@ export class ToolsAdminComponent implements OnInit {
       allowOutsideClick: false,
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
-        this.content.deleteOfer([element.id]).subscribe(() => {
+        this.subscription =  this.content.deleteOfer([element.id]).subscribe(() => {
           this.getOffers();
         });
       }
@@ -688,7 +698,7 @@ export class ToolsAdminComponent implements OnInit {
       }
     }
 
-    this.content.saveOfertBusiness(datos).subscribe(() => {
+    this.subscription = this.content.saveOfertBusiness(datos).subscribe(() => {
       this.dataAddImagen.reset();
       this.dialog.closeAll();
       this.getOffers();
@@ -766,7 +776,7 @@ export class ToolsAdminComponent implements OnInit {
       }
     }
 
-    this.content.saveOfertBusiness(datos).subscribe(() => {
+    this.subscription = this.content.saveOfertBusiness(datos).subscribe(() => {
       this.dataAddImagenOfertas.reset();
       this.dialog.closeAll();
       this.getOffers();
@@ -825,7 +835,7 @@ export class ToolsAdminComponent implements OnInit {
       ];
     }
 
-    this.content.saveOfertBusiness(datos).subscribe(() => {
+    this.subscription = this.content.saveOfertBusiness(datos).subscribe(() => {
       this.dataAddImagenPopup.reset();
       this.dialog.closeAll();
       this.getOffers();
@@ -915,7 +925,7 @@ export class ToolsAdminComponent implements OnInit {
             datos.push(this.dataSourceOfer[index].id);
           }
         }
-        this.content.deleteOfer(datos).subscribe(() => {
+        this.subscription = this.content.deleteOfer(datos).subscribe(() => {
           this.getOffers();
           this.active2 = false;
         });
@@ -940,7 +950,7 @@ export class ToolsAdminComponent implements OnInit {
             datos.push(this.dataSource[index].id);
           }
         }
-        this.content.deleteOfer(datos).subscribe(() => {
+        this.subscription = this.content.deleteOfer(datos).subscribe(() => {
           this.getOffers();
           this.active = false;
         });
@@ -957,8 +967,14 @@ export class ToolsAdminComponent implements OnInit {
       confirmButtonClass: 'updateokdelete order-last',
       cancelButtonClass: 'updatecancel',
       allowOutsideClick: false,
+    }).then((resp: any) => {
+      if (resp.dismiss !== 'cancel') {
+        this.subscription = this.content.deleteBoardings([id]).subscribe(() => {
+          this.getBoardings();
+        });
+      }
     });
-  };
+  }
 
   public editBoard(data: any) {
     this.dialog.open(DialogOnboardingComponent, {
@@ -1033,4 +1049,9 @@ export class ToolsAdminComponent implements OnInit {
     const section = this.selectedSection.find((x) => x.route === url);
     return section ? section.menu : '';
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }

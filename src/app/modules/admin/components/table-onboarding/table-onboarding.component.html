@@ -14,7 +14,7 @@
       <td mat-cell *matCellDef="let element">
         <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
           <mat-icon matSuffix class="mr-1 blue cursor-pointer" cdkDragHandle>drag_indicator</mat-icon>
-          <img class="imageboard" [src]="element.web" />
+          <img class="imageboard" [src]="element.imageweb" />
         </span>
       </td>
     </ng-container>
@@ -22,18 +22,18 @@
     <ng-container matColumnDef="mobile">
       <th mat-header-cell *matHeaderCellDef>imagen mobile</th>
       <td mat-cell *matCellDef="let element">
-        <img class="imageboard" [src]="element.mobile" />
+        <img class="imageboard" [src]="element.imagemobile" />
       </td>
     </ng-container>
     <!-- cta1 Column -->
     <ng-container matColumnDef="cta1">
       <th mat-header-cell *matHeaderCellDef>CTa 1</th>
-      <td mat-cell *matCellDef="let element">{{ element.linkcta1 }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.linkname1 }}</td>
     </ng-container>
     <!-- cta2 Column -->
     <ng-container matColumnDef="cta2">
       <th mat-header-cell *matHeaderCellDef>CTa 2</th>
-      <td mat-cell *matCellDef="let element">{{ element.linkcta2 }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.linkname2 }}</td>
     </ng-container>
     <!-- actions Column -->
     <ng-container matColumnDef="actions">

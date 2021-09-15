@@ -1,13 +1,15 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { Subscription } from 'rxjs';
+import { ContentService } from 'src/app/services/content.service';
 
 @Component({
   selector: 'app-dialog-onboarding',
   templateUrl: './dialog-onboarding.component.html',
   styleUrls: ['./dialog-onboarding.component.scss']
 })
-export class DialogOnboardingComponent implements OnInit {
+export class DialogOnboardingComponent implements OnInit, OnDestroy {
 
   onBoard: FormGroup;
   nameImageWeb = '';
@@ -19,12 +21,14 @@ export class DialogOnboardingComponent implements OnInit {
   fileWeb: any;
   fileMobile: any;
   activeButton: boolean;
+  private subscription: Subscription = new Subscription();
 
   constructor(
     private fb: FormBuilder,
     private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
-  ) {}
+    private content: ContentService
+  ) { }
 
   ngOnInit() {
     this.formBoard();
@@ -44,20 +48,20 @@ export class DialogOnboardingComponent implements OnInit {
   public formBoardChange() {
     this.onBoard.valueChanges.subscribe(value => {
 
-      if (value.namecta1 !== '' && value.linkcta1 === '' ) {
-        this.onBoard.controls.linkcta1.setErrors({require: true});
+      if (value.namecta1 !== '' && value.linkcta1 === '') {
+        this.onBoard.controls.linkcta1.setErrors({ require: true });
       }
 
-      if (value.namecta1 === '' && value.linkcta1 !== '' ) {
-        this.onBoard.controls.namecta1.setErrors({require: true});
+      if (value.namecta1 === '' && value.linkcta1 !== '') {
+        this.onBoard.controls.namecta1.setErrors({ require: true });
       }
 
-      if (value.namecta2 !== '' && value.linkcta2 === '' ) {
-        this.onBoard.controls.linkcta2.setErrors({require: true});
+      if (value.namecta2 !== '' && value.linkcta2 === '') {
+        this.onBoard.controls.linkcta2.setErrors({ require: true });
       }
 
-      if (value.namecta2 === '' && value.linkcta2 !== '' ) {
-        this.onBoard.controls.namecta2.setErrors({require: true});
+      if (value.namecta2 === '' && value.linkcta2 !== '') {
+        this.onBoard.controls.namecta2.setErrors({ require: true });
       }
 
       if (value.namecta1 === '' && value.linkcta1 === '') {
@@ -137,21 +141,26 @@ export class DialogOnboardingComponent implements OnInit {
     const imgMobile = this.splitb64(this.fileMobile);
 
     const data = {
-      imageWeb: imgWeb,
-      imageMobile: imgMobile,
-      namecta1: dataNameCta1,
-      linkcta1: dataLinkCta1,
-      namecta2: dataNameCta2,
-      linkcta2: dataLinkCta2,
+      id: this.data ? this.data.id : 0,
+      imageBase64Web: imgWeb,
+      imageBase64Mobile: imgMobile,
+      buttonName1: dataNameCta1,
+      linkName1: dataLinkCta1,
+      buttonName2: dataNameCta2,
+      linkName2: dataLinkCta2,
     };
 
-    console.log(data);
+    this.subscription = this.content.saveBoardings(data).subscribe();
 
   }
 
   private splitb64(file: any) {
     const explit64 = file.split('data:application/octet-stream;base64,');
     return file = explit64[1];
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

@@ -1,6 +1,8 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material';
+import { Subscription } from 'rxjs';
+import { ContentService } from 'src/app/services/content.service';
 import { PeriodicElement } from '../table-activate-business/table-activate-business.component';
 
 @Component({
@@ -8,18 +10,22 @@ import { PeriodicElement } from '../table-activate-business/table-activate-busin
   templateUrl: './table-onboarding.component.html',
   styleUrls: ['./table-onboarding.component.scss']
 })
-export class TableOnboardingComponent implements OnInit {
+export class TableOnboardingComponent implements OnInit, OnDestroy {
 
   @Input() dataSource;
   @Output() dataOnboardingDelete = new EventEmitter();
   @Output() dataOnboardingEdit = new EventEmitter();
   @Output() openBoard = new EventEmitter();
   @ViewChild('table', { static: false }) table: MatTable<any>;
+  private subscription: Subscription = new Subscription();
+
+  constructor(private content: ContentService) {
+  }
 
 
   displayedColumns: string[] = ['web', 'mobile', 'cta1', 'cta2', 'actions'];
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   deleteItem(dataSource) {
     this.dataOnboardingDelete.emit(dataSource);
@@ -45,7 +51,15 @@ export class TableOnboardingComponent implements OnInit {
         orderby: i + 1,
       });
     }
-    console.log(datosSourceSend);
-    // this.saveOrder(datosSourceSend);
+    this.saveOrderBoarding(datosSourceSend);
   }
+
+  public saveOrderBoarding(datos: any) {
+    this.subscription = this.content.saveOrderBoarding(datos).subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }
