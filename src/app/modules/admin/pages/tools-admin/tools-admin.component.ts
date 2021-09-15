@@ -91,26 +91,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
   dataPopupProgrammed = [];
   dataPopupRoughCopy = [];
   dataPopupExpire = [];
-  onboarding = [
-    {
-      imageweb: 'https://dummyimage.com/600x400/000/fff.jpg',
-      imagemobile: 'https://dummyimage.com/300x300/000/fff.jpg',
-      linkname1: 'https://wwww.google.com',
-      buttonname1: 'Siguiente',
-      buttonname2: 'Atras',
-      linkname2: 'https://wwww.google.com',
-      id: 1
-    },
-    {
-      imageweb: 'https://dummyimage.com/600x400/000/fff.jpg',
-      imagemobile: 'https://dummyimage.com/300x300/000/fff.jpg',
-      linkname1: 'https://wwww.google.com',
-      buttonname1: 'Siguiente',
-      buttonname2: 'Atras',
-      linkname2: 'https://wwww.google.com',
-      id: 2
-    }
-  ];
+  onboarding = [];
 
   constructor(private dialog: MatDialog, private content: ContentService, private auth: AuthService, private fb: FormBuilder) {
     this.dataAddImagen = this.fb.group({
@@ -421,9 +402,14 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
   }
 
   public openModalonBoarding() {
-    this.dialog.open(DialogOnboardingComponent, {
+    const dialog = this.dialog.open(DialogOnboardingComponent, {
       width: '450px',
     });
+
+    dialog.beforeClosed().subscribe(board => {
+      this.getBoardings();
+    });
+
   }
 
   public editPopupModal(elementP) {
