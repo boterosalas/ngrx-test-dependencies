@@ -29,7 +29,6 @@ export class DialogOnboardingComponent implements OnInit, OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private content: ContentService
   ) {
-    console.log(data);
 
     this.nameImageMobile = this.data ? 'Imagen-Mobile.jpg' : '';
     this.nameImageWeb = this.data ? 'Imagen-Web.jpg' : '';
