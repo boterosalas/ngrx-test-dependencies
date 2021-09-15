@@ -93,6 +93,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
   dataPopupExpire = [];
   onboarding = [];
 
+
   constructor(private dialog: MatDialog, private content: ContentService, private auth: AuthService, private fb: FormBuilder) {
     this.dataAddImagen = this.fb.group({
       nameContent: [null, Validators.required],

@@ -16,21 +16,57 @@ import Swal from 'sweetalert2';
 import { JwtModule } from '@auth0/angular-jwt';
 import { ToolsAdminComponent } from './tools-admin.component';
 
+export class MatDialogMock {
+  open() {
+    return {
+      beforeClosed: () => of(true),
+    };
+  }
+  closeAll() {
+    return {
+      closeAll: () => of(true),
+    };
+  }
+}
+
 describe('CarrouselAdminComponent', () => {
   let component: ToolsAdminComponent;
   let fixture: ComponentFixture<ToolsAdminComponent>;
-  const dialogMock = {
-    close: () => {},
-    beforeClosed: () => {},
-  };
+
   const mockContentService = jasmine.createSpyObj('ContentService', [
     'getOffersbyType',
     'saveOrderOfertBusiness',
     'getAllBusiness',
     'deleteOfer',
     'saveOfertBusiness',
+    'getBoarding',
+    'deleteBoardings'
   ]);
+
   const mockAuthService = jasmine.createSpyObj('AuthService', ['getPermisionByUser']);
+
+  const matDialog = new MatDialogMock();
+
+  const dialogMock = {
+    close: () => {},
+  };
+
+  const boarding = [
+    {
+      id: 1,
+      imageweb: 'https://webclickamdev.blob.core.windows.net/img-ofertas/boarding/20210914184213_web.jpg',
+      imagemobile: 'https://webclickamdev.blob.core.windows.net/img-ofertas/boarding/20210914184213_mobile.jpg',
+      buttonname1: 'Botón 1',
+      linkname1: 'https://www.google.com.co',
+      linkname2: 'Botón 2',
+      buttonname2: 'https://www.clickam.com.co',
+      orderby: null,
+      date: '2021-09-14T18:42:13.49',
+      imageBase64Mobile: null,
+      imageBase64Web: null
+    }
+  ];
+
   const datos = [
     {
       active: false,
@@ -129,12 +165,15 @@ describe('CarrouselAdminComponent', () => {
       colorbutton: null,
     },
   ];
+
   const audit = {
     state: 'Success',
     userMessage: 'se ha enviado un correo',
     objectResponse: [],
   };
+
   const getPermisionByUser = [{ idmenu: 1, menu: 'Inicio', route: '/inicio' }];
+
   const busss = [
     {
       code: 'clickam',
@@ -144,11 +183,19 @@ describe('CarrouselAdminComponent', () => {
       tabtablecommission: 'Clickam',
     },
   ];
+
+  const resp = {
+    state: 'Success',
+    userMessage: 'correcto',
+    objectResponse: [],
+  };
+
   const error = {
     state: 'Error',
     userMessage: 'se ha enviado un correo',
     objectResponse: [],
   };
+
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll']);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -179,10 +226,10 @@ describe('CarrouselAdminComponent', () => {
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialog, useValue: matDialog },
         { provide: MatDialogRef, useValue: dialogMock },
         { provide: ContentService, useValue: mockContentService },
         { provide: AuthService, useValue: mockAuthService },
-        { provide: MatDialog, useValue: mockDialog },
       ],
     }).compileComponents();
     mockContentService.getOffersbyType.and.returnValue(of(datos));
@@ -190,6 +237,7 @@ describe('CarrouselAdminComponent', () => {
     mockContentService.getAllBusiness.and.returnValue(of(busss));
     mockContentService.deleteOfer.and.returnValue(of(audit));
     mockContentService.saveOfertBusiness.and.returnValue(of(audit));
+    mockContentService.getBoarding.and.returnValue(of(boarding));
     mockAuthService.getPermisionByUser.and.returnValue(of(getPermisionByUser));
   }));
 
@@ -349,4 +397,31 @@ describe('CarrouselAdminComponent', () => {
   it('get Section Name', () => {
     expect(component.getSectionName('/inicio')).toBe('Inicio');
   });
+
+  it('open modal boarding', () => {
+    component.openModalonBoarding();
+    expect(dialogMock.close).toBeTruthy();
+  });
+
+  it('delete board', () => {
+    mockContentService.deleteBoardings.and.returnValue(of(resp));
+    spyOn(Swal, 'fire').and.returnValue(
+      Promise.resolve<any>({
+        html: "<h3 class='delete-title-comision'>Eliminar contenido</h3> <p class='w-container'>¿Está seguro que desea eliminar el contenido seleccionado?</p>",
+        confirmButtonText: 'Eliminar contenido',
+        cancelButtonText: 'Cancelar',
+        showCancelButton: true,
+        confirmButtonClass: 'updateokdelete order-last',
+        cancelButtonClass: 'updatecancel',
+        allowOutsideClick: false,
+      }));
+    component.deleteBoard(1);
+  });
+
+  it('edit board', () => {
+    component.editBoard(boarding);
+    expect(boarding).not.toBeUndefined();
+  });
+
+
 });

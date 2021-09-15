@@ -54,7 +54,7 @@ export class TableOnboardingComponent implements OnInit, OnDestroy {
     this.saveOrderBoarding(datosSourceSend);
   }
 
-  public saveOrderBoarding(datos: any) {
+  private saveOrderBoarding(datos: any) {
     this.subscription = this.content.saveOrderBoarding(datos).subscribe();
   }
 
