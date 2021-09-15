@@ -6,6 +6,7 @@ import { AuthService } from '../services/auth.service';
 import { Injector } from '@angular/core';
 import { ResponseService } from '../interfaces/response';
 import { LoaderService } from '../services/loader.service';
+import Swal from 'sweetalert2';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -53,7 +54,15 @@ export class AuthInterceptor implements HttpInterceptor {
             });
           }
         } else {
-          if (err.status === 500) {
+          if (err.status === 500 || err.status === 404 || err.status === 400 || err.status === 403) {
+            Swal.fire({
+              html: `<h3 class='delete-title-comision'>Ha ocurrido un problema</h3> <div class='w-container'> <p class="mb-0"> <strong>Código:</strong> ${err.error.statusCode}</p> <p class="mb-0"><strong>Mensaje:</strong> ${err.error.message}</p> </div> `,
+              confirmButtonText: 'Cerrar',
+              cancelButtonText: 'Cancelar',
+              showCancelButton: false,
+              confirmButtonClass: 'badreq',
+              allowOutsideClick: false,
+            });
             return;
           }
         }

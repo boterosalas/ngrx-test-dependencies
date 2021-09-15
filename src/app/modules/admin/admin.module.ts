@@ -79,6 +79,8 @@ import { CardAdminStoryComponent } from './components/card-admin-story/card-admi
 import { DialogStoryComponent } from './components/dialog-story/dialog-story.component';
 import { DatailNewsComponent } from './pages/datail-news/datail-news.component';
 import { NoveltyChatComponent } from './components/novelty-chat/novelty-chat.component';
+import { TableOnboardingComponent } from './components/table-onboarding/table-onboarding.component';
+import { DialogOnboardingComponent } from './components/dialog-onboarding/dialog-onboarding.component';
 
 const routes: Routes = [
   {
@@ -389,7 +391,9 @@ const routes: Routes = [
     StoriesComponent,
     CardAdminStoryComponent,
     DialogStoryComponent,
-    DatailNewsComponent
+    DatailNewsComponent,
+    TableOnboardingComponent,
+    DialogOnboardingComponent
   ],
   imports: [
     AngularEditorModule,
@@ -445,6 +449,7 @@ const routes: Routes = [
     DialogFaqItemComponent,
     DialogDeleteNotificationComponent,
     DialogStoryComponent,
+    DialogOnboardingComponent
   ],
   providers: [{ provide: MatPaginatorIntl, useClass: UsersComponent }],
 })

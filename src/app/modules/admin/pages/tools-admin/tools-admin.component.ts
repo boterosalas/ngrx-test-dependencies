@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatTable } from '@angular/material';
 import * as moment from 'moment';
@@ -7,6 +7,8 @@ import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-g
 import { ContentService } from 'src/app/services/content.service';
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
+import { DialogOnboardingComponent } from '../../components/dialog-onboarding/dialog-onboarding.component';
+import { Subscription } from 'rxjs';
 export interface PeriodicElement {
   drag: any;
   bussiness: any;
@@ -22,7 +24,7 @@ export interface PeriodicElement2 {
   templateUrl: './tools-admin.component.html',
   styleUrls: ['./tools-admin.component.scss'],
 })
-export class ToolsAdminComponent implements OnInit {
+export class ToolsAdminComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['drag', 'imagenWeb', 'imagenMobile', 'nameContent', 'link', 'bussiness', 'comision', 'active', 'actions'];
   displayedColumns2: string[] = ['drag', 'image', 'nameContent', 'link', 'bussiness', 'comision', 'active', 'actions'];
   dataAddImagen: FormGroup;
@@ -47,6 +49,7 @@ export class ToolsAdminComponent implements OnInit {
   @ViewChild('templatePublication', { static: false })
   templatePublication: TemplateRef<any>;
 
+  private subscription: Subscription = new Subscription();
   fileImgCat: any = '';
   nameFileCert = '';
   showErrorCert: boolean;
@@ -88,6 +91,8 @@ export class ToolsAdminComponent implements OnInit {
   dataPopupProgrammed = [];
   dataPopupRoughCopy = [];
   dataPopupExpire = [];
+  onboarding = [];
+
 
   constructor(private dialog: MatDialog, private content: ContentService, private auth: AuthService, private fb: FormBuilder) {
     this.dataAddImagen = this.fb.group({
@@ -120,9 +125,17 @@ export class ToolsAdminComponent implements OnInit {
     this.getOffers();
     this.getAllBusiness();
     this.getSectionsClicker();
+    this.getBoardings();
   }
+
+  public getBoardings() {
+    this.subscription = this.content.getBoarding().subscribe(board => {
+      this.onboarding = board;
+    });
+  }
+
   public getOffers() {
-    this.content.getOffersbyType({ id: 'CARROUSEL', admin: true }).subscribe((resp) => {
+    this.subscription = this.content.getOffersbyType({ id: 'CARROUSEL', admin: true }).subscribe((resp) => {
       const startTime: any = new Date();
 
       this.dataSource = resp;
@@ -141,7 +154,7 @@ export class ToolsAdminComponent implements OnInit {
         }
       }
     });
-    this.content.getOffersbyType({ id: 'OFERTA', admin: true }).subscribe((resp) => {
+    this.subscription = this.content.getOffersbyType({ id: 'OFERTA', admin: true }).subscribe((resp) => {
       const startTime: any = new Date();
       this.dataSourceOfer = resp;
       for (let index = 0; index < this.dataSourceOfer.length; index++) {
@@ -161,7 +174,7 @@ export class ToolsAdminComponent implements OnInit {
 
       }
     });
-    this.content.getOffersbyType({ id: 'POPUP', admin: true }).subscribe((resp) => {
+    this.subscription = this.content.getOffersbyType({ id: 'POPUP', admin: true }).subscribe((resp) => {
       this.dataPopupActive = [];
       this.dataPopupProgrammed = [];
       this.dataPopupRoughCopy = [];
@@ -198,7 +211,7 @@ export class ToolsAdminComponent implements OnInit {
     });
   }
   public getAllBusiness() {
-    this.content.getAllBusiness().subscribe((resp) => {
+    this.subscription = this.content.getAllBusiness().subscribe((resp) => {
       this.selectedBuss = resp;
 
       this.selectedBuss.push({
@@ -212,7 +225,7 @@ export class ToolsAdminComponent implements OnInit {
   }
 
   public getSectionsClicker() {
-    this.auth.getPermisionByUser('CLICKER').subscribe((resp) => {
+    this.subscription = this.auth.getPermisionByUser('CLICKER').subscribe((resp) => {
       this.selectedSection = resp;
     });
   }
@@ -260,11 +273,11 @@ export class ToolsAdminComponent implements OnInit {
     this.saveOrder(datosSourceSend);
   }
   public saveOrder(datos: any) {
-    this.content.saveOrderOfertBusiness(datos).subscribe();
+    this.subscription = this.content.saveOrderOfertBusiness(datos).subscribe();
   }
   private getExtension(nameFile: string, getSize: number) {
-    let splitExtFile = nameFile.split('.');
-    let getExtFile = splitExtFile[splitExtFile.length - 1].toLocaleLowerCase();
+    const splitExtFile = nameFile.split('.');
+    const getExtFile = splitExtFile[splitExtFile.length - 1].toLocaleLowerCase();
     this.validFormat = false;
     if ('jpg' === getExtFile) {
       this.validFormat = true;
@@ -327,7 +340,7 @@ export class ToolsAdminComponent implements OnInit {
           this.fileImgCat2 = this.fileImgCat2.split(',')[1];
           this.nameFileCert2 = nameFileCarrousel2;
           this.showErrorCert2 = false;
-          if (this.nameFileCert != '') {
+          if (this.nameFileCert !== '') {
             this.activebutton = true;
           } else {
             this.activebutton = false;
@@ -389,6 +402,17 @@ export class ToolsAdminComponent implements OnInit {
     });
   }
 
+  public openModalonBoarding() {
+    const dialog = this.dialog.open(DialogOnboardingComponent, {
+      width: '450px',
+    });
+
+    dialog.beforeClosed().subscribe(board => {
+      this.getBoardings();
+    });
+
+  }
+
   public editPopupModal(elementP) {
     this.showUndefinedDate = false;
     const titleP = 'Popup';
@@ -448,7 +472,7 @@ export class ToolsAdminComponent implements OnInit {
 
   public activate(element) {
     const datos = [{ id: element.id, active: element.active }];
-    this.content.saveActiveBanner(datos).subscribe();
+    this.subscription = this.content.saveActiveBanner(datos).subscribe();
   }
 
   public editOfertasModal(element) {
@@ -583,7 +607,7 @@ export class ToolsAdminComponent implements OnInit {
       allowOutsideClick: false,
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
-        this.content.deleteOfer([element.id]).subscribe(() => {
+        this.subscription = this.content.deleteOfer([element.id]).subscribe(() => {
           this.getOffers();
         });
       }
@@ -661,7 +685,7 @@ export class ToolsAdminComponent implements OnInit {
       }
     }
 
-    this.content.saveOfertBusiness(datos).subscribe(() => {
+    this.subscription = this.content.saveOfertBusiness(datos).subscribe(() => {
       this.dataAddImagen.reset();
       this.dialog.closeAll();
       this.getOffers();
@@ -739,7 +763,7 @@ export class ToolsAdminComponent implements OnInit {
       }
     }
 
-    this.content.saveOfertBusiness(datos).subscribe(() => {
+    this.subscription = this.content.saveOfertBusiness(datos).subscribe(() => {
       this.dataAddImagenOfertas.reset();
       this.dialog.closeAll();
       this.getOffers();
@@ -798,7 +822,7 @@ export class ToolsAdminComponent implements OnInit {
       ];
     }
 
-    this.content.saveOfertBusiness(datos).subscribe(() => {
+    this.subscription = this.content.saveOfertBusiness(datos).subscribe(() => {
       this.dataAddImagenPopup.reset();
       this.dialog.closeAll();
       this.getOffers();
@@ -888,13 +912,14 @@ export class ToolsAdminComponent implements OnInit {
             datos.push(this.dataSourceOfer[index].id);
           }
         }
-        this.content.deleteOfer(datos).subscribe(() => {
+        this.subscription = this.content.deleteOfer(datos).subscribe(() => {
           this.getOffers();
           this.active2 = false;
         });
       }
     });
   }
+
   public deleteEvery() {
     Swal.fire({
       html: "<h3 class='delete-title-comision'>Eliminar Imagenes</h3> <p class='w-container'>¿Estás seguro de eliminar las imagenes seleccionadas?</p>",
@@ -912,13 +937,43 @@ export class ToolsAdminComponent implements OnInit {
             datos.push(this.dataSource[index].id);
           }
         }
-        this.content.deleteOfer(datos).subscribe(() => {
+        this.subscription = this.content.deleteOfer(datos).subscribe(() => {
           this.getOffers();
           this.active = false;
         });
       }
     });
   }
+
+  public deleteBoard(id: any) {
+    Swal.fire({
+      html: "<h3 class='delete-title-comision'>Eliminar contenido</h3> <p class='w-container'>¿Está seguro que desea eliminar el contenido seleccionado?</p>",
+      confirmButtonText: 'Eliminar contenido',
+      cancelButtonText: 'Cancelar',
+      showCancelButton: true,
+      confirmButtonClass: 'updateokdelete order-last',
+      cancelButtonClass: 'updatecancel',
+      allowOutsideClick: false,
+    }).then((resp: any) => {
+      if (resp.dismiss !== 'cancel') {
+        this.subscription = this.content.deleteBoardings([id]).subscribe(() => {
+          this.getBoardings();
+        });
+      }
+    });
+  }
+
+  public editBoard(data: any) {
+    const edit = this.dialog.open(DialogOnboardingComponent, {
+      width: '450px',
+      data
+    });
+    edit.beforeClosed().subscribe(board => {
+      this.getBoardings();
+    });
+
+  }
+
   public onNoClick() {
     this.dataAddImagenOfertas.reset();
     this.dataAddImagen.reset();
@@ -985,4 +1040,9 @@ export class ToolsAdminComponent implements OnInit {
     const section = this.selectedSection.find((x) => x.route === url);
     return section ? section.menu : '';
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }
