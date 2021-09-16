@@ -524,18 +524,7 @@ describe('HomeComponent', () => {
     component.openRegisterBusiness();
   });
 
-  it('send Referals Term', () => {
-    component.sendReferalsTerm();
-    expect(mockUserService.saveUserAcceptTermsReferrals).toHaveBeenCalled();
-  });
 
-  it('show terms', () => {
-    component.stepTerms = false;
-    component.newTermsHTML = true;
-    component.showTerms();
-    expect(component.stepTerms).toBeFalsy();
-    expect(component.newTermsHTML).toBeTruthy();
-  });
 
   // it('modal promo', () => {
   //   component.getModalPromo();
