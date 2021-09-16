@@ -81,7 +81,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   templateTerms: TemplateRef<any>;
   newTermsHTML = false;
   stepTerms = true;
-  activateButton  = false;
+  activateButton = false;
   amount: any;
   amountReferred: any;
   paymentPending: number;
@@ -185,11 +185,11 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.subscription = this.user.getuserdata().subscribe((user) => {
           this.isEmployee = user.isEmployeeGrupoExito;
           this.managedPayments = user.managedPayments;
-          this.newTerms = user.acceptTermsReferrals;
           this.getInfomonth();
           if (role === 'CLICKER') {
-            if (this.newTerms === false) {
-              this.termsAndConditions();
+            this.newTerms = user.acceptTermsReferrals;
+            if (this.newTerms === true) {
+              this.showModalPayment();
             }
           }
         });
@@ -378,65 +378,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  public termsAndConditions() {
-    const template = this.templateTerms;
-    const title = '';
-    const id = 'newTerms';
 
-    this.dialog2.open(ModalGenericComponent, {
-      disableClose: true,
-      data: {
-        title,
-        id,
-        template,
-      },
-    });
-  }
-
-  public showTerms() {
-    this.stepTerms = false;
-    this.newTermsHTML = true;
-  }
-
-  public logout() {
-    this.stepTerms = true;
-    this.newTermsHTML = false;
-    this.activateButton = false;
-    this.utils.logout();
-    this.dialog.closeAll();
-  }
-
-  public acceptTermsCheck(buttonState: MatCheckboxChange) {
-    if (buttonState.checked === true) {
-      this.activateButton = true;
-    } else {
-      this.activateButton = false;
-    }
-  }
-
-  /**
-   * Abre el mensaje de confirmacion
-   * @param message mensaje
-   * @param action accion
-   */
-
-  private openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 5000,
-    });
-  }
-
-  public sendReferalsTerm() {
-    this.user.saveUserAcceptTermsReferrals().subscribe((resp: ResponseService) => {
-      this.stepTerms = true;
-      this.newTermsHTML = false;
-      this.activateButton = false;
-      this.dialog2.closeAll();
-      this.newTerms = true;
-      this.showModalPayment();
-      this.openSnackBar(resp.userMessage, 'Cerrar');
-    });
-  }
 
   /**
    * Metodo para obtener el resumen del mes generados

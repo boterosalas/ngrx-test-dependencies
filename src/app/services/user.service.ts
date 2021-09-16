@@ -71,8 +71,6 @@ export class UserService {
   apiGetNewsNovelties = 'new/getnewsnovelty';
   apiSaveQualificationNovelty = '/new/noveltyqualification';
   apiGetNewsById = 'new/usernews';
-  apiGetOnBoarding = '/boarding/getboardings'
-
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -83,6 +81,9 @@ export class UserService {
   };
 
   userInfo$ = new BehaviorSubject<any>(null);
+
+  onboardingView = new BehaviorSubject<any>({ onboardin: false, popUps: false });
+  userOnboardingObservable = this.onboardingView.asObservable();
 
   public getProfile() {
     return this.http
@@ -233,8 +234,6 @@ export class UserService {
     );
   }
 
-
-
   public saveUserDevice(userid: string, token: string) {
     return this.http.post(`${this.url}${this.apiSaveUserDevice}`, { userid: userid, device: token }, this.httpOptions);
   }
@@ -307,10 +306,6 @@ export class UserService {
         )
       )
     );
-  }
-
-  public getOnboarding() {
-    return this.http.get(`${this.urlContent}${this.apiGetOnBoarding}`, this.httpOptions);
   }
 
   public validateEmployee(id: string, document: string) {
@@ -484,7 +479,6 @@ export class UserService {
       )
     );
   }
-
 
   public getNoveltiesById(id) {
     return this.http.get(`${this.url}${this.apiGetNewsById}?userId=${id}`, this.httpOptions).pipe(

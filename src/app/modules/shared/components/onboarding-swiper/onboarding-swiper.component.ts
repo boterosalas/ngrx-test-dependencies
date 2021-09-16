@@ -1,17 +1,17 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
 import { Subscription } from 'rxjs';
 import { ResponseService } from 'src/app/interfaces/response';
-import { UserService } from 'src/app/services/user.service';
+import { ContentService } from 'src/app/services/content.service';
 
 @Component({
   selector: 'app-onboarding-swiper',
   templateUrl: './onboarding-swiper.component.html',
   styleUrls: ['./onboarding-swiper.component.scss'],
 })
-export class OnboardingSwiperComponent implements OnInit {
-  constructor(public dialogRef: MatDialogRef<OnboardingSwiperComponent>, public userSvc: UserService) {}
+export class OnboardingSwiperComponent implements OnInit, OnDestroy {
+  constructor(public dialogRef: MatDialogRef<OnboardingSwiperComponent>, public contentSvc: ContentService) {}
   @ViewChild('slickModal', { static: false })
   slickModal: SlickCarouselComponent;
 
@@ -29,8 +29,8 @@ export class OnboardingSwiperComponent implements OnInit {
   $onBoardingSubscription: Subscription = new Subscription();
 
   ngOnInit() {
-    this.$onBoardingSubscription = this.userSvc.getOnboarding().subscribe((resp: ResponseService) => {
-      this.slides = resp.objectResponse;
+    this.$onBoardingSubscription = this.contentSvc.getBoarding().subscribe((resp) => {
+      this.slides = resp;
     });
   }
 
@@ -44,5 +44,9 @@ export class OnboardingSwiperComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  ngOnDestroy(): void {
+    this.$onBoardingSubscription.unsubscribe();
   }
 }

@@ -20,6 +20,10 @@ import decode from 'jwt-decode';
 import { SidenavService } from './services/sidenav.service';
 import { onMainContentChange } from './animations/animations';
 import { OnboardingSwiperComponent } from './modules/shared/components/onboarding-swiper/onboarding-swiper.component';
+import { MatCheckboxChange } from '@angular/material';
+import { ModalGenericComponent } from './modules/shared/components/modal-generic/modal-generic.component';
+import { ResponseService } from './interfaces/response';
+import { MasterDataService } from './services/master-data.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -64,21 +68,34 @@ export class AppComponent implements OnInit, OnDestroy {
   classPage: string;
   location: Location;
   timeout: any;
+  newTerms: boolean;
+  acceptTerms: boolean = null;
+  @ViewChild('templateTerms', { static: false })
+  templateTerms: TemplateRef<any>;
+  newTermsHTML = false;
+  stepTerms = true;
+  activateButton = false;
+  contentTerminos: any;
+  contentProteccion: any;
+  contentTransparencia: any;
+  contentPrograma: any;
+  textTerminos: any;
+  textProteccion: any;
+  textTransparencia: any;
+  textPrograma: any;
 
   constructor(
     private translate: TranslateService,
     private router: Router,
     private utils: UtilsService,
     public auth: AuthService,
-    private bnIdle: BnNgIdleService,
-    private breakpointObserver: BreakpointObserver,
     private user: UserService,
     private content: ContentService,
     private token: TokenService,
     private swUpdate: SwUpdate,
     private dialog: MatDialog,
     location: Location,
-    private sidenavService: SidenavService
+    private personalInfo: MasterDataService
   ) {
     // this.sidenavService.sideNavState$.subscribe( res => {
     //   this.onSideNavChange = res;
@@ -93,7 +110,7 @@ export class AppComponent implements OnInit, OnDestroy {
           event: 'pageview',
           virtualPageURL: url.url,
         });
-      } else if (url instanceof NavigationEnd) {
+      } else if (url instanceof NavigationEnd && this.role === 'CLICKER') {
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.getPopUps();
@@ -158,6 +175,65 @@ export class AppComponent implements OnInit, OnDestroy {
     this.getUserData();
   }
 
+  public getTerms() {
+    this.personalInfo.getTerms().subscribe((resp: any) => {
+      this.contentTerminos = resp.objectResponse[0].sectionvalue;
+      this.contentProteccion = resp.objectResponse[1].sectionvalue;
+      this.contentTransparencia = resp.objectResponse[2].sectionvalue;
+      this.contentPrograma = resp.objectResponse[3].sectionvalue;
+      this.textTerminos = resp.objectResponse[0].sectiontitle;
+      this.textProteccion = resp.objectResponse[1].sectiontitle;
+      this.textTransparencia = resp.objectResponse[2].sectiontitle;
+      this.textPrograma = resp.objectResponse[3].sectiontitle;
+    });
+  }
+
+  public termsAndConditions() {
+    const template = this.templateTerms;
+    const title = '';
+    const id = 'newTerms';
+    this.dialog.open(ModalGenericComponent, {
+      disableClose: true,
+      data: {
+        title,
+        id,
+        template,
+      },
+    });
+  }
+
+  public showTerms() {
+    this.stepTerms = false;
+    this.newTermsHTML = true;
+  }
+
+  public logout() {
+    this.stepTerms = true;
+    this.newTermsHTML = false;
+    this.activateButton = false;
+    this.utils.logout();
+    this.dialog.closeAll();
+  }
+
+  public acceptTermsCheck(buttonState: MatCheckboxChange) {
+    if (buttonState.checked === true) {
+      this.activateButton = true;
+    } else {
+      this.activateButton = false;
+    }
+  }
+
+  public sendReferalsTerm() {
+    this.user.saveUserAcceptTermsReferrals().subscribe((resp: ResponseService) => {
+      this.stepTerms = true;
+      this.newTermsHTML = false;
+      this.activateButton = false;
+      this.dialog.closeAll();
+      this.newTerms = true;
+      this.showUpdateModal();
+    });
+  }
+
   /**
    * Sigue la secuencia para abrir las modales
    */
@@ -168,9 +244,14 @@ export class AppComponent implements OnInit, OnDestroy {
         .afterClosed()
         .subscribe(() => {
           this.user.saveOnboarding(true).subscribe();
-          setTimeout(() => {
-            this.showUpdateModal();
-          }, 2000);
+          this.onboardingViwed = true;
+          if (!this.newTerms) {
+            this.termsAndConditions();
+          } else {
+            setTimeout(() => {
+              this.showUpdateModal();
+            }, 2000);
+          }
         });
     } else {
       this.showUpdateModal();
@@ -202,7 +283,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   public getPopUps() {
-    if (this.auth.isLoggedIn()) {
+    if (this.auth.isLoggedIn() && this.newTerms && this.onboardingViwed) {
       this.content.getPopup().subscribe((resp) => {
         const locationHref = location.href;
         const routeSplit = locationHref.split('/');
@@ -290,6 +371,10 @@ export class AppComponent implements OnInit, OnDestroy {
           this.lastName = user.lastNames;
           this.managedPayments = user.managedPayments;
           this.isEmployee = user.isEmployeeGrupoExito;
+          this.newTerms = user.acceptTermsReferrals;
+          if (!this.newTerms) {
+            this.getTerms();
+          }
           this.showModalsSecuence();
         });
       }

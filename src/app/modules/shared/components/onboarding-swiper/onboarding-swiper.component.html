@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="slides.length">
   <a class="close-dialog" matRipple (click)="onNoClick()"><mat-icon class="close cursor-pointer">close</mat-icon></a>
   <ngx-slick-carousel id="onboarding-slick" class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
     <div class="item" ngxSlickItem *ngFor="let item of slides">
