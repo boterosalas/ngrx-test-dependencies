@@ -104,6 +104,10 @@ export class ContentService {
   apiGetNotificationDetailAdmin = 'notification/getnotification';
   apiViewNotification = 'notification/savevisitnotification';
   apiDeleteNotificationUser = 'notification/deletenotificationuser';
+  apiGetBoardings = 'boarding/getboardings';
+  apiSaveBoardings = 'boarding/saveboardings';
+  apiDeleteBoardings = 'boarding/deleteboardings';
+  apiSaveOrderBoardings = 'boarding/saveorderboardings';
 
   sendSearch = {};
 
@@ -708,6 +712,33 @@ export class ContentService {
         return user.objectResponse;
       })
     );
+  }
+
+  public getBoarding() {
+    return this.http.get(`${this.url + this.apiGetBoardings}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((user: ResponseService) => {
+        return user.objectResponse;
+      })
+    );
+  }
+
+  public saveBoardings(data: object) {
+    return this.http.post(`${this.url + this.apiSaveBoardings}`, data, this.httpOptions);
+  }
+
+  public deleteBoardings(data: any) {
+    return this.http.post(`${this.url + this.apiDeleteBoardings}`, data, this.httpOptions);
+  }
+
+  public saveOrderBoarding(data: any) {
+    return this.http.post(`${this.url + this.apiSaveOrderBoardings}`, data, this.httpOptions);
   }
 
   // public getOffers() {
