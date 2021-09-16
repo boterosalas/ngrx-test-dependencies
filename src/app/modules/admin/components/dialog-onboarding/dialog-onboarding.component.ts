@@ -170,7 +170,7 @@ export class DialogOnboardingComponent implements OnInit, OnDestroy {
 
   private splitb64(file: any) {
     const explit64 = file.split('data:application/octet-stream;base64,');
-    return file = explit64[1];
+    return explit64[1];
   }
 
   ngOnDestroy(): void {
