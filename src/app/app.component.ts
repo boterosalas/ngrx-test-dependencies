@@ -162,11 +162,12 @@ export class AppComponent implements OnInit, OnDestroy {
    * Sigue la secuencia para abrir las modales
    */
   showModalsSecuence() {
-    if (!this.onboardingViwed) {
+    if (!this.onboardingViwed && this.role === 'CLICKER') {
       this.dialog
         .open(OnboardingSwiperComponent, { panelClass: 'panel-class-onboarding' })
         .afterClosed()
         .subscribe(() => {
+          this.user.saveOnboarding(true).subscribe();
           setTimeout(() => {
             this.showUpdateModal();
           }, 2000);

@@ -18,17 +18,24 @@
     .carousel {
       width: 84%;
       margin: 40px auto;
-      padding: 20px 0;
       .item {
         img {
-          width: 100%;
+          margin: auto;
+          max-width: 100%;
+          max-height: 40vh;
+        }
+        .img-mobile {
+          display: none;
+        }
+        .img-desktop {
+          display: block;
         }
         .actions {
           padding: 25px 0 0;
           display: flex;
           justify-content: center;
 
-          button {
+          a {
             margin: 0 10px;
             background-color: $purple2;
             padding: 0 20px;
@@ -63,11 +70,22 @@
         top: 6px;
       }
       .carousel {
+        width: 77%;
         .item {
+          img {
+            max-width: 100%;
+            max-height: 80vh;
+          }
+          .img-mobile {
+            display: block;
+          }
+          .img-desktop {
+            display: none;
+          }
           .actions {
             flex-direction: column;
 
-            button {
+            a {
               margin: 8px auto;
             }
           }

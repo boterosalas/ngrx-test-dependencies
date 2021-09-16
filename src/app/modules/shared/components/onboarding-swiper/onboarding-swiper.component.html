@@ -1,12 +1,17 @@
 <div class="wrapper">
   <a class="close-dialog" matRipple (click)="onNoClick()"><mat-icon class="close cursor-pointer">close</mat-icon></a>
-  <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+  <ngx-slick-carousel id="onboarding-slick" class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
     <div class="item" ngxSlickItem *ngFor="let item of slides">
-      <img [src]="item.img" alt="Onboarding" />
-      <div class="actions" *ngIf="item.actions.length">
-        <button mat-button *ngFor="let button of item.actions">
-          {{ button.title }}
-        </button>
+      <img [src]="item.imagemobile" class="img-mobile" alt="Onboarding" />
+      <img [src]="item.imageweb" class="img-desktop" alt="Onboarding" />
+
+      <div class="actions">
+        <a mat-button [href]="item.linkname1" *ngIf="item.buttonname1 && item.linkname1">
+          {{ item.buttonname1 }}
+        </a>
+        <a mat-button [href]="item.linkname2" *ngIf="item.buttonname2 && item.linkname2">
+          {{ item.buttonname2 }}
+        </a>
       </div>
     </div>
   </ngx-slick-carousel>

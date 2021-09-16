@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
+import { Subscription } from 'rxjs';
+import { ResponseService } from 'src/app/interfaces/response';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-onboarding-swiper',
@@ -8,7 +11,7 @@ import { SlickCarouselComponent } from 'ngx-slick-carousel';
   styleUrls: ['./onboarding-swiper.component.scss'],
 })
 export class OnboardingSwiperComponent implements OnInit {
-  constructor(public dialogRef: MatDialogRef<OnboardingSwiperComponent>) {}
+  constructor(public dialogRef: MatDialogRef<OnboardingSwiperComponent>, public userSvc: UserService) {}
   @ViewChild('slickModal', { static: false })
   slickModal: SlickCarouselComponent;
 
@@ -21,19 +24,15 @@ export class OnboardingSwiperComponent implements OnInit {
     arrows: true,
   };
 
-  slides = [
-    { img: '/assets/img/clickam-horizontal.jpg', actions: [] },
-    { img: '/assets/img/clickam-horizontal.jpg', actions: [] },
-    {
-      img: '/assets/img/clickam-horizontal.jpg',
-      actions: [
-        { title: 'Ver video', url: 'https://www.youtube.com/embed/cD-9xyZeT2Y?rel=0&amp' },
-        { title: 'Ver imagen', url: 'https://www.youtube.com/embed/cD-9xyZeT2Y?rel=0&amp' },
-      ],
-    },
-  ];
+  slides = [];
 
-  ngOnInit() {}
+  $onBoardingSubscription: Subscription = new Subscription();
+
+  ngOnInit() {
+    this.$onBoardingSubscription = this.userSvc.getOnboarding().subscribe((resp: ResponseService) => {
+      this.slides = resp.objectResponse;
+    });
+  }
 
   next() {
     this.slickModal.slickNext();

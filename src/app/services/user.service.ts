@@ -14,6 +14,7 @@ export class UserService {
   urlReports = environment.URL_REPORTS;
   url = environment.URL_PROFILE;
   urlEmployee = environment.URL_VALIDATE_EMPLOYEE;
+  urlContent = environment.URL_CONTENT;
   apiProfile = 'userprofile/GetUserProfile';
   apiGetDocuments = 'userprofile/downloadBase64';
   apiActivateProfile = 'userprofile/activateUser';
@@ -70,6 +71,7 @@ export class UserService {
   apiGetNewsNovelties = 'new/getnewsnovelty';
   apiSaveQualificationNovelty = '/new/noveltyqualification';
   apiGetNewsById = 'new/usernews';
+  apiGetOnBoarding = '/boarding/getboardings'
 
 
   httpOptions = {
@@ -231,17 +233,7 @@ export class UserService {
     );
   }
 
-  public saveOnboarding(save: any) {
-    return this.http.post(`${this.url}${this.apiSaveUserOnboardingViewed}`, { viewed: save }, this.httpOptions).pipe(
-      retryWhen((errors) =>
-        errors.pipe(
-          delay(1000),
-          take(3),
-          tap((errorStatus) => {})
-        )
-      )
-    );
-  }
+
 
   public saveUserDevice(userid: string, token: string) {
     return this.http.post(`${this.url}${this.apiSaveUserDevice}`, { userid: userid, device: token }, this.httpOptions);
@@ -303,6 +295,22 @@ export class UserService {
 
   public getBanks() {
     return this.http.get(`${this.url}${this.apiBanks}`, this.httpOptions);
+  }
+
+  public saveOnboarding(save: any) {
+    return this.http.post(`${this.url}${this.apiSaveUserOnboardingViewed}`, { viewed: save }, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      )
+    );
+  }
+
+  public getOnboarding() {
+    return this.http.get(`${this.urlContent}${this.apiGetOnBoarding}`, this.httpOptions);
   }
 
   public validateEmployee(id: string, document: string) {
