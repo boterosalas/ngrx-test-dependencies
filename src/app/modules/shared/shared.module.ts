@@ -36,6 +36,7 @@ import { TrimPipe } from 'src/app/pipes/trim.pipe';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { CardStoryComponent } from './components/card-story/card-story.component';
 import { RemoveTagsPipe } from 'src/app/pipes/remove-tags.pipe';
+import { OnboardingSwiperComponent } from './components/onboarding-swiper/onboarding-swiper.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { RemoveTagsPipe } from 'src/app/pipes/remove-tags.pipe';
     BannerComponent,
     DialogStoriesComponent,
     CardStoryComponent,
+    OnboardingSwiperComponent,
   ],
   imports: [
     CommonModule,
@@ -107,7 +109,8 @@ import { RemoveTagsPipe } from 'src/app/pipes/remove-tags.pipe';
     BannerComponent,
     DialogStoriesComponent,
     CardStoryComponent,
+    OnboardingSwiperComponent,
   ],
-  entryComponents: [ModalGenericComponent, PopupComponent, DialogStoriesComponent],
+  entryComponents: [ModalGenericComponent, PopupComponent, DialogStoriesComponent, OnboardingSwiperComponent],
 })
 export class SharedModule {}
