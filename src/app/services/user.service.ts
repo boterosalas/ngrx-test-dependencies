@@ -468,8 +468,8 @@ export class UserService {
     );
   }
 
-  public getNoveltyById(id) {
-    return this.http.get(`${this.urlReports}${this.apiNoveltyById}?id=${id}`, this.httpOptions).pipe(
+  public getNoveltyById(id: string, userId: any) {
+    return this.http.get(`${this.urlReports}${this.apiNoveltyById}?id=${id}&userId=${userId}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(1000),

@@ -160,6 +160,8 @@
           <p class="galano-bold gray">ORIGEN</p>
           <span class="normal-text" *ngIf="data.isEmployeeGrupoExito === true"> Interno </span>
           <span class="normal-text" *ngIf="data.isEmployeeGrupoExito === false"> Externo </span>
+          <p class="galano-bold gray">SCORE</p>
+          <span class="normal-text"> {{data.score}} </span>
           <div>
             <p class="galano-bold gray">VERIFICACIÓN</p>
             <form [formGroup]="dateSelectedState">

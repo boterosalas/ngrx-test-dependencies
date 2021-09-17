@@ -340,6 +340,8 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
         const extensionRUT = resp.objectResponse.maxextensiondaterut;
         const responseAccountBank = user.responseaccountbank;
         const fileRUT = resp.objectResponse.rut;
+        const score = resp.objectResponse.score;
+
 
         const dialogRef = this.dialog.open(DialogUserComponent, {
           data: {
@@ -375,6 +377,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
             extensionBankCertificate,
             extensionRUT,
             responseAccountBank,
+            score
           },
         });
 
