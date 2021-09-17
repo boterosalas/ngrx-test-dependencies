@@ -63,7 +63,7 @@
       }
     }
 
-    @include from(400px) {
+    @include from(600px) {
       .close-dialog {
         position: fixed;
         right: 4px;
