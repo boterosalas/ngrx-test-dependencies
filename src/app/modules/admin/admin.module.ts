@@ -318,7 +318,7 @@ const routes: Routes = [
     },
   },
   {
-    path: 'novedad/:id',
+    path: 'novedad/:id/:userId',
     component: DatailNewsComponent,
     canActivate: [RoleGuard],
     data: {
