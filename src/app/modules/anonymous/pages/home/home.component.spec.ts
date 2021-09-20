@@ -1,5 +1,5 @@
 import { HomeComponent } from './home.component';
-import { async, ComponentFixture, TestBed, tick } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed, tick } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -400,74 +400,76 @@ describe('HomeComponent', () => {
     ],
   };
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [],
-      imports: [
-        AnonymousModule,
-        TranslateModule,
-        AppMaterialModule,
-        FlexLayoutModule,
-        SlickCarouselModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientTestingModule,
-        RouterTestingModule.withRoutes([
-          { path: 'clicker', component: HomeComponent },
-          { path: 'inicio', component: HomeComponent },
-        ]),
-        BrowserAnimationsModule,
-        TranslateModule.forRoot({}),
-        AngularFireDatabaseModule,
-        AngularFireAuthModule,
-        AngularFireMessagingModule,
-        ServiceWorkerModule.register('', { enabled: false }),
-        AngularFireModule.initializeApp({
-          apiKey: 'AIzaSyBLEXtXZGfMEm6dLHtngNa_HWgEjjrk-14',
-          authDomain: 'test-push-notification-633a0.firebaseapp.com',
-          databaseURL: 'https://test-push-notification-633a0.firebaseio.com',
-          projectId: 'test-push-notification-633a0',
-          storageBucket: 'test-push-notification-633a0.appspot.com',
-          messagingSenderId: '374253972065',
-          appId: '1:374253972065:web:96a6651d3a2f816451d820',
-          measurementId: 'G-BESRDNSPL1',
-        }),
-        JwtModule.forRoot({
-          config: {
-            tokenGetter: () => {
-              return localStorage.getItem('ACCESS_TOKEN');
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [],
+        imports: [
+          AnonymousModule,
+          TranslateModule,
+          AppMaterialModule,
+          FlexLayoutModule,
+          SlickCarouselModule,
+          FormsModule,
+          ReactiveFormsModule,
+          HttpClientTestingModule,
+          RouterTestingModule.withRoutes([
+            { path: 'clicker', component: HomeComponent },
+            { path: 'inicio', component: HomeComponent },
+          ]),
+          BrowserAnimationsModule,
+          TranslateModule.forRoot({}),
+          AngularFireDatabaseModule,
+          AngularFireAuthModule,
+          AngularFireMessagingModule,
+          ServiceWorkerModule.register('', { enabled: false }),
+          AngularFireModule.initializeApp({
+            apiKey: 'AIzaSyBLEXtXZGfMEm6dLHtngNa_HWgEjjrk-14',
+            authDomain: 'test-push-notification-633a0.firebaseapp.com',
+            databaseURL: 'https://test-push-notification-633a0.firebaseio.com',
+            projectId: 'test-push-notification-633a0',
+            storageBucket: 'test-push-notification-633a0.appspot.com',
+            messagingSenderId: '374253972065',
+            appId: '1:374253972065:web:96a6651d3a2f816451d820',
+            measurementId: 'G-BESRDNSPL1',
+          }),
+          JwtModule.forRoot({
+            config: {
+              tokenGetter: () => {
+                return localStorage.getItem('ACCESS_TOKEN');
+              },
+              throwNoTokenError: true,
+              whitelistedDomains: [],
+              blacklistedRoutes: [],
             },
-            throwNoTokenError: true,
-            whitelistedDomains: [],
-            blacklistedRoutes: [],
-          },
-        }),
-      ],
-      providers: [
-        { provide: UserService, useValue: mockUserService },
-        { provide: AuthService, useClass: MockAuthService },
-        { provide: UtilsService, useValue: mockUtilsService },
-        { provide: ContentService, useValue: mockContentService },
-        { provide: MasterDataService, useValue: mockMasterService },
-        // { provide: LinksService, useValue: mockLinksService },
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
-    mockMasterService.getTerms.and.returnValue(of(responseTerms));
-    mockUserService.activateProfile.and.returnValue(of(data));
-    mockUserService.saveFeedback.and.returnValue(of(data));
-    mockUserService.getuserdata.and.returnValue(of(dataUserC));
-    mockUserService.saveUserAcceptTermsReferrals.and.returnValue(of(dataTerms));
-    mockUserService.getProfile.and.returnValue();
-    mockUtilsService.showRegisterForm.and.returnValue({});
-    mockContentService.getNews.and.returnValue(of(news));
-    mockContentService.getOffersbyType.and.returnValue(of(offers));
-    mockContentService.getBusiness.and.returnValue(of(business));
-    mockContentService.getBusinessClicker.and.returnValue(of(business));
-    mockContentService.getPopupus.and.returnValue(of(popups));
-    mockContentService.getCategoriesBusinessHome.and.returnValue(of(business));
-    mockContentService.getStories.and.returnValue(of(getStories));
-  }));
+          }),
+        ],
+        providers: [
+          { provide: UserService, useValue: mockUserService },
+          { provide: AuthService, useClass: MockAuthService },
+          { provide: UtilsService, useValue: mockUtilsService },
+          { provide: ContentService, useValue: mockContentService },
+          { provide: MasterDataService, useValue: mockMasterService },
+          // { provide: LinksService, useValue: mockLinksService },
+        ],
+        schemas: [NO_ERRORS_SCHEMA],
+      }).compileComponents();
+      mockMasterService.getTerms.and.returnValue(of(responseTerms));
+      mockUserService.activateProfile.and.returnValue(of(data));
+      mockUserService.saveFeedback.and.returnValue(of(data));
+      mockUserService.getuserdata.and.returnValue(of(dataUserC));
+      mockUserService.saveUserAcceptTermsReferrals.and.returnValue(of(dataTerms));
+      mockUserService.getProfile.and.returnValue();
+      mockUtilsService.showRegisterForm.and.returnValue({});
+      mockContentService.getNews.and.returnValue(of(news));
+      mockContentService.getOffersbyType.and.returnValue(of(offers));
+      mockContentService.getBusiness.and.returnValue(of(business));
+      mockContentService.getBusinessClicker.and.returnValue(of(business));
+      mockContentService.getPopupus.and.returnValue(of(popups));
+      mockContentService.getCategoriesBusinessHome.and.returnValue(of(business));
+      mockContentService.getStories.and.returnValue(of(getStories));
+    })
+  );
 
   beforeEach(() => {
     localStorage.setItem('Amount', '10000');

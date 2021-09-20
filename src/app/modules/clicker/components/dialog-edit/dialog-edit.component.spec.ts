@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogEditComponent } from './dialog-edit.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 describe('DialogEditComponent', () => {
   let component: DialogEditComponent;
@@ -12,7 +12,7 @@ describe('DialogEditComponent', () => {
     close: () => {},
   };
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [DialogEditComponent],
       imports: [AppMaterialModule],

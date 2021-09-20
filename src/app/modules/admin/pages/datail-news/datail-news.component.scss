@@ -53,6 +53,8 @@
     &.-document {
       text-align: left;
       line-height: 14px;
+      width: 18%;
+      max-width: 200px;
       padding: 2px 0 2px 52px;
     }
   }
@@ -111,7 +113,6 @@ mat-card {
             bottom: -21px;
           }
         }
-
 
         .mat-form-field-ripple {
           bottom: -21px;

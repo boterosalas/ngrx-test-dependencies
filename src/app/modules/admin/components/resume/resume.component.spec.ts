@@ -1,15 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ResumeComponent } from './resume.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { MatListModule } from '@angular/material';
+import { MatListModule } from '@angular/material/list';
 
 describe('ResumeComponent', () => {
   let component: ResumeComponent;
   let fixture: ComponentFixture<ResumeComponent>;
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ResumeComponent],
       imports: [AppMaterialModule, MatListModule, TranslateModule.forRoot()],

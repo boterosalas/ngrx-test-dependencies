@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
-import { MatSnackBar } from '@angular/material';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { MasterDataService } from 'src/app/services/master-data.service';
 

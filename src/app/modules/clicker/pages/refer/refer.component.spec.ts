@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
 import { ReferComponent } from './refer.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -88,7 +88,7 @@ describe('ReferComponent', () => {
     },
   };
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ReferComponent],
       imports: [

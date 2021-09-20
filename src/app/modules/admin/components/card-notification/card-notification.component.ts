@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DialogDeleteNotificationComponent } from '../dialog-delete-notification/dialog-delete-notification.component';
 

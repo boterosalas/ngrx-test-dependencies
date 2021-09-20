@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { MatDialog, MatTable } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
@@ -249,5 +250,4 @@ export class InformationBussinessComponent implements OnInit {
       confirmButtonClass: 'upload-success',
     });
   }
-
 }

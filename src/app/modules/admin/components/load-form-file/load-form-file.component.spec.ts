@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoadFormFileComponent } from './load-form-file.component';
 import { ReactiveFormsModule, FormsModule, FormBuilder } from '@angular/forms';
@@ -9,7 +9,7 @@ describe('LoadFormFileComponent', () => {
   let fixture: ComponentFixture<LoadFormFileComponent>;
   const formBuilder: FormBuilder = new FormBuilder();
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [LoadFormFileComponent],
       imports: [ReactiveFormsModule, FormsModule],

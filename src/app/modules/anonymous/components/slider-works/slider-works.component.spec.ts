@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SliderWorksComponent } from './slider-works.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
@@ -8,7 +8,7 @@ describe('SliderWorksComponent', () => {
   let component: SliderWorksComponent;
   let fixture: ComponentFixture<SliderWorksComponent>;
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SliderWorksComponent],
       imports: [SlickCarouselModule, TranslateModule.forRoot()],

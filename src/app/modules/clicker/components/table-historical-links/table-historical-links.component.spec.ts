@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TableHistoricalLinksComponent } from './table-historical-links.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
@@ -10,7 +10,7 @@ describe('TableHistoricalLinksComponent', () => {
   let component: TableHistoricalLinksComponent;
   let fixture: ComponentFixture<TableHistoricalLinksComponent>;
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TableHistoricalLinksComponent],
       imports: [AppMaterialModule, TranslateModule.forRoot(), SharedModule, NgxPaginationModule],

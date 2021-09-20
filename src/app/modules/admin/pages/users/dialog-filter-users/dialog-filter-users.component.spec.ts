@@ -1,5 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LOCALE_CONFIG, LocaleService, NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { config, of } from 'rxjs';
@@ -13,7 +13,7 @@ describe('DialogFilterUsersComponent', () => {
   let fixture: ComponentFixture<DialogFilterUsersComponent>;
 
   const mockContentService = jasmine.createSpyObj('ContentService', ['getAllBusiness']);
-
+  const formBuilder: FormBuilder = new FormBuilder();
   let allBusiness = [
     {
       id: 1,
@@ -62,22 +62,25 @@ describe('DialogFilterUsersComponent', () => {
     },
   ];
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [DialogFilterUsersComponent],
-      imports: [FormsModule, ReactiveFormsModule, AppMaterialModule, NgxDaterangepickerMd, BrowserAnimationsModule],
-      providers: [
-        { provide: ContentService, useValue: mockContentService },
-        { provide: LOCALE_CONFIG, useValue: config },
-        {
-          provide: LocaleService,
-          useClass: LocaleService,
-          deps: [LOCALE_CONFIG],
-        },
-      ],
-    }).compileComponents();
-    mockContentService.getAllBusiness.and.returnValue(of(allBusiness));
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [DialogFilterUsersComponent],
+        imports: [FormsModule, ReactiveFormsModule, AppMaterialModule, NgxDaterangepickerMd, BrowserAnimationsModule],
+        providers: [
+          { provide: ContentService, useValue: mockContentService },
+          { provide: LOCALE_CONFIG, useValue: config },
+          { provide: FormBuilder, useValue: formBuilder },
+          {
+            provide: LocaleService,
+            useClass: LocaleService,
+            deps: [LOCALE_CONFIG],
+          },
+        ],
+      }).compileComponents();
+      mockContentService.getAllBusiness.and.returnValue(of(allBusiness));
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DialogFilterUsersComponent);
@@ -98,6 +101,22 @@ describe('DialogFilterUsersComponent', () => {
     component.clearFilters();
     expect(component.chipsBussiness).toEqual([]);
     expect(component.chipsBussinessId).toEqual([]);
+  });
+
+  it('reset status', () => {
+    component.filterUsers = formBuilder.group({
+      status: [null],
+    });
+    component.resetStatus();
+    expect(component.filterUsers.controls.status.value).toEqual(null);
+  });
+
+  it('reset commission', () => {
+    component.filterUsers = formBuilder.group({
+      commissions: [null],
+    });
+    component.resetCommissions();
+    expect(component.filterUsers.controls.commissions.value).toEqual(null);
   });
 
   it('change value add chip', () => {

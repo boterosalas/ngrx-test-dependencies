@@ -1,5 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
@@ -11,7 +11,7 @@ describe('FaqItemComponent', () => {
   let component: FaqItemComponent;
   let fixture: ComponentFixture<FaqItemComponent>;
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [FaqItemComponent],
       imports: [HttpClientTestingModule, TranslateModule.forRoot({}), BrowserAnimationsModule, AppMaterialModule],

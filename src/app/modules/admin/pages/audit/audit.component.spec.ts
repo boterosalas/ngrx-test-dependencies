@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AuditComponent } from './audit.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -28,7 +28,7 @@ describe('AuditComponent', () => {
     objectResponse: [],
   };
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [AuditComponent],
       imports: [

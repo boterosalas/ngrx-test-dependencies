@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 //import { saveAs } from 'file-saver-ios-bugfix';
 import { DialogImagePlayerComponent } from '../../components/dialog-visualization-image/dialog-image-player.component';
 import { ActivatedRoute } from '@angular/router';
@@ -18,7 +18,7 @@ export class LibraryComponent implements OnInit {
   stepMobile: any;
   visibleStepMobile = false;
   dataReal = [];
-  imagenDispo  = true;
+  imagenDispo = true;
   ext: string;
   contentType: string;
   videosDispo = true;

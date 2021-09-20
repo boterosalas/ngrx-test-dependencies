@@ -6,12 +6,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./table-novelties.component.scss'],
 })
 export class TableNoveltiesComponent implements OnInit {
-  @Input() dataSource;
+  @Input() dataSource?;
   @Output() dataNoveltie = new EventEmitter();
   @Output() sortNoveltie = new EventEmitter();
-  @Input() size;
-  @Input() p;
-  @Input() totalItems;
+  @Input() size?;
+  @Input() p?;
+  @Input() totalItems?;
 
   infoUpdate = {};
 

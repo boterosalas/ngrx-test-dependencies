@@ -20,7 +20,7 @@ import decode from 'jwt-decode';
 import { SidenavService } from './services/sidenav.service';
 import { onMainContentChange } from './animations/animations';
 import { OnboardingSwiperComponent } from './modules/shared/components/onboarding-swiper/onboarding-swiper.component';
-import { MatCheckboxChange } from '@angular/material';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { ModalGenericComponent } from './modules/shared/components/modal-generic/modal-generic.component';
 import { ResponseService } from './interfaces/response';
 import { MasterDataService } from './services/master-data.service';

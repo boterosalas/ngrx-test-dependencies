@@ -5,7 +5,7 @@ import * as moment from 'moment';
 import { UserService } from 'src/app/services/user.service';
 import { LinksService } from 'src/app/services/links.service';
 import { ResponseService } from 'src/app/interfaces/response';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -143,7 +143,7 @@ export class AuditComponent implements OnInit, OnDestroy {
 
   /**
    * Abre el mensaje de confirmacion de copiado del link
-   * @param message mensaje 
+   * @param message mensaje
    * @param action accion
    */
 

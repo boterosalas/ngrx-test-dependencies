@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 
 import { ReportsComponent } from './reports.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -11,13 +11,13 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { LinksService } from 'src/app/services/links.service';
 import { of } from 'rxjs/internal/observable/of';
 import { NgxDaterangepickerMd, LocaleService, LOCALE_CONFIG } from 'ngx-daterangepicker-material';
-import { CardComponent } from 'src/app/modules/anonymous/components/card/card.component';
 import { LoadFormFileComponent } from '../../components/load-form-file/load-form-file.component';
-import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { config } from 'process';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AnonymousModule } from 'src/app/modules/anonymous/anonymous.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 describe('ReportsComponent', () => {
   let component: ReportsComponent;
@@ -50,7 +50,7 @@ describe('ReportsComponent', () => {
     objectResponse: [],
   };
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ReportsComponent, LoadFormFileComponent],
       imports: [

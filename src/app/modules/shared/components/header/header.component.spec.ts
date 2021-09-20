@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
 import { AppMaterialModule } from '../../app-material/app-material.module';
@@ -6,7 +6,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MatMenuModule } from '@angular/material';
+import { MatMenuModule } from '@angular/material/menu';
 import { UtilsService } from 'src/app/services/utils.service';
 import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -33,7 +33,7 @@ describe('HeaderComponent', () => {
     IdType: 1,
   };
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [HeaderComponent, HomeComponent],
       imports: [

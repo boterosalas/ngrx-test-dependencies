@@ -17,12 +17,23 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "@firebase",
+              "@angular/fire",
+              "firebase",
+              "@firebase/app",
+              "@firebase/database",
+              "@firebase/firestore",
+              "@firebase/functions",
+              "@firebase/performance",
+              "@firebase/remote-config",
+              "@firebase/util",
+              "@firebase/component",
+              "jwt-decode"
+            ],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                ".",
-                "src/assets/styles"
-              ]
-          },
+              "includePaths": [".", "src/assets/styles"]
+            },
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -44,11 +55,13 @@
               "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/assets/styles/styles.scss"
             ],
-            "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/slick-carousel/slick/slick.min.js",
-              "node_modules/hammerjs/hammer.min.js"
-            ]
+            "scripts": ["node_modules/jquery/dist/jquery.min.js", "node_modules/slick-carousel/slick/slick.min.js"],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "prod": {
@@ -65,12 +78,10 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": false,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": false,
+              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -87,6 +98,30 @@
               "ngswConfigPath": "ngsw-config.json"
             },
             "qa": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "index": {
+                "input": "src/index-qa.html",
+                "output": "index.html"
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                }
+              ]
+            },
+            "uat": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6mb"
+                }
+              ],
               "index": {
                 "input": "src/index-qa.html",
                 "output": "index.html"
@@ -98,7 +133,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -124,26 +160,22 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "stylePreprocessorOptions": {
-              "includePaths": [
-                ".",
-                "src/assets/styles"
-              ]
-          },
-            "codeCoverageExclude":[
-                "src/app/services/**/*",
-                "src/app/pipes/**/*",
-                "src/app/validators/**/*",
-                "src/app/interceptors/**/*"
-              ],
+              "includePaths": [".", "src/assets/styles"]
+            },
+            "codeCoverageExclude": [
+              "src/app/services/**/*",
+              "src/app/pipes/**/*",
+              "src/app/validators/**/*",
+              "src/app/interceptors/**/*",
+              "src/app/directives/**/*",
+              "/src/app/auth.guard.ts",
+              "/src/app/role.guard.ts"
+            ],
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/manifest.webmanifest"
-            ],
+            "assets": ["src/favicon.ico", "src/assets", "src/manifest.webmanifest"],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "./node_modules/bootstrap/scss/bootstrap-grid.scss",
@@ -153,25 +185,14 @@
               "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/assets/styles/styles.scss"
             ],
-            "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/slick-carousel/slick/slick.min.js",
-              "node_modules/hammerjs/hammer.min.js"
-
-            ]
+            "scripts": ["node_modules/jquery/dist/jquery.min.js", "node_modules/slick-carousel/slick/slick.min.js"]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": ["tsconfig.app.json", "tsconfig.spec.json", "e2e/tsconfig.json"],
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {

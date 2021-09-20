@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
 import { DialogNavigationGroupComponent } from '../dialog-navigation-group/dialog-navigation-group.component';

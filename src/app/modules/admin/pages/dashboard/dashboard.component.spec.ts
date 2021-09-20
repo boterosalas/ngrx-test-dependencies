@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardComponent } from './dashboard.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
@@ -37,7 +37,7 @@ describe('DashboardComponent', () => {
     todayGeneratedLinks: 0,
   };
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [DashboardComponent],
       imports: [

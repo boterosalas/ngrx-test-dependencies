@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewsAdminComponent } from './news-admin.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -9,7 +9,6 @@ import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder } from '@angul
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxDaterangepickerMd, LocaleService, LOCALE_CONFIG } from 'ngx-daterangepicker-material';
-import { MatDatepickerModule, MatDialog, MatNativeDateModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AnonymousModule } from 'src/app/modules/anonymous/anonymous.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
@@ -19,14 +18,19 @@ import { UserService } from 'src/app/services/user.service';
 import { LinksService } from 'src/app/services/links.service';
 import { of } from 'rxjs';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 moment.locale('es');
 
 describe('NewsAdminComponent', () => {
   let component: NewsAdminComponent;
   let fixture: ComponentFixture<NewsAdminComponent>;
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll', 'afterAllClosed']);
+  const mockSnackBar = jasmine.createSpyObj('MatSnackBar', ['open', 'closeAll', 'afterAllClosed']);
   const mockUserService = jasmine.createSpyObj('UserService', ['getExportNewsExcel', 'getAllNews']);
-  const mockLinksService = jasmine.createSpyObj('LinksService', ['getkpiNovelties']);
+  const mockLinksService = jasmine.createSpyObj('LinksService', ['getkpiNovelties', 'searchUsers']);
   const getUserExcel = {
     state: 'Success',
     userMessage: 'se ha enviado un correo a test@h.com',
@@ -114,49 +118,52 @@ describe('NewsAdminComponent', () => {
       },
     ],
   };
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [NewsAdminComponent],
-      imports: [
-        TranslateModule.forRoot(),
-        AnonymousModule,
-        AppMaterialModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        HttpClientTestingModule,
-        ReactiveFormsModule,
-        FormsModule,
-        BrowserAnimationsModule,
-        SharedModule,
-        NgxDaterangepickerMd,
-        NgxPaginationModule,
-        RouterTestingModule.withRoutes([]),
-        JwtModule.forRoot({
-          config: {
-            tokenGetter: () => {
-              return localStorage.getItem('ACCESS_TOKEN');
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [NewsAdminComponent],
+        imports: [
+          TranslateModule.forRoot(),
+          AnonymousModule,
+          AppMaterialModule,
+          MatDatepickerModule,
+          MatNativeDateModule,
+          HttpClientTestingModule,
+          ReactiveFormsModule,
+          FormsModule,
+          BrowserAnimationsModule,
+          SharedModule,
+          NgxDaterangepickerMd,
+          NgxPaginationModule,
+          RouterTestingModule.withRoutes([]),
+          JwtModule.forRoot({
+            config: {
+              tokenGetter: () => {
+                return localStorage.getItem('ACCESS_TOKEN');
+              },
+              throwNoTokenError: true,
+              whitelistedDomains: [],
+              blacklistedRoutes: [],
             },
-            throwNoTokenError: true,
-            whitelistedDomains: [],
-            blacklistedRoutes: [],
+          }),
+        ],
+        schemas: [NO_ERRORS_SCHEMA],
+        providers: [
+          { provide: LOCALE_CONFIG, useValue: config },
+          {
+            provide: LocaleService,
+            useClass: LocaleService,
+            deps: [LOCALE_CONFIG],
           },
-        }),
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
-      providers: [
-        { provide: LOCALE_CONFIG, useValue: config },
-        {
-          provide: LocaleService,
-          useClass: LocaleService,
-          deps: [LOCALE_CONFIG],
-        },
-        { provide: MatDialog, useValue: mockDialog },
-        { provide: UserService, useValue: mockUserService },
-        { provide: LinksService, useValue: mockLinksService },
-      ],
-    }).compileComponents();
-    mockDialog.afterAllClosed.and.returnValue(of(getUserExcel));
-  }));
+          { provide: MatDialog, useValue: mockDialog },
+          { provide: UserService, useValue: mockUserService },
+          { provide: LinksService, useValue: mockLinksService },
+          { provide: MatSnackBar, useValue: mockSnackBar },
+        ],
+      }).compileComponents();
+      mockDialog.afterAllClosed.and.returnValue(of(getUserExcel));
+    })
+  );
 
   beforeEach(() => {
     mockUserService.getAllNews.and.returnValue(of(repsDatos));
@@ -182,6 +189,30 @@ describe('NewsAdminComponent', () => {
       pageSize: 20,
       length: 5,
     });
+    expect(mockUserService.getAllNews).toHaveBeenCalled();
+  });
+
+  it('open snack bar', () => {
+    component.openSnackBar('prueba', 'actionPrueba');
+    expect(mockSnackBar.open).toHaveBeenCalled();
+  });
+
+  it('search user', () => {
+    component.paginate = '';
+    component.searchUser('term', 1, 0, '', '');
+    expect(component.paginate).toBeDefined();
+    expect(component.filterData.searchText).toEqual('term');
+    expect(component.filterData.from).toEqual(1);
+  });
+
+  it('pagination', () => {
+    component.pagination({
+      previousPageIndex: 1,
+      pageIndex: 0,
+      pageSize: 20,
+      length: 5,
+    });
+    component.searchUser('term', 1, 0, '', '');
     expect(mockUserService.getAllNews).toHaveBeenCalled();
   });
 

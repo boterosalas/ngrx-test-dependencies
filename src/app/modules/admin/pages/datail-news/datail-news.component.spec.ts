@@ -1,12 +1,11 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { DatailNewsComponent } from './datail-news.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatDatepickerModule, MatDialog, MatNativeDateModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
@@ -19,6 +18,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { of } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 describe('DatailNewsComponent', () => {
   let component: DatailNewsComponent;
@@ -31,6 +32,7 @@ describe('DatailNewsComponent', () => {
     'getNewNovelties',
     'getNoveltiesById',
   ]);
+  const mockSnackBar = jasmine.createSpyObj('MatSnackBar', ['open', 'closeAll', 'afterAllClosed']);
 
   let mockRouter = {
     navigate: jasmine.createSpy('navigate'),
@@ -157,7 +159,7 @@ describe('DatailNewsComponent', () => {
     },
   };
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [DatailNewsComponent],
       imports: [
@@ -185,6 +187,7 @@ describe('DatailNewsComponent', () => {
       providers: [
         { provide: MatDialog, useValue: mockDialog },
         { provide: UserService, useValue: mockUserService },
+        { provide: MatSnackBar, useValue: mockSnackBar },
       ],
     }).compileComponents();
     mockUserService.getNoveltyById.and.returnValue(of(respDatos));
@@ -242,7 +245,6 @@ describe('DatailNewsComponent', () => {
     expect(component.selecteds[4].state).toEqual(2);
   });
 
-
   it('steps current state "Pendiente de documentación"', () => {
     component.changeSelecteds('Pendiente de documentación');
     expect(component.selecteds[0].state).toEqual(2);
@@ -251,7 +253,6 @@ describe('DatailNewsComponent', () => {
     expect(component.selecteds[3].state).toEqual(0);
     expect(component.selecteds[4].state).toEqual(0);
   });
-
 
   it('steps current state "Solución parcial"', () => {
     component.changeSelecteds('Solución parcial');
@@ -267,6 +268,7 @@ describe('DatailNewsComponent', () => {
     component.initForm();
     component.saveChanges();
     expect(mockUserService.setStatus).toHaveBeenCalled();
+    expect(mockSnackBar.open).toHaveBeenCalled();
     expect(component.active).toBeTruthy();
     component.onChangeSelected('Pendiente');
   });

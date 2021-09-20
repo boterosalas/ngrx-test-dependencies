@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ContentLibraryComponent } from './content-library.component';
 
@@ -10,24 +10,26 @@ import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder } from '@angul
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxDaterangepickerMd, LocaleService, LOCALE_CONFIG } from 'ngx-daterangepicker-material';
-import { MatDatepickerModule, MatDialog, MatNativeDateModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AnonymousModule } from 'src/app/modules/anonymous/anonymous.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import Swal from 'sweetalert2';
 import { ContentService } from 'src/app/services/content.service';
 import { of } from 'rxjs';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialog } from '@angular/material/dialog';
+
 describe('ContentLibraryComponent', () => {
   let component: ContentLibraryComponent;
   let fixture: ComponentFixture<ContentLibraryComponent>;
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll']);
-  const mockContentService = jasmine.createSpyObj('ContentService', ['getVideosImage','getBusiness', 'setContentImgVi', 'deleteContent']);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getVideosImage', 'getBusiness', 'setContentImgVi', 'deleteContent']);
   const audit = {
     state: 'success',
     userMessage: 'se ha enviado un correo',
     objectResponse: [{}],
   };
-
 
   const allBusiness = [
     {
@@ -77,46 +79,48 @@ describe('ContentLibraryComponent', () => {
     },
   ];
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ContentLibraryComponent],
-      imports: [
-        TranslateModule.forRoot(),
-        AnonymousModule,
-        AppMaterialModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        HttpClientTestingModule,
-        ReactiveFormsModule,
-        FormsModule,
-        BrowserAnimationsModule,
-        SharedModule,
-        NgxDaterangepickerMd,
-        RouterTestingModule.withRoutes([]),
-        JwtModule.forRoot({
-          config: {
-            tokenGetter: () => {
-              return localStorage.getItem('ACCESS_TOKEN');
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ContentLibraryComponent],
+        imports: [
+          TranslateModule.forRoot(),
+          AnonymousModule,
+          AppMaterialModule,
+          MatDatepickerModule,
+          MatNativeDateModule,
+          HttpClientTestingModule,
+          ReactiveFormsModule,
+          FormsModule,
+          BrowserAnimationsModule,
+          SharedModule,
+          NgxDaterangepickerMd,
+          RouterTestingModule.withRoutes([]),
+          JwtModule.forRoot({
+            config: {
+              tokenGetter: () => {
+                return localStorage.getItem('ACCESS_TOKEN');
+              },
+              throwNoTokenError: true,
+              whitelistedDomains: [],
+              blacklistedRoutes: [],
             },
-            throwNoTokenError: true,
-            whitelistedDomains: [],
-            blacklistedRoutes: [],
-          },
-        }),
-      ],
+          }),
+        ],
 
-      schemas: [NO_ERRORS_SCHEMA],
-      providers: [
-        { provide: MatDialog, useValue: mockDialog },
-        { provide: ContentService, useValue: mockContentService },
-      ],
-    }).compileComponents();
-    mockContentService.getBusiness.and.returnValue(of(allBusiness));
-    mockContentService.getVideosImage.and.returnValue(of(audit));
-    mockContentService.setContentImgVi.and.returnValue(of(audit));
-    //deleteContent
-    mockContentService.deleteContent.and.returnValue(of(audit));
-  }));
+        schemas: [NO_ERRORS_SCHEMA],
+        providers: [
+          { provide: MatDialog, useValue: mockDialog },
+          { provide: ContentService, useValue: mockContentService },
+        ],
+      }).compileComponents();
+      mockContentService.getBusiness.and.returnValue(of(allBusiness));
+      mockContentService.getVideosImage.and.returnValue(of(audit));
+      mockContentService.setContentImgVi.and.returnValue(of(audit));
+      //deleteContent
+      mockContentService.deleteContent.and.returnValue(of(audit));
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ContentLibraryComponent);

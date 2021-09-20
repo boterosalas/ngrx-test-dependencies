@@ -204,7 +204,7 @@ export class NotificationDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  private getExtension(nameFile: string) {
+   getExtension(nameFile: string) {
     const splitExt = nameFile.split('.');
     const getExt = splitExt[1];
     this.validFormat = false;

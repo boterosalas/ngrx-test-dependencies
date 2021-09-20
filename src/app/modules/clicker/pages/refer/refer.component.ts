@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSnackBar, MatPaginator, MatTableDataSource } from '@angular/material';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import { LinksService } from 'src/app/services/links.service';
 import { Subscription } from 'rxjs';
@@ -9,6 +8,9 @@ import { ResponseService } from 'src/app/interfaces/response';
 import { Refer } from 'src/app/interfaces/refer';
 import { ContentService } from 'src/app/services/content.service';
 import { TokenService } from 'src/app/services/token.service';
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatTableDataSource } from "@angular/material/table";
 
 @Component({
   selector: 'app-refer',

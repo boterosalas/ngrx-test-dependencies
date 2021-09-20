@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { ResponseService } from 'src/app/interfaces/response';
 import { DialogStoriesComponent } from 'src/app/modules/shared/components/dialog-stories/dialog-stories.component';

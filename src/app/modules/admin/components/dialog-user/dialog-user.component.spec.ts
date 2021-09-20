@@ -1,9 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogUserComponent } from './dialog-user.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef, MatSlideToggleModule, MatMenuModule } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -13,10 +14,14 @@ import { of } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 describe('DialogUserComponent', () => {
   let component: DialogUserComponent;
   let fixture: ComponentFixture<DialogUserComponent>;
+  const mockSnackBar = jasmine.createSpyObj('MatSnackBar', ['open', 'closeAll', 'afterAllClosed']);
   const mockUserService = jasmine.createSpyObj('UserService', [
     'getHojaVida',
     'updateInfoClicker',
@@ -61,43 +66,46 @@ describe('DialogUserComponent', () => {
     userMessage: 'Se ha guardado satisfactoriamente',
     objectResponse: null,
   };
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [DialogUserComponent],
-      imports: [
-        TranslateModule.forRoot(),
-        MatSlideToggleModule,
-        SharedModule,
-        MatMenuModule,
-        AppMaterialModule,
-        HttpClientTestingModule,
-        BrowserAnimationsModule,
-        ReactiveFormsModule,
-        FormsModule,
-        RouterTestingModule.withRoutes([]),
-        JwtModule.forRoot({
-          config: {
-            tokenGetter: () => {
-              return localStorage.getItem('ACCESS_TOKEN');
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [DialogUserComponent],
+        imports: [
+          TranslateModule.forRoot(),
+          MatSlideToggleModule,
+          SharedModule,
+          MatMenuModule,
+          AppMaterialModule,
+          HttpClientTestingModule,
+          BrowserAnimationsModule,
+          ReactiveFormsModule,
+          FormsModule,
+          RouterTestingModule.withRoutes([]),
+          JwtModule.forRoot({
+            config: {
+              tokenGetter: () => {
+                return localStorage.getItem('ACCESS_TOKEN');
+              },
+              throwNoTokenError: true,
+              whitelistedDomains: [],
+              blacklistedRoutes: [],
             },
-            throwNoTokenError: true,
-            whitelistedDomains: [],
-            blacklistedRoutes: [],
-          },
-        }),
-      ],
-      providers: [
-        { provide: MAT_DIALOG_DATA, useValue: {} },
-        { provide: MatDialogRef, useValue: dialogMock },
-        { provide: UserService, useValue: mockUserService },
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
-    mockUserService.getHojaVida.and.returnValue(of(getUserExcel));
-    mockUserService.updateInfoClicker.and.returnValue(of(getUserExcel));
-    mockUserService.getStatusVerification.and.returnValue(of(getStatusVerification));
-    mockUserService.postUpdateResponseAccountBank.and.returnValue(of(postUpdateResponse));
-  }));
+          }),
+        ],
+        providers: [
+          { provide: MAT_DIALOG_DATA, useValue: {} },
+          { provide: MatDialogRef, useValue: dialogMock },
+          { provide: UserService, useValue: mockUserService },
+          { provide: MatSnackBar, useValue: mockSnackBar },
+        ],
+        schemas: [NO_ERRORS_SCHEMA],
+      }).compileComponents();
+      mockUserService.getHojaVida.and.returnValue(of(getUserExcel));
+      mockUserService.updateInfoClicker.and.returnValue(of(getUserExcel));
+      mockUserService.getStatusVerification.and.returnValue(of(getStatusVerification));
+      mockUserService.postUpdateResponseAccountBank.and.returnValue(of(postUpdateResponse));
+    })
+  );
 
   beforeEach(() => {
     localStorage.setItem(
@@ -111,6 +119,11 @@ describe('DialogUserComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('open snack bar', () => {
+    component.openSnackBar('prueba', 'actionPrueba');
+    expect(mockSnackBar.open).toHaveBeenCalled();
   });
 
   it('change status', () => {
@@ -155,6 +168,18 @@ describe('DialogUserComponent', () => {
     component.onNoClick;
     expect(component).toBeTruthy();
   });
+
+  it('get hoja de vida', () => {
+    component.getDatasHoja({ userId: 1, start: new Date(), end: new Date() });
+    expect(mockUserService.getHojaVida).toHaveBeenCalled();
+    expect(component.dataSourceBusi).toEqual(getUserExcel.objectResponse);
+  });
+
+  it('Save info clciker', () => {
+    component.saveInfoPersonal();
+    expect(mockUserService.updateInfoClicker).toHaveBeenCalled();
+  });
+
 
   it('onNoClickEdit', () => {
     component.onNoClickEdit;

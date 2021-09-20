@@ -1,9 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogVideoPlayerComponent } from './dialog-video-player.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs/internal/observable/of';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -28,7 +28,7 @@ describe('DialogCategoryComponent', () => {
     userMessage: 'se ha actualizado el email',
     objectResponse: [],
   };
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [DialogVideoPlayerComponent, TruncatePipe],
       imports: [

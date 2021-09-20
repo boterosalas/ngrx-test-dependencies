@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogStoriesComponent } from '../../../shared/components/dialog-stories/dialog-stories.component';
 import { ContentService } from 'src/app/services/content.service';
 import { UserService } from 'src/app/services/user.service';
@@ -19,12 +19,7 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
   bussiness: any;
   userId: string;
 
-  constructor(
-    private user: UserService,
-    private dialog: MatDialog,
-    private content: ContentService,
-    private router: Router
-  ) { }
+  constructor(private user: UserService, private dialog: MatDialog, private content: ContentService, private router: Router) {}
 
   private subscription: Subscription = new Subscription();
 
@@ -62,7 +57,7 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
         showArrows: true,
         userId: this.userId,
         showCarousel: true,
-        vidPause
+        vidPause,
       },
       panelClass: 'dialog-stories',
       hasBackdrop: false,
@@ -77,7 +72,6 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
         this.router.navigate(['/inicio']);
       });
     });
-
   }
 
   public getStories() {
@@ -124,7 +118,6 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
       }
     });
   }
-
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

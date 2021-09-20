@@ -1,5 +1,5 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -11,13 +11,15 @@ describe('TableNoveltiesComponent', () => {
   let component: TableNoveltiesComponent;
   let fixture: ComponentFixture<TableNoveltiesComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [TableNoveltiesComponent],
-      imports: [AppMaterialModule, TranslateModule.forRoot({}), BrowserAnimationsModule, NgxPaginationModule],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TableNoveltiesComponent],
+        imports: [AppMaterialModule, TranslateModule.forRoot({}), BrowserAnimationsModule, NgxPaginationModule],
+        schemas: [NO_ERRORS_SCHEMA],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TableNoveltiesComponent);
@@ -27,5 +29,18 @@ describe('TableNoveltiesComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    expect(component.displayedColumns).toBeTruthy();
+    component.totalItems = 1;
+    expect(component.totalItems).toBeTruthy();
+  });
+  it('emit dialog', () => {
+    spyOn(component.dataNoveltie, 'emit');
+    component.openDialog({});
+    expect(component.dataNoveltie.emit).toHaveBeenCalled();
+  });
+  it('sort emit', () => {
+    spyOn(component.sortNoveltie, 'emit');
+    component.sortData({ prueba: 0 });
+    expect(component.sortNoveltie.emit).toHaveBeenCalled();
   });
 });

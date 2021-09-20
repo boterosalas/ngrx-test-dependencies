@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegisterformComponent } from './registerform.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -16,7 +16,7 @@ import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { UtilsService } from 'src/app/services/utils.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 describe('RegisterformComponent', () => {
   let component: RegisterformComponent;
@@ -125,7 +125,7 @@ describe('RegisterformComponent', () => {
       },
     ],
   };
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [RegisterformComponent],
       imports: [
@@ -205,7 +205,7 @@ describe('RegisterformComponent', () => {
     component.selectId('2');
     expect(component.showBusiness).toBeFalsy();
   });
-  
+
 
   describe('register clicker', () => {
     beforeEach(() => {

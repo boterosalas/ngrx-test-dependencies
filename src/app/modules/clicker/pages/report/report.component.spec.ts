@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReportComponent } from './report.component';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -13,7 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { DialogHistoryComponent } from '../../components/dialog-history/dialog-history.component';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 describe('ReportComponent', () => {
@@ -89,7 +89,7 @@ describe('ReportComponent', () => {
     date: '2019-11-10T20:33:01.207',
   };
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ReportComponent, DialogHistoryComponent, ModalGenericComponent],
       imports: [

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductBussinessComponent } from './product-bussiness.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
@@ -10,7 +10,7 @@ describe('ProductComponent', () => {
   let component: ProductBussinessComponent;
   let fixture: ComponentFixture<ProductBussinessComponent>;
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [SharedModule, AppMaterialModule, FormsModule, ReactiveFormsModule],

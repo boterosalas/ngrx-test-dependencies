@@ -10,11 +10,14 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatSlideToggleModule, MatMenuModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 import { AppMaterialModule } from '../../app-material/app-material.module';
 import { SharedModule } from '../../shared.module';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
 
 describe('OnboardingSwiperComponent', () => {
   let component: OnboardingSwiperComponent;

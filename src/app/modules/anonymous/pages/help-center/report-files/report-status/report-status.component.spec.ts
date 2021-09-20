@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -7,13 +7,16 @@ import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder } from '@angul
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxDaterangepickerMd, LocaleService, LOCALE_CONFIG } from 'ngx-daterangepicker-material';
-import { MatDatepickerModule, MatDialog, MatDialogRef, MatNativeDateModule, MAT_DIALOG_DATA } from '@angular/material';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { ReportStatusComponent } from './report-status.component';
 import { UserService } from 'src/app/services/user.service';
 import { of } from 'rxjs/internal/observable/of';
 import Swal from 'sweetalert2';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 export class MatDialogMock {
   open() {
@@ -50,7 +53,7 @@ describe('ReportStatusComponent', () => {
   };
 
   const matDialog = new MatDialogMock();
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ReportStatusComponent],
       imports: [
@@ -87,7 +90,6 @@ describe('ReportStatusComponent', () => {
     mockContentService.saveNews.and.returnValue(of(resp));
     mockContentService.getNovetlyUser.and.returnValue(of(respNovelty));
     mockContentService.saveQualificationNovelty.and.returnValue(of(resp));
-
   }));
 
   beforeEach(() => {

@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -176,7 +176,7 @@ describe('NavigationMenuComponent', () => {
 
   const matDialog = new MatDialogMock();
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -252,9 +252,8 @@ describe('NavigationMenuComponent', () => {
     expect(mockAuthService.getmenusNoLogin).toHaveBeenCalled();
   });
 
-
   it('edit change state item', () => {
-    component.changeStateOfItem({active:true});
+    component.changeStateOfItem({ active: true });
     expect(mockAuthService.saveMenu).toHaveBeenCalled();
   });
 });

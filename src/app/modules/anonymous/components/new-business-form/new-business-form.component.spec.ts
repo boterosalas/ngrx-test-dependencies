@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewBusinessFormComponent } from './new-business-form.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -8,7 +8,7 @@ import { RecaptchaModule, RecaptchaFormsModule, RECAPTCHA_SETTINGS, RecaptchaSet
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContentService } from 'src/app/services/content.service';
 import { of } from 'rxjs';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 describe('NewBusinessFormComponent', () => {
   let component: NewBusinessFormComponent;
@@ -69,7 +69,7 @@ describe('NewBusinessFormComponent', () => {
     objectResponse: true,
   };
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NewBusinessFormComponent],
       imports: [

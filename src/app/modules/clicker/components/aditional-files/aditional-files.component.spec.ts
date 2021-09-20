@@ -1,5 +1,5 @@
 //Check for testing in cloud
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AditionalFilesComponent } from './aditional-files.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -14,7 +14,7 @@ describe('AditionalFilesComponent', () => {
   let component: AditionalFilesComponent;
   let fixture: ComponentFixture<AditionalFilesComponent>;
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [AditionalFilesComponent, TruncatePipe],
       imports: [

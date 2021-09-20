@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReferShareComponent } from './refer-share.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -31,7 +31,7 @@ describe('ReferShareComponent', () => {
     aud: 'Estudiantes',
   };
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ReferShareComponent],
       imports: [

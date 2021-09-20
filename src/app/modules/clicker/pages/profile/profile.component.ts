@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { ResponseService } from 'src/app/interfaces/response';
 import { ActivatedRoute } from '@angular/router';
-import { MatTabGroup } from '@angular/material';
+import { MatTabGroup } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-profile',

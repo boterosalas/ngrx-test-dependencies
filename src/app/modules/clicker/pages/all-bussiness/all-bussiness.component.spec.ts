@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AllBussinessComponent } from './all-bussiness.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
@@ -30,7 +30,7 @@ describe('AllBussinessComponent', () => {
     },
   ];
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [AllBussinessComponent],
       imports: [

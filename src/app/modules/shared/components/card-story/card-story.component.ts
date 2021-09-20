@@ -1,7 +1,8 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter, ViewChild, TemplateRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { MatBottomSheet, MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
 import { TokenService } from 'src/app/services/token.service';
 import { LinksService } from 'src/app/services/links.service';
@@ -141,7 +142,6 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
     this.selectStory(this.stories[this.indexCStory].id);
 
     if (this.play) {
-
       if (this.video) {
         this.video.addEventListener(
           'loadeddata',
@@ -167,7 +167,6 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
 
       this.subscription = this.content.saveVisitStories(data).subscribe((resp: ResponseService) => {
         if (resp.state === 'Success') {
-
           if (!this.stories.some((x) => x.stateView)) {
             const buttonBusiness = document.getElementById(`button-business-${this.index}`);
             if (buttonBusiness && buttonBusiness.classList.contains('new')) {
@@ -234,7 +233,6 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   public viewStory() {
-
     if (this.cardOpen) {
       this.openStoryCard.emit(this.index);
     }
@@ -242,7 +240,6 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
     setTimeout(() => {
       this.video.currentTime = 0;
     }, 100);
-
   }
 
   private progress() {
@@ -298,7 +295,7 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
             this.vidPause(false);
             if (this.video && !this.isImage) {
               this.video.onended = () => {
-                  this.nextSliderOrStory();
+                this.nextSliderOrStory();
               };
             }
             this.currentTime += 100; // milisegundos

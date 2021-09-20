@@ -1,5 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { waitForAsync, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { ComissionTableComponent } from './comission-table.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
@@ -370,14 +369,16 @@ describe('ComissionTableComponent', () => {
     ],
   };
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), AppMaterialModule, BrowserAnimationsModule, SharedModule, RouterTestingModule],
-      declarations: [ComissionTableComponent],
-      providers: [{ provide: ContentService, useValue: mockContentService }],
-    }).compileComponents();
-    mockContentService.getCommissions.and.returnValue(of(table));
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [TranslateModule.forRoot(), AppMaterialModule, BrowserAnimationsModule, SharedModule, RouterTestingModule],
+        declarations: [ComissionTableComponent],
+        providers: [{ provide: ContentService, useValue: mockContentService }],
+      }).compileComponents();
+      mockContentService.getCommissions.and.returnValue(of(table));
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ComissionTableComponent);
@@ -387,15 +388,7 @@ describe('ComissionTableComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    component.ngOnInit();
     expect(mockContentService.getCommissions).toHaveBeenCalled();
   });
-
-  // it("class tags", () => {
-  //   component.addTagsTableComission();
-  //   fixture.whenStable().then(()=> {
-  //     const nativeElementInput = fixture.nativeElement;
-  //     const tab = nativeElementInput.querySelector("'.mat-tab-label[aria-posinset='1']'");
-  //     expect(tab).toHaveClass('gtmTablaComiClicMenuMovilExito');
-  //   })
-  // });
 });

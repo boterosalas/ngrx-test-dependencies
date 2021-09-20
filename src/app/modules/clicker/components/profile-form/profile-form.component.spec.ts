@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfileFormComponent } from './profile-form.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -10,7 +10,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { DialogEditComponent } from '../dialog-edit/dialog-edit.component';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MasterDataService } from 'src/app/services/master-data.service';
 import { of } from 'rxjs/internal/observable/of';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
@@ -187,7 +187,7 @@ describe('ProfileFormComponent', () => {
     objectResponse: null
   };
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ProfileFormComponent, DialogEditComponent, TruncatePipe],
       imports: [

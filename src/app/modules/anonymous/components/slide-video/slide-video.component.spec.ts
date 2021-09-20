@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SlideVideoComponent } from './slide-video.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
@@ -15,7 +15,7 @@ describe('SlideVideoComponent', () => {
   let component: SlideVideoComponent;
   let fixture: ComponentFixture<SlideVideoComponent>;
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SlideVideoComponent],
       imports: [

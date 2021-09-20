@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogHistoryComponent } from './dialog-history.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 describe('DialogHistoryComponent', () => {
   let component: DialogHistoryComponent;
@@ -12,7 +12,7 @@ describe('DialogHistoryComponent', () => {
     close: () => {},
   };
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [DialogHistoryComponent],
       imports: [AppMaterialModule],

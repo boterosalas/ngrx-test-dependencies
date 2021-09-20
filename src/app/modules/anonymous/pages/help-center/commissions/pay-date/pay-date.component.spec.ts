@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PayDateComponent } from './pay-date.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -7,12 +7,13 @@ import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-mater
 import { AnonymousModule } from 'src/app/modules/anonymous/anonymous.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HomeComponent } from '../../../home/home.component';
 
 describe('PayDateComponent', () => {
   let component: PayDateComponent;
   let fixture: ComponentFixture<PayDateComponent>;
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -21,7 +22,7 @@ describe('PayDateComponent', () => {
         AppMaterialModule,
         AnonymousModule,
         BrowserAnimationsModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([{ path: 'inicio', component: HomeComponent }]),
       ],
     }).compileComponents();
   }));

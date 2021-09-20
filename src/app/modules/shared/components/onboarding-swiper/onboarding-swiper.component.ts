@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
 import { Subscription } from 'rxjs';
 import { ResponseService } from 'src/app/interfaces/response';

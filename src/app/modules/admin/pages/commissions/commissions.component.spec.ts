@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CommissionsComponent } from './commissions.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -9,7 +9,6 @@ import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder } from '@angul
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxDaterangepickerMd, LocaleService, LOCALE_CONFIG } from 'ngx-daterangepicker-material';
-import { MatDatepickerModule, MatDialog, MatNativeDateModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AnonymousModule } from '../../../../modules/anonymous/anonymous.module';
 import { SharedModule } from '../../../../modules/shared/shared.module';
@@ -19,6 +18,9 @@ import { UserService } from '../../../../services/user.service';
 import { LinksService } from '../../../../services/links.service';
 import { ContentService } from '../../../../services/content.service';
 import { of } from 'rxjs';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialog } from '@angular/material/dialog';
 moment.locale('es');
 describe('CommissionsComponent', () => {
   let component: CommissionsComponent;
@@ -89,7 +91,7 @@ describe('CommissionsComponent', () => {
     userMessage: 'se ha enviado un correo a test@h.com',
     objectResponse: [],
   };
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [CommissionsComponent],
       imports: [

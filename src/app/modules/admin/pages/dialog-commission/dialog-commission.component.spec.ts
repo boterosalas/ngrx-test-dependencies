@@ -1,9 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogCommissionComponent } from './dialog-commission.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MatDialog, MatMenuModule, MatSlideToggleModule } from '@angular/material';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -16,6 +15,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import Swal from 'sweetalert2';
+import { MatDialog } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 describe('DialogCommissionComponent', () => {
   let component: DialogCommissionComponent;
   let fixture: ComponentFixture<DialogCommissionComponent>;
@@ -35,43 +37,45 @@ describe('DialogCommissionComponent', () => {
       commission: '2%',
     },
   ];
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [DialogCommissionComponent],
-      imports: [
-        AppMaterialModule,
-        HttpClientTestingModule,
-        ReactiveFormsModule,
-        FormsModule,
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [DialogCommissionComponent],
+        imports: [
+          AppMaterialModule,
+          HttpClientTestingModule,
+          ReactiveFormsModule,
+          FormsModule,
 
-        NoopAnimationsModule,
-        BrowserAnimationsModule,
-        TranslateModule.forRoot(),
-        RouterTestingModule.withRoutes([]),
-        MatMenuModule,
-        MatSlideToggleModule,
-        DragDropModule,
-        SharedModule,
-        JwtModule.forRoot({
-          config: {
-            tokenGetter: () => {
-              return localStorage.getItem('ACCESS_TOKEN');
+          NoopAnimationsModule,
+          BrowserAnimationsModule,
+          TranslateModule.forRoot(),
+          RouterTestingModule.withRoutes([]),
+          MatMenuModule,
+          MatSlideToggleModule,
+          DragDropModule,
+          SharedModule,
+          JwtModule.forRoot({
+            config: {
+              tokenGetter: () => {
+                return localStorage.getItem('ACCESS_TOKEN');
+              },
+              throwNoTokenError: true,
+              whitelistedDomains: [],
+              blacklistedRoutes: [],
             },
-            throwNoTokenError: true,
-            whitelistedDomains: [],
-            blacklistedRoutes: [],
-          },
-        }),
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
-      providers: [
-        { provide: ContentService, useValue: mockContentService },
-        { provide: MatDialog, useValue: mockDialog },
-      ],
-    }).compileComponents();
-    mockContentService.getCommissionsData.and.returnValue(of(response));
-    mockContentService.saveComision.and.returnValue(of(response));
-  }));
+          }),
+        ],
+        schemas: [NO_ERRORS_SCHEMA],
+        providers: [
+          { provide: ContentService, useValue: mockContentService },
+          { provide: MatDialog, useValue: mockDialog },
+        ],
+      }).compileComponents();
+      mockContentService.getCommissionsData.and.returnValue(of(response));
+      mockContentService.saveComision.and.returnValue(of(response));
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DialogCommissionComponent);
@@ -107,5 +111,11 @@ describe('DialogCommissionComponent', () => {
     component.newComision();
     let datos = true;
     expect(datos).toBeTruthy();
+  });
+
+  it('save comition', () => {
+    component.saveComision();
+    expect(mockContentService.saveComision).toHaveBeenCalled();
+    expect(component.disabledButton).toBe(true);
   });
 });

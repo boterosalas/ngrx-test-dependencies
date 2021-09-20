@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModalGenericComponent } from './modal-generic.component';
 import { AppMaterialModule } from '../../app-material/app-material.module';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 describe('ModalGenericComponent', () => {
   let component: ModalGenericComponent;
@@ -12,7 +12,7 @@ describe('ModalGenericComponent', () => {
     close: () => {},
   };
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ModalGenericComponent],
       imports: [AppMaterialModule],

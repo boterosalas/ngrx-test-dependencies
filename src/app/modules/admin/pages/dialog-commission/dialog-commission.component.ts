@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { MatDialog, MatTable } from '@angular/material';
+import { MatDialog } from "@angular/material/dialog";
+import { MatTable } from "@angular/material/table";
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ActivatedRoute } from '@angular/router';
 import { ContentService } from 'src/app/services/content.service';

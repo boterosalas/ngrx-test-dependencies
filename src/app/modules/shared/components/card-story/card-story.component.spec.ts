@@ -1,6 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CardStoryComponent } from './card-story.component';
-import { MAT_BOTTOM_SHEET_DATA, MatDialogRef } from '@angular/material';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShareModule } from '@ngx-share/core';
@@ -12,11 +11,12 @@ import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog
 import { of } from 'rxjs/internal/observable/of';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommentStmt } from '@angular/compiler';
 import { LinksService } from 'src/app/services/links.service';
 import { TokenService } from 'src/app/services/token.service';
 import { ContentService } from 'src/app/services/content.service';
 import { Router } from '@angular/router';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 
 describe('CardStoryComponent', () => {
   let component: CardStoryComponent;
@@ -81,7 +81,7 @@ describe('CardStoryComponent', () => {
     objectResponse: { link: 'https://www.exito.com/story' },
   };
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [CardStoryComponent, DialogComponent],
       imports: [

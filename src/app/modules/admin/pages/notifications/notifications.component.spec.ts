@@ -1,5 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
@@ -59,7 +59,7 @@ describe('NotificationsComponent', () => {
     },
   };
 
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NotificationsComponent, BannerComponent, CardNotificationComponent, RemoveTagsPipe],
       imports: [AppMaterialModule, RouterTestingModule, HttpClientTestingModule],

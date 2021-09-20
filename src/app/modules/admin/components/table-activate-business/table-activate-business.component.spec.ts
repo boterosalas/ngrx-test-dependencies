@@ -1,9 +1,8 @@
-import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TableActivateBusinessComponent } from './table-activate-business.component';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { MatDialog, MatMenuModule, MatSlideToggleModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { LinksService } from 'src/app/services/links.service';
@@ -12,6 +11,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 import { ContentService } from 'src/app/services/content.service';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { MatDialog } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 //import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 
 describe('TableActivateBusinessComponent', () => {
@@ -26,7 +28,7 @@ describe('TableActivateBusinessComponent', () => {
     Status: 'Success',
   };
   const mockContentService = jasmine.createSpyObj('ContentService', ['getCommissionsData', 'saveBussiness']);
-  beforeEach(async(() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TableActivateBusinessComponent],
       imports: [
