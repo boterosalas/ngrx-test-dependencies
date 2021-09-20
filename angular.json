@@ -167,7 +167,9 @@
               "src/app/pipes/**/*",
               "src/app/validators/**/*",
               "src/app/interceptors/**/*",
-              "src/app/directives/**/*"
+              "src/app/directives/**/*",
+              "/src/app/auth.guard.ts",
+              "/src/app/role.guard.ts"
             ],
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
