@@ -64,13 +64,13 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.$subcriptionParams = this.routeParams.params.subscribe((params) => {
       if (params && params['id']) {
-        this.getNoveltyById(params.id);
+        this.getNoveltyById(params.id, params.userId);
       }
     });
   }
 
-  public getNoveltyById(id: string) {
-    this.$subcriptionNovelty = this.user.getNoveltyById(id).subscribe((novelty) => {
+  public getNoveltyById(id: string, userId: string) {
+    this.$subcriptionNovelty = this.user.getNoveltyById(id, userId).subscribe((novelty) => {
       if (novelty['objectResponse']) {
         this.currentNovelty = novelty['objectResponse'];
         this.getMoreNovelties(this.currentNovelty.userid);
@@ -151,7 +151,7 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     };
     this.user.setStatus(datos).subscribe((resp: any) => {
       if (resp.state === 'Success') {
-        this.getNoveltyById(this.currentNovelty.id);
+        this.getNoveltyById(this.currentNovelty.id, this. currentNovelty.userid);
         this.active = true;
         this.snackBar.open(resp.userMessage, 'Cerrar', {
           duration: 3000,
@@ -220,7 +220,7 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
   public updateNovelty(data: any) {
     this.$subscriptionSaveNote = this.user.saveNewNovelty(data).subscribe((resp: any) => {
       if (resp.state === 'Success') {
-        this.getNoveltyById(this.currentNovelty.id);
+        this.getNoveltyById(this.currentNovelty.id, this.currentNovelty.userid);
         this.snackBar.open(resp.userMessage, 'Cerrar', {
           duration: 3000,
         });

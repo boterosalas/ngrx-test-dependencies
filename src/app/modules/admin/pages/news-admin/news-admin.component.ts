@@ -217,7 +217,7 @@ export class NewsAdminComponent implements OnInit {
   }
 
   public goToNovelty(element: any) {
-    this.router.navigateByUrl(`novedad/${element.id}`);
+    this.router.navigateByUrl(`novedad/${element.id}/${element.userid}`);
   }
 
   public getReportExcel() {

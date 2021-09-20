@@ -17,6 +17,8 @@ import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { SidenavService } from './services/sidenav.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MasterDataService } from './services/master-data.service';
+import { UserService } from './services/user.service';
 
 // const TRANSLATIONS_ES = require('../assets/i18n/es.json');
 
@@ -30,6 +32,7 @@ describe('AppComponent', () => {
 
   const mockContentService = jasmine.createSpyObj('ContentService', ['getPopup', 'saveVisitOffer']);
   const mockSidenavService = jasmine.createSpyObj('SidenavService', ['sideNavState']);
+  const mockMasterService = jasmine.createSpyObj('MasterDataService', ['getTerms', 'setTerms']);
 
   const responseGetPopup = [
     {
@@ -55,6 +58,22 @@ describe('AppComponent', () => {
       new: true,
     },
   ];
+
+  let dataTerms = {
+    state: 'Success',
+    userMessage: 'Los terminos se han actualizado',
+    objectResponse: true,
+  };
+
+  const terms = {
+    state: 'Success',
+    userMessage: 'Los terminos se han actualizado',
+    objectResponse: [
+      { sectionvalue: 'prueba', sectiontitle: 'prueba' },
+      { sectionvalue: 'prueba', sectiontitle: 'prueba' },
+      { sectionvalue: 'prueba', sectiontitle: 'prueba' },
+    ],
+  };
 
   const infoPopUp = {
     imageUrlWeb: responseGetPopup[0].imageurlweb,
@@ -104,12 +123,14 @@ beforeEach(waitForAsync(() => {
         { provide: MatDialog, useValue: mockDialog },
         { provide: ContentService, useValue: mockContentService },
         { provide: SidenavService, useValue: mockSidenavService },
+        { provide: MasterDataService, useValue: mockMasterService },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
     mockContentService.getPopup.and.returnValue(of(responseGetPopup));
     mockContentService.saveVisitOffer.and.returnValue(of(responseGetPopup));
     mockSidenavService.sideNavState.and.returnValue(of(true));
+    mockMasterService.getTerms.and.returnValue(of(terms));
 
     // translate = TestBed.get(TranslateService);
     // http = TestBed.get(HttpTestingController);
@@ -133,8 +154,15 @@ beforeEach(waitForAsync(() => {
     });
 
     it('get', () => {
+      component.newTerms = true;
+      component.onboardingViwed = true;
       component.getPopUps();
       expect(mockContentService.getPopup).toHaveBeenCalled();
+    });
+
+    it('get terms', () => {
+      component.getTerms();
+      expect(mockMasterService.getTerms).toHaveBeenCalled();
     });
   });
 

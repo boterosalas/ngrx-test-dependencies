@@ -38,6 +38,7 @@ import { MatRippleModule } from "@angular/material/core";
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import { CardStoryComponent } from './components/card-story/card-story.component';
+import { OnboardingSwiperComponent } from './components/onboarding-swiper/onboarding-swiper.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { CardStoryComponent } from './components/card-story/card-story.component
     BannerComponent,
     DialogStoriesComponent,
     CardStoryComponent,
+    OnboardingSwiperComponent,
   ],
   imports: [
     CommonModule,
@@ -109,7 +111,8 @@ import { CardStoryComponent } from './components/card-story/card-story.component
     BannerComponent,
     DialogStoriesComponent,
     CardStoryComponent,
+    OnboardingSwiperComponent,
   ],
-  entryComponents: [ModalGenericComponent, PopupComponent, DialogStoriesComponent],
+  entryComponents: [ModalGenericComponent, PopupComponent, DialogStoriesComponent, OnboardingSwiperComponent],
 })
 export class SharedModule {}

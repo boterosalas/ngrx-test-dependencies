@@ -128,11 +128,37 @@ mat-form-field.select-custom {
     }
   }
 
-
   .mat-form-field-ripple {
     bottom: -21px;
   }
 }
+
+.panel-class-onboarding {
+  width: 100vw;
+  max-width: 100vw !important;
+  mat-dialog-container {
+    width: 100%;
+    max-width: 740px;
+    margin: auto;
+    border-radius: 10px;
+    @include from(600px) {
+      width: 100vw;
+      height: 100vh;
+      align-items: center;
+      display: flex;
+      padding: 24px 2px;
+      border-radius: 0px;
+    }
+  }
+}
+
+#onboarding-slick {
+  .slick-track {
+    display: flex;
+    align-items: center;
+  }
+}
+
 .maincontent {
   background: $bg-gray;
 }

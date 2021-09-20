@@ -2,8 +2,15 @@
   {{ 'HELP_CENTER.TOPICS' | translate }}
 </p>
 
+<button mat-button class="show-tutorial" (click)="showOnboarding()"><span>Ver Tutorial</span> <mat-icon>reply</mat-icon></button>
+
 <mat-accordion>
-  <mat-expansion-panel [expanded]="step === 0" [ngClass]="{'border-radius-10': step === 0}" (opened)="setStep(0)" class="help-center expansion-panel-box-shadow">
+  <mat-expansion-panel
+    [expanded]="step === 0"
+    [ngClass]="{ 'border-radius-10': step === 0 }"
+    (opened)="setStep(0)"
+    class="help-center expansion-panel-box-shadow"
+  >
     <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusobreclickam">
       <span
         class="gtmCentroDeAyudaClicMenusobreclickam"
@@ -26,7 +33,12 @@
     </mat-list>
   </mat-expansion-panel>
 
-  <mat-expansion-panel [expanded]="step === 1" [ngClass]="{'border-radius-10': step === 1}" (opened)="setStep(1)" class="help-center expansion-panel-box-shadow">
+  <mat-expansion-panel
+    [expanded]="step === 1"
+    [ngClass]="{ 'border-radius-10': step === 1 }"
+    (opened)="setStep(1)"
+    class="help-center expansion-panel-box-shadow"
+  >
     <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusobreclickamconfiguracionesdecuenta">
       <span
         class="gtmCentroDeAyudaClicMenusobreclickamconfiguracionesdecuenta"
@@ -49,7 +61,12 @@
     </mat-list>
   </mat-expansion-panel>
 
-  <mat-expansion-panel [expanded]="step === 2" [ngClass]="{'border-radius-10': step === 2}" (opened)="setStep(2)" class="help-center expansion-panel-box-shadow">
+  <mat-expansion-panel
+    [expanded]="step === 2"
+    [ngClass]="{ 'border-radius-10': step === 2 }"
+    (opened)="setStep(2)"
+    class="help-center expansion-panel-box-shadow"
+  >
     <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenuscomisiones">
       <span
         class="gtmCentroDeAyudaClicMenuscomisiones"
@@ -72,7 +89,12 @@
     </mat-list>
   </mat-expansion-panel>
 
-  <mat-expansion-panel [expanded]="step === 3" [ngClass]="{'border-radius-10': step === 3}" (opened)="setStep(3)" class="help-center expansion-panel-box-shadow">
+  <mat-expansion-panel
+    [expanded]="step === 3"
+    [ngClass]="{ 'border-radius-10': step === 3 }"
+    (opened)="setStep(3)"
+    class="help-center expansion-panel-box-shadow"
+  >
     <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusreportes">
       <span
         class="gtmCentroDeAyudaClicMenusreportes"
@@ -95,7 +117,12 @@
     </mat-list>
   </mat-expansion-panel>
 
-  <mat-expansion-panel [expanded]="step === 4" [ngClass]="{'border-radius-10': step === 4}" (opened)="setStep(4)" class="help-center expansion-panel-box-shadow">
+  <mat-expansion-panel
+    [expanded]="step === 4"
+    [ngClass]="{ 'border-radius-10': step === 4 }"
+    (opened)="setStep(4)"
+    class="help-center expansion-panel-box-shadow"
+  >
     <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusrefiereaunamigo">
       <span
         class="gtmCentroDeAyudaClicMenusrefiereaunamigo"
@@ -118,7 +145,12 @@
     </mat-list>
   </mat-expansion-panel>
 
-  <mat-expansion-panel [expanded]="step === 5" [ngClass]="{'border-radius-10': step === 5}" (opened)="setStep(5)" class="help-center expansion-panel-box-shadow">
+  <mat-expansion-panel
+    [expanded]="step === 5"
+    [ngClass]="{ 'border-radius-10': step === 5 }"
+    (opened)="setStep(5)"
+    class="help-center expansion-panel-box-shadow"
+  >
     <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusofertas">
       <span
         class="gtmCentroDeAyudaClicMenusofertas"
@@ -141,7 +173,12 @@
     </mat-list>
   </mat-expansion-panel>
 
-  <mat-expansion-panel [expanded]="step === 6" [ngClass]="{'border-radius-10': step === 6}" (opened)="setStep(6)" class="help-center expansion-panel-box-shadow">
+  <mat-expansion-panel
+    [expanded]="step === 6"
+    [ngClass]="{ 'border-radius-10': step === 6 }"
+    (opened)="setStep(6)"
+    class="help-center expansion-panel-box-shadow"
+  >
     <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusotraspreguntasfrecuentes">
       <span
         class="gtmCentroDeAyudaClicMenusotraspreguntasfrecuentes"
@@ -164,7 +201,12 @@
     </mat-list>
   </mat-expansion-panel>
 
-  <mat-expansion-panel [expanded]="step === 7" [ngClass]="{'border-radius-10': step === 7}" (opened)="setStep(7)" class="help-center expansion-panel-box-shadow">
+  <mat-expansion-panel
+    [expanded]="step === 7"
+    [ngClass]="{ 'border-radius-10': step === 7 }"
+    (opened)="setStep(7)"
+    class="help-center expansion-panel-box-shadow"
+  >
     <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenuscontactalosnegocios">
       <span
         class="gtmCentroDeAyudaClicMenuscontactalosnegocios"
@@ -187,7 +229,12 @@
     </mat-list>
   </mat-expansion-panel>
 
-  <mat-expansion-panel [expanded]="step === 8" [ngClass]="{'border-radius-10': step === 8}" (opened)="setStep(8)" class="help-center expansion-panel-box-shadow">
+  <mat-expansion-panel
+    [expanded]="step === 8"
+    [ngClass]="{ 'border-radius-10': step === 8 }"
+    (opened)="setStep(8)"
+    class="help-center expansion-panel-box-shadow"
+  >
     <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenuscontactanos">
       <span
         class="gtmCentroDeAyudaClicMenuscontactanos"
@@ -209,7 +256,13 @@
       >
     </mat-list>
   </mat-expansion-panel>
-  <mat-expansion-panel *ngIf="reportVisible" [expanded]="step === 9" [ngClass]="{'border-radius-10': step === 9}" (opened)="setStep(9)" class="help-center expansion-panel-box-shadow">
+  <mat-expansion-panel
+    *ngIf="reportVisible"
+    [expanded]="step === 9"
+    [ngClass]="{ 'border-radius-10': step === 9 }"
+    (opened)="setStep(9)"
+    class="help-center expansion-panel-box-shadow"
+  >
     <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenuscontactanos">
       <span
         class="gtmCentroDeAyudaClicMenuscontactanos"

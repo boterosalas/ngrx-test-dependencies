@@ -14,6 +14,7 @@ export class UserService {
   urlReports = environment.URL_REPORTS;
   url = environment.URL_PROFILE;
   urlEmployee = environment.URL_VALIDATE_EMPLOYEE;
+  urlContent = environment.URL_CONTENT;
   apiProfile = 'userprofile/GetUserProfile';
   apiGetDocuments = 'userprofile/downloadBase64';
   apiActivateProfile = 'userprofile/activateUser';
@@ -71,7 +72,6 @@ export class UserService {
   apiSaveQualificationNovelty = '/new/noveltyqualification';
   apiGetNewsById = 'new/usernews';
 
-
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -81,6 +81,9 @@ export class UserService {
   };
 
   userInfo$ = new BehaviorSubject<any>(null);
+
+  onboardingView = new BehaviorSubject<any>({ onboardin: false, popUps: false });
+  userOnboardingObservable = this.onboardingView.asObservable();
 
   public getProfile() {
     return this.http
@@ -231,18 +234,6 @@ export class UserService {
     );
   }
 
-  public saveOnboarding(save: any) {
-    return this.http.post(`${this.url}${this.apiSaveUserOnboardingViewed}`, { viewed: save }, this.httpOptions).pipe(
-      retryWhen((errors) =>
-        errors.pipe(
-          delay(1000),
-          take(3),
-          tap((errorStatus) => {})
-        )
-      )
-    );
-  }
-
   public saveUserDevice(userid: string, token: string) {
     return this.http.post(`${this.url}${this.apiSaveUserDevice}`, { userid: userid, device: token }, this.httpOptions);
   }
@@ -303,6 +294,18 @@ export class UserService {
 
   public getBanks() {
     return this.http.get(`${this.url}${this.apiBanks}`, this.httpOptions);
+  }
+
+  public saveOnboarding(save: any) {
+    return this.http.post(`${this.url}${this.apiSaveUserOnboardingViewed}`, { viewed: save }, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      )
+    );
   }
 
   public validateEmployee(id: string, document: string) {
@@ -465,8 +468,8 @@ export class UserService {
     );
   }
 
-  public getNoveltyById(id) {
-    return this.http.get(`${this.urlReports}${this.apiNoveltyById}?id=${id}`, this.httpOptions).pipe(
+  public getNoveltyById(id: string, userId: any) {
+    return this.http.get(`${this.urlReports}${this.apiNoveltyById}?id=${id}&userId=${userId}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(1000),
@@ -476,7 +479,6 @@ export class UserService {
       )
     );
   }
-
 
   public getNoveltiesById(id) {
     return this.http.get(`${this.url}${this.apiGetNewsById}?userId=${id}`, this.httpOptions).pipe(

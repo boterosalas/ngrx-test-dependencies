@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { OnboardingSwiperComponent } from 'src/app/modules/shared/components/onboarding-swiper/onboarding-swiper.component';
 
 @Component({
   selector: 'app-menu-help-center',
@@ -11,7 +13,7 @@ export class MenuHelpCenterComponent implements OnInit {
   token = localStorage.getItem('ACCESS_TOKEN');
   authorization = this.token;
   reportVisible: boolean;
-  constructor(location: Location) {
+  constructor(location: Location, private dialog: MatDialog) {
     const urlLocation = location.prepareExternalUrl(location.path());
     const SplitLocation = urlLocation.split('/');
     switch (SplitLocation[2]) {
@@ -240,5 +242,12 @@ export class MenuHelpCenterComponent implements OnInit {
 
   setStep(index: number) {
     this.step = index;
+  }
+
+  /**
+   * Muestra el onboarding
+   */
+  showOnboarding(): void {
+    this.dialog.open(OnboardingSwiperComponent, { panelClass: 'panel-class-onboarding' });
   }
 }

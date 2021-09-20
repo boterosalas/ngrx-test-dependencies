@@ -205,7 +205,7 @@ beforeEach(waitForAsync(() => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-    component.getNoveltyById('1');
+    component.getNoveltyById('1', '0');
     expect(mockUserService.getNoveltyById).toHaveBeenCalled();
     component.currentNovelty = respDatos;
     expect(component.currentNovelty).toEqual(respDatos);
@@ -329,7 +329,7 @@ beforeEach(waitForAsync(() => {
     });
     it('get novelty error', () => {
       expect(component).toBeTruthy();
-      component.getNoveltyById(null);
+      component.getNoveltyById(null, null);
       expect(mockUserService.getNoveltyById).toHaveBeenCalled();
     });
 
