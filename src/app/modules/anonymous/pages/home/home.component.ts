@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding, HostListener, OnDestroy, ViewChild, TemplateRef, ElementRef } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
@@ -12,15 +12,12 @@ import { distinctUntilChanged } from 'rxjs/operators';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
-import { ResponseService } from 'src/app/interfaces/response';
 import { LinksService } from 'src/app/services/links.service';
 import { MessagingService } from 'src/app/shared/messaging.service';
 import { Meta } from '@angular/platform-browser';
 import { MasterDataService } from 'src/app/services/master-data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NewBusinessFormComponent } from '../../components/new-business-form/new-business-form.component';
-import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-login',
