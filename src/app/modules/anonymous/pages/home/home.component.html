@@ -60,7 +60,7 @@
     fxLayoutAlign="center center"
     fxLayoutGap="10px grid"
   >
-    <ng-container *ngFor="let bussines of bussiness | slice: 0:6; let i = index">
+    <ng-container *ngFor="let bussines of bussiness | slice: 0:8; let i = index">
       <app-bussiness-card
         *ngIf="bussines.code !== 'envios-clickam'"
         (bussiness)="bussinessNavigation(bussines)"
