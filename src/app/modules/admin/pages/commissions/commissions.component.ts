@@ -100,9 +100,8 @@ export class CommissionsComponent implements OnInit {
     });
   }
 
-
   ngOnInit() {
-    this.searchCommission('');
+    //   this.searchCommission('');
     this.dateFormCommission = this.fb.group({
       dateRange: {
         startDate: moment(new Date(2020, 1, 1), 'DD/MM/YYYY'),
@@ -308,5 +307,9 @@ export class CommissionsComponent implements OnInit {
     if (close) {
       close.click();
     }
+  }
+
+  public generateCommisions(): void {
+    this.contentService.generateComissions().subscribe();
   }
 }

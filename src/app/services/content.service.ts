@@ -84,6 +84,7 @@ export class ContentService {
   apiSaveVisitStory = 'story/savevisitstory';
   apiFooter = 'footer/getfooter';
   apiCommissions = 'commissions/getcommissions';
+  apiGenerateCommissions = 'commissions/generatecommissions';
   apiImportSellerFile = 'seller/importsellerfile';
   apiSaveFooterSection = 'footer/savefooterseccion';
   apiDeleteFooterSection = 'footer/deletefooterseccions';
@@ -427,7 +428,7 @@ export class ContentService {
   }
 
   public importSellerFile(file: any) {
-    return this.http.post(`${this.urlComission + this.apiImportSellerFile}`, {file}, this.httpOptions).pipe(
+    return this.http.post(`${this.urlComission + this.apiImportSellerFile}`, { file }, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(1000),
@@ -799,7 +800,6 @@ export class ContentService {
         )
       )
     );
-
   }
   public addCategory(datos: any) {
     return this.http.post(`${this.url + this.apiAddCategory}`, datos, this.httpOptions).pipe(
@@ -1171,6 +1171,21 @@ export class ContentService {
           return result;
         })
       );
+  }
+
+  public generateComissions() {
+    return this.http.post(`${this.urlComission + this.apiGenerateCommissions}`, {}, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(1000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((result: ResponseService) => {
+        return result;
+      })
+    );
   }
 
   public getPopup() {
