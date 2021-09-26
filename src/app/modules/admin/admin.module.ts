@@ -438,7 +438,10 @@ const routes: Routes = [
       responsive: true,
     }),
   ],
-  exports: [SideMenuComponent],
+  exports: [
+    SideMenuComponent,
+    RouterModule
+  ],
   entryComponents: [
     DialogUserComponent,
     DialogCategoryComponent,

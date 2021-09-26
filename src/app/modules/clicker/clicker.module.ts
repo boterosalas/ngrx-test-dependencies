@@ -169,6 +169,9 @@ const routes: Routes = [
     AnonymousModule,
     NgxPaginationModule,
   ],
+  exports:[
+    RouterModule
+  ],
   entryComponents: [DialogComponent, DialogEditComponent, DialogHistoryComponent, DialogImagePlayerComponent],
 })
 export class ClickerModule {}
