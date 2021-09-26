@@ -128,6 +128,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.showUpdateModal();
     this.showAnimation1 = true;
     this.innerWidth = window.innerWidth;
     this.showLoginForm = true;
@@ -230,7 +231,6 @@ export class AppComponent implements OnInit, OnDestroy {
       this.activateButton = false;
       this.dialog.closeAll();
       this.newTerms = true;
-      this.showUpdateModal();
     });
   }
 
@@ -247,15 +247,9 @@ export class AppComponent implements OnInit, OnDestroy {
           this.onboardingViwed = true;
           if (!this.newTerms) {
             this.termsAndConditions();
-          } else {
-            setTimeout(() => {
-              this.showUpdateModal();
-            }, 2000);
           }
         });
-    } else {
-      this.showUpdateModal();
-    }
+    } 
   }
 
   /**
@@ -277,9 +271,7 @@ export class AppComponent implements OnInit, OnDestroy {
           window.location.reload();
         });
       });
-    } else {
-      this.getPopUps();
-    }
+    } 
   }
 
   public getPopUps() {

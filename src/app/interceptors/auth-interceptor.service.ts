@@ -78,6 +78,3 @@ export class AuthInterceptor implements HttpInterceptor {
     );
   }
 }
-function forwardRef(arg0: () => typeof AuthService): any {
-  throw new Error("Function not implemented.");
-}
