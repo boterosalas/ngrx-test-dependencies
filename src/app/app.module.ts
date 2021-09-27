@@ -52,8 +52,6 @@ export function jwtTokenGetter() {
     AppRoutingModule,
     HttpClientModule,
     AnonymousModule,
-    ClickerModule,
-    AdminModule,
     SharedModule,
     AppMaterialModule,
     FlexLayoutModule,

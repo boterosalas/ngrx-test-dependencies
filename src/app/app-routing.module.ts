@@ -9,7 +9,7 @@ const routes: Routes = [
     loadChildren: () => import('./modules/anonymous/anonymous.module').then((m) => m.AnonymousModule),
   },
   {
-    path: 'clicker',
+    path: '',
     loadChildren: () => import('./modules/clicker/clicker.module').then((m) => m.ClickerModule),
     canActivate: [AuthGuard, RoleGuard],
     data: {
@@ -17,7 +17,7 @@ const routes: Routes = [
     },
   },
   {
-    path: 'dashboard',
+    path: '',
     loadChildren: () => import('./modules/admin/admin.module').then((m) => m.AdminModule),
   },
 ];
