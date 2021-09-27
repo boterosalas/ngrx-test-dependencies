@@ -37,6 +37,14 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AsyncPipe } from '../../node_modules/@angular/common';
 import { SidenavService } from './services/sidenav.service';
+import { CardComponent } from './modules/anonymous/components/card/card.component';
+import { ActivateAccountFormComponent } from './modules/anonymous/components/activate-account-form/activate-account-form.component';
+import { ForgotpasswordformComponent } from './modules/anonymous/components/forgotpasswordform/forgotpasswordform.component';
+import { LoginformComponent } from './modules/anonymous/components/loginform/loginform.component';
+import { MenuComponent } from './modules/anonymous/components/menu/menu.component';
+import { RegisterformComponent } from './modules/anonymous/components/registerform/registerform.component';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -46,7 +54,15 @@ export function jwtTokenGetter() {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    MenuComponent,
+    CardComponent,
+    LoginformComponent,
+    RegisterformComponent,
+    ForgotpasswordformComponent,
+    ActivateAccountFormComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -58,6 +74,9 @@ export function jwtTokenGetter() {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireMessagingModule,
+    MatPasswordStrengthModule,
+    FormsModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     JwtModule.forRoot({
       config: {

@@ -19,6 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MasterDataService } from './services/master-data.service';
 import { UserService } from './services/user.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 
 // const TRANSLATIONS_ES = require('../assets/i18n/es.json');
 export class MatDialogMock {
@@ -102,6 +104,9 @@ describe('AppComponent', () => {
           AngularFireAuthModule,
           AngularFireMessagingModule,
           BrowserAnimationsModule,
+          ReactiveFormsModule,
+          FormsModule,
+          MatPasswordStrengthModule,
           ServiceWorkerModule.register('', { enabled: false }),
           AngularFireModule.initializeApp({
             apiKey: 'AIzaSyBLEXtXZGfMEm6dLHtngNa_HWgEjjrk-14',
@@ -195,9 +200,7 @@ describe('AppComponent', () => {
       component.sendReferalsTerm();
       expect(mockUserService.saveUserAcceptTermsReferrals).toHaveBeenCalled();
     });
-  });
 
-  describe('open', () => {
     it('openPopUp', () => {
       component.openPopUp(infoPopUp);
       expect(mockDialog.open).toBeTruthy();
@@ -206,14 +209,6 @@ describe('AppComponent', () => {
     it('saveVisitOffer', () => {
       component.saveVisitOffer(responseGetPopup[0].id);
       expect(mockContentService.saveVisitOffer).toHaveBeenCalled();
-    });
-  });
-
-  describe('header', () => {
-    beforeEach(() => {
-      fixture = TestBed.createComponent(AppComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
     });
 
     it('hide login', () => {
@@ -258,4 +253,6 @@ describe('AppComponent', () => {
       expect(component.showForgotForm).toBeTruthy();
     });
   });
+
 });
+
