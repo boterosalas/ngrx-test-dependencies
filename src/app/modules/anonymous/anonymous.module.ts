@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-import { LoginformComponent } from './components/loginform/loginform.component';
 import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { SliderStoriesComponent } from './components/slider-stories/slider-stories.component';
 import { ButtonStoryComponent } from './components/button-story/button-story.component';
@@ -11,12 +10,8 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
-import { RegisterformComponent } from './components/registerform/registerform.component';
-import { ForgotpasswordformComponent } from './components/forgotpasswordform/forgotpasswordform.component';
 import { RecoverpasswordformComponent } from './components/recoverpasswordform/recoverpasswordform.component';
 import { RecoverpasswordComponent } from './pages/recoverpassword/recoverpassword.component';
-import { MenuComponent } from './components/menu/menu.component';
-import { CardComponent } from './components/card/card.component';
 import { ClickAcademyComponent } from './pages/click-academy/click-academy.component';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
 import { BlockCopyPasteDirective } from 'src/directives/copy.directive';
@@ -38,7 +33,6 @@ import {
   RecaptchaSettings,
 } from 'ng-recaptcha';
 import { UrlComponent } from './pages/url/url.component';
-import { ActivateAccountFormComponent } from './components/activate-account-form/activate-account-form.component';
 import { SlideVideoComponent } from './components/slide-video/slide-video.component';
 import { ClickamComponent } from './pages/help-center/about/clickam/clickam.component';
 import { RegisterComponent } from './pages/help-center/about/register/register.component';
@@ -367,13 +361,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     HomeComponent,
-    LoginformComponent,
-    RegisterformComponent,
-    ForgotpasswordformComponent,
     RecoverpasswordComponent,
     RecoverpasswordformComponent,
-    MenuComponent,
-    CardComponent,
     ClickAcademyComponent,
     TermsAndConditionsComponent,
     BlockCopyPasteDirective,
@@ -386,7 +375,6 @@ const routes: Routes = [
     NewBlogComponent,
     NewBusinessFormComponent,
     UrlComponent,
-    ActivateAccountFormComponent,
     SlideVideoComponent,
     ClickamComponent,
     RegisterComponent,
@@ -459,13 +447,7 @@ const routes: Routes = [
   ],
   exports: [
     RouterModule,
-    LoginformComponent,
-    RegisterformComponent,
     RecoverpasswordformComponent,
-    ForgotpasswordformComponent,
-    ActivateAccountFormComponent,
-    MenuComponent,
-    CardComponent,
     BussinessCardComponent,
     SliderStoriesComponent,
     DialogNoveltySatisfactionComponent,
