@@ -84,7 +84,7 @@ import { DialogOnboardingComponent } from './components/dialog-onboarding/dialog
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'dashboard',
     component: DashboardComponent,
     canActivate: [RoleGuard],
     data: {
