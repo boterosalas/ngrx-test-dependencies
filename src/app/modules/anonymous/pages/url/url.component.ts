@@ -11,7 +11,7 @@ import { Meta } from '@angular/platform-browser';
 export class UrlComponent implements OnInit {
   code: string;
   showMessage = false;
-  show  = true;
+  show = true;
 
   constructor(private link: LinksService, private route: ActivatedRoute, private router: Router, private metaTagService: Meta) {
     this.route.params.subscribe((param) => {

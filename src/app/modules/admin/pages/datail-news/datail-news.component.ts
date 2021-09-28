@@ -89,8 +89,8 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     });
   }
 
-  goToNovelty(id): void {
-    this.router.navigateByUrl(`novedad/${id}`);
+  goToNovelty(item): void {
+    this.router.navigateByUrl(`novedad/${item.id}/${item.userId}`);
   }
 
   public initForm() {
