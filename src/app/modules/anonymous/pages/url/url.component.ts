@@ -18,9 +18,7 @@ export class UrlComponent implements OnInit {
 
   constructor(
     private link: LinksService,
-    private authSvc: AuthService,
     private route: ActivatedRoute,
-    private utilsSvc: UtilsService,
     private router: Router,
     private metaTagService: Meta
   ) {
