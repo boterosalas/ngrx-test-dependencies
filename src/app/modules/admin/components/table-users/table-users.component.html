@@ -120,7 +120,8 @@
         <span *ngIf="element.verified === 'No verificada'" class="text-font not-verified">No verificado</span>
         <span *ngIf="element.verified === 'En proceso de verificación'" class="text-font in-progress">En proceso</span>
         <span *ngIf="element.verified === 'Cuenta Verificada'" class="text-font verified">Verificado</span>
-        <span *ngIf="element.verified === 'Cuenta rechazada'" class="text-font rejected">Rechazado</span>
+        <span *ngIf="element.verified === 'Información errónea'" class="text-font rejected">Información errónea</span>
+        <span *ngIf="element.verified === 'Información incompleta'" class="text-font rejected">Información incompleta</span>
       </td>
     </ng-container>
 
