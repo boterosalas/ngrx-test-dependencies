@@ -10,14 +10,11 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // modules
-import { AnonymousModule } from './modules/anonymous/anonymous.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './modules/shared/app-material/app-material.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ClickerModule } from './modules/clicker/clicker.module';
-import { AdminModule } from './modules/admin/admin.module';
 
 // interceptors
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -67,7 +64,6 @@ export function jwtTokenGetter() {
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    AnonymousModule,
     SharedModule,
     AppMaterialModule,
     FlexLayoutModule,
