@@ -131,7 +131,11 @@ export class LoginformComponent implements OnInit, OnDestroy {
     const token = localStorage.getItem('ACCESS_TOKEN');
     const tokenDecode = decode(token);
     if (tokenDecode.role === 'CLICKER') {
-      this.router.navigate(['/inicio']);
+      if(window.location.toString().includes('url')){
+        this.router.navigateByUrl(window.location.toString());
+      }else{
+        this.router.navigate(['/inicio']);
+      }
       this.authService.isLogged$.next(true);
     } else {
       this.router.navigate(['/dashboard']);
