@@ -24,16 +24,16 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './interceptors/auth-interceptor.service';
 
 // sesion timeout
-import { BnNgIdleService } from 'bn-ng-idle';
+// import { BnNgIdleService } from 'bn-ng-idle';
 
 // angular fire notifications
-import { MessagingService } from './shared/messaging.service';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFireMessagingModule } from '@angular/fire/messaging';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
+// import { MessagingService } from './shared/messaging.service';
+// import { AngularFireDatabaseModule } from '@angular/fire/database';
+// import { AngularFireMessagingModule } from '@angular/fire/messaging';
+// import { AngularFireModule } from '@angular/fire';
+// import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AsyncPipe } from '../../node_modules/@angular/common';
-import { SidenavService } from './services/sidenav.service';
+// import { SidenavService } from './services/sidenav.service';
 import { CardComponent } from './modules/anonymous/components/card/card.component';
 import { ActivateAccountFormComponent } from './modules/anonymous/components/activate-account-form/activate-account-form.component';
 import { ForgotpasswordformComponent } from './modules/anonymous/components/forgotpasswordform/forgotpasswordform.component';
@@ -61,24 +61,24 @@ export function jwtTokenGetter() {
     ActivateAccountFormComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
     AppMaterialModule,
     FlexLayoutModule,
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    AngularFireMessagingModule,
+    // AngularFireDatabaseModule,
+    // AngularFireAuthModule,
+    // AngularFireMessagingModule,
     MatPasswordStrengthModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    // AngularFireModule.initializeApp(environment.firebaseConfig),
     JwtModule.forRoot({
       config: {
         tokenGetter: jwtTokenGetter,
-        whitelistedDomains: [],
-        blacklistedRoutes: [],
+        allowedDomains: [],
+        disallowedRoutes: [],
       },
     }),
     TranslateModule.forRoot({
@@ -104,10 +104,10 @@ export function jwtTokenGetter() {
       useClass: AuthInterceptor,
       multi: true,
     },
-    BnNgIdleService,
-    MessagingService,
+    // BnNgIdleService,
+    // MessagingService,
     AsyncPipe,
-    SidenavService,
+    // SidenavService,
   ],
   bootstrap: [AppComponent],
 })

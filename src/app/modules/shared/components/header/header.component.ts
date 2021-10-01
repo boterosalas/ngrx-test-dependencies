@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private utils: UtilsService, public auth: AuthService, private _content: ContentService) {}
 
   ngOnInit() {
-    this.getAmount();
+    // this.getAmount();
     this.getMenu();
     this.getNotications();
   }
@@ -65,17 +65,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.utils.showRegisterForm();
   }
 
-  public getAmount() {
-    let count = 0;
-    const interval = setInterval(() => {
-      this.amount = localStorage.getItem('Amount');
-      count++;
-    }, 500);
+  // public getAmount() {
+  //   let count = 0;
+  //   const interval = setInterval(() => {
+  //     this.amount = localStorage.getItem('Amount');
+  //     count++;
+  //   }, 500);
 
-    if (count === 3) {
-      clearInterval(interval);
-    }
-  }
+  //   if (count === 3) {
+  //     clearInterval(interval);
+  //   }
+  // }
 
   public getNotications() {
     this.auth.getRole$.subscribe((role) => {

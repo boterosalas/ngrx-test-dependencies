@@ -125,7 +125,7 @@ describe('AppComponent', () => {
               },
               throwNoTokenError: true,
               whitelistedDomains: [],
-              blacklistedRoutes: [],
+              disallowedRoutes: [],
             },
           }),
         ],

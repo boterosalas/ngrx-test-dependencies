@@ -18,23 +18,12 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
-              "@firebase",
-              "@angular/fire",
-              "firebase",
-              "@firebase/app",
-              "@firebase/database",
-              "@firebase/firestore",
-              "@firebase/functions",
-              "@firebase/performance",
-              "@firebase/remote-config",
-              "@firebase/util",
-              "@firebase/component",
               "jwt-decode"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [".", "src/assets/styles"]
             },
-            "outputPath": "dist",
+            "outputPath": "dist/clickam/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -64,7 +53,7 @@
             "namedChunks": true
           },
           "configurations": {
-            "prod": {
+            "production": {
               "index": {
                 "input": "src/index-prod.html",
                 "output": "index.html"
@@ -75,13 +64,13 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
+              "optimization": false,
               "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
+              "sourceMap": true,
+              "namedChunks": true,
+              "extractLicenses": false,
               "vendorChunk": false,
-              "buildOptimizer": true,
+              "buildOptimizer": false,
               "budgets": [
                 {
                   "type": "initial",
@@ -101,7 +90,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "1mb"
                 }
               ],
               "index": {
@@ -206,6 +195,100 @@
               "devServerTarget": "clickam:serve:production"
             }
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "externalDependencies": [
+              "firebase",
+              "@firebase",
+              "@angular/fire",
+              "@firebase/app",
+              "@firebase/database",
+              "@firebase/firestore",
+              "@firebase/functions",
+              "@firebase/performance",
+              "@firebase/remote-config",
+              "@firebase/util",
+              "@firebase/component"
+            ],
+            "outputPath": "dist/clickam/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "optimization": false,
+            "sourceMap": true,
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                ".",
+                "src/assets/styles"
+              ]
+            },
+            "extractLicenses": false
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "sourceMap": false,
+              "extractLicenses": true
+            },
+            "qa": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                }
+              ]
+            },
+            "uat": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "clickam:build",
+              "serverTarget": "clickam:server"
+            },
+            "production": {
+              "browserTarget": "clickam:build:production",
+              "serverTarget": "clickam:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "clickam:build:production",
+              "serverTarget": "clickam:server:production"
+            },
+            "development": {
+              "browserTarget": "clickam:build",
+              "serverTarget": "clickam:server"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

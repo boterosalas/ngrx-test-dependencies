@@ -129,8 +129,8 @@ beforeEach(waitForAsync(() => {
               return localStorage.getItem('ACCESS_TOKEN');
             },
             throwNoTokenError: true,
-            whitelistedDomains: [],
-            blacklistedRoutes: [],
+            allowedDomains: [],
+            disallowedRoutes: [],
           },
         }),
       ],
