@@ -4,17 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Meta } from '@angular/platform-browser';
 import { AuthService } from 'src/app/services/auth.service';
 import { UtilsService } from 'src/app/services/utils.service';
-const widgetCodes = [
-  'exito_widget',
-  'carulla_widget',
-  'segurosexito_widget',
-  'movilexito_widget',
-  'beautyholics_widget',
-  'anutibara_widget',
-  'habi_widget',
-  'wesura_widget',
-  'haceb_widget',
-];
+import { ContentService } from 'src/app/services/content.service';
+import { environment } from 'src/environments/environment';
+import { UserService } from 'src/app/services/user.service';
+
 @Component({
   selector: 'app-url',
   templateUrl: './url.component.html',
@@ -31,6 +24,7 @@ export class UrlComponent implements OnInit {
     private authSvc: AuthService,
     private route: ActivatedRoute,
     private utilsSvc: UtilsService,
+    private userSvc: UserService,
     private router: Router,
     private metaTagService: Meta
   ) {
@@ -65,11 +59,19 @@ export class UrlComponent implements OnInit {
   }
 
   public getUrl() {
-    let exist = widgetCodes.find((code) => code === this.code);
-
+    let exist = environment.idsBussinesWidget.find((code) => code.code === this.code);
 
     if (exist) {
-
+      this.userSvc.getProfile();
+      this.userSvc.userInfo$.subscribe((user) => {
+        if (user) {
+          const data = { idBusiness: exist.id, userId: user.userId, url: exist.url };
+          this.link.getUrlWidget(data).subscribe((resp) => {
+            console.log(resp);
+            //window.location.replace(url);
+          });
+        }
+      });
     } else {
       this.link.getUrl(this.code).subscribe((url) => {
         if (url !== null) {
