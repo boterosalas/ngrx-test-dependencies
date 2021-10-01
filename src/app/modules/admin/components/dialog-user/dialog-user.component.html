@@ -77,7 +77,7 @@
               <mat-checkbox class="mr-3 mb-2" (change)="changeValue($event, 'IdentificationCard1')"> </mat-checkbox>
             </span>
             <span class="w-label preview-container"
-              ><a class="text-link text-underline cursor-pointer" (click)="previewDocument('IdentificationCard1')"> Cédula 1</a>
+              ><a class="text-link text-underline cursor-pointer" (click)="previewDocument('IdentificationCard1')"> Cédula parte frontal</a>
             </span>
             <span class="s-label normal-text">{{ data.extensionIdentificationCard1 }}</span>
             <span class="wx-label normal-text">{{ data.AntdateCed1 | date: 'yyyy/MM/dd hh:mm:ss' }}</span>
@@ -89,7 +89,7 @@
             </span>
             <span class="w-label preview-container"
               ><a class="text-link text-underline cursor-pointer" (click)="previewDocument('IdentificationCard2')" target="_blank" id="ced2">
-                Cédula 2</a
+                Cédula parte posterior</a
               >
             </span>
             <span class="s-label normal-text">{{ data.extensionIdentificationCard2 }}</span>
