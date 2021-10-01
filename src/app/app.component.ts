@@ -249,7 +249,7 @@ export class AppComponent implements OnInit, OnDestroy {
             this.termsAndConditions();
           }
         });
-    } 
+    }
   }
 
   /**
@@ -271,7 +271,7 @@ export class AppComponent implements OnInit, OnDestroy {
           window.location.reload();
         });
       });
-    } 
+    }
   }
 
   public getPopUps() {

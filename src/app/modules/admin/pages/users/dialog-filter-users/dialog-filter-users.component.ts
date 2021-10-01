@@ -68,8 +68,9 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
   ];
 
   documents = [
-    { name: 'Con documentos', value: true },
-    { name: 'Sin documentos', value: false },
+    { name: 'Con documentos', value: 'CONDOCUMENTOS' },
+    { name: 'Con Rut', value: 'CONRUT' },
+    { name: 'Sin documentos', value: 'SINDOCUMENTOS' },
   ];
 
   ngOnInit() {
@@ -99,8 +100,6 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
       this.chipsBussiness = obbus;
     }
   }
-
-
 
   public getAllBusiness() {
     this.subscription = this.content.getAllBusiness().subscribe((resp) => {

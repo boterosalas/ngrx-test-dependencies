@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { LinksService } from 'src/app/services/links.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Meta } from '@angular/platform-browser';
+import { AuthService } from 'src/app/services/auth.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-url',
@@ -12,8 +14,14 @@ export class UrlComponent implements OnInit {
   code: string;
   showMessage = false;
   show = true;
+  showLogin = false;
 
-  constructor(private link: LinksService, private route: ActivatedRoute, private router: Router, private metaTagService: Meta) {
+  constructor(
+    private link: LinksService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private metaTagService: Meta
+  ) {
     this.route.params.subscribe((param) => {
       this.code = param.shortCode;
     });
@@ -21,7 +29,6 @@ export class UrlComponent implements OnInit {
 
   ngOnInit() {
     this.getUrl();
-
     this.metaTagService.addTags([
       {
         name: 'keywords',
