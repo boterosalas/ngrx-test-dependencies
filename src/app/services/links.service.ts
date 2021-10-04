@@ -40,6 +40,7 @@ export class LinksService {
   apiPostReferrrals = 'Link/downloadReferrals';
   apiGetTotalLinks = 'Link/GetTotalLinksGenerated';
   apiGetUrl = 'link/geturl';
+  apiGetUrlWidget = "link/savelinkwidget";
   apiFile = 'commissions/getUrlFileCommissions';
   apigetDetailPaymentClicker = 'commissions/getDetailPaymentClicker';
   apigenerateCommissions = 'commissions/generateCommissionsFile';
@@ -217,6 +218,13 @@ export class LinksService {
 
   public getUrl(code: string) {
     return this.http.get(`${this.url}${this.apiGetUrl}?code=${code}`, this.httpOptions).pipe(
+      map((resp: ResponseService) => {
+        return resp.objectResponse;
+      })
+    );
+  }
+  public getUrlWidget(data: any) {
+    return this.http.post(`${this.url}${this.apiGetUrlWidget}`, data, this.httpOptions).pipe(
       map((resp: ResponseService) => {
         return resp.objectResponse;
       })
