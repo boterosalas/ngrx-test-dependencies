@@ -24,7 +24,6 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './interceptors/auth-interceptor.service';
 
 // angular fire notifications
-import { MessagingService } from './shared/messaging.service';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -102,7 +101,6 @@ export function jwtTokenGetter() {
       useClass: AuthInterceptor,
       multi: true,
     },
-    MessagingService,
     AsyncPipe,
   ],
   bootstrap: [AppComponent],

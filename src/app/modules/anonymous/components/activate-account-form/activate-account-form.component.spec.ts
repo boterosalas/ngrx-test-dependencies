@@ -53,7 +53,7 @@ beforeEach(waitForAsync(() => {
             },
             throwNoTokenError: true,
             allowedDomains: [],
-            blacklistedRoutes: [],
+            disallowedRoutes: [],
           },
         }),
       ],

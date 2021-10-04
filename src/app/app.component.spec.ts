@@ -124,7 +124,7 @@ describe('AppComponent', () => {
                 return localStorage.getItem('ACCESS_TOKEN');
               },
               throwNoTokenError: true,
-              whitelistedDomains: [],
+              allowedDomains: [],
               disallowedRoutes: [],
             },
           }),
