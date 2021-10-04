@@ -66,9 +66,8 @@ export class UrlComponent implements OnInit {
       this.userSvc.userInfo$.subscribe((user) => {
         if (user) {
           const data = { idBusiness: exist.id, userId: user.userId, url: exist.url };
-          this.link.getUrlWidget(data).subscribe((resp) => {
-            console.log(resp);
-            //window.location.replace(url);
+          this.link.getUrlWidget(data).subscribe((url) => {
+            window.location.replace(url);
           });
         }
       });
