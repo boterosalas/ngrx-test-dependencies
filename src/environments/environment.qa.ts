@@ -20,4 +20,57 @@ export const environment = {
     messagingSenderId: '707631941836',
     appId: '1:707631941836:web:5a94156b29c8fe2740da69',
   },
+
+  idsBussinesWidget: [
+    {
+      id: 1,
+      code: 'exito_widget',
+      url: 'https://www.exito.com',
+    },
+    {
+      id: 3,
+      code: 'segurosexito_widget',
+      url: 'https://www.segurosexito.com',
+    },
+    {
+      id: 2,
+      code: 'carulla_widget',
+      url: 'https://www.carulla.com',
+    },
+    {
+      id: 14,
+      code: 'movilexito_widget',
+      url: 'https://www.movilexito.com',
+    },
+    {
+      id: 4,
+      code: 'viajesexito_widget',
+      url: 'https://www.viajesexito.com',
+    },
+/*     {
+      id: 11,
+      code: 'beautyholics_widget',
+      url: 'https://www.beautyholics.com',
+    }, */
+    {
+      id: 20,
+      code: 'haceb_widget',
+      url: 'https://www.haceb.com',
+    },
+    {
+      id: 46,
+      code: 'habi_widget',
+      url: 'https://habi.co',
+    },
+/*     {
+      id: 5,
+      code: 'wesura_widget',
+      url: 'https://www.wesura.com',
+    }, */
+    {
+      id: 25,
+      code: 'anutibara_widget',
+      url: 'https://anutibara.com',
+    },
+  ],
 };

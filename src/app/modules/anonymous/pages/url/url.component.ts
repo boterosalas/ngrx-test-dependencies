@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Meta } from '@angular/platform-browser';
 import { AuthService } from 'src/app/services/auth.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { environment } from 'src/environments/environment';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-url',
@@ -18,7 +20,10 @@ export class UrlComponent implements OnInit {
 
   constructor(
     private link: LinksService,
+    private authSvc: AuthService,
     private route: ActivatedRoute,
+    private utilsSvc: UtilsService,
+    private userSvc: UserService,
     private router: Router,
     private metaTagService: Meta
   ) {
@@ -28,7 +33,17 @@ export class UrlComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getUrl();
+    if (this.authSvc.isLoggedIn()) {
+      this.getUrl();
+    } else {
+      this.utilsSvc.showloginForm();
+      this.utilsSvc.change.subscribe((isOpen) => {
+        if (this.authSvc.isLoggedIn() && !isOpen) {
+          this.getUrl();
+        }
+      });
+    }
+
     this.metaTagService.addTags([
       {
         name: 'keywords',
@@ -43,15 +58,29 @@ export class UrlComponent implements OnInit {
   }
 
   public getUrl() {
-    this.link.getUrl(this.code).subscribe((url) => {
-      if (url !== null) {
-        window.location.replace(url);
-      }
-      if (url === null) {
-        this.showMessage = true;
-        this.router.navigate(['/']);
-        this.show = false;
-      }
-    });
+    let exist = environment.idsBussinesWidget.find((code) => code.code === this.code);
+
+    if (exist) {
+      this.userSvc.getProfile();
+      this.userSvc.userInfo$.subscribe((user) => {
+        if (user) {
+          const data = { idBusiness: exist.id, userId: user.userId, url: exist.url };
+          this.link.getUrlWidget(data).subscribe((url) => {
+            window.location.replace(url);
+          });
+        }
+      });
+    } else {
+      this.link.getUrl(this.code).subscribe((url) => {
+        if (url !== null) {
+          window.location.replace(url);
+        }
+        if (url === null) {
+          this.showMessage = true;
+          this.router.navigate(['/']);
+          this.show = false;
+        }
+      });
+    }
   }
 }
