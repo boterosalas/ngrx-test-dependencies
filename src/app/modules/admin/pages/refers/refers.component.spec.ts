@@ -107,27 +107,11 @@ describe('RefersComponent', () => {
 
   it('save comission', () => {
     mockLinksService.saveAmountCommission.and.returnValue(of(saveCommision));
-    component.saveCommission();
+    component.saveCommission('');
     expect(mockLinksService.saveAmountCommission).toHaveBeenCalled();
   });
 
-  it('save refered', () => {
-    mockLinksService.saveAmountReferred.and.returnValue(of(saveCommision));
-    component.saveRefered();
-    expect(mockLinksService.saveAmountReferred).toHaveBeenCalled();
-  });
 
-  it('save comission Error', () => {
-    mockLinksService.saveAmountCommission.and.returnValue(of(saveCommisionError));
-    component.saveCommission();
-    expect(mockLinksService.saveAmountCommission).toHaveBeenCalled();
-  });
-
-  it('save refered Error', () => {
-    mockLinksService.saveAmountReferred.and.returnValue(of(saveCommisionError));
-    component.saveRefered();
-    expect(mockLinksService.saveAmountReferred).toHaveBeenCalled();
-  });
 
   afterAll(() => {
     TestBed.resetTestingModule();

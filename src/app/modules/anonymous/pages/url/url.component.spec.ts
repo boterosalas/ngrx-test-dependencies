@@ -22,7 +22,6 @@ describe('UrlComponent', () => {
   const linkSvcMock = jasmine.createSpyObj('LinksService', ['getUrl', 'getUrlWidget']);
   let utilsSvcMock = jasmine.createSpyObj('UtilsService', ['showloginForm']);
   const userSvcMock = jasmine.createSpyObj('userSvc', ['getProfile']);
-
   const response = {
     Status: 'Success',
     objectResponse: {},
@@ -74,7 +73,6 @@ describe('UrlComponent', () => {
   });
 
   it('should create', () => {
-
     expect(component).toBeTruthy();
   });
 });
