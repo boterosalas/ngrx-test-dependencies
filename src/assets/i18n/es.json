@@ -406,6 +406,8 @@
     "CLICKER_COMISSION_TEXT": "Ingrese cual es la comisión para el clicker por referir",
     "CLICKER_REFERED_TITLE": "Monto para ser un clicker calificado",
     "CLICKER_REFERED_TEXT": "Ingrese cual es el monto para que un clicker pase a ser calificado",
+    "CLICKER_NEW_TITLE": "comisión para el nuevo clicker",
+    "CLICKER_NEW_TEXT": "Ingrese cuál es la comisión para el Clicker nuevo que fue referido por otro Clicker",
     "WHATSAPP": "Compartir en Whatsapp",
     "FACEBOOK": "Compartir en Facebook",
     "TWITTER": "Compartir en Twitter",

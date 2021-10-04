@@ -33,15 +33,20 @@ export class RefersComponent implements OnInit, OnDestroy {
 
   comissionForm: FormGroup;
   referedForm: FormGroup;
+  clickerForm: FormGroup;
+
   email: string;
   disButon: boolean;
   amount: number;
   amountMin: number;
+  amountNewClicker: number;
+
   numberPattern = '^(0|[0-9][0-9]*)$';
 
   ngOnInit() {
     this.comissionClickerForm();
     this.referedClickerForm();
+    this.newClickerForm();
     this.getAmountClicker();
     this.checkRole();
   }
@@ -62,16 +67,25 @@ export class RefersComponent implements OnInit, OnDestroy {
     });
   }
 
+  public newClickerForm() {
+    this.clickerForm = this.fb.group({
+      newClicker: [this.amountNewClicker, [Validators.required, Validators.pattern(this.numberPattern)]],
+    });
+  }
+
   public changeState() {
     this.disButon = false;
   }
 
   public getAmountClicker() {
-    this.subscription = this.file.getAmount().subscribe((amount) => {
+    this.subscription = this.file.getAmount().subscribe((amount: any) => {
       this.amount = amount.amountsCommission;
       this.amountMin = amount.amountsReferred;
+      this.amountNewClicker = amount.amountsCommissionNewClicker;
+
       this.comissionForm.controls.amount.setValue(this.amount);
       this.referedForm.controls.refered.setValue(this.amountMin);
+      this.clickerForm.controls.newClicker.setValue(this.amountNewClicker);
     });
   }
 
@@ -87,30 +101,29 @@ export class RefersComponent implements OnInit, OnDestroy {
     });
   }
 
-  public saveCommission() {
-    const commission = {
-      amount: this.comissionForm.controls.amount.value,
-    };
+  public saveCommission(key: string) {
+    let commission = { amount: null, code: null };
+    switch (key) {
+      case 'amounts-commission':
+        commission = { amount: this.comissionForm.controls.amount.value, code: key };
+        break;
+
+      case 'amounts-referred':
+        commission = { amount: this.referedForm.controls.refered.value, code: key };
+        break;
+      case 'amounts-newclicker':
+        commission = { amount: this.clickerForm.controls.newClicker.value, code: key };
+        break;
+
+      default:
+        break;
+    }
     this.subscription = this.file.saveAmountCommission(commission).subscribe((save: ResponseService) => {
       if (save.state === 'Success') {
         this.openSnackBar(save.userMessage, 'Cerrar');
         this.getAmountClicker();
       } else {
         this.openSnackBar(save.userMessage, 'Cerrar');
-      }
-    });
-  }
-
-  public saveRefered() {
-    const commission = {
-      amount: this.referedForm.controls.refered.value,
-    };
-    this.subscription = this.file.saveAmountReferred(commission).subscribe((resp: ResponseService) => {
-      if (resp.state === 'Success') {
-        this.openSnackBar(resp.userMessage, 'Cerrar');
-        this.getAmountClicker();
-      } else {
-        this.openSnackBar(resp.userMessage, 'Cerrar');
       }
     });
   }
