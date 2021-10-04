@@ -23,17 +23,13 @@ import { SharedModule } from './modules/shared/shared.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './interceptors/auth-interceptor.service';
 
-// sesion timeout
-// import { BnNgIdleService } from 'bn-ng-idle';
-
 // angular fire notifications
-// import { MessagingService } from './shared/messaging.service';
-// import { AngularFireDatabaseModule } from '@angular/fire/database';
-// import { AngularFireMessagingModule } from '@angular/fire/messaging';
-// import { AngularFireModule } from '@angular/fire';
-// import { AngularFireAuthModule } from '@angular/fire/auth';
+import { MessagingService } from './shared/messaging.service';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
 import { AsyncPipe } from '../../node_modules/@angular/common';
-// import { SidenavService } from './services/sidenav.service';
 import { CardComponent } from './modules/anonymous/components/card/card.component';
 import { ActivateAccountFormComponent } from './modules/anonymous/components/activate-account-form/activate-account-form.component';
 import { ForgotpasswordformComponent } from './modules/anonymous/components/forgotpasswordform/forgotpasswordform.component';
@@ -42,6 +38,8 @@ import { MenuComponent } from './modules/anonymous/components/menu/menu.componen
 import { RegisterformComponent } from './modules/anonymous/components/registerform/registerform.component';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularFireModule } from '@angular/fire';
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -67,13 +65,13 @@ export function jwtTokenGetter() {
     SharedModule,
     AppMaterialModule,
     FlexLayoutModule,
-    // AngularFireDatabaseModule,
-    // AngularFireAuthModule,
-    // AngularFireMessagingModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AngularFireMessagingModule,
     MatPasswordStrengthModule,
     FormsModule,
     ReactiveFormsModule,
-    // AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     JwtModule.forRoot({
       config: {
         tokenGetter: jwtTokenGetter,
@@ -104,10 +102,8 @@ export function jwtTokenGetter() {
       useClass: AuthInterceptor,
       multi: true,
     },
-    // BnNgIdleService,
-    // MessagingService,
+    MessagingService,
     AsyncPipe,
-    // SidenavService,
   ],
   bootstrap: [AppComponent],
 })

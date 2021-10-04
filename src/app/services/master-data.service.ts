@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class MasterDataService {
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  constructor(private http: HttpClient) {}
   token = localStorage.getItem('ACCESS_TOKEN');
   authorization = this.token;
   httpOptions = {

@@ -5,7 +5,6 @@ import { trigger, state, style, transition, group, animate } from '@angular/anim
 import { UtilsService } from './services/utils.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from './services/auth.service';
-// import { BnNgIdleService } from 'bn-ng-idle';
 import Swal from 'sweetalert2';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { UserService } from './services/user.service';
@@ -17,7 +16,6 @@ import { PopupComponent } from './modules/shared/components/popup/popup.componen
 import { isPlatformBrowser, Location } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import decode from 'jwt-decode';
-// import { SidenavService } from './services/sidenav.service';
 import { onMainContentChange } from './animations/animations';
 import { OnboardingSwiperComponent } from './modules/shared/components/onboarding-swiper/onboarding-swiper.component';
 import { MatCheckboxChange } from '@angular/material/checkbox';
@@ -98,9 +96,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private personalInfo: MasterDataService,
     @Inject(PLATFORM_ID) private platformId: object
   ) {
-    // this.sidenavService.sideNavState$.subscribe( res => {
-    //   this.onSideNavChange = res;
-    // });
 
     if (isPlatformBrowser(this.platformId)) {
       translate.setDefaultLang('es');

@@ -18,6 +18,17 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
+              "firebase",
+              "@firebase",
+              "@angular/fire",
+              "@firebase/app",
+              "@firebase/database",
+              "@firebase/firestore",
+              "@firebase/functions",
+              "@firebase/performance",
+              "@firebase/remote-config",
+              "@firebase/util",
+              "@firebase/component",
               "jwt-decode"
             ],
             "stylePreprocessorOptions": {
@@ -263,6 +274,14 @@
             "development": {
               "browserTarget": "clickam:build",
               "serverTarget": "clickam:server"
+            },
+            "qa": {
+              "browserTarget": "clickam:build:qa",
+              "serverTarget": "clickam:server:qa"
+            },
+            "uat": {
+              "browserTarget": "clickam:build:uat",
+              "serverTarget": "clickam:server:uat"
             },
             "production": {
               "browserTarget": "clickam:build:production",

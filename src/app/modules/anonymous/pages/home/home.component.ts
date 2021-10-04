@@ -13,7 +13,7 @@ import { distinctUntilChanged } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { LinksService } from 'src/app/services/links.service';
-// import { MessagingService } from 'src/app/shared/messaging.service';
+import { MessagingService } from 'src/app/shared/messaging.service';
 import { Meta } from '@angular/platform-browser';
 import { MasterDataService } from 'src/app/services/master-data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -107,7 +107,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private dialog2: MatDialog,
     private link: LinksService,
-    // private messagingService: MessagingService,
+    private messagingService: MessagingService,
     private _snackBar: MatSnackBar,
     private metaTagService: Meta,
     private fb: FormBuilder,
@@ -205,9 +205,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         const token = localStorage.getItem('ACCESS_TOKEN');
         const tokenDecode = decode(token);
         this.userId = tokenDecode.userid;
-        // this.messagingService.requestPermission(this.userId);
-        // this.messagingService.receiveMessage();
-        // this.message = this.messagingService.currentMessage;
+        this.messagingService.requestPermission(this.userId);
+        this.messagingService.receiveMessage();
+        this.message = this.messagingService.currentMessage;
       }
     });
   }

@@ -1,16 +1,15 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { map, tap, distinctUntilChanged, retry, delay, retryWhen, take } from 'rxjs/operators';
+import { map, tap, delay, retryWhen, take } from 'rxjs/operators';
 import { ResponseService } from '../interfaces/response';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { AuthService } from './auth.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  constructor(private http: HttpClient) {}
   urlReports = environment.URL_REPORTS;
   url = environment.URL_PROFILE;
   urlEmployee = environment.URL_VALIDATE_EMPLOYEE;
