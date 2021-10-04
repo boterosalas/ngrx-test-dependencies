@@ -83,6 +83,7 @@ export class AppComponent implements OnInit, OnDestroy {
   textProteccion: any;
   textTransparencia: any;
   textPrograma: any;
+  hideFH = false;
 
   constructor(
     private translate: TranslateService,
@@ -106,6 +107,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.subscription = router.events.subscribe((url: any) => {
       if (url instanceof NavigationStart) {
+        const splitUrl =  url.url.split('/');
+        if(splitUrl[1] === 'url') {
+          this.hideFH = true;
+        } else {
+          this.hideFH = false;
+        }
         dataLayer.push({
           event: 'pageview',
           virtualPageURL: url.url,
