@@ -613,4 +613,5 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
     this.reference = !this.reference;
     this.showForm = !this.showForm;
   }
+
 }
