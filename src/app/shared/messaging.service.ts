@@ -1,29 +1,33 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFireMessaging } from '@angular/fire/messaging';
 import { mergeMapTo } from 'rxjs/operators';
 import { take } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { UserService } from '../services/user.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireMessaging } from '@angular/fire/messaging';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MessagingService {
-  currentMessage = new BehaviorSubject(null);
-
   constructor(
     private user: UserService,
     private angularFireDB: AngularFireDatabase,
     private angularFireAuth: AngularFireAuth,
     private angularFireMessaging: AngularFireMessaging
   ) {
-    this.angularFireMessaging.messaging.subscribe((_messaging) => {
-      _messaging.onMessage = _messaging.onMessage.bind(_messaging);
-      _messaging.onTokenRefresh = _messaging.onTokenRefresh.bind(_messaging);
-    });
+    this.angularFireMessaging.messages.subscribe(
+      (_messaging: AngularFireMessaging) => {
+        _messaging.onMessage = _messaging.onMessage.bind(_messaging);
+        _messaging.onTokenRefresh = _messaging.onTokenRefresh.bind(_messaging);
+      }
+    )
   }
+
+
+
+  currentMessage = new BehaviorSubject(null);
 
   /**
    * update token in firebase database

@@ -26,24 +26,10 @@ export class UrlComponent implements OnInit {
     private userSvc: UserService,
     private router: Router,
     private metaTagService: Meta
-  ) {
-    this.route.params.subscribe((param) => {
-      this.code = param.shortCode;
-    });
-  }
+  ) {}
 
   ngOnInit() {
-    this.exist = environment.idsBussinesWidget.find((code) => code.code === this.code);
-    if (!this.authSvc.isLoggedIn() && this.exist) {
-      this.utilsSvc.showloginForm();
-      this.utilsSvc.change.subscribe((isOpen) => {
-        if (this.authSvc.isLoggedIn() && !isOpen) {
-          this.getUrl();
-        }
-      });
-    } else if(!this.exist){
-      this.getUrl();
-    }
+    this.getParamCode();
 
     this.metaTagService.addTags([
       {
@@ -56,6 +42,22 @@ export class UrlComponent implements OnInit {
           '¡Te han referido! Realiza tus compras, disfruta los mejores productos y servicios del mercado. Con Clickam gana dinero al recomendar lo que más te gusta.',
       },
     ]);
+  }
+  getParamCode() {
+    this.route.params.subscribe((param) => {
+      this.code = param.shortCode;
+      this.exist = environment.idsBussinesWidget.find((code) => code.code === this.code);
+      if (!this.authSvc.isLoggedIn() && this.exist) {
+        this.utilsSvc.showloginForm();
+        this.utilsSvc.change.subscribe((isOpen) => {
+          if (this.authSvc.isLoggedIn() && !isOpen) {
+            this.getUrl();
+          }
+        });
+      } else if (!this.exist) {
+        this.getUrl();
+      }
+    });
   }
 
   public getUrl() {
