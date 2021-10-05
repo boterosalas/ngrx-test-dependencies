@@ -18,9 +18,9 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
+              "firebase",
               "@firebase",
               "@angular/fire",
-              "firebase",
               "@firebase/app",
               "@firebase/database",
               "@firebase/firestore",

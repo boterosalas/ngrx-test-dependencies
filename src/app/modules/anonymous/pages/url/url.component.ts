@@ -17,7 +17,7 @@ export class UrlComponent implements OnInit {
   showMessage = false;
   show = true;
   showLogin = false;
-
+  exist: any;
   constructor(
     private link: LinksService,
     private authSvc: AuthService,
@@ -26,23 +26,10 @@ export class UrlComponent implements OnInit {
     private userSvc: UserService,
     private router: Router,
     private metaTagService: Meta
-  ) {
-    this.route.params.subscribe((param) => {
-      this.code = param.shortCode;
-    });
-  }
+  ) {}
 
   ngOnInit() {
-    if (this.authSvc.isLoggedIn()) {
-      this.getUrl();
-    } else {
-      this.utilsSvc.showloginForm();
-      this.utilsSvc.change.subscribe((isOpen) => {
-        if (this.authSvc.isLoggedIn() && !isOpen) {
-          this.getUrl();
-        }
-      });
-    }
+    this.getParamCode();
 
     this.metaTagService.addTags([
       {
@@ -56,15 +43,29 @@ export class UrlComponent implements OnInit {
       },
     ]);
   }
+  getParamCode() {
+    this.route.params.subscribe((param) => {
+      this.code = param.shortCode;
+      this.exist = environment.idsBussinesWidget.find((code) => code.code === this.code);
+      if (!this.authSvc.isLoggedIn() && this.exist) {
+        this.utilsSvc.showloginForm();
+        this.utilsSvc.change.subscribe((isOpen) => {
+          if (this.authSvc.isLoggedIn() && !isOpen) {
+            this.getUrl();
+          }
+        });
+      } else if (!this.exist) {
+        this.getUrl();
+      }
+    });
+  }
 
   public getUrl() {
-    let exist = environment.idsBussinesWidget.find((code) => code.code === this.code);
-
-    if (exist) {
+    if (this.exist) {
       this.userSvc.getProfile();
       this.userSvc.userInfo$.subscribe((user) => {
         if (user) {
-          const data = { idBusiness: exist.id, userId: user.userId, url: exist.url };
+          const data = { idBusiness: this.exist.id, userId: user.userId, url: this.exist.url };
           this.link.getUrlWidget(data).subscribe((url) => {
             window.location.replace(url);
           });
