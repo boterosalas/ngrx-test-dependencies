@@ -1,4 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { componentFactoryName } from '@angular/compiler';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -70,11 +71,11 @@ describe('NotificationDetailComponent', () => {
     fixture = TestBed.createComponent(NotificationDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    component.idNotification = 1;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
-    component.idNotification = 1;
   });
 
   it('on file change bad file', () => {
