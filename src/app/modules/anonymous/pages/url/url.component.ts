@@ -54,7 +54,7 @@ export class UrlComponent implements OnInit {
             this.getUrl();
           }
         });
-      } else if (!this.exist) {
+      } else {
         this.getUrl();
       }
     });
