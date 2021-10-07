@@ -1,5 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { componentFactoryName } from '@angular/compiler';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -33,7 +34,12 @@ describe('NotificationDetailComponent', () => {
   let responseNotification = {
     state: 'Success',
     userMessage: 'Se han guardado los cambios satisfactoriamente',
-    objectResponse: { title: 'Prueba', content: 'Contenido de la prueba', filter: 'prueba' },
+    objectResponse: { 
+      title: 'Prueba',
+      content: 'Contenido de la prueba',
+      filter: 'prueba',
+      datepublish: '20T:12:00'
+     },
   };
 
   beforeEach(
@@ -62,7 +68,12 @@ describe('NotificationDetailComponent', () => {
             },
           }),
         ],
-        providers: [{ provide: ContentService, useValue: mockContentService }],
+        providers: [
+          { provide: ContentService, useValue: mockContentService }
+        ],
+        schemas: [
+          NO_ERRORS_SCHEMA
+        ]
       }).compileComponents();
     })
   );
@@ -71,10 +82,10 @@ describe('NotificationDetailComponent', () => {
     fixture = TestBed.createComponent(NotificationDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    component.idNotification = 1;
   });
 
   it('should create', () => {
+    component.idNotification = 1;
     expect(component).toBeTruthy();
   });
 
@@ -106,8 +117,4 @@ describe('NotificationDetailComponent', () => {
     expect(mockContentService.getNotificationDetailAdmin).toHaveBeenCalled();
   });
 
- /*  it('get extension', () => {
-    component.getExtension('prueba.xls');
-    expect(component.validFormat).toBe(true);
-  }); */
 });

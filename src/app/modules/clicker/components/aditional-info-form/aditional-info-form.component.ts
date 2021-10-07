@@ -13,7 +13,7 @@ import { MasterDataService } from 'src/app/services/master-data.service';
 export class AditionalInfoFormComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
-    private user: UserService,
+    public user: UserService,
     private _snackBar: MatSnackBar,
     private personalInfo: MasterDataService
   ) {}

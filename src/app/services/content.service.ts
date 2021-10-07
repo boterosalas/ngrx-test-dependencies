@@ -116,7 +116,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiSaveOrderFooterLinks}`, datos, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -131,7 +131,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiSaveOrderFooterSections}`, datos, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -146,7 +146,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiDeleteFooterLink}`, datos, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -161,7 +161,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiSaveFooterLink}`, datos, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -176,7 +176,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiDeleteFooterSection}`, datos, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -191,7 +191,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiSaveFooterSection}`, datos, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -222,7 +222,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiSaveFaqSeccion}`, datos, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -237,7 +237,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiSaveFaqItem}`, datos, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -252,7 +252,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiDeleteFaqSeccions}`, datos, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -267,7 +267,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiDeleteFaqItems}`, datos, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -282,7 +282,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiSaveOrderFaqSeccions}`, datos, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -297,7 +297,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiSaveOrderFaqItems}`, datos, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -332,7 +332,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiGetBusiness}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -346,7 +346,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiGetBussinessById}?id=${data}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -360,7 +360,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiGetCommissions}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -374,7 +374,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiGetCommissions}?idbusiness=${data}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -388,7 +388,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiComisionByBusiness}?idbusiness=${data}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -404,7 +404,7 @@ export class ContentService {
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
-            delay(1000),
+            delay(3000),
             take(3),
             tap((errorStatus) => {})
           )
@@ -416,7 +416,7 @@ export class ContentService {
     return this.http.post(`${this.urlComission + this.apiManageComisionBusiness}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -431,7 +431,7 @@ export class ContentService {
     return this.http.post(`${this.urlComission + this.apiImportSellerFile}`, { file }, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -446,7 +446,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiSaveBusinessOrderTip}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -460,7 +460,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiSaveOferActive}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -474,7 +474,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiInfoBusiness}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -488,7 +488,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiSaveTerms}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -502,7 +502,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiSaveTips}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -516,7 +516,7 @@ export class ContentService {
     return this.http.delete(`${this.url + this.apiDeleteTip}?id=${data}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -527,7 +527,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiSaveComision}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -541,7 +541,7 @@ export class ContentService {
     return this.http.delete(`${this.url + this.apiDeleteComision}?id=${data}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -553,7 +553,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiGetAllBusiness}?clickam=${clickam}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -568,7 +568,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiSaveActiveBusiness}`, bussiness, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -583,7 +583,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiGetLinkBusiness}`, bussiness, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -598,7 +598,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiGetpopups}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -613,7 +613,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiGetBusinessClicker}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -628,7 +628,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiGetbusinessexcel}`, {}, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -644,7 +644,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiGetBusinessContent}?idBusiness=${id}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -659,7 +659,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiGetcategoriesbusiness}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -674,7 +674,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiAssured}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -689,7 +689,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiTrips}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -704,7 +704,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiCategories}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -719,7 +719,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiGetBoardings}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -781,7 +781,7 @@ export class ContentService {
     }
     const apiSearchVetex = `${this.apiProducts}/getProducts`;
     return this.http.post(`${this.url + apiSearchVetex}`, this.sendSearch, this.httpOptions).pipe(
-      delay(1000),
+      delay(3000),
       take(3),
       tap((errorStatus) => {}),
       map((user: any) => {
@@ -794,7 +794,7 @@ export class ContentService {
     return this.http.delete(`${this.url + this.apiDeleteCategory}?id=${datos.id}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -805,7 +805,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiAddCategory}`, datos, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -819,7 +819,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiOrderCategory}`, datos, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -833,7 +833,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiGetAllCategory}?idbusiness=${id}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -847,7 +847,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiGetContentVideo}?idbusiness=${id}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -871,7 +871,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiDeleteContent}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -904,7 +904,7 @@ export class ContentService {
     return this.http.post(`${this.urlRefer + this.apiSaverefer}`, datos, httpOptionsSet).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -918,7 +918,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiGetBlog}?from=${data.from}&to=${data.to}&orderBy=${data.orderBy}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -942,7 +942,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiGetBlog}?from=${data.from}&to=${200}&orderBy=${data.orderBy}&visible=true`, httpCache).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -956,7 +956,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiGetBlogIndividual}?path=${data}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -970,7 +970,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiGetBlogIndividual}?id=${data}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -984,7 +984,7 @@ export class ContentService {
     return this.http.delete(`${this.url + this.apiDeleteBlog}?id=${data}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -1013,7 +1013,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiSaveBussiness}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -1036,7 +1036,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiDeleteOfer}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -1050,7 +1050,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiSaveOrderOfer}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -1065,7 +1065,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiSaveOfer}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -1080,7 +1080,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiSaveStories}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -1095,7 +1095,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiSaveVisitStory}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -1110,7 +1110,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiGetStories}?visible=${data}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -1125,7 +1125,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiGetStories}?idbusiness=${idBussiness}&visible=${data}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -1140,7 +1140,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiDeleteStories}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -1162,7 +1162,7 @@ export class ContentService {
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
-            delay(1000),
+            delay(3000),
             take(3),
             tap((errorStatus) => {})
           )
@@ -1177,7 +1177,7 @@ export class ContentService {
     return this.http.post(`${this.urlComission + this.apiGenerateCommissions}`, {}, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -1192,7 +1192,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiPopup}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -1207,7 +1207,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiSaveVisitOffer}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -1222,7 +1222,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiGetNotificationAdmin}?visible=${data}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -1237,7 +1237,7 @@ export class ContentService {
     return this.http.delete(`${this.url + this.apiDeleteNotificationAdmin}?id=${id}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -1260,7 +1260,7 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiGetNotificationDetailAdmin}?id=${id}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )

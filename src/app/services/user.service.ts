@@ -92,7 +92,7 @@ export class UserService {
         map((res: ResponseService) => res.objectResponse),
         retryWhen((errors) =>
           errors.pipe(
-            delay(1000),
+            delay(3000),
             take(3),
             tap((errorStatus) => {})
           )
@@ -110,7 +110,7 @@ export class UserService {
     return this.http.post(`${this.url + this.apiActivateProfile}`, { email: email }, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -139,7 +139,7 @@ export class UserService {
     return this.http.get(`${this.url}${this.apiGetuserdata}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -154,7 +154,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apiCreateUser}`, userInfo, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -166,7 +166,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apiSaveNewNovelty}`, newNovelty, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -178,7 +178,7 @@ export class UserService {
     return this.http.get(`${this.url}${this.apiGetNewsNovelties}?id=${id}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -190,7 +190,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apiSaveUserAccepttermsReferrals}`, {}, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -202,7 +202,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apiUpdateEmployees}`, {}, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -214,7 +214,7 @@ export class UserService {
     return this.http.get(`${this.url}${this.apiGetExternalUsers}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -226,7 +226,7 @@ export class UserService {
     return this.http.get(`${this.urlReports}${this.apiReportStories}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -249,7 +249,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apiUploadFiles}`, params, httpOptionsSet).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -300,7 +300,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apiSaveUserOnboardingViewed}`, { viewed: save }, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -324,7 +324,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apiDisableUser}`, { userid: id, value }, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -336,7 +336,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apiUpdateUserEmail}`, { userid, email }, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -348,7 +348,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apigetBankAccountNumber}`, { password }, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -360,7 +360,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apichangeBankInformation}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -372,7 +372,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apiUpdateUser}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -384,7 +384,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apiRegisterUserTerms}`, { idbusiness: id }, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -396,7 +396,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apiComunications}`, { userid: id, value }, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -408,7 +408,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apiVerified}`, { userid: id, verified: value }, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -420,7 +420,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apiDeleteUser}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -431,7 +431,7 @@ export class UserService {
     return this.http.get(`${this.urlReports}${this.apiReporUserGamification}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -442,7 +442,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apiSaveNews}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -453,7 +453,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apiUploadNews}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -472,7 +472,7 @@ export class UserService {
     return this.http.get(`${this.urlReports}${this.apiNoveltyById}?id=${id}&userId=${userId}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -484,7 +484,7 @@ export class UserService {
     return this.http.get(`${this.url}${this.apiGetNewsById}?userId=${id}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -496,7 +496,7 @@ export class UserService {
     return this.http.post(`${this.urlReports}${this.apiGetExcelNews}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -507,7 +507,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apiSetStatusNew}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -520,7 +520,7 @@ export class UserService {
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
-            delay(1000),
+            delay(3000),
             take(3),
             tap((errorStatus) => {})
           )
@@ -533,7 +533,7 @@ export class UserService {
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
-            delay(1000),
+            delay(3000),
             take(3),
             tap((errorStatus) => {})
           )
@@ -545,7 +545,7 @@ export class UserService {
     return this.http.patch(`${this.url}${this.apiSaveQualificationNovelty}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -557,7 +557,7 @@ export class UserService {
     return this.http.get(`${this.url}${this.apiGetDocuments}?typeDocument=${document}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -569,7 +569,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apiUpdateInfoClicker}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -580,7 +580,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apiSaveFeedBack}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -591,7 +591,7 @@ export class UserService {
     return this.http.get(`${this.urlReports}${this.apiReportCambios}?&start=${params.start}&end=${params.end}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -603,7 +603,7 @@ export class UserService {
     return this.http.get(`${this.urlReports}${this.apiDeleteComments}?&start=${params.start}&end=${params.end}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -615,7 +615,7 @@ export class UserService {
     return this.http.get(`${this.urlReports}${this.apiReporReferral}?&start=${params.start}&end=${params.end}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -627,7 +627,7 @@ export class UserService {
     return this.http.get(`${this.url}${this.apiGetStatusVerification}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -638,7 +638,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apiUpdateResponseAccountBank}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -649,7 +649,7 @@ export class UserService {
     return this.http.get(`${this.url + this.apiGetPermision}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -663,7 +663,7 @@ export class UserService {
     return this.http.post(`${this.url + this.apiSavePermision}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -678,7 +678,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apiDeleteUserAdmin}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -690,7 +690,7 @@ export class UserService {
     return this.http.post(`${this.url}${this.apiCreateUserAdmin}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -702,7 +702,7 @@ export class UserService {
     return this.http.get(`${this.url}${this.apiUserInfoAditional}?userid=${userId}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )

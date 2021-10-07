@@ -109,7 +109,7 @@ export class AuthService implements OnDestroy {
     return this.http.get(`${this.url + this.apiGetmenus}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -124,7 +124,7 @@ export class AuthService implements OnDestroy {
     return this.http.get(`${this.url + this.apiGetmenusClicker}?visible=${visible}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -139,7 +139,7 @@ export class AuthService implements OnDestroy {
     return this.http.get(`${this.url + this.apiGetmenusFromAdmin}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -154,7 +154,7 @@ export class AuthService implements OnDestroy {
     return this.http.get(`${this.url + this.apiGetmenusNoLogin}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -169,7 +169,7 @@ export class AuthService implements OnDestroy {
     return this.http.get(`${this.url + this.apiGetmenusNoLoginViewUser}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -184,7 +184,7 @@ export class AuthService implements OnDestroy {
     return this.http.post(`${this.url + this.apiSaveMenu}`, datos, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -199,7 +199,7 @@ export class AuthService implements OnDestroy {
     return this.http.post(`${this.url + this.apiSaveMenuGroup}`, datos, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -214,7 +214,7 @@ export class AuthService implements OnDestroy {
     return this.http.delete(`${this.url + this.apiDeleteMenu}?id=${id}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -229,7 +229,7 @@ export class AuthService implements OnDestroy {
     return this.http.delete(`${this.url + this.apiDeleteMenuGroup}?id=${id}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -244,7 +244,7 @@ export class AuthService implements OnDestroy {
     return this.http.post(`${this.url + this.apiSaveOrderMenus}`, datos, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -259,7 +259,7 @@ export class AuthService implements OnDestroy {
     return this.http.post(`${this.url + this.apiSaveOrderGrupoMenus}`, datos, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -295,7 +295,7 @@ export class AuthService implements OnDestroy {
     return this.http.get(`${this.url + this.apiGetsAdmins}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -309,7 +309,7 @@ export class AuthService implements OnDestroy {
     return this.http.get(`${this.url + this.apiGetPermisionAdmin}?rol=${rol}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -323,7 +323,7 @@ export class AuthService implements OnDestroy {
     return this.http.post(`${this.url + this.apiSavePermision}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )

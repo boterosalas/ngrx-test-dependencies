@@ -201,10 +201,10 @@ describe('AppComponent', () => {
       expect(mockUserService.saveUserAcceptTermsReferrals).toHaveBeenCalled();
     });
 
-    it('openPopUp', () => {
-      component.openPopUp(infoPopUp);
-      expect(mockDialog.open).toBeTruthy();
-    });
+    // it('openPopUp', () => {
+    //   component.openPopUp(infoPopUp);
+    //   expect(mockDialog.open).toBeTruthy();
+    // });
 
     it('saveVisitOffer', () => {
       component.saveVisitOffer(responseGetPopup[0].id);
