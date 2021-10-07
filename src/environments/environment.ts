@@ -42,6 +42,7 @@ export const environment = {
     appId: '1:158450297764:web:0ab01b0d9b7f175aa26f31',
   },
 
+
   idsBussinesWidget: [
     {
       id: 1,
@@ -68,11 +69,11 @@ export const environment = {
       code: 'viajesexito_widget',
       url: 'https://www.viajesexito.com',
     },
-/*     {
-      id: 11,
+    {
+      id: 24,
       code: 'beautyholics_widget',
       url: 'https://www.beautyholics.com',
-    }, */
+    },
     {
       id: 20,
       code: 'haceb_widget',
@@ -83,11 +84,11 @@ export const environment = {
       code: 'habi_widget',
       url: 'https://habi.co',
     },
-/*     {
+     {
       id: 5,
       code: 'wesura_widget',
       url: 'https://www.wesura.com',
-    }, */
+    },
     {
       id: 25,
       code: 'anutibara_widget',
