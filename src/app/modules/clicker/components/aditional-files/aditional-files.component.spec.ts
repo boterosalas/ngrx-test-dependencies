@@ -87,4 +87,5 @@ beforeEach(waitForAsync(() => {
     component.sendInfo();
     expect(component.uploadFile.emit).toHaveBeenCalled();
   });
+  
 });

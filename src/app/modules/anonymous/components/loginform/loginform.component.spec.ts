@@ -142,6 +142,7 @@ beforeEach(waitForAsync(() => {
     TestBed.resetTestingModule();
   });
 
+  
   //it("Login invalid", () => {
 
   //});
@@ -167,23 +168,23 @@ beforeEach(waitForAsync(() => {
 
   // });
 
-  describe('invalid request', () => {
-    beforeEach(() => {
-      mockAuthService.login.and.returnValue(throwError(InvalidRquest));
-    });
+  // describe('invalid request', () => {
+  //   beforeEach(() => {
+  //     mockAuthService.login.and.returnValue(throwError(InvalidRquest));
+  //   });
 
-    it('invalid request', () => {
-      component.isSubmitted = true;
-      component.loginForm.controls.Username.setValue('t@gmail.com');
-      component.loginForm.controls.Password.setValue('123123');
-      component.login();
-      expect(mockAuthService.login).toHaveBeenCalled();
-    });
+  //   it('invalid request', () => {
+  //     component.isSubmitted = true;
+  //     component.loginForm.controls.Username.setValue('t@gmail.com');
+  //     component.loginForm.controls.Password.setValue('123123');
+  //     component.login();
+  //     expect(mockAuthService.login).toHaveBeenCalled();
+  //   });
 
-    afterAll(() => {
-      TestBed.resetTestingModule();
-    });
-  });
+  //   afterAll(() => {
+  //     TestBed.resetTestingModule();
+  //   });
+  // });
 
   // describe("Admin login", () => {
   //   beforeEach(() => {

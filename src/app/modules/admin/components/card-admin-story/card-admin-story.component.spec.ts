@@ -1,4 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CheckboxControlValueAccessor, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -141,6 +142,7 @@ beforeEach(waitForAsync(() => {
         { provide: MatDialogRef, useValue: dialogMock },
         { provide: MAT_DIALOG_DATA, useValue: data },
       ],
+      schemas:[NO_ERRORS_SCHEMA]
     })
       .overrideModule(BrowserDynamicTestingModule, {
         set: {
@@ -156,6 +158,22 @@ beforeEach(waitForAsync(() => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CardAdminStoryComponent);
     component = fixture.componentInstance;
+    component.data = [
+      {
+        description: 'e1',
+        id: 43,
+        imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/stories/20210806082635.jpg',
+        link: null,
+        idbusiness: 1,
+        infoaditional: null,
+        active: true,
+        orderby: null,
+        date: '2021-08-06T08:26:35.433',
+        new: false,
+        datepublish: null,
+        extension: 'jpg',
+      }
+    ]
     fixture.detectChanges();
   });
 
