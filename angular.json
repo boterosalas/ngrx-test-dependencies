@@ -293,7 +293,8 @@
         "prerender": {
           "builder": "@nguniversal/builders:prerender",
           "options": {
-            "routesFile": "src/prerender-routes.txt"
+            "routesFile": "src/prerender-routes.txt",
+            "guessRoutes": false
           },
           "configurations": {
             "production": {
@@ -303,9 +304,17 @@
             "development": {
               "browserTarget": "clickam:build",
               "serverTarget": "clickam:server"
+            },
+            "qa": {
+              "browserTarget": "clickam:build:qa",
+              "serverTarget": "clickam:server:qa"
+            },
+            "uat": {
+              "browserTarget": "clickam:build:uat",
+              "serverTarget": "clickam:server:uat"
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "development"
         }
       }
     }
