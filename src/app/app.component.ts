@@ -104,10 +104,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.subscription = router.events.subscribe((url: any) => {
       if (url instanceof NavigationStart) {
-        dataLayer.push({
-          event: 'pageview',
-          virtualPageURL: url.url,
-        });
+        if (isPlatformBrowser(this.platformId)) {
+          dataLayer.push({
+            event: 'pageview',
+            virtualPageURL: url.url,
+          });
+        }
+        
       } else if (url instanceof NavigationEnd && this.role === 'CLICKER') {
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
@@ -128,7 +131,9 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.showUpdateModal();
     this.showAnimation1 = true;
-    this.innerWidth = window.innerWidth;
+    if (isPlatformBrowser(this.platformId)) {
+      this.innerWidth = window.innerWidth;
+    }
     this.showLoginForm = true;
     this.showRegisterForm = false;
     this.showForgotForm = false;
@@ -266,7 +271,12 @@ export class AppComponent implements OnInit, OnDestroy {
           confirmButtonClass: 'update-success',
           customClass: 'paymentData',
         }).then(() => {
-          window.location.reload();
+          if (isPlatformBrowser(this.platformId)) {
+            const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+            if (iOS) {
+              window.location.reload();
+            }
+          }
         });
       });
     }
