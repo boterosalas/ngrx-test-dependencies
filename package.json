@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build --output-hashing=all",
     "build-qa": "ng build --output-hashing=all --configuration=qa",
-    "build-uat": "ng build --output-hashing=all --configuration=uat",
+    "build-uat": "ng run clickam:prerender",
     "build-pr": "ng build --output-hashing=all --configuration=production",
     "test": "ng test --code-coverage=true --source-map=false --karma-config=./karma.conf.js",
     "testwatch": "ng test --code-coverage=true --source-map=false --karma-config=./karma.conf.js --watch",
