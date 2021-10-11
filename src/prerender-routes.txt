@@ -2,6 +2,7 @@
 /inicio
 /click-academy
 /blog
+/blog/articulos
 /tabla-comisiones
 /terminos-y-condiciones
 /centro-de-ayuda
