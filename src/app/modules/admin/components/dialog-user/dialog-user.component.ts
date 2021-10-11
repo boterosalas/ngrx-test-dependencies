@@ -72,6 +72,16 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     this.state.emit(event);
   }
 
+  changeInternal(e) {
+    const changeUser = {
+      userId: this.data.userId,
+      isEmployeeGrupoExito: e.checked
+    }
+    this.user.changeOrigin(changeUser).subscribe((respInternal:any) => {
+      this.openSnackBar(respInternal.userMessage, 'Cerrar');
+    });
+  }
+
   changeComunications() {
     this.comunications.emit(event);
   }
@@ -129,6 +139,7 @@ export class DialogUserComponent implements OnInit, OnDestroy {
     });
 
     this.getStatusVerificationUser();
+
   }
 
   ngOnDestroy(): void {

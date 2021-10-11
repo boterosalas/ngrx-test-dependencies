@@ -27,6 +27,7 @@ describe('DialogUserComponent', () => {
     'updateInfoClicker',
     'getStatusVerification',
     'postUpdateResponseAccountBank',
+    'changeOrigin'
   ]);
   const dialogMock = {
     close: () => {},
@@ -104,6 +105,7 @@ describe('DialogUserComponent', () => {
       mockUserService.updateInfoClicker.and.returnValue(of(getUserExcel));
       mockUserService.getStatusVerification.and.returnValue(of(getStatusVerification));
       mockUserService.postUpdateResponseAccountBank.and.returnValue(of(postUpdateResponse));
+      mockUserService.changeOrigin.and.returnValue(of(postUpdateResponse));
     })
   );
 
@@ -178,6 +180,14 @@ describe('DialogUserComponent', () => {
   it('Save info clciker', () => {
     component.saveInfoPersonal();
     expect(mockUserService.updateInfoClicker).toHaveBeenCalled();
+  });
+
+  it('Change origin', () => {
+    const e = {
+      checked: true
+    }
+    component.changeInternal(e);
+    expect(mockUserService.changeOrigin).toHaveBeenCalled();
   });
 
 

@@ -130,19 +130,34 @@
         <div class="user-status">
           <h3 class="secundary-text">Usuario</h3>
 
-          <div *ngIf="data.userId !== idAdmin">
-            <p class="galano-bold gray">ESTADO</p>
-
-            <mat-slide-toggle
-              [(ngModel)]="data.state"
-              (change)="changeStatus()"
-              color="orange-toggle"
-              labelPosition="before"
-              id="state-toggle"
-            >
-              <span class="third-text" *ngIf="data.state === true"> Activo </span>
-              <span class="third-text" *ngIf="data.state === false"> Inactivo </span>
-            </mat-slide-toggle>
+          <div *ngIf="data.userId !== idAdmin" fxLayout="row" fxLayoutGap="20px">
+            <span fxLayout="column">
+              <p class="galano-bold gray">ESTADO</p>
+              <mat-slide-toggle
+                [(ngModel)]="data.state"
+                (change)="changeStatus()"
+                color="orange-toggle"
+                labelPosition="before"
+                id="state-toggle"
+              >
+                <span class="third-text" *ngIf="data.state === true"> Activo </span>
+                <span class="third-text" *ngIf="data.state === false"> Inactivo </span>
+              </mat-slide-toggle>
+            </span>
+            <span>
+              <p class="galano-bold gray">INTERNO</p>
+  
+              <mat-slide-toggle
+                [(ngModel)]="data.isEmployeeGrupoExito"
+                (change)="changeInternal($event)"
+                color="orange-toggle"
+                labelPosition="before"
+                id="internal-toggle"
+              >
+                <span class="third-text" *ngIf="data.isEmployeeGrupoExito === true"> Si </span>
+                <span class="third-text" *ngIf="data.isEmployeeGrupoExito === false"> No </span>
+              </mat-slide-toggle>
+            </span>
           </div>
 
           <p class="galano-bold gray">RECIBE COMUNICACIONES</p>

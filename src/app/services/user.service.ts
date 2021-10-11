@@ -25,6 +25,7 @@ export class UserService {
   apichangeBankInformation = 'userprofile/changeBankInformation';
   apiDisableUser = 'userprofile/disableUser';
   apiUpdateUser = 'userprofile/updateUser';
+  apiChangeOrigin= 'userprofile/changeorigin';
   apiUsers = 'userprofile/getUsers';
   apiGetBasicData = 'userprofile/getBasicData';
   apiComunications = 'userprofile/setReceiveCommunications';
@@ -334,6 +335,18 @@ export class UserService {
 
   public updateUserEmail(userid: string, email: string) {
     return this.http.post(`${this.url}${this.apiUpdateUserEmail}`, { userid, email }, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      )
+    );
+  }
+
+  public changeOrigin(data: object) {
+    return this.http.post(`${this.url}${this.apiChangeOrigin}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
