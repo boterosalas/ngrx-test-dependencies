@@ -39,6 +39,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import { CardStoryComponent } from './components/card-story/card-story.component';
 import { OnboardingSwiperComponent } from './components/onboarding-swiper/onboarding-swiper.component';
+import { SafePipe } from "src/app/pipes/safe,pipe";
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { OnboardingSwiperComponent } from './components/onboarding-swiper/onboar
     TruncatePipe,
     TrimPipe,
     RemoveTagsPipe,
+    SafePipe,
     AppStoreComponent,
     LogoComponent,
     ProductComponent,
@@ -103,6 +105,7 @@ import { OnboardingSwiperComponent } from './components/onboarding-swiper/onboar
     UnderConstructionComponent,
     TruncatePipe,
     TrimPipe,
+    SafePipe,
     RemoveTagsPipe,
     LogoComponent,
     ProductComponent,

@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   URL_SECURITY: 'https://apitestexito.azure-api.net/QA-clickam-md-apisecurity/api/',
   URL_PROFILE: 'https://apitestexito.azure-api.net/QA-clickam-md-apiprofile/api/',
   URL_VALIDATE_EMPLOYEE: 'https://apitestexito.azure-api.net/QA-clickam-md-apiprofile/',

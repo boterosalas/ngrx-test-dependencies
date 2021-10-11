@@ -21,7 +21,7 @@
       <h3>{{ section.description }}</h3>
       <ul>
         <li *ngFor="let item of section.links">
-          <a href="{{ item.link }}" target="_blank">{{ item.description }}</a>
+          <a [href]="item.link | safe: 'url'" target="_blank">{{ item.description }}</a>
         </li>
       </ul>
     </section>
@@ -33,7 +33,7 @@
         <summary>{{ section.description }}</summary>
         <ul>
           <li *ngFor="let item of section.links">
-            <a href="{{ item.link }}" target="_blank">{{ item.description }}</a>
+            <a [href]="item.link | safe: 'url'" target="_blank">{{ item.description }}</a>
           </li>
         </ul>
       </details>
