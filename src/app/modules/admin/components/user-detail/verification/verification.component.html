@@ -1,0 +1,26 @@
+<div>
+    <p class="galano-bold gray">VERIFICACIÓN</p>
+    <form [formGroup]="dateSelectedState">
+      <mat-form-field class="selected-state-account">
+        <mat-select formControlName="state">
+          <mat-option
+            *ngFor="let accountStatus of accountStatements"
+            value="{{ accountStatus.id }}"
+            class="select-option-status"
+          >
+            <span>{{ accountStatus.value }}</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+
+    <p class="galano-bold gray edit-message">
+      MENSAJE DE RECHAZO
+      <i
+        class="tio-edit style-icon cursor-pointer {{ enableRejectionMessage ? 'style-icon-enable' : 'style-icon-disabled' }}"
+      ></i>
+    </p>
+    <p class="rejection-message">
+      {{ this.enableRejectionMessage && this.data.responseAccountBank ? this.data.responseAccountBank : '-' }}
+    </p>
+  </div>
