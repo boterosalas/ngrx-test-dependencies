@@ -81,6 +81,14 @@ import { DatailNewsComponent } from './pages/datail-news/datail-news.component';
 import { NoveltyChatComponent } from './components/novelty-chat/novelty-chat.component';
 import { TableOnboardingComponent } from './components/table-onboarding/table-onboarding.component';
 import { DialogOnboardingComponent } from './components/dialog-onboarding/dialog-onboarding.component';
+import { DetailUserComponent } from './pages/users/detail-user/detail-user.component';
+import { PersonalInfoComponent } from './components/user-detail/personal-info/personal-info.component';
+import { DownloadDocumentsComponent } from './components/user-detail/download-documents/download-documents.component';
+import { CvComponent } from './components/user-detail/cv/cv.component';
+import { InfoUserComponent } from './components/user-detail/info-user/info-user.component';
+import { BankAccountComponent } from './components/user-detail/bank-account/bank-account.component';
+import { UserComponent } from './components/user-detail/user/user.component';
+import { VerificationComponent } from './components/user-detail/verification/verification.component';
 
 const routes: Routes = [
   {
@@ -104,6 +112,15 @@ const routes: Routes = [
   {
     path: 'usuarios',
     component: UsersComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
+    },
+  },
+  {
+    path: 'usuario/:id',
+    component: DetailUserComponent,
     canActivate: [RoleGuard],
     data: {
       role: 'ADMIN',
@@ -393,7 +410,15 @@ const routes: Routes = [
     DialogStoryComponent,
     DatailNewsComponent,
     TableOnboardingComponent,
-    DialogOnboardingComponent
+    DialogOnboardingComponent,
+    DetailUserComponent,
+    PersonalInfoComponent,
+    DownloadDocumentsComponent,
+    CvComponent,
+    InfoUserComponent,
+    BankAccountComponent,
+    UserComponent,
+    VerificationComponent
   ],
   imports: [
     AngularEditorModule,

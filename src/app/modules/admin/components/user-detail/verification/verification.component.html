@@ -1,5 +1,5 @@
-<div>
-    <p class="galano-bold gray">VERIFICACIÓN</p>
+<div class="verification">
+    <h3 class="secundary-text">Verificación</h3>
     <form [formGroup]="dateSelectedState">
       <mat-form-field class="selected-state-account">
         <mat-select formControlName="state">
@@ -14,7 +14,7 @@
       </mat-form-field>
     </form>
 
-    <p class="galano-bold gray edit-message">
+    <p class="galano-bold gray edit-message w-label">
       MENSAJE DE RECHAZO
       <i
         class="tio-edit style-icon cursor-pointer {{ enableRejectionMessage ? 'style-icon-enable' : 'style-icon-disabled' }}"

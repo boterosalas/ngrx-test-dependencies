@@ -2,17 +2,17 @@
   <h3 class="secundary-text">Usuario</h3>
 
   <span fxLayout="row" fxLayoutAlign="space-between center">
-      <p class="galano-bold gray">ORIGEN</p>
+      <p class="galano-bold gray w-label w-label-width">ORIGEN</p>
       <span class="normal-text" *ngIf="data.isEmployeeGrupoExito === 'INTERNO'"> Interno </span>
       <span class="normal-text" *ngIf="data.isEmployeeGrupoExito === 'EXTERNO'"> Externo </span>
   </span>
 
   <span fxLayout="row" fxLayoutAlign="space-between center">
-      <p class="galano-bold gray">SCORE</p>
+      <p class="galano-bold gray w-label w-label-width">SCORE</p>
       <span class="normal-text"> {{ data.score }} </span>
   </span>
 
-  <p class="galano-bold gray">RECIBE COMUNICACIONES</p>
+  <p class="galano-bold gray w-label">RECIBE COMUNICACIONES</p>
   <mat-slide-toggle
     [(ngModel)]="data.receiveCommunications"
     color="orange-toggle"
@@ -25,14 +25,14 @@
 
   <div fxLayout="row" fxLayoutGap="20px">
     <span fxLayout="column">
-      <p class="galano-bold gray">ESTADO</p>
+      <p class="galano-bold gray w-label w-label-width">ESTADO</p>
       <mat-slide-toggle [(ngModel)]="data.state" color="orange-toggle" labelPosition="before" id="state-toggle">
         <span class="third-text" *ngIf="data.state"> Activo </span>
         <span class="third-text" *ngIf="!data.state"> Inactivo </span>
       </mat-slide-toggle>
     </span>
     <span>
-      <p class="galano-bold gray">INTERNO</p>
+      <p class="galano-bold gray w-label w-label-width">INTERNO</p>
 
       <mat-slide-toggle
         [(ngModel)]="data.isEmployeeGrupoExito"
