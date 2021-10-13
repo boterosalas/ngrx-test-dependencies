@@ -18,10 +18,50 @@
     <p class="galano-bold gray edit-message w-label">
       MENSAJE DE RECHAZO
       <i
+        (click)="editRejectionMessage()"
         class="tio-edit style-icon cursor-pointer {{ enableRejectionMessage ? 'style-icon-enable' : 'style-icon-disabled' }}"
       ></i>
     </p>
     <p class="rejection-message">
-      {{ this.enableRejectionMessage && this.data.responseAccountBank ? this.data.responseAccountBank : '-' }}
+      {{ this.enableRejectionMessage && this.data.responseaccountbank ? this.data.responseaccountbank : '-' }}
     </p>
   </div>
+
+  <!-- template -->
+
+  <ng-template #templateRejectionMessage>
+    <div>
+      <form [formGroup]="dataRejectionMessage">
+        <mat-form-field class="w-100">
+          <textarea
+            matInput
+            placeholder="Mensaje de rechazo"
+            formControlName="message"
+            type="text"
+            required
+            class="text-area-heigth"
+            value="{{ this.data.responseaccountbank ? this.data.responseaccountbank : '' }}"
+          ></textarea>
+          <mat-error
+            id="requiredMessage"
+            *ngIf="dataRejectionMessage.controls.message.invalid && dataRejectionMessage.controls.message.errors.required"
+            >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Mensaje de rechazo' } }}</mat-error
+          >
+        </mat-form-field>
+      </form>
+  
+      <div class="mt-3 mb-2" fxLayout="row" fxLayoutAlign="end end">
+        <button mat-button ngClass="button_cancel" (click)="onNoClick()">Cancelar</button>
+        <button
+          mat-raised-button
+          color="orange"
+          (click)="saveRejectionMessage()"
+          id="saveMessage"
+          class="ml-2"
+          [disabled]="!dataRejectionMessage.valid"
+        >
+          Guardar Cambios
+        </button>
+      </div>
+    </div>
+  </ng-template>

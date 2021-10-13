@@ -1,7 +1,9 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ResponseService } from 'src/app/interfaces/response';
+import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { UserService } from 'src/app/services/user.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
@@ -13,21 +15,33 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class VerificationComponent implements OnInit , OnDestroy {
 
   dateSelectedState: FormGroup;
+  dataRejectionMessage: FormGroup;
   accountStatements: any;
   private subscription: Subscription = new Subscription();
   enableRejectionMessage: boolean;
+  @ViewChild('templateRejectionMessage', { static: false })
+  templateRejectionMessage: TemplateRef<any>;
+
   @Input() data: any;
 
   constructor(
     private fb:FormBuilder,
     private user:UserService,
-    private utils: UtilsService
+    private utils: UtilsService,
+    public dialogRef: MatDialogRef<any>,
+    private dialog: MatDialog,
     ) { }
 
   ngOnInit(): void {
+
     this.dateSelectedState = this.fb.group({
       state: [this.data.verified, Validators.required],
     });
+
+    this.dataRejectionMessage = this.fb.group({
+      message: [this.data.responseaccountbank, Validators.required],
+    });
+
     this.getStatusVerificationUser();
   }
 
@@ -69,6 +83,39 @@ export class VerificationComponent implements OnInit , OnDestroy {
       this.enableDisabledEditMessage();
       this.utils.openSnackBar(data.userMessage, 'Cerrar');
     });
+  }
+
+  editRejectionMessage() {
+    const title = 'Editar mensaje de rechazo';
+    const idBussiness = 2;
+    const edit = 0;
+    const template = this.templateRejectionMessage;
+
+    this.dataRejectionMessage.reset();
+    this.dialogRef = this.dialog.open(ModalGenericComponent, {
+      width: '450px',
+      data: {
+        title,
+        idBussiness,
+        template,
+        edit,
+      },
+    });
+  }
+
+  public saveRejectionMessage() {
+    const datos = {
+      userId: this.data.userId,
+      message: this.dataRejectionMessage.controls.message.value,
+    };
+    this.user.postUpdateResponseAccountBank(datos).subscribe((resp) => {
+      this.data.responseaccountbank = this.dataRejectionMessage.controls.message.value;
+      this.dialogRef.close();
+    });
+  }
+
+  onNoClick(){
+    this.dialogRef.close();
   }
 
   ngOnDestroy(){
