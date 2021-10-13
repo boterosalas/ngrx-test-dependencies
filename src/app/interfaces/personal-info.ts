@@ -3,4 +3,5 @@ export interface PersonalInfo  {
     email:string;
     cellphone:string;
     address: string;
+    userId: number;
 }

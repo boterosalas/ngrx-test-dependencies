@@ -263,6 +263,7 @@ export class DialogUserComponent implements OnInit, OnDestroy {
       },
     });
   }
+  
   editRejectionMessage() {
     const title = 'Editar mensaje de rechazo';
     const idBussiness = 2;

@@ -89,6 +89,7 @@ import { InfoUserComponent } from './components/user-detail/info-user/info-user.
 import { BankAccountComponent } from './components/user-detail/bank-account/bank-account.component';
 import { UserComponent } from './components/user-detail/user/user.component';
 import { VerificationComponent } from './components/user-detail/verification/verification.component';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 const routes: Routes = [
   {
@@ -477,8 +478,12 @@ const routes: Routes = [
     DialogFaqItemComponent,
     DialogDeleteNotificationComponent,
     DialogStoryComponent,
-    DialogOnboardingComponent
+    DialogOnboardingComponent,
   ],
-  providers: [{ provide: MatPaginatorIntl, useClass: UsersComponent }],
+  providers: [
+    { provide: MatPaginatorIntl, useClass: UsersComponent },
+    { provide: MatDialogRef, useValue: {} },
+	{ provide: MAT_DIALOG_DATA, useValue: [] },
+  ],
 })
 export class AdminModule {}

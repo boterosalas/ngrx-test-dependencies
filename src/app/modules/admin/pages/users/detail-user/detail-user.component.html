@@ -10,7 +10,7 @@
 
       <h3 class="mb-3 title-name">
         <img class="icon-dashboard" src="assets/img/usuario-black.svg" alt="user" />
-        David Betancur
+        {{name}}
       </h3>
     
       <app-back-button route="/usuarios"></app-back-button>
@@ -20,7 +20,7 @@
   <div fxLayout="row" fxLayoutGap="30px" class="mb-3">
 
       <mat-card fxLayout="column" fxFlex="33"> 
-          <app-info-user></app-info-user>
+          <app-info-user [user]="dataUser"></app-info-user>
       </mat-card>
     
       <aside fxLayout="column" fxFlex="67">
