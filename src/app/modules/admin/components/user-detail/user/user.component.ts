@@ -24,7 +24,6 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   public changeValueService(event: any, service: string) {
-    console.log(event, service);
     if (event.checked === false) {
       if (service === 'comunications') {
         this.changeComunications(this.data.userId, event.checked);
