@@ -68,6 +68,7 @@ export class UserService {
   apiGetPermision = 'userprofile/getpermissions';
   apiCreateUserAdmin = 'userprofile/createuseradmin';
   apiUserInfoAditional = 'userprofile/getuserinfoaditional';
+  apiGetDocumentsUser = 'userprofile/getdocumentsuser';
   apiSaveNewNovelty = 'new/savenewnovelty';
   apiGetNewsNovelties = 'new/getnewsnovelty';
   apiSaveQualificationNovelty = '/new/noveltyqualification';
@@ -713,6 +714,18 @@ export class UserService {
 
   public getUserInfoAditional(userId) {
     return this.http.get(`${this.url}${this.apiUserInfoAditional}?userid=${userId}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => { })
+        )
+      )
+    );
+  }
+
+  public getDocumentsUser(userId) {
+    return this.http.get(`${this.url}${this.apiGetDocumentsUser}?userid=${userId}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),

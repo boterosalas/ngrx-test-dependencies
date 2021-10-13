@@ -367,4 +367,5 @@ export class DialogUserComponent implements OnInit, OnDestroy {
         break;
     }
   }
+  
 }
