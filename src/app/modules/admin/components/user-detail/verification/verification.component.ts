@@ -26,7 +26,7 @@ export class VerificationComponent implements OnInit , OnDestroy {
 
   ngOnInit(): void {
     this.dateSelectedState = this.fb.group({
-      state: [null, Validators.required],
+      state: [this.data.verified, Validators.required],
     });
     this.getStatusVerificationUser();
   }
@@ -60,10 +60,15 @@ export class VerificationComponent implements OnInit , OnDestroy {
     } else {
       this.enableRejectionMessage = false;
     }
-  }
+  };
 
-  changeVerified() {
-    this.enableDisabledEditMessage();
+  public changeVerified() {
+    const userId = this.data.userId;
+    const valueMessage = this.dateSelectedState.controls.state.value;
+    this.subscription = this.user.verifiedUser(userId, valueMessage).subscribe((data: ResponseService) => {
+      this.enableDisabledEditMessage();
+      this.utils.openSnackBar(data.userMessage, 'Cerrar');
+    });
   }
 
   ngOnDestroy(){
