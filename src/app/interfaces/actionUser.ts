@@ -1,7 +1,7 @@
 export interface ActionUser  {
     userId: number;
     state:string;
-    isEmployeeGrupoExito:string;
+    isemployeegrupoexito: boolean;
     receiveCommunications:string;
     score: string;
 }

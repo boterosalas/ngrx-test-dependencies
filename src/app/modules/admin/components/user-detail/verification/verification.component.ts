@@ -62,6 +62,10 @@ export class VerificationComponent implements OnInit , OnDestroy {
     }
   }
 
+  changeVerified() {
+    this.enableDisabledEditMessage();
+  }
+
   ngOnDestroy(){
     this.subscription.unsubscribe();
   }

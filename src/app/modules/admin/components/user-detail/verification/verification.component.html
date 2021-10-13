@@ -4,6 +4,7 @@
       <mat-form-field class="selected-state-account">
         <mat-select formControlName="state">
           <mat-option
+            (click)="changeVerified()"
             *ngFor="let accountStatus of accountStatements"
             value="{{ accountStatus.id }}"
             class="select-option-status"
