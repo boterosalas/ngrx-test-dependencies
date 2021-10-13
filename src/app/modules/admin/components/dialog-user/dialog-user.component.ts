@@ -77,9 +77,9 @@ export class DialogUserComponent implements OnInit, OnDestroy {
       userId: this.data.userId,
       isEmployeeGrupoExito: e.checked
     }
-    this.user.changeOrigin(changeUser).subscribe((respInternal:any) => {
-      this.openSnackBar(respInternal.userMessage, 'Cerrar');
-    });
+    // this.user.changeOrigin(changeUser).subscribe((respInternal:any) => {
+    //   this.openSnackBar(respInternal.userMessage, 'Cerrar');
+    // });
   }
 
   changeComunications() {
@@ -263,7 +263,7 @@ export class DialogUserComponent implements OnInit, OnDestroy {
       },
     });
   }
-  
+
   editRejectionMessage() {
     const title = 'Editar mensaje de rechazo';
     const idBussiness = 2;

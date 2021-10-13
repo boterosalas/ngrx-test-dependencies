@@ -2,18 +2,19 @@
   <h3 class="secundary-text">Usuario</h3>
 
   <span fxLayout="row" fxLayoutAlign="space-between center">
-      <p class="galano-bold gray w-label w-label-width">ORIGEN</p>
-      <span class="normal-text" *ngIf="data.isEmployeeGrupoExito === 'INTERNO'"> Interno </span>
-      <span class="normal-text" *ngIf="data.isEmployeeGrupoExito === 'EXTERNO'"> Externo </span>
+    <p class="galano-bold gray w-label w-label-width">ORIGEN</p>
+    <span class="normal-text" *ngIf="data.isEmployeeGrupoExito === 'INTERNO'"> Interno </span>
+    <span class="normal-text" *ngIf="data.isEmployeeGrupoExito === 'EXTERNO'"> Externo </span>
   </span>
 
   <span fxLayout="row" fxLayoutAlign="space-between center">
-      <p class="galano-bold gray w-label w-label-width">SCORE</p>
-      <span class="normal-text"> {{ data.score }} </span>
+    <p class="galano-bold gray w-label w-label-width">SCORE</p>
+    <span class="normal-text"> {{ data.score }} </span>
   </span>
 
   <p class="galano-bold gray w-label">RECIBE COMUNICACIONES</p>
   <mat-slide-toggle
+    (change)="changeValueService($event, 'comunications')"
     [(ngModel)]="data.receiveCommunications"
     color="orange-toggle"
     labelPosition="before"
@@ -26,7 +27,13 @@
   <div fxLayout="row" fxLayoutGap="20px">
     <span fxLayout="column">
       <p class="galano-bold gray w-label w-label-width">ESTADO</p>
-      <mat-slide-toggle [(ngModel)]="data.state" color="orange-toggle" labelPosition="before" id="state-toggle">
+      <mat-slide-toggle
+        (change)="changeValueService($event, 'status')"
+        [(ngModel)]="data.state"
+        color="orange-toggle"
+        labelPosition="before"
+        id="state-toggle"
+      >
         <span class="third-text" *ngIf="data.state"> Activo </span>
         <span class="third-text" *ngIf="!data.state"> Inactivo </span>
       </mat-slide-toggle>
@@ -34,17 +41,10 @@
     <span>
       <p class="galano-bold gray w-label w-label-width">INTERNO</p>
 
-      <mat-slide-toggle
-        [(ngModel)]="data.isEmployeeGrupoExito"
-        color="orange-toggle"
-        labelPosition="before"
-        id="internal-toggle"
-      >
-        <span class="third-text" *ngIf="data.isEmployeeGrupoExito === 'INTERNO'"> Si </span>
+      <mat-slide-toggle (change)="changeValueService($event, 'internal')" [(ngModel)]="data.isEmployeeGrupoExito" color="orange-toggle" labelPosition="before" id="internal-toggle">
         <span class="third-text" *ngIf="data.isEmployeeGrupoExito === 'EXTERNO'"> No </span>
+        <span class="third-text" *ngIf="data.isEmployeeGrupoExito === 'INTERNO'"> Si </span>
       </mat-slide-toggle>
     </span>
   </div>
-
-
 </div>

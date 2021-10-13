@@ -1,6 +1,7 @@
-import { Component, Inject, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 import { PersonalInfo } from 'src/app/interfaces/personal-info';
 import { ResponseService } from 'src/app/interfaces/response';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
@@ -12,12 +13,13 @@ import { UtilsService } from 'src/app/services/utils.service';
   templateUrl: './personal-info.component.html',
   styleUrls: ['./personal-info.component.scss']
 })
-export class PersonalInfoComponent implements OnInit {
+export class PersonalInfoComponent implements OnInit, OnDestroy {
 
   @Input() data: PersonalInfo;
   formPersonalInfo: FormGroup;
   @ViewChild('templateInfoPersonal', { static: false })
   templatePersonalInfo: TemplateRef<any>;
+  private subscription: Subscription = new Subscription();
 
     constructor(
       private fb: FormBuilder,
@@ -66,7 +68,7 @@ export class PersonalInfoComponent implements OnInit {
       identification: this.formPersonalInfo.controls.number.value,
     };
 
-    this.user.updateInfoClicker(datos).subscribe((resp: ResponseService) => {
+    this.subscription = this.user.updateInfoClicker(datos).subscribe((resp: ResponseService) => {
       if (resp.state === 'Success') {
         this.data.identification = this.formPersonalInfo.controls.number.value;
         this.data.cellphone = this.formPersonalInfo.controls.cellphone.value;
@@ -80,6 +82,10 @@ export class PersonalInfoComponent implements OnInit {
 
   onNoClick() {
     this.dialogRef.close();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }
