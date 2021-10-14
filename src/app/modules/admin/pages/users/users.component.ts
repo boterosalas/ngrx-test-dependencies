@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild, OnDestroy, TemplateRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogUserComponent } from '../../components/dialog-user/dialog-user.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { UserService } from 'src/app/services/user.service';
 import { ResponseService } from 'src/app/interfaces/response';
 import { LinksService } from 'src/app/services/links.service';
@@ -14,6 +13,7 @@ import Swal from 'sweetalert2';
 import { Observable, Subscription } from 'rxjs';
 import { UtilsService } from 'src/app/services/utils.service';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -32,8 +32,6 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
   dateReportChangeForm: FormGroup;
   private subscription: Subscription = new Subscription();
   ext: string;
-  contentType: string;
-  tipoReporte: any;
   aux: number;
   maxDate = moment(new Date());
   orderOrigin: string;
@@ -42,7 +40,6 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
   to: any;
   dateParams: any;
   dateParamsReport: any;
-  dateRango: any;
   disButon$: Observable<boolean>;
   disableButon: boolean;
   @ViewChild('templateDialogEmail', { static: false })
@@ -107,6 +104,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
       value: 8,
     },
   ];
+
   locale = {
     locale: 'es',
     direction: 'ltr', // could be rtl
@@ -124,10 +122,10 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
   constructor(
     private dialog: MatDialog,
     private usersService: UserService,
-    private _snackBar: MatSnackBar,
     private file: LinksService,
     private fb: FormBuilder,
-    public utils: UtilsService
+    public utils: UtilsService,
+    private router:Router
   ) {
     super();
 
@@ -271,11 +269,11 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
     this.subscription = this.usersService.updateUserEmail(id, email).subscribe(
       (respEmail: ResponseService) => {
         this.dialog.closeAll();
-        this.openSnackBar(respEmail.userMessage, 'Cerrar');
+        this.utils.openSnackBar(respEmail.userMessage, 'Cerrar');
         this.searchUser(this.paginate);
       },
       (err) => {
-        this.openSnackBar(err.userMessage, 'Cerrar');
+        this.utils.openSnackBar(err.userMessage, 'Cerrar');
       }
     );
   }
@@ -287,189 +285,9 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
   }
 
   public userData(user) {
-    const userId = user.userId;
-    const identification = user.identification;
-    const name = user.firstNames;
-    const lastNames = user.lastNames;
-    const cellphone = user.cellphone;
-    const email = user.email;
-    const address = user.address;
-    const bank = user.bank;
-    const typeBankAccount = user.typeBankAccount;
-    const account = user.account;
-    const bankAccountNumber = user.bankAccountNumber;
-    let state = user.state;
-    let receiveCommunications = user.receiveCommunications;
-    let isEmployeeGrupoExito = user.isEmployeeGrupoExito;
-    const verified = user.verified;
-
-    if (state === 'Inactivo') {
-      state = false;
-    } else {
-      if (state === 'Activo' || state === 'Registrado' || state === 'Migrado') {
-        state = true;
-      }
-    }
-    if (receiveCommunications === 'Si') {
-      receiveCommunications = true;
-    } else {
-      receiveCommunications = false;
-    }
-
-    if (isEmployeeGrupoExito === 'INTERNO') {
-      isEmployeeGrupoExito = true;
-    } else {
-      isEmployeeGrupoExito = false;
-    }
-
-    this.subscription = this.usersService.getUserInfoAditional(user.userId).subscribe((resp: ResponseService) => {
-      if (resp.state === 'Success') {
-        const fileIdentificationCard1 = resp.objectResponse.identificationcard1;
-        const fileIdentificationCard2 = resp.objectResponse.identificationcard2;
-        const fileBankCertificate = resp.objectResponse.bankcertificate;
-        const dateCed1 = resp.objectResponse.maxdateidentificationcard1;
-        const dateCed2 = resp.objectResponse.maxdateidentificationcard2;
-        const dateCertBank = resp.objectResponse.maxdatebankcertificate;
-        const dateRUT = resp.objectResponse.maxdaterut;
-        const AntdateCed1 = resp.objectResponse.mindateidentificationcard1;
-        const AntdateCed2 = resp.objectResponse.mindateidentificationcard2;
-        const AntdateCertBank = resp.objectResponse.mindatebankcertificate;
-        const AntdateRUT = resp.objectResponse.mindaterut;
-        const extensionIdentificationCard1 = resp.objectResponse.maxextensiondateidentificationcard1;
-        const extensionIdentificationCard2 = resp.objectResponse.maxextensiondateidentificationcard2;
-        const extensionBankCertificate = resp.objectResponse.maxextensiondatebankcertificate;
-        const extensionRUT = resp.objectResponse.maxextensiondaterut;
-        const responseAccountBank = user.responseaccountbank;
-        const fileRUT = resp.objectResponse.rut;
-        const score = resp.objectResponse.score;
-
-
-        const dialogRef = this.dialog.open(DialogUserComponent, {
-          data: {
-            userId,
-            identification,
-            name,
-            lastNames,
-            cellphone,
-            email,
-            address,
-            bank,
-            typeBankAccount,
-            bankAccountNumber,
-            account,
-            state,
-            receiveCommunications,
-            isEmployeeGrupoExito,
-            verified,
-            fileIdentificationCard1,
-            fileIdentificationCard2,
-            fileBankCertificate,
-            fileRUT,
-            dateCed1,
-            dateCed2,
-            dateCertBank,
-            dateRUT,
-            AntdateCed1,
-            AntdateCed2,
-            AntdateCertBank,
-            AntdateRUT,
-            extensionIdentificationCard1,
-            extensionIdentificationCard2,
-            extensionBankCertificate,
-            extensionRUT,
-            responseAccountBank,
-            score
-          },
-        });
-
-        this.subscription = dialogRef.componentInstance.state.subscribe((event) => {
-          if (event.target.checked === false) {
-            this.changeStateUser(userId, event.target.checked);
-          } else {
-            if (event.target.checked === true) {
-              this.changeStateUser(userId, event.target.checked);
-            }
-          }
-        });
-
-        this.subscription = dialogRef.componentInstance.comunications.subscribe((event) => {
-          if (event.target.checked === false) {
-            this.changeComunications(userId, event.target.checked);
-          } else {
-            if (event.target.checked === true) {
-              this.changeComunications(userId, event.target.checked);
-            }
-          }
-        });
-
-        this.subscription = dialogRef.componentInstance.verified.subscribe((value) => {
-          this.changeVerified(userId, value);
-        });
-
-        this.subscription = dialogRef.componentInstance.downloadFiles.subscribe((data) => {
-          this.downloadFiles(data);
-        });
-
-        this.subscription = dialogRef.beforeClosed().subscribe(() => {
-          this.searchUser(this.paginate);
-        });
-      }
-    });
+    this.router.navigate(['/usuario',user.userId])
   }
 
-  private downloadFiles(data) {
-    this.usersService.downloadFiles(data).subscribe((respid: any) => {
-      this.downloadBlob(respid, 'application/zip');
-    });
-  }
-
-  private downloadBlob(data, type) {
-    const blob = new Blob([data], { type: type });
-    const url = window.URL.createObjectURL(blob);
-    const downloadLink = document.createElement('a');
-
-    downloadLink.href = url;
-    downloadLink.download = 'archivo.zip';
-    downloadLink.click();
-  }
-
-  public changeComunications(userId, value) {
-    this.subscription = this.usersService.comunitcations(userId, value).subscribe((user: any) => {
-      if (value === true) {
-        this.openSnackBar('Se ha guardado el usuario para que reciba comunicaciones', 'Cerrar');
-      } else {
-        this.openSnackBar('Se ha guardado el usuario para que no reciba comunicaciones', 'Cerrar');
-      }
-    });
-  }
-
-  public changeStateUser(userId, value) {
-    this.subscription = this.usersService.statusUser(userId, value).subscribe(() => {
-      if (value === false) {
-        this.openSnackBar('El usuario ha sido inactivado', 'Cerrar');
-      } else {
-        this.openSnackBar('El usuario ha sido activado', 'Cerrar');
-      }
-    });
-  }
-
-  public changeVerified(userId, value) {
-    this.subscription = this.usersService.verifiedUser(userId, value).subscribe((data: ResponseService) => {
-      this.openSnackBar(data.userMessage, 'Cerrar');
-    });
-  }
-
-  /**
-   * Abre el mensaje de confirmacion de copiado del link
-   * @param message mensaje
-   * @param action accion
-   */
-
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 5000,
-    });
-  }
 
   public getUserExcel() {
     this.dateParams = {
@@ -479,7 +297,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
 
     this.subscription = this.file.getUsersExcel(this.dateParams).subscribe((responseExcel: ResponseService) => {
       if (responseExcel.state === 'Success') {
-        this.openSnackBar(responseExcel.userMessage, 'Cerrar');
+        this.utils.openSnackBar(responseExcel.userMessage, 'Cerrar');
         this.dateForm.reset();
         if (this.dateForm.controls.dateRange.value.startDate === null) {
           this.disableButon = true;
@@ -495,7 +313,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
     };
     this.subscription = this.file.getHistoricalBankInformation(this.dateParamsReport).subscribe((respExcel: ResponseService) => {
       if (respExcel.state === 'Success') {
-        this.openSnackBar(respExcel.userMessage, 'Cerrar');
+        this.utils.openSnackBar(respExcel.userMessage, 'Cerrar');
         this.dateForm.reset();
         if (this.dateForm.controls.dateRange.value.startDate === null) {
           this.disableButon = true;
@@ -523,7 +341,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
 
   public updateEmployee() {
     this.subscription = this.usersService.updateEmployees().subscribe((respUpdate: ResponseService) => {
-      this.openSnackBar(respUpdate.userMessage, 'Cerrar');
+      this.utils.openSnackBar(respUpdate.userMessage, 'Cerrar');
     });
   }
 
@@ -533,7 +351,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
       if (this.dateForm.controls.dateRange.value.startDate === null) {
         this.disableButon = true;
       }
-      this.openSnackBar(respStories.userMessage, 'Cerrar');
+      this.utils.openSnackBar(respStories.userMessage, 'Cerrar');
     });
   }
 
@@ -543,7 +361,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
       if (this.dateForm.controls.dateRange.value.startDate === null) {
         this.disableButon = true;
       }
-      this.openSnackBar(respExport.userMessage, 'Cerrar');
+      this.utils.openSnackBar(respExport.userMessage, 'Cerrar');
     });
   }
 
@@ -568,7 +386,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
       if (this.dateForm.controls.dateRange.value.startDate === null) {
         this.disableButon = true;
       }
-      this.openSnackBar(respuExportGamification.userMessage, 'Cerrar');
+      this.utils.openSnackBar(respuExportGamification.userMessage, 'Cerrar');
     });
   }
   public getComments() {
@@ -578,7 +396,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
     };
     this.subscription = this.usersService.getReportCommets(this.dateParamsReport).subscribe((excel: ResponseService) => {
       if (excel.state === 'Success') {
-        this.openSnackBar(excel.userMessage, 'Cerrar');
+        this.utils.openSnackBar(excel.userMessage, 'Cerrar');
         this.dateForm.reset();
         if (this.dateForm.controls.dateRange.value.startDate === null) {
           this.disableButon = true;
@@ -594,7 +412,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
     };
     this.subscription = this.usersService.getDeleteCommetsRest(this.dateParamsReport).subscribe((remove: ResponseService) => {
       if (remove.state === 'Success') {
-        this.openSnackBar(remove.userMessage, 'Cerrar');
+        this.utils.openSnackBar(remove.userMessage, 'Cerrar');
         this.dateForm.reset();
         if (this.dateForm.controls.dateRange.value.startDate === null) {
           this.disableButon = true;
@@ -610,7 +428,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
     };
     this.subscription = this.usersService.getReportReferral(this.dateParamsReport).subscribe((respReferral: ResponseService) => {
       if (respReferral.state === 'Success') {
-        this.openSnackBar(respReferral.userMessage, 'Cerrar');
+        this.utils.openSnackBar(respReferral.userMessage, 'Cerrar');
         this.dateForm.reset();
         if (this.dateForm.controls.dateRange.value.startDate === null) {
           this.disableButon = true;
@@ -643,7 +461,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
     this.filterData[0].export = true;
     this.subscription = this.file.searchUsers(this.filterData).subscribe(() => {
       this.filterData[0].export = false;
-      this.openSnackBar('Al terminar de procesar el archivo se enviará un correo', 'Cerrar');
+      this.utils.openSnackBar('Al terminar de procesar el archivo se enviará un correo', 'Cerrar');
     });
   }
 

@@ -16,7 +16,6 @@ import { LoadFormFileComponent } from './components/load-form-file/load-form-fil
 import { UsersComponent } from './pages/users/users.component';
 import { TableUsersComponent } from './components/table-users/table-users.component';
 import { SearchUsersComponent } from './components/search-users/search-users.component';
-import { DialogUserComponent } from './components/dialog-user/dialog-user.component';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { KeySpaceDirectiveAdmin } from 'src/directives/space.admin.directive';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -359,7 +358,6 @@ const routes: Routes = [
     UsersComponent,
     TableUsersComponent,
     SearchUsersComponent,
-    DialogUserComponent,
     KeySpaceDirectiveAdmin,
     AuditComponent,
     BusinessComponent,
@@ -469,7 +467,6 @@ const routes: Routes = [
     RouterModule
   ],
   entryComponents: [
-    DialogUserComponent,
     DialogCategoryComponent,
     DialogVideoPlayerComponent,
     DialogNavigationGroupComponent,

@@ -1,4 +1,5 @@
 import { AfterContentInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ResponseService } from 'src/app/interfaces/response';
 import { UserService } from 'src/app/services/user.service';
@@ -12,6 +13,7 @@ export class DetailUserComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
   name:string;
+  id: string;
 
   dataUser = {
     address: '',
@@ -61,15 +63,20 @@ export class DetailUserComponent implements OnInit, OnDestroy {
   dataDocuments = {};
 
   constructor(
-    private user:UserService
-  ) { }
+    private user:UserService,
+    private route: ActivatedRoute
+  ) {
+    this.subscription = this.route.params.subscribe((userId) => {
+      this.id = userId.id;
+    });
+   }
 
   ngOnInit(): void {
     this.getUserInfo();
   }
 
-  public async getUserInfo(){
-    this.subscription = this.user.getUserInfoAditional('689').subscribe((resp: ResponseService) => {
+  public getUserInfo(){
+    this.subscription = this.user.getUserInfoAditional(this.id).subscribe((resp: ResponseService) => {
       const response = resp.objectResponse;
       this.dataUser = response;
       this.name = `${response.firstNames}  ${response.lastNames}`;
