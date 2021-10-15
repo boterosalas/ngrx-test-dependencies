@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { DataFiles } from 'src/app/interfaces/data-files';
 import { Users } from 'src/app/interfaces/users';
+import { UserService } from 'src/app/services/user.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -20,13 +21,15 @@ export class DownloadDocumentsComponent implements OnInit, OnChanges {
   selectedFiles = [];
 
   constructor(
-    private utils: UtilsService
+    private utils: UtilsService,
+    private user: UserService
   ) { }
 
   ngOnInit(): void {
   }
 
   ngOnChanges(): void {
+
     this.dataSource = [
       { document: 'IdentificationCard1', name: 'Cédula parte frontal', type: this.data.maxextensiondateidentificationcard1, dateFirst: this.data.mindateidentificationcard1, dateLast: this.data.maxdateidentificationcard1 },
       { document: 'IdentificationCard2', name: 'Cedula parte posterior', type: this.data.maxextensiondateidentificationcard2, dateFirst: this.data.mindateidentificationcard1, dateLast: this.data.maxdateidentificationcard2 },
@@ -38,44 +41,44 @@ export class DownloadDocumentsComponent implements OnInit, OnChanges {
   public previewDocument(typeDocument: string) {
     switch (typeDocument) {
       case 'IdentificationCard1':
-        if (this.dataFiles.fileIdentificationCard1 !== '') {
-          if (this.dataFiles.extensionIdentificationCard1 === '.jpg') {
-            this.utils.openpreviewImage(this.dataFiles.fileIdentificationCard1);
+        if (this.dataFiles.identificationcard1 !== '') {
+          if (this.data.maxextensiondateidentificationcard1 === '.jpg') {
+            this.utils.openpreviewImage(this.dataFiles.identificationcard1);
           } else {
-            this.utils.openpreviewPdf(this.dataFiles.fileIdentificationCard1);
+            this.utils.openpreviewPdf(this.dataFiles.identificationcard1);
           }
         } else {
           this.utils.openSnackBar('El archivo no existe.', 'Cerrar');
         }
         break;
       case 'IdentificationCard2':
-        if (this.dataFiles.fileIdentificationCard2 !== '') {
-          if (this.dataFiles.extensionIdentificationCard2 === '.jpg') {
-            this.utils.openpreviewImage(this.dataFiles.fileIdentificationCard2);
+        if (this.dataFiles.identificationcard2 !== '') {
+          if (this.data.maxextensiondateidentificationcard2 === '.jpg') {
+            this.utils.openpreviewImage(this.dataFiles.identificationcard2);
           } else {
-            this.utils.openpreviewPdf(this.dataFiles.fileIdentificationCard2);
+            this.utils.openpreviewPdf(this.dataFiles.identificationcard2);
           }
         } else {
           this.utils.openSnackBar('El archivo no existe.', 'Cerrar');
         }
         break;
       case 'BankCertificate':
-        if (this.dataFiles.fileBankCertificate !== '') {
-          if (this.dataFiles.extensionBankCertificate === '.jpg') {
-            this.utils.openpreviewImage(this.dataFiles.fileBankCertificate);
+        if (this.dataFiles.bankcertificate !== '') {
+          if (this.data.maxextensiondatebankcertificate === '.jpg') {
+            this.utils.openpreviewImage(this.dataFiles.bankcertificate);
           } else {
-            this.utils.openpreviewPdf(this.dataFiles.fileBankCertificate);
+            this.utils.openpreviewPdf(this.dataFiles.bankcertificate);
           }
         } else {
           this.utils.openSnackBar('El archivo no existe.', 'Cerrar');
         }
         break;
       case 'Rut':
-        if (this.dataFiles.fileRUT !== '') {
-          if (this.dataFiles.extensionRUT === '.jpg') {
-            this.utils.openpreviewImage(this.dataFiles.fileRUT);
+        if (this.dataFiles.rut !== '') {
+          if (this.data.maxextensiondaterut === '.jpg') {
+            this.utils.openpreviewImage(this.dataFiles.rut);
           } else {
-            this.utils.openpreviewPdf(this.dataFiles.fileRUT);
+            this.utils.openpreviewPdf(this.dataFiles.rut);
           }
         } else {
           this.utils.openSnackBar('El archivo no existe.', 'Cerrar');
@@ -84,15 +87,15 @@ export class DownloadDocumentsComponent implements OnInit, OnChanges {
     }
   }
 
-  changeValue(event, item) {
-    this.addOrRemoveItem(event.checked, item);
-  }
 
-  private addOrRemoveItem(value, item) {
-    if (value && !this.selectedFiles.includes(item)) {
-      this.selectedFiles.push(item);
-    } else if (!value) {
-      this.selectedFiles = this.selectedFiles.filter((val) => val !== item);
+  public changeValue(event:any, element:string) {
+    if (event.checked) {
+      this.selectedFiles.push(element);
+    } else {
+      const index = this.selectedFiles.indexOf(element);
+      if (index >= 0) {
+        this.selectedFiles.splice(index, 1);
+      }
     }
   }
 
@@ -102,10 +105,23 @@ export class DownloadDocumentsComponent implements OnInit, OnChanges {
         userId: this.data.userId,
         typeDocument: this.selectedFiles,
       };
-      // this.downloadFiles.emit(data);
+      console.log(data);
+      this.user.downloadFiles(data).subscribe((respid: any) => {
+        this.downloadBlob(respid, 'application/zip');
+      });
     } else {
       this.utils.openSnackBar('No ha seleccionado ningún archivo.', 'Cerrar');
     }
+  }
+
+  private downloadBlob(data, type) {
+    const blob = new Blob([data], { type: type });
+    const url = window.URL.createObjectURL(blob);
+    const downloadLink = document.createElement('a');
+
+    downloadLink.href = url;
+    downloadLink.download = 'archivo.zip';
+    downloadLink.click();
   }
 
 }

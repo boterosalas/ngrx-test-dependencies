@@ -234,4 +234,15 @@ export class UtilsService {
     return str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : str;
   }
 
+  public addElementArray(event:any, arrayElement: Array<any>, element:string) {
+    if (event.checked) {
+      arrayElement.push(element);
+    } else {
+      const index = arrayElement.indexOf(element);
+      if (index >= 0) {
+        arrayElement.splice(index, 1);
+      }
+    }
+  }
+
 }

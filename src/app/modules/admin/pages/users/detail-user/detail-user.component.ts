@@ -82,11 +82,11 @@ export class DetailUserComponent implements OnInit, OnDestroy {
       this.name = `${response.firstNames}  ${response.lastNames}`;
     });
 
-    // this.subscription = this.user.getDocumentsUser('689').subscribe((respDocuments: ResponseService) => {
-    //   const response = respDocuments.objectResponse;
-    //   console.log(response);
-    //   this.dataDocuments = response;
-    // });
+    this.subscription = this.user.getDocumentsUser(this.id).subscribe((respDocuments: ResponseService) => {
+      const response = respDocuments.objectResponse;
+
+      this.dataDocuments = response;
+    });
   }
 
   ngOnDestroy(): void {

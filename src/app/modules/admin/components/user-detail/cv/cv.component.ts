@@ -53,7 +53,7 @@ export class CvComponent implements OnInit, OnDestroy {
 
     setTimeout(() => {
       this.getDatas();
-    }, 500);
+    }, 1000);
 
   }
 
