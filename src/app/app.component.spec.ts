@@ -21,6 +21,8 @@ import { UserService } from './services/user.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+import { UtilsService } from './services/utils.service';
+import { AppMaterialModule } from './modules/shared/app-material/app-material.module';
 
 // const TRANSLATIONS_ES = require('../assets/i18n/es.json');
 export class MatDialogMock {
@@ -30,6 +32,7 @@ export class MatDialogMock {
     };
   }
 }
+
 describe('AppComponent', () => {
   // let translate: TranslateService;
   // let http: HttpTestingController;
@@ -103,6 +106,7 @@ describe('AppComponent', () => {
           AngularFireDatabaseModule,
           AngularFireAuthModule,
           AngularFireMessagingModule,
+          AppMaterialModule,
           BrowserAnimationsModule,
           ReactiveFormsModule,
           FormsModule,
@@ -133,6 +137,7 @@ describe('AppComponent', () => {
           TranslateService,
           BnNgIdleService,
           SwUpdate,
+          UtilsService,
           { provide: ContentService, useValue: mockContentService },
           { provide: SidenavService, useValue: mockSidenavService },
           { provide: MasterDataService, useValue: mockMasterService },

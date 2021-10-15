@@ -16,6 +16,12 @@ describe('BankAccountComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(BankAccountComponent);
     component = fixture.componentInstance;
+    component.data = {
+      bank: '123456',
+      typeBankAccount: '1',
+      bankAccountNumber: '123456789',
+      mindatebankcertificate: '2020-10-01'
+    }
     fixture.detectChanges();
   });
 
