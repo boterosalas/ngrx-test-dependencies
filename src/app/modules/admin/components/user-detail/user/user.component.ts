@@ -55,31 +55,19 @@ export class UserComponent implements OnInit, OnDestroy {
 
   private changeComunications(userId, value) {
     this.subscription = this.user.comunitcations(userId, value).subscribe((user: any) => {
-      if (value === true) {
-        this.callMsg(user.userMessage);
-      } else {
-        this.callMsg(user.userMessage);
-      }
+      value === true ? this.callMsg(user.userMessage) : this.callMsg(user.userMessage);
     });
   }
 
   private changeStateUser(userId, valueState) {
     this.subscription = this.user.statusUser(userId, valueState).subscribe((respState: any) => {
-      if (valueState === false) {
-        this.callMsg(respState.userMessage);
-      } else {
-        this.callMsg(respState.userMessage);
-      }
+      valueState === true ? this.callMsg(respState.userMessage) : this.callMsg(respState.userMessage);
     });
   }
 
   private changeInternal(userId, valueInternal) {
     this.subscription = this.user.changeOrigin(userId, valueInternal).subscribe((respInternal: any) => {
-      if (valueInternal === false) {
-        this.callMsg(respInternal.userMessage);
-      } else {
-        this.callMsg(respInternal.userMessage);
-      }
+      valueInternal === true ? this.callMsg(respInternal.userMessage) : this.callMsg(respInternal.userMessage);
     });
   }
 
