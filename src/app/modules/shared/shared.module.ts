@@ -39,6 +39,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import { CardStoryComponent } from './components/card-story/card-story.component';
 import { OnboardingSwiperComponent } from './components/onboarding-swiper/onboarding-swiper.component';
+import { BackButtonComponent } from './components/atoms/back-button/back-button.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { OnboardingSwiperComponent } from './components/onboarding-swiper/onboar
     DialogStoriesComponent,
     CardStoryComponent,
     OnboardingSwiperComponent,
+    BackButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -112,6 +114,7 @@ import { OnboardingSwiperComponent } from './components/onboarding-swiper/onboar
     DialogStoriesComponent,
     CardStoryComponent,
     OnboardingSwiperComponent,
+    BackButtonComponent
   ],
   entryComponents: [ModalGenericComponent, PopupComponent, DialogStoriesComponent, OnboardingSwiperComponent],
 })

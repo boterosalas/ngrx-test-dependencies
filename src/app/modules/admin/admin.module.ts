@@ -16,7 +16,6 @@ import { LoadFormFileComponent } from './components/load-form-file/load-form-fil
 import { UsersComponent } from './pages/users/users.component';
 import { TableUsersComponent } from './components/table-users/table-users.component';
 import { SearchUsersComponent } from './components/search-users/search-users.component';
-import { DialogUserComponent } from './components/dialog-user/dialog-user.component';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { KeySpaceDirectiveAdmin } from 'src/directives/space.admin.directive';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -81,6 +80,15 @@ import { DatailNewsComponent } from './pages/datail-news/datail-news.component';
 import { NoveltyChatComponent } from './components/novelty-chat/novelty-chat.component';
 import { TableOnboardingComponent } from './components/table-onboarding/table-onboarding.component';
 import { DialogOnboardingComponent } from './components/dialog-onboarding/dialog-onboarding.component';
+import { DetailUserComponent } from './pages/users/detail-user/detail-user.component';
+import { PersonalInfoComponent } from './components/user-detail/personal-info/personal-info.component';
+import { DownloadDocumentsComponent } from './components/user-detail/download-documents/download-documents.component';
+import { CvComponent } from './components/user-detail/cv/cv.component';
+import { InfoUserComponent } from './components/user-detail/info-user/info-user.component';
+import { BankAccountComponent } from './components/user-detail/bank-account/bank-account.component';
+import { UserComponent } from './components/user-detail/user/user.component';
+import { VerificationComponent } from './components/user-detail/verification/verification.component';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 const routes: Routes = [
   {
@@ -104,6 +112,15 @@ const routes: Routes = [
   {
     path: 'usuarios',
     component: UsersComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
+    },
+  },
+  {
+    path: 'usuario/:id',
+    component: DetailUserComponent,
     canActivate: [RoleGuard],
     data: {
       role: 'ADMIN',
@@ -341,7 +358,6 @@ const routes: Routes = [
     UsersComponent,
     TableUsersComponent,
     SearchUsersComponent,
-    DialogUserComponent,
     KeySpaceDirectiveAdmin,
     AuditComponent,
     BusinessComponent,
@@ -393,7 +409,15 @@ const routes: Routes = [
     DialogStoryComponent,
     DatailNewsComponent,
     TableOnboardingComponent,
-    DialogOnboardingComponent
+    DialogOnboardingComponent,
+    DetailUserComponent,
+    PersonalInfoComponent,
+    DownloadDocumentsComponent,
+    CvComponent,
+    InfoUserComponent,
+    BankAccountComponent,
+    UserComponent,
+    VerificationComponent
   ],
   imports: [
     AngularEditorModule,
@@ -443,7 +467,6 @@ const routes: Routes = [
     RouterModule
   ],
   entryComponents: [
-    DialogUserComponent,
     DialogCategoryComponent,
     DialogVideoPlayerComponent,
     DialogNavigationGroupComponent,
@@ -452,8 +475,12 @@ const routes: Routes = [
     DialogFaqItemComponent,
     DialogDeleteNotificationComponent,
     DialogStoryComponent,
-    DialogOnboardingComponent
+    DialogOnboardingComponent,
   ],
-  providers: [{ provide: MatPaginatorIntl, useClass: UsersComponent }],
+  providers: [
+    { provide: MatPaginatorIntl, useClass: UsersComponent },
+    { provide: MatDialogRef, useValue: {} },
+	{ provide: MAT_DIALOG_DATA, useValue: [] },
+  ],
 })
 export class AdminModule {}

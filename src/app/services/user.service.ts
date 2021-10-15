@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  constructor(private http: HttpClient, private auth: AuthService) { }
   urlReports = environment.URL_REPORTS;
   url = environment.URL_PROFILE;
   urlEmployee = environment.URL_VALIDATE_EMPLOYEE;
@@ -25,6 +25,7 @@ export class UserService {
   apichangeBankInformation = 'userprofile/changeBankInformation';
   apiDisableUser = 'userprofile/disableUser';
   apiUpdateUser = 'userprofile/updateUser';
+  apiChangeOrigin = 'userprofile/changeorigin';
   apiUsers = 'userprofile/getUsers';
   apiGetBasicData = 'userprofile/getBasicData';
   apiComunications = 'userprofile/setReceiveCommunications';
@@ -67,6 +68,7 @@ export class UserService {
   apiGetPermision = 'userprofile/getpermissions';
   apiCreateUserAdmin = 'userprofile/createuseradmin';
   apiUserInfoAditional = 'userprofile/getuserinfoaditional';
+  apiGetDocumentsUser = 'userprofile/getdocumentsuser';
   apiSaveNewNovelty = 'new/savenewnovelty';
   apiGetNewsNovelties = 'new/getnewsnovelty';
   apiSaveQualificationNovelty = '/new/noveltyqualification';
@@ -94,7 +96,7 @@ export class UserService {
           errors.pipe(
             delay(3000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         )
       )
@@ -112,7 +114,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -141,7 +143,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((user: any) => {
@@ -156,7 +158,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -168,7 +170,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -180,7 +182,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -192,7 +194,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -204,7 +206,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -216,7 +218,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -228,7 +230,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -251,7 +253,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -302,7 +304,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -326,7 +328,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -338,7 +340,19 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
+        )
+      )
+    );
+  }
+
+  public changeOrigin(id: any, value: boolean) {
+    return this.http.post(`${this.url}${this.apiChangeOrigin}`, { userid: id, isEmployeeGrupoExito: value }, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => { })
         )
       )
     );
@@ -350,7 +364,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -362,7 +376,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -374,7 +388,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -386,7 +400,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -398,7 +412,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -410,7 +424,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -422,7 +436,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -433,7 +447,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -444,7 +458,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -455,7 +469,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -474,7 +488,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -486,7 +500,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -498,7 +512,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -509,7 +523,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -522,7 +536,7 @@ export class UserService {
           errors.pipe(
             delay(3000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         )
       );
@@ -535,7 +549,7 @@ export class UserService {
           errors.pipe(
             delay(3000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         )
       );
@@ -547,7 +561,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -559,7 +573,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -571,7 +585,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -582,7 +596,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -593,7 +607,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -605,7 +619,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -617,7 +631,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -629,7 +643,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -640,7 +654,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -651,7 +665,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -665,7 +679,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -680,7 +694,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -692,7 +706,7 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -704,7 +718,19 @@ export class UserService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
+        )
+      )
+    );
+  }
+
+  public getDocumentsUser(userId) {
+    return this.http.get(`${this.url}${this.apiGetDocumentsUser}?userid=${userId}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => { })
         )
       )
     );

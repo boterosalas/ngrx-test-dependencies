@@ -8,7 +8,6 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs/internal/observable/of';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { DialogUserComponent } from '../../components/dialog-user/dialog-user.component';
 import { AdminModule } from '../../admin.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -193,7 +192,7 @@ beforeEach(waitForAsync(() => {
     })
       .overrideModule(BrowserDynamicTestingModule, {
         set: {
-          entryComponents: [DialogUserComponent, DialogEditComponent],
+          entryComponents: [DialogEditComponent],
         },
       })
       .compileComponents();
@@ -230,10 +229,6 @@ beforeEach(waitForAsync(() => {
     expect(component).toBeTruthy();
   });
 
-  it('open snack bar', () => {
-    component.openSnackBar('prueba', 'actionPrueba');
-    expect(mockSnackBar.open).toHaveBeenCalled();
-  });
 
   it('updateEmployee', () => {
     component.updateEmployee();
@@ -255,11 +250,11 @@ beforeEach(waitForAsync(() => {
     expect(mockLinksService.searchUsers).toHaveBeenCalled();
   });
 
-  it('modal data', () => {
-    component.userData(dataUsers);
-    expect(dataUsers).not.toBeUndefined();
-    expect(mockUserService.getUserInfoAditional).toHaveBeenCalled();
-  });
+  // it('modal data', () => {
+  //   component.userData(dataUsers);
+  //   expect(dataUsers).not.toBeUndefined();
+  //   expect(mockUserService.getUserInfoAditional).toHaveBeenCalled();
+  // });
 
   it('pagination', () => {
     component.pagination({

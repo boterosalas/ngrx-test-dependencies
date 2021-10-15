@@ -129,78 +129,74 @@ beforeEach(waitForAsync(() => {
     expect(valid).toBeTruthy();
   });
 
-  it('login valid', () => {
+  /*it('login valid', () => {
     component.isSubmitted = true;
     component.loginForm.controls.Username.setValue('test@test.com');
     component.loginForm.controls.Password.setValue('123456789');
     component.login();
     expect(component.loginForm.invalid).toBeFalsy();
     expect(mockAuthService.login).toHaveBeenCalled();
+  });*/
+
+
+  it('Login invalid', () => {
+
   });
 
-  afterAll(() => {
-    TestBed.resetTestingModule();
+  describe('Login invalid', () => {
+
+    beforeEach(() => {
+      fixture = TestBed.createComponent(LoginformComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+      mockAuthService.login.and.returnValue(of(dataUserInvalid));
+    });
+
+    it('Login invalid', () => {
+      component.isSubmitted = true;
+      component.loginForm.controls.Username.setValue(
+        'david.betancur@pragma.com.co'
+      );
+      component.loginForm.controls.Password.setValue('123456');
+      component.login();
+      expect(mockAuthService.login).toHaveBeenCalled();
+    });
+
   });
 
-  
-  //it("Login invalid", () => {
+  describe('invalid request', () => {
+    beforeEach(() => {
+      mockAuthService.login.and.returnValue(throwError(InvalidRquest));
+    });
 
-  //});
+    it('invalid request', () => {
+      component.isSubmitted = true;
+      component.loginForm.controls.Username.setValue('t@gmail.com');
+      component.loginForm.controls.Password.setValue('123123');
+      component.login();
+      expect(mockAuthService.login).toHaveBeenCalled();
+    });
 
-  // describe("Login invalid", () => {
+    afterAll(() => {
+      TestBed.resetTestingModule();
+    });
+  });
 
-  //   beforeEach(() => {
-  //     fixture = TestBed.createComponent(LoginformComponent);
-  //     component = fixture.componentInstance;
-  //     fixture.detectChanges();
-  //     mockAuthService.login.and.returnValue(of(dataUserInvalid));
-  //   });
+  describe('Admin login', () => {
+    beforeEach(() => {
 
-  //   it("Login invalid", () => {
-  //     component.isSubmitted = true;
-  //     component.loginForm.controls.Username.setValue(
-  //       "david.betancur@pragma.com.co"
-  //     );
-  //     component.loginForm.controls.Password.setValue("123456");
-  //     component.login();
-  //     expect(mockAuthService.login).toHaveBeenCalled();
-  //   });
+      mockAuthService.login.and.returnValue(of(dataUserAdmin));
 
-  // });
+    });
 
-  // describe('invalid request', () => {
-  //   beforeEach(() => {
-  //     mockAuthService.login.and.returnValue(throwError(InvalidRquest));
-  //   });
+    it('login valid', () => {
+      component.isSubmitted = true;
+      component.loginForm.controls.Username.setValue('test@test.com');
+      component.loginForm.controls.Password.setValue('123456789');
+      component.login();
+      expect(component.loginForm.invalid).toBeFalsy();
+      expect(mockAuthService.login).toHaveBeenCalled();
+    });
 
-  //   it('invalid request', () => {
-  //     component.isSubmitted = true;
-  //     component.loginForm.controls.Username.setValue('t@gmail.com');
-  //     component.loginForm.controls.Password.setValue('123123');
-  //     component.login();
-  //     expect(mockAuthService.login).toHaveBeenCalled();
-  //   });
-
-  //   afterAll(() => {
-  //     TestBed.resetTestingModule();
-  //   });
-  // });
-
-  // describe("Admin login", () => {
-  //   beforeEach(() => {
-
-  //     mockAuthService.login.and.returnValue(of(dataUserAdmin));
-
-  //   });
-
-  //   it("login valid", () => {
-  //     component.isSubmitted = true;
-  //     component.loginForm.controls.Username.setValue("test@test.com");
-  //     component.loginForm.controls.Password.setValue("123456789");
-  //     component.login();
-  //     expect(component.loginForm.invalid).toBeFalsy();
-  //     expect(mockAuthService.login).toHaveBeenCalled();
-  //   });
-
-  // });
+  });
 });

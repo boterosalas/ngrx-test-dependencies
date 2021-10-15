@@ -7,6 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateModule } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import { AppMaterialModule } from '../../app-material/app-material.module';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -19,6 +20,7 @@ beforeEach(waitForAsync(() => {
         HttpClientTestingModule,
         RouterTestingModule,
         TranslateModule.forRoot(),
+        AppMaterialModule,
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {

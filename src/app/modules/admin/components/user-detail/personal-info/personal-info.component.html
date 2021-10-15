@@ -1,0 +1,63 @@
+<div class="personal-information">
+  <h3 class="secundary-text">
+    Información personal
+    <i class="tio-edit style-icon cursor-pointer" (click)="editInfoPersonal()"></i>
+  </h3>
+  <p fxLayout="row" fxLayoutGap="10%" fxLayoutAlign="start center">
+    <span class="galano-bold gray w-label">DOCUMENTO</span>
+    <span class="normal-text">{{ data.identification }}</span>
+  </p>
+  <p fxLayout="row" fxLayoutGap="10%" fxLayoutAlign="start center">
+    <span class="galano-bold gray w-label">CORREO ELECTRÓNICO </span>
+    <span class="normal-text">{{ data.email }}</span>
+  </p>
+  <p fxLayout="row" fxLayoutGap="10%" fxLayoutAlign="start center">
+    <span class="galano-bold gray w-label">CELULAR</span>
+    <span class="normal-text">{{ data.cellphone }}</span>
+  </p>
+  <p fxLayout="row" fxLayoutGap="10%" fxLayoutAlign="start center">
+    <span class="galano-bold gray w-label">DIRECCIÓN</span>
+    <span class="normal-text">{{ data.address }}</span>
+  </p>
+</div>
+
+<!-- template -->
+
+<ng-template #templateInfoPersonal>
+  <div>
+    <form [formGroup]="formPersonalInfo">
+      <mat-form-field class="w-100">
+        <input matInput placeholder="NÚMERO DE DOCUMENTO" formControlName="number" type="text" required style="color: #37236a" />
+        <mat-error id="requiredName" *ngIf="formPersonalInfo.controls.number.invalid && formPersonalInfo.controls.number.errors.required">{{
+          'GENERIC.REQUIRED' | translate: { formValue: 'Número de documento' }
+        }}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <input matInput placeholder="CORREO ELECTRÓNICO" formControlName="email" type="text" required style="color: #37236a" />
+        <mat-error id="requiredName" *ngIf="formPersonalInfo.controls.email.invalid && formPersonalInfo.controls.email.errors.required">{{
+          'GENERIC.REQUIRED' | translate: { formValue: 'Correo electrónico' }
+        }}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <input matInput placeholder="NÚMERO DE CELULAR" formControlName="cellphone" type="text" required style="color: #37236a" />
+        <mat-error id="requiredName" *ngIf="formPersonalInfo.controls.cellphone.invalid && formPersonalInfo.controls.cellphone.errors.required">{{
+          'GENERIC.REQUIRED' | translate: { formValue: 'Número de celular' }
+        }}</mat-error>
+      </mat-form-field>
+    </form>
+
+    <div class="mt-3 mb-2" fxLayout="row" fxLayoutAlign="end end">
+      <button mat-button ngClass="button_cancel" (click)="onNoClick()">Cancelar</button>
+      <button
+        mat-raised-button
+        color="orange"
+        (click)="saveInfoPersonal()"
+        id="download-users"
+        class="ml-2"
+        [disabled]="!formPersonalInfo.valid"
+      >
+        Guardar Cambios
+      </button>
+    </div>
+  </div>
+</ng-template>

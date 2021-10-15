@@ -5,12 +5,18 @@ import { UserService } from './user.service';
 import decode from 'jwt-decode';
 import { BehaviorSubject } from 'rxjs';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UtilsService {
-  constructor(private router: Router, private auth: AuthService, private user: UserService) {
+  constructor(
+    private router: Router,
+    private auth: AuthService,
+    private user: UserService,
+    private _snackBar: MatSnackBar,
+    ) {
     this.titleSelect = new BehaviorSubject<string>('Seleccionar');
     this.checkedAll = new BehaviorSubject<boolean>(false);
   }
@@ -215,6 +221,27 @@ export class UtilsService {
       downloadLink.href = url;
       downloadLink.download = 'archivo.mp4';
       downloadLink.click();
+    }
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 3000,
+    });
+  }
+
+  public capitalizeFirstLetter(str: string) {
+    return str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : str;
+  }
+
+  public addElementArray(event:any, arrayElement: Array<any>, element:string) {
+    if (event.checked) {
+      arrayElement.push(element);
+    } else {
+      const index = arrayElement.indexOf(element);
+      if (index >= 0) {
+        arrayElement.splice(index, 1);
+      }
     }
   }
 
