@@ -105,7 +105,6 @@ export class DownloadDocumentsComponent implements OnInit, OnChanges {
         userId: this.data.userId,
         typeDocument: this.selectedFiles,
       };
-      console.log(data);
       this.user.downloadFiles(data).subscribe((respid: any) => {
         this.downloadBlob(respid, 'application/zip');
       });
