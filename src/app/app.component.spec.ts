@@ -216,17 +216,17 @@ describe('AppComponent', () => {
     //   expect(mockContentService.saveVisitOffer).toHaveBeenCalled();
     // });
 
-    it('hide login', () => {
-      component.hideLogin();
-      component.isOpen = true;
-      component.showLoginForm = false;
-      component.showRegisterForm = false;
-      component.showForgotForm = false;
-      expect(component.isOpen).toBeTruthy();
-      expect(component.showLoginForm).toBeFalsy();
-      expect(component.showRegisterForm).toBeFalsy();
-      expect(component.showForgotForm).toBeFalsy();
-    });
+    // it('hide login', () => {
+    //   component.hideLogin();
+    //   component.isOpen = true;
+    //   component.showLoginForm = false;
+    //   component.showRegisterForm = false;
+    //   component.showForgotForm = false;
+    //   expect(component.isOpen).toBeTruthy();
+    //   expect(component.showLoginForm).toBeFalsy();
+    //   expect(component.showRegisterForm).toBeFalsy();
+    //   expect(component.showForgotForm).toBeFalsy();
+    // });
 
     it('showRegister', () => {
       component.showRegisterForm = true;
