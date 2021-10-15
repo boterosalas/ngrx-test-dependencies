@@ -49,32 +49,36 @@ export class UserComponent implements OnInit, OnDestroy {
     }
   }
 
+  private callMsg(msg: string) {
+    this.utils.openSnackBar(msg, 'Cerrar')
+  }
+
   private changeComunications(userId, value) {
     this.subscription = this.user.comunitcations(userId, value).subscribe((user: any) => {
       if (value === true) {
-        this.utils.openSnackBar(user.userMessage, 'Cerrar');
+        this.callMsg(user.userMessage);
       } else {
-        this.utils.openSnackBar(user.userMessage, 'Cerrar');
+        this.callMsg(user.userMessage);
       }
     });
   }
 
-  private changeStateUser(userId, value) {
-    this.subscription = this.user.statusUser(userId, value).subscribe((respState: any) => {
-      if (value === false) {
-        this.utils.openSnackBar(respState.userMessage, 'Cerrar');
+  private changeStateUser(userId, valueState) {
+    this.subscription = this.user.statusUser(userId, valueState).subscribe((respState: any) => {
+      if (valueState === false) {
+        this.callMsg(respState.userMessage);
       } else {
-        this.utils.openSnackBar(respState.userMessage, 'Cerrar');
+        this.callMsg(respState.userMessage);
       }
     });
   }
 
-  private changeInternal(userId, value) {
-    this.subscription = this.user.changeOrigin(userId, value).subscribe((respInternal: any) => {
-      if (value === false) {
-        this.utils.openSnackBar(respInternal.userMessage, 'Cerrar');
+  private changeInternal(userId, valueInternal) {
+    this.subscription = this.user.changeOrigin(userId, valueInternal).subscribe((respInternal: any) => {
+      if (valueInternal === false) {
+        this.callMsg(respInternal.userMessage);
       } else {
-        this.utils.openSnackBar(respInternal.userMessage, 'Cerrar');
+        this.callMsg(respInternal.userMessage);
       }
     });
   }
