@@ -211,10 +211,10 @@ describe('AppComponent', () => {
     //   expect(mockDialog.open).toBeTruthy();
     // });
 
-    it('saveVisitOffer', () => {
-      component.saveVisitOffer(responseGetPopup[0].id);
-      expect(mockContentService.saveVisitOffer).toHaveBeenCalled();
-    });
+    // it('saveVisitOffer', () => {
+    //   component.saveVisitOffer(responseGetPopup[0].id);
+    //   expect(mockContentService.saveVisitOffer).toHaveBeenCalled();
+    // });
 
     it('hide login', () => {
       component.hideLogin();
