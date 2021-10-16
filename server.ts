@@ -13,7 +13,7 @@ import 'localstorage-polyfill';
 export function app(): express.Express {
   const domino = require('domino');
   const server = express();
-  const distFolder = join(process.cwd(), 'dist/clickam/browser');
+  const distFolder = join(process.cwd(), 'dist/clickam');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
   const window = domino.createWindow(indexHtml);
   global.localStorage = localStorage;
