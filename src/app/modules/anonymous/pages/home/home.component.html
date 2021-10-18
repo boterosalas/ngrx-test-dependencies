@@ -148,9 +148,9 @@
       </div>
     </div>
     <div *ngIf="!formData && !sendData" class="mt-2 mb-4" fxLayout="row" fxLayoutAlign="center">
-      <button class="cursor-pointer open-form" (click)="openForm()">
-        Abrir formulario
-        <mat-icon class="arrow-down">keyboard_arrow_down</mat-icon>
+      <button fxLayout="row" fxLayoutAlign="space-between center" class="cursor-pointer open-form" (click)="openForm()">
+        <span>Abrir formulario</span>
+        <mat-icon>keyboard_arrow_down</mat-icon>
       </button>
     </div>
     <div *ngIf="formData && !sendData" class="mt-2 mb-4 pl-2 pr-2" fxLayout="column" fxLayoutAlign="center">

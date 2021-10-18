@@ -83,3 +83,10 @@
 .left_menu {
   background-color: $gray3;
 }
+
+.fix {
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+  background: #fff;
+}
