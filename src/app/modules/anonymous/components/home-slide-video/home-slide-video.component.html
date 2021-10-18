@@ -15,7 +15,11 @@
     </span>
   </ngx-slick-carousel>
   <div fxHide.xs="true" class="position-absolute arrows-video" fxLayout="row" fxLayoutAlign="space-between">
-    <img class="rotate cursor-pointer" src="/assets/img/home/next.svg" alt="prev" (click)="prev()" />
-    <img class="cursor-pointer" src="/assets/img/home/next.svg" alt="next" (click)="next()" />
+    <button mat-mini-fab color="white" class="ml-4" (click)="prev()">
+      <i class="tio-back_ui f-22 arrow-position"></i>
+    </button>
+    <button mat-mini-fab color="white" class="mr-4" (click)="next()">
+      <i class="tio-next_ui f-22 arrow-position"></i>
+    </button>
   </div>
 </div>

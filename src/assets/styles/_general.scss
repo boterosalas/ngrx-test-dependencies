@@ -161,6 +161,7 @@ mat-form-field.select-custom {
 
 .maincontent {
   background: $bg-gray;
+  padding-top: 58px;
 }
 
 .mat-sidenav {
@@ -2778,4 +2779,10 @@ h3#bussiness2 {
 
 .slick-prev, .slick-next{
   display: none !important;
+}
+
+.arrow-position{
+    position: relative;
+    top: -2px;
+    left: -1px;
 }
