@@ -2763,3 +2763,15 @@ h3#bussiness2 {
   font-size: 15px;
   font-family: $font-galano;
 }
+
+.itemli {
+  .mat-list-item-content{
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px 24px;
+    color: #726d7e;
+    font-family: 'galano-bold', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+  }
+}

@@ -86,6 +86,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NewBlogComponent } from './components/new-blogs/new-blog.component';
 import { CardOrderNumberComponent } from './components/card-order-number/card-order-number.component';
 import { DialogNoveltySatisfactionComponent } from './components/dialog-novelty-satisfaction/dialog-novelty-satisfaction.component';
+import { ConsultComponent } from './pages/help-center/consult/consult.component';
 const routes: Routes = [
   {
     path: '',
@@ -345,6 +346,15 @@ const routes: Routes = [
     ],
   },
   {
+    path: 'centro-de-ayuda/consultar',
+    children: [
+      {
+        path: '',
+        component: ConsultComponent,
+      },
+    ],
+  },
+  {
     path: 'terminos-y-condiciones',
     component: TermsAndConditionsComponent,
   },
@@ -427,6 +437,7 @@ const routes: Routes = [
     ButtonStoryComponent,
     CardOrderNumberComponent,
     DialogNoveltySatisfactionComponent,
+    ConsultComponent,
   ],
   imports: [
     FormsModule,
@@ -462,4 +473,4 @@ const routes: Routes = [
     },
   ],
 })
-export class AnonymousModule {}
+export class AnonymousModule { }

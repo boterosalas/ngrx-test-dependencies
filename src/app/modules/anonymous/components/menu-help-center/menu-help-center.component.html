@@ -283,4 +283,15 @@
       >
     </mat-list>
   </mat-expansion-panel>
+  <mat-list-item class="help-center itemli expansion-panel-box-shadow" *ngIf="reportVisible"
+  >
+  <span
+      class="gtmCentroDeAyudaClicMenusconsultar"
+      [routerLink]="['/centro-de-ayuda/consultar']"
+      routerLinkActive="active-topic"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >CONSULTAR NÚMERO DE ORDEN</span
+    >
+</mat-list-item>
+
 </mat-accordion>

@@ -47,6 +47,9 @@ export class MenuHelpCenterComponent implements OnInit {
       case 'reportar':
         this.step = 9;
         break;
+      case 'consultar':
+        this.step = 10;
+        break;
       default:
         this.step = 0;
         break;
@@ -219,6 +222,7 @@ export class MenuHelpCenterComponent implements OnInit {
       class: 'dondepuedocontactarmesitengopreguntasextras',
     },
   ];
+
   report = [
     {
       name: 'Reportar novedad',
@@ -229,6 +233,14 @@ export class MenuHelpCenterComponent implements OnInit {
       name: 'Estado de novedades',
       route: '/centro-de-ayuda/reportar/estado-novedades',
       class: 'estadonovedades',
+    },
+  ];
+
+  consult = [
+    {
+      name: 'Consultar número de orden',
+      route: '/centro-de-ayuda/consultar/consultar-numero-de-orden',
+      class: 'consultar',
     },
   ];
 
