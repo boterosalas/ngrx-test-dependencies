@@ -11,8 +11,8 @@
       </span>
     </mat-toolbar>
     <div
-      *ngIf="managedPayments === false && isEmployee === false && (auth.getRole$ | async) === 'CLICKER'"
-      class="paymentInfo text-white p-2 cursor-pointer"
+    *ngIf="managedPayments === false && isEmployee === false && (auth.getRole$ | async) === 'CLICKER'"
+      class="paymentInfo text-white p-2 cursor-pointer mb-2"
       (click)="drawer.toggle()"
       fxLayout="row"
       [routerLink]="['/mi-perfil', 'pagos']"

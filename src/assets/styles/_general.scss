@@ -2775,3 +2775,7 @@ h3#bussiness2 {
     cursor: pointer;
   }
 }
+
+.slick-prev, .slick-next{
+  display: none !important;
+}
