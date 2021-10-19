@@ -42,3 +42,18 @@
   position: relative;
   bottom: 4px;
 }
+
+.mat-card{
+  padding: 0 1rem !important;
+  margin-bottom: 20px;
+  width: 45%;
+  h3{
+    background-color: #f3f1f6;
+    padding: 15px;
+    margin: 0 -1rem;
+  }
+
+  form{
+    margin-top: 10px;
+  }
+}

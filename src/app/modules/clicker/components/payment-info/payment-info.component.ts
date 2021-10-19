@@ -179,7 +179,7 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
             case 'Rut':
               this.nameFileRUT = nameFile;
               if (response.state === 'Success') {
-                this.showErrorRUT = false;
+                this.showErrorRUT = this.showErrorFormatRUT = false;
               } else {
                 this.showErrorRUT = true;
               }
@@ -188,7 +188,7 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
             case 'BankCertificate':
               this.nameFileCert = nameFile;
               if (response.state === 'Success') {
-                this.showErrorCert = false;
+                this.showErrorCert = this.showErrorFormatCert = false;
               } else {
                 this.showErrorCert = true;
               }
@@ -197,7 +197,7 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
             case 'IdentificationCard1':
               this.nameFileCed1 = nameFile;
               if (response.state === 'Success') {
-                this.showErrorCed1 = false;
+                this.showErrorCed1 = this.showErrorFormatCed1 = false;
               } else {
                 this.showErrorCed1 = true;
               }
@@ -206,7 +206,7 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
             case 'IdentificationCard2':
               this.nameFileCed2 = nameFile;
               if (response.state === 'Success') {
-                this.showErrorCed2 = false;
+                this.showErrorCed2 = this.showErrorFormatCed2 = false;
               } else {
                 this.showErrorCed2 = true;
               }

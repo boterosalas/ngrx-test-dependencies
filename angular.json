@@ -168,6 +168,7 @@
             },
             "codeCoverageExclude": [
               "src/app/services/**/*",
+              "src/app/shared/**/*",
               "src/app/pipes/**/*",
               "src/app/validators/**/*",
               "src/app/interceptors/**/*",

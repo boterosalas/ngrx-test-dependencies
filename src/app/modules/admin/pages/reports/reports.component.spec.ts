@@ -111,15 +111,15 @@ beforeEach(waitForAsync(() => {
     //expect(mockLinksService.getFileReport).toHaveBeenCalled();
   });
 
-  it('on file change trip valid', async () => {
-    const mockFile = new File([''], 'name.xlsx', { type: 'text/html' });
-    const mockEvt = { target: { files: [mockFile] } };
-    component.onFileChangeTrip(mockEvt);
-    fixture.detectChanges();
-    fixture.whenRenderingDone().then(() => {
-      expect(mockLinksService.sendfile).toHaveBeenCalled();
-    });
-  });
+  // it('on file change trip valid', async () => {
+  //   const mockFile = new File([''], 'name.xlsx', { type: 'text/html' });
+  //   const mockEvt = { target: { files: [mockFile] } };
+  //   component.onFileChangeTrip(mockEvt);
+  //   fixture.detectChanges();
+  //   fixture.whenRenderingDone().then(() => {
+  //     expect(mockLinksService.sendfile).toHaveBeenCalled();
+  //   });
+  // });
 
   it('on file change trip invalid', () => {
     const mockFile = new File([''], 'name.txt', { type: 'text/html' });

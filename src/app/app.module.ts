@@ -24,9 +24,10 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './interceptors/auth-interceptor.service';
 
 // angular fire notifications
-// import { AngularFireDatabaseModule } from '@angular/fire/database';
-// import { AngularFireMessagingModule } from '@angular/fire/messaging';
-// import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire';
 
 import { AsyncPipe } from '../../node_modules/@angular/common';
 import { CardComponent } from './modules/anonymous/components/card/card.component';
@@ -37,7 +38,6 @@ import { MenuComponent } from './modules/anonymous/components/menu/menu.componen
 import { RegisterformComponent } from './modules/anonymous/components/registerform/registerform.component';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import { AngularFireModule } from '@angular/fire';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -64,13 +64,13 @@ export function jwtTokenGetter() {
     SharedModule,
     AppMaterialModule,
     FlexLayoutModule,
-    // AngularFireDatabaseModule,
-    // AngularFireAuthModule,
-    // AngularFireMessagingModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AngularFireMessagingModule,
     MatPasswordStrengthModule,
     FormsModule,
     ReactiveFormsModule,
-    // AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     JwtModule.forRoot({
       config: {
         tokenGetter: jwtTokenGetter,

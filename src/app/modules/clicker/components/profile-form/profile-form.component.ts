@@ -610,6 +610,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
               this.nameFileRut = nameFile;
               if (response.state === 'Success') {
                 this.showErrorRut = false;
+                this.showErrorFormatRut = false;
               } else {
                 this.showErrorRut = true;
               }
@@ -618,6 +619,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
               this.nameFileCert = nameFile;
               if (response.state === 'Success') {
                 this.showErrorCert = false;
+                this.showErrorFormatCert = false;
               } else {
                 this.showErrorCert = true;
               }
@@ -626,6 +628,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
               this.nameFileCed1 = nameFile;
               if (response.state === 'Success') {
                 this.showErrorCed1 = false;
+                this.showErrorFormatCed1 = false;
               } else {
                 this.showErrorCed1 = true;
               }
@@ -634,6 +637,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
               this.nameFileCed2 = nameFile;
               if (response.state === 'Success') {
                 this.showErrorCed2 = false;
+                this.showErrorFormatCed2 = false;
               } else {
                 this.showErrorCed2 = true;
               }

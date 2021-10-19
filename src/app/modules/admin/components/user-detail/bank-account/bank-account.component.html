@@ -1,0 +1,16 @@
+<div class="bank-information">
+    <h3 class="secundary-text">Información Bancaria</h3>
+    <p fxLayout="row" fxLayoutGap="10%" fxLayoutAlign="start center">
+      <span class="galano-bold gray w-label">BANCO</span>
+      <span class="normal-text">{{ data.bank }}</span>
+    </p>
+    <p fxLayout="row" fxLayoutGap="10%" fxLayoutAlign="start center">
+      <span class="galano-bold gray w-label">CUENTA</span>
+      <span class="normal-text" *ngIf="data.typeBankAccount === '1'"> Ahorros - {{ data.bankAccountNumber }}</span>
+      <span class="normal-text" *ngIf="data.typeBankAccount === '2'"> Corriente - {{ data.bankAccountNumber }}</span>
+    </p>
+    <p fxLayout="row" fxLayoutGap="10%" fxLayoutAlign="start center">
+      <span class="galano-bold gray w-label">FECHA DE CARGA</span>
+      <span class="normal-text" *ngIf="data.typeBankAccount === '1'"> {{ data.mindatebankcertificate | date: 'yyyy-MM-dd' }}</span>
+    </p>
+  </div>

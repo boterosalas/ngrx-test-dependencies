@@ -47,12 +47,31 @@ export class MenuHelpCenterComponent implements OnInit {
       case 'reportar':
         this.step = 9;
         break;
+      case 'consultar':
+        this.step = 10;
+        break;
       default:
         this.step = 0;
         break;
     }
   }
-
+  questions = [
+    {
+      name: '¿Quién es el tomador de un seguro?',
+      route: '/centro-de-ayuda/otras-preguntas-frecuentes/quien-es-el-tomador-de-un-seguro',
+      class: 'quieneseltomadordeunseguro',
+    },
+    {
+      name: '¿Qué es un producto Marketplace?',
+      route: '/centro-de-ayuda/otras-preguntas-frecuentes/que-es-un-producto-marketplace',
+      class: 'queesunproductomarketplace',
+    },
+    {
+      name: '¿Cuáles son los medios de pago de cada negocio?',
+      route: '/centro-de-ayuda/otras-preguntas-frecuentes/cuales-son-los-medios-de-pago-de-cada-negocio',
+      class: 'cualessonlosmediosdepagodecadanegocio',
+    },
+  ];
   aboutClickam = [
     {
       name: '¿Qué es Clickam?',
@@ -88,6 +107,19 @@ export class MenuHelpCenterComponent implements OnInit {
       name: '¿Cuáles son los negocios asociados?',
       route: '/centro-de-ayuda/sobre-clickam/cuales-son-los-negocios-asociados',
       class: 'cualessonlosnegociosasociados',
+    },
+  ];
+
+  offers = [
+    {
+      name: '¿Dónde puedo encontrar las mejores ofertas?',
+      route: '/centro-de-ayuda/ofertas/donde-puedo-encontrar-las-mejores-ofertas',
+      class: 'dondepuedoencontrarlasmejoresofertas',
+    },
+    {
+      name: 'Preferencias de correo',
+      route: '/centro-de-ayuda/ofertas/preferencias-de-correo',
+      class: 'preferenciasdecorreo',
     },
   ];
 
@@ -173,36 +205,7 @@ export class MenuHelpCenterComponent implements OnInit {
     },
   ];
 
-  offers = [
-    {
-      name: '¿Dónde puedo encontrar las mejores ofertas?',
-      route: '/centro-de-ayuda/ofertas/donde-puedo-encontrar-las-mejores-ofertas',
-      class: 'dondepuedoencontrarlasmejoresofertas',
-    },
-    {
-      name: 'Preferencias de correo',
-      route: '/centro-de-ayuda/ofertas/preferencias-de-correo',
-      class: 'preferenciasdecorreo',
-    },
-  ];
 
-  questions = [
-    {
-      name: '¿Quién es el tomador de un seguro?',
-      route: '/centro-de-ayuda/otras-preguntas-frecuentes/quien-es-el-tomador-de-un-seguro',
-      class: 'quieneseltomadordeunseguro',
-    },
-    {
-      name: '¿Qué es un producto Marketplace?',
-      route: '/centro-de-ayuda/otras-preguntas-frecuentes/que-es-un-producto-marketplace',
-      class: 'queesunproductomarketplace',
-    },
-    {
-      name: '¿Cuáles son los medios de pago de cada negocio?',
-      route: '/centro-de-ayuda/otras-preguntas-frecuentes/cuales-son-los-medios-de-pago-de-cada-negocio',
-      class: 'cualessonlosmediosdepagodecadanegocio',
-    },
-  ];
 
   contacts = [
     {
@@ -219,6 +222,7 @@ export class MenuHelpCenterComponent implements OnInit {
       class: 'dondepuedocontactarmesitengopreguntasextras',
     },
   ];
+
   report = [
     {
       name: 'Reportar novedad',
@@ -229,6 +233,14 @@ export class MenuHelpCenterComponent implements OnInit {
       name: 'Estado de novedades',
       route: '/centro-de-ayuda/reportar/estado-novedades',
       class: 'estadonovedades',
+    },
+  ];
+
+  consult = [
+    {
+      name: 'Consultar número de orden',
+      route: '/centro-de-ayuda/consultar/consultar-numero-de-orden',
+      class: 'consultar',
     },
   ];
 

@@ -40,6 +40,7 @@ import {MatListModule} from '@angular/material/list';
 import { CardStoryComponent } from './components/card-story/card-story.component';
 import { OnboardingSwiperComponent } from './components/onboarding-swiper/onboarding-swiper.component';
 import { SafePipe } from "src/app/pipes/safe,pipe";
+import { BackButtonComponent } from './components/atoms/back-button/back-button.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { SafePipe } from "src/app/pipes/safe,pipe";
     DialogStoriesComponent,
     CardStoryComponent,
     OnboardingSwiperComponent,
+    BackButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -115,6 +117,7 @@ import { SafePipe } from "src/app/pipes/safe,pipe";
     DialogStoriesComponent,
     CardStoryComponent,
     OnboardingSwiperComponent,
+    BackButtonComponent
   ],
   entryComponents: [ModalGenericComponent, PopupComponent, DialogStoriesComponent, OnboardingSwiperComponent],
 })

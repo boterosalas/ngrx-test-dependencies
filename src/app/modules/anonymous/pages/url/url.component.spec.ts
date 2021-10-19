@@ -1,71 +1,37 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UrlComponent } from './url.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
-import { AnonymousModule } from '../../anonymous.module';
-import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { JwtModule } from '@auth0/angular-jwt';
-import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { AuthService } from 'src/app/services/auth.service';
-import { LinksService } from 'src/app/services/links.service';
-import { UtilsService } from 'src/app/services/utils.service';
-import { UserService } from 'src/app/services/user.service';
-import { of } from 'rxjs';
-
+import { JwtModule } from '@auth0/angular-jwt';
+localStorage.setItem(
+  'ACCESS_TOKEN',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU'
+);
 describe('UrlComponent', () => {
   let component: UrlComponent;
   let fixture: ComponentFixture<UrlComponent>;
-  const authSvcMock = jasmine.createSpyObj('AuthService', ['isLoggedIn', 'getProfile']);
-  const linkSvcMock = jasmine.createSpyObj('LinksService', ['getUrl', 'getUrlWidget']);
-  let utilsSvcMock = jasmine.createSpyObj('UtilsService', ['showloginForm']);
-  const userSvcMock = jasmine.createSpyObj('userSvc', ['getProfile']);
-
-  const response = {
-    Status: 'Success',
-    objectResponse: {},
-  };
-
-  beforeEach(
-
-    waitForAsync(() => {
-      utilsSvcMock = {...utilsSvcMock,    ...{ change: { subscribe: jasmine.createSpy('change subscribe') } }}
-      TestBed.configureTestingModule({
-        declarations: [UrlComponent],
-        imports: [
-          TranslateModule.forRoot(),
-          AnonymousModule,
-          HttpClientTestingModule,
-          NoopAnimationsModule,
-          RouterTestingModule.withRoutes([]),
-          AppMaterialModule,
-          BrowserAnimationsModule,
-          SharedModule,
-          JwtModule.forRoot({
-            config: {
-              tokenGetter: () => {
-                return localStorage.getItem('ACCESS_TOKEN');
-              },
-              throwNoTokenError: true,
-              allowedDomains: [],
-              disallowedRoutes: [],
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [UrlComponent],
+      imports: [
+        RouterTestingModule,
+        AppMaterialModule,
+        HttpClientTestingModule,
+        JwtModule.forRoot({
+          config: {
+            tokenGetter: () => {
+              return localStorage.getItem('ACCESS_TOKEN');
             },
-          }),
-        ],
-        providers: [
-          { provide: AuthService, useValue: authSvcMock },
-          { provide: LinksService, useValue: linkSvcMock },
-          { provide: UserService, useValue: userSvcMock },
-          { provide: UtilsService, useValue: utilsSvcMock },
-        ],
-      }).compileComponents();
-      //utilsSvcMock.change.and.returnValue(of(true));
-      linkSvcMock.getUrl.and.returnValue(of(response));
-      linkSvcMock.getUrlWidget.and.returnValue(of(response));
-    })
-  );
+            throwNoTokenError: true,
+            allowedDomains: [],
+            disallowedRoutes: [],
+          },
+        }),
+      ],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(UrlComponent);
@@ -74,7 +40,6 @@ describe('UrlComponent', () => {
   });
 
   it('should create', () => {
-
     expect(component).toBeTruthy();
   });
 });

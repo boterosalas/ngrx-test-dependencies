@@ -1,0 +1,50 @@
+<div class="user-status">
+  <h3 class="secundary-text">Usuario</h3>
+
+  <span fxLayout="row" fxLayoutAlign="space-between center">
+    <p class="galano-bold gray w-label w-label-width">ORIGEN</p>
+    <span class="normal-text" *ngIf="data.isemployeegrupoexito === true"> Interno </span>
+    <span class="normal-text" *ngIf="data.isemployeegrupoexito === false"> Externo </span>
+  </span>
+
+  <span fxLayout="row" fxLayoutAlign="space-between center">
+    <p class="galano-bold gray w-label w-label-width">SCORE</p>
+    <span class="normal-text"> {{ data.score }} </span>
+  </span>
+
+  <p class="galano-bold gray w-label">RECIBE COMUNICACIONES</p>
+  <mat-slide-toggle
+    (change)="changeValueService($event, 'comunications')"
+    [(ngModel)]="data.receiveCommunications"
+    color="orange-toggle"
+    labelPosition="before"
+    id="comunications-toggle"
+  >
+    <span class="third-text" *ngIf="data.receiveCommunications === 'Si'"> Si </span>
+    <span class="third-text" *ngIf="data.receiveCommunications === 'No'"> No </span>
+  </mat-slide-toggle>
+
+  <div fxLayout="row" fxLayoutGap="20px">
+    <span fxLayout="column">
+      <p class="galano-bold gray w-label w-label-width">ESTADO</p>
+      <mat-slide-toggle
+        (change)="changeValueService($event, 'status')"
+        [(ngModel)]="data.state"
+        color="orange-toggle"
+        labelPosition="before"
+        id="state-toggle"
+      >
+        <span class="third-text" *ngIf="data.state"> Activo </span>
+        <span class="third-text" *ngIf="!data.state"> Inactivo </span>
+      </mat-slide-toggle>
+    </span>
+    <span>
+      <p class="galano-bold gray w-label w-label-width">INTERNO</p>
+
+      <mat-slide-toggle (change)="changeValueService($event, 'internal')" [(ngModel)]="data.isemployeegrupoexito" color="orange-toggle" labelPosition="before" id="internal-toggle">
+        <span class="third-text" *ngIf="data.isemployeegrupoexito === false"> No </span>
+        <span class="third-text" *ngIf="data.isemployeegrupoexito === true"> Si </span>
+      </mat-slide-toggle>
+    </span>
+  </div>
+</div>

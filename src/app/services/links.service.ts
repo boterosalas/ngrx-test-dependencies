@@ -80,7 +80,7 @@ export class LinksService {
     return this.http.post(`${this.url + this.apiSaveLink}`, SaveLink, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -97,7 +97,7 @@ export class LinksService {
     return this.http.post(`${environment.URL_COMISSION}${this.apiPicking}`, formdata, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -109,7 +109,7 @@ export class LinksService {
     return this.http.post(`${this.url + this.apiSaveLinkRefered}`, SaveLink, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -121,7 +121,7 @@ export class LinksService {
     return this.http.post(`${this.urlComission + this.apiSaveAmountCommission}`, amount, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -133,7 +133,7 @@ export class LinksService {
     return this.http.post(`${this.urlComission + this.apiSaveAmountReferred}`, amount, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -145,7 +145,7 @@ export class LinksService {
     return this.http.post(`${this.url + this.apiPostReferrrals}`, dates, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -158,7 +158,7 @@ export class LinksService {
     return this.http.get(`${this.urlComission}${apiReport}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -173,7 +173,7 @@ export class LinksService {
     return this.http.get(`${this.urlComission}${this.apiGetmedals}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -188,7 +188,7 @@ export class LinksService {
     return this.http.get(`${this.urlComission}${this.apiGetAmounts}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -205,7 +205,7 @@ export class LinksService {
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
-            delay(1000),
+            delay(3000),
             take(3),
             tap((errorStatus) => {})
           )
@@ -245,7 +245,7 @@ export class LinksService {
     return this.http.get(`${this.urlComission}${this.apiKPI}?start=${date.start}&end=${date.end}`, httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -269,7 +269,7 @@ export class LinksService {
     return this.http.get(`${this.urlReports}${this.apikpiresume}`, httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -295,7 +295,7 @@ export class LinksService {
     return this.http.get(`${this.urlReports}${this.apikpibussiness}?start=${datesGet0[0]}&end=${datesGet1[0]}`, httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -321,7 +321,7 @@ export class LinksService {
     return this.http.get(`${this.urlReports}${this.apikpiTotal}?start=${datesGet0[0]}&end=${datesGet1[0]}`, httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -335,7 +335,7 @@ export class LinksService {
     return this.http.get(`${this.urlComission}${this.apiHistory}?from=${params.from}&to=${params.to}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -352,7 +352,7 @@ export class LinksService {
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
-            delay(1000),
+            delay(3000),
             take(3),
             tap((errorStatus) => {})
           )
@@ -367,7 +367,7 @@ export class LinksService {
     return this.http.get(`${this.ulrReport}${this.apiGetReportMonth}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -382,7 +382,7 @@ export class LinksService {
     return this.http.get(`${this.urlComission}/${this.apigetDetailPaymentClicker}?paymentDate=${date}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -397,7 +397,7 @@ export class LinksService {
     return this.http.get(`${this.urlReports}${this.apiUsersExcel}?&start=${params.start}&end=${params.end}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -410,7 +410,7 @@ export class LinksService {
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
-            delay(1000),
+            delay(3000),
             take(3),
             tap((errorStatus) => {})
           )
@@ -422,7 +422,7 @@ export class LinksService {
     return this.http.get(`${this.urlComission}${this.apiAuditExcel}?&start=${params.start}&end=${params.end}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -434,7 +434,7 @@ export class LinksService {
     return this.http.get(`${this.urlComission}${this.apiGetReportReferral}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -446,7 +446,7 @@ export class LinksService {
     return this.http.get(`${this.ulrReport}${this.apigetReportTerms}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -458,7 +458,7 @@ export class LinksService {
     return this.http.get(`${this.ulrReport}${this.apigetReportCommissions}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -470,7 +470,7 @@ export class LinksService {
     return this.http.get(`${this.ulrReport}${this.apiGetReport}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -481,7 +481,7 @@ export class LinksService {
     return this.http.get(`${this.urlReports}${this.apigetReportClickam}?&start=${params.start}&end=${params.end}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -492,7 +492,7 @@ export class LinksService {
     return this.http.get(`${this.urlReports}${this.apiAudit}?&start=${params.start}&end=${params.end}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -503,7 +503,7 @@ export class LinksService {
     return this.http.get(`${this.urlReports}${this.apiAuditUserInfo}?&start=${params.start}&end=${params.end}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -519,7 +519,7 @@ export class LinksService {
     return this.http.post(`${environment.URL_COMISSION}${this.apigenerateCommissions}`, formdata, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -534,7 +534,7 @@ export class LinksService {
     return this.http.post(`${environment.URL_COMISSION}${this.apiupdatePaymentDate}`, formdata, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -546,7 +546,7 @@ export class LinksService {
     return this.http.post(`${this.urlReports}${this.apiUsers}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -560,7 +560,7 @@ export class LinksService {
     return this.http.post(`${environment.URL_CONTENT}${this.apiOrder}`, datos, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -572,7 +572,7 @@ export class LinksService {
     return this.http.get(`${this.urlComission}${this.apiSellers}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -598,7 +598,7 @@ export class LinksService {
     return this.http.post(`${this.urlReports}${this.apikpiNovelties}`, data, httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -620,7 +620,7 @@ export class LinksService {
     return this.http.post(`${environment.URL_COMISSION}${this.apiUpdateStatusCommissionFile}`, formdata, httpOptionsForm).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -642,7 +642,7 @@ export class LinksService {
     return this.http.post(`${environment.URL_COMISSION}${this.apiDeleteCommissionFile}`, formdata, httpOptionsForm).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -657,7 +657,7 @@ export class LinksService {
     return this.http.get(`${this.ulrReport}${this.apiReportRejected}?start=${date.start}&end=${date.end}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -672,7 +672,7 @@ export class LinksService {
     return this.http.post(`${environment.URL_COMISSION}${this.apiUpdateStatusCommission}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -687,7 +687,7 @@ export class LinksService {
     return this.http.post(`${environment.URL_COMISSION}${this.apiDeleteCommission}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )
@@ -704,7 +704,7 @@ export class LinksService {
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
-            delay(1000),
+            delay(3000),
             take(3),
             tap((errorStatus) => {})
           )

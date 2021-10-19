@@ -224,4 +224,12 @@ beforeEach(waitForAsync(() => {
     component.viewStory();
     expect(component.openStoryCard.emit).toHaveBeenCalled();
   });
+
+  it('add Event Pause And Play Card', () => {
+    component.cardOpen = false;
+    component.showCarousel = true;
+
+    component.addEventPauseAndPlayCard();
+    expect(component.showCarousel).toEqual(true);
+  });
 });

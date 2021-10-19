@@ -7,8 +7,8 @@
 <div class="container minaud">
   <br />
   <div fxLayout="row" fxLayoutGap="30px">
-    <div class="border-radius mat-card mat-card-box-shadow mt-3 p-3">
-      <h3 class="border-bottom-orange-init">
+    <div class="border-radius mat-card mat-card-box-shadow mt-3">
+      <h3>
         {{ 'REFER.CLICKER_COMISSION_TITLE' | translate }}
       </h3>
       <p>{{ 'REFER.CLICKER_COMISSION_TEXT' | translate }}</p>
@@ -35,7 +35,7 @@
         <button
           mat-raised-button
           color="orange"
-          (click)="saveCommission()"
+          (click)="saveCommission('amounts-commission')"
           id="send-comission"
           class="ml-2"
           [disabled]="!comissionForm.valid"
@@ -45,8 +45,8 @@
       </form>
     </div>
 
-    <div class="border-radius mat-card mat-card-box-shadow mt-3 p-3">
-      <h3 class="border-bottom-orange-init">
+    <div class="border-radius mat-card mat-card-box-shadow mt-3">
+      <h3>
         {{ 'REFER.CLICKER_REFERED_TITLE' | translate }}
       </h3>
       <p>{{ 'REFER.CLICKER_REFERED_TEXT' | translate }}</p>
@@ -70,7 +70,56 @@
             'GENERIC.ONLY_NUMBERS' | translate
           }}</mat-error>
         </mat-form-field>
-        <button mat-raised-button color="orange" (click)="saveRefered()" id="send-refered" class="ml-2" [disabled]="!referedForm.valid">
+        <button
+          mat-raised-button
+          color="orange"
+          (click)="saveCommission('amounts-referred')"
+          id="send-refered"
+          class="ml-2"
+          [disabled]="!referedForm.valid"
+        >
+          Guardar
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div div fxLayout="row" fxLayoutGap="30px">
+    <div class="border-radius mat-card mat-card-box-shadow mt-3">
+      <h3>
+        {{ 'REFER.CLICKER_NEW_TITLE' | translate }}
+      </h3>
+      <p>{{ 'REFER.CLICKER_NEW_TEXT' | translate }}</p>
+      <form [formGroup]="clickerForm">
+        <mat-form-field>
+          <input matInput id="refered" type="text" placeholder="Valor calificado" formControlName="newClicker" spacebar required />
+
+          <mat-error
+            id="reuiredrefered"
+            *ngIf="clickerForm.controls.newClicker.invalid && clickerForm.controls.newClicker.errors.required"
+            >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Valor calificado' } }}</mat-error
+          >
+
+          <mat-error id="maxrefered" *ngIf="clickerForm.controls.newClicker.invalid && clickerForm.controls.newClicker.errors.maxlength">{{
+            'GENERIC.MAX_CHARACTERS'
+              | translate
+                : {
+                    maxchar: clickerForm.controls.newClicker.errors.maxlength.requiredLength
+                  }
+          }}</mat-error>
+
+          <mat-error id="numberrefered" *ngIf="clickerForm.controls.newClicker.invalid && clickerForm.controls.newClicker.errors.pattern">{{
+            'GENERIC.ONLY_NUMBERS' | translate
+          }}</mat-error>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="orange"
+          (click)="saveCommission('amounts-newclicker')"
+          id="send-refered"
+          class="ml-2"
+          [disabled]="!clickerForm.valid"
+        >
           Guardar
         </button>
       </form>

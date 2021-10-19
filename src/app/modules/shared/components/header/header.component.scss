@@ -113,8 +113,10 @@ header {
   }
 
   span {
-    font-size: 10px;
+    font-size: 8px;
     font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    color: $primary-color;
   }
 }
 

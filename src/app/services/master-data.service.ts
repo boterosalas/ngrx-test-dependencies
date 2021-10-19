@@ -45,7 +45,7 @@ export class MasterDataService {
     return this.http.post(`${this.url + this.apiSetTerms}`, data, this.httpOptionsSet).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(1000),
+          delay(3000),
           take(3),
           tap((errorStatus) => {})
         )

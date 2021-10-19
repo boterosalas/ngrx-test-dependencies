@@ -126,6 +126,8 @@
   background-color: #8d7eb7;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  position: relative;
+  margin: -5px;
 }
 .text-cuentanos {
   font-size: 24px;
@@ -140,10 +142,7 @@
   border: 1px solid #ffffff;
   background-color: transparent;
   color: #ffffff;
-  padding-left: 12px;
-  padding-right: 12px;
-  padding-top: 5px;
-  padding-bottom: 10px;
+  padding: 10px;
 }
 .arrow-down {
   position: relative;

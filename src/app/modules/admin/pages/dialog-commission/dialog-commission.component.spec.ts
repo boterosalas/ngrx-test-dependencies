@@ -111,6 +111,7 @@ describe('DialogCommissionComponent', () => {
     component.newComision();
     let datos = true;
     expect(datos).toBeTruthy();
+    expect(mockDialog.open).toHaveBeenCalled();
   });
 
   it('save comition', () => {

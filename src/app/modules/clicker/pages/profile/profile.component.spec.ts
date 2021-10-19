@@ -99,8 +99,4 @@ beforeEach(waitForAsync(() => {
     component.getUserData();
     expect(service.getuserdata).toHaveBeenCalled();
   });
-
-  afterAll(() => {
-    TestBed.resetTestingModule();
-  });
 });

@@ -13,30 +13,12 @@ import { of } from 'rxjs/internal/observable/of';
 import { MasterDataService } from 'src/app/services/master-data.service';
 import { BehaviorSubject } from 'rxjs';
 
-class MockUserService extends UserService {
-  userInfo$ = new BehaviorSubject<any>({
-    birthDate: '12/12/12',
-    maritalStatusOb: { id: '2', description: 'casado' },
-    genderOb: { id: '1', description: 'Masculino' },
-    educationLevelOb: { id: '1', description: 'Bachiller' },
-    occupationOb: { id: '1', description: 'prueba' },
-    fixedIncomeOb: { id: '1', description: '1' },
-    otherIncome: '11',
-    stratumOb: { id: 1, description: 'otros' },
-    typeHousingOb: { id: '1', description: 'propia' },
-    numberPeopleLiveOb: { id: '1', description: 'personas' },
-    dependantOb: { id: '1', description: 'personas' },
-    mobilityOb: { id: '1', description: 'Bus' },
-    address: 'calle falsa 123',
-    receiveCommunications: true,
-  });
-}
-
 describe('AditionalInfoFormComponent', () => {
   let component: AditionalInfoFormComponent;
   let fixture: ComponentFixture<AditionalInfoFormComponent>;
 
-  const mockUserService = jasmine.createSpyObj('UserService', ['getBasicData', 'updateUser', 'userInfo']);
+
+  const mockUserService = jasmine.createSpyObj('UserService', ['getBasicData', 'updateUser', 'userInfo$']);
 
   const mockMasterDataService = jasmine.createSpyObj('MasterDataService', ['getDepartments', 'getBanks']);
 
@@ -196,19 +178,35 @@ beforeEach(waitForAsync(() => {
         }),
       ],
       providers: [
-        { provide: UserService, useClass: MockUserService },
+        { provide: UserService, useValue: mockUserService },
         { provide: MasterDataService, useValue: mockMasterDataService },
       ],
+      schemas: []
     }).compileComponents();
-    // mockUserService.userInfo.and.returnValue(true);
-    // mockUserService.getBasicData.and.returnValue(of(basicData));
-    // mockUserService.updateUser.and.returnValue(of(dataUser));
+    mockUserService.getBasicData.and.returnValue(of(basicData));
+    mockUserService.updateUser.and.returnValue(of(dataUser));
     mockMasterDataService.getBanks.and.returnValue(of(dataBanks));
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AditionalInfoFormComponent);
     component = fixture.componentInstance;
+    component.user.userInfo$ = new BehaviorSubject<any>({
+      birthDate: '12/12/12',
+      maritalStatusOb: { id: '2', description: 'casado' },
+      genderOb: { id: '1', description: 'Masculino' },
+      educationLevelOb: { id: '1', description: 'Bachiller' },
+      occupationOb: { id: '1', description: 'prueba' },
+      fixedIncomeOb: { id: '1', description: '1' },
+      otherIncome: '11',
+      stratumOb: { id: 1, description: 'otros' },
+      typeHousingOb: { id: '1', description: 'propia' },
+      numberPeopleLiveOb: { id: '1', description: 'personas' },
+      dependantOb: { id: '1', description: 'personas' },
+      mobilityOb: { id: '1', description: 'Bus' },
+      address: 'calle falsa 123',
+      receiveCommunications: true,
+    });
     fixture.detectChanges();
   });
 
@@ -218,15 +216,14 @@ beforeEach(waitForAsync(() => {
 
   it('get basic data', () => {
     let service = fixture.debugElement.injector.get(UserService);
-    spyOn(service, 'getBasicData').and.returnValue(of(basicData));
     component.getBasicData();
     expect(service.getBasicData).toHaveBeenCalled();
   });
 
   it('edit info', () => {
     let service = fixture.debugElement.injector.get(UserService);
-    spyOn(service, 'updateUser').and.returnValue(of(resp));
     component.editInfo();
     expect(service.updateUser).toHaveBeenCalled();
   });
+
 });
