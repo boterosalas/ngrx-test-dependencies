@@ -14,6 +14,7 @@ import { VerificationComponent } from './verification.component';
 
 
 export class MatDialogMock {
+  close: () => {};
   open() {
     return {
       afterClosed: () => of(true),
