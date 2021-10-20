@@ -312,11 +312,11 @@
             },
             "qa": {
               "browserTarget": "clickam:build:qa",
-              "serverTarget": "clickam:server:qa"
+              "serverTarget": "clickam:server"
             },
             "uat": {
               "browserTarget": "clickam:build:uat",
-              "serverTarget": "clickam:server:uat"
+              "serverTarget": "clickam:server"
             }
           },
           "defaultConfiguration": "development"

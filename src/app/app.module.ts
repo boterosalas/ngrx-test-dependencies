@@ -23,13 +23,17 @@ import { SharedModule } from './modules/shared/shared.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './interceptors/auth-interceptor.service';
 
+// sesion timeout
+import { BnNgIdleService } from 'bn-ng-idle';
+
 // angular fire notifications
+import { MessagingService } from './shared/messaging.service';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
-import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
-
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AsyncPipe } from '../../node_modules/@angular/common';
+import { SidenavService } from './services/sidenav.service';
 import { CardComponent } from './modules/anonymous/components/card/card.component';
 import { ActivateAccountFormComponent } from './modules/anonymous/components/activate-account-form/activate-account-form.component';
 import { ForgotpasswordformComponent } from './modules/anonymous/components/forgotpasswordform/forgotpasswordform.component';
@@ -101,7 +105,10 @@ export function jwtTokenGetter() {
       useClass: AuthInterceptor,
       multi: true,
     },
+    BnNgIdleService,
+    MessagingService,
     AsyncPipe,
+    SidenavService,
   ],
   bootstrap: [AppComponent],
 })
