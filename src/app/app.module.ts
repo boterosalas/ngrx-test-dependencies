@@ -112,4 +112,5 @@ export function jwtTokenGetter() {
   ],
   bootstrap: [AppComponent],
 })
+
 export class AppModule {}
