@@ -12,6 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 import { PersonalInfoComponent } from './personal-info.component';
 
 export class MatDialogMock {
+  close: () => {};
   open() {
     return {
       afterClosed: () => of(true),
@@ -61,7 +62,7 @@ describe('PersonalInfoComponent', () => {
         }),
       ],
       providers: [
-        { provide: MatDialogRef, useValue: MatDialogMock },
+        { provide: MatDialogRef, useValue: { close: () => {} } },
         { provide: MAT_DIALOG_DATA, useValue: data },
         { provide: UserService, useValue: mockUserService },
       ]
