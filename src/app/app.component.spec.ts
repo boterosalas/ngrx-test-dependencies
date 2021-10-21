@@ -26,6 +26,8 @@ import { AppMaterialModule } from './modules/shared/app-material/app-material.mo
 
 // const TRANSLATIONS_ES = require('../assets/i18n/es.json');
 export class MatDialogMock {
+  close: () => {};
+  closeAll: () => {};
   open() {
     return {
       afterClosed: () => of(true),
