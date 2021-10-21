@@ -157,12 +157,12 @@ beforeEach(waitForAsync(() => {
     expect(component.showErrorExtPicking).toBeTruthy();
   });
 
-  it('download referal', () => {
-    component.dateForm.controls.dateStart.setValue('2019-11-10');
-    component.dateForm.controls.dateEnd.setValue('2019-11-10');
-    component.downloadReferal();
-    expect(mockLinksService.downloadReferrals).toHaveBeenCalled();
-  });
+  // it('download referal', () => {
+  //   component.dateForm.controls.dateStart.setValue('2019-11-10');
+  //   component.dateForm.controls.dateEnd.setValue('2019-11-10');
+  //   component.downloadReferal();
+  //   expect(mockLinksService.downloadReferrals).toHaveBeenCalled();
+  // });
 
   it('change button', () => {
     component.disButon = false;
