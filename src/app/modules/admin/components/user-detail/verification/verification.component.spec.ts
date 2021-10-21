@@ -113,12 +113,12 @@ describe('VerificationComponent', () => {
     expect(mockUserService.postUpdateResponseAccountBank).toHaveBeenCalled();
   });
 
-  it('getStatusVerificationUser', () => {
-    mockUserService.getStatusVerification.and.returnValue(of(response2));
-    component.accountStatements = response2.objectResponse;
-    component.getStatusVerificationUser();
-    expect(mockUserService.getStatusVerification).toHaveBeenCalled();
-  });
+  // it('getStatusVerificationUser', () => {
+  //   mockUserService.getStatusVerification.and.returnValue(of(response2));
+  //   component.accountStatements = response2.objectResponse;
+  //   component.getStatusVerificationUser();
+  //   expect(mockUserService.getStatusVerification).toHaveBeenCalled();
+  // });
 
 
 });
