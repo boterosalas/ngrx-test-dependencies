@@ -39,6 +39,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import { CardStoryComponent } from './components/card-story/card-story.component';
 import { OnboardingSwiperComponent } from './components/onboarding-swiper/onboarding-swiper.component';
+import { SafePipe } from "src/app/pipes/safe,pipe";
 import { BackButtonComponent } from './components/atoms/back-button/back-button.component';
 
 @NgModule({
@@ -57,6 +58,7 @@ import { BackButtonComponent } from './components/atoms/back-button/back-button.
     TruncatePipe,
     TrimPipe,
     RemoveTagsPipe,
+    SafePipe,
     AppStoreComponent,
     LogoComponent,
     ProductComponent,
@@ -105,6 +107,7 @@ import { BackButtonComponent } from './components/atoms/back-button/back-button.
     UnderConstructionComponent,
     TruncatePipe,
     TrimPipe,
+    SafePipe,
     RemoveTagsPipe,
     LogoComponent,
     ProductComponent,

@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LinksService } from 'src/app/services/links.service';
 import { MasterDataService } from 'src/app/services/master-data.service';
@@ -9,7 +10,7 @@ import { MasterDataService } from 'src/app/services/master-data.service';
   styleUrls: ['./terms-and-conditions.component.scss'],
 })
 export class TermsAndConditionsComponent implements OnInit, OnDestroy {
-  constructor(private personalInfo: MasterDataService, private link: LinksService) {}
+  constructor(private personalInfo: MasterDataService, private link: LinksService, @Inject(PLATFORM_ID) private platformId: object) { }
   contentTerminos: any;
   contentProteccion: any;
   contentTransparencia: any;
@@ -38,12 +39,14 @@ export class TermsAndConditionsComponent implements OnInit, OnDestroy {
   }
 
   public addTagsclass() {
-    setTimeout(() => {
-      document.querySelector('.mat-tab-label[aria-posinset="1"]').classList.add('gtmTerminosCondicionesClicTerminosLegales');
-      document.querySelector('.mat-tab-label[aria-posinset="2"]').classList.add('gtmTerminosCondicionesClicEmprendedor');
-      document.querySelector('.mat-tab-label[aria-posinset="3"]').classList.add('gtmTerminosCondicionesClicProteccionDatos');
-      document.querySelector('.mat-tab-label[aria-posinset="4"]').classList.add('gtmTerminosCondicionesClicProgramaReferidos');
-    }, 1000);
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() => {
+        document.querySelector('.mat-tab-label[aria-posinset="1"]').classList.add('gtmTerminosCondicionesClicTerminosLegales');
+        document.querySelector('.mat-tab-label[aria-posinset="2"]').classList.add('gtmTerminosCondicionesClicEmprendedor');
+        document.querySelector('.mat-tab-label[aria-posinset="3"]').classList.add('gtmTerminosCondicionesClicProteccionDatos');
+        document.querySelector('.mat-tab-label[aria-posinset="4"]').classList.add('gtmTerminosCondicionesClicProgramaReferidos');
+      }, 1000);
+    }
   }
   getTerms() {
     this.subscription = this.personalInfo.getTerms().subscribe((resp: any) => {

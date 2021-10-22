@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-app-store',
@@ -6,19 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app-store.component.scss'],
 })
 export class AppStoreComponent implements OnInit {
-  constructor() {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: object
+  ) { }
 
   showLogo = true;
-  
+
   ngOnInit() {
     this.detectIos();
   }
 
 
   public detectIos() {
-    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    if (iOS) {
-      this.showLogo = false;
+    if (isPlatformBrowser(this.platformId)) {
+      const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      if (iOS) {
+        this.showLogo = false;
+      }
     }
   }
 }

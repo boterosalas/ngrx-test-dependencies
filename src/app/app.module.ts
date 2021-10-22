@@ -42,6 +42,7 @@ import { MenuComponent } from './modules/anonymous/components/menu/menu.componen
 import { RegisterformComponent } from './modules/anonymous/components/registerform/registerform.component';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -61,7 +62,7 @@ export function jwtTokenGetter() {
     ActivateAccountFormComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
@@ -77,8 +78,8 @@ export function jwtTokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: jwtTokenGetter,
-        whitelistedDomains: [],
-        blacklistedRoutes: [],
+        allowedDomains: [],
+        disallowedRoutes: [],
       },
     }),
     TranslateModule.forRoot({
@@ -111,4 +112,5 @@ export function jwtTokenGetter() {
   ],
   bootstrap: [AppComponent],
 })
+
 export class AppModule {}

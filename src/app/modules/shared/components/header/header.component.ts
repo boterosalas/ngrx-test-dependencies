@@ -1,10 +1,10 @@
-import { Component, OnInit, HostListener, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, HostListener, Input, OnDestroy, Output, EventEmitter, Inject, PLATFORM_ID } from '@angular/core';
 import { UtilsService } from 'src/app/services/utils.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { LinksService } from 'src/app/services/links.service';
 import { Subscription } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
 import { ResponseService } from 'src/app/interfaces/response';
+import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -28,7 +28,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   notifications = [];
   total: any;
 
-  constructor(private utils: UtilsService, public auth: AuthService, private _content: ContentService) {}
+  constructor(private utils: UtilsService, public auth: AuthService, private _content: ContentService,
+    @Inject(PLATFORM_ID) private platformId: object
+    ) {}
 
   ngOnInit() {
     this.getAmount();
@@ -66,6 +68,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   public getAmount() {
+    if (isPlatformBrowser(this.platformId)) {
     let count = 0;
     const interval = setInterval(() => {
       this.amount = localStorage.getItem('Amount');
@@ -75,6 +78,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (count === 3) {
       clearInterval(interval);
     }
+  }
   }
 
   public getNotications() {
@@ -94,3 +98,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
 }
+
+

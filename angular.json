@@ -44,7 +44,8 @@
               "src/assets",
               "src/manifest.webmanifest",
               "src/firebase-messaging-sw.js",
-              "src/.well-known/assetlinks.json"
+              "src/.well-known/assetlinks.json",
+              "src/web.config"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
@@ -64,7 +65,7 @@
             "namedChunks": true
           },
           "configurations": {
-            "prod": {
+            "production": {
               "index": {
                 "input": "src/index-prod.html",
                 "output": "index.html"
@@ -75,23 +76,23 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
+              "optimization": false,
               "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
+              "sourceMap": true,
+              "namedChunks": true,
+              "extractLicenses": false,
               "vendorChunk": false,
-              "buildOptimizer": true,
+              "buildOptimizer": false,
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "8mb",
+                  "maximumWarning": "16mb",
                   "maximumError": "16mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "100kb",
-                  "maximumError": "100kb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "1mb"
                 }
               ],
               "serviceWorker": true,
@@ -101,7 +102,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "1mb"
                 }
               ],
               "index": {
@@ -119,7 +120,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6mb"
+                  "maximumWarning": "16mb"
                 }
               ],
               "index": {
@@ -146,7 +147,10 @@
               "browserTarget": "clickam:build:production"
             },
             "qa": {
-              "browserTarget": "per-apl-webapp:build:qa"
+              "browserTarget": "clickam:build:qa"
+            },
+            "uat": {
+              "browserTarget": "clickam:build:uat"
             }
           }
         },
@@ -207,6 +211,115 @@
               "devServerTarget": "clickam:serve:production"
             }
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "externalDependencies": [
+              "firebase",
+              "@firebase",
+              "@angular/fire",
+              "@firebase/app",
+              "@firebase/database",
+              "@firebase/firestore",
+              "@firebase/functions",
+              "@firebase/performance",
+              "@firebase/remote-config",
+              "@firebase/util",
+              "@firebase/component"
+            ],
+            "outputPath": "dist/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "optimization": false,
+            "sourceMap": true,
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                ".",
+                "src/assets/styles"
+              ]
+            },
+            "extractLicenses": false
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "sourceMap": false,
+              "extractLicenses": true
+            },
+            "qa": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                }
+              ]
+            },
+            "uat": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "clickam:build",
+              "serverTarget": "clickam:server"
+            },
+            "qa": {
+              "browserTarget": "clickam:build:qa",
+              "serverTarget": "clickam:server:qa"
+            },
+            "uat": {
+              "browserTarget": "clickam:build:uat",
+              "serverTarget": "clickam:server:uat"
+            },
+            "production": {
+              "browserTarget": "clickam:build:production",
+              "serverTarget": "clickam:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routesFile": "src/prerender-routes.txt",
+            "guessRoutes": false
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "clickam:build:production",
+              "serverTarget": "clickam:server:production"
+            },
+            "development": {
+              "browserTarget": "clickam:build",
+              "serverTarget": "clickam:server"
+            },
+            "qa": {
+              "browserTarget": "clickam:build:qa",
+              "serverTarget": "clickam:server"
+            },
+            "uat": {
+              "browserTarget": "clickam:build:uat",
+              "serverTarget": "clickam:server"
+            }
+          },
+          "defaultConfiguration": "development"
         }
       }
     }

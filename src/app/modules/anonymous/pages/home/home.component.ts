@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy, ViewChild, TemplateRef, Inject, PLATFORM_ID } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
@@ -18,6 +18,7 @@ import { Meta } from '@angular/platform-browser';
 import { MasterDataService } from 'src/app/services/master-data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NewBusinessFormComponent } from '../../components/new-business-form/new-business-form.component';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -111,7 +112,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     private _snackBar: MatSnackBar,
     private metaTagService: Meta,
     private fb: FormBuilder,
-    private personalInfo: MasterDataService
+    private personalInfo: MasterDataService,
+    @Inject(PLATFORM_ID) private platformId: object
   ) {
     /**
      *  Verifica que en la ruta de inicio exista el parametro de email y activa el usuario
@@ -194,12 +196,14 @@ export class HomeComponent implements OnInit, OnDestroy {
           }
         });
       }
+      if (isPlatformBrowser(this.platformId)) {
       const interval = setInterval(() => {
         this.showModalPayment();
         if (this.paymentPending > 10000) {
           clearInterval(interval);
         }
       }, 3000);
+    }
 
       if (role === 'CLICKER') {
         const token = localStorage.getItem('ACCESS_TOKEN');
