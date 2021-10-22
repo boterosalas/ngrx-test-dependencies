@@ -34,7 +34,7 @@
             "stylePreprocessorOptions": {
               "includePaths": [".", "src/assets/styles"]
             },
-            "outputPath": "dist/clickam",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -228,7 +228,7 @@
               "@firebase/util",
               "@firebase/component"
             ],
-            "outputPath": "dist/clickam/server",
+            "outputPath": "dist/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json",
             "optimization": false,

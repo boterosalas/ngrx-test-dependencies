@@ -13,7 +13,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "dev:ssr": "ng run clickam:serve-ssr",
-    "serve:ssr": "node dist/clickam/server/main.js",
+    "serve:ssr": "node dist/server/main.js",
     "build:ssr": "ng build && ng run clickam:server",
     "prerender": "ng run clickam:prerender"
   },
