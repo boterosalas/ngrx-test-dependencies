@@ -1,5 +1,6 @@
 import { AfterContentInit, AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import moment from 'moment';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { UserService } from 'src/app/services/user.service';
@@ -41,8 +42,13 @@ export class CvComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private user: UserService
-  ) { }
+    private user: UserService,
+    private route: ActivatedRoute
+  ) {
+    this.route.params.subscribe((userId) => {
+      this.userId = userId.id
+    })
+   }
 
 
   ngOnInit(): void {
@@ -62,7 +68,7 @@ export class CvComponent implements OnInit, OnDestroy {
     const data = {
       start: this.dateFormHoja.controls.dateRange.value.startDate.format('YYYY-MM-DD'),
       end: this.dateFormHoja.controls.dateRange.value.endDate.format('YYYY-MM-DD'),
-      userId: this.data
+      userId: this.userId
     };
 
     this.getDatasHoja(data);
