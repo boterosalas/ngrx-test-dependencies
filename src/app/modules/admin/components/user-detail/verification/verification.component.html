@@ -33,12 +33,20 @@
     <div>
       <form [formGroup]="dataRejectionMessage">
         <mat-form-field class="w-100">
+          <mat-select (selectionChange)="selectMessage($event)" placeholder="{{ 'GENERIC.MESSAGE' | translate }}" id="message" formControlName="messageSel">
+            <mat-option *ngFor="let message of message" value="{{ message.value }}" matTooltip="{{ message.value }}">{{ message.value }}</mat-option>
+          </mat-select>
+          <mat-error id="requiredTypeId" *ngIf="dataRejectionMessage.controls.messageSel.invalid">{{
+            'GENERIC.REQUIRED' | translate: { formValue: '' }
+          }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100" *ngIf="showOther">
           <textarea
             matInput
             placeholder="Mensaje de rechazo"
             formControlName="message"
             type="text"
-            required
             class="text-area-heigth"
             value="{{ this.data.responseaccountbank ? this.data.responseaccountbank : '' }}"
           ></textarea>

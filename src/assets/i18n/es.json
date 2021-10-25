@@ -55,7 +55,8 @@
     "BUSINESS_CATEGORY": "Categoría del negocio",
     "SEE_DETAIL": "Ver detalle",
     "WIN10K": "Refiere y gana",
-    "NEW_TERMS": "<p>Actualizamos los términos y condiciones de </br> nuestro sitio para que sigas ganando dinero con Clickam.</p>"
+    "NEW_TERMS": "<p>Actualizamos los términos y condiciones de </br> nuestro sitio para que sigas ganando dinero con Clickam.</p>",
+    "MESSAGE":"Mensaje"
   },
   "FOOTER": {
     "SLOGAN": "Gana dinero por comprar y referir - Afiliados"

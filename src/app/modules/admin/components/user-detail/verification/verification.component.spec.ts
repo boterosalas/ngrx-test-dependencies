@@ -1,8 +1,9 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, tick } from '@angular/core/testing';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSelectChange } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -28,6 +29,7 @@ describe('VerificationComponent', () => {
   let fixture: ComponentFixture<VerificationComponent>;
 
   const mockUserService = jasmine.createSpyObj('UserService', ['getStatusVerification', 'verifiedUser', 'postUpdateResponseAccountBank']);
+  const mockDialogRef = jasmine.createSpyObj('MatDialogRef', ['close', 'afterClosed', 'componentInstance', 'event ', 'beforeClosed']);
 
   const data = {
     verified: true,
@@ -74,7 +76,7 @@ describe('VerificationComponent', () => {
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
         UtilsService,
-        { provide: MatDialogRef, useValue: MatDialogMock },
+        { provide: MatDialogRef, useValue: mockDialogRef },
         { provide: MAT_DIALOG_DATA, useValue: data },
         { provide: UserService, useValue: mockUserService },
       ]
@@ -88,12 +90,12 @@ describe('VerificationComponent', () => {
     component.accountStatements = response.objectResponse;
     mockUserService.getStatusVerification.and.returnValue(of(response.objectResponse));
     component.data = data;
+    spyOn(component, 'ngOnChanges').and.callThrough();
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
-    expect(mockUserService.getStatusVerification).toHaveBeenCalled();
   });
 
   it('change verified', () => {
@@ -113,12 +115,20 @@ describe('VerificationComponent', () => {
     expect(mockUserService.postUpdateResponseAccountBank).toHaveBeenCalled();
   });
 
-  // it('getStatusVerificationUser', () => {
-  //   mockUserService.getStatusVerification.and.returnValue(of(response2));
-  //   component.accountStatements = response2.objectResponse;
-  //   component.getStatusVerificationUser();
-  //   expect(mockUserService.getStatusVerification).toHaveBeenCalled();
-  // });
+  it('select change otro', () => {
+    const val = {
+      value: 'Otro'
+    }
+    component.selectMessage(val);
+    expect(component.showOther).toBeTruthy();
+  });
 
+  it('select change', () => {
+    const val = {
+      value: 'prueba'
+    }
+    component.selectMessage(val);
+    expect(component.showOther).toBeFalsy();
+  });
 
 });
