@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
-import { MatPaginator } from "@angular/material/paginator";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { MatBottomSheet } from "@angular/material/bottom-sheet";
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { LinksService } from 'src/app/services/links.service';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-links-historial',
@@ -22,6 +22,9 @@ export class LinksHistorialComponent implements OnInit {
   paginate: string;
   private subscription: Subscription = new Subscription();
   orderBy: string;
+  startDate:string;
+  endDate:string;
+  ordination:string;
   from: any;
   to: any;
   orderOptions: any;
@@ -58,20 +61,13 @@ export class LinksHistorialComponent implements OnInit {
     private links: LinksService,
     ngNavigatorShareService: NgNavigatorShareService,
     private fb: FormBuilder,
-    private _snackBar: MatSnackBar,
-    private dialog: MatBottomSheet
+    private dialog: MatBottomSheet,
+    private utils: UtilsService
   ) {
     this.ngNavigatorShareService = ngNavigatorShareService;
   }
 
   ngOnInit() {
-    this.orderOptions = [
-      { value: 'DATEDESC', description: 'Más recientes' },
-      { value: 'DATEASC', description: 'Menos recientes' },
-      { value: 'EFFECTIVEDESC', description: 'Más efectivo' },
-      { value: 'EFFECTIVEASC', description: 'Menos efectivo' },
-    ];
-
     this.getLinksHistory();
   }
 
@@ -79,41 +75,24 @@ export class LinksHistorialComponent implements OnInit {
     this.pageIndex = paginate;
     this.from = this.pageSize * this.pageIndex + 1 - 20;
     this.to = this.pageSize * (this.pageIndex + 1) - 20;
-    this.getLinksHistory(this.from, this.to);
+    this.getLinksHistory(this.from, this.to, this.orderBy, this.ordination, this.startDate, this.endDate);
   }
 
-  public getLinksHistory(from = 1, to = this.pageTo, orderBy = 'DATEDESC') {
-    const params = { from, to, orderBy };
+  public getLinksHistory(from = 1, to = this.pageTo, orderBy = '' , orderOrigin = '', startDate = '', endDate = '') {
+    const params = { from, to, orderOrigin , orderBy, startDate, endDate };
     this.subscription = this.links.getLinkHistory(params).subscribe((resp) => {
       this.totalItems = resp.total;
       this.dataSource = resp.linkHistory;
     });
   }
 
-  public order(option: string) {
-    this.pageIndex = 0;
-    this.getLinksHistory(1, this.pageTo, option);
-    this.orderValue = option;
-  }
-
-  /**
-   * Abre el mensaje de confirmacion de copiado del link
-   * @param message mensaje
-   * @param action accion
-   */
-
-  private openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 5000,
-    });
-  }
 
   /* To copy Text from Textbox */
   public copyInputMessage(inputElement: any) {
     inputElement.select();
     document.execCommand('copy');
     inputElement.setSelectionRange(0, 0);
-    this.openSnackBar('Se ha copiado el link al portapapeles', 'Cerrar');
+    this.utils.openSnackBar('Se ha copiado el link al portapapeles', 'Cerrar');
   }
 
   share() {
@@ -224,7 +203,22 @@ export class LinksHistorialComponent implements OnInit {
     });
   }
 
-  // ngOnDestroy() {
-  //   this.subscription.unsubscribe();
-  // }
+
+  sort(event) {
+    let name = event.active.toUpperCase();
+    const direction = event.direction.toUpperCase();
+    if (direction === '') {
+      name = '';
+    }
+    this.orderBy = name;
+    this.ordination = direction;
+    this.getLinksHistory(this.from, this.to, this.orderBy, this.ordination, this.startDate, this.endDate);
+  }
+
+  public filterDate(e) {
+    this.startDate = e.startDate;
+    this.endDate = e.endDate;
+    this.getLinksHistory(this.from, this.to, this.orderBy, this.ordination, this.startDate, this.endDate);
+  }
+
 }

@@ -348,7 +348,7 @@ export class LinksService {
 
   public getLinkHistory(params) {
     return this.http
-      .get(`${this.urlReports}${this.apiLinkHistory}?from=${params.from}&to=${params.to}&orderBy=${params.orderBy}`, this.httpOptions)
+      .get(`${this.urlReports}${this.apiLinkHistory}?from=${params.from}&to=${params.to}&orderBy&=${params.orderBy}&ordination=${params.orderOrigin}&start=${params.startDate}&end=${params.endDate}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(

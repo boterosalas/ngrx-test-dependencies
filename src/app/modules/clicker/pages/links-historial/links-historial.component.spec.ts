@@ -10,6 +10,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LinksService } from 'src/app/services/links.service';
 import { of } from 'rxjs/internal/observable/of';
+import { UtilsService } from 'src/app/services/utils.service';
+import { JwtModule } from '@auth0/angular-jwt';
 
 describe('LinksHistorialComponent', () => {
   let component: LinksHistorialComponent;
@@ -61,8 +63,21 @@ beforeEach(waitForAsync(() => {
         ClickerModule,
         HttpClientTestingModule,
         BrowserAnimationsModule,
+        JwtModule.forRoot({
+          config: {
+            tokenGetter: () => {
+              return localStorage.getItem('ACCESS_TOKEN');
+            },
+            throwNoTokenError: true,
+            allowedDomains: [],
+            disallowedRoutes: [],
+          },
+        }),
       ],
-      providers: [{ provide: LinksService, useValue: mockLinksService }],
+      providers: [
+        UtilsService,
+        { provide: LinksService, useValue: mockLinksService }
+      ],
     }).compileComponents();
     mockLinksService.getLinkHistory.and.returnValue(of(dataHistory));
   }));
@@ -85,13 +100,6 @@ beforeEach(waitForAsync(() => {
   it('open modal history', () => {
     component.dataHistory(historyModal);
     expect(dataHistory).not.toBeUndefined();
-  });
-
-  it('order', () => {
-    component.order('ASC');
-    expect(mockLinksService.getLinkHistory).toHaveBeenCalled();
-    component.pagination(pagination);
-    expect(mockLinksService.getLinkHistory).toHaveBeenCalled();
   });
 
   it('copyInputMessage', () => {

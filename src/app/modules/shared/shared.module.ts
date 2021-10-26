@@ -41,6 +41,8 @@ import { CardStoryComponent } from './components/card-story/card-story.component
 import { OnboardingSwiperComponent } from './components/onboarding-swiper/onboarding-swiper.component';
 import { SafePipe } from "src/app/pipes/safe,pipe";
 import { BackButtonComponent } from './components/atoms/back-button/back-button.component';
+import { DateRangeComponent } from './components/atoms/date-range/date-range.component';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 @NgModule({
   declarations: [
@@ -70,6 +72,7 @@ import { BackButtonComponent } from './components/atoms/back-button/back-button.
     CardStoryComponent,
     OnboardingSwiperComponent,
     BackButtonComponent,
+    DateRangeComponent,
   ],
   imports: [
     CommonModule,
@@ -89,6 +92,7 @@ import { BackButtonComponent } from './components/atoms/back-button/back-button.
     MatSidenavModule,
     MatIconModule,
     SlickCarouselModule,
+    NgxDaterangepickerMd.forRoot()
   ],
   exports: [
     SearchComponent,
@@ -117,7 +121,8 @@ import { BackButtonComponent } from './components/atoms/back-button/back-button.
     DialogStoriesComponent,
     CardStoryComponent,
     OnboardingSwiperComponent,
-    BackButtonComponent
+    BackButtonComponent,
+    DateRangeComponent
   ],
   entryComponents: [ModalGenericComponent, PopupComponent, DialogStoriesComponent, OnboardingSwiperComponent],
 })

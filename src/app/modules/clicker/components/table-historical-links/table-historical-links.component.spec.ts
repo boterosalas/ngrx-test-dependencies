@@ -5,6 +5,7 @@ import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-mater
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('TableHistoricalLinksComponent', () => {
   let component: TableHistoricalLinksComponent;
@@ -13,7 +14,13 @@ describe('TableHistoricalLinksComponent', () => {
 beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TableHistoricalLinksComponent],
-      imports: [AppMaterialModule, TranslateModule.forRoot(), SharedModule, NgxPaginationModule],
+      imports: [
+        AppMaterialModule,
+        TranslateModule.forRoot(),
+        SharedModule,
+        NgxPaginationModule,
+        BrowserAnimationsModule
+      ],
     }).compileComponents();
   }));
 
