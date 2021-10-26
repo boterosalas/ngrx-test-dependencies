@@ -8,6 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class TableHistoricalLinksComponent implements OnInit {
   @Input() dataSource;
   @Output() dataUser = new EventEmitter();
+  @Output() sortDataHistory = new EventEmitter();
   @Output() product = new EventEmitter();
   @Input() size;
   @Input() p;
@@ -24,4 +25,9 @@ export class TableHistoricalLinksComponent implements OnInit {
   infoProduct(dataSource) {
     this.product.emit(dataSource);
   }
+
+  sortData(event) {
+    this.sortDataHistory.emit(event);
+  }
+
 }

@@ -3,26 +3,14 @@
   img="/assets/img/banners/banner-historial-pagos-pc.jpg"
   imgMobile="/assets/img/banners/banner-historial-pagos-mobile.jpg"
 ></app-banner>
-<!-- <app-logo></app-logo> -->
 
 <div class="container historical">
-    <!-- <h1 class="border-bottom-orange-init">{{ 'HISTORICAL.HISTORY_LINKS' | translate }}</h1> -->
 
-    <div class="order border-bottom-gray" fxLayout="row" fxLayoutAlign="flex-start center">
-
-        <label class="mr-4 f-17 gray">Ordenar por: </label>
-        <mat-form-field>
-          <mat-select value="DATEDESC">
-              <mat-option *ngFor="let option of orderOptions" [value]="option.value" (click)="order(option.value)">
-                  <span>{{option.description}}</span></mat-option
-                >
-          </mat-select>
-        </mat-form-field>
-
-      </div>
+    <app-date-range (dates)="filterDate($event)"></app-date-range>
 
     <app-table-historical-links
     [dataSource]="dataSource"
+    (sortDataHistory)="sort($event)"
     (product)="dataHistory($event)"
     [size]="pageSize"
     [p]="pageIndex"
@@ -79,17 +67,6 @@
             </span>
           </button>
 
-          <!-- <button
-            mat-button
-            id="refer"
-            color="orange"
-            ngClass="{{classButtonRefer}}"
-            (click)="showReference()"
-          >
-            <span ngClass="{{classButtonRefer}}" fxLayoutAlign="center space-between">
-              Referir
-            </span>
-          </button> -->
 
           <button mat-button id="buy" color="orange" ngClass="orange-border {{ classButtonBuy }}" (click)="buy()">
             <span ngClass="{{ classButtonBuy }}" fxLayoutAlign="center space-between"> Comprar </span>
@@ -126,23 +103,6 @@
           Compartir</span
         >
       </button>
-<!--
-      <button
-        mat-button
-        ngClass="gtmrs  mb-2 mt-2 {{classButtonRefer}}"
-        (click)="showReference()"
-        fxLayout="row"
-        fxLayoutAlign="start start"
-      >
-        <span ngClass="gtmrs f-15 {{classButtonRefer}}" fxLayout="row" fxLayoutAlign="center center">
-          <img
-            ngClass="icon-compartir pr-2 {{classButtonRefer}}"
-            src="/assets/img/Referir.svg"
-            alt="user"
-          />
-          Referir
-        </span>
-      </button> -->
 
       <button mat-button ngClass="gtmrs  mb-2 mt-2 {{ classButtonBuy }}" (click)="buy()" fxLayout="row" fxLayoutAlign="start start">
         <span ngClass="gtmrs f-15 {{ classButtonBuy }}" fxLayout="row" fxLayoutAlign="center center">
@@ -152,86 +112,5 @@
       </button>
     </div>
   </div>
-  <!-- <br />
-  <form
-    class="forgotpassword-container"
-    [formGroup]="idCustomerForm"
-    fxLayout="column"
-    *ngIf="reference"
-  >
-    <span
-      (click)="backStep()"
-      class="cursor-pointer gray"
-      fxLayout="row"
-      fxLayoutAlign="start start"
-      fxFlex="12"
-    >
-      <mat-icon>keyboard_arrow_left</mat-icon>
-      <span class="text-back">{{ "BUTTONS.BACK" | translate}}</span>
-    </span>
-    <p>{{ "GENERIC.REFERENCE_IDENTIFICATION" | translate }}</p>
-    <mat-form-field appearance="outline" class="mt-2">
-      <input
-        matInput
-        class="p-2"
-        id="idcustomer"
-        type="text"
-        placeholder="N° de Documento"
-        formControlName="identification"
-        required
-      />
-      <mat-error
-        id="reuiredId"
-        *ngIf="
-          idCustomerForm.controls.identification.invalid &&
-          idCustomerForm.controls.identification.errors.required
-        "
-        >{{
-          "GENERIC.REQUIRED" | translate: { formValue: "Número de documento" }
-        }}</mat-error
-      >
-
-      <mat-error
-        id="maxId"
-        *ngIf="
-          idCustomerForm.controls.identification.invalid &&
-          idCustomerForm.controls.identification.errors.maxlength
-        "
-        >{{
-          "GENERIC.MAX_CHARACTERS"
-            | translate
-              : {
-                  maxchar:
-                    idCustomerForm.controls.identification.errors.maxlength
-                      .requiredLength
-                }
-        }}</mat-error
-      >
-
-      <mat-error
-        id="numberId"
-        *ngIf="
-          idCustomerForm.controls.identification.invalid &&
-          idCustomerForm.controls.identification.errors.pattern
-        "
-        >{{ "GENERIC.ONLY_NUMBERS" | translate }}</mat-error
-      >
-    </mat-form-field>
-
-    <div fxLayout="column">
-      <button
-        mat-raised-button
-        class="button button-100 p-1 gtmCrearCedulaSiguiente"
-        id="recoverPassword"
-        color="orange"
-        (click)="saveLinkReference()"
-        [disabled]="!idCustomerForm.valid"
-      >
-        <span class="gtmCrearCedulaSiguiente">{{
-          "GENERIC.ACCEPT" | translate
-        }}</span>
-      </button>
-
-    </div>
-  </form> -->
+ 
 </ng-template>
