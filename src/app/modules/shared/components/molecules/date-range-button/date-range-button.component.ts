@@ -1,16 +1,18 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import moment from 'moment';
 
 @Component({
-  selector: 'app-date-range',
-  templateUrl: './date-range.component.html',
-  styleUrls: ['./date-range.component.scss']
+  selector: 'app-date-range-button',
+  templateUrl: './date-range-button.component.html',
+  styleUrls: ['./date-range-button.component.scss']
 })
-export class DateRangeComponent implements OnInit {
+export class DateRangeButtonComponent implements OnInit {
 
   @Output() dates = new EventEmitter();
+  @Output() called = new EventEmitter();
   @Input() direction = 'row';
+  @Input() classLayout:string;
 
   maxDate = moment(new Date());
   dateRangeForm: FormGroup;
@@ -35,7 +37,7 @@ export class DateRangeComponent implements OnInit {
 
   ngOnInit(): void {
     this.dateRangeForm = this.fb.group({
-      dateRange: [],
+      dateRange: ['', Validators.required],
     });
   }
 
@@ -48,5 +50,10 @@ export class DateRangeComponent implements OnInit {
       this.dates.emit(dates);
     }
   }
+
+  public call() {
+    this.called.emit();
+  }
+
 
 }

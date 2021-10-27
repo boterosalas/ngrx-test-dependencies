@@ -24,11 +24,9 @@
                 class="form-control border-input mat-elevation-z1 p-2 border-radius"
               />
             </div>
-            <div class="download-files">
-              <button (click)="getReportRejected()" class="button-selected-label cursor-pointer">
-                Exportar
-                <i class="tio-download_from_cloud style-icon icon-update icon-download-file"></i>
-              </button>
+            <div class="download-files" fxLayoutGap="10px">
+              <app-button title="Exportar" (action)="getReportRejected()" classButton="shadow-purple" classIcon="tio-download_from_cloud style-icon"></app-button>
+              <app-button title="Procesar comisiones" (action)="generateCommisions()" classButton="shadow-yellow" color="yellow" classIcon="tio-play_circle style-icon"></app-button>
             </div>
           </div>
         </div>
@@ -43,7 +41,7 @@
     </div>
   </div>
   <div class="mat-elevation-z0 mt-4 mb-4">
-    <table mat-table [dataSource]="dataSource" class="users-table commissions-table" matSort (matSortChange)="sortCommission($event)">
+    <table mat-table [dataSource]="dataSource" class="users-table commissions-table w-100" matSort (matSortChange)="sortCommission($event)">
       <ng-container matColumnDef="identification">
         <th mat-header-cell class="pl-3" *matHeaderCellDef style="width: 10%" mat-sort-header="IDENTIFICATION">Cédula</th>
         <td mat-cell *matCellDef="let element" class="pl-3">
@@ -122,24 +120,25 @@
     <h3>Importar archivo de comisiones</h3>
     <div class="upload-files">
       <span>
-        <label for="rejected" class="button-selected-label cursor-pointer">
+        <label for="rejected" class="button-selected-label cursor-pointer shadow-purple">
           Comisiones rechazadas
           <i class="tio-upload_on_cloud style-icon icon-update icon-download-file"></i>
         </label>
         <input #inputFile (change)="handleFileInput($event, 'rejected')" id="rejected" type="file" multiple />
       </span>
       <span>
-        <label for="eliminated" class="button-selected-label cursor-pointer">
+        <label for="eliminated" class="button-selected-label cursor-pointer shadow-purple">
           Comisiones eliminadas
           <i class="tio-upload_on_cloud style-icon icon-update icon-download-file"></i>
         </label>
         <input #inputFile (change)="handleFileInput($event, 'eliminated')" id="eliminated" type="file" multiple />
       </span>
-      <button (click)="generateCommisions()" class="button-selected-label cursor-pointer" style="border: none">
-        Generar comisiones
-        <i class="tio-eject style-icon icon-update icon-download-file"></i>
-      </button>
     </div>
+  </div>
+  <br/>
+  <div class="import-files">
+    <h3>Exportar ordenes no finalizadas</h3>
+    <app-date-range-button classLayout="ng-hor" direction="column" (dates)="getDate($event)" (called)="exportOrderNotFinish()"></app-date-range-button>
   </div>
 </div>
 

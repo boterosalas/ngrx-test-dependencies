@@ -1,0 +1,8 @@
+<button (click)="actionButtton()" [id]="id" [ngClass]="classButton" mat-raised-button [color]="color" [(disabled)]="disabled">
+    <span fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+        <span class="mr-2">
+            {{ title }}
+        </span>
+        <i *ngIf="haveIcon" [ngClass]="classIcon"></i>
+    </span>
+</button>

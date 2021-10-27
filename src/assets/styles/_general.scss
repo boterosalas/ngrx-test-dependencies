@@ -474,6 +474,10 @@ body {
   color: $primary-color;
 }
 
+.yellow {
+  color: $yellow-button;
+}
+
 .check {
   color: $checkBox;
 }
@@ -492,6 +496,11 @@ body {
 
 .mat-orange {
   background: $primary-color;
+  color: $white;
+}
+
+.mat-yellow {
+  background: $yellow-button;
   color: $white;
 }
 

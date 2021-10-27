@@ -4,7 +4,7 @@
     
     <form class="form-relative" [formGroup]="dateRangeForm">
       
-      <div fxLayout="row">
+      <div fxLayout="row" [ngClass]="classLayout">
         <i class="tio-date_range icon-date"></i>
         <input
           formControlName="dateRange"
@@ -17,7 +17,11 @@
           ngxDaterangepickerMd
           class="form-control border-input mat-elevation-z1 p-2 border-radius"
         />
+
+        <app-button title="Exportar" (action)="call()" classButton="shadow-purple ml-3" classIcon="tio-download_from_cloud style-icon" [disabled]="!dateRangeForm.valid"></app-button>
+
       </div>
+
 
     </form>
 

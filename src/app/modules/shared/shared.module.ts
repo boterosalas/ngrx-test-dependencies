@@ -43,6 +43,8 @@ import { SafePipe } from "src/app/pipes/safe,pipe";
 import { BackButtonComponent } from './components/atoms/back-button/back-button.component';
 import { DateRangeComponent } from './components/atoms/date-range/date-range.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { ButtonComponent } from './components/atoms/button/button.component';
+import { DateRangeButtonComponent } from './components/molecules/date-range-button/date-range-button.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +75,8 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
     OnboardingSwiperComponent,
     BackButtonComponent,
     DateRangeComponent,
+    ButtonComponent,
+    DateRangeButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -122,7 +126,9 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
     CardStoryComponent,
     OnboardingSwiperComponent,
     BackButtonComponent,
-    DateRangeComponent
+    DateRangeComponent,
+    ButtonComponent,
+    DateRangeButtonComponent
   ],
   entryComponents: [ModalGenericComponent, PopupComponent, DialogStoriesComponent, OnboardingSwiperComponent],
 })
