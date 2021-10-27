@@ -7,13 +7,14 @@ import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { ResponseService } from 'src/app/interfaces/response';
-import { UserService } from 'src/app/services/user.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { LinksService } from 'src/app/services/links.service';
 import { ContentService } from 'src/app/services/content.service';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { dataAdditionalInfo } from '../../../../content/content-aditional-info-commissions';
 import Swal from 'sweetalert2';
+import { DataRangeInterface } from 'src/app/interfaces/dateRangeInterface';
+import { UserService } from 'src/app/services/user.service';
 moment.locale('es');
 @Component({
   selector: 'app-commissions',
@@ -38,6 +39,8 @@ export class CommissionsComponent implements OnInit {
   name: any;
   direction: any;
   dataAdditionalInfoValue: any;
+  startDate: string;
+  endDate: string;
 
   @ViewChild('templateAdditionalInfo', { static: false })
   templateAdditionalInfo: TemplateRef<any>;
@@ -65,7 +68,8 @@ export class CommissionsComponent implements OnInit {
     private _snackBar: MatSnackBar,
     public utils: UtilsService,
     private link: LinksService,
-    private contentService: ContentService
+    private contentService: ContentService,
+    private user: UserService
   ) {
     this.dataAdditionalInfoValue = dataAdditionalInfo;
 
@@ -312,4 +316,22 @@ export class CommissionsComponent implements OnInit {
   public generateCommisions(): void {
     this.contentService.generateComissions().subscribe();
   }
+
+  public getDate(e:DataRangeInterface) {
+    this.startDate = e.startDate;
+    this.endDate = e.endDate;
+  }
+
+  public exportOrderNotFinish() {
+    const params = {
+      startDate: this.startDate,
+      endDate : this.endDate
+    }
+
+    this.user.getreportordersnotinvoiced(params).subscribe((orders: ResponseService) => {
+      this.openSnackBar(orders.userMessage, 'Cerrar');
+    })
+
+  }
+
 }

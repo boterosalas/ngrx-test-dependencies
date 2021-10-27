@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { map, tap, delay, retryWhen, take } from 'rxjs/operators';
 import { ResponseService } from '../interfaces/response';
 import { BehaviorSubject } from 'rxjs';
+import { DataRangeInterface } from '../interfaces/dateRangeInterface';
 
 @Injectable({
   providedIn: 'root',
@@ -49,6 +50,7 @@ export class UserService {
   apiReportCambios = 'reports/getreportfeedback';
   apiDeleteComments = 'reports/getreportfeedbackdeletetion';
   apiReportStories = 'reports/getreportvisitstories';
+  apiOrdersNotInvoiced = 'reports/getreportordersnotinvoiced';
   token = localStorage.getItem('ACCESS_TOKEN');
   authorization = this.token;
   apiSaveNews = 'new/savenew';
@@ -225,6 +227,18 @@ export class UserService {
 
   public getReportStories() {
     return this.http.get(`${this.urlReports}${this.apiReportStories}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => { })
+        )
+      )
+    );
+  }
+
+  public getreportordersnotinvoiced(params: DataRangeInterface) {
+    return this.http.get(`${this.urlReports}${this.apiOrdersNotInvoiced}?start=${params.startDate}&end=${params.endDate}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),

@@ -180,6 +180,11 @@ input[type='file'] {
     text-decoration: underline;
   }
 
+  th{
+    text-transform: uppercase;
+    font-family: $font-galano-bold;
+  }
+
   th.mat-header-cell,
   td.mat-cell {
     padding: 5px 8px;
@@ -199,4 +204,8 @@ input[type='file'] {
     border: none;
     margin-right: 20px;
   }
+}
+
+.shadow-purple{
+  box-shadow: 0px 2px 4px $shadow-purple;
 }
