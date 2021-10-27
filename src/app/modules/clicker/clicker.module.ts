@@ -14,14 +14,11 @@ import { ReportComponent } from './pages/report/report.component';
 import { AuthGuard } from 'src/app/auth.guard';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ProfileFormComponent } from './components/profile-form/profile-form.component';
-import { TableHistorialComponent } from './components/table-historial/table-historial.component';
 import { AditionalFilesComponent } from './components/aditional-files/aditional-files.component';
 import { DragScrollModule } from 'ngx-drag-scroll';
 import { AditionalInfoFormComponent } from './components/aditional-info-form/aditional-info-form.component';
 import { DialogEditComponent } from './components/dialog-edit/dialog-edit.component';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
-import { CardDataComponent } from './components/card-data/card-data.component';
-import { CardDataTotalComponent } from './components/card-data-total/card-data-total.component';
 import { DialogHistoryComponent } from './components/dialog-history/dialog-history.component';
 import { ShareModule } from '@ngx-share/core';
 import { BussinessComponent } from './pages/bussiness/bussiness.component';
@@ -29,7 +26,6 @@ import { PaymentInfoComponent } from './components/payment-info/payment-info.com
 import { SliderDeliverComponent } from './components/slider-deliver/slider-deliver.component';
 import { LinksHistorialComponent } from './pages/links-historial/links-historial.component';
 import { TableHistoricalLinksComponent } from './components/table-historical-links/table-historical-links.component';
-import { TableDetailComissionComponent } from './components/table-detail-comission/table-detail-comission.component';
 import { ReferComponent } from './pages/refer/refer.component';
 import { ReferEmailComponent } from './components/refer-email/refer-email.component';
 import { ReferShareComponent } from './components/refer-share/refer-share.component';
@@ -123,19 +119,15 @@ const routes: Routes = [
     ReportComponent,
     ProfileComponent,
     ProfileFormComponent,
-    TableHistorialComponent,
     AditionalFilesComponent,
     AditionalInfoFormComponent,
     DialogEditComponent,
-    CardDataComponent,
-    CardDataTotalComponent,
     DialogHistoryComponent,
     BussinessComponent,
     PaymentInfoComponent,
     SliderDeliverComponent,
     LinksHistorialComponent,
     TableHistoricalLinksComponent,
-    TableDetailComissionComponent,
     ReferComponent,
     ReferEmailComponent,
     ReferShareComponent,
@@ -170,7 +162,7 @@ const routes: Routes = [
     NgxPaginationModule,
   ],
   exports:[
-    RouterModule
+    RouterModule,
   ],
   entryComponents: [DialogComponent, DialogEditComponent, DialogHistoryComponent, DialogImagePlayerComponent],
 })

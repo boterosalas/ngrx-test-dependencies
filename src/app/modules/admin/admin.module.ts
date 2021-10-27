@@ -89,6 +89,7 @@ import { BankAccountComponent } from './components/user-detail/bank-account/bank
 import { UserComponent } from './components/user-detail/user/user.component';
 import { VerificationComponent } from './components/user-detail/verification/verification.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { HistoryPaymentComponent } from './components/user-detail/history-payment/history-payment.component';
 
 const routes: Routes = [
   {
@@ -417,7 +418,8 @@ const routes: Routes = [
     InfoUserComponent,
     BankAccountComponent,
     UserComponent,
-    VerificationComponent
+    VerificationComponent,
+    HistoryPaymentComponent
   ],
   imports: [
     AngularEditorModule,

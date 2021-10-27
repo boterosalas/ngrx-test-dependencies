@@ -43,6 +43,15 @@
                  <app-cv [data]="dataUser.userId"></app-cv>
              </div>
            </mat-tab>
+
+            <mat-tab>
+             <ng-template mat-tab-label>
+               <span>HISTORIAL DE PAGOS</span>
+             </ng-template>
+             <div class="mt-3">
+                 <app-history-payment></app-history-payment>
+             </div>
+           </mat-tab>
        
          </mat-tab-group>
       </aside>

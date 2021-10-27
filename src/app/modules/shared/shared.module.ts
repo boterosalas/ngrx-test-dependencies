@@ -1,15 +1,15 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { SearchComponent } from "./components/search/search.component";
-import { AppMaterialModule } from "./app-material/app-material.module";
-import { TranslateModule } from "@ngx-translate/core";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { NotFoundComponent } from "./components/not-found/not-found.component";
-import { LoaderComponent } from "./components/loader/loader.component";
-import { PopupComponent } from "./components/popup/popup.component";
-import { DialogComponent } from "./components/dialog/dialog.component";
-import { FooterComponent } from "./components/footer/footer.component";
-import { FlexLayoutModule } from "@angular/flex-layout";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { SearchComponent } from './components/search/search.component';
+import { AppMaterialModule } from './app-material/app-material.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { PopupComponent } from './components/popup/popup.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { HeaderComponent } from './components/header/header.component';
 import { SociallinksComponent } from './components/sociallinks/sociallinks.component';
 import { TopComponent } from './components/top/top.component';
@@ -32,19 +32,24 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { BannerComponent } from './components/banner/banner.component';
 import { TrimPipe } from 'src/app/pipes/trim.pipe';
-import { SlickCarouselModule } from "ngx-slick-carousel";
-import { RemoveTagsPipe } from "src/app/pipes/remove-tags.pipe";
-import { MatRippleModule } from "@angular/material/core";
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { RemoveTagsPipe } from 'src/app/pipes/remove-tags.pipe';
+import { MatRippleModule } from '@angular/material/core';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import { CardStoryComponent } from './components/card-story/card-story.component';
 import { OnboardingSwiperComponent } from './components/onboarding-swiper/onboarding-swiper.component';
-import { SafePipe } from "src/app/pipes/safe,pipe";
+import { SafePipe } from 'src/app/pipes/safe,pipe';
 import { BackButtonComponent } from './components/atoms/back-button/back-button.component';
 import { DateRangeComponent } from './components/atoms/date-range/date-range.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { ButtonComponent } from './components/atoms/button/button.component';
 import { DateRangeButtonComponent } from './components/molecules/date-range-button/date-range-button.component';
+import { CardDataComponent } from './components/card-data/card-data.component';
+import { TableHistorialComponent } from './components/table-historial/table-historial.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { CardDataTotalComponent } from './components/card-data-total/card-data-total.component';
+import { TableDetailComissionComponent } from './components/table-detail-comission/table-detail-comission.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +82,10 @@ import { DateRangeButtonComponent } from './components/molecules/date-range-butt
     DateRangeComponent,
     ButtonComponent,
     DateRangeButtonComponent,
+    CardDataComponent,
+    CardDataTotalComponent,
+    TableHistorialComponent,
+    TableDetailComissionComponent
   ],
   imports: [
     CommonModule,
@@ -96,6 +105,7 @@ import { DateRangeButtonComponent } from './components/molecules/date-range-butt
     MatSidenavModule,
     MatIconModule,
     SlickCarouselModule,
+    NgxPaginationModule,
     NgxDaterangepickerMd.forRoot()
   ],
   exports: [
@@ -128,7 +138,11 @@ import { DateRangeButtonComponent } from './components/molecules/date-range-butt
     BackButtonComponent,
     DateRangeComponent,
     ButtonComponent,
-    DateRangeButtonComponent
+    DateRangeButtonComponent,
+    CardDataComponent,
+    CardDataTotalComponent,
+    TableHistorialComponent,
+    TableDetailComissionComponent
   ],
   entryComponents: [ModalGenericComponent, PopupComponent, DialogStoriesComponent, OnboardingSwiperComponent],
 })
