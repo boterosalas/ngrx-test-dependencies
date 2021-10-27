@@ -22,11 +22,12 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 moment.locale('es');
+
 describe('CommissionsComponent', () => {
   let component: CommissionsComponent;
   let fixture: ComponentFixture<CommissionsComponent>;
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll', 'afterAllClosed']);
-  const mockUserService = jasmine.createSpyObj('UserService', ['getExportNewsExcel', 'getAllNews']);
+  const mockUserService = jasmine.createSpyObj('UserService', ['getreportordersnotinvoiced']);
   const mockLinksService = jasmine.createSpyObj('LinksService', [
     'updateStatusCommissionFile',
     'getReportRejected',
@@ -34,6 +35,7 @@ describe('CommissionsComponent', () => {
     'deleteCommission',
     'deleteCommissionFile',
   ]);
+
   const mockContentService = jasmine.createSpyObj('ContentService', ['getCommissionsSearch']);
 
   const getCommissionsSearch = {
@@ -91,6 +93,7 @@ describe('CommissionsComponent', () => {
     userMessage: 'se ha enviado un correo a test@h.com',
     objectResponse: [],
   };
+
 beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [CommissionsComponent],
@@ -130,6 +133,7 @@ beforeEach(waitForAsync(() => {
         { provide: UserService, useValue: mockUserService },
         { provide: LinksService, useValue: mockLinksService },
         { provide: ContentService, useValue: mockContentService },
+        { provide: UserService, useValue: mockUserService },
       ],
     }).compileComponents();
     mockDialog.closeAll.and.returnValue(of(updateStatusCommissionFile));
@@ -190,6 +194,13 @@ beforeEach(waitForAsync(() => {
       component.deleteCommission();
       expect(mockLinksService.deleteCommission).toHaveBeenCalled();
     });
+
+    it('get orders not invoiced', () => {
+      mockUserService.getreportordersnotinvoiced.and.returnValue(of(updateStatusCommissionFile));
+      component.exportOrderNotFinish();
+      expect(mockUserService.getreportordersnotinvoiced).toHaveBeenCalled();
+    });
+
   });
 
   describe('pagination', () => {

@@ -14,6 +14,7 @@ import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-g
 import { dataAdditionalInfo } from '../../../../content/content-aditional-info-commissions';
 import Swal from 'sweetalert2';
 import { DataRangeInterface } from 'src/app/interfaces/dateRangeInterface';
+import { UserService } from 'src/app/services/user.service';
 moment.locale('es');
 @Component({
   selector: 'app-commissions',
@@ -67,7 +68,8 @@ export class CommissionsComponent implements OnInit {
     private _snackBar: MatSnackBar,
     public utils: UtilsService,
     private link: LinksService,
-    private contentService: ContentService
+    private contentService: ContentService,
+    private user: UserService
   ) {
     this.dataAdditionalInfoValue = dataAdditionalInfo;
 
@@ -326,7 +328,9 @@ export class CommissionsComponent implements OnInit {
       endDate : this.endDate
     }
 
-    console.log(params);
+    this.user.getreportordersnotinvoiced(params).subscribe((orders: ResponseService) => {
+      this.openSnackBar(orders.userMessage, 'Cerrar');
+    })
 
   }
 
