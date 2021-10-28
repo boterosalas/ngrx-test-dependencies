@@ -14,7 +14,6 @@ import { LinksService } from 'src/app/services/links.service';
   styleUrls: ['./history-payment.component.scss'],
 })
 export class HistoryPaymentComponent implements OnInit, OnDestroy {
-
   @ViewChild('templateBreak', { static: false })
   templateBreak: TemplateRef<any>;
   @ViewChild('templateBreak2', { static: false })
@@ -95,16 +94,16 @@ export class HistoryPaymentComponent implements OnInit, OnDestroy {
 
   private getInfomonth() {
     this.payment.getReportUser().subscribe((resp: any) => {
-      this.totalAcumulated = resp.objectResponse.generalResume.totalCommissions;
-      this.available = resp.objectResponse.money.accumulated;
-      this.account = resp.objectResponse.money.cutOffValue;
-      this.rejected = resp.objectResponse.money.rejected || '0';
-      this.conversionRate = resp.objectResponse.generalResume.conversionRate;
-      this.dataBreak1 = new MatTableDataSource<any>(resp.objectResponse.money.detailCutOff);
-      this.dataBreak2 = new MatTableDataSource<any>(resp.objectResponse.money.detailAccumulated);
       this.dataBreak3 = new MatTableDataSource<any>(resp.objectResponse.money.detailRejected);
+      this.dataBreak2 = new MatTableDataSource<any>(resp.objectResponse.money.detailAccumulated);
+      this.dataBreak1 = new MatTableDataSource<any>(resp.objectResponse.money.detailCutOff);
       this.totalLinks = resp.objectResponse.generalResume.totalLinks;
+      this.conversionRate = resp.objectResponse.generalResume.conversionRate;
       this.totalProducts = resp.objectResponse.generalResume.totalProducts;
+      this.rejected = resp.objectResponse.money.rejected || '0';
+      this.account = resp.objectResponse.money.cutOffValue;
+      this.available = resp.objectResponse.money.accumulated;
+      this.totalAcumulated = resp.objectResponse.generalResume.totalCommissions;
     });
   }
 
@@ -114,40 +113,40 @@ export class HistoryPaymentComponent implements OnInit, OnDestroy {
    */
 
   public userData(user) {
-    const paymentDate = user.paymentDate;
-    const bank = user.bank;
-    const amount = user.amount;
-    const title = 'Pago';
-    const detail = 'Detalle de ventas';
     let items;
+    const detail = 'Detalle de ventas';
+    const title = 'Pago';
+    const amount = user.amount;
+    const bank = user.bank;
+    const paymentDate = user.paymentDate;
 
     this.subscription = this.payment.getDetailPaymentClicker(paymentDate, this.userId).subscribe((resp) => {
       items = resp;
-
       this.dialog.open(DialogHistoryComponent, {
         width: '649px',
         data: {
-          items,
-          title,
-          detail,
-          paymentDate,
           bank,
           amount,
+          paymentDate,
+          detail,
+          title,
+          items,
         },
       });
     });
   }
 
   public break(key: string) {
-    let template;
-    let title;
     let id;
+    let title;
+    let template;
 
     switch (key) {
-      case 'commissions':
-        template = this.templateBreak;
-        title = 'Detalle comisiones de este mes';
-        id = 'break1-modal';
+
+      case 'rejected-commissions':
+        template = this.templateBreak3;
+        title = 'Detalle comisiones rechazadas';
+        id = 'break3-modal';
         break;
 
       case 'balance':
@@ -156,10 +155,10 @@ export class HistoryPaymentComponent implements OnInit, OnDestroy {
         id = 'break2-modal';
         break;
 
-      case 'rejected-commissions':
-        template = this.templateBreak3;
-        title = 'Detalle comisiones rechazadas';
-        id = 'break3-modal';
+      case 'commissions':
+        template = this.templateBreak;
+        title = 'Detalle comisiones de este mes';
+        id = 'break1-modal';
         break;
 
       default:
