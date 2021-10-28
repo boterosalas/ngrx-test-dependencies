@@ -15,12 +15,33 @@ import { DialogHistoryComponent } from '../../components/dialog-history/dialog-h
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TokenService } from 'src/app/services/token.service';
+
+export class MockUserInfo {
+  user = {
+    aud: 'Estudiantes',
+    documentType: 'Cédula de ciudadanía',
+    exp: 1635458280,
+    firstnames: 'ñañito',
+    idclicker: 'ñañito77',
+    identification: '1124587893',
+    iss: 'practincanetcore.com',
+    lastnames: 'betancur',
+    role: 'CLICKER',
+    userName: 'davidbet2@hotmail.com',
+    userid: '77',
+  };
+
+  userInfo(){
+    return this.user;
+  }
+}
 
 describe('ReportComponent', () => {
   let component: ReportComponent;
   let fixture: ComponentFixture<ReportComponent>;
 
-  let mockLinksService = jasmine.createSpyObj('LinksService', [
+  const mockLinksService = jasmine.createSpyObj('LinksService', [
     'getPayment',
     'getInfomonth',
     'getReports',
@@ -33,7 +54,7 @@ describe('ReportComponent', () => {
 
   const data = { users: [], total: 0 };
 
-  let infoMonth = {
+  const infoMonth = {
     generalResume: {
       totalCommissions: 0,
       totalLinks: 0,
@@ -53,7 +74,7 @@ describe('ReportComponent', () => {
       },
     ],
   };
-  let infoMonthNew = {
+  const infoMonthNew = {
     objectResponse: {
       generalResume: {
         totalCommissions: 0,
@@ -89,45 +110,49 @@ describe('ReportComponent', () => {
     date: '2019-11-10T20:33:01.207',
   };
 
-beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ReportComponent, DialogHistoryComponent, ModalGenericComponent],
-      imports: [
-        AppMaterialModule,
-        TranslateModule.forRoot({}),
-        HttpClientTestingModule,
-        BrowserAnimationsModule,
-        NgxPaginationModule,
-        RouterTestingModule.withRoutes([]),
-        JwtModule.forRoot({
-          config: {
-            tokenGetter: () => {
-              return localStorage.getItem('ACCESS_TOKEN');
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ReportComponent, DialogHistoryComponent, ModalGenericComponent],
+        imports: [
+          AppMaterialModule,
+          TranslateModule.forRoot({}),
+          HttpClientTestingModule,
+          BrowserAnimationsModule,
+          NgxPaginationModule,
+          RouterTestingModule.withRoutes([]),
+          JwtModule.forRoot({
+            config: {
+              tokenGetter: () => {
+                return localStorage.getItem('ACCESS_TOKEN');
+              },
+              throwNoTokenError: true,
+              allowedDomains: [],
+              disallowedRoutes: [],
             },
-            throwNoTokenError: true,
-            allowedDomains: [],
-            disallowedRoutes: [],
-          },
-        }),
-      ],
-      providers: [
-        { provide: LinksService, useValue: mockLinksService },
-        { provide: MatDialogRef, useValue: mockDialogRef },
-        { provide: MatDialog, useValue: mockDialog },
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
-    })
-      .overrideModule(BrowserDynamicTestingModule, {
-        set: {
-          entryComponents: [DialogHistoryComponent, ModalGenericComponent],
-        },
+          }),
+        ],
+        providers: [
+          { provide: TokenService, useClass: MockUserInfo },
+          { provide: LinksService, useValue: mockLinksService },
+          { provide: MatDialogRef, useValue: mockDialogRef },
+          { provide: MatDialog, useValue: mockDialog },
+        ],
+        schemas: [],
       })
-      .compileComponents();
-    mockLinksService.getPayment.and.returnValue(of(data));
-    mockLinksService.getReports.and.returnValue(of(infoMonth));
-    mockLinksService.getReportUser.and.returnValue(of(infoMonthNew));
-    mockLinksService.getDetailPaymentClicker.and.returnValue(of(getDetailPayment));
-  }));
+        .overrideModule(BrowserDynamicTestingModule, {
+          set: {
+            entryComponents: [DialogHistoryComponent, ModalGenericComponent],
+          },
+        })
+        .compileComponents();
+      // mockTokenService.userInfo.and.returnValue(of(userInfo));
+      mockLinksService.getPayment.and.returnValue(of(data));
+      mockLinksService.getReports.and.returnValue(of(infoMonth));
+      mockLinksService.getReportUser.and.returnValue(of(infoMonthNew));
+      mockLinksService.getDetailPaymentClicker.and.returnValue(of(getDetailPayment));
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ReportComponent);

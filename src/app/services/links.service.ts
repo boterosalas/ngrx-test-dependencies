@@ -331,8 +331,9 @@ export class LinksService {
       })
     );
   }
-  public getPayment(params) {
-    return this.http.get(`${this.urlComission}${this.apiHistory}?from=${params.from}&to=${params.to}`, this.httpOptions).pipe(
+
+  public getPayment(userId: string, params:any ) {
+    return this.http.get(`${this.urlComission}${this.apiHistory}?userid=${userId}&from=${params.from}&to=${params.to}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
@@ -378,8 +379,8 @@ export class LinksService {
     );
   }
 
-  public getDetailPaymentClicker(date: string) {
-    return this.http.get(`${this.urlComission}/${this.apigetDetailPaymentClicker}?paymentDate=${date}`, this.httpOptions).pipe(
+  public getDetailPaymentClicker(date: string, id: string) {
+    return this.http.get(`${this.urlComission}/${this.apigetDetailPaymentClicker}?userid=${id}&paymentDate=${date}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),

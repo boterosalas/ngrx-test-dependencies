@@ -1,8 +1,8 @@
 <div fxLayout="column" class="card-basic {{ classTotal }}">
 
   <img *ngIf="showIcon" class="position-absolute" src="assets/img/icon-clickam-white.svg" alt="fondo-clickam" />
-  <div style="display: flex !important; flex-direction: row !important; justify-content: space-between !important">
-    <div [fxLayout]="direction">
+  <div fxLayout="row" fxLayoutAlign="space-between start">
+    <div [fxLayout]="direction" class="info">
       <span class="payment-card">{{ radicado }} </span>
       <span class="text-white">
         {{ description }}

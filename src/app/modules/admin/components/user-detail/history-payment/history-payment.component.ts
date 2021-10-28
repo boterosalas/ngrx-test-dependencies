@@ -1,35 +1,19 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { DialogHistoryComponent } from 'src/app/modules/clicker/components/dialog-history/dialog-history.component';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import { LinksService } from 'src/app/services/links.service';
 
 @Component({
   selector: 'app-history-payment',
   templateUrl: './history-payment.component.html',
   styleUrls: ['./history-payment.component.scss'],
 })
-export class HistoryPaymentComponent implements OnInit {
-  dataSource: any;
-  pageIndex = 0;
-  pageSize = 20;
-  pageTo = 20;
-  totalItems: number;
-  paginate: string;
-  from: any;
-  to: any;
-
-  available: string;
-  conversionRate: any;
-  totalLinks: number;
-  totalProducts: number;
-  account: string;
-  rejected: string;
-
-  dataBreak1: any;
-  dataBreak2: any;
-  dataBreak3: any;
-  dataAcumulated: any;
-  totalAcumulated: string;
+export class HistoryPaymentComponent implements OnInit, OnDestroy {
 
   @ViewChild('templateBreak', { static: false })
   templateBreak: TemplateRef<any>;
@@ -40,15 +24,118 @@ export class HistoryPaymentComponent implements OnInit {
   @ViewChild('templateAcumulated', { static: false })
   templateAcumulated: TemplateRef<any>;
 
-  constructor(private dialog: MatDialog) {}
+  dataBreak1: any;
+  dataBreak2: any;
+  dataBreak3: any;
+  dataAcumulated: any;
+  totalAcumulated: string;
 
-  ngOnInit(): void {}
+  paymentUser: Array<any>;
+
+  dataSource: any;
+
+  available: string;
+  conversionRate: any;
+
+  totalLinks: number;
+  totalProducts: number;
+  account: string;
+  rejected: string;
+  identification: string;
+  private subscription: Subscription = new Subscription();
+
+  pageIndex = 0;
+  pageSize = 20;
+  pageTo = 20;
+  from: any;
+  to: any;
+  items = [];
+  paginate: string;
+  totalItems: number;
+
+  userId: string;
+
+  constructor(private route: ActivatedRoute, private payment: LinksService, private dialog: MatDialog) {
+    this.route.params.subscribe((userId) => {
+      this.userId = userId.id;
+    });
+  }
+
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
+  ngOnInit() {
+    this.getPayments();
+    this.getInfomonth();
+  }
 
   public pagination(paginate: any) {
     this.pageIndex = paginate;
     this.from = this.pageSize * this.pageIndex + 1 - 20;
     this.to = this.pageSize * (this.pageIndex + 1) - 20;
-    // this.getPayments(this.from, this.to);
+    this.getPayments(this.from, this.to);
+  }
+
+  /**
+   * Metodo para listar los pagos
+   * @param from desde
+   * @param to hasta
+   */
+
+  public getPayments(from = 1, to = this.pageTo) {
+    const params = { from, to };
+    this.subscription = this.payment.getPayment(this.userId, params).subscribe((payment) => {
+      this.totalItems = payment.total;
+      this.dataSource = payment.users;
+    });
+  }
+
+  /**
+   * Metodo para obtener el resumen del mes generados
+   */
+
+  private getInfomonth() {
+    this.payment.getReportUser().subscribe((resp: any) => {
+      this.totalAcumulated = resp.objectResponse.generalResume.totalCommissions;
+      this.available = resp.objectResponse.money.accumulated;
+      this.account = resp.objectResponse.money.cutOffValue;
+      this.rejected = resp.objectResponse.money.rejected || '0';
+      this.conversionRate = resp.objectResponse.generalResume.conversionRate;
+      this.dataBreak1 = new MatTableDataSource<any>(resp.objectResponse.money.detailCutOff);
+      this.dataBreak2 = new MatTableDataSource<any>(resp.objectResponse.money.detailAccumulated);
+      this.dataBreak3 = new MatTableDataSource<any>(resp.objectResponse.money.detailRejected);
+      this.totalLinks = resp.objectResponse.generalResume.totalLinks;
+      this.totalProducts = resp.objectResponse.generalResume.totalProducts;
+    });
+  }
+
+  /**
+   * Metodo para listar la info bancaria del usuario
+   * @param user usuario
+   */
+
+  public userData(user) {
+    const paymentDate = user.paymentDate;
+    const bank = user.bank;
+    const amount = user.amount;
+    const title = 'Pago';
+    const detail = 'Detalle de ventas';
+    let items;
+
+    this.subscription = this.payment.getDetailPaymentClicker(paymentDate, this.userId).subscribe((resp) => {
+      items = resp;
+
+      this.dialog.open(DialogHistoryComponent, {
+        width: '649px',
+        data: {
+          items,
+          title,
+          detail,
+          paymentDate,
+          bank,
+          amount,
+        },
+      });
+    });
   }
 
   public break(key: string) {
@@ -91,30 +178,7 @@ export class HistoryPaymentComponent implements OnInit {
     });
   }
 
-
-  public userData(user) {
-    console.log(user);
-    /*const paymentDate = user.paymentDate;
-    const bank = user.bank;
-    const amount = user.amount;
-    const title = 'Pago';
-    const detail = 'Detalle de ventas';
-    let items;
-
-    this.subscription = this.payment.getDetailPaymentClicker(paymentDate).subscribe((resp) => {
-      items = resp;
-
-      this.dialog.open(DialogHistoryComponent, {
-        width: '649px',
-        data: {
-          items,
-          title,
-          detail,
-          paymentDate,
-          bank,
-          amount,
-        },
-      });
-    });*/
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

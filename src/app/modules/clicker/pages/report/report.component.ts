@@ -47,8 +47,11 @@ export class ReportComponent implements OnInit, OnDestroy {
   templateBreak3: TemplateRef<any>;
   @ViewChild('templateAcumulated', { static: false })
   templateAcumulated: TemplateRef<any>;
+  userId:string;
 
-  constructor(private payment: LinksService, private auth: AuthService, private token: TokenService, private dialog: MatDialog) {}
+  constructor(private payment: LinksService, private auth: AuthService, private token: TokenService, private dialog: MatDialog) {
+    this.userId = token.user.userid;
+  }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -69,7 +72,7 @@ export class ReportComponent implements OnInit, OnDestroy {
 
   public getPayments(from = 1, to = this.pageTo) {
     const params = { from, to };
-    this.subscription = this.payment.getPayment(params).subscribe((payment) => {
+    this.subscription = this.payment.getPayment(this.userId, params).subscribe((payment) => {
       this.totalItems = payment.total;
       this.dataSource = payment.users;
     });
@@ -114,7 +117,7 @@ export class ReportComponent implements OnInit, OnDestroy {
     const detail = 'Detalle de ventas';
     let items;
 
-    this.subscription = this.payment.getDetailPaymentClicker(paymentDate).subscribe((resp) => {
+    this.subscription = this.payment.getDetailPaymentClicker(paymentDate, this.userId).subscribe((resp) => {
       items = resp;
 
       this.dialog.open(DialogHistoryComponent, {
