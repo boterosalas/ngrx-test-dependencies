@@ -1,35 +1,27 @@
-<div
-  class="card-basic {{ classTotal }}"
-  style="
-    position: relative;
-    display: flex !important;
-    display: -webkit-flex !important;
-    flex-direction: column !important;
-    -webkit-flex-direction: column !important;
-  "
->
-  <img class="position-absolute" src="assets/img/icon-clickam-white.svg" alt="fondo-clickam" />
+<div fxLayout="column" class="card-basic {{ classTotal }}">
+
+  <img *ngIf="showIcon" class="position-absolute" src="assets/img/icon-clickam-white.svg" alt="fondo-clickam" />
   <div style="display: flex !important; flex-direction: row !important; justify-content: space-between !important">
-    <div style="display: flex !important; flex-direction: column !important">
+    <div [fxLayout]="direction">
       <span class="payment-card">{{ radicado }} </span>
       <span class="text-white">
         {{ description }}
       </span>
     </div>
     <div>
-      <img class="z-index-top" [src]="imgTotal" alt="icono comisiones" />
+      <img *ngIf="showIcon" class="z-index-top" [src]="imgTotal" alt="icono comisiones" />
     </div>
   </div>
-  <div class="mt-2" style="display: flex !important; flex-direction: row !important; justify-content: space-between !important">
-    <div class="marco-mini-card" style="display: flex !important; flex-direction: column !important">
+  <div class="mt-2" class="z-index-1" fxLayout="row" fxLayoutAlign="space-between start ">
+    <div class="marco-mini-card" fxLayout="column">
       <p class="marco-p-text">{{ linksTotal }}</p>
       <span class="marco-span-text">Links Creados</span>
     </div>
-    <div class="marco-mini-card" style="display: flex !important; flex-direction: column !important">
+    <div class="marco-mini-card" fxLayout="column">
       <p class="marco-p-text">{{ productosTotales }}</p>
       <span class="marco-span-text">Productos vendidos</span>
     </div>
-    <div class="marco-mini-card" style="display: flex !important; flex-direction: column !important">
+    <div class="marco-mini-card" fxLayout="column">
       <p class="marco-p-text">{{ conversionRate }}%</p>
       <span class="marco-span-text">Tasa de conversión</span>
     </div>

@@ -6,22 +6,31 @@
   padding: 10px;
   background: #fff;
   box-shadow: 0px 0px 4px 0px #00000029;
-  min-width: 130px;
   margin-right: 10px;
+  position: relative;
+}
+
+.mw{
+  min-width: 130px;
+}
+
+.widht-card{
+  width: 335px;
 }
 
 .icon-alert {
   width: 25px;
 }
 
+
+
 .color-card-2 {
   background: transparent linear-gradient(90deg, #735cf2 0%, #968bf4 100%) 0% 0% no-repeat padding-box;
   border-radius: 10px !important;
   height: 142px;
-  padding-top: 20px !important;
-  padding-left: 24px !important;
-  width: 335px;
+  box-shadow: 0px 16px 16px #7D6AF21A;
 }
+
 @media screen and (max-width: 425px) {
   .color-card-2 {
     width: 100%;
@@ -72,4 +81,35 @@
   margin-bottom: 0px;
   color: #ffffff;
   font-size: 11px;
+}
+
+.padding-card{
+  padding-top: 20px !important;
+  padding-left: 24px !important;
+}
+
+.admin{
+  align-items: center;
+  justify-content: center;
+  width: 190px;
+  .text-white{
+    font-family: $font-galano;
+  }
+  .payment-card{
+    font-size: 16px;
+  }
+  .icon-alert{
+    position:absolute;
+    top: 10px;
+    right: 10px;
+  }
+  .info{
+    text-align: center;
+  }
+
+  .marco-mini-card{
+    border: none;
+    width: 62px;
+  }
+
 }

@@ -1,16 +1,7 @@
-<div
-  class="card {{ classCard }}"
-  style="
-    position: relative;
-    display: flex !important;
-    display: -webkit-flex !important;
-    flex-direction: column !important;
-    -webkit-flex-direction: column !important;
-  "
->
-  <img class="position-absolute" src="assets/img/icon-clickam-white.svg" alt="fondo-clickam" />
-  <div style="display: flex !important; flex-direction: row !important; justify-content: space-between !important; z-index: 1">
-    <div style="display: flex !important; flex-direction: column !important">
+<div fxLayout="column" class="card {{ classCard }}">
+  <img *ngIf="showIcon" class="position-absolute" src="assets/img/icon-clickam-white.svg" alt="fondo-clickam" />
+  <div class="z-index-1 info" fxLayout="row" fxLayoutAlign="space-between start ">
+    <div [fxLayout]="direction">
       <span class="payment-card">{{ number }}</span>
       <span class="text-white">
         {{ text }}
@@ -24,7 +15,7 @@
       </span>
     </div>
     <div>
-      <img class="z-index-top" [src]="imgCard" alt="icono comisiones" />
+      <img *ngIf="showIcon" class="z-index-1" [src]="imgCard" alt="icono comisiones" />
     </div>
   </div>
   <a class="button-card  mt-2 cursor-pointer {{ Classtag }}" (click)="detail()">
