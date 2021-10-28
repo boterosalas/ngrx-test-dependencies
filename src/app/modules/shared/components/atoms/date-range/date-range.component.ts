@@ -9,12 +9,11 @@ import moment from 'moment';
 })
 export class DateRangeComponent implements OnInit {
 
+  maxDate = moment(new Date());
+
   @Output() dates = new EventEmitter();
   @Input() direction = 'row';
 
-  maxDate = moment(new Date());
-  dateRangeForm: FormGroup;
-  placeholder = 'Seleccione las fechas';
   locale = {
     locale: 'es',
     direction: 'ltr', // could be rtl
@@ -29,6 +28,9 @@ export class DateRangeComponent implements OnInit {
     firstDay: 1, // first day is monday
   };
 
+  placeholder = 'Seleccione las fechas';
+  dateRangeForm: FormGroup;
+
   constructor(
     private fb: FormBuilder
   ) { }
@@ -40,10 +42,10 @@ export class DateRangeComponent implements OnInit {
   }
 
   public getDate(e) {
-    if(e.endDate !== null && e.startDate) {
+    if( e.startDate &&  e.endDate !== null) {
       const dates = {
-        startDate: moment(e.startDate._d).format('YYYY-MM-DD'),
-        endDate: moment(e.endDate._d).format('YYYY-MM-DD')
+        endDate: moment(e.endDate._d).format('YYYY-MM-DD'),
+        startDate: moment(e.startDate._d).format('YYYY-MM-DD')
       };
       this.dates.emit(dates);
     }
