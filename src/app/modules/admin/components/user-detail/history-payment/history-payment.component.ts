@@ -1,44 +1,20 @@
-import { Component, OnInit, ViewChild, OnDestroy, TemplateRef } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { LinksService } from 'src/app/services/links.service';
-import { AuthService } from 'src/app/services/auth.service';
-import { TokenService } from 'src/app/services/token.service';
-import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
-import { DialogHistoryComponent } from '../../components/dialog-history/dialog-history.component';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { DialogHistoryComponent } from 'src/app/modules/clicker/components/dialog-history/dialog-history.component';
+import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import { LinksService } from 'src/app/services/links.service';
 
 @Component({
-  selector: 'app-report',
-  templateUrl: './report.component.html',
-  styleUrls: ['./report.component.scss'],
+  selector: 'app-history-payment',
+  templateUrl: './history-payment.component.html',
+  styleUrls: ['./history-payment.component.scss'],
 })
-export class ReportComponent implements OnInit, OnDestroy {
-  paymentUser: Array<any>;
-  dataSource: any;
-  pageIndex = 0;
-  pageSize = 20;
-  pageTo = 20;
-  totalItems: number;
-  paginate: string;
-  available: string;
-  conversionRate: any;
-  totalLinks: number;
-  totalProducts: number;
-  account: string;
-  rejected: string;
-  isLoggedIn: any;
-  identification: string;
-  private subscription: Subscription = new Subscription();
-  from: any;
-  to: any;
-  items = [];
-  dataBreak1: any;
-  dataBreak2: any;
-  dataBreak3: any;
-  dataAcumulated: any;
-  totalAcumulated: string;
+export class HistoryPaymentComponent implements OnInit, OnDestroy {
+
   @ViewChild('templateBreak', { static: false })
   templateBreak: TemplateRef<any>;
   @ViewChild('templateBreak2', { static: false })
@@ -47,21 +23,56 @@ export class ReportComponent implements OnInit, OnDestroy {
   templateBreak3: TemplateRef<any>;
   @ViewChild('templateAcumulated', { static: false })
   templateAcumulated: TemplateRef<any>;
-  userId:string;
 
-  constructor(private payment: LinksService, private auth: AuthService, private token: TokenService, private dialog: MatDialog) {
-    this.userId = token.user.userid;
+  dataBreak1: any;
+  dataBreak2: any;
+  dataBreak3: any;
+  dataAcumulated: any;
+  totalAcumulated: string;
+
+  paymentUser: Array<any>;
+
+  dataSource: any;
+
+  available: string;
+  conversionRate: any;
+
+  totalLinks: number;
+  totalProducts: number;
+  account: string;
+  rejected: string;
+  identification: string;
+  private subscription: Subscription = new Subscription();
+
+  pageIndex = 0;
+  pageSize = 20;
+  pageTo = 20;
+  from: any;
+  to: any;
+  items = [];
+  paginate: string;
+  totalItems: number;
+
+  userId: string;
+
+  constructor(private route: ActivatedRoute, private payment: LinksService, private dialog: MatDialog) {
+    this.route.params.subscribe((userId) => {
+      this.userId = userId.id;
+    });
   }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit() {
-    this.isLoggedIn = this.auth.isLoggedIn();
-    if (this.isLoggedIn) {
-      this.identification = this.token.userInfo().identification;
-      this.getInfomonth();
-      this.getPayments();
-    }
+    this.getPayments();
+    this.getInfomonth();
+  }
+
+  public pagination(paginate: any) {
+    this.pageIndex = paginate;
+    this.from = this.pageSize * this.pageIndex + 1 - 20;
+    this.to = this.pageSize * (this.pageIndex + 1) - 20;
+    this.getPayments(this.from, this.to);
   }
 
   /**
@@ -76,13 +87,6 @@ export class ReportComponent implements OnInit, OnDestroy {
       this.totalItems = payment.total;
       this.dataSource = payment.users;
     });
-  }
-
-  public pagination(paginate: any) {
-    this.pageIndex = paginate;
-    this.from = this.pageSize * this.pageIndex + 1 - 20;
-    this.to = this.pageSize * (this.pageIndex + 1) - 20;
-    this.getPayments(this.from, this.to);
   }
 
   /**

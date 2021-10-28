@@ -17,6 +17,8 @@ export class CardDataComponent implements OnInit {
   @Input() imgCard: string;
   @Input() totalLinks: number;
   @Input() totalProducts: number;
+  @Input() showIcon = true;
+  @Input() direction = 'column';
 
   @Input() total: boolean;
   @Output() openDetail = new EventEmitter();

@@ -1,45 +1,24 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ReportComponent } from './report.component';
-import { JwtModule } from '@auth0/angular-jwt';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
-import { TranslateModule } from '@ngx-translate/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { LinksService } from 'src/app/services/links.service';
-import { of } from 'rxjs/internal/observable/of';
-import { RouterTestingModule } from '@angular/router/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { DialogHistoryComponent } from '../../components/dialog-history/dialog-history.component';
-import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { JwtModule } from '@auth0/angular-jwt';
+import { TranslateModule } from '@ngx-translate/core';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { TokenService } from 'src/app/services/token.service';
+import { of } from 'rxjs/internal/observable/of';
+import { DialogHistoryComponent } from 'src/app/modules/clicker/components/dialog-history/dialog-history.component';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import { LinksService } from 'src/app/services/links.service';
 
-export class MockUserInfo {
-  user = {
-    aud: 'Estudiantes',
-    documentType: 'Cédula de ciudadanía',
-    exp: 1635458280,
-    firstnames: 'ñañito',
-    idclicker: 'ñañito77',
-    identification: '1124587893',
-    iss: 'practincanetcore.com',
-    lastnames: 'betancur',
-    role: 'CLICKER',
-    userName: 'davidbet2@hotmail.com',
-    userid: '77',
-  };
+import { HistoryPaymentComponent } from './history-payment.component';
 
-  userInfo(){
-    return this.user;
-  }
-}
-
-describe('ReportComponent', () => {
-  let component: ReportComponent;
-  let fixture: ComponentFixture<ReportComponent>;
+describe('HistoryPaymentComponent', () => {
+  let component: HistoryPaymentComponent;
+  let fixture: ComponentFixture<HistoryPaymentComponent>;
 
   const mockLinksService = jasmine.createSpyObj('LinksService', [
     'getPayment',
@@ -110,55 +89,49 @@ describe('ReportComponent', () => {
     date: '2019-11-10T20:33:01.207',
   };
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [ReportComponent, DialogHistoryComponent, ModalGenericComponent],
-        imports: [
-          AppMaterialModule,
-          TranslateModule.forRoot({}),
-          HttpClientTestingModule,
-          BrowserAnimationsModule,
-          NgxPaginationModule,
-          RouterTestingModule.withRoutes([]),
-          JwtModule.forRoot({
-            config: {
-              tokenGetter: () => {
-                return localStorage.getItem('ACCESS_TOKEN');
-              },
-              throwNoTokenError: true,
-              allowedDomains: [],
-              disallowedRoutes: [],
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [
+        AppMaterialModule,
+        TranslateModule.forRoot({}),
+        HttpClientTestingModule,
+        BrowserAnimationsModule,
+        NgxPaginationModule,
+        RouterTestingModule.withRoutes([]),
+        JwtModule.forRoot({
+          config: {
+            tokenGetter: () => {
+              return localStorage.getItem('ACCESS_TOKEN');
             },
-          }),
-        ],
-        providers: [
-          { provide: TokenService, useClass: MockUserInfo },
-          { provide: LinksService, useValue: mockLinksService },
-          { provide: MatDialogRef, useValue: mockDialogRef },
-          { provide: MatDialog, useValue: mockDialog },
-        ],
-        schemas: [],
-      })
-        .overrideModule(BrowserDynamicTestingModule, {
-          set: {
-            entryComponents: [DialogHistoryComponent, ModalGenericComponent],
+            throwNoTokenError: true,
+            allowedDomains: [],
+            disallowedRoutes: [],
           },
-        })
-        .compileComponents();
-      // mockTokenService.userInfo.and.returnValue(of(userInfo));
-      mockLinksService.getPayment.and.returnValue(of(data));
-      mockLinksService.getReports.and.returnValue(of(infoMonth));
-      mockLinksService.getReportUser.and.returnValue(of(infoMonthNew));
-      mockLinksService.getDetailPaymentClicker.and.returnValue(of(getDetailPayment));
+        }),
+      ],
+      providers: [
+        { provide: LinksService, useValue: mockLinksService },
+        { provide: MatDialogRef, useValue: mockDialogRef },
+        { provide: MatDialog, useValue: mockDialog },
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
     })
-  );
+      .overrideModule(BrowserDynamicTestingModule, {
+        set: {
+          entryComponents: [DialogHistoryComponent, ModalGenericComponent],
+        },
+      })
+    .compileComponents();
+    mockLinksService.getPayment.and.returnValue(of(data));
+    mockLinksService.getReports.and.returnValue(of(infoMonth));
+    mockLinksService.getReportUser.and.returnValue(of(infoMonthNew));
+    mockLinksService.getDetailPaymentClicker.and.returnValue(of(getDetailPayment));
+  });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReportComponent);
+    fixture = TestBed.createComponent(HistoryPaymentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    component.identification = '123456789';
   });
 
   it('should create', () => {
@@ -199,4 +172,5 @@ describe('ReportComponent', () => {
     component.break('');
     expect(mockDialog.open).toBeTruthy();
   });
+
 });

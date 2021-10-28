@@ -4,10 +4,8 @@
   img="/assets/img/banners/banner-reportes-pc.jpg"
   imgMobile="/assets/img/banners/banner-reportes-mobile.jpg"
 ></app-banner>
-<!-- <app-logo></app-logo> -->
 
 <div class="container m-t4 fade-in">
-  <!-- <h1 class="border-bottom-orange-init" id="reportsTitle">{{ "REPORTS.REPORTS" | translate }}</h1> -->
   <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px">
     <div fxLayout="column" fxFlex="35" fxFlex.lt-md="100">
       <div fxLayout="row" class="mt-4 mb-2">
@@ -15,7 +13,7 @@
           <app-card-data
             [number]="account | currency: '':'symbol':'1.0-0'"
             Classtag="gtmReportesClicMisComisionesVerDetalle1"
-            classCard="color-card"
+            classCard="color-card mw widht-card padding-card"
             imgCard="assets/img/icon-com.svg"
             text="Comisiones de este mes"
             textToolTip="Las compras de tus referidos efectivas que se generen por medio de tus links durante el mes, se pagarán al siguiente mes entre los días 15 y 20."
@@ -28,7 +26,7 @@
           <app-card-data
             [number]="available | currency: '':'symbol':'1.0-0'"
             Classtag="gtmReportesClicMisComisionesVerDetalle2"
-            classCard="color-card-1"
+            classCard="color-card-1 mw widht-card padding-card"
             imgCard="assets/img/icon-pay.svg"
             text="Saldo pendiente por pagar"
             textToolTip="Este dinero corresponde a los saldos acumulados en los saldos anteriores, y te será pagado cuando completes el monto mínimo ."
@@ -41,7 +39,7 @@
           <app-card-data
             [number]="rejected | currency: '':'symbol':'1.0-0'"
             Classtag="gtmReportesClicMisComisionesVerDetalle3"
-            classCard="color-card-3"
+            classCard="color-card-3 mw widht-card padding-card"
             imgCard="assets/img/icon-rejected-com.svg"
             text="Comisiones rechazadas"
             textToolTip="Estas comisiones no se hicieron efectivas, ya que el negocio confirmó que la compra no fue realizada de manera exitosa."
@@ -53,7 +51,7 @@
         <app-card-data-total
           [radicado]="totalAcumulated | currency: '':'symbol':'1.0-0'"
           description="Total comisiones"
-          classTotal="color-card-2"
+          classTotal="color-card-2 mw widht-card padding-card"
           [linksTotal]="totalLinks"
           [productosTotales]="totalProducts"
           [conversionRate]="conversionRate"
@@ -61,8 +59,6 @@
           Classtag="gtmReportesClicMisComisionesSaldoAcumulado"
         ></app-card-data-total>
       </div>
-      <!-- <p class="mb-0">{{ 'REPORTS.AVAILABLE_TEXT' | translate }}</p>
-      <p class="mb-0">{{ 'REPORTS.ACCOUNT_TEXT' | translate }}</p> -->
     </div>
     <div fxLayout="row" class="w-100">
       <div fxLayout="column" class="w-100" fxLflex="100">

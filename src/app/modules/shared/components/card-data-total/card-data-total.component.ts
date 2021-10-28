@@ -16,6 +16,8 @@ export class CardDataTotalComponent implements OnInit {
   @Input() linksTotal: number;
   @Input() productosTotales: number;
   @Input() conversionRate: number;
+  @Input() showIcon = true;
+  @Input() direction = 'column';
 
   @Output() openDetail = new EventEmitter();
 
