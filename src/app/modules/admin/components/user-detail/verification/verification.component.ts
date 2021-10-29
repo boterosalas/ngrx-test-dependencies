@@ -77,7 +77,7 @@ export class VerificationComponent implements OnChanges, OnInit, OnDestroy {
     if(this.data.verified === 'Información errónea' || this.data.verified === 'Información incompleta') {
       this.enableRejectionMessage = true;
     } else {
-      this.enableRejectionMessage = true;
+      this.enableRejectionMessage = false;
     }
   }
 
