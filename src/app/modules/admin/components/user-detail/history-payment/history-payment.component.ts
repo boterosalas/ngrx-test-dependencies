@@ -93,7 +93,7 @@ export class HistoryPaymentComponent implements OnInit, OnDestroy {
    */
 
   private getInfomonth() {
-    this.payment.getReportUser().subscribe((resp: any) => {
+    this.payment.getReportUser(this.userId).subscribe((resp: any) => {
       this.dataBreak3 = new MatTableDataSource<any>(resp.objectResponse.money.detailRejected);
       this.dataBreak2 = new MatTableDataSource<any>(resp.objectResponse.money.detailAccumulated);
       this.dataBreak1 = new MatTableDataSource<any>(resp.objectResponse.money.detailCutOff);

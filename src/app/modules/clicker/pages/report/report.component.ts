@@ -90,7 +90,7 @@ export class ReportComponent implements OnInit, OnDestroy {
    */
 
   private getInfomonth() {
-    this.payment.getReportUser().subscribe((resp: any) => {
+    this.payment.getReportUser(this.userId).subscribe((resp: any) => {
       this.totalAcumulated = resp.objectResponse.generalResume.totalCommissions;
       this.available = resp.objectResponse.money.accumulated;
       this.account = resp.objectResponse.money.cutOffValue;

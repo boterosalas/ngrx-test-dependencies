@@ -349,7 +349,7 @@ export class LinksService {
 
   public getLinkHistory(params) {
     return this.http
-      .get(`${this.urlReports}${this.apiLinkHistory}?from=${params.from}&to=${params.to}&orderBy&=${params.orderBy}&ordination=${params.orderOrigin}&start=${params.startDate}&end=${params.endDate}`, this.httpOptions)
+      .get(`${this.urlReports}${this.apiLinkHistory}?from=${params.from}&to=${params.to}&orderBy=${params.orderBy}&ordination=${params.orderOrigin}&start=${params.startDate}&end=${params.endDate}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(
@@ -467,8 +467,8 @@ export class LinksService {
     );
   }
 
-  public getReportUser() {
-    return this.http.get(`${this.ulrReport}${this.apiGetReport}`, this.httpOptions).pipe(
+  public getReportUser(id?:string) {
+    return this.http.get(`${this.ulrReport}${this.apiGetReport}?userid=${id}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),

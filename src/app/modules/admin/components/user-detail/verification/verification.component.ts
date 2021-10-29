@@ -137,7 +137,6 @@ export class VerificationComponent implements OnChanges, OnInit, OnDestroy {
     if (this.sendMessage === 'Otro') {
       this.sendMessage = this.dataRejectionMessage.controls.message.value;
     }
-    console.log(this.sendMessage);
     const datos = {
       userId: this.data.userId,
       message: this.sendMessage,

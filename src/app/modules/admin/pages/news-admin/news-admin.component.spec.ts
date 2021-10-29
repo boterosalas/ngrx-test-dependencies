@@ -42,6 +42,7 @@ describe('NewsAdminComponent', () => {
     objectResponse: {
       effectiveness: 0.13,
       id: 0,
+      totalqualification: 1,
       totalinprogress: 4,
       totalnovelties: 56,
       totalpending: 45,

@@ -33,6 +33,7 @@ export class NewsAdminComponent implements OnInit {
   templateFilter: TemplateRef<any>;
   export = false;
   dataSource: any;
+  totalqualification:number;
   filterData = {
     searchText: '',
     from: null,
@@ -170,6 +171,7 @@ export class NewsAdminComponent implements OnInit {
 
   public getKPI() {
     this.subscription = this.kpi.getkpiNovelties(this.filterData).subscribe((resp) => {
+      this.totalqualification = resp.totalqualification;
       this.itemsRowOne = this.itemsRowOne.map((item) => {
         if (item.code === 'satisfaction' && resp.satisfaction) {
           return {

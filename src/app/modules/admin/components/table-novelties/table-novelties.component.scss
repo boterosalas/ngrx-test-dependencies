@@ -2,6 +2,12 @@
 @import 'general';
 @import 'animations';
 
+table{
+  th{
+    font-family: $font-galano-bold;
+  }
+}
+
 .border-input {
   border: none;
   outline: none;
