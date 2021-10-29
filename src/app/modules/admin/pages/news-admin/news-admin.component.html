@@ -39,23 +39,46 @@
           <i [class]="item.icon"></i>
         </div>
         <div class="right">
-          <h3>{{ item.title }}</h3>
+          <span fxLayout="row" fxLayoutGap="10px">
+            <h3>{{ item.title }}</h3> 
+            <span>({{totalqualification}})</span>
+          </span>
           <div class="items">
             <div class="item">
-              <img src="/assets/img/status/llorando.svg" alt="" />
-              <span>{{ item.values.cry | number: '1.0' }}%</span>
+              <span fxLayout="row">
+                <img src="/assets/img/status/llorando.svg" alt="llorando" />
+              </span>
+              <div fxLayout="column">
+                <span>{{ item.values.cry | number: '1.0' }}%</span>
+                <span class="qualification">({{totalCry}})</span>
+              </div>
             </div>
             <div class="item">
-              <img src="/assets/img/status/feliz.svg" alt="" />
-              <span>{{ item.values.happy | number: '1.0' }}%</span>
+              <span fxLayout="row">
+                <img src="/assets/img/status/feliz.svg" alt="feliz" />
+              </span>
+              <div fxLayout="column">
+                <span>{{ item.values.happy | number: '1.0' }}%</span>
+                <span class="qualification">({{totalHappy}})</span>
+              </div>
             </div>
             <div class="item">
-              <img src="/assets/img/status/triste.svg" alt="" />
-              <span>{{ item.values.sad | number: '1.0' }}%</span>
+              <span fxLayout="row">
+                <img src="/assets/img/status/triste.svg" alt="triste" />
+              </span>
+              <div fxLayout="column">
+                <span>{{ item.values.sad | number: '1.0' }}%</span>
+                <span class="qualification">({{totalSad}})</span>
+              </div>
             </div>
             <div class="item">
-              <img src="/assets/img/status/enamorado.svg" alt="" />
-              <span>{{ item.values.love | number: '1.0' }}%</span>
+              <span fxLayout="row">
+                <img src="/assets/img/status/enamorado.svg" alt="enamorado" />
+              </span>
+              <div fxLayout="column">
+                <span>{{ item.values.love | number: '1.0' }}%</span>
+                <span class="qualification">({{totalLove}})</span>
+              </div>
             </div>
           </div>
         </div>

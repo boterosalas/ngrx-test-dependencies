@@ -18,7 +18,7 @@ export class VerificationComponent implements OnChanges, OnInit, OnDestroy {
   dataRejectionMessage: FormGroup;
   accountStatements: any;
   private subscription: Subscription = new Subscription();
-  enableRejectionMessage: boolean;
+  enableRejectionMessage: boolean
   @ViewChild('templateRejectionMessage', { static: false })
   templateRejectionMessage: TemplateRef<any>;
   showOther = false;
@@ -68,10 +68,17 @@ export class VerificationComponent implements OnChanges, OnInit, OnDestroy {
       messageSel: ['', Validators.required],
       message: [''],
     });
+
+
   }
 
   ngOnChanges(): void {
     this.getStatusVerificationUser();
+    if(this.data.verified === 'Información errónea' || this.data.verified === 'Información incompleta') {
+      this.enableRejectionMessage = true;
+    } else {
+      this.enableRejectionMessage = true;
+    }
   }
 
   public getStatusVerificationUser() {
@@ -84,7 +91,6 @@ export class VerificationComponent implements OnChanges, OnInit, OnDestroy {
           const objectState = this.accountStatements.find((state) => state.value === this.utils.capitalizeFirstLetter(this.data.verified));
           if (objectState) {
             this.dateSelectedState.controls.state.setValue(objectState.id.toString());
-            this.enableDisabledEditMessage();
           }
         } else {
           this.utils.openSnackBar(resp.userMessage, 'Cerrar');
@@ -96,20 +102,15 @@ export class VerificationComponent implements OnChanges, OnInit, OnDestroy {
     );
   }
 
-  enableDisabledEditMessage() {
-    const idRejected = this.accountStatements.find((state) => state.code === 'REJECTED').id;
-    if (this.dateSelectedState.controls.state.value === idRejected.toString()) {
+  public changeVerified() {
+    const userId = this.data.userId;
+    const valueMessage = this.dateSelectedState.controls.state.value;
+    if(valueMessage === '4267' || valueMessage === '4809') {
       this.enableRejectionMessage = true;
     } else {
       this.enableRejectionMessage = false;
     }
-  }
-
-  public changeVerified() {
-    const userId = this.data.userId;
-    const valueMessage = this.dateSelectedState.controls.state.value;
     this.subscription = this.user.verifiedUser(userId, valueMessage).subscribe((data: ResponseService) => {
-      this.enableDisabledEditMessage();
       this.utils.openSnackBar(data.userMessage, 'Cerrar');
     });
   }
@@ -137,7 +138,6 @@ export class VerificationComponent implements OnChanges, OnInit, OnDestroy {
     if (this.sendMessage === 'Otro') {
       this.sendMessage = this.dataRejectionMessage.controls.message.value;
     }
-    console.log(this.sendMessage);
     const datos = {
       userId: this.data.userId,
       message: this.sendMessage,
