@@ -34,6 +34,10 @@ export class NewsAdminComponent implements OnInit {
   export = false;
   dataSource: any;
   totalqualification:number;
+  totalCry:number;
+  totalSad:number;
+  totalHappy:number;
+  totalLove:number;
   filterData = {
     searchText: '',
     from: null,
@@ -172,6 +176,10 @@ export class NewsAdminComponent implements OnInit {
   public getKPI() {
     this.subscription = this.kpi.getkpiNovelties(this.filterData).subscribe((resp) => {
       this.totalqualification = resp.totalqualification;
+      this.totalCry = resp.TotalCry;
+      this.totalSad = resp.TotalSad;
+      this.totalHappy = resp.TotalHappy;
+      this.totalLove = resp.totalLove;
       this.itemsRowOne = this.itemsRowOne.map((item) => {
         if (item.code === 'satisfaction' && resp.satisfaction) {
           return {
