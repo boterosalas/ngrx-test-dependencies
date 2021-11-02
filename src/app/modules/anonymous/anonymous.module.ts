@@ -366,10 +366,6 @@ const routes: Routes = [
     path: 'url/:shortCode',
     component: UrlComponent,
   },
-  {
-    path: '#/url/:shortCode',
-    component: UrlComponent,
-  },
 ];
 
 @NgModule({
