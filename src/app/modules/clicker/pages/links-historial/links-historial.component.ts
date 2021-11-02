@@ -81,7 +81,14 @@ export class LinksHistorialComponent implements OnInit {
   public getLinksHistory(from = 1, to = this.pageTo, orderBy = '' , orderOrigin = '', startDate = '', endDate = '') {
     const params = { from, to, orderOrigin , orderBy, startDate, endDate };
     this.subscription = this.links.getLinkHistory(params).subscribe((resp) => {
+      resp.linkHistory.map((val) => {
+        const split = val.link.split('/#');
+        if(split.length > 1) {
+          val.link = split[0] + split[1];
+        }
+      })
       this.totalItems = resp.total;
+      console.log(resp.linkHistory);
       this.dataSource = resp.linkHistory;
     });
   }

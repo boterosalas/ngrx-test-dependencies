@@ -76,7 +76,8 @@ beforeEach(waitForAsync(() => {
       ],
       providers: [
         UtilsService,
-        { provide: LinksService, useValue: mockLinksService }
+        LinksService,
+        // { provide: LinksService, useValue: mockLinksService }
       ],
     }).compileComponents();
     mockLinksService.getLinkHistory.and.returnValue(of(dataHistory));
