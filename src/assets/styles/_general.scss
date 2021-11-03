@@ -2795,3 +2795,25 @@ h3#bussiness2 {
     top: -2px;
     left: -1px;
 }
+
+.individual{
+    display: flex;
+    align-items: center;
+  .mat-list-item-content{
+    padding: 0 24px !important;
+    height: 30px !important;
+  }
+}
+
+.mobile-menu{
+  .mat-list-base{
+    padding: 0 !important;
+  }
+}
+
+.whatsapp {
+  .mat-list-item-content{
+  height: 48px !important;
+  padding: 0 19px !important;
+  }
+}

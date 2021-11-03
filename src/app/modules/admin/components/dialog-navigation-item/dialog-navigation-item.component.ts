@@ -67,7 +67,7 @@ export class DialogNavigationItemComponent implements OnInit {
         item = {
           id: 0,
           route: this.dateForm.controls.link.value,
-          name: this.dateForm.controls.description.value,
+          description: this.dateForm.controls.description.value,
           icon: this.iconSelected,
           idgrupo: this.data.idseccion,
           active: true,
@@ -76,7 +76,7 @@ export class DialogNavigationItemComponent implements OnInit {
         item = {
           id: this.data.id,
           route: this.dateForm.controls.link.value,
-          name: this.dateForm.controls.description.value,
+          description: this.dateForm.controls.description.value,
           icon: this.iconSelected,
           idgrupo: this.data.idseccion,
           orderby: this.data.orderby,

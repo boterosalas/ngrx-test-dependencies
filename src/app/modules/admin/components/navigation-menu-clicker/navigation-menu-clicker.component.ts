@@ -58,24 +58,40 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
       dataSourceSend.push({
         id: this.sectionsLinks[i].id,
         orderBy: i + 1,
+        isGroup: this.sectionsLinks[i].menus !== null
       });
     }
-    this.saveOrderSections(dataSourceSend);
+    this.saveOrderClickerSections(dataSourceSend);
   }
 
-  saveOrderSections(data: any) {
-    this.subscription = this.auth.saveOrderGrupoMenus(data).subscribe();
+  saveOrderClickerSections(data: any) {
+    const dataSourceSend = [];
+
+    for (let i = 0; i < this.sectionsLinks.length; i++) {
+      this.sectionsLinks[i].orderby = i + 1;
+      dataSourceSend.push({
+        id: this.sectionsLinks[i].id,
+        orderBy: i + 1,
+        isGroup: this.sectionsLinks[i].menus !== null
+      });
+    }
+
+    for (let i = 0; i < this.links.length; i++) {
+      this.links[i].orderby = i + 1;
+      dataSourceSend.push({
+        id: this.links[i].Id,
+        orderBy: i + 1,
+      });
+    }
+
+    const mergeData = dataSourceSend.concat(data);
+
+    this.subscription = this.auth.saveOrderGrupoClickerMenus(mergeData).subscribe();
   }
 
   getSections() {
     this.subscription = this.auth.getMenuClicker(true).subscribe((resp) => {
-      resp.map((item) => {
-        if (item.description === 'Sin Grupo') {
-          this.links = item.menus;
-        } else {
-          this.sectionsLinks.push(item);
-        }
-      });
+      this.sectionsLinks = resp;
     });
   }
 
@@ -172,6 +188,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
       date: item.date,
       icon: item.icon,
       isMenu: true,
+      active: item.active
     };
 
     const editItem = this.dialog.open(DialogNavigationItemComponent, {
@@ -184,13 +201,14 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
   }
 
   deleteNavigationItem(item: any) {
-    this.currentLink = item;
-
+    this.currentLink = item.id;
     const title = '';
     const template = this.templateDeleteNavigationItem;
+    const id = item.id;
     this.dialogRef = this.dialog.open(ModalGenericComponent, {
       width: '450px',
       data: {
+        id,
         title,
         template,
       },
@@ -208,7 +226,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
   }
 
   deleteNavigationItemService() {
-    const idMenu = [this.currentLink.Id];
+    const idMenu = [this.currentLink];
     this.auth.deleteMenu(idMenu).subscribe((deleteNavigationItemService: ResponseService) => {
       if (deleteNavigationItemService.state === 'Success') {
         this.dialog.closeAll();

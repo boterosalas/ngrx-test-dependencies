@@ -39,6 +39,15 @@
     </span>
 
     <span *ngIf="item.description !== 'Sin Grupo'">
+
+      <mat-list role="list" *ngIf="item.menus === null">
+        <mat-list-item class="individual">
+          <span fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="{{ item.description }} f-16 lifont">
+            <i *ngIf="item.icon" ngClass="{{ item.icon }} icsub"></i>
+            {{ item.description }}
+          </span>
+        </mat-list-item> 
+      </mat-list>
       <mat-accordion *ngIf="item.menus !== null">
         <mat-expansion-panel class="no-bg">
           <mat-expansion-panel-header
@@ -80,14 +89,14 @@
       target="_blank"
       class="cursor-pointer f-16 whatsapp gtmHomeClicMenuLightboxWhatsApp"
       ><span class="gtmHomeClicMenuLightboxWhatsApp">
-        <i class="tio-whatsapp"></i>
+        <i class="tio-whatsapp f-20"></i>
         WhatsApp
       </span></a
     >
   </span>
 
   <span *ngIf="(auth.getRole$ | async) !== 'ADMIN' && (auth.getRole$ | async) !== 'SUPERADMIN'">
-    <mat-card class="mt-2">
+    <mat-card class="mt-3">
       <h3 class="f-16 mb-2 hc">{{ 'GENERIC.SUPPORT' | translate }}</h3>
       <p class="f-12 m-0">{{ 'GENERIC.TEXT_SUPPORT' | translate }}</p>
       <p class="f-12 m-0 black">{{ 'GENERIC.EMAIL_SUPPORT' | translate }}</p>
