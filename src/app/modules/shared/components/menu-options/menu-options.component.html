@@ -29,10 +29,10 @@
         <span *ngIf="showIcon">
           <img src="assets/img/dashboard/icon-{{ i }}.svg" alt="icon" />
         </span>
-        <a mat-list-item ngClass="cursor-pointer gtmHomeClicMenuLightbox{{ item.name }} f-16 {{ item.name }}" id="{{ section }}{{ i }}">
-          <span fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="gtmHomeClicMenuLightbox{{ item.name }}">
+        <a mat-list-item ngClass="cursor-pointer gtmHomeClicMenuLightbox{{ item.description }} f-16 {{ item.description }}" id="{{ section }}{{ i }}">
+          <span fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="gtmHomeClicMenuLightbox{{ item.description }}">
             <i *ngIf="item.icon" ngClass="{{ item.icon }} icmen"></i>
-            {{ item.name }}</span
+            {{ item.description }}</span
           ></a
         >
       </span>
@@ -42,7 +42,7 @@
 
       <mat-list role="list" *ngIf="item.menus === null">
         <mat-list-item class="individual">
-          <span fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="{{ item.description }} f-16 lifont">
+          <span routerLinkActive="active"  (click)="hide()" routerLink="{{ item.route }}" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="{{ item.description }} f-16 lifont">
             <i *ngIf="item.icon" ngClass="{{ item.icon }} icsub"></i>
             {{ item.description }}
           </span>
@@ -69,9 +69,9 @@
                 routerLink="{{ item.route }}"
                 (click)="hide()"
                 class="menu-mobile"
-                ngClass="gtmHomeClicMenuLightbox{{ item.name }} "
+                ngClass="gtmHomeClicMenuLightbox{{ item.description }} "
                 matRipple
-                >{{ item.name }}</span
+                >{{ item.description }}</span
               >
             </mat-list-item>
           </mat-list>
@@ -89,7 +89,7 @@
       target="_blank"
       class="cursor-pointer f-16 whatsapp gtmHomeClicMenuLightboxWhatsApp"
       ><span class="gtmHomeClicMenuLightboxWhatsApp">
-        <i class="tio-whatsapp f-20"></i>
+        <i class="tio-whatsapp f-20 mrwh"></i>
         WhatsApp
       </span></a
     >

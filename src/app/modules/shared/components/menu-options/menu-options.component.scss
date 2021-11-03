@@ -5,7 +5,7 @@
   &.active {
     a {
       color: #ffffff;
-      margin-left: 5px;
+      margin-left: 0px;
       background-color: $primary-color;
       border-radius: 15px;
     }
@@ -14,7 +14,7 @@
     color: $primary-color;
     font-family: $font-galano-bold;
     height: 30px;
-    margin-left: 5px;
+    margin-left: 0px;
     position: relative;
     padding-bottom: 34px;
   }
@@ -53,7 +53,7 @@
       width: 20px;
       height: 20px;
       position: absolute;
-      left: 4%;
+      left: 3%;
     }
   }
 
@@ -65,7 +65,7 @@
       width: 20px;
       height: 20px;
       position: absolute;
-      left: 4%;
+      left: 3%;
     }
   }
 
@@ -77,7 +77,8 @@
       width: 20px;
       height: 20px;
       position: absolute;
-      left: 4%;
+      left: 3%;
+      top: 6px;
     }
   }
 
@@ -149,5 +150,19 @@
 .lifont {
   color: $primary-color;
   font-family: $font-galano-bold;
+  width: 100%;
 }
 
+.individual {
+  .active {
+    color: #ffffff;
+    margin-left: 0px;
+    background-color: $primary-color;
+    border-radius: 15px;
+    padding: 7px 10px;
+  }
+}
+
+.mrwh{
+  margin-right: 2px;
+}

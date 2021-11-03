@@ -40,6 +40,7 @@ export class MenuOptionsComponent implements OnInit, OnDestroy {
 
   public getMenu() {
     this.subscription = this.auth.getMenu$.subscribe((val) => {
+      console.log(val);
       this.options = val;
     });
   }
