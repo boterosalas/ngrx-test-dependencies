@@ -6,16 +6,6 @@
     <p class="navigation__actions">ACCIONES</p>
   </header>
   <div class="navigation__content">
-    <div class="navigation__list-sections" cdkDropList (cdkDropListDropped)="dropItem($event)">
-      <app-navigation-item
-        *ngFor="let item of links"
-        [link]="item"
-        (editItem)="editNavigationItem($event)"
-        (deleteItem)="deleteNavigationItem($event)"
-        (changeStateItem)="changeStateOfItem($event)"
-        cdkDrag
-      ></app-navigation-item>
-    </div>
 
     <div class="navigation__list-sections" cdkDropList (cdkDropListDropped)="dropSection($event)">
       <app-navigation-group
@@ -26,7 +16,7 @@
         (addItem)="addNavigationItem($event)"
         (editItem)="editNavigationItem($event)"
         (deleteItem)="deleteNavigationItem($event)"
-        (saveOrderItems)="saveOrderItems($event)"
+        (saveOrderItems)="saveOrderClickerSections($event)"
         (changeState)="changeStateOfItem($event)"
         cdkDrag
       >

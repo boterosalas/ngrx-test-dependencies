@@ -29,16 +29,25 @@
         <span *ngIf="showIcon">
           <img src="assets/img/dashboard/icon-{{ i }}.svg" alt="icon" />
         </span>
-        <a mat-list-item ngClass="cursor-pointer gtmHomeClicMenuLightbox{{ item.name }} f-16 {{ item.name }}" id="{{ section }}{{ i }}">
-          <span fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="gtmHomeClicMenuLightbox{{ item.name }}">
+        <a mat-list-item ngClass="cursor-pointer gtmHomeClicMenuLightbox{{ item.description }} f-16 {{ item.description }}" id="{{ section }}{{ i }}">
+          <span fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="gtmHomeClicMenuLightbox{{ item.description }}">
             <i *ngIf="item.icon" ngClass="{{ item.icon }} icmen"></i>
-            {{ item.name }}</span
+            {{ item.description }}</span
           ></a
         >
       </span>
     </span>
 
     <span *ngIf="item.description !== 'Sin Grupo'">
+
+      <mat-list role="list" *ngIf="item.menus === null">
+        <mat-list-item class="individual">
+          <span routerLinkActive="active"  (click)="hide()" routerLink="{{ item.route }}" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="{{ item.description }} f-16 lifont">
+            <i *ngIf="item.icon" ngClass="{{ item.icon }} icsub"></i>
+            {{ item.description }}
+          </span>
+        </mat-list-item> 
+      </mat-list>
       <mat-accordion *ngIf="item.menus !== null">
         <mat-expansion-panel class="no-bg">
           <mat-expansion-panel-header
@@ -60,9 +69,9 @@
                 routerLink="{{ item.route }}"
                 (click)="hide()"
                 class="menu-mobile"
-                ngClass="gtmHomeClicMenuLightbox{{ item.name }} "
+                ngClass="gtmHomeClicMenuLightbox{{ item.description }} "
                 matRipple
-                >{{ item.name }}</span
+                >{{ item.description }}</span
               >
             </mat-list-item>
           </mat-list>
@@ -80,14 +89,14 @@
       target="_blank"
       class="cursor-pointer f-16 whatsapp gtmHomeClicMenuLightboxWhatsApp"
       ><span class="gtmHomeClicMenuLightboxWhatsApp">
-        <i class="tio-whatsapp"></i>
+        <i class="tio-whatsapp f-20 mrwh"></i>
         WhatsApp
       </span></a
     >
   </span>
 
   <span *ngIf="(auth.getRole$ | async) !== 'ADMIN' && (auth.getRole$ | async) !== 'SUPERADMIN'">
-    <mat-card class="mt-2">
+    <mat-card class="mt-3">
       <h3 class="f-16 mb-2 hc">{{ 'GENERIC.SUPPORT' | translate }}</h3>
       <p class="f-12 m-0">{{ 'GENERIC.TEXT_SUPPORT' | translate }}</p>
       <p class="f-12 m-0 black">{{ 'GENERIC.EMAIL_SUPPORT' | translate }}</p>

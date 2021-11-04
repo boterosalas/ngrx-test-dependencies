@@ -1,4 +1,4 @@
-<div class="navigation-group">
+<div class="navigation-group" *ngIf="section.menus !== null">
   <div class="navigation-group__header">
     <span class="navigation-group__drag">
       <mat-icon matSuffix class="mr-1 blue cursor-pointer" cdkDragHandle>drag_indicator</mat-icon>
@@ -35,4 +35,42 @@
       cdkDrag
     ></app-navigation-item>
   </div>
+  
 </div>
+
+<div *ngIf="section.menus === null" cdkDropList (cdkDropListDropped)="dropItems($event)">
+
+  <div class="navigation-item">
+    <span class="navigation-item__drag">
+      <mat-icon matSuffix class="mr-1 blue cursor-pointer" cdkDragHandle>drag_indicator</mat-icon>
+    </span>
+    <span ngClass="navigation-item__description {{ section.icon }}">{{ section.description || section.name }}</span>
+    <span class="navigation-item__link">
+      <a href="{{ section.link }}" class="text-link text-underline cursor-pointer" target="_blank"> {{ section.link || section.route }}</a>
+    </span>
+    <div class="navigation-item__actions">
+      <i class="tio-edit style-icon cursor-pointer" (click)="editNavigationItem(section)"></i>
+  
+      <i
+        *ngIf="section.menusystem === true"
+        class="style-icon cursor-pointer"
+        [ngClass]="{
+          'tio-visible': section.active === true,
+          'tio-hidden': section.active === false
+        }"
+        (click)="changeStateOfItem(section)"
+      ></i>
+  
+      <img
+        *ngIf="section.menusystem === false"
+        class="cursor-pointer"
+        (click)="deleteNavigationItem(section)"
+        src="/assets/img/dashboard/icon-remove-comision.svg"
+        alt=""
+      />
+    </div>
+  </div>
+
+</div>
+
+

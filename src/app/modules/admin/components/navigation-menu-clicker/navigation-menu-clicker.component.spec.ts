@@ -289,16 +289,16 @@ beforeEach(waitForAsync(() => {
     expect(mockAuthService.saveOrderMenus).toHaveBeenCalled();
   });
 
-  it('save order sections', () => {
-    const data = [
-      { id: 1, orderBy: 1 },
-      { id: 2, orderBy: 2 },
-      { id: 13, orderBy: 3 },
-    ];
-    mockAuthService.saveOrderGrupoMenus.and.returnValue(of(response));
-    component.saveOrderSections(data);
-    expect(mockAuthService.saveOrderGrupoMenus).toHaveBeenCalled();
-  });
+  // it('save order sections', () => {
+  //   const data = [
+  //     { id: 1, orderBy: 1 },
+  //     { id: 2, orderBy: 2 },
+  //     { id: 13, orderBy: 3 },
+  //   ];
+  //   mockAuthService.saveOrderGrupoMenus.and.returnValue(of(response));
+  //   component.saveOrderSections(data);
+  //   expect(mockAuthService.saveOrderGrupoMenus).toHaveBeenCalled();
+  // });
 
   it('add section', () => {
     component.addSection();

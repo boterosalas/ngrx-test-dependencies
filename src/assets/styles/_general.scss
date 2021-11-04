@@ -2673,6 +2673,10 @@ h3#bussiness2 {
       padding: 5px 10px;
     }
   }
+  .mat-expansion-panel-header {
+    padding: 0px 10px !important;
+    height: 40px;
+  }
 }
 
 .adminMenu {
@@ -2680,7 +2684,7 @@ h3#bussiness2 {
     padding: 0 37px !important;
   }
   .mat-content {
-    padding: 0 14px !important;
+    padding: 0 30px !important;
   }
 }
 
@@ -2775,7 +2779,7 @@ h3#bussiness2 {
 }
 
 .itemli {
-  .mat-list-item-content{
+  .mat-list-item-content {
     background: #fff;
     border-radius: 10px;
     padding: 10px 24px;
@@ -2786,12 +2790,41 @@ h3#bussiness2 {
   }
 }
 
-.slick-prev, .slick-next{
+.slick-prev,
+.slick-next {
   display: none !important;
 }
 
-.arrow-position{
-    position: relative;
-    top: -2px;
-    left: -1px;
+.arrow-position {
+  position: relative;
+  top: -2px;
+  left: -1px;
+}
+
+.individual {
+  display: flex;
+  align-items: center;
+  .mat-list-item-content {
+    padding: 0 10px !important;
+    height: 30px !important;
+    width: 100%;
+  }
+}
+
+.mobile-menu {
+  .mat-list-base {
+    padding: 0 !important;
+    width: 100%;
+  }
+}
+
+.whatsapp {
+  .mat-list-item-content {
+    height: 40px !important;
+    padding: 0 10px !important;
+  }
+}
+
+.mat-expansion-panel-header.mat-expanded {
+  height: 36px !important;
 }

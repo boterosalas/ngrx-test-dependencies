@@ -88,7 +88,6 @@ export class LinksHistorialComponent implements OnInit {
         }
       })
       this.totalItems = resp.total;
-      console.log(resp.linkHistory);
       this.dataSource = resp.linkHistory;
     });
   }
