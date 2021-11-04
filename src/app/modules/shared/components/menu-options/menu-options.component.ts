@@ -1,11 +1,9 @@
-import { Component, OnInit, HostListener, OnChanges, DoCheck, Input, OnDestroy, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, HostListener, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
 import { UtilsService } from 'src/app/services/utils.service';
 import { LoaderService } from 'src/app/services/loader.service';
-import { distinctUntilChanged } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import decode from 'jwt-decode';
 @Component({
   selector: 'app-menu-options',
   templateUrl: './menu-options.component.html',
@@ -40,7 +38,6 @@ export class MenuOptionsComponent implements OnInit, OnDestroy {
 
   public getMenu() {
     this.subscription = this.auth.getMenu$.subscribe((val) => {
-      console.log(val);
       this.options = val;
     });
   }

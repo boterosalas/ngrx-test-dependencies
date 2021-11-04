@@ -39,11 +39,12 @@ export class DialogNavigationItemComponent implements OnInit {
     this.iconSelected = this.data.icon;
 
     if (this.data.edit === 1) {
+      console.log(this.data);
       this.dateForm = this.fb.group({
         id: [this.data.id],
         idseccion: [this.data.idseccion || this.data.idgrupo],
         link: [this.data.link || this.data.route, Validators.required],
-        description: [this.data.description || this.data.name, Validators.required],
+        description: [this.data.description || this.data.description, Validators.required],
         icon: [this.data.icon],
       });
     } else {
