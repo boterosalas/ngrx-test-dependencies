@@ -59,6 +59,18 @@ beforeEach(waitForAsync(() => {
       description: 'Clickam',
       orderby: 1,
       date: '2021-05-25T08:48:42.533',
+      isgroup: false,
+      menus: [
+          {
+            id: 4,
+            idseccion: 1,
+            link: 'https://www.google.com.co',
+            description: '¿Tienes un sitio web? Regístralo Aqui!',
+            orderby: 1,
+            date: '2021-05-25T09:16:06.897',
+            isgroup: true,
+          },
+      ],
       links: [
         {
           id: 4,
