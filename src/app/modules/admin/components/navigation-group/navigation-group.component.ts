@@ -59,7 +59,7 @@ export class NavigationGroupComponent implements OnInit {
     for (let i = 0; i < items.length; i++) {
       items[i].orderby = i + 1;
       dataSourceSend.push({
-        id: items[i].Id,
+        id: items[i].Id || items[i].id,
         orderBy: i + 1
       });
     }
