@@ -117,6 +117,14 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       icon: '/assets/img/icon-info-white.svg',
     },
     {
+      code: 'INCOMPLETE',
+      status: 'No verificada',
+      title: 'Verificación de cuenta',
+      description: 'Tu cuenta entrará en estado de verificación pronto, una vez sea verificada, se te depositarán las comisiones en ella.',
+      icon: '/assets/img/icon-info-white.svg',
+      className: 'rejected'
+    },
+    {
       code: 'INPROGRESS',
       status: 'En verificación',
       title: '',
@@ -203,7 +211,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
           const accountStatus = resp.objectResponse.find((status) => status.id === this.idVerified);
           if (accountStatus) {
             this.accountStatus = this.typesStatusAccount.find((type) => type.code === accountStatus.code);
-            if (description && accountStatus.code !== 'NOTVERIFIED') {
+            if (description && accountStatus.code !== 'NOTVERIFIED' || accountStatus.code !=='INCOMPLETE') {
               this.accountStatus.description = description;
             }
           }

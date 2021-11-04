@@ -60,8 +60,7 @@ export class NavigationGroupComponent implements OnInit {
       items[i].orderby = i + 1;
       dataSourceSend.push({
         id: items[i].Id,
-        orderBy: i + 1,
-        isGroup: false
+        orderBy: i + 1
       });
     }
     this.saveOrderItems.emit(dataSourceSend);

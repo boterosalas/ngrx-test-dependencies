@@ -1,4 +1,4 @@
-<div class="navigation-group" *ngIf="section.menus !== null">
+<div class="navigation-group" *ngIf="section.isgroup === true">
   <div class="navigation-group__header">
     <span class="navigation-group__drag">
       <mat-icon matSuffix class="mr-1 blue cursor-pointer" cdkDragHandle>drag_indicator</mat-icon>
@@ -38,7 +38,7 @@
   
 </div>
 
-<div *ngIf="section.menus === null" cdkDropList (cdkDropListDropped)="dropItems($event)">
+<div *ngIf="section.isgroup === false" cdkDropList (cdkDropListDropped)="dropItems($event)">
 
   <div class="navigation-item">
     <span class="navigation-item__drag">

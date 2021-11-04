@@ -74,7 +74,7 @@ export class NavigationMenuComponent implements OnInit {
       id: item.Id,
       idseccion: item.idgrupo,
       link: item.route,
-      description: item.name,
+      description: item.description,
       orderby: item.orderby,
       icon: item.icon,
       isMenu: true,

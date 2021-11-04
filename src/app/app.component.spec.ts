@@ -36,8 +36,7 @@ export class MatDialogMock {
 }
 
 describe('AppComponent', () => {
-  // let translate: TranslateService;
-  // let http: HttpTestingController;
+
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   const matDialog = new MatDialogMock();
