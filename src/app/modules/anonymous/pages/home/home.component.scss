@@ -46,8 +46,13 @@
   max-width: 100%;
 }
 
-.bg-slide {
-  background: url('/assets/img/home/bg-videos.jpg') no-repeat;
+// .bg-slide {
+//   background: url('/assets/img/home/bg-videos.jpg') no-repeat;
+//   background-size: cover;
+// }
+
+.bg-welcome {
+  background: url('/assets/img/home/bg-home.png') no-repeat;
   background-size: cover;
 }
 

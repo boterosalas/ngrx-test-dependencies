@@ -87,6 +87,7 @@ import { NewBlogComponent } from './components/new-blogs/new-blog.component';
 import { CardOrderNumberComponent } from './components/card-order-number/card-order-number.component';
 import { DialogNoveltySatisfactionComponent } from './components/dialog-novelty-satisfaction/dialog-novelty-satisfaction.component';
 import { ConsultComponent } from './pages/help-center/consult/consult.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 const routes: Routes = [
   {
     path: '',
@@ -438,6 +439,7 @@ const routes: Routes = [
     CardOrderNumberComponent,
     DialogNoveltySatisfactionComponent,
     ConsultComponent,
+    WelcomeComponent,
   ],
   imports: [
     FormsModule,

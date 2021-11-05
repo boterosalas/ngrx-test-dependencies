@@ -465,6 +465,7 @@ body {
   color: #ffffff;
   border: 1px solid #ffffff;
 }
+
 .mat-white {
   background: #ffffff;
   color: $primary-color;
@@ -1754,6 +1755,12 @@ button.swal2-cancel.updatecancel.swal2-styled {
   }
   &-30 {
     font-size: 30px;
+  }
+  &-40 {
+    font-size: 40px;
+  }
+  &-48 {
+    font-size: 48px;
   }
 }
 

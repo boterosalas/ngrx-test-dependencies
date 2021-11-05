@@ -50,6 +50,7 @@ import { TableHistorialComponent } from './components/table-historial/table-hist
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CardDataTotalComponent } from './components/card-data-total/card-data-total.component';
 import { TableDetailComissionComponent } from './components/table-detail-comission/table-detail-comission.component';
+import { ImageComponent } from './components/atoms/image/image.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { TableDetailComissionComponent } from './components/table-detail-comissi
     CardDataComponent,
     CardDataTotalComponent,
     TableHistorialComponent,
-    TableDetailComissionComponent
+    TableDetailComissionComponent,
+    ImageComponent
   ],
   imports: [
     CommonModule,
@@ -142,7 +144,8 @@ import { TableDetailComissionComponent } from './components/table-detail-comissi
     CardDataComponent,
     CardDataTotalComponent,
     TableHistorialComponent,
-    TableDetailComissionComponent
+    TableDetailComissionComponent,
+    ImageComponent
   ],
   entryComponents: [ModalGenericComponent, PopupComponent, DialogStoriesComponent, OnboardingSwiperComponent],
 })
