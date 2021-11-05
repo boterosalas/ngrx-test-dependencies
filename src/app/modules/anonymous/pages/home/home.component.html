@@ -1,9 +1,12 @@
-<!-- <app-logo></app-logo> -->
+<!-- stories clickam looged -->
 <div *ngIf="auth.isLoggedIn()" class="stories-section">
   <app-slider-stories></app-slider-stories>
 </div>
 
+
+<!-- sliders logged -->
 <app-slider
+  *ngIf="auth.isLoggedIn()"
   Class="gtmHomeClicBanner"
   [showArrows]="true"
   [isSlider]="true"
@@ -11,6 +14,8 @@
   [sliderMobile]="sliderMobile"
   [sliderWeb]="sliderWeb"
 ></app-slider>
+
+<!-- medals mobile logged -->
 
 <div class="medals container pt-3" fxHide.gt-xs="true" *ngIf="auth.isLoggedIn()" fxLayout="row" fxLayoutAlign="center center">
   <mat-card fxLayout="row" fxLayoutAlign="center center">
@@ -30,19 +35,9 @@
   </mat-card>
 </div>
 
-<div class="container" *ngIf="!auth.isLoggedIn()">
-  <span class="border-gray d-block"></span>
-  <app-how-works-clickam></app-how-works-clickam>
-  <app-slider-works></app-slider-works>
-</div>
 
-<div class="container-fluid bg-slide" *ngIf="!auth.isLoggedIn()">
-  <div class="container">
-    <app-home-slide-video></app-home-slide-video>
-  </div>
-</div>
 
-<div class="container">
+<div class="container" *ngIf="auth.isLoggedIn()">
   <span fxLayout="row" fxLayoutAlign="space-between center">
     <h3 ngClass.gt-xs="mb-0" class="border-bottom-orange-init title-h3" id="bussinessHook">
       {{ 'HOME.BUSSINESS' | translate }}
@@ -111,6 +106,7 @@
 </div>
 
 <app-slider
+  *ngIf="auth.isLoggedIn()"
   Class="gtmHomeClicOfertas"
   [showArrows]="false"
   [isSlider]="true"
@@ -119,7 +115,9 @@
   [sliderMobile]="offersMobile"
   [sliderWeb]="offersWeb"
 ></app-slider>
+
 <app-slider
+  *ngIf="auth.isLoggedIn()"
   Class="gtmHomeClicOfertas"
   [showArrows]="false"
   [isSlider]="false"
@@ -133,9 +131,11 @@
   <span class="border-gray d-block mt-3"></span>
   <app-blog-business></app-blog-business>
 </div>
-<div class="container">
+
+<!-- <div class="container">
   <app-new-business (openModal)="openRegisterBusiness()"></app-new-business>
-</div>
+</div> -->
+
 <div *ngIf="auth.isLoggedIn()" class="forms-help" fxLayout="row" fxLayoutAlign="center">
   <div fxLayout="column" fxLayoutAlign="center">
     <div fxLayout="row" fxLayoutAlign="center">
@@ -204,4 +204,5 @@
       </a>
     </div>
   </ng-template>
+
 </div>
