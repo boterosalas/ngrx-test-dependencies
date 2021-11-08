@@ -51,24 +51,14 @@
 //   background-size: cover;
 // }
 
+
+.imgsection{
+  max-width: 100%;
+}
+
 .bg-welcome {
   background: url('/assets/img/home/bg-home.png') no-repeat;
   background-size: cover;
-}
-
-.medals {
-  position: relative;
-  .mat-card {
-    background: transparent linear-gradient(180deg, #fd6a6a 0%, #ff7c7c 100%) 0% 0% no-repeat padding-box;
-    min-height: 90px;
-    width: 360px;
-  }
-}
-
-.icon-medal {
-  position: absolute;
-  top: 0;
-  left: 20px;
 }
 
 .card-library {

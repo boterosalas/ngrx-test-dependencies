@@ -98,6 +98,27 @@ export class HomeComponent implements OnInit, OnDestroy {
   formData = false;
   sendData = false;
   dateForm: FormGroup;
+
+  slideConfig = {
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    dots: false,
+    dotClass: 'slick-dots orange',
+    autoplay: true,
+    autoplaySpeed: 5000,
+    infinite: true,
+    arrows: false,
+    variableWidth: true,
+    responsive: [
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+    ],
+  };
+
   constructor(
     public router: Router,
     private route: ActivatedRoute,
@@ -300,6 +321,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       .getBusiness()
       .pipe(distinctUntilChanged())
       .subscribe((bussiness) => {
+        console.log(bussiness);
         this.bussiness = bussiness;
       });
   }
