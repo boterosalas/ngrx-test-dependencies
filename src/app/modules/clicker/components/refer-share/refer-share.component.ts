@@ -31,8 +31,8 @@ export class ReferShareComponent implements OnInit {
     this.tokenInfo = this.token.userInfo();
     this.idClicker = this.tokenInfo.idclicker;
     const domain = document.location.origin;
-    this.urlWhatsapp = encodeURI(`${domain}/#/inicio?code=${this.idClicker.replace(' ', '%20')}`);
-    this.url = encodeURI(`${domain}/#/inicio?code=${this.idClicker}`);
+    this.urlWhatsapp = encodeURI(`${domain}/inicio?code=${this.idClicker.replace(' ', '%20')}`);
+    this.url = encodeURI(`${domain}/inicio?code=${this.idClicker}`);
     this.formLink = this.fb.group({
       link: [this.url],
     });
