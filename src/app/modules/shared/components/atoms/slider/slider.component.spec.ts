@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 import { SliderComponent } from './slider.component';
 
@@ -8,7 +9,10 @@ describe('SliderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SliderComponent ]
+      declarations: [ SliderComponent ],
+      imports: [
+        SlickCarouselModule
+      ]
     })
     .compileComponents();
   });
