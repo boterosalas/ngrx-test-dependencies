@@ -54,6 +54,7 @@ import { ImageComponent } from './components/atoms/image/image.component';
 import { SliderComponent } from './components/atoms/slider/slider.component';
 import { ImageTextComponent } from './components/molecules/image-text/image-text.component';
 import { TitleComponent } from './components/atoms/title/title.component';
+import { CardComponent } from './components/atoms/card/card.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { TitleComponent } from './components/atoms/title/title.component';
     ImageComponent,
     SliderComponent,
     ImageTextComponent,
-    TitleComponent
+    TitleComponent,
+    CardComponent
   ],
   imports: [
     CommonModule,
@@ -154,7 +156,8 @@ import { TitleComponent } from './components/atoms/title/title.component';
     ImageComponent,
     SliderComponent,
     ImageTextComponent,
-    TitleComponent
+    TitleComponent,
+    CardComponent
   ],
   entryComponents: [ModalGenericComponent, PopupComponent, DialogStoriesComponent, OnboardingSwiperComponent],
 })

@@ -81,6 +81,7 @@
 <div *ngIf="!auth.isLoggedIn()" class="container-fluid pt-3">
   <div class="container">
     <app-title showTitleh2="true" text="Lo que dicen de nosotros" class="text-center"></app-title>
+    <app-slide-testimonials [slider] ="testimonials" [slideConfig]="slideConfigTestimonials"></app-slide-testimonials>
   </div>
 </div>
 

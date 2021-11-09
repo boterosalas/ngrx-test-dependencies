@@ -34,7 +34,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AsyncPipe } from '../../node_modules/@angular/common';
 import { SidenavService } from './services/sidenav.service';
-import { CardComponent } from './modules/anonymous/components/card/card.component';
+import { CardComponent } from './modules/shared/components/atoms/card/card.component';
 import { ActivateAccountFormComponent } from './modules/anonymous/components/activate-account-form/activate-account-form.component';
 import { ForgotpasswordformComponent } from './modules/anonymous/components/forgotpasswordform/forgotpasswordform.component';
 import { LoginformComponent } from './modules/anonymous/components/loginform/loginform.component';
@@ -55,7 +55,6 @@ export function jwtTokenGetter() {
   declarations: [
     AppComponent,
     MenuComponent,
-    CardComponent,
     LoginformComponent,
     RegisterformComponent,
     ForgotpasswordformComponent,

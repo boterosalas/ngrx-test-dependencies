@@ -89,6 +89,8 @@ import { DialogNoveltySatisfactionComponent } from './components/dialog-novelty-
 import { ConsultComponent } from './pages/help-center/consult/consult.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { CardMedalComponent } from './components/molecules/card-medal/card-medal.component';
+import { SlideTestimonialsComponent } from './components/molecules/slide-testimonials/slide-testimonials.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -442,6 +444,7 @@ const routes: Routes = [
     ConsultComponent,
     WelcomeComponent,
     CardMedalComponent,
+    SlideTestimonialsComponent,
   ],
   imports: [
     FormsModule,
