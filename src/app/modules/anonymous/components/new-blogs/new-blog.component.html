@@ -3,6 +3,7 @@
   fxLayout="column"
   fxLayout.gt-xs="row"
   fxLayoutGap.gt-xs="50px"
+  fxLayoutGap.xs="0"
   fxLayoutAlign="space-between center"
   fxLayoutAlign.xs="none"
 >
@@ -11,7 +12,7 @@
   <div [routerLink]="['/blog']" class="newblog__text cursor-pointer" fxLayout.gt-xs="column" fxFlex="40">
     <!-- <h3 class="border-bottom-orange-init f-23">Nuestro blog</h3> -->
     <app-title showTitleh2="true" text="Nuestro blog" classWeb="mb-0" classMobile="mb-0"></app-title>
-    <p class="f-20">Descubre las últimas novedades y artículos relacionados con nuestra plataforma.</p>
+    <p ngClass.gt-xs="f-20" ngClass.xs="f-16">Descubre las últimas novedades y artículos relacionados con nuestra plataforma.</p>
     <app-button fxHide.xs="true" title="Ver todos los artículos" (action)="routeBlog()" color="gray" classIcon="tio-share_vs style-icon"></app-button>
   </div>
 

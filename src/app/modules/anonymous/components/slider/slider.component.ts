@@ -78,14 +78,23 @@ export class SliderComponent implements OnInit, OnDestroy {
   buttonReferir: any;
 
   slideConfig = {
-    slidesToShow: 1,
+    slidesToShow: 3,
     slidesToScroll: 1,
     dots: true,
     dotClass: 'slick-dots orange',
     autoplay: true,
     autoplaySpeed: 5000,
     infinite: false,
-    arrows: true,
+    arrows: false,
+    variableWidth: false,
+    responsive: [
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
 
   ngOnInit() {

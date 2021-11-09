@@ -78,7 +78,7 @@
 </div>
 
 <!-- testimonials -->
-<div *ngIf="!auth.isLoggedIn()" class="container-fluid pt-3">
+<div *ngIf="!auth.isLoggedIn()" class="container-fluid pt-3 pb-3">
   <div class="container">
     <app-title showTitleh2="true" text="Lo que dicen de nosotros" class="text-center"></app-title>
     <app-slide-testimonials [slider] ="testimonials" [slideConfig]="slideConfigTestimonials"></app-slide-testimonials>
@@ -90,7 +90,7 @@
 <app-slider
   *ngIf="auth.isLoggedIn()"
   Class="gtmHomeClicBanner"
-  [showArrows]="true"
+  [showArrows]="false"
   [isSlider]="true"
   (action)="sliderOffers()"
   [sliderMobile]="sliderMobile"
@@ -179,17 +179,19 @@
     </div>
   </div>
 
-  <!-- slider top products -->
+</div>
 
-  <span class="border-gray d-block"></span>
-  <h3 class="border-bottom-orange-init title-h3">
-    {{ 'HOME.OFFERS' | translate }}
-  </h3>
-  <p class="f-20" fxHide.xs>{{ 'HOME.OFFERS_TEXT' | translate }}</p>
+<!-- slider top products -->
+
+<div class="container-fluid">
+  <div class="container">
+    <span class="d-block"></span>
+    <app-title showTitleh2="true" text="{{ 'HOME.OFFERS' | translate }}" classWeb="border-bottom-orange-init" classMobile="border-bottom-orange-init"></app-title>
+    <p ngClass.gt-xs="f-20 mb-4" ngClass.xs="f-16">{{ 'HOME.OFFERS_TEXT' | translate }}</p>
+  </div>
 </div>
 
 <app-slider
-  *ngIf="auth.isLoggedIn()"
   Class="gtmHomeClicOfertas"
   [showArrows]="false"
   [isSlider]="true"
@@ -200,20 +202,20 @@
 ></app-slider>
 
 <app-slider
-  *ngIf="auth.isLoggedIn()"
   Class="gtmHomeClicOfertas"
   [showArrows]="false"
-  [isSlider]="false"
+  [isSlider]="true"
   fxShow.xs="false"
   (action)="sliderOffers()"
   [sliderMobile]="offersWeb"
+  [sliderWeb]="offersWeb"
   class="mb-3"
 ></app-slider>
 
 <!-- blog -->
 
 <div class="container">
-  <span class="border-gray d-block mt-3"></span>
+  <span class="d-block mt-3"></span>
   <app-blog-business></app-blog-business>
 </div>
 
@@ -224,7 +226,7 @@
     
     <div fxLayout="row" fxLayoutAlign="center">
       <div class="mt-4">
-        <img src="/assets/img/compartir_testimonial.svg" alt="" />
+        <img src="/assets/img/compartir_testimonial.svg" alt="testimonial" />
       </div>
       <div class="mt-4">
         <h4 class="text-cuentanos mt-0 mb-0 ml-3">¿Crees que en Clickam podemos mejorar algo?</h4>
