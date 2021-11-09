@@ -171,12 +171,6 @@ mat-form-field.select-custom {
   }
 }
 
-.slide {
-  span {
-    background: $bg-gray;
-  }
-}
-
 .mat-row:nth-child(even),
 thead {
   background-color: #f3f1f6 !important;
@@ -465,6 +459,7 @@ body {
   color: #ffffff;
   border: 1px solid #ffffff;
 }
+
 .mat-white {
   background: #ffffff;
   color: $primary-color;
@@ -904,9 +899,15 @@ table {
   .space {
     min-width: 0;
   }
+
+  .imgsection{
+    max-width: 100%;
+  }
+
 }
 
 @media screen and (min-width: 600px) {
+
   .logros-page {
     padding-bottom: 0;
     overflow: hidden;
@@ -1752,8 +1753,23 @@ button.swal2-cancel.updatecancel.swal2-styled {
   &-26 {
     font-size: 26px;
   }
+  &-27 {
+    font-size: 27px;
+  }
+  &-28 {
+    font-size: 28px;
+  }
+  &-29 {
+    font-size: 29px;
+  }
   &-30 {
     font-size: 30px;
+  }
+  &-40 {
+    font-size: 40px;
+  }
+  &-48 {
+    font-size: 48px;
   }
 }
 
@@ -2825,6 +2841,28 @@ h3#bussiness2 {
   }
 }
 
+
+.medals {
+  position: relative;
+  .mat-card {
+    background: transparent linear-gradient(180deg, #fd6a6a 0%, #ff7c7c 100%) 0% 0% no-repeat padding-box;
+    min-height: 90px;
+    width: 360px;
+  }
+}
+
+.icon-medal {
+  position: absolute;
+  top: 0;
+  left: 20px;
+}
+
+
 .mat-expansion-panel-header.mat-expanded {
   height: 36px !important;
+}
+
+
+img.datacenter {
+  max-width: 100%;
 }

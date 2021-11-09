@@ -15,6 +15,7 @@ export class ButtonComponent implements OnInit {
   @Output() action = new EventEmitter();
   @Input() haveIcon = true;
   @Input() color = 'orange';
+  @Input() direction = 'row';
 
   constructor() { }
 

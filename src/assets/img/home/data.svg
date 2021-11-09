@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="339" height="300" viewBox="0 0 339 300">
+  <defs>
+    <filter id="Rectangle_1070" x="0" y="0" width="339" height="102" filterUnits="userSpaceOnUse">
+      <feOffset dy="8" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feFlood flood-color="#8d7eb7" flood-opacity="0.251"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_1070-2" x="0" y="99" width="339" height="102" filterUnits="userSpaceOnUse">
+      <feOffset dy="8" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4" result="blur-2"/>
+      <feFlood flood-color="#8d7eb7" flood-opacity="0.251"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_1070-3" x="0" y="198" width="339" height="102" filterUnits="userSpaceOnUse">
+      <feOffset dy="8" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4" result="blur-3"/>
+      <feFlood flood-color="#8d7eb7" flood-opacity="0.251"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_3985" data-name="Group 3985" transform="translate(-13 -525)">
+    <g id="Ellipse_143" data-name="Ellipse 143" transform="translate(61 568)" fill="none" stroke="#8d7eb7" stroke-width="3" stroke-dasharray="8 8">
+      <ellipse cx="119.5" cy="99" rx="119.5" ry="99" stroke="none"/>
+      <ellipse cx="119.5" cy="99" rx="118" ry="97.5" fill="none"/>
+    </g>
+    <g id="Group_3921" data-name="Group 3921" transform="translate(-860 -269)">
+      <g id="Group_3957" data-name="Group 3957">
+        <g transform="matrix(1, 0, 0, 1, 873, 794)" filter="url(#Rectangle_1070)">
+          <rect id="Rectangle_1070-4" data-name="Rectangle 1070" width="315" height="78" rx="20" transform="translate(12 4)" fill="#8d7eb7"/>
+        </g>
+        <g id="Group_3898" data-name="Group 3898" transform="translate(899.326 806.178)">
+          <text id="_100.000" data-name="+100.000" transform="translate(3.674 22.822)" fill="#fff" font-size="24" font-family="GalanoGrotesque-Bold" font-weight="700" letter-spacing="-0.02em"><tspan x="0" y="0">+100.000</tspan></text>
+          <text id="productos_que_podrás_comprar_y_referir_para_ganar" data-name="productos que podrás comprar y referir para ganar" transform="translate(17.674 27.822)" fill="#fff" font-size="14" font-family="GalanoGrotesque-Medium" font-weight="500" letter-spacing="-0.02em"><tspan x="0" y="11">productos que podrás comprar y referir </tspan><tspan x="0" y="27">para ganar</tspan></text>
+        </g>
+      </g>
+    </g>
+    <g id="Group_3980" data-name="Group 3980" transform="translate(-860 -170)">
+      <g id="Group_3957-2" data-name="Group 3957">
+        <g transform="matrix(1, 0, 0, 1, 873, 695)" filter="url(#Rectangle_1070-2)">
+          <rect id="Rectangle_1070-5" data-name="Rectangle 1070" width="315" height="78" rx="20" transform="translate(12 103)" fill="#8d7eb7"/>
+        </g>
+        <g id="Group_3898-2" data-name="Group 3898" transform="translate(899.326 806.178)">
+          <text id="_40.000" data-name="+40.000" transform="translate(3.674 22.822)" fill="#fff" font-size="24" font-family="GalanoGrotesque-Bold" font-weight="700" letter-spacing="-0.02em"><tspan x="0" y="0">+40.000</tspan></text>
+          <text id="usuarios_generando_ganancias_con_Clickam" data-name="usuarios generando ganancias con Clickam" transform="translate(17.674 27.822)" fill="#fff" font-size="14" font-family="GalanoGrotesque-Medium" font-weight="500" letter-spacing="-0.02em"><tspan x="0" y="11">usuarios generando ganancias con </tspan><tspan x="0" y="27">Clickam</tspan></text>
+        </g>
+      </g>
+    </g>
+    <g id="Group_3981" data-name="Group 3981" transform="translate(-860 -71)">
+      <g id="Group_3957-3" data-name="Group 3957">
+        <g transform="matrix(1, 0, 0, 1, 873, 596)" filter="url(#Rectangle_1070-3)">
+          <rect id="Rectangle_1070-6" data-name="Rectangle 1070" width="315" height="78" rx="20" transform="translate(12 202)" fill="#8d7eb7"/>
+        </g>
+        <g id="Group_3898-3" data-name="Group 3898" transform="translate(899.326 806.178)">
+          <text id="_1.500_Millones" data-name="+1.500 Millones" transform="translate(3.674 22.822)" fill="#fff" font-size="24" font-family="GalanoGrotesque-Bold" font-weight="700" letter-spacing="-0.02em"><tspan x="0" y="0">+1.500 Millones</tspan></text>
+          <text id="hemos_entregado_a_los_Clickers_en_ganancias" data-name="hemos entregado a los Clickers en ganancias" transform="translate(17.674 27.822)" fill="#fff" font-size="14" font-family="GalanoGrotesque-Medium" font-weight="500" letter-spacing="-0.02em"><tspan x="0" y="11">hemos entregado a los Clickers en </tspan><tspan x="0" y="27">ganancias</tspan></text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -12,8 +12,11 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 export class SlideVideoComponent implements OnInit {
   @ViewChild('slickModal', { static: false })
   slickModal: SlickCarouselComponent;
+
   @ViewChild('templateVideo', { static: false })
   templateVideo: TemplateRef<any>;
+
+
   video: any;
 
   slideConfig = {

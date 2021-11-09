@@ -114,11 +114,10 @@
   </mat-card-content>
 </mat-card>
 
-<mat-card class="mat-elevation-z0 p-0 fade-in" *ngIf="category">
+<div class="mat-elevation-z0 container-fluid offers" *ngIf="category">
   <mat-card-content fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap="10px" fxLayoutAlign.xs="center center" class="category border-rad">
-    <span fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
+    <span fxLayout="column" fxFlex="100" fxLayoutAlign="center center" ngClass.xs="container">
       <img (click)="product()" [src]="photo" class="img-responsive mb-3 cursor-pointer {{ Class }}{{ productName }}" />
-      <!-- <h3></h3> -->
     </span>
   </mat-card-content>
-</mat-card>
+</div>

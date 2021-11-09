@@ -2,7 +2,9 @@
 
 <div fxShow.xs="false" class="no-focus">
   <div class="position-relative">
+    
     <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" *ngIf="isSlider === true">
+      
       <div ngxSlickItem *ngFor="let slide of sliderWeb; let i = index" class="slide text-center">
         <span (click)="openShare()">
           <app-product
@@ -16,7 +18,9 @@
           ></app-product>
         </span>
       </div>
+      
     </ngx-slick-carousel>
+  
     <div class="position-absolute" fxLayout="row" fxLayoutAlign="space-between" *ngIf="showArrows === true">
       <button mat-mini-fab color="orange" class="ml-4 op" (click)="prev()">
         <i class="tio-back_ui f-20 arrow-position"></i>

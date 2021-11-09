@@ -1,0 +1,7 @@
+<div [ngClass.gt-xs]="generalWeb" [ngClass.xs]="generalMobile"  [fxLayout.xs]="directionMobile" [fxLayout.gt-xs]="directionWeb" fxLayoutAlign="space-between center" fxLayoutGap.gt-xs="10%">
+    <app-image [imageClass]="imageClass" [src]="src" [alt]="alt"></app-image>
+    <span fxLayout="column">
+        <app-title showTitleh2="true" [text]="title" [classWeb]="classTitleWeb" [classMobile]="classTitleMobile"></app-title>
+        <p [ngClass.gt-xs]="classTextWeb" [ngClass.xs]="classTextMobile">{{text}}</p>
+    </span>
+</div>

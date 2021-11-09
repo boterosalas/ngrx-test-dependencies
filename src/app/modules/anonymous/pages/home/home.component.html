@@ -1,48 +1,110 @@
-<!-- <app-logo></app-logo> -->
+<!-- stories clickam looged -->
 <div *ngIf="auth.isLoggedIn()" class="stories-section">
   <app-slider-stories></app-slider-stories>
 </div>
 
+<!-- welcome  -->
+
+<div *ngIf="!auth.isLoggedIn()" class="container-fluid bg-welcome pt-3">
+  <app-welcome></app-welcome>
+</div>
+
+<!-- slider business -->
+
+<div *ngIf="!auth.isLoggedIn()" class="container-fluid mt-5">
+  <app-slider-share [slider]="bussiness" [slideConfig]="slideConfig"></app-slider-share>
+</div>
+
+<!-- images data -->
+
+<div *ngIf="!auth.isLoggedIn()" class="container-fluid bg-welcome pt-3">
+  <div class="container">
+    <app-image fxHide.xs="true" imageClass="datacenter" src="/assets/img/home/data.png" alt="data"></app-image>
+    <app-image fxHide.gt-xs="true" imageClass="datacenter" src="/assets/img/home/data.svg" alt="data"></app-image>
+  </div>
+</div>
+
+<div *ngIf="!auth.isLoggedIn()" class="container-fluid pt-3">
+  <div class="container">
+    
+    <app-image-text 
+    directionWeb="row" 
+    directionMobile="column" 
+    imageClass="imgsection" 
+    src="/assets/img/home/refiere.png"
+    title="Refiere y compra en Clickam tus tiendas favoritas"
+    alt="Refiere y compra en Clickam tus tiendas favoritas"
+    classTitleWeb="f-28"
+    classTitleMobile="f-20 text-center"
+    generalMobile="mt-5 text-center"
+    text="Comienza a referir en clickam.com.co o la app de Clickam y encuentra tu tienda, categoría, productos u oferta favorita."
+    classTextWeb="f-20 m-0"
+    classTextMobile="f-16 text-center mt-0 mb-3"
+    ></app-image-text>
+
+    <app-image-text 
+    directionWeb="row-reverse" 
+    directionMobile="column" 
+    imageClass="imgsection" 
+    src="/assets/img/home/gana.png"
+    title="Gana hasta el 10% en recompensas"
+    alt="Gana hasta el 10% en recompensas"
+    generalWeb="mt-5 pt-5"
+    generalMobile="mt-5 text-center"
+    classTitleWeb="f-28"
+    classTitleMobile="f-20 text-center"
+    text="Por comprar o referir los comercios aliados de Clickam, los comercios aliados le pagan a Clickam una comisión por enviar tráfico a sus sitios web y Clickam comparte esta comisión con los usuarios."
+    classTextWeb="f-20 m-0"
+    classTextMobile="f-16 text-center mt-0 mb-3"
+    ></app-image-text>
+
+    <app-image-text 
+    directionWeb="row" 
+    directionMobile="column" 
+    imageClass="imgsection" 
+    src="/assets/img/home/recibe.png"
+    title="Recibe tu dinero"
+    alt="Recibe tu dinero"
+    generalWeb="mt-5 pt-5"
+    generalMobile="mt-5 text-center"
+    classTitleWeb="f-28"
+    classTitleMobile="f-20 text-center"
+    text="Cada 15 días, Clickam te enviará tu dinero a la cuenta Bancaria inscrita."
+    classTextWeb="f-20 m-0"
+    classTextMobile="f-16 text-center mt-0 mb-3"
+    ></app-image-text>
+
+  </div>
+</div>
+
+<!-- testimonials -->
+<div *ngIf="!auth.isLoggedIn()" class="container-fluid pt-3 pb-3">
+  <div class="container">
+    <app-title showTitleh2="true" text="Lo que dicen de nosotros" class="text-center"></app-title>
+    <app-slide-testimonials [slider] ="testimonials" [slideConfig]="slideConfigTestimonials"></app-slide-testimonials>
+  </div>
+</div>
+
+
+<!-- sliders logged -->
 <app-slider
+  *ngIf="auth.isLoggedIn()"
   Class="gtmHomeClicBanner"
-  [showArrows]="true"
+  [showArrows]="false"
   [isSlider]="true"
   (action)="sliderOffers()"
   [sliderMobile]="sliderMobile"
   [sliderWeb]="sliderWeb"
 ></app-slider>
 
+<!-- medals mobile logged -->
+
 <div class="medals container pt-3" fxHide.gt-xs="true" *ngIf="auth.isLoggedIn()" fxLayout="row" fxLayoutAlign="center center">
-  <mat-card fxLayout="row" fxLayoutAlign="center center">
-    <div fxLayout="column" fxLayoutAlign="center space-between" fxLayoutGap="5px">
-      <span fxLayout="column">
-        <img class="icon-medal" src="/assets/img/gamification/medalla.svg" alt="icon" />
-      </span>
-      <span fxLayout="column" class="f-18 galano-bold white">
-        {{ 'MEDALS.MEDALS' | translate }}
-      </span>
-      <span fxLayout="column">
-        <button mat-raised-button class="purple-text" [routerLink]="['/logros']">
-          {{ 'MEDALS.MEDALS_SEE' | translate }}
-        </button>
-      </span>
-    </div>
-  </mat-card>
+  <app-card-medal></app-card-medal>
 </div>
 
-<div class="container" *ngIf="!auth.isLoggedIn()">
-  <span class="border-gray d-block"></span>
-  <app-how-works-clickam></app-how-works-clickam>
-  <app-slider-works></app-slider-works>
-</div>
-
-<div class="container-fluid bg-slide" *ngIf="!auth.isLoggedIn()">
-  <div class="container">
-    <app-home-slide-video></app-home-slide-video>
-  </div>
-</div>
-
-<div class="container">
+<div class="container" *ngIf="auth.isLoggedIn()">
+  
   <span fxLayout="row" fxLayoutAlign="space-between center">
     <h3 ngClass.gt-xs="mb-0" class="border-bottom-orange-init title-h3" id="bussinessHook">
       {{ 'HOME.BUSSINESS' | translate }}
@@ -51,7 +113,11 @@
       {{ 'HOME.ALL_BUSSINESS' | translate }}
     </p>
   </span>
+  
   <p class="f-20" fxHide.xs>{{ 'HOME.BUSSINESS_TEXT' | translate }}</p>
+
+  <!-- business cards -->
+
   <div
     fxLayout="row wrap"
     fxLayout.gt-xs="row wrap"
@@ -61,6 +127,7 @@
     fxLayoutGap="10px grid"
   >
     <ng-container *ngFor="let bussines of bussiness | slice: 0:8; let i = index">
+
       <app-bussiness-card
         *ngIf="bussines.code !== 'envios-clickam'"
         (bussiness)="bussinessNavigation(bussines)"
@@ -69,7 +136,9 @@
         [title]="bussines.description"
         [percent]="bussines.infoaditional"
       ></app-bussiness-card>
+
     </ng-container>
+
     <ng-container *ngFor="let bussines of bussinessClicker; let i = index">
       <app-bussiness-card
         *ngIf="isEmployee === true && bussines.code === 'envios-clickam' && auth.isLoggedIn()"
@@ -79,7 +148,11 @@
         [percent]="bussines.infoaditional"
       ></app-bussiness-card>
     </ng-container>
+
   </div>
+
+  <!-- offers to share banner web loggued -->
+
   <div *ngIf="auth.isLoggedIn()" fxLayout="row" class="card-library" fxShow.gt-xs="true" fxShow.xs="false">
     <div class="position-relative banner-mobile heigth-image" fxShow.gt-xs="true" fxShow.xs="false">
       <div class="position-absolute" fxLayout="column">
@@ -91,6 +164,9 @@
       <img class="responsive-img" src="/assets/img/banners/oferts.png" alt="ofertas" />
     </div>
   </div>
+
+  <!-- offers to share banner mobile loggued -->
+
   <div *ngIf="auth.isLoggedIn()" fxLayout="row" class="card-library" fxShow.gt-xs="false" fxShow.xs="true">
     <div class="position-relative banner-mobile heigth-image" fxShow.gt-xs="false" fxShow.xs="true">
       <div class="position-absolute" fxLayout="column">
@@ -103,11 +179,16 @@
     </div>
   </div>
 
-  <span class="border-gray d-block"></span>
-  <h3 class="border-bottom-orange-init title-h3">
-    {{ 'HOME.OFFERS' | translate }}
-  </h3>
-  <p class="f-20" fxHide.xs>{{ 'HOME.OFFERS_TEXT' | translate }}</p>
+</div>
+
+<!-- slider top products -->
+
+<div class="container-fluid">
+  <div class="container">
+    <span class="d-block"></span>
+    <app-title showTitleh2="true" text="{{ 'HOME.OFFERS' | translate }}" classWeb="border-bottom-orange-init" classMobile="border-bottom-orange-init"></app-title>
+    <p ngClass.gt-xs="f-20 mb-4" ngClass.xs="f-16">{{ 'HOME.OFFERS_TEXT' | translate }}</p>
+  </div>
 </div>
 
 <app-slider
@@ -119,41 +200,49 @@
   [sliderMobile]="offersMobile"
   [sliderWeb]="offersWeb"
 ></app-slider>
+
 <app-slider
   Class="gtmHomeClicOfertas"
   [showArrows]="false"
-  [isSlider]="false"
+  [isSlider]="true"
   fxShow.xs="false"
   (action)="sliderOffers()"
   [sliderMobile]="offersWeb"
+  [sliderWeb]="offersWeb"
   class="mb-3"
 ></app-slider>
 
+<!-- blog -->
+
 <div class="container">
-  <span class="border-gray d-block mt-3"></span>
+  <span class="d-block mt-3"></span>
   <app-blog-business></app-blog-business>
 </div>
-<div class="container">
-  <app-new-business (openModal)="openRegisterBusiness()"></app-new-business>
-</div>
-<div *ngIf="auth.isLoggedIn()" class="forms-help" fxLayout="row" fxLayoutAlign="center">
+
+<!-- form better clickam -->
+
+<div *ngIf="auth.isLoggedIn()" class="forms-help mt-3" fxLayout="row" fxLayoutAlign="center">
   <div fxLayout="column" fxLayoutAlign="center">
+    
     <div fxLayout="row" fxLayoutAlign="center">
       <div class="mt-4">
-        <img src="/assets/img/compartir_testimonial.svg" alt="" />
+        <img src="/assets/img/compartir_testimonial.svg" alt="testimonial" />
       </div>
       <div class="mt-4">
         <h4 class="text-cuentanos mt-0 mb-0 ml-3">¿Crees que en Clickam podemos mejorar algo?</h4>
         <p class="expresion-cuentanos mt-0 mb-0 ml-3">¡Cuéntanos!</p>
       </div>
     </div>
+
     <div *ngIf="!formData && !sendData" class="mt-2 mb-4" fxLayout="row" fxLayoutAlign="center">
       <button fxLayout="row" fxLayoutAlign="space-between center" class="cursor-pointer open-form" (click)="openForm()">
         <span>Abrir formulario</span>
         <mat-icon>keyboard_arrow_down</mat-icon>
       </button>
     </div>
+  
     <div *ngIf="formData && !sendData" class="mt-2 mb-4 pl-2 pr-2" fxLayout="column" fxLayoutAlign="center">
+      
       <form [formGroup]="dateForm">
         <label class="label-up-text" for="picker">Mensaje </label>
         <div class="mt-1">
@@ -168,6 +257,7 @@
           ></textarea>
         </div>
       </form>
+
       <div>
         <div class="mt-3 mb-2" fxLayout="row" fxLayoutAlign="end end">
           <button mat-button ngClass="button_cancel" style="color: #ffffff" (click)="cerrarForm()">Cancelar</button>
@@ -183,13 +273,18 @@
           </button>
         </div>
       </div>
+
     </div>
+
     <div *ngIf="formData && sendData" class="mt-2 mb-4" fxLayout="column" fxLayoutAlign="center center" style="text-align: center">
       <i class="tio-checkmark_circle" style="font-size: 38px; color: #ffffff"></i>
       <p class="expresion-cuentanos mt-0 mb-0 ml-3">¡Tu comentario ha sido enviado!</p>
       <button class="cursor-pointer open-form mt-2" style="width: 125px" (click)="cerrarForm()">Cerrar</button>
     </div>
+
   </div>
+
+  <!-- modal promo template -->
 
   <ng-template #templatePromo>
     <div fxShow.gt-xs="true" fxShow.xs="false">
@@ -204,4 +299,5 @@
       </a>
     </div>
   </ng-template>
+
 </div>

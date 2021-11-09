@@ -1,0 +1,13 @@
+<mat-card fxLayout="row" fxLayoutAlign="center center">
+  <div fxLayout="column" fxLayoutAlign="center space-between" fxLayoutGap="5px">
+    <span fxLayout="column">
+      <app-image imageClass="icon-medal" src="/assets/img/gamification/medalla.svg" alt="medal"></app-image>
+    </span>
+    <span fxLayout="column" class="f-18 galano-bold white">
+      {{ 'MEDALS.MEDALS' | translate }}
+    </span>
+    <span fxLayout="column">
+      <app-button title="{{'MEDALS.MEDALS_SEE' | translate}}" (action)="logrosRoute()" color="white" classButton="purple-text"></app-button>
+    </span>
+  </div>
+</mat-card>

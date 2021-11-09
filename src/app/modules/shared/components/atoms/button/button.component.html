@@ -1,6 +1,6 @@
 <button (click)="actionButtton()" [id]="id" [ngClass]="classButton" mat-raised-button [color]="color" [(disabled)]="disabled">
-    <span fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
-        <span class="mr-2">
+    <span [fxLayout]="direction" fxLayoutAlign="space-between center" fxLayoutGap="{'10px': haveIcon}">
+        <span [ngClass]="{'mr-2': haveIcon }">
             {{ title }}
         </span>
         <i *ngIf="haveIcon" [ngClass]="classIcon"></i>

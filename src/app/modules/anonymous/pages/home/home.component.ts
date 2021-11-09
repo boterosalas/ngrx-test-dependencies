@@ -60,8 +60,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   offersMobile: any;
   offersWeb: any;
   isEmployee: any;
-  @ViewChild('templateBusiness', { static: false })
-  templateBusiness: TemplateRef<any>;
   @ViewChild('templatePromo', { static: false })
   templatePromo: TemplateRef<any>;
   categories = [];
@@ -98,6 +96,56 @@ export class HomeComponent implements OnInit, OnDestroy {
   formData = false;
   sendData = false;
   dateForm: FormGroup;
+
+  @ViewChild('templateTestimonials', { static: true })
+  templateTestimonials: TemplateRef<any>;
+
+  testimonials = [
+    {title: 'Olga Lucía', testimonial: 'Los testimonios pueden ser un recurso poderoso para poder establecer un vínculo de confianza entre tus clientes nuevos. Es parte de lo que se conoce como la demostración social (social proof) y en el marketing es un medio poderoso para persuadir a tus visitantes de realizar cierta acción.'},
+    {title: 'Olga Lucía', testimonial: 'Los testimonios pueden ser un recurso poderoso para poder establecer un vínculo de confianza entre tus clientes nuevos. Es parte de lo que se conoce como la demostración social (social proof) y en el marketing es un medio poderoso para persuadir a tus visitantes de realizar cierta acción.'},
+    {title: 'Olga Lucía', testimonial: 'Los testimonios pueden ser un recurso poderoso para poder establecer un vínculo de confianza entre tus clientes nuevos. Es parte de lo que se conoce como la demostración social (social proof) y en el marketing es un medio poderoso para persuadir a tus visitantes de realizar cierta acción.'}
+  ]
+
+  slideConfig = {
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    dots: false,
+    dotClass: 'slick-dots orange',
+    autoplay: true,
+    autoplaySpeed: 5555000,
+    infinite: true,
+    arrows: true,
+    variableWidth: true,
+    responsive: [
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+    ],
+  };
+
+  slideConfigTestimonials = {
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    dots: true,
+    dotClass: 'slick-dots orange',
+    autoplay: true,
+    autoplaySpeed: 5000,
+    infinite: false,
+    arrows: false,
+    variableWidth: false,
+    responsive: [
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
   constructor(
     public router: Router,
     private route: ActivatedRoute,
@@ -106,10 +154,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     public auth: AuthService,
     private content: ContentService,
     private dialog: MatDialog,
-    private dialog2: MatDialog,
     private link: LinksService,
     private messagingService: MessagingService,
-    private _snackBar: MatSnackBar,
     private metaTagService: Meta,
     private fb: FormBuilder,
     private personalInfo: MasterDataService,
@@ -137,6 +183,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     });
   }
+
   public generateLink(dataEmail: any) {
     const idClicker = dataEmail;
     const formData: FormData = new FormData();
@@ -144,7 +191,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     formData.append('type', 'Visit');
     this.content.setClick(formData).subscribe();
   }
+
   ngOnInit() {
+
     this.metaTagService.addTags([
       {
         name: 'keywords',
@@ -398,7 +447,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     const datos = {
       message: this.dateForm.controls.description.value,
     };
-    this.user.saveFeedback(datos).subscribe((resp) => {
+    this.user.saveFeedback(datos).subscribe(() => {
       this.sendData = true;
       this.dateForm.reset();
     });

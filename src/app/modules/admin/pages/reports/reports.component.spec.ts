@@ -18,7 +18,7 @@ import { AnonymousModule } from 'src/app/modules/anonymous/anonymous.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { CardComponent } from 'src/app/modules/anonymous/components/card/card.component';
+import { CardComponent } from 'src/app/modules/shared/components/atoms/card/card.component';
 
 describe('ReportsComponent', () => {
   let component: ReportsComponent;

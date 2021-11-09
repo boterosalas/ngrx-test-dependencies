@@ -11,3 +11,39 @@
 .shadow-yellow{
     box-shadow: 0px 2px 4px $shadow-yellow;
 }
+
+.mat{
+  &-yellow-not-bg{
+    background: none;
+    box-shadow: none;
+    color: $yellow-button-home;
+  }
+
+  &-border-button {
+    background: none;
+    color: $primary-color;
+    border: 1px solid !important;
+  }
+
+  &-orange-button {
+    background: $third-color;
+    color: #ffffff;
+  }
+
+  &-border-white {
+    background: $primary-color;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+  }
+
+  &-white {
+    background: #ffffff;
+    color: $primary-color;
+  }
+
+  &-gray{
+    background: $gray3;
+    color: $primary-color;
+  }
+
+}
