@@ -112,10 +112,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     dots: false,
     dotClass: 'slick-dots orange',
     autoplay: true,
-    autoplaySpeed: 5555000,
+    autoplaySpeed: 5000,
     infinite: true,
     arrows: true,
     variableWidth: true,
+    lazyLoad: 'ondemand',
     responsive: [
       {
         breakpoint: 600,
@@ -136,6 +137,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     infinite: false,
     arrows: false,
     variableWidth: false,
+    lazyLoad: 'ondemand',
     responsive: [
       {
         breakpoint: 600,
