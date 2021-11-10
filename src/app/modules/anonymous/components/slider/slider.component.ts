@@ -79,7 +79,7 @@ export class SliderComponent implements OnInit, OnDestroy {
 
   slideConfig = {
     slidesToShow: 3,
-    slidesToScroll: 1,
+    slidesToScroll: 3,
     dots: true,
     dotClass: 'slick-dots orange',
     autoplay: true,
@@ -87,11 +87,13 @@ export class SliderComponent implements OnInit, OnDestroy {
     infinite: false,
     arrows: false,
     variableWidth: false,
+    lazyLoad: 'ondemand',
     responsive: [
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 1,
+          slidesToScroll: 1,
         },
       },
     ],
@@ -107,6 +109,7 @@ export class SliderComponent implements OnInit, OnDestroy {
     this.idCustomerForm = this.fb.group({
       identification: ['', [Validators.required, Validators.pattern(this.numberPattern), Validators.maxLength(10)]],
     });
+
   }
 
   public nextStep() {
