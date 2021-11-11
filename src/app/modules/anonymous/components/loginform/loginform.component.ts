@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, Inject, PLATFORM_ID } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -9,6 +9,7 @@ import { LoaderService } from 'src/app/services/loader.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import decode from 'jwt-decode';
 import { LinksService } from 'src/app/services/links.service';
+import { isPlatformBrowser } from '@angular/common';
 declare var dataLayer: any;
 
 @Component({
@@ -23,7 +24,8 @@ export class LoginformComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private loading: LoaderService,
     private utils: UtilsService,
-    private link: LinksService
+    private link: LinksService,
+    @Inject(PLATFORM_ID) private platformId: object
   ) {}
 
   private subscription: Subscription = new Subscription();
@@ -68,7 +70,7 @@ export class LoginformComponent implements OnInit, OnDestroy {
           localStorage.setItem('REFRESH_TOKEN', resp.objectResponse.refreshToken);
           this.utils.hideloginForm();
           this.routeBased();
-
+          if (isPlatformBrowser(this.platformId)) {
           dataLayer.push({
             event: 'pushEventGA',
             categoria: 'IniciarSesion',
@@ -82,6 +84,7 @@ export class LoginformComponent implements OnInit, OnDestroy {
             accion: 'ClicLateral',
             etiqueta: this.loginForm.value.Username,
           });
+        }
         } else {
           Swal.fire({
             title: 'Login inválido',

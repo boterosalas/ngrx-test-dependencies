@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, ViewChild, TemplateRef, Inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmPasswordValidator } from 'src/app/validators/confirm-password.validator';
 import Swal from 'sweetalert2';
@@ -13,6 +13,7 @@ import { MasterDataService } from 'src/app/services/master-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { ContentService } from 'src/app/services/content.service';
+import { isPlatformBrowser } from '@angular/common';
 declare var dataLayer: any;
 
 @Component({
@@ -29,7 +30,8 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     private utils: UtilsService,
     private dialog: MatDialog,
     private content: ContentService,
-    private personalInfo: MasterDataService
+    private personalInfo: MasterDataService,
+    @Inject(PLATFORM_ID) private platformId: object
   ) {}
 
   private subscription: Subscription = new Subscription();
@@ -144,12 +146,14 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       (resp: ResponseService) => {
         this.loading.hide();
         if (resp.state === 'Success') {
+          if (isPlatformBrowser(this.platformId)) {
           dataLayer.push({
             event: 'pushEventGA',
             categoria: 'Registro',
             accion: 'ClicContinuar',
             etiqueta: 'RegistroExitoso',
           });
+        }
 
           Swal.fire({
             title: 'Revisa tu correo',

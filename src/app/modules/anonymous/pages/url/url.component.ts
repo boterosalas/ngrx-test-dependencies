@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { LinksService } from 'src/app/services/links.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Meta } from '@angular/platform-browser';
@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { environment } from 'src/environments/environment';
 import { UserService } from 'src/app/services/user.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-url',
@@ -25,7 +26,8 @@ export class UrlComponent implements OnInit {
     private utilsSvc: UtilsService,
     private userSvc: UserService,
     private router: Router,
-    private metaTagService: Meta
+    private metaTagService: Meta,
+    @Inject(PLATFORM_ID) private platformId: object
   ) {}
 
   ngOnInit() {
@@ -67,14 +69,18 @@ export class UrlComponent implements OnInit {
         if (user) {
           const data = { idBusiness: this.exist.id, userId: user.userId, url: this.exist.url };
           this.link.getUrlWidget(data).subscribe((url) => {
-            window.location.replace(url);
+            if (isPlatformBrowser(this.platformId)) {
+              window.location.replace(url);
+            }
           });
         }
       });
     } else {
       this.link.getUrl(this.code).subscribe((url) => {
         if (url !== null) {
-          window.location.replace(url);
+          if (isPlatformBrowser(this.platformId)) {
+            window.location.replace(url);
+          }
         }
         if (url === null) {
           this.showMessage = true;
