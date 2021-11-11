@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, ViewChild, TemplateRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, TemplateRef, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { ContentService } from 'src/app/services/content.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -17,6 +17,7 @@ import { TokenService } from 'src/app/services/token.service';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { environment } from 'src/environments/environment';
+import { isPlatformBrowser } from '@angular/common';
 
 declare var dataLayer: any;
 
@@ -123,7 +124,8 @@ export class BussinessComponent implements OnInit, OnDestroy {
     private links: LinksService,
     private token: TokenService,
     ngNavigatorShareService: NgNavigatorShareService,
-    private dialogModal: MatDialog
+    private dialogModal: MatDialog,
+    @Inject(PLATFORM_ID) private platformId: object
   ) {
     this.ngNavigatorShareService = ngNavigatorShareService;
 
@@ -571,13 +573,14 @@ export class BussinessComponent implements OnInit, OnDestroy {
       this.mostrarProductos = 3;
       // this.productsListExito = [];
     }
-
+    if (isPlatformBrowser(this.platformId)) {
     dataLayer.push({
       event: 'pushEventGA',
       categoria: 'NegocioExito',
       accion: 'ClicBuscar',
       etiqueta: term,
     });
+  }
     const params = { term, order, page, count };
     this.subscription = this.sp.biggySearchExito(params).subscribe(
       (searchExito: any) => {
