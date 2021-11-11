@@ -1,6 +1,6 @@
 
-  <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
-    <div ngxSlickItem *ngFor="let slide of slider; let i = index" class="slide m-2 p-0">
+  <ngx-slick-carousel fxLayoutGap="10px" class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+    <div ngxSlickItem  fxLayoutAlign="center center" *ngFor="let slide of slider; let i = index" class="slide m-2 p-0">
         <app-image imageClass="img-slide" [src]="slide.imageurl" [alt]="slide.description" ></app-image>
     </div>
   </ngx-slick-carousel>

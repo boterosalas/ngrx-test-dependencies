@@ -115,13 +115,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     autoplaySpeed: 5000,
     infinite: true,
     arrows: true,
-    variableWidth: true,
+    variableWidth: false,
     lazyLoad: 'ondemand',
     responsive: [
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 3,
+          variableWidth: true,
         },
       },
     ],
@@ -238,7 +239,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.subscription = this.user.getuserdata().subscribe((user) => {
           this.isEmployee = user.isEmployeeGrupoExito;
           this.managedPayments = user.managedPayments;
-          this.getInfomonth();
+          // this.getInfomonth();
           if (role === 'CLICKER') {
             this.newTerms = user.acceptTermsReferrals;
             if (this.newTerms === true) {
@@ -441,6 +442,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public getInfomonth() {
     this.subscription = this.link.getReports().subscribe((resume: any) => {
+      console.log(resume);
       this.paymentPending = resume.money.paymentPending;
     });
   }

@@ -2,6 +2,8 @@
 /inicio
 /click-academy
 /blog
+/url
+/url/id
 /blog/articulos
 /tabla-comisiones
 /terminos-y-condiciones

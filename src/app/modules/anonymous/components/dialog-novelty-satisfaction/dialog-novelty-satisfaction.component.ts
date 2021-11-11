@@ -15,13 +15,13 @@ export class DialogNoveltySatisfactionComponent implements OnInit, OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  showCopyThanks: boolean = false;
+  showCopyThanks = false;
   statusForm?: FormGroup;
   activeButton = false;
   $formSubscription: Subscription;
 
   ngOnInit() {
-    this.statusForm = this.fb.group({ qualification: [''], comment: ['', [Validators.required]] });
+    this.statusForm = this.fb.group({ qualification: ['',  [Validators.required]], comment: [''] });
     this.$formSubscription = this.statusForm.valueChanges.subscribe((resp) => {
       if (resp.qualification) {
         this.data.qualification = Number(resp.qualification);
