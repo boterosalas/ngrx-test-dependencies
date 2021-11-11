@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, TemplateRef, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Subscription, Observable } from 'rxjs';
@@ -43,6 +43,9 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
 
   @ViewChild('templateDeleteAccount', { static: false })
   templateDelete: TemplateRef<any>;
+
+  @Input() showBankInfo: boolean;
+  @Input() showInfoAccount: boolean;
 
   private subscription: Subscription = new Subscription();
   profileForm: FormGroup;

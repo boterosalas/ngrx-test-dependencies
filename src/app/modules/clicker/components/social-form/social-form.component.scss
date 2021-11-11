@@ -1,0 +1,45 @@
+@import 'variables';
+@import 'animations';
+
+.item {
+  line-height: 3;
+  border-bottom: 1px solid #ececec;
+  padding: 0 25px;
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+label {
+  width: 190px;
+  color: $gray2;
+  text-transform: uppercase;
+  font-family: $font-galano-bold;
+  line-height: 1.5;
+}
+
+.w-85 {
+  width: 85%;
+}
+
+span.info {
+  width: 220px;
+  position: relative;
+  top: 8px;
+}
+
+.info-basic {
+  .mat-card-header {
+    background: #f3f1f6;
+    color: $primary-color;
+    text-transform: uppercase;
+  }
+}
+
+.iph {
+  min-height: 140px;
+}
+
+button{
+  width: 108px;
+}
