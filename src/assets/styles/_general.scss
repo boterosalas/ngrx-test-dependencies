@@ -900,14 +900,12 @@ table {
     min-width: 0;
   }
 
-  .imgsection{
+  .imgsection {
     max-width: 100%;
   }
-
 }
 
 @media screen and (min-width: 600px) {
-
   .logros-page {
     padding-bottom: 0;
     overflow: hidden;
@@ -2841,7 +2839,6 @@ h3#bussiness2 {
   }
 }
 
-
 .medals {
   position: relative;
   .mat-card {
@@ -2857,17 +2854,16 @@ h3#bussiness2 {
   left: 20px;
 }
 
-
 .mat-expansion-panel-header.mat-expanded {
   height: 36px !important;
 }
-
 
 img.datacenter {
   max-width: 100%;
 }
 
-.img-slide{
-  min-width: 200px;
-  object-fit: contain;
+.img-slide {
+  width: 150px;
+  max-width: 150px;
+  min-width: 150px;
 }
