@@ -11,13 +11,13 @@
 
 <!-- slider business -->
 
-<div *ngIf="!auth.isLoggedIn()" class="container-fluid mt-5">
+<div *ngIf="!auth.isLoggedIn()" class="container-fluid">
   <app-slider-share [slider]="bussiness" [slideConfig]="slideConfig"></app-slider-share>
 </div>
 
 <!-- images data -->
 
-<div *ngIf="!auth.isLoggedIn()" class="container-fluid bg-welcome pt-3" ngClass.gt-xs="mt-5">
+<div *ngIf="!auth.isLoggedIn()" class="container-fluid bg-welcome pt-3" >
   <div class="container">
     <app-image fxHide.xs="true" imageClass="datacenter" src="/assets/img/home/data.png" alt="data"></app-image>
     <app-image fxHide.gt-xs="true" imageClass="datacenter" src="/assets/img/home/data.svg" alt="data"></app-image>

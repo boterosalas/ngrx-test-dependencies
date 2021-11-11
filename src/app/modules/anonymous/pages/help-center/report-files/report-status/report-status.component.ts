@@ -36,8 +36,10 @@ export class ReportStatusComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((resp) => {
-        if (resp.comment && resp.qualification) {
-          this.saveQualification(resp, item);
+        if(resp !== undefined) {
+          if (resp.comment || resp.qualification) {
+            this.saveQualification(resp, item);
+          }
         }
       });
   }

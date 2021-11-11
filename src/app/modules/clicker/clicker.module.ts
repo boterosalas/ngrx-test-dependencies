@@ -44,6 +44,7 @@ import { DeleteformComponent } from './pages/deleteform/deleteform.component';
 import { NotificationsComponent } from './pages/notifications/notifications.component';
 import { DetailComponent } from './pages/notifications/detail/detail.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { SocialFormComponent } from './components/social-form/social-form.component';
 const routes: Routes = [
   {
     path: 'mi-perfil/:pagos',
@@ -144,6 +145,7 @@ const routes: Routes = [
     DeleteformComponent,
     NotificationsComponent,
     DetailComponent,
+    SocialFormComponent,
   ],
   imports: [
     CommonModule,
