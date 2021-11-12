@@ -76,7 +76,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
+              "optimization": false,
               "outputHashing": "all",
               "sourceMap": true,
               "namedChunks": true,
@@ -99,7 +99,7 @@
               "ngswConfigPath": "ngsw-config.json"
             },
             "qa": {
-              "optimization": true,
+              "optimization": false,
               "outputHashing": "all",
               "sourceMap": true,
               "namedChunks": true,
