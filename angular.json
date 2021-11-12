@@ -76,13 +76,13 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": false,
+              "optimization": true,
               "outputHashing": "all",
               "sourceMap": true,
               "namedChunks": true,
               "extractLicenses": false,
               "vendorChunk": false,
-              "buildOptimizer": false,
+              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -99,12 +99,27 @@
               "ngswConfigPath": "ngsw-config.json"
             },
             "qa": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": true,
+              "namedChunks": true,
+              "extractLicenses": false,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "budgets": [
                 {
+                  "type": "initial",
+                  "maximumWarning": "20mb",
+                  "maximumError": "20mb"
+                },
+                {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "1mb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "1mb"
                 }
               ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "index": {
                 "input": "src/index-qa.html",
                 "output": "index.html"
