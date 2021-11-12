@@ -231,7 +231,7 @@
             "outputPath": "dist/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json",
-            "optimization": false,
+            "optimization": true,
             "sourceMap": true,
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -260,7 +260,10 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.qa.ts"
                 }
-              ]
+              ],
+              "optimization": true,
+              "sourceMap": false,
+              "extractLicenses": true
             },
             "uat": {
               "fileReplacements": [
