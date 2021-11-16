@@ -99,7 +99,7 @@
               "ngswConfigPath": "ngsw-config.json"
             },
             "qa": {
-              "optimization": true,
+              "optimization": false,
               "outputHashing": "all",
               "sourceMap": true,
               "namedChunks": true,
