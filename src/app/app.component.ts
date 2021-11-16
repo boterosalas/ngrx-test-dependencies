@@ -283,10 +283,7 @@ export class AppComponent implements OnInit, OnDestroy {
           customClass: 'paymentData',
         }).then(() => {
           if (isPlatformBrowser(this.platformId)) {
-            const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-            if (iOS) {
               window.location.reload();
-            }
           }
         });
       });
