@@ -15,11 +15,8 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-builders/custom-webpack:browser",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "customWebpackConfig": {
-              "path": "./custom-webpack.config.js"
-             },
             "allowedCommonJsDependencies": [
               "firebase",
               "@firebase",
@@ -156,11 +153,8 @@
           "defaultConfiguration": ""
         },
         "serve": {
-          "builder": "@angular-builders/custom-webpack:dev-server",
+          "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "customWebpackConfig": {
-              "path": "./custom-webpack.config.js"
-            },
             "browserTarget": "clickam:build"
           },
           "configurations": {
