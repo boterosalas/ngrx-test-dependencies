@@ -103,6 +103,10 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
       titulo: 'Visualización de las historias',
       value: 8,
     },
+    {
+      titulo: 'Validación de usuarios',
+      value: 9,
+    },
   ];
 
   locale = {
@@ -369,7 +373,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
     this.subscription.unsubscribe();
   }
   onChangeSelected(event) {
-    if (event === 'Datos de gamificación' || event === 'Usuarios externos' || event === 'Visualización de las historias') {
+    if (event === 'Datos de gamificación' || event === 'Usuarios externos' || event === 'Visualización de las historias' || event === 'Validación de usuarios') {
       this.dateNoVisible = true;
       this.disableButon = false;
       this.dateForm.get('dateRange').setValue(null);
@@ -454,7 +458,19 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
       this.getRefers();
     } else if (this.dateForm.controls.tipoReport.value === '8') {
       this.getStoriesReport();
+    } else if (this.dateForm.controls.tipoReport.value === '9') {
+      this.validationUsers();
     }
+  }
+
+  public validationUsers(){
+    this.subscription = this.usersService.getValidationlUsers().subscribe((validation: ResponseService) => {
+      this.dateForm.reset();
+      if (this.dateForm.controls.dateRange.value.startDate === null) {
+        this.disableButon = true;
+      }
+      this.utils.openSnackBar(validation.userMessage, 'Cerrar');
+    });
   }
 
   public exportUsersFilter() {

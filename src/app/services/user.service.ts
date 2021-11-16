@@ -43,6 +43,7 @@ export class UserService {
   apiSaveUserDevice = 'notification/saveuserdevice';
   apiUpdateEmployees = 'userprofile/updateemployees';
   apiGetExternalUsers = 'userprofile/getexternalusers';
+  apiGetValidationsUsers = 'userprofile/getvalidationusers';
   apiDeleteUser = 'userprofile/deleteaccount';
   apiDeleteUserAdmin = 'userprofile/deleteuseradmin';
   apiReporUserGamification = 'reports/getreportgamification';
@@ -215,6 +216,18 @@ export class UserService {
 
   public getExternalUsers() {
     return this.http.get(`${this.url}${this.apiGetExternalUsers}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => { })
+        )
+      )
+    );
+  }
+
+  public getValidationlUsers() {
+    return this.http.get(`${this.url}${this.apiGetValidationsUsers}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
