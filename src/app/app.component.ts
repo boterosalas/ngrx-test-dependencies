@@ -97,7 +97,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private personalInfo: MasterDataService,
     @Inject(PLATFORM_ID) private platformId: object
   ) {
-
     if (isPlatformBrowser(this.platformId)) {
       translate.setDefaultLang('es');
       translate.use('es');
@@ -111,9 +110,9 @@ export class AppComponent implements OnInit, OnDestroy {
             virtualPageURL: url.url,
           });
         }
-        
-        const splitUrl =  url.url.split('/');
-        if(splitUrl[1] === 'url') {
+
+        const splitUrl = url.url.split('/');
+        if (splitUrl[1] === 'url') {
           this.hideFH = true;
         } else {
           this.hideFH = false;
@@ -282,9 +281,7 @@ export class AppComponent implements OnInit, OnDestroy {
           confirmButtonClass: 'update-success',
           customClass: 'paymentData',
         }).then(() => {
-          if (isPlatformBrowser(this.platformId)) {
-              window.location.reload();
-          }
+          window.location.reload();
         });
       });
     }
