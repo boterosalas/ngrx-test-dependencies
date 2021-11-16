@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "postbuild": "gulp compress",
     "build": "ng run clickam:prerender",
     "build-qa": "ng run clickam:prerender --configuration=qa",
     "build-uat": "ng run clickam:prerender --configuration=uat",
@@ -84,7 +85,6 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-builders/custom-webpack": "^12.1.3",
     "@angular-devkit/build-angular": "~12.2.0",
     "@angular/cli": "^12.2.0",
     "@angular/compiler-cli": "^12.2.0",
@@ -95,10 +95,10 @@
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "^2.0.10",
     "@types/node": "^12.11.1",
-    "brotli-webpack-plugin": "^1.1.0",
     "codelyzer": "^6.0.0",
     "compodoc": "0.0.41",
-    "compression-webpack-plugin": "^9.0.0",
+    "gulp": "^4.0.2",
+    "gulp-gzip": "^1.4.2",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.1.0",
