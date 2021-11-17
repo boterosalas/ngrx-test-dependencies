@@ -87,5 +87,15 @@ beforeEach(waitForAsync(() => {
     component.sendInfo();
     expect(component.uploadFile.emit).toHaveBeenCalled();
   });
-  
+
+  it('Test', () => {
+    const test = true;
+    expect(test).toBeTruthy();
+  });
+
+  afterAll(() => {
+    TestBed.resetTestingModule();
+  });
+
+
 });
