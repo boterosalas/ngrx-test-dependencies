@@ -52,9 +52,13 @@ import { CardDataTotalComponent } from './components/card-data-total/card-data-t
 import { TableDetailComissionComponent } from './components/table-detail-comission/table-detail-comission.component';
 import { ImageComponent } from './components/atoms/image/image.component';
 import { SliderComponent } from './components/atoms/slider/slider.component';
+import { SliderComponent as SliderShare } from '../anonymous/components/slider/slider.component';
 import { ImageTextComponent } from './components/molecules/image-text/image-text.component';
 import { TitleComponent } from './components/atoms/title/title.component';
 import { CardComponent } from './components/atoms/card/card.component';
+import { BussinessCardComponent } from '../anonymous/components/bussiness-card/bussiness-card.component';
+import { ButtonStoryComponent } from '../anonymous/components/button-story/button-story.component';
+import { ShareButtonModule } from '@ngx-share/button';
 
 @NgModule({
   declarations: [
@@ -93,9 +97,12 @@ import { CardComponent } from './components/atoms/card/card.component';
     TableDetailComissionComponent,
     ImageComponent,
     SliderComponent,
+    SliderShare,
     ImageTextComponent,
     TitleComponent,
-    CardComponent
+    CardComponent,
+    BussinessCardComponent,
+    ButtonStoryComponent
   ],
   imports: [
     CommonModule,
@@ -116,7 +123,8 @@ import { CardComponent } from './components/atoms/card/card.component';
     MatIconModule,
     SlickCarouselModule,
     NgxPaginationModule,
-    NgxDaterangepickerMd.forRoot()
+    NgxDaterangepickerMd.forRoot(),
+    ShareButtonModule,
   ],
   exports: [
     SearchComponent,
@@ -155,9 +163,12 @@ import { CardComponent } from './components/atoms/card/card.component';
     TableDetailComissionComponent,
     ImageComponent,
     SliderComponent,
+    SliderShare,
     ImageTextComponent,
     TitleComponent,
-    CardComponent
+    CardComponent,
+    BussinessCardComponent,
+    ButtonStoryComponent
   ],
   entryComponents: [ModalGenericComponent, PopupComponent, DialogStoriesComponent, OnboardingSwiperComponent],
 })
