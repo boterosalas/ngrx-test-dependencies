@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
 import { AppMaterialModule } from '../shared/app-material/app-material.module';
-import { SliderStoriesComponent } from './components/slider-stories/slider-stories.component';
-import { ButtonStoryComponent } from './components/button-story/button-story.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
@@ -19,8 +16,6 @@ import { KeySpaceDirective } from 'src/directives/space.directive';
 import { CardOfferComponent } from './components/card-offer/card-offer.component';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
-import { SliderComponent } from './components/slider/slider.component';
-import { BussinessCardComponent } from './components/bussiness-card/bussiness-card.component';
 import { ComissionTableComponent } from './pages/comission-table/comission-table.component';
 import { NewBusinessComponent } from './components/new-business/new-business.component';
 import { NewBusinessFormComponent } from './components/new-business-form/new-business-form.component';
@@ -32,7 +27,6 @@ import {
   RECAPTCHA_SETTINGS,
   RecaptchaSettings,
 } from 'ng-recaptcha';
-import { UrlComponent } from './pages/url/url.component';
 import { SlideVideoComponent } from './components/slide-video/slide-video.component';
 import { ClickamComponent } from './pages/help-center/about/clickam/clickam.component';
 import { RegisterComponent } from './pages/help-center/about/register/register.component';
@@ -77,34 +71,16 @@ import { HowWorksClickamComponent } from './components/how-works-clickam/how-wor
 import { SliderWorksComponent } from './components/slider-works/slider-works.component';
 import { HomeSlideVideoComponent } from './components/home-slide-video/home-slide-video.component';
 import { ReportIconsClickamComponent } from './pages/help-center/report-files/report-icons/report-icons-clickam.component';
-// import { ReportComponent } from '../clicker/components/report/report.component';
 import { ReportNewsComponent } from './pages/help-center/report-news/report-news.component';
 import { ReportStatusComponent } from './pages/help-center/report-files/report-status/report-status.component';
 import { BlogsComponent } from './pages/blogs/blogs.component';
 import { BlogContentComponent } from './pages/blog-content/blog-content.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import { NewBlogComponent } from './components/new-blogs/new-blog.component';
 import { CardOrderNumberComponent } from './components/card-order-number/card-order-number.component';
 import { DialogNoveltySatisfactionComponent } from './components/dialog-novelty-satisfaction/dialog-novelty-satisfaction.component';
 import { ConsultComponent } from './pages/help-center/consult/consult.component';
-import { WelcomeComponent } from './components/welcome/welcome.component';
-import { CardMedalComponent } from './components/molecules/card-medal/card-medal.component';
-import { SlideTestimonialsComponent } from './components/molecules/slide-testimonials/slide-testimonials.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'inicio',
-    pathMatch: 'full',
-  },
-  {
-    path: 'inicio',
-    component: HomeComponent,
-  },
-  {
-    path: '?',
-    component: HomeComponent,
-  },
   {
     path: 'recuperar-contrasena/:id',
     component: RecoverpasswordComponent,
@@ -366,15 +342,10 @@ const routes: Routes = [
     path: 'tabla-comisiones',
     component: ComissionTableComponent,
   },
-  {
-    path: 'url/:shortCode',
-    component: UrlComponent,
-  },
 ];
 
 @NgModule({
   declarations: [
-    HomeComponent,
     RecoverpasswordComponent,
     RecoverpasswordformComponent,
     ClickAcademyComponent,
@@ -382,13 +353,9 @@ const routes: Routes = [
     BlockCopyPasteDirective,
     KeySpaceDirective,
     CardOfferComponent,
-    SliderComponent,
-    BussinessCardComponent,
     ComissionTableComponent,
     NewBusinessComponent,
-    NewBlogComponent,
     NewBusinessFormComponent,
-    UrlComponent,
     SlideVideoComponent,
     ClickamComponent,
     RegisterComponent,
@@ -437,14 +404,9 @@ const routes: Routes = [
     ReportStatusComponent,
     BlogsComponent,
     BlogContentComponent,
-    SliderStoriesComponent,
-    ButtonStoryComponent,
     CardOrderNumberComponent,
     DialogNoveltySatisfactionComponent,
     ConsultComponent,
-    WelcomeComponent,
-    CardMedalComponent,
-    SlideTestimonialsComponent,
   ],
   imports: [
     FormsModule,
@@ -466,8 +428,6 @@ const routes: Routes = [
   exports: [
     RouterModule,
     RecoverpasswordformComponent,
-    BussinessCardComponent,
-    SliderStoriesComponent,
     DialogNoveltySatisfactionComponent,
   ],
   entryComponents: [NewBusinessFormComponent, DialogNoveltySatisfactionComponent],

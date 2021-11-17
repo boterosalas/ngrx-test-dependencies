@@ -6,6 +6,14 @@ import { RoleGuard } from './role.guard';
 const routes: Routes = [
   {
     path: '',
+    loadChildren: () => import('./modules/home/home.module').then((m) => m.HomeModule),
+  },
+  {
+    path: '',
+    loadChildren: () => import('./modules/url/url.module').then((m) => m.UrlModule),
+  },
+  {
+    path: '',
     loadChildren: () => import('./modules/anonymous/anonymous.module').then((m) => m.AnonymousModule),
   },
   {
