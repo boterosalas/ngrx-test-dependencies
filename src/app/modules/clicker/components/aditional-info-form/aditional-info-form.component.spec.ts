@@ -13,10 +13,9 @@ import { of } from 'rxjs/internal/observable/of';
 import { MasterDataService } from 'src/app/services/master-data.service';
 import { BehaviorSubject } from 'rxjs';
 
-describe('AditionalInfoFormComponent', () => {
+xdescribe('AditionalInfoFormComponent', () => {
   let component: AditionalInfoFormComponent;
   let fixture: ComponentFixture<AditionalInfoFormComponent>;
-
 
   const mockUserService = jasmine.createSpyObj('UserService', ['getBasicData', 'updateUser', 'userInfo$']);
 
