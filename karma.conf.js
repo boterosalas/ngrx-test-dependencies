@@ -15,7 +15,7 @@ module.exports = function (config) {
       require('karma-parallel'),
     ],
     parallelOptions: {
-      executors: 5, // Defaults to cpu-count - 1
+      executors: 6, // Defaults to cpu-count - 1
       shardStrategy: 'round-robin',
     },
     client: {

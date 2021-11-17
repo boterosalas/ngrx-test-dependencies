@@ -12,8 +12,9 @@ import { UserService } from 'src/app/services/user.service';
 import { of } from 'rxjs/internal/observable/of';
 import { MasterDataService } from 'src/app/services/master-data.service';
 import { BehaviorSubject } from 'rxjs';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-xdescribe('AditionalInfoFormComponent', () => {
+describe('AditionalInfoFormComponent', () => {
   let component: AditionalInfoFormComponent;
   let fixture: ComponentFixture<AditionalInfoFormComponent>;
 
@@ -180,7 +181,9 @@ beforeEach(waitForAsync(() => {
         { provide: UserService, useValue: mockUserService },
         { provide: MasterDataService, useValue: mockMasterDataService },
       ],
-      schemas: []
+      schemas: [
+        NO_ERRORS_SCHEMA
+      ]
     }).compileComponents();
     mockUserService.getBasicData.and.returnValue(of(basicData));
     mockUserService.updateUser.and.returnValue(of(dataUser));
