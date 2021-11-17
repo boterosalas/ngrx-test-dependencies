@@ -101,10 +101,22 @@ export class HomeComponent implements OnInit, OnDestroy {
   templateTestimonials: TemplateRef<any>;
 
   testimonials = [
-    {title: 'Olga Lucía', testimonial: 'Los testimonios pueden ser un recurso poderoso para poder establecer un vínculo de confianza entre tus clientes nuevos. Es parte de lo que se conoce como la demostración social (social proof) y en el marketing es un medio poderoso para persuadir a tus visitantes de realizar cierta acción.'},
-    {title: 'Olga Lucía', testimonial: 'Los testimonios pueden ser un recurso poderoso para poder establecer un vínculo de confianza entre tus clientes nuevos. Es parte de lo que se conoce como la demostración social (social proof) y en el marketing es un medio poderoso para persuadir a tus visitantes de realizar cierta acción.'},
-    {title: 'Olga Lucía', testimonial: 'Los testimonios pueden ser un recurso poderoso para poder establecer un vínculo de confianza entre tus clientes nuevos. Es parte de lo que se conoce como la demostración social (social proof) y en el marketing es un medio poderoso para persuadir a tus visitantes de realizar cierta acción.'}
-  ]
+    {
+      title: 'Yesenia Ramos',
+      testimonial:
+        'Estoy feliz de tener la posibilidad de generar ingresos con Clickam, sin tener que invertir dinero, ni mucho tiempo, sólo con compartir un link en mis redes sociales puedo obtener ganancias y seguir con mi vida cotidiana, tener tiempo para compartir en familia y aumentar mis ingresos...Es lo máximo!',
+    },
+    {
+      title: 'Santiago Silva',
+      testimonial:
+        'Lo conocí por medio de una publicación en instagram, ya llevo un año largo, me gusta bastante porque es un negocio digital, un negocio que por si solo puede funcionar 24/7 solo con la ayuda de los links y además de esto porque genero ingresos extra para mi hogar',
+    },
+    {
+      title: 'Melisa Betancur',
+      testimonial:
+        'Iba a hacer la compra de mi SOAT, y decidi hacerlo por medio de la aplicación, me sorprendí porque tenía un descuento muy bueno y por refirirlo a mi misma, me dieron un beneficio, una ganancia, de ahí en adelante como vi que si era rentable y real lo seguí haciendo',
+    },
+  ];
 
   slideConfig = {
     slidesToShow: 6,
@@ -129,11 +141,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   };
 
   slideConfigTestimonials = {
-    slidesToShow: 1,
+    slidesToShow: 3,
     slidesToScroll: 1,
-    dots: true,
+    dots: false,
     dotClass: 'slick-dots orange',
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 5000,
     infinite: false,
     arrows: false,
@@ -144,6 +156,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         breakpoint: 600,
         settings: {
           slidesToShow: 1,
+          dots: true,
+          autoplay: true,
+          autoplaySpeed: 5000,
         },
       },
     ],
@@ -196,7 +211,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
     this.metaTagService.addTags([
       {
         name: 'keywords',
@@ -249,13 +263,13 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
       }
       if (isPlatformBrowser(this.platformId)) {
-      const interval = setInterval(() => {
-        this.showModalPayment();
-        if (this.paymentPending > 10000) {
-          clearInterval(interval);
-        }
-      }, 3000);
-    }
+        const interval = setInterval(() => {
+          this.showModalPayment();
+          if (this.paymentPending > 10000) {
+            clearInterval(interval);
+          }
+        }, 3000);
+      }
 
       if (role === 'CLICKER') {
         const token = localStorage.getItem('ACCESS_TOKEN');
@@ -433,8 +447,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
     }
   }
-
-
 
   /**
    * Metodo para obtener el resumen del mes generados
