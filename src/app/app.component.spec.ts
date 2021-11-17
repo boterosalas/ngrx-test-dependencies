@@ -27,7 +27,11 @@ import { AppMaterialModule } from './modules/shared/app-material/app-material.mo
 // const TRANSLATIONS_ES = require('../assets/i18n/es.json');
 export class MatDialogMock {
   close: () => {};
-  closeAll: () => {};
+  closeAll() {
+    return {
+      closeAll: () => of(true),
+    };
+  }
   open() {
     return {
       afterClosed: () => of(true),
@@ -239,25 +243,25 @@ describe('AppComponent', () => {
     //   expect(component.showForgotForm).toBeFalsy();
     // });
 
-    it('showLogin', () => {
-      component.showLoginForm = true;
-      component.showRegisterForm = false;
-      component.showForgotForm = false;
-      component.showLogin();
-      expect(component.showLoginForm).toBeTruthy();
-      expect(component.showRegisterForm).toBeFalsy();
-      expect(component.showForgotForm).toBeFalsy();
-    });
+    // it('showLogin', () => {
+    //   component.showLoginForm = true;
+    //   component.showRegisterForm = false;
+    //   component.showForgotForm = false;
+    //   component.showLogin();
+    //   expect(component.showLoginForm).toBeTruthy();
+    //   expect(component.showRegisterForm).toBeFalsy();
+    //   expect(component.showForgotForm).toBeFalsy();
+    // });
 
-    it('showForgot', () => {
-      component.showForgotForm = true;
-      component.showLoginForm = false;
-      component.showRegisterForm = false;
-      component.showForgot();
-      expect(component.showLoginForm).toBeFalsy();
-      expect(component.showRegisterForm).toBeFalsy();
-      expect(component.showForgotForm).toBeTruthy();
-    });
+    // it('showForgot', () => {
+    //   component.showForgotForm = true;
+    //   component.showLoginForm = false;
+    //   component.showRegisterForm = false;
+    //   component.showForgot();
+    //   expect(component.showLoginForm).toBeFalsy();
+    //   expect(component.showRegisterForm).toBeFalsy();
+    //   expect(component.showForgotForm).toBeTruthy();
+    // });
   });
 
 });
