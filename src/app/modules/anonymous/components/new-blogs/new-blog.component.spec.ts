@@ -4,6 +4,7 @@ import { NewBlogComponent } from './new-blog.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { RouterTestingModule } from '@angular/router/testing';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 describe('NewBlogComponent', () => {
   let component: NewBlogComponent;
@@ -12,7 +13,11 @@ describe('NewBlogComponent', () => {
 beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NewBlogComponent],
-      imports: [TranslateModule.forRoot(), RouterTestingModule.withRoutes([]), AppMaterialModule],
+      imports: [
+        TranslateModule.forRoot(), RouterTestingModule.withRoutes([]), AppMaterialModule,
+        SharedModule
+      ]
+        ,
     }).compileComponents();
   }));
 

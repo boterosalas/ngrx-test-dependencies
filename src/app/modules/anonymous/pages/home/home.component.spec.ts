@@ -24,6 +24,7 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireModule } from '@angular/fire';
 import { MasterDataService } from 'src/app/services/master-data.service';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 class MockAuthService extends AuthService {
   isLoggedIn() {
@@ -405,6 +406,7 @@ describe('HomeComponent', () => {
           AppMaterialModule,
           FlexLayoutModule,
           SlickCarouselModule,
+          SharedModule,
           FormsModule,
           ReactiveFormsModule,
           HttpClientTestingModule,
