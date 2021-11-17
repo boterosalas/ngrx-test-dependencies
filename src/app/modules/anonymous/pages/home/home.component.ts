@@ -109,12 +109,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     {
       title: 'Santiago Silva',
       testimonial:
-        'Lo conocí por medio de una publicación en instagram, ya llevo un año largo, me gusta bastante porque es un negocio digital, un negocio que por si solo puede funcionar 24/7 solo con la ayuda de los links y además de esto porque genero ingresos extra para mi hogar',
+        'Lo conocí por medio de una publicación en instagram, ya llevo un año largo, me gusta bastante porque es un negocio digital, un negocio que por si solo puede funcionar 24/7 solo con la ayuda de los links y además de esto porque genero ingresos extra para mi hogar. Redes:@ssilvacarmona',
     },
     {
       title: 'Melisa Betancur',
       testimonial:
-        'Iba a hacer la compra de mi SOAT, y decidi hacerlo por medio de la aplicación, me sorprendí porque tenía un descuento muy bueno y por refirirlo a mi misma, me dieron un beneficio, una ganancia, de ahí en adelante como vi que si era rentable y real lo seguí haciendo',
+        'Iba a hacer la compra de mi SOAT, y decidi hacerlo por medio de la aplicación, me sorprendí porque tenía un descuento muy bueno y por refirirlo a mi misma, me dieron un beneficio, una ganancia, de ahí en adelante como vi que si era rentable y real lo seguí haciendo.',
     },
   ];
 

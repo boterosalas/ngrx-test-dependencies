@@ -233,25 +233,25 @@ describe('AppComponent', () => {
     //   expect(component.showForgotForm).toBeFalsy();
     // });
 
-    // it('showRegister', () => {
-    //   component.showRegisterForm = true;
-    //   component.showLoginForm = false;
-    //   component.showForgotForm = false;
-    //   component.showRegister();
-    //   expect(component.showRegisterForm).toBeTruthy();
-    //   expect(component.showLoginForm).toBeFalsy();
-    //   expect(component.showForgotForm).toBeFalsy();
-    // });
+    it('showRegister', () => {
+      component.showRegisterForm = true;
+      component.showLoginForm = false;
+      component.showForgotForm = false;
+      component.showRegister();
+      expect(component.showRegisterForm).toBeTruthy();
+      expect(component.showLoginForm).toBeFalsy();
+      expect(component.showForgotForm).toBeFalsy();
+    });
 
-    // it('showLogin', () => {
-    //   component.showLoginForm = true;
-    //   component.showRegisterForm = false;
-    //   component.showForgotForm = false;
-    //   component.showLogin();
-    //   expect(component.showLoginForm).toBeTruthy();
-    //   expect(component.showRegisterForm).toBeFalsy();
-    //   expect(component.showForgotForm).toBeFalsy();
-    // });
+    it('showLogin', () => {
+      component.showLoginForm = true;
+      component.showRegisterForm = false;
+      component.showForgotForm = false;
+      component.showLogin();
+      expect(component.showLoginForm).toBeTruthy();
+      expect(component.showRegisterForm).toBeFalsy();
+      expect(component.showForgotForm).toBeFalsy();
+    });
 
     // it('showForgot', () => {
     //   component.showForgotForm = true;
