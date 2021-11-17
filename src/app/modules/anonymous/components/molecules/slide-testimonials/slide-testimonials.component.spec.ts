@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 import { SlideTestimonialsComponent } from './slide-testimonials.component';
 
@@ -11,7 +12,8 @@ describe('SlideTestimonialsComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ SlideTestimonialsComponent ],
       imports: [
-        SlickCarouselModule
+        SlickCarouselModule,
+        SharedModule
       ]
     })
     .compileComponents();

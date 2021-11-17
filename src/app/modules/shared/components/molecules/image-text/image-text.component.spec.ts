@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SharedModule } from '../../../shared.module';
 
 import { ImageTextComponent } from './image-text.component';
 
@@ -8,7 +9,7 @@ describe('ImageTextComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ImageTextComponent ]
+      declarations: [ ImageTextComponent ], imports:[SharedModule]
     })
     .compileComponents();
   });
