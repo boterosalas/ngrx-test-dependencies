@@ -6,18 +6,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from 'src/app/services/user.service';
-import { of, throwError, Observable, BehaviorSubject } from 'rxjs';
+import { of, throwError, BehaviorSubject } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import Swal from 'sweetalert2';
-import { LogoComponent } from 'src/app/modules/shared/components/logo/logo.component';
-import { SliderComponent } from '../../components/slider/slider.component';
 //import { SliderStoriesComponent } from "src/app/modules/";
 import { AnonymousModule } from '../../anonymous.module';
 import { ContentService } from 'src/app/services/content.service';
@@ -26,8 +23,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireModule } from '@angular/fire';
-import { LinksService } from 'src/app/services/links.service';
-import { By } from '@angular/platform-browser';
 import { MasterDataService } from 'src/app/services/master-data.service';
 
 class MockAuthService extends AuthService {
@@ -403,10 +398,10 @@ describe('HomeComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [],
+        declarations: [HomeComponent],
         imports: [
           AnonymousModule,
-          TranslateModule,
+          TranslateModule.forRoot({}),
           AppMaterialModule,
           FlexLayoutModule,
           SlickCarouselModule,
@@ -418,7 +413,6 @@ describe('HomeComponent', () => {
             { path: 'inicio', component: HomeComponent },
           ]),
           BrowserAnimationsModule,
-          TranslateModule.forRoot({}),
           AngularFireDatabaseModule,
           AngularFireAuthModule,
           AngularFireMessagingModule,
