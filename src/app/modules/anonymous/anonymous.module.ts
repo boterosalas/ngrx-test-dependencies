@@ -27,7 +27,6 @@ import {
   RECAPTCHA_SETTINGS,
   RecaptchaSettings,
 } from 'ng-recaptcha';
-import { UrlComponent } from './pages/url/url.component';
 import { SlideVideoComponent } from './components/slide-video/slide-video.component';
 import { ClickamComponent } from './pages/help-center/about/clickam/clickam.component';
 import { RegisterComponent } from './pages/help-center/about/register/register.component';
@@ -343,10 +342,6 @@ const routes: Routes = [
     path: 'tabla-comisiones',
     component: ComissionTableComponent,
   },
-  {
-    path: 'url/:shortCode',
-    component: UrlComponent,
-  },
 ];
 
 @NgModule({
@@ -361,7 +356,6 @@ const routes: Routes = [
     ComissionTableComponent,
     NewBusinessComponent,
     NewBusinessFormComponent,
-    UrlComponent,
     SlideVideoComponent,
     ClickamComponent,
     RegisterComponent,
