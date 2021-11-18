@@ -12,7 +12,11 @@ import 'localstorage-polyfill';
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
   const domino = require('domino');
+  const compression = require('compression')
   const server = express();
+
+  server.use(compression());
+
   const distFolder = join(process.cwd(), 'dist');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
   const window = domino.createWindow(indexHtml);
