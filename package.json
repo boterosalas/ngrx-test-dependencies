@@ -4,7 +4,6 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "postbuild": "gulp compress && gulp clean",
     "build": "ng run clickam:prerender",
     "build-qa": "ng run clickam:prerender --configuration=qa && gulp compress && gulp clean",
     "build-uat": "ng run clickam:prerender --configuration=uat",
