@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng run clickam:prerender && gulp uglify && gulp compress && gulp clean && gulp change && gulp cleangz",
-    "build-qa": "ng run clickam:prerender --configuration=qa && gulp uglify && gulp compress && gulp clean && gulp change && gulp cleangz",
+    "build": "ng run clickam:prerender && gulp uglify && gulp compress",
+    "build-qa": "ng run clickam:prerender --configuration=qa && gulp uglify && gulp compress",
     "build-uat": "ng run clickam:prerender --configuration=uat",
     "build-pr": "ng run clickam:prerender --configuration=production",
     "test": "ng test --code-coverage=true --source-map=false --karma-config=./karma.conf.js",
