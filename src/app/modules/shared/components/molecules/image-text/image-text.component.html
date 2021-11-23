@@ -2,6 +2,7 @@
     <app-image [imageClass]="imageClass" [src]="src" [alt]="alt"></app-image>
     <span fxLayout="column">
         <app-title showTitleh2="true" [text]="title" [classWeb]="classTitleWeb" [classMobile]="classTitleMobile"></app-title>
-        <p [ngClass.gt-xs]="classTextWeb" [ngClass.xs]="classTextMobile">{{text}}</p>
+        <div [innerHTML]="text" [ngClass.gt-xs]="classTextWeb" [ngClass.xs]="classTextMobile"></div>
+        <app-button [haveIcon]="false" [title]="titleButton" (action)="openRegister()" classButton="shadow-purple"></app-button>
     </span>
 </div>
