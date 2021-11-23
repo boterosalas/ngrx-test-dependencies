@@ -22,8 +22,10 @@ gulp.task('clean', function () {
 gulp.task('change', function() {
   return gulp.src(['./dist/**/*.gz'])
       .pipe(rename(function (path) {
+        path.basename = path.basename.replace('.js', '');
+        path.basename = path.basename.replace('.js.map', '');
+        path.basename = path.basename.replace('.map', '');
         path.extname = path.extname.replace('.gz', '.js');
-        path.extname = path.extname.replace('.gz', '.map');
       }))
       .pipe(gulp.dest('./dist'));
 });
