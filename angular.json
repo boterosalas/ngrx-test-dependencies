@@ -77,7 +77,6 @@
                 }
               ],
               "optimization": true,
-              "outputHashing": "all",
               "sourceMap": true,
               "namedChunks": true,
               "extractLicenses": false,
@@ -100,7 +99,6 @@
             },
             "qa": {
               "optimization": false,
-              "outputHashing": "all",
               "sourceMap": true,
               "namedChunks": true,
               "extractLicenses": false,

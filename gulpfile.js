@@ -2,6 +2,14 @@ var gulp = require('gulp');
 var gzip = require('gulp-gzip');
 var del = require('del');
 var rename = require("gulp-rename");
+var uglify = require('gulp-uglify-es').default;
+
+gulp.task('uglify', function () {
+  return gulp.src(['./dist/**/*.js'])
+        .pipe(uglify())
+        .pipe(gulp.dest('./dist'));
+});
+
 
 gulp.task('compress', function () {
   return gulp.src(['./dist/**/*.js', './dist/**/*.map']).pipe(gzip()).pipe(gulp.dest('./dist'));
@@ -23,5 +31,6 @@ gulp.task('change', function() {
 gulp.task('cleangz', function () {
   return del(['./dist/**/*.gz', '!./dist']);
 });
+
 
 
