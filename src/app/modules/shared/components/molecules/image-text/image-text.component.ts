@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-image-text',
@@ -13,6 +13,7 @@ export class ImageTextComponent implements OnInit {
   @Input() src:string;
   @Input() alt:string;
   @Input() title:string;
+  @Input() titleButton:string;
   @Input() text:string;
   @Input() classTitleMobile:string;
   @Input() classTitleWeb:string;
@@ -20,10 +21,15 @@ export class ImageTextComponent implements OnInit {
   @Input() classTextMobile:string;
   @Input() generalWeb:string;
   @Input() generalMobile:string;
+  @Output() action = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  openRegister() {
+    this.action.emit();
   }
 
 }
