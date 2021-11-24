@@ -76,7 +76,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
+              "optimization": false,
               "sourceMap": false,
               "namedChunks": true,
               "extractLicenses": false,
