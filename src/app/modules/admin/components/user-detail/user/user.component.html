@@ -29,13 +29,13 @@
       <p class="galano-bold gray w-label w-label-width">ESTADO</p>
       <mat-slide-toggle
         (change)="changeValueService($event, 'status')"
-        [(ngModel)]="data.state"
+        [(ngModel)]="state"
         color="orange-toggle"
         labelPosition="before"
         id="state-toggle"
       >
-        <span class="third-text" *ngIf="data.state"> Activo </span>
-        <span class="third-text" *ngIf="!data.state"> Inactivo </span>
+        <span class="third-text" *ngIf="state"> Activo </span>
+        <span class="third-text" *ngIf="!state"> Inactivo </span>
       </mat-slide-toggle>
     </span>
     <span>

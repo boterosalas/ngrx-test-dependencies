@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ActionUser } from 'src/app/interfaces/actionUser';
 import { UserService } from 'src/app/services/user.service';
@@ -9,11 +9,12 @@ import { UtilsService } from 'src/app/services/utils.service';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit, OnDestroy {
+export class UserComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input() data: ActionUser;
   idAdmin: string;
   private subscription: Subscription = new Subscription();
+  state: boolean;
 
   constructor(
     private user: UserService,
@@ -21,6 +22,21 @@ export class UserComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges() {
+    this.userState();
+  }
+
+  public userState() {
+    if (this.data.stateuser === 'Inactivo') {
+      this.state = false;
+    } else {
+      if (this.data.stateuser === 'Activo' || this.data.stateuser === 'Registrado' || this.data.stateuser === 'Migrado') {
+        this.state = true;
+      }
+    }
+
   }
 
   public changeValueService(event: any, service: string) {

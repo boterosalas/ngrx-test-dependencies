@@ -32,7 +32,7 @@ export class WelcomeComponent implements OnInit {
     const id = 'video-modal';
     const template = this.templateVideo;
     const title = '';
-    this.video = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + 'oR5bFl4PoCM?rel=0&amp;autoplay=1');
+    this.video = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + 'AeFNbNgcOdM?rel=0&amp;autoplay=1');
 
     this.dialog.open(ModalGenericComponent, {
       panelClass: 'video-clickacademy',
