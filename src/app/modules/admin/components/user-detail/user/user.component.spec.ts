@@ -20,7 +20,8 @@ describe('UserComponent', () => {
     state:'EXTERNO',
     isemployeegrupoexito: false,
     receiveCommunications: 'Si',
-    score: '2'
+    score: '2',
+    stateuser: 'Activo'
   }
 
   const response = {
