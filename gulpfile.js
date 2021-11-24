@@ -1,16 +1,18 @@
 var gulp = require('gulp');
-// var gzip = require('gulp-gzip');
-// var zlib = require('zlib');
-// const gulpBrotli = require('gulp-brotli');
-// var del = require('del');
-// var rename = require("gulp-rename");
 var uglify = require('gulp-uglify-es').default;
 const cleanCSS = require('gulp-clean-css');
 const htmlmin = require('gulp-htmlmin');
+var sourcemaps = require('gulp-sourcemaps');
+const imagemin= require('gulp-imagemin');
+var webp = require("gulp-webp");
+const purgecss = require('gulp-purgecss');
+const svgmin =  require('gulp-svgmin');
 
 gulp.task('uglify', function () {
   return gulp.src(['./dist/**/*.js'])
         .pipe(uglify())
+        .pipe(sourcemaps.init())
+        .pipe(sourcemaps.write('./maps'))
         .pipe(gulp.dest('./dist'));
 });
 
@@ -26,37 +28,31 @@ gulp.task('minify-html', () => {
     .pipe(gulp.dest('./dist'));
 });
 
+gulp.task("picture", function() {
+  return gulp.src("./dist/**/*.{png,jpg,jpeg,svg}")
+    .pipe(imagemin())
+    .pipe(gulp.dest('./dist'));
+});
 
-// gulp.task('compress', function () {
-//   return gulp.src(['./dist/**/*.js', './dist/**/*.map']).pipe(gzip()).pipe(gulp.dest('./dist'));
-// });
+gulp.task("webp", function() {
+  return gulp.src("./dist/**/*.{png,jpg,jpeg}")
+    .pipe(webp())
+    .pipe(gulp.dest('./dist'));
+});
 
-// gulp.task('compress', function () {
-//   return gulp.src(['./dist/**/*.js', './dist/**/*.map']).pipe(gulpBrotli({
-//     params: {
-//       [zlib.constants.BROTLI_PARAM_QUALITY]: zlib.constants.BROTLI_MAX_QUALITY,
-//     },
-//   })).pipe(gulp.dest('./dist'));
-// });
+gulp.task('purgecss', () => {
+  return gulp.src('./dist/**/*.css')
+      .pipe(purgecss({
+          content: ['src/**/*.html']
+      }))
+      .pipe(gulp.dest('./dist'));
+})
 
-// gulp.task('clean', function () {
-//   return del(['./dist/**/*.js', './dist/**/*.map' ,'!./dist']);
-// });
+gulp.task('svgmin', () => {
+  return gulp.src('./dist/**/*.svg')
+      .pipe(svgmin())
+      .pipe(gulp.dest('./dist'));
+})
 
-// gulp.task('change', function() {
-//   return gulp.src(['./dist/**/*.br'])
-//       .pipe(rename(function (path) {
-//         path.basename = path.basename.replace('.js', '');
-//         path.basename = path.basename.replace('.js.map', '');
-//         path.basename = path.basename.replace('.map', '');
-//         path.extname = path.extname.replace('.br', '.js');
-//       }))
-//       .pipe(gulp.dest('./dist'));
-// });
-
-// gulp.task('cleangz', function () {
-//   return del(['./dist/**/*.br', '!./dist']);
-// });
-
-
+gulp.task("performance", gulp.series("uglify", "svgmin", "minify-css", "minify-html", "picture", "webp"));
 
