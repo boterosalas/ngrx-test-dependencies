@@ -4,10 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng run clickam:prerender && gulp uglify && minify-css && minify-html",
-    "build-qa": "ng run clickam:prerender --configuration=qa && gulp uglify && minify-css && minify-html",
+    "build": "ng run clickam:prerender && gulp uglify && gulp minify-css && gulp minify-html",
+    "build-qa": "ng run clickam:prerender --configuration=qa && gulp uglify && gulp minify-css && gulp minify-html",
     "build-uat": "ng run clickam:prerender --configuration=uat",
-    "build-pr": "ng run clickam:prerender --configuration=production && gulp uglify && minify-css && minify-html",
+    "build-pr": "ng run clickam:prerender --configuration=production && gulp uglify && gulp minify-css && gulp minify-html",
     "test": "ng test --code-coverage=true --source-map=false --karma-config=./karma.conf.js",
     "testwatch": "ng test --code-coverage=true --source-map=false --karma-config=./karma.conf.js --watch",
     "lint": "ng lint",
