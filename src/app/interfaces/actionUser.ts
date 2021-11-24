@@ -4,4 +4,5 @@ export interface ActionUser  {
     isemployeegrupoexito: boolean;
     receiveCommunications:string;
     score: string;
+    stateuser: string;
 }
