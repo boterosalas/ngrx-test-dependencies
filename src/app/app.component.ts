@@ -82,6 +82,7 @@ export class AppComponent implements OnInit, OnDestroy {
   textTransparencia: any;
   textPrograma: any;
   hideFH = false;
+  fullCharge = false;
 
   constructor(
     private translate: TranslateService,
@@ -139,6 +140,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.checkIfLoaded();
     this.showUpdateModal();
     this.showAnimation1 = true;
     if (isPlatformBrowser(this.platformId)) {
@@ -411,4 +413,11 @@ export class AppComponent implements OnInit, OnDestroy {
       this.showAnimation2 = true;
     }
   }
+
+  checkIfLoaded() {
+    window.addEventListener('load', () => {
+      this.fullCharge = true;
+    });
+  }
+
 }

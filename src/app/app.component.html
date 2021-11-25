@@ -161,7 +161,7 @@
       </div>
     </div>
 
-    <app-header class="fix" *ngIf="!hideFH" (sidenav)="drawer.toggle()" [name]="firstName"></app-header>
+    <app-header class="fix" *ngIf="!hideFH && fullCharge" (sidenav)="drawer.toggle()" [name]="firstName"></app-header>
 
     <div ngClass="maincontent {{ classPage }}-page">
       <router-outlet></router-outlet>
@@ -219,7 +219,7 @@
       </div>
     </ng-template>
 
-    <app-footer *ngIf="!hideFH"></app-footer>
+    <app-footer *ngIf="!hideFH && fullCharge"></app-footer>
 
     <app-loader></app-loader>
   </mat-sidenav-content>
