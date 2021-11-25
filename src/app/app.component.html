@@ -164,7 +164,7 @@
     <app-header class="fix" *ngIf="!hideFH && fullCharge" (sidenav)="drawer.toggle()" [name]="firstName"></app-header>
 
     <div ngClass="maincontent {{ classPage }}-page">
-      <router-outlet></router-outlet>
+      <router-outlet *ngIf="fullCharge"></router-outlet>
     </div>
 
     <ng-template #templateTerms>
