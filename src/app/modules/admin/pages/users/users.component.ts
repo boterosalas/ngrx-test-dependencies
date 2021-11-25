@@ -289,7 +289,8 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
   }
 
   public userData(user) {
-    this.router.navigate(['/usuario',user.userId])
+    const url = this.router.serializeUrl(this.router.createUrlTree(['usuario', user.userId]));
+    window.open(url, '_blank');
   }
 
 
