@@ -903,6 +903,13 @@ table {
   .imgsection {
     max-width: 100%;
   }
+
+  .img-slide {
+    width: 100px !important;
+    max-width: 100px !important;
+    min-width: 100px !important;
+  }
+
 }
 
 @media screen and (min-width: 600px) {

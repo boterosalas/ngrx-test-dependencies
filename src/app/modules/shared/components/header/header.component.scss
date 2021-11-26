@@ -1,6 +1,10 @@
 @import 'variables';
 @import 'general';
 
+img{
+  object-fit: contain;
+}
+
 .position-absolute {
   position: absolute;
   width: 100%;
@@ -288,5 +292,6 @@ header {
 }
 
 .logo-mobile{
-  width: 45px; 
+  width: 45px;
+  object-fit: contain;
 }
