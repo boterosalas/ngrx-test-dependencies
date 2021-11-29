@@ -45,8 +45,6 @@ describe('ProfileFormComponent', () => {
 
   const mockMasterDataService = jasmine.createSpyObj('MasterDataService', ['getDepartments', 'getBanks']);
 
-  const mockAuthService = jasmine.createSpyObj('AuthService', ['changePassword']);
-
   const dataUserC = {
     managedPayments: true,
     isEmployeeUser: true,
@@ -215,7 +213,6 @@ beforeEach(waitForAsync(() => {
         { provide: MatDialogRef, useValue: mockDialog },
         { provide: MasterDataService, useValue: mockMasterDataService },
         { provide: UserService, useClass: MockUserService },
-        { provide: AuthService, useValue: mockAuthService },
       ],
     })
       .overrideModule(BrowserDynamicTestingModule, {
@@ -227,7 +224,6 @@ beforeEach(waitForAsync(() => {
     mockMasterDataService.getDepartments.and.returnValue(of(dataDepartments));
     mockUserService.getuserdata.and.returnValue(of(dataUserC));
     mockMasterDataService.getBanks.and.returnValue(of(banks));
-    mockAuthService.changePassword.and.returnValue(of(resp));
     mockUserService.getStatusVerification.and.returnValue(of(getStatusVerification));
     mockUserService.changeBankInformation.and.returnValue(of(changeBankInformation));
     mockUserService.uploadFiles.and.returnValue(of(respUploadFiles));
@@ -298,11 +294,6 @@ beforeEach(waitForAsync(() => {
     expect(service.getBankAccountNumber).toHaveBeenCalled();
   });
 
-  it('changePasswordUser', () => {
-    component.changePasswordUser();
-    expect(mockAuthService.changePassword).toHaveBeenCalled();
-  });
-
   it('getStatusVerification', () => {
     const service = fixture.debugElement.injector.get(UserService);
     spyOn(service, 'getStatusVerification').and.returnValue(of(getStatusVerification));
@@ -327,11 +318,6 @@ beforeEach(waitForAsync(() => {
 
   it('editAddress', () => {
     component.editAddres();
-    expect(mockDialog.open).toBeTruthy();
-  });
-
-  it('changePassword', () => {
-    component.changePassword();
     expect(mockDialog.open).toBeTruthy();
   });
 
