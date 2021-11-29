@@ -3,10 +3,8 @@
   img="/assets/img/banners/banner-perfil-pc.jpg"
   imgMobile="/assets/img/banners/banner-perfil-mobile.jpg"
 ></app-banner>
-<!-- <app-logo></app-logo> -->
 
 <div class="container mb-4" [ngClass]="{ 'd-none': profile === false, 'd-block': profile === true }">
-  <!-- <h2 class="border-bottom-orange-init">{{ "PROFILE.PROFILE" | translate }}</h2> -->
 
   <mat-tab-group #tabGroup>
     <mat-tab>
@@ -30,5 +28,14 @@
       <app-payment-info *ngIf="(auth.getRole$ | async) !== 'ADMIN' && managedPayments === false && isEmployee === false"></app-payment-info>
       <app-profile-form [showBankInfo]="true" [showInfoAccount]="false" *ngIf="(auth.getRole$ | async) !== 'ADMIN' && managedPayments === true && isEmployee === false"></app-profile-form>
     </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class="gtmPerfilClicGestionarPagosClickam">PREFERENCIAS</span>
+      </ng-template>
+      <app-preferences></app-preferences>
+    </mat-tab>
+
+
   </mat-tab-group>
 </div>

@@ -21,13 +21,13 @@ import { UtilsService } from 'src/app/services/utils.service';
 })
 export class ProfileFormComponent implements OnInit, OnDestroy {
   constructor(
-    private fb: FormBuilder,
-    private user: UserService,
+    public fb: FormBuilder,
+    public user: UserService,
     private auth: AuthService,
     private loader: LoaderService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private utils: UtilsService,
+    public utils: UtilsService,
     private personalInfo: MasterDataService
   ) { }
 
@@ -47,7 +47,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   @Input() showBankInfo: boolean;
   @Input() showInfoAccount: boolean;
 
-  private subscription: Subscription = new Subscription();
+  public subscription: Subscription = new Subscription();
   profileForm: FormGroup;
   profileFormCell: FormGroup;
   profileFormPass: FormGroup;
@@ -180,7 +180,6 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
 
       this.formProfile();
       this.formProfileCell();
-      this.formProfilePass();
       this.formAccount();
       this.formAddress();
       this.getDepartments();
@@ -269,19 +268,6 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.loginForm = this.fb.group({
       Password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
     });
-  }
-
-  public formProfilePass() {
-    this.profileFormPass = this.fb.group(
-      {
-        actualPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
-        password: ['', [Validators.minLength(6), Validators.maxLength(20), Validators.pattern(new RegExp(this.passwordPattern))]],
-        confirmPassword: ['', [Validators.minLength(6), Validators.maxLength(20)]],
-      },
-      {
-        validator: [ConfirmPasswordValidator.MatchPassword],
-      }
-    );
   }
 
   public editName() {

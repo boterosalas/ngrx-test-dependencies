@@ -16,6 +16,7 @@ export class UserService {
   urlEmployee = environment.URL_VALIDATE_EMPLOYEE;
   urlContent = environment.URL_CONTENT;
   apiProfile = 'userprofile/GetUserProfile';
+  apiReceiveCommunications = 'userprofile/setReceiveCommunications';
   apiGetDocuments = 'userprofile/downloadBase64';
   apiActivateProfile = 'userprofile/activateUser';
   apiShorUrl = 'userprofile/getShortURL';
@@ -112,6 +113,18 @@ export class UserService {
     const authorization = token;
 
     return this.http.post(`${this.url + this.apiActivateProfile}`, { email: email }, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => { })
+        )
+      )
+    );
+  }
+
+  public setReceiveCommunications(data: object) {
+    return this.http.post(`${this.url + this.apiReceiveCommunications}`, data , this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),

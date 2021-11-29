@@ -45,6 +45,7 @@ import { NotificationsComponent } from './pages/notifications/notifications.comp
 import { DetailComponent } from './pages/notifications/detail/detail.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SocialFormComponent } from './components/social-form/social-form.component';
+import { PreferencesComponent } from './components/preferences/preferences.component';
 const routes: Routes = [
   {
     path: 'mi-perfil/:pagos',
@@ -146,6 +147,7 @@ const routes: Routes = [
     NotificationsComponent,
     DetailComponent,
     SocialFormComponent,
+    PreferencesComponent,
   ],
   imports: [
     CommonModule,
