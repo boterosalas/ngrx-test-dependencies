@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ActionUser } from 'src/app/interfaces/actionUser';
+import { ResponseService } from 'src/app/interfaces/response';
 import { UserService } from 'src/app/services/user.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
@@ -15,6 +16,8 @@ export class UserComponent implements OnInit, OnDestroy, OnChanges {
   idAdmin: string;
   private subscription: Subscription = new Subscription();
   state: boolean;
+  mail: boolean;
+  sms: boolean;
 
   constructor(
     private user: UserService,
@@ -26,6 +29,8 @@ export class UserComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnChanges() {
     this.userState();
+    this.mail = this.data.receiveemail;
+    this.sms = this.data.receivesms;
   }
 
   public userState() {
@@ -85,6 +90,26 @@ export class UserComponent implements OnInit, OnDestroy, OnChanges {
     this.subscription = this.user.changeOrigin(userId, valueInternal).subscribe((respInternal: any) => {
       this.callMsg(respInternal.userMessage);
     });
+  }
+
+  public notifications(e: any, typeNotification: string) {
+    if(e.checked && typeNotification === 'email') {
+      this.mail = true;
+    }
+    if(e.checked && typeNotification === 'sms') {
+      this.sms = true;
+    }
+
+    const dataUser = {
+      userId: this.data.userId,
+      receiveSms: this.sms,
+      receiveEmail: this.mail
+    }
+
+    this.user.setReceiveCommunications(dataUser).subscribe((comunication: ResponseService) => {
+      this.utils.openSnackBar(comunication.userMessage, 'Cerrar');
+    });
+
   }
 
 

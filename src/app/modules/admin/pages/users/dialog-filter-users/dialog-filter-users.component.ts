@@ -52,8 +52,10 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
   ];
 
   comunication = [
-    { name: 'Recibe comunicación', value: true },
-    { name: 'No recibe comunicación (Lista negra)', value: false },
+    { name: 'Email', value: 'EMAIL' },
+    { name: 'SMS', value: 'SMS' },
+    { name: 'Email/SMS', value: 'EMAILSMS' },
+    { name: 'Ninguna', value: 'NINGUNA' },
   ];
 
   commissions = [
@@ -115,7 +117,7 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
     this.filterUsers = this.fb.group({
       dateRange: [''],
       status: [null],
-      comunication: [null],
+      comunication: [''],
       commissions: [null],
       accountBank: [null],
       bussiness: [''],

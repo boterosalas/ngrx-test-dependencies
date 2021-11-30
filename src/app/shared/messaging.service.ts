@@ -42,8 +42,9 @@ export class MessagingService {
       data[userId] = token;
       this.angularFireDB.object('fcmTokens/').update(data);
     });
-
-    this.user.saveUserDevice(userId, token).subscribe();
+    setTimeout(() => {
+      this.user.saveUserDevice(userId, token).subscribe();
+    }, 3000);
   }
 
   /**

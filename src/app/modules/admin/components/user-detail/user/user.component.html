@@ -12,17 +12,12 @@
     <span class="normal-text"> {{ data.score }} </span>
   </span>
 
-  <p class="galano-bold gray w-label">RECIBE COMUNICACIONES</p>
-  <mat-slide-toggle
-    (change)="changeValueService($event, 'comunications')"
-    [(ngModel)]="data.receiveCommunications"
-    color="orange-toggle"
-    labelPosition="before"
-    id="comunications-toggle"
-  >
-    <span class="third-text" *ngIf="data.receiveCommunications === 'Si'"> Si </span>
-    <span class="third-text" *ngIf="data.receiveCommunications === 'No'"> No </span>
-  </mat-slide-toggle>
+  <p class="galano-bold gray w-label">COMUNICACIONES</p>
+
+  <div fxLayout="row" fxLayoutGap="20px">
+    <mat-slide-toggle (change)="notifications($event, 'email')" [(ngModel)]="mail"> <span class="purple-text galano-bold">Recibe email</span> </mat-slide-toggle>
+    <mat-slide-toggle (change)="notifications($event, 'sms')" [(ngModel)]="sms"><span class="purple-text galano-bold">Recibe SMS</span> </mat-slide-toggle>
+  </div>
 
   <div fxLayout="row" fxLayoutGap="20px">
     <span fxLayout="column">
