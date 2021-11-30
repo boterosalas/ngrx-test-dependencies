@@ -18,6 +18,12 @@
   width: 100%;
 }
 
+@media screen and (min-width: 600px) {
+  .user-info {
+    height: 285px;
+  }
+}
+
 .bank-info {
   width: 40%;
   min-width: 440px;

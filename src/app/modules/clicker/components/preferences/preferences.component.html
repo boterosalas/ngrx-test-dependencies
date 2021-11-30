@@ -1,0 +1,173 @@
+<app-title commonClass="border-bottom-gray pb-2" showTitleh3="true" text="OPCIONES DE NOTIFICACIONES"></app-title>
+
+<div fxLayout="column">
+    <mat-slide-toggle (change)="notifications($event, 'email')" [(ngModel)]="mail"> <span class="purple-text galano-bold">Recibir email de Clickam</span> </mat-slide-toggle>
+    <mat-slide-toggle (change)="notifications($event, 'sms')" [(ngModel)]="sms"><span class="purple-text galano-bold">Recibir mensajes de texto de clickam</span> </mat-slide-toggle>
+</div>
+
+<p class="galano-bold">* Clickam solo se contactara contigo si tiene una novedad en la plataforma, independiente de tus preferencias.</p>
+<br/>
+
+<app-title commonClass="border-bottom-gray pb-2" showTitleh3="true" text="OPCIONES DE CUENTA"></app-title>
+
+<span fxLayoutGap="20px">
+    <app-button [haveIcon]="false" title="Cambiar contraseña" (action)="changePassword()" classButton="shadow-purple"></app-button>
+    <app-button [haveIcon]="false" title="Eliminar mi cuenta" [routerLink]="['/eliminar-cuenta']" color="red-border"></app-button>
+</span>
+
+
+<!-- template password-->
+
+<ng-template #templateDialogPass>
+    <form class="register-container" [formGroup]="profileFormPass" fxLayout="column" fxFlex="100">
+      <mat-form-field>
+        <mat-label>{{ 'GENERIC.ACTUAL_PASSWORD' | translate }}</mat-label>
+        <mat-pass-toggle-visibility #toggleVisbility0 matSuffix></mat-pass-toggle-visibility>
+        <input
+          matInput
+          #passwordWithValidation
+          [type]="toggleVisbility0.type"
+          required
+          formControlName="actualPassword"
+          placeholder="{{ 'GENERIC.ACTUAL_PASSWORD' | translate }}"
+        />
+        <mat-error
+          id="requiredPassword"
+          *ngIf="profileFormPass.controls.actualPassword.invalid && profileFormPass.controls.actualPassword.errors.required"
+          >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Contraseña' } }}</mat-error
+        >
+  
+        <mat-error
+          id="minPassword"
+          *ngIf="profileFormPass.controls.actualPassword.invalid && profileFormPass.controls.actualPassword.errors.minlength"
+          >{{
+            'GENERIC.MIN_CHARACTERS'
+              | translate
+                : {
+                    minchar: profileFormPass.controls.actualPassword.errors.minlength.requiredLength
+                  }
+          }}</mat-error
+        >
+  
+        <mat-error
+          id="maxPassword"
+          *ngIf="profileFormPass.controls.actualPassword.invalid && profileFormPass.controls.actualPassword.errors.maxlength"
+          >{{
+            'GENERIC.MAX_CHARACTERS'
+              | translate
+                : {
+                    maxchar: profileFormPass.controls.actualPassword.errors.maxlength.requiredLength
+                  }
+          }}</mat-error
+        >
+  
+        <mat-error
+          id="patternPassword"
+          *ngIf="profileFormPass.controls.actualPassword.invalid && profileFormPass.controls.actualPassword.errors.pattern"
+          >{{ 'GENERIC.PASSWORD_PATTERN' | translate }}</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Nueva contraseña</mat-label>
+        <mat-pass-toggle-visibility #toggleVisbility matSuffix></mat-pass-toggle-visibility>
+        <input
+          matInput
+          #passwordWithValidation
+          [type]="toggleVisbility.type"
+          required
+          formControlName="password"
+          placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
+        />
+        <mat-error
+          id="requiredPassword"
+          *ngIf="profileFormPass.controls.password.invalid && profileFormPass.controls.password.errors.required"
+          >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Contraseña' } }}</mat-error
+        >
+  
+        <mat-error id="minPassword" *ngIf="profileFormPass.controls.password.invalid && profileFormPass.controls.password.errors.minlength">{{
+          'GENERIC.MIN_CHARACTERS'
+            | translate
+              : {
+                  minchar: profileFormPass.controls.password.errors.minlength.requiredLength
+                }
+        }}</mat-error>
+  
+        <mat-error id="maxPassword" *ngIf="profileFormPass.controls.password.invalid && profileFormPass.controls.password.errors.maxlength">{{
+          'GENERIC.MAX_CHARACTERS'
+            | translate
+              : {
+                  maxchar: profileFormPass.controls.password.errors.maxlength.requiredLength
+                }
+        }}</mat-error>
+  
+        <mat-error
+          id="patternPassword"
+          *ngIf="profileFormPass.controls.password.invalid && profileFormPass.controls.password.errors.pattern"
+          >{{ 'GENERIC.PASSWORD_PATTERN' | translate }}</mat-error
+        >
+      </mat-form-field>
+      <div></div>
+  
+      <mat-form-field>
+        <mat-pass-toggle-visibility #toggleVisbility2 matSuffix></mat-pass-toggle-visibility>
+        <input
+          matInput
+          id="confirmPassword"
+          [type]="toggleVisbility2.type"
+          placeholder="{{ 'GENERIC.CONFIRM_PASSWORD' | translate }}"
+          formControlName="confirmPassword"
+          required
+          spacebar
+        />
+        <mat-error
+          id="notmatchPassword"
+          *ngIf="profileFormPass.get('confirmPassword').errors && profileFormPass.get('confirmPassword').errors.ConfirmPassword"
+          >{{ 'REGISTER.PASSWORD_NOT_MATCH' | translate }}</mat-error
+        >
+  
+        <mat-error
+          id="requiredConfirmPassword"
+          *ngIf="profileFormPass.controls.confirmPassword.invalid && profileFormPass.controls.confirmPassword.errors.required"
+          >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Contraseña' } }}</mat-error
+        >
+  
+        <mat-error
+          id="minConfirmPassword"
+          *ngIf="profileFormPass.controls.confirmPassword.invalid && profileFormPass.controls.confirmPassword.errors.minlength"
+          >{{
+            'GENERIC.MIN_CHARACTERS'
+              | translate
+                : {
+                    minchar: profileFormPass.controls.confirmPassword.errors.minlength.requiredLength
+                  }
+          }}</mat-error
+        >
+  
+        <mat-error
+          id="maxConfirmPassword"
+          *ngIf="profileFormPass.controls.confirmPassword.invalid && profileFormPass.controls.confirmPassword.errors.maxlength"
+          >{{
+            'GENERIC.MAX_CHARACTERS'
+              | translate
+                : {
+                    maxchar: profileFormPass.controls.confirmPassword.errors.maxlength.requiredLength
+                  }
+          }}</mat-error
+        >
+      </mat-form-field>
+  
+      <button
+        mat-raised-button
+        id="editProfile"
+        class="center button button-100 mt-4 gtmPerfilClicCuentaClickamGuardarContrasena"
+        color="orange"
+        (click)="changePasswordUser()"
+        [disabled]="!profileFormPass.valid"
+      >
+        <span class="gtmPerfilClicCuentaClickamGuardarContrasena">
+          {{ 'GENERIC.SAVE' | translate }}
+        </span>
+      </button>
+    </form>
+  </ng-template>
+  

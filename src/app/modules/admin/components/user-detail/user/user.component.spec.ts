@@ -21,7 +21,9 @@ describe('UserComponent', () => {
     isemployeegrupoexito: false,
     receiveCommunications: 'Si',
     score: '2',
-    stateuser: 'Activo'
+    stateuser: 'Activo',
+    receivesms: true,
+    receiveemail: true
   }
 
   const response = {

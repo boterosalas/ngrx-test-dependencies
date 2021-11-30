@@ -9,6 +9,7 @@ export class TitleComponent implements OnInit {
 
   @Input() classWeb: string;
   @Input() classMobile: string;
+  @Input() commonClass: string;
   @Input() text: string;
   @Input() showTitleh1: boolean;
   @Input() showTitleh2: boolean;

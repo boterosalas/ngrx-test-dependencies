@@ -5,4 +5,6 @@ export interface ActionUser  {
     receiveCommunications:string;
     score: string;
     stateuser: string;
+    receivesms: boolean;
+    receiveemail: boolean;
 }
