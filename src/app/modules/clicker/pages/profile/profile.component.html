@@ -21,7 +21,7 @@
       <app-aditional-info-form></app-aditional-info-form>
     </mat-tab>
 
-    <mat-tab>
+    <mat-tab *ngIf="managedPayments === false || isEmployee === false">
       <ng-template mat-tab-label>
         <span class="gtmPerfilClicGestionarPagosClickam">DATOS FINANCIEROS</span>
       </ng-template>
