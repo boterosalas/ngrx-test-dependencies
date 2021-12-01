@@ -106,8 +106,8 @@
         </mat-card>
       </div>
   
-      <app-search *ngIf="id === '1'" (search)="searchBiggyExito($event)"></app-search>
-      <app-search *ngIf="id === '2'" (search)="searchBiggyCarulla($event)"></app-search>
+      <app-search class="search" *ngIf="id === '1'" (search)="searchBiggyExito($event)"></app-search>
+      <app-search class="search" *ngIf="id === '2'" (search)="searchBiggyCarulla($event)"></app-search>
   
       <div *ngIf="showResults" class="results">
         <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.xs="column">
