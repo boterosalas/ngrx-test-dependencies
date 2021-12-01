@@ -372,50 +372,6 @@ describe('BussinessComponent', () => {
     expect(input).not.toBeUndefined();
   });
 
-  it('accept Modal', () => {
-    component.acceptTerms = true;
-    component.termsForm.controls.acceptTerms.setValue(true);
-    component.acceptModal();
-    const datos = true;
-    expect(datos).toBeTruthy();
-    component.acceptTerms = false;
-    component.termsForm.controls.acceptTerms.setValue(true);
-    component.acceptTermsCheck();
-    expect(component.acceptTerms).toBeTruthy();
-  });
-
-  it('accept terms check false', () => {
-    component.acceptTerms = true;
-    component.termsForm.controls.acceptTerms.setValue(null);
-    component.acceptTermsCheck();
-    expect(component.acceptTerms).toBeFalsy();
-    mockUserService.registeruserterms.and.returnValue(of(registerFail));
-    component.registerUser();
-    expect(mockUserService.registeruserterms).toHaveBeenCalled();
-  });
-
-  it('register user ok', () => {
-    mockUserService.registeruserterms.and.returnValue(of(registerOk));
-    component.registerUser();
-    expect(mockUserService.registeruserterms).toHaveBeenCalled();
-    const product = {
-      business: 'exito',
-      image: {
-        value: 'https://exitocol.vteximg.com.br/arquivos/ids/97470…CHA-404-L-HIMA-1628964_a.jpg?v=637110938781170000',
-      },
-      oldprice: 1717900,
-      plu: '157741',
-      price: 1546110,
-      seller: '1',
-      title: 'NEVERA SIN ESCARCHA 404 L HIMA Haceb',
-      url: 'https://www.exito.com/nevera-sin-escarcha-404-l-hima-157741/p',
-    };
-
-    component.id = '1';
-    component.dataProduct(product);
-    expect(product).toBeDefined();
-  });
-
   it('modal product carulla', () => {
     const product = {
       business: 'carulla',
