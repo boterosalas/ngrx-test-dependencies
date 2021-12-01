@@ -1,14 +1,13 @@
-import { Component, OnInit, HostListener, ViewChild, TemplateRef, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
-import { RouterLink, ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, ViewChild, TemplateRef, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ContentService } from 'src/app/services/content.service';
 import { UtilsService } from 'src/app/services/utils.service';
-import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { distinctUntilChanged } from 'rxjs/operators';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
 import { ResponseService } from 'src/app/interfaces/response';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -16,7 +15,6 @@ import { LinksService } from 'src/app/services/links.service';
 import { TokenService } from 'src/app/services/token.service';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
-import { environment } from 'src/environments/environment';
 import { isPlatformBrowser } from '@angular/common';
 
 declare var dataLayer: any;
@@ -76,10 +74,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
   terms = false;
   tokenInfo: any;
   idClicker: string;
-  showDeliver = false;
-  acceptTermsDeliver: boolean;
-  urlPlaystore = 'https://play.google.com/store/apps/details?id=com.sewayplus';
-  urlAppstore = 'https://apps.apple.com/co/app/seway/id1414489414';
 
   paginate: string;
   pageIndex = 0;
@@ -118,7 +112,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
     private sp: ContentService,
     private dialog: MatBottomSheet,
     private fb: FormBuilder,
-    private _snackBar: MatSnackBar,
     private user: UserService,
     public auth: AuthService,
     private links: LinksService,
@@ -175,7 +168,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
     this.getDate();
     this.getContentBussiness();
-    this.getUserData();
     this.links.getSellers().subscribe((resp: any) => {
       this.sellersExito = resp.sellersExito;
       this.sellersMarketPlace = resp.sellersMarketPlace;
@@ -216,9 +208,9 @@ export class BussinessComponent implements OnInit, OnDestroy {
     };
     this.subscription = this.links.saveLink(dataSaveLinkReference).subscribe((resp: ResponseService) => {
       if (resp.state === 'Error') {
-        this.openSnackBar(resp.userMessage, 'cerrar');
+        this.utils.openSnackBar(resp.userMessage, 'cerrar');
       } else {
-        this.openSnackBar(resp.userMessage, 'cerrar');
+        this.utils.openSnackBar(resp.userMessage, 'cerrar');
         this.dialog.dismiss();
       }
     });
@@ -249,7 +241,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
       .getBusinessContent(this.id)
       .pipe(distinctUntilChanged())
       .subscribe((bussiness) => {
-        this.showDeliver = true;
         this.bussiness = bussiness;
       });
   }
@@ -279,24 +270,13 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.date = date + ' ' + time;
   }
 
-  /**
-   * Abre el mensaje de confirmacion de copiado del link
-   * @param message mensaje
-   * @param action accion
-   */
-
-  private openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 5000,
-    });
-  }
 
   /* To copy Text from Textbox */
   public copyInputMessage(inputElement: any) {
     inputElement.select();
     document.execCommand('copy');
     inputElement.setSelectionRange(0, 0);
-    this.openSnackBar('Se ha copiado el link al portapapeles', 'Cerrar');
+    this.utils.openSnackBar('Se ha copiado el link al portapapeles', 'Cerrar');
   }
 
   public showReference() {
@@ -349,7 +329,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
     if (token !== null && sliderInfo.business !== 'clickam') {
       this.tokenInfo = this.token.userInfo();
       this.idClicker = this.tokenInfo.idclicker;
-      // this.idClicker = this.tokenInfo.idclicker.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
       const dataCategoryUrl = sliderInfo.link;
       this.showForm = false;
@@ -428,63 +407,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
       });
     } else {
       this.router.navigate(['/' + sliderInfo.link]);
-    }
-  }
-
-  public acceptModal() {
-    this.dialogModal.closeAll();
-    this.acceptTerms = true;
-    this.termsForm.controls.acceptTerms.setValue(true);
-  }
-
-  /**
-   * check para aceptar terminos y condiciones
-   */
-
-  public acceptTermsCheck() {
-    this.acceptTerms = !this.acceptTerms;
-    if (this.acceptTerms === false) {
-      this.termsForm.controls.acceptTerms.setValue(null);
-    }
-  }
-
-  public termsAndConditions() {
-    const template = this.templateTerms;
-    const title = '';
-
-    this.dialogModal.open(ModalGenericComponent, {
-      data: {
-        title,
-        template,
-      },
-    });
-  }
-
-  public registerUser() {
-    this.user.registeruserterms(this.id).subscribe((resp: any) => {
-      if (resp.state === 'Success') {
-        this.acceptTermsDeliver = true;
-      }
-    });
-  }
-
-  public getUserData() {
-    this.subscription = this.auth.getRole$.subscribe((role) => {
-      if (role === 'CLICKER' || role === 'ADMIN' || role === 'SUPERADMIN') {
-        this.subscription = this.user.getuserdata().subscribe((user) => {
-          this.acceptTermsDeliver = user.acceptTerms;
-        });
-      }
-    });
-  }
-
-  public goSeway() {
-    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    if (iOS || isSafari) {
-      window.location.assign(this.urlAppstore);
-    } else {
-      window.open(this.urlPlaystore, '_blank');
     }
   }
 
@@ -571,7 +493,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
       this.paginate = term;
       this.pageIndex = 0;
       this.mostrarProductos = 3;
-      // this.productsListExito = [];
     }
     if (isPlatformBrowser(this.platformId)) {
     dataLayer.push({
@@ -710,6 +631,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
       }
     );
   }
+
   libraryRoute() {
     this.router.navigate([
       '/biblioteca',
@@ -742,7 +664,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
       this.enableCopy = false;
       if (param === 'assured') {
         if (resp.state === 'Error') {
-          this.openSnackBar(resp.userMessage, 'cerrar');
+          this.utils.openSnackBar(resp.userMessage, 'cerrar');
           this.showForm = false;
           this.showFormCustomer = true;
         }
@@ -753,4 +675,5 @@ export class BussinessComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
+
 }
