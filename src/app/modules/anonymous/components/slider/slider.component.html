@@ -38,7 +38,7 @@
       <app-product
         id="slide{{ i }}"
         class="no-slider round-img"
-        [photo]="slide.imageurlmobile"
+        [photo]="slide.imageurlweb"
         productName="{{ Class }}{{ slide.description }}"
         infoaditional="slide.infoaditional"
         category="true"
@@ -57,7 +57,7 @@
       <span (click)="openShare()">
         <app-product
           id="slide{{ i }}"
-          [photo]="slide.imageurlmobile"
+          [photo]="slide.imageurlweb"
           productName="{{ Class }}{{ slide.description }}"
           infoaditional="slide.infoaditional"
           category="true"

@@ -415,9 +415,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   checkIfLoaded() {
-    window.addEventListener('load', () => {
-      this.fullCharge = true;
-    });
+    if (isPlatformBrowser(this.platformId)) {
+      window.addEventListener('load', () => {
+        this.fullCharge = true;
+      });
+    }
   }
-
 }
