@@ -3,6 +3,7 @@ const htmlmin = require('gulp-htmlmin');
 const imagemin = require('gulp-imagemin');
 var webp = require('gulp-webp');
 const svgmin = require('gulp-svgmin');
+const cleanCSS = require('gulp-clean-css');
 
 gulp.task('minify-html', () => {
   return gulp
