@@ -11,6 +11,10 @@ gulp.task('minify-html', () => {
     .pipe(gulp.dest('./dist'));
 });
 
+gulp.task('minify-css', () => {
+  return gulp.src(['./dist/**/*.css']).pipe(cleanCSS()).pipe(gulp.dest('./dist'));
+});
+
 gulp.task('picture', function () {
   return gulp.src('./dist/**/*.{png,jpg,jpeg,svg}').pipe(imagemin()).pipe(gulp.dest('./dist'));
 });
