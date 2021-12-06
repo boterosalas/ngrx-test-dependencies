@@ -82,6 +82,7 @@
               "extractLicenses": false,
               "vendorChunk": false,
               "buildOptimizer": true,
+              "outputHashing": "all",
               "budgets": [
                 {
                   "type": "initial",
@@ -104,6 +105,7 @@
               "extractLicenses": false,
               "vendorChunk": false,
               "buildOptimizer": true,
+              "outputHashing": "all",
               "budgets": [
                 {
                   "type": "initial",
