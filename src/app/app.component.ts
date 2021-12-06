@@ -22,6 +22,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { ModalGenericComponent } from './modules/shared/components/modal-generic/modal-generic.component';
 import { ResponseService } from './interfaces/response';
 import { MasterDataService } from './services/master-data.service';
+import { UpdateService } from './services/update.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -92,12 +93,15 @@ export class AppComponent implements OnInit, OnDestroy {
     private user: UserService,
     private content: ContentService,
     private token: TokenService,
-    private swUpdate: SwUpdate,
+    private sw: UpdateService,
     private dialog: MatDialog,
     location: Location,
     private personalInfo: MasterDataService,
     @Inject(PLATFORM_ID) private platformId: object
   ) {
+
+    this.sw.checkForUpdates();
+
     if (isPlatformBrowser(this.platformId)) {
       translate.setDefaultLang('es');
       translate.use('es');
@@ -141,7 +145,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.checkIfLoaded();
-    this.showUpdateModal();
     this.showAnimation1 = true;
     if (isPlatformBrowser(this.platformId)) {
       this.innerWidth = window.innerWidth;
@@ -264,28 +267,6 @@ export class AppComponent implements OnInit, OnDestroy {
             this.termsAndConditions();
           }
         });
-    }
-  }
-
-  /**
-   * Abre la modal si hay una nueva version de la app
-   */
-  public showUpdateModal() {
-    if (this.swUpdate.isEnabled) {
-      this.swUpdate.available.subscribe(() => {
-        Swal.fire({
-          title: '¡Nueva versión disponible!',
-          text: 'Haz clic en el botón aceptar.',
-          type: 'info',
-          allowEscapeKey: false,
-          allowOutsideClick: false,
-          confirmButtonText: 'Aceptar',
-          confirmButtonClass: 'update-success',
-          customClass: 'paymentData',
-        }).then(() => {
-          window.location.reload();
-        });
-      });
     }
   }
 
