@@ -90,10 +90,8 @@ export class LinksService {
 
   public sendPickingfile(formdata) {
     const data = new FormData();
-    data.append('FileBase64', formdata.fileBase64);
-    // data.append("Business", formdata.business);
-    // data.append("email", formdata.email);
-
+    data.append('formFile', formdata.file);
+   
     return this.http.post(`${environment.URL_COMISSION}${this.apiPicking}`, formdata, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
