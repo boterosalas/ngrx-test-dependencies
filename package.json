@@ -7,7 +7,7 @@
     "build": "ng run clickam:prerender && gulp performance",
     "build-qa": "ng run clickam:prerender --configuration=qa && gulp performance",
     "build-uat": "ng run clickam:prerender --configuration=uat",
-    "build-pr": "ng run clickam:prerender --configuration=production && gulp performance",
+    "build-pr": "ng run clickam:prerender --configuration=production",
     "test": "ng test --code-coverage=true --source-map=false --karma-config=./karma.conf.js",
     "testwatch": "ng test --code-coverage=true --source-map=false --karma-config=./karma.conf.js --watch",
     "lint": "ng lint",
