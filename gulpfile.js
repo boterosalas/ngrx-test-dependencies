@@ -3,17 +3,12 @@ const htmlmin = require('gulp-htmlmin');
 const imagemin = require('gulp-imagemin');
 var webp = require('gulp-webp');
 const svgmin = require('gulp-svgmin');
-const cleanCSS = require('gulp-clean-css');
 
 gulp.task('minify-html', () => {
   return gulp
     .src('./dist/**/*.html')
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(gulp.dest('./dist'));
-});
-
-gulp.task('minify-css', () => {
-  return gulp.src(['./dist/**/*.css']).pipe(cleanCSS()).pipe(gulp.dest('./dist'));
 });
 
 gulp.task('picture', function () {
@@ -28,4 +23,4 @@ gulp.task('svgmin', () => {
   return gulp.src('./dist/**/*.svg').pipe(svgmin()).pipe(gulp.dest('./dist'));
 });
 
-gulp.task('performance', gulp.series('svgmin', 'minify-css', 'minify-html', 'picture', 'webp'));
+gulp.task('performance', gulp.series('svgmin', 'minify-html', 'picture', 'webp'));
