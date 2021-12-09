@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng run clickam:prerender && gulp performance",
-    "build-qa": "ng run clickam:prerender --configuration=qa && gulp performance",
+    "build": "ng run clickam:prerender",
+    "build-qa": "ng run clickam:prerender --configuration=qa",
     "build-uat": "ng run clickam:prerender --configuration=uat",
     "build-pr": "ng run clickam:prerender --configuration=production",
     "test": "ng test --code-coverage=true --source-map=false --karma-config=./karma.conf.js",
