@@ -26,7 +26,7 @@ export interface PeriodicElement2 {
   styleUrls: ['./tools-admin.component.scss'],
 })
 export class ToolsAdminComponent implements OnInit, OnDestroy {
-  displayedColumns: string[] = ['drag', 'imagenWeb', 'imagenMobile', 'nameContent', 'link', 'bussiness', 'comision', 'active', 'actions'];
+  displayedColumns: string[] = ['drag', 'imagenWeb', 'nameContent', 'link', 'bussiness', 'comision', 'active', 'actions'];
   displayedColumns2: string[] = ['drag', 'image', 'nameContent', 'link', 'bussiness', 'comision', 'active', 'actions'];
   dataAddImagen: FormGroup;
   dataAddImagenOfertas: FormGroup;
@@ -96,14 +96,15 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
 
 
   constructor(private dialog: MatDialog, private content: ContentService, private auth: AuthService, private fb: FormBuilder) {
+    
     this.dataAddImagen = this.fb.group({
       nameContent: [null, Validators.required],
       link: [null, Validators.required],
       business: [null, Validators.required],
       comision: [null, Validators.required],
       image: [null],
-      image2: [null],
     });
+
     this.dataAddImagenOfertas = this.fb.group({
       nameContent: [null, Validators.required],
       link: [null, Validators.required],
@@ -111,6 +112,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
       comision: [null, Validators.required],
       image: [null],
     });
+
     this.dataAddImagenPopup = this.fb.group({
       nameContent: [null, Validators.required],
       link: [null],
@@ -120,6 +122,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
       textbutton: [null, Validators.required],
       colorbutton: [null, Validators.required],
     });
+
   }
 
   ngOnInit() {
@@ -307,7 +310,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
           this.nameFileCert = nameFileCarrousel;
           this.showErrorCert = false;
           this.activeButtonOfer = true;
-          if (this.nameFileCert2 !== '') {
+          if (this.nameFileCert !== '') {
             this.activebutton = true;
           } else {
             this.activebutton = false;
@@ -321,6 +324,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
       };
     }
   }
+  
   public onFileChangeFilesSecond(event, param: string) {
     const target = event.target;
     const files2 = target.files[0];
@@ -353,6 +357,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
       };
     }
   }
+
   public checkButton() {
     if (this.nameFileCert !== '' && this.nameFileCert2 !== '') {
       this.activebutton = true;
@@ -362,7 +367,9 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
       this.activeButtonOfer = false;
     }
   }
+
   public editCarouselModal(element) {
+    console.log(element);
     this.showUndefinedDate = true;
     const title = 'Editar Imagen';
     const idBussiness = 1;
@@ -373,12 +380,9 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
     if (element.imageurlweb !== '') {
       const datos = element.imageurlweb.split('/');
       this.nameFileCert = datos[datos.length - 1];
-      const datos2 = element.imageurlmobile.split('/');
-      this.nameFileCert2 = datos2[datos2.length - 1];
       this.checkButton();
     }
     this.fileImgCat = '';
-    this.fileImgCat2 = '';
     this.dataAddImagen.controls.nameContent.setValue(element.description);
     this.dataAddImagen.controls.link.setValue(element.link);
 
@@ -521,7 +525,6 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
     this.showUndefinedDate = true;
     this.idCarousel = 0;
     this.dataAddImagen.reset();
-    this.nameFileCert2 = '';
     this.nameFileCert = '';
     this.showErrorCert = false;
     this.activebutton = false;
@@ -535,6 +538,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
       },
     });
   }
+  
   public saveOfertasModal() {
     this.showUndefinedDate = true;
     const title = 'Nueva Imagen';
@@ -666,7 +670,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
         },
       ];
     } else {
-      if (this.fileImgCat !== '' && this.fileImgCat2 !== '') {
+      if (this.fileImgCat !== '') {
         datos = [
           {
             ...datos[0],

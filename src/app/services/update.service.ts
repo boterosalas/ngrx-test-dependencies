@@ -1,4 +1,5 @@
-import { Injectable, NgZone } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, Injectable, NgZone, PLATFORM_ID } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import { interval } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -7,7 +8,7 @@ import Swal from 'sweetalert2';
   providedIn: 'root',
 })
 export class UpdateService {
-  constructor(public updates: SwUpdate, private ngZone: NgZone) {
+  constructor(public updates: SwUpdate, private ngZone: NgZone, @Inject(PLATFORM_ID) private platformId: object) {
     if (updates.isEnabled) {
       this.ngZone.runOutsideAngular(() => {
         interval(6 * 60 * 60).subscribe(() => updates.checkForUpdate());
@@ -32,7 +33,9 @@ export class UpdateService {
         confirmButtonClass: 'update-success',
         customClass: 'paymentData',
       }).then(() => {
-        window.location.reload();
+        if (isPlatformBrowser(this.platformId)) {
+          window.location.reload();
+        }
       })
     );
   }
