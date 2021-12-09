@@ -90,6 +90,8 @@ import { UserComponent } from './components/user-detail/user/user.component';
 import { VerificationComponent } from './components/user-detail/verification/verification.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HistoryPaymentComponent } from './components/user-detail/history-payment/history-payment.component';
+import { TableTestimonyComponent } from './components/table-testimony/table-testimony.component';
+import { FormTestimonyComponent } from './components/form-testimony/form-testimony.component';
 
 const routes: Routes = [
   {
@@ -419,7 +421,9 @@ const routes: Routes = [
     BankAccountComponent,
     UserComponent,
     VerificationComponent,
-    HistoryPaymentComponent
+    HistoryPaymentComponent,
+    TableTestimonyComponent,
+    FormTestimonyComponent
   ],
   imports: [
     AngularEditorModule,
@@ -478,6 +482,7 @@ const routes: Routes = [
     DialogDeleteNotificationComponent,
     DialogStoryComponent,
     DialogOnboardingComponent,
+    FormTestimonyComponent
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: UsersComponent },

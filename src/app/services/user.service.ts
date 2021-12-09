@@ -76,6 +76,11 @@ export class UserService {
   apiGetNewsNovelties = 'new/getnewsnovelty';
   apiSaveQualificationNovelty = '/new/noveltyqualification';
   apiGetNewsById = 'new/usernews';
+  apiSaveTestimony= 'testimony/savetestimony';
+  apiDeleteTestimonies= 'testimony/deletetestimonies';
+  apiGetTestimonies= 'testimony/gettestimonies';
+  apiSaveOrderTestimony= 'testimony/saveordertestimony';
+  apiSaveActiveTestimony= 'testimony/saveactivetestimony';
 
   httpOptions = {
     headers: new HttpHeaders({
