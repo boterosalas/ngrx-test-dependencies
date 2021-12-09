@@ -99,6 +99,16 @@
               "ngswConfigPath": "ngsw-config.json"
             },
             "qa": {
+              "index": {
+                "input": "src/index-qa.html",
+                "output": "index.html"
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                }
+              ],
               "optimization": false,
               "sourceMap": true,
               "namedChunks": true,
@@ -119,17 +129,7 @@
                 }
               ],
               "serviceWorker": true,
-              "ngswConfigPath": "ngsw-config.json",
-              "index": {
-                "input": "src/index-qa.html",
-                "output": "index.html"
-              },
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.qa.ts"
-                }
-              ]
+              "ngswConfigPath": "ngsw-config.json"
             },
             "uat": {
               "budgets": [
