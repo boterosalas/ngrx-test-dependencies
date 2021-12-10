@@ -1,10 +1,12 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatTable } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import { ContentService } from 'src/app/services/content.service';
+import { ResponseService } from 'src/app/interfaces/response';
+import { UserService } from 'src/app/services/user.service';
+import { UtilsService } from 'src/app/services/utils.service';
 import Swal from 'sweetalert2';
 import { FormTestimonyComponent } from '../form-testimony/form-testimony.component';
 
@@ -17,7 +19,7 @@ export class TableTestimonyComponent implements OnInit, OnDestroy {
   @ViewChild('table', { static: false }) table: MatTable<any>;
   private subscription: Subscription = new Subscription();
 
-  constructor(private content: ContentService, private dialog: MatDialog) {}
+  constructor(private user: UserService, private dialog: MatDialog, private utils: UtilsService) {}
 
   displayedColumns: string[] = ['name', 'user', 'testimony', 'video', 'visible', 'actions'];
 
@@ -25,28 +27,36 @@ export class TableTestimonyComponent implements OnInit, OnDestroy {
     {
       id:'1',
       orderby: 0,
-      name: 'Olga Lucía',
-      user: '@olga.lucia',
+      username: 'Olga Lucía',
+      usersocialnetwork: '@olga.lucia',
       testimony:
         'Los testimonios pueden ser un recurso poderoso para poder establecer un vínculo de confianza entre tus clientes nuevos. Es parte de lo que se conoce como la demostración social (social proof) y en el marketing es un medio poderoso para persuadir a tus visitantes de realizar cierta acción.',
-      video: 'https://www.youtube.com/watch?v=rRXxrFqIwic',
-      visible: true,
+      link: 'https://www.youtube.com/watch?v=rRXxrFqIwic',
+      active: true,
     },
     {
       id:'2',
       orderby: 1,
-      name: 'pepito perez',
-      user: '@perez.pepito',
+      username: 'pepito perez',
+      usersocialnetwork: '@perez.pepito',
       testimony:
         'Los testimonios pueden ser un recurso poderoso para poder establecer un vínculo de confianza entre tus clientes nuevos. Es parte de lo que se conoce como la demostración social (social proof) y en el marketing es un medio poderoso para persuadir a tus visitantes de realizar cierta acción.',
-      video: 'https://www.youtube.com/watch?v=rRXxrFqIwic',
-      visible: false,
+      link: 'https://www.youtube.com/watch?v=rRXxrFqIwic',
+      active: false,
     },
   ];
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getTestimonies();
+  }
 
-  deleteItem(dataSource) {
+  public getTestimonies() {
+    this.subscription = this.user.getTestimonies().subscribe(testimonies => {
+      this.dataSource = testimonies;
+    });
+  }
+
+  public deleteItem(dataSource) {
     const {id} = dataSource;
     Swal.fire({
       html: "<h3 class='delete-title-comision'>Eliminar testimonio</h3> <p class='w-container'>¿Está seguro que desea eliminar el testimonio seleccionado?</p>",
@@ -58,9 +68,9 @@ export class TableTestimonyComponent implements OnInit, OnDestroy {
       allowOutsideClick: false,
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
-        // this.subscription = this.content.deleteBoardings([id]).subscribe(() => {
-        //   this.getBoardings();
-        // });
+        this.subscription = this.user.deleteTestimonies([id]).subscribe(() => {
+          this.getTestimonies();
+        });
       }
     });
   }
@@ -71,9 +81,9 @@ export class TableTestimonyComponent implements OnInit, OnDestroy {
       data: dataSource
     });
 
-    // dialog.beforeClosed().subscribe(board => {
-    //   this.getBoardings();
-    // });
+    dialog.beforeClosed().subscribe(board => {
+      this.getTestimonies();
+    });
   }
 
   public openModalTestimony() {
@@ -81,16 +91,22 @@ export class TableTestimonyComponent implements OnInit, OnDestroy {
       width: '450px',
     });
 
-    // dialog.beforeClosed().subscribe(board => {
-    //   this.getBoardings();
-    // });
+    dialog.beforeClosed().subscribe(board => {
+      this.getTestimonies();
+    });
   }
 
 
 
-  public visible(e: MatSlideToggle, dataSource){
+  public visible(e: any, dataSource){
     const {id} = dataSource;
-    console.log(e.checked, id);
+    let data = {
+      id,
+      active: e.checked
+    }
+    this.subscription = this.user.saveActiveTestimonies(data).subscribe((activeTestimony: ResponseService) => {
+      this.utils.openSnackBar(activeTestimony.userMessage, 'Cerrar');
+    });
   }
 
   public dropTable(event: CdkDragDrop<any[]>) {
@@ -109,8 +125,7 @@ export class TableTestimonyComponent implements OnInit, OnDestroy {
   }
 
   private saveOrderTestimony(datos: any) {
-    console.log(datos);
-    // this.subscription = this.content.saveOrderTestimony(datos).subscribe();
+    this.subscription = this.user.saveOrderTestimonies(datos).subscribe();
   }
 
   ngOnDestroy(): void {

@@ -5,18 +5,18 @@
     <input
       matInput
       placeholder="Nombre del usuario"
-      formControlName="name"
+      formControlName="username"
       type="text"
       required
       class="text-area-heigth"
     />
-    <mat-error id="requiredName" *ngIf="testimonyForm.controls.name.invalid && testimonyForm.controls.name.errors.required">{{
+    <mat-error id="requiredName" *ngIf="testimonyForm.controls.username.invalid && testimonyForm.controls.username.errors.required">{{
       'GENERIC.REQUIRED' | translate: { formValue: 'Nombre del usuario' }
     }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="w-100">
-    <input matInput placeholder="Usuario de Instagram o Facebook (Opcional)" type="text" formControlName="user" />
+    <input matInput placeholder="Usuario de Instagram o Facebook (Opcional)" type="text" formControlName="usersocialnetwork" />
   </mat-form-field>
 
   <mat-form-field class="w-100">
@@ -32,11 +32,11 @@
   </mat-form-field>
 
   <mat-form-field class="w-100">
-    <input matInput placeholder="Link del video (Opcional)" type="text" formControlName="video" />
+    <input matInput placeholder="Link del video (Opcional)" type="text" formControlName="link" />
   </mat-form-field>
   
   <div fxLayout="row" fxLayoutAlign="end end" class="mb-3">
-      <mat-slide-toggle formControlName="visible"> <span class="purple-text galano-bold">Visible</span> </mat-slide-toggle>
+      <mat-slide-toggle formControlName="active"> <span class="purple-text galano-bold">Visible</span> </mat-slide-toggle>
   </div>
   
   <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="20px">

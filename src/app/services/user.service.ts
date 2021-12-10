@@ -779,4 +779,38 @@ export class UserService {
       )
     );
   }
+
+  public getTestimonies() {
+    return this.http.get(`${this.url + this.apiGetTestimonies}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((user: ResponseService) => {
+        return user.objectResponse;
+      })
+    );
+  }
+
+  public saveTestimonies(data: object) {
+    return this.http.post(`${this.url + this.apiSaveTestimony}`, data, this.httpOptions);
+  }
+  
+  public deleteTestimonies(data: any) {
+    return this.http.post(`${this.url + this.apiDeleteTestimonies}`, data, this.httpOptions);
+  }
+  
+  public saveOrderTestimonies(data: any) {
+    return this.http.post(`${this.url + this.apiSaveOrderTestimony}`, data, this.httpOptions);
+  }
+
+  public saveActiveTestimonies(data: any) {
+    return this.http.post(`${this.url + this.apiSaveActiveTestimony}`, data, this.httpOptions);
+  }
+
 }
+
+
