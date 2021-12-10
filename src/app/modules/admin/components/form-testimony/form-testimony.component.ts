@@ -29,6 +29,7 @@ export class FormTestimonyComponent implements OnInit, OnDestroy {
 
   public formTestimony() {
     this.testimonyForm = this.fb.group({
+      id: [this.data ? this.data.id : 0],
       username: [this.data ? this.data.username : '', Validators.required],
       usersocialnetwork: [this.data ? this.data.usersocialnetwork : ''],
       testimony: [this.data ? this.data.testimony : '', [Validators.maxLength(300)]],
@@ -42,7 +43,7 @@ export class FormTestimonyComponent implements OnInit, OnDestroy {
   }
 
   public saveTestimony() {
-    const data = this.testimonyForm.value;
+    const data = [this.testimonyForm.value];
     this.subscription = this.user.saveTestimonies(data).subscribe((saveTestominy: ResponseService) => {
       this.onNoClick();
       this.utils.openSnackBar(saveTestominy.userMessage, 'cerrar');

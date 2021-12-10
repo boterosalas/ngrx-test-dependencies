@@ -780,8 +780,8 @@ export class UserService {
     );
   }
 
-  public getTestimonies() {
-    return this.http.get(`${this.url + this.apiGetTestimonies}`, this.httpOptions).pipe(
+  public getTestimonies(visible = false) {
+    return this.http.get(`${this.url + this.apiGetTestimonies}?visible=${visible}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
