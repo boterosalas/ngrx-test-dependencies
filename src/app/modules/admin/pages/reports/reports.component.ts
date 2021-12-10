@@ -179,7 +179,8 @@ export class ReportsComponent implements OnInit, OnDestroy {
     this.nameFilePicking = event.target.files[0].name;
     const reader = new FileReader();
     if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
+      const file = event.target.files[0];
+      // const [file] = event.target.files;
       const fileBlob = new Blob([file], { type: this.EXCEL_TYPE });
       const filePicking = new File([fileBlob], this.nameFilePicking, {
         type: this.EXCEL_TYPE,
