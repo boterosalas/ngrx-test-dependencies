@@ -79,6 +79,7 @@ export class UserService {
   apiSaveTestimony= 'testimony/savetestimony';
   apiDeleteTestimonies= 'testimony/deletetestimonies';
   apiGetTestimonies= 'testimony/gettestimonies';
+  apiGetTestimoniesUser= 'testimony/gettestimoniesuser';
   apiSaveOrderTestimony= 'testimony/saveordertestimony';
   apiSaveActiveTestimony= 'testimony/saveactivetestimony';
 
@@ -782,6 +783,21 @@ export class UserService {
 
   public getTestimonies(visible = false) {
     return this.http.get(`${this.url + this.apiGetTestimonies}?visible=${visible}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((user: ResponseService) => {
+        return user.objectResponse;
+      })
+    );
+  }
+
+  public getTestimoniesUser() {
+    return this.http.get(`${this.url + this.apiGetTestimoniesUser}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),

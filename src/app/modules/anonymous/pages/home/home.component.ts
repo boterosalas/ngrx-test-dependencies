@@ -232,6 +232,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.amount = localStorage.getItem('Amount');
     this.amountReferred = localStorage.getItem('AmonuntReferred');
     this.getTerms();
+    this.getTestimoniesUser();
+  }
+
+  public getTestimoniesUser() {
+    this.subscription = this.user.getTestimoniesUser().subscribe((testimoniesUser) => {
+      console.log(testimoniesUser);
+    });
   }
 
   getTerms() {
