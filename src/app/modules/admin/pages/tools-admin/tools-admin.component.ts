@@ -369,7 +369,6 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
   }
 
   public editCarouselModal(element) {
-    console.log(element);
     this.showUndefinedDate = true;
     const title = 'Editar Imagen';
     const idBussiness = 1;

@@ -39,7 +39,6 @@ export class DialogNavigationItemComponent implements OnInit {
     this.iconSelected = this.data.icon;
 
     if (this.data.edit === 1) {
-      console.log(this.data);
       this.dateForm = this.fb.group({
         id: [this.data.id],
         idseccion: [this.data.idseccion || this.data.idgrupo],

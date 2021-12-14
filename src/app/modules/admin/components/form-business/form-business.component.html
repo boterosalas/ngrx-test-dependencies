@@ -1,0 +1,208 @@
+<form [formGroup]="businessForm" fxLayout="column">
+  <div fxLayout="row" fxLayoutGap="25px">
+    <mat-card class="mt-3 card mat-card-box-shadow" fxFlex="50" fxLayout="column">
+      <app-title showTitleh3="true" text="DATOS"></app-title>
+      <mat-form-field>
+        <input matInput id="nameBussiness" type="text" placeholder="NOMBRE DEL NEGOCIO" formControlName="nameBussiness" required />
+
+        <mat-error
+          id="requiredName"
+          *ngIf="businessForm.controls.nameBussiness.invalid && businessForm.controls.nameBussiness.errors.required"
+          >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Nombre del negocio' } }}</mat-error
+        >
+
+        <mat-error id="maxName" *ngIf="businessForm.controls.nameBussiness.invalid && businessForm.controls.nameBussiness.errors.maxlength">{{
+          'GENERIC.MAX_CHARACTERS'
+            | translate
+              : {
+                  maxchar: businessForm.controls.nameBussiness.errors.maxlength.requiredLength
+                }
+        }}</mat-error>
+
+        <mat-error
+          id="invalidName"
+          *ngIf="businessForm.controls.nameBussiness.invalid && businessForm.controls.nameBussiness.errors.pattern"
+          >{{ 'GENERIC.INVALID_FORMAT' | translate: { val: 'Nombre del negocio' } }}</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput id="detailCommision" type="text" placeholder="DETALLE DE LA COMISIÓN" formControlName="detailBussiness" required />
+
+        <mat-error
+          id="requiredName"
+          *ngIf="businessForm.controls.detailBussiness.invalid && businessForm.controls.detailBussiness.errors.required"
+          >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Detalle de la comisión' } }}</mat-error
+        >
+
+        <mat-error
+          id="maxName"
+          *ngIf="businessForm.controls.detailBussiness.invalid && businessForm.controls.detailBussiness.errors.maxlength"
+          >{{
+            'GENERIC.MAX_CHARACTERS'
+              | translate
+                : {
+                    maxchar: businessForm.controls.detailBussiness.errors.maxlength.requiredLength
+                  }
+          }}</mat-error
+        >
+
+        <mat-error
+          id="invalidName"
+          *ngIf="businessForm.controls.detailBussiness.invalid && businessForm.controls.detailBussiness.errors.pattern"
+          >{{ 'GENERIC.INVALID_FORMAT' | translate: { val: 'Detalle de la comisión' } }}</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          id="nombreTabla"
+          type="text"
+          placeholder="NOMBRE EN TABLA DE COMISIONES"
+          formControlName="nameTableCommision"
+          required
+        />
+
+        <mat-error
+          id="requiredName"
+          *ngIf="businessForm.controls.nameTableCommision.invalid && businessForm.controls.nameTableCommision.errors.required"
+          >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Nombre en tabla de comisiones' } }}</mat-error
+        >
+
+        <mat-error
+          id="maxName"
+          *ngIf="businessForm.controls.nameTableCommision.invalid && businessForm.controls.nameTableCommision.errors.maxlength"
+          >{{
+            'GENERIC.MAX_CHARACTERS'
+              | translate
+                : {
+                    maxchar: businessForm.controls.nameTableCommision.errors.maxlength.requiredLength
+                  }
+          }}</mat-error
+        >
+
+        <mat-error
+          id="invalidName"
+          *ngIf="businessForm.controls.nameTableCommision.invalid && businessForm.controls.nameTableCommision.errors.pattern"
+          >{{ 'GENERIC.INVALID_FORMAT' | translate: { val: 'nombre en tabla de comisiones' } }}</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          id="placeholderBusi"
+          type="text"
+          placeholder="PLACE HOLDER (REFERENCIA DE COMPRA)"
+          formControlName="placeholderBussiness"
+          required
+        />
+
+        <mat-error
+          id="requiredName"
+          *ngIf="businessForm.controls.placeholderBussiness.invalid && businessForm.controls.placeholderBussiness.errors.required"
+          >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Place holder (referencia de compra)' } }}</mat-error
+        >
+
+        <mat-error
+          id="maxName"
+          *ngIf="businessForm.controls.placeholderBussiness.invalid && businessForm.controls.placeholderBussiness.errors.maxlength"
+          >{{
+            'GENERIC.MAX_CHARACTERS'
+              | translate
+                : {
+                    maxchar: businessForm.controls.placeholderBussiness.errors.maxlength.requiredLength
+                  }
+          }}</mat-error
+        >
+
+        <mat-error
+          id="invalidName"
+          *ngIf="businessForm.controls.placeholderBussiness.invalid && businessForm.controls.placeholderBussiness.errors.pattern"
+          >{{ 'GENERIC.INVALID_FORMAT' | translate: { val: 'Place holder (referencia de compra)' } }}</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput id="codeReference" type="text" placeholder="URL" formControlName="codeReference" />
+
+        <mat-error
+          id="requiredName"
+          *ngIf="businessForm.controls.codeReference.invalid && businessForm.controls.codeReference.errors.required"
+          >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'URL' } }}</mat-error
+        >
+
+        <mat-error id="maxName" *ngIf="businessForm.controls.codeReference.invalid && businessForm.controls.codeReference.errors.maxlength">{{
+          'GENERIC.MAX_CHARACTERS'
+            | translate
+              : {
+                  maxchar: businessForm.controls.codeReference.errors.maxlength.requiredLength
+                }
+        }}</mat-error>
+
+        <mat-error
+          id="invalidName"
+          *ngIf="businessForm.controls.codeReference.invalid && businessForm.controls.codeReference.errors.pattern"
+          >{{ 'GENERIC.INVALID_FORMAT' | translate: { val: 'URL' } }}</mat-error
+        >
+      </mat-form-field>
+
+      <div>
+        Genera comisión excel:
+        <mat-slide-toggle style="position: relative; top: 1px" formControlName="generateExcel" color="orange2-toggle"></mat-slide-toggle>
+      </div>
+      <div>
+        Oculto/Visible:
+        <mat-slide-toggle style="position: relative; top: 1px" formControlName="visible" color="orange2-toggle"></mat-slide-toggle>
+      </div>
+    </mat-card>
+
+    <mat-card class="mt-3 card mat-card-box-shadow" fxFlex="50" fxLayout="column">
+      <app-title showTitleh3="true" text="IMÁGENES"></app-title>
+      <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
+        <div fxLayout="column" fxLayoutAlign="center" class="space">
+          <strong class="title-gray">ADJUNTAR IMAGEN (500X500PX, FORMATO .SVG, MAX 300KB)</strong>
+          <span class="title-secondary" *ngIf="nameFile === ''">No hay archivo seleccionado</span>
+          <span class="file-input" *ngIf="nameFile !== ''">{{ nameFile | truncate: '20' }}</span>
+        </div>
+        <div>
+          <label for="image" id="upload" class="cursor-pointer">
+            <span *ngIf="!errorFile">
+              <i class="tio-upload_on_cloud mt-1 f-25 purple2-text" *ngIf="nameFile === ''"></i>
+              <i class="tio-cloud_on mt-1 f-25 purple2-text" *ngIf="nameFile !== ''"></i>
+            </span>
+            <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="errorFile"></i>
+          </label>
+        </div>
+      </div>
+      <mat-error *ngIf="errorFile" class="text-small small pb-2 d-block">
+        Formato inválido solo se pueden subir archivos con la extensión {{ extension }} y menores de {{ size }}KB
+      </mat-error>
+      <input (change)="uploadFileImage($event)" id="image" type="file" style="display: none" formControlName="image" />
+      <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
+        <div fxLayout="column" fxLayoutAlign="center" class="space">
+          <strong class="title-gray">ADJUNTAR IMAGEN DASHBOARD (500X500PX, FORMATO .SVG, MAX 300KB)</strong>
+          <span class="title-secondary" *ngIf="nameFile2 === ''">No hay archivo seleccionado</span>
+          <span class="file-input" *ngIf="nameFile2 !== ''">{{ nameFile2 | truncate: '20' }}</span>
+        </div>
+        <div>
+          <label for="image2" id="upload" class="cursor-pointer">
+            <span *ngIf="!errorFile2">
+              <i class="tio-upload_on_cloud mt-1 f-25 purple2-text" *ngIf="nameFile2 === ''"></i>
+              <i class="tio-cloud_on mt-1 f-25 purple2-text" *ngIf="nameFile2 !== ''"></i>
+            </span>
+            <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="errorFile2"></i>
+          </label>
+        </div>
+      </div>
+      <mat-error *ngIf="errorFile2" class="text-small small pb-2 d-block">
+        Formato inválido solo se pueden subir archivos con la extensión {{ extension }} y menores de {{ size }}KB
+      </mat-error>
+      <input (change)="uploadFileImage2($event)" id="image2" type="file" style="display: none" formControlName="image2" />
+    </mat-card>
+  </div>
+</form>
+
+<div class="container button-padding mb-4 mt-4">
+  <div fxLayout="row">
+    <app-button title="Descartar cambios" [haveIcon]="false" [routerLink]="['/negocios-admin']" color="transparent" classButton="no-shadow"></app-button>
+    <app-button title="Guardar cambios" (action)="saveBussiness()" [haveIcon]="false"  classButton="shadow-purple" [disabled]="!businessForm.valid"></app-button>
+  </div>
+</div>

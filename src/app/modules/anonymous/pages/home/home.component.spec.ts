@@ -46,6 +46,7 @@ describe('HomeComponent', () => {
     'getProfile',
     'saveUserAcceptTermsReferrals',
     'saveFeedback',
+    'getTestimoniesUser'
   ]);
   const mockAuthService = jasmine.createSpyObj('AuthService', ['login', 'isLoggedIn', 'isLogged$']);
   const mockUtilsService = jasmine.createSpyObj('UtilsService', ['showRegisterForm', 'showloginForm']);
@@ -119,6 +120,30 @@ describe('HomeComponent', () => {
       imageAltWeb: 'Popup número 1',
       imageAltMobile: 'Popup número 1 mobile',
       link: 'http://example.com',
+    },
+  ];
+
+
+  const testominies = [
+    {
+      id: '1',
+      orderby: 0,
+      username: 'Olga Lucía',
+      usersocialnetwork: '@olga.lucia',
+      testimony:
+        'Los testimonios pueden ser un recurso poderoso para poder establecer un vínculo de confianza entre tus clientes nuevos. Es parte de lo que se conoce como la demostración social (social proof) y en el marketing es un medio poderoso para persuadir a tus visitantes de realizar cierta acción.',
+      link: 'https://www.youtube.com/watch?v=rRXxrFqIwic',
+      active: true,
+    },
+    {
+      id: '2',
+      orderby: 1,
+      username: 'pepito perez',
+      usersocialnetwork: '@perez.pepito',
+      testimony:
+        'Los testimonios pueden ser un recurso poderoso para poder establecer un vínculo de confianza entre tus clientes nuevos. Es parte de lo que se conoce como la demostración social (social proof) y en el marketing es un medio poderoso para persuadir a tus visitantes de realizar cierta acción.',
+      link: 'https://www.youtube.com/watch?v=rRXxrFqIwic',
+      active: false,
     },
   ];
 
@@ -464,6 +489,7 @@ describe('HomeComponent', () => {
       mockContentService.getPopupus.and.returnValue(of(popups));
       mockContentService.getCategoriesBusinessHome.and.returnValue(of(business));
       mockContentService.getStories.and.returnValue(of(getStories));
+      mockUserService.getTestimoniesUser.and.returnValue(of(testominies));
     })
   );
 

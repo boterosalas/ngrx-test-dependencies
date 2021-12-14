@@ -1,0 +1,47 @@
+<app-title showTitleh3="true" text="Testimonio"></app-title>
+
+<form [formGroup]="testimonyForm">
+  <mat-form-field class="w-100">
+    <input
+      matInput
+      placeholder="Nombre del usuario"
+      formControlName="username"
+      type="text"
+      required
+      class="text-area-heigth"
+    />
+    <mat-error id="requiredName" *ngIf="testimonyForm.controls.username.invalid && testimonyForm.controls.username.errors.required">{{
+      'GENERIC.REQUIRED' | translate: { formValue: 'Nombre del usuario' }
+    }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="w-100">
+    <input matInput placeholder="Usuario de Instagram o Facebook (Opcional)" type="text" formControlName="usersocialnetwork" />
+  </mat-form-field>
+
+  <mat-form-field class="w-100">
+    <mat-label>Testimonio del usuario (300 carácteres)</mat-label>
+    <textarea matInput formControlName="testimony" required></textarea>
+    <mat-error id="maxTestimony" *ngIf="testimonyForm.controls.testimony.invalid && testimonyForm.controls.testimony.errors.maxlength">{{
+        'GENERIC.MAX_CHARACTERS'
+          | translate
+            : {
+                maxchar: testimonyForm.controls.testimony.errors.maxlength.requiredLength
+              }
+      }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="w-100">
+    <input matInput placeholder="Link del video (Opcional)" type="text" formControlName="link" />
+  </mat-form-field>
+  
+  <div fxLayout="row" fxLayoutAlign="end end" class="mb-3">
+      <mat-slide-toggle formControlName="active"> <span class="purple-text galano-bold">Visible</span> </mat-slide-toggle>
+  </div>
+  
+  <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="20px">
+      <app-button title="Cancelar" [haveIcon]="false" (action)="onNoClick()" color="white" classButton="no-shadow"></app-button>
+      <app-button title="Guardar"  [haveIcon]="false" (action)="saveTestimony()" classButton="shadow-purple" [disabled]="!testimonyForm.valid"></app-button>
+  </div>
+
+</form>

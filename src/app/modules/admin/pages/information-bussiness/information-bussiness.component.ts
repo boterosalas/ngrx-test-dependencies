@@ -39,6 +39,7 @@ export class InformationBussinessComponent implements OnInit {
   idExceptions: number;
   caseSpecial: string;
   idCaseSpecial: number;
+  businessdata:any;
   @ViewChild('table', { static: false }) table: MatTable<PeriodicElement>;
   dataSource = [];
   private subscription: Subscription = new Subscription();
@@ -76,6 +77,7 @@ export class InformationBussinessComponent implements OnInit {
   ngOnInit() {}
   getBusinessData() {
     this.content.getBusinessById(this.id).subscribe((resp) => {
+      this.businessdata = resp;
       this.aboutBuss.controls.aboutBuss.setValue(resp.about);
       this.dataSource = resp.tips;
       if (resp.terms.length > 0) {
