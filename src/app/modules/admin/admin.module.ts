@@ -92,6 +92,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HistoryPaymentComponent } from './components/user-detail/history-payment/history-payment.component';
 import { TableTestimonyComponent } from './components/table-testimony/table-testimony.component';
 import { FormTestimonyComponent } from './components/form-testimony/form-testimony.component';
+import { FormBusinessComponent } from './components/form-business/form-business.component';
 
 const routes: Routes = [
   {
@@ -423,7 +424,8 @@ const routes: Routes = [
     VerificationComponent,
     HistoryPaymentComponent,
     TableTestimonyComponent,
-    FormTestimonyComponent
+    FormTestimonyComponent,
+    FormBusinessComponent
   ],
   imports: [
     AngularEditorModule,

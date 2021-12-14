@@ -89,7 +89,6 @@ export class TableTestimonyComponent implements OnInit, OnDestroy {
     moveItemInArray(this.dataSource, prevIndex, event.currentIndex);
     this.table.renderRows();
     const datosSourceSend = [];
-    console.log(this.dataSource);
     for (let i = 0; i < this.dataSource.length; i++) {
       this.dataSource[i].orderby = i + 1;
       datosSourceSend.push({

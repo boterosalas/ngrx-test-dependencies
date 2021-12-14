@@ -12,7 +12,6 @@
       >
     </div>
     <span fxLayout="row">
-      <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
       <button
         mat-raised-button
         class="back-button"
@@ -30,7 +29,16 @@
     </span>
   </div>
   <div>
+    
     <mat-tab-group>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <span class="gtmgeneral">General</span>
+        </ng-template>
+        <app-form-business [dataBusiness]="businessdata"></app-form-business>
+      </mat-tab>
+
       <mat-tab>
         <ng-template mat-tab-label>
           <span class="gtmTerminosCondicionesClicTerminosLegales">Sobre el negocio</span>

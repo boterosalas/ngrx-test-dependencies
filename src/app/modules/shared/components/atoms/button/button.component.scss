@@ -45,6 +45,11 @@
     color: $primary-color;
   }
 
+  &-transparent {
+    background: none;
+    color: $primary-color;
+  }
+
   &-gray {
     background: $gray3;
     color: $primary-color;

@@ -31,6 +31,13 @@ export class UtilsService {
   formArray = [];
   titleSelect: BehaviorSubject<string>;
   checkedAll: BehaviorSubject<boolean>;
+  validFormat: boolean;
+  fileB64 = new BehaviorSubject<string>('');
+  file2B64 = new BehaviorSubject<string>('');
+  nameFile = new BehaviorSubject<string>('');
+  errorFile = new BehaviorSubject<boolean>(false);
+  nameFile2 = new BehaviorSubject<string>('');
+  errorFile2 = new BehaviorSubject<boolean>(false);
 
   @Output() change: EventEmitter<boolean> = new EventEmitter();
   @Output() changeMenu: EventEmitter<boolean> = new EventEmitter();
@@ -243,6 +250,75 @@ export class UtilsService {
         arrayElement.splice(index, 1);
       }
     }
+  }
+
+  public onFileChangeFiles(event, extension:string, size: number, param?: string) {
+
+    const nameFile = event.target.files[0].name;
+    const reader = new FileReader();
+    const sizeFile = event.target.files[0].size;
+
+    this.getExtension(extension, size, nameFile, sizeFile);
+
+    if(this.validFormat === true) {
+      if (event.target.files && event.target.files.length) {
+        const [file] = event.target.files;
+        const fileBlob = new Blob([file]);
+        const file2 = new File([fileBlob], nameFile);
+        reader.readAsDataURL(file2);
+        reader.onload = () => {
+          if(param == 'file') {
+            this.splitb64(reader.result, 'file');
+          }
+          if(param == 'file2') {
+            this.splitb64(reader.result, 'file2');
+          }
+        };
+      }
+      if(param == 'file') {
+        this.errorFile.next(false);
+        this.nameFile.next(nameFile);
+      }
+      if(param == 'file2') {
+        this.errorFile2.next(false);
+        this.nameFile2.next(nameFile);
+      }
+    } else{
+      if(param == 'file') {
+        this.errorFile.next(true);
+        this.nameFile.next(nameFile);
+      }
+      if(param == 'file2') {
+        this.errorFile2.next(true);
+        this.nameFile2.next(nameFile);
+      }
+    }
+    
+  }
+
+  private getExtension(extension: string , size:number, nameFile?: string, getSize?: number) {
+    const splitExt = nameFile.split('.');
+    const getExt = splitExt[splitExt.length - 1].toLocaleLowerCase();
+    this.validFormat = false;
+    if (getExt === extension ) {
+      this.validFormat = true;
+    }
+    if (getSize / 1000 > size) {
+      this.validFormat = false;
+    }
+  }
+
+  private splitb64(file: any, param: string) {
+    const explit64 = file.split('data:application/octet-stream;base64,');
+    
+    if(param === 'file') {
+      this.fileB64.next(explit64[1]);
+    }
+
+    if(param === 'file2') {
+      this.file2B64.next(explit64[1]);
+    }
+
   }
 
 }
