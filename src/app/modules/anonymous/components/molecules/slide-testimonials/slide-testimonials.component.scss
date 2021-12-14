@@ -5,6 +5,8 @@
   border-radius: 10px;
   position: relative;
   z-index: 1;
+  min-height: 290px;
+  max-height: 290px;
 }
 
 .top {
@@ -29,6 +31,11 @@
   position: relative;
   top: -150px;
   z-index: 0;
+}
+
+.large-text{
+  max-height: 130px;
+  overflow: auto;
 }
 
 @media screen and (max-width: 600px) {

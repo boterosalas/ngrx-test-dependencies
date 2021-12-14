@@ -3,9 +3,26 @@
     <div ngxSlickItem *ngFor="let slide of slider; let i = index" class="slide m-2 p-0" fxLayoutAlign="center center">
         <mat-card class="card-testimonial" fxFlex.xs="100%">
             <i class="tio-quotes top font"></i>
-            <app-title showTitleh3="true" [text]="slide.title"></app-title>
-            <p ngClass.xs="f-16">{{slide.testimony}}</p>
+            <app-title showTitleh3="true" commonClass="mb-0" [text]="slide.username"></app-title>
+            <app-title commonClass="m-0 purple2 galano f-12"  *ngIf="slide.usersocialnetwork" showTitleh4="true" [text]="slide.usersocialnetwork"></app-title>
+            <p ngClass.xs="f-16" class="large-text">{{slide.testimony}}</p>
             <i class="tio-quotes bottom font"></i>
+            <span *ngIf="slide.link">
+              <app-button  direction="row-reverse" color="yellow-not-bg" title="Ver testimonio completo" (action)="openVideo(slide.link)" classButton="shadow-purple p-0" classIcon="tio-play_circle f-20 mr-2"></app-button>
+            </span>
         </mat-card>
     </div>
   </ngx-slick-carousel>
+
+  <ng-template #templateVideo>
+    <div>
+      <iframe
+        width="560"
+        height="315"
+        [src]="video"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </ng-template>

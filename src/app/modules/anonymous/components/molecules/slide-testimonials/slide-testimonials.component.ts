@@ -1,5 +1,8 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { DomSanitizer } from '@angular/platform-browser';
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
+import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 
 @Component({
   selector: 'app-slide-testimonials',
@@ -12,11 +15,19 @@ export class SlideTestimonialsComponent implements OnInit {
   slickModal: SlickCarouselComponent;
   video: any;
 
+  
+  @ViewChild('templateVideo', { static: false })
+  templateVideo: TemplateRef<any>;
+  
+
   @Input() slideConfig: object;
   @Input() slider: Array<any>;
+  
 
-
-  constructor() { }
+  constructor(
+    private dialog: MatDialog,
+    private sanitizer: DomSanitizer
+  ) { }
 
   ngOnInit(): void {
   }
@@ -27,6 +38,21 @@ export class SlideTestimonialsComponent implements OnInit {
 
   prev() {
     this.slickModal.slickPrev();
+  }
+
+  openVideo(link:string) {
+    const id = 'video-modal';
+    const template = this.templateVideo;
+    const title = '';
+    this.video = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + link);
+    this.dialog.open(ModalGenericComponent, {
+      panelClass: 'video-clickacademy',
+      data: {
+        id,
+        title,
+        template,
+      },
+    });
   }
 
 }
