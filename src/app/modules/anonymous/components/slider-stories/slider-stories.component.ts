@@ -92,7 +92,7 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
               image: storyS.imageurl,
               infoAditional: storyS.infoaditional,
               businessCode: bussinessStory ? bussinessStory.code : '',
-              businessImage: bussinessStory ? bussinessStory.imageurl : '',
+              businessImage: bussinessStory ? bussinessStory.icondashboard : '',
               date: new Date(storyS.date),
               link: storyS.link,
               pause: true,
@@ -105,7 +105,7 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
             if (!this.storiesBusiness.some((x) => x.idbusiness === storyS.idbusiness)) {
               this.storiesBusiness.push({
                 idbusiness: storyS.idbusiness,
-                businessImage: bussinessStory ? bussinessStory.imageurl : '',
+                businessImage: bussinessStory ? bussinessStory.icondashboard : '',
                 businessName: bussinessStory ? bussinessStory.description : '',
                 stateView: data.objectResponse.filter((x) => x.idbusiness === storyS.idbusiness).some((x) => !x.new),
                 pause: true,
