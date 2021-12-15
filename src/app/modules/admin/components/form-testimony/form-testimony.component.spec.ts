@@ -13,7 +13,11 @@ import { UserService } from 'src/app/services/user.service';
 import { FormTestimonyComponent } from './form-testimony.component';
 
 export class MatDialogMock {
-  close: () => {};
+  close() {
+    return {
+      close: () => of(true),
+    };
+  }
   closeAll() {
     return {
       closeAll: () => of(true),
