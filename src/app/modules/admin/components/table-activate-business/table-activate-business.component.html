@@ -222,7 +222,7 @@
     <input (change)="onFileChangeFiles($event, 'image')" id="image" type="file" style="display: none" formControlName="image" />
     <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
       <div fxLayout="column" fxLayoutAlign="center" class="space">
-        <strong class="title-gray">ADJUNTAR IMAGEN DASHBOARD (500X500PX, FORMATO .SVG, MAX 300KB)</strong>
+        <strong class="title-gray">ADJUNTAR ICONO DE STORIES (100X100PX, FORMATO .SVG, MAX 300KB)</strong>
         <span class="title-secondary" *ngIf="nameFileCert2 === ''">No hay archivo seleccionado</span>
         <span class="file-input" *ngIf="nameFileCert2 !== ''">{{ nameFileCert2 | truncate: '20' }}</span>
       </div>

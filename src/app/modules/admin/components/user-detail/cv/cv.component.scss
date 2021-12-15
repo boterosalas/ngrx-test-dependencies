@@ -205,7 +205,7 @@ p {
 }
 
 .iconb {
-  width: 45px;
+  width: 80px;
 }
 
 .style-icon {
@@ -234,4 +234,14 @@ p {
 .table-height{
     max-height: 110vh;
     overflow: auto;
+}
+
+.users-table{
+  tr{
+    &:last-child{
+      img {
+        display: none;
+      }
+    }
+  }
 }

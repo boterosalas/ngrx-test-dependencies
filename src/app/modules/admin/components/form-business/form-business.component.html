@@ -154,7 +154,7 @@
       </div>
     </mat-card>
 
-    <mat-card class="mt-3 card mat-card-box-shadow" fxFlex="50" fxLayout="column">
+    <mat-card class="mt-3 card mat-card-box-shadow m-height" fxFlex="50" fxLayout="column">
       <app-title showTitleh3="true" text="IMÁGENES"></app-title>
       <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
         <div fxLayout="column" fxLayoutAlign="center" class="space">
@@ -178,7 +178,7 @@
       <input (change)="uploadFileImage($event)" id="image" type="file" style="display: none" formControlName="image" />
       <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
         <div fxLayout="column" fxLayoutAlign="center" class="space">
-          <strong class="title-gray">ADJUNTAR IMAGEN DASHBOARD (500X500PX, FORMATO .SVG, MAX 300KB)</strong>
+          <strong class="title-gray">ADJUNTAR ICONO DE STORIES (100X100PX, FORMATO .SVG, MAX 300KB)</strong>
           <span class="title-secondary" *ngIf="nameFile2 === ''">No hay archivo seleccionado</span>
           <span class="file-input" *ngIf="nameFile2 !== ''">{{ nameFile2 | truncate: '20' }}</span>
         </div>

@@ -221,7 +221,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public getTestimoniesUser() {
     this.subscription = this.user.getTestimoniesUser().subscribe((testimoniesUser) => {
-      console.log(testimoniesUser);
       this.testimonials = testimoniesUser;
     });
   }

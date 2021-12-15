@@ -99,7 +99,7 @@ export class FormBusinessComponent implements OnInit, OnChanges {
       urlQueryString: this.businessForm.controls.codeReference.value,
       excelCommission: this.businessForm.controls.generateExcel.value,
       image: this.image,
-      image2: this.image2,
+      icondashboardimage: this.image2,
     };
 
     this.content.saveBussiness(data).subscribe((resp: ResponseService) => {

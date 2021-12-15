@@ -40,11 +40,11 @@
           >
             <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign.gt-xs="start center" fxLayoutAlign.xs="center center">
               <span fxLayout="column">
-                <img *ngIf="element.icondashboard != ''" class="iconb" [src]="element.icondashboard" alt=" negocios " />
+                <img *ngIf="element.imageurl !== ''" class="iconb" [src]="element.imageurl" alt="negocios" />
               </span>
               <span
                 fxLayout="column"
-                [class]="element.icondashboard != '' ? 'galano-bold f-16 text-color-table' : 'text-color-total galano-bold'"
+                [class]="element.imageurl !== '' ? 'galano-bold f-16 text-color-table' : 'text-color-total galano-bold'"
                 fxHide.xs="true"
               >
                 {{ element.negocio }}
