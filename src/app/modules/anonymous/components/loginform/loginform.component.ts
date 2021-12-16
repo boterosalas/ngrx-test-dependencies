@@ -71,20 +71,20 @@ export class LoginformComponent implements OnInit, OnDestroy {
           this.utils.hideloginForm();
           this.routeBased();
           if (isPlatformBrowser(this.platformId)) {
-          dataLayer.push({
-            event: 'pushEventGA',
-            categoria: 'IniciarSesion',
-            accion: 'ClicLightboxIniciar',
-            etiqueta: 'IniciarSesionExitoso',
-          });
+            dataLayer.push({
+              event: 'pushEventGA',
+              categoria: 'IniciarSesion',
+              accion: 'ClicLightboxIniciar',
+              etiqueta: 'IniciarSesionExitoso',
+            });
 
-          dataLayer.push({
-            event: 'pushEventGA',
-            categoria: 'Inicio',
-            accion: 'ClicLateral',
-            etiqueta: this.loginForm.value.Username,
-          });
-        }
+            dataLayer.push({
+              event: 'pushEventGA',
+              categoria: 'Inicio',
+              accion: 'ClicLateral',
+              etiqueta: this.loginForm.value.Username,
+            });
+          }
         } else {
           Swal.fire({
             title: 'Login inválido',
@@ -134,16 +134,22 @@ export class LoginformComponent implements OnInit, OnDestroy {
     const token = localStorage.getItem('ACCESS_TOKEN');
     const tokenDecode = decode(token);
     if (tokenDecode.role === 'CLICKER') {
-      if(window.location.toString().includes('url')){
+      if (window.location.toString().includes('url')) {
         this.router.navigateByUrl(window.location.toString());
-      }else{
+      } else {
         this.router.navigate(['/inicio']);
       }
       this.authService.isLogged$.next(true);
-    } else {
+    }
+    if (tokenDecode.role === 'ADMIN' || tokenDecode.role === 'SUPERADMIN') {
       this.router.navigate(['/dashboard']);
       this.authService.isLogged$.next(true);
       this.authService.getRole$.next('ADMIN');
+    }
+    if (tokenDecode.role === 'PARTNER') {
+      this.router.navigate(['/partner']);
+      this.authService.isLogged$.next(true);
+      this.authService.getRole$.next('PARTNER');
     }
   }
 

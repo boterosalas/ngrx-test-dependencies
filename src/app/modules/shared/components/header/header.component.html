@@ -2,7 +2,7 @@
   <!-- Mobile - not login -->
   <div fxHide.gt-sm="true" *ngIf="!auth.isLoggedIn()" fxLayoutAlign="space-between stretch" fxLayoutGap="1rem" class="divContainer">
     <div fxLayout="row" fxLayoutGap="1rem">
-      <span fxLayout="column" fxLayoutAlign="center center" (click)="open()" class="burger-menu cursor-pointer">
+      <span *ngIf="role !== 'PARTNER'" fxLayout="column" fxLayoutAlign="center center" (click)="open()" class="burger-menu cursor-pointer">
         <img src="assets/img/menu2.svg" alt="menu" />
         <span>Menú</span>
       </span>
@@ -48,7 +48,7 @@
   <!-- Mobile and desktop - login -->
   <div *ngIf="auth.isLoggedIn()" fxLayoutAlign="space-between stretch" fxLayoutGap="1rem" class="divContainer divContainerLoggedIn">
     <div fxLayout="row" fxLayoutGap="1rem">
-      <span fxLayout="column" fxLayoutAlign="center center" (click)="open()" class="burger-menu cursor-pointer">
+      <span *ngIf="role !== 'PARTNER'" fxLayout="column" fxLayoutAlign="center center" (click)="open()" class="burger-menu cursor-pointer">
         <img src="assets/img/menu2.svg" alt="menu" />
         <span>Menú</span>
       </span>
@@ -57,8 +57,8 @@
     </div>
 
     <div fxLayoutAlign="center center" fxLayoutGap="0.5rem" class="divIcons">
-      <span fxLayoutAlign="center center" class="iconContainer" [matMenuTriggerFor]="notificationsmenu">
-        <span [matBadge]="total" matBadgeOverlap="false" matBadgeColor="warn" matBadgeSize="small"
+      <span *ngIf="role === 'CLICKER'" fxLayoutAlign="center center" class="iconContainer" [matMenuTriggerFor]="notificationsmenu">
+        <span  [matBadge]="total" matBadgeOverlap="false" matBadgeColor="warn" matBadgeSize="small"
           ><i class="tio-notifications icon cursor-pointer"></i
         ></span>
       </span>
@@ -97,7 +97,7 @@
           <button class="open-notifications" [routerLink]="['/notificaciones']" mat-menu-item>Abrir Notificaciones</button>
         </div>
       </mat-menu>
-      <span fxLayoutAlign="center center" class="iconContainer">
+      <span *ngIf="role === 'CLICKER'" fxLayoutAlign="center center" class="iconContainer">
         <button [routerLink]="['/click-academy']"><i class="tio-education icon cursor-pointer"></i></button>
       </span>
       <span fxLayoutAlign="center center" class="iconContainer" [matMenuTriggerFor]="menu">
@@ -105,7 +105,7 @@
       </span>
       <mat-menu #menu="matMenu" xPosition="before">
         <div class="menuProfile">
-          <button [routerLink]="['/mi-perfil']" mat-menu-item>Mi perfil</button>
+          <button *ngIf="role === 'CLICKER'" [routerLink]="['/mi-perfil']" mat-menu-item>Mi perfil</button>
           <button (click)="logout()" mat-menu-item>Cerrar sesión</button>
         </div>
       </mat-menu>

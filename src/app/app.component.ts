@@ -23,6 +23,7 @@ import { ModalGenericComponent } from './modules/shared/components/modal-generic
 import { ResponseService } from './interfaces/response';
 import { MasterDataService } from './services/master-data.service';
 import { UpdateService } from './services/update.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -109,6 +110,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.subscription = router.events.subscribe((url: any) => {
       if (url instanceof NavigationStart) {
+
+        if(this.role === 'PARTNER' && url.url !== '/partner') {
+          this.router.navigate(['/partner']);
+        }
+
         if (isPlatformBrowser(this.platformId)) {
           dataLayer.push({
             event: 'pageview',
