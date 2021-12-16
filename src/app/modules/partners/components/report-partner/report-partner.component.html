@@ -1,0 +1,18 @@
+<mat-card class="card mat-card-box-shadow">
+  <app-title showTitleh3="true" text="Reporte de recompensas"></app-title>
+  <app-date-range-button
+    classLayout="ng-hor"
+    direction="column"
+    (dates)="getDate($event)"
+    (called)="exportOrderNotFinish()"
+  ></app-date-range-button>
+
+  <app-card-report
+    class="card-start"
+    [items]="items"
+    fxLayout.gt-xs="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="center space-between "
+  ></app-card-report>
+  
+</mat-card>
