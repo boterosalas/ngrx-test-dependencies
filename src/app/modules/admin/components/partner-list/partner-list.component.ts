@@ -34,7 +34,6 @@ export class PartnerListComponent implements OnInit, OnDestroy {
 
   public getBusiness() {
     this.subscription = this.content.getBusiness().subscribe((bussiness) => {
-      console.log(bussiness);
       this.bussiness = bussiness;
     });
   }
@@ -59,10 +58,10 @@ export class PartnerListComponent implements OnInit, OnDestroy {
   }
 
   editItem(dataSource) {
-    // const dialog = this.dialog.open(FormTestimonyComponent, {
-    //   width: '450px',
-    //   data: dataSource,
-    // });
+    const dialog = this.dialog.open(FormPartnerComponent, {
+      width: '450px',
+      data: dataSource,
+    });
 
     // dialog.beforeClosed().subscribe((board) => {
       

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
@@ -10,7 +10,7 @@ import { ConfirmPasswordValidator } from 'src/app/validators/confirm-password.va
   templateUrl: './form-partner.component.html',
   styleUrls: ['./form-partner.component.scss'],
 })
-export class FormPartnerComponent implements OnInit {
+export class FormPartnerComponent implements OnInit, OnChanges {
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<any>,
@@ -23,11 +23,14 @@ export class FormPartnerComponent implements OnInit {
   passwordPattern = '(?=.*[a-zA-Z])(?=.*[0-9])';
   emailPattern = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
 
+  ngOnChanges() {
+  }
+
   ngOnInit() {
     this.partnerForm = this.fb.group(
       {
-        name: ['', Validators.required],
-        email: ['', [Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
+        name: [this.data ? this.data.user : '', Validators.required],
+        email: [this.data ? this.data.mail : '', [Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
         password: [
           '',
           [Validators.required, Validators.minLength(6), Validators.maxLength(20), Validators.pattern(new RegExp(this.passwordPattern))],

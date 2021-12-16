@@ -104,8 +104,9 @@
     >
   </mat-form-field>
   <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="20px">
-    <app-button title="Cancelar" [haveIcon]="false" (action)="onNoClick()" color="white" classButton="no-shadow"></app-button>
+    <app-button id="cancelp" title="Cancelar" [haveIcon]="false" (action)="onNoClick()" color="white" classButton="no-shadow"></app-button>
     <app-button
+      id="savep"
       title="Guardar"
       [haveIcon]="false"
       (action)="savePartner()"
