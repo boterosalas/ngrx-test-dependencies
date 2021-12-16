@@ -93,6 +93,9 @@ import { HistoryPaymentComponent } from './components/user-detail/history-paymen
 import { TableTestimonyComponent } from './components/table-testimony/table-testimony.component';
 import { FormTestimonyComponent } from './components/form-testimony/form-testimony.component';
 import { FormBusinessComponent } from './components/form-business/form-business.component';
+import { PartnersComponent } from './pages/partners/partners.component';
+import { PartnerListComponent } from './components/partner-list/partner-list.component';
+import { FormPartnerComponent } from './components/form-partner/form-partner.component';
 
 const routes: Routes = [
   {
@@ -339,6 +342,15 @@ const routes: Routes = [
     },
   },
   {
+    path: 'partners',
+    component: PartnersComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
+    },
+  },
+  {
     path: 'novedad/:id/:userId',
     component: DatailNewsComponent,
     canActivate: [RoleGuard],
@@ -425,7 +437,10 @@ const routes: Routes = [
     HistoryPaymentComponent,
     TableTestimonyComponent,
     FormTestimonyComponent,
-    FormBusinessComponent
+    FormBusinessComponent,
+    PartnersComponent,
+    PartnerListComponent,
+    FormPartnerComponent
   ],
   imports: [
     AngularEditorModule,
@@ -484,7 +499,8 @@ const routes: Routes = [
     DialogDeleteNotificationComponent,
     DialogStoryComponent,
     DialogOnboardingComponent,
-    FormTestimonyComponent
+    FormTestimonyComponent,
+    FormPartnerComponent
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: UsersComponent },
