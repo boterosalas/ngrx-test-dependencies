@@ -32,6 +32,19 @@
     }
   }
 
+  .Partners {
+    &::before {
+      content: '\ecec';
+      font-family: 'The-Icon-of', sans-serif;
+      font-size: 19px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      left: 3%;
+      background-size: 100%;
+    }
+  }
+
   .logout {
     &::before {
       font-family: 'The-Icon-of', sans-serif;
