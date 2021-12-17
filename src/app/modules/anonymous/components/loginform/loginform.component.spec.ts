@@ -182,21 +182,21 @@ beforeEach(waitForAsync(() => {
     });
   });
 
-  describe('Admin login', () => {
-    beforeEach(() => {
+  // describe('Admin login', () => {
+  //   beforeEach(() => {
 
-      mockAuthService.login.and.returnValue(of(dataUserAdmin));
+  //     mockAuthService.login.and.returnValue(of(dataUserAdmin));
 
-    });
+  //   });
 
-    it('login valid', () => {
-      component.isSubmitted = true;
-      component.loginForm.controls.Username.setValue('test@test.com');
-      component.loginForm.controls.Password.setValue('123456789');
-      component.login();
-      expect(component.loginForm.invalid).toBeFalsy();
-      expect(mockAuthService.login).toHaveBeenCalled();
-    });
+  //   it('login valid', () => {
+  //     component.isSubmitted = true;
+  //     component.loginForm.controls.Username.setValue('test@test.com');
+  //     component.loginForm.controls.Password.setValue('123456789');
+  //     component.login();
+  //     expect(component.loginForm.invalid).toBeFalsy();
+  //     expect(mockAuthService.login).toHaveBeenCalled();
+  //   });
 
-  });
+  // });
 });

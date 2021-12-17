@@ -1,0 +1,36 @@
+@import 'variables';
+
+.cb {
+  img {
+    width: 100px;
+    max-width: 100%;
+    object-fit: cover;
+  }
+}
+
+table {
+  width: 100%;
+  th {
+    font-family: $font-galano-bold;
+    color: $primary-color;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  td {
+    padding-right: 15px;
+    text-align: center;
+  }
+}
+
+.gray {
+  color: $gray4 !important;
+}
+
+.selected {
+  font-family: $font-galano-bold;
+  color: $primary-color !important;
+}
+
+.style-icon{
+    font-size: 22px;
+}
