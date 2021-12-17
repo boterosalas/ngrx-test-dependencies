@@ -14,9 +14,6 @@ import { FormPartnerComponent } from './form-partner.component';
 
 export class MatDialogMock {
   close() {
-    return {
-      close: () => of(true),
-    };
   }
   closeAll() {
     return {
