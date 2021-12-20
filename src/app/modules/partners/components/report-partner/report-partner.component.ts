@@ -26,8 +26,8 @@ export class ReportPartnerComponent implements OnInit {
     this.startDate = moment(e.startDate);
     this.endDate = moment(e.endDate);
     const params = {
-      startDate: this.startDate.format('YYYY/MM/DD'),
-      endDate: this.endDate.format('YYYY/MM/DD'),
+      startDate: this.startDate.format('YYYY-MM-DD'),
+      endDate: this.endDate.format('YYYY-MM-DD'),
       export: false,
     };
     this.link.getBussinessPartnerKPI(params).subscribe((kpiFilter: ResponseService) => {
@@ -37,8 +37,8 @@ export class ReportPartnerComponent implements OnInit {
 
   public exportOrderNotFinish() {
     const params = {
-      startDate: this.startDate.format('YYYY/MM/DD'),
-      endDate: this.endDate.format('YYYY/MM/DD'),
+      startDate: this.startDate.format('YYYY-MM-DD'),
+      endDate: this.endDate.format('YYYY-MM-DD'),
       export: true,
     };
 
@@ -50,8 +50,8 @@ export class ReportPartnerComponent implements OnInit {
 
   public getPartnersKPI() {
     const params = {
-      startDate: this.startDate.format('YYYY/MM/DD'),
-      endDate: this.endDate.format('YYYY/MM/DD'),
+      startDate: this.startDate.format('YYYY-MM-DD'),
+      endDate: this.endDate.format('YYYY-MM-DD'),
       export: false,
     };
 
