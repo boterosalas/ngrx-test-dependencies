@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import moment from 'moment';
 import { DataRangeInterface } from 'src/app/interfaces/dateRangeInterface';
+import { LinksService } from 'src/app/services/links.service';
+import decode from 'jwt-decode';
+import { UtilsService } from 'src/app/services/utils.service';
+import { ResponseService } from 'src/app/interfaces/response';
 
 @Component({
   selector: 'app-report-partner',
@@ -7,136 +12,51 @@ import { DataRangeInterface } from 'src/app/interfaces/dateRangeInterface';
   styleUrls: ['./report-partner.component.scss'],
 })
 export class ReportPartnerComponent implements OnInit {
-  startDate: string;
-  endDate: string;
-  items = [
-    {
-      id: 0,
-      icon: 'https://webclickamdev.blob.core.windows.net/img-ofertas/dashboard/icon-registros.svg',
-      business: null,
-      subtitle: 'Registros',
-      title: 'Usuarios Registrados',
-      number: 0,
-      linksClicked: 0,
-      linksGenerated: 0,
-      total: 0,
-      commission: 0,
-    },
-    {
-      id: 0,
-      icon: 'https://webclickamdev.blob.core.windows.net/img-ofertas/dashboard/icon-activos.svg',
-      business: null,
-      subtitle: 'Nuevos',
-      title: 'Usuarios Activos Nuevos',
-      number: 0,
-      linksClicked: 0,
-      linksGenerated: 0,
-      total: 0,
-      commission: 0,
-    },
-    {
-      id: 0,
-      icon: 'https://webclickamdev.blob.core.windows.net/img-ofertas/dashboard/icon-usuario-nuevo.svg',
-      business: null,
-      subtitle: 'Activos',
-      title: 'Usuarios Activos',
-      number: 0,
-      linksClicked: 0,
-      linksGenerated: 0,
-      total: 0,
-      commission: 0,
-    },
-    {
-      id: 0,
-      icon: 'https://webclickamdev.blob.core.windows.net/img-ofertas/dashboard/icon-ventas.svg',
-      business: null,
-      subtitle: 'Ventas',
-      title: 'Ventas',
-      number: 0,
-      linksClicked: 0,
-      linksGenerated: 0,
-      total: 0,
-      commission: 0,
-    },
-    {
-      id: 0,
-      icon: 'https://webclickamdev.blob.core.windows.net/img-ofertas/dashboard/icon-comision.svg',
-      business: null,
-      subtitle: 'Comisiones',
-      title: 'Comisiones',
-      number: 0,
-      linksClicked: 0,
-      linksGenerated: 0,
-      total: 0,
-      commission: 0,
-    },
-    {
-      id: 0,
-      icon: 'https://webclickamdev.blob.core.windows.net/img-ofertas/dashboard/icon-rejected-commissions.svg',
-      business: null,
-      subtitle: 'Comisiones Rechazadas',
-      title: 'Comisiones Rechazadas',
-      number: 0,
-      linksClicked: 0,
-      linksGenerated: 0,
-      total: 0,
-      commission: 0,
-    },
-    {
-      id: 0,
-      icon: 'https://webclickamdev.blob.core.windows.net/img-ofertas/dashboard/icon-links-generados.svg',
-      business: null,
-      subtitle: 'Links Generados',
-      title: 'Links Generados',
-      number: 0,
-      linksClicked: 0,
-      linksGenerated: 0,
-      total: 0,
-      commission: 0,
-    },
-    {
-      id: 0,
-      icon: 'https://webclickamdev.blob.core.windows.net/img-ofertas/dashboard/icon-links-clickeados.svg',
-      business: null,
-      subtitle: 'Links Clickeados',
-      title: 'Links Clickeados',
-      number: 0,
-      linksClicked: 0,
-      linksGenerated: 0,
-      total: 0,
-      commission: 0,
-    },
-    {
-      id: 0,
-      icon: 'https://webclickamdev.blob.core.windows.net/img-ofertas/dashboard/icon-eliminar-card.svg',
-      business: null,
-      subtitle: 'Eliminadas',
-      title: 'Cuentas Eliminadas',
-      number: 0,
-      linksClicked: 0,
-      linksGenerated: 0,
-      total: 0,
-      commission: 0,
-    },
-  ];
+  startDate = moment(new Date());
+  endDate = moment(new Date());
+  items = [];
 
-  constructor() {}
+  constructor(private link: LinksService, private utils: UtilsService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getPartnersKPI();
+  }
 
   public getDate(e: DataRangeInterface) {
-    this.startDate = e.startDate;
-    this.endDate = e.endDate;
+    this.startDate = moment(e.startDate);
+    this.endDate = moment(e.endDate);
+    const params = {
+      startDate: this.startDate.format('YYYY/MM/DD'),
+      endDate: this.endDate.format('YYYY/MM/DD'),
+      export: false,
+    };
+    this.link.getBussinessPartnerKPI(params).subscribe((kpiFilter: ResponseService) => {
+      this.items =  kpiFilter.objectResponse;
+    });
   }
 
   public exportOrderNotFinish() {
     const params = {
-      startDate: this.startDate,
-      endDate: this.endDate,
+      startDate: this.startDate.format('YYYY/MM/DD'),
+      endDate: this.endDate.format('YYYY/MM/DD'),
+      export: true,
     };
 
-    // this.user.getreportordersnotinvoiced(params).subscribe((orders: ResponseService) => {
-    //   this.openSnackBar(orders.userMessage, 'Cerrar');
-    // })
+    this.link.getBussinessPartnerKPI(params).subscribe((exportKpi:ResponseService) => {
+      console.log(exportKpi);
+      this.utils.openSnackBar(exportKpi.userMessage, 'cerrar')
+    });
+  }
+
+  public getPartnersKPI() {
+    const params = {
+      startDate: this.startDate.format('YYYY/MM/DD'),
+      endDate: this.endDate.format('YYYY/MM/DD'),
+      export: false,
+    };
+
+    this.link.getBussinessPartnerKPI(params).subscribe((kpi:ResponseService) => {
+      this.items = kpi.objectResponse;
+    })
   }
 }

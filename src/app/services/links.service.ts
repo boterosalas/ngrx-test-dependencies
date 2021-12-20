@@ -277,6 +277,7 @@ export class LinksService {
       })
     );
   }
+
   public getBussinessKPI(date: any) {
     const token = localStorage.getItem('ACCESS_TOKEN');
     const authorization = token;
@@ -303,6 +304,22 @@ export class LinksService {
       })
     );
   }
+
+  public getBussinessPartnerKPI(params: any) {
+    return this.http.get(`${this.urlReports}${this.apikpibussiness}?start=${params.startDate}&end=${params.endDate}&export=${params.export}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: ResponseService) => {
+        return resp;
+      })
+    );
+  }
+
   public getTotalKPI(date: any) {
     const token = localStorage.getItem('ACCESS_TOKEN');
     const authorization = token;

@@ -1,13 +1,13 @@
-<div *ngFor="let item of items; let i = index" class="card-{{ i }} white" ngClass.gt-xs="card-dash mr-2">
+<div *ngFor="let item of items; let i = index" class="card-partner-{{ i }} white" ngClass.gt-xs="card-dash mr-2">
     <h3 class="f-18">{{ item.title }}</h3>
   
     <mat-card style="border-radius: 10px !important">
       <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
         <div fxLayout="column">
-          <span class="galano-bold f-22" *ngIf="i === 3 || i === 4 || i === 5">
+          <span class="galano-bold f-22" *ngIf="i === 1 || i === 2">
             {{ item.number | currency: '':'symbol':'1.0-0' }}
           </span>
-          <span class="galano-bold f-22" *ngIf="i !== 3 && i !== 4 && i !== 5">
+          <span class="galano-bold f-22" *ngIf="i !== 1 && i !== 2">
             {{ item.number }}
           </span>
   
