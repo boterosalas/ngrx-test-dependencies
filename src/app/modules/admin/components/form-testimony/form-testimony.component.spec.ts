@@ -12,29 +12,29 @@ import { UserService } from 'src/app/services/user.service';
 
 import { FormTestimonyComponent } from './form-testimony.component';
 
-export class MatDialogMock {
-  close() {
-    return {
-      close: () => of(true),
-    };
-  }
-  closeAll() {
-    return {
-      closeAll: () => of(true),
-    };
-  }
-  open() {
-    return {
-      afterClosed: () => of(true),
-    };
-  }
-}
+// export class MatDialogMock {
+//   close: () => { }
+//   closeAll() {
+//     return {
+//       closeAll: () => of(true),
+//     };
+//   }
+//   open() {
+//     return {
+//       afterClosed: () => of(true),
+//     };
+//   }
+// }
 
 describe('FormTestimonyComponent', () => {
   let component: FormTestimonyComponent;
   let fixture: ComponentFixture<FormTestimonyComponent>;
 
   const mockUserService = jasmine.createSpyObj('UserService', ['saveTestimonies']);
+
+  const dialogMock = {
+    close: () => {},
+  };
 
   const data = {
     id:'1',
@@ -77,7 +77,7 @@ describe('FormTestimonyComponent', () => {
         }),
       ],
       providers: [
-        { provide: MatDialogRef, useValue: MatDialogMock },
+        { provide: MatDialogRef, useValue: dialogMock },
         { provide: MAT_DIALOG_DATA, useValue: data },
         { provide: UserService, useValue: mockUserService },
       ],

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import moment from 'moment';
 import { DataRangeInterface } from 'src/app/interfaces/dateRangeInterface';
 import { LinksService } from 'src/app/services/links.service';
-import decode from 'jwt-decode';
 import { UtilsService } from 'src/app/services/utils.service';
 import { ResponseService } from 'src/app/interfaces/response';
 
@@ -43,7 +42,6 @@ export class ReportPartnerComponent implements OnInit {
     };
 
     this.link.getBussinessPartnerKPI(params).subscribe((exportKpi:ResponseService) => {
-      console.log(exportKpi);
       this.utils.openSnackBar(exportKpi.userMessage, 'cerrar')
     });
   }
