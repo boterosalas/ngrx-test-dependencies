@@ -2,6 +2,8 @@ import { Component, Inject, OnChanges, OnInit, SimpleChanges } from '@angular/co
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { ResponseService } from 'src/app/interfaces/response';
+import { UserService } from 'src/app/services/user.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { ConfirmPasswordValidator } from 'src/app/validators/confirm-password.validator';
 
@@ -10,12 +12,13 @@ import { ConfirmPasswordValidator } from 'src/app/validators/confirm-password.va
   templateUrl: './form-partner.component.html',
   styleUrls: ['./form-partner.component.scss'],
 })
-export class FormPartnerComponent implements OnInit, OnChanges {
+export class FormPartnerComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private utils: UtilsService
+    private utils: UtilsService,
+    private user: UserService
   ) {}
 
   private subscription: Subscription = new Subscription();
@@ -23,14 +26,13 @@ export class FormPartnerComponent implements OnInit, OnChanges {
   passwordPattern = '(?=.*[a-zA-Z])(?=.*[0-9])';
   emailPattern = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
 
-  ngOnChanges() {
-  }
-
   ngOnInit() {
+    console.log(this.data);
     this.partnerForm = this.fb.group(
       {
-        name: [this.data ? this.data.user : '', Validators.required],
-        email: [this.data ? this.data.mail : '', [Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
+        firstNames: ['', Validators.required],
+        lastNames: ['', Validators.required],
+        email: ['', [Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
         password: [
           '',
           [Validators.required, Validators.minLength(6), Validators.maxLength(20), Validators.pattern(new RegExp(this.passwordPattern))],
@@ -43,11 +45,17 @@ export class FormPartnerComponent implements OnInit, OnChanges {
 
   public savePartner() {
     const dataUser = {
-      name: this.partnerForm.controls.name.value,
+      firstNames: this.partnerForm.controls.firstNames.value,
+      lastNames: this.partnerForm.controls.lastNames.value,
       email: this.partnerForm.controls.email.value,
       password: btoa(this.partnerForm.controls.password.value),
+      rol: "PARTNER",
+      idBusiness: this.data
     };
-    console.log(dataUser);
+    this.user.addUserAdmin(dataUser).subscribe((createParner:ResponseService) => {
+      this.utils.openSnackBar(createParner.userMessage, 'cerrar');
+      this.onNoClick();
+    })
   }
 
   onNoClick(): void {

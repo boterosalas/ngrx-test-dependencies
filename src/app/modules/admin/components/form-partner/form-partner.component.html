@@ -2,9 +2,16 @@
 
 <form fxLayout="column" [formGroup]="partnerForm" class="w-100">
     <mat-form-field>
-        <input matInput id="description" type="text" placeholder="Nombre de usuario" formControlName="name" maxlength="100" />
-        <mat-error id="requiredDescription" *ngIf="partnerForm.controls.name.invalid && partnerForm.controls.name.errors.required">{{
-          'GENERIC.REQUIRED' | translate: { formValue: 'Nombre de usuario' }
+        <input matInput id="firstNames" type="text" placeholder="Nombres" formControlName="firstNames" maxlength="100" required />
+        <mat-error id="requiredDescription" *ngIf="partnerForm.controls.firstNames.invalid && partnerForm.controls.firstNames.errors.required">{{
+          'GENERIC.REQUIRED' | translate: { formValue: 'Nombres' }
+        }}</mat-error>
+      </mat-form-field>
+
+    <mat-form-field>
+        <input matInput id="lastNames" type="text" placeholder="Apellidos" formControlName="lastNames" maxlength="100" required/>
+        <mat-error id="requiredDescription" *ngIf="partnerForm.controls.lastNames.invalid && partnerForm.controls.lastNames.errors.required">{{
+          'GENERIC.REQUIRED' | translate: { formValue: 'Apellidos' }
         }}</mat-error>
       </mat-form-field>
 
