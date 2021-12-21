@@ -27,7 +27,6 @@ export class FormPartnerComponent implements OnInit {
   emailPattern = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
 
   ngOnInit() {
-    console.log(this.data);
     this.partnerForm = this.fb.group(
       {
         firstNames: ['', Validators.required],
