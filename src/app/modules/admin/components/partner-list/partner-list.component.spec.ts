@@ -25,7 +25,7 @@ export class MatDialogMock {
   }
 }
 
-fdescribe('PartnerListComponent', () => {
+describe('PartnerListComponent', () => {
   let component: PartnerListComponent;
   let fixture: ComponentFixture<PartnerListComponent>;
 
