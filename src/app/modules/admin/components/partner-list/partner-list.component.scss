@@ -4,7 +4,8 @@
   img {
     width: 100px;
     max-width: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    height: 40px;
   }
 }
 
