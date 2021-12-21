@@ -693,6 +693,7 @@ export class UserService {
       )
     );
   }
+
   public postUpdateResponseAccountBank(data: any) {
     return this.http.post(`${this.url}${this.apiUpdateResponseAccountBank}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
@@ -704,6 +705,7 @@ export class UserService {
       )
     );
   }
+
   public getPermision() {
     return this.http.get(`${this.url + this.apiGetPermision}`, this.httpOptions).pipe(
       retryWhen((errors) =>
@@ -718,6 +720,22 @@ export class UserService {
       })
     );
   }
+
+  public getPermisionPartner(idBusiness:number) {
+    return this.http.get(`${this.url + this.apiGetPermision}?idbusiness=${idBusiness}&rol=PARTNER`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => { })
+        )
+      ),
+      map((resp: ResponseService) => {
+        return resp;
+      })
+    );
+  }
+
   public savePermision(data: any) {
     return this.http.post(`${this.url + this.apiSavePermision}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>

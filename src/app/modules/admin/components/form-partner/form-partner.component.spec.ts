@@ -9,12 +9,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { UserService } from 'src/app/services/user.service';
 
 import { FormPartnerComponent } from './form-partner.component';
 
 export class MatDialogMock {
-  close() {
-  }
+  close() {}
   closeAll() {
     return {
       closeAll: () => of(true),
@@ -31,9 +31,22 @@ describe('FormPartnerComponent', () => {
   let component: FormPartnerComponent;
   let fixture: ComponentFixture<FormPartnerComponent>;
 
+  const mockUserService = jasmine.createSpyObj('UserService', ['addUserAdmin']);
+
+  const partner = {
+    userId: 220,
+    adminUserId: 711,
+    email: 'eisner271190a@gmail.com',
+    firstNames: 'Eisner',
+    lastNames: 'Puerta',
+    password: 'RXBjMTUyNygpOw==',
+    rol: 'PARTNER',
+    idBusiness: 53,
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FormPartnerComponent ],
+      declarations: [FormPartnerComponent],
       imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -57,9 +70,10 @@ describe('FormPartnerComponent', () => {
       providers: [
         { provide: MatDialogRef, useValue: MatDialogMock },
         { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: UserService, useValue: mockUserService },
       ],
-    })
-    .compileComponents();
+    }).compileComponents();
+    mockUserService.addUserAdmin.and.returnValue(of(partner));
   });
 
   beforeEach(() => {
@@ -70,5 +84,10 @@ describe('FormPartnerComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('save partner', () => {
+    component.savePartner();
+    expect(mockUserService.addUserAdmin).toHaveBeenCalled();
   });
 });
