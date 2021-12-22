@@ -8,16 +8,13 @@ import { trigger, state, style, transition, animate, group } from '@angular/anim
 import { AuthService } from 'src/app/services/auth.service';
 import decode from 'jwt-decode';
 import { ContentService } from 'src/app/services/content.service';
-import { distinctUntilChanged } from 'rxjs/operators';
 
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { LinksService } from 'src/app/services/links.service';
 import { MessagingService } from 'src/app/shared/messaging.service';
 import { Meta } from '@angular/platform-browser';
 import { MasterDataService } from 'src/app/services/master-data.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NewBusinessFormComponent } from '../../components/new-business-form/new-business-form.component';
+import { FormBuilder } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({
@@ -53,27 +50,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   email: string;
   bussiness: Array<any> = [];
-  bussinessClicker: Array<any> = [];
-  sliderMobile: any;
-  sliderMobileOffers: any;
-  sliderWeb: any;
-  offersMobile: any;
   offersWeb: any;
   isEmployee: any;
   @ViewChild('templatePromo', { static: false })
   templatePromo: TemplateRef<any>;
-  categories = [];
   managedPayments: boolean;
   role: string;
   userId: any;
   message: any;
-  modalHref: string;
-  modalAltMobile: string;
-  modalAltWeb: string;
-  modalHrefMobile: string;
   modalTarget = '_self';
-  modalSrcWeb: string;
-  modalSrcMobile: string;
   newTerms: boolean;
   acceptTerms: boolean = null;
   @ViewChild('templateTerms', { static: false })
@@ -94,8 +79,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   textTransparencia: any;
   textPrograma: any;
   formData = false;
-  sendData = false;
-  dateForm: FormGroup;
+
+  modalHref: string;
+  modalAltMobile: string;
+  modalAltWeb: string;
+  modalHrefMobile: string;
+  modalSrcWeb: string;
+  modalSrcMobile: string;
+
 
   @ViewChild('templateTestimonials', { static: true })
   templateTestimonials: TemplateRef<any>;
@@ -118,6 +109,28 @@ export class HomeComponent implements OnInit, OnDestroy {
         breakpoint: 600,
         settings: {
           slidesToShow: 3,
+          variableWidth: true,
+        },
+      },
+    ],
+  };
+
+  slideConfigProductsLogged = {
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    dots: false,
+    dotClass: 'slick-dots orange',
+    autoplay: true,
+    autoplaySpeed: 5000,
+    infinite: false,
+    arrows: true,
+    variableWidth: false,
+    lazyLoad: 'ondemand',
+    responsive: [
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
           variableWidth: true,
         },
       },
@@ -163,13 +176,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private personalInfo: MasterDataService,
     @Inject(PLATFORM_ID) private platformId: object
   ) {
-    /**
-     *  Verifica que en la ruta de inicio exista el parametro de email y activa el usuario
-     * @param email email
-     */
-    this.dateForm = this.fb.group({
-      description: [null, Validators.required],
-    });
+ 
     this.subscription = this.route.queryParams.subscribe((params) => {
       if (params.email) {
         this.email = params.email;
@@ -208,8 +215,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     ]);
 
     this.routeBased();
-    this.getBussiness();
-    this.getBussinessClicker();
     this.getOffers();
     this.getUserDataUser();
     this.getAmount();
@@ -237,6 +242,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.textPrograma = resp.objectResponse[3].sectiontitle;
     });
   }
+
   public getUserDataUser() {
     this.subscription = this.auth.getRole$.subscribe((role) => {
       this.role = role;
@@ -244,7 +250,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.subscription = this.user.getuserdata().subscribe((user) => {
           this.isEmployee = user.isEmployeeGrupoExito;
           this.managedPayments = user.managedPayments;
-          // this.getInfomonth();
           if (role === 'CLICKER') {
             this.newTerms = user.acceptTermsReferrals;
             if (this.newTerms === true) {
@@ -272,11 +277,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     });
   }
-
-  /**
-   * Metodo para activar el usuario
-   * @param email email
-   */
 
   public activateUser() {
     this.subscription = this.user.activateProfile(this.email).subscribe(
@@ -324,9 +324,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
+
 
   @HostListener('over')
   openRegister() {
@@ -352,32 +350,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  public getBussiness() {
-    this.subscription = this.content
-      .getBusiness()
-      .pipe(distinctUntilChanged())
-      .subscribe((bussiness) => {
-        this.bussiness = bussiness;
-      });
-  }
-
-  public getBussinessClicker() {
-    this.subscription = this.auth.isLogged$.subscribe((val) => {
-      const token = localStorage.getItem('ACCESS_TOKEN');
-      if (!!val || token !== null) {
-        this.subscription = this.content.getBusinessClicker().subscribe((bussiness) => {
-          this.bussinessClicker = bussiness;
-        });
-      }
-    });
-  }
-
   public getOffers() {
     this.subscription = this.content.getOffersbyType({ id: 'OFERTA', admin: false }).subscribe((resp) => {
       this.offersWeb = resp;
-    });
-    this.subscription = this.content.getOffersbyType({ id: 'CARROUSEL', admin: false }).subscribe((resp) => {
-      this.sliderWeb = resp;
     });
   }
 
@@ -404,10 +379,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         description: params.description,
       },
     ]);
-  }
-
-  public openRegisterBusiness() {
-    this.dialog.open(NewBusinessFormComponent);
   }
 
   private showModalPayment() {
@@ -439,32 +410,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  /**
-   * Metodo para obtener el resumen del mes generados
-   */
-
   public getInfomonth() {
     this.subscription = this.link.getReports().subscribe((resume: any) => {
-      console.log(resume);
       this.paymentPending = resume.money.paymentPending;
     });
   }
 
-  public saveProposal() {
-    const datos = {
-      message: this.dateForm.controls.description.value,
-    };
-    this.user.saveFeedback(datos).subscribe(() => {
-      this.sendData = true;
-      this.dateForm.reset();
-    });
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
-  public cerrarForm() {
-    this.formData = false;
-    this.sendData = false;
-    this.dateForm.reset();
-  }
-  public openForm() {
-    this.formData = true;
-  }
+
 }

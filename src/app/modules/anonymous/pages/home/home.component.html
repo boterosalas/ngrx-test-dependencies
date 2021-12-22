@@ -1,307 +1,182 @@
-<!-- stories clickam looged -->
-<div *ngIf="auth.isLoggedIn()" class="stories-section">
-  <app-slider-stories></app-slider-stories>
-</div>
+<!-- logged section -->
 
-<!-- welcome  -->
-
-<div *ngIf="!auth.isLoggedIn()" class="container-fluid bg-welcome pt-3">
-  <app-welcome></app-welcome>
-</div>
-
-<!-- slider business -->
-
-<div *ngIf="!auth.isLoggedIn()" class="container-fluid">
-  <app-slider-share [slider]="bussiness" [slideConfig]="slideConfig"></app-slider-share>
-</div>
-
-<!-- images data -->
-
-<div *ngIf="!auth.isLoggedIn()" class="container-fluid bg-welcome pt-3" >
-  <div class="container">
-    <app-image fxHide.xs="true" imageClass="datacenter" src="/assets/img/home/data.png" alt="data"></app-image>
-    <app-image fxHide.gt-xs="true" imageClass="datacenter" src="/assets/img/home/data.svg" alt="data"></app-image>
+<section *ngIf="auth.isLoggedIn()">
+  <!-- stories clickam looged -->
+  <div class="stories-section">
+    <app-slider-stories></app-slider-stories>
   </div>
-</div>
 
-<div *ngIf="!auth.isLoggedIn()" class="container-fluid pt-3">
-  <div class="container">
+  <section fxLayout="row" class="container-fluid mt-4 mb-4" fxLayoutGap="20px">
+    <div class="left-section" fxFlex="70">
+      <mat-card class="card mat-card-box-shadow">
+        <div class="container-fluid">
+          <div class="container">
+            <span class="d-block"></span>
+            <app-title
+              showTitleh3="true"
+              text="{{ 'HOME.OFFERS' | translate }}"
+            ></app-title>
+            <p ngClass.gt-xs="mb-4" ngClass.xs="f-16">{{ 'HOME.OFFERS_TEXT' | translate }}</p>
+          </div>
+        </div>
+
+        <app-slider
+          Class="gtmHomeClicOfertas"
+          [showArrows]="false"
+          [isSlider]="true"
+          (action)="sliderOffers()"
+          [sliderWeb]="offersWeb"
+          [slideConfig]="slideConfigProductsLogged"
+          class="mb-3"
+        ></app-slider>
+      </mat-card>
+    </div>
+
+    <div class="right-section" fxFlex="30">
+      <mat-card class="card mat-card-box-shadow">
+        <app-sales-info></app-sales-info>
+      </mat-card>
+    </div>
     
-    <app-image-text 
-    directionWeb="row" 
-    directionMobile="column" 
-    imageClass="imgsection" 
-    src="/assets/img/home/refiere.png"
-    title="¿Cómo funciona Clickam?"
-    alt="¿Cómo funciona Clickam?"
-    classTitleWeb="f-28"
-    classTitleMobile="f-20 text-center"
-    generalMobile="mt-5 text-center"
-    text="<ol class='numeric'><li>Crea una cuenta en Clickam</li><li>Explora la plataforma y sus negocios</li><li>Elige los productos y servicios favoritos</li><li>Cómpralos o recomiéndalos</li><li>Genera ganancias y cumple tus sueños.</li></ol>"
-    classTextWeb="f-20 m-0"
-    classTextMobile="f-16 text-left mt-0 mb-3"
-    titleButton="¡Crea tu cuenta ahora!"
-    (action)="openRegister()"
-    ></app-image-text>
 
-    <app-image-text 
-    directionWeb="row-reverse" 
-    directionMobile="column" 
-    imageClass="imgsection" 
-    src="/assets/img/home/gana.png"
-    title="¿Por qué usar Clickam?"
-    alt="¿Por qué usar Clickam?"
-    generalWeb="mt-5 pt-5"
-    generalMobile="mt-5 text-center"
-    classTitleWeb="f-28"
-    classTitleMobile="f-20 text-center"
-    text="<p>Clickam es una plataforma 100% gratis y digital, en la que generas
+  </section>
+</section>
+
+<!-- anonymous section -->
+
+<section *ngIf="!auth.isLoggedIn()">
+  <!-- welcome  -->
+
+  <div class="container-fluid bg-welcome pt-3">
+    <app-welcome></app-welcome>
+  </div>
+
+  <!-- slider business -->
+
+  <div class="container-fluid">
+    <app-slider-share [slider]="bussiness" [slideConfig]="slideConfig"></app-slider-share>
+  </div>
+
+  <!-- images data -->
+
+  <div class="container-fluid bg-welcome pt-3">
+    <div class="container">
+      <app-image fxHide.xs="true" imageClass="datacenter" src="/assets/img/home/data.png" alt="data"></app-image>
+      <app-image fxHide.gt-xs="true" imageClass="datacenter" src="/assets/img/home/data.svg" alt="data"></app-image>
+    </div>
+  </div>
+
+  <div class="container-fluid pt-3">
+    <div class="container">
+      <app-image-text
+        directionWeb="row"
+        directionMobile="column"
+        imageClass="imgsection"
+        src="/assets/img/home/refiere.png"
+        title="¿Cómo funciona Clickam?"
+        alt="¿Cómo funciona Clickam?"
+        classTitleWeb="f-28"
+        classTitleMobile="f-20 text-center"
+        generalMobile="mt-5 text-center"
+        text="<ol class='numeric'><li>Crea una cuenta en Clickam</li><li>Explora la plataforma y sus negocios</li><li>Elige los productos y servicios favoritos</li><li>Cómpralos o recomiéndalos</li><li>Genera ganancias y cumple tus sueños.</li></ol>"
+        classTextWeb="f-20 m-0"
+        classTextMobile="f-16 text-left mt-0 mb-3"
+        titleButton="¡Crea tu cuenta ahora!"
+        (action)="openRegister()"
+      ></app-image-text>
+
+      <app-image-text
+        directionWeb="row-reverse"
+        directionMobile="column"
+        imageClass="imgsection"
+        src="/assets/img/home/gana.png"
+        title="¿Por qué usar Clickam?"
+        alt="¿Por qué usar Clickam?"
+        generalWeb="mt-5 pt-5"
+        generalMobile="mt-5 text-center"
+        classTitleWeb="f-28"
+        classTitleMobile="f-20 text-center"
+        text="<p>Clickam es una plataforma 100% gratis y digital, en la que generas
     ganancias por comprar y referir productos y servicios de marcas
     reconocidas, desde cualquier lugar y a cualquier hora del día.</p>
     
     <p>En Clickam no te preocupas por: Logística, garantías, envíos, reembolsos o
     devoluciones, de esto se encarga el negocio aliado, tu solo creas un link y
     compras por el o lo compartes.</p>"
-    classTextWeb="f-20 m-0"
-    classTextMobile="f-16 text-center mt-0 mb-3"
-    titleButton="Comenzar"
-    (action)="openRegister()"
-    ></app-image-text>
+        classTextWeb="f-20 m-0"
+        classTextMobile="f-16 text-center mt-0 mb-3"
+        titleButton="Comenzar"
+        (action)="openRegister()"
+      ></app-image-text>
 
-    <app-image-text 
-    directionWeb="row" 
-    directionMobile="column" 
-    imageClass="imgsection" 
-    src="/assets/img/home/recibe.png"
-    title="¿Dónde recibes tus ganancias?"
-    alt="¿Dónde recibes tus ganancias?"
-    generalWeb="mt-5 pt-5"
-    generalMobile="mt-5 text-center"
-    classTitleWeb="f-28"
-    classTitleMobile="f-20 text-center"
-    text="<p>Si te emocionas cuando encuentras dinero en tu bolsillo que
+      <app-image-text
+        directionWeb="row"
+        directionMobile="column"
+        imageClass="imgsection"
+        src="/assets/img/home/recibe.png"
+        title="¿Dónde recibes tus ganancias?"
+        alt="¿Dónde recibes tus ganancias?"
+        generalWeb="mt-5 pt-5"
+        generalMobile="mt-5 text-center"
+        classTitleWeb="f-28"
+        classTitleMobile="f-20 text-center"
+        text="<p>Si te emocionas cuando encuentras dinero en tu bolsillo que
     no sabias que tenías, ahora imagina que cada mes llegaran
     ganancias a tu cuenta bancaria a través de Clickam, regístrate
     en la plataforma, completa tu perfil y empieza a ganar.</p>"
-    classTextWeb="f-20 m-0"
-    classTextMobile="f-16 text-center mt-0 mb-3"
-    titleButton="Empezar a ganar"
-    (action)="openRegister()"
-    ></app-image-text>
-
-  </div>
-</div>
-
-<!-- testimonials -->
-<div *ngIf="!auth.isLoggedIn()" class="container-fluid pt-3 pb-3">
-  <div class="container">
-    <app-title showTitleh2="true" text="Lo que dicen de nosotros" class="text-center"></app-title>
-    <app-slide-testimonials [slider] ="testimonials" [slideConfig]="slideConfigTestimonials"></app-slide-testimonials>
-  </div>
-</div>
-
-
-<!-- sliders logged -->
-<br>
-<app-slider
-  *ngIf="auth.isLoggedIn()"
-  Class="gtmHomeClicBanner"
-  [showArrows]="false"
-  [isSlider]="true"
-  (action)="sliderOffers()"
-  [sliderMobile]="sliderMobile"
-  [sliderWeb]="sliderWeb"
-></app-slider>
-
-<!-- medals mobile logged -->
-
-<div class="medals container pt-3" fxHide.gt-xs="true" *ngIf="auth.isLoggedIn()" fxLayout="row" fxLayoutAlign="center center">
-  <app-card-medal></app-card-medal>
-</div>
-
-<div class="container" *ngIf="auth.isLoggedIn()">
-  
-  <span fxLayout="row" fxLayoutAlign="space-between center">
-    <h3 ngClass.gt-xs="mb-0" class="border-bottom-orange-init title-h3" id="bussinessHook">
-      {{ 'HOME.BUSSINESS' | translate }}
-    </h3>
-    <p *ngIf="auth.isLoggedIn()" ngClass.gt-xs="mb-0 f-20" class="cursor-pointer text-underline purple-text" [routerLink]="['/negocios']">
-      {{ 'HOME.ALL_BUSSINESS' | translate }}
-    </p>
-  </span>
-  
-  <p class="f-20" fxHide.xs>{{ 'HOME.BUSSINESS_TEXT' | translate }}</p>
-
-  <!-- business cards -->
-
-  <div
-    fxLayout="row wrap"
-    fxLayout.gt-xs="row wrap"
-    ngClass.gt-xs="pb-3"
-    ngClass.xs="mb-3"
-    fxLayoutAlign="center center"
-    fxLayoutGap="10px grid"
-  >
-    <ng-container *ngFor="let bussines of bussiness | slice: 0:8; let i = index">
-
-      <app-bussiness-card
-        *ngIf="bussines.code !== 'envios-clickam'"
-        (bussiness)="bussinessNavigation(bussines)"
-        [img]="bussines.imageurl"
-        [code]="bussines.code"
-        [title]="bussines.description"
-        [percent]="bussines.infoaditional"
-      ></app-bussiness-card>
-
-    </ng-container>
-
-    <ng-container *ngFor="let bussines of bussinessClicker; let i = index">
-      <app-bussiness-card
-        *ngIf="isEmployee === true && bussines.code === 'envios-clickam' && auth.isLoggedIn()"
-        (bussiness)="bussinessNavigation(bussines)"
-        [img]="bussines.imageurl"
-        [title]="bussines.description"
-        [percent]="bussines.infoaditional"
-      ></app-bussiness-card>
-    </ng-container>
-
-  </div>
-
-  <!-- offers to share banner web loggued -->
-
-  <div *ngIf="auth.isLoggedIn()" fxLayout="row" class="card-library" fxShow.gt-xs="true" fxShow.xs="false">
-    <div class="position-relative banner-mobile heigth-image" fxShow.gt-xs="true" fxShow.xs="false">
-      <div class="position-absolute" fxLayout="column">
-        <h3>Descarga las mejores ofertas para compartir.</h3>
-        <button mat-raised-button class="button-oferts" color="orange" [routerLink]="['/biblioteca']" id="download-users">
-          Ver Ofertas
-        </button>
-      </div>
-      <img class="responsive-img" src="/assets/img/banners/oferts.png" alt="ofertas" />
+        classTextWeb="f-20 m-0"
+        classTextMobile="f-16 text-center mt-0 mb-3"
+        titleButton="Empezar a ganar"
+        (action)="openRegister()"
+      ></app-image-text>
     </div>
   </div>
 
-  <!-- offers to share banner mobile loggued -->
-
-  <div *ngIf="auth.isLoggedIn()" fxLayout="row" class="card-library" fxShow.gt-xs="false" fxShow.xs="true">
-    <div class="position-relative banner-mobile heigth-image" fxShow.gt-xs="false" fxShow.xs="true">
-      <div class="position-absolute" fxLayout="column">
-        <h3>Descarga aquí las mejores ofertas del día</h3>
-        <button mat-raised-button class="button-oferts" color="orange" [routerLink]="['/biblioteca']" id="download-users">
-          Ver Ofertas
-        </button>
-      </div>
-      <img class="responsive-img" src="/assets/img/banners/oferts_mobile.png" alt="ofertas" />
+  <!-- testimonials -->
+  <div class="container-fluid pt-3 pb-3">
+    <div class="container">
+      <app-title showTitleh2="true" text="Lo que dicen de nosotros" class="text-center"></app-title>
+      <app-slide-testimonials [slider]="testimonials" [slideConfig]="slideConfigTestimonials"></app-slide-testimonials>
     </div>
   </div>
 
-</div>
+  <!-- slider top products -->
 
-<!-- slider top products -->
-
-<div class="container-fluid">
-  <div class="container">
-    <span class="d-block"></span>
-    <app-title showTitleh2="true" text="{{ 'HOME.OFFERS' | translate }}" classWeb="border-bottom-orange-init" classMobile="border-bottom-orange-init"></app-title>
-    <p ngClass.gt-xs="f-20 mb-4" ngClass.xs="f-16">{{ 'HOME.OFFERS_TEXT' | translate }}</p>
-  </div>
-</div>
-
-<app-slider
-  Class="gtmHomeClicOfertas"
-  [showArrows]="false"
-  [isSlider]="true"
-  (action)="sliderOffers()"
-  [sliderWeb]="offersWeb"
-  class="mb-3"
-></app-slider>
-
-<!-- blog -->
-
-<div class="container">
-  <span class="d-block mt-3"></span>
-  <app-blog-business></app-blog-business>
-</div>
-
-<!-- form better clickam -->
-
-<div *ngIf="auth.isLoggedIn()" class="forms-help mt-3" fxLayout="row" fxLayoutAlign="center">
-  <div fxLayout="column" fxLayoutAlign="center">
-    
-    <div fxLayout="row" fxLayoutAlign="center">
-      <div class="mt-4">
-        <img src="/assets/img/compartir_testimonial.svg" alt="testimonial" />
-      </div>
-      <div class="mt-4">
-        <h4 class="text-cuentanos mt-0 mb-0 ml-3">¿Crees que en Clickam podemos mejorar algo?</h4>
-        <p class="expresion-cuentanos mt-0 mb-0 ml-3">¡Cuéntanos!</p>
-      </div>
+  <div class="container-fluid">
+    <div class="container">
+      <span class="d-block"></span>
+      <app-title
+        showTitleh2="true"
+        text="{{ 'HOME.OFFERS' | translate }}"
+        classWeb="border-bottom-orange-init"
+        classMobile="border-bottom-orange-init"
+      ></app-title>
+      <p ngClass.gt-xs="f-20 mb-4" ngClass.xs="f-16">{{ 'HOME.OFFERS_TEXT' | translate }}</p>
     </div>
-
-    <div *ngIf="!formData && !sendData" class="mt-2 mb-4" fxLayout="row" fxLayoutAlign="center">
-      <button fxLayout="row" fxLayoutAlign="space-between center" class="cursor-pointer open-form" (click)="openForm()">
-        <span>Abrir formulario</span>
-        <mat-icon>keyboard_arrow_down</mat-icon>
-      </button>
-    </div>
-  
-    <div *ngIf="formData && !sendData" class="mt-2 mb-4 pl-2 pr-2" fxLayout="column" fxLayoutAlign="center">
-      
-      <form [formGroup]="dateForm">
-        <label class="label-up-text" for="picker">Mensaje </label>
-        <div class="mt-1">
-          <textarea
-            matInput
-            placeholder="Cuéntanos en qué podemos mejorar."
-            id="description"
-            type="text"
-            formControlName="description"
-            required
-            class="text-area-heigth"
-          ></textarea>
-        </div>
-      </form>
-
-      <div>
-        <div class="mt-3 mb-2" fxLayout="row" fxLayoutAlign="end end">
-          <button mat-button ngClass="button_cancel" style="color: #ffffff" (click)="cerrarForm()">Cancelar</button>
-          <button
-            mat-raised-button
-            class="button-oferts ml-2"
-            color="orange"
-            (click)="saveProposal()"
-            id="download-users"
-            [disabled]="!dateForm.valid"
-          >
-            Enviar
-          </button>
-        </div>
-      </div>
-
-    </div>
-
-    <div *ngIf="formData && sendData" class="mt-2 mb-4" fxLayout="column" fxLayoutAlign="center center" style="text-align: center">
-      <i class="tio-checkmark_circle" style="font-size: 38px; color: #ffffff"></i>
-      <p class="expresion-cuentanos mt-0 mb-0 ml-3">¡Tu comentario ha sido enviado!</p>
-      <button class="cursor-pointer open-form mt-2" style="width: 125px" (click)="cerrarForm()">Cerrar</button>
-    </div>
-
   </div>
 
-  <!-- modal promo template -->
+  <app-slider
+    Class="gtmHomeClicOfertas"
+    [showArrows]="false"
+    [isSlider]="true"
+    (action)="sliderOffers()"
+    [sliderWeb]="offersWeb"
+    class="mb-3"
+  ></app-slider>
+</section>
 
-  <ng-template #templatePromo>
-    <div fxShow.gt-xs="true" fxShow.xs="false">
-      <a [href]="modalHref" [target]="modalTarget">
-        <img [src]="modalSrcWeb" class="img-responsive w-100 cursor-pointer" [alt]="modalAltWeb" />
-      </a>
-    </div>
+<!-- modal promo template -->
 
-    <div fxShow.gt-xs="false" fxShow.xs="true">
-      <a [href]="modalHref" [target]="modalTarget">
-        <img [src]="modalSrcMobile" class="img-responsive w-100 cursor-pointer" [alt]="modalAltMobile" />
-      </a>
-    </div>
-  </ng-template>
+<ng-template #templatePromo>
+  <div fxShow.gt-xs="true" fxShow.xs="false">
+    <a [href]="modalHref" [target]="modalTarget">
+      <img [src]="modalSrcWeb" class="img-responsive w-100 cursor-pointer" [alt]="modalAltWeb" />
+    </a>
+  </div>
 
-</div>
+  <div fxShow.gt-xs="false" fxShow.xs="true">
+    <a [href]="modalHref" [target]="modalTarget">
+      <img [src]="modalSrcMobile" class="img-responsive w-100 cursor-pointer" [alt]="modalAltMobile" />
+    </a>
+  </div>
+</ng-template>

@@ -13,6 +13,7 @@ import { SlideTestimonialsComponent } from '../anonymous/components/molecules/sl
 import { WelcomeComponent } from '../anonymous/components/welcome/welcome.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { SalesInfoComponent } from '../anonymous/components/sales-info/sales-info.component';
 
 
 
@@ -40,7 +41,8 @@ const routes: Routes = [
     NewBlogComponent,
     CardMedalComponent,
     SlideTestimonialsComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    SalesInfoComponent
   ],
   imports: [
     CommonModule,
