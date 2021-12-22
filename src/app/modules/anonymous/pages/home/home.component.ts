@@ -131,7 +131,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         breakpoint: 600,
         settings: {
           slidesToShow: 1,
-          variableWidth: true,
+          variableWidth: false,
+          dots: true,
         },
       },
     ],
