@@ -7,9 +7,9 @@
   </div>
 
   <section fxLayout="row" fxLayout.xs="column" class="container-fluid mt-4 mb-4" fxLayoutGap="20px">
-    <div class="left-section" fxFlex="70" fxFlex.xs="100">
+    <div fxLayout="column" class="left-section" fxFlex="70" fxFlex.xs="100" fxLayoutGap="20px">
       <mat-card class="card mat-card-box-shadow">
-        <div class="container-fluid">
+        <div>
           <div class="container">
             <span class="d-block"></span>
             <app-title
@@ -30,6 +30,11 @@
           class="mb-3"
         ></app-slider>
       </mat-card>
+
+      <mat-card class="card mat-card-box-shadow">
+        <app-report-reward></app-report-reward>
+      </mat-card>
+
     </div>
 
     <div class="right-section" fxFlex="30" fxFlex.xs="100">
@@ -163,6 +168,14 @@
     [sliderWeb]="offersWeb"
     class="mb-3"
   ></app-slider>
+
+  <!-- blog -->
+
+  <div class="container">
+    <span class="d-block mt-3"></span>
+    <app-blog-business></app-blog-business>
+  </div>
+
 </section>
 
 <!-- modal promo template -->

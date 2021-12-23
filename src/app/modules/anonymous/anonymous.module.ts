@@ -80,6 +80,7 @@ import { CardOrderNumberComponent } from './components/card-order-number/card-or
 import { DialogNoveltySatisfactionComponent } from './components/dialog-novelty-satisfaction/dialog-novelty-satisfaction.component';
 import { ConsultComponent } from './pages/help-center/consult/consult.component';
 
+
 const routes: Routes = [
   {
     path: 'recuperar-contrasena/:id',
