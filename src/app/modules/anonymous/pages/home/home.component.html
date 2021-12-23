@@ -46,8 +46,26 @@
             <i class="tio-copy f-18 cpb"></i>
           </button>
         </span>
-
       </mat-card>
+
+      <mat-card class="card mat-card-box-shadow pl-0 pr-0">
+        <app-title showTitleh3="true" text="Misiones" commonClass="pl-3"></app-title>
+        <mat-list-item *ngFor="let mission of missions">
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" mat-line class="purple2-text f-16 galano-bold pb-3 pt-3 border-bottom-gray">
+            <span class="pl-3">
+              <i class="tio-checkmark_circle f-18"></i>
+            </span>
+            <span>
+              {{mission.name}}
+            </span>
+          </div>
+        </mat-list-item>
+        <p fxLayout="row" fxLayoutAlign="center center"  class="pl-3 f-16 mt-3 cursor-pointer yellow galano-bold" [routerLink]="[ '/logros']">
+          <mat-icon>emoji_events</mat-icon>
+          ¡Guía completada!
+        </p>
+      </mat-card>
+
     </div>
   </section>
 </section>

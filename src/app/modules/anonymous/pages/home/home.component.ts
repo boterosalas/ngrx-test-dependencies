@@ -163,6 +163,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     ],
   };
 
+  missions = [
+    {name: '1. Registro'},
+    {name: '2. Referir'},
+    {name: '3. Comprar'},
+    {name: '4. Historial y Reportes'},
+  ];
+
   constructor(
     public router: Router,
     private route: ActivatedRoute,
