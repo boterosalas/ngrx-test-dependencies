@@ -12,10 +12,7 @@
         <div>
           <div class="container">
             <span class="d-block"></span>
-            <app-title
-              showTitleh3="true"
-              text="{{ 'HOME.OFFERS' | translate }}"
-            ></app-title>
+            <app-title showTitleh3="true" text="{{ 'HOME.OFFERS' | translate }}"></app-title>
             <p ngClass.gt-xs="mb-4" ngClass.xs="f-16">{{ 'HOME.OFFERS_TEXT' | translate }}</p>
           </div>
         </div>
@@ -34,16 +31,24 @@
       <mat-card class="card mat-card-box-shadow">
         <app-report-reward></app-report-reward>
       </mat-card>
-
     </div>
 
-    <div class="right-section" fxFlex="30" fxFlex.xs="100">
+    <div class="right-section" fxFlex="30" fxFlex.xs="100" fxLayout="column" fxLayoutGap="20px">
       <mat-card class="card mat-card-box-shadow">
         <app-sales-info></app-sales-info>
       </mat-card>
-    </div>
-    
 
+      <mat-card class="card mat-card-box-shadow">
+        <app-title showTitleh3="true" text="INVITA Y GANA"></app-title>
+        <span fxLayout="row">
+          <input id="urlLink" matInput [value]="url" #linkInput readonly />
+          <button mat-mini-fab color="purple2" class="p-0" (click)="copyLink(linkInput)" fxLayoutAlign="center center">
+            <i class="tio-copy f-18 cpb"></i>
+          </button>
+        </span>
+
+      </mat-card>
+    </div>
   </section>
 </section>
 
@@ -175,7 +180,6 @@
     <span class="d-block mt-3"></span>
     <app-blog-business></app-blog-business>
   </div>
-
 </section>
 
 <!-- modal promo template -->

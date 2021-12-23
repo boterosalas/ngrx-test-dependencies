@@ -51,8 +51,7 @@
 //   background-size: cover;
 // }
 
-
-.imgsection{
+.imgsection {
   max-width: 100%;
 }
 
@@ -147,4 +146,14 @@
 .stories-section {
   margin: 0;
   padding: 0;
+}
+
+#urlLink {
+  border: none;
+  width: 100%;
+}
+
+.cpb {
+  position: relative;
+  top: -3px;
 }

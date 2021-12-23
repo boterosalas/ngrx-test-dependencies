@@ -16,6 +16,7 @@ import { Meta } from '@angular/platform-browser';
 import { MasterDataService } from 'src/app/services/master-data.service';
 import { FormBuilder } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-login',
@@ -86,7 +87,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   modalHrefMobile: string;
   modalSrcWeb: string;
   modalSrcMobile: string;
-
+  url:string;
 
   @ViewChild('templateTestimonials', { static: true })
   templateTestimonials: TemplateRef<any>;
@@ -175,7 +176,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     private metaTagService: Meta,
     private fb: FormBuilder,
     private personalInfo: MasterDataService,
-    @Inject(PLATFORM_ID) private platformId: object
+    @Inject(PLATFORM_ID) private platformId: object,
+    private token: TokenService
   ) {
  
     this.subscription = this.route.queryParams.subscribe((params) => {
@@ -202,6 +204,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.content.setClick(formData).subscribe();
   }
 
+  public generateUrl() {
+    const domain = document.location.origin;
+    this.url = encodeURI(`${domain}/inicio?code=${this.token.user.idclicker}`);
+  }
+
+  public copyLink(inputElement:any) {
+    inputElement.select();
+    document.execCommand('copy');
+    inputElement.setSelectionRange(0, 0);
+    this.utils.openSnackBar('Se ha copiado el link al portapapeles', 'Cerrar');
+  }
+
   ngOnInit() {
     this.metaTagService.addTags([
       {
@@ -223,6 +237,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.amountReferred = localStorage.getItem('AmonuntReferred');
     this.getTerms();
     this.getTestimoniesUser();
+    this.generateUrl();
   }
 
   public getTestimoniesUser() {
