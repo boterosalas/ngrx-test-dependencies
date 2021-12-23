@@ -81,6 +81,7 @@ import { DialogNoveltySatisfactionComponent } from './components/dialog-novelty-
 import { ConsultComponent } from './pages/help-center/consult/consult.component';
 
 
+
 const routes: Routes = [
   {
     path: 'recuperar-contrasena/:id',

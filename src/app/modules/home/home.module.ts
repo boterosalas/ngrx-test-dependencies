@@ -16,6 +16,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { SalesInfoComponent } from '../anonymous/components/sales-info/sales-info.component';
 import { ReportRewardComponent } from '../anonymous/components/report-reward/report-reward.component';
 import { RewardCardComponent } from '../anonymous/components/reward-card/reward-card.component';
+import { ListBlogsComponent } from '../anonymous/components/list-blogs/list-blogs.component';
 
 
 
@@ -46,7 +47,8 @@ const routes: Routes = [
     WelcomeComponent,
     SalesInfoComponent,
     ReportRewardComponent,
-    RewardCardComponent
+    RewardCardComponent,
+    ListBlogsComponent
   ],
   imports: [
     CommonModule,
