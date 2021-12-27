@@ -25,6 +25,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireModule } from '@angular/fire';
 import { MasterDataService } from 'src/app/services/master-data.service';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { TokenService } from 'src/app/services/token.service';
 
 class MockAuthService extends AuthService {
   isLoggedIn() {
@@ -34,6 +35,26 @@ class MockAuthService extends AuthService {
   isLogged$ = new BehaviorSubject<boolean>(true);
 
   getRole$ = new BehaviorSubject<any>('CLICKER');
+}
+
+export class MockUserInfo {
+  user = {
+    aud: 'Estudiantes',
+    documentType: 'Cédula de ciudadanía',
+    exp: 1635458280,
+    firstnames: 'ñañito',
+    idclicker: 'ñañito77',
+    identification: '1124587893',
+    iss: 'practincanetcore.com',
+    lastnames: 'betancur',
+    role: 'CLICKER',
+    userName: 'davidbet2@hotmail.com',
+    userid: '77',
+  };
+
+  userInfo(){
+    return this.user;
+  }
 }
 
 describe('HomeComponent', () => {
@@ -471,6 +492,7 @@ describe('HomeComponent', () => {
           { provide: UtilsService, useValue: mockUtilsService },
           { provide: ContentService, useValue: mockContentService },
           { provide: MasterDataService, useValue: mockMasterService },
+          { provide: TokenService, useClass: MockUserInfo },
           // { provide: LinksService, useValue: mockLinksService },
         ],
         schemas: [NO_ERRORS_SCHEMA],
@@ -543,12 +565,6 @@ describe('HomeComponent', () => {
     component.bussinessNavigation(params);
     expect(params).toBeDefined();
   });
-
-  it('open register bussiness', () => {
-    component.openRegisterBusiness();
-  });
-
-
 
   // it('modal promo', () => {
   //   component.getModalPromo();

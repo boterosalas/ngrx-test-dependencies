@@ -1,0 +1,52 @@
+<div class="container-fluid">
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="mb-4">
+    <app-title showTitleh3="true" text="Reporte de recompensas"></app-title>
+    <app-button fxHide.xs="true" title="Ver reporte completo" [routerLink]="['/reportes']" color="gray" classIcon="tio-share_vs style-icon"></app-button>
+  </div>
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutAlign="center center">
+    <app-reward-card
+      title="Recompensas de este mes"
+      [money]="account | currency: '':'symbol':'1.0-0'"
+      textToolTip="Las compras de tus referidos efectivas que se generen por medio de tus links durante el mes, se pagarán al siguiente mes entre los días 15 y 20."
+      (open)="break('commissions')"
+    ></app-reward-card>
+    <app-reward-card
+      title="Saldo pendiente por pagar"
+      [money]="available | currency: '':'symbol':'1.0-0'"
+      textToolTip="Este dinero corresponde a los saldos acumulados en los saldos anteriores, y te será pagado cuando completes el monto mínimo."
+      (open)="break('balance')"
+    ></app-reward-card>
+    <app-reward-card
+      title="Recompensas rechazadas"
+      [money]="rejected | currency: '':'symbol':'1.0-0'"
+      textToolTip="Estas comisiones no se hicieron efectivas, ya que el negocio confirmó que la compra no fue realizada de manera exitosa."
+      (open)="break('rejected-commissions')"
+    ></app-reward-card>
+  </div>
+  <br fxHide.gt-xs="true"/>
+  <span fxLayoutAlign="center center">
+      <app-button fxHide.gt-xs="true" title="Ver reporte completo" [routerLink]="['/reportes']" color="gray" classIcon="tio-share_vs style-icon"></app-button>
+  </span>
+
+</div>
+
+<ng-template #templateBreak>
+    <p>
+      Las compras de tus referidos efectivas que se generen por medio de tus links durante el mes, se pagarán al siguiente mes entre los días
+      15 y 20.
+    </p>
+    <app-table-detail-comission [dataSource]="dataBreak1"></app-table-detail-comission>
+  </ng-template>
+  
+  <ng-template #templateBreak2>
+    <p>
+      Este dinero corresponde a los saldos acumulados en los saldos anteriores, y te será pagado cuando completes el monto mínimo ($ 10,000).
+    </p>
+    <app-table-detail-comission [dataSource]="dataBreak2"></app-table-detail-comission>
+  </ng-template>
+  
+  <ng-template #templateBreak3>
+    <p>Estas comisiones no se hicieron efectivas, ya que el negocio confirmó que la compra no fue realizada de manera exitosa.</p>
+    <app-table-detail-comission [dataSource]="dataBreak3"></app-table-detail-comission>
+  </ng-template>

@@ -51,8 +51,7 @@
 //   background-size: cover;
 // }
 
-
-.imgsection{
+.imgsection {
   max-width: 100%;
 }
 
@@ -147,4 +146,29 @@
 .stories-section {
   margin: 0;
   padding: 0;
+}
+
+#urlLink {
+  border: none;
+  width: 100%;
+}
+
+.cpb {
+  position: relative;
+  top: -3px;
+}
+
+.card{
+  &.purple{
+    background: $primary-color;
+    color: #ffffff;
+  }
+}
+
+.underline{
+  text-decoration: underline;
+}
+
+.white {
+  color: #ffffff;
 }

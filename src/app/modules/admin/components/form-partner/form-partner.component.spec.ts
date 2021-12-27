@@ -1,7 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -30,6 +30,12 @@ export class MatDialogMock {
 describe('FormPartnerComponent', () => {
   let component: FormPartnerComponent;
   let fixture: ComponentFixture<FormPartnerComponent>;
+
+  const dialogMock = {
+    close: () => {},
+  };
+
+  const matDialog = new MatDialogMock();
 
   const mockUserService = jasmine.createSpyObj('UserService', ['addUserAdmin']);
 
@@ -68,7 +74,8 @@ describe('FormPartnerComponent', () => {
         }),
       ],
       providers: [
-        { provide: MatDialogRef, useValue: MatDialogMock },
+        { provide: MatDialog, useValue: matDialog },
+        { provide: MatDialogRef, useValue: matDialog },
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: UserService, useValue: mockUserService },
       ],

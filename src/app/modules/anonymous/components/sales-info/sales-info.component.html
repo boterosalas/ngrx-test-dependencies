@@ -1,0 +1,29 @@
+<div class="sale pl-3 pr-3" fxLayout="column" fxLayoutAlign="center center">
+    <span class="initials f-24 purple-text">
+        {{initialName}}{{initialLastName}}
+    </span>
+
+    <p class="f-16 purple-text galano-bold">{{fullName}}</p>
+
+    <p class="purple-text m-0">Total recompensas</p>
+
+    <span class="f-28 purple-text galano-bold">{{totalComission | currency: '':'symbol':'1.0-0'}}</span>
+
+    <div fxLayout="row" class="mt-3" fxLayoutGap="10px" fxLayoutAlign="space-between center">
+
+        <div class="f-24 purple-text galano-bold text-center" fxLayout="column" fxLayoutAlign="center center">
+            {{linksCreated}}
+            <span class="f-12 galano-bold">Links creados</span>
+        </div>
+        <div class="f-24 purple-text galano-bold text-center" fxLayout="column" fxLayoutAlign="center center">
+            {{sellProducts}}
+            <span class="f-12 galano-bold">Productos vendidos </span>
+        </div>
+        <div class="f-24 purple-text galano-bold text-center" fxLayout="column" fxLayoutAlign="center center">
+            {{conversionRate}}%
+            <span class="f-12 galano-bold">Tasa de conversión</span>
+        </div>
+
+    </div>
+
+</div>

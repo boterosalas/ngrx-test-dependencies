@@ -13,6 +13,11 @@ import { SlideTestimonialsComponent } from '../anonymous/components/molecules/sl
 import { WelcomeComponent } from '../anonymous/components/welcome/welcome.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { SalesInfoComponent } from '../anonymous/components/sales-info/sales-info.component';
+import { ReportRewardComponent } from '../anonymous/components/report-reward/report-reward.component';
+import { RewardCardComponent } from '../anonymous/components/reward-card/reward-card.component';
+import { ListBlogsComponent } from '../anonymous/components/list-blogs/list-blogs.component';
+import { TopRewardComponent } from '../anonymous/components/top-reward/top-reward.component';
 
 
 
@@ -40,7 +45,12 @@ const routes: Routes = [
     NewBlogComponent,
     CardMedalComponent,
     SlideTestimonialsComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    SalesInfoComponent,
+    ReportRewardComponent,
+    RewardCardComponent,
+    ListBlogsComponent,
+    TopRewardComponent
   ],
   imports: [
     CommonModule,
