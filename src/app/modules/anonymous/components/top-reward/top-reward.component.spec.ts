@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TopRewardComponent } from './top-reward.component';
 
-describe('TopRewardComponent', () => {
+fdescribe('TopRewardComponent', () => {
   let component: TopRewardComponent;
   let fixture: ComponentFixture<TopRewardComponent>;
 
