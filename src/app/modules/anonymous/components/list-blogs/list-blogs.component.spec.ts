@@ -6,7 +6,7 @@ import { ContentService } from 'src/app/services/content.service';
 
 import { ListBlogsComponent } from './list-blogs.component';
 
-fdescribe('ListBlogsComponent', () => {
+describe('ListBlogsComponent', () => {
   let component: ListBlogsComponent;
   let fixture: ComponentFixture<ListBlogsComponent>;
 
