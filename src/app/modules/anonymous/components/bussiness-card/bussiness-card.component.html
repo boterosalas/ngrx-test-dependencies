@@ -3,17 +3,19 @@
   class="bussiness cursor-pointer gtmHomeClicNegocios{{ title }}"
   ngClass.xs="p-3"
   fxLayoutAlign="center center"
+  
 >
   <div class="gtmHomeClicNegocios{{ title }} inner-business" fxLayout="column" fxLayoutAlign="center center">
     <span fxLayout="column" class="img-responsive gtmHomeClicNegocios{{ title }}">
       <img [src]="img" class="heigth-imagen gtmHomeClicNegocios{{ title }}" alt="{{ title }}" />
     </span>
-    <span fxLayout="column" class="gtmHomeClicNegocios{{ title }}">
-      <h4 class="title-bussiness m-0 gtmHomeClicNegocios{{ title }}">
-        {{ title }}
-      </h4>
-      <p *ngIf="code === 'movil-exito'" class="m-0">Antes el 5%</p>
-      <span class="percent orange-text gtmHomeClicNegocios{{ title }}">{{ percent }}</span>
-    </span>
   </div>
 </mat-card>
+
+<span class="mt-2" fxLayout="column" class="gtmHomeClicNegocios{{ title }}">
+  <h4 class="title-bussiness m-0 gtmHomeClicNegocios{{ title }}">
+    {{ title }}
+  </h4>
+  <p *ngIf="code === 'movil-exito'" class="m-0">Antes el 5%</p>
+  <span class="percent orange-text gtmHomeClicNegocios{{ title }} galano-bold">{{ percent }}</span>
+</span>

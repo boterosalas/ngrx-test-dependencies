@@ -1,40 +1,17 @@
-<!-- <app-logo></app-logo> -->
-<app-banner
-  color="purple"
-  title="{{ 'HOME.BUSSINESS' | translate }}"
-  img="/assets/img/banners/banner-negocios-pc.jpg"
-  imgMobile="/assets/img/banners/banner-negocios-mobile.jpg"
-></app-banner>
-<div class="container">
-  <span fxLayout="row" fxLayoutAlign="end center">
-    <!-- <h3 class="border-bottom-orange-init title-h3">{{ 'HOME.BUSSINESS' | translate }}</h3> -->
-    <p ngClass.gt-xs="f-20" class="cursor-pointer text-underline purple-text" [routerLink]="['/inicio']">
-      {{ 'HOME.HOME' | translate }}
-    </p>
-  </span>
-  <div fxLayout="row" class="card-library" fxShow.gt-xs="true" fxShow.xs="false">
-    <div class="position-relative banner-mobile heigth-image" fxShow.gt-xs="true" fxShow.xs="false">
-      <div class="position-absolute" fxLayout="column">
-        <h3>Descarga las mejores ofertas para compartir.</h3>
-        <button mat-raised-button class="button-oferts" color="orange" [routerLink]="['/biblioteca']" id="download-users">
-          Ver Ofertas
-        </button>
-      </div>
-      <img class="responsive-img" src="/assets/img/banners/oferts.png" alt="ofertas" />
-    </div>
-  </div>
-  <div fxLayout="row" class="card-library" fxShow.gt-xs="false" fxShow.xs="true">
-    <div class="position-relative banner-mobile heigth-image" fxShow.gt-xs="false" fxShow.xs="true">
-      <div class="position-absolute" fxLayout="column">
-        <h3>Descarga aquí las mejores ofertas del día</h3>
-        <button mat-raised-button class="button-oferts" color="orange" [routerLink]="['/biblioteca']" id="download-users">
-          Ver Ofertas
-        </button>
-      </div>
-      <img class="responsive-img" src="/assets/img/banners/oferts_mobile.png" alt="ofertas" />
-    </div>
-  </div>
-  <div fxLayout="row wrap" fxLayout.gt-xs="row wrap" ngClass.gt-xs="pb-3" fxLayoutAlign="center center" fxLayoutGap="10px grid">
+<br>
+<br>
+ <span class="mt-3 mb-5">
+   <app-slider
+     *ngIf="auth.isLoggedIn()"
+     Class="gtmHomeClicBanner"
+     [showArrows]="false"
+     [isSlider]="true"
+     [sliderWeb]="sliderWeb"
+   ></app-slider>
+ </span>
+
+<div class="container pt-3" ngClass.xs="pr-3 pl-3">
+  <div fxLayout="row wrap" fxLayout.gt-xs="row wrap" ngClass.gt-xs="p-3" fxLayoutAlign="start center" fxLayoutGap="20px grid">
     <ng-container *ngFor="let bussines of bussiness; let i = index">
       <app-bussiness-card
         *ngIf="bussines.code !== 'envios-clickam'"
@@ -46,4 +23,13 @@
       ></app-bussiness-card>
     </ng-container>
   </div>
+
+  <br>
+
+  <mat-card class="card mat-card-box-shadow purple pr-0 pb-0" fxLayout.xs="column" fxLayout="row" fxLayoutAlign="space-around center" [routerLink]="['/biblioteca']">
+    <span class="galano-bold f-20">Encuentra <span class="underline cursor-pointer">aquí</span> las imágenes y videos de los negocios aliados para compartir con tus referidos.</span>
+    <app-image fxHide.xs="true" imageClass="dk" src="/assets/img/biblioteca-collage.png" alt="biblioteca" ></app-image>
+    <app-image fxHide.gt-xs="true" imageClass="dkm" src="/assets/img/bcm.png" alt="biblioteca" ></app-image>
+  </mat-card>
+  <br>
 </div>
