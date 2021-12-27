@@ -31,6 +31,18 @@
       <mat-card class="card mat-card-box-shadow">
         <app-report-reward></app-report-reward>
       </mat-card>
+
+      <mat-card class="card mat-card-box-shadow">
+        <app-top-reward></app-top-reward>
+      </mat-card>
+
+      <app-image fxHide.xs="true" [routerLink]="[ '/negocios']" imageClass="buimg cursor-pointer" src="/assets/img/home/negocios.png" alt="negocios"></app-image>
+
+      <mat-card fxHide.gt-xs="true" class="card mat-card-box-shadow purple" [routerLink]="[ '/negocios']">
+        <app-title showTitleh3="true" text="NEGOCIOS" commonClass="white m-0"></app-title>
+        <span>Encuentra <span class="underline">aquí</span> todos los negocios</span>
+      </mat-card>
+
     </div>
 
     <div class="right-section" fxFlex="30" fxFlex.xs="100" fxLayout="column" fxLayoutGap="20px">

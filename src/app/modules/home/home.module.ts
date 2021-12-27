@@ -17,6 +17,7 @@ import { SalesInfoComponent } from '../anonymous/components/sales-info/sales-inf
 import { ReportRewardComponent } from '../anonymous/components/report-reward/report-reward.component';
 import { RewardCardComponent } from '../anonymous/components/reward-card/reward-card.component';
 import { ListBlogsComponent } from '../anonymous/components/list-blogs/list-blogs.component';
+import { TopRewardComponent } from '../anonymous/components/top-reward/top-reward.component';
 
 
 
@@ -48,7 +49,8 @@ const routes: Routes = [
     SalesInfoComponent,
     ReportRewardComponent,
     RewardCardComponent,
-    ListBlogsComponent
+    ListBlogsComponent,
+    TopRewardComponent
   ],
   imports: [
     CommonModule,
