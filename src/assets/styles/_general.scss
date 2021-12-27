@@ -1054,7 +1054,7 @@ table {
   }
 
   app-bussiness-card {
-    width: 46%;
+    width: 100%;
     @media screen and (max-width: 600px) {
       .mat-card {
         padding: 11px !important;
@@ -2911,4 +2911,8 @@ img.datacenter {
 
 ol.numeric li {
   padding-bottom: 2px;
+}
+
+img.dk {
+  height: 100px;
 }

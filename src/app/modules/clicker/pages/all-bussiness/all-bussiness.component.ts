@@ -17,11 +17,13 @@ export class AllBussinessComponent implements OnInit, OnDestroy {
   role: string;
   userId: any;
   message: any;
+  sliderWeb = [];
 
   constructor(public router: Router, public auth: AuthService, private content: ContentService) {}
 
   ngOnInit() {
     this.getBussiness();
+    this.carousel();
   }
 
   ngOnDestroy() {
@@ -57,4 +59,12 @@ export class AllBussinessComponent implements OnInit, OnDestroy {
       },
     ]);
   }
+
+  public carousel() {
+    this.subscription = this.content.getOffersbyType({ id: 'CARROUSEL', admin: false }).subscribe((resp) => {
+      this.sliderWeb = resp;
+    });
+
+  }
+
 }
