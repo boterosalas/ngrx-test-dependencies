@@ -1,57 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { LinksService } from 'src/app/services/links.service';
 
 @Component({
   selector: 'app-top-reward',
   templateUrl: './top-reward.component.html',
   styleUrls: ['./top-reward.component.scss']
 })
-export class TopRewardComponent implements OnInit {
+export class TopRewardComponent implements OnInit, OnDestroy {
 
- dataSource = [
-   {
-    commission: 0,
-    date: "2021-12-23T14:47:41.383",
-    link: "https://webclickamqa.z13.web.core.windows.net/url/u1tteneuos",
-    productname: "Freidora De Aire Bioceramic Oster ",
-    products: 0,
-    visits: 0,
-  },
-  {
-    commission: 0,
-    date: "2021-12-23T14:47:41.383",
-    link: "https://webclickamqa.z13.web.core.windows.net/url/u1tteneuos",
-    productname: "Freidora De Aire Bioceramic Oster ",
-    products: 0,
-    visits: 0,
-  },
-  {
-    commission: 0,
-    date: "2021-12-23T14:47:41.383",
-    link: "https://webclickamqa.z13.web.core.windows.net/url/u1tteneuos",
-    productname: "Freidora De Aire Bioceramic Oster ",
-    products: 0,
-    visits: 0,
-  },
-  {
-    commission: 0,
-    date: "2021-12-23T14:47:41.383",
-    link: "https://webclickamqa.z13.web.core.windows.net/url/u1tteneuos",
-    productname: "Freidora De Aire Bioceramic Oster ",
-    products: 0,
-    visits: 0,
-  },
-  {
-    commission: 0,
-    date: "2021-12-23T14:47:41.383",
-    link: "https://webclickamqa.z13.web.core.windows.net/url/u1tteneuos",
-    productname: "Freidora De Aire Bioceramic Oster ",
-    products: 0,
-    visits: 0,
-  }
- ]
+  private subscription: Subscription = new Subscription();
+
+  constructor(private links:LinksService) {}
+
+ dataSource = []
 
   displayedColumns: string[] = ['productname', 'date', 'comission', 'total', 'visits'];
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getLinksHistory();
+  }
+
+
+  public getLinksHistory(from = 1, to = 5, orderBy = 'QUANTITY' , orderOrigin = 'DESC', startDate = '', endDate = '') {
+    const params = { from, to, orderOrigin , orderBy, startDate, endDate };
+    this.subscription = this.links.getLinkHistory(params).subscribe((resp) => {
+      this.dataSource = resp.linkHistory;
+    });
+  }
+
+  ngOnDestroy(): void {
+      this.subscription.unsubscribe();
+  }
 
 }
