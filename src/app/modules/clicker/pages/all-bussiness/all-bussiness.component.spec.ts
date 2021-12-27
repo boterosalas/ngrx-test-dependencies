@@ -15,7 +15,7 @@ describe('AllBussinessComponent', () => {
   let component: AllBussinessComponent;
   let fixture: ComponentFixture<AllBussinessComponent>;
 
-  const mockContentService = jasmine.createSpyObj('ContentService', ['getBusiness']);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getBusiness', 'getOffersbyType']);
 
   let bussiness = [
     {
@@ -30,31 +30,57 @@ describe('AllBussinessComponent', () => {
     },
   ];
 
-beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [AllBussinessComponent],
-      imports: [
-        SharedModule,
-        TranslateModule.forRoot(),
-        AppMaterialModule,
-        AnonymousModule,
-        RouterTestingModule,
-        HttpClientTestingModule,
-        JwtModule.forRoot({
-          config: {
-            tokenGetter: () => {
-              return localStorage.getItem('ACCESS_TOKEN');
+  let carousel = [
+   { active: true,
+    business: 'exito',
+    colorbutton: null,
+    date: '2021-12-23T10:23:08.687',
+    dateend: null,
+    datestart: null,
+    description: 'prueba review',
+    id: 86,
+    idbusiness: 1,
+    imagemobile: null,
+    imageurlmobile: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-mobile/20211223102308_mobile.jpg',
+    imageurlweb: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-web/20211223102308_web.jpg',
+    imageweb: null,
+    infoaditional: '5%',
+    link: 'exito.com?utm_source=clickam&utm_medium=referral&utm_campaign={1}',
+    new: false,
+    orderby: 0,
+    seccion: null,
+    textbutton: null,
+    type: 'CARROUSEL',}
+  ]
+
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [AllBussinessComponent],
+        imports: [
+          SharedModule,
+          TranslateModule.forRoot(),
+          AppMaterialModule,
+          AnonymousModule,
+          RouterTestingModule,
+          HttpClientTestingModule,
+          JwtModule.forRoot({
+            config: {
+              tokenGetter: () => {
+                return localStorage.getItem('ACCESS_TOKEN');
+              },
+              throwNoTokenError: true,
+              allowedDomains: [],
+              disallowedRoutes: [],
             },
-            throwNoTokenError: true,
-            allowedDomains: [],
-            disallowedRoutes: [],
-          },
-        }),
-      ],
-      providers: [{ provide: ContentService, useValue: mockContentService }],
-    }).compileComponents();
-    mockContentService.getBusiness.and.returnValue(of(bussiness));
-  }));
+          }),
+        ],
+        providers: [{ provide: ContentService, useValue: mockContentService }],
+      }).compileComponents();
+      mockContentService.getBusiness.and.returnValue(of(bussiness));
+      mockContentService.getOffersbyType.and.returnValue(of(carousel));
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AllBussinessComponent);
