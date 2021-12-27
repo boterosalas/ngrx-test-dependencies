@@ -2,6 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
+import { LinksService } from 'src/app/services/links.service';
 import { TokenService } from 'src/app/services/token.service';
 
 import { ReportRewardComponent } from './report-reward.component';
@@ -35,12 +36,12 @@ export class MockUserInfo {
     userid: '77',
   };
 
-  userInfo(){
+  userInfo() {
     return this.user;
   }
 }
 
-fdescribe('ReportRewardComponent', () => {
+describe('ReportRewardComponent', () => {
   let component: ReportRewardComponent;
   let fixture: ComponentFixture<ReportRewardComponent>;
 
@@ -48,18 +49,41 @@ fdescribe('ReportRewardComponent', () => {
 
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open']);
 
+  const mockLinksService = jasmine.createSpyObj('LinksService', ['getReportUser']);
+
+  const infoMonth = {
+    objectResponse: {
+      money: {
+        accumulated: 0,
+        cutOffValue: 0,
+        detailAccumulated: null,
+        detailCutOff: null,
+        detailRejected: [
+          {
+            commissionGenerationDate: '2020-04-08T15:40:30.69',
+            commissionValue: 249,
+            paymentDate: '2021-03-31T00:00:00',
+            productName: 'AUDIFONOS',
+            quantity: 1,
+            statusCommission: 'Rechazado',
+          },
+        ],
+        rejected: 249,
+      },
+    },
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ReportRewardComponent ],
-      imports: [
-        HttpClientTestingModule
-      ],
+      declarations: [ReportRewardComponent],
+      imports: [HttpClientTestingModule],
       providers: [
         { provide: MatDialog, useValue: matDialog },
         { provide: TokenService, useClass: MockUserInfo },
-      ]
-    })
-    .compileComponents();
+        { provide: LinksService, useValue: mockLinksService },
+      ],
+    }).compileComponents();
+    mockLinksService.getReportUser.and.returnValue(of(infoMonth));
   });
 
   beforeEach(() => {
@@ -71,4 +95,24 @@ fdescribe('ReportRewardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('commissions', () => {
+    let case1 = "commissions";
+    component.break(case1);
+    expect(case1).toBe('commissions');
+  });
+
+  it('balance', () => {
+    let case2 = "balance";
+    component.break(case2);
+    expect(case2).toBe('balance');
+  });
+
+  it('rejected-commissions', () => {
+    let case3 = "rejected-commissions";
+    component.break(case3);
+    expect(case3).toBe('rejected-commissions');
+  });
+  
+
 });

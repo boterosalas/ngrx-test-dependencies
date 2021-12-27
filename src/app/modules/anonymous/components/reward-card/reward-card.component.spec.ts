@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RewardCardComponent } from './reward-card.component';
 
-fdescribe('RewardCardComponent', () => {
+describe('RewardCardComponent', () => {
   let component: RewardCardComponent;
   let fixture: ComponentFixture<RewardCardComponent>;
 
@@ -22,4 +22,12 @@ fdescribe('RewardCardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('open', () => {
+    spyOn(component.open, 'emit');
+    component.openModal();
+    expect(component.open.emit).toHaveBeenCalled();
+  });
+  
+  
 });

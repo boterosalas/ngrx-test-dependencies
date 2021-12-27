@@ -1,6 +1,9 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
+import { LinksService } from 'src/app/services/links.service';
 import { TokenService } from 'src/app/services/token.service';
+import { UserService } from 'src/app/services/user.service';
 
 import { SalesInfoComponent } from './sales-info.component';
 
@@ -19,26 +22,47 @@ export class MockUserInfo {
     userid: '77',
   };
 
-  userInfo(){
+  userInfo() {
     return this.user;
   }
 }
 
-fdescribe('SalesInfoComponent', () => {
+describe('SalesInfoComponent', () => {
   let component: SalesInfoComponent;
   let fixture: ComponentFixture<SalesInfoComponent>;
 
+  const mockUserService = jasmine.createSpyObj('UserService', ['getuserdata']);
+
+  const mockLinksService = jasmine.createSpyObj('LinksService', ['getReportUser']);
+
+  const infoMonth = {
+    objectResponse: {
+      generalResume: {
+        conversionRate: 0.1,
+        totalCommissions: 20249,
+        totalLinks: 1022,
+        totalProducts: 3,
+      },
+    }
+  };
+
+  const user = {
+    firstNames: 'David',
+    lastNames: 'Betancur',
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SalesInfoComponent ],
-      imports: [
-        HttpClientTestingModule
-      ],
+      declarations: [SalesInfoComponent],
+      imports: [HttpClientTestingModule],
       providers: [
         { provide: TokenService, useClass: MockUserInfo },
-      ]
-    })
-    .compileComponents();
+        { provide: UserService, useValue: mockUserService },
+        { provide: LinksService, useValue: mockLinksService },
+      ],
+    }).compileComponents();
+    mockUserService.getuserdata.and.returnValue(of(user));
+    mockLinksService.getReportUser.and.returnValue(of(infoMonth));
   });
 
   beforeEach(() => {

@@ -46,7 +46,7 @@ export class SalesInfoComponent implements OnInit, OnDestroy {
       const {generalResume} = resp.objectResponse
       this.totalComission = generalResume.totalCommissions;
       this.linksCreated = generalResume.totalLinks;
-      this.sellProducts =  generalResume.totalLinks;
+      this.sellProducts =  generalResume.totalProducts;
       this.conversionRate =  generalResume.conversionRate;
     });
   }

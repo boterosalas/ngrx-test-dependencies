@@ -25,7 +25,6 @@ export class ListBlogsComponent implements OnInit, OnDestroy {
       from:'1' , to: '10' , orderBy: 'ASC'
     }
     this.subscription = this.content.getBlogs(params).subscribe((blog: ResponseService) => {
-      console.log(blog);
       this.blogs = blog.objectResponse.blogs;
     });
   }
