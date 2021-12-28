@@ -40,6 +40,7 @@ export class UserService {
   apiUpdateUserEmail = 'userprofile/updateUserEmail';
   apiRegisterUserTerms = 'userprofile/registeruserterms';
   apiSaveUserOnboardingViewed = 'userprofile/saveuseronboardingviewed';
+  apiSaveuserRateapp = 'userprofile/saveuserrateapp';
   apiSaveUserAccepttermsReferrals = 'userprofile/saveuseraccepttermsreferrals';
   apiSaveUserDevice = 'notification/saveuserdevice';
   apiUpdateEmployees = 'userprofile/updateemployees';
@@ -345,6 +346,18 @@ export class UserService {
 
   public saveOnboarding(save: any) {
     return this.http.post(`${this.url}${this.apiSaveUserOnboardingViewed}`, { viewed: save }, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => { })
+        )
+      )
+    );
+  }
+
+  public rateapp(save: any) {
+    return this.http.post(`${this.url}${this.apiSaveuserRateapp}`, { rateapp: save }, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),

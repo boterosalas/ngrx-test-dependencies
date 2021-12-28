@@ -86,6 +86,7 @@ export class AppComponent implements OnInit, OnDestroy {
   textPrograma: any;
   hideFH = false;
   fullCharge = false;
+  rateapp = false;
 
   constructor(
     private translate: TranslateService,
@@ -279,9 +280,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public review() {
     setTimeout(() => {   
-      if (this.onboardingViwed === true && this.role === 'CLICKER' && this.innerWidth < 600) {
+      if (this.onboardingViwed === true && this.role === 'CLICKER' && this.innerWidth < 600 && !this.rateapp) {
         this.dialog.open(ReviewClickamComponent, {
           width: '350px',
+        }).afterClosed()
+        .subscribe(() => {
+          this.user.rateapp(true).subscribe();
         });
       }
     }, 500);
@@ -372,6 +376,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.email = this.token.userInfo().userName;
         this.subscription = this.user.getuserdata().subscribe((user) => {
           this.onboardingViwed = user.onBoardingViewed;
+          this.rateapp = user.rateapp;
           this.firstName = user.firstNames;
           this.lastName = user.lastNames;
           this.managedPayments = user.managedPayments;

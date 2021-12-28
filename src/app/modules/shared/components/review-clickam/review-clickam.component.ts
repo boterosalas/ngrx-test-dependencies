@@ -27,6 +27,7 @@ export class ReviewClickamComponent implements OnInit {
     } else {
       window.open(playstore, '_blank');
     }
+    this.onNoClick();
   }
 
 }
