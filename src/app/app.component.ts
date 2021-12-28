@@ -24,6 +24,7 @@ import { ResponseService } from './interfaces/response';
 import { MasterDataService } from './services/master-data.service';
 import { UpdateService } from './services/update.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { ReviewClickamComponent } from './modules/shared/components/review-clickam/review-clickam.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -100,7 +101,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private personalInfo: MasterDataService,
     @Inject(PLATFORM_ID) private platformId: object
   ) {
-
     this.sw.checkForUpdates();
 
     if (isPlatformBrowser(this.platformId)) {
@@ -110,8 +110,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.subscription = router.events.subscribe((url: any) => {
       if (url instanceof NavigationStart) {
-
-        if(this.role === 'PARTNER' && url.url !== '/partner') {
+        if (this.role === 'PARTNER' && url.url !== '/partner') {
           this.router.navigate(['/partner']);
         }
 
@@ -198,6 +197,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.windowWidth();
     this.getUserData();
+    this.review();
   }
 
   public getTerms() {
@@ -269,11 +269,22 @@ export class AppComponent implements OnInit, OnDestroy {
         .subscribe(() => {
           this.user.saveOnboarding(true).subscribe();
           this.onboardingViwed = true;
+          this.review();
           if (!this.newTerms) {
             this.termsAndConditions();
           }
         });
     }
+  }
+
+  public review() {
+    setTimeout(() => {   
+      if (this.onboardingViwed === true && this.role === 'CLICKER' && this.innerWidth < 600) {
+        this.dialog.open(ReviewClickamComponent, {
+          width: '350px',
+        });
+      }
+    }, 500);
   }
 
   public getPopUps() {
