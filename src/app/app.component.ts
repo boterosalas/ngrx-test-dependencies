@@ -270,7 +270,6 @@ export class AppComponent implements OnInit, OnDestroy {
         .subscribe(() => {
           this.user.saveOnboarding(true).subscribe();
           this.onboardingViwed = true;
-          this.review();
           if (!this.newTerms) {
             this.termsAndConditions();
           }
