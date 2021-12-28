@@ -375,7 +375,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.email = this.token.userInfo().userName;
         this.subscription = this.user.getuserdata().subscribe((user) => {
           this.onboardingViwed = user.onBoardingViewed;
-          this.rateapp = user.rateapp;
+          this.rateapp = user.rateApp;
           this.firstName = user.firstNames;
           this.lastName = user.lastNames;
           this.managedPayments = user.managedPayments;
