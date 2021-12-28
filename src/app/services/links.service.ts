@@ -65,6 +65,7 @@ export class LinksService {
   apikpiNovelties = 'new/getkpinovelties';
   apiReportRejected = 'reports/getreportrejected';
   apiGetOrderNumber = 'orders/getorder';
+  apiReprocessOrdersInvoiced = 'orders/reprocessordersinvoiced';
   token = localStorage.getItem('ACCESS_TOKEN');
   authorization = this.token;
 
@@ -729,6 +730,21 @@ export class LinksService {
           return resp;
         })
       );
+  }
+
+  public reprocessOrdersInvoiced() {
+    return this.http.post(`${environment.URL_COMISSION}${this.apiReprocessOrdersInvoiced}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: ResponseService) => {
+        return resp;
+      })
+    );
   }
 
 

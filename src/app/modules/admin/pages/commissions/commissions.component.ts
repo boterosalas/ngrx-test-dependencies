@@ -317,6 +317,14 @@ export class CommissionsComponent implements OnInit {
     this.contentService.generateComissions().subscribe();
   }
 
+  public reprocessReward(): void {
+    this.link.reprocessOrdersInvoiced().subscribe();
+  }
+
+  public consultReward(): void {
+    this.contentService.consultOrders().subscribe();
+  }
+
   public getDate(e:DataRangeInterface) {
     this.startDate = e.startDate;
     this.endDate = e.endDate;
