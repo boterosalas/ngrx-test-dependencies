@@ -24,6 +24,7 @@ import { ResponseService } from './interfaces/response';
 import { MasterDataService } from './services/master-data.service';
 import { UpdateService } from './services/update.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { ReviewClickamComponent } from './modules/shared/components/review-clickam/review-clickam.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -85,6 +86,7 @@ export class AppComponent implements OnInit, OnDestroy {
   textPrograma: any;
   hideFH = false;
   fullCharge = false;
+  rateapp = false;
 
   constructor(
     private translate: TranslateService,
@@ -100,7 +102,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private personalInfo: MasterDataService,
     @Inject(PLATFORM_ID) private platformId: object
   ) {
-
     this.sw.checkForUpdates();
 
     if (isPlatformBrowser(this.platformId)) {
@@ -110,8 +111,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.subscription = router.events.subscribe((url: any) => {
       if (url instanceof NavigationStart) {
-
-        if(this.role === 'PARTNER' && url.url !== '/partner') {
+        if (this.role === 'PARTNER' && url.url !== '/partner') {
           this.router.navigate(['/partner']);
         }
 
@@ -198,6 +198,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.windowWidth();
     this.getUserData();
+    this.review();
   }
 
   public getTerms() {
@@ -274,6 +275,19 @@ export class AppComponent implements OnInit, OnDestroy {
           }
         });
     }
+  }
+
+  public review() {
+    setTimeout(() => {   
+      if (this.onboardingViwed === true && this.role === 'CLICKER' && this.innerWidth < 600 && !this.rateapp) {
+        this.dialog.open(ReviewClickamComponent, {
+          width: '350px',
+        }).afterClosed()
+        .subscribe(() => {
+          this.user.rateapp(true).subscribe();
+        });
+      }
+    }, 500);
   }
 
   public getPopUps() {
@@ -361,6 +375,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.email = this.token.userInfo().userName;
         this.subscription = this.user.getuserdata().subscribe((user) => {
           this.onboardingViwed = user.onBoardingViewed;
+          this.rateapp = user.rateApp;
           this.firstName = user.firstNames;
           this.lastName = user.lastNames;
           this.managedPayments = user.managedPayments;

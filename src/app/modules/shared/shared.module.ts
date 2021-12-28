@@ -59,6 +59,7 @@ import { CardComponent } from './components/atoms/card/card.component';
 import { BussinessCardComponent } from '../anonymous/components/bussiness-card/bussiness-card.component';
 import { ButtonStoryComponent } from '../anonymous/components/button-story/button-story.component';
 import { ShareButtonModule } from '@ngx-share/button';
+import { ReviewClickamComponent } from './components/review-clickam/review-clickam.component';
 
 @NgModule({
   declarations: [
@@ -102,7 +103,8 @@ import { ShareButtonModule } from '@ngx-share/button';
     TitleComponent,
     CardComponent,
     BussinessCardComponent,
-    ButtonStoryComponent
+    ButtonStoryComponent,
+    ReviewClickamComponent
   ],
   imports: [
     CommonModule,
@@ -168,8 +170,9 @@ import { ShareButtonModule } from '@ngx-share/button';
     TitleComponent,
     CardComponent,
     BussinessCardComponent,
-    ButtonStoryComponent
+    ButtonStoryComponent,
+    ReviewClickamComponent
   ],
-  entryComponents: [ModalGenericComponent, PopupComponent, DialogStoriesComponent, OnboardingSwiperComponent],
+  entryComponents: [ModalGenericComponent, PopupComponent, DialogStoriesComponent, OnboardingSwiperComponent, ReviewClickamComponent],
 })
 export class SharedModule {}
