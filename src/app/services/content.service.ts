@@ -84,6 +84,7 @@ export class ContentService {
   apiSaveVisitStory = 'story/savevisitstory';
   apiFooter = 'footer/getfooter';
   apiCommissions = 'commissions/getcommissions';
+  apiSaveOrdersYesterday = 'commissions/saveordersyesterday';
   apiGenerateCommissions = 'commissions/generatecommissions';
   apiImportSellerFile = 'seller/importsellerfile';
   apiSaveFooterSection = 'footer/savefooterseccion';
@@ -1175,6 +1176,21 @@ export class ContentService {
 
   public generateComissions() {
     return this.http.post(`${this.urlComission + this.apiGenerateCommissions}`, {}, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((result: ResponseService) => {
+        return result;
+      })
+    );
+  }
+
+  public consultOrders() {
+    return this.http.post(`${this.urlComission + this.apiSaveOrdersYesterday}`, {}, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),

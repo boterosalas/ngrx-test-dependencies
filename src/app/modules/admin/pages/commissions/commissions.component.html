@@ -1,5 +1,5 @@
 <app-banner
-  title="Comisiones"
+  title="Recompensas"
   img="/assets/img/banners/banner-dashboard-pc.jpg"
   imgMobile="/assets/img/banners/banner-dashboard-mobile.jpg"
 ></app-banner>
@@ -24,9 +24,8 @@
                 class="form-control border-input mat-elevation-z1 p-2 border-radius"
               />
             </div>
-            <div class="download-files" fxLayoutGap="10px">
+            <div class="download-files" fxLayoutGap="5px" fxLayout="row">
               <app-button title="Exportar" (action)="getReportRejected()" classButton="shadow-purple" classIcon="tio-download_from_cloud style-icon"></app-button>
-              <app-button title="Procesar comisiones" (action)="generateCommisions()" classButton="shadow-yellow" color="yellow" classIcon="tio-play_circle style-icon"></app-button>
             </div>
           </div>
         </div>
@@ -117,18 +116,18 @@
     </div>
   </div>
   <div class="import-files">
-    <h3>Importar archivo de comisiones</h3>
+    <h3>Importar archivo de recompensas</h3>
     <div class="upload-files">
       <span>
         <label for="rejected" class="button-selected-label cursor-pointer shadow-purple">
-          Comisiones rechazadas
+          Recompensas rechazadas
           <i class="tio-upload_on_cloud style-icon icon-update icon-download-file"></i>
         </label>
         <input #inputFile (change)="handleFileInput($event, 'rejected')" id="rejected" type="file" multiple />
       </span>
       <span>
         <label for="eliminated" class="button-selected-label cursor-pointer shadow-purple">
-          Comisiones eliminadas
+          Recompensas eliminadas
           <i class="tio-upload_on_cloud style-icon icon-update icon-download-file"></i>
         </label>
         <input #inputFile (change)="handleFileInput($event, 'eliminated')" id="eliminated" type="file" multiple />
@@ -137,9 +136,20 @@
   </div>
   <br/>
   <div class="import-files">
+    <h3>Procesar recompensas</h3>
+    <span fxLayoutGap="20px">
+      <app-button title="Procesar recompensas" (action)="generateCommisions()" classButton="shadow-yellow" color="yellow" classIcon="tio-play_circle style-icon"></app-button>
+      <app-button title="Reprocesar recompensas" (action)="reprocessReward()" classButton="shadow-yellow" color="yellow" classIcon="tio-play_circle style-icon"></app-button>
+      <app-button title="Consultar ordenes" (action)="consultReward()" classButton="shadow-yellow" color="yellow" classIcon="tio-play_circle style-icon"></app-button>
+    </span>
+  </div>
+  <br/>
+  <div class="import-files">
     <h3>Exportar ordenes no finalizadas</h3>
     <app-date-range-button classLayout="ng-hor" direction="column" (dates)="getDate($event)" (called)="exportOrderNotFinish()"></app-date-range-button>
   </div>
+
+ 
 </div>
 
 <ng-template #templateAdditionalInfo>
