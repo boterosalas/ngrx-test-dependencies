@@ -26,6 +26,7 @@ declare var dataLayer: any;
 })
 export class BussinessComponent implements OnInit, OnDestroy {
   id: string;
+  hasproduct: boolean;
   title: string;
   percent: string;
   percentBussiness = 'Hasta 9.6%';
@@ -140,6 +141,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
           this.commision = (resp[0].commissionvalue / 1000000).toFixed(1);
         });
         this.content.getBusinessById(this.id).subscribe((resp) => {
+          this.hasproduct = resp.hasproduct;
           this.infoBussiness = resp.about;
           this.tips = resp.tips;
           this.nonEditedContent = this.infoBussiness;
