@@ -41,6 +41,7 @@ export class FormBusinessComponent implements OnInit, OnChanges {
       this.nameFile2 = icon;
       this.businessForm.controls.generateExcel.setValue(this.dataBusiness.excelcommission)
       this.businessForm.controls.visible.setValue(this.dataBusiness.active)
+      this.businessForm.controls.hasproduct.setValue(this.dataBusiness.hasproduct)
     }
   }
 
@@ -55,6 +56,7 @@ export class FormBusinessComponent implements OnInit, OnChanges {
       image2: [null],
       generateExcel: [false],
       visible: [false],
+      hasproduct: [false],
     });
 
   }
@@ -96,6 +98,7 @@ export class FormBusinessComponent implements OnInit, OnChanges {
       tabTableCommission: this.businessForm.controls.nameTableCommision.value,
       placeHolder: this.businessForm.controls.placeholderBussiness.value,
       active: this.businessForm.controls.visible.value,
+      hasproduct: this.businessForm.controls.hasproduct.value,
       urlQueryString: this.businessForm.controls.codeReference.value,
       excelCommission: this.businessForm.controls.generateExcel.value,
       image: this.image,

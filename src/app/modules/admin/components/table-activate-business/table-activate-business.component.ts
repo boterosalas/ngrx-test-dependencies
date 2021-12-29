@@ -64,6 +64,7 @@ export class TableActivateBusinessComponent implements OnInit {
       image2: [null],
       generateExcel: [false],
       visible: [false],
+      hasproduct: [false],
     });
   }
 
@@ -253,6 +254,7 @@ export class TableActivateBusinessComponent implements OnInit {
     this.dateForm.controls.placeholderBussiness.setValue(null);
     this.dateForm.controls.codeReference.setValue(null);
     this.dateForm.controls.visible.setValue(false);
+    this.dateForm.controls.hasproduct.setValue(false);
     this.dateForm.controls.generateExcel.setValue(false);
     this.nameFileCert = '';
     const title = 'Agregar Negocio';
@@ -280,6 +282,7 @@ export class TableActivateBusinessComponent implements OnInit {
           tabTableCommission: this.dateForm.controls.nameTableCommision.value,
           placeHolder: this.dateForm.controls.placeholderBussiness.value,
           active: this.dateForm.controls.visible.value,
+          hasproduct: this.dateForm.controls.hasproduct.value,
           urlQueryString: this.dateForm.controls.codeReference.value,
           excelCommission: this.dateForm.controls.generateExcel.value,
           image: this.fileImgCat,
@@ -293,6 +296,7 @@ export class TableActivateBusinessComponent implements OnInit {
           tabTableCommission: this.dateForm.controls.nameTableCommision.value,
           placeHolder: this.dateForm.controls.placeholderBussiness.value,
           active: this.dateForm.controls.visible.value,
+          hasproduct: this.dateForm.controls.hasproduct.value,
           urlQueryString: this.dateForm.controls.codeReference.value,
           excelCommission: this.dateForm.controls.generateExcel.value,
           image: this.fileImgCat,
@@ -305,6 +309,7 @@ export class TableActivateBusinessComponent implements OnInit {
           tabTableCommission: this.dateForm.controls.nameTableCommision.value,
           placeHolder: this.dateForm.controls.placeholderBussiness.value,
           active: this.dateForm.controls.visible.value,
+          hasproduct: this.dateForm.controls.hasproduct.value,
           urlQueryString: this.dateForm.controls.codeReference.value,
           excelCommission: this.dateForm.controls.generateExcel.value,
           icondashboardimage: this.fileImgCat2,
@@ -317,6 +322,7 @@ export class TableActivateBusinessComponent implements OnInit {
           tabTableCommission: this.dateForm.controls.nameTableCommision.value,
           placeHolder: this.dateForm.controls.placeholderBussiness.value,
           active: this.dateForm.controls.visible.value,
+          hasproduct: this.dateForm.controls.hasproduct.value,
           urlQueryString: this.dateForm.controls.codeReference.value,
           excelCommission: this.dateForm.controls.generateExcel.value,
         };
@@ -328,6 +334,7 @@ export class TableActivateBusinessComponent implements OnInit {
         tabTableCommission: this.dateForm.controls.nameTableCommision.value,
         placeHolder: this.dateForm.controls.placeholderBussiness.value,
         active: this.dateForm.controls.visible.value,
+        hasproduct: this.dateForm.controls.hasproduct.value,
         urlQueryString: this.dateForm.controls.codeReference.value,
         excelCommission: this.dateForm.controls.generateExcel.value,
         image: this.fileImgCat,

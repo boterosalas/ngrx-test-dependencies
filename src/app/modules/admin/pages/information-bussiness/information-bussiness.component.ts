@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
@@ -18,7 +18,7 @@ export interface PeriodicElement {
   templateUrl: './information-bussiness.component.html',
   styleUrls: ['./information-bussiness.component.scss'],
 })
-export class InformationBussinessComponent implements OnInit {
+export class InformationBussinessComponent implements OnInit, OnDestroy {
   id: string;
   title: string;
   displayedColumns: string[] = ['drag', 'title', 'description', 'edition'];
@@ -43,6 +43,8 @@ export class InformationBussinessComponent implements OnInit {
   @ViewChild('table', { static: false }) table: MatTable<PeriodicElement>;
   dataSource = [];
   private subscription: Subscription = new Subscription();
+  hasproduct:true;
+
   constructor(private content: ContentService, private route: ActivatedRoute, private dialog: MatDialog, private fb: FormBuilder) {
     this.dataTip = this.fb.group({
       title: [null, Validators.required],
@@ -75,6 +77,7 @@ export class InformationBussinessComponent implements OnInit {
   }
 
   ngOnInit() {}
+  
   getBusinessData() {
     this.content.getBusinessById(this.id).subscribe((resp) => {
       this.businessdata = resp;
@@ -252,4 +255,9 @@ export class InformationBussinessComponent implements OnInit {
       confirmButtonClass: 'upload-success',
     });
   }
+
+  ngOnDestroy(): void {
+      this.subscription.unsubscribe();
+  }
+
 }
