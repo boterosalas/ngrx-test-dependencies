@@ -674,6 +674,10 @@ export class BussinessComponent implements OnInit, OnDestroy {
     });
   }
 
+  searchOtherbusiness(e){
+    console.log(e);
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
