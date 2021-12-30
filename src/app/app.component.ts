@@ -278,16 +278,18 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   public review() {
-    setTimeout(() => {   
-      if (this.onboardingViwed === true && this.role === 'CLICKER' && this.innerWidth < 600 && !this.rateapp) {
-        this.dialog.open(ReviewClickamComponent, {
-          width: '350px',
-        }).afterClosed()
-        .subscribe(() => {
-          this.user.rateapp(true).subscribe();
-        });
+    this.auth.rate$.subscribe((resp) => {
+      if (resp && this.onboardingViwed === true && this.role === 'CLICKER' && this.innerWidth < 600 && !this.rateapp) {
+        this.dialog
+          .open(ReviewClickamComponent, {
+            width: '350px',
+          })
+          .afterClosed()
+          .subscribe(() => {
+            this.user.rateapp(true).subscribe();
+          });
       }
-    }, 500);
+    });
   }
 
   public getPopUps() {
