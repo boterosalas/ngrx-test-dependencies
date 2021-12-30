@@ -22,11 +22,13 @@ export class AuthService implements OnDestroy {
         this.getMenuClicker().subscribe((res) => {
           this.role = this.getRole$.value;
           this.getMenu$.next(res);
+          this.rate$.next(true)
         });
       } else {
         this.role = this.getRole$.value;
         this.getMenu().subscribe((res) => {
           this.getMenu$.next(res);
+          this.rate$.next(false);
         });
       }
     });
@@ -69,6 +71,7 @@ export class AuthService implements OnDestroy {
   };
 
   isLogged$ = new BehaviorSubject<boolean>(false);
+  rate$ = new BehaviorSubject<boolean>(false);
   getMenu$ = new BehaviorSubject<any>(null);
   getRole$ = new BehaviorSubject<any>(null);
   subs = [];

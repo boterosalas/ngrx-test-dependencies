@@ -795,7 +795,7 @@ export class ContentService {
   
 
   public getProductsOtherBusiness(params: any){
-    return this.http.get(`${this.urlExternal}product/getProducts?business=${params.id}&search=${params.text}`, this.httpOptions).pipe(
+    return this.http.get(`${this.url}product/getProducts?business=${params.id}&search=${params.text}`, this.httpOptions).pipe(
       delay(3000),
       take(3),
       tap((errorStatus) => {}),
