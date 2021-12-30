@@ -117,7 +117,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   };
 
   slideConfigProductsLogged = {
-    slidesToShow: 4,
+    slidesToShow: 3,
     slidesToScroll: 1,
     dots: false,
     dotClass: 'slick-dots orange',
