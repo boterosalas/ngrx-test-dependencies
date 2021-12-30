@@ -24,6 +24,8 @@ export class ContentService {
   urlRefer = environment.URL_REFERAL;
   url = environment.URL_CONTENT;
   urlComission = environment.URL_COMISSION;
+  urlExternal = environment.URL_EXTERNAL;
+  
   urlbiggyExito = 'https://search.biggylabs.com.br/search-api/v1/exitocol/api/';
   urlbiggyCarulla = 'https://search.biggylabs.com.br/search-api/v1/carulla/api/';
   apibiggy = 'search/trade-policy/1';
@@ -789,6 +791,18 @@ export class ContentService {
         return user.objectResponse;
       })
     );
+  }
+  
+
+  public getProductsOtherBusiness(params: any){
+    return this.http.get(`${this.urlExternal}product/getProducts?business=${params.id}&search=${params.text}`, this.httpOptions).pipe(
+      delay(3000),
+      take(3),
+      tap((errorStatus) => {}),
+      map((user: any) => {
+        return user.objectResponse;
+      })
+    )
   }
 
   public deleteCategory(datos: any) {

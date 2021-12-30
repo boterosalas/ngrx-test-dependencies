@@ -674,8 +674,16 @@ export class BussinessComponent implements OnInit, OnDestroy {
     });
   }
 
-  searchOtherbusiness(e){
-    console.log(e);
+  searchOtherbusiness(searchText:string){
+    const data = {
+      id: this.id,
+      text: searchText
+    }
+
+    this.subscription = this.sp.getProductsOtherBusiness(data).subscribe(product => {
+      console.log(product);
+    });
+
   }
 
   ngOnDestroy() {

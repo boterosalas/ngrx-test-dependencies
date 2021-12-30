@@ -8,6 +8,7 @@ export const environment = {
   URL_COMISSION: 'https://apimexito.azure-api.net/PD-clickam-md-apicommission/api/',
   URL_REPORTS: 'https://apimexito.azure-api.net/PD-clickam-md-apireport/api/',
   URL_MASTER: 'https://apimexito.azure-api.net/PD-clickam-md-apimasterdata/api/',
+  URL_EXTERNAL: 'https://apitestexito.azure-api.net/PD-clickam-md-apiexternal/api/',
   PDF: 'https://webclickampdn.blob.core.windows.net/clickacademy/pdf/',
   SUBSCRIPTION: 'e2d3328d254d4e52a11495b223f56e86',
   firebaseConfig: {

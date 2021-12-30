@@ -1,5 +1,5 @@
 <div>
-    <app-title showTitleh3="true" text="Blog" commonClass="pl-3"></app-title>
+    <app-title showTitleh3="true" text="BLOG" commonClass="pl-3"></app-title>
     <mat-list-item *ngFor="let blog of blogs | slice: 0:3">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" mat-line class="purple2-text f-16 galano-bold pb-3 pt-3 border-bottom-gray">
             <a class="purple-text galano-bold pl-3" [routerLink]=" '/blog/' + blog.pathurl">{{blog.title}}</a>

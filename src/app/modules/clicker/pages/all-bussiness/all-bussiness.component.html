@@ -10,7 +10,7 @@
    ></app-slider>
  </span>
 
-<div class="container pt-3" ngClass.xs="pr-3 pl-3">
+<div class="container pt-3" ngClass.xs="pr-3 pl-3 px-5">
   <div fxLayout="row wrap" fxLayout.gt-xs="row wrap" ngClass.gt-xs="p-3" fxLayoutAlign="start center" fxLayoutGap="20px grid">
     <ng-container *ngFor="let bussines of bussiness; let i = index">
       <app-bussiness-card
@@ -25,7 +25,8 @@
   </div>
 
   <br>
-
+</div>
+<div class="container">
   <mat-card class="card mat-card-box-shadow purple pr-0 pb-0" fxLayout.xs="column" fxLayout="row" fxLayoutAlign="space-around center" [routerLink]="['/biblioteca']">
     <span class="galano-bold f-20">Encuentra <span class="underline cursor-pointer">aquí</span> las imágenes y videos de los negocios aliados para compartir con tus referidos.</span>
     <app-image fxHide.xs="true" imageClass="dk" src="/assets/img/biblioteca-collage.png" alt="biblioteca" ></app-image>
