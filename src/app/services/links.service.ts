@@ -733,7 +733,7 @@ export class LinksService {
   }
 
   public reprocessOrdersInvoiced() {
-    return this.http.post(`${environment.URL_COMISSION}${this.apiReprocessOrdersInvoiced}`, this.httpOptions).pipe(
+    return this.http.post(`${environment.URL_COMISSION}${this.apiReprocessOrdersInvoiced}`, {}, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),

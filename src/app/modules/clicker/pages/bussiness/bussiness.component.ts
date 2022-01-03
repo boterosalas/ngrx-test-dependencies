@@ -676,7 +676,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   searchOtherbusiness(searchText:string){
     const data = {
-      id: this.id,
+      id: this.title,
       text: searchText
     }
 
