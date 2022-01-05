@@ -1581,6 +1581,12 @@ span.orange-border {
   .mat-progress-bar.mat-accent .mat-progress-bar-fill::after {
     background-color: $primary-color;
   }
+
+  mat-icon.mat-icon.notranslate.material-icons.mat-icon-no-color {
+    color: $purple2;
+    font-size: 16px;
+  }
+
 }
 
 .no-shadow {
