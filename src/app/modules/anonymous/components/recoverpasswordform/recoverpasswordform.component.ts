@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./recoverpasswordform.component.scss'],
 })
 export class RecoverpasswordformComponent implements OnInit, OnDestroy {
+ 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -26,7 +27,8 @@ export class RecoverpasswordformComponent implements OnInit, OnDestroy {
   recoverPasswordForm: FormGroup;
   code: string;
   email: string;
-  // passwordPattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[!#/_@#$%^&+-.*)(´}{><:;¡!})])";
+  msg: string;
+  classMsg: string;
   passwordPattern = '(?=.*[a-zA-Z])(?=.*[0-9])';
 
   ngOnInit() {
@@ -100,6 +102,26 @@ export class RecoverpasswordformComponent implements OnInit, OnDestroy {
         });
       }
     );
+  }
+
+  onStrengthChanged(event) {
+    this.subscription = this.recoverPasswordForm.controls.password.valueChanges.subscribe((resp) => {
+      if (resp === '') {
+        this.msg = '';
+      }
+    });
+    if (event <= 20) {
+      this.msg = 'Contraseña débil';
+      this.classMsg = 'weak';
+    }
+    if (event > 20 && event < 100) {
+      this.msg = 'Contraseña aceptable';
+      this.classMsg = 'normal';
+    }
+    if (event >= 100) {
+      this.msg = 'Contraseña segura';
+      this.classMsg = 'acceptable';
+    }
   }
 
   ngOnDestroy(): void {
