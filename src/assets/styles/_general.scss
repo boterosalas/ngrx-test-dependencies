@@ -1562,6 +1562,33 @@ span.orange-border {
   }
 }
 
+.recover-container {
+  .mat-form-field-subscript-wrapper {
+    z-index: 1;
+  }
+  .mat-progress-bar-background,
+  .mat-progress-bar-buffer,
+  .mat-progress-bar-fill::after {
+    fill: #6bc541 !important;
+    background-color: #6bc541;
+  }
+
+  .mat-progress-bar.mat-accent .mat-progress-bar-buffer {
+    fill: $primary-color !important;
+    background-color: #f9b588;
+  }
+
+  .mat-progress-bar.mat-accent .mat-progress-bar-fill::after {
+    background-color: $primary-color;
+  }
+
+  mat-icon.mat-icon.notranslate.material-icons.mat-icon-no-color {
+    color: $purple2;
+    font-size: 16px;
+  }
+
+}
+
 .no-shadow {
   box-shadow: none !important;
 }
