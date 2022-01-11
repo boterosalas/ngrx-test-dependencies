@@ -264,10 +264,6 @@ beforeEach(waitForAsync(() => {
     });
   });
 
-  it('edit Carousel Modal', () => {
-    component.editCarouselModal(datos[0]);
-    expect(component.showUndefinedDate).toBeTruthy();
-  });
 
   it('file change', () => {
     const mockFile = new File([''], 'name.jpg', { type: 'text/html' });
@@ -278,21 +274,7 @@ beforeEach(waitForAsync(() => {
     expect(component.activebutton).not.toBeTruthy();
   });
 
-  it('save Imagen Carousel', () => {
-    component.visible = true;
-    component.undefinedDate = false;
-    component.dataAddImagen.controls.business.setValue(1);
-    component.dataAddImagen.controls.nameContent.setValue('name');
-    component.dataAddImagen.controls.link.setValue('https://www.exito.com/freidora-de-aire-bioceramic-384560');
-    component.dataAddImagen.controls.comision.setValue('20%');
-    component.datePublication = '2021-05-19';
-    component.dateFinishPublication = '2021-05-19';
-    component.hourDate = '02:05:00';
-    component.hourDateFinish = '02:15:00';
-    fixture.detectChanges();
-    component.saveImagenCarousel();
-    expect(mockContentService.saveOfertBusiness).toHaveBeenCalled();
-  });
+ 
 
   it('on No Click edit Carousel Modal', () => {
     component.onNoClick();
@@ -340,14 +322,6 @@ beforeEach(waitForAsync(() => {
     expect(component.undefinedDate).not.toBeTruthy();
   });
 
-  it('save carousel modal', () => {
-    component.saveCarouselModal();
-    expect(component.showUndefinedDate).toBeTruthy();
-    expect(component.nameFileCert).not.toBeTruthy();
-    expect(component.nameFileCert2).not.toBeTruthy();
-    expect(component.showErrorCert).not.toBeTruthy();
-    expect(component.activebutton).not.toBeTruthy();
-  });
 
   it('save Popup Modal', () => {
     component.savePopupModal();
@@ -377,7 +351,6 @@ beforeEach(waitForAsync(() => {
       })
     );
 
-    component.selectAll();
     component.selectAllOfertas();
 
     component.saveOrder([
@@ -391,7 +364,6 @@ beforeEach(waitForAsync(() => {
 
     component.deleteEveryOfertas();
     component.onNoClick();
-    component.deleteEvery();
     let datos = true;
     expect(datos).toBeTruthy();
   });
