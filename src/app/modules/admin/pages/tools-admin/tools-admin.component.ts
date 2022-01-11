@@ -10,58 +10,66 @@ import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 import { DialogOnboardingComponent } from '../../components/dialog-onboarding/dialog-onboarding.component';
 import { Subscription } from 'rxjs';
+
 export interface PeriodicElement {
   drag: any;
   bussiness: any;
   activated: any;
 }
+
 export interface PeriodicElement2 {
   drag: any;
   bussiness: any;
   activated: any;
 }
+
 @Component({
   selector: 'app-tools-admin',
   templateUrl: './tools-admin.component.html',
   styleUrls: ['./tools-admin.component.scss'],
 })
+
 export class ToolsAdminComponent implements OnInit, OnDestroy {
-  displayedColumns: string[] = ['drag', 'imagenWeb', 'nameContent', 'link', 'bussiness', 'comision', 'active', 'actions'];
+  
   displayedColumns2: string[] = ['drag', 'image', 'nameContent', 'link', 'bussiness', 'comision', 'active', 'actions'];
-  dataAddImagen: FormGroup;
+  
   dataAddImagenOfertas: FormGroup;
   dataAddImagenPopup: FormGroup;
-  selectAllVideosImg = 'Seleccionar todos';
   selectAllVideosImgOfer = 'Seleccionar todos';
-  active: boolean;
   active2: boolean;
   idCarousel = 0;
   idOfertas = 0;
   idPopup = 0;
   selected: any;
+
   @ViewChild('table', { static: false }) table: MatTable<PeriodicElement>;
+
   @ViewChild('table2', { static: false }) table2: MatTable<PeriodicElement2>;
-  @ViewChild('templateAddImagenCarousel', { static: false })
-  templateAddImagenCarousel: TemplateRef<any>;
+
   @ViewChild('templateAddImagenOfertas', { static: false })
   templateAddImagenOfertas: TemplateRef<any>;
+
   @ViewChild('templateAddImagenPopup', { static: false })
   templateAddImagenPopup: TemplateRef<any>;
+
   @ViewChild('templatePublication', { static: false })
   templatePublication: TemplateRef<any>;
 
   private subscription: Subscription = new Subscription();
+
   fileImgCat: any = '';
   nameFileCert = '';
   showErrorCert: boolean;
   selectedBuss = [];
   selectedSection = [];
+
   selectedColors = [
     { name: 'Rojo', color: '#FF3F4C' },
     { name: 'Amarillo', color: '#FFAF51' },
     { name: 'Morado', color: '#37236A' },
     { name: 'Lila', color: '#8D7EB7' },
   ];
+  
   fileImgCat2: any = '';
   nameFileCert2 = '';
   showErrorCert2: boolean;
@@ -96,14 +104,6 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
 
 
   constructor(private dialog: MatDialog, private content: ContentService, private auth: AuthService, private fb: FormBuilder) {
-    
-    this.dataAddImagen = this.fb.group({
-      nameContent: [null, Validators.required],
-      link: [null, Validators.required],
-      business: [null, Validators.required],
-      comision: [null, Validators.required],
-      image: [null],
-    });
 
     this.dataAddImagenOfertas = this.fb.group({
       nameContent: [null, Validators.required],
@@ -139,25 +139,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
   }
 
   public getOffers() {
-    this.subscription = this.content.getOffersbyType({ id: 'CARROUSEL', admin: true }).subscribe((resp) => {
-      const startTime: any = new Date();
 
-      this.dataSource = resp;
-      for (let index = 0; index < this.dataSource.length; index++) {
-        const date: any = new Date(this.dataSource[index].datestart);
-        this.dataSource[index].selected = false;
-        if (date - startTime > 0) {
-          this.dataSource[index].programmed = true;
-        } else {
-          this.dataSource[index].programmed = false;
-        }
-        if (!this.dataSource[index].dateend) {
-          this.dataSource[index].undefinedDate = true;
-        } else {
-          this.dataSource[index].undefinedDate = false;
-        }
-      }
-    });
     this.subscription = this.content.getOffersbyType({ id: 'OFERTA', admin: true }).subscribe((resp) => {
       const startTime: any = new Date();
       this.dataSourceOfer = resp;
@@ -213,6 +195,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
       }
     });
   }
+
   public getAllBusiness() {
     this.subscription = this.content.getAllBusiness().subscribe((resp) => {
       this.selectedBuss = resp;
@@ -247,20 +230,6 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
     }
   }
 
-  public dropTable(event: CdkDragDrop<PeriodicElement[]>) {
-    const prevIndex = this.dataSource.findIndex((d) => d === event.item.data);
-    moveItemInArray(this.dataSource, prevIndex, event.currentIndex);
-    this.table.renderRows();
-    const datosSourceSend = [];
-    for (let i = 0; i < this.dataSource.length; i++) {
-      this.dataSource[i].orderby = i + 1;
-      datosSourceSend.push({
-        id: this.dataSource[i].id,
-        orderby: i + 1,
-      });
-    }
-    this.saveOrder(datosSourceSend);
-  }
   public dropTable2(event: CdkDragDrop<PeriodicElement[]>) {
     const prevIndex = this.dataSourceOfer.findIndex((d) => d === event.item.data);
     moveItemInArray(this.dataSourceOfer, prevIndex, event.currentIndex);
@@ -275,9 +244,11 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
     }
     this.saveOrder(datosSourceSend);
   }
+
   public saveOrder(datos: any) {
     this.subscription = this.content.saveOrderOfertBusiness(datos).subscribe();
   }
+
   private getExtension(nameFile: string, getSize: number) {
     const splitExtFile = nameFile.split('.');
     const getExtFile = splitExtFile[splitExtFile.length - 1].toLocaleLowerCase();
@@ -289,6 +260,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
       this.validFormat = false;
     }
   }
+
   public onFileChangeFiles(event, param: string) {
     const target = event.target;
     const files = target.files[0];
@@ -368,42 +340,6 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
     }
   }
 
-  public editCarouselModal(element) {
-    this.showUndefinedDate = true;
-    const title = 'Editar Imagen';
-    const idBussiness = 1;
-    const edit = 0;
-    const template = this.templateAddImagenCarousel;
-    this.dataAddImagen.reset();
-    this.showErrorCert = false;
-    if (element.imageurlweb !== '') {
-      const datos = element.imageurlweb.split('/');
-      this.nameFileCert = datos[datos.length - 1];
-      this.checkButton();
-    }
-    this.fileImgCat = '';
-    this.dataAddImagen.controls.nameContent.setValue(element.description);
-    this.dataAddImagen.controls.link.setValue(element.link);
-
-    this.formateDateHour(element);
-
-    this.dataAddImagen.controls.business.setValue(element.idbusiness);
-    if (element.idbusiness === null) {
-      this.dataAddImagen.controls.business.setValue(0);
-    }
-    this.dataAddImagen.controls.comision.setValue(element.infoaditional);
-    this.selected = element.business;
-    this.idCarousel = element.id;
-    this.dialog.open(ModalGenericComponent, {
-      width: '450px',
-      data: {
-        title,
-        idBussiness,
-        template,
-        edit,
-      },
-    });
-  }
 
   public openModalonBoarding() {
     const dialog = this.dialog.open(DialogOnboardingComponent, {
@@ -498,35 +434,11 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
     this.dataAddImagenOfertas.controls.nameContent.setValue(element.description);
     this.dataAddImagenOfertas.controls.link.setValue(element.link);
     this.dataAddImagenOfertas.controls.business.setValue(element.idbusiness);
-    if (element.idbusiness === null) {
-      this.dataAddImagen.controls.business.setValue(0);
-    }
     this.dataAddImagenOfertas.controls.comision.setValue(element.infoaditional);
     this.idOfertas = element.id;
 
     this.formateDateHour(element);
 
-    this.dialog.open(ModalGenericComponent, {
-      width: '450px',
-      data: {
-        title,
-        idBussiness,
-        template,
-        edit,
-      },
-    });
-  }
-  public saveCarouselModal() {
-    const title = 'Nueva Imagen';
-    const idBussiness = 1;
-    const edit = 0;
-    const template = this.templateAddImagenCarousel;
-    this.showUndefinedDate = true;
-    this.idCarousel = 0;
-    this.dataAddImagen.reset();
-    this.nameFileCert = '';
-    this.showErrorCert = false;
-    this.activebutton = false;
     this.dialog.open(ModalGenericComponent, {
       width: '450px',
       data: {
@@ -594,11 +506,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
       title = 'Eliminar popup';
       message = '¿Está seguro que desea eliminar el popup seleccionado?';
       confirmButtonText = 'Eliminar popup';
-    } else {
-      title = 'Eliminar imagen';
-      message = '¿Estás seguro de eliminar la imagen seleccionada?';
-      confirmButtonText = 'Eliminar imagen';
-    }
+    } 
 
     Swal.fire({
       html: `<h3 class='delete-title-comision'>${title}</h3> <p class='w-container'>${message}</p>`,
@@ -617,83 +525,6 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
     });
   }
 
-  public saveImagenCarousel() {
-    let visible = 0;
-    if (this.visible) {
-      visible = 1;
-    } else {
-      visible = 0;
-    }
-    const bussiness = this.dataAddImagen.controls.business.value;
-    let buss = '';
-    for (let index = 0; index < this.selectedBuss.length; index++) {
-      if (this.selectedBuss[index].id.toString() === bussiness.toString()) {
-        buss = this.selectedBuss[index].code;
-      }
-    }
-    let idBuss;
-    if (this.dataAddImagen.controls.business.value === 0) {
-      idBuss = null;
-    } else {
-      idBuss = this.dataAddImagen.controls.business.value;
-    }
-
-    const datePublication = moment(this.datePublication).format('YYYY-MM-DD');
-    const dateFinishPublication = moment(this.dateFinishPublication).format('YYYY-MM-DD');
-    const hour = this.hourDate ? this.militaryHrFormat(this.hourDate) : '';
-    const hourEnd = this.hourDateFinish ? this.militaryHrFormat(this.hourDateFinish) : '';
-
-    const datestart = !this.visible ? `${datePublication} ${hour}:00` : '';
-    const dateend = !this.visible && !this.undefinedDate ? `${dateFinishPublication} ${hourEnd}:00` : '';
-
-    let datos: any = [
-      {
-        description: this.dataAddImagen.controls.nameContent.value,
-        link: this.dataAddImagen.controls.link.value,
-        idBusiness: idBuss,
-        Business: buss,
-        infoAditional: this.dataAddImagen.controls.comision.value,
-        active: visible,
-        type: 'CARROUSEL',
-        datestart,
-        dateend,
-      },
-    ];
-
-    if (this.idCarousel === 0) {
-      datos = [
-        {
-          ...datos[0],
-          imageWeb: this.fileImgCat,
-          imageMobile: this.fileImgCat2,
-        },
-      ];
-    } else {
-      if (this.fileImgCat !== '') {
-        datos = [
-          {
-            ...datos[0],
-            id: this.idCarousel,
-            imageWeb: this.fileImgCat,
-            imageMobile: this.fileImgCat2,
-          },
-        ];
-      } else {
-        datos = [
-          {
-            ...datos[0],
-            id: this.idCarousel,
-          },
-        ];
-      }
-    }
-
-    this.subscription = this.content.saveOfertBusiness(datos).subscribe(() => {
-      this.dataAddImagen.reset();
-      this.dialog.closeAll();
-      this.getOffers();
-    });
-  }
 
   public saveImagenOfertas() {
     let visible = 0;
@@ -772,6 +603,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
       this.getOffers();
     });
   }
+
   public saveImagenPopup() {
     let visible;
     if (this.dateFinishPublication && this.visible) {
@@ -831,39 +663,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
       this.getOffers();
     });
   }
-  public selectAll() {
-    if (this.selectAllVideosImg === 'Seleccionar todos') {
-      for (let i = 0; i < this.dataSource.length; i++) {
-        this.dataSource[i].selected = true;
-      }
-      if (this.dataSource.length > 0) {
-        this.active = true;
-        this.selectAllVideosImg = 'Deseleccionar todos';
-      }
-    } else {
-      for (let i = 0; i < this.dataSource.length; i++) {
-        this.dataSource[i].selected = false;
-      }
 
-      if (this.dataSource.length > 0) {
-        this.active = false;
-        this.selectAllVideosImg = 'Seleccionar todos';
-      }
-    }
-  }
-  public loadDelete() {
-    const index = [];
-    this.dataSource.forEach((element, i) => {
-      if (element.selected === true) {
-        index.push(i);
-      }
-    });
-    if (index.length > 0) {
-      this.active = true;
-    } else {
-      this.active = false;
-    }
-  }
   public loadDelete2() {
     const index = [];
     this.dataSourceOfer.forEach((content, i) => {
@@ -898,6 +698,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
       }
     }
   }
+
   public deleteEveryOfertas() {
     Swal.fire({
       html: "<h3 class='delete-title-comision'>Eliminar Imagenes</h3> <p class='w-container'>¿Estás seguro de eliminar las imagenes seleccionadas?</p>",
@@ -923,30 +724,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
     });
   }
 
-  public deleteEvery() {
-    Swal.fire({
-      html: "<h3 class='delete-title-comision'>Eliminar Imagenes</h3> <p class='w-container'>¿Estás seguro de eliminar las imagenes seleccionadas?</p>",
-      confirmButtonText: 'Eliminar imagen',
-      cancelButtonText: 'Cancelar',
-      showCancelButton: true,
-      confirmButtonClass: 'updateokdelete order-last',
-      cancelButtonClass: 'updatecancel',
-      allowOutsideClick: false,
-    }).then((resp: any) => {
-      if (resp.dismiss !== 'cancel') {
-        const datos = [];
-        for (let index = 0; index < this.dataSource.length; index++) {
-          if (this.dataSource[index].selected === true) {
-            datos.push(this.dataSource[index].id);
-          }
-        }
-        this.subscription = this.content.deleteOfer(datos).subscribe(() => {
-          this.getOffers();
-          this.active = false;
-        });
-      }
-    });
-  }
+  
 
   public deleteBoard(id: any) {
     Swal.fire({
@@ -979,7 +757,6 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
 
   public onNoClick() {
     this.dataAddImagenOfertas.reset();
-    this.dataAddImagen.reset();
     this.datePublication = null;
     this.hourDate = null;
     this.dateFinishPublication = null;

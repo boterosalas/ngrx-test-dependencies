@@ -212,6 +212,26 @@ export class UtilsService {
       : militaryTime[0] + ':' + militaryTime[1] + ' AM';
   }
 
+  public timeFormat(time) {
+    const hour = time.split(':')[0];
+    const minute = time.split(':')[1];
+
+    if (hour >= 12) {
+      if (hour === 12) {
+        const h = hour;
+        const m = minute + ' PM';
+        return h + ':' + m;
+      } else {
+        const h = hour - 12;
+        const m = minute + ' PM';
+        return h + ':' + m;
+      }
+    } else {
+      const h = parseInt(hour);
+      return h + ':' + minute + ' AM';
+    }
+  }
+
   public download(data, type) {
     const blob = new Blob([data], { type: type });
     const url = window.URL.createObjectURL(blob);
