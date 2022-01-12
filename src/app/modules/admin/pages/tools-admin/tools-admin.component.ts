@@ -21,6 +21,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
   dataAddImagenPopup: FormGroup;
   idPopup = 0;
   selected: any;
+  maxDate = moment(new Date());
 
   @ViewChild('templateAddImagenPopup', { static: false })
   templateAddImagenPopup: TemplateRef<any>;
