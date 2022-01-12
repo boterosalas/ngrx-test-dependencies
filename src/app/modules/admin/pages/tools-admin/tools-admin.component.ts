@@ -1,4 +1,3 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,17 +11,6 @@ import { DialogOnboardingComponent } from '../../components/dialog-onboarding/di
 import { Subscription } from 'rxjs';
 import { UtilsService } from 'src/app/services/utils.service';
 
-export interface PeriodicElement {
-  drag: any;
-  bussiness: any;
-  activated: any;
-}
-
-export interface PeriodicElement2 {
-  drag: any;
-  bussiness: any;
-  activated: any;
-}
 
 @Component({
   selector: 'app-tools-admin',
@@ -33,10 +21,6 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
   dataAddImagenPopup: FormGroup;
   idPopup = 0;
   selected: any;
-
-  @ViewChild('table', { static: false }) table: MatTable<PeriodicElement>;
-
-  @ViewChild('table2', { static: false }) table2: MatTable<PeriodicElement2>;
 
   @ViewChild('templateAddImagenPopup', { static: false })
   templateAddImagenPopup: TemplateRef<any>;
@@ -62,18 +46,11 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
   fileImgCat2: any = '';
   nameFileCert2 = '';
   showErrorCert2: boolean;
+
   activebutton: boolean;
-  validFormat: boolean;
-  business: any;
-  dataSourceOfer = [];
   activeButtonOfer: boolean;
-  maxDate = new Date();
   minHours: any;
   minHoursFinish: any;
-  disabledButtonEr = true;
-  disabledButtonPu = true;
-  contadorDates = 0;
-  dateForm: FormGroup;
   datePublication: any = '';
   hourDate: any = '';
   dateFinishPublication: any = '';
@@ -81,10 +58,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
   visible = false;
   undefinedDate = false;
   showUndefinedDate = true;
-
-  dataSource = [];
   dataSourcePopup = [];
-
   dataPopupActive = [];
   dataPopupProgrammed = [];
   dataPopupRoughCopy = [];

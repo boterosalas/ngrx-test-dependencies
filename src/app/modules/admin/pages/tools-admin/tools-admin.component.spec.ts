@@ -330,5 +330,41 @@ beforeEach(waitForAsync(() => {
     expect(boarding).not.toBeUndefined();
   });
 
+  it('upload image', () => {
+    component.extension = 'jpg';
+    component.size = 150;
+    let event = {
+      target: {
+        files: [
+          {
+            name: "comision.jpg",
+            size: 2559,
+            type: "image/jpg"
+          }
+        ]
+      }
+    }
+    component.uploadFileImage(event);
+    expect(event).toBeDefined();
+  });
+
+  it('upload image 2', () => {
+    component.extension = 'jpg';
+    component.size = 150;
+    let event = {
+      target: {
+        files: [
+          {
+            name: "comision.jpg",
+            size: 2559,
+            type: "image/jpg"
+          }
+        ]
+      }
+    }
+    component.uploadFileImage2(event);
+    expect(event).toBeDefined();
+  });
+
 
 });
