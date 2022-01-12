@@ -96,6 +96,7 @@ import { FormBusinessComponent } from './components/form-business/form-business.
 import { PartnersComponent } from './pages/partners/partners.component';
 import { PartnerListComponent } from './components/partner-list/partner-list.component';
 import { FormPartnerComponent } from './components/form-partner/form-partner.component';
+import { TableCarruselComponent } from './components/table-carrusel/table-carrusel.component';
 
 const routes: Routes = [
   {
@@ -440,7 +441,8 @@ const routes: Routes = [
     FormBusinessComponent,
     PartnersComponent,
     PartnerListComponent,
-    FormPartnerComponent
+    FormPartnerComponent,
+    TableCarruselComponent,
   ],
   imports: [
     AngularEditorModule,

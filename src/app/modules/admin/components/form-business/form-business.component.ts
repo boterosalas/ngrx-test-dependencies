@@ -72,7 +72,6 @@ export class FormBusinessComponent implements OnInit, OnChanges {
 
     this.utils.nameFile.subscribe(nameFile => this.nameFile = nameFile);
     this.utils.errorFile.subscribe(errorFile => this.errorFile = errorFile);
-
     
   }
 
