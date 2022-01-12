@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 import { DialogOnboardingComponent } from '../../components/dialog-onboarding/dialog-onboarding.component';
 import { Subscription } from 'rxjs';
+import { UtilsService } from 'src/app/services/utils.service';
 
 export interface PeriodicElement {
   drag: any;
@@ -28,26 +29,14 @@ export interface PeriodicElement2 {
   templateUrl: './tools-admin.component.html',
   styleUrls: ['./tools-admin.component.scss'],
 })
-
 export class ToolsAdminComponent implements OnInit, OnDestroy {
-  
-  displayedColumns2: string[] = ['drag', 'image', 'nameContent', 'link', 'bussiness', 'comision', 'active', 'actions'];
-  
-  dataAddImagenOfertas: FormGroup;
   dataAddImagenPopup: FormGroup;
-  selectAllVideosImgOfer = 'Seleccionar todos';
-  active2: boolean;
-  idCarousel = 0;
-  idOfertas = 0;
   idPopup = 0;
   selected: any;
 
   @ViewChild('table', { static: false }) table: MatTable<PeriodicElement>;
 
   @ViewChild('table2', { static: false }) table2: MatTable<PeriodicElement2>;
-
-  @ViewChild('templateAddImagenOfertas', { static: false })
-  templateAddImagenOfertas: TemplateRef<any>;
 
   @ViewChild('templateAddImagenPopup', { static: false })
   templateAddImagenPopup: TemplateRef<any>;
@@ -69,7 +58,7 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
     { name: 'Morado', color: '#37236A' },
     { name: 'Lila', color: '#8D7EB7' },
   ];
-  
+
   fileImgCat2: any = '';
   nameFileCert2 = '';
   showErrorCert2: boolean;
@@ -101,18 +90,10 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
   dataPopupRoughCopy = [];
   dataPopupExpire = [];
   onboarding = [];
+  extension: string;
+  size: number;
 
-
-  constructor(private dialog: MatDialog, private content: ContentService, private auth: AuthService, private fb: FormBuilder) {
-
-    this.dataAddImagenOfertas = this.fb.group({
-      nameContent: [null, Validators.required],
-      link: [null, Validators.required],
-      business: [null, Validators.required],
-      comision: [null, Validators.required],
-      image: [null],
-    });
-
+  constructor(private dialog: MatDialog, private content: ContentService, private auth: AuthService, private fb: FormBuilder, private utils: UtilsService) {
     this.dataAddImagenPopup = this.fb.group({
       nameContent: [null, Validators.required],
       link: [null],
@@ -122,43 +103,21 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
       textbutton: [null, Validators.required],
       colorbutton: [null, Validators.required],
     });
-
   }
 
   ngOnInit() {
     this.getOffers();
-    this.getAllBusiness();
     this.getSectionsClicker();
     this.getBoardings();
   }
 
   public getBoardings() {
-    this.subscription = this.content.getBoarding().subscribe(board => {
+    this.subscription = this.content.getBoarding().subscribe((board) => {
       this.onboarding = board;
     });
   }
 
   public getOffers() {
-
-    this.subscription = this.content.getOffersbyType({ id: 'OFERTA', admin: true }).subscribe((resp) => {
-      const startTime: any = new Date();
-      this.dataSourceOfer = resp;
-      for (let index = 0; index < this.dataSourceOfer.length; index++) {
-        const date: any = new Date(this.dataSourceOfer[index].datestart);
-        this.dataSourceOfer[index].selected = false;
-        if (date - startTime > 0) {
-          this.dataSourceOfer[index].programmed = true;
-        } else {
-          this.dataSourceOfer[index].programmed = false;
-        }
-
-        if (!this.dataSourceOfer[index].dateend) {
-          this.dataSourceOfer[index].undefinedDate = true;
-        } else {
-          this.dataSourceOfer[index].undefinedDate = false;
-        }
-      }
-    });
     this.subscription = this.content.getOffersbyType({ id: 'POPUP', admin: true }).subscribe((resp) => {
       this.dataPopupActive = [];
       this.dataPopupProgrammed = [];
@@ -196,20 +155,6 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
     });
   }
 
-  public getAllBusiness() {
-    this.subscription = this.content.getAllBusiness().subscribe((resp) => {
-      this.selectedBuss = resp;
-
-      this.selectedBuss.push({
-        code: 'clickam',
-        description: 'Clickam',
-        id: 0,
-        placeholder: 'TIPO DE REPORTE',
-        tabtablecommission: 'Clickam',
-      });
-    });
-  }
-
   public getSectionsClicker() {
     this.subscription = this.auth.getPermisionByUser('CLICKER').subscribe((resp) => {
       this.selectedSection = resp;
@@ -230,106 +175,6 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
     }
   }
 
-  public dropTable2(event: CdkDragDrop<PeriodicElement[]>) {
-    const prevIndex = this.dataSourceOfer.findIndex((d) => d === event.item.data);
-    moveItemInArray(this.dataSourceOfer, prevIndex, event.currentIndex);
-    this.table2.renderRows();
-    const datosSourceSend = [];
-    for (let i = 0; i < this.dataSourceOfer.length; i++) {
-      this.dataSourceOfer[i].orderby = i + 1;
-      datosSourceSend.push({
-        id: this.dataSourceOfer[i].id,
-        orderby: i + 1,
-      });
-    }
-    this.saveOrder(datosSourceSend);
-  }
-
-  public saveOrder(datos: any) {
-    this.subscription = this.content.saveOrderOfertBusiness(datos).subscribe();
-  }
-
-  private getExtension(nameFile: string, getSize: number) {
-    const splitExtFile = nameFile.split('.');
-    const getExtFile = splitExtFile[splitExtFile.length - 1].toLocaleLowerCase();
-    this.validFormat = false;
-    if ('jpg' === getExtFile) {
-      this.validFormat = true;
-    }
-    if (300 < getSize / 1000) {
-      this.validFormat = false;
-    }
-  }
-
-  public onFileChangeFiles(event, param: string) {
-    const target = event.target;
-    const files = target.files[0];
-    const nameFileCarrousel = files.name;
-    const readerCarrousel = new FileReader();
-    const sizeFileCarrousel = files.size;
-    const fileList: FileList = target.files;
-    this.getExtension(fileList[0].name, fileList[0].size);
-    if (target.files && target.files.length) {
-      const [Tfiles] = target.files;
-      const fileBlobCarrousel = new Blob([Tfiles]);
-      const newFile = new File([fileBlobCarrousel], nameFileCarrousel);
-      readerCarrousel.readAsDataURL(newFile);
-      readerCarrousel.onload = () => {
-        this.getExtension(nameFileCarrousel, sizeFileCarrousel);
-        if (this.validFormat === true) {
-          this.fileImgCat = readerCarrousel.result;
-          this.fileImgCat = this.fileImgCat.split(',')[1];
-          this.nameFileCert = nameFileCarrousel;
-          this.showErrorCert = false;
-          this.activeButtonOfer = true;
-          if (this.nameFileCert !== '') {
-            this.activebutton = true;
-          } else {
-            this.activebutton = false;
-          }
-        } else {
-          this.showErrorCert = true;
-          this.nameFileCert = nameFileCarrousel;
-          this.activebutton = false;
-          this.activeButtonOfer = false;
-        }
-      };
-    }
-  }
-  
-  public onFileChangeFilesSecond(event, param: string) {
-    const target = event.target;
-    const files2 = target.files[0];
-    const nameFileCarrousel2 = files2.name;
-    const newReader = new FileReader();
-    const sizeFile = target.files[0].size;
-    const fileList: FileList = target.files;
-    this.getExtension(fileList[0].name, sizeFile);
-    if (target.files && target.files.length) {
-      const [Tfiles2] = target.files;
-      const fileBlob = new Blob([Tfiles2]);
-      const newFile2 = new File([fileBlob], nameFileCarrousel2);
-      newReader.readAsDataURL(newFile2);
-      newReader.onload = () => {
-        if (this.validFormat === true) {
-          this.fileImgCat2 = newReader.result;
-          this.fileImgCat2 = this.fileImgCat2.split(',')[1];
-          this.nameFileCert2 = nameFileCarrousel2;
-          this.showErrorCert2 = false;
-          if (this.nameFileCert !== '') {
-            this.activebutton = true;
-          } else {
-            this.activebutton = false;
-          }
-        } else {
-          this.showErrorCert2 = true;
-          this.nameFileCert2 = nameFileCarrousel2;
-          this.activebutton = false;
-        }
-      };
-    }
-  }
-
   public checkButton() {
     if (this.nameFileCert !== '' && this.nameFileCert2 !== '') {
       this.activebutton = true;
@@ -340,16 +185,14 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
     }
   }
 
-
   public openModalonBoarding() {
     const dialog = this.dialog.open(DialogOnboardingComponent, {
       width: '450px',
     });
 
-    dialog.beforeClosed().subscribe(board => {
+    dialog.beforeClosed().subscribe((board) => {
       this.getBoardings();
     });
-
   }
 
   public editPopupModal(elementP) {
@@ -390,111 +233,32 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
     });
   }
 
-  public formateDateHour(element) {
-    let hour;
-    if (element.datestart) {
-      this.datePublication = moment(element.datestart).format();
-      hour = element.datestart.split('T');
-      this.hourDate = this.timeFormat(hour[1]);
-    }
+  public uploadFileImage(e) {
+    this.extension = 'jpg';
+    this.size = 150;
+    this.utils.onFileChangeFiles(e, this.extension, this.size, 'file');
 
-    if (element.dateend) {
-      this.dateFinishPublication = moment(element.dateend).format();
-      hour = element.dateend.split('T');
-      this.hourDateFinish = this.timeFormat(hour[1]);
-    } else {
-      this.undefinedDate = true;
-    }
-
-    this.visible = element.active;
-  }
-
-  public activate(element) {
-    const datos = [{ id: element.id, active: element.active }];
-    this.subscription = this.content.saveActiveBanner(datos).subscribe();
-  }
-
-  public editOfertasModal(element) {
-    this.showUndefinedDate = true;
-    const title = 'Editar Imagen';
-    const idBussiness = 1;
-    const edit = 0;
-    const template = this.templateAddImagenOfertas;
-    this.showErrorCert = false;
-    if (element.imageurlweb !== '') {
-      const datos = element.imageurlweb.split('/');
-      this.nameFileCert = datos[datos.length - 1];
-      const datos2 = element.imageurlmobile.split('/');
-      this.nameFileCert2 = datos2[datos2.length - 1];
-      this.checkButton();
-    }
-    this.fileImgCat = '';
-    this.fileImgCat2 = '';
-    this.dataAddImagenOfertas.reset();
-    this.dataAddImagenOfertas.controls.nameContent.setValue(element.description);
-    this.dataAddImagenOfertas.controls.link.setValue(element.link);
-    this.dataAddImagenOfertas.controls.business.setValue(element.idbusiness);
-    this.dataAddImagenOfertas.controls.comision.setValue(element.infoaditional);
-    this.idOfertas = element.id;
-
-    this.formateDateHour(element);
-
-    this.dialog.open(ModalGenericComponent, {
-      width: '450px',
-      data: {
-        title,
-        idBussiness,
-        template,
-        edit,
-      },
+    this.utils.fileB64.subscribe((val:any) => {
+      this.fileImgCat = val;
     });
-  }
-  
-  public saveOfertasModal() {
-    this.showUndefinedDate = true;
-    const title = 'Nueva Imagen';
-    const idBussiness = 1;
-    const edit = 0;
-    const template = this.templateAddImagenOfertas;
-    this.dataAddImagenOfertas.reset();
-    this.idOfertas = 0;
-    this.showErrorCert = false;
-    this.nameFileCert2 = '';
-    this.nameFileCert = '';
-    this.activeButtonOfer = false;
-    this.dialog.open(ModalGenericComponent, {
-      width: '450px',
-      data: {
-        title,
-        idBussiness,
-        template,
-        edit,
-      },
-    });
+
+    this.utils.nameFile.subscribe(nameFile => this.nameFileCert = nameFile);
+    this.utils.errorFile.subscribe(errorFile => this.showErrorCert = errorFile);
+    
   }
 
-  public savePopupModal() {
-    this.showUndefinedDate = false;
-    this.undefinedDate = false;
-    const titlePopup = 'Popup';
-    const idBussiness = 2;
-    const editPopup = 0;
-    const templatePopup = this.templateAddImagenPopup;
-    this.dataAddImagenPopup.reset();
-    this.idPopup = 0;
-    this.showErrorCert = false;
-    this.activeButtonOfer = false;
-    this.nameFileCert = '';
-    this.nameFileCert2 = '';
-    this.dialog.open(ModalGenericComponent, {
-      width: '450px',
-      data: {
-        title: titlePopup,
-        template: templatePopup,
-        idBussiness,
-        edit: editPopup,
-      },
+  public uploadFileImage2(e) {
+    this.extension = 'jpg';
+    this.size = 150;
+    this.utils.onFileChangeFiles(e, this.extension, this.size, 'file2');
+
+    this.utils.file2B64.subscribe((val:any) => {
+      this.fileImgCat2 = val;
     });
+
+    this.utils.nameFile2.subscribe(nameFile => this.nameFileCert2 = nameFile);
+    this.utils.errorFile2.subscribe(errorFile => this.showErrorCert2 = errorFile);
+    
   }
 
   public deleteOfer(element, type) {
@@ -525,82 +289,51 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
     });
   }
 
+  public formateDateHour(element) {
+    let hour;
+    if (element.datestart) {
+      this.datePublication = moment(element.datestart).format();
+      hour = element.datestart.split('T');
+      this.hourDate = this.timeFormat(hour[1]);
+    }
 
-  public saveImagenOfertas() {
-    let visible = 0;
-    if (this.visible) {
-      visible = 1;
+    if (element.dateend) {
+      this.dateFinishPublication = moment(element.dateend).format();
+      hour = element.dateend.split('T');
+      this.hourDateFinish = this.timeFormat(hour[1]);
     } else {
-      visible = 0;
-    }
-    const bussiness = this.dataAddImagenOfertas.controls.business.value;
-    let buss = '';
-    for (let index = 0; index < this.selectedBuss.length; index++) {
-      if (this.selectedBuss[index].id.toString() === bussiness.toString()) {
-        buss = this.selectedBuss[index].code;
-      }
-    }
-    let idBuss;
-    if (this.dataAddImagenOfertas.controls.business.value === 0) {
-      idBuss = null;
-    } else {
-      idBuss = this.dataAddImagenOfertas.controls.business.value;
+      this.undefinedDate = true;
     }
 
-    const datePublication = moment(this.datePublication).format('YYYY-MM-DD');
-    const dateFinishPublication = moment(this.dateFinishPublication).format('YYYY-MM-DD');
-    const hour = this.hourDate ? this.militaryHrFormat(this.hourDate) : '';
-    const hourEnd = this.hourDateFinish ? this.militaryHrFormat(this.hourDateFinish) : '';
+    this.visible = element.active;
+  }
 
-    const datestart = !this.visible ? `${datePublication} ${hour}:00` : '';
-    const dateend = !this.visible && !this.undefinedDate ? `${dateFinishPublication} ${hourEnd}:00` : '';
+  public activate(element) {
+    const datos = [{ id: element.id, active: element.active }];
+    this.subscription = this.content.saveActiveBanner(datos).subscribe();
+  }
 
-    let datos: any = [
-      {
-        description: this.dataAddImagenOfertas.controls.nameContent.value,
-        link: this.dataAddImagenOfertas.controls.link.value,
-        idBusiness: idBuss,
-        Business: buss,
-        infoAditional: this.dataAddImagenOfertas.controls.comision.value,
-        active: visible,
-        type: 'OFERTA',
-        datestart,
-        dateend,
+  public savePopupModal() {
+    this.showUndefinedDate = false;
+    this.undefinedDate = false;
+    const titlePopup = 'Popup';
+    const idBussiness = 2;
+    const editPopup = 0;
+    const templatePopup = this.templateAddImagenPopup;
+    this.dataAddImagenPopup.reset();
+    this.idPopup = 0;
+    this.showErrorCert = false;
+    this.activeButtonOfer = false;
+    this.nameFileCert = '';
+    this.nameFileCert2 = '';
+    this.dialog.open(ModalGenericComponent, {
+      width: '450px',
+      data: {
+        title: titlePopup,
+        template: templatePopup,
+        idBussiness,
+        edit: editPopup,
       },
-    ];
-
-    if (this.idOfertas === 0) {
-      datos = [
-        {
-          ...datos[0],
-          imageWeb: this.fileImgCat,
-          imageMobile: this.fileImgCat2,
-        },
-      ];
-    } else {
-      if (this.fileImgCat !== '') {
-        datos = [
-          {
-            ...datos[0],
-            id: this.idOfertas,
-            imageWeb: this.fileImgCat,
-            imageMobile: this.fileImgCat2,
-          },
-        ];
-      } else {
-        datos = [
-          {
-            ...datos[0],
-            id: this.idOfertas,
-          },
-        ];
-      }
-    }
-
-    this.subscription = this.content.saveOfertBusiness(datos).subscribe(() => {
-      this.dataAddImagenOfertas.reset();
-      this.dialog.closeAll();
-      this.getOffers();
     });
   }
 
@@ -664,68 +397,6 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
     });
   }
 
-  public loadDelete2() {
-    const index = [];
-    this.dataSourceOfer.forEach((content, i) => {
-      if (content.selected === true) {
-        index.push(i);
-      }
-    });
-    if (index.length > 0) {
-      this.active2 = true;
-    } else {
-      this.active2 = false;
-    }
-  }
-
-  public selectAllOfertas() {
-    if (this.selectAllVideosImgOfer === 'Seleccionar todos') {
-      for (let i = 0; i < this.dataSourceOfer.length; i++) {
-        this.dataSourceOfer[i].selected = true;
-      }
-      if (this.dataSourceOfer.length > 0) {
-        this.active2 = true;
-        this.selectAllVideosImgOfer = 'Deseleccionar todos';
-      }
-    } else {
-      for (let i = 0; i < this.dataSourceOfer.length; i++) {
-        this.dataSourceOfer[i].selected = false;
-      }
-
-      if (this.dataSourceOfer.length > 0) {
-        this.active2 = false;
-        this.selectAllVideosImgOfer = 'Seleccionar todos';
-      }
-    }
-  }
-
-  public deleteEveryOfertas() {
-    Swal.fire({
-      html: "<h3 class='delete-title-comision'>Eliminar Imagenes</h3> <p class='w-container'>¿Estás seguro de eliminar las imagenes seleccionadas?</p>",
-      confirmButtonText: 'Eliminar imagen',
-      cancelButtonText: 'Cancelar',
-      showCancelButton: true,
-      confirmButtonClass: 'updateokdelete order-last',
-      cancelButtonClass: 'updatecancel',
-      allowOutsideClick: false,
-    }).then((resp: any) => {
-      if (resp.dismiss !== 'cancel') {
-        const datos = [];
-        for (let index = 0; index < this.dataSourceOfer.length; index++) {
-          if (this.dataSourceOfer[index].selected === true) {
-            datos.push(this.dataSourceOfer[index].id);
-          }
-        }
-        this.subscription = this.content.deleteOfer(datos).subscribe(() => {
-          this.getOffers();
-          this.active2 = false;
-        });
-      }
-    });
-  }
-
-  
-
   public deleteBoard(id: any) {
     Swal.fire({
       html: "<h3 class='delete-title-comision'>Eliminar contenido</h3> <p class='w-container'>¿Está seguro que desea eliminar el contenido seleccionado?</p>",
@@ -747,16 +418,14 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
   public editBoard(data: any) {
     const edit = this.dialog.open(DialogOnboardingComponent, {
       width: '450px',
-      data
+      data,
     });
-    edit.beforeClosed().subscribe(board => {
+    edit.beforeClosed().subscribe((board) => {
       this.getBoardings();
     });
-
   }
 
   public onNoClick() {
-    this.dataAddImagenOfertas.reset();
     this.datePublication = null;
     this.hourDate = null;
     this.dateFinishPublication = null;
@@ -824,5 +493,4 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
 }

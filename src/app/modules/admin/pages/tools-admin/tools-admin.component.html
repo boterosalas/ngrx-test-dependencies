@@ -11,7 +11,7 @@
         <span class="gtmTerminosCondicionesClicTerminosLegales">Carrusel</span>
       </ng-template>
 
-      <app-table-carrusel></app-table-carrusel>
+      <app-table-carrusel typeConsult="CARROUSEL"></app-table-carrusel>
 
     </mat-tab>
 
@@ -19,147 +19,7 @@
       <ng-template mat-tab-label>
         <span class="gtmTerminosCondicionesClicTerminosLegales">Ofertas</span>
       </ng-template>
-      <div class="mt-3">
-        <div fxLayout="row" class="mb-2">
-          <button mat-raised-button color="orange" (click)="selectAllOfertas()" class="button-selected mr-4">
-            <img class="icon-download" src="assets/img/dashboard/icon-check.svg" alt="descarga" />
-            {{ selectAllVideosImgOfer }}
-          </button>
-          <button
-            mat-raised-button
-            (click)="deleteEveryOfertas()"
-            [ngClass]="active2 === true ? 'button-selected-red' : 'button-selected-red-disabled'"
-            [disabled]="!active2"
-          >
-            <img class="icon-download" src="assets/img/dashboard/icon-trash-red.svg" alt="descarga" />
-            Borrar
-          </button>
-        </div>
-        <table
-          mat-table
-          #table2
-          class="mat-elevation-z2"
-          [dataSource]="dataSourceOfer"
-          cdkDropList
-          [cdkDropListData]="dataSourceOfer"
-          (cdkDropListDropped)="dropTable2($event)"
-        >
-          <ng-container matColumnDef="drag">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let element; let i = index">
-              <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign.gt-xs="end center" fxLayoutAlign.xs="center center">
-                <mat-icon matSuffix class="mr-1 blue cursor-pointer" cdkDragHandle>drag_indicator</mat-icon>
-                <mat-checkbox [(ngModel)]="element.selected" class="check-margin mr-2" (change)="loadDelete2()"> </mat-checkbox>
-              </div>
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="image">
-            <th mat-header-cell *matHeaderCellDef style="font-weight: bold">IMAGEN</th>
-            <td mat-cell *matCellDef="let element">
-              <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign.gt-xs="start center" fxLayoutAlign.xs="center center">
-                <span fxLayout="column">
-                  <img
-                    class="iconb-bussiness mt-2 mb-2 mr-2"
-                    [src]="element.imageurlmobile"
-                    style="width: 75px; height: 42px; border-radius: 10px"
-                  />
-                </span>
-              </div>
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="nameContent">
-            <th mat-header-cell *matHeaderCellDef style="width: 20%; font-weight: bold">NOMBRE DE CONTENIDO</th>
-            <td mat-cell *matCellDef="let element">
-              <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign.gt-xs="start center" fxLayoutAlign.xs="center center">
-                <span fxLayout="column" class="f-16 mr-2" fxHide.xs="true">
-                  {{ element.description }}
-                </span>
-              </div>
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="link">
-            <th mat-header-cell class="tr" *matHeaderCellDef style="width: 30%; font-weight: bold">LINK</th>
-            <td mat-cell *matCellDef="let element; let i = index">
-              <div fxLayout="row">
-                <textarea
-                  fxLayout="column"
-                  class="f-16 mr-2"
-                  fxHide.xs="true"
-                  style="
-                    width: 245px;
-                    height: 100px;
-                    text-decoration: underline;
-                    overflow: hidden;
-                    border: none;
-                    resize: none;
-                    color: #8d7eb7 !important;
-                    background: transparent;
-                  "
-                  readonly
-                  >{{ element.link }}</textarea
-                >
-              </div>
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="bussiness">
-            <th mat-header-cell class="tr" *matHeaderCellDef style="width: 20%; font-weight: bold">NEGOCIO</th>
-            <td mat-cell *matCellDef="let element; let i = index">
-              <div fxLayout="row" fxLayoutGap="10px">
-                <span fxLayout="column" class="f-16" fxHide.xs="true">
-                  {{ element.business }}
-                </span>
-              </div>
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="comision">
-            <th mat-header-cell class="tr" *matHeaderCellDef style="width: 20%; font-weight: bold">COMISIÓN</th>
-            <td mat-cell *matCellDef="let element; let i = index">
-              <div fxLayout="row" fxLayoutGap="10px">
-                <span fxLayout="column" class="f-16" fxHide.xs="true">
-                  {{ element.infoaditional }}
-                </span>
-              </div>
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="active">
-            <th mat-header-cell class="tr" *matHeaderCellDef style="width: 7%; font-weight: bold">ACTIVO / INACTIVO</th>
-            <td mat-cell *matCellDef="let element; let i = index">
-              <div fxLayout="row" fxLayoutGap="10px">
-                <mat-slide-toggle
-                  *ngIf="!element.programmed && !element.undefinedDate"
-                  [(ngModel)]="element.active"
-                  (change)="activate(element)"
-                  color="orange2-toggle"
-                ></mat-slide-toggle>
-                <div *ngIf="element.programmed" class="programmed">
-                  <h4>Programada</h4>
-                  <p>{{ formatDate(element.datestart) }}</p>
-                </div>
-                <div *ngIf="!element.programmed && element.undefinedDate" class="programmed">
-                  <h4>Tiempo indefinido</h4>
-                </div>
-              </div>
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef class="center-text" style="font-weight: bold">ACCIONES</th>
-            <td mat-cell *matCellDef="let element; let i = index">
-              <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign.gt-xs="center" fxLayoutAlign.xs="center center">
-                <i class="tio-edit style-icon cursor-pointer" (click)="editOfertasModal(element)"></i>
-                <img class="cursor-pointer" (click)="deleteOfer(element, '')" src="/assets/img/dashboard/icon-remove-comision.svg" alt="" />
-              </div>
-            </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns2; let i = index" cdkDrag [cdkDragData]="row"></tr>
-        </table>
-        <div class="mt-3 mb-3" fxLayout="row" fxLayoutAlign="end end">
-          <button mat-raised-button color="orange" (click)="saveOfertasModal()" id="download-users" class="ml-2">Agregar imagen</button>
-        </div>
-      </div>
+      <app-table-carrusel typeConsult="OFERTA"></app-table-carrusel>
     </mat-tab>
 
     <mat-tab>
@@ -295,113 +155,6 @@
 </div>
 
 
-<ng-template #templateAddImagenOfertas>
-  <div ngClass="delete-container">
-    <div>
-      <form [formGroup]="dataAddImagenOfertas">
-        <mat-form-field style="width: 370px">
-          <input
-            matInput
-            placeholder="NOMBRE DE CONTENIDO"
-            formControlName="nameContent"
-            type="text"
-            required
-            class="text-area-heigth"
-            style="color: #37236a"
-          />
-          <mat-error
-            id="requiredName"
-            *ngIf="dataAddImagenOfertas.controls.nameContent.invalid && dataAddImagenOfertas.controls.nameContent.errors.required"
-            >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Nombre de contenido' } }}</mat-error
-          >
-        </mat-form-field>
-        <mat-form-field style="width: 370px">
-          <input matInput placeholder="LINK" type="text" formControlName="link" required class="text-area-heigth" style="color: #37236a" />
-          <mat-error
-            id="requiredName"
-            *ngIf="dataAddImagenOfertas.controls.link.invalid && dataAddImagenOfertas.controls.link.errors.required"
-            >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Link' } }}</mat-error
-          >
-        </mat-form-field>
-        <mat-form-field style="width: 370px">
-          <mat-label>NEGOCIO</mat-label>
-          <select formControlName="business" matNativeControl required>
-            <option *ngFor="let selected of selectedBuss" value="{{ selected.id }}">
-              <span style="color: #37236a">{{ selected.description }}</span>
-            </option>
-          </select>
-          <mat-error
-            id="requiredName"
-            *ngIf="dataAddImagenOfertas.controls.business.invalid && dataAddImagenOfertas.controls.business.errors.required"
-            >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Negocio' } }}</mat-error
-          >
-        </mat-form-field>
-        <mat-form-field style="width: 370px">
-          <input
-            matInput
-            placeholder="COMISIÓN"
-            type="text"
-            formControlName="comision"
-            required
-            class="text-area-heigth"
-            style="color: #37236a"
-          />
-          <mat-error
-            id="requiredName"
-            *ngIf="dataAddImagenOfertas.controls.comision.invalid && dataAddImagenOfertas.controls.comision.errors.required"
-            >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Comisión' } }}</mat-error
-          >
-        </mat-form-field>
-
-        <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
-          <div fxLayout="column" fxLayoutAlign="center" class="space">
-            <strong class="title-gray" style="color: #a7a3b1; font-size: 11px"
-              >ADJUNTAR IMAGEN WEB (1000X561PX, FORMATO .JPG, MAX 300KB)</strong
-            >
-            <span class="title-secondary" *ngIf="nameFileCert === ''" style="font-size: 11px">No hay archivo seleccionado</span>
-            <span class="file-input" *ngIf="nameFileCert !== ''" style="color: #37236a; font-size: 11px">{{
-              nameFileCert | truncate: '20'
-            }}</span>
-          </div>
-          <div>
-            <label for="image" id="upload" class="cursor-pointer">
-              <span *ngIf="!showErrorCert">
-                <img class="mt-1" *ngIf="nameFileCert === ''" src="/assets/img/image-file-upload.svg" alt="upload" />
-                <img class="mt-1" *ngIf="nameFileCert !== ''" src="/assets/img/image-file-upload-ok.svg" alt="upload" />
-              </span>
-              <img class="mt-1 w-icon" *ngIf="showErrorCert" src="/assets/img/icono-error-carga.svg" alt="upload" />
-            </label>
-          </div>
-        </div>
-        <mat-error *ngIf="showErrorCert" class="text-small small pb-2 d-block">
-          Formato inválido, sólo se pueden subir archivos con la extensión JPG y menores de 300KB
-        </mat-error>
-        <input (change)="onFileChangeFiles($event, 'image')" id="image" type="file" style="display: none" formControlName="image" />
-        <ng-container *ngTemplateOutlet="templatePublication"> </ng-container>
-      </form>
-    </div>
-
-    <div class="mt-3 mb-2" fxLayout="row" fxLayoutAlign="end end">
-      <button mat-button ngClass="button_cancel" (click)="onNoClick()">Cancelar</button>
-      <button
-        mat-raised-button
-        color="orange"
-        (click)="saveImagenOfertas()"
-        id="download-users"
-        class="ml-2"
-        [disabled]="
-          !dataAddImagenOfertas.valid ||
-          !activeButtonOfer ||
-          (!visible && !datePublication) ||
-          (!visible && !undefinedDate && !dateFinishPublication)
-        "
-      >
-        Guardar Cambios
-      </button>
-    </div>
-  </div>
-</ng-template>
-
 <ng-template #templateAddImagenPopup>
   <div ngClass="delete-container">
     <div>
@@ -492,7 +245,7 @@
         <mat-error *ngIf="showErrorCert" class="text-small small pb-2 d-block">
           Formato inválido, sólo se pueden subir archivos con la extensión JPG y menores de 250kb
         </mat-error>
-        <input (change)="onFileChangeFiles($event, 'image')" id="image" type="file" style="display: none" formControlName="image" />
+        <input (change)="uploadFileImage($event)" id="image" type="file" style="display: none" formControlName="image" />
 
         <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" fxLayoutGap.xs="5px" class="pb-3">
           <div fxLayout="column" fxLayoutAlign="center" class="space">
@@ -517,13 +270,7 @@
         <mat-error *ngIf="showErrorCert" class="text-small small pb-2 d-block">
           Formato inválido, sólo se pueden subir archivos con la extensión JPG y menores de 150kb
         </mat-error>
-        <input
-          (change)="onFileChangeFilesSecond($event, 'image2')"
-          id="image2"
-          type="file"
-          style="display: none"
-          formControlName="image2"
-        />
+        <input (change)="uploadFileImage2($event)" id="image2" type="file" style="display: none" formControlName="image2" />
         <ng-container *ngTemplateOutlet="templatePublication"> </ng-container>
       </form>
     </div>

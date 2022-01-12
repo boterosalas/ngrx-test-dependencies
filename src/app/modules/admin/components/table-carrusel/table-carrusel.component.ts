@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./table-carrusel.component.scss'],
 })
 export class TableCarruselComponent implements OnInit {
+  @Input() typeConsult: string;
   @ViewChild('table', { static: false }) table: MatTable<any>;
   @ViewChild('templateAddImagenCarousel', { static: false })
   templateAddImagenCarousel: TemplateRef<any>;
@@ -69,7 +70,7 @@ export class TableCarruselComponent implements OnInit {
   }
 
   public getCarrusel() {
-    this.subscription = this.content.getOffersbyType({ id: 'CARROUSEL', admin: true }).subscribe((resp) => {
+    this.subscription = this.content.getOffersbyType({ id: this.typeConsult, admin: true }).subscribe((resp) => {
       const startTime: any = new Date();
 
       this.dataSource = resp;
@@ -195,7 +196,7 @@ export class TableCarruselComponent implements OnInit {
         Business: buss,
         infoAditional: this.dataAddImagen.controls.comision.value,
         active: visible,
-        type: 'CARROUSEL',
+        type: this.typeConsult,
         datestart,
         dateend,
       },

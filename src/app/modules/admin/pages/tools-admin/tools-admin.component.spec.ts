@@ -252,8 +252,6 @@ beforeEach(waitForAsync(() => {
   it('should create', () => {
     expect(component).toBeTruthy();
     expect(component.timeFormat('22:20:00')).toEqual('10:20 PM');
-    component.getAllBusiness();
-    expect(mockContentService.getAllBusiness).toHaveBeenCalled();
     expect(mockContentService.getOffersbyType).toHaveBeenCalled();
   });
 
@@ -264,54 +262,6 @@ beforeEach(waitForAsync(() => {
     });
   });
 
-
-  it('file change', () => {
-    const mockFile = new File([''], 'name.jpg', { type: 'text/html' });
-    const mockEvt = { target: { files: [mockFile] } };
-    component.onFileChangeFiles(mockEvt, 'cedula1');
-    expect(component.activebutton).not.toBeTruthy();
-    component.onFileChangeFilesSecond(mockEvt, 'cedula1');
-    expect(component.activebutton).not.toBeTruthy();
-  });
-
- 
-
-  it('on No Click edit Carousel Modal', () => {
-    component.onNoClick();
-    expect(component.datePublication).not.toBeTruthy();
-    expect(component.hourDate).not.toBeTruthy();
-    expect(component.dateFinishPublication).not.toBeTruthy();
-    expect(component.hourDateFinish).not.toBeTruthy();
-    expect(component.undefinedDate).not.toBeTruthy();
-  });
-
-  it('edit Ofertas Modal', () => {
-    component.editOfertasModal(datos[2]);
-    expect(component.visible).toBeTruthy();
-  });
-
-  it('file change Ofertas', () => {
-    const mockFile = new File([''], 'name.jpg', { type: 'text/html' });
-    const mockEvt = { target: { files: [mockFile] } };
-    component.onFileChangeFiles(mockEvt, 'cedula1');
-    expect(component.onFileChangeFiles).not.toBeNull();
-    expect(component.activebutton).not.toBeTruthy();
-  });
-
-  it('save Imagen Ofertas', () => {
-    component.visible = true;
-    component.dataAddImagenOfertas.controls.business.setValue(1);
-    component.dataAddImagenOfertas.controls.nameContent.setValue('name');
-    component.dataAddImagenOfertas.controls.link.setValue('https://www.exito.com/freidora-de-aire-bioceramic-384560');
-    component.dataAddImagenOfertas.controls.comision.setValue('20%');
-    component.datePublication = '2021-05-19';
-    component.dateFinishPublication = '2021-05-19';
-    component.hourDate = '02:05:00';
-    component.hourDateFinish = '02:15:00';
-    fixture.detectChanges();
-    component.saveImagenOfertas();
-    expect(mockContentService.saveOfertBusiness).toHaveBeenCalled();
-  });
 
   it('on No Click edit Carousel Ofertas', () => {
     component.onNoClick();
@@ -332,14 +282,6 @@ beforeEach(waitForAsync(() => {
     expect(component.activebutton).not.toBeTruthy();
   });
 
-  it('save Ofertas modal', () => {
-    component.saveOfertasModal();
-    expect(component.showUndefinedDate).toBeTruthy();
-    expect(component.nameFileCert).not.toBeTruthy();
-    expect(component.nameFileCert2).not.toBeTruthy();
-    expect(component.showErrorCert).not.toBeTruthy();
-    expect(component.activeButtonOfer).not.toBeTruthy();
-  });
 
   it('Additional features', () => {
     spyOn(Swal, 'fire').and.returnValue(
@@ -351,18 +293,9 @@ beforeEach(waitForAsync(() => {
       })
     );
 
-    component.selectAllOfertas();
-
-    component.saveOrder([
-      { id: 1, orderBy: 1 },
-      { id: 2, orderBy: 2 },
-    ]);
-
     component.deleteOfer({ id: 1 }, '');
     component.deleteOfer({ id: 1 }, 'popup');
     component.checkButton();
-
-    component.deleteEveryOfertas();
     component.onNoClick();
     let datos = true;
     expect(datos).toBeTruthy();
