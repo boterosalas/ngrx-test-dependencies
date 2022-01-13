@@ -30,6 +30,7 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   minDate = new Date();
   minHours: any;
+  urlPattern = '^[a-zA-Z0-9-]+$';
   constructor(public router: Router, private content: ContentService, private route: ActivatedRoute, private fb: FormBuilder) {
     this.subscription = this.route.params.subscribe((route) => {
       if (route.id === undefined && route.titulo === undefined && route.imagen === undefined) {
@@ -90,6 +91,7 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.formDataContent = this.fb.group({
       titulo: [null, Validators.maxLength(250)],
+      url: [null, [ Validators.pattern(this.urlPattern),Validators.required]],
       autor: [null, Validators.required],
       etiquetas: [null, Validators.required],
       html: [null, Validators.required],
@@ -99,6 +101,7 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
     this.content.getIndividualBlogId(this.id).subscribe((resp) => {
       this.visible = resp.objectResponse.visible;
       this.formDataContent.controls.titulo.setValue(resp.objectResponse.title);
+      this.formDataContent.controls.url.setValue(resp.objectResponse.url);
       this.formDataContent.controls.autor.setValue(resp.objectResponse.author);
       this.formDataContent.controls.etiquetas.setValue(resp.objectResponse.tags);
       this.formDataContent.controls.html.setValue(resp.objectResponse.content);
@@ -145,6 +148,7 @@ export class EditBlogAdminComponent implements OnInit, OnDestroy {
     }
     this.formData.append('id', this.id);
     this.formData.append('title', this.formDataContent.controls.titulo.value);
+    this.formData.append('url', this.formDataContent.controls.url.value);
     this.formData.append('content', this.formDataContent.controls.html.value);
     this.formData.append('author', this.formDataContent.controls.autor.value);
     this.formData.append('tags', this.formDataContent.controls.etiquetas.value);

@@ -31,6 +31,7 @@ export class AddEditBlogAdminComponent implements OnInit {
   contadorDates = 0;
   maxDate = new Date();
   minHours: any;
+  urlPattern = '^[a-zA-Z0-9-]+$';
   configurationEditor: AngularEditorConfig = {
     toolbarHiddenButtons: [
       [
@@ -76,6 +77,7 @@ export class AddEditBlogAdminComponent implements OnInit {
   ngOnInit() {
     this.dateForm = this.fb.group({
       title: [null, [Validators.maxLength(250), Validators.required]],
+      url: [null, [ Validators.pattern(this.urlPattern),Validators.required]],
       author: [null, Validators.required],
       tags: [null, Validators.required],
       contenido: [null, Validators.required],
@@ -123,6 +125,7 @@ export class AddEditBlogAdminComponent implements OnInit {
     }
 
     this.formData.append('title', this.dateForm.controls.title.value);
+    this.formData.append('url', this.dateForm.controls.url.value);
     this.formData.append('content', this.dateForm.controls.contenido.value);
     this.formData.append('author', this.dateForm.controls.author.value);
     this.formData.append('tags', this.dateForm.controls.tags.value);
