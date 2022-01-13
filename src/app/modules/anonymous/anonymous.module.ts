@@ -341,7 +341,7 @@ const routes: Routes = [
     component: TermsAndConditionsComponent,
   },
   {
-    path: 'tabla-comisiones',
+    path: 'tabla-recompensas',
     component: ComissionTableComponent,
   },
 ];

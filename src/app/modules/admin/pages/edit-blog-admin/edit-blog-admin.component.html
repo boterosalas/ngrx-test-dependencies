@@ -43,6 +43,13 @@
             'GENERIC.INVALID_FORMAT' | translate: { val: 'Título del artículo' }
           }}</mat-error>
         </mat-form-field>
+
+        <mat-form-field class="w-100">
+          <input matInput id="url" type="text" placeholder="URL DEL ARTÍCULO" formControlName="url" spacebar required />
+          <mat-error id="introduceUrl" *ngIf="formDataContent.controls.url.invalid && formDataContent.controls.url.errors.required">Ingrese la url</mat-error>
+          <mat-error id="invalidUrl" *ngIf="formDataContent.controls.url.invalid && formDataContent.controls.url.errors.pattern">url invalida</mat-error>
+        </mat-form-field>
+
         <h4>CONTENIDO</h4>
         <angular-editor (ngModelChange)="comprobarText('texto')" [config]="editorConfig" formControlName="html"></angular-editor>
       </mat-card>
