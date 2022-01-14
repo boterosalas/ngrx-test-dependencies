@@ -52,10 +52,13 @@ export class TableActivateBusinessComponent implements OnInit {
   activebutton: boolean;
   validFormat: boolean;
   dataComision: any;
+  category: string[] = ['Accesorios', 'Autos y llantas', 'Bebes', 'Libros', 'Ropa', 'Electrodomésticos'];
+
 
   ngOnInit() {
     this.dateForm = this.fb.group({
       nameBussiness: [null, Validators.required],
+      category:['', Validators.required],
       detailBussiness: [null, Validators.required],
       nameTableCommision: [null, Validators.required],
       placeholderBussiness: [null, Validators.required],
@@ -226,6 +229,7 @@ export class TableActivateBusinessComponent implements OnInit {
   editBussiness(element: any) {
     this.selectedItem = element;
     this.dateForm.controls.nameBussiness.setValue(this.selectedItem.description);
+    this.dateForm.controls.category.setValue(this.selectedItem.category);
     this.dateForm.controls.detailBussiness.setValue(this.selectedItem.infoaditional);
     this.dateForm.controls.nameTableCommision.setValue(this.selectedItem.tabtablecommission);
     this.dateForm.controls.placeholderBussiness.setValue(this.selectedItem.placeholder);
@@ -249,6 +253,7 @@ export class TableActivateBusinessComponent implements OnInit {
   }
   agregarBussiness() {
     this.dateForm.controls.nameBussiness.setValue(null);
+    this.dateForm.controls.category.setValue(null);
     this.dateForm.controls.detailBussiness.setValue(null);
     this.dateForm.controls.nameTableCommision.setValue(null);
     this.dateForm.controls.placeholderBussiness.setValue(null);
@@ -278,6 +283,7 @@ export class TableActivateBusinessComponent implements OnInit {
         datos = {
           id: this.selectedItem.id,
           description: this.dateForm.controls.nameBussiness.value,
+          category: this.dateForm.controls.category.value,
           infoAditional: this.dateForm.controls.detailBussiness.value,
           tabTableCommission: this.dateForm.controls.nameTableCommision.value,
           placeHolder: this.dateForm.controls.placeholderBussiness.value,
@@ -292,6 +298,7 @@ export class TableActivateBusinessComponent implements OnInit {
         datos = {
           id: this.selectedItem.id,
           description: this.dateForm.controls.nameBussiness.value,
+          category: this.dateForm.controls.category.value,
           infoAditional: this.dateForm.controls.detailBussiness.value,
           tabTableCommission: this.dateForm.controls.nameTableCommision.value,
           placeHolder: this.dateForm.controls.placeholderBussiness.value,
@@ -305,6 +312,7 @@ export class TableActivateBusinessComponent implements OnInit {
         datos = {
           id: this.selectedItem.id,
           description: this.dateForm.controls.nameBussiness.value,
+          category: this.dateForm.controls.category.value,
           infoAditional: this.dateForm.controls.detailBussiness.value,
           tabTableCommission: this.dateForm.controls.nameTableCommision.value,
           placeHolder: this.dateForm.controls.placeholderBussiness.value,
@@ -318,6 +326,7 @@ export class TableActivateBusinessComponent implements OnInit {
         datos = {
           id: this.selectedItem.id,
           description: this.dateForm.controls.nameBussiness.value,
+          category: this.dateForm.controls.category.value,
           infoAditional: this.dateForm.controls.detailBussiness.value,
           tabTableCommission: this.dateForm.controls.nameTableCommision.value,
           placeHolder: this.dateForm.controls.placeholderBussiness.value,
@@ -330,6 +339,7 @@ export class TableActivateBusinessComponent implements OnInit {
     } else {
       datos = {
         description: this.dateForm.controls.nameBussiness.value,
+        category: this.dateForm.controls.category.value,
         infoAditional: this.dateForm.controls.detailBussiness.value,
         tabTableCommission: this.dateForm.controls.nameTableCommision.value,
         placeHolder: this.dateForm.controls.placeholderBussiness.value,
@@ -353,4 +363,5 @@ export class TableActivateBusinessComponent implements OnInit {
       this.updateBusiness.emit();
     });
   }
+
 }

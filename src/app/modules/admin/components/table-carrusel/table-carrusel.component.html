@@ -72,6 +72,18 @@
         <td mat-cell *matCellDef="let element">{{ element.business }}</td>
       </ng-container>
 
+      <!-- clics Column -->
+      <ng-container matColumnDef="clics">
+        <th mat-header-cell *matHeaderCellDef>CLICS</th>
+        <td mat-cell *matCellDef="let element">{{ element.cliks }}</td>
+      </ng-container>
+
+      <!-- clics Column -->
+      <ng-container matColumnDef="clicsu">
+        <th mat-header-cell *matHeaderCellDef>CLICS ÚNICOS</th>
+        <td mat-cell *matCellDef="let element">{{ element.uniquecliks }}</td>
+      </ng-container>
+
       <!-- video Column -->
       <ng-container matColumnDef="comision">
         <th mat-header-cell *matHeaderCellDef>COMISIÓN</th>

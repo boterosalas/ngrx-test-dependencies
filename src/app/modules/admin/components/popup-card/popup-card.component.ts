@@ -19,6 +19,8 @@ export class PopupCardComponent implements OnInit {
   @Input() textButton: string;
   @Input() section: string;
   @Input() showHidden: boolean;
+  @Input() clics: string;
+  @Input() clicsu: string;
 
   @Output() edit = new EventEmitter();
   @Output() delete = new EventEmitter();
