@@ -26,6 +26,17 @@
         >
       </mat-form-field>
       <mat-form-field>
+        <mat-placeholder>CATEGORÍA</mat-placeholder>
+        <mat-select id="business" formControlName="category" class="selected-business" multiple>
+          <mat-option *ngFor="let item of category" value="{{ item }}">
+            <span>{{ item }}</span>
+          </mat-option>
+        </mat-select>
+        <mat-error id="requiredcategory" *ngIf="businessForm.controls.category.invalid && businessForm.controls.category.errors.required">{{
+          'GENERIC.REQUIRED' | translate: { formValue: 'Categoría' }
+        }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
         <input matInput id="detailCommision" type="text" placeholder="DETALLE DE LA COMISIÓN" formControlName="detailBussiness" required />
 
         <mat-error

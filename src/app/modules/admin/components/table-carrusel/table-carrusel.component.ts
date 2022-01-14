@@ -26,7 +26,7 @@ export class TableCarruselComponent implements OnInit {
 
   constructor(private content: ContentService, private dialog: MatDialog, private utils: UtilsService, private fb: FormBuilder) {}
 
-  displayedColumns: string[] = ['drag', 'image', 'name', 'link', 'business', 'comision', 'active', 'actions'];
+  displayedColumns: string[] = ['drag', 'image', 'name', 'link', 'business', 'clics', 'clicsu', 'comision', 'active', 'actions'];
   dataSource = [];
   dataAddImagen: FormGroup;
   active: boolean;
