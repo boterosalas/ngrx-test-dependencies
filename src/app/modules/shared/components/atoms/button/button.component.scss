@@ -39,6 +39,18 @@
     color: #ffffff;
   }
 
+  &-icon {
+    background: none;
+    color: $purple2;
+    padding: 0;
+    width: 35px;
+    min-width: 35px;
+    &.mat-button-disabled{
+      background: none;
+      color: #a7a3b1;
+    }
+  }
+
   &-border-white {
     background: $primary-color;
     color: #ffffff;
