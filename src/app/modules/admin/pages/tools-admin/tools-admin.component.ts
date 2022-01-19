@@ -192,6 +192,8 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
     this.dataAddImagenPopup.controls.seccion.setValue(elementP.seccion);
     this.dataAddImagenPopup.controls.textbutton.setValue(elementP.textbutton);
     this.dataAddImagenPopup.controls.colorbutton.setValue(elementP.colorbutton);
+    this.dataAddImagenPopup.controls.image.clearValidators();
+    this.dataAddImagenPopup.controls.image2.clearValidators();
 
     this.formateDateHour(elementP);
     this.undefinedDate = false;
@@ -301,6 +303,8 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
     this.activeButtonOfer = false;
     this.nameFileCert = '';
     this.nameFileCert2 = '';
+    this.dataAddImagenPopup.controls.image.addValidators(Validators.required);
+    this.dataAddImagenPopup.controls.image2.addValidators(Validators.required);
     this.dialog.open(ModalGenericComponent, {
       width: '450px',
       data: {
