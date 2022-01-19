@@ -38,16 +38,6 @@ export class AllBussinessComponent implements OnInit, OnDestroy {
     })
   }
 
-
-  // public getBussiness() {
-  //   this.subscription = this.content
-  //     .getBusiness()
-  //     .pipe(distinctUntilChanged())
-  //     .subscribe((bussiness) => {
-  //       this.bussiness = bussiness;
-  //     });
-  // }
-
   public selectCategory(data: any) {
     const id = data.value;
     this.getBussinessByCategory(id);

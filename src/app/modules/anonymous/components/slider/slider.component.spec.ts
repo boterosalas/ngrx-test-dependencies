@@ -25,7 +25,7 @@ describe('SliderComponent', () => {
   let component: SliderComponent;
   let fixture: ComponentFixture<SliderComponent>;
 
-  const mockContentService = jasmine.createSpyObj('ContentService', ['getNews']);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getNews', 'saveVisitOffer']);
 
   // const mockUserService = jasmine.createSpyObj("UserService", ["getShortUrl"]);
 
@@ -34,6 +34,13 @@ describe('SliderComponent', () => {
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open']);
 
   const mockDialogRef = jasmine.createSpyObj('MatDialogRef', ['close', 'afterClosed', 'componentInstance']);
+
+  
+  const respOk = {
+    state: 'Success',
+    userMessage: '',
+    objectResponse: [],
+  };
 
   const resp = {
     state: 'Success',
@@ -142,6 +149,7 @@ beforeEach(waitForAsync(() => {
       })
       .compileComponents();
     mockContentService.getNews.and.returnValue(of(news));
+    mockContentService.saveVisitOffer.and.returnValue(of(respOk));
     mockLinksService.saveLink.and.returnValue(of(resp));
   }));
 

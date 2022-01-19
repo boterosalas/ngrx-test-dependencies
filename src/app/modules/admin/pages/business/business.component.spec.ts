@@ -16,7 +16,7 @@ describe('BusinessComponent', () => {
   let component: BusinessComponent;
   let fixture: ComponentFixture<BusinessComponent>;
 
-  const mockContentService = jasmine.createSpyObj('ContentService', ['businessExcel', 'saveActiveBusiness', 'getAllBusiness', 'importSellerFile']);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['businessExcel', 'getCategories', 'saveActiveBusiness', 'getAllBusiness', 'importSellerFile']);
 
   const allBusiness = [
     {
@@ -66,6 +66,12 @@ describe('BusinessComponent', () => {
     },
   ];
 
+  const categories = [
+    { id: 1, description: 'Accesorios' },
+    { id: 2, description: 'Autos y llantas' },
+ ];
+
+
   const saveActive = {
     state: 'Success',
     userMessage: 'se ha activado el negocio',
@@ -111,6 +117,7 @@ beforeEach(waitForAsync(() => {
       providers: [{ provide: ContentService, useValue: mockContentService }],
     }).compileComponents();
     mockContentService.getAllBusiness.and.returnValue(of(allBusiness));
+    mockContentService.getCategories.and.returnValue(of(categories));
   }));
 
   beforeEach(() => {
