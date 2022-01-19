@@ -289,9 +289,9 @@
         mat-raised-button
         color="orange"
         (click)="saveImagenPopup()"
-        id="download-users"
+        id="popup-save"
         class="ml-2"
-        [disabled]="!dataAddImagenPopup.valid || !activeButtonOfer || (visible && !dateFinishPublication)"
+        [disabled]="!dataAddImagenPopup.valid"
       >
         {{ visible ? 'Publicar' : datePublication && dateFinishPublication ? 'Programar' : 'Guardar como borrador' }}
       </button>

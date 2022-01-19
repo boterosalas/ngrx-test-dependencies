@@ -73,8 +73,8 @@ export class ToolsAdminComponent implements OnInit, OnDestroy {
       nameContent: [null, Validators.required],
       link: [null],
       seccion: [null, Validators.required],
-      image: [null],
-      image2: [null],
+      image: [null, Validators.required],
+      image2: [null, Validators.required],
       textbutton: [null, Validators.required],
       colorbutton: [null, Validators.required],
     });
