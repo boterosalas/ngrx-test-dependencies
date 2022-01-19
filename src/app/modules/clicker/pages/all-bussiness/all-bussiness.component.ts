@@ -18,21 +18,44 @@ export class AllBussinessComponent implements OnInit, OnDestroy {
   userId: any;
   message: any;
   sliderWeb = [];
+  category: Object[] = [];
 
   constructor(public router: Router, public auth: AuthService, private content: ContentService) {}
 
   ngOnInit() {
-    this.getBussiness();
+    this.getBussinessByCategory();
     this.carousel();
+    this.getCategoriesBusiness();
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
-  public getBussiness() {
+  public getCategoriesBusiness() {
+    this.content.getCategories().subscribe((categories) => {
+       this.category = categories;
+    })
+  }
+
+
+  // public getBussiness() {
+  //   this.subscription = this.content
+  //     .getBusiness()
+  //     .pipe(distinctUntilChanged())
+  //     .subscribe((bussiness) => {
+  //       this.bussiness = bussiness;
+  //     });
+  // }
+
+  public selectCategory(data: any) {
+    const id = data.value;
+    this.getBussinessByCategory(id);
+  }
+
+  public getBussinessByCategory(id?:number) {
     this.subscription = this.content
-      .getBusiness()
+      .getBusinessByCategory(id)
       .pipe(distinctUntilChanged())
       .subscribe((bussiness) => {
         this.bussiness = bussiness;

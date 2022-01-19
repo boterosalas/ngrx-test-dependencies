@@ -10,8 +10,21 @@
    ></app-slider>
  </span>
 
-<div class="container pt-3" ngClass.xs="pr-3 pl-3 px-5">
-  <div fxLayout="row wrap" fxLayout.gt-xs="row wrap" ngClass.gt-xs="p-3" fxLayoutAlign="start center" fxLayoutGap="20px grid">
+ 
+ <div class="container pt-3" ngClass.xs="pr-3 pl-3 px-5">
+
+   <mat-form-field class="px-4 select">
+    <mat-placeholder>FILTRAR POR CATEGORÍA</mat-placeholder>
+    <mat-select (selectionChange)="selectCategory($event)" id="business"  class="selected-business">
+
+      <mat-option  value="0">Todas las categorías</mat-option>
+      <mat-option *ngFor="let item of category" value="{{ item.id }}">
+        <span>{{ item.description }}</span>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+   <div fxLayout="row wrap" fxLayout.gt-xs="row wrap" ngClass.gt-xs="p-3" fxLayoutAlign="start center" fxLayoutGap="20px grid">
     <ng-container *ngFor="let bussines of bussiness; let i = index">
       <app-bussiness-card
         *ngIf="bussines.code !== 'envios-clickam'"
@@ -22,6 +35,10 @@
         [percent]="bussines.infoaditional"
       ></app-bussiness-card>
     </ng-container>
+  </div>
+
+  <div class="notcategory container text-center" *ngIf="bussiness.length === 0">
+    <p class="f-20 purple-text">No hay negocios con esta categoría, selecciona otra categoría.</p>
   </div>
 
   <br>
