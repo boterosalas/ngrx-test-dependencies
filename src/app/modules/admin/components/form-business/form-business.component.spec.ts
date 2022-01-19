@@ -17,7 +17,7 @@ describe('FormBusinessComponent', () => {
   let component: FormBusinessComponent;
   let fixture: ComponentFixture<FormBusinessComponent>;
 
-  const mockContentService = jasmine.createSpyObj('ContentService', ['saveBussiness']);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['saveBussiness', 'getCategories']);
 
   const response = {
     state: 'Success',
@@ -25,9 +25,14 @@ describe('FormBusinessComponent', () => {
     objectResponse: [],
   };
 
+  const categories = [
+      { id: 1, description: 'Accesorios' },
+      { id: 2, description: 'Autos y llantas' },
+   ];
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FormBusinessComponent ],
+      declarations: [FormBusinessComponent],
       imports: [
         ReactiveFormsModule,
         FormsModule,
@@ -48,13 +53,10 @@ describe('FormBusinessComponent', () => {
           },
         }),
       ],
-      providers: [
-        UtilsService,
-        { provide: ContentService, useValue: mockContentService },
-      ]
-    })
-    .compileComponents();
+      providers: [UtilsService, { provide: ContentService, useValue: mockContentService }],
+    }).compileComponents();
     mockContentService.saveBussiness.and.returnValue(of(response));
+    mockContentService.getCategories.and.returnValue(of(categories));
   });
 
   beforeEach(() => {
@@ -86,13 +88,13 @@ describe('FormBusinessComponent', () => {
       target: {
         files: [
           {
-            name: "comision.svg",
+            name: 'comision.svg',
             size: 2559,
-            type: "image/svg+xml"
-          }
-        ]
-      }
-    }
+            type: 'image/svg+xml',
+          },
+        ],
+      },
+    };
     component.uploadFileImage(event);
     expect(event).toBeDefined();
   });
@@ -104,13 +106,13 @@ describe('FormBusinessComponent', () => {
       target: {
         files: [
           {
-            name: "comision.svg",
+            name: 'comision.svg',
             size: 2559,
-            type: "image/svg+xml"
-          }
-        ]
-      }
-    }
+            type: 'image/svg+xml',
+          },
+        ],
+      },
+    };
     component.uploadFileImage2(event);
     expect(event).toBeDefined();
   });
@@ -119,7 +121,4 @@ describe('FormBusinessComponent', () => {
     component.saveBussiness();
     expect(mockContentService.saveBussiness).toHaveBeenCalled();
   });
-  
-  
-
 });

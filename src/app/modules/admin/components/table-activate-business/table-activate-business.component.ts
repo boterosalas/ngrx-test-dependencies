@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { ContentService } from 'src/app/services/content.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ResponseService } from 'src/app/interfaces/response';
 
 export interface PeriodicElement {
   drag: any;
@@ -52,7 +53,7 @@ export class TableActivateBusinessComponent implements OnInit {
   activebutton: boolean;
   validFormat: boolean;
   dataComision: any;
-  category: string[] = ['Accesorios', 'Autos y llantas', 'Bebes', 'Libros', 'Ropa', 'Electrodomésticos'];
+  category: object[] = [];
 
 
   ngOnInit() {
@@ -69,10 +70,17 @@ export class TableActivateBusinessComponent implements OnInit {
       visible: [false],
       hasproduct: [false],
     });
+    this.getCategoriesBusiness();
   }
 
   activate(dataSource) {
     this.activateBusiness.emit(dataSource);
+  }
+
+  public getCategoriesBusiness() {
+    this.content.getCategories().subscribe((categories) => {
+       this.category = categories;
+    })
   }
 
   dropTable(event: CdkDragDrop<PeriodicElement[]>) {
@@ -226,6 +234,7 @@ export class TableActivateBusinessComponent implements OnInit {
       };
     }
   }
+  
   editBussiness(element: any) {
     this.selectedItem = element;
     this.dateForm.controls.nameBussiness.setValue(this.selectedItem.description);
@@ -283,7 +292,7 @@ export class TableActivateBusinessComponent implements OnInit {
         datos = {
           id: this.selectedItem.id,
           description: this.dateForm.controls.nameBussiness.value,
-          category: this.dateForm.controls.category.value,
+          arraycategories:  this.dateForm.controls.category.value,
           infoAditional: this.dateForm.controls.detailBussiness.value,
           tabTableCommission: this.dateForm.controls.nameTableCommision.value,
           placeHolder: this.dateForm.controls.placeholderBussiness.value,
@@ -298,7 +307,7 @@ export class TableActivateBusinessComponent implements OnInit {
         datos = {
           id: this.selectedItem.id,
           description: this.dateForm.controls.nameBussiness.value,
-          category: this.dateForm.controls.category.value,
+          arraycategories:  this.dateForm.controls.category.value,
           infoAditional: this.dateForm.controls.detailBussiness.value,
           tabTableCommission: this.dateForm.controls.nameTableCommision.value,
           placeHolder: this.dateForm.controls.placeholderBussiness.value,
@@ -312,7 +321,7 @@ export class TableActivateBusinessComponent implements OnInit {
         datos = {
           id: this.selectedItem.id,
           description: this.dateForm.controls.nameBussiness.value,
-          category: this.dateForm.controls.category.value,
+          arraycategories:  this.dateForm.controls.category.value,
           infoAditional: this.dateForm.controls.detailBussiness.value,
           tabTableCommission: this.dateForm.controls.nameTableCommision.value,
           placeHolder: this.dateForm.controls.placeholderBussiness.value,
@@ -326,7 +335,7 @@ export class TableActivateBusinessComponent implements OnInit {
         datos = {
           id: this.selectedItem.id,
           description: this.dateForm.controls.nameBussiness.value,
-          category: this.dateForm.controls.category.value,
+          arraycategories:  this.dateForm.controls.category.value,
           infoAditional: this.dateForm.controls.detailBussiness.value,
           tabTableCommission: this.dateForm.controls.nameTableCommision.value,
           placeHolder: this.dateForm.controls.placeholderBussiness.value,
@@ -339,7 +348,7 @@ export class TableActivateBusinessComponent implements OnInit {
     } else {
       datos = {
         description: this.dateForm.controls.nameBussiness.value,
-        category: this.dateForm.controls.category.value,
+        arraycategories:  this.dateForm.controls.category.value,
         infoAditional: this.dateForm.controls.detailBussiness.value,
         tabTableCommission: this.dateForm.controls.nameTableCommision.value,
         placeHolder: this.dateForm.controls.placeholderBussiness.value,

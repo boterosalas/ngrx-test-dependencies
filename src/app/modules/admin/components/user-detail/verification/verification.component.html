@@ -17,10 +17,7 @@
 
     <p class="galano-bold gray edit-message w-label">
       MENSAJE DE RECHAZO
-      <i
-        (click)="editRejectionMessage()"
-        class="tio-edit style-icon cursor-pointer {{ enableRejectionMessage ? 'style-icon-enable' : 'style-icon-disabled' }}"
-      ></i>
+      <app-button title="" id="reject" haveTitle="false" classButton="p-0" classIcon="tio-edit style-icon" [haveIcon]="true" (action)="editRejectionMessage()" align="start"  color="icon" classButton="no-shadow" [disabled]="!enableRejectionMessage"></app-button>
     </p>
     <p class="rejection-message">
       {{ this.enableRejectionMessage && this.data.responseaccountbank ? this.data.responseaccountbank : '-' }}

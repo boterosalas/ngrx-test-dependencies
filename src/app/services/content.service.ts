@@ -38,6 +38,8 @@ export class ContentService {
   apiCategories = 'offer/getCategories';
   apiProducts = 'product';
   apiGetBusiness = 'business/getBusiness';
+  apiGetCategoriesBusiness = 'business/getcategoriesbusiness';
+  apiGetBusinessByCategories = 'business/getbusinessbycategories';
   apiGetAllBusiness = 'business/getallbusiness';
   apiSaveActiveBusiness = 'business/saveactivebusiness';
   apiGetLinkBusiness = 'business/generatelinkbusiness';
@@ -57,6 +59,7 @@ export class ContentService {
   apiDeleteTip = 'business/deletetipbusiness';
   apiSaveTerms = 'business/savetermbusiness';
   apiGetBussinessById = 'business/getbusinessbyid';
+  apiGetBussinessByCategory = 'business/getbusinessbycategories';
   apiSaveBusinessOrderTip = 'business/saveordertipbusiness';
   apiGetManageCommisionBus = 'category/getcategoriesbyidbusiness';
   apiManageComisionBusiness = 'category/savecategory';
@@ -345,6 +348,7 @@ export class ContentService {
       })
     );
   }
+  
   public getBusinessById(data) {
     return this.http.get(`${this.url + this.apiGetBussinessById}?id=${data}`, this.httpOptions).pipe(
       retryWhen((errors) =>
@@ -359,6 +363,22 @@ export class ContentService {
       })
     );
   }
+
+  public getBusinessByCategory(id = 0) {
+    return this.http.get(`${this.url + this.apiGetBussinessByCategory}?id=${id}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((user: ResponseService) => {
+        return user.objectResponse;
+      })
+    );
+  }
+
   public getCommissions() {
     return this.http.get(`${this.url + this.apiGetCommissions}`, this.httpOptions).pipe(
       retryWhen((errors) =>
@@ -554,6 +574,21 @@ export class ContentService {
 
   public getAllBusiness(clickam: boolean = false) {
     return this.http.get(`${this.url + this.apiGetAllBusiness}?clickam=${clickam}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((user: ResponseService) => {
+        return user.objectResponse;
+      })
+    );
+  }
+
+  public getCategories() {
+    return this.http.get(`${this.url + this.apiGetcategoriesbusiness}?code=business`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),

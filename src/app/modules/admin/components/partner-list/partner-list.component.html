@@ -3,7 +3,6 @@
     <app-title commonClass="pl-3 pr-3" showTitleh3="true" text="NEGOCIOS"></app-title>
     <mat-list role="list" *ngFor="let item of bussiness; let i = index">
       <mat-list-item
-        *ngIf="item.code !== 'exito' && item.code !=='carulla'"
         (click)="selected(item)"
         [class.selected]="item.description === selectedBusiness"
         class="border-bottom-gray cursor-pointer gray"

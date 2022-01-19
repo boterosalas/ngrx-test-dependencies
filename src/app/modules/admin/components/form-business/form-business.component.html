@@ -28,8 +28,8 @@
       <mat-form-field>
         <mat-placeholder>CATEGORÍA</mat-placeholder>
         <mat-select id="business" formControlName="category" class="selected-business" multiple>
-          <mat-option *ngFor="let item of category" value="{{ item }}">
-            <span>{{ item }}</span>
+          <mat-option *ngFor="let item of category" [value]="item.id">
+            <span>{{ item.description }}</span>
           </mat-option>
         </mat-select>
         <mat-error id="requiredcategory" *ngIf="businessForm.controls.category.invalid && businessForm.controls.category.errors.required">{{

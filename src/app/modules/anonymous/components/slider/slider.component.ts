@@ -272,6 +272,7 @@ export class SliderComponent implements OnInit, OnDestroy {
       this.formShareLink();
       const title = category.description;
       const id = category.id;
+      this.content.saveVisitOffer({ idoffer: id, userId: this.idClicker }).subscribe((resp) => {});
       const img = category.imageurlweb;
       const showClose = false;
       const showCloseIcon = true;

@@ -21,7 +21,7 @@ export class FormBusinessComponent implements OnInit, OnChanges {
   extension: string;
   @Input() dataBusiness:any;
   description:string = '';
-  category: string[] = ['Accesorios', 'Autos y llantas', 'Bebes', 'Libros', 'Ropa', 'Electrodomésticos'];
+  category: Object[] = [];
   constructor(private fb: FormBuilder, private utils: UtilsService, private content: ContentService) {}
 
   ngOnChanges() {
@@ -33,7 +33,7 @@ export class FormBusinessComponent implements OnInit, OnChanges {
       const splitImage = this.dataBusiness.imageurl.split('/');
       const image = splitImage[splitImage.length - 1];
       
-      this.businessForm.controls.category.setValue(this.dataBusiness.category)
+      this.businessForm.controls.category.setValue(this.dataBusiness.arraycategories)
       this.businessForm.controls.nameBussiness.setValue(this.dataBusiness.description)
       this.businessForm.controls.detailBussiness.setValue(this.dataBusiness.infoaditional)
       this.businessForm.controls.nameTableCommision.setValue(this.dataBusiness.tabtablecommission)
@@ -62,7 +62,16 @@ export class FormBusinessComponent implements OnInit, OnChanges {
       hasproduct: [false],
     });
 
+    this.getCategoriesBusiness();
+
   }
+
+  public getCategoriesBusiness() {
+    this.content.getCategories().subscribe((categories) => {
+       this.category = categories;
+    })
+  }
+
 
   public uploadFileImage(e) {
     this.extension = 'svg';
@@ -96,7 +105,7 @@ export class FormBusinessComponent implements OnInit, OnChanges {
     const data = {
       id: this.dataBusiness.id,
       description: this.businessForm.controls.nameBussiness.value,
-      category: this.businessForm.controls.category.value,
+      arraycategories: this.businessForm.controls.category.value,
       infoAditional: this.businessForm.controls.detailBussiness.value,
       tabTableCommission: this.businessForm.controls.nameTableCommision.value,
       placeHolder: this.businessForm.controls.placeholderBussiness.value,

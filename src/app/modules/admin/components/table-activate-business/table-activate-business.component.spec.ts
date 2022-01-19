@@ -19,15 +19,25 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 describe('TableActivateBusinessComponent', () => {
   let component: TableActivateBusinessComponent;
   let fixture: ComponentFixture<TableActivateBusinessComponent>;
+  
   let mockRouter = {
     navigate: jasmine.createSpy('navigate'),
   };
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll', 'afterAllClosed']);
   let mockLinksService = jasmine.createSpyObj('LinksService', ['putOrder']);
+  
   let response = {
     Status: 'Success',
   };
-  const mockContentService = jasmine.createSpyObj('ContentService', ['getCommissionsData', 'saveBussiness']);
+
+  
+  const categories = [
+    { id: 1, description: 'Accesorios' },
+    { id: 2, description: 'Autos y llantas' },
+ ];
+
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getCommissionsData', 'saveBussiness', 'getCategories']);
+
 beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TableActivateBusinessComponent],
@@ -53,6 +63,7 @@ beforeEach(waitForAsync(() => {
     mockLinksService.putOrder.and.returnValue(of(response));
     mockContentService.getCommissionsData.and.returnValue(of(response));
     mockContentService.saveBussiness.and.returnValue(of(response));
+    mockContentService.getCategories.and.returnValue(of(categories));
   }));
 
   beforeEach(() => {
