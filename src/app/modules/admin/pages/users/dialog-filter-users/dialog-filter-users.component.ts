@@ -117,7 +117,7 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
     this.filterUsers = this.fb.group({
       dateRange: [''],
       status: [null],
-      comunication: [''],
+      comunication: [null],
       commissions: [null],
       accountBank: [null],
       bussiness: [''],
