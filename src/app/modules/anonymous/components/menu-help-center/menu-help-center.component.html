@@ -12,23 +12,20 @@
     class="help-center expansion-panel-box-shadow"
   >
     <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusobreclickam">
-      <span
-        class="gtmCentroDeAyudaClicMenusobreclickam"
-        [routerLink]="['/centro-de-ayuda']"
-        routerLinkActive="active-topic"
-        [routerLinkActiveOptions]="{ exact: true }"
-        >{{ 'HELP_CENTER.ABOUT_CLICKAM.ABOUT_CLICKAM' | translate }}</span
-      >
+      <span class="gtmCentroDeAyudaClicMenusobreclickam">
+        <a href="/centro-de-ayuda" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">
+          {{ 'HELP_CENTER.ABOUT_CLICKAM.ABOUT_CLICKAM' | translate }}
+        </a>
+      </span>
     </mat-expansion-panel-header>
 
     <mat-list role="list" *ngFor="let item of aboutClickam; let i = index">
-      <mat-list-item
-        (click)="setStep(0)"
-        ngClass="cursor-pointer gtmCentroDeAyudaClicMenu{{ item.class }}"
-        role="listitem"
-        [routerLink]="item.route"
-        routerLinkActive="active"
-        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{ item.name }}</span></mat-list-item
+      <mat-list-item (click)="setStep(0)" ngClass="cursor-pointer gtmCentroDeAyudaClicMenu{{ item.class }}" role="listitem"
+        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">
+          <a routerLinkActive="active" [href]="item.route">
+            {{ item.name }}
+          </a>
+        </span></mat-list-item
       >
     </mat-list>
   </mat-expansion-panel>
@@ -40,23 +37,20 @@
     class="help-center expansion-panel-box-shadow"
   >
     <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusobreclickamconfiguracionesdecuenta">
-      <span
-        class="gtmCentroDeAyudaClicMenusobreclickamconfiguracionesdecuenta"
-        [routerLink]="['/centro-de-ayuda/configuraciones-de-cuenta']"
-        routerLinkActive="active-topic"
-        [routerLinkActiveOptions]="{ exact: true }"
-        >{{ 'HELP_CENTER.CONFIGURATIONS.CONFIGURATIONS' | translate }}</span
-      >
+      <span class="gtmCentroDeAyudaClicMenusobreclickamconfiguracionesdecuenta">
+        <a href="/centro-de-ayuda/configuraciones-de-cuenta" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">
+          {{ 'HELP_CENTER.CONFIGURATIONS.CONFIGURATIONS' | translate }}
+        </a>
+      </span>
     </mat-expansion-panel-header>
 
     <mat-list role="list" *ngFor="let item of configurations; let i = index">
-      <mat-list-item
-        (click)="setStep(1)"
-        ngClass="cursor-pointer gtmCentroDeAyudaClicMenu{{ item.class }}"
-        role="listitem"
-        [routerLink]="item.route"
-        routerLinkActive="active"
-        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{ item.name }}</span></mat-list-item
+      <mat-list-item (click)="setStep(1)" ngClass="cursor-pointer gtmCentroDeAyudaClicMenu{{ item.class }}" role="listitem"
+        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">
+          <a routerLinkActive="active" [href]="item.route">
+            {{ item.name }}
+          </a>
+        </span></mat-list-item
       >
     </mat-list>
   </mat-expansion-panel>
@@ -68,23 +62,20 @@
     class="help-center expansion-panel-box-shadow"
   >
     <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenuscomisiones">
-      <span
-        class="gtmCentroDeAyudaClicMenuscomisiones"
-        [routerLink]="['/centro-de-ayuda/comisiones']"
-        routerLinkActive="active-topic"
-        [routerLinkActiveOptions]="{ exact: true }"
-        >{{ 'HELP_CENTER.COMMISSIONS.COMMISSIONS' | translate }}</span
-      >
+      <span class="gtmCentroDeAyudaClicMenuscomisiones">
+        <a href="/centro-de-ayuda/comisiones" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">
+          {{ 'HELP_CENTER.COMMISSIONS.COMMISSIONS' | translate }}
+        </a>
+      </span>
     </mat-expansion-panel-header>
 
     <mat-list role="list" *ngFor="let item of commissions; let i = index">
-      <mat-list-item
-        (click)="setStep(2)"
-        ngClass="cursor-pointer gtmCentroDeAyudaClicMenu{{ item.class }}"
-        role="listitem"
-        [routerLink]="item.route"
-        routerLinkActive="active"
-        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{ item.name }}</span></mat-list-item
+      <mat-list-item (click)="setStep(2)" ngClass="cursor-pointer gtmCentroDeAyudaClicMenu{{ item.class }}" role="listitem"
+        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">
+          <a routerLinkActive="active" [href]="item.route">
+            {{ item.name }}
+          </a></span
+        ></mat-list-item
       >
     </mat-list>
   </mat-expansion-panel>
@@ -96,23 +87,20 @@
     class="help-center expansion-panel-box-shadow"
   >
     <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusreportes">
-      <span
-        class="gtmCentroDeAyudaClicMenusreportes"
-        [routerLink]="['/centro-de-ayuda/reportes']"
-        routerLinkActive="active-topic"
-        [routerLinkActiveOptions]="{ exact: true }"
-        >{{ 'HELP_CENTER.REPORTS.REPORTS' | translate }}</span
-      >
+      <span class="gtmCentroDeAyudaClicMenusreportes">
+        <a href="/centro-de-ayuda/reportes" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">
+          {{ 'HELP_CENTER.REPORTS.REPORTS' | translate }}
+        </a>
+      </span>
     </mat-expansion-panel-header>
 
     <mat-list role="list" *ngFor="let item of reports; let i = index">
-      <mat-list-item
-        (click)="setStep(3)"
-        ngClass="cursor-pointer gtmCentroDeAyudaClicMenu{{ item.class }}"
-        role="listitem"
-        [routerLink]="item.route"
-        routerLinkActive="active"
-        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{ item.name }}</span></mat-list-item
+      <mat-list-item (click)="setStep(3)" ngClass="cursor-pointer gtmCentroDeAyudaClicMenu{{ item.class }}" role="listitem"
+        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">
+          <a routerLinkActive="active" [href]="item.route">
+            {{ item.name }}
+          </a></span
+        ></mat-list-item
       >
     </mat-list>
   </mat-expansion-panel>
@@ -126,21 +114,21 @@
     <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusrefiereaunamigo">
       <span
         class="gtmCentroDeAyudaClicMenusrefiereaunamigo"
-        [routerLink]="['/centro-de-ayuda/refiere-a-un-amigo']"
-        routerLinkActive="active-topic"
-        [routerLinkActiveOptions]="{ exact: true }"
-        >{{ 'HELP_CENTER.REFER.REFER' | translate }}</span
+        >
+        <a href="/centro-de-ayuda/refiere-a-un-amigo" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">
+          {{ 'HELP_CENTER.REFER.REFER' | translate }}
+        </a>
+        </span
       >
     </mat-expansion-panel-header>
 
     <mat-list role="list" *ngFor="let item of refer; let i = index">
-      <mat-list-item
-        (click)="setStep(4)"
-        ngClass="cursor-pointer gtmCentroDeAyudaClicMenu{{ item.class }}"
-        role="listitem"
-        [routerLink]="item.route"
-        routerLinkActive="active"
-        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{ item.name }}</span></mat-list-item
+      <mat-list-item (click)="setStep(4)" ngClass="cursor-pointer gtmCentroDeAyudaClicMenu{{ item.class }}" role="listitem"
+        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">
+          <a routerLinkActive="active" [href]="item.route">
+            {{ item.name }}
+          </a></span
+        ></mat-list-item
       >
     </mat-list>
   </mat-expansion-panel>
@@ -154,21 +142,21 @@
     <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusofertas">
       <span
         class="gtmCentroDeAyudaClicMenusofertas"
-        [routerLink]="['/centro-de-ayuda/ofertas']"
-        routerLinkActive="active-topic"
-        [routerLinkActiveOptions]="{ exact: true }"
-        >{{ 'HELP_CENTER.OFFERS.OFFERS' | translate }}</span
+        >
+        <a href="/centro-de-ayuda/ofertas" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">
+          {{ 'HELP_CENTER.OFFERS.OFFERS' | translate }}
+        </a>
+        </span
       >
     </mat-expansion-panel-header>
 
     <mat-list role="list" *ngFor="let item of offers; let i = index">
-      <mat-list-item
-        (click)="setStep(5)"
-        ngClass="cursor-pointer gtmCentroDeAyudaClicMenu{{ item.class }}"
-        role="listitem"
-        [routerLink]="item.route"
-        routerLinkActive="active"
-        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{ item.name }}</span></mat-list-item
+      <mat-list-item (click)="setStep(5)" ngClass="cursor-pointer gtmCentroDeAyudaClicMenu{{ item.class }}" role="listitem"
+        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">
+          <a routerLinkActive="active" [href]="item.route">
+            {{ item.name }}
+          </a></span
+        ></mat-list-item
       >
     </mat-list>
   </mat-expansion-panel>
@@ -182,21 +170,21 @@
     <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusotraspreguntasfrecuentes">
       <span
         class="gtmCentroDeAyudaClicMenusotraspreguntasfrecuentes"
-        [routerLink]="['/centro-de-ayuda/otras-preguntas-frecuentes']"
-        routerLinkActive="active-topic"
-        [routerLinkActiveOptions]="{ exact: true }"
-        >{{ 'HELP_CENTER.QUESTIONS.QUESTIONS' | translate }}</span
+        >
+        <a href="/centro-de-ayuda/otras-preguntas-frecuentes" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">
+          {{ 'HELP_CENTER.QUESTIONS.QUESTIONS' | translate }}
+        </a>
+        </span
       >
     </mat-expansion-panel-header>
 
     <mat-list role="list" *ngFor="let item of questions; let i = index">
-      <mat-list-item
-        (click)="setStep(6)"
-        ngClass="cursor-pointer gtmCentroDeAyudaClicMenu{{ item.class }}"
-        role="listitem"
-        [routerLink]="item.route"
-        routerLinkActive="active"
-        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{ item.name }}</span></mat-list-item
+      <mat-list-item (click)="setStep(6)" ngClass="cursor-pointer gtmCentroDeAyudaClicMenu{{ item.class }}" role="listitem"
+        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">
+          <a routerLinkActive="active" [href]="item.route">
+            {{ item.name }}
+          </a></span
+        ></mat-list-item
       >
     </mat-list>
   </mat-expansion-panel>
@@ -210,21 +198,21 @@
     <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenuscontactalosnegocios">
       <span
         class="gtmCentroDeAyudaClicMenuscontactalosnegocios"
-        [routerLink]="['/centro-de-ayuda/contacta-los-negocios']"
-        routerLinkActive="active-topic"
-        [routerLinkActiveOptions]="{ exact: true }"
-        >{{ 'HELP_CENTER.CONTACTS.CONTACTS' | translate }}</span
+        >
+        <a href="/centro-de-ayuda/contacta-los-negocios" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">
+          {{ 'HELP_CENTER.CONTACTS.CONTACTS' | translate }}
+        </a>
+        </span
       >
     </mat-expansion-panel-header>
 
     <mat-list role="list" *ngFor="let item of contacts; let i = index">
-      <mat-list-item
-        (click)="setStep(7)"
-        ngClass="cursor-pointer gtmCentroDeAyudaClicMenu{{ item.class }}"
-        role="listitem"
-        [routerLink]="item.route"
-        routerLinkActive="active"
-        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{ item.name }}</span></mat-list-item
+      <mat-list-item (click)="setStep(7)" ngClass="cursor-pointer gtmCentroDeAyudaClicMenu{{ item.class }}" role="listitem"
+        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">
+          <a routerLinkActive="active" [href]="item.route">
+            {{ item.name }}
+          </a></span
+        ></mat-list-item
       >
     </mat-list>
   </mat-expansion-panel>
@@ -241,18 +229,21 @@
         [routerLink]="['/centro-de-ayuda/contactanos']"
         routerLinkActive="active-topic"
         [routerLinkActiveOptions]="{ exact: true }"
-        >{{ 'HELP_CENTER.CONTACTUS.CONTACTUS' | translate }}</span
+        >
+        <a href="/centro-de-ayuda/contactanos" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">
+          {{ 'HELP_CENTER.CONTACTUS.CONTACTUS' | translate }}
+        </a>
+        </span
       >
     </mat-expansion-panel-header>
 
     <mat-list role="list" *ngFor="let item of contactUs; let i = index">
-      <mat-list-item
-        (click)="setStep(8)"
-        ngClass="cursor-pointer gtmCentroDeAyudaClicMenu{{ item.class }}"
-        role="listitem"
-        [routerLink]="item.route"
-        routerLinkActive="active"
-        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{ item.name }}</span></mat-list-item
+      <mat-list-item (click)="setStep(8)" ngClass="cursor-pointer gtmCentroDeAyudaClicMenu{{ item.class }}" role="listitem"
+        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">
+          <a routerLinkActive="active" [href]="item.route">
+            {{ item.name }}
+          </a></span
+        ></mat-list-item
       >
     </mat-list>
   </mat-expansion-panel>
@@ -269,29 +260,27 @@
         [routerLink]="['/centro-de-ayuda/reportar']"
         routerLinkActive="active-topic"
         [routerLinkActiveOptions]="{ exact: true }"
-        >REPORTAR NOVEDAD</span
+        >
+        REPORTAR NOVEDAD</span
       >
     </mat-expansion-panel-header>
     <mat-list role="list" *ngFor="let item of report; let i = index">
-      <mat-list-item
-        (click)="setStep(9)"
-        ngClass="cursor-pointer gtmCentroDeAyudaClicMenu{{ item.class }}"
-        role="listitem"
-        [routerLink]="item.route"
-        routerLinkActive="active"
-        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">{{ item.name }}</span></mat-list-item
+      <mat-list-item (click)="setStep(9)" ngClass="cursor-pointer gtmCentroDeAyudaClicMenu{{ item.class }}" role="listitem"
+        ><span class="gtmCentroDeAyudaClicMenu{{ item.class }}">
+          <a routerLinkActive="active" [href]="item.route">
+            {{ item.name }}
+          </a></span
+        ></mat-list-item
       >
     </mat-list>
   </mat-expansion-panel>
-  <mat-list-item class="help-center itemli expansion-panel-box-shadow" *ngIf="reportVisible"
-  >
-  <span
+  <mat-list-item class="help-center itemli expansion-panel-box-shadow" *ngIf="reportVisible">
+    <span
       class="gtmCentroDeAyudaClicMenusconsultar"
       [routerLink]="['/centro-de-ayuda/consultar']"
       routerLinkActive="active-topic"
       [routerLinkActiveOptions]="{ exact: true }"
       >CONSULTAR NÚMERO DE ORDEN</span
     >
-</mat-list-item>
-
+  </mat-list-item>
 </mat-accordion>

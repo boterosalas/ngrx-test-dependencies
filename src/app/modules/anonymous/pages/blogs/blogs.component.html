@@ -4,7 +4,7 @@
   imgMobile="/assets/img/banners/banner-perfil-mobile.jpg"
 ></app-banner>
 <div class="over-flow-none container">
-  <a class="cursor-pointer" (click)="redirectionPath(blogMain.url)">
+  <a class="cursor-pointer" href="blog/{{blogMain.url}}">
     <div *ngIf="blogsData.length > 0" class="over-flow-none container-relative mt-4" fxLayout="row" fxLayoutAlign="center center">
       <img class="imagen-general" [src]="blogMain.imageurl" alt="" />
       <div class="background-image"></div>
@@ -37,7 +37,7 @@
       fxLayoutAlign.xs="center center"
     >
       <div *ngFor="let item of blogsData">
-        <a class="cursor-pointer" (click)="redirectionPath(item.url)">
+        <a class="cursor-pointer" href="blog/{{item.url}}">
           <img class="blog-image" [src]="item.imageurl" alt="" />
           <h4 class="mt-0 blog-text-mini">{{ item.title }}</h4>
           <div class="blog-text-sub" fxLayout="row" fxLayoutAlign="space-between">
