@@ -97,6 +97,8 @@ import { PartnersComponent } from './pages/partners/partners.component';
 import { PartnerListComponent } from './components/partner-list/partner-list.component';
 import { FormPartnerComponent } from './components/form-partner/form-partner.component';
 import { TableCarruselComponent } from './components/table-carrusel/table-carrusel.component';
+import { CampaingsComponent } from './components/campaings/campaings.component';
+import { FormCampaignComponent } from './components/form-campaign/form-campaign.component';
 
 const routes: Routes = [
   {
@@ -443,6 +445,8 @@ const routes: Routes = [
     PartnerListComponent,
     FormPartnerComponent,
     TableCarruselComponent,
+    CampaingsComponent,
+    FormCampaignComponent,
   ],
   imports: [
     AngularEditorModule,
@@ -502,7 +506,8 @@ const routes: Routes = [
     DialogStoryComponent,
     DialogOnboardingComponent,
     FormTestimonyComponent,
-    FormPartnerComponent
+    FormPartnerComponent,
+    FormCampaignComponent
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: UsersComponent },
