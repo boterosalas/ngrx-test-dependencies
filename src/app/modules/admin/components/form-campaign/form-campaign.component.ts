@@ -52,12 +52,11 @@ export class FormCampaignComponent implements OnInit {
       date = moment(date).format('YYYY-MM-DD');
     }
 
-    const urlCampaign = `${linkampaign}/?campaign=${nameCampaign}`;
+    const urlCampaign = `${linkampaign}/?campaign=${nameCampaign}&register=${register}`;
 
     const params = {
       date,
       urlCampaign,
-      register
     }
 
     console.log(params);

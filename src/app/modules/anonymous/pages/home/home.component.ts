@@ -196,8 +196,6 @@ export class HomeComponent implements OnInit, OnDestroy {
           localStorage.setItem('idClicker', params.code);
           this.openRegister();
           this.generateLink(params.code);
-        } else {
-          router.navigate(['/']);
         }
       }
     });
@@ -212,8 +210,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public generateUrl() {
-    const domain = document.location.origin;
-    this.url = encodeURI(`${domain}/inicio?code=${this.token.user.idclicker}`);
+    if(this.token.user && this.token.user.idclicker !== undefined) {
+      const domain = document.location.origin;
+      this.url = encodeURI(`${domain}/inicio?code=${this.token.user.idclicker}`);
+    }
   }
 
   public copyLink(inputElement:any) {

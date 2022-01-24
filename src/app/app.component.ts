@@ -1,16 +1,12 @@
 import { Component, OnInit, ViewChild, TemplateRef, HostListener, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Router, NavigationStart, NavigationEnd } from '@angular/router';
-import { trigger, state, style, transition, group, animate } from '@angular/animations';
+import { Router, NavigationStart, NavigationEnd, Routes, ActivatedRoute } from '@angular/router';
 import { UtilsService } from './services/utils.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from './services/auth.service';
-import Swal from 'sweetalert2';
-import { BreakpointObserver } from '@angular/cdk/layout';
 import { UserService } from './services/user.service';
 import { ContentService } from './services/content.service';
 import { TokenService } from './services/token.service';
-import { SwUpdate } from '@angular/service-worker';
 declare var dataLayer: any;
 import { PopupComponent } from './modules/shared/components/popup/popup.component';
 import { isPlatformBrowser, Location } from '@angular/common';
@@ -23,7 +19,6 @@ import { ModalGenericComponent } from './modules/shared/components/modal-generic
 import { ResponseService } from './interfaces/response';
 import { MasterDataService } from './services/master-data.service';
 import { UpdateService } from './services/update.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { ReviewClickamComponent } from './modules/shared/components/review-clickam/review-clickam.component';
 @Component({
   selector: 'app-root',
@@ -32,13 +27,7 @@ import { ReviewClickamComponent } from './modules/shared/components/review-click
   animations: [onMainContentChange],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  // isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Web)
-  // .pipe(
-  //   map(result => result.matches),
-  //   shareReplay()
-  // );
-
-  name = 'Angular';
+  name = 'Clickam';
   public onSideNavChange: boolean;
 
   @ViewChild('templateCardLogin, TemplateCardRegister, TemplateCardForgot, templateCardActivate', {
@@ -87,10 +76,12 @@ export class AppComponent implements OnInit, OnDestroy {
   hideFH = false;
   fullCharge = false;
   rateapp = false;
+  openRegister: boolean = true;
 
   constructor(
     private translate: TranslateService,
     private router: Router,
+    private route: ActivatedRoute,
     private utils: UtilsService,
     public auth: AuthService,
     private user: UserService,
@@ -147,6 +138,16 @@ export class AppComponent implements OnInit, OnDestroy {
       const SplitLocation = urlLocation.split('/');
       this.classPage = SplitLocation[1];
     });
+
+    this.subscription = this.route.queryParams.subscribe((params) => {
+      
+      if (!!params.campaign) {
+        localStorage.setItem('campaign', params.campaign);
+      }
+      if(params.register === 'true') {
+        this.utils.showRegisterForm();
+      }
+    });
   }
 
   ngOnInit() {
@@ -200,6 +201,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.getUserData();
     this.review();
   }
+  
 
   public getTerms() {
     this.personalInfo.getTerms().subscribe((resp: any) => {

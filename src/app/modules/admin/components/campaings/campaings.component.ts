@@ -29,17 +29,17 @@ export class CampaingsComponent implements OnInit {
   displayedColumns: string[] = ['createdate', 'pubdate', 'campaign', 'link', 'clics', 'userscampaign','usersactive','actions'];
 
   dataSource = [
-    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores', clics:200, userscampaign: 150, usersactive: 120, register:false },
-    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores', clics:200, userscampaign: 150, usersactive: 120, register:false },
-    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores', clics:200, userscampaign: 150, usersactive: 120, register:false },
-    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores', clics:200, userscampaign: 150, usersactive: 120, register:false },
-    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores', clics:200, userscampaign: 150, usersactive: 120, register:false },
-    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores', clics:200, userscampaign: 150, usersactive: 120, register:false },
-    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores', clics:200, userscampaign: 150, usersactive: 120, register:false },
-    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores', clics:200, userscampaign: 150, usersactive: 120, register:false },
-    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores', clics:200, userscampaign: 150, usersactive: 120, register:false },
-    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores', clics:200, userscampaign: 150, usersactive: 120, register:false },
-    {createdate: '2023/01/08', publicationdate: '2023/01/08', campaign: 'otro',      link:'https://clickam.com.co/inicio?campaign=otro', clics:100, userscampaign: 50, usersactive: 20, register: true },
+    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores&register=true', clics:200, userscampaign: 150, usersactive: 120, register:false },
+    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores&register=true', clics:200, userscampaign: 150, usersactive: 120, register:false },
+    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores&register=true', clics:200, userscampaign: 150, usersactive: 120, register:false },
+    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores&register=true', clics:200, userscampaign: 150, usersactive: 120, register:false },
+    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores&register=true', clics:200, userscampaign: 150, usersactive: 120, register:false },
+    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores&register=true', clics:200, userscampaign: 150, usersactive: 120, register:false },
+    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores&register=true', clics:200, userscampaign: 150, usersactive: 120, register:false },
+    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores&register=true', clics:200, userscampaign: 150, usersactive: 120, register:false },
+    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores&register=true', clics:200, userscampaign: 150, usersactive: 120, register:false },
+    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores&register=true', clics:200, userscampaign: 150, usersactive: 120, register:false },
+    {createdate: '2023/01/08', publicationdate: '2023/01/08', campaign: 'otro',      link:'https://clickam.com.co/inicio?campaign=otro&register=false', clics:100, userscampaign: 50, usersactive: 20, register: true },
   ];
 
 
