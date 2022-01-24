@@ -87,6 +87,7 @@ export class AppComponent implements OnInit, OnDestroy {
   hideFH = false;
   fullCharge = false;
   rateapp = false;
+  idPopup:any;
 
   constructor(
     private translate: TranslateService,
@@ -270,9 +271,6 @@ export class AppComponent implements OnInit, OnDestroy {
         .subscribe(() => {
           this.user.saveOnboarding(true).subscribe();
           this.onboardingViwed = true;
-          if (!this.newTerms) {
-            this.termsAndConditions();
-          }
         });
     }
   }
@@ -298,7 +296,7 @@ export class AppComponent implements OnInit, OnDestroy {
         const locationHref = location.href;
         const routeSplit = locationHref.split('/');
         const currentRoute = '/' + routeSplit[routeSplit.length - 1];
-
+        
         const popUp = resp.find((x) => !x.new && x.seccion === currentRoute);
 
         if (popUp) {
@@ -309,21 +307,25 @@ export class AppComponent implements OnInit, OnDestroy {
             colorbutton: popUp.colorbutton,
             BLink: popUp.link,
           };
-
           this.openPopUp(infoPopUp);
-          this.saveVisitOffer(popUp.id);
+          this.idPopup = popUp.id;
         }
       });
     }
   }
 
   public openPopUp(infoPopUp) {
-    this.dialog.open(PopupComponent, {
+    const dialog = this.dialog.open(PopupComponent, {
       data: {
         ...infoPopUp,
       },
       panelClass: 'dynamic-popup',
     });
+
+    dialog.beforeClosed().subscribe(resp => {
+      this.saveVisitOffer(this.idPopup);
+    })
+
   }
 
   public saveVisitOffer(idoffer) {
@@ -383,8 +385,9 @@ export class AppComponent implements OnInit, OnDestroy {
           this.managedPayments = user.managedPayments;
           this.isEmployee = user.isEmployeeGrupoExito;
           this.newTerms = user.acceptTermsReferrals;
-          if (!this.newTerms) {
+          if (!this.newTerms && role === 'CLICKER') {
             this.getTerms();
+            this.termsAndConditions();
           }
           this.showModalsSecuence();
         });
