@@ -1,4 +1,4 @@
-<app-widget-bar></app-widget-bar>
+<app-widget-bar *ngIf="!auth.isLoggedIn()"></app-widget-bar>
 
 <header>
   <!-- Mobile - not login -->

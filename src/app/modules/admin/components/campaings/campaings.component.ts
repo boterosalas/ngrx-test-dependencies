@@ -50,6 +50,7 @@ export class CampaingsComponent implements OnInit, OnDestroy {
   constructor(private dialog:MatDialog, private user:UserService) {}
 
   ngOnInit(): void {
+    this.size = 10;
     // this.getCampaigns();
   }
 
