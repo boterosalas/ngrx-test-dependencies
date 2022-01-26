@@ -20,7 +20,7 @@
       
       <!-- Creation Date column -->
       <ng-container matColumnDef="createdate">
-        <th mat-header-cell *matHeaderCellDef class="text-center" mat-sort-header="date">
+        <th mat-header-cell *matHeaderCellDef class="text-center" mat-sort-header="DATE">
           <span class="galano-bold">FECHA DE CREACIÓN</span>
         </th>
         <td mat-cell class="text-center" *matCellDef="let element">
@@ -30,7 +30,7 @@
 
       <!-- Publication Date column -->
       <ng-container matColumnDef="pubdate">
-        <th mat-header-cell *matHeaderCellDef class="text-center" mat-sort-header="pubdate">
+        <th mat-header-cell *matHeaderCellDef class="text-center" mat-sort-header="PUBLISH">
           <span class="galano-bold">FECHA DE PUBLICACIÓN </span>
         </th>
         <td mat-cell class="text-center" *matCellDef="let element">
@@ -40,7 +40,7 @@
 
       <!--  Name Campaign Column -->
       <ng-container matColumnDef="campaign">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header="campaign">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="CAMPAIGN">
           <span class="galano-bold">NOMBRE DE LA CAMPAÑA</span>
         </th>
         <td mat-cell *matCellDef="let element; let i = index">
@@ -50,7 +50,7 @@
 
       <!-- Link Column -->
       <ng-container matColumnDef="link">
-        <th mat-header-cell *matHeaderCellDef class="text-center" mat-sort-header="link">
+        <th mat-header-cell *matHeaderCellDef class="text-center" mat-sort-header="LINK">
           <span class="galano-bold">LINK</span>
         </th>
         <td mat-cell class="text-underline purple2 f-12" *matCellDef="let element">
@@ -60,7 +60,7 @@
 
       <!-- clics Column -->
       <ng-container matColumnDef="clics">
-        <th mat-header-cell *matHeaderCellDef class="text-center" mat-sort-header="clic">
+        <th mat-header-cell *matHeaderCellDef class="text-center" mat-sort-header="CLICKS">
           <span class="galano-bold">CLICS (RECIBIDOS)</span>
         </th>
         <td mat-cell class="text-center" *matCellDef="let element">
@@ -70,7 +70,7 @@
 
       <!-- users campaign Column -->
       <ng-container matColumnDef="userscampaign">
-        <th mat-header-cell *matHeaderCellDef class="text-center" mat-sort-header="userscampaign">
+        <th mat-header-cell *matHeaderCellDef class="text-center" mat-sort-header="REGISTERED">
           <span class="galano-bold">USUARIOS REGISTRADOS POR CAMPAÑA</span>
         </th>
         <td mat-cell class="text-center" *matCellDef="let element">
@@ -80,7 +80,7 @@
 
       <!-- users active Column -->
       <ng-container matColumnDef="usersactive">
-        <th mat-header-cell *matHeaderCellDef class="text-center" mat-sort-header="usersactive">
+        <th mat-header-cell *matHeaderCellDef class="text-center" mat-sort-header="ACTIVE">
           <span class="galano-bold">USUARIOS ACTIVOS DE LA CAMPAÑA</span>
         </th>
         <td mat-cell class="text-center" *matCellDef="let element">

@@ -83,6 +83,8 @@ export class UserService {
   apiGetTestimoniesUser= 'testimony/gettestimoniesuser';
   apiSaveOrderTestimony= 'testimony/saveordertestimony';
   apiSaveActiveTestimony= 'testimony/saveactivetestimony';
+  apiSaveCampaign='campaign/savecampaign';
+  apiGetCampaign='campaign/getcampaigns';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -96,6 +98,35 @@ export class UserService {
 
   onboardingView = new BehaviorSubject<any>({ onboardin: false, popUps: false });
   userOnboardingObservable = this.onboardingView.asObservable();
+
+  public saveCampaign(data: object) {
+    return this.http.post(`${this.urlContent + this.apiSaveCampaign}`, data , this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => { })
+        )
+      )
+    );
+  }
+
+  public getCampaigns(params) {
+    return this.http
+      .get(`${this.urlContent}${this.apiGetCampaign}?from=${params.from}&to=${params.to}&orderBy=${params.orderBy}&ordination=${params.orderOrigin}&start=${params.startDate}&end=${params.endDate}`, this.httpOptions)
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delay(3000),
+            take(3),
+            tap((errorStatus) => {})
+          )
+        ),
+        map((resp: ResponseService) => {
+          return resp.objectResponse;
+        })
+      );
+  }
 
   public getProfile() {
     return this.http

@@ -1,21 +1,32 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import moment from 'moment';
+import { Subscription } from 'rxjs';
+import { ResponseService } from 'src/app/interfaces/response';
+import { UserService } from 'src/app/services/user.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-form-campaign',
   templateUrl: './form-campaign.component.html',
   styleUrls: ['./form-campaign.component.scss']
 })
-export class FormCampaignComponent implements OnInit {
+export class FormCampaignComponent implements OnInit, OnDestroy {
 
   campaignForm: FormGroup;
   campaignPattern = '^[a-za-z0-9-]+$';
+  private subscription: Subscription = new Subscription();
 
   edit: boolean;
 
-  constructor(private fb:FormBuilder, private dialogRef: MatDialogRef<any>, @Inject(MAT_DIALOG_DATA) public data: any,) { }
+  constructor(
+    private fb:FormBuilder,
+    private dialogRef: MatDialogRef<any>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private user: UserService,
+    private utils: UtilsService
+    ) { }
 
   ngOnInit(): void {
     this.campaignForm = this.fb.group({
@@ -25,7 +36,9 @@ export class FormCampaignComponent implements OnInit {
       register: [false]
     })
 
-    this.edit = this.data.edit;
+    if(this.data) {
+      this.edit = this.data.edit;
+    }
 
     
     if(this.edit) {
@@ -55,14 +68,23 @@ export class FormCampaignComponent implements OnInit {
     const urlCampaign = `${linkampaign}/?campaign=${nameCampaign}&register=${register}`;
 
     const params = {
-      date,
-      urlCampaign,
+      id:0,
+      publishdate: date,
+      description: nameCampaign,
+      link: linkampaign,
+      url:urlCampaign,
+      register
     }
 
-    console.log(params);
+    this.subscription = this.user.saveCampaign(params).subscribe((campaign:ResponseService) =>{
+      this.utils.openSnackBar(campaign.userMessage, 'Cerrar');
+      this.onNoClick();
+    })
 
   }
 
-  
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
 }

@@ -4,7 +4,7 @@
     <app-button fxHide.xs="true" title="Ver reporte completo" [routerLink]="['/reportes']" color="gray" classIcon="tio-share_vs style-icon"></app-button>
   </div>
 
-  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutAlign="center center">
+  <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutAlign="center center">
     <app-reward-card
       title="Recompensas de este mes"
       [money]="account | currency: '':'symbol':'1.0-0'"

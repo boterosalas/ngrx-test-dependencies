@@ -1,6 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 import { DataRangeInterface } from 'src/app/interfaces/dateRangeInterface';
+import { UserService } from 'src/app/services/user.service';
 import { FormCampaignComponent } from '../form-campaign/form-campaign.component';
 
 @Component({
@@ -8,7 +10,7 @@ import { FormCampaignComponent } from '../form-campaign/form-campaign.component'
   templateUrl: './campaings.component.html',
   styleUrls: ['./campaings.component.scss'],
 })
-export class CampaingsComponent implements OnInit {
+export class CampaingsComponent implements OnInit, OnDestroy {
   startDate: string;
   endDate: string;
 
@@ -25,6 +27,8 @@ export class CampaingsComponent implements OnInit {
 
   orderBy: string;
   ordination: string;
+
+  private subscription: Subscription = new Subscription();
 
   displayedColumns: string[] = ['createdate', 'pubdate', 'campaign', 'link', 'clics', 'userscampaign','usersactive','actions'];
 
@@ -43,9 +47,11 @@ export class CampaingsComponent implements OnInit {
   ];
 
 
-  constructor(private dialog:MatDialog) {}
+  constructor(private dialog:MatDialog, private user:UserService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.getCampaigns();
+  }
 
   public getDate(e: DataRangeInterface) {
     this.startDate = e.startDate;
@@ -68,9 +74,9 @@ export class CampaingsComponent implements OnInit {
       width: '450px',
     });
 
-    // dialog.beforeClosed().subscribe(() => {
-    //   this.getPartner();
-    // });
+    dialog.beforeClosed().subscribe(() => {
+      this.getCampaigns(this.from, this.to, this.orderBy, this.ordination, this.startDate, this.endDate);
+    });
   }
 
   public edit(item: any) {
@@ -88,7 +94,7 @@ export class CampaingsComponent implements OnInit {
     this.pageIndex = paginate;
     this.from = this.pageSize * this.pageIndex + 1 - 50;
     this.to = this.pageSize * (this.pageIndex + 1) - 50;
-    // this.getLinksHistory(this.from, this.to, this.orderBy, this.ordination, this.startDate, this.endDate);
+    this.getCampaigns(this.from, this.to, this.orderBy, this.ordination, this.startDate, this.endDate);
   }
 
   public sortData(event) {
@@ -99,7 +105,19 @@ export class CampaingsComponent implements OnInit {
     }
     this.orderBy = name;
     this.ordination = direction;
-    // this.getLinksHistory(this.from, this.to, this.orderBy, this.ordination, this.startDate, this.endDate);
+    this.getCampaigns(this.from, this.to, this.orderBy, this.ordination, this.startDate, this.endDate);
+  }
+
+  public getCampaigns(from = 1, to = this.pageTo, orderBy = '' , orderOrigin = '', startDate = '', endDate = '') {
+    const params = { from, to, orderOrigin , orderBy, startDate, endDate };
+    this.subscription = this.user.getCampaigns(params).subscribe((resp) => {
+      this.totalItems = resp.total;
+      this.dataSource = resp.linkHistory;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

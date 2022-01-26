@@ -62,6 +62,13 @@
         </span>
       </mat-card>
 
+      <div class="widget" fxHide.lt-md="true">
+        <a href="https://www.google.com" target="_blank" class="w-100" mat-raised-button color="chrome" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+          <img class="pr-2" src="assets/img/chrome.svg" alt="chrome" />
+          <span>Instalar Clickam en Chrome</span> 
+        </a>
+      </div>
+
       <mat-card class="card mat-card-box-shadow pl-0 pr-0">
         <app-title showTitleh3="true" text="MISIONES" commonClass="pl-3"></app-title>
         <mat-list-item *ngFor="let mission of missions">
