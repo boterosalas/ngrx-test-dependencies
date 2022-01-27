@@ -7,6 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { CardReportComponent } from './components/card-report/card-report.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { TopProductsComponent } from './components/top-products/top-products.component';
 
 const routes: Routes = [
   {
@@ -19,7 +20,8 @@ const routes: Routes = [
   declarations: [
     PartnerComponent,
     ReportPartnerComponent,
-    CardReportComponent
+    CardReportComponent,
+    TopProductsComponent
   ],
   imports: [
     CommonModule,
