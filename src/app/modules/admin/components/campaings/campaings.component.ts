@@ -32,26 +32,14 @@ export class CampaingsComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = ['createdate', 'pubdate', 'campaign', 'link', 'clics', 'userscampaign','usersactive','actions'];
 
-  dataSource = [
-    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores&register=true', clics:200, userscampaign: 150, usersactive: 120, register:false },
-    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores&register=true', clics:200, userscampaign: 150, usersactive: 120, register:false },
-    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores&register=true', clics:200, userscampaign: 150, usersactive: 120, register:false },
-    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores&register=true', clics:200, userscampaign: 150, usersactive: 120, register:false },
-    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores&register=true', clics:200, userscampaign: 150, usersactive: 120, register:false },
-    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores&register=true', clics:200, userscampaign: 150, usersactive: 120, register:false },
-    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores&register=true', clics:200, userscampaign: 150, usersactive: 120, register:false },
-    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores&register=true', clics:200, userscampaign: 150, usersactive: 120, register:false },
-    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores&register=true', clics:200, userscampaign: 150, usersactive: 120, register:false },
-    {createdate: '2022/01/08', publicationdate: '2022/01/08', campaign: 'Acensores', link:'https://clickam.com.co/inicio?campaign=acensores&register=true', clics:200, userscampaign: 150, usersactive: 120, register:false },
-    {createdate: '2023/01/08', publicationdate: '2023/01/08', campaign: 'otro',      link:'https://clickam.com.co/inicio?campaign=otro&register=false', clics:100, userscampaign: 50, usersactive: 20, register: true },
-  ];
+  dataSource = [];
 
 
   constructor(private dialog:MatDialog, private user:UserService) {}
 
   ngOnInit(): void {
     this.size = 10;
-    // this.getCampaigns();
+    this.getCampaigns();
   }
 
   public getDate(e: DataRangeInterface) {
@@ -112,8 +100,9 @@ export class CampaingsComponent implements OnInit, OnDestroy {
   public getCampaigns(from = 1, to = this.pageTo, orderBy = '' , orderOrigin = '', startDate = '', endDate = '') {
     const params = { from, to, orderOrigin , orderBy, startDate, endDate };
     this.subscription = this.user.getCampaigns(params).subscribe((resp) => {
-      this.totalItems = resp.total;
-      this.dataSource = resp.linkHistory;
+      // this.totalItems = resp.total;
+      // this.dataSource = resp.linkHistory;
+      console.log(resp);
     });
   }
 
