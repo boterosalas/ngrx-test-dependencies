@@ -19,8 +19,6 @@ import { RewardCardComponent } from '../anonymous/components/reward-card/reward-
 import { ListBlogsComponent } from '../anonymous/components/list-blogs/list-blogs.component';
 import { TopRewardComponent } from '../anonymous/components/top-reward/top-reward.component';
 
-
-
 const routes: Routes = [
   {
     path: '',
@@ -34,9 +32,8 @@ const routes: Routes = [
   {
     path: '?',
     component: HomeComponent,
-  }
-]
-
+  },
+];
 
 @NgModule({
   declarations: [
@@ -50,7 +47,7 @@ const routes: Routes = [
     ReportRewardComponent,
     RewardCardComponent,
     ListBlogsComponent,
-    TopRewardComponent
+    TopRewardComponent,
   ],
   imports: [
     CommonModule,
@@ -61,12 +58,8 @@ const routes: Routes = [
     TranslateModule,
     RouterModule.forChild(routes),
     SlickCarouselModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
-  exports: [
-    RouterModule,
-    SliderStoriesComponent,
-    NewBlogComponent
-  ]
+  exports: [RouterModule, SliderStoriesComponent, NewBlogComponent],
 })
-export class HomeModule { }
+export class HomeModule {}
