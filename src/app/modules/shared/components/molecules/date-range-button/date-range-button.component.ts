@@ -13,6 +13,7 @@ export class DateRangeButtonComponent implements OnInit {
   @Output() called = new EventEmitter();
   @Input() direction = 'row';
   @Input() classLayout:string;
+  @Input() compare = false;
 
   maxDate = moment(new Date());
   dateRangeForm: FormGroup;
@@ -38,6 +39,7 @@ export class DateRangeButtonComponent implements OnInit {
   ngOnInit(): void {
     this.dateRangeForm = this.fb.group({
       dateRange: ['', Validators.required],
+      compareRange: [''],
     });
   }
 

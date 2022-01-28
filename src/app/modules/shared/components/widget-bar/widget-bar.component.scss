@@ -1,0 +1,10 @@
+@import 'variables';
+
+.widget-bar {
+    background: $third-color;
+    color: $primary-color;
+    height: 48px;
+    // position: fixed;
+    // width: 100%;
+    // top: 0;
+}

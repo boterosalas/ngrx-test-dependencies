@@ -1,0 +1,68 @@
+<mat-card class="card mat-card-box-shadow">
+  <div class="mat-elevation-z0 mt-4 mb-4 overflow-auto">
+    <table mat-table [dataSource]="dataSource" class="users-table w-100">
+      <!-- Product Name Column -->
+      <ng-container matColumnDef="productname">
+        <th mat-header-cell *matHeaderCellDef>
+          <span class="galano-bold">PRODUCTO/CATEGORÍA</span>
+        </th>
+        <td mat-cell *matCellDef="let element; let i = index">
+          <span>{{ element.productname }}</span>
+        </td>
+      </ng-container>
+
+      <!-- users Column -->
+      <ng-container matColumnDef="user">
+        <th mat-header-cell *matHeaderCellDef>
+          <span class="galano-bold"># USUARIOS</span>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.users }}
+        </td>
+      </ng-container>
+
+      <!-- links Column -->
+      <ng-container matColumnDef="links">
+        <th mat-header-cell *matHeaderCellDef>
+          <span class="galano-bold">LINKS GENERADOS</span>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.links }}
+        </td>
+      </ng-container>
+
+      <!-- clicks Column -->
+      <ng-container matColumnDef="clicks">
+        <th mat-header-cell *matHeaderCellDef>
+          <span class="galano-bold">LINKS CLICKEADOS</span>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.clicks }}
+        </td>
+      </ng-container>
+
+      <!-- sell Column -->
+      <ng-container matColumnDef="sell">
+        <th mat-header-cell *matHeaderCellDef>
+          <span class="galano-bold">VENTAS</span>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.sell }}
+        </td>
+      </ng-container>
+
+      <!-- reward Column -->
+      <ng-container matColumnDef="reward">
+        <th mat-header-cell *matHeaderCellDef>
+          <span class="galano-bold">RECOMPENSA</span>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.reward | currency: '':'symbol':'1.0-0' }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
+    </table>
+  </div>
+</mat-card>

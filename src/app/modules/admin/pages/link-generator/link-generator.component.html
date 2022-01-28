@@ -5,10 +5,18 @@
 ></app-banner>
 
 <div class="container minaud mt-3">
-  <app-link-generator-form
-    [enableButton]="enableButton"
-    [bussiness]="bussiness"
-    [url]="url"
-    (generate)="generateLink($event)"
-  ></app-link-generator-form>
+  <mat-tab-group>
+    <mat-tab label="GENERADOR DE LINKS">
+      <br />
+      <app-link-generator-form
+        [enableButton]="enableButton"
+        [bussiness]="bussiness"
+        [url]="url"
+        (generate)="generateLink($event)"
+      ></app-link-generator-form>
+    </mat-tab>
+    <mat-tab label="CAMPAÑAS">
+      <app-campaings></app-campaings>
+    </mat-tab>
+  </mat-tab-group>
 </div>

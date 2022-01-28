@@ -1,5 +1,8 @@
 <div *ngFor="let item of items; let i = index" class="card-partner-{{ i }} white" ngClass.gt-xs="card-dash mr-2">
-    <h3 class="f-18">{{ item.title }}</h3>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <h3 class="f-18">{{ item.title }}</h3>
+      <i class="tio-info f-20 purple2-text" matTooltipClass="purple-tip" [matTooltip]="item.tooltip"></i>
+    </div>
   
     <mat-card style="border-radius: 10px !important">
       <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
@@ -11,10 +14,10 @@
             {{ item.number }}
           </span>
   
-          <span class="galono-bold f-13">{{ item.subtitle }}</span>
+          <!-- <span class="galono-bold f-13">{{ item.subtitle }}</span> -->
         </div>
         <div fxLayout="column">
-          <img [src]="item.icon" [alt]="item.subtitle" />
+          <img [src]="item.icon" alt="icon" />
         </div>
       </div>
     </mat-card>

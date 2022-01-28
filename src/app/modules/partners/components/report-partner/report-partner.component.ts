@@ -14,6 +14,8 @@ export class ReportPartnerComponent implements OnInit {
   startDate = moment(new Date());
   endDate = moment(new Date());
   items = [];
+  name:string;
+  icon:string;
 
   constructor(private link: LinksService, private utils: UtilsService) {}
 
@@ -30,7 +32,7 @@ export class ReportPartnerComponent implements OnInit {
       export: false,
     };
     this.link.getBussinessPartnerKPI(params).subscribe((kpiFilter: ResponseService) => {
-      this.items =  kpiFilter.objectResponse;
+      this.items =  kpiFilter.objectResponse.kpi;
     });
   }
 
@@ -54,7 +56,9 @@ export class ReportPartnerComponent implements OnInit {
     };
 
     this.link.getBussinessPartnerKPI(params).subscribe((kpi:ResponseService) => {
-      this.items = kpi.objectResponse;
+      this.items = kpi.objectResponse.kpi;
+      this.name = kpi.objectResponse.business;
+      this.icon = kpi.objectResponse.icon;
     })
   }
 }
