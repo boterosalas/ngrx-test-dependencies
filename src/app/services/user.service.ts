@@ -113,7 +113,7 @@ export class UserService {
 
   public getCampaigns(params) {
     return this.http
-      .get(`${this.urlContent}${this.apiGetCampaign}?from=${params.from}&to=${params.to}&orderBy=${params.orderBy}&ordination=${params.orderOrigin}&start=${params.startDate}&end=${params.endDate}`, this.httpOptions)
+      .get(`${this.urlContent}${this.apiGetCampaign}?from=${params.from}&to=${params.to}&orderBy=${params.orderBy}&ordination=${params.orderOrigin}&start=${params.startDate}&end=${params.endDate}&export=${params.exports}`, this.httpOptions)
       .pipe(
         retryWhen((errors) =>
           errors.pipe(

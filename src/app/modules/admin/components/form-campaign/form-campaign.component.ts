@@ -30,8 +30,8 @@ export class FormCampaignComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.campaignForm = this.fb.group({
-      campaign: ['',  [ Validators.pattern(this.campaignPattern),Validators.required]],
-      link: ['', [Validators.required]],
+      campaign: [{value:'', disabled: this.data && this.data.edit}, [ Validators.pattern(this.campaignPattern),Validators.required]],
+      link: [{value: '', disabled: this.data && this.data.edit}, [Validators.required]],
       date: [null],
       register: [false]
     })
@@ -42,9 +42,9 @@ export class FormCampaignComponent implements OnInit, OnDestroy {
 
     
     if(this.edit) {
-      this.campaignForm.controls.campaign.setValue(this.data.item.campaign);
+      this.campaignForm.controls.campaign.setValue(this.data.item.description);
       this.campaignForm.controls.link.setValue(this.data.item.link);
-      this.campaignForm.controls.date.setValue(this.data.item.publicationdate);
+      this.campaignForm.controls.date.setValue(this.data.item.publishdate);
       this.campaignForm.controls.register.setValue(this.data.item.register);
     }
 
@@ -65,14 +65,16 @@ export class FormCampaignComponent implements OnInit, OnDestroy {
       date = moment(date).format('YYYY-MM-DD');
     }
 
-    const urlCampaign = `${linkampaign}/?campaign=${nameCampaign}&register=${register}`;
+    const origin = window.location.origin;
+
+    const urlCampaign = `${origin}/${linkampaign}/?campaign=${nameCampaign}&register=${register}`;
 
     const params = {
-      id:0,
+      id: !this.data ? 0 : this.data.item.id,
       publishdate: date,
-      description: nameCampaign,
-      link: linkampaign,
-      url:urlCampaign,
+      description: !this.data ? nameCampaign: '',
+      link: !this.data ? urlCampaign : '',
+      url:!this.data ? linkampaign : '',
       register
     }
 

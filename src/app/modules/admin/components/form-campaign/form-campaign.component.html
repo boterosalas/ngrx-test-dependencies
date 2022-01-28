@@ -31,5 +31,5 @@
 
 <div fxLayout="row" fxLayoutAlign="end center" class="mt-3">
     <app-button title="Cancelar" [haveIcon]="false" (action)="onNoClick()" color="transparent" classButton="no-shadow"></app-button>
-    <app-button title="Agregar campaña" (action)="saveCampaign()" [haveIcon]="false"  classButton="shadow-purple" [disabled]="!campaignForm.valid"></app-button>
+    <app-button [title]="edit ? 'Editar campaña' : 'Agregar campaña'" (action)="saveCampaign()" [haveIcon]="false"  classButton="shadow-purple" [disabled]="!campaignForm.valid"></app-button>
   </div>

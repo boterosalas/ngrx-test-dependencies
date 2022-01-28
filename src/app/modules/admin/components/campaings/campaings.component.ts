@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { DataRangeInterface } from 'src/app/interfaces/dateRangeInterface';
 import { UserService } from 'src/app/services/user.service';
+import { UtilsService } from 'src/app/services/utils.service';
 import { FormCampaignComponent } from '../form-campaign/form-campaign.component';
 
 @Component({
@@ -33,42 +34,41 @@ export class CampaingsComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['createdate', 'pubdate', 'campaign', 'link', 'clics', 'userscampaign','usersactive','actions'];
 
   dataSource = [];
+  export = false;
 
 
-  constructor(private dialog:MatDialog, private user:UserService) {}
+  constructor(private dialog:MatDialog, private user:UserService, private utils: UtilsService) {}
 
   ngOnInit(): void {
-    this.size = 10;
     this.getCampaigns();
   }
 
   public getDate(e: DataRangeInterface) {
+    this.export = false;
     this.startDate = e.startDate;
     this.endDate = e.endDate;
+    this.getCampaigns(this.from, this.to, this.orderBy, this.ordination, this.startDate, this.endDate, this.export);
   }
 
   public exportCampaign() {
-    const params = {
-      startDate: this.startDate,
-      endDate: this.endDate,
-    };
-
-    // this.user.getreportordersnotinvoiced(params).subscribe((orders: ResponseService) => {
-    //   this.openSnackBar(orders.userMessage, 'Cerrar');
-    // })
+    this.export = true;
+    this.getCampaigns(this.from, this.to, this.orderBy, this.ordination, this.startDate, this.endDate, this.export);
+    this.utils.openSnackBar('Se enviará un correo al finalizar la carga', 'Cerrar')
   }
 
   public addCampaign() {
+    this.export = false;
     const dialog = this.dialog.open(FormCampaignComponent, {
       width: '450px',
     });
 
     dialog.beforeClosed().subscribe(() => {
-      this.getCampaigns(this.from, this.to, this.orderBy, this.ordination, this.startDate, this.endDate);
+      this.getCampaigns(this.from, this.to, this.orderBy, this.ordination, this.startDate, this.endDate, this.export);
     });
   }
 
   public edit(item: any) {
+    this.export = false;
     const data = {
       edit: true,
       item
@@ -77,16 +77,21 @@ export class CampaingsComponent implements OnInit, OnDestroy {
       data,
       width: '450px',
     });
+    dialog.beforeClosed().subscribe(() => {
+      this.getCampaigns(this.from, this.to, this.orderBy, this.ordination, this.startDate, this.endDate, this.export);
+    });
   }
 
   public pagination(paginate: any) {
+    this.export = false;
     this.pageIndex = paginate;
     this.from = this.pageSize * this.pageIndex + 1 - 50;
     this.to = this.pageSize * (this.pageIndex + 1) - 50;
-    this.getCampaigns(this.from, this.to, this.orderBy, this.ordination, this.startDate, this.endDate);
+    this.getCampaigns(this.from, this.to, this.orderBy, this.ordination, this.startDate, this.endDate, this.export);
   }
 
   public sortData(event) {
+    this.export = false;
     let name = event.active.toUpperCase();
     const direction = event.direction.toUpperCase();
     if (direction === '') {
@@ -94,15 +99,14 @@ export class CampaingsComponent implements OnInit, OnDestroy {
     }
     this.orderBy = name;
     this.ordination = direction;
-    this.getCampaigns(this.from, this.to, this.orderBy, this.ordination, this.startDate, this.endDate);
+    this.getCampaigns(this.from, this.to, this.orderBy, this.ordination, this.startDate, this.endDate, this.export);
   }
 
-  public getCampaigns(from = 1, to = this.pageTo, orderBy = '' , orderOrigin = '', startDate = '', endDate = '') {
-    const params = { from, to, orderOrigin , orderBy, startDate, endDate };
+  public getCampaigns(from = 1, to = this.pageTo, orderBy = '' , orderOrigin = '', startDate = '', endDate = '', exports = this.export) {
+    const params = { from, to, orderOrigin , orderBy, startDate, endDate, exports};
     this.subscription = this.user.getCampaigns(params).subscribe((resp) => {
-      // this.totalItems = resp.total;
-      // this.dataSource = resp.linkHistory;
-      console.log(resp);
+      this.size = resp.total;
+      this.dataSource = resp.campaigns;
     });
   }
 
