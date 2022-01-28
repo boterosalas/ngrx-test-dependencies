@@ -35,7 +35,9 @@ const routes: Routes = [
     data: {
       role: 'PARTNER',
     },
-  }
+  },
+  { path: '', loadChildren: () => import('./modules/home/home.module').then((m) => m.HomeModule)},
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
