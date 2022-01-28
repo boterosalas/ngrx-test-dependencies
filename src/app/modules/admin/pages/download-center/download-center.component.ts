@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { LinksService } from 'src/app/services/links.service';
 
 @Component({
   selector: 'app-download-center',
@@ -13,8 +14,8 @@ export class DownloadCenterComponent implements OnInit {
   totalItems: number;
 
   pageIndex = 0;
-  pageSize = 10;
-  pageTo = 10;
+  pageSize = 50;
+  pageTo = 50;
   paginate: string;
   from: any;
   to: any;
@@ -26,56 +27,28 @@ export class DownloadCenterComponent implements OnInit {
 
   displayedColumns: string[] = ['createdate', 'name','link'];
 
-  dataSource = [
-    {createdate: '2022/01/08', name: '2022/01/08',  link:'http://clickam.com.co/reportes/ndjfa823njsdf91.xls'},
-    {createdate: '2022/01/08', name: '2022/01/08',  link:'http://clickam.com.co/reportes/ndjfa823njsdf91.xls'},
-    {createdate: '2022/01/08', name: '2022/01/08',  link:'http://clickam.com.co/reportes/ndjfa823njsdf91.xls'},
-    {createdate: '2022/01/08', name: '2022/01/08',  link:'http://clickam.com.co/reportes/ndjfa823njsdf91.xls'},
-    {createdate: '2022/01/08', name: '2022/01/08',  link:'http://clickam.com.co/reportes/ndjfa823njsdf91.xls'},
-    {createdate: '2022/01/08', name: '2022/01/08',  link:'http://clickam.com.co/reportes/ndjfa823njsdf91.xls'},
-    {createdate: '2022/01/08', name: '2022/01/08',  link:'http://clickam.com.co/reportes/ndjfa823njsdf91.xls'},
-    {createdate: '2022/01/08', name: '2022/01/08',  link:'http://clickam.com.co/reportes/ndjfa823njsdf91.xls'},
-    {createdate: '2022/01/08', name: '2022/01/08',  link:'http://clickam.com.co/reportes/ndjfa823njsdf91.xls'},
-    {createdate: '2022/01/08', name: '2022/01/08',  link:'http://clickam.com.co/reportes/ndjfa823njsdf91.xls'},
-    {createdate: '2022/01/08', name: '2022/01/08',  link:'http://clickam.com.co/reportes/ndjfa823njsdf91.xls'},
-    {createdate: '2022/01/08', name: '2022/01/08',  link:'http://clickam.com.co/reportes/ndjfa823njsdf91.xls'},
-    {createdate: '2022/01/08', name: '2022/01/08',  link:'http://clickam.com.co/reportes/ndjfa823njsdf91.xls'},
-    {createdate: '2022/01/08', name: '2022/01/08',  link:'http://clickam.com.co/reportes/ndjfa823njsdf91.xls'},
-    {createdate: '2022/01/08', name: '2022/01/08',  link:'http://clickam.com.co/reportes/ndjfa823njsdf91.xls'},
-    {createdate: '2022/01/10', name: '2022/01/08',  link:'http://clickam.com.co/reportes/ndjfa823njsdf91.xls'},
-  ];
+  dataSource = [];
 
 
-  constructor() {}
+  constructor(private link:LinksService) {}
 
   ngOnInit(): void {
-    this.size = 12;
+    this.getReport();
   }
 
   public pagination(paginate: any) {
     this.pageIndex = paginate;
     this.from = this.pageSize * this.pageIndex + 1 - 10;
     this.to = this.pageSize * (this.pageIndex + 1) - 10;
-    this.getCampaigns(this.from, this.to, this.orderBy, this.ordination);
+    this.getReport(this.from, this.to);
   }
 
-  public sortData(event) {
-    let name = event.active.toUpperCase();
-    const direction = event.direction.toUpperCase();
-    if (direction === '') {
-      name = '';
-    }
-    this.orderBy = name;
-    this.ordination = direction;
-    this.getCampaigns(this.from, this.to, this.orderBy, this.ordination,);
-  }
-
-  public getCampaigns(from = 1, to = this.pageTo, orderBy = '' , orderOrigin = '') {
-    const params = { from, to, orderOrigin , orderBy };
-    // this.subscription = this.user.getCampaigns(params).subscribe((resp) => {
-    //   this.totalItems = resp.total;
-    //   this.dataSource = resp.linkHistory;
-    // });
+  public getReport(from = 1, to = this.pageTo) {
+    const params = { from, to};
+    this.subscription = this.link.getReport(params).subscribe((resp:any) => {
+      this.size = resp.total;
+      this.dataSource = resp.reports;
+    });
   }
 
   ngOnDestroy(): void {

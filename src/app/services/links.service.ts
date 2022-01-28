@@ -20,6 +20,7 @@ export class LinksService {
   reports = 'Reports/ClickerPerformanceReport';
   apiKPI = 'Reports/getKPI';
   apikpiresume = 'Reports/getkpiresume';
+  apiGetReports = 'reports/getreports';
 
   apikpibussiness = 'Reports/getkpibusiness';
 
@@ -449,6 +450,18 @@ export class LinksService {
 
   public getReportReferral() {
     return this.http.get(`${this.urlComission}${this.apiGetReportReferral}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      )
+    );
+  }
+
+  public getReport(params: any) {
+    return this.http.get(`${this.urlReports}${this.apiGetReports}?from=${params.from}&to=${params.to}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
