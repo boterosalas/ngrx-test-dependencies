@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { DownloadCenterComponent } from './download-center.component';
 
@@ -8,7 +10,11 @@ describe('DownloadCenterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DownloadCenterComponent ]
+      declarations: [ DownloadCenterComponent ],
+      imports:[
+        TranslateModule.forRoot(),
+        NgxPaginationModule
+      ]
     })
     .compileComponents();
   });

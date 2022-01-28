@@ -31,4 +31,11 @@ describe('ReviewClickamComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('review', () => {
+    component.qualify();
+    expect(dialogMock).toBeDefined();
+  });
+  
+
 });
