@@ -463,13 +463,16 @@ export class LinksService {
   public getReport(params: any) {
     return this.http.get(`${this.urlReports}${this.apiGetReports}?from=${params.from}&to=${params.to}`, this.httpOptions).pipe(
       retryWhen((errors) =>
-        errors.pipe(
-          delay(3000),
-          take(3),
-          tap((errorStatus) => {})
-        )
+      errors.pipe(
+        delay(3000),
+        take(3),
+        tap((errorStatus) => {})
       )
-    );
+    ),
+    map((resp: any) => {
+      return resp.objectResponse;
+    })
+  );
   }
 
   public getReportTerms() {

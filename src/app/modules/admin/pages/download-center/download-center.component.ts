@@ -46,6 +46,7 @@ export class DownloadCenterComponent implements OnInit {
   public getReport(from = 1, to = this.pageTo) {
     const params = { from, to};
     this.subscription = this.link.getReport(params).subscribe((resp:any) => {
+      console.log(resp);
       this.size = resp.total;
       this.dataSource = resp.reports;
     });
