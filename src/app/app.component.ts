@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, TemplateRef, HostListener, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, HostListener, OnDestroy, Inject, PLATFORM_ID, OnChanges } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router, NavigationStart, NavigationEnd, Routes, ActivatedRoute } from '@angular/router';
 import { UtilsService } from './services/utils.service';
@@ -78,6 +78,7 @@ export class AppComponent implements OnInit, OnDestroy {
   rateapp = false;
   openRegister: boolean = true;
   idPopup:any;
+  idCampaign:number;
 
   constructor(
     private translate: TranslateService,
@@ -143,7 +144,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscription = this.route.queryParams.subscribe((params) => {
       
       if (!!params.campaign) {
-        localStorage.setItem('campaign', params.campaign);
+        localStorage.setItem('campaign', params.id);
+        this.saveVisitCampaign(parseInt(params.id))
       }
       if(params.register === 'true') {
         this.utils.showRegisterForm();
@@ -201,8 +203,12 @@ export class AppComponent implements OnInit, OnDestroy {
     this.windowWidth();
     this.getUserData();
     this.review();
+    
   }
-  
+
+  public saveVisitCampaign(id: number) {
+    this.subscription = this.user.saveVisitCampaign(id).subscribe();
+  }
 
   public getTerms() {
     this.personalInfo.getTerms().subscribe((resp: any) => {

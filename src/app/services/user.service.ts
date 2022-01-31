@@ -85,6 +85,7 @@ export class UserService {
   apiSaveActiveTestimony= 'testimony/saveactivetestimony';
   apiSaveCampaign='campaign/savecampaign';
   apiGetCampaign='campaign/getcampaigns';
+  apiSaveVisitCampaign='campaign/savevisitcampaign';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -101,6 +102,18 @@ export class UserService {
 
   public saveCampaign(data: object) {
     return this.http.post(`${this.urlContent + this.apiSaveCampaign}`, data , this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => { })
+        )
+      )
+    );
+  }
+
+  public saveVisitCampaign(id: number) {
+    return this.http.post(`${this.urlContent + this.apiSaveVisitCampaign}`, {id} , this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
