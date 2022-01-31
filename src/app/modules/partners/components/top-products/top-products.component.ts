@@ -1,44 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { LinksService } from 'src/app/services/links.service';
+import { ResponseService } from 'src/app/interfaces/response';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-top-products',
   templateUrl: './top-products.component.html',
-  styleUrls: ['./top-products.component.scss']
+  styleUrls: ['./top-products.component.scss'],
 })
 export class TopProductsComponent implements OnInit {
-
   private subscription: Subscription = new Subscription();
 
-  constructor(private links:LinksService) {}
+  constructor(private user: UserService) {}
 
- dataSource = [
-   {productname: 'Electrodomésticos', users:'123', links: '1235', clicks: '1012', sell: '750', reward:'1155000'},
-   {productname: 'Electrodomésticos', users:'123', links: '1235', clicks: '1012', sell: '750', reward:'1155000'},
-   {productname: 'Electrodomésticos', users:'123', links: '1235', clicks: '1012', sell: '750', reward:'1155000'},
-   {productname: 'Electrodomésticos', users:'123', links: '1235', clicks: '1012', sell: '750', reward:'1155000'},
-   {productname: 'Electrodomésticos', users:'123', links: '1235', clicks: '1012', sell: '750', reward:'1155000'},
-   {productname: 'Electrodomésticos', users:'123', links: '1235', clicks: '1012', sell: '750', reward:'1155000'},
-   {productname: 'Electrodomésticos', users:'123', links: '1235', clicks: '1012', sell: '750', reward:'1155000'}
- ]
+  dataSource = [];
 
   displayedColumns: string[] = ['productname', 'user', 'links', 'clicks', 'sell', 'reward'];
 
   ngOnInit() {
-    // this.getLinksHistory();
+    this.getTopCategories();
   }
 
-
-  // public getLinksHistory(from = 1, to = 5, orderBy = 'QUANTITY' , orderOrigin = 'DESC', startDate = '', endDate = '') {
-  //   const params = { from, to, orderOrigin , orderBy, startDate, endDate };
-  //   this.subscription = this.links.getLinkHistory(params).subscribe((resp) => {
-  //     this.dataSource = resp.linkHistory;
-  //   });
-  // }
+  public getTopCategories() {
+    this.subscription = this.user.getTop().subscribe((resp:ResponseService) => {
+       this.dataSource = resp.objectResponse;
+    });
+  }
 
   ngOnDestroy(): void {
-      this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
-
 }

@@ -13,8 +13,9 @@
           [locale]="locale"
           [placeholder]="placeholder"
           type="text"
-          [maxDate]="maxDate"
+          [maxDate]="range === true ? maxDate : ''"
           [showDropdowns]="true"
+          [showClearButton]="clear"
           ngxDaterangepickerMd
           class="form-control border-input mat-elevation-z1 p-2 border-radius"
         />

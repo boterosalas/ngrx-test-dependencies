@@ -54,6 +54,7 @@ export class UserService {
   apiDeleteComments = 'reports/getreportfeedbackdeletetion';
   apiReportStories = 'reports/getreportvisitstories';
   apiOrdersNotInvoiced = 'reports/getreportordersnotinvoiced';
+  apiGetTopCategories = 'reports/gettopcategories';
   token = localStorage.getItem('ACCESS_TOKEN');
   authorization = this.token;
   apiSaveNews = 'new/savenew';
@@ -316,6 +317,18 @@ export class UserService {
 
   public getreportordersnotinvoiced(params: DataRangeInterface) {
     return this.http.get(`${this.urlReports}${this.apiOrdersNotInvoiced}?start=${params.startDate}&end=${params.endDate}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => { })
+        )
+      )
+    );
+  }
+
+  public getTop() {
+    return this.http.get(`${this.urlReports}${this.apiGetTopCategories}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
