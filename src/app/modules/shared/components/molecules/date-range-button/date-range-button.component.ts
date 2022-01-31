@@ -14,6 +14,9 @@ export class DateRangeButtonComponent implements OnInit {
   @Input() direction = 'row';
   @Input() classLayout:string;
   @Input() compare = false;
+  @Input() range:boolean = true;
+  @Input() clear:boolean = false;
+  
 
   maxDate = moment(new Date());
   dateRangeForm: FormGroup;
