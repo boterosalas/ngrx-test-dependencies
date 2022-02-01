@@ -21,6 +21,7 @@ export class ImageTextComponent implements OnInit {
   @Input() classTextMobile:string;
   @Input() generalWeb:string;
   @Input() generalMobile:string;
+  @Input() chrome = false;
   @Output() action = new EventEmitter();
 
   constructor() { }
