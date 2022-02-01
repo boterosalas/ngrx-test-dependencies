@@ -38,7 +38,7 @@
           <span class="galano-bold">LINK</span>
         </th>
         <td mat-cell class="text-underline purple2 f-12" *matCellDef="let element">
-          {{ element.link }}
+          <a class="purple2" [href]="element.link">{{ element.link }}</a> 
         </td>
       </ng-container>
 
