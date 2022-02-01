@@ -36,6 +36,16 @@ export class ReportPartnerComponent implements OnInit {
     });
   }
 
+  public getCompareDate(e: DataRangeInterface) {
+    this.startDate = moment(e.startDate);
+    this.endDate = moment(e.endDate);
+    const params = {
+      startDate: this.startDate.format('YYYY-MM-DD'),
+      endDate: this.endDate.format('YYYY-MM-DD'),
+    };
+   console.log(params);
+  }
+
   public exportOrderNotFinish() {
     const params = {
       startDate: this.startDate.format('YYYY-MM-DD'),

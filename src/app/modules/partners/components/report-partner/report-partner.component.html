@@ -6,10 +6,12 @@
 <mat-card class="card mat-card-box-shadow">
   <app-title showTitleh3="true" text="Reporte de recompensas"></app-title>
   <app-date-range-button
-    [compare]="false"
+    [compare]=true
+    [custom]=true
     classLayout="ng-hor"
     direction="column"
     (dates)="getDate($event)"
+    (compareDates)="getCompareDate($event)"
     (called)="exportOrderNotFinish()"
   ></app-date-range-button>
 

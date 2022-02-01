@@ -12,6 +12,8 @@
           (change)="getDate($event)"
           [locale]="locale"
           [placeholder]="placeholder"
+          [ranges]="custom === true ? ranges : empty"
+          [alwaysShowCalendars]="true"
           type="text"
           [maxDate]="range === true ? maxDate : ''"
           [showDropdowns]="true"
@@ -24,7 +26,9 @@
           <i class="tio-date_range icon-date"></i>
           <input
             formControlName="compareRange"
-            (change)="getDate($event)"
+            (change)="getCompareDate($event)"
+            [ranges]="custom === true ? ranges : empty"
+            [alwaysShowCalendars]="true"
             [locale]="locale"
             [placeholder]="placeholder"
             type="text"
