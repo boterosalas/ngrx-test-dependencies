@@ -7,12 +7,24 @@
     <mat-card style="border-radius: 10px !important">
       <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
         <div fxLayout="column">
-          <span class="galano-bold f-22" *ngIf="i === 1 || i === 2">
+          <span class="galano-bold f-22" *ngIf="(i === 1 || i === 2) && item.changed === null">
             {{ item.number | currency: '':'symbol':'1.0-0' }}
           </span>
-          <span class="galano-bold f-22" *ngIf="i !== 1 && i !== 2">
+          <span class="galano-bold f-22" *ngIf="(i !== 1 && i !== 2)  && item.changed === null">
             {{ item.number }}
           </span>
+
+          <div *ngIf="item.changed !== null" fxLayout="column">
+            <div class="galano-bold f-22">
+              <span fxLayout="row" fxLayoutGap="10px">
+                {{ item.percentage }}%
+                <i *ngIf="item.changed === 'BAJO'" class="tio-arrow_large_downward"></i>
+                <i *ngIf="item.changed === 'SUBIO'" class="tio-arrow_large_upward"></i>
+              </span>
+            </div>
+  
+            <span>{{ item.number }} frente a {{ item.numbercompare }}</span>
+          </div>
   
           <!-- <span class="galono-bold f-13">{{ item.subtitle }}</span> -->
         </div>

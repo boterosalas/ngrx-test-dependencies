@@ -12,10 +12,13 @@ import { ResponseService } from 'src/app/interfaces/response';
 })
 export class ReportPartnerComponent implements OnInit {
   startDate = moment(new Date());
+  startCompareDate = undefined;
   endDate = moment(new Date());
+  endCompareDate = undefined;
   items = [];
-  name:string;
-  icon:string;
+  name: string;
+  icon: string;
+  selectedDate:boolean;
 
   constructor(private link: LinksService, private utils: UtilsService) {}
 
@@ -26,13 +29,29 @@ export class ReportPartnerComponent implements OnInit {
   public getDate(e: DataRangeInterface) {
     this.startDate = moment(e.startDate);
     this.endDate = moment(e.endDate);
+    this.selectedDate = true;
     const params = {
       startDate: this.startDate.format('YYYY-MM-DD'),
       endDate: this.endDate.format('YYYY-MM-DD'),
       export: false,
     };
     this.link.getBussinessPartnerKPI(params).subscribe((kpiFilter: ResponseService) => {
-      this.items =  kpiFilter.objectResponse.kpi;
+      this.items = kpiFilter.objectResponse.kpi;
+    });
+  }
+
+  public getCompareDate(e: DataRangeInterface) {
+    this.startCompareDate = moment(e.startDate);
+    this.endCompareDate = moment(e.endDate);
+    const params = {
+      startDate: this.startDate.format('YYYY-MM-DD'),
+      endDate: this.endDate.format('YYYY-MM-DD'),
+      startcompare: this.startCompareDate.format('YYYY-MM-DD'),
+      endcompare: this.endCompareDate.format('YYYY-MM-DD'),
+      export: false,
+    };
+    this.link.getComparedates(params).subscribe((compare: ResponseService) => {
+      this.items = compare.objectResponse.kpi;
     });
   }
 
@@ -43,9 +62,23 @@ export class ReportPartnerComponent implements OnInit {
       export: true,
     };
 
-    this.link.getBussinessPartnerKPI(params).subscribe((exportKpi:ResponseService) => {
-      this.utils.openSnackBar(exportKpi.userMessage, 'cerrar')
-    });
+    if (this.startCompareDate !== undefined || this.endCompareDate !== undefined) {
+      const paramsCompare = {
+        startDate: this.startDate.format('YYYY-MM-DD'),
+        endDate: this.endDate.format('YYYY-MM-DD'),
+        startcompare: this.startCompareDate.format('YYYY-MM-DD'),
+        endcompare: this.endCompareDate.format('YYYY-MM-DD'),
+        export: true,
+      };
+
+      this.link.getComparedates(paramsCompare).subscribe((exportCompare: ResponseService) => {
+        this.utils.openSnackBar(exportCompare.userMessage, 'cerrar');
+      });
+    } else {
+      this.link.getBussinessPartnerKPI(params).subscribe((exportKpi: ResponseService) => {
+        this.utils.openSnackBar(exportKpi.userMessage, 'cerrar');
+      });
+    }
   }
 
   public getPartnersKPI() {
@@ -55,10 +88,10 @@ export class ReportPartnerComponent implements OnInit {
       export: false,
     };
 
-    this.link.getBussinessPartnerKPI(params).subscribe((kpi:ResponseService) => {
+    this.link.getBussinessPartnerKPI(params).subscribe((kpi: ResponseService) => {
       this.items = kpi.objectResponse.kpi;
       this.name = kpi.objectResponse.business;
       this.icon = kpi.objectResponse.icon;
-    })
+    });
   }
 }
