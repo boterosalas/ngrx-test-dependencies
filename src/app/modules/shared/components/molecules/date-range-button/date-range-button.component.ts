@@ -64,7 +64,7 @@ export class DateRangeButtonComponent implements OnInit {
         endDate: moment(e.endDate._d).format('YYYY-MM-DD'),
       };
       this.dates.emit(dates);
-      this.selectDate.emit(this.dateRangeForm.controls.compareRange.enable());
+      this.selectDate.emit(this.dateRangeForm.controls.compareRange.enable({onlySelf: true, emitEvent: true}));
       this.clearButton = false;
     }
   }
@@ -84,7 +84,7 @@ export class DateRangeButtonComponent implements OnInit {
   }
 
   public clearAction(){
-    this.selectDate.emit(this.dateRangeForm.controls.compareRange.disable());
+    this.selectDate.emit(this.dateRangeForm.controls.compareRange.disable({onlySelf: true, emitEvent: true}));
     this.dateRangeForm.controls.dateRange.setValue(null);
     this.dateRangeForm.controls.compareRange.setValue(null);
     this.dateRangeForm.controls.dateRange.addValidators(Validators.required);
