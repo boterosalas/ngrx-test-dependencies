@@ -2,7 +2,7 @@
      
   <span fxLayout="row" fxLayoutAlign="space-between center" class="move">
     <p class="p-range">RANGO DE FECHAS</p>
-    <p class="p-range">FECHAS A COMPARAR</p>
+    <p class="p-range" *ngIf="compare">FECHAS A COMPARAR</p>
   </span>
     
     <form class="form-relative" [formGroup]="dateRangeForm">
