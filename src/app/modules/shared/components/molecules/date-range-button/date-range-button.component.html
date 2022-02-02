@@ -46,11 +46,11 @@
         </span>
         
 
-        <app-button fxHide.xs="true" title="Exportar" (action)="call()" classButton="shadow-purple ml-3" classIcon="tio-download_from_cloud style-icon" [disabled]="!dateRangeForm.valid"></app-button>
+        <app-button fxHide.xs="true" title="Exportar" (action)="call()" classButton="shadow-purple ml-3" classIcon="tio-download_from_cloud style-icon" [disabled]="!dateRangeForm.valid || clearButton"></app-button>
         
       </div>
       <br/>
-      <app-button fxHide.gt-xs="true" title="Exportar" (action)="call()" classButton="shadow-purple" classIcon="tio-download_from_cloud style-icon" [disabled]="!dateRangeForm.valid"></app-button>
+      <app-button fxHide.gt-xs="true" title="Exportar" (action)="call()" classButton="shadow-purple" classIcon="tio-download_from_cloud style-icon" [disabled]="!dateRangeForm.valid || clearButton"></app-button>
 
     </form>
 

@@ -85,7 +85,9 @@ export class DateRangeButtonComponent implements OnInit {
 
   public clearAction(){
     this.selectDate.emit(this.dateRangeForm.controls.compareRange.disable());
-    this.dateRangeForm.reset();
+    this.dateRangeForm.controls.dateRange.setValue(null);
+    this.dateRangeForm.controls.compareRange.setValue(null);
+    this.dateRangeForm.controls.dateRange.addValidators(Validators.required);
     this.reset.emit();
     this.clearButton = true;
   }
