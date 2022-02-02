@@ -13,6 +13,7 @@
     (dates)="getDate($event)"
     (compareDates)="getCompareDate($event)"
     (called)="exportOrderNotFinish()"
+    (reset)="getPartnersKPI()"
   ></app-date-range-button>
 
   <app-card-report
@@ -20,7 +21,7 @@
     [items]="items"
     fxLayout.gt-xs="row wrap"
     fxLayout.xs="column"
-    fxLayoutAlign="start space-between "
+    fxLayoutAlign="start space-between"
   ></app-card-report>
   
 </mat-card>
