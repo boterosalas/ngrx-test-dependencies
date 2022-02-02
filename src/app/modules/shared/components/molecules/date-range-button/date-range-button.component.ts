@@ -22,13 +22,17 @@ export class DateRangeButtonComponent implements OnInit {
 
   clearButton = true;
 
-  ranges: any = {
+  ranges = {
     Hoy: [moment(), moment()],
     Ayer: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-    'Este mes': [moment().startOf('month'), moment().endOf('month')],
+    'Los últimos 7 días': [moment().subtract(6, 'days'), moment()],
+    'Los últimos 15 días': [moment().subtract(14, 'days'), moment()],
+    'Los últimos 30 días': [moment().subtract(29, 'days'), moment()],
+    'Este Mes': [moment().startOf('month'), moment().endOf('month')],
     'El mes pasado': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+    'Últimos 3 meses': [moment().subtract(3, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
   };
-
+  
   empty = {};
 
   maxDate = moment(new Date());
@@ -65,8 +69,8 @@ export class DateRangeButtonComponent implements OnInit {
       };
       this.dates.emit(dates);
       this.clearButton = false;
-      //NOSONAR
-      this.selectDate.emit(this.dateRangeForm.controls.compareRange.enable());
+      const getCompare = this.dateRangeForm.get('compareRange');
+      this.selectDate.emit(getCompare.enable());
     }
   }
 
@@ -90,8 +94,8 @@ export class DateRangeButtonComponent implements OnInit {
     this.dateRangeForm.controls.dateRange.addValidators(Validators.required);
     this.reset.emit();
     this.clearButton = true;
-    //NOSONAR
-    this.selectDate.emit(this.dateRangeForm.controls.compareRange.disable());
+    const getCompare = this.dateRangeForm.get('compareRange');
+    this.selectDate.emit(getCompare.disable());
   }
 
 }
