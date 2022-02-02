@@ -2,12 +2,12 @@
      
   <span fxLayout="row" fxLayoutAlign="space-between center" class="move">
     <p class="p-range">RANGO DE FECHAS</p>
-    <p class="p-range" *ngIf="compare">FECHAS A COMPARAR</p>
+    <p fxHide.xs="true" class="p-range" *ngIf="compare">FECHAS A COMPARAR</p>
   </span>
     
     <form class="form-relative" [formGroup]="dateRangeForm">
       
-      <div fxLayout="row" [ngClass]="classLayout">
+      <div fxLayout="row wrap" [ngClass]="classLayout">
         
         <i class="tio-date_range icon-date"></i>
         <input
@@ -24,8 +24,8 @@
           ngxDaterangepickerMd
           class="form-control border-input mat-elevation-z1 p-2 border-radius"
         />
-
         <span *ngIf="compare">
+          <p fxHide.gt-xs="true" class="p-range px-4" *ngIf="compare">FECHAS A COMPARAR</p>
           <i class="tio-date_range icon-date"></i>
           <input
             formControlName="compareRange"
@@ -46,10 +46,11 @@
         </span>
         
 
-        <app-button title="Exportar" (action)="call()" classButton="shadow-purple ml-3" classIcon="tio-download_from_cloud style-icon" [disabled]="!dateRangeForm.valid"></app-button>
-
+        <app-button fxHide.xs="true" title="Exportar" (action)="call()" classButton="shadow-purple ml-3" classIcon="tio-download_from_cloud style-icon" [disabled]="!dateRangeForm.valid"></app-button>
+        
       </div>
-
+      <br/>
+      <app-button fxHide.gt-xs="true" title="Exportar" (action)="call()" classButton="shadow-purple" classIcon="tio-download_from_cloud style-icon" [disabled]="!dateRangeForm.valid"></app-button>
 
     </form>
 
