@@ -30,14 +30,34 @@ export class ReportPartnerComponent implements OnInit {
     this.startDate = moment(e.startDate);
     this.endDate = moment(e.endDate);
     this.selectedDate = true;
+    
     const params = {
       startDate: this.startDate.format('YYYY-MM-DD'),
       endDate: this.endDate.format('YYYY-MM-DD'),
       export: false,
     };
-    this.link.getBussinessPartnerKPI(params).subscribe((kpiFilter: ResponseService) => {
-      this.items = kpiFilter.objectResponse.kpi;
-    });
+
+
+    if(this.startCompareDate === undefined) {
+      this.link.getBussinessPartnerKPI(params).subscribe((kpiFilter: ResponseService) => {
+        this.items = kpiFilter.objectResponse.kpi;
+      });
+    } else {
+      const params = {
+        startDate: this.startDate.format('YYYY-MM-DD'),
+        endDate: this.endDate.format('YYYY-MM-DD'),
+        startcompare: this.startCompareDate.format('YYYY-MM-DD'),
+        endcompare: this.endCompareDate.format('YYYY-MM-DD'),
+        export: false,
+      };
+
+      this.link.getComparedates(params).subscribe((compare: ResponseService) => {
+        this.items = compare.objectResponse.kpi;
+      });
+  
+    }
+
+
   }
 
   public getCompareDate(e: DataRangeInterface) {
@@ -50,6 +70,7 @@ export class ReportPartnerComponent implements OnInit {
       endcompare: this.endCompareDate.format('YYYY-MM-DD'),
       export: false,
     };
+
     this.link.getComparedates(params).subscribe((compare: ResponseService) => {
       this.items = compare.objectResponse.kpi;
     });
