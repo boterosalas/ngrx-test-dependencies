@@ -245,6 +245,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getTerms();
     this.getTestimoniesUser();
     this.generateUrl();
+    this.getBussiness();
   }
 
   public getTestimoniesUser() {
@@ -264,6 +265,13 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.textTransparencia = resp.objectResponse[2].sectiontitle;
       this.textPrograma = resp.objectResponse[3].sectiontitle;
     });
+  }
+
+  public getBussiness() {
+    this.subscription = this.content
+      .getBusiness().subscribe((bussiness) => {
+        this.bussiness = bussiness;
+      });
   }
 
   public getUserDataUser() {
