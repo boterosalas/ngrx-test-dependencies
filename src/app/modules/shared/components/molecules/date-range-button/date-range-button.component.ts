@@ -80,6 +80,7 @@ export class DateRangeButtonComponent implements OnInit {
         startDate: moment(e.startDate._d).format('YYYY-MM-DD'),
         endDate: moment(e.endDate._d).format('YYYY-MM-DD'),
       };
+
       this.compareDates.emit(dates);
     }
   }

@@ -324,7 +324,7 @@ export class LinksService {
   }
 
   public getComparedates(params: any) {
-    return this.http.get(`${this.urlReports}${this.apiGetComparativeDates}?start=${params.startDate}&end=${params.endDate}&startcompare=${params.startDate}&endcompare=${params.startDate}&export=${params.export}`, this.httpOptions).pipe(
+    return this.http.get(`${this.urlReports}${this.apiGetComparativeDates}?start=${params.startDate}&end=${params.endDate}&startcompare=${params.startcompare}&endcompare=${params.endcompare}&export=${params.export}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
