@@ -23,6 +23,7 @@ export class LinksService {
   apiGetReports = 'reports/getreports';
 
   apikpibussiness = 'Reports/getkpibusiness';
+  apiGetComparativeDates = 'reports/getcomparativedates';
 
   apikpiTotal = 'Reports/getkpitotaldata';
   apiUsersExcel = 'Reports/getUsersExcel';
@@ -322,6 +323,21 @@ export class LinksService {
     );
   }
 
+  public getComparedates(params: any) {
+    return this.http.get(`${this.urlReports}${this.apiGetComparativeDates}?start=${params.startDate}&end=${params.endDate}&startcompare=${params.startcompare}&endcompare=${params.endcompare}&export=${params.export}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: ResponseService) => {
+        return resp;
+      })
+    );
+  }
+
   public getTotalKPI(date: any) {
     const token = localStorage.getItem('ACCESS_TOKEN');
     const authorization = token;
@@ -463,13 +479,16 @@ export class LinksService {
   public getReport(params: any) {
     return this.http.get(`${this.urlReports}${this.apiGetReports}?from=${params.from}&to=${params.to}`, this.httpOptions).pipe(
       retryWhen((errors) =>
-        errors.pipe(
-          delay(3000),
-          take(3),
-          tap((errorStatus) => {})
-        )
+      errors.pipe(
+        delay(3000),
+        take(3),
+        tap((errorStatus) => {})
       )
-    );
+    ),
+    map((resp: any) => {
+      return resp.objectResponse;
+    })
+  );
   }
 
   public getReportTerms() {

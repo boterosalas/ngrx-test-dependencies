@@ -41,6 +41,7 @@ export class CampaingsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getCampaigns();
+    
   }
 
   public getDate(e: DataRangeInterface) {
@@ -48,6 +49,14 @@ export class CampaingsComponent implements OnInit, OnDestroy {
     this.startDate = e.startDate;
     this.endDate = e.endDate;
     this.getCampaigns(this.from, this.to, this.orderBy, this.ordination, this.startDate, this.endDate, this.export);
+    
+      const clearButton = document.querySelector('button[title="Limpiar"]');
+
+      clearButton.addEventListener('click', () => {
+        this.getCampaigns();
+      });
+  
+
   }
 
   public exportCampaign() {

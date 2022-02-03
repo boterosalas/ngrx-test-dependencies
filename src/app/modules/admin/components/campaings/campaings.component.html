@@ -3,6 +3,8 @@
     <app-date-range-button
       classLayout="ng-hor"
       direction="column"
+      [range] = false
+      [clear]= true
       (dates)="getDate($event)"
       (called)="exportCampaign()"
     ></app-date-range-button>
