@@ -336,8 +336,11 @@ export class SliderComponent implements OnInit, OnDestroy {
         this.enableCopy = true;
       });
     }
+    
     if (category.business === 'clickam' && !!token) {
-      window.location.replace(category.link);
+      this.content.saveVisitOffer({ idoffer: category.id, userId: this.token.user.userid }).subscribe((resp) => {
+        window.location.replace(category.link);
+      });
     }
   }
 
