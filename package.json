@@ -5,9 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng run clickam:prerender",
-    "build-qa": "ng run clickam:prerender --configuration=qa",
+    "build-qa": "npm run list-routes && ng run clickam:prerender --configuration=qa",
     "build-uat": "ng run clickam:prerender --configuration=uat",
-    "build-pr": "ng run clickam:prerender --configuration=production",
+    "build-pr": "npm run list-routes && ng run clickam:prerender --configuration=production",
     "test": "ng test --code-coverage=true --source-map=false --karma-config=./karma.conf.js",
     "testwatch": "ng test --code-coverage=true --source-map=false --karma-config=./karma.conf.js --watch",
     "lint": "ng lint",
@@ -15,7 +15,8 @@
     "dev:ssr": "ng run clickam:serve-ssr",
     "serve:ssr": "node dist/server/main.js",
     "build:ssr": "ng build && ng run clickam:server",
-    "prerender": "ng run clickam:prerender"
+    "prerender": "npm run list-routes && ng run clickam:prerender",
+    "list-routes": "node list-routes.js"
   },
   "private": true,
   "dependencies": {
@@ -53,6 +54,7 @@
     "angular-font-awesome": "^3.1.2",
     "angular-google-charts": "^0.1.6",
     "array-unique": "^0.3.2",
+    "axios": "^0.25.0",
     "bn-ng-idle": "^1.0.1",
     "bootstrap": "^4.4.1",
     "del": "^6.0.0",
