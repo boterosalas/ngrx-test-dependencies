@@ -38,7 +38,7 @@
           </div>
         </td>
       </ng-container>
-      <ng-container *ngFor="let column of permisionColumns" matColumnDef="{{ column.menu.split(' ')[0] }}">
+      <ng-container *ngFor="let column of permisionColumns" matColumnDef="{{ column.menu }}">
         <th mat-header-cell *matHeaderCellDef style="min-width: 110px; font-weight: bold; text-align: center">
           {{ column.menu }}
         </th>
