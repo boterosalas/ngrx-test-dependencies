@@ -103,6 +103,9 @@ export class ReportPartnerComponent implements OnInit {
   }
 
   public getPartnersKPI() {
+
+    this.startCompareDate = undefined;
+
     const params = {
       startDate: this.startDate.format('YYYY-MM-DD'),
       endDate: this.endDate.format('YYYY-MM-DD'),
