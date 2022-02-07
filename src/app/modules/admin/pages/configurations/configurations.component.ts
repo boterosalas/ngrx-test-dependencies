@@ -66,7 +66,7 @@ export class ConfigurationsComponent implements OnInit {
     this.auth.getPermisionByUser('ADMIN').subscribe((resp) => {
       this.permisionColumns = resp;
       resp.forEach((element) => {
-        this.displayedColumns.push(element.menu.split(' ')[0]);
+        this.displayedColumns.push(element.menu);
       });
     });
   }
