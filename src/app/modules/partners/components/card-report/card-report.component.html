@@ -23,7 +23,10 @@
               </span>
             </div>
   
-            <span>{{ item.number }} frente a {{ item.numbercompare }}</span>
+            <span *ngIf="i !== 1">{{ item.number }} frente a {{ item.numbercompare }}</span>
+
+            <span  *ngIf="i === 1">{{ item.number | currency: '':'symbol':'1.0-0' }} frente a {{ item.numbercompare | currency: '':'symbol':'1.0-0' }}</span>
+
           </div>
   
           <!-- <span class="galono-bold f-13">{{ item.subtitle }}</span> -->
