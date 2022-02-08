@@ -79,6 +79,9 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { CardOrderNumberComponent } from './components/card-order-number/card-order-number.component';
 import { DialogNoveltySatisfactionComponent } from './components/dialog-novelty-satisfaction/dialog-novelty-satisfaction.component';
 import { ConsultComponent } from './pages/help-center/consult/consult.component';
+import { TestimonyComponent } from './pages/testimony/testimony.component';
+import { SlideTestimonyComponent } from './components/slide-testimony/slide-testimony.component';
+import { RateTestimonyComponent } from './components/rate-testimony/rate-testimony.component';
 
 
 
@@ -344,6 +347,10 @@ const routes: Routes = [
     path: 'tabla-recompensas',
     component: ComissionTableComponent,
   },
+  {
+    path: 'testimonios',
+    component: TestimonyComponent,
+  },
 ];
 
 @NgModule({
@@ -409,6 +416,9 @@ const routes: Routes = [
     CardOrderNumberComponent,
     DialogNoveltySatisfactionComponent,
     ConsultComponent,
+    TestimonyComponent,
+    SlideTestimonyComponent,
+    RateTestimonyComponent,
   ],
   imports: [
     FormsModule,

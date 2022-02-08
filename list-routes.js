@@ -19,6 +19,7 @@ axios.get(blog, {
   const routes = [
     '/',
     '/inicio',
+    '/testimonios',
     '/click-academy',
     '/url/id',
     '/tabla-recompensas',
