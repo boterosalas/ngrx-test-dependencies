@@ -39,6 +39,9 @@ export class FormTestimonyComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.formTestimony();
+    if(this.data) {
+      this.nameFile = 'avatar.jpg';
+    }
   }
 
   public formTestimony() {
@@ -66,11 +69,11 @@ export class FormTestimonyComponent implements OnInit, OnDestroy {
       usersocialnetwork: this.testimonyForm.controls.usersocialnetwork.value,
       testimony: this.testimonyForm.controls.testimony.value,
       link: this.testimonyForm.controls.link.value,
-      imageurl: this.image,
+      image: this.image,
       active: this.testimonyForm.controls.active.value,
     }
 
-    this.subscription = this.user.saveTestimonies(data).subscribe((saveTestominy: ResponseService) => {
+    this.subscription = this.user.saveTestimonies([data]).subscribe((saveTestominy: ResponseService) => {
       this.onNoClick();
       this.utils.openSnackBar(saveTestominy.userMessage, 'cerrar');
     });
