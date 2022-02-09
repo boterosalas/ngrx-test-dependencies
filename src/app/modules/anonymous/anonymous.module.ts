@@ -82,6 +82,7 @@ import { ConsultComponent } from './pages/help-center/consult/consult.component'
 import { TestimonyComponent } from './pages/testimony/testimony.component';
 import { SlideTestimonyComponent } from './components/slide-testimony/slide-testimony.component';
 import { RateTestimonyComponent } from './components/rate-testimony/rate-testimony.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -436,6 +437,7 @@ const routes: Routes = [
     MatPasswordStrengthModule,
     RecaptchaV3Module,
     AngularEditorModule,
+    NgxPaginationModule
   ],
   exports: [
     RouterModule,
