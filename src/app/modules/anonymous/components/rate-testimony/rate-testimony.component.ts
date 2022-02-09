@@ -24,7 +24,6 @@ export class RateTestimonyComponent implements OnInit, OnChanges {
     if(this.testimony !== undefined) {
       this.totalItems = this.testimony.length;
       this.showCard = true;
-      console.log(this.totalItems);
     }
   }
 
