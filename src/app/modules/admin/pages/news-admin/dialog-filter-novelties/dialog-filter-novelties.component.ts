@@ -41,14 +41,14 @@ export class DialogFilterNoveltiesComponent implements OnInit, OnDestroy {
   bussiness = [];
   chipsBussiness = [];
   chipsBussinessId = [];
-
+  chipsStatus = [];
   selectable = true;
   removable = true;
   addOnBlur = true;
   @Output() objectSend = new EventEmitter();
   @Output() close = new EventEmitter();
 
-  constructor(private fb: FormBuilder, private content: ContentService) {}
+  constructor(private fb: FormBuilder, private content: ContentService) { }
 
   ngOnInit() {
     this.filterForm();
@@ -56,6 +56,8 @@ export class DialogFilterNoveltiesComponent implements OnInit, OnDestroy {
 
     const filterData = localStorage.getItem('formFilterNovelties');
     const bussinesss = localStorage.getItem('bussinessNovelties');
+    this.chipsStatus = localStorage.getItem('statusNovelties') ?
+      localStorage.getItem('statusNovelties').split(',') : [];
 
     if (filterData !== null) {
       const obFr = JSON.parse(filterData);
@@ -92,24 +94,32 @@ export class DialogFilterNoveltiesComponent implements OnInit, OnDestroy {
     this.filterNovelties.reset();
     this.chipsBussiness = [];
     this.chipsBussinessId = [];
+    this.chipsStatus = [];
     localStorage.removeItem('bussinessNovelties');
     localStorage.removeItem('formFilterNovelties');
+    localStorage.removeItem('statusNovelties');
   }
 
   public filterForm() {
     this.filterNovelties = this.fb.group({
       dateRange: [''],
       status: [null],
+      chipStatus: [''],
       bussiness: [''],
       chipBussiness: [''],
     });
   }
 
-  remove(bussiness: any): void {
-    const index = this.chipsBussiness.indexOf(bussiness);
+  remove(removable: any): void {
+    if (typeof removable === 'object') {
+      const index = this.chipsBussiness.indexOf(removable);
 
-    if (index >= 0) {
-      this.chipsBussiness.splice(index, 1);
+      if (index >= 0) {
+        this.chipsBussiness.splice(index, 1);
+      }
+    }else {
+      const index = this.chipsStatus.indexOf(removable);
+      this.chipsStatus.splice(index, 1)
     }
   }
 
@@ -131,7 +141,7 @@ export class DialogFilterNoveltiesComponent implements OnInit, OnDestroy {
     const data = {
       dateStart: validDateStart ? '' : this.filterNovelties.controls.dateRange.value.startDate,
       dateEnd: validDateEnd ? '' : this.filterNovelties.controls.dateRange.value.endDate,
-      state: this.filterNovelties.controls.status.value,
+      state: this.chipsStatus,
       business: this.chipsBussinessId,
     };
 
@@ -154,5 +164,11 @@ export class DialogFilterNoveltiesComponent implements OnInit, OnDestroy {
       }
     }
     localStorage.setItem('bussinessNovelties', JSON.stringify(this.chipsBussiness));
+  }
+  public onSelectStatus(val) {
+    if (!this.chipsStatus.includes(val)) {
+      this.chipsStatus.push(val);
+    }
+    localStorage.setItem('statusNovelties', this.chipsStatus.join(','));
   }
 }

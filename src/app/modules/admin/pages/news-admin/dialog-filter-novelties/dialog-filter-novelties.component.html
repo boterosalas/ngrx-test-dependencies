@@ -25,11 +25,37 @@
       <label>Estados</label>
     </span>
 
-    <mat-radio-group aria-labelledby="status" class="status separate" formControlName="status">
+    <!-- <mat-radio-group aria-labelledby="status" class="status separate" formControlName="status">
       <mat-radio-button (dblclick)="resetStatusNovelties()" class="radio-button" *ngFor="let item of status" [value]="item.value">
         {{ item.name }}
       </mat-radio-button>
-    </mat-radio-group>
+    </mat-radio-group> -->
+    <span fxLayout="column" class="w-100">
+      <mat-form-field class="selected-bussiness separate">
+        <mat-placeholder class="selected-bussiness">ESTADO</mat-placeholder>
+        <mat-select id="bussiness" formControlName="status" class="selected-bussiness">
+          <mat-option (click)="onSelectStatus(item.value)" *ngFor="let item of status" 
+            value="{{ item.value }}">
+            <span>{{ item.value }}</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="bussiness-chip-list" appearance="fill" *ngIf="chipsStatus">
+        <mat-chip-list #chipList aria-label="bussiness selection" formControlName="chipStatus">
+          <mat-chip
+            [value]="state.id"
+            *ngFor="let state of chipsStatus"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(state)"
+          >
+            {{ state }}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </mat-form-field>
+    </span>
   </div>
 
   <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center" class="pt-1 pb-1">
