@@ -1,0 +1,56 @@
+@import 'variables';
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.carousel {
+  position: relative;
+}
+
+.top {
+  transform: rotate(180deg);
+  position: absolute;
+  left: -45px;
+  top: -19px;
+}
+
+.bottom {
+  position: absolute;
+  right: -10px;
+}
+
+.font {
+  font-size: 45px;
+  color: $primary-color;
+}
+
+.position-absolute {
+  position: relative;
+  top: -150px;
+  z-index: 0;
+}
+
+.large-text {
+  position: relative;
+}
+
+@media screen and (max-width: 600px) {
+  .font {
+    font-size: 30px;
+  }
+
+  .top {
+    top: -30px;
+    left: -10px;
+  }
+
+  .bottom {
+    position: absolute;
+    bottom: -30px;
+    right: -5px;
+  }
+}

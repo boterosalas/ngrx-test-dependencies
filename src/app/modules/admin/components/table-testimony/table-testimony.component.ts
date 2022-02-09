@@ -21,7 +21,7 @@ export class TableTestimonyComponent implements OnInit, OnDestroy {
 
   constructor(private user: UserService, private dialog: MatDialog, private utils: UtilsService) {}
 
-  displayedColumns: string[] = ['name', 'user', 'testimony', 'video', 'visible', 'actions'];
+  displayedColumns: string[] = ['name', 'photo', 'user', 'testimony', 'rate' , 'video', 'visible', 'actions'];
 
   dataSource = [];
 

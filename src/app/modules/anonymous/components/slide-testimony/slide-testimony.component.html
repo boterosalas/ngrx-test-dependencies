@@ -1,0 +1,44 @@
+<ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+  <div ngxSlickItem *ngFor="let item of testimony; let i = index" class="slide m-2 p-0" fxLayout="column" fxLayoutAlign="center center">
+    <img class="avatar" [src]="item.imageurl ? item.imageurl : '/assets/img/user.png'" alt="avatar" />
+    <span class="galano-bold purple-text f-18 mt-2">{{ item.username }}</span>
+    <span class="purple2 f-14" *ngIf="item.usersocialnetwork">{{ item.usersocialnetwork }}</span>
+
+    
+    <p ngClass.xs="f-12 w-100" ngClass.gt-xs="f-16 w-50" class="large-text f-18"><i class="tio-quotes top font"></i> {{ item.testimony }} <i class="tio-quotes bottom font"></i></p>
+    
+
+    <span *ngIf="item.link">
+      <app-button
+        direction="row-reverse"
+        color="yellow"
+        title="Ver testimonio completo"
+        (action)="openVideo(item.link)"
+        classButton="shadow-purple"
+        classIcon="tio-play_circle f-20 mr-2"
+      ></app-button>
+    </span>
+  </div>
+</ngx-slick-carousel>
+
+<div fxHide.xs="true" class="position-absolute arrows-video" fxLayout="row" fxLayoutAlign="space-between">
+    <button mat-fab color="purple2" class="ml-4" (click)="prev()">
+      <i class="tio-back_ui f-20 arrow-position"></i>
+    </button>
+    <button mat-fab color="purple2" class="mr-4" (click)="next()">
+      <i class="tio-next_ui f-20 arrow-position"></i>
+    </button>
+  </div>
+
+<ng-template #templateVideo>
+  <div>
+    <iframe
+      width="560"
+      height="315"
+      [src]="video"
+      frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </div>
+</ng-template>
