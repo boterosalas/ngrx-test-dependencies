@@ -213,14 +213,28 @@
 
       <div class="mt-3" fxLayout="row" fxLayoutAlign="end">
         <form [formGroup]="dateForm" fxLayout="column" class="w-100">
-          <mat-form-field class="selected-report" class="w-50">
-            <mat-placeholder class="label-up-text-selected">NUEVO ESTADO</mat-placeholder>
-            <mat-select id="tipoReport" formControlName="status" class="selected-report">
-              <mat-option (click)="onChangeSelected(selected.titulo)" *ngFor="let selected of selecteds" value="{{ selected.titulo }}">
-                <span>{{ selected.titulo }}</span>
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          
+          <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+
+            <mat-form-field class="selected-report" class="w-50">
+              <mat-placeholder class="label-up-text-selected">NUEVO ESTADO</mat-placeholder>
+              <mat-select id="tipoReport" formControlName="status" class="selected-report">
+                <mat-option (click)="onChangeSelected(selected.titulo)" *ngFor="let selected of selecteds" value="{{ selected.titulo }}">
+                  <span>{{ selected.titulo }}</span>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+            <mat-form-field class="selected-label" class="w-50">
+              <mat-placeholder class="label-up-text-selected">ETIQUETA</mat-placeholder>
+              <mat-select id="tipolabel" formControlName="label" class="selected-label">
+                <mat-option *ngFor="let label of labels" value="{{ label.titulo }}">
+                  <span>{{ label.titulo }}</span>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          
 
           <mat-form-field appearance="fill">
             <mat-label>Respuesta</mat-label>

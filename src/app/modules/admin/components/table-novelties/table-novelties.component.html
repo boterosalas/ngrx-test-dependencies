@@ -6,11 +6,20 @@
     matSort
     (matSortChange)="sortData($event)"
   >
+    <!-- open new window clicker -->
+    <ng-container matColumnDef="new">
+      <th mat-header-cell class="pl-3" *matHeaderCellDef style="width: 5%"></th>
+      <td mat-cell *matCellDef="let element" class="pl-3">
+        <i class="tio-open_in_new m-0 purple2 cursor-pointer" (click)="openDialog(element, 'new')"></i>
+         
+      </td>
+    </ng-container>
+
     <!-- Identificaton clicker -->
     <ng-container matColumnDef="idclicker">
       <th mat-header-cell class="pl-3" *matHeaderCellDef style="width: 9%" mat-sort-header="consecutive">NO. DE CASO</th>
       <td mat-cell *matCellDef="let element" class="pl-3">
-        <p class="m-0 gray-light text-link cursor-pointer" (click)="openDialog(element)">
+        <p class="m-0 gray-light text-link cursor-pointer" (click)="openDialog(element, '')">
           {{ element.consecutive }}
         </p>
       </td>
@@ -71,6 +80,18 @@
       <td mat-cell *matCellDef="let element; let i = index">
         <span class="text-font" fxLayout="row" fxLayoutAlign="space-between space-between">
           {{ element.responsetime !== null ? element.responsetime : '-' }}
+        </span>
+      </td>
+    </ng-container>
+
+    <!-- label Column -->
+    <ng-container matColumnDef="label">
+      <th mat-header-cell *matHeaderCellDef style="width: 15%" mat-sort-header="label">
+        ETIQUETA
+      </th>
+      <td mat-cell *matCellDef="let element; let i = index">
+        <span class="text-font" fxLayout="row" fxLayoutAlign="space-between space-between">
+          {{ element.label !== null ? element.label : '-' }}
         </span>
       </td>
     </ng-container>
