@@ -61,7 +61,23 @@ export class BlogsComponent implements OnInit {
       value: 'RECENT',
     },
   ];
-  blogMain: any;
+
+  blogMain = {
+    author: '',
+    content: '',
+    file: null,
+    id: '',
+    imageurl: '',
+    path: null,
+    pathurl: '',
+    date: '',
+    tags: '',
+    title: '',
+    url: '',
+    visible: null,
+    visits: '',
+  };
+
   blogsData = [];
   ngOnInit() {
     this.orderBy = 'RELEVANT';

@@ -680,9 +680,9 @@ export class BussinessComponent implements OnInit, OnDestroy {
       text: searchText
     }
 
-    this.subscription = this.sp.getProductsOtherBusiness(data).subscribe(product => {
-      console.log(product);
-    });
+    // this.subscription = this.sp.getProductsOtherBusiness(data).subscribe(product => {
+    //   console.log(product);
+    // });
 
   }
 

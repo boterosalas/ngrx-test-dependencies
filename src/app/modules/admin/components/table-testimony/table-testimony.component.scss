@@ -31,3 +31,9 @@ table {
 .text-left{
     text-align: left !important;
 }
+
+.avatar{
+  width: 50px;
+  height: auto;
+  object-fit: contain;
+}

@@ -44,11 +44,12 @@ export class NewsAdminComponent implements OnInit {
     to: null,
     start: null,
     end: null,
-    state: null,
+    state: [],
     business: [],
     export: false,
     orderBy: '',
     ordination: '',
+    label: []
   };
 
   itemsRowOne = [
@@ -285,6 +286,7 @@ export class NewsAdminComponent implements OnInit {
       export: this.export,
       orderBy: 'IDENTIFICATION',
       ordination: 'ASC',
+      label: data.label
     };
 
     this.pageIndex = 0;

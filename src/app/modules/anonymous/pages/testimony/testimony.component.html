@@ -1,0 +1,18 @@
+<div class="bg-welcome">
+  <div class="container">
+    <div class="text-center mt-5">
+      <app-title showTitleh1="true" text="Lo que dicen nuestros clientes" classWeb="m-0 pb-2 f-32" classMobile="m-0 pb-2"></app-title>
+      <p ngClass.gt-xs="f-22" ngClass.xs="f-16">
+        Clickam está siempre pendiente de lo que dicen nuestros<br />
+        clientes y cómo podemos mejorar, aquí hay algunos<br />
+        testimonios que hemos recopilado.
+      </p>
+
+      <app-slide-testimony *ngIf="testimony.withPhoto.length" [testimony]="testimony.withPhoto" [slideConfig]="slideConfig"></app-slide-testimony>
+      
+    </div>
+    
+    <app-rate-testimony [testimony]="testimony.withoutPhoto"></app-rate-testimony>
+
+  </div>
+</div>

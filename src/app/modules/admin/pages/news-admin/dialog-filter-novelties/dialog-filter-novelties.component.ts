@@ -37,11 +37,12 @@ export class DialogFilterNoveltiesComponent implements OnInit, OnDestroy {
     { name: 'Solución parcial', value: 'Solución parcial' },
     { name: 'Solucionado', value: 'Solucionado' },
   ];
-
+  label = ['Rechazo', 'Pago', 'Otro', 'No confirmada']
   bussiness = [];
   chipsBussiness = [];
   chipsBussinessId = [];
   chipsStatus = [];
+  chipsLabel = [];
   selectable = true;
   removable = true;
   addOnBlur = true;
@@ -58,6 +59,8 @@ export class DialogFilterNoveltiesComponent implements OnInit, OnDestroy {
     const bussinesss = localStorage.getItem('bussinessNovelties');
     this.chipsStatus = localStorage.getItem('statusNovelties') ?
       localStorage.getItem('statusNovelties').split(',') : [];
+    this.chipsLabel = localStorage.getItem('labelNovelties') ?
+      localStorage.getItem('labelNovelties').split(',') : [];
 
     if (filterData !== null) {
       const obFr = JSON.parse(filterData);
@@ -95,9 +98,11 @@ export class DialogFilterNoveltiesComponent implements OnInit, OnDestroy {
     this.chipsBussiness = [];
     this.chipsBussinessId = [];
     this.chipsStatus = [];
+    this.chipsLabel = [];
     localStorage.removeItem('bussinessNovelties');
     localStorage.removeItem('formFilterNovelties');
     localStorage.removeItem('statusNovelties');
+    localStorage.removeItem('labelNovelties');
   }
 
   public filterForm() {
@@ -107,20 +112,29 @@ export class DialogFilterNoveltiesComponent implements OnInit, OnDestroy {
       chipStatus: [''],
       bussiness: [''],
       chipBussiness: [''],
+      label: [''],
+      chipLabel: ['']
     });
   }
 
-  remove(removable: any): void {
-    if (typeof removable === 'object') {
-      const index = this.chipsBussiness.indexOf(removable);
-
-      if (index >= 0) {
-        this.chipsBussiness.splice(index, 1);
-      }
-    }else {
-      const index = this.chipsStatus.indexOf(removable);
-      this.chipsStatus.splice(index, 1)
+  removeBussiness(removable: any): void {
+    const index = this.chipsBussiness.indexOf(removable);
+    if (index >= 0) {
+      this.chipsBussiness.splice(index, 1);
     }
+    localStorage.setItem('bussinessNovelties', JSON.stringify(this.chipsBussiness));
+  }
+
+  removeStatus(removable: any): void {
+    const index = this.chipsStatus.indexOf(removable);
+    this.chipsStatus.splice(index, 1)
+    localStorage.setItem('statusNovelties', this.chipsStatus.join(','));
+  }
+
+  removeLabel(removable: any): void {
+    const index = this.chipsLabel.indexOf(removable);
+    this.chipsLabel.splice(index, 1)
+    localStorage.setItem('labelNovelties', this.chipsLabel.join(','));
   }
 
   public aplyFilters() {
@@ -143,6 +157,7 @@ export class DialogFilterNoveltiesComponent implements OnInit, OnDestroy {
       dateEnd: validDateEnd ? '' : this.filterNovelties.controls.dateRange.value.endDate,
       state: this.chipsStatus,
       business: this.chipsBussinessId,
+      label: this.chipsLabel
     };
 
     this.objectSend.emit(data);
@@ -170,5 +185,11 @@ export class DialogFilterNoveltiesComponent implements OnInit, OnDestroy {
       this.chipsStatus.push(val);
     }
     localStorage.setItem('statusNovelties', this.chipsStatus.join(','));
+  }
+  public onSelectLabel(val) {
+    if (!this.chipsLabel.includes(val)) {
+      this.chipsLabel.push(val);
+    }
+    localStorage.setItem('labelNovelties', this.chipsLabel.join(','));
   }
 }

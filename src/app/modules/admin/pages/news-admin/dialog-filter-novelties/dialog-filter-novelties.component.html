@@ -25,11 +25,6 @@
       <label>Estados</label>
     </span>
 
-    <!-- <mat-radio-group aria-labelledby="status" class="status separate" formControlName="status">
-      <mat-radio-button (dblclick)="resetStatusNovelties()" class="radio-button" *ngFor="let item of status" [value]="item.value">
-        {{ item.name }}
-      </mat-radio-button>
-    </mat-radio-group> -->
     <span fxLayout="column" class="w-100">
       <mat-form-field class="selected-bussiness separate">
         <mat-placeholder class="selected-bussiness">ESTADO</mat-placeholder>
@@ -41,14 +36,14 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field class="bussiness-chip-list" appearance="fill" *ngIf="chipsStatus">
+      <mat-form-field class="bussiness-chip-list" appearance="fill" *ngIf="chipsStatus.length">
         <mat-chip-list #chipList aria-label="bussiness selection" formControlName="chipStatus">
           <mat-chip
             [value]="state.id"
             *ngFor="let state of chipsStatus"
             [selectable]="selectable"
             [removable]="removable"
-            (removed)="remove(state)"
+            (removed)="removeStatus(state)"
           >
             {{ state }}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
@@ -80,7 +75,7 @@
             *ngFor="let bussiness of chipsBussiness"
             [selectable]="selectable"
             [removable]="removable"
-            (removed)="remove(bussiness)"
+            (removed)="removeBussiness(bussiness)"
           >
             {{ bussiness.description }}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
@@ -89,7 +84,38 @@
       </mat-form-field>
     </span>
   </div>
+  <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center" class="pt-1 pb-1">
+    <span fxFlex="20%">
+      <label>Etiquetas</label>
+    </span>
+    
+    <span fxLayout="column" class="w-100">
+      <mat-form-field class="selected-bussiness separate">
+        <mat-placeholder class="selected-bussiness">ETIQUETA</mat-placeholder>
+        <mat-select id="bussiness" formControlName="label" class="selected-bussiness">
+          <mat-option (click)="onSelectLabel(item)" *ngFor="let item of label" 
+            value="{{ item }}">
+            <span>{{ item }}</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
+      <mat-form-field class="bussiness-chip-list" appearance="fill" *ngIf="chipsLabel.length">
+        <mat-chip-list #chipList aria-label="bussiness selection" formControlName="chipLabel">
+          <mat-chip
+            *ngFor="let label of chipsLabel"
+            [value]="label"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="removeLabel(label)"
+          >
+            {{ label }}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </mat-form-field>
+    </span>
+  </div>
   <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="end center">
     <button mat-button (click)="clearFilters()" id="clear-Novelties" class="purple">Limpiar Filtros</button>
 
