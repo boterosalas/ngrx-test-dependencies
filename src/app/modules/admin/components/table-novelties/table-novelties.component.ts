@@ -15,12 +15,12 @@ export class TableNoveltiesComponent implements OnInit {
 
   infoUpdate = {};
 
-  displayedColumns: string[] = ['idclicker', 'subscription', 'users', 'identification', 'cellphone', 'email', 'responsetime',  'status'];
+  displayedColumns: string[] = ['new','idclicker', 'subscription', 'users', 'identification', 'cellphone', 'email', 'responsetime', 'label',  'status'];
 
   ngOnInit() {}
 
-  openDialog(dataSource) {
-    this.dataNoveltie.emit(dataSource);
+  openDialog(dataSource, open?:string) {
+    this.dataNoveltie.emit({dataSource, open});
   }
 
   sortData(event) {

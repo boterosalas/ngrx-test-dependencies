@@ -43,6 +43,27 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
       state: 0,
     },
   ];
+
+  labels = [
+    {
+      titulo: 'Rechazo',
+      state: 'Rechazo',
+    },
+    {
+      titulo: 'Pago',
+      state: 'Pago',
+    },
+    {
+      titulo: 'Otro',
+      state: 'Otro',
+    },
+    {
+      titulo: 'No confirmada',
+      state: 'No confirmada',
+    },
+
+  ];
+
   $subcriptionParams: Subscription = new Subscription();
   $subcriptionNovelty: Subscription = new Subscription();
   $subscriptionSaveNote: Subscription = new Subscription();
@@ -96,6 +117,7 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
   public initForm() {
     this.dateForm = this.fb.group({
       status: [this.currentNovelty.statusnovelty ? this.currentNovelty.statusnovelty : ''],
+      label: [this.currentNovelty.label ? this.currentNovelty.label : ''],
       responsenovelty: ['', Validators.maxLength(500)],
     });
     if (this.currentNovelty.documenturl === '') {
@@ -159,6 +181,7 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
       }
     });
   }
+
   public onChangeSelected(element: any) {
     const data = element;
     if (data === this.currentNovelty.statusnovelty) {

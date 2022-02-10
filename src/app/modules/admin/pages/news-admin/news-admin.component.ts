@@ -38,6 +38,11 @@ export class NewsAdminComponent implements OnInit {
   totalSad:number;
   totalHappy:number;
   totalLove:number;
+  totalpayment:number;
+  totalreject:number;
+  totalnotconfirm:number;
+  totalother:number;
+
   filterData = {
     searchText: '',
     from: null,
@@ -181,6 +186,11 @@ export class NewsAdminComponent implements OnInit {
       this.totalSad = resp.totalsad;
       this.totalHappy = resp.totalhappy;
       this.totalLove = resp.totallove;
+      this.totalpayment = resp.totalpayment;
+      this.totalreject = resp.totalreject;
+      this.totalnotconfirm = resp.totalnotconfirm;
+      this.totalother = resp.totalother;
+
       this.itemsRowOne = this.itemsRowOne.map((item) => {
         if (item.code === 'satisfaction' && resp.satisfaction) {
           return {
@@ -228,7 +238,13 @@ export class NewsAdminComponent implements OnInit {
   }
 
   public goToNovelty(element: any) {
-    this.router.navigateByUrl(`novedad/${element.id}/${element.userid}`);
+    console.log(element.open);
+    if(element.open === '') {
+      this.router.navigateByUrl(`novedad/${element.dataSource.id}/${element.dataSource.userid}`);
+    } else {
+       const url = `novedad/${element.dataSource.id}/${element.dataSource.userid}`;
+       window.open(url, '_blank');
+    }
   }
 
   public getReportExcel() {
