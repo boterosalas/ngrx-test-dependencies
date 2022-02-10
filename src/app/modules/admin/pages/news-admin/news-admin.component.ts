@@ -297,12 +297,12 @@ export class NewsAdminComponent implements OnInit {
       to: 50,
       start: data.dateStart,
       end: data.dateEnd,
-      state: [data.state],
+      state: data.state,
       business: data.business,
       export: this.export,
       orderBy: 'IDENTIFICATION',
       ordination: 'ASC',
-      label: []
+      label: data.label
     };
 
     this.pageIndex = 0;
