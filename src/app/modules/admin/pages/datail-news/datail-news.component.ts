@@ -169,7 +169,6 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     const datos = {
       id: this.currentNovelty.id,
       status: this.dateForm.controls.status.value,
-      label: this.dateForm.controls.label.value,
       responsenovelty: this.dateForm.controls.responsenovelty.value,
     };
     this.user.setStatus(datos).subscribe((resp: any) => {
