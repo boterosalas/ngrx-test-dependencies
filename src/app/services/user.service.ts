@@ -61,6 +61,7 @@ export class UserService {
   apiUploadNews = 'new/uploadnew';
   apiGetNews = 'new/getnews';
   apiNoveltyById = 'new/getnoveltybyid';
+  apiSaveLabel = 'new/changelabelnew';
   apiGetExcelNews = 'new/getnewsexcel';
   apiSetStatusNew = 'new/changestatusnew';
   apiReportLife = 'report/getcommissionsbyuser';
@@ -632,6 +633,7 @@ export class UserService {
       )
     );
   }
+
   public setStatus(data: any) {
     return this.http.post(`${this.url}${this.apiSetStatusNew}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
@@ -643,6 +645,19 @@ export class UserService {
       )
     );
   }
+
+  public saveLabels(data: any) {
+    return this.http.post(`${this.url}${this.apiSaveLabel}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => { })
+        )
+      )
+    );
+  }
+
   public getHojaVida(data: any) {
     return this.http
       .get(`${this.urlReports}${this.apiReportLife}?&userid=${data.userId}&start=${data.start}&end=${data.end}`, this.httpOptions)

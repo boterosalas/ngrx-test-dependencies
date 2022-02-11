@@ -21,6 +21,8 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
   image: string;
   active = true;
   currentNovelty: any;
+  id:string;
+  userId: string;
   selecteds = [
     {
       titulo: 'Pendiente',
@@ -84,6 +86,8 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.$subcriptionParams = this.routeParams.params.subscribe((params) => {
+      this.id = params.id;
+      this.userId = params.userId;
       if (params && params['id']) {
         this.getNoveltyById(params.id, params.userId);
       }
@@ -279,6 +283,14 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
         qualification: this.currentNovelty.qualification,
       },
     });
+  }
+
+  public saveLabel(value:string) {
+    const data = {
+      id: this.id,
+      label:  value
+    }
+    this.user.saveLabels(data).subscribe();
   }
 
   ngOnDestroy() {

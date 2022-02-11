@@ -228,7 +228,7 @@
             <mat-form-field class="selected-label" class="w-50">
               <mat-placeholder class="label-up-text-selected">ETIQUETA</mat-placeholder>
               <mat-select id="tipolabel" formControlName="label" class="selected-label">
-                <mat-option *ngFor="let label of labels" value="{{ label.titulo }}">
+                <mat-option (click)="saveLabel(label.titulo)" *ngFor="let label of labels" value="{{ label.titulo }}">
                   <span>{{ label.titulo }}</span>
                 </mat-option>
               </mat-select>
