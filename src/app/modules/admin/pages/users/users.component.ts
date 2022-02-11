@@ -59,7 +59,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
       to: null,
       datestart: null,
       dateend: null,
-      state: [],
+      state: null,
       comunications: null,
       commissions: null,
       business: [],
