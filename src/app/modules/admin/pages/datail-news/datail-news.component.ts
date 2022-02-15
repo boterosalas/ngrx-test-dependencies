@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { DialogNoveltySatisfactionComponent } from 'src/app/modules/anonymous/components/dialog-novelty-satisfaction/dialog-novelty-satisfaction.component';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
+import { ContentService } from 'src/app/services/content.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -71,7 +72,10 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
   $subscriptionSaveNote: Subscription = new Subscription();
   $subscriptionGetNovelties: Subscription = new Subscription();
   $subscriptionGetMoreNovelties: Subscription = new Subscription();
+  businesses$: Subscription = new Subscription();
 
+  selectedBusiness = {};
+  businesses = [];
   listNovelties = [];
   listMoreNovelties = [];
 
@@ -81,7 +85,8 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private user: UserService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private content: ContentService
   ) {}
 
   ngOnInit() {
@@ -92,6 +97,17 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
         this.getNoveltyById(params.id, params.userId);
       }
     });
+    this.businesses$ = this.content.getAllBusiness().subscribe(this.findBusinessInSelect);
+  }
+
+  findBusinessInSelect(businesses){
+    this.businesses = businesses;
+    console.log(businesses);
+    
+    this.selectedBusiness = this.businesses.find(business => {
+      return business.description === this.currentNovelty.businessdescription
+    });
+    this.dateForm.get('business').setValue(this.selectedBusiness);
   }
 
   public getNoveltyById(id: string, userId: string) {
@@ -123,6 +139,7 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
       status: [this.currentNovelty.statusnovelty ? this.currentNovelty.statusnovelty : ''],
       label: [this.currentNovelty.label ? this.currentNovelty.label : ''],
       responsenovelty: ['', Validators.maxLength(500)],
+      business: null
     });
     if (this.currentNovelty.documenturl === '') {
       this.image = '';
@@ -285,10 +302,14 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     });
   }
 
-  public saveLabel(value:string) {
+  public saveLabel(value:string, evt) {
+    if (value==='') {
+      this.dateForm.get('business').setValue(evt.value);
+    }
     const data = {
       id: this.id,
-      label:  value
+      label:  this.dateForm.get('label').value,
+      idBusiness: this.dateForm.get('business').value.id,
     }
     this.user.saveLabels(data).subscribe();
   }
@@ -299,5 +320,6 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     this.$subcriptionNovelty.unsubscribe();
     this.$subscriptionSaveNote.unsubscribe();
     this.$subscriptionGetMoreNovelties.unsubscribe();
+    this.businesses$.unsubscribe();
   }
 }
