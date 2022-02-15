@@ -143,7 +143,11 @@
           </p>
           <p fxLayout="row" class="margin-zero-bottom">
             <span class="galano-bold gray w-label">NEGOCIO</span>
-            <span class="normal-text">{{ currentNovelty.businessdescription }}</span>
+              <mat-select (selectionChange)="saveLabel('', $event)" [(value)]="selectedBusiness" id="business" class="selected-business" placeholder="Negocio">
+                <mat-option *ngFor="let item of businesses" [value]="item">
+                  <span>{{ item.description }}</span>
+                </mat-option>
+              </mat-select>
           </p>
           <p fxLayout="row" class="margin-zero-bottom">
             <span class="galano-bold gray w-label">REFERENCIA DE ORDEN/SERVICIO</span>
@@ -228,7 +232,7 @@
             <mat-form-field class="selected-label" class="w-50">
               <mat-placeholder class="label-up-text-selected">ETIQUETA</mat-placeholder>
               <mat-select id="tipolabel" formControlName="label" class="selected-label">
-                <mat-option (click)="saveLabel(label.titulo)" *ngFor="let label of labels" value="{{ label.titulo }}">
+                <mat-option (click)="saveLabel(label.titulo, null)" *ngFor="let label of labels" value="{{ label.titulo }}">
                   <span>{{ label.titulo }}</span>
                 </mat-option>
               </mat-select>
