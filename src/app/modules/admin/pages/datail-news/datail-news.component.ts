@@ -97,13 +97,11 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
         this.getNoveltyById(params.id, params.userId);
       }
     });
-    this.businesses$ = this.content.getAllBusiness().subscribe(this.findBusinessInSelect);
+    this.businesses$ = this.content.getAllBusiness().subscribe(this.findBusinessInSelect.bind(this));
   }
 
   findBusinessInSelect(businesses){
     this.businesses = businesses;
-    console.log(businesses);
-    
     this.selectedBusiness = this.businesses.find(business => {
       return business.description === this.currentNovelty.businessdescription
     });
