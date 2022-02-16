@@ -97,7 +97,6 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
         this.getNoveltyById(params.id, params.userId);
       }
     });
-    this.businesses$ = this.content.getAllBusiness().subscribe(this.findBusinessInSelect.bind(this));
   }
 
   findBusinessInSelect(businesses){
@@ -116,6 +115,7 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
         this.changeSelecteds(this.currentNovelty.statusnovelty);
         this.initForm();
         this.getNovelties();
+        this.businesses$ = this.content.getAllBusiness().subscribe(this.findBusinessInSelect.bind(this));
       }
     });
   }
