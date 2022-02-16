@@ -180,13 +180,19 @@ export class TableCarruselComponent implements OnInit {
       idBuss = this.dataAddImagen.controls.business.value;
     }
 
-    const datePublication = moment(this.datePublication).format('YYYY-MM-DD');
-    const dateFinishPublication = moment(this.dateFinishPublication).format('YYYY-MM-DD');
+    const datePublication = this.datePublication ? moment(this.datePublication).format('YYYY-MM-DD'): '';
+    const dateFinishPublication = this.dateFinishPublication ? moment(this.dateFinishPublication).format('YYYY-MM-DD'): '';
     const hour = this.hourDate ? this.utils.HoraMilitar(this.hourDate) : '';
     const hourEnd = this.hourDateFinish ? this.utils.HoraMilitar(this.hourDateFinish) : '';
-
-    const datestart = !this.visible ? `${datePublication} ${hour}:00` : '';
-    const dateend = !this.visible && !this.undefinedDate ? `${dateFinishPublication} ${hourEnd}:00` : '';
+    let datestart;
+    let dateend;
+    
+    if (!this.visible) {
+      datestart = datePublication && hour ? `${datePublication} ${hour}:00` : '';
+      if (!this.undefinedDate) {
+        dateend = dateFinishPublication && hourEnd ? `${dateFinishPublication} ${hourEnd}:00` : '';
+      }
+    }
 
     let datos: any = [
       {
@@ -227,6 +233,7 @@ export class TableCarruselComponent implements OnInit {
         ];
       }
     }
+    console.log(datos);
 
     this.subscription = this.content.saveOfertBusiness(datos).subscribe(() => {
       this.dataAddImagen.reset();
