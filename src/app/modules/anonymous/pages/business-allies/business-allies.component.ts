@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
+import { NewBusinessFormComponent } from '../../components/new-business-form/new-business-form.component';
 
 @Component({
   selector: 'app-business-allies',
@@ -33,7 +35,7 @@ export class BusinessAlliesComponent implements OnInit, OnDestroy {
   };
 
 
-  constructor(private content: ContentService) { }
+  constructor(private content: ContentService, private dialog: MatDialog) { }
 
   private subscription = new Subscription();
 
@@ -48,7 +50,12 @@ export class BusinessAlliesComponent implements OnInit, OnDestroy {
       });
   }
 
-  public openForm() {}
+
+  public openForm() {
+    this.dialog.open(NewBusinessFormComponent, {
+      width: '450px',
+    });
+  }
 
   ngOnDestroy(): void {
       this.subscription.unsubscribe();

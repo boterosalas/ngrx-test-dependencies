@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { UtilsService } from 'src/app/services/utils.service';
+import { NewBusinessFormComponent } from '../new-business-form/new-business-form.component';
 
 @Component({
   selector: 'app-welcome',
@@ -48,6 +49,12 @@ export class WelcomeComponent implements OnInit {
         title,
         template,
       },
+    });
+  }
+
+  public openForm() {
+    this.dialog.open(NewBusinessFormComponent, {
+      width: '450px',
     });
   }
 

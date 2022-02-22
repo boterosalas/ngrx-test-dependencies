@@ -62,6 +62,8 @@ import { ShareButtonModule } from '@ngx-share/button';
 import { ReviewClickamComponent } from './components/review-clickam/review-clickam.component';
 import { WidgetBarComponent } from './components/widget-bar/widget-bar.component';
 import { WelcomeComponent } from '../anonymous/components/welcome/welcome.component';
+import { NewBusinessFormComponent } from '../anonymous/components/new-business-form/new-business-form.component';
+import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -108,7 +110,8 @@ import { WelcomeComponent } from '../anonymous/components/welcome/welcome.compon
     ButtonStoryComponent,
     ReviewClickamComponent,
     WidgetBarComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    NewBusinessFormComponent
   ],
   imports: [
     CommonModule,
@@ -131,6 +134,8 @@ import { WelcomeComponent } from '../anonymous/components/welcome/welcome.compon
     NgxPaginationModule,
     NgxDaterangepickerMd.forRoot(),
     ShareButtonModule,
+    RecaptchaFormsModule,
+    RecaptchaModule,
   ],
   exports: [
     SearchComponent,
@@ -177,8 +182,9 @@ import { WelcomeComponent } from '../anonymous/components/welcome/welcome.compon
     ButtonStoryComponent,
     ReviewClickamComponent,
     WidgetBarComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    NewBusinessFormComponent
   ],
-  entryComponents: [ModalGenericComponent, PopupComponent, DialogStoriesComponent, OnboardingSwiperComponent, ReviewClickamComponent],
+  entryComponents: [ModalGenericComponent, PopupComponent, DialogStoriesComponent, OnboardingSwiperComponent, ReviewClickamComponent, NewBusinessFormComponent],
 })
 export class SharedModule {}

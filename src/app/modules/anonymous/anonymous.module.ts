@@ -18,7 +18,6 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { ComissionTableComponent } from './pages/comission-table/comission-table.component';
 import { NewBusinessComponent } from './components/new-business/new-business.component';
-import { NewBusinessFormComponent } from './components/new-business-form/new-business-form.component';
 import {
   RECAPTCHA_V3_SITE_KEY,
   RecaptchaV3Module,
@@ -370,7 +369,6 @@ const routes: Routes = [
     CardOfferComponent,
     ComissionTableComponent,
     NewBusinessComponent,
-    NewBusinessFormComponent,
     SlideVideoComponent,
     ClickamComponent,
     RegisterComponent,
@@ -450,7 +448,7 @@ const routes: Routes = [
     RecoverpasswordformComponent,
     DialogNoveltySatisfactionComponent,
   ],
-  entryComponents: [NewBusinessFormComponent, DialogNoveltySatisfactionComponent],
+  entryComponents: [DialogNoveltySatisfactionComponent],
   providers: [
     {
       provide: RECAPTCHA_SETTINGS,
