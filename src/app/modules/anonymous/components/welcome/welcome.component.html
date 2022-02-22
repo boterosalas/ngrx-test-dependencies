@@ -2,12 +2,14 @@
     <div fxLayout="row" fxLayoutAlign="space-between center">
         
         <span fxLayout="column" fxFlex.gt-xs="50%" ngClass.xs="pt-4 pb-4">
-            <app-title showTitleh1="true" text="¡Bienvenido a Clickam!" classWeb="m-0 pb-2 f-48" classMobile="m-0 pb-2"></app-title>
-            <app-title showTitleh2="true" text="Crea links, comparte y ¡gana!" classWeb="m-0" classMobile="m-0 f-16"></app-title>
-            <p ngClass.gt-xs="f-20" ngClass.xs="f-16">Porque en Clickam podrás ahorrar con tus compras y ganar dinero recomendando los productos que más te gustan.</p>
+            <img class="logo-allies" *ngIf="buttonAllies" src="assets/img/clickam-horizontal.svg" alt="clickam">
+            <app-title showTitleh1="true" [text]="title" classWeb="m-0 pb-2 f-48" classMobile="m-0 pb-2"></app-title>
+            <app-title showTitleh2="true" [text]="subtitle" classWeb="m-0" classMobile="m-0 f-16"></app-title>
+            <p ngClass.gt-xs="f-20" ngClass.xs="f-16">{{text}}</p>
             
             <span fxLayout.gt-xs="row" fxLayout.xs="column-reverse" fxLayoutGap="20px">
-                <app-button [haveIcon]="false" title="Empezar" (action)="begin()" classButton="shadow-purple"></app-button>
+                <app-button *ngIf="buttonHome" [haveIcon]="false" title="Empezar" (action)="begin()" classButton="shadow-purple"></app-button>
+                <app-button *ngIf="buttonAllies" [haveIcon]="false" title="¡Unirme!" (action)="begin()" classButton="shadow-purple"></app-button>
                 <app-button direction="row-reverse" color="yellow-not-bg" title="Ver cómo funciona" (action)="works()" classButton="shadow-purple p-0" classIcon="tio-play_circle f-40 mr-2"></app-button>
             </span>
 

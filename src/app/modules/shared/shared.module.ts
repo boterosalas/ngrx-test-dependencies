@@ -61,6 +61,7 @@ import { ButtonStoryComponent } from '../anonymous/components/button-story/butto
 import { ShareButtonModule } from '@ngx-share/button';
 import { ReviewClickamComponent } from './components/review-clickam/review-clickam.component';
 import { WidgetBarComponent } from './components/widget-bar/widget-bar.component';
+import { WelcomeComponent } from '../anonymous/components/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -106,7 +107,8 @@ import { WidgetBarComponent } from './components/widget-bar/widget-bar.component
     BussinessCardComponent,
     ButtonStoryComponent,
     ReviewClickamComponent,
-    WidgetBarComponent
+    WidgetBarComponent,
+    WelcomeComponent
   ],
   imports: [
     CommonModule,
@@ -174,7 +176,8 @@ import { WidgetBarComponent } from './components/widget-bar/widget-bar.component
     BussinessCardComponent,
     ButtonStoryComponent,
     ReviewClickamComponent,
-    WidgetBarComponent
+    WidgetBarComponent,
+    WelcomeComponent
   ],
   entryComponents: [ModalGenericComponent, PopupComponent, DialogStoriesComponent, OnboardingSwiperComponent, ReviewClickamComponent],
 })

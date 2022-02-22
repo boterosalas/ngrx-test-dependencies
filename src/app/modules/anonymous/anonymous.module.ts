@@ -83,6 +83,7 @@ import { TestimonyComponent } from './pages/testimony/testimony.component';
 import { SlideTestimonyComponent } from './components/slide-testimony/slide-testimony.component';
 import { RateTestimonyComponent } from './components/rate-testimony/rate-testimony.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { BusinessAlliesComponent } from './pages/business-allies/business-allies.component';
 
 
 
@@ -352,6 +353,10 @@ const routes: Routes = [
     path: 'testimonios',
     component: TestimonyComponent,
   },
+  {
+    path: 'negocios-aliados',
+    component: BusinessAlliesComponent,
+  },
 ];
 
 @NgModule({
@@ -420,6 +425,7 @@ const routes: Routes = [
     TestimonyComponent,
     SlideTestimonyComponent,
     RateTestimonyComponent,
+    BusinessAlliesComponent,
   ],
   imports: [
     FormsModule,
