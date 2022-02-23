@@ -119,6 +119,13 @@
                   <span class="text-description">{{ item.responsenovelty }}</span>
                 </div>
 
+                <div fxLayout="column" *ngIf="item.responsedocumenturl">
+                  <p class="mt-0 mb-0 radications-p">DOCUMENTO ADJUNTO</p>
+                  <span class="text-description">
+                    <i class="tio-link style-icon"></i>{{ item.responsedocumenturl }}
+                  </span>
+                </div>
+
                 <div class="status-novelty" fxLayout="column" *ngIf="item.statusnovelty === 'Solucionado'">
                   <p>¿Cómo fue tu experiencia en esta novedad?</p>
                   <div class="emoji-status">

@@ -373,6 +373,15 @@ const routes: Routes = [
       superRole: 'SUPERADMIN',
     },
   },
+  {
+    path: 'control',
+    component: ControlComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
+    },
+  },
 ];
 
 @NgModule({
