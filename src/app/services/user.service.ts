@@ -648,6 +648,28 @@ export class UserService {
       )
     );
   }
+  public saveBusinessNovelty(data: any) {
+    return this.http.post(`${this.url}${this.apiChangeBusinessNovelty}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => { })
+        )
+      )
+    );
+  }
+  public saveDocumentNovelty(data: any) {
+    return this.http.post(`${this.url}${this.apiChangeDocumentNovelty}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => { })
+        )
+      )
+    );
+  }
 
   public saveLabels(data: any) {
     return this.http.post(`${this.url}${this.apiSaveLabel}`, data, this.httpOptions).pipe(

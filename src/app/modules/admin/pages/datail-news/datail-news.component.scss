@@ -242,6 +242,27 @@ mat-card {
       margin-left: 10px;
     }
   }
+  .button-element {
+    background-color: #37236a;
+    padding-left: 16px;
+    padding-right: 16px;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 1px -2px rgb(61 47 86 / 18%), 0 2px 2px 0 rgb(61 47 86 / 18%), 0 1px 5px 0 rgb(61 47 86 / 18%);
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+  .attach-button {
+    min-width: 145px;
+  }
+  .style-icon {
+    font-size: 20px;
+  }
+  .file-upload-input {
+    display: none;
+  }
 }
 
 .gray{

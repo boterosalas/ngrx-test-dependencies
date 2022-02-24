@@ -31,6 +31,7 @@ describe('DatailNewsComponent', () => {
     'saveNewNovelty',
     'getNewNovelties',
     'getNoveltiesById',
+    'saveBusinessNovelty'
   ]);
   const mockSnackBar = jasmine.createSpyObj('MatSnackBar', ['open', 'closeAll', 'afterAllClosed']);
 
@@ -195,6 +196,7 @@ beforeEach(waitForAsync(() => {
     mockUserService.getNewNovelties.and.returnValue(of(listNotes));
     mockUserService.saveNewNovelty.and.returnValue(of(dataResp));
     mockUserService.getNoveltiesById.and.returnValue(of(moreNovelites));
+    mockUserService.saveBusinessNovelty.and.returnValue(of(dataResp));
   }));
 
   beforeEach(() => {
@@ -317,6 +319,7 @@ beforeEach(waitForAsync(() => {
       typenewnovelty: false,
     });
     expect(mockUserService.setStatus).toHaveBeenCalled();
+    expect(mockUserService.saveBusinessNovelty).toHaveBeenCalled();
   });
 
   describe('Errors', () => {

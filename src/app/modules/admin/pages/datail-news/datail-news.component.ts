@@ -9,6 +9,8 @@ import { DialogNoveltySatisfactionComponent } from 'src/app/modules/anonymous/co
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { ContentService } from 'src/app/services/content.service';
 import { UserService } from 'src/app/services/user.service';
+import { UtilsService } from 'src/app/services/utils.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-datail-news',
@@ -24,6 +26,8 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
   currentNovelty: any;
   id:string;
   userId: string;
+  configurarEditor = this.utils.configurarEditor;
+  namePDF = '';
   selecteds = [
     {
       titulo: 'Pendiente',
@@ -86,7 +90,8 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     private user: UserService,
     private dialog: MatDialog,
     private router: Router,
-    private content: ContentService
+    private content: ContentService,
+    private utils: UtilsService
   ) {}
 
   ngOnInit() {
@@ -97,6 +102,8 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
         this.getNoveltyById(params.id, params.userId);
       }
     });
+    this.configurarEditor.width = 'auto';
+    this.configurarEditor.height = '113px';
   }
 
   findBusinessInSelect(businesses){
@@ -137,7 +144,8 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
       status: [this.currentNovelty.statusnovelty ? this.currentNovelty.statusnovelty : ''],
       label: [this.currentNovelty.label ? this.currentNovelty.label : ''],
       responsenovelty: ['', Validators.maxLength(500)],
-      business: null
+      business: null,
+      file: []
     });
     if (this.currentNovelty.documenturl === '') {
       this.image = '';
@@ -190,6 +198,11 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
       status: this.dateForm.controls.status.value,
       responsenovelty: this.dateForm.controls.responsenovelty.value,
     };
+    const data = {
+      id: this.currentNovelty.id,
+      responseDocument: this.dateForm.controls.file.value,
+    };
+    
     this.user.setStatus(datos).subscribe((resp: any) => {
       if (resp.state === 'Success') {
         this.getNoveltyById(this.currentNovelty.id, this. currentNovelty.userid);
@@ -199,6 +212,7 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
         });
       }
     });
+    this.user.saveBusinessNovelty(data).subscribe(() => console.log('Document saved'));
   }
 
   public onChangeSelected(element: any) {
@@ -300,18 +314,60 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     });
   }
 
-  public saveLabel(value:string, evt) {
-    if (value==='') {
-      this.dateForm.get('business').setValue(evt.value);
-    }
+  public saveLabel(value:string) {
     const data = {
       id: this.id,
-      label:  this.dateForm.get('label').value,
-      idBusiness: this.dateForm.get('business').value.id,
+      label:  value
     }
     this.user.saveLabels(data).subscribe();
   }
 
+  public saveBusiness() {
+    const data = {
+      id: this.id,
+      idBusiness: this.dateForm.get('business').value.id,
+    }
+    this.user.saveBusinessNovelty(data).subscribe();
+  }
+
+  onFileChange(event) {
+    const [file] = event.target.files;
+    this.namePDF = file ? file.name : '';
+    const reader = new FileReader();
+    
+    reader.onload = () => {
+      const getExt = this.namePDF.split('.')[1];
+      if (getExt === 'pdf') {
+        if(file.size<5000000){
+          const file = reader.result.toString();
+          this.dateForm.controls.file.patchValue(file.split(',')[1]);
+          this.active = true;
+        }else {
+          Swal.fire({
+            title: 'Error en la Carga',
+            text: 'El límite de tamaño del archivo es de 5 Megas',
+            type: 'error',
+            confirmButtonText: 'Aceptar',
+            confirmButtonClass: 'upload-error',
+          });
+        }
+      } else {
+        Swal.fire({
+          title: 'Error en la Carga',
+          text: 'El archivo no es de tipo PDF',
+          type: 'error',
+          confirmButtonText: 'Aceptar',
+          confirmButtonClass: 'upload-error',
+        });
+      }
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+  reset() {
+    this.dateForm.controls.file.patchValue(null);
+  }
   ngOnDestroy() {
     this.$subscriptionGetNovelties.unsubscribe();
     this.$subcriptionParams.unsubscribe();
