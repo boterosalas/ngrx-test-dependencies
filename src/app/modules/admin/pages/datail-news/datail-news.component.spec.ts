@@ -54,11 +54,8 @@ describe('DatailNewsComponent', () => {
     datenovelty: '2020-02-04',
     businessdescription: 'Haceb',
     date: '2021-02-25',
-    documenturl: 'http/archivo.jpg',
+    documenturl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/novelty/20220223133637_kxidgh2dLN.png',
     code: '12223444',
-    objectResponse: {
-      random: 'asd'
-    },
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
   };
@@ -256,13 +253,13 @@ describe('DatailNewsComponent', () => {
     fixture = TestBed.createComponent(DatailNewsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    component.currentNovelty = respDatos;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
     component.getNoveltyById('1', '0');
     expect(mockUserService.getNoveltyById).toHaveBeenCalled();
-    component.currentNovelty = respDatos;
     expect(component.currentNovelty).toEqual(respDatos);
     expect(component.$subcriptionNovelty).toBeTruthy();
     expect(component.$subcriptionParams).toBeTruthy();
