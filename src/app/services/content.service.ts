@@ -1076,8 +1076,8 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiSaveBussiness}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
-          delay(3000),
-          take(3),
+          delay(5000),
+          take(1),
           tap((errorStatus) => {})
         )
       ),

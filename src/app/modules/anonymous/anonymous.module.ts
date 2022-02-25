@@ -18,7 +18,6 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { ComissionTableComponent } from './pages/comission-table/comission-table.component';
 import { NewBusinessComponent } from './components/new-business/new-business.component';
-import { NewBusinessFormComponent } from './components/new-business-form/new-business-form.component';
 import {
   RECAPTCHA_V3_SITE_KEY,
   RecaptchaV3Module,
@@ -83,6 +82,7 @@ import { TestimonyComponent } from './pages/testimony/testimony.component';
 import { SlideTestimonyComponent } from './components/slide-testimony/slide-testimony.component';
 import { RateTestimonyComponent } from './components/rate-testimony/rate-testimony.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { BusinessAlliesComponent } from './pages/business-allies/business-allies.component';
 
 
 
@@ -352,6 +352,10 @@ const routes: Routes = [
     path: 'testimonios',
     component: TestimonyComponent,
   },
+  {
+    path: 'negocios-aliados',
+    component: BusinessAlliesComponent,
+  },
 ];
 
 @NgModule({
@@ -365,7 +369,6 @@ const routes: Routes = [
     CardOfferComponent,
     ComissionTableComponent,
     NewBusinessComponent,
-    NewBusinessFormComponent,
     SlideVideoComponent,
     ClickamComponent,
     RegisterComponent,
@@ -420,6 +423,7 @@ const routes: Routes = [
     TestimonyComponent,
     SlideTestimonyComponent,
     RateTestimonyComponent,
+    BusinessAlliesComponent,
   ],
   imports: [
     FormsModule,
@@ -444,7 +448,7 @@ const routes: Routes = [
     RecoverpasswordformComponent,
     DialogNoveltySatisfactionComponent,
   ],
-  entryComponents: [NewBusinessFormComponent, DialogNoveltySatisfactionComponent],
+  entryComponents: [DialogNoveltySatisfactionComponent],
   providers: [
     {
       provide: RECAPTCHA_SETTINGS,

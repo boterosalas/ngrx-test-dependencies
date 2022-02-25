@@ -1,0 +1,97 @@
+<div class="container-fluid bg-welcome pt-3">
+  <app-welcome
+    subtitle="¿Qué tal si Clickam te ayuda a incrementar tus ventas online?"
+    text="Clickam es una plataforma creada por Grupo Éxito que permitirá a tu negocio alcanzar compradores por medio de embajadores en todo el país, a los cuales cederás un porcentaje de tus ganancias por cada venta realizada."
+    [buttonAllies]="true"
+  ></app-welcome>
+</div>
+
+<div class="container-fluid pt-3">
+  <div class="container">
+    <app-image-text
+      directionWeb="row"
+      directionMobile="column"
+      imageClass="imgsection"
+      src="/assets/img/landing/s1.png"
+      title="Beneficios del negocio"
+      alt="Beneficios del negocio"
+      classTitleWeb="f-28"
+      classTitleMobile=""
+      generalMobile="mt-5 "
+      text="
+        <h3 class='m-0 f-24'>+ 50.000</h3>
+        <p class='m-0 f-18 purple-text'>usuarios hablando de tus productos o servicios.</p>
+        <br>
+        <h3 class='m-0 f-24'>+ 1.000.000</h3>
+        <p class='m-0 f-18 purple-text'>órdenes realizadas por los links de afiliado.</p>
+        <br>
+        <h3 class='m-0 f-24'>+ $3.000 millones</h3>
+        <p class='m-0 f-18 purple-text'>en recompensas entregadas.</p>
+        <br>
+        <h3 class='m-0 f-24'>15X</h3>
+        <p class='m-0 f-18 purple-text'>de incremento en la tasa de conversión.</p>
+        <br>
+        <h3 class='m-0 f-24'>Adquisición de nuevos clientes</h3>
+        <br>
+        <h3 class='m-0 f-24'>Publicidad en todos los medios</h3>
+
+        "
+    ></app-image-text>
+
+    <app-image-text
+      directionWeb="row-reverse"
+      directionMobile="column"
+      imageClass="imgsection"
+      src="/assets/img/landing/s2.png"
+      title="Qué necesitas para ingresar a Clickam como negocio aliado?"
+      alt="Qué necesitas para ingresar a Clickam como negocio aliado?"
+      generalWeb="mt-5 pt-5"
+      generalMobile="mt-5"
+      classTitleWeb="f-28"
+      classTitleMobile="text-center"
+      text="<span class='f-20'>
+            <p class='m-0'>- Un Ecommerce </p>
+            <p class='m-0'>- Cámara de comercio</p>
+            <p class='m-0'>- RUT</p>
+        </span>"
+    ></app-image-text>
+
+    <app-image-text
+      directionWeb="row"
+      directionMobile="column"
+      imageClass="imgsection"
+      src="/assets/img/landing/s3.png"
+      title="Conversión"
+      alt="Conversión"
+      generalWeb="mt-5 pt-5"
+      generalMobile="mt-5"
+      classTitleWeb="f-28"
+      classTitleMobile="text-center"
+      classTextWeb="f-20 m-0"
+      classTextMobile="f-16 text-center mt-0 mb-3"
+      text="El 62% de los negocios B2B se realizan a través de referidos, un referido tiene 32% más de posibilidad de convertir en comparación con otros canales."
+    ></app-image-text>
+
+    <div class="comment">
+      <p>
+        <i class="tio-quotes top font"></i> Clickam es una de las fuentes de tráfico de nuestro sitio que le vemos el mayor potencial,
+        llegando a tener una tasa de conversión hasta 10x Mayor a una fuente de trafico tradicional como es el trafico orgánico.
+        <i class="tio-quotes bottom font"></i>
+      </p>
+      <span>- Nestor Arias. Jefe de Producto Digial – Grupo Exito</span>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <app-title showTitleh2="true" text="Nuestros aliados" commonClass="text-center"></app-title>
+  <app-slider-share [slider]="bussiness" [slideConfig]="slideConfig"></app-slider-share>
+</div>
+
+<div class="container-fluid bg-gray py-4">
+    <div class="container text-center">
+        <app-title showTitleh2="true" text="¿Quieres saber más sobre clickam?" commonClass="text-center"></app-title>
+        <p class="f-20">Aprende como nuestra plataforma puede <br fxHide.xs="true"> hacerte llegar a más personas</p>
+        <app-button  [haveIcon]="false" title="Conversemos" (action)="openForm()" classButton="shadow-purple"></app-button>
+    </div>
+</div>
