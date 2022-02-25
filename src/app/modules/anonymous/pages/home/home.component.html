@@ -7,7 +7,6 @@
   </div>
 
   <section fxLayout="row" fxLayout.xs="column" class="container-fluid mt-4 mb-4" fxLayoutGap="20px">
-    
     <div fxLayout="column" class="left-section" fxFlex="70" fxFlex.xs="100" fxLayoutGap="20px">
       <mat-card class="card mat-card-box-shadow">
         <div>
@@ -33,17 +32,22 @@
         <app-report-reward></app-report-reward>
       </mat-card>
 
-      <app-image fxHide.xs="true" [routerLink]="[ '/negocios']" imageClass="buimg cursor-pointer w-100" src="/assets/img/home/negocios.png" alt="negocios"></app-image>
+      <app-image
+        fxHide.xs="true"
+        [routerLink]="['/negocios']"
+        imageClass="buimg cursor-pointer w-100"
+        src="/assets/img/home/negocios.png"
+        alt="negocios"
+      ></app-image>
 
       <mat-card class="card mat-card-box-shadow">
         <app-top-reward></app-top-reward>
       </mat-card>
 
-      <mat-card fxHide.gt-xs="true" class="card mat-card-box-shadow purple" [routerLink]="[ '/negocios']">
+      <mat-card fxHide.gt-xs="true" class="card mat-card-box-shadow purple" [routerLink]="['/negocios']">
         <app-title showTitleh3="true" text="NEGOCIOS" commonClass="white m-0"></app-title>
         <span>Encuentra <span class="underline">aquí</span> todos los negocios</span>
       </mat-card>
-
     </div>
 
     <div class="right-section" fxFlex="30" fxFlexOrder.xs="-1" fxFlex.xs="100" fxLayout="column" fxLayoutGap="20px">
@@ -53,7 +57,10 @@
 
       <mat-card class="card mat-card-box-shadow">
         <app-title showTitleh3="true" text="INVITA Y GANA"></app-title>
-        <p>Invita a tus amigos a unirse a la plataforma, ¡gana dinero por su primera ganancia! <a [routerLink]="[ '/referidos']">*Aplican TyC</a> </p>
+        <p>
+          Invita a tus amigos a unirse a la plataforma, ¡gana dinero por su primera ganancia!
+          <a [routerLink]="['/referidos']">*Aplican TyC</a>
+        </p>
         <span fxLayout="row">
           <input id="urlLink" matInput [value]="url" #linkInput readonly />
           <button mat-mini-fab color="purple2" class="p-0" (click)="copyLink(linkInput)" fxLayoutAlign="center center">
@@ -63,25 +70,40 @@
       </mat-card>
 
       <div class="widget" fxHide.lt-md="true">
-        <a href="https://chrome.google.com/webstore/detail/clickam-cashback/jnfdngchdoaemojfkecanhlfgelofibh?authuser=1" target="_blank" class="w-100" mat-raised-button color="chrome" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+        <a
+          href="https://chrome.google.com/webstore/detail/clickam-cashback/jnfdngchdoaemojfkecanhlfgelofibh?authuser=1"
+          target="_blank"
+          class="w-100"
+          mat-raised-button
+          color="chrome"
+          fxLayout="row"
+          fxLayoutGap="10px"
+          fxLayoutAlign="center center"
+        >
           <img class="pr-2" src="assets/img/chrome.svg" alt="chrome" />
-          <span>Instalar Clickam en Chrome</span> 
+          <span>Instalar Clickam en Chrome</span>
         </a>
       </div>
 
       <mat-card class="card mat-card-box-shadow pl-0 pr-0">
         <app-title showTitleh3="true" text="MISIONES" commonClass="pl-3"></app-title>
         <mat-list-item *ngFor="let mission of missions">
-          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" mat-line class="purple2-text f-16 galano-bold pb-3 pt-3 border-bottom-gray">
+          <div
+            fxLayout="row"
+            fxLayoutAlign="start center"
+            fxLayoutGap="5px"
+            mat-line
+            class="purple2-text f-16 galano-bold pb-3 pt-3 border-bottom-gray"
+          >
             <span class="pl-3">
               <i class="tio-checkmark_circle f-18"></i>
             </span>
             <span>
-              {{mission.name}}
+              {{ mission.name }}
             </span>
           </div>
         </mat-list-item>
-        <p fxLayout="row" fxLayoutAlign="center center"  class="pl-3 f-16 mt-3 cursor-pointer yellow galano-bold" [routerLink]="[ '/logros']">
+        <p fxLayout="row" fxLayoutAlign="center center" class="pl-3 f-16 mt-3 cursor-pointer yellow galano-bold" [routerLink]="['/logros']">
           <mat-icon>emoji_events</mat-icon>
           ¡Guía completada!
         </p>
@@ -90,9 +112,7 @@
       <mat-card class="card mat-card-box-shadow p-0">
         <app-list-blogs></app-list-blogs>
       </mat-card>
-
     </div>
-
   </section>
 </section>
 
@@ -102,7 +122,12 @@
   <!-- welcome  -->
 
   <div class="container-fluid bg-welcome pt-3">
-    <app-welcome></app-welcome>
+    <app-welcome
+      title="¡Bienvenido a Clickam!"
+      subtitle="Crea links, comparte y ¡gana!"
+      text="Porque en Clickam podrás ahorrar con tus compras y ganar dinero recomendando los productos que más te gustan."
+      [buttonHome]=true
+    ></app-welcome>
   </div>
 
   <!-- slider business -->
@@ -198,11 +223,10 @@
         classTitleMobile="f-20 text-center"
         text="<p>Con Clickam, ¡Ahorra en todas tus compras! Recibe una recompensa por cada compra que hagas en nuestros negocios aliados. </p>
     <p>Al añadirla en tu navegador, cada vez que ingreses a la página de alguno de nuestros aliados, podrás activar con un solo link las recompensas que te da Clickam al comprar</p>"
-       chrome=true
-       classTextWeb="f-20 m-0"
-       classTextMobile="f-16 text-left mt-0 mb-3"
+        chrome="true"
+        classTextWeb="f-20 m-0"
+        classTextMobile="f-16 text-left mt-0 mb-3"
       ></app-image-text>
-
     </div>
   </div>
 
