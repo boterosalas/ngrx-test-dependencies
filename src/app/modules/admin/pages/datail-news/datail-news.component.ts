@@ -111,7 +111,6 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     this.selectedBusiness = this.businesses.find(business => {
       return business.description === this.currentNovelty.businessdescription
     });
-    this.dateForm.get('business').setValue(this.selectedBusiness);
   }
 
   public getNoveltyById(id: string, userId: string) {
@@ -144,8 +143,6 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
       status: [this.currentNovelty.statusnovelty ? this.currentNovelty.statusnovelty : ''],
       label: [this.currentNovelty.label ? this.currentNovelty.label : ''],
       responsenovelty: ['', Validators.maxLength(500)],
-      business: null,
-      file: []
     });
     if (this.currentNovelty.documenturl === '') {
       this.image = '';
@@ -198,11 +195,6 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
       status: this.dateForm.controls.status.value,
       responsenovelty: this.dateForm.controls.responsenovelty.value,
     };
-    const data = {
-      id: this.currentNovelty.id,
-      responseDocument: this.dateForm.controls.file.value,
-    };
-    
     this.user.setStatus(datos).subscribe((resp: any) => {
       if (resp.state === 'Success') {
         this.getNoveltyById(this.currentNovelty.id, this. currentNovelty.userid);
@@ -212,7 +204,6 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
         });
       }
     });
-    this.user.saveBusinessNovelty(data).subscribe(() => console.log('Document saved'));
   }
 
   public onChangeSelected(element: any) {
@@ -322,26 +313,32 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     this.user.saveLabels(data).subscribe();
   }
 
-  public saveBusiness() {
+  public saveBusiness(e) {
     const data = {
       id: this.id,
-      idBusiness: this.dateForm.get('business').value.id,
+      idBusiness: e.value.id,
     }
     this.user.saveBusinessNovelty(data).subscribe();
   }
 
   onFileChange(event) {
     const [file] = event.target.files;
-    this.namePDF = file ? file.name : '';
     const reader = new FileReader();
     
     reader.onload = () => {
-      const getExt = this.namePDF.split('.')[1];
+      const getExt = file.name.split('.')[1];
       if (getExt === 'pdf') {
         if(file.size<5000000){
-          const file = reader.result.toString();
-          this.dateForm.controls.file.patchValue(file.split(',')[1]);
-          this.active = true;
+          const bl = reader.result.toString();
+          const data = {
+            id: this.currentNovelty.id,
+            responseDocument: bl.split(',')[1],
+          };
+          this.user.saveDocumentNovelty(data).subscribe( (resp: any) => {
+            this.snackBar.open(resp.userMessage, 'Cerrar', {
+              duration: 3000,
+            })
+          });
         }else {
           Swal.fire({
             title: 'Error en la Carga',
@@ -364,9 +361,6 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     if (file) {
       reader.readAsDataURL(file);
     }
-  }
-  reset() {
-    this.dateForm.controls.file.patchValue(null);
   }
   ngOnDestroy() {
     this.$subscriptionGetNovelties.unsubscribe();

@@ -17,6 +17,7 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { of } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
+import { ContentService } from 'src/app/services/content.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -33,6 +34,7 @@ describe('DatailNewsComponent', () => {
     'getNoveltiesById',
     'saveBusinessNovelty'
   ]);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getAllBusiness']);
   const mockSnackBar = jasmine.createSpyObj('MatSnackBar', ['open', 'closeAll', 'afterAllClosed']);
 
   let mockRouter = {
@@ -54,6 +56,9 @@ describe('DatailNewsComponent', () => {
     date: '2021-02-25',
     documenturl: 'http/archivo.jpg',
     code: '12223444',
+    objectResponse: {
+      random: 'asd'
+    },
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
   };
@@ -159,8 +164,55 @@ describe('DatailNewsComponent', () => {
       statusnovelty: 'Pendiente',
     },
   };
-
-beforeEach(waitForAsync(() => {
+  const businesses = [
+    {
+      id: 69,
+      code: "negocio69",
+      image: null,
+      imageurl: "https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/20220218113151.svg",
+      infoaditional: "Hasta 2%",
+      description: "Mis aliados",
+      orderby: 0,
+      active: true,
+      placeholder: "cedula",
+      urlquerystring: "{0}utm_source=clickam&utm_medium=referral&utm_campaign={1}",
+      excelcommission: false,
+      vtexcommission: false,
+      tabtablecommission: "aliados",
+      icondashboard: "20220218113151.svg",
+      icondashboardimage: null,
+      iconstory: "20220218113151.svg",
+      iconstoryimage: null,
+      about: null,
+      urlproducts: null,
+      hasproduct: false,
+      tips: [],
+      terms: [],
+      categories: [
+        {
+          id: 80,
+          idbusiness: 0,
+          idcategory: 2
+        }
+      ],
+      arraycategories: null
+    }
+  ]
+  const event = {
+    value: {
+      id: 3
+    },
+    target: {
+      file: {
+        lastModified: 1645645709697,
+        name: "prob-prob4_3.pdf",
+        size: 211120,
+        type: "application/pdf",
+        webkitRelativePath: "",
+      }
+    }
+  }
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [DatailNewsComponent],
       imports: [
@@ -197,6 +249,7 @@ beforeEach(waitForAsync(() => {
     mockUserService.saveNewNovelty.and.returnValue(of(dataResp));
     mockUserService.getNoveltiesById.and.returnValue(of(moreNovelites));
     mockUserService.saveBusinessNovelty.and.returnValue(of(dataResp));
+    mockContentService.getAllBusiness.and.returnValue(of(businesses));
   }));
 
   beforeEach(() => {
@@ -216,6 +269,8 @@ beforeEach(waitForAsync(() => {
     expect(component.$subscriptionGetMoreNovelties).toBeTruthy();
     expect(component.$subscriptionGetNovelties).toBeTruthy();
     expect(component.$subscriptionSaveNote).toBeTruthy();
+    expect(component.businesses$).toBeTruthy();
+    component.findBusinessInSelect(businesses)
     component.initForm();
     expect(component.dateForm).toBeTruthy();
   });
@@ -319,7 +374,17 @@ beforeEach(waitForAsync(() => {
       typenewnovelty: false,
     });
     expect(mockUserService.setStatus).toHaveBeenCalled();
+  });
+  it('saves business', () => {
+    component.id = '1';
+    component.saveBusiness(event);
     expect(mockUserService.saveBusinessNovelty).toHaveBeenCalled();
+  });
+  it('saves the file', () => {
+    component.id = '1';
+    const mockFile = new File([''], 'name.pdf', { type: 'application/pdf' });
+    const mockEvt = { target: { files: [mockFile] } };
+    component.onFileChange(mockEvt);
   });
 
   describe('Errors', () => {

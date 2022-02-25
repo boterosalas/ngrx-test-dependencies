@@ -115,9 +115,22 @@ export class ContentService {
   apiSaveBoardings = 'boarding/saveboardings';
   apiDeleteBoardings = 'boarding/deleteboardings';
   apiSaveOrderBoardings = 'boarding/saveorderboardings';
+  apiSaveMaxReferredIds='Link/savemaximumreferredids';
 
   sendSearch = {};
 
+
+  public saveMaxReferredIds(data: any) {
+    return this.http.post(`${this.urlRefer}${this.apiSaveMaxReferredIds}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => { })
+        )
+      )
+    );
+  }
   public saveOrderFooterLinks(datos: any) {
     return this.http.post(`${this.url + this.apiSaveOrderFooterLinks}`, datos, this.httpOptions).pipe(
       retryWhen((errors) =>

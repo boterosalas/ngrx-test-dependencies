@@ -116,14 +116,21 @@
 
                 <div fxLayout="column">
                   <p class="mb-0 radications-r">respuesta a novedad</p>
-                  <span class="text-description">{{ item.responsenovelty }}</span>
+                  <!-- <span class="text-description">{{ item.responsenovelty }}</span> -->
+                  <div [innerHtml]="item.responsenovelty"></div>
                 </div>
 
                 <div fxLayout="column" *ngIf="item.responsedocumenturl">
                   <p class="mt-0 mb-0 radications-p">DOCUMENTO ADJUNTO</p>
-                  <span class="text-description">
-                    <i class="tio-link style-icon"></i>{{ item.responsedocumenturl }}
-                  </span>
+                  
+                  <div fxLayout="row">
+                    <i class="tio-link style-icon"></i>
+                    <a href="{{ item.responsedocumenturl }}">
+                      <span class="document__link">
+                        {{ item.responsedocumenturl.split('/')[item.responsedocumenturl.split('/').length-1] }}
+                      </span>
+                    </a>
+                  </div>
                 </div>
 
                 <div class="status-novelty" fxLayout="column" *ngIf="item.statusnovelty === 'Solucionado'">

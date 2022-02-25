@@ -8,8 +8,8 @@
     </h3>
     <p>{{ 'REFER.CONTROL_TEXT' | translate }}</p>
     <form fxLayout="row" fxLayoutAlign="space-between center" [formGroup]="form" (ngSubmit)="onSubmit()">
-      <mat-form-field>
-        <input matInput id="amount" type="text" placeholder="Cantidad de cédulas" 
+      <mat-form-field fxFlex="75">
+        <input fxFill matInput id="amount" type="text" placeholder="Cantidad de cédulas" 
         formControlName="idAmount" spacebar required />
 
         <mat-error *ngIf="form.get('idAmount').hasError('min')">{{

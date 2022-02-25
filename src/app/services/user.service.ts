@@ -90,7 +90,6 @@ export class UserService {
   apiSaveVisitCampaign='campaign/savevisitcampaign';
   apiChangeBusinessNovelty='new/changebusinessnovelty';
   apiChangeDocumentNovelty='new/changedocumentnovelty';
-  apiSaveMaxReferredIds='link/savemaximumreferredids';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -955,17 +954,6 @@ export class UserService {
     return this.http.post(`${this.url + this.apiSaveActiveTestimony}`, data, this.httpOptions);
   }
 
-  public saveMaxReferredIds(data: any) {
-    return this.http.post(`${this.url}${this.apiSaveMaxReferredIds}`, data, this.httpOptions).pipe(
-      retryWhen((errors) =>
-        errors.pipe(
-          delay(3000),
-          take(3),
-          tap((errorStatus) => { })
-        )
-      )
-    );
-  }
 }
 
 
