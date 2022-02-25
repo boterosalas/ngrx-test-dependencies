@@ -326,8 +326,8 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     const reader = new FileReader();
     
     reader.onload = () => {
-      const getExt = file.name.split('.')[1];
-      if (getExt === 'pdf') {
+      let getExt = file.name.split('.').slice(-1);
+      if (getExt[0] === 'pdf') {
         if(file.size<5000000){
           const bl = reader.result.toString();
           const data = {

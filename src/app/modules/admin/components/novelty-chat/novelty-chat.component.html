@@ -11,7 +11,7 @@
         <span>CAMBIO DE ESTADO ({{ note.state }})</span>
       </div>
       <div class="text">
-        <p>{{ note.text }}</p>
+        <div [innerHtml]="note.text "></div>
       </div>
       <div fxLayout="row" class="footer-note" fxLayoutAlign="space-between center">
         <span>{{ note.adminName }}</span>
