@@ -88,6 +88,8 @@ export class UserService {
   apiSaveCampaign='campaign/savecampaign';
   apiGetCampaign='campaign/getcampaigns';
   apiSaveVisitCampaign='campaign/savevisitcampaign';
+  apiChangeBusinessNovelty='new/changebusinessnovelty';
+  apiChangeDocumentNovelty='new/changedocumentnovelty';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -636,6 +638,28 @@ export class UserService {
 
   public setStatus(data: any) {
     return this.http.post(`${this.url}${this.apiSetStatusNew}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => { })
+        )
+      )
+    );
+  }
+  public saveBusinessNovelty(data: any) {
+    return this.http.post(`${this.url}${this.apiChangeBusinessNovelty}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => { })
+        )
+      )
+    );
+  }
+  public saveDocumentNovelty(data: any) {
+    return this.http.post(`${this.url}${this.apiChangeDocumentNovelty}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),

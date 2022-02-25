@@ -414,7 +414,10 @@
     "TWITTER": "Compartir en Twitter",
     "SHARE_INVITATION": "Comparte tu invitación",
     "CONDITIONS": "<h3>¿Cómo funciona el programa? </h3><p>En Clickam creamos un link asignado para ti, el cual puedes encontrar al clickear “Refiere y gana {{amount}}”, simplemente envía este link a tu círculo social, o publícalo en tus redes sociales como Facebook, Instagram, estado de WhatsApp, Twitter, entre otras. Y si alguna persona: </p><ul> <li>Ingresa a la plataforma por medio del link enviado por ti.</li><li>Realiza el proceso de registro.</li><li>Acumula {{sale}} en compras o ventas efectivas.</li></ul><p>Entonces, ¡ganarás una comisión! </p>",
-    "TERMS": "<h3>Refiere y Gana Términos y Condiciones</h3><h4>Términos del Programa de Referidos</h4><p>De acuerdo con los Términos del Programa de Referidos. Clickam te pagará un bono de COP{{amount}} en tu cuenta inscrita en la plataforma por cada referido calificado en el periodo que inicia el 1 de Enero del 2021 y finaliza el 31 de Diciembre del 2022. (“Periodo de Oferta”).</p><p>A pesar de todo lo contrario en los Términos del Programa de referidos, esta oferta es válida solo si el referido se registra y completa su compra calificada durante el Período de la oferta.</p>"
+    "TERMS": "<h3>Refiere y Gana Términos y Condiciones</h3><h4>Términos del Programa de Referidos</h4><p>De acuerdo con los Términos del Programa de Referidos. Clickam te pagará un bono de COP{{amount}} en tu cuenta inscrita en la plataforma por cada referido calificado en el periodo que inicia el 1 de Enero del 2021 y finaliza el 31 de Diciembre del 2022. (“Periodo de Oferta”).</p><p>A pesar de todo lo contrario en los Términos del Programa de referidos, esta oferta es válida solo si el referido se registra y completa su compra calificada durante el Período de la oferta.</p>",
+    "CONTROL_PAGE": "Control",
+    "CONTROL_TITLE": "CONTROL DE REFERIDOS",
+    "CONTROL_TEXT": "Ingrese cuál será la cantidad de cédulas permitidas"
   },
 
   "HELP_CENTER": {

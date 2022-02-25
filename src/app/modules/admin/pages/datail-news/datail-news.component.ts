@@ -9,6 +9,8 @@ import { DialogNoveltySatisfactionComponent } from 'src/app/modules/anonymous/co
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { ContentService } from 'src/app/services/content.service';
 import { UserService } from 'src/app/services/user.service';
+import { UtilsService } from 'src/app/services/utils.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-datail-news',
@@ -24,6 +26,8 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
   currentNovelty: any;
   id:string;
   userId: string;
+  configurarEditor = this.utils.configurarEditor;
+  namePDF = '';
   selecteds = [
     {
       titulo: 'Pendiente',
@@ -86,7 +90,8 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     private user: UserService,
     private dialog: MatDialog,
     private router: Router,
-    private content: ContentService
+    private content: ContentService,
+    private utils: UtilsService
   ) {}
 
   ngOnInit() {
@@ -97,6 +102,8 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
         this.getNoveltyById(params.id, params.userId);
       }
     });
+    this.configurarEditor.width = 'auto';
+    this.configurarEditor.height = '113px';
   }
 
   findBusinessInSelect(businesses){
@@ -104,7 +111,6 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     this.selectedBusiness = this.businesses.find(business => {
       return business.description === this.currentNovelty.businessdescription
     });
-    this.dateForm.get('business').setValue(this.selectedBusiness);
   }
 
   public getNoveltyById(id: string, userId: string) {
@@ -137,7 +143,6 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
       status: [this.currentNovelty.statusnovelty ? this.currentNovelty.statusnovelty : ''],
       label: [this.currentNovelty.label ? this.currentNovelty.label : ''],
       responsenovelty: ['', Validators.maxLength(500)],
-      business: null
     });
     if (this.currentNovelty.documenturl === '') {
       this.image = '';
@@ -300,18 +305,63 @@ export class DatailNewsComponent implements OnInit, OnDestroy {
     });
   }
 
-  public saveLabel(value:string, evt) {
-    if (value==='') {
-      this.dateForm.get('business').setValue(evt.value);
-    }
+  public saveLabel(value:string) {
     const data = {
       id: this.id,
-      label:  this.dateForm.get('label').value,
-      idBusiness: this.dateForm.get('business').value.id,
+      label:  value
     }
     this.user.saveLabels(data).subscribe();
   }
 
+  public saveBusiness(e) {
+    const data = {
+      id: this.id,
+      idBusiness: e.value.id,
+    }
+    this.user.saveBusinessNovelty(data).subscribe();
+  }
+
+  onFileChange(event) {
+    const [file] = event.target.files;
+    const reader = new FileReader();
+    
+    reader.onload = () => {
+      const getExt = file.name.split('.')[1];
+      if (getExt === 'pdf') {
+        if(file.size<5000000){
+          const bl = reader.result.toString();
+          const data = {
+            id: this.currentNovelty.id,
+            responseDocument: bl.split(',')[1],
+          };
+          this.user.saveDocumentNovelty(data).subscribe( (resp: any) => {
+            this.snackBar.open(resp.userMessage, 'Cerrar', {
+              duration: 3000,
+            })
+          });
+        }else {
+          Swal.fire({
+            title: 'Error en la Carga',
+            text: 'El límite de tamaño del archivo es de 5 Megas',
+            type: 'error',
+            confirmButtonText: 'Aceptar',
+            confirmButtonClass: 'upload-error',
+          });
+        }
+      } else {
+        Swal.fire({
+          title: 'Error en la Carga',
+          text: 'El archivo no es de tipo PDF',
+          type: 'error',
+          confirmButtonText: 'Aceptar',
+          confirmButtonClass: 'upload-error',
+        });
+      }
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
   ngOnDestroy() {
     this.$subscriptionGetNovelties.unsubscribe();
     this.$subcriptionParams.unsubscribe();

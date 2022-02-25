@@ -16,6 +16,7 @@ import { TokenService } from 'src/app/services/token.service';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { isPlatformBrowser } from '@angular/common';
+import Swal from 'sweetalert2';
 
 declare var dataLayer: any;
 
@@ -210,7 +211,16 @@ export class BussinessComponent implements OnInit, OnDestroy {
     };
     this.subscription = this.links.saveLink(dataSaveLinkReference).subscribe((resp: ResponseService) => {
       if (resp.state === 'Error') {
-        this.utils.openSnackBar(resp.userMessage, 'cerrar');
+        if (resp.userMessage.includes('máximo de referidos')) {
+          Swal.fire({
+            title: 'Limite de referidos',
+            text: resp.userMessage,
+            type: 'error',
+            confirmButtonText: 'Aceptar',
+            confirmButtonClass: 'upload-error',
+          });
+        } else
+          this.utils.openSnackBar(resp.userMessage, 'cerrar');
       } else {
         this.utils.openSnackBar(resp.userMessage, 'cerrar');
         this.dialog.dismiss();

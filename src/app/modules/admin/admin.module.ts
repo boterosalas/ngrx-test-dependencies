@@ -100,6 +100,7 @@ import { TableCarruselComponent } from './components/table-carrusel/table-carrus
 import { CampaingsComponent } from './components/campaings/campaings.component';
 import { FormCampaignComponent } from './components/form-campaign/form-campaign.component';
 import { DownloadCenterComponent } from './pages/download-center/download-center.component';
+import { ControlComponent } from './pages/control/control.component';
 
 const routes: Routes = [
   {
@@ -372,6 +373,15 @@ const routes: Routes = [
       superRole: 'SUPERADMIN',
     },
   },
+  {
+    path: 'control',
+    component: ControlComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
+    },
+  },
 ];
 
 @NgModule({
@@ -458,6 +468,7 @@ const routes: Routes = [
     CampaingsComponent,
     FormCampaignComponent,
     DownloadCenterComponent,
+    ControlComponent,
   ],
   imports: [
     AngularEditorModule,
