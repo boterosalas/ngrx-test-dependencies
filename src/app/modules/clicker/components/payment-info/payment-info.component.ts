@@ -123,7 +123,7 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
       ced1: [null, Validators.required],
       ced2: [null, Validators.required],
       cert: [null, Validators.required],
-      rut: [null, Validators.required],
+      rut: [],
     });
   }
 
