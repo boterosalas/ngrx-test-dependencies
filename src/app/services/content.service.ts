@@ -116,10 +116,17 @@ export class ContentService {
   apiDeleteBoardings = 'boarding/deleteboardings';
   apiSaveOrderBoardings = 'boarding/saveorderboardings';
   apiSaveMaxReferredIds='Link/savemaximumreferredids';
+  apiGetMaximumReferredIds='Link/getmaximumreferredids';
 
   sendSearch = {};
 
-
+  public getMaximumReferredIds() {
+    return this.http.get(`${this.urlRefer + this.apiGetMaximumReferredIds}`, this.httpOptions).pipe(
+      map((user: ResponseService) => {
+        return user.objectResponse;
+      })
+    );
+  }
   public saveMaxReferredIds(data: any) {
     return this.http.post(`${this.urlRefer}${this.apiSaveMaxReferredIds}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
