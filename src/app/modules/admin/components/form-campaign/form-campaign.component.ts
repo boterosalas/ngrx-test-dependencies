@@ -70,7 +70,7 @@ export class FormCampaignComponent implements OnInit, OnDestroy {
     const urlCampaign = `${origin}/${linkampaign}/?campaign=${nameCampaign}&register=${register}`;
 
     const params = {
-      id: !this.data ? 0 : this.data.item.id,
+      id: !this.data ? 0 : this.data.item.idcampaign,
       publishdate: date,
       description: !this.data ? nameCampaign: '',
       link: !this.data ? urlCampaign : '',
