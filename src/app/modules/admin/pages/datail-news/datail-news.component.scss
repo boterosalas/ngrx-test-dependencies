@@ -241,6 +241,20 @@ mat-card {
     .margin-left-10px {
       margin-left: 10px;
     }
+    .style-icon {
+      font-size: 19px;
+      color: black;
+    }
+    .document__link {
+      color: #37236a;
+      font-size: 16px;
+    }
+    .doc_anchor {
+      overflow: hidden;
+    }
+    .attached {
+      font-size: 11px;
+    }
   }
   .button-element {
     background-color: #37236a;
@@ -267,4 +281,9 @@ mat-card {
 
 .gray{
   color:#726d7e !important;
+}
+@media (max-width: 992px) {
+  .selected-business {
+    width: 160px;
+  }
 }

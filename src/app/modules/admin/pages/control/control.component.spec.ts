@@ -40,7 +40,7 @@ describe('ControlComponent', () => {
       ]
     }).compileComponents();
     mockContentService.saveMaxReferredIds.and.returnValue(of(dataResp));
-    mockContentService.getMaximumReferredIds.and.returnValue(of(3));
+    mockContentService.getMaximumReferredIds.and.returnValue(of(referredIds));
   });
 
   beforeEach(() => {
