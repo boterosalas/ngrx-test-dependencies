@@ -38,7 +38,7 @@ export class TableActivateBusinessComponent implements OnInit {
   @ViewChild('templateBussiness', { static: false })
   templateBussiness: TemplateRef<any>;
   idBussinessSelected: number;
-  displayedColumns: string[] = ['drag', 'bussiness', 'activate', 'category'];
+  displayedColumns: string[] = ['drag', 'bussiness', 'id', 'activate', 'category'];
   displayedColumnsComision: string[] = ['drag', 'bussiness', 'comision', 'button'];
   arrayComision: any[];
   disabledButton = true;

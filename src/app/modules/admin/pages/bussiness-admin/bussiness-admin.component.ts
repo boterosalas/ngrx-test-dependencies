@@ -35,6 +35,7 @@ export class BussinessAdminComponent implements OnInit {
   displayedColumns: string[] = [
     'drag',
     'image',
+    'id',
     'name',
     'comission',
     'typeCommision',

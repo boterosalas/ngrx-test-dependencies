@@ -17,6 +17,8 @@
           </div>
         </td>
       </ng-container>
+
+
       <ng-container matColumnDef="bussiness">
         <th mat-header-cell *matHeaderCellDef>
           {{ 'DASHBOARD.NEW_BUSINESS' | translate }}
@@ -34,6 +36,19 @@
               {{ element.description }}
             </span>
           </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>
+          ID
+        </th>
+        <td mat-cell *matCellDef="let element">
+          
+            <span fxLayout="column" class="f-16" fxHide.xs="true">
+              {{ element.code }}
+            </span>
+         
         </td>
       </ng-container>
 
