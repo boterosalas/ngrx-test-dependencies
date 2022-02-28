@@ -50,8 +50,6 @@ export class SliderComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   @ViewChild('templateCategories', { static: false })
   templateCategories: TemplateRef<any>;
-  @ViewChild('templateDialogAssured', { static: false })
-  templateAssured: TemplateRef<any>;
   urlshorten = '';
   url: string;
   identification: string;

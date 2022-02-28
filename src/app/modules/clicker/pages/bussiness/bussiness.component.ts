@@ -14,7 +14,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { LinksService } from 'src/app/services/links.service';
 import { TokenService } from 'src/app/services/token.service';
 import { NgNavigatorShareService } from 'ng-navigator-share';
-import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { isPlatformBrowser } from '@angular/common';
 import Swal from 'sweetalert2';
 
@@ -59,8 +58,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   @ViewChild('templateCategories', { static: false })
   templateCategories: TemplateRef<any>;
-  @ViewChild('templateDialogAssured', { static: false })
-  templateAssured: TemplateRef<any>;
+ 
   @ViewChild('templateEC', { static: false }) templateEC: TemplateRef<any>;
 
   urlshorten = '';
