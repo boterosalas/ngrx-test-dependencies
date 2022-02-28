@@ -7,7 +7,7 @@
       {{ 'REFER.CONTROL_TITLE' | translate }}
     </h3>
     <p>{{ 'REFER.CONTROL_TEXT' | translate }}</p>
-    <form fxLayout="row" fxLayoutAlign="space-between center" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form fxLayout="row" fxLayoutAlign="space-between center" [formGroup]="form">
       <mat-form-field fxFlex="75">
         <input fxFill matInput id="amount" type="text" placeholder="Cantidad de cédulas" 
         formControlName="idAmount" spacebar required />
@@ -20,7 +20,7 @@
           'GENERIC.ONLY_NUMBERS' | translate
           }}</mat-error>
       </mat-form-field>
-      <button type="submit" mat-raised-button color="orange" id="send-comission" class="ml-2">
+      <button (click)="onSubmit()" mat-raised-button color="orange" id="send-comission" class="ml-2">
         Guardar
       </button>
     </form>
