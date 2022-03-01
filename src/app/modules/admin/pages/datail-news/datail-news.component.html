@@ -250,6 +250,18 @@
           }}</mat-error>
         </form>
       </div>
+      <div fxLayout="column" *ngIf="currentNovelty.responsedocumenturl">
+        <p class="mt-3 mb-1 attached">DOCUMENTO ADJUNTO</p>
+                
+        <div fxLayout="row">
+          <i class="tio-link style-icon"></i>
+          <a href="{{ currentNovelty.responsedocumenturl }}" class="doc_anchor">
+            <span class="document__link">
+              {{ currentNovelty.responsedocumenturl.split('/').slice(-1) }}
+            </span>
+          </a>
+        </div>
+      </div>
       <div fxLayout="row wrap" fxLayoutAlign="end end" class="mt-4">
         <span class="file-input" *ngIf="namePDF !== ''">{{ namePDF }}</span>
       

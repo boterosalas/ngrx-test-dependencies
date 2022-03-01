@@ -3,6 +3,7 @@
 @import 'animations';
 
 .wrapper {
+  height: 100%;
   .header {
     .title-name {
       color: #37236a;
@@ -15,7 +16,7 @@
   }
 
   .list-notes {
-    height: calc(540px - 216px);
+    max-height: 500px;
     overflow-y: auto;
     .note {
       border-radius: 10px;

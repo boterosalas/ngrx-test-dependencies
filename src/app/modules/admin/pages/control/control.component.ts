@@ -13,7 +13,7 @@ import { ContentService } from 'src/app/services/content.service';
 export class ControlComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   form: FormGroup;
-  
+
   constructor(
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
@@ -27,17 +27,17 @@ export class ControlComponent implements OnInit, OnDestroy {
 
   initForm() {
     this.form = this.fb.group({
-      idAmount: ['' , [Validators.required, Validators.min(1), Validators.pattern('[0-9]+')]]
+      idAmount: ['', [Validators.required, Validators.min(1), Validators.pattern('[0-9]+')]]
     });
   }
 
   getMaxReferredIds() {
-    this.subscription = this.content.getMaximumReferredIds().subscribe((res: number)=> {
+    this.subscription = this.content.getMaximumReferredIds().subscribe((res) => {
       this.form.controls.idAmount.setValue(res)
     }
     );
   }
-  
+
   onSubmit() {
     this.subscription = this.content.saveMaxReferredIds({
       value: this.form.controls.idAmount.value
