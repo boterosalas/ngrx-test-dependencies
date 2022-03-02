@@ -82,11 +82,5 @@ describe('BusinessAlliesComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('open form', () => {
-    component.openForm();
-    expect(mockDialog.open).toHaveBeenCalled();
-  });
-  
-
 });
 

@@ -52,10 +52,4 @@ export class WelcomeComponent implements OnInit {
     });
   }
 
-  public openForm() {
-    this.dialog.open(NewBusinessFormComponent, {
-      width: '450px',
-    });
-  }
-
 }

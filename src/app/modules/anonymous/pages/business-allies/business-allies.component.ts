@@ -51,12 +51,6 @@ export class BusinessAlliesComponent implements OnInit, OnDestroy {
   }
 
 
-  public openForm() {
-    this.dialog.open(NewBusinessFormComponent, {
-      width: '450px',
-    });
-  }
-
   ngOnDestroy(): void {
       this.subscription.unsubscribe();
   }
