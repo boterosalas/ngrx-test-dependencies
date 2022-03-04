@@ -21,6 +21,7 @@ export class ContentService {
       'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
     }),
   };
+
   urlRefer = environment.URL_REFERAL;
   url = environment.URL_CONTENT;
   urlComission = environment.URL_COMISSION;
@@ -117,8 +118,24 @@ export class ContentService {
   apiSaveOrderBoardings = 'boarding/saveorderboardings';
   apiSaveMaxReferredIds='Link/savemaximumreferredids';
   apiGetMaximumReferredIds='Link/getmaximumreferredids';
+  apiSaveMenuFooter='footer/saveactivefooterlinks'
 
   sendSearch = {};
+
+  public saveMenuFooter(datos: any) {
+    return this.http.post(`${this.url + this.apiSaveMenuFooter}`, datos, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: ResponseService) => {
+        return resp;
+      })
+    );
+  }
 
   public getMaximumReferredIds() {
     return this.http.get(`${this.urlRefer + this.apiGetMaximumReferredIds}`, this.httpOptions).pipe(
