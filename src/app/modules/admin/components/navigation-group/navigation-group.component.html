@@ -52,7 +52,6 @@
       <i class="tio-edit style-icon cursor-pointer" (click)="editNavigationItem(section)"></i>
   
       <i
-        *ngIf="section.menusystem === true"
         class="style-icon cursor-pointer"
         [ngClass]="{
           'tio-visible': section.active === true,
@@ -62,7 +61,6 @@
       ></i>
   
       <img
-        *ngIf="section.menusystem === false"
         class="cursor-pointer"
         (click)="deleteNavigationItem(section)"
         src="/assets/img/dashboard/icon-remove-comision.svg"

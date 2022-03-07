@@ -183,4 +183,20 @@ export class NavigationFooterComponent implements OnInit {
       }
     });
   }
+
+  changeStateOfItem(item: any) {
+    if (item.active) {
+      item.active = false;
+    } else {
+      item.active = true;
+    }
+
+    const data = {
+      id: item.id,
+      active: item.active
+    }
+
+    this.content.saveMenuFooter(data).subscribe(() => {});
+  }
+
 }
