@@ -31,6 +31,8 @@ describe('ReportsComponent', () => {
     'updatePaymentDate',
     'downloadReferrals',
     'getReportClickam',
+    'saveCutOffDate',
+    'getCutOffDate'
   ]);
 
   const fileReport = {
@@ -51,6 +53,8 @@ describe('ReportsComponent', () => {
     userMessage: 'se ha enviado un correo a test@h.com',
     objectResponse: [],
   };
+
+  const date = "2022-02-01T00:00:00";
 
 beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -102,6 +106,7 @@ beforeEach(waitForAsync(() => {
     mockLinksService.getReportClickam.and.returnValue(of(getReport));
     mockLinksService.sendfile.and.returnValue(of(data));
     mockLinksService.updatePaymentDate.and.returnValue(of(data));
+    mockLinksService.getCutOffDate.and.returnValue(of(date));
     fixture = TestBed.createComponent(ReportsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -187,5 +192,16 @@ beforeEach(waitForAsync(() => {
     component.getReportClickam();
     expect(mockLinksService.getReportClickam).toHaveBeenCalled();
   });
+
+  it('save cut off date', () => {
+    mockLinksService.saveCutOffDate.and.returnValue(of(getReport));
+    component.changeMonth(-1);
+    const button = document.querySelector('.swal2-confirm');
+    button.dispatchEvent(new Event('click'));
+    fixture.whenStable().then(() => {
+      expect(mockLinksService.saveCutOffDate).toHaveBeenCalled();
+    })
+  });
+  
 
 });

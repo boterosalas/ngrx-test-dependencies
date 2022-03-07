@@ -42,6 +42,8 @@ export class ReportsComponent implements OnInit, OnDestroy {
   maxDate = moment(new Date());
   maxDate2 = new Date();
 
+  date:any;
+
   dateParams: any;
   disButon: boolean;
   email: string;
@@ -103,10 +105,13 @@ export class ReportsComponent implements OnInit, OnDestroy {
       }
     );
     this.checkRole();
+    this.CutOffDate();
   }
+
   checkRole() {
     this.utils.checkPermision();
   }
+
   public getFileReport() {
     this.subscription = this.file.getFileReport().subscribe((file) => {
       if (file.state === 'Success') {
@@ -405,6 +410,31 @@ export class ReportsComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+  public changeMonth(value:number) {
+    Swal.fire({
+      html: "<h3>Cambio de corte</h3> <p class='w-container'>¿Está seguro que desea realizar el cambio de mes?</p>",
+      confirmButtonText: 'Confirmar cambio de corte',
+      cancelButtonText: 'Cancelar',
+      showCancelButton: true,
+      confirmButtonClass: 'month order-last',
+      cancelButtonClass: 'updatecancel',
+      allowOutsideClick: false,
+    }).then((resp: any) => {
+      if (resp.dismiss !== 'cancel') {
+        this.subscription = this.file.saveCutOffDate(value).subscribe((save:ResponseService) => {
+          this.utils.openSnackBar(save.userMessage, 'Cerrar');
+        })
+      }
+    });
+  }
+
+  public CutOffDate() {
+    this.subscription = this.file.getCutOffDate().subscribe(resp => {
+      this.date = resp;
+    })
+  }
+
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

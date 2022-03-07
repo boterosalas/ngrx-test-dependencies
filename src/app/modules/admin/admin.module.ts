@@ -513,10 +513,7 @@ const routes: Routes = [
       responsive: true,
     }),
   ],
-  exports: [
-    SideMenuComponent,
-    RouterModule
-  ],
+  exports: [SideMenuComponent, RouterModule],
   entryComponents: [
     DialogCategoryComponent,
     DialogVideoPlayerComponent,
@@ -529,12 +526,12 @@ const routes: Routes = [
     DialogOnboardingComponent,
     FormTestimonyComponent,
     FormPartnerComponent,
-    FormCampaignComponent
+    FormCampaignComponent,
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: UsersComponent },
     { provide: MatDialogRef, useValue: {} },
-	{ provide: MAT_DIALOG_DATA, useValue: [] },
+    { provide: MAT_DIALOG_DATA, useValue: [] },
   ],
 })
 export class AdminModule {}
