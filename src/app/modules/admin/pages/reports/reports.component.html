@@ -5,15 +5,25 @@
 ></app-banner>
 
 <div class="container mt-4 mb-3 fade-in">
-  <!-- <h1 class="border-bottom-orange-init" id="reportsTitle">{{ "REPORTS.REPORTS" | translate }}</h1> -->
   <div fxLayout="row" fxLayoutGap="20px">
-    <app-card-admin
-      fxLayout="column"
-      fxFlex="50"
-      title="{{ 'REPORTS.SELL_REPORTS' | translate }}"
-      img="/assets/img/dashboard/icono-reporte-ventas.svg"
-      [template]="templateCardReport"
-    ></app-card-admin>
+    
+    <div fxLayout="column" fxLayoutGap="20px">
+
+      <app-card-admin
+        fxLayout="column"
+        title="{{ 'REPORTS.SELL_REWARDS' | translate }}"
+        img="/assets/img/dashboard/icono-reporte-ventas.svg"
+        [template]="templateCardRewards"
+      ></app-card-admin>
+  
+      <app-card-admin
+        fxLayout="column"
+        title="{{ 'REPORTS.SELL_REPORTS' | translate }}"
+        img="/assets/img/dashboard/icono-reporte-ventas.svg"
+        [template]="templateCardReport"
+      ></app-card-admin>
+    </div>
+
     <app-card-admin
       fxLayout="column"
       fxFlex="50"
@@ -21,129 +31,152 @@
       img="/assets/img/dashboard/Icono-cruzar-ventas.svg"
       [template]="templateCardCross"
     ></app-card-admin>
+
   </div>
 </div>
 
-<ng-template #templateCardReport>
-  <p id="reportSell">{{ 'REPORTS.DOWNLOAD_REPORT' | translate }}</p>
-  <button (click)="getFileReport()" id="downloadReport" class="mb-3" mat-raised-button color="orange">
-    Exportar
-    <i class="tio-download_from_cloud style-icon"></i>
-  </button>
-  <p>{{ 'REPORTS.UPLOAD_FILE' | translate }}</p>
-  <h4 id="trips" class="title-upload m-0">
-    {{ 'REPORTS.PAYMENT_REPORTS' | translate }}
-  </h4>
-  <app-load-form-file
-    [fileForm]="fileFormPayment"
-    [nameFile]="nameFilePayment"
-    label="Payment"
-    (uploadFile)="onFileChangePayment($event)"
-  ></app-load-form-file>
-  <mat-error *ngIf="showErrorExtPayment" class="small">
-    {{ 'GENERIC.INVALID_FORMAT_FILE' | translate }}
-  </mat-error>
-  <br />
-  <p>{{ 'REPORTS.SELECT_DATE' | translate }}</p>
-
-  <form [formGroup]="dateFormSell" class="downloadUsers user-transactions">
-    <i class="tio-date_range icon-date"></i>
-    <input
-      (change)="change()"
-      formControlName="dateRange"
-      [locale]="locale"
-      drops="up"
-      placeholder="Seleccione fechas"
-      type="text"
-      [maxDate]="maxDate"
-      ngxDaterangepickerMd
-      [showDropdowns]="true"
-      class="form-control border-input mat-elevation-z1 p-2 border-radius"
-    />
-    <button
-      mat-raised-button
-      color="orange"
-      (click)="getReportClickam()"
-      id="download-users"
-      class="ml-2"
-      [disabled]="!dateFormSell.valid || disButon"
-    >
-      Exportar <i class="tio-download_from_cloud style-icon"></i>
+<ng-template #templateCardRewards>
+  <div class="px-3">
+    <p id="reportSell">{{ 'REPORTS.DOWNLOAD_REPORT' | translate }}</p>
+    <button (click)="getFileReport()" id="downloadReport" class="mb-3" mat-raised-button color="orange">
+      Exportar
+      <i class="tio-download_from_cloud style-icon"></i>
     </button>
-  </form>
+    <h3 class="border-bottom-gray pb-2">
+      {{ 'REPORTS.UPDATE_PAYMENTS' | translate }}
+    </h3>
+    <p>{{ 'REPORTS.UPLOAD_FILE' | translate }}</p>
+
+    <div class="updatePayment" fxLayout="row" fxLayoutAlign="space-around center">
+      <button color="orange" (click)="changeMonth(-1)" class="change-date" mat-raised-button>-</button>
+      <span class="upper">{{date | date:'MMMM, y':'es-ES'}}</span>
+      <button color="orange" (click)="changeMonth(1)" class="change-date" mat-raised-button>+</button>
+    </div>
+
+    <h4 id="trips" class="title-upload m-0">
+      {{ 'REPORTS.PAYMENT_REPORTS' | translate }}
+    </h4>
+    <app-load-form-file
+      [fileForm]="fileFormPayment"
+      [nameFile]="nameFilePayment"
+      label="Payment"
+      (uploadFile)="onFileChangePayment($event)"
+    ></app-load-form-file>
+    <mat-error *ngIf="showErrorExtPayment" class="small">
+      {{ 'GENERIC.INVALID_FORMAT_FILE' | translate }}
+    </mat-error>
+    <br />
+  </div>
+</ng-template>
+
+<ng-template #templateCardReport>
+  <div class="px-3">
+
+    <p>{{ 'REPORTS.SELECT_DATE' | translate }}</p>
+  
+    <form [formGroup]="dateFormSell" class="downloadUsers user-transactions">
+      <i class="tio-date_range icon-date"></i>
+      <input
+        (change)="change()"
+        formControlName="dateRange"
+        [locale]="locale"
+        drops="up"
+        placeholder="Seleccione fechas"
+        type="text"
+        [maxDate]="maxDate"
+        ngxDaterangepickerMd
+        [showDropdowns]="true"
+        class="form-control border-input mat-elevation-z1 p-2 border-radius"
+      />
+      <button
+        mat-raised-button
+        color="orange"
+        (click)="getReportClickam()"
+        id="download-users"
+        class="ml-2"
+        [disabled]="!dateFormSell.valid || disButon"
+      >
+        Exportar <i class="tio-download_from_cloud style-icon"></i>
+      </button>
+    </form>
+    <br />
+  </div>
 </ng-template>
 
 <ng-template #templateCardCross>
-  <br />
-  <p>{{ 'REPORTS.DOWNLOAD_FILE' | translate }}</p>
-  <form [formGroup]="dateForm">
-    <div fxLayout="row">
-      <mat-form-field class="pr-2">
-        <input matInput [matDatepicker]="picker" [max]="maxDate2" placeholder="Fecha inicial" formControlName="dateStart" readonly />
-        <mat-datepicker-toggle matSuffix [for]="picker" id="dateStart"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error
-          class="small"
-          id="requireddateStart"
-          *ngIf="dateForm.controls.dateStart.invalid && dateForm.controls.dateStart.errors.required"
-          >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Fecha inicial' } }}</mat-error
-        >
-      </mat-form-field>
-
-      <mat-form-field>
-        <input
-          matInput
-          [max]="maxDate2"
-          [min]="dateForm.controls.dateStart.value"
-          [matDatepicker]="picker2"
-          placeholder="Fecha final"
-          formControlName="dateEnd"
-          readonly
-        />
-        <mat-datepicker-toggle
-          matSuffix
-          id="dateEnd"
-          [for]="picker2"
-          [disabled]="dateForm.controls.dateStart.value === ''"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #picker2></mat-datepicker>
-        <mat-error
-          class="small"
-          id="requireddateEnd"
-          *ngIf="dateForm.controls.dateEnd.invalid && dateForm.controls.dateEnd.errors.required"
-          >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Fecha final' } }}</mat-error
-        >
-        <mat-error class="small" id="invalidDate" *ngIf="dateForm.get('dateEnd').errors && dateForm.get('dateEnd').errors.dateEnd">{{
-          'REPORTS.DATE_ERROR' | translate
-        }}</mat-error>
-      </mat-form-field>
-    </div>
+  <div class="px-3">
     <br />
-    <button (click)="downloadReferal()" id="downloadReportSell" mat-raised-button color="orange" [disabled]="!dateForm.valid">
-      {{ 'REPORTS.DOWNLOAD' | translate }}
-      <i class="tio-download_from_cloud style-icon"></i>
-    </button>
+    <p>{{ 'REPORTS.DOWNLOAD_FILE' | translate }}</p>
+    <form [formGroup]="dateForm">
+      <div fxLayout="row">
+        <mat-form-field class="pr-2">
+          <input matInput [matDatepicker]="picker" [max]="maxDate2" placeholder="Fecha inicial" formControlName="dateStart" readonly />
+          <mat-datepicker-toggle matSuffix [for]="picker" id="dateStart"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error
+            class="small"
+            id="requireddateStart"
+            *ngIf="dateForm.controls.dateStart.invalid && dateForm.controls.dateStart.errors.required"
+            >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Fecha inicial' } }}</mat-error
+          >
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input
+            matInput
+            [max]="maxDate2"
+            [min]="dateForm.controls.dateStart.value"
+            [matDatepicker]="picker2"
+            placeholder="Fecha final"
+            formControlName="dateEnd"
+            readonly
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            id="dateEnd"
+            [for]="picker2"
+            [disabled]="dateForm.controls.dateStart.value === ''"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+          <mat-error
+            class="small"
+            id="requireddateEnd"
+            *ngIf="dateForm.controls.dateEnd.invalid && dateForm.controls.dateEnd.errors.required"
+            >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Fecha final' } }}</mat-error
+          >
+          <mat-error class="small" id="invalidDate" *ngIf="dateForm.get('dateEnd').errors && dateForm.get('dateEnd').errors.dateEnd">{{
+            'REPORTS.DATE_ERROR' | translate
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+      <br />
+      <button (click)="downloadReferal()" id="downloadReportSell" mat-raised-button color="orange" [disabled]="!dateForm.valid">
+        {{ 'REPORTS.DOWNLOAD' | translate }}
+        <i class="tio-download_from_cloud style-icon"></i>
+      </button>
+      <br />
+    </form>
+    <p id="cross">{{ 'REPORTS.UPLOAD' | translate }}</p>
     <br />
-  </form>
-  <p id="cross">{{ 'REPORTS.UPLOAD' | translate }}</p>
+    <h4 id="trips" class="title-upload m-0">{{ 'REPORTS.SELLS' | translate }}</h4>
+    <app-load-form-file [fileForm]="fileForm" [nameFile]="nameFile" label="trip" (uploadFile)="onFileChangeTrip($event)"></app-load-form-file>
+    <mat-error *ngIf="showErrorExt" class="small">
+      {{ 'GENERIC.INVALID_FORMAT_FILE' | translate }}
+    </mat-error>
+    <br />
+  
+    <h4 id="trips" class="title-upload m-0">
+      {{ 'REPORTS.PICKING' | translate }}
+    </h4>
+    <app-load-form-file
+      [fileForm]="fileFormPicking"
+      [nameFile]="nameFilePicking"
+      label="picking"
+      (uploadFile)="onFileChangePicking($event)"
+    ></app-load-form-file>
+    <mat-error *ngIf="showErrorExtPicking" class="small">
+      {{ 'GENERIC.INVALID_FORMAT_FILE' | translate }}
+    </mat-error>
+  </div>
   <br />
-  <h4 id="trips" class="title-upload m-0">{{ 'REPORTS.SELLS' | translate }}</h4>
-  <app-load-form-file [fileForm]="fileForm" [nameFile]="nameFile" label="trip" (uploadFile)="onFileChangeTrip($event)"></app-load-form-file>
-  <mat-error *ngIf="showErrorExt" class="small">
-    {{ 'GENERIC.INVALID_FORMAT_FILE' | translate }}
-  </mat-error>
-  <br />
-
-  <h4 id="trips" class="title-upload m-0">
-    {{ 'REPORTS.PICKING' | translate }}
-  </h4>
-  <app-load-form-file
-    [fileForm]="fileFormPicking"
-    [nameFile]="nameFilePicking"
-    label="picking"
-    (uploadFile)="onFileChangePicking($event)"
-  ></app-load-form-file>
-  <mat-error *ngIf="showErrorExtPicking" class="small">
-    {{ 'GENERIC.INVALID_FORMAT_FILE' | translate }}
-  </mat-error>
 </ng-template>

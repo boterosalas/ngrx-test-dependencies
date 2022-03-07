@@ -1711,6 +1711,14 @@ button.swal2-confirm.updateokdelete.order-last.swal2-styled {
   box-shadow: 0px 3px 9px #f2190580;
   font-size: 14px;
 }
+button.swal2-confirm.month.order-last.swal2-styled {
+  background-color: $primary-color !important;
+  color: #fff !important;
+  border-radius: 10px;
+  box-shadow: 0px 3px 9px $primary-color;
+  font-size: 14px;
+  padding: 14px 25px;
+}
 .delete-title-comision {
   color: #f21905;
 }

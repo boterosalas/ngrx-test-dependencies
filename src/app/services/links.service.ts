@@ -53,6 +53,8 @@ export class LinksService {
   apiUpdateStatusCommission = 'commissions/updatestatuscommission';
   apiDeleteCommissionFile = 'commissions/deletecommissionfile';
   apiDeleteCommission = 'commissions/deletecommission';
+  apiSaveCutOffDate = 'commissions/savecutoffdate';
+  apiGetCutOffDate = 'commissions/getcutoffdate';
   apiGetReferrals = 'referrals/getreferrals';
   apiGetAmounts = 'amount/getamounts';
   apiSaveAmountCommission = 'amount/saveamountcommission';
@@ -130,6 +132,18 @@ export class LinksService {
     );
   }
 
+  public saveCutOffDate(value: number) {
+    return this.http.post(`${this.urlComission + this.apiSaveCutOffDate}`, value, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(1),
+          tap((errorStatus) => {})
+        )
+      )
+    );
+  }
+
   public saveAmountReferred(amount: any) {
     return this.http.post(`${this.urlComission + this.apiSaveAmountReferred}`, amount, this.httpOptions).pipe(
       retryWhen((errors) =>
@@ -157,6 +171,21 @@ export class LinksService {
   public getReports() {
     const apiReport = `${this.reports}`;
     return this.http.get(`${this.urlComission}${apiReport}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: ResponseService) => {
+        return resp.objectResponse;
+      })
+    );
+  }
+
+  public getCutOffDate() {
+    return this.http.get(`${this.urlComission}${this.apiGetCutOffDate}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
