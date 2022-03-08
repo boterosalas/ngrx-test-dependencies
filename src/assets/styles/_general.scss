@@ -2957,3 +2957,17 @@ img.dk {
   height: 100px;
 }
 
+
+.waypad {
+  .mat-dialog-container{
+    padding-bottom: 0;
+  }
+}
+
+@media (max-width:'768px') {
+  .image{
+    img{
+      width: 100%;
+    }
+  }
+}
