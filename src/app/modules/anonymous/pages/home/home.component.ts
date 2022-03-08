@@ -453,7 +453,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  public modalLogin(position: any) {
+  public modalWay(position: any) {
     const template = this.templateClickamWay;
     const title = 'EL CAMINO DEL CLICKAMER';
     const id = 'way';

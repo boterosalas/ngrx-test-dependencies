@@ -566,6 +566,37 @@ describe('HomeComponent', () => {
     expect(params).toBeDefined();
   });
 
+  it('modal way 0', () => {
+    component.modalWay(0);
+    expect(component.titleWay).toBe('Ingresaste a Clickam');
+  });
+
+  it('modal way 1', () => {
+    component.modalWay(1);
+    expect(component.titleWay).toBe('Completaste tu registro');
+  });
+
+  it('modal way 2', () => {
+    component.modalWay(2);
+    expect(component.titleWay).toBe('Aprendiste sobre la extensión de Chrome');
+  });
+
+  it('modal way 3', () => {
+    component.modalWay(3);
+    expect(component.titleWay).toBe('Realizaste tu primera compra (¡Que rico ahorrar!)');
+  });
+
+  it('modal way 4', () => {
+    component.modalWay(4);
+    expect(component.titleWay).toBe('Tienes un amigo que ahora hace parte de Clickam');
+  });
+
+  it('modal way 5', () => {
+    component.modalWay(5);
+    expect(component.titleWay).toBe('Referiste tu primer producto de forma exitosa');
+  });
+  
+
   // it('modal promo', () => {
   //   component.getModalPromo();
   //   expect(mockContentService.getPopupus).toHaveBeenCalled();
