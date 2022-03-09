@@ -86,8 +86,8 @@
       </div>
 
       <mat-card class="card mat-card-box-shadow pl-0 pr-0">
-        <app-title showTitleh3="true" text="MISIONES" commonClass="pl-3"></app-title>
-        <mat-list-item *ngFor="let mission of missions">
+        <app-title showTitleh3="true" text="EL CAMINO DEL CLICKAMER" commonClass="pl-3"></app-title>
+        <mat-list-item *ngFor="let mission of missions; let i = index">
           <div
             fxLayout="row"
             fxLayoutAlign="start center"
@@ -95,17 +95,22 @@
             mat-line
             class="purple2-text f-16 galano-bold pb-3 pt-3 border-bottom-gray"
           >
-            <span class="pl-3">
+            <span class="pl-3" *ngIf="mission.completed">
               <i class="tio-checkmark_circle f-18"></i>
             </span>
-            <span>
+
+            <span class="pl-3" *ngIf="!mission.completed">
+              <i class="tio-checkmark_circle_outlined f-18"></i>
+            </span>
+
+            <span class="cursor-pointer" (click)="modalWay(i)">
               {{ mission.name }}
             </span>
           </div>
         </mat-list-item>
         <p fxLayout="row" fxLayoutAlign="center center" class="pl-3 f-16 mt-3 cursor-pointer yellow galano-bold" [routerLink]="['/logros']">
           <mat-icon>emoji_events</mat-icon>
-          ¡Guía completada!
+          Logros
         </p>
       </mat-card>
 
@@ -283,5 +288,19 @@
     <a [href]="modalHref" [target]="modalTarget">
       <img [src]="modalSrcMobile" class="img-responsive w-100 cursor-pointer" [alt]="modalAltMobile" />
     </a>
+  </div>
+</ng-template>
+
+<!-- modal ingreso clickam -->
+
+<ng-template #templateClickamWay>
+  <div [fxLayout]="direction" [fxLayout.xs]="directionMobile" fxLayoutGap="20px">
+    <span class="image">
+      <app-image [src]="imageWay" [alt]="titleWay"></app-image>
+    </span>
+    <span>
+      <app-title showTitleh3="true" [text]="titleWay"></app-title>
+      <p>{{textWay}}</p>
+    </span>
   </div>
 </ng-template>

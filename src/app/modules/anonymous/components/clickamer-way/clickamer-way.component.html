@@ -1,0 +1,15 @@
+<div id="{{ data.id }}" class="modal-width">
+  <div class="bg-welcome">
+    <div fxLayoutAlign="end">
+      <a id="closeDialog" matRipple (click)="onNoClick()"><mat-icon class="close">close</mat-icon></a>
+    </div>
+  
+    <h1 class="title-width f-18 galano-bold text-center" mat-dialog-title>
+      {{ data.title }}
+    </h1>
+  </div>
+
+  <div mat-dialog-content>
+    <ng-container *ngTemplateOutlet="data.template"> </ng-container>
+  </div>
+</div>

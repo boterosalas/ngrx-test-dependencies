@@ -83,6 +83,7 @@ import { SlideTestimonyComponent } from './components/slide-testimony/slide-test
 import { RateTestimonyComponent } from './components/rate-testimony/rate-testimony.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BusinessAlliesComponent } from './pages/business-allies/business-allies.component';
+import { ClickamerWayComponent } from './components/clickamer-way/clickamer-way.component';
 
 
 
@@ -424,6 +425,7 @@ const routes: Routes = [
     SlideTestimonyComponent,
     RateTestimonyComponent,
     BusinessAlliesComponent,
+    ClickamerWayComponent,
   ],
   imports: [
     FormsModule,
@@ -448,7 +450,7 @@ const routes: Routes = [
     RecoverpasswordformComponent,
     DialogNoveltySatisfactionComponent,
   ],
-  entryComponents: [DialogNoveltySatisfactionComponent],
+  entryComponents: [DialogNoveltySatisfactionComponent, ClickamerWayComponent],
   providers: [
     {
       provide: RECAPTCHA_SETTINGS,

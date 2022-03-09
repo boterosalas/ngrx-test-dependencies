@@ -101,6 +101,9 @@ import { CampaingsComponent } from './components/campaings/campaings.component';
 import { FormCampaignComponent } from './components/form-campaign/form-campaign.component';
 import { DownloadCenterComponent } from './pages/download-center/download-center.component';
 import { ControlComponent } from './pages/control/control.component';
+import { CatologueComponent } from './pages/catologue/catologue.component';
+import { CatologueCardComponent } from './components/catologue-card/catologue-card.component';
+import { CatologueFormComponent } from './components/catologue-form/catologue-form.component';
 
 const routes: Routes = [
   {
@@ -382,6 +385,15 @@ const routes: Routes = [
       superRole: 'SUPERADMIN',
     },
   },
+  {
+    path: 'catalogo-admin',
+    component: CatologueComponent,
+    canActivate: [RoleGuard],
+    data: {
+      role: 'ADMIN',
+      superRole: 'SUPERADMIN',
+    },
+  },
 ];
 
 @NgModule({
@@ -469,6 +481,9 @@ const routes: Routes = [
     FormCampaignComponent,
     DownloadCenterComponent,
     ControlComponent,
+    CatologueComponent,
+    CatologueCardComponent,
+    CatologueFormComponent,
   ],
   imports: [
     AngularEditorModule,
@@ -527,6 +542,7 @@ const routes: Routes = [
     FormTestimonyComponent,
     FormPartnerComponent,
     FormCampaignComponent,
+    CatologueFormComponent
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: UsersComponent },

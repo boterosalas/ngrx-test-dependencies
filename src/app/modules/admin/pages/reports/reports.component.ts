@@ -424,6 +424,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
       if (resp.dismiss !== 'cancel') {
         this.subscription = this.file.saveCutOffDate(value).subscribe((save:ResponseService) => {
           this.utils.openSnackBar(save.userMessage, 'Cerrar');
+          this.CutOffDate();
         })
       }
     });

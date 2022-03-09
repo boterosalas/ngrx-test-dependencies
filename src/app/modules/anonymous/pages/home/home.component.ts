@@ -17,6 +17,7 @@ import { MasterDataService } from 'src/app/services/master-data.service';
 import { FormBuilder } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 import { TokenService } from 'src/app/services/token.service';
+import { ClickamerWayComponent } from '../../components/clickamer-way/clickamer-way.component';
 
 @Component({
   selector: 'app-login',
@@ -64,6 +65,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   acceptTerms: boolean = null;
   @ViewChild('templateTerms', { static: false })
   templateTerms: TemplateRef<any>;
+  @ViewChild('templateClickamWay', { static: false })
+  templateClickamWay: TemplateRef<any>;
   newTermsHTML = false;
   stepTerms = true;
   activateButton = false;
@@ -87,7 +90,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   modalHrefMobile: string;
   modalSrcWeb: string;
   modalSrcMobile: string;
-  url:string;
+  url: string;
+  imageWay: string;
+  textWay: string;
+  titleWay: string;
+  direction = 'row';
+  directionMobile = 'column-reverse';
 
   @ViewChild('templateTestimonials', { static: true })
   templateTestimonials: TemplateRef<any>;
@@ -164,10 +172,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   };
 
   missions = [
-    {name: '1. Registro'},
-    {name: '2. Referir'},
-    {name: '3. Comprar'},
-    {name: '4. Historial y Reportes'},
+    { name: 'Ingresaste a Clickam', completed: true },
+    { name: 'Completaste tu registro', completed: true },
+    { name: 'Aprendiste sobre la extensión de Chrome', completed: true },
+    { name: 'Realizaste tu primera compra (¡Que rico ahorrar!)', completed: false },
+    { name: 'Tienes un amigo que ahora hace parte de Clickam', completed: false },
+    { name: 'Referiste tu primer producto de forma exitosa', completed: false },
   ];
 
   constructor(
@@ -186,7 +196,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     @Inject(PLATFORM_ID) private platformId: object,
     private token: TokenService
   ) {
- 
     this.subscription = this.route.queryParams.subscribe((params) => {
       if (params.email) {
         this.email = params.email;
@@ -210,13 +219,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public generateUrl() {
-    if(this.token.user && this.token.user.idclicker !== undefined) {
+    if (this.token.user && this.token.user.idclicker !== undefined) {
       const domain = document.location.origin;
       this.url = encodeURI(`${domain}/inicio?code=${this.token.user.idclicker}`);
     }
   }
 
-  public copyLink(inputElement:any) {
+  public copyLink(inputElement: any) {
     inputElement.select();
     document.execCommand('copy');
     inputElement.setSelectionRange(0, 0);
@@ -268,10 +277,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public getBussiness() {
-    this.subscription = this.content
-      .getBusiness().subscribe((bussiness) => {
-        this.bussiness = bussiness;
-      });
+    this.subscription = this.content.getBusiness().subscribe((bussiness) => {
+      this.bussiness = bussiness;
+    });
   }
 
   public getUserDataUser() {
@@ -354,8 +362,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       localStorage.setItem('AmonuntReferred', amount.amountsReferred);
     });
   }
-
-
 
   @HostListener('over')
   openRegister() {
@@ -447,8 +453,80 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
+  public modalWay(position: any) {
+    const template = this.templateClickamWay;
+    const title = 'EL CAMINO DEL CLICKAMER';
+    const id = 'way';
+
+    switch (position) {
+      case (position = 0):
+        this.direction = 'row';
+        this.imageWay = '/assets/img/way/ingresaste.png';
+        this.titleWay = 'Ingresaste a Clickam';
+        this.textWay =
+          '¡Te damos la bienvenida! Tomaste una increíble decisión, mejorar tus finanzas personales generando ingresos adicionales y ahorrando con Clickam.';
+        break;
+
+      case (position = 1):
+        this.direction = 'row';
+        this.imageWay = '/assets/img/way/registro.png';
+        this.titleWay = 'Completaste tu registro';
+        this.textWay =
+          'Verifica en “Mi perfil” que hayas completado toda tu información, recuerda que para realizar el pago de tus ganancias debes adjuntar tu certificado bancario y fotocopia de la cédula, ¡No pierdas la oportunidad de recibir dinero en tu cuenta!';
+        break;
+
+      case (position = 2):
+        this.direction = 'row-reverse';
+        this.imageWay = '/assets/img/way/extension.png';
+        this.titleWay = 'Aprendiste sobre la extensión de Chrome';
+        this.textWay =
+          'Con la extensión tendrás la oportunidad de ahorrar en todas tus compras y nunca se te olvidará ganar, haz click en “Instalar Clickam en Chrome” y ¡Ahorra como nunca!';
+        break;
+
+      case (position = 3):
+        this.direction = 'row-reverse';
+        this.imageWay = '/assets/img/way/compra.png';
+        this.titleWay = 'Realizaste tu primera compra (¡Que rico ahorrar!)';
+        this.textWay =
+          'Generaste tu link y compraste por medio de él, lo que nosotros llamamos inteligencia financiera, estas avanzando en tu camino para ser un Clickamer exitoso.';
+        break;
+
+      case (position = 4):
+        this.direction = 'row';
+        this.imageWay = '/assets/img/way/amigo.png';
+        this.titleWay = 'Tienes un amigo que ahora hace parte de Clickam';
+        this.textWay =
+          'Ayudas a otros a tener libertad financiera y a ahorrar, comparte tu link de referido para que alguien más conozca la plataforma y genere su primera ganancia, tú también generarás una recompensa.';
+        break;
+
+      case (position = 5):
+        this.direction = 'row-reverse';
+        this.imageWay = '/assets/img/way/refiere.png';
+        this.titleWay = 'Referiste tu primer producto de forma exitosa';
+        this.textWay =
+          'Gana al apoyar a alguien en su búsqueda del producto perfecto, recomienda por medio de tu link un negocio, categoría o producto para ganar dinero y así alcanzar tus sueños.';
+        break;
+
+      default:
+        this.imageWay = '/assets/img/way/ingresaste.png';
+        this.titleWay = 'Ingresaste a Clickam';
+        this.textWay =
+          '¡Te damos la bienvenida! Tomaste una increíble decisión, mejorar tus finanzas personales generando ingresos adicionales y ahorrando con Clickam.';
+        break;
+    }
+
+    this.dialog.open(ClickamerWayComponent, {
+      width: '700px',
+      panelClass: 'waypad',
+      data: {
+        title,
+        id,
+        template,
+      },
+    });
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 }

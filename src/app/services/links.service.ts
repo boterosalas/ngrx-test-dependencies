@@ -133,7 +133,7 @@ export class LinksService {
   }
 
   public saveCutOffDate(value: number) {
-    return this.http.post(`${this.urlComission + this.apiSaveCutOffDate}`, value, this.httpOptions).pipe(
+    return this.http.post(`${this.urlComission + this.apiSaveCutOffDate}`, {value: value}, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),

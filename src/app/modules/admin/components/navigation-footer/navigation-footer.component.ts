@@ -196,7 +196,7 @@ export class NavigationFooterComponent implements OnInit {
       active: item.active
     }
 
-    this.content.saveMenuFooter(data).subscribe(() => {});
+    this.content.saveMenuFooter([data]).subscribe(() => {});
   }
 
 }
