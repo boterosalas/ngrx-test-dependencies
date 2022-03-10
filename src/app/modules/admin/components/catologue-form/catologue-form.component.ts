@@ -1,7 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import moment from 'moment';
 import { Subscription } from 'rxjs';
+import { ResponseService } from 'src/app/interfaces/response';
 import { ContentService } from 'src/app/services/content.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
@@ -10,7 +12,7 @@ import { UtilsService } from 'src/app/services/utils.service';
   templateUrl: './catologue-form.component.html',
   styleUrls: ['./catologue-form.component.scss'],
 })
-export class CatologueFormComponent implements OnInit {
+export class CatologueFormComponent implements OnInit, OnDestroy {
   catalogueForm: FormGroup;
   image: string;
   nameFile: string = '';
@@ -29,22 +31,38 @@ export class CatologueFormComponent implements OnInit {
   minHours: any;
   add = true;
   pdf: string;
+  ediDate: any;
+  dateEdit:string;
+  hourEdit: string;
+
   private subscription: Subscription = new Subscription();
 
-  constructor(private fb: FormBuilder, private utils: UtilsService, private content: ContentService) {}
+  constructor(private fb: FormBuilder, private utils: UtilsService, private content: ContentService,  public dialogRef: MatDialogRef<any>, @Inject(MAT_DIALOG_DATA) public data: any, ) {}
 
   listCatalogue = [];
 
   ngOnInit(): void {
+
+    if(this.data !== null) {
+      this.listCatalogue = this.data.urls
+      this.nameFile = 'portada.jpg';
+      this.nameFile2 = 'catalogo.pdf';
+      this.ediDate = this.data.enddate;
+      let splitDate = this.ediDate.split('T');
+      this.dateEdit = splitDate[0];
+      const hour = splitDate[1];
+      this.hourEdit = this.utils.timeFormat(hour);
+    }
+
     this.catalogueForm = this.fb.group({
-      name: [null, Validators.required],
+      name: [this.data !== null ? this.data.description  : '', Validators.required],
       url: [null],
       business: [null],
       image: [null],
       pdf: [null],
-      date: [null, Validators.required],
-      hour: [null, Validators.required],
-      visible: [false],
+      date: [this.data !== null ? this.dateEdit : null , Validators.required],
+      hour: [this.data !== null ? this.hourEdit : null, Validators.required],
+      visible: [this.data !== null ? this.data.active : false ],
     });
 
     this.getAllBusiness();
@@ -92,7 +110,7 @@ export class CatologueFormComponent implements OnInit {
     const endDate = endDateFormat + ' ' + hourFormat;
 
     const data = {
-      id: 0,
+      id: this.data !== null ? this.data.id : 0,
       active: this.catalogueForm.controls.visible.value,
       startDate: startDate,
       endDate: endDate,
@@ -102,11 +120,10 @@ export class CatologueFormComponent implements OnInit {
       urls: this.listCatalogue,
     };
 
-    console.log(data);
-
-    // this.content.saveBussiness(data).subscribe((resp: ResponseService) => {
-    //   this.utils.openSnackBar(resp.userMessage, 'Cerrar');
-    // })
+    this.subscription = this.content.saveCatalog(data).subscribe((resp: ResponseService) => {
+      this.utils.openSnackBar(resp.userMessage, 'Cerrar');
+      this.dialogRef.close();
+    });
   }
 
   addItem() {
@@ -128,7 +145,7 @@ export class CatologueFormComponent implements OnInit {
   }
 
   public changeValue() {
-    this.catalogueForm.controls.url.valueChanges.subscribe((value) => {
+    this.subscription = this.catalogueForm.controls.url.valueChanges.subscribe((value) => {
       if (value !== '' && this.catalogueForm.controls.business.value !== null) {
         this.add = false;
       } else {
@@ -136,4 +153,9 @@ export class CatologueFormComponent implements OnInit {
       }
     });
   }
+
+  ngOnDestroy(): void {
+      this.subscription.unsubscribe();
+  }
+
 }

@@ -233,7 +233,6 @@ export class TableCarruselComponent implements OnInit {
         ];
       }
     }
-    console.log(datos);
 
     this.subscription = this.content.saveOfertBusiness(datos).subscribe(() => {
       this.dataAddImagen.reset();

@@ -8,25 +8,38 @@
   <div>
     <h3 class="popup-category">Catálogos publicados <span class="line"></span></h3>
     <app-catologue-card
-          *ngFor="let element of dataCatalogueActive; let i = index"
-          [idCatalogue]="element.id"
-          [title]="element.description"
-          [img]="element.imageurlweb"
-          [links]="element.links"
-          [dateStart]="element.datestart"
-          [dateEnd]="element.dateend"
-          [showHidden]="element.active"
-          (edit)="editCatalogueModal(element)"
-          (delete)="deleteOfer($event, 'popup')"
-          (setShowHidden)="activate($event)"
-        >
-        </app-catologue-card>
+      *ngFor="let element of dataCatalogueActive; let i = index"
+      [idCatalogue]="element.id"
+      [title]="element.description"
+      [img]="element.imageurl"
+      [links]="element.urls.length"
+      [dateStart]="element.startdate"
+      [dateEnd]="element.enddate"
+      [showHidden]="element.active"
+      (edit)="editCatalogueModal(element)"
+      (delete)="deleteCatalogue($event)"
+      (setShowHidden)="activate($event)"
+    >
+    </app-catologue-card>
 
-    <h3 class="popup-category">Catálogos vencidos <span class="line"></span></h3>
+    <h3 class="popup-category">Catálogos Inactivos <span class="line"></span></h3>
+    <app-catologue-card
+      *ngFor="let element of dataCatalogueInactive; let i = index"
+      [idCatalogue]="element.id"
+      [title]="element.description"
+      [img]="element.imageurl"
+      [links]="element.urls.length"
+      [dateStart]="element.startdate"
+      [dateEnd]="element.enddate"
+      [showHidden]="element.active"
+      (edit)="editCatalogueModal(element)"
+      (delete)="deleteCatalogue($event)"
+      (setShowHidden)="activate($event)"
+    >
+    </app-catologue-card>
   </div>
-  
+
   <div fxLayoutAlign="end center">
-      <app-button title="Agregar catálogo" (action)="addCatalogue()" [haveIcon]="false" class="mb-3" classButton="shadow-purple"></app-button>
+    <app-button title="Agregar catálogo" (action)="addCatalogue()" [haveIcon]="false" class="mb-3" classButton="shadow-purple"></app-button>
   </div>
-  
 </div>

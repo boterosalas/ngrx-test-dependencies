@@ -49,7 +49,7 @@
 
     <div class="updatePayment" fxLayout="row" fxLayoutAlign="space-around center">
       <button color="orange" (click)="changeMonth(-1)" class="change-date" mat-raised-button>-</button>
-      <span class="upper">{{date | date:'MMMM, y':'locale':'es-ES'}}</span>
+      <span class="upper">{{date}}</span>
       <button color="orange" (click)="changeMonth(1)" class="change-date" mat-raised-button>+</button>
     </div>
 
