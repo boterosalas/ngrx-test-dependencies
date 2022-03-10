@@ -46,6 +46,8 @@ import { DetailComponent } from './pages/notifications/detail/detail.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SocialFormComponent } from './components/social-form/social-form.component';
 import { PreferencesComponent } from './components/preferences/preferences.component';
+import { CatalogComponent } from './pages/catalog/catalog.component';
+import { CardCatalogPdfComponent } from './components/card-catalog-pdf/card-catalog-pdf.component';
 const routes: Routes = [
   {
     path: 'mi-perfil/:pagos',
@@ -112,6 +114,11 @@ const routes: Routes = [
     component: DetailComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'catalogo',
+    component: CatalogComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
@@ -148,6 +155,8 @@ const routes: Routes = [
     DetailComponent,
     SocialFormComponent,
     PreferencesComponent,
+    CatalogComponent,
+    CardCatalogPdfComponent,
   ],
   imports: [
     CommonModule,

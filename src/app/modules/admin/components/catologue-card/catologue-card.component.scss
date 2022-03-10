@@ -22,9 +22,10 @@
 .img-desktop {
   display: inline-block;
   border-radius: 10px;
-  height: 100%;
-  width: 140px;
+  height: 90px;
+  width: 100px;
   margin-right: 5px;
+  object-fit: contain;
 }
 
 .catalogue-info-container {
