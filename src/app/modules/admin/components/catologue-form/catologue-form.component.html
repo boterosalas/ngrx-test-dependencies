@@ -132,7 +132,7 @@
 
   <div class="container button-padding mb-4 mt-4">
     <div fxLayout="row" fxLayoutAlign="end center">
-      <app-button title="Cancelar" [haveIcon]="false" color="transparent" classButton="no-shadow"></app-button>
+      <app-button title="Cancelar" (click)="onNoClick()" [haveIcon]="false" color="transparent" classButton="no-shadow"></app-button>
       <app-button
         title="Publicar"
         (action)="saveCatalogue()"
