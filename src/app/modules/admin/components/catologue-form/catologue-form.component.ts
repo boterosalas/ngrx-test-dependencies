@@ -154,6 +154,10 @@ export class CatologueFormComponent implements OnInit, OnDestroy {
     });
   }
 
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
   ngOnDestroy(): void {
       this.subscription.unsubscribe();
   }
