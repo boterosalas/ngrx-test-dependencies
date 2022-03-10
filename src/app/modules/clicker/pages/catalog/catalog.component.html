@@ -1,0 +1,12 @@
+<app-banner
+  color="purple"
+  title="Catálogo"
+  img="/assets/img/banners/banner-reportes-pc.jpg"
+  imgMobile="/assets/img/banners/banner-reportes-mobile.jpg"
+></app-banner>
+
+<div class="container mt-4 mb-4 fade-in">
+    <div class="grid">
+        <app-card-catalog-pdf *ngFor="let item of catalogs" [data]="item" ></app-card-catalog-pdf>
+    </div>
+</div>

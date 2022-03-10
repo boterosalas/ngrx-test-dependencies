@@ -1,0 +1,13 @@
+@import 'variables';
+
+.link{
+    text-decoration: underline;
+    cursor: pointer;
+    color: $primary-color;
+    margin-bottom: 0;
+}
+
+.date{
+    color: #A7A3B1;
+    font-size: 12px;
+}
