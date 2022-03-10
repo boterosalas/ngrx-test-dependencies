@@ -459,7 +459,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     const id = 'way';
 
     switch (position) {
-      case (position = 0):
+      case 0:
         this.direction = 'row';
         this.imageWay = '/assets/img/way/ingresaste.png';
         this.titleWay = 'Ingresaste a Clickam';
@@ -467,7 +467,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           '¡Te damos la bienvenida! Tomaste una increíble decisión, mejorar tus finanzas personales generando ingresos adicionales y ahorrando con Clickam.';
         break;
 
-      case (position = 1):
+      case 1:
         this.direction = 'row';
         this.imageWay = '/assets/img/way/registro.png';
         this.titleWay = 'Completaste tu registro';
@@ -475,7 +475,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           'Verifica en “Mi perfil” que hayas completado toda tu información, recuerda que para realizar el pago de tus ganancias debes adjuntar tu certificado bancario y fotocopia de la cédula, ¡No pierdas la oportunidad de recibir dinero en tu cuenta!';
         break;
 
-      case (position = 2):
+      case 2:
         this.direction = 'row-reverse';
         this.imageWay = '/assets/img/way/extension.png';
         this.titleWay = 'Aprendiste sobre la extensión de Chrome';
@@ -483,7 +483,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           'Con la extensión tendrás la oportunidad de ahorrar en todas tus compras y nunca se te olvidará ganar, haz click en “Instalar Clickam en Chrome” y ¡Ahorra como nunca!';
         break;
 
-      case (position = 3):
+      case 3:
         this.direction = 'row-reverse';
         this.imageWay = '/assets/img/way/compra.png';
         this.titleWay = 'Realizaste tu primera compra (¡Que rico ahorrar!)';
@@ -491,7 +491,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           'Generaste tu link y compraste por medio de él, lo que nosotros llamamos inteligencia financiera, estas avanzando en tu camino para ser un Clickamer exitoso.';
         break;
 
-      case (position = 4):
+      case 4:
         this.direction = 'row';
         this.imageWay = '/assets/img/way/amigo.png';
         this.titleWay = 'Tienes un amigo que ahora hace parte de Clickam';
@@ -499,7 +499,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           'Ayudas a otros a tener libertad financiera y a ahorrar, comparte tu link de referido para que alguien más conozca la plataforma y genere su primera ganancia, tú también generarás una recompensa.';
         break;
 
-      case (position = 5):
+      case 5:
         this.direction = 'row-reverse';
         this.imageWay = '/assets/img/way/refiere.png';
         this.titleWay = 'Referiste tu primer producto de forma exitosa';

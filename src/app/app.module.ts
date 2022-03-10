@@ -43,9 +43,6 @@ import { RegisterformComponent } from './modules/anonymous/components/registerfo
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import es from '@angular/common/locales/es';
-import { registerLocaleData } from '@angular/common';
-registerLocaleData(es);
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -108,7 +105,6 @@ export function jwtTokenGetter() {
       useClass: AuthInterceptor,
       multi: true,
     },
-    { provide: LOCALE_ID, useValue: "es-ES" },
     BnNgIdleService,
     MessagingService,
     AsyncPipe,

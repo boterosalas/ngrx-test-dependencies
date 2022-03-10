@@ -432,7 +432,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
   public CutOffDate() {
     this.subscription = this.file.getCutOffDate().subscribe(resp => {
-      this.date = resp;
+      this.date = moment(resp).format('MMMM, y');
     })
   }
 

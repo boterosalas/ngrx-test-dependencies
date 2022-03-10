@@ -91,7 +91,7 @@
     <div class="listCatalogue">
         <div *ngFor="let item of listCatalogue; let i = index" class="border-bottom-gray p-3" fxLayout="row" fxLayoutAlign="space-between center">
             <div fxLayout="column">
-                <span class="galano-bold purple-text f-14">{{item.business}}</span>
+                <span class="galano-bold purple-text f-14">{{item.business || item.businessdescription}}</span>
                 <span class="link f12">{{item.url}}</span>
             </div>
             <div fxLayout="column">

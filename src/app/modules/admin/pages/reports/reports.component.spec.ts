@@ -83,6 +83,7 @@ beforeEach(waitForAsync(() => {
           },
         }),
       ],
+      schemas:[NO_ERRORS_SCHEMA],
       providers: [
         { provide: LinksService, useValue: mockLinksService },
         { provide: LOCALE_CONFIG, useValue: config },

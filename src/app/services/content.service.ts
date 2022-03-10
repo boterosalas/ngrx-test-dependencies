@@ -118,7 +118,11 @@ export class ContentService {
   apiSaveOrderBoardings = 'boarding/saveorderboardings';
   apiSaveMaxReferredIds='Link/savemaximumreferredids';
   apiGetMaximumReferredIds='Link/getmaximumreferredids';
-  apiSaveMenuFooter='footer/saveactivefooterlinks'
+  apiSaveMenuFooter='footer/saveactivefooterlinks';
+  apiSaveCatalog='catalog/savecatalog';
+  apiGetCatalog='catalog/getcatalogs';
+  apiDeleteCatalog='catalog/deletecatalog';
+  apiSaveCatalogActive='catalog/saveactivecatalog';
 
   sendSearch = {};
 
@@ -516,6 +520,7 @@ export class ContentService {
       })
     );
   }
+
   public saveActiveBanner(data: any) {
     return this.http.post(`${this.url + this.apiSaveOferActive}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
@@ -530,6 +535,19 @@ export class ContentService {
       })
     );
   }
+
+  public saveActiveCatalog(data: any) {
+    return this.http.post(`${this.url + this.apiSaveCatalogActive}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      )
+    );
+  }
+
   public saveInfoBusiness(data: any) {
     return this.http.post(`${this.url + this.apiInfoBusiness}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
@@ -1096,6 +1114,7 @@ export class ContentService {
     };
     return this.http.post(`${this.url + this.apiActivateBlog}`, data, httpOptionsSet);
   }
+
   public saveBussiness(data: any) {
     return this.http.post(`${this.url + this.apiSaveBussiness}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
@@ -1110,6 +1129,22 @@ export class ContentService {
       })
     );
   }
+
+  public saveCatalog(data: any) {
+    return this.http.post(`${this.url + this.apiSaveCatalog}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(5000),
+          take(1),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((bussiness: ResponseService) => {
+        return bussiness;
+      })
+    );
+  }
+
   public sendMessage(data: any) {
     const httpOptionsSet = {
       headers: new HttpHeaders({
@@ -1119,6 +1154,7 @@ export class ContentService {
     };
     return this.http.post(`${this.url + this.apiSendMessage}`, data, httpOptionsSet);
   }
+
   public deleteOfer(data) {
     return this.http.post(`${this.url + this.apiDeleteOfer}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
@@ -1133,6 +1169,23 @@ export class ContentService {
       })
     );
   }
+
+  public deleteCatalog(data) {
+    return this.http.post(`${this.url + this.apiDeleteCatalog}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((user: ResponseService) => {
+        return user.objectResponse;
+      })
+    );
+  }
+
+
   public saveOrderOfertBusiness(data: any) {
     return this.http.post(`${this.url + this.apiSaveOrderOfer}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
@@ -1195,6 +1248,21 @@ export class ContentService {
 
   public getStories(data: any) {
     return this.http.get(`${this.url + this.apiGetStories}?visible=${data}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((result: ResponseService) => {
+        return result;
+      })
+    );
+  }
+
+  public getCatalog(data: any) {
+    return this.http.get(`${this.url + this.apiGetCatalog}?visible=${data}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
