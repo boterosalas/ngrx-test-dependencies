@@ -123,8 +123,25 @@ export class ContentService {
   apiGetCatalog='catalog/getcatalogs';
   apiDeleteCatalog='catalog/deletecatalog';
   apiSaveCatalogActive='catalog/saveactivecatalog';
+  apiGetMissions='mission/getmissions';
+  apiSaveMissions='mission/saveclick';
 
   sendSearch = {};
+
+  public saveMission(mission: string) {
+    return this.http.post(`${this.url + this.apiSaveMissions}`, {missionCode: mission}, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: ResponseService) => {
+        return resp;
+      })
+    );
+  }
 
   public saveMenuFooter(datos: any) {
     return this.http.post(`${this.url + this.apiSaveMenuFooter}`, datos, this.httpOptions).pipe(
@@ -629,6 +646,21 @@ export class ContentService {
 
   public getAllBusiness(clickam: boolean = false) {
     return this.http.get(`${this.url + this.apiGetAllBusiness}?clickam=${clickam}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((user: ResponseService) => {
+        return user.objectResponse;
+      })
+    );
+  }
+
+  public getMissions() {
+    return this.http.get(`${this.url + this.apiGetMissions}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),

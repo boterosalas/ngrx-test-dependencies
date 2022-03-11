@@ -95,20 +95,20 @@
             mat-line
             class="purple2-text f-16 galano-bold pb-3 pt-3 border-bottom-gray"
           >
-            <span class="pl-3" *ngIf="mission.completed">
+            <span class="pl-3" *ngIf="mission.status">
               <i class="tio-checkmark_circle f-18"></i>
             </span>
 
-            <span class="pl-3" *ngIf="!mission.completed">
+            <span class="pl-3" *ngIf="!mission.status">
               <i class="tio-checkmark_circle_outlined f-18"></i>
             </span>
 
-            <span class="cursor-pointer" (click)="modalWay(i)">
-              {{ mission.name }}
+            <span class="cursor-pointer" (click)="modalWay(i, mission)">
+              {{ mission.description }}
             </span>
           </div>
         </mat-list-item>
-        <p fxLayout="row" fxLayoutAlign="center center" class="pl-3 f-16 mt-3 cursor-pointer yellow galano-bold" [routerLink]="['/logros']">
+        <p (click)="logros()" fxLayout="row" fxLayoutAlign="center center" class="pl-3 f-16 mt-3 cursor-pointer yellow galano-bold">
           <mat-icon>emoji_events</mat-icon>
           Logros
         </p>

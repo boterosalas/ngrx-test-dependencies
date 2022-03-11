@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
 import { UtilsService } from 'src/app/services/utils.service';
+import { ContentService } from 'src/app/services/content.service';
 
 @Component({
   selector: 'app-links-historial',
@@ -62,7 +63,8 @@ export class LinksHistorialComponent implements OnInit {
     ngNavigatorShareService: NgNavigatorShareService,
     private fb: FormBuilder,
     private dialog: MatBottomSheet,
-    private utils: UtilsService
+    private utils: UtilsService,
+    private content: ContentService
   ) {
     this.ngNavigatorShareService = ngNavigatorShareService;
   }
@@ -117,6 +119,7 @@ export class LinksHistorialComponent implements OnInit {
   }
 
   buy() {
+    this.subscription = this.content.saveMission('FIRSTBUY').subscribe();
     const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (iOS) {
       window.location.assign(this.urlshorten);
