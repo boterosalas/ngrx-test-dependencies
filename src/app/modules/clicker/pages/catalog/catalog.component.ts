@@ -21,7 +21,6 @@ export class CatalogComponent implements OnInit, OnDestroy {
   public getCatalog() {
     this.subscription = this.content.getCatalog(false).subscribe((catalogs: ResponseService) => {
       this.catalogs = catalogs.objectResponse.published;
-      console.log(this.catalogs);
     });
   }
 

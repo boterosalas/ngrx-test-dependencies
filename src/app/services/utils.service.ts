@@ -232,7 +232,7 @@ export class UtilsService {
     }
   }
 
-  public download(data, type) {
+  public download(data, type, name?) {
     const blob = new Blob([data], { type: type });
     const url = window.URL.createObjectURL(blob);
     const downloadLink = document.createElement('a');
@@ -247,6 +247,10 @@ export class UtilsService {
     } else if (type.includes('mp4')) {
       downloadLink.href = url;
       downloadLink.download = 'archivo.mp4';
+      downloadLink.click();
+    } else if (type.includes('pdf')) {
+      downloadLink.href = url;
+      downloadLink.download = name;
       downloadLink.click();
     }
   }

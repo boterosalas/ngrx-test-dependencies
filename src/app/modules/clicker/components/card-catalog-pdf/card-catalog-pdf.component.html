@@ -1,13 +1,13 @@
 <mat-card class="card mat-card-box-shadow ctlg">
   <app-title showTitleh3="true" [text]="data.description" commonClass="border-bottom-gray pb-2"></app-title>
-  <a [href]="data.pdfurl" target="_blank">
+  <a (click)="generatePdf(data)">
       <app-image imageClass="cover border-bottom-gray pb-2 w-100 cursor-pointer" [src]="data.imageurl" [alt]="data.description"></app-image>
   </a>
 
   <div fxLayout="row" fxLayoutAlign="space-between center">
     <div fxLayout="column">
       <p class="mb-0">
-          <a class="link" [href]="data.pdfurl" target="_blank">
+          <a class="link" (click)="generatePdf(data)">
               Descargar catálogo
           </a>
         </p>
