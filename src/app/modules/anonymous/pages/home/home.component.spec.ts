@@ -52,7 +52,7 @@ export class MockUserInfo {
     userid: '77',
   };
 
-  userInfo(){
+  userInfo() {
     return this.user;
   }
 }
@@ -67,7 +67,7 @@ describe('HomeComponent', () => {
     'getProfile',
     'saveUserAcceptTermsReferrals',
     'saveFeedback',
-    'getTestimoniesUser'
+    'getTestimoniesUser',
   ]);
   const mockAuthService = jasmine.createSpyObj('AuthService', ['login', 'isLoggedIn', 'isLogged$']);
   const mockUtilsService = jasmine.createSpyObj('UtilsService', ['showRegisterForm', 'showloginForm']);
@@ -81,6 +81,8 @@ describe('HomeComponent', () => {
     'getCategoriesBusinessHome',
     'registerBusinessClicker',
     'getStories',
+    'getMissions',
+    'saveMission'
   ]);
 
   const mockLinksService = jasmine.createSpyObj('LinksService', ['getAmount']);
@@ -143,7 +145,6 @@ describe('HomeComponent', () => {
       link: 'http://example.com',
     },
   ];
-
 
   const testominies = [
     {
@@ -442,7 +443,58 @@ describe('HomeComponent', () => {
     ],
   };
 
-  beforeEach(
+  const mission = [
+    {
+      id: 1,
+      description: 'Ingresaste a Clickam',
+      status: true,
+      code: 'ENTEREDCLICKAM',
+      detail:
+        '¡Te damos la bienvenida! Tomaste una increíble decisión, mejorar tus finanzas personales generando ingresos adicionales y ahorrando con Clickam.',
+    },
+    {
+      id: 2,
+      description: 'Completaste tu registro',
+      status: true,
+      code: 'COMPLETEDREGISTRATION',
+      detail:
+        'Verifica en “Mi perfil” que hayas completado toda tu información, recuerda que para realizar el pago de tus ganancias debes adjuntar tu certificado bancario y fotocopia de la cédula, ¡No pierdas la oportunidad de recibir dinero en tu cuenta!',
+    },
+    {
+      id: 3,
+      description: 'Aprendiste sobre la extensión de Chrome',
+      status: true,
+      code: 'LEARNEDCHROMEEXTENSION',
+      detail:
+        'Con la extensión tendrás la oportunidad de ahorrar en todas tus compras y nunca se te olvidará ganar, haz click en “Instalar Clickam en Chrome” y ¡Ahorra como nunca!',
+    },
+    {
+      id: 4,
+      description: 'Realizaste tu primera compra (Que rico ahorrar!)',
+      status: true,
+      code: 'FIRSTBUY',
+      detail:
+        'Generaste tu link y compraste por medio de él, lo que nosotros llamamos inteligencia financiera, estas avanzando en tu camino para ser un Clickamer exitoso.',
+    },
+    {
+      id: 5,
+      description: 'Tienes un amigo que ahora hace parte de Clickam',
+      status: true,
+      code: 'FRIENDCLICKAM',
+      detail:
+        'Ayudas a otros a tener libertad financiera y a ahorrar, comparte tu link de referido para que alguien más conozca la plataforma y genere su primera ganancia, tú también generarás una recompensa',
+    },
+    {
+      id: 6,
+      description: 'Referiste tu primer producto de forma exitosa',
+      status: true,
+      code: 'PRODUCTREFERRED',
+      detail:
+        'Gana al apoyar a alguien en su búsqueda del producto perfecto, recomienda por medio de tu link un negocio, categoría o producto para ganar dinero y así alcanzar tus sueños.',
+    },
+  ];
+
+  const missions = beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [HomeComponent],
@@ -497,6 +549,8 @@ describe('HomeComponent', () => {
         ],
         schemas: [NO_ERRORS_SCHEMA],
       }).compileComponents();
+      mockContentService.getMissions.and.returnValue(of(mission));
+      mockContentService.saveMission.and.returnValue(of(data));
       mockMasterService.getTerms.and.returnValue(of(responseTerms));
       mockUserService.activateProfile.and.returnValue(of(data));
       mockUserService.saveFeedback.and.returnValue(of(data));
@@ -567,35 +621,82 @@ describe('HomeComponent', () => {
   });
 
   it('modal way 0', () => {
-    component.modalWay(0);
+    const mission = {
+      id: 1,
+      description: 'Ingresaste a Clickam',
+      status: true,
+      code: 'ENTEREDCLICKAM',
+      detail:
+        '¡Te damos la bienvenida! Tomaste una increíble decisión, mejorar tus finanzas personales generando ingresos adicionales y ahorrando con Clickam.',
+    };
+    component.modalWay(0, mission);
     expect(component.titleWay).toBe('Ingresaste a Clickam');
   });
 
   it('modal way 1', () => {
-    component.modalWay(1);
+    const mission = {
+      id: 2,
+      description: 'Completaste tu registro',
+      status: true,
+      code: 'COMPLETEDREGISTRATION',
+      detail:
+        'Verifica en “Mi perfil” que hayas completado toda tu información, recuerda que para realizar el pago de tus ganancias debes adjuntar tu certificado bancario y fotocopia de la cédula, ¡No pierdas la oportunidad de recibir dinero en tu cuenta!',
+    };
+    component.modalWay(1, mission);
     expect(component.titleWay).toBe('Completaste tu registro');
   });
 
   it('modal way 2', () => {
-    component.modalWay(2);
+    const mission = {
+      id: 2,
+      description: 'Completaste tu registro',
+      status: true,
+      code: 'COMPLETEDREGISTRATION',
+      detail:
+        'Verifica en “Mi perfil” que hayas completado toda tu información, recuerda que para realizar el pago de tus ganancias debes adjuntar tu certificado bancario y fotocopia de la cédula, ¡No pierdas la oportunidad de recibir dinero en tu cuenta!',
+    };
+    component.modalWay(2, mission);
     expect(component.titleWay).toBe('Aprendiste sobre la extensión de Chrome');
   });
 
   it('modal way 3', () => {
-    component.modalWay(3);
+    const mission = {
+      id: 3,
+      description: 'Aprendiste sobre la extensión de Chrome',
+      status: true,
+      code: 'LEARNEDCHROMEEXTENSION',
+      detail:
+        'Con la extensión tendrás la oportunidad de ahorrar en todas tus compras y nunca se te olvidará ganar, haz click en “Instalar Clickam en Chrome” y ¡Ahorra como nunca!',
+    };
+    component.modalWay(3, mission);
     expect(component.titleWay).toBe('Realizaste tu primera compra (¡Que rico ahorrar!)');
   });
 
   it('modal way 4', () => {
-    component.modalWay(4);
+    const mission = {
+      id: 4,
+      description: 'Realizaste tu primera compra (Que rico ahorrar!)',
+      status: true,
+      code: 'FIRSTBUY',
+      detail:
+        'Generaste tu link y compraste por medio de él, lo que nosotros llamamos inteligencia financiera, estas avanzando en tu camino para ser un Clickamer exitoso.',
+    };
+    component.modalWay(4, mission);
     expect(component.titleWay).toBe('Tienes un amigo que ahora hace parte de Clickam');
   });
 
   it('modal way 5', () => {
-    component.modalWay(5);
+    const mission = {
+      id: 5,
+      description: 'Tienes un amigo que ahora hace parte de Clickam',
+      status: true,
+      code: 'FRIENDCLICKAM',
+      detail:
+        'Ayudas a otros a tener libertad financiera y a ahorrar, comparte tu link de referido para que alguien más conozca la plataforma y genere su primera ganancia, tú también generarás una recompensa',
+    };
+    component.modalWay(5, mission);
     expect(component.titleWay).toBe('Referiste tu primer producto de forma exitosa');
   });
-  
 
   // it('modal promo', () => {
   //   component.getModalPromo();
