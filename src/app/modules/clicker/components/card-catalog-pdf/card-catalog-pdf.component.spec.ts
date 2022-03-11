@@ -6,7 +6,7 @@ import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-mater
 
 import { CardCatalogPdfComponent } from './card-catalog-pdf.component';
 
-fdescribe('CardCatalogPdfComponent', () => {
+describe('CardCatalogPdfComponent', () => {
   let component: CardCatalogPdfComponent;
   let fixture: ComponentFixture<CardCatalogPdfComponent>;
 
