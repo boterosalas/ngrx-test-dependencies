@@ -117,7 +117,7 @@ export class SliderComponent implements OnInit, OnDestroy {
   }
 
   buy() {
-    this.subscription = this.content.saveMission('FIRSTBUY').subscribe();
+    this.subscription = this.content.saveMission('BUY').subscribe();
     const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (iOS) {
       window.location.assign(this.urlshorten);

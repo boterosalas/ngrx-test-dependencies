@@ -489,6 +489,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.imageWay = '/assets/img/way/compra.png';
         this.titleWay = 'Realizaste tu primera compra (¡Que rico ahorrar!)';
         this.textWay = detail;
+        this.saveMission(code);
         break;
 
       case 4:
@@ -496,6 +497,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.imageWay = '/assets/img/way/amigo.png';
         this.titleWay = 'Tienes un amigo que ahora hace parte de Clickam';
         this.textWay = detail;
+        this.saveMission(code);
         break;
 
       case 5:
@@ -503,6 +505,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.imageWay = '/assets/img/way/refiere.png';
         this.titleWay = 'Referiste tu primer producto de forma exitosa';
         this.textWay = detail;
+        this.saveMission(code);
         break;
 
       default:
