@@ -1,8 +1,12 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 
 import { CardCatalogPdfComponent } from './card-catalog-pdf.component';
 
-describe('CardCatalogPdfComponent', () => {
+fdescribe('CardCatalogPdfComponent', () => {
   let component: CardCatalogPdfComponent;
   let fixture: ComponentFixture<CardCatalogPdfComponent>;
 
@@ -40,6 +44,21 @@ describe('CardCatalogPdfComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CardCatalogPdfComponent],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        AppMaterialModule,
+        JwtModule.forRoot({
+          config: {
+            tokenGetter: () => {
+              return localStorage.getItem('ACCESS_TOKEN');
+            },
+            throwNoTokenError: true,
+            allowedDomains: [],
+            disallowedRoutes: [],
+          },
+        })
+      ]
     }).compileComponents();
   });
 
