@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { map, retry, delay, retryWhen, tap, take } from 'rxjs/operators';
 import { ResponseService } from '../interfaces/response';
 import { Observable } from 'rxjs';
+import { AnyCnameRecord } from 'dns';
 
 @Injectable({
   providedIn: 'root',
@@ -123,10 +124,32 @@ export class ContentService {
   apiGetCatalog='catalog/getcatalogs';
   apiDeleteCatalog='catalog/deletecatalog';
   apiSaveCatalogActive='catalog/saveactivecatalog';
+  apiGeneratePdf='catalog/generatepdf';
   apiGetMissions='mission/getmissions';
   apiSaveMissions='mission/saveclick';
 
   sendSearch = {};
+
+  public generatepdf(id: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + this.authorization,
+        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        'Content-Disposition': 'attachment',
+      }),responseType: 'blob' as 'json'
+    };
+
+    return this.http.post(`${this.urlRefer + this.apiGeneratePdf}`, {idCatalog: id}, httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      )
+    );
+  }
 
   public saveMission(mission: string) {
     return this.http.post(`${this.url + this.apiSaveMissions}`, {missionCode: mission}, this.httpOptions).pipe(
