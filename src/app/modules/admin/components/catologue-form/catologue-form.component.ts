@@ -41,6 +41,8 @@ export class CatologueFormComponent implements OnInit, OnDestroy {
 
   listCatalogue = [];
 
+  template = [1,2,3,6]
+
   ngOnInit(): void {
 
     if(this.data !== null) {
@@ -56,14 +58,17 @@ export class CatologueFormComponent implements OnInit, OnDestroy {
 
     this.catalogueForm = this.fb.group({
       name: [this.data !== null ? this.data.description  : '', Validators.required],
-      url: [null],
-      business: [null],
-      image: [null],
-      pdf: [null],
-      date: [this.data !== null ? this.dateEdit : null , Validators.required],
-      hour: [this.data !== null ? this.hourEdit : null, Validators.required],
+      url: [''],
+      business: [''],
+      image: [''],
+      pdf: [''],
+      template: [this.data !== null ? this.data.template : '' , Validators.required],
+      date: [this.data !== null ? this.dateEdit : '' , Validators.required],
+      hour: [this.data !== null ? this.hourEdit : '', Validators.required],
       visible: [this.data !== null ? this.data.active : false ],
     });
+
+    console.log(this.catalogueForm.valid);
 
     this.getAllBusiness();
   }
@@ -116,6 +121,7 @@ export class CatologueFormComponent implements OnInit, OnDestroy {
       endDate: endDate,
       description: this.catalogueForm.controls.name.value,
       image: this.image,
+      template: this.catalogueForm.controls.template.value,
       pdf: this.pdf,
       urls: this.listCatalogue,
     };

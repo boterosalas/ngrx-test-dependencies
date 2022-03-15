@@ -13,7 +13,7 @@
 
   <span *ngFor="let item of options; let i = index" class="menu-mobile">
     <span
-      *ngIf="item.description === 'Sin Grupo' && item.active"
+      *ngIf="item.description === 'Sin Grupo'"
       [ngClass]="{
         adminMenu: (auth.getRole$ | async) === 'ADMIN' || ((auth.getRole$ | async) === 'SUPERADMIN' && auth.isLoggedIn())
       }"
