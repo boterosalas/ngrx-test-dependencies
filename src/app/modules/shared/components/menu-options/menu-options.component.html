@@ -13,7 +13,7 @@
 
   <span *ngFor="let item of options; let i = index" class="menu-mobile">
     <span
-      *ngIf="item.description === 'Sin Grupo'"
+      *ngIf="item.description === 'Sin Grupo' && item.active"
       [ngClass]="{
         adminMenu: (auth.getRole$ | async) === 'ADMIN' || ((auth.getRole$ | async) === 'SUPERADMIN' && auth.isLoggedIn())
       }"
@@ -30,7 +30,7 @@
           <img src="assets/img/dashboard/icon-{{ i }}.svg" alt="icon" />
         </span>
         <a mat-list-item ngClass="cursor-pointer gtmHomeClicMenuLightbox{{ item.description }} f-16 {{ item.description }}" id="{{ section }}{{ i }}">
-          <span fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="gtmHomeClicMenuLightbox{{ item.description }}">
+          <span *ngIf="item.active" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="gtmHomeClicMenuLightbox{{ item.description }}">
             <i *ngIf="item.icon" ngClass="{{ item.icon }} icmen"></i>
             {{ item.description }}</span
           ></a
@@ -42,7 +42,7 @@
 
       <mat-list role="list" *ngIf="item.menus === null">
         <mat-list-item class="individual">
-          <span routerLinkActive="active"  (click)="hide()" routerLink="{{ item.route }}" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="{{ item.description }} f-16 lifont">
+          <span *ngIf="item.active" routerLinkActive="active"  (click)="hide()" routerLink="{{ item.route }}" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="{{ item.description }} f-16 lifont">
             <i *ngIf="item.icon" ngClass="{{ item.icon }} icsub"></i>
             {{ item.description }}
           </span>
@@ -56,7 +56,7 @@
             }"
           >
             <mat-panel-title>
-              <span fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="{{ item.description }} f-16">
+              <span *ngIf="item.active" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="{{ item.description }} f-16">
                 <i *ngIf="item.icon" ngClass="{{ item.icon }} icsub"></i>
                 {{ item.description }}
               </span>
@@ -65,6 +65,7 @@
           <mat-list role="list">
             <mat-list-item *ngFor="let item of item.menus" class="pl-4">
               <span
+                *ngIf="item.active"
                 routerLinkActive="active"
                 routerLink="{{ item.route }}"
                 (click)="hide()"

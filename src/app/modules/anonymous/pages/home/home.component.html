@@ -301,6 +301,7 @@
     <span>
       <app-title showTitleh3="true" [text]="titleWay"></app-title>
       <p>{{textWay}}</p>
+      <app-button *ngIf="showWay" [title]="nameButton" (action)="routeWay()" [haveIcon]="false" class="bp" classButton="shadow-purple"></app-button>
     </span>
   </div>
 </ng-template>
