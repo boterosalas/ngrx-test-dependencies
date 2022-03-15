@@ -21,7 +21,7 @@
       <h3>{{ section.description }}</h3>
       <ul>
         <li *ngFor="let item of section.links">
-          <a [href]="item.link | safe: 'url'" target="_blank">{{ item.description }}</a>
+          <a *ngIf="item.active" [href]="item.link | safe: 'url'" target="_blank">{{ item.description }}</a>
         </li>
       </ul>
     </section>
@@ -33,7 +33,7 @@
         <summary>{{ section.description }}</summary>
         <ul>
           <li *ngFor="let item of section.links">
-            <a [href]="item.link | safe: 'url'" target="_blank">{{ item.description }}</a>
+            <a *ngIf="item.active" [href]="item.link | safe: 'url'" target="_blank">{{ item.description }}</a>
           </li>
         </ul>
       </details>
@@ -51,30 +51,3 @@
   </div>
 </footer>
 
-<!-- <footer class="text-center border-gray pt-3">
-  <div fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-around center" ngClass.gt-xs="pt-4">
-    <div fxLayout.gt-xs="row">
-      <h3 class="pr-3"> {{ 'FOOTER.AVAILABLE_IN' | translate }}</h3>
-      <app-app-store></app-app-store>
-    </div>
-  
-    <div fxLayout.gt-xs="row">
-      <h3 class="pr-3"> {{ 'FOOTER.FOLLOW_US' | translate }}</h3>
-      <div fxLayoutAlign="center center" class="social-links">
-        <img  src="assets/img/arrow-footer.svg" alt="Clickam" />
-        <app-sociallinks></app-sociallinks>
-        <img  class="rotate" src="assets/img/arrow-footer.svg" alt="Clickam" />
-      </div>
-    </div>
-  </div>
-
-
-  <div class="terms gtmHomeTerminosCondicionesClickam" id="terms-footer" fxLayout="column" fxLayoutAlign="center center">
-    <a (click)="goTerms()" class="cursor-pointer gtmHomeTerminosCondicionesClickam">Términos y condiciones</a>
-</div>
-
-<div fxLayout="column" fxLayoutAlign="center center" class="width-border">
-  <span class="copy pt-3 pb-3">{{ 'GENERIC.COPYRIGHT' | translate }} &copy;</span>
-</div>
-
-</footer> -->

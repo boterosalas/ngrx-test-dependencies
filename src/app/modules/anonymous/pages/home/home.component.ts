@@ -97,6 +97,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   direction = 'row';
   directionMobile = 'column-reverse';
 
+  showWay = true;
+  nameButton: string;
+  path: string;
+  dialogWay: any;
+
   @ViewChild('templateTestimonials', { static: true })
   templateTestimonials: TemplateRef<any>;
 
@@ -248,7 +253,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getTestimoniesUser();
     this.generateUrl();
     this.getBussiness();
-    this.getMissions();
   }
 
   public getTestimoniesUser() {
@@ -284,6 +288,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.isEmployee = user.isEmployeeGrupoExito;
           this.managedPayments = user.managedPayments;
           if (role === 'CLICKER') {
+            this.getMissions();
             this.newTerms = user.acceptTermsReferrals;
             if (this.newTerms === true) {
               this.showModalPayment();
@@ -459,63 +464,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     const id = 'way';
     const {detail, code} = mission;
 
-    switch (position) {
-      case 0:
-        this.direction = 'row';
-        this.imageWay = '/assets/img/way/ingresaste.png';
-        this.titleWay = 'Ingresaste a Clickam';
-        this.textWay = detail;
-        this.saveMission(code);
-        break;
+   
 
-      case 1:
-        this.direction = 'row';
-        this.imageWay = '/assets/img/way/registro.png';
-        this.titleWay = 'Completaste tu registro';
-        this.textWay = detail;
-        this.saveMission(code);
-        break;
-
-      case 2:
-        this.direction = 'row-reverse';
-        this.imageWay = '/assets/img/way/extension.png';
-        this.titleWay = 'Aprendiste sobre la extensión de Chrome';
-        this.textWay = detail;
-        this.saveMission(code);
-        break;
-
-      case 3:
-        this.direction = 'row-reverse';
-        this.imageWay = '/assets/img/way/compra.png';
-        this.titleWay = 'Realizaste tu primera compra (¡Que rico ahorrar!)';
-        this.textWay = detail;
-        this.saveMission(code);
-        break;
-
-      case 4:
-        this.direction = 'row';
-        this.imageWay = '/assets/img/way/amigo.png';
-        this.titleWay = 'Tienes un amigo que ahora hace parte de Clickam';
-        this.textWay = detail;
-        this.saveMission(code);
-        break;
-
-      case 5:
-        this.direction = 'row-reverse';
-        this.imageWay = '/assets/img/way/refiere.png';
-        this.titleWay = 'Referiste tu primer producto de forma exitosa';
-        this.textWay = detail;
-        this.saveMission(code);
-        break;
-
-      default:
-        this.imageWay = '/assets/img/way/ingresaste.png';
-        this.titleWay = '';
-        this.textWay ='';
-        break;
-    }
-
-   const dialog = this.dialog.open(ClickamerWayComponent, {
+   this.dialogWay = this.dialog.open(ClickamerWayComponent, {
       width: '700px',
       panelClass: 'waypad',
       data: {
@@ -525,10 +476,90 @@ export class HomeComponent implements OnInit, OnDestroy {
       },
     });
 
-    dialog.beforeClosed().subscribe(() => {
+    this.dialogWay.beforeClosed().subscribe(() => {
       this.getMissions();
     })
 
+    switch (position) {
+      case 0:
+        this.direction = 'row';
+        this.imageWay = '/assets/img/way/ingresaste.png';
+        this.titleWay = 'Ingresaste a Clickam';
+        this.textWay = detail;
+        this.showWay = false;
+        this.saveMission(code);
+        break;
+
+      case 1:
+        this.direction = 'row';
+        this.imageWay = '/assets/img/way/registro.png';
+        this.titleWay = 'Completaste tu registro';
+        this.textWay = detail;
+        this.showWay = true;
+        this.nameButton = 'Mi perfil';
+        this.path = 'mi-perfil';
+        break;
+
+      case 2:
+        this.direction = 'row-reverse';
+        this.imageWay = '/assets/img/way/extension.png';
+        this.titleWay = 'Aprendiste sobre la extensión de Chrome';
+        this.textWay = detail;
+        this.showWay = true;
+        this.saveMission(code);
+        this.nameButton = 'Instalar Extensión';
+        this.path = '';
+        break;
+
+      case 3:
+        this.direction = 'row-reverse';
+        this.imageWay = '/assets/img/way/compra.png';
+        this.titleWay = 'Realizaste tu primera compra (¡Que rico ahorrar!)';
+        this.textWay = detail;
+        this.showWay = true;
+        this.saveMission(code);
+        this.nameButton = 'Conocer Aliados';
+        this.path = '/negocios';
+        break;
+        
+        case 4:
+          this.direction = 'row';
+          this.imageWay = '/assets/img/way/amigo.png';
+          this.titleWay = 'Tienes un amigo que ahora hace parte de Clickam';
+          this.textWay = detail;
+          this.showWay = true;
+          this.saveMission(code);
+          this.nameButton = 'Invitar Amigos';
+          this.path = '/referidos';
+          break;
+          
+          case 5:
+            this.direction = 'row-reverse';
+            this.imageWay = '/assets/img/way/refiere.png';
+            this.titleWay = 'Referiste tu primer producto de forma exitosa';
+            this.textWay = detail;
+            this.showWay = true;
+            this.saveMission(code);
+            this.nameButton = 'Conoce los Reportes';
+            this.path = '/reportes';
+        break;
+
+      default:
+        this.imageWay = '/assets/img/way/ingresaste.png';
+        this.titleWay = '';
+        this.textWay ='';
+        break;
+    }
+
+  }
+
+  public routeWay() {
+    if(this.path !== '') {
+      this.router.navigate([this.path]);
+      this.dialogWay.close();
+    } else{
+      window.open('https://chrome.google.com/webstore/detail/clickam-cashback/jnfdngchdoaemojfkecanhlfgelofibh?authuser=1', '_blank');
+    }
   }
 
   public saveMission(mission: string) {

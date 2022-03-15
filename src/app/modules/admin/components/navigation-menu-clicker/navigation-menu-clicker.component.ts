@@ -243,7 +243,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
       item.active = true;
     }
 
-    this.subscription = this.auth.saveMenu(item).subscribe();
+    this.subscription = this.auth.saveMenuActive(item).subscribe();
   }
 
   ngOnDestroy(): void {
