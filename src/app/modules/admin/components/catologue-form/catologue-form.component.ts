@@ -41,6 +41,8 @@ export class CatologueFormComponent implements OnInit, OnDestroy {
 
   listCatalogue = [];
 
+  template = [1,2,3,6]
+
   ngOnInit(): void {
 
     if(this.data !== null) {
@@ -60,6 +62,7 @@ export class CatologueFormComponent implements OnInit, OnDestroy {
       business: [null],
       image: [null],
       pdf: [null],
+      template: [this.data !== null ? this.data.template : null , Validators.required],
       date: [this.data !== null ? this.dateEdit : null , Validators.required],
       hour: [this.data !== null ? this.hourEdit : null, Validators.required],
       visible: [this.data !== null ? this.data.active : false ],
@@ -116,6 +119,7 @@ export class CatologueFormComponent implements OnInit, OnDestroy {
       endDate: endDate,
       description: this.catalogueForm.controls.name.value,
       image: this.image,
+      template: this.catalogueForm.controls.template.value,
       pdf: this.pdf,
       urls: this.listCatalogue,
     };
