@@ -44,7 +44,7 @@ describe('NavigationMenuComponent', () => {
 
   const mockAuthService = jasmine.createSpyObj('AuthService', [
     'getmenusNoLogin',
-    'saveMenu',
+    'saveMenuActive',
     'deleteMenu',
     'saveOrderMenus',
     'getMenuClicker',
@@ -208,7 +208,7 @@ beforeEach(waitForAsync(() => {
       ],
     }).compileComponents();
     mockAuthService.getmenusNoLogin.and.returnValue(of(sectionsLinks));
-    mockAuthService.saveMenu.and.returnValue(of(response));
+    mockAuthService.saveMenuActive.and.returnValue(of(response));
     mockAuthService.deleteMenu.and.returnValue(of(response));
     mockAuthService.saveOrderMenus.and.returnValue(of(response));
     mockAuthService.getMenuClicker.and.returnValue(of(response));
@@ -254,6 +254,6 @@ beforeEach(waitForAsync(() => {
 
   it('edit change state item', () => {
     component.changeStateOfItem({ active: true });
-    expect(mockAuthService.saveMenu).toHaveBeenCalled();
+    expect(mockAuthService.saveMenuActive).toHaveBeenCalled();
   });
 });

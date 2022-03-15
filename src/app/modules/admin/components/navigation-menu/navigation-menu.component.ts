@@ -59,7 +59,7 @@ export class NavigationMenuComponent implements OnInit {
     } else {
       item.active = true;
     }
-    this.auth.saveMenu(item).subscribe(() => {});
+    this.auth.saveMenuActive(item).subscribe(() => {});
   }
 
   cancelDelete() {
