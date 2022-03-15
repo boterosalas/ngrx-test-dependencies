@@ -58,15 +58,17 @@ export class CatologueFormComponent implements OnInit, OnDestroy {
 
     this.catalogueForm = this.fb.group({
       name: [this.data !== null ? this.data.description  : '', Validators.required],
-      url: [null],
-      business: [null],
-      image: [null],
-      pdf: [null],
-      template: [this.data !== null ? this.data.template : null , Validators.required],
-      date: [this.data !== null ? this.dateEdit : null , Validators.required],
-      hour: [this.data !== null ? this.hourEdit : null, Validators.required],
+      url: [''],
+      business: [''],
+      image: [''],
+      pdf: [''],
+      template: [this.data !== null ? this.data.template : '' , Validators.required],
+      date: [this.data !== null ? this.dateEdit : '' , Validators.required],
+      hour: [this.data !== null ? this.hourEdit : '', Validators.required],
       visible: [this.data !== null ? this.data.active : false ],
     });
+
+    console.log(this.catalogueForm.valid);
 
     this.getAllBusiness();
   }

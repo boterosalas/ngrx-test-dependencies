@@ -139,7 +139,7 @@
         (action)="saveCatalogue()"
         [haveIcon]="false"
         classButton="shadow-purple"
-        [disabled]="!catalogueForm.valid && listCatalogue.length > 0"
+        [disabled]="!catalogueForm.valid || listCatalogue.length < 0"
       ></app-button>
     </div>
   </div>
