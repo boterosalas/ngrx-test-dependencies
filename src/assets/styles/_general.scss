@@ -1700,6 +1700,34 @@ button#btnCopy[disabled] {
   background: #ececec;
 }
 
+
+button#refer[disabled] {
+  background: #ececec;
+}
+
+button#buy[disabled] {
+  border: 1px solid #ececec !important;
+  color: #ececec !important;
+}
+
+.sharebutton[disabled] i{
+  color: #ffffff;
+}
+
+.sharebutton[disabled] a{
+  color: #ffffff;
+}
+
+a.sharebutton{
+  border-radius: 50% !important;
+  width: 49px !important;
+  height: 49px !important;
+  padding: 0 !important;
+  min-width: 49px;
+  position: relative;
+  top: -9px;
+}
+
 button.swal2-confirm.updateok.order-last.swal2-styled {
   background-color: #ff6f11 !important;
   color: #fff !important;

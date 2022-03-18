@@ -58,7 +58,7 @@
             mat-button
             id="btnCopy"
             color="orange"
-            [disabled]="enableCopy"
+            [disabled]=enableCopy
             ngClass="{{ classButtonCopy }}"
             (click)="copyInputMessage(linkInput)"
           >
@@ -68,7 +68,7 @@
           </button>
 
 
-          <button mat-button id="buy" color="orange" ngClass="orange-border {{ classButtonBuy }}" (click)="buy()">
+          <button mat-button [disabled]=enableCopy id="buy" color="orange" ngClass="orange-border {{ classButtonBuy }}" (click)="buy()">
             <span ngClass="{{ classButtonBuy }}" fxLayoutAlign="center space-between"> Comprar </span>
           </button>
         </div>
@@ -80,10 +80,10 @@
     </h3>
 
     <div class="share-desktop" id="share">
-      <button theme="circles-dark" shareButton="facebook" [url]="urlshorten" ngClass="sharebutton {{ classButtonFacebook }} mr-2">
+      <button [disabled]=enableCopy theme="circles-dark" shareButton="facebook" [url]="urlshorten" ngClass="sharebutton {{ classButtonFacebook }} mr-2">
         <i ngClass="fab fa-facebook-f {{ classButtonFacebook }}"></i>
       </button>
-      <button theme="circles-dark" shareButton="twitter" [url]="urlshorten" ngClass="sharebutton {{ classButtonTwitter }} mr-2">
+      <button [disabled]=enableCopy theme="circles-dark" shareButton="twitter" [url]="urlshorten" ngClass="sharebutton {{ classButtonTwitter }} mr-2">
         <i ngClass="fab fa-twitter {{ classButtonTwitter }}"></i>
       </button>
       <a
@@ -97,14 +97,14 @@
     </div>
 
     <div class="share-mobile">
-      <button mat-button ngClass="gtmrs  mb-2 mt-2 {{ classButtonShare }}" (click)="share()" fxLayout="row" fxLayoutAlign="start start">
+      <button mat-button [disabled]=enableCopy ngClass="gtmrs  mb-2 mt-2 {{ classButtonShare }}" (click)="share()" fxLayout="row" fxLayoutAlign="start start">
         <span ngClass="gtmrs f-15 {{ classButtonShare }}" fxLayout="row" fxLayoutAlign="center center">
           <img ngClass="icon-compartir pr-2 {{ classButtonShare }}" src="/assets/img/Compartir.svg" alt="user" />
           Compartir</span
         >
       </button>
 
-      <button mat-button ngClass="gtmrs  mb-2 mt-2 {{ classButtonBuy }}" (click)="buy()" fxLayout="row" fxLayoutAlign="start start">
+      <button mat-button [disabled]=enableCopy ngClass="gtmrs  mb-2 mt-2 {{ classButtonBuy }}" (click)="buy()" fxLayout="row" fxLayoutAlign="start start">
         <span ngClass="gtmrs f-15 {{ classButtonBuy }}" fxLayout="row" fxLayoutAlign="center center">
           <img ngClass="icon-compartir pr-2 {{ classButtonBuy }}" src="/assets/img/Comprar.svg" alt="user" />
           Comprar

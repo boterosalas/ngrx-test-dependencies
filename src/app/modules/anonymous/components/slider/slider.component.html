@@ -2,9 +2,7 @@
 
 <div fxShow.xs="false" class="no-focus">
   <div class="position-relative">
-    
     <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" *ngIf="isSlider === true">
-      
       <div ngxSlickItem *ngFor="let slide of sliderWeb; let i = index" class="slide text-center">
         <span (click)="openShare()">
           <app-product
@@ -18,9 +16,8 @@
           ></app-product>
         </span>
       </div>
-      
     </ngx-slick-carousel>
-  
+
     <div class="position-absolute" fxLayout="row" fxLayoutAlign="space-between" *ngIf="showArrows === true">
       <button mat-mini-fab color="orange" class="ml-4 op" (click)="prev()">
         <i class="tio-back_ui f-20 arrow-position"></i>
@@ -99,13 +96,14 @@
             mat-button
             id="refer"
             color="orange"
+            [disabled]="enableCopy"
             ngClass="{{ classButtonRefer }}"
             (click)="showReference()"
           >
             <span ngClass="{{ classButtonRefer }}" fxLayoutAlign="center space-between"> Referir </span>
           </button>
 
-          <button mat-button id="buy" color="orange" ngClass="orange-border {{ classButtonBuy }}" (click)="buy()">
+          <button mat-button id="buy" color="orange" [disabled]="enableCopy" ngClass="orange-border {{ classButtonBuy }}" (click)="buy()">
             <span ngClass="{{ classButtonBuy }}" fxLayoutAlign="center space-between"> Comprar </span>
           </button>
         </div>
@@ -117,13 +115,27 @@
     </h3>
 
     <div class="share-desktop" id="share">
-      <button theme="circles-dark" shareButton="facebook" [url]="urlshorten" ngClass="sharebutton {{ classButtonFacebook }} mr-2">
+      <button
+        theme="circles-dark"
+        shareButton="facebook"
+        [disabled]="enableCopy"
+        [url]="urlshorten"
+        ngClass="sharebutton {{ classButtonFacebook }} mr-2"
+      >
         <i ngClass="fab fa-facebook-f {{ classButtonFacebook }}"></i>
       </button>
-      <button theme="circles-dark" shareButton="twitter" [url]="urlshorten" ngClass="sharebutton {{ classButtonTwitter }} mr-2">
+      <button
+        theme="circles-dark"
+        shareButton="twitter"
+        [disabled]="enableCopy"
+        [url]="urlshorten"
+        ngClass="sharebutton {{ classButtonTwitter }} mr-2"
+      >
         <i ngClass="fab fa-twitter {{ classButtonTwitter }}"></i>
       </button>
       <a
+        mat-button
+        [disabled]="enableCopy"
         href="https://web.whatsapp.com/send?text={{ urlshorten }}"
         target="_blank"
         data-action="share/whatsapp/share"
@@ -134,7 +146,14 @@
     </div>
 
     <div class="share-mobile">
-      <button mat-button ngClass="gtmrs  mb-2 mt-2 {{ classButtonShare }}" (click)="share()" fxLayout="row" fxLayoutAlign="start start">
+      <button
+        mat-button
+        [disabled]="enableCopy"
+        ngClass="gtmrs  mb-2 mt-2 {{ classButtonShare }}"
+        (click)="share()"
+        fxLayout="row"
+        fxLayoutAlign="start start"
+      >
         <span ngClass="gtmrs f-15 {{ classButtonShare }}" fxLayout="row" fxLayoutAlign="center center">
           <img ngClass="icon-compartir pr-2 {{ classButtonShare }}" src="/assets/img/Compartir.svg" alt="user" />
           Compartir</span
@@ -143,6 +162,7 @@
 
       <button
         mat-button
+        [disabled]="enableCopy"
         ngClass="gtmrs  mb-2 mt-2 {{ classButtonRefer }}"
         (click)="showReference()"
         fxLayout="row"
@@ -155,7 +175,14 @@
         </span>
       </button>
 
-      <button mat-button ngClass="gtmrs  mb-2 mt-2 {{ classButtonBuy }}" (click)="buy()" fxLayout="row" fxLayoutAlign="start start">
+      <button
+        [disabled]="enableCopy"
+        mat-button
+        ngClass="gtmrs  mb-2 mt-2 {{ classButtonBuy }}"
+        (click)="buy()"
+        fxLayout="row"
+        fxLayoutAlign="start start"
+      >
         <span ngClass="gtmrs f-15 {{ classButtonBuy }}" fxLayout="row" fxLayoutAlign="center center">
           <img ngClass="icon-compartir pr-2 {{ classButtonBuy }}" src="/assets/img/Comprar.svg" alt="user" />
           Comprar
@@ -167,7 +194,7 @@
   <form class="forgotpassword-container" [formGroup]="idCustomerForm" fxLayout="column" *ngIf="reference">
     <span (click)="backStep()" class="cursor-pointer gray" fxLayout="row" fxLayoutAlign="start start" fxFlex="12">
       <mat-icon>keyboard_arrow_left</mat-icon>
-      <span class="text-back">{{ "BUTTONS.BACK" | translate}}</span>
+      <span class="text-back">{{ 'BUTTONS.BACK' | translate }}</span>
     </span>
     <p>{{ 'GENERIC.REFERENCE_IDENTIFICATION' | translate }}</p>
     <mat-form-field appearance="outline" class="mt-2">
