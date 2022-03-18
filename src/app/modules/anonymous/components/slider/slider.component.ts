@@ -200,7 +200,6 @@ export class SliderComponent implements OnInit, OnDestroy {
    */
 
   public saveLink(param?: string) {
-    debugger;
     const data = {
       link: this.url,
       identification: this.identification,
