@@ -36,6 +36,7 @@ export class LinksService {
   apigetReportTerms = 'reports/getterms';
   apigetReportCommissions = 'reports/getadmincommissions';
   apiUsers = 'Reports/getUsers';
+  apiExportFilterUsers= 'reports/getusersfilter';
   insurance = 'Insurance/ProcessFiles';
   apiSaveLink = 'Link/SaveLink';
   apiSaveLinkRefered = 'link/savelinkreferred';
@@ -634,6 +635,22 @@ export class LinksService {
       })
     );
   }
+
+  public exportFilterUsers(data: any) {
+    return this.http.post(`${this.urlReports}${this.apiExportFilterUsers}`, data, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((user: any) => {
+        return user.objectResponse;
+      })
+    );
+  }
+
   public putOrder(datos?: any) {
     return this.http.post(`${environment.URL_CONTENT}${this.apiOrder}`, datos, this.httpOptions).pipe(
       retryWhen((errors) =>

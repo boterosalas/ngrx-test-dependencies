@@ -1,6 +1,9 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { JwtModule } from '@auth0/angular-jwt';
 import { LOCALE_CONFIG, LocaleService, NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { config, of } from 'rxjs';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
@@ -66,7 +69,25 @@ describe('DialogFilterUsersComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [DialogFilterUsersComponent],
-        imports: [FormsModule, ReactiveFormsModule, AppMaterialModule, NgxDaterangepickerMd, BrowserAnimationsModule],
+        imports: [
+          FormsModule,
+          ReactiveFormsModule,
+          AppMaterialModule,
+          NgxDaterangepickerMd,
+          BrowserAnimationsModule,
+          HttpClientTestingModule,
+          RouterTestingModule,
+          JwtModule.forRoot({
+            config: {
+              tokenGetter: () => {
+                return localStorage.getItem('ACCESS_TOKEN');
+              },
+              throwNoTokenError: true,
+              allowedDomains: [],
+              disallowedRoutes: [],
+            },
+          }),
+        ],
         providers: [
           { provide: ContentService, useValue: mockContentService },
           { provide: LOCALE_CONFIG, useValue: config },
