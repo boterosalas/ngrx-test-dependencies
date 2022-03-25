@@ -7,15 +7,22 @@
 <div class="container m-t4 fade-in">
   <div fxLayout="row" fxLayoutAlign="space-between center">
     <div>
-      <button mat-raised-button color="orange" (click)="openModalFilters()" id="download-users">
+
+      <button mat-raised-button color="orange" (click)="openModalFilters(false)" id="download-users">
         Ordenar y filtrar
         <i class="tio-filter style-icon"></i>
       </button>
 
-      <button mat-raised-button color="orange" (click)="exportUsersFilter()" id="download-users" class="ml-2">
+      <button mat-raised-button color="orange" (click)="exportUsersFilter()" id="download-users" class="ml-2 mr-2">
         Exportar
         <i class="tio-download_from_cloud style-icon"></i>
       </button>
+      <span class="mx-2 br-gray" ></span>
+      <button mat-raised-button color="orange" (click)="openModalFilters(true)" id="download-users" class="ml-2">
+        Exportar filtros usuario
+        <i class="tio-download_from_cloud style-icon"></i>
+      </button>
+
     </div>
 
     <div class="container-search mt-2">
@@ -97,7 +104,7 @@
 <!-- template filter-->
 
 <ng-template #templateDialogFilter>
-  <app-dialog-filter-users (objectSend)="infoFilter($event)" (close)="onNoClick()"></app-dialog-filter-users>
+  <app-dialog-filter-users [filter]="filter" (objectSend)="infoFilter($event)" (close)="onNoClick()"></app-dialog-filter-users>
 </ng-template>
 
 <!-- template Email-->

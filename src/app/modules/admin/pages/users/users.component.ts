@@ -52,6 +52,7 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
   userMail: string;
   dateNoVisible: boolean;
   export = false;
+  filter: boolean;
   filterData = [
     {
       searchtext: '',
@@ -233,11 +234,19 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
     this.userId = userId;
   }
 
-  public openModalFilters() {
+  public openModalFilters(filter: boolean) {
     const template = this.templateFilter;
-    const title = 'Filtrar Usuarios';
+    let title;
 
+    if(filter) {
+      title = 'Exportar filtro Usuarios'
+    } else {
+      title = 'Filtrar Usuarios'
+    }
+
+    this.filter = filter;
     this.dialogRef = this.dialog.open(ModalGenericComponent, {
+      width: '800px',
       data: {
         title,
         template,

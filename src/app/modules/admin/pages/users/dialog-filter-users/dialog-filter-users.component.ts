@@ -1,8 +1,10 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
+import { LinksService } from 'src/app/services/links.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-dialog-filter-users',
@@ -10,7 +12,7 @@ import { ContentService } from 'src/app/services/content.service';
   styleUrls: ['./dialog-filter-users.component.scss'],
 })
 export class DialogFilterUsersComponent implements OnInit, OnDestroy {
-  constructor(public fb: FormBuilder, private content: ContentService) {}
+  constructor(public fb: FormBuilder, private content: ContentService, private link:LinksService, private utils: UtilsService) {}
 
   private subscription: Subscription = new Subscription();
   maxDate = moment(new Date());
@@ -40,6 +42,7 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
   addOnBlur = true;
   @Output() objectSend = new EventEmitter();
   @Output() close = new EventEmitter();
+  @Input() filter: boolean;
 
   status = [
     { name: 'Registrados', value: 'REGISTRADOS' },
@@ -79,27 +82,29 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
     this.filterForm();
     this.getAllBusiness();
 
-    const filterData = localStorage.getItem('formFilter');
-    const bussinesss = localStorage.getItem('bussiness');
-
-    if (filterData !== null) {
-      const obFr = JSON.parse(filterData);
-      this.filterUsers.controls.comunication.setValue(obFr.comunication);
-      this.filterUsers.controls.status.setValue(obFr.status);
-      this.filterUsers.controls.commissions.setValue(obFr.commissions);
-      this.filterUsers.controls.accountBank.setValue(obFr.accountBank);
-      this.filterUsers.controls.documents.setValue(obFr.documents);
-      const startDate = obFr.dateRange.startDate === null ? '' : obFr.dateRange.startDate;
-      const endDate = obFr.dateRange.endDate === null ? '' : obFr.dateRange.endDate;
-      this.filterUsers.controls.dateRange.setValue({
-        startDate: startDate,
-        endDate: endDate,
-      });
-    }
-
-    if (bussinesss !== null) {
-      const obbus = JSON.parse(bussinesss);
-      this.chipsBussiness = obbus;
+    if(!this.filter) {
+          const filterData = localStorage.getItem('formFilter');
+          const bussinesss = localStorage.getItem('bussiness');
+      
+          if (filterData !== null) {
+            const obFr = JSON.parse(filterData);
+            this.filterUsers.controls.comunication.setValue(obFr.comunication);
+            this.filterUsers.controls.status.setValue(obFr.status);
+            this.filterUsers.controls.commissions.setValue(obFr.commissions);
+            this.filterUsers.controls.accountBank.setValue(obFr.accountBank);
+            this.filterUsers.controls.documents.setValue(obFr.documents);
+            const startDate = obFr.dateRange.startDate === null ? '' : obFr.dateRange.startDate;
+            const endDate = obFr.dateRange.endDate === null ? '' : obFr.dateRange.endDate;
+            this.filterUsers.controls.dateRange.setValue({
+              startDate: startDate,
+              endDate: endDate,
+            });
+          }
+      
+          if (bussinesss !== null) {
+            const obbus = JSON.parse(bussinesss);
+            this.chipsBussiness = obbus;
+          }
     }
   }
 
@@ -200,7 +205,14 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
       documents: this.filterUsers.controls.documents.value,
     };
 
-    this.objectSend.emit(data);
+    
+    if(!this.filter) {
+      this.objectSend.emit(data);
+    } else {
+      this.subscription = this.link.exportFilterUsers(data).subscribe(() => {
+        this.utils.openSnackBar('Al terminar de procesar el archivo se enviará un correo', 'Cerrar');
+      });
+    }
 
     localStorage.setItem('formFilter', JSON.stringify(this.filterUsers.value));
   }
