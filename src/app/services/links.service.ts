@@ -644,10 +644,7 @@ export class LinksService {
           take(3),
           tap((errorStatus) => {})
         )
-      ),
-      map((user: any) => {
-        return user.objectResponse;
-      })
+      )
     );
   }
 

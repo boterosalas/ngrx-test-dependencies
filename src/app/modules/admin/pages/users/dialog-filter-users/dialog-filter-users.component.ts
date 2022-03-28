@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { FormBuilder, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
+import { ResponseService } from 'src/app/interfaces/response';
 import { ContentService } from 'src/app/services/content.service';
 import { LinksService } from 'src/app/services/links.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -209,8 +210,8 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
     if(!this.filter) {
       this.objectSend.emit(data);
     } else {
-      this.subscription = this.link.exportFilterUsers(data).subscribe(() => {
-        this.utils.openSnackBar('Al terminar de procesar el archivo se enviará un correo', 'Cerrar');
+      this.subscription = this.link.exportFilterUsers([data]).subscribe((resp: ResponseService) => {
+        this.utils.openSnackBar(resp.userMessage, 'Cerrar');
       });
     }
 
