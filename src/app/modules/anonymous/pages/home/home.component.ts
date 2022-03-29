@@ -204,6 +204,11 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.openRegister();
           this.generateLink(params.code);
         }
+        else{
+          if(params.widget) {
+            this.utils.showloginForm();
+          }
+        }
       }
     });
   }
