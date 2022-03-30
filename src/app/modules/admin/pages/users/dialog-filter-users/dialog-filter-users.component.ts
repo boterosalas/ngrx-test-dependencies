@@ -221,6 +221,6 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
   public closeModal() {
     setTimeout(() => {
       this.close.emit();
-    }, 3000);
+    }, 1000);
   }
 }
