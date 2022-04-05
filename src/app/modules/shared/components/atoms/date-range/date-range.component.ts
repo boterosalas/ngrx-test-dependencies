@@ -5,14 +5,16 @@ import moment from 'moment';
 @Component({
   selector: 'app-date-range',
   templateUrl: './date-range.component.html',
-  styleUrls: ['./date-range.component.scss']
+  styleUrls: ['./date-range.component.scss'],
 })
 export class DateRangeComponent implements OnInit {
-
   maxDate = moment(new Date());
 
   @Output() dates = new EventEmitter();
   @Input() direction = 'row';
+  @Input() drop = 'down';
+  @Input() open = 'center';
+  @Input() title = 'RANGO DE FECHAS';
 
   locale = {
     locale: 'es',
@@ -31,9 +33,7 @@ export class DateRangeComponent implements OnInit {
   placeholder = 'Seleccione las fechas';
   dateRangeForm: FormGroup;
 
-  constructor(
-    private fb: FormBuilder
-  ) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.dateRangeForm = this.fb.group({
@@ -42,13 +42,12 @@ export class DateRangeComponent implements OnInit {
   }
 
   public getDate(e) {
-    if( e.startDate &&  e.endDate !== null) {
+    if (e.startDate && e.endDate !== null) {
       const dates = {
         endDate: moment(e.endDate._d).format('YYYY-MM-DD'),
-        startDate: moment(e.startDate._d).format('YYYY-MM-DD')
+        startDate: moment(e.startDate._d).format('YYYY-MM-DD'),
       };
       this.dates.emit(dates);
     }
   }
-
 }

@@ -556,8 +556,9 @@ export class LinksService {
       )
     );
   }
+
   public getReportClickam(params: any) {
-    return this.http.get(`${this.urlReports}${this.apigetReportClickam}?&start=${params.start}&end=${params.end}`, this.httpOptions).pipe(
+    return this.http.get(`${this.urlReports}${this.apigetReportClickam}?&start=${params.start}&end=${params.end}&identification=${params.identification}&business=${params.business}&startoncreatedate=${params.startoncreatedate}&endoncreatedate=${params.endoncreatedate}&medium=${params.medium}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
@@ -567,6 +568,7 @@ export class LinksService {
       )
     );
   }
+
   public getAuditoria(params: any) {
     return this.http.get(`${this.urlReports}${this.apiAudit}?&start=${params.start}&end=${params.end}`, this.httpOptions).pipe(
       retryWhen((errors) =>
