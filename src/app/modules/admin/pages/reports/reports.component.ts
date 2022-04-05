@@ -11,6 +11,8 @@ import { ValidateDate } from 'src/app/validators/validate-date.validators';
 import * as moment from 'moment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UtilsService } from 'src/app/services/utils.service';
+import { SellReportFormComponent } from '../../components/sell-report-form/sell-report-form.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-reports',
@@ -71,7 +73,8 @@ export class ReportsComponent implements OnInit, OnDestroy {
     private cd: ChangeDetectorRef,
     private _snackBar: MatSnackBar,
     private usersService: UserService,
-    public utils: UtilsService
+    public utils: UtilsService,
+    private dialog:MatDialog
   ) {}
 
   ngOnInit() {
@@ -434,6 +437,12 @@ export class ReportsComponent implements OnInit, OnDestroy {
     this.subscription = this.file.getCutOffDate().subscribe(resp => {
       this.date = moment(resp).format('MMMM, y');
     })
+  }
+
+  public openModalFilters(){
+   this.dialog.open(SellReportFormComponent, {
+      width: '450px',
+    });
   }
 
 

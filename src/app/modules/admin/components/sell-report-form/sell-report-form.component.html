@@ -1,0 +1,59 @@
+<div mat-dialog-content class="pr">
+  <form [formGroup]="sellForm" fxLayout="column">
+
+    <app-date-range direction="column" title="FECHA DE CREACIÓN DE ORDEN" (dates)="filterDate($event)"></app-date-range>
+    
+
+    <p class="p-range">FECHA DE COMISIÓN</p>
+
+    <div class="neg" fxLayout="row">
+        <i class="tio-date_range icon-date"></i>
+        <input
+          formControlName="dateRange"
+          (change)="filterComision($event)"
+          [locale]="locale"
+          placeholder="Seleccione las fechas"
+          type="text"
+          [maxDate]="maxDate"
+          [showDropdowns]="true"
+          ngxDaterangepickerMd
+          class="w-100 form-control border-input mat-elevation-z1 p-2 border-radius"
+        />
+      </div>
+
+    <mat-form-field class="w-100">
+      <mat-placeholder>NEGOCIO</mat-placeholder>
+      <mat-select id="business" formControlName="business" class="selected-business">
+        <mat-option *ngFor="let item of business" [value]="item.id">
+          <span>{{ item.description }}</span>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput id="namesell" type="text" placeholder="Cedula" formControlName="id" />
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-placeholder>MEDIO</mat-placeholder>
+      <mat-select id="medium" formControlName="medium" class="selected-type">
+        <mat-option *ngFor="let item of type" [value]="item.value">
+          <span>{{ item.title }}</span>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+  <div class="container button-padding mb-4 mt-4">
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <app-button title="Cancelar" (click)="onNoClick()" [haveIcon]="false" color="transparent" classButton="no-shadow"></app-button>
+      <app-button
+        title="Exportar"
+        (action)="exportFilter()"
+        classButton="shadow-purple"
+        classIcon="tio-download_from_cloud style-icon"
+        [disabled]="activeButton"
+      ></app-button>
+    </div>
+  </div>
+</div>

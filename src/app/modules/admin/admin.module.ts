@@ -104,6 +104,7 @@ import { ControlComponent } from './pages/control/control.component';
 import { CatologueComponent } from './pages/catologue/catologue.component';
 import { CatologueCardComponent } from './components/catologue-card/catologue-card.component';
 import { CatologueFormComponent } from './components/catologue-form/catologue-form.component';
+import { SellReportFormComponent } from './components/sell-report-form/sell-report-form.component';
 
 const routes: Routes = [
   {
@@ -484,6 +485,7 @@ const routes: Routes = [
     CatologueComponent,
     CatologueCardComponent,
     CatologueFormComponent,
+    SellReportFormComponent,
   ],
   imports: [
     AngularEditorModule,
@@ -542,7 +544,8 @@ const routes: Routes = [
     FormTestimonyComponent,
     FormPartnerComponent,
     FormCampaignComponent,
-    CatologueFormComponent
+    CatologueFormComponent,
+    SellReportFormComponent
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: UsersComponent },

@@ -86,18 +86,29 @@
         [maxDate]="maxDate"
         ngxDaterangepickerMd
         [showDropdowns]="true"
-        class="form-control border-input mat-elevation-z1 p-2 border-radius"
+        class="form-control border-input mat-elevation-z1 p-2 border-radius w-95"
       />
-      <button
-        mat-raised-button
-        color="orange"
-        (click)="getReportClickam()"
-        id="download-users"
-        class="ml-2"
-        [disabled]="!dateFormSell.valid || disButon"
-      >
-        Exportar <i class="tio-download_from_cloud style-icon"></i>
-      </button>
+      <span fxLayout="row" class="mt-3 px-3">
+        <button
+          mat-raised-button
+          color="orange"
+          (click)="getReportClickam()"
+          id="download-users"
+          class="ml-2"
+          [disabled]="!dateFormSell.valid || disButon"
+        >
+          Exportar <i class="tio-download_from_cloud style-icon"></i>
+        </button>
+        <button
+          mat-raised-button
+          color="orange"
+          (click)="openModalFilters()"
+          id="download-users"
+          class="ml-2"
+        >
+          Exportar con filtros <i class="tio-download_from_cloud style-icon ml-2"></i>
+        </button>
+      </span>
     </form>
     <br />
   </div>
