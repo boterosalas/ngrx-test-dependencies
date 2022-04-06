@@ -75,7 +75,7 @@
     <p>{{ 'REPORTS.SELECT_DATE' | translate }}</p>
   
     <form [formGroup]="dateFormSell" class="downloadUsers user-transactions">
-      <i class="tio-date_range icon-date"></i>
+      <!-- <i class="tio-date_range icon-date"></i>
       <input
         (change)="change()"
         formControlName="dateRange"
@@ -98,17 +98,18 @@
           [disabled]="!dateFormSell.valid || disButon"
         >
           Exportar <i class="tio-download_from_cloud style-icon"></i>
-        </button>
+        </span>
+        </button> -->
+
         <button
           mat-raised-button
           color="orange"
           (click)="openModalFilters()"
           id="download-users"
-          class="ml-2"
+          class="ml-4 px-3"
         >
           Exportar con filtros <i class="tio-download_from_cloud style-icon ml-2"></i>
         </button>
-      </span>
     </form>
     <br />
   </div>
