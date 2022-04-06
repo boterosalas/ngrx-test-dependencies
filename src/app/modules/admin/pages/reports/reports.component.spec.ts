@@ -179,20 +179,20 @@ beforeEach(waitForAsync(() => {
     expect(component.disButon).toBeFalsy();
   });
 
-  it('getReportClickam', () => {
-    const nativeElement = fixture.nativeElement;
-    const input = nativeElement.querySelector('input');
-    input.dispatchEvent(new Event('click'));
-    const nativeElementDate = fixture.nativeElement;
-    const dateStart = nativeElementDate.querySelector('.today');
-    dateStart.dispatchEvent(new Event('click'));
-    const nativeElementbtn = fixture.nativeElement;
-    const btn = nativeElementbtn.querySelector('.btn');
-    btn.dispatchEvent(new Event('click'));
-    fixture.detectChanges();
-    component.getReportClickam();
-    expect(mockLinksService.getReportClickam).toHaveBeenCalled();
-  });
+  // it('getReportClickam', () => {
+  //   const nativeElement = fixture.nativeElement;
+  //   const input = nativeElement.querySelector('input');
+  //   input.dispatchEvent(new Event('click'));
+  //   const nativeElementDate = fixture.nativeElement;
+  //   const dateStart = nativeElementDate.querySelector('.today');
+  //   dateStart.dispatchEvent(new Event('click'));
+  //   const nativeElementbtn = fixture.nativeElement;
+  //   const btn = nativeElementbtn.querySelector('.btn');
+  //   btn.dispatchEvent(new Event('click'));
+  //   fixture.detectChanges();
+  //   component.getReportClickam();
+  //   expect(mockLinksService.getReportClickam).toHaveBeenCalled();
+  // });
 
   it('save cut off date', () => {
     mockLinksService.saveCutOffDate.and.returnValue(of(getReport));

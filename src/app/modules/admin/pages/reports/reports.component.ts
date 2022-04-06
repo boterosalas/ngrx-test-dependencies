@@ -397,22 +397,22 @@ export class ReportsComponent implements OnInit, OnDestroy {
     });
   }
 
-  public getReportClickam() {
-    this.dateParams = {
-      start: this.dateFormSell.controls.dateRange.value.startDate.format(),
-      end: this.dateFormSell.controls.dateRange.value.endDate.format(),
-    };
+  // public getReportClickam() {
+  //   this.dateParams = {
+  //     start: this.dateFormSell.controls.dateRange.value.startDate.format(),
+  //     end: this.dateFormSell.controls.dateRange.value.endDate.format(),
+  //   };
 
-    this.subscription = this.file.getReportClickam(this.dateParams).subscribe((resp: ResponseService) => {
-      if (resp.state === 'Success') {
-        this.openSnackBar(resp.userMessage, 'Cerrar');
-        this.dateFormSell.reset();
-        if (this.dateFormSell.controls.dateRange.value.startDate === null) {
-          this.disButon = true;
-        }
-      }
-    });
-  }
+  //   this.subscription = this.file.getReportClickam(this.dateParams).subscribe((resp: ResponseService) => {
+  //     if (resp.state === 'Success') {
+  //       this.openSnackBar(resp.userMessage, 'Cerrar');
+  //       this.dateFormSell.reset();
+  //       if (this.dateFormSell.controls.dateRange.value.startDate === null) {
+  //         this.disButon = true;
+  //       }
+  //     }
+  //   });
+  // }
 
   public changeMonth(value:number) {
     Swal.fire({
