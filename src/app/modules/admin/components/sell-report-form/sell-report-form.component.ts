@@ -107,8 +107,8 @@ export class SellReportFormComponent implements OnInit {
   }
 
   public filterComision(e) {
-    this.startDateComision = moment(e.endDate._d).format('YYYY-MM-DD');
-    this.endDateComision = moment(e.startDate._d).format('YYYY-MM-DD');
+    this.startDateComision = moment(e.startDate._d).format('YYYY-MM-DD');
+    this.endDateComision = moment(e.endDate._d).format('YYYY-MM-DD');
 
     localStorage.setItem('starComission', this.startDateComision);
     localStorage.setItem('endComission', this.endDateComision);
