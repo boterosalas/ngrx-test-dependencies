@@ -68,8 +68,6 @@ export class CatologueFormComponent implements OnInit, OnDestroy {
       visible: [this.data !== null ? this.data.active : false ],
     });
 
-    console.log(this.catalogueForm.valid);
-
     this.getAllBusiness();
   }
 
