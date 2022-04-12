@@ -24,7 +24,7 @@
     <mat-form-field class="w-100">
       <mat-placeholder>NEGOCIO</mat-placeholder>
       <mat-select id="business" formControlName="business" class="selected-business">
-        <mat-option *ngFor="let item of business" [value]="item.id">
+        <mat-option *ngFor="let item of business" [value]="item.code">
           <span>{{ item.description }}</span>
         </mat-option>
       </mat-select>
