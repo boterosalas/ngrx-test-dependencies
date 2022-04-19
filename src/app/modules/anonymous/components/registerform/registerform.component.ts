@@ -65,6 +65,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   showPerson = false;
   showBusiness = false;
   typedc = 'documento';
+  business: Object[] = [];
 
   ngOnInit() {
     this.amount = localStorage.getItem('Amount');
@@ -78,6 +79,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
         idType: ['', Validators.required],
         id: ['', [Validators.required, Validators.maxLength(11), Validators.pattern(this.numberPattern)]],
         phone: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern(this.numberPattern)]],
+        business: [''],
         email: ['', [Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
         confirmEmail: ['', []],
         password: [
@@ -94,6 +96,13 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     this.showRegisterForm = true;
 
     this.getidType();
+    this.getBusiness();
+  }
+
+  public getBusiness() {
+    this.subscription = this.content.getBusiness().subscribe((resp) => {
+      this.business = resp;
+    });
   }
 
   public termsAndConditions() {
@@ -135,6 +144,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       social: this.registerForm.controls.social.value,
       Identification: this.registerForm.controls.id.value,
       Cellphone: this.registerForm.controls.phone.value,
+      idbusiness: this.registerForm.controls.business.value,
       Password: btoa(this.registerForm.controls.password.value),
       idReferrer: localStorage.getItem('idClicker'),
       idcampaign: parseInt(localStorage.getItem('campaign')),
