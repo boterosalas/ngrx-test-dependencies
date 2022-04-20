@@ -1,4 +1,4 @@
-<mat-card class="mat-elevation-z0 card-product card-other fade-in p-1" *ngIf="exito">
+<mat-card class="mat-elevation-z0 card-product card-other fade-in p-1 cursor-pointer" *ngIf="exito" (click)="product()">
   <mat-card-content fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="10px" fxLayoutAlign.xs="space-around">
     <span fxLayout="column" fxFlex="20" fxFlex.xs="30" fxFLex.gt-xs="100" fxLayoutAlign="center">
       <div class="{{ container }}">
