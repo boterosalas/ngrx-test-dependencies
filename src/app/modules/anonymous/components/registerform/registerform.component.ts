@@ -79,7 +79,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
         idType: ['', Validators.required],
         id: ['', [Validators.required, Validators.maxLength(11), Validators.pattern(this.numberPattern)]],
         phone: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern(this.numberPattern)]],
-        business: [''],
+        business: ['', Validators.required],
         email: ['', [Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
         confirmEmail: ['', []],
         password: [

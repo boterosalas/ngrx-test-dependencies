@@ -6,16 +6,14 @@
 
 <div class="container mt-4 mb-3 fade-in">
   <div fxLayout="row" fxLayoutGap="20px">
-    
     <div fxLayout="column" fxLayoutGap="20px">
-
       <app-card-admin
         fxLayout="column"
         title="{{ 'REPORTS.SELL_REWARDS' | translate }}"
         img="/assets/img/dashboard/icono-reporte-ventas.svg"
         [template]="templateCardRewards"
       ></app-card-admin>
-  
+
       <app-card-admin
         fxLayout="column"
         title="{{ 'REPORTS.SELL_REPORTS' | translate }}"
@@ -24,14 +22,17 @@
       ></app-card-admin>
     </div>
 
-    <app-card-admin
-      fxLayout="column"
-      fxFlex="50"
-      title="{{ 'REPORTS.CROSS' | translate }}"
-      img="/assets/img/dashboard/Icono-cruzar-ventas.svg"
-      [template]="templateCardCross"
-    ></app-card-admin>
+    <div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="space-between">
+      <app-card-admin
+        fxLayout="column"
+        fxFlex="50"
+        title="{{ 'REPORTS.CROSS' | translate }}"
+        img="/assets/img/dashboard/Icono-cruzar-ventas.svg"
+        [template]="templateCardCross"
+      ></app-card-admin>
 
+      <app-card-admin fxLayout="column" title="RECOMPENSAS PAGADAS" [template]="templateCardPayReward"></app-card-admin>
+    </div>
   </div>
 </div>
 
@@ -49,7 +50,7 @@
 
     <div class="updatePayment" fxLayout="row" fxLayoutAlign="space-around center">
       <button color="orange" (click)="changeMonth(-1)" class="change-date" mat-raised-button>-</button>
-      <span class="upper">{{date}}</span>
+      <span class="upper">{{ date }}</span>
       <button color="orange" (click)="changeMonth(1)" class="change-date" mat-raised-button>+</button>
     </div>
 
@@ -71,45 +72,12 @@
 
 <ng-template #templateCardReport>
   <div class="px-3">
-
     <p>{{ 'REPORTS.SELECT_DATE' | translate }}</p>
-  
-    <form [formGroup]="dateFormSell" class="downloadUsers user-transactions">
-      <!-- <i class="tio-date_range icon-date"></i>
-      <input
-        (change)="change()"
-        formControlName="dateRange"
-        [locale]="locale"
-        drops="up"
-        placeholder="Seleccione fechas"
-        type="text"
-        [maxDate]="maxDate"
-        ngxDaterangepickerMd
-        [showDropdowns]="true"
-        class="form-control border-input mat-elevation-z1 p-2 border-radius w-95"
-      />
-      <span fxLayout="row" class="mt-3 px-3">
-        <button
-          mat-raised-button
-          color="orange"
-          (click)="getReportClickam()"
-          id="download-users"
-          class="ml-2"
-          [disabled]="!dateFormSell.valid || disButon"
-        >
-          Exportar <i class="tio-download_from_cloud style-icon"></i>
-        </span>
-        </button> -->
 
-        <button
-          mat-raised-button
-          color="orange"
-          (click)="openModalFilters()"
-          id="download-users"
-          class="ml-4 px-3"
-        >
-          Exportar con filtros <i class="tio-download_from_cloud style-icon ml-2"></i>
-        </button>
+    <form [formGroup]="dateFormSell" class="downloadUsers user-transactions">
+      <button mat-raised-button color="orange" (click)="openModalFilters()" id="download-users" class="ml-4 px-3">
+        Exportar con filtros <i class="tio-download_from_cloud style-icon ml-2"></i>
+      </button>
     </form>
     <br />
   </div>
@@ -132,7 +100,7 @@
             >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Fecha inicial' } }}</mat-error
           >
         </mat-form-field>
-  
+
         <mat-form-field>
           <input
             matInput
@@ -171,12 +139,17 @@
     <p id="cross">{{ 'REPORTS.UPLOAD' | translate }}</p>
     <br />
     <h4 id="trips" class="title-upload m-0">{{ 'REPORTS.SELLS' | translate }}</h4>
-    <app-load-form-file [fileForm]="fileForm" [nameFile]="nameFile" label="trip" (uploadFile)="onFileChangeTrip($event)"></app-load-form-file>
+    <app-load-form-file
+      [fileForm]="fileForm"
+      [nameFile]="nameFile"
+      label="trip"
+      (uploadFile)="onFileChangeTrip($event)"
+    ></app-load-form-file>
     <mat-error *ngIf="showErrorExt" class="small">
       {{ 'GENERIC.INVALID_FORMAT_FILE' | translate }}
     </mat-error>
     <br />
-  
+
     <h4 id="trips" class="title-upload m-0">
       {{ 'REPORTS.PICKING' | translate }}
     </h4>
@@ -191,4 +164,42 @@
     </mat-error>
   </div>
   <br />
+</ng-template>
+
+<ng-template #templateCardPayReward>
+  <div class="px-3">
+    <p>{{ 'REPORTS.PAYMENT_DATE' | translate }}</p>
+
+    <form [formGroup]="dateFormSell" class="downloadUsers user-transactions">
+      <span fxLayout="row">
+
+        <i class="tio-date_range icon-date"></i>
+        <input
+          (change)="change()"
+          formControlName="dateRange"
+          [locale]="locale"
+          drops="up"
+          placeholder="Seleccione fechas"
+          type="text"
+          [maxDate]="maxDate"
+          ngxDaterangepickerMd
+          [showDropdowns]="true"
+          class="form-control border-input mat-elevation-z1 p-2 border-radius w-95"
+        />
+        <span fxLayout="row" class="px-3">
+          <button
+            mat-raised-button
+            color="orange"
+            (click)="getReportClickam()"
+            id="download-users"
+            class="ml-2"
+            [disabled]="!dateFormSell.valid || disButon"
+          >
+            Exportar <i class="tio-download_from_cloud style-icon"></i>
+          </button>
+        </span>
+      </span>
+    </form>
+    <br />
+  </div>
 </ng-template>
