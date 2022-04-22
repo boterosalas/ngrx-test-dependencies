@@ -91,7 +91,7 @@
             </span>
           </button>
 
-          <button
+          <!-- <button
             *ngIf="buttonReferir.business === 'exito' || buttonReferir.business === 'carulla'"
             mat-button
             id="refer"
@@ -101,7 +101,7 @@
             (click)="showReference()"
           >
             <span ngClass="{{ classButtonRefer }}" fxLayoutAlign="center space-between"> Referir </span>
-          </button>
+          </button> -->
 
           <button mat-button id="buy" color="orange" [disabled]="enableCopy" ngClass="orange-border {{ classButtonBuy }}" (click)="buy()">
             <span ngClass="{{ classButtonBuy }}" fxLayoutAlign="center space-between"> Comprar </span>
@@ -160,7 +160,7 @@
         >
       </button>
 
-      <button
+      <!-- <button
         mat-button
         [disabled]="enableCopy"
         ngClass="gtmrs  mb-2 mt-2 {{ classButtonRefer }}"
@@ -173,7 +173,7 @@
           <img ngClass="icon-compartir pr-2 {{ classButtonRefer }}" src="/assets/img/Referir.svg" alt="user" />
           Referir
         </span>
-      </button>
+      </button> -->
 
       <button
         [disabled]="enableCopy"
