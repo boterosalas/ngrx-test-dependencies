@@ -15,6 +15,7 @@ export class CatologueCardComponent implements OnInit {
   @Input() img: string;
   @Input() links: string;
   @Input() template: number;
+  @Input() download: number;
   @Input() dateStart: string;
   @Input() dateEnd: string;
   @Input() showHidden: boolean;

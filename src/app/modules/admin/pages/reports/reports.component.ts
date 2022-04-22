@@ -20,7 +20,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./reports.component.scss'],
 })
 export class ReportsComponent implements OnInit, OnDestroy {
-  @ViewChild('templateCardReport, templateCardCross', { static: false })
+  @ViewChild('templateCardReport, templateCardCross, templateCardPayReward', { static: false })
   template: TemplateRef<any>;
 
   fileUrl: string;
@@ -44,7 +44,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
   maxDate = moment(new Date());
   maxDate2 = new Date();
 
-  date:any;
+  date: any;
 
   dateParams: any;
   disButon: boolean;
@@ -74,7 +74,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
     private _snackBar: MatSnackBar,
     private usersService: UserService,
     public utils: UtilsService,
-    private dialog:MatDialog
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -397,24 +397,24 @@ export class ReportsComponent implements OnInit, OnDestroy {
     });
   }
 
-  // public getReportClickam() {
-  //   this.dateParams = {
-  //     start: this.dateFormSell.controls.dateRange.value.startDate.format(),
-  //     end: this.dateFormSell.controls.dateRange.value.endDate.format(),
-  //   };
+  public getReportClickam() {
+    this.dateParams = {
+      start: this.dateFormSell.controls.dateRange.value.startDate.format(),
+      end: this.dateFormSell.controls.dateRange.value.endDate.format(),
+    };
 
-  //   this.subscription = this.file.getReportClickam(this.dateParams).subscribe((resp: ResponseService) => {
-  //     if (resp.state === 'Success') {
-  //       this.openSnackBar(resp.userMessage, 'Cerrar');
-  //       this.dateFormSell.reset();
-  //       if (this.dateFormSell.controls.dateRange.value.startDate === null) {
-  //         this.disButon = true;
-  //       }
-  //     }
-  //   });
-  // }
+    this.subscription = this.file.getReportClickam(this.dateParams).subscribe((resp: ResponseService) => {
+      if (resp.state === 'Success') {
+        this.openSnackBar(resp.userMessage, 'Cerrar');
+        this.dateFormSell.reset();
+        if (this.dateFormSell.controls.dateRange.value.startDate === null) {
+          this.disButon = true;
+        }
+      }
+    });
+  }
 
-  public changeMonth(value:number) {
+  public changeMonth(value: number) {
     Swal.fire({
       html: "<h3>Cambio de corte</h3> <p class='w-container'>¿Está seguro que desea realizar el cambio de mes?</p>",
       confirmButtonText: 'Confirmar cambio de corte',
@@ -425,26 +425,25 @@ export class ReportsComponent implements OnInit, OnDestroy {
       allowOutsideClick: false,
     }).then((resp: any) => {
       if (resp.dismiss !== 'cancel') {
-        this.subscription = this.file.saveCutOffDate(value).subscribe((save:ResponseService) => {
+        this.subscription = this.file.saveCutOffDate(value).subscribe((save: ResponseService) => {
           this.utils.openSnackBar(save.userMessage, 'Cerrar');
           this.CutOffDate();
-        })
+        });
       }
     });
   }
 
   public CutOffDate() {
-    this.subscription = this.file.getCutOffDate().subscribe(resp => {
+    this.subscription = this.file.getCutOffDate().subscribe((resp) => {
       this.date = moment(resp).format('MMMM, y');
-    })
-  }
-
-  public openModalFilters(){
-   this.dialog.open(SellReportFormComponent, {
-      width: '450px',
     });
   }
 
+  public openModalFilters() {
+    this.dialog.open(SellReportFormComponent, {
+      width: '450px',
+    });
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

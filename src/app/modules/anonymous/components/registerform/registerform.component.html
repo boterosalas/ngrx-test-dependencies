@@ -126,6 +126,19 @@
     }}</mat-error>
   </mat-form-field>
 
+  <mat-form-field class="w-100">
+    <mat-placeholder>¿Trabajas con nuestras marcas aliadas?</mat-placeholder>
+    <mat-select id="business" formControlName="business" class="selected-business" required>
+      <mat-option *ngFor="let item of business" [value]="item.id">
+        <span>{{ item.description }}</span>
+      </mat-option>
+      <mat-option value="null">No trabajo con ninguna marca aliada</mat-option>
+    </mat-select>
+    <mat-error id="requiredBusiness" *ngIf="registerForm.controls.business.invalid && registerForm.controls.business.errors.required">{{
+      'GENERIC.REQUIRED' | translate: { formValue: 'Marcas aliadas' }
+    }}</mat-error>
+  </mat-form-field>
+
   <mat-form-field>
     <input matInput id="email" type="email" placeholder="{{ 'GENERIC.EMAIL' | translate }}" formControlName="email" spacebar required />
     <mat-error id="invalidEmail" *ngIf="registerForm.controls.email.invalid">{{
