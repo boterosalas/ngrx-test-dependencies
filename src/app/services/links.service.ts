@@ -33,6 +33,7 @@ export class LinksService {
   apiAuditUserInfo = 'admin/getreportupdateinfoclicker';
   apiGetReportReferral = 'Reports/getreportreferral';
   apigetReportClickam = 'Reports/getReportClickam';
+  apigetPaymentReport = 'reports/getpaymentreport';
   apigetReportTerms = 'reports/getterms';
   apigetReportCommissions = 'reports/getadmincommissions';
   apiUsers = 'Reports/getUsers';
@@ -559,6 +560,18 @@ export class LinksService {
 
   public getReportClickam(params: any) {
     return this.http.get(`${this.urlReports}${this.apigetReportClickam}?&start=${params.start}&end=${params.end}&identification=${params.identification}&business=${params.business}&startoncreatedate=${params.startoncreatedate}&endoncreatedate=${params.endoncreatedate}&medium=${params.medium}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      )
+    );
+  }
+
+  public getPaymentReport(params: any) {
+    return this.http.get(`${this.urlReports}${this.apigetPaymentReport}?&start=${params.start}&end=${params.end}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
