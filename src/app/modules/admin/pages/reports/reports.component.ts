@@ -397,13 +397,13 @@ export class ReportsComponent implements OnInit, OnDestroy {
     });
   }
 
-  public getReportClickam() {
+  public getReportPayment() {
     this.dateParams = {
       start: this.dateFormSell.controls.dateRange.value.startDate.format(),
       end: this.dateFormSell.controls.dateRange.value.endDate.format(),
     };
 
-    this.subscription = this.file.getReportClickam(this.dateParams).subscribe((resp: ResponseService) => {
+    this.subscription = this.file.getPaymentReport(this.dateParams).subscribe((resp: ResponseService) => {
       if (resp.state === 'Success') {
         this.openSnackBar(resp.userMessage, 'Cerrar');
         this.dateFormSell.reset();
