@@ -80,6 +80,7 @@
     "ngx-drag-scroll": "^8.0.0-beta.2",
     "ngx-material-timepicker": "^5.5.3",
     "ngx-pagination": "^5.1.1",
+    "ngx-skeleton-loader": "^5.0.0",
     "ngx-slick-carousel": "^0.4.7",
     "process": "^0.11.10",
     "rxjs": "~6.6.7",

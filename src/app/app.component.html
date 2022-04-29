@@ -1,3 +1,38 @@
+
+<div class="ske" *ngIf="!fullCharge">
+  <ngx-skeleton-loader
+  [theme]="{ 
+    height: '50px'
+  }"
+  ></ngx-skeleton-loader>
+  <br>
+  <ngx-skeleton-loader
+  [theme]="{ 
+    'border-radius': '5px',
+    height: '250px',
+    width:' 90%',
+    margin: '0 auto',
+    display: 'block'
+  }"
+  ></ngx-skeleton-loader>
+  <br>
+  <ngx-skeleton-loader
+  [theme]="{ 
+    height: '150px'
+  }"
+  ></ngx-skeleton-loader>
+  <ngx-skeleton-loader
+  [theme]="{ 
+    'border-radius': '5px',
+    height: '250px',
+    width:' 50%',
+    margin: '0 auto',
+    display: 'block'
+  }"
+  ></ngx-skeleton-loader>
+
+</div>
+
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav pt-3" fixedInViewport position="start" [opened]="false">
     <mat-icon (click)="drawer.toggle()" class="border-close cursor-pointer">close</mat-icon>
@@ -161,7 +196,7 @@
       </div>
     </div>
 
-    <app-header class="fix" *ngIf="!hideFH && fullCharge" (sidenav)="drawer.toggle()" [name]="firstName"></app-header>
+    <app-header class="fix" *ngIf="!hideFH" (sidenav)="drawer.toggle()" [name]="firstName"></app-header>
 
     <div ngClass="maincontent {{ classPage }}-page">
       <router-outlet></router-outlet>
@@ -219,7 +254,7 @@
       </div>
     </ng-template>
 
-    <app-footer *ngIf="!hideFH && fullCharge"></app-footer>
+    <app-footer *ngIf="!hideFH"></app-footer>
 
     <app-loader></app-loader>
   </mat-sidenav-content>
