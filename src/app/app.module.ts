@@ -42,6 +42,7 @@ import { MenuComponent } from './modules/anonymous/components/menu/menu.componen
 import { RegisterformComponent } from './modules/anonymous/components/registerform/registerform.component';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -74,6 +75,7 @@ export function jwtTokenGetter() {
     MatPasswordStrengthModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxSkeletonLoaderModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     JwtModule.forRoot({
       config: {
