@@ -8,11 +8,12 @@
         testimonios que hemos recopilado.
       </p>
 
-      <app-slide-testimony *ngIf="testimony.withPhoto.length" [testimony]="testimony.withPhoto" [slideConfig]="slideConfig"></app-slide-testimony>
+      <app-slide-testimony *ngIf="testimony && testimony.withPhoto.length" [testimony]="testimony && testimony.withPhoto" [slideConfig]="slideConfig"></app-slide-testimony>
       
     </div>
     
-    <app-rate-testimony [testimony]="testimony.withoutPhoto"></app-rate-testimony>
+    <app-rate-testimony [testimony]="testimony && testimony.withoutPhoto"></app-rate-testimony>
+    
 
   </div>
 </div>
