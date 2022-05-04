@@ -41,7 +41,7 @@
         <g transform="matrix(1, 0, 0, 1, -20, -17)" filter="url(#Rectangle_187)">
           <rect id="Rectangle_187-3" data-name="Rectangle 187" width="142" height="45" rx="10" transform="translate(20 17)" fill="#3a226a"/>
         </g>
-        <text id="Copiar_link" data-name="Copiar link" transform="translate(71 27)" fill="#fff" font-size="14" font-family="GalanoGrotesque-Medium" font-weight="500" letter-spacing="-0.02em"><tspan x="-36.064" y="0">Copiar link</tspan></text>
+        <text id="Copiar_link" data-name="Referir" transform="translate(71 27)" fill="#fff" font-size="14" font-family="GalanoGrotesque-Medium" font-weight="500" letter-spacing="-0.02em"><tspan x="-36.064" y="0">Referir</tspan></text>
       </g>
       <g id="Btn_secundario" data-name="Btn secundario" transform="translate(765 505)">
         <g transform="matrix(1, 0, 0, 1, -338, -17)" filter="url(#Rectangle_11)">
