@@ -144,7 +144,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       social: this.registerForm.controls.social.value,
       Identification: this.registerForm.controls.id.value,
       Cellphone: this.registerForm.controls.phone.value,
-      idbusiness: this.registerForm.controls.business.value,
+      idbusiness: this.registerForm.controls.business.value === "null" ? null : this.registerForm.controls.business.value,
       Password: btoa(this.registerForm.controls.password.value),
       idReferrer: localStorage.getItem('idClicker'),
       idcampaign: parseInt(localStorage.getItem('campaign')),
