@@ -27,6 +27,7 @@ export class LinksService {
 
   apikpiTotal = 'Reports/getkpitotaldata';
   apiUsersExcel = 'Reports/getUsersExcel';
+  apiGetCommissionsDeletedUsers = 'reports/getcommissionsdeletedusers';
 
   apiUsersHistoricalBankInformation = 'admin/gethistoricalbankinformation';
   apiAuditExcel = 'Reports/getAudit';
@@ -469,6 +470,19 @@ export class LinksService {
       )
     );
   }
+
+  public deleteImports(params: any) {
+    return this.http.get(`${this.urlReports}${this.apiGetCommissionsDeletedUsers}?&start=${params.start}&end=${params.end}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      )
+    );
+  }
+
   public getHistoricalBankInformation(params: any) {
     return this.http
       .get(`${this.urlReports}${this.apiUsersHistoricalBankInformation}?&start=${params.start}&end=${params.end}`, this.httpOptions)
