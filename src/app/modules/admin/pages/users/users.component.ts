@@ -108,6 +108,10 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
       titulo: 'Validación de usuarios',
       value: 9,
     },
+    {
+      titulo: 'Venta usuarios eliminados',
+      value: 10,
+    }
   ];
 
   locale = {
@@ -369,6 +373,23 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
     });
   }
 
+  public deleteSell() {
+    this.dateParams = {
+      start: this.dateForm.controls.dateRange.value.startDate.format(),
+      end: this.dateForm.controls.dateRange.value.endDate.format(),
+    };
+
+    this.subscription = this.file.deleteImports(this.dateParams).subscribe((deleteSell: ResponseService) => {
+      if (deleteSell.state === 'Success') {
+        this.utils.openSnackBar(deleteSell.userMessage, 'Cerrar');
+        this.dateForm.reset();
+        if (this.dateForm.controls.dateRange.value.startDate === null) {
+          this.disableButon = true;
+        }
+      }
+    });
+  }
+
   public exportusers() {
     this.subscription = this.usersService.getExternalUsers().subscribe((respExport: ResponseService) => {
       this.dateForm.reset();
@@ -470,6 +491,8 @@ export class UsersComponent extends MatPaginatorIntl implements OnInit, OnDestro
       this.getStoriesReport();
     } else if (this.dateForm.controls.tipoReport.value === '9') {
       this.validationUsers();
+    } else if (this.dateForm.controls.tipoReport.value === '10') {
+      this.deleteSell();
     }
   }
 

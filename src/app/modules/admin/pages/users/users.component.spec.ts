@@ -27,7 +27,7 @@ describe('UsersComponent', () => {
   let component: UsersComponent;
   let fixture: ComponentFixture<UsersComponent>;
 
-  const mockLinksService = jasmine.createSpyObj('LinksService', ['searchUsers', 'getUsersExcel', 'getHistoricalBankInformation']);
+  const mockLinksService = jasmine.createSpyObj('LinksService', ['searchUsers', 'getUsersExcel', 'getHistoricalBankInformation','deleteImports']);
   const mockSnackBar = jasmine.createSpyObj('MatSnackBar', ['open', 'closeAll', 'afterAllClosed']);
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open']);
   const mockDialogRef = jasmine.createSpyObj('MatDialogRef', ['close', 'afterClosed', 'componentInstance', 'event ']);
@@ -43,7 +43,7 @@ describe('UsersComponent', () => {
     'getReportCommets',
     'getDeleteCommetsRest',
     'getUserInfoAditional',
-    'getReportStories'
+    'getReportStories',
   ]);
 
   const dataUser = {
@@ -218,6 +218,7 @@ beforeEach(waitForAsync(() => {
     mockUserService.getReportCommets.and.returnValue(of(getUserExcel));
     mockUserService.getDeleteCommetsRest.and.returnValue(of(getUserExcel));
     mockUserService.getUserInfoAditional.and.returnValue(of(getUserInfoAditional));
+    mockLinksService.deleteImports.and.returnValue(of(resp));
     //mockUserService.getExternalUser.and.returnValue(of(getUserExcel));verifiedUser
     fixture = TestBed.createComponent(UsersComponent);
     component = fixture.componentInstance;
@@ -375,4 +376,5 @@ beforeEach(waitForAsync(() => {
     component.getDeleteComments();
     expect(datos).toBeTruthy();
   });
+
 });
