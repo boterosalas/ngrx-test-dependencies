@@ -94,6 +94,7 @@ export class ContentService {
   apiSaveOrdersYesterday = 'commissions/saveordersyesterday';
   apiGenerateCommissions = 'commissions/generatecommissions';
   apiImportSellerFile = 'seller/importsellerfile';
+  apiImportSeller = 'seller/importseller';
   apiSaveFooterSection = 'footer/savefooterseccion';
   apiDeleteFooterSection = 'footer/deletefooterseccions';
   apiSaveFooterLink = 'footer/savefooterlink';
@@ -533,6 +534,21 @@ export class ContentService {
 
   public importSellerFile(file: any) {
     return this.http.post(`${this.urlComission + this.apiImportSellerFile}`, { file }, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((user: ResponseService) => {
+        return user;
+      })
+    );
+  }
+
+  public importSeller(file: any) {
+    return this.http.post(`${this.urlComission + this.apiImportSeller}`, { file }, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),

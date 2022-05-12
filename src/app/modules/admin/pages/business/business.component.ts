@@ -74,7 +74,7 @@ export class BusinessComponent implements OnInit, OnDestroy {
         this.fileb64 = reader.result;
         const explit64 = this.fileb64.split('data:application/octet-stream;base64,');
         this.fileb64 = explit64[1];
-        this.content.importSellerFile(this.fileb64).subscribe(document => {
+        this.content.importSellerFile(this.fileb64).subscribe((document) => {
           event.target.value = null;
           if (document.state === 'Success') {
             this.openSnackBar('Los negocios fueron importados correctamente', 'Aceptar');
@@ -84,6 +84,24 @@ export class BusinessComponent implements OnInit, OnDestroy {
         });
       };
     }
+  }
+
+  public uploadFileExcel(e) {
+    const extension = 'xlsx';
+    const size = 10000;
+    this.utils.onFileChangeFiles(e, extension, size, 'file');
+
+    this.utils.fileB64.subscribe((val: any) => {
+      const file = val;
+      this.content.importSeller(file).subscribe((documentSeller) => {
+        e.target.value = null;
+        if (documentSeller.state === 'Success') {
+          this.openSnackBar('Los negocios fueron importados correctamente', 'Aceptar');
+        } else {
+          this.openSnackBar(documentSeller.userMessage, 'Cerrar');
+        }
+      });
+    });
   }
 
   ngOnDestroy() {
