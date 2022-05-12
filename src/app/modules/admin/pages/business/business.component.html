@@ -25,6 +25,17 @@
     <p>Cargar los nuevos vendedores de Marketplace en Éxito y Carulla.</p>
   </span>
 
+  <span fxLayout="row" fxLayoutGap="20px" class="mb-4">
+    <label for="excel" mat-raised-button color="orange" id="download-users" class="custom-file-upload ml-2">
+      Importar vendedores market place<i class="tio-upload_on_cloud ml-2 f-18"></i>
+    </label>
+    
+    <input (change)="uploadFileExcel($event)" id="excel" type="file" style="display: none"/>
+
+    <p>Cargar vendedores Éxito.</p>
+
+  </span>
+
   <span fxLayout="row" fxLayoutGap="20px" class="mt-4 mb-4">
     <button mat-raised-button color="orange" (click)="exportBusiness()" id="download-users" class="ml-2">
       Exportar negocios nuevos <i class="tio-download_from_cloud style-icon"></i>
