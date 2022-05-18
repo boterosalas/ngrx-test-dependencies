@@ -89,7 +89,7 @@ export class LinksService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       )
@@ -104,7 +104,7 @@ export class LinksService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       )
@@ -116,7 +116,7 @@ export class LinksService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       )
@@ -128,7 +128,7 @@ export class LinksService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       )
@@ -152,7 +152,7 @@ export class LinksService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       )
@@ -164,7 +164,7 @@ export class LinksService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       )
@@ -261,7 +261,7 @@ export class LinksService {
       map((resp: ResponseService) => {
         return resp.objectResponse;
       })
-    );
+  );
   }
 
   public getKPI(date: any) {
@@ -628,7 +628,7 @@ export class LinksService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       )
@@ -643,7 +643,7 @@ export class LinksService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       )
@@ -655,7 +655,7 @@ export class LinksService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -670,7 +670,7 @@ export class LinksService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       )
@@ -682,7 +682,7 @@ export class LinksService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       )
@@ -720,7 +720,7 @@ export class LinksService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -742,7 +742,7 @@ export class LinksService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -764,7 +764,7 @@ export class LinksService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -794,7 +794,7 @@ export class LinksService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -809,7 +809,7 @@ export class LinksService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -841,7 +841,7 @@ export class LinksService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
