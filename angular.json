@@ -77,12 +77,15 @@
                 }
               ],
               "optimization": false,
-              "sourceMap": true,
-              "namedChunks": true,
-              "extractLicenses": false,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": true,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": true,
+              "commonChunk": true,
+              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",

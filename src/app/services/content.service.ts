@@ -145,7 +145,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       )
@@ -157,7 +157,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -172,7 +172,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -194,7 +194,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => { })
         )
       )
@@ -205,7 +205,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -220,7 +220,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -235,7 +235,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -250,7 +250,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -265,7 +265,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -280,7 +280,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -311,7 +311,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -326,7 +326,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -341,7 +341,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -356,7 +356,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -371,7 +371,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -386,7 +386,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -522,7 +522,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -537,7 +537,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -552,7 +552,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -567,7 +567,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -582,7 +582,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -597,7 +597,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       )
@@ -609,7 +609,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -623,7 +623,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -637,7 +637,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -662,7 +662,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -733,7 +733,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -748,7 +748,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -793,7 +793,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       )
@@ -907,7 +907,7 @@ export class ContentService {
   }
 
   // public getOffers() {
-  //   return this.http.get(`${this.url + this.apiOffers}`, this.httpOptions).pipe(
+  //   return this.htt1.get(`${this.url + this.apiOffers}`, this.httpOptions).pipe(
   //     map((user: ResponseService) => {
   //       return user.objectResponse;
   //     })
@@ -946,7 +946,7 @@ export class ContentService {
     const apiSearchVetex = `${this.apiProducts}/getProducts`;
     return this.http.post(`${this.url + apiSearchVetex}`, this.sendSearch, this.httpOptions).pipe(
       delay(3000),
-      take(3),
+      take(1),
       tap((errorStatus) => {}),
       map((user: any) => {
         return user.objectResponse;
@@ -982,7 +982,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -996,7 +996,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -1048,7 +1048,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -1081,7 +1081,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -1231,7 +1231,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -1246,7 +1246,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -1262,7 +1262,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -1277,7 +1277,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -1292,7 +1292,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -1307,7 +1307,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -1367,7 +1367,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -1404,7 +1404,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -1419,7 +1419,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
@@ -1449,7 +1449,7 @@ export class ContentService {
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
-          take(3),
+          take(1),
           tap((errorStatus) => {})
         )
       ),
