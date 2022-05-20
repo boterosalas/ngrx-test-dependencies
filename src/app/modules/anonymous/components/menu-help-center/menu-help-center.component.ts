@@ -153,7 +153,7 @@ export class MenuHelpCenterComponent implements OnInit {
       class: 'cualessonlasfechasdepago',
     },
     {
-      name: '¿Por qué no me llegó la comisión?',
+      name: '¿Por qué no me llegó la recompensa?',
       route: '/centro-de-ayuda/comisiones/porque-no-me-llego-la-comision',
       class: 'porquenomellegolacomision',
     },
@@ -181,7 +181,7 @@ export class MenuHelpCenterComponent implements OnInit {
       class: 'comoveolascomisionesqueheganado',
     },
     {
-      name: '¿Cómo puedo saber por cuales productos me pagaron comisión?',
+      name: '¿Cómo puedo saber por cuales productos me pagaron recompensa?',
       route: '/centro-de-ayuda/reportes/como-puedo-saber-por-cuales-productos-me-pagaron-comision',
       class: 'comopuedosaberporcualesproductosmepagaroncomision',
     },

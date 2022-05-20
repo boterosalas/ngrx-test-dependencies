@@ -22,7 +22,7 @@ export class MonthResumeComponent implements OnInit, OnDestroy {
   title = 'Performance del Clicker';
   type = 'ComboChart';
   data = [];
-  columnNames = ['Mes', 'Links Creados', 'Comisión'];
+  columnNames = ['Mes', 'Links Creados', 'Recompensa'];
 
   options = {
     colors: ['#FF6F11', '#B5B8BC'],
@@ -31,7 +31,7 @@ export class MonthResumeComponent implements OnInit, OnDestroy {
     },
     vAxes: {
       0: { title: 'Links Creados' },
-      1: { title: 'Comisión' },
+      1: { title: 'Recompensa' },
     },
     seriesType: 'bars',
     series: {

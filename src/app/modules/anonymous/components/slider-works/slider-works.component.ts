@@ -20,7 +20,7 @@ export class SliderWorksComponent implements OnInit {
     },
     {
       title: 'Gana hasta el 10% en comisiones.',
-      text: 'Por comprar o referir los comercios aliados de clickam, los comercios aliados le pagan a clickam una comisión por enviar tráfico a sus sitios web y clickam comparte esta comisión con los usuarios.',
+      text: 'Por comprar o referir los comercios aliados de clickam, los comercios aliados le pagan a clickam una recompensa por enviar tráfico a sus sitios web y clickam comparte esta recompensa con los usuarios.',
       image: '/assets/img/home/tarjeta-2.png',
     },
     {

@@ -43,7 +43,7 @@ describe('AchievementsComponent', () => {
         {
           icon: '/assets/img/gamification/icon-informacion-bancaria.svg',
           title: 'Información Bancaria',
-          description: 'Completa los datos bancarios para consignar tu comisión',
+          description: 'Completa los datos bancarios para consignar tu recompensa',
           complete: false,
           progress: 0,
           totalProgress: 9,

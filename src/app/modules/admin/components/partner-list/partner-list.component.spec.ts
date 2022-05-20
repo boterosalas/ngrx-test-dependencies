@@ -48,7 +48,7 @@ describe('PartnerListComponent', () => {
       id: 14,
       code: 'movil-exito',
       imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-movil-exito.svg',
-      infoaditional: 'Ahora 10% de comisión',
+      infoaditional: 'Ahora 10% de recompensa',
       description: 'Móvil Éxito',
       orderby: 5,
       active: true,
