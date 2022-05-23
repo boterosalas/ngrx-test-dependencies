@@ -14,10 +14,10 @@
       <p>{{ 'REFER.CLICKER_COMISSION_TEXT' | translate }}</p>
       <form [formGroup]="comissionForm">
         <mat-form-field>
-          <input matInput id="amount" type="text" placeholder="Valor de la comisión" formControlName="amount" spacebar required />
+          <input matInput id="amount" type="text" placeholder="Valor de la recompensa" formControlName="amount" spacebar required />
 
           <mat-error id="reuiredamount" *ngIf="comissionForm.controls.amount.invalid && comissionForm.controls.amount.errors.required">{{
-            'GENERIC.REQUIRED' | translate: { formValue: 'Valor de la comisión' }
+            'GENERIC.REQUIRED' | translate: { formValue: 'Valor de la recompensa' }
           }}</mat-error>
 
           <mat-error id="maxamount" *ngIf="comissionForm.controls.amount.invalid && comissionForm.controls.amount.errors.maxlength">{{

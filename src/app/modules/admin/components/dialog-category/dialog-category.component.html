@@ -48,17 +48,17 @@
             }}</mat-error>
           </mat-form-field>
           <mat-form-field class="selected-report">
-            <mat-select placeholder="Tipo de Comisión" id="tipoComision" formControlName="tipoCommision" class="selected-report">
+            <mat-select placeholder="Tipo de Recompensa" id="tipoComision" formControlName="tipoCommision" class="selected-report">
               <mat-option *ngFor="let selected of selecteds" value="{{ selected.value }}">
                 <span>{{ selected.titulo }}</span>
               </mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field>
-            <input matInput id="comision" type="text" placeholder="Comisión Clicker" formControlName="commision" required />
+            <input matInput id="comision" type="text" placeholder="Recompensa Clicker" formControlName="commision" required />
 
             <mat-error id="requiredName" *ngIf="dateForm.controls.commision.invalid && dateForm.controls.commision.errors.required">{{
-              'GENERIC.REQUIRED' | translate: { formValue: 'Comisión' }
+              'GENERIC.REQUIRED' | translate: { formValue: 'Recompensa' }
             }}</mat-error>
 
             <mat-error id="maxName" *ngIf="dateForm.controls.commision.invalid && dateForm.controls.commision.errors.maxlength">{{
@@ -70,7 +70,7 @@
             }}</mat-error>
 
             <mat-error id="invalidName" *ngIf="dateForm.controls.commision.invalid && dateForm.controls.commision.errors.pattern">{{
-              'GENERIC.INVALID_FORMAT' | translate: { val: 'Comisión' }
+              'GENERIC.INVALID_FORMAT' | translate: { val: 'Recompensa' }
             }}</mat-error>
           </mat-form-field>
           <mat-form-field>
@@ -78,7 +78,7 @@
               matInput
               id="commisionBussiness"
               type="text"
-              placeholder="Comisión Negocio"
+              placeholder="Recompensa Negocio"
               formControlName="commisionBussiness"
               required
             />
@@ -86,7 +86,7 @@
             <mat-error
               id="requiredName"
               *ngIf="dateForm.controls.commisionBussiness.invalid && dateForm.controls.commisionBussiness.errors.required"
-              >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Comisión' } }}</mat-error
+              >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Recompensa' } }}</mat-error
             >
 
             <mat-error
@@ -104,7 +104,7 @@
             <mat-error
               id="invalidName"
               *ngIf="dateForm.controls.commisionBussiness.invalid && dateForm.controls.commisionBussiness.errors.pattern"
-              >{{ 'GENERIC.INVALID_FORMAT' | translate: { val: 'Comisión' } }}</mat-error
+              >{{ 'GENERIC.INVALID_FORMAT' | translate: { val: 'Recompensa' } }}</mat-error
             >
           </mat-form-field>
           <mat-form-field>

@@ -37,12 +37,12 @@
         }}</mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput id="detailCommision" type="text" placeholder="DETALLE DE LA COMISIÓN" formControlName="detailBussiness" required />
+        <input matInput id="detailCommision" type="text" placeholder="DETALLE DE LA RECOMPENSA" formControlName="detailBussiness" required />
 
         <mat-error
           id="requiredName"
           *ngIf="businessForm.controls.detailBussiness.invalid && businessForm.controls.detailBussiness.errors.required"
-          >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Detalle de la comisión' } }}</mat-error
+          >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Detalle de la recompensa' } }}</mat-error
         >
 
         <mat-error
@@ -60,7 +60,7 @@
         <mat-error
           id="invalidName"
           *ngIf="businessForm.controls.detailBussiness.invalid && businessForm.controls.detailBussiness.errors.pattern"
-          >{{ 'GENERIC.INVALID_FORMAT' | translate: { val: 'Detalle de la comisión' } }}</mat-error
+          >{{ 'GENERIC.INVALID_FORMAT' | translate: { val: 'Detalle de la recompensa' } }}</mat-error
         >
       </mat-form-field>
       <mat-form-field>
@@ -156,7 +156,7 @@
       </mat-form-field>
 
       <div>
-        Genera comisión excel:
+        Genera recompensa excel:
         <mat-slide-toggle style="position: relative; top: 1px" formControlName="generateExcel" color="orange2-toggle"></mat-slide-toggle>
       </div>
       <div>

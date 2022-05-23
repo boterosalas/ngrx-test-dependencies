@@ -23,7 +23,7 @@ export class CommissionClickamComponent implements OnInit {
       comissionIcon: '/assets/img/ayuda/comisiones/fechas-de-pago.svg',
     },
     {
-      title: '¿Por qué no me llegó la comisión?',
+      title: '¿Por qué no me llegó la recompensa?',
       internalRoute: '/centro-de-ayuda/comisiones/porque-no-me-llego-la-comision',
       comissionIcon: '/assets/img/ayuda/comisiones/comisiones-compras.svg',
     },

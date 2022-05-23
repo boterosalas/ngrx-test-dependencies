@@ -149,7 +149,7 @@ export const dataAdditionalInfo = [
       },
       {
         code: 'id',
-        name: 'id comisión',
+        name: 'id recompensa',
         value: '',
       },
       {
@@ -174,7 +174,7 @@ export const dataAdditionalInfo = [
       },
       {
         code: 'commissiongenerationdate',
-        name: 'fecha de la comisión',
+        name: 'fecha de la recompensa',
         value: '',
       },
       {
@@ -185,7 +185,7 @@ export const dataAdditionalInfo = [
     ],
   },
   {
-    column: 'Valor & Comisión',
+    column: 'Valor & Recompensa',
     info: [
       {
         code: 'price',
@@ -199,17 +199,17 @@ export const dataAdditionalInfo = [
       },
       {
         code: 'commissionvalue',
-        name: 'comisión del clicker',
+        name: 'recompensa del clicker',
         value: '',
       },
       {
         code: 'commissionbusiness',
-        name: 'comisión del negocio',
+        name: 'recompensa del negocio',
         value: '',
       },
       {
         code: 'totalcommission',
-        name: 'comisión total',
+        name: 'recompensa total',
         value: '',
       },
     ],

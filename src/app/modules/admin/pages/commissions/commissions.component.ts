@@ -163,11 +163,11 @@ export class CommissionsComponent implements OnInit {
     this.typeConfirm = type;
     this.textConfirm =
       type === 'rejected-commission'
-        ? '¿Está seguro que desea rechazar la comisión seleccionada?'
-        : '¿Está seguro que desea eliminar la comisión seleccionada?';
+        ? '¿Está seguro que desea rechazar la recompensa seleccionada?'
+        : '¿Está seguro que desea eliminar la recompensa seleccionada?';
 
     const id = type;
-    const title = type === 'rejected-commission' ? 'Rechazar comisión' : 'Eliminar comisión';
+    const title = type === 'rejected-commission' ? 'Rechazar recompensa' : 'Eliminar recompensa';
     const template = this.templateConfirm;
 
     this.dialog.open(ModalGenericComponent, {

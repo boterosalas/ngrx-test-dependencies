@@ -39,11 +39,11 @@
       </div>
       <div fxLayout="column" fxFlex="50" *ngIf="data.home">
         <h3 class="title m-0">{{ data.title }}</h3>
-        <span class="f-13 gray">Comisión:</span>
+        <span class="f-13 gray">Recompensa:</span>
         <span class="d-block orange-text inf">
           <div [innerHTML]="data.infoaditional"></div>
         </span>
-        <span *ngIf="data.showComission">Comisión:</span>
+        <span *ngIf="data.showComission">Recompensa:</span>
         <span class="discount small text-line" *ngIf="data.discount !== data.price">{{
           data.discount | currency: '':'symbol':'1.0-0'
         }}</span>

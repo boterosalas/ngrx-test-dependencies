@@ -18,7 +18,7 @@ export class ReportClickamComponent implements OnInit {
       icon: '/assets/img/ayuda/reportes/reportes.svg',
     },
     {
-      name: '¿Cómo puedo saber por cuales productos me pagaron comisión?',
+      name: '¿Cómo puedo saber por cuales productos me pagaron recompensa?',
       route: '/centro-de-ayuda/reportes/como-puedo-saber-por-cuales-productos-me-pagaron-comision',
       icon: '/assets/img/ayuda/reportes/productos.svg',
     },

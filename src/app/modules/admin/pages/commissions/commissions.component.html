@@ -62,7 +62,7 @@
         </td>
       </ng-container>
       <ng-container matColumnDef="commissiondate">
-        <th mat-header-cell *matHeaderCellDef style="width: 12%" mat-sort-header="DATE">fecha comisión</th>
+        <th mat-header-cell *matHeaderCellDef style="width: 12%" mat-sort-header="DATE">fecha recompensa</th>
         <td mat-cell *matCellDef="let element; let i = index">
           <p class="m-0 gray-light text-font-cc">
             {{ element.commissiongenerationdate | date: 'dd/MM/yyyy' }}
@@ -70,7 +70,7 @@
         </td>
       </ng-container>
       <ng-container matColumnDef="idcommission">
-        <th mat-header-cell *matHeaderCellDef style="width: 10%" mat-sort-header="IDCOMISION">id comisión</th>
+        <th mat-header-cell *matHeaderCellDef style="width: 10%" mat-sort-header="IDCOMISION">id recompensa</th>
         <td mat-cell *matCellDef="let element" class="text-font">
           <p (click)="openCommission(element)" class="link-style cursor-pointer">
             {{ element.id }}
@@ -155,7 +155,7 @@
 <ng-template #templateAdditionalInfo>
   <div fxLayout="column" fxLayoutAlign="center" class="border-bottom-gray border-blue">
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <h3 class="mb-3 title-name"><strong> No. de comisión: </strong> {{ currentCommission || '-' }}</h3>
+      <h3 class="mb-3 title-name"><strong> No. de recompensa: </strong> {{ currentCommission || '-' }}</h3>
     </div>
   </div>
   <div fxLayout="row" class="border-bottom-gray pb-25">
@@ -169,7 +169,7 @@
   </div>
   <div class="mt-3 mb-3" fxLayout="row" fxLayoutAlign="end">
     <button mat-raised-button color="orange" (click)="openConfirm('rejected-commission')" id="rejected-button" class="ml-2 rejected-button">
-      Rechazar comisión
+      Rechazar recompensa
     </button>
     <button
       mat-raised-button
@@ -178,7 +178,7 @@
       id="eliminated-button"
       class="ml-2 eliminated-button"
     >
-      Eliminar comisión
+      Eliminar recompensa
     </button>
   </div>
 </ng-template>
@@ -195,7 +195,7 @@
       id="rejected-button"
       class="ml-2 rejected-button"
     >
-      Rechazar comisión
+      Rechazar recompensa
     </button>
     <button
       *ngIf="typeConfirm === 'eliminated-commission'"
@@ -205,7 +205,7 @@
       id="eliminated-button"
       class="ml-2 eliminated-button"
     >
-      Eliminar comisión
+      Eliminar recompensa
     </button>
   </div>
 </ng-template>
