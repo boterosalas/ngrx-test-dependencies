@@ -5,13 +5,30 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { JwtModule } from '@auth0/angular-jwt';
+import { ContentService } from 'src/app/services/content.service';
+import { of } from 'rxjs';
 localStorage.setItem(
   'ACCESS_TOKEN',
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU'
 );
 describe('UrlComponent', () => {
+
   let component: UrlComponent;
   let fixture: ComponentFixture<UrlComponent>;
+
+  const mockContentService = jasmine.createSpyObj('ContentService', ['getBusiness']);
+
+  let bussiness = [
+    {
+      id: 0,
+      description: 'Almacenes Carulla',
+    },
+    {
+      id: 1,
+      description: 'Almacenes Exito',
+    },
+  ];
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [UrlComponent],
@@ -30,7 +47,9 @@ describe('UrlComponent', () => {
           },
         }),
       ],
+      providers: [{ provide: ContentService, useValue: mockContentService }]
     }).compileComponents();
+    mockContentService.getBusiness.and.returnValue(of(bussiness));
   }));
 
   beforeEach(() => {

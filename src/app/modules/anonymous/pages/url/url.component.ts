@@ -4,9 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Meta } from '@angular/platform-browser';
 import { AuthService } from 'src/app/services/auth.service';
 import { UtilsService } from 'src/app/services/utils.service';
-import { environment } from 'src/environments/environment';
 import { UserService } from 'src/app/services/user.service';
 import { isPlatformBrowser } from '@angular/common';
+import { ContentService } from 'src/app/services/content.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-url',
@@ -19,6 +20,9 @@ export class UrlComponent implements OnInit {
   show = true;
   showLogin = false;
   exist: any;
+  bussiness: any;
+  getbusiness$ = new BehaviorSubject<any>('');
+
   constructor(
     private link: LinksService,
     private authSvc: AuthService,
@@ -27,6 +31,7 @@ export class UrlComponent implements OnInit {
     private userSvc: UserService,
     private router: Router,
     private metaTagService: Meta,
+    private content: ContentService,
     @Inject(PLATFORM_ID) private platformId: object
   ) {}
 
@@ -45,20 +50,26 @@ export class UrlComponent implements OnInit {
       },
     ]);
   }
+
   getParamCode() {
-    this.route.params.subscribe((param) => {
-      this.code = param.shortCode;
-      this.exist = environment.idsBussinesWidget.find((code) => code.code === this.code);
-      if (!this.authSvc.isLoggedIn() && this.exist) {
-        this.utilsSvc.showloginForm();
-        this.utilsSvc.change.subscribe((isOpen) => {
-          if (this.authSvc.isLoggedIn() && !isOpen) {
+    this.content.getBusiness().subscribe((bussiness) => {
+      this.bussiness = bussiness;
+      this.getbusiness$.next(
+        this.route.params.subscribe((param) => {
+          this.code = param.shortCode;
+          this.exist = this.bussiness.find((code) => code.code === this.code);
+          if (!this.authSvc.isLoggedIn() && this.exist) {
+            this.utilsSvc.showloginForm();
+            this.utilsSvc.change.subscribe((isOpen) => {
+              if (this.authSvc.isLoggedIn() && !isOpen) {
+                this.getUrl();
+              }
+            });
+          } else {
             this.getUrl();
           }
-        });
-      } else {
-        this.getUrl();
-      }
+        })
+      );
     });
   }
 
@@ -77,7 +88,7 @@ export class UrlComponent implements OnInit {
       });
     } else {
       this.link.getUrl(this.code).subscribe((url) => {
-        if (url !== null) {
+        if (url !== null || url !== undefined) {
           if (isPlatformBrowser(this.platformId)) {
             window.location.replace(url);
           }
