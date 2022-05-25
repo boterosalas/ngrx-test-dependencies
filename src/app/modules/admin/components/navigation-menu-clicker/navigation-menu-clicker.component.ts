@@ -201,7 +201,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
   }
 
   deleteNavigationItem(item: any) {
-    this.currentLink = item.id;
+    this.currentLink = item.id || item.Id;
     const title = '';
     const template = this.templateDeleteNavigationItem;
     const id = item.id;
@@ -227,6 +227,7 @@ export class NavigationMenuClickerComponent implements OnInit, OnDestroy {
 
   deleteNavigationItemService() {
     const idMenu = [this.currentLink];
+    console.log(idMenu);
     this.auth.deleteMenu(idMenu).subscribe((deleteNavigationItemService: ResponseService) => {
       if (deleteNavigationItemService.state === 'Success') {
         this.dialog.closeAll();
