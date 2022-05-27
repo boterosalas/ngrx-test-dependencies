@@ -1,6 +1,6 @@
-<button (click)="actionButtton()" [id]="id" [ngClass]="classButton" mat-raised-button [color]="color" [(disabled)]="disabled">
-    <span [fxLayout]="direction" [fxLayoutAlign]="align" fxLayoutGap="{'10px': haveIcon}">
-        <span [ngClass]="{'mr-2': haveIcon }" *ngIf="haveTitle">
+<button (click)="actionButtton()" [id]="id" [ngClass]="classButton + ' ' + gtm" mat-raised-button [color]="color" [(disabled)]="disabled">
+    <span [ngClass]="gtm" [fxLayout]="direction" [fxLayoutAlign]="align" fxLayoutGap="{'10px': haveIcon}">
+        <span [ngClass]="{'mr-2': haveIcon } + ' ' + gtm" *ngIf="haveTitle">
             {{ title }}
         </span>
         <i *ngIf="haveIcon" [ngClass]="classIcon"></i>

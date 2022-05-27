@@ -10,6 +10,7 @@ export class ButtonComponent implements OnInit {
   @Input() title:string;
   @Input() id:string;
   @Input() classButton:string;
+  @Input() gtm = '';
   @Input() classIcon:string;
   @Input() disabled:boolean;
   @Output() action = new EventEmitter();

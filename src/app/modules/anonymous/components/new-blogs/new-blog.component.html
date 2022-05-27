@@ -9,25 +9,25 @@
 >
 
 
-  <div [routerLink]="['/blog']" class="newblog__text cursor-pointer" fxLayout.gt-xs="column" fxFlex="40">
+  <div [routerLink]="['/blog']" class="newblog__text cursor-pointer gtmHomeNuestroBlogVerTodosLosArticulos" fxLayout.gt-xs="column" fxFlex="40">
     <!-- <h3 class="border-bottom-orange-init f-23">Nuestro blog</h3> -->
     <app-title showTitleh2="true" text="Nuestro blog" classWeb="mb-0" classMobile="mb-0"></app-title>
     <p ngClass.gt-xs="f-20" ngClass.xs="f-16">Descubre las últimas novedades y artículos relacionados con nuestra plataforma.</p>
-    <app-button fxHide.xs="true" title="Ver todos los artículos" (action)="routeBlog()" color="gray" classIcon="tio-share_vs style-icon"></app-button>
+    <app-button fxHide.xs="true" gtm="gtmHomeNuestroBlogVerTodosLosArticulos" title="Ver todos los artículos" (action)="routeBlog()" color="gray" classIcon="tio-share_vs style-icon"></app-button>
   </div>
 
-  <div class="newblog__img gtmHomeClicRgistroNuevosNegociosIrAlRegistro" fxLayout.gt-xs="column" fxFlex="50">
+  <div class="newblog__img  gtmHomeNuestroBlogVerTodosLosArticulos" fxLayout.gt-xs="column" fxFlex="50">
     <img
       fxShow.xs="false"
       [routerLink]="['/blog']"
-      class="imagen-responsive-blog responsive-img radius mt-5 cursor-pointer gtmHomeClicRgistroNuevosNegociosIrAlRegistro"
+      class="imagen-responsive-blog responsive-img radius mt-5 cursor-pointer"
       src="assets/img/blog-banner.png"
       alt="blogsdesktop"
     />
     <img
       fxShow.gt-xs="false"
       [routerLink]="['/blog']"
-      class="imagen-responsive-blog-mobile responsive-img radius gtmHomeClicRgistroNuevosNegociosIrAlRegistro"
+      class="imagen-responsive-blog-mobile responsive-img radius"
       src="assets/img/blog-banner.png"
       alt="blogsmobile"
     />
@@ -36,7 +36,7 @@
       <p class="text-line-blog">No te pierdas lo último en novedades de Clickam.</p>
     </div>
     <div class="mt-3 mb-3" fxLayout="row" fxLayoutAlign="center center">
-      <app-button fxHide.gt-xs="true" title="Ver todos los artículos" (action)="routeBlog()" color="gray" classIcon="tio-share_vs style-icon"></app-button>
+      <app-button fxHide.gt-xs="true" gtm="gtmHomeNuestroBlogVerTodosLosArticulos" title="Ver todos los artículos" (action)="routeBlog()" color="gray" classIcon="tio-share_vs style-icon"></app-button>
     </div>
   </div>
 </div>

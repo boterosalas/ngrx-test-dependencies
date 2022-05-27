@@ -29,8 +29,8 @@
         <span *ngIf="showIcon">
           <img src="assets/img/dashboard/icon-{{ i }}.svg" alt="icon" />
         </span>
-        <a mat-list-item ngClass="cursor-pointer gtmHomeClicMenuLightbox{{ item.description }} f-16 {{ item.description }}" id="{{ section }}{{ i }}">
-          <span *ngIf="item.active" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="gtmHomeClicMenuLightbox{{ item.description }}">
+        <a mat-list-item ngClass="cursor-pointer gtmHomeClicMenuLightbox{{ item.description | trim}} f-16 {{ item.description }}" id="{{ section }}{{ i }}">
+          <span *ngIf="item.active" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="gtmHomeClicMenuLightbox{{ item.description | trim}}">
             <i *ngIf="item.icon" ngClass="{{ item.icon }} icmen"></i>
             {{ item.description }}</span
           ></a
@@ -70,7 +70,7 @@
                 routerLink="{{ item.route }}"
                 (click)="hide()"
                 class="menu-mobile"
-                ngClass="gtmHomeClicMenuLightbox{{ item.description }} "
+                ngClass="gtmHomeClicMenuLightbox{{ item.description | trim}} "
                 matRipple
                 >{{ item.description }}</span
               >

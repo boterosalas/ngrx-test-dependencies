@@ -9,7 +9,7 @@
         <span>Menú</span>
       </span>
 
-      <img [routerLink]="['inicio']" class="cursor-pointer logo-mobile" src="assets/img/logo-icon.svg" alt="logo-clickam" />
+      <img [routerLink]="['inicio']" class="cursor-pointer logo-mobile gtmHomeLogoClickam" src="assets/img/logo-icon.svg" alt="logo-clickam" />
     </div>
 
     <div fxLayoutAlign="center center">
@@ -26,24 +26,24 @@
   <!-- Desktop - not login -->
   <div fxHide fxShow.gt-sm="true" *ngIf="!auth.isLoggedIn()" fxLayoutAlign="space-between center" fxLayoutGap="1rem" class="container divContainer">
     <div fxLayout="row" fxLayoutGap="1rem">
-      <img [routerLink]="['inicio']" class="cursor-pointer" src="assets/img/clickam-horizontal.svg" alt="logo-clickam" />
+      <img [routerLink]="['inicio']" class="cursor-pointer gtmHomeLogoClickam" src="assets/img/clickam-horizontal.svg" alt="logo-clickam" />
 
       <mat-divider [vertical]="true"></mat-divider>
 
       <nav>
         <ul fxLayoutAlign="space-between center" fxLayoutGap="1rem" class="links">
-          <li *ngFor="let item of menuItems">
-            <a [routerLink]="item.route">{{ item.description }}</a>
+          <li *ngFor="let item of menuItems" class="gtmHomeMenuClickam{{item.description | trim}}">
+            <a class="gtmHomeMenuClickam{{item.description | trim}}" [routerLink]="item.route">{{ item.description }}</a>
           </li>
         </ul>
       </nav>
     </div>
 
     <div fxLayoutAlign="center center" class="loginButtons">
-      <a class="login-text" mat-button (click)="showLogin()">
-        {{ 'LOGIN.LOGIN' | translate }}
+      <a class="login-text gtmHomeMenuClickamIniciarSesion" mat-button (click)="showLogin()">
+         {{ 'LOGIN.LOGIN' | translate }}
       </a>
-      <a class="btnRegister login-text" mat-button (click)="openRegister()">{{ 'GENERIC.REGISTER2' | translate }}</a>
+      <a class="btnRegister login-text gtmHomeMenuClickamRegistrarse" mat-button (click)="openRegister()">{{ 'GENERIC.REGISTER2' | translate }}</a>
     </div>
   </div>
 
@@ -55,7 +55,7 @@
         <span>Menú</span>
       </span>
 
-      <img [routerLink]="['inicio']" class="cursor-pointer logo" src="assets/img/clickam-horizontal.svg" alt="logo-clickam" />
+      <img [routerLink]="['inicio']" class="cursor-pointer logo gtmHomeLogoClickam" src="assets/img/clickam-horizontal.svg" alt="logo-clickam" />
     </div>
 
     <div fxLayoutAlign="center center" fxLayoutGap="0.5rem" class="divIcons">
