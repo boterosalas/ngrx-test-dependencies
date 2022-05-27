@@ -2,7 +2,7 @@
   {{ 'HELP_CENTER.TOPICS' | translate }}
 </p>
 
-<button mat-button class="show-tutorial" (click)="showOnboarding()"><span>Ver Tutorial</span> <mat-icon>reply</mat-icon></button>
+<button mat-button class="show-tutorial gtmTemasPrincipalesVerTutorial" (click)="showOnboarding()"><span>Ver Tutorial</span> <mat-icon>reply</mat-icon></button>
 
 <mat-accordion>
   <mat-expansion-panel
@@ -11,8 +11,8 @@
     (opened)="setStep(0)"
     class="help-center expansion-panel-box-shadow"
   >
-    <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusobreclickam">
-      <span class="gtmCentroDeAyudaClicMenusobreclickam">
+    <mat-expansion-panel-header class="head gtmTemasPrincipalesSobreClickam">
+      <span class="gtmTemasPrincipalesSobreClickam">
         <a href="/centro-de-ayuda" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">
           {{ 'HELP_CENTER.ABOUT_CLICKAM.ABOUT_CLICKAM' | translate }}
         </a>
@@ -36,8 +36,8 @@
     (opened)="setStep(1)"
     class="help-center expansion-panel-box-shadow"
   >
-    <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusobreclickamconfiguracionesdecuenta">
-      <span class="gtmCentroDeAyudaClicMenusobreclickamconfiguracionesdecuenta">
+    <mat-expansion-panel-header class="head gtmTemasPrincipalesConfiguracionDeCuenta">
+      <span class="gtmTemasPrincipalesConfiguracionDeCuenta">
         <a href="/centro-de-ayuda/configuraciones-de-cuenta" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">
           {{ 'HELP_CENTER.CONFIGURATIONS.CONFIGURATIONS' | translate }}
         </a>
@@ -61,8 +61,8 @@
     (opened)="setStep(2)"
     class="help-center expansion-panel-box-shadow"
   >
-    <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenuscomisiones">
-      <span class="gtmCentroDeAyudaClicMenuscomisiones">
+    <mat-expansion-panel-header class="head gtmTemasPrincipalesComisiones">
+      <span class="gtmTemasPrincipalesComisiones">
         <a href="/centro-de-ayuda/comisiones" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">
           {{ 'HELP_CENTER.COMMISSIONS.COMMISSIONS' | translate }}
         </a>
@@ -86,8 +86,8 @@
     (opened)="setStep(3)"
     class="help-center expansion-panel-box-shadow"
   >
-    <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusreportes">
-      <span class="gtmCentroDeAyudaClicMenusreportes">
+    <mat-expansion-panel-header class="head gtmTemasPrincipalesReportes">
+      <span class="gtmTemasPrincipalesReportes">
         <a href="/centro-de-ayuda/reportes" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">
           {{ 'HELP_CENTER.REPORTS.REPORTS' | translate }}
         </a>
@@ -111,9 +111,9 @@
     (opened)="setStep(4)"
     class="help-center expansion-panel-box-shadow"
   >
-    <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusrefiereaunamigo">
+    <mat-expansion-panel-header class="head gtmTemasPrincipalesRefiereAUnAmigo">
       <span
-        class="gtmCentroDeAyudaClicMenusrefiereaunamigo"
+        class="gtmTemasPrincipalesRefiereAUnAmigo"
         >
         <a href="/centro-de-ayuda/refiere-a-un-amigo" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">
           {{ 'HELP_CENTER.REFER.REFER' | translate }}
@@ -139,9 +139,9 @@
     (opened)="setStep(5)"
     class="help-center expansion-panel-box-shadow"
   >
-    <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusofertas">
+    <mat-expansion-panel-header class="head gtmTemasPrincipalesOfertas">
       <span
-        class="gtmCentroDeAyudaClicMenusofertas"
+        class="gtmTemasPrincipalesOfertas"
         >
         <a href="/centro-de-ayuda/ofertas" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">
           {{ 'HELP_CENTER.OFFERS.OFFERS' | translate }}
@@ -167,9 +167,9 @@
     (opened)="setStep(6)"
     class="help-center expansion-panel-box-shadow"
   >
-    <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenusotraspreguntasfrecuentes">
+    <mat-expansion-panel-header class="head gtmTemasPrincipalesOtrasPreguntas">
       <span
-        class="gtmCentroDeAyudaClicMenusotraspreguntasfrecuentes"
+        class="gtmTemasPrincipalesOtrasPreguntas"
         >
         <a href="/centro-de-ayuda/otras-preguntas-frecuentes" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">
           {{ 'HELP_CENTER.QUESTIONS.QUESTIONS' | translate }}
@@ -195,9 +195,9 @@
     (opened)="setStep(7)"
     class="help-center expansion-panel-box-shadow"
   >
-    <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenuscontactalosnegocios">
+    <mat-expansion-panel-header class="head gtmTemasPrincipalesContactaLosNegocios">
       <span
-        class="gtmCentroDeAyudaClicMenuscontactalosnegocios"
+        class="gtmTemasPrincipalesContactaLosNegocios"
         >
         <a href="/centro-de-ayuda/contacta-los-negocios" routerLinkActive="active-topic" [routerLinkActiveOptions]="{ exact: true }">
           {{ 'HELP_CENTER.CONTACTS.CONTACTS' | translate }}
@@ -223,9 +223,9 @@
     (opened)="setStep(8)"
     class="help-center expansion-panel-box-shadow"
   >
-    <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenuscontactanos">
+    <mat-expansion-panel-header class="head gtmTemasPrincipalesContactarnos">
       <span
-        class="gtmCentroDeAyudaClicMenuscontactanos"
+        class="gtmTemasPrincipalesContactarnos"
         [routerLink]="['/centro-de-ayuda/contactanos']"
         routerLinkActive="active-topic"
         [routerLinkActiveOptions]="{ exact: true }"
@@ -254,9 +254,9 @@
     (opened)="setStep(9)"
     class="help-center expansion-panel-box-shadow"
   >
-    <mat-expansion-panel-header class="head gtmCentroDeAyudaClicMenuscontactanos">
+    <mat-expansion-panel-header class="head gtmTemasPrincipalesReportarNovedad">
       <span
-        class="gtmCentroDeAyudaClicMenuscontactanos"
+        class="gtmTemasPrincipalesReportarNovedad"
         [routerLink]="['/centro-de-ayuda/reportar']"
         routerLinkActive="active-topic"
         [routerLinkActiveOptions]="{ exact: true }"
@@ -276,7 +276,7 @@
   </mat-expansion-panel>
   <mat-list-item class="help-center itemli expansion-panel-box-shadow" *ngIf="reportVisible">
     <span
-      class="gtmCentroDeAyudaClicMenusconsultar"
+      class="gtmTemasPrincipalesConsultarOrden"
       [routerLink]="['/centro-de-ayuda/consultar']"
       routerLinkActive="active-topic"
       [routerLinkActiveOptions]="{ exact: true }"
