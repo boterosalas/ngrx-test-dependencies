@@ -3,6 +3,6 @@
     <span class="galano-bold purple-text f-18">{{money}}</span>
     <div fxLayout="row" fxLayoutAlign="space-between center" class="mt-3">
         <i class="tio-info f-16 purple-text" matTooltip="{{textToolTip}}"></i>
-        <app-button title="Ver detalles" (action)="openModal()" [haveIcon]="false" color="purple2" classButton="shadow-purple"></app-button>
+        <app-button [gtm]="gtm" title="Ver detalles" (action)="openModal()" [haveIcon]="false" color="purple2" classButton="shadow-purple"></app-button>
     </div>
 </mat-card>

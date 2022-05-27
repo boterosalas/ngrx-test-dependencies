@@ -10,18 +10,21 @@
       [money]="account | currency: '':'symbol':'1.0-0'"
       textToolTip="Las compras de tus referidos efectivas que se generen por medio de tus links durante el mes, se pagarán al siguiente mes entre los días 15 y 20."
       (open)="break('commissions')"
+      gtm="gtmPanelReporteDeRecompensasRecompensasdeestemes"
     ></app-reward-card>
     <app-reward-card
       title="Saldo pendiente por pagar"
       [money]="available | currency: '':'symbol':'1.0-0'"
       textToolTip="Este dinero corresponde a los saldos acumulados en los saldos anteriores, y te será pagado cuando completes el monto mínimo."
       (open)="break('balance')"
+      gtm="gtmPanelReporteDeRecompensasSaldopendienteporpagar"
     ></app-reward-card>
     <app-reward-card
       title="Recompensas rechazadas"
       [money]="rejected | currency: '':'symbol':'1.0-0'"
       textToolTip="Estas comisiones no se hicieron efectivas, ya que el negocio confirmó que la compra no fue realizada de manera exitosa."
       (open)="break('rejected-commissions')"
+      gtm="gtmPanelReporteDeRecompensasRecompensasrechazadas"
     ></app-reward-card>
   </div>
   <br fxHide.gt-xs="true"/>
