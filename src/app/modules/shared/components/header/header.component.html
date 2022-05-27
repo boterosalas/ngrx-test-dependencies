@@ -59,9 +59,9 @@
     </div>
 
     <div fxLayoutAlign="center center" fxLayoutGap="0.5rem" class="divIcons">
-      <span *ngIf="role === 'CLICKER'" fxLayoutAlign="center center" class="iconContainer" [matMenuTriggerFor]="notificationsmenu">
+      <span *ngIf="role === 'CLICKER'" fxLayoutAlign="center center" class="iconContainer gtmIconoNotificaciones" [matMenuTriggerFor]="notificationsmenu">
         <span  [matBadge]="total" matBadgeOverlap="false" matBadgeColor="warn" matBadgeSize="small"
-          ><i class="tio-notifications icon cursor-pointer"></i
+          ><i class="tio-notifications icon cursor-pointer gtmIconoNotificaciones"></i
         ></span>
       </span>
       <mat-menu #notificationsmenu="matMenu" xPosition="before">
@@ -89,26 +89,26 @@
           </mat-list>
 
           <div class="mt-3" *ngIf="!notifications.length" fxLayout="row" fxLayoutAlign="center center">
-            <span class="not-notifications" fxLayout="column" fxLayoutAlign="center center">
-              <i class="tio-notifications"></i>
+            <span class="not-notifications gtmIconoNotificaciones" fxLayout="column" fxLayoutAlign="center center">
+              <i class="tio-notifications gtmIconoNotificaciones"></i>
               <p>¡Pronto recibirás grandes noticias!</p>
             </span>
           </div>
 
-          <span class="separate"></span>
-          <button class="open-notifications" [routerLink]="['/notificaciones']" mat-menu-item>Abrir Notificaciones</button>
+          <span class="separate gtmIconoNotificaciones"></span>
+          <button class="open-notifications gtmIconoNotificaciones" [routerLink]="['/notificaciones']" mat-menu-item>Abrir Notificaciones</button>
         </div>
       </mat-menu>
-      <span *ngIf="role === 'CLICKER'" fxLayoutAlign="center center" class="iconContainer">
-        <button [routerLink]="['/click-academy']"><i class="tio-education icon cursor-pointer"></i></button>
+      <span *ngIf="role === 'CLICKER'" fxLayoutAlign="center center" class="iconContainer gtmIconoClicClickAcademy">
+        <button [routerLink]="['/click-academy']"><i class="tio-education icon cursor-pointer gtmIconoClicClickAcademy"></i></button>
       </span>
-      <span fxLayoutAlign="center center" class="iconContainer" [matMenuTriggerFor]="menu">
-        <i class="tio-account_circle icon cursor-pointer"></i>
+      <span fxLayoutAlign="center center" class="iconContainer gtmIconoPerfil" [matMenuTriggerFor]="menu">
+        <i class="tio-account_circle icon cursor-pointer gtmIconoPerfil"></i>
       </span>
       <mat-menu #menu="matMenu" xPosition="before">
         <div class="menuProfile">
-          <button *ngIf="role === 'CLICKER'" [routerLink]="['/mi-perfil']" mat-menu-item>Mi perfil</button>
-          <button (click)="logout()" mat-menu-item>Cerrar sesión</button>
+          <button class="gtmPerfilMenuLightboxMiPerfil" *ngIf="role === 'CLICKER'" [routerLink]="['/mi-perfil']" mat-menu-item>Mi perfil</button>
+          <button class="gtmPerfilMenuCerrarsesion" (click)="logout()" mat-menu-item>Cerrar sesión</button>
         </div>
       </mat-menu>
     </div>

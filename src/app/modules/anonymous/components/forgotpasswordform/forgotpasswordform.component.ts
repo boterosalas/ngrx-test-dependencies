@@ -8,6 +8,8 @@ import { LoaderService } from 'src/app/services/loader.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { AuthService } from 'src/app/services/auth.service';
 
+declare var dataLayer: any;
+
 @Component({
   selector: 'app-forgotpasswordform',
   templateUrl: './forgotpasswordform.component.html',
@@ -68,6 +70,14 @@ export class ForgotpasswordformComponent implements OnInit, OnDestroy {
       (resp: ResponseService) => {
         this.loading.hide();
         if (resp.state !== 'Success') {
+
+          dataLayer.push({
+            event: 'pushEventGA',
+            categoria: 'CambioDeContrasena',
+            accion: 'ClicContinuar',
+            etiqueta: 'CambioDeContrasenaAceptarExitoso',
+          });
+
           Swal.fire(
             (this.swalOptError = {
               ...this.swalOptError,
