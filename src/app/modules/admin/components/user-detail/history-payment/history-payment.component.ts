@@ -145,7 +145,7 @@ export class HistoryPaymentComponent implements OnInit, OnDestroy {
 
       case 'rejected-commissions':
         template = this.templateBreak3;
-        title = 'Detalle comisiones rechazadas';
+        title = 'Detalle recompensas rechazadas';
         id = 'break3-modal';
         break;
 

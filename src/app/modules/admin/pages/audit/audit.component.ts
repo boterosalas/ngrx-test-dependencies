@@ -58,7 +58,7 @@ export class AuditComponent implements OnInit, OnDestroy {
       value: '3',
     },
     {
-      titulo: 'Administración de comisiones',
+      titulo: 'Administración de recompensas',
       value: '4',
     },
   ];

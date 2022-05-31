@@ -28,7 +28,7 @@ export class AboutClickamComponent implements OnInit {
       icon: '/assets/img/ayuda/sobre-clickam/como-funciona.svg',
     },
     {
-      name: '¿Cómo gano comisiones?',
+      name: '¿Cómo gano recompensas?',
       route: '/centro-de-ayuda/sobre-clickam/como-gano-comisiones',
       icon: '/assets/img/ayuda/sobre-clickam/comisiones.svg',
     },

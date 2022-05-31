@@ -40,7 +40,7 @@ export class DeleteformComponent implements OnInit {
       value: false,
     },
     {
-      title: 'Tuve inconvenientes con mis comisiones',
+      title: 'Tuve inconvenientes con mis recompensas',
       value: false,
     },
     {

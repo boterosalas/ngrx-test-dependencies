@@ -65,7 +65,7 @@ export class DialogFilterUsersComponent implements OnInit, OnDestroy {
   commissions = [
     { name: 'Menos de $10.000', value: 'MENOR' },
     { name: 'Mas de $10.000', value: 'MAYOR' },
-    { name: 'Comisiones del periodo', value: 'PERIODO' },
+    { name: 'Recompensas del periodo', value: 'PERIODO' },
   ];
 
   accountBank = [

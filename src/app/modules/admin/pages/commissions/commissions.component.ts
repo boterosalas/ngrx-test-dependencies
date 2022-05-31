@@ -221,10 +221,10 @@ export class CommissionsComponent implements OnInit {
           let text;
           let type;
           if (status.state === 'Success') {
-            text = 'Se ha subido exitosamente el archivos de comisiones rechazadas.';
+            text = 'Se ha subido exitosamente el archivos de recompensas rechazadas.';
             type = 'success';
           } else {
-            text = 'No pudimos cargar el archivos de comisiones rechazadas.';
+            text = 'No pudimos cargar el archivos de recompensas rechazadas.';
             type = 'error';
           }
 
@@ -235,10 +235,10 @@ export class CommissionsComponent implements OnInit {
           let text;
           let type;
           if (remove.state === 'Success') {
-            text = 'Se ha subido exitosamente el archivos de comisiones eliminadas.';
+            text = 'Se ha subido exitosamente el archivos de recompensas eliminadas.';
             type = 'success';
           } else {
-            text = 'No pudimos cargar el archivos de comisiones eliminadas.';
+            text = 'No pudimos cargar el archivos de recompensas eliminadas.';
             type = 'error';
           }
 
