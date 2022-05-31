@@ -12,6 +12,7 @@ export class RewardCardComponent implements OnInit {
   @Input() title: string;
   @Input() money: string;
   @Input() textToolTip: string;
+  @Input() gtm: string;
   @Output() open = new EventEmitter();
 
   ngOnInit(): void {

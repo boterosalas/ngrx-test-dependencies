@@ -432,7 +432,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     ) {
       Swal.fire({
         title: '¡Registra tus datos bancarios!',
-        text: `Recuerda que para recibir el pago de tus comisiones , debes registrar tus datos bancarios. (Tienes comisiones pendientes por $${this.paymentPending})`,
+        text: `Recuerda que para recibir el pago de tus recompensas , debes registrar tus datos bancarios. (Tienes recompensas pendientes por $${this.paymentPending})`,
         type: 'info',
         showCancelButton: true,
         showCloseButton: true,

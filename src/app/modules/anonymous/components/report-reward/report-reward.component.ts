@@ -58,7 +58,7 @@ export class ReportRewardComponent implements OnInit, OnDestroy {
     switch (key) {
       case 'commissions':
         template = this.templateBreak;
-        title = 'Detalle comisiones de este mes';
+        title = 'Detalle recompensas de este mes';
         id = 'break1-modal';
         break;
 
@@ -70,7 +70,7 @@ export class ReportRewardComponent implements OnInit, OnDestroy {
 
       case 'rejected-commissions':
         template = this.templateBreak3;
-        title = 'Detalle comisiones rechazadas';
+        title = 'Detalle recompensas rechazadas';
         id = 'break3-modal';
         break;
 

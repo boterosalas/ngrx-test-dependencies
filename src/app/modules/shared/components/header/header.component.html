@@ -9,7 +9,7 @@
         <span>Menú</span>
       </span>
 
-      <img [routerLink]="['inicio']" class="cursor-pointer logo-mobile" src="assets/img/logo-icon.svg" alt="logo-clickam" />
+      <img [routerLink]="['inicio']" class="cursor-pointer logo-mobile gtmHomeLogoClickam" src="assets/img/logo-icon.svg" alt="logo-clickam" />
     </div>
 
     <div fxLayoutAlign="center center">
@@ -26,24 +26,24 @@
   <!-- Desktop - not login -->
   <div fxHide fxShow.gt-sm="true" *ngIf="!auth.isLoggedIn()" fxLayoutAlign="space-between center" fxLayoutGap="1rem" class="container divContainer">
     <div fxLayout="row" fxLayoutGap="1rem">
-      <img [routerLink]="['inicio']" class="cursor-pointer" src="assets/img/clickam-horizontal.svg" alt="logo-clickam" />
+      <img [routerLink]="['inicio']" class="cursor-pointer gtmHomeLogoClickam" src="assets/img/clickam-horizontal.svg" alt="logo-clickam" />
 
       <mat-divider [vertical]="true"></mat-divider>
 
       <nav>
         <ul fxLayoutAlign="space-between center" fxLayoutGap="1rem" class="links">
-          <li *ngFor="let item of menuItems">
-            <a [routerLink]="item.route">{{ item.description }}</a>
+          <li *ngFor="let item of menuItems" class="gtmHomeMenuClickam{{item.description | trim}}">
+            <a class="gtmHomeMenuClickam{{item.description | trim}}" [routerLink]="item.route">{{ item.description }}</a>
           </li>
         </ul>
       </nav>
     </div>
 
     <div fxLayoutAlign="center center" class="loginButtons">
-      <a class="login-text" mat-button (click)="showLogin()">
-        {{ 'LOGIN.LOGIN' | translate }}
+      <a class="login-text gtmHomeMenuClickamIniciarSesion" mat-button (click)="showLogin()">
+         {{ 'LOGIN.LOGIN' | translate }}
       </a>
-      <a class="btnRegister login-text" mat-button (click)="openRegister()">{{ 'GENERIC.REGISTER2' | translate }}</a>
+      <a class="btnRegister login-text gtmHomeMenuClickamRegistrarse" mat-button (click)="openRegister()">{{ 'GENERIC.REGISTER2' | translate }}</a>
     </div>
   </div>
 
@@ -55,13 +55,13 @@
         <span>Menú</span>
       </span>
 
-      <img [routerLink]="['inicio']" class="cursor-pointer logo" src="assets/img/clickam-horizontal.svg" alt="logo-clickam" />
+      <img [routerLink]="['inicio']" class="cursor-pointer logo gtmHomeLogoClickam" src="assets/img/clickam-horizontal.svg" alt="logo-clickam" />
     </div>
 
     <div fxLayoutAlign="center center" fxLayoutGap="0.5rem" class="divIcons">
-      <span *ngIf="role === 'CLICKER'" fxLayoutAlign="center center" class="iconContainer" [matMenuTriggerFor]="notificationsmenu">
+      <span *ngIf="role === 'CLICKER'" fxLayoutAlign="center center" class="iconContainer gtmIconoNotificaciones" [matMenuTriggerFor]="notificationsmenu">
         <span  [matBadge]="total" matBadgeOverlap="false" matBadgeColor="warn" matBadgeSize="small"
-          ><i class="tio-notifications icon cursor-pointer"></i
+          ><i class="tio-notifications icon cursor-pointer gtmIconoNotificaciones"></i
         ></span>
       </span>
       <mat-menu #notificationsmenu="matMenu" xPosition="before">
@@ -89,26 +89,26 @@
           </mat-list>
 
           <div class="mt-3" *ngIf="!notifications.length" fxLayout="row" fxLayoutAlign="center center">
-            <span class="not-notifications" fxLayout="column" fxLayoutAlign="center center">
-              <i class="tio-notifications"></i>
+            <span class="not-notifications gtmIconoNotificaciones" fxLayout="column" fxLayoutAlign="center center">
+              <i class="tio-notifications gtmIconoNotificaciones"></i>
               <p>¡Pronto recibirás grandes noticias!</p>
             </span>
           </div>
 
-          <span class="separate"></span>
-          <button class="open-notifications" [routerLink]="['/notificaciones']" mat-menu-item>Abrir Notificaciones</button>
+          <span class="separate gtmIconoNotificaciones"></span>
+          <button class="open-notifications gtmIconoNotificaciones" [routerLink]="['/notificaciones']" mat-menu-item>Abrir Notificaciones</button>
         </div>
       </mat-menu>
-      <span *ngIf="role === 'CLICKER'" fxLayoutAlign="center center" class="iconContainer">
-        <button [routerLink]="['/click-academy']"><i class="tio-education icon cursor-pointer"></i></button>
+      <span *ngIf="role === 'CLICKER'" fxLayoutAlign="center center" class="iconContainer gtmIconoClicClickAcademy">
+        <button [routerLink]="['/click-academy']"><i class="tio-education icon cursor-pointer gtmIconoClicClickAcademy"></i></button>
       </span>
-      <span fxLayoutAlign="center center" class="iconContainer" [matMenuTriggerFor]="menu">
-        <i class="tio-account_circle icon cursor-pointer"></i>
+      <span fxLayoutAlign="center center" class="iconContainer gtmIconoPerfil" [matMenuTriggerFor]="menu">
+        <i class="tio-account_circle icon cursor-pointer gtmIconoPerfil"></i>
       </span>
       <mat-menu #menu="matMenu" xPosition="before">
         <div class="menuProfile">
-          <button *ngIf="role === 'CLICKER'" [routerLink]="['/mi-perfil']" mat-menu-item>Mi perfil</button>
-          <button (click)="logout()" mat-menu-item>Cerrar sesión</button>
+          <button class="gtmPerfilMenuLightboxMiPerfil" *ngIf="role === 'CLICKER'" [routerLink]="['/mi-perfil']" mat-menu-item>Mi perfil</button>
+          <button class="gtmPerfilMenuCerrarsesion" (click)="logout()" mat-menu-item>Cerrar sesión</button>
         </div>
       </mat-menu>
     </div>

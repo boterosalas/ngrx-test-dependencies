@@ -3,11 +3,11 @@
     <span fxLayout="column">
         <app-title showTitleh2="true" [text]="title" [classWeb]="classTitleWeb" [classMobile]="classTitleMobile"></app-title>
         <div [innerHTML]="text" [ngClass.gt-xs]="classTextWeb" [ngClass.xs]="classTextMobile"></div>
-        <app-button *ngIf="!chrome" [haveIcon]="false" [title]="titleButton" (action)="openRegister()" classButton="shadow-purple" ></app-button>
+        <app-button *ngIf="!chrome" [haveIcon]="false" [title]="titleButton" (action)="openRegister()" classButton="shadow-purple" [gtm]="gtm" ></app-button>
 
-        <a *ngIf="chrome" href="https://chrome.google.com/webstore/detail/clickam-cashback/jnfdngchdoaemojfkecanhlfgelofibh?authuser=1" target="_blank" class="bw" mat-raised-button color="chrome" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
-            <img class="pr-2" src="assets/img/chrome.svg" alt="chrome" />
-            <span>Instalar Clickam en Chrome</span> 
+        <a *ngIf="chrome" href="https://chrome.google.com/webstore/detail/clickam-cashback/jnfdngchdoaemojfkecanhlfgelofibh?authuser=1" target="_blank" class="bw gtmHomeNuncaOlvidarasGanarInstalarClickamEnChrome" mat-raised-button color="chrome" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+            <img class="pr-2 gtmHomeNuncaOlvidarasGanarInstalarClickamEnChrome" src="assets/img/chrome.svg" alt="chrome" />
+            <span class="gtmHomeNuncaOlvidarasGanarInstalarClickamEnChrome">Instalar Clickam en Chrome</span> 
           </a>
 
     </span>

@@ -116,14 +116,14 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       code: 'NOTVERIFIED',
       status: 'No verificada',
       title: 'Verificación de cuenta',
-      description: 'Tu cuenta entrará en estado de verificación pronto, una vez sea verificada, se te depositarán las comisiones en ella.',
+      description: 'Tu cuenta entrará en estado de verificación pronto, una vez sea verificada, se te depositarán las recompensas en ella.',
       icon: '/assets/img/icon-info-white.svg',
     },
     {
       code: 'INCOMPLETE',
       status: 'No verificada',
       title: 'Verificación de cuenta',
-      description: 'Tu cuenta entrará en estado de verificación pronto, una vez sea verificada, se te depositarán las comisiones en ella.',
+      description: 'Tu cuenta entrará en estado de verificación pronto, una vez sea verificada, se te depositarán las recompensas en ella.',
       icon: '/assets/img/icon-info-white.svg',
       className: 'rejected'
     },

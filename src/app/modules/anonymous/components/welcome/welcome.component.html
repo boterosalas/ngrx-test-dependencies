@@ -8,9 +8,9 @@
             <p ngClass.gt-xs="f-20" ngClass.xs="f-16">{{text}}</p>
             
             <span fxLayout.gt-xs="row" fxLayout.xs="column-reverse" fxLayoutGap="20px">
-                <app-button *ngIf="buttonHome" [haveIcon]="false" title="Empezar" (action)="begin()" classButton="shadow-purple"></app-button>
+                <app-button *ngIf="buttonHome" [haveIcon]="false" title="Empezar" (action)="begin()" gtm="gtmHomeBannerBienvenidoEmpezar" classButton="shadow-purple"></app-button>
                 <a mat-raised-button color="orange" href="https://forms.office.com/Pages/ResponsePage.aspx?id=Y0n5QDQbzkWl-28f3i8aJ_6ywHfvDe1MmDmVPKMNpdtUQjQxV0xSNTZBMjFOTTJJOUdKSUtQTVk2SC4u" target="_blank"  *ngIf="buttonAllies" class="shadow-purple">¡Unirme!</a>
-                <app-button direction="row-reverse" color="yellow-not-bg" title="Ver cómo funciona" (action)="works()" classButton="shadow-purple p-0" classIcon="tio-play_circle f-40 mr-2"></app-button>
+                <app-button direction="row-reverse" color="yellow-not-bg" title="Ver cómo funciona" (action)="works()" gtm="gtmHomeBannerBienvenidovercomofunciona" classButton="shadow-purple p-0" classIcon="tio-play_circle f-40 mr-2"></app-button>
             </span>
 
         </span>

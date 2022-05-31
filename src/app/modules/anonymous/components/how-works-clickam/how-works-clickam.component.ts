@@ -27,7 +27,7 @@ export class HowWorksClickamComponent implements OnInit {
     },
     {
       icon: '/assets/img/home/gana-comisiones.svg',
-      title: '6. Gana comisiones',
+      title: '6. Gana recompensas',
     },
   ];
 

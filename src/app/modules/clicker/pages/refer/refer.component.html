@@ -9,8 +9,8 @@
   <mat-tab-group>
     <!-- REFERS -->
     <mat-tab>
-      <ng-template mat-tab-label>
-        <span>{{ 'REFER.REFER' | translate }}</span>
+      <ng-template mat-tab-label class="gtmRefiereYGanaReferir">
+        <span class="gtmRefiereYGanaReferir">{{ 'REFER.REFER' | translate }}</span>
       </ng-template>
       <div>
         <app-refer-share #share (shareMobile)="shareEvent($event)" (urlClicker)="copyInputMessage($event)"></app-refer-share>
@@ -20,8 +20,8 @@
 
     <!-- MY REFERS -->
     <mat-tab>
-      <ng-template mat-tab-label>
-        <span>{{ 'REFER.MY_REFERS' | translate }}</span>
+      <ng-template mat-tab-label class="gtmRefiereYGanaMisReferidos">
+        <span class="gtmRefiereYGanaMisReferidos">{{ 'REFER.MY_REFERS' | translate }}</span>
       </ng-template>
       <app-table-refer [dataSource]="dataSource"></app-table-refer>
       <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageIndex]="pageIndex" (page)="pagination($event)"></mat-paginator>

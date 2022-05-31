@@ -68,7 +68,7 @@
           matInput
           id="nombreTabla"
           type="text"
-          placeholder="NOMBRE EN TABLA DE COMISIONES"
+          placeholder="NOMBRE EN TABLA DE RECOMPENSAS"
           formControlName="nameTableCommision"
           required
         />
@@ -76,7 +76,7 @@
         <mat-error
           id="requiredName"
           *ngIf="businessForm.controls.nameTableCommision.invalid && businessForm.controls.nameTableCommision.errors.required"
-          >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Nombre en tabla de comisiones' } }}</mat-error
+          >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Nombre en tabla de recompensas' } }}</mat-error
         >
 
         <mat-error

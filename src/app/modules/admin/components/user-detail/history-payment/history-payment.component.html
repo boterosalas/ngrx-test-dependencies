@@ -4,7 +4,7 @@
     Classtag="gtmReportesClicMisComisionesVerDetalle1"
     classCard="color-card mw-a admin"
     imgCard="assets/img/icon-com.svg"
-    text="Comisiones de este mes"
+    text="Recompensas de este mes"
     textToolTip="Las compras de tus referidos efectivas que se generen por medio de tus links durante el mes, se pagarán al siguiente mes entre los días 15 y 20."
     (openDetail)="break('commissions')"
     [showIcon]="false"
@@ -28,8 +28,8 @@
     Classtag="gtmReportesClicMisComisionesVerDetalle3"
     classCard="color-card-3 mw-a admin"
     imgCard="assets/img/icon-rejected-com.svg"
-    text="Comisiones rechazadas"
-    textToolTip="Estas comisiones no se hicieron efectivas, ya que el negocio confirmó que la compra no fue realizada de manera exitosa."
+    text="Recompensas rechazadas"
+    textToolTip="Estas recompensas no se hicieron efectivas, ya que el negocio confirmó que la compra no fue realizada de manera exitosa."
     (openDetail)="break('rejected-commissions')"
     [showIcon]="false"
     direction="column-reverse"
@@ -37,7 +37,7 @@
 
   <app-card-data-total
     [radicado]="totalAcumulated | currency: '':'symbol':'1.0-0'"
-    description="Total comisiones"
+    description="Total recompensas"
     classTotal="color-card-2 admin"
     [linksTotal]="totalLinks"
     [productosTotales]="totalProducts"
@@ -95,7 +95,7 @@
 </ng-template>
 
 <ng-template #templateBreak3>
-  <p>Estas comisiones no se hicieron efectivas, ya que el negocio confirmó que la compra no fue realizada de manera exitosa.</p>
+  <p>Estas recompensas no se hicieron efectivas, ya que el negocio confirmó que la compra no fue realizada de manera exitosa.</p>
   <app-table-detail-comission [dataSource]="dataBreak3"></app-table-detail-comission>
 </ng-template>
 
