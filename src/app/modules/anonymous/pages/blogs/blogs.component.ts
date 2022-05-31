@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
 import { UtilsService } from 'src/app/services/utils.service';
+declare var dataLayer: any;
 
 @Component({
   selector: 'app-blogs',
@@ -118,5 +119,13 @@ export class BlogsComponent implements OnInit {
   orderByFun(element) {
     this.orderBy = element.value;
     this.searchUser();
+
+    dataLayer.push({
+      event: 'pushEventGA',
+      categoria: 'Blog',
+      accion: 'ClicOrdenar',
+      etiqueta: element.value
+    });
+
   }
 }
