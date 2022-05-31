@@ -2,6 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import moment from 'moment';
 import { of } from 'rxjs';
+import { TrimPipe } from 'src/app/pipes/trim.pipe';
 import { ContentService } from 'src/app/services/content.service';
 
 import { ListBlogsComponent } from './list-blogs.component';
@@ -33,7 +34,7 @@ describe('ListBlogsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ListBlogsComponent ],
+      declarations: [ ListBlogsComponent, TrimPipe ],
       imports: [
         HttpClientTestingModule
       ],

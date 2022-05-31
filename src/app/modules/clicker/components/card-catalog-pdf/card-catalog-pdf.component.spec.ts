@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { TrimPipe } from 'src/app/pipes/trim.pipe';
 
 import { CardCatalogPdfComponent } from './card-catalog-pdf.component';
 
@@ -43,7 +44,7 @@ describe('CardCatalogPdfComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CardCatalogPdfComponent],
+      declarations: [CardCatalogPdfComponent, TrimPipe],
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
