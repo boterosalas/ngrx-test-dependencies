@@ -157,7 +157,7 @@ export class HistoryPaymentComponent implements OnInit, OnDestroy {
 
       case 'commissions':
         template = this.templateBreak;
-        title = 'Detalle comisiones de este mes';
+        title = 'Detalle recompensas de este mes';
         id = 'break1-modal';
         break;
 

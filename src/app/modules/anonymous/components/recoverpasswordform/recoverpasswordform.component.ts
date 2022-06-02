@@ -7,6 +7,7 @@ import { ResponseService } from 'src/app/interfaces/response';
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
 import { AuthService } from 'src/app/services/auth.service';
+declare var dataLayer: any;
 
 @Component({
   selector: 'app-recoverpasswordform',
@@ -72,6 +73,14 @@ export class RecoverpasswordformComponent implements OnInit, OnDestroy {
       (resp: ResponseService) => {
         this.loading.hide();
         if (resp.state === 'Success') {
+
+          dataLayer.push({
+            event: 'pushEventGA',
+            categoria: 'CambioDeContrasena',
+            accion: 'ClicContinuar',
+            etiqueta: 'CambioDeContrasenaEnviarExitoso',
+          });
+
           Swal.fire({
             title: 'cambio de contraseña',
             text: 'Tu contraseña ha sido restablecida exitosamente',
