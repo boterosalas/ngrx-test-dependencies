@@ -13,7 +13,7 @@ export class ReportClickamComponent implements OnInit {
       icon: '/assets/img/ayuda/reportes/historial.svg',
     },
     {
-      name: '¿Cómo veo las comisiones que he ganado?',
+      name: '¿Cómo veo las recompensas que he ganado?',
       route: '/centro-de-ayuda/reportes/como-veo-las-comisiones-que-he-ganado',
       icon: '/assets/img/ayuda/reportes/reportes.svg',
     },
