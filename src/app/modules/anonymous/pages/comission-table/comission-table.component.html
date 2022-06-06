@@ -7,9 +7,11 @@
 
 <div class="container">
   <mat-tab-group>
-    <mat-tab *ngFor="let item of tableComission | keyvalue; let i = index">
+    <mat-tab *ngFor="let item of tableComission | keyvalue; let i = index" label="gtmTablaDeRecompensasProducto{{ item.key }}">
       <ng-template mat-tab-label>
-        {{ item.key }}
+        <span class="gtmTablaDeRecompensasProducto{{ item.key | trim}} tg">
+          {{ item.key }}
+        </span>
       </ng-template>
 
       <table class="tableComission w-100 text-left mt-3">
