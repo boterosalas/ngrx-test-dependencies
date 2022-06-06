@@ -154,6 +154,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.initService();
     this.checkIfLoaded();
     this.showAnimation1 = true;
     if (isPlatformBrowser(this.platformId)) {
@@ -436,4 +437,17 @@ export class AppComponent implements OnInit, OnDestroy {
       });
     }
   }
+
+  initService() {
+    const conn = (navigator as any).connection;
+    if (conn) {
+      if (conn.saveData) {
+        // do something
+      }
+      const connectionlist = ["slow-2g", "2g", "3g", "4g"];
+      const effectiveType = conn.effectiveType;
+      console.log(effectiveType);
+    }
+  }
+
 }
