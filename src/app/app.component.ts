@@ -20,6 +20,7 @@ import { ResponseService } from './interfaces/response';
 import { MasterDataService } from './services/master-data.service';
 import { UpdateService } from './services/update.service';
 import { ReviewClickamComponent } from './modules/shared/components/review-clickam/review-clickam.component';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -79,6 +80,7 @@ export class AppComponent implements OnInit, OnDestroy {
   openRegister: boolean = true;
   idPopup:any;
   idCampaign:number;
+  slowConection = false;
 
   constructor(
     private translate: TranslateService,
@@ -154,6 +156,11 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    
+    if(this.fullCharge === false) {
+      this.initService();
+    }
+
     this.checkIfLoaded();
     this.showAnimation1 = true;
     if (isPlatformBrowser(this.platformId)) {
@@ -436,4 +443,22 @@ export class AppComponent implements OnInit, OnDestroy {
       });
     }
   }
+
+  initService() {
+    const conn = (navigator as any).connection;
+    if (conn) {
+      const effectiveType = conn.effectiveType;
+      const getConection = localStorage.getItem('conection');
+      if(effectiveType !== "4g" && getConection !== "4g"){
+        localStorage.setItem('conection', effectiveType);
+        Swal.fire({
+          html: "<i class='tio-wifi_off purple-text f-48'></i> <h3>Ups!</h3> <p class='purple-text f-19'>No tienes acceso a internet o tu señal es débil. Revisa tu conexión.</p>",
+          confirmButtonText: 'Continuar',
+          confirmButtonClass: 'continue',
+          allowOutsideClick: false,
+        })
+      }
+    }
+  }
+
 }

@@ -137,16 +137,14 @@ export class LoginformComponent implements OnInit, OnDestroy {
       if (window.location.toString().includes('url')) {
         this.router.navigateByUrl(window.location.toString());
       } else {
-        // this.router.navigate(['/inicio']);
-        const origin = window.location.origin;
-        window.location.replace(`${origin}/inicio`);
+        this.router.navigate(['/inicio']);
+        // const origin = window.location.origin;
+        // window.location.replace(`${origin}/inicio`);
       }
       this.authService.isLogged$.next(true);
     }
     if (tokenDecode.role === 'ADMIN' || tokenDecode.role === 'SUPERADMIN') {
-      this.router.navigate(['/dashboard']);
-      this.authService.isLogged$.next(true);
-      this.authService.getRole$.next('ADMIN');
+      localStorage.clear();
     }
     if (tokenDecode.role === 'PARTNER') {
       this.router.navigate(['/partner']);
