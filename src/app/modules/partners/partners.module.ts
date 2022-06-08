@@ -8,6 +8,9 @@ import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { CardReportComponent } from './components/card-report/card-report.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TopProductsComponent } from './components/top-products/top-products.component';
+import { DiscountComponent } from './components/discount/discount.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -21,14 +24,18 @@ const routes: Routes = [
     PartnerComponent,
     ReportPartnerComponent,
     CardReportComponent,
-    TopProductsComponent
+    TopProductsComponent,
+    DiscountComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     SharedModule,
     AppMaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    TranslateModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     RouterModule
