@@ -10,7 +10,10 @@ import { DataRangeInterface } from '../interfaces/dateRangeInterface';
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+
+  }
+
   urlReports = environment.URL_REPORTS;
   url = environment.URL_PROFILE;
   urlEmployee = environment.URL_VALIDATE_EMPLOYEE;
@@ -90,6 +93,7 @@ export class UserService {
   apiSaveVisitCampaign='campaign/savevisitcampaign';
   apiChangeBusinessNovelty='new/changebusinessnovelty';
   apiChangeDocumentNovelty='new/changedocumentnovelty';
+  apiGetUser = 'phygital/getuser';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -161,6 +165,14 @@ export class UserService {
       .subscribe((resp: ResponseService) => {
         this.userInfo$.next(resp);
       });
+  }
+
+  getUserPhygital(params:any) {
+    return this.http.get(`${this.url}${this.apiGetUser}?identification=${params.identification}&cellphone=${params.cellphone}`, this.httpOptions).pipe(
+      map((user: any) => {
+        return user;
+      })
+    );
   }
 
   public activateProfile(email: string) {
