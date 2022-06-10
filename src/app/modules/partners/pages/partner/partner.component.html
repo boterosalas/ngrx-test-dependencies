@@ -1,8 +1,12 @@
 <div class="container mt-5 mb-4">
-    <app-report-partner></app-report-partner>
+    <div>
+        <app-report-partner></app-report-partner>
+        <br>
+        <app-top-products *ngIf="showPatner"></app-top-products>
+    </div>
     <br>
-    <app-top-products></app-top-products>
-    <br>
-    <app-discount></app-discount>
+    <div *ngIf="showCashier">
+        <app-discount></app-discount>
+    </div>
 </div>
 

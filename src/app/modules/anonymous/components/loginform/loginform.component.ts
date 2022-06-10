@@ -146,10 +146,15 @@ export class LoginformComponent implements OnInit, OnDestroy {
     if (tokenDecode.role === 'ADMIN' || tokenDecode.role === 'SUPERADMIN') {
       localStorage.clear();
     }
-    if (tokenDecode.role === 'PARTNER') {
+  
+    if (tokenDecode.role === 'PARTNER' || tokenDecode.role === 'PARTNER-CASHIER') {
       this.router.navigate(['/partner']);
       this.authService.isLogged$.next(true);
-      this.authService.getRole$.next('PARTNER');
+      if(tokenDecode.role === 'PARTNER-CASHIER') {
+        this.authService.getRole$.next('PARTNER-CASHIER');
+      } else {
+        this.authService.getRole$.next('PARTNER');
+      }
     }
   }
 

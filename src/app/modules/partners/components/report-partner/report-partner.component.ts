@@ -4,6 +4,7 @@ import { DataRangeInterface } from 'src/app/interfaces/dateRangeInterface';
 import { LinksService } from 'src/app/services/links.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { ResponseService } from 'src/app/interfaces/response';
+import decode from 'jwt-decode';
 
 @Component({
   selector: 'app-report-partner',
@@ -19,11 +20,25 @@ export class ReportPartnerComponent implements OnInit {
   name: string;
   icon: string;
   selectedDate:boolean;
+  showCashier = false;
+  showPatner = false;
 
   constructor(private link: LinksService, private utils: UtilsService) {}
 
   ngOnInit(): void {
     this.getPartnersKPI();
+    const token = localStorage.getItem('ACCESS_TOKEN');
+    const tokenDecode = decode(token);
+
+    if(tokenDecode.role === 'PARTNER') {
+      this.showPatner = true;
+      this.showCashier = false;
+    }
+
+    if(tokenDecode.role === 'PARTNER-CASHIER') {
+      this.showPatner = false;
+      this.showCashier = true;
+    }
   }
 
   public getDate(e: DataRangeInterface) {

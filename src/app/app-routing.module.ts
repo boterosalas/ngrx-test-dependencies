@@ -30,6 +30,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, RoleGuard],
     data: {
       role: 'PARTNER',
+      role2: 'PARTNER-CASHIER'
     },
   },
   { path: '', loadChildren: () => import('./modules/home/home.module').then((m) => m.HomeModule)},

@@ -3,7 +3,7 @@
   <app-title showTitleh2="true" [text]="name"></app-title>
 </div>
 
-<mat-card class="card mat-card-box-shadow">
+<mat-card class="card mat-card-box-shadow" *ngIf="showPatner">
   <app-title showTitleh3="true" text="Reporte de recompensas"></app-title>
   <app-date-range-button
     [compare]=true
