@@ -23,7 +23,7 @@ export class DiscountComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.discountForm = this.fb.group({
-      identification: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern(this.numberPattern)]],
+      identification: ['', [Validators.required, Validators.maxLength(10), Validators.pattern(this.numberPattern)]],
       cellphone: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern(this.numberPattern)]],
     })
   }
