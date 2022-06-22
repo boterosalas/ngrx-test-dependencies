@@ -130,6 +130,7 @@
             [imagen]="!!product.image.value ? product.image.value : '/assets/img/Na.svg'"
             [altimagen]="product.name"
             [pluexito]="product.plu"
+            [phygital]="phygital"
             textoboton="{{ 'PRODUCTS.GET_LINK' | translate }}"
             exito="true"
             (infoProduct)="dataProduct(product)"
@@ -165,18 +166,20 @@
           *ngFor="let bussiness of bussiness; let i = index"
         >
           <app-product-bussiness
-            idne="bussiness{{ i }}"
+            id="bussiness{{ i }}"
             butonid="gtmNegocio{{ title }}{{ bussiness.description | trim }}"
             [nombreProducto]="bussiness.description"
             [precio]="bussiness.commission"
             [porcentaje]="bussiness.infoaditional"
             [imagen]="bussiness.imageurl"
             [altimagen]="bussiness.description"
+            [phygital]="phygital"
             otro="true"
             Class="mb-1 button-20 gtmNegocio{{ title }}{{ bussiness.description | trim }}"
             container="img-container-viajes"
             textoboton="{{ 'PRODUCTS.GET_LINK' | translate }}"
             (infoProduct)="dataSliderCategory(bussiness)"
+            (infoPhygital)="location(bussiness)"
           ></app-product-bussiness>
         </div>
       </div>
@@ -239,18 +242,6 @@
             </span>
           </button>
 
-          <!-- <button
-            *ngIf="showReferenceButton"
-            mat-button
-            id="refer"
-            [disabled]="enableCopy"
-            color="orange"
-            ngClass="{{ classButtonRefer }}"
-            (click)="showReference()"
-          >
-            <span ngClass="{{ classButtonRefer }}" fxLayoutAlign="center space-between"> Referir </span>
-          </button> -->
-
           <button mat-button id="buy" [disabled]="enableCopy" color="orange" ngClass="orange-border {{ classButtonBuy }}" (click)="buy()">
             <span ngClass="{{ classButtonBuy }}" fxLayoutAlign="center space-between"> Comprar </span>
           </button>
@@ -307,21 +298,6 @@
           Referir</span
         >
       </button>
-
-      <!-- <button
-        *ngIf="showReferenceButton"
-        mat-button
-        [disabled]="enableCopy"
-        ngClass="gtmrs  mb-2 mt-2 {{ classButtonRefer }}"
-        (click)="showReference()"
-        fxLayout="row"
-        fxLayoutAlign="start start"
-      >
-        <span ngClass="gtmrs f-15 {{ classButtonRefer }}" fxLayout="row" fxLayoutAlign="center center">
-          <img ngClass="icon-compartir pr-2 {{ classButtonRefer }}" src="/assets/img/Referir.svg" alt="user" />
-          Referir
-        </span>
-      </button> -->
 
       <button
         mat-button
@@ -413,10 +389,6 @@
             </span>
           </button>
 
-          <!-- <button mat-button [disabled]="enableCopy" id="refer" color="orange" ngClass="{{ classButtonRefer }}" (click)="showReference()">
-            <span ngClass="{{ classButtonRefer }}" fxLayoutAlign="center space-between"> Referir </span>
-          </button> -->
-
           <button mat-button [disabled]="enableCopy" id="buy" color="orange" ngClass="orange-border {{ classButtonBuy }}" (click)="buy()">
             <span ngClass="{{ classButtonBuy }}" fxLayoutAlign="center space-between"> Comprar </span>
           </button>
@@ -473,20 +445,6 @@
           Referir</span
         >
       </button>
-
-      <!-- <button
-        mat-button
-        [disabled]="enableCopy"
-        ngClass="gtmrs  mb-2 mt-2 {{ classButtonRefer }}"
-        (click)="showReference()"
-        fxLayout="row"
-        fxLayoutAlign="start start"
-      >
-        <span ngClass="gtmrs f-15 {{ classButtonRefer }}" fxLayout="row" fxLayoutAlign="center center">
-          <img ngClass="icon-compartir pr-2 {{ classButtonRefer }}" src="/assets/img/Referir.svg" alt="user" />
-          Referir
-        </span>
-      </button> -->
 
       <button
         mat-button

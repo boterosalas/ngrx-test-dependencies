@@ -1,0 +1,31 @@
+.descphy{
+    color: #707070;
+    font-size: 11px;
+}
+
+.uppercase{
+    text-transform: uppercase !important;
+}
+
+.logo{
+    text-align: center;
+    width: 200px;
+    height: auto;
+}
+
+.location{
+    color: #707070;
+    font-size: 20px;
+}
+
+@media screen and (max-width: 600px) {
+    .location{
+        font-size: 14px;
+    }
+    
+}
+
+li{
+    list-style: none;
+    margin-bottom: 5px;
+}
