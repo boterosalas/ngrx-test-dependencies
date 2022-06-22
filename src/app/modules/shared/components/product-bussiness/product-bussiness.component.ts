@@ -14,6 +14,7 @@ export class ProductBussinessComponent implements OnInit {
   @Input() otro: boolean;
   @Input() categoria: boolean;
   @Input() container: boolean;
+  @Input() phygital: boolean;
   @Input() foto: string;
   @Input() Class: string;
   @Input() nombreProducto: string;
@@ -25,6 +26,7 @@ export class ProductBussinessComponent implements OnInit {
   @Input() imagen: string;
   @Input() pluexito: string;
   @Output() infoProduct = new EventEmitter();
+  @Output() infoPhygital = new EventEmitter();
   constructor() {}
 
   ngOnInit() {}
@@ -32,4 +34,9 @@ export class ProductBussinessComponent implements OnInit {
   public product() {
     this.infoProduct.emit();
   }
+
+  public phygitalModal() {
+    this.infoPhygital.emit();
+  }
+
 }

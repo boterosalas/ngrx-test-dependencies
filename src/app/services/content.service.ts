@@ -128,6 +128,7 @@ export class ContentService {
   apiGeneratePdf='catalog/generatepdf';
   apiGetMissions='mission/getmissions';
   apiSaveMissions='mission/saveclick';
+  apiGetPhysicalPos='phygital/getphysicalpos';
 
   sendSearch = {};
 
@@ -1527,4 +1528,21 @@ export class ContentService {
       })
     );
   }
+
+  public getCities(id:number) {
+    return this.http.get(`${this.url + this.apiGetPhysicalPos}?idbusiness=${id}`, this.httpOptions).pipe(
+      map((phygital: ResponseService) => {
+        return phygital.objectResponse;
+      })
+    );
+  }
+
+  public getLocations(id:number, city:string) {
+    return this.http.get(`${this.url + this.apiGetPhysicalPos}?idbusiness=${id}&city=${city}`, this.httpOptions).pipe(
+      map((phygital: ResponseService) => {
+        return phygital.objectResponse;
+      })
+    );
+  }
+
 }

@@ -48,6 +48,7 @@ import { SocialFormComponent } from './components/social-form/social-form.compon
 import { PreferencesComponent } from './components/preferences/preferences.component';
 import { CatalogComponent } from './pages/catalog/catalog.component';
 import { CardCatalogPdfComponent } from './components/card-catalog-pdf/card-catalog-pdf.component';
+import { PhygitalLocationComponent } from './components/phygital-location/phygital-location.component';
 const routes: Routes = [
   {
     path: 'mi-perfil/:pagos',
@@ -157,6 +158,7 @@ const routes: Routes = [
     PreferencesComponent,
     CatalogComponent,
     CardCatalogPdfComponent,
+    PhygitalLocationComponent,
   ],
   imports: [
     CommonModule,
@@ -177,6 +179,6 @@ const routes: Routes = [
   exports:[
     RouterModule,
   ],
-  entryComponents: [DialogComponent, DialogEditComponent, DialogHistoryComponent, DialogImagePlayerComponent],
+  entryComponents: [DialogComponent, DialogEditComponent, DialogHistoryComponent, DialogImagePlayerComponent, PhygitalLocationComponent],
 })
 export class ClickerModule {}

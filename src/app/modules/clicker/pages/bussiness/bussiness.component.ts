@@ -16,6 +16,7 @@ import { TokenService } from 'src/app/services/token.service';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import { isPlatformBrowser } from '@angular/common';
 import Swal from 'sweetalert2';
+import { PhygitalLocationComponent } from '../../components/phygital-location/phygital-location.component';
 
 declare var dataLayer: any;
 
@@ -28,6 +29,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   id: string;
   hasproduct: boolean;
   title: string;
+  phygital:boolean;
   percent: string;
   percentBussiness = 'Hasta 9.6%';
   bussiness = [];
@@ -145,6 +147,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
           this.tips = resp.tips;
           this.nonEditedContent = this.infoBussiness;
           this.infoBussiness = this.formatContent(this.infoBussiness);
+          this.phygital = resp.phygital;
           if (resp.terms.length > 0) {
             this.generalInfo = resp.terms[0].description;
             this.exceptionsInfo = resp.terms[1].description;
@@ -686,10 +689,12 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
     return data;
 
-    // this.subscription = this.sp.getProductsOtherBusiness(data).subscribe(product => {
-    //   console.log(product);
-    // });
+  }
 
+  public location(data) {
+    this.dialogModal.open(PhygitalLocationComponent, {
+      data
+    });
   }
 
   ngOnDestroy() {

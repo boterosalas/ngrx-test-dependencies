@@ -1,0 +1,48 @@
+<div class="top-generic" fxLayout="row" fxLayoutAlign="end">
+    <a id="closeDialog" matRipple (click)="onNoClick()"><mat-icon class="close cursor-pointer">close</mat-icon></a>
+</div>
+
+<app-title showTitleh3="true" text="PASO A PASO PARA COMPRAR EN TIENDAS FÍSICAS" commonClass="text-center"></app-title>
+
+<div mat-dialog-content>
+  <ul class="purple2-text p-0">
+    <li>
+      1. Ingresa a Clickam y verifica los puntos de venta que aplican para recompensas.
+    </li>
+    <li>
+      2. Dirígete al punto de venta del negocio aliado.
+    </li>
+    <li>
+      3. Antes de realizar el pago presenta tu cédula y datos de Afiliado Clickam y accede a descuentos.
+    </li>
+  </ul>
+
+  <app-title
+    showTitleh3="true"
+    text="TIENDAS FÍSICAS DISPONIBLES - {{ business }}"
+    commonClass="purple2-text text-center uppercase"
+  ></app-title>
+
+  <mat-form-field class="w-100">
+    <mat-select placeholder="CIUDAD" id="city">
+      <mat-option *ngFor="let item of cities | keyvalue" value="{{ item.key }}" (click)="getPoints(idBusiness, item.key)">{{
+        item.key
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="location" *ngFor="let item of locations | keyvalue; let i = index">
+    <div *ngFor="let item of item.value">
+      <p class="mb-0">{{ item.description }}</p>
+      <p class="mt-0">{{ item.adress }}</p>
+    </div>
+  </div>
+
+  <p class="descphy">
+    Gane RECOMPENSA cuando compre en todas los negocios físicos válidos de Clickam. Se aplican términos y restricciones. Clickam se reserva
+    el derecho de modificar la tasa de recompensa en cualquier momento sin previo aviso. Las ofertas en la tienda no son válidas para
+    compras en línea y no se pueden combinar con otras recompensas de Clickam. Oferta válida para tiendas de territorio colombiano, NO
+    válida en ubicaciones de otros países. Una oferta vinculada que no se haya canjeado caducará automáticamente 45 días después de que se
+    vincule o en la fecha en que finalice la oferta, lo que ocurra primero. Solo se aceptan tarjetas de pago emitidas en Colombia.
+  </p>
+</div>
