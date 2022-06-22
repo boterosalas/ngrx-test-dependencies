@@ -34,7 +34,7 @@
   <div class="location" *ngFor="let item of locations | keyvalue; let i = index">
     <div *ngFor="let item of item.value">
       <p class="mb-0">{{ item.description }}</p>
-      <p class="mt-0">{{ item.adress }}</p>
+      <p class="mt-0">Dirección: {{ item.adress }}</p>
     </div>
   </div>
 
