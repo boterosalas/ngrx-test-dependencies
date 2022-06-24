@@ -1,76 +1,122 @@
 <mat-card class="card mat-card-box-shadow">
-    <app-title showTitleh3="true" text="Calcular descuento"></app-title>
-    
-    <form class="discount" [formGroup]="discountForm" fxLayout="row" fxLayoutGap="20px">
+  <app-title showTitleh3="true" text="Calcular descuento"></app-title>
 
-        <mat-form-field>
-          <input matInput id="phone" type="text" placeholder="Número de documento" formControlName="identification" />
-          <mat-error id="requiredPhone" *ngIf="discountForm.controls.identification.invalid && discountForm.controls.identification.errors.required">{{
-            'GENERIC.REQUIRED' | translate: { formValue: 'Número de documento' }
-          }}</mat-error>
-  
-          <mat-error id="minidentification" *ngIf="discountForm.controls.identification.invalid && discountForm.controls.identification.errors.minlength">{{
-            'GENERIC.MIN_CHARACTERS'
-              | translate
-                : {
-                    minchar: discountForm.controls.identification.errors.minlength.requiredLength
-                  }
-          }}</mat-error>
-  
-          <mat-error id="maxidentification" *ngIf="discountForm.controls.identification.invalid && discountForm.controls.identification.errors.maxlength">{{
-            'GENERIC.MAX_CHARACTERS'
-              | translate
-                : {
-                    maxchar: discountForm.controls.identification.errors.maxlength.requiredLength
-                  }
-          }}</mat-error>
-  
-          <mat-error id="numberidentification" *ngIf="discountForm.controls.identification.invalid && discountForm.controls.identification.errors.pattern">{{
-            'GENERIC.ONLY_NUMBERS' | translate
-          }}</mat-error>
-        </mat-form-field>
+  <form class="discount" [formGroup]="discountForm" fxLayout="row" fxLayoutGap="20px">
+    <mat-form-field>
+      <input matInput id="document" type="text" placeholder="NÚMERO DE DOCUMENTO" formControlName="identification" />
+      <mat-error
+        id="requireddocument"
+        *ngIf="discountForm.controls.identification.invalid && discountForm.controls.identification.errors.required"
+        >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Número de documento' } }}</mat-error
+      >
 
-        <mat-form-field>
-          <input matInput id="phone" type="text" placeholder="Celular" formControlName="cellphone"  />
-          <mat-error id="requiredPhone" *ngIf="discountForm.controls.cellphone.invalid && discountForm.controls.cellphone.errors.required">{{
-            'GENERIC.REQUIRED' | translate: { formValue: 'Celular' }
-          }}</mat-error>
-  
-          <mat-error id="mincellphone" *ngIf="discountForm.controls.cellphone.invalid && discountForm.controls.cellphone.errors.minlength">{{
-            'GENERIC.MIN_CHARACTERS'
-              | translate
-                : {
-                    minchar: discountForm.controls.cellphone.errors.minlength.requiredLength
-                  }
-          }}</mat-error>
-  
-          <mat-error id="maxcellphone" *ngIf="discountForm.controls.cellphone.invalid && discountForm.controls.cellphone.errors.maxlength">{{
-            'GENERIC.MAX_CHARACTERS'
-              | translate
-                : {
-                    maxchar: discountForm.controls.cellphone.errors.maxlength.requiredLength
-                  }
-          }}</mat-error>
-  
-          <mat-error id="numbercellphone" *ngIf="discountForm.controls.cellphone.invalid && discountForm.controls.cellphone.errors.pattern">{{
-            'GENERIC.ONLY_NUMBERS' | translate
-          }}</mat-error>
-        </mat-form-field>
-  
-        <button
-          mat-raised-button
-          id="discount"
-          class="mt-2 center button button-height"
-          color="orange"
-          (click)="validate()"
-          [disabled]="!discountForm.valid"
-        >
-          <span>Validar</span>
-        </button>
+      <mat-error
+        id="minidentification"
+        *ngIf="discountForm.controls.identification.invalid && discountForm.controls.identification.errors.minlength"
+        >{{
+          'GENERIC.MIN_CHARACTERS'
+            | translate
+              : {
+                  minchar: discountForm.controls.identification.errors.minlength.requiredLength
+                }
+        }}</mat-error
+      >
 
-      </form>
-      <div *ngIf="validUser" >
-          <p fxLayout="row" fxLayoutAlign="start center" class="green galano-bold">Cuenta verificada <i class="tio-checkmark_circle f-24 ml-2"></i></p>
-      </div>
+      <mat-error
+        id="maxidentification"
+        *ngIf="discountForm.controls.identification.invalid && discountForm.controls.identification.errors.maxlength"
+        >{{
+          'GENERIC.MAX_CHARACTERS'
+            | translate
+              : {
+                  maxchar: discountForm.controls.identification.errors.maxlength.requiredLength
+                }
+        }}</mat-error
+      >
 
+      <mat-error
+        id="numberidentification"
+        *ngIf="discountForm.controls.identification.invalid && discountForm.controls.identification.errors.pattern"
+        >{{ 'GENERIC.ONLY_NUMBERS' | translate }}</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput id="phone" type="text" placeholder="CELULAR" formControlName="cellphone" />
+      <mat-error id="requiredPhone" *ngIf="discountForm.controls.cellphone.invalid && discountForm.controls.cellphone.errors.required">{{
+        'GENERIC.REQUIRED' | translate: { formValue: 'Celular' }
+      }}</mat-error>
+
+      <mat-error id="mincellphone" *ngIf="discountForm.controls.cellphone.invalid && discountForm.controls.cellphone.errors.minlength">{{
+        'GENERIC.MIN_CHARACTERS'
+          | translate
+            : {
+                minchar: discountForm.controls.cellphone.errors.minlength.requiredLength
+              }
+      }}</mat-error>
+
+      <mat-error id="maxcellphone" *ngIf="discountForm.controls.cellphone.invalid && discountForm.controls.cellphone.errors.maxlength">{{
+        'GENERIC.MAX_CHARACTERS'
+          | translate
+            : {
+                maxchar: discountForm.controls.cellphone.errors.maxlength.requiredLength
+              }
+      }}</mat-error>
+
+      <mat-error id="numbercellphone" *ngIf="discountForm.controls.cellphone.invalid && discountForm.controls.cellphone.errors.pattern">{{
+        'GENERIC.ONLY_NUMBERS' | translate
+      }}</mat-error>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      id="discount"
+      class="mt-2 center button button-height"
+      color="orange"
+      (click)="validate()"
+      [disabled]="!discountForm.valid"
+    >
+      <span>Validar</span>
+    </button>
+  </form>
+  <div *ngIf="validUser">
+    <p fxLayout="row" fxLayoutAlign="start center" class="green galano-bold">
+      Cuenta verificada <i class="tio-checkmark_circle f-24 ml-2"></i>
+    </p>
+  </div>
+
+  <form [formGroup]="valueForm" *ngIf="validUser">
+    <mat-form-field>
+      <input
+        matInput
+        id="value"
+        type="text"
+        placeholder="VALOR DE LOS PRODUCTOS"
+        formControlName="value"
+        (focusout)="calculateDiscount()"
+      />
+
+      <mat-error id="numbervalue" *ngIf="valueForm.controls.value.invalid && valueForm.controls.value.errors.pattern">{{
+        'GENERIC.ONLY_NUMBERS' | translate
+      }}</mat-error>
+    </mat-form-field>
+  </form>
+
+  <div *ngIf="showResults">
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+      <app-title showTitleh3="true" text="Resultado"></app-title>
+      <span class="border-gray-title"></span>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field>
+        <input matInput id="discount" type="text" placeholder="DESCUENTO" value="{{discount}} %" readonly />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput id="total" type="text" placeholder="TOTAL A PAGAR" value="{{total | currency: '':'symbol':'1.0-0'}}" readonly />
+      </mat-form-field>
+
+      <app-button title="CONFIRMAR VENTA" [haveIcon]="false" classButton="shadow-purple"></app-button>
+
+    </div>
+  </div>
 </mat-card>
