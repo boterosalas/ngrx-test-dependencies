@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { ContentService } from 'src/app/services/content.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
+import decode from 'jwt-decode';
 
 @Component({
   selector: 'app-discount',
@@ -13,26 +15,38 @@ export class DiscountComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private user: UserService
+    private user: UserService,
+    private content: ContentService
   ) { }
 
   discountForm: FormGroup;
+  valueForm: FormGroup;
   numberPattern = '^(0|[0-9][0-9]*)$';
   private subscription: Subscription = new Subscription();
   validUser = false;
+  discount:string;
+  total:string;
+  showResults = false;
+  idBusiness:number;
 
   ngOnInit(): void {
     this.discountForm = this.fb.group({
       identification: ['', [Validators.required, Validators.maxLength(10), Validators.pattern(this.numberPattern)]],
       cellphone: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern(this.numberPattern)]],
     })
+
+    this.valueForm = this.fb.group({
+      value: ['', [Validators.pattern(this.numberPattern)]]
+    })
+
+    const token = localStorage.getItem('ACCESS_TOKEN');
+    const tokenDecode = decode(token);
+    this.idBusiness = tokenDecode.idbusiness;
   }
 
   public validate() {
     const values = this.discountForm.value;
-    console.log(values);
     this.subscription = this.user.getUserPhygital(values).subscribe(valid => {
-      console.log(valid);
       if(valid.state === 'Error') {
         Swal.fire({
           html: `<i class='tio-clear_circle_outlined red-text f-48'></i> <h3>Cuenta incorrecta</h3> <p class='f-19'>${valid.userMessage}</p>`,
@@ -42,6 +56,15 @@ export class DiscountComponent implements OnInit, OnDestroy {
       } else {
         this.validUser = true;
       }
+    })
+  }
+
+  calculateDiscount() {
+  let value = this.valueForm.controls.value.value;
+    this.content.calculateDiscount(this.idBusiness, value).subscribe(val => {
+      this.discount = val.percentage;
+      this.total = val.total;
+      this.showResults = true;
     })
   }
 

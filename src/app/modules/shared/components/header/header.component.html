@@ -4,7 +4,7 @@
   <!-- Mobile - not login -->
   <div fxHide.gt-sm="true" *ngIf="!auth.isLoggedIn()" fxLayoutAlign="space-between stretch" fxLayoutGap="1rem" class="divContainer">
     <div fxLayout="row" fxLayoutGap="1rem">
-      <span *ngIf="role !== 'PARTNER'" fxLayout="column" fxLayoutAlign="center center" (click)="open()" class="burger-menu cursor-pointer">
+      <span *ngIf="role !== 'PARTNER' && role !== 'PARTNER-CASHIER'" fxLayout="column" fxLayoutAlign="center center" (click)="open()" class="burger-menu cursor-pointer">
         <img src="assets/img/menu2.svg" alt="menu" />
         <span>Menú</span>
       </span>
@@ -50,7 +50,7 @@
   <!-- Mobile and desktop - login -->
   <div *ngIf="auth.isLoggedIn()" fxLayoutAlign="space-between stretch" fxLayoutGap="1rem" class="divContainer divContainerLoggedIn">
     <div fxLayout="row" fxLayoutGap="1rem">
-      <span *ngIf="role !== 'PARTNER'" fxLayout="column" fxLayoutAlign="center center" (click)="open()" class="burger-menu cursor-pointer">
+      <span *ngIf="role !== 'PARTNER'&& role !== 'PARTNER-CASHIER'" fxLayout="column" fxLayoutAlign="center center" (click)="open()" class="burger-menu cursor-pointer">
         <img src="assets/img/menu2.svg" alt="menu" />
         <span>Menú</span>
       </span>

@@ -129,6 +129,7 @@ export class ContentService {
   apiGetMissions='mission/getmissions';
   apiSaveMissions='mission/saveclick';
   apiGetPhysicalPos='phygital/getphysicalpos';
+  apiCalculateDiscount='phygital/calculatediscount';
 
   sendSearch = {};
 
@@ -1539,6 +1540,14 @@ export class ContentService {
 
   public getLocations(id:number, city:string) {
     return this.http.get(`${this.url + this.apiGetPhysicalPos}?idbusiness=${id}&city=${city}`, this.httpOptions).pipe(
+      map((phygital: ResponseService) => {
+        return phygital.objectResponse;
+      })
+    );
+  }
+
+  public calculateDiscount(idbusiness:number, value:string) {
+    return this.http.get(`${this.url + this.apiCalculateDiscount}?idbusiness=${idbusiness}&value=${value}`, this.httpOptions).pipe(
       map((phygital: ResponseService) => {
         return phygital.objectResponse;
       })
