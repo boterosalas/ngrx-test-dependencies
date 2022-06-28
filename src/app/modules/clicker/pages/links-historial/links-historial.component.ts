@@ -122,7 +122,7 @@ export class LinksHistorialComponent implements OnInit {
     this.subscription = this.content.saveMission('BUY').subscribe();
     const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (iOS) {
-      window.location.assign(this.urlshorten);
+      window.open(this.urlshorten, '_blank');
     } else {
       window.open(this.urlshorten, '_blank');
     }

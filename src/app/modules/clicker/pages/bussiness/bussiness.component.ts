@@ -311,7 +311,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     this.subscription = this.content.saveMission('BUY').subscribe();
     const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (iOS) {
-      window.location.assign(this.urlshorten);
+      window.open(this.urlshorten, '_blank');
     } else {
       window.open(this.urlshorten, '_blank');
     }
