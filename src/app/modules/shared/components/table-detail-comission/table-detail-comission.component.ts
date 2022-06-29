@@ -11,7 +11,7 @@ export class TableDetailComissionComponent implements OnInit {
   @Input() dataSource;
   @Output() dataUser = new EventEmitter();
 
-  displayedColumns: string[] = ['date', 'product', 'state', 'quantity', 'commission'];
+  displayedColumns: string[] = ['date', 'business','product', 'state', 'quantity', 'commission'];
 
   ngOnInit() {}
 
