@@ -130,6 +130,7 @@ export class ContentService {
   apiSaveMissions='mission/saveclick';
   apiGetPhysicalPos='phygital/getphysicalpos';
   apiCalculateDiscount='phygital/calculatediscount';
+  apiSalePhygital='phygital/salephygital';
 
   sendSearch = {};
 
@@ -1550,6 +1551,21 @@ export class ContentService {
     return this.http.get(`${this.url + this.apiCalculateDiscount}?idbusiness=${idbusiness}&value=${value}`, this.httpOptions).pipe(
       map((phygital: ResponseService) => {
         return phygital.objectResponse;
+      })
+    );
+  }
+
+  public salePhygital(id: string) {
+    return this.http.post(`${this.url + this.apiSalePhygital}`, {identification: id}, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(2),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((resp: ResponseService) => {
+        return resp;
       })
     );
   }

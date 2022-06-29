@@ -115,7 +115,7 @@
         <input matInput id="total" type="text" placeholder="TOTAL A PAGAR" value="{{total | currency: '':'symbol':'1.0-0'}}" readonly />
       </mat-form-field>
 
-      <app-button title="CONFIRMAR VENTA" [haveIcon]="false" classButton="shadow-purple"></app-button>
+      <app-button title="CONFIRMAR VENTA" [haveIcon]="false" (click)="confirmSale()" classButton="shadow-purple"></app-button>
 
     </div>
   </div>

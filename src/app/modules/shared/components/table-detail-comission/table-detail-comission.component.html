@@ -13,6 +13,16 @@
     </td>
   </ng-container>
 
+  <!-- business Column -->
+  <ng-container matColumnDef="business">
+    <th mat-header-cell *matHeaderCellDef>
+      {{ 'DETAILCOMISSION.BUSINESS' | translate }}
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.business }}
+    </td>
+  </ng-container>
+
   <!-- product Column -->
   <ng-container matColumnDef="product">
     <th mat-header-cell *matHeaderCellDef>

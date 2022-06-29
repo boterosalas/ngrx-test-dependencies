@@ -383,6 +383,7 @@
   },
   "DETAILCOMISSION": {
     "DETAILS": "Detalle de ventas",
+    "BUSINESS": "NEGOCIOS",
     "DATE": "FECHA",
     "PRODUCT": "PRODUCTO",
     "STATE": "ESTADO",
