@@ -68,6 +68,21 @@ export class DiscountComponent implements OnInit, OnDestroy {
     })
   }
 
+  public confirmSale() {
+    let id = this.discountForm.controls.identification.value;
+    this.subscription = this.content.salePhygital(id).subscribe(() => {
+      this.showResults = false;
+      this.discountForm.reset();
+      Swal.fire({
+        title: 'Venta confirmada',
+        text: 'Venta registrada con éxito.',
+        confirmButtonText: 'Aceptar',
+        confirmButtonClass: 'accept-sale',
+        type: 'success',
+      })
+    });
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
