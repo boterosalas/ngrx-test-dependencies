@@ -732,6 +732,12 @@ button {
     img {
       height: 100%;
     }
+    @media (max-width:'600px') {
+      img {
+        height: 30vh;
+        object-fit: cover;
+      }
+    }
   }
 }
 
