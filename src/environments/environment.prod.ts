@@ -4,7 +4,7 @@ export const environment = {
   URL_PROFILE: 'https://apimexito.azure-api.net/PD-clickam-md-apiprofile/api/',
   URL_VALIDATE_EMPLOYEE: 'https://apimexito.azure-api.net/PD-clickam-md-apiprofile/',
   URL_CONTENT: 'https://apimexito.azure-api.net/PD-clickam-md-apicontent/api/',
-  URL_REFERAL: 'https://apimexito.azure-api.net/PD-clickam-md-apireferral/api/',
+  URL_REFERAL: 'https://lawrencio.grupo-exito.com/apiew/clickam/v1/ALPDQLKDKG/',
   URL_COMISSION: 'https://apimexito.azure-api.net/PD-clickam-md-apicommission/api/',
   URL_REPORTS: 'https://apimexito.azure-api.net/PD-clickam-md-apireport/api/',
   // URL_MASTER: 'https://apimexito.azure-api.net/PD-clickam-md-apimasterdata/api/',

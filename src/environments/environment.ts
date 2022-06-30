@@ -8,7 +8,7 @@ export const environment = {
   URL_PROFILE: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apiprofile/api/',
   URL_VALIDATE_EMPLOYEE: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apiprofile/',
   URL_CONTENT: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apicontent/api/',
-  URL_REFERAL: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apireferral/api/',
+  URL_REFERAL: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/JFXDAXHPYG/',
   URL_COMISSION: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apicommission/api/',
   URL_REPORTS: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apireport/api/',
   URL_MASTER: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/WYAJQSJPBU/',
