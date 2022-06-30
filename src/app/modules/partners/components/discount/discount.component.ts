@@ -73,6 +73,9 @@ export class DiscountComponent implements OnInit, OnDestroy {
     this.subscription = this.content.salePhygital(id).subscribe(() => {
       this.showResults = false;
       this.discountForm.reset();
+      this.discountForm.controls.identification.setErrors(null);
+      this.discountForm.controls.cellphone.setErrors(null);
+      this.validUser = false;
       Swal.fire({
         title: 'Venta confirmada',
         text: 'Venta registrada con éxito.',

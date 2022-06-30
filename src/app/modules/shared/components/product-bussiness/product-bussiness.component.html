@@ -97,7 +97,7 @@
       fxLayoutAlign="center center"
       fxLayoutAlign.gt-xs="inherit inherit"
     >
-      <span fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap.xs="0px">
+      <span fxLayout="row" fxLayout.xs="column" fxLayout.gt-xs="column" fxLayoutGap.xs="0px">
         <span fxLayout="column" ngClass.gt-xs="container" ngClass.xs="container-info" fxLayoutAlign="start start">
           <h3 class="mt-3 mb-0" ngClass.gt-xs="f-18" id="{{ idne }}" matTooltip="{{ nombreProducto }}">
             {{ nombreProducto | truncate: '30' }}
@@ -110,19 +110,21 @@
           </p>
         </span>
 
-        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end start" fxLayoutGap="10px" class="mt-2 mb-2">
-          
-          <span fxLayout="column" fxLayoutAlign="flex-end flex-end" *ngIf="phygital">
-            <button id="{{ butonid }}" mat-raised-button color="orange" [(ngClass)]="Class" (click)="phygitalModal()">
-              <span [(ngClass)]="Class">Punto físico</span>
-            </button>
-          </span>
+        <div fxLayout="row" fxLayout.xs="row" fxLayoutAlign="end start" fxLayoutGap="10px" class="mt-2 mb-2">
 
-          <span fxLayout="column" fxLayoutAlign="flex-end flex-end" class="mr-2">
+          <span fxLayout="row" fxLayoutAlign="flex-end flex-end" class="mr-2">
             <button id="{{ butonid }}" mat-raised-button color="orange" [(ngClass)]="Class" (click)="product()">
               <span [(ngClass)]="Class">{{ textoboton }}</span>
             </button>
           </span>
+          
+          <span fxLayout="row" fxLayoutAlign="flex-end flex-end" *ngIf="phygital" class="mr-2">
+            <button id="{{ butonid }}" mat-raised-button color="purple2" [(ngClass)]="Class" (click)="phygitalModal()">
+              <span [(ngClass)]="Class">Punto físico</span>
+            </button>
+          </span>
+
+          
 
         </div>
 

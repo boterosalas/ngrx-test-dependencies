@@ -1556,7 +1556,7 @@ export class ContentService {
   }
 
   public salePhygital(id: string) {
-    return this.http.post(`${this.url + this.apiSalePhygital}`, {identification: id}, this.httpOptions).pipe(
+    return this.http.post(`${this.urlComission + this.apiSalePhygital}`, {identification: id}, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
