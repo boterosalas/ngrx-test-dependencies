@@ -590,7 +590,6 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
     const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (iOS) {
       window.location.assign(this.urlshorten);
-      window.open(this.urlshorten, '_blank');
     } else {
       window.open(this.urlshorten, '_blank');
     }
