@@ -48,8 +48,9 @@ span.img-responsive img {
   img {
     max-width: 100%;
     width: 230px !important;
+    object-fit: scale-down;
   }
 }
 .heigth-imagen {
-  height: 76.03px;
+  height: 115px;
 }
