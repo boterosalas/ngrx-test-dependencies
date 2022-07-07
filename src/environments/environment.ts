@@ -11,7 +11,7 @@ export const environment = {
   URL_REFERAL: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/JFXDAXHPYG/',
   URL_COMISSION: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apicommission/api/',
   URL_REPORTS: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apireport/api/',
-  URL_MASTER: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/WYAJQSJPBU/',
+  URL_MASTER: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/LYWCBAXGTW/',
   URL_EXTERNAL: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apiexternal/api/',
   PDF: 'https://webclickamdev.blob.core.windows.net/clickacademy/pdf/',
   SUBSCRIPTION: 'f5edbcd2315e479aad33d80c58052fcc',
