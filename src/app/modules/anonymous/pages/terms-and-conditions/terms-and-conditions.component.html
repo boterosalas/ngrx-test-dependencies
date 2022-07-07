@@ -18,6 +18,14 @@
 
     <mat-tab>
       <ng-template mat-tab-label>
+        <span class="gtmTerminosCondicionesClicTerminosLegales">{{ 'TERMS.CONDITION_TAB_PJ' | translate }}</span>
+      </ng-template>
+      <h2 class="border-bottom-orange-init">{{ textTerminosPJ }}</h2>
+      <div [innerHtml]="contentTerminosPJ"></div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
         <span class="gtmTerminosCondicionesClicEmprendedor">{{ 'TERMS.LEGAL_TAB' | translate }}</span>
       </ng-template>
       <h2 class="border-bottom-orange-init">{{ textProteccion }}</h2>
