@@ -55,10 +55,12 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   amountReferred: any;
 
   contentTerminos: any;
+  contentTerminosPJ: any;
   contentProteccion: any;
   contentTransparencia: any;
   contentPrograma: any;
   textTerminos: any;
+  textTerminosPJ: any;
   textProteccion: any;
   textTransparencia: any;
   textPrograma: any;
@@ -209,10 +211,12 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       this.contentProteccion = resp.objectResponse[1].sectionvalue;
       this.contentTransparencia = resp.objectResponse[2].sectionvalue;
       this.contentPrograma = resp.objectResponse[3].sectionvalue;
+      this.contentTerminosPJ = resp.objectResponse[4].sectionvalue;
       this.textTerminos = resp.objectResponse[0].sectiontitle;
       this.textProteccion = resp.objectResponse[1].sectiontitle;
       this.textTransparencia = resp.objectResponse[2].sectiontitle;
       this.textPrograma = resp.objectResponse[3].sectiontitle;
+      this.textTerminosPJ = resp.objectResponse[4].sectiontitle;
     });
   }
   /**

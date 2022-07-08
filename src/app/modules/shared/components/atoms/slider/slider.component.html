@@ -1,6 +1,9 @@
 
   <ngx-slick-carousel fxLayoutGap="10px" class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
     <div ngxSlickItem  fxLayoutAlign="center center" *ngFor="let slide of slider; let i = index" class="slide m-2 p-0">
+      <div class="st" fxLayout="column" fxLayoutAlign="center center">
         <app-image imageClass="img-slide" [src]="slide.imageurl" [alt]="slide.description" ></app-image>
+        <span class="galano-bold discount">{{slide.infoaditional}}</span>
+      </div>
     </div>
   </ngx-slick-carousel>

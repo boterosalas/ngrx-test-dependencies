@@ -12,10 +12,12 @@ import { MasterDataService } from 'src/app/services/master-data.service';
 export class TermsAndConditionsComponent implements OnInit, OnDestroy {
   constructor(private personalInfo: MasterDataService, private link: LinksService, @Inject(PLATFORM_ID) private platformId: object) { }
   contentTerminos: any;
+  contentTerminosPJ: any;
   contentProteccion: any;
   contentTransparencia: any;
   contentPrograma: any;
   textTerminos: any;
+  textTerminosPJ: any;
   textProteccion: any;
   textTransparencia: any;
   textPrograma: any;
@@ -54,10 +56,12 @@ export class TermsAndConditionsComponent implements OnInit, OnDestroy {
       this.contentProteccion = resp.objectResponse[1].sectionvalue;
       this.contentTransparencia = resp.objectResponse[2].sectionvalue;
       this.contentPrograma = resp.objectResponse[3].sectionvalue;
+      this.contentTerminosPJ = resp.objectResponse[4].sectionvalue;
       this.textTerminos = resp.objectResponse[0].sectiontitle;
       this.textProteccion = resp.objectResponse[1].sectiontitle;
       this.textTransparencia = resp.objectResponse[2].sectiontitle;
       this.textPrograma = resp.objectResponse[3].sectiontitle;
+      this.textTerminosPJ = resp.objectResponse[4].sectiontitle;
     });
   }
 
