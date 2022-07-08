@@ -123,6 +123,10 @@ describe('RegisterformComponent', () => {
         sectionValue: 'Contenido',
         sectionTitle: 'Title',
       },
+      {
+        sectionValue: 'Contenido',
+        sectionTitle: 'Title',
+      },
     ],
   };
 beforeEach(waitForAsync(() => {
