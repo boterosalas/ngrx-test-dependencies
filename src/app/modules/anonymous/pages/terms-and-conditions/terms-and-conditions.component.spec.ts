@@ -36,6 +36,10 @@ describe('TermsAndConditionsComponent', () => {
         sectionValue: 'Contenido',
         sectionTitle: 'Title',
       },
+      {
+        sectionValue: 'Contenido',
+        sectionTitle: 'Title',
+      },
     ],
   };
   let amount = {
