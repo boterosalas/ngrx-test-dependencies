@@ -53,6 +53,7 @@
     "@schematics/angular": "^12.2.8",
     "angular-font-awesome": "^3.1.2",
     "angular-google-charts": "^0.1.6",
+    "angularx-social-login": "^4.1.0",
     "array-unique": "^0.3.2",
     "axios": "^0.25.0",
     "bn-ng-idle": "^1.0.1",

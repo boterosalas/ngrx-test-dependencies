@@ -10,12 +10,13 @@ import { Forgotpassword } from '../interfaces/forgotpassword';
 import { Recoverpassword } from '../interfaces/recoverpassword';
 import { UserService } from './user.service';
 import { ResponseService } from '../interfaces/response';
+import { SocialAuthService } from 'angularx-social-login';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService implements OnDestroy {
-  constructor(private http: HttpClient, private router: Router, public jwtHelper: JwtHelperService) {
+  constructor(private http: HttpClient, private router: Router, public jwtHelper: JwtHelperService, private authService: SocialAuthService) {
     this.isLogged$.subscribe((val) => {
       this.getRole();
       if (!!val || this.isLoggedIn()) {
@@ -92,6 +93,7 @@ export class AuthService implements OnDestroy {
 
   public logout() {
     localStorage.clear();
+    this.authService.signOut();
     setTimeout(() => {
       this.router.navigate(['/']);
     }, 500);

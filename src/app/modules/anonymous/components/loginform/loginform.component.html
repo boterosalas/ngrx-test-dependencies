@@ -60,6 +60,11 @@
   </div>
 </form>
 
+<div fxLayout="row" fxLayoutGap="10px" ngClass="social">
+  <app-button  title="Continuar con" (action)="signInWithFB()"  color="gray" classIcon="tio-facebook style-icon"></app-button>
+  <app-button  title="Continuar con"   (action)="signInWithGoogle()" color="gray" classIcon="tio-google style-icon"></app-button>
+</div>
+
 <p
   id="forgotPass"
   class="cursor-pointer f-13 text-decoration text-center gtmIniciarSesionClicLightboxOlvidasteTuContrasena"
