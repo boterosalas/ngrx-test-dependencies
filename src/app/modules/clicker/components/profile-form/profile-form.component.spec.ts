@@ -15,9 +15,10 @@ import { MasterDataService } from 'src/app/services/master-data.service';
 import { of } from 'rxjs/internal/observable/of';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { UserService } from 'src/app/services/user.service';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
+import { SocialAuthService } from 'angularx-social-login';
 
 class MockUserService extends UserService {
 
@@ -34,6 +35,7 @@ describe('ProfileFormComponent', () => {
   let fixture: ComponentFixture<ProfileFormComponent>;
 
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open']);
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
   const mockUserService = jasmine.createSpyObj('UserService', [
     'getuserdata',
@@ -210,6 +212,7 @@ beforeEach(waitForAsync(() => {
         }),
       ],
       providers: [
+        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
         { provide: MatDialogRef, useValue: mockDialog },
         { provide: MasterDataService, useValue: mockMasterDataService },
         { provide: UserService, useClass: MockUserService },

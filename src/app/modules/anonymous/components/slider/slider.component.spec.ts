@@ -4,7 +4,7 @@ import { SliderComponent } from './slider.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ContentService } from 'src/app/services/content.service';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LinksService } from 'src/app/services/links.service';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { MatDialogRef } from '@angular/material/dialog';
+import { SocialAuthService } from 'angularx-social-login';
 
 describe('SliderComponent', () => {
   let component: SliderComponent;
@@ -35,6 +36,7 @@ describe('SliderComponent', () => {
 
   const mockDialogRef = jasmine.createSpyObj('MatDialogRef', ['close', 'afterClosed', 'componentInstance']);
 
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
   
   const respOk = {
     state: 'Success',
@@ -136,6 +138,7 @@ beforeEach(waitForAsync(() => {
         }),
       ],
       providers: [
+        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
         { provide: ContentService, useValue: mockContentService },
         { provide: MatDialogRef, useValue: mockDialogRef },
         { provide: MAT_BOTTOM_SHEET_DATA, useValue: mockDialog },

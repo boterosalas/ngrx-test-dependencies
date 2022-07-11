@@ -9,14 +9,16 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { ContentService } from 'src/app/services/content.service';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SocialAuthService } from 'angularx-social-login';
 
 describe('AllBussinessComponent', () => {
   let component: AllBussinessComponent;
   let fixture: ComponentFixture<AllBussinessComponent>;
 
   const mockContentService = jasmine.createSpyObj('ContentService', ['getBusinessByCategory', 'getOffersbyType', 'getCategories']);
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
   const categories = [
     { id: 1, description: 'Accesorios' },
@@ -83,7 +85,7 @@ describe('AllBussinessComponent', () => {
             },
           }),
         ],
-        providers: [{ provide: ContentService, useValue: mockContentService }],
+        providers: [{ provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },{ provide: ContentService, useValue: mockContentService }],
       }).compileComponents();
       mockContentService.getBusinessByCategory.and.returnValue(of(bussiness));
       mockContentService.getOffersbyType.and.returnValue(of(carousel));

@@ -5,18 +5,20 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AuthService } from 'src/app/services/auth.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UtilsService } from 'src/app/services/utils.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateModule } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import { SocialAuthService } from 'angularx-social-login';
 
 describe('MenuOptionsComponent', () => {
   let component: MenuOptionsComponent;
   let fixture: ComponentFixture<MenuOptionsComponent>;
 
   const mockUtilsService = jasmine.createSpyObj('UtilsService', ['showRegisterForm', 'hideMenu']);
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
   let menuAnymous = {
     state: 'Success',
@@ -57,6 +59,7 @@ beforeEach(waitForAsync(() => {
       ],
       providers: [
         // { provide: AuthService, useValue: mockAuthService },
+        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
         { provide: UtilsService, useValue: mockUtilsService },
       ],
       schemas: [NO_ERRORS_SCHEMA],

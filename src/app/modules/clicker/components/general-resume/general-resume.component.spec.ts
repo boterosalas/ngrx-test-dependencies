@@ -7,12 +7,15 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LinksService } from 'src/app/services/links.service';
 import { of } from 'rxjs/internal/observable/of';
+import { SocialAuthService } from 'angularx-social-login';
+import { Observable } from 'rxjs';
 
 describe('GeneralResumeComponent', () => {
   let component: GeneralResumeComponent;
   let fixture: ComponentFixture<GeneralResumeComponent>;
 
   let mockLinksService = jasmine.createSpyObj('LinksService', ['getReports']);
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
   let resume = {
     monthResume: {
@@ -54,7 +57,7 @@ beforeEach(waitForAsync(() => {
           },
         }),
       ],
-      providers: [{ provide: LinksService, useValue: mockLinksService }],
+      providers: [{ provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },{ provide: LinksService, useValue: mockLinksService }],
     }).compileComponents();
     mockLinksService.getReports.and.returnValue(of(resume));
   }));

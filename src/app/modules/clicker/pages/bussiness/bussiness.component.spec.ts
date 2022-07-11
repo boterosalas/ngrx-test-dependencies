@@ -21,6 +21,8 @@ import { Router } from '@angular/router';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { SocialAuthService } from 'angularx-social-login';
+import { Observable } from 'rxjs';
 
 describe('BussinessComponent', () => {
   let component: BussinessComponent;
@@ -41,6 +43,8 @@ describe('BussinessComponent', () => {
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open']);
 
   const mockDialogRef = jasmine.createSpyObj('MatDialogRef', ['close', 'afterClosed', 'componentInstance']);
+
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
   const dataUserC = {
     acceptTermsDeliver: true,
@@ -255,6 +259,7 @@ describe('BussinessComponent', () => {
         }),
       ],
       providers: [
+        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
         { provide: ContentService, useValue: mockContentService },
         { provide: UserService, useValue: mockUserService },
         { provide: MatDialogRef, useValue: mockDialogRef },

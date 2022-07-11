@@ -13,7 +13,7 @@ import { AngularFireModule } from '@angular/fire';
 import { SwUpdate, ServiceWorkerModule } from '@angular/service-worker';
 import { ContentService } from './services/content.service';
 import { Router } from '@angular/router';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { SidenavService } from './services/sidenav.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MasterDataService } from './services/master-data.service';
@@ -23,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { UtilsService } from './services/utils.service';
 import { AppMaterialModule } from './modules/shared/app-material/app-material.module';
+import { SocialLoginModule, SocialAuthServiceConfig, SocialAuthService } from 'angularx-social-login';
 
 // const TRANSLATIONS_ES = require('../assets/i18n/es.json');
 export class MatDialogMock {
@@ -40,7 +41,6 @@ export class MatDialogMock {
 }
 
 describe('AppComponent', () => {
-
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   const matDialog = new MatDialogMock();
@@ -101,84 +101,84 @@ describe('AppComponent', () => {
     BLink: responseGetPopup[0].link,
   };
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [AppComponent],
-        imports: [
-          HttpClientTestingModule,
-          TranslateModule.forRoot({}),
-          RouterTestingModule.withRoutes([]),
-          AngularFireDatabaseModule,
-          AngularFireAuthModule,
-          AngularFireMessagingModule,
-          AppMaterialModule,
-          BrowserAnimationsModule,
-          ReactiveFormsModule,
-          FormsModule,
-          MatPasswordStrengthModule,
-          ServiceWorkerModule.register('', { enabled: false }),
-          AngularFireModule.initializeApp({
-            apiKey: 'AIzaSyBLEXtXZGfMEm6dLHtngNa_HWgEjjrk-14',
-            authDomain: 'test-push-notification-633a0.firebaseapp.com',
-            databaseURL: 'https://test-push-notification-633a0.firebaseio.com',
-            projectId: 'test-push-notification-633a0',
-            storageBucket: 'test-push-notification-633a0.appspot.com',
-            messagingSenderId: '374253972065',
-            appId: '1:374253972065:web:96a6651d3a2f816451d820',
-            measurementId: 'G-BESRDNSPL1',
-          }),
-          JwtModule.forRoot({
-            config: {
-              tokenGetter: () => {
-                return localStorage.getItem('ACCESS_TOKEN');
-              },
-              throwNoTokenError: true,
-              allowedDomains: [],
-              disallowedRoutes: [],
+  let socialAuthServiceMock: any;
+
+  socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
+
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [AppComponent],
+      imports: [
+        HttpClientTestingModule,
+        TranslateModule.forRoot({}),
+        RouterTestingModule.withRoutes([]),
+        AngularFireDatabaseModule,
+        AngularFireAuthModule,
+        AngularFireMessagingModule,
+        AppMaterialModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatPasswordStrengthModule,
+        ServiceWorkerModule.register('', { enabled: false }),
+        SocialLoginModule,
+        AngularFireModule.initializeApp({
+          apiKey: 'AIzaSyBLEXtXZGfMEm6dLHtngNa_HWgEjjrk-14',
+          authDomain: 'test-push-notification-633a0.firebaseapp.com',
+          databaseURL: 'https://test-push-notification-633a0.firebaseio.com',
+          projectId: 'test-push-notification-633a0',
+          storageBucket: 'test-push-notification-633a0.appspot.com',
+          messagingSenderId: '374253972065',
+          appId: '1:374253972065:web:96a6651d3a2f816451d820',
+          measurementId: 'G-BESRDNSPL1',
+        }),
+        JwtModule.forRoot({
+          config: {
+            tokenGetter: () => {
+              return localStorage.getItem('ACCESS_TOKEN');
             },
-          }),
-        ],
-        providers: [
-          TranslateService,
-          BnNgIdleService,
-          SwUpdate,
-          UtilsService,
-          { provide: ContentService, useValue: mockContentService },
-          { provide: SidenavService, useValue: mockSidenavService },
-          { provide: MasterDataService, useValue: mockMasterService },
-          { provide: UserService, useValue: mockUserService },
-          { provide: MatDialogRef, useValue: MatDialogMock },
-          { provide: MatDialog, useValue: matDialog },
-        ],
-        schemas: [NO_ERRORS_SCHEMA],
-      }).compileComponents();
-      mockContentService.getPopup.and.returnValue(of(responseGetPopup));
-      mockContentService.saveVisitOffer.and.returnValue(of(responseGetPopup));
-      mockSidenavService.sideNavState.and.returnValue(of(true));
-      mockMasterService.getTerms.and.returnValue(of(terms));
-      mockUserService.saveUserAcceptTermsReferrals.and.returnValue(of(dataTerms));
-      mockUserService.getuserdata.and.returnValue(of(dataTerms));
-      mockUserService.saveOnboarding.and.returnValue(of(dataTerms));
+            throwNoTokenError: true,
+            allowedDomains: [],
+            disallowedRoutes: [],
+          },
+        }),
+      ],
+      providers: [
+        TranslateService,
+        BnNgIdleService,
+        SwUpdate,
+        UtilsService,
+        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
+        { provide: ContentService, useValue: mockContentService },
+        { provide: SidenavService, useValue: mockSidenavService },
+        { provide: MasterDataService, useValue: mockMasterService },
+        { provide: UserService, useValue: mockUserService },
+        { provide: MatDialogRef, useValue: MatDialogMock },
+        { provide: MatDialog, useValue: matDialog },
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
+    mockContentService.getPopup.and.returnValue(of(responseGetPopup));
+    mockContentService.saveVisitOffer.and.returnValue(of(responseGetPopup));
+    mockSidenavService.sideNavState.and.returnValue(of(true));
+    mockMasterService.getTerms.and.returnValue(of(terms));
+    mockUserService.saveUserAcceptTermsReferrals.and.returnValue(of(dataTerms));
+    mockUserService.getuserdata.and.returnValue(of(dataTerms));
+    mockUserService.saveOnboarding.and.returnValue(of(dataTerms));
 
+    // translate = TestBed.get(TranslateService);
+    // http = TestBed.get(HttpTestingController);
+  }));
 
-      // translate = TestBed.get(TranslateService);
-      // http = TestBed.get(HttpTestingController);
-    })
-  );
-
-  it(
-    'should create the app',
-    waitForAsync(() => {
-      localStorage.setItem(
-        'ACCESS_TOKEN',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU'
-      );
-      const fixture = TestBed.createComponent(AppComponent);
-      const app = fixture.debugElement.componentInstance;
-      expect(app).toBeTruthy();
-    })
-  );
+  it('should create the app', waitForAsync(() => {
+    localStorage.setItem(
+      'ACCESS_TOKEN',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInVzZXJOYW1lIjoiZGF2aWQuYmV0YW5jdXJAcHJhZ21hLmNvbS5jbyIsInJvbGUiOiJDTElDS0VSIiwiZXhwIjoxNTcxODY2MDgwLCJpc3MiOiJwcmFjdGluY2FuZXRjb3JlLmNvbSIsImF1ZCI6IkVzdHVkaWFudGVzIn0.UJahw9VBALxwYizSTppjGJYnr618EKlaFW-d3YLugnU'
+    );
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app).toBeTruthy();
+  }));
 
   describe('get popup', () => {
     beforeEach(() => {
@@ -264,6 +264,4 @@ describe('AppComponent', () => {
     //   expect(component.showForgotForm).toBeTruthy();
     // });
   });
-
 });
-

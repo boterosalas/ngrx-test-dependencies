@@ -10,13 +10,16 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { UserService } from 'src/app/services/user.service';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { SocialAuthService } from 'angularx-social-login';
 
 describe('ClickAcademyComponent', () => {
   let component: ClickAcademyComponent;
   let fixture: ComponentFixture<ClickAcademyComponent>;
 
   const mockUserService = jasmine.createSpyObj('UserService', ['saveOnboarding']);
+
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
   const saveOnboardingOk = {
     state: 'Success',
@@ -45,7 +48,7 @@ beforeEach(waitForAsync(() => {
           },
         }),
       ],
-      providers: [{ provide: UserService, useValue: mockUserService }],
+      providers: [{ provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },{ provide: UserService, useValue: mockUserService }],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   }));

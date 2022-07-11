@@ -14,6 +14,7 @@ import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { PaymentInfoComponent } from './payment-info.component';
 import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
+import { SocialAuthService } from 'angularx-social-login';
 
 class MockUserService {
   userInfo$ = new BehaviorSubject<any>({
@@ -86,6 +87,7 @@ describe('PaymentInfoComponent', () => {
   let fixture: ComponentFixture<PaymentInfoComponent>;
 
   const mockMasterDataService = jasmine.createSpyObj('MasterDataService', ['getDepartments', 'getBanks']);
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
   const dataDepartments = {
     state: 'Success',
@@ -209,6 +211,7 @@ describe('PaymentInfoComponent', () => {
           }),
         ],
         providers: [
+          { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
           { provide: MasterDataService, useValue: mockMasterDataService },
           { provide: UserService, useClass: MockUserService },
           { provide: UserService, useClass: MockUserServiceError },

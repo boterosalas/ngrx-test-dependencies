@@ -5,7 +5,8 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
-import { of } from 'rxjs';
+import { SocialAuthService } from 'angularx-social-login';
+import { Observable, of } from 'rxjs';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -35,6 +36,7 @@ describe('PreferencesComponent', () => {
   const matDialog = new MatDialogMock();
 
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open']);
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
   const resp = {
     state: 'Success',
@@ -65,6 +67,7 @@ describe('PreferencesComponent', () => {
         }),
       ],
       providers: [
+        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
         { provide: MatDialog, useValue: matDialog },
         { provide: AuthService, useValue: mockAuthService },
         { provide: MatDialogRef, useValue: mockDialog },

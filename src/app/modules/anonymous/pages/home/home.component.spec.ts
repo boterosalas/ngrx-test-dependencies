@@ -8,7 +8,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from 'src/app/services/user.service';
-import { of, throwError, BehaviorSubject } from 'rxjs';
+import { of, throwError, BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -26,6 +26,7 @@ import { AngularFireModule } from '@angular/fire';
 import { MasterDataService } from 'src/app/services/master-data.service';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { TokenService } from 'src/app/services/token.service';
+import { SocialAuthService } from 'angularx-social-login';
 
 class MockAuthService extends AuthService {
   isLoggedIn() {
@@ -60,6 +61,8 @@ export class MockUserInfo {
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
+
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
   const mockUserService = jasmine.createSpyObj('UserService', [
     'activateProfile',
@@ -539,6 +542,7 @@ describe('HomeComponent', () => {
           }),
         ],
         providers: [
+          { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
           { provide: UserService, useValue: mockUserService },
           { provide: AuthService, useClass: MockAuthService },
           { provide: UtilsService, useValue: mockUtilsService },
