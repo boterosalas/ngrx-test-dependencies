@@ -16,6 +16,8 @@ import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-g
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TokenService } from 'src/app/services/token.service';
+import { SocialAuthService } from 'angularx-social-login';
+import { Observable } from 'rxjs';
 
 export class MockUserInfo {
   user = {
@@ -48,6 +50,8 @@ describe('ReportComponent', () => {
     'getDetailPaymentClicker',
     'getReportUser',
   ]);
+
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open']);
   const mockDialogRef = jasmine.createSpyObj('MatDialogRef', ['close', 'afterClosed', 'componentInstance', 'event ']);
@@ -133,6 +137,7 @@ describe('ReportComponent', () => {
           }),
         ],
         providers: [
+          { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
           { provide: TokenService, useClass: MockUserInfo },
           { provide: LinksService, useValue: mockLinksService },
           { provide: MatDialogRef, useValue: mockDialogRef },

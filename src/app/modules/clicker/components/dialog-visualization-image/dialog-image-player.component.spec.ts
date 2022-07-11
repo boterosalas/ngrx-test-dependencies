@@ -14,12 +14,15 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ContentService } from 'src/app/services/content.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { SocialAuthService } from 'angularx-social-login';
+import { Observable } from 'rxjs';
 
 describe('DialogCategoryComponent', () => {
   let component: DialogImagePlayerComponent;
   let fixture: ComponentFixture<DialogImagePlayerComponent>;
 
   const mockContentService = jasmine.createSpyObj('ContentService', ['addCategory', 'downloadF']);
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
   const dialogMock = {
     close: () => {},
   };
@@ -60,6 +63,7 @@ beforeEach(waitForAsync(() => {
       ],
       providers: [
         UtilsService,
+        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: dialogMock },
         { provide: ContentService, useValue: mockContentService },

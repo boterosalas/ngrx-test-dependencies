@@ -2,6 +2,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
+import { SocialAuthService } from 'angularx-social-login';
+import { Observable } from 'rxjs';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { TrimPipe } from 'src/app/pipes/trim.pipe';
 
@@ -10,6 +12,8 @@ import { CardCatalogPdfComponent } from './card-catalog-pdf.component';
 describe('CardCatalogPdfComponent', () => {
   let component: CardCatalogPdfComponent;
   let fixture: ComponentFixture<CardCatalogPdfComponent>;
+
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
   const data = {
     id: 3,
@@ -59,7 +63,8 @@ describe('CardCatalogPdfComponent', () => {
             disallowedRoutes: [],
           },
         })
-      ]
+      ],
+      providers: [{ provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },]
     }).compileComponents();
   });
 

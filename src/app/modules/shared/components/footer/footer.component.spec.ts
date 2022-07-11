@@ -8,10 +8,14 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateModule } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { AppMaterialModule } from '../../app-material/app-material.module';
+import { SocialAuthService } from 'angularx-social-login';
+import { Observable } from 'rxjs';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
   let fixture: ComponentFixture<FooterComponent>;
+
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
 beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -32,6 +36,7 @@ beforeEach(waitForAsync(() => {
           },
         }),
       ],
+      providers:[{ provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));

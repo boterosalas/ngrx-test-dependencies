@@ -12,12 +12,15 @@ import { LinksService } from 'src/app/services/links.service';
 import { of } from 'rxjs/internal/observable/of';
 import { UtilsService } from 'src/app/services/utils.service';
 import { JwtModule } from '@auth0/angular-jwt';
+import { SocialAuthService } from 'angularx-social-login';
+import { Observable } from 'rxjs';
 
 describe('LinksHistorialComponent', () => {
   let component: LinksHistorialComponent;
   let fixture: ComponentFixture<LinksHistorialComponent>;
 
   const mockLinksService = jasmine.createSpyObj('LinksService', ['getLinkHistory']);
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
   let dataHistory = {
     state: 'Success',
@@ -75,6 +78,7 @@ beforeEach(waitForAsync(() => {
         }),
       ],
       providers: [
+        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
         UtilsService,
         LinksService,
         // { provide: LinksService, useValue: mockLinksService }

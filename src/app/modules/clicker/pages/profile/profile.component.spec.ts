@@ -11,6 +11,8 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
 import { UserService } from 'src/app/services/user.service';
 import { of } from 'rxjs/internal/observable/of';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { SocialAuthService } from 'angularx-social-login';
+import { Observable } from 'rxjs';
 
 class MockUserService extends UserService {
   userInfo$ = new BehaviorSubject<any>({
@@ -30,6 +32,7 @@ describe('ProfileComponent', () => {
   let fixture: ComponentFixture<ProfileComponent>;
 
   const mockUserService = jasmine.createSpyObj('UserService', ['uploadFiles']);
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
   let sendvalues = {
     userid: '260',
@@ -64,6 +67,7 @@ beforeEach(waitForAsync(() => {
       ],
       providers: [
         // { provide: UserService, useValue: mockUserService },
+        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
         { provide: UserService, useClass: MockUserService },
       ],
       schemas: [NO_ERRORS_SCHEMA],

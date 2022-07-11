@@ -10,6 +10,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { UtilsService } from 'src/app/services/utils.service';
 import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { SocialAuthService } from 'angularx-social-login';
+import { Observable } from 'rxjs';
 
 localStorage.setItem(
   'ACCESS_TOKEN',
@@ -22,6 +24,7 @@ describe('HeaderComponent', () => {
 
   const mockUtilsService = jasmine.createSpyObj('UtilsService', ['showRegisterForm', 'showloginForm', 'showMenu']);
   const mockAuthService = jasmine.createSpyObj('AuthService', ['logout', 'userInfo$']);
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
   let dataUser = {
     Email: 'daniel.salamanca@pragma.com.co',
@@ -54,6 +57,7 @@ beforeEach(waitForAsync(() => {
         }),
       ],
       providers: [
+        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
         { provide: UtilsService, useValue: mockUtilsService },
         // { provide: AuthService, useValue: mockAuthService },
       ],

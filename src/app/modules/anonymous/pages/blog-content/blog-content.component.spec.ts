@@ -7,7 +7,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { ContentService } from 'src/app/services/content.service';
@@ -15,9 +15,13 @@ import { ContentService } from 'src/app/services/content.service';
 import { BlogContentComponent } from './blog-content.component';
 import * as moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
+import { SocialAuthService } from 'angularx-social-login';
 describe('BlogContentComponent', () => {
   let component: BlogContentComponent;
   let fixture: ComponentFixture<BlogContentComponent>;
+
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
+
   let response = {
     Status: 'Success',
     objectResponse: {
@@ -62,6 +66,7 @@ beforeEach(waitForAsync(() => {
 
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
+        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
         { provide: ContentService, useValue: mockContentService },
         { provide: MatDialog, useValue: mockDialog },
       ],

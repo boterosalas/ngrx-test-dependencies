@@ -8,12 +8,15 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { JwtModule } from '@auth0/angular-jwt';
 import { UtilsService } from 'src/app/services/utils.service';
+import { SocialAuthService } from 'angularx-social-login';
+import { Observable } from 'rxjs';
 
 describe('MenuComponent', () => {
   let component: MenuComponent;
   let fixture: ComponentFixture<MenuComponent>;
 
   const mockUtilsService = jasmine.createSpyObj('UtilsService', ['showRegisterForm', 'hideMenu']);
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
 beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -34,7 +37,7 @@ beforeEach(waitForAsync(() => {
           },
         }),
       ],
-      providers: [{ provide: UtilsService, useValue: mockUtilsService }],
+      providers: [{ provide: UtilsService, useValue: mockUtilsService }, { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
     mockUtilsService.showRegisterForm.and.returnValue(true);

@@ -5,17 +5,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateModule } from '@ngx-translate/core';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { ContentService } from 'src/app/services/content.service';
 
 import { BlogsComponent } from './blogs.component';
 import * as moment from 'moment';
+import { SocialAuthService } from 'angularx-social-login';
 describe('BlogsComponent', () => {
   let component: BlogsComponent;
   let fixture: ComponentFixture<BlogsComponent>;
   const mockContentService = jasmine.createSpyObj('ContentService', ['getBlogs']);
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
   let response = {
     Status: 'Success',
     objectResponse: {
@@ -59,7 +61,7 @@ describe('BlogsComponent', () => {
         ],
 
         schemas: [NO_ERRORS_SCHEMA],
-        providers: [{ provide: ContentService, useValue: mockContentService }],
+        providers: [{ provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },{ provide: ContentService, useValue: mockContentService }],
       }).compileComponents();
       mockContentService.getBlogs.and.returnValue(of(response));
     })

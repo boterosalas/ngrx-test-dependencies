@@ -11,10 +11,14 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { HomeComponent } from '../home/home.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { AnonymousModule } from '../../anonymous.module';
+import { SocialAuthService } from 'angularx-social-login';
+import { Observable } from 'rxjs';
 
 describe('RecoverpasswordComponent', () => {
   let component: RecoverpasswordComponent;
   let fixture: ComponentFixture<RecoverpasswordComponent>;
+
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
   localStorage.setItem(
     'ACCESS_TOKEN',
@@ -44,6 +48,7 @@ beforeEach(waitForAsync(() => {
           },
         }),
       ],
+      providers: [{ provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));

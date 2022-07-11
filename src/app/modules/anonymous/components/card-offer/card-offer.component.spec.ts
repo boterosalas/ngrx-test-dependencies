@@ -8,10 +8,14 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
+import { SocialAuthService } from 'angularx-social-login';
+import { Observable } from 'rxjs';
 
 describe('CardOfferComponent', () => {
   let component: CardOfferComponent;
   let fixture: ComponentFixture<CardOfferComponent>;
+
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
 beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -33,6 +37,9 @@ beforeEach(waitForAsync(() => {
             disallowedRoutes: [],
           },
         }),
+      ],
+      providers: [
+        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();

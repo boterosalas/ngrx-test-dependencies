@@ -10,13 +10,15 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LinksService } from 'src/app/services/links.service';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { SocialAuthService } from 'angularx-social-login';
 
 describe('AchievementsComponent', () => {
   let component: AchievementsComponent;
   let fixture: ComponentFixture<AchievementsComponent>;
 
   const mockLinksService = jasmine.createSpyObj('LinksService', ['getMedals']);
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
   let medals = [
     {
@@ -81,7 +83,7 @@ beforeEach(waitForAsync(() => {
           },
         }),
       ],
-      providers: [{ provide: LinksService, useValue: mockLinksService }],
+      providers: [{ provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },{ provide: LinksService, useValue: mockLinksService }],
     }).compileComponents();
     mockLinksService.getMedals.and.returnValue(of(medals));
   }));

@@ -44,6 +44,10 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
+//social login
+
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -60,7 +64,7 @@ export function jwtTokenGetter() {
     LoginformComponent,
     RegisterformComponent,
     ForgotpasswordformComponent,
-    ActivateAccountFormComponent
+    ActivateAccountFormComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -95,6 +99,7 @@ export function jwtTokenGetter() {
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
+    SocialLoginModule,
   ],
   providers: [
     {
@@ -111,8 +116,26 @@ export function jwtTokenGetter() {
     MessagingService,
     AsyncPipe,
     SidenavService,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('521875290874-uj5bdliur9nfhes7phqfuvbnerqg2p77.apps.googleusercontent.com'),
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('1249539112520599'),
+          },
+        ],
+        onError: (err) => {
+          console.error(err);
+        },
+      } as SocialAuthServiceConfig,
+    },
   ],
   bootstrap: [AppComponent],
 })
-
 export class AppModule {}

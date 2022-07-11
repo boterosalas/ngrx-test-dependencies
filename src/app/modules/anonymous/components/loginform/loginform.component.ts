@@ -10,6 +10,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import decode from 'jwt-decode';
 import { LinksService } from 'src/app/services/links.service';
 import { isPlatformBrowser } from '@angular/common';
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
 declare var dataLayer: any;
 
 @Component({
@@ -25,7 +26,8 @@ export class LoginformComponent implements OnInit, OnDestroy {
     private loading: LoaderService,
     private utils: UtilsService,
     private link: LinksService,
-    @Inject(PLATFORM_ID) private platformId: object
+    @Inject(PLATFORM_ID) private platformId: object,
+    private authServiceSocial: SocialAuthService
   ) {}
 
   private subscription: Subscription = new Subscription();
@@ -33,11 +35,19 @@ export class LoginformComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
   isSubmitted = false;
   emailPattern = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
+  user: SocialUser;
+  loggedIn: boolean;
 
   ngOnInit() {
     this.loginForm = this.fb.group({
       Username: ['', [Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
       Password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
+    });
+
+    this.authServiceSocial.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+      console.log(this.user);
     });
   }
 
@@ -163,6 +173,14 @@ export class LoginformComponent implements OnInit, OnDestroy {
       localStorage.setItem('Amount', amount.amountsCommission);
       localStorage.setItem('AmonuntReferred', amount.amountsReferred);
     });
+  }
+
+  signInWithGoogle(): void {
+    this.authServiceSocial.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  signInWithFB(): void {
+    this.authServiceSocial.signIn(FacebookLoginProvider.PROVIDER_ID);
   }
 
   ngOnDestroy(): void {

@@ -3,7 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
-import { of } from 'rxjs';
+import { SocialAuthService } from 'angularx-social-login';
+import { Observable, of } from 'rxjs';
 import { DataRangeInterface } from 'src/app/interfaces/dateRangeInterface';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { LinksService } from 'src/app/services/links.service';
@@ -14,6 +15,7 @@ describe('ReportPartnerComponent', () => {
   let fixture: ComponentFixture<ReportPartnerComponent>;
 
   let mockLinksService = jasmine.createSpyObj('LinksService', ['getBussinessPartnerKPI']);
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
 
   const kpi = {
@@ -56,7 +58,7 @@ describe('ReportPartnerComponent', () => {
           },
         }),
       ],
-      providers: [{ provide: LinksService, useValue: mockLinksService }],
+      providers: [{ provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },{ provide: LinksService, useValue: mockLinksService }],
     }).compileComponents();
     mockLinksService.getBussinessPartnerKPI.and.returnValue(of(kpi));
   });
