@@ -89,6 +89,7 @@ describe('AppComponent', () => {
       { sectionvalue: 'prueba', sectiontitle: 'prueba' },
       { sectionvalue: 'prueba', sectiontitle: 'prueba' },
       { sectionvalue: 'prueba', sectiontitle: 'prueba' },
+      { sectionvalue: 'prueba', sectiontitle: 'prueba' },
     ],
   };
 

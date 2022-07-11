@@ -67,10 +67,12 @@ export class AppComponent implements OnInit, OnDestroy {
   stepTerms = true;
   activateButton = false;
   contentTerminos: any;
+  contentTerminosPJ: any;
   contentProteccion: any;
   contentTransparencia: any;
   contentPrograma: any;
   textTerminos: any;
+  textTerminosPJ: any;
   textProteccion: any;
   textTransparencia: any;
   textPrograma: any;
@@ -81,6 +83,7 @@ export class AppComponent implements OnInit, OnDestroy {
   idPopup:any;
   idCampaign:number;
   slowConection = false;
+  documentType:string;
 
   constructor(
     private translate: TranslateService,
@@ -223,10 +226,12 @@ export class AppComponent implements OnInit, OnDestroy {
       this.contentProteccion = resp.objectResponse[1].sectionvalue;
       this.contentTransparencia = resp.objectResponse[2].sectionvalue;
       this.contentPrograma = resp.objectResponse[3].sectionvalue;
+      this.contentTerminosPJ = resp.objectResponse[4].sectionvalue;
       this.textTerminos = resp.objectResponse[0].sectiontitle;
       this.textProteccion = resp.objectResponse[1].sectiontitle;
       this.textTransparencia = resp.objectResponse[2].sectiontitle;
       this.textPrograma = resp.objectResponse[3].sectiontitle;
+      this.textTerminosPJ = resp.objectResponse[4].sectiontitle;
     });
   }
 
@@ -392,6 +397,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.role = role;
       if (role === 'CLICKER' || role === 'ADMIN' || role === 'SUPERADMIN') {
         this.email = this.token.userInfo().userName;
+        this.documentType = this.token.userInfo().documentType;
         this.subscription = this.user.getuserdata().subscribe((user) => {
           this.onboardingViwed = user.onBoardingViewed;
           this.rateapp = user.rateApp;
