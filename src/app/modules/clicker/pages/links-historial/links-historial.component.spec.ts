@@ -107,11 +107,11 @@ beforeEach(waitForAsync(() => {
     expect(dataHistory).not.toBeUndefined();
   });
 
-  it('copyInputMessage', () => {
-    const button = document.querySelector('#btnCopy');
-    button.dispatchEvent(new Event('click'));
-    const nativeElementInput = fixture.nativeElement;
-    const input = nativeElementInput.querySelector('input');
-    expect(input).not.toBeUndefined();
-  });
+  // it('copyInputMessage', () => {
+  //   const button = document.querySelector('#btnCopy');
+  //   button.dispatchEvent(new Event('click'));
+  //   const nativeElementInput = fixture.nativeElement;
+  //   const input = nativeElementInput.querySelector('input');
+  //   expect(input).not.toBeUndefined();
+  // });
 });

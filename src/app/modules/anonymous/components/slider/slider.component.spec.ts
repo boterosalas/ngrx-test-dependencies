@@ -207,13 +207,13 @@ beforeEach(waitForAsync(() => {
     expect(mockDialog.open).toBeTruthy();
   });
 
-  it('copyInputMessage', () => {
-    const button = document.querySelector('#btnCopy');
-    button.dispatchEvent(new Event('click'));
-    const nativeElementInput = fixture.nativeElement;
-    const input = nativeElementInput.querySelector('input');
-    expect(input).not.toBeUndefined();
-  });
+  // it('copyInputMessage', () => {
+  //   const button = document.querySelector('#btnCopy');
+  //   button.dispatchEvent(new Event('click'));
+  //   const nativeElementInput = fixture.nativeElement;
+  //   const input = nativeElementInput.querySelector('input');
+  //   expect(input).not.toBeUndefined();
+  // });
 
   it('share mobile', () => {
     component.share();
@@ -243,8 +243,5 @@ beforeEach(waitForAsync(() => {
     component.openShare();
     expect(component.urlshorten).not.toBeUndefined();
   });
-  it('Change', () => {
-    let datos = true;
-    expect(datos).toBeTruthy();
-  });
+
 });

@@ -367,15 +367,15 @@ describe('BussinessComponent', () => {
     expect(date).toBeDefined();
   });
 
-  it('copyInputMessage', () => {
-    // const buttonModal = document.querySelector(".gtmInicioClicL");
-    // buttonModal.dispatchEvent(new Event("click"));
-    const button = document.querySelector('#btnCopy');
-    button.dispatchEvent(new Event('click'));
-    const nativeElementInput = fixture.nativeElement;
-    const input = nativeElementInput.querySelector('input');
-    expect(input).not.toBeUndefined();
-  });
+  // it('copyInputMessage', () => {
+  //   const buttonModal = document.querySelector(".gtmInicioClicL");
+  //   buttonModal.dispatchEvent(new Event("click"));
+  //   const button = document.querySelector('#btnCopy');
+  //   button.dispatchEvent(new Event('click'));
+  //   const nativeElementInput = fixture.nativeElement;
+  //   const input = nativeElementInput.querySelector('input');
+  //   expect(input).not.toBeUndefined();
+  // });
 
   it('modal product carulla', () => {
     const product = {

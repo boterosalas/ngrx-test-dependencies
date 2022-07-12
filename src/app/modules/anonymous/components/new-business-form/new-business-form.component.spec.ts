@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContentService } from 'src/app/services/content.service';
 import { of } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('NewBusinessFormComponent', () => {
   let component: NewBusinessFormComponent;
@@ -80,6 +81,7 @@ beforeEach(waitForAsync(() => {
         RecaptchaModule,
         RecaptchaFormsModule,
         BrowserAnimationsModule,
+        RouterTestingModule,
       ],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
