@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, Inject, PLATFORM_ID, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -10,7 +10,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import decode from 'jwt-decode';
 import { LinksService } from 'src/app/services/links.service';
 import { isPlatformBrowser } from '@angular/common';
-import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 declare var dataLayer: any;
 
 @Component({
@@ -35,8 +35,10 @@ export class LoginformComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
   isSubmitted = false;
   emailPattern = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
-  user: SocialUser;
+  user: SocialUser | undefined;
+  GoogleLoginProvider = GoogleLoginProvider;
   loggedIn: boolean;
+  @ViewChild('googleButton', { static: false}) googleButton: ElementRef;
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -178,6 +180,10 @@ export class LoginformComponent implements OnInit, OnDestroy {
   signInWithGoogle(): void {
     this.authServiceSocial.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
+
+  submitGoogleLogin() {
+    this.googleButton.nativeElement.click();
+}
 
   signInWithFB(): void {
     this.authServiceSocial.signIn(FacebookLoginProvider.PROVIDER_ID);

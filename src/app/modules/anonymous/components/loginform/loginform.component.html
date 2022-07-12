@@ -62,7 +62,8 @@
 
 <div fxLayout="row" fxLayoutGap="10px" ngClass="social">
   <app-button  title="Continuar con" (action)="signInWithFB()"  color="gray" classIcon="tio-facebook style-icon"></app-button>
-  <app-button  title="Continuar con"   (action)="signInWithGoogle()" color="gray" classIcon="tio-google style-icon"></app-button>
+  <app-button  title="Continuar con"   (action)="submitGoogleLogin()" color="gray" classIcon="tio-google style-icon"></app-button>
+  <asl-google-signin-button #googleButton [hidden]="true"></asl-google-signin-button>
 </div>
 
 <p
