@@ -10,7 +10,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { UtilsService } from 'src/app/services/utils.service';
 import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 import { JwtModule } from '@auth0/angular-jwt';
-import { SocialAuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
 
 localStorage.setItem(

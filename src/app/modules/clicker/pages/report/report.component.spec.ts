@@ -16,7 +16,7 @@ import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-g
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TokenService } from 'src/app/services/token.service';
-import { SocialAuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
 
 export class MockUserInfo {

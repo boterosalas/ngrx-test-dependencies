@@ -11,7 +11,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateModule } from '@ngx-translate/core';
 import { Router } from '@angular/router';
-import { SocialAuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 describe('MenuOptionsComponent', () => {
   let component: MenuOptionsComponent;

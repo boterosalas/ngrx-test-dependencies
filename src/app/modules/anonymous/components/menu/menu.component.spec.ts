@@ -8,7 +8,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { JwtModule } from '@auth0/angular-jwt';
 import { UtilsService } from 'src/app/services/utils.service';
-import { SocialAuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
 
 describe('MenuComponent', () => {

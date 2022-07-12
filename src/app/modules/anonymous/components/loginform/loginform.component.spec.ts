@@ -15,7 +15,7 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { LinksService } from 'src/app/services/links.service';
 import { UtilsService } from 'src/app/services/utils.service';
-import { SocialAuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 describe('LoginformComponent', () => {
   let component: LoginformComponent;

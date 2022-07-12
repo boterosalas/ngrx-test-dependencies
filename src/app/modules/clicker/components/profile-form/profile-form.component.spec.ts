@@ -18,7 +18,7 @@ import { UserService } from 'src/app/services/user.service';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
-import { SocialAuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 class MockUserService extends UserService {
 

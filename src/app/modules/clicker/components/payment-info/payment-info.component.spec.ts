@@ -14,7 +14,7 @@ import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { PaymentInfoComponent } from './payment-info.component';
 import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
-import { SocialAuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 class MockUserService {
   userInfo$ = new BehaviorSubject<any>({
