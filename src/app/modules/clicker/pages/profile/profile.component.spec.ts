@@ -11,7 +11,7 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
 import { UserService } from 'src/app/services/user.service';
 import { of } from 'rxjs/internal/observable/of';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { SocialAuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
 
 class MockUserService extends UserService {

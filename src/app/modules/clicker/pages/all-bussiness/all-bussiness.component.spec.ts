@@ -11,7 +11,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { ContentService } from 'src/app/services/content.service';
 import { Observable, of } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SocialAuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 describe('AllBussinessComponent', () => {
   let component: AllBussinessComponent;

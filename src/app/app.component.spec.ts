@@ -23,7 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { UtilsService } from './services/utils.service';
 import { AppMaterialModule } from './modules/shared/app-material/app-material.module';
-import { SocialLoginModule, SocialAuthServiceConfig, SocialAuthService } from 'angularx-social-login';
+import { SocialLoginModule, SocialAuthServiceConfig, SocialAuthService } from '@abacritt/angularx-social-login';
 
 // const TRANSLATIONS_ES = require('../assets/i18n/es.json');
 export class MatDialogMock {

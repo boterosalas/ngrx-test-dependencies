@@ -8,7 +8,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
-import { SocialAuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
 
 describe('CardOfferComponent', () => {

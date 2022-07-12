@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
@@ -26,7 +26,7 @@ export class PreferencesComponent extends ProfileFormComponent implements OnInit
   subscription: Subscription = new Subscription();
 
   constructor(
-     fb: FormBuilder,
+     fb: UntypedFormBuilder,
      user: UserService,
      auth: AuthService,
      loader: LoaderService,

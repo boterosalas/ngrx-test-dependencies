@@ -15,7 +15,7 @@ import { ContentService } from 'src/app/services/content.service';
 import { BlogContentComponent } from './blog-content.component';
 import * as moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
-import { SocialAuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 describe('BlogContentComponent', () => {
   let component: BlogContentComponent;
   let fixture: ComponentFixture<BlogContentComponent>;

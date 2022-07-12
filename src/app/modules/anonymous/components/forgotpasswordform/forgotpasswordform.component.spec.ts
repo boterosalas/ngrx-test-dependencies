@@ -49,7 +49,7 @@ beforeEach(waitForAsync(() => {
         HttpClientTestingModule,
         BrowserAnimationsModule,
         AppMaterialModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule,
         SharedModule,
       ],
       providers: [
@@ -63,6 +63,7 @@ beforeEach(waitForAsync(() => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ForgotpasswordformComponent);
+    window['dataLayer'] = [];
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

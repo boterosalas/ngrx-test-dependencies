@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { LinksService } from 'src/app/services/links.service';
 import { Subscription } from 'rxjs';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder } from '@angular/forms';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -42,7 +42,7 @@ export class LinksHistorialComponent implements OnInit {
   classButtonTwitter: string;
   classButtonWhatsapp: string;
   classButtonShare: string;
-  formLink: FormGroup;
+  formLink: UntypedFormGroup;
   private ngNavigatorShareService: NgNavigatorShareService;
   tokenInfo: any;
   token: any;
@@ -61,7 +61,7 @@ export class LinksHistorialComponent implements OnInit {
   constructor(
     private links: LinksService,
     ngNavigatorShareService: NgNavigatorShareService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private dialog: MatBottomSheet,
     private utils: UtilsService,
     private content: ContentService

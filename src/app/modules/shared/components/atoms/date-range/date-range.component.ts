@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import moment from 'moment';
 
 @Component({
@@ -31,9 +31,9 @@ export class DateRangeComponent implements OnInit {
   };
 
   placeholder = 'Seleccione las fechas';
-  dateRangeForm: FormGroup;
+  dateRangeForm: UntypedFormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: UntypedFormBuilder) {}
 
   ngOnInit(): void {
     this.dateRangeForm = this.fb.group({

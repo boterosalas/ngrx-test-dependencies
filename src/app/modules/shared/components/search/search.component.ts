@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-search',
@@ -7,9 +7,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: UntypedFormBuilder) {}
   @Output() search = new EventEmitter();
-  searchForm: FormGroup;
+  searchForm: UntypedFormGroup;
   searchPattern = '^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$';
 
   ngOnInit() {

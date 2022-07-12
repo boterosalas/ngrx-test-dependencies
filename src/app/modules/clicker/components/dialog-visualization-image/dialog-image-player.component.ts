@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ContentService } from 'src/app/services/content.service';
@@ -14,7 +14,7 @@ export class DialogImagePlayerComponent implements OnInit {
     private content: ContentService,
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private utils: UtilsService
   ) {}
 

@@ -79,7 +79,6 @@
               "optimization": false,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": true,
               "aot": true,
               "extractLicenses": true,
@@ -211,13 +210,6 @@
             "scripts": ["node_modules/jquery/dist/jquery.min.js", "node_modules/slick-carousel/slick/slick.min.js"]
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["tsconfig.app.json", "tsconfig.spec.json", "e2e/tsconfig.json"],
-            "exclude": ["**/node_modules/**"]
-          }
-        },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
@@ -344,6 +336,5 @@
         }
       }
     }
-  },
-  "defaultProject": "clickam"
+  }
 }

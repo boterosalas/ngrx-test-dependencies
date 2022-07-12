@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter, ViewChild, TemplateRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, Validators, UntypedFormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
@@ -53,8 +53,8 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
   showForm = false;
   urlshorten = '';
   url: string;
-  idCustomerForm: FormGroup;
-  formLink: FormGroup;
+  idCustomerForm: UntypedFormGroup;
+  formLink: UntypedFormGroup;
   business: string;
   plu: string;
   classButtonCopy: string;
@@ -85,7 +85,7 @@ export class CardStoryComponent implements OnInit, OnChanges, AfterViewInit {
 
   constructor(
     private router: Router,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private token: TokenService,
     private dialog: MatBottomSheet,
     private links: LinksService,

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild, TemplateRef } from '@angular/core';
 import { ContentService } from 'src/app/services/content.service';
 import { Subscription } from 'rxjs';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
 import { ResponseService } from 'src/app/interfaces/response';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -23,7 +23,7 @@ export class SliderComponent implements OnInit, OnDestroy {
   constructor(
     private sp: ContentService,
     private dialog: MatBottomSheet,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private _snackBar: MatSnackBar,
     private user: UserService,
     private auth: AuthService,
@@ -54,11 +54,11 @@ export class SliderComponent implements OnInit, OnDestroy {
   url: string;
   identification: string;
   enableCopy = true;
-  formLink: FormGroup;
+  formLink: UntypedFormGroup;
   plu: string;
   business: string;
   date: any;
-  idCustomerForm: FormGroup;
+  idCustomerForm: UntypedFormGroup;
   showForm = false;
   showFormCustomer = true;
   reference: boolean;

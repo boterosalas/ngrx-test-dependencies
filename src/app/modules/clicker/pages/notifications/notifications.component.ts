@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ResponseService } from 'src/app/interfaces/response';
@@ -21,9 +21,9 @@ export class NotificationsComponent implements OnInit {
   titleSelect = 'Seleccionar';
   innerWidth: number;
   formArray = [];
-  checkboxGroup: FormGroup;
+  checkboxGroup: UntypedFormGroup;
 
-  constructor(private _content: ContentService, private fb: FormBuilder, private _snackBar: MatSnackBar, private router: Router) {}
+  constructor(private _content: ContentService, private fb: UntypedFormBuilder, private _snackBar: MatSnackBar, private router: Router) {}
 
   ngOnInit() {
     this.getNotications();

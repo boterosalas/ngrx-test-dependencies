@@ -10,7 +10,7 @@ import { Forgotpassword } from '../interfaces/forgotpassword';
 import { Recoverpassword } from '../interfaces/recoverpassword';
 import { UserService } from './user.service';
 import { ResponseService } from '../interfaces/response';
-import { SocialAuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 @Injectable({
   providedIn: 'root',

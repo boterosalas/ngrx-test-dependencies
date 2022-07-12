@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ContentService } from 'src/app/services/content.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { distinctUntilChanged } from 'rxjs/operators';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, Validators, UntypedFormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
 import { ResponseService } from 'src/app/interfaces/response';
@@ -46,12 +46,12 @@ export class BussinessComponent implements OnInit, OnDestroy {
   showFormCustomer = true;
   reference: boolean;
   showForm = false;
-  termsForm: FormGroup;
-  idCustomerForm: FormGroup;
+  termsForm: UntypedFormGroup;
+  idCustomerForm: UntypedFormGroup;
   date: any;
   business: string;
   plu: string;
-  formLink: FormGroup;
+  formLink: UntypedFormGroup;
   enableCopy = true;
   identification: string;
   imgBanner: string;
@@ -113,7 +113,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     private utils: UtilsService,
     private sp: ContentService,
     private dialog: MatBottomSheet,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private user: UserService,
     public auth: AuthService,
     private links: LinksService,

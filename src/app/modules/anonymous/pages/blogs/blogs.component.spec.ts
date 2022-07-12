@@ -12,7 +12,7 @@ import { ContentService } from 'src/app/services/content.service';
 
 import { BlogsComponent } from './blogs.component';
 import * as moment from 'moment';
-import { SocialAuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 describe('BlogsComponent', () => {
   let component: BlogsComponent;
   let fixture: ComponentFixture<BlogsComponent>;

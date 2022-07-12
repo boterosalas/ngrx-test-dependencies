@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import moment from 'moment';
 
 @Component({
@@ -36,7 +36,7 @@ export class DateRangeButtonComponent implements OnInit {
   empty = {};
 
   maxDate = moment(new Date());
-  dateRangeForm: FormGroup;
+  dateRangeForm: UntypedFormGroup;
   placeholder = 'Seleccione las fechas';
   locale = {
     locale: 'es',
@@ -52,7 +52,7 @@ export class DateRangeButtonComponent implements OnInit {
     firstDay: 1, // first day is monday
   };
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: UntypedFormBuilder) {}
 
   ngOnInit(): void {
     this.dateRangeForm = this.fb.group({

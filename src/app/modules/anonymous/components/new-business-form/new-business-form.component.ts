@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Subscription } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
@@ -24,13 +24,13 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
   ],
 })
 export class NewBusinessFormComponent implements OnInit, OnDestroy {
-  constructor(private fb: FormBuilder, private content: ContentService, private dialog: MatDialog, public dialogRef: MatDialogRef<any>) {}
+  constructor(private fb: UntypedFormBuilder, private content: ContentService, private dialog: MatDialog, public dialogRef: MatDialogRef<any>) {}
 
   @Input() categories: Array<any> = [];
   @Output() registerBusinessEmit = new EventEmitter();
   private subscription: Subscription = new Subscription();
 
-  registerForm: FormGroup;
+  registerForm: UntypedFormGroup;
   emailPattern = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
   namePattern = '[a-zA-Z0-9 àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]+';
   numberPattern = '^(0|[0-9][0-9]*)$';

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ResponseService } from 'src/app/interfaces/response';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
@@ -18,7 +18,7 @@ declare var dataLayer: any;
 export class ForgotpasswordformComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private forgot: AuthService,
     private loading: LoaderService,
     private utils: UtilsService
@@ -26,7 +26,7 @@ export class ForgotpasswordformComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
   emailPattern = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
-  forgotPaswordForm: FormGroup;
+  forgotPaswordForm: UntypedFormGroup;
   text: any = '';
 
   swalOptSuccess: object = {

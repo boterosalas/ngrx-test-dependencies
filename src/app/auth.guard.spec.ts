@@ -4,7 +4,7 @@ import { AuthGuard } from './auth.guard';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
-import { SocialAuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
 
 describe('AuthGuard', () => {

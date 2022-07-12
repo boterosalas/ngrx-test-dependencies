@@ -14,7 +14,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ContentService } from 'src/app/services/content.service';
 import { UtilsService } from 'src/app/services/utils.service';
-import { SocialAuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
 
 describe('DialogCategoryComponent', () => {

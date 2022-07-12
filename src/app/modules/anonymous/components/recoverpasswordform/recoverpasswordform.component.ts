@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { ConfirmPasswordValidator } from 'src/app/validators/confirm-password.validator';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -17,7 +17,7 @@ declare var dataLayer: any;
 export class RecoverpasswordformComponent implements OnInit, OnDestroy {
  
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private recover: AuthService,
@@ -25,7 +25,7 @@ export class RecoverpasswordformComponent implements OnInit, OnDestroy {
   ) {}
 
   private subscription: Subscription = new Subscription();
-  recoverPasswordForm: FormGroup;
+  recoverPasswordForm: UntypedFormGroup;
   code: string;
   email: string;
   msg: string;

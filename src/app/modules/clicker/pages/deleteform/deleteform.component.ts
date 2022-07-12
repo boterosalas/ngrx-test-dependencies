@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
@@ -18,7 +18,7 @@ export class DeleteformComponent implements OnInit {
   constructor(
     private payment: LinksService,
     private user: UserService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private utils: UtilsService
@@ -27,7 +27,7 @@ export class DeleteformComponent implements OnInit {
   available: number;
   account: number;
   activeText = true;
-  profileFormDelete: FormGroup;
+  profileFormDelete: UntypedFormGroup;
   causeSurvey = '';
   disableButtonOr = true;
 

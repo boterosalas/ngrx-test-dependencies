@@ -14,7 +14,7 @@ import { LinksService } from 'src/app/services/links.service';
 import { MessagingService } from 'src/app/shared/messaging.service';
 import { Meta } from '@angular/platform-browser';
 import { MasterDataService } from 'src/app/services/master-data.service';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 import { TokenService } from 'src/app/services/token.service';
 import { ClickamerWayComponent } from '../../components/clickamer-way/clickamer-way.component';
@@ -189,7 +189,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private link: LinksService,
     private messagingService: MessagingService,
     private metaTagService: Meta,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private personalInfo: MasterDataService,
     @Inject(PLATFORM_ID) private platformId: object,
     private token: TokenService

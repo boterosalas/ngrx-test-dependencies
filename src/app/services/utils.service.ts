@@ -6,7 +6,7 @@ import decode from 'jwt-decode';
 import { BehaviorSubject } from 'rxjs';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { SocialAuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 @Injectable({
   providedIn: 'root',

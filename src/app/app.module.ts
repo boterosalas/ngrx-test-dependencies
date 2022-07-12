@@ -46,8 +46,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 //social login
 
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
-import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
+import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider } from '@abacritt/angularx-social-login';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

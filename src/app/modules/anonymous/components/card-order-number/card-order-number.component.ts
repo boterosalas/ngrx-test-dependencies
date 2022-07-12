@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { LinksService } from 'src/app/services/links.service';
 import Swal from 'sweetalert2';
 
@@ -9,14 +9,14 @@ import Swal from 'sweetalert2';
   styleUrls: ['./card-order-number.component.scss'],
 })
 export class CardOrderNumberComponent implements OnInit {
-  orderNumberForm: FormGroup;
+  orderNumberForm: UntypedFormGroup;
 
   bussiness = [
     { id: 'exito', name: 'exito.com' },
     { id: 'carulla', name: 'carulla.com' },
   ];
 
-  constructor(private fb: FormBuilder, private _link: LinksService) {}
+  constructor(private fb: UntypedFormBuilder, private _link: LinksService) {}
 
   ngOnInit() {
     this.formOrderNumber();

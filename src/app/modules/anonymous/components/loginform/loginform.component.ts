@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, HostListener, Inject, PLATFORM_ID } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Component, OnInit, OnDestroy, HostListener, Inject, PLATFORM_ID, ElementRef, ViewChild } from '@angular/core';
+import { UntypedFormGroup, Validators, UntypedFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
@@ -10,7 +10,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import decode from 'jwt-decode';
 import { LinksService } from 'src/app/services/links.service';
 import { isPlatformBrowser } from '@angular/common';
-import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 declare var dataLayer: any;
 
 @Component({
@@ -22,7 +22,7 @@ export class LoginformComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private loading: LoaderService,
     private utils: UtilsService,
     private link: LinksService,
@@ -32,10 +32,10 @@ export class LoginformComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
 
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
   isSubmitted = false;
   emailPattern = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
-  user: SocialUser;
+  user: SocialUser | undefined;
   loggedIn: boolean;
 
   ngOnInit() {
@@ -46,8 +46,7 @@ export class LoginformComponent implements OnInit, OnDestroy {
 
     this.authServiceSocial.authState.subscribe((user) => {
       this.user = user;
-      this.loggedIn = (user != null);
-      console.log(this.user);
+      this.loggedIn = user != null;
     });
   }
 
@@ -156,11 +155,11 @@ export class LoginformComponent implements OnInit, OnDestroy {
     if (tokenDecode.role === 'ADMIN' || tokenDecode.role === 'SUPERADMIN') {
       localStorage.clear();
     }
-  
+
     if (tokenDecode.role === 'PARTNER' || tokenDecode.role === 'PARTNER-CASHIER') {
       this.router.navigate(['/partner']);
       this.authService.isLogged$.next(true);
-      if(tokenDecode.role === 'PARTNER-CASHIER') {
+      if (tokenDecode.role === 'PARTNER-CASHIER') {
         this.authService.getRole$.next('PARTNER-CASHIER');
       } else {
         this.authService.getRole$.next('PARTNER');
@@ -173,10 +172,6 @@ export class LoginformComponent implements OnInit, OnDestroy {
       localStorage.setItem('Amount', amount.amountsCommission);
       localStorage.setItem('AmonuntReferred', amount.amountsReferred);
     });
-  }
-
-  signInWithGoogle(): void {
-    this.authServiceSocial.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
   signInWithFB(): void {
