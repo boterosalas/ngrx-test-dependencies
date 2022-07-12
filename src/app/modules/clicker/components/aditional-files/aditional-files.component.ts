@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { Subscription } from 'rxjs';
 
@@ -9,9 +9,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./aditional-files.component.scss'],
 })
 export class AditionalFilesComponent implements OnInit, OnDestroy {
-  constructor(private fb: FormBuilder, private user: UserService) {}
+  constructor(private fb: UntypedFormBuilder, private user: UserService) {}
 
-  externalForm: FormGroup;
+  externalForm: UntypedFormGroup;
   files = {
     validFormat: true,
     nameFileCed1: '',

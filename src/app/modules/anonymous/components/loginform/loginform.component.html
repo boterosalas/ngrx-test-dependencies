@@ -60,10 +60,13 @@
   </div>
 </form>
 
-<div fxLayout="row" fxLayoutGap="10px" ngClass="social">
-  <app-button  title="Continuar con" (action)="signInWithFB()"  color="gray" classIcon="tio-facebook style-icon"></app-button>
-  <app-button  title="Continuar con"   (action)="submitGoogleLogin()" color="gray" classIcon="tio-google style-icon"></app-button>
-  <asl-google-signin-button #googleButton [hidden]="true"></asl-google-signin-button>
+<app-title showTitleh4="true" text="ACCEDE CON" commonClass="mx-3 text-center"></app-title>
+
+<div fxLayout="row" class="ml-5" fxLayoutAlign="center center" fxLayoutGap="10px" ngClass="social">
+  <button mat-raised-button class="socialbtn" color="orange" (click)="signInWithFB()">
+    <i class="tio-facebook face"></i>
+  </button>
+  <asl-google-signin-button></asl-google-signin-button>
 </div>
 
 <p

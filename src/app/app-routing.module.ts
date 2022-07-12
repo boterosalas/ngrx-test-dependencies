@@ -44,7 +44,7 @@ const routes: Routes = [
     preloadingStrategy: PreloadAllModules,
     useHash: false,
     scrollPositionRestoration: 'top',
-    initialNavigation: 'enabled'
+    initialNavigation: 'enabledBlocking'
 }),
   ],
   exports: [RouterModule],

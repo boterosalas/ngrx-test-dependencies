@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, FormControl } from '@angular/forms';
 import * as moment from 'moment';
 import { ContentService } from 'src/app/services/content.service';
 import { UserService } from 'src/app/services/user.service';
@@ -12,7 +12,7 @@ moment.locale('es');
   styleUrls: ['./report-news.component.scss'],
 })
 export class ReportNewsComponent implements OnInit {
-  dateForm: FormGroup;
+  dateForm: UntypedFormGroup;
   maxDate = new Date();
   nameFileCert = '';
   showErrorCert: boolean;
@@ -22,7 +22,7 @@ export class ReportNewsComponent implements OnInit {
   referencia: string;
   visibleLeft = false;
   placeholder = 'REFERENCIA';
-  constructor(private fb: FormBuilder, private content: ContentService, private users: UserService) {
+  constructor(private fb: UntypedFormBuilder, private content: ContentService, private users: UserService) {
   }
   dataSource: any;
   ngOnInit() {

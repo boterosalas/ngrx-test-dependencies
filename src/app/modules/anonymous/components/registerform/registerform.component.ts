@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, HostListener, ViewChild, TemplateRef, Inject, PLATFORM_ID } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ConfirmPasswordValidator } from 'src/app/validators/confirm-password.validator';
 import Swal from 'sweetalert2';
 import { ResponseService } from 'src/app/interfaces/response';
@@ -23,7 +23,7 @@ declare var dataLayer: any;
 })
 export class RegisterformComponent implements OnInit, OnDestroy {
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private registerUser: UserService,
     private router: Router,
     private loading: LoaderService,
@@ -35,7 +35,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   ) {}
 
   private subscription: Subscription = new Subscription();
-  registerForm: FormGroup;
+  registerForm: UntypedFormGroup;
   showTerms: boolean;
   showRegisterForm: boolean;
   showLoginForm: boolean;

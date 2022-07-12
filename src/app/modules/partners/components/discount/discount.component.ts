@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
 import { UserService } from 'src/app/services/user.service';
@@ -14,13 +14,13 @@ import decode from 'jwt-decode';
 export class DiscountComponent implements OnInit, OnDestroy {
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private user: UserService,
     private content: ContentService
   ) { }
 
-  discountForm: FormGroup;
-  valueForm: FormGroup;
+  discountForm: UntypedFormGroup;
+  valueForm: UntypedFormGroup;
   numberPattern = '^(0|[0-9][0-9]*)$';
   private subscription: Subscription = new Subscription();
   validUser = false;

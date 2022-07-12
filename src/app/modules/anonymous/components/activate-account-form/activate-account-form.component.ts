@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
 export class ActivateAccountFormComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private forgot: AuthService,
     private loading: LoaderService,
     private utils: UtilsService
@@ -24,7 +24,7 @@ export class ActivateAccountFormComponent implements OnInit, OnDestroy {
 
   text: any = '';
   emailPattern = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
-  activateForm: FormGroup;
+  activateForm: UntypedFormGroup;
   private subscription: Subscription = new Subscription();
 
   swalOptInvalid: object = {

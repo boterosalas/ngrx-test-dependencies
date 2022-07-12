@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -10,12 +10,12 @@ import { UtilsService } from 'src/app/services/utils.service';
   styleUrls: ['./social-form.component.scss'],
 })
 export class SocialFormComponent implements OnInit, OnDestroy {
-  socialForm: FormGroup;
+  socialForm: UntypedFormGroup;
   socialInfo: any;
   private subscription: Subscription = new Subscription();
 
 
-  constructor(private fb: FormBuilder, private user: UserService, private utils: UtilsService) {}
+  constructor(private fb: UntypedFormBuilder, private user: UserService, private utils: UtilsService) {}
 
   ngOnInit(): void {
     this.socialFormInfo();

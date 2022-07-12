@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
@@ -12,15 +12,15 @@ import { MasterDataService } from 'src/app/services/master-data.service';
 })
 export class AditionalInfoFormComponent implements OnInit, OnDestroy {
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     public user: UserService,
     private _snackBar: MatSnackBar,
     private personalInfo: MasterDataService
   ) {}
 
-  personalForm: FormGroup;
-  profesionalForm: FormGroup;
-  livingForm: FormGroup;
+  personalForm: UntypedFormGroup;
+  profesionalForm: UntypedFormGroup;
+  livingForm: UntypedFormGroup;
 
   educationLevel = [];
   fixedIncome = [];

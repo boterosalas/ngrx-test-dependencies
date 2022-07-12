@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { LoaderService } from 'src/app/services/loader.service';
@@ -17,7 +17,7 @@ import Swal from 'sweetalert2';
 })
 export class PaymentInfoComponent implements OnInit, OnDestroy {
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private registerUser: UserService,
     private router: Router,
     private loading: LoaderService,
@@ -27,7 +27,7 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
 
-  externalForm: FormGroup;
+  externalForm: UntypedFormGroup;
   validFormat: boolean;
   nameFileCed1 = '';
   nameFileCed2 = '';

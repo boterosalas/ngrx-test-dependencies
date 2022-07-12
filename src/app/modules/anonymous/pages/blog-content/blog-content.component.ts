@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, PLATFORM_ID, TemplateRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { Meta } from '@angular/platform-browser';
@@ -16,9 +16,9 @@ import { isPlatformBrowser } from '@angular/common';
 })
 
 export class BlogContentComponent implements OnInit {
-  dateForm: FormGroup;
+  dateForm: UntypedFormGroup;
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private _snackBar: MatSnackBar,
     private route: ActivatedRoute,
     private dialog: MatDialog,

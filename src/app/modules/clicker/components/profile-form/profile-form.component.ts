@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild, TemplateRef, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { Subscription, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -21,7 +21,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 })
 export class ProfileFormComponent implements OnInit, OnDestroy {
   constructor(
-    public fb: FormBuilder,
+    public fb: UntypedFormBuilder,
     public user: UserService,
     private auth: AuthService,
     private loader: LoaderService,
@@ -48,13 +48,13 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   @Input() showInfoAccount: boolean;
 
   public subscription: Subscription = new Subscription();
-  profileForm: FormGroup;
-  profileFormCell: FormGroup;
-  profileFormPass: FormGroup;
-  profileFormDelete: FormGroup;
-  accountForm: FormGroup;
-  loginForm: FormGroup;
-  addressForm: FormGroup;
+  profileForm: UntypedFormGroup;
+  profileFormCell: UntypedFormGroup;
+  profileFormPass: UntypedFormGroup;
+  profileFormDelete: UntypedFormGroup;
+  accountForm: UntypedFormGroup;
+  loginForm: UntypedFormGroup;
+  addressForm: UntypedFormGroup;
   isLoggedIn: any;
   name: string;
   lastName: string;

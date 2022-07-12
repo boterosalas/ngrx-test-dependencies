@@ -1,5 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 
@@ -10,13 +10,13 @@ import { Subscription } from 'rxjs';
 })
 export class DialogNoveltySatisfactionComponent implements OnInit, OnDestroy {
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     public dialogRef: MatDialogRef<DialogNoveltySatisfactionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   showCopyThanks = false;
-  statusForm?: FormGroup;
+  statusForm?: UntypedFormGroup;
   activeButton = false;
   $formSubscription: Subscription;
 

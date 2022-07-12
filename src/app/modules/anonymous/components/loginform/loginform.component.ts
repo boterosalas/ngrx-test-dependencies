@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, HostListener, Inject, PLATFORM_ID, ElementRef, ViewChild } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, Validators, UntypedFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
@@ -22,7 +22,7 @@ export class LoginformComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private loading: LoaderService,
     private utils: UtilsService,
     private link: LinksService,
@@ -32,13 +32,11 @@ export class LoginformComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
 
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
   isSubmitted = false;
   emailPattern = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
   user: SocialUser | undefined;
-  GoogleLoginProvider = GoogleLoginProvider;
   loggedIn: boolean;
-  @ViewChild('googleButton', { static: false}) googleButton: ElementRef;
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -48,8 +46,7 @@ export class LoginformComponent implements OnInit, OnDestroy {
 
     this.authServiceSocial.authState.subscribe((user) => {
       this.user = user;
-      this.loggedIn = (user != null);
-      console.log(this.user);
+      this.loggedIn = user != null;
     });
   }
 
@@ -158,11 +155,11 @@ export class LoginformComponent implements OnInit, OnDestroy {
     if (tokenDecode.role === 'ADMIN' || tokenDecode.role === 'SUPERADMIN') {
       localStorage.clear();
     }
-  
+
     if (tokenDecode.role === 'PARTNER' || tokenDecode.role === 'PARTNER-CASHIER') {
       this.router.navigate(['/partner']);
       this.authService.isLogged$.next(true);
-      if(tokenDecode.role === 'PARTNER-CASHIER') {
+      if (tokenDecode.role === 'PARTNER-CASHIER') {
         this.authService.getRole$.next('PARTNER-CASHIER');
       } else {
         this.authService.getRole$.next('PARTNER');
@@ -176,14 +173,6 @@ export class LoginformComponent implements OnInit, OnDestroy {
       localStorage.setItem('AmonuntReferred', amount.amountsReferred);
     });
   }
-
-  signInWithGoogle(): void {
-    this.authServiceSocial.signIn(GoogleLoginProvider.PROVIDER_ID);
-  }
-
-  submitGoogleLogin() {
-    this.googleButton.nativeElement.click();
-}
 
   signInWithFB(): void {
     this.authServiceSocial.signIn(FacebookLoginProvider.PROVIDER_ID);

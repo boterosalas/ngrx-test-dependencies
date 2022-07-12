@@ -2,7 +2,7 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfileFormComponent } from './profile-form.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { ReactiveFormsModule, FormsModule, FormBuilder } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, UntypedFormBuilder } from '@angular/forms';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -332,7 +332,7 @@ beforeEach(waitForAsync(() => {
   });
 
   it('select selectDepartment', () => {
-    const fb = new FormBuilder();
+    const fb = new UntypedFormBuilder();
     component.addressForm = fb.group({
       department: ['Antioquia'],
       city: ['Medellin'],
