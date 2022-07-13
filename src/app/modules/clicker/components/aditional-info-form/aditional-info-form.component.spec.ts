@@ -13,6 +13,7 @@ import { of } from 'rxjs/internal/observable/of';
 import { MasterDataService } from 'src/app/services/master-data.service';
 import { BehaviorSubject } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('AditionalInfoFormComponent', () => {
   let component: AditionalInfoFormComponent;
@@ -155,6 +156,11 @@ describe('AditionalInfoFormComponent', () => {
     objectResponse: [],
   };
 
+  const routes = {
+    path: 'inicio',
+    component: HomeComponent,
+  }
+
 beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [AditionalInfoFormComponent],
@@ -164,7 +170,7 @@ beforeEach(waitForAsync(() => {
         ReactiveFormsModule,
         FormsModule,
         HttpClientTestingModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([routes]),
         BrowserAnimationsModule,
         JwtModule.forRoot({
           config: {
