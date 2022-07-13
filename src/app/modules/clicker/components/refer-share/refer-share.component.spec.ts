@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ShareButtonsModule } from '@ngx-share/buttons';
+import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TokenService } from 'src/app/services/token.service';
 

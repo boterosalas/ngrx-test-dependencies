@@ -4,7 +4,7 @@ import { BussinessComponent } from './bussiness.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ShareModule } from '@ngx-share/core';
+import { ShareModule } from 'ngx-sharebuttons';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { JwtModule } from '@auth0/angular-jwt';

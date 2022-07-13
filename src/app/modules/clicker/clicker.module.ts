@@ -20,7 +20,7 @@ import { AditionalInfoFormComponent } from './components/aditional-info-form/adi
 import { DialogEditComponent } from './components/dialog-edit/dialog-edit.component';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { DialogHistoryComponent } from './components/dialog-history/dialog-history.component';
-import { ShareModule } from '@ngx-share/core';
+import { ShareModule } from 'ngx-sharebuttons';
 import { BussinessComponent } from './pages/bussiness/bussiness.component';
 import { PaymentInfoComponent } from './components/payment-info/payment-info.component';
 import { SliderDeliverComponent } from './components/slider-deliver/slider-deliver.component';

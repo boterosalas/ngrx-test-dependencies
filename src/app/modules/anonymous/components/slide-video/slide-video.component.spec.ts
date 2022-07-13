@@ -4,7 +4,7 @@ import { SlideVideoComponent } from './slide-video.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
-import { ShareModule } from '@ngx-share/core';
+import { ShareModule } from 'ngx-sharebuttons';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';

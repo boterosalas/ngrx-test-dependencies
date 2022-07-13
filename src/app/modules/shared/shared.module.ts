@@ -58,7 +58,7 @@ import { TitleComponent } from './components/atoms/title/title.component';
 import { CardComponent } from './components/atoms/card/card.component';
 import { BussinessCardComponent } from '../anonymous/components/bussiness-card/bussiness-card.component';
 import { ButtonStoryComponent } from '../anonymous/components/button-story/button-story.component';
-import { ShareButtonModule } from '@ngx-share/button';
+import { ShareButtonModule } from 'ngx-sharebuttons/button';
 import { ReviewClickamComponent } from './components/review-clickam/review-clickam.component';
 import { WidgetBarComponent } from './components/widget-bar/widget-bar.component';
 import { WelcomeComponent } from '../anonymous/components/welcome/welcome.component';
