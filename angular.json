@@ -225,19 +225,6 @@
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "externalDependencies": [
-              "firebase",
-              "@firebase",
-              "@angular/fire",
-              "@firebase/app",
-              "@firebase/database",
-              "@firebase/firestore",
-              "@firebase/functions",
-              "@firebase/performance",
-              "@firebase/remote-config",
-              "@firebase/util",
-              "@firebase/component"
-            ],
             "outputPath": "dist/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json",
