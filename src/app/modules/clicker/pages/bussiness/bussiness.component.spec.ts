@@ -23,6 +23,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('BussinessComponent', () => {
   let component: BussinessComponent;
@@ -244,7 +245,9 @@ describe('BussinessComponent', () => {
         ShareModule,
         ClickerModule,
         AppMaterialModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+      ]),
         HttpClientTestingModule,
         BrowserAnimationsModule,
         JwtModule.forRoot({

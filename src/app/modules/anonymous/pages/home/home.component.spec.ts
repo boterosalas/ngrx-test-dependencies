@@ -516,7 +516,10 @@ describe('HomeComponent', () => {
           FormsModule,
           ReactiveFormsModule,
           HttpClientTestingModule,
-          RouterTestingModule.withRoutes([routes]),
+          RouterTestingModule.withRoutes([
+            { path: 'clicker', component: HomeComponent },
+            { path: 'inicio', component: HomeComponent },
+          ]),
           BrowserAnimationsModule,
           AngularFireDatabaseModule,
           AngularFireAuthModule,
@@ -678,18 +681,18 @@ describe('HomeComponent', () => {
     expect(component.titleWay).toBe('Realizaste tu primera compra (¡Que rico ahorrar!)');
   });
 
-  // it('modal way 4', () => {
-  //   const mission = {
-  //     id: 4,
-  //     description: 'Realizaste tu primera compra (Que rico ahorrar!)',
-  //     status: true,
-  //     code: 'FIRSTBUY',
-  //     detail:
-  //       'Generaste tu link y compraste por medio de él, lo que nosotros llamamos inteligencia financiera, estas avanzando en tu camino para ser un Clickamer exitoso.',
-  //   };
-  //   component.modalWay(4, mission);
-  //   expect(component.titleWay).toBe('Tienes un amigo que ahora hace parte de Clickam');
-  // });
+  it('modal way 4', () => {
+    const mission = {
+      id: 4,
+      description: 'Realizaste tu primera compra (Que rico ahorrar!)',
+      status: true,
+      code: 'FIRSTBUY',
+      detail:
+        'Generaste tu link y compraste por medio de él, lo que nosotros llamamos inteligencia financiera, estas avanzando en tu camino para ser un Clickamer exitoso.',
+    };
+    component.modalWay(4, mission);
+    expect(component.titleWay).toBe('Tienes un amigo que ahora hace parte de Clickam');
+  });
 
   it('modal way 5', () => {
     const mission = {

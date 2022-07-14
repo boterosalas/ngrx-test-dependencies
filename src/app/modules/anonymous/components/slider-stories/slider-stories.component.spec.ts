@@ -11,8 +11,8 @@ import { ContentService } from 'src/app/services/content.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from 'src/app/services/user.service';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
-import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 import { MatDialog } from '@angular/material/dialog';
+import { HomeComponent } from '../../pages/home/home.component';
 
 class MockUserService extends UserService {
   userInfo$ = new BehaviorSubject<any>({

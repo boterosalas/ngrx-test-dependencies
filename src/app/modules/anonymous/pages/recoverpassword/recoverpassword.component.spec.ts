@@ -56,6 +56,7 @@ beforeEach(waitForAsync(() => {
   beforeEach(() => {
     fixture = TestBed.createComponent(RecoverpasswordComponent);
     component = fixture.componentInstance;
+    window['dataLayer'] = [];
     fixture.detectChanges();
   });
 

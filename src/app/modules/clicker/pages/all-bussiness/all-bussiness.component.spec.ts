@@ -12,6 +12,7 @@ import { ContentService } from 'src/app/services/content.service';
 import { Observable, of } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('AllBussinessComponent', () => {
   let component: AllBussinessComponent;
@@ -71,7 +72,9 @@ describe('AllBussinessComponent', () => {
           TranslateModule.forRoot(),
           AppMaterialModule,
           AnonymousModule,
-          RouterTestingModule,
+          RouterTestingModule.withRoutes([
+            { path: 'inicio', component: HomeComponent}
+          ]),
           HttpClientTestingModule,
           BrowserAnimationsModule,
           JwtModule.forRoot({
