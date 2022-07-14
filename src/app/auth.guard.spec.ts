@@ -6,6 +6,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
+import { HomeComponent } from './modules/anonymous/pages/home/home.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AuthGuard', () => {
 
@@ -20,7 +22,9 @@ describe('AuthGuard', () => {
       providers: [AuthGuard, { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },],
       imports: [
         HttpClientTestingModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
@@ -32,6 +36,7 @@ describe('AuthGuard', () => {
           },
         }),
       ],
+      schemas:[NO_ERRORS_SCHEMA],
     });
   });
 

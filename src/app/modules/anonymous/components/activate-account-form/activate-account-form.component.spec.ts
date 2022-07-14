@@ -14,6 +14,7 @@ import { of, throwError, from } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import Swal from 'sweetalert2';
 import { UtilsService } from 'src/app/services/utils.service';
+import { HomeComponent } from '../../pages/home/home.component';
 describe('ActivateAccountFormComponent', () => {
   let component: ActivateAccountFormComponent;
   let fixture: ComponentFixture<ActivateAccountFormComponent>;
@@ -44,7 +45,9 @@ beforeEach(waitForAsync(() => {
         HttpClientTestingModule,
         BrowserAnimationsModule,
         AppMaterialModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         SharedModule,
         JwtModule.forRoot({
           config: {

@@ -1,7 +1,10 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
+import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
+import { HomeComponent } from '../home/home.component';
 
 import { BusinessAlliesComponent } from './business-allies.component';
 
@@ -62,8 +65,12 @@ describe('BusinessAlliesComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ BusinessAlliesComponent ],
       imports: [
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
       ],
+      schemas:[NO_ERRORS_SCHEMA],
       providers: [
         { provide: MatDialog, useValue: mockDialog },
       ]

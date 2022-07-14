@@ -1,8 +1,10 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 import { ContentService } from 'src/app/services/content.service';
 import { ClickerModule } from '../../clicker.module';
 
@@ -67,7 +69,10 @@ describe('NotificationsComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [],
-        imports: [ClickerModule, RouterTestingModule, HttpClientTestingModule, BrowserAnimationsModule],
+        imports: [ClickerModule, RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]), HttpClientTestingModule, BrowserAnimationsModule],
+        schemas:[NO_ERRORS_SCHEMA],
         providers: [{ provide: ContentService, useValue: mockContentService }],
       }).compileComponents();
     })

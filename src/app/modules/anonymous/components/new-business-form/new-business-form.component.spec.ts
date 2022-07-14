@@ -10,6 +10,8 @@ import { ContentService } from 'src/app/services/content.service';
 import { of } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HomeComponent } from '../../pages/home/home.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('NewBusinessFormComponent', () => {
   let component: NewBusinessFormComponent;
@@ -81,8 +83,11 @@ beforeEach(waitForAsync(() => {
         RecaptchaModule,
         RecaptchaFormsModule,
         BrowserAnimationsModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
       ],
+      schemas:[NO_ERRORS_SCHEMA],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: dialogMock },

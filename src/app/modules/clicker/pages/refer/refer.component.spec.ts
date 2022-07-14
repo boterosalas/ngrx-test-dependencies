@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { LinksService } from 'src/app/services/links.service';
 import { of, throwError } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('ReferComponent', () => {
   let component: ReferComponent;
@@ -96,7 +97,9 @@ beforeEach(waitForAsync(() => {
         AppMaterialModule,
         SharedModule,
         // ClickerModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         HttpClientTestingModule,
         BrowserAnimationsModule,
       ],

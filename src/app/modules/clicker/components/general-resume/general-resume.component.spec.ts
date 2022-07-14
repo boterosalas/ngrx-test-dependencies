@@ -9,6 +9,7 @@ import { LinksService } from 'src/app/services/links.service';
 import { of } from 'rxjs/internal/observable/of';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('GeneralResumeComponent', () => {
   let component: GeneralResumeComponent;
@@ -44,7 +45,9 @@ beforeEach(waitForAsync(() => {
       declarations: [GeneralResumeComponent],
       imports: [
         TranslateModule.forRoot({}),
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         HttpClientTestingModule,
         JwtModule.forRoot({
           config: {

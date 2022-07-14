@@ -24,6 +24,7 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
 import { UtilsService } from './services/utils.service';
 import { AppMaterialModule } from './modules/shared/app-material/app-material.module';
 import { SocialLoginModule, SocialAuthServiceConfig, SocialAuthService } from '@abacritt/angularx-social-login';
+import { HomeComponent } from './modules/anonymous/pages/home/home.component';
 
 // const TRANSLATIONS_ES = require('../assets/i18n/es.json');
 export class MatDialogMock {
@@ -111,7 +112,9 @@ describe('AppComponent', () => {
       imports: [
         HttpClientTestingModule,
         TranslateModule.forRoot({}),
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         AngularFireDatabaseModule,
         AngularFireAuthModule,
         AngularFireMessagingModule,

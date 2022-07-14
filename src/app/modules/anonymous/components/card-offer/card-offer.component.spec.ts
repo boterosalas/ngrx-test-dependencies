@@ -10,6 +10,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
+import { HomeComponent } from '../../pages/home/home.component';
 
 describe('CardOfferComponent', () => {
   let component: CardOfferComponent;
@@ -25,7 +26,9 @@ beforeEach(waitForAsync(() => {
         // ClickerModule,
         AppMaterialModule,
         HttpClientTestingModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         BrowserAnimationsModule,
         JwtModule.forRoot({
           config: {

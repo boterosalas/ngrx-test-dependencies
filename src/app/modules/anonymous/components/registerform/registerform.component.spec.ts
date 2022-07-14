@@ -17,6 +17,7 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { UtilsService } from 'src/app/services/utils.service';
 import { MatDialog } from '@angular/material/dialog';
+import { HomeComponent } from '../../pages/home/home.component';
 
 describe('RegisterformComponent', () => {
   let component: RegisterformComponent;
@@ -141,7 +142,9 @@ beforeEach(waitForAsync(() => {
         BrowserAnimationsModule,
         MatPasswordStrengthModule,
         SharedModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         TranslateModule.forRoot({}),
         JwtModule.forRoot({
           config: {

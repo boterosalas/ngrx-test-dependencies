@@ -16,6 +16,7 @@ import { ContentService } from 'src/app/services/content.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('DialogCategoryComponent', () => {
   let component: DialogImagePlayerComponent;
@@ -46,7 +47,9 @@ beforeEach(waitForAsync(() => {
         TranslateModule.forRoot(),
         AppMaterialModule,
         HttpClientTestingModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         ReactiveFormsModule,
         FormsModule,
         NoopAnimationsModule,

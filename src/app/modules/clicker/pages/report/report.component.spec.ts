@@ -18,6 +18,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { TokenService } from 'src/app/services/token.service';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 export class MockUserInfo {
   user = {
@@ -124,7 +125,9 @@ describe('ReportComponent', () => {
           HttpClientTestingModule,
           BrowserAnimationsModule,
           NgxPaginationModule,
-          RouterTestingModule.withRoutes([]),
+          RouterTestingModule.withRoutes([
+            { path: 'inicio', component: HomeComponent}
+          ]),
           JwtModule.forRoot({
             config: {
               tokenGetter: () => {

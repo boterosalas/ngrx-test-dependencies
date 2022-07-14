@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialog } from '@angular/material/dialog';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('LibraryComponent', () => {
   let component: LibraryComponent;
@@ -36,7 +37,9 @@ beforeEach(waitForAsync(() => {
         MatFormFieldModule,
         ShareModule,
         AppMaterialModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         HttpClientTestingModule,
         BrowserAnimationsModule,
         JwtModule.forRoot({

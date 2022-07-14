@@ -17,6 +17,8 @@ import { ContentService } from 'src/app/services/content.service';
 import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('CardStoryComponent', () => {
   let component: CardStoryComponent;
@@ -91,7 +93,9 @@ beforeEach(waitForAsync(() => {
         BrowserAnimationsModule,
         ReactiveFormsModule,
         FormsModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
@@ -103,6 +107,7 @@ beforeEach(waitForAsync(() => {
           },
         }),
       ],
+      schemas:[NO_ERRORS_SCHEMA],
       providers: [
         { provide: LinksService, useValue: mockLinksService },
         { provide: TokenService, useValue: mockTokenService },

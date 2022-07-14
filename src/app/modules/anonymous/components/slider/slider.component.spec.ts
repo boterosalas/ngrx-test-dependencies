@@ -21,6 +21,7 @@ import { LinksService } from 'src/app/services/links.service';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { MatDialogRef } from '@angular/material/dialog';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { HomeComponent } from '../../pages/home/home.component';
 
 describe('SliderComponent', () => {
   let component: SliderComponent;
@@ -121,7 +122,9 @@ beforeEach(waitForAsync(() => {
         AppMaterialModule,
         ReactiveFormsModule,
         FormsModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         ShareModule,
         SharedModule,
         BrowserAnimationsModule,

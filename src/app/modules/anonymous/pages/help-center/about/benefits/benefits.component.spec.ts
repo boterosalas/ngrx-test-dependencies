@@ -7,6 +7,8 @@ import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-mater
 import { AnonymousModule } from 'src/app/modules/anonymous/anonymous.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HomeComponent } from '../../../home/home.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('BenefitsComponent', () => {
   let component: BenefitsComponent;
@@ -21,8 +23,11 @@ beforeEach(waitForAsync(() => {
         AppMaterialModule,
         AnonymousModule,
         BrowserAnimationsModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
       ],
+      schemas:[NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
 

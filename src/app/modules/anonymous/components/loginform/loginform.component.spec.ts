@@ -16,6 +16,7 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { LinksService } from 'src/app/services/links.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { HomeComponent } from '../../pages/home/home.component';
 
 describe('LoginformComponent', () => {
   let component: LoginformComponent;
@@ -81,7 +82,9 @@ beforeEach(waitForAsync(() => {
         FormsModule,
         ReactiveFormsModule,
         HttpClientTestingModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         BrowserAnimationsModule,
         TranslateModule.forRoot({}),
         MatPasswordStrengthModule,

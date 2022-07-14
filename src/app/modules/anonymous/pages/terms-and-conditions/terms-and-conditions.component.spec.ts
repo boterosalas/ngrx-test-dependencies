@@ -11,6 +11,7 @@ import { LinksService } from 'src/app/services/links.service';
 import { of } from 'rxjs/internal/observable/of';
 import { By } from '@angular/platform-browser';
 import { MasterDataService } from 'src/app/services/master-data.service';
+import { HomeComponent } from '../home/home.component';
 
 describe('TermsAndConditionsComponent', () => {
   let component: TermsAndConditionsComponent;
@@ -55,7 +56,9 @@ beforeEach(waitForAsync(() => {
         AppMaterialModule,
         BrowserAnimationsModule,
         SharedModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         HttpClientTestingModule,
       ],
       providers: [

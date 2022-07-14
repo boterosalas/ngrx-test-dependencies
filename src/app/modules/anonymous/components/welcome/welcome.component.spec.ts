@@ -9,6 +9,7 @@ import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-mater
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 import { WelcomeComponent } from './welcome.component';
+import { HomeComponent } from '../../pages/home/home.component';
 
 describe('WelcomeComponent', () => {
   let component: WelcomeComponent;
@@ -20,7 +21,9 @@ describe('WelcomeComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ WelcomeComponent ],
       imports:[
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         HttpClientTestingModule,
         AppMaterialModule,
         BrowserAnimationsModule,

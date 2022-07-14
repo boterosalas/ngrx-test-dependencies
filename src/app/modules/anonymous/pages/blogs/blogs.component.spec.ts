@@ -13,6 +13,7 @@ import { ContentService } from 'src/app/services/content.service';
 import { BlogsComponent } from './blogs.component';
 import * as moment from 'moment';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { HomeComponent } from '../home/home.component';
 describe('BlogsComponent', () => {
   let component: BlogsComponent;
   let fixture: ComponentFixture<BlogsComponent>;
@@ -45,7 +46,9 @@ describe('BlogsComponent', () => {
           TranslateModule.forRoot({}),
           BrowserAnimationsModule,
           HttpClientTestingModule,
-          RouterTestingModule.withRoutes([]),
+          RouterTestingModule.withRoutes([
+            { path: 'inicio', component: HomeComponent}
+          ]),
           SharedModule,
 
           JwtModule.forRoot({

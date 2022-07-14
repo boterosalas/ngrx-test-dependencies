@@ -14,6 +14,7 @@ import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-mater
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 
 import { DeleteformComponent } from './deleteform.component';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('DeleteformComponent', () => {
   let component: DeleteformComponent;
@@ -36,7 +37,9 @@ beforeEach(waitForAsync(() => {
         AppMaterialModule,
         MatPasswordStrengthModule,
         BrowserAnimationsModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {

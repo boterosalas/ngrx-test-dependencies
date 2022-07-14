@@ -11,6 +11,7 @@ import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-mater
 import { AuthService } from 'src/app/services/auth.service';
 
 import { PreferencesComponent } from './preferences.component';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 const mockAuthService = jasmine.createSpyObj('AuthService', ['changePassword']);
 
@@ -52,7 +53,9 @@ describe('PreferencesComponent', () => {
         ReactiveFormsModule,
         FormsModule,
         HttpClientTestingModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         AppMaterialModule,
         BrowserAnimationsModule,
         JwtModule.forRoot({

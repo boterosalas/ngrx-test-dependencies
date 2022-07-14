@@ -9,6 +9,7 @@ import { DataRangeInterface } from 'src/app/interfaces/dateRangeInterface';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { LinksService } from 'src/app/services/links.service';
 import { ReportPartnerComponent } from './report-partner.component';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('ReportPartnerComponent', () => {
   let component: ReportPartnerComponent;
@@ -44,7 +45,9 @@ describe('ReportPartnerComponent', () => {
       declarations: [ReportPartnerComponent],
       imports: [
         HttpClientTestingModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         AppMaterialModule,
         BrowserAnimationsModule,
         JwtModule.forRoot({

@@ -8,6 +8,7 @@ import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-mater
 import { TrimPipe } from 'src/app/pipes/trim.pipe';
 
 import { CardCatalogPdfComponent } from './card-catalog-pdf.component';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('CardCatalogPdfComponent', () => {
   let component: CardCatalogPdfComponent;
@@ -51,7 +52,9 @@ describe('CardCatalogPdfComponent', () => {
       declarations: [CardCatalogPdfComponent, TrimPipe],
       imports: [
         HttpClientTestingModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         AppMaterialModule,
         JwtModule.forRoot({
           config: {

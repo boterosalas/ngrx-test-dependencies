@@ -10,6 +10,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { MatDialogRef } from '@angular/material/dialog';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HomeComponent } from '../../pages/home/home.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('MenuHelpCenterComponent', () => {
   let component: MenuHelpCenterComponent;
@@ -27,8 +29,11 @@ describe('MenuHelpCenterComponent', () => {
           AnonymousModule,
           BrowserAnimationsModule,
           HttpClientTestingModule,
-          RouterTestingModule,
+          RouterTestingModule.withRoutes([
+            { path: 'inicio', component: HomeComponent}
+          ]),
         ],
+        schemas: [NO_ERRORS_SCHEMA],
         providers: [
           { provide: MatDialogRef, useValue: mockDialogRef },
           { provide: MAT_BOTTOM_SHEET_DATA, useValue: mockDialog },
