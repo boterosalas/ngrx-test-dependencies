@@ -497,6 +497,11 @@ describe('HomeComponent', () => {
     },
   ];
 
+  const routes = {
+    path: 'inicio',
+    component: HomeComponent,
+  }
+
   const missions = beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({

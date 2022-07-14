@@ -12,7 +12,7 @@ import '@angular/platform-server/init';
  */
 import '@angular/localize/init';
 
-import { enableProdMode } from '@angular/core';
+import { enableProdMode , CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { environment } from './environments/environment';
 

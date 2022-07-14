@@ -70,6 +70,7 @@ describe('BlogsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(BlogsComponent);
     component = fixture.componentInstance;
+    window['dataLayer'] = [];
     fixture.detectChanges();
   });
 

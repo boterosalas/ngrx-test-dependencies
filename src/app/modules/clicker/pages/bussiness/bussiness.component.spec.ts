@@ -4,7 +4,7 @@ import { BussinessComponent } from './bussiness.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ShareModule } from '@ngx-share/core';
+import { ShareModule } from 'ngx-sharebuttons';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -23,6 +23,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('BussinessComponent', () => {
   let component: BussinessComponent;
@@ -244,7 +245,9 @@ describe('BussinessComponent', () => {
         ShareModule,
         ClickerModule,
         AppMaterialModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+      ]),
         HttpClientTestingModule,
         BrowserAnimationsModule,
         JwtModule.forRoot({

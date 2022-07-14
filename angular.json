@@ -49,10 +49,10 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./node_modules/ngx-sharebuttons/themes/circles.scss",
               "./node_modules/bootstrap/scss/bootstrap-grid.scss",
               "node_modules/slick-carousel/slick/slick.scss",
               "node_modules/slick-carousel/slick/slick-theme.scss",
-              "node_modules/smart-app-banner/dist/smart-app-banner.css",
               "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/assets/styles/styles.scss"
             ],
@@ -200,10 +200,10 @@
             "assets": ["src/favicon.ico", "src/assets", "src/manifest.webmanifest"],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./node_modules/ngx-sharebuttons/themes/circles.scss",
               "./node_modules/bootstrap/scss/bootstrap-grid.scss",
               "node_modules/slick-carousel/slick/slick.scss",
               "node_modules/slick-carousel/slick/slick-theme.scss",
-              "node_modules/smart-app-banner/dist/smart-app-banner.css",
               "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/assets/styles/styles.scss"
             ],
@@ -225,19 +225,6 @@
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "externalDependencies": [
-              "firebase",
-              "@firebase",
-              "@angular/fire",
-              "@firebase/app",
-              "@firebase/database",
-              "@firebase/firestore",
-              "@firebase/functions",
-              "@firebase/performance",
-              "@firebase/remote-config",
-              "@firebase/util",
-              "@firebase/component"
-            ],
             "outputPath": "dist/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json",

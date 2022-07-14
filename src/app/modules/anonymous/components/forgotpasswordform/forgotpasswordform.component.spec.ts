@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { UtilsService } from 'src/app/services/utils.service';
+import { HomeComponent } from '../../pages/home/home.component';
 
 describe('ForgotpasswordformComponent', () => {
   let component: ForgotpasswordformComponent;
@@ -49,10 +50,13 @@ beforeEach(waitForAsync(() => {
         HttpClientTestingModule,
         BrowserAnimationsModule,
         AppMaterialModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         SharedModule,
       ],
       providers: [
+        UtilsService,
         { provide: AuthService, useValue: mockAuthService },
         { provide: UtilsService, useValue: mockUtilsService },
       ],

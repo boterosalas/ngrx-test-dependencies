@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ShareButtonModule } from '@ngx-share/button';
+import { ShareButtonModule } from 'ngx-sharebuttons/button';
 import { RouterModule, Routes } from '@angular/router';
 import { UrlComponent } from '../anonymous/pages/url/url.component';
 

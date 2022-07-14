@@ -9,6 +9,7 @@ import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('AditionalFilesComponent', () => {
   let component: AditionalFilesComponent;
@@ -23,7 +24,9 @@ beforeEach(waitForAsync(() => {
         FormsModule,
         AppMaterialModule,
         HttpClientTestingModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {

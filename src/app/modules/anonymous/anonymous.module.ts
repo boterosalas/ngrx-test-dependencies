@@ -14,7 +14,7 @@ import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-
 import { BlockCopyPasteDirective } from 'src/directives/copy.directive';
 import { KeySpaceDirective } from 'src/directives/space.directive';
 import { CardOfferComponent } from './components/card-offer/card-offer.component';
-import { ShareButtonsModule } from '@ngx-share/buttons';
+import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { ComissionTableComponent } from './pages/comission-table/comission-table.component';
 import { NewBusinessComponent } from './components/new-business/new-business.component';

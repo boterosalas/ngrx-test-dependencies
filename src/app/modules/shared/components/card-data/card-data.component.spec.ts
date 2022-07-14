@@ -3,6 +3,8 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CardDataComponent } from './card-data.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('CardDataComponent', () => {
   let component: CardDataComponent;
@@ -11,7 +13,9 @@ describe('CardDataComponent', () => {
 beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [CardDataComponent],
-      imports: [TranslateModule.forRoot(), AppMaterialModule],
+      imports: [TranslateModule.forRoot(), AppMaterialModule, RouterTestingModule.withRoutes([
+        { path: 'inicio', component: HomeComponent}
+      ])],
     }).compileComponents();
   }));
 

@@ -1,4 +1,4 @@
-import { enableProdMode } from '@angular/core';
+import { enableProdMode , CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import './icons/icons';
 
