@@ -6,6 +6,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { UtilsService } from 'src/app/services/utils.service';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('MedalComponent', () => {
   let component: MedalComponent;
@@ -59,7 +60,9 @@ beforeEach(waitForAsync(() => {
       imports: [
         ClickerModule,
         HttpClientTestingModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {

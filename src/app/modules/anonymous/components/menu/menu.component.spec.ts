@@ -10,6 +10,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { UtilsService } from 'src/app/services/utils.service';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
+import { HomeComponent } from '../../pages/home/home.component';
 
 describe('MenuComponent', () => {
   let component: MenuComponent;
@@ -25,7 +26,9 @@ beforeEach(waitForAsync(() => {
         AppMaterialModule,
         HttpClientTestingModule,
         TranslateModule.forRoot({}),
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {

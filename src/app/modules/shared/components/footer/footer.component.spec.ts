@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { AppMaterialModule } from '../../app-material/app-material.module';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -22,7 +23,9 @@ beforeEach(waitForAsync(() => {
       declarations: [FooterComponent],
       imports: [
         HttpClientTestingModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         TranslateModule.forRoot(),
         AppMaterialModule,
         JwtModule.forRoot({

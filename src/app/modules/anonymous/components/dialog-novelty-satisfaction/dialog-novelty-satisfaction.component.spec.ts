@@ -11,6 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { ContentService } from 'src/app/services/content.service';
+import { HomeComponent } from '../../pages/home/home.component';
 
 import { DialogNoveltySatisfactionComponent } from './dialog-novelty-satisfaction.component';
 
@@ -28,7 +29,9 @@ beforeEach(waitForAsync(() => {
         TranslateModule.forRoot(),
         AppMaterialModule,
         HttpClientTestingModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         ReactiveFormsModule,
         FormsModule,
         NoopAnimationsModule,

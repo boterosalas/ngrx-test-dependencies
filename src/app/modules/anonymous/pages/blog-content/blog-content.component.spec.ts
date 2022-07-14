@@ -16,6 +16,7 @@ import { BlogContentComponent } from './blog-content.component';
 import * as moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { HomeComponent } from '../home/home.component';
 describe('BlogContentComponent', () => {
   let component: BlogContentComponent;
   let fixture: ComponentFixture<BlogContentComponent>;
@@ -48,7 +49,9 @@ beforeEach(waitForAsync(() => {
         TranslateModule.forRoot({}),
         BrowserAnimationsModule,
         HttpClientTestingModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         NgxDaterangepickerMd,
         SharedModule,
         NgxMaterialTimepickerModule,

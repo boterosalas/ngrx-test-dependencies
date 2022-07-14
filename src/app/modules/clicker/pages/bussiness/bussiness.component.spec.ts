@@ -24,6 +24,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
 import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('BussinessComponent', () => {
   let component: BussinessComponent;
@@ -261,6 +262,7 @@ describe('BussinessComponent', () => {
           },
         }),
       ],
+      schemas:[NO_ERRORS_SCHEMA],
       providers: [
         { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
         { provide: ContentService, useValue: mockContentService },

@@ -13,6 +13,7 @@ import { of } from 'rxjs/internal/observable/of';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 class MockUserService extends UserService {
   userInfo$ = new BehaviorSubject<any>({
@@ -51,7 +52,9 @@ beforeEach(waitForAsync(() => {
         ClickerModule,
         HttpClientTestingModule,
         TranslateModule.forRoot({}),
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         BrowserAnimationsModule,
         NoopAnimationsModule,
         JwtModule.forRoot({

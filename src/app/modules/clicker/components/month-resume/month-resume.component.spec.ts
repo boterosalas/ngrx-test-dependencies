@@ -10,6 +10,7 @@ import { LinksService } from 'src/app/services/links.service';
 import { of } from 'rxjs/internal/observable/of';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 localStorage.setItem(
   'ACCESS_TOKEN',
@@ -57,7 +58,9 @@ beforeEach(waitForAsync(() => {
         TranslateModule.forRoot({}),
         GoogleChartsModule,
         HttpClientTestingModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {

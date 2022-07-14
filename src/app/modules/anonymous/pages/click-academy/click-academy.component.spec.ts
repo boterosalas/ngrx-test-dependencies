@@ -12,6 +12,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { UserService } from 'src/app/services/user.service';
 import { Observable, of } from 'rxjs';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { HomeComponent } from '../home/home.component';
 
 describe('ClickAcademyComponent', () => {
   let component: ClickAcademyComponent;
@@ -35,7 +36,9 @@ beforeEach(waitForAsync(() => {
         AppMaterialModule,
         BrowserAnimationsModule,
         SharedModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         HttpClientTestingModule,
         JwtModule.forRoot({
           config: {

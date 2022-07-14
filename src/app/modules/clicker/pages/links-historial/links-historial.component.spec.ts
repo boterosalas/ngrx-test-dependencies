@@ -14,6 +14,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('LinksHistorialComponent', () => {
   let component: LinksHistorialComponent;
@@ -60,7 +61,9 @@ beforeEach(waitForAsync(() => {
       declarations: [],
       imports: [
         SharedModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         TranslateModule.forRoot(),
         AppMaterialModule,
         ClickerModule,

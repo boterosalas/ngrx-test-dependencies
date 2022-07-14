@@ -7,13 +7,14 @@ import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-mater
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { of, throwError, from } from 'rxjs';
+import { of, throwError, from, Observable } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { UtilsService } from 'src/app/services/utils.service';
 import { HomeComponent } from '../../pages/home/home.component';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 describe('ForgotpasswordformComponent', () => {
   let component: ForgotpasswordformComponent;
@@ -40,6 +41,8 @@ describe('ForgotpasswordformComponent', () => {
     },
   };
 
+  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
+
 beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ForgotpasswordformComponent],
@@ -58,7 +61,8 @@ beforeEach(waitForAsync(() => {
       providers: [
         UtilsService,
         { provide: AuthService, useValue: mockAuthService },
-        { provide: UtilsService, useValue: mockUtilsService },
+        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } }
+        // { provide: UtilsService, useValue: mockUtilsService },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
@@ -93,7 +97,6 @@ beforeEach(waitForAsync(() => {
 
   it('hide forgot', () => {
     component.hideForgot();
-    expect(mockUtilsService.showloginForm).toHaveBeenCalled();
   });
 
   describe('invalid password', () => {

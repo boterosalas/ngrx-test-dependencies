@@ -12,6 +12,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { LinksService } from 'src/app/services/links.service';
 import { Observable, of } from 'rxjs';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('AchievementsComponent', () => {
   let component: AchievementsComponent;
@@ -71,7 +72,9 @@ beforeEach(waitForAsync(() => {
         SharedModule,
         ClickerModule,
         HttpClientTestingModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {

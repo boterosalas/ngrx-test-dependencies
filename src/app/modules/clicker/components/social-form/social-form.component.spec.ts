@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 
 import { SocialFormComponent } from './social-form.component';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('SocialFormComponent', () => {
   let component: SocialFormComponent;
@@ -25,7 +26,9 @@ describe('SocialFormComponent', () => {
         ReactiveFormsModule,
         AppMaterialModule,
         HttpClientTestingModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         TranslateModule.forRoot(),
         BrowserAnimationsModule,
         JwtModule.forRoot({

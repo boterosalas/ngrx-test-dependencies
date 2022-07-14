@@ -17,6 +17,7 @@ import Swal from 'sweetalert2';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { HomeComponent } from '../../../home/home.component';
 
 export class MatDialogMock {
   open() {
@@ -66,7 +67,9 @@ beforeEach(waitForAsync(() => {
         BrowserAnimationsModule,
         SharedModule,
         NgxDaterangepickerMd,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         TranslateModule.forRoot({}),
         JwtModule.forRoot({
           config: {

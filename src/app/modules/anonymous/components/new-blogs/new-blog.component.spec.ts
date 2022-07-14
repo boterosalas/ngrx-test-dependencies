@@ -5,6 +5,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { HomeComponent } from '../../pages/home/home.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('NewBlogComponent', () => {
   let component: NewBlogComponent;
@@ -14,10 +16,12 @@ beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NewBlogComponent],
       imports: [
-        TranslateModule.forRoot(), RouterTestingModule.withRoutes([]), AppMaterialModule,
+        TranslateModule.forRoot(), RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]), AppMaterialModule,
         SharedModule
-      ]
-        ,
+      ],
+      schemas:[NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
 

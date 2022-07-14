@@ -18,6 +18,7 @@ import { SharedModule } from '../../shared.module';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('OnboardingSwiperComponent', () => {
   let component: OnboardingSwiperComponent;
@@ -137,7 +138,9 @@ describe('OnboardingSwiperComponent', () => {
         SharedModule,
         DragDropModule,
         HttpClientTestingModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         MatMenuModule,
         BrowserAnimationsModule,
         JwtModule.forRoot({

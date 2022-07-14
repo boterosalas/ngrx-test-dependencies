@@ -7,6 +7,7 @@ import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-mater
 import { AnonymousModule } from 'src/app/modules/anonymous/anonymous.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HomeComponent } from '../../../home/home.component';
 
 describe('MailPreferencesComponent', () => {
   let component: MailPreferencesComponent;
@@ -21,7 +22,9 @@ beforeEach(waitForAsync(() => {
         AppMaterialModule,
         AnonymousModule,
         BrowserAnimationsModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
       ],
     }).compileComponents();
   }));

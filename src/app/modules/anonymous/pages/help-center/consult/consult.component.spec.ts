@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { AnonymousModule } from '../../../anonymous.module';
+import { HomeComponent } from '../../home/home.component';
 
 import { ConsultComponent } from './consult.component';
 
@@ -22,7 +23,9 @@ describe('ConsultComponent', () => {
         AppMaterialModule,
         AnonymousModule,
         BrowserAnimationsModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         HttpClientTestingModule
       ],
     })

@@ -19,6 +19,7 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 class MockUserService extends UserService {
 
@@ -199,7 +200,9 @@ beforeEach(waitForAsync(() => {
         AppMaterialModule,
         MatPasswordStrengthModule,
         BrowserAnimationsModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {

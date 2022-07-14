@@ -5,6 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { HomeComponent } from '../../pages/home/home.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('NewBusinessComponent', () => {
   let component: NewBusinessComponent;
@@ -16,6 +17,7 @@ beforeEach(waitForAsync(() => {
       imports: [TranslateModule.forRoot(), AppMaterialModule, RouterTestingModule.withRoutes([
         { path: 'inicio', component: HomeComponent}
       ])],
+      schemas:[NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
 

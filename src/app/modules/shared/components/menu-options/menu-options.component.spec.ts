@@ -12,6 +12,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateModule } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('MenuOptionsComponent', () => {
   let component: MenuOptionsComponent;
@@ -43,7 +44,9 @@ beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [MenuOptionsComponent],
       imports: [
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         TranslateModule.forRoot(),
         JwtModule.forRoot({
           config: {

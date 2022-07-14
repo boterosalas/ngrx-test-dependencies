@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { JwtModule } from '@auth0/angular-jwt';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HomeComponent } from '../../pages/home/home.component';
 
 describe('SlideVideoComponent', () => {
   let component: SlideVideoComponent;
@@ -25,7 +26,9 @@ beforeEach(waitForAsync(() => {
         ShareModule,
         SharedModule,
         BrowserAnimationsModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         TranslateModule.forRoot(),
         JwtModule.forRoot({
           config: {

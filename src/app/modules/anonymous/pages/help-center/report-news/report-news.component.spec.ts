@@ -15,6 +15,7 @@ import { of } from 'rxjs/internal/observable/of';
 import Swal from 'sweetalert2';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { HomeComponent } from '../../home/home.component';
 
 describe('ReportNewsComponent', () => {
   let component: ReportNewsComponent;
@@ -36,7 +37,9 @@ beforeEach(waitForAsync(() => {
         BrowserAnimationsModule,
         SharedModule,
         NgxDaterangepickerMd,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'inicio', component: HomeComponent}
+        ]),
         TranslateModule.forRoot({}),
         JwtModule.forRoot({
           config: {
