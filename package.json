@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng run clickam:prerender",
+    "build": "ng build --output-hashing=all",
     "build-qa": "npm run list-routes && ng run clickam:prerender:qa",
     "build-uat": "ng run clickam:prerender:uat",
     "build-pr": "npm run list-routes && ng run clickam:prerender:production",
