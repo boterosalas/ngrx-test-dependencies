@@ -27,7 +27,7 @@ export class ContentService {
   url = environment.URL_CONTENT;
   urlComission = environment.URL_COMISSION;
   urlExternal = environment.URL_EXTERNAL;
-  
+
   urlbiggyExito = 'https://search.biggylabs.com.br/search-api/v1/exitocol/api/';
   urlbiggyCarulla = 'https://search.biggylabs.com.br/search-api/v1/carulla/api/';
   apibiggy = 'search/trade-policy/1';
@@ -118,19 +118,19 @@ export class ContentService {
   apiSaveBoardings = 'boarding/saveboardings';
   apiDeleteBoardings = 'boarding/deleteboardings';
   apiSaveOrderBoardings = 'boarding/saveorderboardings';
-  apiSaveMaxReferredIds='Link/savemaximumreferredids';
-  apiGetMaximumReferredIds='Link/getmaximumreferredids';
-  apiSaveMenuFooter='footer/saveactivefooterlinks';
-  apiSaveCatalog='catalog/savecatalog';
-  apiGetCatalog='catalog/getcatalogs';
-  apiDeleteCatalog='catalog/deletecatalog';
-  apiSaveCatalogActive='catalog/saveactivecatalog';
-  apiGeneratePdf='catalog/generatepdf';
-  apiGetMissions='mission/getmissions';
-  apiSaveMissions='mission/saveclick';
-  apiGetPhysicalPos='phygital/getphysicalpos';
-  apiCalculateDiscount='phygital/calculatediscount';
-  apiSalePhygital='phygital/salephygital';
+  apiSaveMaxReferredIds = 'Link/savemaximumreferredids';
+  apiGetMaximumReferredIds = 'Link/getmaximumreferredids';
+  apiSaveMenuFooter = 'footer/saveactivefooterlinks';
+  apiSaveCatalog = 'catalog/savecatalog';
+  apiGetCatalog = 'catalog/getcatalogs';
+  apiDeleteCatalog = 'catalog/deletecatalog';
+  apiSaveCatalogActive = 'catalog/saveactivecatalog';
+  apiGeneratePdf = 'catalog/generatepdf';
+  apiGetMissions = 'mission/getmissions';
+  apiSaveMissions = 'mission/saveclick';
+  apiGetPhysicalPos = 'phygital/getphysicalpos';
+  apiCalculateDiscount = 'phygital/calculatediscount';
+  apiSalePhygital = 'phygital/salephygital';
 
   sendSearch = {};
 
@@ -141,10 +141,11 @@ export class ContentService {
         Authorization: 'Bearer ' + this.authorization,
         'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
         'Content-Disposition': 'attachment',
-      }),responseType: 'blob' as 'json'
+      }),
+      responseType: 'blob' as 'json',
     };
 
-    return this.http.post(`${this.urlRefer + this.apiGeneratePdf}`, {idCatalog: id}, httpOptions).pipe(
+    return this.http.post(`${this.urlRefer + this.apiGeneratePdf}`, { idCatalog: id }, httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
@@ -156,7 +157,7 @@ export class ContentService {
   }
 
   public saveMission(mission: string) {
-    return this.http.post(`${this.url + this.apiSaveMissions}`, {missionCode: mission}, this.httpOptions).pipe(
+    return this.http.post(`${this.url + this.apiSaveMissions}`, { missionCode: mission }, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
@@ -198,7 +199,7 @@ export class ContentService {
         errors.pipe(
           delay(3000),
           take(1),
-          tap((errorStatus) => { })
+          tap((errorStatus) => {})
         )
       )
     );
@@ -433,7 +434,7 @@ export class ContentService {
       })
     );
   }
-  
+
   public getBusinessById(data) {
     return this.http.get(`${this.url + this.apiGetBussinessById}?id=${data}`, this.httpOptions).pipe(
       retryWhen((errors) =>
@@ -956,9 +957,8 @@ export class ContentService {
       })
     );
   }
-  
 
-  public getProductsOtherBusiness(params: any){
+  public getProductsOtherBusiness(params: any) {
     return this.http.get(`${this.url}product/getProducts?business=${params.id}&search=${params.text}`, this.httpOptions).pipe(
       delay(3000),
       take(3),
@@ -966,7 +966,7 @@ export class ContentService {
       map((user: any) => {
         return user.objectResponse;
       })
-    )
+    );
   }
 
   public deleteCategory(datos: any) {
@@ -1259,7 +1259,6 @@ export class ContentService {
     );
   }
 
-
   public saveOrderOfertBusiness(data: any) {
     return this.http.post(`${this.url + this.apiSaveOrderOfer}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
@@ -1531,7 +1530,7 @@ export class ContentService {
     );
   }
 
-  public getCities(id:number) {
+  public getCities(id: number) {
     return this.http.get(`${this.url + this.apiGetPhysicalPos}?idbusiness=${id}`, this.httpOptions).pipe(
       map((phygital: ResponseService) => {
         return phygital.objectResponse;
@@ -1539,7 +1538,7 @@ export class ContentService {
     );
   }
 
-  public getLocations(id:number, city:string) {
+  public getLocations(id: number, city: string) {
     return this.http.get(`${this.url + this.apiGetPhysicalPos}?idbusiness=${id}&city=${city}`, this.httpOptions).pipe(
       map((phygital: ResponseService) => {
         return phygital.objectResponse;
@@ -1547,7 +1546,7 @@ export class ContentService {
     );
   }
 
-  public calculateDiscount(idbusiness:number, value:string) {
+  public calculateDiscount(idbusiness: number, value: string) {
     return this.http.get(`${this.url + this.apiCalculateDiscount}?idbusiness=${idbusiness}&value=${value}`, this.httpOptions).pipe(
       map((phygital: ResponseService) => {
         return phygital.objectResponse;
@@ -1555,8 +1554,8 @@ export class ContentService {
     );
   }
 
-  public salePhygital(id: string) {
-    return this.http.post(`${this.urlComission + this.apiSalePhygital}`, {identification: id}, this.httpOptions).pipe(
+  public salePhygital(params: object) {
+    return this.http.post(`${this.urlComission + this.apiSalePhygital}`, params, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
@@ -1569,5 +1568,4 @@ export class ContentService {
       })
     );
   }
-
 }

@@ -70,7 +70,13 @@ export class DiscountComponent implements OnInit, OnDestroy {
 
   public confirmSale() {
     let id = this.discountForm.controls.identification.value;
-    this.subscription = this.content.salePhygital(id).subscribe(() => {
+    let price = this.valueForm.controls.value.value;
+    let params = {
+      identification: id,
+      idBusiness: this.idBusiness,
+      price: price
+    }
+    this.subscription = this.content.salePhygital(params).subscribe(() => {
       this.showResults = false;
       this.discountForm.reset();
       this.discountForm.controls.identification.setErrors(null);
