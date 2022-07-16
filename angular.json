@@ -323,5 +323,6 @@
         }
       }
     }
-  }
+  },
+  "defaultProject": "clickam"
 }
