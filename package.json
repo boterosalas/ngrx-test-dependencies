@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build ",
+    "build": "ng build && npm run scully -- --scanRoutes ",
     "build-qa": "npm run list-routes &&  ng build --configuration=qa",
     "build-uat": "ng run &&  ng build --configuration=uat",
     "build-pr": "npm run list-routes &&  ng build --configuration=production",
