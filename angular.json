@@ -77,7 +77,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": false,
+              "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": true,
@@ -133,24 +133,6 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json"
-            },
-            "uat": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "16mb"
-                }
-              ],
-              "index": {
-                "input": "src/index-qa.html",
-                "output": "index.html"
-              },
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.qa.ts"
-                }
-              ]
             }
           },
           "defaultConfiguration": ""
