@@ -60,9 +60,9 @@
             "scripts": ["node_modules/jquery/dist/jquery.min.js", "node_modules/slick-carousel/slick/slick.min.js"],
             "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": false,
+            "buildOptimizer": true,
             "sourceMap": false,
-            "optimization": false,
+            "optimization": true,
             "namedChunks": true
           },
           "configurations": {
@@ -79,7 +79,7 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
+              "sourceMap": true,
               "namedChunks": true,
               "aot": true,
               "extractLicenses": true,
@@ -112,7 +112,7 @@
                   "with": "src/environments/environment.qa.ts"
                 }
               ],
-              "optimization": false,
+              "optimization": true,
               "sourceMap": true,
               "namedChunks": true,
               "extractLicenses": false,
