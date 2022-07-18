@@ -48,6 +48,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider } from '@abacritt/angularx-social-login';
+import { ScullyLibModule } from '@scullyio/ng-lib';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -100,6 +101,7 @@ export function jwtTokenGetter() {
       enabled: environment.production,
     }),
     SocialLoginModule,
+    ScullyLibModule,
   ],
   providers: [
     {

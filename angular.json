@@ -1,6 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
+  "defaultProject": "clickam",
   "newProjectRoot": "projects",
   "projects": {
     "clickam": {
@@ -34,7 +35,7 @@
             "stylePreprocessorOptions": {
               "includePaths": [".", "src/assets/styles"]
             },
-            "outputPath": "dist",
+            "outputPath": "dist/clickam",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -59,9 +60,9 @@
             "scripts": ["node_modules/jquery/dist/jquery.min.js", "node_modules/slick-carousel/slick/slick.min.js"],
             "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": false,
+            "buildOptimizer": true,
             "sourceMap": false,
-            "optimization": false,
+            "optimization": true,
             "namedChunks": true
           },
           "configurations": {
@@ -76,9 +77,9 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": false,
+              "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
+              "sourceMap": true,
               "namedChunks": true,
               "aot": true,
               "extractLicenses": true,
@@ -111,7 +112,7 @@
                   "with": "src/environments/environment.qa.ts"
                 }
               ],
-              "optimization": false,
+              "optimization": true,
               "sourceMap": true,
               "namedChunks": true,
               "extractLicenses": false,
@@ -132,24 +133,6 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json"
-            },
-            "uat": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "16mb"
-                }
-              ],
-              "index": {
-                "input": "src/index-qa.html",
-                "output": "index.html"
-              },
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.qa.ts"
-                }
-              ]
             }
           },
           "defaultConfiguration": ""
@@ -221,105 +204,6 @@
               "devServerTarget": "clickam:serve:production"
             }
           }
-        },
-        "server": {
-          "builder": "@angular-devkit/build-angular:server",
-          "options": {
-            "outputPath": "dist/server",
-            "main": "server.ts",
-            "tsConfig": "tsconfig.server.json",
-            "optimization": true,
-            "sourceMap": false,
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                ".",
-                "src/assets/styles"
-              ]
-            },
-            "extractLicenses": false
-          },
-          "configurations": {
-            "production": {
-              "outputHashing": "media",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "sourceMap": false,
-              "extractLicenses": true
-            },
-            "qa": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.qa.ts"
-                }
-              ],
-              "optimization": true,
-              "sourceMap": false,
-              "extractLicenses": true
-            },
-            "uat": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.qa.ts"
-                }
-              ]
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve-ssr": {
-          "builder": "@nguniversal/builders:ssr-dev-server",
-          "configurations": {
-            "development": {
-              "browserTarget": "clickam:build",
-              "serverTarget": "clickam:server"
-            },
-            "qa": {
-              "browserTarget": "clickam:build:qa",
-              "serverTarget": "clickam:server:qa"
-            },
-            "uat": {
-              "browserTarget": "clickam:build:uat",
-              "serverTarget": "clickam:server:uat"
-            },
-            "production": {
-              "browserTarget": "clickam:build:production",
-              "serverTarget": "clickam:server:production"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "prerender": {
-          "builder": "@nguniversal/builders:prerender",
-          "options": {
-            "routesFile": "src/prerender-routes.txt",
-            "guessRoutes": false
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "clickam:build:production",
-              "serverTarget": "clickam:server:production"
-            },
-            "development": {
-              "browserTarget": "clickam:build",
-              "serverTarget": "clickam:server"
-            },
-            "qa": {
-              "browserTarget": "clickam:build:qa",
-              "serverTarget": "clickam:server"
-            },
-            "uat": {
-              "browserTarget": "clickam:build:uat",
-              "serverTarget": "clickam:server"
-            }
-          },
-          "defaultConfiguration": "development"
         }
       }
     }
