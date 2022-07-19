@@ -6,7 +6,7 @@ export const config: ScullyConfig = {
   projectRoot: './src',
   projectName: 'clickam',
   spsModulePath: 'YOUR OWN MODULE PATH HERE',
-  outDir: './dist/static',
+  outDir: './dist/',
   routes: {},
   extraRoutes: [
     '/blog/que-es-clickam-y-como-ganar-dinero-online-con-la-plataforma',
