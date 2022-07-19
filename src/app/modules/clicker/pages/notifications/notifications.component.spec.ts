@@ -65,18 +65,19 @@ describe('NotificationsComponent', () => {
     },
   };
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [],
-        imports: [ClickerModule, RouterTestingModule.withRoutes([
-          { path: 'inicio', component: HomeComponent}
-        ]), HttpClientTestingModule, BrowserAnimationsModule],
-        schemas:[NO_ERRORS_SCHEMA],
-        providers: [{ provide: ContentService, useValue: mockContentService }],
-      }).compileComponents();
-    })
-  );
+  beforeEach(async () => {
+    TestBed.configureTestingModule({
+      declarations: [],
+      imports: [
+        ClickerModule,
+        RouterTestingModule.withRoutes([{ path: 'inicio', component: HomeComponent }]),
+        HttpClientTestingModule,
+        BrowserAnimationsModule,
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [{ provide: ContentService, useValue: mockContentService }],
+    }).compileComponents();
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NotificationsComponent);
