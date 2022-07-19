@@ -13,7 +13,7 @@ describe('MarketplaceComponent', () => {
   let component: MarketplaceComponent;
   let fixture: ComponentFixture<MarketplaceComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -27,7 +27,7 @@ beforeEach(waitForAsync(() => {
         ]),
       ],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MarketplaceComponent);

@@ -38,7 +38,7 @@ describe('RecoverpasswordformComponent', () => {
     },
   };
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -61,7 +61,7 @@ beforeEach(waitForAsync(() => {
       providers: [{ provide: AuthService, useValue: mockAuthService }],
     }).compileComponents();
     mockAuthService.recoverPassword.and.returnValue(of(Success));
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RecoverpasswordformComponent);

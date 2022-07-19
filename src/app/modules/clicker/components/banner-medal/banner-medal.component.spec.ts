@@ -9,14 +9,14 @@ describe('BannerMedalComponent', () => {
   let component: BannerMedalComponent;
   let fixture: ComponentFixture<BannerMedalComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [BannerMedalComponent],
       imports: [RouterTestingModule.withRoutes([
         { path: 'inicio', component: HomeComponent}
       ]), AppMaterialModule],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BannerMedalComponent);

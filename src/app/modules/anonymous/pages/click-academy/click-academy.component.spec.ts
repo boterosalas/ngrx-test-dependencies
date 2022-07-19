@@ -28,7 +28,7 @@ describe('ClickAcademyComponent', () => {
     objectResponse: [],
   };
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [ClickAcademyComponent],
       imports: [
@@ -54,7 +54,7 @@ beforeEach(waitForAsync(() => {
       providers: [{ provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },{ provide: UserService, useValue: mockUserService }],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ClickAcademyComponent);

@@ -13,7 +13,7 @@ describe('BestOffersComponent', () => {
   let component: BestOffersComponent;
   let fixture: ComponentFixture<BestOffersComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -27,7 +27,7 @@ beforeEach(waitForAsync(() => {
         ]),
       ],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BestOffersComponent);

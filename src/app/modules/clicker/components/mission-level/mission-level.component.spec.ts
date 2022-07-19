@@ -7,12 +7,12 @@ describe('MissionLevelComponent', () => {
   let component: MissionLevelComponent;
   let fixture: ComponentFixture<MissionLevelComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [MissionLevelComponent],
       imports: [AppMaterialModule],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MissionLevelComponent);

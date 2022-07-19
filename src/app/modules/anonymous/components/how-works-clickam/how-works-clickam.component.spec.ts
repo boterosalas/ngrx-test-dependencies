@@ -8,12 +8,12 @@ describe('HowWorksClickamComponent', () => {
   let component: HowWorksClickamComponent;
   let fixture: ComponentFixture<HowWorksClickamComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [HowWorksClickamComponent],
       imports: [TranslateModule.forRoot(), SlickCarouselModule],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(HowWorksClickamComponent);

@@ -12,7 +12,7 @@ describe('DialogHistoryComponent', () => {
     close: () => {},
   };
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [DialogHistoryComponent],
       imports: [AppMaterialModule],
@@ -21,7 +21,7 @@ beforeEach(waitForAsync(() => {
         { provide: MatDialogRef, useValue: dialogMock },
       ],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DialogHistoryComponent);

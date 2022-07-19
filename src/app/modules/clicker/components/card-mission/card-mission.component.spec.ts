@@ -7,12 +7,12 @@ describe('CardMissionComponent', () => {
   let component: CardMissionComponent;
   let fixture: ComponentFixture<CardMissionComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [CardMissionComponent],
       imports: [AppMaterialModule],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CardMissionComponent);

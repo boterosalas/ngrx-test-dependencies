@@ -13,7 +13,7 @@ describe('CrossSellComponent', () => {
   let component: CrossSellComponent;
   let fixture: ComponentFixture<CrossSellComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -27,7 +27,7 @@ beforeEach(waitForAsync(() => {
         ]),
       ],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CrossSellComponent);

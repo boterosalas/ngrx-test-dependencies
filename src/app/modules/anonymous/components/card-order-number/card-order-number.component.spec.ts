@@ -21,7 +21,7 @@ describe('CardOrderNumberComponent', () => {
     objectResponse: 'Este número de orden esta erróneo o no existe un registro en las bases del aliado con este número.',
   };
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [CardOrderNumberComponent],
       imports: [
@@ -34,7 +34,7 @@ beforeEach(waitForAsync(() => {
       ],
       providers: [{ provide: LinksService, useValue: mockLinksService }],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CardOrderNumberComponent);

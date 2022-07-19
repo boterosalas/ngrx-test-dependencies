@@ -8,12 +8,12 @@ describe('SliderWorksComponent', () => {
   let component: SliderWorksComponent;
   let fixture: ComponentFixture<SliderWorksComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [SliderWorksComponent],
       imports: [SlickCarouselModule, TranslateModule.forRoot()],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SliderWorksComponent);

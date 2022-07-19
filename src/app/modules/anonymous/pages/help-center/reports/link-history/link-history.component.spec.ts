@@ -13,7 +13,7 @@ describe('LinkHistoryComponent', () => {
   let component: LinkHistoryComponent;
   let fixture: ComponentFixture<LinkHistoryComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -27,7 +27,7 @@ beforeEach(waitForAsync(() => {
         ]),
       ],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LinkHistoryComponent);

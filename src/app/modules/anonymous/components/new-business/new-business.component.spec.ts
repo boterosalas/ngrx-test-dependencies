@@ -11,7 +11,7 @@ describe('NewBusinessComponent', () => {
   let component: NewBusinessComponent;
   let fixture: ComponentFixture<NewBusinessComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [NewBusinessComponent],
       imports: [TranslateModule.forRoot(), AppMaterialModule, RouterTestingModule.withRoutes([
@@ -19,7 +19,7 @@ beforeEach(waitForAsync(() => {
       ])],
       schemas:[NO_ERRORS_SCHEMA],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NewBusinessComponent);

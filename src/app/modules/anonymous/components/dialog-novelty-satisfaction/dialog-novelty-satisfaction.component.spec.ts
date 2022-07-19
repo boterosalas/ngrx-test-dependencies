@@ -22,7 +22,7 @@ describe('DialogNoveltySatisfactionComponent', () => {
     close: () => {},
     backdropClick: () => of(true)
   };
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [DialogNoveltySatisfactionComponent],
       imports: [
@@ -52,7 +52,7 @@ beforeEach(waitForAsync(() => {
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DialogNoveltySatisfactionComponent);

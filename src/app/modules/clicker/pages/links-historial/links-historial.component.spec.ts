@@ -56,7 +56,7 @@ describe('LinksHistorialComponent', () => {
     length: 80,
   };
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -88,7 +88,7 @@ beforeEach(waitForAsync(() => {
       ],
     }).compileComponents();
     mockLinksService.getLinkHistory.and.returnValue(of(dataHistory));
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LinksHistorialComponent);

@@ -7,12 +7,12 @@ describe('UnderConstructionComponent', () => {
   let component: UnderConstructionComponent;
   let fixture: ComponentFixture<UnderConstructionComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [UnderConstructionComponent],
       imports: [TranslateModule.forRoot()],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(UnderConstructionComponent);

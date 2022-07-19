@@ -13,7 +13,7 @@ describe('RouteBuyComponent', () => {
   let component: RouteBuyComponent;
   let fixture: ComponentFixture<RouteBuyComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -25,7 +25,7 @@ beforeEach(waitForAsync(() => {
         RouterTestingModule.withRoutes([{ path: 'inicio', component: HomeComponent }]),
       ],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RouteBuyComponent);

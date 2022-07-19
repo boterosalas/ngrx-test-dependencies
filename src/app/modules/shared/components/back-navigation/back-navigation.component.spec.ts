@@ -9,12 +9,12 @@ describe('BackNavigationComponent', () => {
   let component: BackNavigationComponent;
   let fixture: ComponentFixture<BackNavigationComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [BackNavigationComponent],
       imports: [FlexLayoutModule, AppMaterialModule, TranslateModule.forRoot({})],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BackNavigationComponent);

@@ -9,12 +9,12 @@ describe('TableHistorialComponent', () => {
   let component: TableHistorialComponent;
   let fixture: ComponentFixture<TableHistorialComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [TableHistorialComponent],
       imports: [TranslateModule.forRoot({}), AppMaterialModule, NgxPaginationModule],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TableHistorialComponent);

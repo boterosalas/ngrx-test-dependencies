@@ -13,7 +13,7 @@ describe('PayDateComponent', () => {
   let component: PayDateComponent;
   let fixture: ComponentFixture<PayDateComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -25,7 +25,7 @@ beforeEach(waitForAsync(() => {
         RouterTestingModule.withRoutes([{ path: 'inicio', component: HomeComponent }]),
       ],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PayDateComponent);

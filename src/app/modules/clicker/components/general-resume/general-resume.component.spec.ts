@@ -40,7 +40,7 @@ describe('GeneralResumeComponent', () => {
     },
   };
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [GeneralResumeComponent],
       imports: [
@@ -63,7 +63,7 @@ beforeEach(waitForAsync(() => {
       providers: [{ provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },{ provide: LinksService, useValue: mockLinksService }],
     }).compileComponents();
     mockLinksService.getReports.and.returnValue(of(resume));
-  }));
+  });
 
   beforeEach(() => {
     localStorage.setItem(
