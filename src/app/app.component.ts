@@ -77,13 +77,12 @@ export class AppComponent implements OnInit, OnDestroy {
   textTransparencia: any;
   textPrograma: any;
   hideFH = false;
-  fullCharge = false;
   rateapp = false;
   openRegister: boolean = true;
-  idPopup:any;
-  idCampaign:number;
+  idPopup: any;
+  idCampaign: number;
   slowConection = false;
-  documentType:string;
+  documentType: string;
 
   constructor(
     private translate: TranslateService,
@@ -147,24 +146,19 @@ export class AppComponent implements OnInit, OnDestroy {
     });
 
     this.subscription = this.route.queryParams.subscribe((params) => {
-      
       if (!!params.campaign) {
         localStorage.setItem('campaign', params.id);
-        this.saveVisitCampaign(parseInt(params.id))
+        this.saveVisitCampaign(parseInt(params.id));
       }
-      if(params.register === 'true') {
+      if (params.register === 'true') {
         this.utils.showRegisterForm();
       }
     });
   }
 
   ngOnInit() {
-    
-    if(this.fullCharge === false) {
-      this.initService();
-    }
+    this.initService();
 
-    this.checkIfLoaded();
     this.showAnimation1 = true;
     if (isPlatformBrowser(this.platformId)) {
       this.innerWidth = window.innerWidth;
@@ -213,7 +207,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.windowWidth();
     this.getUserData();
     this.review();
-    
   }
 
   public saveVisitCampaign(id: number) {
@@ -316,7 +309,7 @@ export class AppComponent implements OnInit, OnDestroy {
         const locationHref = location.href;
         const routeSplit = locationHref.split('/');
         const currentRoute = '/' + routeSplit[routeSplit.length - 1];
-        
+
         const popUp = resp.find((x) => !x.new && x.seccion === currentRoute);
 
         if (popUp) {
@@ -342,10 +335,9 @@ export class AppComponent implements OnInit, OnDestroy {
       panelClass: 'dynamic-popup',
     });
 
-    dialog.beforeClosed().subscribe(resp => {
+    dialog.beforeClosed().subscribe((resp) => {
       this.saveVisitOffer(this.idPopup);
-    })
-
+    });
   }
 
   public saveVisitOffer(idoffer) {
@@ -442,29 +434,20 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  checkIfLoaded() {
-    if (isPlatformBrowser(this.platformId)) {
-      window.addEventListener('load', () => {
-        this.fullCharge = true;
-      });
-    }
-  }
-
   initService() {
     const conn = (navigator as any).connection;
     if (conn) {
       const effectiveType = conn.effectiveType;
       const getConection = localStorage.getItem('conection');
-      if(effectiveType !== "4g" && getConection !== "4g"){
+      if (effectiveType !== '4g' && getConection !== '4g') {
         localStorage.setItem('conection', effectiveType);
         Swal.fire({
           html: "<i class='tio-wifi_off purple-text f-48'></i> <h3>Ups!</h3> <p class='purple-text f-19'>No tienes acceso a internet o tu señal es débil. Revisa tu conexión.</p>",
           confirmButtonText: 'Continuar',
           confirmButtonClass: 'continue',
           allowOutsideClick: false,
-        })
+        });
       }
     }
   }
-
 }
