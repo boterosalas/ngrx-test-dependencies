@@ -22,7 +22,7 @@ describe('ReviewClickamComponent', () => {
     .compileComponents();
   });
 
-  beforeEach(() => {
+  beforeEach(async() => {
     fixture = TestBed.createComponent(ReviewClickamComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
