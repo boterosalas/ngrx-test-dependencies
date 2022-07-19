@@ -89,7 +89,7 @@ describe('ReferComponent', () => {
     },
   };
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [ReferComponent],
       imports: [
@@ -107,7 +107,7 @@ beforeEach(waitForAsync(() => {
       providers: [{ provide: LinksService, useValue: mockLinksService }],
     }).compileComponents();
     mockLinksService.getReferrals.and.returnValue(of(referals));
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ReferComponent);

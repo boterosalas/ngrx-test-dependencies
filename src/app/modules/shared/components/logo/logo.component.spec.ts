@@ -7,12 +7,12 @@ describe('LogoComponent', () => {
   let component: LogoComponent;
   let fixture: ComponentFixture<LogoComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [LogoComponent],
       imports: [RouterTestingModule],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LogoComponent);

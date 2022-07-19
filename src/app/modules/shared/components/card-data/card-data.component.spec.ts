@@ -10,14 +10,14 @@ describe('CardDataComponent', () => {
   let component: CardDataComponent;
   let fixture: ComponentFixture<CardDataComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [CardDataComponent],
       imports: [TranslateModule.forRoot(), AppMaterialModule, RouterTestingModule.withRoutes([
         { path: 'inicio', component: HomeComponent}
       ])],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CardDataComponent);

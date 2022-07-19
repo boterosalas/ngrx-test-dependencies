@@ -63,7 +63,7 @@ describe('AchievementsComponent', () => {
     },
   ];
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -89,7 +89,7 @@ beforeEach(waitForAsync(() => {
       providers: [{ provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },{ provide: LinksService, useValue: mockLinksService }],
     }).compileComponents();
     mockLinksService.getMedals.and.returnValue(of(medals));
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AchievementsComponent);

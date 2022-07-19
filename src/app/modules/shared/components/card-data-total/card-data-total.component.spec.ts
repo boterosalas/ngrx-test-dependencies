@@ -8,12 +8,12 @@ describe('CardDataComponent', () => {
   let component: CardDataTotalComponent;
   let fixture: ComponentFixture<CardDataTotalComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [CardDataTotalComponent],
       imports: [TranslateModule.forRoot(), AppMaterialModule],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CardDataTotalComponent);

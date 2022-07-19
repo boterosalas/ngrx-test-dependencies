@@ -13,7 +13,7 @@ describe('TakeAssuredComponent', () => {
   let component: TakeAssuredComponent;
   let fixture: ComponentFixture<TakeAssuredComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -27,7 +27,7 @@ beforeEach(waitForAsync(() => {
         ]),
       ],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TakeAssuredComponent);

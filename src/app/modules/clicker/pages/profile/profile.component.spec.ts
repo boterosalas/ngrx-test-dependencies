@@ -45,7 +45,7 @@ describe('ProfileComponent', () => {
     // rut: '84994889',
   };
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -75,7 +75,7 @@ beforeEach(waitForAsync(() => {
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     localStorage.setItem(

@@ -6,11 +6,11 @@ describe('AppStoreComponent', () => {
   let component: AppStoreComponent;
   let fixture: ComponentFixture<AppStoreComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [AppStoreComponent],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AppStoreComponent);

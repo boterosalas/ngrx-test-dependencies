@@ -54,7 +54,7 @@ describe('MedalComponent', () => {
     ],
   };
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -77,7 +77,7 @@ beforeEach(waitForAsync(() => {
       providers: [{ provide: UtilsService, useValue: mockUtilsService }],
     }).compileComponents();
     mockUtilsService.medals.and.returnValue(mockMedal);
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MedalComponent);

@@ -43,7 +43,7 @@ describe('ForgotpasswordformComponent', () => {
 
   let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [ForgotpasswordformComponent],
       imports: [
@@ -67,7 +67,7 @@ beforeEach(waitForAsync(() => {
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
     mockAuthService.forgotPassword.and.returnValue(of(Success));
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ForgotpasswordformComponent);

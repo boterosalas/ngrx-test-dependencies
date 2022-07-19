@@ -13,7 +13,7 @@ describe('FriendInviteComponent', () => {
   let component: FriendInviteComponent;
   let fixture: ComponentFixture<FriendInviteComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -27,7 +27,7 @@ beforeEach(waitForAsync(() => {
         ]),
       ],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FriendInviteComponent);

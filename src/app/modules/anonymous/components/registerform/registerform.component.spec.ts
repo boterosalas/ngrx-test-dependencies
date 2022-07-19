@@ -130,7 +130,7 @@ describe('RegisterformComponent', () => {
       },
     ],
   };
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [RegisterformComponent],
       imports: [
@@ -168,7 +168,7 @@ beforeEach(waitForAsync(() => {
     mockMasterService.getTerms.and.returnValue(of(responseTerms));
     mockUserService.idType.and.returnValue(of(idType));
     mockUserService.registerUser.and.returnValue(of(register));
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterformComponent);

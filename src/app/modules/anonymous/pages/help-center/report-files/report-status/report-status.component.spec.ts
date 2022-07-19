@@ -54,7 +54,7 @@ describe('ReportStatusComponent', () => {
   };
 
   const matDialog = new MatDialogMock();
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [ReportStatusComponent],
       imports: [
@@ -93,7 +93,7 @@ beforeEach(waitForAsync(() => {
     mockContentService.saveNews.and.returnValue(of(resp));
     mockContentService.getNovetlyUser.and.returnValue(of(respNovelty));
     mockContentService.saveQualificationNovelty.and.returnValue(of(resp));
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ReportStatusComponent);

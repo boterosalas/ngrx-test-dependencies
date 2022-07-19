@@ -13,7 +13,7 @@ describe('HowWorksComponent', () => {
   let component: HowWorksComponent;
   let fixture: ComponentFixture<HowWorksComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -27,7 +27,7 @@ beforeEach(waitForAsync(() => {
         ]),
       ],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(HowWorksComponent);

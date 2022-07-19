@@ -22,7 +22,7 @@ describe('PopupComponent', () => {
     },
   };
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [PopupComponent],
       imports: [AppMaterialModule],
@@ -32,7 +32,7 @@ beforeEach(waitForAsync(() => {
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PopupComponent);

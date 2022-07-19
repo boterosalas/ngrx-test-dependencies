@@ -13,7 +13,7 @@ describe('WinComissionComponent', () => {
   let component: WinComissionComponent;
   let fixture: ComponentFixture<WinComissionComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -27,7 +27,7 @@ beforeEach(waitForAsync(() => {
         ]),
       ],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(WinComissionComponent);

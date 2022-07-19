@@ -17,7 +17,7 @@ describe('DialogComponent', () => {
     dismiss: () => {},
   };
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [DialogComponent],
       imports: [AppMaterialModule, SlickCarouselModule, TranslateModule.forRoot()],
@@ -27,7 +27,7 @@ beforeEach(waitForAsync(() => {
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DialogComponent);

@@ -31,7 +31,7 @@ describe('ReferShareComponent', () => {
     aud: 'Estudiantes',
   };
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [ReferShareComponent],
       imports: [
@@ -46,7 +46,7 @@ beforeEach(waitForAsync(() => {
       providers: [{ provide: TokenService, useValue: mockTokenService }],
     }).compileComponents();
     mockTokenService.userInfo.and.returnValue(userInfo);
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ReferShareComponent);

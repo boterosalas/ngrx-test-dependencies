@@ -18,7 +18,7 @@ describe('CardOfferComponent', () => {
 
   let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [CardOfferComponent, TruncatePipe],
       imports: [
@@ -46,7 +46,7 @@ beforeEach(waitForAsync(() => {
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     localStorage.setItem(

@@ -7,12 +7,12 @@ describe('HomeSlideVideoComponent', () => {
   let component: HomeSlideVideoComponent;
   let fixture: ComponentFixture<HomeSlideVideoComponent>;
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [HomeSlideVideoComponent],
       imports: [SlickCarouselModule],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(HomeSlideVideoComponent);

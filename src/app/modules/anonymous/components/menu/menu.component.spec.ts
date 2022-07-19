@@ -19,7 +19,7 @@ describe('MenuComponent', () => {
   const mockUtilsService = jasmine.createSpyObj('UtilsService', ['showRegisterForm', 'hideMenu']);
   let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
-beforeEach(waitForAsync(() => {
+beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [MenuComponent],
       imports: [
@@ -45,7 +45,7 @@ beforeEach(waitForAsync(() => {
     }).compileComponents();
     mockUtilsService.showRegisterForm.and.returnValue(true);
     mockUtilsService.hideMenu.and.returnValue(true);
-  }));
+  });
 
   beforeEach(() => {
     localStorage.setItem(
