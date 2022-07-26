@@ -58,6 +58,8 @@ export class UserService {
   apiReportStories = 'reports/getreportvisitstories';
   apiOrdersNotInvoiced = 'reports/getreportordersnotinvoiced';
   apiGetTopCategories = 'reports/gettopcategories';
+  apiGetReportSavers = 'reports/getreportsavers';
+  apiSaveSaver = 'userprofile/savesaver';
   token = localStorage.getItem('ACCESS_TOKEN');
   authorization = this.token;
   apiSaveNews = 'new/savenew';
@@ -793,6 +795,30 @@ export class UserService {
 
   public getReportReferral(params: any) {
     return this.http.get(`${this.urlReports}${this.apiReporReferral}?&start=${params.start}&end=${params.end}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => { })
+        )
+      )
+    );
+  }
+
+  public getReportsavers() {
+    return this.http.get(`${this.urlReports}${this.apiGetReportSavers}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => { })
+        )
+      )
+    );
+  }
+
+  public saveSaver() {
+    return this.http.post(`${this.url + this.apiSaveSaver}`, {} , this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
