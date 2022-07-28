@@ -75,6 +75,6 @@ describe('SavingComponent', () => {
 
   it('cancel', () => {
     component.cancel();
-    expect(mockUserService.getReportsavers).toHaveBeenCalled();
+    expect(component.savingToggle).toBeFalsy();
   });
 });

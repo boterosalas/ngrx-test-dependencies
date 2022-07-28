@@ -70,6 +70,9 @@ describe('ReportRewardComponent', () => {
         ],
         rejected: 249,
       },
+      generalResume: {
+        isSaver: false
+      }
     },
   };
 
