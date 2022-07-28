@@ -22,6 +22,13 @@ export class ReportNewsComponent implements OnInit {
   referencia: string;
   visibleLeft = false;
   placeholder = 'REFERENCIA';
+
+  novelties = [
+    {value: 'OTRO', name: 'Otro'},
+    {value: 'TERMINO', name: 'TYC'},
+    {value: 'TRATAMIENTO', name: 'Tratamiento de datos'},
+  ]
+
   constructor(private fb: UntypedFormBuilder, private content: ContentService, private users: UserService) {
   }
   dataSource: any;
@@ -29,6 +36,7 @@ export class ReportNewsComponent implements OnInit {
     this.dateForm = this.fb.group({
       dateRange: [null, Validators.required],
       bussiness: [null, Validators.required],
+      typenovelty: ['', Validators.required],
       reference: [null, Validators.required],
       description: [null, Validators.required],
       image: [null],
@@ -103,6 +111,7 @@ export class ReportNewsComponent implements OnInit {
     if (this.dateForm.controls.bussiness.value === 0 || this.dateForm.controls.bussiness.value === '0') {
       data = {
         datenovelty: this.dateForm.controls.dateRange.value,
+        typenovelty: this.dateForm.controls.typenovelty.value,
         code: this.dateForm.controls.reference.value,
         description: this.dateForm.controls.description.value,
         document: this.fileImgCat,
@@ -112,6 +121,7 @@ export class ReportNewsComponent implements OnInit {
       codeBussiness = this.dateForm.controls.bussiness.value;
       data = {
         datenovelty: this.dateForm.controls.dateRange.value,
+        typenovelty: this.dateForm.controls.typenovelty.value,
         idbusiness: codeBussiness,
         code: this.dateForm.controls.reference.value,
         description: this.dateForm.controls.description.value,

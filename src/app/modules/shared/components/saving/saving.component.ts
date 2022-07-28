@@ -19,7 +19,7 @@ export class SavingComponent implements OnInit, OnDestroy {
   constructor(private dialog: MatDialog, private user: UserService) {}
 
   ngOnInit(): void {
-    this.getSaver();
+    // this.getSaver();
   }
 
   saving() {
@@ -40,21 +40,21 @@ export class SavingComponent implements OnInit, OnDestroy {
   cancel() {
     this.dialog.closeAll();
     this.savingToggle = false;
-    this.getSaver();
+    // this.getSaver();
   }
 
   savingAction() {
     this.subscription = this.user.saveSaver().subscribe(() => {
-      this.getSaver();
+      // this.getSaver();
       this.dialog.closeAll();
     })
   }
 
-  public getSaver() {
-    this.subscription = this.user.getReportsavers().subscribe((resp: ResponseService) => {
-      this.savingToggle = resp.objectResponse.isSaver;
-    })
-  }
+  // public getSaver() {
+  //   this.subscription = this.user.getReportsavers().subscribe((resp: ResponseService) => {
+  //     this.savingToggle = resp.objectResponse.isSaver;
+  //   })
+  // }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

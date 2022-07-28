@@ -28,7 +28,7 @@
             Classtag="gtmReportesClicMisComisionesVerDetalle2"
             classCard="color-card-1 mw widht-card padding-card"
             imgCard="assets/img/icon-pay.svg"
-            text="Saldo pendiente por pagar"
+            [text]="isSaver ? 'Mis Ahorros' : 'Saldo pendiente por pagar'"
             textToolTip="Este dinero corresponde a los saldos acumulados en los saldos anteriores, y te será pagado cuando completes el monto mínimo ."
             (openDetail)="break('balance')"
           ></app-card-data>
