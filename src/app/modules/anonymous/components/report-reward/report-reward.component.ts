@@ -21,6 +21,7 @@ export class ReportRewardComponent implements OnInit, OnDestroy {
   dataBreak1: any;
   dataBreak2: any;
   dataBreak3: any;
+  isSaver:boolean;
 
   @ViewChild('templateBreak', { static: false })
   templateBreak: TemplateRef<any>;
@@ -47,6 +48,7 @@ export class ReportRewardComponent implements OnInit, OnDestroy {
       this.dataBreak1 = new MatTableDataSource<any>(resp.objectResponse.money.detailCutOff);
       this.dataBreak2 = new MatTableDataSource<any>(resp.objectResponse.money.detailAccumulated);
       this.dataBreak3 = new MatTableDataSource<any>(resp.objectResponse.money.detailRejected);
+      this.isSaver = resp.objectResponse.generalResume.isSaver;
     });
   }
 

@@ -48,6 +48,7 @@ export class ReportComponent implements OnInit, OnDestroy {
   @ViewChild('templateAcumulated', { static: false })
   templateAcumulated: TemplateRef<any>;
   userId:string;
+  isSaver:boolean;
 
   constructor(private payment: LinksService, private auth: AuthService, private token: TokenService, private dialog: MatDialog) {
     this.userId = token.user.userid;
@@ -101,6 +102,7 @@ export class ReportComponent implements OnInit, OnDestroy {
       this.dataBreak3 = new MatTableDataSource<any>(resp.objectResponse.money.detailRejected);
       this.totalLinks = resp.objectResponse.generalResume.totalLinks;
       this.totalProducts = resp.objectResponse.generalResume.totalProducts;
+      this.isSaver = resp.objectResponse.generalResume.isSaver;
     });
   }
 

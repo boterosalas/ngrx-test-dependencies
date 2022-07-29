@@ -9,7 +9,7 @@
       <button mat-button [routerLink]="['/centro-de-ayuda/reportar']">
         <span class="galano-bold f-16" fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>keyboard_arrow_left</mat-icon>
-          {{ "BUTTONS.BACK" | translate}}
+          {{ 'BUTTONS.BACK' | translate }}
         </span>
       </button>
     </span>
@@ -60,6 +60,7 @@
                       class="form-control border-input mat-elevation-z1 p-2 border-radius"
                     />
                   </div>
+                  
                   <div>
                     <label class="label-up-text" for="picker">NEGOCIO <b style="color: #f21905">*</b></label>
                     <div>
@@ -74,9 +75,21 @@
                       </mat-select>
                     </div>
                   </div>
+                  
+                  <div>
+                    <label class="label-up-text" for="picker">TIPO DE NOVEDAD <b style="color: #f21905">*</b></label>
+                    <div>
+                      <mat-select placeholder="Seleccionar" id="tipoNovelty" formControlName="typenovelty" class="selected-bussiness">
+                        <mat-option *ngFor="let novelty of novelties" value="{{ novelty.value }}">
+                          <span>{{ novelty.name }}</span>
+                        </mat-option>
+                      </mat-select>
+                    </div>
+                  </div>
+
                   <div>
                     <mat-form-field class="selected-bussiness-text">
-                      <mat-placeholder class="label-up-text-selected">{{ placeholder }} <b style="color: #f21905">*</b></mat-placeholder>
+                      <mat-placeholder class="label-up-text-selected">{{ placeholder }} </mat-placeholder>
                       <input matInput id="bussiness" type="text" formControlName="reference" />
                     </mat-form-field>
                   </div>

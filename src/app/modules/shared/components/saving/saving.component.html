@@ -1,0 +1,28 @@
+<mat-card class="gray-card w-100 card mat-card-box-shadow" fxLayout="column">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <i
+      class="tio-info f-16 purple-text mr-2"
+      matTooltipClass="purple-tip"
+      matTooltip="Aquí verás reflejado todo el dinero que estás ahorrando, desactívalo cuando quieras que se te pague este dinero y recuerda que debe ser antes del 7 de cada mes."
+    ></i>
+    <mat-slide-toggle (change)="saving()" [(ngModel)]="savingToggle">
+      <span class="purple-text galano-bold">Deseo ahorrar mis ganancias</span>
+    </mat-slide-toggle>
+  </div>
+</mat-card>
+
+<ng-template #templateSaving>
+  <app-title showTitleh3="true" text="Proceso de ahorro en Clickam" commonClass="text-center"></app-title>
+  <p>Al activar esta opción estás aceptando que Clickam ahorre el dinero que vas ganando mes a mes.</p>
+  <p><b>Activa tu ahorro antes del día 7 de cada mes,</b> si no tu ahorro comenzará al mes siguiente.</p>
+  <p>
+    Este ahorro lo puedes hacer máximo hasta el mes de diciembre, si no desactivas esta opción antes de este mes se te hará el pago
+    automático de todo tu dinero ahorrado.
+  </p>
+
+  <span fxLayoutGap="20px" fxLayoutAlign="center center" class="my-2">
+    <app-button [haveIcon]="false" title="Cancelar" (action)="cancel()" color="transparent" ></app-button>
+    <app-button [haveIcon]="false" title="Continuar" (action)="savingAction()" classButton="shadow-purple" ></app-button>
+  </span>
+
+</ng-template>
