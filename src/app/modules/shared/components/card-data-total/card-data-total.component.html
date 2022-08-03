@@ -1,6 +1,6 @@
 <div fxLayout="column" class="card-basic {{ classTotal }}">
 
-  <img *ngIf="showIcon" class="position-absolute" src="assets/img/icon-clickam-white.svg" alt="fondo-clickam" />
+  <img loading="lazy"*ngIf="showIcon" class="position-absolute" src="assets/img/icon-clickam-white.svg" alt="fondo-clickam" />
   <div fxLayout="row" fxLayoutAlign="space-between start">
     <div [fxLayout]="direction" class="info">
       <span class="payment-card">{{ radicado }} </span>
@@ -9,7 +9,7 @@
       </span>
     </div>
     <div>
-      <img *ngIf="showIcon" class="z-index-top" [src]="imgTotal" alt="icono comisiones" />
+      <img loading="lazy"*ngIf="showIcon" class="z-index-top" [src]="imgTotal" alt="icono comisiones" />
     </div>
   </div>
   <div class="mt-2" class="z-index-1" fxLayout="row" fxLayoutAlign="space-between start ">

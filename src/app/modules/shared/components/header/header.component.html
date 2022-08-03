@@ -5,11 +5,11 @@
   <div fxHide.gt-sm="true" *ngIf="!auth.isLoggedIn()" fxLayoutAlign="space-between stretch" fxLayoutGap="1rem" class="divContainer">
     <div fxLayout="row" fxLayoutGap="1rem">
       <span *ngIf="role !== 'PARTNER' && role !== 'PARTNER-CASHIER'" fxLayout="column" fxLayoutAlign="center center" (click)="open()" class="burger-menu cursor-pointer">
-        <img src="assets/img/menu2.svg" alt="menu" />
+        <img loading="lazy"src="assets/img/menu2.svg" alt="menu" />
         <span>Menú</span>
       </span>
 
-      <img [routerLink]="['inicio']" class="cursor-pointer logo-mobile gtmHomeLogoClickam" src="assets/img/logo-icon.svg" alt="logo-clickam" />
+      <img loading="lazy"[routerLink]="['inicio']" class="cursor-pointer logo-mobile gtmHomeLogoClickam" src="assets/img/logo-icon.svg" alt="logo-clickam" />
     </div>
 
     <div fxLayoutAlign="center center">
@@ -26,7 +26,7 @@
   <!-- Desktop - not login -->
   <div fxHide fxShow.gt-sm="true" *ngIf="!auth.isLoggedIn()" fxLayoutAlign="space-between center" fxLayoutGap="1rem" class="container divContainer">
     <div fxLayout="row" fxLayoutGap="1rem">
-      <img [routerLink]="['inicio']" class="cursor-pointer gtmHomeLogoClickam" src="assets/img/clickam-horizontal.svg" alt="logo-clickam" />
+      <img loading="lazy"[routerLink]="['inicio']" class="cursor-pointer gtmHomeLogoClickam" src="assets/img/clickam-horizontal.svg" alt="logo-clickam" />
 
       <mat-divider [vertical]="true"></mat-divider>
 
@@ -51,11 +51,11 @@
   <div *ngIf="auth.isLoggedIn()" fxLayoutAlign="space-between stretch" fxLayoutGap="1rem" class="divContainer divContainerLoggedIn">
     <div fxLayout="row" fxLayoutGap="1rem">
       <span *ngIf="role !== 'PARTNER'&& role !== 'PARTNER-CASHIER'" fxLayout="column" fxLayoutAlign="center center" (click)="open()" class="burger-menu cursor-pointer">
-        <img src="assets/img/menu2.svg" alt="menu" />
+        <img loading="lazy"src="assets/img/menu2.svg" alt="menu" />
         <span>Menú</span>
       </span>
 
-      <img [routerLink]="['inicio']" class="cursor-pointer logo gtmHomeLogoClickam" src="assets/img/clickam-horizontal.svg" alt="logo-clickam" />
+      <img loading="lazy"[routerLink]="['inicio']" class="cursor-pointer logo gtmHomeLogoClickam" src="assets/img/clickam-horizontal.svg" alt="logo-clickam" />
     </div>
 
     <div fxLayoutAlign="center center" fxLayoutGap="0.5rem" class="divIcons">

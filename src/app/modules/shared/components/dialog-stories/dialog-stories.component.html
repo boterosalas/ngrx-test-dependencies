@@ -29,10 +29,10 @@
   </ngx-slick-carousel>
   <div class="arrows" *ngIf="showArrows === true">
     <button id="arrow-prev" color="orange" class="slick-arrow arrow-left">
-      <img *ngIf="showArrowLeft === true" src="/assets/img/slick-arrow-left.svg" alt="arrow left" />
+      <img loading="lazy"*ngIf="showArrowLeft === true" src="/assets/img/slick-arrow-left.svg" alt="arrow left" />
     </button>
     <button id="arrow-next" color="orange" class="slick-arrow arrow-right">
-      <img *ngIf="showArrowRight === true" src="/assets/img/slick-arrow-right.svg" alt="arrow right" />
+      <img loading="lazy"*ngIf="showArrowRight === true" src="/assets/img/slick-arrow-right.svg" alt="arrow right" />
     </button>
   </div>
 </div>

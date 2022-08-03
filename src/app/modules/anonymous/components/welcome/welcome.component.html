@@ -2,7 +2,7 @@
     <div fxLayout="row" fxLayoutAlign="space-between center">
         
         <span fxLayout="column" fxFlex.gt-xs="50%" ngClass.xs="pt-4 pb-4">
-            <img class="logo-allies" *ngIf="buttonAllies" src="assets/img/clickam-horizontal.svg" alt="clickam">
+            <img loading="lazy"class="logo-allies" *ngIf="buttonAllies" src="assets/img/clickam-horizontal.svg" alt="clickam">
             <app-title showTitleh1="true" [text]="title" classWeb="m-0 pb-2 f-48" classMobile="m-0 pb-2"></app-title>
             <app-title showTitleh2="true" [text]="subtitle" classWeb="m-0" classMobile="m-0 f-16"></app-title>
             <p ngClass.gt-xs="f-20" ngClass.xs="f-16">{{text}}</p>

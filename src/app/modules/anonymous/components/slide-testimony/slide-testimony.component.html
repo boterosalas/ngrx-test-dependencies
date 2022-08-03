@@ -1,6 +1,6 @@
 <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
   <div ngxSlickItem *ngFor="let item of testimony; let i = index" class="slide m-2 p-0" fxLayout="column" fxLayoutAlign="center center">
-    <img class="avatar" [src]="item.imageurl ? item.imageurl : '/assets/img/user.png'" alt="avatar" />
+    <img loading="lazy"class="avatar" [src]="item.imageurl ? item.imageurl : '/assets/img/user.png'" alt="avatar" />
     <span class="galano-bold purple-text f-18 mt-2">{{ item.username }}</span>
     <span class="purple2 f-14" *ngIf="item.usersocialnetwork">{{ item.usersocialnetwork }}</span>
 

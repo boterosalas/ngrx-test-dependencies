@@ -2,7 +2,7 @@
   <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
     <div ngxSlickItem *ngFor="let slide of sliderVideo; let i = index" class="slide mat-card m-2 p-0 gtmClickamAcademyReproducirComo{{ slide.title | trim}}">
       <div id="video{{ i }}" class="cursor-pointer" (click)="openVideo(slide)">
-        <img class="responsive-img gtmClickamAcademyReproducirComo{{ slide.title | trim}}" [src]="slide.img" [alt]="slide.title" />
+        <img loading="lazy"class="responsive-img gtmClickamAcademyReproducirComo{{ slide.title | trim}}" [src]="slide.img" [alt]="slide.title" />
         <div class="pl-2 pr-2 content-h gtmClickamAcademyReproducirComo{{ slide.title | trim}}">
           <h3>{{ slide.title }}</h3>
           <p>{{ slide.description }}</p>

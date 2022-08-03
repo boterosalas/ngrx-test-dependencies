@@ -2,8 +2,8 @@
   <a class="close-dialog" matRipple (click)="onNoClick()"><mat-icon class="close cursor-pointer">close</mat-icon></a>
   <ngx-slick-carousel id="onboarding-slick" class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
     <div class="item" ngxSlickItem *ngFor="let item of slides">
-      <img [src]="item.imagemobile" class="img-mobile" alt="Onboarding" />
-      <img [src]="item.imageweb" class="img-desktop" alt="Onboarding" />
+      <img loading="lazy"[src]="item.imagemobile" class="img-mobile" alt="Onboarding" />
+      <img loading="lazy"[src]="item.imageweb" class="img-desktop" alt="Onboarding" />
 
       <div class="actions">
         <a mat-button [href]="item.linkname1" *ngIf="item.buttonname1 && item.linkname1">

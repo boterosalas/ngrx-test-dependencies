@@ -6,7 +6,7 @@
 <div class="over-flow-none container">
   <a class="cursor-pointer" href="blog/{{blogMain.url}}" class="gtmBlogEntradaDestacada{{ blogMain.title | trim}}">
     <div *ngIf="blogsData.length > 0" class="over-flow-none container-relative mt-4" fxLayout="row" fxLayoutAlign="center center">
-      <img class="imagen-general" [src]="blogMain.imageurl" alt="" />
+      <img loading="lazy"class="imagen-general" [src]="blogMain.imageurl" alt="" />
       <div class="background-image"></div>
       <div class="text-blog" fxLayout="column" class="gtmBlogEntradaDestacada{{ blogMain.title | trim}}">
         <h3 class="text-title">{{ blogMain.title }}</h3>
@@ -38,7 +38,7 @@
     >
       <div *ngFor="let item of blogsData">
         <a class="cursor-pointer gtmBlogEntrada{{ item.title | trim}}" href="blog/{{item.url}}">
-          <img class="blog-image gtmBlogEntrada{{ item.title | trim}}" [src]="item.imageurl" alt="" />
+          <img loading="lazy"class="blog-image gtmBlogEntrada{{ item.title | trim}}" [src]="item.imageurl" alt="" />
           <h4 class="mt-0 blog-text-mini gtmBlogEntrada{{ item.title | trim}}">{{ item.title }}</h4>
           <div class="blog-text-sub gtmBlogEntrada{{ item.title | trim}}" fxLayout="row" fxLayoutAlign="space-between">
             <p class="mt-0 mb-0 text-autor gtmBlogEntrada{{ item.title | trim}}">{{ item.author }}</p>

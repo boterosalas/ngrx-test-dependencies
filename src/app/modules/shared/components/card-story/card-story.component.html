@@ -13,13 +13,13 @@
         [src]="stories[0].businessImage"
         alt="{{ stories[0].businessName }}"
       />
-      <img *ngIf="!stories[0].businessImage" class="img-client" src="/assets/icons/icon-72x72.png" alt="clickam" />
+      <img loading="lazy"*ngIf="!stories[0].businessImage" class="img-client" src="/assets/icons/icon-72x72.png" alt="clickam" />
       <h4 *ngIf="showTitleClient">{{ stories[0].businessName }}</h4>
       <span *ngIf="stories && stories.length > 0">{{ timeStory }}</span>
     </div>
     <div class="action-container">
       <button id="shared-{{ index }}" *ngIf="showShared" class="btn-shared" (click)="dataSliderCategory()">
-        <img src="/assets/img/shared.svg" alt="shared" />
+        <img loading="lazy"src="/assets/img/shared.svg" alt="shared" />
       </button>
       <mat-checkbox *ngIf="showCheck" [(ngModel)]="check" (change)="checkDeleteStory()" class="check-margin check-transparent">
       </mat-checkbox>
@@ -30,7 +30,7 @@
   </div>
   <div class="container-absolute">
     <div *ngFor="let story of stories; let i = index" id="file-{{ id }}-{{ story.id }}" class="container-file">
-      <img *ngIf="story.isImage" class="img-story" [src]="story.image" alt="story {{ story.name }}" />
+      <img loading="lazy"*ngIf="story.isImage" class="img-story" [src]="story.image" alt="story {{ story.name }}" />
       <video
         *ngIf="!story.isImage"
         id="video-{{ story.id }}"
@@ -120,7 +120,7 @@
         fxLayoutAlign="start start"
       >
         <span ngClass="gtmrs f-15 {{ classButtonShare }}" fxLayout="row" fxLayoutAlign="center center">
-          <img ngClass="icon-compartir pr-2 {{ classButtonShare }}" src="/assets/img/Compartir.svg" alt="user" />
+          <img loading="lazy"ngClass="icon-compartir pr-2 {{ classButtonShare }}" src="/assets/img/Compartir.svg" alt="user" />
           Referir</span
         >
       </button>
@@ -134,7 +134,7 @@
         fxLayoutAlign="start start"
       >
         <span ngClass="gtmrs f-15 {{ classButtonRefer }}" fxLayout="row" fxLayoutAlign="center center">
-          <img ngClass="icon-compartir pr-2 {{ classButtonRefer }}" src="/assets/img/Referir.svg" alt="user" />
+          <img loading="lazy"ngClass="icon-compartir pr-2 {{ classButtonRefer }}" src="/assets/img/Referir.svg" alt="user" />
           Referir
         </span>
       </button> -->
@@ -148,7 +148,7 @@
         fxLayoutAlign="start start"
       >
         <span ngClass="gtmrs f-15 {{ classButtonBuy }}" fxLayout="row" fxLayoutAlign="center center">
-          <img ngClass="icon-compartir pr-2 {{ classButtonBuy }}" src="/assets/img/Comprar.svg" alt="user" />
+          <img loading="lazy"ngClass="icon-compartir pr-2 {{ classButtonBuy }}" src="/assets/img/Comprar.svg" alt="user" />
           Comprar
         </span>
       </button>
