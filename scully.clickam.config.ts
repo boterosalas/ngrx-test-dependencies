@@ -1,9 +1,15 @@
 import { ScullyConfig } from '@scullyio/scully';
+const { fouc } =  require("@notiz/scully-plugin-fouc");
+const { lazyImages } =  require('@notiz/scully-plugin-lazy-images');
+const { MinifyHtml } = require('scully-plugin-minify-html');
+
+const postRenderers = [MinifyHtml, fouc, lazyImages];
 
 /** this loads the default render plugin, remove when switching to something else. */
 
 export const config: ScullyConfig = {
   projectRoot: './src',
+  defaultPostRenderers: postRenderers,
   projectName: 'clickam',
   spsModulePath: 'YOUR OWN MODULE PATH HERE',
   outDir: './dist/',
