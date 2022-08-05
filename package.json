@@ -99,6 +99,7 @@
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@notiz/scully-plugin-fouc": "^0.3.0",
     "@notiz/scully-plugin-lazy-images": "^0.5.0",
+    "@scullyio/scully-plugin-flash-prevention": "^2.1.36",
     "@types/express": "^4.17.0",
     "@types/jasmine": "~4.0.0",
     "@types/jasminewd2": "^2.0.10",
