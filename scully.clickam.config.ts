@@ -3,7 +3,7 @@ const { lazyImages } =  require('@notiz/scully-plugin-lazy-images');
 const { MinifyHtml } = require('scully-plugin-minify-html');
 import  { getFlashPreventionPlugin }  from '@scullyio/scully-plugin-flash-prevention';
 
-const postRenderers = [MinifyHtml, lazyImages, getFlashPreventionPlugin({appRootSelector: 'app-root'})];
+const postRenderers = [MinifyHtml, lazyImages];
 
 /** this loads the default render plugin, remove when switching to something else. */
 
