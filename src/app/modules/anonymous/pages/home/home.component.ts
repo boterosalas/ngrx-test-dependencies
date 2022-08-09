@@ -578,6 +578,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     }, 500);
   }
 
+  public openPollDesktop() {
+    window.open('https://app.useberry.com/t/pQwhtanaO13W/','_blank')
+  }
+
+  public openPollMobile() {
+    window.open('https://app.useberry.com/t/5HXrwyTwDN1c/','_blank')
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
