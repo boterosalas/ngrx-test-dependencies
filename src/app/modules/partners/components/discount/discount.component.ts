@@ -25,9 +25,12 @@ export class DiscountComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   validUser = false;
   discount:string;
+  valoriva:string;
+  valorAntesIva:string;
   total:string;
   showResults = false;
   idBusiness:number;
+  ivaIncluido = false;
 
   ngOnInit(): void {
     this.discountForm = this.fb.group({
@@ -65,6 +68,9 @@ export class DiscountComponent implements OnInit, OnDestroy {
       this.discount = val.percentage;
       this.total = val.total;
       this.showResults = true;
+      this.valoriva = val.valoriva;
+      this.valorAntesIva = val.valorAntesIva;
+      this.ivaIncluido = val.ivaIncluido;
     })
   }
 
@@ -78,7 +84,9 @@ export class DiscountComponent implements OnInit, OnDestroy {
     }
     this.subscription = this.content.salePhygital(params).subscribe(() => {
       this.showResults = false;
+      this.ivaIncluido = false;
       this.discountForm.reset();
+      this.valueForm.reset();
       this.discountForm.controls.identification.setErrors(null);
       this.discountForm.controls.cellphone.setErrors(null);
       this.validUser = false;

@@ -100,11 +100,11 @@
         'GENERIC.ONLY_NUMBERS' | translate
       }}</mat-error>
     </mat-form-field>
-    <mat-form-field *ngIf="showResults">
-      <input matInput id="discount" type="text" placeholder="VALOR IVA" value="{{ discount }}" readonly />
+    <mat-form-field *ngIf="showResults && !ivaIncluido">
+      <input matInput id="discount" type="text" placeholder="VALOR IVA" value="{{ valoriva | currency: '':'symbol':'1.0-0' }}" readonly />
     </mat-form-field>
-    <mat-form-field *ngIf="showResults">
-      <input matInput id="discount" type="text" placeholder="DESCUENTO DE IVA" value="{{ discount }}" readonly />
+    <mat-form-field *ngIf="showResults && !ivaIncluido">
+      <input matInput id="discount" type="text" placeholder="DESCUENTO DE IVA" value="{{ valorAntesIva | currency: '':'symbol':'1.0-0' }}" readonly />
     </mat-form-field>
   </form>
 
