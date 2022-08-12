@@ -20,10 +20,13 @@ export class AuthInterceptor implements HttpInterceptor {
     this.auth = this.injector.get<AuthService>(AuthService);
     const token: string = localStorage.getItem('ACCESS_TOKEN');
 
-    const tokenDecode = decode(token);
-    if(tokenDecode.state !== 'ACTIVO') {
-      localStorage.clear();
+    if(token !== null) {
+      const tokenDecode = decode(token);
+      if(tokenDecode.state !== 'ACTIVO') {
+        localStorage.clear();
+      }
     }
+
 
     let request = req;
 
