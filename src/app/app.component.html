@@ -18,7 +18,7 @@
       [routerLink]="['/mi-perfil', 'pagos']"
     >
       <span fxLayout="column" fxFlex="12" fxLayoutAlign="center center">
-        <img class="pr-2" src="assets/img/alerta.svg" alt="user" />
+        <img loading="lazy"class="pr-2" src="assets/img/alerta.svg" alt="user" />
       </span>
       <span fxLayout="column" fxFlex="80" fxLayoutAlign="center start">
         <h4 class="m-0 f-14">{{ 'GENERIC.COMPLETE_REGISTER' | translate }}</h4>
@@ -169,7 +169,7 @@
 
     <ng-template #templateTerms>
       <div class="terms text-center" *ngIf="stepTerms">
-        <img class="icon" src="/assets/img/icon.svg" alt="icon" />
+        <img loading="lazy"class="icon" src="/assets/img/icon.svg" alt="icon" />
         <div innerHtml="{{ 'GENERIC.NEW_TERMS' | translate }}"></div>
         <button mat-raised-button color="orange" (click)="showTerms()">Conócelos aquí</button>
       </div>

@@ -10,6 +10,8 @@ export class ImageComponent implements OnInit {
   @Input() imageClass:string;
   @Input() src:string;
   @Input() alt:string;
+  @Input() width = "auto";
+  @Input() height = "auto";
 
   constructor() { }
 

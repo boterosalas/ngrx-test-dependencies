@@ -80,7 +80,7 @@ export class LinksService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + this.authorization,
-      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+      
     }),
   };
 
@@ -272,7 +272,7 @@ export class LinksService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        
       }),
     };
     return this.http.get(`${this.urlComission}${this.apiKPI}?start=${date.start}&end=${date.end}`, httpOptions).pipe(
@@ -296,7 +296,7 @@ export class LinksService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        
       }),
     };
     return this.http.get(`${this.urlReports}${this.apikpiresume}`, httpOptions).pipe(
@@ -321,7 +321,7 @@ export class LinksService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        
       }),
     };
     const datesGet0 = date.start.split('T');
@@ -378,7 +378,7 @@ export class LinksService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        
       }),
     };
     const datesGet0 = date.start.split('T');
@@ -712,7 +712,7 @@ export class LinksService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        
       }),
     };
 
@@ -734,7 +734,7 @@ export class LinksService {
     const httpOptionsForm = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        
       }),
     };
 
@@ -756,7 +756,7 @@ export class LinksService {
     const httpOptionsForm = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        
       }),
     };
 

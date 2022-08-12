@@ -19,7 +19,7 @@ export class ContentService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + this.authorization,
-      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+      
     }),
   };
 
@@ -139,7 +139,7 @@ export class ContentService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + this.authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        
         'Content-Disposition': 'attachment',
       }),
       responseType: 'blob' as 'json',
@@ -1040,7 +1040,7 @@ export class ContentService {
     const httpOptionsSet = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        
       }),
     };
     return this.http.post(`${this.url + this.apiUploadContent}`, data, httpOptionsSet);
@@ -1065,7 +1065,7 @@ export class ContentService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + this.authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        
         'Content-Disposition': 'attachment',
       }),
       responseType: 'blob' as 'text',
@@ -1077,7 +1077,7 @@ export class ContentService {
     const httpOptionsSet = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        
       }),
     };
     return this.http.post(`${this.urlRefer + this.apiSaverefer}`, datos, httpOptionsSet).pipe(
@@ -1112,7 +1112,7 @@ export class ContentService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + this.authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        
         'Cache-Control': 'no-cache, no-store, must-revalidate, post-check=0, pre-check=0',
         Pragma: 'no-cache',
         Expires: '0',
@@ -1174,7 +1174,7 @@ export class ContentService {
     const httpOptionsSet = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        
       }),
     };
     return this.http.post(`${this.url + this.apiSaveBlog}`, data, httpOptionsSet);
@@ -1183,7 +1183,7 @@ export class ContentService {
     const httpOptionsSet = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        
       }),
     };
     return this.http.post(`${this.url + this.apiActivateBlog}`, data, httpOptionsSet);
@@ -1223,7 +1223,7 @@ export class ContentService {
     const httpOptionsSet = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        
       }),
     };
     return this.http.post(`${this.url + this.apiSendMessage}`, data, httpOptionsSet);

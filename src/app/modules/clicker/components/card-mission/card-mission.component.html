@@ -4,7 +4,7 @@
   <mat-card *ngFor="let item of items">
     <div fxLayout="row" fxLayoutAlign="space-between center " fxLayoutGap="10px">
       <span fxLayout="column">
-        <img [src]="item.icon" [alt]="item.title" />
+        <img loading="lazy"[src]="item.icon" [alt]="item.title" />
       </span>
       <span fxLayout="column">
         <h3 class="m-0">{{ item.title }}</h3>
@@ -12,10 +12,10 @@
       </span>
       <div fxLayout="column">
         <span *ngIf="item.complete === true">
-          <img src="/assets/img/gamification/Icon-check.svg" alt="check" />
+          <img loading="lazy"src="/assets/img/gamification/Icon-check.svg" alt="check" />
         </span>
         <span *ngIf="item.complete === false">
-          <img src="/assets/img/gamification/Icon-check-disabled.svg" alt="check incomplete" />
+          <img loading="lazy"src="/assets/img/gamification/Icon-check-disabled.svg" alt="check incomplete" />
         </span>
       </div>
     </div>

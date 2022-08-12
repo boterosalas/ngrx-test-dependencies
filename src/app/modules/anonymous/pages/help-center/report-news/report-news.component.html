@@ -20,7 +20,7 @@
       <div fxLayout="row" fxLayoutGap="10px">
         <mat-card>
           <div fxLayout="row" fxLayoutGap="10px" class="report-news">
-            <img src="/assets/img/ayuda/reportar-novedad/icon-reportar-novedad.svg" alt="" />
+            <img loading="lazy"src="/assets/img/ayuda/reportar-novedad/icon-reportar-novedad.svg" alt="" />
             <h3>Reportar novedad</h3>
           </div>
           <h4>
@@ -122,10 +122,10 @@
                     <div>
                       <label for="image" id="upload" class="cursor-pointer">
                         <span *ngIf="!showErrorCert">
-                          <img class="mt-1" *ngIf="nameFileCert === ''" src="/assets/img/image-file-upload.svg" alt="upload" />
-                          <img class="mt-1" *ngIf="nameFileCert !== ''" src="/assets/img/image-file-upload-ok.svg" alt="upload" />
+                          <img loading="lazy"class="mt-1" *ngIf="nameFileCert === ''" src="/assets/img/image-file-upload.svg" alt="upload" />
+                          <img loading="lazy"class="mt-1" *ngIf="nameFileCert !== ''" src="/assets/img/image-file-upload-ok.svg" alt="upload" />
                         </span>
-                        <img class="mt-1 w-icon" *ngIf="showErrorCert" src="/assets/img/icono-error-carga.svg" alt="upload" />
+                        <img loading="lazy"class="mt-1 w-icon" *ngIf="showErrorCert" src="/assets/img/icono-error-carga.svg" alt="upload" />
                       </label>
                     </div>
                   </div>

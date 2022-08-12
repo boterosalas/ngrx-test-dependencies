@@ -6,18 +6,24 @@ import { AuthService } from '../services/auth.service';
 import { Injector } from '@angular/core';
 import { ResponseService } from '../interfaces/response';
 import { LoaderService } from '../services/loader.service';
+import decode from 'jwt-decode';
 
 @Injectable({ providedIn: 'root' })
 export class AuthInterceptor implements HttpInterceptor {
   countError = 0;
   countError2 = 0;
-  auth:any;
+  auth: any;
 
   constructor(private injector: Injector, private loaderService: LoaderService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.auth = this.injector.get<AuthService>(AuthService);
     const token: string = localStorage.getItem('ACCESS_TOKEN');
+
+    const tokenDecode = decode(token);
+    if(tokenDecode.state !== 'ACTIVO') {
+      localStorage.clear();
+    }
 
     let request = req;
 
@@ -57,7 +63,7 @@ export class AuthInterceptor implements HttpInterceptor {
             if (this.countError2 === 0) {
               console.log(err);
             }
-            this.countError2 +=1;
+            this.countError2 += 1;
             setTimeout(() => {
               this.loaderService.hide();
               this.countError2 = 0;

@@ -13,7 +13,7 @@
     <!-- exito -->
     <div fxLayout="row" *ngIf="data.exito === true" fxLayoutGap="15px" class="mb-2">
       <div fxLayout="column" fxFlex="26">
-        <img class="responsive-img img-desk" src="{{ data.img }}" alt="{{ data.title }}" />
+        <img loading="lazy"class="responsive-img img-desk" src="{{ data.img }}" alt="{{ data.title }}" />
       </div>
       <div fxLayout="column" fxFlex="50" *ngIf="data.home">
         <h3 class="title m-0">{{ data.title }}</h3>
@@ -35,7 +35,7 @@
     <!-- others -->
     <div fxLayout="row" *ngIf="data.showProduct && data.infoaditional" fxLayoutGap="15px" class="mb-2">
       <div fxLayout="column" fxFlex="26">
-        <img class="responsive-img img-desk" src="{{ data.img }}" alt="{{ data.title }}" />
+        <img loading="lazy"class="responsive-img img-desk" src="{{ data.img }}" alt="{{ data.title }}" />
       </div>
       <div fxLayout="column" fxFlex="50" *ngIf="data.home">
         <h3 class="title m-0">{{ data.title }}</h3>

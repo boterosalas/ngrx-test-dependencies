@@ -6,7 +6,7 @@
     class="goals gtmHomeClicMenuLightboxtusmedallas"
   >
     <span matPrefix class="pr-2 gtmHomeClicMenuLightboxtusmedallas"
-      ><img src="assets/img/gamification/icon-prize-btn-menu.svg" alt="prize"
+      ><img loading="lazy"src="assets/img/gamification/icon-prize-btn-menu.svg" alt="prize"
     /></span>
     {{ 'MEDALS.MEDALS' | translate }}
   </span>
@@ -27,7 +27,7 @@
         matRipple
       >
         <span *ngIf="showIcon">
-          <img src="assets/img/dashboard/icon-{{ i }}.svg" alt="icon" />
+          <img loading="lazy"src="assets/img/dashboard/icon-{{ i }}.svg" alt="icon" />
         </span>
         <a mat-list-item ngClass="cursor-pointer gtmHomeClicMenuLightbox{{ item.description | trim}} f-16 {{ item.description }}" id="{{ section }}{{ i }}">
           <span *ngIf="item.active" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="gtmHomeClicMenuLightbox{{ item.description | trim}}">

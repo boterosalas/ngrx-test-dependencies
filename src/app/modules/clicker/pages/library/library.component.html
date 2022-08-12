@@ -27,7 +27,7 @@
           <mat-list *ngFor="let item of bussiness; let i = index">
             <mat-list-item (click)="setStep(i, item)" ngClass="cursor-pointer"
               ><span [class]="step === i ? 'activo' : 'no-activo'"
-                ><img class="mini-img" [src]="item.imageurl" alt="logo" />
+                ><img loading="lazy"class="mini-img" [src]="item.imageurl" alt="logo" />
                 {{ item.description }}
               </span></mat-list-item
             >
@@ -50,7 +50,7 @@
           <mat-list *ngFor="let item of bussiness; let i = index">
             <mat-list-item (click)="setStepMovil(item, item)" ngClass="cursor-pointer"
               ><span class="sub-item"
-                ><img class="mini-img" [src]="item.imageurl" alt="logo" />
+                ><img loading="lazy"class="mini-img" [src]="item.imageurl" alt="logo" />
                 {{ item.description }}
               </span></mat-list-item
             >
@@ -63,11 +63,11 @@
       <div fxLayout="row" fxLayoutAlign="space-between">
         <div fxLayout="row">
           <button mat-raised-button color="orange" (click)="selectAll()" class="button-selected">
-            <img class="icon-download" src="assets/img/dashboard/icon-check.svg" alt="descarga" />
+            <img loading="lazy"class="icon-download" src="assets/img/dashboard/icon-check.svg" alt="descarga" />
             {{ selectAllVideosImg }}
           </button>
           <button mat-raised-button color="orange" [disabled]="active" (click)="downloadFiles()" class="ml-4 button-selected-normal">
-            <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga" />
+            <img loading="lazy"class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga" />
             Descargar
           </button>
         </div>
@@ -89,11 +89,11 @@
         <h3 style="color: #726d7e" *ngIf="!imagenDispo">No hay imágenes disponibles para este negocio.</h3>
         <ng-container class="mt-4" *ngFor="let product of dataReal; let i = index">
           <div class="image-hover">
-            <img class="image-size" [src]="product.url" alt="" />
+            <img loading="lazy"class="image-size" [src]="product.url" alt="" />
             <div class="image-background">
               <div class="image-viewer-x" (click)="viewerPhoto(product)"></div>
               <div class="image-viewer-y" (click)="viewerPhoto(product)"></div>
-              <img class="cursor-pointer image-vysor" (click)="viewerPhoto(product)" src="assets/img/dashboard/icon-view-img.svg" alt="" />
+              <img loading="lazy"class="cursor-pointer image-vysor" (click)="viewerPhoto(product)" src="assets/img/dashboard/icon-view-img.svg" alt="" />
               <div class="custom-color-primary">
                 <mat-checkbox [(ngModel)]="product.dataR" class="check-margin" (change)="loadDelete()"> </mat-checkbox>
               </div>
@@ -115,7 +115,7 @@
             <div class="image-background">
               <div class="image-viewer-x" (click)="downloadVideo(product)"></div>
               <div class="image-viewer-y" (click)="downloadVideo(product)"></div>
-              <img class="cursor-pointer image-vysor" (click)="downloadVideo(product)" src="assets/img/dashboard/descarga.svg" alt="" />
+              <img loading="lazy"class="cursor-pointer image-vysor" (click)="downloadVideo(product)" src="assets/img/dashboard/descarga.svg" alt="" />
               <div class="custom-color-primary">
                 <mat-checkbox [(ngModel)]="product.dataR" class="check-margin" (change)="loadDelete()"> </mat-checkbox>
               </div>
@@ -135,7 +135,7 @@
         </button>
       </span>
       <span class="mt-2 mb-2" fxLayout="row">
-        <img class="image-bussiness" [src]="stepMobile.imageurl" alt="" />
+        <img loading="lazy"class="image-bussiness" [src]="stepMobile.imageurl" alt="" />
         <span>
           <h3>{{ stepMobile.description }}</h3></span
         >
@@ -143,11 +143,11 @@
       <div fxLayout="row" fxLayoutAlign="space-between">
         <div fxLayout="row">
           <button mat-raised-button color="orange" (click)="selectAll()" class="button-selected">
-            <img class="icon-download" src="assets/img/dashboard/icon-check.svg" alt="descarga" />
+            <img loading="lazy"class="icon-download" src="assets/img/dashboard/icon-check.svg" alt="descarga" />
             {{ selectAllVideosImg }}
           </button>
           <button mat-raised-button [disabled]="active" color="orange" (click)="downloadFiles()" class="ml-3 button-selected-normal">
-            <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga" />
+            <img loading="lazy"class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga" />
             Descargar
           </button>
         </div>
@@ -160,11 +160,11 @@
         <h3 style="color: #726d7e" *ngIf="!imagenDispo">No hay imágenes disponibles para este negocio.</h3>
         <ng-container class="mt-4" *ngFor="let product of dataReal; let i = index">
           <div class="image-hover">
-            <img class="image-size" [src]="product.url" alt="" />
+            <img loading="lazy"class="image-size" [src]="product.url" alt="" />
             <div class="image-background">
               <div class="image-viewer-x" (click)="viewerPhoto(product)"></div>
               <div class="image-viewer-y" (click)="viewerPhoto(product)"></div>
-              <img class="cursor-pointer image-vysor" (click)="viewerPhoto(product)" src="assets/img/dashboard/icon-view-img.svg" alt="" />
+              <img loading="lazy"class="cursor-pointer image-vysor" (click)="viewerPhoto(product)" src="assets/img/dashboard/icon-view-img.svg" alt="" />
               <div class="custom-color-primary">
                 <mat-checkbox [(ngModel)]="product.dataR" class="check-margin" (change)="loadDelete()"> </mat-checkbox>
               </div>
@@ -193,7 +193,7 @@
             <div class="image-background">
               <div class="image-viewer-x" (click)="downloadVideo(product)"></div>
               <div class="image-viewer-y" (click)="downloadVideo(product)"></div>
-              <img class="cursor-pointer image-vysor" (click)="downloadVideo(product)" src="assets/img/dashboard/descarga.svg" alt="" />
+              <img loading="lazy"class="cursor-pointer image-vysor" (click)="downloadVideo(product)" src="assets/img/dashboard/descarga.svg" alt="" />
               <div class="custom-color-primary">
                 <mat-checkbox [(ngModel)]="product.dataR" class="check-margin" (change)="loadDelete()"> </mat-checkbox>
               </div>
@@ -207,9 +207,9 @@
 
 <ng-template #templateImage>
   <div>
-    <img class="w-image" [src]="url" alt="contenido-negocio" />
+    <img loading="lazy"class="w-image" [src]="url" alt="contenido-negocio" />
     <button class="download-file cursor-pointer" (click)="downloadFile()">
-      <img class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga" />
+      <img loading="lazy"class="icon-download" src="assets/img/dashboard/descarga.svg" alt="descarga" />
       Descargar
     </button>
   </div>

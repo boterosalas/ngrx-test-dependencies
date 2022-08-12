@@ -68,7 +68,7 @@ export class AuthService implements OnDestroy {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + this.authorization,
-      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+      
     }),
   };
 

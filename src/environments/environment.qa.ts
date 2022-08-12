@@ -10,7 +10,6 @@ export const environment = {
   URL_MASTER: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/LYWCBAXGTW/',
   URL_EXTERNAL: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/JRDGSLTQHN/',
   PDF: 'https://webclickamqa.blob.core.windows.net/clickacademy/pdf/',
-  SUBSCRIPTION: 'f5edbcd2315e479aad33d80c58052fcc',
   firebaseConfig: {
     apiKey: 'AIzaSyAqrpI8Yw4m0fOL41SWVrENCBL2XRs4BIY',
     authDomain: 'clickam.firebaseapp.com',

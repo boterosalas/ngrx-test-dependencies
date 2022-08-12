@@ -2,7 +2,7 @@
   <mat-card-content fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="10px" fxLayoutAlign.xs="space-around">
     <span fxLayout="column" fxFlex="20" fxFlex.xs="40" fxFLex.gt-xs="100" fxLayoutAlign="center">
       <div class="{{ container }}">
-        <img class="img-responsive ch-100 heigth-automatic" mat-card-image src="{{ imagen }}" alt="{{ altimagen }}" />
+        <img loading="lazy"class="img-responsive ch-100 heigth-automatic" mat-card-image src="{{ imagen }}" alt="{{ altimagen }}" />
       </div>
     </span>
     <span
@@ -86,7 +86,7 @@
   <mat-card-content fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="10px" fxLayoutAlign.xs="space-around">
     <span fxLayout="column" fxFlex="20" fxFlex.xs="40" fxFLex.gt-xs="100" fxLayoutAlign="center">
       <div class="{{ container }}">
-        <img class="img-responsive ch-100" mat-card-image src="{{ imagen }}" alt="{{ altimagen }}" />
+        <img loading="lazy"class="img-responsive ch-100" mat-card-image src="{{ imagen }}" alt="{{ altimagen }}" />
       </div>
     </span>
     <span
@@ -136,7 +136,7 @@
 <mat-card class="mat-elevation-z0 p-0 fade-in" *ngIf="categoria">
   <mat-card-content fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap="10px" fxLayoutAlign.xs="center center" class="category border-rad">
     <span fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
-      <img (click)="product()" [src]="foto" class="img-responsive mb-3 cursor-pointer {{ Class }}{{ nombreProducto }}" />
+      <img loading="lazy"(click)="product()" [src]="foto" class="img-responsive mb-3 cursor-pointer {{ Class }}{{ nombreProducto }}" />
     </span>
   </mat-card-content>
 </mat-card>

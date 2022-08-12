@@ -85,7 +85,7 @@
     </p>
   </div>
 
-  <form [formGroup]="valueForm" *ngIf="validUser">
+  <form [formGroup]="valueForm" *ngIf="validUser" fxLayoutGap="20px">
     <mat-form-field>
       <input
         matInput
@@ -100,6 +100,12 @@
         'GENERIC.ONLY_NUMBERS' | translate
       }}</mat-error>
     </mat-form-field>
+    <mat-form-field *ngIf="showResults">
+      <input matInput id="discount" type="text" placeholder="VALOR IVA" value="{{ discount }}" readonly />
+    </mat-form-field>
+    <mat-form-field *ngIf="showResults">
+      <input matInput id="discount" type="text" placeholder="DESCUENTO DE IVA" value="{{ discount }}" readonly />
+    </mat-form-field>
   </form>
 
   <div *ngIf="showResults">
@@ -109,14 +115,13 @@
     </div>
     <div fxLayout="row" fxLayoutGap="10px">
       <mat-form-field>
-        <input matInput id="discount" type="text" placeholder="DESCUENTO" value="{{discount}} %" readonly />
+        <input matInput id="discount" type="text" placeholder="DESCUENTO" value="{{ discount }} %" readonly />
       </mat-form-field>
       <mat-form-field>
-        <input matInput id="total" type="text" placeholder="TOTAL A PAGAR" value="{{total | currency: '':'symbol':'1.0-0'}}" readonly />
+        <input matInput id="total" type="text" placeholder="TOTAL A PAGAR" value="{{ total | currency: '':'symbol':'1.0-0' }}" readonly />
       </mat-form-field>
 
       <app-button title="CONFIRMAR VENTA" [haveIcon]="false" (click)="confirmSale()" classButton="shadow-purple"></app-button>
-
     </div>
   </div>
 </mat-card>

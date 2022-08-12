@@ -4,13 +4,13 @@
       <mat-icon class="white">arrow_back</mat-icon>
     </a>
   </div>
-  <img class="responsive-img" [src]="img" [alt]="title" />
+  <img loading="lazy"class="responsive-img" [src]="img" [alt]="title" />
   <div class="container set-size charts-container position-relative">
     <div fxLayout="column" ngClass="pie-wrapper {{ classLevel }} progress-{{ percent }}" fxLayoutAlign="center center">
       <div fxLayout="column">
         <div ngClass="label bglabel label-bg-{{ percent }}">
           <span>
-            <img [src]="icon" [alt]="title" />
+            <img loading="lazy"[src]="icon" [alt]="title" />
           </span>
           <span class="percent"> {{ percent }}% </span>
         </div>

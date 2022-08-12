@@ -64,7 +64,7 @@
           <div class="content-state {{ accountStatus.className ? accountStatus.className : '' }}">
             <h3 class="m-0">{{ 'PROFILE.ACOUNT_INFO' | translate }}</h3>
             <span *ngIf="accountStatus.status" class="verification-status">
-              <img *ngIf="accountStatus.icon" [src]="accountStatus.icon" [alt]="accountStatus.status" />
+              <img loading="lazy"*ngIf="accountStatus.icon" [src]="accountStatus.icon" [alt]="accountStatus.status" />
               {{ accountStatus.status }}
             </span>
           </div>

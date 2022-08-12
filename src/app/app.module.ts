@@ -101,7 +101,10 @@ export function jwtTokenGetter() {
       enabled: environment.production,
     }),
     SocialLoginModule,
-    ScullyLibModule,
+    ScullyLibModule.forRoot({
+      useTransferState: true,
+      alwaysMonitor: true,
+    }),
   ],
   providers: [
     {

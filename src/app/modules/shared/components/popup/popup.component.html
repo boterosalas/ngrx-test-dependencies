@@ -2,9 +2,9 @@
   <a id="closeDialog" matRipple (click)="onNoClick()"><mat-icon class="close cursor-pointer">close</mat-icon></a>
   <div>
     <!-- Imagen Web -->
-    <img class="imageContainer" fxShow.xs="false" src="{{ data.imageUrlWeb }}" alt="{{ data.textbutton }}" />
+    <img loading="lazy"class="imageContainer" fxShow.xs="false" src="{{ data.imageUrlWeb }}" alt="{{ data.textbutton }}" />
     <!-- Imagen Mobile -->
-    <img class="imageContainer" fxShow.gt-xs="false" src="{{ data.imageUrlMobile }}" alt="{{ data.textbutton }}" />
+    <img loading="lazy"class="imageContainer" fxShow.gt-xs="false" src="{{ data.imageUrlMobile }}" alt="{{ data.textbutton }}" />
     <a
       *ngIf="data.textbutton && data.BLink"
       (click)="onNoClick()"

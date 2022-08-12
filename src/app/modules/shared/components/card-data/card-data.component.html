@@ -1,5 +1,5 @@
 <div fxLayout="column" class="card {{ classCard }}">
-  <img *ngIf="showIcon" class="position-absolute" src="assets/img/icon-clickam-white.svg" alt="fondo-clickam" />
+  <img loading="lazy"*ngIf="showIcon" class="position-absolute" src="assets/img/icon-clickam-white.svg" alt="fondo-clickam" />
   <div class="z-index-1 info" fxLayout="row" fxLayoutAlign="space-between start ">
     <div [fxLayout]="direction">
       <span class="payment-card">{{ number }}</span>
@@ -15,7 +15,7 @@
       </span>
     </div>
     <div>
-      <img *ngIf="showIcon" class="z-index-1" [src]="imgCard" alt="icono comisiones" />
+      <img loading="lazy"*ngIf="showIcon" class="z-index-1" [src]="imgCard" alt="icono comisiones" />
     </div>
   </div>
   <a class="button-card  mt-2 cursor-pointer {{ Classtag }}" (click)="detail()">

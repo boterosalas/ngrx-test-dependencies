@@ -80,7 +80,7 @@
           fxLayoutGap="10px"
           fxLayoutAlign="center center"
         >
-          <img class="pr-2" src="assets/img/chrome.svg" alt="chrome" />
+          <img loading="lazy"class="pr-2" src="assets/img/chrome.svg" alt="chrome" />
           <span>Instalar Clickam en Chrome</span>
         </a>
       </div>
@@ -145,7 +145,7 @@
 
   <div class="container-fluid bg-welcome pt-3">
     <div class="container">
-      <app-image fxHide.xs="true" imageClass="datacenter" src="/assets/img/home/data.png" alt="data"></app-image>
+      <app-image fxHide.xs="true" height="469" width="1110" imageClass="datacenter" src="/assets/img/home/data.png" alt="data"></app-image>
       <app-image fxHide.gt-xs="true" imageClass="datacenter" src="/assets/img/home/data.svg" alt="data"></app-image>
     </div>
   </div>
@@ -278,18 +278,23 @@
   </div>
 </section>
 
+<div class="fix">
+  <app-button fxHide.xs="true"  direction="row-reverse" title="Nuevo diseño" (action)="openPollDesktop()" color="red" classIcon="tio-gesture_hover_1f style-icon mr-2"></app-button>
+  <app-button fxHide.gt-xs="true" direction="row-reverse" title="Nuevo diseño" (action)="openPollMobile()" color="red" classIcon="tio-gesture_hover_1f style-icon mr-2"></app-button>
+</div>
+
 <!-- modal promo template -->
 
 <ng-template #templatePromo>
   <div fxShow.gt-xs="true" fxShow.xs="false">
     <a [href]="modalHref" [target]="modalTarget">
-      <img [src]="modalSrcWeb" class="img-responsive w-100 cursor-pointer" [alt]="modalAltWeb" />
+      <img loading="lazy"[src]="modalSrcWeb" class="img-responsive w-100 cursor-pointer" [alt]="modalAltWeb" />
     </a>
   </div>
 
   <div fxShow.gt-xs="false" fxShow.xs="true">
     <a [href]="modalHref" [target]="modalTarget">
-      <img [src]="modalSrcMobile" class="img-responsive w-100 cursor-pointer" [alt]="modalAltMobile" />
+      <img loading="lazy"[src]="modalSrcMobile" class="img-responsive w-100 cursor-pointer" [alt]="modalAltMobile" />
     </a>
   </div>
 </ng-template>

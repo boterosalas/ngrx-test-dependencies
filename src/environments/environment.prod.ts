@@ -12,7 +12,6 @@ export const environment = {
   URL_MASTER: 'https://lawrencio.grupo-exito.com/apiew/clickam/v1/VBTWYUCZDJ/',
   URL_EXTERNAL: 'https://lawrencio.grupo-exito.com/apiew/clickam/v1/WTCHMPSSJP/',
   PDF: 'https://webclickampdn.blob.core.windows.net/clickacademy/pdf/',
-  SUBSCRIPTION: 'e2d3328d254d4e52a11495b223f56e86',
   firebaseConfig: {
     apiKey: 'AIzaSyAZNoC1LqIWsTtXhjaWBneju-b_-xSIpnw',
     authDomain: 'app-clickam-pdn.firebaseapp.com',
