@@ -101,7 +101,7 @@ export class UserService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + this.authorization,
-      'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+      
     }),
   };
 
@@ -364,7 +364,7 @@ export class UserService {
     const httpOptionsSet = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        
       }),
     };
 
@@ -388,7 +388,7 @@ export class UserService {
       headers: new HttpHeaders({
         'Content-Type': 'APPLICATION/octet-stream',
         Authorization: 'Bearer ' + this.authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        
         responseType: 'blob',
         Accept: 'application/pdf',
         observe: 'response',
@@ -402,7 +402,7 @@ export class UserService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + this.authorization,
-        'Ocp-Apim-Subscription-Key': environment.SUBSCRIPTION,
+        
       }),
       responseType: 'blob' as 'text',
     };
