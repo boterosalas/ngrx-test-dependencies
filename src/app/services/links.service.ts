@@ -445,7 +445,7 @@ export class LinksService {
   }
 
   public getDetailPaymentClicker(date: string, id: string) {
-    return this.http.get(`${this.urlComission}/${this.apigetDetailPaymentClicker}?userid=${id}&paymentDate=${date}`, this.httpOptions).pipe(
+    return this.http.get(`${this.urlComission}${this.apigetDetailPaymentClicker}?userid=${id}&paymentDate=${date}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
