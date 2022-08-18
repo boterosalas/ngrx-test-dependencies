@@ -17,7 +17,7 @@ body {
   background: $bg-gray;
 }
 
-img{
+img {
   height: auto;
 }
 
@@ -2999,6 +2999,10 @@ img.datacenter {
   max-width: 100px;
   min-width: 100px;
   min-height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 3px solid $primary-color;
+  object-fit: scale-down;
 }
 
 ol.numeric li {

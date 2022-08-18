@@ -1,3 +1,5 @@
+@import 'variables';
+
 .slide {
   width: 100px;
   height: 120px;
@@ -5,10 +7,11 @@
 }
 
 .discount {
-  color: #f21905;
+  color: $color-p;
   width: 150px;
   text-align: center;
-  font-size: 13px;
+  font-size: 12px;
+  margin-top: 10px;
 }
 
 .st{
