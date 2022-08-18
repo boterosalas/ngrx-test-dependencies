@@ -63,7 +63,13 @@
         </p>
         <span fxLayout="row">
           <input id="urlLink" matInput [value]="url" #linkInput readonly />
-          <button mat-mini-fab color="purple2" class="p-0 gtmPanelInvitaYGanaCopiarLink" (click)="copyLink(linkInput)" fxLayoutAlign="center center">
+          <button
+            mat-mini-fab
+            color="purple2"
+            class="p-0 gtmPanelInvitaYGanaCopiarLink"
+            (click)="copyLink(linkInput)"
+            fxLayoutAlign="center center"
+          >
             <i class="tio-copy f-18 cpb gtmPanelInvitaYGanaCopiarLink"></i>
           </button>
         </span>
@@ -80,7 +86,7 @@
           fxLayoutGap="10px"
           fxLayoutAlign="center center"
         >
-          <img loading="lazy"class="pr-2" src="assets/img/chrome.svg" alt="chrome" />
+          <img loading="lazy" class="pr-2" src="assets/img/chrome.svg" alt="chrome" />
           <span>Instalar Clickam en Chrome</span>
         </a>
       </div>
@@ -93,17 +99,17 @@
             fxLayoutAlign="start center"
             fxLayoutGap="5px"
             mat-line
-            class="purple2-text f-16 galano-bold pb-3 pt-3 border-bottom-gray  gtmPanelCaminoDelClickamer{{mission.description | trim}}"
+            class="purple2-text f-16 galano-bold pb-3 pt-3 border-bottom-gray  gtmPanelCaminoDelClickamer{{ mission.description | trim }}"
           >
-            <span class="pl-3 gtmPanelCaminoDelClickamer{{mission.description | trim}}" *ngIf="mission.status">
-              <i class="tio-checkmark_circle f-18 "></i>
+            <span class="pl-3 gtmPanelCaminoDelClickamer{{ mission.description | trim }}" *ngIf="mission.status">
+              <i class="tio-checkmark_circle f-18"></i>
             </span>
 
-            <span class="pl-3 gtmPanelCaminoDelClickamer{{mission.description | trim}}" *ngIf="!mission.status">
+            <span class="pl-3 gtmPanelCaminoDelClickamer{{ mission.description | trim }}" *ngIf="!mission.status">
               <i class="tio-checkmark_circle_outlined f-18"></i>
             </span>
 
-            <span class="cursor-pointer gtmPanelCaminoDelClickamer{{mission.description | trim}}" (click)="modalWay(i, mission)">
+            <span class="cursor-pointer gtmPanelCaminoDelClickamer{{ mission.description | trim }}" (click)="modalWay(i, mission)">
               {{ mission.description }}
             </span>
           </div>
@@ -131,7 +137,7 @@
       title="¡Bienvenido a Clickam!"
       subtitle="Crea links, comparte y ¡gana!"
       text="Porque en Clickam podrás ahorrar con tus compras y ganar dinero recomendando los productos que más te gustan."
-      [buttonHome]=true
+      [buttonHome]="true"
     ></app-welcome>
   </div>
 
@@ -142,7 +148,25 @@
     <app-slider-share (click)="openRegister()" [slider]="bussiness" [slideConfig]="slideConfig"></app-slider-share>
   </div>
 
-  <!-- images data -->
+  <!-- image -->
+  <div class="container py-5">
+    <app-image
+      fxHide.xs="true"
+      (click)="openRegister()"
+      imageClass="cursor-pointer w-100"
+      src="/assets/img/home/gana.png"
+      alt="negocios"
+    ></app-image>
+    <app-image
+      fxHide.gt-xs="true"
+      (click)="openRegister()"
+      width="324"
+      height="77"
+      imageClass="cursor-pointer w-100"
+      src="/assets/img/home/gana-mobile.png"
+      alt="negocios"
+    ></app-image>
+  </div>
 
   <!-- testimonials -->
 
@@ -177,33 +201,41 @@
     class="mb-3"
   ></app-slider> -->
 
-<!-- modal promo template -->
+  <!-- modal promo template -->
 
-<ng-template #templatePromo>
-  <div fxShow.gt-xs="true" fxShow.xs="false">
-    <a [href]="modalHref" [target]="modalTarget">
-      <img loading="lazy"[src]="modalSrcWeb" class="img-responsive w-100 cursor-pointer" [alt]="modalAltWeb" />
-    </a>
-  </div>
+  <ng-template #templatePromo>
+    <div fxShow.gt-xs="true" fxShow.xs="false">
+      <a [href]="modalHref" [target]="modalTarget">
+        <img loading="lazy" [src]="modalSrcWeb" class="img-responsive w-100 cursor-pointer" [alt]="modalAltWeb" />
+      </a>
+    </div>
 
-  <div fxShow.gt-xs="false" fxShow.xs="true">
-    <a [href]="modalHref" [target]="modalTarget">
-      <img loading="lazy"[src]="modalSrcMobile" class="img-responsive w-100 cursor-pointer" [alt]="modalAltMobile" />
-    </a>
-  </div>
-</ng-template>
+    <div fxShow.gt-xs="false" fxShow.xs="true">
+      <a [href]="modalHref" [target]="modalTarget">
+        <img loading="lazy" [src]="modalSrcMobile" class="img-responsive w-100 cursor-pointer" [alt]="modalAltMobile" />
+      </a>
+    </div>
+  </ng-template>
 
-<!-- modal ingreso clickam -->
+  <!-- modal ingreso clickam -->
 
-<ng-template #templateClickamWay>
-  <div [fxLayout]="direction" [fxLayout.xs]="directionMobile" fxLayoutGap="20px">
-    <span class="image">
-      <app-image [src]="imageWay" [alt]="titleWay"></app-image>
-    </span>
-    <span>
-      <app-title showTitleh3="true" [text]="titleWay"></app-title>
-      <p>{{textWay}}</p>
-      <app-button *ngIf="showWay" [title]="nameButton" (action)="routeWay()" [haveIcon]="false" class="bp" classButton="shadow-purple"></app-button>
-    </span>
-  </div>
-</ng-template>
+  <ng-template #templateClickamWay>
+    <div [fxLayout]="direction" [fxLayout.xs]="directionMobile" fxLayoutGap="20px">
+      <span class="image">
+        <app-image [src]="imageWay" [alt]="titleWay"></app-image>
+      </span>
+      <span>
+        <app-title showTitleh3="true" [text]="titleWay"></app-title>
+        <p>{{ textWay }}</p>
+        <app-button
+          *ngIf="showWay"
+          [title]="nameButton"
+          (action)="routeWay()"
+          [haveIcon]="false"
+          class="bp"
+          classButton="shadow-purple"
+        ></app-button>
+      </span>
+    </div>
+  </ng-template>
+</section>
