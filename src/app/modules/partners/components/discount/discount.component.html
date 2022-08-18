@@ -104,7 +104,7 @@
       <input matInput id="discount" type="text" placeholder="VALOR IVA" value="{{ valoriva | currency: '':'symbol':'1.0-0' }}" readonly />
     </mat-form-field>
     <mat-form-field *ngIf="showResults && !ivaIncluido">
-      <input matInput id="discount" type="text" placeholder="DESCUENTO DE IVA" value="{{ valorAntesIva | currency: '':'symbol':'1.0-0' }}" readonly />
+      <input matInput id="discount" type="text" placeholder="VALOR SIN IVA" value="{{ valorAntesIva | currency: '':'symbol':'1.0-0' }}" readonly />
     </mat-form-field>
   </form>
 
