@@ -1,5 +1,3 @@
-<app-widget-bar *ngIf="!auth.isLoggedIn()"></app-widget-bar>
-
 <header>
   <!-- Mobile - not login -->
   <div fxHide.gt-sm="true" *ngIf="!auth.isLoggedIn()" fxLayoutAlign="space-between stretch" fxLayoutGap="1rem" class="divContainer">

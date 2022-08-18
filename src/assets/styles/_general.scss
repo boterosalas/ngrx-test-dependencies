@@ -1857,6 +1857,12 @@ button.swal2-cancel.updatecancel.swal2-styled {
   &-30 {
     font-size: 30px;
   }
+  &-31 {
+    font-size: 31px;
+  }
+  &-32 {
+    font-size: 32px;
+  }
   &-40 {
     font-size: 40px;
   }
@@ -3034,7 +3040,7 @@ app-date-range form input {
 }
 
 .red-text {
-  color: red;
+  color: $secondary-color;
 }
 
 .uppercase {
@@ -3060,4 +3066,9 @@ app-date-range form input {
 
 #savings .top-generic {
   display: none !important;
+}
+
+.card-style {
+  background: #ffffff;
+  border-radius: 6px;
 }

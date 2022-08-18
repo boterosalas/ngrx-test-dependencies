@@ -126,7 +126,7 @@
 <section *ngIf="!auth.isLoggedIn()">
   <!-- welcome  -->
 
-  <div class="container-fluid bg-welcome pt-3">
+  <div class="container-fluid bg-welcome py-5">
     <app-welcome
       title="¡Bienvenido a Clickam!"
       subtitle="Crea links, comparte y ¡gana!"
@@ -137,118 +137,24 @@
 
   <!-- slider business -->
 
-  <div class="container-fluid">
+  <!-- <div class="container-fluid">
     <app-slider-share (click)="openRegister()" [slider]="bussiness" [slideConfig]="slideConfig"></app-slider-share>
-  </div>
+  </div> -->
 
   <!-- images data -->
 
-  <div class="container-fluid bg-welcome pt-3">
-    <div class="container">
-      <app-image fxHide.xs="true" height="469" width="1110" imageClass="datacenter" src="/assets/img/home/data.png" alt="data"></app-image>
-      <app-image fxHide.gt-xs="true" imageClass="datacenter" src="/assets/img/home/data.svg" alt="data"></app-image>
-    </div>
-  </div>
-
-  <div class="container-fluid pt-3">
-    <div class="container">
-      <app-image-text
-        directionWeb="row"
-        directionMobile="column"
-        imageClass="imgsection"
-        src="/assets/img/home/refiere.png"
-        title="¿Cómo funciona Clickam?"
-        alt="¿Cómo funciona Clickam?"
-        classTitleWeb="f-28"
-        classTitleMobile="f-20 text-center"
-        generalMobile="mt-5 text-center"
-        text="<ol class='numeric'><li>Crea una cuenta en Clickam</li><li>Explora la plataforma y sus negocios</li><li>Elige los productos y servicios favoritos</li><li>Cómpralos o recomiéndalos</li><li>Genera ganancias y cumple tus sueños.</li></ol>"
-        classTextWeb="f-20 m-0"
-        classTextMobile="f-16 text-left mt-0 mb-3"
-        titleButton="¡Crea tu cuenta ahora!"
-        gtm="gtmHomeComoFuncionaClickamCreaTuCuentaAhora"
-        (action)="openRegister()"
-      ></app-image-text>
-
-      <app-image-text
-        directionWeb="row-reverse"
-        directionMobile="column"
-        imageClass="imgsection"
-        src="/assets/img/home/gana.png"
-        title="¿Por qué usar Clickam?"
-        alt="¿Por qué usar Clickam?"
-        generalWeb="mt-5 pt-5"
-        generalMobile="mt-5 text-center"
-        classTitleWeb="f-28"
-        classTitleMobile="f-20 text-center"
-        text="<p>Clickam es una plataforma 100% gratis y digital, en la que generas
-    ganancias por comprar y referir productos y servicios de marcas
-    reconocidas, desde cualquier lugar y a cualquier hora del día.</p>
-    
-    <p>En Clickam no te preocupas por: Logística, garantías, envíos, reembolsos o
-    devoluciones, de esto se encarga el negocio aliado, tu solo creas un link y
-    compras por el o lo compartes.</p>"
-        classTextWeb="f-20 m-0"
-        classTextMobile="f-16 text-center mt-0 mb-3"
-        titleButton="Comenzar"
-        gtm="gtmHomePorQueUsarClickmanComenzar"
-        (action)="openRegister()"
-      ></app-image-text>
-
-      <app-image-text
-        directionWeb="row"
-        directionMobile="column"
-        imageClass="imgsection"
-        src="/assets/img/home/recibe.png"
-        title="¿Dónde recibes tus ganancias?"
-        alt="¿Dónde recibes tus ganancias?"
-        generalWeb="mt-5 pt-5"
-        generalMobile="mt-5 text-center"
-        classTitleWeb="f-28"
-        classTitleMobile="f-20 text-center"
-        text="<p>Si te emocionas cuando encuentras dinero en tu bolsillo que
-    no sabias que tenías, ahora imagina que cada mes llegaran
-    ganancias a tu cuenta bancaria a través de Clickam, regístrate
-    en la plataforma, completa tu perfil y empieza a ganar.</p>"
-        classTextWeb="f-20 m-0"
-        classTextMobile="f-16 text-center mt-0 mb-3"
-        titleButton="Empezar a ganar"
-        gtm="gtmHomeDondeRecibesTusGananciasEmpezarAGanar"
-        (action)="openRegister()"
-      ></app-image-text>
-
-      <app-image-text
-        fxHide.lt-md="true"
-        directionWeb="row-reverse"
-        directionMobile="column"
-        imageClass="imgsection"
-        src="/assets/img/home/widget.png"
-        title="¡Nunca olvidarás ganar mientras compras!"
-        alt="widget"
-        generalWeb="mt-5 pt-5"
-        generalMobile="mt-5 text-center"
-        classTitleWeb="f-28"
-        classTitleMobile="f-20 text-center"
-        text="<p>Con Clickam, ¡Ahorra en todas tus compras! Recibe una recompensa por cada compra que hagas en nuestros negocios aliados. </p>
-    <p>Al añadirla en tu navegador, cada vez que ingreses a la página de alguno de nuestros aliados, podrás activar con un solo link las recompensas que te da Clickam al comprar</p>"
-        chrome="true"
-        classTextWeb="f-20 m-0"
-        classTextMobile="f-16 text-left mt-0 mb-3"
-      ></app-image-text>
-    </div>
-  </div>
-
   <!-- testimonials -->
-  <div class="container-fluid pt-3 pb-3">
+
+  <!-- <div class="container-fluid pt-3 pb-3">
     <div class="container">
       <app-title showTitleh2="true" text="Lo que dicen de nosotros" class="text-center"></app-title>
       <app-slide-testimonials [slider]="testimonials" [slideConfig]="slideConfigTestimonials"></app-slide-testimonials>
     </div>
-  </div>
+  </div> -->
 
   <!-- slider top products -->
 
-  <div class="container-fluid">
+  <!-- <div class="container-fluid">
     <div class="container">
       <span class="d-block"></span>
       <app-title
@@ -259,29 +165,16 @@
       ></app-title>
       <p ngClass.gt-xs="f-20 mb-4" ngClass.xs="f-16">{{ 'HOME.OFFERS_TEXT' | translate }}</p>
     </div>
-  </div>
+  </div> -->
 
-  <app-slider
+  <!-- <app-slider
     Class="gtmHomeCarruselTopDeProductos"
     [showArrows]="false"
     [isSlider]="true"
     (action)="sliderOffers()"
     [sliderWeb]="offersWeb"
     class="mb-3"
-  ></app-slider>
-
-  <!-- blog -->
-
-  <div class="container">
-    <span class="d-block mt-3"></span>
-    <app-blog-business></app-blog-business>
-  </div>
-</section>
-
-<div class="fix">
-  <app-button fxHide.xs="true"  direction="row-reverse" title="Nuevo diseño" (action)="openPollDesktop()" color="red" classIcon="tio-gesture_hover_1f style-icon mr-2"></app-button>
-  <app-button fxHide.gt-xs="true" direction="row-reverse" title="Nuevo diseño" (action)="openPollMobile()" color="red" classIcon="tio-gesture_hover_1f style-icon mr-2"></app-button>
-</div>
+  ></app-slider> -->
 
 <!-- modal promo template -->
 

@@ -1,22 +1,24 @@
-<div class="container">
+<div class="container" ngClass.xs="card-style">
     <div fxLayout="row" fxLayoutAlign="space-between center">
         
         <span fxLayout="column" fxFlex.gt-xs="50%" ngClass.xs="pt-4 pb-4">
             <img loading="lazy"class="logo-allies" *ngIf="buttonAllies" src="assets/img/clickam-horizontal.svg" alt="clickam">
-            <app-title showTitleh1="true" [text]="title" classWeb="m-0 pb-2 f-48" classMobile="m-0 pb-2"></app-title>
-            <app-title showTitleh2="true" [text]="subtitle" classWeb="m-0" classMobile="m-0 f-16"></app-title>
-            <p ngClass.gt-xs="f-20" ngClass.xs="f-16">{{text}}</p>
+            <app-title showTitleh1="true" [text]="title" classWeb="m-0 pb-2 f-32" classMobile="m-0 pb-2"></app-title>
+            <app-title showTitleh2="true" [text]="subtitle" classWeb="m-0 galano f-22" classMobile="m-0 galano f-16"></app-title>
+            <p ngClass.gt-xs="f-16 galano">{{text}}</p>
             
             <span fxLayout.gt-xs="row" fxLayout.xs="column-reverse" fxLayoutGap="20px">
-                <app-button *ngIf="buttonHome" [haveIcon]="false" title="Empezar" (action)="begin()" gtm="gtmHomeBannerBienvenidoEmpezar" classButton="shadow-purple"></app-button>
-                <a mat-raised-button color="orange" href="https://forms.office.com/Pages/ResponsePage.aspx?id=Y0n5QDQbzkWl-28f3i8aJ_6ywHfvDe1MmDmVPKMNpdtUQjQxV0xSNTZBMjFOTTJJOUdKSUtQTVk2SC4u" target="_blank"  *ngIf="buttonAllies" class="shadow-purple">¡Unirme!</a>
-                <app-button direction="row-reverse" color="yellow-not-bg" title="Ver cómo funciona" (action)="works()" gtm="gtmHomeBannerBienvenidovercomofunciona" classButton="shadow-purple p-0" classIcon="tio-play_circle f-40 mr-2"></app-button>
+                <app-button direction="row-reverse" title="Empezar" (action)="openVideo()" gtm="gtmHomeBannerBienvenidovercomofunciona" classButton="shadow-purple p-0 d-block px-3" classIcon="tio-play_circle f-30 mr-2 red-text"></app-button>
             </span>
 
         </span>
 
-        <span fxLayout="column" fxHide.xs="true" fxShow.gt-xs="true">
-            <app-image width="339" height="422" src="/assets/img/home/cel.png" alt="clickam-app" ></app-image>
+        <span fxLayout="column" fxHide.lt-md="true" >
+            <app-image width="185" height="230" src="/assets/img/home/cel.png" alt="clickam-app" ></app-image>
+        </span>
+
+        <span fxLayout="column" fxHide.lt-md="true" >
+            <app-image width="436" height="232" src="/assets/img/home/data.png" alt="clickam-app" ></app-image>
         </span>
 
     </div>
