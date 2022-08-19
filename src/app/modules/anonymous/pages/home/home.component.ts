@@ -155,7 +155,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   slideConfigTestimonials = {
     slidesToShow: 3,
     slidesToScroll: 1,
-    dots: true,
+    dots: false,
     dotClass: 'slick-dots orange',
     autoplay: true,
     autoplaySpeed: 5000,
@@ -262,7 +262,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public getTestimoniesUser() {
     this.subscription = this.user.getTestimoniesUser().subscribe((testimoniesUser) => {
-      this.testimonials = testimoniesUser.withoutPhoto;
+      console.log(testimoniesUser);
+      this.testimonials = testimoniesUser.withPhoto;
     });
   }
 
