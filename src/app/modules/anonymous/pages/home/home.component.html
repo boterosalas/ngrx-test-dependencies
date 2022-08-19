@@ -169,20 +169,22 @@
     ></app-image>
   </div>
 
+  <span fxLayout="column" fxHide.gt-xs="true" class="py-3">
+    <app-image imageClass="w-100" width="436" height="232" src="/assets/img/home/data.png" alt="clickam-app"></app-image>
+  </span>
+
   <!-- works -->
 
-  <div class="container py-1">
+  <div class="container py-3">
     <div class="card-style p-3">
-      
       <app-title showTitleh3="true" text="¿Cómo funciona Clickam?" class="text-center"></app-title>
 
       <div fxLayout.gt-xs="row" fxLayout="column" fxLayoutAlign="space-between center">
-        
         <span fxLayout="row" fxLayoutGap="5px">
           <app-image width="64" height="64" src="/assets/img/home/comparte-compra.svg" alt="compra"></app-image>
           <p>Compra o refiere a través de Clickam.</p>
         </span>
-        
+
         <span fxLayout="row" fxLayoutGap="5px">
           <app-image width="64" height="64" src="/assets/img/home/clickea.svg" alt="compra"></app-image>
           <p>Te devolvemos un porcentaje de la transacción.</p>
@@ -192,8 +194,26 @@
           <app-image width="64" height="64" src="/assets/img/home/gana-comisiones.svg" alt="compra"></app-image>
           <p>Recibe las comisiones en tu cuenta bancaria.</p>
         </span>
-
       </div>
+    </div>
+  </div>
+
+  <!-- slider top products -->
+
+  <div class="container py-3">
+    <div class="card-style p-3">
+      <span class="d-block"></span>
+      <app-title showTitleh3="true" text="{{ 'HOME.OFFERS' | translate }}"></app-title>
+      <p class="f-16 galano">{{ 'HOME.OFFERS_TEXT' | translate }}</p>
+
+      <app-slider
+        Class="gtmHomeCarruselTopDeProductos"
+        [showArrows]="false"
+        [isSlider]="true"
+        (action)="sliderOffers()"
+        [sliderWeb]="offersWeb"
+        class=""
+      ></app-slider>
     </div>
   </div>
 
@@ -205,30 +225,6 @@
       <app-slide-testimonials [slider]="testimonials" [slideConfig]="slideConfigTestimonials"></app-slide-testimonials>
     </div>
   </div> -->
-
-  <!-- slider top products -->
-
-  <!-- <div class="container-fluid">
-    <div class="container">
-      <span class="d-block"></span>
-      <app-title
-        showTitleh2="true"
-        text="{{ 'HOME.OFFERS' | translate }}"
-        classWeb="border-bottom-orange-init"
-        classMobile="border-bottom-orange-init"
-      ></app-title>
-      <p ngClass.gt-xs="f-20 mb-4" ngClass.xs="f-16">{{ 'HOME.OFFERS_TEXT' | translate }}</p>
-    </div>
-  </div> -->
-
-  <!-- <app-slider
-    Class="gtmHomeCarruselTopDeProductos"
-    [showArrows]="false"
-    [isSlider]="true"
-    (action)="sliderOffers()"
-    [sliderWeb]="offersWeb"
-    class="mb-3"
-  ></app-slider> -->
 
   <!-- modal promo template -->
 
