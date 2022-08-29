@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   URL_SECURITY: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/UVCGDWUHSS/',
   URL_PROFILE: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/HAKUBMQPYR/',
   URL_VALIDATE_EMPLOYEE: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/HAKUBMQPYR/',
