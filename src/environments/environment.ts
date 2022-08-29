@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
+  production: true,
   // URL_SECURITY: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/BGSCLUZWVD/',
   // URL_PROFILE: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/GSUCYURYSK/',
   // URL_VALIDATE_EMPLOYEE: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/GSUCYURYSK/',
