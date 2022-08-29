@@ -4,9 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build && npm run scully -- --scanRoutes ",
-    "build-qa": "ng build --configuration=qa && npm run scully -- --scanRoutes",
-    "build-pr": "ng build --configuration=production && npm run scully -- --scanRoutes",
+    "build": "ng build ",
+    "build-qa": "ng build --configuration=qa",
+    "build-pr": "ng build --configuration=production",
     "test": "ng test --code-coverage=true --source-map=false --karma-config=./karma.conf.js",
     "testwatch": "ng test --code-coverage=true --source-map=false --karma-config=./karma.conf.js --watch",
     "lint": "ng lint",
