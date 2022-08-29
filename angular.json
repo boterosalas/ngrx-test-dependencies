@@ -35,7 +35,7 @@
             "stylePreprocessorOptions": {
               "includePaths": [".", "src/assets/styles"]
             },
-            "outputPath": "dist/clickam",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -78,7 +78,7 @@
                 }
               ],
               "optimization": true,
-              "outputHashing": "all",
+              "outputHashing": "none",
               "sourceMap": true,
               "namedChunks": true,
               "aot": true,
@@ -118,7 +118,7 @@
               "extractLicenses": false,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "outputHashing": "all",
+              "outputHashing": "none",
               "budgets": [
                 {
                   "type": "initial",
