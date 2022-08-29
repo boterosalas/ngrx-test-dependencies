@@ -108,7 +108,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   testimonials = [];
 
   slideConfig = {
-    slidesToShow: 6,
+    slidesToShow: 8,
     slidesToScroll: 1,
     dots: false,
     dotClass: 'slick-dots orange',
