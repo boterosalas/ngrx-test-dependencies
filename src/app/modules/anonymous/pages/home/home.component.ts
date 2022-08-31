@@ -53,6 +53,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   email: string;
   bussiness: Array<any> = [];
   offersWeb: any;
+  topProducts: any;
   isEmployee: any;
   @ViewChild('templatePromo', { static: false })
   templatePromo: TemplateRef<any>;
@@ -394,6 +395,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public getOffers() {
     this.subscription = this.content.getOffersbyType({ id: 'OFERTA', admin: false }).subscribe((resp) => {
+      this.topProducts = resp;
+    });
+
+    this.subscription = this.content.getOffersbyType({ id: 'CARROUSEL', admin: false }).subscribe((resp) => {
       this.offersWeb = resp;
     });
   }

@@ -2,23 +2,43 @@
 
 <section *ngIf="auth.isLoggedIn()">
   <!-- stories clickam looged -->
-  <div class="stories-section">
-    <app-slider-stories></app-slider-stories>
+  <div class="container-fluid my-3">
+    <mat-card class="card mat-card-box-shadow px-3 py-1">
+      <app-slider-stories></app-slider-stories>
+    </mat-card>
+  </div>
+
+  <div class="container-fluid">
+    <app-image
+      fxHide.xs="true"
+      (click)="openRegister()"
+      imageClass="cursor-pointer w-100 my-3"
+      src="/assets/img/home/gana.png"
+      alt="negocios"
+    ></app-image>
+    <app-image
+      fxHide.gt-xs="true"
+      (click)="openRegister()"
+      width="324"
+      height="77"
+      imageClass="cursor-pointer w-100"
+      src="/assets/img/home/gana-mobile.png"
+      alt="negocios"
+    ></app-image>
   </div>
 
   <section fxLayout="row" fxLayout.xs="column" class="container-fluid mt-4 mb-4" fxLayoutGap="20px">
-    <div fxLayout="column" class="left-section" fxFlex="70" fxFlex.xs="100" fxLayoutGap="20px">
+    <div fxLayout="column" class="left-section" fxFlex="100" fxFlex.xs="100" fxLayoutGap="20px">
       <mat-card class="card mat-card-box-shadow">
         <div>
-          <div class="container">
+          <div>
             <span class="d-block"></span>
-            <app-title showTitleh3="true" text="{{ 'HOME.OFFERS' | translate }}"></app-title>
-            <p ngClass.gt-xs="mb-4" ngClass.xs="f-16">{{ 'HOME.OFFERS_TEXT' | translate }}</p>
+            <app-title showTitleh3="true" text="OFERTAS"></app-title>
           </div>
         </div>
 
         <app-slider
-          Class="gtmHomeCarruselTopDeProductos"
+          Class="gtmHomeCarruselOfertas"
           [showArrows]="false"
           [isSlider]="true"
           (action)="sliderOffers()"
@@ -27,30 +47,9 @@
           class="mb-3"
         ></app-slider>
       </mat-card>
-
-      <mat-card class="card mat-card-box-shadow">
-        <app-report-reward></app-report-reward>
-      </mat-card>
-
-      <app-image
-        fxHide.xs="true"
-        [routerLink]="['/negocios']"
-        imageClass="buimg cursor-pointer w-100 gtmPanelEncuentraAquiTodosLosNegocios"
-        src="/assets/img/home/negocios.png"
-        alt="negocios"
-      ></app-image>
-
-      <mat-card class="card mat-card-box-shadow">
-        <app-top-reward></app-top-reward>
-      </mat-card>
-
-      <mat-card fxHide.gt-xs="true" class="card mat-card-box-shadow purple" [routerLink]="['/negocios']">
-        <app-title showTitleh3="true" text="NEGOCIOS" commonClass="white m-0"></app-title>
-        <span>Encuentra <span class="underline">aquí</span> todos los negocios</span>
-      </mat-card>
     </div>
 
-    <div class="right-section" fxFlex="30" fxFlexOrder.xs="-1" fxFlex.xs="100" fxLayout="column" fxLayoutGap="20px">
+    <!-- <div class="right-section" fxFlex="30" fxFlexOrder.xs="-1" fxFlex.xs="100" fxLayout="column" fxLayoutGap="20px">
       <mat-card class="card mat-card-box-shadow">
         <app-sales-info></app-sales-info>
       </mat-card>
@@ -74,56 +73,7 @@
           </button>
         </span>
       </mat-card>
-
-      <div class="widget" fxHide.lt-md="true">
-        <a
-          href="https://chrome.google.com/webstore/detail/clickam-cashback/jnfdngchdoaemojfkecanhlfgelofibh?authuser=1"
-          target="_blank"
-          class="w-100"
-          mat-raised-button
-          color="chrome"
-          fxLayout="row"
-          fxLayoutGap="10px"
-          fxLayoutAlign="center center"
-        >
-          <img loading="lazy" class="pr-2" src="assets/img/chrome.svg" alt="chrome" />
-          <span>Instalar Clickam en Chrome</span>
-        </a>
-      </div>
-
-      <mat-card class="card mat-card-box-shadow pl-0 pr-0">
-        <app-title showTitleh3="true" text="EL CAMINO DEL CLICKAMER" commonClass="pl-3"></app-title>
-        <mat-list-item *ngFor="let mission of missions; let i = index">
-          <div
-            fxLayout="row"
-            fxLayoutAlign="start center"
-            fxLayoutGap="5px"
-            mat-line
-            class="purple2-text f-16 galano-bold pb-3 pt-3 border-bottom-gray  gtmPanelCaminoDelClickamer{{ mission.description | trim }}"
-          >
-            <span class="pl-3 gtmPanelCaminoDelClickamer{{ mission.description | trim }}" *ngIf="mission.status">
-              <i class="tio-checkmark_circle f-18"></i>
-            </span>
-
-            <span class="pl-3 gtmPanelCaminoDelClickamer{{ mission.description | trim }}" *ngIf="!mission.status">
-              <i class="tio-checkmark_circle_outlined f-18"></i>
-            </span>
-
-            <span class="cursor-pointer gtmPanelCaminoDelClickamer{{ mission.description | trim }}" (click)="modalWay(i, mission)">
-              {{ mission.description }}
-            </span>
-          </div>
-        </mat-list-item>
-        <p (click)="logros()" fxLayout="row" fxLayoutAlign="center center" class="pl-3 f-16 mt-3 cursor-pointer yellow galano-bold">
-          <mat-icon>emoji_events</mat-icon>
-          Logros
-        </p>
-      </mat-card>
-
-      <mat-card class="card mat-card-box-shadow p-0">
-        <app-list-blogs></app-list-blogs>
-      </mat-card>
-    </div>
+    </div> -->
   </section>
 </section>
 
@@ -211,7 +161,7 @@
         [showArrows]="false"
         [isSlider]="true"
         (action)="sliderOffers()"
-        [sliderWeb]="offersWeb"
+        [sliderWeb]="topProducts"
         class=""
       ></app-slider>
     </div>
@@ -220,7 +170,7 @@
   <!-- testimonials -->
 
   <div class="container py-3">
-     <div ngClass.gt-xs="card-style p-3">
+    <div ngClass.gt-xs="card-style p-3">
       <app-title showTitleh3="true" text="Lo que dicen de nosotros" class="text-center"></app-title>
       <app-slide-testimonials [slider]="testimonials" [slideConfig]="slideConfigTestimonials"></app-slide-testimonials>
     </div>
