@@ -53,7 +53,7 @@ export class WelcomeComponent implements OnInit {
   // }
 
   openVideo() {
-    window.open('https://vimeo.com/eunocolombia/review/734868928/41015490f4 ', '_blank')
+    window.open('https://www.youtube.com/watch?v=pdcZ5cVAVvw ', '_blank')
   }
 
 }
