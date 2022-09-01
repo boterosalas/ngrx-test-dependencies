@@ -1,8 +1,10 @@
-<span *ngIf="storiesBusiness.length > 0">
-  <app-title showTitleh3="true" text="COMPRAR O REFERIR"></app-title>
-  <ul class="p-0" fxLayout="row" fxLayoutGap="50px">
-    <li class="story-container" *ngFor="let story of storiesBusiness; let i = index">
-      <app-button-story [story]="story" [index]="i" (openStory)="openDialogStories($event)"></app-button-story>
-    </li>
-  </ul>
-</span>
+<mat-card class="card mat-card-box-shadow px-3 py-1" *ngIf="storiesBusiness.length > 0">
+  <span>
+    <app-title showTitleh3="true" text="COMPRAR O REFERIR"></app-title>
+    <ul class="p-0" fxLayout="row" fxLayoutGap="50px">
+      <li class="story-container" *ngFor="let story of storiesBusiness; let i = index">
+        <app-button-story [story]="story" [index]="i" (openStory)="openDialogStories($event)"></app-button-story>
+      </li>
+    </ul>
+  </span>
+</mat-card>

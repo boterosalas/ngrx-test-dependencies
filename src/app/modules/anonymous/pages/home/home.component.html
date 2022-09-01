@@ -3,12 +3,10 @@
 <section *ngIf="auth.isLoggedIn()">
   <!-- stories clickam looged -->
   <div class="container-fluid my-3">
-    <mat-card class="card mat-card-box-shadow px-3 py-1">
-      <app-slider-stories></app-slider-stories>
-    </mat-card>
+    <app-slider-stories></app-slider-stories>
   </div>
 
-  <div class="container-fluid">
+  <div class="container-fluid py-3">
     <app-image
       fxHide.xs="true"
       (click)="openRegister()"
@@ -29,15 +27,15 @@
 
   <div class="container-fluid">
     <div fxFlex="100" fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
-      <mat-card class="card mat-card-box-shadow">
+      <mat-card fxFlex.gt-xs="33" class="card mat-card-box-shadow">
         <app-sales-info></app-sales-info>
       </mat-card>
 
-      <mat-card class="card mat-card-box-shadow">
+      <mat-card fxFlex.gt-xs="33" class="card mat-card-box-shadow">
         <app-title showTitleh3="true" text="INVITA Y GANA"></app-title>
         <input class="mb-4" id="urlLink" matInput [value]="url" #linkInput readonly />
         <br />
-        <span fxLayout="row" >
+        <span fxLayout="row">
           <div fxHide.xs="true" class="share-desktop w-100" id="share" fxLayout="row" fxLayoutAlign="space-around" fxLayoutGap="20px">
             <div fxLayout="column">
               <div fxLayout="row" fxLayoutGap="10px">
@@ -52,7 +50,7 @@
                     <i ngClass="fab fa-whatsapp gtmRfiereYGanaClicReferirwhatsapp"></i>
                   </a>
                 </span>
-  
+
                 <span class="share-refer gtmRfiereYGanaClicReferirFacebook" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
                   <button
                     theme="circles-dark"
@@ -64,7 +62,7 @@
                     <i ngClass="fab fa-facebook-f gtmRfiereYGanaClicReferirFacebook"></i>
                   </button>
                 </span>
-  
+
                 <span class="share-refer gtmRfiereYGanaClicReferirTwitter" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
                   <button
                     theme="circles-dark"
@@ -76,7 +74,7 @@
                     <i ngClass="fab fa-twitter gtmRfiereYGanaClicReferirTwitter"></i>
                   </button>
                 </span>
-              </div> 
+              </div>
             </div>
             <div fxLayout="column">
               <button mat-raised-button color="orange" class="px-5 gtmPanelInvitaYGanaCopiarLink" (click)="copyLink(linkInput)">
@@ -89,15 +87,14 @@
             <button class="button button-100 button-height f-16" mat-raised-button id="ShareInvite" color="orange" (click)="share(url)">
               <span class="px-3" fxLayout="row" fxLayoutAlign="space-between">
                 {{ 'REFER.SEND_INVITATION' | translate }}
-                <img loading="lazy"src="/assets/img/share/compartir-button.svg" alt="share-button" />
+                <img loading="lazy" src="/assets/img/share/compartir-button.svg" alt="share-button" />
               </span>
             </button>
           </div>
-
         </span>
-
       </mat-card>
-      <mat-card class="card mat-card-box-shadow"> </mat-card>
+
+      <mat-card fxFlex.gt-xs="33" class="card mat-card-box-shadow"> </mat-card>
     </div>
   </div>
 
