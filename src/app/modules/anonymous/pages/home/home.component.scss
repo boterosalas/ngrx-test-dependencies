@@ -180,3 +180,15 @@
   z-index: 10;
 }
 
+.shared{
+  background: none;
+  border: none;
+  color: $primary-color;
+  font-size: 20px;
+  border: 1px solid #2E235C10;
+  border-radius: 50%;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}

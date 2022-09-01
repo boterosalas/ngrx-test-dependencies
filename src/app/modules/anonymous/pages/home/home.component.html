@@ -27,6 +27,80 @@
     ></app-image>
   </div>
 
+  <div class="container-fluid">
+    <div fxFlex="100" fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
+      <mat-card class="card mat-card-box-shadow">
+        <app-sales-info></app-sales-info>
+      </mat-card>
+
+      <mat-card class="card mat-card-box-shadow">
+        <app-title showTitleh3="true" text="INVITA Y GANA"></app-title>
+        <input class="mb-4" id="urlLink" matInput [value]="url" #linkInput readonly />
+        <br />
+        <span fxLayout="row" >
+          <div fxHide.xs="true" class="share-desktop w-100" id="share" fxLayout="row" fxLayoutAlign="space-around" fxLayoutGap="20px">
+            <div fxLayout="column">
+              <div fxLayout="row" fxLayoutGap="10px">
+                <span class="share-refer gtmRfiereYGanaClicReferirwhatsapp" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
+                  <a
+                    (click)="generateLink()"
+                    href="https://web.whatsapp.com/send?text={{ urlWhatsapp }}"
+                    target="_blank"
+                    data-action="share/whatsapp/share"
+                    ngClass="shared gtmRfiereYGanaClicReferirwhatsapp"
+                  >
+                    <i ngClass="fab fa-whatsapp gtmRfiereYGanaClicReferirwhatsapp"></i>
+                  </a>
+                </span>
+  
+                <span class="share-refer gtmRfiereYGanaClicReferirFacebook" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
+                  <button
+                    theme="circles-dark"
+                    shareButton="facebook"
+                    [url]="url"
+                    ngClass="shared mr-2 gtmRfiereYGanaClicReferirFacebook"
+                    (click)="generateLink()"
+                  >
+                    <i ngClass="fab fa-facebook-f gtmRfiereYGanaClicReferirFacebook"></i>
+                  </button>
+                </span>
+  
+                <span class="share-refer gtmRfiereYGanaClicReferirTwitter" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
+                  <button
+                    theme="circles-dark"
+                    shareButton="twitter"
+                    [url]="url"
+                    (click)="generateLink()"
+                    ngClass="shared mr-2 gtmRfiereYGanaClicReferirTwitter"
+                  >
+                    <i ngClass="fab fa-twitter gtmRfiereYGanaClicReferirTwitter"></i>
+                  </button>
+                </span>
+              </div> 
+            </div>
+            <div fxLayout="column">
+              <button mat-raised-button color="orange" class="px-5 gtmPanelInvitaYGanaCopiarLink" (click)="copyLink(linkInput)">
+                Copiar enlace
+              </button>
+            </div>
+          </div>
+
+          <div class="share-mobile w-100" fxHide.gt-xs="true">
+            <button class="button button-100 button-height f-16" mat-raised-button id="ShareInvite" color="orange" (click)="share(url)">
+              <span class="px-3" fxLayout="row" fxLayoutAlign="space-between">
+                {{ 'REFER.SEND_INVITATION' | translate }}
+                <img loading="lazy"src="/assets/img/share/compartir-button.svg" alt="share-button" />
+              </span>
+            </button>
+          </div>
+
+        </span>
+
+      </mat-card>
+      <mat-card class="card mat-card-box-shadow"> </mat-card>
+    </div>
+  </div>
+
   <section fxLayout="row" fxLayout.xs="column" class="container-fluid mt-4 mb-4" fxLayoutGap="20px">
     <div fxLayout="column" class="left-section" fxFlex="100" fxFlex.xs="100" fxLayoutGap="20px">
       <mat-card class="card mat-card-box-shadow">
@@ -48,32 +122,6 @@
         ></app-slider>
       </mat-card>
     </div>
-
-    <!-- <div class="right-section" fxFlex="30" fxFlexOrder.xs="-1" fxFlex.xs="100" fxLayout="column" fxLayoutGap="20px">
-      <mat-card class="card mat-card-box-shadow">
-        <app-sales-info></app-sales-info>
-      </mat-card>
-
-      <mat-card class="card mat-card-box-shadow">
-        <app-title showTitleh3="true" text="INVITA Y GANA"></app-title>
-        <p>
-          Invita a tus amigos a unirse a la plataforma, ¡gana dinero por su primera ganancia!
-          <a [routerLink]="['/referidos']">*Aplican TyC</a>
-        </p>
-        <span fxLayout="row">
-          <input id="urlLink" matInput [value]="url" #linkInput readonly />
-          <button
-            mat-mini-fab
-            color="purple2"
-            class="p-0 gtmPanelInvitaYGanaCopiarLink"
-            (click)="copyLink(linkInput)"
-            fxLayoutAlign="center center"
-          >
-            <i class="tio-copy f-18 cpb gtmPanelInvitaYGanaCopiarLink"></i>
-          </button>
-        </span>
-      </mat-card>
-    </div> -->
   </section>
 </section>
 

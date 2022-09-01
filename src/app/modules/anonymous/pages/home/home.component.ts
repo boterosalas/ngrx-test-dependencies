@@ -18,6 +18,7 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 import { TokenService } from 'src/app/services/token.service';
 import { ClickamerWayComponent } from '../../components/clickamer-way/clickamer-way.component';
+import { NgNavigatorShareService } from 'ng-navigator-share';
 
 @Component({
   selector: 'app-login',
@@ -95,6 +96,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   imageWay: string;
   textWay: string;
   titleWay: string;
+  urlWhatsapp: string;
   direction = 'row';
   directionMobile = 'column-reverse';
 
@@ -193,8 +195,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     private fb: UntypedFormBuilder,
     private personalInfo: MasterDataService,
     @Inject(PLATFORM_ID) private platformId: object,
-    private token: TokenService
+    private token: TokenService,
+    public ngNavigatorShareService: NgNavigatorShareService,
   ) {
+    
     this.subscription = this.route.queryParams.subscribe((params) => {
       if (params.email) {
         this.email = params.email;
@@ -204,17 +208,17 @@ export class HomeComponent implements OnInit, OnDestroy {
           localStorage.setItem('idClicker', params.code);
           this.openRegister();
           this.generateLink(params.code);
-        }
-        else{
-          if(params.widget) {
+        } else {
+          if (params.widget) {
             this.utils.showloginForm();
           }
         }
       }
     });
+    this.ngNavigatorShareService = ngNavigatorShareService;
   }
 
-  public generateLink(dataEmail: any) {
+  public generateLink(dataEmail?: any) {
     const idClicker = dataEmail;
     const formData: FormData = new FormData();
     formData.append('idClicker', idClicker);
@@ -225,6 +229,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public generateUrl() {
     if (this.token.user && this.token.user.idclicker !== undefined) {
       const domain = document.location.origin;
+      this.urlWhatsapp = encodeURI(`${domain}/inicio?code=${this.token.user.idclicker.replace(' ', '%20')}`);
       this.url = encodeURI(`${domain}/inicio?code=${this.token.user.idclicker}`);
     }
   }
@@ -263,7 +268,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public getTestimoniesUser() {
     this.subscription = this.user.getTestimoniesUser().subscribe((testimoniesUser) => {
-      console.log(testimoniesUser);
       this.testimonials = testimoniesUser.withPhoto;
     });
   }
@@ -463,21 +467,19 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  public getMissions(){
-    this.subscription = this.content.getMissions().subscribe(mission => {
+  public getMissions() {
+    this.subscription = this.content.getMissions().subscribe((mission) => {
       this.missions = mission;
-    })
+    });
   }
 
-  public modalWay(position: any, mission:any) {
+  public modalWay(position: any, mission: any) {
     const template = this.templateClickamWay;
     const title = 'EL CAMINO DEL CLICKAMER';
     const id = 'way';
-    const {detail, code} = mission;
+    const { detail, code } = mission;
 
-   
-
-   this.dialogWay = this.dialog.open(ClickamerWayComponent, {
+    this.dialogWay = this.dialog.open(ClickamerWayComponent, {
       width: '700px',
       panelClass: 'waypad',
       data: {
@@ -489,7 +491,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.dialogWay.beforeClosed().subscribe(() => {
       this.getMissions();
-    })
+    });
 
     switch (position) {
       case 0:
@@ -532,43 +534,57 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.nameButton = 'Conocer Aliados';
         this.path = '/negocios';
         break;
-        
-        case 4:
-          this.direction = 'row';
-          this.imageWay = '/assets/img/way/amigo.png';
-          this.titleWay = 'Tienes un amigo que ahora hace parte de Clickam';
-          this.textWay = detail;
-          this.showWay = true;
-          this.saveMission(code);
-          this.nameButton = 'Invitar Amigos';
-          this.path = '/referidos';
-          break;
-          
-          case 5:
-            this.direction = 'row-reverse';
-            this.imageWay = '/assets/img/way/refiere.png';
-            this.titleWay = 'Referiste tu primer producto de forma exitosa';
-            this.textWay = detail;
-            this.showWay = true;
-            this.saveMission(code);
-            this.nameButton = 'Conoce los Reportes';
-            this.path = '/reportes';
+
+      case 4:
+        this.direction = 'row';
+        this.imageWay = '/assets/img/way/amigo.png';
+        this.titleWay = 'Tienes un amigo que ahora hace parte de Clickam';
+        this.textWay = detail;
+        this.showWay = true;
+        this.saveMission(code);
+        this.nameButton = 'Invitar Amigos';
+        this.path = '/referidos';
+        break;
+
+      case 5:
+        this.direction = 'row-reverse';
+        this.imageWay = '/assets/img/way/refiere.png';
+        this.titleWay = 'Referiste tu primer producto de forma exitosa';
+        this.textWay = detail;
+        this.showWay = true;
+        this.saveMission(code);
+        this.nameButton = 'Conoce los Reportes';
+        this.path = '/reportes';
         break;
 
       default:
         this.imageWay = '/assets/img/way/ingresaste.png';
         this.titleWay = '';
-        this.textWay ='';
+        this.textWay = '';
         break;
     }
+  }
 
+  public share(url: string) {
+    this.ngNavigatorShareService
+      .share({
+        title: '',
+        text: '',
+        url: url,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   public routeWay() {
-    if(this.path !== '') {
+    if (this.path !== '') {
       this.router.navigate([this.path]);
       this.dialogWay.close();
-    } else{
+    } else {
       window.open('https://chrome.google.com/webstore/detail/clickam-cashback/jnfdngchdoaemojfkecanhlfgelofibh?authuser=1', '_blank');
     }
   }
@@ -580,16 +596,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   public logros() {
     this.saveMission('GAMIFICATION');
     setTimeout(() => {
-      this.router.navigate(['/logros'])
+      this.router.navigate(['/logros']);
     }, 500);
   }
 
   public openPollDesktop() {
-    window.open('https://app.useberry.com/t/pQwhtanaO13W/','_blank')
+    window.open('https://app.useberry.com/t/pQwhtanaO13W/', '_blank');
   }
 
   public openPollMobile() {
-    window.open('https://app.useberry.com/t/5HXrwyTwDN1c/','_blank')
+    window.open('https://app.useberry.com/t/5HXrwyTwDN1c/', '_blank');
   }
 
   ngOnDestroy() {
