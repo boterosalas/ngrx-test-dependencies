@@ -99,13 +99,13 @@
           <app-title showTitleh3="true" text="PASO A PASO"></app-title>
           <span class="text-secondary underline cursor-pointer" [routerLink]="['/negocios']">Ver más</span>
         </div>
-        <div class="connected-steps px-3">
+        <div class="connected-steps px-3" *ngIf="missions.length">
           <div class="step-active">1</div>
           
           <div class="connector"></div>
-          <div class="step">2</div>
+          <div [ngClass]="missions[3].status || missions[5].status ? 'step-active' : 'step'">2</div>
           <div class="connector"></div>
-          <div class="step">3</div>
+          <div [ngClass]="missions[3].status || missions[5].status ? 'step-active' : 'step'">3</div>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <p>Ingresar</p>
