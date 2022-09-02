@@ -192,3 +192,33 @@
   height: 40px;
   cursor: pointer;
 }
+
+.text-secondary {
+  color: $secondary-color;
+}
+
+.connected-steps {
+  display: flex;
+  width: 100%; // set the width you need
+  align-items: center;
+}
+
+.step {
+  color: white;
+  background-color: $primary-color;
+  display: block;
+  border-radius: 10px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+}
+
+.connector {
+  flex-grow: 1; //fill the space
+  width: 10px;
+  content: "";
+  display: block;
+  height: 1px;
+  background-color: $primary-color;
+}
