@@ -93,17 +93,17 @@ describe('NotificationsComponent', () => {
     expect(mockContentService.getNotificationAdmin).toHaveBeenCalled();
   });
 
-  it('show notification', () => {
-    let data = {
-      title: 'test',
-      date: '21/21/21',
-      content: 'prueba',
-      id: '1',
-    };
-    component.showNotification(data);
-    component.innerWidth = 500;
-    expect(mockContentService.viewNotification).toHaveBeenCalled();
-  });
+  // it('show notification', () => {
+  //   let data = {
+  //     title: 'test',
+  //     date: '21/21/21',
+  //     content: 'prueba',
+  //     id: '1',
+  //   };
+  //   component.showNotification(data);
+  //   component.innerWidth = 500;
+  //   expect(mockContentService.viewNotification).toHaveBeenCalled();
+  // });
 
   it('delete notification', () => {
     component.deleteNotication();
