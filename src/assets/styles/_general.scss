@@ -544,6 +544,10 @@ h6 {
   font-family: $font-galano;
 }
 
+.galano-medium {
+  font-family: $font-family-sans-serif;
+}
+
 .text-right {
   text-align: right;
 }
@@ -1074,7 +1078,7 @@ table {
   }
 
   app-bussiness-card {
-    width: 100%;
+    width: 50%;
     @media screen and (max-width: 600px) {
       .mat-card {
         padding: 11px !important;

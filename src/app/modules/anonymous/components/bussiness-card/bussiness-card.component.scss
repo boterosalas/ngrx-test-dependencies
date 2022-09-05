@@ -1,7 +1,7 @@
 @import 'variables';
 
 .bussiness {
-  box-shadow: 0px 16px 16px #9aaacf1a;
+  border: 1px solid #d5d5d5;
   border-radius: 10px;
   padding: 24px 20px;
   @media screen and (max-width: 600px) {
@@ -20,11 +20,13 @@
   img {
     max-width: 100%;
     width: 100%;
+    min-width: 110px;
   }
 
   .title-bussiness {
     font-size: 14px;
     font-family: $font-galano;
+    color: #726D7E !important;
   }
 
   .percent {
@@ -42,7 +44,7 @@ span.img-responsive img {
     max-width: 250px;
     min-width: 250px;
     max-height: 140px;
-    box-shadow: 0px 0px 16px #9AAACF33;
+    overflow: hidden;
   }
 
   img {
@@ -50,7 +52,4 @@ span.img-responsive img {
     width: 230px !important;
     object-fit: scale-down;
   }
-}
-.heigth-imagen {
-  height: 115px;
 }

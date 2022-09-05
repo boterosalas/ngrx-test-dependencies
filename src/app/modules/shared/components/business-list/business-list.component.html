@@ -1,0 +1,15 @@
+<div fxLayout="row wrap" fxLayout.gt-xs="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="20px grid">
+  <ng-container *ngFor="let bussines of bussiness | slice: 0:8; let i = index">
+    <app-bussiness-card
+      *ngIf="bussines.code !== 'envios-clickam'"
+      (bussiness)="bussinessNavigation(bussines)"
+      [img]="bussines.imageurl"
+      [code]="bussines.code"
+      [title]="bussines.description"
+      [percent]="bussines.infoaditional"
+    ></app-bussiness-card>
+  </ng-container>
+</div>
+<span fxLayoutAlign="center center" class="mt-5">
+  <app-button title="Ver más" [routerLink]="['/negocios']" color="transparent" haveIcon=false></app-button>
+</span>
