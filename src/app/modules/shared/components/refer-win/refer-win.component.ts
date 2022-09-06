@@ -1,4 +1,5 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -8,12 +9,11 @@ import { UtilsService } from 'src/app/services/utils.service';
 })
 export class ReferWinComponent implements OnInit {
 
-  constructor(private utils:UtilsService) { }
+  constructor(private utils:UtilsService, public auth: AuthService) { }
 
   ngOnInit(): void {
   }
 
-  @HostListener('over')
   openRegister() {
     this.utils.showRegisterForm();
   }
