@@ -56,10 +56,4 @@ describe('WelcomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('works', () => {
-    component.video = 'https://www.youtube.com/embed/oR5bFl4PoCM?rel=0&amp;autoplay=1';
-    component.works();
-    expect(component.video).not.toBeUndefined();
-  });
-
 });

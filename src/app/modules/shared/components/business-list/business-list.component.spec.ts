@@ -1,4 +1,9 @@
+import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { JwtModule } from '@auth0/angular-jwt';
+import { Observable } from 'rxjs';
 
 import { BusinessListComponent } from './business-list.component';
 
@@ -6,9 +11,31 @@ describe('BusinessListComponent', () => {
   let component: BusinessListComponent;
   let fixture: ComponentFixture<BusinessListComponent>;
 
+  
+  let socialAuthServiceMock: any;
+
+  socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BusinessListComponent ]
+      declarations: [ BusinessListComponent ],
+      imports:[
+        RouterTestingModule,
+        HttpClientTestingModule,
+        JwtModule.forRoot({
+          config: {
+            tokenGetter: () => {
+              return localStorage.getItem('ACCESS_TOKEN');
+            },
+            throwNoTokenError: true,
+            allowedDomains: [],
+            disallowedRoutes: [],
+          },
+        }),
+      ],
+      providers: [
+        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
+      ]
     })
     .compileComponents();
 
