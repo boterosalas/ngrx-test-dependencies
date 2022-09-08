@@ -114,7 +114,7 @@
   </mat-card-content>
 </mat-card>
 
-<div class="mat-elevation-z0 container-fluid offers" *ngIf="category">
+<div class="mat-elevation-z0 pr-4 offers" *ngIf="category">
   <mat-card-content fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap="10px" fxLayoutAlign.xs="center center" class="category border-rad">
     <span fxLayout="column" fxFlex="100" fxLayoutAlign="center center" ngClass.xs="container">
       <img loading="lazy"(click)="product()" [src]="photo" class="img-responsive mb-3 cursor-pointer {{ Class }}{{ productName }}" />

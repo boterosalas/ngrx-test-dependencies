@@ -3,7 +3,7 @@
 @import 'mixins';
 
 .story-button {
-  width: 80px;
+  width: 100px;
   border: none;
   background-color: transparent;
   padding: 0;
@@ -15,8 +15,8 @@
 
 .image-container {
   display: block;
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
   padding: 3px;
   border-radius: 50px;
   background: transparent linear-gradient(180deg, #8c80b4 0%, #352767 100%) 0% 0% no-repeat padding-box;
@@ -35,4 +35,9 @@
 
 .story-button.viewed .image-container {
   background: #d2d0d4;
+}
+
+.text-story{
+  color:$color-p;
+  font-size: 12px;
 }

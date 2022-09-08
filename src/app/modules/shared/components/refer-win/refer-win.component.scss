@@ -1,0 +1,21 @@
+@import 'variables';
+
+.bg-purple {
+  background: $primary-color;
+  min-height: 72px;
+}
+
+.parallelogram {
+  width: 180px;
+  height: 35px;
+  transform: skew(-20deg);
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f21910;
+}
+
+.rotate{
+  transform: skew(20deg);
+}

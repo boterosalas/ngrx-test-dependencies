@@ -17,6 +17,7 @@ import { ReportRewardComponent } from '../anonymous/components/report-reward/rep
 import { RewardCardComponent } from '../anonymous/components/reward-card/reward-card.component';
 import { ListBlogsComponent } from '../anonymous/components/list-blogs/list-blogs.component';
 import { TopRewardComponent } from '../anonymous/components/top-reward/top-reward.component';
+import { ShareButtonModule } from 'ngx-sharebuttons/button';
 
 const routes: Routes = [
   {
@@ -57,6 +58,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SlickCarouselModule,
     FlexLayoutModule,
+    ShareButtonModule
   ],
   exports: [RouterModule, SliderStoriesComponent, NewBlogComponent],
 })

@@ -65,6 +65,8 @@ import { WelcomeComponent } from '../anonymous/components/welcome/welcome.compon
 import { NewBusinessFormComponent } from '../anonymous/components/new-business-form/new-business-form.component';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { SavingComponent } from './components/saving/saving.component';
+import { ReferWinComponent } from './components/refer-win/refer-win.component';
+import { BusinessListComponent } from './components/business-list/business-list.component';
 
 @NgModule({
     declarations: [
@@ -113,7 +115,9 @@ import { SavingComponent } from './components/saving/saving.component';
         WidgetBarComponent,
         WelcomeComponent,
         NewBusinessFormComponent,
-        SavingComponent
+        SavingComponent,
+        ReferWinComponent,
+        BusinessListComponent
     ],
     imports: [
         CommonModule,
@@ -186,7 +190,8 @@ import { SavingComponent } from './components/saving/saving.component';
         WidgetBarComponent,
         WelcomeComponent,
         NewBusinessFormComponent,
-        SavingComponent
+        SavingComponent,
+        BusinessListComponent
     ]
 })
 export class SharedModule {}
