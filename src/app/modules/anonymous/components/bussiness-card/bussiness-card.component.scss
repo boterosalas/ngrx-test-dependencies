@@ -53,3 +53,18 @@ span.img-responsive img {
     object-fit: scale-down;
   }
 }
+
+
+.infomarketing{
+  background: $primary-color;
+  color: #ffffff;
+  border-radius: 10px;
+  top: 5px;
+  right: 5px;
+  padding: 5px 10px;
+  position: absolute;
+}
+
+.postion-relative{
+  position: relative;
+}

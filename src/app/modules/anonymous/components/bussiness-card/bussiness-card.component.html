@@ -1,11 +1,13 @@
 <mat-card
   (click)="navigateBussiness()"
-  class="bussiness cursor-pointer gtmHomeClicNegocios{{ title }} mat-elevation-z0"
+  class="bussiness cursor-pointer gtmHomeClicNegocios{{ title }} mat-elevation-z0 position-relative"
   ngClass.xs="p-3"
   fxLayoutAlign="center center"
   
 >
-  <div class="gtmHomeClicNegocios{{ title }} inner-business" fxLayout="column" fxLayoutAlign="center center">
+<div class="position-absolute infomarketing" *ngIf="infomarketing !== null">{{infomarketing}}</div>
+
+  <div class="gtmHomeClicNegocios{{ title }} inner-business " fxLayout="column" fxLayoutAlign="center center">
     <span fxLayout="column" class="img-responsive gtmHomeClicNegocios{{ title }}">
       <img loading="lazy"[src]="img" class="heigth-imagen gtmHomeClicNegocios{{ title }}" alt="{{ title }}" />
     </span>

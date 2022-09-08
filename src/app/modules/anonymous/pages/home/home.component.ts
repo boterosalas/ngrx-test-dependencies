@@ -262,7 +262,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.amountReferred = localStorage.getItem('AmonuntReferred');
     this.getTerms();
     this.getTestimoniesUser();
-    this.generateUrl();
     this.getBussiness();
   }
 
@@ -293,6 +292,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public getUserDataUser() {
     this.subscription = this.auth.getRole$.subscribe((role) => {
+      this.generateUrl();
       this.role = role;
       if (role === 'CLICKER' || role === 'ADMIN' || role === 'SUPERADMIN') {
         this.subscription = this.user.getuserdata().subscribe((user) => {
