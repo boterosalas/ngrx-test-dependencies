@@ -1,33 +1,27 @@
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
-import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
-import { SharedModule } from 'src/app/modules/shared/shared.module';
 
-import { WelcomeComponent } from './welcome.component';
-import { HomeComponent } from '../../pages/home/home.component';
+import { BusinessListComponent } from './business-list.component';
 
-describe('WelcomeComponent', () => {
-  let component: WelcomeComponent;
-  let fixture: ComponentFixture<WelcomeComponent>;
+describe('BusinessListComponent', () => {
+  let component: BusinessListComponent;
+  let fixture: ComponentFixture<BusinessListComponent>;
 
-  let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
+  
+  let socialAuthServiceMock: any;
+
+  socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WelcomeComponent ],
+      declarations: [ BusinessListComponent ],
       imports:[
-        RouterTestingModule.withRoutes([
-          { path: 'inicio', component: HomeComponent}
-        ]),
+        RouterTestingModule,
         HttpClientTestingModule,
-        AppMaterialModule,
-        BrowserAnimationsModule,
-        SharedModule,
         JwtModule.forRoot({
           config: {
             tokenGetter: () => {
@@ -44,10 +38,8 @@ describe('WelcomeComponent', () => {
       ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(WelcomeComponent);
+    fixture = TestBed.createComponent(BusinessListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -55,5 +47,4 @@ describe('WelcomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
 });

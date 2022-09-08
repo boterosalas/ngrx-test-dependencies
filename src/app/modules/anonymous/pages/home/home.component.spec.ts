@@ -80,8 +80,10 @@ describe('HomeComponent', () => {
     'getOffersbyType',
     'getBusiness',
     'getBusinessClicker',
+    'getCategories',
     'getPopupus',
     'getCategoriesBusinessHome',
+    'getBusinessByCategory',
     'registerBusinessClicker',
     'getStories',
     'getMissions',
@@ -497,6 +499,24 @@ describe('HomeComponent', () => {
     },
   ];
 
+  let bussiness = [
+    {
+      id: 25,
+      orderby: 26,
+      link: 'https://www.exito.com/ferreteria?utm_source=clickam&utm_medium=referral&utm_campaign=',
+      imageurl: 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-content/ferreteria-vehiculos.png',
+      description: 'Ferreteria y vehiculos',
+      commission: 0,
+      idbusiness: 1,
+      infoaditional: '',
+    },
+  ];
+
+  const categories = [
+    { id: 1, description: 'Accesorios' },
+    { id: 2, description: 'Autos y llantas' },
+ ];
+
   const routes = {
     path: 'inicio',
     component: HomeComponent,
@@ -575,6 +595,8 @@ describe('HomeComponent', () => {
       mockContentService.getCategoriesBusinessHome.and.returnValue(of(business));
       mockContentService.getStories.and.returnValue(of(getStories));
       mockUserService.getTestimoniesUser.and.returnValue(of(testominies));
+      mockContentService.getBusinessByCategory.and.returnValue(of(bussiness));
+      mockContentService.getCategories.and.returnValue(of(categories));
     })
   );
 

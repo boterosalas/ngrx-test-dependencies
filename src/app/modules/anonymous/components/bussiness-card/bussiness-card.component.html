@@ -1,11 +1,13 @@
 <mat-card
   (click)="navigateBussiness()"
-  class="bussiness cursor-pointer gtmHomeClicNegocios{{ title }}"
+  class="bussiness cursor-pointer gtmHomeClicNegocios{{ title }} mat-elevation-z0 position-relative"
   ngClass.xs="p-3"
   fxLayoutAlign="center center"
   
 >
-  <div class="gtmHomeClicNegocios{{ title }} inner-business" fxLayout="column" fxLayoutAlign="center center">
+<div class="position-absolute infomarketing" *ngIf="infomarketing !== null">{{infomarketing}}</div>
+
+  <div class="gtmHomeClicNegocios{{ title }} inner-business " fxLayout="column" fxLayoutAlign="center center">
     <span fxLayout="column" class="img-responsive gtmHomeClicNegocios{{ title }}">
       <img loading="lazy"[src]="img" class="heigth-imagen gtmHomeClicNegocios{{ title }}" alt="{{ title }}" />
     </span>
@@ -13,9 +15,9 @@
 </mat-card>
 
 <span class="mt-2" fxLayout="column" class="gtmHomeClicNegocios{{ title }}">
-  <h4 class="title-bussiness m-0 gtmHomeClicNegocios{{ title }}">
+  <span class="title-bussiness galano-medium m-0 gtmHomeClicNegocios{{ title }}">
     {{ title }}
-  </h4>
+  </span>
   <p *ngIf="code === 'movil-exito'" class="m-0">Antes el 5%</p>
-  <span class="percent orange-text gtmHomeClicNegocios{{ title }} galano-bold">{{ percent }}</span>
+  <span class="percent purple-text gtmHomeClicNegocios{{ title }} galano-bold f-16">{{ percent }}</span>
 </span>

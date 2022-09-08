@@ -36,20 +36,24 @@ export class WelcomeComponent implements OnInit {
     this.utils.showloginForm();
   }
 
-  works() {
-    const id = 'video-modal';
-    const template = this.templateVideo;
-    const title = '';
-    this.video = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + 'AeFNbNgcOdM?rel=0&amp;autoplay=1');
+  // works() {
+  //   const id = 'video-modal';
+  //   const template = this.templateVideo;
+  //   const title = '';
+  //   this.video = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + 'AeFNbNgcOdM?rel=0&amp;autoplay=1');
 
-    this.dialog.open(ModalGenericComponent, {
-      panelClass: 'video-clickacademy',
-      data: {
-        id,
-        title,
-        template,
-      },
-    });
+  //   this.dialog.open(ModalGenericComponent, {
+  //     panelClass: 'video-clickacademy',
+  //     data: {
+  //       id,
+  //       title,
+  //       template,
+  //     },
+  //   });
+  // }
+
+  openVideo() {
+    window.open('https://www.youtube.com/watch?v=pdcZ5cVAVvw ', '_blank')
   }
 
 }

@@ -17,7 +17,7 @@ body {
   background: $bg-gray;
 }
 
-img{
+img {
   height: auto;
 }
 
@@ -542,6 +542,10 @@ h6 {
 
 .galano {
   font-family: $font-galano;
+}
+
+.galano-medium {
+  font-family: $font-family-sans-serif;
 }
 
 .text-right {
@@ -1074,7 +1078,7 @@ table {
   }
 
   app-bussiness-card {
-    width: 100%;
+    width: 50%;
     @media screen and (max-width: 600px) {
       .mat-card {
         padding: 11px !important;
@@ -1856,6 +1860,12 @@ button.swal2-cancel.updatecancel.swal2-styled {
   }
   &-30 {
     font-size: 30px;
+  }
+  &-31 {
+    font-size: 31px;
+  }
+  &-32 {
+    font-size: 32px;
   }
   &-40 {
     font-size: 40px;
@@ -2993,6 +3003,10 @@ img.datacenter {
   max-width: 100px;
   min-width: 100px;
   min-height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 3px solid $primary-color;
+  object-fit: scale-down;
 }
 
 ol.numeric li {
@@ -3034,7 +3048,7 @@ app-date-range form input {
 }
 
 .red-text {
-  color: red;
+  color: $secondary-color;
 }
 
 .uppercase {
@@ -3060,4 +3074,9 @@ app-date-range form input {
 
 #savings .top-generic {
   display: none !important;
+}
+
+.card-style {
+  background: #ffffff;
+  border-radius: 6px;
 }

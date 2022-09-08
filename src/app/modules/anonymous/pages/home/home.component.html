@@ -2,23 +2,130 @@
 
 <section *ngIf="auth.isLoggedIn()">
   <!-- stories clickam looged -->
-  <div class="stories-section">
+  <div class="container-fluid my-3">
     <app-slider-stories></app-slider-stories>
   </div>
 
+  <div class="container-fluid py-3">
+    <app-image
+      fxHide.xs="true"
+      imageClass="cursor-pointer w-100 my-3"
+      src="/assets/img/home/gana.png"
+      alt="negocios"
+    ></app-image>
+    <app-image
+      fxHide.gt-xs="true"
+      width="324"
+      height="77"
+      imageClass="cursor-pointer w-100"
+      src="/assets/img/home/gana-mobile.png"
+      alt="negocios"
+    ></app-image>
+  </div>
+
+  <div class="container-fluid">
+    <div fxFlex="100" fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
+      <mat-card fxFlex.gt-xs="33" class="card mat-card-box-shadow cursor-pointer" [routerLink]="['/reportes']">
+        <app-sales-info></app-sales-info>
+      </mat-card>
+
+      <mat-card fxFlex.gt-xs="33" class="card mat-card-box-shadow">
+        <app-title showTitleh3="true" text="INVITA Y GANA"></app-title>
+        <input class="mb-4" id="urlLink" matInput [value]="url" #linkInput readonly />
+        <br />
+        <span fxLayout="row">
+          <div fxHide.xs="true" class="share-desktop w-100" id="share" fxLayout="row" fxLayoutAlign="space-around" fxLayoutGap="20px">
+            <div fxLayout="column">
+              <div fxLayout="row" fxLayoutGap="10px">
+                <span class="share-refer gtmRfiereYGanaClicReferirwhatsapp" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
+                  <a
+                    (click)="generateLink()"
+                    href="https://web.whatsapp.com/send?text={{ urlWhatsapp }}"
+                    target="_blank"
+                    data-action="share/whatsapp/share"
+                    ngClass="shared gtmRfiereYGanaClicReferirwhatsapp"
+                  >
+                    <i ngClass="fab fa-whatsapp gtmRfiereYGanaClicReferirwhatsapp"></i>
+                  </a>
+                </span>
+
+                <span class="share-refer gtmRfiereYGanaClicReferirFacebook" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
+                  <button
+                    theme="circles-dark"
+                    shareButton="facebook"
+                    [url]="url"
+                    ngClass="shared mr-2 gtmRfiereYGanaClicReferirFacebook"
+                    (click)="generateLink()"
+                  >
+                    <i ngClass="fab fa-facebook-f gtmRfiereYGanaClicReferirFacebook"></i>
+                  </button>
+                </span>
+
+                <span class="share-refer gtmRfiereYGanaClicReferirTwitter" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
+                  <button
+                    theme="circles-dark"
+                    shareButton="twitter"
+                    [url]="url"
+                    (click)="generateLink()"
+                    ngClass="shared mr-2 gtmRfiereYGanaClicReferirTwitter"
+                  >
+                    <i ngClass="fab fa-twitter gtmRfiereYGanaClicReferirTwitter"></i>
+                  </button>
+                </span>
+              </div>
+            </div>
+            <div fxLayout="column">
+              <button mat-raised-button color="orange" class="px-5 gtmPanelInvitaYGanaCopiarLink" (click)="copyLink(linkInput)">
+                Copiar enlace
+              </button>
+            </div>
+          </div>
+
+          <div class="share-mobile w-100" fxHide.gt-xs="true">
+            <button class="button button-100 button-height f-16" mat-raised-button id="ShareInvite" color="orange" (click)="share(url)">
+              <span class="px-3" fxLayout="row" fxLayoutAlign="space-between">
+                {{ 'REFER.SEND_INVITATION' | translate }}
+                <img loading="lazy" src="/assets/img/share/compartir-button.svg" alt="share-button" />
+              </span>
+            </button>
+          </div>
+        </span>
+      </mat-card>
+
+      <mat-card fxFlex.gt-xs="33" class="card mat-card-box-shadow"> 
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <app-title showTitleh3="true" text="PASO A PASO"></app-title>
+          <span class="text-secondary underline cursor-pointer" [routerLink]="['/negocios']">Ver más</span>
+        </div>
+        <div class="connected-steps px-3" *ngIf="missions.length">
+          <div class="step-active">1</div>
+          
+          <div class="connector"></div>
+          <div [ngClass]="missions[3].status || missions[5].status ? 'step-active' : 'step'">2</div>
+          <div class="connector"></div>
+          <div [ngClass]="missions[3].status || missions[5].status ? 'step-active' : 'step'">3</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <p>Ingresar</p>
+          <p>Comprar o referir</p>
+          <p>Ganar</p>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+
   <section fxLayout="row" fxLayout.xs="column" class="container-fluid mt-4 mb-4" fxLayoutGap="20px">
-    <div fxLayout="column" class="left-section" fxFlex="70" fxFlex.xs="100" fxLayoutGap="20px">
+    <div fxLayout="column" fxFlex="100" fxFlex.xs="100" fxLayoutGap="20px">
       <mat-card class="card mat-card-box-shadow">
         <div>
-          <div class="container">
+          <div>
             <span class="d-block"></span>
-            <app-title showTitleh3="true" text="{{ 'HOME.OFFERS' | translate }}"></app-title>
-            <p ngClass.gt-xs="mb-4" ngClass.xs="f-16">{{ 'HOME.OFFERS_TEXT' | translate }}</p>
+            <app-title showTitleh3="true" text="OFERTAS"></app-title>
           </div>
         </div>
 
         <app-slider
-          Class="gtmHomeCarruselTopDeProductos"
+          Class="gtmHomeCarruselOfertas"
           [showArrows]="false"
           [isSlider]="true"
           (action)="sliderOffers()"
@@ -27,95 +134,44 @@
           class="mb-3"
         ></app-slider>
       </mat-card>
-
+    </div>
+  </section>
+  
+  <section fxLayout="row" fxLayout.xs="column" class="container-fluid mt-4 mb-4" fxLayoutGap="20px">
+    <div fxLayout="column" fxFlex="100" fxFlex.xs="100" fxLayoutGap="20px">
       <mat-card class="card mat-card-box-shadow">
-        <app-report-reward></app-report-reward>
-      </mat-card>
+        <div>
+          <div>
+            <span class="d-block"></span>
+            <app-title showTitleh3="true" text="TOP DE PRODUCTOS"></app-title>
+          </div>
+        </div>
 
-      <app-image
-        fxHide.xs="true"
-        [routerLink]="['/negocios']"
-        imageClass="buimg cursor-pointer w-100 gtmPanelEncuentraAquiTodosLosNegocios"
-        src="/assets/img/home/negocios.png"
-        alt="negocios"
-      ></app-image>
-
-      <mat-card class="card mat-card-box-shadow">
-        <app-top-reward></app-top-reward>
-      </mat-card>
-
-      <mat-card fxHide.gt-xs="true" class="card mat-card-box-shadow purple" [routerLink]="['/negocios']">
-        <app-title showTitleh3="true" text="NEGOCIOS" commonClass="white m-0"></app-title>
-        <span>Encuentra <span class="underline">aquí</span> todos los negocios</span>
+        <app-slider
+          Class="gtmHomeCarruselOfertas"
+          [showArrows]="false"
+          [isSlider]="true"
+          (action)="sliderOffers()"
+          [sliderWeb]="topProducts"
+          [slideConfig]="slideConfigProductsLogged"
+          class="mb-3"
+        ></app-slider>
       </mat-card>
     </div>
+  </section>
 
-    <div class="right-section" fxFlex="30" fxFlexOrder.xs="-1" fxFlex.xs="100" fxLayout="column" fxLayoutGap="20px">
+  <section fxLayout="row" fxLayout.xs="column" class="container-fluid mt-4 mb-4" fxLayoutGap="20px">
+    <div fxLayout="column" fxFlex="100" fxFlex.xs="100" fxLayoutGap="20px">
       <mat-card class="card mat-card-box-shadow">
-        <app-sales-info></app-sales-info>
-      </mat-card>
-
-      <mat-card class="card mat-card-box-shadow">
-        <app-title showTitleh3="true" text="INVITA Y GANA"></app-title>
-        <p>
-          Invita a tus amigos a unirse a la plataforma, ¡gana dinero por su primera ganancia!
-          <a [routerLink]="['/referidos']">*Aplican TyC</a>
-        </p>
-        <span fxLayout="row">
-          <input id="urlLink" matInput [value]="url" #linkInput readonly />
-          <button mat-mini-fab color="purple2" class="p-0 gtmPanelInvitaYGanaCopiarLink" (click)="copyLink(linkInput)" fxLayoutAlign="center center">
-            <i class="tio-copy f-18 cpb gtmPanelInvitaYGanaCopiarLink"></i>
-          </button>
-        </span>
-      </mat-card>
-
-      <div class="widget" fxHide.lt-md="true">
-        <a
-          href="https://chrome.google.com/webstore/detail/clickam-cashback/jnfdngchdoaemojfkecanhlfgelofibh?authuser=1"
-          target="_blank"
-          class="w-100"
-          mat-raised-button
-          color="chrome"
-          fxLayout="row"
-          fxLayoutGap="10px"
-          fxLayoutAlign="center center"
-        >
-          <img loading="lazy"class="pr-2" src="assets/img/chrome.svg" alt="chrome" />
-          <span>Instalar Clickam en Chrome</span>
-        </a>
-      </div>
-
-      <mat-card class="card mat-card-box-shadow pl-0 pr-0">
-        <app-title showTitleh3="true" text="EL CAMINO DEL CLICKAMER" commonClass="pl-3"></app-title>
-        <mat-list-item *ngFor="let mission of missions; let i = index">
-          <div
-            fxLayout="row"
-            fxLayoutAlign="start center"
-            fxLayoutGap="5px"
-            mat-line
-            class="purple2-text f-16 galano-bold pb-3 pt-3 border-bottom-gray  gtmPanelCaminoDelClickamer{{mission.description | trim}}"
-          >
-            <span class="pl-3 gtmPanelCaminoDelClickamer{{mission.description | trim}}" *ngIf="mission.status">
-              <i class="tio-checkmark_circle f-18 "></i>
-            </span>
-
-            <span class="pl-3 gtmPanelCaminoDelClickamer{{mission.description | trim}}" *ngIf="!mission.status">
-              <i class="tio-checkmark_circle_outlined f-18"></i>
-            </span>
-
-            <span class="cursor-pointer gtmPanelCaminoDelClickamer{{mission.description | trim}}" (click)="modalWay(i, mission)">
-              {{ mission.description }}
-            </span>
+        <div>
+          <div>
+            <span class="d-block"></span>
+            <app-title showTitleh3="true" text="NEGOCIOS ALIADOS"></app-title>
           </div>
-        </mat-list-item>
-        <p (click)="logros()" fxLayout="row" fxLayoutAlign="center center" class="pl-3 f-16 mt-3 cursor-pointer yellow galano-bold">
-          <mat-icon>emoji_events</mat-icon>
-          Logros
-        </p>
-      </mat-card>
+        </div>
 
-      <mat-card class="card mat-card-box-shadow p-0">
-        <app-list-blogs></app-list-blogs>
+        <app-business-list></app-business-list>
+
       </mat-card>
     </div>
   </section>
@@ -126,185 +182,129 @@
 <section *ngIf="!auth.isLoggedIn()">
   <!-- welcome  -->
 
-  <div class="container-fluid bg-welcome pt-3">
+  <div class="container-fluid bg-welcome py-5">
     <app-welcome
       title="¡Bienvenido a Clickam!"
       subtitle="Crea links, comparte y ¡gana!"
       text="Porque en Clickam podrás ahorrar con tus compras y ganar dinero recomendando los productos que más te gustan."
-      [buttonHome]=true
+      [buttonHome]="true"
     ></app-welcome>
   </div>
 
   <!-- slider business -->
 
-  <div class="container-fluid">
+  <div class="container-fluid py-4 bg-white">
+    <app-title showTitleh3="true" text="GANANCIAS POR COMPRAR O REFERIR" class="text-center"></app-title>
     <app-slider-share (click)="openRegister()" [slider]="bussiness" [slideConfig]="slideConfig"></app-slider-share>
   </div>
 
-  <!-- images data -->
+  <!-- image -->
+  <div class="container py-5">
+    <app-image
+      fxHide.xs="true"
+      imageClass="cursor-pointer w-100"
+      src="/assets/img/home/gana.png"
+      alt="negocios"
+    ></app-image>
 
-  <div class="container-fluid bg-welcome pt-3">
-    <div class="container">
-      <app-image fxHide.xs="true" height="469" width="1110" imageClass="datacenter" src="/assets/img/home/data.png" alt="data"></app-image>
-      <app-image fxHide.gt-xs="true" imageClass="datacenter" src="/assets/img/home/data.svg" alt="data"></app-image>
-    </div>
+    <app-image
+      fxHide.gt-xs="true"
+      width="324"
+      height="77"
+      imageClass="cursor-pointer w-100"
+      src="/assets/img/home/gana-mobile.png"
+      alt="negocios"
+    ></app-image>
   </div>
 
-  <div class="container-fluid pt-3">
-    <div class="container">
-      <app-image-text
-        directionWeb="row"
-        directionMobile="column"
-        imageClass="imgsection"
-        src="/assets/img/home/refiere.png"
-        title="¿Cómo funciona Clickam?"
-        alt="¿Cómo funciona Clickam?"
-        classTitleWeb="f-28"
-        classTitleMobile="f-20 text-center"
-        generalMobile="mt-5 text-center"
-        text="<ol class='numeric'><li>Crea una cuenta en Clickam</li><li>Explora la plataforma y sus negocios</li><li>Elige los productos y servicios favoritos</li><li>Cómpralos o recomiéndalos</li><li>Genera ganancias y cumple tus sueños.</li></ol>"
-        classTextWeb="f-20 m-0"
-        classTextMobile="f-16 text-left mt-0 mb-3"
-        titleButton="¡Crea tu cuenta ahora!"
-        gtm="gtmHomeComoFuncionaClickamCreaTuCuentaAhora"
-        (action)="openRegister()"
-      ></app-image-text>
+  <!-- works -->
 
-      <app-image-text
-        directionWeb="row-reverse"
-        directionMobile="column"
-        imageClass="imgsection"
-        src="/assets/img/home/gana.png"
-        title="¿Por qué usar Clickam?"
-        alt="¿Por qué usar Clickam?"
-        generalWeb="mt-5 pt-5"
-        generalMobile="mt-5 text-center"
-        classTitleWeb="f-28"
-        classTitleMobile="f-20 text-center"
-        text="<p>Clickam es una plataforma 100% gratis y digital, en la que generas
-    ganancias por comprar y referir productos y servicios de marcas
-    reconocidas, desde cualquier lugar y a cualquier hora del día.</p>
-    
-    <p>En Clickam no te preocupas por: Logística, garantías, envíos, reembolsos o
-    devoluciones, de esto se encarga el negocio aliado, tu solo creas un link y
-    compras por el o lo compartes.</p>"
-        classTextWeb="f-20 m-0"
-        classTextMobile="f-16 text-center mt-0 mb-3"
-        titleButton="Comenzar"
-        gtm="gtmHomePorQueUsarClickmanComenzar"
-        (action)="openRegister()"
-      ></app-image-text>
+  <div class="container py-3">
+    <div class="card-style p-3">
+      <app-title showTitleh3="true" text="¿Cómo funciona Clickam?" class="text-center"></app-title>
 
-      <app-image-text
-        directionWeb="row"
-        directionMobile="column"
-        imageClass="imgsection"
-        src="/assets/img/home/recibe.png"
-        title="¿Dónde recibes tus ganancias?"
-        alt="¿Dónde recibes tus ganancias?"
-        generalWeb="mt-5 pt-5"
-        generalMobile="mt-5 text-center"
-        classTitleWeb="f-28"
-        classTitleMobile="f-20 text-center"
-        text="<p>Si te emocionas cuando encuentras dinero en tu bolsillo que
-    no sabias que tenías, ahora imagina que cada mes llegaran
-    ganancias a tu cuenta bancaria a través de Clickam, regístrate
-    en la plataforma, completa tu perfil y empieza a ganar.</p>"
-        classTextWeb="f-20 m-0"
-        classTextMobile="f-16 text-center mt-0 mb-3"
-        titleButton="Empezar a ganar"
-        gtm="gtmHomeDondeRecibesTusGananciasEmpezarAGanar"
-        (action)="openRegister()"
-      ></app-image-text>
+      <div fxLayout.gt-xs="row" fxLayout="column" fxLayoutAlign="space-between center">
+        <span fxLayout="row" fxLayoutGap="5px">
+          <app-image width="64" height="64" src="/assets/img/home/icon-step1.svg" alt="compra"></app-image>
+          <p>Compra o refiere a través de Clickam.</p>
+        </span>
 
-      <app-image-text
-        fxHide.lt-md="true"
-        directionWeb="row-reverse"
-        directionMobile="column"
-        imageClass="imgsection"
-        src="/assets/img/home/widget.png"
-        title="¡Nunca olvidarás ganar mientras compras!"
-        alt="widget"
-        generalWeb="mt-5 pt-5"
-        generalMobile="mt-5 text-center"
-        classTitleWeb="f-28"
-        classTitleMobile="f-20 text-center"
-        text="<p>Con Clickam, ¡Ahorra en todas tus compras! Recibe una recompensa por cada compra que hagas en nuestros negocios aliados. </p>
-    <p>Al añadirla en tu navegador, cada vez que ingreses a la página de alguno de nuestros aliados, podrás activar con un solo link las recompensas que te da Clickam al comprar</p>"
-        chrome="true"
-        classTextWeb="f-20 m-0"
-        classTextMobile="f-16 text-left mt-0 mb-3"
-      ></app-image-text>
-    </div>
-  </div>
+        <span fxLayout="row" fxLayoutGap="5px">
+          <app-image width="64" height="64" src="/assets/img/home/icon-step2.svg" alt="compra"></app-image>
+          <p>Te devolvemos un porcentaje de la transacción.</p>
+        </span>
 
-  <!-- testimonials -->
-  <div class="container-fluid pt-3 pb-3">
-    <div class="container">
-      <app-title showTitleh2="true" text="Lo que dicen de nosotros" class="text-center"></app-title>
-      <app-slide-testimonials [slider]="testimonials" [slideConfig]="slideConfigTestimonials"></app-slide-testimonials>
+        <span fxLayout="row" fxLayoutGap="5px">
+          <app-image width="64" height="64" src="/assets/img/home/icon-step3.svg" alt="compra"></app-image>
+          <p>Recibe las comisiones en tu cuenta bancaria.</p>
+        </span>
+      </div>
     </div>
   </div>
 
   <!-- slider top products -->
 
-  <div class="container-fluid">
-    <div class="container">
+  <div class="container py-3">
+    <div class="card-style p-3">
       <span class="d-block"></span>
-      <app-title
-        showTitleh2="true"
-        text="{{ 'HOME.OFFERS' | translate }}"
-        classWeb="border-bottom-orange-init"
-        classMobile="border-bottom-orange-init"
-      ></app-title>
-      <p ngClass.gt-xs="f-20 mb-4" ngClass.xs="f-16">{{ 'HOME.OFFERS_TEXT' | translate }}</p>
+      <app-title showTitleh3="true" text="{{ 'HOME.OFFERS' | translate }}"></app-title>
+      <p class="f-16 galano">{{ 'HOME.OFFERS_TEXT' | translate }}</p>
+
+      <app-slider
+        Class="gtmHomeCarruselTopDeProductos"
+        [showArrows]="false"
+        [isSlider]="true"
+        (action)="sliderOffers()"
+        [sliderWeb]="topProducts"
+        class=""
+      ></app-slider>
     </div>
   </div>
 
-  <app-slider
-    Class="gtmHomeCarruselTopDeProductos"
-    [showArrows]="false"
-    [isSlider]="true"
-    (action)="sliderOffers()"
-    [sliderWeb]="offersWeb"
-    class="mb-3"
-  ></app-slider>
+  <!-- testimonials -->
 
-  <!-- blog -->
-
-  <div class="container">
-    <span class="d-block mt-3"></span>
-    <app-blog-business></app-blog-business>
+  <div class="container py-3">
+    <div ngClass.gt-xs="card-style p-3">
+      <app-title showTitleh3="true" text="Lo que dicen de nosotros" class="text-center"></app-title>
+      <app-slide-testimonials [slider]="testimonials" [slideConfig]="slideConfigTestimonials"></app-slide-testimonials>
+    </div>
   </div>
+
+  <!-- modal promo template -->
+
+  <ng-template #templatePromo>
+    <div fxShow.gt-xs="true" fxShow.xs="false">
+      <a [href]="modalHref" [target]="modalTarget">
+        <img loading="lazy" [src]="modalSrcWeb" class="img-responsive w-100 cursor-pointer" [alt]="modalAltWeb" />
+      </a>
+    </div>
+
+    <div fxShow.gt-xs="false" fxShow.xs="true">
+      <a [href]="modalHref" [target]="modalTarget">
+        <img loading="lazy" [src]="modalSrcMobile" class="img-responsive w-100 cursor-pointer" [alt]="modalAltMobile" />
+      </a>
+    </div>
+  </ng-template>
+
+  <!-- modal ingreso clickam -->
+
+  <ng-template #templateClickamWay>
+    <div [fxLayout]="direction" [fxLayout.xs]="directionMobile" fxLayoutGap="20px">
+      <span class="image">
+        <app-image [src]="imageWay" [alt]="titleWay"></app-image>
+      </span>
+      <span>
+        <app-title showTitleh3="true" [text]="titleWay"></app-title>
+        <p>{{ textWay }}</p>
+        <app-button
+          *ngIf="showWay"
+          [title]="nameButton"
+          (action)="routeWay()"
+          [haveIcon]="false"
+          class="bp"
+          classButton="shadow-purple"
+        ></app-button>
+      </span>
+    </div>
+  </ng-template>
 </section>
-
-<!-- modal promo template -->
-
-<ng-template #templatePromo>
-  <div fxShow.gt-xs="true" fxShow.xs="false">
-    <a [href]="modalHref" [target]="modalTarget">
-      <img loading="lazy"[src]="modalSrcWeb" class="img-responsive w-100 cursor-pointer" [alt]="modalAltWeb" />
-    </a>
-  </div>
-
-  <div fxShow.gt-xs="false" fxShow.xs="true">
-    <a [href]="modalHref" [target]="modalTarget">
-      <img loading="lazy"[src]="modalSrcMobile" class="img-responsive w-100 cursor-pointer" [alt]="modalAltMobile" />
-    </a>
-  </div>
-</ng-template>
-
-<!-- modal ingreso clickam -->
-
-<ng-template #templateClickamWay>
-  <div [fxLayout]="direction" [fxLayout.xs]="directionMobile" fxLayoutGap="20px">
-    <span class="image">
-      <app-image [src]="imageWay" [alt]="titleWay"></app-image>
-    </span>
-    <span>
-      <app-title showTitleh3="true" [text]="titleWay"></app-title>
-      <p>{{textWay}}</p>
-      <app-button *ngIf="showWay" [title]="nameButton" (action)="routeWay()" [haveIcon]="false" class="bp" classButton="shadow-purple"></app-button>
-    </span>
-  </div>
-</ng-template>
