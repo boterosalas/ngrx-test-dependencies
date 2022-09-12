@@ -1,6 +1,10 @@
-<div fxLayout="row wrap" fxLayout.gt-xs="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="20px grid">
+<div fxLayout="row wrap" fxLayout.gt-xs="row wrap" fxLayoutGap.lt-md="20px grid">
   <ng-container *ngFor="let bussines of bussiness | slice: 0:8; let i = index">
     <app-bussiness-card
+      fxFlex.gt-md="25"
+      fxFlex.sm="33"
+      fxFlex.xs="50"
+      class="mb-3"
       *ngIf="bussines.code !== 'envios-clickam'"
       (bussiness)="bussinessNavigation(bussines)"
       [img]="bussines.imageurl"
