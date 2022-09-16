@@ -2291,14 +2291,14 @@ app-menu-help-center {
       background: transparent linear-gradient(90deg, #ff8646 0%, #f7bc80 100%) 0% 0% no-repeat padding-box;
     }
   }
-  // &-3 {
-  //   .mat-card {
-  //     background: transparent linear-gradient(90deg, #fcca90 0%, #ffb664 100%) 0% 0% no-repeat padding-box;
-  //   }
-  // }
   &-3 {
     .mat-card {
       background: transparent linear-gradient(90deg, #a3bcf9 0%, #868ff8 100%) 0% 0% no-repeat padding-box;
+    }
+  }
+  &-5 {
+    .mat-card {
+      background: transparent linear-gradient(90deg, #ff8646 0%, #f7bc80 100%) 0% 0% no-repeat padding-box;
     }
   }
 }

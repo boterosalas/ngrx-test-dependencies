@@ -1,29 +1,32 @@
-<div fxLayout="column" class="card-basic {{ classTotal }}">
+<div fxLayout="" class="card-basic {{ classTotal }}">
+  <img loading="lazy" class="position-absolute" src="assets/img/icon-clickam-white.svg" alt="fondo-clickam" />
+  <div class="w-100" fxLayout="row" fxLayout.xs="column" fxLayoutAlign.xs="start start" fxLayoutAlign="space-between center">
+    <div fxLayout="row" fxLayoutAlign="space-between start">
+      <div [fxLayout]="direction" class="info mb-3">
+        <span class="payment-card">{{ radicado }} </span>
+        <span class="text-white">
+          {{ description }}
+        </span>
+      </div>
+      
+      <div>
+        <img loading="lazy" *ngIf="showIcon" class="z-index-top" [src]="imgTotal" alt="icono comisiones" />
+      </div>
+    </div>
 
-  <img loading="lazy"*ngIf="showIcon" class="position-absolute" src="assets/img/icon-clickam-white.svg" alt="fondo-clickam" />
-  <div fxLayout="row" fxLayoutAlign="space-between start">
-    <div [fxLayout]="direction" class="info">
-      <span class="payment-card">{{ radicado }} </span>
-      <span class="text-white">
-        {{ description }}
-      </span>
-    </div>
-    <div>
-      <img loading="lazy"*ngIf="showIcon" class="z-index-top" [src]="imgTotal" alt="icono comisiones" />
-    </div>
-  </div>
-  <div class="mt-2" class="z-index-1" fxLayout="row" fxLayoutAlign="space-between start ">
-    <div class="marco-mini-card" fxLayout="column">
-      <p class="marco-p-text">{{ linksTotal }}</p>
-      <span class="marco-span-text">Links Creados</span>
-    </div>
-    <div class="marco-mini-card" fxLayout="column">
-      <p class="marco-p-text">{{ productosTotales }}</p>
-      <span class="marco-span-text">Productos vendidos</span>
-    </div>
-    <div class="marco-mini-card" fxLayout="column">
-      <p class="marco-p-text">{{ conversionRate }}%</p>
-      <span class="marco-span-text">Tasa de conversión</span>
+    <div class="mt-2 w-100" class="z-index-1" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+      <div class="marco-mini-card" fxLayout="column">
+        <p class="marco-p-text">{{ linksTotal }}</p>
+        <span class="marco-span-text">Links Creados</span>
+      </div>
+      <div class="marco-mini-card" fxLayout="column">
+        <p class="marco-p-text">{{ productosTotales }}</p>
+        <span class="marco-span-text">Productos vendidos</span>
+      </div>
+      <div class="marco-mini-card" fxLayout="column">
+        <p class="marco-p-text">{{ conversionRate }}%</p>
+        <span class="marco-span-text">Tasa de conversión</span>
+      </div>
     </div>
   </div>
 </div>
