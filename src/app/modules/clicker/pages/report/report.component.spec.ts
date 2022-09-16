@@ -66,7 +66,7 @@ describe('ReportComponent', () => {
       totalProducts: 0,
       conversionRate: 0,
     },
-    money: { available: 0, account: 0, cutOffValue: 0, accumulated: 0 },
+    money: { available: 0, account: 0, cutOffValue: 0, accumulated: 0, validation: 0 },
     monthResume: { totalCommissions: 0, totalLink: 0, daysResume: [] },
     accumulated: '9999',
     detailAccumulated: [
@@ -87,7 +87,7 @@ describe('ReportComponent', () => {
         totalProducts: 0,
         conversionRate: 0,
       },
-      money: { available: 0, account: 0, cutOffValue: 0, accumulated: 0 },
+      money: { available: 0, account: 0, cutOffValue: 0, accumulated: 0, validation: 0 },
       monthResume: { totalCommissions: 0, totalLink: 0, daysResume: [] },
       accumulated: '9999',
       detailAccumulated: [

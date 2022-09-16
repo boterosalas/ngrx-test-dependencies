@@ -22,6 +22,7 @@ export class UrlComponent implements OnInit {
   exist: any;
   bussiness: any;
   getbusiness$ = new BehaviorSubject<any>('');
+  showSpinner = true;
 
   constructor(
     private link: LinksService,
@@ -81,6 +82,7 @@ export class UrlComponent implements OnInit {
           const data = { idBusiness: this.exist.id, userId: user.userId, url: this.exist.url };
           this.link.getUrlWidget(data).subscribe((url) => {
             if (isPlatformBrowser(this.platformId)) {
+              this.showSpinner = false;
               window.location.replace(url);
             }
           });
@@ -90,11 +92,13 @@ export class UrlComponent implements OnInit {
       this.link.getUrl(this.code).subscribe((url) => {
         if (url !== null || url !== undefined) {
           if (isPlatformBrowser(this.platformId)) {
+            this.showSpinner = false;
             window.location.replace(url);
           }
         }
         if (url === null) {
           this.showMessage = true;
+          this.showSpinner = false;
           this.router.navigate(['/']);
           this.show = false;
         }

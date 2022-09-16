@@ -5,16 +5,16 @@
   imgMobile="/assets/img/banners/banner-reportes-mobile.jpg"
 ></app-banner>
 
-<div class="container m-t4 fade-in">
+<div class="container mb-2 fade-in">
   <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="0px">
     <div fxLayout="column" fxFlex="35" fxFlex.lt-md="100">
-      <div fxLayout="row" class="mt-4 mb-2">
+      <div fxLayout="row" class="mt-2 mb-2">
         <span fxLayout="column" fxFlex="100">
           <app-card-data
             [number]="account | currency: '':'symbol':'1.0-0'"
             Classtag="gtmReportesClicMisComisionesVerDetalle1"
             classCard="color-card mw widht-card padding-card"
-            imgCard="assets/img/icon-com.svg"
+            [showIcon]="false"
             text="Recompensas de este mes"
             textToolTip="Las compras de tus referidos efectivas que se generen por medio de tus links durante el mes, se pagarán al siguiente mes entre los días 15 y 20."
             (openDetail)="break('commissions')"
@@ -24,10 +24,23 @@
       <div fxLayout="row" class="mb-2">
         <span fxLayout="column" fxFlex="100">
           <app-card-data
-            [number]="available | currency: '':'symbol':'1.0-0'"
+            [number]="validation | currency: '':'symbol':'1.0-0'"
             Classtag="gtmReportesClicMisComisionesVerDetalle2"
+            classCard="color-card-4 mw widht-card padding-card"
+            [showIcon]="false"
+            text="En validación del negocio"
+            textToolTip="Tus ganancias estan en proceso de verificación y serán pasadas a tu saldo pendiente por pagar cuando el negocio confirme las ventas."
+            (openDetail)="break('validation')"
+          ></app-card-data>
+        </span>
+      </div>
+      <div fxLayout="row" class="mb-2">
+        <span fxLayout="column" fxFlex="100">
+          <app-card-data
+            [number]="available | currency: '':'symbol':'1.0-0'"
+            Classtag="gtmReportesClicMisComisionesVerDetalle3"
             classCard="color-card-1 mw widht-card padding-card"
-            imgCard="assets/img/icon-pay.svg"
+            [showIcon]="false"
             [text]="isSaver ? 'Mis Ahorros' : 'Saldo pendiente por pagar'"
             textToolTip="Este dinero corresponde a los saldos acumulados en los saldos anteriores, y te será pagado cuando completes el monto mínimo ."
             (openDetail)="break('balance')"
@@ -38,29 +51,31 @@
         <span fxLayout="column" fxFlex="100">
           <app-card-data
             [number]="rejected | currency: '':'symbol':'1.0-0'"
-            Classtag="gtmReportesClicMisComisionesVerDetalle3"
+            Classtag="gtmReportesClicMisComisionesVerDetalle4"
             classCard="color-card-3 mw widht-card padding-card"
             imgCard="assets/img/icon-rejected-com.svg"
+            [showIcon]="false"
             text="Recompensas rechazadas"
             textToolTip="Estas recompensas no se hicieron efectivas, ya que el negocio confirmó que la compra no fue realizada de manera exitosa."
             (openDetail)="break('rejected-commissions')"
           ></app-card-data>
         </span>
       </div>
-      <div class="acumulated mt-2">
+    </div>
+    <div fxLayout="column" class="w-100">
+      <div class="acumulated mt-2 w-100">
         <app-card-data-total
           [radicado]="totalAcumulated | currency: '':'symbol':'1.0-0'"
           description="Total recompensas"
-          classTotal="color-card-2 mw widht-card padding-card"
+          classTotal="color-card-2 mw widht-card padding-card w-100"
           [linksTotal]="totalLinks"
           [productosTotales]="totalProducts"
           [conversionRate]="conversionRate"
+          [showIcon]="false"
           imgTotal="assets/img/icon-total.svg"
           Classtag="gtmReportesClicMisComisionesSaldoAcumulado"
         ></app-card-data-total>
       </div>
-    </div>
-    <div fxLayout="row" class="w-100">
       <div fxLayout="column" class="w-100" fxLflex="100">
         <app-table-historial
           (dataUser)="userData($event)"
@@ -116,6 +131,11 @@
 <ng-template #templateBreak3>
   <p>Estas recompensas no se hicieron efectivas, ya que el negocio confirmó que la compra no fue realizada de manera exitosa.</p>
   <app-table-detail-comission [dataSource]="dataBreak3"></app-table-detail-comission>
+</ng-template>
+
+<ng-template #templateBreak4>
+  <p>Tus ganancias estan en proceso de verificación y serán pasadas a tu saldo pendiente por pagar cuando el negocio confirme las ventas.</p>
+  <app-table-detail-comission [dataSource]="dataBreak4"></app-table-detail-comission>
 </ng-template>
 
 <ng-template #templateAcumulated>

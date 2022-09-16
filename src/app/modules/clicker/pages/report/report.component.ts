@@ -23,6 +23,7 @@ export class ReportComponent implements OnInit, OnDestroy {
   totalItems: number;
   paginate: string;
   available: string;
+  validation: string;
   conversionRate: any;
   totalLinks: number;
   totalProducts: number;
@@ -37,6 +38,7 @@ export class ReportComponent implements OnInit, OnDestroy {
   dataBreak1: any;
   dataBreak2: any;
   dataBreak3: any;
+  dataBreak4: any;
   dataAcumulated: any;
   totalAcumulated: string;
   @ViewChild('templateBreak', { static: false })
@@ -45,6 +47,8 @@ export class ReportComponent implements OnInit, OnDestroy {
   templateBreak2: TemplateRef<any>;
   @ViewChild('templateBreak3', { static: false })
   templateBreak3: TemplateRef<any>;
+  @ViewChild('templateBreak4', { static: false })
+  templateBreak4: TemplateRef<any>;
   @ViewChild('templateAcumulated', { static: false })
   templateAcumulated: TemplateRef<any>;
   userId:string;
@@ -94,12 +98,14 @@ export class ReportComponent implements OnInit, OnDestroy {
     this.payment.getReportUser(this.userId).subscribe((resp: any) => {
       this.totalAcumulated = resp.objectResponse.generalResume.totalCommissions;
       this.available = resp.objectResponse.money.accumulated;
+      this.validation = resp.objectResponse.money.validation;
       this.account = resp.objectResponse.money.cutOffValue;
       this.rejected = resp.objectResponse.money.rejected || '0';
       this.conversionRate = resp.objectResponse.generalResume.conversionRate;
       this.dataBreak1 = new MatTableDataSource<any>(resp.objectResponse.money.detailCutOff);
       this.dataBreak2 = new MatTableDataSource<any>(resp.objectResponse.money.detailAccumulated);
       this.dataBreak3 = new MatTableDataSource<any>(resp.objectResponse.money.detailRejected);
+      this.dataBreak4 = new MatTableDataSource<any>(resp.objectResponse.money.detailValidation);
       this.totalLinks = resp.objectResponse.generalResume.totalLinks;
       this.totalProducts = resp.objectResponse.generalResume.totalProducts;
       this.isSaver = resp.objectResponse.generalResume.isSaver;
@@ -158,6 +164,12 @@ export class ReportComponent implements OnInit, OnDestroy {
         template = this.templateBreak3;
         title = 'Detalle recompensas rechazadas';
         id = 'break3-modal';
+        break;
+
+      case 'validation':
+        template = this.templateBreak4;
+        title = 'En validación del negocio';
+        id = 'break4-modal';
         break;
 
       default:

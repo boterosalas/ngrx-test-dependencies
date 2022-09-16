@@ -11,7 +11,10 @@ export class ReferWinComponent implements OnInit {
 
   constructor(private utils:UtilsService, public auth: AuthService) { }
 
+  amount: string;
+
   ngOnInit(): void {
+    this.amount = localStorage.getItem('Amount');
   }
 
   openRegister() {
