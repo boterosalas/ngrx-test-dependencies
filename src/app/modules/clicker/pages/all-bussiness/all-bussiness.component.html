@@ -1,34 +1,38 @@
-<br>
-<br>
- <div class="mt-3 mb-5 container-fluid">
-   <app-slider
-     *ngIf="auth.isLoggedIn()"
-     Class="gtmHomeClicBanner"
-     [showArrows]="false"
-     [isSlider]="true"
-     [sliderWeb]="sliderWeb"
-   ></app-slider>
- </div>
+<br />
+<br />
+<div class="mt-3 mb-5 container-fluid">
+  <app-slider
+    *ngIf="auth.isLoggedIn()"
+    Class="gtmHomeClicBanner"
+    [showArrows]="false"
+    [isSlider]="true"
+    [sliderWeb]="sliderWeb"
+  ></app-slider>
+</div>
 
- 
- <div class="container pt-3" ngClass.xs="pr-3 pl-3 px-5">
+<div class="container pt-3" ngClass.xs="pr-3 pl-3 px-5">
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayout.xs="column">
+    <mat-form-field class="px-4 select">
+      <mat-placeholder>FILTRAR POR CATEGORÍA</mat-placeholder>
+      <mat-select (selectionChange)="selectCategory($event)" id="business" class="selected-business">
+        <mat-option value="0">Todas las categorías</mat-option>
+        <mat-option *ngFor="let item of category" value="{{ item.id }}">
+          <span>{{ item.description }}</span>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-   <mat-form-field class="px-4 select">
-    <mat-placeholder>FILTRAR POR CATEGORÍA</mat-placeholder>
-    <mat-select (selectionChange)="selectCategory($event)" id="business"  class="selected-business">
+    <span fxLayout="row" fxLayoutGap="5px" class="location" ngClass.gt-xs="mr-7" ngClass.xs="mb-3">
+      <i class="tio-poi mr-2 f-14"></i> Aprovecha el descuento en los puntos físicos de los negocios con este sello</span
+    >
+  </div>
 
-      <mat-option  value="0">Todas las categorías</mat-option>
-      <mat-option *ngFor="let item of category" value="{{ item.id }}">
-        <span>{{ item.description }}</span>
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-   <div fxLayout="row wrap" fxLayout.gt-xs="row wrap" ngClass.gt-xs="p-3" fxLayoutAlign="start center" fxLayoutGap="20px grid">
+  <div fxLayout="row wrap" fxLayout.gt-xs="row wrap" ngClass.gt-xs="p-3" fxLayoutAlign="start center" fxLayoutGap="20px grid">
     <ng-container *ngFor="let bussines of bussiness; let i = index">
       <app-bussiness-card
         *ngIf="bussines.code !== 'envios-clickam'"
         (bussiness)="bussinessNavigation(bussines)"
+        [phygital]="bussines.phygital"
         [img]="bussines.imageurl"
         [infomarketing]="bussines.infomarketing"
         [code]="bussines.code"
@@ -42,13 +46,22 @@
     <p class="f-20 purple-text">No hay negocios con esta categoría, selecciona otra categoría.</p>
   </div>
 
-  <br>
+  <br />
 </div>
 <div class="container">
-  <mat-card class="card mat-card-box-shadow purple pr-0 pb-0" fxLayout.xs="column" fxLayout="row" fxLayoutAlign="space-around center" [routerLink]="['/biblioteca']">
-    <span class="galano-bold f-20">Encuentra <span class="underline cursor-pointer">aquí</span> las imágenes y videos de los negocios aliados para compartir con tus referidos.</span>
-    <app-image fxHide.xs="true" imageClass="dk" src="/assets/img/biblioteca-collage.png" alt="biblioteca" ></app-image>
-    <app-image fxHide.gt-xs="true" imageClass="dkm" src="/assets/img/bcm.png" alt="biblioteca" ></app-image>
+  <mat-card
+    class="card mat-card-box-shadow purple pr-0 pb-0"
+    fxLayout.xs="column"
+    fxLayout="row"
+    fxLayoutAlign="space-around center"
+    [routerLink]="['/biblioteca']"
+  >
+    <span class="galano-bold f-20"
+      >Encuentra <span class="underline cursor-pointer">aquí</span> las imágenes y videos de los negocios aliados para compartir con tus
+      referidos.</span
+    >
+    <app-image fxHide.xs="true" imageClass="dk" src="/assets/img/biblioteca-collage.png" alt="biblioteca"></app-image>
+    <app-image fxHide.gt-xs="true" imageClass="dkm" src="/assets/img/bcm.png" alt="biblioteca"></app-image>
   </mat-card>
-  <br>
+  <br />
 </div>
