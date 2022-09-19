@@ -57,9 +57,8 @@ span.img-responsive img {
 .infomarketing {
   background: $secondary-color;
   color: #ffffff;
-  border-radius: 10px;
-  top: 5px;
-  right: 5px;
+  top: 0px;
+  right: 0px;
   padding: 5px 10px;
   position: absolute;
   font-size: 10px;
@@ -68,4 +67,14 @@ span.img-responsive img {
 
 .postion-relative {
   position: relative;
+}
+
+.phygital {
+  background: $primary-color;
+  color: #ffffff;
+  bottom: 0px;
+  left: 0px;
+  padding: 4px;
+  position: absolute;
+  font-size: 13px;
 }

@@ -11,6 +11,7 @@ export class BussinessCardComponent implements OnInit {
   @Input() code: string;
   @Input() percent: string;
   @Input() infomarketing: string;
+  @Input() phygital: boolean;
 
   @Output() bussiness = new EventEmitter();
 
