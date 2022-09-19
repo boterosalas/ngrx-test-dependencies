@@ -15,6 +15,7 @@ export class ProductBussinessComponent implements OnInit {
   @Input() categoria: boolean;
   @Input() container: boolean;
   @Input() phygital: boolean;
+  @Input() clickear: boolean;
   @Input() foto: string;
   @Input() Class: string;
   @Input() nombreProducto: string;

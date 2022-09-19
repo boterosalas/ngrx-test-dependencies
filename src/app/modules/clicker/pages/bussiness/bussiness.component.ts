@@ -30,6 +30,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   hasproduct: boolean;
   title: string;
   phygital:boolean;
+  clickear:boolean;
   percent: string;
   percentBussiness = 'Hasta 9.6%';
   bussiness = [];
@@ -148,6 +149,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
           this.nonEditedContent = this.infoBussiness;
           this.infoBussiness = this.formatContent(this.infoBussiness);
           this.phygital = resp.phygital;
+          this.clickear = resp.buttonclickear;
           if (resp.terms.length > 0) {
             this.generalInfo = resp.terms[0].description;
             this.exceptionsInfo = resp.terms[1].description;
