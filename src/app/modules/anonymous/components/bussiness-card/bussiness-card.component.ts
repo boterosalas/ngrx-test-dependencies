@@ -8,6 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class BussinessCardComponent implements OnInit {
   @Input() img: string;
   @Input() title: string;
+  @Input() description: string;
   @Input() code: string;
   @Input() percent: string;
   @Input() infomarketing: string;

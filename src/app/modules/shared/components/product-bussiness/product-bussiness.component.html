@@ -112,7 +112,7 @@
 
         <div fxLayout="row" fxLayout.xs="row" fxLayoutAlign.xs="start start" fxLayoutAlign.gt-xs="end end" fxLayoutGap="10px" class="mt-2 mb-2">
 
-          <span fxLayout="row" fxLayoutAlign="flex-end flex-end" class="mr-2">
+          <span fxLayout="row" fxLayoutAlign="flex-end flex-end" *ngIf="clickear" class="mr-2">
             <button id="{{ butonid }}" mat-raised-button color="orange" [(ngClass)]="Class" (click)="product()">
               <span [(ngClass)]="Class">{{ textoboton }}</span>
             </button>
