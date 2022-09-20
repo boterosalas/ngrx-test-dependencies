@@ -201,7 +201,7 @@
   </div>
 
   <!-- image -->
-  <div class="container py-5">
+  <div class="container py-5"  *ngIf="firstBuy === 'true'">
     <app-image
       fxHide.xs="true"
       imageClass="cursor-pointer w-100"
