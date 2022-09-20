@@ -18,6 +18,7 @@ export class UserService {
   url = environment.URL_PROFILE;
   urlEmployee = environment.URL_VALIDATE_EMPLOYEE;
   urlContent = environment.URL_CONTENT;
+
   apiProfile = 'userprofile/GetUserProfile';
   apiReceiveCommunications = 'userprofile/setReceiveCommunications';
   apiGetDocuments = 'userprofile/downloadBase64';
@@ -77,6 +78,7 @@ export class UserService {
   apiUpdateResponseAccountBank = 'userprofile/updateresponseaccountbank';
   apiSavePermision = 'userprofile/savepermissions';
   apiGetPermision = 'userprofile/getpermissions';
+  apiGetFirstBuy = 'userprofile/getfirstbuy';
   apiCreateUserAdmin = 'userprofile/createuseradmin';
   apiUserInfoAditional = 'userprofile/getuserinfoaditional';
   apiGetDocumentsUser = 'userprofile/getdocumentsuser';
@@ -109,6 +111,21 @@ export class UserService {
 
   onboardingView = new BehaviorSubject<any>({ onboardin: false, popUps: false });
   userOnboardingObservable = this.onboardingView.asObservable();
+
+  public getFirstBuy() {
+    return this.http.get(`${this.url}${this.apiGetFirstBuy}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => {})
+        )
+      ),
+      map((data: any) => {
+        return data.objectResponse;
+      })
+    );
+  }
 
   public saveCampaign(data: object) {
     return this.http.post(`${this.urlContent + this.apiSaveCampaign}`, data , this.httpOptions).pipe(

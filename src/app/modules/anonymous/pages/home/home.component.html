@@ -6,12 +6,13 @@
     <app-slider-stories></app-slider-stories>
   </div>
 
-  <div class="container-fluid py-3">
+  <div class="container-fluid py-3" *ngIf="firstBuy === 'true'">
     <app-image
       fxHide.xs="true"
       imageClass="cursor-pointer w-100 my-3"
       src="/assets/img/home/gana.png"
       alt="negocios"
+      (click)="openVideo()"
     ></app-image>
     <app-image
       fxHide.gt-xs="true"
@@ -20,6 +21,7 @@
       imageClass="cursor-pointer w-100"
       src="/assets/img/home/gana-mobile.png"
       alt="negocios"
+      (click)="openVideo()"
     ></app-image>
   </div>
 
