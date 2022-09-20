@@ -99,6 +99,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   urlWhatsapp: string;
   direction = 'row';
   directionMobile = 'column-reverse';
+  firstBuy:string;
 
   showWay = true;
   nameButton: string;
@@ -263,6 +264,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getTerms();
     this.getTestimoniesUser();
     this.getBussiness();
+    this.getFirstBuy();
   }
 
   public getTestimoniesUser() {
@@ -606,6 +608,16 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public openPollMobile() {
     window.open('https://app.useberry.com/t/5HXrwyTwDN1c/', '_blank');
+  }
+
+  public openVideo() {
+    window.open('https://youtube.com/shorts/5DSLlSCwJiw?feature=share', '_blank');
+  }
+
+  getFirstBuy() {
+    this.subscription = this.user.getFirstBuy().subscribe((firstBuy: any) => {
+      this.firstBuy = firstBuy.value;
+    });
   }
 
   ngOnDestroy() {

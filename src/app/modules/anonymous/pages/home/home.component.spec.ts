@@ -71,6 +71,8 @@ describe('HomeComponent', () => {
     'saveUserAcceptTermsReferrals',
     'saveFeedback',
     'getTestimoniesUser',
+    'getTestimoniesUser',
+    'getFirstBuy',
   ]);
   const mockAuthService = jasmine.createSpyObj('AuthService', ['login', 'isLoggedIn', 'isLogged$']);
   const mockUtilsService = jasmine.createSpyObj('UtilsService', ['showRegisterForm', 'showloginForm']);
@@ -584,6 +586,7 @@ describe('HomeComponent', () => {
       mockUserService.activateProfile.and.returnValue(of(data));
       mockUserService.saveFeedback.and.returnValue(of(data));
       mockUserService.getuserdata.and.returnValue(of(dataUserC));
+      mockUserService.getFirstBuy.and.returnValue(of({value: true}));
       mockUserService.saveUserAcceptTermsReferrals.and.returnValue(of(dataTerms));
       mockUserService.getProfile.and.returnValue();
       mockUtilsService.showRegisterForm.and.returnValue({});
