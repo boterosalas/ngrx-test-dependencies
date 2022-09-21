@@ -35,7 +35,7 @@ describe('ActivateAccountFormComponent', () => {
       userMessage: 'Internal server error',
     },
   };
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ActivateAccountFormComponent],
       imports: [
@@ -67,7 +67,7 @@ beforeEach(async() => {
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
     mockAuthService.sendActivation.and.returnValue(of(Success));
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ActivateAccountFormComponent);

@@ -8,13 +8,13 @@ describe('TopComponent', () => {
   let component: TopComponent;
   let fixture: ComponentFixture<TopComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TopComponent],
       imports: [AppMaterialModule],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TopComponent);

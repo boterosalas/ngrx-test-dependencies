@@ -10,12 +10,12 @@ describe('ReferEmailComponent', () => {
   let component: ReferEmailComponent;
   let fixture: ComponentFixture<ReferEmailComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ReferEmailComponent],
       imports: [TranslateModule.forRoot(), AppMaterialModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ReferEmailComponent);

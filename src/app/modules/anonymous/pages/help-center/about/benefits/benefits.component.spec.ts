@@ -14,7 +14,7 @@ describe('BenefitsComponent', () => {
   let component: BenefitsComponent;
   let fixture: ComponentFixture<BenefitsComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -29,7 +29,7 @@ beforeEach(async() => {
       ],
       schemas:[NO_ERRORS_SCHEMA],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BenefitsComponent);

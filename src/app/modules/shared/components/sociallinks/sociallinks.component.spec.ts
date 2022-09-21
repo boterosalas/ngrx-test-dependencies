@@ -6,11 +6,11 @@ describe('SociallinksComponent', () => {
   let component: SociallinksComponent;
   let fixture: ComponentFixture<SociallinksComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SociallinksComponent],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SociallinksComponent);

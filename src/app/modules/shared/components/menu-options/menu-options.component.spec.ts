@@ -40,7 +40,7 @@ describe('MenuOptionsComponent', () => {
     ],
   };
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [MenuOptionsComponent],
       imports: [
@@ -68,7 +68,7 @@ beforeEach(async() => {
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
     // mockAuthService.getMenu$.and.returnValue(of(true));
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MenuOptionsComponent);

@@ -9,12 +9,12 @@ describe('CardMedalComponent', () => {
   let component: CardMedalComponent;
   let fixture: ComponentFixture<CardMedalComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [CardMedalComponent],
       imports: [AppMaterialModule, FlexLayoutModule],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CardMedalComponent);

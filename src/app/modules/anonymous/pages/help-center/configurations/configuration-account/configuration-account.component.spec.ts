@@ -13,7 +13,7 @@ describe('ConfigurationAccountComponent', () => {
   let component: ConfigurationAccountComponent;
   let fixture: ComponentFixture<ConfigurationAccountComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -27,7 +27,7 @@ beforeEach(async() => {
         ]),
       ],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ConfigurationAccountComponent);

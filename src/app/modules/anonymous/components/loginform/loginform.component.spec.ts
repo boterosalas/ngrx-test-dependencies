@@ -73,7 +73,7 @@ describe('LoginformComponent', () => {
 
 let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [LoginformComponent],
       imports: [
@@ -100,7 +100,7 @@ beforeEach(async() => {
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     mockAuthService.login.and.returnValue(of(dataUser));

@@ -12,7 +12,7 @@ describe('DialogEditComponent', () => {
     close: () => {},
   };
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [DialogEditComponent],
       imports: [AppMaterialModule],
@@ -21,7 +21,7 @@ beforeEach(async() => {
         { provide: MatDialogRef, useValue: dialogMock },
       ],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DialogEditComponent);

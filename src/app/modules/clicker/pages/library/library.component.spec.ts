@@ -26,7 +26,7 @@ describe('LibraryComponent', () => {
     userMessage: 'se ha enviado un correo',
     objectResponse: [{}],
   };
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [LibraryComponent],
       imports: [
@@ -59,7 +59,7 @@ beforeEach(async() => {
     mockContentService.getVideosImage.and.returnValue(of(audit));
     mockContentService.getBusiness.and.returnValue(of(audit));
     mockContentService.downloadF.and.returnValue(of(audit));
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LibraryComponent);

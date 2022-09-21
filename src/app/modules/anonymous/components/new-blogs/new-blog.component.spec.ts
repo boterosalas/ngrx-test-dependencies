@@ -12,7 +12,7 @@ describe('NewBlogComponent', () => {
   let component: NewBlogComponent;
   let fixture: ComponentFixture<NewBlogComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NewBlogComponent],
       imports: [
@@ -23,7 +23,7 @@ beforeEach(async() => {
       ],
       schemas:[NO_ERRORS_SCHEMA],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NewBlogComponent);

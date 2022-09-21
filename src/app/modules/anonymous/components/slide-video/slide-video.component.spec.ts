@@ -16,7 +16,7 @@ describe('SlideVideoComponent', () => {
   let component: SlideVideoComponent;
   let fixture: ComponentFixture<SlideVideoComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SlideVideoComponent],
       imports: [
@@ -42,7 +42,7 @@ beforeEach(async() => {
         }),
       ],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SlideVideoComponent);

@@ -14,7 +14,7 @@ describe('CardHelpCenterComponent', () => {
   let component: CardHelpCenterComponent;
   let fixture: ComponentFixture<CardHelpCenterComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -29,7 +29,7 @@ beforeEach(async() => {
       ],
       schemas:[NO_ERRORS_SCHEMA],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CardHelpCenterComponent);

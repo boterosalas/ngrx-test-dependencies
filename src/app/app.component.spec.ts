@@ -106,7 +106,7 @@ describe('AppComponent', () => {
 
   socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
-  beforeEach(async() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [AppComponent],
       imports: [
@@ -171,7 +171,7 @@ describe('AppComponent', () => {
 
     // translate = TestBed.get(TranslateService);
     // http = TestBed.get(HttpTestingController);
-  });
+  }));
 
   it('should create the app', waitForAsync(() => {
     localStorage.setItem(

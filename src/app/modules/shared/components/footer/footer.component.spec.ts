@@ -18,7 +18,7 @@ describe('FooterComponent', () => {
 
   let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [FooterComponent],
       imports: [
@@ -42,7 +42,7 @@ beforeEach(async() => {
       providers:[{ provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     localStorage.setItem(

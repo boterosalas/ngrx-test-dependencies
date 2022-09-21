@@ -13,7 +13,7 @@ describe('MailPreferencesComponent', () => {
   let component: MailPreferencesComponent;
   let fixture: ComponentFixture<MailPreferencesComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -27,7 +27,7 @@ beforeEach(async() => {
         ]),
       ],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MailPreferencesComponent);

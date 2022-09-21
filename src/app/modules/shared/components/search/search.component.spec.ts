@@ -10,13 +10,13 @@ describe('SearchComponent', () => {
   let component: SearchComponent;
   let fixture: ComponentFixture<SearchComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SearchComponent],
       imports: [ReactiveFormsModule, FormsModule, AppMaterialModule, BrowserAnimationsModule, TranslateModule.forRoot({})],
       providers: [],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SearchComponent);

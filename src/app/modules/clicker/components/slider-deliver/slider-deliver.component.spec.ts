@@ -7,12 +7,12 @@ describe('SliderDeliverComponent', () => {
   let component: SliderDeliverComponent;
   let fixture: ComponentFixture<SliderDeliverComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SliderDeliverComponent],
       imports: [SlickCarouselModule],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SliderDeliverComponent);

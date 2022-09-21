@@ -83,7 +83,7 @@ describe('CardStoryComponent', () => {
     objectResponse: { link: 'https://www.exito.com/story' },
   };
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [CardStoryComponent, DialogComponent],
       imports: [
@@ -125,7 +125,7 @@ beforeEach(async() => {
     mockLinksService.saveLink.and.returnValue(of(saveLink));
     mockTokenService.userInfo.and.returnValue(userInfo);
     mockContentService.saveVisitStories.and.returnValue(of(saveVisitStories));
-  });
+  }));
 
   beforeEach(() => {
     localStorage.setItem(

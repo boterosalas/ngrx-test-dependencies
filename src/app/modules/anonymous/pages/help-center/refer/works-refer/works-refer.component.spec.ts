@@ -13,7 +13,7 @@ describe('WorksReferComponent', () => {
   let component: WorksReferComponent;
   let fixture: ComponentFixture<WorksReferComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -27,7 +27,7 @@ beforeEach(async() => {
         ]),
       ],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(WorksReferComponent);

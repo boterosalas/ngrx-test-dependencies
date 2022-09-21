@@ -9,13 +9,13 @@ describe('TableDetailComissionComponent', () => {
   let component: TableDetailComissionComponent;
   let fixture: ComponentFixture<TableDetailComissionComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TableDetailComissionComponent],
       imports: [TranslateModule.forRoot(), AppMaterialModule],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TableDetailComissionComponent);

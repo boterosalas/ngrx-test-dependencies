@@ -40,7 +40,7 @@ describe('DialogCategoryComponent', () => {
     objectResponse: [{}],
   };
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [DialogImagePlayerComponent, TruncatePipe],
       imports: [
@@ -75,7 +75,7 @@ beforeEach(async() => {
     }).compileComponents();
     mockContentService.addCategory.and.returnValue(of(resp));
     mockContentService.downloadF.and.returnValue(of(audit));
-  });
+  }));
   beforeEach(() => {
     fixture = TestBed.createComponent(DialogImagePlayerComponent);
     component = fixture.componentInstance;

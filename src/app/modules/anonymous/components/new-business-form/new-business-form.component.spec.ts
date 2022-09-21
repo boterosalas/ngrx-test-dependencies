@@ -72,7 +72,7 @@ describe('NewBusinessFormComponent', () => {
     objectResponse: true,
   };
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NewBusinessFormComponent],
       imports: [
@@ -100,7 +100,7 @@ beforeEach(async() => {
     }).compileComponents();
     mockContentService.getCategoriesBusinessHome.and.returnValue(of(business));
     mockContentService.registerBusinessClicker.and.returnValue(of(dataBussiness));
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NewBusinessFormComponent);

@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatDialogRef } from '@angular/material/dialog';
 
 import { ReviewClickamComponent } from './review-clickam.component';
@@ -22,11 +22,11 @@ describe('ReviewClickamComponent', () => {
     .compileComponents();
   });
 
-  beforeEach(async() => {
+  beforeEach(waitForAsync(() => {
     fixture = TestBed.createComponent(ReviewClickamComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

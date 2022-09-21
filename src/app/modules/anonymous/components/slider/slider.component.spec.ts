@@ -112,7 +112,7 @@ describe('SliderComponent', () => {
     title: 'Mercado',
   };
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SliderComponent],
       imports: [
@@ -157,7 +157,7 @@ beforeEach(async() => {
     mockContentService.getNews.and.returnValue(of(news));
     mockContentService.saveVisitOffer.and.returnValue(of(respOk));
     mockLinksService.saveLink.and.returnValue(of(resp));
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SliderComponent);

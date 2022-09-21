@@ -14,7 +14,7 @@ describe('DownloadComponent', () => {
   let component: DownloadComponent;
   let fixture: ComponentFixture<DownloadComponent>;
 
-  beforeEach(async() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -26,7 +26,7 @@ describe('DownloadComponent', () => {
         RouterTestingModule.withRoutes([{ path: 'inicio', component: HomeComponent }]),
       ],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DownloadComponent);
