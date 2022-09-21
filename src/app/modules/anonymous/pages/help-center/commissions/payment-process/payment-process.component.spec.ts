@@ -13,7 +13,7 @@ describe('PaymentProcessComponent', () => {
   let component: PaymentProcessComponent;
   let fixture: ComponentFixture<PaymentProcessComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -25,7 +25,7 @@ beforeEach(async() => {
         RouterTestingModule.withRoutes([{ path: 'inicio', component: HomeComponent }]),
       ],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PaymentProcessComponent);

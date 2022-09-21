@@ -13,7 +13,7 @@ describe('NotCommissionComponent', () => {
   let component: NotCommissionComponent;
   let fixture: ComponentFixture<NotCommissionComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -27,7 +27,7 @@ beforeEach(async() => {
         ]),
       ],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NotCommissionComponent);

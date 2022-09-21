@@ -15,7 +15,7 @@ describe('AditionalFilesComponent', () => {
   let component: AditionalFilesComponent;
   let fixture: ComponentFixture<AditionalFilesComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [AditionalFilesComponent, TruncatePipe],
       imports: [
@@ -39,7 +39,7 @@ beforeEach(async() => {
         }),
       ],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     localStorage.setItem(

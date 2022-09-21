@@ -13,7 +13,7 @@ describe('ExtraQuestionsComponent', () => {
   let component: ExtraQuestionsComponent;
   let fixture: ComponentFixture<ExtraQuestionsComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -27,7 +27,7 @@ beforeEach(async() => {
         ]),
       ],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ExtraQuestionsComponent);

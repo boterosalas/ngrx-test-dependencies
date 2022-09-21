@@ -11,14 +11,14 @@ describe('DetailComponent', () => {
   let component: DetailComponent;
   let fixture: ComponentFixture<DetailComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [ClickerModule,  RouterTestingModule.withRoutes([
         { path: 'inicio', component: HomeComponent}
       ]), HttpClientTestingModule, TranslateModule.forRoot({})],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DetailComponent);

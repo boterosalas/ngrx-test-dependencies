@@ -8,12 +8,12 @@ describe('TableReferComponent', () => {
   let component: TableReferComponent;
   let fixture: ComponentFixture<TableReferComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TableReferComponent],
       imports: [TranslateModule.forRoot(), AppMaterialModule],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TableReferComponent);

@@ -24,7 +24,7 @@ describe('ReportNewsComponent', () => {
   const resp = {
     state: 'Success',
   };
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ReportNewsComponent],
       imports: [
@@ -56,7 +56,7 @@ beforeEach(async() => {
       providers: [{ provide: UserService, useValue: mockContentService }],
     }).compileComponents();
     mockContentService.saveNews.and.returnValue(of(resp));
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ReportNewsComponent);

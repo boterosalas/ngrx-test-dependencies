@@ -161,7 +161,7 @@ describe('AditionalInfoFormComponent', () => {
     component: HomeComponent,
   }
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [AditionalInfoFormComponent],
       imports: [
@@ -194,7 +194,7 @@ beforeEach(async() => {
     mockUserService.getBasicData.and.returnValue(of(basicData));
     mockUserService.updateUser.and.returnValue(of(dataUser));
     mockMasterDataService.getBanks.and.returnValue(of(dataBanks));
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AditionalInfoFormComponent);

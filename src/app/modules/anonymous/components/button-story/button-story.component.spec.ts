@@ -8,13 +8,13 @@ describe('ButtonStoryComponent', () => {
   let component: ButtonStoryComponent;
   let fixture: ComponentFixture<ButtonStoryComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ButtonStoryComponent],
       imports: [AppMaterialModule],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ButtonStoryComponent);

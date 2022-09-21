@@ -10,14 +10,14 @@ describe('ProductComponent', () => {
   let component: ProductBussinessComponent;
   let fixture: ComponentFixture<ProductBussinessComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [SharedModule, AppMaterialModule, FormsModule, ReactiveFormsModule],
       providers: [],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductBussinessComponent);

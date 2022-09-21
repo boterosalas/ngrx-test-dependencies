@@ -13,7 +13,7 @@ describe('ChangeDataProfileComponent', () => {
   let component: ChangeDataProfileComponent;
   let fixture: ComponentFixture<ChangeDataProfileComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -27,7 +27,7 @@ beforeEach(async() => {
         ]),
       ],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ChangeDataProfileComponent);

@@ -11,7 +11,7 @@ describe('TableHistoricalLinksComponent', () => {
   let component: TableHistoricalLinksComponent;
   let fixture: ComponentFixture<TableHistoricalLinksComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TableHistoricalLinksComponent],
       imports: [
@@ -22,7 +22,7 @@ beforeEach(async() => {
         BrowserAnimationsModule
       ],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TableHistoricalLinksComponent);

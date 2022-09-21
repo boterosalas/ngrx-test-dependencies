@@ -13,7 +13,7 @@ describe('ProgramFriendComponent', () => {
   let component: ProgramFriendComponent;
   let fixture: ComponentFixture<ProgramFriendComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -27,7 +27,7 @@ beforeEach(async() => {
         ]),
       ],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ProgramFriendComponent);

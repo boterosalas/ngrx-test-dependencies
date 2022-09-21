@@ -48,7 +48,7 @@ describe('TermsAndConditionsComponent', () => {
     amountsReferred: 500000,
   };
   const mockMasterService = jasmine.createSpyObj('MasterDataService', ['getTerms', 'setTerms']);
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TermsAndConditionsComponent],
       imports: [
@@ -68,7 +68,7 @@ beforeEach(async() => {
     }).compileComponents();
     mockMasterService.getTerms.and.returnValue(of(responseTerms));
     mockLinksService.getAmount.and.returnValue(of(amount));
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TermsAndConditionsComponent);

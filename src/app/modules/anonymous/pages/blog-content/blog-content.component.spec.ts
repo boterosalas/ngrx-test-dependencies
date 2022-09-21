@@ -41,7 +41,7 @@ describe('BlogContentComponent', () => {
   };
   const mockContentService = jasmine.createSpyObj('ContentService', ['getIndividualBlog', 'sendMessage']);
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll', 'afterAllClosed']);
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [BlogContentComponent],
       imports: [
@@ -76,7 +76,7 @@ beforeEach(async() => {
     }).compileComponents();
     mockContentService.getIndividualBlog.and.returnValue(of(response));
     mockContentService.sendMessage.and.returnValue(of(responseMessage));
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BlogContentComponent);

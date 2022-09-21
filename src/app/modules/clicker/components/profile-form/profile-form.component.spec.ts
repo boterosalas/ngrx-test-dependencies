@@ -188,7 +188,7 @@ describe('ProfileFormComponent', () => {
     objectResponse: null
   };
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ProfileFormComponent, DialogEditComponent, TruncatePipe],
       imports: [
@@ -234,7 +234,7 @@ beforeEach(async() => {
     mockUserService.changeBankInformation.and.returnValue(of(changeBankInformation));
     mockUserService.uploadFiles.and.returnValue(of(respUploadFiles));
     mockUserService.getDocuments.and.returnValue(of(previewImg));
-  });
+  }));
 
   beforeEach(() => {
     localStorage.setItem(

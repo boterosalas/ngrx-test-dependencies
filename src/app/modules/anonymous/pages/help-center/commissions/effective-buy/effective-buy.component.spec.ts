@@ -13,7 +13,7 @@ describe('EffectiveBuyComponent', () => {
   let component: EffectiveBuyComponent;
   let fixture: ComponentFixture<EffectiveBuyComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -27,7 +27,7 @@ beforeEach(async() => {
         ]),
       ],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EffectiveBuyComponent);

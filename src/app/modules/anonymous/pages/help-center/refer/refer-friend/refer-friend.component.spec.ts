@@ -13,7 +13,7 @@ describe('ReferFriendComponent', () => {
   let component: ReferFriendComponent;
   let fixture: ComponentFixture<ReferFriendComponent>;
 
-beforeEach(async() => {
+beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
@@ -27,7 +27,7 @@ beforeEach(async() => {
         ]),
       ],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ReferFriendComponent);
