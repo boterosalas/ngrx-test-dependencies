@@ -4,9 +4,10 @@
 module.exports = function (config) {
   config.set({
     basePath: '',
-    frameworks: ['jasmine', '@angular-devkit/build-angular'],
+    frameworks: ['parallel','jasmine', '@angular-devkit/build-angular'],
     plugins: [
       require('karma-jasmine'),
+      require('karma-parallel'),
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       // require('karma-coverage-istanbul-reporter'),
@@ -20,14 +21,14 @@ module.exports = function (config) {
         timeoutInterval: 15000,
       },
     },
+    parallelOptions: {
+      executors: 4, // Defaults to cpu-count - 1
+      shardStrategy: 'round-robin',
+    },
     coverageReporter: {
       dir: 'coverage',
       subdir: '.',
-      reporters:[
-        {type: 'html'},
-        {type: 'lcov'},
-        {type: 'lcovonly'},
-      ],
+      reporters: [{ type: 'html' }, { type: 'lcov' }, { type: 'lcovonly' }],
     },
     reporters: ['progress', 'kjhtml'],
     port: 9876,
@@ -35,7 +36,7 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     // browsers: ['Chrome'],
-    //singleRun: false,
+    // singleRun: false,
     browsers: ['ChromeHeadless'],
     singleRun: true,
     customLaunchers: {
