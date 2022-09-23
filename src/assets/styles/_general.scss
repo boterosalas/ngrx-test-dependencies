@@ -1082,7 +1082,7 @@ table {
     @media screen and (max-width: 600px) {
       .mat-card {
         padding: 11px !important;
-        min-height: 132px;
+        min-height: 150px;
       }
     }
   }
@@ -3086,7 +3086,7 @@ app-date-range form input {
   border-top-right-radius: 10px;
 }
 
-.location{
+.locations{
   border-radius: 10px;
   background: $primary-color;
   color: #ffffff;
