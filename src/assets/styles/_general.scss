@@ -2726,7 +2726,8 @@ h3#bussiness2 {
 
 #break1-modal,
 #break2-modal,
-#break3-modal {
+#break3-modal,
+#break4-modal {
   .mat-dialog-title {
     margin: 0 0 5px;
   }
@@ -3086,7 +3087,7 @@ app-date-range form input {
   border-top-right-radius: 10px;
 }
 
-.locations{
+.locations {
   border-radius: 10px;
   background: $primary-color;
   color: #ffffff;
@@ -3097,6 +3098,6 @@ app-date-range form input {
 .line-clamp {
   display: -webkit-box;
   -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;  
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }

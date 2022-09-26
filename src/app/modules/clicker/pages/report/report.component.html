@@ -28,7 +28,7 @@
             Classtag="gtmReportesClicMisComisionesVerDetalle2"
             classCard="color-card-4 mw widht-card padding-card"
             [showIcon]="false"
-            text="En validación del negocio"
+            text="Saldo por validar"
             textToolTip="Tus ganancias estan en proceso de verificación y serán pasadas a tu saldo pendiente por pagar cuando el negocio confirme las ventas."
             (openDetail)="break('validation')"
           ></app-card-data>
@@ -134,7 +134,9 @@
 </ng-template>
 
 <ng-template #templateBreak4>
-  <p>Tus ganancias estan en proceso de verificación y serán pasadas a tu saldo pendiente por pagar cuando el negocio confirme las ventas.</p>
+  <p>
+    Tus ganancias estan en proceso de verificación y serán pasadas a tu saldo pendiente por pagar cuando el negocio confirme las ventas.
+  </p>
   <app-table-detail-comission [dataSource]="dataBreak4"></app-table-detail-comission>
 </ng-template>
 

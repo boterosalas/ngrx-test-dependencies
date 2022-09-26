@@ -51,8 +51,8 @@ export class ReportComponent implements OnInit, OnDestroy {
   templateBreak4: TemplateRef<any>;
   @ViewChild('templateAcumulated', { static: false })
   templateAcumulated: TemplateRef<any>;
-  userId:string;
-  isSaver:boolean;
+  userId: string;
+  isSaver: boolean;
 
   constructor(private payment: LinksService, private auth: AuthService, private token: TokenService, private dialog: MatDialog) {
     this.userId = token.user.userid;
@@ -168,7 +168,7 @@ export class ReportComponent implements OnInit, OnDestroy {
 
       case 'validation':
         template = this.templateBreak4;
-        title = 'En validación del negocio';
+        title = 'Detalle saldo por validar';
         id = 'break4-modal';
         break;
 
