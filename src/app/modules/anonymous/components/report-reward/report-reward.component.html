@@ -2,7 +2,13 @@
   <div fxLayout="row" fxLayoutAlign="space-between center" class="mb-4">
     <app-title showTitleh3="true" text="Reporte de recompensas"></app-title>
     <!-- <app-saving></app-saving> -->
-    <app-button fxHide.xs="true" title="Ver reporte completo" [routerLink]="['/reportes']" color="gray" classIcon="tio-share_vs style-icon"></app-button>
+    <app-button
+      fxHide.xs="true"
+      title="Ver reporte completo"
+      [routerLink]="['/reportes']"
+      color="gray"
+      classIcon="tio-share_vs style-icon"
+    ></app-button>
   </div>
 
   <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutAlign="center center">
@@ -14,7 +20,7 @@
       gtm="gtmPanelReporteDeRecompensasRecompensasdeestemes"
     ></app-reward-card>
     <app-reward-card
-      [title]="isSaver ? 'Mis Ahorros' : 'Saldo pendiente por pagar'"
+      [title]="'Saldo pendiente por pagar'"
       [money]="available | currency: '':'symbol':'1.0-0'"
       textToolTip="Este dinero corresponde a los saldos acumulados en los saldos anteriores, y te será pagado cuando completes el monto mínimo."
       (open)="break('balance')"
@@ -28,29 +34,34 @@
       gtm="gtmPanelReporteDeRecompensasRecompensasrechazadas"
     ></app-reward-card>
   </div>
-  <br fxHide.gt-xs="true"/>
+  <br fxHide.gt-xs="true" />
   <span fxLayoutAlign="center center">
-      <app-button fxHide.gt-xs="true" title="Ver reporte completo" [routerLink]="['/reportes']" color="gray" classIcon="tio-share_vs style-icon"></app-button>
+    <app-button
+      fxHide.gt-xs="true"
+      title="Ver reporte completo"
+      [routerLink]="['/reportes']"
+      color="gray"
+      classIcon="tio-share_vs style-icon"
+    ></app-button>
   </span>
-
 </div>
 
 <ng-template #templateBreak>
-    <p>
-      Las compras de tus referidos efectivas que se generen por medio de tus links durante el mes, se pagarán al siguiente mes entre los días
-      15 y 20.
-    </p>
-    <app-table-detail-comission [dataSource]="dataBreak1"></app-table-detail-comission>
-  </ng-template>
-  
-  <ng-template #templateBreak2>
-    <p>
-      Este dinero corresponde a los saldos acumulados en los saldos anteriores, y te será pagado cuando completes el monto mínimo ($ 10,000).
-    </p>
-    <app-table-detail-comission [dataSource]="dataBreak2"></app-table-detail-comission>
-  </ng-template>
-  
-  <ng-template #templateBreak3>
-    <p>Estas recompensas no se hicieron efectivas, ya que el negocio confirmó que la compra no fue realizada de manera exitosa.</p>
-    <app-table-detail-comission [dataSource]="dataBreak3"></app-table-detail-comission>
-  </ng-template>
+  <p>
+    Las compras de tus referidos efectivas que se generen por medio de tus links durante el mes, se pagarán al siguiente mes entre los días
+    15 y 20.
+  </p>
+  <app-table-detail-comission [dataSource]="dataBreak1"></app-table-detail-comission>
+</ng-template>
+
+<ng-template #templateBreak2>
+  <p>
+    Este dinero corresponde a los saldos acumulados en los saldos anteriores, y te será pagado cuando completes el monto mínimo ($ 10,000).
+  </p>
+  <app-table-detail-comission [dataSource]="dataBreak2"></app-table-detail-comission>
+</ng-template>
+
+<ng-template #templateBreak3>
+  <p>Estas recompensas no se hicieron efectivas, ya que el negocio confirmó que la compra no fue realizada de manera exitosa.</p>
+  <app-table-detail-comission [dataSource]="dataBreak3"></app-table-detail-comission>
+</ng-template>
