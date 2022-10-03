@@ -6,10 +6,10 @@
     <app-slider-stories></app-slider-stories>
   </div>
 
-  <div class="container-fluid py-3" *ngIf="firstBuy === 'true'">
+  <div class="container-fluid py-3 gtmHomeBannerGanaMas" *ngIf="firstBuy === 'true'">
     <app-image
       fxHide.xs="true"
-      imageClass="cursor-pointer w-100 my-3"
+      imageClass="cursor-pointer w-100 my-3 gtmHomeBannerGanaMas"
       src="/assets/img/home/gana.png"
       alt="negocios"
       (click)="openVideo()"
@@ -18,7 +18,7 @@
       fxHide.gt-xs="true"
       width="324"
       height="77"
-      imageClass="cursor-pointer w-100"
+      imageClass="cursor-pointer w-100 gtmHomeBannerGanaMas"
       src="/assets/img/home/gana-mobile.png"
       alt="negocios"
       (click)="openVideo()"
@@ -97,7 +97,7 @@
       <mat-card fxFlex.gt-xs="33" class="card mat-card-box-shadow"> 
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <app-title showTitleh3="true" text="PASO A PASO"></app-title>
-          <span class="text-secondary underline cursor-pointer" [routerLink]="['/negocios']">Ver más</span>
+          <span class="text-secondary underline cursor-pointer gtmPanelPasoPasoVerMas" [routerLink]="['/negocios']">Ver más</span>
         </div>
         <div class="connected-steps px-3" *ngIf="missions.length">
           <div class="step-active">1</div>
@@ -165,12 +165,10 @@
   <section fxLayout="row" fxLayout.xs="column" class="container-fluid mt-4 mb-4" fxLayoutGap="20px">
     <div fxLayout="column" fxFlex="100" fxFlex.xs="100" fxLayoutGap="20px">
       <mat-card class="card mat-card-box-shadow">
-        <div>
-          <div fxLayout="row" fxLayoutAlign="space-between center" fxLayout.xs="column">
+          <div class="max-1600-container" fxLayout="row" fxLayoutAlign="space-between center" fxLayout.xs="column">
             <app-title showTitleh3="true" text="NEGOCIOS ALIADOS"></app-title>
             <span fxLayout="row" fxLayoutGap="5px" class="locations" ngClass.xs="mb-3"> <i class="tio-poi mr-2 f-14"></i> Aprovecha el descuento en los puntos físicos de los negocios con este sello</span>
           </div>
-        </div>
 
         <app-business-list></app-business-list>
 

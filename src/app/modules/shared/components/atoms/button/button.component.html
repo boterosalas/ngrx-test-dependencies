@@ -3,6 +3,6 @@
         <span [ngClass]="{'mr-2': haveIcon } + ' ' + gtm" *ngIf="haveTitle">
             {{ title }}
         </span>
-        <i *ngIf="haveIcon" [ngClass]="classIcon"></i>
+        <i *ngIf="haveIcon" [ngClass]="classIcon" [ngClass]="gtm"></i>
     </span>
 </button>
