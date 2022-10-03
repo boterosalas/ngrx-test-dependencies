@@ -1,9 +1,9 @@
-<div fxLayout="row wrap" fxLayout.gt-xs="row wrap" fxLayoutGap.lt-md="20px grid">
+<div fxLayout="row wrap" fxLayout.gt-xs="row wrap" fxLayoutGap.lt-md="20px grid" fxLayoutAlign="start start" class="max-1600-container">
   <ng-container *ngFor="let bussines of bussiness | slice: 0:10; let i = index">
     <app-bussiness-card
       fxFlex.gt-md="20"
-      fxFlex.sm="33"
-      fxFlex.xs="50"
+      fxFlex.gt-sm="33"
+      fxFlex="50"
       class="mb-3"
       *ngIf="bussines.code !== 'envios-clickam'"
       (bussiness)="bussinessNavigation(bussines)"
@@ -18,5 +18,5 @@
   </ng-container>
 </div>
 <span fxLayoutAlign="center center" class="mt-5">
-  <app-button title="Ver más" [routerLink]="['/negocios']" color="transparent" haveIcon=false></app-button>
+  <app-button title="Ver más" [routerLink]="['/negocios']" color="transparent" haveIcon=false gtm="gtmHomelNegociosAliadosVerMas"></app-button>
 </span>
