@@ -17,12 +17,24 @@
       </div>
     </div>
   </div>
+
+  <div fxHide fxShow.gt-sm class="qr">
+    <p>¡Descarga gratis la app y gana!</p>
+    <img src="assets/img/qr-descargar-app-clickam.png" alt="qr descargar-app" width="85" height="85" loading="lazy" />
+  </div>
+
   <div fxHide fxShow.gt-sm class="linksInformation">
     <section *ngFor="let section of sectionsLinks">
       <h3>{{ section.description }}</h3>
       <ul>
-        <li *ngFor="let item of section.links" class="gtmHome{{section.description | trim}}{{item.description  | trim}}">
-          <a class="gtmHome{{section.description | trim}}{{item.description  | trim}}" *ngIf="item.active" [href]="item.link | safe: 'url'" target="_blank">{{ item.description }}</a>
+        <li *ngFor="let item of section.links" class="gtmHome{{ section.description | trim }}{{ item.description | trim }}">
+          <a
+            class="gtmHome{{ section.description | trim }}{{ item.description | trim }}"
+            *ngIf="item.active"
+            [href]="item.link | safe: 'url'"
+            target="_blank"
+            >{{ item.description }}</a
+          >
         </li>
       </ul>
     </section>
@@ -51,4 +63,3 @@
     </div>
   </div>
 </footer>
-

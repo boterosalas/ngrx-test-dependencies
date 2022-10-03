@@ -2,11 +2,13 @@
 @import 'general';
 
 footer {
-  background: #3D2F59;
+  background: #3d2f59;
   padding: 3% 6%;
 
   display: grid;
-  grid-template-columns: 40% 55%;
+  // grid-template-columns: 40% 55%;
+  // column-gap: 5%;
+  grid-template-columns: 25% 10% 60%;
   column-gap: 5%;
 
   @media (max-width: 959px) {
@@ -18,6 +20,12 @@ footer {
     flex-direction: column;
     justify-content: space-between;
     text-align: left;
+  }
+  .qr {
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    align-items: center;
   }
 
   .linksInformation {
@@ -38,7 +46,7 @@ footer {
 
     section {
       width: 100%;
-      border-bottom: 1px solid #3D2F59;
+      border-bottom: 1px solid #3d2f59;
     }
 
     ul {
@@ -59,7 +67,6 @@ footer {
     text-decoration: none;
     color: #ffffff;
   }
-
 
   ul {
     text-align: left;
