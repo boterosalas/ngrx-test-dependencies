@@ -6,9 +6,7 @@ footer {
   padding: 3% 6%;
 
   display: grid;
-  // grid-template-columns: 40% 55%;
-  // column-gap: 5%;
-  grid-template-columns: 25% 10% 60%;
+  grid-template-columns: 40% 55%;
   column-gap: 5%;
 
   @media (max-width: 959px) {
@@ -20,12 +18,6 @@ footer {
     flex-direction: column;
     justify-content: space-between;
     text-align: left;
-  }
-  .qr {
-    display: flex;
-    flex-direction: column;
-    // justify-content: center;
-    align-items: center;
   }
 
   .linksInformation {
