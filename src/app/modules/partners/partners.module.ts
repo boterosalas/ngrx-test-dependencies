@@ -11,6 +11,7 @@ import { TopProductsComponent } from './components/top-products/top-products.com
 import { DiscountComponent } from './components/discount/discount.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PhygitalReportComponent } from './components/phygital-report/phygital-report.component';
 
 const routes: Routes = [
   {
@@ -25,7 +26,8 @@ const routes: Routes = [
     ReportPartnerComponent,
     CardReportComponent,
     TopProductsComponent,
-    DiscountComponent
+    DiscountComponent,
+    PhygitalReportComponent
   ],
   imports: [
     CommonModule,

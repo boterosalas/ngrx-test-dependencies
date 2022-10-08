@@ -62,10 +62,10 @@ export class DateRangeButtonComponent implements OnInit {
   }
 
   public getDate(e) {
-    if (e.endDate !== null && e.startDate) {
+    if (e.startDate && e.endDate) {
       const dates = {
-        startDate: moment(e.startDate._d).format('YYYY-MM-DD'),
-        endDate: moment(e.endDate._d).format('YYYY-MM-DD'),
+        startDate: moment(e.startDate.$d).format('YYYY-MM-DD'),
+        endDate: moment(e.endDate.$d).format('YYYY-MM-DD'),
       };
       this.dates.emit(dates);
       this.clearButton = false;
@@ -75,10 +75,10 @@ export class DateRangeButtonComponent implements OnInit {
   }
 
   public getCompareDate(e) {
-    if (e.endDate !== null && e.startDate) {
+    if (e.startDate && e.endDate) {
       const dates = {
-        startDate: moment(e.startDate._d).format('YYYY-MM-DD'),
-        endDate: moment(e.endDate._d).format('YYYY-MM-DD'),
+        startDate: moment(e.startDate.$d).format('YYYY-MM-DD'),
+        endDate: moment(e.endDate.$d).format('YYYY-MM-DD'),
       };
 
       this.compareDates.emit(dates);

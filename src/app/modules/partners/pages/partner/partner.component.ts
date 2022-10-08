@@ -11,19 +11,19 @@ export class PartnerComponent implements OnInit {
   constructor() { }
 
   showCashier = false;
-  showPatner = false;
+  showPartner = false;
 
   ngOnInit(): void {
     const token = localStorage.getItem('ACCESS_TOKEN');
     const tokenDecode = decode(token);
 
     if(tokenDecode.role === 'PARTNER') {
-      this.showPatner = true;
+      this.showPartner = true;
       this.showCashier = false;
     }
 
     if(tokenDecode.role === 'PARTNER-CASHIER') {
-      this.showPatner = false;
+      this.showPartner = false;
       this.showCashier = true;
     }
 

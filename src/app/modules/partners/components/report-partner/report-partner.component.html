@@ -1,27 +1,27 @@
 <div fxLayout="row" class="mb-3" fxLayoutAlign="start center">
-  <img loading="lazy"class="pr-3 iconb" [src]="icon" [alt]="name" />
+  <img loading="lazy" class="pr-3 iconb" [src]="icon" [alt]="name" />
   <app-title showTitleh2="true" [text]="name"></app-title>
 </div>
 
-<mat-card class="card mat-card-box-shadow" *ngIf="showPatner">
+<mat-card class="card mat-card-box-shadow" *ngIf="showPartner">
   <app-title showTitleh3="true" text="Reporte de recompensas"></app-title>
   <app-date-range-button
-    [compare]=true
-    [custom]=true
+    [compare]="true"
+    [custom]="true"
     classLayout="ng-hor"
     direction="column"
     (dates)="getDate($event)"
     (compareDates)="getCompareDate($event)"
     (called)="exportOrderNotFinish()"
-    (reset)="getPartnersKPI()"
+    (reset)="resetDates()"
   ></app-date-range-button>
 
-  <app-card-report
+    <app-card-report
     class="card-start"
     [items]="items"
-    fxLayout.gt-xs="row wrap"
-    fxLayout.xs="column"
-    fxLayoutAlign="start space-between"
-  ></app-card-report>
-  
+    fxLayout="row wrap"
+    fxLayoutGap="20px grid"
+    ></app-card-report>
 </mat-card>
+<br>
+<app-phygital-report [dataSource]="phygitalReportData" *ngIf="showPartner"></app-phygital-report>

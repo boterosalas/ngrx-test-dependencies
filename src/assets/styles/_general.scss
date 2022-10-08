@@ -164,8 +164,11 @@ mat-form-field.select-custom {
 }
 
 .maincontent {
+  width: 100%;
   background: $bg-gray;
   padding-top: 58px;
+  overflow-x: hidden;
+  padding-bottom: 5px;
 }
 
 .mat-sidenav {
@@ -259,12 +262,6 @@ body {
 
 .mat-drawer-container {
   background: none !important;
-}
-
-.maincontent {
-  overflow-x: hidden;
-  padding-bottom: 5px;
-  // min-height: 520px;
 }
 
 .login {
@@ -3097,7 +3094,10 @@ app-date-range form input {
 }
 
 .max-1600-container {
-  margin: auto;
   width: 100%;
   max-width: 1600px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
 }

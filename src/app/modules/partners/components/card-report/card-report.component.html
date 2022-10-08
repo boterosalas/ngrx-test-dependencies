@@ -1,16 +1,25 @@
-<div *ngFor="let item of items; let i = index" class="card-partner-{{ i }} white" ngClass.gt-xs="card-dash mr-2">
+<article
+  *ngFor="let item of items; let i = index"
+  class="card-partner-{{ i }} white"
+  ngClass.gt-xs=""
+  fxLayout="column"
+  fxLayoutAlign="space-between stretch"
+  fxFlex.gt-sm="33"
+  fxFlex.gt-xs="50"
+  fxFlex="100"
+>
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <h3 class="f-18">{{ item.title }}</h3>
       <i class="tio-info f-20 purple2-text" matTooltipClass="purple-tip" [matTooltip]="item.tooltip"></i>
     </div>
-  
+
     <mat-card style="border-radius: 10px !important">
       <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
         <div fxLayout="column">
-          <span class="galano-bold f-22" *ngIf="(i === 1 ) && item.changed === null">
+          <span class="galano-bold f-22 word-break" *ngIf="i === 1 && item.changed === null">
             {{ item.number | currency: '':'symbol':'1.0-0' }}
           </span>
-          <span class="galano-bold f-22" *ngIf="(i !== 1)  && item.changed === null">
+          <span class="galano-bold f-22" *ngIf="i !== 1 && item.changed === null">
             {{ item.number }}
           </span>
 
@@ -22,18 +31,17 @@
                 <i *ngIf="item.changed === 'SUBIO'" class="tio-arrow_large_upward"></i>
               </span>
             </div>
-  
+
             <span *ngIf="i !== 1">{{ item.number }} frente a {{ item.numbercompare }}</span>
 
-            <span  *ngIf="i === 1">{{ item.number | currency: '':'symbol':'1.0-0' }} frente a {{ item.numbercompare | currency: '':'symbol':'1.0-0' }}</span>
-
+            <span *ngIf="i === 1"
+              >{{ item.number | currency: '':'symbol':'1.0-0' }} frente a {{ item.numbercompare | currency: '':'symbol':'1.0-0' }}</span
+            >
           </div>
-  
-          <!-- <span class="galono-bold f-13">{{ item.subtitle }}</span> -->
         </div>
         <div fxLayout="column">
-          <img loading="lazy"[src]="item.icon" alt="icon" />
+          <img loading="lazy" [src]="item.icon" alt="icon" />
         </div>
       </div>
     </mat-card>
-  </div>
+</article>
