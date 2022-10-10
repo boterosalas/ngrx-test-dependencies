@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocationHref } from 'src/app/helpers/window-location';
 
 @Component({
   selector: 'app-download-app',
@@ -15,9 +16,9 @@ export class DownloadAppComponent implements OnInit {
     const playStore = 'https://play.google.com/store/apps/details?id=com.clickam.appcompania';
 
     if (/iphone|ipad|phone/i.test(this.userAgent)) {
-      window.location.href = appStore;
+      LocationHref.redirect(appStore);
     } else if (/android|x11/i.test(this.userAgent)) {
-      window.location.href = playStore;
+      LocationHref.redirect(playStore);
     } else {
       this.router.navigate(['/inicio']);
     }
