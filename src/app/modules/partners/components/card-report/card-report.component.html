@@ -1,6 +1,6 @@
 <article
   *ngFor="let item of items; let i = index"
-  class="card-partner-{{ i }} white"
+  class="card-bg-{{ i }} white"
   ngClass.gt-xs=""
   fxLayout="column"
   fxLayoutAlign="space-between stretch"
@@ -42,11 +42,6 @@
         <div fxLayout="column">
           <img loading="lazy" [src]="item.icon" alt="icon" />
         </div>
-
       </div>
-      <div fxLayout="column">
-        <img loading="lazy" [src]="item.icon" alt="icon" />
-      </div>
-    </div>
   </mat-card>
-</div>
+</article>
