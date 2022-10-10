@@ -39,6 +39,7 @@ footer {
     section {
       width: 100%;
       border-bottom: 1px solid #3d2f59;
+      margin-bottom: 13px;
     }
 
     ul {
@@ -139,4 +140,12 @@ footer {
     margin: 0 0 1rem;
     padding-top: 1rem;
   }
+}
+hr {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  border: 0 none;
+  height: 1px;
+  background-color: #8d7eb7;
 }
